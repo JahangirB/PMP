@@ -770,6 +770,13 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .verdict--wrong { background: var(--st-incorrect-bg); color: var(--st-incorrect-fg); }
 .explain { margin-top: var(--sp-4); font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); }
 .explain h3 { font-size: var(--t-xs); font-family: var(--font-mono); letter-spacing: var(--ls-cap); text-transform: uppercase; color: var(--fg-muted); margin-bottom: var(--sp-2); }
+.mindset {
+  margin-top: var(--sp-3); padding: var(--sp-3) var(--sp-4);
+  border-left: 2px solid var(--c-signal); border-radius: 0 var(--r-2) var(--r-2) 0;
+  background: var(--s-raise); max-width: var(--measure);
+}
+.mindset h3 { font-size: var(--t-xs); font-family: var(--font-mono); letter-spacing: var(--ls-cap); text-transform: uppercase; color: var(--fg-muted); margin-bottom: var(--sp-1); }
+.mindset p { font-size: var(--t-sm); line-height: var(--lh-body); }
 
 /* Item tools and footer */
 .q-tools { display: flex; gap: var(--sp-2); align-items: center; flex-wrap: wrap; margin-top: var(--sp-5); padding-top: var(--sp-4); border-top: var(--border); }
@@ -1097,7 +1104,7 @@ dialog.sheet::backdrop { background: var(--scrim); }
 
    §05  DATA — CONTENT PACKS ............. JS constants, frozen
         05.1  ECO_TASKS — 26 task records, ids and paraphrases
-        05.2  QUESTIONS — 60 seeded items · 05.3 CASES · 05.4 SCENARIOS
+        05.2  QUESTIONS — 110 items · 05.3 CASES · 05.4 SCENARIOS
         05.8  CONTENT INDEX — id lookup across shipped and imported packs
         05.5  FLASHCARDS · 05.6  FORMULAS · 05.7  REFERENCE + GLOSSARY
 
@@ -1196,18 +1203,25 @@ PMP.ECO_TASKS = Object.freeze([
 PMP.ECO_TASK_BY_ID = Object.freeze(PMP.ECO_TASKS.reduce(function (m, t) { m[t.id] = t; return m; }, {}));
 
 /* ── 05.2  QUESTIONS ────────────────────────────────────────────────────────
-   The Phase 1 seed pack: 60 original items, weighted to the July 2026 outline.
+   110 original items, weighted to the July 2026 outline. Phase 1 seeded the
+   first 60; the second batch of 50 follows the Business block below and is
+   authored to the same rules.
 
    Distribution, and how it was arrived at:
-     Domain    People 20 · Process 25 · Business 15, which lands at
-               33.3 / 41.7 / 25.0 percent against the published 33 / 41 / 26.
-     Task      Every one of the 26 tasks carries at least one item; the eight
-               People and ten Process tasks carry two or three each.
-     Approach  24 predictive, 21 adaptive, 15 hybrid — 40 / 35 / 25, which is
-               PMI's published 40 / 60 split with this build's own assumption
-               about how the 60 divides.
-     Type      40 multiple choice, 8 multiple response, 3 matching,
-               3 drop-down, 4 fill-in-the-blank, 2 hotspot.
+     Domain    People 36 · Process 45 · Business 29, which lands at
+               32.7 / 40.9 / 26.4 percent against the published 33 / 41 / 26.
+     Task      Every one of the 26 tasks carries at least three items and 23
+               of the 26 carry four or more. Business tasks 6, 7 and 8 sit at
+               three, which is the most the 26 percent domain ceiling allows
+               at this pack size; they clear the floor at about 150 items.
+     Approach  50 predictive, 35 adaptive, 25 hybrid — 45 / 32 / 23. Batch
+               two was authored at roughly 50/50 predictive against adaptive
+               plus hybrid, which moves the running figure off the 40 / 35 / 25
+               assumption while staying inside the audit's 8 point tolerance.
+     Type      70 multiple choice, 16 multiple response, 6 matching,
+               6 drop-down, 8 fill-in-the-blank, 4 hotspot.
+     Difficulty Batch two is 24 / 52 / 24 across easy (1–2), medium (3) and
+               hard (4–5). The running pack is 23 / 56 / 21.
    The audit panel in §10.14 re-derives every one of those figures from the
    array below rather than trusting this comment.
 
@@ -1219,13 +1233,18 @@ PMP.ECO_TASK_BY_ID = Object.freeze(PMP.ECO_TASKS.reduce(function (m, t) { m[t.id
        exam the distractors are where the learning is.
      · The explanation states the rule that transfers, not the answer that
        was correct this time.
+     · Every distractor rationale names the specific error a candidate makes
+       in choosing it, so a wrong answer is diagnosable rather than merely
+       wrong.
+     · Each item carries a one-sentence mindset principle: the disposition
+       the item turns on, stated so it outlives the particular scenario.
 
    All wording is original. No PMI text is reproduced and none of these are
-   real exam questions. The full pack targets 300 items; this is the first 60.
+   real exam questions. The full pack targets 300 items; this is the first 110.
 
    Shape (schema v2, validated by §09.6):
      id, type, domain, ecoTask, approach, difficulty 1–5, tags[]
-     stem, explanation
+     stem, explanation, mindset?
      options[]  { id, text, correct, rationale, match?, fixed? }
      prompts[]  matching and pulldown — the left-hand side, authored order kept
      regions[]  hotspot and graphic — positions in the diagram, never shuffled
@@ -2307,6 +2326,969 @@ PMP.QUESTIONS = [
         rationale: "This is no longer a risk. The rule exists and the lead time is known, so monitoring it as something that might happen is the wrong instrument for an issue that already has." }
     ],
     explanation: "An external change that has already happened is an issue rather than a risk, and it is worked by establishing its actual boundaries before responding. What the rule covers, what alternatives exist and whether the rollout can be phased are all knowable in days and all change the answer. The re-plan then goes to the sponsor as options with costs, because the trade-off between delay, cost and a different source is theirs."
+  },
+
+
+/* ── PEOPLE ── 16 items, taking the eight People tasks to 36 ───────────── */
+
+  {
+    id: "pmp-p1-004", type: "single", domain: "people", ecoTask: "people-1",
+    approach: "predictive", difficulty: 3, tags: ["vision", "handover", "sponsor"],
+    stem: "You take over a stalled warehouse relocation eleven months in. The original sponsor has left, the objectives in the charter refer to a distribution contract the company lost last quarter, and the team is still building to them because nobody told them otherwise. The new sponsor is available and engaged. The team is a week from delivering a racking layout sized for volumes that no longer exist. What should the project manager do first?",
+    mindset: "Work to the outcome the organisation needs now, not the one the paperwork was written for.",
+    options: [
+      { id: "a", text: "Stop the racking work and take the discrepancy to the new sponsor with a recommendation on what the project should now be for.", correct: true,
+        rationale: "The team is a week from spending real money against a purpose that expired. Halting that specific piece and bringing the sponsor a recommendation rather than a problem is what makes the conversation short and the decision informed." },
+      { id: "b", text: "Let the racking layout complete as planned, then raise the change through the change control process once there is a deliverable to compare against.", correct: false,
+        rationale: "This is the process-completeness error: finishing known-wrong work because a procedure has a slot for it later. Change control governs decisions about scope, not permission to keep building against a purpose everyone can already see is void." },
+      { id: "c", text: "Update the charter to reflect current volumes and circulate the revised version to the team and the new sponsor.", correct: false,
+        rationale: "This is the document-first error. Rewriting the charter yourself asserts a new purpose that the sponsor has not agreed, and a charter is the record of an alignment rather than the means of creating one." },
+      { id: "d", text: "Run a workshop with the team to re-derive the objectives from what the business needs today.", correct: false,
+        rationale: "This is the consultation-misdirected error: the team can describe the work but cannot authorise a change of purpose. A workshop produces a well-argued position that still has to go to the sponsor, at the cost of the week you do not have." }
+    ],
+    explanation: "When the stated purpose of a project has been overtaken by events, the priority is to stop the spend that is running against it and get the decision to whoever now owns it. Speed matters more than completeness here, because every day of delay converts into work that will be thrown away. Bringing a recommendation rather than an open question is what keeps the escalation to one conversation instead of three."
+  },
+
+  {
+    id: "pmp-p1-005", type: "single", domain: "people", ecoTask: "people-1",
+    approach: "agile", difficulty: 2, tags: ["vision", "pivot", "team"],
+    stem: "A product team pivots from serving small independent retailers to serving two large grocery chains. The product owner announces the change at a sprint review with a slide. Three sprints later the team is still refining stories written for the old audience, and in refinement two developers argue about a feature neither chain has asked for. Nobody has objected to the pivot. What is the most useful thing for the project manager to do?",
+    mindset: "A change of direction is not communicated until the team can use it to make decisions without you.",
+    options: [
+      { id: "a", text: "Ask the product owner to repeat the pivot rationale at the next review, with more detail on the commercial case.", correct: false,
+        rationale: "This is the repeat-the-broadcast error. The first announcement did not fail because it was too short; it failed because a slide cannot be used as a decision aid during refinement, and a longer slide will not be either." },
+      { id: "b", text: "Work with the product owner to rewrite the backlog against the two chains, then have the team walk the revised items and mark what no longer applies.", correct: true,
+        rationale: "The pivot has to reach the artefact the team actually touches. Having the team walk the revised backlog is what surfaces the leftovers and converts an announcement into something they can apply on their own next week." },
+      { id: "c", text: "Raise the stale stories in the retrospective and ask the team to agree an action to keep the backlog current.", correct: false,
+        rationale: "This is the wrong-forum error. Retrospectives improve how the team works, and this is a gap in what the team knows about the product, which the retrospective is not equipped to close." },
+      { id: "d", text: "Have the two chains' account managers brief the team directly on what those customers need.", correct: false,
+        rationale: "This is the right-move-wrong-order error. A briefing lands on top of a backlog still full of items for the old audience, so the team hears the new direction and then goes back to a queue that contradicts it." }
+    ],
+    explanation: "Direction that lives only in an announcement does not change behaviour, because the thing a team works from is its queue. The reliable route is to change the artefact and then have the team handle it, since that is what exposes the items written under the old assumption. Silence after a pivot is usually a sign that people have nothing to disagree with yet, not that they have understood."
+  },
+
+  {
+    id: "pmp-p2-004", type: "single", domain: "people", ecoTask: "people-2",
+    approach: "predictive", difficulty: 4, tags: ["conflict", "resources", "departments"],
+    stem: "Two department heads both need the same test rig in the final fortnight before your go-live. Each has emailed you separately arguing their case, each has copied your sponsor, and the tone has sharpened over three exchanges. Your project needs the rig for two of those fourteen days. Neither head has spoken to the other. The sponsor has not replied to either email. What should the project manager do?",
+    mindset: "Get the people who disagree into the same conversation before you carry either position forward.",
+    options: [
+      { id: "a", text: "Reply to both, copying the sponsor, setting out the two days your project needs and proposing a schedule for the remaining twelve.", correct: false,
+        rationale: "This is the solve-it-in-writing error. A fourth email into a thread that has sharpened three times adds a third position to a dispute that already has two, and it commits you publicly before you know what either head actually needs." },
+      { id: "b", text: "Ask the sponsor to arbitrate, since both heads have already escalated and the sponsor holds authority over both departments.", correct: false,
+        rationale: "This is the premature-escalation error. Neither head has spoken to the other, so the disagreement has not yet been attempted at the level that can resolve it, and an arbitrated split leaves both parties managing the outcome rather than owning it." },
+      { id: "c", text: "Convene the two heads, establish what each actually needs the rig for and by when, and work the schedule from the constraints rather than the claims.", correct: true,
+        rationale: "Positions harden in email and soften in a room. Separating the underlying need from the stated demand is what usually reveals that the two requirements are not in as direct a collision as three rounds of correspondence made them look." },
+      { id: "d", text: "Book the rig for your two days immediately, then let the two departments settle the remaining twelve between themselves.", correct: false,
+        rationale: "This is the secure-your-own-interest error. It protects your go-live and makes you a third claimant in a dispute you will need both heads' goodwill to survive, particularly during a fortnight when either could quietly deprioritise your testing." }
+    ],
+    explanation: "A dispute conducted in writing between parties who have not spoken tends to escalate, because each exchange is a position statement rather than an exploration. Bringing the parties together and working from underlying need rather than stated demand is what makes room visible. Escalation stays available and becomes better founded once a genuine attempt at the working level has been made and recorded."
+  },
+
+  {
+    id: "pmp-p3-004", type: "pulldown", domain: "people", ecoTask: "people-3",
+    approach: "hybrid", difficulty: 3, tags: ["leadership", "delegation", "empowerment"],
+    stem: "A hybrid programme has four squads at very different stages of maturity. The programme manager is deciding how much decision-making authority to hand each squad this quarter, and wants the level to fit the squad rather than a uniform policy. Complete each sentence with the delegation level that fits the situation described. Two choices are not used.",
+    mindset: "Delegate to the level the team can carry today, then move the line as capability grows.",
+    prompts: [
+      { id: "d1", text: "A squad formed six weeks ago has twice committed to dates it could not meet, and the programme has an external regulatory deadline. The manager should" },
+      { id: "d2", text: "A squad with two years together has met every commitment and now spends an hour a week waiting for sign-off on decisions it has never got wrong. The manager should" },
+      { id: "d3", text: "A squad is technically strong but has just absorbed three new members and is visibly unsure how much latitude it now has. The manager should" }
+    ],
+    options: [
+      { id: "consult", text: "decide, but only after asking the squad for input", correct: true, match: "d1",
+        rationale: "A squad that has misjudged its own capacity twice needs the commitment to be sound more than it needs the autonomy. Asking for input keeps the squad's knowledge in the decision while the manager still carries the date the regulator is holding." },
+      { id: "devolve", text: "hand the decision over entirely and be told the outcome", correct: true, match: "d2",
+        rationale: "A sustained record of good decisions and an hour a week of waiting is a queue the sign-off is creating rather than preventing. Full devolution removes the cost and loses nothing, because the squad has already been making the calls in substance." },
+      { id: "agree", text: "set the boundaries jointly and let the squad decide inside them", correct: true, match: "d3",
+        rationale: "Capability is high but the working agreement has just been disturbed by new members. Naming the boundaries together restores certainty about where the squad may act without narrowing the authority it has earned." },
+      { id: "instruct", text: "decide alone and tell the squad what has been decided", correct: false, match: null,
+        rationale: "Not used. Unilateral instruction fits a genuine emergency or a decision the team has no information about, and all three squads here hold knowledge the manager needs." },
+      { id: "abdicate", text: "leave the decision unassigned and see who picks it up", correct: false, match: null,
+        rationale: "Not used. Declining to say who owns a decision is not delegation, and on the first squad it would put a regulatory date in the hands of whoever happens to feel responsible." }
+    ],
+    explanation: "The level of authority handed to a team is set by what that team can currently carry and by what is riding on the decision, not by a programme-wide policy or by the manager's general preference for empowerment. Repeated misjudgement pulls the line back toward consultation; a long record of sound calls pushes it out to full devolution; a disturbance in team composition calls for the boundaries to be restated rather than the authority reduced."
+  },
+
+  {
+    id: "pmp-p3-005", type: "single", domain: "people", ecoTask: "people-3",
+    approach: "agile", difficulty: 3, tags: ["leadership", "self-organisation", "impediments"],
+    stem: "In daily standups you have started assigning the day's work item by item, because two sprints ago the team left an urgent defect unclaimed for a day. Velocity has held steady. In the last retrospective a senior developer said, carefully, that standup now feels like a status meeting, and three others nodded. Nobody has asked you to stop. What should the project manager do?",
+    mindset: "Ownership grows where the team is allowed to carry the consequences of its own decisions.",
+    options: [
+      { id: "a", text: "Continue, since velocity has held and the team has not formally asked for the practice to change.", correct: false,
+        rationale: "This is the metric-as-permission error. Velocity measures throughput, not ownership, and a team that has been nodding along in a retrospective has already asked in the only register available to it." },
+      { id: "b", text: "Stop assigning work, explain why you started, and agree with the team how urgent items will get picked up.", correct: true,
+        rationale: "The practice was a response to a real failure, so naming that failure is what stops the withdrawal reading as a reversal on a whim. Agreeing the mechanism for urgent work addresses the original problem without keeping the cure that caused this one." },
+      { id: "c", text: "Keep assigning only the urgent items and let the team self-organise around everything else.", correct: false,
+        rationale: "This is the split-the-difference error. It reserves exactly the decisions that carry the most learning, and the team continues to experience standup as a meeting where the important calls are made by someone else." },
+      { id: "d", text: "Ask the team in the next retrospective whether they would like you to stop assigning work.", correct: false,
+        rationale: "This is the false-consultation error. The team has already signalled its view, and asking a team to formally request that its manager relinquish control puts the cost of speaking up on the people with the least power to bear it." }
+    ],
+    explanation: "A control introduced to fix a specific failure tends to outlive the failure, because nothing forces a review of it while the numbers look fine. The correction is to withdraw the control, state plainly why it existed, and replace it with an agreement the team owns. Hedged withdrawals keep the highest-value decisions in the manager's hands, which is precisely where the team stops learning."
+  },
+
+  {
+    id: "pmp-p4-004", type: "multi", domain: "people", ecoTask: "people-4",
+    approach: "predictive", difficulty: 3, tags: ["stakeholders", "engagement", "power"],
+    stem: "A regulatory reporting project has a general counsel who holds an effective veto at the sign-off gate but has attended none of the six monthly steering meetings and answers emails in about a fortnight. Your gate is eleven weeks away. Her deputy attends everything, is well informed, and has told you twice that he cannot commit on her behalf. Which two actions should the project manager take?",
+    mindset: "Engagement is designed around the stakeholder you have, not the one the plan assumed.",
+    options: [
+      { id: "a", text: "Ask the general counsel what form and frequency of contact would let her form a view before the gate, and rebuild the engagement around her answer.", correct: true,
+        rationale: "Six months of non-attendance is evidence the current mechanism does not fit her, and she is the only person who can say what would. Redesigning around the answer is what converts a stakeholder who is absent into one who is merely differently engaged." },
+      { id: "b", text: "Work through the deputy to surface legal concerns early, while being explicit with him that the decision itself still needs the general counsel.", correct: true,
+        rationale: "The deputy is informed and cannot commit, so he is a route to the issues rather than to the decision. Naming that distinction openly stops the arrangement drifting into an assumption that his comfort equals her approval." },
+      { id: "c", text: "Treat the deputy's attendance and informed participation as the department's representation and proceed to the gate on that basis.", correct: false,
+        rationale: "This is the proxy-as-principal error. He has told you twice that he cannot commit, so relying on him substitutes the person who is available for the person who holds the veto, and it fails at the gate rather than before it." },
+      { id: "d", text: "Ask the sponsor to require the general counsel's attendance at the remaining steering meetings.", correct: false,
+        rationale: "This is the compel-attendance error. It fills a seat with someone who has demonstrated for six months that this forum is not how she engages, and it spends sponsor authority on a stakeholder you will need to work with well beyond this gate." },
+      { id: "e", text: "Record the risk of late legal objection in the register with a mitigation of early document circulation.", correct: false,
+        rationale: "This is the register-as-action error. Circulating documents to someone with a fortnight's email latency is the mechanism that has already failed, so the mitigation restates the problem in the column marked solution." }
+    ],
+    explanation: "A stakeholder with high authority and low observable engagement is not disengaged so much as engaged on terms the project has not discovered. The work is to find those terms from the stakeholder directly, and to use the available deputy for what a deputy can actually do, which is early sight of the issues rather than the decision itself. Substituting the accessible person for the accountable one is the failure this pattern most reliably produces."
+  },
+
+  {
+    id: "pmp-p5-003", type: "matching", domain: "people", ecoTask: "people-5",
+    approach: "predictive", difficulty: 3, tags: ["expectations", "alignment", "negotiation"],
+    stem: "A finance transformation has three stakeholder groups whose expectations have drifted apart during a long planning phase. The project manager is choosing how to close each gap, and the right move differs in each case. Match each situation to the approach that fits it best. Two choices are not used.",
+    mindset: "Diagnose why expectations diverged before choosing the technique for closing the gap.",
+    prompts: [
+      { id: "e1", text: "Two directors want incompatible things from the same module, both are certain they were promised it, and the contemporaneous notes are ambiguous." },
+      { id: "e2", text: "A user group expects a reporting capability that was descoped in month two, and the descoping was recorded but never communicated to them." },
+      { id: "e3", text: "A regional head expects a March cutover; the plan has always said June, and he has been told June four times and repeats March each month." }
+    ],
+    options: [
+      { id: "reconcile", text: "Bring both parties to a joint session and negotiate one agreed position", correct: true, match: "e1",
+        rationale: "Two irreconcilable expectations with no authoritative record cannot be settled by producing evidence, because the evidence is ambiguous. What is left is a negotiation between the two holders, conducted together so neither hears the outcome secondhand." },
+      { id: "inform", text: "Communicate the decision that was already taken, with its rationale and consequences", correct: true, match: "e2",
+        rationale: "Here the gap is purely informational: a decision was properly made and never travelled. The group needs the decision, why it was taken and what it means for them, not a renegotiation of a settled question." },
+      { id: "root", text: "Investigate why the message is not landing before repeating it again", correct: true, match: "e3",
+        rationale: "Four accurate communications that produced no change mean the barrier is not the information. Something, whether an incentive, a commitment made elsewhere or a misunderstanding of what cutover means, is holding the expectation in place." },
+      { id: "escalate", text: "Refer the disagreement upward for a ruling", correct: false, match: null,
+        rationale: "Not used. Escalation suits a genuine deadlock between parties who have tried and failed to agree, and none of these three has yet had a serious attempt at the working level." },
+      { id: "baseline", text: "Point to the approved baseline and hold the line", correct: false, match: null,
+        rationale: "Not used. Citing the baseline settles what the project is committed to and does nothing about why someone believes otherwise, which is the live problem in all three situations." }
+    ],
+    explanation: "Expectation gaps have different causes and the technique has to match the cause. Genuinely competing expectations with no clear record need negotiation between the holders; a properly taken decision that never reached the affected group needs communication rather than reopening; and an expectation that survives repeated accurate correction signals a barrier that has to be found before any further message will land. Reaching for the baseline or for escalation treats all three as the same problem."
+  },
+
+  {
+    id: "pmp-p5-004", type: "single", domain: "people", ecoTask: "people-5",
+    approach: "agile", difficulty: 2, tags: ["expectations", "commitments", "sales"],
+    stem: "Your product owner, wanting to close a deal, told a prospective customer that a bulk import feature would ship in the next release. The team has not sized it, it is not in the sprint, and two developers think it is a fortnight of work. The customer has repeated the commitment in writing. The product owner tells you privately that she may have got ahead of herself. What should the project manager do first?",
+    mindset: "An expectation that cannot be met is cheapest to correct on the day it is created.",
+    options: [
+      { id: "a", text: "Have the team size the feature, then work with the product owner on what can honestly be committed and get the corrected position to the customer quickly.", correct: true,
+        rationale: "The estimate is the missing input and two developers' impression is not one. Correcting the customer early costs a difficult conversation now instead of a broken commitment later, when the customer has planned around it." },
+      { id: "b", text: "Pull the bulk import into the current sprint and displace lower-value items so the commitment is met.", correct: false,
+        rationale: "This is the honour-it-regardless error. It rewards a commitment made outside the team's planning, and it silently transfers the cost to whichever stakeholders were expecting the displaced items." },
+      { id: "c", text: "Ask the product owner to correct the customer herself, since she made the commitment.", correct: false,
+        rationale: "This is the ownership-as-abdication error. She did make it, and leaving her to unwind it alone forfeits the sizing information the team holds and risks a second inaccurate number replacing the first." },
+      { id: "d", text: "Add the feature to the top of the backlog and let the next refinement session establish whether the date is achievable.", correct: false,
+        rationale: "This is the defer-the-bad-news error. It leaves a written commitment standing while the answer is worked out, and every day of that delay makes the correction more expensive for the customer to absorb." }
+    ],
+    explanation: "A commitment made without the team's input is a defect in the expectation rather than in the plan, and the repair is to establish the real position and communicate it before the customer builds on it. Meeting the promise anyway teaches that commitments made outside planning will be absorbed, and delegating the retraction to whoever made the error discards the information that would make the second message reliable."
+  },
+
+  {
+    id: "pmp-p5-005", type: "single", domain: "people", ecoTask: "people-5",
+    approach: "hybrid", difficulty: 4, tags: ["expectations", "rollout", "divisions"],
+    stem: "A shared platform is being rolled out to two divisions. The retail division has been told it will get a phased rollout with a pilot; the wholesale division has been told the same platform arrives in a single cutover. Both understandings came from your own steering pack, which used different wording in two sections. Build has assumed a single cutover throughout. Discovery is three weeks from complete. What should the project manager do?",
+    mindset: "When you created the divergence, correct it yourself before it costs either party a decision.",
+    options: [
+      { id: "a", text: "Take the contradiction to both divisions together, acknowledge it originated in your reporting, and establish one rollout approach both can plan against.", correct: true,
+        rationale: "A joint correction stops each division hearing a different second version, and owning the source is what makes the correction credible. Establishing one approach they can plan against is the actual deliverable, not the apology." },
+      { id: "b", text: "Confirm the single cutover to retail, since that is what build has assumed and changing it now would be expensive.", correct: false,
+        rationale: "This is the cheapest-for-the-project error. It resolves the contradiction by overruling one division without discussion, and retail may have made staffing or trading decisions on the phased understanding that a cutover would strand." },
+      { id: "c", text: "Correct the steering pack wording in the next issue so future reporting is unambiguous.", correct: false,
+        rationale: "This is the fix-the-artefact error. It prevents recurrence and leaves both divisions holding the two understandings they already have, since neither will read a revised section as a retraction of what they were told." },
+      { id: "d", text: "Ask each division separately what they now expect, then design a rollout that accommodates both.", correct: false,
+        rationale: "This is the separate-conversations error. Handling it division by division risks producing a third position, and it treats a contradiction the project introduced as though it were a genuine difference in requirements." }
+    ],
+    explanation: "Where a project's own communication has created two incompatible expectations, the correction belongs in one conversation with both parties, because sequential correction produces a fresh set of divergent understandings. Owning the source plainly is what earns the room to settle it, and the purpose of the session is a single approach both can plan against rather than a determination of who was right."
+  },
+
+  {
+    id: "pmp-p6-003", type: "single", domain: "people", ecoTask: "people-6",
+    approach: "predictive", difficulty: 3, tags: ["customer", "requirements", "signals"],
+    stem: "Halfway through a twelve-month customer portal build, your client's own market has shifted and their competitors have launched self-service returns. Your contract, requirements and baseline contain no returns capability and the client has raised nothing formally. In an informal call their operations lead mentioned returns three times. Your delivery is on schedule and within budget. What should the project manager do?",
+    mindset: "Track what the customer now needs, not only what the customer formally asked for.",
+    options: [
+      { id: "a", text: "Continue to the baseline, since the client has raised no formal change and the contract is being met.", correct: false,
+        rationale: "This is the contract-compliance error. Delivering exactly what was agreed while the customer's need moves produces a project that succeeds against its measures and lands something the client can no longer use." },
+      { id: "b", text: "Raise the shift with the client, establish whether returns has become a real requirement, and set out the options and their cost while there is still time to act.", correct: true,
+        rationale: "Three unprompted mentions is a signal worth testing, and testing it costs a conversation. Presenting options with costs keeps the decision with the client rather than converting an observation into unrequested scope." },
+      { id: "c", text: "Add a returns capability to the design now, so the portal is not obsolete at launch.", correct: false,
+        rationale: "This is the anticipate-and-build error. It commits budget and schedule to a requirement the client has not confirmed, and unrequested scope delivered against a fixed contract is difficult to be paid for and harder to defend." },
+      { id: "d", text: "Note the market change in the risk register and monitor whether the client raises it formally.", correct: false,
+        rationale: "This is the passive-monitoring error. It records an exposure the project could reduce today and waits for the client to act, by which point the remaining schedule may be too short to absorb the change." }
+    ],
+    explanation: "Customer expectations move with the customer's own environment, and a project that tracks only formal requests will discover the movement at acceptance. Informal signals are worth surfacing deliberately rather than acting on unilaterally: raising the question preserves the client's authority over scope while there is still schedule to spend, whereas building ahead of confirmation and waiting for a formal request both remove that choice in opposite directions."
+  },
+
+  {
+    id: "pmp-p6-004", type: "single", domain: "people", ecoTask: "people-6",
+    approach: "agile", difficulty: 2, tags: ["customer", "acceptance", "criteria"],
+    stem: "An internal operations team is the customer for a scheduling tool. For four consecutive sprints they have accepted the demo, then raised defects in the following week that turn out to be behaviours the team never agreed to build. Their manager is frustrated, your team is demoralised, and the rework is now about a fifth of each sprint. Acceptance criteria exist and are written by your business analyst. What should the project manager do?",
+    mindset: "Acceptance is only meaningful when the customer helped define what they were accepting.",
+    options: [
+      { id: "a", text: "Have the operations team write or co-write the acceptance criteria before each item is built, and confirm them at refinement.", correct: true,
+        rationale: "Criteria written by an analyst capture what the analyst understood, which is why the mismatch appears only once operations use the thing. Co-writing moves the disagreement to before the build, where it costs a conversation rather than a fifth of a sprint." },
+      { id: "b", text: "Require the operations manager to sign the acceptance criteria before development starts on each item.", correct: false,
+        rationale: "This is the signature-as-understanding error. A signature on someone else's document creates accountability for a misunderstanding rather than preventing it, and the same behaviours will surface in the same place the following week." },
+      { id: "c", text: "Extend the demo into a longer hands-on session so the operations team can exercise the software properly before accepting.", correct: false,
+        rationale: "This is the too-late-to-help error, since it catches the mismatch a few days earlier at the end of the build rather than the start. The item has already been built to the wrong understanding by then, so the rework is deferred rather than avoided." },
+      { id: "d", text: "Track the post-acceptance defects separately as new requirements and schedule them into later sprints.", correct: false,
+        rationale: "This is the reclassify-the-symptom error. Renaming the rework makes the reporting tidier and leaves the cause untouched, while the operations team continues to experience the tool as not doing what they expected." }
+    ],
+    explanation: "Repeated acceptance followed by immediate defect reports usually means the acceptance criteria describe someone's interpretation of the need rather than the need. The durable fix is to move the customer upstream into defining what good looks like before the work starts, since that is the only point at which the misunderstanding is cheap. Tightening the ceremony at the end, or formalising sign-off on the same flawed document, both leave the misunderstanding in place."
+  },
+
+  {
+    id: "pmp-p7-003", type: "single", domain: "people", ecoTask: "people-7",
+    approach: "predictive", difficulty: 3, tags: ["knowledge", "handover", "attrition"],
+    stem: "The only engineer who understands your legacy billing interface has resigned and works four more weeks. Her documentation is thin, and the interface has failed twice in two years, each time resolved by her within hours. Two other engineers are capable but have never touched it. Your project depends on that interface through to a cutover in seven months. What should the project manager do with her remaining time?",
+    mindset: "Knowledge transfers through shared work, not through documents handed over at the door.",
+    options: [
+      { id: "a", text: "Have her write comprehensive documentation of the interface as her main task for the four weeks.", correct: false,
+        rationale: "This is the documentation-only error. A document written under time pressure captures what she can articulate, not what she does under pressure, and the two failures were resolved by judgement that does not survive being written down." },
+      { id: "b", text: "Pair the two engineers with her on real interface work, including a rehearsed failure, and have them write the documentation from what they learn.", correct: true,
+        rationale: "Working the interface alongside her is what transfers the diagnostic judgement the failures needed. Having the receivers write the document tests what actually landed, because they can only describe what they now understand." },
+      { id: "c", text: "Negotiate a retainer so she remains available on call through the cutover in seven months.", correct: false,
+        rationale: "This is the retain-the-dependency error. It buys insurance and removes the pressure to transfer anything, so in seven months the organisation is in the same position with less time and no remaining leverage." },
+      { id: "d", text: "Record a series of walkthrough videos covering the interface architecture and the two previous failures.", correct: false,
+        rationale: "This is the capture-without-practice error. Video preserves her explanation more faithfully than a document and still produces engineers who have watched someone else diagnose a fault rather than engineers who have diagnosed one." }
+    ],
+    explanation: "Tacit knowledge, the kind that resolves an outage in hours, moves through joint work rather than through artefacts. The strongest available transfer puts the receiving people on the real system with the departing expert present, rehearses the failure mode that matters, and uses documentation written by the receivers as the test of what was absorbed. Artefact-first approaches capture the explicable residue and leave the judgement behind."
+  },
+
+  {
+    id: "pmp-p7-004", type: "single", domain: "people", ecoTask: "people-7",
+    approach: "hybrid", difficulty: 4, tags: ["knowledge", "vendor", "transition"],
+    stem: "A vendor has run your data platform for three years under a contract ending in five months, and will be replaced by an internal team. The contract requires a handover pack at termination. The vendor is cooperative but its staff are being reassigned as work tails off, and the two people with the deepest platform knowledge leave the account in six weeks. Your internal team is hired but not yet started. What should the project manager do?",
+    mindset: "Sequence knowledge transfer around when the knowledge leaves, not when the contract ends.",
+    options: [
+      { id: "a", text: "Bring the internal team's start date forward if possible and, whether or not that succeeds, secure structured transfer from the two departing specialists within the six weeks.", correct: true,
+        rationale: "The binding constraint is six weeks, not five months, and it is set by people rather than by the contract. Acting on the specialists' window is what protects the knowledge even in the case where the internal start cannot be moved." },
+      { id: "b", text: "Hold the vendor to the contractual handover pack and review it against the platform when the internal team starts.", correct: false,
+        rationale: "This is the contract-timing error. The pack arrives at termination, by which point the two people who could have explained it have been gone for months, and a review then finds gaps with no one left to fill them." },
+      { id: "c", text: "Ask the vendor to keep the two specialists on the account until the contract ends.", correct: false,
+        rationale: "This is the plan-that-is-not-yours error. It depends on a commercial decision inside the vendor's own resourcing, and if declined at week five you have spent the window without a fallback." },
+      { id: "d", text: "Commission the vendor to produce enhanced documentation from the two specialists before they leave the account.", correct: false,
+        rationale: "This is the artefact-substitution error. It uses the six weeks to generate a description of the platform rather than to build capability, and there is still no one on your side able to interrogate what was written." }
+    ],
+    explanation: "In a transition the real deadline is the date the knowledge leaves the building, which is often well inside the contractual end. Planning has to be built around that window and around receivers who can absorb what is transferred. Contractual handover artefacts and vendor retention requests are both worth having, but neither should be the primary plan, because one arrives too late and the other is not yours to decide."
+  },
+
+  {
+    id: "pmp-p8-003", type: "multi", domain: "people", ecoTask: "people-8",
+    approach: "predictive", difficulty: 3, tags: ["communication", "reporting", "sponsor"],
+    stem: "Your sponsor has twice made decisions in steering that contradict information sent in the weekly status report, most recently approving an extra workstream in a week the report flagged a resourcing shortfall. The report runs to nine pages with a one-page summary at the front. The sponsor is engaged in the meetings themselves and asks good questions. Which two actions should the project manager take?",
+    mindset: "Reporting has done its job only when the decision-maker can act on it.",
+    options: [
+      { id: "a", text: "Ask the sponsor directly what she needs from the report, when she reads it, and what would have changed the resourcing decision.", correct: true,
+        rationale: "The gap between an engaged sponsor and a contradicted report is a design problem in the reporting, and she is the only source for what would work. Anchoring on the specific decision keeps the conversation concrete rather than a general request for feedback." },
+      { id: "b", text: "Raise material items that need a decision at the start of the steering meeting itself, rather than relying on the written report to carry them.", correct: true,
+        rationale: "Decisions taken in the room should be informed in the room. Putting the decision-relevant items in front of her at the point of decision closes the gap regardless of when or whether the written report is read." },
+      { id: "c", text: "Expand the executive summary so the resourcing position is unmissable on the first page.", correct: false,
+        rationale: "This is the louder-not-different error. A one-page summary already exists and did not carry the point, so more emphasis in the same channel repeats an approach with two failures behind it." },
+      { id: "d", text: "Ask the sponsor to confirm in writing that she has read each weekly report before steering.", correct: false,
+        rationale: "This is the compliance-over-communication error. It creates an audit trail that shifts blame onto the sponsor for the next contradicted decision, and it does nothing to make the information usable." },
+      { id: "e", text: "Circulate the report earlier in the week so there is more time to absorb it before the meeting.", correct: false,
+        rationale: "This is the timing-assumption error. It presumes the cause is insufficient time rather than format, relevance or channel, and nothing in the sponsor's behaviour points to time as the constraint." }
+    ],
+    explanation: "When a decision-maker acts against information you have supplied, the reporting has failed even though it was accurate. The two moves that reliably help are finding out from the recipient what would actually inform her and putting decision-critical items into the forum where decisions are made. Amplifying, formalising or rescheduling the same artefact all assume the format was right and only the delivery was wrong."
+  },
+
+  {
+    id: "pmp-p8-004", type: "single", domain: "people", ecoTask: "people-8",
+    approach: "agile", difficulty: 2, tags: ["communication", "distributed", "transparency"],
+    stem: "Your team works across three time zones with a two-hour overlap. Decisions taken during the overlap are not reaching the engineers who are offline, and twice this month work has been built against a decision that had been reversed. The team already runs a daily standup in the overlap and keeps a chat channel that scrolls fast. What should the project manager do?",
+    mindset: "In a distributed team, a decision does not exist until it is written somewhere durable.",
+    options: [
+      { id: "a", text: "Record decisions and their reasoning in a single durable place the whole team reads at the start of its own day, and reference it from the chat channel.", correct: true,
+        rationale: "The failure is that decisions live in a fast-scrolling stream and a meeting half the team cannot attend. A durable record read at each person's start of day matches the artefact to how a distributed team actually consumes information." },
+      { id: "b", text: "Move the daily standup to a time all three zones can attend so decisions are heard by everyone.", correct: false,
+        rationale: "This is the synchronise-everything error. With a two-hour overlap there is no such time, and forcing one puts a recurring meeting outside working hours for at least one zone in order to solve a problem that is really about persistence." },
+      { id: "c", text: "Have the overlap group post a summary of each decision to the chat channel immediately after standup.", correct: false,
+        rationale: "This is the same-channel error. The channel is already the place decisions are getting lost, so a summary posted into a fast stream is scrolled past by the people who most need it." },
+      { id: "d", text: "Assign a liaison in each zone to brief their colleagues on decisions taken during the overlap.", correct: false,
+        rationale: "This is the human-relay error. It introduces three retellings of every decision, adds a dependency on three individuals' availability, and makes the reasoning behind a decision the first thing to be lost." }
+    ],
+    explanation: "Distributed teams need information that persists and can be consumed asynchronously, because the constraint is that most of the team is asleep when most decisions are made. A single durable record covering the decision and the reasoning behind it, read at the start of each person's day, is what makes reversals visible. Extending synchronous ceremonies or relying on fast channels and human relays all assume everyone is available at the same time."
+  },
+
+  {
+    id: "pmp-p8-005", type: "single", domain: "people", ecoTask: "people-8",
+    approach: "predictive", difficulty: 5, tags: ["communication", "incident", "stakeholders"],
+    stem: "A data migration you ran over the weekend has corrupted a subset of customer records. Your technical lead is confident it affects under one per cent but cannot confirm the number for six hours. Meanwhile the head of customer service has already emailed her team saying the issue is fixed, a regional director is asking for numbers, and a journalist has contacted the press office. What should the project manager do first?",
+    mindset: "In a live incident, say what is known, what is not, and when you will next speak.",
+    options: [
+      { id: "a", text: "Wait for the six-hour analysis so that everything communicated is confirmed and accurate.", correct: false,
+        rationale: "This is the accuracy-before-anything error. Six hours of silence does not stop communication, it just leaves the customer service email and the journalist's enquiry to fill the space with a version nobody in the project controls." },
+      { id: "b", text: "Issue a single position to all parties stating what is known, what is not yet known, that the earlier all-clear was premature, and when the next update will come.", correct: true,
+        rationale: "One position from one source stops the divergence, and correcting the premature all-clear is urgent because it is currently being acted on. A committed next update time is what buys the six hours without inviting people to keep asking." },
+      { id: "c", text: "Brief the regional director and the press office with the current estimate, and correct customer service once the numbers are confirmed.", correct: false,
+        rationale: "This is the tiered-disclosure error. Briefing the senior and external audiences first leaves the operational team acting on a known-false all-clear, and the inconsistency surfaces the moment those audiences compare notes." },
+      { id: "d", text: "Ask the head of customer service to retract her email, and hold all other communication until the analysis completes.", correct: false,
+        rationale: "This is the partial-correction error. Retracting without supplying what is currently known creates alarm with no anchor, and the regional director and the journalist remain unanswered while speculation runs." }
+    ],
+    explanation: "Incident communication is judged on consistency and timeliness rather than completeness. A single statement covering what is known, what remains unknown, what previously said was wrong, and when the next update will arrive gives every audience the same footing and prevents the vacuum being filled elsewhere. Waiting for certainty, briefing audiences in tiers, or retracting without replacing all leave some group acting on a version of events the project knows to be wrong."
+  },
+/* ── PROCESS ── 20 items, taking the ten Process tasks to 45 ───────────── */
+
+  {
+    id: "pmp-pr1-004", type: "multi", domain: "process", ecoTask: "process-1",
+    approach: "predictive", difficulty: 3, tags: ["planning", "integration", "baseline"],
+    stem: "Three weeks into planning a hospital systems replacement, your scope lead, schedule lead and procurement lead have each produced a credible plan. The schedule assumes a supplier chosen by March, procurement's plan reaches award in May, and scope includes a module procurement has been told is out. Each lead is confident their own plan is sound. The sponsor wants a baseline in a fortnight. Which two actions should the project manager take?",
+    mindset: "One coherent plan beats three good plans that were never reconciled.",
+    options: [
+      { id: "a", text: "Run a joint session where the three plans are laid against each other and every assumption one makes about another is tested.", correct: true,
+        rationale: "The conflicts sit at the seams, which is exactly where individual planning cannot see them. Testing each cross-plan assumption in one room is what turns three internally consistent documents into one that holds together." },
+      { id: "b", text: "Establish which of the conflicting positions the project will actually adopt, and have each lead reflect that single decision in their own plan.", correct: true,
+        rationale: "Surfacing the conflicts is only half the work; someone has to decide the March or May question and the module question. Pushing the decision back into all three plans is what stops the reconciliation living only in a meeting note." },
+      { id: "c", text: "Baseline the three plans as they stand and manage the differences through variance reporting once execution starts.", correct: false,
+        rationale: "This is the baseline-the-contradiction error. A baseline containing a known two-month impossibility measures execution against a target no one can hit, and every subsequent variance report describes a planning defect as delivery underperformance." },
+      { id: "d", text: "Ask each lead to review the other two plans and submit comments for consolidation.", correct: false,
+        rationale: "This is the serial-review error. Written comment exchange between three parties who each believe their own plan is sound tends to produce three defences rather than a resolution, and it consumes most of the fortnight." },
+      { id: "e", text: "Extend the planning period so each lead has time to refine their plan before the baseline is set.", correct: false,
+        rationale: "This is the more-of-the-same error. More individual planning time deepens three separate plans, and the defect is that they were produced without contact rather than that they were produced too quickly." }
+    ],
+    explanation: "Component plans produced in parallel are individually reasonable and collectively contradictory, because each carries assumptions about the others that were never checked. Integration is the act of surfacing those assumptions together and then deciding, so that one position propagates back into every plan. Baselining the contradiction converts a planning problem into a permanent reporting problem, and asking for more time or written comment leaves the plans as separate as they started."
+  },
+
+  {
+    id: "pmp-pr1-005", type: "single", domain: "process", ecoTask: "process-1",
+    approach: "hybrid", difficulty: 4, tags: ["planning", "delivery-approach", "tailoring"],
+    stem: "You are planning a payments platform replacement. The core ledger must satisfy a regulator whose requirements are published, detailed and unlikely to change; the customer-facing app has no settled requirements and a business sponsor who expects to learn from usage. Your organisation's method mandates a single delivery approach per project. The programme board is asking which approach you will use. What should the project manager propose?",
+    mindset: "Fit the delivery approach to the nature of the work, and justify any tailoring openly.",
+    options: [
+      { id: "a", text: "Propose a predictive approach for the ledger and an iterative one for the app, with defined integration points, and take the tailoring to the board for approval.", correct: true,
+        rationale: "The two components differ in exactly the dimension that should drive the choice, which is requirement stability. Taking the tailoring to the board openly is what distinguishes a reasoned deviation from quietly ignoring the organisational method." },
+      { id: "b", text: "Use a predictive approach throughout, since the regulated ledger carries the greater consequence of failure and the method mandates consistency.", correct: false,
+        rationale: "This is the highest-risk-component-wins error. It fixes requirements for an app whose requirements do not yet exist, so the plan's detail is invented and the sponsor's intention to learn from usage is designed out." },
+      { id: "c", text: "Use an iterative approach throughout, delivering the ledger in increments against the published regulatory requirements.", correct: false,
+        rationale: "This is the uniform-agility error. Iterating toward requirements that are already published, detailed and stable spends discovery effort on questions that have documented answers and complicates the evidence trail the regulator expects." },
+      { id: "d", text: "Follow the mandated single approach and manage the app's uncertainty through a larger contingency reserve.", correct: false,
+        rationale: "This is the buy-your-way-out error. Reserve absorbs cost variance and does nothing about not knowing what to build, so the money is available and the app is still specified from assumptions nobody has tested." }
+    ],
+    explanation: "Delivery approach follows the characteristics of the work, principally how stable the requirements are and how much value there is in early feedback. Where components differ sharply on that dimension, a single approach necessarily misfits one of them. Where an organisational method constrains the choice, the professional route is a reasoned tailoring proposal put to whoever owns the method, not a silent deviation and not a compliant plan you already know will not work."
+  },
+
+  {
+    id: "pmp-pr2-004", type: "hotspot", domain: "process", ecoTask: "process-2",
+    approach: "predictive", difficulty: 2, tags: ["scope", "decomposition", "control"],
+    stem: "The diagram shows the sequence your project follows to establish and hold its scope. A stakeholder has just asked for an addition, and you need to know which step produces the reference that determines whether the request is a change or was always included. Select that step.",
+    mindset: "You cannot control scope against a definition that was never agreed.",
+    graphic: {
+      viewBox: "0 0 660 130",
+      title: "Scope definition and control, five steps left to right",
+      caption: "Select a step. Use Tab or the arrow keys to move between steps, then Enter or Space."
+    },
+    regions: [
+      { id: "s1", n: 1, label: "Collect requirements", x: 8, y: 34, w: 118, h: 62, correct: false,
+        rationale: "Collecting requirements gathers what stakeholders say they need. It produces raw input that has not yet been bounded, so it cannot settle whether a given request sits inside the project." },
+      { id: "s2", n: 2, label: "Define scope", x: 142, y: 34, w: 118, h: 62, correct: false,
+        rationale: "Defining scope narrows the collected requirements into what this project will and will not do. It is the necessary input to the next step but is not yet the agreed reference against which requests are judged." },
+      { id: "s3", n: 3, label: "Baseline scope", x: 276, y: 34, w: 118, h: 62, correct: true,
+        rationale: "Baselining fixes the agreed statement of scope as the approved reference. Once it exists, any request can be tested against it and classified as already included or as a change requiring approval." },
+      { id: "s4", n: 4, label: "Validate deliverables", x: 410, y: 34, w: 118, h: 62, correct: false,
+        rationale: "Validation is where the customer formally accepts completed deliverables. It happens after work is done and consumes the baseline rather than establishing it." },
+      { id: "s5", n: 5, label: "Control scope", x: 544, y: 34, w: 108, h: 62, correct: false,
+        rationale: "Controlling scope is the ongoing activity of comparing requests and work against the reference. It is where the test is applied, but the reference it applies was created at the earlier step." }
+    ],
+    explanation: "The distinction between a change and an inclusion only exists once there is an approved reference to test against, and that reference is created when scope is baselined rather than when it is drafted or when control activity begins. Projects that attempt to control scope without a baseline end up arguing about what was always intended, because there is no agreed point of comparison and every party remembers the original discussion differently."
+  },
+
+  {
+    id: "pmp-pr2-005", type: "single", domain: "process", ecoTask: "process-2",
+    approach: "predictive", difficulty: 3, tags: ["scope", "gold-plating", "change"],
+    stem: "A developer on your fixed-price contract has added a configurable dashboard to a reporting module. It took her four days, it was not requested, and she is proud of it. The client's analyst has seen it and is enthusiastic. The module passed its review without the dashboard mentioned, and there are eleven weeks left with no float on that workstream. What should the project manager do?",
+    mindset: "Unrequested additions are scope decisions, and scope decisions are not the delivery team's to take.",
+    options: [
+      { id: "a", text: "Raise the addition with the client as a change, establish whether they want it, and make the schedule and support consequences explicit before it is retained.", correct: true,
+        rationale: "The dashboard is now real and the client has seen it, so quietly removing it is no longer a neutral act. Routing it through change control puts the decision with the client while making the eleven-week and support cost visible rather than absorbed." },
+      { id: "b", text: "Remove the dashboard and return the module to the reviewed scope, then remind the team that additions must be requested.", correct: false,
+        rationale: "This is the strict-revert error. It is defensible on scope discipline and ignores that the client's analyst has already seen and wants the feature, so removal creates a conversation about withdrawal rather than about approval." },
+      { id: "c", text: "Retain the dashboard at no charge as goodwill, since the work is already done and the client is pleased.", correct: false,
+        rationale: "This is the free-gift error. The build cost is sunk but the testing, documentation and ongoing support are not, and an unpriced feature accepted informally sets the expectation that further additions arrive the same way." },
+      { id: "d", text: "Log the dashboard in the lessons learned register and let the client's formal acceptance decide whether it stays.", correct: false,
+        rationale: "This is the defer-to-acceptance error. It leaves an unapproved feature inside a fixed-price deliverable until the latest possible moment, when the leverage to price it or remove it is at its lowest." }
+    ],
+    explanation: "Work added without a request is a change regardless of whether anyone is pleased with it, and the cost of it is rarely limited to the days already spent. Once a client has seen the addition, both silent removal and silent retention are decisions taken on the client's behalf. The controlled route makes the addition visible, prices its full consequence including support, and leaves the decision where it belongs."
+  },
+
+  {
+    id: "pmp-pr3-003", type: "single", domain: "process", ecoTask: "process-3",
+    approach: "agile", difficulty: 3, tags: ["value", "prioritisation", "backlog"],
+    stem: "Your backlog is ordered by a scoring model the product owner built eighteen months ago. Two features near the top serve a customer segment the company exited in January. The product owner defends the order because the scores are objective and consistently applied. Three stakeholders have separately asked why the team is building for a segment that no longer exists. What should the project manager do?",
+    mindset: "Prioritisation models serve current value; they do not outrank it.",
+    options: [
+      { id: "a", text: "Ask the product owner to rescore the backlog against the current strategy, starting with the inputs the model uses rather than the scores it produces.", correct: true,
+        rationale: "A consistently applied model producing obviously wrong output has stale inputs, not stale arithmetic. Going after the inputs fixes every item at once and preserves the discipline the product owner is rightly protecting." },
+      { id: "b", text: "Move the two features down the backlog, since the segment they serve has been exited.", correct: false,
+        rationale: "This is the fix-the-instance error. It corrects two visible symptoms and leaves a model that will keep generating the same class of error, while overriding the product owner on an ordering that is properly hers." },
+      { id: "c", text: "Escalate to the sponsor, since three stakeholders have raised concerns about work that no longer serves the strategy.", correct: false,
+        rationale: "This is the escalate-before-asking error. The product owner has not yet been shown that her inputs are stale, and escalating a solvable disagreement past her damages the working relationship the backlog depends on." },
+      { id: "d", text: "Bring the two features to the next review and let stakeholder feedback determine whether they should still be built.", correct: false,
+        rationale: "This is the demo-as-decision error. It spends a sprint building the features in order to ask whether they should exist, which is the most expensive available way to answer a question that could be settled in a conversation." }
+    ],
+    explanation: "A prioritisation model is a way of applying current judgement consistently, so when the organisation's strategy moves the model has to be re-fed rather than defended or bypassed. Correcting individual items treats the output while the mechanism continues to produce the same error, and escalating past the person who owns the ordering skips the step most likely to work. The objectivity of a model is only as current as what was put into it."
+  },
+
+  {
+    id: "pmp-pr3-004", type: "single", domain: "process", ecoTask: "process-3",
+    approach: "hybrid", difficulty: 3, tags: ["value", "benefits", "continuation"],
+    stem: "Your programme was funded to save two million a year by automating claims handling. Nine months in, a competitor's acquisition has halved the claim volume your company expects to process. The automation works. Delivered as planned it would now save roughly six hundred thousand a year against three million of remaining spend. Your delivery metrics are all green and the team is performing well. What should the project manager do?",
+    mindset: "Keep asking whether the work is still worth doing, not only whether it is being done well.",
+    options: [
+      { id: "a", text: "Present the revised benefit case to the sponsor and governance board with options including reduced scope and termination, and let them decide.", correct: true,
+        rationale: "The investment decision belongs to the people who made it, and they cannot revisit it without being told the numbers have moved. Bringing options rather than a single recommendation respects that this is a funding judgement rather than a delivery one." },
+      { id: "b", text: "Continue to plan, since the programme is performing well against its baseline and the automation delivers what was specified.", correct: false,
+        rationale: "This is the on-track-therefore-fine error. Green delivery metrics measure whether the work is being done as agreed and say nothing about whether it is still worth three million to finish." },
+      { id: "c", text: "Reduce scope to the components that still pay back, and inform the board of the revised plan at the next reporting cycle.", correct: false,
+        rationale: "This is the decide-then-report error. Rescoping may well be the right answer, but choosing it unilaterally takes an investment decision that belongs to the board and presents it as a delivery adjustment." },
+      { id: "d", text: "Recalculate the benefit case and re-forecast, then continue while monitoring whether claim volumes recover.", correct: false,
+        rationale: "This is the monitor-and-hope error. It correctly identifies that the numbers have changed and then declines to act on them, spending real money against a recovery nobody has forecast." }
+    ],
+    explanation: "Value is not fixed at approval, and a project delivering exactly what was agreed can stop being worth its remaining cost through no fault of its own. The project manager's obligation is to notice the shift and put it in front of whoever owns the investment, framed as options with numbers attached. Continuing on the strength of good delivery metrics, or rescoping without sanction, both substitute delivery judgement for an investment decision."
+  },
+
+  {
+    id: "pmp-pr3-005", type: "fillblank", domain: "process", ecoTask: "process-3",
+    approach: "agile", difficulty: 3, tags: ["value", "sequencing", "cost-of-delay"],
+    stem: "Your team can start only one of two features next. Finance estimates that delaying the express checkout feature costs the business about £48,000 a month, and the team sizes it at 8 points. Delaying the saved-baskets feature costs about £27,000 a month, and the team sizes it at 3 points. Both are technically independent and either could start immediately. Work out the delay cost per point for each, then state which should be started first.",
+    mindset: "Sequence by the value released per unit of effort, not by the size of the prize.",
+    blanks: [
+      { id: "wsjf1", label: "Express checkout, delay cost per point (£ per month)", numeric: true, expect: 6000, tol: 1, unit: "£/point/month",
+        rationale: "48,000 ÷ 8 = £6,000 per point per month. This is what each unit of the team's effort on express checkout buys back in avoided delay cost." },
+      { id: "wsjf2", label: "Saved baskets, delay cost per point (£ per month)", numeric: true, expect: 9000, tol: 1, unit: "£/point/month",
+        rationale: "27,000 ÷ 3 = £9,000 per point per month. The smaller prize on the smaller job returns more per unit of effort than the larger prize on the larger job." },
+      { id: "first", label: "Which feature should be started first", accept: ["saved baskets", "saved-baskets", "saved basket", "baskets", "b", "the saved baskets feature"],
+        rationale: "Saved baskets returns £9,000 per point against express checkout's £6,000, so starting it first releases more value per unit of capacity and finishes sooner, after which express checkout begins." }
+    ],
+    explanation: "When capacity is the constraint, sequencing by absolute value systematically favours large items and leaves cheaper, faster value sitting in the queue. Dividing the cost of delay by the size of the job puts every candidate on the same footing and tends to promote small high-value work. The larger headline figure is the trap here: express checkout is worth more in total and is worth less per unit of the scarce thing, which is the team's time."
+  },
+
+  {
+    id: "pmp-pr4-003", type: "pulldown", domain: "process", ecoTask: "process-4",
+    approach: "predictive", difficulty: 3, tags: ["resources", "estimating", "allocation"],
+    stem: "You are building the resource plan for a two-year infrastructure refresh and different parts of the work give you very different kinds of evidence to estimate from. Complete each sentence with the estimating basis that fits the situation described. Two choices are not used.",
+    mindset: "Estimate from the best evidence the situation actually offers.",
+    prompts: [
+      { id: "r1", text: "Cabling twelve floors of an office the company refitted last year, to the same specification. The estimate should mostly be based on" },
+      { id: "r2", text: "A migration nobody in the organisation has attempted, where two engineers give confident but very different figures. The estimate should mostly be based on" },
+      { id: "r3", text: "Installing 400 identical access points, where a reliable per-unit installation time is already known. The estimate should mostly be based on" }
+    ],
+    options: [
+      { id: "analogous", text: "the recorded effort from the comparable job", correct: true, match: "r1",
+        rationale: "A near-identical piece of work completed recently by the same organisation is the strongest evidence available. Building up from first principles here would discard real data in favour of an assumption." },
+      { id: "threepoint", text: "an optimistic, likely and pessimistic range from both engineers", correct: true, match: "r2",
+        rationale: "Wide disagreement between credible experts is information about uncertainty, and a range captures it where a single agreed number would conceal it. It also gives the reserve conversation something to work from." },
+      { id: "parametric", text: "the known unit rate multiplied by the quantity", correct: true, match: "r3",
+        rationale: "A reliable per-unit figure and a large repeated quantity is the situation where scaling the rate is both accurate and cheap. The repetition is what makes the unit rate trustworthy at this volume." },
+      { id: "bottomup", text: "a full decomposition of every task and its effort", correct: false, match: null,
+        rationale: "Not used. Detailed decomposition earns its cost where work is novel and divisible into understood parts, and each situation here already offers a faster basis of comparable data, expert range or unit rate." },
+      { id: "vendor", text: "the supplier's quoted figure taken as given", correct: false, match: null,
+        rationale: "Not used. A quotation is a commercial position rather than an estimate, and adopting one without an independent basis leaves you unable to tell whether it is padded or optimistic." }
+    ],
+    explanation: "The estimating basis follows the evidence available rather than a house preference for one technique. Recent comparable work supports estimating by analogy; a known unit rate across a large repeated quantity supports scaling that rate; and genuine expert disagreement on novel work is best expressed as a range, because forcing consensus hides the uncertainty that the reserve is meant to cover. Decomposition and supplier figures both have their place, but neither is the strongest basis when better evidence is already to hand."
+  },
+
+  {
+    id: "pmp-pr4-004", type: "single", domain: "process", ecoTask: "process-4",
+    approach: "agile", difficulty: 2, tags: ["resources", "capacity", "utilisation"],
+    stem: "A manager has asked you to raise your team's utilisation from about seventy per cent to ninety-five, arguing that the difference is waste. Your team's throughput has been stable for six months and its cycle time is predictable. Two of the engineers use part of that slack to handle production support, which arrives unpredictably. What should the project manager do?",
+    mindset: "Slack is what lets a system absorb variation; removing it buys utilisation and sells predictability.",
+    options: [
+      { id: "a", text: "Show the manager what the slack is currently absorbing and what raising utilisation would do to cycle time and support response, then agree a target from that.", correct: true,
+        rationale: "The manager is treating unbooked time as waste because nobody has shown him what it does. Making the support load and the queueing effect visible converts an assertion about idleness into a decision about which outcome the organisation wants." },
+      { id: "b", text: "Raise the target to ninety-five per cent and monitor cycle time, reverting if delivery deteriorates.", correct: false,
+        rationale: "This is the comply-and-measure error. Queueing effects appear as a growing backlog of part-finished work rather than an immediate signal, so the deterioration is well established by the time the metric moves." },
+      { id: "c", text: "Move production support to a separate team so the engineers' time can be fully allocated to project work.", correct: false,
+        rationale: "This is the relocate-the-variability error. It may be worth doing on its own merits, and it does not answer the manager's point, since unpredictable arrivals still need slack wherever they land." },
+      { id: "d", text: "Explain that high utilisation increases cycle time and decline the target on that basis.", correct: false,
+        rationale: "This is the correct-but-unevidenced error. The principle holds, and refusing a manager's request with a general argument invites the reply that your team is the exception, which only local data can answer." }
+    ],
+    explanation: "In any system with variable arrival of work, pushing utilisation toward full capacity lengthens queues sharply and makes delivery less predictable. The persuasive move is local evidence rather than the general principle: showing what the slack is currently absorbing and what the trade would cost in cycle time turns the conversation into a choice between predictability and apparent efficiency, which is the choice actually on the table."
+  },
+
+  {
+    id: "pmp-pr5-003", type: "matching", domain: "process", ecoTask: "process-5",
+    approach: "predictive", difficulty: 3, tags: ["procurement", "contracts", "risk"],
+    stem: "You are letting three packages on a rail depot project, and the right contract form differs across them because what is known and who is best placed to carry the risk differ. Match each package to the contract arrangement that fits it best. Two choices are not used.",
+    mindset: "The contract form should place risk with the party best able to control it.",
+    prompts: [
+      { id: "k1", text: "Supply and install 60 identical charging points to a published specification, with a well-understood market and several capable bidders." },
+      { id: "k2", text: "Ground remediation where the extent of contamination will not be known until excavation begins, and no bidder will price the unknown." },
+      { id: "k3", text: "A specialist signalling upgrade where the scope is clear but delivery six weeks early is worth a great deal to the operator." }
+    ],
+    options: [
+      { id: "ffp", text: "Fixed price for the whole package", correct: true, match: "k1",
+        rationale: "A published specification, a competitive market and no meaningful unknowns is the case where a supplier can price with confidence. The buyer gets cost certainty and the supplier carries an efficiency risk it can actually manage." },
+      { id: "costplus", text: "Reimbursement of actual cost plus an agreed fee", correct: true, match: "k2",
+        rationale: "Where the extent of the work is genuinely unknown, a fixed price would either be refused or loaded with contingency the buyer pays for regardless. Reimbursing actual cost keeps the buyer's exposure tied to what is actually found." },
+      { id: "incentive", text: "Fixed price with an incentive for early completion", correct: true, match: "k3",
+        rationale: "Clear scope allows a firm price, and an early-completion incentive puts money behind the outcome the operator values. The supplier is the party able to influence the date, so that is where the reward should sit." },
+      { id: "tm", text: "Time and materials with no ceiling", correct: false, match: null,
+        rationale: "Not used. Open-ended time and materials suits small or urgent work where defining the scope costs more than the work itself, and all three packages here are substantial and definable." },
+      { id: "framework", text: "A call-off framework with rates fixed for four years", correct: false, match: null,
+        rationale: "Not used. A framework is for repeated purchasing of similar items over time, whereas these are three one-off packages on a single project." }
+    ],
+    explanation: "Contract form is a risk allocation decision. Where scope is clear and the market is competitive, fixed price transfers cost risk to the party that can manage it. Where the extent of work is genuinely unknowable in advance, insisting on a fixed price simply buys someone else's contingency. Where scope is clear and timing carries value, an incentive aligns the supplier's interest with the outcome the buyer actually wants."
+  },
+
+  {
+    id: "pmp-pr5-004", type: "single", domain: "process", ecoTask: "process-5",
+    approach: "predictive", difficulty: 4, tags: ["procurement", "vendor", "performance"],
+    stem: "A supplier on a firm fixed-price contract has missed two of four milestones. Their delivery manager attributes the slippage to your organisation's slow provision of test environments, and your own records show three environment requests took eleven, nine and fourteen days against a five-day commitment in the contract. Your sponsor wants the supplier put on formal notice this week. What should the project manager do first?",
+    mindset: "Establish the facts on both sides before invoking a contractual remedy.",
+    options: [
+      { id: "a", text: "Establish jointly with the supplier which delays are attributable to which party and by how much, then advise the sponsor what the position actually supports.", correct: true,
+        rationale: "Your own records already corroborate part of the supplier's account, so notice served now may be answered with a claim rather than improved performance. Establishing the split first is what tells the sponsor which remedy is available." },
+      { id: "b", text: "Serve the formal notice as the sponsor has asked, and address the environment delays separately as an internal improvement.", correct: false,
+        rationale: "This is the follow-the-instruction error. It asserts sole supplier fault against evidence you hold to the contrary, which weakens the notice and hands the supplier a defence in any subsequent dispute." },
+      { id: "c", text: "Waive the missed milestones on the basis that the environment delays caused them, and reset the schedule.", correct: false,
+        rationale: "This is the concede-everything error. Environment delays are evidenced but the causal share is not established, and waiving both milestones gives away a contractual position before anyone has quantified what it was worth." },
+      { id: "d", text: "Fix the environment provisioning first, then reassess the supplier's performance over the next two milestones.", correct: false,
+        rationale: "This is the sequential-remediation error. The internal fix is necessary, and deferring the performance conversation for two more milestones lets a possibly genuine supplier problem run for months unaddressed." }
+    ],
+    explanation: "Where a supplier's non-performance is met with a credible claim of buyer-caused delay, the first task is to establish the factual split rather than to act on either party's account. Serving notice on contested facts weakens the remedy and invites a counterclaim, while conceding wholesale surrenders a position that has not been valued. The sponsor is entitled to the pressure he is applying and is better served by advice on what the evidence will actually support."
+  },
+
+  {
+    id: "pmp-pr6-004", type: "fillblank", domain: "process", ecoTask: "process-6",
+    approach: "predictive", difficulty: 3, tags: ["finance", "earned-value", "forecast"],
+    stem: "A depot construction project has an approved budget at completion of £900,000. At the end of month six the plan said £450,000 of work should have been completed, the value of the work actually completed is £405,000, and £450,000 has been spent. Cost performance so far is expected to continue for the rest of the project. Work out the cost performance index, then the forecast total cost at completion.",
+    mindset: "A forecast built from demonstrated performance is worth more than a forecast built from hope.",
+    blanks: [
+      { id: "cpi", label: "Cost performance index", numeric: true, expect: 0.9, tol: 0.005,
+        rationale: "The index is the value of work completed divided by what was spent to complete it: 405,000 ÷ 450,000 = 0.90. The project is returning ninety pence of work for every pound spent." },
+      { id: "eac", label: "Forecast cost at completion (£)", numeric: true, expect: 1000000, tol: 500, unit: "£",
+        rationale: "Where current cost performance is expected to continue, the forecast is the budget divided by the index: 900,000 ÷ 0.90 = £1,000,000. The project is on course to overrun by £100,000." }
+    ],
+    explanation: "Dividing the budget by the demonstrated cost performance index projects the current rate of overspend across the remaining work, which is the appropriate forecast whenever nothing has changed that would make future performance differ from past performance. The alternative assumption, that the remainder will be delivered exactly to budget, is only defensible when a specific and identified cause of the past variance has been removed."
+  },
+
+  {
+    id: "pmp-pr7-003", type: "multi", domain: "process", ecoTask: "process-7",
+    approach: "agile", difficulty: 3, tags: ["quality", "defects", "prevention"],
+    stem: "Defects found after release have tripled over four sprints. Your testers are working longer hours and finding more, but the escape rate keeps climbing. The team has no automated regression suite, code review is optional and often skipped when a sprint is tight, and the definition of done does not mention testing. Velocity has risen across the same four sprints. Which two actions should the project manager prioritise?",
+    mindset: "Quality is built in during the work, not inspected in at the end.",
+    options: [
+      { id: "a", text: "Work with the team to add testing and code review to the definition of done, so an item is not complete until both have happened.", correct: true,
+        rationale: "Optional review skipped under pressure is not a discipline, and rising velocity across the same period suggests done currently means written rather than working. Putting both into the definition of done makes the quality work part of the item's cost." },
+      { id: "b", text: "Invest team capacity in automated regression coverage, starting with the areas where escaped defects cluster.", correct: true,
+        rationale: "Escapes rising while manual testing intensifies is the signature of regression the team cannot re-check by hand each sprint. Targeting the clusters first is what makes the investment pay back inside a few sprints rather than eventually." },
+      { id: "c", text: "Add two more testers so that more defects are caught before release.", correct: false,
+        rationale: "This is the more-inspection error. It scales the activity that is already failing to keep up, and it confirms to the team that quality is the test function's responsibility rather than part of building the thing." },
+      { id: "d", text: "Introduce a quality gate requiring your sign-off before any release goes out.", correct: false,
+        rationale: "This is the gatekeeper error. It places one person at the end of a pipeline producing defects upstream, which slows release without improving what arrives at the gate." },
+      { id: "e", text: "Report the escape trend to the steering committee and request additional budget for a quality improvement initiative.", correct: false,
+        rationale: "This is the escalate-for-funding error. The two effective actions cost the team's own capacity and a working agreement rather than budget, so the request buys delay while the escape rate continues to climb." }
+    ],
+    explanation: "A rising escape rate alongside intensifying test effort means defects are being created faster than inspection can remove them, so the leverage is upstream. Building the quality activity into the team's definition of done changes when the work happens, and automating regression addresses the specific failure that manual testing cannot repeat at sprint cadence. Adding inspectors, adding gates or seeking funding all scale the response at the end of the pipeline."
+  },
+
+  {
+    id: "pmp-pr7-004", type: "single", domain: "process", ecoTask: "process-7",
+    approach: "predictive", difficulty: 2, tags: ["quality", "cost-of-quality", "trade-off"],
+    stem: "Your finance business partner has flagged that the project is spending £180,000 on inspection, testing and audit activities, and asks whether this can be cut to protect a strained budget. The product is a medical device component. Field failure would trigger recall costs the business case estimates at several million, and the regulator requires evidence of the testing regime. What should the project manager do?",
+    mindset: "Weigh what prevention and appraisal cost against what failure would cost.",
+    options: [
+      { id: "a", text: "Set out for the finance partner what the £180,000 buys against the recall and regulatory exposure it reduces, and identify any activity that is genuinely duplicated.", correct: true,
+        rationale: "The request deserves an answer in the terms it was asked, which are financial. Separating the exposure argument from any genuine duplication is what distinguishes a defensible spend from an unexamined one." },
+      { id: "b", text: "Decline the reduction on the grounds that the regulator requires the testing regime.", correct: false,
+        rationale: "This is the compliance-shield error. It is true of some of the spend and probably not all of it, and it declines to examine whether any of the £180,000 is genuinely duplicated or poorly targeted." },
+      { id: "c", text: "Reduce inspection activity by the amount requested and increase the contingency reserve to cover the additional failure risk.", correct: false,
+        rationale: "This is the reserve-for-recall error. Contingency covers estimating variance within the project, not a multi-million recall borne by the wider business, and it does nothing about the regulator's evidence requirement." },
+      { id: "d", text: "Propose moving the inspection cost into the operations budget so it no longer sits against the project.", correct: false,
+        rationale: "This is the move-the-cost error. It relieves the project's budget position without changing what the organisation spends, and it presents an accounting transfer as a saving." }
+    ],
+    explanation: "Money spent preventing and detecting defects is judged against the cost of the failures it avoids, and in regulated or safety-critical work that comparison is usually decisive. The professional response to a challenge on the spend is to make the trade-off explicit in financial terms rather than to defend the budget on principle, and to use the challenge as an occasion to find any duplication that genuinely exists. Reclassifying the cost or reserving against the exposure changes neither the risk nor the total spend."
+  },
+
+  {
+    id: "pmp-pr8-004", type: "single", domain: "process", ecoTask: "process-8",
+    approach: "predictive", difficulty: 3, tags: ["schedule", "compression", "risk"],
+    stem: "Your sponsor needs the project delivered five weeks earlier to meet a trade show. The critical path runs through a sequence of integration and user acceptance testing. Adding people to testing would help marginally; the two testing phases are currently sequential, and running them with a partial overlap is technically possible but would mean acceptance testing starts against a build still being fixed. What should the project manager present to the sponsor?",
+    mindset: "Compression buys time by spending cost or risk; the sponsor should choose which.",
+    options: [
+      { id: "a", text: "Both compression options with their cost, the time each would recover, and the specific risk each introduces, so the sponsor can choose.", correct: true,
+        rationale: "Compression is never free and the currency differs by option: staffing spends money, overlapping spends rework risk. Presenting both with what each costs and buys puts a business trade-off in front of the person entitled to make it." },
+      { id: "b", text: "Recommend overlapping the two testing phases, since it recovers the most time at no additional cost.", correct: false,
+        rationale: "This is the free-lunch error. Overlapping is not costless, it converts schedule pressure into rework risk on acceptance testing, and presenting it as no-cost hides the thing the sponsor most needs to weigh." },
+      { id: "c", text: "Explain that the critical path cannot be shortened without unacceptable risk and propose a later date.", correct: false,
+        rationale: "This is the premature-no error. Two viable options exist and one may well be worth the risk to hit a trade show, so declining on the project manager's own risk appetite pre-empts a decision that belongs to the sponsor." },
+      { id: "d", text: "Add the additional testers and reassess whether the remaining shortfall can be absorbed later in the schedule.", correct: false,
+        rationale: "This is the partial-action error. It spends budget for marginal gain, defers the real decision, and leaves the sponsor believing the date is being addressed when most of the five weeks is still unfunded." }
+    ],
+    explanation: "Shortening a schedule works either by adding resource to critical activities, which costs money, or by overlapping activities that were sequential, which introduces rework risk. Neither is free, and which is preferable depends on the organisation's appetite in this particular situation. The project manager's job is to quantify both and hand the choice up, rather than to pick on the sponsor's behalf or to refuse on the basis of a risk the sponsor might well accept."
+  },
+
+  {
+    id: "pmp-pr8-005", type: "fillblank", domain: "process", ecoTask: "process-8",
+    approach: "predictive", difficulty: 4, tags: ["schedule", "critical-path", "float"],
+    stem: "A site handover has two independent chains of work that must both finish before commissioning. Chain one runs survey, four days, then fit-out, six days. Chain two runs permits, seven days, then connections, five days. Commissioning takes three days and cannot start until both chains are complete. All activities start as early as possible. Work out the shortest possible project duration, then the total float on the survey activity.",
+    mindset: "Float belongs to the path, and the path with none of it sets the date.",
+    blanks: [
+      { id: "dur", label: "Shortest project duration, in days", numeric: true, expect: 15, tol: 0.01, unit: "days",
+        rationale: "Chain one takes 4 + 6 = 10 days and chain two takes 7 + 5 = 12 days. Commissioning waits for the later of the two, so the duration is 12 + 3 = 15 days." },
+      { id: "float", label: "Total float on the survey activity, in days", numeric: true, expect: 2, tol: 0.01, unit: "days",
+        rationale: "Chain one finishes in 10 days against the 12 that chain two needs, so everything on chain one can slip 2 days without delaying commissioning. Survey therefore carries 2 days of total float, shared with fit-out." }
+    ],
+    explanation: "Where parallel chains converge, the longest of them determines when the successor can start, and every shorter chain carries float equal to the difference. That float is a property of the path rather than of any single activity on it, so it is consumed once by whichever activity slips first. Compressing an activity that sits on a chain with float buys nothing at all, which is why identifying the driving path comes before any decision about where to spend effort."
+  },
+
+  {
+    id: "pmp-pr9-004", type: "multi", domain: "process", ecoTask: "process-9",
+    approach: "hybrid", difficulty: 3, tags: ["status", "artifacts", "reporting"],
+    stem: "Your programme reports monthly using a status pack assembled by hand from six workstream spreadsheets. Assembly takes three days, the figures are between two and five weeks old by the time the board sees them, and last month two workstreams reported the same milestone under different names. The board has asked for weekly reporting. Which two actions should the project manager take?",
+    mindset: "Report from one current source rather than reconciling six stale ones.",
+    options: [
+      { id: "a", text: "Agree one definition and one identifier for milestones across all six workstreams before changing the reporting cadence.", correct: true,
+        rationale: "Duplicated milestones under different names mean the workstreams are not describing the same reality, and moving to weekly would produce that inconsistency four times as often. Common definitions are the precondition for any increase in frequency." },
+      { id: "b", text: "Have workstreams maintain their status in a single shared source that the report is generated from, rather than submitting spreadsheets.", correct: true,
+        rationale: "Three days of manual assembly is what makes the data stale, and weekly reporting would spend most of each week assembling. Generating the report from one live source removes the delay and the transcription errors together." },
+      { id: "c", text: "Move to weekly reporting immediately, since the board has asked for it, and improve the underlying process afterwards.", correct: false,
+        rationale: "This is the comply-first error. Weekly assembly of a three-day pack from inconsistent sources is not sustainable, and it puts the reconciliation errors in front of the board more often rather than less." },
+      { id: "d", text: "Reduce the pack to a summary so that weekly assembly is achievable within the current process.", correct: false,
+        rationale: "This is the shrink-the-symptom error. A shorter pack is quicker to assemble and is built from the same stale, inconsistent inputs, so the board gets less information with the same defects." },
+      { id: "e", text: "Ask the board what decisions it needs weekly reporting to support before making any change.", correct: false,
+        rationale: "This is the clarify-before-fixing error. The question is fair in general, and here it delays two fixes worth making regardless of the answer, since stale data and duplicate milestone names are defects at any cadence." }
+    ],
+    explanation: "A request for more frequent reporting is a test of the reporting mechanism rather than of the team's willingness. Where the pack is assembled by hand from inconsistent sources, increasing frequency multiplies both the effort and the error rate. Establishing common definitions and generating the report from a single current source addresses the constraint, after which cadence becomes a choice rather than a burden."
+  },
+
+  {
+    id: "pmp-pr9-005", type: "single", domain: "process", ecoTask: "process-9",
+    approach: "agile", difficulty: 2, tags: ["status", "metrics", "interpretation"],
+    stem: "Your sprint burndown has been flat for eight days and then dropped almost vertically on the last day of the sprint, for three sprints running. Every sprint has completed its committed scope. A stakeholder has begun citing the flat period as evidence the team is not working. The team says the pattern reflects how the work naturally integrates. What should the project manager do?",
+    mindset: "A metric that misleads its audience needs fixing, not defending.",
+    options: [
+      { id: "a", text: "Work with the team to break items down so progress is visible during the sprint, and explain the current pattern to the stakeholder in the meantime.", correct: true,
+        rationale: "A chart that only moves on the final day genuinely cannot distinguish a team integrating late from a team in trouble. Smaller items make progress observable, and the interim explanation stops the stakeholder acting on a reading nobody has corrected." },
+      { id: "b", text: "Explain to the stakeholder that burndown shape varies and that the committed scope has been delivered every sprint.", correct: false,
+        rationale: "This is the defend-the-metric error. It is accurate and it leaves in place a chart that will produce the same alarm next sprint, having spent your credibility asking the stakeholder to disregard what they can see." },
+      { id: "c", text: "Replace the burndown with a cumulative flow diagram, which shows work in progress rather than remaining effort.", correct: false,
+        rationale: "This is the swap-the-chart error. A different visualisation of the same large late-integrating items shows a similar plateau, so the display changes and the underlying invisibility of progress does not." },
+      { id: "d", text: "Stop publishing the burndown to stakeholders and report completed scope at the end of each sprint instead.", correct: false,
+        rationale: "This is the remove-the-transparency error. It solves the stakeholder's objection by withholding information, which is a poor trade for a stakeholder relationship that depends on being able to see how delivery is going." }
+    ],
+    explanation: "When a progress measure repeatedly gives a misleading impression, the useful response is to change what the measure can see rather than to argue with the people reading it. Breaking work into smaller pieces makes progress genuinely observable during the period, which serves the team as well as the audience. Defending the chart, substituting a different chart or withdrawing it all leave the underlying problem, which is that nothing verifiable happens until the last day."
+  },
+
+  {
+    id: "pmp-pr10-003", type: "single", domain: "process", ecoTask: "process-10",
+    approach: "predictive", difficulty: 2, tags: ["closure", "handover", "acceptance"],
+    stem: "Your system has passed acceptance testing and gone live. The operations team that will run it has raised no objection but has not confirmed it is ready to take over, and two of the four runbooks are still in draft. Your team's contracts end in nine days and your sponsor is keen to announce completion at Thursday's board. What should the project manager do?",
+    mindset: "Closure is complete when the receiving organisation can actually run the thing.",
+    options: [
+      { id: "a", text: "Use the nine days to finish the runbooks and secure explicit operational readiness confirmation, and tell the sponsor what is outstanding before Thursday.", correct: true,
+        rationale: "Nine days is enough for both, and the sponsor is about to make a public statement on an incomplete picture. Explicit confirmation matters because silence from operations is not agreement that they can run it." },
+      { id: "b", text: "Close the project on the basis of successful acceptance testing, and pass the outstanding runbooks to operations as a residual action.", correct: false,
+        rationale: "This is the acceptance-equals-closure error. Passing the test proves the system meets its specification, not that anyone can operate it, and the residual action lands on a team that has just lost access to the people who wrote it." },
+      { id: "c", text: "Extend two team members' contracts by a month to complete the runbooks after the announcement.", correct: false,
+        rationale: "This is the extend-the-tail error. It spends budget on a problem the remaining nine days can absorb, and it lets the board be told the project is complete while its handover is not." },
+      { id: "d", text: "Ask operations to confirm readiness now, and treat no response by Thursday as acceptance.", correct: false,
+        rationale: "This is the deemed-acceptance error. Converting silence into agreement transfers responsibility without transferring capability, and the first incident will find the runbooks that were never finished." }
+    ],
+    explanation: "Closure has two distinct conditions: the deliverable meets its specification, and the organisation that inherits it can run it. Acceptance testing establishes only the first. Where time remains, it is spent completing the handover and obtaining explicit confirmation rather than converting silence into consent, and the sponsor is told the true position before making a public statement rather than after."
+  },
+
+  {
+    id: "pmp-pr10-004", type: "single", domain: "process", ecoTask: "process-10",
+    approach: "hybrid", difficulty: 4, tags: ["closure", "termination", "lessons"],
+    stem: "Your programme has been cancelled after fourteen months because the parent company was acquired and the acquirer already owns an equivalent platform. The team is being redeployed within three weeks and morale is low. Two components you built are genuinely reusable, and a great deal was learned about integrating with the legacy estate. Your sponsor has asked you simply to stand the team down. What should the project manager do?",
+    mindset: "A cancelled project still owes the organisation everything it can salvage.",
+    options: [
+      { id: "a", text: "Run a full closure within the three weeks, capturing lessons, documenting and transferring the reusable components, and settling contracts and records.", correct: true,
+        rationale: "Cancellation changes why the project ends, not what closure is for, and three weeks with the team still in place is the only window in which any of it can be captured. The reusable components have real value that disappears the moment people redeploy." },
+      { id: "b", text: "Stand the team down as instructed, since the programme is cancelled and further effort cannot deliver its objectives.", correct: false,
+        rationale: "This is the literal-instruction error. It reads a stand-down instruction as covering the closure obligations too, and it discards reusable assets and hard-won integration knowledge that the wider organisation has already paid for." },
+      { id: "c", text: "Focus the three weeks on a lessons learned exercise, since knowledge is the only remaining value from a cancelled programme.", correct: false,
+        rationale: "This is the lessons-only error. It correctly identifies one salvageable asset and overlooks the two working components, along with the contract and record settlement that will otherwise become somebody else's untidy problem." },
+      { id: "d", text: "Propose to the sponsor that the two reusable components be completed before the team disperses.", correct: false,
+        rationale: "This is the rescue-the-work error. Completing components on a cancelled programme continues spending against an objective the acquirer no longer wants, when the task is to make what exists transferable." }
+    ],
+    explanation: "Termination for reasons outside the project's control still triggers the full closure obligation: capture what was learned, transfer whatever has value elsewhere, and settle contracts and records properly. The window is defined by how long the team remains, so the work is scheduled against that rather than against how much there is to do. Standing down without closure discards paid-for value, and narrowing closure to lessons alone leaves both the assets and the administrative tail behind."
+  },
+/* ── BUSINESS ENVIRONMENT ── 14 items, taking the eight tasks to 29 ────── */
+
+  {
+    id: "pmp-b1-003", type: "multi", domain: "business", ecoTask: "business-1",
+    approach: "predictive", difficulty: 3, tags: ["governance", "decisions", "escalation"],
+    stem: "Your project has a steering committee that meets monthly, a technical design authority that meets fortnightly, and a sponsor available weekly. In three months, four decisions have been taken twice by different bodies and two have been taken by nobody, sitting unresolved for six weeks each. Everyone attends willingly and no one is obstructing. Which two actions should the project manager take?",
+    mindset: "Governance works when everyone knows which body decides what, and by when.",
+    options: [
+      { id: "a", text: "Define which body owns which class of decision, with the value and risk thresholds that route a decision to each, and have that agreed by all three.", correct: true,
+        rationale: "Decisions taken twice and decisions taken by nobody are the two symptoms of undefined boundaries, and both disappear once each class has one owner. Agreeing it across all three bodies is what stops the definition becoming your view of their authority." },
+      { id: "b", text: "Establish a route and a timescale for decisions that fall outside the defined classes, so nothing can sit unowned.", correct: true,
+        rationale: "Any classification will meet cases it did not anticipate, which is how the two six-week stalls happened. A default route with a deadline is what converts an unclassifiable decision into a slow one rather than a permanent one." },
+      { id: "c", text: "Take the unresolved decisions to the sponsor, who is available weekly and can act fastest.", correct: false,
+        rationale: "This is the fastest-route error. It clears the two current items and establishes that anything difficult ends up with the sponsor, which hollows out the two bodies that were created to handle exactly these decisions." },
+      { id: "d", text: "Align the meeting cycles so all three bodies meet in the same week and decisions can be sequenced between them.", correct: false,
+        rationale: "This is the calendar-as-cure error. Cadence is not what caused a decision to be taken twice, and synchronising three diaries adds coordination cost without telling anyone which body should have decided." },
+      { id: "e", text: "Circulate minutes from all three bodies to all members so each can see what the others have decided.", correct: false,
+        rationale: "This is the transparency-instead-of-authority error. Better visibility might let someone notice a duplicate decision after the fact, and it still leaves two bodies believing the same decision is theirs to take." }
+    ],
+    explanation: "Duplicated and orphaned decisions are the standard signature of a governance structure whose boundaries were never drawn, rather than of bad faith or poor attendance. The fix is to allocate classes of decision to bodies using explicit thresholds, agreed by those bodies, and to provide a default route with a deadline for whatever the classification misses. Routing round the structure, synchronising diaries or sharing minutes all leave the underlying ambiguity intact."
+  },
+
+  {
+    id: "pmp-b1-004", type: "single", domain: "business", ecoTask: "business-1",
+    approach: "hybrid", difficulty: 4, tags: ["governance", "autonomy", "thresholds"],
+    stem: "Your hybrid programme's governance requires board approval for any scope change above £25,000. The product teams make small scope decisions continuously, and in the last quarter forty-one changes were individually below the threshold but totalled £310,000, none of which the board saw. The board believes it has visibility of scope. Your programme is meeting its objectives. What should the project manager do?",
+    mindset: "Report the aggregate when the individual figures are the only thing being governed.",
+    options: [
+      { id: "a", text: "Bring the aggregate position to the board, explain how the threshold is being met while the cumulative effect is invisible, and propose a control that catches it.", correct: true,
+        rationale: "Every individual change complied and the board's belief about its own visibility is nevertheless false, which only the board can decide how to correct. Bringing a proposed control alongside the disclosure keeps it a governance improvement rather than a confession." },
+      { id: "b", text: "Continue, since each change was within delegated authority and the programme is meeting its objectives.", correct: false,
+        rationale: "This is the letter-of-the-rule error. Technical compliance with a threshold does not cure the board's mistaken belief that it can see scope movement, and good performance does not make a governance blind spot acceptable." },
+      { id: "c", text: "Lower the internal approval threshold so that changes of this kind come to you before they are made.", correct: false,
+        rationale: "This is the private-fix error. It restores control to the programme rather than to the board, leaves the board's mistaken belief undisturbed, and slows the teams for a problem of reporting rather than of decision quality." },
+      { id: "d", text: "Add a quarterly summary of sub-threshold changes to the standard board pack.", correct: false,
+        rationale: "This is the quiet-remediation error. It is sensible as an ongoing control and inadequate as the first move, because it lets £310,000 of unseen change surface as a routine table rather than as the governance gap the board needs to be told about directly." }
+    ],
+    explanation: "Thresholds govern individual transactions and are routinely satisfied by a stream of decisions whose combined effect would never have been approved. Where that is happening, the governing body is operating on a false picture of its own oversight and is entitled to be told plainly, together with a proposal for the control that would catch the aggregate in future. Tightening internal limits or quietly adding a report addresses the mechanism while leaving the misapprehension in place."
+  },
+
+  {
+    id: "pmp-b2-003", type: "matching", domain: "business", ecoTask: "business-2",
+    approach: "predictive", difficulty: 3, tags: ["compliance", "evidence", "audit"],
+    stem: "An external audit of your programme is six weeks away and three compliance obligations are in different states of readiness. Each needs a different response from you now. Match each situation to the action that fits it best. Two choices are not used.",
+    mindset: "Compliance is demonstrated with evidence, not asserted with intention.",
+    prompts: [
+      { id: "m1", text: "A control is being operated correctly by the team every week, but nothing is recorded to show that it was." },
+      { id: "m2", text: "A regulation that applied when the programme started was amended four months ago and nobody has assessed the effect." },
+      { id: "m3", text: "A control has not been operated at all for two months because the person responsible left and was not replaced." }
+    ],
+    options: [
+      { id: "evidence", text: "Establish a record that captures the control operating from now on", correct: true, match: "m1",
+        rationale: "The control itself is sound, so the gap is purely evidential. Starting a record now allows the auditor to see the control working, and the historical gap is disclosed rather than reconstructed after the fact." },
+      { id: "assess", text: "Assess the amendment against the programme and act on what it changes", correct: true, match: "m2",
+        rationale: "Nobody yet knows whether the amendment affects the programme, so the required action is the assessment. Anything else, including reassurance to the auditor, would be asserting a conclusion that has not been reached." },
+      { id: "remediate", text: "Reinstate the control, then disclose the gap and its exposure", correct: true, match: "m3",
+        rationale: "A control that has not operated for two months is a live exposure, so restoring it comes first. Disclosing the gap is not optional, since concealing a known lapse is a more serious finding than the lapse itself." },
+      { id: "defer", text: "Note it for the post-audit improvement plan", correct: false, match: null,
+        rationale: "Not used. Deferring suits genuinely minor enhancements, and each of these three is either an unevidenced control, an unassessed legal change or an active gap." },
+      { id: "scope", text: "Ask the auditor to place it outside the audit scope", correct: false, match: null,
+        rationale: "Not used. Audit scope is the auditor's to set, and requesting the exclusion of an area you know to be weak is the request most likely to draw attention to it." }
+    ],
+    explanation: "Compliance issues resolve differently according to whether the failure is in the control, in the evidence, or in the assessment of what applies. A control operating without a record needs evidence started and the gap disclosed; an unassessed legal change needs the assessment before anything can be said about it; and a control that has lapsed needs reinstating and reporting. What none of them tolerates is deferral or an attempt to steer the audit away, since a concealed known gap is treated far more seriously than a disclosed one."
+  },
+
+  {
+    id: "pmp-b2-004", type: "single", domain: "business", ecoTask: "business-2",
+    approach: "predictive", difficulty: 2, tags: ["compliance", "data", "legal"],
+    stem: "A team member proposes copying live customer records into the test environment so testing can use realistic data. The test environment sits outside the controls that protect the production database, and the records include names, addresses and payment details. She points out that the project is two weeks behind and that generating synthetic data would take four days. What should the project manager do?",
+    mindset: "Schedule pressure is never a reason to step outside a legal obligation.",
+    options: [
+      { id: "a", text: "Decline the copy, and have the four days for synthetic data planned in and the schedule impact reported.", correct: true,
+        rationale: "Moving personal data into an environment without the protecting controls is a legal exposure that the schedule position does not license. Reporting the four days rather than absorbing them keeps the cost of the correct route visible to whoever owns the date." },
+      { id: "b", text: "Allow the copy for a strictly limited period, with the data deleted immediately after the test cycle completes.", correct: false,
+        rationale: "This is the time-boxed-breach error. The exposure exists from the moment the records land outside the controls, and a deletion commitment made under schedule pressure is the kind that slips." },
+      { id: "c", text: "Allow the copy with payment details removed, since the remaining fields are lower risk.", correct: false,
+        rationale: "This is the partial-anonymisation error. Names and addresses are themselves personal data, so stripping the payment fields reduces the severity of the exposure without changing the fact of it." },
+      { id: "d", text: "Escalate to the data protection officer and pause testing until a ruling is received.", correct: false,
+        rationale: "This is the referral-as-delay error. Consulting the data protection officer is sound practice in a genuinely uncertain case, and pausing testing here treats a clear answer as an open question while the project falls further behind." }
+    ],
+    explanation: "Legal and regulatory obligations sit outside the trade space a project manager works in, so being behind schedule does not open an option that was closed before. The right handling is to take the compliant route, plan its cost in, and make that cost visible in reporting rather than absorbing it silently. Partial and time-limited versions of a breach are still breaches, and referring an unambiguous question upward mainly buys delay."
+  },
+
+  {
+    id: "pmp-b3-003", type: "hotspot", domain: "business", ecoTask: "business-3",
+    approach: "predictive", difficulty: 2, tags: ["change", "control", "authorisation"],
+    stem: "The diagram shows your project's change control sequence. A developer has begun building a requested change as soon as the impact assessment was returned, reasoning that the assessment showed the change was small. Select the step that should have been completed before any build work started.",
+    mindset: "An assessed change is not an approved change.",
+    graphic: {
+      viewBox: "0 0 660 130",
+      title: "Change control, five steps left to right",
+      caption: "Select a step. Use Tab or the arrow keys to move between steps, then Enter or Space."
+    },
+    regions: [
+      { id: "c1", n: 1, label: "Request logged", x: 8, y: 34, w: 118, h: 62, correct: false,
+        rationale: "Logging captures the request so that it cannot be lost and can be tracked. It records that someone has asked for something, which confers no authority to build it." },
+      { id: "c2", n: 2, label: "Impact assessed", x: 142, y: 34, w: 118, h: 62, correct: false,
+        rationale: "Assessment establishes what the change would cost in time, money and risk. This is the step the developer relied on, and it produces the information for a decision rather than the decision itself." },
+      { id: "c3", n: 3, label: "Decision by change authority", x: 276, y: 34, w: 118, h: 62, correct: true,
+        rationale: "This is where the change is approved, rejected or deferred by whoever holds that authority. Only an approved change may be built, and a small assessed impact does not pre-empt the decision." },
+      { id: "c4", n: 4, label: "Baselines updated", x: 410, y: 34, w: 118, h: 62, correct: false,
+        rationale: "Updating the baselines records an approved change in the scope, schedule and cost references. It follows the decision and cannot precede it, since there would be nothing approved to record." },
+      { id: "c5", n: 5, label: "Change implemented", x: 544, y: 34, w: 108, h: 62, correct: false,
+        rationale: "Implementation is the build itself, which is what the developer started early. It is the last step precisely because everything before it establishes whether it should happen at all." }
+    ],
+    explanation: "The purpose of assessing a change is to inform a decision, not to substitute for one, and the size of an assessed impact has no bearing on who is entitled to authorise it. Work started between assessment and decision commits the project to an outcome the change authority has not chosen, and if the change is rejected the effort is wasted and the baselines no longer describe what exists."
+  },
+
+  {
+    id: "pmp-b3-004", type: "single", domain: "business", ecoTask: "business-3",
+    approach: "agile", difficulty: 3, tags: ["change", "backlog", "contract"],
+    stem: "Your team works from a prioritised backlog under a contract that pays for a fixed number of sprints. The client's product owner reorders the backlog freely, which the contract permits. This sprint she has added an item that requires a third-party integration not contemplated anywhere in the agreement, and has placed it at the top. She sees this as ordinary reprioritisation. What should the project manager do?",
+    mindset: "Reordering agreed work is not the same as introducing work nobody agreed.",
+    options: [
+      { id: "a", text: "Explain that this item falls outside what was contracted, set out what it would require, and route it as a change before it enters the sprint.", correct: true,
+        rationale: "The product owner's reordering right is genuine and does not extend to work outside the agreement, and a third-party integration brings cost and risk the contract never priced. Raising it before the sprint starts is what keeps the conversation about scope rather than about an overrun." },
+      { id: "b", text: "Accept the item, since the contract gives the product owner authority over backlog order and the sprint count is unchanged.", correct: false,
+        rationale: "This is the authority-overreach error. It reads a right to order agreed work as a right to introduce anything, and an unpriced third-party integration will consume far more than one item's worth of the fixed sprints." },
+      { id: "c", text: "Accept the item this sprint and raise the contractual position if similar requests recur.", correct: false,
+        rationale: "This is the precedent-setting error. Accepting once establishes that out-of-scope items enter through reprioritisation, which makes the objection much harder to sustain the second time." },
+      { id: "d", text: "Decline the item and ask the product owner to select something from the existing backlog instead.", correct: false,
+        rationale: "This is the flat-refusal error. It protects the contract and treats a possibly valuable requirement as inadmissible, when the available route is to price it and let the client decide whether to fund it." }
+    ],
+    explanation: "Adaptive delivery under a contract distinguishes between reordering work that was agreed and introducing work that was not. The first is the flexibility the arrangement was designed to give; the second changes what is being bought. The productive response is neither to absorb it nor to refuse it, but to make the requirement visible with its cost and route it through change so the client can decide whether to fund it."
+  },
+
+  {
+    id: "pmp-b4-003", type: "multi", domain: "business", ecoTask: "business-4",
+    approach: "agile", difficulty: 3, tags: ["impediments", "blockers", "flow"],
+    stem: "Your team's board shows six items in progress and four of them blocked, three waiting on the same external security review that takes about two weeks. The team continues to start new items rather than sit idle, and work in progress has risen every sprint for two months. In standup, blockers are mentioned and then the team moves on. What two actions should the project manager prioritise?",
+    mindset: "Clearing the blockage matters more than keeping everyone busy.",
+    options: [
+      { id: "a", text: "Take the security review bottleneck up directly with that team and its management, and pursue a faster or parallel route for the three waiting items.", correct: true,
+        rationale: "One external dependency is blocking three items, so it is the single highest-value thing to attack. Removing impediments the team cannot reach itself is precisely the work the project manager is placed to do." },
+      { id: "b", text: "Agree a work in progress limit with the team so that blocked work must be cleared before new work is started.", correct: true,
+        rationale: "Starting new items whenever something blocks is what has driven work in progress up for two months. A limit forces the team to converge on unblocking, which is the behaviour that actually shortens delivery." },
+      { id: "c", text: "Ask the team to raise blockers more prominently in standup so they are not passed over.", correct: false,
+        rationale: "This is the visibility-only error. The blockers are already being mentioned and the problem is that nothing happens next, so raising them more loudly changes the volume rather than the response." },
+      { id: "d", text: "Reduce the sprint commitment to reflect the capacity lost to blocked work.", correct: false,
+        rationale: "This is the plan-around-it error. It makes the forecast honest and accepts the two-week security wait as permanent, when it is the specific constraint most worth attacking." },
+      { id: "e", text: "Escalate the security review delay to your sponsor for resolution.", correct: false,
+        rationale: "This is the escalate-first error. Nobody has yet approached the security team directly, so escalation arrives before the working-level attempt that would either solve it or justify escalating." }
+    ],
+    explanation: "Rising work in progress alongside persistent blockers means the team is responding to impediments by starting more work, which lengthens everything without finishing anything. The two effective moves are to attack the specific constraint at its source and to limit starting so that clearing blockages becomes the team's default response. Making blockers more visible, planning around them or escalating before trying all leave the constraint operating."
+  },
+
+  {
+    id: "pmp-b4-004", type: "single", domain: "business", ecoTask: "business-4",
+    approach: "hybrid", difficulty: 3, tags: ["issues", "escalation", "dependencies"],
+    stem: "A dependency owner in another division has missed two agreed dates for an interface your programme needs in five weeks. She has been responsive and apologetic each time, explaining that her own priorities keep being reset above her. You have a good relationship with her and do not want to damage it. Your programme has no float left on that path. What should the project manager do?",
+    mindset: "Escalate the constraint, not the person.",
+    options: [
+      { id: "a", text: "Agree with her jointly to escalate the priority conflict to whoever is resetting her work, framing it as a decision they need to take.", correct: true,
+        rationale: "The constraint sits above her and she cannot resolve it, so escalating with her rather than about her puts the decision where it can be made. Framing it as a priority call protects the relationship you will still need in five weeks." },
+      { id: "b", text: "Escalate to your sponsor and ask him to raise the missed dates with her division's leadership.", correct: false,
+        rationale: "This is the escalate-over-them error. It routes a solvable priority conflict through two layers as a performance complaint, and she will hear about it as having been reported rather than supported." },
+      { id: "c", text: "Continue working with her and agree a third date, with more frequent check-ins to catch slippage earlier.", correct: false,
+        rationale: "This is the repeat-with-monitoring error. Two dates have failed for a reason neither of you controls, so a third arrangement changes only how quickly you will learn it has failed again." },
+      { id: "d", text: "Re-sequence your programme to remove the dependency from the critical path.", correct: false,
+        rationale: "This is the design-around-it error. Worth examining as a fallback and, with no float and five weeks left, unlikely to be available at reasonable cost, and it leaves the underlying priority conflict to recur on the next interface." }
+    ],
+    explanation: "When a cooperative counterpart repeatedly misses commitments because of pressures above them, the obstacle is a priority conflict rather than a performance problem. Escalating jointly puts the trade-off in front of whoever is making it, preserves the working relationship, and produces a decision rather than an apology. Going over the person's head, agreeing another date on the same basis, or redesigning around them each leave the conflict unresolved for the next time."
+  },
+
+  {
+    id: "pmp-b5-004", type: "fillblank", domain: "business", ecoTask: "business-5",
+    approach: "predictive", difficulty: 4, tags: ["risk", "quantitative", "expected-value"],
+    stem: "You are sizing contingency for three independent uncertainties on a bridge refurbishment. A ground condition risk has a 30 per cent chance of costing £200,000. A supplier failure risk has a 55 per cent chance of costing £40,000. An opportunity to reuse existing steelwork has a 40 per cent chance of saving £75,000. Work out the expected cost of the ground condition risk, then the net expected exposure across all three.",
+    mindset: "Size contingency from expected value across the whole set, not from the worst single case.",
+    blanks: [
+      { id: "emv1", label: "Expected cost of the ground condition risk (£)", numeric: true, expect: 60000, tol: 100, unit: "£",
+        rationale: "0.30 × 200,000 = £60,000. This is the probability-weighted cost, not a prediction that £60,000 will be spent, since the actual outcome is either £200,000 or nothing." },
+      { id: "emv2", label: "Net expected exposure across all three, in £, entered as a positive cost", numeric: true, expect: 52000, tol: 100, unit: "£",
+        rationale: "Costs are 60,000 and 0.55 × 40,000 = 22,000, giving 82,000. The opportunity contributes 0.40 × 75,000 = 30,000 against it, leaving a net expected exposure of £52,000." }
+    ],
+    explanation: "Expected value weights each outcome by its likelihood, which lets a mixed set of threats and opportunities be combined into one figure for sizing contingency. It describes the set rather than any individual event, so it is only meaningful across a portfolio of uncertainties and never predicts what will happen on any one of them. Opportunities belong in the same calculation as threats, since ignoring them systematically overstates the reserve required."
+  },
+
+  {
+    id: "pmp-b6-002", type: "multi", domain: "business", ecoTask: "business-6",
+    approach: "agile", difficulty: 3, tags: ["improvement", "retrospectives", "actions"],
+    stem: "Your team's retrospectives are well attended and people speak openly. Reviewing the last eight, you find forty-three actions recorded, six completed, and the same three themes recurring throughout: unclear requirements, slow environment provisioning and interruptions from support. The team says retrospectives are useful. Nothing has measurably changed in four months. Which two actions should the project manager take?",
+    mindset: "Improvement is measured by what changed, not by what was discussed.",
+    options: [
+      { id: "a", text: "Limit each retrospective to one or two improvement actions, with an owner and a date, and treat them as work that takes capacity.", correct: true,
+        rationale: "Forty-three actions against six completions means improvement is being recorded rather than resourced. Restricting the number and giving each one capacity is what converts an intention into something that competes fairly with delivery work." },
+      { id: "b", text: "Take the two themes the team cannot fix itself, environment provisioning and support interruptions, and pursue them outside the team.", correct: true,
+        rationale: "Themes recurring for four months usually persist because their causes sit beyond the team's authority. Carrying those outward is work the project manager can do that the team cannot, which is why they keep reappearing on the team's own list." },
+      { id: "c", text: "Change the retrospective format to surface different issues and prevent the same themes recurring.", correct: false,
+        rationale: "This is the blame-the-format error. The retrospective is doing its job by identifying real recurring problems accurately, and a new format would produce different conversation about problems that would still not be fixed." },
+      { id: "d", text: "Review the outstanding thirty-seven actions and reassign owners so they can be progressed.", correct: false,
+        rationale: "This is the clear-the-backlog error. A list that grew because there was no capacity to work it will not move because it has been reassigned, and thirty-seven items is itself a reason nothing gets started." },
+      { id: "e", text: "Reduce retrospective frequency, since they are generating more actions than the team can absorb.", correct: false,
+        rationale: "This is the reduce-the-reflection error. It lowers the rate at which problems are identified rather than raising the rate at which they are fixed, and the team values the sessions." }
+    ],
+    explanation: "Retrospectives that generate actions faster than the team can complete them stop producing change, and the recurrence of the same themes is the diagnostic. Two things restore it: constraining improvement work to a volume that fits alongside delivery, and recognising that some recurring causes sit outside the team's authority and must be pursued elsewhere. Changing the format, redistributing a stale backlog or meeting less often all treat the ceremony rather than the capacity."
+  },
+
+  {
+    id: "pmp-b6-003", type: "single", domain: "business", ecoTask: "business-6",
+    approach: "predictive", difficulty: 2, tags: ["lessons", "organisation", "closure"],
+    stem: "At closure you have a substantial lessons learned report. Your organisation has a lessons repository, and searching it you find eleven earlier reports describing the same integration testing problem your project hit, one of them from a project that finished four months before yours started. Nobody consulted the repository during your planning, including you. What should the project manager do?",
+    mindset: "A lesson only counts once it changes what the next project does.",
+    options: [
+      { id: "a", text: "File your report and raise with the process owner that a repository nobody consults is not preventing recurrence, with the eleven reports as evidence.", correct: true,
+        rationale: "The eleven prior reports are the finding: the capture step works and the retrieval step does not. Taking it to whoever owns the process with concrete evidence is what makes it a fixable organisational problem rather than a personal oversight." },
+      { id: "b", text: "File your report as required, since capturing the lesson is the project's obligation and applying it is each future project's responsibility.", correct: false,
+        rationale: "This is the discharge-the-duty error. It adds a twelfth report to a repository with a demonstrated retrieval failure, which is the action least likely to change anything for the thirteenth project." },
+      { id: "c", text: "Circulate your report directly to the project managers currently in planning so they benefit from it immediately.", correct: false,
+        rationale: "This is the personal-broadcast error. It helps a handful of colleagues who happen to be in flight now and depends entirely on your continued presence and goodwill rather than on anything the organisation would repeat." },
+      { id: "d", text: "Propose that consulting the repository be made a mandatory step in project planning.", correct: false,
+        rationale: "This is the remedy-before-diagnosis error. The proposal is plausible as an eventual outcome and premature now, since nobody has yet established why eleven reports went unread, and mandating a search of a repository that may be unsearchable adds a step without a result." }
+    ],
+    explanation: "Continuous improvement fails at retrieval far more often than at capture, and eleven reports describing a problem that recurred is direct evidence of exactly that. The valuable act at closure is to surface the systemic failure to the person who owns the process, with the evidence attached, rather than to add another document, to distribute it personally, or to propose a specific remedy before the cause of the retrieval failure is understood."
+  },
+
+  {
+    id: "pmp-b7-002", type: "pulldown", domain: "business", ecoTask: "business-7",
+    approach: "hybrid", difficulty: 3, tags: ["change", "adoption", "culture"],
+    stem: "A new scheduling system is being rolled out to four depots, and each depot is resisting for a different reason. The programme manager wants the response at each site to address the actual cause rather than applying one adoption plan everywhere. Complete each sentence with the response that fits. Two choices are not used.",
+    mindset: "Resistance is information about what the change costs the people absorbing it.",
+    prompts: [
+      { id: "a1", text: "Depot staff believe the system will be used to monitor individual productivity, and management has said nothing on the point. The response should be to" },
+      { id: "a2", text: "Depot staff are willing but the new process takes longer until it is familiar, and their targets have not been adjusted. The response should be to" },
+      { id: "a3", text: "Depot supervisors quietly prefer the old system because it gave them discretion the new one removes, and that discretion was never sanctioned. The response should be to" }
+    ],
+    options: [
+      { id: "clarify", text: "state plainly how the data will and will not be used", correct: true, match: "a1",
+        rationale: "An unanswered question about surveillance will be answered by the workforce's own assumption, and the assumption is always the worse one. An explicit statement removes the vacuum that the fear is filling." },
+      { id: "capacity", text: "adjust the targets to reflect the learning period", correct: true, match: "a2",
+        rationale: "These staff are not resisting the change, they are resisting being measured as though it had not happened. Adjusting targets removes the penalty for adopting and costs nothing in commitment." },
+      { id: "surface", text: "bring the loss of informal discretion into the open and decide it deliberately", correct: true, match: "a3",
+        rationale: "An unsanctioned practice removed by a system change needs to be named before it can be settled, since some of that discretion may have been genuinely useful and some of it may be exactly what the new system is meant to stop." },
+      { id: "train", text: "run further training sessions on the new system", correct: false, match: null,
+        rationale: "Not used. More training addresses a capability gap, and none of these three sites is failing to adopt because the staff cannot operate the software." },
+      { id: "mandate", text: "require use of the new system and withdraw the old one", correct: false, match: null,
+        rationale: "Not used. Enforcement produces compliance without addressing any of the three causes, and where the concern is surveillance or unadjusted targets it confirms the workforce's reading of the change." }
+    ],
+    explanation: "Resistance to an organisational change is usually a rational response to a real cost, and the response has to match the cost rather than the fact of resistance. Unspoken fears about how data will be used need explicit answers; a learning curve that collides with unchanged targets needs the targets adjusted; and the loss of informal discretion needs to be surfaced and decided rather than left to erode adoption quietly. Training and enforcement are the reflexes that address neither."
+  },
+
+  {
+    id: "pmp-b7-003", type: "single", domain: "business", ecoTask: "business-7",
+    approach: "agile", difficulty: 5, tags: ["culture", "adoption", "sponsorship"],
+    stem: "Six months into an agile transformation, teams run every ceremony correctly and their boards are immaculate. Yet requirements still arrive as fully specified documents, dates are still fixed before estimation, and the annual budget cycle still allocates by project. Team members privately describe the change as theatre. Your executive sponsor points to the ceremony adoption metrics as evidence of success. What should the project manager do?",
+    mindset: "Practices adopted inside a structure that contradicts them will not survive it.",
+    options: [
+      { id: "a", text: "Show the sponsor the specific organisational practices that contradict the change, with the evidence of their effect, and set out what leadership would need to decide.", correct: true,
+        rationale: "The constraint is fixed dates, upfront specification and annual project funding, none of which a team can change. Naming them as decisions for leadership is the only route, since the sponsor currently believes adoption metrics are measuring the outcome." },
+      { id: "b", text: "Focus on deepening team practice, since well-executed ceremonies will gradually change how the organisation works around them.", correct: false,
+        rationale: "This is the bottom-up-osmosis error. Teams already execute correctly and the surrounding structures are unchanged after six months, so more depth at team level pushes against constraints the teams have no authority over." },
+      { id: "c", text: "Report the gap between ceremony adoption and outcomes in the transformation dashboard so it becomes visible over time.", correct: false,
+        rationale: "This is the wait-for-the-data error. The evidence is already sufficient, and presenting a widening gap on a dashboard leaves the sponsor to draw a conclusion he has shown no sign of drawing unaided." },
+      { id: "d", text: "Escalate to the sponsor's peers in finance and business planning, since they own the budget and requirements practices that block the change.", correct: false,
+        rationale: "This is the bypass-the-sponsor error. Those functions do own the practices and approaching them without your own sponsor forfeits the person best placed to carry the argument at that level." }
+    ],
+    explanation: "Adopting the visible practices of a way of working, inside structures that still assume the previous one, produces the appearance of change without its effect. The teams cannot resolve that, because fixed dates, upfront specification and annual project funding are decided elsewhere. The productive move is to make the specific contradictions and their effects legible to the sponsor as decisions requiring leadership action, rather than deepening practice, waiting for metrics to make the case, or going round the one person able to carry it."
+  },
+
+  {
+    id: "pmp-b8-003", type: "single", domain: "business", ecoTask: "business-8",
+    approach: "predictive", difficulty: 4, tags: ["external", "regulation", "scope"],
+    stem: "A regulator has published a consultation proposing rules that, if adopted as drafted, would require a reporting capability your product does not have. The consultation closes in three months and any rules would take effect eighteen months after that. You are nine months from launch. Building the capability speculatively would cost about eight per cent of your remaining budget. Nothing is certain. What should the project manager do?",
+    mindset: "Watch the external environment early enough that you still have choices.",
+    options: [
+      { id: "a", text: "Assess what the proposal would require, identify the design decisions that would be expensive to reverse later, and take the options to the sponsor with costs.", correct: true,
+        rationale: "The live question is not whether to build the capability but which imminent design choices would foreclose it cheaply or expensively. Separating those from the full build gives the sponsor a decision with real optionality rather than a bet on the consultation." },
+      { id: "b", text: "Build the reporting capability now, since regulatory requirements are rarely relaxed and retrofitting after launch would cost more.", correct: false,
+        rationale: "This is the assume-the-worst error. It commits eight per cent of remaining budget to rules that are still in consultation and may change materially or not be adopted in this form at all." },
+      { id: "c", text: "Record the consultation in the risk register and reassess when the final rules are published.", correct: false,
+        rationale: "This is the wait-for-certainty error. By publication you will be past launch and past the architectural decisions that determine whether the capability can be added cheaply, so the reassessment happens with the options already gone." },
+      { id: "d", text: "Submit a response to the consultation setting out the implementation burden for products like yours.", correct: false,
+        rationale: "This is the influence-instead-of-plan error. The response is worth submitting on its own merits and is not a substitute for a plan, since the regulator may not adopt your position and the project still needs to decide what to do about the design decisions falling due now." }
+    ],
+    explanation: "External developments that are probable but not certain are handled by protecting optionality rather than by committing or by waiting. The analysis that matters is which decisions in the immediate window would be expensive to reverse, because those are the only ones where uncertainty has a present cost. That framing turns an unanswerable question about what the regulator will do into a tractable one about what it is worth paying now to keep a door open."
   }
 
 ];
@@ -4352,6 +5334,15 @@ PMP.Practice = (function () {
       item.ui.feedback.appendChild(el("div", { class: "explain" }, [
         el("h3", { text: "Why" }),
         el("p", { text: item.q.explanation })
+      ]));
+    }
+    /* The mindset line is the one-sentence principle the item turns on. It is
+       optional in the schema, so items authored before it was added simply do
+       not render this block. */
+    if (item.q.mindset) {
+      item.ui.feedback.appendChild(el("div", { class: "mindset" }, [
+        el("h3", { text: "Mindset" }),
+        el("p", { text: item.q.mindset })
       ]));
     }
   }
@@ -6613,6 +7604,11 @@ PMP.Exam = (function () {
             el("h3", { text: "Why" }), el("p", { text: q.explanation })
           ]));
         }
+        if (q.mindset) {
+          body.appendChild(el("div", { class: "mindset" }, [
+            el("h3", { text: "Mindset" }), el("p", { text: q.mindset })
+          ]));
+        }
       });
 
       if (row.answered && !row.correct) det.open = true;
@@ -7271,7 +8267,8 @@ PMP.Data = (function () {
         { id: "a", text: "The answer that is right.", correct: true, rationale: "Why it is right." },
         { id: "b", text: "The answer that is tempting.", correct: false, rationale: "Why it is tempting and why it is still wrong." }
       ],
-      explanation: "The rule the item turns on, stated so it transfers to the next item like it."
+      explanation: "The rule the item turns on, stated so it transfers to the next item like it.",
+      mindset: "Optional. One sentence naming the disposition behind the rule."
     }]
   }, null, 2);
 
