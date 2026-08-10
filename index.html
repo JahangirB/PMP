@@ -85,10 +85,33 @@ PMP.READINESS = Object.freeze({
   GATE_ITEMS: 100, GATE_TASKS: 15
 });
 
-/* ── 01.4  SPACED REPETITION (SM-2) ── consumed by §10.05 ────────────────── */
+/* ── 01.4  SPACED REPETITION (SM-2) ── consumed by §10.05 ──────────────────
+   Every number the scheduler uses lives here, so the spacing behaviour can be
+   changed without opening §10.05. GRADES is ordered worst to best and the
+   order is load-bearing: §10.05 maps the 1-4 keyboard shortcuts to it by index.
+
+   EASE_* are the per-grade adjustments to a card's ease factor. Good is 0 by
+   design — it is the grade pressed most often, and a schedule that drifted on
+   every ordinary success would never settle. EASE_MIN bounds how far a
+   repeatedly failed card can drag its own interval down; LEECH_THRESHOLD is
+   what actually resolves such a card, by surfacing it to the person at six
+   lapses rather than letting it churn.
+
+   NEW_PER_DAY is not part of SM-2. It exists because 150 cards taken in on
+   day one return as 150 reviews on day four, and that spike is what makes
+   people give up in week two. */
 PMP.SRS = Object.freeze({
   EASE_START: 2.5, EASE_MIN: 1.3,
+  EASE_AGAIN: 0.20, EASE_HARD: 0.15, EASE_EASY: 0.15,
   GRADES: Object.freeze(["again", "hard", "good", "easy"]),
+  INTERVAL_1: 1,          /* days, first success */
+  INTERVAL_2: 6,          /* days, second success */
+  INTERVAL_EASY: 4,       /* days, first success graded Easy */
+  LAPSE_INTERVAL: 1,      /* days, after Again */
+  HARD_FACTOR: 1.2,       /* multiplier on Hard, in place of the ease */
+  EASY_BONUS: 1.3,        /* extra multiplier on Easy */
+  MAX_INTERVAL: 365,      /* days; beyond a year the schedule is noise */
+  NEW_PER_DAY: 20,
   LEECH_THRESHOLD: 6
 });
 
@@ -1011,6 +1034,79 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .chip[data-rank="wrong"]      { background: var(--st-incorrect-bg); color: var(--st-incorrect-fg); border-color: currentColor; }
 .scn-line { flex: 1 1 260px; min-width: 0; font-size: var(--t-sm); line-height: var(--lh-body); color: var(--fg-muted); }
 
+/* ── 03.13  FLASHCARDS ──────────────────────────────────────────────────────
+   The card face is the one surface in this file that is deliberately quiet.
+   A review is a recall test, and every chip, rule and count competing with the
+   prompt is a cue the person did not earn. State lives in a single left edge
+   rather than a fill, so the four states are distinguishable without turning
+   the card into a traffic light. */
+.card-hd { display: flex; align-items: flex-start; gap: var(--sp-4); }
+.card-left { font-size: var(--t-sm); color: var(--fg-muted); white-space: nowrap; padding-top: var(--sp-2); }
+
+.cardface { border-left: 3px solid var(--fg-faint); }
+.cardface[data-state="new"]      { border-left-color: var(--c-signal); }
+.cardface[data-state="learning"] { border-left-color: var(--c-warn); }
+.cardface[data-state="review"]   { border-left-color: var(--c-go); }
+.cardface[data-state="leech"]    { border-left-color: var(--c-danger); }
+
+.cardface-meta { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-4); }
+.cardface-front {
+  font-size: var(--t-xl); font-weight: var(--w-med); line-height: var(--lh-snug);
+  max-width: var(--measure); margin: 0;
+}
+.cardface-back {
+  margin-top: var(--sp-5); padding-top: var(--sp-5); border-top: var(--border);
+}
+.cardface-back p { font-size: var(--t-md); line-height: var(--lh-body); max-width: var(--measure); margin: 0; }
+.cardface-note {
+  margin-top: var(--sp-4); padding: var(--sp-4); border-radius: var(--r-2);
+  background: var(--s-sunk);
+}
+.cardface-note p { margin: var(--sp-2) 0 0; font-size: var(--t-sm); color: var(--fg-muted); line-height: var(--lh-body); max-width: var(--measure); }
+.cardface-actions { margin-top: var(--sp-6); display: grid; gap: var(--sp-2); justify-items: center; }
+
+/* Four grades, always in the same order and always the same width, so the
+   choice becomes muscle memory rather than a reading task. */
+.grades {
+  display: grid; gap: var(--sp-2); margin-top: var(--sp-5);
+  grid-template-columns: repeat(4, 1fr);
+}
+.grade {
+  display: grid; gap: 2px; justify-items: center; align-content: center;
+  min-height: var(--hit-min); padding: var(--sp-3) var(--sp-2);
+  border: var(--border-hi); border-radius: var(--r-2);
+  background: var(--s-raise); color: var(--fg); cursor: pointer;
+  font: inherit; transition: background var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+}
+.grade:hover { background: var(--s-wash); }
+.grade[data-g="again"] { border-color: var(--c-danger); }
+.grade[data-g="hard"]  { border-color: var(--c-warn); }
+.grade[data-g="good"]  { border-color: var(--c-go); }
+.grade[data-g="easy"]  { border-color: var(--c-signal); }
+.grade-k { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--fg-faint); }
+.grade-l { font-size: var(--t-sm); font-weight: var(--w-semi); }
+.grade-i { font-size: var(--t-xs); color: var(--fg-muted); }
+
+.deck-tbl td p.hint { margin: 2px 0 0; }
+.deck-tbl td:first-child { min-width: 12rem; }
+
+.leeches { border-left: 3px solid var(--c-danger); }
+.leech-list { list-style: none; margin: var(--sp-4) 0 0; padding: 0; display: grid; gap: var(--sp-3); }
+.leech-list li { padding: var(--sp-4); border-radius: var(--r-2); background: var(--s-sunk); }
+.leech-t { display: flex; align-items: center; gap: var(--sp-3); }
+.leech-t .num { font-size: var(--t-xs); color: var(--c-danger); }
+.leech-f { margin: var(--sp-2) 0 var(--sp-3); font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); }
+.leech-a { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+
+/* Dashboard due panel (§10.05 publishes the counts; §12.3 renders them). */
+.due-panel { border-left: 3px solid var(--c-signal); }
+
+@media (max-width: 600px) {
+  .grades { grid-template-columns: repeat(2, 1fr); }
+  .cardface-front { font-size: var(--t-lg); }
+  .deck-tbl td:first-child { min-width: 0; }
+}
+
 /* ── 03.8  RESPONSIVE ───────────────────────────────────────────────────── */
 @media (min-width: 600px) {
   .view { padding-left: var(--sp-6); padding-right: var(--sp-6); }
@@ -1200,6 +1296,7 @@ dialog.sheet::backdrop { background: var(--scrim); }
         03.4  banner, toast, dialog, empty state
         03.5  navigator grid (signature element)
         03.6  stub view scaffolding
+        03.13 flashcards — card face, four grades, leech list
         03.10 mock exam — clock, block navigator, break, proficiency bands
         03.11 data and audit — indexed error tables, ECO coverage grid
         03.12 scenario trainer — four-rank reveal, distribution bar
@@ -1217,7 +1314,8 @@ dialog.sheet::backdrop { background: var(--scrim); }
         05.2  QUESTIONS — 300 items · 05.3 CASES
         05.4  SCENARIOS — 80 situational items, ranked options · built
         05.8  CONTENT INDEX — id lookup across shipped and imported packs
-        05.5  FLASHCARDS · 05.6  FORMULAS · 05.7  REFERENCE + GLOSSARY
+        05.5  FLASHCARDS — 150 cards, 7 decks · built
+        05.6  FORMULAS · 05.7  REFERENCE + GLOSSARY
 
    §06  STORAGE ADAPTER
         06.1  probe() — write/read/delete, catches throws AND silent no-ops
@@ -1255,7 +1353,7 @@ dialog.sheet::backdrop { background: var(--scrim); }
         10.03 Mock exam simulator · built      10.10 Mistake journal
         10.04 Question renderers · built       10.11 Analytics
               5 renderers, 7 accepted type ids 10.12 Settings, About, help
-        10.05 Flashcards (SM-2)                10.13 Data portability · built
+        10.05 Flashcards (SM-2) · built        10.13 Data portability · built
         10.06 Formula lab                      10.14 Content audit panel · built
               (10.14.3 audits 05.4 against its own rules)
         10.07 Reference library
@@ -9213,7 +9311,655 @@ PMP.SCENARIOS = [
   },
 
 ];
-PMP.FLASHCARDS = [];
+/* ── 05.5  FLASHCARDS ───────────────────────────────────────────────────────
+   150 cards across the seven decks §3.6 calls for. Original wording throughout;
+   no PMI text is reproduced (C8).
+
+   Shape:  id, deck, ecoTask, tags[], front, back, note?
+
+   Three rules were applied to every card, because a spaced repetition pack
+   fails in ways a question pack does not:
+
+   1. One fact per card. A card asking for "the five conflict modes and when to
+      use each" cannot be graded — the person half-remembers, and whichever
+      grade they press is wrong for half the content. The five modes are one
+      card; each mode's selection criteria is another.
+
+   2. The front narrows to a single answer. "Risk" is not a prompt. "Threat
+      versus opportunity" is, because there is exactly one thing being asked
+      for and the person can tell whether they produced it.
+
+   3. `note` never carries the answer. It holds the exam angle, the common
+      error, or the reason the distinction exists, and it is shown only after
+      the reveal. Anything needed to grade the recall is in `back`.
+
+   Decks are declared separately below so §10.05 can render a deck table and a
+   per-deck queue without a second pass over the pack. */
+PMP.DECKS = Object.freeze([
+  { id: "evm",       label: "Earned value",     ecoTask: "process-6",  summary: "The three measures, the four forecasts, and reading an index out loud." },
+  { id: "agile",     label: "Agile ceremonies", ecoTask: "process-1",  summary: "Scrum events, roles and artifacts, plus the Kanban flow ideas." },
+  { id: "risk",      label: "Risk",             ecoTask: "business-5", summary: "Register, analysis, the ten responses, reserves and EMV." },
+  { id: "contracts", label: "Contract types",   ecoTask: "process-5",  summary: "Fixed price to cost reimbursable, who carries the risk, and the PTA." },
+  { id: "conflict",  label: "Conflict modes",   ecoTask: "people-2",   summary: "The five modes and, more importantly, when each one is right." },
+  { id: "process",   label: "Process mapping",  ecoTask: "process-1",  summary: "Process groups, baselines, change control and the legacy cross-reference." },
+  { id: "glossary",  label: "Glossary",         ecoTask: null,         summary: "The vocabulary distinctions the exam turns on most often." }
+]);
+
+PMP.FLASHCARDS = [
+  /* ── Deck: EVM ─────────────────────────────────────────────────────────── */
+  { id: "evm-01", deck: "evm", ecoTask: "process-6", tags: ["evm", "definitions"],
+    front: "Planned value (PV)",
+    back: "The budgeted cost of the work that was scheduled to be finished by now. It is read off the time-phased cost baseline and owes nothing to what the team has actually done.",
+    note: "PV is the only one of the three that is fixed the moment the baseline is set. If a figure moves when the team works faster, it is not PV." },
+  { id: "evm-02", deck: "evm", ecoTask: "process-6", tags: ["evm", "definitions"],
+    front: "Earned value (EV)",
+    back: "The budgeted cost of the work actually completed. Take the work that is genuinely done and value it at baseline rates, not at what it cost to do.",
+    note: "EV is the bridge between the two other measures: compare it to PV for schedule, to AC for cost. Everything in EVM turns on valuing progress at budget, not at actuals." },
+  { id: "evm-03", deck: "evm", ecoTask: "process-6", tags: ["evm", "definitions"],
+    front: "Actual cost (AC)",
+    back: "What has genuinely been spent to complete the work that EV measures. No budget rate is applied and there is no ceiling on it.",
+    note: "AC must cover the same work as EV or every variance is meaningless. Mismatched periods are the usual cause of a CPI that nobody can explain." },
+  { id: "evm-04", deck: "evm", ecoTask: "process-6", tags: ["evm", "definitions"],
+    front: "Budget at completion (BAC)",
+    back: "The total authorised budget for the work, which is the cost baseline summed to the end. It is the value PV reaches on the final day.",
+    note: "BAC excludes management reserve. That distinction is what makes BAC a baseline figure and the overall project budget a larger one." },
+  { id: "evm-05", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "variance"],
+    front: "Cost variance (CV) - formula and sign convention",
+    back: "CV = EV - AC. Negative means the work completed cost more than it was budgeted at, so the project is over cost.",
+    note: "Every variance in EVM is EV minus something, and every index is EV over something. Negative and less than one are both bad; that pairing is worth memorising once rather than four times." },
+  { id: "evm-06", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "variance"],
+    front: "Schedule variance (SV) - formula and sign convention",
+    back: "SV = EV - PV. Negative means less work has been completed than was scheduled, so the project is behind schedule.",
+    note: "SV comes out in currency, not in days. A SV of -40,000 does not tell you the project is any particular number of weeks late." },
+  { id: "evm-07", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "index"],
+    front: "Cost performance index (CPI) - formula and reading",
+    back: "CPI = EV / AC. It is the value earned per unit of currency spent, so 0.85 means 85p of budgeted work for every pound spent. Below 1 is over cost.",
+    note: "CPI is the most stable of the four measures. Research on completed projects found that once a project is around 20% through, CPI rarely recovers, which is why it drives the default forecast." },
+  { id: "evm-08", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "index"],
+    front: "Schedule performance index (SPI) - formula and reading",
+    back: "SPI = EV / PV. It is the rate of progress against plan, so 0.9 means the team is completing nine days of scheduled work in every ten. Below 1 is behind.",
+    note: "SPI is a whole-project average. A project can sit at SPI 1.0 while the critical path slips badly, because non-critical work ahead of plan masks it." },
+  { id: "evm-09", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "forecast"],
+    front: "EAC when current cost performance is expected to continue",
+    back: "EAC = BAC / CPI. The remaining work is assumed to run at the same efficiency as the work so far, so the whole budget is deflated by the index.",
+    note: "This is the default forecast and the one to reach for when a question describes a systemic cause - a bad rate assumption, a productivity shortfall - rather than a one-off." },
+  { id: "evm-10", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "forecast"],
+    front: "EAC when the cost variance was a one-off and will not recur",
+    back: "EAC = AC + (BAC - EV). What has been spent is sunk, and the work still to do is expected to cost exactly what it was budgeted at.",
+    note: "The trigger words are atypical, one-off, will not recur. A single damaged shipment or a one-time regulatory fee is atypical; a supplier whose day rate rose permanently is not." },
+  { id: "evm-11", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "forecast"],
+    front: "EAC when both cost and schedule performance will persist",
+    back: "EAC = AC + (BAC - EV) / (CPI x SPI). The remaining work is deflated by both indices, on the reasoning that recovering the schedule will itself cost money.",
+    note: "Use this when the question says the project must still hit its original date despite being behind. Dividing by the product punishes the forecast twice, which is the point." },
+  { id: "evm-12", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "forecast"],
+    front: "EAC when the original estimate is no longer credible",
+    back: "EAC = AC + bottom-up ETC. The team re-estimates the remaining work from scratch and that figure is added to what has been spent.",
+    note: "The most accurate of the four and the most expensive, because it costs the team the time to redo the estimate. It is the right answer when the assumptions behind the baseline have been invalidated." },
+  { id: "evm-13", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "forecast"],
+    front: "Estimate to complete (ETC)",
+    back: "ETC = EAC - AC. What the rest of the project is forecast to cost from today. It can also be built bottom-up from a fresh estimate of the remaining work.",
+    note: "ETC and EAC are the same forecast measured from different starting points: ETC from now, EAC from the beginning." },
+  { id: "evm-14", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "forecast"],
+    front: "Variance at completion (VAC)",
+    back: "VAC = BAC - EAC. The forecast overrun or underrun at the end. Negative means the project is expected to finish over budget.",
+    note: "VAC is the figure a sponsor actually wants. CV tells them what has already gone wrong; VAC tells them what it will cost by the end if nothing changes." },
+  { id: "evm-15", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "tcpi"],
+    front: "TCPI to finish within the original budget",
+    back: "TCPI = (BAC - EV) / (BAC - AC). The efficiency the team must sustain on all remaining work to land on BAC.",
+    note: "Both formulas are remaining work over remaining money. Change the target and only the denominator changes: BAC - AC for the original budget, EAC - AC for the revised one." },
+  { id: "evm-16", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula", "tcpi"],
+    front: "TCPI to finish within a revised budget (EAC)",
+    back: "TCPI = (BAC - EV) / (EAC - AC). The efficiency needed to land on the new forecast rather than the original baseline.",
+    note: "A TCPI meaningfully above 1 when CPI has been below 1 all project is the arithmetic telling you the target is not achievable. That gap is the point of calculating it." },
+  { id: "evm-17", deck: "evm", ecoTask: "process-6", tags: ["evm", "formula"],
+    front: "Percent complete, in earned value terms",
+    back: "Percent complete = EV / BAC. The share of the total budgeted work that has been earned.",
+    note: "Distinct from percent spent, which is AC / BAC. Comparing the two is the quickest read on a project: spending faster than earning is a cost problem in one line." },
+  { id: "evm-18", deck: "evm", ecoTask: "process-6", tags: ["evm", "interpretation"],
+    front: "CPI 0.80 and SPI 1.10 - what is happening?",
+    back: "The project is ahead of schedule and substantially over cost. Work is being completed faster than planned but each unit is costing about 25% more than budgeted.",
+    note: "This is the classic signature of unplanned overtime, expedited materials or extra staff. The schedule was bought with money, and if nobody authorised the purchase it needs raising." },
+  { id: "evm-19", deck: "evm", ecoTask: "process-6", tags: ["evm", "interpretation", "limits"],
+    front: "Why does SPI always return to 1.0 at the end of a project?",
+    back: "At completion EV and PV both equal BAC, so the index is forced to 1.0 however late the project finished. SPI loses all information as the end approaches.",
+    note: "It is the reason schedule performance is judged on the critical path and the network, not on SPI, in the closing stages. Earned schedule methods exist to address exactly this." },
+  { id: "evm-20", deck: "evm", ecoTask: "process-6", tags: ["evm", "interpretation", "limits"],
+    front: "Why is schedule variance a poor measure of lateness in time?",
+    back: "SV is expressed in currency. It says how much budgeted work is missing, not how many days late the project is, and identical SV figures can mean very different delays.",
+    note: "Translating SV into duration requires knowing which work is missing and whether it sits on the critical path. Non-critical work behind plan may cost nothing in time at all." },
+  { id: "evm-21", deck: "evm", ecoTask: "process-6", tags: ["evm", "baselines", "reserves"],
+    front: "Cost baseline versus total project budget",
+    back: "The cost baseline is the time-phased spending plan including contingency reserve, and it is what EVM measures against. The total budget is the cost baseline plus management reserve.",
+    note: "Contingency covers identified risks and sits inside the baseline under the project manager's control. Management reserve covers unknown unknowns, sits outside it, and needs approval to release - which is why using it changes the baseline." },
+  { id: "evm-22", deck: "evm", ecoTask: "process-6", tags: ["evm", "worked"],
+    front: "PV 200,000, EV 180,000, AC 210,000. Give CV, SV, CPI and SPI.",
+    back: "CV = 180,000 - 210,000 = -30,000. SV = 180,000 - 200,000 = -20,000. CPI = 180,000 / 210,000 = 0.857. SPI = 180,000 / 200,000 = 0.90.",
+    note: "Behind on both counts: about 86p of value per pound spent, and nine tenths of the planned progress. Write EV down first every time - it is in all four formulas." },
+  { id: "evm-23", deck: "evm", ecoTask: "process-6", tags: ["evm", "worked", "forecast"],
+    front: "BAC 500,000, EV 180,000, AC 210,000. Forecast EAC and VAC assuming current performance continues.",
+    back: "CPI = 180,000 / 210,000 = 0.857. EAC = 500,000 / 0.857 = 583,333. VAC = 500,000 - 583,333 = -83,333, so an overrun of about 83,000.",
+    note: "The overrun forecast is nearly three times the cost variance recorded so far, because the same inefficiency is projected across all the work still to come." },
+  { id: "evm-24", deck: "evm", ecoTask: "process-6", tags: ["evm", "worked", "tcpi"],
+    front: "BAC 500,000, EV 180,000, AC 210,000. What TCPI is needed to still finish on budget?",
+    back: "TCPI = (500,000 - 180,000) / (500,000 - 210,000) = 320,000 / 290,000 = 1.10.",
+    note: "The team has been running at 0.857 and now needs 1.10 on everything remaining - a 29% improvement sustained to the end. That is the honest case for re-baselining rather than promising recovery." },
+  { id: "evm-25", deck: "evm", ecoTask: "process-6", tags: ["evm", "prerequisites"],
+    front: "What has to exist before earned value can be used at all?",
+    back: "A scope baseline decomposed to work packages, a time-phased cost baseline, and an agreed rule for how progress is credited on each work package.",
+    note: "Without the third, EV is opinion. Two people can report the same half-built work package as 20% or 80% complete, and the whole method rests on that number." },
+  { id: "evm-26", deck: "evm", ecoTask: "process-6", tags: ["evm", "measurement"],
+    front: "Fixed-formula progress rules: 0/100, 50/50 and 25/75",
+    back: "A work package earns a set share of its budget when it starts and the rest when it finishes. Under 0/100 nothing is earned until completion; under 50/50 half is earned at the start.",
+    note: "These exist to remove judgement from the progress figure. The conservative 0/100 rule suits short work packages; anything long enough to span several reporting periods needs a different rule or it reports no progress for months." },
+
+  /* ── Deck: Agile ceremonies ────────────────────────────────────────────── */
+  { id: "agile-01", deck: "agile", ecoTask: "process-1", tags: ["scrum", "events"],
+    front: "Sprint planning - purpose and timebox",
+    back: "The team agrees a sprint goal, selects backlog items it forecasts it can complete, and plans how the work will be done. Timeboxed to a maximum of eight hours for a one-month sprint, proportionally less for shorter ones.",
+    note: "The forecast is the team's, not the product owner's. A plan handed to the team is not sprint planning, and it removes the accountability the whole framework rests on." },
+  { id: "agile-02", deck: "agile", ecoTask: "process-1", tags: ["scrum", "events"],
+    front: "Daily scrum - purpose and timebox",
+    back: "Fifteen minutes, held at the same time and place each day, for the developers to inspect progress toward the sprint goal and adapt the plan for the next day's work.",
+    note: "It is a planning event for the developers, not a status report to the scrum master or a manager. If people are reporting upward rather than replanning together, the event has been repurposed." },
+  { id: "agile-03", deck: "agile", ecoTask: "process-3", tags: ["scrum", "events"],
+    front: "Sprint review - purpose and who attends",
+    back: "The team demonstrates the increment to stakeholders, they inspect it together, and the product backlog is adapted in the light of what was learned. Up to four hours for a one-month sprint.",
+    note: "It is a working session, not a sign-off meeting or a demo with an audience. The output is a revised backlog, which is why stakeholder attendance matters more than the polish of the demonstration." },
+  { id: "agile-04", deck: "agile", ecoTask: "business-6", tags: ["scrum", "events"],
+    front: "Sprint retrospective - purpose and timing",
+    back: "The team inspects how it worked - process, tools, interactions, definition of done - and commits to improvements. Held after the review and before the next planning, up to three hours for a one-month sprint.",
+    note: "The review is about the product; the retrospective is about the team. Merging them reliably means the process conversation is the one that gets dropped when the demo overruns." },
+  { id: "agile-05", deck: "agile", ecoTask: "process-2", tags: ["scrum", "backlog"],
+    front: "Backlog refinement",
+    back: "The continuing activity of adding detail, estimates and order to product backlog items so that upcoming ones are ready to be selected. Ongoing work rather than a formal event.",
+    note: "Commonly guided to around 10% of the team's capacity. Too little and planning becomes an analysis session; too much and the team is elaborating items that will change before they are built." },
+  { id: "agile-06", deck: "agile", ecoTask: "process-8", tags: ["scrum", "events"],
+    front: "The sprint itself - length and the rule about changing it",
+    back: "A fixed timebox of one month or less within which a usable increment is produced. Its length stays constant, and it is never extended to fit unfinished work.",
+    note: "Extending a sprint destroys the only fixed reference the team has for velocity and forecasting. Unfinished work returns to the backlog and is reconsidered, which is the honest outcome." },
+  { id: "agile-07", deck: "agile", ecoTask: "process-3", tags: ["scrum", "roles"],
+    front: "Product owner - accountability",
+    back: "Accountable for maximising the value of the product: owns the product backlog, its ordering and its transparency, and decides what is built and in what sequence.",
+    note: "One person, not a committee. Others may influence the ordering, but the exam's model requires that anyone wanting a change goes through the product owner rather than around them." },
+  { id: "agile-08", deck: "agile", ecoTask: "people-3", tags: ["scrum", "roles"],
+    front: "Scrum master - accountability",
+    back: "Accountable for the team's effectiveness and for the framework being understood and enacted. Coaches the team, removes impediments, and protects it from disruption.",
+    note: "Not a project manager under another name and not the team's line manager. The scrum master has no authority to assign work, which is the distinction most situational questions turn on." },
+  { id: "agile-09", deck: "agile", ecoTask: "people-3", tags: ["scrum", "roles"],
+    front: "Developers - accountability",
+    back: "Accountable for creating a usable increment each sprint. They own the sprint backlog, the technical decisions, the estimates and the daily plan.",
+    note: "Self-managing means the team decides who does what and how. Handing the team a task allocation is the single most common way an organisation adopts the ceremonies without the framework." },
+  { id: "agile-10", deck: "agile", ecoTask: "process-7", tags: ["scrum", "quality"],
+    front: "Definition of done",
+    back: "The shared, explicit standard a backlog item must meet to be considered complete. It applies to every item, and work that does not meet it is not part of the increment.",
+    note: "It is a quality contract, not a checklist for one story. Where an organisational standard exists the team may strengthen it but not weaken it." },
+  { id: "agile-11", deck: "agile", ecoTask: "process-2", tags: ["scrum", "backlog"],
+    front: "Definition of ready",
+    back: "An optional working agreement describing when a backlog item is sufficiently understood for the team to take it into a sprint - typically clear acceptance criteria, no blocking dependency, and small enough to finish.",
+    note: "Useful discipline, but not part of Scrum itself, and it turns harmful when it becomes a gate that blocks the team from starting anything until documentation is complete." },
+  { id: "agile-12", deck: "agile", ecoTask: "process-3", tags: ["scrum", "planning"],
+    front: "Sprint goal",
+    back: "A single objective for the sprint that gives the selected work coherence and explains why it is worth doing. Agreed in planning and fixed for the sprint.",
+    note: "It is what gives the team room to negotiate scope mid-sprint: if the goal still holds, exactly which items are delivered can flex." },
+  { id: "agile-13", deck: "agile", ecoTask: "process-2", tags: ["scrum", "backlog"],
+    front: "Product backlog versus sprint backlog",
+    back: "The product backlog is the ordered, continuously refined list of everything known to be wanted in the product, owned by the product owner. The sprint backlog is the sprint goal, the items selected for the sprint and the plan for delivering them, owned by the developers.",
+    note: "Different owners is the whole point. It is why nobody outside the team adds work to a sprint in progress, and why the product owner cannot dictate the plan inside it." },
+  { id: "agile-14", deck: "agile", ecoTask: "process-3", tags: ["scrum", "artifacts"],
+    front: "Increment",
+    back: "A concrete step toward the product goal: the sum of all completed backlog items this sprint plus those of previous sprints, meeting the definition of done and usable whether or not it is released.",
+    note: "Usable is the load-bearing word. Work that needs a further hardening phase before anyone could use it is not an increment." },
+  { id: "agile-15", deck: "agile", ecoTask: "process-9", tags: ["metrics", "forecasting"],
+    front: "Velocity - what it is and what it is not for",
+    back: "The number of story points a team completes in a sprint, used by that team to forecast how much it can take on next. An empirical average, not a target.",
+    note: "It cannot be compared between teams, because points are relative to each team's own baseline. Managing velocity upward as a KPI produces point inflation and nothing else." },
+  { id: "agile-16", deck: "agile", ecoTask: "process-9", tags: ["metrics", "charts"],
+    front: "Burndown versus burnup chart",
+    back: "A burndown plots remaining work falling toward zero. A burnup plots completed work rising, with total scope as a separate line above it.",
+    note: "The burnup is the more honest of the two, because scope change shows as a moving top line. On a burndown, added scope and slow progress look identical." },
+  { id: "agile-17", deck: "agile", ecoTask: "process-8", tags: ["kanban", "flow"],
+    front: "Work in progress limits",
+    back: "A cap on how many items may sit in a workflow state at once. When the limit is reached nothing new is pulled and the team clears the constraint first.",
+    note: "By Little's Law, cycle time equals WIP divided by throughput, so cutting WIP shortens cycle time directly. The counter-intuitive part is that starting less finishes more." },
+  { id: "agile-18", deck: "agile", ecoTask: "process-1", tags: ["kanban", "scrum"],
+    front: "Kanban versus Scrum - the structural difference",
+    back: "Scrum works in fixed timeboxes with a committed sprint scope; Kanban is continuous flow with no required iteration, pulling work as capacity frees up.",
+    note: "Kanban suits unpredictable arrival - support, operations, maintenance - where a two-week commitment would be broken every sprint. Scrum suits work that can be planned in batches." },
+  { id: "agile-19", deck: "agile", ecoTask: "process-8", tags: ["estimating"],
+    front: "Story points and planning poker",
+    back: "Relative sizing that combines effort, complexity and uncertainty into a single unitless figure. The team estimates simultaneously, discusses the outliers, and re-estimates until it converges.",
+    note: "Simultaneous reveal exists to stop anchoring - the first number said aloud otherwise sets the answer. The discussion of why two people differ is worth more than the number itself." },
+  { id: "agile-20", deck: "agile", ecoTask: "people-3", tags: ["leadership"],
+    front: "Servant leadership",
+    back: "Leading by removing impediments, providing what the team needs and developing people, rather than by directing the work. The leader's first question is what is in the team's way.",
+    note: "It is not passivity. Escalating a blocker the team cannot clear, or protecting the sprint from unplanned interruption, is servant leadership acting decisively." },
+  { id: "agile-21", deck: "agile", ecoTask: "process-1", tags: ["planning"],
+    front: "Release planning versus iteration planning",
+    back: "Release planning looks across several iterations at what will be delivered to users and when, using velocity to forecast. Iteration planning covers a single timebox in detail.",
+    note: "The two answer different questions. A stakeholder asking when a feature ships needs the release forecast with its range, not the current sprint's contents." },
+  { id: "agile-22", deck: "agile", ecoTask: "business-5", tags: ["uncertainty"],
+    front: "Spike",
+    back: "A timeboxed piece of investigation taken into a sprint to answer a technical or design question, where the deliverable is knowledge rather than product functionality.",
+    note: "The timebox is what makes it safe. A spike without one becomes indefinite research, and the decision it was meant to inform never gets made." },
+
+  /* ── Deck: Risk ────────────────────────────────────────────────────────── */
+  { id: "risk-01", deck: "risk", ecoTask: "business-5", tags: ["definitions"],
+    front: "Risk versus issue",
+    back: "A risk is an uncertain event that has not happened and may not. An issue has happened and is affecting the project now.",
+    note: "The distinction drives where it is recorded and who acts. Risks are analysed and given responses in advance; issues are assigned an owner and a resolution date today." },
+  { id: "risk-02", deck: "risk", ecoTask: "business-5", tags: ["definitions"],
+    front: "Threat versus opportunity",
+    back: "Both are risks. A threat is uncertainty with a negative effect on objectives; an opportunity is uncertainty with a positive one.",
+    note: "Opportunities are managed with the same rigour and belong in the same register. A project that only records threats is doing half the process." },
+  { id: "risk-03", deck: "risk", ecoTask: "business-5", tags: ["definitions"],
+    front: "Individual risk versus overall project risk",
+    back: "An individual risk is a single identified event affecting one or more objectives. Overall project risk is the exposure of the whole project arising from all sources, including the interaction between individual risks.",
+    note: "Overall risk is not the sum of the register. Twenty small independent risks and twenty correlated ones give very different overall exposure, which is what quantitative analysis is for." },
+  { id: "risk-04", deck: "risk", ecoTask: "business-5", tags: ["artifacts"],
+    front: "What does the risk register hold?",
+    back: "Identified individual risks, each with a description, category, owner, probability and impact assessment, priority, agreed response, response owner, and any trigger or residual and secondary risks.",
+    note: "It is a live document, first produced during identification and updated by every subsequent risk process. The owner field is the one most often left blank, and an unowned risk is not being managed." },
+  { id: "risk-05", deck: "risk", ecoTask: "business-5", tags: ["artifacts"],
+    front: "Risk report",
+    back: "Summarises sources of overall project risk and the current exposure at project level, alongside summary information about individual risks.",
+    note: "The register is the detail, the report is the picture. A sponsor asking whether the project is riskier than last month is asking a risk report question." },
+  { id: "risk-06", deck: "risk", ecoTask: "business-5", tags: ["analysis"],
+    front: "Qualitative risk analysis - what it produces",
+    back: "A prioritised list. Each risk is assessed for probability and impact, plus factors like urgency and manageability, and the register is ordered so attention goes to what matters most.",
+    note: "It is fast, subjective and always done. Its purpose is to decide what deserves further work, not to produce numbers anyone would put in a forecast." },
+  { id: "risk-07", deck: "risk", ecoTask: "business-5", tags: ["analysis"],
+    front: "Quantitative risk analysis - what it produces",
+    back: "A numerical estimate of the combined effect of risks on project outcomes, typically a probability distribution for cost or completion date and a ranking of which risks drive it.",
+    note: "Optional, and only worth doing where the data supports it. Its distinctive output is a confidence statement - an 80% chance of finishing by a date - which qualitative analysis cannot give." },
+  { id: "risk-08", deck: "risk", ecoTask: "business-5", tags: ["analysis", "tools"],
+    front: "Probability and impact matrix",
+    back: "A grid combining rated probability with rated impact to place each risk in a priority band, using thresholds agreed in the risk management plan.",
+    note: "The bands come from the organisation's risk appetite, not from the grid's geometry. The same risk can be high priority in one organisation and low in another, and that is correct." },
+  { id: "risk-09", deck: "risk", ecoTask: "business-5", tags: ["governance"],
+    front: "Risk appetite, tolerance and threshold",
+    back: "Appetite is the degree of uncertainty an organisation is willing to accept in pursuit of reward. Tolerance is the amount of variation it can absorb. A threshold is the specific measured level at which action is required.",
+    note: "Appetite is a stance, a threshold is a number in the risk management plan. Escalation questions usually turn on whether a stated threshold has been crossed." },
+  { id: "risk-10", deck: "risk", ecoTask: "business-5", tags: ["formula", "emv"],
+    front: "Expected monetary value (EMV) - formula and sign convention",
+    back: "EMV = probability x impact. Threats are entered as negative impacts and opportunities as positive, so a set of risks can be summed into a single expected figure.",
+    note: "EMV is an average over many repetitions, which no single project is. It sizes a contingency pot well and predicts an individual outcome badly." },
+  { id: "risk-11", deck: "risk", ecoTask: "business-5", tags: ["worked", "emv"],
+    front: "A 30% chance of a 200,000 loss and a 20% chance of a 50,000 gain. What is the total EMV?",
+    back: "(0.30 x -200,000) + (0.20 x +50,000) = -60,000 + 10,000 = -50,000.",
+    note: "A net expected loss of 50,000 is a defensible contingency figure for these two risks. Note that the opportunity offsets the threat in the total - that is why both belong in the register." },
+  { id: "risk-12", deck: "risk", ecoTask: "business-5", tags: ["tools", "emv"],
+    front: "Decision tree analysis",
+    back: "A diagram of decision nodes and chance nodes used to compare options under uncertainty. Each path's EMV is computed and rolled back to the decision node, where the best expected value wins.",
+    note: "The rollback direction is what people get wrong: compute forward to the end states, then fold the values backward to the decision. Build cost and probability sit on the branches." },
+  { id: "risk-13", deck: "risk", ecoTask: "business-5", tags: ["responses", "threats"],
+    front: "Threat response: avoid",
+    back: "Eliminate the threat entirely by removing its cause or changing the plan so that it can no longer affect the project - dropping the scope, extending the schedule, or choosing a different approach.",
+    note: "The only response that takes probability to zero. Reserved for high-impact threats, because it usually costs something the project wanted." },
+  { id: "risk-14", deck: "risk", ecoTask: "business-5", tags: ["responses", "threats"],
+    front: "Threat response: transfer",
+    back: "Shift the impact and ownership of the response to a third party, typically through insurance, a warranty, a performance bond or a fixed-price contract.",
+    note: "Transfer moves the consequence, never the probability, and it is rarely free - the premium is the price of the certainty. Reputational impact almost never transfers." },
+  { id: "risk-15", deck: "risk", ecoTask: "business-5", tags: ["responses", "threats"],
+    front: "Threat response: mitigate",
+    back: "Reduce the probability of the threat occurring, its impact if it does, or both, to an acceptable level. Prototyping, adding redundancy and choosing a proven supplier are all mitigations.",
+    note: "The most common response, and the one to reach for when a threat cannot be avoided but the exposure is unacceptable. Acting early is generally cheaper than repairing damage later." },
+  { id: "risk-16", deck: "risk", ecoTask: "business-5", tags: ["responses", "threats"],
+    front: "Threat response: accept, actively or passively",
+    back: "Take no action to change the exposure. Active acceptance sets aside a contingency reserve of time or money; passive acceptance does nothing beyond documenting the risk and reviewing it.",
+    note: "Acceptance is a deliberate decision recorded in the register, not the absence of one. Every low-priority risk on the watchlist is passively accepted." },
+  { id: "risk-17", deck: "risk", ecoTask: "business-5", tags: ["responses", "escalation"],
+    front: "Threat response: escalate",
+    back: "Used when the threat is outside the project's scope or the project manager's authority. Ownership passes to the programme or organisational level, and the risk leaves the project register once accepted there.",
+    note: "Escalate is about authority, not severity. A large risk the project can act on stays; a small one that only the organisation can address goes up." },
+  { id: "risk-18", deck: "risk", ecoTask: "business-5", tags: ["responses", "opportunities"],
+    front: "The five opportunity responses",
+    back: "Exploit - make it certain to happen. Enhance - increase its probability or impact. Share - give part ownership to a partner better placed to capture it. Accept. Escalate.",
+    note: "Exploit mirrors avoid, enhance mirrors mitigate, share mirrors transfer. Learning the pairs is faster than learning ten separate terms." },
+  { id: "risk-19", deck: "risk", ecoTask: "business-5", tags: ["definitions"],
+    front: "Secondary risk versus residual risk",
+    back: "A secondary risk arises directly from implementing a response. A residual risk is what remains after the response has been applied.",
+    note: "Both are recorded in the register. A mitigation that introduces a larger secondary risk than the exposure it removed is a bad response, and this is where that becomes visible." },
+  { id: "risk-20", deck: "risk", ecoTask: "process-6", tags: ["reserves"],
+    front: "Contingency reserve versus management reserve",
+    back: "Contingency covers identified risks that have been actively accepted, sits inside the cost baseline, and the project manager can use it. Management reserve covers unknown unknowns, sits outside the baseline, and requires management approval.",
+    note: "Because management reserve is outside the baseline, releasing it changes the cost baseline and is a formal change. That is the practical difference in an exam question." },
+  { id: "risk-21", deck: "risk", ecoTask: "business-5", tags: ["monitoring"],
+    front: "Risk trigger",
+    back: "An observable condition indicating that a risk is about to occur or has occurred, recorded with the risk so that the response is launched at the right moment.",
+    note: "A response plan without a trigger tends to be executed late, once the impact is already visible. The trigger is what converts a plan into a warning system." },
+  { id: "risk-22", deck: "risk", ecoTask: "business-5", tags: ["tools", "quantitative"],
+    front: "Monte Carlo simulation",
+    back: "Runs the schedule or cost model thousands of times, sampling from a distribution for each uncertain input, and produces a distribution of outcomes with confidence levels.",
+    note: "Its most useful output is often the sensitivity ranking - which inputs actually drive the spread. It also exposes merge bias, where parallel paths converging make a milestone far less likely to hit than any single path suggests." },
+
+  /* ── Deck: Contract types ──────────────────────────────────────────────── */
+  { id: "contract-01", deck: "contracts", ecoTask: "process-5", tags: ["fixed-price"],
+    front: "Firm fixed price (FFP)",
+    back: "One price agreed up front for a defined scope, unchanged regardless of what the work costs the seller. Scope changes are the only route to a price change.",
+    note: "Maximum risk to the seller, minimum to the buyer, and it requires a scope defined well enough to price. Used where the requirement is stable and well understood." },
+  { id: "contract-02", deck: "contracts", ecoTask: "process-5", tags: ["fixed-price", "incentive"],
+    front: "Fixed price incentive fee (FPIF)",
+    back: "A fixed price with a target cost, target fee, sharing ratio and ceiling price. Cost savings or overruns are shared until the ceiling is reached, beyond which the seller absorbs everything.",
+    note: "Defined by five numbers: target cost, target fee, target price, ceiling price and sharing ratio. Questions almost always want either the final fee or the point of total assumption." },
+  { id: "contract-03", deck: "contracts", ecoTask: "process-5", tags: ["fixed-price"],
+    front: "Fixed price with economic price adjustment (FP-EPA)",
+    back: "A fixed price with a pre-agreed clause allowing adjustment for defined external factors such as inflation or a named commodity index.",
+    note: "The use case is a multi-year contract where a genuinely fixed price would force the seller to price in years of inflation risk. The index must be named in the contract, not argued later." },
+  { id: "contract-04", deck: "contracts", ecoTask: "process-5", tags: ["fixed-price"],
+    front: "Purchase order",
+    back: "The simplest form of fixed-price contract: a unilateral order for a defined commodity item at a stated price, binding once the seller accepts it.",
+    note: "Suitable for standard goods where nothing needs negotiating. If the requirement needs describing in a statement of work, a purchase order is the wrong instrument." },
+  { id: "contract-05", deck: "contracts", ecoTask: "process-5", tags: ["cost-reimbursable"],
+    front: "Cost plus fixed fee (CPFF)",
+    back: "The buyer reimburses allowable costs and pays a fee fixed as a currency amount, set from the initial estimate. The fee does not move when actual costs do.",
+    note: "The seller has no incentive to control costs but none to inflate them either, since the fee is fixed in absolute terms. Common in research and development where the scope cannot be fully defined." },
+  { id: "contract-06", deck: "contracts", ecoTask: "process-5", tags: ["cost-reimbursable", "incentive"],
+    front: "Cost plus incentive fee (CPIF)",
+    back: "Costs are reimbursed and the seller earns a fee that rises or falls against a target cost according to an agreed sharing ratio, usually within a minimum and maximum fee.",
+    note: "The sharing ratio is stated buyer-first, so 80/20 means the buyer takes 80% of any underrun or overrun. Getting the order the wrong way round is the classic calculation error." },
+  { id: "contract-07", deck: "contracts", ecoTask: "process-5", tags: ["cost-reimbursable"],
+    front: "Cost plus award fee (CPAF)",
+    back: "Costs are reimbursed plus a base fee, with an award pool paid at the buyer's judgement against subjective performance criteria. The award determination is usually not subject to appeal.",
+    note: "Used where quality or responsiveness matters and cannot be reduced to a formula. The criteria must be written down in advance or the arrangement becomes a dispute." },
+  { id: "contract-08", deck: "contracts", ecoTask: "process-5", tags: ["cost-reimbursable", "prohibited"],
+    front: "Cost plus percentage of cost - why is it a trap?",
+    back: "The fee is a percentage of actual costs, so the seller earns more the more it spends. The incentive runs directly against the buyer, and it is prohibited in US federal procurement.",
+    note: "If it appears as an option in a question it is almost always the wrong answer. It is worth recognising precisely because it is the one arrangement with a perverse incentive built in." },
+  { id: "contract-09", deck: "contracts", ecoTask: "process-5", tags: ["time-and-materials"],
+    front: "Time and materials (T&M)",
+    back: "A hybrid: unit rates are fixed like a fixed-price contract, but the quantity is open like a cost-reimbursable one. The buyer pays for hours and materials actually used.",
+    note: "Suited to staff augmentation and to work that must start before it can be scoped. Contracts normally carry a not-to-exceed ceiling, because without one the buyer's exposure is unlimited." },
+  { id: "contract-10", deck: "contracts", ecoTask: "process-5", tags: ["risk"],
+    front: "Order the main contract types by where cost risk sits",
+    back: "From most seller risk to most buyer risk: firm fixed price, fixed price incentive fee, fixed price with economic price adjustment, time and materials, cost plus incentive or award fee, cost plus fixed fee.",
+    note: "Risk shifts as the definition of scope weakens. The type is chosen from how well the work can be specified, not from who has more negotiating power." },
+  { id: "contract-11", deck: "contracts", ecoTask: "process-5", tags: ["selection"],
+    front: "When is a fixed-price contract the right choice?",
+    back: "When the scope is well defined and stable, the requirement can be specified in enough detail to price, and the buyer wants cost certainty and is willing to pay a risk premium for it.",
+    note: "Forcing a fixed price onto an ill-defined scope produces a change order on every ambiguity, and the buyer ends up paying more than a cost-reimbursable contract would have cost." },
+  { id: "contract-12", deck: "contracts", ecoTask: "process-5", tags: ["selection"],
+    front: "When is a cost-reimbursable contract the right choice?",
+    back: "When the scope cannot be defined precisely at the outset, the work is exploratory or high risk, and the buyer needs the flexibility to direct changes without renegotiating a price each time.",
+    note: "The trade is flexibility for cost certainty. It obliges the buyer to audit costs and manage the seller actively, which is real overhead that has to be resourced." },
+  { id: "contract-13", deck: "contracts", ecoTask: "process-5", tags: ["selection"],
+    front: "When is time and materials the right choice?",
+    back: "For small, short or urgent engagements, staff augmentation, and work that must begin before the scope is known well enough to price.",
+    note: "It is the standard answer to a question about needing expert help immediately with the scope still emerging - provided a ceiling is set." },
+  { id: "contract-14", deck: "contracts", ecoTask: "process-5", tags: ["formula", "pta"],
+    front: "Point of total assumption - formula",
+    back: "PTA = ((Ceiling price - Target price) / Buyer's share ratio) + Target cost.",
+    note: "It applies only to FPIF. Above the PTA the seller bears every further pound of cost, which is why it is the number a seller watches most closely." },
+  { id: "contract-15", deck: "contracts", ecoTask: "process-5", tags: ["worked", "pta"],
+    front: "Target cost 100,000, target fee 10,000, ceiling 130,000, share 70/30. Find the PTA.",
+    back: "Target price = 110,000. PTA = ((130,000 - 110,000) / 0.70) + 100,000 = 28,571 + 100,000 = 128,571.",
+    note: "Once actual costs pass about 128,571 the seller absorbs the whole of any further overrun. Note the PTA sits below the ceiling price, which is what makes it the meaningful warning line." },
+  { id: "contract-16", deck: "contracts", ecoTask: "process-5", tags: ["incentive"],
+    front: "How does a sharing ratio work?",
+    back: "It splits the difference between target cost and actual cost between buyer and seller, quoted buyer first. Under 80/20 an underrun of 10,000 returns 8,000 to the buyer and adds 2,000 to the seller's fee.",
+    note: "The same ratio applies to overruns, reducing the fee. That symmetry is what gives the seller a reason to control cost." },
+  { id: "contract-17", deck: "contracts", ecoTask: "process-5", tags: ["definitions"],
+    front: "Target cost, target fee, target price and ceiling price",
+    back: "Target cost is the expected cost of the work. Target fee is the profit if it lands on target. Target price is the two added together. Ceiling price is the most the buyer will pay under any circumstances.",
+    note: "Ceiling price is a buyer protection and applies to the price, not the cost. Costs above it are still incurred - they are simply the seller's problem." },
+  { id: "contract-18", deck: "contracts", ecoTask: "process-5", tags: ["worked", "incentive"],
+    front: "Target cost 200,000, target fee 20,000, share 80/20, actual cost 180,000. What does the seller receive?",
+    back: "The underrun is 20,000, of which the seller keeps 20%, so 4,000. Fee = 20,000 + 4,000 = 24,000. Total paid = 180,000 + 24,000 = 204,000.",
+    note: "The buyer pays 204,000 against a target price of 220,000 and keeps 16,000 of the saving. Always answer the question actually asked - fee and total payment are different numbers." },
+  { id: "contract-19", deck: "contracts", ecoTask: "process-5", tags: ["documents"],
+    front: "RFI, RFQ and RFP",
+    back: "A request for information gathers market intelligence before a requirement is settled. A request for quotation asks for a price on a defined item. A request for proposal invites sellers to propose how they would meet a stated need.",
+    note: "The sequence tracks how well the buyer understands what it wants. An RFP is the one that invites a solution rather than a number." },
+  { id: "contract-20", deck: "contracts", ecoTask: "process-5", tags: ["process"],
+    front: "Source selection criteria, bidder conference and procurement statement of work",
+    back: "The procurement statement of work describes what is being bought in enough detail to price. Source selection criteria state how proposals will be scored. A bidder conference gives all prospective sellers the same information at the same time.",
+    note: "The bidder conference exists to protect fairness - every seller hears the same answers. Answering one bidder's question privately is the failure that gets procurements challenged." },
+
+  /* ── Deck: Conflict modes ──────────────────────────────────────────────── */
+  { id: "conflict-01", deck: "conflict", ecoTask: "people-2", tags: ["modes"],
+    front: "Name the five conflict-handling modes",
+    back: "Collaborate or problem solve; compromise or reconcile; smooth or accommodate; force or direct; withdraw or avoid.",
+    note: "They vary along two axes: how far you press your own concern, and how far you accommodate the other party's. Every mode is the right one somewhere, which is what situational questions test." },
+  { id: "conflict-02", deck: "conflict", ecoTask: "people-2", tags: ["modes"],
+    front: "Collaborate / problem solve",
+    back: "Both parties work through the disagreement to a solution that meets both sets of concerns, incorporating multiple viewpoints. High assertiveness and high cooperation.",
+    note: "The only genuinely win-win mode and the generally preferred one, because it resolves the underlying cause rather than the symptom. Its cost is time, which is why it is not always available." },
+  { id: "conflict-03", deck: "conflict", ecoTask: "people-2", tags: ["modes"],
+    front: "Compromise / reconcile",
+    back: "Each party gives up something to reach a settlement both can live with. Moderate on both assertiveness and cooperation.",
+    note: "Lose-lose in the sense that neither side's concern is fully met. Reasonable when the parties have equal power and a workable answer is needed quickly." },
+  { id: "conflict-04", deck: "conflict", ecoTask: "people-2", tags: ["modes"],
+    front: "Smooth / accommodate",
+    back: "Emphasise areas of agreement and yield on your own position to preserve the relationship. Low assertiveness, high cooperation.",
+    note: "It buys harmony rather than resolution; the underlying disagreement is still there. Appropriate when the issue matters far more to the other party than to you." },
+  { id: "conflict-05", deck: "conflict", ecoTask: "people-2", tags: ["modes"],
+    front: "Force / direct",
+    back: "Push your position at the other party's expense, usually from a position of authority. High assertiveness, low cooperation. A win-lose outcome.",
+    note: "Fast and damaging to the relationship. It is the right mode when safety, legality or ethics are at stake, or when a decision genuinely cannot wait." },
+  { id: "conflict-06", deck: "conflict", ecoTask: "people-2", tags: ["modes"],
+    front: "Withdraw / avoid",
+    back: "Retreat from the disagreement or defer it, leaving the matter unresolved for now. Low on both assertiveness and cooperation.",
+    note: "Legitimate as a deliberate choice - to let tempers settle, or because someone better placed will handle it. It is a failure only when it is the default rather than a decision." },
+  { id: "conflict-07", deck: "conflict", ecoTask: "people-2", tags: ["selection"],
+    front: "Which mode is generally preferred, and why?",
+    back: "Collaborating, because it addresses the underlying cause and produces a solution both parties own, so the same conflict does not return the following week.",
+    note: "Generally, not always. A question that supplies a hard constraint - a safety issue, an hour before a go-live - is testing whether you will apply the default where it does not fit." },
+  { id: "conflict-08", deck: "conflict", ecoTask: "people-2", tags: ["selection"],
+    front: "When is forcing the right response?",
+    back: "When safety, legal or ethical compliance is at stake, when a decision must be made immediately and no time exists to build agreement, or when an unpopular action is genuinely necessary.",
+    note: "Note what these have in common: the cost of delay outweighs the cost to the relationship. Convenience and impatience do not qualify." },
+  { id: "conflict-09", deck: "conflict", ecoTask: "people-2", tags: ["selection"],
+    front: "When is withdrawing the right response?",
+    back: "When emotions need time to cool, when the issue is trivial relative to others, when someone else is better placed to resolve it, or when more information will arrive shortly.",
+    note: "The distinction is whether you have decided to defer or simply hoped it would go away. A deferred conflict with a date to revisit is being managed." },
+  { id: "conflict-10", deck: "conflict", ecoTask: "people-2", tags: ["selection"],
+    front: "When is compromising the right response?",
+    back: "When both parties have roughly equal power and firmly held positions, when a temporary settlement will do, or when collaboration has been tried and time has run out.",
+    note: "It is often the second-best answer in a question where collaborating is available. Reaching for it first gives away value that a longer conversation would have found." },
+  { id: "conflict-11", deck: "conflict", ecoTask: "people-2", tags: ["selection"],
+    front: "When is smoothing the right response?",
+    back: "When the issue matters much more to the other party, when you are wrong, or when preserving harmony is worth more right now than the point in dispute.",
+    note: "Used repeatedly on matters that do count, it teaches the team that pressing hard works, and the project manager's position erodes." },
+  { id: "conflict-12", deck: "conflict", ecoTask: "people-2", tags: ["outcomes"],
+    front: "Map the five modes to win-lose, lose-lose and win-win",
+    back: "Collaborating is win-win. Compromising is lose-lose, since both give something up. Forcing is win-lose. Smoothing is lose-win from the accommodating party's side. Withdrawing resolves nothing, so no one wins.",
+    note: "The labels describe how the concerns were met, not how people felt. A compromise everyone is content with is still lose-lose in this vocabulary." },
+  { id: "conflict-13", deck: "conflict", ecoTask: "people-2", tags: ["principles"],
+    front: "Is conflict on a project a problem to be eliminated?",
+    back: "No. Conflict is inevitable on any project and, handled openly and early, it improves decisions by surfacing information and viewpoints that agreement would have hidden.",
+    note: "The exam's model treats suppressed conflict as the dangerous kind. Answers that shut a disagreement down rather than working it through are usually wrong." },
+  { id: "conflict-14", deck: "conflict", ecoTask: "people-2", tags: ["escalation"],
+    front: "When should a conflict be escalated?",
+    back: "When it cannot be resolved at the level it sits, when it crosses a governance threshold, or when it involves matters outside the project manager's authority such as policy or a personnel decision.",
+    note: "Escalating first is a common wrong answer. The expected order is to work it with the parties involved, and to go up only when the resolution genuinely is not the project's to make." },
+  { id: "conflict-15", deck: "conflict", ecoTask: "people-2", tags: ["sources"],
+    front: "What do project conflicts most often arise from?",
+    back: "Competing schedules and priorities, contested resources, technical opinions, administrative procedures, cost, and only then personality.",
+    note: "Personality is the least common source and the first one people reach for. Treating a resource conflict as a clash of personalities means the actual cause is never addressed." },
+
+  /* ── Deck: Process mapping ─────────────────────────────────────────────── */
+  { id: "process-01", deck: "process", ecoTask: "process-1", tags: ["structure"],
+    front: "The five process groups",
+    back: "Initiating, planning, executing, monitoring and controlling, and closing.",
+    note: "They are not phases. Monitoring and controlling runs across the whole life cycle, and planning recurs whenever new information arrives." },
+  { id: "process-02", deck: "process", ecoTask: "process-1", tags: ["structure"],
+    front: "The ten knowledge areas",
+    back: "Integration, scope, schedule, cost, quality, resource, communications, risk, procurement and stakeholder management.",
+    note: "The current outline is organised around domains and principles rather than these areas, but the vocabulary persists and the legacy mapping is still useful for locating a process." },
+  { id: "process-03", deck: "process", ecoTask: "process-1", tags: ["initiating"],
+    front: "What comes out of initiating?",
+    back: "An approved project charter and an initial stakeholder register. The charter authorises the project and names the project manager.",
+    note: "The charter is issued by the sponsor or initiator, not written and signed by the project manager. That is what gives it authority over resources the project manager does not control." },
+  { id: "process-04", deck: "process", ecoTask: "process-1", tags: ["planning"],
+    front: "What does the project management plan contain?",
+    back: "The subsidiary management plans for each knowledge area, the three baselines, and additional components such as the change management plan, configuration management plan and performance measurement baseline.",
+    note: "It is how the project will be executed, monitored and closed - not the schedule. Once approved it changes only through the change control process." },
+  { id: "process-05", deck: "process", ecoTask: "process-1", tags: ["executing"],
+    front: "What happens in executing?",
+    back: "Directing and managing the work, managing project knowledge, managing quality, acquiring, developing and managing the team, managing communications, implementing risk responses, conducting procurements and managing stakeholder engagement.",
+    note: "Most of the budget is spent here, and it is where deliverables and work performance data are produced. If a process makes something, it is probably executing." },
+  { id: "process-06", deck: "process", ecoTask: "process-9", tags: ["monitoring"],
+    front: "What happens in monitoring and controlling?",
+    back: "Tracking and reviewing progress, controlling scope, schedule, cost, quality, resources, communications, risk, procurement and stakeholder engagement, validating scope, and performing integrated change control.",
+    note: "Its signature is comparison against a baseline followed by a corrective action or a change request. If a process compares plan to actual, it lives here." },
+  { id: "process-07", deck: "process", ecoTask: "process-10", tags: ["closing"],
+    front: "What happens in closing?",
+    back: "Finalising all activities, confirming completed deliverables have been formally accepted, closing procurements, releasing resources, transferring the product and recording final lessons learned.",
+    note: "A project is closed whether it succeeded or was terminated early, and the lessons from a cancelled project are frequently the more valuable ones." },
+  { id: "process-08", deck: "process", ecoTask: "process-1", tags: ["integration"],
+    front: "What is in a project charter?",
+    back: "The purpose and justification, measurable objectives and success criteria, high-level requirements and risks, a summary milestone schedule and budget, the approval requirements, and the named project manager with their authority level.",
+    note: "High-level throughout. Detail belongs in the plan; the charter exists to authorise the project and establish who may commit resources." },
+  { id: "process-09", deck: "process", ecoTask: "process-7", tags: ["quality", "scope"],
+    front: "Validate scope versus control quality",
+    back: "Control quality checks deliverables against quality requirements internally and produces verified deliverables. Validate scope obtains the customer's formal acceptance of them.",
+    note: "Quality control comes first and is internal; validation is external and produces a signature. A question about a customer refusing to sign is a validate scope question." },
+  { id: "process-10", deck: "process", ecoTask: "people-7", tags: ["integration", "knowledge"],
+    front: "Direct and manage project work versus manage project knowledge",
+    back: "The first performs the work defined in the plan and produces deliverables. The second uses existing knowledge and creates new knowledge so the project and the organisation both benefit.",
+    note: "Managing knowledge is an executing process running throughout, not an activity saved for closure. Waiting until the end loses the tacit knowledge as people roll off." },
+  { id: "process-11", deck: "process", ecoTask: "process-1", tags: ["baselines"],
+    front: "The three baselines, and what they combine into",
+    back: "Scope, schedule and cost baselines. Together they form the performance measurement baseline against which earned value is calculated.",
+    note: "Approved versions only, changed solely through formal change control. Comparing performance to anything else - an old plan, an informal target - is not measuring against a baseline." },
+  { id: "process-12", deck: "process", ecoTask: "business-3", tags: ["change-control"],
+    front: "The integrated change control sequence",
+    back: "A change request is raised, its impact on scope, schedule, cost, quality and risk is assessed, the change control board or authorised approver decides, and if approved the baselines and plan are updated and the change is communicated.",
+    note: "Assess before deciding, decide before doing, and update the baseline after. Implementing an approved change without updating the baseline leaves every later variance meaningless." },
+  { id: "process-13", deck: "process", ecoTask: "business-3", tags: ["change-control"],
+    front: "Configuration control versus change control",
+    back: "Configuration control governs the specification of the deliverables and their documentation - what the product is. Change control governs changes to the baselines and the plan - what the project committed to.",
+    note: "A version change to a component's specification is configuration; a change to the approved scope, schedule or cost is change control. Many changes touch both." },
+  { id: "process-14", deck: "process", ecoTask: "process-1", tags: ["planning"],
+    front: "Progressive elaboration and rolling wave planning",
+    back: "Progressive elaboration is the continuous refinement of plans as more becomes known. Rolling wave planning applies it deliberately: near-term work is planned in detail, distant work is left at a summary level.",
+    note: "It is not an excuse for planning badly. The distant work still has a planning package and a budget - what it lacks is decomposition into activities." },
+  { id: "process-15", deck: "process", ecoTask: "process-1", tags: ["tailoring"],
+    front: "Tailoring",
+    back: "Deliberately selecting the processes, inputs, tools, outputs and life cycle appropriate to this project, given its size, risk, complexity and organisational context.",
+    note: "Expected on every project - applying every process regardless is a failure of judgement. Tailoring decisions are recorded and justified rather than made silently." },
+  { id: "process-16", deck: "process", ecoTask: "business-1", tags: ["inputs"],
+    front: "Organisational process assets versus enterprise environmental factors",
+    back: "Assets are things the organisation has that the project can use and update - templates, procedures, historical information, lessons repositories. Environmental factors are conditions the project must work within and generally cannot control, internal or external.",
+    note: "The usable test is whether the project can change it. A standard template is an asset; the regulatory regime and the market are factors." },
+  { id: "process-17", deck: "process", ecoTask: "process-9", tags: ["reporting"],
+    front: "Work performance data, information and reports",
+    back: "Data are raw observations from executing. Information is data analysed in context in the controlling processes. Reports are that information compiled for a decision or a communication.",
+    note: "The chain is data to information to reports. Sending a sponsor raw data is skipping the analysis step that makes it actionable." },
+  { id: "process-18", deck: "process", ecoTask: "process-2", tags: ["scope", "wbs"],
+    front: "Work package, control account and planning package",
+    back: "A work package is the lowest level of the WBS, where cost and duration are estimated. A control account is a management point above it where scope, budget and actuals are compared. A planning package sits below a control account with known content but no detailed activities yet.",
+    note: "Work is measured at the work package and managed at the control account. Each work package belongs to exactly one control account." },
+  { id: "process-19", deck: "process", ecoTask: "process-2", tags: ["scope", "requirements"],
+    front: "Requirements traceability matrix",
+    back: "Links each requirement to its origin and forward through design, build and test to the deliverable, so coverage and the impact of any change can be traced in both directions.",
+    note: "It is what makes an impact assessment quick. Without it, answering whether a requirement change touches three components or thirty is guesswork." },
+  { id: "process-20", deck: "process", ecoTask: "process-2", tags: ["scope", "wbs"],
+    front: "The 100 percent rule for a WBS",
+    back: "The WBS captures all of the work in scope and only that work. Each parent is fully described by the sum of its children, and anything absent from the WBS is out of scope.",
+    note: "The second half does the real work: it makes the WBS the reference for what is not being delivered, which is how scope creep is spotted." },
+
+  /* ── Deck: Glossary ────────────────────────────────────────────────────── */
+  { id: "gloss-01", deck: "glossary", ecoTask: "process-1", tags: ["planning"],
+    front: "Assumption",
+    back: "A factor taken to be true for planning purposes without proof. Assumptions are recorded in the assumption log and tracked, because each is a risk if it turns out to be false.",
+    note: "The log is a live artifact, not an appendix. Validating a load-bearing assumption early is often the highest-value risk response available." },
+  { id: "gloss-02", deck: "glossary", ecoTask: "process-1", tags: ["planning"],
+    front: "Constraint",
+    back: "A limiting factor the project must work within - a fixed date, a capped budget, a mandated technology, a regulatory requirement.",
+    note: "The difference from an assumption is certainty. A constraint is known to be true; an assumption is believed to be." },
+  { id: "gloss-03", deck: "glossary", ecoTask: "process-1", tags: ["planning"],
+    front: "Competing constraints",
+    back: "Scope, schedule, cost, quality, resources and risk, which cannot be changed independently. Moving any one of them forces a change in at least one other.",
+    note: "The older triple constraint named only three. The modern six is the useful version, because it makes explicit that quality and risk absorb the pressure when scope, time and cost are all held fixed." },
+  { id: "gloss-04", deck: "glossary", ecoTask: "people-4", tags: ["stakeholders"],
+    front: "Stakeholder",
+    back: "Any individual, group or organisation that may affect, be affected by, or perceive itself to be affected by the project.",
+    note: "Perceive is the operative word. Someone who believes they are affected is a stakeholder whether or not the project agrees, and ignoring them on a technicality is how opposition forms." },
+  { id: "gloss-05", deck: "glossary", ecoTask: "business-1", tags: ["stakeholders", "governance"],
+    front: "Sponsor",
+    back: "The person or group providing resources and support, accountable for the project's success and for the realisation of its benefits. Champions the project and clears obstacles above the project manager's authority.",
+    note: "The sponsor issues the charter and owns the business case. Escalation questions almost always end at the sponsor unless a governance body is specified." },
+  { id: "gloss-06", deck: "glossary", ecoTask: "process-1", tags: ["initiating"],
+    front: "Project charter",
+    back: "The document issued by the sponsor that formally authorises the project's existence and gives the project manager authority to apply organisational resources.",
+    note: "Without it the project manager has responsibility and no authority. It is the first thing to ask for when a question describes resistance from functional managers." },
+  { id: "gloss-07", deck: "glossary", ecoTask: "business-1", tags: ["business"],
+    front: "Business case",
+    back: "The justification for the investment: the need, the options considered, the expected benefits and costs, and the basis on which the project was authorised.",
+    note: "Owned by the sponsor and reviewed at decision points throughout, not only at the start. A project can be delivering perfectly while its business case has stopped being true." },
+  { id: "gloss-08", deck: "glossary", ecoTask: "process-3", tags: ["business", "benefits"],
+    front: "Benefits management plan",
+    back: "Describes how and when the project's benefits will be delivered and measured, who owns them, and how they will be sustained after the project closes.",
+    note: "It extends past project closure, which is the point. Deliverables are handed over at the end; benefits usually arrive months later, and someone must still own them." },
+  { id: "gloss-09", deck: "glossary", ecoTask: "process-8", tags: ["schedule"],
+    front: "Milestone",
+    back: "A significant point or event in the project. It has zero duration and consumes no resources - it marks that something has been reached.",
+    note: "Because it has no duration, a milestone cannot slip on its own. It moves only because the work in front of it moved." },
+  { id: "gloss-10", deck: "glossary", ecoTask: "process-8", tags: ["schedule", "network"],
+    front: "Critical path",
+    back: "The longest path through the schedule network, which determines the shortest possible project duration. Activities on it normally have zero total float.",
+    note: "Longest, not most important. A project can have several critical paths, and adding one increases risk because there are now more ways for the end date to slip." },
+  { id: "gloss-11", deck: "glossary", ecoTask: "process-8", tags: ["schedule", "network"],
+    front: "Total float versus free float",
+    back: "Total float is how long an activity can slip without delaying the project end date. Free float is how long it can slip without delaying any immediate successor.",
+    note: "Free float is always less than or equal to total float. Consuming total float on a non-critical path is often fine; consuming a successor's free float starts a chain reaction." },
+  { id: "gloss-12", deck: "glossary", ecoTask: "process-8", tags: ["schedule", "network"],
+    front: "Lead versus lag",
+    back: "A lead lets a successor start before its predecessor finishes, overlapping the two. A lag imposes a mandatory wait between them.",
+    note: "A lead compresses the schedule and adds rework risk; a lag reflects something real like curing time. A lead is a negative lag arithmetically, which is why they are often confused." },
+  { id: "gloss-13", deck: "glossary", ecoTask: "process-8", tags: ["schedule", "compression"],
+    front: "Crashing versus fast tracking",
+    back: "Crashing adds resources to critical path activities to shorten them, increasing cost. Fast tracking runs activities in parallel that were planned in sequence, increasing risk and potential rework.",
+    note: "Both apply only to the critical path. Crashing costs money, fast tracking costs certainty, and neither changes the scope - which is what distinguishes them from descoping." },
+  { id: "gloss-14", deck: "glossary", ecoTask: "process-4", tags: ["resources", "schedule"],
+    front: "Resource levelling versus resource smoothing",
+    back: "Levelling adjusts the schedule to respect resource limits and will usually change the critical path and extend the duration. Smoothing adjusts activities only within their available float, so the end date is unchanged.",
+    note: "The end date is the discriminator. If the finish moved, it was levelling; if it could not move, only smoothing was available." },
+  { id: "gloss-15", deck: "glossary", ecoTask: "process-2", tags: ["scope"],
+    front: "Scope creep versus gold plating",
+    back: "Scope creep is uncontrolled expansion without adjustment to time, cost and resources. Gold plating is the team deliberately adding extras the customer never asked for.",
+    note: "Creep usually comes from outside the team, gold plating from inside it. Both bypass change control, and both are wrong for that reason rather than because the addition is unwelcome." },
+  { id: "gloss-16", deck: "glossary", ecoTask: "business-6", tags: ["knowledge"],
+    front: "Lessons learned register versus repository",
+    back: "The register is a project artifact, created early and added to throughout that project. The repository is the organisational store where lessons are held for future projects to use.",
+    note: "The register feeds the repository at closure. Waiting until the end to start the register means the early lessons have already been forgotten." },
+  { id: "gloss-17", deck: "glossary", ecoTask: "people-3", tags: ["resources", "roles"],
+    front: "RACI chart",
+    back: "A responsibility assignment matrix mapping people to activities as Responsible, Accountable, Consulted or Informed.",
+    note: "Exactly one A per activity - accountability that is shared is accountability that is absent. There may be several Rs, and the commonest failure is an activity with no A at all." },
+  { id: "gloss-18", deck: "glossary", ecoTask: "process-7", tags: ["quality"],
+    front: "Quality versus grade",
+    back: "Quality is the degree to which a deliverable meets its requirements. Grade is a category assigned to items with the same functional use but different technical characteristics.",
+    note: "Low grade may be perfectly acceptable; low quality never is. A basic model that does exactly what was specified is low grade and high quality." },
+  { id: "gloss-19", deck: "glossary", ecoTask: "process-7", tags: ["quality", "cost"],
+    front: "Cost of conformance versus cost of non-conformance",
+    back: "Conformance costs are spent to prevent failure - training, reviews, testing, process control. Non-conformance costs are incurred when failure happens - rework, scrap, warranty claims, lost business.",
+    note: "The principle behind them is that prevention is cheaper than inspection, and inspection is cheaper than failure in the customer's hands. Cutting the quality budget moves spend rightward, it does not remove it." },
+  { id: "gloss-20", deck: "glossary", ecoTask: "process-7", tags: ["quality", "scope"],
+    front: "Verification versus validation",
+    back: "Verification asks whether the deliverable meets its specification - are we building it right. Validation asks whether it meets the need - are we building the right thing.",
+    note: "A deliverable can pass verification and fail validation, which is exactly the situation where a customer refuses to accept something that matches the specification." },
+  { id: "gloss-21", deck: "glossary", ecoTask: "process-6", tags: ["estimating"],
+    front: "Analogous, parametric and bottom-up estimating",
+    back: "Analogous uses actuals from a similar past project and is fast and least accurate. Parametric multiplies a unit rate by a quantity using a statistical relationship. Bottom-up estimates each work package and rolls them up, and is slowest and most accurate.",
+    note: "Analogous suits an early charter estimate; bottom-up needs a decomposed WBS. The choice follows how much is known, not how much accuracy is wanted." },
+  { id: "gloss-22", deck: "glossary", ecoTask: "process-8", tags: ["estimating", "formula"],
+    front: "Three-point estimating: triangular and beta (PERT)",
+    back: "Triangular = (O + M + P) / 3. Beta or PERT = (O + 4M + P) / 6, which weights the most likely case four times more heavily. Standard deviation = (P - O) / 6.",
+    note: "PERT is the one to use when the question mentions weighting toward the most likely value. The standard deviation gives the range, which is what a confidence question needs." },
+  { id: "gloss-23", deck: "glossary", ecoTask: "people-8", tags: ["communication", "formula"],
+    front: "Communication channels formula",
+    back: "n(n - 1) / 2, where n is the number of people. Ten people have 45 channels; adding an eleventh takes it to 55.",
+    note: "The point is that channels grow with the square of team size. It is the arithmetic behind small teams and behind a defined communications plan on large ones." },
+  { id: "gloss-24", deck: "glossary", ecoTask: "business-1", tags: ["organisation"],
+    front: "Project, programme and portfolio",
+    back: "A project is a temporary endeavour creating a unique product or result. A programme is a group of related projects managed together for benefits unavailable from managing them separately. A portfolio is a collection of projects, programmes and operations grouped to meet strategic objectives.",
+    note: "Programmes are grouped for the benefits of coordination; portfolios are grouped for strategic alignment, and their components need not be related at all." },
+  { id: "gloss-25", deck: "glossary", ecoTask: "business-1", tags: ["organisation", "governance"],
+    front: "The three PMO types",
+    back: "Supportive supplies templates, training and lessons, and has low control. Controlling requires compliance with a framework and has moderate control. Directive manages the projects itself and has high control.",
+    note: "The distinguishing question is what happens to a project manager who ignores the PMO. Under a directive PMO the project manager reports into it, which changes who they escalate to." },
+];
 PMP.FORMULAS   = [];
 PMP.REFERENCE  = [];
 PMP.GLOSSARY   = [];
@@ -9511,7 +10257,10 @@ PMP.Store = (function () {
          order that was on screen, so a review can reproduce it exactly. */
       attempts: [],   /* { id, qid, ecoTask, domain, approach, type, difficulty,
                          correct, credit, ms, at, confidence, mode, order } */
-      srs: {},        /* cardId -> { ease, interval, reps, lapses, due, suspended } */
+      /* One record per card that has been reviewed at least once; a card with
+         no record is new, so an unstudied pack costs no storage at all. */
+      srs: {},        /* cardId -> { ease, interval, reps, lapses, due, suspended,
+                         leech, first, last, reviews }  — see §10.05 */
       exams: [],      /* { id, startedAt, finishedAt, answers, score, layout } */
       notes: {},      /* qid -> string */
       flags: {},      /* qid -> true, set from any question view */
@@ -14311,6 +15060,673 @@ PMP.Scenarios = (function () {
 })();
 
 
+/* ── 10.05  FLASHCARDS (SM-2) ───────────────────────────────────────────────
+   Renders 05.5 and schedules it with SM-2, the algorithm behind SuperMemo and,
+   in the four-grade form used here, behind Anki. §3.6.
+
+   The scheduler is a pure function. review(record, grade, now) takes a card's
+   current state and returns its next state, and it reads nothing outside its
+   arguments. Everything that decides what the person sees next — the queue
+   split, the daily cap, the leech list, the badge — is derived from records the
+   scheduler produced, so the whole of the spacing behaviour can be reasoned
+   about, and tested, in one thirty-line function.
+
+   What SM-2 actually tracks, and why each piece is needed:
+
+   · ease      A per-card multiplier, starting at 2.5 and floored at 1.3. It is
+               the card's difficulty as revealed by the person's own answers,
+               not as guessed by the author. Two cards in the same deck end up
+               on very different schedules, which is the entire value of the
+               method over a fixed rotation.
+   · interval  Days until the card is next due. Grading Good multiplies the
+               interval by the ease, so intervals grow geometrically and a card
+               answered correctly six times in a row is not seen again for
+               months. That is the point: retention is bought with the fewest
+               reviews that will sustain it.
+   · reps      Consecutive successful reviews. It selects the early schedule —
+               the first two intervals are fixed steps rather than products,
+               because multiplying a zero interval by anything is still zero —
+               and it resets to 0 on a lapse.
+   · lapses    Total failures over the card's life, never reset by success.
+               This is the leech counter, and it must survive recovery: a card
+               that is failed, relearned, and failed again five more times is a
+               badly written card, and a counter that reset on each recovery
+               would never say so.
+
+   The floor of 1.3 on ease exists because without it a repeatedly failed card
+   drives its own ease toward zero, its interval collapses to a day, and it
+   crowds out the rest of the deck forever. The floor bounds the damage; the
+   leech threshold is what actually resolves it.
+
+   Leeches (§3.6). At LEECH_THRESHOLD lapses — six in this build — the card is
+   flagged and surfaced rather than silently suspended. Six is roughly the point
+   at which the evidence stops being about the person and starts being about the
+   card: one or two failures are normal, six means the card is ambiguous, is
+   testing two facts at once, or depends on context the front does not give. The
+   person is offered the three responses that actually help — suspend it, reset
+   its schedule, or leave it and keep working — because the algorithm cannot
+   tell which of those is right and the person can. Auto-suspending would hide
+   the signal at the moment it became useful.
+
+   The daily cap on new cards is not part of SM-2 and is deliberate. 150 cards
+   introduced on day one return as 150 reviews a few days later, and the spike
+   is what makes people abandon spaced repetition in the second week. NEW_PER_DAY
+   spreads the intake so the review load converges instead of oscillating.
+
+   Store shape, one record per card id in the `srs` slice. Cards with no record
+   are new; there is no pre-seeding pass, so a pack import costs nothing and
+   an unstudied deck occupies no storage.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.Cards = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on;
+  var S = PMP.SRS;
+  var DAY = 86400000;
+
+  var GRADE_LABEL = { again: "Again", hard: "Hard", good: "Good", easy: "Easy" };
+  var GRADE_KEY   = { again: "1", hard: "2", good: "3", easy: "4" };
+
+  var deckFilter = null;   /* null = every deck */
+  var session = null;
+  var teardown = [];
+
+  function cleanup() {
+    teardown.forEach(function (fn) { try { fn(); } catch (e) {} });
+    teardown = [];
+  }
+
+  function repaint() {
+    var host = document.getElementById("view");
+    if (!host) return;
+    host.innerHTML = "";
+    view(host, {});
+  }
+
+  /* ── 10.05.1  THE SCHEDULER ──────────────────────────────────────────────
+     Pure. Given a record (or null for a card never seen) and a grade, returns
+     the next record. `now` is injected rather than read from the clock so the
+     function can be reasoned about and replayed. */
+
+  function blank() {
+    return {
+      ease: S.EASE_START, interval: 0, reps: 0, lapses: 0,
+      due: 0, suspended: false, leech: false,
+      first: null, last: null, reviews: 0
+    };
+  }
+
+  /* Ease moves by grade. Again and Hard reduce it, Good leaves it alone, Easy
+     raises it. Good is the neutral point by design: it is the grade the person
+     should be pressing most of the time, and a schedule that drifted on every
+     ordinary success would never settle. */
+  function nextEase(ease, grade) {
+    var e = ease;
+    if (grade === "again")      e -= S.EASE_AGAIN;
+    else if (grade === "hard")  e -= S.EASE_HARD;
+    else if (grade === "easy")  e += S.EASE_EASY;
+    return Math.max(S.EASE_MIN, Math.round(e * 100) / 100);
+  }
+
+  /* The next interval in days. The first two successful reviews use fixed
+     steps; from the third onward the interval is the previous one multiplied
+     by the ease, which is what makes the growth geometric. Hard multiplies by
+     a smaller fixed factor so a struggling card still advances, just slowly —
+     holding it flat would leave it due daily forever. */
+  function nextInterval(rec, grade, ease) {
+    if (grade === "again") return S.LAPSE_INTERVAL;
+    if (rec.reps === 0)    return grade === "easy" ? S.INTERVAL_EASY : S.INTERVAL_1;
+    if (rec.reps === 1)    return grade === "easy" ? Math.round(S.INTERVAL_2 * S.EASY_BONUS) : S.INTERVAL_2;
+    var base = Math.max(1, rec.interval);
+    var days = grade === "hard" ? base * S.HARD_FACTOR
+             : grade === "easy" ? base * ease * S.EASY_BONUS
+             : base * ease;
+    return Math.min(S.MAX_INTERVAL, Math.max(rec.interval + 1, Math.round(days)));
+  }
+
+  function review(record, grade, now) {
+    if (S.GRADES.indexOf(grade) < 0) throw new Error("Unknown grade: " + grade);
+    now = now || Date.now();
+    var rec = record ? Object.assign({}, record) : blank();
+    var failed = grade === "again";
+
+    rec.ease = nextEase(rec.ease, grade);
+    rec.interval = nextInterval(rec, grade, rec.ease);
+    /* reps counts consecutive successes, so a lapse takes it to zero and the
+       card re-enters at the first fixed step. lapses counts failures over the
+       card's whole life and is never reset — see the leech note above. */
+    rec.reps = failed ? 0 : rec.reps + 1;
+    if (failed) rec.lapses += 1;
+    if (rec.lapses >= S.LEECH_THRESHOLD) rec.leech = true;
+
+    rec.due = PMP.time.startOfDay(now) + rec.interval * DAY;
+    rec.reviews += 1;
+    rec.last = now;
+    if (!rec.first) rec.first = now;
+    return rec;
+  }
+
+  /* What each button will do, shown on the button itself. A schedule the person
+     can see before committing to it is a schedule they can learn to use; four
+     unlabelled buttons are a slot machine. */
+  function previewDays(record, grade) {
+    return review(record, grade, Date.now()).interval;
+  }
+
+  function intervalText(days) {
+    if (days < 1) return "today";
+    if (days === 1) return "1 day";
+    if (days < 30) return days + " days";
+    if (days < 365) return (days / 30).toFixed(days < 60 ? 1 : 0) + " mo";
+    return (days / 365).toFixed(1) + " yr";
+  }
+
+  /* ── 10.05.2  THE QUEUE ──────────────────────────────────────────────────
+     One pass over the pack partitions it into due, new, leech and scheduled.
+     Everything that reports a count — the badge, the dashboard panel, the deck
+     table — reads this, so the number in the rail and the number in the view
+     cannot disagree.
+
+     `newToday` is the remaining allowance under the daily cap, not the number
+     of unseen cards: introduced counts records whose first review was today,
+     which is the only figure that makes the cap hold across sessions. */
+  function counts(state, deck) {
+    state = state || PMP.Store.state;
+    var srs = state.srs || {};
+    var today = PMP.time.startOfDay(Date.now());
+    var cutoff = today + DAY - 1;
+    var out = { due: 0, new: 0, learning: 0, leech: 0, suspended: 0,
+                scheduled: 0, total: 0, introduced: 0, newAvailable: 0 };
+
+    PMP.FLASHCARDS.forEach(function (c) {
+      if (deck && c.deck !== deck) return;
+      out.total++;
+      var r = srs[c.id];
+      if (!r) { out.newAvailable++; return; }
+      out.scheduled++;
+      if (r.suspended) { out.suspended++; return; }
+      if (r.leech) out.leech++;
+      if (r.first && PMP.time.startOfDay(r.first) === today) out.introduced++;
+      if (r.due <= cutoff) {
+        out.due++;
+        if (r.reps === 0) out.learning++;
+      }
+    });
+
+    out.new = Math.max(0, Math.min(out.newAvailable, S.NEW_PER_DAY - out.introduced));
+    /* The badge figure: what there is to do today, reviews plus the new cards
+       still allowed. A deck nobody has touched reads 150 available but 20 to
+       do, and 20 is the honest number. */
+    out.today = out.due + out.new;
+    return out;
+  }
+
+  /* Build the actual working queue. Due cards first, ordered by how overdue
+     they are, then new cards up to the remaining allowance. Due before new
+     because a forgotten card that is not shown today is a card that has to be
+     relearned from scratch, whereas a new card deferred costs nothing. */
+  function buildQueue(deck) {
+    var state = PMP.Store.state;
+    var srs = state.srs || {};
+    var cutoff = PMP.time.startOfDay(Date.now()) + DAY - 1;
+    var c = counts(state, deck);
+    var due = [], fresh = [];
+
+    PMP.FLASHCARDS.forEach(function (card) {
+      if (deck && card.deck !== deck) return;
+      var r = srs[card.id];
+      if (!r) { fresh.push(card); return; }
+      if (r.suspended) return;
+      if (r.due <= cutoff) due.push(card);
+    });
+
+    due.sort(function (a, b) { return (srs[a.id].due || 0) - (srs[b.id].due || 0); });
+    return due.concat(fresh.slice(0, c.new));
+  }
+
+  function deckMeta(id) {
+    for (var i = 0; i < PMP.DECKS.length; i++) if (PMP.DECKS[i].id === id) return PMP.DECKS[i];
+    return { id: id, label: id, summary: "" };
+  }
+
+  /* ── 10.05.3  SESSION ──────────────────────────────────────────────────── */
+  function start(deck) {
+    var queue = buildQueue(deck);
+    if (!queue.length) return;
+    session = {
+      deck: deck || null,
+      queue: queue,
+      i: 0,
+      revealed: false,
+      startedAt: Date.now(),
+      graded: { again: 0, hard: 0, good: 0, easy: 0 },
+      newLeeches: [],
+      finished: false
+    };
+    repaint();
+  }
+
+  function current() { return session ? session.queue[session.i] : null; }
+
+  function grade(g) {
+    var card = current();
+    if (!card || !session || session.finished) return;
+    var before = PMP.Store.state.srs[card.id] || null;
+    var after = review(before, g, Date.now());
+
+    PMP.Store.commit(["srs"], function (s) {
+      /* Replaced rather than mutated: the store's subscribers diff on slice
+         identity, and an in-place edit would not repaint the badge. */
+      var next = Object.assign({}, s.srs);
+      next[card.id] = after;
+      s.srs = next;
+    });
+
+    session.graded[g]++;
+    /* Surfaced at the crossing, not on every subsequent failure — the person
+       needs to be told once, at the point the card earns the label. */
+    if (after.leech && (!before || !before.leech)) {
+      session.newLeeches.push(card.id);
+      PMP.UI.toast("Leech: this card has now been forgotten " + after.lapses
+        + " times. Review it at the end of the session.", "warn");
+    }
+
+    /* A failed card comes back before the session ends. Relearning it once in
+       the same sitting is the difference between having seen it and having
+       learned it, and it costs about twenty seconds. */
+    if (g === "again") session.queue.push(card);
+
+    session.i++;
+    session.revealed = false;
+    if (session.i >= session.queue.length) session.finished = true;
+    repaint();
+  }
+
+  function setSuspended(cardId, flag) {
+    PMP.Store.commit(["srs"], function (s) {
+      var next = Object.assign({}, s.srs);
+      var r = Object.assign(blank(), next[cardId] || {});
+      r.suspended = !!flag;
+      next[cardId] = r;
+      s.srs = next;
+    });
+  }
+
+  /* Resetting clears the schedule but keeps the lapse count and the leech
+     flag. The card returns to the new pile with its history intact, so a card
+     that was a leech before is still visibly one, and a second reset does not
+     look like a first. */
+  function resetCard(cardId) {
+    PMP.Store.commit(["srs"], function (s) {
+      var next = Object.assign({}, s.srs);
+      var old = next[cardId];
+      if (!old) return;
+      delete next[cardId];
+      if (old.lapses) {
+        var r = blank();
+        r.lapses = old.lapses;
+        r.leech = old.leech;
+        r.reviews = old.reviews;
+        r.first = old.first;
+        r.due = PMP.time.startOfDay(Date.now());
+        next[cardId] = r;
+      }
+      s.srs = next;
+    });
+  }
+
+  function cardById(id) {
+    for (var i = 0; i < PMP.FLASHCARDS.length; i++) if (PMP.FLASHCARDS[i].id === id) return PMP.FLASHCARDS[i];
+    return null;
+  }
+
+  /* ── 10.05.4  THE REVIEW VIEW ────────────────────────────────────────────
+     Two states: prompt, then prompt with answer and the four grades. The front
+     stays on screen after the reveal, because judging your own recall against
+     a question you can no longer see is a different and easier task. */
+  function renderSession(host) {
+    var card = current();
+    if (!card) { session.finished = true; return renderSummary(host); }
+    var rec = PMP.Store.state.srs[card.id] || null;
+    var meta = deckMeta(card.deck);
+    var left = session.queue.length - session.i;
+
+    host.appendChild(el("div", { class: "view-hd card-hd" }, [
+      el("div", null, [
+        el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 " + meta.label }),
+        el("h2", { text: "Review" })
+      ]),
+      el("span", { class: "spacer" }),
+      el("span", { class: "card-left num", text: PMP.fmt.plural(left, "card") + " left" })
+    ]));
+
+    var body = el("div", { class: "card cardface" });
+    var state = rec ? (rec.leech ? "leech" : rec.reps === 0 ? "learning" : "review") : "new";
+    body.setAttribute("data-state", state);
+
+    var tags = el("div", { class: "cardface-meta" }, [
+      el("span", { class: "chip", text: meta.label }),
+      el("span", { class: "chip", text: state === "new" ? "New"
+        : state === "learning" ? "Relearning"
+        : state === "leech" ? "Leech \u00B7 " + rec.lapses + " lapses"
+        : "Review \u00B7 ease " + rec.ease.toFixed(2) })
+    ]);
+    if (card.ecoTask && PMP.ECO_TASK_BY_ID[card.ecoTask]) {
+      tags.appendChild(el("span", { class: "chip", text: PMP.ECO_TASK_BY_ID[card.ecoTask].label }));
+    }
+    body.appendChild(tags);
+    body.appendChild(el("p", { class: "cardface-front", text: card.front }));
+
+    if (!session.revealed) {
+      body.appendChild(el("div", { class: "cardface-actions" }, [
+        el("button", {
+          class: "btn btn--primary btn--block", type: "button",
+          onclick: function () { session.revealed = true; repaint(); }
+        }, "Show answer"),
+        el("span", { class: "hint", text: "Space or Enter" })
+      ]));
+    } else {
+      body.appendChild(el("div", { class: "cardface-back" }, [
+        el("p", { text: card.back })
+      ]));
+      if (card.note) {
+        body.appendChild(el("div", { class: "cardface-note" }, [
+          el("span", { class: "eyebrow", text: "Why it matters" }),
+          el("p", { text: card.note })
+        ]));
+      }
+      var grades = el("div", { class: "grades" });
+      S.GRADES.forEach(function (g) {
+        grades.appendChild(el("button", {
+          class: "grade", type: "button", dataset: { g: g },
+          onclick: function () { grade(g); }
+        }, [
+          el("span", { class: "grade-k", text: GRADE_KEY[g] }),
+          el("span", { class: "grade-l", text: GRADE_LABEL[g] }),
+          el("span", { class: "grade-i num", text: intervalText(previewDays(rec, g)) })
+        ]));
+      });
+      body.appendChild(grades);
+      body.appendChild(el("p", { class: "hint",
+        text: "Again resets the card and counts a lapse. Good is the ordinary answer \u2014 press it when you recalled the card without struggling." }));
+    }
+
+    host.appendChild(body);
+
+    var bar = el("div", { class: "filter-bar" }, [
+      el("button", {
+        class: "btn btn--sm btn--ghost", type: "button",
+        onclick: function () { session.finished = true; repaint(); }
+      }, "End session"),
+      el("span", { class: "spacer" }),
+      el("span", { class: "hint", text: "Reviewed " + session.i + " of " + session.queue.length })
+    ]);
+    host.appendChild(bar);
+
+    bindKeys();
+  }
+
+  /* ── 10.05.5  KEYBOARD ───────────────────────────────────────────────────
+     1-4 grade, space or enter reveals. Ignored while focus is in a field, so
+     the shortcuts cannot fire from a search box elsewhere on the view. */
+  function bindKeys() {
+    teardown.push(on(document, "keydown", function (e) {
+      if (!session || session.finished) return;
+      var t = e.target;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      if (!session.revealed) {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          session.revealed = true;
+          repaint();
+        }
+        return;
+      }
+      var idx = ["1", "2", "3", "4"].indexOf(e.key);
+      if (idx >= 0) { e.preventDefault(); grade(S.GRADES[idx]); return; }
+      if (e.key === " " || e.key === "Enter") { e.preventDefault(); grade("good"); }
+    }));
+  }
+
+  /* ── 10.05.6  SUMMARY ──────────────────────────────────────────────────── */
+  function renderSummary(host) {
+    var g = session.graded;
+    var done = g.again + g.hard + g.good + g.easy;
+    var recalled = g.hard + g.good + g.easy;
+    var mins = Math.max(1, Math.round((Date.now() - session.startedAt) / 60000));
+
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Session complete" }),
+      el("h2", { text: "You reviewed " + PMP.fmt.plural(done, "card") }),
+      el("p", { text: done
+        ? "Recalled " + recalled + " of " + done + " on first sight, over about " + PMP.fmt.plural(mins, "minute") + "."
+        : "Nothing was graded in this session." })
+    ]));
+
+    var stats = el("div", { class: "card" }, [el("span", { class: "eyebrow", text: "How you graded" })]);
+    var row = el("div", { class: "filters" });
+    S.GRADES.forEach(function (k) {
+      row.appendChild(el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: GRADE_LABEL[k] }),
+        el("span", { class: "stat-v", text: String(g[k]) })
+      ]));
+    });
+    stats.appendChild(row);
+    if (done) {
+      stats.appendChild(el("p", { class: "hint", style: "margin-top:var(--sp-4)", text:
+        g.again / done > 0.35
+          ? "A high proportion of Again suggests the intake is running ahead of what is sticking. Reviews are due before new cards, so the queue will settle if you keep coming back daily."
+          : "Cards you graded Good or Easy will not return for some time. That is the schedule doing its job \u2014 there is no value in seeing them sooner." }));
+    }
+    host.appendChild(stats);
+
+    if (session.newLeeches.length) host.appendChild(leechCard(session.newLeeches, true));
+
+    var rest = counts(PMP.Store.state, session.deck);
+    var bar = el("div", { class: "filter-bar" }, [
+      el("button", {
+        class: "btn btn--primary", type: "button",
+        onclick: function () { var d = session.deck; session = null; start(d); }
+      }, rest.today ? "Continue \u00B7 " + rest.today + " left today" : "Nothing left today"),
+      el("button", {
+        class: "btn", type: "button",
+        onclick: function () { session = null; repaint(); }
+      }, "Back to decks")
+    ]);
+    if (!rest.today) bar.firstChild.setAttribute("disabled", "");
+    host.appendChild(bar);
+    session.finished = true;
+  }
+
+  /* ── 10.05.7  LEECHES ────────────────────────────────────────────────────
+     §3.6 asks for leeches to be surfaced at six failures, and surfacing means
+     offering the decision rather than making it. Suspending is right for a card
+     the person has decided is not worth the time; resetting is right for one
+     they got wrong for a reason that has since been fixed. */
+  function leechCard(ids, fromSession) {
+    var wrap = el("div", { class: "card leeches" }, [
+      el("span", { class: "eyebrow", text: "Leeches" }),
+      el("h2", { text: fromSession ? "Cards that crossed the threshold in this session" : "Cards you keep forgetting" }),
+      el("p", { text: "A card forgotten " + S.LEECH_THRESHOLD + " times is usually a problem with the card rather than "
+        + "with you \u2014 two facts on one side, or a prompt that does not narrow to a single answer. Suspend it, or "
+        + "reset it and start it again from scratch." })
+    ]);
+
+    var list = el("ul", { class: "leech-list" });
+    ids.forEach(function (id) {
+      var card = cardById(id);
+      if (!card) return;
+      var rec = PMP.Store.state.srs[id] || blank();
+      list.appendChild(el("li", null, [
+        el("div", { class: "leech-t" }, [
+          el("span", { class: "chip", text: deckMeta(card.deck).label }),
+          el("span", { class: "num", text: PMP.fmt.plural(rec.lapses, "lapse") })
+        ]),
+        el("p", { class: "leech-f", text: card.front }),
+        el("div", { class: "leech-a" }, [
+          el("button", {
+            class: "btn btn--sm", type: "button",
+            onclick: function () {
+              setSuspended(id, !rec.suspended);
+              PMP.UI.toast(rec.suspended ? "Card unsuspended." : "Card suspended \u2014 it will not come up again until you unsuspend it.", "ok");
+              repaint();
+            }
+          }, rec.suspended ? "Unsuspend" : "Suspend"),
+          el("button", {
+            class: "btn btn--sm", type: "button",
+            onclick: function () {
+              resetCard(id);
+              PMP.UI.toast("Schedule reset. The card returns as new; its lapse count is kept.", "ok");
+              repaint();
+            }
+          }, "Reset schedule")
+        ])
+      ]));
+    });
+    wrap.appendChild(list);
+    return wrap;
+  }
+
+  function allLeeches(deck) {
+    var srs = PMP.Store.state.srs || {};
+    return PMP.FLASHCARDS.filter(function (c) {
+      if (deck && c.deck !== deck) return false;
+      var r = srs[c.id];
+      return !!(r && r.leech);
+    }).map(function (c) { return c.id; });
+  }
+
+  /* ── 10.05.8  DECKS ──────────────────────────────────────────────────── */
+  function renderDecks(host) {
+    var overall = counts(PMP.Store.state, null);
+
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 Spaced repetition" }),
+      el("h2", { text: "Flashcards" }),
+      el("p", { text: "Cards are scheduled with SM-2. Grade honestly and the algorithm spreads its own workload: "
+        + "what you know moves out to weeks and months, what you do not comes back tomorrow. New cards are capped at "
+        + S.NEW_PER_DAY + " a day so today's intake does not become a spike of reviews next week." })
+    ]));
+
+    if (!PMP.FLASHCARDS.length) {
+      host.appendChild(PMP.UI.empty("No cards are loaded",
+        "This build ships a card pack; if you are seeing this, the pack failed to load.", "alert"));
+      return;
+    }
+
+    var top = el("div", { class: "card" }, [el("span", { class: "eyebrow", text: "Today" })]);
+    top.appendChild(el("div", { class: "filters" }, [
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "Due for review" }),
+        el("span", { class: "stat-v", text: String(overall.due) })
+      ]),
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "New today" }),
+        el("span", { class: "stat-v", text: String(overall.new) })
+      ]),
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "In the schedule" }),
+        el("span", { class: "stat-v", text: overall.scheduled + " / " + overall.total })
+      ]),
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "Leeches" }),
+        el("span", { class: "stat-v", text: String(overall.leech) })
+      ])
+    ]));
+    var go = el("div", { class: "filter-bar" }, [
+      el("button", {
+        class: "btn btn--primary", type: "button",
+        onclick: function () { start(null); }
+      }, overall.today ? "Study all decks \u00B7 " + overall.today + " cards" : "Nothing due today")
+    ]);
+    if (!overall.today) {
+      go.firstChild.setAttribute("disabled", "");
+      go.appendChild(el("span", { class: "hint", text: overall.scheduled === overall.total
+        ? "Everything is scheduled ahead. Come back tomorrow \u2014 reviewing early does not help retention."
+        : "Every card allowed today has been seen. The cap resets at midnight." }));
+    }
+    top.appendChild(go);
+    host.appendChild(top);
+
+    var table = el("div", { class: "card" }, [
+      el("span", { class: "eyebrow", text: "Decks" }),
+      el("h2", { text: "Seven decks, " + PMP.FLASHCARDS.length + " cards" })
+    ]);
+    var tbl = el("table", { class: "tbl deck-tbl" }, [
+      el("thead", null, [el("tr", null, [
+        el("th", { text: "Deck" }),
+        el("th", { class: "num", text: "Cards" }),
+        el("th", { class: "num", text: "Due" }),
+        el("th", { class: "num", text: "New" }),
+        el("th", { class: "num", text: "Leech" }),
+        el("th", { text: "" })
+      ])])
+    ]);
+    var tb = el("tbody");
+    PMP.DECKS.forEach(function (d) {
+      var c = counts(PMP.Store.state, d.id);
+      if (!c.total) return;
+      tb.appendChild(el("tr", null, [
+        el("td", null, [
+          el("b", { text: d.label }),
+          el("p", { class: "hint", text: d.summary })
+        ]),
+        el("td", { class: "num", text: String(c.total) }),
+        el("td", { class: "num", text: String(c.due) }),
+        el("td", { class: "num", text: String(c.new) }),
+        el("td", { class: "num", text: c.leech ? String(c.leech) : "\u2014" }),
+        el("td", null, [
+          el("button", {
+            class: "btn btn--sm" + (c.today ? " btn--primary" : ""), type: "button",
+            disabled: c.today ? null : true,
+            onclick: function () { start(d.id); }
+          }, c.today ? "Study " + c.today : "Clear")
+        ])
+      ]));
+    });
+    tbl.appendChild(tb);
+    table.appendChild(tbl);
+    host.appendChild(table);
+
+    var leeches = allLeeches(null);
+    if (leeches.length) host.appendChild(leechCard(leeches, false));
+  }
+
+  /* ── 10.05.9  ROUTE ────────────────────────────────────────────────────── */
+  function view(host, params) {
+    cleanup();
+    if (params && params.deck) deckFilter = params.deck;
+    if (session && !session.finished) return renderSession(host);
+    if (session && session.finished) return renderSummary(host);
+    return renderDecks(host);
+  }
+
+  PMP.Router.register("cards", { title: "Flashcards", render: view });
+
+  PMP.Store.subscribe(function (state, changed) {
+    if (changed.indexOf("ui") >= 0 && state.ui.route && state.ui.route !== "cards") {
+      cleanup();
+      if (session && session.finished) session = null;
+    }
+  });
+
+  return {
+    /* The scheduler is exported because it is the part worth testing, and
+       because §12.2's self-check exercises it at boot. */
+    blank: blank,
+    review: review,
+    nextEase: nextEase,
+    nextInterval: nextInterval,
+    intervalText: intervalText,
+    counts: counts,
+    buildQueue: buildQueue,
+    allLeeches: allLeeches,
+    cleanup: cleanup,
+    get session() { return session; }
+  };
+})();
+
+
 /* ── 10.13  DATA PORTABILITY ────────────────────────────────────────────────
    Both directions, for both kinds of file: progress out and back in, question
    packs out and back in. Four decisions worth knowing:
@@ -15680,10 +17096,18 @@ PMP.Shell = (function () {
     /* The label text is hidden under 600px, so the name lives on the element. */
     tag.setAttribute("aria-label", txt.textContent + ". " + explain);
     document.getElementById("brand-eco").textContent = "ECO " + PMP.ECO.VERSION;
+    /* §3.6 asks for a due-today count, not a count of everything scheduled.
+       The figure is whatever §10.05 says there is to do today — reviews that
+       have come due plus the new cards still allowed under the daily cap — so
+       the rail and the Flashcards view cannot drift apart. */
     var due = document.getElementById("due-badge");
-    var scheduled = Object.keys(state.srs).length;
-    due.textContent = String(scheduled);
-    due.hidden = scheduled === 0;
+    var c = PMP.Cards ? PMP.Cards.counts(state) : { today: 0 };
+    due.textContent = String(c.today);
+    due.hidden = c.today === 0;
+    due.setAttribute("title", c.today
+      ? c.due + " due for review, " + c.new + " new"
+      : "Nothing due today");
+    due.setAttribute("aria-label", c.today + " flashcards due today");
   }
 
   function init() {
@@ -15761,6 +17185,49 @@ PMP.Shell = (function () {
     };
   }
 
+  /* The due-today counter §3.6 asks for. §10.01 has not landed, so the
+     dashboard is still a stub — but the counter is live data from a module that
+     has, and holding it back until the rest of the dashboard exists would leave
+     a shipped feature with nowhere to report. It is passed as the stub's `extra`
+     block, and §10.01 should absorb it rather than render a second copy. */
+  function dueToday() {
+    var c = PMP.Cards.counts(PMP.Store.state);
+    var card = el("div", { class: "card due-panel" }, [
+      el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 Flashcards" }),
+      el("h2", { text: c.today ? PMP.fmt.plural(c.today, "card") + " due today" : "No cards due today" })
+    ]);
+    card.appendChild(el("div", { class: "filters" }, [
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "Due for review" }),
+        el("span", { class: "stat-v", text: String(c.due) })
+      ]),
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "New today" }),
+        el("span", { class: "stat-v", text: String(c.new) })
+      ]),
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "In the schedule" }),
+        el("span", { class: "stat-v", text: c.scheduled + " / " + c.total })
+      ]),
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "Leeches" }),
+        el("span", { class: "stat-v", text: String(c.leech) })
+      ])
+    ]));
+    card.appendChild(el("div", { class: "filter-bar" }, [
+      el("button", {
+        class: "btn" + (c.today ? " btn--primary" : ""), type: "button",
+        disabled: c.today ? null : true,
+        onclick: function () { PMP.Router.navigate("cards"); }
+      }, c.today ? "Study now" : "Nothing due"),
+      el("span", { class: "spacer" }),
+      el("span", { class: "hint", text: c.leech
+        ? PMP.fmt.plural(c.leech, "card") + " you keep forgetting need a decision."
+        : "Reviews come before new cards, so the queue settles if you come back daily." })
+    ]));
+    return card;
+  }
+
   register("dashboard", {
     title: "Dashboard",
     render: stub("Dashboard", "Your readiness score, domain mastery, streak and next best action will open here.", [
@@ -15769,7 +17236,7 @@ PMP.Shell = (function () {
       ["\u00A73.1", "Streak, questions answered today against your daily target, minutes studied"],
       ["\u00A73.1", "Next best action, chosen from the same points-per-minute calculation as the score breakdown"],
       ["\u00A73.1", "Countdown to your exam date"]
-    ])
+    ], dueToday)
   });
 
   register("scenarios", {
@@ -15780,6 +17247,9 @@ PMP.Shell = (function () {
     ])
   });
 
+  /* §10.05 has landed and registered "cards" already, so register() leaves this
+     alone. It is kept only so that deleting the module does not leave a dead
+     nav entry, on the same terms as the practice and scenario stubs. */
   register("cards", {
     title: "Flashcards",
     render: stub("Flashcards", "Spaced repetition across formulas, agile vocabulary, risk, procurement and more.", [
