@@ -1107,6 +1107,277 @@ dialog.sheet::backdrop { background: var(--scrim); }
   .deck-tbl td:first-child { min-width: 0; }
 }
 
+/* ── 03.14  FORMULA LAB ─────────────────────────────────────────────────────
+   Three surfaces share one type rule: every number the person might read off,
+   compare or copy is monospace with tabular figures. Digits then sit in a
+   fixed column whether the value is 0.87 or 1.00, so a stack of CPI readings
+   can be scanned down the decimal point rather than read one at a time.
+
+   .fx-n is the atom. It is on every result, every table cell of figures and
+   every substituted value inside a worked solution. The .num rule in 03.1
+   already gives tabular figures to a handful of named elements; .fx-n adds
+   the monospace family, because in this view the numbers are the content.
+
+   Expressions are set in the same monospace face at a slightly larger size so
+   that EV \u2212 AC reads as an expression rather than as prose containing symbols.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.fx-n {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* ── 03.14.1  MODE SWITCH ───────────────────────────────────────────────── */
+.fx-tabs {
+  display: flex; gap: var(--sp-1); flex-wrap: wrap;
+  margin-bottom: var(--sp-5);
+  border-bottom: var(--border);
+  padding-bottom: var(--sp-3);
+}
+.fx-tab {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  min-height: var(--hit-min); padding: 0 var(--sp-4);
+  border: var(--border-hi); border-radius: var(--r-2);
+  background: var(--s-raise); color: var(--fg-muted);
+  font-size: var(--t-sm); font-weight: var(--w-semi);
+  transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+.fx-tab:hover { background: var(--s-sunk); color: var(--fg); }
+.fx-tab[aria-selected="true"] {
+  background: var(--c-signal); border-color: var(--c-signal); color: var(--fg-on-acc);
+}
+.fx-tab .i { width: var(--icon); height: var(--icon); }
+
+/* ── 03.14.2  REFERENCE SHEET ───────────────────────────────────────────────
+   Two columns on a wide screen, one on paper and on a phone. Each group is a
+   break-inside: avoid block so a group is never split across a page fold. */
+.fx-sheet { display: grid; gap: var(--sp-4); grid-template-columns: 1fr; }
+@media (min-width: 900px) { .fx-sheet { grid-template-columns: 1fr 1fr; } }
+
+.fx-grp { break-inside: avoid; }
+.fx-grp > h3 {
+  font-size: var(--t-md); font-weight: var(--w-semi); line-height: var(--lh-tight);
+}
+.fx-grp > p.hint { margin-top: var(--sp-1); max-width: var(--measure); }
+
+.fx-list { margin-top: var(--sp-3); display: grid; gap: var(--sp-3); }
+.fx-row {
+  display: grid; gap: var(--sp-1);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px dashed var(--s-edge);
+}
+.fx-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.fx-row-t {
+  display: flex; align-items: baseline; gap: var(--sp-2); flex-wrap: wrap;
+  font-size: var(--t-sm); font-weight: var(--w-semi);
+}
+.fx-row-t .fx-tag {
+  font-family: var(--font-mono); font-size: var(--t-xs);
+  letter-spacing: var(--ls-cap); text-transform: uppercase;
+  color: var(--fg-faint); font-weight: var(--w-med);
+}
+.fx-expr {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--t-sm); line-height: 1.7;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--s-sunk); border-left: 2px solid var(--c-signal);
+  border-radius: 0 var(--r-1) var(--r-1) 0;
+  overflow-x: auto; white-space: pre;
+}
+.fx-where { font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-body); }
+.fx-reads {
+  font-size: var(--t-xs); color: var(--fg); line-height: var(--lh-body);
+  display: flex; gap: var(--sp-2); align-items: baseline;
+}
+.fx-reads::before {
+  content: "\25B8"; color: var(--c-signal); flex: 0 0 auto; font-size: var(--t-xs);
+}
+
+/* ── 03.14.3  CALCULATORS ───────────────────────────────────────────────── */
+.fx-picker { display: grid; gap: var(--sp-2); grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: var(--sp-4); }
+.fx-pick {
+  display: grid; gap: var(--sp-1); text-align: left;
+  padding: var(--sp-3); min-height: var(--hit-min);
+  border: var(--border-hi); border-radius: var(--r-2);
+  background: var(--s-raise); color: var(--fg);
+}
+.fx-pick:hover { background: var(--s-sunk); }
+.fx-pick[aria-pressed="true"] { border-color: var(--c-signal); background: var(--s-wash); }
+.fx-pick b { font-size: var(--t-sm); font-weight: var(--w-semi); }
+.fx-pick span { font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-snug); }
+
+.fx-inputs { display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.fx-in { display: block; }
+.fx-in > .lbl {
+  display: block; margin-bottom: var(--sp-1);
+  font-size: var(--t-xs); font-weight: var(--w-med); color: var(--fg-muted);
+}
+.fx-in > .lbl b { font-family: var(--font-mono); color: var(--fg); font-weight: var(--w-semi); }
+.fx-in input {
+  width: 100%; min-height: var(--hit-min);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--s-sunk); color: var(--fg);
+  border: var(--border); border-radius: var(--r-2);
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--t-sm);
+}
+.fx-in input:focus-visible { border-color: var(--c-signal); }
+.fx-in input[aria-invalid="true"] { border-color: var(--c-danger); }
+.fx-in .hint { margin-top: var(--sp-1); }
+
+/* Results. A fixed two-column grid keeps the value column aligned across
+   every row, which is the whole point of the tabular figures. */
+.fx-out { margin-top: var(--sp-4); display: grid; gap: var(--sp-2); }
+.fx-out-r {
+  display: grid; grid-template-columns: 1fr max-content; gap: var(--sp-3);
+  align-items: baseline;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-1); background: var(--s-sunk);
+}
+.fx-out-r.fx-lead { background: var(--s-wash); border: 1px solid var(--c-signal); }
+.fx-out-k { font-size: var(--t-sm); color: var(--fg-muted); }
+.fx-out-k b { color: var(--fg); font-weight: var(--w-semi); }
+.fx-out-v {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--t-md); font-weight: var(--w-semi); text-align: right;
+  white-space: nowrap;
+}
+.fx-out-note { grid-column: 1 / -1; font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-body); }
+.fx-flag { font-size: var(--t-xs); font-weight: var(--w-med); }
+.fx-flag--good { color: var(--st-correct-fg); }
+.fx-flag--bad  { color: var(--st-incorrect-fg); }
+.fx-flag--warn { color: var(--st-flagged-fg); }
+
+/* Editable row sets: decision-tree branches, cash flows, network activities. */
+.fx-rows { display: grid; gap: var(--sp-2); margin-top: var(--sp-2); }
+.fx-rows-hd, .fx-rowset {
+  display: grid; gap: var(--sp-2); align-items: center;
+}
+.fx-rows-hd {
+  font-family: var(--font-mono); font-size: var(--t-xs);
+  letter-spacing: var(--ls-cap); text-transform: uppercase; color: var(--fg-muted);
+}
+.fx-rowset input, .fx-rowset select {
+  width: 100%; min-height: 38px; padding: var(--sp-1) var(--sp-2);
+  background: var(--s-sunk); color: var(--fg);
+  border: var(--border); border-radius: var(--r-1);
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: var(--t-sm);
+}
+.fx-rowset .icon-btn { min-height: 38px; }
+
+/* ── 03.14.4  NETWORK DIAGRAM ───────────────────────────────────────────────
+   Activity-on-node boxes drawn as a plain grid by column (topological rank),
+   with the critical path marked by weight and a glyph rather than colour
+   alone, on the same terms as the answer states in 02.4. */
+.fx-net { display: flex; gap: var(--sp-5); overflow-x: auto; padding: var(--sp-2) 0; }
+.fx-net-col { display: grid; gap: var(--sp-3); align-content: start; flex: 0 0 auto; }
+.fx-node {
+  display: grid; grid-template-columns: repeat(3, minmax(34px, 1fr));
+  gap: 1px; background: var(--s-edge);
+  border: var(--border-hi); border-radius: var(--r-2); overflow: hidden;
+  min-width: 116px;
+}
+.fx-node.is-crit { border-color: var(--c-danger); border-width: 2px; }
+.fx-node i, .fx-node b, .fx-node s {
+  background: var(--s-raise); padding: var(--sp-1);
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--t-xs); font-style: normal; text-decoration: none;
+  text-align: center;
+}
+.fx-node b { grid-column: 1 / -1; font-size: var(--t-sm); font-weight: var(--w-semi); background: var(--s-sunk); }
+.fx-node.is-crit b { background: var(--st-incorrect-bg); color: var(--st-incorrect-fg); }
+
+/* ── 03.14.5  DRILL ─────────────────────────────────────────────────────── */
+.fx-drill-hd {
+  display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap;
+  margin-bottom: var(--sp-4);
+}
+.fx-drill-hd .spacer { flex: 1 1 auto; }
+.fx-tally {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--t-sm); color: var(--fg-muted);
+}
+.fx-tally b { color: var(--fg); font-weight: var(--w-semi); }
+
+.fx-stem { font-size: var(--t-md); line-height: var(--lh-body); max-width: var(--measure); }
+.fx-given {
+  margin-top: var(--sp-3); display: grid; gap: var(--sp-1);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+.fx-given div {
+  display: flex; justify-content: space-between; gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-2);
+  background: var(--s-sunk); border-radius: var(--r-1);
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: var(--t-sm);
+}
+.fx-given dt, .fx-given span:first-child { color: var(--fg-muted); }
+.fx-given span:last-child { font-weight: var(--w-semi); }
+
+.fx-answer { display: flex; gap: var(--sp-2); align-items: flex-start; flex-wrap: wrap; margin-top: var(--sp-4); }
+.fx-answer input {
+  flex: 1 1 180px; min-width: 0; min-height: var(--hit-min);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--s-sunk); color: var(--fg);
+  border: var(--border-hi); border-radius: var(--r-2);
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--t-md);
+}
+.fx-answer input:focus-visible { border-color: var(--c-signal); }
+.fx-unit { align-self: center; font-size: var(--t-sm); color: var(--fg-muted); }
+
+.fx-verdict {
+  display: flex; align-items: center; gap: var(--sp-2);
+  margin-top: var(--sp-4); padding: var(--sp-3);
+  border: var(--border); border-radius: var(--r-2);
+  font-size: var(--t-sm); font-weight: var(--w-med);
+}
+.fx-verdict .i { width: var(--icon-lg); height: var(--icon-lg); flex: 0 0 auto; }
+.fx-verdict--right { background: var(--st-correct-bg);   color: var(--st-correct-fg);   border-color: currentColor; }
+.fx-verdict--wrong { background: var(--st-incorrect-bg); color: var(--st-incorrect-fg); border-color: currentColor; }
+.fx-verdict--near  { background: var(--st-flagged-bg);   color: var(--st-flagged-fg);   border-color: currentColor; }
+
+/* ── 03.14.6  WORKED SOLUTION ───────────────────────────────────────────────
+   The requirement is a full working, not an answer. Each step is numbered,
+   states the rule in words, then shows the substitution and the result on its
+   own monospace line so the arithmetic can be followed with a finger. */
+.fx-work { margin-top: var(--sp-4); }
+.fx-work > h3 {
+  font-family: var(--font-mono); font-size: var(--t-xs);
+  letter-spacing: var(--ls-cap); text-transform: uppercase; color: var(--fg-muted);
+  margin-bottom: var(--sp-3);
+}
+.fx-steps { display: grid; gap: var(--sp-3); counter-reset: fxstep; }
+.fx-step {
+  display: grid; grid-template-columns: max-content 1fr; gap: var(--sp-3);
+  align-items: start;
+}
+.fx-step::before {
+  counter-increment: fxstep; content: counter(fxstep);
+  display: flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; margin-top: 1px;
+  border-radius: var(--r-full); background: var(--s-sunk);
+  font-family: var(--font-mono); font-size: var(--t-xs); font-weight: var(--w-semi);
+  color: var(--fg-muted);
+}
+.fx-step-b { display: grid; gap: var(--sp-1); min-width: 0; }
+.fx-step-t { font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); }
+.fx-math {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--t-sm); line-height: 1.7;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--s-sunk); border-radius: var(--r-1);
+  overflow-x: auto; white-space: pre;
+}
+.fx-math em { font-style: normal; color: var(--c-signal); font-weight: var(--w-semi); }
+.fx-trap {
+  margin-top: var(--sp-4); padding: var(--sp-3);
+  background: var(--st-flagged-bg); color: var(--st-flagged-fg);
+  border: 1px solid currentColor; border-radius: var(--r-2);
+  font-size: var(--t-sm); line-height: var(--lh-body);
+}
+.fx-trap b { font-weight: var(--w-semi); }
+
 /* ── 03.8  RESPONSIVE ───────────────────────────────────────────────────── */
 @media (min-width: 600px) {
   .view { padding-left: var(--sp-6); padding-right: var(--sp-6); }
@@ -1134,6 +1405,35 @@ dialog.sheet::backdrop { background: var(--scrim); }
   body { background: #fff; color: #000; }
   .view { max-width: none; padding: 0; }
   .card { box-shadow: none; border: 1px solid #999; break-inside: avoid; }
+
+  /* Formula lab. Everything that only exists to be clicked comes off the
+     page: the tab strip, the calculator picker, the answer field and every
+     button. What is left is the sheet itself, which is the artefact worth
+     printing. Printing from the drill tab is deliberately still allowed and
+     yields the problem with its full worked solution, which is a legitimate
+     thing to want on paper. */
+  .fx-tabs, .fx-picker, .filter-bar, .fx-answer, .btn, .icon-btn { display: none !important; }
+
+  /* Two columns of formulas on A4, and never a group broken across the fold. */
+  .fx-sheet { grid-template-columns: 1fr 1fr; gap: 10pt; }
+  .fx-grp, .fx-row, .fx-step { break-inside: avoid; }
+  .fx-expr {
+    background: transparent; border-left: 1pt solid #000;
+    padding: 2pt 6pt; font-size: 8.5pt;
+  }
+  .fx-math, .fx-given div, .fx-out-r { background: transparent; border: 1px solid #ccc; }
+  .fx-reads::before { color: #000; }
+  .fx-row { border-bottom: 1px dotted #bbb; }
+  .fx-node i, .fx-node b, .fx-node s { background: transparent; }
+  .fx-step::before { background: transparent; border: 1px solid #666; color: #000; }
+  .fx-trap, .fx-verdict { border: 1px solid #666; background: transparent; color: #000; }
+
+  /* Font sizes are set in points on paper: the screen scale is tuned for a
+     reading distance the page does not have. */
+  .fx-grp > h3 { font-size: 11pt; }
+  .fx-row-t { font-size: 9pt; }
+  .fx-where, .fx-reads { font-size: 7.5pt; }
+  @page { margin: 12mm; }
 }
 </style>
 </head>
@@ -1301,6 +1601,7 @@ dialog.sheet::backdrop { background: var(--scrim); }
         03.11 data and audit — indexed error tables, ECO coverage grid
         03.12 scenario trainer — four-rank reveal, distribution bar
         03.7  question engine — filters, options, hotspot, blanks, pace meter
+        03.14 formula lab — sheet, calculators, network nodes, worked steps
         03.8  responsive — 320 / 600 / 900 / 1200 breakpoints
         03.9  print — formula sheet, reference pages
 
@@ -1315,7 +1616,8 @@ dialog.sheet::backdrop { background: var(--scrim); }
         05.4  SCENARIOS — 80 situational items, ranked options · built
         05.8  CONTENT INDEX — id lookup across shipped and imported packs
         05.5  FLASHCARDS — 150 cards, 7 decks · built
-        05.6  FORMULAS · 05.7  REFERENCE + GLOSSARY
+        05.6  FORMULAS — 9 groups, ~50 entries · built
+        05.7  REFERENCE + GLOSSARY
 
    §06  STORAGE ADAPTER
         06.1  probe() — write/read/delete, catches throws AND silent no-ops
@@ -1354,7 +1656,7 @@ dialog.sheet::backdrop { background: var(--scrim); }
         10.04 Question renderers · built       10.11 Analytics
               5 renderers, 7 accepted type ids 10.12 Settings, About, help
         10.05 Flashcards (SM-2) · built        10.13 Data portability · built
-        10.06 Formula lab                      10.14 Content audit panel · built
+        10.06 Formula lab · built              10.14 Content audit panel · built
               (10.14.3 audits 05.4 against its own rules)
         10.07 Reference library
 
@@ -9960,7 +10262,312 @@ PMP.FLASHCARDS = [
     back: "Supportive supplies templates, training and lessons, and has low control. Controlling requires compliance with a framework and has moderate control. Directive manages the projects itself and has high control.",
     note: "The distinguishing question is what happens to a project manager who ignores the PMO. Under a directive PMO the project manager reports into it, which changes who they escalate to." },
 ];
-PMP.FORMULAS   = [];
+/* ── 05.6  FORMULAS ─────────────────────────────────────────────────────────
+   The reference sheet behind §10.06. Nine groups, in the order someone
+   revising tends to want them rather than alphabetically: the earned value
+   core first because everything in forecasting depends on it.
+
+   Four fields per entry, and the split between them is deliberate:
+
+     expr   the formula, and nothing else. Monospace, and multi-line where the
+            formula genuinely has more than one line (a forward pass has two).
+     where  what each symbol stands for. Printed under the expression so the
+            sheet is usable by someone who has not yet memorised the initials.
+     reads  what the answer means once you have it. This is the field that
+            earns its place on an exam sheet: candidates lose marks far more
+            often on \u201Cis 0.92 good or bad\u201D than on the division itself.
+     trap   the specific way the exam catches people. Omitted where there is
+            no distinctive trap rather than padded with something generic.
+
+   Nothing here is computed. §10.06 owns the arithmetic, and the two are kept
+   apart so that correcting a wording never risks changing a result.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.FORMULAS = Object.freeze([
+
+  { id: "evm", label: "Earned value \u2014 the core four",
+    blurb: "Three measured inputs and everything derived from them. Write EV down first: it appears in all four of the variances and indices.",
+    items: [
+      { id: "pv", name: "Planned value", tag: "PV",
+        expr: "PV = BAC \u00D7 planned % complete",
+        where: "BAC is the budget at completion; the percentage is the fraction of the plan that should be finished by now.",
+        reads: "The budgeted cost of the work that was scheduled to be done by this date." },
+      { id: "ev", name: "Earned value", tag: "EV",
+        expr: "EV = BAC \u00D7 actual % complete",
+        where: "The percentage is physical progress, not effort burnt.",
+        reads: "The budgeted cost of the work actually finished. Value earned, priced at the plan.",
+        trap: "Percent complete means work delivered. A team that has spent 80% of the money has not thereby earned 80% of the value." },
+      { id: "ac", name: "Actual cost", tag: "AC",
+        expr: "AC = money spent to date",
+        where: "Measured from the accounts, not derived.",
+        reads: "What the finished work actually cost." },
+      { id: "cv", name: "Cost variance", tag: "CV",
+        expr: "CV = EV \u2212 AC",
+        where: "Both in currency.",
+        reads: "Negative is over budget. The figure is the overspend in pounds on the work done so far.",
+        trap: "Variances subtract and indices divide, and both put EV first. CV = AC \u2212 EV inverts every sign." },
+      { id: "sv", name: "Schedule variance", tag: "SV",
+        expr: "SV = EV \u2212 PV",
+        where: "Both in currency, even though this measures schedule.",
+        reads: "Negative is behind schedule, expressed as the budget value of the missing work.",
+        trap: "SV is in pounds, not days. It also collapses to zero at the end of a late project, because EV and PV both reach BAC." },
+      { id: "cpi", name: "Cost performance index", tag: "CPI",
+        expr: "CPI = EV \u00F7 AC",
+        where: "Dimensionless.",
+        reads: "Work earned per pound spent. Below 1.00 is over budget; 0.85 means 85p of value for every pound." },
+      { id: "spi", name: "Schedule performance index", tag: "SPI",
+        expr: "SPI = EV \u00F7 PV",
+        where: "Dimensionless.",
+        reads: "Progress rate against plan. Below 1.00 is behind; 0.90 means nine tenths of the planned pace." },
+      { id: "pctc", name: "Percent complete and percent spent", tag: "%",
+        expr: "% complete = EV \u00F7 BAC\n% spent    = AC \u00F7 BAC",
+        where: "Both against the original budget.",
+        reads: "The gap between the two is the cost problem stated as a percentage." }
+    ] },
+
+  { id: "forecast", label: "Forecasting and recovery",
+    blurb: "Where the project lands, and what it would take to change that. Choosing the right EAC is a judgement about the cause of the variance, not an arithmetic step.",
+    items: [
+      { id: "eac-cpi", name: "EAC \u2014 variances are typical", tag: "EAC",
+        expr: "EAC = BAC \u00F7 CPI",
+        where: "The default when nothing in the question says otherwise.",
+        reads: "Projects the efficiency achieved so far across all the remaining work.",
+        trap: "This is the right choice when the overrun is systemic. If the overrun came from a one-off event that will not recur, it overstates the finish." },
+      { id: "eac-atyp", name: "EAC \u2014 variance was a one-off", tag: "EAC",
+        expr: "EAC = AC + (BAC \u2212 EV)",
+        where: "BAC \u2212 EV is the remaining work at budgeted rates.",
+        reads: "Sunk cost stays sunk; everything still to do is added at plan.",
+        trap: "Look for wording like a one-time event, a settled dispute, or a supplier problem now fixed." },
+      { id: "eac-both", name: "EAC \u2014 cost and schedule both bite", tag: "EAC",
+        expr: "EAC = AC + (BAC \u2212 EV) \u00F7 (CPI \u00D7 SPI)",
+        where: "The denominator is sometimes weighted, e.g. 0.8 CPI + 0.2 SPI.",
+        reads: "Used when the recovery must hold a deadline as well as a budget, so lateness costs money.",
+        trap: "Only reach for this when the question ties the two together. Unprompted, it produces a pessimistic answer that is not among the options." },
+      { id: "eac-new", name: "EAC \u2014 the plan is no longer credible", tag: "EAC",
+        expr: "EAC = AC + bottom-up ETC",
+        where: "ETC re-estimated from scratch by the people doing the work.",
+        reads: "The original baseline is abandoned as a predictor and the remainder is re-estimated.",
+        trap: "Correct when the question says the original assumptions are invalid; a re-estimate, not a calculation." },
+      { id: "etc", name: "Estimate to complete", tag: "ETC",
+        expr: "ETC = EAC \u2212 AC",
+        where: "Currency.",
+        reads: "What the rest of the project is forecast to cost from today." },
+      { id: "vac", name: "Variance at completion", tag: "VAC",
+        expr: "VAC = BAC \u2212 EAC",
+        where: "Currency.",
+        reads: "Negative means the project is forecast to finish over budget by that amount." },
+      { id: "tcpi-bac", name: "TCPI against the original budget", tag: "TCPI",
+        expr: "TCPI = (BAC \u2212 EV) \u00F7 (BAC \u2212 AC)",
+        where: "Remaining work over remaining money.",
+        reads: "The efficiency the team must now hit to finish on the original budget. Above 1.00 means they must work better than they have been." },
+      { id: "tcpi-eac", name: "TCPI against the revised budget", tag: "TCPI",
+        expr: "TCPI = (BAC \u2212 EV) \u00F7 (EAC \u2212 AC)",
+        where: "Same numerator, revised denominator.",
+        reads: "The efficiency needed to hit the new forecast instead of the old baseline.",
+        trap: "Both TCPI formulas are remaining work over remaining money. Change the target and only the denominator moves." }
+    ] },
+
+  { id: "estimate", label: "Estimating and PERT",
+    blurb: "Three-point estimating, the spread around the mean, and how spread accumulates along a path.",
+    items: [
+      { id: "pert", name: "PERT / beta expected duration", tag: "tE",
+        expr: "tE = (O + 4M + P) \u00F7 6",
+        where: "O optimistic, M most likely, P pessimistic.",
+        reads: "A weighted mean that pulls the answer towards the most likely value.",
+        trap: "Divide by 6, not 3, and only after multiplying M by 4. The weights must sum to the divisor." },
+      { id: "tri", name: "Triangular expected duration", tag: "tE",
+        expr: "tE = (O + M + P) \u00F7 3",
+        where: "The straight average of the three.",
+        reads: "Used where there is no reason to trust the most likely value more than the extremes.",
+        trap: "A question that says simple average or triangular wants this one; PERT and beta want the weighted version." },
+      { id: "sd", name: "Standard deviation", tag: "\u03C3",
+        expr: "\u03C3 = (P \u2212 O) \u00F7 6",
+        where: "Only the two extremes; M plays no part.",
+        reads: "The spread of the estimate. A wide gap between optimistic and pessimistic means an uncertain estimate." },
+      { id: "var", name: "Variance", tag: "\u03C3\u00B2",
+        expr: "\u03C3\u00B2 = ((P \u2212 O) \u00F7 6)\u00B2",
+        where: "The square of the standard deviation.",
+        reads: "The form that can be added up. Standard deviations cannot be summed; variances can." },
+      { id: "range", name: "Confidence ranges", tag: "\u00B1\u03C3",
+        expr: "68.3%  tE \u00B1 1\u03C3\n95.5%  tE \u00B1 2\u03C3\n99.7%  tE \u00B1 3\u03C3",
+        where: "Assumes the estimate is roughly normal.",
+        reads: "Quote a commitment at 2\u03C3 or 3\u03C3, not at the mean: the mean is a coin toss." },
+      { id: "path", name: "Rolling up a path", tag: "path",
+        expr: "Path tE = \u03A3 tE\nPath \u03C3  = \u221A(\u03A3 \u03C3\u00B2)",
+        where: "Sum the means; sum the variances, then take the root.",
+        reads: "Path uncertainty grows more slowly than path length, because the variances add and the root shrinks the total.",
+        trap: "Adding the standard deviations along a path is the classic error and always overstates the spread." }
+    ] },
+
+  { id: "comms", label: "Communication channels",
+    blurb: "One formula, and the reason it appears so often is that the growth is quadratic and people underestimate it.",
+    items: [
+      { id: "chan", name: "Number of channels", tag: "C",
+        expr: "C = n(n \u2212 1) \u00F7 2",
+        where: "n is everyone who communicates, the project manager included.",
+        reads: "Lines of communication in a group of n people.",
+        trap: "Forgetting to count yourself is the most common slip. If a question adds people to a team, count both totals and subtract." },
+      { id: "chan-d", name: "Channels added by growth", tag: "\u0394C",
+        expr: "\u0394C = n\u2082(n\u2082 \u2212 1) \u00F7 2 \u2212 n\u2081(n\u2081 \u2212 1) \u00F7 2",
+        where: "n\u2081 before, n\u2082 after.",
+        reads: "The new channels created. Adding three people to a team of seven adds 24 channels, not three." }
+    ] },
+
+  { id: "risk", label: "Risk and decision analysis",
+    blurb: "Expected monetary value, and the roll-up that turns a tree of options into one number per branch.",
+    items: [
+      { id: "emv", name: "Expected monetary value", tag: "EMV",
+        expr: "EMV = Probability \u00D7 Impact",
+        where: "Impact carries a sign: threats negative, opportunities positive.",
+        reads: "The average outcome if this risk were faced many times.",
+        trap: "The sign convention is the mark. A threat with a 30% chance of costing 40,000 is an EMV of \u221212,000, not 12,000." },
+      { id: "emv-sum", name: "Contingency reserve", tag: "\u03A3EMV",
+        expr: "Reserve = \u03A3 EMV of the identified risks",
+        where: "Across the register, threats and opportunities together.",
+        reads: "The contingency for known risks. Management reserve for unknown risks sits outside this and outside the cost baseline.",
+        trap: "Contingency is inside the cost baseline and the project manager controls it. Management reserve is neither." },
+      { id: "tree", name: "Decision tree roll-up", tag: "tree",
+        expr: "At a chance node    : EMV = \u03A3 (P \u00D7 payoff)\nAt a decision node  : take the best branch EMV\nNet path value      : EMV \u2212 cost of that branch",
+        where: "Work right to left, from the payoffs back to the first decision.",
+        reads: "The branch with the best net value is the recommendation.",
+        trap: "Subtract the branch's own cost once, at the branch, and never subtract it again inside each outcome. Probabilities at one chance node must total 1.0." },
+      { id: "evpi", name: "Value of perfect information", tag: "EVPI",
+        expr: "EVPI = EMV with perfect information \u2212 best EMV without it",
+        where: "The first term picks the best payoff for each state, then weights by probability.",
+        reads: "The most a rational buyer would pay for a study that removes the uncertainty entirely." }
+    ] },
+
+  { id: "procure", label: "Procurement and incentive contracts",
+    blurb: "The point of total assumption, and the sharing arithmetic on either side of it.",
+    items: [
+      { id: "pta", name: "Point of total assumption", tag: "PTA",
+        expr: "PTA = ((Ceiling price \u2212 Target price) \u00F7 Buyer share) + Target cost",
+        where: "Target price is target cost plus target fee. Buyer share is the buyer's fraction of an overrun.",
+        reads: "The actual cost at which the seller starts absorbing every further pound. Above it the seller's fee falls pound for pound.",
+        trap: "The divisor is the buyer's share, not the seller's, and the addend is the target cost, not the target price. Both are easy to swap under time pressure." },
+      { id: "fee", name: "Final fee under an FPIF", tag: "fee",
+        expr: "Fee = Target fee + (Target cost \u2212 Actual cost) \u00D7 Seller share",
+        where: "The bracket is positive on an underrun and negative on an overrun.",
+        reads: "Come in under target and the seller keeps their share of the saving; overrun and they fund their share of it.",
+        trap: "The share ratio is quoted buyer/seller. In an 80/20 the seller keeps 20% of a saving and funds 20% of an overrun." },
+      { id: "price", name: "Final price", tag: "price",
+        expr: "Price = Actual cost + Fee,  capped at the ceiling",
+        where: "The cap binds at and above the PTA.",
+        reads: "Never more than the ceiling price, whatever the actual cost reaches.",
+        trap: "Apply the cap last. A computed price above the ceiling is not the answer; the ceiling is." },
+      { id: "savings", name: "Sharing a saving or an overrun", tag: "share",
+        expr: "Buyer share  = Variance \u00D7 buyer fraction\nSeller share = Variance \u00D7 seller fraction",
+        where: "Variance is target cost minus actual cost.",
+        reads: "Both fractions apply to the same variance and must total 1.0." }
+    ] },
+
+  { id: "schedule", label: "Network, float and the critical path",
+    blurb: "The passes are bookkeeping; the marks are in the float. This sheet uses day numbering, where the first activity starts on day 1.",
+    items: [
+      { id: "fwd", name: "Forward pass \u2014 earliest dates", tag: "ES/EF",
+        expr: "ES = max(EF of predecessors) + 1\nEF = ES + Duration \u2212 1",
+        where: "A starting activity has ES = 1.",
+        reads: "Left to right through the network. The largest EF at the end is the project duration.",
+        trap: "The \u00B11 belongs to day numbering, where an activity of 3 days starting on day 1 finishes on day 3. If a question numbers from day 0, both adjustments disappear." },
+      { id: "bwd", name: "Backward pass \u2014 latest dates", tag: "LS/LF",
+        expr: "LF = min(LS of successors) \u2212 1\nLS = LF \u2212 Duration + 1",
+        where: "A finishing activity has LF = the project duration.",
+        reads: "Right to left. Take the minimum, not the maximum: the constraint is the earliest successor." },
+      { id: "tf", name: "Total float", tag: "TF",
+        expr: "TF = LS \u2212 ES = LF \u2212 EF",
+        where: "Both forms give the same number; use whichever pair you have.",
+        reads: "How long the activity can slip before the project end date moves.",
+        trap: "Total float belongs to the path, not the activity. Consuming it on one activity removes it from every other activity on that path." },
+      { id: "ff", name: "Free float", tag: "FF",
+        expr: "FF = min(ES of successors) \u2212 EF \u2212 1",
+        where: "Zero for any activity feeding straight into a critical successor.",
+        reads: "How long the activity can slip before it delays any successor's early start.",
+        trap: "Free float is never greater than total float, and a merge point is where the two most often differ." },
+      { id: "cp", name: "Critical path", tag: "CP",
+        expr: "The longest path through the network; every activity on it has TF = 0",
+        where: "There can be more than one.",
+        reads: "The shortest possible project duration. Longest path, shortest schedule.",
+        trap: "Near-critical paths matter: a path with two days of float becomes critical after a three-day slip, and the answer to a delay question changes with it." },
+      { id: "crash", name: "Crash cost slope", tag: "slope",
+        expr: "Slope = (Crash cost \u2212 Normal cost) \u00F7 (Normal duration \u2212 Crash duration)",
+        where: "Cost per period saved.",
+        reads: "Crash the cheapest slope first, and only on the critical path.",
+        trap: "Crashing a non-critical activity buys nothing. After each crash, recheck which path is longest." }
+    ] },
+
+  { id: "finance", label: "Business case and selection",
+    blurb: "The figures a sponsor uses to choose between projects. In every one of them, bigger is better except payback, where sooner is better.",
+    items: [
+      { id: "pvf", name: "Present value", tag: "PV",
+        expr: "PV = FV \u00F7 (1 + r)^n",
+        where: "r is the discount rate per period, n the number of periods.",
+        reads: "What a future sum is worth today." },
+      { id: "npv", name: "Net present value", tag: "NPV",
+        expr: "NPV = \u03A3 [ C\u209C \u00F7 (1 + r)^t ] \u2212 C\u2080",
+        where: "C\u209C is the cash flow in period t, C\u2080 the initial outlay.",
+        reads: "Positive means the project earns more than the discount rate. Choose the higher NPV.",
+        trap: "NPV is already net of the investment, so no further deduction is made. Comparing NPVs never needs the durations." },
+      { id: "irr", name: "Internal rate of return", tag: "IRR",
+        expr: "The rate r at which NPV = 0",
+        where: "Solved iteratively, not in closed form.",
+        reads: "The project's own rate of return. Higher is better, and above the cost of capital is the test.",
+        trap: "Nothing on the exam asks you to compute an IRR by hand. It asks you to compare two, or to read it against a hurdle rate." },
+      { id: "payback", name: "Payback period", tag: "PB",
+        expr: "PB = full years before recovery + (outstanding \u00F7 cash flow in the recovery year)",
+        where: "Undiscounted unless the question says otherwise.",
+        reads: "How long until the investment is recovered. Shorter is better.",
+        trap: "Payback ignores everything after the recovery date and ignores the time value of money entirely, which is why it is never the only criterion." },
+      { id: "roi", name: "Return on investment", tag: "ROI",
+        expr: "ROI = (Gain \u2212 Cost) \u00F7 Cost",
+        where: "Usually quoted as a percentage.",
+        reads: "Return per unit invested." },
+      { id: "bcr", name: "Benefit\u2013cost ratio", tag: "BCR",
+        expr: "BCR = Benefits \u00F7 Costs",
+        where: "Both discounted, if the question discounts either.",
+        reads: "Above 1.0 means the benefits exceed the costs.",
+        trap: "A BCR of 0.8 is a loss-making project even though the number is positive. Compare against 1.0, not against zero." },
+      { id: "opp", name: "Opportunity cost", tag: "OC",
+        expr: "Opportunity cost = value of the best option not taken",
+        where: "The runner-up, not the sum of the rejected options.",
+        reads: "Choosing a project worth 500,000 over one worth 350,000 carries an opportunity cost of 350,000." }
+    ] },
+
+  { id: "agile", label: "Agile and flow metrics",
+    blurb: "Empirical measures taken from what the team actually finished. Little's Law ties three of them together and is the one worth being able to rearrange.",
+    items: [
+      { id: "vel", name: "Velocity", tag: "v",
+        expr: "Velocity = story points accepted \u00F7 iteration",
+        where: "Averaged over the last few iterations, typically three.",
+        reads: "The team's demonstrated rate. Used for forecasting, never for comparison between teams.",
+        trap: "Only accepted work counts. Points for a story that is nearly done contribute nothing this iteration." },
+      { id: "remain", name: "Iterations remaining", tag: "n",
+        expr: "Iterations = points remaining \u00F7 average velocity",
+        where: "Round up.",
+        reads: "The forecast, as a range if velocity varies." },
+      { id: "thr", name: "Throughput", tag: "TH",
+        expr: "Throughput = items completed \u00F7 unit of time",
+        where: "Items, not points.",
+        reads: "How fast finished work leaves the system." },
+      { id: "ct", name: "Cycle time", tag: "CT",
+        expr: "Cycle time = completed \u2212 work started",
+        where: "Measured per item, then averaged.",
+        reads: "How long an item takes once someone starts it." },
+      { id: "lt", name: "Lead time", tag: "LT",
+        expr: "Lead time = completed \u2212 requested",
+        where: "Starts when the customer asks, not when the team starts.",
+        reads: "What the customer experiences. Always at least the cycle time, and usually much longer.",
+        trap: "Lead time includes queue time before work starts, so it is the larger of the two. Reducing WIP shortens both." },
+      { id: "little", name: "Little's Law", tag: "L",
+        expr: "Cycle time = WIP \u00F7 Throughput\n\nWIP        = Throughput \u00D7 Cycle time\nThroughput = WIP \u00F7 Cycle time",
+        where: "Holds for a stable system over a period long enough to average out.",
+        reads: "The mathematical case for limiting work in progress: halve the WIP at a fixed throughput and you halve the cycle time.",
+        trap: "The units must agree. WIP in items and throughput in items per week give a cycle time in weeks." },
+      { id: "takt", name: "Takt time", tag: "takt",
+        expr: "Takt = available time \u00F7 units required",
+        where: "Demand-driven, not capacity-driven.",
+        reads: "The pace the customer requires, against which the actual pace is compared." }
+    ] }
+
+]);
 PMP.REFERENCE  = [];
 PMP.GLOSSARY   = [];
 
@@ -11254,9 +11861,9 @@ PMP.Exporter = (function () {
    One IIFE each. A module that has landed registers its own route here, and
    the stubs in §12.3 stand aside for it rather than overwriting it.
    Built: 10.02 practice engine, 10.03 mock exam simulator,
-          10.04 question renderers, 10.13 data portability,
-          10.14 content audit.
-   Still stubs: 10.01, 10.05 to 10.12.
+          10.04 question renderers, 10.05 flashcards, 10.06 formula lab,
+          10.08 scenario trainer, 10.13 data portability, 10.14 content audit.
+   Still stubs: 10.01, 10.07, 10.09 to 10.12.
    ════════════════════════════════════════════════════════════════════ */
 
 /* ── 10.02  PRACTICE ENGINE ─────────────────────────────────────────────────
@@ -15727,6 +16334,2660 @@ PMP.Cards = (function () {
 })();
 
 
+/* ── 10.06  FORMULA LAB ─────────────────────────────────────────────────────
+   Three surfaces over one body of arithmetic: a reference sheet built for
+   paper, a set of calculators, and a generator that marks randomised problems
+   and then shows the full working.
+
+   Five decisions worth knowing before reading the code:
+
+   \u00B7 The arithmetic lives in one place. Every calculator and every drill
+     generator calls the same functions in 10.06.3 \u2014 evm(), pta(), network(),
+     cash(), tree(). A drill answer and a calculator result can therefore never
+     disagree, which matters because the drill is the thing that teaches and a
+     contradiction between the two would teach the wrong number.
+
+   \u00B7 A generated problem is a value, not a script. gen() returns an object
+     holding the stem, the givens, the answer and the steps, all computed up
+     front. Marking never re-derives anything, so the working shown after an
+     answer is provably the working that produced the answer being marked.
+
+   \u00B7 Worked solutions are steps, not sentences. Each step pairs a statement
+     of the rule with the substitution and the result on separate monospace
+     lines, because the failure being addressed is not \u201Cwhat is the formula\u201D
+     but \u201Cwhere did that number come from\u201D. A step that only restates the
+     formula is not written.
+
+   \u00B7 Known wrong turns are named. Where a formula has a classic inversion \u2014
+     AC \u2212 EV, dividing PERT by 3, the seller's share in the PTA divisor \u2014 the
+     generator carries the value that mistake produces. Getting told which
+     mistake was made is worth more than being told the answer was wrong.
+
+   \u00B7 Display minus signs differ by context on purpose. Typeset formulas use
+     a true minus (\u2212) because they are typography. Computed figures use the
+     ASCII hyphen, because those are numbers someone may copy into a
+     calculator or a spreadsheet, and a true minus does not parse there.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.FormulaLab = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, frag = PMP.dom.frag;
+
+  var TABS = [
+    { id: "sheet", label: "Reference sheet", icon: "book" },
+    { id: "calc",  label: "Calculators",     icon: "sigma" },
+    { id: "drill", label: "Drill",           icon: "target" }
+  ];
+
+  var tab = "sheet";
+  var calcId = "evm";
+  var calcVals = Object.create(null);   /* calcId -> field values, kept per tab visit */
+  var drillGroup = "";                  /* "" is every group */
+  var problem = null;
+  var revealed = false;
+  var lastMark = null;                  /* { verdict, given, why } */
+  var tally = { asked: 0, right: 0, streak: 0, best: 0 };
+
+  /* ── 10.06.1  NUMBERS ───────────────────────────────────────────────────
+     One rounding helper and one formatter. The epsilon nudge in round() is
+     there because 1.005 is stored as slightly less than 1.005 and would
+     otherwise round down, which shows up immediately in a CPI of exactly
+     0.875 being displayed as 0.87 in one place and 0.88 in another. */
+  function round(x, dp) {
+    var f = Math.pow(10, dp || 0);
+    var v = x * f;
+    return (v >= 0 ? Math.round(v + 1e-9) : -Math.round(-v + 1e-9)) / f;
+  }
+  function group(intPart) {
+    return intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  /* dp defaults to 2. Grouped thousands, ASCII minus \u2014 see the header note. */
+  function fmt(x, dp) {
+    if (x === null || x === undefined || !isFinite(x)) return "\u2014";
+    dp = dp === undefined ? 2 : dp;
+    var v = Math.abs(round(x, dp)).toFixed(dp).split(".");
+    return (x < 0 && round(x, dp) !== 0 ? "-" : "") + group(v[0]) + (v[1] ? "." + v[1] : "");
+  }
+  function n0(x) { return fmt(x, 0); }
+  function n2(x) { return fmt(x, 2); }
+  /* Money inside a worked solution. Whole amounts print without pence so a
+     chain of subtractions stays readable, and anything with a fractional part
+     prints to two places so the line still reconciles against the stated
+     answer. Mixing the two in one chain is the point, not an oversight: an
+     EAC of 745,555.02 must not be shown as 745,555 and then subtracted to
+     give an ETC that ends in .02 out of nowhere. */
+  function mn(x) { return Math.abs(x - Math.round(x)) < 0.005 ? fmt(x, 0) : fmt(x, 2); }
+  function pc(x, dp) { return fmt(x * 100, dp === undefined ? 1 : dp) + "%"; }
+  function money(x) { return "\u00A3" + fmt(x, 2); }
+
+  /* Left-aligned continuation chain:
+       CV = EV - AC
+          = 220,000 - 260,000
+          = -40,000
+     The padding is the width of the left-hand side, so every "=" lines up
+     under the first one however long the symbol is. */
+  function chain(lhs, lines) {
+    var pad = new Array(String(lhs).length + 1).join(" ");
+    return lines.map(function (ln, i) {
+      return (i ? pad : String(lhs)) + " = " + ln;
+    }).join("\n");
+  }
+
+  /* Monospace block. The last line is the result and is marked with <em>,
+     which 03.14.6 colours; built as nodes rather than innerHTML so nothing
+     here depends on the content being escaped. */
+  function math(str, plain) {
+    var lines = String(str).split("\n");
+    var node = el("div", { class: "fx-math" });
+    lines.forEach(function (ln, i) {
+      if (i) node.appendChild(document.createTextNode("\n"));
+      if (i === lines.length - 1 && !plain) node.appendChild(el("em", { text: ln }));
+      else node.appendChild(document.createTextNode(ln));
+    });
+    return node;
+  }
+  function step(text, mathStr, plain) {
+    return el("li", { class: "fx-step" }, [
+      el("div", { class: "fx-step-b" }, [
+        el("p", { class: "fx-step-t", text: text }),
+        mathStr ? math(mathStr, plain) : null
+      ])
+    ]);
+  }
+
+  function num(x) { var v = parseFloat(String(x).replace(/[,\s\u00A3$\u20AC%]/g, "")); return isFinite(v) ? v : null; }
+  function pick(rand, list) { return list[Math.floor(rand() * list.length)]; }
+  function between(rand, lo, hi, stepSize) {
+    var n = Math.floor(rand() * (Math.floor((hi - lo) / stepSize) + 1));
+    return round(lo + n * stepSize, 6);
+  }
+
+  function repaint() {
+    var host = document.getElementById("view");
+    if (!host) return;
+    host.innerHTML = "";
+    view(host, {});
+  }
+
+  /* ── 10.06.2  REFERENCE SHEET ───────────────────────────────────────────
+     Deliberately unfiltered. A reference sheet with a filter on it is a
+     search box, and the thing being built here is the single sheet of paper
+     someone takes into the last hour before an exam. Everything in 05.6 is
+     on it, in 05.6's order, and 03.9 prints it two-up without the chrome. */
+  function sheetRow(f) {
+    return el("div", { class: "fx-row" }, [
+      el("div", { class: "fx-row-t" }, [
+        el("span", { text: f.name }),
+        f.tag ? el("span", { class: "fx-tag", text: f.tag }) : null
+      ]),
+      el("div", { class: "fx-expr", text: f.expr }),
+      f.where ? el("p", { class: "fx-where", text: f.where }) : null,
+      f.reads ? el("p", { class: "fx-reads", text: f.reads }) : null
+    ]);
+  }
+
+  function renderSheet(host) {
+    var count = PMP.FORMULAS.reduce(function (a, g) { return a + g.items.length; }, 0);
+
+    host.appendChild(el("div", { class: "filter-bar" }, [
+      el("span", { class: "hint fx-n",
+        text: count + " formulas in " + PMP.FORMULAS.length + " groups" }),
+      el("span", { class: "spacer" }),
+      el("button", {
+        class: "btn btn--sm", type: "button",
+        onclick: function () { window.print(); }
+      }, [icon("clip"), "Print the sheet"])
+    ]));
+
+    var sheet = el("div", { class: "fx-sheet" });
+    PMP.FORMULAS.forEach(function (g) {
+      var card = el("div", { class: "card fx-grp" }, [
+        el("h3", { text: g.label }),
+        g.blurb ? el("p", { class: "hint", text: g.blurb }) : null
+      ]);
+      var list = el("div", { class: "fx-list" });
+      g.items.forEach(function (f) { list.appendChild(sheetRow(f)); });
+      card.appendChild(list);
+      sheet.appendChild(card);
+    });
+    host.appendChild(sheet);
+
+    /* The traps are worth a page of their own. On the sheet they would double
+       its length; collected here they read as a checklist. */
+    var traps = [];
+    PMP.FORMULAS.forEach(function (g) {
+      g.items.forEach(function (f) { if (f.trap) traps.push([g.label, f.name, f.trap]); });
+    });
+    var tcard = el("div", { class: "card fx-grp", style: "margin-top:var(--sp-4)" }, [
+      el("span", { class: "eyebrow", text: "Where the marks go" }),
+      el("h3", { text: "The " + traps.length + " traps behind these formulas" }),
+      el("p", { class: "hint", text: "Almost none of the marks lost on calculation questions are lost on the arithmetic. They are lost here." })
+    ]);
+    var tlist = el("div", { class: "fx-list" });
+    traps.forEach(function (t) {
+      tlist.appendChild(el("div", { class: "fx-row" }, [
+        el("div", { class: "fx-row-t" }, [
+          el("span", { text: t[1] }),
+          el("span", { class: "fx-tag", text: t[0] })
+        ]),
+        el("p", { class: "fx-where", text: t[2] })
+      ]));
+    });
+    tcard.appendChild(tlist);
+    host.appendChild(tcard);
+  }
+
+  /* ── 10.06.3  THE ARITHMETIC ────────────────────────────────────────────
+     Every number this module shows, in either the calculators or the drill,
+     comes out of one of these five functions. They take plain values and
+     return plain values: no DOM, no formatting, no rounding beyond what the
+     mathematics requires. Rounding is a display decision and is made at the
+     point of display, so a chain of results never compounds it. */
+
+  /* Earned value and everything derived from it. Any field may be missing;
+     a result that cannot be computed comes back as null and the callers
+     render it as an em dash rather than as NaN. */
+  function evm(v) {
+    var bac = v.bac, pv = v.pv, ev = v.ev, ac = v.ac;
+    var has = function (x) { return typeof x === "number" && isFinite(x); };
+    var r = {};
+    r.cv  = has(ev) && has(ac) ? ev - ac : null;
+    r.sv  = has(ev) && has(pv) ? ev - pv : null;
+    r.cpi = has(ev) && has(ac) && ac !== 0 ? ev / ac : null;
+    r.spi = has(ev) && has(pv) && pv !== 0 ? ev / pv : null;
+    r.pctComplete = has(ev) && has(bac) && bac !== 0 ? ev / bac : null;
+    r.pctSpent    = has(ac) && has(bac) && bac !== 0 ? ac / bac : null;
+    r.eacCpi   = has(bac) && r.cpi ? bac / r.cpi : null;
+    r.eacAtyp  = has(ac) && has(bac) && has(ev) ? ac + (bac - ev) : null;
+    r.eacBoth  = has(ac) && has(bac) && has(ev) && r.cpi && r.spi && r.cpi * r.spi !== 0
+      ? ac + (bac - ev) / (r.cpi * r.spi) : null;
+    r.etc      = r.eacCpi !== null && has(ac) ? r.eacCpi - ac : null;
+    r.vac      = has(bac) && r.eacCpi !== null ? bac - r.eacCpi : null;
+    r.tcpiBac  = has(bac) && has(ev) && has(ac) && bac - ac !== 0 ? (bac - ev) / (bac - ac) : null;
+    r.tcpiEac  = has(bac) && has(ev) && has(ac) && r.eacCpi !== null && r.eacCpi - ac !== 0
+      ? (bac - ev) / (r.eacCpi - ac) : null;
+    return r;
+  }
+
+  /* Fixed price incentive fee. sellerShare is derived rather than taken, so a
+     buyer/seller pair that does not total 1.0 is impossible to enter. */
+  function pta(v) {
+    var buyer = v.buyerShare, seller = 1 - buyer;
+    var targetPrice = v.targetCost + v.targetFee;
+    var r = {
+      targetPrice: targetPrice,
+      sellerShare: seller,
+      pta: buyer ? (v.ceiling - targetPrice) / buyer + v.targetCost : null
+    };
+    if (typeof v.actualCost === "number" && isFinite(v.actualCost)) {
+      r.fee = v.targetFee + (v.targetCost - v.actualCost) * seller;
+      r.uncapped = v.actualCost + r.fee;
+      r.price = Math.min(r.uncapped, v.ceiling);
+      r.capped = r.uncapped > v.ceiling;
+      r.overPta = r.pta !== null && v.actualCost > r.pta;
+    }
+    return r;
+  }
+
+  /* Activity-on-node forward and backward pass, day numbering: the first
+     activity starts on day 1, so an activity of three days beginning on day 1
+     finishes on day 3. The \u00B11 terms in the passes are that convention and
+     nothing more; 05.6 says so on the sheet, because a question numbering
+     from day 0 drops them and the float figures are unchanged either way. */
+  function network(list) {
+    var byId = Object.create(null), ids = [], errs = [];
+    list.forEach(function (a) {
+      var id = String(a.id || "").trim();
+      if (!id) return;
+      if (byId[id]) { errs.push("There are two activities called " + id + "."); return; }
+      if (!isFinite(a.dur) || a.dur <= 0) { errs.push("Activity " + id + " needs a duration of at least 1."); return; }
+      byId[id] = { id: id, dur: a.dur, preds: [], succs: [] };
+      ids.push(id);
+    });
+    if (!ids.length) return { ok: false, errs: ["Add at least one activity."] };
+    list.forEach(function (a) {
+      var id = String(a.id || "").trim();
+      if (!byId[id]) return;
+      (a.preds || []).forEach(function (p) {
+        p = String(p).trim();
+        if (!p) return;
+        if (!byId[p]) { errs.push("Activity " + id + " depends on " + p + ", which is not in the list."); return; }
+        if (p === id) { errs.push("Activity " + id + " depends on itself."); return; }
+        if (byId[id].preds.indexOf(p) < 0) { byId[id].preds.push(p); byId[p].succs.push(id); }
+      });
+    });
+    if (errs.length) return { ok: false, errs: errs };
+
+    /* Kahn's algorithm. An order shorter than the list means a cycle, which
+       is reported rather than left to overflow the passes below. */
+    var indeg = Object.create(null), queue = [], order = [];
+    ids.forEach(function (id) { indeg[id] = byId[id].preds.length; if (!indeg[id]) queue.push(id); });
+    while (queue.length) {
+      var id = queue.shift();
+      order.push(id);
+      byId[id].succs.forEach(function (s) { if (--indeg[s] === 0) queue.push(s); });
+    }
+    if (order.length !== ids.length) return { ok: false, errs: ["The dependencies form a loop, so the network has no start."] };
+
+    order.forEach(function (id) {
+      var a = byId[id];
+      a.es = a.preds.length ? Math.max.apply(null, a.preds.map(function (p) { return byId[p].ef; })) + 1 : 1;
+      a.ef = a.es + a.dur - 1;
+      a.rank = a.preds.length ? Math.max.apply(null, a.preds.map(function (p) { return byId[p].rank; })) + 1 : 0;
+    });
+    var duration = Math.max.apply(null, ids.map(function (id) { return byId[id].ef; }));
+
+    order.slice().reverse().forEach(function (id) {
+      var a = byId[id];
+      a.lf = a.succs.length ? Math.min.apply(null, a.succs.map(function (s) { return byId[s].ls; })) - 1 : duration;
+      a.ls = a.lf - a.dur + 1;
+      a.tf = a.ls - a.es;
+      /* A terminal activity can slip until the project end date, so its free
+         float is measured against the finish rather than against a successor. */
+      a.ff = a.succs.length
+        ? Math.min.apply(null, a.succs.map(function (s) { return byId[s].es; })) - a.ef - 1
+        : duration - a.ef;
+      a.crit = a.tf === 0;
+    });
+
+    var acts = order.map(function (id) { return byId[id]; });
+    var critical = acts.filter(function (a) { return a.crit; }).map(function (a) { return a.id; });
+    /* More than one distinct chain can carry zero float. Counting the starts
+       is enough to say so honestly without enumerating every path. */
+    var critStarts = acts.filter(function (a) {
+      return a.crit && !a.preds.some(function (p) { return byId[p].crit; });
+    }).length;
+
+    var cols = [];
+    acts.forEach(function (a) { (cols[a.rank] || (cols[a.rank] = [])).push(a); });
+
+    return {
+      ok: true, acts: acts, byId: byId, duration: duration,
+      critical: critical, multipleCritical: critStarts > 1, cols: cols
+    };
+  }
+
+  /* Discounted cash flow. flows[0] is period 1; the outlay is separate and is
+     treated as period 0, so it is never discounted. */
+  function npvAt(c0, flows, rate) {
+    var s = -c0;
+    flows.forEach(function (c, i) { s += c / Math.pow(1 + rate, i + 1); });
+    return s;
+  }
+  function cash(c0, flows, rate) {
+    var discounted = flows.map(function (c, i) { return c / Math.pow(1 + rate, i + 1); });
+    var inflow = flows.reduce(function (a, b) { return a + b; }, 0);
+    var pvIn = discounted.reduce(function (a, b) { return a + b; }, 0);
+    var r = {
+      discounted: discounted,
+      npv: pvIn - c0,
+      pvIn: pvIn,
+      roi: c0 ? (inflow - c0) / c0 : null,
+      bcr: c0 ? pvIn / c0 : null,
+      payback: payback(c0, flows),
+      discPayback: payback(c0, discounted),
+      irr: irr(c0, flows)
+    };
+    return r;
+  }
+  function payback(c0, flows) {
+    var outstanding = c0, i;
+    for (i = 0; i < flows.length; i++) {
+      if (flows[i] >= outstanding) return i + (flows[i] ? outstanding / flows[i] : 0);
+      outstanding -= flows[i];
+    }
+    return null;                                  /* never recovered in the horizon */
+  }
+  /* Bisection rather than Newton: it cannot diverge, and the bracket check
+     means an unconventional flow pattern returns null instead of a wrong
+     root. Nothing on the exam requires an IRR computed by hand \u2014 see 05.6 \u2014
+     so this exists for the calculator, not for the drill. */
+  function irr(c0, flows) {
+    var lo = -0.9999, hi = 10;
+    var flo = npvAt(c0, flows, lo), fhi = npvAt(c0, flows, hi), k, mid, f;
+    if (!isFinite(flo) || !isFinite(fhi) || flo * fhi > 0) return null;
+    for (k = 0; k < 200; k++) {
+      mid = (lo + hi) / 2;
+      f = npvAt(c0, flows, mid);
+      if (f === 0) return mid;
+      if (flo * f < 0) { hi = mid; fhi = f; } else { lo = mid; flo = f; }
+    }
+    return (lo + hi) / 2;
+  }
+
+  /* Decision tree roll-up. Each branch is one decision option carrying its own
+     cost and a set of chance outcomes. Probabilities are checked per branch
+     rather than silently normalised: a set that does not total 1.0 is a
+     mistake in the question, and hiding it would teach the wrong lesson. */
+  function tree(branches) {
+    var out = branches.map(function (b) {
+      var p = b.outcomes.reduce(function (a, o) { return a + o.p; }, 0);
+      var emv = b.outcomes.reduce(function (a, o) { return a + o.p * o.payoff; }, 0);
+      return {
+        name: b.name, cost: b.cost, outcomes: b.outcomes,
+        pTotal: p, pOk: Math.abs(p - 1) < 1e-6,
+        emv: emv, net: emv - b.cost
+      };
+    });
+    var best = null;
+    out.forEach(function (b) { if (best === null || b.net > best.net) best = b; });
+    out.forEach(function (b) { b.best = best !== null && b === best; });
+    return { branches: out, best: best };
+  }
+
+  /* ── 10.06.4  CALCULATOR PLUMBING ───────────────────────────────────────
+     Inputs are built once and never rebuilt on a keystroke. Only the output
+     block is replaced, because re-rendering the field someone is typing into
+     moves the caret to the end and, on a phone, closes the keyboard. Adding
+     or removing a row is the one case that does rebuild, and that is a
+     deliberate click rather than a keystroke. */
+
+  function outHead(text) {
+    return el("p", { class: "eyebrow", style: "margin-top:var(--sp-3)", text: text });
+  }
+  function outRow(k, value, opts) {
+    opts = opts || {};
+    return el("div", { class: "fx-out-r" + (opts.lead ? " fx-lead" : "") }, [
+      el("div", { class: "fx-out-k" }, [
+        el("b", { text: k }),
+        opts.sub ? el("span", { text: "  " + opts.sub }) : null
+      ]),
+      el("div", { class: "fx-out-v", text: value }),
+      opts.note ? el("p", {
+        class: "fx-out-note" + (opts.tone ? " fx-flag fx-flag--" + opts.tone : ""),
+        text: opts.note
+      }) : null
+    ]);
+  }
+  function field(f, vals, onChange) {
+    var input = el("input", {
+      type: "text", inputmode: "decimal", autocomplete: "off",
+      value: vals[f.k] === null || vals[f.k] === undefined ? "" : String(vals[f.k])
+    });
+    input.addEventListener("input", function () {
+      var raw = input.value.trim();
+      vals[f.k] = raw === "" ? null : num(raw);
+      input.setAttribute("aria-invalid", raw !== "" && vals[f.k] === null ? "true" : "false");
+      onChange();
+    });
+    return el("label", { class: "fx-in" }, [
+      el("span", { class: "lbl" }, [
+        f.sym ? el("b", { text: f.sym }) : null,
+        el("span", { text: (f.sym ? "  " : "") + f.label })
+      ]),
+      input,
+      f.hint ? el("p", { class: "hint", text: f.hint }) : null
+    ]);
+  }
+
+  /* Editable table of rows. Columns are inputs unless they declare static(),
+     in which case they render as a read-only cell \u2014 used for the year numbers
+     in the cash-flow calculator, which are positional and not for editing. */
+  function rowsEditor(opts) {
+    var widths = opts.cols.map(function (c) { return c.width || "1fr"; }).join(" ") + " max-content";
+    var wrap = el("div", { class: "fx-rows" });
+    wrap.appendChild(el("div", { class: "fx-rows-hd", style: "grid-template-columns:" + widths },
+      opts.cols.map(function (c) { return el("span", { text: c.label }); })
+        .concat([el("span", { class: "sr-only", text: "Remove" })])));
+
+    opts.rows.forEach(function (row, i) {
+      var line = el("div", { class: "fx-rowset", style: "grid-template-columns:" + widths });
+      opts.cols.forEach(function (c) {
+        if (c.static) {
+          line.appendChild(el("span", { class: "fx-n hint", text: c.static(row, i) }));
+          return;
+        }
+        var input = el("input", {
+          type: "text", autocomplete: "off",
+          inputmode: c.text ? "text" : "decimal",
+          placeholder: c.placeholder || "",
+          "aria-label": c.label + ", row " + (i + 1),
+          value: row[c.k] === null || row[c.k] === undefined ? "" : String(row[c.k])
+        });
+        input.addEventListener("input", function () {
+          var raw = input.value;
+          row[c.k] = c.text ? raw : (raw.trim() === "" ? null : num(raw));
+          opts.onChange();
+        });
+        line.appendChild(input);
+      });
+      line.appendChild(el("button", {
+        class: "icon-btn", type: "button", "aria-label": "Remove row " + (i + 1),
+        disabled: opts.rows.length <= (opts.min || 1) ? true : null,
+        onclick: function () { opts.rows.splice(i, 1); opts.rebuild(); }
+      }, [icon("x")]));
+      wrap.appendChild(line);
+    });
+
+    return frag([
+      wrap,
+      el("button", {
+        class: "btn btn--sm", type: "button", style: "margin-top:var(--sp-3)",
+        onclick: function () { opts.rows.push(opts.blank()); opts.rebuild(); }
+      }, [opts.addLabel || "Add a row"])
+    ]);
+  }
+
+  /* ── 10.06.5  THE CALCULATORS ───────────────────────────────────────────
+     Eight, one per group on the sheet. A calculator either declares fields
+     and a run(), or takes over its own body for the three that edit a set of
+     rows rather than a fixed set of numbers. */
+
+  function need(v, keys) {
+    return keys.every(function (k) { return typeof v[k] === "number" && isFinite(v[k]); });
+  }
+  function waiting(what) {
+    return el("p", { class: "hint", style: "margin-top:var(--sp-4)", text: "Fill in " + what + " to see the results." });
+  }
+  function tone(good) { return good ? "good" : "bad"; }
+
+  var CALCS = [
+
+    { id: "evm", label: "Earned value cockpit",
+      blurb: "The three inputs and every measure derived from them, including all four forecasts.",
+      fields: [
+        { k: "bac", sym: "BAC", label: "Budget at completion", hint: "The approved baseline." },
+        { k: "pv",  sym: "PV",  label: "Planned value",        hint: "Budgeted cost of scheduled work." },
+        { k: "ev",  sym: "EV",  label: "Earned value",         hint: "BAC \u00D7 actual % complete." },
+        { k: "ac",  sym: "AC",  label: "Actual cost",          hint: "Money spent to date." }
+      ],
+      defaults: { bac: 250000, pv: 120000, ev: 100000, ac: 115000 },
+      run: function (v) {
+        if (!need(v, ["bac", "pv", "ev", "ac"])) return waiting("all four values");
+        var r = evm(v);
+        var out = [];
+        out.push(outHead("Where the project stands"));
+        out.push(outRow("CV", money(r.cv), {
+          sub: "cost variance", lead: true, tone: tone(r.cv >= 0),
+          note: r.cv >= 0 ? "Under budget on the work completed so far."
+                          : "Over budget by " + money(-r.cv) + " on the work completed so far."
+        }));
+        out.push(outRow("SV", money(r.sv), {
+          sub: "schedule variance", lead: true, tone: tone(r.sv >= 0),
+          note: r.sv >= 0 ? "Ahead of the plan, valued at budgeted rates."
+                          : "Behind the plan by " + money(-r.sv) + " of budgeted work. This is a value, not a number of days."
+        }));
+        out.push(outRow("CPI", n2(r.cpi), {
+          sub: "cost performance", tone: tone(r.cpi >= 1),
+          note: fmt(r.cpi * 100, 0) + "p of work earned for every pound spent."
+        }));
+        out.push(outRow("SPI", n2(r.spi), {
+          sub: "schedule performance", tone: tone(r.spi >= 1),
+          note: pc(r.spi, 0) + " of the planned pace."
+        }));
+        out.push(outRow("% complete", pc(r.pctComplete), { sub: "EV \u00F7 BAC" }));
+        out.push(outRow("% spent", pc(r.pctSpent), {
+          sub: "AC \u00F7 BAC",
+          note: "The gap between the two lines is the cost problem stated as a percentage."
+        }));
+
+        out.push(outHead("Where it lands"));
+        out.push(outRow("EAC", money(r.eacCpi), {
+          sub: "variances are typical", lead: true,
+          note: "BAC \u00F7 CPI. The default choice: assumes the efficiency to date continues."
+        }));
+        out.push(outRow("EAC", money(r.eacAtyp), {
+          sub: "variance was a one-off",
+          note: "AC + (BAC \u2212 EV). Remaining work at budgeted rates."
+        }));
+        out.push(outRow("EAC", money(r.eacBoth), {
+          sub: "cost and schedule both bite",
+          note: "AC + (BAC \u2212 EV) \u00F7 (CPI \u00D7 SPI). Only when the deadline must hold too."
+        }));
+        out.push(outRow("ETC", money(r.etc), { sub: "from the typical EAC" }));
+        out.push(outRow("VAC", money(r.vac), {
+          sub: "variance at completion", tone: tone(r.vac >= 0),
+          note: r.vac >= 0 ? "Forecast to come in under the budget."
+                           : "Forecast to overrun the budget by " + money(-r.vac) + "."
+        }));
+
+        out.push(outHead("What recovery would take"));
+        out.push(outRow("TCPI", n2(r.tcpiBac), {
+          sub: "to hit BAC", lead: true,
+          tone: r.tcpiBac === null ? null : (r.tcpiBac <= 1 ? "good" : r.tcpiBac <= 1.1 ? "warn" : "bad"),
+          note: r.tcpiBac === null ? "The budget is exhausted, so there is no remaining money to divide by."
+            : r.tcpiBac <= 1 ? "Achievable at less than the efficiency already being delivered."
+            : "Every remaining pound must buy " + n2(r.tcpiBac) + " of work, against the " + n2(r.cpi) + " achieved so far."
+        }));
+        out.push(outRow("TCPI", n2(r.tcpiEac), {
+          sub: "to hit the typical EAC",
+          note: "Same remaining work, measured against the revised forecast instead of the baseline."
+        }));
+        return out;
+      } },
+
+    { id: "pert", label: "Three-point estimating",
+      blurb: "Beta and triangular means, the spread around them, and the ranges worth quoting.",
+      fields: [
+        { k: "o", sym: "O", label: "Optimistic" },
+        { k: "m", sym: "M", label: "Most likely" },
+        { k: "p", sym: "P", label: "Pessimistic" }
+      ],
+      defaults: { o: 12, m: 18, p: 36 },
+      run: function (v) {
+        if (!need(v, ["o", "m", "p"])) return waiting("all three estimates");
+        if (v.p < v.o) return el("p", { class: "hint fx-flag fx-flag--bad", style: "margin-top:var(--sp-4)",
+          text: "The pessimistic estimate is below the optimistic one. Check the order." });
+        var beta = (v.o + 4 * v.m + v.p) / 6;
+        var tri = (v.o + v.m + v.p) / 3;
+        var sd = (v.p - v.o) / 6;
+        return [
+          outRow("tE", n2(beta), { sub: "PERT / beta", lead: true, note: "(O + 4M + P) \u00F7 6. The weighted mean, pulled towards the most likely value." }),
+          outRow("tE", n2(tri), { sub: "triangular", note: "(O + M + P) \u00F7 3. Used when the most likely value earns no extra weight." }),
+          outRow("\u03C3", n2(sd), { sub: "standard deviation", note: "(P \u2212 O) \u00F7 6. The most likely value plays no part in the spread." }),
+          outRow("\u03C3\u00B2", n2(sd * sd), { sub: "variance", note: "The form that can be added along a path. Standard deviations cannot be summed." }),
+          outHead("Ranges around the beta mean"),
+          outRow("68.3%", n2(beta - sd) + "  to  " + n2(beta + sd), { sub: "\u00B11\u03C3" }),
+          outRow("95.5%", n2(beta - 2 * sd) + "  to  " + n2(beta + 2 * sd), { sub: "\u00B12\u03C3", lead: true,
+            note: "The band to commit to. The mean on its own is a coin toss." }),
+          outRow("99.7%", n2(beta - 3 * sd) + "  to  " + n2(beta + 3 * sd), { sub: "\u00B13\u03C3" })
+        ];
+      } },
+
+    { id: "channels", label: "Communication channels",
+      blurb: "Channels now, channels after a change, and the difference between them.",
+      fields: [
+        { k: "n1", sym: "n\u2081", label: "People now", hint: "Count yourself." },
+        { k: "n2", sym: "n\u2082", label: "People after the change", hint: "Leave blank if nothing changes." }
+      ],
+      defaults: { n1: 8, n2: 11 },
+      run: function (v) {
+        if (!need(v, ["n1"])) return waiting("the current team size");
+        var c = function (n) { return n * (n - 1) / 2; };
+        var out = [outRow("C", n0(c(v.n1)), { sub: "channels among " + n0(v.n1) + " people", lead: true,
+          note: "n(n \u2212 1) \u00F7 2. The project manager is one of the n." })];
+        if (need(v, ["n2"])) {
+          var d = c(v.n2) - c(v.n1);
+          out.push(outRow("C\u2082", n0(c(v.n2)), { sub: "after the change" }));
+          out.push(outRow("\u0394C", (d >= 0 ? "+" : "") + n0(d), {
+            sub: "channels added", lead: true, tone: d > 0 ? "warn" : "good",
+            note: "Adding " + n0(v.n2 - v.n1) + " people adds " + n0(Math.abs(d)) + " channels, not " + n0(Math.abs(v.n2 - v.n1)) + "."
+          }));
+        }
+        return out;
+      } },
+
+    { id: "tree", label: "Decision tree",
+      blurb: "Roll chance nodes up to an EMV, subtract each branch's own cost, and take the best net value.",
+      custom: true },
+
+    { id: "pta", label: "Point of total assumption",
+      blurb: "The PTA on a fixed price incentive fee contract, and the fee and price at any actual cost.",
+      fields: [
+        { k: "targetCost", sym: "TC", label: "Target cost" },
+        { k: "targetFee",  sym: "TF", label: "Target fee" },
+        { k: "ceiling",    sym: "CP", label: "Ceiling price" },
+        { k: "buyerPct",   sym: "%",  label: "Buyer's share", hint: "The first number of an 80/20." },
+        { k: "actualCost", sym: "AC", label: "Actual cost", hint: "Optional: gives the fee and price." }
+      ],
+      defaults: { targetCost: 200000, targetFee: 30000, ceiling: 270000, buyerPct: 70, actualCost: 220000 },
+      run: function (v) {
+        if (!need(v, ["targetCost", "targetFee", "ceiling", "buyerPct"])) return waiting("the target cost, target fee, ceiling and share");
+        if (v.buyerPct <= 0 || v.buyerPct >= 100) return el("p", { class: "hint fx-flag fx-flag--bad", style: "margin-top:var(--sp-4)",
+          text: "The buyer's share must sit between 0 and 100." });
+        var r = pta({
+          targetCost: v.targetCost, targetFee: v.targetFee, ceiling: v.ceiling,
+          buyerShare: v.buyerPct / 100,
+          actualCost: need(v, ["actualCost"]) ? v.actualCost : null
+        });
+        var out = [
+          outRow("Target price", money(r.targetPrice), { sub: "target cost + target fee" }),
+          outRow("Share", n0(v.buyerPct) + " / " + n0(100 - v.buyerPct), { sub: "buyer / seller" }),
+          outRow("PTA", money(r.pta), {
+            lead: true, sub: "point of total assumption",
+            note: "Above an actual cost of " + money(r.pta) + " the seller absorbs every further pound. Note the divisor is the buyer's share and the addend is the target cost."
+          })
+        ];
+        if (r.fee !== undefined) {
+          out.push(outHead("At an actual cost of " + money(v.actualCost)));
+          out.push(outRow("Fee", money(r.fee), {
+            sub: "target fee " + (v.actualCost <= v.targetCost ? "+ share of the saving" : "\u2212 share of the overrun"),
+            tone: tone(r.fee >= v.targetFee)
+          }));
+          out.push(outRow("Price", money(r.price), {
+            lead: true, sub: r.capped ? "the ceiling binds" : "actual cost + fee",
+            tone: r.capped ? "bad" : null,
+            note: r.capped
+              ? "Cost plus fee comes to " + money(r.uncapped) + ", so the ceiling price applies instead. Apply the cap last."
+              : (r.overPta ? "Past the PTA: from here the seller funds the whole of any further overrun."
+                           : "Below the PTA, so the overrun is still being shared.")
+          }));
+        }
+        return out;
+      } },
+
+    { id: "network", label: "Float and the critical path",
+      blurb: "Forward and backward passes over a small network, with total float, free float and the critical path.",
+      custom: true },
+
+    { id: "cash", label: "NPV, IRR and payback",
+      blurb: "Discounted cash flow over an outlay and a stream of returns.",
+      custom: true },
+
+    { id: "flow", label: "Flow metrics and Little's Law",
+      blurb: "Leave one of the first three blank and it is solved for; the last two forecast the remaining iterations.",
+      fields: [
+        { k: "wip",   sym: "WIP", label: "Work in progress", hint: "Items started but not finished." },
+        { k: "thr",   sym: "TH",  label: "Throughput", hint: "Items finished per week." },
+        { k: "ct",    sym: "CT",  label: "Cycle time", hint: "Weeks per item." },
+        { k: "pts",   sym: "\u03A3", label: "Points remaining" },
+        { k: "vel",   sym: "v",   label: "Average velocity", hint: "Points per iteration." }
+      ],
+      defaults: { wip: 12, thr: 4, ct: null, pts: 145, vel: 22 },
+      run: function (v) {
+        var out = [];
+        var have = ["wip", "thr", "ct"].filter(function (k) { return typeof v[k] === "number" && isFinite(v[k]); });
+        if (have.length >= 2) {
+          var wip = v.wip, thr = v.thr, ct = v.ct, solved = null;
+          if (have.indexOf("ct") < 0)       { ct = wip / thr;  solved = "ct"; }
+          else if (have.indexOf("wip") < 0) { wip = thr * ct;  solved = "wip"; }
+          else if (have.indexOf("thr") < 0) { thr = wip / ct;  solved = "thr"; }
+          out.push(outRow("Cycle time", n2(ct) + " weeks", {
+            lead: solved === "ct", sub: solved === "ct" ? "WIP \u00F7 throughput" : "given"
+          }));
+          out.push(outRow("WIP", n2(wip) + " items", {
+            lead: solved === "wip", sub: solved === "wip" ? "throughput \u00D7 cycle time" : "given"
+          }));
+          out.push(outRow("Throughput", n2(thr) + " / week", {
+            lead: solved === "thr", sub: solved === "thr" ? "WIP \u00F7 cycle time" : "given",
+            note: solved ? "Little's Law. Halving the WIP at a fixed throughput halves the cycle time \u2014 which is the whole argument for a WIP limit."
+                         : "All three given, so nothing was solved for. They are consistent only if WIP = throughput \u00D7 cycle time."
+          }));
+        } else {
+          out.push(waiting("any two of WIP, throughput and cycle time"));
+        }
+        if (need(v, ["pts", "vel"]) && v.vel > 0) {
+          out.push(outHead("Velocity forecast"));
+          out.push(outRow("Iterations", n2(v.pts / v.vel), {
+            sub: "points remaining \u00F7 velocity"
+          }));
+          out.push(outRow("Rounded up", n0(Math.ceil(v.pts / v.vel)), {
+            lead: true, sub: "iterations to finish",
+            note: "Only accepted work counts towards velocity, so a nearly-finished story contributes nothing this iteration."
+          }));
+        }
+        return out;
+      } }
+  ];
+
+  /* ── 10.06.6  THE THREE THAT EDIT ROWS ──────────────────────────────────
+     A decision tree, a network and a cash-flow stream are all sets of rows
+     rather than fixed sets of numbers, so each takes over its own body. The
+     defaults are worked examples in their own right: the network ships with
+     an activity whose total float and free float differ, because that is the
+     distinction the exam tests and a network without a merge point cannot
+     show it. */
+
+  var treeRows = [
+    { b: "Build new",     p: 0.6, payoff: 1200000 },
+    { b: "Build new",     p: 0.4, payoff: 400000 },
+    { b: "Upgrade",       p: 0.6, payoff: 700000 },
+    { b: "Upgrade",       p: 0.4, payoff: 300000 }
+  ];
+  var treeCosts = { "Build new": 500000, "Upgrade": 180000 };
+
+  var netRows = [
+    { id: "A", dur: 3, preds: "" },
+    { id: "B", dur: 4, preds: "A" },
+    { id: "C", dur: 2, preds: "A" },
+    { id: "D", dur: 5, preds: "B" },
+    { id: "E", dur: 3, preds: "C" },
+    { id: "F", dur: 2, preds: "D, E" }
+  ];
+
+  var cashVals = { c0: 400000, rate: 10 };
+  var cashRows = [{ c: 120000 }, { c: 160000 }, { c: 180000 }, { c: 150000 }];
+
+  function branchNames() {
+    var seen = [];
+    treeRows.forEach(function (r) {
+      var n = String(r.b || "").trim();
+      if (n && seen.indexOf(n) < 0) seen.push(n);
+    });
+    return seen;
+  }
+
+  function renderTree(body, rebuild) {
+    var out = el("div", { class: "fx-out" });
+    function refresh() {
+      out.innerHTML = "";
+      var names = branchNames();
+      if (!names.length) { out.appendChild(waiting("at least one branch")); return; }
+      var built = tree(names.map(function (n) {
+        return {
+          name: n,
+          cost: isFinite(treeCosts[n]) ? treeCosts[n] : 0,
+          outcomes: treeRows.filter(function (r) { return String(r.b || "").trim() === n; })
+            .map(function (r) { return { p: isFinite(r.p) ? r.p : 0, payoff: isFinite(r.payoff) ? r.payoff : 0 }; })
+        };
+      }));
+      built.branches.forEach(function (b) {
+        out.appendChild(outHead(b.name));
+        b.outcomes.forEach(function (o, i) {
+          out.appendChild(outRow("Outcome " + (i + 1), n2(o.p) + " \u00D7 " + money(o.payoff) + "  =  " + money(o.p * o.payoff), {}));
+        });
+        out.appendChild(outRow("EMV at the chance node", money(b.emv), {
+          sub: "\u03A3 (P \u00D7 payoff)",
+          tone: b.pOk ? null : "warn",
+          note: b.pOk ? null : "The probabilities on this branch total " + n2(b.pTotal) + ", not 1.00."
+        }));
+        out.appendChild(outRow("Less the cost of the branch", "-" + money(b.cost), {}));
+        out.appendChild(outRow("Net value", money(b.net), {
+          lead: b.best, tone: b.best ? "good" : null,
+          sub: b.best ? "the recommendation" : null
+        }));
+      });
+      if (built.best) {
+        out.appendChild(outHead("Decision"));
+        out.appendChild(outRow("Choose", built.best.name, {
+          lead: true, sub: "net " + money(built.best.net),
+          note: "Work right to left: roll each chance node up to an EMV, subtract that branch's own cost once, then take the largest net value at the decision node."
+        }));
+      }
+    }
+
+    body.appendChild(rowsEditor({
+      rows: treeRows, min: 2, addLabel: "Add an outcome", onChange: refresh, rebuild: rebuild,
+      blank: function () { return { b: branchNames()[0] || "Option A", p: null, payoff: null }; },
+      cols: [
+        { k: "b", label: "Branch", text: true, width: "1.4fr", placeholder: "Build new" },
+        { k: "p", label: "Probability", width: "1fr", placeholder: "0.6" },
+        { k: "payoff", label: "Payoff", width: "1.2fr", placeholder: "1200000" }
+      ]
+    }));
+
+    var names = branchNames();
+    if (names.length) {
+      body.appendChild(el("p", { class: "eyebrow", style: "margin-top:var(--sp-5)", text: "Cost of each branch" }));
+      var costs = el("div", { class: "fx-inputs", style: "margin-top:var(--sp-2)" });
+      names.forEach(function (n) {
+        costs.appendChild(field({ k: n, label: n }, treeCosts, refresh));
+      });
+      body.appendChild(costs);
+    }
+
+    body.appendChild(out);
+    refresh();
+  }
+
+  function renderNetwork(body, rebuild) {
+    var out = el("div", { class: "fx-out" });
+    function refresh() {
+      out.innerHTML = "";
+      var r = network(netRows.map(function (a) {
+        return {
+          id: a.id, dur: isFinite(a.dur) ? a.dur : 0,
+          preds: String(a.preds || "").split(/[,\s]+/).filter(Boolean)
+        };
+      }));
+      if (!r.ok) {
+        r.errs.forEach(function (e) {
+          out.appendChild(el("p", { class: "hint fx-flag fx-flag--bad", text: e }));
+        });
+        return;
+      }
+      out.appendChild(nodeDiagram(r));
+
+      var table = el("table", { class: "tbl" }, [
+        el("thead", null, [el("tr", null, [
+          el("th", { text: "Activity" }), el("th", { class: "n", text: "Dur" }),
+          el("th", { class: "n", text: "ES" }), el("th", { class: "n", text: "EF" }),
+          el("th", { class: "n", text: "LS" }), el("th", { class: "n", text: "LF" }),
+          el("th", { class: "n", text: "TF" }), el("th", { class: "n", text: "FF" }),
+          el("th", { text: "" })
+        ])])
+      ]);
+      var tb = el("tbody");
+      r.acts.forEach(function (a) {
+        tb.appendChild(el("tr", null, [
+          el("td", null, [el("b", { class: "fx-n", text: a.id })]),
+          el("td", { class: "n", text: n0(a.dur) }),
+          el("td", { class: "n", text: n0(a.es) }), el("td", { class: "n", text: n0(a.ef) }),
+          el("td", { class: "n", text: n0(a.ls) }), el("td", { class: "n", text: n0(a.lf) }),
+          el("td", { class: "n", text: n0(a.tf) }), el("td", { class: "n", text: n0(a.ff) }),
+          el("td", null, [a.crit ? el("span", { class: "chip chip--incorrect", text: "critical" }) : null])
+        ]));
+      });
+      table.appendChild(tb);
+      out.appendChild(table);
+
+      out.appendChild(outRow("Duration", n0(r.duration) + " days", {
+        lead: true, sub: "the longest path through the network"
+      }));
+      out.appendChild(outRow("Critical path", r.critical.join(" \u2192 "), {
+        sub: r.multipleCritical ? "more than one chain carries zero float" : "every activity with zero total float"
+      }));
+      var slack = r.acts.filter(function (a) { return a.tf !== a.ff; });
+      if (slack.length) {
+        out.appendChild(outRow("Float differs on", slack.map(function (a) { return a.id; }).join(", "), {
+          sub: "total float \u2260 free float",
+          note: "On these, slipping uses float that belongs to the path rather than to the activity: it delays no successor's early start, but it does consume the total float of everything behind it."
+        }));
+      }
+    }
+
+    body.appendChild(rowsEditor({
+      rows: netRows, min: 1, addLabel: "Add an activity", onChange: refresh, rebuild: rebuild,
+      blank: function () { return { id: "", dur: null, preds: "" }; },
+      cols: [
+        { k: "id", label: "Activity", text: true, width: "1fr", placeholder: "G" },
+        { k: "dur", label: "Duration", width: "1fr", placeholder: "4" },
+        { k: "preds", label: "Predecessors", text: true, width: "1.8fr", placeholder: "D, E" }
+      ]
+    }));
+    body.appendChild(el("p", { class: "hint", text: "Day numbering: the first activity starts on day 1, so a three-day activity beginning on day 1 finishes on day 3." }));
+    body.appendChild(out);
+    refresh();
+  }
+
+  /* Activity-on-node boxes, laid out in columns by longest chain from a start.
+     Each box carries ES / dur / EF on the top row and LS / TF / LF beneath,
+     which is the layout most study guides use. Criticality is shown by a
+     heavier border and a filled label, never by colour alone. */
+  function nodeDiagram(r) {
+    var wrap = el("div", { class: "fx-net" });
+    r.cols.forEach(function (col) {
+      var c = el("div", { class: "fx-net-col" });
+      col.forEach(function (a) {
+        c.appendChild(el("div", { class: "fx-node" + (a.crit ? " is-crit" : "") }, [
+          el("i", { text: n0(a.es) }), el("i", { text: n0(a.dur) }), el("i", { text: n0(a.ef) }),
+          el("b", { text: a.id }),
+          el("s", { text: n0(a.ls) }), el("s", { text: "TF " + n0(a.tf) }), el("s", { text: n0(a.lf) })
+        ]));
+      });
+      wrap.appendChild(c);
+    });
+    return frag([
+      el("p", { class: "hint", text: "Each box reads ES \u00B7 duration \u00B7 EF across the top and LS \u00B7 total float \u00B7 LF beneath. A heavy border marks the critical path." }),
+      wrap
+    ]);
+  }
+
+  function renderCash(body, rebuild) {
+    var out = el("div", { class: "fx-out" });
+    function refresh() {
+      out.innerHTML = "";
+      if (!need(cashVals, ["c0", "rate"])) { out.appendChild(waiting("the outlay and the discount rate")); return; }
+      var flows = cashRows.map(function (r) { return isFinite(r.c) ? r.c : 0; });
+      var rate = cashVals.rate / 100;
+      var r = cash(cashVals.c0, flows, rate);
+
+      out.appendChild(outHead("Discounting each period"));
+      r.discounted.forEach(function (d, i) {
+        out.appendChild(outRow("Year " + (i + 1), money(d), {
+          sub: money(flows[i]) + " \u00F7 " + n2(Math.pow(1 + rate, i + 1))
+        }));
+      });
+      out.appendChild(outRow("Present value in", money(r.pvIn), { sub: "sum of the discounted returns" }));
+
+      out.appendChild(outHead("The decision figures"));
+      out.appendChild(outRow("NPV", money(r.npv), {
+        lead: true, tone: tone(r.npv >= 0),
+        note: r.npv >= 0
+          ? "Positive, so the project earns more than the " + n0(cashVals.rate) + "% discount rate. NPV is already net of the outlay."
+          : "Negative at " + n0(cashVals.rate) + "%: the returns do not cover the outlay once discounted."
+      }));
+      out.appendChild(outRow("IRR", r.irr === null ? "\u2014" : pc(r.irr), {
+        lead: true, tone: r.irr === null ? null : tone(r.irr >= rate),
+        sub: "the rate at which NPV = 0",
+        note: r.irr === null ? "No single rate zeroes this stream, which happens when the signs alternate."
+          : (r.irr >= rate ? "Above the discount rate, which is the same verdict the NPV gives."
+                           : "Below the discount rate, so the project destroys value.")
+      }));
+      out.appendChild(outRow("Payback", r.payback === null ? "not within the horizon" : n2(r.payback) + " years", {
+        sub: "undiscounted",
+        note: "Payback ignores everything after the recovery date and ignores the time value of money, which is why it is never the only test."
+      }));
+      out.appendChild(outRow("Discounted payback", r.discPayback === null ? "not within the horizon" : n2(r.discPayback) + " years", { sub: "same test, discounted flows" }));
+      out.appendChild(outRow("BCR", r.bcr === null ? "\u2014" : n2(r.bcr), {
+        sub: "PV of benefits \u00F7 outlay", tone: r.bcr === null ? null : tone(r.bcr >= 1),
+        note: "Compare against 1.0, not against zero."
+      }));
+      out.appendChild(outRow("ROI", r.roi === null ? "\u2014" : pc(r.roi), { sub: "undiscounted gain \u00F7 outlay" }));
+    }
+
+    var head = el("div", { class: "fx-inputs" }, [
+      field({ k: "c0", sym: "C\u2080", label: "Initial investment" }, cashVals, refresh),
+      field({ k: "rate", sym: "r", label: "Discount rate", hint: "As a percentage per period." }, cashVals, refresh)
+    ]);
+    body.appendChild(head);
+    body.appendChild(el("p", { class: "eyebrow", style: "margin-top:var(--sp-5)", text: "Returns by period" }));
+    body.appendChild(rowsEditor({
+      rows: cashRows, min: 1, addLabel: "Add a period", onChange: refresh, rebuild: rebuild,
+      blank: function () { return { c: null }; },
+      cols: [
+        { label: "Year", width: "80px", static: function (row, i) { return String(i + 1); } },
+        { k: "c", label: "Cash flow", width: "1fr", placeholder: "150000" }
+      ]
+    }));
+    body.appendChild(out);
+    refresh();
+  }
+
+  /* ── 10.06.7  CALCULATOR TAB ────────────────────────────────────────── */
+  function renderCalc(host) {
+    var picker = el("div", { class: "fx-picker" });
+    CALCS.forEach(function (c) {
+      picker.appendChild(el("button", {
+        class: "fx-pick", type: "button", "aria-pressed": c.id === calcId ? "true" : "false",
+        onclick: function () {
+          calcId = c.id;
+          PMP.Router.navigate("formulas", { tab: "calc", calc: calcId }, true);
+        }
+      }, [el("b", { text: c.label }), el("span", { text: c.blurb })]));
+    });
+    host.appendChild(picker);
+
+    var def = null;
+    CALCS.forEach(function (c) { if (c.id === calcId) def = c; });
+    if (!def) def = CALCS[0];
+
+    var card = el("div", { class: "card" }, [
+      el("span", { class: "eyebrow", text: "Calculator" }),
+      el("h2", { text: def.label }),
+      el("p", { text: def.blurb })
+    ]);
+    var body = el("div", { style: "margin-top:var(--sp-4)" });
+    card.appendChild(body);
+    host.appendChild(card);
+
+    function build() {
+      body.innerHTML = "";
+      if (def.id === "tree")    return renderTree(body, build);
+      if (def.id === "network") return renderNetwork(body, build);
+      if (def.id === "cash")    return renderCash(body, build);
+
+      var vals = calcVals[def.id];
+      if (!vals) {
+        vals = calcVals[def.id] = Object.create(null);
+        def.fields.forEach(function (f) {
+          var d = def.defaults ? def.defaults[f.k] : null;
+          vals[f.k] = d === undefined ? null : d;
+        });
+      }
+      var out = el("div", { class: "fx-out" });
+      function refresh() {
+        out.innerHTML = "";
+        PMP.dom.append(out, def.run(vals));
+      }
+      var inputs = el("div", { class: "fx-inputs" });
+      def.fields.forEach(function (f) { inputs.appendChild(field(f, vals, refresh)); });
+      body.appendChild(inputs);
+      body.appendChild(out);
+      refresh();
+    }
+    build();
+  }
+
+  /* ── 10.06.8  PROBLEM GENERATORS ────────────────────────────────────────
+     One function per problem shape. Each takes a random source and returns a
+     finished problem: stem, givens, the answer, the tolerance it is marked
+     to, the steps of the working, and any known wrong turns.
+
+     Two rules hold across all of them.
+
+     First, the numbers are chosen to divide. Budgets are multiples of 20,000
+     and percentages are multiples of 5, so an EV lands on a round figure and
+     the person is being tested on the method rather than on long division.
+     Where a figure has to be derived it is rounded to a sensible unit before
+     it is used, never after, so the working reproduces exactly.
+
+     Second, alts carries the value a named mistake produces. Marking checks
+     it before it reports a plain wrong answer, so someone who inverted CV
+     is told they inverted CV. That is the feedback worth having; \u201Cincorrect\u201D
+     on its own sends them back to re-do the same arithmetic the same way. */
+
+  function roundTo(x, unit) { return Math.round(x / unit) * unit; }
+  function padL(s, n) { s = String(s); while (s.length < n) s = " " + s; return s; }
+  function padR(s, n) { s = String(s); while (s.length < n) s += " "; return s; }
+
+  var PROJECTS = [
+    "the depot rollout", "the billing migration", "the site refit",
+    "the fleet upgrade", "the platform rebuild", "the warehouse fit-out",
+    "the payments programme", "the network refresh"
+  ];
+  function projectName(rand) { return pick(rand, PROJECTS); }
+
+  /* Shared EVM setup, so the variance and forecast generators cannot drift
+     apart on their arithmetic. */
+  /* Built backwards from the actual cost so that the cost performance index
+     is exactly representable at two decimal places.
+
+     This matters more than it looks. CPI is the only intermediate that later
+     steps divide by, so if it is an endless decimal, the working has to show
+     a rounded figure and then produce a result that figure does not actually
+     give: "820,000 / 1.10 = 745,556" is wrong by a hundred pounds, and a
+     reader who checks it on a calculator is right to conclude the solution is
+     broken. Choosing AC as a multiple of 40,000 and CPI as a multiple of 0.05
+     makes EV a whole multiple of 2,000, and a percent complete drawn from
+     fractions that divide it leaves BAC and PV whole as well. Every figure in
+     the working is then exact and every line reconciles.
+
+     The percent complete is also constrained to sit below the CPI, which
+     keeps AC below BAC \u2014 a project that has spent its entire budget has no
+     remaining money for a TCPI to divide by. */
+  var PCT_COMPLETE = [0.20, 0.25, 0.40, 0.50, 0.80];
+  function evmSetup(rand) {
+    var ac = between(rand, 120000, 600000, 40000);
+    var cpi = between(rand, 0.75, 1.20, 0.05);
+    var ev = round(ac * cpi, 2);                    /* whole multiple of 2,000 */
+    var usable = PCT_COMPLETE.filter(function (x) { return x < cpi; });
+    var actual = pick(rand, usable.length ? usable : [0.20]);
+    var bac = round(ev / actual, 2);                /* whole, and a multiple of 2,500 */
+    var planned = Math.max(0.05, Math.min(0.95, round(actual + between(rand, -0.10, 0.15, 0.05), 2)));
+    var pv = round(bac * planned, 2);               /* whole */
+    return { bac: bac, pv: pv, ev: ev, ac: ac, planned: planned, actual: actual, cpi: cpi };
+  }
+  /* EV and PV are derived in the working rather than handed over, which is how
+     the exam presents them: the percentages are what a status report gives
+     you. */
+  function evmGivens(s) {
+    return [
+      ["BAC", money(s.bac)],
+      ["Planned % complete", pc(s.planned, 0)],
+      ["Actual % complete", pc(s.actual, 0)],
+      ["AC", money(s.ac)]
+    ];
+  }
+  function evSteps(s, needPv) {
+    var out = [{
+      t: "Earned value is the anchor \u2014 it appears in all four of the variances and indices. It is the budget multiplied by the fraction of the work actually delivered, not by the fraction of the money spent.",
+      m: chain("EV", [
+        "BAC \u00D7 actual % complete",
+        mn(s.bac) + " \u00D7 " + n2(s.actual),
+        mn(s.ev)
+      ])
+    }];
+    if (needPv) out.push({
+      t: "Planned value is the same budget measured against the schedule instead: what should have been finished by today.",
+      m: chain("PV", [
+        "BAC \u00D7 planned % complete",
+        mn(s.bac) + " \u00D7 " + n2(s.planned),
+        mn(s.pv)
+      ])
+    });
+    return out;
+  }
+
+  function gEvmVariance(rand) {
+    var s = evmSetup(rand);
+    var which = pick(rand, ["cv", "sv", "cpi", "spi"]);
+    var r = evm(s);
+    var name = { cv: "cost variance", sv: "schedule variance", cpi: "cost performance index", spi: "schedule performance index" }[which];
+    var isMoney = which === "cv" || which === "sv";
+    var steps = evSteps(s, which === "sv" || which === "spi");
+    var answer, alts = [];
+
+    if (which === "cv") {
+      answer = r.cv;
+      steps.push({
+        t: "Cost variance is earned value minus actual cost. Variances subtract and indices divide, and both put earned value first.",
+        m: chain("CV", ["EV \u2212 AC", mn(s.ev) + " - " + mn(s.ac), mn(r.cv)])
+      });
+      steps.push({
+        t: r.cv >= 0
+          ? "Positive, so the work completed cost less than it was budgeted to cost \u2014 under budget by " + money(r.cv) + " on the work done so far."
+          : "Negative, so the work completed cost more than budgeted \u2014 over budget by " + money(-r.cv) + " on the work done so far."
+      });
+      alts.push({ v: s.ac - s.ev, why: "That is AC \u2212 EV. The convention puts earned value first, so every sign comes out inverted." });
+    } else if (which === "sv") {
+      answer = r.sv;
+      steps.push({
+        t: "Schedule variance is earned value minus planned value. It is measured in currency even though it describes schedule.",
+        m: chain("SV", ["EV \u2212 PV", mn(s.ev) + " - " + mn(s.pv), mn(r.sv)])
+      });
+      steps.push({
+        t: r.sv >= 0
+          ? "Positive, so more work has been earned than the plan called for by this date."
+          : "Negative: " + money(-r.sv) + " of budgeted work that should be finished is not. This is a value, not a number of days, and it falls back to zero by the end of even a late project because EV and PV both finish at BAC."
+      });
+      alts.push({ v: s.pv - s.ev, why: "That is PV \u2212 EV, which inverts the sign." });
+      alts.push({ v: s.ev - s.ac, why: "That is the cost variance, EV \u2212 AC. Schedule variance compares against planned value." });
+    } else if (which === "cpi") {
+      answer = r.cpi;
+      steps.push({
+        t: "The cost performance index is earned value divided by actual cost: work earned per pound spent.",
+        m: chain("CPI", ["EV \u00F7 AC", mn(s.ev) + " / " + mn(s.ac), n2(r.cpi)])
+      });
+      steps.push({
+        t: r.cpi >= 1
+          ? "At or above 1.00, so every pound spent has bought at least a pound of budgeted work."
+          : "Below 1.00: every pound spent has bought " + fmt(r.cpi * 100, 0) + "p of budgeted work."
+      });
+      alts.push({ v: s.ac / s.ev, why: "That is AC \u00F7 EV, the index inverted. Earned value is always the numerator." });
+    } else {
+      answer = r.spi;
+      steps.push({
+        t: "The schedule performance index is earned value divided by planned value: progress against the rate the plan assumed.",
+        m: chain("SPI", ["EV \u00F7 PV", mn(s.ev) + " / " + mn(s.pv), n2(r.spi)])
+      });
+      steps.push({
+        t: r.spi >= 1
+          ? "At or above 1.00, so the team is at least keeping pace with the plan."
+          : "Below 1.00: the team is running at " + pc(r.spi, 0) + " of the planned pace."
+      });
+      alts.push({ v: s.pv / s.ev, why: "That is PV \u00F7 EV, the index inverted." });
+      alts.push({ v: s.ev / s.ac, why: "That is the cost performance index. SPI divides by planned value." });
+    }
+
+    return {
+      group: "evm", label: name.charAt(0).toUpperCase() + name.slice(1),
+      stem: "On " + projectName(rand) + ", the figures below are reported at the end of the month. Calculate the " + name + ".",
+      given: evmGivens(s),
+      unit: isMoney ? "\u00A3" : "index",
+      answer: answer, dp: 2,
+      tol: isMoney ? Math.max(1, Math.abs(answer) * 0.001) : 0.005,
+      alts: alts, steps: steps,
+      trap: "Variances subtract and give a currency figure; indices divide and give a ratio. Earned value leads in all four."
+    };
+  }
+
+  function gEvmForecast(rand) {
+    var s = evmSetup(rand);
+    var r = evm(s);
+    var which = pick(rand, ["eac", "etc", "vac", "atyp"]);
+    var steps = evSteps(s, false);
+    var answer, alts = [], ask, note;
+
+    steps.push({
+      t: "The forecasts all run through the cost performance index, so take that next.",
+      m: chain("CPI", ["EV \u00F7 AC", mn(s.ev) + " / " + mn(s.ac), n2(r.cpi)])
+    });
+
+    if (which === "atyp") {
+      answer = r.eacAtyp;
+      ask = "The overrun came from a one-off supplier dispute that has now been settled, and the remaining work is expected to run at budgeted rates. Forecast the estimate at completion.";
+      steps.push({
+        t: "Because the variance will not recur, the money already spent stays spent and everything still to do is added at the original budgeted rates. The CPI above is deliberately not used.",
+        m: chain("EAC", ["AC + (BAC \u2212 EV)", mn(s.ac) + " + (" + mn(s.bac) + " - " + mn(s.ev) + ")", mn(s.ac) + " + " + mn(s.bac - s.ev), mn(r.eacAtyp)])
+      });
+      alts.push({ v: r.eacCpi, why: "That is BAC \u00F7 CPI, which assumes the variance is typical and will continue. The question says it was a one-off." });
+      note = "Wording like a one-time event, a settled dispute or a problem now fixed is what selects this form over BAC \u00F7 CPI.";
+    } else if (which === "eac") {
+      answer = r.eacCpi;
+      ask = "The variances to date are considered typical of the work remaining. Forecast the estimate at completion.";
+      steps.push({
+        t: "Typical variances mean the efficiency achieved so far is projected across everything still to do, so the whole budget is divided by that efficiency.",
+        m: chain("EAC", ["BAC \u00F7 CPI", mn(s.bac) + " / " + n2(r.cpi), mn(r.eacCpi)])
+      });
+      alts.push({ v: s.bac * r.cpi, why: "That multiplies by the CPI. A CPI below 1.00 must push the forecast above the budget, so the operation is division." });
+      alts.push({ v: r.eacAtyp, why: "That is AC + (BAC \u2212 EV), the form for a one-off variance. This question says the variances are typical." });
+      note = "This is the default form. It is right when the causes of the overrun are systemic and wrong when they were a single event that will not recur.";
+    } else if (which === "etc") {
+      answer = r.etc;
+      ask = "The variances to date are considered typical. How much more is the project forecast to cost from today?";
+      steps.push({
+        t: "Take the estimate at completion first, on the typical-variance assumption.",
+        m: chain("EAC", ["BAC \u00F7 CPI", mn(s.bac) + " / " + n2(r.cpi), mn(r.eacCpi)])
+      });
+      steps.push({
+        t: "The estimate to complete is whatever of that forecast has not been spent yet.",
+        m: chain("ETC", ["EAC \u2212 AC", mn(r.eacCpi) + " - " + mn(s.ac), mn(r.etc)])
+      });
+      alts.push({ v: s.bac - s.ev, why: "That is the remaining work at budgeted rates, which is the ETC only if the variances are treated as one-off." });
+      note = "ETC answers what is left to spend; EAC answers what the whole project will have cost.";
+    } else {
+      answer = r.vac;
+      ask = "The variances to date are considered typical. What is the forecast variance at completion?";
+      steps.push({
+        t: "Forecast the outturn first.",
+        m: chain("EAC", ["BAC \u00F7 CPI", mn(s.bac) + " / " + n2(r.cpi), mn(r.eacCpi)])
+      });
+      steps.push({
+        t: "Variance at completion is the budget less that forecast, and it carries a sign in the same direction as every other variance.",
+        m: chain("VAC", ["BAC \u2212 EAC", mn(s.bac) + " - " + mn(r.eacCpi), mn(r.vac)])
+      });
+      steps.push({
+        t: r.vac >= 0
+          ? "Positive, so the project is forecast to finish under budget by " + money(r.vac) + "."
+          : "Negative, so the project is forecast to overrun by " + money(-r.vac) + "."
+      });
+      alts.push({ v: r.eacCpi - s.bac, why: "That is EAC \u2212 BAC, which inverts the sign. Budget comes first, as it does in every variance." });
+      note = "A negative VAC is an overrun. The sign convention matches CV and SV.";
+    }
+
+    return {
+      group: "forecast", label: which === "etc" ? "Estimate to complete" : which === "vac" ? "Variance at completion" : "Estimate at completion",
+      stem: "On " + projectName(rand) + ", the figures below are reported at the end of the month. " + ask,
+      given: evmGivens(s),
+      unit: "\u00A3", answer: answer, dp: 2,
+      tol: Math.max(1, Math.abs(answer) * 0.002),
+      alts: alts, steps: steps, trap: note
+    };
+  }
+
+  function gTcpi(rand) {
+    var s = evmSetup(rand);
+    var r = evm(s);
+    var toEac = rand() < 0.4;
+    var answer = toEac ? r.tcpiEac : r.tcpiBac;
+    var steps = evSteps(s, false);
+
+    steps.push({
+      t: "Both TCPI formulas are the same idea: remaining work divided by remaining money. Take the remaining work first, which is the same either way.",
+      m: chain("Work left", ["BAC \u2212 EV", mn(s.bac) + " - " + mn(s.ev), mn(s.bac - s.ev)])
+    });
+
+    if (toEac) {
+      steps.push({
+        t: "The target here is the revised forecast, so the money left is measured against the estimate at completion rather than the baseline.",
+        m: chain("EAC", ["BAC \u00F7 CPI", mn(s.bac) + " / " + n2(r.cpi), mn(r.eacCpi)])
+      });
+      steps.push({
+        t: "Money still available against that revised target.",
+        m: chain("Money left", ["EAC \u2212 AC", mn(r.eacCpi) + " - " + mn(s.ac), mn(r.eacCpi - s.ac)])
+      });
+      steps.push({
+        t: "Divide the one by the other.",
+        m: chain("TCPI", ["(BAC \u2212 EV) \u00F7 (EAC \u2212 AC)", mn(s.bac - s.ev) + " / " + mn(r.eacCpi - s.ac), n2(r.tcpiEac)])
+      });
+    } else {
+      steps.push({
+        t: "The target is the original budget, so the money left is the budget less what has been spent.",
+        m: chain("Money left", ["BAC \u2212 AC", mn(s.bac) + " - " + mn(s.ac), mn(s.bac - s.ac)])
+      });
+      steps.push({
+        t: "Divide the one by the other.",
+        m: chain("TCPI", ["(BAC \u2212 EV) \u00F7 (BAC \u2212 AC)", mn(s.bac - s.ev) + " / " + mn(s.bac - s.ac), n2(r.tcpiBac)])
+      });
+    }
+    steps.push({
+      t: answer > 1
+        ? "Above 1.00, so from here every remaining pound must buy " + n2(answer) + " of work \u2014 against the " + n2(r.cpi) + " the team has actually been achieving. The wider that gap, the less credible the recovery."
+        : "At or below 1.00, so the target can be met at less than the efficiency already being delivered."
+    });
+
+    return {
+      group: "forecast", label: "To-complete performance index",
+      stem: "On " + projectName(rand) + ", the sponsor asks what efficiency the team must now achieve to finish "
+        + (toEac ? "on the revised forecast (the estimate at completion, assuming typical variances)" : "on the original budget")
+        + ". Calculate the TCPI.",
+      given: evmGivens(s),
+      unit: "index", answer: answer, dp: 2, tol: 0.005,
+      alts: [
+        { v: toEac ? r.tcpiBac : r.tcpiEac, why: "That is the other TCPI. Both share the numerator; only the denominator changes with the target." },
+        { v: 1 / answer, why: "The ratio is inverted. Remaining work goes on top." }
+      ],
+      steps: steps,
+      trap: "Remaining work over remaining money, every time. Change the target and only the denominator moves."
+    };
+  }
+
+  /* Both PERT formulas divide by six, so a triple drawn at random leaves tE
+     and \u03C3 as endless decimals \u2014 and \u03C3 then gets squared and summed in the path
+     roll-up, where a rounded 2.17 shown as squaring to 4.69 is visibly not
+     what 2.17\u00B2 comes to. Constraining the triple so that P \u2212 O is a multiple
+     of six and O \u2261 M (mod 3) makes tE, \u03C3 and \u03C3\u00B2 all whole numbers, and every
+     line of the working then reconciles exactly.
+
+     Writing O as M \u2212 3a and P as O + 6k does it: \u03C3 comes to k, and tE to
+     M \u2212 a + k. Drawing k above a keeps P above M, so the three stay in order. */
+  function pertTriple(rand) {
+    var m = between(rand, 16, 34, 1);
+    var a = between(rand, 1, 4, 1);
+    var k = a + between(rand, 1, 4, 1);
+    return { o: m - 3 * a, m: m, p: m - 3 * a + 6 * k };
+  }
+
+  function gPert(rand) {
+    var tri3 = pertTriple(rand);
+    var o = tri3.o, m = tri3.m, p = tri3.p;
+    var beta = (o + 4 * m + p) / 6;
+    var tri = (o + m + p) / 3;
+    var sd = (p - o) / 6;
+    var which = pick(rand, ["beta", "sd", "range"]);
+    var givens = [["Optimistic", mn(o) + " days"], ["Most likely", mn(m) + " days"], ["Pessimistic", mn(p) + " days"]];
+    var steps = [], answer, ask, label, alts = [];
+
+    if (which === "beta") {
+      label = "PERT expected duration"; answer = beta;
+      ask = "Calculate the PERT (beta) expected duration.";
+      steps.push({
+        t: "The beta estimate weights the most likely value by four and divides by the total of the weights, which is six.",
+        m: chain("tE", [
+          "(O + 4M + P) \u00F7 6",
+          "(" + mn(o) + " + 4 \u00D7 " + mn(m) + " + " + mn(p) + ") \u00F7 6",
+          "(" + mn(o) + " + " + mn(4 * m) + " + " + mn(p) + ") \u00F7 6",
+          mn(o + 4 * m + p) + " / 6",
+          n2(beta)
+        ])
+      });
+      steps.push({ t: "The answer sits between the most likely value and the pessimistic one, pulled towards the most likely because of the weight of four. An estimate that lands outside O and P is arithmetic that has gone wrong." });
+      alts.push({ v: tri, why: "That is the triangular estimate, (O + M + P) \u00F7 3. This question asks for the beta form." });
+      alts.push({ v: (o + 4 * m + p) / 3, why: "The weights total six, so the divisor is six. Dividing by three double-counts." });
+    } else if (which === "sd") {
+      label = "Standard deviation"; answer = sd;
+      ask = "Calculate the standard deviation of the estimate.";
+      steps.push({
+        t: "The spread depends only on the distance between the extremes. The most likely value plays no part in it at all.",
+        m: chain("\u03C3", [
+          "(P \u2212 O) \u00F7 6",
+          "(" + mn(p) + " - " + mn(o) + ") \u00F7 6",
+          mn(p - o) + " / 6",
+          n2(sd)
+        ])
+      });
+      steps.push({ t: "A wide gap between optimistic and pessimistic is what an uncertain estimate looks like numerically, whatever the most likely value happens to be." });
+      alts.push({ v: (p - m) / 6, why: "The numerator is pessimistic minus optimistic. The most likely value is not involved in the spread." });
+      alts.push({ v: sd * sd, why: "That is the variance, the square of the standard deviation." });
+    } else {
+      label = "Confidence range"; answer = beta + 2 * sd;
+      ask = "Calculate the upper end of the range you could commit to with roughly 95% confidence.";
+      steps.push({
+        t: "Take the beta expected duration first.",
+        m: chain("tE", ["(O + 4M + P) \u00F7 6", "(" + mn(o) + " + " + mn(4 * m) + " + " + mn(p) + ") \u00F7 6", n2(beta)])
+      });
+      steps.push({
+        t: "Then the standard deviation, from the two extremes.",
+        m: chain("\u03C3", ["(P \u2212 O) \u00F7 6", mn(p - o) + " / 6", n2(sd)])
+      });
+      steps.push({
+        t: "Roughly 95% confidence is two standard deviations either side of the mean, and the commitment is the upper end of that band.",
+        m: chain("Upper", ["tE + 2\u03C3", n2(beta) + " + 2 \u00D7 " + n2(sd), n2(beta) + " + " + n2(2 * sd), n2(beta + 2 * sd)])
+      });
+      steps.push({ t: "Committing to the mean is committing to a coin toss: half the outcomes fall the other side of it. Two sigma is the figure to give a sponsor." });
+      alts.push({ v: beta + sd, why: "One sigma is about 68% confidence. Roughly 95% needs two." });
+      alts.push({ v: beta + 3 * sd, why: "Three sigma is 99.7%. Two is the band that corresponds to roughly 95%." });
+    }
+
+    return {
+      group: "estimate", label: label,
+      stem: "A work package on " + projectName(rand) + " has been estimated three ways. " + ask,
+      given: givens, unit: "days", answer: answer, dp: 2, tol: 0.02,
+      alts: alts, steps: steps,
+      trap: "The beta form divides by six and weights M by four. The spread uses only P and O."
+    };
+  }
+
+  function gPertPath(rand) {
+    var acts = ["A", "B", "C"].map(function (id) {
+      var t = pertTriple(rand);
+      return { id: id, o: t.o, m: t.m, p: t.p, te: (t.o + 4 * t.m + t.p) / 6, sd: (t.p - t.o) / 6 };
+    });
+    var sumTe = acts.reduce(function (a, x) { return a + x.te; }, 0);
+    var sumVar = acts.reduce(function (a, x) { return a + x.sd * x.sd; }, 0);
+    var pathSd = Math.sqrt(sumVar);
+    var sumSd = acts.reduce(function (a, x) { return a + x.sd; }, 0);
+
+    return {
+      group: "estimate", label: "Path standard deviation",
+      stem: "Three activities run one after another on the critical path of " + projectName(rand) + ". Calculate the standard deviation of the path as a whole.",
+      given: acts.map(function (x) { return [x.id, mn(x.o) + " / " + mn(x.m) + " / " + mn(x.p)]; }),
+      unit: "days", answer: pathSd, dp: 2, tol: 0.03,
+      alts: [
+        { v: sumSd, why: "That adds the standard deviations. They cannot be summed \u2014 only variances can, which is the whole reason the variance form exists." },
+        { v: sumVar, why: "That is the path variance. The standard deviation is its square root." }
+      ],
+      steps: [
+        {
+          t: "Take each activity's standard deviation from its two extremes.",
+          m: acts.map(function (x) {
+            return padR(x.id, 3) + "\u03C3 = (" + padL(mn(x.p), 2) + " - " + padL(mn(x.o), 2) + ") / 6 = " + n2(x.sd);
+          }).join("\n"),
+          plain: true
+        },
+        {
+          t: "Square each one. Standard deviations cannot be added along a path, but variances can, and this is the step that makes the roll-up possible.",
+          m: acts.map(function (x) {
+            return padR(x.id, 3) + "\u03C3\u00B2 = " + padL(n2(x.sd), 6) + "\u00B2 = " + n2(x.sd * x.sd);
+          }).join("\n") + "\n" + padR("\u03A3", 3) + "\u03C3\u00B2 = " + n2(sumVar)
+        },
+        {
+          t: "Take the square root of the total to get back to a standard deviation.",
+          m: chain("Path \u03C3", ["\u221A(\u03A3 \u03C3\u00B2)", "\u221A" + n2(sumVar), n2(pathSd)])
+        },
+        {
+          t: "Notice the result is smaller than the sum of the three individual figures, which comes to " + n2(sumSd) + ". Uncertainty grows more slowly than path length, because the root pulls the total back down. Adding the deviations always overstates the risk."
+        }
+      ],
+      trap: "Sum the variances, then take the root. Never sum the standard deviations.",
+      extra: { sumTe: sumTe }
+    };
+  }
+
+  function gChannels(rand) {
+    var team = between(rand, 6, 18, 1);
+    var joining = between(rand, 2, 6, 1);
+    var asksDelta = rand() < 0.5;
+    var n1 = team + 1;                    /* the project manager is in the count */
+    var n2v = n1 + joining;
+    var c = function (n) { return n * (n - 1) / 2; };
+    var steps = [], answer, ask, label, alts = [];
+
+    if (!asksDelta) {
+      label = "Communication channels"; answer = c(n1);
+      ask = "How many lines of communication are there?";
+      steps.push({
+        t: "Count everyone who communicates, and that includes you. This is the single most common slip on this formula.",
+        m: chain("n", [mn(team) + " team members + 1 project manager", mn(n1)])
+      });
+      steps.push({
+        t: "Then apply the formula.",
+        m: chain("C", [
+          "n(n \u2212 1) \u00F7 2",
+          mn(n1) + " \u00D7 " + mn(n1 - 1) + " / 2",
+          mn(n1 * (n1 - 1)) + " / 2",
+          mn(c(n1))
+        ])
+      });
+      alts.push({ v: c(team), why: "That is " + mn(team) + " people. You are on the project too, so n is " + mn(n1) + "." });
+      alts.push({ v: n1 * (n1 - 1), why: "The pairs are counted twice without the division by two: A to B and B to A are one channel." });
+    } else {
+      label = "Channels added"; answer = c(n2v) - c(n1);
+      ask = "How many additional lines of communication does that create?";
+      steps.push({
+        t: "Count both totals, remembering to include yourself in each.",
+        m: "before = " + mn(team) + " + 1 = " + mn(n1) + "\nafter  = " + mn(n1) + " + " + mn(joining) + " = " + mn(n2v)
+      });
+      steps.push({
+        t: "Channels before the change.",
+        m: chain("C\u2081", ["n\u2081(n\u2081 \u2212 1) \u00F7 2", mn(n1) + " \u00D7 " + mn(n1 - 1) + " / 2", mn(c(n1))])
+      });
+      steps.push({
+        t: "Channels after it.",
+        m: chain("C\u2082", ["n\u2082(n\u2082 \u2212 1) \u00F7 2", mn(n2v) + " \u00D7 " + mn(n2v - 1) + " / 2", mn(c(n2v))])
+      });
+      steps.push({
+        t: "The question asks for the difference, not the total.",
+        m: chain("\u0394C", ["C\u2082 \u2212 C\u2081", mn(c(n2v)) + " - " + mn(c(n1)), mn(c(n2v) - c(n1))])
+      });
+      steps.push({
+        t: "Adding " + mn(joining) + " people has added " + mn(c(n2v) - c(n1)) + " channels. The growth is quadratic, which is why coordination cost rises so much faster than headcount and why a team that has doubled feels far more than twice as hard to run."
+      });
+      alts.push({ v: c(n2v), why: "That is the new total. The question asks how many were added, so subtract the old total." });
+      alts.push({ v: c(team + joining) - c(team), why: "Both counts leave the project manager out. Add one to each before applying the formula." });
+    }
+
+    return {
+      group: "comms", label: label,
+      stem: "You are the project manager on " + projectName(rand) + " with " + mn(team) + " team members"
+        + (asksDelta ? ", and " + mn(joining) + " more people are about to join. " : ". ") + ask,
+      given: asksDelta
+        ? [["Team members", mn(team)], ["Joining", mn(joining)], ["Project manager", "1"]]
+        : [["Team members", mn(team)], ["Project manager", "1"]],
+      unit: "channels", answer: answer, dp: 0, tol: 0.4,
+      alts: alts, steps: steps,
+      trap: "Count yourself. If the question changes the team size, work out both totals and subtract."
+    };
+  }
+
+  function gEmv(rand) {
+    var count = between(rand, 3, 4, 1);
+    var risks = [], i;
+    for (i = 0; i < count; i++) {
+      /* The last item is always an opportunity. A register of pure threats
+         makes the signed sum, the unsigned sum and the threats-only sum the
+         same number, which kills all three distractors at once and, worse,
+         removes the netting that is the point of the question. */
+      var opportunity = i === count - 1;
+      risks.push({
+        id: String.fromCharCode(82, 49 + i),
+        p: between(rand, 0.10, 0.60, 0.05),
+        impact: (opportunity ? 1 : -1) * between(rand, 20000, 200000, 5000),
+        kind: opportunity ? "opportunity" : "threat"
+      });
+    }
+    risks.forEach(function (r) { r.emv = r.p * r.impact; });
+    var total = risks.reduce(function (a, r) { return a + r.emv; }, 0);
+    var absTotal = risks.reduce(function (a, r) { return a + Math.abs(r.emv); }, 0);
+    var threatsOnly = risks.reduce(function (a, r) { return a + (r.impact < 0 ? r.emv : 0); }, 0);
+
+    return {
+      group: "risk", label: "Contingency reserve",
+      stem: "The risk register for " + projectName(rand) + " holds the items below. Calculate the expected monetary value of the register as a whole, which is the contingency reserve the project needs.",
+      given: risks.map(function (r) {
+        return [r.id + " \u00B7 " + r.kind, pc(r.p, 0) + " \u00D7 " + money(r.impact)];
+      }),
+      unit: "\u00A3", answer: total, dp: 2, tol: 1,
+      alts: [
+        { v: -absTotal, why: "That treats every item as a threat. Opportunities carry a positive impact and reduce the reserve." },
+        { v: absTotal, why: "That drops the signs entirely. Threats are negative and opportunities positive, and the register nets off." },
+        { v: threatsOnly, why: "That is the threats alone. The opportunities in the register belong in the same sum." }
+      ],
+      steps: [
+        {
+          t: "Expected monetary value for each item is its probability multiplied by its impact. The sign carries the meaning: a threat costs money, so its impact is negative; an opportunity is positive.",
+          m: risks.map(function (r) {
+            return padR(r.id, 4) + padL(n2(r.p), 5) + " \u00D7 " + padL(mn(r.impact), 9) + " = " + padL(mn(r.emv), 9);
+          }).join("\n"),
+          plain: true
+        },
+        {
+          t: "The reserve is the sum across the register, threats and opportunities together.",
+          m: chain("\u03A3 EMV", [
+            risks.map(function (r) { return mn(r.emv); }).join(" + ").replace(/\+ -/g, "- "),
+            mn(total)
+          ])
+        },
+        {
+          t: "This is the contingency reserve for known risks. It sits inside the cost baseline and the project manager can spend it. Management reserve, for the risks nobody has identified, sits outside both the baseline and this calculation."
+        }
+      ],
+      trap: "Sign convention is the mark. A 30% chance of a \u00A340,000 loss is an EMV of -12,000, and an opportunity nets against it rather than adding to it."
+    };
+  }
+
+  function gTree(rand) {
+    var names = pick(rand, [
+      ["Build in house", "Buy the platform"],
+      ["Run the pilot first", "Go straight to rollout"],
+      ["Refurbish the depot", "Lease a new one"]
+    ]);
+    function branch(name, rand) {
+      var cost = between(rand, 80000, 400000, 20000);
+      var p = between(rand, 0.45, 0.75, 0.05);
+      var high = between(rand, 400000, 1400000, 50000);
+      var low = between(rand, 50000, 350000, 25000);
+      return {
+        name: name, cost: cost,
+        outcomes: [
+          { label: "strong demand", p: p, payoff: high },
+          { label: "weak demand", p: round(1 - p, 2), payoff: low }
+        ]
+      };
+    }
+    var built = tree([branch(names[0], rand), branch(names[1], rand)]);
+    var a = built.branches[0], b = built.branches[1];
+    /* A tie makes the decision question meaningless, so nudge one branch. */
+    if (Math.abs(a.net - b.net) < 5000) {
+      b.cost += 20000; b.net = b.emv - b.cost;
+      built.best = a.net > b.net ? a : b;
+      a.best = built.best === a; b.best = built.best === b;
+    }
+    var best = built.best;
+
+    var given = [];
+    built.branches.forEach(function (br) {
+      given.push([br.name + " \u00B7 cost", money(br.cost)]);
+      br.outcomes.forEach(function (o) {
+        given.push([br.name + " \u00B7 " + o.label, n2(o.p) + " \u2192 " + money(o.payoff)]);
+      });
+    });
+
+    var steps = [];
+    built.branches.forEach(function (br) {
+      steps.push({
+        t: "Roll the chance node up for " + br.name + ": each outcome's probability multiplied by its payoff, then added.",
+        m: chain("EMV", [
+          br.outcomes.map(function (o) { return n2(o.p) + " \u00D7 " + mn(o.payoff); }).join("  +  "),
+          br.outcomes.map(function (o) { return mn(o.p * o.payoff); }).join("  +  "),
+          mn(br.emv)
+        ])
+      });
+      steps.push({
+        t: "Subtract what that branch costs to take. It comes off once, here at the branch, and never inside each outcome.",
+        m: chain("Net", ["EMV \u2212 cost", mn(br.emv) + " - " + mn(br.cost), mn(br.net)])
+      });
+    });
+    steps.push({
+      t: "At the decision node, take the branch with the largest net value.",
+      m: built.branches.map(function (br) {
+        return padR(br.name, 22) + padL(mn(br.net), 10) + (br.best ? "   \u25C0 best" : "");
+      }).join("\n")
+    });
+    steps.push({
+      t: "The recommendation is " + best.name + ", worth " + money(best.net) + " net, which is " + money(Math.abs(a.net - b.net)) + " ahead of the alternative. Work right to left through a tree: payoffs, then chance nodes, then the decision."
+    });
+
+    return {
+      group: "risk", label: "Decision tree roll-up",
+      stem: "A decision on " + projectName(rand) + " comes down to two options, each with the same two possible states of demand. Calculate the net expected value of the option you should recommend.",
+      given: given, unit: "\u00A3", answer: best.net, dp: 2, tol: 1,
+      alts: [
+        { v: best.emv, why: "That is the EMV at the chance node, before the branch's own cost is taken off." },
+        { v: (best === a ? b : a).net, why: "That is the net value of the other branch. The decision node takes the larger of the two." }
+      ],
+      steps: steps,
+      trap: "Subtract the branch cost once, at the branch. Probabilities at any one chance node must total 1.0."
+    };
+  }
+
+  function ptaSetup(rand) {
+    var targetCost = between(rand, 150000, 600000, 10000);
+    var targetFee = roundTo(targetCost * between(rand, 0.08, 0.15, 0.01), 1000);
+    var buyerPct = pick(rand, [60, 65, 70, 75, 80]);
+    var targetPrice = targetCost + targetFee;
+    var ceiling = roundTo(targetPrice * between(rand, 1.08, 1.22, 0.02), 5000);
+    return {
+      targetCost: targetCost, targetFee: targetFee, buyerPct: buyerPct,
+      targetPrice: targetPrice, ceiling: ceiling, buyerShare: buyerPct / 100
+    };
+  }
+  function ptaGivens(s) {
+    return [
+      ["Target cost", money(s.targetCost)],
+      ["Target fee", money(s.targetFee)],
+      ["Ceiling price", money(s.ceiling)],
+      ["Share (buyer / seller)", mn(s.buyerPct) + " / " + mn(100 - s.buyerPct)]
+    ];
+  }
+
+  function gPta(rand) {
+    var s = ptaSetup(rand);
+    var r = pta(s);
+    return {
+      group: "procure", label: "Point of total assumption",
+      stem: "A fixed price incentive fee contract on " + projectName(rand) + " is agreed on the terms below. Calculate the point of total assumption.",
+      given: ptaGivens(s), unit: "\u00A3", answer: r.pta, dp: 2, tol: 1,
+      alts: [
+        { v: (s.ceiling - s.targetPrice) / (1 - s.buyerShare) + s.targetCost, why: "The divisor is the buyer's share, not the seller's. The buyer is the one still absorbing cost below the PTA." },
+        { v: (s.ceiling - s.targetPrice) / s.buyerShare + s.targetPrice, why: "The addend is the target cost, not the target price. Adding the fee back in double-counts it." },
+        { v: s.ceiling - s.targetPrice, why: "That is only the headroom above the target price. It still has to be divided by the buyer's share and added to the target cost." }
+      ],
+      steps: [
+        {
+          t: "Target price first, because the formula works from the headroom between it and the ceiling.",
+          m: chain("Target price", ["target cost + target fee", mn(s.targetCost) + " + " + mn(s.targetFee), mn(s.targetPrice)])
+        },
+        {
+          t: "The headroom is how much of a cost overrun the ceiling still leaves room for.",
+          m: chain("Headroom", ["ceiling \u2212 target price", mn(s.ceiling) + " - " + mn(s.targetPrice), mn(s.ceiling - s.targetPrice)])
+        },
+        {
+          t: "Below the PTA the buyer absorbs their share of each pound of overrun, so the headroom stretches by one over the buyer's share. Then add the target cost, which is where the overrun is measured from.",
+          m: chain("PTA", [
+            "(headroom \u00F7 buyer share) + target cost",
+            mn(s.ceiling - s.targetPrice) + " / " + n2(s.buyerShare) + " + " + mn(s.targetCost),
+            mn((s.ceiling - s.targetPrice) / s.buyerShare) + " + " + mn(s.targetCost),
+            mn(r.pta)
+          ])
+        },
+        {
+          t: "At an actual cost of " + money(r.pta) + " the seller's fee has been eroded to the point where every further pound comes out of their own pocket. Below it the overrun is shared " + mn(s.buyerPct) + "/" + mn(100 - s.buyerPct) + "; above it the split stops mattering."
+        }
+      ],
+      trap: "Divide by the buyer's share and add the target cost. Swapping either is the classic way to lose this mark."
+    };
+  }
+
+  function gFee(rand) {
+    var s = ptaSetup(rand);
+    var over = rand() < 0.65;
+    var actualCost = over
+      ? roundTo(s.targetCost * between(rand, 1.04, 1.22, 0.02), 1000)
+      : roundTo(s.targetCost * between(rand, 0.86, 0.98, 0.02), 1000);
+    var r = pta({
+      targetCost: s.targetCost, targetFee: s.targetFee, ceiling: s.ceiling,
+      buyerShare: s.buyerShare, actualCost: actualCost
+    });
+    var askPrice = rand() < 0.45;
+    var sellerShare = 1 - s.buyerShare;
+    var variance = s.targetCost - actualCost;
+
+    var steps = [
+      {
+        t: "The seller's share is whatever the buyer's is not. It applies to a saving and to an overrun alike.",
+        m: chain("Seller share", ["1 \u2212 buyer share", "1 - " + n2(s.buyerShare), n2(sellerShare)])
+      },
+      {
+        t: "Then the cost variance against the target, keeping the sign: positive is an underrun, negative an overrun.",
+        m: chain("Variance", ["target cost \u2212 actual cost", mn(s.targetCost) + " - " + mn(actualCost), mn(variance)])
+      },
+      {
+        t: "The fee moves from the target fee by the seller's share of that variance.",
+        m: chain("Fee", [
+          "target fee + variance \u00D7 seller share",
+          mn(s.targetFee) + " + " + mn(variance) + " \u00D7 " + n2(sellerShare),
+          mn(s.targetFee) + " + " + mn(variance * sellerShare),
+          mn(r.fee)
+        ])
+      }
+    ];
+    if (askPrice) {
+      steps.push({
+        t: "The price is what the buyer pays: the cost actually incurred plus that fee.",
+        m: chain("Price", ["actual cost + fee", mn(actualCost) + " + " + mn(r.fee), mn(r.uncapped)])
+      });
+      steps.push({
+        t: r.capped
+          ? "Now apply the ceiling, and apply it last. The computed price is above " + money(s.ceiling) + ", so the ceiling is what the buyer pays and the seller absorbs the difference."
+          : "Check it against the ceiling of " + money(s.ceiling) + ". It comes in below, so the ceiling does not bind and the computed price stands.",
+        m: chain("Final price", [
+          "min(" + mn(r.uncapped) + ", " + mn(s.ceiling) + ")",
+          mn(r.price)
+        ])
+      });
+    } else {
+      steps.push({
+        t: over
+          ? "The seller has overrun the target, so they fund " + pc(sellerShare, 0) + " of the overrun out of their fee \u2014 " + money(-variance * sellerShare) + " of it."
+          : "The seller has come in under the target, so they keep " + pc(sellerShare, 0) + " of the saving as extra fee \u2014 " + money(variance * sellerShare) + " of it."
+      });
+    }
+
+    return {
+      group: "procure", label: askPrice ? "Final price under an FPIF" : "Final fee under an FPIF",
+      stem: "The fixed price incentive fee contract below closes out at an actual cost of " + money(actualCost) + ". Calculate the "
+        + (askPrice ? "final price the buyer pays" : "final fee the seller earns") + ".",
+      given: ptaGivens(s).concat([["Actual cost", money(actualCost)]]),
+      unit: "\u00A3", answer: askPrice ? r.price : r.fee, dp: 2, tol: 1,
+      /* The uncapped price is only a mistake when the ceiling actually binds.
+         Where it does not, it is the answer, so it is not offered at all. */
+      alts: askPrice
+        ? [
+            r.capped ? { v: r.uncapped, why: "That is cost plus fee before the ceiling is applied. Here the ceiling binds, and it is applied last of all." } : null,
+            { v: actualCost + s.targetFee, why: "That uses the target fee unchanged. The fee moves from target by the seller's share of the cost variance." }
+          ].filter(Boolean)
+        : [
+            { v: s.targetFee + variance * s.buyerShare, why: "That applies the buyer's share to the variance. The seller's fee moves by the seller's share." },
+            { v: s.targetFee - variance * sellerShare, why: "The sign is inverted: an underrun raises the fee and an overrun lowers it." }
+          ],
+      steps: steps,
+      trap: "The share is quoted buyer/seller. Apply the seller's fraction to the fee, and apply the ceiling last of all."
+    };
+  }
+
+  function gFloat(rand) {
+    var d = {
+      A: between(rand, 2, 5, 1), B: between(rand, 3, 7, 1), C: between(rand, 1, 4, 1),
+      D: between(rand, 3, 8, 1), E: between(rand, 2, 5, 1), F: between(rand, 2, 4, 1)
+    };
+    /* The lower branch must be the slack one, and by a visible margin, or the
+       float question has no content. */
+    var gap = (d.B + d.D) - (d.C + d.E);
+    if (gap < 2) d.D += (2 - gap) + between(rand, 0, 2, 1);
+
+    var list = [
+      { id: "A", dur: d.A, preds: [] },
+      { id: "B", dur: d.B, preds: ["A"] },
+      { id: "C", dur: d.C, preds: ["A"] },
+      { id: "D", dur: d.D, preds: ["B"] },
+      { id: "E", dur: d.E, preds: ["C"] },
+      { id: "F", dur: d.F, preds: ["D", "E"] }
+    ];
+    var r = network(list);
+    var slack = (d.B + d.D) - (d.C + d.E);
+    var which = pick(rand, ["duration", "tfC", "tfE", "ffE", "ffC"]);
+    var target = { tfC: "C", tfE: "E", ffE: "E", ffC: "C" }[which];
+    var act = target ? r.byId[target] : null;
+
+    var pathTop = d.A + d.B + d.D + d.F;
+    var pathBottom = d.A + d.C + d.E + d.F;
+
+    var ask = {
+      duration: "How long will the project take?",
+      tfC: "What is the total float of activity C?",
+      tfE: "What is the total float of activity E?",
+      ffE: "What is the free float of activity E?",
+      ffC: "What is the free float of activity C?"
+    }[which];
+    var answer = which === "duration" ? r.duration
+      : which === "tfC" || which === "tfE" ? act.tf : act.ff;
+
+    var steps = [
+      {
+        t: "There are two paths through this network. Add the durations along each: the longer one is the critical path and it sets the project duration.",
+        m: "A-B-D-F : " + [d.A, d.B, d.D, d.F].map(n0).join(" + ") + " = " + mn(pathTop) + "   \u25C0 longest\n"
+          + "A-C-E-F : " + [d.A, d.C, d.E, d.F].map(n0).join(" + ") + " = " + mn(pathBottom) + "\n"
+          + "Project duration = " + mn(r.duration) + " days"
+      },
+      {
+        t: "Forward pass, left to right. An activity starts the day after the latest of its predecessors finishes, and day numbering means a task of n days starting on day s finishes on day s + n \u2212 1.",
+        m: r.acts.map(function (a) {
+          return padR(a.id, 3) + "dur " + padL(mn(a.dur), 2) + "    ES " + padL(mn(a.es), 3) + "    EF " + padL(mn(a.ef), 3);
+        }).join("\n"),
+        plain: true
+      },
+      {
+        t: "Backward pass, right to left from the project finish on day " + mn(r.duration) + ". Take the minimum of the successors' late starts, not the maximum: the tightest successor is the binding one.",
+        m: r.acts.slice().reverse().map(function (a) {
+          return padR(a.id, 3) + "dur " + padL(mn(a.dur), 2) + "    LS " + padL(mn(a.ls), 3) + "    LF " + padL(mn(a.lf), 3);
+        }).join("\n"),
+        plain: true
+      },
+      {
+        t: "Total float is the difference between the late and early dates, and free float is measured against the earliest start of the successors instead.",
+        m: r.acts.map(function (a) {
+          return padR(a.id, 3) + "TF " + padL(mn(a.tf), 3) + "    FF " + padL(mn(a.ff), 3) + (a.crit ? "    critical" : "");
+        }).join("\n"),
+        plain: true
+      }
+    ];
+
+    if (which === "duration") {
+      steps.push({
+        t: "The longest path is the answer, and it is worth saying why that is not a contradiction: the critical path is the longest route through the work, which is exactly what makes it the shortest time the project can be finished in.",
+        m: chain("Duration", [mn(r.duration) + " days"])
+      });
+    } else if (which === "tfC" || which === "tfE") {
+      steps.push({
+        t: "For activity " + target + ", total float is how long it can slip before the project end date moves.",
+        m: chain("TF", ["LS \u2212 ES", mn(act.ls) + " - " + mn(act.es), mn(act.tf)])
+      });
+      steps.push({
+        t: "That float belongs to the path, not to the activity. The lower branch runs "
+          + mn(pathBottom) + " days against the critical " + mn(pathTop) + ", so C and E share the same "
+          + mn(slack) + " days of total float between them. Spend it on C and E has none left."
+      });
+    } else {
+      steps.push({
+        t: "For activity " + target + ", free float is how long it can slip before it delays any successor's early start.",
+        m: chain("FF", [
+          "min(ES of successors) \u2212 EF \u2212 1",
+          (act.succs.length ? mn(Math.min.apply(null, act.succs.map(function (s2) { return r.byId[s2].es; }))) : mn(r.duration + 1))
+            + " - " + mn(act.ef) + " - 1",
+          mn(act.ff)
+        ])
+      });
+      steps.push({
+        t: target === "C"
+          ? "Zero, even though C carries " + mn(act.tf) + " days of total float. E starts the very next day, so any slip on C pushes E straight away. The float is real but it belongs to the path, and C cannot use it without taking it from E."
+          : "E is the last activity on the slack branch before the merge at F, so it is the one that can actually absorb the "
+            + mn(act.ff) + " days without moving anything. Free float is never greater than total float, and a merge point is where the two most often differ."
+      });
+    }
+
+    return {
+      group: "schedule", label: which === "duration" ? "Project duration" : (which.charAt(0) === "t" ? "Total float" : "Free float"),
+      stem: "The network below describes " + projectName(rand) + ". " + ask,
+      given: list.map(function (a) {
+        return [a.id + " (" + mn(a.dur) + "d)", a.preds.length ? "after " + a.preds.join(", ") : "start"];
+      }),
+      unit: "days", answer: answer, dp: 0, tol: 0.4,
+      /* C and E sit on the same slack branch, so E's total and free float are
+         always equal and cannot serve as each other's distractor. Zero is the
+         live wrong turn on both: it is what gets written after reading the
+         lower branch as critical. finalise() drops whichever of these lands
+         on the answer for a given draw. */
+      alts: which === "duration"
+        ? [{ v: pathBottom, why: "That is the shorter path. A project cannot finish before its longest path does, which is exactly why the longest path sets the duration." }]
+        : (which.charAt(0) === "t"
+          ? [
+              { v: act.ff, why: "That is the free float. Total float measures against the project end date; free float measures against the next activity's early start." },
+              { v: 0, why: "Zero float would mean " + target + " is on the critical path. It is on the lower branch, which runs " + mn(pathBottom) + " days against the critical " + mn(pathTop) + "." }
+            ]
+          : [
+              { v: act.tf, why: "That is the total float, which the whole branch shares. Free float is only what this one activity can absorb without moving its own successor." },
+              { v: 0, why: "Zero is right for an activity whose successor starts the very next day. " + target + " is the last activity before the merge at F, so it has room that C does not." }
+            ]),
+      steps: steps,
+      trap: "Total float is against the project finish; free float is against the next activity. Free float is never the larger of the two."
+    };
+  }
+
+  function gNpv(rand) {
+    var outlay = between(rand, 200000, 700000, 20000);
+    var ratePct = pick(rand, [8, 10, 12]);
+    var rate = ratePct / 100;
+    var years = between(rand, 3, 4, 1);
+    var flows = [], i;
+    for (i = 0; i < years; i++) flows.push(between(rand, 80000, 320000, 10000));
+    var r = cash(outlay, flows, rate);
+    var undiscounted = flows.reduce(function (a, b) { return a + b; }, 0) - outlay;
+
+    return {
+      group: "finance", label: "Net present value",
+      stem: "A business case for " + projectName(rand) + " needs an outlay of " + money(outlay)
+        + " today, against the returns below. At a discount rate of " + mn(ratePct) + "%, what is the net present value?",
+      given: [["Outlay now", money(outlay)], ["Discount rate", mn(ratePct) + "%"]].concat(
+        flows.map(function (c, ix) { return ["Year " + (ix + 1), money(c)]; })),
+      unit: "\u00A3", answer: r.npv, dp: 2, tol: Math.max(50, Math.abs(r.npv) * 0.01),
+      alts: [
+        { v: undiscounted, why: "That is the undiscounted total less the outlay. Each year's return has to be divided by (1 + r) raised to that year." },
+        { v: r.pvIn, why: "That is the present value of the returns. NPV is net, so the outlay still comes off." }
+      ],
+      steps: [
+        {
+          t: "Discount each year's return back to today. The divisor is (1 + r) raised to the number of the year, so a return further out is worth proportionally less.",
+          m: flows.map(function (c, ix) {
+            return "Year " + (ix + 1) + "   " + padL(mn(c), 8) + " / " + n2(Math.pow(1 + rate, ix + 1))
+              + "  =  " + padL(n2(r.discounted[ix]), 11);
+          }).join("\n"),
+          plain: true
+        },
+        {
+          t: "Add the discounted returns to get the present value of everything coming in.",
+          m: chain("PV in", [
+            r.discounted.map(function (d) { return n2(d); }).join(" + "),
+            n2(r.pvIn)
+          ])
+        },
+        {
+          t: "Then take off the outlay, which needs no discounting because it is paid today.",
+          m: chain("NPV", ["PV in \u2212 outlay", n2(r.pvIn) + " - " + mn(outlay), n2(r.npv)])
+        },
+        {
+          t: r.npv >= 0
+            ? "Positive, so the project earns more than the " + mn(ratePct) + "% the money could earn elsewhere, and it is worth doing on this test. When two projects are compared, the higher NPV wins and their durations are irrelevant."
+            : "Negative, so at " + mn(ratePct) + "% the returns do not cover the outlay once the timing is accounted for. The project destroys value on this test."
+        }
+      ],
+      trap: "NPV is already net of the investment. Do not subtract the outlay twice, and do not compare projects on duration."
+    };
+  }
+
+  function gPayback(rand) {
+    var outlay = between(rand, 150000, 500000, 10000);
+    var flows = [], i;
+    for (i = 0; i < 4; i++) flows.push(between(rand, 60000, 200000, 5000));
+    /* Guarantee recovery inside the horizon, or the answer is "never". */
+    var total = flows.reduce(function (a, b) { return a + b; }, 0);
+    if (total <= outlay) flows[3] += outlay - total + between(rand, 20000, 80000, 5000);
+    var pb = payback(outlay, flows);
+    var fullYears = Math.floor(pb);
+    var recovered = flows.slice(0, fullYears).reduce(function (a, b) { return a + b; }, 0);
+    var outstanding = outlay - recovered;
+
+    var cum = -outlay, lines = [];
+    flows.forEach(function (c, ix) {
+      cum += c;
+      lines.push("Year " + (ix + 1) + "   +" + padL(mn(c), 8) + "    cumulative " + padL(mn(cum), 10));
+    });
+
+    return {
+      group: "finance", label: "Payback period",
+      stem: "An investment of " + money(outlay) + " in " + projectName(rand)
+        + " returns the amounts below. Calculate the payback period in years.",
+      given: [["Outlay", money(outlay)]].concat(flows.map(function (c, ix) { return ["Year " + (ix + 1), money(c)]; })),
+      unit: "years", answer: pb, dp: 2, tol: 0.02,
+      alts: [
+        { v: fullYears + 1, why: "That rounds up to the whole year. Payback is normally quoted with the part-year interpolated." },
+        { v: fullYears, why: "That is the last full year before recovery. The outstanding balance is recovered part way through the following one." }
+      ],
+      steps: [
+        {
+          t: "Run the cumulative cash flow forward from the outlay and find the year the balance turns positive.",
+          m: "Start     " + padL(mn(-outlay), 10) + "\n" + lines.join("\n"),
+          plain: true
+        },
+        {
+          t: "After " + mn(fullYears) + " full years, " + money(recovered) + " has come back, so this much of the outlay is still outstanding.",
+          m: chain("Outstanding", ["outlay \u2212 recovered", mn(outlay) + " - " + mn(recovered), mn(outstanding)])
+        },
+        {
+          t: "That balance is cleared part way through year " + mn(fullYears + 1) + ". Assuming the cash arrives evenly across the year, the fraction is the outstanding balance over that year's return.",
+          m: chain("Fraction", [
+            mn(outstanding) + " / " + mn(flows[fullYears]),
+            n2(outstanding / flows[fullYears])
+          ])
+        },
+        {
+          t: "Add the two together.",
+          m: chain("Payback", [mn(fullYears) + " + " + n2(outstanding / flows[fullYears]), n2(pb) + " years"])
+        },
+        {
+          t: "Payback says nothing about what happens after the recovery date and nothing about the time value of money. A project that pays back in two years and then stops beats one that pays back in three and runs for a decade, on this measure alone \u2014 which is exactly why it is never used alone."
+        }
+      ],
+      trap: "Interpolate the part-year. Payback ignores everything after recovery, and it is undiscounted unless the question says otherwise."
+    };
+  }
+
+  function gIrr(rand) {
+    var r1 = pick(rand, [8, 10, 12]);
+    var r2 = r1 + pick(rand, [4, 5, 6]);
+    /* The interpolated fraction is shown and then multiplied by the rate gap,
+       so it is drawn as an exact two-place value rather than left to fall out
+       of two independent NPVs. Choosing the total span first and taking a
+       fixed share of it does that. 0.50 is left out of the share list on
+       purpose: it would put the crossing exactly at the midpoint and make the
+       midpoint shortcut accidentally right. */
+    var span = pick(rand, [100000, 120000, 140000, 160000, 200000, 240000]);
+    var share = pick(rand, [0.25, 0.30, 0.35, 0.40, 0.45, 0.55, 0.60, 0.65, 0.70, 0.75]);
+    var npv1 = round(span * share, 2);
+    var npv2 = round(npv1 - span, 2);
+    var irrEst = r1 + share * (r2 - r1);
+
+    return {
+      group: "finance", label: "IRR by interpolation",
+      stem: "The business case for " + projectName(rand) + " has been discounted at two rates, giving the net present values below. Estimate the internal rate of return by interpolating between them.",
+      given: [["NPV at " + mn(r1) + "%", money(npv1)], ["NPV at " + mn(r2) + "%", money(npv2)]],
+      unit: "%", answer: irrEst, dp: 2, tol: 0.1,
+      alts: [
+        { v: (r1 + r2) / 2, why: "That is the midpoint, which is only the answer when the two NPVs happen to be equal in size. Here they are not, so the crossing is nearer the smaller one." },
+        { v: r2 - (npv1 / (npv1 - npv2)) * (r2 - r1), why: "The fraction is measured from the lower rate upwards. Start at " + mn(r1) + "% and add." }
+      ],
+      steps: [
+        {
+          t: "The internal rate of return is the discount rate at which net present value is zero. One of these rates gives a positive NPV and the other a negative one, so the crossing lies between them.",
+          m: mn(r1) + "%  \u2192  " + padL(mn(npv1), 9) + "   positive\n"
+            + mn(r2) + "%  \u2192  " + padL(mn(npv2), 9) + "   negative",
+          plain: true
+        },
+        {
+          t: "Work out how far along the gap the line crosses zero. The total vertical distance travelled is the first NPV minus the second, and subtracting a negative adds the two magnitudes together.",
+          m: chain("Fraction", [
+            "NPV\u2081 \u00F7 (NPV\u2081 \u2212 NPV\u2082)",
+            mn(npv1) + " / (" + mn(npv1) + " - " + mn(npv2) + ")",
+            mn(npv1) + " / " + mn(npv1 - npv2),
+            n2(npv1 / (npv1 - npv2))
+          ])
+        },
+        {
+          t: "Apply that fraction to the gap between the two rates and add it to the lower one.",
+          m: chain("IRR", [
+            "r\u2081 + fraction \u00D7 (r\u2082 \u2212 r\u2081)",
+            mn(r1) + " + " + n2(npv1 / (npv1 - npv2)) + " \u00D7 " + mn(r2 - r1),
+            mn(r1) + " + " + n2((npv1 / (npv1 - npv2)) * (r2 - r1)),
+            n2(irrEst) + "%"
+          ])
+        },
+        {
+          t: "This is a straight-line approximation across a curve, so it is an estimate rather than the exact rate. The exam never asks you to compute an IRR from first principles; it asks you to read one against a hurdle rate, and here anything above the cost of capital means the project clears its bar."
+        }
+      ],
+      trap: "Interpolate upwards from the lower rate. The denominator subtracts a negative, so it is the sum of the two magnitudes."
+    };
+  }
+
+  function gBcr(rand) {
+    var costs = between(rand, 200000, 900000, 20000);
+    var ratio = between(rand, 0.75, 1.9, 0.05);
+    var benefits = roundTo(costs * ratio, 5000);
+    var bcr = benefits / costs;
+    return {
+      group: "finance", label: "Benefit\u2013cost ratio",
+      stem: "Two figures have been prepared for " + projectName(rand) + ", both discounted to present value. Calculate the benefit\u2013cost ratio.",
+      given: [["PV of benefits", money(benefits)], ["PV of costs", money(costs)]],
+      unit: "ratio", answer: bcr, dp: 2, tol: 0.005,
+      alts: [
+        { v: costs / benefits, why: "The ratio is inverted. Benefits go on top." },
+        { v: benefits - costs, why: "That is the net benefit in currency. A ratio is a division." }
+      ],
+      steps: [
+        {
+          t: "The ratio is simply benefits over costs, both at present value so that the timing is already accounted for.",
+          m: chain("BCR", ["benefits \u00F7 costs", mn(benefits) + " / " + mn(costs), n2(bcr)])
+        },
+        {
+          t: bcr >= 1
+            ? "Above 1.0, so the benefits exceed the costs and the project clears the bar. Every " + money(1) + " of cost returns " + money(bcr) + " of benefit."
+            : "Below 1.0, so the project loses money even though the figure is positive. The comparison is always against 1.0, never against zero \u2014 a BCR of " + n2(bcr) + " is a loss-making case."
+        }
+      ],
+      trap: "Compare a BCR against 1.0, not against zero. Anything below 1.0 is a loss."
+    };
+  }
+
+  function gLittle(rand) {
+    var solveFor = pick(rand, ["ct", "thr", "wip"]);
+    /* All three arrangements get shown, so all three figures have to be exact:
+       a cycle time of 2.5714 displayed as 2.57 makes the WIP line read
+       7 × 2.57 = 18.00, which is not what 7 × 2.57 comes to. An even
+       throughput and a cycle time in half weeks keeps WIP a whole number of
+       items and every line reconciling. */
+    var thr = pick(rand, [2, 4, 6, 8, 10]);
+    var ct = pick(rand, [1.5, 2, 2.5, 3, 3.5, 4, 5]);
+    var wip = thr * ct;
+    var steps = [], answer, ask, unit, alts = [];
+
+    if (solveFor === "ct") {
+      answer = ct; unit = "weeks";
+      ask = "the average cycle time";
+      steps.push({
+        t: "Little's Law relates the three in one statement: the average cycle time of a stable system is the work in progress divided by the throughput.",
+        m: chain("CT", ["WIP \u00F7 throughput", mn(wip) + " items / " + mn(thr) + " per week", n2(ct) + " weeks"])
+      });
+      steps.push({
+        t: "Check the units cancel: items divided by items per week leaves weeks, which is what a cycle time is measured in. If the units do not come out right, the formula has been used upside down."
+      });
+      steps.push({
+        t: "This is the argument for a work-in-progress limit stated arithmetically. Cut the WIP from " + mn(wip) + " to " + mn(wip / 2)
+          + " while the team keeps finishing " + mn(thr) + " items a week, and the cycle time halves to " + n2(ct / 2)
+          + " weeks. Nobody worked faster; there was simply less work sitting in the queue."
+      });
+      alts.push({ v: wip * thr, why: "That multiplies. Cycle time is WIP divided by throughput \u2014 check the units: items \u00D7 items per week is not a time." });
+      alts.push({ v: thr / wip, why: "The ratio is inverted, which gives a rate rather than a duration." });
+    } else if (solveFor === "thr") {
+      answer = thr; unit = "items per week";
+      ask = "the throughput";
+      steps.push({
+        t: "Rearranging Little's Law for throughput gives work in progress over cycle time.",
+        m: chain("Throughput", ["WIP \u00F7 cycle time", mn(wip) + " / " + n2(ct), n2(thr) + " items per week"])
+      });
+      steps.push({ t: "Items divided by weeks gives items per week, which confirms the arrangement is the right way up." });
+      alts.push({ v: wip * ct, why: "That multiplies rather than divides." });
+    } else {
+      answer = wip; unit = "items";
+      ask = "the work in progress";
+      steps.push({
+        t: "Rearranging Little's Law for work in progress gives throughput multiplied by cycle time.",
+        m: chain("WIP", ["throughput \u00D7 cycle time", mn(thr) + " \u00D7 " + n2(ct), n2(wip) + " items"])
+      });
+      steps.push({ t: "Items per week multiplied by weeks leaves items, which is what work in progress counts." });
+      alts.push({ v: thr / ct, why: "That divides. Solving for WIP is the one arrangement that multiplies." });
+    }
+
+    var given = [];
+    if (solveFor !== "wip") given.push(["Work in progress", mn(wip) + " items"]);
+    if (solveFor !== "thr") given.push(["Throughput", mn(thr) + " items per week"]);
+    if (solveFor !== "ct") given.push(["Cycle time", n2(ct) + " weeks"]);
+
+    return {
+      group: "agile", label: "Little's Law",
+      stem: "A Kanban team on " + projectName(rand) + " has been running steadily for a quarter. From the figures below, calculate " + ask + ".",
+      given: given, unit: unit, answer: answer, dp: 2, tol: 0.02,
+      alts: alts, steps: steps,
+      trap: "Only one of the three arrangements multiplies. Check the units and the right one falls out."
+    };
+  }
+
+  function gVelocity(rand) {
+    var v = [between(rand, 14, 34, 1), between(rand, 14, 34, 1), between(rand, 14, 34, 1)];
+    /* The average is divided into the backlog in the next step, so it is
+       nudged onto a whole number rather than shown rounded and reused. */
+    v[2] += (3 - ((v[0] + v[1] + v[2]) % 3)) % 3;
+    var avg = (v[0] + v[1] + v[2]) / 3;
+    var remaining = between(rand, 120, 400, 5);
+    /* A backlog that divides exactly into the velocity makes the rounding
+       step \u2014 which is the entire point of this item \u2014 do nothing, and leaves
+       the rounded-up and rounded-down answers identical. Nudge it off the
+       boundary so a part iteration always has to be accounted for. */
+    if (remaining % avg === 0) remaining += 5;
+    var iterations = remaining / avg;
+
+    return {
+      group: "agile", label: "Iterations remaining",
+      stem: "A team on " + projectName(rand) + " has completed three iterations at the velocities below and has "
+        + mn(remaining) + " story points left in the backlog. How many further iterations will it take, rounded up to a whole iteration?",
+      given: [
+        ["Iteration 1", mn(v[0]) + " points"], ["Iteration 2", mn(v[1]) + " points"],
+        ["Iteration 3", mn(v[2]) + " points"], ["Backlog remaining", mn(remaining) + " points"]
+      ],
+      unit: "iterations", answer: Math.ceil(iterations), dp: 0, tol: 0.4,
+      alts: [
+        { v: round(iterations, 2), why: "That is the unrounded figure. Iterations are whole and a part iteration still needs a full one, so it rounds up." },
+        { v: Math.floor(iterations), why: "Rounding down leaves " + n2((iterations - Math.floor(iterations)) * avg) + " points with nowhere to go." }
+      ],
+      steps: [
+        {
+          t: "Average the observed velocities. Three iterations is the usual window: enough to smooth a bad sprint, recent enough to still describe this team.",
+          m: chain("Velocity", [
+            "(" + v.map(n0).join(" + ") + ") \u00F7 3",
+            mn(v[0] + v[1] + v[2]) + " / 3",
+            n2(avg) + " points per iteration"
+          ])
+        },
+        {
+          t: "Divide the remaining backlog by that rate.",
+          m: chain("Iterations", [
+            "points remaining \u00F7 velocity",
+            mn(remaining) + " / " + n2(avg),
+            n2(iterations)
+          ])
+        },
+        {
+          t: "Round up: a part iteration still occupies a whole one.",
+          m: chain("Answer", ["\u2308" + n2(iterations) + "\u2309", mn(Math.ceil(iterations)) + " iterations"])
+        },
+        {
+          t: "Only accepted work counts towards velocity, so a story that is nearly finished contributes nothing this iteration. And velocity is a forecasting tool for one team \u2014 comparing it between teams measures how they happened to size their points, not how much they deliver."
+        }
+      ],
+      trap: "Average first, then divide, then round up. Velocity counts accepted work only."
+    };
+  }
+
+  function gLeadTime(rand) {
+    /* Both divisions are shown and their difference is quoted, so backlog and
+       WIP are drawn as whole multiples of the throughput. */
+    var thr = pick(rand, [2, 4, 6]);
+    var lead = between(rand, 4, 14, 1);
+    var cycle = pick(rand, [0.5, 1, 1.5, 2]);
+    var backlog = thr * lead;
+    var wip = thr * cycle;
+
+    return {
+      group: "agile", label: "Lead time from the queue",
+      stem: "A support team on " + projectName(rand) + " has " + mn(backlog)
+        + " items waiting, including " + mn(wip) + " actively being worked, and finishes " + mn(thr)
+        + " items a week. A new request arrives today and joins the back of the queue. How long before it is delivered?",
+      given: [
+        ["Items in the system", mn(backlog)], ["Of those, in progress", mn(wip)],
+        ["Throughput", mn(thr) + " per week"]
+      ],
+      unit: "weeks", answer: lead, dp: 2, tol: 0.02,
+      alts: [
+        { v: cycle, why: "That is the cycle time, which starts when someone picks the item up. A new request has to wait behind everything already in the system first, and that whole wait is what the customer experiences." }
+      ],
+      steps: [
+        {
+          t: "Little's Law applies to whichever part of the system you draw the boundary around. Draw it around the queue as well as the work, and the answer is the lead time \u2014 what the customer actually waits.",
+          m: chain("Lead time", ["items in the system \u00F7 throughput", mn(backlog) + " / " + mn(thr), n2(lead) + " weeks"])
+        },
+        {
+          t: "Draw the boundary around only the items in progress and the same law gives the cycle time instead, which is much shorter.",
+          m: chain("Cycle time", ["WIP \u00F7 throughput", mn(wip) + " / " + mn(thr), n2(cycle) + " weeks"])
+        },
+        {
+          t: "The difference of " + n2(lead - cycle) + " weeks is time the item spends waiting before anyone touches it. Lead time is always at least the cycle time and usually far longer, and the gap between them is queue. That gap is what shrinks when work in progress is limited \u2014 which is why the customer's experience improves even though nobody is working any faster."
+        }
+      ],
+      trap: "Lead time starts when the customer asks; cycle time starts when work begins. The gap is queue."
+    };
+  }
+
+  var GENERATORS = [
+    { fn: gEvmVariance, group: "evm" },
+    { fn: gEvmForecast, group: "forecast" },
+    { fn: gTcpi,        group: "forecast" },
+    { fn: gPert,        group: "estimate" },
+    { fn: gPertPath,    group: "estimate" },
+    { fn: gChannels,    group: "comms" },
+    { fn: gEmv,         group: "risk" },
+    { fn: gTree,        group: "risk" },
+    { fn: gPta,         group: "procure" },
+    { fn: gFee,         group: "procure" },
+    { fn: gFloat,       group: "schedule" },
+    { fn: gNpv,         group: "finance" },
+    { fn: gPayback,     group: "finance" },
+    { fn: gIrr,         group: "finance" },
+    { fn: gBcr,         group: "finance" },
+    { fn: gLittle,      group: "agile" },
+    { fn: gVelocity,    group: "agile" },
+    { fn: gLeadTime,    group: "agile" }
+  ];
+
+  /* Some draws are degenerate, and in a degenerate draw a named wrong turn
+     lands on the right answer: a backlog that divides exactly into the
+     velocity makes the rounded-down figure identical to the rounded-up one,
+     an activity at the end of a slack branch has a free float equal to its
+     total float, and a benefit-cost ratio of exactly 1.0 is its own
+     reciprocal. Reporting \u201Cyou rounded the wrong way\u201D to somebody who did
+     not is worse than saying nothing, so any alt sitting within tolerance of
+     the answer is dropped.
+
+     This is done once, around every generator, rather than eighteen times
+     inside them. The generators stay readable \u2014 each one declares the mistake
+     its formula actually invites \u2014 and the guard holds for any generator
+     added later, including one whose degenerate case nobody anticipated.
+     mark() checks the answer before the alts in any case, so this has never
+     been able to mis-mark a correct answer; what it removes is a misleading
+     explanation attached to a correct one. */
+  function sanitise(p) {
+    if (p && p.alts) {
+      p.alts = p.alts.filter(function (a) {
+        if (typeof a.v !== "number" || !isFinite(a.v)) return false;
+        return Math.abs(a.v - p.answer) > (p.tol || 0);
+      });
+    }
+    return p;
+  }
+  GENERATORS.forEach(function (g) {
+    var raw = g.fn;
+    g.fn = function (rand) { return sanitise(raw(rand)); };
+  });
+
+  /* ── 10.06.9  MARKING ───────────────────────────────────────────────────
+     Three outcomes rather than two. A figure that matches a known wrong turn
+     is reported as that mistake by name, and one that is close but outside
+     tolerance is reported as a rounding difference rather than as an error of
+     method \u2014 telling someone their arithmetic is wrong when they rounded an
+     intermediate CPI to two places teaches them to distrust a correct
+     method. The answer is always checked first, so an alt that happens to
+     coincide with it can never steal a correct mark. */
+  /* The tolerance a problem declares is a floor, not the whole story. Someone
+     who works correctly and quotes the answer to the precision the question
+     is asked in must always be marked right, so the band is widened to at
+     least half a unit of the last displayed place. Without this a CPI whose
+     exact value is 0.6349 marks a perfectly correct "0.63" as wrong, which
+     teaches the reader to distrust a method that was never at fault. */
+  function tolFor(p) {
+    return Math.max(p.tol || 0.005, 0.5 * Math.pow(10, -(p.dp || 0)) + 1e-9);
+  }
+  function mark(p, raw) {
+    var v = num(raw);
+    if (v === null) return { verdict: "none" };
+    var tol = tolFor(p);
+    if (Math.abs(v - p.answer) <= tol) return { verdict: "right", given: v };
+    var hit = null;
+    (p.alts || []).forEach(function (a) {
+      if (hit) return;
+      if (typeof a.v === "number" && isFinite(a.v) && Math.abs(v - a.v) <= tol) hit = a;
+    });
+    if (hit) return { verdict: "wrong", given: v, why: hit.why };
+    var near = Math.max(tol * 25, Math.abs(p.answer) * 0.02);
+    if (Math.abs(v - p.answer) <= near) {
+      return {
+        verdict: "near", given: v,
+        why: "That is within a couple of per cent of the answer, which usually means an intermediate figure was rounded rather than the method being wrong. Carry full precision through and round only at the end."
+      };
+    }
+    return { verdict: "wrong", given: v };
+  }
+
+  /* A named wrong turn is only worth carrying while it is actually wrong.
+     Random inputs occasionally make one coincide with the answer \u2014 a cost
+     variance of exactly zero makes EV \u2212 AC and AC \u2212 EV the same number \u2014 and
+     a distractor sitting on top of the answer can never fire, because mark()
+     tests the answer first. Rather than leave dead entries in every
+     generator, they are stripped once, here, on the way out. */
+  function finalise(p) {
+    var tol = tolFor(p);
+    p.alts = (p.alts || []).filter(function (a) {
+      return typeof a.v === "number" && isFinite(a.v) && Math.abs(a.v - p.answer) > tol;
+    });
+    return p;
+  }
+
+  function newProblem() {
+    var pool = GENERATORS.filter(function (g) { return !drillGroup || g.group === drillGroup; });
+    if (!pool.length) pool = GENERATORS;
+    /* Seeded from §09.4 so a problem is reproducible from its seed, which is
+       what makes a reported bad question something that can be looked at
+       again rather than something that has already vanished. */
+    var seed = PMP.rng.seedFrom(String(Date.now()) + ":" + Math.random());
+    var rand = PMP.rng.seeded(seed);
+    var g = pool[Math.floor(rand() * pool.length)];
+    problem = finalise(g.fn(rand));
+    problem.seed = seed;
+    revealed = false;
+    lastMark = null;
+  }
+
+  function groupLabel(id) {
+    var out = id;
+    PMP.FORMULAS.forEach(function (g) { if (g.id === id) out = g.label; });
+    return out;
+  }
+
+  /* ── 10.06.10  WORKED SOLUTION ─────────────────────────────────────────
+     Always the whole thing. The brief for this view is a worked solution
+     rather than a number, so there is no short form and no collapsed state:
+     someone who got it right still gets the working, because the common case
+     is a right answer reached the long way round. */
+  function workedSolution(p) {
+    var wrap = el("div", { class: "fx-work" }, [
+      el("h3", { text: "Worked solution" })
+    ]);
+    var list = el("ol", { class: "fx-steps" });
+    p.steps.forEach(function (s) { list.appendChild(step(s.t, s.m, s.plain)); });
+    wrap.appendChild(list);
+    wrap.appendChild(el("div", { class: "fx-out", style: "margin-top:var(--sp-4)" }, [
+      outRow("Answer", fmtAnswer(p), { lead: true, sub: p.unit })
+    ]));
+    if (p.trap) {
+      wrap.appendChild(el("div", { class: "fx-trap" }, [
+        el("b", { text: "Where the mark goes.  " }),
+        el("span", { text: p.trap })
+      ]));
+    }
+    return wrap;
+  }
+  function fmtAnswer(p) {
+    var s = fmt(p.answer, p.dp);
+    if (p.unit === "\u00A3") return "\u00A3" + s;
+    if (p.unit === "%") return s + "%";
+    if (p.unit === "index" || p.unit === "ratio") return s;
+    return s + " " + p.unit;
+  }
+
+  /* ── 10.06.11  DRILL VIEW ─────────────────────────────────────────────── */
+  function renderDrill(host) {
+    if (!problem) newProblem();
+    var p = problem;
+
+    /* Header: scope, running tally, and a fresh problem. */
+    var tallyNode = el("span", { class: "fx-tally" });
+    function paintTally() {
+      tallyNode.innerHTML = "";
+      if (!tally.asked) {
+        PMP.dom.append(tallyNode, el("span", { text: "No problems marked yet this session." }));
+        return;
+      }
+      PMP.dom.append(tallyNode, [
+        el("b", { text: n0(tally.right) + " / " + n0(tally.asked) }),
+        el("span", { text: "  correct \u00B7 " + pc(tally.right / tally.asked, 0) + "  \u00B7  streak " }),
+        el("b", { text: n0(tally.streak) }),
+        el("span", { text: tally.best > tally.streak ? "  (best " + n0(tally.best) + ")" : "" })
+      ]);
+    }
+    paintTally();
+
+    var select = el("select", { class: "input", style: "min-width:220px", "aria-label": "Restrict the drill to one group" }, [
+      el("option", { value: "", selected: drillGroup ? null : true, text: "Every group" })
+    ]);
+    PMP.FORMULAS.forEach(function (g) {
+      var n = GENERATORS.filter(function (x) { return x.group === g.id; }).length;
+      if (!n) return;
+      select.appendChild(el("option", {
+        value: g.id, selected: drillGroup === g.id ? true : null,
+        text: g.label
+      }));
+    });
+    select.addEventListener("change", function () {
+      drillGroup = select.value;
+      newProblem();
+      PMP.Router.navigate("formulas", { tab: "drill", group: drillGroup }, true);
+    });
+
+    host.appendChild(el("div", { class: "fx-drill-hd" }, [
+      select,
+      el("span", { class: "spacer" }),
+      tallyNode
+    ]));
+
+    /* The problem itself. */
+    var card = el("div", { class: "card" }, [
+      el("span", { class: "eyebrow", text: groupLabel(p.group) + "  \u00B7  " + p.label }),
+      el("p", { class: "fx-stem", style: "margin-top:var(--sp-2)", text: p.stem })
+    ]);
+
+    var given = el("div", { class: "fx-given" });
+    p.given.forEach(function (g) {
+      given.appendChild(el("div", null, [
+        el("span", { text: g[0] }),
+        el("span", { text: g[1] })
+      ]));
+    });
+    card.appendChild(given);
+
+    var input = el("input", {
+      type: "text", inputmode: "decimal", autocomplete: "off",
+      "aria-label": "Your answer",
+      placeholder: p.unit === "\u00A3" ? "0.00" : "0"
+    });
+    var result = el("div");
+
+    function submit() {
+      if (revealed) return;
+      var res = mark(p, input.value);
+      if (res.verdict === "none") {
+        PMP.UI.toast("Type a number before checking.", "warn");
+        input.focus();
+        return;
+      }
+      tally.asked++;
+      if (res.verdict === "right") {
+        tally.right++;
+        tally.streak++;
+        if (tally.streak > tally.best) tally.best = tally.streak;
+      } else {
+        tally.streak = 0;
+      }
+      lastMark = res;
+      revealed = true;
+      paintTally();
+      paintResult();
+    }
+    function giveUp() {
+      if (revealed) return;
+      tally.asked++;
+      tally.streak = 0;
+      lastMark = { verdict: "shown" };
+      revealed = true;
+      paintTally();
+      paintResult();
+    }
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); if (revealed) { newProblem(); repaint(); } else submit(); }
+    });
+
+    var checkBtn = el("button", { class: "btn btn--primary", type: "button", onclick: submit }, [icon("check"), "Check"]);
+    var showBtn = el("button", { class: "btn", type: "button", onclick: giveUp }, "Show the working");
+
+    card.appendChild(el("div", { class: "fx-answer" }, [
+      input,
+      el("span", { class: "fx-unit", text: p.unit === "index" ? "as an index" : p.unit === "ratio" ? "as a ratio" : p.unit }),
+      checkBtn, showBtn
+    ]));
+    card.appendChild(result);
+    host.appendChild(card);
+
+    function paintResult() {
+      result.innerHTML = "";
+      if (!revealed) return;
+      input.disabled = true;
+      checkBtn.disabled = true;
+      showBtn.disabled = true;
+
+      var m = lastMark;
+      if (m.verdict !== "shown") {
+        var kind = m.verdict === "right" ? "right" : m.verdict === "near" ? "near" : "wrong";
+        var text = m.verdict === "right"
+          ? "Correct \u2014 " + fmtAnswer(p) + "."
+          : (m.verdict === "near" ? "Close: you answered " + fmt(m.given, p.dp) + ", and the answer is " + fmtAnswer(p) + "."
+                                  : "Not right: you answered " + fmt(m.given, p.dp) + ", and the answer is " + fmtAnswer(p) + ".");
+        result.appendChild(el("div", { class: "fx-verdict fx-verdict--" + kind }, [
+          icon(m.verdict === "right" ? "check" : "alert"),
+          el("span", { text: text })
+        ]));
+        if (m.why) {
+          result.appendChild(el("p", { class: "hint", style: "margin-top:var(--sp-2)", text: m.why }));
+        }
+      }
+
+      result.appendChild(workedSolution(p));
+
+      result.appendChild(el("div", { class: "filter-bar", style: "margin-top:var(--sp-5)" }, [
+        el("button", {
+          class: "btn btn--primary", type: "button",
+          onclick: function () { newProblem(); repaint(); }
+        }, [icon("target"), "Another problem"]),
+        el("span", { class: "spacer" }),
+        el("span", { class: "hint fx-n", text: "seed " + p.seed.toString(36) })
+      ]));
+    }
+
+    paintResult();
+    if (!revealed) setTimeout(function () { try { input.focus(); } catch (e) {} }, 0);
+  }
+
+  /* ── 10.06.12  ROUTE ────────────────────────────────────────────────────
+     The tab, the chosen calculator and the drill scope all live in the query
+     string, so a particular calculator or a drill restricted to procurement
+     is a link someone can keep. Nothing here is written to the store: which
+     tab was open is not a preference worth surviving a reload. */
+  function renderTabs(host) {
+    var bar = el("div", { class: "fx-tabs", role: "tablist", "aria-label": "Formula lab sections" });
+    TABS.forEach(function (t) {
+      bar.appendChild(el("button", {
+        class: "fx-tab", type: "button", role: "tab",
+        "aria-selected": t.id === tab ? "true" : "false",
+        onclick: function () {
+          if (tab === t.id) return;
+          PMP.Router.navigate("formulas", { tab: t.id }, true);
+        }
+      }, [icon(t.icon), t.label]));
+    });
+    host.appendChild(bar);
+  }
+
+  function view(host, params) {
+    params = params || {};
+    if (params.tab && TABS.some(function (t) { return t.id === params.tab; })) tab = params.tab;
+    if (params.calc && CALCS.some(function (c) { return c.id === params.calc; })) calcId = params.calc;
+    if (typeof params.group === "string") {
+      var ok = params.group === "" || GENERATORS.some(function (g) { return g.group === params.group; });
+      if (ok && params.group !== drillGroup) { drillGroup = params.group; problem = null; }
+    }
+
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "\u00A73.7" }),
+      el("h2", { text: "Formula lab" }),
+      el("p", { text: "A reference sheet built for paper, calculators for the awkward ones, and randomised problems that show the whole working rather than the answer." })
+    ]));
+    renderTabs(host);
+
+    var panel = el("div", { role: "tabpanel" });
+    host.appendChild(panel);
+    if (tab === "calc") renderCalc(panel);
+    else if (tab === "drill") renderDrill(panel);
+    else renderSheet(panel);
+  }
+
+  PMP.Router.register("formulas", { title: "Formula lab", render: view });
+
+  return {
+    /* Exported because these are the parts worth testing: every figure this
+       view puts on screen comes out of one of them, and §12.2's boot check
+       exercises evm() and network() against known values. */
+    evm: evm,
+    pta: pta,
+    network: network,
+    cash: cash,
+    tree: tree,
+    payback: payback,
+    irr: irr,
+    mark: mark,
+    generators: GENERATORS,
+    finalise: finalise,
+    newProblem: newProblem,
+    get problem() { return problem; },
+    get tally() { return tally; }
+  };
+})();
+
+
 /* ── 10.13  DATA PORTABILITY ────────────────────────────────────────────────
    Both directions, for both kinds of file: progress out and back in, question
    packs out and back in. Four decisions worth knowing:
@@ -17259,6 +20520,9 @@ PMP.Shell = (function () {
     ])
   });
 
+  /* §10.06 has landed and registered "formulas" already, so register() leaves
+     this alone. Kept on the same terms as the flashcards stub: deleting the
+     module should not leave a nav entry pointing at nothing. */
   register("formulas", {
     title: "Formula lab",
     render: stub("Formula lab", "A printable reference sheet and a generator that marks randomised numeric problems.", [
@@ -17404,6 +20668,5 @@ PMP.Shell = (function () {
   else run();
 })();
 </script>
-<script src="pack-loader.js"></script>
 </body>
 </html>
