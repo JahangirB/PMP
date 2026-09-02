@@ -1,0 +1,1883 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "People 7 — Knowledge transfer",
+  "questions": [
+    {
+      "id": "pmp-p7-101",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "decision-log",
+        "single-point-of-knowledge",
+        "onboarding"
+      ],
+      "stem": "You are eight months into giving a group of eleven veterinary practices a single appointments and clinical records system. Every design decision so far — why branch-level pricing was dropped, why the vaccination reminder rules were narrowed to two species — sits in your own notebook and nowhere else. A business analyst joins next week and will take on half the remaining design work. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move the decisions into a shared record that names each decision, its reason and its date, before she starts.",
+          "correct": true,
+          "rationale": "The reasoning behind a decision is the part that decays fastest and is hardest to reconstruct. Putting it somewhere with an address means the next person can check it without needing you to be available or to remember."
+        },
+        {
+          "id": "b",
+          "text": "Brief her verbally in her first week and keep the notebook as your working copy.",
+          "correct": false,
+          "rationale": "A briefing transfers what you remember to say on one morning, and leaves the record in a single copy held by one person. It feels like a handover because someone was told."
+        },
+        {
+          "id": "c",
+          "text": "Give her the notebook to read and answer her questions as they arise.",
+          "correct": false,
+          "rationale": "Personal notes are written by the author for the author: they omit the context the writer already had. Handing them over transfers the shorthand and not the meaning."
+        },
+        {
+          "id": "d",
+          "text": "Wait until she has enough project context for the decisions to make sense, then walk her through them.",
+          "correct": false,
+          "rationale": "This treats the risk as her readiness to receive, when the actual risk is that the only copy sits with one person. Deferring capture makes the timing of the transfer depend on your continued presence."
+        }
+      ],
+      "explanation": "Knowledge held in one place by one person is a project risk regardless of how good that person is, and the fix does not wait on a successor being ready. What has to survive is not the decision but the reasoning attached to it, because a decision without its reasoning cannot be reviewed, only obeyed or overturned. Capture is cheap while the reasoning is fresh and expensive once it has to be reconstructed.",
+      "mindset": "Write down why, not just what, while the why is still in living memory."
+    },
+    {
+      "id": "pmp-p7-102",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "recorded-material",
+        "pull-based-learning",
+        "support-load"
+      ],
+      "stem": "Your squad builds ordering and delivery-round software for a craft brewery. Before a long-serving developer moved to another team, he recorded eleven hours of screen-share walkthroughs covering the routing engine. Four months on, two people have opened the recordings and neither finished one. The routing engine still generates most of the squad's support load. What is the most useful next step?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the two people now handling routing support work the live tickets, using the recordings only to answer the questions those tickets raise, and write up what they find.",
+          "correct": true,
+          "rationale": "Real work supplies the questions, which is what turns eleven hours of material into a few minutes that matter. It also tests whether the recordings actually contain what the squad needs, which nobody currently knows."
+        },
+        {
+          "id": "b",
+          "text": "Ask the squad to block time to watch the recordings in full.",
+          "correct": false,
+          "rationale": "It makes consumption the goal and ignores that eleven undirected hours is a cost people will rationally avoid. Scheduling the viewing does not give anyone a reason to retain any of it."
+        },
+        {
+          "id": "c",
+          "text": "Have the recordings transcribed and indexed so they are searchable.",
+          "correct": false,
+          "rationale": "This invests further in the artefact rather than in the transfer. Findability helps someone who is already looking, and the evidence so far is that nobody is looking."
+        },
+        {
+          "id": "d",
+          "text": "Ask the developer to come back for a half-day question-and-answer session with the squad.",
+          "correct": false,
+          "rationale": "The squad has not yet done enough of the work to know what to ask, so the session will cover what he thinks is important — which is what the recordings already are. It also re-opens a dependency that was supposed to have ended."
+        }
+      ],
+      "explanation": "Recorded material is a store, not a transfer, and it only becomes knowledge when someone with a live question goes looking. That makes demand the thing to engineer: put the work in front of the people who must own it and let the recording answer questions rather than pose them. Volume of captured material is a poor proxy for how much has moved, and a large store with no reader is indistinguishable from no store at all.",
+      "mindset": "Transfer is measured by what someone can now do, not by how much was captured."
+    },
+    {
+      "id": "pmp-p7-103",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "procedures",
+        "accuracy",
+        "trust",
+        "handover"
+      ],
+      "stem": "A fire and rescue service upgraded its mobilising system nine months ago. The control room's written procedures were never updated, and watch managers have learned to skip three of them because they describe screens that no longer exist. Your project is about to hand over a further change to the same system. A supervisor tells you the procedures are mostly fine and that everyone knows which bits to ignore. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Correct the three wrong procedures as part of this handover, recording who verified each and when.",
+          "correct": true,
+          "rationale": "A procedure known to be wrong teaches staff to treat the whole set as advisory, which is the real damage. Naming a verifier and a date is what lets the next reader tell current material from stale material without asking anyone."
+        },
+        {
+          "id": "b",
+          "text": "Add the new procedure and mark the older three as known to be out of date.",
+          "correct": false,
+          "rationale": "Labelling errors instead of fixing them normalises a broken set and adds a fourth procedure to a document nobody fully trusts. It records the problem in place of resolving it."
+        },
+        {
+          "id": "c",
+          "text": "Withdraw the written procedures and rely on the watch managers' working knowledge.",
+          "correct": false,
+          "rationale": "The working knowledge is real but it reaches only the people who already have it. Removing the record cuts off night cover, relief staff and every future starter, which is precisely who the procedures exist for."
+        },
+        {
+          "id": "d",
+          "text": "Raise the out-of-date procedures as a risk for the service's operations team and proceed with handover.",
+          "correct": false,
+          "rationale": "It hands back a defect that this project is well placed to fix, at the one moment when the people who understand the change are still present. Logging it converts a two-day correction into somebody else's backlog item."
+        }
+      ],
+      "explanation": "Documentation that is confidently wrong is worse than documentation that is missing, because a gap prompts someone to ask and an error does not. Once staff learn to work around the record, every accurate part of it loses authority too, so currency has to be treated as a property of the whole set rather than of individual pages. The cheapest moment to restore it is while the people who made the change are still available to say what is true.",
+      "mindset": "A record people have learned to distrust has stopped being a record."
+    },
+    {
+      "id": "pmp-p7-104",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "duplicated-effort",
+        "cross-team",
+        "reuse"
+      ],
+      "stem": "A national charity runs two delivery teams under one programme: one modernising its donor platform iteratively, the other replacing case management to a fixed plan. At a supplier demonstration you discover both teams have spent roughly three months each building an address-matching component, neither aware of the other. Both work, and both are now embedded in their own team's release. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the two technical leads compare the components, agree which one carries forward, and plan the retirement of the other.",
+          "correct": true,
+          "rationale": "Two working components is a permanent maintenance liability, not a redundancy benefit. Making the leads decide keeps the judgement with the people who know the constraints on each side."
+        },
+        {
+          "id": "b",
+          "text": "Establish a standing mechanism, such as a shared register of components in build, so the next overlap surfaces in weeks rather than months.",
+          "correct": true,
+          "rationale": "The duplication is a symptom of the programme having no way for one team to see what the other is building. Fixing the instance without fixing the visibility guarantees a repeat with a different component."
+        },
+        {
+          "id": "c",
+          "text": "Escalate the duplicated cost to the sponsor as a governance failure.",
+          "correct": false,
+          "rationale": "It converts a fixable coordination gap into an attribution argument, and the six months are already spent. It also makes both teams less likely to disclose the next overlap early."
+        },
+        {
+          "id": "d",
+          "text": "Keep both components, since both work and replacing either introduces avoidable risk.",
+          "correct": false,
+          "rationale": "This weighs the visible risk of change against an invisible recurring cost, and the recurring cost wins over a programme's life. The build effort is sunk; the maintenance of two things that do one job is not."
+        },
+        {
+          "id": "e",
+          "text": "Require each team to attend the other's demonstrations from now on.",
+          "correct": false,
+          "rationale": "Attendance relies on somebody happening to recognise an overlap in passing, which is exactly the mechanism that has just failed. It adds a standing time cost and no reliable detection."
+        }
+      ],
+      "explanation": "When two teams inside one programme solve the same problem independently, the immediate loss is the effort and the lasting loss is that nobody notices for months. Both need addressing: choose one artefact to carry forward so the duplication does not become permanent, and put in a mechanism that makes work in progress visible across teams. Relying on people to spot overlaps through general awareness is a control that only works when it is not needed.",
+      "mindset": "Treat duplicated work as a detection problem, because the effort is only the part you can see."
+    },
+    {
+      "id": "pmp-p7-105",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "design-rationale",
+        "legacy-code",
+        "investigation"
+      ],
+      "stem": "Your team maintains telemetry software for a textile mill. In the code that reads loom sensors there is a retry loop that waits ninety seconds before a second attempt, carrying a comment that reads only: do not remove. The developer who wrote it left two years ago. A new team member wants to delete it because it delays fault detection on every loom. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the team hunt for the original reason — change history, old incident tickets, the mill's own engineers — before deciding anything.",
+          "correct": true,
+          "rationale": "A constraint someone thought worth a warning usually encodes an incident. Twenty minutes of searching is cheap against reintroducing a fault that took the mill down once already."
+        },
+        {
+          "id": "b",
+          "text": "Delete it and monitor closely for problems, since no reason is documented.",
+          "correct": false,
+          "rationale": "It treats the absence of a record as the absence of a reason. The failure it guards against may be seasonal, load-dependent or rare, in which case monitoring for a fortnight proves nothing."
+        },
+        {
+          "id": "c",
+          "text": "Leave it in place and add a note that it must not be changed.",
+          "correct": false,
+          "rationale": "This makes the record worse by adding authority to an instruction nobody can explain. An unexplained constraint gets more entrenched each time someone declines to investigate it."
+        },
+        {
+          "id": "d",
+          "text": "Rewrite the component so the retry loop is no longer needed.",
+          "correct": false,
+          "rationale": "A rewrite carries the same unknown into new code with more confidence attached. You cannot design around a constraint you have not yet identified."
+        }
+      ],
+      "explanation": "Unexplained constraints in long-lived systems are almost always compressed incident history, and the useful question is what happened rather than whether the code looks necessary. Recovering the reason converts a superstition into a decision that can be made on merit, and either outcome — keep or remove — is then defensible. The cost of the search is bounded and known; the cost of guessing wrong is neither.",
+      "mindset": "Find out why something is there before deciding whether it should be."
+    },
+    {
+      "id": "pmp-p7-106",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "handover",
+        "audience",
+        "artefacts"
+      ],
+      "stem": "A ferry operator's new engine-monitoring system goes live in six weeks and your project team disbands a month after that. Three groups will need what the team currently knows, and each needs something different from the others: the engine-room watch team who will meet the system's alarms at three in the morning, the classification surveyor who audits the installation once a year, and the manager who will run next year's refit. Match each to the artefact that serves it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The engine-room watch team, working alone at night with an alarm on screen."
+        },
+        {
+          "id": "s2",
+          "text": "The classification surveyor, auditing the installation annually against what was approved."
+        },
+        {
+          "id": "s3",
+          "text": "The manager planning next year's refit, deciding what can and cannot be altered."
+        }
+      ],
+      "options": [
+        {
+          "id": "tree",
+          "text": "A fault decision tree keyed to the alarm text the system actually displays",
+          "correct": true,
+          "match": "s1",
+          "rationale": "At three in the morning the reader has one alarm and no time, so the artefact has to start from what is on the screen and end in an action. Anything requiring interpretation first will not be opened."
+        },
+        {
+          "id": "asbuilt",
+          "text": "A verified as-built record with the test evidence that supports it",
+          "correct": true,
+          "match": "s2",
+          "rationale": "An auditor is checking that what exists matches what was approved, so the artefact must be a claim with evidence attached rather than a description. Its value is that it was verified and by whom."
+        },
+        {
+          "id": "decisions",
+          "text": "A log of the design decisions and the reasoning that constrains future change",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Someone planning later work needs to know which choices are load-bearing and why, because that is what tells them where change is cheap. Drawings show what was done and not what it would break."
+        },
+        {
+          "id": "report",
+          "text": "A narrative closure report describing how the project was run",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A closure report addresses governance and is read once, by people confirming the project ended properly. None of these three readers is asking how the project was managed."
+        }
+      ],
+      "explanation": "What to hand over is a question about the reader, not about the project: the same underlying knowledge has to take a different shape for someone acting under time pressure, someone verifying compliance, and someone making a future design decision. Producing one comprehensive document and offering it to everybody optimises for the author's convenience and leaves each reader to do the translation. Naming the receiving audiences before choosing the artefacts is what prevents that.",
+      "mindset": "Shape the handover around who has to act on it and what they will be doing at the time."
+    },
+    {
+      "id": "pmp-p7-107",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "supplier",
+        "acceptance",
+        "capability",
+        "contract"
+      ],
+      "stem": "A vendor has built the control interface for a waste-to-energy plant under a fixed-price contract. Handover to the plant's own engineers is a named deliverable and the final ten per cent of the price is due on acceptance. The vendor's lead engineer answers questions helpfully but keeps postponing the scheduled training sessions, and your engineers still cannot restart the feed system unaided. Four weeks remain. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Define acceptance of the deliverable as the plant's engineers restarting the feed system unaided, put that in writing now, and schedule the demonstration.",
+          "correct": true,
+          "rationale": "It makes the outcome the thing being bought while there is still time for the vendor to act on it. A test with a date attached also gives both sides an unambiguous account of whether the obligation has been met."
+        },
+        {
+          "id": "b",
+          "text": "Withhold the final payment until the outstanding training sessions have been held.",
+          "correct": false,
+          "rationale": "It uses commercial leverage to buy attendance, which is the input that has already been shown not to produce capability. It also starts a dispute before anyone has agreed what completion looks like."
+        },
+        {
+          "id": "c",
+          "text": "Escalate to the vendor's account director to get the sessions into the diary.",
+          "correct": false,
+          "rationale": "Escalation will produce sessions, and sessions were never the binding constraint. It spends a relationship on securing the wrong thing."
+        },
+        {
+          "id": "d",
+          "text": "Have your engineers list their outstanding questions and require the vendor to answer them in writing.",
+          "correct": false,
+          "rationale": "It converts a capability gap into a question-and-answer exercise, which only surfaces what your engineers already know they do not know. The dangerous gaps are the ones nobody thinks to ask about."
+        }
+      ],
+      "explanation": "Where knowledge transfer is a contractual obligation it has to be written as an outcome the receiving party can demonstrate, because anything expressed as sessions, hours or documents can be satisfied without anyone becoming able to do the work. The demonstration also protects the supplier: it replaces an open-ended duty to keep explaining with a defined finish line. Defining that test early is a planning act, not an enforcement one.",
+      "mindset": "Buy the ability to do the work, not the delivery of the training."
+    },
+    {
+      "id": "pmp-p7-108",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "shadowing",
+        "competence-check",
+        "forecasting"
+      ],
+      "stem": "For three months a junior analyst has sat with the colleague who runs the weekly demand forecast for a bakery chain with sixty shops. She has watched every run and takes careful notes. Her colleague leaves in three weeks and the forecast drives all ordering. Asked whether she could run it alone, she says she thinks so. What should the project manager arrange for next week's run?",
+      "options": [
+        {
+          "id": "a",
+          "text": "She runs it herself with the current owner watching and intervening only if the run would otherwise fail.",
+          "correct": true,
+          "rationale": "Doing it under supervision is the only way to find the gaps while there is still someone present who can close them. Her uncertainty is itself the signal that observation has not yet been tested."
+        },
+        {
+          "id": "b",
+          "text": "Extend the shadowing for the remaining three weeks, covering the run in more depth.",
+          "correct": false,
+          "rationale": "It treats exposure as though it accumulates into competence. Three more weeks of watching produces better notes and the same untested assumption."
+        },
+        {
+          "id": "c",
+          "text": "Have her write the procedure up from her notes and get the current owner to review it.",
+          "correct": false,
+          "rationale": "A review checks the document against the reviewer's memory, not the analyst against the task. Both parties can be satisfied while she is still unable to complete a run."
+        },
+        {
+          "id": "d",
+          "text": "Ask the departing colleague to stay contactable by phone for the first month after leaving.",
+          "correct": false,
+          "rationale": "It plans around the gap instead of closing it, and defers the first real test to a point where help is a favour rather than a duty. The problems surface when nobody is obliged to answer."
+        }
+      ],
+      "explanation": "Watching someone work builds recognition, which is easy to mistake for the ability to perform. The only reliable check is a live attempt while the expert is still present and accountable, because that converts unknown gaps into visible ones at the moment they can still be fixed. Scheduling that attempt early enough to fail safely is the whole point of an overlap period.",
+      "mindset": "Test the transfer by having the receiver do the work, not by asking whether they could."
+    },
+    {
+      "id": "pmp-p7-109",
+      "type": "fillblank",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "transfer-planning",
+        "capacity",
+        "prioritisation"
+      ],
+      "stem": "The only technician who commissions blade-pitch controllers at your offshore wind site retires in six weeks. His line manager will release him for knowledge transfer for two hours a week and no more, and that will not be reconsidered. There are nine commissioning procedures, and a worked-through session on one takes ninety minutes. Work out what the window actually buys, then decide how it should be spent.",
+      "blanks": [
+        {
+          "id": "hours",
+          "label": "Total transfer hours available before the retirement date",
+          "numeric": true,
+          "expect": 12,
+          "tol": 0,
+          "unit": "hours",
+          "rationale": "Two hours a week for six weeks gives twelve hours. This is the entire budget for the transfer, and unlike most project constraints it cannot be re-negotiated or resourced around."
+        },
+        {
+          "id": "covered",
+          "label": "Number of the nine procedures that can be covered once each in that window",
+          "numeric": true,
+          "expect": 8,
+          "tol": 0,
+          "rationale": "Twelve hours is 720 minutes and each session takes 90, so eight sessions fit. Nine procedures against eight slots means the plan is short before it starts, which is the finding that matters."
+        },
+        {
+          "id": "order",
+          "label": "The property that should decide which procedures are covered first",
+          "accept": [
+            "criticality",
+            "consequence of failure",
+            "how critical it is",
+            "risk",
+            "impact of failure",
+            "business criticality"
+          ],
+          "rationale": "With more procedures than slots, the sequence has to be driven by what it costs the site if a procedure cannot be performed, not by the order they appear in the manual or by which is easiest to explain."
+        }
+      ],
+      "explanation": "When access to the person holding the knowledge is fixed and small, the transfer plan is a prioritisation problem rather than a scheduling one, and the arithmetic should be done before the first session rather than discovered at the last. Knowing the window is short converts an implicit hope of covering everything into an explicit decision about what will be left uncovered, which can then be escalated, mitigated or accepted deliberately. A shortfall named in week one is a manageable risk; the same shortfall found in week six is an incident.",
+      "mindset": "Size the transfer window first, because it tells you what you are choosing not to transfer."
+    },
+    {
+      "id": "pmp-p7-110",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "receiving-team",
+        "operational-readiness",
+        "replanning"
+      ],
+      "stem": "Your hybrid project replaces the permit system for a council's parking service. The plan has always been that a newly recruited in-house team of three takes it over at go-live in ten weeks. Recruitment has produced one appointment, starting in eight weeks; the other two posts are unfilled and the vacancy freeze is unlikely to lift this year. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Re-plan the transfer around the one named person and the existing service desk, and reshape the remaining knowledge into forms that do not need a receiving team to exist.",
+          "correct": true,
+          "rationale": "It takes the recruitment position as a fact and asks what transfer is still possible, which keeps the decision inside your control. Knowing there is no full team also changes what gets written and how much of it."
+        },
+        {
+          "id": "b",
+          "text": "Delay go-live until the support team is fully staffed.",
+          "correct": false,
+          "rationale": "It makes delivery hostage to a freeze the project cannot influence, on a timescale nobody can state. The project team's own knowledge decays and disperses during the wait."
+        },
+        {
+          "id": "c",
+          "text": "Proceed with the planned transfer to the one appointee and record the shortfall as an operational risk for the service.",
+          "correct": false,
+          "rationale": "It loads a three-person role onto one new starter and treats a register entry as a mitigation. The risk is real but logging it does not change what that person will be able to do in week one."
+        },
+        {
+          "id": "d",
+          "text": "Keep members of the project team on in a support capacity until the posts are filled.",
+          "correct": false,
+          "rationale": "With no filling date this has no end, and an open-ended safety net removes the forcing point that makes any transfer happen. It also quietly re-labels project cost as support cost."
+        }
+      ],
+      "explanation": "A transfer plan assumes a receiver, and when the receiver shrinks or fails to appear the plan needs rebuilding rather than executing at reduced scale. The useful question is what form the knowledge must take to survive a gap in ownership — which usually means fewer, better artefacts aimed at whoever will actually pick up the phone. Waiting for the intended receiver to materialise spends the one asset that is genuinely perishable, which is the project team's own memory.",
+      "mindset": "When the receiver changes, re-plan the transfer rather than shrinking it."
+    },
+    {
+      "id": "pmp-p7-111",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "scaling",
+        "pilot",
+        "embedding"
+      ],
+      "stem": "A pilot squad has spent four months putting real-time passenger information onto one line of a tram network. Eight further squads will do the remaining lines over the next year. The pilot squad's retrospectives record around forty things it learned, from quirks in the timetable feed to which depot supervisors must be involved before a survey. The first rollout squad starts in a fortnight. What is the best way to move what the pilot squad knows?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Embed a pilot squad member in the first rollout squad for its opening fortnight, and make that squad responsible for passing on what it learns to the next one.",
+          "correct": true,
+          "rationale": "A person carries judgement and can answer the question actually being asked, which a list cannot. Making each squad the source for the next spreads the teaching load and keeps the material current as conditions change."
+        },
+        {
+          "id": "b",
+          "text": "Publish the forty lessons as a rollout playbook issued to all eight squads.",
+          "correct": false,
+          "rationale": "It pushes a long list to readers who have no context yet for which entries apply to them. A playbook written from one team's experience also freezes at the moment of writing while the remaining lines differ."
+        },
+        {
+          "id": "c",
+          "text": "Run a single briefing for all eight squads before the rollout programme starts.",
+          "correct": false,
+          "rationale": "It delivers everything to everybody at the one moment when none of them can use it. Squads starting in nine months will retain almost nothing from a session held today."
+        },
+        {
+          "id": "d",
+          "text": "Ask each rollout squad to read the pilot squad's retrospective notes at its kick-off.",
+          "correct": false,
+          "rationale": "Retrospective notes are written as reminders for the people who were in the room, so they compress heavily and assume shared context. Handing them to strangers transfers the vocabulary and not the lesson."
+        }
+      ],
+      "explanation": "Moving experience from a first team to many later ones is a distribution problem, and the choice is between broadcasting an artefact once and seeding people repeatedly. Seeding scales more slowly but survives the fact that later teams meet different conditions and ask different questions. Making each receiving team the next source also converts transfer from a one-off event owned by the pilot into a property of how the programme works.",
+      "mindset": "Move experience by putting people alongside people, and let each receiver become the next source."
+    },
+    {
+      "id": "pmp-p7-112",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "tool-migration",
+        "records",
+        "decision-rationale"
+      ],
+      "stem": "Your organisation is retiring the ticketing system its project teams have used for nine years. Only open tickets migrate to the replacement; the closed ones are deleted in eight weeks. On your project, which handles duty-suspension processing for a wine importer's bonded warehouse, almost everything anyone knows about why the current rules take the form they do exists in those comment threads and nowhere else. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Identify the specific decisions that exist only in those threads and write them out with their reasoning before the deletion date.",
+          "correct": true,
+          "rationale": "Eight weeks is enough to save the part that matters if you go looking for named decisions rather than reading everything. It also forces a judgement about what is genuinely load-bearing."
+        },
+        {
+          "id": "b",
+          "text": "Ask the tool owner what export is possible and at what cost, so the decision to lose the history is taken knowingly.",
+          "correct": true,
+          "rationale": "The option may be cheap and nobody has checked, and if it is expensive the loss becomes a decision someone owns rather than a default. Either answer improves the position."
+        },
+        {
+          "id": "c",
+          "text": "Request that the migration be delayed until the history has been reviewed.",
+          "correct": false,
+          "rationale": "It asks an organisation-wide programme to wait on one project's reading exercise, which is unlikely to be granted and consumes credibility in the asking. It also leaves you with no plan if the answer is no."
+        },
+        {
+          "id": "d",
+          "text": "Export all nine years of tickets to files and store them on a shared drive.",
+          "correct": false,
+          "rationale": "It converts a searchable system into an unsearchable heap with no owner, which satisfies the instinct to keep everything while producing nothing anyone will use. Volume preserved is not knowledge preserved."
+        },
+        {
+          "id": "e",
+          "text": "Accept the loss, since closed tickets are historical records rather than current knowledge.",
+          "correct": false,
+          "rationale": "It confuses closed with finished. A rule still in force today is current knowledge regardless of the age of the thread that explains it."
+        }
+      ],
+      "explanation": "Knowledge often lives inside tools that are managed on their own lifecycle by people who have no view of what depends on them, so a tool decision can quietly become a knowledge decision. The response is to separate the small set of things that would be genuinely expensive to lose from the bulk that would not, and to make the remaining loss explicit rather than accidental. Bulk export is usually the comforting option that preserves the appearance of the archive and none of its usefulness.",
+      "mindset": "Treat a tool retirement as a deadline on the knowledge that only lives there."
+    },
+    {
+      "id": "pmp-p7-113",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "training",
+        "timing",
+        "supplier"
+      ],
+      "stem": "A supplier's contract for a new dosing control system at a water treatment works includes five days of operator training. The supplier can only deliver it in March; the system will not be installed and running until August. The works manager wants to accept the March dates because the training is already paid for and the trainer is well regarded. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Press to move the training close to commissioning, and if it genuinely cannot move, treat March as an introduction and secure a second session near go-live.",
+          "correct": true,
+          "rationale": "Training retains best when the learner can use it within days. Treating an immovable date as an introduction rather than as the transfer keeps the value it does have without pretending the obligation is discharged."
+        },
+        {
+          "id": "b",
+          "text": "Accept the March dates and have the supplier record the sessions for use in August.",
+          "correct": false,
+          "rationale": "It assumes the problem is memory when the problem is that in March nobody has touched the system and cannot tell which parts matter. Recordings preserve an explanation given to an audience with no context."
+        },
+        {
+          "id": "c",
+          "text": "Accept the March dates and plan internal refresher sessions before go-live.",
+          "correct": false,
+          "rationale": "It makes your own staff responsible for re-teaching a supplier's system from a standing start, which is the obligation you have already bought. The refresher will be led by people who attended in March and have not used it since."
+        },
+        {
+          "id": "d",
+          "text": "Decline the training and negotiate a price reduction instead.",
+          "correct": false,
+          "rationale": "It trades away the transfer entirely for a modest commercial gain, leaving the operators to learn the system unaided. A discount does not run the plant."
+        }
+      ],
+      "explanation": "The value of training decays with the distance between learning and doing, so the scheduling of transfer is part of its design rather than an administrative detail. Where a date cannot move, the honest response is to rename what that session achieves and plan the real transfer separately, instead of treating a delivered session as an obligation discharged. Accepting a convenient date and hoping retention holds is how a project arrives at go-live with trained-on-paper operators.",
+      "mindset": "Schedule learning next to the doing, because the gap between them is where it is lost."
+    },
+    {
+      "id": "pmp-p7-114",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "lessons",
+        "process-improvement",
+        "candour"
+      ],
+      "stem": "Your programme has finished replacing the maintenance planning system for a regional airline's engineering base. The clearest lesson is that the organisation's mandatory two-stage gate review added eleven weeks and changed nothing, because both gates examined the same evidence and asked the same questions. The gate process is owned by a governance director who designed it and is proud of it. How should this lesson be handled?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record it with its evidence — the dates, the questions asked at each gate, what changed as a result — and take it to the process owner as a finding about the process before it circulates.",
+          "correct": true,
+          "rationale": "Evidence makes the finding about the mechanism rather than about the person who owns it, which is the only version he can act on. Going to him first gives him the chance to lead the change instead of defending against it."
+        },
+        {
+          "id": "b",
+          "text": "Record it in the lessons repository and let the process owner find it there.",
+          "correct": false,
+          "rationale": "It files a criticism where its owner will meet it without warning and in front of others. The predictable response is a challenge to the finding rather than a change to the process."
+        },
+        {
+          "id": "c",
+          "text": "Raise it verbally with the process owner and leave it out of the written record.",
+          "correct": false,
+          "rationale": "It buys a comfortable conversation by giving up the organisational record, so the lesson lasts exactly as long as the two people who discussed it stay in post."
+        },
+        {
+          "id": "d",
+          "text": "Soften the wording to say the gates could be streamlined, without the eleven weeks or the finding that nothing changed.",
+          "correct": false,
+          "rationale": "A lesson edited until it is acceptable stops carrying the information that would justify acting on it. Nobody reprioritises a process review on the strength of a suggestion that something could be tidier."
+        }
+      ],
+      "explanation": "A lesson only has value where it reaches someone with the authority to change the thing it is about, and that person is often invested in the current arrangement. Keeping the specifics and the evidence is what makes the finding survive challenge; choosing the route and the sequence is what makes it survive the person. Suppressing it protects a relationship at the cost of the organisation repeating the same eleven weeks on the next programme.",
+      "mindset": "Aim a lesson at whoever can change the thing, and make it about the mechanism rather than the person."
+    },
+    {
+      "id": "pmp-p7-115",
+      "type": "pulldown",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "records",
+        "reconciliation",
+        "asset-data"
+      ],
+      "stem": "You have taken over a programme upgrading lock control equipment for a canal trust. In three separate places the written record and what people actually do have come apart, and each needs a different response — one is an error to correct, one is two records that disagree, and one is an unresolved technical difference. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "An operating procedure describes a manual override that was removed in last year's upgrade, and staff have learned to skip that step. The project manager should"
+        },
+        {
+          "id": "c2",
+          "text": "The asset register lists 214 lock gates; the maintenance team works from a spreadsheet of 219 that includes five gates transferred from a neighbouring trust. The project manager should"
+        },
+        {
+          "id": "c3",
+          "text": "The supplier's manual gives a torque setting the trust's own engineers have always ignored in favour of a lower figure that has never failed. The project manager should"
+        }
+      ],
+      "options": [
+        {
+          "id": "fix",
+          "text": "correct the record to match current practice and note who verified it and when",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Here practice is right and the document is out of date, so the record is simply wrong and can be fixed. Recording the verifier is what stops the same doubt arising next year."
+        },
+        {
+          "id": "recon",
+          "text": "establish which list is authoritative, reconcile the other to it, and name its owner",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Neither list is wrong about the gates it covers; the failure is that two lists exist with no agreed precedence. Reconciliation without naming an owner leaves them free to diverge again."
+        },
+        {
+          "id": "resolve",
+          "text": "have the supplier and the trust's engineers examine the difference together and agree a single figure",
+          "correct": true,
+          "match": "c3",
+          "rationale": "This is a genuine technical disagreement between two competent parties, and no amount of documentation settles it. Long-standing practice without failure is evidence, not proof, and the supplier may have a reason nobody has asked for."
+        },
+        {
+          "id": "cr",
+          "text": "raise a change request so the deviation is formally approved",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Change control governs proposed changes to something agreed, and none of these three is that: one is an outdated document, one is two records disagreeing, and one is an unsettled technical question."
+        }
+      ],
+      "explanation": "When a document and reality diverge, the first question is which of the two is wrong, and it has to be answered before anything is edited. Amending paperwork to reflect what people do is safe only where their behaviour has been confirmed sound; two lists that disagree need a precedence decision and a custodian rather than an edit; and a difference resting on engineering judgement is settled by engineers, not by whoever holds the pen. Treating every divergence identically either enshrines errors or overwrites good practice.",
+      "mindset": "Before reconciling a record with reality, work out which of the two is actually wrong."
+    },
+    {
+      "id": "pmp-p7-116",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "knowledge-hoarding",
+        "incentives",
+        "shared-ownership"
+      ],
+      "stem": "On a squad automating fault dispatch for a telecoms field operation, one engineer has built and holds the entire scheduling logic. He declines pairing, argues that documentation would be out of date within a fortnight, and has twice been the reason a release shipped on time. Two colleagues have stopped asking him things. A promotion decision on him is due in the spring. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Make shared ownership an explicit expectation of the role he is being considered for, and make sure teaching it counts for as much in that decision as building it did.",
+          "correct": true,
+          "rationale": "The behaviour is a rational response to what the organisation currently rewards, so changing the reward is the only durable lever. Naming it before the decision gives him time and reason to change rather than a penalty afterwards."
+        },
+        {
+          "id": "b",
+          "text": "Require pairing on all scheduling work from the next sprint.",
+          "correct": false,
+          "rationale": "A mandate addresses the behaviour while leaving the incentive that produces it untouched, and pairing can be complied with in a way that transfers nothing. It also makes the team's most productive engineer an opponent of the change."
+        },
+        {
+          "id": "c",
+          "text": "Assign the next scheduling story to a colleague and have him review the pull request.",
+          "correct": false,
+          "rationale": "Review is a veto rather than a transfer: it moves the typing while leaving the judgement, and the reviewer can gatekeep indefinitely without appearing obstructive."
+        },
+        {
+          "id": "d",
+          "text": "Escalate to his line manager as a delivery risk arising from his conduct.",
+          "correct": false,
+          "rationale": "It reframes a predictable response to incentives as a personal failing, which invites a defensive reaction from someone the project depends on. The manager's available remedies do not include making shared ownership worth his while."
+        }
+      ],
+      "explanation": "Concentrated knowledge is often held deliberately, and where it is, the holder is usually responding accurately to what gets noticed and rewarded. Instructions and process changes are weak against that, because compliance and transfer look identical from outside. The durable move is to make the behaviour you want the one that pays, and to say so early enough that the person can respond to it.",
+      "mindset": "Where knowledge is hoarded, look first at what the organisation is rewarding."
+    },
+    {
+      "id": "pmp-p7-117",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "service-desk",
+        "handover",
+        "fit-for-purpose"
+      ],
+      "stem": "A university's new admissions portal transfers to the institution's IT service desk in three weeks. Your team has produced a ninety-page technical design document and offered a two-hour walkthrough of it. The service desk manager says her staff answer calls in four-minute slots during the clearing period and cannot read a design document while an applicant waits. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the desk to build what they will use during a call: the twenty most likely questions and the steps that resolve each.",
+          "correct": true,
+          "rationale": "It starts from the receiver's working conditions rather than from the material that happens to exist. Building it with the desk also surfaces the questions your team never thought of."
+        },
+        {
+          "id": "b",
+          "text": "Deliver the walkthrough as planned and leave the design document as the reference.",
+          "correct": false,
+          "rationale": "It hands over an artefact written for people building the system to people doing a different job under time pressure. The handover is recorded as complete while nothing usable has moved."
+        },
+        {
+          "id": "c",
+          "text": "Ask the service desk to write their own call scripts from the design document.",
+          "correct": false,
+          "rationale": "It pushes the translation onto the people with the least context and the least time, at the point in the year when they have none. Predictably it will not be done."
+        },
+        {
+          "id": "d",
+          "text": "Route admissions portal calls to the project team for the first three months.",
+          "correct": false,
+          "rationale": "It postpones the transfer past the point where the project team disperses, and trains both callers and desk staff to treat the bypass as normal."
+        }
+      ],
+      "explanation": "An artefact is fit for handover only in relation to the conditions the receiver works under: time available, what they are holding while they read, and what question they are trying to answer. Comprehensiveness is a property that serves the author, and offering a complete document is a common way of discharging a duty without transferring anything. Building the artefact jointly with the receiving group is usually faster than writing it alone and always more accurate about what is needed.",
+      "mindset": "Judge a handover artefact by the conditions the reader will be in when they open it."
+    },
+    {
+      "id": "pmp-p7-118",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "community-of-practice",
+        "cross-team",
+        "forum"
+      ],
+      "stem": "Three squads at a dental practice group build different parts of the same patient-facing product. A monthly practitioners' forum was set up a year ago so the squads would stop solving the same problems separately. Attendance has fallen from eighteen to five and the last two sessions were round-the-room status updates. Meanwhile two squads have written near-identical appointment reminder code. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Replace the standing agenda with a real problem someone currently has, presented by the person who has it.",
+          "correct": true,
+          "rationale": "People attend when the hour helps with something they are stuck on this week. A live problem also gives the room something only that room can supply, which a status update never does."
+        },
+        {
+          "id": "b",
+          "text": "Require each session to end with something concrete — a decision, or a shared component with a named owner.",
+          "correct": true,
+          "rationale": "Without an output the forum cannot be told apart from a meeting, and it will lose the attendance contest to actual work. A named owner is what turns agreement in the room into something that exists afterwards."
+        },
+        {
+          "id": "c",
+          "text": "Make attendance mandatory for one nominated representative from each squad.",
+          "correct": false,
+          "rationale": "It fills three seats and changes nothing about why the other thirteen people stopped coming. Compulsory attendance at an empty session also teaches people that the forum is a tax."
+        },
+        {
+          "id": "d",
+          "text": "Move the forum to a written channel so people can contribute when it suits them.",
+          "correct": false,
+          "rationale": "Changing the medium does not supply a reason to contribute, and asynchronous formats fail faster when nobody has anything they want from the group."
+        },
+        {
+          "id": "e",
+          "text": "Reduce it to quarterly so that each session has more material to cover.",
+          "correct": false,
+          "rationale": "It treats frequency as the problem when the sessions are already short of content. Longer gaps make the forum less likely to be the place anyone thinks of when they hit a problem."
+        }
+      ],
+      "explanation": "A cross-team forum survives on the value it returns to the people in the room, and it decays into status reporting whenever that value is not deliberately maintained. The diagnosis is usually that nobody arrives with a live need and nothing leaves with an owner, so the hour costs more than it returns. Mandating attendance or changing the format treats the symptom, because the question a potential attendee is asking is what they get for the hour.",
+      "mindset": "A knowledge-sharing forum earns its attendance every session or it becomes a status meeting."
+    },
+    {
+      "id": "pmp-p7-119",
+      "type": "hotspot",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "skills-matrix",
+        "single-point-of-failure",
+        "prioritisation"
+      ],
+      "stem": "The grid shows which of four people on your frozen food distribution programme can work unaided on each of four systems: a filled cell means competent, an empty cell means not. Priya and Dan both leave within eight weeks and will not be replaced. The programme runs for a further year and all four systems stay in use throughout. Select the row where knowledge transfer should start.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Competence grid: four systems against four people, with two leavers marked",
+        "caption": "Select a row. Use Tab or the arrow keys to move between rows, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "r1",
+          "n": 1,
+          "label": "Cold chain telemetry — Priya only",
+          "x": 40,
+          "y": 80,
+          "w": 560,
+          "h": 58,
+          "correct": true,
+          "rationale": "This is the only row whose cover reaches zero: its single competent person is one of the leavers, and the system is still needed for another year. A row that empties is a different order of problem from a row that thins."
+        },
+        {
+          "id": "r2",
+          "n": 2,
+          "label": "Route optimiser — Priya and Sam",
+          "x": 40,
+          "y": 148,
+          "w": 560,
+          "h": 58,
+          "correct": false,
+          "rationale": "This falls from two people to one, which makes it the next priority rather than the first. Sam can still run it on the day after Priya leaves, so nothing stops."
+        },
+        {
+          "id": "r3",
+          "n": 3,
+          "label": "Warehouse control — Sam and Ana",
+          "x": 40,
+          "y": 216,
+          "w": 560,
+          "h": 58,
+          "correct": false,
+          "rationale": "Neither of its two competent people is leaving, so the departures do not change this row at all. It is chosen by readers scanning for thin cover without checking who is going."
+        },
+        {
+          "id": "r4",
+          "n": 4,
+          "label": "Order intake — Dan, Sam and Ana",
+          "x": 40,
+          "y": 284,
+          "w": 560,
+          "h": 58,
+          "correct": false,
+          "rationale": "It loses a leaver but retains two people, which is the most comfortable position on the grid. It attracts readers who look for rows containing a departing name rather than for what the row is left with."
+        }
+      ],
+      "explanation": "A competence grid is read by working out what each row is left with after the known departures, not by counting who currently covers it or by looking for the leavers' names. The first call on transfer effort is any row whose cover reaches zero while the work continues, because that is the only case where capability stops rather than becomes fragile. Ordering the rest by how thin they become is the next decision, and it is a different one.",
+      "mindset": "Read a coverage matrix forwards to what remains, not backwards to who is leaving."
+    },
+    {
+      "id": "pmp-p7-120",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "intellectual-property",
+        "regulator",
+        "long-term-custody",
+        "contract"
+      ],
+      "stem": "A specialist contractor has spent four years characterising contamination in a redundant fuel-handling building. Its analytical method is proprietary and the contract grants you the results, not the method. The site's regulator expects the licensee — not the contractor — to be able to justify that characterisation for the next thirty years, long after the firm may exist. The contractor demobilises in five months. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Define what the licensee must be able to do — defend and where necessary reproduce each result — and negotiate now for the contractor to evidence the basis of every result in a form the licensee owns outright.",
+          "correct": true,
+          "rationale": "It works from the regulatory obligation back to the minimum the licensee must hold, which is narrower than the method and therefore negotiable. Evidence of basis can usually be given without disclosing proprietary technique."
+        },
+        {
+          "id": "b",
+          "text": "Open negotiations to buy the analytical method outright before demobilisation.",
+          "correct": false,
+          "rationale": "It pursues the asset rather than the obligation, at high cost and with a real chance of refusal. Owning a method the licensee's own scientists have never applied would still leave them unable to defend the results."
+        },
+        {
+          "id": "c",
+          "text": "Commission the licensee's own scientists to independently re-characterise a sample of the building.",
+          "correct": false,
+          "rationale": "Independent verification answers whether the results look right, which is a different question from whether the licensee can justify them. It also leaves every unsampled result in exactly the same position."
+        },
+        {
+          "id": "d",
+          "text": "Record the constraint as a risk and transfer it to the licensee's operations team at demobilisation.",
+          "correct": false,
+          "rationale": "It logs a thirty-year obligation as somebody else's problem at the precise moment the only party who could help walks off site. The register entry will outlive every option for acting on it."
+        }
+      ],
+      "explanation": "Where an obligation outlives every organisation involved in creating the knowledge, the transfer has to be specified from the duty backwards: what must the enduring party be able to say, to whom, and on what basis. That question usually has a narrower answer than acquiring the underlying capability, which makes it affordable and negotiable while a commercial relationship still exists. The point of maximum leverage is before demobilisation, and it falls away completely afterwards.",
+      "mindset": "Work back from the obligation that outlives the project to the minimum the enduring owner must hold."
+    },
+    {
+      "id": "pmp-p7-121",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "teaching",
+        "session-design",
+        "expert"
+      ],
+      "stem": "The furnace control specialist on your glassworks upgrade is generous with her time and well liked. She has run four sessions on the batch-charging logic. Afterwards nobody can restate the two rules that actually govern it: she moves quickly, answers one question with three more, and assumes knowledge her audience does not have. She leaves the project in two months. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Change the format so the learners work and she corrects — give them a real charging problem to solve with her in the room.",
+          "correct": true,
+          "rationale": "When the learner is working, their errors show her exactly which assumptions were unwarranted, which she cannot discover while she is talking. It also converts her strength, spotting what is wrong, into the mechanism of the session."
+        },
+        {
+          "id": "b",
+          "text": "Give her feedback on her delivery and ask her to slow down and pitch it lower.",
+          "correct": false,
+          "rationale": "It asks someone to calibrate against knowledge she cannot see, since the gap is invisible from the front of the room. Willing people usually try, revert, and end up feeling criticised for a session structure that was never theirs to fix."
+        },
+        {
+          "id": "c",
+          "text": "Bring in a technical writer to attend and turn the sessions into documentation.",
+          "correct": false,
+          "rationale": "It captures her explanation faithfully, gaps included, and produces a document with the same unstated assumptions. The writer cannot supply what nobody in the room knew was missing."
+        },
+        {
+          "id": "d",
+          "text": "Book further sessions so the material can be covered again before she leaves.",
+          "correct": false,
+          "rationale": "It repeats a format that has already failed four times, on the assumption that comprehension is a function of exposure. The two months get spent without producing a different result."
+        }
+      ],
+      "explanation": "The commonest failure in expert-led transfer is that the expert cannot see their own assumed knowledge, and no amount of goodwill or slowing down reveals it to them. Inverting the session so the learner performs and the expert corrects turns invisible gaps into visible errors at the only moment they can be fixed. This is a design problem in how transfer is structured rather than a shortcoming in the person doing it.",
+      "mindset": "Have the learner do the work and the expert correct it, because experts cannot see what they assume."
+    },
+    {
+      "id": "pmp-p7-122",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "incident",
+        "capture-timing",
+        "workaround"
+      ],
+      "stem": "At two in the morning a member of your squad cleared a payment queue backlog on a ticketing platform by flushing a cache and restarting two services in a particular order. It worked, and the order mattered. He mentioned it briefly at stand-up and moved on to his sprint work. The same load conditions will recur at the next on-sale in three weeks. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have him write the sequence down today, including why the order mattered, rather than at the end of the sprint.",
+          "correct": true,
+          "rationale": "The reasoning behind an order of operations is the first thing to fade, usually within days, and it is the part that lets someone else adapt the fix. Waiting for a convenient moment loses precisely the part worth having."
+        },
+        {
+          "id": "b",
+          "text": "Put finding and fixing the underlying cause on the backlog, with the workaround recorded as an interim measure.",
+          "correct": true,
+          "rationale": "A documented workaround makes the symptom survivable and quietly removes the pressure to fix the cause. Recording it as interim is what keeps the real defect visible."
+        },
+        {
+          "id": "c",
+          "text": "Ask him to be on call for the next on-sale.",
+          "correct": false,
+          "rationale": "It converts something that could be a written procedure into a dependency on one person being awake and reachable. It is the fastest option and it makes the squad less capable, not more."
+        },
+        {
+          "id": "d",
+          "text": "Raise a formal incident report so the event is properly logged.",
+          "correct": false,
+          "rationale": "An incident report establishes that something happened and how it was escalated. It is not the same artefact as the sequence someone needs at two in the morning, and filing it can feel like the job is done."
+        },
+        {
+          "id": "e",
+          "text": "Wait for the next occurrence to confirm the workaround reliably works before writing it down.",
+          "correct": false,
+          "rationale": "It withholds capture until the memory has decayed and makes the next recurrence dependent on the same person. Confirmation and recording are not in competition."
+        }
+      ],
+      "explanation": "Knowledge created under pressure is the most perishable kind, because the reasoning that made it work was never articulated even to the person who applied it. Capturing it while it is fresh is a matter of days rather than sprints, and the record has to include why as well as what or it cannot be adapted when conditions differ slightly. Recording a workaround also creates its own risk: a well-documented workaround competes with fixing the cause, so it needs labelling as temporary at the moment it is written.",
+      "mindset": "Capture what was learned under pressure while the reasoning is still recoverable."
+    },
+    {
+      "id": "pmp-p7-123",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "assumptions",
+        "schedule",
+        "departure"
+      ],
+      "stem": "A planner leaving your commercial laundry automation project mentions in her exit conversation that the equipment supplier's delivery dates have always run optimistic, and that she has quietly held two weeks of float in every installation sequence to absorb it. The float is not identified anywhere in the schedule narrative and nobody else knows it is there. She leaves on Friday. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Get the assumption into the schedule as a stated allowance with the supplier history behind it, so whoever plans next knows it is there and can test it.",
+          "correct": true,
+          "rationale": "A hidden allowance and a stated one behave identically until someone re-plans, at which point only the stated one survives. Recording the evidence lets a successor judge whether it is still warranted rather than inheriting it blind."
+        },
+        {
+          "id": "b",
+          "text": "Leave the float where it is, noting that the schedule has proved reliable in practice.",
+          "correct": false,
+          "rationale": "It preserves the outcome and loses the reasoning, so the next person to compress the schedule will remove the float without knowing what it was absorbing."
+        },
+        {
+          "id": "c",
+          "text": "Remove the float, on the basis that undeclared padding distorts the plan.",
+          "correct": false,
+          "rationale": "It corrects the concealment by discarding the judgement, which was built on real observed supplier behaviour. The transparency principle is right and applying it as deletion throws away the evidence."
+        },
+        {
+          "id": "d",
+          "text": "Ask her to write a handover note describing her planning approach before she goes.",
+          "correct": false,
+          "rationale": "A general note about method buries one specific, checkable assumption in a description of how she works. The successor gets a philosophy rather than a fact about a named supplier."
+        }
+      ],
+      "explanation": "Departures surface undeclared assumptions that have been silently doing real work, and the value lies in the evidence behind them rather than the allowance itself. Making such an assumption explicit lets it be tested, defended or withdrawn on its merits by whoever inherits it, whereas leaving it embedded means it will eventually be removed by someone who cannot see what it was for. Neither preserving it untouched nor deleting it on principle preserves the thing that was actually scarce, which is the observation about the supplier.",
+      "mindset": "Make inherited assumptions explicit with their evidence, so a successor can judge them rather than guess."
+    },
+    {
+      "id": "pmp-p7-124",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "merger",
+        "procedures",
+        "ownership"
+      ],
+      "stem": "Two bus operators have merged and your programme is combining their engineering systems. Each side brings a working set of maintenance procedures: one is formally controlled, properly versioned and slightly out of date; the other is a well-used wiki that is current but has no owner and no history. Depot staff on each side trust their own and distrust the other. One set is needed within four months. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree the destination format first, then merge procedure by procedure with a named engineer from each depot signing off each one.",
+          "correct": true,
+          "rationale": "Working procedure by procedure means each decision is made on technical merit rather than as one side's set defeating the other. Joint sign-off is what converts staff trust in a document into trust in the merged document."
+        },
+        {
+          "id": "b",
+          "text": "Adopt the controlled set as the baseline and update it from the wiki.",
+          "correct": false,
+          "rationale": "It picks the artefact with better governance and inherits its staleness, while reading to one depot as a takeover. The updating step is where all the disputed content sits and it is left undefined."
+        },
+        {
+          "id": "c",
+          "text": "Adopt the wiki, since it reflects what people actually do today.",
+          "correct": false,
+          "rationale": "It is the mirror error: currency without control or history, and no owner means nobody to arbitrate the conflicts as they surface."
+        },
+        {
+          "id": "d",
+          "text": "Run both sets until depot practice converges, then document the result.",
+          "correct": false,
+          "rationale": "It defers the decision to a process with no forcing point and no end date. Two sets of maintenance procedures is the condition you were asked to end, not a transitional state."
+        }
+      ],
+      "explanation": "Merging two bodies of working knowledge is a legitimacy problem before it is a documentation problem, because each set carries the trust of the people who use it. Choosing one wholesale settles the mechanics quickly and leaves half the workforce with a document they did not agree to, which they will work around. Deciding the format first and then the content item by item separates the two arguments, so the format debate does not get fought out through every individual procedure.",
+      "mindset": "When two bodies of knowledge merge, the people who use them have to be part of choosing what survives."
+    },
+    {
+      "id": "pmp-p7-125",
+      "type": "fillblank",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "cross-training",
+        "key-person-risk",
+        "skills-audit"
+      ],
+      "stem": "Your squad of six supports eight services for an online plant nursery. A skills audit finds that three of the services have exactly one person able to work on them unaided, four have two, and one has four. Two squad members have each agreed to cross-train onto one of the single-cover services during the coming quarter. Work out where that leaves the squad and what the measure is called.",
+      "blanks": [
+        {
+          "id": "before",
+          "label": "Number of services with single-person cover before any cross-training",
+          "numeric": true,
+          "expect": 3,
+          "tol": 0,
+          "rationale": "The audit states it directly: three of the eight services have exactly one competent person. Establishing the starting position is what makes the improvement measurable rather than asserted."
+        },
+        {
+          "id": "after",
+          "label": "Number of services with single-person cover once both cross-trainings are complete",
+          "numeric": true,
+          "expect": 1,
+          "tol": 0,
+          "rationale": "Each cross-training takes one service from one competent person to two, so three minus two leaves one. One service still stops if one person is unavailable, which is the residual position to decide about."
+        },
+        {
+          "id": "measure",
+          "label": "The common name for the measure being improved here",
+          "accept": [
+            "bus factor",
+            "truck factor",
+            "key person risk",
+            "key-person risk",
+            "bus number"
+          ],
+          "rationale": "It counts how many people would have to become unavailable before work on something stops. Naming it matters because it makes the exposure discussable with people who will not read a skills matrix."
+        }
+      ],
+      "explanation": "Cross-training decisions are easier to defend when the exposure is counted rather than described, because a number can be compared before and after and argued about at the right level. The useful framing is how many people would have to be absent before work stops, which shifts attention from who is skilled to what would halt. Reaching a residual figure that is not zero is a normal outcome and the point is that it becomes a decision someone takes deliberately rather than a fact nobody has noticed.",
+      "mindset": "Count how many absences it would take to stop the work, then decide what number you are willing to live with."
+    },
+    {
+      "id": "pmp-p7-126",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "milestone",
+        "acceptance",
+        "evidence",
+        "supplier"
+      ],
+      "stem": "Your contract to replace a hospital pathology laboratory's specimen tracking includes knowledge transfer to trust staff as a milestone worth £45,000. The supplier has delivered every scheduled session and holds signed attendance sheets. The senior biomedical scientist tells you her team still cannot configure a new test panel without ringing the supplier. The milestone is due for certification this week. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Certify against demonstrated capability instead of attendance: ask the laboratory to configure a panel unaided this week and treat the outcome as the evidence.",
+          "correct": true,
+          "rationale": "It tests the thing the milestone was meant to buy and produces evidence both parties can see. If the laboratory succeeds the supplier is paid immediately, so the test is not simply a way of withholding money."
+        },
+        {
+          "id": "b",
+          "text": "Certify the milestone, since the supplier has met the obligation exactly as it is written.",
+          "correct": false,
+          "rationale": "It accepts an input-shaped definition of an outcome-shaped deliverable, which is defensible on the paperwork and leaves the laboratory dependent. Signing it also removes the last leverage to fix the gap."
+        },
+        {
+          "id": "c",
+          "text": "Reject the milestone and hold payment until further sessions have been delivered.",
+          "correct": false,
+          "rationale": "It buys more of the input that has already failed, and turns the disagreement into one about volume rather than effect. The supplier can reasonably say it has done what was asked."
+        },
+        {
+          "id": "d",
+          "text": "Certify it and raise a separate change request funding additional training.",
+          "correct": false,
+          "rationale": "It pays for an outcome that was not achieved and then pays a second time to pursue it. It also establishes that unmet transfer obligations are resolved by buying more."
+        }
+      ],
+      "explanation": "Milestones written in terms of sessions, attendance or documents can be satisfied completely while the receiving organisation gains nothing, and the gap only becomes visible when someone tries to do the work alone. Where the wording is loose, the honest reading is the outcome the clause was clearly intended to secure, and the fair test is one the supplier can pass this week. Certifying on inputs is the choice that looks lowest-risk and transfers the entire consequence to the operational team.",
+      "mindset": "Certify transfer on what the receiver can now do unaided, whatever the clause counts."
+    },
+    {
+      "id": "pmp-p7-127",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "self-assessment",
+        "relationships",
+        "succession"
+      ],
+      "stem": "You run a programme standardising the finance systems of a nineteen-school academy trust. Reviewing your own position, you realise you are the only person who knows which three schools hold local arrangements that the standard model breaks, why the pilot school was chosen over two better-prepared ones, and which finance officer to ring when a return looks wrong. Your contract has six months left. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Treat yourself as the programme's single point of failure and start transferring now, beginning with the relationships and the reasons rather than the records.",
+          "correct": true,
+          "rationale": "Relationships and reasoning take longest to move and cannot be written down usefully, so they need the months rather than the final weeks. Naming yourself as the exposure is the step most project managers skip when auditing everyone else."
+        },
+        {
+          "id": "b",
+          "text": "Write a comprehensive handover pack during your final month.",
+          "correct": false,
+          "rationale": "It leaves the transfer until there is no time left to test whether it worked, and packs written under that pressure are complete on paper and untried in practice."
+        },
+        {
+          "id": "c",
+          "text": "Raise it with your sponsor as a resourcing risk needing a successor to be appointed.",
+          "correct": false,
+          "rationale": "It converts something you can begin today into a request for someone else to act first. The transfer stalls until a decision arrives, and six months is not as long as it sounds."
+        },
+        {
+          "id": "d",
+          "text": "Document the three local arrangements and the pilot rationale in the programme's document set.",
+          "correct": false,
+          "rationale": "It captures the recordable fraction and quietly abandons the rest. Knowing which finance officer to ring, and why they will take the call, does not survive being written in a document set."
+        }
+      ],
+      "explanation": "Project managers audit key-person risk across their teams and routinely leave themselves out of the assessment, even though the role concentrates relationships, history and reasoning more than any other. The parts that take longest to move are exactly the parts that cannot be documented, which means the transfer has to start early and run through work rather than through artefacts. Waiting for a named successor makes the start date depend on someone else's decision, when introductions and shared work can begin immediately.",
+      "mindset": "Put yourself in the key-person assessment, and start with what a document cannot carry."
+    },
+    {
+      "id": "pmp-p7-128",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "decision-records",
+        "definition-of-done",
+        "habit"
+      ],
+      "stem": "A year ago your squad, which builds order software for a bicycle manufacturer, agreed to write a short record whenever it takes a decision that would be expensive to reverse. Looking back over the year, four such records exist and at least a dozen decisions of that kind were clearly taken. The team says the records get written when someone remembers. What is the most useful change?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Attach the record to the work itself, so an item involving that kind of decision cannot be called done without one.",
+          "correct": true,
+          "rationale": "It removes the dependence on someone noticing at the right moment by putting the requirement where the work already gets checked. The record also gets written while the reasoning is current."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to be more disciplined about remembering.",
+          "correct": false,
+          "rationale": "It relies on exactly the mechanism that has demonstrably failed for a year, and adds an implication of fault where the design was the problem."
+        },
+        {
+          "id": "c",
+          "text": "Make the scrum master responsible for writing all of them.",
+          "correct": false,
+          "rationale": "It moves the writing to someone who was often not in the discussion and cannot recover the reasoning. It also converts a shared practice into one person's chore."
+        },
+        {
+          "id": "d",
+          "text": "Review the past year's decisions and write the missing records now.",
+          "correct": false,
+          "rationale": "It clears the backlog without changing what produced it, so the gap reopens immediately. Reasons reconstructed months later are the least reliable ones anyone will ever rely on."
+        }
+      ],
+      "explanation": "A practice that depends on people remembering at the right moment will hold for a few weeks and then decay, and the decay is a property of the design rather than of the team's commitment. Building the requirement into the point where work is already inspected makes it near-automatic and captures the reasoning while it is still accurate. Exhortation and catch-up exercises both leave the original mechanism untouched.",
+      "mindset": "Build capture into the work, because anything that relies on remembering will not survive a busy month."
+    },
+    {
+      "id": "pmp-p7-129",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "phase-handover",
+        "design-intent",
+        "gap"
+      ],
+      "stem": "The design consultant for a flood defence scheme finishes in November. The contractor who will build it is not appointed until February and does not start on site until April. The design carries judgements that are nowhere in the drawings: why a sheet-piled wall was chosen over an embankment on one reach, and which landowner agreed to what and on what understanding. What should the project manager arrange before November?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the design intent and the landowner commitments recorded for the builder specifically, and buy a small retained call-off so the designer can be questioned in April.",
+          "correct": true,
+          "rationale": "It covers both halves of the gap: what can be written is written for the person who will read it, and a bounded call-off keeps the judgement reachable across the five-month break. Buying it in November costs a fraction of what an April enquiry to a departed firm costs."
+        },
+        {
+          "id": "b",
+          "text": "Require the consultant to produce a full design rationale report before their contract ends.",
+          "correct": false,
+          "rationale": "A report written with no identified reader answers the questions the designer finds interesting, and the contractor's questions in April will not be those. It also assumes every question is foreseeable in November."
+        },
+        {
+          "id": "c",
+          "text": "Extend the consultant's contract through to April.",
+          "correct": false,
+          "rationale": "It pays for five months of retained capacity to cover what is likely to be a few days of questions, and the individuals who did the work will have moved to other schemes regardless."
+        },
+        {
+          "id": "d",
+          "text": "Rely on the tender and contract documents to carry the design intent to the contractor.",
+          "correct": false,
+          "rationale": "Tender documents state requirements and obligations rather than the reasoning behind them, and they say nothing about undertakings given to landowners in conversation."
+        }
+      ],
+      "explanation": "Phased delivery routinely creates a gap between the team that made the judgements and the team that must act on them, and the gap is usually months rather than days. Two different things have to survive it: what can be written, which should be written for the specific downstream reader, and the ability to ask a question, which needs a contractual route arranged while the relationship still exists. Commitments made to third parties in conversation are the most commonly lost category, because everyone assumes they are somewhere in the documents.",
+      "mindset": "Where a gap separates the deciders from the doers, preserve both the record and a route back to ask."
+    },
+    {
+      "id": "pmp-p7-130",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "training",
+        "ownership",
+        "rollout"
+      ],
+      "stem": "You are training a car dealership group's staff on a new vehicle handover system before it goes live across twelve sites. Three sessions have run. Each site has sent whoever happened to be free that day, so nobody has attended more than one and no site has anyone with the full picture. Two sessions remain and the go-live date is fixed. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask each site to name the person who will own the system there, and make that person's attendance a condition of the site going live.",
+          "correct": true,
+          "rationale": "It replaces spare capacity with accountability as the basis for who attends, and gives each site a reason to protect the time. Naming an owner also gives you someone to contact after go-live."
+        },
+        {
+          "id": "b",
+          "text": "Restructure the two remaining sessions so each is self-contained rather than the next instalment of a series.",
+          "correct": true,
+          "rationale": "The audience has already proved to be different each time, so a cumulative design cannot work whatever you ask of the sites. Self-contained sessions salvage value from attendance you cannot control."
+        },
+        {
+          "id": "c",
+          "text": "Repeat all three earlier sessions so everyone can catch up.",
+          "correct": false,
+          "rationale": "It multiplies delivery effort to compensate for an attendance problem that will simply repeat, since the same people will again be sent according to who is free."
+        },
+        {
+          "id": "d",
+          "text": "Record the remaining sessions and circulate them to all twelve sites.",
+          "correct": false,
+          "rationale": "It makes material available and leaves the ownership question entirely untouched, so on go-live day each site still has nobody accountable for knowing the system."
+        },
+        {
+          "id": "e",
+          "text": "Escalate the attendance problem to the group's operations director.",
+          "correct": false,
+          "rationale": "It escalates before defining what the sites are actually being asked to commit to, so the likely result is an instruction to attend that repeats the current pattern with more resentment."
+        }
+      ],
+      "explanation": "Training rolled out across sites fails on who is sent long before it fails on content, and sending whoever is free is what happens whenever the ask is attendance rather than ownership. Fixing that means naming a person per site with a stake in the outcome, and adjusting the session design to the attendance you can realistically secure. Producing more material or repeating sessions responds to the visible symptom while leaving the selection mechanism that caused it in place.",
+      "mindset": "Ask sites to name an owner rather than to send an attendee."
+    },
+    {
+      "id": "pmp-p7-131",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "onboarding",
+        "pairing",
+        "sprint-commitment"
+      ],
+      "stem": "A developer joins your six-person squad at a meal-kit company on the Monday of a two-week sprint. The squad has committed to work it considers achievable but not comfortable. The technical lead suggests parking the new joiner on a documentation task for the fortnight so the sprint is not disrupted, and starting her properly in the next one. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pair her with someone on committed work from her first day, and adjust the sprint commitment to reflect what that costs.",
+          "correct": true,
+          "rationale": "It starts the transfer immediately and prices it honestly rather than pretending onboarding is free. Adjusting the commitment is what stops the pairing being quietly abandoned when the sprint gets tight."
+        },
+        {
+          "id": "b",
+          "text": "Accept the technical lead's suggestion, since the sprint commitment is a promise the squad has made.",
+          "correct": false,
+          "rationale": "It protects a two-week forecast at the cost of the joiner's first two weeks, which is a poor trade on any horizon longer than the sprint. It also treats the commitment as fixed when re-planning is available."
+        },
+        {
+          "id": "c",
+          "text": "Give her access to the codebase and let her explore independently for the fortnight.",
+          "correct": false,
+          "rationale": "Unsupervised exploration builds confident misunderstandings with nobody present to correct them, and those are harder to undo than ignorance."
+        },
+        {
+          "id": "d",
+          "text": "Delay her start with the squad until the sprint has finished.",
+          "correct": false,
+          "rationale": "It leaves a new joiner idle for two weeks and signals that the sprint board matters more than she does. The disruption is merely postponed, not avoided."
+        }
+      ],
+      "explanation": "Onboarding always costs the receiving team capacity, and the only real choice is whether that cost is planned or disguised. Parking a new person on peripheral work protects this sprint's numbers and delays the point at which they become useful, usually by more than the fortnight saved. Making the cost visible in the commitment is what allows the pairing to survive the middle of the sprint when the work gets tight.",
+      "mindset": "Price the cost of bringing someone up to speed into the plan instead of hiding it."
+    },
+    {
+      "id": "pmp-p7-132",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "practices",
+        "diagnosis",
+        "team-knowledge"
+      ],
+      "stem": "A squad building booking software for a holiday park operator has three distinct knowledge problems, each showing up as a different symptom. The team's coach has proposed four practices in response and the squad has capacity to adopt three. Match each symptom to the practice that addresses it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Only one developer can safely change the pricing rules, and everything pricing-related waits whenever she is on leave."
+        },
+        {
+          "id": "s2",
+          "text": "A decision to store bookings in local time is now causing defects, and nobody can say whether it was deliberate."
+        },
+        {
+          "id": "s3",
+          "text": "Releases go wrong about once a month, always at the same step, and whoever is running one works the same fix out from scratch."
+        }
+      ],
+      "options": [
+        {
+          "id": "rotate",
+          "text": "Rotate ownership so pricing work is always picked up by a pair, with the current owner as the second member",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Concentrated capability is only diluted by other people doing the work with support, not by them reading about it. Keeping the owner in the pair means the transfer happens during delivery rather than instead of it."
+        },
+        {
+          "id": "record",
+          "text": "Write a short record of consequential decisions at the moment they are taken",
+          "correct": true,
+          "match": "s2",
+          "rationale": "The lost item is the reasoning, and reasoning is only recoverable at the time. A record written at the point of decision is also the only one that reflects what was actually considered."
+        },
+        {
+          "id": "setup",
+          "text": "Maintain a release procedure that whoever runs it repairs wherever it proved wrong",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The friction is concrete, repeating and already understood, so what is missing is a written procedure rather than a discussion. Having the person who just hit the problem repair it is the only arrangement that reliably keeps such a document current."
+        },
+        {
+          "id": "retro",
+          "text": "Hold a longer retrospective every quarter to surface systemic problems",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. All three problems are already surfaced, named and understood, so more surfacing adds nothing. Reaching for a discussion forum when the diagnosis is complete is a way of deferring the work of fixing anything."
+        }
+      ],
+      "explanation": "Knowledge problems present as distinguishable symptoms and each responds to a different mechanism: concentrated capability needs shared doing, lost reasoning needs capture at the point of decision, and repeated friction needs a maintained procedure. Applying one favoured practice to all three wastes effort on two of them. Once a problem is already well understood, another round of discussion is usually a substitute for acting rather than a step towards it.",
+      "mindset": "Diagnose which kind of knowledge is being lost before choosing the practice to fix it."
+    },
+    {
+      "id": "pmp-p7-133",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "distributed-teams",
+        "overlap",
+        "transition"
+      ],
+      "stem": "Support for your logistics platform moves from the build team in Bristol to a support team in Manila over the next eight weeks. The two teams share three and a half hours of working day. The build team has offered to write everything down; the Manila support lead says her people learn by working live incidents with someone watching. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Spend the overlap hours on live incidents worked jointly, and use the non-overlapping hours for writing and reading the material.",
+          "correct": true,
+          "rationale": "The overlap is the scarce input and it is the only one of the two activities that requires both teams awake at once. Writing and reading are the parts that survive being done alone."
+        },
+        {
+          "id": "b",
+          "text": "Have the build team complete the documentation first, then use the overlap for questions arising from it.",
+          "correct": false,
+          "rationale": "It spends the scarce resource on the activity that least needs it, and front-loads writing at the point when the receiving team has no basis for questions."
+        },
+        {
+          "id": "c",
+          "text": "Shift the build team's working hours to widen the overlap for the eight weeks.",
+          "correct": false,
+          "rationale": "It buys hours by imposing a sustained cost on the team that is leaving the work, whose goodwill is the thing the transition actually runs on."
+        },
+        {
+          "id": "d",
+          "text": "Extend the transition to sixteen weeks so that more overlap accumulates.",
+          "correct": false,
+          "rationale": "More calendar does not increase the overlap available per day; it stretches the same thin contact over twice the period while urgency and attention both fall."
+        }
+      ],
+      "explanation": "In a distributed transition the genuinely scarce resource is synchronous contact, and the planning question is which activities strictly require it. Anything that can be done asynchronously — writing, reading, watching a recording — should be pushed out of the overlap so the shared hours go to the things that cannot happen any other way. Extending the calendar or moving people's hours addresses the symptom while spending the transition's remaining goodwill.",
+      "mindset": "Spend synchronous time only on what cannot be done any other way."
+    },
+    {
+      "id": "pmp-p7-134",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "near-miss",
+        "psychological-safety",
+        "lessons"
+      ],
+      "stem": "A near-miss on your grain terminal conveyor project — an isolation signed off but never physically applied — is being written up for the organisation's lessons repository. The draft names the supervisor involved four times and concludes that he failed to follow the procedure. Since the draft circulated, two of his colleagues have declined to be interviewed about a separate incident. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rewrite the account around the conditions that allowed a signed-off isolation to go unapplied, and take the individual's name out of the record.",
+          "correct": true,
+          "rationale": "The transferable knowledge is in the conditions, since the next site will have different people and the same arrangements. Removing the name is also what restores the willingness of others to talk, which the withdrawal of two colleagues shows is already at risk."
+        },
+        {
+          "id": "b",
+          "text": "Keep the account as drafted, since accuracy about who did what is what makes a lesson credible.",
+          "correct": false,
+          "rationale": "It conflates factual accuracy with usefulness. A record naming an individual teaches everyone else that participating is dangerous, so the next near-miss is less likely to be reported at all."
+        },
+        {
+          "id": "c",
+          "text": "Remove the name but keep the conclusion that the procedure was not followed.",
+          "correct": false,
+          "rationale": "The finding still stops at the individual, merely anonymised, so it yields no action beyond reminding people to comply. Anyone in the terminal will know exactly who is meant."
+        },
+        {
+          "id": "d",
+          "text": "Withdraw the write-up until the separate incident has been closed.",
+          "correct": false,
+          "rationale": "It delays the lesson and confirms to the two colleagues that the safest response to any of this is silence. The reporting problem gets worse while nothing is learned."
+        }
+      ],
+      "explanation": "The supply of lessons about failures depends entirely on people's willingness to describe them, and that willingness is the first thing damaged by a record that attributes cause to a named person. It is also a weak lesson: individuals vary between projects while the conditions that allowed the failure usually persist. Writing about conditions rather than people is both the more transferable account and the one that keeps the next report coming.",
+      "mindset": "Write up a failure so that the next person is willing to report theirs."
+    },
+    {
+      "id": "pmp-p7-135",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "organisational-routing",
+        "platform",
+        "recurrence"
+      ],
+      "stem": "Your squad is the third team in eighteen months to discover that the shared identity service silently truncates long email addresses. Each team found it the same way, lost about a week, and recorded it in its own retrospective. The service belongs to a platform group that does not attend your reviews and whose backlog you cannot see. Your squad's position is that this is not their problem to solve. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Get the finding into the platform group's own intake, and pursue the defect being fixed rather than the discovery being recorded.",
+          "correct": true,
+          "rationale": "Three retrospectives have already demonstrated that recording it locally changes nothing. The only place the knowledge does any work is with the people who can remove the cause."
+        },
+        {
+          "id": "b",
+          "text": "Write it up for the organisation's lessons repository so the next team finds it before starting.",
+          "correct": false,
+          "rationale": "The repository has now failed twice against this exact defect. It also assumes the next team searches for a problem it does not yet know exists, which is the assumption the evidence contradicts."
+        },
+        {
+          "id": "c",
+          "text": "Warn the other squads directly so that nobody loses a week to it again.",
+          "correct": false,
+          "rationale": "It inoculates the teams that exist today and leaves the defect in place, so the cost simply returns with the next squad or the next joiner. Person-to-person warning does not scale past the people you happen to know."
+        },
+        {
+          "id": "d",
+          "text": "Document the workaround in your squad's codebase and move on.",
+          "correct": false,
+          "rationale": "It resolves the issue for one team at the price of three more discoveries, and it is the option the squad's own view of ownership points to. Being right that it is not your defect does not make it cheaper for the organisation."
+        }
+      ],
+      "explanation": "Repeated rediscovery of the same problem is evidence that the routing of knowledge has failed, not that people are recording too little. Knowledge reaches its destination when it lands with an owner able to act on it, and a repository that no one queries before they have the problem is not such a destination. Where the knowledge is really about a defect, the durable form of transfer is removing the thing being learned about, which is a harder ask across a team boundary and the only one that ends the recurrence.",
+      "mindset": "Route what you learn to whoever can remove the cause, not to wherever it is easiest to file."
+    },
+    {
+      "id": "pmp-p7-136",
+      "type": "pulldown",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "post-handover",
+        "dependency",
+        "support"
+      ],
+      "stem": "Six weeks ago your squad handed the member portal to a pension administrator's permanent product team. Three things have happened since, each pulling one of your developers back in, and each needs a different response if the handover is to hold. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "A member of the new team messages your developer directly for the fourth time this week with a routine question already covered in the handover. Your developer should"
+        },
+        {
+          "id": "c2",
+          "text": "The new team hits a failure mode nobody anticipated and has no starting point for diagnosing it. Your developer should"
+        },
+        {
+          "id": "c3",
+          "text": "The new team asks for a reporting change they are capable of making themselves but have not attempted. Your developer should"
+        }
+      ],
+      "options": [
+        {
+          "id": "point",
+          "text": "answer it once, then help them put the answer where their own team will look for it next time",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Refusing damages the relationship and answering repeatedly entrenches the dependency, so the useful move is to answer and simultaneously remove the reason to ask again. Recurrence is the signal that something is missing from their material, not that they are lazy."
+        },
+        {
+          "id": "work",
+          "text": "work it through with them and treat the gap as something the handover missed",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A genuinely novel failure is outside what any handover could have covered, so this is legitimate support rather than backsliding. Recording it as a gap is what stops the next one being handled the same way by default."
+        },
+        {
+          "id": "coach",
+          "text": "talk them through making the change themselves rather than making it for them",
+          "correct": true,
+          "match": "c3",
+          "rationale": "They have the capability and lack the confidence, so doing it for them removes the one opportunity to establish it. The time cost is similar and only one version leaves them able to do the next one."
+        },
+        {
+          "id": "refuse",
+          "text": "redirect them to their own team lead and decline to engage",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A flat redirect ends the contact without transferring anything, and its real effect is that the next question does not get asked at all. Unasked questions become defects rather than disappearing."
+        }
+      ],
+      "explanation": "After a handover the receiving team will keep making contact, and the response has to distinguish between a question that reveals a gap in the handover, one that reveals a gap in confidence, and one that is simply easier to ask than to look up. Each has a different remedy, and treating them all as backsliding to be refused ends the contact rather than the dependency. The general test is whether the response leaves the receiving team more able to handle the next instance without you.",
+      "mindset": "Answer in the way that makes the next question unnecessary rather than unwelcome."
+    },
+    {
+      "id": "pmp-p7-137",
+      "type": "fillblank",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "currency",
+        "procedures",
+        "backlog"
+      ],
+      "stem": "A highways depot holds 48 winter-service procedures. A review finds 30 have been verified within the last twelve months and the rest have not been looked at since. Your project changes how gritting routes are planned, and you have agreed with the depot manager that the whole set will be current before next winter, six months away. Work out the size of the task and how to sequence it.",
+      "blanks": [
+        {
+          "id": "pct",
+          "label": "Percentage of the 48 procedures currently verified, to the nearest whole number",
+          "numeric": true,
+          "expect": 63,
+          "tol": 1,
+          "unit": "%",
+          "rationale": "30 of 48 is 62.5%, which rounds to 63%. Stating it as a proportion is what makes the position arguable with a depot manager who believes the set is broadly fine."
+        },
+        {
+          "id": "rate",
+          "label": "Number of procedures that must be verified each month to clear the backlog in six months",
+          "numeric": true,
+          "expect": 3,
+          "tol": 0,
+          "rationale": "Eighteen unverified procedures over six months is three a month. Expressing the backlog as a monthly rate turns an intimidating total into a commitment somebody can actually accept."
+        },
+        {
+          "id": "first",
+          "label": "Which should be verified first — the ones your project changes, or the ones that are oldest",
+          "accept": [
+            "the ones your project changes",
+            "the ones the project changes",
+            "the ones changed by the project",
+            "the ones affected by the project",
+            "the ones my project changes"
+          ],
+          "rationale": "Age is a proxy for risk; being changed by live work is direct evidence of it. A procedure your project is altering is certain to be wrong the day the change lands, whereas an old one may still be perfectly accurate."
+        }
+      ],
+      "explanation": "Documentation currency is manageable only when it is measured, because an unmeasured set drifts until people stop trusting all of it. Converting a backlog into a monthly rate makes it a commitment somebody can own rather than a project nobody starts. Sequencing should follow evidence of inaccuracy rather than age, since the procedures your own work is changing are guaranteed to be wrong on a known date while an old procedure may never have needed to change at all.",
+      "mindset": "Measure how much of the record is current, then work the backlog at a rate somebody can own."
+    },
+    {
+      "id": "pmp-p7-138",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "closure",
+        "custody",
+        "destination"
+      ],
+      "stem": "Your desalination plant control upgrade closes next month. Three things the project has produced will outlive it, and each will only be found later if it is lodged with the group that maintains that kind of material. Getting this wrong is not visible at closure and becomes visible years afterwards. Match each to the home it should have. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The tested sequence for restarting the reverse-osmosis trains after an unplanned power loss."
+        },
+        {
+          "id": "s2",
+          "text": "The finding that running two commissioning stages in parallel cost more than the four weeks it saved."
+        },
+        {
+          "id": "s3",
+          "text": "The correspondence establishing what the supplier warranted about membrane life and on what conditions."
+        }
+      ],
+      "options": [
+        {
+          "id": "ops",
+          "text": "The plant's operating procedure set, owned by the operations manager",
+          "correct": true,
+          "match": "s1",
+          "rationale": "It will be needed at short notice by whoever is on shift, so it has to sit where operators already look under pressure. It also needs an owner who will keep it current as the plant changes."
+        },
+        {
+          "id": "lessons",
+          "text": "The organisation's lessons repository, with the supporting evidence attached",
+          "correct": true,
+          "match": "s2",
+          "rationale": "This is a finding about how to run projects rather than how to run a plant, so its readers are future project teams. Without the evidence it reads as an opinion and will be discounted by anyone who prefers the parallel approach."
+        },
+        {
+          "id": "contract",
+          "text": "The contract file held by the commercial team",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A warranty is only enforceable if its conditions can be produced years later by people who were not there. The commercial team is the group that retains such material and gets asked for it when a claim arises."
+        },
+        {
+          "id": "closure",
+          "text": "The project's own closure report",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A closure report is read once, by people confirming the project ended properly, and then filed by project rather than by subject. Anything placed there is effectively lost to everyone searching by topic later."
+        }
+      ],
+      "explanation": "At closure the question for every durable artefact is who will come looking for it, and in what circumstances, because that determines which custodian should hold it. Material filed by project rather than by subject is retrievable only by someone who already knows which project produced it, which is exactly what a future searcher does not know. The instinct to consolidate everything into one comprehensive closure document optimises for the closing team and defeats every later reader.",
+      "mindset": "File what outlives the project where its future reader will look, not where the project would file it."
+    },
+    {
+      "id": "pmp-p7-139",
+      "type": "graphic",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "escalation",
+        "support-tiers",
+        "diagnosis"
+      ],
+      "stem": "The diagram shows the path a fault takes through your parcel carrier's support arrangements after the new depot scanning system went live eight weeks ago. Around seventy per cent of the faults now reaching the project team are ones second line was trained and equipped to resolve, and second line is passing them on within minutes of receipt. Select the point in the path where the knowledge transfer has failed.",
+      "graphic": {
+        "viewBox": "0 0 640 300",
+        "title": "Fault escalation path from depot user through first and second line to the project team",
+        "caption": "Select a point in the path. Use Tab or the arrow keys to move between points, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "user",
+          "n": 1,
+          "label": "Depot user raises the fault",
+          "x": 30,
+          "y": 110,
+          "w": 130,
+          "h": 80,
+          "correct": false,
+          "rationale": "Depot users are raising faults through the route they were given, and nothing in the figures suggests they are reporting badly. Volume arriving at the far end says nothing about how it entered."
+        },
+        {
+          "id": "first",
+          "n": 2,
+          "label": "First line records and triages",
+          "x": 180,
+          "y": 110,
+          "w": 130,
+          "h": 80,
+          "correct": false,
+          "rationale": "First line is passing faults to second line, which is what triage is supposed to do with anything technical. It is a natural pick for anyone who assumes the earliest tier is where filtering breaks down."
+        },
+        {
+          "id": "second",
+          "n": 3,
+          "label": "Second line, trained on these faults, forwards them on",
+          "x": 330,
+          "y": 110,
+          "w": 130,
+          "h": 80,
+          "correct": true,
+          "rationale": "This is the tier that was trained, equipped and expected to resolve these faults and is not doing so. Passing them on within minutes shows they are not being attempted, which points to capability or confidence rather than difficulty."
+        },
+        {
+          "id": "project",
+          "n": 4,
+          "label": "Project team resolves and returns the fix",
+          "x": 480,
+          "y": 110,
+          "w": 130,
+          "h": 80,
+          "correct": false,
+          "rationale": "This is where the consequence lands and is therefore the most visible point, but the project team is doing exactly what an escalation of last resort should do. Mistaking where a problem is measured for where it is caused is the usual error with escalation data."
+        }
+      ],
+      "explanation": "An escalation path shows where work is arriving, and the failure sits at the last tier that should have stopped it and did not. The distinguishing evidence is what that tier was expected to handle compared with what it actually attempts, which is why the speed of the pass-on matters as much as the volume. Reading the pain point as the failure point puts effort into the group that is already coping and leaves the untested tier untouched.",
+      "mindset": "Look for the failure at the last point that should have handled it, not the point where it hurts."
+    },
+    {
+      "id": "pmp-p7-140",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-7",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "knowledge-base",
+        "curation",
+        "ownership"
+      ],
+      "stem": "The engineering wiki for an equipment hire firm's booking product has grown to around 1,400 pages over four years. New joiners say they cannot tell which pages are current, and the experienced developers have stopped using it altogether, keeping personal notes instead. Any proposal to delete anything makes people uneasy, and the last attempt stalled. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Identify the small set of pages that answer the questions people actually ask, and give each a named owner accountable for it being right.",
+          "correct": true,
+          "rationale": "Starting from real questions finds the fraction that carries almost all the value, and an owner is what keeps a page trustworthy afterwards. Without ownership the curated set decays back into the same condition."
+        },
+        {
+          "id": "b",
+          "text": "Move everything unread in a year into a clearly marked archive rather than deleting it, so the working set becomes small.",
+          "correct": true,
+          "rationale": "The obstacle is fear of losing something, and archiving addresses that directly at almost no cost. It shrinks what a reader has to judge without requiring anyone to certify that a page is worthless."
+        },
+        {
+          "id": "c",
+          "text": "Delete every page not updated within the last twelve months.",
+          "correct": false,
+          "rationale": "Update date is a weak proxy for value, since a good page describing something stable needs no edits. It is also the proposal that has already stalled once, because irreversibility is what people object to."
+        },
+        {
+          "id": "d",
+          "text": "Ask every author to review the pages they wrote.",
+          "correct": false,
+          "rationale": "Many authors have left over four years, and those remaining are the developers who have stopped using the wiki. It distributes the work to precisely the people least motivated and least available to do it."
+        },
+        {
+          "id": "e",
+          "text": "Add a banner to each page showing when it was last updated.",
+          "correct": false,
+          "rationale": "It makes staleness visible without reducing it, leaving the reader to judge 1,400 pages instead of the system doing the judging. Effort that improves the display of a problem rather than its size."
+        }
+      ],
+      "explanation": "A knowledge base fails on findability long before it fails on content, and past a certain size adding material makes it less useful rather than more. Recovering it means shrinking the working set to what demand actually justifies and attaching ownership so trust can be rebuilt, since an unowned page cannot be relied on however good it was when written. Reversible moves such as archiving get past the loss aversion that stalls every deletion proposal.",
+      "mindset": "Curate down to what people ask for and give it an owner, because an unowned page cannot be trusted."
+    }
+  ]
+}
