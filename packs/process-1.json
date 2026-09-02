@@ -1,0 +1,1878 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 1 — Integrated planning",
+  "questions": [
+    {
+      "id": "pmp-pr1-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "estimating",
+        "constraints",
+        "sponsor-expectations"
+      ],
+      "stem": "Your brewery's commercial director announced at a trade fair that the new canning line will be running by the first week of October. Nobody had estimated the work when she said it; the date came from the week the autumn order book opens. You have a scope outline, no estimates, and eleven weeks. The engineering lead has already started ordering long-lead parts to avoid losing time. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Build an estimate of the outlined scope and show the commercial director what the October date would actually require.",
+          "correct": true,
+          "rationale": "The estimate is the only thing that turns an announced date into either a commitment or a negotiation. Producing it early is also the cheapest moment to find out which of the two you are in."
+        },
+        {
+          "id": "b",
+          "text": "Accept the date, compress the outline plan to fit and budget for overtime from the start.",
+          "correct": false,
+          "rationale": "It treats a date that has never been tested as a validated constraint, and buys the appearance of feasibility with money before anyone knows how large the gap is."
+        },
+        {
+          "id": "c",
+          "text": "Tell the commercial director the date is not achievable and ask her to correct it with the trade buyers.",
+          "correct": false,
+          "rationale": "It rejects the date on instinct rather than evidence. Spending credibility on a public correction you cannot yet justify makes the later, evidenced conversation harder."
+        },
+        {
+          "id": "d",
+          "text": "Plan to the announced date and record the possibility of missing it as a project risk.",
+          "correct": false,
+          "rationale": "Logging a risk substitutes for doing the estimating work. A register entry does not tell anyone how far short the plan falls, so nobody can act on it."
+        }
+      ],
+      "explanation": "A date fixed before the work was sized is an input to planning, not an output of it, and the planner's job is to convert it into an evidenced statement about what is possible. Until an estimate exists there is nothing to negotiate with, so both accepting the date and refusing it are guesses. The estimate is what gives everyone a shared object to argue about rather than competing intuitions.",
+      "mindset": "Estimate first and negotiate second, because a date with no estimate behind it is a hope wearing a plan's clothes."
+    },
+    {
+      "id": "pmp-pr1-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "forecasting",
+        "planning-horizon",
+        "release-planning"
+      ],
+      "stem": "Your team at an online plant nursery has worked in two-week iterations for five months and plans one iteration at a time. A board member asks what the site will be able to do by the spring catalogue launch, sixteen weeks away. The team lead answers that adaptive teams do not plan that far ahead. The board member is visibly unsatisfied, and so are you, because the team has five months of steady delivery data sitting unused. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Produce a release forecast from the team's measured throughput and the ordered backlog, give it as a range, and refresh it every iteration.",
+          "correct": true,
+          "rationale": "Five months of delivery data is exactly what a long-horizon answer should be built from, and refreshing it each iteration keeps the forecast honest as the backlog changes."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to plan all eight remaining iterations in detail so the board member has a definite answer.",
+          "correct": false,
+          "rationale": "It confuses planning further ahead with planning in more detail. Detail on iteration eight will be rewritten several times before anyone reaches it, so the effort buys precision that decays."
+        },
+        {
+          "id": "c",
+          "text": "Support the team lead's answer and explain to the board member that adaptive delivery does not forecast.",
+          "correct": false,
+          "rationale": "It defends a practice by misstating it. Adaptive delivery forecasts continuously; what it declines to do is fix the detail, and conflating the two leaves a stakeholder with no answer at all."
+        },
+        {
+          "id": "d",
+          "text": "Commit to the scope the board member is asking about and have the product owner order the backlog to deliver it.",
+          "correct": false,
+          "rationale": "It converts a question into a promise with no evidence in between, and quietly transfers backlog authority from the product owner to whoever asked the most pointed question."
+        }
+      ],
+      "explanation": "The horizon a plan covers and the detail it carries are separate choices, and adaptive planning shortens the second rather than the first. Anyone funding work over months is entitled to an expectation about months, and a team with delivery history can give one as a range with its confidence attached. Declining to forecast does not remove the stakeholder's need; it just means the number they use will be invented elsewhere.",
+      "mindset": "Adaptive planning shortens the detail, not the horizon."
+    },
+    {
+      "id": "pmp-pr1-103",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "estimating",
+        "assumptions",
+        "uncertainty"
+      ],
+      "stem": "You are planning the digitisation of a county archive's photographic collection. Your three workstream leads have each returned a single number: eleven weeks for conservation, nine for scanning, six for cataloguing. Each says the figure is what they gave the last project of this kind. None has said what their number assumes about the condition of the material, and none has expressed any confidence in it. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask each lead for an optimistic, most likely and pessimistic figure, and for the conditions that produce each one.",
+          "correct": true,
+          "rationale": "A spread shows where the uncertainty actually sits, which a single number cannot. The conditions behind each figure are what make the estimate reviewable by someone who was not in the room."
+        },
+        {
+          "id": "b",
+          "text": "Record what each estimate assumes about the material's condition in the assumption log, with an owner and a date to test it.",
+          "correct": true,
+          "rationale": "Condition is the variable all three estimates turn on, so it is the assumption most worth testing early. An owner and a date are what stop an assumption log becoming a list of things nobody checked."
+        },
+        {
+          "id": "c",
+          "text": "Add a uniform twenty per cent contingency across all three figures to cover the uncertainty.",
+          "correct": false,
+          "rationale": "It pads every estimate identically without discovering which one is fragile. Conservation on unknown material and cataloguing to a known standard do not carry the same risk, and a flat uplift hides that."
+        },
+        {
+          "id": "d",
+          "text": "Accept the three figures as given, on the basis that each lead knows their own discipline better than you do.",
+          "correct": false,
+          "rationale": "It mistakes expertise for an estimate. A specialist's judgement is the raw material of a good estimate, but until its assumptions are stated it cannot be integrated with anyone else's."
+        },
+        {
+          "id": "e",
+          "text": "Replace all three with a parametric estimate derived from pages-per-day rates published by a larger archive.",
+          "correct": false,
+          "rationale": "It discards local knowledge for an external rate whose conditions may not match this collection at all, and it removes the three people who would have owned the numbers."
+        }
+      ],
+      "explanation": "An estimate is a claim about the future and it carries two things beyond the number: what it assumes, and how wide it could be. Without those, estimates from different people cannot be combined, because there is no way to know whether they are all optimistic, all cautious, or resting on incompatible views of the same unknown. Contingency applied evenly across estimates of unequal quality does not manage uncertainty, it only obscures where it lives.",
+      "mindset": "A number with no assumptions and no spread attached is not an estimate, it is a guess someone is willing to repeat."
+    },
+    {
+      "id": "pmp-pr1-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "cadence",
+        "integration",
+        "dependencies"
+      ],
+      "stem": "A ferry operator is replacing its ticketing system. The web and app team works in two-week iterations. The team fitting scanners on the vessels works to monthly milestones fixed by the docking schedule, which cannot move. Each team plans well on its own. Twice now the app has released a change to the ticket barcode that the installed scanners could not read, and the mismatch persisted for three weeks until the next docking. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Establish a joint integration point on a fixed rhythm, at which the barcode interface is frozen and the next docking milestone builds against that frozen version.",
+          "correct": true,
+          "rationale": "Only the interface between the two tracks needs to be synchronised, and freezing it on a rhythm both teams plan around lets each keep the cadence its own constraints demand."
+        },
+        {
+          "id": "b",
+          "text": "Move the app team to monthly releases so that both teams are planning to the same rhythm.",
+          "correct": false,
+          "rationale": "It buys alignment by slowing the team that has no reason to be slow. Forcing one cadence on both discards the feedback speed the app team's constraints allow."
+        },
+        {
+          "id": "c",
+          "text": "Ask the vessel team to adopt two-week milestones so it can keep pace with the app team.",
+          "correct": false,
+          "rationale": "The docking schedule is a physical constraint, and no change of process makes a vessel available between dockings. It treats a hard constraint as a preference."
+        },
+        {
+          "id": "d",
+          "text": "Require the app team to hold every barcode change until the vessel team confirms it is ready to receive it.",
+          "correct": false,
+          "rationale": "It makes one team's flow depend on another team's approval, turning a synchronisation problem into a permanent queue and pushing the delay upstream instead of removing it."
+        }
+      ],
+      "explanation": "When two parts of one delivery run at different rhythms because their constraints differ, the integration problem lives at the interface between them and not in the rhythms themselves. Planning a shared point at which the interface is fixed lets each side keep the cadence its own work supports, while giving both a date they can build towards. Harmonising cadences instead usually means the constrained side sets the pace for everyone, which costs speed nobody gains anything from.",
+      "mindset": "Synchronise at the interface rather than forcing one rhythm onto work whose constraints differ."
+    },
+    {
+      "id": "pmp-pr1-105",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "forecasting",
+        "throughput",
+        "release-planning"
+      ],
+      "stem": "An e-learning team has completed 32, 26, 30 and 28 story points in its last four two-week iterations. The ordered backlog for the next release holds 156 points. The sales director wants a launch date to put in a customer newsletter that goes out on Friday, and has asked you for one number. Work the forecast through before deciding what she should actually be given.",
+      "blanks": [
+        {
+          "id": "vel",
+          "label": "Average points completed per iteration across the four iterations",
+          "numeric": true,
+          "expect": 29,
+          "tol": 0.5,
+          "rationale": "The four figures total 116, and 116 divided by 4 is 29 points per iteration. Averaging across several iterations rather than taking the last one keeps a single good or bad fortnight from setting the forecast."
+        },
+        {
+          "id": "avgit",
+          "label": "Iterations needed for 156 points at the average rate, to one decimal place",
+          "numeric": true,
+          "expect": 5.4,
+          "tol": 0.2,
+          "rationale": "156 divided by 29 is 5.38, so 5.4 iterations. Since a partial iteration still delivers nothing until it ends, this rounds up to six in any date you actually quote."
+        },
+        {
+          "id": "slowit",
+          "label": "Iterations needed for 156 points at the slowest observed rate",
+          "numeric": true,
+          "expect": 6,
+          "tol": 0.2,
+          "rationale": "The slowest of the four iterations delivered 26 points, and 156 divided by 26 is exactly 6. The gap between this and the average case is the honest width of the forecast."
+        },
+        {
+          "id": "form",
+          "label": "In two or three words, the form the answer to the sales director should take",
+          "accept": [
+            "a range",
+            "range",
+            "a range of dates",
+            "range of dates",
+            "a forecast range",
+            "a date range"
+          ],
+          "rationale": "The data supports six iterations at the average and six at the worst observed rate, but only over a backlog that will change. A range carries that honestly where a single date silently discards it."
+        }
+      ],
+      "explanation": "A forecast built from observed throughput is a statement about a team's demonstrated rate applied to a backlog that is still moving, so its accuracy depends on both staying stable. Working the average and the pessimistic case separately shows how much of the answer is real signal and how much is arithmetic. The width between them is not a weakness in the forecast; it is the part a reader needs in order to decide how much to commit on the strength of it.",
+      "mindset": "Forecast from the rate a team has actually demonstrated, and hand over the range rather than the middle of it."
+    },
+    {
+      "id": "pmp-pr1-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "resource-planning",
+        "scheduling",
+        "feasibility"
+      ],
+      "stem": "You are ten days from baselining a rail signalling renewal. Loading the schedule with named resources shows that your only signalling design authority, whose approval is a legal prerequisite at three points, is required on all three workstreams during the same six weeks in autumn. She is the sole person in the business holding the current competence certificate, and the certification route for a second person takes nine months. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Re-sequence the three workstreams around her availability, then take the resulting completion date to the sponsor before anything is baselined.",
+          "correct": true,
+          "rationale": "Her availability is the binding constraint, so the sequence has to be built from it rather than adjusted afterwards. Taking the date out before baselining keeps the decision with the person who owns the consequences."
+        },
+        {
+          "id": "b",
+          "text": "Level the loading by extending all three workstreams by the same proportion until the clash disappears.",
+          "correct": false,
+          "rationale": "Even smoothing ignores which workstream drives the finish date. Stretching a path with float costs nothing useful, and stretching the critical one by the same amount costs the project directly."
+        },
+        {
+          "id": "c",
+          "text": "Engage a contract signalling designer to cover the overlap so the three workstreams can run as planned.",
+          "correct": false,
+          "rationale": "It assumes a certificated legal competence can be bought at short notice like general capacity. The nine-month certification route is exactly what makes this person unlike a resource you can add."
+        },
+        {
+          "id": "d",
+          "text": "Baseline the plan as drawn and manage the six-week clash when it arrives, since resource conflicts routinely resolve themselves.",
+          "correct": false,
+          "rationale": "It commits the organisation to dates already known to be unachievable. A baseline everyone knows is wrong stops functioning as a measure the moment it is approved."
+        }
+      ],
+      "explanation": "Loading a schedule with real people is the point at which a plan stops being arithmetic about durations and becomes a claim about capacity that somebody has to honour. Where a scarce competence is genuinely unsubstitutable, it sets the sequence and everything else arranges around it, rather than the reverse. A baseline is a commitment, so approving one containing a conflict you have already identified converts a solvable planning problem into a delivery failure with your signature on it.",
+      "mindset": "Never baseline a plan you already know cannot be resourced."
+    },
+    {
+      "id": "pmp-pr1-107",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "estimating",
+        "techniques",
+        "evidence"
+      ],
+      "stem": "You are pricing three unrelated pieces of work for a civil engineering business, all due at the same investment meeting. What is known about each differs sharply: one has close precedents, one has a measured unit rate, and one has confident tasks with contested durations. Match each to the estimating approach its evidence will actually support. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "A funding decision on a depot rebuild is needed in a fortnight, and three comparable depots have been rebuilt by the same organisation in the last four years."
+        },
+        {
+          "id": "s2",
+          "text": "A cable-laying contract will run 240 kilometres over ground the crew has worked before, and the crew's cost and progress per kilometre are recorded for the last six contracts."
+        },
+        {
+          "id": "s3",
+          "text": "A first-of-a-kind integration between two systems, where the team can list the tasks confidently but disagrees strongly about how long several of them will take."
+        }
+      ],
+      "options": [
+        {
+          "id": "anal",
+          "text": "Analogous estimating from the completed comparable projects",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Recent comparable work and a fortnight to answer in is the situation analogous estimating exists for. It buys speed at the cost of precision, which is the correct trade at a funding gate."
+        },
+        {
+          "id": "param",
+          "text": "Parametric estimating from the recorded rate per kilometre",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A repeatable unit of work with six contracts of history behind its rate is the strongest case for a parametric model, because the rate is measured rather than asserted."
+        },
+        {
+          "id": "three",
+          "text": "Three-point estimating of the disputed tasks",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The disagreement is about duration, not about what the work is, so the useful output is a range that captures the spread rather than a single figure that overrules one camp."
+        },
+        {
+          "id": "bu",
+          "text": "Bottom-up estimating from a fully decomposed breakdown of the work",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. It is the most accurate method and the slowest, so it needs both time and settled detail. The first situation has no time, the second already has a better rate, and in the third the decomposition exists and is not what is in dispute."
+        }
+      ],
+      "explanation": "The choice of estimating method is governed by the evidence available and the decision the estimate has to support, not by which method is most rigorous in the abstract. History of similar whole projects supports comparison, history of a repeatable unit supports a rate, and confident tasks with contested durations support a range. Reaching for the most precise technique when its inputs do not exist produces a number that looks stronger than the evidence underneath it.",
+      "mindset": "Pick the estimating technique that matches the evidence you have, not the precision you would like to claim."
+    },
+    {
+      "id": "pmp-pr1-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "capacity",
+        "iteration-planning",
+        "commitment"
+      ],
+      "stem": "A community radio station's app team is planning its next two-week iteration. The team has averaged around twenty points an iteration for months. Two of the six members are away for the whole fortnight, one on annual leave and one at a training course, and both absences have been in the calendar since the spring. The team lead opens planning by proposing they take in the usual twenty points. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the team to work out the capacity actually available this fortnight before deciding how much work to take in.",
+          "correct": true,
+          "rationale": "Capacity is the input to a commitment and it changes every iteration. Doing the sum before committing takes thirty seconds and prevents a shortfall the team already had all the information to predict."
+        },
+        {
+          "id": "b",
+          "text": "Take in the usual twenty points and make up any shortfall in the following iteration.",
+          "correct": false,
+          "rationale": "It treats an average as an entitlement rather than a measurement, and plans a deficit into an iteration that has not been planned yet."
+        },
+        {
+          "id": "c",
+          "text": "Ask the two people leaving to finish their share of the work before they go.",
+          "correct": false,
+          "rationale": "It preserves the number by pushing the gap onto people's leave and training. It also hides the capacity problem behind two individuals' goodwill, so it recurs the next time anyone is away."
+        },
+        {
+          "id": "d",
+          "text": "Swap in lower-priority items that the four remaining people know well, keeping the total at twenty points.",
+          "correct": false,
+          "rationale": "It solves for familiarity when the constraint is available hours. Four people do not become six because the work is easier, and the total is still more than the fortnight holds."
+        }
+      ],
+      "explanation": "A team's historical rate describes what a full team has achieved and is a starting point for planning, not a quota to be met regardless of who is present. Every planning session begins with the capacity genuinely available in that period, and known absences are the easiest input there is to gather. Committing beyond available capacity does not increase what gets delivered; it just moves the discovery of the shortfall to the end of the iteration.",
+      "mindset": "Plan against the capacity you have this time, not the average you usually have."
+    },
+    {
+      "id": "pmp-pr1-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "assumptions",
+        "validation",
+        "planning-inputs"
+      ],
+      "stem": "You are finalising the plan for a seed genetics trial. Eight weeks of the schedule depend on access to a controlled growth chamber owned by another department, which your agronomist says has always been free in the autumn. Nobody has spoken to the chamber's manager about this season, and the chamber is a fifteen-minute walk away. The plan is due for baselining on Friday. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Treat chamber access as an assumption with a named owner, confirm it with the chamber's manager, and only baseline once it is confirmed or the plan has changed.",
+          "correct": true,
+          "rationale": "It is a statement of fact the plan depends on and it can be verified this week, which makes it an assumption to close rather than a condition to carry into a baseline."
+        },
+        {
+          "id": "b",
+          "text": "Record it in the risk register as a possible loss of chamber access, with a mitigation to find alternative capacity.",
+          "correct": false,
+          "rationale": "A risk is an uncertain future event. This is a present fact nobody has checked, and putting it in the risk register converts a fifteen-minute walk into a monitored item that may never be resolved."
+        },
+        {
+          "id": "c",
+          "text": "Develop a parallel plan based on hiring commercial chamber capacity, so the project is covered either way.",
+          "correct": false,
+          "rationale": "It spends planning effort on a contingency before establishing whether one is needed, and a second plan will need maintaining for as long as it exists."
+        },
+        {
+          "id": "d",
+          "text": "Proceed to baseline, since the chamber has been available every autumn the agronomist can remember.",
+          "correct": false,
+          "rationale": "It substitutes a pattern from previous years for a confirmation about this one, which is precisely the reasoning that leaves a plan resting on something nobody owns."
+        }
+      ],
+      "explanation": "Assumptions and risks are handled differently because they are different things: an assumption is something taken as true that could be checked, and a risk is an event that may or may not occur. Cheap, checkable assumptions should be closed before a baseline rather than carried past it, because their cost of verification only ever rises once dates are committed. A register full of items that could have been settled with a conversation is a sign the distinction has been lost.",
+      "mindset": "If a planning assumption can be closed with a short conversation, close it rather than carrying it."
+    },
+    {
+      "id": "pmp-pr1-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "milestones",
+        "acceptance",
+        "plan-quality"
+      ],
+      "stem": "The plan for a municipal swimming pool refurbishment has nine milestones, each with an owner and a date. Reading them before approval, you notice that every one is a noun phrase: plant room complete, tiling complete, commissioning complete. None says what evidence would show it had been reached, and the same three words appeared in a previous project where two milestones were reported complete twice. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with each milestone owner the specific evidence that will demonstrate the milestone is met, and record it in the plan before approval.",
+          "correct": true,
+          "rationale": "The evidence has to be agreed with the person who will produce it, and before approval is the only moment when defining it is a neutral act rather than a challenge to a claim."
+        },
+        {
+          "id": "b",
+          "text": "Add a percentage-complete column so progress towards each milestone can be tracked between reports.",
+          "correct": false,
+          "rationale": "It measures effort towards a destination that is still undefined. A milestone is reached or it is not, and a percentage lets an unreachable one look healthy for months."
+        },
+        {
+          "id": "c",
+          "text": "Rely on the workstream leads to judge completion, since they know the work better than anyone reviewing the plan.",
+          "correct": false,
+          "rationale": "It leaves the definition with whoever reports the status, so completion becomes an opinion that varies by author and cannot be compared across the plan."
+        },
+        {
+          "id": "d",
+          "text": "Schedule a short review meeting at each milestone date to decide whether it has been achieved.",
+          "correct": false,
+          "rationale": "It defers defining the test until the moment it is contested, when the parties have the strongest incentives to disagree and the least time to resolve it."
+        }
+      ],
+      "explanation": "A milestone earns its place in a plan by being unambiguously reached or not reached, which requires a stated test agreed in advance by the person accountable for meeting it. Dates and owners without that test produce a plan that can be reported green indefinitely, because each report is an assertion rather than a check. Defining the evidence is cheap while the milestone is distant and nearly impossible once someone has an interest in the answer.",
+      "mindset": "A milestone with no agreed test for 'met' is only a date with an ambition attached."
+    },
+    {
+      "id": "pmp-pr1-111",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "product-goal",
+        "direction",
+        "measures"
+      ],
+      "stem": "A museum's audio-guide product team has a well-ordered backlog, a stable cadence and a demonstrable increment every fortnight. Asked at a review what the next three months are for, four team members give four different answers: better accessibility, more languages, faster loading and a schools offer. Each is defensible, each has some backlog items behind it, and the team is genuinely productive. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the product owner and the sponsor to set one goal for the period, and have the backlog ordered against it.",
+          "correct": true,
+          "rationale": "Four defensible directions with no ranking is a decision that has not been taken, and it belongs to the person accountable for the product's value rather than to whoever argues hardest."
+        },
+        {
+          "id": "b",
+          "text": "Agree the measure that will show the goal has been reached, and review it at each increment review.",
+          "correct": true,
+          "rationale": "A goal without a measure attached degrades into a slogan within a few iterations. Reviewing it alongside the increment is what keeps the direction connected to what is actually being built."
+        },
+        {
+          "id": "c",
+          "text": "Split iteration capacity across the four directions so that each one makes visible progress.",
+          "correct": false,
+          "rationale": "It treats a disagreement about direction as a problem of fair shares, and guarantees four things that are each too incomplete to be worth releasing."
+        },
+        {
+          "id": "d",
+          "text": "Have the team vote on which of the four directions to pursue for the quarter.",
+          "correct": false,
+          "rationale": "It converts a value decision into a team preference. The team has the best view of cost and feasibility, but not of which outcome the museum most needs."
+        },
+        {
+          "id": "e",
+          "text": "Ask the sponsor for a detailed twelve-month feature roadmap so the direction is settled well in advance.",
+          "correct": false,
+          "rationale": "It over-specifies the far horizon to fix a near-horizon problem. The team does not lack a list of features; it lacks a reason for choosing between the ones it already has."
+        }
+      ],
+      "explanation": "A cadence tells a team when to deliver and a backlog tells it what is available, but neither answers what the period is for, and a productive team without that answer will optimise locally in several directions at once. The goal has to come from whoever is accountable for the outcome, and it needs a measure or it cannot be reviewed. Steady delivery is not evidence of direction; it is what makes the absence of direction expensive.",
+      "mindset": "A team that is delivering steadily can still be going nowhere in particular, so name what the period is for and how you will know."
+    },
+    {
+      "id": "pmp-pr1-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "funding-cycle",
+        "sequencing",
+        "trade-offs"
+      ],
+      "stem": "Your university has approved £2.4 million for replacing science-block ventilation, from a capital allocation that expires on 31 March and cannot be carried over. The technically sound sequence surveys the occupied building over winter and replaces the main plant during the summer vacation when the block is empty, which puts £1.7 million of spend into the next financial year. The finance director suggests ordering the plant in March to book the cost against this year. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Set out both sequences with their cost, risk and disruption, and put the choice to the sponsor and finance director together as a decision about funding rather than about scheduling.",
+          "correct": true,
+          "rationale": "The conflict is between two legitimate constraints owned by two different people, and neither can resolve it alone. Making the trade explicit is the only route that does not quietly let one calendar redesign the delivery."
+        },
+        {
+          "id": "b",
+          "text": "Order the plant in March to secure the funding and store it on site until the summer.",
+          "correct": false,
+          "rationale": "It solves the accounting deadline and creates storage, insurance, warranty-start and obsolescence exposure that nobody has priced. It also settles a governance question by procurement action."
+        },
+        {
+          "id": "c",
+          "text": "Compress the works into the winter so the whole spend falls inside the financial year.",
+          "correct": false,
+          "rationale": "It accepts disruption to an occupied building and a compressed programme in order to satisfy a financial calendar, letting the funding cycle choose the delivery approach."
+        },
+        {
+          "id": "d",
+          "text": "Ask the finance director to seek carry-over approval, and plan for the summer on the basis that it will be granted.",
+          "correct": false,
+          "rationale": "The request is reasonable but building the plan on it is not. It converts an unmade decision by a third party into a planning assumption with no fallback if the answer is no."
+        }
+      ],
+      "explanation": "Funding calendars are real constraints, but they constrain when money may be committed rather than how work is best sequenced, and the two are frequently in tension on capital projects. The planner's contribution is to make the exchange rate between them visible — what the organisation gains in certainty of funding and what it pays in risk, disruption or cost — so that the people who own each constraint decide together. Resolving it silently in one currency is the failure, whichever currency is chosen.",
+      "mindset": "When a financial calendar and a delivery sequence disagree, surface the exchange rate rather than settling it quietly in one direction."
+    },
+    {
+      "id": "pmp-pr1-113",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "reporting",
+        "vendor-management",
+        "integrated-view"
+      ],
+      "stem": "A port authority's yard management programme has an external supplier delivering the terminal operating system against a four-hundred-line schedule issued monthly, while your internal team builds the driver-facing app using a flow board with eleven months of cycle-time history. The two forecasts are produced in different units and have never been combined, and the sponsor needs a single defensible answer on whether November holds before she commits to a berth reallocation. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree a small set of shared milestones both parties commit to, forecast each side in its own terms against those milestones, and report a single integrated view of the target date.",
+          "correct": true,
+          "rationale": "Shared commitments are the only thing the two methods have in common, and forecasting each side natively keeps both forecasts trustworthy while still producing one answer for the sponsor."
+        },
+        {
+          "id": "b",
+          "text": "Ask the supplier to adopt a flow board so that both sides report in the same way.",
+          "correct": false,
+          "rationale": "It imposes an internal working method on a contracted party whose obligations are expressed as dates. The supplier's process is not yours to set, and asking spends goodwill on presentation."
+        },
+        {
+          "id": "c",
+          "text": "Convert the internal team's cycle-time data into a bar schedule so that the two plans can be merged into one chart.",
+          "correct": false,
+          "rationale": "It manufactures precision by turning a probabilistic forecast into fixed bars, and the resulting chart is more confident than either input justified."
+        },
+        {
+          "id": "d",
+          "text": "Report both sources side by side with their own measures and let the sponsor draw the overall conclusion.",
+          "correct": false,
+          "rationale": "It hands the integration problem to the person least equipped to do it. Producing the single coherent view is the work being asked for, not an optional refinement of it."
+        }
+      ],
+      "explanation": "Integrating plans that are built on different methods means finding the level at which both can make the same kind of commitment, which is usually a short list of dated outcomes rather than the underlying detail. Each side then forecasts against those outcomes using the technique its own work supports, and the integration happens at the commitments rather than in the notation. Translating one method into the other's format destroys information in whichever direction it is done.",
+      "mindset": "Integrate plans at shared commitments, not by forcing both sides into a single notation."
+    },
+    {
+      "id": "pmp-pr1-114",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "planning-horizon",
+        "release-planning",
+        "commitment"
+      ],
+      "stem": "Two requests have reached you on the same afternoon at a garden equipment retailer, and although both are questions about what the team will deliver, they sit at very different distances from today. Answering either one in the other's terms would mislead the person asking. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The team has committed to eight items for the fortnight now under way, and a stakeholder wants a ninth added. What that commitment lives in, and what must therefore be renegotiated, is"
+        },
+        {
+          "id": "c2",
+          "text": "The sales team needs something to tell customers about the June launch, four months out, and has asked what it can promise. What they should be given is"
+        }
+      ],
+      "options": [
+        {
+          "id": "iter",
+          "text": "the iteration plan, which the team owns and which cannot absorb a ninth item without one of the eight coming out",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The commitment is the team's and it is bounded by capacity, so an addition is a trade rather than an increment. Naming the trade is what keeps the commitment meaningful next time."
+        },
+        {
+          "id": "rel",
+          "text": "the release forecast, expressed as a range of likely outcomes and refreshed each iteration",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Four months out the honest object is a forecast, not a promise, and giving sales the range with its refresh cycle lets them talk to customers without inventing certainty."
+        },
+        {
+          "id": "vis",
+          "text": "the product vision, which states why the product exists and carries no dated content",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Neither question asks what the product is for; both ask what will exist by when. A vision offered as an answer to either would be a plan wearing the wrong label."
+        }
+      ],
+      "explanation": "Different horizons carry different kinds of promise, and confusion between them is where most planning arguments start. Inside a committed period the answer is a trade against capacity; months out it is a forecast with a range; and the statement of purpose behind both is not an answer to either. Matching the horizon of the question to the horizon of the artefact is what allows a team to be firm about the near term without pretending to certainty about the far one.",
+      "mindset": "Answer each question at the horizon it was asked, because a promise and a forecast are different objects."
+    },
+    {
+      "id": "pmp-pr1-115",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "benefits",
+        "plan-scope",
+        "handover"
+      ],
+      "stem": "A bus network's contactless ticketing project has a plan that ends at go-live in November. The funding case promised £900,000 a year in reduced fare evasion, and the benefits plan measures that from January onwards. Nobody has planned the intervening period: the evasion baseline has not been captured, the enforcement team has not been told, and the November-to-January window belongs to no one in either plan. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Extend the integrated plan across the window, naming who runs it, what baseline data must be captured before go-live, and when the project's involvement ends.",
+          "correct": true,
+          "rationale": "The baseline data can only be captured before the change, so it is a dated dependency inside the project even though the measurement falls outside it. Naming the owner closes the gap between the two plans."
+        },
+        {
+          "id": "b",
+          "text": "Move the start of benefits measurement forward to go-live so that the two plans meet.",
+          "correct": false,
+          "rationale": "It fits the measurement to the plan rather than the other way round, and produces a figure taken while the system is still stabilising, which will understate or overstate the effect unpredictably."
+        },
+        {
+          "id": "c",
+          "text": "Close the project at go-live as planned and transfer responsibility for benefits to the operations team.",
+          "correct": false,
+          "rationale": "It hands over a commitment without the evidence needed to meet it, since the pre-change baseline will no longer be collectable once the project has closed."
+        },
+        {
+          "id": "d",
+          "text": "Ask the finance team to estimate the reduction in evasion rather than measure it.",
+          "correct": false,
+          "rationale": "It replaces the evidence the funding case promised with an estimate produced after the fact, which cannot distinguish the project's effect from anything else that changed."
+        }
+      ],
+      "explanation": "A plan that stops at the point of delivery has not planned the part the money was granted for, and the join between delivery and benefit is where most funded outcomes are quietly lost. Some inputs to measurement — a pre-change baseline above all — can only be gathered while the project still exists, which makes them project work regardless of which plan the benefit sits in. Every handover between plans needs a named owner on both sides and a date, or it becomes a gap that each side assumes the other covered.",
+      "mindset": "Plan through the join between delivery and benefit, because nobody owns a gap that both plans assume the other covers."
+    },
+    {
+      "id": "pmp-pr1-116",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "risk",
+        "iteration-planning",
+        "dependencies"
+      ],
+      "stem": "A podcast platform team's iteration planning produces a clear list of work and nothing else. Twice in the last four months a version change in the third-party audio processing service has appeared mid-iteration and consumed several days, and on both occasions someone in the room said afterwards that they had known it was coming. The team is about to plan the next iteration the same way. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add a short step to planning that asks what could stop each committed item, and carry the answers as work the team owns inside the iteration.",
+          "correct": true,
+          "rationale": "The knowledge is already in the room and the planning session is simply not asking for it. Keeping the answers as work rather than as a list keeps them with the people who can act."
+        },
+        {
+          "id": "b",
+          "text": "Open a project risk register that the project manager maintains and reviews outside the team's planning.",
+          "correct": false,
+          "rationale": "It relocates risk away from the people who spotted it and can respond to it, and creates a document whose review cycle is slower than the thing it tracks."
+        },
+        {
+          "id": "c",
+          "text": "Reduce the team's commitment by a fifth each iteration to absorb interruptions of this kind.",
+          "correct": false,
+          "rationale": "It buys slack without learning what consumes it, so the same dependency arrives a third time and the team is now slower as well as surprised."
+        },
+        {
+          "id": "d",
+          "text": "Raise the third-party dependency at the next retrospective so the team can discuss how it was handled.",
+          "correct": false,
+          "rationale": "It puts a forward-looking question into a backward-looking meeting. A retrospective can improve how the team plans, but it cannot plan the iteration that has already started."
+        }
+      ],
+      "explanation": "Planning that only enumerates work is half a plan, because a commitment is a statement about what will be finished and finishing depends on what might intervene. The most valuable risk information usually already sits with the team and goes unspoken because nothing in the session asks for it. Keeping the resulting actions inside the iteration rather than in a separate register is what makes them cheap enough to be worth raising at all.",
+      "mindset": "Ask what could stop the work while there is still time to act on the answer."
+    },
+    {
+      "id": "pmp-pr1-117",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "capacity",
+        "resource-planning",
+        "escalation"
+      ],
+      "stem": "Your dairy co-operative's traceability programme is planned around six named people. Reviewing it with their line managers, you learn that four of them are committed to milk collection support for two days a week, an arrangement that predates your project and that the collection manager regards as non-negotiable during the season. The plan assumes all six full time and shows a March completion. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rebuild the schedule on the hours actually available, and take the revised date to the sponsor with the choice between scope, date and changing the collection commitment.",
+          "correct": true,
+          "rationale": "The recalculated date is what makes the conflict visible as a decision rather than a grievance, and the three options are the only levers, so presenting them together keeps the choice where the authority sits."
+        },
+        {
+          "id": "b",
+          "text": "Ask the line managers to protect the project's share of their people's time as far as they can.",
+          "correct": false,
+          "rationale": "It seeks a promise that costs the manager something and gives you nothing plannable in return, because the collection commitment will win every week that it conflicts."
+        },
+        {
+          "id": "c",
+          "text": "Keep the plan as it stands and track the slippage weekly so that it is at least visible.",
+          "correct": false,
+          "rationale": "It monitors an infeasibility already known at planning time, producing months of reports about a gap that could have been resolved before anyone committed to March."
+        },
+        {
+          "id": "d",
+          "text": "Add two further part-time people to make up the missing hours.",
+          "correct": false,
+          "rationale": "It treats hours as interchangeable and adds coordination and onboarding cost to a plan whose problem is availability of specific knowledge, not headcount."
+        }
+      ],
+      "explanation": "Plans built on nominal allocations rather than genuine availability fail slowly and invisibly, because each week's shortfall is small enough to be absorbed and the cumulative gap only appears near the end. Recalculating on real hours converts an operational reality into a schedule fact, which is the form in which it can be escalated usefully. The decision between scope, date and the competing commitment belongs to whoever owns all three, and the planner's job is to make that trade legible rather than to choose it.",
+      "mindset": "Plan on the hours people actually have, and turn the shortfall into a decision for whoever can resolve it."
+    },
+    {
+      "id": "pmp-pr1-118",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "estimating",
+        "three-point",
+        "uncertainty"
+      ],
+      "stem": "A wind farm's cable-pull activity has not been attempted on this seabed before. The marine supervisor offers three figures: 12 days if the weather holds and the trenching rig behaves, 18 days as the realistic case, and 36 days if the rig needs recovery, which happened on the previous contract. You need a duration for the integrated plan and a statement of how confident it is.",
+      "blanks": [
+        {
+          "id": "pert",
+          "label": "Weighted expected duration in days, giving the most likely case four times the weight of each extreme",
+          "numeric": true,
+          "expect": 20,
+          "tol": 0.5,
+          "unit": "days",
+          "rationale": "The weighted average is (12 + 4 x 18 + 36) divided by 6, which is 120 over 6, or 20 days. It sits above the most likely figure because the pessimistic tail is further from the middle than the optimistic one."
+        },
+        {
+          "id": "sd",
+          "label": "Standard deviation in days, taken as the range between the extremes divided by six",
+          "numeric": true,
+          "expect": 4,
+          "tol": 0.5,
+          "unit": "days",
+          "rationale": "The spread is 36 minus 12, which is 24, and 24 divided by 6 gives 4 days. This is what lets the estimate be quoted as roughly 20 days give or take 4 rather than as a bare number."
+        },
+        {
+          "id": "single",
+          "label": "In two or three words, which of the supervisor's three figures a single-number estimate would almost certainly have reported",
+          "accept": [
+            "most likely",
+            "the most likely",
+            "most likely case",
+            "18",
+            "18 days",
+            "the realistic case"
+          ],
+          "rationale": "Asked for one number, an estimator reports the realistic case, so a single-point estimate here would have been 18 days. That is two days below the weighted figure and gives no hint that the tail reaches 36."
+        }
+      ],
+      "explanation": "A three-point estimate is worth the effort mainly for what the two extremes reveal, not for the weighted number it produces. Where the pessimistic case sits far further from the likely case than the optimistic one, the distribution is skewed and a single realistic figure will systematically understate the duration to plan around. Quoting the expected value together with its spread is what lets the reader decide how much schedule protection the activity deserves.",
+      "mindset": "The value of a three-point estimate is the spread it exposes, not the single number it collapses into."
+    },
+    {
+      "id": "pmp-pr1-119",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "forecasting",
+        "commitment",
+        "confidence"
+      ],
+      "stem": "A pharmacy chain's prescription app is forecast to reach its release scope somewhere between mid-May and late July, with the middle of that range around the third week of June. The board paper closes tomorrow and the template has a single field for the launch date, which the finance director will use to schedule a marketing spend of £400,000. Your product owner asks what you are going to put in the box. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Give a date the team can meet at a stated confidence, name what must hold true for it, and record the scope that would be dropped first if it does not.",
+          "correct": true,
+          "rationale": "The board needs one number to commit money against, and attaching the confidence and the first sacrifice makes the number a plan rather than a prediction the team will be held to blindly."
+        },
+        {
+          "id": "b",
+          "text": "Enter mid-May, since the range supports it and an ambitious date keeps pressure on the team.",
+          "correct": false,
+          "rationale": "It reports the optimistic tail as if it were the expectation, which guarantees a later conversation about a slip that was fully predictable when the paper was written."
+        },
+        {
+          "id": "c",
+          "text": "Enter late July, since a date the team cannot miss protects both the marketing spend and the team's credibility.",
+          "correct": false,
+          "rationale": "It buys safety with capacity the organisation could have used, and a forecast that is never beaten teaches everyone to discount the next one."
+        },
+        {
+          "id": "d",
+          "text": "Decline to give a single date and supply the full range with an explanation of why a point estimate would be misleading.",
+          "correct": false,
+          "rationale": "It is right about method and unhelpful in context. Refusing to commit hands the choice of number to someone with less information, who will pick one anyway."
+        }
+      ],
+      "explanation": "Forecasts are ranges and commitments are points, and the planner's job at a governance boundary is to convert one into the other without losing the information. That conversion has three parts: which point in the range is being offered, the confidence attached to it, and what gives way first if the assumptions fail. Reporting only the range refuses the conversion, while reporting a bare date discards everything that makes it decidable.",
+      "mindset": "Commit to a point in the range with its confidence and its first sacrifice attached, rather than hiding behind either optimism or the range itself."
+    },
+    {
+      "id": "pmp-pr1-120",
+      "type": "graphic",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "integration-points",
+        "hybrid-planning",
+        "sequencing"
+      ],
+      "stem": "An events venue is replacing its access control. The turnstile hardware follows a fixed install and commissioning sequence; the mobile ticketing app is built in fortnightly iterations. A test rig with live turnstiles becomes available in week 7, and iteration four completes the first end-to-end scan journey in week 8. Go-live is week 16. The diagram marks four candidate positions for the first joint integration checkpoint. Select the position at which it should be planned.",
+      "graphic": {
+        "viewBox": "0 0 640 320",
+        "title": "Sixteen-week timeline with a hardware install track above and an eight-iteration software track below, four candidate checkpoint positions marked",
+        "caption": "Select a candidate position. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "w2",
+          "n": 1,
+          "label": "Week 2 — at the end of the first iteration, before the rig exists",
+          "x": 60,
+          "y": 40,
+          "w": 90,
+          "h": 240,
+          "correct": false,
+          "rationale": "Neither side has anything to integrate: no rig and no completed journey. A checkpoint here can only review intentions, and reviewing intentions is what design reviews already do."
+        },
+        {
+          "id": "w8",
+          "n": 2,
+          "label": "Week 8 — rig available since week 7, first end-to-end journey complete",
+          "x": 200,
+          "y": 40,
+          "w": 90,
+          "h": 240,
+          "correct": true,
+          "rationale": "This is the earliest week at which both sides have something real to bring, and eight weeks remain to act on what it finds. Integration first proves itself here or it does not."
+        },
+        {
+          "id": "w14",
+          "n": 3,
+          "label": "Week 14 — two weeks before go-live, with commissioning under way",
+          "x": 380,
+          "y": 40,
+          "w": 90,
+          "h": 240,
+          "correct": false,
+          "rationale": "It waits for more of both tracks to be finished, which feels safer and removes the time to respond. Anything discovered here is discovered when only the launch date can absorb it."
+        },
+        {
+          "id": "w16",
+          "n": 4,
+          "label": "Week 16 — at go-live, as part of acceptance testing",
+          "x": 500,
+          "y": 40,
+          "w": 90,
+          "h": 240,
+          "correct": false,
+          "rationale": "It confuses acceptance with integration. Acceptance confirms that something already known to work meets the requirement; discovering here that the two tracks disagree leaves no options at all."
+        }
+      ],
+      "explanation": "The first integration point between two tracks belongs at the earliest moment both sides have something real to test, because its purpose is to expose disagreement while the disagreement is still cheap. Two conditions set that moment: the enabling asset must exist, and one side must have completed something that exercises it end to end. Deferring integration until more is built consistently feels like the responsible choice and consistently removes the time that would have made the finding useful.",
+      "mindset": "Put the first integration point where both sides first have something real, not where the most has been built."
+    },
+    {
+      "id": "pmp-pr1-121",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "reserves",
+        "contingency",
+        "cost-planning"
+      ],
+      "stem": "Three uncertainties have surfaced while you plan a distribution centre build, and each needs a home in the plan before the cost baseline is set. Match each uncertainty to the provision that suits how well it is understood and who owns it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Two site surveys agree that ground conditions may require extra piling, and both have estimated the likely range of additional cost."
+        },
+        {
+          "id": "s2",
+          "text": "A change to national building regulations mid-project would force a redesign. It is possible, it is unbudgeted, and its scale cannot be sized from anything the project knows."
+        },
+        {
+          "id": "s3",
+          "text": "The steel supplier's price is indexed to a published rate that moves monthly, and the contract passes those movements straight through to the buyer."
+        }
+      ],
+      "options": [
+        {
+          "id": "cont",
+          "text": "Contingency reserve held inside the cost baseline, drawn on by the project manager",
+          "correct": true,
+          "match": "s1",
+          "rationale": "A quantified range for an identified event is the definition of a known unknown, and holding the money inside the baseline lets the project respond without returning to the sponsor."
+        },
+        {
+          "id": "mgmt",
+          "text": "Management reserve held outside the cost baseline, released by the sponsor",
+          "correct": true,
+          "match": "s2",
+          "rationale": "An event that cannot be sized should not be priced into a baseline that performance will be measured against. Holding it above the baseline keeps the sponsor's decision separate from project performance."
+        },
+        {
+          "id": "esc",
+          "text": "A price adjustment mechanism written into the procurement approach",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A published index moving monthly is a certainty about direction and an unknown only about amount, so it belongs in how the contract handles price rather than in a reserve for events."
+        },
+        {
+          "id": "buff",
+          "text": "A schedule buffer placed at the end of the chain of dependent activities",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A buffer absorbs duration variation, and all three uncertainties here are about money. Adding time to a cost problem protects nothing and disguises which reserve was actually needed."
+        }
+      ],
+      "explanation": "Provisions in a plan are classified by how well the uncertainty is understood and by who has the authority to release the money, not by how worried anyone is about it. Quantifiable events sit inside the baseline where the project can act; unquantifiable ones sit above it where the sponsor decides; and predictable variation in a price is a contracting question rather than a reserve at all. Putting an uncertainty in the wrong provision usually means the wrong person finds out about it, at the wrong time.",
+      "mindset": "Place each uncertainty where its owner sits, because a reserve is a statement about authority as much as about money."
+    },
+    {
+      "id": "pmp-pr1-122",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "scope-addition",
+        "baseline",
+        "integration"
+      ],
+      "stem": "Nine months into a waste recycling programme, a regional grant unexpectedly funds a second sorting depot. The grant letter names a completion date fifteen months out. The existing programme already draws on one commissioning team and one procurement officer, both fully committed, and its integrated plan was baselined in the spring. The grant sponsor wants the new depot treated as an addition to your programme. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Test the new depot's demands against the existing resource and procurement plans before accepting its dates.",
+          "correct": true,
+          "rationale": "The two shared roles are where the collision will actually happen, so the feasibility question has to be answered against them before any date is agreed."
+        },
+        {
+          "id": "b",
+          "text": "Take the revised integrated plan through the agreed change route so the programme has a single current commitment.",
+          "correct": true,
+          "rationale": "A programme with an old baseline and a new workstream outside it has two versions of the truth, and re-baselining through governance is what collapses them back into one."
+        },
+        {
+          "id": "c",
+          "text": "Let the new depot run to its own plan and integrate the two at monthly reporting.",
+          "correct": false,
+          "rationale": "It postpones the collision to the point where it becomes visible in a report rather than resolving it while it is still a planning question, and reporting cannot allocate a commissioning team."
+        },
+        {
+          "id": "d",
+          "text": "Accept the grant letter's completion date, since the funding is conditional on it.",
+          "correct": false,
+          "rationale": "It treats a funding condition as a validated schedule. The date says what the funder wants, not what the programme's shared resources can deliver."
+        },
+        {
+          "id": "e",
+          "text": "Pause the existing workstreams while the new depot is planned in, to avoid committing capacity twice.",
+          "correct": false,
+          "rationale": "It stops delivering value in order to solve a planning problem that does not require a stop, and the paused work will still be there competing for the same people afterwards."
+        }
+      ],
+      "explanation": "New money buys work but it does not buy feasibility, and an addition to a programme is only real once it has been tested against the constraints the programme already has. The test belongs before the date is accepted, because afterwards the conversation is about recovery rather than about choice. Running the addition alongside the baseline instead of through it produces two plans that each look achievable and cannot both be true.",
+      "mindset": "New funding buys work, not capacity, so integrate an addition before committing to its dates."
+    },
+    {
+      "id": "pmp-pr1-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "sequencing",
+        "architecture",
+        "early-decisions"
+      ],
+      "stem": "A satellite ground station's software team is ready to start building operator features. Nobody has yet decided how telemetry will be stored, and every feature on the backlog reads or writes telemetry. The team wants to begin on the highest-value feature now and settle storage when the usage pattern becomes clear. Two architects have offered to produce a target design document within the month. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Spend the first iteration building a thin end-to-end slice that forces the storage decision, then plan the feature work on top of the answer.",
+          "correct": true,
+          "rationale": "A decision every feature depends on is settled fastest by building something that exercises it, and the slice produces a working answer rather than a proposed one."
+        },
+        {
+          "id": "b",
+          "text": "Hold feature planning until the storage architecture has been decided and documented in full.",
+          "correct": false,
+          "rationale": "It stops the work to buy certainty that only running code will provide, and reverts to designing the whole approach before anything is validated."
+        },
+        {
+          "id": "c",
+          "text": "Start on the highest-value feature and refactor the storage layer later, once the usage pattern is visible.",
+          "correct": false,
+          "rationale": "It defers a decision that every subsequent feature will encode, so the cost of changing it grows with each iteration rather than falling as information arrives."
+        },
+        {
+          "id": "d",
+          "text": "Commission the architects' target design document and have the team follow it once it is issued.",
+          "correct": false,
+          "rationale": "It buys a document rather than a decision, and leaves the team idle or building on an assumption for a month while the document is written."
+        }
+      ],
+      "explanation": "Early sequencing in adaptive work should be driven by which decisions everything else depends on, because those are the ones whose cost of reversal rises fastest. Where a decision can only be settled by evidence, the cheapest evidence is usually a narrow slice that exercises the whole path rather than a document that predicts it. Deferring such a decision is not the same as deferring a commitment: each iteration built over it quietly makes the eventual choice more expensive.",
+      "mindset": "Sequence the early work so that the decisions everything depends on are settled by building, not by waiting."
+    },
+    {
+      "id": "pmp-pr1-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "governance",
+        "organisational-change",
+        "decision-rights"
+      ],
+      "stem": "An insurance broker's policy administration replacement depends on requirement sign-off from four named regional managers across the coming quarter. The chief operating officer has just announced a restructuring that will merge the regions, with the new structure taking effect at some point in that quarter and the appointments not yet made. Your plan names all four managers as approvers on dated activities. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rewrite the plan around the decisions needed and the roles that own them, and agree an interim decision route with the sponsor that survives the restructuring.",
+          "correct": true,
+          "rationale": "Decisions and roles outlast individuals, so a plan expressed that way stays valid through the change, and the interim route stops the project stalling on the day the names move."
+        },
+        {
+          "id": "b",
+          "text": "Hold planning until the new structure is announced and the appointments are known.",
+          "correct": false,
+          "rationale": "It suspends the project for an event with no confirmed date, converting somebody else's organisational uncertainty into schedule loss the project owns."
+        },
+        {
+          "id": "c",
+          "text": "Obtain all four sign-offs early, before the current managers move to their new posts.",
+          "correct": false,
+          "rationale": "It collects approvals from people who will not be accountable for them afterwards, and successors routinely reopen decisions they did not make."
+        },
+        {
+          "id": "d",
+          "text": "Escalate to the chief operating officer and ask that your four approvers be excluded from the restructuring until sign-off is complete.",
+          "correct": false,
+          "rationale": "It requests an exemption from an organisational decision the project has no standing in, and signals that the plan cannot survive ordinary change."
+        }
+      ],
+      "explanation": "A plan that names individuals as the point of a decision inherits every personnel change the organisation makes, while a plan expressed in terms of decisions and the roles that own them survives them. Restructuring is a normal condition rather than an interruption, and the planning response is to make the decision rights explicit so they can be reassigned without reopening the schedule. Obtaining decisions from an outgoing holder buys a signature rather than a commitment.",
+      "mindset": "Plan around the decisions you need and the roles that own them, because roles outlive the people currently in them."
+    },
+    {
+      "id": "pmp-pr1-125",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "plan-components",
+        "diagnosis",
+        "integration"
+      ],
+      "stem": "You have spent a week interviewing leads on a rail depot programme that keeps losing time to problems nobody saw coming. Three complaints came up repeatedly, and each traces back to a different gap in the integrated plan rather than to the people involved. Match each complaint to the plan component that must change for it to stop recurring. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Two workstreams have each assumed the other is providing the test data for September's dress rehearsal, and neither has scheduled the work."
+        },
+        {
+          "id": "s2",
+          "text": "The same two engineers are doing the integration work for three workstreams and neither has had time for their own assigned deliverables for six weeks."
+        },
+        {
+          "id": "s3",
+          "text": "Every requirement amendment produces a week of argument about who is entitled to approve it before anyone can act."
+        }
+      ],
+      "options": [
+        {
+          "id": "sched",
+          "text": "The integrated schedule, where the interface has no owning milestone on either side",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Work that both parties assume the other holds is work that appears in neither schedule. Giving the interface a dated milestone with one owner is what makes the omission impossible to repeat."
+        },
+        {
+          "id": "res",
+          "text": "The resource plan, where demand on shared people was never totalled across workstreams",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Each workstream's own plan can be individually reasonable while the sum is impossible. The failure is in the aggregation, so the fix belongs where allocations are totalled."
+        },
+        {
+          "id": "gov",
+          "text": "The governance and change approach, where approval authority for amendments is undefined",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A week of argument each time means the authority was never established, and it will recur for every amendment until it is written down and agreed by the people it binds."
+        },
+        {
+          "id": "comms",
+          "text": "The communications plan, which sets who is told what and how often",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. All three are failures of definition rather than of information flow, and telling people more frequently about something nobody has defined does not define it."
+        }
+      ],
+      "explanation": "Recurring delivery symptoms are usually the visible end of a specific gap in the plan, and the diagnosis matters because each gap has a different owner and a different fix. Work nobody scheduled points at the schedule's interfaces; people over-committed across workstreams points at how demand is aggregated; and repeated arguments about permission point at decision rights. The common wrong move is to answer all three with more communication, which raises the volume of the symptom without touching its source.",
+      "mindset": "Trace a recurring symptom to the part of the plan that is actually missing, rather than adding meetings to everything."
+    },
+    {
+      "id": "pmp-pr1-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "planning-overhead",
+        "tailoring",
+        "proportionality"
+      ],
+      "stem": "A textile manufacturer's systems team holds iteration planning, twice-weekly refinement, a review, a retrospective, a weekly project manager's planning call and a monthly pre-read session for the steering group. You measure it: 22 per cent of the team's available hours go into these sessions. The team is not complaining, but three of them have separately mentioned that the pre-read and the weekly call cover the same ground. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Put the measured cost in front of the team, remove or merge the sessions that repeat decisions made elsewhere, and keep the ones that change what gets built.",
+          "correct": true,
+          "rationale": "The test is whether a session changes a decision, and the measured hours give the team the evidence to apply it rather than debating preferences."
+        },
+        {
+          "id": "b",
+          "text": "Halve the length of every session so the total planning overhead comes down proportionately.",
+          "correct": false,
+          "rationale": "It reduces cost uniformly without asking which sessions were earning their place, so the valuable ones are cut by as much as the redundant ones."
+        },
+        {
+          "id": "c",
+          "text": "Keep the cadence as it stands, since the events are prescribed and the team has not raised a formal objection.",
+          "correct": false,
+          "rationale": "It treats a practice as a rule rather than a means, and takes the absence of complaint as evidence of value when three people have already noticed the duplication."
+        },
+        {
+          "id": "d",
+          "text": "Send only the team lead to the planning call and the pre-read, and have them relay the outcomes.",
+          "correct": false,
+          "rationale": "It recovers hours by removing the people whose knowledge the planning depends on, and turns two-way sessions into a relay where questions arrive a week late."
+        }
+      ],
+      "explanation": "Planning effort is an investment and should be sized by the decisions it improves, which means the question about any recurring session is what would be decided differently if it did not happen. Cost measured in team hours makes that question answerable rather than a matter of taste, and duplication between forums is the most common source of waste because each forum was individually justified. Uniform trimming avoids the diagnosis and reduces the useful sessions along with the redundant ones.",
+      "mindset": "Size planning effort by the decisions it changes, and cut what is repeating a decision already made."
+    },
+    {
+      "id": "pmp-pr1-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "scheduling",
+        "negative-float",
+        "escalation"
+      ],
+      "stem": "You have built the schedule for an airport's stand allocation system backwards from a go-live fixed by the summer flight schedule. The backward pass shows that the first activity, a data extract from the airline systems, would have had to start three weeks ago. Every duration in the chain came from the people who will do the work, and nothing has been padded. Nothing has started yet. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Report the shortfall to the sponsor immediately, with the options that could recover it and what each would cost.",
+          "correct": true,
+          "rationale": "A schedule that cannot start on time is telling you the constraint set is infeasible, and the only useful moment to say so is before work begins and while all the options remain open."
+        },
+        {
+          "id": "b",
+          "text": "Shorten the early activities until the start date reaches today, and manage the tighter durations closely.",
+          "correct": false,
+          "rationale": "It compresses estimates without any evidence that the shorter durations are achievable, which makes the plan fiction on the day it is issued."
+        },
+        {
+          "id": "c",
+          "text": "Start the data extract at once and plan to recover the three weeks over the rest of the schedule.",
+          "correct": false,
+          "rationale": "It begins in a known deficit and removes the moment at which the constraint could have been renegotiated, betting recovery on a chain that was already fully estimated."
+        },
+        {
+          "id": "d",
+          "text": "Run the first three activities in parallel to absorb the shortfall.",
+          "correct": false,
+          "rationale": "It assumes the dependencies between them are preferences rather than requirements, without checking, and buys time against a constraint that may be physical."
+        }
+      ],
+      "explanation": "Negative float on a backward pass is information, not an error to be corrected in the tool, and it usually means the date and the estimates cannot both be true. The first response is to state the size of the gap while every recovery option is still available, because compression, resequencing and scope reduction all cost less before work has started. Absorbing the gap silently transfers a decision that belongs to whoever set the constraint onto the person who noticed the problem.",
+      "mindset": "A plan that cannot start when it must has already given you the answer, so report it before you compress it."
+    },
+    {
+      "id": "pmp-pr1-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "prioritisation",
+        "capacity",
+        "programme-planning"
+      ],
+      "stem": "A national forestry body runs three workstreams: replanting after storm damage, a fire-watch tower network, and a public access app. Each lead has produced a sound plan and each plan peaks in the third quarter. Combined, the third quarter needs three times the available GIS survey capacity and 40 per cent more cash than the quarter's allocation. All three leads are adamant their timing is driven by external factors. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sequence the three against the outcomes the programme was funded to deliver, and take the proposed order to the board with the consequence of each deferral stated.",
+          "correct": true,
+          "rationale": "The conflict cannot be resolved inside any one plan, so it becomes a prioritisation decision, and stating the cost of each deferral is what lets the board choose rather than merely approve."
+        },
+        {
+          "id": "b",
+          "text": "Reduce each workstream's third-quarter scope by a third so that all three fit within the capacity and the cash.",
+          "correct": false,
+          "rationale": "Equal cuts feel fair between teams and destroy the coherence of each deliverable. A third of a fire-watch network covers no defined area and protects nothing."
+        },
+        {
+          "id": "c",
+          "text": "Move the public access app into the next financial year, since it is the only one without a physical dependency.",
+          "correct": false,
+          "rationale": "It takes a prioritisation decision the project manager does not own, and defers the workstream that is easiest to defer rather than the one whose deferral costs least."
+        },
+        {
+          "id": "d",
+          "text": "Ask the three leads to re-estimate their third quarter more aggressively so the totals come within the envelope.",
+          "correct": false,
+          "rationale": "It resolves an integration problem by pressing on the estimates, which returns the same conflict later with less warning and with three leads who no longer estimate honestly."
+        }
+      ],
+      "explanation": "When individually sound plans are collectively infeasible, the failure is in the integration rather than in any of the plans, and it cannot be repaired by adjusting them proportionally. The resolution is a sequencing decision made against what the programme exists to achieve, taken by whoever owns that judgement and informed by what each possible deferral would actually cost. Pressure applied to estimates or scope in equal shares preserves the appearance of even-handedness and converts three viable deliverables into three compromised ones.",
+      "mindset": "When sound plans collide, re-sequence against the outcome rather than trimming everyone by the same fraction."
+    },
+    {
+      "id": "pmp-pr1-129",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "cadence",
+        "stage-gates"
+      ],
+      "stem": "Your programme's design freeze gate is fixed for week 9 by a governance calendar set annually across the organisation. Your delivery team works in three-week iterations, and the current one runs from week 8 to week 10. The evidence the gate requires, a demonstrated integration of the two candidate designs, will not exist until the iteration closes in week 10. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the mismatch with the gate owner now, proposing either a one-week move of the gate or an agreed redefinition of the evidence that will genuinely exist at week 9.",
+          "correct": true,
+          "rationale": "Both parties still have options a fortnight out, and putting the choice to the person who owns the gate keeps the decision with the authority rather than resolving it by presentation."
+        },
+        {
+          "id": "b",
+          "text": "Align iteration boundaries with the gate calendar for the remainder of the programme so evidence lands before it is needed.",
+          "correct": true,
+          "rationale": "The clash will recur at every gate, so treating it as a structural fix rather than a one-off avoids repeating this conversation three or four more times."
+        },
+        {
+          "id": "c",
+          "text": "Present the partial evidence available at week 9 and undertake to supply the remainder immediately afterwards.",
+          "correct": false,
+          "rationale": "It preserves the date by hollowing out the decision, and a gate passed on a promise stops functioning as a control for everyone who relies on it."
+        },
+        {
+          "id": "d",
+          "text": "Extend the current iteration by a week so that it closes in time for the gate.",
+          "correct": false,
+          "rationale": "It distorts the delivery rhythm to serve a reporting date and breaks the comparability of the team's throughput data, which the forecast depends on."
+        },
+        {
+          "id": "e",
+          "text": "Request that adaptive workstreams be exempted from the design freeze gate.",
+          "correct": false,
+          "rationale": "It asks governance to make an exception rather than fitting delivery to it, and gives up the assurance the gate provides in exchange for convenience."
+        }
+      ],
+      "explanation": "Hybrid delivery means two calendars exist and they will not naturally align, so the alignment has to be planned rather than discovered at each collision. The negotiable elements are the timing of the gate and the definition of the evidence it requires, both of which belong to the gate's owner; what is not negotiable is presenting evidence that does not yet exist. Fixing the boundaries once is far cheaper than resolving the same mismatch at every gate for the life of the programme.",
+      "mindset": "Where governance and delivery cadence collide, move the calendars rather than the evidence."
+    },
+    {
+      "id": "pmp-pr1-130",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "capacity",
+        "iteration-planning",
+        "reserved-capacity"
+      ],
+      "stem": "Your team of six developers is planning a three-week iteration containing 15 working days. Two of the six are away for five days each. The team has agreed to hold a fifth of its remaining capacity for production support, which the operations manager depends on. The product owner arrives at planning with 90 person-days of candidate work and expects most of it to be taken in.",
+      "blanks": [
+        {
+          "id": "gross",
+          "label": "Gross capacity in person-days if everyone were present for the whole iteration",
+          "numeric": true,
+          "expect": 90,
+          "tol": 0,
+          "unit": "person-days",
+          "rationale": "Six developers across 15 working days gives 90 person-days. This is the figure that makes the product owner's 90 days of candidate work look affordable, which is exactly why it is the wrong anchor."
+        },
+        {
+          "id": "net",
+          "label": "Capacity in person-days after the two known absences",
+          "numeric": true,
+          "expect": 80,
+          "tol": 0,
+          "unit": "person-days",
+          "rationale": "Two people away for five days each removes 10 person-days, leaving 80. Known absences are deducted first because they are certain, unlike anything that might interrupt the iteration later."
+        },
+        {
+          "id": "avail",
+          "label": "Capacity in person-days available for backlog work after the support reserve",
+          "numeric": true,
+          "expect": 64,
+          "tol": 0,
+          "unit": "person-days",
+          "rationale": "A fifth of 80 is 16 person-days held for support, leaving 64 for planned work. The reserve is deducted from the post-absence figure, not from the gross, or it would be understated."
+        },
+        {
+          "id": "anchor",
+          "label": "In a few words, which of the three figures the team should plan its commitment against",
+          "accept": [
+            "available capacity",
+            "64",
+            "64 person-days",
+            "the available capacity",
+            "the 64",
+            "capacity available for backlog work"
+          ],
+          "rationale": "Only the final figure describes hours that are genuinely free for backlog work. Committing against either of the larger numbers means promising time that is already spoken for by leave or by support."
+        }
+      ],
+      "explanation": "Capacity for planning is what remains after every claim already made on the team's time, and the deductions have to be applied in order because a proportional reserve taken from the wrong base gives the wrong answer. The distance between the gross figure and the genuinely available one is usually large enough to change what a team commits to, which is why it is worked openly in the planning session rather than assumed. A reserve that is quietly consumed by optimistic commitment is not a reserve.",
+      "mindset": "Commit against the hours that are genuinely free, after every existing claim on the team has been taken out."
+    },
+    {
+      "id": "pmp-pr1-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "carryover",
+        "iteration-planning",
+        "prioritisation"
+      ],
+      "stem": "A bicycle courier firm's dispatch team ended its last iteration with two items unfinished, both roughly three-quarters done. At the start of planning the team lead pulls them straight into the new iteration ahead of everything else, on the grounds that they are nearly complete and it would be wasteful to stop. The product owner has not seen the backlog since the last review. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the two unfinished items reordered against the rest of the backlog by the product owner before the team commits to them.",
+          "correct": true,
+          "rationale": "Unfinished work re-enters as a candidate like anything else, and the product owner is the person who can say whether three-quarters-done still beats what is now at the top."
+        },
+        {
+          "id": "b",
+          "text": "Pull them into the new iteration automatically, since most of the effort has already been spent.",
+          "correct": false,
+          "rationale": "It is sunk-cost reasoning: how much has been spent says nothing about whether finishing is now the best use of the next fortnight."
+        },
+        {
+          "id": "c",
+          "text": "Return both to the bottom of the backlog so the new iteration starts with a clean commitment.",
+          "correct": false,
+          "rationale": "It discards real progress for tidiness, on items that may still be the most valuable things available."
+        },
+        {
+          "id": "d",
+          "text": "Split each item, count the finished three-quarters as delivered, and carry the remainder as a new item.",
+          "correct": false,
+          "rationale": "It reports credit for work that produces nothing usable on its own, which inflates the throughput figures the team's forecasts are built from."
+        }
+      ],
+      "explanation": "Work left unfinished at the end of a period returns to the backlog as a candidate rather than as an entitlement, and the decision to continue it belongs to whoever orders the backlog. Near-completion is a genuine argument for finishing, but it is an argument about cost to complete rather than about value, and the two are decided together. Automatic carryover also hides how often work is being started that cannot be finished, which is the more useful signal.",
+      "mindset": "Unfinished work re-enters planning as a candidate, never as an entitlement."
+    },
+    {
+      "id": "pmp-pr1-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "external-dependencies",
+        "decision-dates",
+        "options"
+      ],
+      "stem": "Your council's depot refurbishment is planned to include charging infrastructure for electric refuse vehicles. The fleet electrification project that would buy those vehicles is expected to be approved in March but has not been funded, and its business case is one of eleven competing for the same capital pot. Your groundworks must start in May, and the charging provision changes the excavation design substantially. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Plan the work that does not depend on the decision, identify the latest date by which you must choose, and agree that date and the fallback design with the sponsor now.",
+          "correct": true,
+          "rationale": "It keeps both designs live until the last useful moment while making the deadline explicit, so the choice is made deliberately rather than by the arrival of the excavation date."
+        },
+        {
+          "id": "b",
+          "text": "Assume approval and design the excavation to include the charging provision.",
+          "correct": false,
+          "rationale": "It builds a baseline on another body's unmade decision, and the cost of the assumption being wrong lands entirely in your groundworks."
+        },
+        {
+          "id": "c",
+          "text": "Remove the dependency from the plan until the electrification project is approved.",
+          "correct": false,
+          "rationale": "It hides a known dependency, so nobody is monitoring the single external event most likely to change your design and your date."
+        },
+        {
+          "id": "d",
+          "text": "Ask your sponsor to press for the electrification business case to be accelerated through approval.",
+          "correct": false,
+          "rationale": "It attempts to manage another project's governance instead of managing your own exposure, and leaves you with no plan if the answer is still no in March."
+        }
+      ],
+      "explanation": "An undecided external dependency is managed by identifying the point beyond which you can no longer keep both options open, and by knowing what you will do at that point if the decision has not arrived. That date is a planning artefact in its own right and it should be agreed with the sponsor while it is still distant. Assuming the outcome, or deleting the dependency, both replace a manageable exposure with an invisible one.",
+      "mindset": "Against an undecided dependency, name the date you must choose by and what you will choose if nothing has changed."
+    },
+    {
+      "id": "pmp-pr1-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "shared-resources",
+        "contention",
+        "cross-team-planning"
+      ],
+      "stem": "Two teams at a hotel group's booking platform build against the same shared integration environment, which can hold one configuration at a time. Both plan their fortnightly iterations independently on the same Monday, and both have assumed environment availability in four of the next six iterations. Neither team's plan mentions the other. The clash has already cost each of them two days in the last month. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Make the environment a planned resource with a visible booking schedule that both teams plan against.",
+          "correct": true,
+          "rationale": "A resource two plans depend on has to appear in both, and a visible schedule turns an invisible collision into a constraint everyone can see before committing."
+        },
+        {
+          "id": "b",
+          "text": "Have both teams plan the contended iterations in the same session so the trade is made by the people it affects.",
+          "correct": true,
+          "rationale": "The teams hold the information about what each needs the environment for, so deciding together produces a better trade than any allocation imposed afterwards."
+        },
+        {
+          "id": "c",
+          "text": "Give the higher-priority team first call on the environment whenever the two clash.",
+          "correct": false,
+          "rationale": "It settles every future clash by rank rather than by what each release actually needs, and teaches the other team that planning honestly costs them access."
+        },
+        {
+          "id": "d",
+          "text": "Build a second integration environment so that neither team is constrained.",
+          "correct": false,
+          "rationale": "It reaches for spend before establishing whether the contention is structural or confined to a few overlapping weeks, and a second environment brings its own maintenance and drift."
+        },
+        {
+          "id": "e",
+          "text": "Let each team book the environment when it needs it, on a first-come basis.",
+          "correct": false,
+          "rationale": "It turns a planning problem into a race and rewards whoever books earliest rather than whoever needs it most, which pushes both teams to book speculatively."
+        }
+      ],
+      "explanation": "A resource that two independent plans both rely on is not really shared until it appears in both of them, and until then each team is planning against a capacity it does not exclusively hold. Making the contention visible is the first move, and resolving it among the people who own the work is the second, because they are the only ones who can weigh what each use is worth. Standing priority rules and open access both remove the negotiation rather than improving it.",
+      "mindset": "A resource two plans depend on belongs in both, with the contention settled before either team commits."
+    },
+    {
+      "id": "pmp-pr1-134",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "baseline",
+        "forecast",
+        "variance"
+      ],
+      "stem": "Six weeks into a laboratory relocation your project is running eight days late, and everyone including the sponsor agrees the original dates were realistic when they were set. Two questions arrive on the same day and each needs a different figure, though both are about the same eight days. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The board asks how the project is performing against what was agreed. The figure that answer should be measured from is"
+        },
+        {
+          "id": "c2",
+          "text": "The sponsor asks when the project will now finish, given the eight days. The figure that answer should be drawn from is"
+        }
+      ],
+      "options": [
+        {
+          "id": "base",
+          "text": "the approved baseline, which stays fixed so that variance can be measured against it",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Performance is a comparison, and it needs a stationary point of reference. A baseline that moves whenever reality does cannot show anything about how delivery is going."
+        },
+        {
+          "id": "fcast",
+          "text": "the current forecast, which reflects performance to date and is not itself a change to what was agreed",
+          "correct": true,
+          "match": "c2",
+          "rationale": "The forecast answers the question about the future without altering the record of what was committed, which is why both figures can coexist without contradiction."
+        },
+        {
+          "id": "rebase",
+          "text": "a re-baselined schedule reissued with the eight days absorbed into the remaining work",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Re-baselining to make a variance disappear destroys the only record of how the project has performed, and leaves the next slippage with nothing to be measured against."
+        }
+      ],
+      "explanation": "A baseline and a forecast answer different questions and both are needed at once: one is the fixed reference that makes variance meaningful, the other is the current best expectation of the outcome. Reporting a slipped project by moving the baseline collapses the two, so the project appears to be on plan while nobody can see how far it has drifted. Re-baselining is legitimate when the agreement itself has changed, and not as a way of tidying away a variance.",
+      "mindset": "Hold the baseline still so the forecast has something to mean."
+    },
+    {
+      "id": "pmp-pr1-135",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "delivery-approach",
+        "tailoring",
+        "sponsor-expectations"
+      ],
+      "stem": "A new sponsor joins your water treatment upgrade in month five. Having watched the software workstream demonstrate something every fortnight, she asks that the plant workstream move to two-week iterations as well, saying the contrast between the two makes the hardware side look slow. Pump lead times are sixteen weeks and commissioning cannot be reversed once started. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Show her where iterating would genuinely help on the plant side and where lead times and irreversibility prevent it, and propose changes only where the constraints allow.",
+          "correct": true,
+          "rationale": "It takes the sponsor's underlying concern about visibility seriously while keeping the approach tied to what the work will actually support, and it names which parts can move."
+        },
+        {
+          "id": "b",
+          "text": "Move both workstreams to two-week iterations as requested, since the sponsor owns the delivery approach.",
+          "correct": false,
+          "rationale": "It applies a cadence to work whose uncertainty and lead times do not support it, on the strength of a preference rather than a constraint, and the cadence will be theatre within a month."
+        },
+        {
+          "id": "c",
+          "text": "Explain that physical works cannot be delivered iteratively and keep the plant workstream as it is.",
+          "correct": false,
+          "rationale": "It defends the current approach as a category rule, and gives up the parts of the plant work — prototyping, staged commissioning, early factory tests — where iteration genuinely does apply."
+        },
+        {
+          "id": "d",
+          "text": "Report the plant workstream on a fortnightly cycle to match the software team, leaving the work itself unchanged.",
+          "correct": false,
+          "rationale": "It gives the sponsor the appearance of the change she asked for, which costs more trust when noticed than declining would have cost in the first place."
+        }
+      ],
+      "explanation": "Delivery approach follows the constraints of the work — how quickly feedback can be obtained, how reversible decisions are, and what lead times apply — rather than the preference of whoever is watching. Where a request cannot be met as stated, the useful response separates the concern behind it from the mechanism proposed, since visibility and cadence are different things and only one of them was actually being asked for. On mixed programmes the honest answer to 'can this be iterative' is usually that some of it can.",
+      "mindset": "Let the constraints of the work choose the approach, and answer 'partly' when that is the truthful answer."
+    },
+    {
+      "id": "pmp-pr1-136",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "backlog-order",
+        "feasibility",
+        "specialist-availability"
+      ],
+      "stem": "Your veterinary practice software product owner has ordered the backlog strictly by value. Three of the top five items each need the same clinical data specialist, who is available for one week in the next six because she is committed to a regulatory audit. The team is about to plan the next iteration and intends to work down the order as written. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the near-term order revisited so that value and feasibility are weighed together, and the specialist's one week is spent on whichever item most needs her.",
+          "correct": true,
+          "rationale": "Order should reflect what can actually be started as well as what is worth most, and a scarce week is best spent where the specialist is genuinely irreplaceable."
+        },
+        {
+          "id": "b",
+          "text": "Keep the value order intact and let the team work around the specialist's availability as they go.",
+          "correct": false,
+          "rationale": "It treats the backlog order as untouchable and pushes an unresolvable dependency into the iteration, where it becomes blocked work rather than a planning choice."
+        },
+        {
+          "id": "c",
+          "text": "Schedule all three items into the specialist's available week.",
+          "correct": false,
+          "rationale": "It fills a scarce week without asking whether all three genuinely need her or whether one does and the others merely benefit."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to lower the priority of two of the three items.",
+          "correct": false,
+          "rationale": "It asks for a value judgement to be misstated in order to accommodate a capacity constraint, which corrupts the one signal the order is supposed to carry."
+        }
+      ],
+      "explanation": "Backlog order expresses what is worth most, but the sequence a team actually works in also has to respect what can be started, and the two are reconciled in the near-term ordering rather than by pretending one of them does not exist. Where a constraint is a scarce person, the useful question is which item genuinely requires that person rather than which would merely go faster with them. Rewriting priorities to disguise a constraint destroys the meaning of the order for everyone downstream.",
+      "mindset": "Order by value, then sequence by what can actually be started, without pretending either consideration is the other."
+    },
+    {
+      "id": "pmp-pr1-137",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "decision-points",
+        "lead-times",
+        "planning-sequence"
+      ],
+      "stem": "Your programme must choose between two data migration tools. The pilot that will distinguish them reports in week 9. Whichever is chosen needs licences and trained operators, and the supplier quotes a six-week lead time from order. Migration build starts in week 16 and cannot begin without the tool in place. The timeline marks four candidate positions for the decision point. Select the position where it belongs.",
+      "graphic": {
+        "viewBox": "0 0 640 300",
+        "title": "Twenty-week timeline showing the pilot reporting in week 9, a six-week supplier lead time and migration build starting in week 16, with four candidate decision positions",
+        "caption": "Select a candidate position. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "w0",
+          "n": 1,
+          "label": "Week 0 — at plan approval, alongside the other baseline decisions",
+          "x": 40,
+          "y": 60,
+          "w": 90,
+          "h": 180,
+          "correct": false,
+          "rationale": "It settles the question before any evidence exists, purely to have it settled. Deciding early is only a virtue when waiting would cost more than the information is worth, and here the pilot is already funded."
+        },
+        {
+          "id": "w6",
+          "n": 2,
+          "label": "Week 6 — while the pilot is still running, to protect the lead time",
+          "x": 180,
+          "y": 60,
+          "w": 90,
+          "h": 180,
+          "correct": false,
+          "rationale": "It pays for the pilot and then declines to use it. Deciding three weeks before the results arrive discards the very information the pilot was commissioned to produce."
+        },
+        {
+          "id": "w10",
+          "n": 3,
+          "label": "Week 10 — after the pilot reports, with six weeks left before build",
+          "x": 320,
+          "y": 60,
+          "w": 90,
+          "h": 180,
+          "correct": true,
+          "rationale": "The pilot has reported and exactly the quoted lead time remains before build starts. This is the last point at which the decision can use all the evidence and still be delivered in time."
+        },
+        {
+          "id": "w16",
+          "n": 4,
+          "label": "Week 16 — at the start of migration build, once the need is immediate",
+          "x": 460,
+          "y": 60,
+          "w": 90,
+          "h": 180,
+          "correct": false,
+          "rationale": "It waits until the decision is unavoidable, by which point the six-week lead time guarantees the build starts six weeks late whichever tool is chosen."
+        }
+      ],
+      "explanation": "A decision that depends on both incoming evidence and an outgoing lead time has a window rather than a date, and the window opens when the evidence arrives and closes a lead time before the result is needed. Planning the decision at the closing edge preserves every option for as long as possible without putting the dependent work at risk. Deciding before the window opens wastes the evidence, and letting it close converts a choice into a delay.",
+      "mindset": "Place a decision at the last point where it can still use the evidence and still be acted on in time."
+    },
+    {
+      "id": "pmp-pr1-138",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "estimating",
+        "budget",
+        "integrity"
+      ],
+      "stem": "Your bottom-up estimate for a museum's collection management replacement totals €1.14 million against an approved budget of €900,000. The finance business partner has asked you to go back to the workstream leads and sharpen the numbers, noting that estimates always contain padding and that a submission over budget will not be considered by the investment committee. The scope has not changed. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold the estimate as given and present the scope that could be removed or deferred to reach €900,000, with the consequence of each reduction.",
+          "correct": true,
+          "rationale": "It keeps the estimate as evidence and moves the only variable that can honestly move, while giving the committee a decision it is equipped to take."
+        },
+        {
+          "id": "b",
+          "text": "Reduce the contingency provision until the total comes within the approved budget.",
+          "correct": false,
+          "rationale": "It closes a scope gap with money set aside for uncertainty, so the first thing that goes wrong reopens the same gap with no provision left."
+        },
+        {
+          "id": "c",
+          "text": "Ask the workstream leads to re-estimate with the €900,000 target in mind.",
+          "correct": false,
+          "rationale": "It anchors the estimate to the desired answer, producing a number that satisfies the committee and predicts nothing, and it teaches the leads that estimates are negotiable downwards."
+        },
+        {
+          "id": "d",
+          "text": "Submit the full estimate with an explanation and leave the shortfall for the committee to resolve.",
+          "correct": false,
+          "rationale": "It is honest and stops one step short. Presenting the problem without the options leaves the committee to invent scope reductions it is far less well placed to design."
+        }
+      ],
+      "explanation": "An estimate is evidence about what work will cost, and a budget is a decision about what the organisation will spend, so a gap between them is resolved by changing the work rather than the evidence. Adjusting estimates to fit a target destroys their value as a forecast and their usefulness as a control, and it usually reappears as an overrun that nobody predicted because the prediction was suppressed. Presenting the options alongside the gap is what turns bad news into a decision.",
+      "mindset": "Move the scope to reach a budget, never the estimate, and bring the options with the gap."
+    },
+    {
+      "id": "pmp-pr1-139",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "distributed-teams",
+        "coordination",
+        "work-design"
+      ],
+      "stem": "Your logistics product is built by one team split across Manila, Lisbon and Chicago, with a single hour in which all three are at work. Planning currently happens in that hour and routinely overruns without concluding, and work is allocated to whoever is free rather than by location. Cross-location handoffs regularly wait a full day for an answer. The team is well regarded and morale is dropping. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Restructure the work so each location owns whole slices with few cross-location dependencies, and plan the dependencies that remain into the overlap hour.",
+          "correct": true,
+          "rationale": "It reduces the amount of coordination the day needs rather than trying to fit more coordination into an hour that cannot grow."
+        },
+        {
+          "id": "b",
+          "text": "Move planning decisions into a written asynchronous form with a fixed deadline for objections, keeping the overlap hour for what genuinely needs live conversation.",
+          "correct": true,
+          "rationale": "Most planning input does not require simultaneity, and a stated deadline is what stops asynchronous discussion from drifting instead of deciding."
+        },
+        {
+          "id": "c",
+          "text": "Rotate the planning meeting time so that each location takes its turn attending outside working hours.",
+          "correct": false,
+          "rationale": "It distributes the pain evenly and leaves the structural dependency untouched. Fairness about who suffers is not a substitute for reducing the need to meet."
+        },
+        {
+          "id": "d",
+          "text": "Have the project manager take the planning decisions between iterations and communicate them to the three locations.",
+          "correct": false,
+          "rationale": "It buys speed by removing the people who hold the information from the decision, and the resulting plans will be revised as soon as they meet reality."
+        },
+        {
+          "id": "e",
+          "text": "Split into three independent teams with separate backlogs, each free to plan on its own.",
+          "correct": false,
+          "rationale": "It solves coordination by abandoning it, and one product with three unaligned backlogs becomes three products that have to be reintegrated later."
+        }
+      ],
+      "explanation": "When coordination capacity is fixed by geography, the durable response is to design the work so less coordination is required, and only then to make the remaining coordination efficient. Allocating work by availability rather than by location maximises the handoffs that the time zones make expensive, so it is the allocation rule that needs changing first. Measures that redistribute inconvenience, or that centralise decisions to avoid the conversation, leave the underlying dependency structure exactly as it was.",
+      "mindset": "Reduce the coordination the work demands before optimising the coordination you can afford."
+    },
+    {
+      "id": "pmp-pr1-140",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "baseline",
+        "integration",
+        "assumptions"
+      ],
+      "stem": "You inherit a programme whose six workstreams were baselined one at a time as each completed planning, across five months. The integrated plan is a roll-up of the six. Comparing them, you find three assume a three-day cutover weekend in October and three assume five days, and the resource assumptions behind two of them were written before a hiring freeze that the later four accounted for. The board believes it has one approved plan. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reconcile the conflicting assumptions first, then establish a single integrated baseline at one date, and report the variance that reconciliation exposes against the original commitments.",
+          "correct": true,
+          "rationale": "The assumptions have to agree before a baseline means anything, and taking the whole programme to one date is what turns six documents into a plan. The exposed variance is a real finding, not a failure to be smoothed away."
+        },
+        {
+          "id": "b",
+          "text": "Keep the six baselines and reconcile them each month in reporting so that the board sees a consistent view.",
+          "correct": false,
+          "rationale": "It preserves the appearance of stability by paying a reconciliation cost every month forever, while the underlying assumptions continue to disagree and drive incompatible decisions."
+        },
+        {
+          "id": "c",
+          "text": "Re-baseline everything to the current integrated forecast, so that the programme starts from a consistent and achievable position.",
+          "correct": false,
+          "rationale": "It achieves consistency by erasing five months of performance history, leaving the board with a plan that agrees with itself and nothing to measure the programme against."
+        },
+        {
+          "id": "d",
+          "text": "Baseline the October cutover jointly across all six workstreams and leave each workstream's other assumptions as they are.",
+          "correct": false,
+          "rationale": "It fixes the collision that happens to be visible and leaves the resource assumptions, written either side of a hiring freeze, to produce the next one unannounced."
+        }
+      ],
+      "explanation": "A set of separately approved plans is not an integrated plan, because integration is precisely the reconciliation of assumptions that the individual plans were free to make independently. Baselining component by component over months guarantees that early components encode conditions the later ones know to be false. Correcting it means agreeing the shared assumptions, setting one baseline at one moment, and reporting honestly on the gap that appears — the gap was always there and was merely undiscoverable.",
+      "mindset": "One plan means one set of reconciled assumptions baselined at one moment; anything else is several plans under a cover sheet."
+    }
+  ]
+}
