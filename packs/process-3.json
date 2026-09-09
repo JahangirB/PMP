@@ -1,0 +1,1876 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 3 — Value delivery",
+  "questions": [
+    {
+      "id": "pmp-pr3-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "benefits",
+        "ownership",
+        "business-case"
+      ],
+      "stem": "The business case for a leakage-detection rollout at a water utility names the regional operations director as the owner of the £1.4 million annual saving. She left the utility two months ago, and her post is covered by an interim from another region who has never seen the case. Delivery is on schedule and nobody has raised the vacancy. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the sponsor to name a replacement benefit owner and take them through the measures and the baseline.",
+          "correct": true,
+          "rationale": "Realisation depends on somebody who can change how the operation runs and will be answerable for the saving. Naming that person while the baseline is still readable is the only step that keeps the benefit measurable."
+        },
+        {
+          "id": "b",
+          "text": "Continue delivering and hand the benefits over at closure, when ownership is formally transferred.",
+          "correct": false,
+          "rationale": "It treats benefit ownership as a closure formality. By closure the pre-project baseline may no longer be reconstructable, and the new owner inherits a target they had no part in setting."
+        },
+        {
+          "id": "c",
+          "text": "Take ownership of the saving yourself until a permanent director is appointed.",
+          "correct": false,
+          "rationale": "It confuses delivering a capability with running the operation that produces the saving. A project manager cannot direct depot crews or change working practices, so the accountability would be nominal."
+        },
+        {
+          "id": "d",
+          "text": "Record the vacancy as a risk in the register and continue as planned.",
+          "correct": false,
+          "rationale": "Logging substitutes for acting. This is a present gap with a known remedy rather than an uncertain future event, so parking it in the register defers the one decision that would close it."
+        }
+      ],
+      "explanation": "Delivering a capability and realising a benefit are separate accountabilities, and only the first ends when the project does. A benefit needs a named owner with authority over the operation that produces it, identified early enough to agree the baseline and the measure. Where that name is vacant, the forecast is arithmetic that nobody is answerable for.",
+      "mindset": "A benefit nobody is accountable for is a forecast, not a benefit."
+    },
+    {
+      "id": "pmp-pr3-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "release-cadence",
+        "flow",
+        "undelivered-value"
+      ],
+      "stem": "A building society's mortgage team finishes and tests work continuously, but the live service only accepts changes in a quarterly window, because the regression sign-off costs three weeks of manual effort. Eleven completed items are waiting, the oldest for four months. The sponsor is content, because throughput and burn-down both look healthy. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Treat the cost of the regression sign-off as the constraint and fund work to reduce it, so the window can open more often.",
+          "correct": true,
+          "rationale": "The cadence is capped by what a release costs, not by what the team can build. Reducing that cost is the only move that raises the ceiling rather than rearranging work beneath it."
+        },
+        {
+          "id": "b",
+          "text": "Keep building at the current rate, since the completed work is safe and will all land at the next window.",
+          "correct": false,
+          "rationale": "It counts finished work as delivered. Value in a queue earns nothing, ages against a moving market, and carries the rework risk of eleven changes integrating for the first time on the same day."
+        },
+        {
+          "id": "c",
+          "text": "Ask the operations group to waive the regression sign-off for items assessed as low risk.",
+          "correct": false,
+          "rationale": "It buys cadence by removing a control instead of reducing the cost of running it. The queue shortens and the failure exposure rises, which is a trade nobody has been asked to approve."
+        },
+        {
+          "id": "d",
+          "text": "Slow the team to match the release window so that nothing sits completed and waiting.",
+          "correct": false,
+          "rationale": "It matches supply to the bottleneck rather than attacking it. Inventory falls, which looks like an improvement, but the amount of value the service can absorb in a year is unchanged."
+        }
+      ],
+      "explanation": "Value is realised at the point of use, so anything finished but unreleased is inventory rather than delivery. Where the release rate is fixed by a large per-release cost, the leverage sits on that cost; building faster only deepens the queue, and building slower only hides it. Measures of team output will look healthy throughout either mistake.",
+      "mindset": "Nothing is delivered until somebody can use it."
+    },
+    {
+      "id": "pmp-pr3-103",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "benefits",
+        "double-counting",
+        "portfolio"
+      ],
+      "stem": "A grocery retailer's portfolio office asks you to confirm the benefits claimed by your depot routing project. Your case claims £900,000 a year from reduced mileage. A fleet-renewal project funded in the same quarter claims £700,000 a year against the same fuel line, and neither case mentions the other. Both projects are proceeding. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree an attribution split of the fuel line with the other project manager and restate both cases against one shared baseline.",
+          "correct": true,
+          "rationale": "The two claims can only be reconciled against a single measured starting point. Agreeing the split between the projects settles it where the knowledge is, rather than leaving finance to guess later."
+        },
+        {
+          "id": "b",
+          "text": "Ask the portfolio office to record fuel as a shared benefit line with one named measurement owner.",
+          "correct": true,
+          "rationale": "Double counting recurs unless the register holds the line once. A single measurement owner means the saving is read one way rather than reported twice from two projects' perspectives."
+        },
+        {
+          "id": "c",
+          "text": "Reduce your project's claim by the other project's figure so that the portfolio total is not overstated.",
+          "correct": false,
+          "rationale": "It substitutes arithmetic for attribution. The subtraction is arbitrary, it may understate a genuine contribution, and the underlying problem of two projects reading one meter is untouched."
+        },
+        {
+          "id": "d",
+          "text": "Leave both cases unchanged, since each saving is genuinely achievable on its own terms.",
+          "correct": false,
+          "rationale": "Each claim being individually defensible is exactly what makes the error hard to see. The portfolio adds them, and the sum promises a saving the fuel line cannot produce."
+        },
+        {
+          "id": "e",
+          "text": "Escalate to the finance director and ask for the other project's business case to be withdrawn.",
+          "correct": false,
+          "rationale": "It converts a measurement problem into a funding contest between two projects the organisation has already chosen to run. The overlap is a reason to reconcile, not a reason for one to lose."
+        }
+      ],
+      "explanation": "Benefits are added up at the portfolio, not at the project, so two cases can each be honest and still be wrong together. Where more than one initiative acts on the same measured line, the portfolio needs an agreed attribution, a single baseline and one owner reading the meter. The test is whether the organisation could still bank the total if both projects succeeded exactly as promised.",
+      "mindset": "Ask what else is claiming the same pound before you believe your own benefit."
+    },
+    {
+      "id": "pmp-pr3-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "assumptions",
+        "value-hypothesis",
+        "measurement"
+      ],
+      "stem": "A product owner at a garden-centre chain wants the next three sprints spent on a plant-care reminder feature, on the grounds that customers will love it. No measure is attached to the idea, and there is no point at which the team would conclude it had not worked. The team is willing and has capacity. What should the project manager encourage before the work is committed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree what will be measured, the number that would count as working, and when the reading will be taken.",
+          "correct": true,
+          "rationale": "It converts an opinion into something the next three sprints can actually test. Fixing the reading date in advance is what stops the result being reinterpreted once the effort has been spent."
+        },
+        {
+          "id": "b",
+          "text": "Build the feature in full and judge it on the reaction at the sprint review.",
+          "correct": false,
+          "rationale": "A review confirms the thing was built and gathers opinion from people already invested in it. It substitutes enthusiasm in the room for evidence from use outside it."
+        },
+        {
+          "id": "c",
+          "text": "Require the product owner to justify the feature in an addendum to the business case first.",
+          "correct": false,
+          "rationale": "It escalates a cheaply testable assumption into a documentation exercise. The paperwork takes longer than a trial would and still contains no measure."
+        },
+        {
+          "id": "d",
+          "text": "Build a reduced version first and decide afterwards how it should be evaluated.",
+          "correct": false,
+          "rationale": "The instinct to go small is right, but deferring the measure means the small version answers nothing either. An experiment without a stated outcome is just a cheaper build."
+        }
+      ],
+      "explanation": "An assumption earns effort only when it has been stated so it could turn out false. Naming the measure, the threshold and the date turns a preference into a hypothesis, and doing it before the work starts prevents the standard being set afterwards to match whatever happened. The size of the first slice matters less than whether it can settle the question.",
+      "mindset": "Say in advance what result would show you were wrong."
+    },
+    {
+      "id": "pmp-pr3-105",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "sunk-cost",
+        "continue-or-stop",
+        "revised-case"
+      ],
+      "stem": "A museum's ticketing replacement has spent £2.1 million of a £3 million budget over twenty months. The remaining £900,000 delivers online booking, valued in the case at £250,000 a year. A change to card-scheme fees since approval has cut that expected saving to roughly £60,000 a year. The museum director says the money is largely spent, so the project should finish. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Put a continue-or-stop decision to the sponsor comparing the remaining £900,000 with the revised £60,000 a year, with the spend to date excluded.",
+          "correct": true,
+          "rationale": "Only the unspent money is still governable, and the revised return is the only return on offer. Excluding the £2.1 million is what makes the comparison a decision rather than a defence of past choices."
+        },
+        {
+          "id": "b",
+          "text": "Complete the project as planned, since stopping now would waste everything already invested.",
+          "correct": false,
+          "rationale": "This is sunk-cost reasoning stated plainly. Money already spent is not recovered by spending more, and treating it as a reason to continue means the worse the overspend the stronger the argument to keep going."
+        },
+        {
+          "id": "c",
+          "text": "Cut the remaining scope until the revised benefit is enough to repay it, then carry on.",
+          "correct": false,
+          "rationale": "Rescoping may well be the right outcome, but doing it before telling the sponsor the case has changed takes a decision that is not the project manager's. It also risks delivering a version too thin to earn even £60,000."
+        },
+        {
+          "id": "d",
+          "text": "Continue and revisit the case at the next stage gate, when the effect of the fee change is clearer.",
+          "correct": false,
+          "rationale": "It delays a decision that is already informed enough to take. Every month of deferral spends money against a return that has been re-estimated and found wanting."
+        }
+      ],
+      "explanation": "A continue decision governs only the money not yet committed, so it is tested against remaining cost and remaining benefit. Spend to date belongs in the record, not in the comparison, and the decision itself belongs to whoever holds authority to stop. When an external change moves the benefit rather than the delivery, the project manager's obligation is to re-open the case rather than to defend the plan.",
+      "mindset": "Decide with the money you still have, not the money you have already lost."
+    },
+    {
+      "id": "pmp-pr3-106",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "cost-of-delay",
+        "acceleration",
+        "marginal-analysis"
+      ],
+      "stem": "A ferry operator's booking upgrade is forecast to go live three months after the summer timetable starts. For each month it is late, the operator forgoes £48,000 of additional bookings. Bringing go-live forward by one month would cost £30,000 in contractor overtime; bringing it forward by two months would cost £75,000 in total. Work the figures through, then say which acceleration a value argument supports.",
+      "blanks": [
+        {
+          "id": "forgone",
+          "label": "Bookings forgone across the full three-month delay, in £",
+          "numeric": true,
+          "expect": 144000,
+          "tol": 0,
+          "unit": "£",
+          "rationale": "Three months at £48,000 forgone each gives 3 × 48,000 = £144,000. This is what the delay costs before any decision is taken to buy time back."
+        },
+        {
+          "id": "nettwo",
+          "label": "Net gain from accelerating by two months, in £",
+          "numeric": true,
+          "expect": 21000,
+          "tol": 0,
+          "unit": "£",
+          "rationale": "Two months recovered is 2 × 48,000 = £96,000 of bookings, bought for £75,000, so the net gain is £21,000. Positive means the overtime pays for itself."
+        },
+        {
+          "id": "which",
+          "label": "Which acceleration gives the larger net gain — one month or two months",
+          "accept": [
+            "two months",
+            "two",
+            "2 months",
+            "two month",
+            "the two-month acceleration",
+            "accelerating by two months"
+          ],
+          "rationale": "One month nets 48,000 − 30,000 = £18,000; two months nets 96,000 − 75,000 = £21,000. Two months is larger overall, even though the second month alone costs £45,000 to recover £48,000 and so contributes only £3,000."
+        }
+      ],
+      "explanation": "Buying schedule is worth doing only while the value recovered exceeds what recovering it costs, and the test has to be applied to each increment as well as to the total. A cheap first tranche of acceleration can carry a second tranche that barely pays for itself, so a decision stated only as a total hides how thin the margin has become. Where the benefit is seasonal, the same arithmetic also has a deadline after which no amount of overtime recovers anything.",
+      "mindset": "Buy speed one increment at a time, and check that the increment you are buying still pays."
+    },
+    {
+      "id": "pmp-pr3-107",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "prioritisation",
+        "sequencing",
+        "dependencies"
+      ],
+      "stem": "A delivery team at an equipment-hire firm walks its backlog with you and finds three items that have each been ranked highly at some point and none of which has moved. The team wants one rule it can apply to all three; you think each is stuck for a different reason. Match each situation to the response that protects the value at stake. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "An item has been at the top of the backlog for five sprints and is never pulled, because it is too large to finish inside one."
+        },
+        {
+          "id": "s2",
+          "text": "Two items carry equal customer benefit, but one of them stops being worth anything when a supplier contract ends in eight weeks."
+        },
+        {
+          "id": "s3",
+          "text": "An item's whole benefit depends on a partner organisation switching on an interface, and no date for that has been agreed."
+        }
+      ],
+      "options": [
+        {
+          "id": "split",
+          "text": "Split it until a slice can be finished and released within a single sprint.",
+          "correct": true,
+          "match": "s1",
+          "rationale": "An item that cannot be completed in an iteration will keep being passed over whatever its rank, so priority alone will never move it. Slicing turns a permanent blockage into work that can actually start."
+        },
+        {
+          "id": "decay",
+          "text": "Sequence first the one whose benefit expires soonest.",
+          "correct": true,
+          "match": "s2",
+          "rationale": "When two items are equal on benefit, the tie is broken by how long that benefit remains available. Deferring the expiring one risks converting a real gain into nothing at all."
+        },
+        {
+          "id": "hold",
+          "text": "Hold it out of the iteration until the partner commits to a date.",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Building something whose benefit is switched on by somebody else produces finished work that cannot be used. The date is the dependency, so securing it is the work that has to happen first."
+        },
+        {
+          "id": "escalate",
+          "text": "Escalate it to the sponsor for a priority ruling.",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Each of these situations has a response the team can take on its own authority. Referring upwards a decision you are equipped to make spends sponsor attention and adds a wait to work that is already stalled."
+        }
+      ],
+      "explanation": "Priority order is not simply the size of a benefit. It is the benefit adjusted for whether it can be finished, whether it can be released, and how long it stays available, so items that fail on different conditions need different remedies rather than a higher rank. Ranking on value alone leaves the ones that cannot move exactly where they were.",
+      "mindset": "Order the work by when the value can actually be taken, not by how large it looks on paper."
+    },
+    {
+      "id": "pmp-pr3-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "prioritisation",
+        "effort-bias",
+        "benefit-realisation"
+      ],
+      "stem": "For four months an insurance claims team has ordered its work by taking the cheapest items that carry any benefit at all, and has shipped thirty-one of them. Nine items remain, all substantial, and between them they hold most of the benefit in the approved case. The sponsor has started asking why none of the promised savings has appeared. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Change the ordering so benefit is weighed against effort rather than effort alone, and start the highest-benefit item now.",
+          "correct": true,
+          "rationale": "The ordering rule is what produced the residue, so the rule is what has to change. Starting the largest benefit immediately is also the only move that puts savings within reach of the sponsor's question."
+        },
+        {
+          "id": "b",
+          "text": "Keep shipping the cheapest remaining work so the team's delivery rate holds up.",
+          "correct": false,
+          "rationale": "It optimises the count of items shipped, which is the measure that already looks healthy while the case stalls. Doing more of what caused the problem makes the eventual gap larger."
+        },
+        {
+          "id": "c",
+          "text": "Propose dropping the nine remaining items and rewriting the case around the benefits already delivered.",
+          "correct": false,
+          "rationale": "It moves the target to fit the result. The organisation funded the project for the benefits now sitting untouched, and retiring them quietly conceals a prioritisation failure rather than correcting it."
+        },
+        {
+          "id": "d",
+          "text": "Ask for more people so the large items can be run alongside the small ones.",
+          "correct": false,
+          "rationale": "It reads a sequencing error as a capacity shortage. A larger team ordering work by the same rule produces the same residue faster and at greater cost."
+        }
+      ],
+      "explanation": "Ordering by cost alone is only a value strategy if cost and benefit move together, and they usually do not. Cheap-first buys visible activity early and postpones the case, and the shortfall becomes apparent at the point when the remaining work is hardest and the schedule shortest. Any ranking rule should be judged by what it leaves at the end, not by how comfortable it makes the first month.",
+      "mindset": "Cheap and valuable are different axes, so rank on both."
+    },
+    {
+      "id": "pmp-pr3-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "pilot",
+        "evidence",
+        "scaling"
+      ],
+      "stem": "A pharmacy chain piloted an automated dispensing cabinet at one branch and recorded a 22 per cent fall in dispensing time. The case for installing it across 60 branches assumes the same fall throughout. The pilot branch is the largest in the estate and the only one with a full-time stock controller. The board is asked to approve the whole rollout next week. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Present the case with the pilot's conditions stated explicitly and propose a second trial at a small branch before full approval.",
+          "correct": true,
+          "rationale": "The result is sound where it was taken; what is unproven is that it travels. A trial at a branch that differs on the variable in doubt buys the missing evidence for a fraction of the rollout."
+        },
+        {
+          "id": "b",
+          "text": "Recommend approval on the pilot result, since a controlled trial is the strongest evidence available.",
+          "correct": false,
+          "rationale": "It treats a well-run trial as evidence about everywhere. The quality of the measurement at one site says nothing about whether the site is representative, which is the question actually being asked."
+        },
+        {
+          "id": "c",
+          "text": "Reduce the forecast benefit by a uniform margin to allow for differences between branches.",
+          "correct": false,
+          "rationale": "A haircut dresses an untested assumption as prudence. Nobody can say whether the margin is right, and applying one closes the discussion without producing any new information."
+        },
+        {
+          "id": "d",
+          "text": "Install across all 60 branches and refine the forecast from live data as the rollout proceeds.",
+          "correct": false,
+          "rationale": "It buys the answer at the price of the entire rollout when a second pilot would have bought the same answer. By the time the data arrives the money is committed and the decision is no longer open."
+        }
+      ],
+      "explanation": "A pilot establishes that something works under the conditions it was run in, and extending the finding requires either evidence that those conditions hold elsewhere or a second trial where they do not. The value of further evidence is highest when the decision it informs is large and still reversible, which is precisely the week before approval. Scaling an unrepresentative success is how a forecast becomes a shortfall discovered site by site.",
+      "mindset": "Ask what was unusual about the place your evidence came from."
+    },
+    {
+      "id": "pmp-pr3-110",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "cumulative-flow",
+        "queues",
+        "lead-time"
+      ],
+      "stem": "The chart is a cumulative flow diagram for a housing-repairs team across twelve weeks. Reading upwards, the bands are Done, In test, In development and Ready. Throughput has been steady and both the Ready and the In development bands have held a roughly constant thickness, but the time from a request being accepted to being usable has almost doubled. Select the band that accounts for it.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Cumulative flow diagram over twelve weeks with four stacked bands",
+        "caption": "Select a band. Use Tab or the arrow keys to move between bands, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "ready",
+          "n": 1,
+          "label": "Ready — accepted, not started",
+          "x": 60,
+          "y": 50,
+          "w": 520,
+          "h": 60,
+          "correct": false,
+          "rationale": "This band is the queue of accepted work waiting to start, and it is stated as holding constant. It also describes how much has been committed rather than where completed effort is being withheld."
+        },
+        {
+          "id": "dev",
+          "n": 2,
+          "label": "In development",
+          "x": 60,
+          "y": 110,
+          "w": 520,
+          "h": 60,
+          "correct": false,
+          "rationale": "A band of constant thickness means items are entering and leaving at the same rate, so it adds a steady delay rather than a growing one. Reading a wide band as a widening one is the usual misreading of this chart."
+        },
+        {
+          "id": "test",
+          "n": 3,
+          "label": "In test",
+          "x": 60,
+          "y": 170,
+          "w": 520,
+          "h": 60,
+          "correct": true,
+          "rationale": "This is the only band that has widened, and it holds work developers have finished and testers have not cleared. Completed effort is accumulating one step short of being usable, which is exactly where the extra lead time is being added."
+        },
+        {
+          "id": "done",
+          "n": 4,
+          "label": "Done",
+          "x": 60,
+          "y": 230,
+          "w": 520,
+          "h": 90,
+          "correct": false,
+          "rationale": "The Done band only ever grows, because the chart is cumulative, so its rise measures throughput rather than delay. Treating it as a queue misreads what the vertical axis is counting."
+        }
+      ],
+      "explanation": "On a cumulative flow diagram the thickness of a band is how much work is sitting in that state, and the horizontal distance across it is how long work waits there. A band that widens while throughput holds steady is a queue growing, and a queue sitting immediately before the point of use is finished effort being stored rather than delivered. Steady output and a lengthening wait can coexist happily, which is why output alone will not reveal this.",
+      "mindset": "Look for where finished work waits, because that is value stored rather than delivered."
+    },
+    {
+      "id": "pmp-pr3-111",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "enablers",
+        "capacity-allocation",
+        "technical-value"
+      ],
+      "stem": "On a rail freight operator's platform programme, a shared authentication component adds about three weeks to every new integration. Replacing it would take a team two months and no user would notice any difference. The product owner will not schedule it, because it has no customer value, and eleven further integrations are planned. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Size the replacement by the delivery time it returns across the remaining integrations and agree a standing share of capacity for work of that kind.",
+          "correct": true,
+          "rationale": "Its value is the cost it removes from everything downstream, which is a number that can be put beside a feature's benefit. A standing allocation lets that class of work compete honestly instead of losing to whatever has a user attached."
+        },
+        {
+          "id": "b",
+          "text": "Describe the replacement in customer terms so it can be prioritised as a feature.",
+          "correct": false,
+          "rationale": "It relabels the work to slip it past a value filter. The sprint is won and the backlog stops meaning anything, because nobody can now tell which items were ranked on a benefit somebody actually stated."
+        },
+        {
+          "id": "c",
+          "text": "Have the team absorb the work quietly alongside the scheduled features.",
+          "correct": false,
+          "rationale": "Hidden work makes delivery rates unreliable and takes a real trade-off away from the person entitled to make it. It also removes any record of why two months went missing."
+        },
+        {
+          "id": "d",
+          "text": "Defer it until the delay it causes is raised as a formal impediment.",
+          "correct": false,
+          "rationale": "It waits for the cost to become undeniable, by which point most of the eleven integrations have already paid the three weeks. Compounding costs are cheapest to address before they have compounded."
+        }
+      ],
+      "explanation": "Work with no user-visible benefit can still carry large value, because it changes what every later piece of work costs. Expressing that as time or money returned over the remaining pipeline puts it in the same units as feature benefit, which is the only way a backlog can rank the two against each other. Left unpriced, such work is either never done or done invisibly, and both outcomes are decisions taken by default.",
+      "mindset": "Work with no visible benefit still has value if it changes what everything after it costs."
+    },
+    {
+      "id": "pmp-pr3-112",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "local-optimisation",
+        "shared-goal",
+        "end-to-end"
+      ],
+      "stem": "At a university, one team builds the applicant portal and another the offer-processing back office. Both have met every sprint goal for a term and both report themselves on track. Applicants still cannot receive an offer, because neither half is usable without the other and each team has been slicing its own side. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Define a measure at the level of the applicant journey that neither team can satisfy alone.",
+          "correct": true,
+          "rationale": "Both teams are succeeding against measures that stop at their own boundary, so the measure is what has to move. A goal that cannot be met by half the system forces the halves to meet."
+        },
+        {
+          "id": "b",
+          "text": "Re-sequence both backlogs against one thin slice that carries a single applicant from application to offer.",
+          "correct": true,
+          "rationale": "A slice defined by the journey rather than by the component makes the integration part of the work rather than an event after it. It also produces something usable at the end of it, which neither current plan does."
+        },
+        {
+          "id": "c",
+          "text": "Merge the two teams into a single larger team.",
+          "correct": false,
+          "rationale": "It reaches for reorganisation instead of alignment. Merging is slow and disruptive, and a single team can still slice by component and produce exactly the same two unusable halves."
+        },
+        {
+          "id": "d",
+          "text": "Ask each team to raise the other's outstanding work as an impediment in its own stand-up.",
+          "correct": false,
+          "rationale": "It manages the symptom as a coordination overhead while leaving two local optima intact. Both teams keep succeeding separately and the applicant still gets nothing."
+        },
+        {
+          "id": "e",
+          "text": "Stand up a third team to integrate the two halves.",
+          "correct": false,
+          "rationale": "It adds a handoff and a queue between the halves rather than removing the split. Integration capacity buys the ability to live with the problem instead of resolving it."
+        }
+      ],
+      "explanation": "When completion is measured inside a team boundary, each team can be entirely successful while the customer receives nothing, because value only appears where the pieces join. The remedy is to move the measure and the slice out to the level at which the benefit is actually taken, so that partial delivery reads as partial rather than as done. Structure follows that decision rather than substituting for it.",
+      "mindset": "If value crosses a boundary, the goal has to cross it too."
+    },
+    {
+      "id": "pmp-pr3-113",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "forecast-integrity",
+        "stage-gate",
+        "sponsor"
+      ],
+      "stem": "Two weeks before a stage gate at a regional airport, your sponsor asks you to raise the forecast passenger-handling saving from €480,000 to €700,000. The investment committee has been rejecting anything below €600,000 this year, and the sponsor observes that the figure is only an estimate. Your analysis supports the lower number, with a range of €420,000 to €530,000. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Submit the €480,000 with its range and assumptions, and set out what would have to be true for a materially higher figure.",
+          "correct": true,
+          "rationale": "It gives the committee the estimate and the conditions it depends on, which is what lets them judge the project rather than the number. Showing what a higher figure would require also answers the sponsor's real interest honestly."
+        },
+        {
+          "id": "b",
+          "text": "Restate the forecast at €700,000, since forecasts are estimates and the sponsor owns the business case.",
+          "correct": false,
+          "rationale": "Owning a case is not authority to misstate it. The number is being chosen to clear a threshold rather than to describe an expectation, which makes both the analysis and the threshold worthless."
+        },
+        {
+          "id": "c",
+          "text": "Decline the request and report it to the internal audit function.",
+          "correct": false,
+          "rationale": "It escalates into an allegation a conversation that has not yet been had. Showing the sponsor what the estimate rests on will often resolve it, and skipping that step spends a relationship for nothing."
+        },
+        {
+          "id": "d",
+          "text": "Put both figures to the committee and let them decide which to rely on.",
+          "correct": false,
+          "rationale": "Presenting an unsupported number as an option lends it the analyst's credibility. A range is one estimate with uncertainty stated, not two estimates with different motives behind them."
+        }
+      ],
+      "explanation": "A benefit forecast is a claim the organisation will commit money against, so its whole usefulness rests on it being the best honest estimate available with its uncertainty attached. A threshold that can be met by adjusting the estimate has stopped selecting between projects and begun selecting between authors. The professional obligation is to make the uncertainty visible rather than to resolve it in whichever direction is convenient.",
+      "mindset": "A forecast bent to clear a threshold destroys the only thing the threshold was for."
+    },
+    {
+      "id": "pmp-pr3-114",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "demand-signal",
+        "evidence",
+        "prioritisation"
+      ],
+      "stem": "Three long-standing customers of a veterinary practice-management product have repeatedly and loudly demanded a bespoke report builder. Between them they are 4 per cent of revenue, and they escalate to your managing director whenever they are refused. Usage data shows most practices never open the reports that already exist. The product owner now wants to build it. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Put the value of retaining those three accounts beside what the same capacity would return across the whole base, and decide on that comparison.",
+          "correct": true,
+          "rationale": "It expresses both a concentrated commercial risk and a broad opportunity in the same units, which is the only way they can be ranked. It also makes the trade-off explicit for the product owner rather than implicit in who shouted."
+        },
+        {
+          "id": "b",
+          "text": "Build it, because these are long-standing customers whose relationship carries value and who escalate when refused.",
+          "correct": false,
+          "rationale": "It mistakes the volume of a request for the size of a benefit. Once escalation is what moves the backlog, the roadmap is set by whoever is most willing to complain."
+        },
+        {
+          "id": "c",
+          "text": "Decline on the usage evidence, since most practices never open the existing reports.",
+          "correct": false,
+          "rationale": "Low use of a weak existing feature is not evidence about a different one, and it ignores that keeping three accounts has a real value nobody has yet counted. Data used only to close the argument is as one-sided as the escalation."
+        },
+        {
+          "id": "d",
+          "text": "Offer the three customers a paid bespoke build outside the product roadmap.",
+          "correct": false,
+          "rationale": "It looks like a commercial answer but commits the same team's capacity under a different budget line, and leaves the product forked for 4 per cent of revenue."
+        }
+      ],
+      "explanation": "The strength of a demand signal is a measure of how the request was made, not of what satisfying it is worth. Concentrated revenue risk and diffuse base value are both genuine, and neither can be judged until they are stated in comparable terms. Decisions made to stop an escalation teach the organisation how to get its requests to the top of the list.",
+      "mindset": "Measure the size of the benefit, not the volume of the request."
+    },
+    {
+      "id": "pmp-pr3-115",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "assumptions",
+        "case-review",
+        "external-change"
+      ],
+      "stem": "A textiles manufacturer approved a €2.4 million capacity expansion on a case that rests on winning a competitor's customers when that competitor's ageing plant fails its next inspection. Nine months in, the competitor has been acquired and its plant refitted. Construction is 40 per cent complete and the remaining commitment can still be released. Nobody has put the acquisition in front of the steering group. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Take the acquisition to the steering group as a failure of the assumption the case rests on, with the case re-tested against remaining cost.",
+          "correct": true,
+          "rationale": "The mechanism that was funded has gone, and the steering group is the body entitled to decide what follows. Re-testing against remaining cost frames it as a live decision rather than as a report of bad news."
+        },
+        {
+          "id": "b",
+          "text": "Continue as planned, since additional capacity will be useful to the business whatever the competitor does.",
+          "correct": false,
+          "rationale": "It replaces the specific mechanism that justified €2.4 million with a general hope. Capacity without identified demand is a cost the business carries every year."
+        },
+        {
+          "id": "c",
+          "text": "Ask the commercial team to find replacement customers before raising the matter upwards.",
+          "correct": false,
+          "rationale": "It repairs the case before disclosing that it needs repair, so the steering group hears about the invalidated assumption only if the repair fails. That is a decision about their money taken on their behalf."
+        },
+        {
+          "id": "d",
+          "text": "Add the acquisition to the risk register with a high impact score and monitor it.",
+          "correct": false,
+          "rationale": "It has already happened, so it is not a risk to be scored. Registering a certainty as an uncertainty is a way of recording a problem without acting on it."
+        }
+      ],
+      "explanation": "A business case rests on assumptions about a world that keeps moving, and the trigger to re-open one is an assumption failing rather than a variance in delivery. A project can be perfectly on schedule and on budget while producing something the organisation no longer needs, which is why assumption tracking belongs in status reporting alongside cost and time. Events that have already occurred are issues to decide, not risks to watch.",
+      "mindset": "Watch the assumptions your case rests on as closely as the plan you are delivering."
+    },
+    {
+      "id": "pmp-pr3-116",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "net-benefit",
+        "running-costs",
+        "business-case"
+      ],
+      "stem": "A council's waste-route optimisation system is forecast to save £310,000 a year in fuel and overtime. During design the supplier confirms a licence and hosting charge of £190,000 a year, and the council's IT team estimates a further £70,000 a year of support effort it has said it cannot absorb. The approved case shows the gross saving only. Build has not yet been committed. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Restate the case on the net annual position and put it back to the sponsor before build is committed.",
+          "correct": true,
+          "rationale": "Fifty thousand pounds a year is a very different proposition from three hundred and ten, and the sponsor is entitled to decide on the real one. Doing it before commitment is what keeps the decision open."
+        },
+        {
+          "id": "b",
+          "text": "Report the saving as approved and have the running costs picked up in the operating budget.",
+          "correct": false,
+          "rationale": "Splitting a single decision across two budgets means nobody sees the whole of it. The project reports green while the council is materially worse off than its own papers say."
+        },
+        {
+          "id": "c",
+          "text": "Negotiate the licence charge down with the supplier before telling the sponsor.",
+          "correct": false,
+          "rationale": "A sensible commercial move made at the wrong moment. While the negotiation runs, the sponsor is committing money against a figure that is already known to be wrong."
+        },
+        {
+          "id": "d",
+          "text": "Treat the support effort as existing staff cost and exclude it from the case.",
+          "correct": false,
+          "rationale": "Calling a cost absorbed does not create the capacity to absorb it, and the IT team has already said it does not have any. The cost simply reappears as something else not being done."
+        }
+      ],
+      "explanation": "A benefit is what the organisation is left with once the change is running, so recurring costs the change creates belong in the same case as the savings it produces. Costs that land in a different budget still land, and excluding them turns a case into an argument for one department at the expense of another. The moment to correct a case is before the money is committed, because that is the last point at which the correction is still a decision.",
+      "mindset": "Count what a benefit costs to keep, not only what it saves."
+    },
+    {
+      "id": "pmp-pr3-117",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "benefits-realisation",
+        "adoption",
+        "shortfall"
+      ],
+      "stem": "A national charity's donation-form redesign was forecast to raise £600,000 a year, assuming 80 per cent of regular donors moved to the new form. Six months after launch, 45 per cent have moved and the benefit scales directly with that proportion. The form works correctly and those using it give as expected. Work out where the case stands, then say what the remaining shortfall calls for.",
+      "blanks": [
+        {
+          "id": "implied",
+          "label": "Annual benefit implied by 45 per cent take-up, in £",
+          "numeric": true,
+          "expect": 337500,
+          "tol": 0,
+          "unit": "£",
+          "rationale": "The forecast of £600,000 assumed 80 percentage points of take-up, so each point is worth 600,000 ÷ 80 = £7,500. At 45 points that is 45 × 7,500 = £337,500."
+        },
+        {
+          "id": "shortfall",
+          "label": "Shortfall against the original forecast, in £",
+          "numeric": true,
+          "expect": 262500,
+          "tol": 0,
+          "unit": "£",
+          "rationale": "600,000 − 337,500 = £262,500 a year. This is benefit that is still available rather than benefit that has been lost, which is what makes it worth chasing."
+        },
+        {
+          "id": "lever",
+          "label": "Is the shortfall closed by building more functionality, or by raising take-up",
+          "accept": [
+            "raising take-up",
+            "take-up",
+            "adoption",
+            "raising adoption",
+            "increasing take-up",
+            "increasing adoption",
+            "by raising take-up"
+          ],
+          "rationale": "The capability exists and performs as forecast for everyone using it, so the missing £262,500 sits entirely in the 35 percentage points who have not moved. Effort belongs on the reasons they have not, rather than on more features."
+        }
+      ],
+      "explanation": "A benefit forecast is usually the product of a capability and a rate of use, and building delivers only one of those factors. When realisation falls short, decomposing the forecast shows which factor is missing and therefore where the remaining budget should go. Answering an adoption gap with more functionality is the common and expensive error, because it spends against the factor that is already performing.",
+      "mindset": "When a benefit falls short, find which factor is missing before spending on the one you know how to build."
+    },
+    {
+      "id": "pmp-pr3-118",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "benefits-measurement",
+        "closure",
+        "accountability"
+      ],
+      "stem": "You are settling the benefits arrangements for a three-year programme at a national insurer. Two of its benefit lines will not fit the timetable the plan assumed: one starts earning well before the final release, and the other cannot be read until a full financial year after that release. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "b1",
+          "text": "A workstream's saving starts accruing eight months before the programme's final release. Measuring and reporting it from the moment it starts should sit with"
+        },
+        {
+          "id": "b2",
+          "text": "A programme's principal benefit cannot be read until a full financial year after closure. Before the programme closes, what should be put in place is"
+        }
+      ],
+      "options": [
+        {
+          "id": "owner",
+          "text": "the named benefit owner, reporting into the programme while it is still running",
+          "correct": true,
+          "match": "b1",
+          "rationale": "A saving that starts early has to be measured from the day it starts or the baseline is lost. Putting it with the owner who remains afterwards, while routing the reporting through the live programme, keeps both the measurement and the accountability continuous."
+        },
+        {
+          "id": "review",
+          "text": "a post-closure review already scheduled and funded, with the measure and its owner recorded in the closure documents",
+          "correct": true,
+          "match": "b2",
+          "rationale": "A review a year out only happens if it is booked and paid for while somebody still has an interest in it. Recording the measure at closure also stops it being redefined later by whoever inherits the question."
+        },
+        {
+          "id": "pm",
+          "text": "the project manager, who holds the benefit until the organisation formally accepts it",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The project manager is accountable for delivering the capability, and in both situations the measurement outlives that role. Assigning it here guarantees a gap on the day the post is stood down."
+        }
+      ],
+      "explanation": "Benefits do not queue politely behind project closure: some begin while delivery is still running and some arrive long after everyone has moved on. In both cases the measurement has to be attached to a role that persists and agreed while the baseline and the original intent are still known. An arrangement made after closure is made by people guessing at what was meant.",
+      "mindset": "Settle who reads the benefit, and when, while there is still somebody to ask."
+    },
+    {
+      "id": "pmp-pr3-119",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "backlog",
+        "spare-capacity",
+        "prioritisation"
+      ],
+      "stem": "Two days remain in a sprint at a bicycle-hire operator and every committed item is finished and accepted. A developer offers to spend the time building a settings screen he thinks riders might like. It is not in the backlog and has not been discussed with anybody. The product owner is at her desk and the refined backlog has ready items at the top. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the product owner to bring forward the next ready item from the ordered backlog.",
+          "correct": true,
+          "rationale": "Spare capacity is answered from the order that already exists, by the person who owns that order. It is the only option that converts two days into value somebody has ranked."
+        },
+        {
+          "id": "b",
+          "text": "Let the developer build the settings screen, since the capacity would otherwise go to waste.",
+          "correct": false,
+          "rationale": "It assumes any activity beats none. Unranked scope still has to be tested, supported and maintained, so it consumes future capacity as well as these two days."
+        },
+        {
+          "id": "c",
+          "text": "Hold the capacity and let the team finish the sprint early.",
+          "correct": false,
+          "rationale": "It treats inventing work and doing nothing as the only options, while ranked and ready work is sitting at the top of the backlog and the product owner is available to release it."
+        },
+        {
+          "id": "d",
+          "text": "Use the two days for the team to start planning the next sprint.",
+          "correct": false,
+          "rationale": "A reasonable use of time that nevertheless pre-empts a session the whole team attends together, and it still leaves ready value unpulled for the sake of preparation."
+        }
+      ],
+      "explanation": "Capacity that comes free is pulled against the existing order rather than filled with whatever is nearby, because work entering outside that order has never been weighed against anything. The cost of unranked work is also not confined to the time spent building it, since everything shipped carries a maintenance tail. The question to ask of any spare time is what the person who owns the priorities would spend it on.",
+      "mindset": "Free capacity is pulled against, not filled."
+    },
+    {
+      "id": "pmp-pr3-120",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "commitments",
+        "scope-value",
+        "change-route"
+      ],
+      "stem": "Your firm won a facilities-management contract partly on a promise of a mobile inspection app. Eighteen months on, the client has issued its inspectors with tablets running a supplier tool that does the same job, and the client's operations lead says the app is no longer wanted. Four months of effort remain in the plan for it. Your bid team argues it was promised and must be delivered. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Take the client's position through the agreed change route and propose redirecting the four months to work the client still values.",
+          "correct": true,
+          "rationale": "It settles a contracted deliverable with the party entitled to release it, and it protects the capacity rather than merely saving it. Both halves are needed: the authority and the redirection."
+        },
+        {
+          "id": "b",
+          "text": "Build the app as promised, because the commitment formed part of the winning bid.",
+          "correct": false,
+          "rationale": "It honours the wording of a commitment whose purpose has already been met another way. Four months of effort produce something the client has said nobody will open."
+        },
+        {
+          "id": "c",
+          "text": "Stop the work, reallocate the effort and record the decision in the project log.",
+          "correct": false,
+          "rationale": "The right destination reached without the authority to go there. Contracted scope is removed by agreement with the client, not by a note the project manager writes to file."
+        },
+        {
+          "id": "d",
+          "text": "Build a reduced version of the app so the commitment is technically satisfied.",
+          "correct": false,
+          "rationale": "Token compliance costs real effort and produces a product that exists only to close a paragraph in a bid document. It also leaves the client maintaining something they did not want."
+        }
+      ],
+      "explanation": "Commitments are made in order to achieve something, and when that something has been achieved by other means the commitment should be renegotiated rather than either delivered hollowly or dropped quietly. The route is what separates the two failures: contracted scope changes with the agreement of the party it was promised to. Value is protected by redirecting the freed capacity, since effort saved and not reassigned is simply effort lost.",
+      "mindset": "Ask what a commitment was for before deciding what honouring it means."
+    },
+    {
+      "id": "pmp-pr3-121",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "funding-deadline",
+        "sequencing",
+        "evidence"
+      ],
+      "stem": "A research consortium holds a £3.2 million grant for a marine sensor network. Any benefit not demonstrated by 31 March is not recognised by the funder, and ten months remain. The current plan completes all four sensor arrays in month twelve, two months past the deadline, with nothing demonstrable before then. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Re-sequence the work so that at least one complete array is operating and evidenced before the deadline.",
+          "correct": true,
+          "rationale": "A hard recognition date changes the ordering rule from total benefit to benefit that can be proved in time. One finished array crosses that threshold; four unfinished ones do not."
+        },
+        {
+          "id": "b",
+          "text": "Agree with the funder now what evidence they will accept, and by what date.",
+          "correct": true,
+          "rationale": "The criterion belongs to somebody else, so assuming it is a risk taken for no reason. Agreeing it early also tells you how much has to be finished, which is what the re-sequencing has to aim at."
+        },
+        {
+          "id": "c",
+          "text": "Request an extension from the funder and continue with the existing plan.",
+          "correct": false,
+          "rationale": "It rests the entire benefit on a concession that has not been given, with no fallback if it is refused. A request is worth making, but not instead of a plan that works without it."
+        },
+        {
+          "id": "d",
+          "text": "Commit the full grant to procurement before 31 March so the funds are spent within the period.",
+          "correct": false,
+          "rationale": "It satisfies an accounting test and fails the one that actually governs recognition. Spending the money is not the same as demonstrating what the money bought."
+        },
+        {
+          "id": "e",
+          "text": "Advance all four arrays partially so that each can show progress by the deadline.",
+          "correct": false,
+          "rationale": "Four part-built arrays demonstrate nothing, because a sensor network only reads data when a whole array is working. Spreading effort is exactly what stops any single unit crossing the line."
+        }
+      ],
+      "explanation": "Where benefit is recognised only before a fixed external date, the ordering rule stops being total value and becomes value that can be evidenced in time. That makes finishing one thing worth more than advancing four, however uncomfortable the partial coverage looks. It also makes the acceptance criterion someone else's property, so it is agreed in advance rather than assumed and discovered at the deadline.",
+      "mindset": "When benefit expires on a date, sequence for what can be proved by that date."
+    },
+    {
+      "id": "pmp-pr3-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "incremental-delivery",
+        "slicing",
+        "migration"
+      ],
+      "stem": "A regional bank must move its savings platform off a mainframe. The team holds that the migration is indivisible: all 400,000 accounts move in one weekend or none do. On that plan, eight months of work produce nothing usable until the cut-over. The sponsor is uneasy about a single unrehearsed event of that size. What should the project manager press the team to look for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A genuine slice that puts a real subset of accounts into live use early, even a small or unusual product line.",
+          "correct": true,
+          "rationale": "It tests the indivisibility claim against the cheapest counter-example available. A live subset also starts benefit early and turns one untested event into a rehearsed sequence."
+        },
+        {
+          "id": "b",
+          "text": "A full dress rehearsal of the single cut-over in a copied environment.",
+          "correct": false,
+          "rationale": "Worthwhile risk reduction that delivers no value: the organisation still receives nothing for eight months. A rehearsal tests the plan under laboratory conditions rather than the product under real use."
+        },
+        {
+          "id": "c",
+          "text": "Assurance from the team that a single cut-over is standard practice for migrations of this size.",
+          "correct": false,
+          "rationale": "It accepts the indivisibility claim on the strength of custom. That a thing is usually done one way is not evidence that it cannot be done another."
+        },
+        {
+          "id": "d",
+          "text": "A longer testing phase ahead of the cut-over weekend.",
+          "correct": false,
+          "rationale": "It buys confidence with time and money while leaving every pound of benefit behind the same single event. The exposure is reduced in likelihood and untouched in shape."
+        }
+      ],
+      "explanation": "Indivisibility is usually a property of the first design somebody considered rather than of the problem itself, and it is worth attacking directly because so much follows from it. Any real slice that reaches live use converts one large untested event into a series of small tested ones and starts the benefit earlier. Where the claim turns out to be true, the search has still produced the evidence for it rather than the assumption.",
+      "mindset": "Treat 'it cannot be split' as a hypothesis before accepting it as a constraint."
+    },
+    {
+      "id": "pmp-pr3-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "enabling-change",
+        "dependencies",
+        "benefits-plan"
+      ],
+      "stem": "The case for a housing association's shared finance service depends on removing eleven posts from regional offices once the system is live. Go-live is five months away. HR confirms that consultation cannot take less than ninety days and has not begun, and the operations director says he will deal with it after go-live. Delivery itself is on plan. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Put the ninety-day consultation on the benefits plan as a dependency with an owner and a start date, and take the resulting slippage to the sponsor.",
+          "correct": true,
+          "rationale": "The consultation has a lead time as real as any build task, and it is the step that turns the system into a saving. Naming an owner and a date is what converts an intention into something that can be tracked and escalated."
+        },
+        {
+          "id": "b",
+          "text": "Continue delivering and report that the benefits will begin later than forecast.",
+          "correct": false,
+          "rationale": "It downgrades a delay to the whole case into a reporting adjustment. Nobody is asked to act at the point when acting would still have recovered the date."
+        },
+        {
+          "id": "c",
+          "text": "Ask HR to compress the consultation so it fits the go-live date.",
+          "correct": false,
+          "rationale": "It proposes shortening a process with statutory minimums to protect a project date, which exposes the organisation for a schedule that is not actually the binding constraint."
+        },
+        {
+          "id": "d",
+          "text": "Remove the post reductions from the case and report the project as a technology benefit only.",
+          "correct": false,
+          "rationale": "It deletes most of the benefit to make the case deliverable. The investment was approved for the saving, and quietly redefining success leaves it justified by whatever happens to be left."
+        }
+      ],
+      "explanation": "Most benefits require an organisational change that the project does not control and cannot perform, and that change has its own lead time and its own owner. Those steps belong on the plan with dates, because a capability delivered punctually into an organisation that has not changed produces nothing at all. The project manager's job is not to make the change happen but to make its absence visible while there is still time to start it.",
+      "mindset": "Plan the change that turns a deliverable into a benefit, not only the deliverable."
+    },
+    {
+      "id": "pmp-pr3-124",
+      "type": "graphic",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "benefits-map",
+        "dependencies",
+        "realisation"
+      ],
+      "stem": "The diagram is the benefits map for a bakery chain's depot consolidation. Boxes run from the delivered capability on the left to the cash saving on the right, and each arrow is a dependency. The programme has completed the two boxes marked as delivered, and no saving has appeared. Select the first step on the map that has not yet been completed.",
+      "graphic": {
+        "viewBox": "0 0 720 300",
+        "title": "Benefits map from delivered capability through operational change to cash saving",
+        "caption": "Select a box. Use Tab or the arrow keys to move between boxes, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "routing",
+          "n": 1,
+          "label": "Route-planning system live — delivered",
+          "x": 20,
+          "y": 40,
+          "w": 150,
+          "h": 90,
+          "correct": false,
+          "rationale": "This box is marked delivered, so it cannot be the first outstanding step. It is the capability the rest of the chain depends on, which is why it was built first and why finishing it feels like progress."
+        },
+        {
+          "id": "telematics",
+          "n": 2,
+          "label": "Fleet telematics installed — delivered",
+          "x": 20,
+          "y": 160,
+          "w": 150,
+          "h": 90,
+          "correct": false,
+          "rationale": "Also marked delivered. Both left-hand boxes belong to the programme, and the habit of looking at the part you own is exactly what leaves the next box unattended."
+        },
+        {
+          "id": "reroute",
+          "n": 3,
+          "label": "Deliveries re-routed and two depots emptied",
+          "x": 210,
+          "y": 100,
+          "w": 170,
+          "h": 90,
+          "correct": true,
+          "rationale": "The first box after the delivered capability, and the one nothing else can start without. It is owned by operations rather than by the programme, which is precisely why it has been left while the technical work was finished."
+        },
+        {
+          "id": "leases",
+          "n": 4,
+          "label": "Leases surrendered and rates ended",
+          "x": 420,
+          "y": 100,
+          "w": 150,
+          "h": 90,
+          "correct": false,
+          "rationale": "This is where the money is released, so it draws the eye, but a lease cannot be surrendered while stock and vehicles are still in the buildings. Selecting the box nearest the cash mistakes the destination for the blockage."
+        },
+        {
+          "id": "reported",
+          "n": 5,
+          "label": "Saving reported against the case",
+          "x": 600,
+          "y": 100,
+          "w": 100,
+          "h": 90,
+          "correct": false,
+          "rationale": "Reporting is an act of measurement rather than a step that produces anything. A saving cannot be reported into existence, and treating this as the outstanding task confuses the record with the result."
+        }
+      ],
+      "explanation": "A benefits map is a chain in which the project usually owns only the leftmost boxes, and the chain delivers nothing until every link is complete. Attention belongs on the first unfinished link, which is typically the operational change immediately after the technology and is owned by somebody who was not in the project team. Delivered capability plus unchanged operations produces no benefit, however impressive the delivered part looks.",
+      "mindset": "Find the first unfinished link, not the box where the money appears."
+    },
+    {
+      "id": "pmp-pr3-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "outcome-measures",
+        "reporting",
+        "output-bias"
+      ],
+      "stem": "A logistics scale-up reports progress to its board as story points completed per sprint, and the trend has risen steadily for six months. At the last meeting a non-executive asked what a customer can now do that they could not do in January, and the product owner struggled to answer. The board remains pleased with the trend. What should the project manager change?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Report to the board in terms of outcomes customers can now achieve, and keep points for the team's own planning.",
+          "correct": true,
+          "rationale": "It matches the unit to the decision the audience is taking, which is whether to keep funding the work. Retaining points internally preserves a tool that is useful where it was designed to be used."
+        },
+        {
+          "id": "b",
+          "text": "Convert story points into an estimated monetary value per point for board reporting.",
+          "correct": false,
+          "rationale": "It dresses an effort measure as money, which makes the wrong measure harder to challenge rather than more accurate. The precision is invented at the point of conversion."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to prepare a better answer to that question before the next meeting.",
+          "correct": false,
+          "rationale": "It fixes the presentation and leaves the reporting measure untouched, so the same question returns every time somebody thinks to ask it."
+        },
+        {
+          "id": "d",
+          "text": "Stop using story points altogether.",
+          "correct": false,
+          "rationale": "It discards a legitimate internal planning tool because it is being used with the wrong audience. The problem is where the measure is reported, not that it exists."
+        }
+      ],
+      "explanation": "Estimation units measure effort undertaken, which is genuinely useful inside a team and close to meaningless to a board deciding whether the investment is working. A rising output measure and a static outcome sit together perfectly comfortably, and reporting the first will conceal the second for as long as nobody asks. Choose the unit by the decision the reader has to take.",
+      "mindset": "Report to each audience in the units of the decision they are making."
+    },
+    {
+      "id": "pmp-pr3-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "portfolio",
+        "overlap",
+        "professional-judgement"
+      ],
+      "stem": "Your eighteen-month project will give a national breakdown-recovery firm a single view of member vehicles, worth roughly £1.1 million a year and due in eleven months. A programme funded last quarter in another division will produce the same capability as a by-product in seven months, and its team does not know your project exists. You have spent £600,000 of £1.4 million. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Confirm the overlap with the other programme's manager, then put the comparison to both sponsors with a recommendation on which should continue.",
+          "correct": true,
+          "rationale": "Verifying first avoids acting on a resemblance rather than a duplication, and putting it to both sponsors places the decision where the money is controlled. The recommendation has to be open to the answer being that your project stops."
+        },
+        {
+          "id": "b",
+          "text": "Continue, since your project was funded first and is considerably further advanced.",
+          "correct": false,
+          "rationale": "Order of funding is a fact about the past, not a value argument. The organisation ends up paying twice for one capability and gets it later than it needed to."
+        },
+        {
+          "id": "c",
+          "text": "Ask the portfolio office to require the other programme to drop the overlapping element.",
+          "correct": false,
+          "rationale": "It defends your project instead of the benefit. Their by-product may cost far less than your remaining £800,000, and that comparison is never made if the overlap is removed by instruction."
+        },
+        {
+          "id": "d",
+          "text": "Accelerate your project so that it delivers ahead of theirs.",
+          "correct": false,
+          "rationale": "It spends more to arrive earlier at a capability the organisation needs only once. Winning the race consumes exactly the money the duplication was already wasting."
+        }
+      ],
+      "explanation": "At portfolio level the question is what the organisation gains for the money it has not yet spent, not which initiative reaches a capability first. Where two pieces of work converge, the professional obligation is to surface the overlap and let the comparison be made on remaining cost, remaining time and risk. That obligation holds when the analysis points at your own project, and a project manager who only ever argues upward for continuation is not giving advice.",
+      "mindset": "Argue for the benefit even when the argument runs against your own project."
+    },
+    {
+      "id": "pmp-pr3-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "risk-response",
+        "scope-review",
+        "baseline"
+      ],
+      "stem": "A dairy processor's plant project includes a £165,000 secondary chilling loop, put in the scope solely to protect against a supply interruption from the single available refrigerant supplier. Since approval, procurement has signed a second supplier on equivalent terms and lead times. The design team intends to build the loop because it is in the approved scope. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a change to remove the loop, on the grounds that the risk it was bought to treat is now treated another way.",
+          "correct": true,
+          "rationale": "The item was never wanted for itself, so when its risk is addressed elsewhere its justification has gone. Raising it as a change puts the saving in front of the people who approved the spend."
+        },
+        {
+          "id": "b",
+          "text": "Build it as approved, since scope in the baseline should not be removed without strong justification.",
+          "correct": false,
+          "rationale": "It treats the baseline as a reason rather than a record. What was agreed is not evidence that the reasons for agreeing it still hold."
+        },
+        {
+          "id": "c",
+          "text": "Keep it as additional resilience, since it costs nothing further to leave it in.",
+          "correct": false,
+          "rationale": "It costs £165,000 plus a maintenance and inspection tail for the life of the plant. Resilience nobody has asked for is not free merely because it has already been budgeted."
+        },
+        {
+          "id": "d",
+          "text": "Leave the scope unchanged and reduce the supply risk's score in the register.",
+          "correct": false,
+          "rationale": "It updates the record to show the risk is treated while continuing to pay for a second treatment. The register and the spend end up telling different stories."
+        }
+      ],
+      "explanation": "Scope bought to treat a risk should be revisited whenever that risk changes, because a response that outlives its risk is pure cost carried to completion. The baseline records what was agreed and why, and the why is the part that goes stale first. Reviewing risk responses when the risk picture moves is as much a value activity as choosing between features.",
+      "mindset": "When a risk changes, revisit what you bought to treat it."
+    },
+    {
+      "id": "pmp-pr3-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "fixed-price",
+        "scope-exchange",
+        "client-value"
+      ],
+      "stem": "You are delivering a fixed-price €1.8 million pupil-records system to a school trust. Halfway through, a change to national reporting means the trust urgently needs a statutory return module that is not in scope. They value it far above the parent-messaging module still to be built, which is of comparable size and effort. The trust cannot fund a variation this financial year, and your margin is thin. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Offer an exchange of the two modules through the change process, with the comparable effort and any difference stated openly.",
+          "correct": true,
+          "rationale": "It moves what the fixed price buys without moving the price, which is the one lever a fixed-price contract leaves open. Stating the effort difference keeps it an agreement rather than a favour that is resented later."
+        },
+        {
+          "id": "b",
+          "text": "Decline, since the statutory module falls outside the agreed fixed-price scope.",
+          "correct": false,
+          "rationale": "Contractually safe and commercially blind. It spends the remaining budget building something the client has stopped valuing while their pressing need goes unaddressed."
+        },
+        {
+          "id": "c",
+          "text": "Build the statutory module in addition and absorb the cost to protect the relationship.",
+          "correct": false,
+          "rationale": "It gives away margin on a fixed price and establishes that urgent requests are met without a variation. The next urgent request arrives on those terms."
+        },
+        {
+          "id": "d",
+          "text": "Deliver both modules by reducing the depth of testing across the release.",
+          "correct": false,
+          "rationale": "It pays for extra scope with quality the client never agreed to trade. The cost is real, deferred to live running, and lands on the client without ever having been discussed."
+        }
+      ],
+      "explanation": "A fixed price fixes what is owed and what it costs, not which of the things owed are still worth having. When a client's priorities shift, an exchange of comparable scope can serve the changed need without disturbing the commercial position, provided it goes through the agreed change route with the difference in effort visible. The two failure modes are refusing to move at all and moving without recording it, and both end in a dispute about what was actually agreed.",
+      "mindset": "Inside a fixed price, the remaining lever is what the scope is spent on."
+    },
+    {
+      "id": "pmp-pr3-129",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "non-financial-benefits",
+        "measures",
+        "baseline"
+      ],
+      "stem": "A city council is having a case-recording tool built for its rough-sleeping outreach team. The business case promises better continuity of support, which the finance business partner will not accept because it carries no number. The service manager objects that the value in this work is not financial and cannot be reduced to one. Build starts in three weeks. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the service manager to define an observable measure of continuity, such as the share of clients seen twice running by the same worker.",
+          "correct": true,
+          "rationale": "It keeps the benefit in the service's own terms while making it countable. Defining it with the service manager rather than for him is what makes the measure one he will stand behind."
+        },
+        {
+          "id": "b",
+          "text": "Establish the current value of that measure before the tool is built.",
+          "correct": true,
+          "rationale": "A measure with no starting point can never show a change. Three weeks before build is the last comfortable moment to capture a baseline that is not contaminated by the new tool."
+        },
+        {
+          "id": "c",
+          "text": "Convert the continuity benefit into an estimated financial saving so that finance will accept the case.",
+          "correct": false,
+          "rationale": "It forces a currency figure onto an outcome nobody can price credibly, and the invented number then becomes the standard the project is judged against."
+        },
+        {
+          "id": "d",
+          "text": "Accept that the benefit is unmeasurable and describe it qualitatively in the case.",
+          "correct": false,
+          "rationale": "It concedes that some benefits cannot be examined at all. An unmeasured benefit is also unfalsifiable, so the case can never be shown to have failed."
+        },
+        {
+          "id": "e",
+          "text": "Ask finance to approve the case on the strength of the service manager's professional judgement.",
+          "correct": false,
+          "rationale": "It substitutes seniority for evidence and leaves the project with no way of telling afterwards whether the tool helped. It also loses the argument permanently the first time a finance partner declines."
+        }
+      ],
+      "explanation": "Non-financial is not the same as non-measurable, and most outcomes can be tied to something observable and countable in the language of the service itself. The discipline is to agree the measure and capture its baseline before delivery starts, since afterwards there is nothing to compare against. Both common escapes fail in the same way: pricing an unpriceable outcome and declining to measure it each leave the organisation unable to learn anything.",
+      "mindset": "A non-financial benefit still needs a number, just not necessarily a currency."
+    },
+    {
+      "id": "pmp-pr3-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "marginal-value",
+        "phasing",
+        "reauthorisation"
+      ],
+      "stem": "A national library's digitisation programme has three phases. Phase one covered the 60,000 most-requested items, cost £900,000 and delivered around 70 per cent of the forecast research benefit. Phases two and three cover the long tail for a further £1.4 million and deliver the remaining 30 per cent. Phase one is complete and the later funding is not yet committed. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Put the marginal cost and marginal benefit of the remaining phases to the sponsor as a decision in their own right.",
+          "correct": true,
+          "rationale": "The uncommitted phases are the only money still in play, and their return is visibly different from the programme average. Framing it as a decision gives the sponsor the choice the original approval could not have made for them."
+        },
+        {
+          "id": "b",
+          "text": "Proceed with phases two and three as approved, since the programme was funded as a single whole.",
+          "correct": false,
+          "rationale": "One approval covering a whole plan is not evidence that each part of it still earns its cost. It also assumes the sponsor knew the benefit would be this unevenly distributed."
+        },
+        {
+          "id": "c",
+          "text": "Cancel the remaining phases, since the return per pound has fallen sharply.",
+          "correct": false,
+          "rationale": "The analysis is right and the authority is wrong. Complete coverage may matter to the library for reasons of access or obligation that sit outside the research benefit, and that is the sponsor's call."
+        },
+        {
+          "id": "d",
+          "text": "Merge phases two and three to reduce delivery cost and continue as planned.",
+          "correct": false,
+          "rationale": "It applies efficiency to work whose value has not been retested. Doing something cheaply is no answer to the question of whether it is worth doing."
+        }
+      ],
+      "explanation": "Value inside a plan is rarely spread evenly, and phased work usually concentrates it early by design, so the average return of a programme says little about the return of what is left. Each uncommitted phase is a decision of its own, tested on what it costs from here against what it adds from here. The project manager's role is to make that margin visible; the choice to buy completeness anyway belongs to whoever holds the money.",
+      "mindset": "Test each remaining phase on its own margin, not on the approval the whole plan once had."
+    },
+    {
+      "id": "pmp-pr3-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "release-decision",
+        "early-value",
+        "feedback"
+      ],
+      "stem": "A brewery's trade-ordering app is finished, tested and ready to go live. Marketing has booked its campaign for six weeks' time and asks the team to hold the release so that launch and campaign land together. Around thirty trade customers have already asked when they can start using it. What should the project manager propose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Release now to the customers who have asked for it, and let marketing run the campaign to the wider base in six weeks.",
+          "correct": true,
+          "rationale": "It separates being ready to use from being ready to promote, so neither has to wait for the other. The willing customers also produce real feedback before the audience is at its largest."
+        },
+        {
+          "id": "b",
+          "text": "Hold the release for six weeks so the launch coincides with the campaign.",
+          "correct": false,
+          "rationale": "It buys a tidier launch by leaving six weeks of usable value sitting in a queue, and it defers the first honest evidence about the product until the moment of greatest exposure."
+        },
+        {
+          "id": "c",
+          "text": "Release to the whole base now and ask marketing to bring the campaign forward.",
+          "correct": false,
+          "rationale": "It overrides a plan with its own bookings, print deadlines and partner slots to solve a problem that does not require the campaign to move at all."
+        },
+        {
+          "id": "d",
+          "text": "Hold the release and use the six weeks to add further features.",
+          "correct": false,
+          "rationale": "It converts a wait into a commitment and fills it with unranked scope, so the release grows larger and less tested while still delivering nothing in the meantime."
+        }
+      ],
+      "explanation": "Readiness to release and readiness to promote are different questions with different constraints, and collapsing them into one forces whichever is ready first to wait for the other. A staged release serves both, since early users generate feedback while the campaign still gets its moment. The general form is to ask what each date is actually a constraint on before accepting that they must be the same date.",
+      "mindset": "Do not let the loudest launch date decide the earliest useful one."
+    },
+    {
+      "id": "pmp-pr3-132",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "parallel-running",
+        "deferred-benefit",
+        "risk-cost"
+      ],
+      "stem": "A utility has migrated billing to a new platform but is running the legacy system in parallel as a safety net. Parallel running costs £26,000 a month in licences and support, and the migration's forecast saving of £340,000 a year does not begin until the legacy system is decommissioned. The operations director wants three more months of parallel running. Work the figures through, then say what the decision turns on.",
+      "blanks": [
+        {
+          "id": "runcost",
+          "label": "Cost of three further months of parallel running, in £",
+          "numeric": true,
+          "expect": 78000,
+          "tol": 0,
+          "unit": "£",
+          "rationale": "Three months at £26,000 each is 3 × 26,000 = £78,000. This is the visible half of the extension and usually the only half that gets discussed."
+        },
+        {
+          "id": "deferred",
+          "label": "Saving deferred by the three-month extension, in £",
+          "numeric": true,
+          "expect": 85000,
+          "tol": 0,
+          "unit": "£",
+          "rationale": "The annual saving of £340,000 is £28,333 a month, so three months defers 340,000 ÷ 12 × 3 = £85,000. Deferred benefit is a real cost even though no invoice is raised for it."
+        },
+        {
+          "id": "turns",
+          "label": "What has to be worth more than £163,000 for the extension to be justified",
+          "accept": [
+            "the risk reduction",
+            "the reduction in risk",
+            "the value of the risk it removes",
+            "the assurance it buys",
+            "the reduced risk of billing failure",
+            "risk reduction",
+            "the value of the extra assurance"
+          ],
+          "rationale": "The extension costs £78,000 to run and defers £85,000 of saving, so it consumes £163,000 in total. The only thing on the other side of the ledger is the value of the risk the safety net removes, and that has to be estimated rather than assumed."
+        }
+      ],
+      "explanation": "A control that costs money is a purchase like any other and has to be compared with what it buys, which here is a reduction in the chance and consequence of a billing failure. The recurring failure is that the running cost is visible, the deferred benefit is invisible, and the risk being treated is never sized at all, so the extension is argued on prudence rather than on numbers. Extensions granted this way tend to repeat, because nothing in the reasoning ever changes.",
+      "mindset": "Price the safety net and the risk it removes in the same units, or you are only counting one side."
+    },
+    {
+      "id": "pmp-pr3-133",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "value-definition",
+        "stakeholder-requests",
+        "measures"
+      ],
+      "stem": "During design of a shared appointment system for four community health teams, one team manager insists on a bespoke daily paper printout, because her team has always worked from paper. It would take two sprints, and none of the other three teams wants it. She describes it as a value item and has the backing of her own staff. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Take the request back to the benefit measures the four teams agreed, and ask which of them the printout would move.",
+          "correct": true,
+          "rationale": "It turns a contest of conviction into a question about evidence, using a standard all four teams already signed up to. It also leaves room for the answer to be that the printout genuinely does move one."
+        },
+        {
+          "id": "b",
+          "text": "Build it, since her team will not adopt the system otherwise and adoption is where the value sits.",
+          "correct": false,
+          "rationale": "It accepts an untested prediction about adoption as an established fact. The reasoning is sound in form and hands the roadmap to whoever is most willing to state that they will not cooperate."
+        },
+        {
+          "id": "c",
+          "text": "Decline it, on the basis that only one team of four has asked for it.",
+          "correct": false,
+          "rationale": "It counts heads instead of testing the claim. A need felt by a minority can be entirely real, and rejecting it on arithmetic alone tells nobody anything about whether it mattered."
+        },
+        {
+          "id": "d",
+          "text": "Add it to the backlog at a low priority to avoid a confrontation now.",
+          "correct": false,
+          "rationale": "It is postponement dressed as prioritisation. Nothing is resolved, the manager discovers the outcome months later, and the relationship costs more then than an honest conversation costs now."
+        }
+      ],
+      "explanation": "The word value is routinely used to mean what somebody wants, and the defence against that is a definition of value written down and agreed before the requests start arriving. Anchoring to the agreed measures makes the conversation about which outcome moves rather than about who is most insistent, and it protects genuine minority needs as well as filtering preferences. Without such a standard, prioritisation reduces to seniority and volume.",
+      "mindset": "Ask which agreed measure a request moves, not how strongly it is felt."
+    },
+    {
+      "id": "pmp-pr3-134",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "gates",
+        "reauthorisation",
+        "post-implementation-review"
+      ],
+      "stem": "A new portfolio director at an engineering group finds that all three of her investment gates ask much the same questions, and that those questions are almost entirely about progress against plan. She asks you to say what each gate is actually for, so the papers can be rebuilt around it. Match each decision point to the question it exists to answer. One choice is not used.",
+      "prompts": [
+        {
+          "id": "g1",
+          "text": "The approval at the end of feasibility, before any design money is committed."
+        },
+        {
+          "id": "g2",
+          "text": "The review held midway through build, with two-thirds of the budget still uncommitted."
+        },
+        {
+          "id": "g3",
+          "text": "The review held twelve months after the capability went live."
+        }
+      ],
+      "options": [
+        {
+          "id": "q1",
+          "text": "Is the benefit still credible, and is this the best available way of getting it?",
+          "correct": true,
+          "match": "g1",
+          "rationale": "At this point almost nothing is committed, so alternatives are still genuinely open and the cost of choosing differently is at its lowest. It is the last gate at which the question of approach can be asked cheaply."
+        },
+        {
+          "id": "q2",
+          "text": "Given what the remaining spend now buys, should this continue, change or stop?",
+          "correct": true,
+          "match": "g2",
+          "rationale": "Two-thirds of the money is still governable, so the gate is a decision rather than a report. Framing it on the remaining spend keeps what has already gone out of a comparison it cannot inform."
+        },
+        {
+          "id": "q3",
+          "text": "Did the forecast benefit arrive, and what does that say about how we forecast?",
+          "correct": true,
+          "match": "g3",
+          "rationale": "By this point nothing about the project can be changed, so the only value left is learning. The second half of the question is what turns a post-mortem into something that improves the next case."
+        },
+        {
+          "id": "q4",
+          "text": "Has the work been carried out to the agreed standard?",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. This is an acceptance question asked of a deliverable rather than of an investment. A gate that checks only conformance will happily pass a project that is building the wrong thing correctly."
+        }
+      ],
+      "explanation": "Gates exist so that an investment can be re-decided, and each one asks a different question because a different amount of money is still in play. Early gates test the idea and the approach, mid-course gates test what the remainder buys, and post-implementation reviews test the forecasting itself so the next case is better made. A gate that has become a progress report has stopped governing anything.",
+      "mindset": "Ask at every gate what is still in play, because that is what the gate governs."
+    },
+    {
+      "id": "pmp-pr3-135",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "capacity-policy",
+        "urgent-work",
+        "displacement"
+      ],
+      "stem": "A retail bank's servicing team has held one high-value item at the top of its backlog for three months. It is never started, because urgent small requests from branch managers arrive weekly and are always taken into the current iteration. The team is busy, small items ship steadily, and the branch managers are satisfied with the service they get. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree an explicit share of each iteration's capacity for unplanned urgent work, with anything beyond it queued.",
+          "correct": true,
+          "rationale": "It bounds a class of demand that is genuine rather than trying to stop it, so the protected remainder can finally be used for planned work. A stated share also makes the next overflow a visible decision rather than a silent one."
+        },
+        {
+          "id": "b",
+          "text": "Report the benefit forgone for each month the top item has not started.",
+          "correct": true,
+          "rationale": "The displaced item currently costs nothing that anybody can see, which is why the pattern survives. Putting a monthly figure on it gives the trade-off a price and moves it in front of the people making it."
+        },
+        {
+          "id": "c",
+          "text": "Ask the branch managers to stop raising urgent requests.",
+          "correct": false,
+          "rationale": "It tries to remove real operational demand rather than bound it. The demand simply reappears through informal routes, where it is neither counted nor prioritised."
+        },
+        {
+          "id": "d",
+          "text": "Move the high-value item into the next iteration and protect it personally.",
+          "correct": false,
+          "rationale": "It applies a one-off intervention to a standing pattern. The item may get done, and the same displacement resumes the following month with the next one."
+        },
+        {
+          "id": "e",
+          "text": "Put the urgent requests into the backlog to be ranked alongside everything else.",
+          "correct": false,
+          "rationale": "It treats two genuinely different classes of demand as one. Real operational incidents cannot always wait for the next refinement, so either they are delayed or the ranking quietly becomes a fiction."
+        }
+      ],
+      "explanation": "An item that keeps losing to a recurring class of work is not a prioritisation failure but a policy gap, and re-ranking it will not survive the next week's arrivals. Where two kinds of demand compete on different timescales, the durable answer is an agreed allocation for each plus a visible cost for whatever keeps being displaced. Steady output and satisfied requesters can mask this for a long time, because everybody involved is behaving reasonably.",
+      "mindset": "When the same item keeps losing, change the policy rather than the ranking."
+    },
+    {
+      "id": "pmp-pr3-136",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "change-request",
+        "benefit-justification",
+        "impact-assessment"
+      ],
+      "stem": "A claims director asks you to add a second authorisation step to the expenses workflow your team is building, on the grounds that it will improve control. She has not said what problem it addresses. A first look suggests the step would take most of a sprint to build and would need around two hundred claim handlers retrained. Your change procedure requires an impact assessment before anything reaches the board. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask her what the step is meant to achieve and how anyone would recognise the improvement, then assess the impact.",
+          "correct": true,
+          "rationale": "It gathers the half of the equation that is missing while the requester is still in the conversation. Without it the assessment can only describe cost, which is not enough to decide anything."
+        },
+        {
+          "id": "b",
+          "text": "Submit the request to the board with the build effort and the retraining impact attached.",
+          "correct": false,
+          "rationale": "It hands the board one side of a two-sided decision. A change presented as pure cost will be refused, and a worthwhile control may be lost because nobody asked what it was for."
+        },
+        {
+          "id": "c",
+          "text": "Decline the request, since no benefit has been quantified.",
+          "correct": false,
+          "rationale": "It treats an incomplete request as a rejected one. The benefit may well be real and simply unstated, and the requester has not yet been given the chance to state it."
+        },
+        {
+          "id": "d",
+          "text": "Add the step, since stronger authorisation is self-evidently worth having.",
+          "correct": false,
+          "rationale": "It accepts a category as though it were a benefit. Every additional approval also costs claimants and approvers time, so control is a trade rather than a free good."
+        }
+      ],
+      "explanation": "A change request is a proposal to spend money, and it can only be assessed if both sides are on the table. Establishing what the change is intended to achieve, in terms somebody could check afterwards, comes before pricing it, because the price is meaningless on its own. Requests arriving without a stated benefit are common and usually mean the benefit is obvious to the requester rather than absent.",
+      "mindset": "Every change costs something, so ask what it is buying before you price it."
+    },
+    {
+      "id": "pmp-pr3-137",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "benefit-type",
+        "redeployment",
+        "case-revision"
+      ],
+      "stem": "A council's digital licensing service was approved on a forecast saving of £220,000 a year in processing cost. Twelve months on, that cost line is unchanged: applications have risen by about a third and the same team has absorbed the increase without additional staff. The service head regards this as a clear success, while the finance business partner records the benefit as unrealised. Both are describing the same facts. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record what has actually occurred as a capacity benefit against a stated measure, kept separate from the cash saving that was approved.",
+          "correct": true,
+          "rationale": "Absorbing a third more work without extra staff is a real gain and deserves a stated measure rather than an argument. Keeping it separate from the approved saving stops one being quietly substituted for the other."
+        },
+        {
+          "id": "b",
+          "text": "Put the difference between the approved cash benefit and the realised capacity benefit to the sponsor as a decision about the case.",
+          "correct": true,
+          "rationale": "The council funded a reduction in processing cost and has received something else, which is a change to the basis of the investment. Only the sponsor can decide whether that substitution is acceptable."
+        },
+        {
+          "id": "c",
+          "text": "Report the benefit as realised, since the processing cost for each application has fallen exactly as forecast.",
+          "correct": false,
+          "rationale": "It reports the mechanism as though it were the outcome. Cost per application was how the saving was to be produced; the saving itself was what was approved, and it has not appeared."
+        },
+        {
+          "id": "d",
+          "text": "Ask the service to reduce the team to the size the original case assumed and take the saving.",
+          "correct": false,
+          "rationale": "It subordinates a live operational judgement to a year-old projection. The extra applications may well be worth more than the saving, and that is the service's call rather than the project's."
+        },
+        {
+          "id": "e",
+          "text": "Write off the cash benefit and close the case as delivered.",
+          "correct": false,
+          "rationale": "It closes the question instead of answering it, and discards the most useful lesson available: that the forecast rested on an assumption about redeployment nobody had ever agreed with the service."
+        }
+      ],
+      "explanation": "A benefit is realised only in the form it was approved in, so a genuine gain of a different kind is still a change to the case and belongs in front of whoever funded it. Cases that convert saved effort into money almost always carry an unstated assumption that the effort will be removed rather than reused, and that assumption is the one worth surfacing early. Both parties here can be right at once, which is exactly why the decision is not the project manager's to settle.",
+      "mindset": "A different benefit from the one you promised is still a change to the case."
+    },
+    {
+      "id": "pmp-pr3-138",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "diagnosis",
+        "symptoms",
+        "benefits"
+      ],
+      "stem": "A programme assurance reviewer at a transport authority has listed three observations from a delivery programme and proposed the same remedy for all of them, which is tighter estimation discipline. You think each observation points at a different problem, and that none of them is about effort. Match each symptom to what it most likely indicates about value. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Every feature the team ships is accepted by the sponsor, and none of them moves any measure named in the business case."
+        },
+        {
+          "id": "s2",
+          "text": "Stakeholders keep requesting features that already exist in the released product."
+        },
+        {
+          "id": "s3",
+          "text": "The benefit forecast has not been revised in two years, across three changes of sponsor."
+        }
+      ],
+      "options": [
+        {
+          "id": "d1",
+          "text": "The link between what is being built and the outcomes it was meant to move has never been drawn.",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Acceptance confirms a deliverable meets its criteria, which is a statement about the thing rather than about its effect. Features can pass every check and still connect to nothing in the case."
+        },
+        {
+          "id": "d2",
+          "text": "Delivered capability is not reaching the people it was built for.",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A request for something that already exists is evidence that it was never found or never explained. The build was complete and the delivery, in the sense that matters, was not."
+        },
+        {
+          "id": "d3",
+          "text": "The case has stopped being a live document and become a historical record.",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Two years and three sponsors is more than enough change to have moved something in the forecast. A number that never moves is one nobody is using to make decisions."
+        },
+        {
+          "id": "d4",
+          "text": "The team's effort estimates are unreliable.",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Estimation accuracy is about predicting how long work takes, and none of these three symptoms concerns effort at all. Reaching for it is how a value problem gets diagnosed as a delivery problem."
+        }
+      ],
+      "explanation": "Value problems present through delivery symptoms and are routinely misread as delivery problems, because delivery is what everyone is watching. Sorting them means asking whether the failure lies in the link from output to outcome, in the capability reaching its users, or in the case having gone stale. Each of those has a different remedy, and applying the wrong one leaves the symptom intact and everyone busier.",
+      "mindset": "Diagnose the symptom before reaching for the remedy you know best."
+    },
+    {
+      "id": "pmp-pr3-139",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "release-readiness",
+        "constraints",
+        "competing-definitions"
+      ],
+      "stem": "An agile programme is building a patient-triage tool. The product owner considers it releasable once clinicians can complete a triage. The sponsor wants the reporting pack finished before any release, because that is what the board sees. The regulator's inspector will not accept a live clinical tool without a full audit trail. Each position is reasonable, and none has shifted in six weeks. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Get the three positions written into one release-readiness definition, with the regulator's requirement set as a constraint and the other two ranked within it.",
+          "correct": true,
+          "rationale": "It separates a condition that cannot be waived from two that are preferences, which is the distinction the stalemate has been missing. Once the floor is fixed, the remaining disagreement is an ordinary ranking question the team can settle."
+        },
+        {
+          "id": "b",
+          "text": "Release on the product owner's definition, since the product owner owns the backlog and its priorities.",
+          "correct": false,
+          "rationale": "It applies backlog authority to a decision that contains a regulatory condition no product owner can waive. Ownership of ranking is not ownership of what makes a release lawful."
+        },
+        {
+          "id": "c",
+          "text": "Escalate to the sponsor for a ruling, since he controls the budget.",
+          "correct": false,
+          "rationale": "It settles a disagreement by rank when one of the three positions is not the sponsor's to overrule. Any ruling that waives the audit trail collapses on first contact with the inspector."
+        },
+        {
+          "id": "d",
+          "text": "Build all three and release once every requirement is complete in full.",
+          "correct": false,
+          "rationale": "It avoids the trade-off by satisfying everybody, which is the most expensive route available and defers clinical benefit for as long as the longest item takes."
+        }
+      ],
+      "explanation": "A stalemate between reasonable positions is usually a sign that constraints and preferences have not been separated. Conditions imposed from outside set a floor beneath which no release can go, and everything above that floor is ranking, which is a solvable problem. Working the two together produces either an unlawful release or an unaffordable one, and six weeks of unchanged positions is the signal that nobody has done the sorting.",
+      "mindset": "Separate the conditions that cannot be waived from the ones that can, then rank only the second kind."
+    },
+    {
+      "id": "pmp-pr3-140",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "measures",
+        "attribution",
+        "reporting"
+      ],
+      "stem": "A finance partner at a regional water company is reviewing how two of your projects will be judged. One reports progress as a percentage of planned deliverables completed; the other has forecast a saving that will land in an accounts line several unrelated initiatives also touch. She wants to know what each arrangement can and cannot establish. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "m1",
+          "text": "The dashboard figure showing 84 per cent of planned deliverables complete cannot establish"
+        },
+        {
+          "id": "m2",
+          "text": "A saving visible only in an accounts line that many other things also affect calls for"
+        }
+      ],
+      "options": [
+        {
+          "id": "o1",
+          "text": "whether any of the value the programme was funded for has yet appeared",
+          "correct": true,
+          "match": "m1",
+          "rationale": "Completion counts output against plan, and a plan can be executed immaculately while the outcome it was built for does not move. It is a measure of conformance, not of worth."
+        },
+        {
+          "id": "o2",
+          "text": "an agreed method for isolating the project's contribution, fixed before the change goes live",
+          "correct": true,
+          "match": "m2",
+          "rationale": "Where several influences land on one line, attribution has to be settled in advance or it becomes an argument afterwards between people with different interests. Fixing the method early is what makes the eventual figure credible."
+        },
+        {
+          "id": "o3",
+          "text": "a monthly report circulated to everyone with an interest in the project",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Circulating a figure more widely does nothing to establish whose figure it is. It answers a communication question when the difficulty in both sentences is measurement, which is the standard way a measurement problem gets treated as a reporting one."
+        }
+      ],
+      "explanation": "A measure answers the question it was built to answer and no other, so the discipline is to check what a number was designed for before relying on it for something else. Deliverable completion reports conformance to a plan; benefit realisation reports worth; and where a benefit lands in a shared line, the method of attribution has to be agreed before the change rather than negotiated once the figures are in and everyone has a position to defend.",
+      "mindset": "Ask what question a measure was built to answer before you rely on it for another."
+    }
+  ]
+}
