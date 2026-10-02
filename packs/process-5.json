@@ -1,0 +1,1950 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 5 — Procurement",
+  "questions": [
+    {
+      "id": "pmp-pr5-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "bidder-clarification",
+        "tendering"
+      ],
+      "stem": "You are running the tender for a £600,000 replacement of a hospital's central kitchen equipment. Four suppliers attended last week's bidders' conference. One of them now emails you directly asking whether the combination ovens must be electric or may be gas, because the drawings and the written specification disagree. Bids close in ten days. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reply only to the supplier who asked, since it found the discrepancy and the answer mainly affects how it prices its own bid.",
+          "correct": false,
+          "rationale": "The candidate treats a clarification as private correspondence. One bidder pricing on better information than the other three makes the bids incomparable and exposes the award to challenge."
+        },
+        {
+          "id": "b",
+          "text": "Answer the question in writing to all four bidders without naming who asked, and confirm which of the two documents takes precedence.",
+          "correct": true,
+          "rationale": "The discrepancy affects every bidder's price, so every bidder needs the same answer at the same time. Issuing it to all, anonymised, keeps the bids comparable and the eventual award defensible."
+        },
+        {
+          "id": "c",
+          "text": "Tell the supplier that questions closed with the conference and that each bidder should price whichever reading it considers reasonable.",
+          "correct": false,
+          "rationale": "This confuses a procedural deadline with good practice. Leaving a known ambiguity in place guarantees four bids priced on different assumptions and a dispute with whoever wins."
+        },
+        {
+          "id": "d",
+          "text": "Ask the supplier to state its assumption in its bid, then adjust all four bids for the oven difference during the evaluation stage.",
+          "correct": false,
+          "rationale": "The candidate hopes to repair the comparison after the event. Normalising bids for an assumption only one bidder was invited to state is guesswork, and the other three never had the chance to price the right thing."
+        }
+      ],
+      "explanation": "During a tender, any clarification that could affect how bidders price or design their response is owed to every bidder at once, in writing and without identifying who raised it. Equal information is what makes bids comparable, and comparability is what makes an award defensible. Where documents conflict, the fix is to resolve the conflict for everyone before bids close, not to absorb it during evaluation.",
+      "mindset": "Treat an answer to one bidder as an answer owed to all of them."
+    },
+    {
+      "id": "pmp-pr5-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "procurement",
+        "source-selection",
+        "price-realism"
+      ],
+      "stem": "Your council is replacing the roof of a leisure centre. The engineer's independent estimate is €1.9 million. Three bids sit between €1.85 and €2.1 million; the fourth, from a contractor with good references, is €1.2 million. Because price carries 40% of the marks, the low bid scores highest on the published criteria. The finance director wants the award made this week. What should the project manager do next?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Award to the low bidder as the scoring dictates, and protect the council with a performance bond and firm liquidated damages in the contract.",
+          "correct": false,
+          "rationale": "The candidate relies on remedies instead of checking whether the bid is workable. A contractor that has mispriced by a third will look for claims or fail, and a bond only softens the second outcome."
+        },
+        {
+          "id": "b",
+          "text": "Exclude the low bid as abnormally low and award to the highest-scoring of the three bids that sit close to the independent estimate.",
+          "correct": false,
+          "rationale": "The candidate rejects on suspicion alone. Without asking the bidder to justify its price, exclusion is open to challenge and may throw away a legitimate saving from a different construction method."
+        },
+        {
+          "id": "c",
+          "text": "Ask the low bidder to explain in writing how it priced the main items and to confirm it has understood the full scope before any award.",
+          "correct": true,
+          "rationale": "A bid this far below the estimate and the field is either a genuine saving or a misunderstanding, and the evidence to tell which is with the bidder. Clarifying first protects both the saving and the council."
+        },
+        {
+          "id": "d",
+          "text": "Re-run the evaluation with price weighted at 25%, so that the scores reflect the council's real concern about quality and delivery risk.",
+          "correct": false,
+          "rationale": "Changing published weightings after bids are opened is unfair to every bidder who responded to them. The concern about risk is legitimate but belonged in the criteria before the tender went out."
+        }
+      ],
+      "explanation": "An outlier bid is a question, not an answer. When a price is far below the independent estimate and the rest of the field, the buyer seeks a written explanation of how it was built before awarding or rejecting it, because underpricing usually returns as claims, quality shortcuts or failure. Evaluation criteria stay as published; what changes is the evidence gathered within them.",
+      "mindset": "Check that a surprising price is real before you either celebrate or reject it."
+    },
+    {
+      "id": "pmp-pr5-103",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "procurement",
+        "agile-contracts",
+        "backlog-exchange"
+      ],
+      "stem": "You are product owner for an insurer's claims portal, built by a vendor on a capacity basis: a fixed team for twelve two-week sprints. The contract lets the product owner exchange any not-yet-started backlog item for new work of equivalent estimated size, at no charge, by recording the swap in the backlog. Mid-way, a regulatory change makes document upload urgent. A finance manager insists any change must go to next month's change board. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Swap the upload feature in for unstarted items of equal size under the exchange clause, record it, and show the finance manager the clause.",
+          "correct": true,
+          "rationale": "The contract grants the product owner exactly this authority and sets out how to evidence it. Using it, and pointing the finance manager to the clause, is acting within governance rather than around it."
+        },
+        {
+          "id": "b",
+          "text": "Raise a change request for next month's board, and ask the vendor to begin design work on the upload feature informally so time is not lost.",
+          "correct": false,
+          "rationale": "The candidate defers to a forum the contract does not require for this kind of change, then undermines it with informal instructions. Both halves create the ambiguity the exchange clause was written to avoid."
+        },
+        {
+          "id": "c",
+          "text": "Ask the vendor to price the upload feature as a variation on top of the current plan, so that no backlog item already agreed is lost.",
+          "correct": false,
+          "rationale": "The candidate treats a priority decision as additional scope and pays for it. The contract already provides a no-cost route, and the displaced items are by definition the least valuable remaining ones."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the disagreement to the sponsor and keep the backlog unchanged until the sponsor rules on which process should apply.",
+          "correct": false,
+          "rationale": "The candidate escalates a question the contract already answers, and freezes delivery of an urgent regulatory item while waiting. Escalation is for decisions above your authority, not ones the contract assigns to you."
+        }
+      ],
+      "explanation": "Where a contract assigns a specific decision to a named role, exercising that authority as written is compliance, not a shortcut. Agile contracts often include an exchange mechanism so that priority changes of equal size cost nothing and need no variation; the obligation is to use it as specified and keep the record that proves it was used properly. Routing such changes through a board anyway adds delay without adding control.",
+      "mindset": "Read what the contract already lets you decide before asking anyone's permission."
+    },
+    {
+      "id": "pmp-pr5-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "procurement",
+        "contract-administration",
+        "variations"
+      ],
+      "stem": "You manage the electrical fit-out of a ferry terminal under a fixed-price contract. The contract names your organisation's contracts manager as the only person who may instruct variations. On site, the supplier's foreman says the new baggage hall needs an extra distribution board not shown on the drawings, worth about €18,000, and asks you to confirm verbally so his crew can carry on tomorrow. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Confirm verbally so the crew is not left idle, then email the contracts manager straight away so the variation can be formalised afterwards.",
+          "correct": false,
+          "rationale": "The candidate assumes a verbal go-ahead is informal. From the person running the job it can be treated as an instruction, binding the buyer to a price nobody has agreed and bypassing the only authorised role."
+        },
+        {
+          "id": "b",
+          "text": "Tell the foreman to install the board within the fixed price, because checking the drawings for completeness was part of the supplier's duty.",
+          "correct": false,
+          "rationale": "The candidate settles the risk allocation on the spot without reading the contract. If the omission is a buyer design error, this is an instruction to do extra work for nothing, which becomes a claim."
+        },
+        {
+          "id": "c",
+          "text": "Ask the design team to confirm whether the board is needed and hold the matter until they have reissued the drawings to the supplier.",
+          "correct": false,
+          "rationale": "The technical check is sensible, but the candidate leaves the contractual route untouched and lets a crew stand idle meanwhile. Whether the board is needed and who pays for it are separate questions for separate owners."
+        },
+        {
+          "id": "d",
+          "text": "Have the foreman put the request in writing today and take it straight to the contracts manager for a decision before the extra work starts.",
+          "correct": true,
+          "rationale": "The request may well be valid, but only the named role can commit the buyer. Getting it in writing and to that person quickly keeps the work moving without creating an unpriced, unauthorised change."
+        }
+      ],
+      "explanation": "On a contract, the power to vary scope sits with whoever the contract names, and other people's words can still bind the buyer if a supplier reasonably acts on them. The project manager's job when a variation surfaces on site is to capture it in writing and get it to the authorised role fast, so that need, entitlement and price are decided before the work is done rather than argued about afterwards.",
+      "mindset": "Know who can commit the buyer, and get requests to that person before the work starts."
+    },
+    {
+      "id": "pmp-pr5-105",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "procurement",
+        "negotiation",
+        "liquidated-damages"
+      ],
+      "stem": "You are negotiating with the preferred contractor for a £3.4 million extension to a secondary school that must open for the September intake; if it is late, the council must hire temporary classrooms at about £40,000 a week. The draft contract sets liquidated damages at £15,000 a week. The contractor offers to cut its price by £120,000 if liquidated damages are removed. At the current price the project is £90,000 over budget. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the reduction, which brings the project inside budget, and manage the opening date through weekly progress meetings with the contractor.",
+          "correct": false,
+          "rationale": "The candidate treats budget compliance as the objective and gives away the contractor's priced exposure to the one date that cannot move. Progress meetings report lateness; they do not make anyone pay for it."
+        },
+        {
+          "id": "b",
+          "text": "Keep the liquidated damages and take the £90,000 shortfall to the sponsor as a funding decision, setting out what late opening would cost.",
+          "correct": true,
+          "rationale": "Three weeks of late opening would cost the council the whole £120,000 offered. The damages are the contractor's incentive to protect the fixed date, and the budget gap is a decision for whoever owns the funding."
+        },
+        {
+          "id": "c",
+          "text": "Counter-offer to keep liquidated damages at half the rate in exchange for half the reduction, so that both parties move towards each other.",
+          "correct": false,
+          "rationale": "Splitting the difference is a negotiating habit rather than an analysis. The damages already cover well under half the weekly loss, so halving them sells more schedule protection for less money."
+        },
+        {
+          "id": "d",
+          "text": "Accept the reduction and add an early-completion bonus paid from part of the saving, so that the contractor still has a reason to finish on time.",
+          "correct": false,
+          "rationale": "The candidate swaps a penalty for a reward, but a bonus only bites when the contractor is ahead. If it runs late it simply forgoes the bonus while the council pays £40,000 a week."
+        }
+      ],
+      "explanation": "A price concession in exchange for a contract protection is a sale of risk, and it should be valued like one: compare what is offered with the expected cost of the risk being handed back. Where the protected outcome is fixed and the loss from missing it is large, keeping the protection is usually worth more than the discount. A budget shortfall that results is a funding decision to escalate, not a reason to sell the protection cheaply.",
+      "mindset": "Price what you are giving up in a negotiation, not just what you are being offered."
+    },
+    {
+      "id": "pmp-pr5-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "claims",
+        "ground-conditions"
+      ],
+      "stem": "A contractor laying a 4 km water main has claimed £140,000 for rock excavation. The contract leaves ground conditions at the contractor's risk unless they could not reasonably have been foreseen from the site investigation issued at tender. That report found rock in 3 of 12 boreholes, all within the first kilometre. Your site diaries confirm rock along most of the route. The contract requires negotiation before adjudication. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reject the claim, because the site investigation put the contractor on notice that rock was present and it should have priced accordingly.",
+          "correct": false,
+          "rationale": "The candidate stretches foreseeability beyond what the report showed. Rock confined to the first kilometre does not tell a reasonable bidder to expect it for the next three, and an adjudicator is likely to say so."
+        },
+        {
+          "id": "b",
+          "text": "Accept the claim in full, because the site diaries confirm the rock and a dispute would slow the remaining work on the main.",
+          "correct": false,
+          "rationale": "The candidate buys peace with money the contract does not require. The rock in the first kilometre was foreseeable and was the contractor's to price, so paying for it hands back risk the buyer had already transferred."
+        },
+        {
+          "id": "c",
+          "text": "Refer the claim to the adjudicator now, so that an independent party decides the split instead of the two parties arguing over it.",
+          "correct": false,
+          "rationale": "The candidate skips a step the contract makes mandatory. Adjudication is for failure to agree; going there first adds cost and time and gives the contractor a procedural point against you."
+        },
+        {
+          "id": "d",
+          "text": "Measure from the site records the rock found beyond the first kilometre and negotiate payment for that portion, declining the rest.",
+          "correct": true,
+          "rationale": "The contract's test splits the claim along the line of what the report disclosed. Quantifying each side from your own records gives the negotiation the contract requires a factual basis rather than two opening positions."
+        }
+      ],
+      "explanation": "A claim is assessed against the contract's own allocation of risk, not against whether the event happened or how inconvenient a dispute would be. Where the test is foreseeability from information provided at tender, the information draws the line, and a single claim can fall partly on each side of it. Quantify each part from contemporaneous records, then follow the contract's dispute steps in order.",
+      "mindset": "Let the contract's risk allocation decide a claim, and let the records decide the numbers."
+    },
+    {
+      "id": "pmp-pr5-107",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "procurement",
+        "intellectual-property",
+        "open-source"
+      ],
+      "stem": "A vendor is building a route-planning app for your logistics company in two-week sprints. The contract assigns all intellectual property in delivered code to your company. At today's sprint review a vendor developer mentions that the mapping module is built on an open-source library whose licence requires any derivative work to be published under the same licence. The first public release is three sprints away. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add a backlog item to replace the library before release, and let the product owner rank it against the rest of the release work.",
+          "correct": false,
+          "rationale": "The candidate treats a contractual compliance problem as an ordinary priority call. Every sprint spent building on the library deepens the rework, and ranking it lets it slip behind visible features."
+        },
+        {
+          "id": "b",
+          "text": "Ask your legal team for an opinion on the licence terms, and wait for their view before raising the matter with the vendor at all.",
+          "correct": false,
+          "rationale": "Legal advice is worth having, but the candidate lets the vendor keep building in the meantime. Seeking advice and putting the supplier on notice can happen in parallel; waiting compounds the cost."
+        },
+        {
+          "id": "c",
+          "text": "Raise it formally with the vendor today as a possible breach of the IP clause, and ask that no further work builds on that library until it is resolved.",
+          "correct": true,
+          "rationale": "The conflict with the IP clause exists now and grows with each sprint. Formal notice today preserves your contractual position and stops more code being built on a foundation that may have to be removed."
+        },
+        {
+          "id": "d",
+          "text": "Record the issue in the risk register with an owner, and review it again at the release go/no-go meeting in three sprints' time.",
+          "correct": false,
+          "rationale": "The candidate files a present problem as a future possibility. The licence terms already apply to the code; a risk review at release finds the same issue with three more sprints of dependent work on top."
+        }
+      ],
+      "explanation": "When a supplier's delivery conflicts with a contract term, the cost of fixing it usually grows with every increment built on top, so the response is formal and immediate rather than queued. Putting the supplier on notice preserves the buyer's position and stops the conflict deepening while the details are worked out. Iterative delivery makes this more urgent, not less, because each sprint adds dependent work.",
+      "mindset": "A contract problem found early is cheap only if you act on it while it is still early."
+    },
+    {
+      "id": "pmp-pr5-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "procurement",
+        "subcontracting",
+        "data-protection"
+      ],
+      "stem": "A vendor is delivering a council's housing-repairs service, designing the citizen screens iteratively and the back-office integration to a fixed plan. It now asks to subcontract accessibility testing to a specialist firm because its own tester has left. The contract needs your written consent to any subcontracting, which may not be unreasonably withheld. The specialist would need access to anonymised tenant data. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Consent, on condition that the specialist accepts data-protection terms equivalent to the vendor's and the vendor stays accountable for its work.",
+          "correct": true,
+          "rationale": "The request is reasonable and the clause favours consent; the real exposure is the tenant data. Conditions that flow the protections down and keep accountability with the vendor accept the change and manage what it introduces."
+        },
+        {
+          "id": "b",
+          "text": "Decline, and require the vendor to recruit a replacement tester so that the team you contracted with stays as it was at award.",
+          "correct": false,
+          "rationale": "The candidate protects the original team at the cost of the work. Withholding consent without a substantive reason risks breaching the clause, and recruitment will delay testing far longer than a specialist would."
+        },
+        {
+          "id": "c",
+          "text": "Consent without conditions, since under the contract the vendor remains fully responsible for anything its subcontractors do.",
+          "correct": false,
+          "rationale": "The candidate relies on contractual liability for a data risk that liability cannot undo. If the specialist mishandles tenant data, suing the vendor afterwards does not reverse the breach."
+        },
+        {
+          "id": "d",
+          "text": "Contract the specialist firm directly yourself, so that the council has its own relationship with the testers and their data handling.",
+          "correct": false,
+          "rationale": "The candidate fragments accountability for the vendor's own quality obligations and creates a new procurement with its own process. Defects found in testing would then sit between two suppliers."
+        }
+      ],
+      "explanation": "A supplier's request to change how it delivers is judged on what the change introduces, not on whether it departs from the original arrangement. Where the contract leans towards consent, the buyer's lever is the conditions attached: flow down the obligations that matter, such as data protection and confidentiality, and keep a single point of accountability. Refusing a reasonable change usually costs more than conditioning it.",
+      "mindset": "Say yes to a reasonable change and put your effort into the conditions that protect what matters."
+    },
+    {
+      "id": "pmp-pr5-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-act-now",
+        "procurement",
+        "supplier-insolvency",
+        "vesting"
+      ],
+      "stem": "A specialist manufacturer is building bespoke switchgear for your data centre, and 60% of the €2.2 million price has been paid in stage payments. The contract says ownership of materials passes to you on payment, provided they are marked and stored separately. This week you hear the manufacturer is paying its own suppliers late and two senior engineers have resigned. Delivery is due in ten weeks. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the manufacturer for an updated delivery programme and a written assurance about its finances before you take any further step.",
+          "correct": false,
+          "rationale": "The candidate seeks reassurance from the party least able to give it honestly. A business in difficulty will usually say it is fine, and the paid-for components remain unprotected while you wait."
+        },
+        {
+          "id": "b",
+          "text": "Withhold the next stage payment until the manufacturer's position is clearer, so as to limit the amount the project could lose.",
+          "correct": false,
+          "rationale": "The candidate caps future exposure but ignores the €1.32 million already paid. Withholding a due payment may also breach the contract and hasten the very failure it is meant to guard against."
+        },
+        {
+          "id": "c",
+          "text": "Start approaching alternative manufacturers so that a replacement order could be placed quickly if this one fails before delivery.",
+          "correct": false,
+          "rationale": "Contingency sourcing is sensible but not first: bespoke switchgear will take months from a new supplier either way. It does nothing to secure the value already paid, which is the time-critical exposure."
+        },
+        {
+          "id": "d",
+          "text": "Arrange an inspection at the works this week to confirm the paid-for components are marked as yours and stored apart from other stock.",
+          "correct": true,
+          "rationale": "Ownership on payment depends on a condition that can be checked now and may be impossible to enforce later. If an administrator is appointed, unmarked materials are likely to be treated as the manufacturer's assets."
+        }
+      ],
+      "explanation": "Early signs of supplier distress call for securing what the buyer already owns or has paid for before anything else, because those protections usually depend on conditions that lapse or become unenforceable once insolvency begins. Reassurances, payment holds and contingency suppliers all have a place, but they address future exposure. Act first on the exposure that is already sunk and still recoverable.",
+      "mindset": "When a supplier wobbles, secure what you have already paid for before planning what comes next."
+    },
+    {
+      "id": "pmp-pr5-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-route-to-owner",
+        "procurement",
+        "conflict-of-interest",
+        "evaluation-panel"
+      ],
+      "stem": "Your bank is choosing a development partner to build a new mobile product with its own Scrum team, and you sit on the five-person evaluation panel. Before scoring begins, a fellow panel member mentions over coffee that her brother-in-law is delivery director at one of the six bidders. She says it will not affect her judgement. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask her to declare the relationship formally to the procurement lead, who will decide whether and how she can continue on the panel.",
+          "correct": true,
+          "rationale": "Conflicts are managed by formal declaration to whoever owns the process, who then decides the response. That protects her, the panel and the award, whatever the decision turns out to be."
+        },
+        {
+          "id": "b",
+          "text": "Accept her assurance, since she has mentioned the link openly and nothing so far suggests it has influenced her views on the bidders.",
+          "correct": false,
+          "rationale": "The candidate treats a remark to a colleague as a declaration. A conflict of interest is about how the process looks to every bidder, not only about her good faith, and it needs to be on the record."
+        },
+        {
+          "id": "c",
+          "text": "Remove her from the panel yourself, so that the evaluation cannot later be challenged on grounds of bias by an unsuccessful bidder.",
+          "correct": false,
+          "rationale": "The candidate takes a decision that does not belong to a fellow panel member. The outcome may well be right, but making it without authority gives a bidder a different procedural point to challenge."
+        },
+        {
+          "id": "d",
+          "text": "Let her score all the bids but quietly discard her marks for that one bidder, so that the panel keeps the benefit of her expertise.",
+          "correct": false,
+          "rationale": "The candidate improvises a remedy outside the process. Her scores for the competing bidders are still shaped by the relationship, and an undeclared workaround looks worse than the conflict itself."
+        }
+      ],
+      "explanation": "A potential conflict of interest in source selection is handled by formal declaration to the owner of the procurement process, who decides whether the person steps back, is restricted or continues. Panel members do not assess or fix each other's conflicts, and good faith is not the test: the award must withstand scrutiny from every bidder who lost.",
+      "mindset": "Put a conflict of interest on the record and let the process owner decide what follows."
+    },
+    {
+      "id": "pmp-pr5-111",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "procurement",
+        "agile-contracts",
+        "payment-terms"
+      ],
+      "stem": "A vendor supplies two Scrum teams for your retailer's checkout rebuild under a capacity contract paid monthly. Combined velocity has fallen from 42 to 30 points over three sprints; the vendor has shown that the drop followed your organisation's decision to add accessibility checks to the definition of done. The procurement manager now proposes amending the contract so that monthly payment is reduced pro rata whenever velocity falls below 40. How should you respond to the proposal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support a velocity threshold, but have it re-baselined jointly with the vendor whenever the definition of done changes, so the vendor is not penalised for the accessibility work.",
+          "correct": false,
+          "rationale": "The candidate fixes the fairness problem and misses the measurement one. Re-baselining makes the threshold reasonable on paper, but once money follows story points the teams have every reason to estimate larger, and the figure stops meaning anything."
+        },
+        {
+          "id": "b",
+          "text": "Advise against tying payment to velocity, and propose instead that a share of each payment depends on increments accepted against the definition of done.",
+          "correct": true,
+          "rationale": "Velocity is a planning aid owned by the team, and paying against it rewards bigger estimates rather than more value. Linking payment to accepted increments rewards the outcome the buyer wants and is far harder to game."
+        },
+        {
+          "id": "c",
+          "text": "Accept the lower velocity as the new normal and ask the procurement manager to set the payment threshold at 30 points rather than 40.",
+          "correct": false,
+          "rationale": "The candidate corrects the number and keeps the mechanism. A threshold at any level ties payment to a relative estimate the vendor's own teams produce, so the incentive to inflate points is the same at 30 as at 40."
+        },
+        {
+          "id": "d",
+          "text": "Refer the proposal to the sponsor as a commercial decision, setting out the vendor's explanation so that the sponsor can weigh it fairly against the procurement view.",
+          "correct": false,
+          "rationale": "The candidate routes away a question they are best placed to answer. The flaw is in how the measure behaves, which is delivery expertise, and passing it upward without that advice lets an unsound clause through by default."
+        }
+      ],
+      "explanation": "A measure that is useful for a team's own planning usually stops being useful once payment depends on it, because the people producing the number are then rewarded for moving it rather than for the result it was meant to reflect. When a contract change proposes paying against such a measure, the right move is to question the mechanism itself, whatever threshold is suggested, and offer a payment basis tied to outcomes the buyer can verify independently.",
+      "mindset": "Before paying against a number, ask who produces it and what they will do once money depends on it."
+    },
+    {
+      "id": "pmp-pr5-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "procurement",
+        "supplier-performance",
+        "contract-closure"
+      ],
+      "stem": "A design agency has finished the interpretation panels for a museum's new gallery, which you ran with a fixed build plan and iterative content reviews. Every deliverable arrived on time, but the agency missed four agreed review deadlines and needed three escalations. Procurement asks for your supplier performance evaluation, which feeds the approved supplier list. Your sponsor suggests rating the agency satisfactory throughout, as it will probably bid for the next gallery. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rate the agency satisfactory as the sponsor suggests, and brief the procurement team verbally about the missed reviews so they are aware of them.",
+          "correct": false,
+          "rationale": "The candidate keeps the problem off the record to avoid friction. A verbal briefing does not reach the next project manager or evaluation panel, which is the purpose of the formal record."
+        },
+        {
+          "id": "b",
+          "text": "Rate the agency on its final deliverables only, since they all arrived on time and the review delays did not in the end affect the opening date.",
+          "correct": false,
+          "rationale": "The candidate judges supplier performance on outcome alone. Three escalations cost the buyer effort and risk, and a future project with less schedule slack would feel them directly."
+        },
+        {
+          "id": "c",
+          "text": "Complete the evaluation accurately, recording the on-time delivery and the missed reviews with dates, and share it with the agency before submitting.",
+          "correct": true,
+          "rationale": "An evidence-based record serves the next buyer and is fair to the agency, which sees what was recorded and can respond. Both the strengths and the problems are facts that a future tender should weigh."
+        },
+        {
+          "id": "d",
+          "text": "Hold the evaluation back until the agency bids for the next gallery, and raise the review problems with it in clarification during that tender.",
+          "correct": false,
+          "rationale": "The candidate moves the feedback to a point where it cannot be acted on fairly. Raising past performance only inside a live tender treats one bidder differently from the rest and leaves the record empty meanwhile."
+        }
+      ],
+      "explanation": "A supplier performance evaluation is the organisation's memory of what a supplier is like to work with, and it only has value if it records what happened, good and bad, with evidence. Softening it to protect a relationship or a future bid passes the cost to the next project. Sharing the record with the supplier keeps it fair and gives the supplier the chance to improve.",
+      "mindset": "Write the supplier record you would want to read before your own next contract."
+    },
+    {
+      "id": "pmp-pr5-113",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "contract-closure",
+        "final-account"
+      ],
+      "stem": "A supplier installed 24 fume cupboards in a university's chemistry building under a fixed-price contract. The cupboards have been in daily use for a year and the 12-month defects period ended last week. The supplier's claim for £22,000 of extra ductwork is still under discussion, and its operating manuals and airflow test certificates were promised but have not arrived. Which two must be completed before the contract is closed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Obtain the operating manuals and airflow test certificates, and record formal acceptance of every deliverable the contract specifies.",
+          "correct": true,
+          "rationale": "Documents named as deliverables are part of what was bought. Closing without them gives up the leverage that gets them delivered and leaves the university operating safety equipment without its certification."
+        },
+        {
+          "id": "b",
+          "text": "Settle the ductwork claim and agree the final account, so that no open claim remains between the parties at closure.",
+          "correct": true,
+          "rationale": "A contract cannot be closed cleanly while a claim is open, because the final payment and the release of obligations both depend on knowing what is owed. Resolution may mean paying, rejecting or compromising, but it must be reached."
+        },
+        {
+          "id": "c",
+          "text": "Release the retention now that the defects period has ended, and deal with the ductwork claim separately as part of a later dispute.",
+          "correct": false,
+          "rationale": "The candidate releases the buyer's main remaining leverage before the account is settled. Retention is usually the money that motivates a supplier to close out documents and claims on reasonable terms."
+        },
+        {
+          "id": "d",
+          "text": "Treat the year of daily use by the department as acceptance of the installation, and archive the procurement file on that basis.",
+          "correct": false,
+          "rationale": "The candidate equates use with acceptance. Occupation shows the cupboards work in practice, not that every contracted deliverable, including certification, has been provided and checked."
+        },
+        {
+          "id": "e",
+          "text": "Issue a purchase order under the same contract for annual servicing, so that the supplier's support continues without a gap after closure.",
+          "correct": false,
+          "rationale": "The candidate extends a contract that is meant to be closing, and buys new scope without competition. Ongoing servicing is a separate need with its own procurement route."
+        }
+      ],
+      "explanation": "Closing a contract means confirming that both sides have finished what it obliges them to do: every specified deliverable received and formally accepted, and every claim and payment settled. Use of the product is not acceptance, and the expiry of a defects period is not settlement. Keep the remaining leverage, such as retention, until the account is agreed, because closure is the last point at which the buyer still has it.",
+      "mindset": "A contract is closed when both sides are finished, not when the product is in use."
+    },
+    {
+      "id": "pmp-pr5-114",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "procurement",
+        "source-selection",
+        "agile-vendors"
+      ],
+      "stem": "A housing association is selecting a vendor to supply a cross-functional team that will build its tenant app in two-week sprints alongside the association's own product owner. Three shortlisted bidders submitted near-identical written methodologies describing Scrum by the book. The panel feels the written scores will not separate them. Which two additions to the selection process would give the most reliable evidence of how each bidder's team will actually work?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Run a short paid exercise in which each bidder's proposed team works on a real backlog item with the association's product owner.",
+          "correct": true,
+          "rationale": "Watching the named team work on the buyer's own problem is direct evidence of collaboration, questioning and delivery habits. Paying for it keeps it fair to bidders and gets their real people rather than a sales team."
+        },
+        {
+          "id": "b",
+          "text": "Take references from recent clients on whose engagements the same proposed team members worked, rather than only from the firm's showcase clients.",
+          "correct": true,
+          "rationale": "References about the specific people predict much better than references about the company. Showcase references describe the firm's best engagement, which may have been staffed by someone else entirely."
+        },
+        {
+          "id": "c",
+          "text": "Raise the weighting of the written methodology section, so that small differences in the quality of the answers carry more of the decision.",
+          "correct": false,
+          "rationale": "The candidate amplifies a signal the panel already knows is weak. Near-identical method statements describe what bidders know to write, and weighting them more heavily only magnifies noise."
+        },
+        {
+          "id": "d",
+          "text": "Require every team member proposed by each bidder to hold a recognised agile certification, and score bidders on how many certificates they hold.",
+          "correct": false,
+          "rationale": "The candidate measures training rather than practice. Certification shows someone has learned the vocabulary, which every bidder's documents already demonstrate, not how the team behaves under real conditions."
+        },
+        {
+          "id": "e",
+          "text": "Ask each bidder for a firm price to deliver the whole initial backlog, so that the panel can compare commitment as well as method.",
+          "correct": false,
+          "rationale": "The candidate brings in a price comparison that suits fixed scope, not a team supplying evolving work. Bidders would price for uncertainty differently, which says little about how they collaborate."
+        }
+      ],
+      "explanation": "When written submissions stop discriminating between bidders, the selection should seek evidence of behaviour, not more or better-weighted claims. For a supplied team, the best predictors are the named people observed doing representative work and the testimony of clients who worked with those same people. Selection criteria should test what will determine success, which for collaborative delivery is how the team works rather than what it says it does.",
+      "mindset": "When the documents all look the same, go and watch the people who will do the work."
+    },
+    {
+      "id": "pmp-pr5-115",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "procurement",
+        "negotiation",
+        "contract-renewal"
+      ],
+      "stem": "Your hosting contract supporting a hybrid ERP programme expires in five months. The incumbent provider proposes an 18% increase for a further three years. Migrating to another provider would take about four months and carries cutover risk during the programme's busiest phase. Your first negotiation meeting is next week. Which two should you settle before that meeting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The realistic cost and timing of moving to another provider, and the walk-away point on price that this alternative implies.",
+          "correct": true,
+          "rationale": "Knowing your alternative is what tells you when to stop conceding. With only five months left and four needed to migrate, the alternative is weak and getting weaker, and you need to know that before the provider does."
+        },
+        {
+          "id": "b",
+          "text": "Which terms you are prepared to trade for price, such as contract length or service levels on test environments, and which are fixed.",
+          "correct": true,
+          "rationale": "A negotiation conducted on price alone ends in splitting the difference. Knowing in advance what you can offer that costs you little but is worth something to the provider creates room to agree."
+        },
+        {
+          "id": "c",
+          "text": "A clear opening statement of your budget ceiling for the renewal, so that the provider understands the limit and the meeting can move quickly.",
+          "correct": false,
+          "rationale": "The candidate confuses openness with efficiency. Revealing the ceiling anchors the provider's offer to it, so the result tends to land on your maximum rather than below it."
+        },
+        {
+          "id": "d",
+          "text": "Arrangements for the sponsor to attend the meeting, so that any proposal the provider makes can be agreed or rejected in the room.",
+          "correct": false,
+          "rationale": "The candidate puts final authority at the table, which removes the useful step of taking an offer away to consider it. Negotiators who can decide on the spot are pressed to decide on the spot."
+        },
+        {
+          "id": "e",
+          "text": "A formal tender to three competing providers to be issued before the meeting, so that the incumbent negotiates knowing it faces competition.",
+          "correct": false,
+          "rationale": "The candidate treats a full re-procurement as a negotiating tactic. Competitors may decline once they see the timeline, and launching a tender you may not be able to act on wastes their effort and your credibility."
+        }
+      ],
+      "explanation": "Preparation for a negotiation turns on two things decided in advance: how good your alternative to agreement really is, which sets the point at which you walk away, and what you can trade, which creates room to move other than on price. Without the first you cannot tell a good offer from a bad one; without the second the only lever left is the headline number. Both have to be settled before the other side starts shaping the conversation.",
+      "mindset": "Know your alternative and your tradeables before you hear the other side's offer."
+    },
+    {
+      "id": "pmp-pr5-116",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "source-selection",
+        "selection-methods"
+      ],
+      "stem": "A highways authority is buying three things for a bridge refurbishment programme. Match each purchase to the source selection method that best fits it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Replacement bearings for a bridge whose deck is certified only for one manufacturer's bearings; any other make would mean redesigning the deck."
+        },
+        {
+          "id": "s2",
+          "text": "3,000 high-visibility jackets to a published safety standard, where every compliant jacket performs the same as any other."
+        },
+        {
+          "id": "s3",
+          "text": "A conservation engineer for a listed viaduct, whose fee is under 2% of the works cost but whose judgement will drive the cost of the works."
+        }
+      ],
+      "options": [
+        {
+          "id": "sole",
+          "text": "Single-source award with a documented justification",
+          "correct": true,
+          "match": "s1",
+          "rationale": "When only one supplier can meet a genuine technical constraint, competition is a formality. Documenting why the constraint is real is what keeps a sole-source award defensible."
+        },
+        {
+          "id": "lpta",
+          "text": "Lowest price among technically compliant bids",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Where compliance with a standard is all that matters and compliant products are interchangeable, paying more buys nothing. Price is the right discriminator once the pass mark is met."
+        },
+        {
+          "id": "qbs",
+          "text": "Quality-based selection, then negotiate the fee with the top-ranked firm",
+          "correct": true,
+          "match": "s3",
+          "rationale": "When the fee is small and the consultant's decisions drive a much larger cost, competing on price risks false economy. Selecting on quality and then negotiating a fair fee puts the weight where the value is."
+        },
+        {
+          "id": "best",
+          "text": "Weighted best value, scoring price and quality together",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Weighted scoring suits purchases where price and quality both vary and both matter. Here one case has no competition, one has no quality difference and one has a price too small to weigh."
+        }
+      ],
+      "explanation": "The source selection method should follow what actually varies between suppliers and what drives value. Where only one supplier can meet a real constraint, justify the single source; where products are interchangeable once compliant, compete on price; where the supplier's judgement drives a far larger cost than its fee, select on quality first. Weighted scoring is the default only when both price and quality genuinely differ and matter.",
+      "mindset": "Choose how to select a supplier by asking what really differs between them."
+    },
+    {
+      "id": "pmp-pr5-117",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-diagnose-first",
+        "procurement",
+        "solicitation-documents",
+        "market-engagement"
+      ],
+      "stem": "A logistics firm is building a new distribution hub, with civil works planned in stages and its software delivered iteratively. Match each buying situation to the document that should go to the market. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The firm does not yet know which suppliers could integrate automated parcel sorting with its warehouse software, and wants to learn what is possible before writing requirements."
+        },
+        {
+          "id": "s2",
+          "text": "The firm needs prices and delivery dates for 40 standard pallet racks to a fully defined specification."
+        },
+        {
+          "id": "s3",
+          "text": "The firm wants suppliers to propose how they would build a yard-management app iteratively, with which team and on what commercial basis."
+        }
+      ],
+      "options": [
+        {
+          "id": "rfi",
+          "text": "Request for information",
+          "correct": true,
+          "match": "s1",
+          "rationale": "When the buyer does not yet know what the market can offer, the first step is to ask. An RFI gathers capability and options without committing anyone, and shapes the requirements that follow."
+        },
+        {
+          "id": "rfq",
+          "text": "Request for quotation",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A fully specified standard item leaves only price and delivery to compare. A quotation request asks for exactly those and keeps the exercise quick."
+        },
+        {
+          "id": "rfp",
+          "text": "Request for proposal",
+          "correct": true,
+          "match": "s3",
+          "rationale": "When the buyer wants suppliers to propose an approach, a team and a commercial model, it needs a proposal that can be evaluated on several dimensions, not a single price."
+        },
+        {
+          "id": "loi",
+          "text": "Letter of intent",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A letter of intent signals the intention to contract with a supplier already chosen, often so work can start before the full contract is signed. None of these situations has a chosen supplier yet."
+        }
+      ],
+      "explanation": "Which document goes to the market depends on what the buyer already knows. If it does not know what is possible, it asks for information; if it knows exactly what it wants and only price and delivery vary, it asks for quotations; if it wants suppliers to propose how to meet a need, it asks for proposals. Sending the wrong one either forces suppliers to guess or wastes their effort on detail the buyer does not need.",
+      "mindset": "Work out what you still need to learn from the market before deciding what to ask it."
+    },
+    {
+      "id": "pmp-pr5-118",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "procurement",
+        "agile-contracts",
+        "decision-rights"
+      ],
+      "stem": "A vendor team builds a booking platform for your travel company in two-week sprints, paid monthly for accepted increments, with named key personnel in the contract. Complete each sentence with the person who holds the decision. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The vendor asks whether a story that is coded but untested can count as complete in this month's invoice. That decision belongs to"
+        },
+        {
+          "id": "c2",
+          "text": "The vendor proposes replacing its lead architect, who is named as key personnel, with a colleague from another account. Approval belongs to"
+        },
+        {
+          "id": "c3",
+          "text": "Your marketing director wants the vendor team to commit to 50 story points next sprint to hit a campaign date. How much work is taken into the sprint is decided by"
+        }
+      ],
+      "options": [
+        {
+          "id": "po",
+          "text": "the product owner, judging the increment against the definition of done",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Acceptance of an increment is the product owner's call, and the definition of done is the test. Untested work does not meet it, so it is not accepted and cannot be invoiced as accepted."
+        },
+        {
+          "id": "cm",
+          "text": "the buyer's contract manager, under the key-personnel clause",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A change to named personnel is a contractual matter. The clause sets who approves a substitute and on what terms, and that authority sits with the buyer's contract owner rather than the delivery team."
+        },
+        {
+          "id": "devs",
+          "text": "the developers in the vendor team, at sprint planning",
+          "correct": true,
+          "match": "c3",
+          "rationale": "The people doing the work forecast how much they can complete. Pressure from outside the team produces a larger commitment, not a larger capacity, and the campaign date is a matter for backlog ordering."
+        },
+        {
+          "id": "sponsor",
+          "text": "the sponsor, as the person accountable for the overall budget",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The sponsor is accountable for the investment, but none of these is a funding decision: each sits with a role the contract or the framework already names."
+        }
+      ],
+      "explanation": "In a contracted agile delivery, decision rights come from two places: the delivery framework, which gives acceptance to the product owner and sprint forecasting to the developers, and the contract, which assigns commercial matters such as key-personnel changes to the buyer's contract owner. Most friction arises when a decision is taken by whoever is asked first rather than whoever holds it.",
+      "mindset": "Before answering a vendor's question, check whose decision it is under the contract and the framework."
+    },
+    {
+      "id": "pmp-pr5-119",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "procurement",
+        "source-selection",
+        "weighted-scoring"
+      ],
+      "stem": "A port authority is evaluating two bids for dredging. Published weights: technical 50%, price 30%, programme 20%. Price is scored as lowest price ÷ bid price × 100. Bidder North: €480,000, technical 80, programme 70. Bidder South: €400,000, technical 65, programme 80. Work out the weighted totals.",
+      "blanks": [
+        {
+          "id": "nprice",
+          "label": "North's price score, out of 100, to one decimal place",
+          "numeric": true,
+          "expect": 83.3,
+          "tol": 0.1,
+          "rationale": "South is cheapest, so North scores 400,000 ÷ 480,000 × 100 = 83.3. South, as the lowest bid, scores the full 100 on price."
+        },
+        {
+          "id": "ntotal",
+          "label": "North's weighted total, out of 100, to one decimal place",
+          "numeric": true,
+          "expect": 79.0,
+          "tol": 0.1,
+          "rationale": "0.5 × 80 + 0.3 × 83.33 + 0.2 × 70 = 40 + 25 + 14 = 79.0. North's technical lead more than offsets its price disadvantage."
+        },
+        {
+          "id": "stotal",
+          "label": "South's weighted total, out of 100, to one decimal place",
+          "numeric": true,
+          "expect": 78.5,
+          "tol": 0.1,
+          "rationale": "0.5 × 65 + 0.3 × 100 + 0.2 × 80 = 32.5 + 30 + 16 = 78.5. The €80,000 saving is outweighed by a 15-point technical gap at a 50% weight."
+        },
+        {
+          "id": "winner",
+          "label": "Which bidder ranks first on the published criteria — North or South",
+          "accept": [
+            "north",
+            "bidder north",
+            "north bidder"
+          ],
+          "rationale": "North ranks first with 79.0 against 78.5. The half-point margin is narrow, which is a reason to check the technical marking carefully, not a reason to change the published weights."
+        }
+      ],
+      "explanation": "Weighted scoring converts a trade-off between price and quality into a decision rule agreed before bids arrive, so the weights express how much quality the buyer will pay for. A narrow margin is a prompt to re-check the scoring evidence, not licence to reweight; once bids are open, the published method is what makes the award defensible.",
+      "mindset": "Agree what quality is worth before seeing the prices, then let the method decide."
+    },
+    {
+      "id": "pmp-pr5-120",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "source-selection",
+        "mandatory-criteria"
+      ],
+      "stem": "A charity is choosing a vendor team to build its donor app in sprints. Bidders must pass two mandatory gates — current information-security certification, and the proposed team available to start by 2 March — before weighted scores count. The evaluation sheet is shown. Select the bidder the panel should recommend.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Evaluation sheet with two pass/fail gates and a weighted score for four bidders",
+        "caption": "Select a bidder. Use Tab or the arrow keys to move between rows, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "b1",
+          "n": 1,
+          "label": "Bidder 1 — score 86; security: pass; team starts 6 April",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 70,
+          "correct": false,
+          "rationale": "The highest score, but it fails the availability gate. A mandatory criterion is pass/fail by design, and a high weighted score cannot buy back a failed gate."
+        },
+        {
+          "id": "b2",
+          "n": 2,
+          "label": "Bidder 2 — score 81; security: pass; team starts 23 February",
+          "x": 20,
+          "y": 105,
+          "w": 600,
+          "h": 70,
+          "correct": true,
+          "rationale": "The highest-scoring bidder that passes both gates. Gates first, then scores, is the order the published method sets, and it is the order that keeps the award defensible."
+        },
+        {
+          "id": "b3",
+          "n": 3,
+          "label": "Bidder 3 — score 84; security: certification expected next quarter; team starts 2 March",
+          "x": 20,
+          "y": 190,
+          "w": 600,
+          "h": 70,
+          "correct": false,
+          "rationale": "An expected certificate is not a current one. Treating a promise as a pass would apply the gate to this bidder differently from the others, who were held to it."
+        },
+        {
+          "id": "b4",
+          "n": 4,
+          "label": "Bidder 4 — score 72; security: pass; team starts 16 February; lowest price",
+          "x": 20,
+          "y": 275,
+          "w": 600,
+          "h": 70,
+          "correct": false,
+          "rationale": "It passes both gates and is cheapest, but price is already inside the weighted score. Choosing it on price alone abandons the published method for a single criterion."
+        }
+      ],
+      "explanation": "An evaluation with mandatory criteria is applied in two steps: screen out every bid that fails a gate, then rank the survivors on the weighted score. A high score cannot compensate for a failed gate, a promise to meet a gate later is not meeting it, and no single criterion overrides the published weighting. Applying the method in the order it was published is what makes the result defensible to the bidders who lose.",
+      "mindset": "Apply the gates before the scores, and apply both exactly as published."
+    },
+    {
+      "id": "pmp-pr5-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "tendering",
+        "late-bids"
+      ],
+      "stem": "A water utility is tendering a £1.4 million contract to replace domestic meters. The invitation to tender states that bids received after 12:00 on 14 May will not be considered. At 12:20 a courier delivers a sealed bid from a regional contractor whose van broke down on the motorway. The contractor's director phones to explain the breakdown and says the firm has priced keenly and would be a strong contender. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the bid on this occasion, because the delay was outside the contractor's control, and record the reason clearly in the tender file.",
+          "correct": false,
+          "rationale": "The candidate treats the reason for lateness as relevant. Every other bidder planned around the published deadline, and a documented exception for one firm is exactly what a losing bidder would cite in a challenge."
+        },
+        {
+          "id": "b",
+          "text": "Record the bid as late, keep it unopened, and tell the contractor that it cannot be considered under the published tender rules.",
+          "correct": true,
+          "rationale": "The deadline was published as a condition of every bid, so a late bid is excluded whatever the reason. Keeping it unopened ensures its price can play no part in the decision, which is what protects the award."
+        },
+        {
+          "id": "c",
+          "text": "Open the bid alongside the others and decide afterwards whether to admit it, depending on how competitive its price turns out to be.",
+          "correct": false,
+          "rationale": "The candidate lets the content of a bid decide whether it is admissible. Once admission depends on the price, the rule has been replaced by discretion, and the evaluation can no longer be shown to be fair."
+        },
+        {
+          "id": "d",
+          "text": "Extend the closing time for every bidder by one day, so that the contractor's bid can be received without treating anyone differently.",
+          "correct": false,
+          "rationale": "The candidate disguises an exception as a general change. Extending a deadline after it has passed, with the other bids already in, benefits only the late bidder, and changes to deadlines are announced before closing."
+        }
+      ],
+      "explanation": "A published submission deadline is a pass/fail condition that applies to every bidder in the same way, and the reason a bid is late does not change its status. Bidders plan around the rules they are given, so discretion exercised for one of them becomes the ground on which another challenges the award. Late bids are logged and returned or held unopened, so that their content can have no influence on the outcome.",
+      "mindset": "Apply a published deadline the same way for everyone, however good the excuse or the price."
+    },
+    {
+      "id": "pmp-pr5-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "procurement",
+        "specifications",
+        "competition"
+      ],
+      "stem": "A regional bus operator is about to tender for telematics units across 300 buses, worth about €750,000. Reviewing the draft specification the day before issue, you notice that its 14 technical requirements match one manufacturer's product sheet almost word for word, including a proprietary data format. The fleet engineer who wrote it says that product works well at a neighbouring operator and asks you to issue the specification as written. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Issue the specification as written, since the engineer's operational experience at a neighbouring operator is the best available evidence of what works.",
+          "correct": false,
+          "rationale": "The candidate mistakes evidence that one product works for proof that only one product will. A specification only one product can meet turns the tender into a disguised direct award, keeping the cost of competition and losing its benefit."
+        },
+        {
+          "id": "b",
+          "text": "Seek approval for a direct award to the manufacturer, recording the neighbouring operator's experience as the formal justification for a single source.",
+          "correct": false,
+          "rationale": "The candidate accepts the engineer's premise and formalises it. A single-source justification needs a genuine reason only one supplier can do the work, and liking a product that another operator uses is not that."
+        },
+        {
+          "id": "c",
+          "text": "Issue it on time but add a clause inviting bidders to offer equivalent products, and let the panel judge equivalence against the manufacturer's sheet during evaluation.",
+          "correct": false,
+          "rationale": "The candidate patches the bias instead of removing it. 'Or equivalent' on a specification copied from a product sheet leaves bidders guessing what counts, and judging equivalence against that sheet keeps the original product as the yardstick."
+        },
+        {
+          "id": "d",
+          "text": "Hold the issue and work with the engineer to restate the requirements as the outcomes the fleet needs, so that other products can compete.",
+          "correct": true,
+          "rationale": "The engineer's experience shows what the fleet needs to achieve, not that only one product can achieve it. Restating each requirement as a need, with an open data format, keeps the tender competitive and the evaluation objective."
+        }
+      ],
+      "explanation": "A specification should describe the outcomes and constraints the buyer needs, not the features of a product someone already likes, because a requirement that only one product can meet removes competition while keeping the cost and delay of a tender. When a draft reads like a product sheet, the remedy is to restate each requirement as a need — performance, interfaces, open data — before issue. A genuine single source is a separate decision that needs its own justification.",
+      "mindset": "Specify what the work must achieve, so that the market rather than the author decides who can achieve it."
+    },
+    {
+      "id": "pmp-pr5-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "procurement",
+        "payment-certification",
+        "contract-administration"
+      ],
+      "stem": "You are the contract administrator for a £5 million flood-defence scheme, named in the contract as the person who certifies interim payments. This month's application is for £420,000. Your quantity surveyor has verified £365,000; the remaining £55,000 is for sheet piling the contractor says is installed but which has not yet been surveyed. The contract requires payment within 21 days of application. The contractor warns that it will slow work if paid less than the full amount. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold the whole certificate until the sheet piling has been surveyed, so that a single payment is made covering everything that is genuinely due.",
+          "correct": false,
+          "rationale": "The candidate ties an undisputed sum to a disputed one. Withholding £365,000 that is verified, to settle a question about £55,000, breaches the payment terms and hands the contractor the grievance it was threatening to act on."
+        },
+        {
+          "id": "b",
+          "text": "Certify the full £420,000 to keep the work moving, and recover any overpayment from next month's application once the piling survey has been done.",
+          "correct": false,
+          "rationale": "The candidate lets a threat set the certificate. Certifying value that has not been verified puts the client's money at risk and abandons the evidence standard the certifier role exists to apply."
+        },
+        {
+          "id": "c",
+          "text": "Refer the application to the client's finance director, since the contractor's warning about slowing the work turns this into a commercial decision.",
+          "correct": false,
+          "rationale": "The candidate gives away a decision the contract assigns to them. A threat does not change who certifies; finance can be kept informed, but the certificate and its timing remain the administrator's responsibility."
+        },
+        {
+          "id": "d",
+          "text": "Certify the £365,000 that has been verified, and give the contractor written notice of the £55,000 withheld and why, within the contract's time limits.",
+          "correct": true,
+          "rationale": "Certifying is a duty exercised on evidence. Paying the verified sum on time and giving reasons for the rest keeps the client within the payment terms and leaves the contractor no legitimate ground to slow the work."
+        }
+      ],
+      "explanation": "Where a contract names a certifier, certifying is a duty carried out on evidence: pay what has been verified, on time, and notify what is being withheld with reasons. Separating the undisputed sum from the disputed one keeps the buyer compliant with the payment terms, removes the supplier's grounds for slowing work, and lets the open question be settled on its own facts. Pressure changes neither the evidence nor who holds the decision.",
+      "mindset": "Pay what is proven, explain what is not, and do both on the contract's clock."
+    },
+    {
+      "id": "pmp-pr5-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-trade-off",
+        "procurement",
+        "value-engineering",
+        "contract-variations"
+      ],
+      "stem": "A contractor is building a hotel extension for your client under a €6.8 million fixed-price contract that has no value-engineering clause. It proposes replacing the specified façade panels with an alternative system that meets the same performance standards and would save €240,000, but will make the change only if it keeps half the saving. The architect has reviewed the proposal and is satisfied with the technical case. What should you recommend to the client?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Instruct the alternative as a variation valued by the contract's own rules, so that the client receives the whole saving the fixed price would otherwise keep.",
+          "correct": false,
+          "rationale": "The candidate treats a single change as the whole relationship. The alternative is not priced in the contract, so its valuation becomes a negotiation the contractor has no reason to make generous, and seizing the full saving stops further proposals."
+        },
+        {
+          "id": "b",
+          "text": "Decline the proposal and keep the specified panels, because the fixed price was chosen precisely so that the client would not carry design changes.",
+          "correct": false,
+          "rationale": "The candidate confuses price certainty with refusing improvement. With the architect satisfied on performance, declining forgoes a six-figure saving on the strength of a risk the variation itself can control."
+        },
+        {
+          "id": "c",
+          "text": "Agree a formal variation that adopts the alternative and shares the saving with the contractor, on terms that restate the performance it must still meet.",
+          "correct": true,
+          "rationale": "The contractor had no duty to offer the idea, and sharing the saving is what makes offering it worthwhile. A formal variation that keeps the performance obligation secures €120,000 for the client and signals that the next idea is welcome too."
+        },
+        {
+          "id": "d",
+          "text": "Ask the contractor to submit the proposal to the client's change board with a full cost breakdown before any discussion of sharing the saving takes place.",
+          "correct": false,
+          "rationale": "The candidate offers a process instead of the recommendation the client asked for. Change control is the route the variation will travel, but deferring the sharing question leaves the one decision the contractor's offer depends on unanswered."
+        }
+      ],
+      "explanation": "When a supplier offers a saving it had no contractual duty to offer, the buyer is choosing between taking the whole value once and creating an incentive for more. Sharing the saving, recorded as a formal variation that keeps the performance obligation intact, turns the supplier's self-interest into the buyer's advantage; refusing, or seizing the full amount, is defensible on paper but stops the ideas coming. Value engineering pays best when the contract rewards the party best placed to find it.",
+      "mindset": "Reward the supplier for the savings you want more of, while holding it to the performance you are paying for."
+    },
+    {
+      "id": "pmp-pr5-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "procurement",
+        "debriefing",
+        "vendor-selection"
+      ],
+      "stem": "Your pension administrator has selected a vendor to supply a Scrum team for its member portal. One of the four unsuccessful bidders, which came second, emails to ask why it lost and hints that it may challenge the decision. The evaluation followed the published criteria and the panel's scoring notes are complete. The standstill period before the contract can be signed ends in eight days. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Offer the bidder a debrief that sets out its scores and the panel's reasons against each published criterion, and the main strengths of the winning bid.",
+          "correct": true,
+          "rationale": "A bidder that can see how its own bid was judged, criterion by criterion, has facts to weigh instead of suspicion. Offering it inside the standstill period lets any genuine concern surface while it can still be dealt with."
+        },
+        {
+          "id": "b",
+          "text": "Reply that the decision is final and was reached in line with the published criteria, without going into the scoring, so as not to give grounds for a challenge.",
+          "correct": false,
+          "rationale": "The candidate assumes less information means less exposure. A bidder who cannot see why it lost has only suspicion to act on, and an unexplained decision is the one most likely to be challenged."
+        },
+        {
+          "id": "c",
+          "text": "Send the bidder the full evaluation file, including the winning proposal and the panel's notes on every bidder, to show that nothing has been hidden.",
+          "correct": false,
+          "rationale": "The candidate equates openness with disclosing everything. Other bidders' proposals and pricing are commercially confidential, so releasing them creates a fresh breach while trying to answer the first complaint."
+        },
+        {
+          "id": "d",
+          "text": "Pass the email to the legal team and pause contact with the bidder until the standstill period has ended and the contract has been signed.",
+          "correct": false,
+          "rationale": "The candidate treats a request for feedback as a dispute. Going silent until standstill ends removes the bidder's chance to raise a concern in time and makes a formal challenge the only route left to it."
+        }
+      ],
+      "explanation": "A debrief turns an unsuccessful bidder's suspicion into information: its own scores and the panel's reasons, criterion by criterion, and the relative strengths of the winning bid, without disclosing anyone else's confidential pricing or proposal. Bidders who understand why they lost rarely challenge a sound evaluation, and those who still do are arguing from the same facts as the buyer. Offering it while the standstill period runs is what gives the explanation its value.",
+      "mindset": "Explain a sound decision openly, because unexplained decisions are the ones that get challenged."
+    },
+    {
+      "id": "pmp-pr5-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "procurement",
+        "warranty",
+        "supplier-claims"
+      ],
+      "stem": "Eight months into a 12-month warranty, a high-pressure pump supplied for your brewery's new bottling line fails. The supplier says the failure was caused by running the pump above its rated temperature, which would void the warranty, and quotes 18,000 for the repair. Your line supervisor insists it was operated within its rating, and the line records temperatures continuously. Production is running normally on a standby pump. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pull the temperature records for the weeks before the failure and propose a joint inspection of the pump with the supplier before either side settles its position.",
+          "correct": true,
+          "rationale": "The contractual question turns on a fact the buyer can check. Reading its own records and inspecting the pump jointly produces evidence both sides will accept, and the standby pump means there is time to do it."
+        },
+        {
+          "id": "b",
+          "text": "Reject the supplier's position in writing, stating that your line supervisor confirms the pump was run within its rating and that the repair is therefore covered by the warranty.",
+          "correct": false,
+          "rationale": "The candidate asserts the supervisor's view as fact before checking it. If the records show temperature excursions, the buyer has hardened a position it will have to retreat from, weakening its hand on everything else."
+        },
+        {
+          "id": "c",
+          "text": "Accept the 18,000 quote so the pump is repaired quickly, and pursue the warranty question with the supplier once the line is back to full resilience.",
+          "correct": false,
+          "rationale": "The candidate trades a contractual right for speed that the situation does not need. With production running on the standby pump, paying first only concedes the point the warranty was bought to protect."
+        },
+        {
+          "id": "d",
+          "text": "Refer the disagreement to the contract's dispute resolution procedure, since the two parties hold directly opposing views on what caused the failure.",
+          "correct": false,
+          "rationale": "The candidate escalates before the facts are known. Formal dispute procedures are for disagreements that evidence has not resolved, and here the deciding evidence is sitting in the buyer's own records."
+        }
+      ],
+      "explanation": "When buyer and supplier disagree about the cause of a failure, the first move is to establish the facts that decide the contractual position — operating records, inspection of the failed part — and to do it jointly so that both sides accept the evidence. Asserting a position, paying to make the problem go away and launching a formal dispute all come before the deciding question has been answered. Evidence both parties watched being gathered is far harder to argue with than evidence either one produces later.",
+      "mindset": "Establish the facts with the other party before arguing about what they mean."
+    },
+    {
+      "id": "pmp-pr5-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "procurement",
+        "time-and-materials",
+        "audit-rights"
+      ],
+      "stem": "A consultancy is migrating your pharmaceutical company's laboratory data on a time-and-materials basis, with the data mapping planned up front and the migration runs delivered in iterations. The contract gives you the right to audit timesheets and supporting records. Checking March's €96,000 invoice, your coordinator notices that two consultants billed full on-site days on four dates when the building access logs show neither of them entered the site. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Dispute the March invoice in full and notify the consultancy that it is in breach, since the access logs show billing for days that were not worked on site.",
+          "correct": false,
+          "rationale": "The candidate concludes wrongdoing from a mismatch that has innocent explanations, and withholds undisputed money along with the questioned days. Both put the buyer in the wrong if the records turn out to be sound."
+        },
+        {
+          "id": "b",
+          "text": "Ask the consultancy for the timesheets and work records behind those days under the audit clause, and hold that part of the invoice pending its answer.",
+          "correct": true,
+          "rationale": "The mismatch is a question with several possible answers, including remote work or another site. The audit clause exists to answer it from the supplier's records, and holding only the questioned amount keeps the rest of the payment on time."
+        },
+        {
+          "id": "c",
+          "text": "Pay the invoice as submitted and raise the access log discrepancy at the next monthly contract review with the consultancy's account lead.",
+          "correct": false,
+          "rationale": "The candidate treats verification as a relationship topic. Paying first gives up the leverage, and a month's delay makes the records behind those four dates harder to reconstruct reliably."
+        },
+        {
+          "id": "d",
+          "text": "Require the consultants to sign in at reception each day from now on, so that every future invoice can be checked against a reliable record.",
+          "correct": false,
+          "rationale": "The candidate fixes the control and skips the question. Future invoices may become easier to check, but the four days already billed in March remain unexplained and are about to be paid."
+        }
+      ],
+      "explanation": "On a time-and-materials contract the buyer pays for effort it cannot directly observe, so the audit right is the control that makes that payment basis safe. A gap between billed time and independent evidence is a question to answer from the supplier's records before it is treated as either an error or a breach, and withholding only the questioned amount keeps the remainder of the payment on time. Verification works best when it is prompt, targeted and proportionate to what has been found.",
+      "mindset": "Treat a billing anomaly as a question to verify, not yet as an accusation or a rounding error."
+    },
+    {
+      "id": "pmp-pr5-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "procurement",
+        "supplier-relationship",
+        "price-adjustment"
+      ],
+      "stem": "A packaging firm makes custom cartons for your food company's new product range under a two-year fixed-price contract with no price-adjustment clause; the production line is being built in stages while the branding is refined in iterations. Fourteen months in, the firm writes that board and energy costs have risen 30% and asks for a 12% price increase, saying it now loses money on every order. It is your only qualified carton supplier, and qualifying another takes six months. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Decline the request, pointing out that the price was fixed for two years and that the firm accepted the cost risk when it signed the contract.",
+          "correct": false,
+          "rationale": "The candidate treats the contract as the whole of the risk. The position is legally sound, but with a single supplier and six months to replace it, enforcing the price without knowing whether supply is at risk could cost far more than 12%."
+        },
+        {
+          "id": "b",
+          "text": "Agree the 12% increase for the remaining ten months, since keeping the only qualified supplier healthy matters more than holding to the contract terms.",
+          "correct": false,
+          "rationale": "The candidate concedes on assertion. A 30% rise in some input costs does not show a 12% loss on this contract, and paying without evidence sets the price of the next request as well."
+        },
+        {
+          "id": "c",
+          "text": "Ask the firm to show you, on an open-book basis, its costs on your contract and what the loss is doing to its ability to keep supplying you.",
+          "correct": true,
+          "rationale": "Whether to hold the price, adjust it or invest in an alternative depends on whether the loss is real on this contract and whether it threatens supply. Open-book evidence answers both before the buyer commits to any of those responses."
+        },
+        {
+          "id": "d",
+          "text": "Start qualifying a second carton supplier immediately, so that the company has a credible alternative in place before replying to the price request.",
+          "correct": false,
+          "rationale": "The candidate commits six months of effort before knowing whether supply is actually threatened, and leaves the request unanswered in the meantime. A second source may be right, but the evidence should come first."
+        }
+      ],
+      "explanation": "A fixed price allocates cost risk to the supplier, but when the buyer depends on that supplier the contract does not remove the buyer's exposure to the supplier failing. A hardship request is therefore answered from evidence: open-book cost data showing whether the loss is real on this contract and whether it endangers supply. That evidence decides whether to hold the price, agree a limited adjustment in exchange for something, or invest in an alternative — choices that cannot be made well on assertion alone.",
+      "mindset": "Find out whether a supplier's problem is about to become yours before deciding whose problem it is."
+    },
+    {
+      "id": "pmp-pr5-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-route-to-owner",
+        "procurement",
+        "software-subscriptions",
+        "purchasing-policy"
+      ],
+      "stem": "Your charity's product team builds a fundraising app in two-week sprints. To unblock a sprint goal, a developer bought a cloud error-monitoring service on his company card and has already connected it to the live app. Reading the click-through terms, you find they let the provider store app data outside the UK and renew annually at £4,800 unless cancelled. The charity's policy routes all software purchases through procurement. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Disconnect the service from the live app today and cancel the subscription, then ask the developer to find an approved alternative in the next sprint.",
+          "correct": false,
+          "rationale": "The candidate decides the outcome before the risk owners have looked at it. The tool may be acceptable on adjusted terms, and pulling it out abruptly removes monitoring the live app may already rely on."
+        },
+        {
+          "id": "b",
+          "text": "Keep the service, since it unblocked the sprint, and add the subscription to the team's budget so that the renewal is charged to the right cost centre.",
+          "correct": false,
+          "rationale": "The candidate regularises the spending but not the purchase. Moving the cost to the right budget leaves the data-location and auto-renewal terms unreviewed by anyone entitled to accept them."
+        },
+        {
+          "id": "c",
+          "text": "Tell the procurement and data protection leads what has been bought and connected, and agree with them whether to keep, renegotiate or replace it.",
+          "correct": true,
+          "rationale": "The purchase is now a contract the charity is party to, with data and renewal terms nobody with authority has assessed. Putting it promptly in front of the people who own those risks lets them decide quickly, with full facts."
+        },
+        {
+          "id": "d",
+          "text": "Remind the team at the next retrospective that software must go through procurement, so that the same thing does not happen in a future sprint.",
+          "correct": false,
+          "rationale": "The candidate addresses recurrence and skips the exposure that exists today. Live data is flowing under terms nobody has reviewed, and a retrospective is days away and is not where that is resolved."
+        }
+      ],
+      "explanation": "A purchase made outside policy is still a commitment the organisation is now bound by, so the first job is to put it in front of the people who own the risks it creates — commercial terms, data protection — rather than to approve or reverse it yourself. They can decide quickly whether to keep, renegotiate or replace it; the project manager's part is to surface it promptly and completely. Preventing a repeat matters, but comes after the live exposure is in the right hands.",
+      "mindset": "Bring an unauthorised commitment to its owners quickly, before deciding its fate yourself."
+    },
+    {
+      "id": "pmp-pr5-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-use-own-authority",
+        "procurement",
+        "multi-vendor",
+        "integration"
+      ],
+      "stem": "Your airline's loyalty app is built in sprints by two vendors on separate contracts: one builds the mobile front end, the other the points engine and its API. Each contract covers only its own component, and your organisation is named as the system integrator. For three sprints, defects at the interface have been passed back and forth, each vendor blaming the other's assumptions about the API. Twenty-two interface defects are now open. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Take charge of the interface: convene both vendors to agree a single API specification and a joint triage of the open defects, with your team arbitrating.",
+          "correct": true,
+          "rationale": "Neither contract makes either vendor responsible for the join, and the integrator role sits with your organisation. Defining the interface both build to and deciding disputed defects is authority you already hold."
+        },
+        {
+          "id": "b",
+          "text": "Ask each vendor's account manager to investigate the open defects and report which side is at fault, so that the cost can be charged to the right contract.",
+          "correct": false,
+          "rationale": "The candidate asks each party to judge its own case, which is the pattern of the last three sprints. With no one contracted to own the interface, the reports will mirror the blame already going back and forth."
+        },
+        {
+          "id": "c",
+          "text": "Propose a contract variation making the points-engine vendor responsible for end-to-end integration, since its API is the source of most of the disagreements.",
+          "correct": false,
+          "rationale": "The candidate sells off a role the buyer holds and prejudges the fault. A variation takes weeks to price and agree while 22 defects stay open, and it assumes the API vendor is the one in the wrong."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the pattern to both vendors' senior management under each contract's escalation clause, so that the two firms settle it between themselves.",
+          "correct": false,
+          "rationale": "The candidate escalates a gap that sits with the buyer. Senior managers cannot resolve something neither contract asks their firm to own, and the vendors have no contract with each other to settle it under."
+        }
+      ],
+      "explanation": "When work is split across several contracts, every interface between them belongs to whoever holds the integration role — usually the buyer — and no supplier can be made to own a gap its contract does not cover. The integrator defines what each party builds to at the boundary and arbitrates where they meet, using authority it already has. Asking suppliers to settle between themselves what neither has been contracted to own guarantees the defects keep moving rather than closing.",
+      "mindset": "If you hold the contracts for the pieces, you hold the joins between them."
+    },
+    {
+      "id": "pmp-pr5-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "procurement",
+        "acceptance",
+        "agile-contracts"
+      ],
+      "stem": "A vendor is building your university's e-learning platform in two-week sprints, invoicing for each accepted increment. The contract says an increment is deemed accepted unless the product owner rejects it in writing within five working days of the sprint review. Yesterday's review showed an increment whose grading feature fails when more than 200 students submit at once. The product owner left this morning on two weeks' leave, is unreachable, and has no named deputy. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Email the vendor yourself today rejecting the increment and describing the grading failure, so that the five-day window does not run out unchallenged.",
+          "correct": false,
+          "rationale": "The candidate has the timing right but assumes the project manager role carries the contract's acceptance right. A rejection from someone the contract does not name may be disputed as invalid, leaving the deemed acceptance standing."
+        },
+        {
+          "id": "b",
+          "text": "Ask the sponsor to authorise someone to act for the product owner on acceptance now, so that a written rejection reaches the vendor within the five days.",
+          "correct": true,
+          "rationale": "The clock is running against the buyer, and the right to reject sits with a role nobody is currently filling. Getting that right properly delegated today is what allows a rejection to be sent in time and to carry contractual weight."
+        },
+        {
+          "id": "c",
+          "text": "Tell the vendor informally that the increment has a problem, and send the formal rejection as soon as the product owner returns from leave.",
+          "correct": false,
+          "rationale": "The candidate relies on goodwill against a contractual deadline. The window closes long before the product owner returns, and an informal comment does not stop the increment being deemed accepted and invoiced."
+        },
+        {
+          "id": "d",
+          "text": "Add the grading defect to the backlog for the next sprint, so that the vendor fixes it without the delay of rejecting an otherwise sound increment.",
+          "correct": false,
+          "rationale": "The candidate treats a contractual acceptance as a backlog choice. Letting the increment be accepted means paying for work that fails a basic load, and then paying again for the sprint capacity used to fix it."
+        }
+      ],
+      "explanation": "A deemed-acceptance clause turns inaction into a decision, so the period it sets is a deadline on the buyer rather than on the supplier. When the person who holds the acceptance right is unavailable, the remedy is to have that right properly delegated in time, because a rejection from someone without authority may carry no weight and an informal warning carries none. Every acceptance role in a contract needs a named deputy for exactly this reason.",
+      "mindset": "Watch the clocks a contract runs against you, and make sure someone with authority can stop them."
+    },
+    {
+      "id": "pmp-pr5-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "procurement",
+        "competition",
+        "incumbent-advantage"
+      ],
+      "stem": "Over 18 months, a vendor built the first release of a city's public-transport ticketing app in sprints. The contract gives the city ownership of the code, backlog and documentation, but almost all of it sits in the vendor's own repositories and wiki. The city intends to tender the next phase competitively, and two prospective bidders have said they doubt anyone but the incumbent could win. What should you do before the tender is issued?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Exclude the incumbent from the tender, so that the bidders who are worried about its advantage can compete with each other on equal terms.",
+          "correct": false,
+          "rationale": "The candidate removes the best-informed supplier instead of the information gap. That penalises the incumbent for doing the work it was paid for and reduces competition, when the unfairness lies in access to material the city can share."
+        },
+        {
+          "id": "b",
+          "text": "Extend the incumbent's contract for the next phase, since the bidders' own feedback suggests a competitive tender would not change the likely outcome.",
+          "correct": false,
+          "rationale": "The candidate accepts the information gap as permanent and uses it to justify the lock-in it causes. The city would pay a non-competitive price precisely because it never took possession of what it owns."
+        },
+        {
+          "id": "c",
+          "text": "Ask the incumbent to run a briefing day for prospective bidders, explaining the architecture and the remaining backlog before they submit their bids.",
+          "correct": false,
+          "rationale": "The candidate improves access but leaves the incumbent controlling what is shown and how. A competitor's briefing is a poor substitute for direct access to material the city owns outright."
+        },
+        {
+          "id": "d",
+          "text": "Bring the code, backlog and documentation into the city's own repositories and make them available to every bidder, with time allowed to examine them.",
+          "correct": true,
+          "rationale": "The incumbent's advantage comes from holding information the city already owns. Taking it into the city's custody and opening it equally to all bidders makes the competition real and reduces the city's dependence whoever wins."
+        }
+      ],
+      "explanation": "An incumbent's advantage in a re-tender usually comes from controlling information that the buyer already owns. Taking that material into the buyer's own custody and opening it equally to every bidder is what turns a nominal competition into a real one, and it lowers the buyer's dependence whatever the result. Excluding the incumbent, or giving up on competition, treats an information gap as if it were a fixed fact about the market.",
+      "mindset": "Own your project's knowledge in practice, not just on paper, so that competition stays possible."
+    },
+    {
+      "id": "pmp-pr5-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "procurement",
+        "not-to-exceed",
+        "budget-control"
+      ],
+      "stem": "A vendor team is building a membership platform for a sports federation under a time-and-materials contract with a not-to-exceed ceiling of £600,000. After nine of fourteen planned sprints, £480,000 has been invoiced, and the product owner estimates that 35% of the must-have backlog remains. At the current burn rate the ceiling will be reached around sprint twelve. Which two actions should the project manager take now?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Show the sponsor the forecast and the options — reduced scope, a higher ceiling or a later release — while there is still time to choose between them.",
+          "correct": true,
+          "rationale": "Whether to cut scope, add money or move the date is the sponsor's trade-off, and the ceiling is valuable precisely because it warns in time. Three sprints out, every option is still open; at sprint twelve most of them are gone."
+        },
+        {
+          "id": "b",
+          "text": "Work with the product owner to re-slice and re-rank the remaining must-haves, so that the money left buys the highest-value increments first.",
+          "correct": true,
+          "rationale": "Whatever the sponsor decides, the remaining budget should go to the most valuable work. Re-slicing often reveals that part of each must-have delivers most of its value, which widens the sponsor's options."
+        },
+        {
+          "id": "c",
+          "text": "Ask the vendor to keep the team working beyond the ceiling at its own risk, on the understanding that the overrun will be settled at the end.",
+          "correct": false,
+          "rationale": "The candidate invites work outside the contract's limit with no authority to pay for it. The ceiling exists to stop exactly this, and an informal understanding becomes a dispute when the bill arrives."
+        },
+        {
+          "id": "d",
+          "text": "Propose converting the remaining work to a firm fixed price, so that the vendor carries the risk of the backlog taking longer than estimated.",
+          "correct": false,
+          "rationale": "The candidate expects a contract change to remove uncertainty. A fixed price for a backlog still being re-sliced will be priced with a heavy contingency or argued over, and negotiating it eats the time the decision needs."
+        },
+        {
+          "id": "e",
+          "text": "Reduce the vendor team by two developers for the remaining sprints, so that the burn rate falls and the ceiling is not reached before sprint fourteen.",
+          "correct": false,
+          "rationale": "The candidate manages the burn rate instead of the value. A smaller team spreads the same money over more sprints but delivers less in each, so the gap between scope and budget is unchanged and simply arrives later."
+        }
+      ],
+      "explanation": "A not-to-exceed ceiling on a time-and-materials contract is a budget control, and its worth lies in the early warning it gives. When the forecast shows the ceiling arriving before the scope, the decision belongs to the sponsor and should be put to them while options still exist, and the backlog should be re-sliced so that the remaining money buys the most value. Asking the supplier to work past the limit, changing contract form mid-stream or merely slowing the spend all leave the real trade-off unmade.",
+      "mindset": "Surface a ceiling breach while it is still a choice, and spend what is left on what matters most."
+    },
+    {
+      "id": "pmp-pr5-134",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "force-majeure",
+        "claims"
+      ],
+      "stem": "A supplier of offshore wind-turbine towers tells you that delivery of six towers will be five weeks late because a strike at its export port has stopped all loading. It claims force majeure, which under the contract excuses delay caused by events beyond the supplier's reasonable control, provided notice is given within ten days and the supplier takes reasonable steps to reduce the effect. Which two should you establish before accepting or rejecting the claim?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whether the supplier's notice reached you within ten days of the strike first affecting its deliveries.",
+          "correct": true,
+          "rationale": "Notice is a condition of the relief, not a courtesy. A late notice can defeat an otherwise valid claim, and the date the event began to bite is the one the clause measures from."
+        },
+        {
+          "id": "b",
+          "text": "Whether the supplier has explored reasonable alternatives, such as loading at another port, to cut the delay.",
+          "correct": true,
+          "rationale": "The clause excuses only the delay the supplier could not reasonably avoid. If another port could have shortened it, relief extends only to the delay that would have remained."
+        },
+        {
+          "id": "c",
+          "text": "Whether the strike has made the contract unprofitable for the supplier, since that would strengthen its case for relief.",
+          "correct": false,
+          "rationale": "The candidate confuses hardship with force majeure. The clause concerns events that prevent or delay performance; an event that only makes performance more expensive is not what it excuses."
+        },
+        {
+          "id": "d",
+          "text": "Whether the supplier's other customers have also been told that their deliveries will be late because of the strike.",
+          "correct": false,
+          "rationale": "The candidate looks for consistency rather than compliance. How the supplier has treated other customers says nothing about whether this claim meets the conditions in this contract."
+        },
+        {
+          "id": "e",
+          "text": "Whether the supplier's insurance covers losses from the strike, so that it can claim against its policy for your extra costs.",
+          "correct": false,
+          "rationale": "The candidate turns a question of excusing delay into one of recovering cost. The supplier's insurance is its own arrangement, and a force majeure clause typically relieves liability rather than creating compensation."
+        }
+      ],
+      "explanation": "A force majeure clause is a set of conditions, and a claim under it is tested against each one: whether the event is of the kind the clause covers, whether notice was given as required, and whether the affected party has done what it reasonably can to limit the effect. Higher cost, other customers' experience and insurance arrangements are not tests the clause applies. Checking the conditions before responding keeps the decision tied to the contract rather than to sympathy or suspicion.",
+      "mindset": "Test a relief claim against the clause's conditions, one by one, before deciding how you feel about it."
+    },
+    {
+      "id": "pmp-pr5-135",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "procurement",
+        "letter-of-intent",
+        "contract-award"
+      ],
+      "stem": "Your hospital trust has chosen a contractor to build a modular operating theatre, with the structure delivered to a fixed design and the clinical fit-out refined with surgeons in iterations. Contract terms will take six more weeks to agree, but the factory slot for the modules will be lost unless design and long-lead orders start now. The sponsor approves a letter of intent. Which two should the letter contain?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A cap on the total the trust will pay for work done under the letter if the full contract is ultimately not signed.",
+          "correct": true,
+          "rationale": "The cap fixes the trust's maximum exposure if negotiations fail. Without it, the letter becomes an open-ended commitment to pay for whatever the contractor does in the meantime."
+        },
+        {
+          "id": "b",
+          "text": "A defined list of the preliminary work authorised, limited to design and the long-lead orders needed to hold the factory slot.",
+          "correct": true,
+          "rationale": "Authorising only what the time pressure requires keeps the letter proportionate to its purpose, and makes clear that anything beyond that list waits for the signed contract."
+        },
+        {
+          "id": "c",
+          "text": "A commitment to award the full contract to the contractor once negotiations are complete, to give it confidence to start.",
+          "correct": false,
+          "rationale": "The candidate turns a holding instrument into a binding award before the terms are settled, giving away the trust's leverage over everything still being negotiated."
+        },
+        {
+          "id": "d",
+          "text": "Agreement that the contractor's standard terms will govern the preliminary work until the full contract has been signed.",
+          "correct": false,
+          "rationale": "The candidate fills the gap with the other party's paper. The work done under the letter is the work most likely to be disputed if talks fail, and it would be judged on terms drafted for the contractor."
+        },
+        {
+          "id": "e",
+          "text": "An instruction to start the whole of the works now, so that the six weeks of negotiation do not hold up the overall programme.",
+          "correct": false,
+          "rationale": "The candidate maximises speed by maximising exposure. Starting everything while the terms are open commits the trust to the whole project without any of the protections the contract is being negotiated to provide."
+        }
+      ],
+      "explanation": "A letter of intent buys time by authorising some work before the contract is agreed, and its job is to limit the buyer's exposure if agreement never comes. It does so by naming exactly which preliminary work is authorised and capping what will be paid for it, while leaving the main negotiation open. The more a letter commits — to the award, to the whole scope, to the other side's terms — the more it becomes a contract without the protections of one.",
+      "mindset": "When you must start before signing, authorise only what time demands and cap what it can cost."
+    },
+    {
+      "id": "pmp-pr5-136",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "contract-clauses",
+        "exit-planning"
+      ],
+      "stem": "A telecoms company is outsourcing its billing platform to a vendor for five years; cutover follows a fixed plan and enhancements are then delivered in sprints. The commercial manager is drafting the contract and has three concerns from the steering group. Match each concern to the clause that addresses it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "If the vendor fails financially, the company could lose access to the software that runs its billing."
+        },
+        {
+          "id": "p2",
+          "text": "A planned merger may make the outsourced platform unnecessary in two years, however well the vendor performs."
+        },
+        {
+          "id": "p3",
+          "text": "When the contract ends, customer data and configuration must move to whoever runs billing next without disruption."
+        }
+      ],
+      "options": [
+        {
+          "id": "escrow",
+          "text": "Source code escrow with defined release triggers",
+          "correct": true,
+          "match": "p1",
+          "rationale": "Escrow places the code with an independent agent and releases it to the buyer on named events such as insolvency, so the company can keep its billing running without the vendor."
+        },
+        {
+          "id": "convenience",
+          "text": "Termination for convenience with an agreed compensation schedule",
+          "correct": true,
+          "match": "p2",
+          "rationale": "The merger is a change in the buyer's own needs, not a failure by the vendor. A right to end the contract without proving fault, at a cost agreed in advance, is the clause written for that."
+        },
+        {
+          "id": "exit",
+          "text": "Exit assistance obligations, including data return in an agreed format",
+          "correct": true,
+          "match": "p3",
+          "rationale": "An orderly handover needs the vendor's cooperation at the very moment it is losing the business, so the obligation to assist and to return data in a usable form has to be agreed while both sides still want the contract."
+        },
+        {
+          "id": "ld",
+          "text": "Liquidated damages for late delivery of milestones",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Liquidated damages compensate for lateness against agreed milestones, and none of the three concerns is about delay: they are about failure, a change of need and the end of the relationship."
+        }
+      ],
+      "explanation": "Contract clauses are risk responses written in advance, and each answers a specific question about what happens if something goes wrong. Supplier failure is met by securing what the buyer needs to carry on without the supplier; a change in the buyer's own needs by a right to end the contract without proving fault, at a pre-agreed cost; and the end of the relationship by obligations that make the transfer workable. Matching clause to risk at drafting stage is far cheaper than negotiating any of these after the event.",
+      "mindset": "Write the failure and exit routes into a contract while both parties still want to sign it."
+    },
+    {
+      "id": "pmp-pr5-137",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "procurement",
+        "negotiation",
+        "negotiation-tactics"
+      ],
+      "stem": "You are negotiating a 12-month extension with the vendor that supplies two Scrum teams for your energy retailer's customer platform. Three moments from the sessions are below. Match each to the response that best protects your position. One choice is not used.",
+      "prompts": [
+        {
+          "id": "m1",
+          "text": "With the day rate agreed, the vendor's lead adds, as a final small point, a 5% uplift for weekend support cover."
+        },
+        {
+          "id": "m2",
+          "text": "The vendor's negotiator says he can agree the service credits only once his managing director signs them off next month."
+        },
+        {
+          "id": "m3",
+          "text": "The vendor says its rate is available only if the extension is signed by Friday, four weeks before the current contract ends."
+        }
+      ],
+      "options": [
+        {
+          "id": "trade",
+          "text": "Treat it as reopening the package and ask what the vendor will give in return",
+          "correct": true,
+          "match": "m1",
+          "rationale": "A late extra request relies on the agreement feeling finished. Treating it as a new trade, rather than a formality, stops concessions being collected one at a time after the main deal is struck."
+        },
+        {
+          "id": "authority",
+          "text": "Ask who can approve it and arrange for that person to join the next session",
+          "correct": true,
+          "match": "m2",
+          "rationale": "Limited authority lets one side bank your concessions while its own stay provisional. Bringing the real decision-maker into the room puts both sides' commitments on the same footing."
+        },
+        {
+          "id": "deadline",
+          "text": "Test the deadline against your own timetable and alternatives, and decline to be hurried if it has no real basis",
+          "correct": true,
+          "match": "m3",
+          "rationale": "With four weeks left on the contract, the pressure is manufactured. Checking it against your real timetable and your alternatives shows whether the deadline costs you anything, and usually it does not."
+        },
+        {
+          "id": "split",
+          "text": "Propose splitting the difference so that both sides move by the same amount",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Splitting the difference rewards whichever side opened furthest from a fair figure, and none of these moments is a gap between two positions waiting to be closed."
+        }
+      ],
+      "explanation": "Negotiating tactics work by making a concession feel like the natural next step, so the defence is to recognise the move and answer it on its own terms. A late extra demand is answered by treating it as a new trade; a claim of limited authority by bringing the decision-maker into the room; an imposed deadline by testing it against the real timetable and your alternatives. Recognising which tactic is in play is most of the response.",
+      "mindset": "Name the tactic to yourself before you answer the request it comes wrapped in."
+    },
+    {
+      "id": "pmp-pr5-138",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "supplier-segmentation",
+        "supplier-management"
+      ],
+      "stem": "A rail operator's rolling-stock maintenance project buys from many suppliers. The procurement lead is setting a management approach for each supply relationship according to how much is spent and how hard the item is to source. Complete each sentence with the approach that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Brake pads are bought in large volumes from any of six approved suppliers, all able to meet the standard. For this spend, the project should"
+        },
+        {
+          "id": "s2",
+          "text": "A £30 door-seal kit is made by only one certified manufacturer, and a train cannot return to service without it. For this item, the project should"
+        },
+        {
+          "id": "s3",
+          "text": "Cleaning materials are cheap, standard and stocked by many wholesalers. For these purchases, the project should"
+        }
+      ],
+      "options": [
+        {
+          "id": "compete",
+          "text": "use competition between suppliers to secure the best price and terms",
+          "correct": true,
+          "match": "s1",
+          "rationale": "High spend with many capable sources is where competition pays: switching is easy, so the buyer's volume is its leverage and price and terms are where the value lies."
+        },
+        {
+          "id": "secure",
+          "text": "protect continuity of supply, for example with buffer stock while a second source is qualified",
+          "correct": true,
+          "match": "s2",
+          "rationale": "The spend is trivial but the exposure is not: one source and a stopped train. Effort goes into making sure the part is there when needed, not into negotiating a lower price on a £30 kit."
+        },
+        {
+          "id": "simplify",
+          "text": "keep buying simple and cheap to administer, for example through purchasing cards or standing call-offs",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Low spend and low risk justify little management attention. The cost of the buying process itself is the main thing to minimise here."
+        },
+        {
+          "id": "partner",
+          "text": "build a long-term partnership with joint improvement planning and shared targets",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A deep partnership is worth its cost only for items that are both high-spend and hard to source, and none of the three is both."
+        }
+      ],
+      "explanation": "Supplier management effort should follow two questions: how much the buyer spends, and how exposed it is if the item cannot be obtained. High spend with many sources rewards competition; low spend with a single critical source calls for protecting supply rather than chasing price; low spend and low risk calls for cheap, simple buying; and only items that are both high-spend and hard to source justify a deep partnership. One approach applied to every supplier wastes effort on some and leaves others unprotected.",
+      "mindset": "Match the effort you put into a supplier to what you spend and what you would lose without it."
+    },
+    {
+      "id": "pmp-pr5-139",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "procurement",
+        "price-adjustment",
+        "indexation"
+      ],
+      "stem": "Your stadium project buys structural steel for £2,400,000, a price set at signature. An economic price adjustment clause says 70% of the price moves in proportion to a published steel index and 30% stays fixed. The index stood at 120 at signature. Work out the adjusted price if the index is 138 at delivery, and the adjusted price if it is instead 108.",
+      "blanks": [
+        {
+          "id": "up",
+          "label": "Adjusted price if the index is 138 at delivery, in £",
+          "numeric": true,
+          "expect": 2652000,
+          "tol": 1000,
+          "unit": "£",
+          "rationale": "Adjusted price = 2,400,000 × (0.30 + 0.70 × 138 ÷ 120) = 2,400,000 × (0.30 + 0.805) = 2,400,000 × 1.105 = £2,652,000. The index rose 15%, but only 70% of the price follows it, so the price rises 10.5%."
+        },
+        {
+          "id": "down",
+          "label": "Adjusted price if the index is 108 at delivery, in £",
+          "numeric": true,
+          "expect": 2232000,
+          "tol": 1000,
+          "unit": "£",
+          "rationale": "Adjusted price = 2,400,000 × (0.30 + 0.70 × 108 ÷ 120) = 2,400,000 × (0.30 + 0.63) = 2,400,000 × 0.93 = £2,232,000. The clause works in both directions, so a 10% fall in the index cuts the price by 7%."
+        },
+        {
+          "id": "who",
+          "label": "Which party carries the steel market-price risk on the indexed 70% — buyer or supplier",
+          "accept": [
+            "buyer",
+            "the buyer",
+            "purchaser",
+            "the purchaser",
+            "client",
+            "the client"
+          ],
+          "rationale": "The indexed share moves with the market whichever way it goes, so the buyer pays more when steel rises and less when it falls. The supplier keeps the risk on the fixed 30% and on any gap between its own costs and the index."
+        }
+      ],
+      "explanation": "An economic price adjustment clause moves part of a fixed price with a published index, shifting the market-price risk on that part from the supplier to the buyer. The adjusted price is the fixed share plus the indexed share scaled by the ratio of the current index to the base index, and the clause cuts both ways. Buyers use it on long contracts for volatile commodities because, without it, suppliers price the volatility in as contingency whether or not it ever materialises.",
+      "mindset": "Know which way an index clause cuts, because it is meant to cut both ways."
+    },
+    {
+      "id": "pmp-pr5-140",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-5",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-diagnose-first",
+        "procurement",
+        "payment-schedule",
+        "financial-exposure"
+      ],
+      "stem": "A water treatment plant is buying filtration equipment for €1.6 million; the civil works follow a fixed plan while the control software is delivered iteratively. The preferred supplier's proposed payment schedule is shown, giving each milestone's share of the price beside its share of the work in the engineer's estimate. Select the milestone that should be renegotiated before signing because it leaves the buyer most exposed if the supplier fails.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "Proposed payment schedule: five milestones, each with its share of price and share of work",
+        "caption": "Select a milestone. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "m1",
+          "n": 1,
+          "label": "Mobilisation and design approval — 25% of price; 8% of work",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 65,
+          "correct": true,
+          "rationale": "The buyer would pay €400,000 for work worth about €128,000, so €272,000 is at risk before anything has been built. Cumulative payment runs furthest ahead of cumulative work here, and nothing exists yet that the buyer could keep."
+        },
+        {
+          "id": "m2",
+          "n": 2,
+          "label": "Off-site fabrication — 30% of price; 42% of work",
+          "x": 20,
+          "y": 95,
+          "w": 600,
+          "h": 65,
+          "correct": false,
+          "rationale": "This milestone pays less than the work it covers, so it reduces the buyer's exposure: cumulatively 55% paid against 50% of work. Choosing it confuses the largest payment with the largest risk."
+        },
+        {
+          "id": "m3",
+          "n": 3,
+          "label": "Delivery to site — 20% of price; 15% of work",
+          "x": 20,
+          "y": 170,
+          "w": 600,
+          "h": 65,
+          "correct": false,
+          "rationale": "It pays slightly ahead of the work, taking cumulative exposure to 10 points (75% paid, 65% done), but that is well below the 17 points opened up at the first milestone, and the equipment is on site by then."
+        },
+        {
+          "id": "m4",
+          "n": 4,
+          "label": "Installation and integration — 15% of price; 25% of work",
+          "x": 20,
+          "y": 245,
+          "w": 600,
+          "h": 65,
+          "correct": false,
+          "rationale": "Payment lags the work here, bringing cumulative payment and work level at 90%. It is the milestone where the supplier carries the most risk, not the buyer."
+        },
+        {
+          "id": "m5",
+          "n": 5,
+          "label": "Commissioning and acceptance — 10% of price; 10% of work",
+          "x": 20,
+          "y": 320,
+          "w": 600,
+          "h": 65,
+          "correct": false,
+          "rationale": "Payment and work are in step, and the final payment is held until acceptance. This is the protection the buyer wants, so there is nothing here to renegotiate."
+        }
+      ],
+      "explanation": "A payment schedule decides how much of the buyer's money is at risk at each point in a contract: paying ahead of the work delivered amounts to an unsecured loan to the supplier. The milestone to challenge is the one where cumulative payment runs furthest ahead of cumulative work, which is usually early, when little exists that the buyer could keep. Rebalancing it, or securing it with an advance payment bond, is far easier before signature than after.",
+      "mindset": "Pay in step with the value delivered, so that a supplier's failure costs you time rather than money."
+    }
+  ]
+}

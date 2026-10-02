@@ -1,0 +1,1964 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 1 — Integrated planning",
+  "questions": [
+    {
+      "id": "pmp-pr1-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-route-to-owner",
+        "integrated-plan",
+        "baseline-approval",
+        "governance"
+      ],
+      "stem": "You have completed the integrated project management plan for a £6.2 million dam spillway upgrade. The schedule, cost, resource and risk components have been reconciled with each other, and the charter names the water company's asset director as sponsor, with authority to approve the baseline. Two contractors are mobilised and keen to start site work next Monday. What should you do next?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the contractors start on Monday as planned, and take the plan to the asset director for approval at the first monthly progress review after mobilisation.",
+          "correct": false,
+          "rationale": "This treats approval as a formality that can follow the work. Weeks of site activity would be measured against a plan nobody with authority has accepted, and any disagreement at the review arrives after money is spent."
+        },
+        {
+          "id": "b",
+          "text": "Circulate the plan to the workstream leads and both contractors for a further round of comments, so that everyone has endorsed it before it goes to the sponsor.",
+          "correct": false,
+          "rationale": "The components are already reconciled, so more consultation adds delay without closing the real gap. The candidate confuses broad endorsement with the specific authority the charter assigns to one person."
+        },
+        {
+          "id": "c",
+          "text": "Submit the plan to the company's project management office for sign-off, since it maintains the planning standards against which the plan was originally built.",
+          "correct": false,
+          "rationale": "A project office can assure a plan against its standards, but the charter gives approval authority to the sponsor. Choosing this mistakes assurance for decision rights."
+        },
+        {
+          "id": "d",
+          "text": "Present the plan to the asset director for formal approval as the baseline, and confirm the start date with the contractors once it is approved.",
+          "correct": true,
+          "rationale": "The plan is ready, and the one missing step is approval by the person the charter names. Until it is approved there is no baseline to measure progress against and nothing for change control to protect."
+        }
+      ],
+      "explanation": "A plan becomes a baseline only when the person with authority to approve it does so. Before that point there is nothing to measure performance against and no agreed reference for change control. Reviewers, assurance functions and keen contractors can improve or accelerate a plan, but none of them can stand in for the approval authority the charter names.",
+      "mindset": "A plan is only a proposal until the person with authority approves it."
+    },
+    {
+      "id": "pmp-pr1-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-diagnose-first",
+        "estimating",
+        "spike",
+        "release-planning"
+      ],
+      "stem": "Your team is building a donations app for a children's charity. The next release depends on integrating with a payment provider whose interface nobody in the team has used before. In refinement, estimates for the integration story range from 3 to 40 points, and the team cannot agree what the work involves. The product owner needs a release forecast for the trustees in three weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Take the middle of the range as the working estimate for now, and adjust the release forecast once the team has started the integration work itself.",
+          "correct": false,
+          "rationale": "The midpoint of 3 and 40 is a number, not an estimate. The candidate averages the team's ignorance and passes it to the trustees as if it were a forecast with some basis behind it."
+        },
+        {
+          "id": "b",
+          "text": "Agree a time-boxed spike in the coming sprint to build a small test against the provider's interface, then re-estimate the story from what it shows.",
+          "correct": true,
+          "rationale": "The spread of estimates comes from missing knowledge, not poor estimating. A short, bounded investigation buys that knowledge cheaply and leaves time to give the trustees a forecast the team can stand behind."
+        },
+        {
+          "id": "c",
+          "text": "Use the highest estimate of 40 points in the release forecast, so that the trustees are given a cautious figure that the team is unlikely to exceed.",
+          "correct": false,
+          "rationale": "Choosing the pessimistic guess feels prudent, but it is still a guess. It may push other features out of the release unnecessarily and does nothing to reduce the uncertainty that caused the spread."
+        },
+        {
+          "id": "d",
+          "text": "Ask the payment provider's technical account manager to estimate the integration effort, since they understand their own interface far better than the team.",
+          "correct": false,
+          "rationale": "The provider knows its interface but not the charity's codebase or the team's skills. The estimate would be owned by someone who will not do the work, and the team would still not understand it."
+        }
+      ],
+      "explanation": "When estimates for one item spread widely because the team lacks knowledge, the problem is information rather than technique. A short, time-boxed investigation turns the unknown into something the team can size, and its cost is small next to a release forecast built on a guess. Choosing a number from a wide spread without reducing the uncertainty only hides it.",
+      "mindset": "When a team cannot estimate, find out what it does not know before choosing a number."
+    },
+    {
+      "id": "pmp-pr1-103",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "roadmap",
+        "planning-horizon",
+        "governance"
+      ],
+      "stem": "You are delivery lead for a contactless ticketing app for a regional bus operator. The operator's steering committee has asked the product owner for a nine-month plan showing which stories will be completed in each two-week sprint. The team has a stable velocity, a clear product goal and a backlog ordered for roughly the next three months. The committee meets quarterly to decide whether to continue funding. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Produce the sprint-by-sprint plan as requested using the current velocity, and explain that it will be revised at each quarterly meeting as the backlog changes.",
+          "correct": false,
+          "rationale": "Compliance looks cooperative, but stories planned six months out will be wrong and will be read as commitments. The candidate assumes a caveat will stop the committee measuring the team against the detail."
+        },
+        {
+          "id": "b",
+          "text": "Explain to the product owner that agile teams plan one sprint at a time, and decline to produce anything beyond the current release forecast for the committee.",
+          "correct": false,
+          "rationale": "It is right that detail decays, but this refuses a legitimate governance need. A committee deciding on funding needs a view of where the product is going, and refusing it pushes them towards a plan built without the team."
+        },
+        {
+          "id": "c",
+          "text": "Find out what the committee needs to decide each quarter, and offer a roadmap with sprint-level detail for the next release and broader themes beyond it.",
+          "correct": true,
+          "rationale": "The committee's real need is a funding decision every quarter, not a list of stories for sprint seventeen. Matching detail to how far ahead it can be trusted gives them something to decide on that will still be true when they meet."
+        },
+        {
+          "id": "d",
+          "text": "Ask the team to refine and estimate the whole remaining backlog over the next two sprints, so that the nine-month plan rests on properly sized stories throughout.",
+          "correct": false,
+          "rationale": "This spends delivery capacity on precision that will decay before it is used, since later items will change or disappear. The candidate treats the request as an estimating problem rather than asking whether the detail is needed."
+        }
+      ],
+      "explanation": "Plan detail should match how far ahead it can be trusted and what its reader must decide. When a request asks for more precision than the work supports, find the decision it serves and provide that level of detail: specifics in the near term, intent and themes further out. Producing false precision and refusing to plan at all both fail the same governance need.",
+      "mindset": "Ask what decision a plan is for before deciding how detailed it must be."
+    },
+    {
+      "id": "pmp-pr1-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "dependencies",
+        "multi-team-planning",
+        "capacity"
+      ],
+      "stem": "At a two-day joint planning event for an online grocer, three product teams have drafted their plans for the next ten weeks. The dependency board shows that between them they need fourteen changes from the shared checkout platform team, which has capacity for about eight in that period. All three product owners describe their features as top priority. What should you do before the teams commit to their plans?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the platform team to commit to all fourteen changes and plan overtime in the later weeks, since all three product owners rate their features as top priority.",
+          "correct": false,
+          "rationale": "This plans on capacity that does not exist. The candidate treats stated priority as a reason to stretch the constraint, and the likely result is a cascade of missed dependencies across all three teams."
+        },
+        {
+          "id": "b",
+          "text": "Bring the three product owners and the platform team together during the event to agree which eight changes go first, and re-sequence the dependent features.",
+          "correct": true,
+          "rationale": "The constraint is visible while the plans are still drafts and the people who can trade priorities are in the room. Agreeing the order now means each team commits only to features whose dependencies will actually be ready."
+        },
+        {
+          "id": "c",
+          "text": "Let each product team commit to its own plan and have the platform team work through the changes in the order the requests appeared on the dependency board.",
+          "correct": false,
+          "rationale": "First-come ordering replaces a value decision with chance. Teams would commit to features whose platform changes arrive late or not at all, and the conflict resurfaces mid-quarter when it is harder to fix."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the conflict to the head of e-commerce after the event and ask for a ruling on which product team's features should take precedence this quarter.",
+          "correct": false,
+          "rationale": "Escalation has its place, but this defers the decision past the point at which commitments are made. The product owners at the event have the authority to trade, so the candidate escalates before trying the cheaper route."
+        }
+      ],
+      "explanation": "A shared constraint found during planning is cheapest to resolve while plans are still drafts and the people who own the priorities are together. Plans that each look feasible alone are not feasible together if they rely on the same scarce capacity, so the dependent work has to be sequenced against that capacity before anyone commits. Escalation is for conflicts the owners cannot settle themselves.",
+      "mindset": "Resolve a shared constraint while the plans are still drafts, not after everyone has committed to them."
+    },
+    {
+      "id": "pmp-pr1-105",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "external-approval",
+        "lead-time",
+        "integrated-plan"
+      ],
+      "stem": "Your hybrid programme is replacing a council's housing repairs system. Configuration is delivered in two-week sprints, and go-live is a fixed date eleven weeks away, set by the end of the old system's licence. Reviewing the integrated plan, you find that the council's information security board must accredit any system holding tenant data before go-live, and its last three reviews each took about eight weeks. The plan does not mention accreditation. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add an eight-week accreditation activity to the schedule after the final configuration sprint, and move the go-live date if the resulting timing does not fit.",
+          "correct": false,
+          "rationale": "Go-live is fixed by the licence end, so moving it is not really available. The candidate also assumes the board can only review a finished system, when design and evidence can usually be reviewed as they are produced."
+        },
+        {
+          "id": "b",
+          "text": "Record the missing accreditation as a risk in the register, with the board's review time as its trigger, and review it at the next monthly risk meeting.",
+          "correct": false,
+          "rationale": "Accreditation is a known requirement, not an uncertain event, so it belongs in the plan rather than the register. Waiting for a monthly meeting spends a large share of the remaining margin on paperwork."
+        },
+        {
+          "id": "c",
+          "text": "Contact the security board this week to agree what it needs and when, and add accreditation and its evidence to the integrated plan and the backlog.",
+          "correct": true,
+          "rationale": "With eleven weeks left and an eight-week review, the slack is three weeks and shrinking daily. Engaging the board now finds out what evidence it needs in time to produce it, and puts the work where it will be planned and tracked."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor to request an exemption from accreditation for go-live, with the review completed in the first months after the new system is running.",
+          "correct": false,
+          "rationale": "The candidate plans around an exception before trying to meet the requirement. A system holding tenant data is exactly what the control exists for, and an exemption may be refused after weeks have been lost."
+        }
+      ],
+      "explanation": "When a mandatory external approval appears with a lead time close to the time remaining, engage the approver immediately and plan the work their process needs, because the lead time does not start until someone asks. Approval steps belong in the integrated plan as work with inputs, owners and durations, not as a gate assumed to happen on the day it is needed.",
+      "mindset": "Start the clock on anything with a lead time as soon as you know about it."
+    },
+    {
+      "id": "pmp-pr1-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "portfolio-dependencies",
+        "constrained-resources",
+        "rail"
+      ],
+      "stem": "You are planning a signalling upgrade on a rail line. Your schedule depends on a 54-hour weekend track closure in March, the only one available before the summer timetable. While integrating your plan with the portfolio calendar, you find that a drainage renewal project in the same portfolio has planned to use the same closure. Neither project could finish in half the hours, but the drainage work is at the northern end of the section and yours is at the two southern junctions. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the portfolio office to decide which project gets the March closure, giving them the cost and schedule impact of each project losing it to the other.",
+          "correct": false,
+          "rationale": "This is a well-formed escalation, but it presents a choice that may never need making. The candidate frames the conflict as either-or without first testing whether both projects can work in the closure together."
+        },
+        {
+          "id": "b",
+          "text": "Replan your work into the next available closure after the summer timetable, and record the resulting delay and its cost as a variance against the draft schedule.",
+          "correct": false,
+          "rationale": "Conceding the closure without testing alternatives absorbs a delay of several months that may be avoidable. The candidate is being cooperative at a cost the sponsor has not agreed to."
+        },
+        {
+          "id": "c",
+          "text": "Work with the drainage project manager to check whether both sets of work can be sequenced within the closure, then take a joint plan to the portfolio office.",
+          "correct": true,
+          "rationale": "The two jobs are at different locations, so the closure may not need dividing at all. Testing a shared plan with the other project manager turns an apparent either-or into a question that can be answered from the facts."
+        },
+        {
+          "id": "d",
+          "text": "Confirm your booking of the March closure with the infrastructure manager now, since your signalling work appeared in the draft portfolio calendar first.",
+          "correct": false,
+          "rationale": "A first-come claim creates a portfolio dispute and may be overturned anyway. It treats the closure as a prize to be won rather than a shared resource whose best use has not yet been worked out."
+        }
+      ],
+      "explanation": "When two plans compete for one constrained resource, test whether they can share it before asking anyone to choose between them. Escalation is right when a genuine choice exists; presenting an either-or that was never necessary spends governance attention and can cost a project months it did not need to lose. Integrating plans across a portfolio is partly a search for combinations nobody has yet tried.",
+      "mindset": "Before asking who gets a scarce resource, ask whether both can use it."
+    },
+    {
+      "id": "pmp-pr1-107",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-make-visible",
+        "cost-estimating",
+        "confidence-levels",
+        "business-case"
+      ],
+      "stem": "You are preparing the cost estimate for a ferry pier replacement. The quantitative risk analysis gives a P50 of €24.1 million and a P80 of €26.9 million. The sponsor asks you for 'the realistic figure' to put in the business case, adding that the funding board treats the approved figure as a ceiling and expects any overrun to come back to it as a new business case. What should you provide?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Give the P50 of €24.1 million as the realistic figure, since it is the most likely outcome and asking the board for more would weaken the business case.",
+          "correct": false,
+          "rationale": "It answers the literal question, but the board will use the figure as a ceiling, and a P50 ceiling carries an even chance of a second business case. The candidate gives the most likely figure where the use calls for a safe one."
+        },
+        {
+          "id": "b",
+          "text": "Give the P80 of €26.9 million as the business case figure, since the board treats approval as a ceiling and a lower figure carries a high chance of breach.",
+          "correct": false,
+          "rationale": "The confidence level is right, but presenting one figure hides the P50. The whole €26.9 million then becomes the working budget, and the margin tends to be spent rather than held against the risks it was sized for."
+        },
+        {
+          "id": "c",
+          "text": "Give the range from €24.1 million to €26.9 million with the confidence of each figure, and ask the board to choose the figure it is comfortable approving.",
+          "correct": false,
+          "rationale": "This is transparent, but it hands an estimating judgement back to the board without a recommendation. The candidate stops one step short of the estimator's job, and a board choosing unaided may pick the lower end."
+        },
+        {
+          "id": "d",
+          "text": "Give both figures, recommending the board approves the P80 with the €2.8 million above the P50 held as a reserve that the sponsor controls.",
+          "correct": true,
+          "rationale": "A ceiling needs a high-confidence figure, and showing the gap between likely and safe keeps the margin visible and managed rather than absorbed into the working budget. It answers the sponsor and gives the board a recommendation it can act on."
+        }
+      ],
+      "explanation": "The confidence level a cost figure should carry depends on how its approver will use it. A figure treated as a ceiling needs high confidence, but the gap between the likely and the safe figure should stay visible and be controlled separately, or it will be absorbed into the working budget. The estimator's job is to recommend, neither hiding the margin inside one number nor passing the choice of confidence back unaided.",
+      "mindset": "Match an estimate's confidence to how it will be used, and keep the margin where everyone can see it."
+    },
+    {
+      "id": "pmp-pr1-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "capacity-planning",
+        "release-forecast",
+        "shared-resources"
+      ],
+      "stem": "Your hybrid programme for an insurer combines a predictive migration of 1.3 million claims records with two agile teams building the new claims screens. The integrated plan has both agile teams spending about half their time supporting user acceptance testing of the migration in sprints 7 to 9. The release forecast for the screens still uses the teams' full average velocity of 34 points per sprint in those sprints. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the forecast as it is and ask the teams to absorb the testing support, tracking actual velocity in sprints 7 to 9 to see whether it really does fall.",
+          "correct": false,
+          "rationale": "The candidate waits to observe a shortfall that is already planned. By the time the data confirms it, the release forecast has been wrong for weeks and the people relying on it have had no warning."
+        },
+        {
+          "id": "b",
+          "text": "Reduce the planned velocity for sprints 7 to 9 to reflect the testing support, and show the product owner and sponsor the effect on the release forecast.",
+          "correct": true,
+          "rationale": "Half the teams' time is already committed elsewhere in the same plan, so the drop is known now. Adjusting the forecast and showing its effect turns a hidden double-count into a decision the people who made the allocation can see."
+        },
+        {
+          "id": "c",
+          "text": "Ask the migration workstream to find other testers for sprints 7 to 9, so that both agile teams can keep their full capacity for the claims screens.",
+          "correct": false,
+          "rationale": "This may be a valid option, but it changes an agreed allocation unilaterally. The agile teams were assigned because they know the screens, and choosing between the streams is a decision for the sponsor, not a planning fix."
+        },
+        {
+          "id": "d",
+          "text": "Move the testing support into a dedicated hardening sprint after sprint 9, so that the release forecast for sprints 7 to 9 does not need to change at all.",
+          "correct": false,
+          "rationale": "This protects one stream's forecast by moving the other stream's testing later than it needs to happen. The candidate shifts the migration schedule to avoid showing a number, which only moves the problem."
+        }
+      ],
+      "explanation": "Capacity committed in one part of an integrated plan cannot also be counted in another. When people are shared between streams, each stream's forecast must use only the capacity left to it, and the consequences of the allocation should be shown to the people who made it, so the trade-off is a decision rather than a surprise later.",
+      "mindset": "Count each person's time once across the whole plan."
+    },
+    {
+      "id": "pmp-pr1-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-use-own-authority",
+        "wbs",
+        "decomposition",
+        "progress-measurement"
+      ],
+      "stem": "You are building the work breakdown structure for a new packaging line at a pharmaceutical plant. The commissioning lead has entered 'Commission line' as a single nine-week work package, with one estimate and no breakdown beneath it. Progress will be reported fortnightly to the steering group, and the plant's planning procedure leaves the level of decomposition to the project manager. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the commissioning lead to break the package into smaller pieces of work, each with an owner and a deliverable that can be checked within a reporting period.",
+          "correct": true,
+          "rationale": "The procedure gives you the decision, and a nine-week package cannot show objective progress in a fortnightly cycle. Decomposing it with the person who knows the work keeps her expertise in the plan while making progress visible."
+        },
+        {
+          "id": "b",
+          "text": "Accept the single work package, since the commissioning lead is the expert and nine weeks is short compared with the eighteen-month duration of the project as a whole.",
+          "correct": false,
+          "rationale": "The candidate defers to technical expertise on what is really a question of control. With fortnightly reporting, the steering group would receive four reports saying the package is in progress before learning whether it is late."
+        },
+        {
+          "id": "c",
+          "text": "Ask the plant's planning department to rule on the right level of decomposition, so that the structure is consistent with other projects running at the site.",
+          "correct": false,
+          "rationale": "Consistency is reasonable to want, but the procedure leaves this decision with the project manager. Seeking a ruling the candidate already holds delays the plan and hands away part of the job."
+        },
+        {
+          "id": "d",
+          "text": "Keep the single work package but ask the commissioning lead for a percentage-complete figure every fortnight, so that the steering group can still see progress.",
+          "correct": false,
+          "rationale": "Percentage complete on a large undivided package is a judgement, not a measurement, and such figures tend to sit near ninety per cent for weeks. The candidate tries to report progress without making it measurable."
+        }
+      ],
+      "explanation": "Work is decomposed until each package can be estimated, assigned an owner and shown to be done or not done within the cycle at which progress is reported. A package longer than that cycle cannot give an objective progress signal. Setting the level of detail is part of the project manager's own planning authority, best exercised with the people who know the work.",
+      "mindset": "Break work down until progress can be seen rather than guessed."
+    },
+    {
+      "id": "pmp-pr1-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "velocity",
+        "forecasting",
+        "metrics"
+      ],
+      "stem": "You support four agile teams building a university's new student portal. Six months ago the head of IT began publishing each team's velocity in a monthly league table. Since then average velocity has risen by 30%, yet the release forecast has slipped twice and the number of features the product owner accepts each sprint is flat. The head of IT wants to know why the teams are 'faster' but later. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Recalculate the release forecast using the higher current velocity, since it reflects the improvement the teams have made over the last six months.",
+          "correct": false,
+          "rationale": "The candidate takes the inflated measure at face value. A forecast built on it would slip a third time, because the thing it predicts, accepted features, has not moved."
+        },
+        {
+          "id": "b",
+          "text": "Run a retrospective with each team on why its forecast has slipped, and ask each one to agree actions that bring delivery back in line with its velocity.",
+          "correct": false,
+          "rationale": "This treats the gap as a delivery failure for the teams to fix. It does not test whether the measure itself has drifted, and it may push teams to inflate further to close the apparent gap."
+        },
+        {
+          "id": "c",
+          "text": "Ask the head of IT to stop publishing the league table at once, explaining that comparing velocity between teams is not a meaningful use of the measure.",
+          "correct": false,
+          "rationale": "It may well be the right outcome, but acting before confirming the cause reads as protecting the teams and leaves the forecast still broken. The candidate jumps to the remedy without the diagnosis that would justify it."
+        },
+        {
+          "id": "d",
+          "text": "Compare the points now recorded for typical stories with similar stories from before the league table, alongside the trend in features accepted per sprint.",
+          "correct": true,
+          "rationale": "Rising velocity with flat accepted output points to the measure changing rather than the work. Checking the sizing of comparable stories tests that directly, and gives the head of IT evidence before anyone re-forecasts or changes practice."
+        }
+      ],
+      "explanation": "When a measure improves while the outcome it is meant to predict does not, suspect the measure before the outcome. Velocity is a team's own calibration for planning; once it becomes a target or a comparison it tends to inflate, and forecasts built on it drift. Establish what has changed in the measure before re-forecasting or changing behaviour.",
+      "mindset": "When the number and the result disagree, check the number first."
+    },
+    {
+      "id": "pmp-pr1-111",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "release-planning",
+        "minimum-viable-release",
+        "fixed-date"
+      ],
+      "stem": "Your team is building the ticketing site for a music festival. The release plan assumed ticket sales would open in mid-April. The festival's board has now decided, for sponsorship reasons that it has explained and will not revisit, that sales open on 1 March, six weeks earlier. At current velocity the team can finish roughly 60% of the planned release backlog by then. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the product owner to define the smallest set of features that lets sales open safely on 1 March, and replan the rest into later releases.",
+          "correct": true,
+          "rationale": "The date is settled, so the open question is what to deliver by it. Choosing the smallest set that makes selling tickets safe, and moving everything else into later increments, uses the plan to protect the outcome the board actually needs."
+        },
+        {
+          "id": "b",
+          "text": "Ask the board to reconsider the 1 March date, presenting the release forecast that shows only about 60% of the planned backlog can be finished by then.",
+          "correct": false,
+          "rationale": "The board has explained its reasons and said the decision is final, so the forecast changes nothing it does not already accept. The candidate spends the first days of a shortened window contesting a constraint instead of planning to it."
+        },
+        {
+          "id": "c",
+          "text": "Bring in two contract developers for the next six weeks so that the team's capacity rises enough to finish the whole planned backlog before 1 March.",
+          "correct": false,
+          "rationale": "New people slow a team down before they speed it up, and six weeks is not long enough for that to pay back. The candidate tries to keep the original scope rather than adapting the plan to the new constraint."
+        },
+        {
+          "id": "d",
+          "text": "Keep the release backlog as it is and shorten the remaining sprints to one week each, so that the team can show steady progress to the board.",
+          "correct": false,
+          "rationale": "Shorter sprints change the reporting rhythm, not the amount of work the team can do. The candidate changes the cadence and leaves the real mismatch between scope and date unresolved."
+        }
+      ],
+      "explanation": "When a constraint changes and the people who own it have settled it, the plan moves rather than the constraint. In adaptive planning a fixed date is met by varying scope: identify the minimum that delivers the outcome by that date, then replan the remainder into later increments. Arguing with a closed decision or adding capacity late usually costs the time the new plan needs.",
+      "mindset": "When a fixed constraint moves, replan the scope to fit it instead of contesting it."
+    },
+    {
+      "id": "pmp-pr1-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "constraints",
+        "planning-consent",
+        "schedule-integration"
+      ],
+      "stem": "You are integrating the plan for a rural road widening scheme. The planning consent, issued last month, includes a condition that no hedgerow or vegetation may be cleared between 1 March and 31 August because of nesting birds. Your draft schedule has hedgerow clearance in April, immediately before the drainage and earthworks activities that depend on it. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move clearance to before 1 March or after 31 August, and resequence the drainage and earthworks that depend on it across the rest of the integrated plan.",
+          "correct": true,
+          "rationale": "Consent conditions are fixed constraints, so the plan must respect them. Moving the activity and then following its dependants through the plan is what keeps the schedule, cost and resource components consistent with each other."
+        },
+        {
+          "id": "b",
+          "text": "Keep clearance in April, and have the project ecologist inspect each section of hedgerow for active nests before the contractor removes it.",
+          "correct": false,
+          "rationale": "Nest checks are good practice where clearance is allowed, but this consent forbids clearance in that period outright. The candidate treats a binding condition as a risk to be mitigated rather than a constraint to be planned around."
+        },
+        {
+          "id": "c",
+          "text": "Apply to the planning authority to vary the consent condition so that clearance can go ahead in April as the draft schedule currently assumes.",
+          "correct": false,
+          "rationale": "A variation might be possible, but seeking one to rescue a draft schedule puts the plan's start at the mercy of another approval. The candidate reaches for an exception before checking whether the work can simply be resequenced."
+        },
+        {
+          "id": "d",
+          "text": "Record the consent condition in the risk register as a threat to the earthworks dates, and review it with the contractor at the next progress meeting.",
+          "correct": false,
+          "rationale": "The condition is certain and already known, so it is a constraint rather than a risk. Logging it leaves an unworkable activity in the schedule and defers a planning decision that has to be made now."
+        }
+      ],
+      "explanation": "Conditions attached to permits and consents are mandatory constraints, and an integrated plan that breaks one is not a valid plan. The fix is to schedule the constrained activity within its permitted window and then trace the change through every dependent activity, cost and resource assignment. Constraints belong in the plan's logic; risks are for things that might happen.",
+      "mindset": "Plan around a binding constraint first, then trace what it moves."
+    },
+    {
+      "id": "pmp-pr1-113",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "integrated-master-schedule",
+        "agile-workstreams",
+        "milestones"
+      ],
+      "stem": "You are building the integrated master schedule for a hybrid programme that fits out a new regional hospital. Construction and equipment installation are planned predictively. A product team is building the patient-flow software in two-week sprints against an ordered backlog, and the equipment commissioning team needs the software's device interfaces before it can test the scanners. Which two things should the master schedule hold for the software workstream?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A milestone for each point at which another workstream depends on the software, such as the device interfaces needed for scanner commissioning.",
+          "correct": true,
+          "rationale": "Integration points are what the rest of the programme plans against. Holding them as milestones makes the cross-workstream dependencies visible without dictating how the product team organises its own work."
+        },
+        {
+          "id": "b",
+          "text": "A forecast date range for each of those milestones, based on the team's measured velocity and updated by the team after each sprint review.",
+          "correct": true,
+          "rationale": "A range shows the real uncertainty in adaptive delivery, and refreshing it each sprint keeps the master schedule honest. Other workstreams can then see early when a dependency is drifting towards their own dates."
+        },
+        {
+          "id": "c",
+          "text": "Every story in the current backlog, scheduled into the sprint in which it is expected to be built, so that progress can be tracked from one tool.",
+          "correct": false,
+          "rationale": "A single tool is attractive, but story-level dates months ahead are guesses that will be read as commitments. The candidate mistakes detail for integration and creates a schedule that needs rewriting every fortnight."
+        },
+        {
+          "id": "d",
+          "text": "A single fixed completion date for the software, agreed with the product owner now and controlled through the programme's change process from then on.",
+          "correct": false,
+          "rationale": "Control is reasonable for what other teams depend on, but freezing one completion date ignores which parts are needed when. The candidate applies a predictive baseline to the whole backlog instead of to the integration points."
+        },
+        {
+          "id": "e",
+          "text": "A duration for the software workstream calculated from the total backlog size, with sprints shown as identical repeating activities until the end.",
+          "correct": false,
+          "rationale": "This looks tidy on a chart but hides the order in which features arrive, which is exactly what commissioning needs. The candidate shows a duration without showing when the dependent parts land."
+        }
+      ],
+      "explanation": "An integrated schedule needs to show where workstreams depend on one another, not every task inside each of them. For adaptive work, that means milestones at the integration points and forecasts for those milestones that move with the team's actual performance. Pushing story-level detail into the master schedule creates churn without improving coordination.",
+      "mindset": "Integrate at the points where workstreams meet, and leave the inside of each to its owners."
+    },
+    {
+      "id": "pmp-pr1-114",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "assumptions",
+        "baseline-readiness",
+        "healthcare-estates"
+      ],
+      "stem": "You are about to baseline the plan for replacing the chillers that cool an operating-theatre block. The assumption log has forty entries, and there is time to test only a few before the sponsor's approval meeting in ten days. Which two assumptions should you validate first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The chiller supplier can deliver within fourteen weeks, which is based on a verbal quote and sits on the critical path for every later activity.",
+          "correct": true,
+          "rationale": "It is unconfirmed and the whole schedule hangs off it, so being wrong moves every later date. High impact combined with weak evidence is what earns an assumption a place at the front of the queue."
+        },
+        {
+          "id": "b",
+          "text": "Theatre managers will accept four-hour cooling shutdowns on weekend nights, which has not been discussed with them yet and every installation step depends on.",
+          "correct": true,
+          "rationale": "No one has asked the people who control the shutdowns, and the installation method rests entirely on them. If the answer is no, the method, sequence and cost all change, so it must be tested before baselining."
+        },
+        {
+          "id": "c",
+          "text": "The plant-room floor can carry the weight of the new units, which a structural engineer confirmed in a written report on the existing slab last month.",
+          "correct": false,
+          "rationale": "This matters a great deal, but it has already been validated by a qualified person. The candidate ranks by importance alone and spends scarce time re-testing what is already known."
+        },
+        {
+          "id": "d",
+          "text": "The electrical contractor's day rate will stay at last year's level, a small share of total cost and covered by a price-review clause in the framework.",
+          "correct": false,
+          "rationale": "It is uncertain, but even a large change barely moves the total and the contract already handles it. The candidate tests whatever is unconfirmed rather than what would hurt the plan most if wrong."
+        },
+        {
+          "id": "e",
+          "text": "Porters can move the units through the service corridor, which has taken equipment of similar size and weight twice already in the current year.",
+          "correct": false,
+          "rationale": "Recent, directly comparable experience is good evidence. The candidate treats every assumption as equally doubtful instead of weighing the evidence already behind each one."
+        }
+      ],
+      "explanation": "When there is not time to test every assumption before a plan is baselined, rank them by how much the plan would change if each were wrong and how weak the evidence behind each is. Test the ones that score high on both first. Assumptions already confirmed, or whose failure the plan could easily absorb, can wait for routine monitoring.",
+      "mindset": "Test first the assumptions that are both weakly supported and costly to get wrong."
+    },
+    {
+      "id": "pmp-pr1-115",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "definition-of-done",
+        "release-forecast",
+        "release-readiness"
+      ],
+      "stem": "You lead delivery for a team building a citizen-facing benefits application for a local authority. The release forecast counts a story as done when the team's sprint review accepts it. Before go-live, however, a central accessibility team audits the service and a separate security team runs penetration tests, and each takes about three weeks and usually finds issues. The forecast shows release in eight weeks. Which two changes would make the forecast reliable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the accessibility audit, the penetration test and the time to fix what they find to the release plan, with their real lead times included.",
+          "correct": true,
+          "rationale": "The forecast stops at team acceptance, but the release does not. Planning the downstream work and its fix cycle shows how far the real release date sits from the date the board has been given."
+        },
+        {
+          "id": "b",
+          "text": "Agree with both specialist teams how accessibility and security checks can be done within each sprint, and extend the definition of done to cover them.",
+          "correct": true,
+          "rationale": "The premise that sprint acceptance means releasable is what makes the forecast wrong. Moving checks into each sprint shrinks the work left at the end and makes velocity measure something closer to shippable output."
+        },
+        {
+          "id": "c",
+          "text": "Apply a reduction of 20% to the team's velocity across the remaining sprints, so that the forecast carries a margin for whatever issues the audits find.",
+          "correct": false,
+          "rationale": "A margin feels prudent, but it is sized on nothing and still assumes the audits happen inside the team's sprints. The candidate pads the existing forecast rather than questioning what it counts."
+        },
+        {
+          "id": "d",
+          "text": "Plan a hardening sprint after the last feature sprint in which the team fixes all accessibility and security findings in one block before go-live.",
+          "correct": false,
+          "rationale": "This is common and will help, but a single block of unknown size at the end leaves discovery as late as possible. The candidate accepts the premise that done means accepted and bolts the real work on afterwards."
+        },
+        {
+          "id": "e",
+          "text": "Ask both specialist teams to commit to completing their reviews within one week, so that the current eight-week forecast still holds without other change.",
+          "correct": false,
+          "rationale": "Those teams serve the whole authority and set their own capacity. The candidate tries to protect the forecast by compressing someone else's process instead of making the forecast describe the real work."
+        }
+      ],
+      "explanation": "A release forecast is only as good as its definition of done. If work still has to pass checks after the team calls it done, velocity measures something short of releasable and the forecast is systematically early. Either plan the remaining work explicitly or bring it inside the definition of done, and preferably both, so the forecast measures what is actually released.",
+      "mindset": "Check what 'done' means before trusting any forecast built on it."
+    },
+    {
+      "id": "pmp-pr1-116",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "estimating",
+        "estimating-techniques"
+      ],
+      "stem": "Match each estimating situation to the technique that suits the information available and the purpose of the estimate. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "A sponsor needs a rough figure by Friday for refurbishing a branch library, and the council refurbished a library of very similar size and layout two years ago."
+        },
+        {
+          "id": "s2",
+          "text": "A highway authority must estimate resurfacing 38 km of rural road and holds a reliable cost per lane-kilometre from a dozen recent contracts."
+        },
+        {
+          "id": "s3",
+          "text": "The work breakdown structure for an office fit-out is complete, and the owner of each work package is ready to estimate it for the cost baseline."
+        }
+      ],
+      "options": [
+        {
+          "id": "analog",
+          "text": "Analogous estimating from a comparable past project",
+          "correct": true,
+          "match": "s1",
+          "rationale": "One close comparison and a short deadline suit an analogous estimate: quick, cheap and good enough for an early decision, as long as it is presented as a rough figure."
+        },
+        {
+          "id": "param",
+          "text": "Parametric estimating from a unit rate",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A reliable rate per unit of a measurable quantity is exactly what parametric estimating needs. Multiplying it by the quantity gives an accurate figure for repetitive work."
+        },
+        {
+          "id": "bottom",
+          "text": "Bottom-up estimating from the work packages",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A complete decomposition with owners ready to estimate is the condition for bottom-up estimating, which gives the most defensible basis for a baseline at the cost of more effort."
+        },
+        {
+          "id": "three",
+          "text": "Three-point estimating from optimistic, most likely and pessimistic values",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Three-point estimating suits individual activities with wide uncertainty and little history. Each situation here has a stronger basis available: a close analogue, a proven rate or a full decomposition."
+        }
+      ],
+      "explanation": "The right estimating technique depends on what information exists and what the estimate is for. Early, rough decisions with a good comparison suit analogous methods; repetitive work with a reliable rate suits parametric methods; a baseline built on a full decomposition suits bottom-up estimating. Choosing a more elaborate method than the information supports adds effort without adding accuracy.",
+      "mindset": "Pick the estimating method that fits the information you have and the decision it will support."
+    },
+    {
+      "id": "pmp-pr1-117",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "planning-horizons",
+        "roadmap",
+        "release-planning"
+      ],
+      "stem": "A product team is building a reading app for a public library network. Match each planning question to the level of planning at which it should be answered. One choice is not used.",
+      "prompts": [
+        {
+          "id": "q1",
+          "text": "The library network's director asks which reader outcomes the app will address over the next eighteen months, and in roughly what order."
+        },
+        {
+          "id": "q2",
+          "text": "The marketing manager needs to know which quarter offline reading is likely to ship, so that a campaign can be booked."
+        },
+        {
+          "id": "q3",
+          "text": "The team must decide which refined stories it can finish in the next two weeks and how it will build them."
+        }
+      ],
+      "options": [
+        {
+          "id": "road",
+          "text": "Product roadmap",
+          "correct": true,
+          "match": "q1",
+          "rationale": "Outcomes and their rough order over a long horizon are what a roadmap carries. It gives direction without committing to features or dates that far ahead."
+        },
+        {
+          "id": "rel",
+          "text": "Release planning",
+          "correct": true,
+          "match": "q2",
+          "rationale": "Release planning turns the ordered backlog and the team's velocity into a forecast of when a feature is likely to ship, which is the level of commitment a campaign booking needs."
+        },
+        {
+          "id": "sprint",
+          "text": "Sprint planning",
+          "correct": true,
+          "match": "q3",
+          "rationale": "Choosing near-term work and how to build it is the purpose of sprint planning, done by the team that will do the work."
+        },
+        {
+          "id": "daily",
+          "text": "Daily stand-up",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The daily stand-up adjusts the plan for the current sprint from one day to the next. None of these questions is about coordinating today's work."
+        }
+      ],
+      "explanation": "Adaptive planning works at several horizons, each with the precision its timescale can support. Long-range direction and outcomes sit in the roadmap; likely delivery windows for features sit in release planning; the specific work for the next iteration sits in sprint planning. Answering a question at the wrong level gives either false precision or too little to act on.",
+      "mindset": "Answer each planning question at the horizon that can support its precision."
+    },
+    {
+      "id": "pmp-pr1-118",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "integrated-plan",
+        "cross-workstream-dependencies",
+        "float"
+      ],
+      "stem": "In a hybrid programme, a predictive hardware workstream and an agile software team both feed a baselined integration milestone. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The hardware workstream confirms its test rigs will arrive two weeks late, still inside the float before the baselined integration milestone. The agile team should"
+        },
+        {
+          "id": "c2",
+          "text": "The software team's forecast shows a feature needed at the baselined integration milestone will arrive four weeks late, well beyond the float. The project manager should"
+        },
+        {
+          "id": "c3",
+          "text": "The software team finds that a required feature needs a second data port that the frozen hardware design does not include. The project manager should"
+        }
+      ],
+      "options": [
+        {
+          "id": "reorder",
+          "text": "reorder its backlog so the stories that need the rigs fall in later sprints",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The slip is inside float, so no baselined date moves. The team can absorb it through its own backlog ordering, which is the decision the team and product owner already own."
+        },
+        {
+          "id": "cr",
+          "text": "raise a change request for the milestone, together with options to recover the date",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A forecast beyond float means a baselined date will move unless something changes. That decision belongs to whoever controls the baseline, and arriving with options makes it a choice rather than a notification."
+        },
+        {
+          "id": "joint",
+          "text": "bring the hardware and software leads together to assess the design impact before either plan changes",
+          "correct": true,
+          "match": "c3",
+          "rationale": "A clash between a frozen design and a requirement crosses both workstreams. Neither lead can resolve it alone, so the impact has to be understood jointly before anyone replans."
+        },
+        {
+          "id": "buffer",
+          "text": "add a contingency sprint to the end of the agile release plan",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A contingency sprint answers uncertainty in the team's own throughput. None of these situations is that: each is a specific dependency issue with a clear owner."
+        }
+      ],
+      "explanation": "In a hybrid plan, each change should be handled at the level that owns its effect. A slip absorbed within float stays inside the affected team's planning; a slip that threatens a baselined date goes to whoever controls the baseline; a conflict between workstreams goes to the people on both sides before either plan moves. Routing everything upwards, or nothing, both break the integration.",
+      "mindset": "Route each change to the level that owns what it affects."
+    },
+    {
+      "id": "pmp-pr1-119",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "cost-baseline",
+        "reserves",
+        "budget"
+      ],
+      "stem": "You are assembling the budget for a visitor centre at a nature reserve. The work package estimates total 1,840,000. The risk register supports a contingency reserve of 210,000 for identified risks. The sponsor's organisation adds a management reserve of 5% of the cost baseline. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "cb",
+          "label": "Cost baseline, in the same currency units",
+          "numeric": true,
+          "expect": 2050000,
+          "tol": 0,
+          "rationale": "The cost baseline is the work package estimates plus the contingency reserve for identified risks: 1,840,000 + 210,000 = 2,050,000. Contingency sits inside the baseline because it covers risks the plan already knows about."
+        },
+        {
+          "id": "mr",
+          "label": "Management reserve, in the same currency units",
+          "numeric": true,
+          "expect": 102500,
+          "tol": 0,
+          "rationale": "Management reserve is 5% of the cost baseline: 0.05 × 2,050,000 = 102,500. It is calculated on the baseline, not on the work package estimates alone."
+        },
+        {
+          "id": "pb",
+          "label": "Total project budget, in the same currency units",
+          "numeric": true,
+          "expect": 2152500,
+          "tol": 0,
+          "rationale": "The project budget is the cost baseline plus management reserve: 2,050,000 + 102,500 = 2,152,500. Management reserve sits outside the baseline and is released only through the sponsor's approval."
+        }
+      ],
+      "explanation": "Reserves are layered in a set order. Contingency for identified risks is added to the work estimates to form the cost baseline, which is what performance is measured against. Management reserve for unknown risks is added on top to form the total budget and stays outside the baseline under the sponsor's control. Mixing the layers either inflates the baseline or leaves known risks unfunded.",
+      "mindset": "Keep each layer of reserve where its owner and purpose say it belongs."
+    },
+    {
+      "id": "pmp-pr1-120",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "integration-milestone",
+        "dependencies",
+        "forecast-range"
+      ],
+      "stem": "The diagram shows five workstreams feeding an integration test that must start in week 15 of a hybrid programme replacing the tills in a garden-centre chain. Each box gives the workstream's current position. Select the feed the integrated plan most needs to address now.",
+      "graphic": {
+        "viewBox": "0 0 640 420",
+        "title": "Five feeder workstreams converging on an integration test starting in week 15",
+        "caption": "Select a workstream. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "hw",
+          "n": 1,
+          "label": "Till hardware (predictive): delivery week 10, three weeks' float",
+          "x": 20,
+          "y": 20,
+          "w": 380,
+          "h": 60,
+          "correct": false,
+          "rationale": "Delivery five weeks before the test with three weeks' float is comfortably placed. Nothing here needs action beyond routine tracking."
+        },
+        {
+          "id": "pay",
+          "n": 2,
+          "label": "Payments features (agile): forecast weeks 13 to 17 at current velocity range",
+          "x": 20,
+          "y": 100,
+          "w": 380,
+          "h": 60,
+          "correct": true,
+          "rationale": "The forecast range already extends two weeks past the test start, so there is a real chance the test cannot begin on time. This is the only feed whose own forecast says it may miss the date."
+        },
+        {
+          "id": "net",
+          "n": 3,
+          "label": "Store network upgrade (predictive): finishes week 14, no float, supplier confirmed in writing",
+          "x": 20,
+          "y": 180,
+          "w": 380,
+          "h": 60,
+          "correct": false,
+          "rationale": "Zero float makes this worth watching, and many candidates pick it for that reason. But its date is confirmed and still before the test, whereas another feed is forecast to land after it."
+        },
+        {
+          "id": "data",
+          "n": 4,
+          "label": "Product data load (predictive): completes week 12, one week late against its plan",
+          "x": 20,
+          "y": 260,
+          "w": 380,
+          "h": 60,
+          "correct": false,
+          "rationale": "Being late against its own plan draws attention, but finishing in week 12 still leaves three weeks before the test. The candidate reacts to variance rather than to the threat to the dependency."
+        },
+        {
+          "id": "env",
+          "n": 5,
+          "label": "Test environment (internal platform team): ready week 14, on track",
+          "x": 20,
+          "y": 340,
+          "w": 380,
+          "h": 60,
+          "correct": false,
+          "rationale": "On track and due before the test starts. Choosing it confuses the feed that is most essential with the feed that is most at risk."
+        },
+        {
+          "id": "test",
+          "n": 6,
+          "label": "Integration test: starts week 15",
+          "x": 440,
+          "y": 180,
+          "w": 180,
+          "h": 60,
+          "correct": false,
+          "rationale": "The test is the point the feeds converge on, not a feed. Its start date is threatened by one of its inputs, which is where the plan needs attention."
+        }
+      ],
+      "explanation": "At a point where several workstreams converge, attention should go to the input whose forecast threatens the shared date, not to the one that is most late against its own plan or has the least float. Compare each feed's forecast with the date it is needed, and act first where the forecast already crosses that date. Float and variance are signals; the gap to the dependency is the diagnosis.",
+      "mindset": "Judge each feed by its forecast against the date it is needed, not by its own variance."
+    },
+    {
+      "id": "pmp-pr1-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "baseline",
+        "forecasting",
+        "variance"
+      ],
+      "stem": "You are managing the €3.4 million mid-life refit of a university's coastal research vessel. The sponsor approved the integrated plan's baseline four weeks ago. Hull work is now running a week behind, and the engineering lead suggests updating the baseline dates every Friday to match actual progress, so that 'the plan reflects reality' and the weekly report shows no slippage. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to the weekly update, since a baseline that matches actual progress gives the shipyard a more realistic plan to work to.",
+          "correct": false,
+          "rationale": "This confuses the baseline with the working forecast. A baseline that follows actuals can never show a variance, so the report would look healthy precisely when the refit is slipping."
+        },
+        {
+          "id": "b",
+          "text": "Update the baseline monthly rather than weekly, so that the plan stays reasonably current without constant revisions to the figures.",
+          "correct": false,
+          "rationale": "Changing the frequency does not change the error. Any routine realignment of the baseline to actuals erases variance, whether it happens every week or every month."
+        },
+        {
+          "id": "c",
+          "text": "Re-baseline once now to absorb the hull delay, and then hold the revised baseline fixed for the remainder of the refit.",
+          "correct": false,
+          "rationale": "A one-week delay is a variance to report, not grounds to rewrite the baseline. Re-baselining needs an approved change, and doing it to hide a slip loses the record of what was agreed."
+        },
+        {
+          "id": "d",
+          "text": "Keep the approved baseline unchanged, update the forecast dates each week, and report the variance between the two.",
+          "correct": true,
+          "rationale": "The baseline is the approved reference that progress is measured against, and the forecast is what moves with reality. Reporting the gap between them is what tells the sponsor the hull work is late."
+        }
+      ],
+      "explanation": "The baseline is the approved version of the plan and changes only through approved change control. Forecasts are updated as often as needed to reflect what is actually happening, and the difference between forecast and baseline is the performance information stakeholders rely on. Moving the baseline to match actuals makes every project look on time by construction, which removes the one signal the baseline exists to give.",
+      "mindset": "Let the forecast move with reality and keep the baseline still, because the gap between them is the message."
+    },
+    {
+      "id": "pmp-pr1-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "velocity",
+        "release-forecast",
+        "new-team"
+      ],
+      "stem": "A housing association has formed a new five-person team to build a tenant repairs app. Before the first sprint, the head of digital asks you for a release forecast and suggests using the 42-point velocity of the association's established rent-payments team, which uses similar technology. The new team has not yet estimated together, and its members have not worked with each other before. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use the established team's 42 points with a 20% reduction for a new team, and revise the forecast as the actual sprints are completed.",
+          "correct": false,
+          "rationale": "The adjustment looks prudent but still assumes the two teams share a points scale. Points are relative to the team that assigns them, so any figure derived from 42 has no meaning for the new team."
+        },
+        {
+          "id": "b",
+          "text": "Give a wide initial range based on the new team's own sizing of the first items, and narrow it once three sprints of its own velocity exist.",
+          "correct": true,
+          "rationale": "Velocity measures one team's output in that team's own estimating scale. A new team has neither yet, so the honest forecast is a wide range from its own sizing, tightened as real data arrives."
+        },
+        {
+          "id": "c",
+          "text": "Ask both teams to calibrate their story points against the same set of reference stories, so the 42-point figure can be applied to the new team.",
+          "correct": false,
+          "rationale": "Calibrating the scale still leaves the new team's throughput unknown. Shared reference stories might align the units, but the rate at which an unformed team delivers them is the missing number."
+        },
+        {
+          "id": "d",
+          "text": "Have the new team estimate the whole backlog in hours, and forecast the release from the total hours divided by the team's available hours.",
+          "correct": false,
+          "rationale": "This swaps one unknown for another. A team that has never worked together will estimate hours as unreliably as points, and dividing by available hours ignores how much of that time becomes delivered work."
+        }
+      ],
+      "explanation": "Velocity is a property of a specific team working in its own estimating scale, so it cannot be borrowed, scaled or normalised across teams. A newly formed team should forecast from its own early sizing with a deliberately wide range, then narrow the range as its own sprints produce data. Presenting a borrowed number as a forecast gives stakeholders false precision at exactly the point where uncertainty is greatest.",
+      "mindset": "Forecast from the team's own evidence, and let the range be as wide as the evidence is thin."
+    },
+    {
+      "id": "pmp-pr1-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "competing-constraints",
+        "sponsor-decision",
+        "schedule-compression"
+      ],
+      "stem": "You are planning a £3.8 million flood defence scheme for a riverside town. The sponsor wants the embankment finished before the storm season begins on 1 October and the cost held at £3.8 million. After testing resequencing and fast-tracking, your integrated plan finishes in mid-December at that cost. Crashing the earthworks with a second plant crew would achieve a September finish but add £420,000. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Present both plans to the sponsor with the cost, date and flood-risk consequences of each, and baseline the one the sponsor chooses.",
+          "correct": true,
+          "rationale": "The two constraints cannot both be met, and choosing between money and protection is the sponsor's call. Laying out the consequences of each turns an impossible request into a decision the sponsor can make."
+        },
+        {
+          "id": "b",
+          "text": "Baseline the £4.22 million crashed plan, since protecting the town before the storm season clearly outweighs the additional cost to the scheme.",
+          "correct": false,
+          "rationale": "The judgement may well be right, but it spends £420,000 the sponsor has not approved. Deciding which constraint gives way is not the project manager's decision to make alone."
+        },
+        {
+          "id": "c",
+          "text": "Baseline the £3.8 million plan finishing in December, and add temporary flood barriers for October and November to the risk response plan.",
+          "correct": false,
+          "rationale": "This quietly chooses cost over date and adds a response with its own unbudgeted cost. The sponsor asked for both constraints and needs to know that one of them is being traded away."
+        },
+        {
+          "id": "d",
+          "text": "Ask the contractor to price a partial second crew, aiming for a late-October finish that sits between the two options already prepared.",
+          "correct": false,
+          "rationale": "It spends planning effort hunting for a compromise that still misses the storm-season date and still exceeds the budget. The conflict remains, and it remains the sponsor's to resolve."
+        }
+      ],
+      "explanation": "When planning shows that the constraints a sponsor has set cannot all be met, the project manager's job is to make the trade-off explicit, not to resolve it silently. Each option should be presented with its full consequences on cost, time and risk so that the person who owns the constraints chooses which one gives. A plan baselined on the project manager's private choice between constraints carries an approval the sponsor never actually gave.",
+      "mindset": "When the constraints collide, show the owner the price of each way out and let them choose."
+    },
+    {
+      "id": "pmp-pr1-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "change-management-plan",
+        "tailoring",
+        "product-backlog"
+      ],
+      "stem": "You are planning a hybrid programme for an airport's new baggage reconciliation system. Conveyor and scanner installation is predictive; the operator dashboards are built by an agile team in two-week sprints. The PMO's draft change management plan routes every scope change to a change control board that meets monthly, including the product owner's reordering or replacing of backlog items. What should you do before the plan is approved?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the monthly board for both workstreams, and ask the agile team to batch its backlog changes so that each sprint's work is approved by the board in advance.",
+          "correct": false,
+          "rationale": "This accepts the premise and bends the agile team around it. Batching changes for monthly approval removes the responsiveness that was the reason for choosing an agile approach for the dashboards."
+        },
+        {
+          "id": "b",
+          "text": "Ask the PMO to convene the board fortnightly, so that backlog changes can be approved in time for each of the team's sprint planning meetings.",
+          "correct": false,
+          "rationale": "Faster meetings treat a design problem as a scheduling one. Backlog ordering does not need board approval at any frequency, and a fortnightly board would consume governance time on decisions it should not own."
+        },
+        {
+          "id": "c",
+          "text": "Propose that the board controls the baselined milestones, budget and interfaces, while the product owner changes the backlog freely inside that envelope.",
+          "correct": true,
+          "rationale": "Backlog change is how the agile workstream is meant to work, and the board's real interest is the envelope the other workstreams depend on. Drawing the line there keeps control where it matters without stalling every sprint."
+        },
+        {
+          "id": "d",
+          "text": "Exclude the dashboard workstream from change control altogether, and report its backlog changes to the board for information after each sprint.",
+          "correct": false,
+          "rationale": "It overcorrects. Some dashboard changes will touch interfaces, budget or milestones the predictive workstream relies on, and those need control whichever approach produced them."
+        }
+      ],
+      "explanation": "A change management plan for a hybrid programme should set its control boundary at what other parts of the programme depend on: baselined milestones, budget, interfaces and regulated commitments. Inside that boundary, an agile workstream's backlog is expected to change and is governed by the product owner. Applying one control process to everything either paralyses the adaptive work or leaves the shared commitments uncontrolled.",
+      "mindset": "Put formal change control around what others depend on, and leave expected change to the role that owns it."
+    },
+    {
+      "id": "pmp-pr1-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "product-backlog",
+        "multi-team",
+        "product-owner"
+      ],
+      "stem": "Three agile teams are building an online estate agency's new property listings platform. Each team has its own product owner and its own backlog. Over the last two quarters, each team finished its own top items on time, yet the features buyers and sellers most wanted arrived late, because the pieces they needed sat at different priorities in different backlogs. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold a joint prioritisation meeting each quarter where the three product owners agree a shared top ten across their separate backlogs.",
+          "correct": false,
+          "rationale": "It treats the symptom with a coordination ritual while keeping three competing orderings. Between meetings each backlog drifts back to its own priorities, and nobody is accountable for the product as a whole."
+        },
+        {
+          "id": "b",
+          "text": "Assign a dependency coordinator to track which items in each backlog belong to the same customer feature, and escalate any mismatches to the product owners concerned.",
+          "correct": false,
+          "rationale": "Tracking the mismatches makes them visible but does not remove their cause. The coordinator has no authority to reorder any backlog, so each escalation becomes another negotiation."
+        },
+        {
+          "id": "c",
+          "text": "Ask each product owner to rank their backlog against a common scoring formula, so that priorities line up across the three teams.",
+          "correct": false,
+          "rationale": "A shared formula produces consistent scores, not a shared order. Each owner still ranks a partial list, so the parts of one feature can still land at different depths in different backlogs."
+        },
+        {
+          "id": "d",
+          "text": "Move to one product backlog for the platform, ordered by a single accountable product owner, with all three teams planning their work from it.",
+          "correct": true,
+          "rationale": "One product needs one ordering of its work. A single backlog with one accountable owner means the pieces of a customer feature are ranked together rather than negotiated between three lists."
+        }
+      ],
+      "explanation": "When several teams build one product, the plan needs a single ordering of the product's work, held by one person accountable for its value. Separate backlogs optimise each team's slice and leave whole features to fall between them, and no amount of coordination fully replaces a single ranked list. Scale the number of teams, not the number of backlogs.",
+      "mindset": "One product, one backlog, one person accountable for its order."
+    },
+    {
+      "id": "pmp-pr1-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "estimating",
+        "contingency-reserve",
+        "padding"
+      ],
+      "stem": "You are integrating estimates for a university laboratory fit-out. Comparing the six work-package estimates with records from similar fit-outs, you find each owner has added an unstated allowance of 25–40% to their own figures 'to be safe'. Added together, these allowances exceed the contingency that the quantitative risk analysis supports for the whole project. The sponsor approves the baseline in three weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Leave the owners' allowances in place, since each owner knows their own risks best, and drop the separate project contingency to avoid double-counting.",
+          "correct": false,
+          "rationale": "It removes the double-count but keeps the reserve hidden and oversized. Allowances buried in estimates cannot be tracked, released or reclaimed, and the sponsor approves a figure larger than the risk justifies."
+        },
+        {
+          "id": "b",
+          "text": "Reduce every work-package estimate by a flat 25%, and add the total removed back as a contingency line that you control centrally.",
+          "correct": false,
+          "rationale": "A flat cut ignores that the allowances ranged from 25% to 40% and leaves some estimates padded and others cut below realistic. The contingency is then sized by what was removed rather than by the risk analysis."
+        },
+        {
+          "id": "c",
+          "text": "Agree realistic estimates with each owner, and hold a single project-level contingency sized by the risk analysis and visible in the baseline.",
+          "correct": true,
+          "rationale": "Moving the allowances out of the estimates and into one visible reserve lets it be sized to the actual risk, controlled, and reported. Hidden allowances are larger than needed and tend to be spent whether or not the risk occurs."
+        },
+        {
+          "id": "d",
+          "text": "Keep the padded estimates in the baseline but schedule each work package to its unpadded duration, so that teams aim for the tighter target.",
+          "correct": false,
+          "rationale": "Two sets of numbers for the same work means the baseline and the working plan disagree from the start. Teams soon learn which figure really counts, and the reserve stays hidden inside the baseline."
+        }
+      ],
+      "explanation": "Contingency should be explicit and sized to the identified risk at project level, not distributed silently through individual estimates. Hidden allowances add up to more than the aggregate risk requires, are consumed as available time and money rather than held against risk events, and cannot be reported or controlled. Separating the realistic estimate from the reserve is what makes both of them manageable.",
+      "mindset": "Make reserve visible and pooled, because hidden safety is both larger than needed and quietly spent."
+    },
+    {
+      "id": "pmp-pr1-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "hybrid-integration",
+        "freeze-point",
+        "training"
+      ],
+      "stem": "A parcel courier is replacing its depot handheld app. An agile team is refining the scanning screens sprint by sprint, while a predictive workstream will train 2,000 depot staff using e-learning that the supplier needs eight weeks to produce from final screens. Go-live is fixed for 1 March. The product owner wants the screens to stay open to change until two weeks before go-live. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the e-learning supplier to start building from the current screens now, and to update the modules after each sprint review as the product owner refines the screens.",
+          "correct": false,
+          "rationale": "It looks like accommodating change on both sides, but an eight-week production process cannot absorb fortnightly rework. The likely result is either heavy extra cost or modules that lag the screens at go-live."
+        },
+        {
+          "id": "b",
+          "text": "Keep the screens open until two weeks out as the product owner wants, and cover any late changes with briefings delivered by depot supervisors.",
+          "correct": false,
+          "rationale": "It protects adaptability by pushing the cost onto 2,000 staff and their supervisors. Briefings layered over e-learning that no longer matches the app leave the training contradicting the product."
+        },
+        {
+          "id": "c",
+          "text": "Agree with the product owner a freeze on the training-relevant screens eight weeks out, with later changes allowed only where their training impact is assessed.",
+          "correct": true,
+          "rationale": "The freeze is placed exactly where the predictive dependency needs it and only on what that dependency uses. The product owner keeps freedom elsewhere and a route for changes worth their training cost."
+        },
+        {
+          "id": "d",
+          "text": "Freeze every screen in the app eight weeks before go-live, so that the training and the delivered product are certain to match on 1 March.",
+          "correct": false,
+          "rationale": "The freeze reaches further than the dependency does. Screens the training never shows, such as supervisor reports, lose eight weeks of refinement for no gain to the training workstream."
+        }
+      ],
+      "explanation": "Where adaptive and predictive work meet, the plan needs a freeze point set by the lead time of the downstream predictive work and scoped to exactly what that work consumes. Freezing too little pushes the cost of change onto the people downstream; freezing too much throws away the adaptability the agile approach was chosen for. Allowing assessed exceptions keeps the freeze from becoming absolute where a change is worth its cost.",
+      "mindset": "Freeze only what the downstream work consumes, and only when its lead time demands it."
+    },
+    {
+      "id": "pmp-pr1-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "cadence",
+        "integration-events",
+        "sprint-planning"
+      ],
+      "stem": "Your hybrid programme for a tractor manufacturer integrates new telemetry software into prototype vehicles at a test track. Track slots are fixed every six weeks for the year. The software team runs two-week sprints that started on a different week, so each slot falls mid-sprint and receives either half-finished work or a build from three weeks earlier. You and the team control sprint timing. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the test track's owner to move each of the remaining slots for the year so that it falls on the last day of a two-week software sprint.",
+          "correct": false,
+          "rationale": "It asks an external party to change a fixed calendar to fix a misalignment you can fix yourself. Even if the track agreed, it spends goodwill on a problem that is within your own authority."
+        },
+        {
+          "id": "b",
+          "text": "Switch the software team to six-week sprints, so that each sprint ends at a track slot and delivers one complete build for integration.",
+          "correct": false,
+          "rationale": "This aligns the dates by tripling the feedback loop. The team loses two-thirds of its reviews and planning points to solve a timing problem that a single shift of the calendar removes."
+        },
+        {
+          "id": "c",
+          "text": "Have the team cut a release branch two days before each slot, wherever it falls in the sprint, and send that branch to the track.",
+          "correct": false,
+          "rationale": "It accepts the misalignment and works around it every six weeks. Branches cut mid-sprint carry partly finished stories, so the track still tests work the team has not completed."
+        },
+        {
+          "id": "d",
+          "text": "Shift the sprint calendar once so that every third sprint ends just before a track slot, and plan those sprints to finish an integrable build.",
+          "correct": true,
+          "rationale": "A one-off shift aligns the cadences permanently, using a lever the team already controls. Each slot then receives finished work from a sprint that was planned with the integration in view."
+        }
+      ],
+      "explanation": "In a hybrid plan, fixed integration events in the predictive part should shape the adaptive part's cadence, so that sprint ends coincide with the points where work is handed over. When the misalignment is within the team's control, the fix is to realign the cadence rather than to ask fixed external dates to move or to work around the gap at every event. Cadence is a planning decision, and it can be designed around the integration points.",
+      "mindset": "Line up the rhythms you control with the dates you cannot move."
+    },
+    {
+      "id": "pmp-pr1-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "release-burnup",
+        "scope-growth",
+        "forecasting"
+      ],
+      "stem": "Your team is building a member portal for a pension provider. For six sprints the release burn-up has shown the team completing about 30 points per sprint, while the total release scope has risen by about 28 points per sprint, so the forecast date keeps sliding. The sponsor asks whether to fund a second team. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the product owner to freeze the release scope at its current total, so that the forecast can finally converge on a reliable date.",
+          "correct": false,
+          "rationale": "A freeze stops new requests but not the growth that comes from discovering existing items are bigger. Without knowing the mix, it may leave most of the drift in place while blocking valuable change."
+        },
+        {
+          "id": "b",
+          "text": "Break down the scope growth to see how much comes from splitting and re-estimating existing items and how much from newly requested work.",
+          "correct": true,
+          "rationale": "The two sources mean different things. Growth from refinement says the original sizing was low; growth from new requests is a prioritisation question. The right response depends on which it is."
+        },
+        {
+          "id": "c",
+          "text": "Recommend funding the second team, since roughly doubling throughput would outpace the scope growth and bring the release date back within reach.",
+          "correct": false,
+          "rationale": "It answers the sponsor's question before the cause is known. If the growth is new scope, a second team may simply attract more of it; if it is re-estimation, the backlog may be larger than two teams can absorb either."
+        },
+        {
+          "id": "d",
+          "text": "Re-forecast using the net progress of about two points per sprint, and give the sponsor the resulting date along with its likely range.",
+          "correct": false,
+          "rationale": "It reports the situation honestly but extrapolates a trend nobody understands yet. A date built on unexplained growth tells the sponsor that something is wrong without saying what to do about it."
+        }
+      ],
+      "explanation": "A release forecast that never converges is a signal about the scope, not just about speed. Before choosing between adding capacity, cutting scope or re-forecasting, separate the growth into its sources: emergent detail in work already planned, which points to estimation, and new requests, which point to prioritisation. Each calls for a different decision, and acting before the split is known risks applying the wrong one.",
+      "mindset": "When the finish line keeps moving, find out who is moving it before deciding how to run faster."
+    },
+    {
+      "id": "pmp-pr1-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "configuration-management",
+        "test-environments",
+        "integrated-plan"
+      ],
+      "stem": "On a hybrid programme for smart electricity meters, the agile firmware team releases a build every two weeks, and a predictive test team runs certification tests on four hardware rigs. Last month two weeks of tests were run against an outdated build, because nobody recorded which build was loaded on which rig. The integrated plan has no configuration management approach. As project manager, what should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add a configuration management procedure to the plan that identifies each build, records what is on each rig, and controls when rigs are updated.",
+          "correct": true,
+          "rationale": "The failure came from a gap in the plan, not from one person's slip. Defining how builds are identified, recorded and released to rigs is a planning decision within the project manager's authority, and it prevents the next occurrence."
+        },
+        {
+          "id": "b",
+          "text": "Ask the firmware team to stop releasing new builds during certification windows, so that the four rigs keep one stable build for the whole test period.",
+          "correct": false,
+          "rationale": "Freezing releases avoids the confusion by slowing the firmware team, and it still leaves no record of what is on each rig. Builds will need to change during certification eventually, and the gap will reappear."
+        },
+        {
+          "id": "c",
+          "text": "Repeat the two weeks of tests against the current build, and ask the test lead to check build numbers by hand before each test run.",
+          "correct": false,
+          "rationale": "Repeating the tests deals with this instance, and the manual check depends on one person's diligence. Neither gives the programme a controlled record of configuration across four rigs and a fortnightly release rate."
+        },
+        {
+          "id": "d",
+          "text": "Raise the incident with the quality assurance function, and ask it to investigate how the outdated build came to be tested on the rigs.",
+          "correct": false,
+          "rationale": "An investigation will find what is already known: there was no procedure. Passing the problem to another function delays a fix that sits squarely within the project manager's own planning authority."
+        }
+      ],
+      "explanation": "Wherever frequently changing outputs from one workstream are consumed by another, the integrated plan needs configuration management: each version identified, its location recorded, and changes to controlled environments released deliberately. This matters most in hybrid work, where an adaptive team's release rate meets a predictive team's need for a known, stable configuration. Fixing individual incidents without the procedure leaves the cause in place.",
+      "mindset": "If two workstreams share a moving artefact, plan how everyone will know which version they are holding."
+    },
+    {
+      "id": "pmp-pr1-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-make-visible",
+        "schedule-risk",
+        "merge-bias",
+        "milestones"
+      ],
+      "stem": "You are about to baseline the plan for a new water treatment works. Commissioning can start only when four parallel workstreams are all complete: civils, process mechanical, electrical and the control system. Each is planned to finish in the week before commissioning with little float, and each lead says they are about 80% confident of their own date. The schedule shows first water into supply on 14 June, and the utility's board wants to announce that date. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add a schedule reserve before commissioning, sized at 20% of the longest path's remaining duration, and announce the later date that includes that reserve to the public.",
+          "correct": false,
+          "rationale": "A reserve is the right kind of response, but sizing it as a flat share of one path ignores that the exposure comes from four paths converging. The candidate reaches for protection before measuring the problem, so the board still cannot see what confidence the date carries."
+        },
+        {
+          "id": "b",
+          "text": "Show the board that four paths at about 80% each give roughly a 40% joint chance of 14 June, and offer dates at the confidence levels it can choose from.",
+          "correct": true,
+          "rationale": "Each lead's confidence describes one path, but commissioning needs all four. If the paths are broadly independent, the joint chance is about 0.8 to the fourth power, or 41%, and the board can only choose a date responsibly once that is visible."
+        },
+        {
+          "id": "c",
+          "text": "Ask each workstream lead to replan to a date they are 95% confident of, and set commissioning to follow the latest of the four revised finish dates in the schedule.",
+          "correct": false,
+          "rationale": "This pushes the protection down into each workstream, where it tends to be consumed, and four paths at 95% still give only about 81% at the merge. The candidate treats confidence as a property of each part rather than of the milestone the board cares about."
+        },
+        {
+          "id": "d",
+          "text": "Resequence the electrical and control system work to finish a month earlier, so that fewer paths can delay commissioning, and then let the board announce 14 June.",
+          "correct": false,
+          "rationale": "Reducing the number of converging paths is a legitimate mitigation, but committing cost and effort to it before quantifying the exposure may solve the wrong problem. The candidate also lets the date be announced without anyone knowing how likely it is."
+        }
+      ],
+      "explanation": "Where several parallel paths must all finish before a milestone, the chance of meeting that milestone is lower than the chance of any one path, because any of them can delay it. A deterministic critical path hides this merge effect, so confidence has to be assessed at the points where paths converge rather than inherited from the component plans. Dates go to decision-makers with the confidence each one carries, and choices about reserve or resequencing follow from that picture rather than coming before it.",
+      "mindset": "Confidence in each part is not confidence in the whole, so measure it where the paths meet."
+    },
+    {
+      "id": "pmp-pr1-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-use-own-authority",
+        "funding-limit",
+        "cost-baseline",
+        "float"
+      ],
+      "stem": "You are planning a £4.6 million gallery redevelopment at a regional museum, funded by a heritage grant that releases at most £1.5 million in the first financial year. Your resource-loaded schedule spends £1.82 million in that year. About £450,000 of the first-year spend falls in the final quarter, on display-case fabrication and lighting procurement, and both activities have nine to twelve weeks of total float. The finish date is tied to a planned exhibition opening. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move the case fabrication and lighting procurement later within their float until first-year spend is under £1.5 million, then confirm the finish date still holds.",
+          "correct": true,
+          "rationale": "Reconciling spend with a funding limit is part of setting the cost baseline, and float exists to let non-critical work move. Shifting it reshapes the spend profile without touching the critical path or the opening, which is within the project manager's planning authority."
+        },
+        {
+          "id": "b",
+          "text": "Ask the sponsor to request that the heritage body advance £320,000 of the second-year grant, so that the schedule can be baselined exactly as it now stands.",
+          "correct": false,
+          "rationale": "The candidate escalates to the sponsor and an outside funder a problem the plan can solve on its own. Activities with float can absorb the excess without moving the finish, so the request spends goodwill with the funder for no gain."
+        },
+        {
+          "id": "c",
+          "text": "Baseline the schedule as planned and fund the £320,000 first-year excess from the contingency reserve, then repay the reserve from second-year grant funding.",
+          "correct": false,
+          "rationale": "Contingency is held against identified risks, not to bridge a known funding profile. The candidate confuses a timing problem with a risk, leaving the project without cover for the events the reserve was sized for, while the grant limit is still breached."
+        },
+        {
+          "id": "d",
+          "text": "Extend the whole schedule by one quarter, so that the spend profile flattens below the first-year limit evenly across every workstream in the project.",
+          "correct": false,
+          "rationale": "It meets the limit by moving a finish date that is tied to the exhibition, when non-critical work alone can carry the shift. The candidate moves everything in order to move some things, and gives away schedule the project does not need to lose."
+        }
+      ],
+      "explanation": "A spending limit by period is a constraint the integrated plan has to satisfy, and the first lever is the schedule itself: non-critical activities can be moved within their float to change when money is spent without changing when the project finishes. Only when float cannot absorb the gap does the question become one of extra funding, a later finish or less scope, and those decisions belong to the people who own them. Reserves cover risk; they are not a way of reconciling a known funding profile.",
+      "mindset": "Use the room the plan already holds before asking anyone to change its limits."
+    },
+    {
+      "id": "pmp-pr1-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "product-goal",
+        "product-backlog",
+        "progressive-elaboration"
+      ],
+      "stem": "A regional newspaper has funded a new team to build a subscription app, and the first sprint starts in a week. The editor-in-chief, acting as product owner, has a clear aim of converting print readers to digital subscriptions and a long list of feature ideas. The IT director would like a complete requirements specification and a six-month delivery schedule before the team writes any code. Which two things are needed before the first sprint starts?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A product goal stating the outcome the app is meant to achieve for print readers, agreed between the editor-in-chief and the team.",
+          "correct": true,
+          "rationale": "The goal is what lets the team and the product owner judge every later choice. It is cheap to agree now and is the one thing the team cannot sensibly start without."
+        },
+        {
+          "id": "b",
+          "text": "An ordered backlog whose top items are refined enough for the team to plan its first sprint, with the rest left at a coarser level.",
+          "correct": true,
+          "rationale": "The first sprint needs only enough refined work to plan it. Leaving later items coarse accepts that they will change as the team and readers learn what works."
+        },
+        {
+          "id": "c",
+          "text": "A complete requirements specification signed off by the IT director, so that the team builds against an agreed and stable scope from the start.",
+          "correct": false,
+          "rationale": "The candidate applies predictive entry criteria to adaptive work. Detailing every requirement now spends effort on ideas that early reader feedback is likely to change or remove."
+        },
+        {
+          "id": "d",
+          "text": "A six-month schedule allocating each idea on the list to a specific sprint, so that stakeholders can see when every feature will arrive.",
+          "correct": false,
+          "rationale": "It plans in detail far beyond the horizon the team can see. The candidate mistakes a sprint-by-sprint allocation for a forecast, when the team has no delivery history to base one on."
+        },
+        {
+          "id": "e",
+          "text": "A velocity figure for the new team, estimated in advance from the size of the list, so that a release date can be committed to now.",
+          "correct": false,
+          "rationale": "Velocity is observed, not estimated in advance. The candidate wants a commitment the evidence cannot yet support, and a date fixed now would rest on a guess."
+        }
+      ],
+      "explanation": "Adaptive planning needs just enough to start: a goal that tells everyone what success looks like, and enough ordered, refined work to plan the first iteration. Detail is added progressively as the work and the team's understanding develop, and forecasts come from observed delivery rather than predicted rates. Demanding full specification before starting moves the cost of change to the moment when the least has been learned.",
+      "mindset": "Plan enough to start well, and let the detail arrive with the learning."
+    },
+    {
+      "id": "pmp-pr1-134",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "story-mapping",
+        "release-planning",
+        "minimum-viable-product"
+      ],
+      "stem": "A social care provider's product team has a flat backlog of 180 user stories for an app that schedules home-care visits. After three sprints, managers and carers say they cannot tell what the first release will let them do, and the product owner is struggling to decide which stories make a usable first version. Which two actions should you suggest?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Run a story-mapping workshop with carers and managers that lays the stories out along the steps of a carer's working day.",
+          "correct": true,
+          "rationale": "Arranging stories along the user's journey shows how they combine into something a carer can actually do, and exposes the steps that have no stories at all."
+        },
+        {
+          "id": "b",
+          "text": "Agree a goal for the first release, then slice the map to the thinnest set of stories that lets a carer complete a full day's visits.",
+          "correct": true,
+          "rationale": "A release goal gives the product owner a test for what belongs in the first version, and an end-to-end slice delivers something usable rather than a finished part."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to estimate all 180 stories in a single session, so that the product owner can see the total size of the work before choosing.",
+          "correct": false,
+          "rationale": "The candidate treats a structure problem as a sizing problem. Knowing the total size of a flat list still does not show which stories make a usable release."
+        },
+        {
+          "id": "d",
+          "text": "Group the backlog by technical component, such as scheduling engine, mobile screens and reporting, so that each part can be released in turn.",
+          "correct": false,
+          "rationale": "Component releases are easy for the team to plan but give carers nothing they can use until every part is done. The candidate organises around the system rather than the user."
+        },
+        {
+          "id": "e",
+          "text": "Ask managers and carers to rank all 180 stories in an online survey, and order the backlog by the combined scores so their priorities show directly.",
+          "correct": false,
+          "rationale": "Ranking stories in isolation produces a popular list, not a coherent release. The candidate also hands the ordering decision to a survey rather than to the accountable product owner."
+        }
+      ],
+      "explanation": "A flat list hides how stories combine into something a user can do, so release planning stalls even when every item is well written. Arranging the work along the user's journey makes the gaps and the smallest end-to-end slice visible, and a release goal gives a test for what belongs in that slice. Sizing or ranking items one by one adds information without adding the structure that the release decision needs.",
+      "mindset": "Plan releases around what a user can do from start to finish, not around a list of parts."
+    },
+    {
+      "id": "pmp-pr1-135",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "dependencies",
+        "schedule-logic",
+        "fast-tracking"
+      ],
+      "stem": "You are planning an insurer's move of 600 staff into a refurbished six-floor office. The draft schedule finishes three weeks after the old lease ends, and the sponsor has asked you to look for logic the project can change before considering any extra cost. Which two dependencies are the strongest candidates to challenge?",
+      "options": [
+        {
+          "id": "a",
+          "text": "IT cabling on each floor waits until carpets are laid on all six floors, because that is how the fit-out contractor usually sequences its work.",
+          "correct": true,
+          "rationale": "This is preferred practice, not a necessity. Cabling can follow carpets floor by floor, and that overlap is the project's own decision to make."
+        },
+        {
+          "id": "b",
+          "text": "Furniture assembly starts only after the whole building has been repainted, following the facilities team's practice on its previous office move.",
+          "correct": true,
+          "rationale": "Habit from the last move sets this link, not any physical or legal need. Assembly can begin on floors that are already painted while painting continues elsewhere."
+        },
+        {
+          "id": "c",
+          "text": "Power cannot be switched on to the new electrical installation until the certified inspection has been completed and its certificate issued.",
+          "correct": false,
+          "rationale": "The candidate looks for time in a mandatory dependency. Energising an uncertified installation breaches safety regulations, so this link is not the project's to change."
+        },
+        {
+          "id": "d",
+          "text": "Floor finishes cannot be laid until the new screed has dried to the moisture level stated in the flooring manufacturer's warranty terms.",
+          "correct": false,
+          "rationale": "This is a physical and contractual dependency. Laying finishes early risks failure and voids the warranty, so the candidate would be trading three weeks for a defect."
+        },
+        {
+          "id": "e",
+          "text": "Removal vans can use the loading bay only on the weekend dates allocated by the landlord's building management, as set out in the lease.",
+          "correct": false,
+          "rationale": "This is an external dependency controlled by the landlord. It may be negotiable, but only with someone else's agreement, so it is not logic the project can change itself."
+        }
+      ],
+      "explanation": "Schedule logic comes in kinds: mandatory dependencies arise from law, physics or contract terms; external ones are set by parties outside the project; discretionary ones reflect preferred practice. When a schedule must be shortened without extra cost, discretionary logic is the first place to look, because the project can change it by its own decision, often by letting work overlap area by area. Challenging mandatory or external links either fails or depends on someone else agreeing.",
+      "mindset": "Find out which links in the logic are choices before treating the schedule as fixed."
+    },
+    {
+      "id": "pmp-pr1-136",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "decision-rights",
+        "roles",
+        "release-planning"
+      ],
+      "stem": "A veterinary practice group's product team is building an appointment booking app in two-week sprints. Match each planning decision to the person or group who should make it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "Online repeat prescriptions and video consultations cannot both fit in the next release, and someone must decide which comes first."
+        },
+        {
+          "id": "p2",
+          "text": "With two people on leave, someone must decide how many of the refined backlog items can realistically be finished in the coming sprint."
+        },
+        {
+          "id": "p3",
+          "text": "After the quarterly review, someone must decide whether the group keeps funding the app for another year or moves the money elsewhere."
+        }
+      ],
+      "options": [
+        {
+          "id": "po",
+          "text": "The product owner",
+          "correct": true,
+          "match": "p1",
+          "rationale": "Choosing between two valuable features is a judgement about value and order, which is what the product owner is accountable for."
+        },
+        {
+          "id": "dev",
+          "text": "The developers on the team",
+          "correct": true,
+          "match": "p2",
+          "rationale": "How much fits in a sprint depends on capacity and on how the work will be done, which only the people doing it can judge. A forecast imposed from outside is a wish."
+        },
+        {
+          "id": "spon",
+          "text": "The executive sponsor who holds the budget",
+          "correct": true,
+          "match": "p3",
+          "rationale": "Continuing or stopping investment is a funding decision. The sponsor owns the money and the business case, so the decision sits with them, informed by what the review showed."
+        },
+        {
+          "id": "lead",
+          "text": "The delivery lead who facilitates the team's planning",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The delivery lead runs the planning events and makes the decisions easier to take, which is why candidates often hand them all three, but facilitating a decision is not owning it."
+        }
+      ],
+      "explanation": "Adaptive planning splits decisions by the knowledge they need: what to build next is a value judgement for the person accountable for the product, how much fits in an iteration is a capacity judgement for the people who will do the work, and whether to keep investing is a funding judgement for whoever owns the budget. Facilitators make these decisions easier; they do not take them. Routing each decision to its owner keeps the plan credible, because each part of it is backed by the person who must stand behind it.",
+      "mindset": "Send each planning decision to the person who holds both the knowledge and the accountability for it."
+    },
+    {
+      "id": "pmp-pr1-137",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "assumption-log",
+        "risk-register",
+        "issue-log"
+      ],
+      "stem": "While integrating the plan for a 120-home housing development, you collect several items from the workstream leads. Match each item to the planning document where it should be recorded first. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "The groundworks schedule is built on the supplier's verbal statement that precast foundation beams will arrive in week 14, which nobody has confirmed in writing."
+        },
+        {
+          "id": "p2",
+          "text": "The council may restrict working hours when it decides on the construction management plan next month, which would lengthen the build."
+        },
+        {
+          "id": "p3",
+          "text": "The temporary access road flooded on Monday, and concrete deliveries cannot reach plots 1 to 30 until it has been repaired."
+        }
+      ],
+      "options": [
+        {
+          "id": "asm",
+          "text": "Assumption log",
+          "correct": true,
+          "match": "p1",
+          "rationale": "The schedule treats the week-14 delivery as true without proof. Recording it as an assumption puts it on the list to be validated, and if validation shows doubt it can then be raised as a risk."
+        },
+        {
+          "id": "risk",
+          "text": "Risk register",
+          "correct": true,
+          "match": "p2",
+          "rationale": "The restriction is an uncertain future event that would affect the schedule if it happened. It needs an owner, an assessment and a planned response before the council decides."
+        },
+        {
+          "id": "iss",
+          "text": "Issue log",
+          "correct": true,
+          "match": "p3",
+          "rationale": "The flood has already happened and is stopping work now. It needs an owner and an action to resolve it, not an assessment of whether it might occur."
+        },
+        {
+          "id": "chg",
+          "text": "Change log",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A change log records requests to alter an approved baseline. Resolving one of these items might later lead to a change request, but recording it there first skips the assessment that decides whether a change is needed."
+        }
+      ],
+      "explanation": "Planning information is sorted by how certain it is and when it bites: something treated as true without proof is an assumption to validate, an uncertain future event that would affect objectives is a risk, and something already happening that needs action is an issue. The category decides the next step, whether that is validation, a planned response or immediate resolution, and a change request follows only if dealing with the item would alter an approved baseline.",
+      "mindset": "Classify by what is known and when, because the category decides the response."
+    },
+    {
+      "id": "pmp-pr1-138",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "forecasting",
+        "hybrid-reporting",
+        "steering-group"
+      ],
+      "stem": "A pet-food manufacturer's hybrid programme builds a new packing hall predictively, while an agile team builds a trade ordering portal for retailers. The steering group asks you three questions. Complete each sentence with the evidence the answer should rest on. Two choices are not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Asked when the packing hall will be ready for production trials, you should answer from"
+        },
+        {
+          "id": "c2",
+          "text": "Asked when retailers will be able to place and track orders online, you should answer from"
+        },
+        {
+          "id": "c3",
+          "text": "Asked what the programme as a whole will cost to complete, you should answer from"
+        }
+      ],
+      "options": [
+        {
+          "id": "cp",
+          "text": "the critical path of the hall's resource-loaded schedule, together with its float",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The hall is planned predictively, so its finish comes from its scheduled logic. The float on the path tells the steering group how much slippage the trials date can absorb."
+        },
+        {
+          "id": "vel",
+          "text": "a range forecast from the portal team's measured velocity against its remaining ordered backlog",
+          "correct": true,
+          "match": "c2",
+          "rationale": "The portal's evidence is its observed delivery rate against what remains. Giving a range shows the steering group how uncertain that forecast honestly is."
+        },
+        {
+          "id": "cost",
+          "text": "the hall's remaining cost baseline plus the portal team's cost per sprint over its forecast range",
+          "correct": true,
+          "match": "c3",
+          "rationale": "Each workstream is costed on the basis it is funded: the hall against its baseline, the portal as a team running for a forecast number of sprints. Adding the two gives a range the steering group can plan against."
+        },
+        {
+          "id": "hours",
+          "text": "a single portal date produced by converting its remaining story points into hours in the master schedule",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Converting points into hours gives a precise-looking date with none of the evidence behind it. It is tempting because it makes the portal look like the hall, but it hides the uncertainty the steering group needs to see."
+        },
+        {
+          "id": "pct",
+          "text": "the workstream leads' own estimates of percentage complete, averaged across the programme",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Self-reported percentages are the least reliable progress measure in either approach, and averaging a building with a software product blends two measures that mean different things."
+        }
+      ],
+      "explanation": "Each kind of work produces its own forecasting evidence: a predictive build is forecast from its scheduled logic and float, an adaptive team from its observed delivery rate against what remains, and cost from the basis on which each part is funded. An integrated plan combines those forecasts without converting one into the other's units, and shows the adaptive ones as ranges because that is what the evidence supports. Forcing one method onto both produces figures that look comparable and are not.",
+      "mindset": "Answer each question from the evidence that kind of work actually produces."
+    },
+    {
+      "id": "pmp-pr1-139",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "release-forecast",
+        "velocity",
+        "range-estimating"
+      ],
+      "stem": "A language-learning app team has 260 points left in its release backlog. Over its last six two-week sprints, velocity ranged from 31 to 40 points. The marketing director wants a forecast to plan the launch campaign. Assuming the scope stays as it is, work out the forecast range in whole sprints.",
+      "blanks": [
+        {
+          "id": "best",
+          "label": "Fewest whole sprints needed, at the highest observed velocity",
+          "numeric": true,
+          "expect": 7,
+          "tol": 0,
+          "unit": "sprints",
+          "rationale": "260 ÷ 40 = 6.5. A part-sprint still needs a whole sprint, so at the best observed velocity the release needs 7 sprints."
+        },
+        {
+          "id": "worst",
+          "label": "Most whole sprints needed, at the lowest observed velocity",
+          "numeric": true,
+          "expect": 9,
+          "tol": 0,
+          "unit": "sprints",
+          "rationale": "260 ÷ 31 = 8.39, which rounds up to 9 sprints. This is the slow end of the range, which a campaign that cannot move should be planned around."
+        },
+        {
+          "id": "window",
+          "label": "Width of the window between those two outcomes, in weeks",
+          "numeric": true,
+          "expect": 4,
+          "tol": 0,
+          "unit": "weeks",
+          "rationale": "The range runs from 7 to 9 sprints, a difference of 2 sprints. At two weeks per sprint that is a 4-week window for the launch."
+        }
+      ],
+      "explanation": "An adaptive release forecast is a range built from the team's own observed velocity, not a single date from its average. Dividing the remaining work by the highest and lowest recent rates, and rounding up to whole iterations, shows stakeholders both the likely window and how wide it is. Planning a dependent event such as a campaign then becomes a choice about how much of that window to accept, made by the person who owns the event.",
+      "mindset": "Give the range the evidence supports, so others can plan with its width in view."
+    },
+    {
+      "id": "pmp-pr1-140",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "crashing",
+        "critical-path",
+        "schedule-compression"
+      ],
+      "stem": "Your £2.1 million extension to a secondary school is scheduled to finish one week after the autumn term starts, and the governors have approved extra spending to recover that week. There is one critical path, and no other path has less than two weeks of float. Each box shows an activity, its total float and the cost of shortening it by one week. Select the activity to shorten first.",
+      "graphic": {
+        "viewBox": "0 0 640 340",
+        "title": "Five schedule activities with total float and one-week compression cost",
+        "caption": "Select an activity. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "found",
+          "n": 1,
+          "label": "Foundations — float 0 weeks — £18,000 to shorten by one week",
+          "x": 20,
+          "y": 40,
+          "w": 180,
+          "h": 100,
+          "correct": false,
+          "rationale": "Foundations are on the critical path, so shortening them would recover the week, but at nearly twice the cost of another critical activity. The candidate stops at the first critical activity rather than comparing them."
+        },
+        {
+          "id": "steel",
+          "n": 2,
+          "label": "Steel frame — float 0 weeks — £9,500 to shorten by one week",
+          "x": 230,
+          "y": 40,
+          "w": 180,
+          "h": 100,
+          "correct": true,
+          "rationale": "It is on the critical path and is the cheapest critical activity to shorten. With every other path holding at least two weeks of float, one week taken out here comes straight off the finish date."
+        },
+        {
+          "id": "roof",
+          "n": 3,
+          "label": "Roof covering — float 0 weeks — £12,000 to shorten by one week",
+          "x": 440,
+          "y": 40,
+          "w": 180,
+          "h": 100,
+          "correct": false,
+          "rationale": "Roofing is critical and would recover the week, but it costs £2,500 more than another critical activity that does the same job. The candidate chooses a valid option without checking for a cheaper one."
+        },
+        {
+          "id": "land",
+          "n": 4,
+          "label": "External landscaping — float 4 weeks — £3,000 to shorten by one week",
+          "x": 120,
+          "y": 200,
+          "w": 180,
+          "h": 100,
+          "correct": false,
+          "rationale": "It is cheap to shorten, but with four weeks of float it is not driving the finish. The candidate picks the lowest price without checking whether the activity is on the critical path, and the term-start date would not move."
+        },
+        {
+          "id": "furn",
+          "n": 5,
+          "label": "Furniture delivery — float 2 weeks — £1,500 to shorten by one week",
+          "x": 340,
+          "y": 200,
+          "w": 180,
+          "h": 100,
+          "correct": false,
+          "rationale": "The cheapest option of all, but its float means shortening it recovers nothing. Spending money on non-critical work is the classic crashing error: it buys time where none is needed."
+        }
+      ],
+      "explanation": "Crashing buys time with money, so the purchase has to be made where it shortens the project and at the lowest price per unit of time. That means looking only at activities on the critical path, comparing their cost to shorten, and starting with the cheapest, while checking that no other path becomes critical as the compression proceeds. Cheap compression off the critical path buys nothing, and expensive compression on it wastes money that a cheaper critical activity would have saved.",
+      "mindset": "Spend schedule money only where it moves the finish, and there at the lowest price."
+    }
+  ]
+}

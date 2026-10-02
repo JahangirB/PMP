@@ -1,0 +1,1930 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 9 — Status and artifacts",
+  "questions": [
+    {
+      "id": "pmp-pr9-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "issue-log",
+        "version-control",
+        "artifacts",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You manage the refit of a passenger ferry at a shipyard. At the weekly coordination meeting the hull, electrical and outfitting leads each bring their own copy of the issue log from their laptops. Issue 14, a corroded bulkhead frame, is shown as closed on one copy, awaiting steel on another and missing from the third. The yard's shared document system is available to all three leads. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reconcile the three copies yourself before each weekly meeting and circulate a merged version that the leads agree to treat as the record.",
+          "correct": false,
+          "rationale": "This treats divergence as a clerical task to be repeated every week. The three copies stay alive and drift apart again between meetings, and the project manager becomes the only person who knows the true status."
+        },
+        {
+          "id": "b",
+          "text": "Ask the shipyard's quality manager to issue a formal procedure requiring every lead to keep their issue log in an approved common format.",
+          "correct": false,
+          "rationale": "This escalates a decision the project manager can take directly, and it fixes the wrong thing. A common format still leaves three separate copies, which is what produced three different answers about issue 14."
+        },
+        {
+          "id": "c",
+          "text": "Open each weekly meeting by walking through every open issue with all three leads and agreeing its current status together in the room.",
+          "correct": false,
+          "rationale": "It produces one agreed answer once a week but leaves the leads working from conflicting records for the other six days. It spends meeting time on reconciliation that a single shared log would make unnecessary."
+        },
+        {
+          "id": "d",
+          "text": "Set up one issue log in the yard's document system, give each issue a named owner, and ask the leads to stop using their own copies.",
+          "correct": true,
+          "rationale": "The problem is that three records exist, so the remedy is one authoritative record in a place everyone can reach, with clear ownership of each entry. Setting that up is squarely within the project manager's authority."
+        }
+      ],
+      "explanation": "A coordination artifact only works if there is one authoritative copy that everyone reads and writes. When copies diverge, reconciling them becomes a recurring cost that never ends; the durable fix is structural — one controlled location, a named owner for each entry, and retirement of the alternatives. Deciding how project artifacts are kept is part of the project manager's role and needs no further permission.",
+      "mindset": "Fix where the record lives before arguing about what the record says."
+    },
+    {
+      "id": "pmp-pr9-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "burn-up",
+        "scope-growth",
+        "information-radiator",
+        "archetype-make-visible"
+      ],
+      "stem": "Your team is building an online course platform for a training provider. Over the last three sprints the product owner has added roughly 60 story points of new requirements to the release, while the team has completed about 35 points per sprint. The release burndown the team publishes now looks almost flat, and the sales director has asked whether the team has stalled. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Meet the sales director this week to explain that the team has been delivering steadily and that the flat line is caused by the newly added requirements.",
+          "correct": false,
+          "rationale": "It corrects one reader once. Everyone else who reads the published chart still draws the same wrong conclusion, because the artifact itself continues to hide the cause of the flat line."
+        },
+        {
+          "id": "b",
+          "text": "Ask the product owner to pause new requirements for this release until the burndown line starts falling again at its earlier rate.",
+          "correct": false,
+          "rationale": "This treats the shape of the chart as the goal. Adding scope is a legitimate product owner decision, and constraining it so that a report looks better puts the reporting ahead of the product."
+        },
+        {
+          "id": "c",
+          "text": "Add a note beneath the burndown each sprint listing the story points that were added, so readers can work out the underlying progress.",
+          "correct": false,
+          "rationale": "The information becomes available but the picture still says the team has stalled. It leaves each reader to do arithmetic the chart could do for them, and most readers will look at the line, not the note."
+        },
+        {
+          "id": "d",
+          "text": "Switch the release report to a burn-up that plots completed work and total scope as two separate lines, so that growth in scope shows on its own.",
+          "correct": true,
+          "rationale": "The burndown merges finished work and added work into one line, which is why steady delivery looks like a stall. Separating the two lets every reader see both movements without needing an explanation."
+        }
+      ],
+      "explanation": "A chart of remaining work combines two different movements — work being finished and work being added — into one line, so it cannot distinguish a slow team from a growing scope. When both are happening, report them separately. The choice of chart decides which question a reader can answer, and a chart that hides the cause invites the wrong conclusion about the team.",
+      "mindset": "Choose the chart that separates the causes a reader would otherwise confuse."
+    },
+    {
+      "id": "pmp-pr9-103",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "milestone-reporting",
+        "supplier",
+        "evidence",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Your programme is upgrading a regional mobile network. The predictive site-build workstream relies on a supplier whose monthly report shows its two interface-design milestones as complete. The agile integration team, working in two-week sprints, says it has received no interface specifications and has been stubbing them for a month. The programme status report goes to the board on Friday. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the supplier for the deliverables and acceptance records behind the two milestones it has reported as complete, before Friday's report is issued.",
+          "correct": true,
+          "rationale": "Two sources contradict each other and only one of them can be checked against evidence quickly. A completed milestone should have a deliverable and an acceptance record; asking for them establishes the facts before anything goes to the board."
+        },
+        {
+          "id": "b",
+          "text": "Report both milestones as at risk in Friday's board report, citing the integration team's statement that no specifications have yet arrived.",
+          "correct": false,
+          "rationale": "It reports one side of an unresolved contradiction as the conclusion. The specifications may exist and have gone to the wrong place, in which case the board is told about a slip that has not happened."
+        },
+        {
+          "id": "c",
+          "text": "Raise a formal issue against the supplier for misreporting progress and ask the commercial lead to review the contract's reporting obligations.",
+          "correct": false,
+          "rationale": "This assumes misreporting before it is established and moves straight to a contractual footing. If the deliverables exist, the project has damaged a supplier relationship over a misrouted document."
+        },
+        {
+          "id": "d",
+          "text": "Arrange for the integration team to join the supplier's next monthly progress meeting so that the two sides can compare which interface documents each of them holds.",
+          "correct": false,
+          "rationale": "Bringing the two parties together is sensible, but the next monthly meeting falls after Friday's report. The contradiction would either go to the board unresolved or be left out of the report altogether."
+        }
+      ],
+      "explanation": "When two sources of status contradict each other, a report is only as reliable as the evidence behind the weaker claim. A milestone marked complete is a claim; its deliverable and acceptance record are the evidence. Establish which version is true before reporting either one upward, because presenting a contradiction as a conclusion — in either direction — puts an untested assumption in front of the people who will act on it.",
+      "mindset": "Treat a reported status as a claim to check against its evidence, not a fact to pass on."
+    },
+    {
+      "id": "pmp-pr9-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "earned-value",
+        "measurement-method",
+        "progress-measurement",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "On a rail signalling upgrade, work packages run for 12 to 16 weeks. Engineers report earned value as their own estimate of percent complete, and the cost performance index has swung between 0.82 and 1.15 over four months with no matching change on site. The sponsor has stopped trusting the figures. What should the project manager change?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Apply the 0/100 rule to every package, so that no value is credited until a package is fully complete and has been formally accepted.",
+          "correct": false,
+          "rationale": "This removes subjectivity but, on packages lasting up to 16 weeks, shows no progress for months and then a sudden jump. It replaces noisy figures with figures that are steady and uninformative."
+        },
+        {
+          "id": "b",
+          "text": "Ask each engineer to submit a short written justification with every percent-complete estimate, reviewed by the package lead before reporting.",
+          "correct": false,
+          "rationale": "Review adds effort without changing the basis of the measurement. A justified estimate is still an estimate, and the sponsor's doubt is about the method, not about whether engineers can explain their numbers."
+        },
+        {
+          "id": "c",
+          "text": "Apply the 50/50 rule to each package, crediting half its value when work starts and the remaining half once the package is finished and its tests are signed off.",
+          "correct": false,
+          "rationale": "Fixed-formula rules suit packages that finish within a reporting period or two. On a 16-week package this credits half the value on day one, overstating progress at the start and leaving nothing to show in between."
+        },
+        {
+          "id": "d",
+          "text": "Define weighted milestones within each long package, each worth a set share of its budget and earned only when an objective completion test is met.",
+          "correct": true,
+          "rationale": "Long packages need interim credit, and that credit has to depend on something observable. Predefined weights tied to objective tests remove the judgement that has been making the index swing."
+        }
+      ],
+      "explanation": "The earned value measurement method should match the length and nature of the work. Fixed formulas such as 0/100 and 50/50 are reliable for packages that finish within one or two reporting periods but misstate progress for months on longer ones, and subjective percent complete is the least reliable method of all. Long work earns value credibly through interim points with predefined weights and objective completion tests.",
+      "mindset": "Earned value is only as honest as the rule that decides when value has been earned."
+    },
+    {
+      "id": "pmp-pr9-105",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "release-forecast",
+        "reporting-format",
+        "stakeholder-needs",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your agile team is replacing a claims system for an insurer. The new sponsor, used to construction projects, asks you to send a Gantt chart every Friday showing each feature's percent complete, so she can tell whether the June release date is safe. The team plans in two-week sprints and the release backlog is still being refined. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Produce the Gantt chart each Friday from the sprint plan, estimating each feature's percent complete from the tasks the team has finished so far in the release.",
+          "correct": false,
+          "rationale": "It gives the sponsor exactly what she asked for, but percent complete against a backlog that is still being refined is invented precision. It would tell her June is safe or unsafe on figures that do not mean what they appear to."
+        },
+        {
+          "id": "b",
+          "text": "Explain that the team works in sprints rather than to a Gantt chart, and invite her to the sprint reviews so she can see working software herself.",
+          "correct": false,
+          "rationale": "Declining the format without meeting the need leaves her question unanswered. Sprint reviews show what has been built but not whether the remaining work will fit before June."
+        },
+        {
+          "id": "c",
+          "text": "Ask which decisions the report needs to support, then offer a release burn-up with a forecast range that shows directly whether June is achievable.",
+          "correct": true,
+          "rationale": "The sponsor's real question is whether June is safe. A forecast from observed throughput against the remaining backlog answers it honestly, whereas a percentage of an unsettled scope cannot."
+        },
+        {
+          "id": "d",
+          "text": "Send her the team's sprint burndown each Friday, with a short covering note summarising which features were completed during the sprint.",
+          "correct": false,
+          "rationale": "A sprint burndown tracks progress against the current sprint's commitment. It says nothing about how much of the release remains or whether it will be done by June, which is the decision she is trying to make."
+        }
+      ],
+      "explanation": "A request for a particular report format is usually a request for an answer to a question. Find the question first, then choose the artifact that answers it honestly for the delivery approach in use. Percent complete assumes a fixed, known scope; where scope is still being refined, a forecast based on observed throughput against the remaining backlog says more about a date than any percentage can.",
+      "mindset": "Answer the question behind a report request, not only the format it arrived in."
+    },
+    {
+      "id": "pmp-pr9-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "status-report",
+        "data-quality",
+        "timeliness",
+        "archetype-trade-off"
+      ],
+      "stem": "Your water treatment upgrade reports to the steering committee monthly. The pack is due tomorrow for Thursday's meeting, where the committee will decide whether to release a £400,000 contingency draw. Finance has warned that this month's cost actuals will not be reconciled for another four days; its unreconciled figures point to a cost variance of about −£60,000. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Issue the pack on time with the cost figures clearly marked as provisional, and state when the reconciled figures will be sent to the committee.",
+          "correct": true,
+          "rationale": "The committee has a decision to take on Thursday and the provisional figures are material to it. Labelling them as provisional lets members weigh them for what they are, instead of deciding with no current cost picture."
+        },
+        {
+          "id": "b",
+          "text": "Ask the committee chair to defer the contingency decision to next month's meeting so that members can take it on fully reconciled cost figures from finance.",
+          "correct": false,
+          "rationale": "It lets the reporting cycle set the pace of governance. If the contingency is needed now, a month's delay costs more than the uncertainty in a figure that finance expects to move only modestly."
+        },
+        {
+          "id": "c",
+          "text": "Issue the pack on time using last month's reconciled cost figures, with a note that this month's actuals are still being reconciled by finance.",
+          "correct": false,
+          "rationale": "Every figure in it is certain, but it withholds a known signal — a likely £60,000 overrun — from a committee deciding about contingency. Accuracy about the past is bought at the cost of relevance to the decision."
+        },
+        {
+          "id": "d",
+          "text": "Hold the pack for four days until finance has reconciled the actuals, and send the committee a short holding note explaining the reason.",
+          "correct": false,
+          "rationale": "The committee meets on Thursday, so a pack issued after reconciliation arrives too late for the meeting it was produced for. Certainty that comes after the decision is of no use to the decision."
+        }
+      ],
+      "explanation": "Status reporting trades timeliness against certainty, and the right balance depends on the decision the report feeds. When a decision is imminent, current figures with their uncertainty labelled are more useful than certain figures that are stale or late. The discipline is to state how firm each number is and when it will be firmer, so the reader can weigh it rather than having that choice made for them.",
+      "mindset": "Give decision-makers the best current figure with its uncertainty stated, not a certain figure too late to use."
+    },
+    {
+      "id": "pmp-pr9-107",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "release-forecast",
+        "transparency",
+        "dependencies",
+        "archetype-act-now"
+      ],
+      "stem": "Your team publishes a release burn-up on the company intranet, forecasting a mid-May launch for a retailer's new checkout. Yesterday the payment provider withdrew the API version the team was building against, adding an estimated two sprints of rework. The next scheduled update of the burn-up is in nine days, but the marketing team books its launch campaign on Monday. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Update the published forecast now to show the likely slip and its cause, and tell the marketing lead directly before Monday's booking.",
+          "correct": true,
+          "rationale": "Marketing is about to commit money against a forecast the team already knows is wrong. A rough but honest revision now is worth far more than a precise one after the campaign has been booked."
+        },
+        {
+          "id": "b",
+          "text": "Wait for the next scheduled update so the team can estimate the rework properly and then publish a single revised forecast with confidence.",
+          "correct": false,
+          "rationale": "A better estimate is a reasonable aim, but waiting lets marketing book a campaign on a date the team believes is gone. The scheduled cycle is the wrong trigger when someone is about to act on the forecast."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to work on the API change alongside the planned stories and see over the next sprint whether the May date can still be held.",
+          "correct": false,
+          "rationale": "This protects the date instead of reporting the change, on the untested hope that two sprints of rework can be absorbed. Meanwhile the published forecast continues to tell marketing that May is safe."
+        },
+        {
+          "id": "d",
+          "text": "Raise the change at the next sprint review, where the product owner and stakeholders can agree together how to respond to the slip.",
+          "correct": false,
+          "rationale": "The sprint review is a good forum for deciding the response, but it falls after Monday. The decision about how to respond can wait for it; correcting a forecast others are about to rely on cannot."
+        }
+      ],
+      "explanation": "A published forecast is something other people plan against, so once it is known to be wrong, the reporting cycle stops being the right trigger for updating it. The trigger is the next decision someone will make on the strength of it. Correcting the information and deciding how to respond to it are separate steps, and only the first is urgent.",
+      "mindset": "Update a forecast when you know it is wrong, not when the calendar says to."
+    },
+    {
+      "id": "pmp-pr9-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "risk-register",
+        "risk-ownership",
+        "artifact-currency",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Reviewing the risk register for a pharmaceutical packaging line, you notice that the risk of late validation of the new labelling equipment, owned by the quality assurance lead, has shown the same response — 'supplier contacted' — for four months. The equipment's validation window opens in three weeks. The QA lead sits in the plant's quality function and reports to the site quality director. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Update the register entry yourself from what you know of the supplier's position, and then tell the QA lead what you have changed.",
+          "correct": false,
+          "rationale": "The entry becomes current but the ownership quietly moves to the project manager. The QA lead's knowledge of the supplier is not captured, and the response itself is still nobody's active job."
+        },
+        {
+          "id": "b",
+          "text": "Escalate to the site quality director that a risk owned by the director's team has gone four months without active management.",
+          "correct": false,
+          "rationale": "It skips the owner and goes straight to their line manager before anyone has asked the lead what is happening. Escalation is for when the conversation with the owner fails, not a substitute for having it."
+        },
+        {
+          "id": "c",
+          "text": "Meet the QA lead to reassess the risk and its response together, and agree the updates the lead will make to the register this week.",
+          "correct": true,
+          "rationale": "The owner holds both the knowledge needed to update the entry and the accountability for the response. A direct conversation revives the entry through the person responsible for it, with three weeks still in hand."
+        },
+        {
+          "id": "d",
+          "text": "Raise the risk's probability and impact scores to reflect the lack of progress, and move it to the top of the next status report.",
+          "correct": false,
+          "rationale": "Rescoring without new information changes how the entry looks rather than what is known about it. It draws attention but leaves the stale response, and the owner's silence, exactly as they were."
+        }
+      ],
+      "explanation": "A register stays current through the people who own its entries; the project manager's job is to make sure owners keep them alive, not to stand in for them. A stale entry is first a conversation with its owner, who holds the information needed to update it and the accountability for acting on it. Escalation follows if that conversation fails, and rescoring without new information only changes appearances.",
+      "mindset": "Keep an artifact current through the people who own its entries."
+    },
+    {
+      "id": "pmp-pr9-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "earned-value",
+        "critical-path",
+        "status-rating",
+        "archetype-diagnose-first"
+      ],
+      "stem": "At 60% complete on an airport baggage-hall expansion, earned value analysis shows a CPI of 1.06 and an SPI of 0.97. The sponsor asks whether she can report the project as green to the airport board next week. Looking at the schedule detail, you see that several conveyor installation activities finished early while the control-system commissioning work has slipped. What should the project manager do before answering?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Calculate the schedule variance and cost variance in currency, so the sponsor can see the size of each gap alongside the two indices.",
+          "correct": false,
+          "rationale": "Variances in currency give a sense of scale, but they are aggregates in the same way as the indices. They show how much value is behind plan overall, not whether the work that drives the opening date is late."
+        },
+        {
+          "id": "b",
+          "text": "Recommend reporting amber, because an SPI below 1.0 shows that the project as a whole is earning value more slowly than planned.",
+          "correct": false,
+          "rationale": "It reacts to the aggregate index rather than to what it hides. An SPI of 0.97 could be harmless if the slip has float, or serious if it sits on the critical path, and this answer does not find out which."
+        },
+        {
+          "id": "c",
+          "text": "Check whether the slipped commissioning work lies on the critical path, and what that slip means for the planned opening date.",
+          "correct": true,
+          "rationale": "SPI blends all the work together, so early conveyor work can offset late commissioning. Whether the status is green depends on what the slip does to the opening date, and only the critical path shows that."
+        },
+        {
+          "id": "d",
+          "text": "Compare the latest indices with those of the previous three months, to see whether schedule performance is improving or deteriorating.",
+          "correct": false,
+          "rationale": "Trend is genuinely useful context, but a trend in an aggregate index inherits the same blind spot. It would show whether overall earning is speeding up, not whether the commissioning slip threatens the opening."
+        }
+      ],
+      "explanation": "Earned value indices aggregate across all work, so activities running ahead off the critical path can offset slippage on it and produce a reassuring overall figure. A schedule performance index measures the rate at which planned value is being earned, not whether key dates will be met. Before an aggregate index is turned into a status rating, check what is happening on the path that determines the end date.",
+      "mindset": "Look beneath an aggregate before letting it stand for the whole project."
+    },
+    {
+      "id": "pmp-pr9-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "velocity",
+        "release-forecast",
+        "team-change",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Two experienced developers have moved from your benefits-portal team to another product. Over the three sprints since, velocity has averaged 29 points, against 41 before. The PMO's release plan still forecasts at 41 points per sprint, and the PMO lead asks you to keep it that way because the team 'will recover once the new joiners settle'. The release has 290 points remaining. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the 41-point forecast for one more sprint, then re-forecast if velocity has not started to recover towards its earlier level by then.",
+          "correct": false,
+          "rationale": "Waiting one more sprint sounds measured, but three sprints of data already point the same way. It keeps a forecast in circulation that the team does not believe, on the strength of a recovery nobody has yet seen."
+        },
+        {
+          "id": "b",
+          "text": "Re-forecast the release from the velocity observed since the change, show the PMO the later date range, and revise it as the new joiners settle.",
+          "correct": true,
+          "rationale": "The last three sprints are the only evidence about the team as it now is. At 29 points the release needs about ten sprints rather than seven, and the forecast can move back as recovery actually shows in the data."
+        },
+        {
+          "id": "c",
+          "text": "Forecast from an average of the velocity before and after the change, so that the plan reflects both the old capacity and the current one.",
+          "correct": false,
+          "rationale": "Blending looks balanced but mixes data from a team that no longer exists. The resulting figure describes neither the old team nor the new one, and the forecast it produces is still optimistic."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to remove about 80 points from the release, so that the original date still holds at the team's current velocity.",
+          "correct": false,
+          "rationale": "Cutting scope may well be the right response, but it is a decision for the product owner and stakeholders once they can see the later date. Doing it first keeps the date looking unchanged and hides the trade-off from them."
+        }
+      ],
+      "explanation": "A forecast should be built on the capacity the team has now, not the capacity it had or hopes to regain. When team composition changes, earlier velocity stops being evidence about the future. Re-forecast from current data, show the range, and update it as new data arrives; how to respond to a later date — through scope, date or resources — is a separate decision for the people who own it.",
+      "mindset": "Forecast from the team you have, and let the data show you when it has changed."
+    },
+    {
+      "id": "pmp-pr9-111",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "performance-baseline",
+        "change-log",
+        "earned-value",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your programme is building an automated warehouse for a food distributor. The racking workstream is predictive and reports earned value; the warehouse software team works in sprints. Six weeks ago the change control board approved adding a mezzanine level for €240,000. The work started, but this month's report shows the racking workstream at a CPI of 0.88, and the sponsor has asked why costs are out of control. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add a section to this month's report explaining that the approved mezzanine change accounts for most of the apparent overrun on racking.",
+          "correct": false,
+          "rationale": "It explains the distortion instead of removing it. Next month the index will be wrong again, and every reader has to adjust it mentally, which is exactly what a performance baseline is meant to spare them."
+        },
+        {
+          "id": "b",
+          "text": "Incorporate the approved mezzanine change into the performance measurement baseline, then rerun this month's earned value figures against it.",
+          "correct": true,
+          "rationale": "The mezzanine work is drawing actual cost while the baseline gives it no planned or earned value, so the index is measuring approved work against a plan that excludes it. Updating the baseline is the step the approval required."
+        },
+        {
+          "id": "c",
+          "text": "Book the mezzanine costs to a separate cost code outside the earned value system, so they stop distorting the workstream's indices.",
+          "correct": false,
+          "rationale": "This makes the index look right by taking approved scope out of performance measurement altogether. The mezzanine is now part of the project and its cost and progress should be measured like the rest."
+        },
+        {
+          "id": "d",
+          "text": "Ask the change control board to confirm the mezzanine's approved budget, so that the overrun can be formally attributed to the change.",
+          "correct": false,
+          "rationale": "The board has already approved the change and its budget. Asking again treats the board as the gap, when the gap is that the approval was never carried through into the baseline the report measures against."
+        }
+      ],
+      "explanation": "An approved change is not finished when it is approved: the baselines it affects have to be updated, or performance reporting will measure new work against an old plan. A baseline left unchanged turns approved scope into apparent overruns or delays. Following any approval through to every affected baseline and artifact is part of controlling change, and it is what keeps status figures meaningful.",
+      "mindset": "Carry every approved change through to the baseline that reports measure against."
+    },
+    {
+      "id": "pmp-pr9-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "rag-status",
+        "reporting-criteria",
+        "communications-plan",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are building a secondary school for a local authority, with four workstream leads each rating their area red, amber or green in your monthly report. The mechanical lead rates amber when any activity is a day late; the structural lead stays green until the finish date is threatened. The client board says it cannot compare the ratings. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask each lead to add two or three lines of commentary under every rating explaining what led them to choose that particular colour.",
+          "correct": false,
+          "rationale": "Commentary helps a reader decode each rating but leaves four different scales in place. The board still cannot compare a mechanical amber with a structural green at a glance, which is what the colours are for."
+        },
+        {
+          "id": "b",
+          "text": "Define common thresholds for each rating, covering schedule, cost and risk, and have all four leads apply them from the next report.",
+          "correct": true,
+          "rationale": "The ratings disagree because each lead uses private criteria. Setting shared thresholds in the reporting arrangements is the project manager's call and makes every colour mean the same thing to the board."
+        },
+        {
+          "id": "c",
+          "text": "Review the four ratings yourself before each report is issued and adjust any that look inconsistent with the others on the same page.",
+          "correct": false,
+          "rationale": "This moves the inconsistency into your own judgement each month. Without written criteria the leads cannot predict the rating you will apply, and the board has no stable basis for interpreting it either."
+        },
+        {
+          "id": "d",
+          "text": "Replace the colour ratings with the schedule and cost variances for each workstream, so the board can read the actual figures instead.",
+          "correct": false,
+          "rationale": "Figures are useful, but removing the ratings takes away the quick signal the board relies on and leaves members to set their own thresholds while reading. The fix is to define what the colours mean, not to drop them."
+        }
+      ],
+      "explanation": "A status rating is a summary judgement, and it only communicates if everyone applies the same rule to reach it. Without defined thresholds, colours reflect each author's temperament rather than the state of the work. Agreeing the criteria in advance, and recording them where everyone can see them, is what lets a reader compare one rating with another.",
+      "mindset": "A status colour means nothing until everyone uses the same rule to choose it."
+    },
+    {
+      "id": "pmp-pr9-113",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "cumulative-flow",
+        "bottleneck",
+        "wip-limits",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Your team builds a mortgage application app for a building society. Over five weeks the cumulative flow diagram shows the 'awaiting code review' band widening steadily while the 'done' line has flattened. The 'in development' band has stayed the same width, and developers say they are flat out starting new stories. Which two actions should the project manager take first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bring the diagram to the team and ask together why reviewed work is queueing and what is stopping reviews being picked up.",
+          "correct": true,
+          "rationale": "The chart shows where work is accumulating but not why. The team knows whether reviewers are scarce, reviews are too large or review simply ranks below new work, and the response depends on which it is."
+        },
+        {
+          "id": "b",
+          "text": "Propose a work-in-progress limit on the review stage so that developers finish reviews before pulling new stories into development.",
+          "correct": true,
+          "rationale": "A widening queue while people keep starting new work is the classic sign of missing limits. Capping the queue makes finishing the priority and lets the team swarm on the bottleneck."
+        },
+        {
+          "id": "c",
+          "text": "Ask the head of development to assign an additional senior developer to the team whose main job is to carry out code reviews.",
+          "correct": false,
+          "rationale": "It assumes the cause is reviewer capacity before anyone has asked. If reviews are queueing because starting new work is valued more than finishing it, an extra reviewer is absorbed and the queue returns."
+        },
+        {
+          "id": "d",
+          "text": "Agree with the tech lead that low-risk changes can skip code review until the queue has been cleared back to a normal level.",
+          "correct": false,
+          "rationale": "This clears the chart by removing a quality control, and the stories released without review carry defects into later sprints. It treats the queue as the problem rather than the symptom of how work is pulled."
+        },
+        {
+          "id": "e",
+          "text": "Report the flattening of the 'done' line to stakeholders as a drop in throughput and re-forecast the release from current figures.",
+          "correct": false,
+          "rationale": "Re-forecasting is reasonable eventually, but doing it first reports the symptom upward before the team has looked at a bottleneck it may clear within a sprint or two. Diagnosis comes before the forecast changes."
+        }
+      ],
+      "explanation": "A cumulative flow diagram shows where work accumulates between stages; a widening band with a flattening completion line points to a bottleneck at that stage. The chart locates the problem but does not explain it, so the first step is to examine the cause with the people doing the work. Limiting work in progress is the standard response when people keep starting new items while finished work waits.",
+      "mindset": "Use a flow chart to find where work is stuck, then ask the team why before changing anything."
+    },
+    {
+      "id": "pmp-pr9-114",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "work-performance-information",
+        "forecasting",
+        "status-report",
+        "archetype-make-visible"
+      ],
+      "stem": "On a bridge refurbishment for a regional road authority, your monthly report to the sponsor runs to 38 pages of site diaries, hours by trade, tonnes of steel replaced and inspection certificates. The sponsor says she reads it but cannot tell whether the bridge will reopen in October as planned or finish within its €6.2 million budget. Which two changes should the project manager make to the report?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Compare progress and spending against the schedule and cost baselines, and report the resulting variances instead of the raw site quantities.",
+          "correct": true,
+          "rationale": "Quantities and hours are data; they become information only when set against what was planned. Variances against the baselines tell the sponsor how far off plan the project is, which the current pack cannot."
+        },
+        {
+          "id": "b",
+          "text": "Add a forecast of the completion date and final cost each month, stating the main assumptions on which each forecast is based.",
+          "correct": true,
+          "rationale": "The sponsor's questions are about October and the budget, which are forward-looking. A forecast with its assumptions stated answers them directly and lets her judge how much weight to put on it."
+        },
+        {
+          "id": "c",
+          "text": "Reduce the report to a one-page dashboard showing red, amber or green ratings for schedule, cost, quality and safety.",
+          "correct": false,
+          "rationale": "Shorter is welcome, but a colour without a variance or forecast behind it still does not say whether October and the budget will hold. It swaps too much unanalysed data for too little analysed information."
+        },
+        {
+          "id": "d",
+          "text": "Move the site diaries and certificates to an appendix and open the report with a narrative summary from the site manager.",
+          "correct": false,
+          "rationale": "Reorganising the pack makes it easier to read but does not change what it contains. A narrative of site activity, however well written, still does not compare progress with the plan or project the outcome."
+        },
+        {
+          "id": "e",
+          "text": "Hold a monthly walk-through of the report with the sponsor to explain what the figures mean for the reopening date.",
+          "correct": false,
+          "rationale": "It answers the sponsor's question in conversation but leaves the report unable to answer it for anyone else who reads it. The analysis the walk-through supplies belongs in the artifact itself."
+        }
+      ],
+      "explanation": "Raw performance data — hours, quantities, certificates — becomes useful information only when compared with the baseline and projected forward. A status report should answer the reader's questions about whether the project will meet its targets, which means reporting variances and forecasts with their assumptions. Volume is not transparency; analysis is.",
+      "mindset": "Report what the data means against the plan, not merely what the data is."
+    },
+    {
+      "id": "pmp-pr9-115",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "decision-log",
+        "rationale",
+        "artifacts",
+        "archetype-make-visible"
+      ],
+      "stem": "Seven months into replacing a university's student-records system, a newly appointed enterprise architect challenges the month-two decision to keep the legacy fees module. Nobody can find who approved it or why. The debate has cost the agile teams two sprints and delayed the predictive data-migration workstream, and similar arguments have reopened two other early design decisions. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Start a decision log that records each significant decision with its rationale, the options considered, the decision-maker and the date.",
+          "correct": true,
+          "rationale": "The recurring cost comes from decisions that leave no trace. A log of what was decided, by whom and why gives any future challenge something to test against instead of starting from nothing."
+        },
+        {
+          "id": "b",
+          "text": "Work with the people involved to reconstruct and record the rationale for the fees-module decision and the other early decisions now being questioned.",
+          "correct": true,
+          "rationale": "A new log only helps from today. The decisions currently being reopened need their reasoning recovered now, while the people who made them are still available to supply it."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to confirm that decisions taken earlier in the project are not to be reopened without a formal change request.",
+          "correct": false,
+          "rationale": "It may stop the debates but it protects decisions whose reasons nobody can state. A new architect may be right, and shutting down challenge without a record of rationale trades one risk for another."
+        },
+        {
+          "id": "d",
+          "text": "Ask the architect to submit the fees-module challenge as a change request, so that the change control board can decide it on its merits.",
+          "correct": false,
+          "rationale": "Routing the challenge is reasonable, but it deals with one instance and leaves the board deciding without knowing why the original choice was made. The missing record, which is driving all three disputes, remains."
+        },
+        {
+          "id": "e",
+          "text": "Reconstruct a complete record of every decision made since the project began, from the meeting minutes, emails and sprint notes.",
+          "correct": false,
+          "rationale": "Recovering history is the right instinct, but doing it for every decision spends weeks on choices nobody is questioning. Effort belongs on the decisions that are still shaping the design and being disputed."
+        }
+      ],
+      "explanation": "Decisions whose rationale is not recorded get relitigated whenever people change, and the cost falls on delivery. A decision log captures not just what was chosen but why, by whom and against which alternatives, so that a later challenge can be tested against the original reasoning. When the record is missing, recover it selectively for the decisions that are live, rather than either suppressing the challenge or rebuilding everything.",
+      "mindset": "Record why a decision was made, because the decision alone will not survive a change of people."
+    },
+    {
+      "id": "pmp-pr9-116",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "project-logs",
+        "artifacts",
+        "information-retrieval",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "During a museum gallery refurbishment, three people bring you questions in one morning. Match each question to the project artifact that should hold its answer. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The lighting contractor asks whether the curator's request to move the display cases, discussed at last month's board, was approved."
+        },
+        {
+          "id": "s2",
+          "text": "The exhibition planner asks what the schedule took for granted about loan objects arriving from a partner museum by March."
+        },
+        {
+          "id": "s3",
+          "text": "The sponsor asks which unresolved problems are blocking work right now and who is dealing with each one."
+        }
+      ],
+      "options": [
+        {
+          "id": "chg",
+          "text": "Change log",
+          "correct": true,
+          "match": "s1",
+          "rationale": "A requested change and the decision on it are recorded in the change log, along with its status. Whether the request was approved, deferred or rejected is exactly what that log tracks."
+        },
+        {
+          "id": "asm",
+          "text": "Assumption log",
+          "correct": true,
+          "match": "s2",
+          "rationale": "What the plan treated as true without proof — such as loans arriving by March — is recorded in the assumption log, so it can be checked and revisited if it turns out not to hold."
+        },
+        {
+          "id": "iss",
+          "text": "Issue log",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Current problems affecting the work, with an owner and status for each, belong in the issue log. Its purpose is to show what is blocking progress now and who is resolving it."
+        },
+        {
+          "id": "ll",
+          "text": "Lessons learned register",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The lessons learned register records what the project has learned for future work. None of the three questions is about improving practice; each asks for the current state of a specific item."
+        }
+      ],
+      "explanation": "Each project log answers a different kind of question: the change log tracks requested changes and their decisions, the assumption log records what the plan has taken as true, the issue log tracks current problems and their owners, and the risk register covers uncertain future events. Knowing which artifact holds which answer is what lets a project manager respond from the record rather than from memory.",
+      "mindset": "Answer from the artifact built for the question, not from memory."
+    },
+    {
+      "id": "pmp-pr9-117",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "information-radiators",
+        "agile-metrics",
+        "charts",
+        "archetype-make-visible"
+      ],
+      "stem": "Your team develops route-planning software for a parcel carrier. Three people ask you questions this week. Match each question to the chart that answers it most directly. One choice is not used.",
+      "prompts": [
+        {
+          "id": "q1",
+          "text": "The product owner wants to know whether the features committed for the November peak season will all be ready in time."
+        },
+        {
+          "id": "q2",
+          "text": "The team lead suspects tickets are piling up between development and testing, and wants to see where work is accumulating."
+        },
+        {
+          "id": "q3",
+          "text": "The operations manager wants to know how long a typical bug fix takes from the moment the team starts it until it is live."
+        }
+      ],
+      "options": [
+        {
+          "id": "burnup",
+          "text": "Release burn-up showing completed work against total scope",
+          "correct": true,
+          "match": "q1",
+          "rationale": "Readiness for a date depends on both completed work and remaining scope. A burn-up projects completion against the scope line, so the product owner can see whether the line is likely to be reached by November."
+        },
+        {
+          "id": "cfd",
+          "text": "Cumulative flow diagram",
+          "correct": true,
+          "match": "q2",
+          "rationale": "A cumulative flow diagram shows the amount of work in each stage over time. A band that widens between development and testing is exactly where accumulation becomes visible."
+        },
+        {
+          "id": "cycle",
+          "text": "Cycle-time scatterplot",
+          "correct": true,
+          "match": "q3",
+          "rationale": "A cycle-time scatterplot plots how long each finished item took from start to done, so it shows both the typical duration and the spread the operations manager can expect."
+        },
+        {
+          "id": "vel",
+          "text": "Velocity chart",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Velocity shows how much the team completes per sprint. It feeds a release forecast but cannot answer the product owner's question on its own, because it carries no information about remaining scope."
+        }
+      ],
+      "explanation": "Each agile chart is designed to answer one kind of question: a burn-up addresses whether a scope will be finished by a date, a cumulative flow diagram shows where work is accumulating, and a cycle-time chart shows how long items take. Choosing the chart begins with naming the question, because a chart that answers a neighbouring question invites a confident wrong answer.",
+      "mindset": "Name the question first, then pick the chart built to answer it."
+    },
+    {
+      "id": "pmp-pr9-118",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "artifact-updates",
+        "product-backlog",
+        "schedule-baseline",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your hybrid programme delivers in-car charging software through agile teams and the charging hardware through a predictive workstream. Complete each sentence with the update that keeps the programme's artifacts current. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "At a sprint review, the product owner decides that a planned route-sharing feature, which the programme lets the product owner manage, is no longer wanted for the first release. The update that follows is that"
+        },
+        {
+          "id": "c2",
+          "text": "The change control board approves a three-week extension to the hardware workstream after a component redesign. The update that follows is that"
+        }
+      ],
+      "options": [
+        {
+          "id": "po",
+          "text": "the product owner removes it from the product backlog and the release burn-up is redrawn against the reduced scope",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Release content is within the product owner's authority here, so the decision is made and recorded in the backlog the product owner owns. The burn-up must then be redrawn, or its scope line overstates the remaining work."
+        },
+        {
+          "id": "pm",
+          "text": "the project manager updates the schedule baseline and records the approved extension in the change log",
+          "correct": true,
+          "match": "c2",
+          "rationale": "The board's approval changes the baseline the hardware workstream is measured against. Carrying it into the baseline and the change log is the project manager's job, and it keeps status reporting against the right plan."
+        },
+        {
+          "id": "ccb",
+          "text": "a change request is raised so that the change control board can approve the revised scope before any artifact is altered",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The feature removal is a decision the product owner is entitled to make, and the hardware extension has already been approved. Sending either back to the board adds a step that neither needs."
+        }
+      ],
+      "explanation": "In a hybrid environment each artifact has an owner and an update trigger. Backlog content changes when the product owner decides, within the authority the programme has given them; baselines change when change control approves. Keeping artifacts current means knowing which decision updates which artifact and who makes the update, so that nothing waits for an approval it does not need.",
+      "mindset": "Know which decision changes which artifact, and who is entitled to make it."
+    },
+    {
+      "id": "pmp-pr9-119",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "littles-law",
+        "cycle-time",
+        "kanban",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A council's digital services team runs a Kanban board. Over eight stable weeks it has averaged 30 items in progress at any one time and finished an average of 6 items per week. Service managers want to know how long a typical new request takes, and whether limiting the board would help.",
+      "blanks": [
+        {
+          "id": "ct",
+          "label": "Average cycle time now, in weeks",
+          "numeric": true,
+          "expect": 5,
+          "tol": 0,
+          "unit": "weeks",
+          "rationale": "By Little's law, average cycle time is work in progress divided by throughput: 30 ÷ 6 = 5 weeks. A typical request waits behind 29 others for most of that time."
+        },
+        {
+          "id": "ct18",
+          "label": "Average cycle time if work in progress is limited to 18 items and throughput stays at 6 a week, in weeks",
+          "numeric": true,
+          "expect": 3,
+          "tol": 0,
+          "unit": "weeks",
+          "rationale": "With the same throughput and a limit of 18, cycle time becomes 18 ÷ 6 = 3 weeks. The team works no faster; each request simply joins a shorter queue."
+        },
+        {
+          "id": "lever",
+          "label": "The quantity the team can reduce to shorten cycle time without working any faster",
+          "accept": [
+            "work in progress",
+            "wip",
+            "work-in-progress",
+            "items in progress",
+            "work in process"
+          ],
+          "rationale": "Cycle time equals work in progress divided by throughput. With throughput held constant, the only way to shorten cycle time is to have less work in progress at once."
+        }
+      ],
+      "explanation": "Little's law links three flow measures: average cycle time equals average work in progress divided by average throughput, provided the system is reasonably stable. It turns a board's counts into a status answer stakeholders understand — how long things take — and it shows that long waits are often caused by too much work started rather than too little capacity.",
+      "mindset": "Before asking a team to go faster, check how much work it has started."
+    },
+    {
+      "id": "pmp-pr9-120",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "milestone-trend",
+        "forecasting",
+        "schedule-control",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "The milestone trend chart for an offshore wind substation shows how the forecast dates of four milestones have moved over six monthly reports. The workstream lead says the only real problem was the seabed survey and it has been stable since. Select the milestone whose current forecast you should trust least.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Milestone trend chart: forecast dates of four milestones across six monthly reports",
+        "caption": "Select a milestone. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "m1",
+          "n": 1,
+          "label": "M1 Jacket fabrication complete: forecast unchanged in all six reports",
+          "x": 40,
+          "y": 30,
+          "w": 560,
+          "h": 60,
+          "correct": false,
+          "rationale": "A forecast that has held through six reports is the most stable on the chart. It gives no sign that its estimate is optimistic, so there is no reason to single it out."
+        },
+        {
+          "id": "m2",
+          "n": 2,
+          "label": "M2 Seabed survey complete: slipped 10 weeks in report 2 after a survey vessel was lost, unchanged since",
+          "x": 40,
+          "y": 110,
+          "w": 560,
+          "h": 60,
+          "correct": false,
+          "rationale": "This is the largest total slip and the one most people pick. But it came from a single known event, the forecast was re-planned around it, and it has held for four reports since, which is evidence the new date is realistic."
+        },
+        {
+          "id": "m3",
+          "n": 3,
+          "label": "M3 Topside load-out: slipped 1 to 2 weeks in each of the six reports, 8 weeks in total",
+          "x": 40,
+          "y": 190,
+          "w": 560,
+          "h": 60,
+          "correct": true,
+          "rationale": "A forecast that moves in the same direction at every report shows the underlying estimate is still optimistic. Each date has been wrong in the same way, so the current one is likely to be wrong too until the estimate is re-based."
+        },
+        {
+          "id": "m4",
+          "n": 4,
+          "label": "M4 Export cable pull-in: moved 3 weeks earlier in report 4 after resequencing, unchanged since",
+          "x": 40,
+          "y": 270,
+          "w": 560,
+          "h": 60,
+          "correct": false,
+          "rationale": "Moving earlier after a deliberate resequencing is an explained change, and the forecast has been stable since. Improvement is not a warning sign in itself when its cause is known."
+        }
+      ],
+      "explanation": "A milestone trend chart is read for the pattern of change, not just its size. A single explained jump followed by stability suggests the forecast has been re-planned and is now credible; small slips in the same direction at every report suggest a systematic optimism that the next forecast will repeat. Steady drift calls for re-basing the estimate rather than continuing to track it.",
+      "mindset": "Distrust a forecast that keeps moving the same way, however small each move is."
+    },
+    {
+      "id": "pmp-pr9-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "status-report",
+        "confidentiality",
+        "distribution",
+        "archetype-act-now"
+      ],
+      "stem": "You manage the steelwork and cladding packages for a new stadium roof. Your weekly progress report is ready to send at 4 pm, and its distribution list, set in the communications plan, includes all five subcontractors. Reading it through, you notice a new appendix your planner added this week listing each subcontractor's agreed day rates beside their progress. Two of the subcontractors are bidding against each other for the next roof package. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold the send, take the rates appendix out of the version going to subcontractors, and keep the full version for the internal distribution only.",
+          "correct": true,
+          "rationale": "The disclosure has not happened yet, and once the report is sent it cannot be undone. A redacted external version and a full internal one keep the report on time without handing competing bidders each other's prices."
+        },
+        {
+          "id": "b",
+          "text": "Send the report on time as the plan requires, then ask the planner to remove the rates appendix from next week's edition and to check future additions with you.",
+          "correct": false,
+          "rationale": "This treats a commercial disclosure as a formatting issue for next time. Sending on schedule is the wrong priority when the content itself is the problem, because the rates reach two competing bidders today."
+        },
+        {
+          "id": "c",
+          "text": "Send the report on time and ask each subcontractor in a covering note to treat the commercial appendix as confidential and not to share it any further.",
+          "correct": false,
+          "rationale": "A request for discretion does not undo a disclosure that has already happened. The harm is that competitors see each other's rates, and asking them not to pass the information on does nothing about what they have read."
+        },
+        {
+          "id": "d",
+          "text": "Delay the whole report until the commercial manager has reviewed every section and confirmed in writing what may be shared with each recipient on the list.",
+          "correct": false,
+          "rationale": "It hands a straightforward judgement to someone else and holds back the progress information every recipient is entitled to. Only one appendix is the problem, and removing it is within the project manager's own remit."
+        }
+      ],
+      "explanation": "A distribution list decides who receives a report, not what each recipient should see. Commercially sensitive or personal content has to be checked against the audience before release, because a disclosure cannot be recalled once sent. When one artifact serves mixed audiences, keep a full internal version and issue a redacted version externally, rather than delaying everyone or relying on recipients' discretion.",
+      "mindset": "Check who will read an artifact before checking whether it is on time."
+    },
+    {
+      "id": "pmp-pr9-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "burndown",
+        "team-artifacts",
+        "overhead",
+        "archetype-use-own-authority"
+      ],
+      "stem": "Your team is building an appointment-booking app for a chain of veterinary practices. Since the first sprint, developers have re-estimated the hours left on every task each morning so the sprint burndown can be drawn in hours. They now say the re-estimating takes 30 minutes a day and nobody outside the team looks at the chart. The PMO's only reporting requirement is the release burn-up. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the hours-based burndown, but move the re-estimating to the end of each day so it no longer interrupts the team's most productive morning hours.",
+          "correct": false,
+          "rationale": "It changes when the overhead is paid, not whether it is worth paying. The team has said the chart is not being used, and moving the ritual to the afternoon keeps the full cost for the same unused output."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to choose a lighter measure for its own sprint burndown, such as remaining tasks, and try it for the next sprint.",
+          "correct": true,
+          "rationale": "The sprint burndown is the team's own artifact and the PMO does not rely on it, so the team can change its measure. Counting remaining tasks keeps the in-sprint signal at a fraction of the cost, and trying it for one sprint lets the team judge the result."
+        },
+        {
+          "id": "c",
+          "text": "Write to the PMO asking whether the hours-based burndown can be dropped, given that it already receives the release burn-up after every sprint.",
+          "correct": false,
+          "rationale": "This seeks permission from a body that neither requires nor reads the artifact. It mistakes a team working tool for a governance deliverable and delays a change the team is entitled to make for itself."
+        },
+        {
+          "id": "d",
+          "text": "Stop producing a sprint burndown altogether and point the team to the release burn-up, which already shows progress at the level the PMO uses.",
+          "correct": false,
+          "rationale": "A release burn-up moves once a sprint and cannot tell the team mid-sprint whether its sprint goal is at risk. It discards a useful signal because of the cost of one way of producing it."
+        }
+      ],
+      "explanation": "Team-level artifacts exist to help the team inspect its own progress, so their form is the team's decision and should cost less than the information it provides. When an artifact's upkeep outweighs its use, change what it measures rather than when it is updated, and treat the change as an experiment the team can review. Only artifacts that other people rely on need their consumers' agreement before they change.",
+      "mindset": "An artifact earns its upkeep or it changes shape."
+    },
+    {
+      "id": "pmp-pr9-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "lessons-learned",
+        "registers",
+        "phase-planning",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your programme is converting three bus depots to electric fleets, one depot per phase. Lessons from phase 1 were written into its closure report and filed. Phase 2 has just lost five weeks waiting for a grid-connection approval, a delay the phase 1 report describes in detail. You are about to start planning phase 3 at the largest depot. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Circulate the phase 1 closure report to the phase 3 planning team and ask everyone to read it carefully before the first planning session is held.",
+          "correct": false,
+          "rationale": "Distributing the report is what already happened before phase 2, and the lesson still went unused. Reading a document does not turn its contents into planning decisions with owners."
+        },
+        {
+          "id": "b",
+          "text": "Hold a lessons-learned workshop at the end of phase 2 so its findings can be added to the closure report before phase 3 planning gets under way.",
+          "correct": false,
+          "rationale": "Phase 2 is still running, so this waits for closure to capture lessons that are already known. It also feeds them back into the same closure-report format whose lessons phase 2 failed to use."
+        },
+        {
+          "id": "c",
+          "text": "Keep a live lessons register across the phases and work through its entries in the phase 3 planning sessions, giving each relevant lesson an owner.",
+          "correct": true,
+          "rationale": "The failure was not in capturing the lesson but in getting it into the next plan. A register reviewed as a standing planning input, with each relevant lesson converted into an owned action, closes that gap for every lesson, not just the grid delay."
+        },
+        {
+          "id": "d",
+          "text": "Add the grid-connection approval to the phase 3 risk register with an early application date and a named owner in the network team.",
+          "correct": false,
+          "rationale": "It fixes the one lesson that has just hurt and leaves every other lesson in the phase 1 report unread. Treating the latest symptom does not change the way lessons reach planning."
+        }
+      ],
+      "explanation": "Lessons change outcomes only when they reach the planning of the next piece of work, which is why the lessons register is a living artifact rather than a chapter of a closure report. Recording a lesson is the cheap half; the rule that transfers is to make reviewing the register a standing input to every planning cycle and to turn each relevant entry into an action someone owns. A lesson nobody acts on has been documented, not learned.",
+      "mindset": "A lesson is learned when it changes a plan, not when it is written down."
+    },
+    {
+      "id": "pmp-pr9-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "tailoring",
+        "pmo",
+        "artifacts",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your organisation's PMO requires every project to produce 22 standard artifacts, from a benefits realisation plan to a procurement management plan. You are leading a ten-week, €90,000 project to build a marketing analytics dashboard with one internal team, no suppliers and fortnightly demos to the marketing director. Producing the full set would take an estimated three weeks of effort. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Produce all 22 artifacts in a deliberately short form, one or two pages each, so that the PMO standard is met without three weeks of effort.",
+          "correct": false,
+          "rationale": "This accepts the premise that every artifact is needed and simply makes them thinner. The project still spends effort on documents nobody will use, and short versions of irrelevant plans add nothing to governance."
+        },
+        {
+          "id": "b",
+          "text": "Produce only the artifacts the team will actually use, and explain the reasoning for each omission to the PMO when it holds the first stage review.",
+          "correct": false,
+          "rationale": "The judgement about which artifacts matter may be right, but omitting mandated items unilaterally and explaining afterwards takes a decision that belongs to the standard's owner and presents it as done."
+        },
+        {
+          "id": "c",
+          "text": "Propose a tailored artifact set to the PMO, showing for each standard artifact either where its purpose is met or why it does not apply.",
+          "correct": true,
+          "rationale": "It questions the one-size requirement with the body that owns it, and it argues from purpose rather than convenience. The PMO can see that each governance need is still covered, which is what the standard exists to secure."
+        },
+        {
+          "id": "d",
+          "text": "Ask the marketing director, as sponsor, to approve a waiver from the PMO standard for this project, given its small size and internal scope.",
+          "correct": false,
+          "rationale": "The sponsor does not own the PMO's standard, so the approval comes from the wrong authority. A blanket waiver also replaces tailoring with exemption, losing the artifacts that would genuinely help."
+        }
+      ],
+      "explanation": "Organisational standards describe what governance needs to know, and the artifacts are one way of supplying it. Tailoring is legitimate when it is agreed with the owner of the standard and shows how each underlying purpose is still met, whether through a lighter artifact, an existing event or a justified omission. Producing documents nobody uses is not compliance, and dropping them without agreement is not tailoring.",
+      "mindset": "Tailor artifacts to the purpose they serve, and agree the tailoring with whoever owns the standard."
+    },
+    {
+      "id": "pmp-pr9-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "rag-status",
+        "transparency",
+        "client-reporting",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your company is building a data centre for a client under a contract that defines the RAG criteria for the monthly report: red means the handover date is forecast to slip by more than four weeks. The current forecast is a six-week slip. Your sponsor asks you to report amber, because a recovery plan bringing the slip down to two weeks is nearly agreed with the client's engineers. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Report amber with a clear note that the rating assumes the recovery plan is agreed, and that it will be changed to red if the plan falls through.",
+          "correct": false,
+          "rationale": "The rating is then built on a decision that has not been taken. The contractual criteria apply to the current forecast, and a caveat does not change what the headline rating tells a reader who looks no further."
+        },
+        {
+          "id": "b",
+          "text": "Report red against the contractual criteria, and set out the recovery plan, the date it should be agreed and the rating it would restore.",
+          "correct": true,
+          "rationale": "It applies the agreed definition to the current forecast and gives the sponsor's concern its proper place: the recovery is visible, with its decision date and effect, without being reported as though it had already happened."
+        },
+        {
+          "id": "c",
+          "text": "Hold the report for a few days until the recovery plan is formally agreed, so that it can show the red rating and the approved recovery together.",
+          "correct": false,
+          "rationale": "It delays a contractual report to manage how the news lands. The client loses several days of an accurate picture, and the timing of the report becomes something that bends to the message."
+        },
+        {
+          "id": "d",
+          "text": "Report red as the contract requires, and raise the sponsor's request with the head of the PMO so the pressure on reporting is formally on record.",
+          "correct": false,
+          "rationale": "The rating is right, but escalating a sponsor's request as if it were misconduct is disproportionate and damages the relationship. It also leaves out the recovery plan the client needs to see beside the rating."
+        }
+      ],
+      "explanation": "A status rating defined by agreed criteria reports the current forecast, not the forecast expected after decisions that have not yet been taken. Pending recovery belongs alongside the rating, with its decision date and expected effect, so the reader sees both where things stand and what would change them. Softening, delaying or escalating around the rating each erode the one property that makes a rating worth reading: that it means the same thing every month.",
+      "mindset": "Report the forecast you have, and show the recovery you are working on next to it."
+    },
+    {
+      "id": "pmp-pr9-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "tolerances",
+        "exception-reporting",
+        "forecasting",
+        "archetype-act-now"
+      ],
+      "stem": "Your £8 million flood defence scheme is 40% complete. The board has delegated a cost tolerance of ±5% of budget at completion; anything forecast beyond it goes to the board as an exception, and everything else is covered in your monthly highlight report. Earned value is £3.2 million against actual cost of £3.42 million, and the monthly CPI has fallen from 0.99 to 0.94 over four months. The site engineers are confident the final phase can be value-engineered to recover. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Report the worsening trend prominently in this month's highlight report and set a trigger to escalate to the board if the overspend to date reaches 5%.",
+          "correct": false,
+          "rationale": "It measures the tolerance against money already spent, which is under 3% of budget. At a CPI of 0.94 the forecast overrun is already near 7%, so a trigger on actuals escalates long after the board's options have narrowed."
+        },
+        {
+          "id": "b",
+          "text": "Raise an exception report to the board now, because the forecast at completion breaches tolerance even though the overspend to date does not.",
+          "correct": true,
+          "rationale": "Budget divided by a CPI of 0.94 forecasts about £8.55 million, roughly 7% over. Tolerance governs the forecast, so the decision has passed beyond the project manager's delegation and the board needs it while it still has room to act."
+        },
+        {
+          "id": "c",
+          "text": "Ask the engineers for a costed value-engineering proposal, then take it to the board with the exception report once its savings have been confirmed.",
+          "correct": false,
+          "rationale": "Bringing options is right, but making the escalation wait for them is not. The forecast is outside the board's tolerance now, and an uncosted recovery belongs in the exception report as an option rather than as a reason to delay it."
+        },
+        {
+          "id": "d",
+          "text": "Recalculate the forecast treating the variance as atypical, since the engineers expect the final phase to recover, and report it within tolerance this month.",
+          "correct": false,
+          "rationale": "An atypical forecast, £8.22 million here, assumes the cause has stopped. Four months of steady decline say it has not, so this picks the formula that gives the comfortable answer rather than the one the evidence supports."
+        }
+      ],
+      "explanation": "Tolerances are set against the forecast at completion, because their purpose is to hand the decision to the next level of authority while it still has options. Overspend to date can sit comfortably inside tolerance while the trend and the forecast are already beyond it, and a recovery that has not been costed and agreed is a reason to include options in the escalation, not to postpone it. A forecast that assumes the variance is a one-off needs evidence that the cause has stopped.",
+      "mindset": "Escalate on where the project is heading, not on how far it has already gone."
+    },
+    {
+      "id": "pmp-pr9-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "dashboards",
+        "data-quality",
+        "governance-reporting",
+        "archetype-make-visible"
+      ],
+      "stem": "Your hybrid programme is moving an airline's engine-maintenance planning onto a new platform. The programme dashboard pulls figures automatically from the agile teams' tool and the predictive workstreams' schedule. You discover that a tool migration three weeks ago broke the feed, so the dashboard has shown frozen figures since then. Last week the steering group used it to approve moving two testers off the data-migration workstream. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Get the feed fixed first and republish the corrected dashboard, so the steering group sees the true position at its next scheduled meeting in a fortnight.",
+          "correct": false,
+          "rationale": "Repairing the source is necessary but not sufficient. A decision has already been taken on false figures, and leaving it in force for another fortnight lets its consequences build before anyone with authority can reconsider it."
+        },
+        {
+          "id": "b",
+          "text": "Check with the data-migration lead whether losing the two testers has actually harmed progress before deciding whether anything needs raising with the steering group.",
+          "correct": false,
+          "rationale": "It sounds like diagnosing first, but it puts the project manager in the position of judging whether the steering group's error mattered. The group decided on information that was wrong, and whether to revisit is its call."
+        },
+        {
+          "id": "c",
+          "text": "Move the two testers back to data migration on your own authority while the feed is repaired, and explain the reason for it in the next status report.",
+          "correct": false,
+          "rationale": "This overrides a steering group decision without the authority to do so. Even if the reversal turns out to be right, the governance record now shows a decision being quietly undone by the person reporting to it."
+        },
+        {
+          "id": "d",
+          "text": "Tell the steering group now which figures were frozen, give it the current ones, and ask it to revisit the tester decision on the corrected data.",
+          "correct": true,
+          "rationale": "It makes the error visible to the people who relied on it, promptly and with the right figures, and leaves the decision with them. They may confirm or reverse it, but they do so knowingly."
+        }
+      ],
+      "explanation": "When an artifact that informed a decision turns out to have been wrong, the people who made the decision need to know promptly, with corrected information, so they can confirm or revisit it. Repairing the source quietly, judging for them whether the error mattered, or reversing their decision yourself all leave the governance record resting on data that is now known to be false. Automated reports need the same scrutiny as manual ones, because a silent failure looks exactly like a quiet month.",
+      "mindset": "If a decision rested on bad data, give the decision back to its owner with the right data."
+    },
+    {
+      "id": "pmp-pr9-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "action-log",
+        "steering-group",
+        "meetings",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are running a programme to merge the IT systems of two housing associations after their merger. Steering group actions are recorded in the minutes, which are circulated a week after each meeting. At this month's meeting, three actions agreed two meetings ago turned out to be unstarted, and two members said they had not realised the actions were theirs. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Set up an action log with an owner and due date for each action, circulate it within a day, and review it at the start of each meeting.",
+          "correct": true,
+          "rationale": "An action log is built for tracking: one line per commitment, a named owner, a date and a status that the group looks at every time it meets. Setting it up is within the project manager's own remit."
+        },
+        {
+          "id": "b",
+          "text": "Ask the chair to remind members at the start of every meeting to reread the previous minutes and check them carefully for any actions that fall to them.",
+          "correct": false,
+          "rationale": "It relies on members searching narrative minutes for their own commitments, which is the mechanism that has just failed. It also hands the chair a tracking job that the project manager can set up directly."
+        },
+        {
+          "id": "c",
+          "text": "Circulate the minutes within two days instead of a week, with every agreed action highlighted in bold so members can find their own quickly.",
+          "correct": false,
+          "rationale": "Faster, clearer minutes help, but they still bury actions in prose with no owner column, no due date and nothing that reviews their status. Two members did not know the actions were theirs, and bold type does not fix that."
+        },
+        {
+          "id": "d",
+          "text": "Follow up personally with each member a few days after every meeting, to confirm they know which actions are theirs and have started on them.",
+          "correct": false,
+          "rationale": "It may work while the project manager keeps chasing, but it depends on private conversations and leaves the group with no shared view of what is owed. Slippage stays invisible to everyone except the person chasing."
+        }
+      ],
+      "explanation": "Actions agreed in a meeting are commitments, and commitments need a record built for tracking rather than for narrative: one line per action, a named owner, a date and a status. Minutes record what was discussed; an action log records what is owed, and reviewing it at the start of the next meeting makes ownership visible and slippage hard to miss. Setting this up is within the project manager's own remit and needs nobody's permission.",
+      "mindset": "If a commitment matters, give it an owner, a date and a place where it can be seen."
+    },
+    {
+      "id": "pmp-pr9-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "impediments",
+        "information-radiators",
+        "team-board",
+        "archetype-make-visible"
+      ],
+      "stem": "Your team is building a ticketing app for a regional theatre group. For four sprints, developers have mentioned at stand-up that the shared test environment goes down most afternoons, and they have worked around it by testing in the evenings. At the last sprint review the product owner was surprised that two stories slipped, and the theatre's IT manager, who owns the environment, says nobody has reported a problem to him. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the developers to keep testing in the evenings for the time being, since the workaround has kept most stories on track, and review the arrangement at the next retrospective.",
+          "correct": false,
+          "rationale": "It treats a workaround as a solution because most work still lands. The cost is being paid in unplanned evening hours and slipped stories, and keeping it inside the team is exactly why the owner and the product owner did not know."
+        },
+        {
+          "id": "b",
+          "text": "Explain the outages to the product owner at the next sprint review so that the slipped stories are understood, and let the product owner decide whether to pursue the matter.",
+          "correct": false,
+          "rationale": "It explains the past slippage but routes the problem to someone who does not own the environment, and it waits another sprint to do so. The impediment stays invisible to the one person who can remove it."
+        },
+        {
+          "id": "c",
+          "text": "Put the outages on the team's impediment board with their effect on each sprint, and take that record to the IT manager who owns the environment.",
+          "correct": true,
+          "rationale": "The problem has been known for four sprints but has lived only in spoken stand-up updates. A visible record with its impact shows everyone what it is costing, and taking it to the owner gives the person who can fix it the information to act."
+        },
+        {
+          "id": "d",
+          "text": "Ask the team to log every outage in a shared spreadsheet for two more sprints, so that there is firm evidence of the pattern before anyone approaches the IT manager.",
+          "correct": false,
+          "rationale": "Gathering data sounds rigorous, but four sprints of daily outages are already enough evidence. Waiting two more sprints adds cost without changing the case, and a private spreadsheet is no more visible than the stand-up was."
+        }
+      ],
+      "explanation": "An impediment that is only spoken about at stand-up is visible to the team and to nobody else, and workarounds hide its cost until it shows up as slipped work. Recording impediments where stakeholders can see them, with their effect on delivery, turns a private frustration into something that can be prioritised, and taking it to whoever owns the cause starts the removal. Evidence beyond what is needed to act is delay, not diligence.",
+      "mindset": "A problem the team is quietly absorbing is still a problem; make it visible to whoever can remove it."
+    },
+    {
+      "id": "pmp-pr9-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "roadmap",
+        "forecasting",
+        "external-communication",
+        "archetype-trade-off"
+      ],
+      "stem": "Your team builds farm-management software. The product roadmap, an internal artifact, shows features by quarter for the next 18 months. The sales team has started showing it to prospective customers, and two have signed contracts citing features planned for Q3, which the product owner regards as likely but not committed. The product owner reorders the backlog every sprint based on user feedback. What should the project manager do about the roadmap?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Help the product owner create a separate customer-facing roadmap that commits only to near-term work and shows later items as themes without dates.",
+          "correct": true,
+          "rationale": "It trades some precision for durability: customers get a firm view of what is close and a credible view of direction, while the team keeps the freedom to reorder what lies further out."
+        },
+        {
+          "id": "b",
+          "text": "Ask the product owner to lock the Q3 features in the backlog, since customers have now signed contracts relying on those features being delivered.",
+          "correct": false,
+          "rationale": "It lets a sales disclosure set product priorities and gives up the reordering that keeps the product responsive to users. The next roadmap shown to customers would lock the following quarter the same way."
+        },
+        {
+          "id": "c",
+          "text": "Stop sharing the roadmap outside the product team and ask sales to describe future features only in general terms when talking to customers.",
+          "correct": false,
+          "rationale": "It removes the misuse by removing the artifact, leaving sales with nothing reliable to sell from. Customers still need some view of direction, and improvised descriptions will create promises of their own."
+        },
+        {
+          "id": "d",
+          "text": "Add a confidence rating to each feature on the existing roadmap and let sales keep using it, so that customers can judge the risk for themselves.",
+          "correct": false,
+          "rationale": "Quarter labels still read as dates whatever rating sits beside them, and customers rarely discount for confidence. One artifact is still being made to serve two audiences with different needs."
+        }
+      ],
+      "explanation": "A roadmap built for internal planning carries a different promise from one shown to customers, and dates on an adaptive roadmap become commitments the moment someone outside the team relies on them. The trade-off is between giving customers enough to buy on and keeping the freedom to reorder: commit precisely only where the horizon is short, and describe the far horizon by outcome or theme. When one artifact serves two audiences with different needs, it usually needs to become two.",
+      "mindset": "Promise only as far ahead as you can see."
+    },
+    {
+      "id": "pmp-pr9-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "product-backlog",
+        "progress-measures",
+        "pmo-reporting",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your team maintains the booking engine for a hotel group. The PMO's monthly report quotes the product backlog as 'work remaining': 620 items, up from 540 last quarter, and the operations director has asked why the team is falling further behind. About 400 of the items are ideas and requests more than a year old that the product owner has never prioritised. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the team to estimate all 620 items so that the PMO can report the remaining work in story points rather than as a raw count of items.",
+          "correct": false,
+          "rationale": "It spends estimating effort on items that may never be built and still treats the whole backlog as committed work. The report becomes more precise about the wrong quantity."
+        },
+        {
+          "id": "b",
+          "text": "Explain to the operations director that the backlog includes old ideas, and ask the PMO to add a footnote saying so to every future report.",
+          "correct": false,
+          "rationale": "It keeps a misleading measure and attaches a caveat that most readers will skip. The headline number still rises every quarter and will keep prompting the same question."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to prioritise the 400 older items into the coming releases so the backlog shrinks and the trend line starts to turn downwards.",
+          "correct": false,
+          "rationale": "It works to the metric rather than to value, committing the team to building stale requests so that a chart looks better. The cure is worse than the misreading it fixes."
+        },
+        {
+          "id": "d",
+          "text": "Help the product owner archive the stale items, then agree with the PMO to report progress against the current release goal rather than backlog size.",
+          "correct": true,
+          "rationale": "It challenges the premise that backlog size measures remaining work. Pruning makes the backlog a usable list of options again, and reporting against a committed goal gives the director a number that actually tracks progress."
+        }
+      ],
+      "explanation": "A product backlog is a list of options, not a statement of committed work, so its size measures how many ideas have been captured rather than how much is left to do. Progress is reported against something the team has committed to, such as a release or product goal, and the backlog stays useful only if its owner removes what will not be built. When a status measure tracks the wrong thing, fix the measure and the artifact, not the number.",
+      "mindset": "Count progress against commitments, not against everything anyone has ever asked for."
+    },
+    {
+      "id": "pmp-pr9-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "cycle-time",
+        "kanban",
+        "flow-metrics",
+        "archetype-make-visible"
+      ],
+      "stem": "Your Kanban team builds systems for a port authority. Its dashboard reports a median cycle time of four days, and the harbour master's office plans around that figure. You notice that items waiting on an external vendor are moved to a 'blocked' lane that pauses their clock; eleven items there have now waited between 20 and 45 days. The team says blocked time is outside its control. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the four-day figure, since it measures the team's own performance fairly, and send a separate monthly report listing the vendor's delays to the harbour master.",
+          "correct": false,
+          "rationale": "It frames the metric around the team's fairness rather than the reader's needs. The harbour master plans around elapsed time, and a separate monthly list is easy to miss beside a headline figure that looks reliable."
+        },
+        {
+          "id": "b",
+          "text": "Escalate the vendor's delays to the port's contract manager, so the eleven blocked items are cleared and the dashboard figure becomes reliable for planning again.",
+          "correct": false,
+          "rationale": "Pursuing the vendor is worthwhile, but it leaves the misleading figure in place meanwhile, and the next blocked item will vanish from the measure in the same way."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to stop starting work that depends on the vendor until the vendor confirms its capacity, so that fewer items end up in the blocked lane.",
+          "correct": false,
+          "rationale": "It is a sensible flow improvement, but it does not correct the figure that the harbour master is planning around today. The reporting problem and the flow problem need separate fixes."
+        },
+        {
+          "id": "d",
+          "text": "Report cycle time from start to finish including blocked time, and show the blocked items and their age alongside it on the dashboard.",
+          "correct": true,
+          "rationale": "Stakeholders experience elapsed time, whatever caused the waiting. Including it makes the figure honest, and showing blocked items with their age keeps the external cause visible so it can be managed."
+        }
+      ],
+      "explanation": "A flow metric that other people plan with has to measure what they experience, which is elapsed time from commitment to delivery, whatever caused the waiting. Excluding time the team does not control can be useful internally, but publishing it as the cycle time hides exactly the delays stakeholders most need to plan around. Show an external cause separately so it can be managed, rather than removing it from the measure.",
+      "mindset": "Measure delivery as the customer experiences it, then show who caused the waits."
+    },
+    {
+      "id": "pmp-pr9-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "status-meetings",
+        "shutdown",
+        "management-by-exception",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are managing a five-week maintenance shutdown at an oil refinery. The daily status meeting runs for two hours: each of 14 discipline leads reads out progress on every task, and problems needing a decision come up, if at all, near the end, when people are leaving. Leads complain that the meeting takes them off the plant at the busiest time of day. Which two changes should the project manager make?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the leads update their progress in the shared shutdown schedule before the meeting, so that it is read in advance rather than reported aloud.",
+          "correct": true,
+          "rationale": "Progress that can be read does not need to be spoken. Moving it into the shared schedule beforehand removes most of the two hours and gives everyone the same current record."
+        },
+        {
+          "id": "b",
+          "text": "Split the meeting into two shorter sessions, one for the mechanical disciplines and one for the rest, each held at a different time of day.",
+          "correct": false,
+          "rationale": "It halves the attendance but keeps the readout format, and it separates the disciplines whose interfaces cause most shutdown problems. Cross-discipline issues would fall between the two meetings."
+        },
+        {
+          "id": "c",
+          "text": "Restructure the agenda to deal with blocked work and decisions needed first, and take only exceptions from each discipline after that.",
+          "correct": true,
+          "rationale": "Putting decisions first means they are made while the right people are still in the room. Taking exceptions only keeps the meeting on what needs coordinating."
+        },
+        {
+          "id": "d",
+          "text": "Move the meeting to the end of the shift, when the leads are no longer needed on the plant and can give the discussion their full attention.",
+          "correct": false,
+          "rationale": "It solves the timing complaint but not the format, and it pushes every decision to the end of the day. In a shutdown that can cost a whole shift on blocked work."
+        },
+        {
+          "id": "e",
+          "text": "Ask each lead to send you a written report instead, and replace the meeting with a summary email that you send to all the leads every morning.",
+          "correct": false,
+          "rationale": "It removes the forum where cross-discipline problems get solved face to face and turns the project manager into a relay for every issue. Coordination slows rather than speeds up."
+        }
+      ],
+      "explanation": "A status meeting is expensive time, so it should be spent on what only a meeting can do: resolving problems that cross disciplines and taking decisions. Progress that can be read belongs in the shared artifact beforehand, handled by exception, and the agenda should put blocked work first so decisions are made while the right people are present. Changing when or how often a readout happens leaves the readout in place.",
+      "mindset": "Read the status, meet about the problems."
+    },
+    {
+      "id": "pmp-pr9-134",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "definition-of-done",
+        "burn-up",
+        "forecasting",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your team is building an e-lending app for a regional library service. Its definition of done requires code review, automated tests and deployment to the staging environment. Reviewing the release burn-up, you find that 14 of the 52 stories counted as done in the last three sprints were merged but never deployed to staging, and several have no tests. The release is forecast as on track. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add a 'done pending deployment' column to the board so the 14 stories stay visible without changing the velocity history the forecast relies on.",
+          "correct": false,
+          "rationale": "It makes the stories visible but keeps them counted, so the burn-up and forecast still overstate progress. It protects the comparability of the history at the expense of its truth."
+        },
+        {
+          "id": "b",
+          "text": "Recount those 14 stories as not done, republish the burn-up and release forecast, and explain the restatement to the stakeholders who use them.",
+          "correct": true,
+          "rationale": "Stories that miss the definition of done are undone work. Restating the artifacts, and telling the people who rely on them why, puts the forecast back on the true position."
+        },
+        {
+          "id": "c",
+          "text": "Schedule a hardening sprint before the release to deploy and test the 14 stories, keeping the current forecast and burn-up unchanged in the meantime.",
+          "correct": false,
+          "rationale": "It plans the missing work but goes on reporting it as complete until then. The hardening sprint is itself evidence that the forecast is wrong, while the chart says it is right."
+        },
+        {
+          "id": "d",
+          "text": "Have the product owner accept stories at the sprint review only against the definition of done, with the checklist visible on the team board.",
+          "correct": true,
+          "rationale": "The inflation got in through acceptance, so that is where the rule has to be applied. A visible checklist at review keeps the count honest from now on."
+        },
+        {
+          "id": "e",
+          "text": "Relax the definition of done for this release to merged and reviewed, and move the staging deployment and tests into a later release.",
+          "correct": false,
+          "rationale": "It changes the rule to fit what happened, so the reports become accurate by lowering the bar. The untested code and deployment work do not go away; they become unplanned debt."
+        }
+      ],
+      "explanation": "Progress measured against a definition of done is only as true as the definition's enforcement. Work that misses it is undone work, and counting it as done borrows from the end of the release. When inflation is found, restate the artifacts that depend on it and tell their readers, then fix the acceptance step so the count stays honest. Extra columns or hardening sprints manage the undone work but leave the forecast overstating where the release stands.",
+      "mindset": "Done means done against the definition, or the chart is reporting hope."
+    },
+    {
+      "id": "pmp-pr9-135",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "stakeholder-register",
+        "artifact-ownership",
+        "communications-plan",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your hybrid programme is upgrading a toll road's payment systems. A formal notice about planned lane closures went to the regulator's former liaison officer, who left five months ago, because the stakeholder register and communications plan were never updated, and the notice missed its deadline. A quick check finds other entries out of date too. The registers were written at initiation and have no named owners. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the PMO to audit every programme artifact against current reality and report all the discrepancies it finds within the next month.",
+          "correct": false,
+          "rationale": "An audit finds drift after the fact and places responsibility with the PMO rather than with anyone who could keep the registers current. A month is also a long time to leave the known errors in place."
+        },
+        {
+          "id": "b",
+          "text": "Correct the regulator's entry now, reissue the notice to the current liaison officer, and agree with the regulator how to handle the missed deadline.",
+          "correct": true,
+          "rationale": "The immediate harm is a regulatory notice that never arrived. Correcting the record and repairing the communication come before fixing the mechanism, because the deadline has already passed."
+        },
+        {
+          "id": "c",
+          "text": "Require the communications lead to confirm each recipient by telephone before any formal notice is sent to a regulator or other external stakeholder.",
+          "correct": false,
+          "rationale": "It adds a control at the point of sending while the registers themselves stay stale. Every other use of those registers, from engagement planning to escalation routes, remains wrong."
+        },
+        {
+          "id": "d",
+          "text": "Give each register a named owner and define events, such as staff changes at a stakeholder, that trigger an update between scheduled reviews.",
+          "correct": true,
+          "rationale": "The registers decayed because nobody owned them and nothing prompted a review. An owner plus event triggers addresses the cause and catches the next change when it happens."
+        },
+        {
+          "id": "e",
+          "text": "Move all the programme's registers into a single collaborative tool so that anyone who spots an outdated entry can correct it immediately.",
+          "correct": false,
+          "rationale": "A shared tool makes editing easy but does not make it anyone's job. When everyone can update an entry, in practice no one is responsible for keeping it right."
+        }
+      ],
+      "explanation": "An artifact stays current only if someone owns it and something prompts them to update it; a register written at initiation with no owner and no trigger decays from the first organisational change. When decay has already caused harm, deal with the consequence first by correcting the record and repairing the communication, then fix the mechanism so the next change is caught. Audits find drift after the fact, and shared editing without ownership tends to mean nobody edits.",
+      "mindset": "Every living artifact needs an owner and a reason to be reopened."
+    },
+    {
+      "id": "pmp-pr9-136",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "forecasting",
+        "monte-carlo",
+        "velocity",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A games studio's delivery lead receives three requests for forecasts this month. Match each situation to the forecasting approach that fits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "A team with twelve sprints of steady velocity must tell the publisher in which sprint a fixed set of 140 remaining story points is likely to finish."
+        },
+        {
+          "id": "s2",
+          "text": "A live-operations team works a Kanban flow of player-reported bugs of very mixed size, and the producer asks when all 40 open bugs will be cleared."
+        },
+        {
+          "id": "s3",
+          "text": "A team formed this month, with no delivery history together, is asked for an early indication of how long a new multiplayer mode will take."
+        }
+      ],
+      "options": [
+        {
+          "id": "vel",
+          "text": "Divide the remaining points by the team's lowest and highest recent velocities and quote the resulting range of sprints",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Stable velocity on consistently sized work is good evidence, and using the low and high values turns it into an honest range rather than a single date that hides the variation."
+        },
+        {
+          "id": "mc",
+          "text": "Run a Monte Carlo simulation over the team's weekly throughput history and quote a date at a stated probability",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Unestimated items of mixed size suit throughput sampling: the simulation uses what the team has actually finished per week and gives the producer a date with a known confidence."
+        },
+        {
+          "id": "ref",
+          "text": "Give a wide range based on comparable features built elsewhere in the studio, state the low confidence, and narrow it after a few sprints",
+          "correct": true,
+          "match": "s3",
+          "rationale": "With no history of its own, the team's best evidence is a reference class of similar work. Stating the low confidence and committing to narrow the range is what keeps an early figure from hardening into a promise."
+        },
+        {
+          "id": "hrs",
+          "text": "Add up the developers' hour estimates for every remaining task and divide by the hours the team has available",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Summing task-hour estimates replaces measured performance with optimism and needs a detailed task breakdown that none of the three situations has. It also produces a single figure with no sense of its uncertainty."
+        }
+      ],
+      "explanation": "A forecast should be built from the best evidence the team actually has: its own measured rate where there is history and the work is sized consistently, its throughput distribution where items vary and are not estimated, and comparison with similar past work where there is no history yet. Every forecast is quoted as a range or a probability, because a single number hides the uncertainty its reader most needs to see.",
+      "mindset": "Forecast from the evidence you have, and show how uncertain it is."
+    },
+    {
+      "id": "pmp-pr9-137",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "configuration-management",
+        "document-control",
+        "decision-records",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your hybrid programme is building a new hospital wing and the software that will manage patient flow through it. Match each artifact to the way changes to it should be controlled. One choice is not used.",
+      "prompts": [
+        {
+          "id": "a1",
+          "text": "The issued-for-construction drawings of the plant room, from which the mechanical contractor's crews are working on site."
+        },
+        {
+          "id": "a2",
+          "text": "The architecture decision records in which the software teams have documented the design choices they accepted over the past year."
+        },
+        {
+          "id": "a3",
+          "text": "The software teams' working agreement covering core hours, code-review turnaround and how they handle urgent production fixes."
+        }
+      ],
+      "options": [
+        {
+          "id": "rev",
+          "text": "Issue each new revision through the document register, recording it and withdrawing superseded copies from site",
+          "correct": true,
+          "match": "a1",
+          "rationale": "People are building from these drawings, so the danger is a crew working from an old revision. A register of current revisions and withdrawal of superseded copies is what prevents it."
+        },
+        {
+          "id": "sup",
+          "text": "Leave each accepted record unchanged and capture any reversal as a new record that states which one it supersedes",
+          "correct": true,
+          "match": "a2",
+          "rationale": "A decision record is valuable because it shows what was decided and why at the time. Editing it erases that history; a superseding record keeps both the old reasoning and the new."
+        },
+        {
+          "id": "team",
+          "text": "Let the team revise it itself, usually at a retrospective, keeping the current version visible to everyone it affects",
+          "correct": true,
+          "match": "a3",
+          "rationale": "A working agreement belongs to the people it binds. They revise it as they learn, and keeping the current version visible is what makes it an agreement rather than a forgotten document."
+        },
+        {
+          "id": "pmo",
+          "text": "Have the PMO update it each month from the workstream status returns and circulate the new version to all leads",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Monthly central updating suits a compiled report, not any of these. It would let construction drawings lag behind site, rewrite decision history, and take a team's own agreement out of its hands."
+        }
+      ],
+      "explanation": "Artifacts differ in how they should change because they do different jobs. Documents that others build from need strict revision control so nobody works from a superseded copy; records of decisions keep their value by not being rewritten, so a changed decision becomes a new record pointing at the old one; and working agreements belong to the people they bind, who revise them as they learn. Choosing the control to fit the artifact's job, and its owner, keeps each one trustworthy.",
+      "mindset": "Control an artifact according to who relies on it and what for."
+    },
+    {
+      "id": "pmp-pr9-138",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "evm",
+        "estimate-at-completion",
+        "forecasting",
+        "archetype-diagnose-first"
+      ],
+      "stem": "You are forecasting the cost at completion of three packages in a public-health laboratory fit-out for this month's report. Complete each sentence with the forecasting basis that fits the cause of each package's variance. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "The electrical package overran by €80,000 because an unexpected asbestos find had to be cleared, and the remaining electrical work is unaffected, so its estimate at completion should be based on"
+        },
+        {
+          "id": "p2",
+          "text": "The joinery package has run at a CPI of 0.85 for five months because the specified panels take longer to fit than the estimator allowed, and the same panels fill the rest of the package, so its estimate at completion should be based on"
+        },
+        {
+          "id": "p3",
+          "text": "The ventilation package's original estimate left out the clean-room filtration system altogether, so the existing budget no longer describes the work left to do, and its estimate at completion should be based on"
+        }
+      ],
+      "options": [
+        {
+          "id": "atyp",
+          "text": "the actual cost to date plus the remaining work at its original budgeted cost",
+          "correct": true,
+          "match": "p1",
+          "rationale": "The cause was a one-off and has been dealt with, so the rest of the package should cost what was budgeted. Scaling the remaining work by the CPI would project an asbestos find onto work that has none."
+        },
+        {
+          "id": "typ",
+          "text": "the budget at completion divided by the package's cumulative cost performance index",
+          "correct": true,
+          "match": "p2",
+          "rationale": "The cause is built into the remaining work, so the efficiency seen so far is the best predictor of the rest. Five consistent months and an unchanged specification support assuming it continues."
+        },
+        {
+          "id": "etc",
+          "text": "the actual cost to date plus a fresh bottom-up estimate of the remaining work",
+          "correct": true,
+          "match": "p3",
+          "rationale": "When the original estimate missed work entirely, no index applied to it can recover the missing scope. The remaining work has to be estimated again from what is now known."
+        },
+        {
+          "id": "comb",
+          "text": "the actual cost to date plus the remaining work divided by the product of the cost and schedule indices",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Combining both indices fits a case where a fixed completion date is forcing acceleration, so schedule performance drives future cost too. None of the three packages describes that pressure."
+        }
+      ],
+      "explanation": "The forecasting formula is a statement about the future: whether the cause of the variance has stopped, will continue, or has shown the original estimate to be wrong. Identifying the cause comes first and the formula follows from it. A one-off cause leaves the remaining budget valid, a persistent one scales it by performance to date, and a broken estimate needs replacing rather than adjusting. Combined cost and schedule indices belong where a fixed date is making schedule pressure drive cost.",
+      "mindset": "Find out why a variance happened before deciding what it says about the rest."
+    },
+    {
+      "id": "pmp-pr9-139",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "earned-schedule",
+        "evm",
+        "schedule-performance",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A ten-month motorway resurfacing contract has cumulative planned value, in £000, of 60, 150, 260, 380, 500, 610, 700, 780, 850 and 900 at the end of months 1 to 10. At the end of month 7, earned value is £555,000. The client wants the delay stated in months rather than pounds. Earned schedule is the time at which planned value equalled today's earned value, interpolating linearly within a month.",
+      "blanks": [
+        {
+          "id": "es",
+          "label": "Earned schedule, in months, to one decimal place",
+          "numeric": true,
+          "expect": 5.5,
+          "tol": 0.05,
+          "unit": "months",
+          "rationale": "Earned value of 555 falls between planned value of 500 at month 5 and 610 at month 6. Interpolating: 5 + (555 − 500) ÷ (610 − 500) = 5 + 55 ÷ 110 = 5.5 months. The work done by month 7 was planned to be done by mid-month 6."
+        },
+        {
+          "id": "spit",
+          "label": "Time-based schedule performance index (earned schedule ÷ actual time), to two decimal places",
+          "numeric": true,
+          "expect": 0.79,
+          "tol": 0.01,
+          "rationale": "Actual time is 7 months, so the index is 5.5 ÷ 7 = 0.786, about 0.79. The project is achieving roughly 79% of a month's planned progress for each month that passes, which puts it 1.5 months behind."
+        },
+        {
+          "id": "fd",
+          "label": "Forecast total duration if this time performance continues (planned duration ÷ time-based index), in months, to one decimal place",
+          "numeric": true,
+          "expect": 12.7,
+          "tol": 0.1,
+          "unit": "months",
+          "rationale": "Planned duration of 10 months divided by 0.786 gives 12.7 months, a finish about 2.7 months late if the current rate continues. The cost-based schedule variance of −£145,000 says nothing directly about this date."
+        }
+      ],
+      "explanation": "Earned value variances are measured in money, and as a late project approaches its end the cost-based schedule variance shrinks towards zero because all the planned value is eventually earned, however late the finish. Translating earned value onto the time axis, by finding when the plan expected today's achievement, gives a schedule measure that stays meaningful to the end and answers the question clients actually ask. Report slippage in units of time whenever the audience is planning around dates.",
+      "mindset": "Answer a question about dates in units of time."
+    },
+    {
+      "id": "pmp-pr9-140",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-9",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "tracking-gantt",
+        "float",
+        "schedule-status",
+        "archetype-diagnose-first"
+      ],
+      "stem": "The tracking Gantt for a hospice extension shows five activities. Each label gives how far the activity's forecast finish has slipped against baseline and the total float it had in the baseline schedule. The trustees ask which delay, if any, you should report as threatening the contractual handover date. Select that activity.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Tracking Gantt: five activities with slippage against baseline and baseline total float",
+        "caption": "Select an activity. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "ward",
+          "n": 1,
+          "label": "Ward fit-out: 12 days behind baseline, 20 days total float",
+          "x": 20,
+          "y": 30,
+          "w": 600,
+          "h": 52,
+          "correct": false,
+          "rationale": "A twelve-day slip looks serious, but the activity had twenty days of float and still has eight. Choosing it ranks delays by size rather than by what they do to the finish date."
+        },
+        {
+          "id": "call",
+          "n": 2,
+          "label": "Nurse-call installation: 6 days behind baseline, 6 days total float",
+          "x": 20,
+          "y": 95,
+          "w": 600,
+          "h": 52,
+          "correct": false,
+          "rationale": "The slip has used exactly all of the float, so the activity is now critical and should be watched closely. But it has not yet moved the handover date, and reporting it as the threat confuses zero float with negative float."
+        },
+        {
+          "id": "gas",
+          "n": 3,
+          "label": "Medical gas testing: 5 days behind baseline, 2 days total float",
+          "x": 20,
+          "y": 160,
+          "w": 600,
+          "h": 52,
+          "correct": true,
+          "rationale": "The slip exceeds the float by three days, so unless it is recovered the handover moves by three days. It is one of the smaller delays on the chart and the only one that reaches the finish."
+        },
+        {
+          "id": "land",
+          "n": 4,
+          "label": "Garden landscaping: 15 days behind baseline, 30 days total float",
+          "x": 20,
+          "y": 225,
+          "w": 600,
+          "h": 52,
+          "correct": false,
+          "rationale": "The largest slip on the chart, which is what draws the eye, but it has used only half its float. Picking it treats calendar delay as if it were schedule risk."
+        },
+        {
+          "id": "lift",
+          "n": 5,
+          "label": "Lift commissioning: on baseline, 0 days total float",
+          "x": 20,
+          "y": 290,
+          "w": 600,
+          "h": 52,
+          "correct": false,
+          "rationale": "This activity is on the critical path, so any slip would move handover, but it has not slipped. Being critical is a reason to watch an activity, not evidence that it is threatening the date."
+        }
+      ],
+      "explanation": "A delay threatens the end date only when it exceeds the float the activity had, so reading a tracking Gantt means comparing each slip with its float rather than ranking slips by size. The largest delay is often harmless, an activity whose float is exactly used up has become critical and needs watching, and a modest slip on a low-float activity can be the one that moves the finish. Report the threat as the number of days by which slip exceeds float.",
+      "mindset": "Judge a delay by the float it consumes, not by its size."
+    }
+  ]
+}

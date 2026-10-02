@@ -1,0 +1,1710 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Business 5 — Risk",
+  "questions": [
+    {
+      "id": "pmp-b5-101",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "risk-identification",
+        "risk-register",
+        "telecoms",
+        "archetype-make-visible"
+      ],
+      "stem": "During planning for a rural mobile-mast rollout, a site acquisition surveyor mentions that two landowners have talked about withdrawing access consent if the contractor's vehicles damage their tracks again. Nothing has been withdrawn, and the masts on those two sites are not due to be built until month six. The project keeps a risk register and holds a monthly risk review. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record the possible withdrawal of consent in the risk register with an owner, then assess its likelihood and its effect on the month-six installations.",
+          "correct": true,
+          "rationale": "A concern that has not happened yet is a risk, and the first move is to capture it where it will be owned and analysed. Analysis then tells you whether scouting sites, talking to landowners or warning anyone is worth the effort."
+        },
+        {
+          "id": "b",
+          "text": "Start scouting replacement sites close to the two locations now, so that workable alternatives are ready to use if either landowner withdraws consent.",
+          "correct": false,
+          "rationale": "Scouting alternatives is a response, and choosing a response before the risk has been assessed spends effort on a threat whose size nobody yet knows. The candidate has jumped from identification straight to mitigation."
+        },
+        {
+          "id": "c",
+          "text": "Write to both landowners asking them to confirm in writing that they remain committed to the access terms they agreed at the start, then file their replies against the two month-six sites.",
+          "correct": false,
+          "rationale": "Asking for written commitment may be part of a later response, but sent cold it can provoke the very withdrawal it is meant to prevent. It also skips recording and assessing the risk, so nobody owns it."
+        },
+        {
+          "id": "d",
+          "text": "Tell the sponsor now that the two month-six sites are under threat, then agree with the board whether those installation dates should move later in the year.",
+          "correct": false,
+          "rationale": "Reporting an unassessed concern upward as a threat to dates alarms the board without any information on likelihood or size. Escalation follows analysis and agreed thresholds; it does not replace them."
+        }
+      ],
+      "explanation": "A risk raised in conversation has to be captured before it can be managed: put it on the register, give it an owner and assess it, and only then choose a response or decide who needs to hear about it. Responses and escalations chosen before analysis are sized by how alarming the remark sounded rather than by how likely and how damaging the event would be.",
+      "mindset": "Capture and assess a new risk before deciding what to do about it."
+    },
+    {
+      "id": "pmp-b5-102",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "risk-response",
+        "product-backlog",
+        "product-owner",
+        "archetype-route-to-owner"
+      ],
+      "stem": "A developer on your agile team building a mobile banking app learns that the third-party payments interface the app depends on will be switched off in five months. Migrating to the replacement interface is roughly two sprints of work. The product backlog is already full of features the marketing team wants for a spring campaign. What should happen next?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the migration stories to the current sprint, so the work starts well inside the five-month window and the risk is closed early.",
+          "correct": false,
+          "rationale": "Pulling new work into a running sprint breaks the team's commitment and takes a prioritisation decision away from the person who owns it. Five months is ample time for the work to be ordered properly."
+        },
+        {
+          "id": "b",
+          "text": "Have the team absorb the migration gradually over the next few sprints, using the capacity it normally keeps aside for paying down technical debt.",
+          "correct": false,
+          "rationale": "Hiding the migration inside technical-debt capacity makes a deadline-driven, two-sprint response invisible to the person ordering the backlog, and the debt work it displaces quietly stops. The candidate has treated a business risk as housekeeping."
+        },
+        {
+          "id": "c",
+          "text": "Take the switch-off date and the effort estimate to the product owner, so the migration is ordered in the backlog against the campaign features.",
+          "correct": true,
+          "rationale": "Ordering the backlog is the product owner's call, and a risk response that consumes capacity competes with features for the same sprints. Giving the owner the date and the effort lets the response be weighed and scheduled rather than slipped in."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the switch-off date to the steering group, so senior managers can decide between the migration and the spring campaign features.",
+          "correct": false,
+          "rationale": "The trade-off is a backlog-ordering decision that sits with the product owner. Escalating it skips the role that has the authority and the context, and it will come back down with a request for the same information."
+        }
+      ],
+      "explanation": "In agile delivery, the response to a risk that needs team capacity is a backlog item, and the backlog has one owner who weighs it against everything else. The project manager's job is to make the exposure visible to that owner — deadline, effort, consequence of missing it — rather than to schedule the response directly or send it above the owner. Risk work that bypasses the backlog either displaces commitments or becomes invisible.",
+      "mindset": "A risk response that needs capacity belongs in the queue its owner prioritises."
+    },
+    {
+      "id": "pmp-b5-103",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "risk-analysis",
+        "root-cause",
+        "supplier-risk",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Your data-centre build has a fit-out baselined in a fixed plan and monitoring software delivered in sprints. The risk register holds three separate entries — late switchgear delivery, a slip in factory acceptance testing and loss of warranty support — each with a different owner and its own mitigation. This morning a credit agency notice shows that the switchgear supplier has entered a formal restructuring process. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the probability of each of the three entries and ask each owner to strengthen their own mitigation in the light of the restructuring notice.",
+          "correct": false,
+          "rationale": "Re-scoring each entry in isolation keeps three owners working on symptoms of the same cause. The candidate has updated the numbers without noticing that the risks are correlated, so the combined exposure is still understated."
+        },
+        {
+          "id": "b",
+          "text": "Ask procurement to begin qualifying an alternative switchgear supplier straight away, so a replacement is available before the supplier's position worsens.",
+          "correct": false,
+          "rationale": "A second source may well be part of the answer, but committing procurement effort before the exposure is understood picks a response first. Lead times, partial deliveries and stock already built may make another response better."
+        },
+        {
+          "id": "c",
+          "text": "Analyse the three entries together as effects of a single cause, the supplier's possible failure, and plan the response at that level.",
+          "correct": true,
+          "rationale": "Three entries sharing one driver are one exposure, and treating them separately hides how large it is and invites three responses that may conflict. Grouping by root cause shows what a response must address, which is what makes the later choice of second source, guarantee or stock purchase sensible."
+        },
+        {
+          "id": "d",
+          "text": "Ask the supplier for a parent-company guarantee that covers both its delivery and its warranty obligations before the next stage payment is released.",
+          "correct": false,
+          "rationale": "A guarantee may help with delivery and warranty, but it is one response picked before the combined exposure has been analysed. A guarantee from a group in restructuring may also be worth little, which analysis would surface."
+        }
+      ],
+      "explanation": "When several risks share one cause, the cause is the risk that needs managing, and analysing the entries one by one understates the exposure because they will tend to occur together. Look for common drivers whenever new information touches more than one register entry, then size and respond at the level of the driver. Responses chosen per symptom tend to overlap, miss the root and leave owners pulling in different directions.",
+      "mindset": "When one fact moves several risks, look for the single cause behind them."
+    },
+    {
+      "id": "pmp-b5-104",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "contingency-plan",
+        "risk-trigger",
+        "rail",
+        "archetype-act-now"
+      ],
+      "stem": "Your weekend rail possession plan includes a contingency response: if the new crossover is not fully laid by 02:00 on Sunday, the crew installs temporary plain line and hands the track back on time, finishing the crossover in a later possession. The plan delegates that call to you. At 02:05 the crossover is about 70% laid, and the gang leader says the crew has found its rhythm and could finish in three hours. Handback is at 05:00. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the crew continue and review progress again at 03:00, when the remaining work can be judged against the actual rate being achieved.",
+          "correct": false,
+          "rationale": "Waiting an hour spends the time the plain-line installation needs and turns a planned, low-cost response into an unplanned overrun. The candidate is trusting an optimistic in-the-moment estimate over a threshold chosen with a clear head."
+        },
+        {
+          "id": "b",
+          "text": "Call the operator's control centre to ask whether handback could be extended by an hour, so the crossover can be finished tonight.",
+          "correct": false,
+          "rationale": "A handback extension is a negotiation with consequences for the morning's services, and even the gang leader's estimate overruns it. The plan already contains the response; asking for more time treats it as optional."
+        },
+        {
+          "id": "c",
+          "text": "Invoke the contingency response now and have the crew switch to installing the temporary plain line for an on-time handback.",
+          "correct": true,
+          "rationale": "The trigger was set in advance precisely so that this decision is not made under pressure at 2am. It has been met, the authority is yours, and the gang leader's own estimate runs past handback, so the planned response is due now."
+        },
+        {
+          "id": "d",
+          "text": "Ask the gang leader and site engineer to re-estimate the remaining work in detail before you decide whether the trigger really applies.",
+          "correct": false,
+          "rationale": "Re-estimating is the reflex the trigger was designed to replace. The condition is observable and has been met, and the gang leader's figure already shows that the work cannot finish before handback."
+        }
+      ],
+      "explanation": "A contingency plan pairs a response with a trigger and an owner so that the decision is made once, calmly, and then executed when the condition occurs. When the trigger fires, the owner acts on it; re-litigating the plan in the moment usually means trusting the most optimistic voice under the most pressure. If the trigger turns out to be badly set, fix it afterwards for the next occasion, not while it is firing.",
+      "mindset": "When a pre-agreed trigger fires, carry out the planned response rather than reopening the decision."
+    },
+    {
+      "id": "pmp-b5-105",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "technical-risk",
+        "spike",
+        "backlog-ordering",
+        "archetype-trade-off"
+      ],
+      "stem": "Your agile team is building a delivery-route optimisation service for a parcel carrier. A spike shows the open-source solver you chose handles 2,000 stops comfortably, but its run time climbs steeply beyond that; the carrier's largest depot needs 5,000 stops at launch in four months. The product owner wants the next two sprints spent on the dispatcher screens, because stakeholders expect to see them at the next review. What should the project manager recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the dispatcher screens in the next two sprints as planned and run a second solver investigation in parallel, using about a fifth of the team's capacity.",
+          "correct": false,
+          "rationale": "Running the investigation alongside is defensible, but at a fifth of capacity the answer arrives later while more is built on an unproven foundation. The candidate has protected the demo at the cost of slowing the one piece of learning everything depends on."
+        },
+        {
+          "id": "b",
+          "text": "Put the work that proves or disproves performance at 5,000 stops at the top of the next sprint, and accept that the review will show fewer dispatcher screens.",
+          "correct": true,
+          "rationale": "The scaling question can invalidate the architecture that every screen sits on, so resolving it first protects the value of all later work. Fewer screens at one review is a visible, recoverable cost; discovering the limit in month three is not."
+        },
+        {
+          "id": "c",
+          "text": "Switch to a commercial solver now, before more of the service is built around the open-source one, and absorb the extra licence cost within the contingency budget.",
+          "correct": false,
+          "rationale": "Switching now acts on a partial result: the spike showed steep growth, not failure, and a commercial solver brings its own integration and cost risks. The candidate has chosen a response before the uncertainty that would justify it is resolved."
+        },
+        {
+          "id": "d",
+          "text": "Record the scaling risk with the carrier's depot manager as its owner, and revisit it at the release planning session at the start of next month.",
+          "correct": false,
+          "rationale": "Registering and deferring the risk lets a month of feature work accumulate on an architecture that may not scale. The depot manager also cannot act on a solver limit; the response sits with the team and the product owner."
+        }
+      ],
+      "explanation": "Agile delivery reduces risk by ordering the work that resolves the biggest uncertainties early, even when it produces less to show in the short term. Where an unknown could invalidate the architecture, value built on top of it is at risk too, so the cheapest time to find out is before more depends on it. The visible cost of fewer features now is usually smaller than the hidden cost of rework later.",
+      "mindset": "Spend early sprints buying down the uncertainty that everything else rests on."
+    },
+    {
+      "id": "pmp-b5-106",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "overall-project-risk",
+        "quantitative-analysis",
+        "heritage",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A national museum is relocating 40,000 objects to a new storage centre. The risk register holds 38 open risks; none is rated red, and 22 are amber, most of them threats to activities on the move schedule's critical path. The sponsor, about to announce the public reopening date, says: 'Nothing is red, so the date is safe.' What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Review the five highest-rated amber risks with their owners to check whether any of them should now be re-rated red before the announcement.",
+          "correct": false,
+          "rationale": "Re-rating individual risks accepts the sponsor's premise that the date is safe unless a single risk is red. Even if none changes colour, the combined exposure is still unexamined."
+        },
+        {
+          "id": "b",
+          "text": "Explain that many amber schedule risks can together make the date unlikely, and run a quantitative schedule risk analysis before the date is announced.",
+          "correct": true,
+          "rationale": "Ratings describe risks one at a time; the date depends on all of them together, and 22 threats on one critical path compound. Only an analysis of their combined effect can say how likely the date is, and the sponsor needs that before committing publicly."
+        },
+        {
+          "id": "c",
+          "text": "Support the announcement but ask the sponsor to describe the date as provisional, to be confirmed after next month's full review of the register.",
+          "correct": false,
+          "rationale": "Calling the date provisional softens the message but still rests on the belief that no red means no problem. A public date tends to stick whatever caveat came with it, so the analysis needs to come first."
+        },
+        {
+          "id": "d",
+          "text": "Add a few weeks of schedule contingency to the date before it is announced, to cover the combined effect of the amber risks on the move.",
+          "correct": false,
+          "rationale": "Recognising the combined effect is right, but a buffer of 'a few weeks' is a guess at its size. Without analysis it may be far too small or wastefully large, and either way the public date rests on an unsized number."
+        }
+      ],
+      "explanation": "Overall project risk is not the worst individual risk: it is the combined effect of all the uncertainty on an objective, and many moderate risks on the same path can make a target improbable with no single item looking alarming. When a decision rests on the whole picture, such as committing a date publicly, assess the aggregate quantitatively rather than reading the register's colours. A register sorted by rating answers which risk is worst, not whether the objective is achievable.",
+      "mindset": "Judge an objective by the combined risk on it, not by the worst single entry."
+    },
+    {
+      "id": "pmp-b5-107",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "risk-owner",
+        "risk-monitoring",
+        "banking",
+        "archetype-use-own-authority"
+      ],
+      "stem": "On a bank's hybrid migration of customer records to a cloud platform, the named owner of the risk 'privileged access not revoked for leavers' left the organisation three weeks ago. Her name is still on the register, and the risk's monthly review is now overdue. The risk management plan gives the project manager authority to assign risk owners. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Assign a new owner today who controls the access-review process the response depends on, and have them confirm that the response is still operating.",
+          "correct": true,
+          "rationale": "The plan puts assignment in the project manager's hands, so waiting for anyone else leaves a possibly lapsed control unowned for no reason. The right owner is whoever can make the response work, and the first job is to confirm it still does."
+        },
+        {
+          "id": "b",
+          "text": "Take ownership of the risk yourself until the security team names a permanent replacement, and check personally that the access reviews are still happening each week.",
+          "correct": false,
+          "rationale": "A project manager who holds risks personally rarely controls the response, so ownership becomes tracking rather than action. The candidate has filled the gap with the nearest name instead of the person able to act."
+        },
+        {
+          "id": "c",
+          "text": "Raise the ownership gap at next week's steering meeting and ask the chief information officer to nominate a replacement from the security function.",
+          "correct": false,
+          "rationale": "Escalation adds a week to a gap that has already run three, for a decision the plan delegates to the project manager. It moves authority upward that the governance deliberately placed lower."
+        },
+        {
+          "id": "d",
+          "text": "Ask the former owner's line manager to pick up the risk and the overdue review, since the role she held sat within that manager's team.",
+          "correct": false,
+          "rationale": "The line manager may be a sensible candidate, but asking rather than assigning leaves the decision open, and the role's location does not mean the manager controls access reviews. The candidate has picked an owner by organisation chart."
+        }
+      ],
+      "explanation": "A risk owner is the person who can make the response happen, and an owner who has left means the response may have stopped without anyone noticing. Where the plan gives the project manager authority to assign owners, use it promptly and choose by control over the response, not by convenience or hierarchy. Then check the response itself, because the owner's departure is evidence that it may have lapsed.",
+      "mindset": "Use delegated authority promptly when a risk has lost its owner."
+    },
+    {
+      "id": "pmp-b5-108",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "unidentified-risk",
+        "workaround",
+        "games",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Your agile team is three weeks from submitting a console game for platform certification. The platform holder has just announced that, from next month, every submission must pass new accessibility checks, including remappable controls. This was not on the risk register. The producer wants to hold a risk retrospective this week to understand why the team missed it before deciding anything else. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold the retrospective this week as the producer proposes, so that the re-plan is informed by a shared understanding of how the requirement was missed.",
+          "correct": false,
+          "rationale": "Understanding the miss is worthwhile but it is not on the critical path; spending this week on it uses time the adaptation needs. The candidate has put process learning ahead of the response."
+        },
+        {
+          "id": "b",
+          "text": "Ask the platform holder's account manager for a waiver for titles already in final testing, since the change was announced so late in the cycle.",
+          "correct": false,
+          "rationale": "A waiver request may be worth a message, but planning around it treats a published rule as negotiable and loses the days the team needs if the answer is no. The candidate is hoping the constraint goes away."
+        },
+        {
+          "id": "c",
+          "text": "Move the submission to the following certification window, so the team can absorb the new checks without cutting any of the planned game content.",
+          "correct": false,
+          "rationale": "Slipping the window may turn out to be necessary, but deciding now, before the effort is estimated, gives up the date without testing whether scope can be traded to keep it. It is a response chosen before the re-plan."
+        },
+        {
+          "id": "d",
+          "text": "Treat the new checks as a fixed constraint, work with the product owner to re-plan the next sprint around them, and review the identification gap afterwards.",
+          "correct": true,
+          "rationale": "The event has happened and the requirement is not negotiable, so the useful work is adapting the plan inside the time left. Learning why it was missed matters, but it does not change what the team needs to build next sprint."
+        }
+      ],
+      "explanation": "When an unidentified risk occurs, it is no longer a risk to analyse but a condition to work around, and the first job is to adapt the plan to it with the decision-makers who own scope. Lessons about why identification missed it are captured once the workaround is in hand, not before. Treating the new condition as provisional, or pausing to investigate, spends the time the response needs.",
+      "mindset": "When the unforeseen arrives, adapt the plan first and examine the miss afterwards."
+    },
+    {
+      "id": "pmp-b5-109",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "risk-versus-issue",
+        "risk-register",
+        "laboratory",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your laboratory relocation's risk register includes 'Specialist freezer contractor may arrive late, delaying sample transfer', rated at 40% probability, with a planned response of renting temporary cold storage for about €12,000. This morning the contractor confirmed in writing that it will arrive ten days late. Your risk analyst proposes raising the probability to 100% and keeping the entry open. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Log the late arrival as an issue, put the cold-storage response into effect, and close the risk entry with a reference to the issue.",
+          "correct": true,
+          "rationale": "A confirmed event is no longer uncertain, so it leaves the register and becomes an issue to be managed. The planned response exists for exactly this moment, and closing the risk with a link keeps the audit trail."
+        },
+        {
+          "id": "b",
+          "text": "Raise the probability to 100% as the analyst suggests, so the register shows the true likelihood and the risk owner keeps tracking it.",
+          "correct": false,
+          "rationale": "A risk at 100% is a contradiction: it has happened. Keeping it on the register leaves the response waiting behind an analysis that is already complete, and mixes certain events in with uncertain ones."
+        },
+        {
+          "id": "c",
+          "text": "Ask the contractor for a written recovery plan and keep the risk open until it is clear whether some of the ten days can be clawed back.",
+          "correct": false,
+          "rationale": "A recovery plan may shorten the delay, but waiting for it postpones a planned response while the samples still need cold storage. The candidate is treating a confirmed event as if it were still uncertain."
+        },
+        {
+          "id": "d",
+          "text": "Report the delay to the sponsor as a new threat to the go-live date, with the €12,000 cold-storage cost attached for the sponsor's approval.",
+          "correct": false,
+          "rationale": "The cold-storage cost was planned as the response, so it does not need to come back as a new threat. Reporting it as a risk to go-live misclassifies an event that has already occurred."
+        }
+      ],
+      "explanation": "A risk is an uncertain event; once it occurs it becomes an issue and is handled through the issue log, starting with the response that was planned for it. Leaving a certain event on the risk register, even at 100%, blurs the line between what might happen and what is happening, and delays the action already agreed. Close the risk with a link to the issue so the history stays traceable.",
+      "mindset": "Once a risk has happened, manage it as an issue and use the response you planned."
+    },
+    {
+      "id": "pmp-b5-110",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "risk-response",
+        "risk-tolerance",
+        "tunnelling",
+        "archetype-trade-off"
+      ],
+      "stem": "A water utility's new 4 km tunnel must be in service before a regulatory permit deadline, with no float left. Ground investigation suggests a 70% chance of stiff clay and a 30% chance of fractured rock along the middle section. The boring machine must be ordered within three weeks to keep the manufacturer's slot; the next slot is nine months away. A dual-mode machine costs £400,000 more than a clay-only one. A clay-only machine meeting rock would need a new cutter head and about five months. Extra boreholes would take six weeks. What should the project manager recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Commission the extra boreholes now and place the machine order once their results narrow down which ground conditions the tunnel will meet.",
+          "correct": false,
+          "rationale": "More information is valuable only if it arrives before the decision it informs. Six weeks of boreholes misses the slot, and the next one is nine months away, so the investigation itself causes the delay it was meant to avoid."
+        },
+        {
+          "id": "b",
+          "text": "Order the dual-mode machine, treating the £400,000 as the price of a schedule that still works whichever ground the tunnel meets.",
+          "correct": true,
+          "rationale": "The deadline makes a five-month delay intolerable, and no information can arrive before the irreversible order. Paying a known premium to keep both outcomes workable is the response that fits a threat whose consequence lies outside tolerance."
+        },
+        {
+          "id": "c",
+          "text": "Order the clay-only machine for the likelier ground and hold a contingency reserve sized to cover a cutter-head change if rock is found.",
+          "correct": false,
+          "rationale": "Contingency money covers the cost of a cutter head but cannot buy back five months against a deadline with no float. The candidate has sized the response to the financial impact and ignored the schedule impact that breaches tolerance."
+        },
+        {
+          "id": "d",
+          "text": "Order the clay-only machine and transfer the ground risk through a contract clause making the tunnelling contractor bear unforeseen ground costs.",
+          "correct": false,
+          "rationale": "A contract clause moves the cost, not the event: if rock is met, the machine still stops for five months and the permit deadline is still missed. The contractor will also price the clause heavily or contest it."
+        }
+      ],
+      "explanation": "Choosing a risk response means checking every dimension of impact against tolerance, not just the expected cost. When a consequence would breach a hard limit, responses that only fund or reallocate the damage do not help, and information is worth buying only if it can arrive before the irreversible commitment it informs. Paying for flexibility is often the right trade when the decision cannot wait and the downside cannot be tolerated.",
+      "mindset": "Match the response to the impact that breaks tolerance, not just the one that is easiest to price."
+    },
+    {
+      "id": "pmp-b5-111",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "risk-prioritisation",
+        "proximity",
+        "insurance",
+        "archetype-act-now"
+      ],
+      "stem": "Your agile team at an insurer keeps a risk board scored by probability times impact, and reserves about 15% of each sprint for risk work. The top-scoring item, at 20, is a possible data-residency rule that would force a hosting move, expected to be decided in eight months. Scoring 9 is the risk of losing claims-export knowledge held only by one engineer, who leaves on Friday. The product owner wants this sprint's risk capacity spent on the top score. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Spend the risk capacity on the top-scoring item, as the board's agreed scoring method ranks it highest, and ask the engineer to write notes before Friday.",
+          "correct": false,
+          "rationale": "The score measures size, not urgency, and following it mechanically spends this week on a risk that can wait. Notes written in a final week rarely capture tacit knowledge, so the candidate under-responds to the urgent risk."
+        },
+        {
+          "id": "b",
+          "text": "Split this sprint's risk capacity evenly between the two items, so that both see real progress and neither is left without attention this sprint.",
+          "correct": false,
+          "rationale": "Splitting evenly feels fair but halves the effort on the only risk whose window ends this week. The candidate has balanced attention instead of ordering it by when each response stops being possible."
+        },
+        {
+          "id": "c",
+          "text": "Arrange for the departing engineer to be available on a short paid contract after Friday, and keep this sprint's risk capacity on the hosting item.",
+          "correct": false,
+          "rationale": "A post-departure contract is a reasonable fallback, but it depends on her agreement and availability and leaves the risk open. The candidate has relied on goodwill when a surer response is available now."
+        },
+        {
+          "id": "d",
+          "text": "Spend this sprint's risk capacity on capturing the claims-export knowledge, and schedule the hosting work in later sprints well ahead of the ruling.",
+          "correct": true,
+          "rationale": "Proximity changes the order: the knowledge risk's window closes in days while the hosting risk has months of runway. A lower score with an imminent deadline can outrank a higher score that can still be handled later."
+        }
+      ],
+      "explanation": "Risk priority combines how large a risk is with how soon its response window closes; a probability-impact score alone captures only the first. When a lower-scored risk can only be addressed in the next few days and a higher-scored one has months of runway, act on the closing window first and schedule the other. Ranking without proximity sends capacity to whatever looks biggest on paper rather than to whatever is about to become unmanageable.",
+      "mindset": "Weigh how soon a response stops being possible, not just how big the risk is."
+    },
+    {
+      "id": "pmp-b5-112",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "risk-assessment",
+        "estimation-bias",
+        "aerospace",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are facilitating a risk assessment workshop for an aircraft landing-gear redesign. On each risk, the chief engineer gives his probability estimate first, often a low one ('we have done this before'), and the nine other participants then settle close to his figure. You suspect the ratings reflect his view rather than the group's. Which two changes should you make to the way the workshop assesses risks?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Collect each participant's estimate independently and anonymously before any discussion, then share the spread and discuss the outliers.",
+          "correct": true,
+          "rationale": "Independent, anonymous estimates remove the anchor before it is set, and the spread itself is information: wide disagreement marks a risk worth discussing. This is the core of the Delphi approach."
+        },
+        {
+          "id": "b",
+          "text": "Ask the chief engineer to sit out the workshop and review the group's ratings afterwards, so the others can speak without his influence.",
+          "correct": false,
+          "rationale": "Excluding the most experienced person throws away the expertise the workshop exists to use, and his later review re-imports the anchor anyway. The candidate has removed a person rather than a bias."
+        },
+        {
+          "id": "c",
+          "text": "Open each risk with reference data from comparable past programmes, such as how often similar redesigns slipped, before anyone gives a view.",
+          "correct": true,
+          "rationale": "Base rates from comparable work give everyone, the chief engineer included, an external reference that competes with a single confident voice. 'We have done this before' becomes something the group can test."
+        },
+        {
+          "id": "d",
+          "text": "Average all the participants' estimates for each risk and add a fixed margin, so the final ratings lean towards caution on every risk.",
+          "correct": false,
+          "rationale": "Averaging anchored estimates averages the anchor, and a fixed margin adds an arbitrary bias of its own. The candidate has adjusted the numbers without fixing how they were produced."
+        },
+        {
+          "id": "e",
+          "text": "Have the chief engineer sign off the final ratings as the accountable technical authority, so they carry the weight of his experience.",
+          "correct": false,
+          "rationale": "Sign-off by the dominant voice entrenches the effect you suspect and makes his view the official one. Accountability for the ratings does not require that one person sets them."
+        }
+      ],
+      "explanation": "Group risk assessment is vulnerable to anchoring and deference: the first confident number shapes everyone else's, and seniority amplifies it. The remedies change the process rather than the people — gather estimates independently before discussion, and ground the group in external evidence such as historical outcomes rather than in whoever speaks first. Adjusting the outputs afterwards cannot remove a bias that was built into how they were produced.",
+      "mindset": "Fix the way estimates are gathered before trusting what they say."
+    },
+    {
+      "id": "pmp-b5-113",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "risk-appetite",
+        "risk-thresholds",
+        "charity",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your agile team is building an online donations platform for a children's charity, releasing every two weeks. At release planning for the public launch before the winter appeal, the chair of trustees says: 'We have zero appetite for risk on this launch.' The team is unsure what this means for what it builds and when it releases. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Postpone the public launch until no open risk on the register is rated above low, so the trustees' stated position is honoured in full.",
+          "correct": false,
+          "rationale": "No register with real uncertainty reaches all-low, so this postpones the launch indefinitely and misses the appeal, itself a risk the trustees would not accept. The candidate has taken the statement literally."
+        },
+        {
+          "id": "b",
+          "text": "Ask the trustees to set limits for each outcome they care about, such as downtime on appeal night, data incidents and the launch date.",
+          "correct": true,
+          "rationale": "Appetite becomes usable when it is expressed as thresholds on specific objectives. The trustees almost certainly tolerate some risks more than others, and asking per outcome reveals where the real limits lie."
+        },
+        {
+          "id": "c",
+          "text": "Record 'zero appetite' in the risk management plan as the agreed position, and ask the team to apply it to every decision it makes.",
+          "correct": false,
+          "rationale": "Recording an unattainable position as policy leaves the team unable to make any decision consistent with it. The candidate has documented the ambiguity instead of resolving it."
+        },
+        {
+          "id": "d",
+          "text": "Show the trustees what driving specific risks lower would cost in time and features, so they can choose where to spend the effort.",
+          "correct": true,
+          "rationale": "Zero risk is unattainable, so the useful conversation is about price. Making the cost of each reduction visible turns a slogan into a set of trade-offs the trustees can actually decide."
+        },
+        {
+          "id": "e",
+          "text": "Replace the fortnightly releases with a single launch release after full testing, so there are fewer release events that could go wrong.",
+          "correct": false,
+          "rationale": "A single large release concentrates risk into one event and removes the early feedback that frequent releases give. The candidate has assumed fewer releases means less risk, which in agile delivery is usually the reverse."
+        }
+      ],
+      "explanation": "A statement of risk appetite only guides decisions once it is translated into thresholds against specific objectives, and stakeholders who say 'zero' usually mean 'low for the things I care most about'. The project manager's job is to draw those thresholds out and show what reducing each risk would cost, so the decision-makers choose consciously. Taking an absolute literally either paralyses delivery or gets quietly ignored.",
+      "mindset": "Turn a stated appetite into thresholds someone can actually apply."
+    },
+    {
+      "id": "pmp-b5-114",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "agile-risk-practices",
+        "spike",
+        "public-sector",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your agile team is starting a case-management system for a regional housing service. Match each risk raised at the kickoff to the agile practice that addresses it most directly. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "Nobody knows whether the chosen database can meet the 200-millisecond search response time written into the contract."
+        },
+        {
+          "id": "p2",
+          "text": "Caseworkers may reject the new workflow because it changes how they triage urgent housing cases."
+        },
+        {
+          "id": "p3",
+          "text": "Integration with the council's mainframe broke late on the last two projects that touched it."
+        }
+      ],
+      "options": [
+        {
+          "id": "spike",
+          "text": "A short, time-boxed spike early in the plan to test the database against the response-time target",
+          "correct": true,
+          "match": "p1",
+          "rationale": "A technical unknown is cheapest to resolve with a small experiment before anything depends on the answer. A time-box stops the investigation becoming open-ended research."
+        },
+        {
+          "id": "pilot",
+          "text": "Releasing a thin working slice to a small group of caseworkers and adjusting from their feedback",
+          "correct": true,
+          "match": "p2",
+          "rationale": "Adoption risk can only be tested with real users on something real. A thin slice exposes the workflow change early, while it is still cheap to adjust."
+        },
+        {
+          "id": "ci",
+          "text": "Integrating with the mainframe from the first sprint and including it in the definition of done",
+          "correct": true,
+          "match": "p3",
+          "rationale": "Integration that breaks late does so because it is done late. Integrating from the start and making it part of done turns one big late surprise into many small early ones."
+        },
+        {
+          "id": "harden",
+          "text": "A stabilisation sprint before go-live dedicated to integration and performance testing",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A stabilisation sprint saves integration and performance discovery for the end, which is the late-surprise pattern the other three practices exist to prevent."
+        }
+      ],
+      "explanation": "Agile practices reduce risk by turning uncertainty into evidence early: technical unknowns are tested with time-boxed experiments, adoption risk is tested with real users on working increments, and integration risk is reduced by integrating continuously. Any practice that saves the risky work for the end recreates the late discovery that iterative delivery exists to prevent.",
+      "mindset": "Pull the riskiest learning forward instead of saving it for the end."
+    },
+    {
+      "id": "pmp-b5-115",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "management-reserve",
+        "contingency-reserve",
+        "warehousing",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your warehouse automation project has a fixed-price civils package and control software delivered in increments. The approved budget holds a contingency reserve for identified risks, and the sponsor holds a management reserve. Match each funding need to where the money should come from. One choice is not used.",
+      "prompts": [
+        {
+          "id": "f1",
+          "text": "A register risk, conveyor parts held at customs, has occurred, and its planned response of air-freighting replacements costs £28,000."
+        },
+        {
+          "id": "f2",
+          "text": "A sinkhole opens under the loading yard; nothing like it was ever identified, and the repair costs £60,000."
+        },
+        {
+          "id": "f3",
+          "text": "The operations director asks for a returns-sorting lane that was never in the agreed scope, costing £45,000."
+        }
+      ],
+      "options": [
+        {
+          "id": "cr",
+          "text": "The contingency reserve, drawn by the project manager under the risk management plan",
+          "correct": true,
+          "match": "f1",
+          "rationale": "The risk was identified, its response planned and its cost provided for. Contingency reserve exists for exactly this, and drawing it is within the project's own risk process."
+        },
+        {
+          "id": "mr",
+          "text": "The management reserve, released by the sponsor on request",
+          "correct": true,
+          "match": "f2",
+          "rationale": "An event nobody identified was never covered by contingency. Management reserve is held above the project for unknown unknowns, so releasing it is the sponsor's decision."
+        },
+        {
+          "id": "cc",
+          "text": "An approved change, with new funding added to the budget",
+          "correct": true,
+          "match": "f3",
+          "rationale": "New scope is not a risk event, so neither reserve should pay for it. Funding it through change control keeps the baseline honest about what the project now delivers."
+        },
+        {
+          "id": "ret",
+          "text": "Retention money withheld from the civils contractor's payments",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Retention secures the contractor's completion of its own obligations; none of the three costs arises from the contractor's default."
+        }
+      ],
+      "explanation": "Reserves follow the kind of uncertainty they were set aside for: contingency covers identified risks and is drawn under the project's own risk process, management reserve covers what nobody identified and sits with the sponsor, and new scope is not a risk at all but a change that brings its own funding. Drawing on the wrong pot hides scope growth inside risk money or spends the cover for known risks on unknown ones.",
+      "mindset": "Ask what kind of uncertainty a cost came from before deciding whose money pays for it."
+    },
+    {
+      "id": "pmp-b5-116",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "risk-monitoring",
+        "secondary-risk",
+        "ports",
+        "archetype-make-visible"
+      ],
+      "stem": "At the monthly risk review on your ferry terminal upgrade, where the building works follow a fixed baseline and the ticketing app is built in sprints, three register entries come up. Complete each sentence with the action that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The risk that winter storms would delay the external cladding, now that the cladding is complete and signed off, should"
+        },
+        {
+          "id": "c2",
+          "text": "The risk of the ticketing app's payment provider failing, now that a second provider is contracted but switching still takes a week, should"
+        },
+        {
+          "id": "c3",
+          "text": "The possibility that the floating crane hired to lift in the gangway sections, chosen to avoid closing the access road, breaks down mid-lift should"
+        }
+      ],
+      "options": [
+        {
+          "id": "close",
+          "text": "be closed, with the contingency held against it returned through the reserve process",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A risk whose window has passed can no longer occur. Closing it, and releasing the reserve held against it, keeps the register and the budget honest about the exposure that remains."
+        },
+        {
+          "id": "residual",
+          "text": "stay open, with its residual rating re-assessed and the remaining exposure monitored",
+          "correct": true,
+          "match": "c2",
+          "rationale": "The response reduced the risk without removing it: a week of switching is still a week without payments. The rating should reflect what is left, not what was there before the response."
+        },
+        {
+          "id": "secondary",
+          "text": "be logged as a risk in its own right, with its own owner and response",
+          "correct": true,
+          "match": "c3",
+          "rationale": "The crane lift was chosen as a response to another problem, and it brings a new risk with it. A secondary risk needs its own entry, or the register shows the original risk solved and nothing in its place."
+        },
+        {
+          "id": "hold",
+          "text": "be held at its current rating until the quarterly assurance review looks at it",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Each of the three has changed in a way the monthly review can act on now; holding entries for a later review leaves the register describing a project that no longer exists."
+        }
+      ],
+      "explanation": "A risk register is accurate only if each review changes entries to match reality: risks whose window has passed are closed and their reserve released, risks that have been partly treated are re-rated for what remains, and risks created by responses are added in their own right. A register that only ever grows, or that waits for formal reviews to change, overstates some exposures, understates others and ties up reserve that could be released.",
+      "mindset": "Make the register say what is true today, including what the responses themselves have created."
+    },
+    {
+      "id": "pmp-b5-117",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "monte-carlo",
+        "schedule-risk",
+        "confidence-level",
+        "archetype-make-visible"
+      ],
+      "stem": "A Monte Carlo simulation of your hospital imaging-suite refurbishment ran 5,000 iterations. Finish-week counts were: week 30, 250; week 31, 600; week 32, 1,100; week 33, 1,400; week 34, 900; week 35, 500; week 36, 250. The contract completion date is the end of week 32, and the hospital board wants a date it can hold with at least 80% confidence.",
+      "blanks": [
+        {
+          "id": "p32",
+          "label": "Probability of finishing by the end of week 32, in %",
+          "numeric": true,
+          "expect": 39,
+          "tol": 0.5,
+          "unit": "%",
+          "rationale": "Add the iterations finishing in weeks 30 to 32: 250 + 600 + 1,100 = 1,950. Divided by 5,000 that is 39%, so the contract date is more likely to be missed than met."
+        },
+        {
+          "id": "p80",
+          "label": "Earliest finish week that gives at least 80% confidence",
+          "numeric": true,
+          "expect": 34,
+          "tol": 0,
+          "rationale": "Cumulative shares are 5%, 17%, 39%, 67% and 85% for weeks 30 to 34. Week 33, the most frequent single outcome, reaches only 67%; week 34 is the first to clear 80%."
+        },
+        {
+          "id": "buffer",
+          "label": "Weeks of schedule reserve needed beyond the contract date to reach that confidence",
+          "numeric": true,
+          "expect": 2,
+          "tol": 0,
+          "unit": "weeks",
+          "rationale": "The 80% date is the end of week 34 and the contract date is the end of week 32, so the uncertainty the simulation describes calls for 34 − 32 = 2 weeks of reserve."
+        }
+      ],
+      "explanation": "A simulation's output is a distribution, and a date only means something alongside the confidence it carries: read the cumulative share of iterations finishing by each date, not the most frequent outcome. The most likely week is rarely a safe commitment, and the gap between a contract date and a chosen confidence level is the schedule reserve that the uncertainty demands. Stating a date without its confidence level hides most of the risk analysis.",
+      "mindset": "Quote a date together with the confidence it carries."
+    },
+    {
+      "id": "pmp-b5-118",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "risk-escalation",
+        "heat-map",
+        "product-development",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your electric-vehicle charger project builds hardware through stage gates and firmware in sprints. The heat map shows the five open risks, each labelled with its rating and current response. Your sponsor asks which single risk should go to Thursday's portfolio board for a decision. Select that risk.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "Risk heat map with five open risks, ratings and current responses",
+        "caption": "Select a risk. Use Tab or the arrow keys to move between risks, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "r1",
+          "n": 1,
+          "label": "R1 Firmware memory headroom — high probability, high impact; team refactoring under way within the project budget",
+          "x": 420,
+          "y": 30,
+          "w": 200,
+          "h": 80,
+          "correct": false,
+          "rationale": "The most severe rating on the map, but its response is in hand and inside the project's authority and budget. Severity alone is not a reason to escalate; sending it up asks the board to watch work the team already owns."
+        },
+        {
+          "id": "r2",
+          "n": 2,
+          "label": "R2 EMC test chamber double-booked with another programme in our test week — medium, medium; chamber allocated only by the portfolio office",
+          "x": 210,
+          "y": 160,
+          "w": 200,
+          "h": 80,
+          "correct": true,
+          "rationale": "The only risk whose response needs a decision the project cannot make: the chamber is a shared resource allocated above the project. A middling rating does not matter when the owner of the response sits at portfolio level."
+        },
+        {
+          "id": "r3",
+          "n": 3,
+          "label": "R3 Connector supplier lead time — high probability, medium impact; second source being qualified by project procurement",
+          "x": 210,
+          "y": 30,
+          "w": 200,
+          "h": 80,
+          "correct": false,
+          "rationale": "A high-probability risk with an active response the project controls. The candidate has escalated by probability when the response needs nothing from the board."
+        },
+        {
+          "id": "r4",
+          "n": 4,
+          "label": "R4 Charging standard revision next year — low probability, high impact; accepted and monitored by the compliance lead",
+          "x": 420,
+          "y": 290,
+          "w": 200,
+          "h": 80,
+          "correct": false,
+          "rationale": "A deliberate acceptance with a named monitor is a decision already taken. Escalating it because the impact is high reopens a settled choice without new information."
+        },
+        {
+          "id": "r5",
+          "n": 5,
+          "label": "R5 Enclosure tooling cost overrun — medium probability, high impact; covered by the project's contingency reserve",
+          "x": 420,
+          "y": 160,
+          "w": 200,
+          "h": 80,
+          "correct": false,
+          "rationale": "Funded from contingency the project already holds, so the response is within delegated authority. The candidate has treated a high cost impact as if it automatically required the board."
+        }
+      ],
+      "explanation": "Escalation is decided by who can act on a risk, not by how red it looks. A risk goes up when its response needs a decision, resource or authority outside the project, and a severe risk with an owned, funded response stays where it is. Reading a heat map for escalation means reading each response's owner, not just its position on the grid.",
+      "mindset": "Escalate a risk because its response lies beyond your authority, not because it scores high."
+    },
+    {
+      "id": "pmp-b5-119",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "risk-identification",
+        "approved-change",
+        "education",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "You are managing a €6 million secondary-school extension. The change control board has just approved a change request adding a two-storey sports hall on the far side of the site, beside a protected tree line and a public footpath. The risk register was built for the original classroom block and was last reviewed a fortnight ago. What should you do about risk now that the change is approved?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Carry the existing register forward unchanged and pick up any risks from the sports hall at the next monthly risk review.",
+          "correct": false,
+          "rationale": "The candidate treats the review calendar as the trigger for identification. Work on the hall may be planned and procured before the next review, so its risks would be found after the decisions that could have avoided them."
+        },
+        {
+          "id": "b",
+          "text": "Run a risk identification session on the added scope, then update the register, responses and reserves with what it finds.",
+          "correct": true,
+          "rationale": "The sports hall brings a new location, new neighbours and new work, so the register no longer describes the project being delivered. Identifying risks on the added scope first is what makes any later decision about responses or reserves meaningful."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor for extra contingency in proportion to the sports hall's share of the total budget, before planning starts.",
+          "correct": false,
+          "rationale": "Sizing a reserve by budget share skips the step that tells you what the reserve is for. The tree line and footpath could make the hall far riskier per euro than the classroom block, or far less, and only identification will show which."
+        },
+        {
+          "id": "d",
+          "text": "Copy the classroom block's construction risks across for the sports hall, since the two buildings use similar build methods.",
+          "correct": false,
+          "rationale": "Reusing a similar building's risks is a reasonable prompt but a poor substitute. The candidate assumes the risks follow the build method, when the protected trees and public footpath are exactly the site-specific exposures a copied list would miss."
+        }
+      ],
+      "explanation": "Any approved change to scope, location, method or timing re-opens risk identification for the part of the project it touches. A register describes the project as it was when it was analysed, so after a change it has to be refreshed before responses are adjusted or reserves resized. Waiting for the routine review, or assuming the new work carries the same risks as similar work, leaves the new exposure unexamined at exactly the moment it is cheapest to deal with.",
+      "mindset": "When the project changes, assume its risks have changed too until you have looked."
+    },
+    {
+      "id": "pmp-b5-120",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "risk-triggers",
+        "early-warning",
+        "stadium",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "On a stadium roof replacement, the register entry 'Steel fabricator delivers the roof trusses late, delaying the crane programme' gives its trigger as 'Trusses not on site by 14 May'. The planned response, re-sequencing the lifts and booking a second crane, takes six weeks to arrange. The fabricator's shop drawings are still awaiting approval and its steel mill order has not yet been confirmed. What should the project manager do with this entry?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the trigger as written and ask the fabricator for weekly written confirmation that the 14 May delivery date still stands, logging each reply against the entry.",
+          "correct": false,
+          "rationale": "Supplier assurances are useful information, but the trigger still fires on the day the risk occurs. The candidate has added reporting without fixing the timing problem, so the six-week response would still start too late."
+        },
+        {
+          "id": "b",
+          "text": "Book the second crane now as a precaution, so the contingency response is ready to use whether or not the trusses arrive late.",
+          "correct": false,
+          "rationale": "Implementing a contingency response before its trigger spends money on an outcome that may not happen. The candidate has noticed the lead-time problem but solved it by abandoning the trigger instead of moving it earlier."
+        },
+        {
+          "id": "c",
+          "text": "Replace the trigger with earlier warning signs, such as the mill order or drawing approval missing set dates more than six weeks before delivery.",
+          "correct": true,
+          "rationale": "A trigger has to fire while the response can still work. Tying it to observable precursors, dated back from the response's six-week lead time, turns the entry from a description of failure into an early warning."
+        },
+        {
+          "id": "d",
+          "text": "Raise the probability rating on the entry to reflect that the shop drawings and the mill order are both still outstanding.",
+          "correct": false,
+          "rationale": "The outstanding items may justify a higher rating, but re-scoring does not change when the response will start. The candidate has updated the analysis and left the entry unable to warn anyone in time."
+        }
+      ],
+      "explanation": "A trigger is only useful if it fires early enough to leave time for the response to take effect. Work back from the response's lead time and choose observable conditions that come before the risk event, rather than naming the event itself. An entry whose trigger is the moment of failure is a record of what went wrong, not a plan for preventing it.",
+      "mindset": "Set a trigger by how long the response takes to start, not by when the damage shows."
+    },
+    {
+      "id": "pmp-b5-121",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "reserve-analysis",
+        "contingency-reserve",
+        "aviation",
+        "archetype-make-visible"
+      ],
+      "stem": "Your airport baggage-hall refit is 35% complete and has used £420,000 of its £700,000 contingency reserve, all on identified risks that occurred and were handled as planned. Most of the remaining assessed exposure sits in the final phase, the live cut-over of the baggage sorter. No threshold has been breached, and the monthly report shows contingency only as 'available: £280,000'. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Compare the remaining reserve with the assessed exposure of the risks still open, and report the forecast gap or surplus to the sponsor now.",
+          "correct": true,
+          "rationale": "Reserve analysis tests what is left against what is still ahead. Reporting the result now, before the cut-over, gives the sponsor time to add reserve, change the approach or accept the position knowingly."
+        },
+        {
+          "id": "b",
+          "text": "Request a release from management reserve now, so that the cut-over phase starts with the same level of cover the project began with.",
+          "correct": false,
+          "rationale": "Management reserve is held for unidentified risks and released by the sponsor, not drawn to top up contingency on request. The candidate has sensed the shortfall but jumped to funding before showing how large it is."
+        },
+        {
+          "id": "c",
+          "text": "Require sponsor approval for each further contingency drawdown, so that the remaining £280,000 is protected for the cut-over phase.",
+          "correct": false,
+          "rationale": "Tighter control slows spending but says nothing about whether £280,000 is enough. The candidate has protected the balance without testing it against the exposure it has to cover."
+        },
+        {
+          "id": "d",
+          "text": "Re-run the quantitative analysis for the cut-over phase and present the results, with any forecast shortfall, at the next scheduled stage review in two months.",
+          "correct": false,
+          "rationale": "The analysis is right but the timing is not. The candidate holds a forming shortfall for two months, by which point the options for funding or reshaping the cut-over will be fewer and dearer."
+        }
+      ],
+      "explanation": "A reserve is monitored against the risk it is meant to cover, not against the amount already spent. When consumption runs ahead of progress, or the heaviest exposure is still to come, compare what remains with the assessed exposure of the open risks and report the forecast while the sponsor can still act on it. A balance shown as 'available' says nothing about whether it is enough.",
+      "mindset": "Judge a reserve by the risk still ahead of it, not by the money left in it."
+    },
+    {
+      "id": "pmp-b5-122",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "risk-avoidance",
+        "change-control",
+        "public-buildings",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your library building's approved design specifies a new green-roof membrane that is still awaiting national fire certification, expected in four months but not guaranteed. The roof goes on in five months, and the certified alternative has a twelve-week lead time. The design lead proposes switching now, which removes the risk entirely but adds €38,000 and changes the specification the client signed off. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a change request for the switch that sets out the risk it removes against its cost, for the client to decide through change control.",
+          "correct": true,
+          "rationale": "The project manager owns the analysis and the recommendation; the client owns the specification. Routing the proposal through change control, with the risk case attached, gets a timely decision from the person entitled to make it."
+        },
+        {
+          "id": "b",
+          "text": "Approve the switch as a risk response and fund the €38,000 from contingency, since avoiding an identified threat is within the project's remit.",
+          "correct": false,
+          "rationale": "The candidate treats the risk logic as authority to change the agreed specification. Avoidance that alters a baseline is a change, and the client who signed off the membrane has the right to decide it."
+        },
+        {
+          "id": "c",
+          "text": "Keep the original membrane and set a trigger on certification at month four, switching to the certified product only if it has not arrived.",
+          "correct": false,
+          "rationale": "A contingent switch is a reasonable idea, but with a twelve-week lead time a decision at month four leaves only a month before the roof goes on. The candidate has chosen a trigger that fires after the response can work."
+        },
+        {
+          "id": "d",
+          "text": "Ask the membrane manufacturer for a contractual indemnity that covers the cost of replacement if fire certification is refused.",
+          "correct": false,
+          "rationale": "An indemnity transfers some of the cost but not the delay or the non-compliant roof. The candidate has picked a financial response to a risk whose real impact is on the schedule and on regulatory approval."
+        }
+      ],
+      "explanation": "A risk response that changes an agreed baseline, whether scope, specification, cost or date, is a change and goes through change control, however sound the risk reasoning behind it. The project manager frames the decision, showing the exposure removed against the cost added, and the authority that agreed the baseline decides. Responses that stay within the baseline, such as contingency plans funded from reserve, are the project's own to approve.",
+      "mindset": "A good risk response still needs the right signature when it changes what was agreed."
+    },
+    {
+      "id": "pmp-b5-123",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "risk-identification",
+        "risk-culture",
+        "manufacturing",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a food-processing line installation, the risk register holds 46 entries, every one raised by you or the two engineering leads. Last quarter two issues hit the project, a floor-drain clash and a delayed hygiene inspection, and afterwards fitters said they had seen both coming weeks earlier but 'it isn't our place'. The client asks you to fix risk identification before the next phase starts. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Set up an anonymous risk-reporting form on the site tablets, so fitters can raise concerns without being identified to their supervisors.",
+          "correct": false,
+          "rationale": "Anonymity solves fear of blame, but 'it isn't our place' may mean the fitters think risk is not their job, or that nothing happens when they speak. The candidate has chosen a remedy before knowing which problem it is for."
+        },
+        {
+          "id": "b",
+          "text": "Talk with fitters and supervisors to find out what stops them raising risks, and shape the change around what they tell you.",
+          "correct": true,
+          "rationale": "Silence has several possible causes, and each needs a different fix. Finding out which applies here is quick, and it stops the project building a channel that nobody uses."
+        },
+        {
+          "id": "c",
+          "text": "Add a ten-minute risk round to the daily site briefing, where each crew is asked to name one thing that could go wrong that week.",
+          "correct": false,
+          "rationale": "A daily forum assumes the missing piece is an opportunity to speak. If the fitters believe raising risks is above their station, asking them in front of supervisors may produce the same silence, only more often."
+        },
+        {
+          "id": "d",
+          "text": "Run a facilitated identification workshop for the next phase that brings the fitters, supervisors and engineering leads together.",
+          "correct": false,
+          "rationale": "Workshops are sound practice, but putting fitters in a room with the leads who currently own the register can reproduce the hierarchy that is keeping them quiet. The candidate has picked a technique before understanding the barrier."
+        }
+      ],
+      "explanation": "When a group is not raising risks, the cause decides the fix: fear of blame, a belief that risk belongs to someone more senior, no convenient forum, or experience that nothing happens when they speak. Each points to a different remedy, and a mechanism chosen before the cause is known often becomes another channel that stays empty. Diagnose the barrier with the people affected, then design the route around it.",
+      "mindset": "Find out why people stay quiet before building a way for them to speak."
+    },
+    {
+      "id": "pmp-b5-124",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "quantitative-analysis",
+        "risk-correlation",
+        "energy",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your schedule risk analysis for an offshore wind cable-laying campaign gives an 82% probability of finishing by the grid connection date; the sponsor's threshold for committing to the grid operator is 80%. Reviewing the model, you see that weather downtime on cable pull-in, trenching and jointing, all in the same autumn window, is modelled as three independent distributions. The sponsor wants to sign the commitment this week. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Re-run the analysis with the three weather distributions correlated, and give the sponsor the corrected confidence before anything is signed.",
+          "correct": true,
+          "rationale": "Delays from the same weather window will tend to occur together, so modelling them separately lets good and bad draws cancel and narrows the spread. Correcting the structure first gives the sponsor a figure that can actually support the commitment."
+        },
+        {
+          "id": "b",
+          "text": "Advise the sponsor to sign, since the result clears the 80% threshold and the weather inputs come from the marine contractor's own records.",
+          "correct": false,
+          "rationale": "Good input data does not rescue a model whose structure is wrong. The candidate has checked where the numbers came from but not how they were combined, which is where the overstatement lies."
+        },
+        {
+          "id": "c",
+          "text": "Report the 82% to the sponsor with a clear note that weather is modelled as independent, and let the sponsor weigh that limitation.",
+          "correct": false,
+          "rationale": "Transparency is a virtue, but this flaw biases the answer in one known direction and can be corrected in days. The candidate passes a technical judgement to a sponsor who cannot size its effect, alongside a figure that is known to be too high."
+        },
+        {
+          "id": "d",
+          "text": "Add a two-week weather buffer to the committed date to cover any weakness in the model, and confirm the commitment to the grid operator on that later date.",
+          "correct": false,
+          "rationale": "A buffer may be too large or too small, because nobody yet knows how much the independence assumption overstates confidence. The candidate replaces one unquantified judgement with another and moves the date without evidence."
+        }
+      ],
+      "explanation": "Risks driven by a common factor rise and fall together. Modelling them as independent lets favourable and unfavourable draws offset each other, which narrows the forecast range and overstates confidence at the high percentiles. Before a simulation result is used to support a commitment, check its structure, such as shared drivers and correlations, and not only its inputs. A known flaw that biases the answer in one direction should be corrected rather than footnoted.",
+      "mindset": "Question how a model was built before trusting the confidence it reports."
+    },
+    {
+      "id": "pmp-b5-125",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "risk-identification",
+        "pre-mortem",
+        "events",
+        "archetype-use-own-authority"
+      ],
+      "stem": "At release planning for a music festival's new ticketing app, you ask the agile team what could stop a smooth launch in eight weeks. After a long pause, the lead developer says the stack is familiar and the last two releases went fine; nobody else adds anything. Earlier festival launches suffered traffic spikes and payment declines. You facilitate the team's planning events. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add traffic spikes and payment declines to the risk board yourself from the earlier launches, and ask the team to choose owners.",
+          "correct": false,
+          "rationale": "The history is worth sharing, but supplying the list yourself teaches the team that identification is your job. It also limits the board to risks that have already happened, which is not where the next launch is most likely to be hurt."
+        },
+        {
+          "id": "b",
+          "text": "Accept the team's view for now, and ask them to raise any risks at the daily stand-up as these come up during the release.",
+          "correct": false,
+          "rationale": "Deferring to the team respects its knowledge, but a pause followed by silence is a sign of optimism or social pressure, not of low risk. The candidate takes the absence of answers as an answer."
+        },
+        {
+          "id": "c",
+          "text": "Run a short pre-mortem: ask the team to imagine the launch has failed and to write down, each on their own, why it happened.",
+          "correct": true,
+          "rationale": "Assuming failure gives people permission to name problems, and writing before discussing stops the most senior voice setting the tone. As facilitator you can change the technique on the spot without needing anyone's approval."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to commission a load test and a payment review from the platform team before the team commits to the release.",
+          "correct": false,
+          "rationale": "These may be sensible responses to two known risks, but they skip the identification the team has not done. The candidate jumps to treating the risks already known instead of finding the ones not yet named."
+        }
+      ],
+      "explanation": "Asking a group directly what might go wrong often produces silence, because optimism, recent success and deference to senior members all suppress identification. Techniques that reframe the question, such as assuming the outcome has already failed, and that gather views independently before discussion, surface risks that direct questioning does not. Choosing the technique is part of facilitation and sits within the facilitator's own remit.",
+      "mindset": "When a team sees no risks, change the question before accepting the answer."
+    },
+    {
+      "id": "pmp-b5-126",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "value-risk",
+        "experimentation",
+        "pharmacy",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your agile team is building a repeat-prescription feature for a chain of community pharmacies. Its risk board lists fourteen technical risks, each with an owner and a spike or test planned. Three pharmacists have told you they doubt customers will switch from phoning the branch. The product owner says adoption is a business matter, not a delivery risk, and wants the next four sprints spent building the full ordering flow. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pass the pharmacists' doubts to the product owner in writing and leave adoption off the risk board, since the product owner owns value decisions.",
+          "correct": false,
+          "rationale": "The product owner does own value, but deciding what counts as risk is not the same as deciding priorities. The candidate defers on visibility, so the largest uncertainty on the product stays off the board that drives the team's risk work."
+        },
+        {
+          "id": "b",
+          "text": "Propose adding adoption to the risk board and testing it early with a thin release to one or two branches before the full flow is built.",
+          "correct": true,
+          "rationale": "Whether customers will use the feature is the uncertainty most likely to waste the four sprints. A small early release reduces it the way a spike reduces a technical risk, with evidence, while the product owner still decides what follows."
+        },
+        {
+          "id": "c",
+          "text": "Recommend a customer survey across the chain to measure the intention to switch before the team commits the next four sprints.",
+          "correct": false,
+          "rationale": "A survey treats adoption as a risk, which is right, but stated intention is a weak guide to behaviour and the survey delays the team without producing usage evidence. The candidate picked a slower, less reliable test."
+        },
+        {
+          "id": "d",
+          "text": "Keep the plan, but add adoption measures to the definition of done so that take-up is tracked as soon as the full flow goes live.",
+          "correct": false,
+          "rationale": "Measuring adoption after four sprints confirms the risk only once the investment is spent. The candidate makes the uncertainty visible too late for the answer to change what gets built."
+        }
+      ],
+      "explanation": "In adaptive work the largest uncertainty is often whether a product will be used, not whether it can be built, and that uncertainty belongs on the risk board alongside technical risks. It is reduced in the same way: early, cheaply and with evidence from real use, before most of the investment is made. Treating value risk as someone else's concern leaves the team diligently retiring the smaller risks.",
+      "mindset": "Count 'nobody will use it' as a risk, and test it first."
+    },
+    {
+      "id": "pmp-b5-127",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "risk-acceptance",
+        "information-security",
+        "higher-education",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your agile team is two days from releasing a university's new student-records portal. A penetration test has found a high-severity flaw in session handling, and the fix needs about one sprint. The product owner wants to release on schedule and accept the risk, putting the fix into the next sprint, because enrolment opens on Monday. University policy says only the chief information security officer can accept high-severity security risks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support the product owner's decision, record the acceptance on the risk board, and make the fix the top item of the next sprint.",
+          "correct": false,
+          "rationale": "The product owner owns the release, but policy puts acceptance of this risk elsewhere. The candidate has confused authority over priorities with authority over risk, and recorded a decision nobody on the team was entitled to make."
+        },
+        {
+          "id": "b",
+          "text": "Stop the release until the flaw is fixed, and explain to the product owner that a high-severity flaw cannot be accepted under policy.",
+          "correct": false,
+          "rationale": "Policy does not forbid acceptance; it names who may grant it. The candidate makes the opposite decision with no more authority than the product owner, and may block a release the CISO would have allowed with safeguards."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to add interim controls, such as shorter session timeouts and extra monitoring, so the residual rating falls below high.",
+          "correct": false,
+          "rationale": "Interim controls are worth proposing, but re-rating the risk inside the team to bring it within the product owner's authority sidesteps the person policy says must judge it. The candidate is engineering the rating rather than seeking the decision."
+        },
+        {
+          "id": "d",
+          "text": "Take the finding, the product owner's case and any interim controls to the CISO today for an acceptance decision before Monday.",
+          "correct": true,
+          "rationale": "The decision exists and has a named owner, and the deadline is days away. Bringing the CISO the risk, the business case and the mitigations available gets a timely, legitimate decision that may well be to release with conditions."
+        }
+      ],
+      "explanation": "Who may accept a risk is set by the organisation's thresholds, not by who owns the backlog or the release date. When a risk exceeds a role's authority, the project manager's job is to get the decision to the person who holds it, quickly and with what they need to decide, including the options that would reduce exposure. Making the call either way, or adjusting the rating until it fits someone's authority, both bypass the control the policy creates.",
+      "mindset": "Accepting a risk is a decision that belongs to whoever is authorised to carry it."
+    },
+    {
+      "id": "pmp-b5-128",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "risk-thresholds",
+        "risk-acceptance",
+        "retail",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Your retail chain's hybrid programme refits 30 stores to a fixed schedule while a loyalty app is built in sprints. Six risks were accepted at planning because each could delay go-live by under three weeks, inside the board's four-week schedule tolerance. After a profit warning, the board has cut that tolerance to one week. Three of the accepted risks could now exceed it. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the board to confirm whether the one-week tolerance applies to risks accepted before the change, before revising any responses.",
+          "correct": false,
+          "rationale": "Clarifying a rule is sometimes wise, but tolerance governs exposure from now on, not the date a risk was logged. The candidate spends time defending earlier acceptances when the board has already said what it can bear."
+        },
+        {
+          "id": "b",
+          "text": "Keep the three risks accepted but move them to weekly monitoring with tighter triggers, so any slip is caught within the new tolerance.",
+          "correct": false,
+          "rationale": "Closer monitoring detects a slip sooner but does not shrink it. The candidate has adjusted the watch on the risks when their possible impact, not their visibility, is what now breaches tolerance."
+        },
+        {
+          "id": "c",
+          "text": "Escalate the three risks to the board as now outside the project's tolerance, and ask the board to decide how each should be handled.",
+          "correct": false,
+          "rationale": "The board should approve the outcome, but handing it the problem without options asks it to do the project's analysis. The candidate escalates where a costed recommendation is what the board needs."
+        },
+        {
+          "id": "d",
+          "text": "Plan active responses for the three risks against the one-week tolerance, and bring the options and their costs to the board for approval.",
+          "correct": true,
+          "rationale": "An acceptance was only valid against the threshold in force when it was made. Re-planning the three that now breach, and putting costed options to the board, adapts the plan to the new constraint while leaving the spending decision with the board."
+        }
+      ],
+      "explanation": "Accepting a risk is a decision made against a tolerance, so when the tolerance changes every acceptance made under the old one has to be revisited, and those now outside it need active responses. The project manager adapts the plan to the new limit and brings costed options to the people who set it, rather than defending earlier decisions, watching more closely or handing the problem back upward.",
+      "mindset": "When the tolerance changes, yesterday's acceptable risks have to earn their place again."
+    },
+    {
+      "id": "pmp-b5-129",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "dependency-risk",
+        "multi-team",
+        "airline",
+        "archetype-act-now"
+      ],
+      "stem": "Your agile team is building a crew-rostering module for an airline. It depends on a pay-rules service that another team has committed to deliver in three sprints. At today's cross-team sync, that team's product owner mentions that a regulatory change has moved their priorities and the service 'may slip a bit'. Without it, your team would have nothing integrable for the next release. Which two actions should the project manager take now?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Meet the other team's product owner this week to establish the likely new date and agree a date by which to decide on a workaround.",
+          "correct": true,
+          "rationale": "A vague slip is an early warning, and the time to act on it is while options remain. Getting a realistic date and a decision point from the owner of the cause turns 'a bit' into something both teams can plan against."
+        },
+        {
+          "id": "b",
+          "text": "Escalate to the programme sponsor so that the pay-rules service is restored to its original priority in the other team's backlog.",
+          "correct": false,
+          "rationale": "The regulatory change may be the right priority for the organisation. The candidate escalates to reverse a decision before knowing how large the slip is or whether it can be absorbed."
+        },
+        {
+          "id": "c",
+          "text": "Ask your team to build against an agreed stub of the pay-rules interface, so integration can continue whichever date the service lands.",
+          "correct": true,
+          "rationale": "A stub reduces your own exposure without needing the other team to change anything. It keeps the release integrable and preserves options while the real service's date is uncertain."
+        },
+        {
+          "id": "d",
+          "text": "Record the dependency on the risk board with a high rating and review it with the other team at the next cross-team sync in two weeks.",
+          "correct": false,
+          "rationale": "Recording the risk is right, but waiting two weeks spends the response window on observation. The candidate treats visibility as the response when the slip is already signalled."
+        },
+        {
+          "id": "e",
+          "text": "Ask your team to build a simplified version of the pay rules themselves, so the module no longer depends on the other team's service.",
+          "correct": false,
+          "rationale": "Duplicating another team's regulated logic removes the dependency at the cost of a second, unverified implementation and a later reconciliation. The candidate trades one risk for a larger one."
+        }
+      ],
+      "explanation": "A dependency on another team is a risk whose cause lies outside your control and whose response window is set by your own integration point. Act early on both sides: get information and a decision date from the owner of the cause, and reduce your own exposure with work that keeps options open. Waiting for the next scheduled forum, or escalating before the facts are known, both use up the time the response needs.",
+      "mindset": "Treat 'may slip a bit' as an early warning to act on, not a status to note."
+    },
+    {
+      "id": "pmp-b5-130",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "technical-debt",
+        "risk-prioritisation",
+        "grocery",
+        "archetype-trade-off"
+      ],
+      "stem": "Your agile team runs a grocery delivery platform. Quick fixes over the past year have left the order service fragile: two outages since September, each traced to the same tangled code. Peak Christmas trading starts in seven weeks, when order volumes triple. The product owner has filled the next three sprints with promotional features the commercial team wants for Christmas. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with the team to reserve 20% of each sprint for stabilisation work without changing the backlog the product owner has set.",
+          "correct": false,
+          "rationale": "Hidden capacity may fix some code, but it takes a value decision away from the product owner and makes the team's forecasts unreliable. The candidate has solved the risk by bypassing the person who should weigh it."
+        },
+        {
+          "id": "b",
+          "text": "Help the team express the outage risk in commercial terms, such as orders likely to be lost at peak, so it can be weighed against the promotions.",
+          "correct": true,
+          "rationale": "A product owner can only trade off what is stated in comparable terms. Converting fragility into lost orders at peak puts the risk on the same scale as the features competing for the same sprints."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to impose a feature freeze until the order service has been refactored, as peak trading is too important to put at risk.",
+          "correct": false,
+          "rationale": "A freeze overrides the product owner and assumes a full refactor is the only answer. The candidate escalates to remove the trade-off when targeted work might lower the risk and still leave room for promotions."
+        },
+        {
+          "id": "d",
+          "text": "Propose specific stabilisation items for the backlog, each sized, so the product owner can order them against the promotional features.",
+          "correct": true,
+          "rationale": "Sized items turn a general worry into options the product owner can schedule. Placing them in the same backlog as the features makes the trade-off explicit and keeps the decision where it belongs."
+        },
+        {
+          "id": "e",
+          "text": "Log the fragility as a high-rated risk on the risk board and set up enhanced monitoring of the order service throughout peak trading.",
+          "correct": false,
+          "rationale": "Monitoring shortens the time to spot an outage but does nothing to make one less likely. The candidate has recorded and watched the risk instead of offering a way to reduce it before peak."
+        }
+      ],
+      "explanation": "Technical debt is a risk, and it competes fairly for capacity only when it is expressed in the same terms as features and placed in the same backlog. The project manager's role is to make the exposure legible to the person who orders the work and to offer sized responses, so the trade-off is made openly. Diverting capacity quietly, or escalating around the product owner, takes the decision away from where it belongs.",
+      "mindset": "Put technical risk in the same currency and the same queue as the features it competes with."
+    },
+    {
+      "id": "pmp-b5-131",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "integrated-risk",
+        "interdependencies",
+        "healthcare",
+        "archetype-make-visible"
+      ],
+      "stem": "Your hybrid project is building a hospital wing to a fixed plan while an agile team delivers its patient-flow software. The construction manager keeps a formal risk register; the software team tracks risks on its own board. Last month a late ceiling installation halved the time available for sensor testing, and neither record had shown the link between the two. Which two changes should the project manager make?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Replace the software team's risk board with the project's formal register, so every risk is recorded and rated in a single place.",
+          "correct": false,
+          "rationale": "One register does not by itself show how risks in different streams affect each other, and forcing the team off its board weakens its own risk habits. The candidate fixes the tool rather than the blind spot between the streams."
+        },
+        {
+          "id": "b",
+          "text": "Map the points where the two streams depend on each other and record the risks at those points, each with a named owner.",
+          "correct": true,
+          "rationale": "The ceiling-to-testing link sat at a handover that neither record covered. Mapping the interfaces and logging risks there, with owners, puts the exposure where it actually arises."
+        },
+        {
+          "id": "c",
+          "text": "Take ownership of every risk that affects both streams yourself, so that no cross-stream risk can fall between the two leads.",
+          "correct": false,
+          "rationale": "Central ownership closes the gap on paper, but owners should be those best placed to act. The candidate makes the project manager the bottleneck for responses that the leads are better placed to carry out."
+        },
+        {
+          "id": "d",
+          "text": "Hold a joint risk review with both leads ahead of each point where the streams interact, such as installation and test windows.",
+          "correct": true,
+          "rationale": "Interface risks change as each stream moves, so they need reviewing by both sides before each interaction. A joint review timed to the handovers lets each lead see how their slip lands on the other."
+        },
+        {
+          "id": "e",
+          "text": "Add a fixed time buffer to each sensor-testing window, so the software team can absorb late handovers from the construction work.",
+          "correct": false,
+          "rationale": "A buffer may help at one interface but leaves the others unexamined. The candidate has treated the symptom that has already appeared rather than making the cross-stream risks visible."
+        }
+      ],
+      "explanation": "In hybrid work, risk concentrates at the handovers between streams, and separate records can each be accurate while missing the risks that sit between them. Let each stream keep the tools that suit it, but map where they depend on each other, record risks at those points with owners, and review them jointly before each interaction. The aim is a shared view of the interfaces, not a single tool.",
+      "mindset": "Look for risk where the streams meet, because that is where nobody's record looks."
+    },
+    {
+      "id": "pmp-b5-132",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "opportunity-responses",
+        "response-strategies",
+        "solar-energy",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your hybrid project is building a solar farm to a fixed plan while its monitoring software is developed in sprints. Three opportunities came up at this month's risk review. Match each to the response strategy that fits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "A permit amendment allows panels to go in a month early, but only if you commit an installation crew to the earlier start now."
+        },
+        {
+          "id": "s2",
+          "text": "A neighbouring developer is building a substation that could also connect your farm, cutting both projects' costs if the two share its design and construction."
+        },
+        {
+          "id": "s3",
+          "text": "A sprint review suggests that adding battery-health alerts would make the operator more likely to renew its monitoring contract, though not certain to."
+        }
+      ],
+      "options": [
+        {
+          "id": "exploit",
+          "text": "Exploit: act to make sure the opportunity happens",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Committing the crew removes the uncertainty: the early start happens because the project makes it happen. Exploiting suits an opportunity that one action within the project's control can secure."
+        },
+        {
+          "id": "share",
+          "text": "Share: give part of it to a party better able to capture it",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Neither project can capture the substation saving alone. Sharing the benefit with the developer, who controls half of it, is what makes the saving achievable for both."
+        },
+        {
+          "id": "enhance",
+          "text": "Enhance: raise its likelihood or the size of its benefit",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The alerts make renewal more likely without guaranteeing it, which is enhancement. The operator's decision stays outside the project, so the most the team can do is improve the odds."
+        },
+        {
+          "id": "accept",
+          "text": "Accept: take the benefit if it comes, without acting on it",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Each opportunity here needs action to be captured: without a crew, a partner or the new alerts, the benefit is likely to pass. Acceptance suits opportunities where pursuing them would cost more than they are worth."
+        }
+      ],
+      "explanation": "Opportunity responses mirror threat responses and are chosen by how much control the project has over the outcome. Exploit when a project action can make the benefit certain, enhance when you can only improve its odds or size, share when a partner is needed to capture it, and accept when pursuing it costs more than it returns. Opportunities left in the register without a response are usually lost by default.",
+      "mindset": "Plan for the upside with the same care you give the downside."
+    },
+    {
+      "id": "pmp-b5-133",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "non-event-risk",
+        "resilience",
+        "shipbuilding",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Your hybrid project is building a research vessel, with the hull fabricated to a fixed plan and the onboard science systems developed iteratively with the scientists. Complete each sentence with the approach that best addresses the uncertainty described. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Hull welding output varies from week to week between 80 and 120 metres, with no single event behind it, so the hull schedule is best protected by"
+        },
+        {
+          "id": "c2",
+          "text": "Nobody can yet say how the scientists will want instruments laid out on deck, because they will only know once they try them, so this is best handled by"
+        },
+        {
+          "id": "c3",
+          "text": "Earlier first-of-a-kind vessels met problems that nobody could have listed in advance, so the project should prepare for surprises of that kind by"
+        }
+      ],
+      "options": [
+        {
+          "id": "range",
+          "text": "modelling the range of outcomes and planning with buffers sized from it",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Variability is a spread around a known quantity rather than an event that may or may not happen. Modelling the range and sizing buffers from it protects the plan without pretending any single week's output can be predicted."
+        },
+        {
+          "id": "learn",
+          "text": "delivering in increments with prototypes and trials, so understanding grows before commitments are made",
+          "correct": true,
+          "match": "c2",
+          "rationale": "This is ambiguity: the answer does not yet exist to be estimated. Prototypes and trials with the scientists create the knowledge, and the iterative stream is built to absorb what is learned."
+        },
+        {
+          "id": "resilience",
+          "text": "building resilience through management reserve, design margins and fast decision routes",
+          "correct": true,
+          "match": "c3",
+          "rationale": "Emergent risks cannot be listed, so they cannot be given individual responses. Reserve, margin and the ability to decide quickly let the project absorb whatever does appear."
+        },
+        {
+          "id": "transfer",
+          "text": "transferring the exposure to the shipyard through a fixed-price contract clause",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Transfer works for risks that can be defined and priced. None of these can be, so a fixed-price clause would either be priced very high or end in dispute when the uncertainty materialises."
+        }
+      ],
+      "explanation": "Not all uncertainty is a discrete event with a probability and an impact. Variability, a spread around a known quantity, is managed by modelling the range and protecting with buffers; ambiguity, not yet knowing what is true or wanted, is reduced by learning through experiments and increments; emergent risk that cannot be identified in advance is met with resilience. Forcing all three into event-style register entries produces responses that change nothing.",
+      "mindset": "Match the response to the kind of uncertainty, not just to its size."
+    },
+    {
+      "id": "pmp-b5-134",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "risk-burndown",
+        "risk-exposure",
+        "payroll-software",
+        "archetype-make-visible"
+      ],
+      "stem": "Your agile team building a payroll app tracks risk exposure as probability × impact in days, summed across open risks, and plots it each sprint. At the start of sprint 5 there are four risks: data migration (50%, 20 days), tax-table updates (30%, 10 days), single sign-on integration (40%, 15 days) and app-store review (20%, 5 days). During the sprint a spike closes the single sign-on risk and testing cuts data migration to 25%. Nothing else changes. Work out the exposure before and after the sprint.",
+      "blanks": [
+        {
+          "id": "start",
+          "label": "Total risk exposure at the start of sprint 5, in days",
+          "numeric": true,
+          "expect": 20,
+          "tol": 0,
+          "unit": "days",
+          "rationale": "0.50 × 20 = 10, 0.30 × 10 = 3, 0.40 × 15 = 6 and 0.20 × 5 = 1, which sum to 20 days of exposure across the four open risks."
+        },
+        {
+          "id": "end",
+          "label": "Total risk exposure at the end of sprint 5, in days",
+          "numeric": true,
+          "expect": 9,
+          "tol": 0,
+          "unit": "days",
+          "rationale": "Single sign-on is closed and contributes nothing; data migration falls to 0.25 × 20 = 5. The other two are unchanged at 3 and 1, so the total is 5 + 3 + 1 = 9 days."
+        },
+        {
+          "id": "pct",
+          "label": "Reduction in exposure during the sprint, as a percentage of the starting figure",
+          "numeric": true,
+          "expect": 55,
+          "tol": 0.5,
+          "unit": "%",
+          "rationale": "The exposure fell by 20 − 9 = 11 days, and 11 ÷ 20 = 0.55, a 55% reduction. Of that, 6 days came from closing single sign-on and 5 from halving the migration probability."
+        }
+      ],
+      "explanation": "A risk burndown sums the exposure of open risks each sprint, so the team and its stakeholders can see whether uncertainty is actually being retired as features are delivered. The useful reading is the trend and the work behind it: a flat or rising line means risk work is not getting into sprints, while a steep fall shows which spikes and tests are paying off. Exposure in days is only as good as the probabilities behind it, so the scores need revisiting each sprint.",
+      "mindset": "Measure whether risk is going down, not just whether features are going out."
+    },
+    {
+      "id": "pmp-b5-135",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "sensitivity-analysis",
+        "quantitative-analysis",
+        "oil-and-gas",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your refinery turnaround's risk analysis produced this sensitivity chart, with five inputs shown in register order. Each bar shows how far the finish date moves as that one input ranges from its low to its high estimate, with every other input held at its most likely value. Management will fund one further study to narrow the forecast range as much as possible. Select the input to study.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "Sensitivity chart of five inputs against turnaround finish date, centre line at the planned finish",
+        "caption": "Select a bar. Use Tab or the arrow keys to move between bars, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "b1",
+          "n": 1,
+          "label": "Crane availability: finish moves from 1 day early to 4 days late; highest probability rating on the register",
+          "x": 300,
+          "y": 30,
+          "w": 100,
+          "h": 60,
+          "correct": false,
+          "rationale": "A high probability rating says how likely the risk is, not how much it moves the forecast. Its 5-day swing is one of the smaller ones, so studying it would narrow the range little."
+        },
+        {
+          "id": "b2",
+          "n": 2,
+          "label": "Catalyst delivery: finish moves from on time to 9 days late; the largest possible delay of any input",
+          "x": 320,
+          "y": 100,
+          "w": 180,
+          "h": 60,
+          "correct": false,
+          "rationale": "This bar reaches furthest to the late side, which is why it tempts, but its total swing is 9 days. The candidate has read the worst case instead of the width of the bar."
+        },
+        {
+          "id": "b3",
+          "n": 3,
+          "label": "Heat-exchanger repair scope: finish moves from 4 days early to 8 days late",
+          "x": 240,
+          "y": 170,
+          "w": 240,
+          "h": 60,
+          "correct": true,
+          "rationale": "A 12-day swing, the widest on the chart. Narrowing the uncertainty in this input does most to narrow the forecast, because it contributes most to the spread."
+        },
+        {
+          "id": "b4",
+          "n": 4,
+          "label": "Contractor productivity: finish moves from 3 days early to 3 days late",
+          "x": 260,
+          "y": 240,
+          "w": 120,
+          "h": 60,
+          "correct": false,
+          "rationale": "A symmetrical 6-day swing. The candidate may see two-sided uncertainty as the most uncertain, but its width is half that of the widest bar."
+        },
+        {
+          "id": "b5",
+          "n": 5,
+          "label": "Permit-to-work delays: finish moves from on time to 3 days late; most frequent issue on past turnarounds",
+          "x": 320,
+          "y": 310,
+          "w": 60,
+          "h": 60,
+          "correct": false,
+          "rationale": "Frequency on past jobs is a good identification prompt, but here the input moves the finish by only 3 days. The candidate has ranked by familiarity instead of by sensitivity."
+        }
+      ],
+      "explanation": "A sensitivity chart ranks inputs by how much each one, varied alone, moves the outcome, and the width of a bar, from its low end to its high end, is that measure. To narrow a forecast, reduce uncertainty in the widest bar first; neither the furthest single extreme, the probability rating nor how often a problem occurred elsewhere tells you how much an input drives the spread. Read the whole width, then confirm the input can actually be studied or influenced.",
+      "mindset": "Spend analysis effort where the uncertainty moves the answer most."
+    }
+  ]
+}

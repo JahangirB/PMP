@@ -1,0 +1,1950 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 4 — Resources",
+  "questions": [
+    {
+      "id": "pmp-pr4-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "resource-calendar",
+        "scheduling",
+        "construction"
+      ],
+      "stem": "You are scheduling a town-centre resurfacing project. The scheduling tool applied its default calendar of seven days a week to every resource. The paving contractor's crew works Monday to Friday only, and the council permit bans machine work after 18:00. The draft schedule shows the crew laying asphalt on two Saturdays. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the paving contractor to quote for Saturday working so that the dates already shown in the draft schedule can stand.",
+          "correct": false,
+          "rationale": "This treats dates produced by a wrong calendar as a requirement and pays a premium to meet them. The candidate is protecting the draft rather than checking whether it was ever valid."
+        },
+        {
+          "id": "b",
+          "text": "Add a second paving crew for the two weekend activities so that the same work can be finished within the working week.",
+          "correct": false,
+          "rationale": "It buys extra resource to solve a problem that exists only in the model. Until the calendar is corrected nobody knows whether those activities are late at all, so the extra crew may be paid for nothing."
+        },
+        {
+          "id": "c",
+          "text": "Add a note to the schedule that the weekend dates will be moved by hand when the work is closer to starting.",
+          "correct": false,
+          "rationale": "Moving two activities by hand leaves every dependent date and the finish date computed on the wrong calendar. The candidate defers a simple correction and keeps reporting a schedule known to be wrong."
+        },
+        {
+          "id": "d",
+          "text": "Create a resource calendar for the crew with their working days and permit hours, assign it, and recalculate the schedule.",
+          "correct": true,
+          "rationale": "The impossible dates come from a modelling error, not from the work. Giving the crew its real working time lets the tool compute dates that can actually happen, including every successor and the finish date."
+        }
+      ],
+      "explanation": "A schedule is only as realistic as the working time assigned to each resource. Resource calendars record when a particular person, crew or piece of equipment can actually work — working days, shifts, holidays, permit windows — and every date the tool computes depends on them. When dates look impossible, correct the model that produced them before spending money or effort to make those dates happen.",
+      "mindset": "Fix the model before you fix the dates it produced."
+    },
+    {
+      "id": "pmp-pr4-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "estimating",
+        "resource-assignment",
+        "matrix-organisation"
+      ],
+      "stem": "Your plan for a hospital's patient-records migration estimated the data-mapping tasks at 60 days because Priya, a senior analyst who has led three similar migrations, would do them. Two weeks before the tasks start, her functional manager tells you Priya is needed elsewhere and assigns Tom, an analyst eight months into the job. The functional manager controls the allocation. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept Tom, keep the 60-day estimate, and plan closer weekly supervision of his mapping work so that the original duration can still be achieved.",
+          "correct": false,
+          "rationale": "This assumes supervision closes an experience gap that nobody has measured, and it quietly takes time from whoever supervises. The candidate is absorbing someone else's resource decision instead of exposing its cost."
+        },
+        {
+          "id": "b",
+          "text": "Escalate to the sponsor and ask for Priya's allocation to be reinstated, since the plan and the estimate were both built around her experience.",
+          "correct": false,
+          "rationale": "Escalating before the impact is known asks the sponsor to overrule a functional manager on assertion alone. It may be the right request later, but only once the cost of the substitution has been worked out."
+        },
+        {
+          "id": "c",
+          "text": "Ask the functional manager to let Priya review Tom's mapping work part-time so that her experience still shapes the final result.",
+          "correct": false,
+          "rationale": "It places a new, unplanned demand on the person the manager has just reassigned and assumes review restores the original pace. The estimate is still unrevised, so nobody can judge whether the fix is enough."
+        },
+        {
+          "id": "d",
+          "text": "Re-estimate the mapping tasks with Tom and his manager, then show the sponsor and the functional manager the schedule and cost impact of the change.",
+          "correct": true,
+          "rationale": "The 60 days was an estimate for Priya, not for the work. Re-estimating for the person actually assigned turns a hidden variance into a known impact that the allocation owner and the sponsor can accept, reverse or offset."
+        }
+      ],
+      "explanation": "An effort estimate is made for a particular level of skill, so when the person changes the estimate stops being evidence of anything. Re-estimate for the resource actually assigned and put the consequence in front of the people who own the allocation and the baseline; they can then choose between accepting the impact, changing the assignment or adding support. Quietly absorbing a substitution converts somebody else's resource decision into a variance you will later have to explain.",
+      "mindset": "When the person changes, the estimate changes with them."
+    },
+    {
+      "id": "pmp-pr4-103",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "shared-equipment",
+        "resource-contention",
+        "pharmaceutical"
+      ],
+      "stem": "Your drug-formulation project and a colleague's stability-study project both need the research site's only high-resolution mass spectrometer in weeks 14 to 16. Your analysis in those weeks has four days of total float; your colleague says hers sits on the critical path of a regulatory filing. The laboratory manager who allocates the instrument has asked both project managers to sort it out between them. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prepare a joint summary with your colleague of each project's dates, float and consequences of delay, and ask the laboratory manager to allocate from it.",
+          "correct": true,
+          "rationale": "Ranking a regulatory filing against a product timeline is a priority call neither project manager can bind the other to. Working together on the facts and handing the decision to the person who allocates the instrument resolves it on value rather than persistence."
+        },
+        {
+          "id": "b",
+          "text": "Give your colleague priority using your four days of float, and rebook your remaining analysis for the first free slot after week 16.",
+          "correct": false,
+          "rationale": "Four days of float does not cover a three-week clash, so this concedes a slip to your own project that nobody with authority has agreed. The candidate mistakes being cooperative for having the authority to trade away the sponsor's date."
+        },
+        {
+          "id": "c",
+          "text": "Ask your sponsor to agree priority directly with your colleague's sponsor, since the clash is really between two projects' objectives.",
+          "correct": false,
+          "rationale": "Sponsors may need to decide if the laboratory manager cannot, but going there first skips the person who owns the asset and has asked for input. The question usually comes back to the laboratory manager anyway, a week later."
+        },
+        {
+          "id": "d",
+          "text": "Propose that the two projects split the instrument time equally across weeks 14 to 16 and each absorb the resulting delay within its own schedule and budget.",
+          "correct": false,
+          "rationale": "An even split treats the instrument as something to share fairly rather than to allocate where it creates most value. It guarantees both projects slip, including the one tied to a regulatory filing."
+        }
+      ],
+      "explanation": "When two projects need the same scarce resource, the project managers' contribution is to make the trade-off explicit — dates, float and what each delay costs — and the decision belongs to whoever allocates the resource or sets priority between the projects. A private bargain between project managers produces an allocation based on who concedes first, and neither can commit the other's sponsor. Going straight to sponsors skips the person who actually holds the asset.",
+      "mindset": "Bring the owner of a shared resource the trade-off, not a private deal."
+    },
+    {
+      "id": "pmp-pr4-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "materials",
+        "resource-control",
+        "electrical"
+      ],
+      "stem": "On a hospital wing rewiring project, the electrical subcontractor has installed 40% of the planned circuits but has drawn 58% of the cable from your site store. At this rate the store will be empty in about seven weeks, well before the work finishes, and the supplier's lead time is three weeks. The subcontractor's supervisor says the original cable take-off was simply wrong. What should you do next?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Order enough cable now to finish the remaining circuits at the current consumption rate, since the lead time leaves little room to wait.",
+          "correct": false,
+          "rationale": "It locks the observed rate into the budget, including any waste or loss inside it. The candidate overreads the urgency: the stock and lead time leave time to find out why consumption is high before paying for it."
+        },
+        {
+          "id": "b",
+          "text": "Compare cable drawn with cable installed on a sample of finished circuits, and check the store records, before deciding how much more to order.",
+          "correct": true,
+          "rationale": "The gap could be an estimating error, waste, rework, loss from the store or a design change, and each needs a different response. With seven weeks of stock and a three-week lead time, there is room for a few days of reconciliation."
+        },
+        {
+          "id": "c",
+          "text": "Ask the designer to recheck the cable take-off against the drawings, since an estimating error would explain the whole of the gap.",
+          "correct": false,
+          "rationale": "This tests only the explanation that was offered. Waste, rework or loss on site would not show up on the drawings, so a clean take-off would leave the real cause still unknown."
+        },
+        {
+          "id": "d",
+          "text": "Raise the overconsumption formally with the subcontractor and ask for a recovery plan that brings cable usage back in line with the original estimate.",
+          "correct": false,
+          "rationale": "It presumes the subcontractor is at fault before the cause is known. If the take-off really was wrong, no recovery plan can meet the estimate and the relationship has been damaged for nothing."
+        }
+      ],
+      "explanation": "A gap between materials consumed and work completed has several possible causes — an estimating error, waste, rework, loss from the store, or a change in what is being built — and each calls for a different response. Reconciling what was drawn against what was installed separates them quickly, and the lead time tells you how long you can afford to look. Ordering at the observed rate, or accepting the first explanation offered, settles a number without settling its cause.",
+      "mindset": "Reconcile what was used against what was built before deciding what the gap means."
+    },
+    {
+      "id": "pmp-pr4-105",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-trade-off",
+        "resource-acquisition",
+        "float",
+        "erp"
+      ],
+      "stem": "Your ERP replacement for a logistics firm needs a finance-systems specialist for nine months, starting with configuration activities that have eight weeks of total float. After go-live the firm will support the system with its own staff. A contractor with the right skills can start next week at €950 a day. An internal finance analyst with the same skills can be seconded at no extra cost, but only from six weeks' time. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Take the internal analyst and start the configuration activities in six weeks, recording the reduced float as a schedule risk.",
+          "correct": true,
+          "rationale": "The float makes the six-week wait free to the finish date, and the internal analyst is the one who will still be there to support the system. It costs nothing extra and leaves the knowledge where it is needed, at the price of less schedule margin."
+        },
+        {
+          "id": "b",
+          "text": "Hire the contractor now and build a structured handover to the internal support team into the last month of the engagement.",
+          "correct": false,
+          "rationale": "A reasonable plan that pays for nine months of contractor to buy a start date the schedule does not need. It also moves the knowledge across at the end, which is the weakest point to transfer nine months of configuration decisions."
+        },
+        {
+          "id": "c",
+          "text": "Hire the contractor for six weeks to make an early start, then hand the configuration work over to the analyst when she arrives.",
+          "correct": false,
+          "rationale": "It buys an early start that the float makes unnecessary, and it adds a handover in the middle of configuration. The candidate is treating idle float as a problem to be solved rather than a margin to be spent."
+        },
+        {
+          "id": "d",
+          "text": "Ask the analyst's line manager to release her sooner, offering to backfill her current work with a contractor in the meantime.",
+          "correct": false,
+          "rationale": "It recovers time the schedule does not need by moving cost and disruption onto another team. The candidate has not noticed that the float already absorbs the wait."
+        }
+      ],
+      "explanation": "Float is time an activity can give up without moving the finish date, which makes it a resource in its own right: it can be spent waiting for a better-fit person instead of paying for speed nobody needs. Choosing between an external and an internal resource is also a decision about where the knowledge ends up, so it should weigh what the organisation must be able to do after the project, not only the start date and the day rate. Spending float deliberately is legitimate; the discipline is recording that less of it remains.",
+      "mindset": "Spend float on purpose, and count where the knowledge will live once the project ends."
+    },
+    {
+      "id": "pmp-pr4-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "tooling",
+        "delegated-authority",
+        "build-pipeline"
+      ],
+      "stem": "Your agile team building a claims portal waits an average of 40 minutes for each build on its single build server. Developers now batch changes to avoid the queue, which is producing larger, riskier merges. A second build agent would cost about £2,800 a year. Your delegated authority covers tooling spend up to £5,000 without further approval, and the team has already removed the slow tests it could. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a change request for the build agent so that the sponsor can approve the extra spend, since it was not included in the original tooling plan.",
+          "correct": false,
+          "rationale": "Delegated authority exists so that small, justified tooling decisions do not need the sponsor. The candidate is defaulting to formal approval and adding weeks of risky merges while it is obtained."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to profile the build pipeline for one more iteration to find further time savings before any money is spent on capacity.",
+          "correct": false,
+          "rationale": "Optimising first is often right, but the team has already removed what it could. Another iteration of investigation keeps the batching and the merge risk going to save a modest sum."
+        },
+        {
+          "id": "c",
+          "text": "Approve the second build agent from your delegated tooling budget, and ask the team to report at the next retrospective whether queue times fell.",
+          "correct": true,
+          "rationale": "The evidence is in, the cheaper fixes have been tried and the spend is inside the limit you were given for exactly this kind of decision. Pairing it with a measure lets the team confirm the money worked."
+        },
+        {
+          "id": "d",
+          "text": "Agree a team rule that changes are merged at least daily, so that merges stay small even while the build queue remains as it is.",
+          "correct": false,
+          "rationale": "The rule fights the behaviour without fixing the cause, and more frequent merges add load to a queue that is already the constraint. The candidate treats a capacity problem as a discipline problem."
+        }
+      ],
+      "explanation": "Delegated spending authority exists so that small, clearly justified resource decisions are taken quickly by the person nearest the problem. When the evidence is in, the cost is inside the limit and cheaper remedies have been tried, using that authority is the responsible move; sending the decision upwards spends the sponsor's attention and the team's patience on something governance has already delegated. Attach a measure so the spend can be shown to have worked.",
+      "mindset": "Use the authority you have been given once the case is made."
+    },
+    {
+      "id": "pmp-pr4-107",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "cross-skilling",
+        "single-point-of-failure",
+        "data-engineering"
+      ],
+      "stem": "Your retail analytics team has one data engineer, Sven. Whenever he is away, data-pipeline stories stall and the iteration goal is missed. Next quarter's roadmap is heavy on pipeline work, and the sponsor has said there is no budget for a second data engineer this year. Two developers on the team have said they are interested in pipeline work but have never done it. What should you encourage?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the product owner to plan pipeline stories into the iterations when Sven is present, and to fill his absences with other backlog work.",
+          "correct": false,
+          "rationale": "It manages around the dependency without reducing it, and a pipeline-heavy quarter leaves too little other work to fill the gaps. The candidate optimises the schedule while the risk stays exactly where it was."
+        },
+        {
+          "id": "b",
+          "text": "Have Sven pair with the two developers on real pipeline stories, accepting slower delivery of those stories for the next few iterations.",
+          "correct": true,
+          "rationale": "Practice on real work with the specialist alongside is the fastest way to grow a second skill in the team. The slowdown is the price of removing the dependency, and the quarter ahead makes that dependency more expensive the longer it stays."
+        },
+        {
+          "id": "c",
+          "text": "Book the two developers onto an external data-engineering course next month, so that they can start picking up pipeline stories afterwards.",
+          "correct": false,
+          "rationale": "A course teaches general technique but not this team's pipelines, and it delays any change by a month. The candidate assumes learning has to happen away from the work rather than in it."
+        },
+        {
+          "id": "d",
+          "text": "Ask Sven to document each pipeline and its failure modes thoroughly, so that other developers can follow it when he is away.",
+          "correct": false,
+          "rationale": "Documentation helps someone who already has the skill; it does not give the skill to someone who lacks it. It also spends Sven's time without increasing what anyone else can do."
+        }
+      ],
+      "explanation": "A skill held by one person is both a capacity constraint and a risk, and in a stable agile team the usual remedy is to grow a secondary skill in other members rather than to add another specialist. Building that breadth costs throughput while people learn, so the team has to accept a temporary slowdown to buy resilience. Scheduling around the specialist or writing things down manages the dependency; only practice on real work removes it.",
+      "mindset": "Pay a little speed now so that one person stops being the team's ceiling."
+    },
+    {
+      "id": "pmp-pr4-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "team-stability",
+        "resource-management",
+        "insurance"
+      ],
+      "stem": "You coach three stable agile teams in an insurer's digital unit. The engineering resource manager proposes moving one developer between teams every quarter, saying it will spread knowledge and give people variety. Two of the teams have spent the last two quarters re-establishing a steady velocity after earlier membership changes. The resource manager owns developer assignments and has asked for your view before deciding. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support the rotation but suggest moving developers every six months instead, so that each team has longer to absorb each change.",
+          "correct": false,
+          "rationale": "Halving the frequency halves the disruption but keeps the premise that reshuffling teams is how knowledge should spread. The candidate negotiates the dose without asking whether the treatment fits."
+        },
+        {
+          "id": "b",
+          "text": "Support the rotation and ask each team to reduce its forecast for the iteration after a move to reflect the expected disruption.",
+          "correct": false,
+          "rationale": "Planning honestly for a cost is good practice, but here it accepts a cost that may not need to be incurred. The candidate treats the resource manager's means as fixed when the request was for a view."
+        },
+        {
+          "id": "c",
+          "text": "Recommend keeping team membership stable, and offer cross-team practices such as a shared guild and short pairing exchanges to spread knowledge.",
+          "correct": true,
+          "rationale": "It separates the aim, which is sound, from the mechanism, which carries a recurring cost to every team. Practices that move knowledge without moving people meet the aim while protecting what the teams have rebuilt."
+        },
+        {
+          "id": "d",
+          "text": "Suggest a one-quarter trial of the rotation with the one team that has had no recent membership changes, and review its effect on velocity afterwards.",
+          "correct": false,
+          "rationale": "A trial sounds cautious but still changes a stable team's membership to test a mechanism whose costs are well known. The candidate defers the question of whether a cheaper route to the same aim exists."
+        }
+      ],
+      "explanation": "Before deciding how to implement a proposal, check whether it is the right means to its stated end. Stable membership is what lets an agile team build the shared context and working agreements its throughput depends on, so routine reshuffling has a recurring cost to set against the benefit sought. Where the real goal can be met by mechanisms that leave teams intact, recommend those; softening, trialling or planning around a costly means still accepts its premise.",
+      "mindset": "Separate the goal from the mechanism before negotiating the mechanism."
+    },
+    {
+      "id": "pmp-pr4-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "resource-release",
+        "supplier-delay",
+        "medical-devices"
+      ],
+      "stem": "On a medical-device programme, the agile software teams are on track but the predictive hardware workstream is waiting for a supplier's injection-moulded housings. The supplier now says delivery will slip by between two and five weeks. Your two mechanical engineers, borrowed from the engineering department, have nothing useful to do until the housings arrive. Their manager has another project that could use them. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep both engineers on the programme and ask them to support the software teams' testing until the housings have arrived.",
+          "correct": false,
+          "rationale": "It keeps the engineers close by finding them work that does not use their skills. The candidate is avoiding the risk of release by paying for mismatched capacity for up to five weeks."
+        },
+        {
+          "id": "b",
+          "text": "Release them to the other project now, agreeing with their manager a recall notice that matches the earliest likely delivery date.",
+          "correct": true,
+          "rationale": "Idle time is a certain cost and release is a manageable risk. Setting the recall notice to the earliest delivery date lets the organisation use the capacity while protecting the restart if the housings arrive in two weeks."
+        },
+        {
+          "id": "c",
+          "text": "Keep the engineers until the supplier confirms a firm delivery date, then decide whether releasing them is worth the risk of losing them.",
+          "correct": false,
+          "rationale": "Waiting for certainty means paying for idle time throughout the uncertainty, which is the period the decision is about. The firm date may arrive only days before the housings do."
+        },
+        {
+          "id": "d",
+          "text": "Release them to the other project and ask the department for replacement engineers once the housings have actually been delivered.",
+          "correct": false,
+          "rationale": "Releasing without return terms turns a short gap into a fresh acquisition, and replacements will lack the context the original engineers built. The candidate captures the saving but gives up the restart."
+        }
+      ],
+      "explanation": "When a resource has no productive work for an uncertain period, keeping it is a cost and releasing it is a risk, and the job is to weigh both rather than default to either. The useful lever is the terms of release: an agreed recall notice that matches the earliest date the person could be needed lets the organisation use the capacity without exposing the restart. Waiting for certainty before deciding usually means paying for idle time throughout the uncertainty.",
+      "mindset": "Release idle capacity on terms that let you get it back when you need it."
+    },
+    {
+      "id": "pmp-pr4-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "onboarding",
+        "resource-acquisition",
+        "public-sector"
+      ],
+      "stem": "A contract test analyst joins your hybrid benefits-system project next Monday to support the next three iterations. On the Wednesday before, you learn that nobody has requested her building pass, laptop or test-environment access. The service desk's standard lead time for these is five working days. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the agency to move her start date back by a week, so that she arrives once her equipment and access are ready for her to use.",
+          "correct": false,
+          "rationale": "It gives away a week of a three-iteration engagement before trying to expedite anything. The candidate solves the inconvenience by shrinking the capacity the project acquired."
+        },
+        {
+          "id": "b",
+          "text": "Let her start on Monday shadowing a team member at their desk and reading the test documentation until her own equipment and system access have been arranged.",
+          "correct": false,
+          "rationale": "Shadowing has some value on day one, but as the plan for a whole week it wastes most of her time. Nothing in this option starts the five-day clock, so the gap is no shorter."
+        },
+        {
+          "id": "c",
+          "text": "Report the missed requests to the resource manager so that the onboarding process can be fixed before the next contractor arrives.",
+          "correct": false,
+          "rationale": "Fixing the process is worthwhile, but it is a later step. The candidate addresses the next contractor while this one is still about to arrive with no access."
+        },
+        {
+          "id": "d",
+          "text": "Raise the requests today, ask the service desk whether any can be expedited, and plan useful first-week work that does not need system access.",
+          "correct": true,
+          "rationale": "Starting the clock immediately recovers most of the gap, and shaping the first week around what will not be ready turns lost days into usable ones. Both steps are within your control now."
+        }
+      ],
+      "explanation": "Onboarding is part of acquiring a resource: a person who cannot get into the building or the systems is being paid but is not yet available to the work. Lead times for equipment and access belong in the resource plan alongside start dates, and when they have been missed the first move is to start the clock immediately and shape early work around whatever will not be ready. Improving the process comes after the immediate gap is closed.",
+      "mindset": "Count a resource as acquired when it can work, not when it arrives."
+    },
+    {
+      "id": "pmp-pr4-111",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-route-to-owner",
+        "team-capacity",
+        "product-owner",
+        "utilities"
+      ],
+      "stem": "You are the scrum master for a team building a payroll app for a water utility. Mid-iteration, the head of finance emails one of your developers directly, asking him to spend two days building an urgent spreadsheet macro for the year-end close. The developer wants to help and tells you he plans to start on it tomorrow morning. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the head of finance to take the request to the product owner, who can weigh it against the work the team committed to this iteration.",
+          "correct": true,
+          "rationale": "The team's time is allocated through the backlog, and the product owner is the person who decides what it is spent on. Routing the request there lets an urgent need be met openly, if it is worth more than what it would displace."
+        },
+        {
+          "id": "b",
+          "text": "Let the developer build the macro, and lower the team's iteration forecast by two days so that the lost capacity is shown honestly to the product owner.",
+          "correct": false,
+          "rationale": "Being honest about lost capacity is good, but this accepts that anyone can claim team time by asking a developer directly. The candidate records the diversion instead of sending it to the person who decides priority."
+        },
+        {
+          "id": "c",
+          "text": "Tell the head of finance that the team cannot take on outside work until the current iteration ends and the next one is planned.",
+          "correct": false,
+          "rationale": "It protects the iteration but has the scrum master making a priority call that belongs to the product owner. A year-end deadline may well justify the change, and only the product owner can judge that."
+        },
+        {
+          "id": "d",
+          "text": "Suggest the developer builds the macro outside his usual hours this week, so that the iteration goal is not put at risk.",
+          "correct": false,
+          "rationale": "Hiding the work in overtime makes the demand invisible and wears down the person doing it. The candidate protects the goal by taking capacity from somewhere nobody is measuring."
+        }
+      ],
+      "explanation": "In an agile team, capacity is allocated through a single prioritised backlog, and requests that reach team members directly bypass the person accountable for deciding what the team works on. The response to a side-channel request is to route it to that person, not to refuse it on their behalf or quietly absorb it. Urgent work can still displace planned work, but only as an open decision.",
+      "mindset": "Send every claim on the team's time through the person who owns its priorities."
+    },
+    {
+      "id": "pmp-pr4-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "equipment-maintenance",
+        "resource-availability",
+        "tunnelling"
+      ],
+      "stem": "Your water-main tunnelling project relies on a single tunnel boring machine. The maintenance plan includes a ten-day overhaul at the 2 km mark, which the crew has just reached. Progress is three weeks behind, and the machine supervisor proposes deferring the overhaul to the 3 km mark to recover time, saying the machine is running well. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Carry out the overhaul as planned, since the maintenance plan is part of the baseline and deferring it would be an unapproved change.",
+          "correct": false,
+          "rationale": "Treating the plan as untouchable ignores that maintenance intervals can be adjusted on evidence. The candidate uses process as a substitute for judging the trade-off between three weeks of delay and breakdown risk."
+        },
+        {
+          "id": "b",
+          "text": "Accept the supervisor's proposal, since he operates the machine every day and is the person best placed to judge its condition.",
+          "correct": false,
+          "rationale": "Daily operation gives insight but also a stake in recovering time, and running well is not the same as having no wear. The candidate takes one interested view as the assessment."
+        },
+        {
+          "id": "c",
+          "text": "Ask the manufacturer's engineer to inspect the machine and assess the risk of running another kilometre before you decide on the deferral.",
+          "correct": true,
+          "rationale": "The decision turns on the machine's condition, which is a question of fact that someone qualified can answer within days. A breakdown mid-tunnel would cost far more than ten days, so the evidence is worth having before trading the overhaul away."
+        },
+        {
+          "id": "d",
+          "text": "Defer the overhaul and add a contingency allowance to the schedule to cover the risk of a breakdown before the 3 km mark.",
+          "correct": false,
+          "rationale": "It sizes a contingency for a risk nobody has assessed. The candidate jumps to a response without the one fact that would show whether deferral is reasonable at all."
+        }
+      ],
+      "explanation": "Preventive maintenance is how a project keeps critical equipment available, and deferring it trades a certain, planned outage for an uncertain, unplanned one. That trade can be sound, but only once the equipment's actual condition and the consequence of failure are known. When a resource decision hinges on a fact that can be established quickly, establish it before deciding either way.",
+      "mindset": "Find out the condition of a critical resource before betting the schedule on it."
+    },
+    {
+      "id": "pmp-pr4-113",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "self-organisation",
+        "task-assignment",
+        "logistics"
+      ],
+      "stem": "A logistics company has just moved to agile teams. The new development manager, who previously ran a predictive department, wants to keep assigning individual tasks to each developer at a morning meeting so that everyone stays fully utilised. Your team has started waiting for his assignments instead of pulling the next priority item. Which two responses should you, as the team's agile coach, make?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Meet the manager to explain how the team assigns its own work and what that gives him in place of daily task allocation.",
+          "correct": true,
+          "rationale": "His concern is that capacity is used well; his method is individual allocation. Explaining what self-organisation offers addresses the concern directly, rather than arguing over the method."
+        },
+        {
+          "id": "b",
+          "text": "Make the team's board and flow measures available to the manager so that he can follow progress without allocating tasks himself.",
+          "correct": true,
+          "rationale": "Daily assignment is often a way of getting visibility. Giving him that visibility another way removes the reason for the practice while keeping the team pulling work in priority order."
+        },
+        {
+          "id": "c",
+          "text": "Let the manager keep assigning tasks for the first few iterations, then raise the practice at a later retrospective with the team.",
+          "correct": false,
+          "rationale": "Every iteration of central assignment deepens the habit of waiting to be told. The candidate defers a conversation that is easier now, before the pattern sets."
+        },
+        {
+          "id": "d",
+          "text": "Ask the manager to assign tasks to pairs rather than to individuals, so that knowledge spreads more widely across the team.",
+          "correct": false,
+          "rationale": "Pairing is valuable, but this keeps the manager allocating the work and the team waiting for him. The candidate improves the mechanism while accepting the premise that work must be handed out."
+        },
+        {
+          "id": "e",
+          "text": "Raise the manager's practice with the head of delivery as a departure from the company's new agile operating model.",
+          "correct": false,
+          "rationale": "Escalating before talking to him treats a habit from his previous role as a breach. The candidate reaches for authority where a direct conversation has not yet been tried."
+        }
+      ],
+      "explanation": "In agile teams, work is assigned by the team pulling the highest-priority item it can take, which keeps flow and priority aligned; aiming for every individual to be fully utilised optimises busyness rather than delivery. When someone keeps a habit from a different way of working, find the need behind it — usually visibility or control — and meet that need another way. Negotiating the details of the habit leaves its premise in place.",
+      "mindset": "Meet the need behind a habit rather than haggling over the habit."
+    },
+    {
+      "id": "pmp-pr4-114",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-act-now",
+        "scarce-skills",
+        "resource-planning",
+        "rail"
+      ],
+      "stem": "You are planning a 14-month rail signalling upgrade. Its testing phase, months 10 to 13, needs six testers holding a specific safety certification. The national pool of certified testers is small, three other rail projects peak at the same time, and qualifying takes four months of supervised work. Your main contractor's bid says it will supply the testers but names none. Which two actions should you take during planning?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Require the contractor to name its six certified testers now, with their availability for months 10 to 13 confirmed in writing.",
+          "correct": true,
+          "rationale": "An unnamed promise in a bid is the weakest form of commitment for a scarce skill. Asking for names and dates now tests whether the contractor can really supply them while there is still time to act if it cannot."
+        },
+        {
+          "id": "b",
+          "text": "Start two of your own technicians on supervised work towards the certification this month, so they qualify well before testing starts.",
+          "correct": true,
+          "rationale": "Four months' qualification time means this option exists now and disappears later. Growing capacity you control is the one response the competing projects cannot outbid."
+        },
+        {
+          "id": "c",
+          "text": "Record the shortage in the risk register and hold a contingency reserve to cover premium day rates if testers become scarce.",
+          "correct": false,
+          "rationale": "Money manages price but not supply. If the pool is fully committed during the peak, a larger budget cannot create certified people, and the four-month window to grow them will have closed."
+        },
+        {
+          "id": "d",
+          "text": "Accept the contractor's commitment as it stands, since supplying the testers is its contractual obligation under the agreed bid.",
+          "correct": false,
+          "rationale": "A contractual remedy after the event does not deliver testers in month 10. The candidate mistakes having someone to blame for having the resource."
+        },
+        {
+          "id": "e",
+          "text": "Ask the sponsor to approve a later testing window, after the other three rail projects have finished their peak demand.",
+          "correct": false,
+          "rationale": "It extends the project by months to avoid a constraint that could still be managed. The candidate gives up the date before testing whether the testers can be secured or grown."
+        }
+      ],
+      "explanation": "For scarce, slow-to-develop skills, the actions that secure supply have lead times of their own and expire if they are not taken early. Confirm named availability from anyone who has promised the resource, and where the market is tight, start growing capacity you control while the qualification time still fits. Contingency money and contractual obligations are useful backstops, but neither produces a qualified person on the day the work starts.",
+      "mindset": "Secure scarce skills while the lead time to get them still fits the plan."
+    },
+    {
+      "id": "pmp-pr4-115",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "shared-environment",
+        "integrated-planning",
+        "retail"
+      ],
+      "stem": "On a hybrid programme replacing a retailer's ordering system, four agile teams and a predictive data-migration workstream share one integration environment. Each migration rehearsal locks the environment for three days, and the last two were announced the day before they started, leaving the agile teams unable to test mid-iteration. Both leads say the other side should adjust. Which two actions should the programme manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Set up one booking calendar for the integration environment that both workstreams plan against and can see at any time.",
+          "correct": true,
+          "rationale": "The clash comes from neither side seeing the other's demand on the environment. A shared calendar turns surprise lock-outs into known constraints each side can plan around."
+        },
+        {
+          "id": "b",
+          "text": "Agree in the joint planning session to place migration rehearsals at iteration boundaries, so the agile teams can plan around them.",
+          "correct": true,
+          "rationale": "Aligning the predictive workstream's rehearsals with the agile cadence keeps a three-day lock-out out of the middle of an iteration. It uses integrated planning to fit both rhythms to one shared resource."
+        },
+        {
+          "id": "c",
+          "text": "Give the migration rehearsals priority over agile testing, since a failed data migration would put the go-live date at risk.",
+          "correct": false,
+          "rationale": "Settling priority without visibility still leaves the agile teams being locked out without warning. The candidate decides who wins the clash rather than removing the reason it keeps happening."
+        },
+        {
+          "id": "d",
+          "text": "Request funding for a second integration environment so that each workstream can test in its own space without interruption.",
+          "correct": false,
+          "rationale": "A second environment may be justified later, but it spends money on a scheduling problem that coordination can solve. It can also hide integration faults that only appear when both workstreams share one."
+        },
+        {
+          "id": "e",
+          "text": "Ask the migration lead to give the agile teams at least 24 hours' notice by email before each rehearsal locks the environment.",
+          "correct": false,
+          "rationale": "A day's notice is still too short for a team partway through an iteration to replan around. The candidate improves the warning without making the demand visible at planning time."
+        }
+      ],
+      "explanation": "When different workstreams share a scarce resource, contention is usually a visibility problem before it is a capacity problem. Put every claim on the resource where all its users can see it, and agree the timing of large claims at the point where plans are made, aligned to the cadence of the teams affected. Adding capacity or picking a winner can follow, but only once demand is visible enough to show whether either is needed.",
+      "mindset": "Make every claim on a shared resource visible before arguing about who gets it."
+    },
+    {
+      "id": "pmp-pr4-116",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "resource-planning-tools",
+        "fit-out",
+        "planning"
+      ],
+      "stem": "You are planning resources for the fit-out of a new 12-storey office building. Match each planning need to the tool that meets it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "You need to see, week by week, where demand for electricians exceeds the six the contractor can supply."
+        },
+        {
+          "id": "s2",
+          "text": "Two supervisors each believe they are the one who signs off completed floors, and nobody can say who is right."
+        },
+        {
+          "id": "s3",
+          "text": "The cost estimator wants every labour, equipment and material need grouped by category so that each can be priced."
+        }
+      ],
+      "options": [
+        {
+          "id": "hist",
+          "text": "Resource histogram",
+          "correct": true,
+          "match": "s1",
+          "rationale": "A histogram plots demand for a resource in each period against the amount available, so the weeks of overallocation stand out at a glance."
+        },
+        {
+          "id": "ram",
+          "text": "Responsibility assignment matrix",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A responsibility assignment matrix records who does, approves and is consulted on each deliverable. Disputed sign-off is exactly the gap it is built to close."
+        },
+        {
+          "id": "rbs",
+          "text": "Resource breakdown structure",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A resource breakdown structure organises resources hierarchically by category and type, which is the form an estimator needs to price them."
+        },
+        {
+          "id": "cal",
+          "text": "Resource calendar",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A resource calendar records when a person or item can work. It feeds the histogram's supply line but does not by itself show demand against availability, assign accountability or group resources for pricing."
+        }
+      ],
+      "explanation": "Each resource planning tool answers one question. A histogram answers how much is needed against how much is available in each period; a responsibility assignment matrix answers who is accountable for what; a breakdown structure answers what kinds of resource the project needs; a calendar answers when a resource can work. Naming the question first is the quickest way to the right tool.",
+      "mindset": "Name the question before picking the tool that answers it."
+    },
+    {
+      "id": "pmp-pr4-117",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "capacity-planning",
+        "dependencies",
+        "banking"
+      ],
+      "stem": "Your agile team builds online banking features in two-week iterations. Match each situation to the response that best keeps the team's capacity and plans realistic. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Two of the seven developers will be on annual leave for the whole of the next iteration."
+        },
+        {
+          "id": "s2",
+          "text": "A story planned two iterations from now needs two days of work from the central security team's only penetration tester."
+        },
+        {
+          "id": "s3",
+          "text": "Halfway through the iteration, the team finds a committed story needs a database change only the central DBA team can make."
+        }
+      ],
+      "options": [
+        {
+          "id": "fc",
+          "text": "Forecast the iteration on the hours the team will actually have, not on its usual velocity",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Known absence is a capacity fact, and planning on usual velocity would overcommit the team before the iteration starts. Adjusting the forecast keeps the commitment honest."
+        },
+        {
+          "id": "book",
+          "text": "Agree the specialist's time with the owning team now, ahead of the iteration that needs it",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A single specialist outside the team is booked by others too. Securing the time two iterations ahead turns a likely blocker into a planned dependency."
+        },
+        {
+          "id": "flag",
+          "text": "Show it as a blocker today and rework the iteration plan with the product owner",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A dependency found mid-iteration needs to be visible at once so it can be chased and the plan adjusted while there is still time to swap in other work."
+        },
+        {
+          "id": "add",
+          "text": "Ask for a permanent extra developer to be added to the team",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of these situations is a lasting shortage of team capacity: one is temporary absence and two are dependencies on specialists outside the team. A new member would not fix any of them and would slow the team while joining."
+        }
+      ],
+      "explanation": "Agile teams keep plans realistic by treating capacity as something they measure and adjust each iteration, rather than a fixed number. Known absences reduce the forecast; known needs for outside specialists are booked ahead like any other dependency; surprises are made visible the day they appear so the plan can change. Adding permanent capacity is a response to a lasting shortfall, not to a temporary or external constraint.",
+      "mindset": "Plan on the capacity you will actually have, and adjust as soon as it changes."
+    },
+    {
+      "id": "pmp-pr4-118",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "materials-planning",
+        "lead-time",
+        "energy"
+      ],
+      "stem": "You are planning the physical resources for an electricity substation upgrade. Complete each sentence with the approach that fits the item's supply conditions. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Concrete blocks are available from three local merchants within two days, and the site has very little storage space, so you should"
+        },
+        {
+          "id": "c2",
+          "text": "The main transformer has a 30-week lead time from a single overseas manufacturer, so you should"
+        },
+        {
+          "id": "c3",
+          "text": "Scaffolding is needed for eight weeks on one elevation and will not be needed again on this project, so you should"
+        }
+      ],
+      "options": [
+        {
+          "id": "jit",
+          "text": "order them in small batches timed just ahead of each use",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Short, reliable supply from several sources removes the need to hold stock, and limited storage makes holding it costly. Just-in-time delivery fits both conditions."
+        },
+        {
+          "id": "early",
+          "text": "order it as early as the design allows and track the supplier's progress closely",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A long lead time from one supplier puts the item on or near the critical path from the start. Ordering early and monitoring manufacture is the only way to protect the installation date."
+        },
+        {
+          "id": "hire",
+          "text": "hire it for the period of use rather than buy it",
+          "correct": true,
+          "match": "c3",
+          "rationale": "A short, one-off need is cheaper to rent than to own, and hiring avoids storing or disposing of equipment the project will not use again."
+        },
+        {
+          "id": "stock",
+          "text": "build up a large stock on site to buffer against any delay in supply",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Buffer stock suits items with unreliable supply and room to store them. The blocks have reliable supply and no storage space, the transformer is a single item, and the scaffolding is needed only once."
+        }
+      ],
+      "explanation": "How a physical resource is acquired should follow its supply conditions: lead time, number of sources, storage, and how long the need lasts. Short, reliable supply favours just-in-time delivery; long lead times from a single source call for early ordering and active tracking; short, one-off needs favour hiring over buying. Holding stock is a response to unreliable supply, and it has storage and capital costs of its own.",
+      "mindset": "Let each item's supply conditions decide how you acquire it."
+    },
+    {
+      "id": "pmp-pr4-119",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "resource-estimating",
+        "productive-hours",
+        "data-labelling"
+      ],
+      "stem": "The data-labelling workstream of a hybrid machine-learning programme needs 3,600 person-hours of labelling within 20 working days. Each labeller works 7.5 hours a day, of which 6 hours are productive labelling time. Work out the labellers needed, then how many working days the work would take if only 24 labellers can be found.",
+      "blanks": [
+        {
+          "id": "people",
+          "label": "Labellers needed to finish in 20 working days",
+          "numeric": true,
+          "expect": 30,
+          "tol": 0,
+          "rationale": "Each labeller contributes 6 productive hours a day, so 20 days gives 120 hours each. 3,600 ÷ 120 = 30 labellers. Using the 7.5 paid hours instead would give 24 and understate the need."
+        },
+        {
+          "id": "days",
+          "label": "Working days needed with 24 labellers",
+          "numeric": true,
+          "expect": 25,
+          "tol": 0,
+          "rationale": "24 labellers × 6 productive hours = 144 hours a day. 3,600 ÷ 144 = 25 working days, five more than the window allows."
+        }
+      ],
+      "explanation": "Resource estimates must use productive hours rather than paid hours, because meetings, breaks and other overheads consume part of every working day. Effort divided by productive hours per person per day gives person-days; dividing by the window gives headcount, and dividing by headcount gives duration. Using paid hours makes every estimate look achievable with fewer people than it really needs.",
+      "mindset": "Estimate with the hours people can actually give the work."
+    },
+    {
+      "id": "pmp-pr4-120",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "bottleneck",
+        "kanban",
+        "flow"
+      ],
+      "stem": "The board shows your agile team's workflow midway through an iteration. Throughput has fallen for two iterations, although every developer reports being busy. Select the stage where the team's capacity constraint sits.",
+      "graphic": {
+        "viewBox": "0 0 800 400",
+        "title": "Team board with five workflow columns, item counts and WIP limits",
+        "caption": "Select a column. Use Tab or the arrow keys to move between columns, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "ready",
+          "n": 1,
+          "label": "Ready — 6 items, refilled at planning",
+          "x": 20,
+          "y": 60,
+          "w": 140,
+          "h": 300,
+          "correct": false,
+          "rationale": "A short, prioritised Ready column is a healthy backlog, not a constraint. Work is available to start, so nothing upstream is starving the team."
+        },
+        {
+          "id": "dev",
+          "n": 2,
+          "label": "In development — 3 items, WIP limit 4",
+          "x": 175,
+          "y": 60,
+          "w": 140,
+          "h": 300,
+          "correct": false,
+          "rationale": "Development is below its limit and is pushing finished work downstream. Busy developers are a sign of where effort goes, not of where flow is restricted."
+        },
+        {
+          "id": "wait",
+          "n": 3,
+          "label": "Awaiting code review — 9 items, no WIP limit, oldest waiting 6 days",
+          "x": 330,
+          "y": 60,
+          "w": 140,
+          "h": 300,
+          "correct": false,
+          "rationale": "This is the most visible problem on the board, but a queue is a symptom. Work piles up in front of the constraint, not at it, so choosing the queue mistakes where the wait shows for where the capacity is short."
+        },
+        {
+          "id": "review",
+          "n": 4,
+          "label": "In code review — 2 items, WIP limit 2, only two senior developers review",
+          "x": 485,
+          "y": 60,
+          "w": 140,
+          "h": 300,
+          "correct": true,
+          "rationale": "The stage is full, a large queue waits in front of it and the stage after it receives little. Only two people can do the work, so their capacity sets the throughput of the whole team."
+        },
+        {
+          "id": "done",
+          "n": 5,
+          "label": "Done this iteration — 5 items",
+          "x": 640,
+          "y": 60,
+          "w": 140,
+          "h": 300,
+          "correct": false,
+          "rationale": "Done shows the result of the constraint, a low completion count, not its cause. Reading throughput here tells you there is a problem but not where it is."
+        }
+      ],
+      "explanation": "A team's throughput is set by the stage with the least capacity, and the signature of that stage is a full stage with a growing queue in front of it and a thin stream after it. The queue is where the problem shows; the constrained stage is where it lives. Find the constraint before adding resource, because capacity added anywhere else only lengthens the queue.",
+      "mindset": "Look for the full stage behind the queue, not the queue itself."
+    },
+    {
+      "id": "pmp-pr4-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-act-now",
+        "physical-resources",
+        "mobilisation",
+        "energy"
+      ],
+      "stem": "You manage the ground investigation for an onshore wind farm. A drilling rig and its two-person crew are hired at €2,100 a day and booked to arrive on site next Monday for ten days. It is Tuesday, and the civil contractor has just told you the access track to the turbine bases will not be passable until the following Wednesday. The hire firm allows free rebooking with three working days' notice. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Contact the hire firm today to move the rig's arrival to the date the track will be passable, and confirm that date with the civil contractor.",
+          "correct": true,
+          "rationale": "The rig cannot work until the track is ready, and today is the last day the move costs nothing. Acting now keeps the resource aligned with the work it serves and avoids paying for idle days."
+        },
+        {
+          "id": "b",
+          "text": "Let the rig arrive on Monday as booked so that it is already on site and ready to start drilling the moment the access track becomes passable.",
+          "correct": false,
+          "rationale": "Having the rig on site does not let it start any earlier, because the track is the constraint. The candidate pays around a week of standby charges for readiness that buys nothing."
+        },
+        {
+          "id": "c",
+          "text": "Ask the civil contractor to add weekend shifts on the access track so that it is passable in time for the rig's planned Monday arrival on site.",
+          "correct": false,
+          "rationale": "This tries to bend the predecessor to fit the booking, at a cost and with no assurance of success, when the booking can be moved for free. The candidate treats the resource date as fixed and the work as flexible."
+        },
+        {
+          "id": "d",
+          "text": "Cancel the rig booking now and arrange a fresh hire once the access track has been completed and inspected, so that no further charges can arise.",
+          "correct": false,
+          "rationale": "Cancelling gives up a confirmed rig when the firm already offers free rebooking, and risks a long wait for availability later. The candidate overreacts to a short, known slip."
+        }
+      ],
+      "explanation": "Physical resources should arrive when the work they serve can actually start. When a predecessor slips, the cheapest moment to move a dependent resource is while the supplier's notice terms still allow it at no cost; once that window passes, a schedule problem becomes a standby bill. Check the notice terms of every booked resource as soon as a predecessor date moves.",
+      "mindset": "Move dependent resources while moving them is still free."
+    },
+    {
+      "id": "pmp-pr4-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-apply-the-rule",
+        "resource-levelling",
+        "float",
+        "construction"
+      ],
+      "stem": "You are building a two-storey extension at a secondary school, due to finish before the autumn term. The plan has been resource-levelled so that the single groundworks crew lays the drainage runs and then goes straight on to the car-park base, which is on the levelled critical path. In the logic network alone, the drainage runs show eight days of total float. The site manager wants to start drainage eight days late so the crew can finish snagging on another job. What should you tell him?",
+      "options": [
+        {
+          "id": "a",
+          "text": "That he can use the float as planned, provided he gives you the revised drainage start date so that you can update the schedule in good time.",
+          "correct": false,
+          "rationale": "The candidate reads float from the logic network, which assumes the crew is free whenever the logic allows. Here the same crew is booked straight onto a critical activity, so the float is not really there."
+        },
+        {
+          "id": "b",
+          "text": "That he may use half of the float and keep the other half in reserve, so that the drainage still has some protection against later problems on site.",
+          "correct": false,
+          "rationale": "Splitting the difference sounds prudent, but any late start pushes the crew's critical next activity by the same amount. The candidate is rationing float that the resource dependency has already consumed."
+        },
+        {
+          "id": "c",
+          "text": "That the eight days of float disappear once the crew's next activity is counted, so a late drainage start would delay the car-park base and the finish.",
+          "correct": true,
+          "rationale": "In the levelled schedule the crew links the drainage to a critical successor. Any delay to the drainage carries straight through to the car-park base, so the usable float is effectively nil."
+        },
+        {
+          "id": "d",
+          "text": "That he must raise a change request for the late start, since any use of total float on the project has to be approved by the change control board.",
+          "correct": false,
+          "rationale": "Using float is not a change to the baseline and does not normally need board approval. The candidate reaches for the wrong control and misses the real problem, which is that the float does not exist."
+        }
+      ],
+      "explanation": "Float calculated from logic alone assumes every resource is available whenever the logic allows. Once a scarce resource links two activities in sequence, delaying the first delays the second, and the real float is whatever the resource-levelled schedule shows, which is often none. Before agreeing to anyone using float, check whether the people or equipment doing the work are booked onto something critical immediately afterwards.",
+      "mindset": "Read float from the schedule the resources can actually follow."
+    },
+    {
+      "id": "pmp-pr4-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "matrix-organisation",
+        "resource-availability",
+        "water"
+      ],
+      "stem": "You are commissioning a new water treatment works. Ana, a process engineer seconded from the operations department, asks you to approve two weeks' annual leave in week 18, when her filter-commissioning tests are scheduled. The resource management plan states that leave for seconded staff is approved by their line manager. Her tests have four days of float, and one other engineer in operations is qualified to run them. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Approve the leave yourself, since you know the schedule best, and arrange for the other qualified engineer in operations to run the tests that week.",
+          "correct": false,
+          "rationale": "The plan gives leave approval to the line manager, and the other engineer belongs to operations too. The candidate takes two decisions that belong to someone else, however sensible the outcome."
+        },
+        {
+          "id": "b",
+          "text": "Ask Ana whether she could move her leave to after week 20, so that the tests can stay with the engineer who planned them and the float is kept.",
+          "correct": false,
+          "rationale": "Asking a team member to rearrange her leave puts pressure on her personally and bypasses the person who owns the decision. The candidate solves the schedule problem at the individual's expense."
+        },
+        {
+          "id": "c",
+          "text": "Decline the request on the project's behalf, because the tests sit inside her planned assignment and four days of float cannot absorb two weeks.",
+          "correct": false,
+          "rationale": "The candidate has the impact right but not the authority. Refusing leave for someone you do not line-manage oversteps the agreed arrangement and damages the relationship with the department lending her."
+        },
+        {
+          "id": "d",
+          "text": "Tell Ana her line manager approves leave, and give that manager the schedule impact and the cover option before the decision is made.",
+          "correct": true,
+          "rationale": "The decision sits with the line manager, and the project manager's job is to make sure it is taken with the facts. Supplying the impact and the cover option lets the owner decide well."
+        }
+      ],
+      "explanation": "In a matrix organisation, the functional manager usually keeps decisions about a seconded person's availability, such as leave, training and other duties. The project manager's contribution is to make the consequences visible to that owner, with any workable options, before they decide. Taking the decision yourself, in either direction, undermines the arrangement that lets you borrow people in the first place.",
+      "mindset": "Bring the impact to whoever owns the decision instead of taking the decision."
+    },
+    {
+      "id": "pmp-pr4-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-trade-off",
+        "sourcing",
+        "distributed-teams",
+        "engineering-design"
+      ],
+      "stem": "Your consultancy is designing a £14m pharmaceutical cold store. The client will hold weekly design reviews for the first four months, while the layout is still changing. After design freeze, about 6,000 hours of detailed drawing production remain. Your firm's drawing office in Pune costs £32 an hour against £68 in Bristol and has delivered this type of drawing before. The Bristol team knows the client well. How should you plan the design resourcing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Run the whole design from Bristol, because the savings from Pune are likely to be lost in rework and in handling the client's review comments.",
+          "correct": false,
+          "rationale": "The rework risk is real during layout, but after freeze the drawing work is stable and Pune has done it before. The candidate gives up a large, safe saving to avoid a risk that belongs to the earlier phase only."
+        },
+        {
+          "id": "b",
+          "text": "Move the whole design to Pune from the start, with a Bristol engineer attending the weekly client reviews and relaying the comments to the team.",
+          "correct": false,
+          "rationale": "This puts the most change-heavy, conversation-dependent phase furthest from the client, so every review comment is relayed second hand. The candidate applies the hourly saving to the work least able to bank it."
+        },
+        {
+          "id": "c",
+          "text": "Keep layout design in Bristol until freeze, then move detailed drawing to Pune with one Bristol engineer kept as the client and design interface.",
+          "correct": true,
+          "rationale": "Volatile, review-driven work stays near the client; stable, specified work goes where it is cheapest once it has stopped changing. Keeping a named interface carries the context across, which is what makes the transfer safe."
+        },
+        {
+          "id": "d",
+          "text": "Split each drawing package between Bristol and Pune throughout, so that both offices share the load and either can cover if the other falls behind.",
+          "correct": false,
+          "rationale": "Shared packages create coordination across two offices on every deliverable, and blur who owns each drawing. The candidate treats the two offices as interchangeable when the phases need different things."
+        }
+      ],
+      "explanation": "Where work is done should follow what the work needs at each stage. Interaction-heavy, changing work belongs close to the people who drive the changes; stable, well-specified work can move to cheaper capacity once it has stopped changing, provided a named person carries the context across. A lower hourly rate is only a saving on work that will not have to be redone.",
+      "mindset": "Source each phase of the work for what it needs, not the project as one block."
+    },
+    {
+      "id": "pmp-pr4-125",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "overtime",
+        "productivity",
+        "data-centre"
+      ],
+      "stem": "To recover a delay on your data-centre fit-out, the electrical installation crew has worked twelve-hour shifts, six days a week, for five weeks. Hours worked are 45% above plan, but circuits completed per week have risen by only 10%, and the inspector's rework list has doubled. The contractor proposes keeping the same pattern for four more weeks to reach energisation. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Compare output per hour and rework before and during the extended shifts with the contractor, to establish what the extra hours are producing.",
+          "correct": true,
+          "rationale": "The figures suggest the extra hours are buying very little net progress once rework is counted. Establishing the real return on the hours is the basis for any decision about continuing them."
+        },
+        {
+          "id": "b",
+          "text": "Return the crew to a sustainable working pattern and re-plan the route to energisation using the output rate the crew can actually hold.",
+          "correct": true,
+          "rationale": "Fatigue is the likely cause of both the flat output and the rising rework. Planning on a rate the crew can sustain gives a forecast that will hold, instead of one that depends on exhausted people."
+        },
+        {
+          "id": "c",
+          "text": "Accept the contractor's proposal for four more weeks, since total weekly output is still higher than it would be on standard working hours.",
+          "correct": false,
+          "rationale": "Gross output is up 10%, but the doubled rework list has to be done before energisation too. The candidate counts installation and ignores the defects it is creating."
+        },
+        {
+          "id": "d",
+          "text": "Add a second electrical crew on the same shift pattern so that the remaining circuits can be installed in roughly half the remaining time.",
+          "correct": false,
+          "rationale": "This doubles exposure to the pattern that is producing the rework, and a new crew needs induction on a live site. The candidate adds capacity before understanding why the current capacity is underperforming."
+        },
+        {
+          "id": "e",
+          "text": "Ask the inspector to defer the non-safety rework items until after energisation so that the crew can stay focused on new installation work.",
+          "correct": false,
+          "rationale": "Deferring rework moves the problem rather than reducing it, and the rework is a symptom of the fatigue the candidate has not addressed. The list will keep growing while the cause continues."
+        }
+      ],
+      "explanation": "Sustained overtime is a short-term capacity lever with a falling return: fatigue reduces output per hour and raises error rates, so the net gain shrinks and can turn negative. Before extending it, measure what the extra hours actually produce once rework is counted, and plan on the rate a crew can sustain rather than the hours it can be rostered.",
+      "mindset": "Measure what extra hours produce before buying more of them."
+    },
+    {
+      "id": "pmp-pr4-126",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "inventory",
+        "reorder-level",
+        "housing"
+      ],
+      "stem": "On a 60-home housing development near Leipzig, the bricklaying gangs use 35 bags of mortar mix each working day. The merchant delivers 4 working days after an order is placed, and you want a safety stock of 2 days' use on site. The site store holds 490 bags today. Work out the reorder level, how many working days remain before you must order, and the reorder level if the lead time rises to 6 working days.",
+      "blanks": [
+        {
+          "id": "rl",
+          "label": "Reorder level, in bags",
+          "numeric": true,
+          "expect": 210,
+          "tol": 0,
+          "unit": "bags",
+          "rationale": "The reorder level covers use during the lead time plus the safety stock: 35 × (4 + 2) = 210 bags. Ordering at this level means the delivery lands just as the stock reaches the safety margin."
+        },
+        {
+          "id": "days",
+          "label": "Working days until the order must be placed",
+          "numeric": true,
+          "expect": 8,
+          "tol": 0,
+          "unit": "days",
+          "rationale": "Stock above the reorder level is 490 − 210 = 280 bags. At 35 bags a day, that lasts 280 ÷ 35 = 8 working days before the order has to go in."
+        },
+        {
+          "id": "rl6",
+          "label": "Reorder level with a 6-day lead time, in bags",
+          "numeric": true,
+          "expect": 280,
+          "tol": 0,
+          "unit": "bags",
+          "rationale": "With the same safety stock, the reorder level becomes 35 × (6 + 2) = 280 bags. Two extra days of lead time raise the trigger by 70 bags and bring the order date two days closer."
+        }
+      ],
+      "explanation": "A reorder level is the stock that covers consumption during the supplier's lead time plus the safety margin chosen: daily use × (lead time + safety days). The order goes in when stock falls to that level, not when the store looks low. Because lead time multiplies the daily use, any change in a supplier's delivery time moves the trigger point, so the level must be recalculated whenever lead times change.",
+      "mindset": "Set the reorder trigger from lead time and use, not from how full the store looks."
+    },
+    {
+      "id": "pmp-pr4-127",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "resource-estimating",
+        "commissioning",
+        "food-manufacturing"
+      ],
+      "stem": "You are estimating the commissioning labour for a new production line at a food-processing plant. Match each situation to the estimating approach that fits the information available at that point. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "At concept stage you have only the total commissioning hours recorded for a similar line the firm installed two years ago."
+        },
+        {
+          "id": "s2",
+          "text": "Your firm's records show commissioning takes about 3.5 engineer-hours per instrument loop, and this line has 420 loops."
+        },
+        {
+          "id": "s3",
+          "text": "Detailed design is complete and the commissioning lead has broken the work into 140 individual test activities with named skills."
+        }
+      ],
+      "options": [
+        {
+          "id": "analog",
+          "text": "Analogous estimating",
+          "correct": true,
+          "match": "s1",
+          "rationale": "With only a comparable past total, scaling from the similar line is the best available method. It is quick and rough, which suits a concept-stage decision."
+        },
+        {
+          "id": "param",
+          "text": "Parametric estimating",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A reliable rate per unit and a known count of units is exactly what a parametric estimate needs: 420 loops at 3.5 hours each gives a defensible figure."
+        },
+        {
+          "id": "bottom",
+          "text": "Bottom-up estimating",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Once the work is broken into individual activities, estimating each and summing them gives the most accurate figure and shows which skills are needed when."
+        },
+        {
+          "id": "reserve",
+          "text": "Reserve analysis",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Reserve analysis sizes the contingency added to an estimate for uncertainty; it does not produce the base estimate of labour that each situation asks for."
+        }
+      ],
+      "explanation": "The right resource-estimating method is set by the information available, and it changes as the project matures. A comparable past project supports an analogous estimate; a reliable unit rate and a count support a parametric one; a detailed activity breakdown supports bottom-up estimating. Reserves are sized on top of whichever base estimate is used, not instead of one.",
+      "mindset": "Match the estimating method to what you actually know at the time."
+    },
+    {
+      "id": "pmp-pr4-128",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "critical-chain",
+        "resource-buffer",
+        "infrastructure"
+      ],
+      "stem": "Your bridge-strengthening project is scheduled using critical chain. The diagram shows the critical chain and one feeding chain. The piling rig and its crew come from the company's plant pool and must be ready the moment their activity can start. Select the point where a resource buffer belongs.",
+      "graphic": {
+        "viewBox": "0 0 800 400",
+        "title": "Critical chain of four activities with one feeding chain and five candidate buffer points",
+        "caption": "Select a point. Use Tab or the arrow keys to move between points, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "p1",
+          "n": 1,
+          "label": "Between Set up site and Break out deck edges, both done by the site's own civils crew",
+          "x": 20,
+          "y": 60,
+          "w": 180,
+          "h": 120,
+          "correct": false,
+          "rationale": "The same crew carries straight on from one activity to the next, so there is no new resource to call up. A resource buffer here would warn a crew that is already working on the chain."
+        },
+        {
+          "id": "p2",
+          "n": 2,
+          "label": "Before Install piles, the first task for the piling rig and crew from the plant pool",
+          "x": 210,
+          "y": 60,
+          "w": 180,
+          "h": 120,
+          "correct": true,
+          "rationale": "This is where a critical-chain activity needs a resource not already working on the chain. The buffer acts as an early call-up so the rig and crew are ready as soon as the deck edges are broken out."
+        },
+        {
+          "id": "p3",
+          "n": 3,
+          "label": "Where the Fabricate steel brackets chain joins, before Cast pile caps",
+          "x": 400,
+          "y": 200,
+          "w": 180,
+          "h": 120,
+          "correct": false,
+          "rationale": "A merge of a non-critical chain into the critical chain is protected by a feeding buffer. Choosing it confuses protection against a late feeding path with readiness of a new resource."
+        },
+        {
+          "id": "p4",
+          "n": 4,
+          "label": "After Cast pile caps, before the handover date",
+          "x": 600,
+          "y": 60,
+          "w": 180,
+          "h": 120,
+          "correct": false,
+          "rationale": "The end of the critical chain is where the project buffer sits, protecting the committed finish. It aggregates uncertainty and does nothing to make sure a pooled resource turns up on time."
+        },
+        {
+          "id": "p5",
+          "n": 5,
+          "label": "Before Fabricate steel brackets, the start of the feeding chain",
+          "x": 210,
+          "y": 220,
+          "w": 180,
+          "h": 120,
+          "correct": false,
+          "rationale": "The start of a feeding chain needs no buffer; the protection for that chain belongs where it joins the critical chain. Nothing about the piling resource is affected at this point."
+        }
+      ],
+      "explanation": "In critical chain scheduling, a resource buffer is a warning rather than added time: it sits wherever a critical-chain activity needs a resource that is not already working on the chain, and it triggers the call-up early enough for that resource to be ready when the predecessor finishes. Feeding buffers protect merge points, and the project buffer protects the finish; only a change of resource on the critical chain calls for a resource buffer.",
+      "mindset": "Warn a pooled resource before the chain needs it, not when it does."
+    },
+    {
+      "id": "pmp-pr4-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "distributed-teams",
+        "handoffs",
+        "travel"
+      ],
+      "stem": "Your team building a travel-booking app has four developers in Dublin and four in Manila, with one hour of overlapping working time. Stories are designed in Dublin, coded in Manila and tested in Dublin, so most stories wait overnight twice and cycle time has doubled. The engineering director proposes moving the Manila developers to a late shift to create four hours of overlap. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support the late shift for a trial period, measuring cycle time before and after so that the decision about overlap rests on evidence.",
+          "correct": false,
+          "rationale": "A trial is reasonable as method, but it tests the director's premise that more overlap is the fix. The candidate measures a workaround for the handoffs instead of questioning why the handoffs exist."
+        },
+        {
+          "id": "b",
+          "text": "Ask the Dublin testers to start two hours earlier so that each story finished in Manila can be tested on the same day it is completed.",
+          "correct": false,
+          "rationale": "Shifting Dublin's hours removes one wait but keeps work crossing time zones twice per story. The candidate tunes the handoff schedule rather than reducing the handoffs."
+        },
+        {
+          "id": "c",
+          "text": "Introduce detailed written handover notes for every story so that each location can pick up work without needing to speak to the other.",
+          "correct": false,
+          "rationale": "Better handover notes reduce misunderstandings but not the waiting, because the next site still cannot start until it wakes up. The candidate improves handoff quality while accepting the handoff structure."
+        },
+        {
+          "id": "d",
+          "text": "Organise the work so that each location takes whole stories from design to test, using the overlap hour for planning and integration.",
+          "correct": true,
+          "rationale": "The waits come from splitting each story across the time zones. Letting each site finish what it starts removes the overnight queues, and the overlap hour is enough for coordination."
+        }
+      ],
+      "explanation": "In a distributed team, a handoff across time zones turns each dependency into an overnight wait. The stronger fix is usually to change how work is divided, so that each location can take an item from start to finish, rather than stretching people's hours to make the handoffs quicker. Use whatever overlap exists for the decisions that genuinely need both sites.",
+      "mindset": "Remove the handoff before trying to speed it up."
+    },
+    {
+      "id": "pmp-pr4-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "external-resources",
+        "team-continuity",
+        "transport"
+      ],
+      "stem": "Your team building a ticketing platform for a ferry operator includes three developers supplied by an outsourcing partner under a framework contract. In five months the partner has replaced two of them at short notice, and each change cost the team about one iteration of reduced velocity while the newcomer learned the codebase. The partner's account manager now says a third developer will move to another client next month. Your procurement team manages the contract. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the account manager to postpone this particular move by three months as a goodwill gesture, given how much the earlier changes have already cost your team.",
+          "correct": false,
+          "rationale": "A favour may save one transition, but it leaves the partner free to rotate people whenever it suits them. The candidate treats a recurring pattern as a one-off and deals informally with a contract someone else manages."
+        },
+        {
+          "id": "b",
+          "text": "Quantify the velocity lost to each replacement and take it to procurement and the partner, asking for continuity terms such as minimum assignment periods and handover overlap.",
+          "correct": true,
+          "rationale": "The cost of the churn is real but invisible to the people who can change it. Putting a number on it gives procurement and the partner a reason to agree terms that stop the pattern, not just this instance."
+        },
+        {
+          "id": "c",
+          "text": "Build a structured onboarding pack and a pairing rota, agreed with the partner's account manager, so that each incoming developer from the partner can reach full pace within a few days of joining.",
+          "correct": false,
+          "rationale": "Faster onboarding is useful, but it absorbs the churn rather than addressing it, and a codebase is not learned in a few days. The candidate adapts to a cost that the contract could reduce."
+        },
+        {
+          "id": "d",
+          "text": "Propose replacing the partner's developers with permanent internal hires over the coming year, so that the membership of the team is fully under the organisation's control.",
+          "correct": false,
+          "rationale": "This is a sourcing decision with a long lead time and a cost case that has not been made. The candidate jumps to restructuring before trying the cheaper lever of agreeing better terms with the existing supplier."
+        }
+      ],
+      "explanation": "When external people are part of a team, their continuity is a resource the contract can protect or neglect. A recurring loss of capacity should be measured and put in front of whoever manages the supplier relationship, so that it can be addressed through terms such as minimum assignment periods, notice and handover overlap. Workarounds inside the team are worth having, but they do not stop the pattern.",
+      "mindset": "Put a number on a recurring capacity loss and show it to whoever can stop it."
+    },
+    {
+      "id": "pmp-pr4-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-route-to-owner",
+        "physical-resources",
+        "co-location",
+        "insurance"
+      ],
+      "stem": "Facilities has announced that from next month your claims-automation team's floor will become hot-desking, shared with two other departments, so the eight team members will sit wherever desks are free. The team pairs every day and plans around a large physical board. Facilities owns the floor plan and has invited departments to submit their workspace needs within the next two weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move the team's board to a digital tool now and ask the team to adapt its pairing to video calls, so that the change to hot-desking causes as little disruption as possible.",
+          "correct": false,
+          "rationale": "Going digital may be part of the eventual answer, but the candidate gives up the team's working space without using the window facilities has opened for exactly this kind of need."
+        },
+        {
+          "id": "b",
+          "text": "Submit a request to facilities within the two weeks, explaining how the team works together and asking for a bookable team area with wall space for its board.",
+          "correct": true,
+          "rationale": "Facilities owns the space and has asked for needs. Explaining how the team works, through the channel offered and inside the window, gives the owner what it needs to decide well."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team members to arrive early each morning so that they can claim a block of neighbouring desks and keep working together in much the same way as they do now.",
+          "correct": false,
+          "rationale": "This competes with the other departments every day and depends on people's goodwill to keep it going. The candidate invents a workaround instead of raising the need with the owner of the floor plan."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor to have the team exempted from the hot-desking policy, on the grounds that the project's delivery depends on the team sitting together every day.",
+          "correct": false,
+          "rationale": "Escalating before the owner has even been asked skips the route facilities has just opened. The candidate spends the sponsor's influence on a question that a request might settle."
+        }
+      ],
+      "explanation": "Physical resources such as workspace, equipment and facilities are part of what a team needs to deliver, and they are usually owned outside the project. When the owner invites input, the project's job is to state its need clearly, with the reason, through that channel and in time. Escalation and workarounds come after the owner has had a chance to respond.",
+      "mindset": "Tell the owner of a shared resource what the team needs while they are still deciding."
+    },
+    {
+      "id": "pmp-pr4-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "test-equipment",
+        "resource-requirements",
+        "pharmacy"
+      ],
+      "stem": "Your team builds a pharmacy chain's prescription-ordering app and tests on emulators. Across the last three releases, 11 of the 14 defects reported by customers appeared only on particular physical phones. The developers propose buying 20 popular handsets for about £9,000. The company's shared device lab has 60 handsets but a three-day booking queue, and a cloud device-testing service costs £400 a month. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Find which handset models and operating-system versions the escaped defects occurred on, and compare them with the app's usage data to see which coverage is missing.",
+          "correct": true,
+          "rationale": "The defects already say where coverage is thin. Knowing which models and versions matter, and how many customers use them, is what lets the team choose between buying, renting and booking."
+        },
+        {
+          "id": "b",
+          "text": "Approve the purchase of the 20 handsets so that the team has its own devices on hand every iteration and no longer has to wait for anyone else's equipment.",
+          "correct": false,
+          "rationale": "Owning devices removes the queue, but nobody yet knows whether 20 popular handsets would have caught these defects. The candidate buys a resource before establishing what the gap actually is."
+        },
+        {
+          "id": "c",
+          "text": "Subscribe to the cloud device-testing service for a trial quarter, since it gives access to far more handsets than the team could ever buy, at a fraction of the purchase cost.",
+          "correct": false,
+          "rationale": "It is cheaper and broader, which makes it tempting, but it is still a solution chosen before the problem has been described. The candidate compares options on price without knowing which devices matter."
+        },
+        {
+          "id": "d",
+          "text": "Book the shared device lab three days ahead of each iteration's final testing days, so that physical handsets are reliably available without any new spending at all.",
+          "correct": false,
+          "rationale": "Using an existing resource is sensible, but it fixes testing at the end of the iteration and still assumes the lab holds the right devices. The candidate schedules a resource without checking it fits the need."
+        }
+      ],
+      "explanation": "Resource requirements should be derived from the work and its evidence, not from the options on offer. When a quality problem points to missing equipment, first define precisely what is missing, then compare ways of getting it on cost, availability and fit. Choosing between suppliers before the need is defined tends to buy the wrong thing efficiently.",
+      "mindset": "Define what the work needs before choosing how to get it."
+    },
+    {
+      "id": "pmp-pr4-133",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "resource-estimating",
+        "velocity",
+        "retail"
+      ],
+      "stem": "A retailer's sponsor must decide how many developers to fund for a new loyalty platform. The initial backlog is estimated at 1,400 story points and the platform is wanted within ten months. The finance partner has taken a figure of 8 points per developer per two-week iteration from an industry article and calculated that eight developers are needed. No team has yet worked on this product. What should you advise the sponsor?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Fund eight developers as calculated, but add 20% contingency to make ten, so that the plan is protected if the figure from the article turns out to be optimistic for this product.",
+          "correct": false,
+          "rationale": "Contingency on top of a figure that does not apply to this team only makes a wrong number larger. The candidate accepts the calculation's premise and adjusts its margin instead of its basis."
+        },
+        {
+          "id": "b",
+          "text": "Base the headcount on the velocity of the company's existing e-commerce team, divided per developer, since that reflects how the organisation's own people actually work.",
+          "correct": false,
+          "rationale": "Local data is better than an article, which makes this attractive, but story points are calibrated within one team and do not convert into a per-person rate for another. The candidate improves the input while keeping the flawed method."
+        },
+        {
+          "id": "c",
+          "text": "Re-estimate the backlog in hours using bottom-up task estimates, so that the headcount can be worked out precisely before any funding is agreed for the platform.",
+          "correct": false,
+          "rationale": "A detailed estimate of an initial backlog adds precision to work that will change as it is learned about, and it delays the decision. The candidate answers uncertainty with more estimating rather than with evidence."
+        },
+        {
+          "id": "d",
+          "text": "Fund one cross-functional team now, measure its throughput over the first three or four iterations, and give the sponsor a staffing range to be firmed up from that data.",
+          "correct": true,
+          "rationale": "The calculation assumes points convert into people at a fixed rate, which they do not. Observed throughput from a real team on this product is the only sound basis for sizing, and a range lets the sponsor decide now."
+        }
+      ],
+      "explanation": "Story points are a relative measure inside one team, so a points-per-person figure from elsewhere cannot size a new team. In agile work, the reliable way to estimate the people needed is to start a team, measure what it actually delivers on this product, and size from that, giving decision-makers a range in the meantime. Challenge any resource calculation that rests on a conversion the unit does not support.",
+      "mindset": "Size teams from observed throughput, not from borrowed conversion rates."
+    },
+    {
+      "id": "pmp-pr4-134",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "team-composition",
+        "cross-functional",
+        "public-sector"
+      ],
+      "stem": "You are helping a resource manager form a new team to build a council's online parking-permit service. The work covers user research, front-end and back-end development, integration with the council's payments system and accessibility testing. Suitable people are available from several departments, and the manager has asked for your guidance before choosing names. Which two principles should guide the team's composition?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Include the skills needed to take an item from idea to tested increment, such as research, development and testing, as full members of the team.",
+          "correct": true,
+          "rationale": "A team that holds every skill its work needs can finish items without waiting on other groups. Treating testers and researchers as members rather than later additions is what makes that possible."
+        },
+        {
+          "id": "b",
+          "text": "Keep the team small enough to coordinate easily, typically fewer than ten people, and add a second team later if the work outgrows it.",
+          "correct": true,
+          "rationale": "Communication paths grow quickly with team size. A small team can plan and decide together; if more capacity is needed, a second team scales better than a larger first one."
+        },
+        {
+          "id": "c",
+          "text": "Staff the team first with the strongest back-end developers, since integration is the riskiest part, and add testers once there is enough to test.",
+          "correct": false,
+          "rationale": "Prioritising the riskiest skill sounds prudent, but adding testers later builds in a handoff and delays feedback on quality. The candidate staffs for a phase sequence the team is not meant to follow."
+        },
+        {
+          "id": "d",
+          "text": "Take one representative from each contributing department at around a third of their time, so that every department's interests are represented.",
+          "correct": false,
+          "rationale": "Representation is a governance concern, not a team design. Fractional members split their attention and slow every decision, so the candidate trades the team's flow for departmental visibility."
+        },
+        {
+          "id": "e",
+          "text": "Give each developer ownership of one component from the start, so that responsibilities are clear and nobody's work overlaps with anyone else's.",
+          "correct": false,
+          "rationale": "Clear ownership feels efficient, but fixed component owners become bottlenecks and stop the team swarming on priorities. The candidate applies a functional structure inside a team that needs shared ownership."
+        }
+      ],
+      "explanation": "An agile team is designed to deliver finished increments on its own, so its composition is judged by whether it holds all the skills the work needs and whether it is small enough to work as one unit. Capacity grows by adding teams, not by enlarging one; dependence on outside groups and fractional members are the costs to minimise when choosing names.",
+      "mindset": "Compose a team around finishing the work, not around representing the organisation."
+    },
+    {
+      "id": "pmp-pr4-135",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "resource-calendar",
+        "secondment",
+        "financial-services"
+      ],
+      "stem": "Your hybrid programme is replacing a building society's mortgage-servicing system. Five operations staff are seconded at 60% to run user acceptance tests at the end of each three-week iteration. For the last four working days of every month, their manager takes them back for month-end reconciliations, a regulatory obligation. Twice now, a test window has fallen at month end and the release has slipped. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask their manager to shield the secondees from month-end work for the rest of the programme, since the secondment agreement commits 60% of their time to you.",
+          "correct": false,
+          "rationale": "The agreement sets an average, and the reconciliations are a regulatory duty that will win any contest. The candidate fights a fixed, legitimate constraint instead of planning around it."
+        },
+        {
+          "id": "b",
+          "text": "Bring in contract testers to run the acceptance tests whenever a test window falls at month end, so that releases no longer depend on the operations team.",
+          "correct": false,
+          "rationale": "Acceptance testing by the people who will use the system is the point of those tests. The candidate substitutes availability for the business knowledge the activity exists to apply."
+        },
+        {
+          "id": "c",
+          "text": "Mark the month-end days as unavailable in the testers' resource calendars and arrange the iteration timing so that test windows avoid the end of each month.",
+          "correct": true,
+          "rationale": "The unavailability is predictable and permanent. Recording it in the calendars and planning test windows around it removes the clash at no cost to either the business or the programme."
+        },
+        {
+          "id": "d",
+          "text": "Raise the two slipped releases with the steering committee and ask it to decide whether month-end or acceptance testing should take priority in future months.",
+          "correct": false,
+          "rationale": "There is nothing for the committee to decide: the regulatory work takes priority, and the clash can be planned out. The candidate escalates a scheduling problem that sits within the programme's own control."
+        }
+      ],
+      "explanation": "A resource calendar should hold every predictable limit on availability, including recurring business obligations as well as leave and holidays. When a constraint is legitimate and fixed, the efficient response is to plan the work around it rather than to contest it or to swap in less suitable people. A clash that happens twice from a known cause is a planning gap, not bad luck.",
+      "mindset": "Plan around a constraint that will not move instead of fighting it every month."
+    },
+    {
+      "id": "pmp-pr4-136",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-use-own-authority",
+        "physical-resources",
+        "equipment-control",
+        "utilities"
+      ],
+      "stem": "On a hybrid programme developing smart electricity meters, three firmware teams share twelve hardware debug probes that took six weeks to procure. Over the last two iterations, engineers have often spent an hour or more looking for one, and two probes cannot be found at all. Controlling project equipment is within your remit as programme manager, and replacements would take another six weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Set up a sign-out log for the probes with a named custodian and an agreed storage place, and order replacements for the two missing probes now.",
+          "correct": true,
+          "rationale": "This is within your remit and deals with both problems: the log and custodian stop the searching and losses, and ordering now starts the six-week clock on the missing capacity."
+        },
+        {
+          "id": "b",
+          "text": "Order twelve further probes so that each team can hold a complete set of its own, which removes the need for engineers to search for a shared one.",
+          "correct": false,
+          "rationale": "Doubling the stock answers a control problem with spending and still leaves probes untracked. The candidate assumes the shortage is one of quantity when the evidence points to how the probes are managed."
+        },
+        {
+          "id": "c",
+          "text": "Raise the losses at the next steering committee and ask the programme office to issue an equipment-handling policy that all the teams must follow.",
+          "correct": false,
+          "rationale": "A policy may help later, but equipment control is already your responsibility and the next committee may be weeks away. The candidate escalates a fix that is theirs to make today."
+        },
+        {
+          "id": "d",
+          "text": "Divide the probes evenly between the three teams and make each team's scrum master responsible for looking after its own allocation from now on.",
+          "correct": false,
+          "rationale": "Splitting the pool makes accountability clearer but loses the flexibility of sharing, so one team may be short while another's probes sit idle. The candidate trades the pool's value for simpler ownership."
+        }
+      ],
+      "explanation": "Shared physical resources need a simple control: a known location, a record of who has each item and a named person accountable. When equipment goes missing, put that control in place within your own authority and start replacing lost items at once if the lead time is long. Buying more or escalating is premature until the control problem is fixed.",
+      "mindset": "Fix how a shared resource is controlled before buying more of it."
+    },
+    {
+      "id": "pmp-pr4-137",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "rollout-planning",
+        "resource-constraints",
+        "retail"
+      ],
+      "stem": "Your hybrid programme is introducing a new point-of-sale system in 48 shops. The software is built iteratively; the rollout plan, agreed with the retail director, goes live in eight shops a week for six weeks. Each shop needs on-site training, and each of your three trainers can cover two shops a week. Recruiting and preparing new trainers takes six weeks. The retail director's firm requirement is that every shop is live before peak trading begins in week 10. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have each shop in the first two weeks nominate a super-user who, once trained, helps train staff in a later shop alongside one of the three trainers.",
+          "correct": false,
+          "rationale": "It adds capacity without hiring, but it relies on untested trainers and takes experienced staff out of their own newly live shops. The candidate solves a capacity gap that the date did not require solving."
+        },
+        {
+          "id": "b",
+          "text": "Propose to the retail director a revised rollout of six shops a week, which completes all 48 shops in week 8 and still finishes before peak trading begins.",
+          "correct": true,
+          "rationale": "The three trainers support six shops a week, and at that pace the rollout ends in week 8, inside the director's real constraint. Taking the change to the director keeps the decision with the person who agreed the plan."
+        },
+        {
+          "id": "c",
+          "text": "Shorten the on-site training and add an online module before go-live, so that each of the three trainers can cover enough shops to hold eight a week.",
+          "correct": false,
+          "rationale": "It keeps the original pace by cutting what each shop receives, which raises the risk of disruption in the shops. The candidate protects a date that had room to move and reduces quality instead."
+        },
+        {
+          "id": "d",
+          "text": "Start recruiting two more trainers now and keep the eight-a-week plan, letting a backlog of shops build up until the new trainers arrive to clear it before peak trading.",
+          "correct": false,
+          "rationale": "The new trainers arrive as the original plan was due to end, so shops would go live untrained or late in an unplanned order. The candidate pays to keep a pace the resources cannot support yet."
+        }
+      ],
+      "explanation": "When a plan's pace exceeds the resources available, first check what the binding requirement is. If the real constraint leaves room, adjusting the pace to the capacity you have is usually cheaper and safer than adding people with long lead times or reducing what each unit of work receives. A change to an agreed plan still goes to the person who agreed it.",
+      "mindset": "Fit the pace to the resources when the real deadline allows it."
+    },
+    {
+      "id": "pmp-pr4-138",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "resource-management-plan",
+        "tailoring",
+        "transport"
+      ],
+      "stem": "Your programme for a regional bus operator has finished its predictive design phase. Delivery now moves to three agile software teams, while a predictive workstream installs equipment in the depots. The resource management plan was written for the design phase and assigns named individuals to individual activities week by week. Which two changes should you make to the plan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Plan the agile part at team level, with stable membership and capacity per iteration, rather than assigning named people to individual tasks.",
+          "correct": true,
+          "rationale": "Agile teams decide among themselves who does which task. The plan's job for that part is to keep membership stable and capacity known, which is what forecasting depends on."
+        },
+        {
+          "id": "b",
+          "text": "Set out how the agile teams request specialists from outside the team, such as depot engineers, including who approves and the lead time.",
+          "correct": true,
+          "rationale": "Shared specialists are where agile teams most often stall. Defining the request route and lead time in the plan makes those dependencies predictable for both sides."
+        },
+        {
+          "id": "c",
+          "text": "Remove the agile teams from the resource management plan entirely, since agile teams organise their own work and manage their own resourcing.",
+          "correct": false,
+          "rationale": "Self-organisation covers how work is shared inside the team, not how the team is staffed, funded or supported. The candidate confuses team autonomy with having no resource planning at all."
+        },
+        {
+          "id": "d",
+          "text": "Keep the week-by-week named assignments for the agile teams, updating them after each iteration planning session so all workstreams stay consistent.",
+          "correct": false,
+          "rationale": "Consistency of format is not a reason to manage agile teams at task level. The candidate preserves the plan's structure at the cost of the team's self-organisation and creates rework every iteration."
+        },
+        {
+          "id": "e",
+          "text": "Move the depot workstream to team-level capacity planning as well, so that the whole programme follows one approach and one set of measures.",
+          "correct": false,
+          "rationale": "Depot installation is predictive work with specific crews tied to scheduled activities, so named assignments still fit it. The candidate applies one approach everywhere instead of tailoring by workstream."
+        }
+      ],
+      "explanation": "A resource management plan should be tailored to how each part of the work is delivered. In a hybrid programme that usually means team-level, stable capacity for agile work, named assignments for predictive work, and clear rules for how teams obtain specialists they share. When the delivery approach changes, the plan should change with it rather than being kept or discarded wholesale.",
+      "mindset": "Tailor the resource plan to each way of working the programme contains."
+    },
+    {
+      "id": "pmp-pr4-139",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "decision-rights",
+        "matrix-organisation",
+        "higher-education"
+      ],
+      "stem": "On a hybrid programme replacing a university's student-records system, agile teams build the software while a predictive workstream migrates data, staffed by analysts seconded from the registry. Match each resource decision to the person who should make it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Which developer on an agile team picks up the next story from the iteration backlog."
+        },
+        {
+          "id": "s2",
+          "text": "Whether a seconded registry analyst's migration time drops from full-time to half-time during enrolment week."
+        },
+        {
+          "id": "s3",
+          "text": "Which of two features waiting for the shared data architect's limited time should be worked on first."
+        },
+        {
+          "id": "s4",
+          "text": "Whether to increase the programme budget to hire a second data architect for six months."
+        }
+      ],
+      "options": [
+        {
+          "id": "team",
+          "text": "The agile team itself",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Agile teams decide among themselves who takes which item. Assigning stories from outside the team undermines the self-organisation that makes its commitments reliable."
+        },
+        {
+          "id": "line",
+          "text": "The analyst's line manager in the registry",
+          "correct": true,
+          "match": "s2",
+          "rationale": "In a matrix arrangement, the functional manager keeps decisions about a seconded person's availability. The programme supplies the impact; the line manager decides."
+        },
+        {
+          "id": "po",
+          "text": "The product owner",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Choosing which feature goes first is an ordering decision about value, and ordering the backlog is the product owner's call even when the constraint is a scarce person's time."
+        },
+        {
+          "id": "sponsor",
+          "text": "The programme sponsor",
+          "correct": true,
+          "match": "s4",
+          "rationale": "Increasing the budget to buy more capacity is a funding decision, and funding sits with the sponsor. The programme manager can make the case but cannot commit the money."
+        },
+        {
+          "id": "pm",
+          "text": "The programme manager",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The programme manager coordinates these decisions and makes their impact visible, but each of the four sits with someone else: the team, the line manager, the product owner or the sponsor."
+        }
+      ],
+      "explanation": "Resource decisions in a hybrid programme are spread across several owners: teams decide who does what within their own work, functional managers control the availability of people they lend, product owners order work by value and sponsors control funding. The project or programme manager's leverage comes from making impacts visible to each owner, not from taking their decisions.",
+      "mindset": "Know whose decision each resource question is before acting on it."
+    },
+    {
+      "id": "pmp-pr4-140",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "skills",
+        "team-capacity",
+        "veterinary"
+      ],
+      "stem": "Your agile team builds a booking app for a chain of veterinary clinics. Complete each sentence with the way of providing the skill that fits how long the work will need it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Accessibility checks are now needed on almost every story, and nobody on the team can do them, so the team should"
+        },
+        {
+          "id": "c2",
+          "text": "The next two iterations carry about three times the usual front-end work, after which the load returns to normal, so the team should"
+        },
+        {
+          "id": "c3",
+          "text": "The team's mainframe specialist has had no mainframe work for three iterations, and none remains in the backlog, so the team should"
+        }
+      ],
+      "options": [
+        {
+          "id": "member",
+          "text": "ask for a person with that skill to join as a full, dedicated team member",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A need that appears in nearly every story is permanent work for the team. Making the skill part of the team avoids a standing dependency on outside help for routine items."
+        },
+        {
+          "id": "loan",
+          "text": "agree a time-boxed loan of a front-end developer from another team, with that team's product owner",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A short, known peak is best met with temporary capacity that returns when the peak ends. Agreeing it with the lending team's product owner keeps the cost to their work visible."
+        },
+        {
+          "id": "release",
+          "text": "agree his release to work where his skill is needed, with a way to call on him later if required",
+          "correct": true,
+          "match": "c3",
+          "rationale": "Keeping a specialist with no work for his skill wastes scarce capacity. Releasing him, with a route back if a need appears, serves the organisation and the person."
+        },
+        {
+          "id": "course",
+          "text": "send the whole team on a formal training course in the skill before the work starts",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Training everyone is slow and costly, and it does not fit a permanent gap needing depth, a short peak, or a skill that is no longer needed."
+        }
+      ],
+      "explanation": "How a team obtains a skill should follow how long and how often the work needs it. A permanent need belongs inside the team; a short peak is met by temporary capacity that returns afterwards; and a skill that is no longer needed should be released for use elsewhere. Matching the arrangement to the duration of the need avoids both standing dependencies and idle specialists.",
+      "mindset": "Match how a skill is provided to how long the work needs it."
+    }
+  ]
+}
