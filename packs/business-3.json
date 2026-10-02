@@ -1,0 +1,1724 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Business 3 — Change control",
+  "questions": [
+    {
+      "id": "pmp-b3-101",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "change-control",
+        "delegated-authority",
+        "thresholds"
+      ],
+      "stem": "You manage a billing replacement for a regional water utility. The change management plan lets you approve changes under £15,000; anything larger goes to the change board. Over three weeks the finance team has raised five requests, each between £9,000 and £13,000, for new reports. Reading them together, you see they share one data model and are the parts of a single debt-management dashboard. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Approve each request under your delegated limit as it is assessed, because every one of them individually falls inside the authority the plan gives you.",
+          "correct": false,
+          "rationale": "This reads the threshold literally and misses its purpose. The candidate checks each ticket against the limit without asking whether the tickets are really separate changes, which is how a large change passes without the people meant to decide it."
+        },
+        {
+          "id": "b",
+          "text": "Treat the five as one change, assess the combined impact, and put it to the change board as a single request, explaining to finance why.",
+          "correct": true,
+          "rationale": "A threshold measures the size of a change, not the size of the paperwork. Once the requests are seen to be one piece of scope, its real impact is around £55,000 and the decision belongs to the board, whatever the individual tickets say."
+        },
+        {
+          "id": "c",
+          "text": "Approve requests in the order received until their running total reaches £15,000, then send the remaining requests to the change board for decision.",
+          "correct": false,
+          "rationale": "Counting cumulatively sounds prudent, but it still splits one dashboard between two decision-makers. The board would be asked about half a design whose other half is already committed, so its decision is partly made for it."
+        },
+        {
+          "id": "d",
+          "text": "Ask finance to choose the two reports they need most, approve those under your own authority, and hold the other three back until a later phase.",
+          "correct": false,
+          "rationale": "It keeps the decision inside the delegated limit by reshaping the request to fit, rather than routing the request to the level its real size requires. Whether to phase the dashboard is itself a scope decision for the board."
+        }
+      ],
+      "explanation": "Delegated thresholds apply to changes, and a change is defined by the scope it alters rather than by how many requests it arrives in. When several small requests turn out to serve one outcome, they are assessed and decided as one, at the level their combined impact requires. Splitting, whether deliberate or accidental, is the commonest way thresholds are defeated, and the person holding the delegation is the one placed to notice it.",
+      "mindset": "Judge a change by what it really alters, not by how it happened to be ticketed."
+    },
+    {
+      "id": "pmp-b3-102",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "archetype-route-to-owner",
+        "change-control",
+        "product-owner",
+        "backlog"
+      ],
+      "stem": "Your agile team builds a claims-handling app for an insurer, and a product owner orders its backlog. The sales director has emailed one of the developers directly asking for an export-to-spreadsheet button by Friday, saying it is tiny. The developer forwards the email to you and asks whether to fit it into the current sprint. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the developer build it this sprint if it really takes under a day, since a quick win with sales is worth more than the minor disruption.",
+          "correct": false,
+          "rationale": "The candidate judges the request by its size rather than by who decides. Small additions slipped into a sprint displace committed work and teach stakeholders that asking a developer directly is quicker than asking the product owner."
+        },
+        {
+          "id": "b",
+          "text": "Add it to the sprint backlog yourself as a small item, then tell the product owner at the daily stand-up so the team's plan stays transparent.",
+          "correct": false,
+          "rationale": "Telling the product owner afterwards does not give them the decision. The candidate takes an ordering decision that is not theirs and makes it visible only once the sprint has already absorbed the work."
+        },
+        {
+          "id": "c",
+          "text": "Raise a formal change request with the project steering group, so that the cost and schedule impact of the new button can be assessed properly.",
+          "correct": false,
+          "rationale": "This applies plan-driven machinery to a backlog item. The product owner already has the authority to accept, reorder or decline new requests, so a steering-group change request adds weeks to a decision that can be made this afternoon."
+        },
+        {
+          "id": "d",
+          "text": "Pass the request to the product owner to weigh against the backlog, and let the sales director know that is where the decision will be made.",
+          "correct": true,
+          "rationale": "The product owner is the single route by which new work enters the backlog. Sending the request there gets it a fair decision against everything else, and telling the sales director keeps the relationship intact while setting the route for next time."
+        }
+      ],
+      "explanation": "On an agile team, the backlog is the change control mechanism and the product owner is its gatekeeper. Requests that reach the team by another route are redirected to that gatekeeper, not quietly absorbed and not escalated past them. Redirecting politely, and saying where the decision is made, protects the sprint and teaches stakeholders the route at the same time.",
+      "mindset": "Send every new request to the one person who decides what the team works on next."
+    },
+    {
+      "id": "pmp-b3-103",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "change-control",
+        "governance",
+        "tailoring"
+      ],
+      "stem": "A logistics programme combines a predictive warehouse-automation build with three agile software teams. The change management plan sends every change to a monthly change board, including reordering stories inside an agreed release. Teams now wait up to five weeks for decisions, and two have started work on unapproved stories at their own risk. The board members are frustrated by long agendas of minor items. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Propose to the sponsor a revised plan in which product owners decide changes inside an agreed release and the board keeps changes to milestones, budget or automation interfaces.",
+          "correct": true,
+          "rationale": "The process, not the teams, is the root problem: it routes decisions to a level that neither needs nor wants them. Tiering by impact restores speed for the software teams and gives the board back the decisions that actually affect the baseline."
+        },
+        {
+          "id": "b",
+          "text": "Instruct both teams to stop all unapproved work at once and remind every team that each change must go to the board, however small it appears.",
+          "correct": false,
+          "rationale": "Enforcing the rule addresses the symptom while keeping the cause. The candidate treats the teams' workaround as the problem, when the workaround exists because the process routes trivial decisions through a five-week loop."
+        },
+        {
+          "id": "c",
+          "text": "Ask the board to meet weekly rather than monthly for the rest of the build, so that each team's change requests are decided within days and nobody needs to work at risk.",
+          "correct": false,
+          "rationale": "Faster meetings shorten the wait but multiply the burden on board members who are already frustrated by minor items. The candidate accepts the premise that every backlog change needs the board and only changes how often it is consulted."
+        },
+        {
+          "id": "d",
+          "text": "Let the teams continue working at risk on stories they judge to be low impact, and report those decisions to each monthly board meeting so that its members can ratify them afterwards.",
+          "correct": false,
+          "rationale": "It legitimises bypassing a process that is still formally in force, and leaves the teams to judge impact with no agreed criteria. Retrospective ratification gives the board decisions it cannot meaningfully reverse."
+        }
+      ],
+      "explanation": "Change control should be tailored so that each decision is taken at the lowest level that owns its consequences. In a hybrid environment that usually means product owners manage change within an agreed release envelope while a board governs changes to the shared baseline and interfaces. When people routinely work around a control, the first question is whether the control fits the work, and the fix is a governed change to the plan rather than either stricter enforcement or tolerated bypass.",
+      "mindset": "When everyone works around a control, question the control before blaming the people."
+    },
+    {
+      "id": "pmp-b3-104",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "change-control",
+        "impact-assessment",
+        "construction"
+      ],
+      "stem": "On a €9 million school extension, the cladding subcontractor proposes replacing the specified façade fixings with another brand. They describe the alternative as equivalent, say it is €14,000 cheaper and available four weeks sooner. The site manager wants to accept at once to recover an earlier delay. The specification names the original product and was approved by the building-control body. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the substitution as a like-for-like swap, since the subcontractor has confirmed in writing that it is equivalent and the earlier delay makes four weeks particularly valuable.",
+          "correct": false,
+          "rationale": "The candidate takes the supplier's claim of equivalence as evidence of it. The party proposing the swap gains from it, and a specification approved by a regulator cannot be varied on a commercial assurance."
+        },
+        {
+          "id": "b",
+          "text": "Have the façade engineer assess the alternative against the specification, including fire performance and warranty, before deciding how the proposal should be handled.",
+          "correct": true,
+          "rationale": "Whether this is a change at all depends on whether the products really are equivalent, and only a technical assessment can say. Establishing that first tells you whether the proposal needs a formal change, a building-control resubmission, or nothing."
+        },
+        {
+          "id": "c",
+          "text": "Submit the substitution to the change board straight away, highlighting the cost and schedule savings so that the board can reach a quick decision on it.",
+          "correct": false,
+          "rationale": "Routing is right eventually, but the board would be deciding on the benefits alone, with no assessment of what the swap does to fire performance, warranty or the approval. A request without its impact assessment is not ready to decide."
+        },
+        {
+          "id": "d",
+          "text": "Reject the proposal and tell the subcontractor to fit the specified product, because the specification is baselined and was approved by building control.",
+          "correct": false,
+          "rationale": "A baseline can be changed through the proper route; it is not a reason to refuse to consider a change. The candidate forfeits a possible four-week recovery without ever finding out whether the alternative is acceptable."
+        }
+      ],
+      "explanation": "A claim that a substitution is equivalent is a hypothesis to be tested, not a conclusion. The first step on any proposed variation is to establish its real impact, technical as well as commercial, because that determines whether it is a change at all and, if so, which route and approvals it needs. Deciding before the assessment, in either direction, is deciding blind.",
+      "mindset": "Test whether something is a change before deciding what to do about it."
+    },
+    {
+      "id": "pmp-b3-105",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "definition-of-done",
+        "release-forecast",
+        "transparency"
+      ],
+      "stem": "Three sprints into a six-sprint release of a payments app, a near miss leads the team and product owner to add automated security scanning to the Definition of Done. The team estimates its velocity will fall by about 15% for the rest of the release. The release forecast shared with the client last month was based on the old velocity and showed all 40 committed features landing. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the existing forecast and ask the team to recover the lost velocity through extra effort, so that the client commitment is met as promised.",
+          "correct": false,
+          "rationale": "The candidate protects the promise rather than the client's ability to plan. Sustained overtime erodes quality, which is the very thing the new scanning was meant to protect, and the forecast quietly stops reflecting reality."
+        },
+        {
+          "id": "b",
+          "text": "Apply the new scanning only to features built after this release, so that the agreed forecast and its committed features can still be delivered on time.",
+          "correct": false,
+          "rationale": "It defers a control the team adopted because of a real near miss, trading security for a forecast. The candidate treats the quality standard as negotiable in order to avoid an uncomfortable conversation about scope."
+        },
+        {
+          "id": "c",
+          "text": "Raise a formal change request asking the client to approve the change to the Definition of Done before the team starts applying the new scanning.",
+          "correct": false,
+          "rationale": "The Definition of Done is the team's quality standard, agreed with the product owner, and does not need client approval. What the client needs is the effect on delivery, which this option asks them to sign off without being shown."
+        },
+        {
+          "id": "d",
+          "text": "Re-forecast the release at the new velocity and show the client what it now means for scope by the date, along with the near miss that prompted the change.",
+          "correct": true,
+          "rationale": "Changing the Definition of Done changes what the team can deliver, and the client is relying on a forecast that no longer holds. Re-forecasting openly lets the client and product owner decide on the scope early, rather than discovering the gap at release."
+        }
+      ],
+      "explanation": "In agile delivery, change to how work is done is just as real as change to what is built, because both alter what the team can deliver by a date. The control is transparency: when the basis of a forecast changes, the forecast is updated and its consequences are shown to the people relying on it, so scope decisions are made early and deliberately. Holding an outdated forecast converts a known change into a late surprise.",
+      "mindset": "When the basis of a forecast changes, change the forecast where people can see it."
+    },
+    {
+      "id": "pmp-b3-106",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "change-log",
+        "configuration-management",
+        "records"
+      ],
+      "stem": "On a road-tunnel refurbishment, three people ask the project manager for information. Match each request to the record that should answer it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The client's engineer asks which revision of the ventilation drawings the contractor used when installing the fans in the north bore."
+        },
+        {
+          "id": "s2",
+          "text": "The change board wants to know, before it decides, what a proposed lighting upgrade would do to cost, schedule, risk and quality."
+        },
+        {
+          "id": "s3",
+          "text": "The sponsor asks how many change requests are open, who raised each one, and what was decided on those already closed."
+        }
+      ],
+      "options": [
+        {
+          "id": "cfg",
+          "text": "Configuration records",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Configuration records track which version of each controlled item is current and which was used where. They are what links an installed fan to the exact drawing revision it was built from."
+        },
+        {
+          "id": "ia",
+          "text": "Impact assessment",
+          "correct": true,
+          "match": "s2",
+          "rationale": "An impact assessment is prepared for a specific proposed change so that the decision-maker sees its effect on every constraint before deciding. It is the input to the board's decision, not a record of it."
+        },
+        {
+          "id": "log",
+          "text": "Change log",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The change log lists every request with its originator, status and decision. It is the record that answers how many, who and what was decided across all changes."
+        },
+        {
+          "id": "iss",
+          "text": "Issue log",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The issue log tracks current problems needing resolution. A candidate may reach for it because changes often arise from issues, but none of the three questions asks about an open problem."
+        }
+      ],
+      "explanation": "Change control relies on several records, and each answers a different question: the change log tracks requests and decisions, the impact assessment informs a particular decision, and configuration records track which version of each controlled item is in use. Keeping them distinct is what lets a project answer an auditor, a board or a client quickly, and confusing them is how records drift out of alignment.",
+      "mindset": "Know which record answers which question before anyone asks it."
+    },
+    {
+      "id": "pmp-b3-107",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "change-control",
+        "vendor",
+        "saas"
+      ],
+      "stem": "Your hybrid project for a county council is implementing a cloud HR platform. The configuration design was signed off under a plan-driven approval, while integrations are built in two-week sprints. The vendor announces that its quarterly release, six weeks away, replaces the absence-approval workflow on which your signed-off design depends. The vendor has confirmed it will not delay the release for any customer. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Escalate through the council's account manager to request an exemption from the release, since the signed-off design depends on the current absence workflow continuing unchanged.",
+          "correct": false,
+          "rationale": "The vendor has already said it will not delay for anyone. The candidate spends the six weeks trying to stop a change that is certain, instead of using them to adapt to it."
+        },
+        {
+          "id": "b",
+          "text": "Record the vendor release as a risk in the register and agree to monitor it at each sprint review until the vendor publishes the detailed release notes.",
+          "correct": false,
+          "rationale": "An announced, confirmed change with a date is not uncertain, so it is not a risk to monitor. Treating it as one delays the assessment until the window for an orderly response has mostly gone."
+        },
+        {
+          "id": "c",
+          "text": "Raise a change request against your own design baseline so the impact on configuration, integrations, testing and training is assessed and re-planned around the vendor's date.",
+          "correct": true,
+          "rationale": "The vendor's release is outside your control, but your baseline is not. Treating the external change as a trigger for your own change process gets its effects assessed and approved in time, rather than leaving the signed-off design describing a workflow that will not exist."
+        },
+        {
+          "id": "d",
+          "text": "Ask the integration team to add a workaround to the next sprint so the existing design keeps working, leaving the signed-off configuration document unchanged.",
+          "correct": false,
+          "rationale": "The workaround may be needed, but making it without changing the baseline leaves the signed-off design out of step with what is built. The candidate solves the technical problem while letting the records drift."
+        }
+      ],
+      "explanation": "Changes imposed from outside, by vendors, regulators or the market, are not optional, but they still enter the project through its own change process. The question is not whether to accept the external change but how the project's baselines adapt to it, and that needs the same impact assessment and approval as an internal request. Responding outside the process fixes the immediate problem and leaves the records describing a project that no longer exists.",
+      "mindset": "You cannot control an outside change, but you control how your baseline absorbs it."
+    },
+    {
+      "id": "pmp-b3-108",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "change-control",
+        "contract-variation",
+        "fixed-price"
+      ],
+      "stem": "You are the supplier's project manager on a fixed-price contract to build a booking system for a ferry operator. In a design workshop, the client's operations director asks your team to add a group-booking discount, calling it a small change. The contract contains a variation clause requiring changes to be priced and signed by the client's commercial manager. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Assess the request's impact on cost, schedule and risk, then submit it to the client as a priced variation under the contract's clause.",
+          "correct": true,
+          "rationale": "The variation clause is the agreed change route for both parties. Assessing and pricing the request turns an informal ask into a decision the client can make with full information."
+        },
+        {
+          "id": "b",
+          "text": "Continue delivering against the contracted scope, and start work on the discount only once the commercial manager has signed the variation.",
+          "correct": true,
+          "rationale": "The operations director can ask for a change but cannot authorise one under this contract. Keeping to the baseline until the right signatory agrees protects both the price and the relationship."
+        },
+        {
+          "id": "c",
+          "text": "Build the discount as a goodwill gesture, since it is small and the operator's satisfaction will matter when the support contract is renewed.",
+          "correct": false,
+          "rationale": "Goodwill additions on a fixed-price contract are unpriced scope that sets a precedent. The candidate weighs future revenue over the agreed change route and starts absorbing requests the contract says are to be priced."
+        },
+        {
+          "id": "d",
+          "text": "Decline the request, explaining that a fixed-price contract fixes the scope as well and that new features belong in a later contract.",
+          "correct": false,
+          "rationale": "Fixed price does not mean fixed scope where a variation clause exists. The candidate refuses a legitimate route for change that both parties signed up to, and leaves the client's need unmet."
+        },
+        {
+          "id": "e",
+          "text": "Ask the operations director to confirm the request by email, then begin the work so the delivery schedule is not put at risk by waiting.",
+          "correct": false,
+          "rationale": "Written confirmation from the wrong person is still not authorisation. The candidate mistakes a record of the request for approval of it, and commits unpriced work before the client has agreed to pay."
+        }
+      ],
+      "explanation": "On a contract with a variation clause, a client request for new scope is handled by assessing and pricing it, then waiting for authorisation from whoever the contract names. Two errors pull in opposite directions: absorbing the change informally, which erodes the price and sets a precedent, and refusing it outright, which ignores a route both parties agreed. The contract defines both the route and who can approve.",
+      "mindset": "Know who the contract says can authorise a change, and work to the baseline until they do."
+    },
+    {
+      "id": "pmp-b3-109",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "change-freeze",
+        "release-planning",
+        "product-owner"
+      ],
+      "stem": "An online grocer's mobile team releases every two weeks, and a national launch campaign begins in six weeks. The developers ask for a total change freeze over the last two sprints so they can stabilise the app. The marketing team wants to keep adjusting promotional features right up to launch day. Last year a late legal change to pricing wording had to be made two days before a campaign. What should the project manager propose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Grant the total freeze the developers asked for over the last two sprints, since stability matters most for a national launch and each late change adds risk to it.",
+          "correct": false,
+          "rationale": "The candidate maximises stability and ignores last year's evidence that some late changes are unavoidable. A freeze with no exception route will be broken under pressure, and broken informally."
+        },
+        {
+          "id": "b",
+          "text": "Keep the normal two-week cadence without any freeze, adding extra regression testing to each sprint so that marketing can keep changing promotional features.",
+          "correct": false,
+          "rationale": "Responding to change is a value, not an obligation to accept every change at any moment. The candidate optimises for flexibility and leaves the team absorbing promotional churn in the sprints where defects cost most."
+        },
+        {
+          "id": "c",
+          "text": "Agree with the product owner a freeze for the final two sprints, with a short published exception rule covering launch-blocking defects and legal changes only.",
+          "correct": true,
+          "rationale": "This takes the stability the developers need and keeps an explicit, narrow route for the changes that genuinely cannot wait. Publishing the rule in advance means exceptions are decided against criteria rather than by whoever pushes hardest."
+        },
+        {
+          "id": "d",
+          "text": "Freeze feature work for the last two sprints, and let the marketing director approve any exception case by case as each new request comes in.",
+          "correct": false,
+          "rationale": "The structure is close, but it hands the exception decision to the main requester of late changes and gives no criteria. The candidate creates a freeze that the person most motivated to breach it controls."
+        }
+      ],
+      "explanation": "A change freeze is a trade-off between stability and responsiveness, and it works only if it says in advance what may still pass and who decides. The useful design is narrow and explicit: a defined window, a short list of exception criteria, and the backlog owner as the decision-maker. A freeze with no exceptions is broken informally; a freeze with discretionary exceptions is not a freeze.",
+      "mindset": "Decide in advance what may break a freeze and who says so, before the pressure arrives."
+    },
+    {
+      "id": "pmp-b3-110",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "baseline",
+        "variance-reporting",
+        "change-control"
+      ],
+      "stem": "A telecoms fibre-rollout project has revised its plan twice. CR-07, approved in March, re-issued the schedule and cost baselines. CR-09 was submitted in May and awaits the change board's July meeting. The diagram shows each version of the plan up to the June status date. Select the version against which June's variances should be reported.",
+      "graphic": {
+        "viewBox": "0 0 640 240",
+        "title": "Four versions of the project plan on a timeline from January to June",
+        "caption": "Select a plan version. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "v1",
+          "n": 1,
+          "label": "Baseline v1 — original plan, approved in January",
+          "x": 20,
+          "y": 70,
+          "w": 135,
+          "h": 100,
+          "correct": false,
+          "rationale": "The original baseline was superseded when CR-07 was approved. Measuring against it reports an authorised change as if it were a performance problem, which mixes the two things variance analysis is meant to separate."
+        },
+        {
+          "id": "v2",
+          "n": 2,
+          "label": "Baseline v2 — re-issued in March with approved CR-07",
+          "x": 175,
+          "y": 70,
+          "w": 135,
+          "h": 100,
+          "correct": true,
+          "rationale": "This is the current approved baseline. Once a change is approved and the baseline re-issued, performance is measured against the revised plan, so the variance reflects how the work is going rather than what has been authorised."
+        },
+        {
+          "id": "v3",
+          "n": 3,
+          "label": "Draft v3 — includes CR-09, awaiting the July board",
+          "x": 330,
+          "y": 70,
+          "w": 135,
+          "h": 100,
+          "correct": false,
+          "rationale": "A pending change is not part of the baseline until the board approves it. Reporting against the draft assumes a decision the board has not taken, and it would make the board's July choice look already made."
+        },
+        {
+          "id": "fc",
+          "n": 4,
+          "label": "Team forecast — latest estimate to complete, June",
+          "x": 485,
+          "y": 70,
+          "w": 135,
+          "h": 100,
+          "correct": false,
+          "rationale": "A forecast is what is compared with the baseline, not a baseline in itself. Measuring progress against the team's own latest estimate makes every variance disappear, because the estimate already contains it."
+        }
+      ],
+      "explanation": "Variance is always measured against the current approved baseline: the original plan plus every approved change, and nothing that is still pending. Using an older version counts authorised change as poor performance, using a draft pre-empts a decision, and using a forecast measures the plan against itself. Keeping the baseline current after each approval is what makes variance reports mean anything.",
+      "mindset": "Measure against what has been approved, no earlier and no later."
+    },
+    {
+      "id": "pmp-b3-111",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-route-to-owner",
+        "change-budget",
+        "delegated-authority",
+        "airport"
+      ],
+      "stem": "On a hybrid airport baggage-system upgrade, product owners may approve changes within a release from a €120,000 change pool. Any request the remaining pool cannot fully fund goes to the programme change board. Changes approved so far cost €38,500, €22,000 and €17,250. A new request costs €45,000. Work out what remains in the pool, how far the new request exceeds it, and who decides it.",
+      "blanks": [
+        {
+          "id": "left",
+          "label": "Amount remaining in the change pool, in €",
+          "numeric": true,
+          "expect": 42250,
+          "tol": 0,
+          "unit": "€",
+          "rationale": "The approved changes total 38,500 + 22,000 + 17,250 = €77,750. Taking that from the €120,000 pool leaves 120,000 − 77,750 = €42,250."
+        },
+        {
+          "id": "gap",
+          "label": "Amount by which the new request exceeds the remaining pool, in €",
+          "numeric": true,
+          "expect": 2750,
+          "tol": 0,
+          "unit": "€",
+          "rationale": "The request is €45,000 against €42,250 remaining, so it is 45,000 − 42,250 = €2,750 more than the pool can fund. Small as the gap is, it means the pool cannot fully fund the request."
+        },
+        {
+          "id": "who",
+          "label": "Who decides the €45,000 request — the product owners or the change board",
+          "accept": [
+            "change board",
+            "the change board",
+            "programme change board",
+            "the programme change board",
+            "board",
+            "the board"
+          ],
+          "rationale": "The rule sends any request the remaining pool cannot fully fund to the programme change board. The product owners' authority is bounded by what is left in the pool, not by the size of the original allocation."
+        }
+      ],
+      "explanation": "A delegated change budget is an authority that shrinks as it is used: each approval reduces what the delegate can decide next. Checking a request against what remains, rather than against the original allocation, is what keeps the delegation honest, and a request that does not fit goes to the level above whole rather than being trimmed or split to squeeze under the limit.",
+      "mindset": "A delegated budget is spent authority, so check what is left before deciding."
+    },
+    {
+      "id": "pmp-b3-112",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "sprint-goal",
+        "backlog",
+        "rail"
+      ],
+      "stem": "A Scrum team building a ticket-sales app for a regional rail operator meets three different changes in one month. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Mid-sprint, the developers find that the agreed design for a seat-map story will miss its response-time criterion, although the sprint goal can still be reached another way. The developers should"
+        },
+        {
+          "id": "c2",
+          "text": "On day three of a sprint, a new fares regulation means the discount feature that is the whole sprint goal can no longer legally be offered. The product owner should"
+        },
+        {
+          "id": "c3",
+          "text": "Customers using a journey-planner screen that was accepted two sprints ago ask for a different layout. The product owner should"
+        }
+      ],
+      "options": [
+        {
+          "id": "neg",
+          "text": "renegotiate the story's approach with the product owner inside the sprint, keeping the sprint goal intact",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The sprint goal is the commitment; the detail of how a story meets it is open to negotiation as the team learns. Agreeing a different approach with the product owner adapts the plan without disturbing what the sprint was for."
+        },
+        {
+          "id": "cancel",
+          "text": "cancel the sprint and replan the work from the reordered backlog",
+          "correct": true,
+          "match": "c2",
+          "rationale": "When the sprint goal itself becomes obsolete, carrying on builds something that cannot be released. Cancelling is the product owner's decision and is meant for exactly this case, where no adjustment inside the sprint can save the goal."
+        },
+        {
+          "id": "new",
+          "text": "capture the request as a new backlog item and order it against the rest of the backlog",
+          "correct": true,
+          "match": "c3",
+          "rationale": "Accepted work met its criteria when it was accepted, so a different layout is new work. Treating it as a backlog item lets the product owner weigh its value against everything else waiting."
+        },
+        {
+          "id": "reopen",
+          "text": "reopen the accepted story and return it to the current sprint as unfinished work",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A candidate may pick it for the layout request, but reopening an accepted story rewrites history: it treats new learning as a failure to finish, distorts velocity and lets the request skip the ordering every other item goes through."
+        }
+      ],
+      "explanation": "In agile delivery the right response to a change depends on what it threatens. A change to how a story is done is negotiated inside the sprint; a change that destroys the sprint goal is grounds for cancelling the sprint; and a change to work already accepted is new work for the backlog. Matching the response to the level of commitment affected keeps the team adaptive without making every commitment provisional.",
+      "mindset": "Ask what a change actually threatens before choosing how far to replan."
+    },
+    {
+      "id": "pmp-b3-113",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-apply-the-rule",
+        "change-request-types",
+        "corrective-action",
+        "aviation"
+      ],
+      "stem": "An airline's cabin-refit programme runs a plan-driven seat-installation workstream alongside an in-flight entertainment team working in sprints. Match each proposal raised this week to the kind of change request it is. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Seat-frame welds from the new jig are all within tolerance, but measurements over three weeks show them drifting towards the limit, and the engineer proposes recalibrating the jig now."
+        },
+        {
+          "id": "s2",
+          "text": "The entertainment team's burn-up shows its release landing three sprints after the date in the integrated plan, and the lead proposes moving two developers across from the seat-control software."
+        },
+        {
+          "id": "s3",
+          "text": "The seat supplier has renumbered the seat-cover part in its catalogue, and the bill of materials must be revised to match, although nothing physical is changing."
+        }
+      ],
+      "options": [
+        {
+          "id": "prev",
+          "text": "Preventive action",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Every weld is still within tolerance, so nothing has gone wrong yet. Recalibrating to stop a trend reaching the limit is action taken to keep future performance in line with the plan before a deviation occurs."
+        },
+        {
+          "id": "corr",
+          "text": "Corrective action",
+          "correct": true,
+          "match": "s2",
+          "rationale": "The release is already forecast to land late against the integrated plan, so performance has deviated. Moving developers is an intentional step to bring future work back into line with the baseline date."
+        },
+        {
+          "id": "upd",
+          "text": "Update",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Revising the bill of materials changes a controlled document to reflect new information, with no change to the work or the product. It still goes through change control because the document is under configuration management."
+        },
+        {
+          "id": "def",
+          "text": "Defect repair",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A candidate may attach it to the drifting welds, but defect repair is for a component that fails its requirement, and every weld here passes. Treating a trend as a defect confuses something that may go wrong with something that has."
+        }
+      ],
+      "explanation": "Change requests are classified by what has happened to performance. Corrective action responds to a deviation that has already occurred; preventive action acts on a trend before it becomes one; defect repair fixes a component that fails its requirement; and an update brings a controlled document into line with new information. The distinction between preventive and corrective turns on timing, so the evidence of whether a limit has been crossed decides it.",
+      "mindset": "Classify a change by what has actually happened, not by how worrying it looks."
+    },
+    {
+      "id": "pmp-b3-114",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "sprint-planning",
+        "backlog-refinement",
+        "charity"
+      ],
+      "stem": "Your Scrum team is rebuilding an online donations platform for a national charity. Over the last four sprints, the product owner has rewritten or swapped about a third of the stories after sprint planning, and developers say they spend more time re-planning than building. The product owner says the changes come from the fundraising side of the organisation. Which two actions should the project manager take first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Go through the changed stories with the product owner to find where each change came from and why it surfaced only after planning.",
+          "correct": true,
+          "rationale": "Late change has a source, and until it is known any fix is a guess. Tracing each change shows whether the problem is one stakeholder, one type of request or the timing of fundraising decisions."
+        },
+        {
+          "id": "b",
+          "text": "Check whether the changed stories had been refined and met the team's Definition of Ready before they were brought into a sprint.",
+          "correct": true,
+          "rationale": "Stories that enter a sprint half-understood are rewritten once someone looks closely. If the churn is concentrated in unrefined stories, the cause is inside the team's own process rather than with the fundraisers."
+        },
+        {
+          "id": "c",
+          "text": "Agree with the team that stories are locked once sprint planning ends, with every change held over to the start of the following sprint.",
+          "correct": false,
+          "rationale": "A lock treats the symptom before the cause is known. If the changes are urgent fundraising needs, they will find another way into the sprint; if they come from poor refinement, a lock leaves the wrong stories locked in."
+        },
+        {
+          "id": "d",
+          "text": "Move the team to one-week sprints so that fundraising requests wait less time and disturb less of the work that is already in progress.",
+          "correct": false,
+          "rationale": "Shorter sprints can help, but the candidate chooses a structural change without knowing why the stories change. If refinement is the cause, a shorter sprint simply rewrites half-understood stories more often."
+        },
+        {
+          "id": "e",
+          "text": "Ask the sponsor to name a single fundraising contact who must approve every request before it is passed on to the product owner.",
+          "correct": false,
+          "rationale": "It adds a gate in front of the product owner on the assumption that the fundraisers are the cause. The product owner's own account is the only evidence for that, and a second gatekeeper dilutes the product owner's authority over the backlog."
+        }
+      ],
+      "explanation": "Frequent change after planning is a symptom with several possible causes: unrefined work, an unmanaged stakeholder channel, or a business rhythm that does not match the sprint cadence. Each calls for a different remedy, and the wrong remedy can make the churn worse. Looking at where the changes come from and what state the work was in when it entered the sprint is cheap, and it tells you which control to change.",
+      "mindset": "Find out why work keeps changing before deciding how to stop it."
+    },
+    {
+      "id": "pmp-b3-115",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-use-own-authority",
+        "delegated-authority",
+        "change-control",
+        "pharmaceutical"
+      ],
+      "stem": "You are installing a packaging line for a pharmaceutical manufacturer. The change management plan lets you approve changes up to €25,000 that move no milestone; others go to the fortnightly change board. After a mislabelling near miss in trials, the quality lead requests a second label-inspection camera. The impact assessment shows €18,000, three of the eight days of float, and no milestone affected. The supplier will hold its price for five days; the board next meets in eleven. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Log the request as pending and put it to the change board at its next meeting with your recommendation to approve, accepting the risk that the supplier's price may rise.",
+          "correct": false,
+          "rationale": "It feels like the careful route, but it hands the board a decision the plan says is yours and lets the price window close. The candidate mistakes deference for diligence and turns a delegated decision into a delayed one."
+        },
+        {
+          "id": "b",
+          "text": "Approve the change yourself, record it in the change log, update the baselines, and report the decision at the next change board meeting.",
+          "correct": true,
+          "rationale": "The plan delegated exactly this class of change to you, and the assessment shows the request sits inside every limit. Using the authority, with the decision recorded and reported, is what the delegation exists for, and it secures the price."
+        },
+        {
+          "id": "c",
+          "text": "Ask the change board chair for an out-of-cycle decision by email, so the supplier's price can be secured within the five-day window, and log the outcome.",
+          "correct": false,
+          "rationale": "An out-of-cycle decision solves the timing problem by escalating something that never needed escalating. The candidate uses an exceptional route for a routine delegated change, and teaches the board to expect requests it delegated away."
+        },
+        {
+          "id": "d",
+          "text": "Approve the change within your limit, but ask the sponsor to confirm it in writing first because of its significance for product quality, then update the baselines.",
+          "correct": false,
+          "rationale": "Seeking written cover adds an approval step the plan does not require and makes the sponsor a de facto approver of delegated changes. The candidate reads quality significance as a reason to escalate, though the plan's criteria are cost and milestones."
+        }
+      ],
+      "explanation": "Delegated change authority is meant to be used: it puts decisions that fall inside agreed limits with the person closest to the work, so they can be made at the speed the work needs. Escalating such a decision, however politely, slows it down and quietly withdraws the delegation. Using authority well means applying it inside its limits, recording the decision and reporting it so that the level above can see how its delegation is being exercised.",
+      "mindset": "Authority that has been delegated to you is a duty to decide, not an option to defer."
+    },
+    {
+      "id": "pmp-b3-116",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-act-now",
+        "release-management",
+        "configuration-control",
+        "streaming"
+      ],
+      "stem": "Your team at a video-streaming company releases fortnightly and freezes a tested release candidate 48 hours before each release. At 6 p.m. on the eve of a release, you find a developer merged a change to the payment-retry logic into the release branch after the freeze, at the product owner's request, to fix a minor customer annoyance. The frozen candidate passed full regression yesterday; the new build is untested. Release is at 7 a.m. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Postpone tomorrow's release until the full regression suite has been run against the new build, and then release that build once it passes.",
+          "correct": false,
+          "rationale": "It protects quality but sacrifices a release that is already safe to ship. The candidate treats the new build as the release, when the freeze exists precisely so that a tested version is available if something late goes in."
+        },
+        {
+          "id": "b",
+          "text": "Ask the developer to run the payment-retry tests overnight and release the new build at 7 a.m. if all of those targeted tests pass.",
+          "correct": false,
+          "rationale": "Targeted tests check what the developer expects the change to affect, not what it actually affects. The candidate accepts partial evidence on payment logic, where an unexpected side effect is most costly."
+        },
+        {
+          "id": "c",
+          "text": "Release the tagged candidate that passed regression yesterday, leaving the late change out, and put the fix through the next fortnight's release cycle.",
+          "correct": true,
+          "rationale": "A tested, releasable build already exists, and the late change is the only unknown. Restoring the frozen candidate tonight removes the risk without losing the release, and the fix still reaches customers in a fortnight."
+        },
+        {
+          "id": "d",
+          "text": "Let the release go ahead, since the product owner asked for the change, and raise the breach of the freeze at the team's next retrospective.",
+          "correct": false,
+          "rationale": "The product owner's request gives the change priority, not a test result. The candidate defers the control failure to a later conversation while shipping untested payment code in the meantime."
+        }
+      ],
+      "explanation": "A release freeze works by keeping a known, tested configuration available, so when something slips past the freeze the first move is to return to that configuration before the deadline arrives. Investigating why the freeze was breached matters, but it comes after the risk is contained. Waiting, partially testing or reviewing later all leave the untested change in play at the point where it can do harm.",
+      "mindset": "When an untested change slips into a release, get back to the tested version first and ask why afterwards."
+    },
+    {
+      "id": "pmp-b3-117",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "change-impact",
+        "incremental-delivery",
+        "housing"
+      ],
+      "stem": "A housing association is replacing its repairs system in a hybrid project: a fixed go-live date for the core system, with later increments delivered in sprints. Four weeks before go-live, tenant representatives ask for text-message updates on repair appointments. The change board likes the idea and asks you for a recommendation. Adding it before go-live would need three extra weeks of build and testing. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the go-live date and deliver text-message updates in the first increment after launch, agreeing that timing with the tenant representatives.",
+          "correct": true,
+          "rationale": "This keeps the fixed date the core system was planned around and still gives tenants the feature within weeks. The hybrid structure exists for exactly this, so the trade-off costs little on either side."
+        },
+        {
+          "id": "b",
+          "text": "Move the go-live date back by three weeks so that text-message updates are part of the core system from the first day tenants and repair staff use it.",
+          "correct": false,
+          "rationale": "It delivers everything at once but spends the fixed date on a feature that does not need to be in the first release. The candidate treats all requested scope as belonging in go-live, ignoring the increments that follow."
+        },
+        {
+          "id": "c",
+          "text": "Add text-message updates to the go-live scope and absorb the three weeks by shortening user acceptance testing on the core system.",
+          "correct": false,
+          "rationale": "It appears to get both scope and date, but pays for them with the testing of a system tenants depend on. The candidate trades hidden quality risk for visible scope, which is the worst side of the trade-off to take."
+        },
+        {
+          "id": "d",
+          "text": "Recommend that the board rejects the request, because go-live is only four weeks away and the core scope was agreed by every stakeholder at the start.",
+          "correct": false,
+          "rationale": "Rejecting it protects the date but discards a request the board already values. The candidate treats the baseline as a reason to refuse instead of looking for a route that respects both the date and the request."
+        }
+      ],
+      "explanation": "A late change rarely presents a simple yes or no; it presents a choice about what to give up. Recommending well means setting out which constraint each option spends, and in hybrid delivery the cheapest option is often to move the change to a later increment rather than to bend a fixed date or the testing behind it. Quality is the constraint most often traded away silently, and it is usually the most expensive.",
+      "mindset": "Ask which constraint a change will spend, and spend the one that costs least."
+    },
+    {
+      "id": "pmp-b3-118",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "impact-assessment",
+        "change-board",
+        "construction"
+      ],
+      "stem": "Two weeks ago, the change board of a £22 million university laboratory build approved adding a cleanroom suite, based on an impact assessment showing £310,000 and three weeks' delay. Before any order is placed, the quantity surveyor finds the assessment omitted the air-handling upgrade the suite needs, bringing the cost to £520,000 and the delay to seven weeks. The project's contingency could cover the extra cost. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Return the change to the board with the corrected assessment, and hold any orders or other commitment to the work until the board has reconsidered it.",
+          "correct": true,
+          "rationale": "The board approved a £310,000, three-week change; it has not approved a £520,000, seven-week one. Taking the corrected figures back before anything is committed lets the people who own the decision make it on true information."
+        },
+        {
+          "id": "b",
+          "text": "Proceed with the approved change and fund the additional £210,000 from contingency, recording the overrun in the next monthly report.",
+          "correct": false,
+          "rationale": "The candidate treats the approval as covering the change whatever it turns out to cost. An approval given on materially wrong figures is not consent to the real ones, and reporting after the event removes the board's choice."
+        },
+        {
+          "id": "c",
+          "text": "Proceed with the cleanroom suite but defer the air-handling upgrade to a later phase, so that the change stays within the approved figures.",
+          "correct": false,
+          "rationale": "It keeps the numbers inside the approval by building something that does not work as intended. The candidate protects the paperwork rather than the outcome, and leaves the board believing it bought a usable cleanroom."
+        },
+        {
+          "id": "d",
+          "text": "Withdraw the approved change yourself, as at the corrected cost it no longer represents good value, and explain the reasons to the department.",
+          "correct": false,
+          "rationale": "The candidate rightly sees that the decision has changed, but takes it alone. Whether the cleanroom is still worth £520,000 is a value judgement for the board that approved it, not for the project manager."
+        }
+      ],
+      "explanation": "An approval is only as good as the information it was based on. When the impact of an approved change turns out to be materially different before work is committed, the decision goes back to whoever made it, with corrected figures, rather than being carried out, quietly reshaped or reversed by the person who found the error. Catching a wrong estimate early is valuable only if the decision-maker gets to use it.",
+      "mindset": "If the facts behind an approval change, the approval goes back to whoever gave it."
+    },
+    {
+      "id": "pmp-b3-119",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "change-control",
+        "rejected-change",
+        "change-board"
+      ],
+      "stem": "You are refurbishing a borough council's leisure centre. Last week the change board rejected a request from the centre's operations manager to add a second sauna, judging the £38,000 cost poor value against the remaining budget. She now asks you to have the contractor build it anyway, pointing out that the programme has nine days of float and that the cost could be spread across the other packages. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the contractor to price a smaller sauna that would fall inside your own approval limit, so that her need can still be met this year.",
+          "correct": false,
+          "rationale": "The candidate treats the rejection as a pricing problem and reshapes the request to fit a lower authority. The board declined the sauna on value, not on size, so a cut-down version decided by someone else defeats its decision."
+        },
+        {
+          "id": "b",
+          "text": "Agree to build it if savings found elsewhere in the packages can cover the £38,000, and record that trade clearly in the change log.",
+          "correct": false,
+          "rationale": "Savings belong to the project and the board, not to whichever request asks for them first. The candidate mistakes available money for authority and funds work the board has explicitly turned down."
+        },
+        {
+          "id": "c",
+          "text": "Refer her request to the sponsor and ask whether the sponsor wishes to overrule the change board's rejection in this particular case.",
+          "correct": false,
+          "rationale": "Nothing new has emerged that the board did not consider, so the candidate reopens a settled decision through a side door. Inviting an overrule teaches requesters that a rejection is only the first round of lobbying."
+        },
+        {
+          "id": "d",
+          "text": "Decline, explain the board's reasons to her, and tell her that a fresh request can go to the board if new information emerges.",
+          "correct": true,
+          "rationale": "A rejection binds as firmly as an approval. The float and the chance to spread the cost were both things the board could already see, so nothing has changed, and pointing to resubmission with genuinely new information gives her a legitimate route rather than a closed door."
+        }
+      ],
+      "explanation": "Change control only works if its decisions bind, and a rejection binds as firmly as an approval. Spare float or budget is not authority: those reserves were part of what the board weighed, not permission to act on something it declined. A requester who disagrees has a legitimate route, which is a new request carrying information the board did not have, and the project manager's job is to point to that route rather than to find a way round the decision.",
+      "mindset": "A rejected change stays rejected until new information reopens it through the same door."
+    },
+    {
+      "id": "pmp-b3-120",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "change-control",
+        "design-authority",
+        "self-organisation"
+      ],
+      "stem": "Your Scrum team is building a mortgage-application app for a building society. Midway through a release, the developers conclude that a graph database would make the affordability checks far simpler, and they want to move away from the relational database in the original design. The society's architecture standards list approved database products, overseen by a design authority that meets fortnightly; the graph product is not on the list. The developers say technical choices belong to the team. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Help the developers put their case for the graph product to the design authority, and keep building on the approved database until it decides.",
+          "correct": true,
+          "rationale": "The team owns how it builds within the organisation's standards, and the design authority owns the standards. Taking a well-argued case to that owner keeps a good idea alive without the team granting itself an exception."
+        },
+        {
+          "id": "b",
+          "text": "Support the developers' choice, because how the product is built belongs to the team, and record the switch and its reasons in the retrospective notes.",
+          "correct": false,
+          "rationale": "The candidate stretches self-organisation past its boundary. Teams decide how to meet their goals inside the constraints the organisation sets; an approved-products list is one of those constraints, not a suggestion."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to decide, since the switch affects how quickly the affordability features in the backlog can be delivered to customers.",
+          "correct": false,
+          "rationale": "The product owner decides what is built and in what order, not which technology standards the organisation will relax. The candidate routes the decision to the owner of value rather than the owner of the constraint."
+        },
+        {
+          "id": "d",
+          "text": "Raise a change request to the project's change board, setting out the cost and schedule effect of moving the app onto the graph product.",
+          "correct": false,
+          "rationale": "A project change board can approve changes to the project's own baselines, but it cannot grant an exemption from an enterprise standard it does not own. The candidate picks the familiar route instead of the right owner."
+        }
+      ],
+      "explanation": "Self-organisation gives a team authority over how it meets its goals inside the constraints the organisation sets, not over the constraints themselves. A change that departs from an organisational standard belongs with whoever owns that standard, whatever the delivery approach, and neither the product owner nor the project's own change board can grant an exception they do not own. Carrying a good technical case to the right owner keeps the idea alive without turning the team's autonomy into a way round governance.",
+      "mindset": "Find out who owns a constraint before deciding who may change it."
+    },
+    {
+      "id": "pmp-b3-121",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-diagnose-first",
+        "change-control",
+        "verification",
+        "change-log"
+      ],
+      "stem": "A hospital trust is replacing its pharmacy stock system in a hybrid project. The vendor's team builds approved changes as stories in two-week sprints. CR-14, approved by the change board, adds barcode checks when controlled drugs leave the dispensary. The vendor's sprint report marks the story done and asks you to close CR-14 in the change log so that its €21,000 can be invoiced. What should you do before closing it?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Close CR-14 on the strength of the vendor's sprint report, because its definition of done includes testing, and then approve the invoice for payment.",
+          "correct": false,
+          "rationale": "The candidate treats the supplier's done criteria as the customer's verification. The vendor tests that its work runs; only the trust can confirm that it is the change the board actually approved."
+        },
+        {
+          "id": "b",
+          "text": "Ask the change board to confirm at its next meeting that CR-14 can be closed and that the invoice can be released to the vendor.",
+          "correct": false,
+          "rationale": "The board decides whether a change should be made, not whether it was made correctly. Sending closure back to it adds weeks of delay and still leaves nobody checking the delivered behaviour against the request."
+        },
+        {
+          "id": "c",
+          "text": "Arrange for the pharmacy lead to check the delivered barcode checks against what the board approved in CR-14, and close it once they match.",
+          "correct": true,
+          "rationale": "A change is complete when what was delivered has been checked against what was approved. The pharmacy lead can judge whether the checks behave as the trust intended, which the vendor's own testing cannot settle."
+        },
+        {
+          "id": "d",
+          "text": "Close CR-14 now so the change log stays current, and note that the pharmacy team will raise a defect if anything turns out to be missing.",
+          "correct": false,
+          "rationale": "Closing first and checking later shifts the burden of proof onto the users and turns the log into a record of claims. Any gap found afterwards then has to be argued as a defect against a change already marked complete."
+        }
+      ],
+      "explanation": "A change is complete when what was delivered has been checked against what was approved, not when the builder reports it finished. A supplier's own done criteria test its work; verification against the approved request tests the customer's decision, and only someone who can judge the intended behaviour can do it. Closing a change record unverified turns the change log into a record of claims and makes later disputes about payment and scope much harder to settle.",
+      "mindset": "Close a change on evidence that it does what was approved."
+    },
+    {
+      "id": "pmp-b3-122",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "change-control",
+        "impact-assessment",
+        "sponsor"
+      ],
+      "stem": "You are refurbishing forty rooms for a hotel group. The change management plan names the sponsor as the approver for any change above your £10,000 limit. On a site visit, the sponsor tells the site manager to switch every bathroom to a premium tile range she has just seen, which the supplier estimates at roughly £45,000 extra. She says, 'I approve changes anyway, so just get on with it.' The site manager asks you what to do.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the site manager place the order now, since she is the named approver, and complete the change request paperwork afterwards for the log.",
+          "correct": false,
+          "rationale": "The candidate confuses having authority with making an informed decision. Nobody yet knows the tiles' lead time or what they do to the finishing sequence, so the order commits the project to consequences nobody has sized."
+        },
+        {
+          "id": "b",
+          "text": "Refer the request to the steering group, because a change of this size made during a site visit should need more than one person's approval.",
+          "correct": false,
+          "rationale": "The plan names the sponsor as the approver, and the candidate overrides it on a feeling about how big decisions ought to be made. Escalating past the agreed authority undermines the plan as surely as bypassing it."
+        },
+        {
+          "id": "c",
+          "text": "Write it up as a change request showing the cost, lead time and programme effect, and ask her to approve that version before anything is ordered.",
+          "correct": true,
+          "rationale": "She is the right approver, but she has approved a rough materials price, not a change. Setting out lead time and programme effect lets her decide on the real impact, and the written record protects everyone if the tiles arrive late."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor to submit the request through the change form herself, so that it is handled in exactly the same way as everyone else's.",
+          "correct": false,
+          "rationale": "Moving the paperwork onto her treats the problem as one of form-filling. She would still be approving the same unassessed estimate, and the impact analysis the project manager should run would still be missing."
+        }
+      ],
+      "explanation": "Having the authority to approve a change does not remove the need for the decision to be informed. Impact assessment exists so that whoever decides can see the cost, schedule and risk consequences before committing, and a rough price for materials says nothing about lead times or sequence. When the approver and the requester are the same person, the record and the assessment matter more, not less, because nobody else is positioned to ask the questions.",
+      "mindset": "Authority to decide a change is not the same as knowing what it will cost."
+    },
+    {
+      "id": "pmp-b3-123",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "change-control",
+        "interfaces",
+        "multi-team"
+      ],
+      "stem": "Two Scrum teams build a travel-booking platform. The search team owns a pricing interface that the checkout team calls. Yesterday the search team renamed several fields in the interface's response to tidy it up, and the checkout team's build has failed ever since, three days before a joint sprint review with the airline partners. Nobody told the checkout team the change was coming. Which two actions should the project manager encourage?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the checkout team to adapt its code to the renamed fields, since the change has already been made and reverting it would repeat work.",
+          "correct": false,
+          "rationale": "The candidate accepts the change as a fact and pushes its whole cost onto the team that was not consulted. With the review three days away, the consumer is left absorbing an unplanned change under the worst time pressure."
+        },
+        {
+          "id": "b",
+          "text": "Have the search team restore the previous response format, or run both formats side by side, so the checkout build passes again now.",
+          "correct": true,
+          "rationale": "A broken build stops a whole team, so restoring what consumers depend on is the first move. Running both formats keeps the tidy-up without forcing the checkout team to change on someone else's timetable."
+        },
+        {
+          "id": "c",
+          "text": "Place the pricing interface under the programme's formal change board, so that any future change to it needs the board's approval first.",
+          "correct": false,
+          "rationale": "The candidate reaches for heavyweight control where lightweight coordination is enough. A board meeting monthly cannot keep pace with interface work, and teams under that regime usually route round it rather than through it."
+        },
+        {
+          "id": "d",
+          "text": "Agree with both teams that changes to a shared interface are versioned and announced to the teams that call it before they are released.",
+          "correct": true,
+          "rationale": "The root cause is a change to something others build on, made without telling them. Versioning and advance notice give the owning team control of its interface while protecting the teams that depend on it."
+        },
+        {
+          "id": "e",
+          "text": "Ask the architect to decide which team should own the pricing interface, then let that team decide how its response format ought to change.",
+          "correct": false,
+          "rationale": "Ownership was never in doubt: the search team owns the interface. The candidate diagnoses an ownership gap when the actual failure was changing a shared agreement without telling the people who rely on it."
+        }
+      ],
+      "explanation": "A shared interface is a small baseline that other teams build against, so changing it is a change to their plans as well as the owner's. The immediate priority is to restore the consumers' ability to work, because a broken build delays everyone until it is fixed; the lasting fix is a lightweight agreement, such as versioning and advance notice, that keeps control with the teams rather than with a distant board. Heavyweight approval on every technical interface tends to push teams into workarounds instead.",
+      "mindset": "Treat anything another team builds against as an agreement, and change it like one."
+    },
+    {
+      "id": "pmp-b3-124",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "change-control",
+        "impact-assessment",
+        "change-request"
+      ],
+      "stem": "You manage the extension of a rail maintenance depot. Before CR-22 goes to Thursday's change board, you review its change request form, shown as six labelled fields. The change management plan says the board decides only on fully assessed requests. Select the field that means the form should go back before the board sees it.",
+      "graphic": {
+        "viewBox": "0 0 600 420",
+        "title": "Change request CR-22 form with six completed fields",
+        "caption": "Select a field. Use Tab or the arrow keys to move between fields, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "f1",
+          "n": 1,
+          "label": "Requested by: the client's fleet engineer",
+          "x": 30,
+          "y": 20,
+          "w": 540,
+          "h": 55,
+          "correct": false,
+          "rationale": "Anyone with a legitimate interest in the project may raise a change request. The requester's identity tells the board whose need it is, and nothing about this entry makes the form incomplete."
+        },
+        {
+          "id": "f2",
+          "n": 2,
+          "label": "Description: add a second wheel-lathe pit on road 4 for the new train fleet",
+          "x": 30,
+          "y": 85,
+          "w": 540,
+          "h": 55,
+          "correct": false,
+          "rationale": "The description says what is to change, where and why, which is what the board needs to understand the request. It is specific enough to assess against."
+        },
+        {
+          "id": "f3",
+          "n": 3,
+          "label": "Cost impact: €86,000, assessed by the quantity surveyor",
+          "x": 30,
+          "y": 150,
+          "w": 540,
+          "h": 55,
+          "correct": false,
+          "rationale": "The cost has been sized by someone competent to do it. Whether €86,000 is good value is the board's judgement to make, not a gap in the form."
+        },
+        {
+          "id": "f4",
+          "n": 4,
+          "label": "Schedule impact: to be assessed by the contractor once the change is approved",
+          "x": 30,
+          "y": 215,
+          "w": 540,
+          "h": 55,
+          "correct": true,
+          "rationale": "Approval would commit the project to a schedule effect nobody has sized, and would leave the sizing to the party that gains from a generous answer. A pit dug into a working depot can easily move the critical path, so this dimension has to be assessed before the decision."
+        },
+        {
+          "id": "f5",
+          "n": 5,
+          "label": "Risk impact: one new risk, R-31, ground-water ingress, owner named",
+          "x": 30,
+          "y": 280,
+          "w": 540,
+          "h": 55,
+          "correct": false,
+          "rationale": "The risk has been identified, logged and given an owner. Candidates sometimes pick it because a new risk sounds like a problem, but recording a risk is evidence the assessment was done."
+        },
+        {
+          "id": "f6",
+          "n": 6,
+          "label": "Recommendation: approve, to avoid a second pit being dug after handover",
+          "x": 30,
+          "y": 345,
+          "w": 540,
+          "h": 55,
+          "correct": false,
+          "rationale": "A recommendation with a stated reason is part of a well-prepared request. The board remains free to disagree, so a clear view from the project manager does not pre-empt its decision."
+        }
+      ],
+      "explanation": "An impact assessment is complete only when every dimension the decision-maker needs has been examined before the decision, because approval commits the project to consequences that nobody has yet sized. A deferred dimension is not a neutral gap: it often hides the largest effect, and assessing it after approval hands the job to whoever has the least reason to keep it small. Checking a request for completeness before it reaches the board is what makes the board's time worth spending.",
+      "mindset": "Never ask anyone to approve an impact that has not yet been assessed."
+    },
+    {
+      "id": "pmp-b3-125",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "change-control",
+        "integrated-baseline",
+        "product-owner"
+      ],
+      "stem": "An energy company runs a hybrid programme: meter installation is plan-driven, while a customer app is built in sprints. The baselined integrated plan, approved by the programme board, commits the app's outage-reporting feature to go live with the March installation milestone, a date the regulator has been given. The product owner now wants to defer outage reporting by two sprints to deliver a billing feature customers ask for more often. She says ordering the backlog is her call. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support her decision, because ordering the backlog is the product owner's accountability, and update the release plan to show the new order.",
+          "correct": false,
+          "rationale": "The candidate applies the agile rule without noticing where it stops. This item is tied to a baselined milestone that the regulator has been given, so moving it changes a commitment the product owner does not own."
+        },
+        {
+          "id": "b",
+          "text": "Tell her the feature cannot move because the integrated plan has been baselined, and keep outage reporting at the top of the backlog for now.",
+          "correct": false,
+          "rationale": "A baseline is changed through change control, not frozen by the project manager. The candidate takes a decision that belongs to the programme board, which may well judge the billing feature worth a revised March scope."
+        },
+        {
+          "id": "c",
+          "text": "Ask the regulator's account manager whether a two-sprint delay to outage reporting would cause concern before anything else is decided.",
+          "correct": false,
+          "rationale": "Sounding out an external party before the programme has decided its own position gets the sequence wrong. It can turn an internal option into an expectation the regulator then holds the programme to."
+        },
+        {
+          "id": "d",
+          "text": "Agree that she orders the backlog, and take the proposed deferral to the programme board as a change to the baselined March commitment.",
+          "correct": true,
+          "rationale": "Her authority over order is real, but this particular reorder moves a baselined, externally shared commitment. Routing it to the body that owns that baseline respects both her role and the programme's."
+        }
+      ],
+      "explanation": "In a hybrid setting, a product owner's authority to order the backlog runs up to the commitments the backlog has been tied to elsewhere. Where an item is part of a baselined milestone, especially one shared with an external party, moving it changes that baseline, and the body that owns the baseline decides. Reordering that touches nothing baselined stays with the product owner; the skill is noticing which reorders cross that line.",
+      "mindset": "Backlog order belongs to the product owner until it moves a promise someone else owns."
+    },
+    {
+      "id": "pmp-b3-126",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "change-control",
+        "competing-changes",
+        "change-board"
+      ],
+      "stem": "You are building a secondary school for a multi-academy trust. Two change requests reach you in the same week. The head of science wants the unallocated ground-floor room fitted out as a fourth laboratory for £64,000. The trust's IT lead wants the same room as a server and network hub for £41,000. The client's remaining change allowance is £70,000, and the change board meets next Tuesday. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Assess the two requests together and show the board that approving either one rules out the other, with the combined effect on the allowance.",
+          "correct": true,
+          "rationale": "The requests compete for the same room and the same money, so assessing each alone would let the board approve one without seeing what it forecloses. Presenting them as a set turns an accident of timing into a real choice."
+        },
+        {
+          "id": "b",
+          "text": "Put the two requests to the board in the order they arrived, so each one is decided on its own merits without favouring either department.",
+          "correct": false,
+          "rationale": "Neutral sequencing sounds fair but hides the interaction. Whichever is heard first wins by default, and the board never sees that it was choosing between them."
+        },
+        {
+          "id": "c",
+          "text": "Meet both requesters before Tuesday to explore whether one option could meet both needs, such as siting the network hub in another space.",
+          "correct": true,
+          "rationale": "Many conflicts between requests disappear once the underlying needs are examined, because a server hub rarely needs one particular room. Exploring that before the meeting may give the board a better option than either request."
+        },
+        {
+          "id": "d",
+          "text": "Recommend the laboratory to the board, because teaching space serves the school's core purpose and a network hub can be housed almost anywhere.",
+          "correct": false,
+          "rationale": "The candidate pre-judges the trade-off and asserts something about the hub that nobody has checked. Recommending before assessing turns the project manager into an advocate for one requester."
+        },
+        {
+          "id": "e",
+          "text": "Defer both requests until after handover, so the room can be allocated once the school has been operating for a full term.",
+          "correct": false,
+          "rationale": "Deferral avoids choosing but not the cost: fitting out an occupied school is dearer and more disruptive than doing it now, and the IT hub may be needed on opening day. The candidate trades a decision for a later, more expensive one."
+        }
+      ],
+      "explanation": "Change requests are usually assessed one at a time, but requests that compete for the same space, money or capacity have to be assessed as a set, because the decision on one changes the options for the other. The project manager's contribution is to make that interaction visible and to look for an option that dissolves the conflict before the board has to pick a winner. Leaving the board to discover the clash, or quietly picking a side, replaces a trade-off decision with an accident of sequence.",
+      "mindset": "When two changes compete for the same resource, decide them together."
+    },
+    {
+      "id": "pmp-b3-127",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "change-control",
+        "product-goal",
+        "evidence"
+      ],
+      "stem": "You support a Scrum team building a language-learning app, where the product owner is accountable for the product goal. This release's goal is to win schools as paying customers. Feedback from the last two sprint reviews shows schools will not buy for at least eighteen months, while adult learners are converting to paid plans far faster than forecast. The product owner wants to change the goal to adult learners. The head of sales, who has been promising features to schools, asks you to stop the change. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the product owner to keep the school goal until the release ends, then revisit it with the head of sales at the next release planning.",
+          "correct": false,
+          "rationale": "The candidate values a stable plan over the evidence. Every sprint left on the old goal builds features for customers who will not buy, and the cost of that delay is far higher than the disruption of changing now."
+        },
+        {
+          "id": "b",
+          "text": "Support the product owner in changing the goal, and help her set out the evidence and its effect on the roadmap for the head of sales and the schools affected.",
+          "correct": true,
+          "rationale": "The goal is hers to change, and the evidence is clear. The control that matters is transparency: the head of sales needs to see why the direction moved and what it means for the promises already made to schools."
+        },
+        {
+          "id": "c",
+          "text": "Broker a compromise in which half of each sprint goes to schools and half to adult learners, until the evidence has had time to settle.",
+          "correct": false,
+          "rationale": "Splitting capacity avoids conflict by diluting both directions. It halves progress on the market that is converting while still spending effort on one that will not buy for eighteen months."
+        },
+        {
+          "id": "d",
+          "text": "Ask the team to run one more round of school interviews during the next sprint before any change to the goal is considered further.",
+          "correct": false,
+          "rationale": "More evidence sounds prudent, but two reviews' worth already point the same way. The candidate uses further research to postpone a decision the accountable person is ready to make."
+        }
+      ],
+      "explanation": "In adaptive delivery, a change of direction driven by evidence is the process working, not a failure of control. The person accountable for the product goal decides it, and the control lies in making the evidence and its consequences transparent to those affected rather than in an approval gate that protects an earlier plan. The cost of delaying an evidence-based change is all the work built in the wrong direction while the decision waits.",
+      "mindset": "When the evidence moves, move the goal openly rather than defend it quietly."
+    },
+    {
+      "id": "pmp-b3-128",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "change-control",
+        "reserves",
+        "cost-baseline"
+      ],
+      "stem": "An offshore substation project has a cost baseline of €48.0 million, which includes €3.2 million of contingency reserve. A further €2.5 million of management reserve sits outside the baseline. The sponsor has approved two scope changes funded from management reserve, of €0.9 million and €0.6 million. Separately, an identified risk occurred and €0.7 million of contingency was spent on it. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "baseline",
+          "label": "Revised cost baseline, in € million",
+          "numeric": true,
+          "expect": 49.5,
+          "tol": 0.05,
+          "unit": "€m",
+          "rationale": "Approved scope changes funded from management reserve move into the baseline: 48.0 + 0.9 + 0.6 = €49.5 million. The contingency spend does not move it, because that money was already inside the baseline."
+        },
+        {
+          "id": "mr",
+          "label": "Management reserve remaining, in € million",
+          "numeric": true,
+          "expect": 1.0,
+          "tol": 0.05,
+          "unit": "€m",
+          "rationale": "The two approved changes draw 0.9 + 0.6 = €1.5 million out of the reserve: 2.5 − 1.5 = €1.0 million left outside the baseline."
+        },
+        {
+          "id": "cr",
+          "label": "Contingency reserve remaining inside the baseline, in € million",
+          "numeric": true,
+          "expect": 2.5,
+          "tol": 0.05,
+          "unit": "€m",
+          "rationale": "The realised risk used €0.7 million of the €3.2 million set aside for identified risks: 3.2 − 0.7 = €2.5 million still available within the baseline."
+        },
+        {
+          "id": "budget",
+          "label": "Total project budget (cost baseline plus management reserve), in € million",
+          "numeric": true,
+          "expect": 50.5,
+          "tol": 0.05,
+          "unit": "€m",
+          "rationale": "49.5 + 1.0 = €50.5 million, the same as the original 48.0 + 2.5. Approved changes moved money from the reserve into the baseline; they did not enlarge the overall budget."
+        }
+      ],
+      "explanation": "Contingency reserve sits inside the cost baseline for identified risks, so spending it changes how the baseline is consumed but not the baseline itself. Management reserve sits outside, so any approved change funded from it moves money into the baseline, and the baseline has to be revised through change control. Keeping the two apart is what lets a performance report distinguish risks the plan anticipated from scope the plan never contained.",
+      "mindset": "Know which reserve a change draws on before saying whether the baseline moves."
+    },
+    {
+      "id": "pmp-b3-129",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "change-control",
+        "kanban",
+        "explicit-policies"
+      ],
+      "stem": "A Kanban team runs online ordering for a garden-centre chain. Its explicit policies include a weekly replenishment meeting, work-in-progress limits on each column and an expedite lane limited to one item. Complete each sentence with the response that fits the team's policies. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "A merchandiser asks for a new gift-card design. It is valuable but not urgent, and the team's 'ready' column is already at its limit. The request should"
+        },
+        {
+          "id": "p2",
+          "text": "Card payments have failed on the website since a supplier update this morning, and customers cannot complete their orders. The fix should"
+        },
+        {
+          "id": "p3",
+          "text": "While an item adding delivery-slot booking is in progress, a stakeholder asks for it to cover click-and-collect slots too, roughly doubling its size. The extra scope should"
+        }
+      ],
+      "options": [
+        {
+          "id": "replenish",
+          "text": "be ordered against the other candidates at the next replenishment meeting",
+          "correct": true,
+          "match": "p1",
+          "rationale": "Valuable but not urgent work enters the system when the team next chooses what to pull. Replenishment is where it is weighed against everything else waiting, which is the decision the merchandiser needs."
+        },
+        {
+          "id": "expedite",
+          "text": "go straight into the expedite lane, ahead of the work already in progress",
+          "correct": true,
+          "match": "p2",
+          "rationale": "Customers unable to pay is the kind of urgent, high-cost-of-delay problem the expedite lane exists for. Its one-item limit is what stops it being used for everything that merely feels pressing."
+        },
+        {
+          "id": "split",
+          "text": "become a new item for replenishment while the original is finished as agreed",
+          "correct": true,
+          "match": "p3",
+          "rationale": "Doubling an item mid-flight would hold up something nearly finished and bypass the decision about whether the extra work is worth doing next. Finishing the original and queuing the extension keeps both visible."
+        },
+        {
+          "id": "raise",
+          "text": "be pulled into progress now by raising that column's limit for a week",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Raising a work-in-progress limit to fit in one more request is the commonest way flow control is lost; it is tempting for the gift-card design, but that request has no urgency to justify it and replenishment is only days away."
+        }
+      ],
+      "explanation": "In flow-based delivery, change control lives in the team's explicit policies: replenishment decides what enters the system, work-in-progress limits protect flow, and a constrained expedite lane handles genuine emergencies. Applying those policies consistently is what lets the team absorb change without a separate approval process, and bending them for whoever asks most loudly removes the control they provide. A request that grows mid-flight is new work, not a reason to stretch the item already started.",
+      "mindset": "Let the team's agreed policies decide where new work goes, so urgency is earned rather than claimed."
+    },
+    {
+      "id": "pmp-b3-130",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "change-control",
+        "shared-resources",
+        "cross-project-impact"
+      ],
+      "stem": "You lead a hybrid project moving a bank's card-servicing platform to a new data centre. The change board has just approved a change adding a fraud-rules module, which pushes your use of the shared performance-test environment from May into June. A separate payments project, not represented on your board, has June booked in that environment for its own regulatory testing. The payments project's manager has not been told. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tell the payments project manager and the environment's owner now, so that the clash is resolved before either plan relies on June.",
+          "correct": true,
+          "rationale": "The people who can resolve a contention for a shared resource are its owner and the other user, and neither knows yet. Telling them at once gives them the most time to find an option and keeps the decision with those who own it."
+        },
+        {
+          "id": "b",
+          "text": "Proceed with the approved change and let the environment's booking process settle the clash when your team formally requests the June slot.",
+          "correct": false,
+          "rationale": "The candidate leaves the conflict to an administrative queue. The other project would learn of it only when the booking is contested, by which time its regulatory testing may have no room to move."
+        },
+        {
+          "id": "c",
+          "text": "Ask the change board to reconsider the fraud-rules change now that a clash with another project's environment booking has come to light.",
+          "correct": false,
+          "rationale": "Reopening the decision is premature when nobody yet knows whether the clash can be resolved by other means. The candidate treats a knock-on effect as a reason to undo the change before talking to the people affected."
+        },
+        {
+          "id": "d",
+          "text": "Ask your test lead to find a way to complete your performance testing in May despite the change, so that the June slot is not needed at all.",
+          "correct": false,
+          "rationale": "Quietly absorbing the effect may squeeze testing the change board assumed would happen, and it hides the problem rather than resolving it. If May proves impossible, the other project still finds out late."
+        }
+      ],
+      "explanation": "A change's impact does not stop at the project boundary: anything shared, such as environments, people or suppliers, carries the effect into other work, and those owners were not in the room when the change was approved. Making the knock-on effect visible to the affected parties and the resource owner quickly keeps the contention decision with the people who can make it and gives them the most time to find options. Hoping a booking process or one's own team will absorb it leaves the other project to discover the clash when it is hardest to fix.",
+      "mindset": "Follow a change's impact to everyone it reaches, not just to the edge of your own plan."
+    },
+    {
+      "id": "pmp-b3-131",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "change-control",
+        "acceptance",
+        "scope-creep"
+      ],
+      "stem": "Your team has delivered a new contact-centre telephony system for a regional bus operator. Acceptance tests against the agreed requirements, including two approved changes, all passed last week. The customer services director now says she will sign acceptance only once callers can also be offered a call-back instead of waiting, which was never in scope. Her team has wanted it for months. The project is due to close in three weeks. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Treat call-back as a change request and assess its impact, keeping acceptance open until the change board has reached a decision on it.",
+          "correct": false,
+          "rationale": "Routing call-back through change control is right, but tying acceptance to its outcome is not. The candidate lets a new request hold finished work hostage, so the delivered system cannot close however the board decides."
+        },
+        {
+          "id": "b",
+          "text": "Ask her to accept the system against the agreed scope, and raise call-back as a new change request to be assessed on its own merits.",
+          "correct": true,
+          "rationale": "Acceptance is judged against the scope as it stands after approved changes, and the tests show that scope was met. Call-back is a separate need and deserves its own decision rather than a concession made under deadline pressure."
+        },
+        {
+          "id": "c",
+          "text": "Add call-back in the three weeks left if the team can absorb it, so that acceptance is signed and the project closes on its planned date.",
+          "correct": false,
+          "rationale": "It buys a signature with unapproved scope. The candidate skips impact assessment on a new feature and teaches the client that acceptance can be traded for extras."
+        },
+        {
+          "id": "d",
+          "text": "Escalate to the sponsor that acceptance is being withheld, and ask the sponsor to instruct the director to sign off the delivered system.",
+          "correct": false,
+          "rationale": "Escalation may eventually be needed, but leading with it turns a conversation about scope into a contest of authority. The candidate skips the step of separating the two issues with the director, which usually resolves this without a sponsor."
+        }
+      ],
+      "explanation": "Acceptance is judged against the agreed scope as it stands after approved changes, and a new requirement, however reasonable, is a separate request with its own assessment. Letting new scope become a condition of acceptance merges two decisions, so the original work cannot close and the new work escapes impact assessment. Separating them protects both: the delivered product is accepted on what was agreed, and the new need gets a proper decision rather than a concession under deadline pressure.",
+      "mindset": "Accept what was agreed, and treat what is new as new."
+    },
+    {
+      "id": "pmp-b3-132",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "change-control",
+        "release-management",
+        "standard-changes"
+      ],
+      "stem": "Your agile team builds a public-sector benefits portal and can deploy small, fully tested changes several times a day. IT operations requires every production change to be approved at its weekly change advisory board, which it owns. Finished work now waits up to six days, and the team has started batching changes into large weekly releases, which caused two incidents last month. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Propose to the head of IT operations that low-risk, automatically tested deployments be treated as pre-approved standard changes.",
+          "correct": true,
+          "rationale": "Operations owns the board, so the route to faster approval runs through its owner. Pre-approving a defined class of routine, reversible changes keeps control where it belongs while removing the wait for work that does not need a meeting."
+        },
+        {
+          "id": "b",
+          "text": "Raise the more urgent deployments as emergency changes, which the operations process allows to be approved without waiting for the weekly board.",
+          "correct": false,
+          "rationale": "The candidate uses an emergency route for routine work. It erodes trust in the emergency process and, once noticed, usually leads operations to tighten control rather than relax it."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to exempt the team from the change advisory board, given that the team's own delivery process already controls change well.",
+          "correct": false,
+          "rationale": "An exemption bypasses the people accountable for live service, and the team's process controls what is built, not how it lands in production. The candidate goes around the owner of the risk instead of working with them."
+        },
+        {
+          "id": "d",
+          "text": "Offer the change advisory board automatic records of every deployment, with test results and rollback steps, so it keeps full oversight.",
+          "correct": true,
+          "rationale": "Pre-approval is only acceptable to operations if it can still see what is happening. Automatic evidence gives the board oversight without a meeting, which is what makes a standard-change category safe to grant."
+        },
+        {
+          "id": "e",
+          "text": "Keep the weekly releases but add a fuller regression run before each one, to cut down the incidents that the larger batches are causing.",
+          "correct": false,
+          "rationale": "It treats the symptom. The incidents come from batching, and batching comes from the approval wait, so more testing on large releases adds effort without removing the cause."
+        }
+      ],
+      "explanation": "Operational change control exists to protect live services and belongs to whoever runs them, so improving it means working with its owner rather than around it. The usual route is to separate changes by risk: routine, well-tested, reversible changes can be pre-approved as a class with evidence captured automatically, while the board's attention goes to changes that genuinely need it. Large infrequent batches are often a symptom of slow approval, and they raise the very risk that approval was meant to reduce.",
+      "mindset": "Make the safe path the fast path, and agree it with whoever owns the risk."
+    },
+    {
+      "id": "pmp-b3-133",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "change-control",
+        "change-board",
+        "recommendations"
+      ],
+      "stem": "You prepare recommendations for the change board of a hybrid programme redeveloping a castle visitor attraction: the building works are plan-driven and the ticketing app is built in sprints. Match each assessed request to the recommendation it supports. One choice is not used.",
+      "prompts": [
+        {
+          "id": "r1",
+          "text": "A lift in the gatehouse would open the upper galleries to wheelchair users. The impact assessment is complete, and the €95,000 fits within the remaining change allowance."
+        },
+        {
+          "id": "r2",
+          "text": "Audio-guide downloads in the app have strong demand, but the cost rests on a supplier's verbal figure. The written quote arrives a week before the next board, and no sprint before then would include the work."
+        },
+        {
+          "id": "r3",
+          "text": "A themed courtyard café would cost €140,000 and delay opening by four weeks, and the attraction's operator says it has no staff to run one for at least two years."
+        }
+      ],
+      "options": [
+        {
+          "id": "approve",
+          "text": "Recommend approval",
+          "correct": true,
+          "match": "r1",
+          "rationale": "The benefit is clear, the assessment is complete and the cost fits the allowance. Nothing further would improve the decision, so delaying it only delays the benefit."
+        },
+        {
+          "id": "defer",
+          "text": "Recommend deferral to the next meeting, pending the written quote",
+          "correct": true,
+          "match": "r2",
+          "rationale": "One specific fact is missing and will arrive before waiting costs anything, because no sprint would start the work sooner. Deferring lets the board decide on a real price rather than a verbal one."
+        },
+        {
+          "id": "reject",
+          "text": "Recommend rejection, recording the reasons for any future request",
+          "correct": true,
+          "match": "r3",
+          "rationale": "The benefit cannot be realised, because the operator will not staff the café, so no price makes it good value. Recording why lets a future request show what has changed."
+        },
+        {
+          "id": "conditional",
+          "text": "Recommend approval now, with a ceiling on the supplier's figure",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A conditional approval is tempting for the audio guide, but it commits the board to an estimate it has not seen when waiting a week costs nothing. It earns its place only when delay is expensive."
+        }
+      ],
+      "explanation": "A change recommendation follows from what the assessment shows: approve when the case and the impact are both known and acceptable, defer when a specific missing fact will arrive before waiting costs anything, and reject when the benefit cannot be realised at any price. Conditional approvals have their place when delay is expensive, but they commit the project to a figure the board has not seen. Recording the reasons for a rejection is what lets a future request show what has changed.",
+      "mindset": "Recommend on what the assessment shows, and say exactly what would change the answer."
+    },
+    {
+      "id": "pmp-b3-134",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "change-control",
+        "traceability",
+        "regulated-software"
+      ],
+      "stem": "Your Scrum team builds the companion app for an insulin pump, which is regulated as medical-device software. An auditor has asked to see, for any change, who requested it, who approved it and what testing proved it. The team holds all of this somewhere in conversations and its backlog tool, but not in one traceable form. A team member proposes adding a paper change-request form for every backlog item. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the team and the quality lead to link each backlog item to its request, approval and test evidence inside the backlog tool they already use.",
+          "correct": true,
+          "rationale": "The requirement is traceability, not paperwork. Building the links into the tool the work already runs on gives the auditor a trail that stays accurate because it is the same record the team uses every day."
+        },
+        {
+          "id": "b",
+          "text": "Adopt the paper form for every backlog item, because a regulated product needs a change record that an auditor will readily recognise.",
+          "correct": false,
+          "rationale": "The candidate meets the audit with a second record that runs alongside the real one. Within weeks the forms and the backlog drift apart, and the auditor then finds two sources that disagree."
+        },
+        {
+          "id": "c",
+          "text": "Show the auditor the backlog tool's history and explain that agile teams record their decisions through conversation rather than forms.",
+          "correct": false,
+          "rationale": "Conversation is how agile teams decide, not how they evidence decisions. The candidate defends the method instead of meeting a legitimate need for a traceable trail in a safety-critical product."
+        },
+        {
+          "id": "d",
+          "text": "Introduce the paper form only for items the product owner judges to be safety-related, and keep using the backlog alone for everything else.",
+          "correct": false,
+          "rationale": "A risk-based split sounds proportionate, but it rests on one person's judgement of what is safety-related and still leaves two systems to keep in step. In regulated device software, every change needs a traceable trail."
+        }
+      ],
+      "explanation": "Regulated adaptive teams need traceability, not paperwork: the requirement is that each change can be followed from request through approval to verification. Building that evidence into the tools the team already works in produces a record that stays accurate because it is the same record the work runs on, whereas a parallel form drifts out of step with the backlog. The test of any approach is whether an auditor can pick any change and follow its trail without asking anyone to remember.",
+      "mindset": "Make the trail of every change visible in the place where the work actually happens."
+    },
+    {
+      "id": "pmp-b3-135",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-3",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "change-control",
+        "re-baselining",
+        "forecasting"
+      ],
+      "stem": "You are fourteen months into building a fire station for a fire and rescue service. No scope has changed, but poor groundworks productivity has left the project with a cost performance index of 0.86 and a schedule performance index of 0.81. The sponsor says the baseline is now meaningless because every report shows red, and asks you to re-baseline to the current forecast so the steering group can track something achievable. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Submit a re-baseline to the change board with the variance history archived, so the steering group tracks progress against an achievable plan.",
+          "correct": false,
+          "rationale": "Going through the board makes it procedurally sound, which is why it is tempting. But with no change to scope or objectives, the re-baseline exists to absorb poor performance, and archiving the history still removes the live measure of it."
+        },
+        {
+          "id": "b",
+          "text": "Keep the baseline, and add the forecast completion date and cost to each report so the steering group can track both side by side.",
+          "correct": true,
+          "rationale": "The sponsor's need for an achievable view is legitimate, and a forecast meets it without erasing the variance. The steering group then sees both where the project is heading and how far it has drifted from what was approved."
+        },
+        {
+          "id": "c",
+          "text": "Re-baseline only the remaining groundworks packages, where productivity has been worst, and keep the rest of the baseline exactly as it is.",
+          "correct": false,
+          "rationale": "A partial re-baseline hides the variance exactly where it is largest. The candidate narrows the premise rather than questioning it, and the steering group loses sight of the packages that most need attention."
+        },
+        {
+          "id": "d",
+          "text": "Keep the baseline and the reports as they are, and explain to the sponsor that variances can only be removed by approved changes.",
+          "correct": false,
+          "rationale": "The rule is right but the response ignores the sponsor's real problem: a report that shows only red tells the steering group nothing about where the project will land. Defending the baseline without adding a forecast leaves that need unmet."
+        }
+      ],
+      "explanation": "A baseline is the yardstick for performance, so re-baselining is reserved for approved changes to what the project must deliver, such as scope, objectives or constraints, not for performance that has fallen short. When variances are large, the useful response is to forecast alongside the baseline, so decision-makers see both how far the work is from plan and where it is heading. Replacing the baseline with the forecast erases the signal that tells the organisation its estimates or delivery need attention.",
+      "mindset": "Report the forecast beside the baseline rather than replacing the yardstick that shows the gap."
+    }
+  ]
+}

@@ -1,0 +1,1704 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Business 1 — Governance",
+  "questions": [
+    {
+      "id": "pmp-b1-101",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "business-case",
+        "exception-reporting",
+        "archetype-make-visible"
+      ],
+      "stem": "You are managing a £3.2m replacement of a ferry operator's online booking platform, now in its fourth month of build. The benefits owner tells you that a rival operator's new route has cut the passenger growth the business case depends on, and her revised figures show the project no longer recovers its cost within the ten-year appraisal period. The next stage gate is eleven weeks away. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Continue delivery to plan and present the revised benefits case at the stage gate, where the board has already scheduled its decision on continuation.",
+          "correct": false,
+          "rationale": "This treats the gate calendar as the only moment the board may hear about viability. Eleven weeks of build is committed against a case the manager already knows is broken, which is exactly the spend the board would want the chance to stop."
+        },
+        {
+          "id": "b",
+          "text": "Work with the benefits owner over the next few weeks to find a reduced scope that restores a positive return, so the board receives a viable option alongside the bad news.",
+          "correct": false,
+          "rationale": "Bringing options is good practice, but doing the re-planning before reporting presumes the project should continue and keeps the decision-makers uninformed while the work proceeds. The options can follow the report rather than delay it."
+        },
+        {
+          "id": "c",
+          "text": "Raise an exception report to the project board now, setting out the revised benefits case and asking whether the project should continue, change or stop.",
+          "correct": true,
+          "rationale": "The board owns the investment decision and the business case is a live control, not a gate document. Telling it now, with the evidence, lets it decide while eleven weeks of spend are still avoidable."
+        },
+        {
+          "id": "d",
+          "text": "Slow the non-critical build activity to conserve budget while the benefits owner validates her figures with finance before anything is reported upward.",
+          "correct": false,
+          "rationale": "Changing the pace of delivery is a response to the business case problem, and the manager is taking it unilaterally while the board is unaware. It mixes a decision the manager does not hold with a delay in disclosure."
+        }
+      ],
+      "explanation": "A business case remains a governing control for the whole life of a project, not just at the points where it is formally reviewed. When the justification changes materially, the people who own the investment decision need to know when it changes, not when the calendar next brings them together. The manager's role is to inform and recommend; deciding continuation alone, or holding the news back while preparing a cure, takes a decision that belongs elsewhere.",
+      "mindset": "A business case that has stopped being true is news for the decision-makers today, not at the next scheduled gate."
+    },
+    {
+      "id": "pmp-b1-102",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "governance",
+        "product-owner",
+        "decision-rights",
+        "archetype-route-to-owner"
+      ],
+      "stem": "A regional director at an online grocery retailer messages one of your Scrum team's developers directly, asking him to build a promotional banner feature this sprint because a supplier deal has just been signed. The sprint goal concerns checkout reliability. The product owner, who orders the backlog, is in the office today. The developer asks you what to do. What is the best advice?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Point the director to the product owner, who decides whether the banner displaces planned work and when it is scheduled.",
+          "correct": true,
+          "rationale": "Backlog order has one owner, and she is available today. Routing the request to her gets it a quick, accountable answer without the developer or the manager deciding something that is not theirs."
+        },
+        {
+          "id": "b",
+          "text": "Build the banner this sprint, since a signed supplier deal is a firm business commitment the team should support quickly.",
+          "correct": false,
+          "rationale": "Urgency and a senior requester do not transfer prioritisation authority to a developer. Taking the work on silently displaces the sprint goal without anyone accountable having weighed the trade."
+        },
+        {
+          "id": "c",
+          "text": "Add the banner to the sprint backlog yourself and tell the product owner afterwards that the scope has grown slightly.",
+          "correct": false,
+          "rationale": "The project manager does not own backlog order in Scrum, and informing the owner after the fact turns her accountability into a formality. A helpful intention still bypasses the decision right."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the request to the project sponsor so that a senior person can decide between the director and the team.",
+          "correct": false,
+          "rationale": "There is no dispute yet, only a request that has not reached the person who decides it. Escalating treats a routine prioritisation as a conflict and pulls the sponsor into the product owner's role."
+        }
+      ],
+      "explanation": "Agile governance depends on each decision right having a single, known owner, and in Scrum the ordering of work belongs to the product owner. Requests that arrive through side channels are redirected to that owner rather than absorbed by whoever received them or lifted above the owner's head. Seniority of the requester changes how quickly the request should reach the owner, not who decides it.",
+      "mindset": "Send priority requests to whoever owns the order of work, whatever the seniority of the person asking."
+    },
+    {
+      "id": "pmp-b1-103",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "governance",
+        "delegation",
+        "release-management",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your hybrid programme for an energy supplier's customer portal produces tested increments every two weeks. Programme governance requires board approval before any release reaches customers, but the board meets quarterly. Five finished increments are now waiting, two of them fixing billing errors that customers are complaining about. Board members say they value their oversight of releases and do not want to meet more often. What should the project manager propose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Propose that the board delegates release approval to the product owner within agreed guardrails, reviewing release outcomes and guardrail breaches at each quarterly meeting.",
+          "correct": true,
+          "rationale": "The premise that the board must approve each release is what fails, not the board's oversight. Delegating within limits it sets, and reviewing their use, keeps the board in control while decisions run at the speed of delivery."
+        },
+        {
+          "id": "b",
+          "text": "Request a fortnightly fifteen-minute board call dedicated to release approval, keeping the board's oversight while matching the cadence of delivery.",
+          "correct": false,
+          "rationale": "It solves the cadence problem on paper, but the board has already said it will not meet more often. Proposing what the decision-makers have declined spends credibility and leaves the backlog of releases where it is."
+        },
+        {
+          "id": "c",
+          "text": "Bundle the waiting increments into quarterly releases timed to follow each board meeting, so that every release still receives board approval as required.",
+          "correct": false,
+          "rationale": "This keeps the rule by slowing delivery to the speed of the meeting. Customers wait up to three months for billing fixes, and the value of releasing every two weeks is given up to preserve a control's form."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor to approve the two billing fixes by email as an urgent exception, and hold the remaining three increments for the next board meeting.",
+          "correct": false,
+          "rationale": "It relieves today's pressure sensibly, but the mismatch will recreate the same queue every quarter. A governance design that runs on repeated exceptions has effectively stopped governing."
+        }
+      ],
+      "explanation": "When the cadence of a governance control cannot match the cadence of delivery, the durable fix is to change what the governing body controls rather than to slow delivery or keep granting exceptions. A body keeps oversight of frequent, routine decisions by setting the boundaries for delegated decision-makers and reviewing how those boundaries were used. That preserves accountability without forcing every decision into a meeting.",
+      "mindset": "Govern routine decisions by setting their limits, not by queuing each one for a meeting."
+    },
+    {
+      "id": "pmp-b1-104",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "delegated-authority",
+        "handover",
+        "archetype-make-visible"
+      ],
+      "stem": "You take over a hospital estates project midway through construction. Reviewing the files, you find that your predecessor approved a £140,000 variation with the building contractor for upgraded ventilation, although the delegation schedule limited him to £50,000 per variation. The contractor has completed about half of the work in good faith, and the clinical users support the upgrade. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the work continue to completion, since the contractor acted in good faith and the clinical users have confirmed that they want the upgrade.",
+          "correct": false,
+          "rationale": "Good faith and user support do not supply the authority that was missing. Continuing spends a further £70,000 that nobody entitled to approve it has approved, and the new manager now owns that decision."
+        },
+        {
+          "id": "b",
+          "text": "Report the variation to the project board with the facts and its status, asking the board to ratify it or direct how to proceed.",
+          "correct": true,
+          "rationale": "The board holds the authority the predecessor lacked, so only it can ratify, vary or stop the variation. Disclosure first lets the right level decide while the remaining half of the spend is still in play."
+        },
+        {
+          "id": "c",
+          "text": "Instruct the contractor to suspend the ventilation work until the variation has gone through a fresh approval at the correct level of authority.",
+          "correct": false,
+          "rationale": "Suspension is itself a significant decision with cost and contractual consequences, taken by the manager on assumption that the board would not ratify. It may also breach the contractor's instruction, creating a dispute that the board has not chosen."
+        },
+        {
+          "id": "d",
+          "text": "Ask the commercial team to establish the contractual position on the variation, so that you can present the board with a complete picture.",
+          "correct": false,
+          "rationale": "The contractual position matters, but gathering it first keeps the breach hidden while the contractor continues to spend. The board can commission that analysis itself once it knows there is something to analyse."
+        }
+      ],
+      "explanation": "Authority exceeded in the past does not become valid because the work has started or the users like it, and it does not become void simply because it was irregular. Whoever inherits it discloses it to the level that holds the relevant authority, which can ratify, vary or stop it. Acting on either assumption alone substitutes the manager's judgement for a decision the governance structure reserves to someone else.",
+      "mindset": "An inherited breach of authority is disclosed to whoever holds that authority, not quietly resolved either way."
+    },
+    {
+      "id": "pmp-b1-105",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "agile-reporting",
+        "steering-committee",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Three Scrum teams are rebuilding a public benefits agency's online claims service. The steering committee, used to predictive projects, asks you for a monthly Gantt chart and a percentage-complete figure for each team. Members explain that they need to know whether the service will be ready for the April policy change and whether to release the next tranche of funding. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with the committee which decisions it needs to make, and shape the monthly report around the evidence those decisions require.",
+          "correct": true,
+          "rationale": "The committee's need is legitimate and the members have already named it: readiness for April and a funding call. Starting from the decisions accepts the oversight while adapting the information to how the work is actually run."
+        },
+        {
+          "id": "b",
+          "text": "Offer a release burn-up against the April scope, with the forecast range it implies, in place of percentage complete per team.",
+          "correct": true,
+          "rationale": "A burn-up built from measured throughput answers the readiness question directly and shows its uncertainty honestly, which a plan-based percentage cannot do for a backlog that is still changing."
+        },
+        {
+          "id": "c",
+          "text": "Build a Gantt chart by mapping each backlog epic to the sprint in which it is currently expected, and update the dates monthly.",
+          "correct": false,
+          "rationale": "It supplies the requested format, but the dates are guesses about a backlog the product owner will reorder. The chart implies a commitment the teams have not made and will look like slippage every time priorities change."
+        },
+        {
+          "id": "d",
+          "text": "Calculate percentage complete for each team from story points finished against the total points in the current backlog.",
+          "correct": false,
+          "rationale": "The figure looks rigorous but its denominator moves whenever the backlog grows or is re-estimated, so it can fall while work progresses. It answers the format request rather than the readiness question."
+        },
+        {
+          "id": "e",
+          "text": "Explain that Scrum teams do not produce Gantt charts and invite the committee to attend sprint reviews instead of receiving reports.",
+          "correct": false,
+          "rationale": "Sprint reviews are valuable, but declining the request on method grounds treats legitimate oversight as a misunderstanding and leaves members to extract a funding decision from demonstrations."
+        }
+      ],
+      "explanation": "Governance bodies are entitled to the information their decisions need, not to a particular format. When a delivery method does not naturally produce the artefact requested, find out which decision the artefact was meant to support and supply evidence native to the method that supports it, such as forecast ranges from measured throughput. Translating an unsuitable format faithfully gives the appearance of oversight while weakening its substance.",
+      "mindset": "Serve the decision a report is for, not the format it used to come in."
+    },
+    {
+      "id": "pmp-b1-106",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "governance",
+        "quorum",
+        "terms-of-reference",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A water utility's steering group terms of reference set a quorum of four members, including the finance director, and allow decisions between meetings by written procedure if every member responds within five working days. Yesterday's meeting, attended by three members without the finance director, approved moving €300,000 from contingency into a pipeline diversion. The contractor needs instruction by Monday to keep its crew booked. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Instruct the contractor on the strength of the meeting's decision, since the three members present were unanimous and the chair has signed the minutes.",
+          "correct": false,
+          "rationale": "Unanimity among those present does not cure the absence of a quorum. The group never made a valid decision, so the instruction would commit €300,000 without authority, however likely approval seems."
+        },
+        {
+          "id": "b",
+          "text": "Ask the finance director to confirm her agreement by email, and record yesterday's decision as approved once her reply arrives today.",
+          "correct": false,
+          "rationale": "This borrows half of the written procedure. The terms require every member to respond, not just the missing one, and they provide a route for a fresh decision rather than for topping up an inquorate one."
+        },
+        {
+          "id": "c",
+          "text": "Circulate the proposal to all members under the written procedure today, explaining the deadline, and instruct the contractor once it is approved.",
+          "correct": true,
+          "rationale": "The terms of reference already provide a valid route for exactly this gap. Using it as written, and starting today, gives the best chance of a lawful decision before Monday."
+        },
+        {
+          "id": "d",
+          "text": "Refer the reallocation to the sponsor for approval on her own authority, given the deadline, and report it to the steering group afterwards.",
+          "correct": false,
+          "rationale": "The decision sits with the group, and the group's own rules supply a fast mechanism. Moving it to an individual because of time pressure bypasses the body that holds the authority when a valid route exists."
+        }
+      ],
+      "explanation": "A decision by a body that lacked its quorum is not a decision of that body, however unanimous those present were. Where the governing document provides an alternative route, the route is followed as written, including who must take part, rather than improvised from parts of it. A deadline is a reason to start the valid process immediately, not to treat an invalid one as good enough.",
+      "mindset": "A decision is only as valid as the procedure that made it, so repair the procedure rather than the paperwork."
+    },
+    {
+      "id": "pmp-b1-107",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "lean-portfolio",
+        "guardrails",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "An airline's loyalty platform is funded through a lean portfolio. Its guardrails let product teams progress any epic forecast under €1.5m, but an epic above that needs a lean business case approved at the portfolio sync. After two months of discovery, your team's partner-rewards epic has grown from a €1.1m forecast to €1.7m. The product owner wants to keep building because the work is going well. What should happen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Split the partner-rewards epic into two separately funded epics of about €850,000 each, so that each one sits inside the team's guardrail.",
+          "correct": false,
+          "rationale": "Splitting may be sensible for delivery, but doing it to land under a threshold removes the guardrail's effect while keeping its form. The portfolio would be committing €1.7m without the decision it reserved for that scale."
+        },
+        {
+          "id": "b",
+          "text": "Continue building and present the revised forecast at the next quarterly portfolio review, where funding for every epic is reconsidered anyway.",
+          "correct": false,
+          "rationale": "Relying on a later routine review lets the epic spend beyond its delegated limit in the meantime. A scheduled review is not a substitute for the specific approval the guardrail requires once it is crossed."
+        },
+        {
+          "id": "c",
+          "text": "Ask the release train engineer to approve the higher €1.7m forecast, since the train's leadership already oversees the capacity allocated to each of its teams.",
+          "correct": false,
+          "rationale": "Overseeing capacity is not the same as holding investment authority above the guardrail. Choosing a nearby, convenient approver sends the decision to someone the portfolio has not empowered to take it."
+        },
+        {
+          "id": "d",
+          "text": "Take a lean business case for the €1.7m forecast to the next portfolio sync, and pause new investment beyond the original scope until it is approved.",
+          "correct": true,
+          "rationale": "The guardrail is tested against the current forecast, and the current forecast is over it. Seeking the reserved decision while holding growth at the original scope respects the boundary without stopping useful work."
+        }
+      ],
+      "explanation": "Guardrails delegate decisions up to a defined boundary and reserve the rest for a named forum. The boundary applies to the current forecast, not the figure at the start, so growth across a threshold triggers the higher-level decision as soon as it is known. Restructuring the work to sit under a threshold, or waiting for a routine review, keeps the appearance of the guardrail while removing what it was for.",
+      "mindset": "A threshold is crossed when the forecast crosses it, not when someone gets round to noticing."
+    },
+    {
+      "id": "pmp-b1-108",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "governance",
+        "board-papers",
+        "agenda",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You act as secretary to a bus operator's ticketing programme board. Its terms of reference give you, on the chair's behalf, control of the agenda, with decision papers due five working days before each meeting. Two days before this month's meeting, a workstream lead sends a paper requesting a 60,000 hardware purchase. It lacks the cost comparison, and the supplier's quote is valid for two more months. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Include the paper on this month's agenda marked as late, leaving the board to decide whether it wants to consider it.",
+          "correct": false,
+          "rationale": "The terms of reference put the agenda decision with the secretary precisely so the board does not spend meeting time on it. Passing it back also invites an incomplete paper to be decided on."
+        },
+        {
+          "id": "b",
+          "text": "Ask the chair whether the paper should be added to this month's agenda, given that it arrived after the deadline.",
+          "correct": false,
+          "rationale": "The chair has already delegated this call, and nothing about it is unusual: the paper is late, incomplete and not urgent. Referring it back asks for a decision that has been handed to you."
+        },
+        {
+          "id": "c",
+          "text": "Circulate the paper with a covering note listing its gaps, so that the board can weigh the risks of deciding now.",
+          "correct": false,
+          "rationale": "Flagging the gaps is honest, but it still asks the board to decide on a paper that cannot support a decision when nothing is lost by waiting. The control on paper quality is weakened for no benefit."
+        },
+        {
+          "id": "d",
+          "text": "Hold the paper for next month's meeting and tell the workstream lead what it needs before it is resubmitted.",
+          "correct": true,
+          "rationale": "The decision is within your delegated authority, the paper misses both the deadline and the content standard, and the quote outlasts the next meeting. Waiting costs nothing and produces a decidable paper."
+        }
+      ],
+      "explanation": "Governance mechanics delegated to the manager, such as agendas, paper deadlines and quality standards for decision papers, are decisions to take rather than to refer. Applying them consistently keeps the board's time for decisions that are ready to be made. Passing them upward, or letting the board absorb incomplete papers, erodes the control while protecting no one, particularly when nothing is lost by waiting.",
+      "mindset": "Use the authority you have been delegated, because handing it back is also a decision."
+    },
+    {
+      "id": "pmp-b1-109",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "emergency-authority",
+        "safety",
+        "archetype-act-now"
+      ],
+      "stem": "Your project is refurbishing a station concourse while trains continue to run. The governance plan allows the project manager to suspend site work on safety grounds without prior approval, provided the sponsor is informed within 24 hours. The temporary works engineer reports new cracking in a propping structure next to the platform and cannot yet say whether it is safe. The sponsor is on a nine-hour flight. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Contact the deputy sponsor for authority to suspend the work, since the sponsor cannot be reached and a stoppage will affect the programme.",
+          "correct": false,
+          "rationale": "The governance plan has already granted the authority, so seeking it again adds delay to a safety decision. The candidate treats a stoppage as needing approval because it is costly, when the plan has decided otherwise."
+        },
+        {
+          "id": "b",
+          "text": "Keep the work going under closer supervision while the engineer completes the assessment, so that any stoppage is justified by evidence.",
+          "correct": false,
+          "rationale": "Waiting for certainty before acting on a safety signal next to a live platform inverts the burden. The emergency provision exists for exactly the period in which the evidence is incomplete."
+        },
+        {
+          "id": "c",
+          "text": "Suspend the work around the propping structure now, then send the sponsor a written report of the decision and the engineer's findings.",
+          "correct": true,
+          "rationale": "The authority exists, the hazard is credible and the cost of waiting falls on people beside a live platform. Acting now and reporting promptly is exactly the behaviour the provision was written to produce."
+        },
+        {
+          "id": "d",
+          "text": "Convene an emergency call of the steering group to decide on suspension, using the engineer's report as the basis for discussion.",
+          "correct": false,
+          "rationale": "A collective decision feels well governed but takes hours to assemble, and the plan deliberately placed this call with the person on site. Using a committee here reintroduces the delay the provision was written to remove."
+        }
+      ],
+      "explanation": "Emergency provisions in a governance plan move a decision to whoever is present when waiting would cause harm, and they keep accountability through a duty to report rather than through prior approval. Seeking permission that has already been given, or waiting for certainty before acting on a safety signal, uses governance as a reason to delay. The report afterwards is what lets the governing body check that the authority was used well.",
+      "mindset": "When governance has already given you the authority to act, using it promptly is the governed behaviour."
+    },
+    {
+      "id": "pmp-b1-110",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "governance",
+        "tailoring",
+        "discovery",
+        "archetype-trade-off"
+      ],
+      "stem": "A retail bank's governance framework requires a full business case, approved at a gate, for any initiative costing over £30,000. The PMO may approve a tailoring statement that varies those controls for a particular initiative. Your agile team wants to run a six-week, £48,000 discovery to test whether customers will use a round-up savings feature. A full business case takes about four weeks to prepare and approve, and the sponsor wants to start on Monday. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prepare the full business case before starting, and accept the four-week delay, because the discovery is above the threshold the framework sets for every initiative.",
+          "correct": false,
+          "rationale": "This applies the framework's default without using the flexibility the same framework provides. The candidate treats compliance as following the heaviest version of the rule, and spends four weeks justifying a six-week experiment."
+        },
+        {
+          "id": "b",
+          "text": "Submit a tailoring statement to the PMO proposing a one-page hypothesis case, a £48,000 spending cap and a stop-or-continue decision at week six.",
+          "correct": true,
+          "rationale": "It trades upfront analysis, which the experiment is designed to replace, for a hard cap and an early decision point. The PMO holds the authority to vary the controls, so the lighter route is legitimate rather than improvised."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to waive the business case for this initiative, since she owns the budget and the discovery is small, short and easily stopped.",
+          "correct": false,
+          "rationale": "The reasoning about proportion is sound, but the framework gives tailoring authority to the PMO, not to the budget holder. The candidate picks the most senior available person rather than the one who holds this particular decision."
+        },
+        {
+          "id": "d",
+          "text": "Start the discovery on Monday and write the business case in parallel, so that it is approved well before most of the £48,000 has been spent.",
+          "correct": false,
+          "rationale": "It keeps the sponsor's date by committing money before the approval the framework requires. The candidate assumes approval will follow and treats a control as satisfied if it is met eventually rather than beforehand."
+        }
+      ],
+      "explanation": "Governance frameworks are designed with a default level of control and, usually, a route for varying it where the default is out of proportion to the risk. The judgement is what to give up and what to keep: thinner upfront justification can be traded for tighter limits and earlier decision points, which suits work whose purpose is to generate the evidence a full case would need. Who may approve the variation is set by the framework itself, not by whoever is most senior or most impatient.",
+      "mindset": "Match the weight of control to the size of the risk, and agree the trade with whoever owns the framework."
+    },
+    {
+      "id": "pmp-b1-111",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "governance",
+        "sponsor",
+        "board-decisions",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Last month the project board for a pharmaceutical distributor's warehouse upgrade chose to refurbish the existing racking for €2.1m rather than build a new automated store for €2.6m, and the decision is minuted. The board's terms of reference reserve option selection to the board. Over lunch, the sponsor, who chairs the board, tells you she now believes the automated store is the better choice. She asks you to begin its design next week and says she will square it with the board later. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Begin design work on the automated store as she asks, because the sponsor chairs the board and is accountable for the business case that the project serves.",
+          "correct": false,
+          "rationale": "Chairing a board does not give one member the board's authority. The candidate confuses the most senior voice on a collective body with the body itself, and spends money against a decision that still stands."
+        },
+        {
+          "id": "b",
+          "text": "Ask her to take the change of option back to the board, at an extra meeting if needed, and continue the refurbishment until the board decides.",
+          "correct": true,
+          "rationale": "The board's decision stands until the board changes it, and the sponsor is well placed to ask it to. Routing her view to the body that holds the decision respects both her judgement and its authority."
+        },
+        {
+          "id": "c",
+          "text": "Pause work on both options until the next scheduled board meeting, so that no money is spent on an option the board may soon drop.",
+          "correct": false,
+          "rationale": "It looks cautious, but stopping approved work is itself a decision the manager has not been given. The candidate lets an informal remark suspend a valid decision, which is the same error as acting on it, in reverse."
+        },
+        {
+          "id": "d",
+          "text": "Start design for the automated store alongside the refurbishment, and record her instruction in the decision log for the board's next meeting.",
+          "correct": false,
+          "rationale": "Recording the instruction makes the irregularity visible but does not make it authorised. The candidate assumes documentation substitutes for authority and commits spend on an option the board rejected."
+        }
+      ],
+      "explanation": "A decision taken by a governing body can only be changed by that body, however senior the individual who has changed their mind. Until it is formally revisited, the decision stands, which means neither acting on the new view nor halting work on the old one. The manager's part is to direct the new view to the forum that can decide it, quickly, so that a better idea is not lost and a valid decision is not quietly overturned.",
+      "mindset": "A body's decision is changed by the body, not by its most senior member over lunch."
+    },
+    {
+      "id": "pmp-b1-112",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "product-owner",
+        "delegation",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "The named product owner for a logistics firm's route-planning app is the operations director, who can give the team one hour a fortnight. She asked a senior dispatcher to act for her day to day, but twice this quarter she has reversed the dispatcher's backlog decisions at sprint review, discarding most of a sprint's work. The director says firmly that she cannot give the team more time. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the director to set out which backlog decisions the dispatcher may take for her and which she keeps, then share that with the team and stakeholders.",
+          "correct": true,
+          "rationale": "Her limited time is a fixed condition, so the workable fix is to make the delegation explicit. The reversals come from authority nobody defined, and defining it lets the dispatcher decide with confidence inside known limits."
+        },
+        {
+          "id": "b",
+          "text": "Ask the dispatcher to email the director for approval before each significant backlog decision, so that her view is captured before the team starts the work.",
+          "correct": false,
+          "rationale": "It routes every decision back through the one person who has said she has no time. The candidate tries to prevent reversals by centralising decisions further, which creates a queue instead of a decision-maker."
+        },
+        {
+          "id": "c",
+          "text": "Propose to the sponsor that the dispatcher formally replaces the director as product owner, since she is the person who is actually available to the team.",
+          "correct": false,
+          "rationale": "It may become the right outcome, but the director has not been asked to define the delegation and the manager is reassigning an accountability over her head. The candidate jumps to restructuring before trying the lighter fix."
+        },
+        {
+          "id": "d",
+          "text": "Move the director's fortnightly hour to sprint planning, so that she reviews what the team intends to build rather than what it has already built.",
+          "correct": false,
+          "rationale": "Earlier review helps, but it leaves the dispatcher's day-to-day authority undefined, and the director can still overturn mid-sprint decisions. The candidate fixes the timing of the reversals rather than their cause."
+        }
+      ],
+      "explanation": "When a decision-maker's availability is a constraint that will not change, governance adapts by making delegation explicit: which decisions pass to the delegate, which stay with the owner, and who needs to know. Reversals of a delegate's decisions are usually a sign that the delegation was informal, not that the delegate chose badly. Defining the boundary is cheaper than either routing everything back to the owner or replacing the owner.",
+      "mindset": "If the owner's time cannot grow, make the delegate's authority explicit rather than leaving it to be discovered at review."
+    },
+    {
+      "id": "pmp-b1-113",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "joint-funding",
+        "terms-of-reference",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A city council and a university are jointly funding a €1.2m air-quality sensor network, half each, which you will deliver with a hybrid approach. At the kick-off, the council's representative assumes changes will go through the council's cabinet approval process, and the university's representative assumes its research committee will approve them. Neither has considered what happens if the two disagree. Which two actions should you take before delivery starts?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Propose a joint project board with both funders represented, and terms of reference stating which decisions it may take without referring back to either organisation.",
+          "correct": true,
+          "rationale": "Two parallel internal processes are not a governance structure for one project. A joint body with defined decision rights gives the project a single place where its decisions are actually made."
+        },
+        {
+          "id": "b",
+          "text": "Agree with both funders in advance how disagreements between them will be resolved, including who decides if the joint board is deadlocked.",
+          "correct": true,
+          "rationale": "With equal funders, deadlock is a foreseeable event rather than an unlikely one. Settling the route while relations are good avoids designing it in the middle of the first dispute."
+        },
+        {
+          "id": "c",
+          "text": "Route each change through both organisations' approval processes in turn, and proceed only once both have approved it in writing.",
+          "correct": false,
+          "rationale": "It respects both organisations' rules, but it doubles the time for every change and offers no answer when the two reach different conclusions. The candidate accepts the premise that the existing processes can govern a joint project."
+        },
+        {
+          "id": "d",
+          "text": "Adopt the council's governance framework for the whole project, as the council is the public body most accountable for how the money is spent.",
+          "correct": false,
+          "rationale": "It resolves the ambiguity by giving one equal funder control over the other's money. The university's accountability for its half is not addressed, which will surface the first time its committee disagrees."
+        },
+        {
+          "id": "e",
+          "text": "Offer to act as the tie-breaker yourself when the two representatives disagree, since you are employed by neither funder and can judge neutrally.",
+          "correct": false,
+          "rationale": "Neutrality is not authority. The funders' money and objectives are theirs to trade, and a manager who decides between them takes an accountability that neither organisation has given."
+        }
+      ],
+      "explanation": "Where a project has more than one sponsoring organisation, each organisation's own approval process governs its commitment, not the project. The project needs its own decision-making body with stated authority, and a pre-agreed route for the case where the sponsors disagree. Both are cheapest to agree before the first contested decision, because once a dispute exists every proposed rule is read as taking a side.",
+      "mindset": "A shared project needs governance of its own, agreed before the partners first disagree."
+    },
+    {
+      "id": "pmp-b1-114",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "governance",
+        "scrum-events",
+        "decision-forums",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your Scrum team is rebuilding an insurer's claims portal. Match each situation to the Scrum event that is the right forum for the decision it raises. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Business stakeholders want to try out the new claim-upload screen and suggest what the team should tackle next."
+        },
+        {
+          "id": "s2",
+          "text": "The team wants to change how it hands work to its testers, because handovers have stalled in each of the last three sprints."
+        },
+        {
+          "id": "s3",
+          "text": "Midway through the sprint, a developer finds that a task will take three days longer, and the team needs to rearrange who does what to still meet the sprint goal."
+        }
+      ],
+      "options": [
+        {
+          "id": "review",
+          "text": "Sprint review",
+          "correct": true,
+          "match": "s1",
+          "rationale": "The review is where stakeholders inspect the increment and the product backlog is adapted in light of what they see. Their suggestions feed the product owner's ordering decisions there."
+        },
+        {
+          "id": "retro",
+          "text": "Sprint retrospective",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Changing how the team works, including its handovers, is the purpose of the retrospective. A repeated process problem belongs in the forum designed to improve the process."
+        },
+        {
+          "id": "daily",
+          "text": "Daily scrum",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Re-planning the remaining work towards the sprint goal is what the daily scrum is for. Waiting for a later event would leave the team working to a plan it already knows is wrong."
+        },
+        {
+          "id": "steer",
+          "text": "Monthly steering committee",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of these decisions needs authority beyond the team and its product owner. Sending them to a steering committee would slow them down and pull a governance body into the team's own decisions."
+        }
+      ],
+      "explanation": "In agile delivery much of governance is carried by a cadence of short, regular forums, each with a defined purpose. A decision is taken fastest and by the right people when it goes to the forum built for it: product direction where stakeholders inspect the product, process change where the team examines its own way of working, and daily re-planning where the team coordinates. Escalating routine team decisions to a management body adds delay without adding authority that was missing.",
+      "mindset": "Take each decision to the forum designed for it, at the earliest point that forum meets."
+    },
+    {
+      "id": "pmp-b1-115",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "decision-log",
+        "project-assurance",
+        "archetype-diagnose-first"
+      ],
+      "stem": "You are reviewing the governance of a struggling hospital records digitisation project. Match each recurring symptom to the missing governance mechanism most likely to be causing it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Board members argue at each meeting about what was agreed at the previous one, and the minutes record only the discussion."
+        },
+        {
+          "id": "s2",
+          "text": "Two workstreams each assumed the other was responsible for migrating archived scans, and neither has planned or budgeted for it."
+        },
+        {
+          "id": "s3",
+          "text": "The board approves each stage plan without challenge, and nobody independent of the delivery team has ever checked the estimates behind them."
+        }
+      ],
+      "options": [
+        {
+          "id": "dlog",
+          "text": "A decision log recording each decision, its owner and its date",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Minutes of discussion are not a record of decisions. A log that states what was decided, by whom and when gives the board something to refer to instead of re-arguing."
+        },
+        {
+          "id": "raci",
+          "text": "A responsibility assignment for deliverables that cross workstreams",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Gaps appear at the boundaries between workstreams, where each can reasonably assume the other has the work. Assigning a single accountable owner to each cross-boundary deliverable closes them."
+        },
+        {
+          "id": "assure",
+          "text": "A project assurance role independent of the delivery team",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A board can only challenge what it has reason to question. Independent assurance gives it a view of the plan's soundness that does not come from the people who wrote it."
+        },
+        {
+          "id": "freq",
+          "text": "More frequent board meetings to give each issue more time",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. More meetings add time but not the missing mechanism in any of the three cases: the board would still lack a record, an owner or an independent view."
+        }
+      ],
+      "explanation": "Governance failures tend to show up as symptoms in meetings, but the cause is usually a missing mechanism rather than too little meeting time. Re-argued decisions point to the absence of a decision record; work that nobody owns points to unassigned accountability at boundaries; unchallenged plans point to a lack of independent assurance. Diagnosing which mechanism is absent comes before adding process, because more of the wrong process makes the symptom slower rather than rarer.",
+      "mindset": "Trace each governance symptom to the mechanism that is missing before adding more meetings."
+    },
+    {
+      "id": "pmp-b1-116",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "independence",
+        "conflict-of-interest",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Both situations arise on a hybrid programme replacing a housing association's repairs system. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "To save cost, the sponsor suggests that the project manager also carries out the stage-end assurance review of his own stage. The project manager should"
+        },
+        {
+          "id": "c2",
+          "text": "A board member discloses that her brother-in-law's firm is one of three bidders for the integration contract the board will award next week. The board should"
+        }
+      ],
+      "options": [
+        {
+          "id": "indep",
+          "text": "decline, and ask the board to appoint a reviewer who is independent of the delivery team",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Assurance exists to give the board a view that does not come from the people delivering the work. A manager reviewing his own stage provides the form of assurance with none of its value."
+        },
+        {
+          "id": "recuse",
+          "text": "record the interest and have her take no part in that decision",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Disclosure is the first step, not the whole remedy. Removing the conflicted member from the decision protects both the award and her, while the rest of the board can still decide on time."
+        },
+        {
+          "id": "minute",
+          "text": "accept the arrangement, recording it in the minutes so that it is transparent",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Transparency about a conflict or a lack of independence is necessary but does not cure it. In both cases a record would show the problem without removing it."
+        }
+      ],
+      "explanation": "Governance relies on separating those who do the work from those who check it, and those who benefit from a decision from those who make it. Disclosure is necessary in both cases but is not the remedy on its own: the conflicted or non-independent person is removed from the specific role, and the decision or review proceeds without them. Cost or convenience is not a reason to merge roles whose value comes from being separate.",
+      "mindset": "Keep checking separate from doing, and deciding separate from benefiting, even when merging them is cheaper."
+    },
+    {
+      "id": "pmp-b1-117",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "governance",
+        "tolerance",
+        "exception-reporting",
+        "archetype-make-visible"
+      ],
+      "stem": "The project board for a rail signalling upgrade set the current stage a budget of €840,000 with a cost tolerance of +8%. To date €510,000 has been spent and the estimate to complete is €385,000. The supplier has just confirmed a €20,000 price rise on equipment still to be delivered, which the estimate to complete does not include.",
+      "blanks": [
+        {
+          "id": "limit",
+          "label": "Upper limit of the stage cost tolerance, in €",
+          "numeric": true,
+          "expect": 907200,
+          "tol": 0,
+          "unit": "€",
+          "rationale": "The tolerance is 8% of the stage budget: 840,000 × 0.08 = 67,200. Adding it to the budget gives 840,000 + 67,200 = €907,200, the most the stage can be forecast to cost before the board must be told."
+        },
+        {
+          "id": "over",
+          "label": "Amount by which the revised stage forecast exceeds that limit, in €",
+          "numeric": true,
+          "expect": 7800,
+          "tol": 0,
+          "unit": "€",
+          "rationale": "The forecast is spend to date plus estimate to complete plus the price rise: 510,000 + 385,000 + 20,000 = €915,000. That is 915,000 − 907,200 = €7,800 above the tolerance limit."
+        },
+        {
+          "id": "who",
+          "label": "Who decides how to respond to the forecast breach",
+          "accept": [
+            "project board",
+            "the project board",
+            "board",
+            "the board"
+          ],
+          "rationale": "Tolerance is the authority the board delegated to the manager. Once the forecast exceeds it, the decision on how to respond returns to the board that set it, through an exception report."
+        }
+      ],
+      "explanation": "Tolerances are tested against the forecast, not against spend to date, so a breach exists as soon as a credible forecast crosses the limit, even while actual spend is well inside it. The forecast must include every known commitment, including changes not yet built into the estimate. Once it crosses, the decision passes back to the body that set the tolerance; the manager's job is to make the breach visible with options rather than to absorb it.",
+      "mindset": "A tolerance is breached when the forecast crosses it, so report on the forecast, not the spend."
+    },
+    {
+      "id": "pmp-b1-118",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "governance",
+        "risk-escalation",
+        "reporting",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a hybrid programme, a supplier-insolvency risk has been scored 20 out of 25 on a team log for three months, and the PMO confirms it is in the programme register. The board, which must decide responses to every risk scored 15 or above, says it has never seen it. The register holds eleven such risks. The diagram shows each step of the escalation route with its rule. Select the step where the route fails.",
+      "graphic": {
+        "viewBox": "0 0 640 420",
+        "title": "Five-step risk escalation route from team logs to the programme board",
+        "caption": "Select a step. Use Tab or the arrow keys to move between steps, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "team",
+          "n": 1,
+          "label": "Team risk logs — every risk scored by the team and reviewed weekly",
+          "x": 40,
+          "y": 20,
+          "w": 560,
+          "h": 60,
+          "correct": false,
+          "rationale": "The risk was logged and scored at 20 three months ago, so the route starts as designed. The candidate assumes a missing risk was never recorded without checking the evidence that it was."
+        },
+        {
+          "id": "lead",
+          "n": 2,
+          "label": "Workstream leads — escalate risks scored 15 or above to the PMO within a week",
+          "x": 40,
+          "y": 100,
+          "w": 560,
+          "h": 60,
+          "correct": false,
+          "rationale": "The PMO confirms the risk reached the programme register, so it was escalated. Blaming the lead is the familiar story of individual failure, and the evidence in the stem rules it out."
+        },
+        {
+          "id": "pmo",
+          "n": 3,
+          "label": "PMO — consolidates escalated risks into the programme risk register",
+          "x": 40,
+          "y": 180,
+          "w": 560,
+          "h": 60,
+          "correct": false,
+          "rationale": "The risk is in the register, so consolidation worked. The PMO is a tempting answer because it sits in the middle, but its step did what its rule says."
+        },
+        {
+          "id": "dash",
+          "n": 4,
+          "label": "Board dashboard — shows the five highest-scoring risks from the register",
+          "x": 40,
+          "y": 260,
+          "w": 560,
+          "h": 60,
+          "correct": true,
+          "rationale": "With eleven risks at 15 or above, a top-five view hides six of the risks the board is required to decide on. The reporting rule conflicts with the board's own remit, so a risk can travel the whole route and still never arrive."
+        },
+        {
+          "id": "board",
+          "n": 5,
+          "label": "Programme board — decides responses to every risk scored 15 or above",
+          "x": 40,
+          "y": 340,
+          "w": 560,
+          "h": 60,
+          "correct": false,
+          "rationale": "The board's rule is sound; it cannot act on risks it is not shown. Treating the body at the top as the point of failure confuses where accountability sits with where the information was lost."
+        }
+      ],
+      "explanation": "An escalation route is only as wide as its narrowest step, and the narrowest step is often a reporting format rather than a person. Diagnose a governance failure by checking each step's rule against the remit of the body it serves, and by using the evidence of how far the item actually travelled. A summary view that filters below the decision-maker's threshold quietly removes items the governance design requires them to see.",
+      "mindset": "When something never reaches the top, follow its route and test each step's rule before blaming a person."
+    },
+    {
+      "id": "pmp-b1-119",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "governance",
+        "reporting",
+        "highlight-report",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your governance plan for a city library service's self-service kiosk rollout requires a highlight report to the project board on the first working day of each month. This month the project is on schedule and within budget, and there are no new risks or issues. The sponsor, who sits on the board alongside three other directors, tells you she already knows things are going well. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Skip this month's report, since the sponsor already knows the position and there is nothing new for the board to consider or decide.",
+          "correct": false,
+          "rationale": "This treats the sponsor's knowledge as the board's knowledge. The other three directors share accountability and have no other agreed source, and a missing report looks exactly like a forgotten one."
+        },
+        {
+          "id": "b",
+          "text": "Send the highlight report on the usual day, keeping it brief and stating that nothing currently needs the board's attention.",
+          "correct": true,
+          "rationale": "The report is how the whole board, not just the sponsor, exercises its oversight. A short report confirming that everything is within tolerance is itself information the board relies on, and it costs little to produce."
+        },
+        {
+          "id": "c",
+          "text": "Give the sponsor a short verbal update and ask her to pass the position on to the other three directors on the board.",
+          "correct": false,
+          "rationale": "It routes the board's information through one member and turns a documented control into hearsay. The candidate confuses informing the sponsor with informing the body the governance plan names."
+        },
+        {
+          "id": "d",
+          "text": "Hold this month's report back and send a combined two-month report next month, when there is likely to be more to say.",
+          "correct": false,
+          "rationale": "Combining reports changes the agreed reporting cycle without the board's agreement, and it delays information on the assumption that nothing will change in the meantime."
+        }
+      ],
+      "explanation": "Reporting arrangements in a governance plan are part of how a board exercises control, and a report with no exceptions is a valid and useful report: it confirms the project was within tolerance on a known date. Varying the cadence or the audience is a decision for the board, not for the project manager or a single member, however reasonable it seems in a quiet month.",
+      "mindset": "Good news still travels through the agreed channel, because the channel is part of the control."
+    },
+    {
+      "id": "pmp-b1-120",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "governance",
+        "decision-integrity",
+        "contract-award",
+        "archetype-make-visible"
+      ],
+      "stem": "Last week a port authority's steering group, which holds authority for contract awards, approved awarding a £2.4m crane-maintenance contract to Supplier A on the strength of your evaluation paper. Your analyst has now found a spreadsheet error: A's five-year spares cost was understated by £130,000, so Supplier B is £50,000 cheaper over the contract, although A still scored higher on quality. The award letter is due to go out on Thursday. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tell the chair today, issue a corrected paper and ask the steering group to confirm or revisit its decision before the letter goes out.",
+          "correct": true,
+          "rationale": "The group decided on figures that were wrong in a way that reverses the price ranking. Only the body holding the authority can judge whether A's quality advantage is still worth the extra cost, and it can do so before anything irreversible happens."
+        },
+        {
+          "id": "b",
+          "text": "Issue the award on Thursday, since A's higher quality score would very likely have won anyway, and table the corrected figures for noting at the next meeting.",
+          "correct": false,
+          "rationale": "This substitutes the project manager's view of the trade-off for the group's. Whether A would have won anyway is precisely the judgement the steering group was entitled to make with the right numbers in front of it."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to review the corrected figures and decide on her own whether the award should stand, so that the Thursday date can still be met.",
+          "correct": false,
+          "rationale": "It moves an award decision from the body that holds it to one person because of a date. The sponsor may well agree with the group, but she has no authority to remake its decision alone."
+        },
+        {
+          "id": "d",
+          "text": "Postpone the award letter and re-run the whole evaluation with fresh scoring by a new panel, so that confidence in the process is fully restored.",
+          "correct": false,
+          "rationale": "The error sits in one cost line, not in the quality scoring, so a full re-evaluation adds weeks without addressing the actual problem. Deciding to restart the procurement is also a call that belongs to the group."
+        }
+      ],
+      "explanation": "A governance decision is only as sound as the information it was made on. When a material error is found after approval, the decision-makers need to see the correction and either reconfirm or revisit, ideally before the decision is acted on. A project manager who concludes that the outcome would not have changed is quietly retaking a decision that was never theirs, and a response larger than the error takes a different decision out of the decision-makers' hands.",
+      "mindset": "When the facts behind a decision change, put them back in front of whoever made it."
+    },
+    {
+      "id": "pmp-b1-121",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "benefits-ownership",
+        "business-case",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "You are preparing the business case for a parcel carrier's depot rostering system, due at next week's gate. It claims £400,000 a year in reduced agency staff costs. The operations director, whose depots would realise the saving, declines to be named benefits owner, saying the project should own the benefits because it is creating them. To keep the gate date, the sponsor suggests naming you as benefits owner. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Explain to the sponsor that the saving can only be owned by the manager who controls depot staffing, and ask her to settle ownership with the operations director before the gate.",
+          "correct": true,
+          "rationale": "Benefits are realised by changing how the business operates, and only the manager who controls agency spend can make that happen. The sponsor is the right person to resolve it, because the gap is in her business case."
+        },
+        {
+          "id": "b",
+          "text": "Accept the role for now so that next week's gate can go ahead as planned, and schedule a formal handover of benefits ownership to the operations director as part of project closure.",
+          "correct": false,
+          "rationale": "A project that ends cannot be held to a saving that accrues for years afterwards, and closure is when business owners most often refuse a handover. The candidate solves the gate problem by creating a later, larger one."
+        },
+        {
+          "id": "c",
+          "text": "Remove the agency saving from the business case until someone in operations agrees to own it, and take the reduced case to the gate without it.",
+          "correct": false,
+          "rationale": "It hides the problem rather than fixing it: the case is now understated and may be judged on a basis it was never meant to stand on, while the ownership gap remains unresolved."
+        },
+        {
+          "id": "d",
+          "text": "Write to the chief operating officer, asking her to instruct the operations director to accept ownership of the benefit before the gate meets next week.",
+          "correct": false,
+          "rationale": "Going over the sponsor to an executive takes a business-case issue away from the person accountable for the case. The sponsor should try to resolve it first, and escalate herself if she cannot."
+        }
+      ],
+      "explanation": "Benefits are owned by whoever controls the operation in which they will be realised, because a project cannot change how a business runs after it has closed. When nobody in the business will accept a benefit, that is a signal about the business case itself, and it belongs with the sponsor. Accepting ownership inside the project to protect a gate date converts a visible problem into an untraceable one.",
+      "mindset": "A benefit without a business owner is a forecast nobody has agreed to deliver."
+    },
+    {
+      "id": "pmp-b1-122",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "board-effectiveness",
+        "decision-rights",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A museum's gallery redevelopment board has grown to fourteen regular attendees as departments asked to be included. At the last three meetings, the decision on display-case procurement was deferred because discussion overran and attendees disagreed about who was entitled to decide. The terms of reference name a chair and four voting members, and you prepare the board's papers and agenda. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Remove the ten non-voting attendees from the invitation list and send them the minutes instead, so that meetings are small enough to decide.",
+          "correct": false,
+          "rationale": "The project manager does not own the board's membership, and uninviting departments unilaterally costs goodwill and advice the members may need. The candidate fixes the right problem with the wrong authority."
+        },
+        {
+          "id": "b",
+          "text": "Ask the chair to restate the terms of reference at the next meeting, separating the four voting members from attendees who advise or are kept informed.",
+          "correct": true,
+          "rationale": "The deferrals come from confusion about who is entitled to decide, not from a shortage of opinions. Having the chair restate decision rights fixes the cause while keeping the advice the other attendees bring."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to take the display-case decision herself between meetings, so that procurement is not held up any further by the board.",
+          "correct": false,
+          "rationale": "It solves this decision by moving it outside the body that holds it, and leaves the next decision just as stuck. The board's own decision rights are what needs repairing."
+        },
+        {
+          "id": "d",
+          "text": "Restructure the agenda so that decisions come first, each supported by a short paper setting out the options and a recommendation.",
+          "correct": true,
+          "rationale": "Decisions deferred for lack of time are a symptom of agendas that put open discussion first. Decision-led papers let the voting members act within the meeting they have."
+        },
+        {
+          "id": "e",
+          "text": "Extend board meetings from one hour to three, so that every attendee can be heard in full before any decision is put to the members.",
+          "correct": false,
+          "rationale": "More time treats the volume of discussion as the problem. Without clarity on who decides, a longer meeting produces a longer debate and the same deferral."
+        }
+      ],
+      "explanation": "When a governance body keeps deferring decisions, check whether its members know who holds the decision rights before adding time or changing the cast. Decision-makers, advisers and those to be informed have different roles in the room, and papers built around a recommendation let the decision-makers use the meeting for what only they can do.",
+      "mindset": "Before fixing a stuck board, find out whether it knows who is entitled to decide."
+    },
+    {
+      "id": "pmp-b1-123",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "stage-gates",
+        "gate-decisions",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "You are presenting the end-of-stage review for a new secondary school build to the project board. Match each situation to the gate decision the board should take. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "All exit criteria are met, the business case still holds, and the next stage plan sits within the board's tolerances."
+        },
+        {
+          "id": "s2",
+          "text": "All criteria are met except the fire engineer's sign-off of the escape strategy, due in two weeks; no work that depends on it starts until week six."
+        },
+        {
+          "id": "s3",
+          "text": "The planning condition that must be discharged before groundworks will not be decided for six weeks, and starting the stage commits £1.1m of contractor mobilisation that cannot be recovered."
+        }
+      ],
+      "options": [
+        {
+          "id": "go",
+          "text": "Authorise the next stage as planned",
+          "correct": true,
+          "match": "s1",
+          "rationale": "When the criteria are met and the case still holds, holding back adds delay without reducing any risk. A gate exists to say yes as clearly as it says no."
+        },
+        {
+          "id": "cond",
+          "text": "Authorise the next stage with a condition to be met by a stated date",
+          "correct": true,
+          "match": "s2",
+          "rationale": "The gap is real but bounded: it has a date, and nothing depends on it before that date. A conditional authorisation keeps momentum while recording exactly what must be closed and by when."
+        },
+        {
+          "id": "hold",
+          "text": "Defer the decision and keep the current stage open until a stated trigger",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Starting now would spend money that cannot be recovered on work that may not be permitted. Deferring until the planning answer arrives keeps the option open at little cost."
+        },
+        {
+          "id": "stop",
+          "text": "Stop the project and plan its controlled closure",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Closure is for a project whose justification has gone. In all three situations the school is still needed and the case still stands; the questions are only about timing and conditions."
+        }
+      ],
+      "explanation": "A stage gate has more than two outcomes, and the right one depends on whether a gap is bounded and whether proceeding would commit irrecoverable resources before it closes. A known gap with a date and no dependent work supports conditional approval; an unresolved external decision that later work depends on supports deferral; termination is reserved for a case that no longer holds.",
+      "mindset": "Match the gate decision to the shape of the gap, not to how comfortable a yes or a no would feel."
+    },
+    {
+      "id": "pmp-b1-124",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "delegated-authority",
+        "cumulative-limits",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "The governance plan for a stadium floodlight upgrade lets the project manager approve changes of up to 20,000 each, to a cumulative total of 60,000 per stage; anything beyond either limit goes to the project board. So far this stage the project manager has approved changes of 14,500, 19,000 and 12,000. A new change request for 16,000 has just arrived.",
+      "blanks": [
+        {
+          "id": "head",
+          "label": "Cumulative authority still available to the project manager this stage",
+          "numeric": true,
+          "expect": 14500,
+          "tol": 0,
+          "rationale": "Approved so far: 14,500 + 19,000 + 12,000 = 45,500. Against the cumulative limit of 60,000, that leaves 60,000 − 45,500 = 14,500."
+        },
+        {
+          "id": "over",
+          "label": "Amount by which the new request exceeds that remaining authority",
+          "numeric": true,
+          "expect": 1500,
+          "tol": 0,
+          "rationale": "16,000 − 14,500 = 1,500. The request is inside the 20,000 per-change limit but breaches the cumulative limit, and a breach of either limit takes the decision upwards."
+        },
+        {
+          "id": "who",
+          "label": "Who must decide the 16,000 request",
+          "accept": [
+            "the project board",
+            "project board",
+            "board",
+            "the board"
+          ],
+          "rationale": "Because the cumulative limit would be exceeded, the decision belongs to the project board. Splitting the request, or approving 14,500 now and the remainder later, would be evading the limit rather than working within it."
+        }
+      ],
+      "explanation": "Delegated authority often has more than one dimension, such as a per-item limit and a cumulative limit, and a decision must sit within every one of them to stay with the delegate. Cumulative limits exist so that many small approvals cannot add up to a large commitment the board never saw, which is why the running total is checked as well as the size of the individual item.",
+      "mindset": "Read a delegation limit as a running total, not only as a ceiling per decision."
+    },
+    {
+      "id": "pmp-b1-125",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "raci",
+        "accountability",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a project installing a new production line at a food factory, three delivered equipment modules have waited six weeks for formal acceptance, and the supplier is now withholding the next delivery. The commercial manager and the senior user each say they are waiting for the other. The diagram shows the project's RACI chart, one row per decision. Select the row that explains the stall.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "Project RACI chart with five decision rows",
+        "caption": "Select a row. Use Tab or the arrow keys to move between rows, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "layout",
+          "n": 1,
+          "label": "Approve factory layout drawings — A: senior user; R: design lead; C: health and safety; I: commercial manager",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "Layout approval has a single accountable person and plays no part in accepting delivered modules. The candidate picks the first row naming the senior user rather than the row that governs acceptance."
+        },
+        {
+          "id": "accept",
+          "n": 2,
+          "label": "Accept delivered equipment modules — A: senior user and commercial manager; R: site engineer; C: quality lead; I: project manager",
+          "x": 20,
+          "y": 95,
+          "w": 600,
+          "h": 60,
+          "correct": true,
+          "rationale": "Two people are accountable for the same decision, so each can reasonably wait for the other and neither is answerable for the delay. One accountable person per decision is the rule this row breaks, and it matches the stall exactly."
+        },
+        {
+          "id": "pay",
+          "n": 3,
+          "label": "Authorise supplier payments — A: commercial manager; R: finance officer; C: project manager; I: senior user",
+          "x": 20,
+          "y": 170,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "Payment follows acceptance, so this row sits downstream of the stall rather than causing it. The candidate is drawn by the supplier's commercial reaction and misses that payment cannot start until acceptance is given."
+        },
+        {
+          "id": "seq",
+          "n": 4,
+          "label": "Approve changes to the installation sequence — A: project manager; R: site engineer; C: supplier, senior user; I: project board",
+          "x": 20,
+          "y": 245,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "Sequence changes have a single accountable owner, and nothing in the situation suggests the sequence is in dispute. Choosing this row treats the withheld delivery as a scheduling problem."
+        },
+        {
+          "id": "release",
+          "n": 5,
+          "label": "Release the line for production — A: plant director; R: senior user; C: quality lead, health and safety; I: commercial manager",
+          "x": 20,
+          "y": 320,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "Release to production comes much later and has one accountable owner. Being responsible here does not make the senior user accountable for acceptance, which is the confusion behind this choice."
+        }
+      ],
+      "explanation": "A responsibility matrix fails most quietly when a decision has two accountable parties, because each can wait for the other in good faith and nobody is answerable for the delay. When work stalls at a decision point, trace the decision to its row and check that exactly one person is accountable before looking for an individual who has failed. Sharing responsibility for doing work is fine; sharing accountability for deciding is not.",
+      "mindset": "When a decision stalls, check that one person owns it before asking why they have not made it."
+    },
+    {
+      "id": "pmp-b1-126",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "definition-of-done",
+        "security-standards",
+        "archetype-route-to-owner"
+      ],
+      "stem": "A building society's security standard, owned by its chief information security officer, requires penetration testing before any change to payment features goes live, and your Scrum team has written this into its Definition of Done. The testing lab is booked for three weeks, but a marketing campaign built around the team's new instalment-payment feature launches in one week. The product owner proposes releasing on time and testing afterwards, saying she will accept the risk. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Release on the campaign date and book the first available test slot, recording the product owner's acceptance of the risk in the risk log.",
+          "correct": false,
+          "rationale": "Recording an acceptance does not make it valid. The product owner would be accepting a risk against a standard she does not own, which is the authority error this option represents."
+        },
+        {
+          "id": "b",
+          "text": "Take the request to the security officer, setting out the campaign impact, and ask her to decide on an expedited test or a formal exception.",
+          "correct": true,
+          "rationale": "The product owner owns the product's value, but this standard belongs to the security officer, and only she can vary it or find testing capacity. Putting the business cost in front of her gives the owner of the control a real decision to make."
+        },
+        {
+          "id": "c",
+          "text": "Tell the product owner that the Definition of Done cannot be changed mid-release, so the release has to wait for the testing lab's first available slot.",
+          "correct": false,
+          "rationale": "It treats the standard as having no route for exceptions and leaves a real business cost undiscussed. The person who owns the standard may well be able to expedite or vary it if she is asked."
+        },
+        {
+          "id": "d",
+          "text": "Have the team run automated security scanning against the feature this week and treat a clean result as meeting the Definition of Done.",
+          "correct": false,
+          "rationale": "Scanning is not penetration testing, and the team would be redefining the control to fit the date. Substituting a weaker check is a decision only the standard's owner could take."
+        }
+      ],
+      "explanation": "Agile teams own how they work and product owners own priorities, but organisational standards written into a Definition of Done remain owned by whoever set them. When a standard and a business deadline collide, the route is to the standard's owner with the cost made explicit, because only the owner can grant an exception, find capacity or accept the residual risk. Neither the team nor the product owner can waive a control by recording that they have chosen to.",
+      "mindset": "A control can only be waived by whoever owns it, however senior or confident the person asking."
+    },
+    {
+      "id": "pmp-b1-127",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "governance",
+        "delegated-authority",
+        "product-ownership",
+        "archetype-trade-off"
+      ],
+      "stem": "Your Scrum team at a travel start-up wants to integrate a flight-pricing API this sprint. The provider's terms require a three-year commitment at €70,000 a year, though it offers a 30-day free trial. The company's delegation policy says any commitment over €50,000 in total needs the finance director's signature. The product owner's authority covers the backlog and a €10,000 monthly tooling budget. The finance director's next approval round is in two weeks. What should happen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the product owner sign the agreement, since the monthly cost of about €5,800 sits comfortably within her €10,000 monthly tooling budget.",
+          "correct": false,
+          "rationale": "The policy is about the total commitment, which is €210,000, not the monthly cash outflow. Reading the threshold by its most convenient measure is the error, and the product owner would be committing the company beyond her authority."
+        },
+        {
+          "id": "b",
+          "text": "Build the integration against the free trial now, and submit the three-year commitment to the finance director so that it is decided before the trial ends.",
+          "correct": true,
+          "rationale": "The trial lets the team learn whether the API is worth having while the commitment goes to the person who can authorise it. Speed and authority are both preserved, and the finance director decides with evidence from the trial in hand."
+        },
+        {
+          "id": "c",
+          "text": "Take the integration out of this sprint and keep it in the backlog until the finance director has approved the full three-year commitment.",
+          "correct": false,
+          "rationale": "This respects the authority but throws away two weeks of learning that the trial offers at no cost or commitment. Waiting is unnecessary when an option exists that still leaves the decision with the finance director."
+        },
+        {
+          "id": "d",
+          "text": "Ask the provider for a month-to-month contract at a higher rate that fits within the product owner's monthly tooling budget, avoiding the three-year commitment.",
+          "correct": false,
+          "rationale": "Paying a premium to restructure a deal so that it falls under an approval threshold is designing around the control. The real decision, whether to depend on this provider, still has not been put to anyone with the authority to make it."
+        }
+      ],
+      "explanation": "Delegation limits apply to the full commitment a decision creates, not to the instalments it is paid in, and restructuring a deal to slip beneath a threshold defeats the purpose of having one. Agile teams can usually keep learning while an approval is sought, by using reversible, uncommitted options such as trials or spikes. The skill is to separate the work that needs authority from the work that does not, and to start both at once.",
+      "mindset": "Keep learning on what is reversible while the irreversible commitment goes to whoever can authorise it."
+    },
+    {
+      "id": "pmp-b1-128",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "financial-controls",
+        "agile-adoption",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "At a games studio, finance capitalises development costs on new titles, and the external auditors require records showing the time spent on capitalisable work. After a retrospective, your Scrum team has stopped filling in daily timesheets, calling them waste. The finance controller warns that without records about £600,000 of this year's costs would have to be expensed, cutting reported profit. The team is otherwise delivering well. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tell the team that timesheets are company policy that the audit depends on, and that they must resume completing them every day from the start of the next sprint.",
+          "correct": false,
+          "rationale": "It enforces the form of the control and discards the team's legitimate improvement. The candidate assumes the current method is the only way to satisfy the requirement without checking what the auditors actually need."
+        },
+        {
+          "id": "b",
+          "text": "Let the team stop timesheets and have the Scrum Master estimate each person's capitalisable allocation from the sprint boards at the end of each quarter.",
+          "correct": false,
+          "rationale": "Retrospective estimates by one person are unlikely to satisfy auditors and expose £600,000 of capitalisation to challenge. The candidate solves the team's problem by weakening the evidence the control depends on."
+        },
+        {
+          "id": "c",
+          "text": "Ask the finance director to exempt the team from the time-recording requirement as a pilot, given its strong delivery results over the last quarter.",
+          "correct": false,
+          "rationale": "The evidence is what the external auditors need, so an internal exemption does not remove the need for it. Treating good delivery as a reason to relax a financial control confuses performance with compliance."
+        },
+        {
+          "id": "d",
+          "text": "Work with the finance controller to agree a lighter record the auditors will accept, such as tagging capitalisable backlog items and logging each person's sprint allocation.",
+          "correct": true,
+          "rationale": "The constraint is the audit evidence, not the daily timesheet. Accepting the requirement and redesigning how it is met respects both the control and the team's improvement, and agreeing it with finance first keeps it valid."
+        }
+      ],
+      "explanation": "Agile teams are right to remove waste from their own process, but organisational controls exist to serve someone outside the team, and their purpose survives a change of method. The productive move is to find out what evidence the control actually requires and agree a lighter way of providing it with the control's owner, rather than enforcing the old form or dropping the evidence altogether.",
+      "mindset": "Keep the purpose of a control fixed and stay flexible about its form."
+    },
+    {
+      "id": "pmp-b1-129",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "governance",
+        "transparency",
+        "information-radiators",
+        "archetype-make-visible"
+      ],
+      "stem": "Your team's release burn-up for a broadband provider's self-install app is published on the company wiki, as the programme's governance requires for all product teams. This sprint's update shows the launch forecast slipping by a month. The sponsor asks you to take the chart down for two weeks, so that the chief financial officer does not see it before she can present a recovery plan. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Take the chart down for the two weeks she asks, and republish it with the recovery plan attached once she has had the chance to brief the chief financial officer.",
+          "correct": false,
+          "rationale": "It suspends a governance requirement to manage how news lands. The candidate treats the sponsor's discomfort as a reason to withhold information that others are entitled to see."
+        },
+        {
+          "id": "b",
+          "text": "Restrict the wiki page to the team and the sponsor until the recovery plan is ready, then reopen access to everyone as the governance requires.",
+          "correct": false,
+          "rationale": "Restricting access hides the information by a different route, and does so selectively. The governance requirement covers who can see the chart, not just whether it exists somewhere."
+        },
+        {
+          "id": "c",
+          "text": "Keep the chart published as governance requires, and help the sponsor prepare her recovery options quickly so she can brief the chief financial officer herself.",
+          "correct": true,
+          "rationale": "Transparency is the control here, and the slip is exactly the information it exists to share. Helping the sponsor get ahead of the news meets her real need without hiding anything from the people governance says should see it."
+        },
+        {
+          "id": "d",
+          "text": "Leave the chart published but hold the forecast line at last sprint's position until the sponsor's recovery plan has been agreed and announced.",
+          "correct": false,
+          "rationale": "Freezing the forecast makes the published chart misleading, which is worse than removing it. A chart that looks current but is not undermines trust in every other team's data as well."
+        }
+      ],
+      "explanation": "Visible progress data is a governance control on agile programmes: it replaces much of the formal reporting that predictive projects rely on, and it only works if bad news appears as promptly as good news. The legitimate response to an awkward forecast is to add context and options quickly, not to delay, filter or freeze the information.",
+      "mindset": "Add context to bad news rather than subtracting the news."
+    },
+    {
+      "id": "pmp-b1-130",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "governance",
+        "decision-rights",
+        "self-organisation",
+        "archetype-use-own-authority"
+      ],
+      "stem": "A garden-centre chain is moving its e-commerce team to Scrum. Company policy says hiring sits with line managers, any purchase over £5,000 goes through procurement, and production releases follow the change calendar owned by IT operations. The team asks which decisions it can now make for itself without asking anyone. Which three decisions can the team own?",
+      "options": [
+        {
+          "id": "a",
+          "text": "How to break the selected backlog items into tasks, and who on the team picks up each one during the sprint.",
+          "correct": true,
+          "rationale": "How work is planned and shared within a sprint is the team's own decision in Scrum, and no company policy reaches it. This is self-organisation exactly where it is meant to apply."
+        },
+        {
+          "id": "b",
+          "text": "Bringing in a contract developer for six weeks to cover a skills gap the team identified at its last retrospective.",
+          "correct": false,
+          "rationale": "Hiring, including contractors, sits with line managers under the stated policy. Self-organisation covers how the team works, not who it employs."
+        },
+        {
+          "id": "c",
+          "text": "The team's working agreements, such as core hours for pairing and how quickly code reviews are turned round.",
+          "correct": true,
+          "rationale": "Working agreements govern how the team itself operates and affect nobody outside it, so the team can set and change them without approval."
+        },
+        {
+          "id": "d",
+          "text": "Buying a £7,000 annual licence for a design tool the team prefers, paid from the team's unspent training budget.",
+          "correct": false,
+          "rationale": "The purchase is over the £5,000 procurement threshold whichever budget it comes from. The candidate assumes that a budget held by the team carries purchasing authority."
+        },
+        {
+          "id": "e",
+          "text": "Releasing an urgent improvement to production on a Friday afternoon, outside the slots in the change calendar.",
+          "correct": false,
+          "rationale": "The change calendar is owned by IT operations, and an urgent case for an exception goes to that owner. A self-organising team still works within the organisation's release governance."
+        },
+        {
+          "id": "f",
+          "text": "Which branching strategy and automated testing approach to use, working within the company's approved toolset.",
+          "correct": true,
+          "rationale": "Technical practice inside an approved toolset is the team's call. The policy constrains which tools are approved, not how the team chooses to use them."
+        }
+      ],
+      "explanation": "Self-organisation gives a team authority over how it does its work, within the boundaries the organisation has set for everything else. A useful test for any decision is whether a stated policy reaches it: if none does and the effects stay inside the team, the team owns it; if hiring, spending or shared operational processes are involved, the decision belongs to whoever the policy names.",
+      "mindset": "Self-organisation is real authority inside clear edges, so learn where the edges are."
+    },
+    {
+      "id": "pmp-b1-131",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "product-ownership",
+        "scaling",
+        "archetype-route-to-owner"
+      ],
+      "stem": "A car-sharing company's app is built by three Scrum teams, each with its own product owner ordering a separate backlog. An upgrade to the shared booking database, which all three teams depend on, has sat near the bottom of every backlog for four sprints because each product owner ranks their own features higher. Outages linked to the database are rising. Nobody holds priorities across the whole product. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the three product owners to agree a rotation in which each team takes a turn at shared platform work, beginning with the database upgrade next sprint.",
+          "correct": false,
+          "rationale": "A rotation shares the burden but still leaves nobody deciding what matters most for the product. The next cross-cutting item will stall in exactly the same way, because turn-taking is not prioritisation."
+        },
+        {
+          "id": "b",
+          "text": "Ask one team's developers to carry out the upgrade as technical work alongside their sprint, keeping it outside the product backlog altogether.",
+          "correct": false,
+          "rationale": "Work done outside the backlog is hidden from the product owners and takes capacity without anyone deciding to spend it. The candidate fixes this item by weakening the governance of every sprint."
+        },
+        {
+          "id": "c",
+          "text": "Raise the gap with the sponsor and ask her to give one person authority to order work across all three backlogs, starting with the database upgrade.",
+          "correct": true,
+          "rationale": "The fault is structural: three local orderings cannot produce a product-level priority, and goodwill does not fix a decision that nobody holds. The sponsor can create that authority, which is why the gap goes to her."
+        },
+        {
+          "id": "d",
+          "text": "Log the outages as a major incident with IT operations, so that the database upgrade is forced to the top of all three backlogs at once.",
+          "correct": false,
+          "rationale": "It uses an operational process to force a product decision, which may work once but leaves the ownership gap untouched. It also misuses incident management for planned improvement work."
+        }
+      ],
+      "explanation": "When several teams build one product, someone must hold authority to order work across them, or shared and cross-cutting items will lose every local contest. A recurring pattern of shared work being deferred points to a missing decision right rather than poor judgement by any one product owner, and a missing decision right is fixed by whoever can grant it.",
+      "mindset": "If shared work keeps losing, look for the decision nobody is entitled to make."
+    },
+    {
+      "id": "pmp-b1-132",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "hybrid",
+      "difficulty": 1,
+      "tags": [
+        "governance",
+        "governance-plan",
+        "mobilisation",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You have just been appointed to lead a hybrid programme building a visitor-booking system for a national park authority, using two agile software teams and a fixed-price contract for ticket kiosks. The newly appointed sponsor asks who approves changes, when issues should reach her, and how the board will be kept informed. Nothing has yet been written down. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Draft the programme's governance arrangements, covering decision limits, escalation routes and reporting, and put them to the sponsor for approval.",
+          "correct": true,
+          "rationale": "Setting up governance is the project manager's to propose and the sponsor's to approve. Answering her questions in a written, approved form gives everyone the same rules before the first decision is needed."
+        },
+        {
+          "id": "b",
+          "text": "Tell the sponsor that issues will reach her as they arise, and set formal rules later once a pattern of decisions has become clear.",
+          "correct": false,
+          "rationale": "Making the rules up as issues arrive means the first contentious decision is taken with no agreed authority. Governance is cheapest to agree before anyone has a stake in the answer."
+        },
+        {
+          "id": "c",
+          "text": "Adopt the governance plan from the authority's last IT project unchanged, since it has already been approved once, so that delivery can begin without further delay.",
+          "correct": false,
+          "rationale": "An earlier plan can be a useful starting point, but adopting it unchanged ignores this programme's mix of agile teams and a fixed-price contract, and skips the sponsor's approval."
+        },
+        {
+          "id": "d",
+          "text": "Ask the two agile teams to agree between themselves how changes and issues will be approved, since they will raise most of them.",
+          "correct": false,
+          "rationale": "The teams can shape how they work, but limits on changes to a fixed-price contract and escalation to the sponsor are not theirs to set. The candidate delegates a sponsor-level decision to the delivery level."
+        }
+      ],
+      "explanation": "Governance arrangements should be defined and approved before delivery generates the decisions that need them, and on a hybrid programme they must cover both the adaptive work and the contractual parts. The project manager proposes, the sponsor or board approves, and an earlier template is a starting point to tailor rather than a substitute for agreement.",
+      "mindset": "Agree how decisions will be made before the first one arrives."
+    },
+    {
+      "id": "pmp-b1-133",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "governance",
+        "delegated-authority",
+        "sponsorship",
+        "archetype-route-to-owner"
+      ],
+      "stem": "On a hybrid programme replacing a national charity's donor database, the governance plan sets your approval limit at £10,000 and the sponsor's at £100,000, and says any wider delegation must be recorded in a delegation schedule approved by the board. You need a decision on extending the data-migration supplier's contract by three months at £45,000. When you send the sponsor your analysis, she replies: 'You know this better than I do. Just decide, I trust you.' What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Make the decision on the strength of her email, which gives you written authority from the sponsor, and record it in the decision log.",
+          "correct": false,
+          "rationale": "An unlimited 'just decide' is not a delegation the governance plan recognises, since it requires a recorded entry in the board-approved schedule. The candidate treats goodwill in writing as authority in writing."
+        },
+        {
+          "id": "b",
+          "text": "Raise with the board chair that the sponsor is not fulfilling her role as decision-maker, so that the extension can be considered and approved by the full board instead.",
+          "correct": false,
+          "rationale": "The sponsor has expressed confidence, not neglect, and going over her head damages a working relationship to solve a problem a short note can solve. It also moves a sponsor-level decision to the board unnecessarily."
+        },
+        {
+          "id": "c",
+          "text": "Hold the decision until the next board meeting in five weeks, when the extension can be approved formally with all the members present.",
+          "correct": false,
+          "rationale": "Waiting five weeks puts the migration supplier's continuity at risk when the sponsor can approve the extension now. It treats the board as the only route when the authority already sits with an available individual."
+        },
+        {
+          "id": "d",
+          "text": "Send her a one-page decision note with your recommendation for her explicit approval, and offer to draft a recorded delegation if she wants a higher limit.",
+          "correct": true,
+          "rationale": "It makes approval as easy as possible for a sponsor who trusts you, while keeping the decision with the person who holds the authority. If she wants to delegate more, the governance plan already provides a recorded way to do it."
+        }
+      ],
+      "explanation": "Trust from a sponsor does not change who holds an authority; only a delegation made the way the governance arrangements require does that. When a decision-maker is happy to defer to you, the right response is to make their decision effortless and, if appropriate, to formalise a defined delegation, rather than act on an informal blessing with no limits attached.",
+      "mindset": "Make it easy for the owner to decide, rather than deciding for them because they let you."
+    },
+    {
+      "id": "pmp-b1-134",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "governance",
+        "decision-deadlock",
+        "programme-board",
+        "archetype-make-visible"
+      ],
+      "stem": "On a hybrid programme at a regional airport, the board has failed at three consecutive meetings to choose between two baggage-handling systems, splitting three votes to three each time. The terms of reference give the sponsor, as chair, a casting vote, but she has held back in the hope of consensus. Two software teams are now filling sprints with low-value work, and the preferred supplier's price expires in five weeks. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Commission an independent study of a third option, so that the board has fresh evidence that may break the three-to-three split.",
+          "correct": false,
+          "rationale": "A third study adds time and a third contender for a body that cannot choose between two. Fresh evidence does not resolve a split that is about preference rather than missing facts."
+        },
+        {
+          "id": "b",
+          "text": "Put the monthly cost of delay, including the teams' low-value work and the price expiry, in front of the board alongside the decision paper.",
+          "correct": true,
+          "rationale": "Boards defer when delay looks free. Showing the cost of each month of indecision makes waiting a choice with a price, which is often what moves a split body to decide."
+        },
+        {
+          "id": "c",
+          "text": "Have the software teams build interfaces for both systems, so that the delay costs less whichever option the board finally chooses.",
+          "correct": false,
+          "rationale": "Building for both spends delivery capacity hedging a decision the governance can already make, and it reduces the pressure on the board to make it. It is a costly way of avoiding the real issue."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the choice to the airport's executive committee, since the board has shown three times that it cannot reach a decision.",
+          "correct": false,
+          "rationale": "The board has a decision rule it has not yet used, so it has not reached the limit of its authority. Escalating past a level that can still decide undermines that level and spends executive time."
+        },
+        {
+          "id": "e",
+          "text": "Before the next meeting, ask the chair whether she will use the casting vote the terms of reference give her if the board splits again.",
+          "correct": true,
+          "rationale": "The terms of reference already contain the mechanism for breaking a tie. Raising it privately with the chair respects her position while making clear that the governance has an answer she can use."
+        }
+      ],
+      "explanation": "A deadlocked governance body usually needs two things: a clear view of what indecision is costing, and a reminder of the decision rule its own terms provide. Escalation and further analysis are for when the body has exhausted its authority or genuinely lacks information, not for when it has the means to decide and is reluctant to use them.",
+      "mindset": "Make the cost of not deciding visible, and point to the rule that lets someone decide."
+    },
+    {
+      "id": "pmp-b1-135",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-1",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "governance",
+        "board-roles",
+        "accountability",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Both judgements arise on a hybrid programme replacing an ambulance service's call-triage system. Complete each sentence with the role whose view the board should rely on. Two choices are not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "At the stage review, the board must judge whether the new triage screens will work for call handlers during a busy night shift. The board should rely on the view of"
+        },
+        {
+          "id": "c2",
+          "text": "The board must judge whether the supplier's plan for the next three increments is technically achievable with the engineers the supplier has committed. The board should rely on the view of"
+        }
+      ],
+      "options": [
+        {
+          "id": "su",
+          "text": "the senior user, who represents the people who will use the outputs",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Fitness for use is judged by those who will live with the result. The senior user speaks for the call handlers and is accountable for confirming that what is delivered meets their needs."
+        },
+        {
+          "id": "ss",
+          "text": "the senior supplier, who represents those providing the expertise and resources",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Technical feasibility and the adequacy of committed resources are the senior supplier's to vouch for, because that role is accountable for what the suppliers can deliver."
+        },
+        {
+          "id": "spon",
+          "text": "the sponsor, who owns the business case and overall value for money",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The sponsor decides whether the investment is still worth making, drawing on both views, but is not the source of either judgement. The candidate picks the most senior member rather than the one accountable for the specific question."
+        },
+        {
+          "id": "pa",
+          "text": "project assurance, which checks independently on the board's behalf",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Assurance checks that the board's information is sound; it does not replace the judgement of the member accountable for the area. The candidate confuses verifying a view with providing it."
+        }
+      ],
+      "explanation": "A project board is designed so that business, user and supplier interests are each represented by a member accountable for them. When the board needs a judgement, it should come from the member whose interest the question belongs to, with assurance verifying it independently and the sponsor weighing the views together. Asking the most senior or the most independent person instead loses the accountability the structure was built to provide.",
+      "mindset": "Route each judgement to the member accountable for that interest, not to whoever is most senior."
+    }
+  ]
+}

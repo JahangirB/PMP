@@ -1,0 +1,1961 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 2 — Scope",
+  "questions": [
+    {
+      "id": "pmp-pr2-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "scope-statement",
+        "exclusions",
+        "sign-off",
+        "archetype-make-visible"
+      ],
+      "stem": "You are drafting the project scope statement for fitting out a temporary exhibition at a regional museum. Over coffee, the curator says she is looking forward to hearing the audio guide. No audio guide was discussed in any requirements session, and your draft describes only the build, the lighting and the display cases. Sign-off is next week. What should you do before sign-off?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Leave the draft as it stands, because the audio guide was not raised in any of the requirements sessions and so cannot be part of the agreed scope.",
+          "correct": false,
+          "rationale": "This treats silence in the sessions as agreement. The curator plainly believes otherwise, and signing a document both parties read differently only postpones the dispute to opening week."
+        },
+        {
+          "id": "b",
+          "text": "Add an audio guide to the scope statement now so that the curator is not disappointed when the exhibition opens to visitors.",
+          "correct": false,
+          "rationale": "This commits the project to unestimated, unrequested work on the strength of a passing comment. Expanding scope to avoid an awkward conversation is gold plating, not scope definition."
+        },
+        {
+          "id": "c",
+          "text": "Confirm with the curator whether she expects an audio guide, and record it in the scope statement as either included or explicitly excluded.",
+          "correct": true,
+          "rationale": "A remark like this is the cheapest moment to surface a hidden expectation. Writing the answer into the scope statement, either way, means sign-off records a shared understanding rather than two different ones."
+        },
+        {
+          "id": "d",
+          "text": "Note the remark in the issue log and deal with the audio guide through change control if the curator raises it after sign-off.",
+          "correct": false,
+          "rationale": "Logging it feels diligent, but it deliberately lets a known ambiguity through sign-off. Change control is for changes to an agreed scope, and here the scope has not yet been agreed."
+        }
+      ],
+      "explanation": "A scope statement earns its value at the boundary: exclusions are as much a part of the agreement as inclusions. Any hint that a stakeholder expects something the draft is silent on should be resolved before sign-off and written down explicitly, because a document that is silent on a point will be read by each party in their own favour.",
+      "mindset": "Treat a stakeholder's assumption as a scope question to settle in writing, not a remark to let pass."
+    },
+    {
+      "id": "pmp-pr2-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "requirements",
+        "conflicting-requirements",
+        "decision-authority",
+        "archetype-route-to-owner"
+      ],
+      "stem": "On an electronic prescribing rollout at a district hospital, the chief pharmacist requires a barcode scan for every dose given. The head of nursing wants scanning optional during resuscitation, where she says it would delay care. They report to different directors, and a joint meeting you chaired last week ended with both restating their positions. The requirements document is due for sign-off in three weeks. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record the pharmacist's version in the requirements document, since mandatory scanning is the safer default, and log the nursing concern as a risk.",
+          "correct": false,
+          "rationale": "The candidate who picks this is deciding a clinical-safety policy on the project's behalf. Choosing the more cautious-sounding side is still choosing, and the project manager has no authority to do it."
+        },
+        {
+          "id": "b",
+          "text": "Specify scanning as a configurable setting that each ward manager can switch on or off locally, which meets both leads' stated needs without forcing a ruling.",
+          "correct": false,
+          "rationale": "This adds build and validation work to avoid a decision, and it hands the same policy question to every ward manager. Expanding scope to dodge a conflict buys a bigger product and the same argument."
+        },
+        {
+          "id": "c",
+          "text": "Document both positions with their clinical, cost and schedule impacts, and take the conflict to the sponsor, who owns the decision, before sign-off.",
+          "correct": true,
+          "rationale": "Facilitation has been tried and the disagreement is about clinical policy across two directorates. The project manager's job is to frame the decision well and place it with the person who has authority over both."
+        },
+        {
+          "id": "d",
+          "text": "Run a second facilitated workshop with both leads and their teams, and ask them to reach a joint position before the sign-off date.",
+          "correct": false,
+          "rationale": "Facilitation is the right first move, but it has already failed once on a question neither lead can settle for the other. Repeating it spends a third of the time left without changing who can decide."
+        }
+      ],
+      "explanation": "When stakeholders hold incompatible requirements and direct negotiation has not resolved them, the project manager's role shifts from mediator to analyst: lay out each option's impact on the objectives and take it to whoever has authority across both parties. Choosing a side, or building a product that avoids choosing, both substitute the project manager's judgement for a decision that belongs elsewhere.",
+      "mindset": "Frame a requirements conflict sharply, then put it in front of the person entitled to settle it."
+    },
+    {
+      "id": "pmp-pr2-103",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "wbs",
+        "rolling-wave",
+        "planning-package",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your organisation's PMO requires every phase of a project to be decomposed to work packages before the scope baseline is approved. On an onshore wind farm, phase 3 is the turbine foundations, which cannot be designed until the ground investigation in phase 1 reports in month seven; the foundations could be piled or gravity-based. The PMO lead tells you to detail both designs as full work packages to satisfy the rule. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Decompose both foundation designs to work packages as instructed, and baseline the more expensive design so that the budget stays on the conservative side.",
+          "correct": false,
+          "rationale": "This satisfies the letter of the rule with detail nobody can stand behind. Baselining the dearer design inflates the budget with work that may never exist and makes later variance figures meaningless."
+        },
+        {
+          "id": "b",
+          "text": "Decompose phase 3 using the gravity-based design, which the engineers think more likely, and raise a change request if the survey points to piling.",
+          "correct": false,
+          "rationale": "It looks decisive, but it baselines a guess as if it were a plan and builds a probable change request into the baseline from day one. Precision that the information cannot support is not control."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor for a formal exception that removes phase 3 from the scope baseline entirely until the ground investigation has reported in month seven.",
+          "correct": false,
+          "rationale": "Taking the phase out of the baseline leaves its budget and scope uncontrolled for seven months. The candidate is right that the rule does not fit, but wrong to solve it by baselining less than the whole project."
+        },
+        {
+          "id": "d",
+          "text": "Propose to the PMO that phase 3 enter the baseline as planning packages under a control account, with a dated trigger to decompose once the survey reports.",
+          "correct": true,
+          "rationale": "Rolling-wave planning keeps the whole scope inside the baseline at the level of detail the information supports, and the dated trigger shows the PMO when the detail will arrive. It meets the rule's purpose rather than its wording."
+        }
+      ],
+      "explanation": "Decomposition should go as deep as current knowledge allows and no deeper. Where future work depends on information not yet available, planning packages under a control account keep that scope and budget inside the baseline while deferring the detail to a defined point. A governance rule demanding uniform depth is worth challenging with its own purpose: control is served by honest granularity, not by invented detail.",
+      "mindset": "Decompose to the depth the facts support, and say when the rest will be detailed."
+    },
+    {
+      "id": "pmp-pr2-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "wbs-dictionary",
+        "contractor-boundaries",
+        "variation-claims",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a water treatment upgrade, two contractors each claim that installing the cable trays between the new dosing building and the existing control room is extra work. The electrical contractor's work package covers all cabling to the control room; the mechanical contractor's covers all supports and containment in the dosing building. Both have submitted variations for the trays, and commissioning is six weeks away. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Approve the cheaper of the two variations so that the trays are installed promptly and the commissioning date is not put at risk.",
+          "correct": false,
+          "rationale": "Paying for the work before establishing whether it was already bought may mean paying for it twice. Six weeks is enough time to check, so the schedule pressure does not justify skipping the question."
+        },
+        {
+          "id": "b",
+          "text": "Instruct the electrical contractor to install the trays, since containment exists only to carry the cabling already in their package.",
+          "correct": false,
+          "rationale": "The reasoning may even prove correct, but it reaches a contractual conclusion from engineering logic without checking the documents. If the trays sit in the mechanical package, this instruction creates a valid claim."
+        },
+        {
+          "id": "c",
+          "text": "Raise a change request to add the trays as a new work package, and have the change control board decide which of the two contractors should install them.",
+          "correct": false,
+          "rationale": "This assumes the trays are a gap in scope. If either package already covers them, the change adds cost for work that was bought, and the board is asked to decide something the documents may already settle."
+        },
+        {
+          "id": "d",
+          "text": "Compare both WBS dictionary entries and both contracts' statements of work to establish whether the trays were assigned to either package.",
+          "correct": true,
+          "rationale": "Whether this is extra work depends entirely on what the two packages already include. The dictionary entries and statements of work are where that was defined, so reading them turns two competing claims into a question of fact."
+        }
+      ],
+      "explanation": "A boundary dispute between work packages is first a question about what was defined, and only then a question about who should pay. The detailed scope of each package, and the contracts behind them, either assign the work or reveal a genuine gap; acting before reading them risks paying twice or creating a claim. Establish whether scope is missing before treating it as a change.",
+      "mindset": "Read what was agreed before deciding whether anything needs to change."
+    },
+    {
+      "id": "pmp-pr2-105",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "acceptance-criteria",
+        "outcomes",
+        "product-owner",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A product owner at a publishing company writes acceptance criteria for a story about keeping the online catalogue in step with the warehouse: a nightly batch job shall copy stock levels to the catalogue. The developers say a change-event feed would be simpler and keep stock current within minutes. The product owner admits she wrote nightly batch only because the old system worked that way. What should the agile project lead encourage?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Build the nightly batch job exactly as written, since the product owner is accountable for the acceptance criteria on every story.",
+          "correct": false,
+          "rationale": "The candidate conflates the product owner's ownership of what is needed with how it is built. Following a criterion she has just said was accidental produces a worse product to honour a wording slip."
+        },
+        {
+          "id": "b",
+          "text": "Have the developers build the event feed and leave the criteria unchanged, because the feed already goes beyond what they ask for.",
+          "correct": false,
+          "rationale": "The team would deliver something that fails its own acceptance criteria as written. Leaving a known mismatch in place makes the record of what was agreed wrong, and the next reviewer will test against it."
+        },
+        {
+          "id": "c",
+          "text": "Refer the design choice to the architecture review board so that the integration decision is taken independently of both the team and the product owner.",
+          "correct": false,
+          "rationale": "This escalates a question the team and product owner have already nearly resolved between them. An architecture board is for decisions with wider reach, not for correcting one story's wording."
+        },
+        {
+          "id": "d",
+          "text": "Rewrite the criteria to state the outcome needed, such as how current the stock figures must be, and let the developers choose the design.",
+          "correct": true,
+          "rationale": "The real requirement is how fresh the catalogue's stock data must be. Stating that as the criterion keeps the product owner in charge of the outcome and leaves the design to the people building it."
+        }
+      ],
+      "explanation": "Acceptance criteria describe the outcome that makes an item valuable, not the solution that delivers it. When criteria encode a design, usually inherited from an old system, they quietly constrain the team without anyone having decided to. The fix is to restate the criterion as the measurable need, which keeps the 'what' with the product owner and the 'how' with the developers.",
+      "mindset": "Write scope as the outcome needed, and question any criterion that is really a design."
+    },
+    {
+      "id": "pmp-pr2-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "sprint-review",
+        "feedback",
+        "defects-vs-changes",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "At a sprint review for a council's planning-application portal, the head of planning says the new upload-documents feature is not what her officers need: they want files grouped by document type, not listed in upload order. The story met every acceptance criterion and the product owner accepted it last week. A developer proposes logging a defect so it is fixed first thing next sprint. What should the project manager encourage?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the story as done and have the product owner capture grouping by type as a new backlog item, ordered against the other work.",
+          "correct": true,
+          "rationale": "The increment met its agreed criteria, so it is done; what the review produced is a new requirement. Putting it in the backlog lets the product owner weigh it against everything else rather than letting it jump the queue."
+        },
+        {
+          "id": "b",
+          "text": "Log the defect as the developer proposes, so that the feedback is tracked formally and the grouping is fixed early in the next sprint.",
+          "correct": false,
+          "rationale": "Calling it a defect lets new scope skip the product owner's ordering and misstates the quality of work that met its criteria. The candidate is rewarding quick fixing at the cost of an honest record."
+        },
+        {
+          "id": "c",
+          "text": "Reopen the accepted story and extend its acceptance criteria to cover grouping by type, then carry it into the next sprint to finish.",
+          "correct": false,
+          "rationale": "Reopening done work rewrites what was agreed after the fact and blurs what the team actually delivered. It treats a new requirement as if it had always been part of the old one."
+        },
+        {
+          "id": "d",
+          "text": "Invite the head of planning to attend refinement so that future acceptance criteria reflect what her officers actually need from the portal.",
+          "correct": false,
+          "rationale": "Good practice for the future, but it leaves today's request with no home. The candidate is solving the cause of the gap while ignoring the specific piece of scope the review has just surfaced."
+        }
+      ],
+      "explanation": "A defect is a failure to meet agreed criteria; feedback that the agreed criteria were the wrong ones is new scope. Sprint reviews exist to produce exactly that kind of learning, and it enters the backlog to be ordered like any other work. Labelling it a defect or reopening accepted work hides a scope change inside a quality record and lets it bypass prioritisation.",
+      "mindset": "Treat review feedback as learning to be ordered, not as a fault to be fixed."
+    },
+    {
+      "id": "pmp-pr2-107",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "mvp",
+        "release-scope",
+        "fixed-date",
+        "archetype-trade-off"
+      ],
+      "stem": "A ferry operator's new booking app must go live for the summer timetable in nine weeks; the season fixes the date. At the team's stable velocity, the first release on the story map needs eleven weeks. Unstarted items include automated refunds, about two weeks of work, for roughly 2% of bookings that the call centre already refunds by hand, and multi-leg journeys, also about two weeks, which carry 18% of revenue. What should the project manager recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Launch with refunds handled by the call centre's existing manual process, and deliver automated refunds in the first release after go-live.",
+          "correct": true,
+          "rationale": "This cuts two weeks from the release while touching about 2% of bookings, which already have a working manual route. It is the cut that loses least value per week saved."
+        },
+        {
+          "id": "b",
+          "text": "Launch without multi-leg journeys, asking customers to book each crossing separately, and add the multi-leg feature in the first release after go-live.",
+          "correct": false,
+          "rationale": "It removes the right amount of work, but from the wrong place. Pushing friction onto journeys that carry 18% of revenue costs far more value than the alternative cut of equal size."
+        },
+        {
+          "id": "c",
+          "text": "Bring two contract developers into the team now to raise velocity enough to absorb the extra two weeks of work before the fixed date.",
+          "correct": false,
+          "rationale": "Adding people nine weeks out costs the team onboarding time before it adds output, and the gain is uncertain. The candidate is protecting scope by betting on capacity rather than making the scope choice the date requires."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor to move go-live two weeks later so that the release ships with its full scope and no workarounds for customers.",
+          "correct": false,
+          "rationale": "The stem says the season fixes the date, so moving it gives up part of the season to protect features. When time is the fixed constraint, scope is the variable, and the candidate has reversed them."
+        }
+      ],
+      "explanation": "When the date is fixed and the work does not fit, the release scope is the variable, and the choice of what to defer should minimise lost value per unit of effort saved. Features that already have a workable manual fallback, or touch a small share of use, are usually the cheapest to defer. Adding people late, or moving a date that the business has fixed, avoids the scope decision rather than making it.",
+      "mindset": "When time is fixed, cut where the value lost per week saved is lowest."
+    },
+    {
+      "id": "pmp-pr2-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "product-owner",
+        "backlog-ownership",
+        "single-voice",
+        "archetype-route-to-owner"
+      ],
+      "stem": "The product owner for your studio's mobile puzzle game is on leave for three weeks and named no stand-in. Since she left, the art director, the monetisation lead and the live-operations manager have each told developers which items to pull next, and the team now has work started for all three. Sprint planning is tomorrow. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Facilitate a session tomorrow in which the three leads agree among themselves a single order for the backlog for the next three weeks.",
+          "correct": false,
+          "rationale": "A negotiated order among three interested parties has no accountable owner, and the next disagreement restarts the contest. The candidate fixes the symptom while leaving nobody entitled to decide."
+        },
+        {
+          "id": "b",
+          "text": "Ask the product owner's manager to appoint an interim product owner with authority to order the backlog before tomorrow's planning.",
+          "correct": true,
+          "rationale": "The problem is an empty decision seat, and the person who assigns product ownership can fill it. One accountable interim owner restores a single order and someone to answer the team's scope questions."
+        },
+        {
+          "id": "c",
+          "text": "Order the backlog yourself from the product roadmap so that the team has one clear set of priorities until the product owner returns.",
+          "correct": false,
+          "rationale": "It produces a single voice, but the wrong one. Ordering the backlog is a product decision; doing it yourself quietly takes on an accountability your role was not given."
+        },
+        {
+          "id": "d",
+          "text": "Have the team pull only the items the product owner had ordered at the top of the backlog before she went on leave three weeks ago.",
+          "correct": false,
+          "rationale": "This is defensible for a day, but it freezes priorities for three weeks of new information and leaves nobody to clarify or accept work. The candidate treats a stale order as if it were an owner."
+        }
+      ],
+      "explanation": "Agile scope depends on one accountable person ordering the backlog; when that seat is empty, the backlog becomes whoever spoke to the developers last. The remedy is to fill the role through whoever assigns it, not to share it among stakeholders or absorb it into a facilitating role. A gap in decision authority is closed by the owner of that authority, not by the loudest available substitute.",
+      "mindset": "When a decision seat is empty, get it filled by whoever assigns it rather than sitting in it."
+    },
+    {
+      "id": "pmp-pr2-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "scope-baseline",
+        "validated-systems",
+        "backlog",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A pharmaceutical laboratory is replacing its sample-tracking system. Its user requirements are baselined under formal change control, while the screens are built by a Scrum team from a backlog the product owner orders. In refinement, the lab manager asks for a story to show audit-trail timestamps in local time, because analysts misread the UTC entries. Baselined requirement UR-14 reads: audit-trail screens shall display all timestamps in UTC. The team sizes the story at two points. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the product owner order the story as normal, since screen behaviour sits on the agile side of the hybrid split and the change is small.",
+          "correct": false,
+          "rationale": "The candidate decides the control path by the size of the work and the track that builds it. Neither matters when the story contradicts the wording of a baselined requirement."
+        },
+        {
+          "id": "b",
+          "text": "Have the team build the story behind a feature toggle now, and seek approval of the UR-14 change before the toggle is switched on.",
+          "correct": false,
+          "rationale": "Toggles separate deployment from release, but in a validated system the code itself changes what has to be qualified. Building first also commits effort to a change that may be refused."
+        },
+        {
+          "id": "c",
+          "text": "Raise a change request against UR-14 through the validated-system change process, and keep the story out of sprints until it is decided.",
+          "correct": true,
+          "rationale": "The story would make the system do the opposite of what UR-14 says, so it changes the baseline regardless of its size. Holding it until the change is decided keeps the backlog from overriding the controlled requirement."
+        },
+        {
+          "id": "d",
+          "text": "Ask the quality assurance lead to judge whether the change is cosmetic, and send it to change control only if she rules validation is affected.",
+          "correct": false,
+          "rationale": "Checking with quality feels prudent, but the routing question is already answered by the requirement's text. The candidate asks whether validation is affected when the issue is that baselined scope is being changed."
+        }
+      ],
+      "explanation": "In a hybrid arrangement the control path follows what an item changes, not which team builds it or how large it is. Anything that alters the wording or effect of a baselined requirement goes through that baseline's change control before it is built, however small. Work that sits wholly inside the adaptive space can be ordered freely; the test is the content of the baseline, not the convenience of the backlog.",
+      "mindset": "Route a change by what it alters, not by how small it is or who builds it."
+    },
+    {
+      "id": "pmp-pr2-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "fixed-price",
+        "scope-swap",
+        "contract-change",
+        "archetype-trade-off"
+      ],
+      "stem": "A university has a fixed-price contract for a timetabling system delivered in two-week iterations. The contract lets the registrar swap any unstarted feature for new work of equal estimated size. Midway through, she asks for an exam-clash report, estimated at eight days, to be added without removing anything, saying it is small. The remaining backlog exactly fills the contract budget. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the report and absorb the eight days in the team's contingency, given the goodwill it will buy with the registrar for later phases.",
+          "correct": false,
+          "rationale": "Contingency exists for the risks in the agreed scope, not for new features. Spending it on a request quietly converts a fixed price into an open one and leaves the project exposed when a real risk arrives."
+        },
+        {
+          "id": "b",
+          "text": "Offer the registrar a choice: swap out unstarted features totalling about eight days, or raise a contract change to fund the extra work.",
+          "correct": true,
+          "rationale": "The contract already provides a mechanism for this, and the alternative is a priced change. Presenting both lets the registrar make the value trade-off, which is hers to make."
+        },
+        {
+          "id": "c",
+          "text": "Decline the request until the contract is renewed, explaining that adding any work during the current term would breach the agreed fixed price.",
+          "correct": false,
+          "rationale": "This ignores the swap clause and the change route, both of which allow the request to be accommodated now. Refusing outright treats a fixed price as fixed scope, which this contract deliberately is not."
+        },
+        {
+          "id": "d",
+          "text": "Place the report at the bottom of the backlog so that it is built if the team finishes the contracted features ahead of the estimate.",
+          "correct": false,
+          "rationale": "This sets an expectation the budget cannot support and leaves the registrar believing the report is coming. Parking scope on hope avoids the conversation the request actually needs."
+        }
+      ],
+      "explanation": "In a fixed-price contract with flexible scope, the budget is the constraint and the scope inside it is tradable. New work enters either by displacing work of equal size or by a priced change to the contract. Absorbing it informally, or parking it on hope, both erode the agreement without anyone having chosen to change it.",
+      "mindset": "When the budget is fixed, every addition is paid for by a subtraction or a new agreement."
+    },
+    {
+      "id": "pmp-pr2-111",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "requirements-elicitation",
+        "subject-matter-expert",
+        "timing",
+        "archetype-act-now"
+      ],
+      "stem": "You are managing the replacement of a pension administrator's benefits calculation engine. The plan schedules detailed requirements elicitation for month three. Today you learn that the actuarial analyst who wrote most of the legacy calculation rules, many of them undocumented, retires in two weeks and will not be available afterwards. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep elicitation in month three as planned, and reconstruct the undocumented rules then by analysing the legacy code and its historical outputs.",
+          "correct": false,
+          "rationale": "Reverse-engineering code shows what the system does, not why, and it cannot tell intended rules from old errors. The candidate protects the schedule's sequence at the cost of the one source that can explain the rules."
+        },
+        {
+          "id": "b",
+          "text": "Bring forward focused elicitation sessions with the analyst over the next two weeks, recording the calculation rules and the reasons behind them.",
+          "correct": true,
+          "rationale": "The source of the requirements has a fixed expiry date, and two weeks is the whole window. Moving a slice of elicitation earlier costs little against losing knowledge that exists nowhere else."
+        },
+        {
+          "id": "c",
+          "text": "Ask human resources whether the analyst could be retained on a consultancy basis for month three, so that elicitation can still go ahead as scheduled.",
+          "correct": false,
+          "rationale": "A reasonable thing to try alongside, but it bets the requirements on an arrangement that may not happen. If the answer is no, the two weeks will already be gone."
+        },
+        {
+          "id": "d",
+          "text": "Add the analyst's retirement to the risk register with a mitigation owner, and review the response at next month's project board.",
+          "correct": false,
+          "rationale": "Registering the risk is sound practice, but reviewing it next month is after the risk has materialised. The candidate applies the right process at a cadence the situation does not allow."
+        }
+      ],
+      "explanation": "Requirements come from people, and when a source of requirements is about to become unavailable, the timing of elicitation should follow the source rather than the plan. Pulling a targeted part of the work forward is a small, recoverable change; losing undocumented knowledge is not. When the window to act is shorter than the normal governance cycle, acting inside the window is the plan.",
+      "mindset": "Capture requirements while their source is still in the room, whatever the plan's sequence says."
+    },
+    {
+      "id": "pmp-pr2-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "delegated-authority",
+        "epics",
+        "backlog-refinement",
+        "archetype-use-own-authority"
+      ],
+      "stem": "A logistics company is rolling out a warehouse management system. Its steering committee approves the epics, each with a budget, such as £240,000 for the returns-handling epic; its terms of reference delegate decisions inside an epic to you as project manager. A business analyst has been sending every story split and wording change to the monthly committee, and refinement has stalled for five weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Approve the pending story changes yourself where they stay within their epic's scope and budget, and report them to the committee in summary.",
+          "correct": true,
+          "rationale": "These are exactly the decisions the committee delegated. Taking them within the epic's limits, and reporting them, uses the authority as intended and restores the flow of refinement."
+        },
+        {
+          "id": "b",
+          "text": "Ask the steering committee to confirm in writing that story-level decisions are delegated, before approving any further refinements yourself.",
+          "correct": false,
+          "rationale": "The terms of reference already say so. Seeking fresh confirmation of authority you hold costs another month and signals that the committee should keep deciding detail."
+        },
+        {
+          "id": "c",
+          "text": "Propose holding an extra steering committee meeting each fortnight, so that story changes are approved more quickly while governance is kept intact.",
+          "correct": false,
+          "rationale": "It speeds up the wrong route. The candidate treats the committee's involvement as the control, when the control it set up is the epic boundary it approved and the authority it delegated."
+        },
+        {
+          "id": "d",
+          "text": "Coach the business analyst on the delegation and let her decide each story change directly with the warehouse users in refinement sessions.",
+          "correct": false,
+          "rationale": "Coaching is worthwhile, but the delegation is to the project manager, not the analyst. Passing it on without authority to do so swaps one gap for another."
+        }
+      ],
+      "explanation": "Hybrid governance usually sets the baseline at a coarse level and delegates the detail inside it. Delegated authority that goes unused is as much a governance failure as authority exceeded: decisions drift upward, slow down, and crowd out the questions the senior forum exists to settle. Acting within the limits, and reporting what was done, is how delegated authority is meant to work.",
+      "mindset": "Use the authority you have been given, within its limits, and say what you did with it."
+    },
+    {
+      "id": "pmp-pr2-113",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "validate-scope",
+        "acceptance-criteria",
+        "customer-rejection",
+        "archetype-make-visible"
+      ],
+      "stem": "Your firm is refurbishing forty passenger carriages for a train operator. The operator's inspector has rejected the first refurbished carriage at acceptance, listing nine findings. Your quality lead says five relate to acceptance criteria in the signed specification and four do not appear in it at all, including a request for a different shade of seat fabric. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Map each finding against the signed acceptance criteria and share the result with the operator, showing which fall inside the agreed scope and which fall outside it.",
+          "correct": true,
+          "rationale": "Acceptance is judged against agreed criteria, so the first step is to make that comparison explicit and visible to both parties. It turns nine undifferentiated complaints into two kinds of conversation."
+        },
+        {
+          "id": "b",
+          "text": "Correct the five findings that relate to the specification and resubmit the carriage, while recording the actions taken in the quality log.",
+          "correct": true,
+          "rationale": "Findings against the agreed criteria are genuine non-conformances and must be put right for acceptance. Recording the corrections keeps the evidence that the remaining carriages can be built to the same standard."
+        },
+        {
+          "id": "c",
+          "text": "Rework the carriage to address all nine findings, so that acceptance is secured quickly and the remaining thirty-nine carriages are built to the same standard.",
+          "correct": false,
+          "rationale": "This absorbs four new requirements, one of them across forty carriages, into the scope without change control or price. The candidate trades the baseline for a quick signature."
+        },
+        {
+          "id": "d",
+          "text": "Ask the operator to accept the carriage now and to raise the nine findings as a punch list for correction before the final fleet handover.",
+          "correct": false,
+          "rationale": "Conditional acceptance can be useful, but asking for it here sidesteps five genuine non-conformances. It postpones the real defects and still leaves the four new requests without a route."
+        },
+        {
+          "id": "e",
+          "text": "Refer the four findings outside the specification to the firm's commercial team so that they can prepare a claim against the train operator.",
+          "correct": false,
+          "rationale": "Starting with a claim treats a customer request as a dispute before anyone has asked whether the operator wants to pay for the change. A change request is the proportionate first step."
+        }
+      ],
+      "explanation": "Scope validation compares deliverables with the acceptance criteria that were agreed, and a rejection must be sorted the same way: findings against the criteria are defects to correct, and findings outside them are proposed changes to be raised and decided. Mixing the two either lets new scope in unpriced or treats real defects as negotiable. Making the split visible is what lets the customer and the project respond to each kind on its own terms.",
+      "mindset": "Sort a rejection by the agreed criteria before deciding what to fix and what to negotiate."
+    },
+    {
+      "id": "pmp-pr2-114",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "sprint-goal",
+        "sprint-scope",
+        "negotiation",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Four days into a ten-day sprint, a charity's donations team finds that the gift-aid declaration story, central to the sprint goal of letting donors claim gift aid online, needs an address-lookup integration nobody had foreseen. The team now expects the sprint's planned stories to take about twelve days. Which two actions best fit agile practice?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the product owner to renegotiate the sprint backlog, keeping the gift-aid goal and moving lower-value stories back to the product backlog.",
+          "correct": true,
+          "rationale": "Scrum expects sprint scope to be clarified and renegotiated as the team learns, provided the goal holds. Moving out lower-value stories protects what the sprint was for."
+        },
+        {
+          "id": "b",
+          "text": "Look for the thinnest version of the declaration that meets the goal, such as manual address entry, and capture the lookup as a new backlog item.",
+          "correct": true,
+          "rationale": "Delivering the goal through a simpler slice keeps the value and defers the unforeseen work to be ordered on its merits. It adapts the solution rather than the commitment."
+        },
+        {
+          "id": "c",
+          "text": "Extend the sprint by two days so that every planned story can be completed and the team's velocity figures stay comparable between sprints.",
+          "correct": false,
+          "rationale": "A fixed sprint length is what makes velocity and cadence meaningful. Stretching the timebox to fit the work protects the plan at the cost of the rhythm the whole team plans around."
+        },
+        {
+          "id": "d",
+          "text": "Ask the team to work two extra evenings this week to absorb the additional integration effort without changing the scope of the sprint.",
+          "correct": false,
+          "rationale": "Overtime hides an estimation miss rather than responding to it, and it undermines sustainable pace. The candidate is protecting the plan when the plan is what the new information has overtaken."
+        },
+        {
+          "id": "e",
+          "text": "Cancel the sprint and replan from the start, because the sprint backlog no longer reflects the work needed to meet the sprint goal.",
+          "correct": false,
+          "rationale": "Cancellation is for a sprint goal that has become obsolete. Here the goal is still valid; only the route to it has changed, which renegotiation handles without discarding four days of work."
+        }
+      ],
+      "explanation": "In an iteration, the goal is the commitment and the list of items is the forecast. When new information makes the forecast wrong, the team and product owner adapt the scope and the solution around the goal rather than stretching the timebox, adding hidden hours or abandoning the iteration. Unforeseen work becomes backlog to be ordered, not an emergency to be absorbed.",
+      "mindset": "Hold the goal steady and let the scope flex around what you learn."
+    },
+    {
+      "id": "pmp-pr2-115",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "scope-agreement",
+        "hybrid-contract",
+        "product-goal",
+        "archetype-make-visible"
+      ],
+      "stem": "A football club's €38 million stadium redevelopment pairs a fixed-design construction contract with a fan app built in monthly releases. The club's board must sign the scope before work starts. The construction scope is a full specification; the app's backlog is expected to change heavily once fans use the first release. Which two items should the board's scope agreement contain for the app?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A product goal with the capabilities needed for the opening match day, each with measurable outcomes the board can use to judge success.",
+          "correct": true,
+          "rationale": "Agreeing outcomes and a few essential capabilities gives the board a real commitment to hold the team to, without freezing detail that fan feedback is expected to change."
+        },
+        {
+          "id": "b",
+          "text": "The rules for changing the app's backlog: who orders it, what the release budget is, and which changes return to the board for decision.",
+          "correct": true,
+          "rationale": "When scope is expected to move, the agreement has to cover how it moves. Making the decision rights and budget explicit is what lets the board sign something it can later recognise."
+        },
+        {
+          "id": "c",
+          "text": "A complete list of user stories for the first twelve monthly releases, estimated and sequenced, so that the board can approve the full scope.",
+          "correct": false,
+          "rationale": "This applies the construction approach to work everyone expects to change. The board would be signing a list that will be wrong by release two, which makes the signature meaningless."
+        },
+        {
+          "id": "d",
+          "text": "A specification of the app's screens and data fields at the same level of detail as the construction drawings, so that both parts are baselined alike.",
+          "correct": false,
+          "rationale": "Uniform rigour feels consistent, but it ignores why the app is delivered iteratively. Detailed design up front for uncertain work invites constant change requests against a baseline nobody believes."
+        },
+        {
+          "id": "e",
+          "text": "An agreement that the app's scope will be confirmed after the first release, once fan feedback shows what is wanted, with nothing signed beforehand.",
+          "correct": false,
+          "rationale": "This leaves a funded workstream with no agreed purpose or limits until it has already spent its first release. Uncertain scope still needs agreement at the level that is knowable now."
+        }
+      ],
+      "explanation": "Securing agreement on scope means agreeing at the level of detail the work can support. For adaptive work, that is the goal, the outcomes and essential capabilities, plus explicit rules for how the detail will change and who decides; for predictive work it is the full specification. Forcing one level onto both either produces a signature on fiction or leaves the adaptive part with nothing agreed at all.",
+      "mindset": "Agree each part of the scope at the level of certainty it actually has, including how it may change."
+    },
+    {
+      "id": "pmp-pr2-116",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "scope-artefacts",
+        "traceability",
+        "wbs-dictionary",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "On an airport baggage-hall upgrade, several people come to you with questions about scope. Match each question to the project document that answers it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "q1",
+          "text": "A test lead wants to know which business objective a sortation requirement supports and which test case verifies it."
+        },
+        {
+          "id": "q2",
+          "text": "The conveyor subcontractor asks exactly what work, deliverables and acceptance criteria belong to its work package."
+        },
+        {
+          "id": "q3",
+          "text": "The airline liaison asks whether the project includes moving the check-in desks or whether that has been excluded."
+        }
+      ],
+      "options": [
+        {
+          "id": "rtm",
+          "text": "Requirements traceability matrix",
+          "correct": true,
+          "match": "q1",
+          "rationale": "The traceability matrix links each requirement back to its business objective and forward to the deliverables and tests that satisfy it, which is exactly the chain the test lead is asking about."
+        },
+        {
+          "id": "dict",
+          "text": "WBS dictionary",
+          "correct": true,
+          "match": "q2",
+          "rationale": "The dictionary holds the detailed description of each work package: its work, deliverables, responsible party and acceptance criteria. It is where a package boundary is written down."
+        },
+        {
+          "id": "stmt",
+          "text": "Project scope statement",
+          "correct": true,
+          "match": "q3",
+          "rationale": "The scope statement records the project's deliverables and its explicit exclusions, so it answers whether a piece of work is in or out of the project as a whole."
+        },
+        {
+          "id": "charter",
+          "text": "Project charter",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The charter authorises the project and gives high-level requirements and objectives, but it is not detailed enough to answer any of these three questions with confidence."
+        }
+      ],
+      "explanation": "Each scope document answers a different question at a different level: the charter authorises, the scope statement draws the boundary including what is excluded, the WBS dictionary details each package, and the traceability matrix links requirements to their purpose and their proof. Going to the right document first is faster than reading them all and avoids answering a detailed question from a summary.",
+      "mindset": "Know which scope document answers which question, and send people to the right one."
+    },
+    {
+      "id": "pmp-pr2-117",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "backlog-techniques",
+        "spike",
+        "story-mapping",
+        "archetype-diagnose-first"
+      ],
+      "stem": "An energy supplier's agile team faces three different scope problems on its customer-portal backlog. Match each problem to the technique that addresses its underlying cause. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "The team cannot size a meter-reading story because nobody knows whether the smart-meter vendor's interface supports half-hourly data."
+        },
+        {
+          "id": "p2",
+          "text": "Stakeholders keep arguing about what belongs in the first release, and the backlog is a flat list of 180 items with no view of customer journeys."
+        },
+        {
+          "id": "p3",
+          "text": "Marketing keeps adding feature requests, but nobody can say which business goal any of them is meant to move or for which customers."
+        }
+      ],
+      "options": [
+        {
+          "id": "spike",
+          "text": "A timeboxed spike",
+          "correct": true,
+          "match": "p1",
+          "rationale": "The obstacle is a specific technical unknown. A short, timeboxed investigation answers it and turns an unestimable story into one the team can size."
+        },
+        {
+          "id": "map",
+          "text": "User story mapping",
+          "correct": true,
+          "match": "p2",
+          "rationale": "A story map lays items out along the customer journey, so release slices can be drawn as thin end-to-end paths rather than argued item by item from a flat list."
+        },
+        {
+          "id": "impact",
+          "text": "Impact mapping",
+          "correct": true,
+          "match": "p3",
+          "rationale": "Impact mapping starts from a business goal and works through who must change their behaviour and how, so each requested feature has to show which goal it serves."
+        },
+        {
+          "id": "poker",
+          "text": "Planning poker",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Planning poker produces shared estimates once an item is understood; it does not resolve a technical unknown, a missing journey view or an absent goal."
+        }
+      ],
+      "explanation": "Backlog problems that look alike on the surface often have different causes: a technical unknown, a missing structure, or a missing purpose. Each calls for a technique aimed at that cause, and applying a familiar ceremony to the wrong one adds activity without resolving anything. Name what is actually missing before choosing how to refine.",
+      "mindset": "Diagnose what the backlog is missing before reaching for a refinement technique."
+    },
+    {
+      "id": "pmp-pr2-118",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "validate-scope",
+        "control-quality",
+        "acceptance",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "An academy trust is building a new school block under a predictive contract while a software team delivers its room-booking system in sprints. Complete each sentence with the activity being performed. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Before inviting the trust to inspect the finished science labs, the contractor's engineers test the fume cupboards against the specification. This is"
+        },
+        {
+          "id": "s2",
+          "text": "The trust's estates director walks the labs with the agreed acceptance checklist and signs to take them over from the contractor. This is"
+        },
+        {
+          "id": "s3",
+          "text": "At the end of a sprint, the product owner checks the new booking screens against their acceptance criteria and the definition of done before accepting them. This is"
+        }
+      ],
+      "options": [
+        {
+          "id": "qc",
+          "text": "quality control, checking the work is correct before it is offered for acceptance",
+          "correct": true,
+          "match": "s1",
+          "rationale": "The contractor checking its own output against the specification is quality control. It establishes correctness, and it normally comes before the customer is asked to accept anything."
+        },
+        {
+          "id": "vs",
+          "text": "scope validation, the customer's formal acceptance of completed deliverables",
+          "correct": true,
+          "match": "s2",
+          "rationale": "The customer's representative inspecting against agreed criteria and signing to take the labs over is formal acceptance, which is what scope validation produces."
+        },
+        {
+          "id": "po",
+          "text": "iterative acceptance, with the product owner accepting increments on the customer's behalf",
+          "correct": true,
+          "match": "s3",
+          "rationale": "In adaptive delivery, acceptance happens item by item through the product owner against acceptance criteria and the definition of done, rather than in a single sign-off at the end."
+        },
+        {
+          "id": "sc",
+          "text": "scope control, monitoring the scope baseline and managing changes to it",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Scope control deals with changes to the baseline and with scope creep. None of the three sentences describes a change; each describes checking or accepting completed work."
+        }
+      ],
+      "explanation": "Checking correctness and accepting completeness are different acts done by different people: the delivery team verifies its work meets the specification, and the customer, or the product owner standing in for them, accepts it. Predictive work tends to bundle acceptance into a formal sign-off; adaptive work spreads it across each increment. Both still need the internal check to come first.",
+      "mindset": "Verify your own work before asking anyone to accept it."
+    },
+    {
+      "id": "pmp-pr2-119",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "wbs",
+        "planning-package",
+        "hundred-percent-rule",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "On a grid substation project, the WBS element 'Substation 3' carries a budget of €480,000. Below it sit two work packages, civils at €152,000 and primary electrical at €187,500, and one planning package for protection and control that has not yet been decomposed. No other children exist.",
+      "blanks": [
+        {
+          "id": "pp",
+          "label": "Budget of the planning package, in €",
+          "numeric": true,
+          "expect": 140500,
+          "tol": 0,
+          "unit": "€",
+          "rationale": "The children of an element must account for all of its work and budget: 480,000 − 152,000 − 187,500 = €140,500 for the planning package."
+        },
+        {
+          "id": "pct",
+          "label": "Share of the element's budget still in the planning package, as a percentage to one decimal place",
+          "numeric": true,
+          "expect": 29.3,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "140,500 ÷ 480,000 = 0.2927, or 29.3%. Nearly a third of the element is budgeted but not yet decomposed into manageable work packages."
+        },
+        {
+          "id": "rule",
+          "label": "Name of the WBS principle that requires the children to sum exactly to their parent",
+          "accept": [
+            "100% rule",
+            "100 percent rule",
+            "100 per cent rule",
+            "hundred percent rule",
+            "hundred per cent rule",
+            "the 100% rule",
+            "one hundred percent rule"
+          ],
+          "rationale": "The 100% rule says that the children of any WBS element together contain all of its work, no more and no less, which is why the planning package value can be derived by subtraction."
+        }
+      ],
+      "explanation": "Every level of a WBS must represent all of the work of the level above it, so a planning package is not a gap but a placeholder that holds the undecomposed share of scope and budget. Knowing how much of an element is still in planning packages shows how much of the baseline is held at low precision, and therefore where the next wave of decomposition matters most.",
+      "mindset": "Account for all of the work at every level, even the parts not yet broken down."
+    },
+    {
+      "id": "pmp-pr2-120",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "story-mapping",
+        "release-planning",
+        "walking-skeleton",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A veterinary group's story map for its appointment app has five journey steps. Group policy says no appointment is confirmed until a deposit is taken. Each card shown sits below the release 1 line, and its label also states what release 1 already offers for that step. Select the card that should be moved into release 1.",
+      "graphic": {
+        "viewBox": "0 0 700 300",
+        "title": "Story map with five journey steps, one release 2 card under each and its release 1 coverage",
+        "caption": "Select a card. Use Tab or the arrow keys to move between cards, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "find",
+          "n": 1,
+          "label": "Find a slot: filter by preferred vet (release 2). Release 1 offers: list of all open slots",
+          "x": 20,
+          "y": 160,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "A convenience on a step that release 1 already covers with a basic card. The journey works without it, so moving it up adds polish while the journey is still broken elsewhere."
+        },
+        {
+          "id": "book",
+          "n": 2,
+          "label": "Book: book for several pets at once (release 2). Release 1 offers: book for one pet",
+          "x": 155,
+          "y": 160,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "Valuable for multi-pet households, but single-pet booking already exists in release 1. It is an enrichment of a working step, not a missing link in the journey."
+        },
+        {
+          "id": "pay",
+          "n": 3,
+          "label": "Pay: take the deposit by card (release 2). Release 1 offers: nothing yet",
+          "x": 290,
+          "y": 160,
+          "w": 120,
+          "h": 100,
+          "correct": true,
+          "rationale": "Pay is the only step with nothing in release 1, and policy makes it mandatory for a confirmed appointment. Without it the release cannot complete a single booking, so this card is the gap in the walking skeleton."
+        },
+        {
+          "id": "remind",
+          "n": 4,
+          "label": "Get reminded: text message reminder (release 2). Release 1 offers: email reminder",
+          "x": 425,
+          "y": 160,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "Reminders reduce missed appointments, which makes them tempting to promote, but release 1 already has a basic reminder card. The candidate is optimising a step that already works."
+        },
+        {
+          "id": "checkin",
+          "n": 5,
+          "label": "Check in: self check-in kiosk (release 2). Release 1 offers: check in at the desk",
+          "x": 560,
+          "y": 160,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "Release 1 already supports checking in at the desk, so the journey can be completed without a kiosk. This is an operational improvement, not a missing step."
+        }
+      ],
+      "explanation": "A first release should let a user complete the whole journey at least once in its simplest form, so release planning on a story map starts by finding any step with nothing above the line. Enrichments to steps that already work can wait; a step that is both empty and mandatory breaks every journey through the product, however polished the other steps are.",
+      "mindset": "Make the whole journey work thinly before making any part of it work well."
+    },
+    {
+      "id": "pmp-pr2-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "scope-statement",
+        "acceptance-criteria",
+        "measurability",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "You are finalising the project scope statement for refurbishing three floors of a law firm's London office. The partners' draft lists acceptance criteria such as 'a high-quality finish throughout' and 'meeting rooms with good acoustics'. The fit-out contractor will price against the signed scope statement next month, and the partners have asked you to circulate it for signature this week. What should the project manager do before circulating it?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Circulate the draft as written and agree measurable standards with the contractor during design development, once the detailed drawings show what is realistically achievable.",
+          "correct": false,
+          "rationale": "The candidate postpones definition until after pricing. The contractor will price the ambiguity as risk or later as claims, and the client's meaning gets negotiated with the party paid to deliver it."
+        },
+        {
+          "id": "b",
+          "text": "Attach the contractor's standard specification for finishes and acoustics as an appendix, so the general criteria are backed by a recognised benchmark document that everyone can refer to.",
+          "correct": false,
+          "rationale": "This substitutes the contractor's standard for the client's need. The benchmark may be higher or lower than what the partners mean, so acceptance ends up defined by someone other than the customer."
+        },
+        {
+          "id": "c",
+          "text": "Circulate the draft for signature now and record in the issue log that several acceptance criteria need tightening before the fit-out reaches its handover inspection stage.",
+          "correct": false,
+          "rationale": "Logging the problem does not change the baseline the contractor will price. The candidate knowingly obtains a signature on criteria that cannot be tested and moves the argument to handover."
+        },
+        {
+          "id": "d",
+          "text": "Work with the partners to restate each criterion as something measurable, such as a stated sound-insulation rating for the meeting rooms, and agree the wording before signature.",
+          "correct": true,
+          "rationale": "A criterion that cannot be tested cannot be used to accept or reject anything. Fixing it now, while the partners still own the definition and before the contractor prices it, is the cheapest point at which to do so."
+        }
+      ],
+      "explanation": "Acceptance criteria are what make a deliverable objectively acceptable or not; if a criterion cannot be tested, scope has not really been agreed, whatever the signatures say. Measurability has to be settled while the customer still owns the definition and before anyone prices against it, because every later point moves the argument closer to handover, where it is most expensive to resolve.",
+      "mindset": "A criterion nobody can test is an opinion waiting to become a dispute."
+    },
+    {
+      "id": "pmp-pr2-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "wbs",
+        "work-packages",
+        "decomposition-level",
+        "archetype-trade-off"
+      ],
+      "stem": "On a £14 million data-centre build, your planning lead has decomposed the WBS into 620 work packages, most representing half a day of one person's effort, such as 'terminate rack 14 power cables'. Each has its own WBS dictionary entry, cost account and progress report. Two months in, the four control account managers say they spend more than a day a week updating packages, and real variances are lost in the volume. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the WBS structure but automate progress capture from the site team's daily logs, so the control account managers no longer have to key updates for every package by hand.",
+          "correct": false,
+          "rationale": "The candidate treats the data-entry effort as the problem. Automation keeps 620 control points, so variances are still buried; the level of control is wrong, not the way updates are typed in."
+        },
+        {
+          "id": "b",
+          "text": "Ask the control account managers to report only on packages that are behind or over budget, and treat every other package as running to plan until its scheduled finish date.",
+          "correct": false,
+          "rationale": "Reporting by exception is sound practice, but here it is bolted onto a structure with far too many control points, and it assumes that a package nobody reported on is on plan."
+        },
+        {
+          "id": "c",
+          "text": "Roll the lowest level up into deliverable-based work packages sized to be estimated and controlled within a reporting period, and keep the half-day detail as activities in the schedule.",
+          "correct": true,
+          "rationale": "A work package is the level at which cost and schedule are managed. Consolidating restores a manageable number of control points while the fine detail stays where it belongs, in the schedule's activities."
+        },
+        {
+          "id": "d",
+          "text": "Commission a fresh WBS from an external planning consultant and re-baseline the project around the structure the client used successfully on its previous two data-centre builds of a similar size.",
+          "correct": false,
+          "rationale": "The candidate overreacts. The decomposition above the lowest level is sound, and importing another build's structure brings that project's scope assumptions with it while forcing a full re-baseline."
+        }
+      ],
+      "explanation": "A work package is the lowest level at which cost and schedule are estimated and controlled, so its size is set by what management needs to control rather than by how finely the work can be described. Decomposing beyond that point turns the WBS into a task list, multiplies control points and hides real variances; activity-level detail belongs in the schedule, which is derived from work packages rather than replacing them.",
+      "mindset": "Decompose until the work can be managed, then stop."
+    },
+    {
+      "id": "pmp-pr2-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "validate-scope",
+        "acceptance-authority",
+        "contract",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your company is installing a new keycard system across a hotel group's twelve sites. The contract names the group's operations director as the only person who can accept each site's installation. At the first site, the hotel's general manager walked the installation with your engineer, signed your completion form and said she is delighted. Your finance team wants to invoice the €86,000 milestone today. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Invoice the milestone now, since the person who runs the site has inspected the installation and confirmed in writing that it meets her hotel's needs.",
+          "correct": false,
+          "rationale": "The candidate treats user satisfaction as acceptance. The contract names who can accept, and an invoice raised on the wrong signature invites a dispute over the milestone."
+        },
+        {
+          "id": "b",
+          "text": "Ask the general manager to countersign a statement that she is acting on the operations director's behalf, then invoice against the two signatures together.",
+          "correct": false,
+          "rationale": "Delegated authority has to come from the person who holds it. The candidate is trying to manufacture authority on site that only the operations director can grant."
+        },
+        {
+          "id": "c",
+          "text": "Send the signed form and the test results to the operations director and ask for her formal acceptance of the site before the milestone is invoiced.",
+          "correct": true,
+          "rationale": "The general manager's sign-off is useful evidence, and the operations director is the person the contract empowers to accept. Routing the evidence to her secures acceptance that will stand."
+        },
+        {
+          "id": "d",
+          "text": "Record this sign-off as acceptance and propose to the general manager that each hotel's own manager accepts its installation, to speed up the other eleven sites.",
+          "correct": false,
+          "rationale": "The candidate changes the contract's acceptance terms in a conversation with someone who cannot agree to it. A change to who accepts is a change to the agreement itself."
+        }
+      ],
+      "explanation": "Validating scope means obtaining formal acceptance from the stakeholder the agreement names, and the satisfaction of users, however sincere, is evidence for that decision rather than a substitute for it. Who holds acceptance authority is part of the scope agreement; altering it is a change to that agreement and has to come from the customer's side, not from convenience on site.",
+      "mindset": "Satisfaction is evidence; acceptance is a decision by the person entitled to make it."
+    },
+    {
+      "id": "pmp-pr2-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "progressive-elaboration",
+        "scope-baseline",
+        "change-requests",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Your team is building a digital archive for a city library in Cardiff under a signed scope statement that includes 'a public search interface returning results by title, author, date and subject'. As the archivists supply detail, your analyst has raised 23 change requests in a month, including ones for sorting results by date and for showing subject headings in Welsh as well as English. The library director says the project treats every conversation as a change. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Review the 23 requests with the analyst against the baselined scope description, separating detail that refines what was agreed from requests that add to it.",
+          "correct": true,
+          "rationale": "The director's complaint and the analyst's caution can both be partly right. Classifying each item against the baseline is what tells the project which are elaboration and which are genuine changes."
+        },
+        {
+          "id": "b",
+          "text": "Withdraw the change requests and treat the archivists' input as elaboration of the agreed scope, so that the working relationship with the library is restored quickly.",
+          "correct": false,
+          "rationale": "The candidate swings to the opposite error. Some requests, such as bilingual subject headings, plausibly add to the agreed scope, and withdrawing all of them lets genuine additions in without approval."
+        },
+        {
+          "id": "c",
+          "text": "Submit all 23 requests to the change control board as raised, because once a scope statement is signed any new detail has to pass through formal change control.",
+          "correct": false,
+          "rationale": "Detail that sits inside the baselined description is not a change. Sending every refinement to the board floods it, slows the work and confirms the director's complaint."
+        },
+        {
+          "id": "d",
+          "text": "Meet the library director to agree a materiality threshold, below which requests are accepted without change control and above which they go to the board for a decision.",
+          "correct": false,
+          "rationale": "A size threshold confuses how big a request is with whether it is in scope. Small additions are still additions, and accepting them unexamined is how scope creeps in increments."
+        }
+      ],
+      "explanation": "Progressive elaboration adds detail inside the boundary that a baseline already describes; a change moves that boundary. The test is the baselined scope description and WBS dictionary, not how recently the detail arrived or how large it is. Treating every refinement as a change paralyses the project and strains the relationship, while treating additions as refinement is how scope creeps, so each item has to be classified before it is routed.",
+      "mindset": "Ask whether the boundary moved, not whether the detail is new."
+    },
+    {
+      "id": "pmp-pr2-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "definition-of-ready",
+        "backlog-refinement",
+        "flow",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A payments team at a fintech adopted a definition of ready after a sprint in which half the stories proved unclear. It now requires every story to have final screen designs, all edge cases listed and written compliance sign-off before it can enter a sprint. Over the last three sprints the team has pulled in fewer than half its usual number of stories, and the product owner spends most of her week completing readiness templates. What should the project manager encourage?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add a business analyst to help the product owner complete the readiness templates each sprint, so stories still meet the agreed definition without consuming so much of her time for product decisions.",
+          "correct": false,
+          "rationale": "The candidate resources the bottleneck instead of questioning it. More people producing upfront specification faster still leaves the team waiting on detail it could have worked out during the sprint."
+        },
+        {
+          "id": "b",
+          "text": "Keep the definition of ready as agreed, and let the team pull partly ready stories only when its sprint backlog would otherwise run short of planned work.",
+          "correct": false,
+          "rationale": "This creates a standing exception that undermines the definition while leaving its excessive demands untouched. The team ends up with a rule it neither follows nor revises."
+        },
+        {
+          "id": "c",
+          "text": "Review the definition of ready at the retrospective after next, once two more sprints of data show whether the lower throughput is only a settling-in effect.",
+          "correct": false,
+          "rationale": "Three sprints already show the harm and its cause is visible in the criteria themselves. Waiting for more data costs another month of throughput to confirm what is already clear."
+        },
+        {
+          "id": "d",
+          "text": "Reset the definition of ready with the team and product owner to the minimum that lets a story start with confidence, and resolve the remaining detail through conversation during the sprint.",
+          "correct": true,
+          "rationale": "The original problem was stories nobody understood, not stories lacking final designs. A lighter definition keeps the protection against starting blind while restoring the conversation that refinement is meant to prompt."
+        }
+      ],
+      "explanation": "A definition of ready exists to stop teams starting work they cannot understand, not to require that a story be fully specified before anyone touches it. When readiness criteria demand final designs and exhaustive edge cases, they rebuild big upfront specification inside the backlog and remove the conversation a story is meant to start. Readiness should mean enough to begin with confidence, and its success is judged by flow rather than by how complete the templates look.",
+      "mindset": "Prepare work enough to start it well, not so much that it never starts."
+    },
+    {
+      "id": "pmp-pr2-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "product-backlog",
+        "progressive-elaboration",
+        "product-goal",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A sports equipment retailer is starting an agile rebuild of its online shop. Before sprint one, the new product owner plans to spend six weeks writing detailed user stories, with full acceptance criteria, for every feature the shop might need over the next year, so that, as she puts it, nothing gets missed. The development team is available from next Monday. What should the project manager advise?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree a product goal and a coarse backlog of larger items, detail only enough stories for the first sprint or two, and refine the rest as the team learns.",
+          "correct": true,
+          "rationale": "Just-in-time refinement puts detail where it will be used soon and leaves later items coarse, so early increments and user feedback can shape them before effort is spent on detail."
+        },
+        {
+          "id": "b",
+          "text": "Support the six-week plan, but ask the product owner to prioritise stories as she writes them so the team can start on the first ones before she has finished.",
+          "correct": false,
+          "rationale": "Starting earlier helps, but the candidate still endorses detailing a year of features that will change once users see the first increments. Most of that effort is spent on work that will be rewritten."
+        },
+        {
+          "id": "c",
+          "text": "Have the development team join her for the six weeks, so the detailed stories reflect technical constraints and estimates are ready when sprint one begins.",
+          "correct": false,
+          "rationale": "This spends the whole team's capacity on speculative specification and pushes the first feedback back by six weeks. The premise that everything must be detailed first goes unchallenged."
+        },
+        {
+          "id": "d",
+          "text": "Ask her to document the year's requirements as a conventional specification instead, then convert its sections into user stories as each sprint is planned.",
+          "correct": false,
+          "rationale": "The candidate changes the format but keeps the upfront approach. It is a waterfall specification sliced into sprints, with the same risk that the early detail is wrong."
+        }
+      ],
+      "explanation": "In adaptive work, backlog detail is created close to when it will be built: items near the top are refined enough to start, while those further down stay coarse because what is learned from early increments will change them. Detailing a year of work in advance spends effort on items that will be rewritten or dropped and delays the feedback that would have shown which ones matter.",
+      "mindset": "Detail the backlog close to the work, because learning will rewrite the rest."
+    },
+    {
+      "id": "pmp-pr2-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "technical-debt",
+        "backlog-transparency",
+        "enabler-work",
+        "archetype-make-visible"
+      ],
+      "stem": "The team building an airline's crew-rostering tool wants to replace a rule engine it put together quickly in early sprints; each new rostering rule now takes about three times as long as it once did. The product owner has declined to put the rework in the backlog, saying it delivers nothing crew planners can see. The team has started slipping the rework into feature stories without telling her. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the team carry on absorbing the rework into feature stories, since how the product is built is the team's decision and not something the product owner directs.",
+          "correct": false,
+          "rationale": "The team does own how it builds, but hiding the rework inflates feature estimates and leaves the product owner ordering scope on false information about its cost."
+        },
+        {
+          "id": "b",
+          "text": "Help the team add the rework to the backlog as an item stating the slowdown it is causing and what it would recover, so the product owner can order it against features.",
+          "correct": true,
+          "rationale": "Expressed in terms of delivery speed, the rework becomes something the product owner can weigh. She keeps her ordering authority and now exercises it with the cost in view."
+        },
+        {
+          "id": "c",
+          "text": "Agree with the product owner that the team reserves a fixed 20% of every sprint for technical work, which it may spend without bringing individual items to her.",
+          "correct": false,
+          "rationale": "A capacity allocation can be a sound practice, but the candidate is negotiating a funding rule before anyone has shown the product owner what the slowdown costs, so she agrees blind."
+        },
+        {
+          "id": "d",
+          "text": "Escalate to the sponsor that the product owner is blocking necessary technical work, and ask the sponsor to decide whether the rework should go ahead now.",
+          "correct": false,
+          "rationale": "The product owner has not yet seen the cost quantified. Escalating before the information has been put to her bypasses the person who orders the backlog."
+        }
+      ],
+      "explanation": "All the work a team does belongs in the backlog, where the product owner can see it and order it, including enabling work with no visible feature. Concealing it inside feature stories distorts their estimates and lets scope decisions be made on false information. The remedy is to express enabling work by its effect on delivery, so that it competes openly with features for capacity.",
+      "mindset": "Work hidden from the backlog cannot be weighed, only discovered later."
+    },
+    {
+      "id": "pmp-pr2-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "spike",
+        "product-owner",
+        "story-reshaping",
+        "archetype-route-to-owner"
+      ],
+      "stem": "An agri-tech company's team ran a three-day spike on a story to detect crop disease from drone images at single-leaf resolution. The spike shows the current cameras cannot resolve individual leaves but can reliably flag patches of about one square metre, which agronomists on the team believe would catch most outbreaks. The developers are keen to rewrite the story around patch detection and start next sprint. What should the project manager encourage?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rewrite the story around patch detection as the developers propose, since the spike's evidence and the team's own agronomists both support it as the best available option.",
+          "correct": false,
+          "rationale": "The candidate lets the team settle a product-scope trade-off. Whether patch-level detection is worth building instead of leaf-level is a value judgement that belongs to the product owner."
+        },
+        {
+          "id": "b",
+          "text": "Raise a request to buy higher-resolution cameras so the original story can be delivered as written, and move the story down the backlog until they arrive.",
+          "correct": false,
+          "rationale": "This assumes the original scope must be kept and commits spending before anyone has weighed the alternative the spike uncovered. It jumps to a solution for the wrong owner."
+        },
+        {
+          "id": "c",
+          "text": "Run a second, longer spike to test whether better image processing could reach leaf-level detection with the existing cameras before any decision is made.",
+          "correct": false,
+          "rationale": "Further investigation might be justified, but whether to spend more on it is itself a value decision. The candidate delays the choice instead of putting it to the person who makes it."
+        },
+        {
+          "id": "d",
+          "text": "Have the team present the spike's findings and the patch-detection option to the product owner, who then decides whether to reshape, reorder or drop the story.",
+          "correct": true,
+          "rationale": "The spike has produced exactly what it was for: information. The team frames the options and the product owner, who owns the backlog's scope and value, makes the call."
+        }
+      ],
+      "explanation": "A spike produces information for a scope decision; it does not make the decision. When it shows a story cannot be delivered as written, the choices of reshaping, reordering, investigating further or dropping it are trade-offs of value against cost, and they belong to whoever owns the product's scope. The team's contribution is to lay those options out clearly.",
+      "mindset": "Bring what was learned to the person who owns the trade-off."
+    },
+    {
+      "id": "pmp-pr2-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "business-case",
+        "backlog-ordering",
+        "scope-agreement",
+        "archetype-make-visible"
+      ],
+      "stem": "A fashion retailer approved a £2.1 million programme whose business case counts on £400,000 a year of savings from self-service returns. Stores are being refitted under a fixed plan, and the app is built by a Scrum team whose product owner orders the backlog. After user testing, the product owner has moved self-service returns below the release line in favour of a size-recommendation feature that customers rated higher. The sponsor has not been told. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Leave the ordering with the product owner, and take the sponsor through how the change affects the business case's savings so the benefit assumptions can be revisited.",
+          "correct": true,
+          "rationale": "The decision stays where it belongs and its consequence reaches the person who owns the benefits. The sponsor can then accept the trade, adjust the case or ask for the order to be reconsidered."
+        },
+        {
+          "id": "b",
+          "text": "Restore self-service returns above the release line, because the sponsor approved the programme on the strength of savings that depend on that feature being delivered.",
+          "correct": false,
+          "rationale": "The candidate overrides the product owner's ordering authority on the basis of an earlier assumption. The user evidence may well be right, and a business case is not a feature list."
+        },
+        {
+          "id": "c",
+          "text": "Raise a change request to the programme's change board, since moving a business-case feature out of the release alters the scope that the sponsor originally approved.",
+          "correct": false,
+          "rationale": "This treats backlog order as baselined scope and routes a legitimate product decision through heavyweight control. The real gap is a benefits question for the sponsor, not a backlog change."
+        },
+        {
+          "id": "d",
+          "text": "Accept the product owner's decision without further action, since ordering the backlog in response to user testing evidence is exactly the authority that her role carries on the programme.",
+          "correct": false,
+          "rationale": "The candidate is right about authority but stops there. A business-case assumption has changed, and the person who owns the business case is still planning against the old one."
+        }
+      ],
+      "explanation": "In hybrid delivery, the product owner's authority over backlog order and the sponsor's ownership of the business case sit side by side, and one decision can touch both. The ordering decision stays with its owner while its consequence for approved benefits travels to theirs. Reversing a legitimate decision, or processing it as a baseline change, misses the actual gap: someone is managing against assumptions that are no longer true.",
+      "mindset": "Respect who decides, and make sure whoever owns the consequences knows."
+    },
+    {
+      "id": "pmp-pr2-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "prototyping",
+        "requirements-baseline",
+        "fixed-price-tender",
+        "archetype-trade-off"
+      ],
+      "stem": "A housing association is using three-week prototype iterations to settle requirements for a tenant repairs portal, which a supplier will then build under a fixed-price contract. After four iterations, the core journeys of reporting a repair, booking an appointment and tracking progress have not changed for two rounds, but tenants keep suggesting new colours, icons and wording. The sponsor wants to keep iterating until every tenant is happy. The tender goes out in a month. What should the project manager recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Continue iterating up to the tender date and then baseline whichever version the prototype has reached, so tenants have the longest possible chance to contribute.",
+          "correct": false,
+          "rationale": "The candidate lets the calendar decide what is frozen, not stability. Cosmetic details still in flux go into a fixed-price specification, where every later change costs money."
+        },
+        {
+          "id": "b",
+          "text": "Delay the tender by two further iterations so that the cosmetic feedback has time to converge, and the supplier then receives a specification that tenants have fully settled and endorsed.",
+          "correct": false,
+          "rationale": "This spends schedule chasing agreement on details that affect neither price nor structure and may never converge. The parts that matter least end up holding back the rest."
+        },
+        {
+          "id": "c",
+          "text": "Baseline the stable journeys in the tender specification now, and set visual design and wording as matters the supplier finalises with tenants against agreed accessibility criteria.",
+          "correct": true,
+          "rationale": "The journeys are what drive price and structure, and they have settled. The open details get criteria instead of final answers, so the tender can proceed without pretending they are decided."
+        },
+        {
+          "id": "d",
+          "text": "Baseline the whole current prototype, including colours, icons and wording, so the supplier has a complete specification and cannot reopen any design question.",
+          "correct": false,
+          "rationale": "The candidate freezes details that are still moving into a fixed-price contract, which makes the changes tenants will keep asking for expensive variations later."
+        }
+      ],
+      "explanation": "Prototyping exists to reduce requirements uncertainty, and it has finished its job for any element that has stopped changing. The trade-off is between baselining what is stable, so commitment can proceed, and leaving genuinely open detail outside the fixed part with criteria rather than final answers. Waiting for everything to settle holds the whole back for the sake of the parts that matter least.",
+      "mindset": "Freeze what has settled, and give what has not a rule instead of an answer."
+    },
+    {
+      "id": "pmp-pr2-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "interface-control",
+        "scope-baseline",
+        "hardware-software",
+        "archetype-trade-off"
+      ],
+      "stem": "A domestic heating manufacturer is building a smart thermostat. The circuit board and enclosure go to a contract manufacturer whose tooling takes 14 weeks; the companion app is built in two-week sprints from a product backlog. The app team keeps finding reasons to change what the board must report, most recently room-humidity readings, and the hardware lead says the board design cannot be finalised. What should the project manager propose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Run the hardware work in sprints alongside the app team, so that the board can absorb new reporting needs as quickly as the app discovers them.",
+          "correct": false,
+          "rationale": "Short iterations do not shorten a 14-week tooling lead time, so the board still has to be frozen at some point. The candidate applies the app's way of working to a deliverable whose economics rule it out."
+        },
+        {
+          "id": "b",
+          "text": "Fix the board-to-app interface under change control by an agreed date, while leaving the app's own backlog free to change within that interface.",
+          "correct": true,
+          "rationale": "The interface is where the two approaches meet, and only it needs the stability the tooling lead time demands. Freezing it on a date gives the hardware its baseline and leaves the app free to keep learning inside it."
+        },
+        {
+          "id": "c",
+          "text": "Ask the app team to finish its whole backlog for the reporting screens first, so the full set of board requirements is known before design begins.",
+          "correct": false,
+          "rationale": "It trades the hardware's problem for the app's: the app cannot be finished without real boards to learn from, and the hardware waits months. The candidate makes the flexible part fixed to suit the fixed part."
+        },
+        {
+          "id": "d",
+          "text": "Have the hardware lead include every reading the app team might plausibly need on the board, so later app changes do not touch the hardware design.",
+          "correct": false,
+          "rationale": "Designing in every plausible sensor adds cost to every unit and still cannot anticipate everything. The candidate is buying the absence of a scope decision with permanent product cost."
+        }
+      ],
+      "explanation": "In a hybrid project, scope that is expensive to change and scope that is cheap to change have to be separated, and the boundary between them is where the baseline matters most. Fixing the interface on an agreed date gives the long-lead work a stable definition, while the iterative work keeps its freedom inside that boundary. Making everything fixed, or everything flexible, throws away the advantage of one of the two approaches.",
+      "mindset": "Fix the boundary between fixed and flexible work, and let each side work its own way."
+    },
+    {
+      "id": "pmp-pr2-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "requirements-traceability",
+        "regulated-product",
+        "definition-of-done",
+        "archetype-trade-off"
+      ],
+      "stem": "A diagnostics company's laboratory analyser software is regulated: every baselined design input must trace to the code and tests that satisfy it. The software is built in sprints from user stories. A business analyst rebuilds the traceability matrix by hand before each quarterly design review, which takes about three weeks and each time finds several stories with no clear link. The team asks whether the matrix can simply be dropped. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the quarterly rebuild of the matrix but add a second analyst to it, so the work takes half the time before each design review.",
+          "correct": false,
+          "rationale": "Twice the people rebuilding links after the fact still find the missing ones months late, when the developers have moved on. The candidate is speeding up reconstruction rather than removing the need for it."
+        },
+        {
+          "id": "b",
+          "text": "Make linking each story to its design inputs and tests part of the definition of done, so traceability is complete whenever a story is.",
+          "correct": true,
+          "rationale": "Recording the link at the moment the work is done costs minutes, is made by the person who knows the answer, and keeps the matrix current at every review. Compliance and iteration stop competing for the same three weeks."
+        },
+        {
+          "id": "c",
+          "text": "Trace the design inputs to epics rather than individual stories, which keeps the regulator's chain intact with far less linking effort in each sprint.",
+          "correct": false,
+          "rationale": "The regulation requires trace to the code and tests that satisfy each input, and an epic is neither. The candidate saves effort by tracing at a level that no longer shows what satisfies the requirement."
+        },
+        {
+          "id": "d",
+          "text": "Pause story development for one sprint each quarter so that the whole team can rebuild and check the matrix together before the design review.",
+          "correct": false,
+          "rationale": "Using the people who did the work improves accuracy, but it costs a sprint of delivery every quarter and still captures links long after they were made. The candidate accepts batch reconstruction as inevitable."
+        }
+      ],
+      "explanation": "When an iterative team works under a requirement for formal traceability, the cheapest place to create the trace is at the moment each item is finished, by the people who finished it. Reconstructing links in batches is slow and finds gaps too late to fix easily; tracing at a coarser level satisfies the effort budget but not the purpose. Putting the obligation into the definition of done turns a periodic compliance exercise into a by-product of normal work.",
+      "mindset": "Capture evidence when the work is done, not when someone asks for it."
+    },
+    {
+      "id": "pmp-pr2-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "scope-assumptions",
+        "scope-baseline",
+        "impact-analysis",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "You are managing an insurer's move of 600 staff into a leased office in Dublin. The approved scope statement assumes the landlord will install the floor-box data cabling, so the WBS covers only network equipment and desk set-up; the assumption was never entered in the risk register. The landlord's agent now writes that cabling is the tenant's responsibility, and the insurer's legal team agrees. The raised floors close in seven weeks, and quotes for the cabling are around €140,000. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record the assumption as invalid and analyse what adding the cabling means for scope, cost and schedule, working back from the date the raised floors close.",
+          "correct": true,
+          "rationale": "The scope baseline was built on a premise that is now known to be false. Establishing the size of the gap against the hard floor-closure date is what makes a quick, informed decision possible."
+        },
+        {
+          "id": "b",
+          "text": "Raise a change request to add the cabling to the scope baseline, carrying the impact analysis, so the sponsor can decide well before the raised floors are closed.",
+          "correct": true,
+          "rationale": "The work is not in the baseline, so adding it is a change that needs a decision from the person who owns the budget. Raising it now leaves time for that decision and for the installation."
+        },
+        {
+          "id": "c",
+          "text": "Instruct the network contractor to begin installing the cabling at once under its existing order, and bring the cost through change control once the work is under way.",
+          "correct": false,
+          "rationale": "The candidate is right about the urgency but commits €140,000 of unapproved work. Starting first and seeking approval afterwards turns change control into a record of decisions already made."
+        },
+        {
+          "id": "d",
+          "text": "Ask the insurer's legal team to challenge the landlord's reading of the lease formally, and hold the cabling question open until that dispute has been settled.",
+          "correct": false,
+          "rationale": "The legal team has already confirmed the landlord's position. The candidate spends the seven weeks on a dispute the client does not expect to win, while the floor-closure date approaches."
+        },
+        {
+          "id": "e",
+          "text": "Treat the cabling as outside the project, add it to the scope statement's exclusions, and tell the insurer's facilities team that it must arrange the work separately.",
+          "correct": false,
+          "rationale": "An office without data cabling is not a usable office, so excluding it hides a dependency rather than resolving it. Deciding the boundary unilaterally also takes a scope decision away from the sponsor."
+        }
+      ],
+      "explanation": "Assumptions in a scope statement are part of what the baseline rests on, so when one is shown to be false the scope has to be re-examined rather than defended. The response is to accept the new fact, size its effect on scope, cost and schedule, and put the resulting change to whoever approves the baseline, early enough for the decision still to matter. Acting before approval, contesting a settled fact or quietly moving the work outside the boundary each avoids that decision instead of enabling it.",
+      "mindset": "When an assumption fails, take the new fact as given and re-plan through the baseline, quickly."
+    },
+    {
+      "id": "pmp-pr2-134",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "sprint-goal",
+        "sprint-cancellation",
+        "product-owner",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Three days into a two-week sprint, a payroll software company's team is building support for a proposed change to employee tax allowances; it is the entire sprint goal. The government announces that the change has been withdrawn and will not happen. About a third of the sprint's work is done, and the product backlog holds plenty of other valuable items. Which two actions best fit agile practice?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The product owner decides whether to cancel the sprint, since its goal no longer has any value to the business.",
+          "correct": true,
+          "rationale": "When a sprint goal becomes obsolete, cancelling the sprint is an option, and the decision belongs to the product owner because it is a judgement about value."
+        },
+        {
+          "id": "b",
+          "text": "The team finishes the sprint as planned, because the sprint backlog was committed and changing it mid-sprint breaks the timebox.",
+          "correct": false,
+          "rationale": "The timebox protects a goal, and this goal no longer exists. The candidate is honouring the form of the commitment after its purpose has gone, spending ten days on work nobody will use."
+        },
+        {
+          "id": "c",
+          "text": "The project manager cancels the sprint straight away, because the announcement has made its goal impossible to achieve.",
+          "correct": false,
+          "rationale": "The reasoning about the goal is right, but cancelling a sprint is the product owner's call. The candidate is acting on the correct conclusion without the authority to do so."
+        },
+        {
+          "id": "d",
+          "text": "If the sprint is cancelled, the team holds a new sprint planning with a fresh goal drawn from the reordered product backlog.",
+          "correct": true,
+          "rationale": "Cancellation is followed by planning a new sprint, so the team's capacity goes straight to the next most valuable work with a coherent goal rather than a loose collection of items."
+        },
+        {
+          "id": "e",
+          "text": "The team keeps the sprint running and swaps in backlog items of equal size, so that velocity and the sprint length are both preserved.",
+          "correct": false,
+          "rationale": "Swapping items keeps the team busy but leaves a sprint with no goal to guide trade-offs. The candidate protects the metrics and the calendar rather than the coherence of the work."
+        },
+        {
+          "id": "f",
+          "text": "The team completes the tax-allowance stories already started, so the effort spent so far is not wasted, then picks up new items.",
+          "correct": false,
+          "rationale": "Finishing work whose purpose has disappeared adds cost without adding value. The candidate is letting effort already spent justify spending more."
+        }
+      ],
+      "explanation": "A sprint's scope exists to serve its goal, so when the goal becomes obsolete the scope has no reason to stand. The response is to let the person accountable for value decide whether to stop, and then re-plan around the next most valuable goal. Finishing obsolete work, preserving metrics or acting on someone else's authority all put the mechanics of the sprint ahead of the reason it exists.",
+      "mindset": "When the goal goes, let the plan go with it."
+    },
+    {
+      "id": "pmp-pr2-135",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "non-functional-requirements",
+        "requirements-documentation",
+        "requirements-traceability",
+        "archetype-make-visible"
+      ],
+      "stem": "A music festival is commissioning a new ticketing website under a fixed-price contract. Reviewing the requirements document before it is baselined, you find 64 functional requirements covering browsing, basket, payment and e-tickets, but nothing about how many buyers the site must handle at release time, how quickly pages must load or what availability is expected. Last year, 40,000 people queued in the first ten minutes of the general sale. Which two actions should the project manager take before the baseline is agreed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the festival's ticketing and operations leads to define measurable capacity, response-time and availability requirements, using last year's release-day demand as the basis.",
+          "correct": true,
+          "rationale": "Performance expectations exist whether or not anyone wrote them down. Turning them into measurable requirements now puts them in the fixed price instead of leaving them to be argued about on sale day."
+        },
+        {
+          "id": "b",
+          "text": "Add each new performance requirement to the requirements traceability matrix with a linked test, so that the supplier's testing has to show every one of them being met.",
+          "correct": true,
+          "rationale": "A requirement with no verification attached can be agreed and then never demonstrated. Tracing each to a test makes the supplier prove the site meets the release-day load before it is accepted."
+        },
+        {
+          "id": "c",
+          "text": "Rely on the hosting service level that the tender already asks each bidder to state, rather than adding requirements that the festival's organisers have not themselves raised.",
+          "correct": false,
+          "rationale": "A hosting service level covers whether the servers are up, not whether the site copes with 40,000 buyers at once. The candidate mistakes the organisers' silence for an absence of need."
+        },
+        {
+          "id": "d",
+          "text": "Ask the supplier to size the platform generously for peak demand and to include the extra hosting cost as a provisional sum within its fixed-price bid.",
+          "correct": false,
+          "rationale": "Generously sized is not a target anyone can test against. The candidate hands the definition of adequate to the party paid to deliver it, and the provisional sum reopens the price it was meant to fix."
+        },
+        {
+          "id": "e",
+          "text": "Baseline the functional requirements on schedule and plan a load test shortly before go-live, to find out how much demand the finished site can actually handle.",
+          "correct": false,
+          "rationale": "A load test without a stated target has no pass mark, and running it just before go-live finds the gap when the design can no longer change cheaply. The candidate treats measurement as a substitute for a requirement."
+        }
+      ],
+      "explanation": "Requirements documentation is incomplete until the qualities a solution must have are stated alongside what it must do. Capacity, speed, availability and similar qualities are usually assumed by stakeholders rather than voiced, so the project manager has to draw them out, express them as measurable thresholds and attach a means of verification to each. Under a fixed price this matters doubly, because anything unstated is something the supplier was never paid to deliver.",
+      "mindset": "Treat what stakeholders take for granted as requirements that still need writing down."
+    },
+    {
+      "id": "pmp-pr2-136",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "requirements-elicitation",
+        "elicitation-techniques",
+        "collect-requirements",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a court service's case-management replacement, the business analyst must decide how to elicit requirements from three different groups. Match each situation to the elicitation technique that suits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Listing clerks book hearings so quickly and habitually that, when interviewed, they cannot describe the steps they actually follow."
+        },
+        {
+          "id": "s2",
+          "text": "Around 900 magistrates across forty courts must be asked which of twelve candidate features matter most to them, within three weeks."
+        },
+        {
+          "id": "s3",
+          "text": "Listing, finance and judicial office leads each own part of the end-to-end process and disagree about where one stage ends and the next begins."
+        }
+      ],
+      "options": [
+        {
+          "id": "obs",
+          "text": "Observation of the work as it is done",
+          "correct": true,
+          "match": "s1",
+          "rationale": "When expertise has become habit, people describe what they think they do rather than what they do. Watching the work captures the steps, shortcuts and workarounds an interview would miss."
+        },
+        {
+          "id": "survey",
+          "text": "Questionnaire",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A large, dispersed group answering a bounded question in a short time is the case questionnaires are built for. Interviews or workshops could not reach 900 people in three weeks."
+        },
+        {
+          "id": "workshop",
+          "text": "Facilitated cross-functional workshop",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The disagreement is about hand-offs between groups, so it can only be resolved with all of them in the room. A facilitator helps them agree the boundaries together rather than separately."
+        },
+        {
+          "id": "bench",
+          "text": "Benchmarking against another organisation's system",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Benchmarking shows what others do and can inspire options, but none of these situations lacks ideas: each lacks access to what the service's own people know or need."
+        }
+      ],
+      "explanation": "Elicitation technique follows the nature of the gap in knowledge. Tacit, habitual knowledge needs observation; a large population with a bounded question needs a questionnaire; disagreement across group boundaries needs those groups together under facilitation. Choosing by what is familiar, rather than by what kind of knowledge is missing, produces confident requirements that are incomplete.",
+      "mindset": "Choose how to ask by working out what kind of knowledge is missing."
+    },
+    {
+      "id": "pmp-pr2-137",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "prioritisation",
+        "product-backlog",
+        "release-planning",
+        "archetype-trade-off"
+      ],
+      "stem": "A streaming service's product owner uses different prioritisation techniques for different backlog questions. Match each situation to the technique that answers it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "Items vary widely in size, and some lose value quickly: a licensing feature is worthless if it misses a rights deadline in eight weeks."
+        },
+        {
+          "id": "p2",
+          "text": "The team needs to know which features subscribers take for granted, so that their absence causes anger, and which would genuinely delight them."
+        },
+        {
+          "id": "p3",
+          "text": "A launch date is fixed, and stakeholders must agree which items the release cannot ship without and which can drop if time runs out."
+        }
+      ],
+      "options": [
+        {
+          "id": "wsjf",
+          "text": "Weighted shortest job first (cost of delay divided by duration)",
+          "correct": true,
+          "match": "p1",
+          "rationale": "When value decays at different rates and sizes differ, ordering by cost of delay over duration puts urgent, small items first and stops large, slow-decaying items blocking them."
+        },
+        {
+          "id": "kano",
+          "text": "Kano analysis",
+          "correct": true,
+          "match": "p2",
+          "rationale": "Kano classifies features by how their presence or absence affects satisfaction, separating basic expectations from delighters, which is exactly the question being asked."
+        },
+        {
+          "id": "moscow",
+          "text": "MoSCoW (must, should, could, won't)",
+          "correct": true,
+          "match": "p3",
+          "rationale": "With time fixed, scope is the variable, and MoSCoW makes stakeholders draw the line between what the release must contain and what can fall away under time pressure."
+        },
+        {
+          "id": "points",
+          "text": "100-point method (stakeholders divide 100 points across items)",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. It captures the relative preference of a group of stakeholders, but none of these questions turns on preference: they turn on time sensitivity, customer perception and a must-have line."
+        }
+      ],
+      "explanation": "Prioritisation techniques answer different questions, so the choice starts with the question. Time-sensitive value against varying size calls for cost of delay; how features affect customer satisfaction calls for a satisfaction model; a fixed date calls for a clear line between essential and droppable scope. Using one technique for every question gives tidy orderings that answer the wrong thing.",
+      "mindset": "Pick the prioritisation technique by the question you need answered."
+    },
+    {
+      "id": "pmp-pr2-138",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "scope-levels",
+        "product-backlog",
+        "wbs",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A parcel carrier's programme builds a depot extension under a predictive contract and a driver app in two-week sprints. Complete each sentence with where the scope item should be held. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The steering committee funds the capability 'drivers capture proof of delivery in the app', with a budget and a target quarter. It belongs in"
+        },
+        {
+          "id": "c2",
+          "text": "A driver suggests that proof of delivery should let them photograph where a parcel was left. It belongs in"
+        },
+        {
+          "id": "c3",
+          "text": "Installing the extension's loading-bay doors to the agreed specification, with its own cost and acceptance criteria. It belongs in"
+        }
+      ],
+      "options": [
+        {
+          "id": "roadmap",
+          "text": "the approved release plan as a funded feature, held at that level by the committee",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The committee governs capability, budget and timing, so the feature sits at the level it approves. The detail of how drivers capture proof is left to the team's backlog beneath it."
+        },
+        {
+          "id": "backlog",
+          "text": "the product backlog, for the product owner to refine and order",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A suggestion about how a feature should work is a candidate story. The product owner weighs it against everything else; it changes no approved baseline and needs no committee decision."
+        },
+        {
+          "id": "wp",
+          "text": "a work package in the WBS, described in the WBS dictionary",
+          "correct": true,
+          "match": "c3",
+          "rationale": "Fully specified physical work with its own cost and acceptance criteria is exactly what a predictive work package holds, and the dictionary carries the detail the contractor builds to."
+        },
+        {
+          "id": "sprint",
+          "text": "the current sprint backlog, for the team to start straight away",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Nothing here is urgent or already part of the sprint goal, and adding items mid-sprint bypasses the product owner's ordering. Even the driver's idea goes to the product backlog first."
+        }
+      ],
+      "explanation": "A hybrid programme holds scope at different levels in different artefacts, and putting each item at the right level is what keeps governance light and detail flexible. Funded capability belongs at the level the governing body approves; detail of how that capability works belongs in the product backlog; fully specified predictive work belongs in work packages. Pushing detail upwards clogs governance, and pushing commitments downwards hides them.",
+      "mindset": "Hold each piece of scope at the level of the person who decides it."
+    },
+    {
+      "id": "pmp-pr2-139",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "release-planning",
+        "velocity",
+        "forecasting",
+        "archetype-make-visible"
+      ],
+      "stem": "A fitness app team has six sprints left before a fixed launch date. Its last eight sprints delivered between 34 and 42 points each, and the product owner forecasts with the lowest and highest of these. The ordered release backlog holds 290 points. Work out the forecast range and the scope at risk.",
+      "blanks": [
+        {
+          "id": "low",
+          "label": "Points the team can expect to complete at its lowest velocity",
+          "numeric": true,
+          "expect": 204,
+          "tol": 0,
+          "unit": "points",
+          "rationale": "Six sprints at the lowest observed velocity: 6 × 34 = 204 points. Items down to this point in the ordered backlog are the ones the release can reasonably commit to."
+        },
+        {
+          "id": "high",
+          "label": "Points the team might complete at its highest velocity",
+          "numeric": true,
+          "expect": 252,
+          "tol": 0,
+          "unit": "points",
+          "rationale": "Six sprints at the highest observed velocity: 6 × 42 = 252 points. Items between 204 and 252 points may make the release if the team performs at the top of its range."
+        },
+        {
+          "id": "risk",
+          "label": "Points of ordered backlog beyond even the highest forecast",
+          "numeric": true,
+          "expect": 38,
+          "tol": 0,
+          "unit": "points",
+          "rationale": "290 − 252 = 38 points. This scope is unlikely to ship by the launch date and should be presented to stakeholders as a trade-off decision now, not discovered in the final sprint."
+        }
+      ],
+      "explanation": "With a fixed date, a velocity range turns an ordered backlog into three bands: what will very likely ship, what might, and what almost certainly will not. Forecasting with a range rather than an average makes the uncertainty visible, and drawing the bands on the ordered backlog shows stakeholders exactly which items sit in each. The lower band is the commitment; the upper band is the trade-off conversation to have early.",
+      "mindset": "Forecast a fixed date as a range, and show which scope falls in each part of it."
+    },
+    {
+      "id": "pmp-pr2-140",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "context-diagram",
+        "scope-boundary",
+        "scope-statement",
+        "archetype-make-visible"
+      ],
+      "stem": "The context diagram for a café chain's new loyalty system shows five external interfaces. Each label states how the draft scope statement treats that interface. Before the scope baseline is approved, select the interface that still needs a scope decision.",
+      "graphic": {
+        "viewBox": "0 0 700 360",
+        "title": "Context diagram of a loyalty system with five external interfaces and their scope status",
+        "caption": "Select an interface. Use Tab or the arrow keys to move between interfaces, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "till",
+          "n": 1,
+          "label": "Till system: sends each purchase to the loyalty system. In scope; data specification agreed",
+          "x": 20,
+          "y": 20,
+          "w": 200,
+          "h": 90,
+          "correct": false,
+          "rationale": "Listed as in scope with an agreed specification, so its boundary is settled. It is the most prominent interface, which is why it draws attention, but nothing about it is undecided."
+        },
+        {
+          "id": "pay",
+          "n": 2,
+          "label": "Card payment provider: no data exchanged. Listed under exclusions",
+          "x": 480,
+          "y": 20,
+          "w": 200,
+          "h": 90,
+          "correct": false,
+          "rationale": "An explicit exclusion is a scope decision, not a gap. Candidates sometimes pick it because it involves no work, but the scope statement has already said so."
+        },
+        {
+          "id": "agency",
+          "n": 3,
+          "label": "Marketing agency: receives a monthly customer extract. Shown on the diagram only; in neither inclusions nor exclusions",
+          "x": 20,
+          "y": 250,
+          "w": 200,
+          "h": 90,
+          "correct": true,
+          "rationale": "The diagram shows a data flow that the scope statement neither includes nor excludes, so nobody has decided whether building it is part of the project. That is exactly the kind of gap that becomes a dispute after baselining."
+        },
+        {
+          "id": "store",
+          "n": 4,
+          "label": "Mobile app stores: host the customer app. In scope; publishing listed as a deliverable",
+          "x": 480,
+          "y": 250,
+          "w": 200,
+          "h": 90,
+          "correct": false,
+          "rationale": "Publishing is named as a deliverable, so the interface is inside the boundary and accounted for. Its external ownership does not make its scope unclear."
+        },
+        {
+          "id": "finance",
+          "n": 5,
+          "label": "Head-office finance: receives a points-liability report. In scope; report format agreed",
+          "x": 250,
+          "y": 260,
+          "w": 200,
+          "h": 90,
+          "correct": false,
+          "rationale": "Both the inclusion and the report format are agreed, so this interface needs no further decision before the baseline is approved."
+        }
+      ],
+      "explanation": "A context diagram is a check on the scope statement: every interface it shows should be either included, with enough definition to build, or explicitly excluded. An interface that appears on the diagram but in neither list is an undecided boundary, and undecided boundaries are where scope disputes start. Reconcile the two documents before baselining, so each external flow has a recorded decision.",
+      "mindset": "Every line crossing the boundary needs a recorded decision on which side it falls."
+    }
+  ]
+}

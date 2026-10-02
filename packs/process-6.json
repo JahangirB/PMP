@@ -1,0 +1,1941 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 6 — Project finance",
+  "questions": [
+    {
+      "id": "pmp-pr6-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "estimating",
+        "rough-order-of-magnitude",
+        "initiation",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A district council asks you to scope the refurbishment of a 1970s leisure centre. So far you have a condition survey and a wish-list of facilities; no design work has started. The finance committee wants a cost figure this week to place in next year's capital programme, and the chair has asked for 'one number we can plan around'. What should the project manager provide?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A single figure of £8m drawn from recent leisure refurbishments elsewhere, with a ten per cent contingency added on top so the committee has the number it asked for.",
+          "correct": false,
+          "rationale": "This gives the chair what was asked for rather than what is known. Ten per cent contingency on a figure whose real uncertainty is several times larger creates false confidence the capital programme will be built on."
+        },
+        {
+          "id": "b",
+          "text": "A statement that no responsible figure can be given until the concept design is complete, with a date by which a costed design will be ready for the committee.",
+          "correct": false,
+          "rationale": "Refusing to estimate treats early uncertainty as a reason to give nothing. The committee has a legitimate need to plan, and a range with assumptions meets it; declining leaves it to invent its own number."
+        },
+        {
+          "id": "c",
+          "text": "A per-square-metre rate from a published industry cost guide applied to the floor area, presented as the budget figure so that the capital programme can be finalised this week.",
+          "correct": false,
+          "rationale": "A unit rate is a reasonable way to produce an early figure, but presenting it as the budget converts a rough estimate into a commitment. The error is the claimed precision, not the method."
+        },
+        {
+          "id": "d",
+          "text": "A rough order of magnitude range, such as £6.5m to £11m, with the assumptions behind it and the points at which the range will narrow as design progresses.",
+          "correct": true,
+          "rationale": "With no design, the honest estimate is a wide range. Stating the assumptions and when it will tighten gives the committee something to plan with without implying a precision that does not yet exist."
+        }
+      ],
+      "explanation": "Estimate precision follows definition. At initiation the honest output is a range whose width reflects what is not yet known, together with the assumptions that would move it. Presenting an early figure as a point estimate, however it is padded or sourced, invites the organisation to commit funds against a precision that does not exist; the range is then refined progressively as the design matures.",
+      "mindset": "Give an early estimate the width its information deserves, and say what will narrow it."
+    },
+    {
+      "id": "pmp-pr6-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "agile-budgeting",
+        "burn-up",
+        "backlog-prioritisation",
+        "archetype-trade-off"
+      ],
+      "stem": "Your travel-booking app team is funded for eight more sprints at €52,000 each, and the sponsor has said that is the full budget for this release. The burn-up chart shows that, at the team's stable velocity, the remaining release backlog needs about eleven sprints. Nothing in the backlog is contractually committed. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the sponsor now for a further €156,000 to fund three more sprints, using the burn-up chart and the team's stable velocity as evidence that the full backlog needs them.",
+          "correct": false,
+          "rationale": "The evidence is sound but the question is premature. It assumes every remaining item is worth funding, when nobody has yet checked whether the lowest-value items justify €156,000."
+        },
+        {
+          "id": "b",
+          "text": "Add two contract developers for the remaining sprints so that velocity rises enough to clear the backlog, and ask the sponsor to fund the extra cost per sprint this creates.",
+          "correct": false,
+          "rationale": "Adding people to a stable team rarely raises velocity in proportion and often lowers it at first, while it certainly raises cost per sprint. It also assumes the whole backlog must be delivered."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to revisit their estimates in the next refinement session, since an eleven-sprint forecast may reflect cautious sizing rather than the real effort that is left.",
+          "correct": false,
+          "rationale": "This treats an empirical forecast as an estimating error without evidence. Velocity is stable, so the burn-up is the best information available, and pressure to resize tends to deflate points rather than work."
+        },
+        {
+          "id": "d",
+          "text": "Work with the product owner to order the backlog so the highest-value items fit within the eight funded sprints, and show the sponsor the cost of the remainder as a separate decision.",
+          "correct": true,
+          "rationale": "With a fixed budget, scope is the variable. Fitting the most valuable work into the funded sprints protects the release, and pricing the rest turns a request for more money into a decision the sponsor can weigh item by item."
+        }
+      ],
+      "explanation": "When an agile budget is fixed, scope is the variable, and the first financial task is to find what the funded capacity can buy in value terms. Only once the product owner has ordered the backlog against that envelope does a request for more money become a real decision, because the sponsor can then see exactly what the extra spend would purchase and judge it on its merits.",
+      "mindset": "Spend a fixed budget on the most valuable work first, then price what is left."
+    },
+    {
+      "id": "pmp-pr6-103",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "budget-reduction",
+        "rebaselining",
+        "options-analysis",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Halfway through an ERP rollout for a logistics group, the executive committee cuts your budget from €2.0m to €1.7m as part of group-wide savings, and the sponsor confirms the decision is final. Configuration work runs in sprints; data migration and cutover are planned predictively. €140,000 of contingency remains unspent. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prepare costed options showing what scope and timing can be delivered within €1.7m, agree the choice with the sponsor, and rebaseline through change control.",
+          "correct": true,
+          "rationale": "The cut is a new constraint, not a negotiation. Showing what each option delivers lets the sponsor choose where the reduction falls, and a formal rebaseline keeps the measures honest from here on."
+        },
+        {
+          "id": "b",
+          "text": "Draw the remaining €140,000 of contingency into the plan to soften the cut, and look for the other €160,000 through efficiencies across the sprint teams over the next quarter.",
+          "correct": false,
+          "rationale": "Spending contingency on a budget cut leaves the identified risks it was held for unfunded, and unspecified efficiencies are a hope rather than a plan. The cut is hidden rather than managed."
+        },
+        {
+          "id": "c",
+          "text": "Apply a fifteen per cent reduction to every workstream's budget so that each team shares the cut equally and no single area carries a disproportionate loss of scope.",
+          "correct": false,
+          "rationale": "An equal cut looks fair but ignores where value and risk sit. Cutover and migration may have almost no slack, while some configuration scope may be cheap to defer."
+        },
+        {
+          "id": "d",
+          "text": "Prepare a business case showing the benefits lost through the cut and ask the sponsor to present it to the executive committee so the original funding can be reconsidered.",
+          "correct": false,
+          "rationale": "The sponsor has said the decision is final. Spending effort on reopening it delays the re-planning the project now needs and uses the sponsor's credibility on a closed question."
+        }
+      ],
+      "explanation": "When funding is reduced by a decision that will not be revisited, the project's task is to re-plan to the new envelope transparently: show the options for scope, schedule and risk that fit it, let the sponsor choose, and make the new baseline formal. Spending contingency to absorb a cut leaves identified risks unfunded, and an across-the-board percentage ignores where value and risk actually sit.",
+      "mindset": "Treat a final funding decision as a new constraint to plan to, not a position to argue with."
+    },
+    {
+      "id": "pmp-pr6-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "control-accounts",
+        "variance-analysis",
+        "cost-reporting",
+        "archetype-make-visible"
+      ],
+      "stem": "On a hospital wing fit-out, the monthly report shows a project cost performance index of 1.01 and the sponsor describes the project as on budget. Underneath, the mechanical and electrical control account has a CPI of 0.82, while the medical equipment account looks well under budget only because a £600,000 imaging purchase has slipped to next quarter. The report template shows project-level figures only. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Transfer part of the unspent medical equipment budget into the mechanical and electrical account, so the overrun is covered without changing the overall project budget or baseline.",
+          "correct": false,
+          "rationale": "The equipment money is not spare, only late. Moving it covers one account by creating a shortfall in another next quarter, and reallocating between control accounts is a baseline change in its own right."
+        },
+        {
+          "id": "b",
+          "text": "Keep the project-level report as it is for now and review the position after the imaging purchase lands next quarter, when the true project index will be visible to everyone.",
+          "correct": false,
+          "rationale": "Waiting a quarter lets a known overrun grow unreported. The project manager already knows the true position, so the delay only shortens the time the sponsor has to respond."
+        },
+        {
+          "id": "c",
+          "text": "Report the mechanical and electrical overrun and its forecast at control account level, explaining that the healthy project index is being held up by a timing slip.",
+          "correct": true,
+          "rationale": "The offset is temporary and disappears when the imaging purchase lands. Reporting at control account level shows the sponsor the real overrun now, while there is still time to act on it."
+        },
+        {
+          "id": "d",
+          "text": "Ask the mechanical and electrical contractor for a recovery plan targeting a CPI of 0.95 within two months, and report progress against it within the existing project-level figures.",
+          "correct": false,
+          "rationale": "A recovery plan is a sensible response to the overrun, but reporting it inside project-level figures keeps the sponsor unaware there is anything to recover from. Corrective action does not replace disclosure."
+        }
+      ],
+      "explanation": "Aggregated performance indices can hide a real overrun behind an unrelated timing variance, and the offset vanishes the moment the delayed spend arrives. Variances should be analysed and reported at the level where they are controlled, with timing effects separated from genuine cost performance, so that decision-makers see a problem while there is still time to act on it.",
+      "mindset": "Look beneath a healthy total before trusting it, and report what the total hides."
+    },
+    {
+      "id": "pmp-pr6-105",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "agile-budgeting",
+        "financial-reporting",
+        "run-rate",
+        "archetype-make-visible"
+      ],
+      "stem": "Your organisation's finance director asks the three Scrum teams building a new claims product to report monthly 'percentage complete against the annual budget', as the predictive projects do. Each team costs a stable £68,000 a month, and the backlog is reprioritised every sprint as user feedback arrives. Which two measures would give finance an honest view of the money?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The percentage of backlog items completed so far this year, reported against the percentage of the annual budget spent to date.",
+          "correct": false,
+          "rationale": "The backlog is meant to change every sprint, so its percentage complete measures progress against a plan the teams are designed to revise. The figure would move whenever items are added or removed."
+        },
+        {
+          "id": "b",
+          "text": "Actual spend against the funded run rate, showing how many months of funded capacity remain at the current team cost.",
+          "correct": true,
+          "rationale": "With stable team costs, the financial question is how much funded runway is left. Spend against run rate answers it directly and exposes any drift in team cost."
+        },
+        {
+          "id": "c",
+          "text": "Cost per story point for each of the three teams, compared side by side so that finance can see which team gives the best value for money.",
+          "correct": false,
+          "rationale": "Story points are a relative scale that each team calibrates for itself. Comparing cost per point across teams treats a private sizing unit as a common currency and rewards point inflation."
+        },
+        {
+          "id": "d",
+          "text": "Value delivered per release against the product goal, such as features in live use and the outcome measures each was meant to move.",
+          "correct": true,
+          "rationale": "Finance needs to know what the money is buying. Outcomes against the product goal show return on the spend in a way that survives reprioritisation."
+        },
+        {
+          "id": "e",
+          "text": "Hours booked against each feature compared with its original hour estimate, so that overruns on individual features can be spotted early.",
+          "correct": false,
+          "rationale": "This imports task-level cost control into a model where cost is set by team capacity. It adds reporting overhead and invites the team to protect estimates rather than deliver value."
+        }
+      ],
+      "explanation": "When a team's cost is stable and its scope is deliberately variable, the financial questions become how much funded capacity remains and what the money is buying. Measures borrowed from fixed-scope projects, such as percentage of backlog complete or hours against estimate, track progress against a plan the team is designed to change, and cross-team point comparisons treat a relative sizing scale as if it were money.",
+      "mindset": "Report agile spend as runway and value, because that is what the money actually buys."
+    },
+    {
+      "id": "pmp-pr6-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "spending-guardrails",
+        "delegated-authority",
+        "team-budget",
+        "archetype-use-own-authority"
+      ],
+      "stem": "Your organisation lets each agile team spend up to 5,000 a quarter on tools and services without further approval, provided purchases are logged. Your mobile game team has spent 600 this quarter and now wants a device-testing service costing 3,800 for the remaining eight weeks. The product owner agrees it will cut release defects. What should you do as the team's delivery lead?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Send a purchase request to finance for formal approval, attaching the product owner's support, because 3,800 uses most of what is left in this quarter's allowance.",
+          "correct": false,
+          "rationale": "The allowance exists so that purchases within it do not need finance approval. Escalating anyway adds delay and signals that the delegation is not being trusted or used."
+        },
+        {
+          "id": "b",
+          "text": "Approve the subscription within the team's quarterly allowance and record it in the spend log along with the expected benefit for the product owner.",
+          "correct": true,
+          "rationale": "The purchase fits inside the guardrail with room to spare and has product owner support. Logging it provides the transparency the guardrail asks for in place of prior approval."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to put the purchase to stakeholders at the next sprint review so that the spending decision is made openly with the people who fund the team.",
+          "correct": false,
+          "rationale": "Sprint review is for inspecting the product, not approving small purchases. It turns a delegated decision into a committee one and delays a tool the team needs now."
+        },
+        {
+          "id": "d",
+          "text": "Defer the subscription to next quarter so the team keeps headroom for unexpected tool costs, and use the free tier of the service for the remaining eight weeks.",
+          "correct": false,
+          "rationale": "Keeping headroom sounds prudent, but it holds back a purchase with a clear benefit to guard against costs nobody has identified. The allowance is there to be used well, not preserved."
+        }
+      ],
+      "explanation": "Delegated spending guardrails exist so that small, low-risk decisions are taken quickly by the people closest to the work, with transparency provided by logging rather than by prior approval. Escalating a purchase that sits inside the guardrail adds delay, signals that the delegation is not trusted, and spends the time of the people the guardrail was designed to free.",
+      "mindset": "Use the authority you have been delegated, and keep the record that makes it trustworthy."
+    },
+    {
+      "id": "pmp-pr6-107",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "earned-value",
+        "cost-reporting",
+        "spend-versus-plan",
+        "archetype-diagnose-first"
+      ],
+      "stem": "At the end of month five of a water-treatment plant upgrade, the finance report shows actual spend to date of 1,240,000 against planned spend to date of 1,240,000. The sponsor emails to say the project is 'exactly on budget' and asks you to confirm that in the steering committee pack. What should you do before confirming?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Confirm the on-budget position as reported, adding a note that the figures come from the finance system and will be refreshed at the next month end.",
+          "correct": false,
+          "rationale": "This repeats the sponsor's reading without testing it. Agreement between actual and planned spend is not evidence of cost performance, so the pack would carry an unsupported conclusion."
+        },
+        {
+          "id": "b",
+          "text": "Check whether any purchase orders have been raised but not yet invoiced, so that committed costs are shown alongside actual spend in the steering pack.",
+          "correct": false,
+          "rationale": "Commitments are useful context for cash, but they do not answer the question asked. Spend plus commitments still says nothing about how much work has been done for the money."
+        },
+        {
+          "id": "c",
+          "text": "Establish how much of the planned work has actually been completed, so that spend can be compared with the value of the work it has bought.",
+          "correct": true,
+          "rationale": "Spend matching planned spend says only that money is leaving at the expected rate. Without earned value there is no way to say whether that money bought the expected work."
+        },
+        {
+          "id": "d",
+          "text": "Compare the latest supplier invoices with their contract rates line by line, so that the steering committee can rely on the accuracy of the actual spend figure.",
+          "correct": false,
+          "rationale": "Verifying the accuracy of actual cost is good practice, but an accurate spend figure compared with planned spend still cannot show whether the project is over or under cost."
+        }
+      ],
+      "explanation": "Comparing spend with planned spend shows only whether money is going out at the expected rate; it says nothing about whether the expected work has been done for it. Cost performance needs a measure of work accomplished, set against what was actually spent, and without it a project that is behind schedule and over cost per unit of work can appear perfectly on budget.",
+      "mindset": "Ask what the money has bought before saying whether it was well spent."
+    },
+    {
+      "id": "pmp-pr6-108",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "estimating",
+        "estimating-techniques",
+        "cost-estimates",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A construction firm needs cost estimates for three pieces of work at different stages of definition. Match each situation to the estimating technique that fits the information available. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "A board wants an early figure for a distribution warehouse that closely resembles one the firm finished last year, and almost no design detail exists yet."
+        },
+        {
+          "id": "s2",
+          "text": "Data cabling must be installed in 340 retail branches, and costs from 60 completed branches give a reliable, consistent cost per branch."
+        },
+        {
+          "id": "s3",
+          "text": "The design for a laboratory fit-out is complete, every work package is defined, and each package owner has priced their own scope with confidence."
+        }
+      ],
+      "options": [
+        {
+          "id": "analogous",
+          "text": "Analogous estimating from the cost of the comparable past project, adjusted for known differences",
+          "correct": true,
+          "match": "s1",
+          "rationale": "With a close precedent and little detail, scaling the actual cost of the similar project is the quickest credible figure, at the accuracy an early decision needs."
+        },
+        {
+          "id": "parametric",
+          "text": "Parametric estimating, multiplying a proven unit cost by the number of units",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A reliable cost driver with a consistent rate from 60 completions is exactly the condition for a parametric estimate, and it scales to 340 branches with good accuracy."
+        },
+        {
+          "id": "bottomup",
+          "text": "Bottom-up estimating, rolling work package costs up into a single project total",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Once the scope is decomposed and each package is priced by its owner, aggregating those estimates gives the most accurate figure available."
+        },
+        {
+          "id": "threepoint",
+          "text": "Three-point estimating, weighting optimistic, most likely and pessimistic figures for each activity",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Three-point estimating suits activities whose cost is genuinely uncertain and can be described as a range. The warehouse has no activities yet, the cabling has a proven rate, and the laboratory packages are priced with confidence."
+        }
+      ],
+      "explanation": "The estimating technique follows the information available: a whole-project comparison when only a similar past project is known, a unit rate when a reliable cost driver exists, and an aggregation of package estimates once the scope has been decomposed. Using a more detailed technique than the information supports produces false precision, while using a coarser one once the detail exists throws away accuracy that has already been paid for.",
+      "mindset": "Choose the estimating method that the information in hand can actually support."
+    },
+    {
+      "id": "pmp-pr6-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "capitalisation",
+        "cost-classification",
+        "finance-policy",
+        "archetype-route-to-owner"
+      ],
+      "stem": "A housing association capitalises development of new systems but expenses maintenance of live ones. Your hybrid team splits its time between building a new tenant portal and fixing defects in the existing repairs system. Near year end, an accountant asks you to 'just code all the team's time as capital, since it's a project'. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Code all of the team's time as capital as the accountant requested, since classifying costs is finance's responsibility and the instruction came from the finance team itself.",
+          "correct": false,
+          "rationale": "Deferring to finance is right in principle, but this instruction appears to contradict finance's own policy. Complying silently puts a likely misstatement into the accounts with the project's data behind it."
+        },
+        {
+          "id": "b",
+          "text": "Give finance time records split by type of work, and point out to the finance controller that the request appears to conflict with the capitalisation policy.",
+          "correct": true,
+          "rationale": "Applying the policy is finance's call, but it needs data only the project holds. Supplying the split and flagging the apparent conflict to the accountable person respects both roles."
+        },
+        {
+          "id": "c",
+          "text": "Estimate the split from the sprint backlog, roughly seventy per cent new development and thirty per cent defect work, and code the team's time on that basis.",
+          "correct": false,
+          "rationale": "This takes an accounting judgement the project manager does not own and bases it on an estimate rather than recorded time. A defensible split needs actual records and finance's application of the policy."
+        },
+        {
+          "id": "d",
+          "text": "Leave the team's time uncoded for now and let the year-end auditors decide the right treatment, since they will be reviewing the capital additions in any case.",
+          "correct": false,
+          "rationale": "Auditors test the organisation's treatment; they do not make it. Leaving the data uncoded pushes the problem to the point where it is most expensive to fix."
+        }
+      ],
+      "explanation": "Capitalisation is an accounting judgement that belongs to finance under the organisation's policy, but it depends on project data only the project can supply. The project manager's job is to record costs in a way that lets the policy be applied, by type of work rather than by the label 'project', and to raise an instruction that seems to contradict policy with the person accountable for it, rather than complying silently or making the accounting call personally.",
+      "mindset": "Supply the data that lets the policy owner apply the policy, and say so when an instruction cuts across it."
+    },
+    {
+      "id": "pmp-pr6-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "foreign-exchange",
+        "cost-forecasting",
+        "treasury",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your budget for a food-packaging line is held in sterling, but the main equipment contract, worth €2.4m, is priced in euros and payable on delivery in five months. The estimate assumed a fixed exchange rate, currency was not in the risk register, and the euro has since strengthened by 7 per cent. The organisation's treasury team manages all foreign-exchange exposure. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Quantify the exposure at today's rate, reflect it in the cost forecast, and take it to treasury so they can decide whether and how to hedge the payment.",
+          "correct": true,
+          "rationale": "The project can measure the exposure and show it honestly, but the hedging tools sit with treasury. Giving them the size and timing lets the owner of the instrument decide."
+        },
+        {
+          "id": "b",
+          "text": "Draw enough contingency to cover the 7 per cent movement straight away, so that the cost forecast stays within budget whichever way the rate moves before delivery.",
+          "correct": false,
+          "rationale": "Contingency was sized for identified risks and currency was not one of them. Drawing it now spends reserve on a rate that may yet move back, and pre-empts a cheaper hedge treasury could arrange."
+        },
+        {
+          "id": "c",
+          "text": "Ask procurement to reopen the contract with the supplier and propose converting the price into sterling at the original rate, removing the currency risk from the project.",
+          "correct": false,
+          "rationale": "A supplier asked to take currency risk after signature will either refuse or price it in. Reopening the contract is a costly route to a risk the organisation already has a function to manage."
+        },
+        {
+          "id": "d",
+          "text": "Add currency movement to the risk register with an owner and a trigger rate, then monitor it each month until the payment falls due on delivery in five months.",
+          "correct": false,
+          "rationale": "Registering the risk is correct but incomplete. Monitoring against a trigger accepts the loss as it happens, when the exposure is already quantifiable and someone in the organisation can act on it now."
+        }
+      ],
+      "explanation": "A financial exposure the project cannot control should be measured, reflected honestly in the forecast, and taken to whoever in the organisation owns the instrument that manages it. Foreign-exchange risk is typically held by a treasury function with hedging tools a project does not have, so the project's contribution is the size and timing of the exposure, not an improvised response from its own reserves.",
+      "mindset": "Size the exposure yourself, then hand it to whoever holds the tools to manage it."
+    },
+    {
+      "id": "pmp-pr6-111",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "contingency-reserve",
+        "expected-monetary-value",
+        "reserve-release",
+        "archetype-make-visible"
+      ],
+      "stem": "A coastal flood-defence scheme sizes its contingency reserve from expected monetary value. The register holds piling refusal (30 per cent, £120,000 impact), a breach during works (10 per cent, £400,000), a licensing delay (50 per cent, £36,000) and an opportunity to reuse dredged material (20 per cent, saving £50,000). Work out the reserve. The breach window then closes without incident: how much of the reserve is no longer needed?",
+      "blanks": [
+        {
+          "id": "reserve",
+          "label": "Contingency reserve from expected monetary value, in £",
+          "numeric": true,
+          "expect": 84000,
+          "tol": 500,
+          "unit": "£",
+          "rationale": "Each threat contributes probability × impact: 0.3 × 120,000 = 36,000; 0.1 × 400,000 = 40,000; 0.5 × 36,000 = 18,000. The opportunity offsets 0.2 × 50,000 = 10,000. Net: 36,000 + 40,000 + 18,000 − 10,000 = £84,000."
+        },
+        {
+          "id": "release",
+          "label": "Amount of reserve no longer needed once the breach risk is retired, in £",
+          "numeric": true,
+          "expect": 40000,
+          "tol": 500,
+          "unit": "£",
+          "rationale": "The breach contributed its expected value of 0.1 × 400,000 = £40,000 to the reserve, not its full £400,000 impact. Retiring the risk frees that share, leaving £44,000 to cover the exposure that remains."
+        }
+      ],
+      "explanation": "A reserve built from expected monetary value is the sum of each risk's probability-weighted impact, with opportunities netted off, so it covers the portfolio of risks rather than the worst case of any one. Because each risk contributed a known share, that share should be identified and released as the risk is retired, otherwise the reserve quietly becomes general padding that no longer corresponds to any exposure the project still carries.",
+      "mindset": "Keep the reserve tied to the risks that remain, and give back what a retired risk no longer needs."
+    },
+    {
+      "id": "pmp-pr6-112",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "control-accounts",
+        "variance-thresholds",
+        "cost-variance",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "The cost management plan for a highway resurfacing contract requires a formal variance report to the sponsor for any control account whose cost variance is unfavourable by more than 8 per cent of its earned value. The diagram lists the five control accounts at month four, in £ thousands. Select the account that triggers the report.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "Five control accounts with planned value, earned value and actual cost at month four",
+        "caption": "Select a control account. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "earth",
+          "n": 1,
+          "label": "Earthworks — PV 500, EV 420, AC 440",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "Cost variance is 420 − 440 = −20, which is 4.8 per cent of earned value. The large gap here is between planned and earned value, a schedule variance of −80, which the cost threshold does not cover."
+        },
+        {
+          "id": "struct",
+          "n": 2,
+          "label": "Structures — PV 300, EV 300, AC 330",
+          "x": 20,
+          "y": 95,
+          "w": 600,
+          "h": 60,
+          "correct": true,
+          "rationale": "Cost variance is 300 − 330 = −30, which is 10 per cent of earned value and beyond the 8 per cent threshold. The account is exactly on schedule, which is why it is easy to overlook."
+        },
+        {
+          "id": "drain",
+          "n": 3,
+          "label": "Drainage — PV 900, EV 950, AC 1,010",
+          "x": 20,
+          "y": 170,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "At −60 this is the largest cost variance in money, but against earned value of 950 it is 6.3 per cent. Choosing it reads the threshold as an absolute amount rather than a percentage."
+        },
+        {
+          "id": "surf",
+          "n": 4,
+          "label": "Surfacing — PV 200, EV 150, AC 135",
+          "x": 20,
+          "y": 245,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "Cost variance is 150 − 135 = +15, a favourable 10 per cent. The threshold applies to unfavourable variances, so a large percentage in the right direction does not trigger the report."
+        },
+        {
+          "id": "sign",
+          "n": 5,
+          "label": "Signage — PV 120, EV 110, AC 118",
+          "x": 20,
+          "y": 320,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "Cost variance is 110 − 118 = −8, which is 7.3 per cent of earned value. It is close to the threshold and worth watching, but it has not crossed it."
+        }
+      ],
+      "explanation": "A variance threshold is applied exactly as the plan defines it: which variance, measured against which base, and in which direction. Here that means cost variance as a percentage of earned value, unfavourable only. The common errors are reacting to the largest number in money, to the largest gap of any kind, or to a large favourable variance, each of which substitutes a different test for the one the plan set.",
+      "mindset": "Apply a threshold as it is written before reacting to whichever number looks largest."
+    },
+    {
+      "id": "pmp-pr6-113",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "agile-funding",
+        "incremental-funding",
+        "funding-models",
+        "archetype-trade-off"
+      ],
+      "stem": "A fintech firm is replacing annual project budgets with funding approaches matched to how much is known about the work. Complete each sentence with the funding approach that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "A new savings feature rests on an untested assumption that customers will link external accounts, and nobody can yet say whether it is worth building. The investment board should"
+        },
+        {
+          "id": "c2",
+          "text": "A long-lived payments platform team of stable size delivers continuously, and its priorities shift each month with regulatory and customer demand. The investment board should"
+        },
+        {
+          "id": "c3",
+          "text": "A one-off data-centre migration has a well-understood scope, a fixed regulatory deadline and a supplier quoting against a complete specification. The investment board should"
+        }
+      ],
+      "options": [
+        {
+          "id": "metered",
+          "text": "release a small first tranche tied to a learning milestone, with further money depending on the evidence it produces",
+          "correct": true,
+          "match": "c1",
+          "rationale": "When value is unproven, the cheapest way to buy certainty is a small, bounded investment that tests the assumption. Tying later money to evidence limits the loss if the assumption fails."
+        },
+        {
+          "id": "capacity",
+          "text": "fund the team's capacity for the period and let the product owner direct what that capacity works on",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A stable team's cost is predictable while its scope is not. Funding the capacity gives finance a reliable figure and leaves the product owner free to follow changing priorities without a budget change each month."
+        },
+        {
+          "id": "baseline",
+          "text": "approve a budget for the full defined scope and control spending against a cost baseline",
+          "correct": true,
+          "match": "c3",
+          "rationale": "Defined scope, a complete specification and a firm quote are the conditions under which a baselined budget is reliable. The control it gives is worth having here because the plan is unlikely to move."
+        },
+        {
+          "id": "detailed",
+          "text": "estimate every backlog item in detail and approve the total as a fixed multi-year budget",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A detailed backlog estimate fixed for years claims certainty that neither the untested feature nor the shifting platform work can support, and the migration is priced against a specification rather than a backlog."
+        }
+      ],
+      "explanation": "The funding approach should match how much is known about the work. Where value is unproven, fund small and buy evidence; where the team is stable but scope moves, fund capacity and let priorities change within it; where scope is defined and priced, a baselined budget gives control at little cost. Each choice trades flexibility for control, and the error is applying one model to every kind of work.",
+      "mindset": "Fund work in the way its uncertainty allows, not in the way the last budget was set."
+    },
+    {
+      "id": "pmp-pr6-114",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "earned-value",
+        "estimate-at-completion",
+        "forecasting",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A hybrid data-centre programme reports earned value on its three build workstreams, each of which is running over budget. Before forecasting, the project manager establishes why each overrun happened. Match each workstream to the estimate-at-completion basis that its cause supports. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Cooling: a one-off crane hire after a chiller was dropped on delivery caused the whole overrun, and the remaining installation work is unaffected."
+        },
+        {
+          "id": "s2",
+          "text": "Electrical: the electricians' negotiated day rate is 12 per cent above the estimate, and that rate applies to all of the remaining work."
+        },
+        {
+          "id": "s3",
+          "text": "Fit-out: work is over cost and behind schedule, and the client's fixed handover date means late work must be recovered through paid acceleration."
+        }
+      ],
+      "options": [
+        {
+          "id": "atypical",
+          "text": "Actual cost plus the remaining budgeted work at its planned rates",
+          "correct": true,
+          "match": "s1",
+          "rationale": "A one-off cause that will not recur leaves the remaining work at its original cost, so the overrun to date is carried forward without being multiplied across the rest of the workstream."
+        },
+        {
+          "id": "cpi",
+          "text": "Budget at completion divided by the cumulative cost performance index",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A rate that applies to all remaining work means the efficiency achieved so far will continue. Dividing by CPI projects that inefficiency across the whole budget."
+        },
+        {
+          "id": "composite",
+          "text": "Actual cost plus remaining budgeted work divided by the product of CPI and SPI",
+          "correct": true,
+          "match": "s3",
+          "rationale": "When a fixed date forces late work to be bought back, schedule slippage turns into cost. The composite index lets both the cost and the schedule performance weigh on the forecast."
+        },
+        {
+          "id": "bottomup",
+          "text": "Actual cost plus a new bottom-up estimate for all of the remaining work",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A fresh bottom-up estimate is for when the original estimate has been shown to be wrong. In all three workstreams the cause is understood and the original estimate for the remaining work still holds, adjusted by a known factor."
+        }
+      ],
+      "explanation": "Each estimate-at-completion formula is a claim about whether the cause of past variance will continue. A one-off cause argues for carrying the variance forward unchanged; a persistent cost cause argues for projecting the cost index; schedule pressure that will be bought back argues for weighting both indices; and a discredited original estimate argues for re-estimating. The forecast is only as sound as the diagnosis of cause that precedes it.",
+      "mindset": "Find out why the money went before predicting where the rest of it will go."
+    },
+    {
+      "id": "pmp-pr6-115",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "cost-of-delay",
+        "budget-reduction",
+        "financial-analysis",
+        "archetype-make-visible"
+      ],
+      "stem": "Finance proposes saving €540,000 by releasing one of the two teams building a language-learning app for the remaining nine months of its funded plan. With one team, the paid subscription tier would launch about four months later than planned. The product owner's forecast, based on trial conversion data, puts the tier's net revenue at €150,000 a month once live. The finance director has asked for your view before Friday's budget meeting. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the reduction, then work with the product owner to reorder the backlog so that the single remaining team delivers the paid tier ahead of every other roadmap item.",
+          "correct": false,
+          "rationale": "Reordering is a sensible response once a cut is decided, but accepting it without comment leaves finance deciding on half the numbers. The cost of the delay is never put in front of them."
+        },
+        {
+          "id": "b",
+          "text": "Set the saving against the roughly €600,000 of revenue the four-month delay would forgo, and give finance both figures with their assumptions before Friday.",
+          "correct": true,
+          "rationale": "The proposal counts the cost of the team but not the cost of the delay it causes. Putting both in the same currency, with the forecast's basis stated, lets finance decide on the full effect."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to validate the €150,000 forecast with a larger customer sample before offering finance any view, since the whole case rests on that one figure.",
+          "correct": false,
+          "rationale": "Testing the forecast matters, but it cannot be done by Friday and the decision will be taken without the project's input. A figure with its assumptions stated is more useful than a better figure next month."
+        },
+        {
+          "id": "d",
+          "text": "Tell finance that the team's velocity shows a single team would take twice as long, and recommend rejecting the saving because delivery dates across the roadmap would slip.",
+          "correct": false,
+          "rationale": "This argues in schedule terms to people deciding in money. Finance can weigh €540,000 against a delay only if the delay is also expressed as money, which is the step this option skips."
+        }
+      ],
+      "explanation": "A cost saving that delays a revenue-earning release is only a saving if the value lost through the delay is smaller. Cost of delay converts time into the same currency as the budget, so that a funding decision compares like with like. The project's contribution is to make that comparison visible with its assumptions attached, leaving the decision with the people who own it.",
+      "mindset": "Price the delay before agreeing to the saving that causes it."
+    },
+    {
+      "id": "pmp-pr6-116",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "sunk-cost",
+        "investment-appraisal",
+        "estimate-to-complete",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A regional airport's baggage-system replacement has spent £3.1m of its £4.0m budget. A bottom-up re-estimate, reviewed by the cost engineers last week, puts the remaining cost at £2.1m, so the project will finish at £5.2m. The benefits case, unchanged and realised only if the system is completed, is worth £4.5m. The sponsor tells the board 'we've spent too much to stop now'. What should the project manager recommend to the board?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Stop, because the £5.2m total cost now exceeds the £4.5m of benefits, so completing the system would leave the organisation worse off than if the project had not been started at all.",
+          "correct": false,
+          "rationale": "True of the original investment decision, but that decision has already been taken. Stopping now recovers none of the £3.1m and gives up £4.5m of benefits to save £2.1m."
+        },
+        {
+          "id": "b",
+          "text": "Continue, supporting the sponsor's case that stopping now would write off the £3.1m already invested and leave the airport with nothing to show for the money.",
+          "correct": false,
+          "rationale": "The decision is right but the reason is the sunk-cost error. A board taught to continue because of past spend will use the same logic when the remaining cost no longer justifies it."
+        },
+        {
+          "id": "c",
+          "text": "Defer the decision for a month while an independent reviewer validates the £2.1m estimate, since the whole recommendation depends on how reliable that figure really is.",
+          "correct": false,
+          "rationale": "Validation is prudent in general, but this estimate is fresh and reviewed, and it would have to more than double to change the answer. A month's delay costs more than the doubt it removes."
+        },
+        {
+          "id": "d",
+          "text": "Continue, on the grounds that the £2.1m still to spend buys £4.5m of benefits, and present that comparison to the board in place of the amount already spent.",
+          "correct": true,
+          "rationale": "The £3.1m is spent whether the project stops or not, so only the remaining cost and the benefits it secures can differ between the two choices. On that basis continuing is clearly worthwhile."
+        }
+      ],
+      "explanation": "A decision to continue or stop compares only what still differs between the choices: the cost still to be spent and the benefits still to be gained. Money already spent is the same under every option and so carries no weight, whether it is used to argue for stopping because the total is too high or for continuing because the spend must not be wasted. Getting the right answer for the wrong reason sets a precedent for the next overrun.",
+      "mindset": "Decide on the money still to be spent and the value it still buys."
+    },
+    {
+      "id": "pmp-pr6-117",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 1,
+      "tags": [
+        "cost-coding",
+        "month-end-close",
+        "actual-cost",
+        "archetype-act-now"
+      ],
+      "stem": "Reviewing the cost report for a hybrid warehouse-automation project, you notice that a 48,000 invoice for conveyor spares belonging to a different project in the same depot has been coded to yours. Finance closes the month's ledger tomorrow at noon, after which corrections need a formal journal and the error flows into both projects' monthly reports. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask finance today to recode the invoice to the correct project before tomorrow's close, and let that project's manager know the cost is moving to them.",
+          "correct": true,
+          "rationale": "The error is known, cheap to fix today and expensive to fix after noon tomorrow. Correcting it at source keeps both projects' actual costs right and warns the other manager before their report changes."
+        },
+        {
+          "id": "b",
+          "text": "Leave the ledger as it stands this month and adjust your own cost forecast to exclude the 48,000, with a footnote in your monthly report explaining the difference.",
+          "correct": false,
+          "rationale": "This fixes your own forecast while leaving the ledger, and the other project's report, wrong. It creates two versions of actual cost when one correction today would leave a single true one."
+        },
+        {
+          "id": "c",
+          "text": "Raise the miscoding at next week's project board so that the board can decide how the cost should be treated, with a note of the amount and the supplier involved.",
+          "correct": false,
+          "rationale": "There is no decision for the board to take; the invoice simply belongs elsewhere. Waiting a week lets the error pass through the close and into two sets of reports."
+        },
+        {
+          "id": "d",
+          "text": "Contact the supplier and ask them to reissue the invoice addressed to the other project, so that the correction is made at source rather than within the ledger.",
+          "correct": false,
+          "rationale": "A reissued invoice will not arrive before tomorrow's close, and the coding error is internal rather than the supplier's. It sends the fix the long way round while the deadline passes."
+        }
+      ],
+      "explanation": "Cost data is cheapest to correct before the period closes, and an error known before a deadline should be fixed before it. Actual cost feeds every performance measure, so a miscoded charge distorts two projects at once. Workarounds in a project's own reports leave the ledger wrong and create competing versions of the truth.",
+      "mindset": "Fix a known error in the numbers while it is still cheap to fix."
+    },
+    {
+      "id": "pmp-pr6-118",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "cloud-costs",
+        "team-budget",
+        "cost-control",
+        "archetype-act-now"
+      ],
+      "stem": "Your genomics data-platform team holds its own monthly cloud budget of €12,000. On day ten of the month the cost dashboard shows €11,200 already spent, because eight large test clusters created for a performance spike were never shut down and are still running at about €900 a day. Nobody needs them until the next spike in three weeks. Which two actions should the delivery lead take today?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Shut the idle clusters down today, after checking with the engineer who built them that no results still need to be saved.",
+          "correct": true,
+          "rationale": "Every day they run costs €900 for nothing. Stopping them is within the team's own budget authority, and a quick check protects any data that has not been kept."
+        },
+        {
+          "id": "b",
+          "text": "Tell the product owner and finance now that the month will overrun, with the likely figure once the clusters have been stopped.",
+          "correct": true,
+          "rationale": "The budget is already almost spent with twenty days to go, so an overrun is certain. Raising it now, with a figure, lets the people who fund the team plan rather than discover it at month end."
+        },
+        {
+          "id": "c",
+          "text": "Ask finance to raise this month's cloud budget to €20,000 so that the team's work is not interrupted while the clusters are reviewed over the coming week.",
+          "correct": false,
+          "rationale": "This asks for more money to keep paying for capacity nobody is using. The overrun needs reporting, but the waste needs stopping first."
+        },
+        {
+          "id": "d",
+          "text": "Scale the clusters down to their smallest instance size so that they cost less but stay available in case the performance work resumes earlier than planned.",
+          "correct": false,
+          "rationale": "It reduces the waste without ending it. Nobody needs the clusters for three weeks, and paying to keep them warm guards against a need nobody has identified."
+        },
+        {
+          "id": "e",
+          "text": "Add the cluster clean-up to the next retrospective's agenda so that the team agrees its own working rule for shutting down test environments after use.",
+          "correct": false,
+          "rationale": "A team rule is worth agreeing, but it prevents the next incident rather than ending this one. The clusters keep costing €900 a day until the retrospective."
+        }
+      ],
+      "explanation": "When spending is running away for no benefit, stopping the spend comes before analysing or preventing it, and the people who fund the work should hear about the resulting variance as soon as it is certain, not at the next reporting point. Improvements to how the team works belong in the follow-up, once the immediate loss has been contained.",
+      "mindset": "Stop money leaking first, say so straight away, and improve the process afterwards."
+    },
+    {
+      "id": "pmp-pr6-119",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "accruals",
+        "earned-value",
+        "actual-cost",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a broadcaster's studio refit, the in-house fit-out runs in sprints while a contractor installs the lighting rig to a fixed plan and invoices quarterly in arrears. This month the project CPI has risen from 0.97 to 1.24, and the contractor's site log shows the rig two-thirds installed. No contractor invoice has arrived since the quarter began. Which two actions should the project manager take before reporting the CPI?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Estimate the cost of contractor work performed but not yet invoiced, and include it in actual cost as an accrual.",
+          "correct": true,
+          "rationale": "Earned value already counts the rig work, so actual cost must count it too. Leaving the uninvoiced cost out compares a full month of value with a partial month of cost."
+        },
+        {
+          "id": "b",
+          "text": "Calculate the cost performance index separately for the in-house fit-out to see whether any of the improvement there is genuine.",
+          "correct": true,
+          "rationale": "Splitting the index by workstream shows how much of the jump is invoice timing and how much, if any, is real performance worth reporting."
+        },
+        {
+          "id": "c",
+          "text": "Report the 1.24 as it stands, since actual cost is taken from the finance system and the contractor's invoices will correct the figure next quarter.",
+          "correct": false,
+          "rationale": "The figure is known to be distorted now. Reporting it invites decisions on an improvement that will reverse when the invoice lands."
+        },
+        {
+          "id": "d",
+          "text": "Reduce the earned value claimed for the lighting rig until the contractor invoices, so that value and cost are recognised in the same reporting period.",
+          "correct": false,
+          "rationale": "This aligns the two figures by misstating progress instead of correcting cost. The work is done, so earned value is right and the schedule index would become wrong."
+        },
+        {
+          "id": "e",
+          "text": "Ask the contractor to move to monthly invoicing from now on, so that actual cost keeps pace with the progress recorded in the site log.",
+          "correct": false,
+          "rationale": "A useful change for future periods, but it does nothing for this month's report, which still compares completed work with costs that have not been recorded."
+        }
+      ],
+      "explanation": "Earned value analysis compares value and cost for the same work in the same period. When cost is recognised on invoice while value is recognised on progress, timing gaps make performance look better or worse than it is, so actual cost must include accruals for work performed. A sudden jump in an index is a prompt to find its source before reporting it as a trend.",
+      "mindset": "Treat a sudden improvement as a question to answer before it becomes a claim."
+    },
+    {
+      "id": "pmp-pr6-120",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "underspend",
+        "agile-funding",
+        "forecasting",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Three weeks before quarter end, your insurance-pricing product team is forecast to finish €90,000 under its €600,000 quarterly funding because two vacancies were filled late. The product owner wants to hire two contractors for the final three weeks, arguing that unspent money is lost and will make next quarter's request look inflated. The funding policy returns underspends to the portfolio. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support the contractor hire, choosing two well-defined backlog items they could finish in three weeks, so that the funding is turned into delivered value before it lapses.",
+          "correct": false,
+          "rationale": "Choosing well-defined items limits the waste, but the trigger for the spend is the deadline rather than the value. Contractors arriving for three weeks carry onboarding cost the team will feel."
+        },
+        {
+          "id": "b",
+          "text": "Use the €90,000 to prepay next quarter's software licences, which the team will need anyway, so the money buys something useful and next quarter's request can be smaller.",
+          "correct": false,
+          "rationale": "Prepaying moves cost between periods, so this quarter looks fully spent and next quarter looks cheaper than it is. Both figures stop reflecting what the team actually costs."
+        },
+        {
+          "id": "c",
+          "text": "Report the forecast underspend to the portfolio now, and judge any contractor hire on whether three weeks of their work is worth the cost rather than on using the funding.",
+          "correct": true,
+          "rationale": "Returned money funds other work, so it is not lost to the organisation. Reporting early lets the portfolio redeploy it, and any hire should stand on the value of the work alone."
+        },
+        {
+          "id": "d",
+          "text": "Leave the funding unspent without comment and lower next quarter's request by €90,000, since the late vacancies suggest the team cannot use its full allocation.",
+          "correct": false,
+          "rationale": "The vacancies are now filled, so the underspend was a one-off. Cutting next quarter's request on that basis underfunds a full team, and saying nothing denies the portfolio early use of the money."
+        }
+      ],
+      "explanation": "Funding is a means of buying value, not a target to be consumed. An underspend that returns to a portfolio is redeployed rather than lost, and is most useful when reported early. Spending to avoid an underspend, or shifting cost between periods, makes the figures describe the budget rather than the work, and a one-off cause should not be projected onto future periods.",
+      "mindset": "Spend money because the work is worth it, not because the period is ending."
+    },
+    {
+      "id": "pmp-pr6-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "estimating",
+        "escalation",
+        "cost-baseline",
+        "archetype-make-visible"
+      ],
+      "stem": "You are preparing the cost baseline for a four-year canal lock refurbishment. The estimating team's bottom-up figure of £38m is priced entirely at current 2026 rates, but most of the construction spend falls in 2028 and 2029. When you raise this, the lead estimator says inflation 'is finance's problem, not ours'. The sponsor wants to put the figure to the investment board next week. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Submit the £38m figure as the base estimate and attach a note recommending that finance adds inflation centrally when the board approves the capital programme for those later years.",
+          "correct": false,
+          "rationale": "This accepts the estimator's framing that escalation belongs elsewhere. The project is the only party that knows when its spend falls, and a board approving £38m has approved too little whatever finance does later."
+        },
+        {
+          "id": "b",
+          "text": "Raise the contingency reserve by around 10 per cent so that inflation is absorbed with the other cost risks, giving the board one combined allowance rather than several separate ones.",
+          "correct": false,
+          "rationale": "Escalation is near-certain and calculable, which makes it part of the expected cost rather than a risk allowance. Burying it in contingency hides the assumption and leaves less reserve for the risks the contingency was sized for."
+        },
+        {
+          "id": "c",
+          "text": "Add an escalation allowance phased to when the spend actually falls, shown as its own line beside the base estimate, with the price index and rates it assumes stated.",
+          "correct": true,
+          "rationale": "The estimate is in 2026 money and the bills arrive in 2028 and 2029, so the difference is a forecastable cost, not a risk. Showing it separately lets the board review the assumption and lets it be updated as indices move."
+        },
+        {
+          "id": "d",
+          "text": "Ask the estimating team to re-price every work package at forecast 2028 and 2029 rates, so that the base estimate itself reflects the prices the project will really pay for the work.",
+          "correct": false,
+          "rationale": "It reaches roughly the right total but welds the price assumption into hundreds of line items, where nobody can see or update it. It also means re-doing the whole estimate when one separate, phased line would do the job."
+        }
+      ],
+      "explanation": "Every estimate is stated at a price base date, and when spend falls years after that date the difference is escalation: a forecastable cost that belongs in the budget, phased to the spend profile and shown separately so its index and rates can be reviewed and updated. Leaving it out understates the budget; hiding it in contingency or in the unit rates makes the assumption impossible to challenge.",
+      "mindset": "Ask what year's money an estimate is in before calling it a budget."
+    },
+    {
+      "id": "pmp-pr6-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "earned-value",
+        "change-control",
+        "performance-baseline",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Three months ago the change control board approved adding a second loading bay to a distribution centre build, worth £420,000 of extra work, and the contractor started on it straight away. This month the project's cost performance index has fallen from 0.99 to 0.88, and the sponsor wants a cost recovery plan by Friday. Checking the cost baseline, you find it still shows the original budget at completion and control accounts. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prepare the recovery plan the sponsor has asked for, targeting the control accounts with the largest cost variances, and list the loading bay among the possible contributing factors.",
+          "correct": false,
+          "rationale": "It accepts the index at face value. If the approved work is not in the baseline, its cost appears as overrun with no value earned against it, and a recovery plan would chase a variance that is partly a bookkeeping gap."
+        },
+        {
+          "id": "b",
+          "text": "Raise a new change request to increase the budget at completion by £420,000, so that the loading bay work is properly funded and authorised before you report revised indices to the sponsor.",
+          "correct": false,
+          "rationale": "The change is already approved, so a second request duplicates a decision the board has made. The gap is that the approved change never reached the baseline, which is an update to make, not an approval to seek."
+        },
+        {
+          "id": "c",
+          "text": "Incorporate the approved change's budget into the affected control accounts and the baseline, then recalculate the indices before deciding whether any recovery plan is needed.",
+          "correct": true,
+          "rationale": "Earned value can only be credited for work the baseline contains. Bringing the approved change into the baseline first shows how much of the fall to 0.88 is real cost performance and how much is unbudgeted approved work."
+        },
+        {
+          "id": "d",
+          "text": "Report the current index of 0.88 to the sponsor with a note that part of the decline relates to the loading bay, leaving the baseline unchanged until that work is complete.",
+          "correct": false,
+          "rationale": "A note does not fix the measurement. Every month the baseline stays stale, the loading bay's cost keeps flowing in as unearned spend, so the reported index stays wrong and gets worse."
+        }
+      ],
+      "explanation": "Earned value measures performance against whatever the performance measurement baseline contains, so an approved change has to enter the baseline when it is approved; otherwise its costs show up as overrun with nothing earned against them. When an index moves sharply, check that the baseline it is measured against reflects every approved change before treating the movement as a performance problem.",
+      "mindset": "Before reacting to a variance, check that the yardstick it was measured with is current."
+    },
+    {
+      "id": "pmp-pr6-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "underrun",
+        "change-control",
+        "budget-authority",
+        "archetype-route-to-owner"
+      ],
+      "stem": "On a museum's gallery redevelopment, the structural steel package closed £180,000 under its control account budget after a simpler connection detail was approved. The curator, who sits on the steering group, asks you to use the 'saving' to add interactive displays to two rooms, pointing out that the project would still finish within its approved budget. Several risks on the remaining work are still open, and the contingency reserve is two-thirds drawn. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the interactive displays, since the total budget is unchanged and the curator speaks for the client, and record the reallocation between control accounts in the next monthly cost report.",
+          "correct": false,
+          "rationale": "Staying within the total budget does not authorise new scope. The underrun is unallocated money inside a baselined budget, and spending it on additions is a scope and baseline decision that neither the project manager nor one steering group member can make alone."
+        },
+        {
+          "id": "b",
+          "text": "Take the displays through change control as a scope change, setting out the underrun, the open risks and the contingency remaining, so the sponsor decides how the £180,000 is used.",
+          "correct": true,
+          "rationale": "There are three legitimate uses for the money and they compete: new scope, risk cover and return to the organisation. Laying out the remaining exposure lets the person who owns the budget choose between them with the facts in front of them."
+        },
+        {
+          "id": "c",
+          "text": "Move the £180,000 into the contingency reserve to cover the open risks, and tell the curator the displays can be considered again once those risks have closed later in the project.",
+          "correct": false,
+          "rationale": "Strengthening reserves may well be the right use of the money, but moving funds into contingency is itself a budget decision. Making it unilaterally pre-empts the sponsor's choice and quietly defers the curator's request without anyone deciding it."
+        },
+        {
+          "id": "d",
+          "text": "Reduce the steel control account and the budget at completion by £180,000, and return the saving to the organisation's capital programme so that other projects can bid for the money.",
+          "correct": false,
+          "rationale": "Returning an underrun is a valid outcome, but re-baselining downwards while risks are open and contingency is thin is a decision about the project's exposure. It belongs to the sponsor, not to the project manager acting alone."
+        }
+      ],
+      "explanation": "An underrun in one control account is not discretionary money. Whether it funds new scope, strengthens reserves against open risks or goes back to the organisation is a decision about the baseline, and it belongs to whoever owns the budget, informed by the risk exposure that remains. 'Still within budget' answers whether the money exists, not whether anyone has authorised spending it.",
+      "mindset": "Money left over is a decision for the budget owner, not a licence for whoever asks first."
+    },
+    {
+      "id": "pmp-pr6-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "forecasting",
+        "learning-curve",
+        "estimate-at-completion",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A water company is installing 12,000 smart meters with a budget at completion of £3.6m, earned at £300 per installed meter. The basis of estimate states that unit costs were expected to fall as crews gained experience. After the first 600 installations the actual cost is £246,000, a CPI of 0.73, and the finance system's automatic forecast shows an estimate at completion of £4.9m. The sponsor asks for a recovery plan. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Compare the actual cost of the first 600 installations with the learning curve the estimate assumed, and base the forecast on that comparison before agreeing whether recovery action is needed.",
+          "correct": true,
+          "rationale": "The estimate already contains an expected cost profile, and that is the right yardstick for early units. If actuals track the curve the overrun is planned and temporary; if they sit above it, the gap is the real variance to forecast and recover."
+        },
+        {
+          "id": "b",
+          "text": "Report the £4.9m estimate at completion, since a CPI-based forecast is the standard assumption once work is under way, and start a recovery plan aimed at crew productivity.",
+          "correct": false,
+          "rationale": "Projecting cumulative CPI assumes early efficiency predicts later efficiency. Five per cent into a programme whose estimate expected early units to cost more, that assumption is the one most likely to be wrong."
+        },
+        {
+          "id": "c",
+          "text": "Hold the forecast at £3.6m and explain to the sponsor that the first installations were expected to cost more than later ones, so the variance will reverse as the crews learn.",
+          "correct": false,
+          "rationale": "It may be true, but it asserts the learning effect rather than checking it. Nothing yet shows whether £410 a meter is on the expected curve or above it, and holding the forecast on hope is the opposite error to extrapolating it."
+        },
+        {
+          "id": "d",
+          "text": "Ask the installation contractor for a bottom-up re-estimate of the remaining 11,400 meters, and use that figure as the forecast in place of the finance system's automatic calculation before agreeing any recovery plan.",
+          "correct": false,
+          "rationale": "A re-estimate is legitimate when the original basis is broken, but here the basis exists and simply has not been checked. Commissioning a new one takes weeks and leaves the sponsor's question unanswered in the meantime."
+        }
+      ],
+      "explanation": "A cumulative index is only a good predictor when the work remaining is expected to perform like the work completed. Where the estimate deliberately expects early work to cost more, through learning, mobilisation or set-up, early indices are biased and should be compared with the planned cost profile before anyone extrapolates them or dismisses them. A flat earned value rate on a curved cost plan will report an overrun even when everything is on track.",
+      "mindset": "Compare early results with what the plan expected of early results, not with the average."
+    },
+    {
+      "id": "pmp-pr6-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "contingency-reserve",
+        "risk-transfer",
+        "fixed-price",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A university's research building is delivered as a hybrid programme, and the groundworks are let under a firm fixed-price contract that places unforeseen ground conditions with the contractor. The contractor has struck a buried concrete slab and says removal will cost €95,000. Before the contract was let, your risk register set €120,000 of contingency against ground conditions. The site manager suggests paying the contractor from that contingency to keep work moving. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pay the €95,000 from contingency to avoid delay, since the risk was identified and funded, and record the drawdown against the ground-conditions entry in the risk register.",
+          "correct": false,
+          "rationale": "The fact that money was set aside does not make the cost the buyer's. The contract moved this risk to the contractor, who priced it, so paying from contingency pays for the same risk twice."
+        },
+        {
+          "id": "b",
+          "text": "Ask the contractor to submit a formal change request for the €95,000, so that the change control board can decide whether the extra cost should be paid and from which budget.",
+          "correct": false,
+          "rationale": "Inviting a change request treats a risk the contractor already owns as a change in scope. It signals the buyer may pay and turns a contractual position into a negotiation the programme did not need to open."
+        },
+        {
+          "id": "c",
+          "text": "Refer the contractor to the contract, which places this cost with them, and reassess the ground-conditions contingency, since the transfer reduced the risk the programme still carries.",
+          "correct": true,
+          "rationale": "The contingency was sized before the risk was transferred and has not been revisited since. Holding the contractor to the terms keeps the cost where it was priced, and reassessing the reserve shows what residual exposure, if any, still needs funding."
+        },
+        {
+          "id": "d",
+          "text": "Agree to share the €95,000 equally with the contractor, so neither party carries the whole cost and the working relationship on the remaining groundworks stays productive.",
+          "correct": false,
+          "rationale": "Goodwill splits can be worth having, but this one gives away €47,500 the contract does not require and makes the risk allocation negotiable for every future event on the job."
+        }
+      ],
+      "explanation": "Contingency funds the risks the buyer still carries. Once a contract transfers a risk, the reserve held against it should be reassessed and largely released or redirected, and a cost the seller agreed to carry is not paid from it just because the money is there. Check who owns a risk under the contract before checking whether there is a reserve against it.",
+      "mindset": "Ask who carries a risk today, not who carried it when the reserve was sized."
+    },
+    {
+      "id": "pmp-pr6-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "commitments",
+        "budget-control",
+        "cost-reporting",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a hybrid laboratory-equipment upgrade, a team lead asks you to approve a €48,000 order for a spectrometer. He points to the monthly cost report: budget €900,000, actual cost to date €610,000, so €290,000 appears to be left. You know procurement raised several purchase orders last month for items not yet delivered or invoiced. What should you do before approving the order?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Get the value of open purchase orders and other commitments, and check the order against what remains once those are deducted alongside the actual cost to date.",
+          "correct": true,
+          "rationale": "Money available is budget minus actuals minus commitments. Open orders are money already promised, and only after deducting them does the report show whether €48,000 is genuinely free."
+        },
+        {
+          "id": "b",
+          "text": "Approve the order, since €290,000 remains and the spectrometer is within the approved scope, and ask procurement to flag any difficulty when they raise the purchase order.",
+          "correct": false,
+          "rationale": "The €290,000 figure counts only money already paid. Orders placed but not yet invoiced have claimed part of it, so approving against actuals alone risks spending the same budget twice."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team lead to confirm that the spectrometer is in the approved scope and estimate, and approve the order if it matches the corresponding line item in the baseline.",
+          "correct": false,
+          "rationale": "Checking scope answers whether the purchase is allowed, not whether the money is still free. A planned item can still overrun the budget if other commitments have already consumed the headroom."
+        },
+        {
+          "id": "d",
+          "text": "Ask finance to re-run the cost report with this month's actual costs before deciding, since the report may be several weeks out of date by the time an order like this goes out.",
+          "correct": false,
+          "rationale": "A fresher report helps, but it still shows actual cost only. Undelivered and uninvoiced orders remain invisible in it, which is exactly the gap that matters here."
+        }
+      ],
+      "explanation": "Actual cost records money spent; commitments record money already promised through orders and contracts. The budget genuinely available for new spending is what is left after both are deducted, so any approval made against actuals alone can commit the same money twice. Cost reports that omit commitments flatter the remaining budget most just after a burst of ordering.",
+      "mindset": "Count what has been promised as well as what has been paid before calling money free."
+    },
+    {
+      "id": "pmp-pr6-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "invoice-approval",
+        "cost-control",
+        "time-and-materials",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are the delivery lead for an agile team that includes two contractors supplied on a time-and-materials basis. The supplier's invoice for last month charges 22 days for one contractor, but the team's approved timesheets and sprint attendance show 19 days worked and three days of agreed leave. The cost management plan makes you responsible for approving the team's supplier invoices. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold approval and send the invoice back to the supplier with the timesheet evidence, asking for it to be corrected to the 19 days actually worked.",
+          "correct": true,
+          "rationale": "Invoice approval is your authority under the plan, and the approved timesheets are the agreed record. Returning it with evidence is the routine correction, and it keeps the payment accurate from the start."
+        },
+        {
+          "id": "b",
+          "text": "Approve the invoice so the supplier is paid on time, and ask finance to recover the three days from next month's invoice once the supplier has agreed to the correction.",
+          "correct": false,
+          "rationale": "Approving an invoice you know to be wrong certifies it as correct. Recovery later depends on the supplier's agreement and finance remembering, when the evidence is in your hands now."
+        },
+        {
+          "id": "c",
+          "text": "Pass the invoice to the procurement team, since disputes with suppliers belong to the function that manages the contract rather than to the delivery team that uses it.",
+          "correct": false,
+          "rationale": "A three-day billing error against approved timesheets is not a contract dispute. The plan gives you the approval, and handing it on delays payment over something you can settle yourself."
+        },
+        {
+          "id": "d",
+          "text": "Ask the contractor to confirm the days they worked last month before deciding, since they will know better than the timesheet system which days the supplier has billed.",
+          "correct": false,
+          "rationale": "The approved timesheet is the agreed record of time worked, so asking the contractor reopens something already settled. The discrepancy is with the supplier's billing, and that is where to correct it."
+        }
+      ],
+      "explanation": "Approving an invoice is a control, not a formality: it certifies that what is charged matches what was received. Where the plan gives you that approval and you hold the evidence, use it at the point of approval, because a payment corrected later relies on goodwill and memory that the original control was meant to replace.",
+      "mindset": "Use the control you hold at the moment it can still prevent the error."
+    },
+    {
+      "id": "pmp-pr6-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "agile-finance",
+        "velocity",
+        "funding",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Over three quarters your payments-app team's cost has held at about €95,000 a sprint while its velocity has risen from 40 to 62 points. Finance reads this as cost per point falling by over a third and proposes cutting the team's funding by 20 per cent next quarter to 'bank the efficiency'. You know the team began splitting stories more finely after a coaching workshop. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the proposal, since a 20 per cent cut still leaves the team cheaper per point than before, and use the next quarter to confirm whether the higher velocity holds up.",
+          "correct": false,
+          "rationale": "This treats story points as a unit of output with a price. If the points simply got smaller, the team is delivering what it delivered before, and the cut removes a fifth of real capacity on the strength of a measurement artefact."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to re-estimate the remaining backlog using the old, larger story sizes, so that velocity and cost per point can be compared fairly with the earlier quarters.",
+          "correct": false,
+          "rationale": "It recognises the sizing shift but answers it by managing the points, which keeps them in use as a financial currency. Re-estimating to defend a ratio invites the gaming that makes points useless for the team's own planning."
+        },
+        {
+          "id": "c",
+          "text": "Agree to the cut but ask finance to phase it over two quarters, giving the product owner time to reprioritise the backlog so the most valuable work fits the lower funding.",
+          "correct": false,
+          "rationale": "Phasing softens the impact but accepts the reasoning behind it. The cut is justified by an efficiency that probably does not exist, and negotiating its timing concedes the point that most needed challenging."
+        },
+        {
+          "id": "d",
+          "text": "Show finance that the points got smaller when stories were split, and offer a measure based on features or outcomes delivered to test whether output actually rose.",
+          "correct": true,
+          "rationale": "The premise is that more points means more output. Explaining the sizing change removes the false efficiency, and offering a measure of delivered features or outcomes gives finance a legitimate way to judge value for money."
+        }
+      ],
+      "explanation": "Story points are a team's relative sizing scale, not a unit of output, and a change in how stories are sliced changes velocity without changing what is delivered. Cost-efficiency claims need a measure of what the money buys, such as features released or outcomes achieved, rather than a ratio of cost to an internal estimating unit that the team itself controls.",
+      "mindset": "Check what a number counts before letting it decide what money moves."
+    },
+    {
+      "id": "pmp-pr6-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "value-of-information",
+        "agile-finance",
+        "investment-decision",
+        "archetype-trade-off"
+      ],
+      "stem": "Your team at a car insurer is about to spend an estimated €260,000 building a telematics pricing feature. The product owner proposes first spending €40,000 on a six-week concierge trial with 300 customers, to test whether drivers will share their driving data at all. Market research puts the chance that they will not at roughly 50 per cent. The sponsor objects that the trial adds cost and delays launch. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Build the feature as planned but release a thin first slice early, so that real customer behaviour is learned from the product itself rather than from a separate trial.",
+          "correct": false,
+          "rationale": "Releasing early is good practice, but a pricing feature needs its data pipeline and pricing engine before any slice can go live. Much of the €260,000 is committed before that learning arrives, which is what the trial is meant to avoid."
+        },
+        {
+          "id": "b",
+          "text": "Recommend the trial, showing that €40,000 guards against an expected €130,000 of wasted build, and weigh that against what six weeks' delay costs.",
+          "correct": true,
+          "rationale": "A one-in-two chance of building something unused puts about €130,000 of expected waste on the table. The trial is worth buying unless six weeks' delay costs more than the difference, which is the comparison the sponsor needs to see."
+        },
+        {
+          "id": "c",
+          "text": "Fund the trial from within the feature's €260,000 build budget rather than as an addition, so that the total cost of the initiative stays at what the sponsor approved.",
+          "correct": false,
+          "rationale": "This moves money around without making the decision. The sponsor's question is whether the trial is worth its cost and delay, and absorbing it into the build budget simply avoids answering that."
+        },
+        {
+          "id": "d",
+          "text": "Ask the market-research team to run a larger survey first, since a survey is quicker and cheaper than a concierge trial and would sharpen the 50 per cent estimate.",
+          "correct": false,
+          "rationale": "A survey measures what people say they would do, and willingness to share personal data is exactly where stated and actual behaviour diverge. It narrows the wrong uncertainty at lower cost."
+        }
+      ],
+      "explanation": "Spending to reduce uncertainty is justified when the cost of the information, including any delay it causes, is lower than the expected loss it lets you avoid. Framing an experiment that way turns 'it adds cost' into a comparison the sponsor can decide on, and it applies equally to prototypes, trials and spikes before any large build.",
+      "mindset": "Price information against the expected cost of being wrong without it."
+    },
+    {
+      "id": "pmp-pr6-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "agile-forecasting",
+        "run-rate",
+        "cost-reporting",
+        "archetype-make-visible"
+      ],
+      "stem": "Your release forecast to the sponsor says nine more sprints at €48,000 each, a remaining cost of €432,000. From this month, the platform vendor's new licensing model and a contractor's renewed day rate raise the team's cost to about €56,000 a sprint. Velocity is unchanged, so the product owner says the forecast still holds and nothing needs reporting. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the forecast as it stands, since the release is still nine sprints away and the sponsor's main concern is whether the scope lands on the date that was planned.",
+          "correct": false,
+          "rationale": "Nine sprints is the delivery forecast, not the cost forecast. The sponsor is funding the release, and an increase of about €72,000 is material whether or not the date moves."
+        },
+        {
+          "id": "b",
+          "text": "Ask the product owner to drop enough low-value backlog items to finish in eight sprints, so that the remaining cost comes back close to the €432,000 already reported.",
+          "correct": false,
+          "rationale": "Cutting scope to protect a reported number is a decision for the sponsor and product owner once they know the new cost. Doing it first hides the change and trades away value nobody chose to give up."
+        },
+        {
+          "id": "c",
+          "text": "Report the higher cost at the quarterly funding review in two months' time, when finance expects agile teams to restate their run rates and forecasts anyway.",
+          "correct": false,
+          "rationale": "The review is a routine checkpoint, not the earliest moment a known change should be shared. Two months' delay lets several sprints of unreported increase accumulate and removes options the sponsor would have had."
+        },
+        {
+          "id": "d",
+          "text": "Update the money forecast to about €504,000 and tell the sponsor now, explaining that the forecast in sprints is unchanged but each sprint costs more.",
+          "correct": true,
+          "rationale": "An agile cost forecast is iterations remaining multiplied by cost per iteration. The second term has moved, so the forecast has moved, and the sponsor needs it while there is still time to respond."
+        }
+      ],
+      "explanation": "An agile cost forecast has two parts: how many iterations remain and what each one costs. Stable velocity speaks only to the first, so a change in rates, licences or team mix changes the forecast even when the delivery date does not move, and it should be reported when it becomes known rather than at the next scheduled review.",
+      "mindset": "A forecast in sprints and a forecast in money are two forecasts; keep both current."
+    },
+    {
+      "id": "pmp-pr6-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "lean-portfolio",
+        "guardrails",
+        "epic-funding",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your organisation funds value streams, and each epic is approved by the portfolio board with a cost guardrail: if spend reaches the approved figure before the minimum viable product is proven, the board decides whether to continue. Your team's loyalty-scheme epic was approved at £300,000. It has spent £285,000 and needs about two more sprints, costing £60,000, to reach the MVP. The product owner wants to carry on and report afterwards. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Continue for the two sprints, since the value stream's overall budget can absorb the £45,000 overshoot, and report the overrun at the board's next scheduled review.",
+          "correct": false,
+          "rationale": "Headroom in the value stream budget is not the test the guardrail sets. The board kept the decision to continue for itself, and reporting afterwards turns a decision point into a notification."
+        },
+        {
+          "id": "b",
+          "text": "Reduce the remaining MVP scope so the team can finish within the last £15,000, and report to the board that the epic was delivered inside its guardrail.",
+          "correct": false,
+          "rationale": "Trimming the MVP to fit the money changes the hypothesis the board funded. A smaller MVP may not prove what the investment depended on, and reporting it as on guardrail hides that the test itself was altered."
+        },
+        {
+          "id": "c",
+          "text": "Pause the epic now and move the team onto the next item in the portfolio backlog, since spending past the guardrail needs approval and the remaining funds are too small to matter.",
+          "correct": false,
+          "rationale": "The guardrail calls for a decision, not an automatic stop, and it has not yet been reached. Stopping unilaterally makes the board's decision for it in the other direction and strands £285,000 of work short of its test."
+        },
+        {
+          "id": "d",
+          "text": "Take the epic back to the portfolio board now with the spend, the evidence so far and the £60,000 still needed, and let the board decide whether to continue.",
+          "correct": true,
+          "rationale": "The guardrail exists so the funder can decide, with evidence, whether more money is worth spending. Bringing it before the threshold is crossed gives the board a real choice rather than a fait accompli."
+        }
+      ],
+      "explanation": "A cost guardrail turns a spending threshold into a decision point owned by the funder. The team's job is to bring the spend, the evidence and the ask to that owner before the threshold is crossed, not to decide in either direction on the owner's behalf, and not to reshape the work so the threshold never triggers.",
+      "mindset": "When a threshold reserves a decision for someone else, bring them the decision before you reach it."
+    },
+    {
+      "id": "pmp-pr6-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "grant-funding",
+        "restricted-funds",
+        "eligibility",
+        "archetype-route-to-owner"
+      ],
+      "stem": "A charity's digital team is building a volunteer-matching service, part-funded by a £250,000 government grant restricted to 'user-facing features for volunteers' and spendable until March. Development runs in sprints, while the grant is reported quarterly against a fixed plan. The team now needs £70,000 of database and hosting rework that underpins the volunteer features, and the charity's general budget is fully committed. The product owner wants to charge the rework to the grant. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Charge the rework to the grant, since the volunteer features cannot work without it, and have the product owner explain the link in the next quarterly report to the funder.",
+          "correct": false,
+          "rationale": "The argument may be sound, but the funder's terms decide eligibility, not the charity's reading of them. Explaining after the money is spent leaves the charity exposed to clawback if the funder disagrees."
+        },
+        {
+          "id": "b",
+          "text": "Ask the charity's grant manager to seek the funder's view on whether infrastructure underpinning the volunteer features is an eligible cost, before charging any of it.",
+          "correct": true,
+          "rationale": "The eligibility question is genuinely open, and only the funder can close it. Routing it through the person who holds the funder relationship settles it before spending, when a 'no' still leaves options."
+        },
+        {
+          "id": "c",
+          "text": "Defer the rework until the general budget has headroom next financial year, and keep the grant for volunteer-facing features exactly as its terms describe.",
+          "correct": false,
+          "rationale": "It respects the restriction but ignores the dependency. If the volunteer features cannot run without the rework, deferring it risks the grant being unspent or its outputs undeliverable by March."
+        },
+        {
+          "id": "d",
+          "text": "Split the £70,000 between the grant and the general budget in proportion to the share of the database the volunteer features use, and document the apportionment method.",
+          "correct": false,
+          "rationale": "Apportionment sounds rigorous, but the funder has not agreed the method, and the general budget has no room for its share. A documented method is still the charity deciding eligibility on the funder's behalf."
+        }
+      ],
+      "explanation": "Restricted funding is governed by the funder's terms rather than by the project's view of what is reasonable. When eligibility is ambiguous, the interpretation belongs to the funder, reached through whoever manages that relationship, and it must be settled before the money is spent, because ineligible spending is recovered after the fact and recovery is far harder than prevention.",
+      "mindset": "Settle whose rules govern the money before deciding what the money can buy."
+    },
+    {
+      "id": "pmp-pr6-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "overhead-rates",
+        "variance-analysis",
+        "forecasting",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Midway through a two-year flood-warning systems project, the organisation's finance function raises the overhead rate charged on every internal labour hour from 18 to 26 per cent, backdated to the start of the financial year. The project's cost performance index falls from 1.00 to 0.94 overnight, although productivity and spending on the work itself are unchanged. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Report the variance separately as a rate change outside the project's control, showing the indices with and without it so the sponsor can see underlying performance.",
+          "correct": true,
+          "rationale": "Separating the rate effect from delivery performance stops a corporate charging decision from being read as a project failing. The sponsor sees both the true efficiency of the work and the cost the organisation has added."
+        },
+        {
+          "id": "b",
+          "text": "Re-forecast the estimate at completion using the new overhead rate for all remaining labour, and tell the sponsor how much additional funding the change implies.",
+          "correct": true,
+          "rationale": "The new rate applies to every remaining hour, so the forecast has to carry it. Quantifying the funding gap early gives the sponsor time to decide whether to fund it or change the plan."
+        },
+        {
+          "id": "c",
+          "text": "Start a corrective action plan to recover the 6 per cent through productivity gains in the remaining work packages, so that the project index returns to 1.00.",
+          "correct": false,
+          "rationale": "Corrective action addresses performance, and performance has not changed. Asking the team to work faster to absorb a charging decision treats a rate variance as an efficiency variance."
+        },
+        {
+          "id": "d",
+          "text": "Draw on the contingency reserve to cover the higher overhead charges, since the increase is an unforeseen cost event that has fallen on the project's budget.",
+          "correct": false,
+          "rationale": "Contingency is held for the identified risks it was sized against. Spending it on a corporate rate change leaves those risks uncovered and hides a funding question that belongs to the sponsor."
+        },
+        {
+          "id": "e",
+          "text": "Ask finance to exempt the project from the new rate, on the grounds that its budget was approved under the old rate and corporate charges are outside its control.",
+          "correct": false,
+          "rationale": "The rate is an organisation-wide decision and the project has no standing to opt out of it. Seeking an exemption spends effort resisting a change that should simply be reflected in the forecast and funding."
+        }
+      ],
+      "explanation": "A variance caused by a change in a charging rate is not a performance problem and should not be managed as one. Separate rate effects from efficiency in reporting, carry the new rate into the forecast for all remaining work, and take the resulting funding gap to whoever owns the budget. Absorbing it through reserves or productivity targets misdiagnoses where the cost came from.",
+      "mindset": "Accept a change you cannot control, then make sure everyone can see what it did to the numbers."
+    },
+    {
+      "id": "pmp-pr6-134",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "padding",
+        "contingency-reserve",
+        "estimating",
+        "archetype-make-visible"
+      ],
+      "stem": "Consolidating estimates for a hybrid retail-systems programme, you find that each of the five workstream leads has quietly added a 15 to 20 per cent 'safety margin' to their packages. The programme also holds a contingency reserve of €400,000 sized from the risk register. Two leads say the margins protect them from being blamed for overruns. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask each lead to separate the margin from the base estimate and name the risks it was meant to cover, so those risks can be assessed alongside the rest of the register.",
+          "correct": true,
+          "rationale": "The margins may be protecting against real risks the register missed. Surfacing them turns private worry into named, assessable risk, and it addresses the blame concern by showing that risk is managed openly rather than absorbed by individuals."
+        },
+        {
+          "id": "b",
+          "text": "Re-size the programme contingency from the combined risks once the hidden margins are removed, and hold it visibly at programme level with clear rules for drawing it down.",
+          "correct": true,
+          "rationale": "Pooled, visible contingency covers the same exposure with less money than five hidden buffers, because not every risk occurs at once. Clear drawdown rules give leads a legitimate route to cover when a risk does materialise."
+        },
+        {
+          "id": "c",
+          "text": "Remove the margins from every package without further discussion and return the money to the sponsor, since the contingency reserve already covers the programme's identified risks.",
+          "correct": false,
+          "rationale": "This assumes the register already captures everything the margins were protecting against, without checking. It also confirms the leads' fear of being exposed, which is likely to drive the padding somewhere harder to find."
+        },
+        {
+          "id": "d",
+          "text": "Leave the margins in place but cut the programme contingency by the same total, so that the overall budget stays the same and the risk cover is not counted twice.",
+          "correct": false,
+          "rationale": "It fixes the double count on paper while keeping the cover hidden and unpooled. Buffers held inside packages tend to be spent whether or not the risks occur, so the money is consumed without being controlled."
+        },
+        {
+          "id": "e",
+          "text": "Accept the margins as each lead's professional judgement, and make clear that any overruns will be met from that workstream's own buffer before the programme reserve is touched.",
+          "correct": false,
+          "rationale": "Respecting judgement is reasonable, but this formalises the hidden buffers rather than examining them. The programme ends up double-funded for some risks and blind to which ones the money is held against."
+        }
+      ],
+      "explanation": "Hidden buffers double-count risk that contingency already covers, cannot be pooled across workstreams, and tend to be consumed whether or not the risk occurs. Risk allowances should be explicit, tied to named risks, and held where they can be pooled and controlled. When padding is defensive, removing the cause, a culture of blame for honest estimates, matters as much as removing the padding.",
+      "mindset": "Bring hidden allowances into the open, where they can be sized, pooled and controlled."
+    },
+    {
+      "id": "pmp-pr6-135",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "running-costs",
+        "agile-finance",
+        "total-cost",
+        "archetype-make-visible"
+      ],
+      "stem": "Your product team's quarterly funding covers its eight people and a test environment. Load testing shows that when the new route-planning feature opens to all 40,000 customers next quarter, cloud mapping and compute charges will rise from about £3,000 to £22,000 a month. The product owner says running costs belong to operations after launch, but operations has no budget line for this service. Which two actions should the delivery lead take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the projected running costs to next quarter's funding request and to the product's business case, so the investment decision reflects what the feature costs to run.",
+          "correct": true,
+          "rationale": "A feature that costs £22,000 a month to run is a different investment from one that does not. Putting the cost into the funding request and business case makes it part of the decision instead of a surprise after launch."
+        },
+        {
+          "id": "b",
+          "text": "Show the product owner which parts of the feature drive the mapping charges, so cost per use can be weighed alongside value when ordering the remaining backlog.",
+          "correct": true,
+          "rationale": "Running cost is a product attribute the product owner can manage once it is visible. Knowing which behaviours drive the charges lets backlog decisions trade cost against value rather than discovering the bill afterwards."
+        },
+        {
+          "id": "c",
+          "text": "Ask operations to raise a budget request for the service before launch, since running costs after release fall under their remit rather than under the product team's.",
+          "correct": false,
+          "rationale": "It assumes an ownership arrangement that does not yet exist. The team holds the numbers and the knowledge of what drives them, and leaving the request to a function with no budget line risks launching with the cost unfunded."
+        },
+        {
+          "id": "d",
+          "text": "Hold the launch to a smaller group of customers for now, so that monthly charges stay within the team's current funding until someone agrees who will pay for the full rollout.",
+          "correct": false,
+          "rationale": "Phased rollout is a valid tactic, but choosing it to stay inside a budget gap makes a product decision on financial grounds without telling the people who fund it. The gap stays hidden while value is held back."
+        },
+        {
+          "id": "e",
+          "text": "Re-engineer the feature to use a cheaper mapping provider before launch, adding the work to the next two sprints so that running costs fall back to a level the team can absorb.",
+          "correct": false,
+          "rationale": "It commits two sprints to cost reduction before anyone has decided the cost is unacceptable for the value delivered. The trade-off belongs to the product owner and funders once they can see it."
+        }
+      ],
+      "explanation": "A product's financial picture includes what it costs to run, not just what it costs to build. When design choices create recurring costs, those costs belong in funding requests, business cases and backlog decisions before launch, because once a feature is live the cost is already committed and the question of who pays becomes a dispute rather than a decision.",
+      "mindset": "Count what it costs to run as well as what it costs to build."
+    },
+    {
+      "id": "pmp-pr6-136",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "cost-concepts",
+        "decision-making",
+        "cost-of-delay",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A product company is making three spending decisions about its booking platform. Match each decision to the cost concept that should drive it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Whether to move the only engineer who understands the payment gateway onto this team, when doing so postpones a client integration worth €30,000 in fees."
+        },
+        {
+          "id": "s2",
+          "text": "Whether to pay €15,000 for an extra fortnight of contractor capacity to finish the release, given that the team's salaries and tooling are paid either way."
+        },
+        {
+          "id": "s3",
+          "text": "Whether a €20,000 fee to expedite a third-party security audit is worth paying, given that each week of later launch forgoes about €8,000 of subscription revenue."
+        }
+      ],
+      "options": [
+        {
+          "id": "opp",
+          "text": "Opportunity cost: the value of the best alternative given up",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Moving the engineer costs nothing on the payroll but gives up €30,000 of client fees. The value of the alternative forgone is the real cost of the move, and it is invisible in any budget line."
+        },
+        {
+          "id": "inc",
+          "text": "Incremental cost: only the costs that change because of the decision",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Salaries and tooling are paid whichever way the decision goes, so they are irrelevant to it. Only the €15,000 of contractor cost changes, and that is what has to be weighed against finishing the release."
+        },
+        {
+          "id": "cod",
+          "text": "Cost of delay: the value lost for each unit of time the outcome arrives later",
+          "correct": true,
+          "match": "s3",
+          "rationale": "At about €8,000 a week of forgone revenue, the expedite fee pays for itself if it brings launch forward by roughly two and a half weeks or more. Expressing time as money is what makes the fee comparable."
+        },
+        {
+          "id": "sunk",
+          "text": "Sunk cost: money already spent that cannot be recovered",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Sunk cost matters in decisions only as something to ignore, and none of these three turns on money already spent. Each is about future costs and value that still depend on the choice made."
+        }
+      ],
+      "explanation": "A spending decision should be driven by the costs and value that actually change with it. That means counting what is given up as well as what is paid, ignoring costs incurred either way, and pricing time when the benefit depends on when the outcome arrives. Choosing the right cost concept first stops irrelevant figures, often the largest ones on the page, from deciding the question.",
+      "mindset": "Count only what the decision changes, including what it gives up and what it delays."
+    },
+    {
+      "id": "pmp-pr6-137",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "estimating",
+        "estimating-bias",
+        "reference-class-forecasting",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Reviewing estimates across a hybrid transport infrastructure programme, the project management office finds three different problems. Match each to the corrective technique that addresses its cause. One choice is not used.",
+      "prompts": [
+        {
+          "id": "e1",
+          "text": "Before estimating a bridge refurbishment, the engineers were told the board 'expects around £2m', and all three supposedly independent estimates came in between £1.9m and £2.1m."
+        },
+        {
+          "id": "e2",
+          "text": "Every package in a signalling upgrade was estimated assuming nothing goes wrong, and the organisation's last eight signalling projects finished on average 34 per cent over their estimates."
+        },
+        {
+          "id": "e3",
+          "text": "A business unit submitted a low estimate for its own scheme, and later emails show its team knew the figure was unrealistic but feared the scheme would otherwise lose the funding round."
+        }
+      ],
+      "options": [
+        {
+          "id": "blind",
+          "text": "Produce estimates before any target or expected figure is shared with the estimators",
+          "correct": true,
+          "match": "e1",
+          "rationale": "Three estimates clustering around a figure the board mentioned is the signature of anchoring. The fix is to remove the anchor from the process, since estimators cannot reliably ignore a number once they have heard it."
+        },
+        {
+          "id": "rcf",
+          "text": "Adjust the estimate using actual outturns from a reference class of comparable past projects",
+          "correct": true,
+          "match": "e2",
+          "rationale": "Bottom-up estimates built on a no-problems view miss the overrun that comparable projects consistently show. Reference class forecasting brings in the outside view, here a 34 per cent history, which inside-view estimating cannot see."
+        },
+        {
+          "id": "icr",
+          "text": "Have an independent cost review that reports to the investment board, not to the sponsoring unit",
+          "correct": true,
+          "match": "e3",
+          "rationale": "When the estimators have a reason to understate, better technique does not help because the error is deliberate. An independent review accountable to the funder removes the incentive from the people producing the figure."
+        },
+        {
+          "id": "flat",
+          "text": "Apply a flat 10 per cent uplift to every estimate in the programme",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A uniform uplift treats three different causes as one error of size and corrects none of them. It is too small for the signalling history, arbitrary for the bridge, and leaves the incentive behind the third estimate untouched."
+        }
+      ],
+      "explanation": "Estimating errors have causes, and the correction has to match the cause: anchoring is fixed by removing the anchor before estimating, optimism by bringing in outturn data from comparable projects, and deliberate understatement by moving review away from those with a reason to understate. A blanket uplift treats symptoms and leaves every one of those causes in place for the next estimate.",
+      "mindset": "Diagnose why an estimate is wrong before deciding how to correct it."
+    },
+    {
+      "id": "pmp-pr6-138",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "earned-value",
+        "measurement-methods",
+        "cost-control",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your cost management plan lets each work package choose how its earned value is credited. Complete each sentence with the method that fits the work. One choice is not used.",
+      "prompts": [
+        {
+          "id": "w1",
+          "text": "A two-day independent safety inspection that starts and finishes inside a single monthly reporting period should earn value using"
+        },
+        {
+          "id": "w2",
+          "text": "A nine-month tunnelling package with six physically verifiable milestones, each agreed with the client's engineer, should earn value using"
+        },
+        {
+          "id": "w3",
+          "text": "Project controls support that runs for the whole project and produces no discrete deliverable of its own should earn value using"
+        }
+      ],
+      "options": [
+        {
+          "id": "zero",
+          "text": "the 0/100 rule, crediting value only when the work is complete",
+          "correct": true,
+          "match": "w1",
+          "rationale": "Work that starts and finishes within one reporting period never needs partial credit. Crediting it only on completion is simple and cannot overstate progress."
+        },
+        {
+          "id": "mile",
+          "text": "weighted milestones, crediting an agreed share as each milestone is verified",
+          "correct": true,
+          "match": "w2",
+          "rationale": "A long package needs progress credited along the way, and verifiable milestones agreed with the client give objective points to credit it at, rather than someone's estimate of percentage complete."
+        },
+        {
+          "id": "loe",
+          "text": "level of effort, crediting value in step with the passage of time",
+          "correct": true,
+          "match": "w3",
+          "rationale": "Support work has no product to measure, so its value is earned as time passes. It should be kept small and separate, because it always shows on schedule and can mask variances in discrete work."
+        },
+        {
+          "id": "fifty",
+          "text": "the 50/50 rule, crediting half at the start and half at completion",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The 50/50 rule suits short work that spans two reporting periods. The inspection fits within one, the tunnelling is far too long, and the support work has no point of completion to credit."
+        }
+      ],
+      "explanation": "The earned value method should match how progress on the work can be objectively observed. Short work inside one period needs no partial credit, long work needs objective intermediate points, and support work with no product is earned by time and kept apart from discrete work. Choosing a method that lets someone estimate progress where it could be measured invites earned value to drift ahead of reality.",
+      "mindset": "Credit progress the way it can be verified, not the way it can be estimated."
+    },
+    {
+      "id": "pmp-pr6-139",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "three-point-estimating",
+        "pert",
+        "cost-estimating",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A theatre's air-handling upgrade has three work packages with three-point cost estimates (optimistic / most likely / pessimistic, in £ thousands): sensors 40 / 50 / 72; chillers 180 / 210 / 300; controls software 60 / 75 / 120. Using beta (PERT) weighting and treating the packages as independent, work out the expected cost of the whole upgrade, its standard deviation, and how far the expected cost sits above the sum of the most likely figures.",
+      "blanks": [
+        {
+          "id": "mean",
+          "label": "Expected cost of the whole upgrade, in £ thousands",
+          "numeric": true,
+          "expect": 352,
+          "tol": 1,
+          "unit": "£k",
+          "rationale": "Each package's expected cost is (O + 4M + P) ÷ 6: sensors (40 + 200 + 72) ÷ 6 = 52, chillers (180 + 840 + 300) ÷ 6 = 220, software (60 + 300 + 120) ÷ 6 = 80. The total is 52 + 220 + 80 = 352."
+        },
+        {
+          "id": "sd",
+          "label": "Standard deviation of the total, in £ thousands, to one decimal place",
+          "numeric": true,
+          "expect": 23.0,
+          "tol": 0.3,
+          "unit": "£k",
+          "rationale": "Each package's standard deviation is (P − O) ÷ 6: 5.33, 20 and 10. Standard deviations do not add; variances do: 28.4 + 400 + 100 = 528.4, and its square root is about 23.0."
+        },
+        {
+          "id": "gap",
+          "label": "Amount by which the expected cost exceeds the sum of the most likely figures, in £ thousands",
+          "numeric": true,
+          "expect": 17,
+          "tol": 1,
+          "unit": "£k",
+          "rationale": "The most likely figures sum to 50 + 210 + 75 = 335. Every package is skewed towards overrun, so the expected cost of 352 sits 17 above it, which is what a single-point estimate built from most likely values leaves out."
+        }
+      ],
+      "explanation": "Three-point estimating gives an expected value and a measure of spread for each package. Expected values add directly, but spread combines through variances, so the total's standard deviation is the square root of the summed variances, not the sum of the standard deviations. When estimates are skewed towards overrun, a budget built from most likely figures is systematically low, and the gap is a cost to plan for rather than a risk to hope away.",
+      "mindset": "Treat the most likely figure as a point on a range, not as the estimate."
+    },
+    {
+      "id": "pmp-pr6-140",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-6",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "monte-carlo",
+        "confidence-level",
+        "contingency-reserve",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A Monte Carlo simulation of a ferry terminal refurbishment's total cost, against a base estimate of £4.6m, produced the five points shown. Company policy sets the budget at the lowest figure that gives at least 80 per cent confidence of not being exceeded, with contingency covering the gap above the base estimate. Select the figure the budget should be set at.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "Five simulated total-cost outcomes with the probability that each will be exceeded",
+        "caption": "Select a cost figure. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "c46",
+          "n": 1,
+          "label": "£4.6m (base estimate): 70% chance of being exceeded",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "The base estimate has only a 30 per cent chance of holding. Budgeting at it means no contingency at all and an overrun in seven simulated outcomes out of ten."
+        },
+        {
+          "id": "c49",
+          "n": 2,
+          "label": "£4.9m: 45% chance of being exceeded",
+          "x": 20,
+          "y": 95,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "This is close to the median outcome, giving about 55 per cent confidence. It is a common choice because it feels like a realistic central figure, but it falls well short of the 80 per cent the policy requires."
+        },
+        {
+          "id": "c52",
+          "n": 3,
+          "label": "£5.2m: 25% chance of being exceeded",
+          "x": 20,
+          "y": 170,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "A 25 per cent chance of being exceeded means 75 per cent confidence, just below the threshold. Reading the exceedance figure as if it were the confidence level is the slip that leads here."
+        },
+        {
+          "id": "c54",
+          "n": 4,
+          "label": "£5.4m: 15% chance of being exceeded",
+          "x": 20,
+          "y": 245,
+          "w": 600,
+          "h": 60,
+          "correct": true,
+          "rationale": "A 15 per cent chance of being exceeded is 85 per cent confidence of not being exceeded, and this is the lowest figure that meets the 80 per cent policy. Contingency is £5.4m − £4.6m = £0.8m."
+        },
+        {
+          "id": "c58",
+          "n": 5,
+          "label": "£5.8m: 5% chance of being exceeded",
+          "x": 20,
+          "y": 320,
+          "w": 600,
+          "h": 60,
+          "correct": false,
+          "rationale": "This meets the policy comfortably, but the policy asks for the lowest figure that does. Budgeting here ties up £0.4m more than the organisation decided it needed to hold."
+        }
+      ],
+      "explanation": "A simulation turns a single estimate into a range of outcomes, and a confidence policy picks a point on that range. Confidence of not exceeding a figure is one minus the chance of exceeding it, and the budget is the lowest figure that meets the required confidence: anything lower under-reserves and anything higher locks up money the organisation chose not to hold. The contingency is then the distance from the base estimate to that point.",
+      "mindset": "Convert the probability to the form the policy uses before reading the chart."
+    }
+  ]
+}

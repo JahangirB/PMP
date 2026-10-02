@@ -1,0 +1,1964 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 8 — Schedule",
+  "questions": [
+    {
+      "id": "pmp-pr8-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "resource-levelling",
+        "float",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are scheduling a 40-home refurbishment programme. Kitchen fitting in block C and bathroom fitting in block D both need the same two-person tiling crew for eight working days in weeks 14 and 15. Neither activity is on the critical path: kitchen fitting in block C carries 12 days of total float and bathroom fitting in block D carries 3. The tiling subcontract provides one crew only. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the tiling subcontractor for a quotation to supply a second crew for weeks 14 and 15 so both activities can keep their planned dates.",
+          "correct": false,
+          "rationale": "This treats a sequencing problem as a capacity problem. Float already available in the schedule resolves the clash for nothing, so buying a second crew spends money to protect dates that did not need protecting."
+        },
+        {
+          "id": "b",
+          "text": "Escalate the clash to the programme sponsor and ask which block should take priority, since the choice affects residents in both blocks.",
+          "correct": false,
+          "rationale": "The candidate mistakes a routine levelling decision for a priority call. Neither choice moves a milestone when the float is used correctly, so there is nothing here that needs the sponsor's authority."
+        },
+        {
+          "id": "c",
+          "text": "Move kitchen fitting in block C back by eight working days so the crew completes block D first, using float that block C already carries.",
+          "correct": true,
+          "rationale": "Block C can absorb an eight-day delay inside its 12 days of float, so the clash disappears without moving the finish date, adding cost or asking anyone else to decide. Resequencing within float is squarely the scheduler's own call."
+        },
+        {
+          "id": "d",
+          "text": "Move bathroom fitting in block D back by eight working days so block C keeps its slot, then monitor block D closely as it nears the critical path.",
+          "correct": false,
+          "rationale": "Block D has only three days of float, so an eight-day delay pushes the programme finish out by five days. The error is resolving the clash on the path with least slack rather than the one with most."
+        }
+      ],
+      "explanation": "When a resource clash falls on activities that carry float, the first tool is levelling within float: delay the activity with the most float, by no more than that float, and the finish date holds. Spend slack where there is most of it, not where there is least, and turn to extra resources or escalation only when float cannot absorb the conflict.",
+      "mindset": "Float is the project manager's to spend, so spend it where there is most before asking anyone for money or a decision."
+    },
+    {
+      "id": "pmp-pr8-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "velocity",
+        "capacity-planning",
+        "sprint-planning",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your six-person team building an insurance claims app has delivered 42, 45 and 40 story points in its last three two-week sprints, with everyone present throughout. For the coming sprint, two developers will be on annual leave for the whole fortnight and the other four are available as normal. The product owner hopes the team can still take on about 42 points because a demonstration to the claims director is planned. How should the team size its commitment?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Commit to the usual 42 points this once, and agree with the team that any stories left unfinished will roll into the following sprint.",
+          "correct": false,
+          "rationale": "Planning to a figure the team knows it cannot reach builds a miss into the sprint. The candidate is treating velocity as a target to hold rather than a measurement tied to the capacity that produced it."
+        },
+        {
+          "id": "b",
+          "text": "Scale the forecast to the capacity actually available, roughly two-thirds of recent velocity, and agree with the product owner which stories the demonstration needs most.",
+          "correct": true,
+          "rationale": "Four of six people gives about two-thirds of normal capacity, so around 28 points is an honest forecast. Agreeing the demonstration's must-haves lets the product owner choose what fills the reduced sprint."
+        },
+        {
+          "id": "c",
+          "text": "Ask the two developers whether they could defer their leave by one sprint, so the team keeps its normal velocity for the director's demonstration and absorbs the absence later.",
+          "correct": false,
+          "rationale": "Booked leave is planned capacity loss, not a problem to be negotiated away for one demonstration. The candidate protects a number at the cost of the team's trust in planning."
+        },
+        {
+          "id": "d",
+          "text": "Keep the sprint at 42 points but lengthen it to three weeks so that the four available developers have time to finish the planned stories.",
+          "correct": false,
+          "rationale": "Stretching the timebox to fit the scope removes the fixed cadence that makes velocity comparable sprint to sprint. It also moves the demonstration, which was the reason for wanting 42 points."
+        }
+      ],
+      "explanation": "Velocity measures what a particular team delivered at a particular capacity, so a sprint forecast should be scaled by the capacity actually available rather than copied forward. Leave, holidays and shared duties reduce capacity predictably, and planning against them openly lets the product owner choose what matters most instead of discovering the shortfall at the review.",
+      "mindset": "Forecast from the capacity you will actually have, not the capacity you had last time."
+    },
+    {
+      "id": "pmp-pr8-103",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "integrated-master-schedule",
+        "hybrid-scheduling",
+        "milestones",
+        "archetype-trade-off"
+      ],
+      "stem": "Your medical imaging programme combines a stage-gated hardware build with three Scrum teams writing the control software. The PMO wants every software user story entered in the integrated master schedule with a start date, finish date and named developer for the next nine months, so that it can calculate a single critical path. Beyond the next two sprints, the teams' backlog is still being refined. What should the project manager propose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Show the software in the integrated schedule as feature-level milestones with forecast date ranges, linked to the hardware gates they feed, and refresh them each sprint.",
+          "correct": true,
+          "rationale": "This keeps what governance needs — the points where hardware and software depend on each other — without fixing story-level dates that are meant to change. Ranges refreshed each sprint keep the integrated view honest."
+        },
+        {
+          "id": "b",
+          "text": "Enter every refined story with dates as the PMO asks, and add placeholder activities for the unrefined backlog that the teams update as refinement proceeds.",
+          "correct": false,
+          "rationale": "This gives the PMO the format it asked for and a schedule that will churn every sprint. Placeholder dates for unrefined work are false precision, and the critical path calculated from them is not one anyone can manage to."
+        },
+        {
+          "id": "c",
+          "text": "Keep the software out of the integrated schedule entirely and give the PMO a separate sprint report, since agile work does not fit a critical path calculation.",
+          "correct": false,
+          "rationale": "The candidate protects the teams' flexibility by hiding the very dependencies the integrated schedule exists to manage. Hardware gates still need software at known points, and leaving it out makes those interfaces invisible."
+        },
+        {
+          "id": "d",
+          "text": "Ask the PMO to accept one summary bar covering all software work for nine months, with the agreed final release date as its finish and no interim links.",
+          "correct": false,
+          "rationale": "A single bar removes the false precision but also removes the interim dependencies on hardware gates. The candidate has traded too far the other way, leaving the PMO blind to the interfaces where hybrid schedules usually slip."
+        }
+      ],
+      "explanation": "In a hybrid plan the integrated schedule needs the points where adaptive and predictive work depend on each other, not the internal detail of either. Representing agile delivery at feature or release level, with dates as forecast ranges tied to the gates they feed, gives governance the dependencies it must manage without freezing a backlog that is meant to move. Too much detail creates false precision; too little hides the interfaces.",
+      "mindset": "Integrate at the interfaces and leave each method to manage its own detail."
+    },
+    {
+      "id": "pmp-pr8-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "schedule-model",
+        "lags",
+        "procurement-activities",
+        "archetype-make-visible"
+      ],
+      "stem": "Reviewing the schedule for a hospital's new MRI suite, you notice that the link between 'Shielding design approved' and 'Shielding installed' carries a 35-day lag. The planner explains that the lag covers ordering, manufacturing and delivering €410,000 of copper shielding panels from a supplier in Germany. The schedule's finish date is currently correct. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Replace the lag with procurement activities for ordering, manufacture and delivery, each with an owner and duration, linked into the same logic.",
+          "correct": true,
+          "rationale": "Ordering, manufacturing and shipping are real work by real people that can go late. Modelling them as activities makes them ownable and measurable, so a slip shows up when it starts rather than when the panels fail to arrive."
+        },
+        {
+          "id": "b",
+          "text": "Leave the lag in place, since the finish date is right, and add a note to the link explaining exactly what the 35 days represent.",
+          "correct": false,
+          "rationale": "A note documents the problem without fixing it. The candidate is reassured by a correct finish date, but the ordering, manufacture and shipping still cannot be statused or seen slipping while they sit inside a lag."
+        },
+        {
+          "id": "c",
+          "text": "Ask the German supplier to confirm the 35 days in writing and attach that confirmation to the schedule as the documented basis of the lag estimate.",
+          "correct": false,
+          "rationale": "This improves the estimate but not the model. A confirmed duration hidden in a lag still has no owner, no progress and no early warning, which is the weakness the reviewer spotted."
+        },
+        {
+          "id": "d",
+          "text": "Convert the 35-day lag into a date constraint on 'Shielding installed' so that it cannot start before the expected delivery date of the panels.",
+          "correct": false,
+          "rationale": "A hard date constraint overrides logic, so a late delivery would no longer push the installation or the finish date. The candidate swaps one hidden assumption for another that also stops the schedule reacting to change."
+        }
+      ],
+      "explanation": "Lag represents waiting time that consumes no resources and needs no management, such as concrete curing. Work that someone must do, and that can go late, belongs in the schedule as activities. When real work hides inside a lag it cannot be owned, statused or seen slipping, so the schedule stays green until the delay lands. A correct finish date is not evidence of a sound model.",
+      "mindset": "If someone has to do it, it is an activity, and it deserves to be seen and statused."
+    },
+    {
+      "id": "pmp-pr8-105",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "story-points",
+        "release-forecasting",
+        "multi-team",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Three Scrum teams are building features for a bank's new savings app. The delivery director wants a combined release date and has asked you to standardise story points across the teams, so that one point equals one developer-day everywhere and the three backlogs can be added together into a single forecast. Each team has a stable velocity measured in its own points. How should you respond?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to the standard, ask each team to re-estimate its remaining backlog in developer-days, then sum the totals and divide by the combined headcount.",
+          "correct": false,
+          "rationale": "Converting points to days throws away each team's velocity history, the only thing that made its estimates forecastable. Summing and dividing by headcount also assumes anyone can do any team's work, which is rarely true."
+        },
+        {
+          "id": "b",
+          "text": "Explain that each team's points only forecast that team's work, and offer a combined date built from each team's own velocity and the cross-team dependencies.",
+          "correct": true,
+          "rationale": "This meets the director's real need, a combined date, without destroying the measures that make each team's forecast reliable. Combining dates and dependencies, not points, is what produces a release forecast."
+        },
+        {
+          "id": "c",
+          "text": "Run a joint calibration session in which all three teams estimate the same reference stories, so their points become comparable before the backlogs are combined.",
+          "correct": false,
+          "rationale": "Calibration is a recognised practice, which is why it tempts, but it resets every team's velocity baseline for several sprints. Adding the backlogs afterwards still ignores the cross-team dependencies that usually decide the release."
+        },
+        {
+          "id": "d",
+          "text": "Forecast the release from whichever team has the largest remaining backlog, because that team's finish date will determine when the combined release can go.",
+          "correct": false,
+          "rationale": "The biggest backlog is not necessarily the latest finish, since teams have different velocities, and dependencies can make a smaller team the constraint. The candidate picks a shortcut in place of combining dates."
+        }
+      ],
+      "explanation": "Story points are a relative scale private to the team that set them, and their forecasting value comes from pairing them with that same team's velocity. Combining teams into one forecast means combining their dates, not their points, and the dependencies between teams usually decide the release more than any single team's throughput. When a request asks for a conversion that destroys what makes a measure useful, address the need behind it instead.",
+      "mindset": "Before producing the number someone asks for, ask what decision the number is meant to support."
+    },
+    {
+      "id": "pmp-pr8-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "schedule-performance-index",
+        "critical-path",
+        "float",
+        "archetype-diagnose-first"
+      ],
+      "stem": "At month seven of a £24 million railway signalling upgrade, the schedule performance index has fallen to 0.84 for the third month running. Your critical path analysis, refreshed this week, shows every critical activity on or ahead of its baseline dates and the forecast finish unchanged. The sponsor has read the index in the monthly report and asked for a recovery plan at next week's board. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Report to the board that the project is on schedule because the forecast finish has not moved, explaining that non-critical work is distorting the index.",
+          "correct": false,
+          "rationale": "This is half right, which makes it tempting: SPI can fall while the critical path holds. But three months of decline on non-critical work may be eroding float, and declaring the project safe without checking that turns a warning into a surprise."
+        },
+        {
+          "id": "b",
+          "text": "Prepare a recovery plan aimed at the lagging non-critical work so that the schedule performance index returns above 0.95 before the following board.",
+          "correct": false,
+          "rationale": "The candidate manages the indicator rather than the end date. Effort spent lifting SPI on work with ample float may not move the finish at all, while any path genuinely close to critical gets no special attention."
+        },
+        {
+          "id": "c",
+          "text": "Move two supervisors from critical activities that are ahead of baseline onto the lagging work, protecting the finish date while improving the index.",
+          "correct": false,
+          "rationale": "Taking people off the critical path to fix a non-critical metric risks the one thing that is currently safe. It acts before establishing whether the lagging work actually threatens the finish."
+        },
+        {
+          "id": "d",
+          "text": "Compare each lagging activity's slip with the total float it has left, identify any path close to becoming critical, and present both measures to the board.",
+          "correct": true,
+          "rationale": "The two measures disagree, so the first job is to reconcile them. Slip against remaining float shows whether any near-critical path is about to take over, which is the fact the board needs before deciding whether recovery is required."
+        }
+      ],
+      "explanation": "Schedule performance index aggregates all work by value, so it can fall while the critical path holds when the slippage sits on activities with float. Neither measure alone says whether the finish date is safe: the question is whether any lagging path is consuming float faster than it can afford. Reconciling the two before responding stops a project either dismissing a real warning or spending effort on an index that does not govern the end date.",
+      "mindset": "When two schedule measures disagree, find out why before acting on either."
+    },
+    {
+      "id": "pmp-pr8-107",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "velocity",
+        "release-forecasting",
+        "forecast-range",
+        "archetype-make-visible"
+      ],
+      "stem": "A game studio's team has 312 story points left in its release backlog. Its last six sprint velocities were 34, 41, 38, 29, 44 and 36 points. The producer wants the release forecast expressed as a range rather than a single date. Work out the figures below, rounding any number of sprints up to whole sprints.",
+      "blanks": [
+        {
+          "id": "mean",
+          "label": "Mean velocity over the six sprints, in points",
+          "numeric": true,
+          "expect": 37,
+          "tol": 0.5,
+          "unit": "points",
+          "rationale": "34 + 41 + 38 + 29 + 44 + 36 = 222 points over six sprints, so the mean is 222 ÷ 6 = 37 points per sprint."
+        },
+        {
+          "id": "atmean",
+          "label": "Sprints needed at the mean velocity (whole sprints)",
+          "numeric": true,
+          "expect": 9,
+          "tol": 0,
+          "unit": "sprints",
+          "rationale": "312 ÷ 37 = 8.43 sprints. A partial sprint still has to be run, so the central estimate is 9 sprints."
+        },
+        {
+          "id": "fast",
+          "label": "Sprints needed at the fastest observed velocity (whole sprints)",
+          "numeric": true,
+          "expect": 8,
+          "tol": 0,
+          "unit": "sprints",
+          "rationale": "The fastest sprint delivered 44 points: 312 ÷ 44 = 7.09, which rounds up to 8 sprints. This is the optimistic end of the range."
+        },
+        {
+          "id": "slow",
+          "label": "Sprints needed at the slowest observed velocity (whole sprints)",
+          "numeric": true,
+          "expect": 11,
+          "tol": 0,
+          "unit": "sprints",
+          "rationale": "The slowest sprint delivered 29 points: 312 ÷ 29 = 10.76, which rounds up to 11 sprints. The forecast range is therefore 8 to 11 sprints, centred on 9."
+        }
+      ],
+      "explanation": "A release forecast built from one average velocity hides the variation the team has already shown. Dividing the remaining work by the slowest and fastest recent velocities gives an honest range, with the mean as a central estimate inside it, and partial sprints round up because the sprint is the unit of delivery. Presenting the range lets stakeholders plan for the outcome they cannot afford, and it should narrow as the release approaches.",
+      "mindset": "Forecast as a range drawn from what the team has actually done, and let the range carry the uncertainty."
+    },
+    {
+      "id": "pmp-pr8-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "backlog-order",
+        "date-commitments",
+        "product-owner",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your programme is replacing a retailer's warehouse management system: infrastructure is delivered in planned phases, and the application is built by a Scrum team. The sales director asks you to confirm in writing that a returns-labelling feature will be live by 1 March for a large customer. The feature sits near the bottom of the product backlog, and at that position the team's forecast puts it well after March. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Take the request and the customer's deadline to the product owner, who decides whether the feature moves up the backlog and what drops to make room.",
+          "correct": true,
+          "rationale": "When a feature arrives depends on where it sits in the backlog, and the product owner owns that order. Bringing the deadline to them lets the trade-off against displaced work be made by the person accountable for value."
+        },
+        {
+          "id": "b",
+          "text": "Give the sales director the date the current forecast supports, explaining that the feature's low position in the backlog puts it well after March.",
+          "correct": false,
+          "rationale": "The answer is honest but incomplete. It treats the backlog order as fixed, when the customer deadline is exactly the kind of new information that could justify reordering, and the person who can decide that has not been asked."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to estimate the feature and, if it turns out small, add it to the next sprint so that the 1 March date can be confirmed in writing.",
+          "correct": false,
+          "rationale": "This reorders the backlog without its owner. Even a small item displaces something the product owner ranked higher, and the candidate is quietly taking a value decision that is not theirs to take."
+        },
+        {
+          "id": "d",
+          "text": "Raise a change request through the programme's change board, since committing to a customer date would alter the agreed phase plan for the application.",
+          "correct": false,
+          "rationale": "Backlog ordering inside an agile workstream is not a baseline change, so the board is the wrong forum. The candidate applies predictive change control to a decision the product owner makes routinely."
+        }
+      ],
+      "explanation": "In agile delivery, the date a feature arrives is a consequence of its position in the backlog, and that ordering belongs to the product owner. A request for a date commitment is therefore a request to reprioritise, and it belongs with the person who can weigh it against everything it would displace. Promising the date, or arranging it quietly with the team, takes a decision that belongs to someone else and hides its cost.",
+      "mindset": "When a date depends on a priority, take the question to whoever owns the priority."
+    },
+    {
+      "id": "pmp-pr8-109",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "dependencies",
+        "sequencing",
+        "schedule-model",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "On an offshore wind farm project, you are classifying the dependencies in the schedule model so the team knows which ones can be challenged later. Match each situation to the type of dependency it represents. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Cable pull-in at a turbine cannot start until the foundation and transition piece for that turbine are installed."
+        },
+        {
+          "id": "s2",
+          "text": "The installation contractor prefers to finish all monopiles across the site before fitting any transition pieces, as it did on its last project."
+        },
+        {
+          "id": "s3",
+          "text": "Array cable laying cannot begin until the marine authority issues its licence variation for the revised cable route."
+        }
+      ],
+      "options": [
+        {
+          "id": "mand",
+          "text": "Mandatory dependency: inherent in the work, modelled as hard logic",
+          "correct": true,
+          "match": "s1",
+          "rationale": "There is nothing to pull a cable into until the structure exists. The sequence is physical, so it only changes if the work itself changes."
+        },
+        {
+          "id": "disc",
+          "text": "Discretionary dependency: a preferred sequence, recorded with its reason",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Nothing physical stops transition pieces following monopiles turbine by turbine; this is the contractor's preference from past practice. It should be documented as such, because it is the first logic to revisit if the schedule needs room."
+        },
+        {
+          "id": "ext",
+          "text": "External dependency: outside the project's control, tracked as a milestone",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The licence variation is issued by a party the project cannot direct. It belongs in the model as a milestone with a named contact at the authority, managed through that relationship."
+        },
+        {
+          "id": "sslead",
+          "text": "Start-to-start relationship with a lead: the successor begins before its predecessor ends",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. This describes how two activities overlap, not why they are sequenced. It tempts for the monopile situation, but that situation is about whose preference sets the order, which is a question of dependency type rather than relationship type."
+        }
+      ],
+      "explanation": "Dependency type tells you what can be challenged. Mandatory logic comes from the nature of the work and moves only if the work changes; discretionary logic is a choice, recorded with its reason and the first place to look when the schedule needs room; external dependencies sit outside the team's control and are managed through whoever owns them, usually as milestones. Classifying them during planning saves arguing about them during recovery.",
+      "mindset": "Know which sequences are physics, which are preference, and which belong to someone else."
+    },
+    {
+      "id": "pmp-pr8-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "burnup",
+        "scope-growth",
+        "release-forecasting",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Your team's release burnup for a telecoms self-service portal shows completed work rising steadily at around 30 points per sprint. Over the last four sprints, though, the total-scope line has risen by 70 points, and the forecast intersection has moved from sprint 12 to sprint 15. The sponsor asks whether to approve two extra developers to bring the date back. What should you do before answering?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Model the effect of two extra developers on velocity, allowing for onboarding time, and present the sponsor with a revised forecast for the release.",
+          "correct": false,
+          "rationale": "The candidate answers the question asked rather than the problem shown. Velocity is steady, so the team is not the cause, and modelling extra people evaluates a remedy before anyone knows what the 70 points are."
+        },
+        {
+          "id": "b",
+          "text": "Ask the product owner to freeze the release scope at its current total so that the burnup's scope line stops moving and the date stabilises.",
+          "correct": false,
+          "rationale": "A freeze treats all growth as unwanted. Some of it may be splitting or better understanding of work already promised, which a freeze cannot remove, and some may be valuable new work the product owner should be free to rank."
+        },
+        {
+          "id": "c",
+          "text": "Break the 70 points down into newly requested features, stories split during refinement and re-estimates, and review each source with the product owner.",
+          "correct": true,
+          "rationale": "Each source of growth points to a different response: new features are a prioritisation choice, splits reflect existing scope better understood, and re-estimates say something about the original forecast. Knowing the mix comes before choosing a lever."
+        },
+        {
+          "id": "d",
+          "text": "Re-run the forecast using the scope growth rate of the last four sprints as well as velocity, and give the sponsor the resulting date range for the release.",
+          "correct": false,
+          "rationale": "This is good forecasting practice, which is why it tempts, but it projects the growth forward without asking whether it should continue. The sponsor needs to know what is driving the date, not only where the trend lands."
+        }
+      ],
+      "explanation": "A burnup separates two causes of a slipping date: the team delivering less, and the target moving. When completed work is steady and the scope line climbs, adding people treats a problem the team does not have. The next step is to find out what the growth consists of, because new requests, story splitting and re-estimation each lead to a different conversation about the date.",
+      "mindset": "Read which line moved before deciding which lever to pull."
+    },
+    {
+      "id": "pmp-pr8-111",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "schedule-quality",
+        "baseline",
+        "schedule-model",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Before a water treatment works upgrade is baselined, you run a quality check on the planner's 640-activity schedule. The summary lists six findings. Which two must be corrected before the schedule can be relied on to calculate a meaningful critical path?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Seventy-two activities have no successor, so their late finish is taken from the project end date rather than from following work.",
+          "correct": true,
+          "rationale": "An activity with no successor cannot pass a delay on to anything, so it can slip indefinitely without moving the finish. Open ends make float figures meaningless and hide real critical work."
+        },
+        {
+          "id": "b",
+          "text": "Thirty-one activities carry 'must start on' date constraints entered to match dates the client mentioned at the kick-off meeting.",
+          "correct": true,
+          "rationale": "Hard constraints override the network logic, so these activities will not move when their predecessors slip. The critical path calculated around them shows what the planner typed in, not what the logic produces."
+        },
+        {
+          "id": "c",
+          "text": "Eighteen activities on the sludge treatment stream carry more than 25 days of total float in the current calculation.",
+          "correct": false,
+          "rationale": "Large float on a parallel stream is common and often correct. The candidate treats a symptom of open ends as a defect in its own right, when float is only suspect if the logic producing it is broken."
+        },
+        {
+          "id": "d",
+          "text": "A two-day lag follows each concrete pour to allow curing before formwork is struck and the next lift begins.",
+          "correct": false,
+          "rationale": "Curing is genuine waiting time that consumes no resources, which is exactly what a lag is for. Removing it would make the schedule wrong in the other direction."
+        },
+        {
+          "id": "e",
+          "text": "Twelve zero-duration milestones mark the client's hold points for inspection and sign-off across the mechanical works.",
+          "correct": false,
+          "rationale": "Zero-duration milestones are the standard way to show hold points. The candidate confuses an unusual-looking entry with a modelling fault."
+        },
+        {
+          "id": "f",
+          "text": "Summary bars for each process stream carry no resources, while all labour and plant is loaded on the detailed activities beneath them.",
+          "correct": false,
+          "rationale": "Loading resources on detailed activities and not on summaries is correct practice, since loading both would double count. The candidate mistakes good structure for a gap."
+        }
+      ],
+      "explanation": "A critical path is only as good as the network logic beneath it. Two defects break that logic directly: activities with no successor, which cannot pass delay forward, and hard date constraints, which stop activities responding to their predecessors. Both produce float and critical-path figures that look precise and mean nothing. Other oddities, such as large float, lags or milestones, are worth questioning but are often correct modelling.",
+      "mindset": "Check that the logic is complete before trusting anything the logic calculates."
+    },
+    {
+      "id": "pmp-pr8-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "release-planning",
+        "external-dependency",
+        "transparency",
+        "archetype-act-now"
+      ],
+      "stem": "In sprint 6 of a ten-sprint release for a ticketing platform, your team learns that the payment provider's test environment will not be available for another three weeks. Two features needed for the release depend on it. The release date is tied to the start of the festival season, and the sprint review is in eight days. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prepare an updated release burnup over the coming week showing the likely effect, and present it with options at the sprint review in eight days.",
+          "correct": false,
+          "rationale": "The analysis is sound but the timing is not. Eight days is most of a sprint in which the product owner could have been reordering work, and the review is a demonstration forum, not the first place stakeholders should hear about a threat to a fixed date."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to build a simulated payment service for the next three weeks so that development on both dependent features can carry on as planned.",
+          "correct": false,
+          "rationale": "A simulator may well be worth building, but deciding it inside the team keeps the product owner unaware that two release features are now at risk, and it commits capacity before anyone has weighed the alternatives."
+        },
+        {
+          "id": "c",
+          "text": "Raise the delay with the product owner today, so the backlog can be reordered to bring forward work that does not depend on the payment provider.",
+          "correct": true,
+          "rationale": "Every day the team keeps working in the current order is a day it could have spent on unblocked work. Raising it now gives the product owner the most room to reorder and to warn stakeholders of any risk to the date."
+        },
+        {
+          "id": "d",
+          "text": "Escalate to supplier management today and ask them to press the payment provider for an earlier date before the team changes its sprint plan.",
+          "correct": false,
+          "rationale": "Pressing the supplier is reasonable in parallel, but making re-planning wait for its outcome means the team keeps spending capacity on blocked work. The candidate treats the dependency as something to remove rather than something to plan around."
+        }
+      ],
+      "explanation": "In iterative delivery the main schedule lever is the order of the backlog, and its value decays every day that new information is held back from the person who owns that order. When something threatens a release date, the information should reach the product owner as soon as it is known, not at the next scheduled event. Simulators, supplier pressure and updated forecasts are all useful, but they come alongside the early warning, not instead of it.",
+      "mindset": "Bad news about a date loses value every day it waits for a meeting."
+    },
+    {
+      "id": "pmp-pr8-113",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "rolling-wave-planning",
+        "timeboxing",
+        "deadlines",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "You are building the schedule for a three-year hybrid programme to digitise a national land registry. Complete each sentence with the scheduling technique that fits the situation. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Work for the next six months is understood in detail, but the later migration phases depend on what the pilot regions reveal. The schedule should use"
+        },
+        {
+          "id": "c2",
+          "text": "A discovery workstream cannot be estimated until users have been studied, and the steering group wants a fixed point at which to decide whether to continue. It should be planned as"
+        },
+        {
+          "id": "c3",
+          "text": "Parliament has set the date by which the new statutory register must be live, and the team needs to see at once if the logic misses it. The schedule should show it as"
+        }
+      ],
+      "options": [
+        {
+          "id": "rolling",
+          "text": "rolling wave planning, detailing near-term work and keeping later phases at a higher level",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Detailing work that depends on unknown pilot results would produce false precision that is rewritten anyway. Planning in waves keeps near-term work manageable and later phases honest about their uncertainty."
+        },
+        {
+          "id": "timebox",
+          "text": "a fixed timebox ending in a go or no-go decision milestone",
+          "correct": true,
+          "match": "c2",
+          "rationale": "When the work cannot be estimated, fixing the time and letting the content vary turns an open-ended activity into a bounded investment, with the steering group's decision built into the schedule."
+        },
+        {
+          "id": "deadline",
+          "text": "a deadline marker that produces negative float if forecast dates pass it",
+          "correct": true,
+          "match": "c3",
+          "rationale": "A deadline records the external date without overriding the logic, so the network still calculates honestly and any shortfall appears immediately as negative float rather than being hidden by a forced date."
+        },
+        {
+          "id": "loe",
+          "text": "a level-of-effort activity running across the full three years",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Level of effort suits support work such as programme management that has no discrete output. It may tempt for the discovery work, but it gives the steering group no decision point and no limit."
+        }
+      ],
+      "explanation": "Different kinds of uncertainty call for different scheduling techniques. Work whose detail depends on future learning is planned in waves; work that cannot be estimated is bounded by time with a decision at the end; fixed external dates are recorded in a way that leaves the logic free to show whether they will be met. Forcing every part of a programme into one level of detail either hides uncertainty or hides risk.",
+      "mindset": "Plan each part of the work at the level of detail its uncertainty allows."
+    },
+    {
+      "id": "pmp-pr8-114",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "schedule-baseline",
+        "forecasting",
+        "variance",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "On a museum gallery refit, the display cases arrived two weeks late and three installation activities have slipped. Your planner proposes updating the schedule baseline so that the slipped activities show their new dates and the variance report shows no red. No change request has been raised, and the client's opening date is unaffected. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the planner's proposal, since the opening date has not moved and a variance report full of red would worry the client unnecessarily.",
+          "correct": false,
+          "rationale": "The candidate wants a calm report and gets one by deleting the evidence. Once the baseline moves with the actuals, the project loses the record of what slipped and why."
+        },
+        {
+          "id": "b",
+          "text": "Raise a change request to rebaseline the three activities, since the supplier delay was outside the project's control and should not count against the team.",
+          "correct": false,
+          "rationale": "Rebaselining is for approved changes to scope or plan, not for absorbing performance variance. Whether a delay was anyone's fault does not change the fact that it is a variance to be reported."
+        },
+        {
+          "id": "c",
+          "text": "Keep the baseline unchanged but leave the three activities off the variance report until the next milestone, when the effect on the opening date is clearer.",
+          "correct": false,
+          "rationale": "This preserves the baseline but withholds the variance from the people who rely on the report. The candidate is managing the message rather than reporting the schedule as it stands."
+        },
+        {
+          "id": "d",
+          "text": "Keep the baseline as approved, update the current schedule with the new forecast dates, and report the variance and its cause to the client.",
+          "correct": true,
+          "rationale": "The baseline is the approved reference against which slippage is measured. Forecast dates go in the current schedule, and the variance is reported with its cause and the fact that the opening date is safe."
+        }
+      ],
+      "explanation": "A schedule baseline changes only through approved change control, and it is not updated to match actual performance. Slippage is shown as variance between the baseline and the current forecast, and that variance is what tells stakeholders how the project is really doing. Rebaselining to remove variance destroys the measure it was meant to provide.",
+      "mindset": "The baseline is what you measure against, so it stays put while the forecast moves."
+    },
+    {
+      "id": "pmp-pr8-115",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "free-float",
+        "total-float",
+        "network-diagram",
+        "archetype-use-own-authority"
+      ],
+      "stem": "The network diagram shows part of an office fit-out schedule, with each activity's duration, total float and free float. A subcontractor asks to start their activity five days later than planned so they can finish another job. Select the one activity whose start you can let slip five days without delaying the planned early start of any other activity.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Five-activity network for an office fit-out with total and free float for each activity",
+        "caption": "Select an activity. Use Tab or the arrow keys to move between activities, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "a",
+          "n": 1,
+          "label": "Strip-out: 8 days, total float 0, free float 0",
+          "x": 20,
+          "y": 150,
+          "w": 140,
+          "h": 60,
+          "correct": false,
+          "rationale": "Strip-out is on the critical path with no float of either kind. A five-day slip here delays every following activity and the finish date."
+        },
+        {
+          "id": "b",
+          "n": 2,
+          "label": "Ductwork first fix: 10 days, total float 12, free float 3",
+          "x": 220,
+          "y": 30,
+          "w": 200,
+          "h": 60,
+          "correct": false,
+          "rationale": "The largest total float on the diagram is the tempting choice. But free float is only 3 days, so a five-day slip delays the early start of the next activity by two days even though the finish date holds."
+        },
+        {
+          "id": "c",
+          "n": 3,
+          "label": "Electrical first fix: 6 days, total float 6, free float 6",
+          "x": 220,
+          "y": 150,
+          "w": 200,
+          "h": 60,
+          "correct": true,
+          "rationale": "Free float of 6 days means this activity can start up to six days late before any successor's early start moves. A five-day slip disturbs no other crew."
+        },
+        {
+          "id": "d",
+          "n": 4,
+          "label": "Plumbing first fix: 7 days, total float 4, free float 4",
+          "x": 220,
+          "y": 270,
+          "w": 200,
+          "h": 60,
+          "correct": false,
+          "rationale": "Four days of float in each measure is close but short. A five-day slip would push its successor by one day and also move the finish date by one day."
+        },
+        {
+          "id": "e",
+          "n": 5,
+          "label": "Plastering: 9 days, total float 8, free float 0",
+          "x": 470,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "correct": false,
+          "rationale": "Eight days of total float protects the finish date, but zero free float means any delay pushes the next activity's early start. The candidate has read the wrong float figure."
+        }
+      ],
+      "explanation": "Total float is how far an activity can slip before the project finish moves; free float is how far it can slip before any successor's early start moves. A delay inside total float but beyond free float still disrupts other crews' planned dates, so a slip that affects nobody else must fit within free float. Reading which float a question is about matters as much as reading the number.",
+      "mindset": "Ask whose dates a slip would move before agreeing to it."
+    },
+    {
+      "id": "pmp-pr8-116",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "kanban",
+        "wip-limits",
+        "cycle-time",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A council's digital services team works in Kanban and has finished about eight items a week for months. To show every department progress, managers have pushed work to start early, and work in progress has grown from 16 items to 40. Average cycle time has risen from two weeks to five. The head of service asks you to start her new licensing form today so that it is visibly under way. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Start the form today but mark it as an expedite item, so it moves ahead of the queue and is finished well inside the current five-week average.",
+          "correct": false,
+          "rationale": "An expedite lane exists for genuine urgency, and using it to satisfy visibility makes every other item slower still. The candidate solves one stakeholder's wait by quietly adding to everyone else's."
+        },
+        {
+          "id": "b",
+          "text": "Show her that starting more work has lengthened delivery, and agree to bring work in progress back towards 16 so items finish in about two weeks.",
+          "correct": true,
+          "rationale": "With throughput steady at eight a week, cycle time is roughly work in progress divided by throughput: 40 ÷ 8 is five weeks and 16 ÷ 8 is two. Limiting starts is what gets her form delivered sooner, even though it begins later."
+        },
+        {
+          "id": "c",
+          "text": "Explain that the form will join the queue, quote her the current five-week cycle time as the forecast, and start it when a slot opens up.",
+          "correct": false,
+          "rationale": "The forecast is honest but treats five weeks as a fact of nature. The candidate accepts the condition that causes the delay rather than addressing the high work in progress that produced it."
+        },
+        {
+          "id": "d",
+          "text": "Propose a temporary increase in capacity, such as two contractors for a quarter, so that the team can start new requests like hers on the day they arrive.",
+          "correct": false,
+          "rationale": "More people would raise throughput a little, but with work in progress uncapped the extra capacity is soon absorbed by more starts. The candidate tackles throughput when the cause of the long wait is the volume of unfinished work."
+        }
+      ],
+      "explanation": "In a flow system, average cycle time is roughly work in progress divided by throughput. If throughput is steady, starting more work does not deliver anything sooner; it makes everything take longer. Limiting work in progress is therefore a scheduling decision, and the request to start something early so that it looks under way often rests on a premise the data contradicts.",
+      "mindset": "Stop starting and start finishing: delivery dates come from completed work, not started work."
+    },
+    {
+      "id": "pmp-pr8-117",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "hybrid-scheduling",
+        "interface-milestones",
+        "backlog-order",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Your hybrid programme is fitting out a distribution centre: conveyor hardware follows a predictive plan, and two Scrum teams build the sorting software. The conveyor supplier has just confirmed that delivery will be four weeks late, and the software teams had planned integration testing on the delivered conveyors in sprints 7 and 8. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Update the hardware-to-software interface milestone in the integrated schedule and tell the stakeholders whose dates depend on it.",
+          "correct": true,
+          "rationale": "The interface milestone is where the two plans meet. Moving it to the confirmed date keeps the integrated view honest and lets dependent stakeholders replan now rather than discover the gap later."
+        },
+        {
+          "id": "b",
+          "text": "Work with the product owners to bring forward backlog items that do not need the physical conveyors, moving integration testing later.",
+          "correct": true,
+          "rationale": "Reordering the backlog lets the software teams keep delivering value during the delay, which is the main schedule advantage of adaptive work inside a hybrid plan."
+        },
+        {
+          "id": "c",
+          "text": "Pause both Scrum teams' sprints for the four weeks and reassign the developers to support work until the conveyors arrive.",
+          "correct": false,
+          "rationale": "Pausing throws away capacity when most of the backlog probably does not depend on the hardware. The candidate treats the dependency as blocking all software work rather than part of it."
+        },
+        {
+          "id": "d",
+          "text": "Extend the software teams' sprints from two weeks to four so that sprint 7 ends after the revised conveyor delivery date.",
+          "correct": false,
+          "rationale": "Changing the timebox to fit an external date disrupts cadence and velocity history while doing nothing to use the intervening time well. The candidate adjusts the calendar instead of the content."
+        },
+        {
+          "id": "e",
+          "text": "Submit a change request to rebaseline the programme finish date four weeks later before the teams have assessed what they can reorder.",
+          "correct": false,
+          "rationale": "Rebaselining may be needed eventually, but doing it first assumes the full four weeks lands on the finish date. The candidate locks in the worst case before exploring how much of it the software resequencing can absorb."
+        }
+      ],
+      "explanation": "In a hybrid plan, a slip on the predictive side reaches the adaptive side through specific interface points. The response is to make the revised interface visible in the integrated schedule and to use the adaptive teams' ability to reorder work so they keep delivering while they wait. Pausing teams, bending timeboxes or rebaselining straight away all treat the delay as if it applied to all the work, when it usually applies to only part of it.",
+      "mindset": "When one part of a hybrid plan slips, use the flexibility of the other part rather than freezing it."
+    },
+    {
+      "id": "pmp-pr8-118",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "schedule-reserve",
+        "management-reserve",
+        "unknown-unknowns",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Excavation for a new flood defence wall uncovers an uncharted Victorian culvert, which nobody had identified as a risk. Diverting it adds nine days to the critical path. Your schedule carries a 20-day contingency reserve, built for the twelve identified risks in the register; four of those are still open. The sponsor holds a separate management reserve. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Draw nine days from the 20-day contingency reserve, since it is large enough to cover the delay, and record the drawdown in the reserve log.",
+          "correct": false,
+          "rationale": "The reserve looks big enough, which is why this tempts. But it was sized for identified risks, four of which are still open, so spending it on something unforeseen leaves those risks underfunded without anyone deciding to accept that."
+        },
+        {
+          "id": "b",
+          "text": "Treat the culvert as a new risk, add it to the register with a nine-day impact, and then fund it from contingency like the other identified risks.",
+          "correct": false,
+          "rationale": "The culvert is not a risk any more; it has already happened. Registering it after the fact so that it qualifies for contingency disguises an unforeseen event as a planned one and erodes the reserve covering the remaining risks."
+        },
+        {
+          "id": "c",
+          "text": "Report the nine-day delay as a schedule variance, update the forecast finish date, and wait to see whether later activities can recover the time.",
+          "correct": false,
+          "rationale": "Reporting the variance is right, but waiting to see whether it recovers leaves the funding decision unmade. The candidate avoids choosing between reserves by not using either and lets the finish date take the hit by default."
+        },
+        {
+          "id": "d",
+          "text": "Present the sponsor with the impact and ask for nine days of management reserve, leaving the contingency reserve for the identified risks.",
+          "correct": true,
+          "rationale": "An unidentified risk that occurs is what management reserve is for, and the sponsor controls it. Keeping the contingency for the risks it was built for keeps both reserves meaningful."
+        }
+      ],
+      "explanation": "Contingency reserve is sized for identified risks and is the project manager's to manage within that purpose; management reserve covers the unforeseen and sits with the sponsor or governance body. Funding an unidentified event from contingency because the numbers allow it quietly underfunds the risks the reserve was built for. Using each reserve for its own purpose keeps both meaningful and puts the decision with whoever owns it.",
+      "mindset": "Each reserve has a purpose and an owner; keep them separate even when one could cover the gap."
+    },
+    {
+      "id": "pmp-pr8-119",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "velocity",
+        "definition-of-done",
+        "release-forecasting",
+        "archetype-make-visible"
+      ],
+      "stem": "A newly formed Scrum team at a logistics firm has finished its first two sprints. Stakeholders want a release date. You notice the team has been counting points for stories that are about 80 percent finished, and that both sprints' velocities came out at different figures. Which two practices will make the team's velocity a reliable basis for a release forecast?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Count story points only for items that meet the definition of done, carrying unfinished stories into the next sprint at full value.",
+          "correct": true,
+          "rationale": "Partial credit inflates velocity with work that may hide its hardest part in the last 20 percent. Counting only done work makes velocity measure what was actually delivered."
+        },
+        {
+          "id": "b",
+          "text": "Base the forecast on velocity across several sprints, presented as a range, rather than on either of the first two sprints alone.",
+          "correct": true,
+          "rationale": "Early velocities are noisy while a team settles. A range over several sprints shows stakeholders both the likely date and the uncertainty around it."
+        },
+        {
+          "id": "c",
+          "text": "Award partial points in proportion to each unfinished story's percentage complete, so velocity reflects the effort the team really spent.",
+          "correct": false,
+          "rationale": "This formalises the problem the stem describes. Velocity is a measure of finished value, not effort, and percentage complete on a story is a guess that is usually optimistic."
+        },
+        {
+          "id": "d",
+          "text": "Compare the team's velocity with an established team elsewhere in the firm and adjust its estimates until the two figures are similar.",
+          "correct": false,
+          "rationale": "Points are a relative scale private to each team. Adjusting one team's estimates to match another's velocity makes the numbers look comparable while breaking the link to the team's own pace."
+        },
+        {
+          "id": "e",
+          "text": "Set a stretch velocity target for the next sprint, above both recent figures, so the release date stakeholders receive is ambitious.",
+          "correct": false,
+          "rationale": "A target turns velocity from a measure into a goal, and the team will then inflate estimates to meet it. The forecast becomes optimistic rather than reliable."
+        }
+      ],
+      "explanation": "Velocity is useful for forecasting only if it measures the same thing every sprint: completed work, judged against the definition of done, at a stable team's own scale. Partial credit, cross-team comparison and velocity targets each distort that measure. A forecast from velocity should use several sprints and be expressed as a range until the team's pace settles.",
+      "mindset": "Measure velocity honestly and it will forecast honestly."
+    },
+    {
+      "id": "pmp-pr8-120",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "hybrid-scheduling",
+        "scheduling-methods",
+        "tailoring",
+        "archetype-trade-off"
+      ],
+      "stem": "A utility's smart-meter rollout combines several kinds of work, and you must choose how each workstream is scheduled. Match each workstream to the scheduling approach that fits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "w1",
+          "text": "Installing 180,000 meters across regions in a fixed sequence agreed with the regulator, with long-lead equipment orders."
+        },
+        {
+          "id": "w2",
+          "text": "Building the customer energy app, whose feature priorities shift as trial households give feedback each month."
+        },
+        {
+          "id": "w3",
+          "text": "Handling installation faults and customer queries that arrive unpredictably and vary in size from minutes to days."
+        }
+      ],
+      "options": [
+        {
+          "id": "cpm",
+          "text": "A baselined critical path schedule with logic-linked activities and milestones",
+          "correct": true,
+          "match": "w1",
+          "rationale": "A known, regulator-agreed sequence with long-lead procurement is where a logic-driven baseline earns its keep: it shows the effect of any slip on the end date and anchors the procurement orders."
+        },
+        {
+          "id": "backlog",
+          "text": "An ordered product backlog with release forecasts drawn from velocity",
+          "correct": true,
+          "match": "w2",
+          "rationale": "When priorities change with monthly feedback, the schedule is the backlog order. Velocity-based release forecasts give dates without freezing the feature list."
+        },
+        {
+          "id": "flow",
+          "text": "A Kanban flow with work-in-progress limits and cycle-time service levels",
+          "correct": true,
+          "match": "w3",
+          "rationale": "Unpredictable arrivals of uneven size cannot be planned in advance. Managing flow with WIP limits and cycle-time targets gives reliable response times without a fixed plan."
+        },
+        {
+          "id": "chain",
+          "text": "A critical chain schedule with buffers placed at the end of each feeding chain",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Critical chain suits planned work with shared, constrained resources. It tempts for the rollout, but nothing in that workstream points to resource contention as the main schedule risk."
+        }
+      ],
+      "explanation": "Tailoring a schedule means choosing a method for each kind of work rather than imposing one across a programme. Stable, sequenced work with long-lead dependencies suits a baselined logic network; work whose priorities shift suits an ordered backlog with velocity forecasts; unplanned, variable demand suits flow management. A hybrid programme then needs only enough integration to connect them at their interfaces.",
+      "mindset": "Fit the scheduling method to the nature of the work, not to the habits of the organisation."
+    },
+    {
+      "id": "pmp-pr8-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "milestone-schedule",
+        "schedule-reporting",
+        "audience",
+        "archetype-make-visible"
+      ],
+      "stem": "You manage the construction of a vaccine filling plant, and the schedule holds 2,400 activities. The chair of the investment board says members cannot tell from the monthly pack whether the project is on track: the pack currently contains a 38-page Gantt chart exported from the scheduling tool. The board's decisions concern the four contractual milestones and the regulator's inspection date. What should you provide instead?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A summary Gantt chart rolled up to the sixty level-two work packages, so that board members can still trace any slippage back to the area of work that is causing it.",
+          "correct": false,
+          "rationale": "Rolling up helps, but sixty work packages still answer a delivery-team question rather than a board one. The candidate reduces the volume without changing the level, so the milestones remain hard to find."
+        },
+        {
+          "id": "b",
+          "text": "The full Gantt chart filtered to critical-path activities only, which cuts the export to about four pages while keeping the logic and dates the planner relies on.",
+          "correct": false,
+          "rationale": "A critical-path filter is the planner's analysis view. It shows what drives the finish, not whether each contractual milestone and the inspection will be met, which is what the board must decide on."
+        },
+        {
+          "id": "c",
+          "text": "A one-page milestone chart showing the baseline and current forecast date for each contractual milestone and the inspection, with a short note on any that have moved.",
+          "correct": true,
+          "rationale": "The board decides on milestone commitments, so the view it needs is those dates against baseline. One page answers the chair's question directly and leaves the detail with the people who act on it."
+        },
+        {
+          "id": "d",
+          "text": "A walkthrough of the detailed schedule at the next board meeting, so that members learn how to read the Gantt chart and can locate the milestones for themselves.",
+          "correct": false,
+          "rationale": "This fits the audience to the artefact instead of the artefact to the audience. It spends board time on training and still leaves members searching 38 pages for five dates each month."
+        }
+      ],
+      "explanation": "One schedule model supports several presentations, and the right one is set by the decisions the reader takes. People deciding on commitments need the few dates they are accountable for, shown against baseline; people co-ordinating the work need the bar chart; people analysing logic need the network. Giving a governance body the planner's view does not make the project more transparent, it makes the answer harder to find.",
+      "mindset": "Show each audience the level of the schedule that matches the decisions it takes."
+    },
+    {
+      "id": "pmp-pr8-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "effort-vs-duration",
+        "basis-of-estimates",
+        "duration-estimating",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a £14 million airport baggage-handling upgrade, the activity 'Write site acceptance test procedures' is on the critical path with a duration of 90 working days. The sponsor expected something nearer six weeks and asks you to add two more test engineers to shorten it. The planner took the 90 days directly from the test lead's estimate, and three test engineers are already assigned to the activity full time. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the two test engineers the sponsor has asked for, since the activity is on the critical path and extra people on divisible documentation work will shorten it directly.",
+          "correct": false,
+          "rationale": "Crashing a critical activity is sound when its duration is genuinely too long, but the candidate accepts the 90-day figure without asking what it measures. If it is effort, the extra cost buys a reduction that a corrected entry would give for free."
+        },
+        {
+          "id": "b",
+          "text": "Ask the test lead for optimistic, most likely and pessimistic estimates of the procedure work, so that the duration rests on a range rather than on a single planning figure.",
+          "correct": false,
+          "rationale": "A range deals with uncertainty in an estimate, but the suspected problem is what the number represents. Three points of effort entered as duration would still be about three times too long, now with false precision attached."
+        },
+        {
+          "id": "c",
+          "text": "Fast-track the procedure writing by starting it alongside the equipment installation it currently follows, accepting some rework risk to bring the critical path back in.",
+          "correct": false,
+          "rationale": "Overlapping work is a legitimate compression technique, but the candidate compresses before questioning an implausible duration. Taking on rework risk to fix what may be a units error in the schedule model spends real risk on a data problem."
+        },
+        {
+          "id": "d",
+          "text": "Check with the test lead whether the 90 days is an estimate of effort or of elapsed time, and recalculate the duration for the three engineers already assigned before adding anyone.",
+          "correct": true,
+          "rationale": "If 90 days is effort shared by three full-time engineers, the activity is about 30 days long and the sponsor's concern disappears. Establishing what the figure measures comes before spending money to shorten it."
+        }
+      ],
+      "explanation": "An estimate of work and an activity duration are different quantities, linked by how many people work on the activity and for what share of their time. When a duration looks implausible, the first question is what the underlying figure measures and how the planner converted it. Compression techniques act on real durations; applied to a figure entered in the wrong units, they add cost or risk to solve a problem that a corrected estimate would remove.",
+      "mindset": "Before shortening an activity, check what its duration actually measures."
+    },
+    {
+      "id": "pmp-pr8-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "schedule-updating",
+        "out-of-sequence-progress",
+        "schedule-logic",
+        "archetype-diagnose-first"
+      ],
+      "stem": "At this week's status update for a distribution warehouse, the planner reports 'Install pallet racking' as 40 percent complete, although its only predecessor, 'Floor coating and cure', is 60 percent complete and linked finish-to-start. The scheduling tool is flagging out-of-sequence progress. The planner suggests switching the calculation to progress override, so that the warning disappears and the racking simply continues from where it is. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Find out from the site manager what is happening on the floor: whether racking is following the coating zone by zone, or has started on floor that has not cured.",
+          "correct": true,
+          "rationale": "Out-of-sequence progress means either the logic or the work is wrong. Establishing which tells you whether to remodel the link, for example as a zoned start-to-start sequence, or to raise a quality issue."
+        },
+        {
+          "id": "b",
+          "text": "Accept progress override for this update, since actual progress on site is the best evidence of what can happen and the link was only ever the planner's estimate of the sequence.",
+          "correct": false,
+          "rationale": "Override makes the warning go away by ignoring the logic, without asking why the two disagree. If the crew is racking on uncured floor, the schedule now endorses a quality problem."
+        },
+        {
+          "id": "c",
+          "text": "Keep retained logic, so that the remaining racking work is held until coating finishes, which gives the more cautious of the two forecasts the tool can calculate.",
+          "correct": false,
+          "rationale": "Choosing the cautious setting still picks an answer before establishing the facts. If racking is legitimately following coating zone by zone, retained logic forecasts a delay that will not happen."
+        },
+        {
+          "id": "d",
+          "text": "Instruct the racking crew to stop until the coating activity is reported complete, so that the work on site returns to the sequence in the approved schedule.",
+          "correct": false,
+          "rationale": "This assumes the schedule is right and the site is wrong. If the zoned sequence is valid, stopping the crew costs real time to protect a link that never reflected how the work is done."
+        }
+      ],
+      "explanation": "When progress contradicts the network, the scheduling tool offers settings that decide which of the two to believe, but neither setting knows the answer. The conflict has two possible causes: the logic misdescribes a valid way of working, or the work has departed from a sequence that matters. The first is fixed by remodelling the relationships; the second is a quality or safety issue. Investigate before choosing a calculation option.",
+      "mindset": "Treat a conflict between the logic and the site as a question about which one is wrong."
+    },
+    {
+      "id": "pmp-pr8-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "critical-chain",
+        "buffer-management",
+        "schedule-control",
+        "archetype-act-now"
+      ],
+      "stem": "Your refinery's 40-day maintenance turnaround is scheduled using critical chain, with aggressive task estimates and a 12-day project buffer at the end. On day 14, 35 percent of the critical chain is complete and 8 of the 12 buffer days have been used. The agreed rule is that buffer use running well ahead of chain completion moves recovery actions from planned to executed. Area supervisors say most tasks are finishing close to estimate. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the supervisors to re-estimate the remaining tasks with realistic safety added back in, so that the plan reflects how the turnaround work is actually running on site.",
+          "correct": false,
+          "rationale": "Adding safety back into each task undoes the method. The buffer exists precisely so that individual estimates can be aggressive, and padding them again hides the consumption the report has just revealed."
+        },
+        {
+          "id": "b",
+          "text": "Put the prepared recovery actions into effect now on the remaining critical-chain tasks, because buffer is being used nearly twice as fast as the chain is progressing.",
+          "correct": true,
+          "rationale": "About 67 percent of the buffer has gone against 35 percent of the chain. That crosses the agreed trigger, and the value of buffer management lies in acting on the trend while two-thirds of the chain remains to recover on."
+        },
+        {
+          "id": "c",
+          "text": "Wait for the next buffer report before acting, since a few early overruns are normal in a turnaround and the supervisors report most tasks finishing close to estimate.",
+          "correct": false,
+          "rationale": "The trigger was agreed in advance so that reassurance would not delay the response. The candidate weighs anecdote about typical tasks above the measure designed to aggregate them."
+        },
+        {
+          "id": "d",
+          "text": "Identify which tasks consumed the eight buffer days and hold their supervisors to account at the daily meeting, so that the same overruns are not repeated on later tasks.",
+          "correct": false,
+          "rationale": "Learning which tasks overran is useful, but holding people to aggressive estimates breaks the trust critical chain relies on and does nothing to recover the days already lost."
+        }
+      ],
+      "explanation": "Critical chain moves safety out of individual tasks into a shared buffer, and control then rests on comparing the share of buffer consumed with the share of the chain completed. Zones on that comparison are set in advance so that the response is triggered by the trend, not argued from individual task stories. Once consumption runs well ahead of progress, the time for planning recovery has passed and the time for executing it has arrived.",
+      "mindset": "Let the buffer burn rate, not reassurance about individual tasks, decide when to act."
+    },
+    {
+      "id": "pmp-pr8-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "schedule-updating",
+        "remaining-duration",
+        "forecasting",
+        "archetype-make-visible"
+      ],
+      "stem": "Your university's student-records migration includes a 40-day data cleansing activity with 4 days of total float. After 20 working days the team reports it 50 percent complete, and the scheduling tool, which derives remaining duration from percent complete, shows 20 days remaining and an unchanged finish. The cleansing lead tells you that, at the rate records are actually being corrected, about 30 days of work remain. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the tool's 20-day figure and note the lead's view in the status commentary, because remaining duration should be derived consistently from percent complete across every activity in the model.",
+          "correct": false,
+          "rationale": "Consistency of method is not accuracy. Deriving remaining time from percent complete assumes the rest of the work will go at the planned rate, which the person doing it has just said it will not."
+        },
+        {
+          "id": "b",
+          "text": "Ask the lead to revise percent complete downwards until the derived remaining duration matches 30 days, so the tool's calculation method stays intact across the model.",
+          "correct": false,
+          "rationale": "This bends the progress measure to make the forecast come out right. Half the records really are done, so the report would now misstate progress in order to fix a forecasting setting."
+        },
+        {
+          "id": "c",
+          "text": "Record the lead's concern in the risk register as a possible ten-day overrun and review it at the next update, once more records have been cleansed and the rate is clearer.",
+          "correct": false,
+          "rationale": "The overrun is not uncertain: it is the lead's current estimate of work in progress. Treating a forecast as a risk keeps a known slip out of the schedule for another reporting cycle."
+        },
+        {
+          "id": "d",
+          "text": "Enter the lead's 30-day remaining duration, let the forecast recalculate, and report the resulting slip to the finish date together with the reason for it.",
+          "correct": true,
+          "rationale": "Ten extra days against four days of float makes the activity critical and moves the finish by six days. Updating remaining duration from the rate of work exposes that now, while there is time to respond."
+        }
+      ],
+      "explanation": "Percent complete describes work done; remaining duration forecasts work still to do, and the second is not arithmetic on the first when the work is running at a different rate from the plan. A sound status update takes remaining duration from the people doing the work and lets the network show what follows. Forecasts that are derived mechanically from progress look stable right up until the activity overruns.",
+      "mindset": "Forecast remaining work from the rate it is actually being done, not from the fraction already done."
+    },
+    {
+      "id": "pmp-pr8-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "planning-poker",
+        "relative-estimation",
+        "story-points",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your team is estimating stories for a charity's donations app using planning poker. For a story that adds Gift Aid declarations, four developers show 3 points, one shows 5, and the newest tester shows 13. The product owner suggests recording 3 points, since most of the team agrees and the session is already running long. What should happen next?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record 3 points as the product owner suggests, and note the tester's concern on the story card so that it can be checked once the sprint is under way.",
+          "correct": false,
+          "rationale": "Taking the majority view treats the outlier as noise. If the tester knows of work the others have missed, the estimate is wrong before the sprint starts and the note will not change that."
+        },
+        {
+          "id": "b",
+          "text": "Ask the tester who chose 13 and one of the developers who chose 3 to explain their reasoning, then have the whole team estimate the story again.",
+          "correct": true,
+          "rationale": "A wide spread means people are picturing different work. Hearing the highest and lowest reasoning surfaces what one side knows, such as compliance testing the developers had not counted, and the re-vote reflects it."
+        },
+        {
+          "id": "c",
+          "text": "Record 5 points as a compromise between the majority and the outlier, which adds some safety to the estimate without slowing the planning session any further.",
+          "correct": false,
+          "rationale": "Splitting the difference produces a number nobody believes and loses the reason for the disagreement. It saves a few minutes by keeping a misunderstanding in the backlog."
+        },
+        {
+          "id": "d",
+          "text": "Ask the tester to pair with a senior developer on the story so that the tester learns why the rest of the team sees it as a small piece of work.",
+          "correct": false,
+          "rationale": "This assumes the newest member is the one who is wrong. The tester may be the only person who has thought about how Gift Aid declarations must be tested and evidenced."
+        }
+      ],
+      "explanation": "In relative estimation, the spread of first votes is the useful output: a wide gap means the estimators hold different pictures of the work. The technique works by having the people at the extremes explain their reasoning and then estimating again, so that the number reflects a shared understanding. Averaging, majority votes and compromise figures all keep the number while discarding the information.",
+      "mindset": "Treat a divergent estimate as information to surface, not noise to average away."
+    },
+    {
+      "id": "pmp-pr8-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "sprint-length",
+        "story-splitting",
+        "cadence",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your team at an online furniture retailer runs two-week sprints. In five of the last six sprints, one or two large stories were unfinished at the sprint review and carried over. The team proposes moving to four-week sprints so that big stories fit. The product owner is uneasy about getting feedback only once a month but is willing to try it if the team prefers. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree a four-week trial for two sprints, then compare carry-over and stakeholder feedback with the two-week sprints before deciding which length to keep.",
+          "correct": false,
+          "rationale": "Experimenting sounds empirical, but the trial would show only that bigger boxes hold bigger stories. It tests the team's proposed fix without testing the assumption that story size has to stay as it is."
+        },
+        {
+          "id": "b",
+          "text": "Keep two-week sprints but let a large story span two sprints by design, with its points counted only in the sprint in which it is actually done.",
+          "correct": false,
+          "rationale": "This formalises the carry-over rather than removing it. Stories still go a fortnight without being finished or shown, so the feedback loop the product owner values is lost for exactly the riskiest work."
+        },
+        {
+          "id": "c",
+          "text": "Keep the two-week cadence and work with the team and product owner to split large stories into thin slices that can each be finished within a sprint.",
+          "correct": true,
+          "rationale": "The repeated carry-over is a symptom of oversized stories, not of a short sprint. Splitting keeps fortnightly feedback and gives each sprint work that can genuinely reach done."
+        },
+        {
+          "id": "d",
+          "text": "Move to three-week sprints as a middle course, which gives large stories more room while keeping feedback more frequent than the once a month the product owner fears.",
+          "correct": false,
+          "rationale": "A compromise length still treats the timebox as the problem. Stories tend to grow to fill the space, and the team will be back at the same question with three-week sprints."
+        }
+      ],
+      "explanation": "A sprint's length sets how often the team gets feedback and how often the plan can be adjusted, so it is a scheduling asset rather than a container to be resized around the work. When work regularly fails to fit the timebox, the usual cause is item size, and the remedy is to split items into slices that each deliver something finished. Lengthening the cadence trades away feedback to accommodate a backlog problem.",
+      "mindset": "When the work does not fit the timebox, change the size of the work before the size of the box."
+    },
+    {
+      "id": "pmp-pr8-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "multi-team",
+        "cadence",
+        "integration",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Three teams build software for an electric vehicle charging network. The payments team runs one-week sprints starting Mondays, the app team two-week sprints starting Wednesdays, and the hardware-interface team three-week sprints starting Thursdays. Integrated demonstrations keep slipping because one team is always mid-sprint, and each team agrees dependencies at a different time. All three teams want to keep working in sprints. What should you propose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Align the teams on a shared sprint length with common start and end days, so that planning, integration and review happen together at each boundary.",
+          "correct": true,
+          "rationale": "When teams contribute to one product, synchronised boundaries let dependencies be planned at a single event and the integrated increment be reviewed at a single event, which is what the demonstrations need."
+        },
+        {
+          "id": "b",
+          "text": "Set up a small integration team that picks up each team's output whenever it is ready and assembles it for a monthly integrated demonstration to stakeholders.",
+          "correct": false,
+          "rationale": "A separate integration team absorbs the symptom and adds a hand-off. The underlying problem, that the three plans never line up, is left in place and now has a team built around it."
+        },
+        {
+          "id": "c",
+          "text": "Keep each team's own cadence and hold a weekly cross-team dependency meeting where the leads agree integration dates for the coming fortnight.",
+          "correct": false,
+          "rationale": "Better coordination helps, but the leads would be negotiating dates across three cycles that only coincide every few weeks. The meeting manages the misalignment rather than removing it."
+        },
+        {
+          "id": "d",
+          "text": "Ask each team to publish its sprint plan to a shared board, so that the others can see when their dependencies will land and plan their own sprints around them.",
+          "correct": false,
+          "rationale": "Visibility is useful, but seeing that a dependency lands mid-sprint does not make it usable. Each team still plans at a different moment, so commitments cannot be made together."
+        }
+      ],
+      "explanation": "Several teams building one product schedule their work on a shared cadence, so that sprint boundaries coincide and every team plans, integrates and reviews at the same moments. Coordination meetings, shared boards and integration specialists can all help, but none of them can make misaligned cycles meet. Aligning the cadence is the structural fix; the other practices then work on top of it.",
+      "mindset": "Teams that integrate together should plan and finish together."
+    },
+    {
+      "id": "pmp-pr8-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "release-planning",
+        "fixed-date",
+        "scope-flexing",
+        "archetype-trade-off"
+      ],
+      "stem": "Your team must ship a pensions provider's member dashboard before a regulatory deadline in four sprints. Velocity has been steady at 25 points for six sprints. The remaining backlog items that the product owner has labelled 'must' total 115 points. The product owner asks the team to commit to 29 points a sprint, and the tech lead proposes deferring automated regression tests until after launch to free about 15 points. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the 29-point commitment and review it after the first sprint, since a short, deliberate push towards a fixed regulatory deadline is a fair request of a stable team.",
+          "correct": false,
+          "rationale": "Six sprints at 25 points is the team's demonstrated capacity, and a target does not change it. The candidate converts a forecast gap into a hope, and finds out after one sprint of the four has gone."
+        },
+        {
+          "id": "b",
+          "text": "Work with the product owner to split the 'must' items and identify which parts the regulation actually requires, aiming for a release scope of about 100 points.",
+          "correct": true,
+          "rationale": "The 'must' label is the product owner's judgement, not the regulator's text. Four sprints at 25 points gives 100, and slicing against the actual requirement is the lever that does not depend on hope or hidden debt."
+        },
+        {
+          "id": "c",
+          "text": "Defer the automated regression tests as the tech lead proposes, and schedule the deferred work as the first priority in the sprint immediately after launch.",
+          "correct": false,
+          "rationale": "It closes the gap on paper by moving quality work out of view at the point of highest release risk. For a regulated pensions service, untested regressions are a worse outcome than a narrower release."
+        },
+        {
+          "id": "d",
+          "text": "Ask the regulator's liaison now for a short extension, so the team can deliver the full 115 points at its proven velocity instead of relying on a stretch target.",
+          "correct": false,
+          "rationale": "Honest about the arithmetic, but it spends regulatory credibility before the team has tested whether the full 115 points is really required. Extension is the last lever, not the first."
+        }
+      ],
+      "explanation": "When a date is fixed and the forecast falls short, scope is the variable to move, and the first place to look is whether the priority labels match the real constraint. Raising velocity targets and dropping quality work both close the gap on paper while moving the shortfall somewhere less visible; asking for more time before testing the scope spends credibility that may be needed later. Fix the scope to the evidence of capacity, not the capacity to the scope.",
+      "mindset": "When the date cannot move, test what 'must' really means before asking people or quality to absorb the gap."
+    },
+    {
+      "id": "pmp-pr8-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "last-responsible-moment",
+        "long-lead-items",
+        "hybrid-scheduling",
+        "archetype-trade-off"
+      ],
+      "stem": "Your hybrid programme is developing a smart home thermostat. The control-board chips have a 26-week lead time, and the supplier needs the board's pin layout and power specification to accept the order. Integration testing on production boards is planned for week 34. The software teams, working in sprints, want to keep the board design open as long as possible because user trials keep changing the feature set. It is now week 4. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Back-schedule from week 34 to find the latest date the order can be placed, and freeze only the pin layout and power specification by then, leaving the rest open.",
+          "correct": true,
+          "rationale": "Working back 26 weeks gives an order date around week 8. Freezing only what the supplier needs by then protects integration while leaving the software teams four more weeks of trials and the rest of the design open."
+        },
+        {
+          "id": "b",
+          "text": "Freeze the complete board design now and place the chip order immediately, so that the long-lead item is secured and integration testing in week 34 is fully protected.",
+          "correct": false,
+          "rationale": "Ordering early secures the date, but freezing the whole design four weeks before it is necessary throws away learning from user trials that the lead time did not require the team to give up."
+        },
+        {
+          "id": "c",
+          "text": "Let the software teams keep the design open until user trials settle, then expedite the chip order with the supplier and pay for faster delivery if it is needed.",
+          "correct": false,
+          "rationale": "This assumes the lead time can be bought down when it is needed. Semiconductor lead times are rarely compressible, and the candidate stakes the integration date on a supplier concession nobody has offered."
+        },
+        {
+          "id": "d",
+          "text": "Order chips now against the current draft specification, accepting the cost of a possible reorder if user trials later change the pin layout or power requirements.",
+          "correct": false,
+          "rationale": "Paying for an option can be reasonable, but a reorder restarts a 26-week clock that cannot fit before week 34. The fallback the candidate is relying on does not exist."
+        }
+      ],
+      "explanation": "A long-lead item turns a design decision into a dated commitment. The decision should be made at the last responsible moment: the latest point at which deciding still keeps the downstream date achievable, found by working back from the need date through the lead time. Only the parameters the long-lead item depends on need to be fixed then; freezing more trades away learning for no schedule benefit, and freezing later trades away the date.",
+      "mindset": "Fix what the long-lead item needs at the latest safe date, and keep everything else open."
+    },
+    {
+      "id": "pmp-pr8-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "backward-scheduling",
+        "milestones",
+        "release-planning",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A housing association is replacing its payroll system, and go-live is fixed at the start of the tax year on 6 April. The cutover, two parallel payroll runs and staff training are planned predictively; a Scrum team is building the reporting and integration features. The Scrum team's lead says the team will keep sprinting until the end of March and release whatever is done in the final week. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the plan, since a Scrum team releasing whatever is done by a fixed date is the usual way of protecting that date, and ask the lead for a weekly scope forecast.",
+          "correct": false,
+          "rationale": "Releasing what is done protects a date when the release is the end of the line. Here parallel runs and training must use the finished features first, so the team's real deadline is weeks before 6 April."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to estimate the full remaining backlog now, so that the programme schedule can include every remaining story with planned dates through to the end of March.",
+          "correct": false,
+          "rationale": "Detailed dates for every story add precision without fixing the problem. The schedule would still be aiming the team at the end of March rather than at the date the downstream activities need."
+        },
+        {
+          "id": "c",
+          "text": "Work back from 6 April through cutover, parallel runs and training to set a feature-complete date, and agree it with the team as the release target for their sprints.",
+          "correct": true,
+          "rationale": "Every predictive activity before go-live consumes the finished features. Back-scheduling through them gives the date the team must actually hit, and turns the external deadline into an internal one the sprints can plan to."
+        },
+        {
+          "id": "d",
+          "text": "Add two buffer sprints to the end of the team's plan in March, so that any late features have time to be finished before the final release week begins.",
+          "correct": false,
+          "rationale": "Buffer at the end of March sits after the point where training and parallel runs needed the features. The candidate protects the wrong date, so the buffer is consumed by work that is already too late."
+        }
+      ],
+      "explanation": "A fixed external date is the end of the schedule, not the deadline for building. Working backwards from it through every activity that needs the finished product, such as rehearsals, parallel running and training, produces the internal milestones the delivery teams must meet. In a hybrid plan, that derived milestone is what an agile team's release target should be, because the predictive work that follows cannot start on features that do not yet exist.",
+      "mindset": "Set the build deadline from what has to happen after the build, not from the go-live date itself."
+    },
+    {
+      "id": "pmp-pr8-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "joint-planning",
+        "dependencies",
+        "hybrid-scheduling",
+        "archetype-use-own-authority"
+      ],
+      "stem": "Your hybrid programme for a building society runs a data-centre migration on a predictive plan, alongside a customer platform built by two Scrum teams. Last month the migration team switched off a test server that one Scrum team needed for its next sprint. Neither side knew of the other's plan, because each plans separately on its own cycle. Both leads have asked you to stop it happening again. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the migration team to email both Scrum teams before switching off or changing any shared environment, giving at least five working days' notice each time.",
+          "correct": false,
+          "rationale": "A notice rule fixes this one direction of this one kind of dependency. Next time it will be a Scrum team change that affects the migration, and nothing in the rule will catch it."
+        },
+        {
+          "id": "b",
+          "text": "Add each Scrum team's sprint goals to the migration schedule as milestones, so that the migration planner can see when the shared environments are in use.",
+          "correct": false,
+          "rationale": "This makes the agile work visible to one side only and records goals rather than the environments they depend on. It also loads sprint-level detail into the predictive schedule without creating a shared conversation."
+        },
+        {
+          "id": "c",
+          "text": "Escalate the incident to the programme board so that it can decide how the two workstreams should co-ordinate and who should own the shared environments.",
+          "correct": false,
+          "rationale": "Co-ordinating workstreams is the programme manager's job, and both leads have asked for exactly that. Escalating a problem you have the authority to solve hands the board a decision it expects you to make."
+        },
+        {
+          "id": "d",
+          "text": "Set up a joint planning session each quarter, with a shared dependency board that both workstreams update at every sprint planning and monthly plan review.",
+          "correct": true,
+          "rationale": "Dependencies between workstreams planned on different cycles only surface where the plans meet. A joint session and a shared board create that meeting point, and setting them up is within the programme manager's own remit."
+        }
+      ],
+      "explanation": "Workstreams that plan on different cycles, such as a predictive plan and a set of sprints, will miss each other's dependencies unless there is a regular point where their plans are laid side by side. Establishing that integration point, and a shared place to record dependencies between meetings, is part of running an integrated schedule and sits within the manager's own authority. One-way notification rules fix the instance, not the pattern.",
+      "mindset": "Workstreams planned on different cycles need a place where their plans meet."
+    },
+    {
+      "id": "pmp-pr8-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "calendars",
+        "schedule-model",
+        "constraints",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "You are reviewing the schedule for a multi-storey car park. The precast concrete supplier's factory closes for the first three weeks of August, and the specification prohibits external concrete pours from 1 December to the end of February. The planner has scheduled manufacturing and pours on the standard five-day project calendar, so both restrictions are currently ignored. Which two changes should be made to the schedule model?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Assign a calendar to the precast manufacturing activities that treats the factory's August shutdown as non-working time.",
+          "correct": true,
+          "rationale": "A resource or activity calendar records when the factory can work, so manufacturing dates move correctly wherever the logic places them, including if the work slips into or out of August."
+        },
+        {
+          "id": "b",
+          "text": "Add a 15-day lag after each precast manufacturing activity to allow for the working time lost during August.",
+          "correct": false,
+          "rationale": "A lag adds the delay whether or not the work falls in August. If manufacturing moves a month earlier or later, the lag stays and the schedule becomes wrong in the other direction."
+        },
+        {
+          "id": "c",
+          "text": "Assign a calendar to the external pour activities that treats December to February as non-working time.",
+          "correct": true,
+          "rationale": "The winter restriction is about when pours can happen, which is exactly what a calendar models. Any pour the logic pushes into winter then moves to March automatically rather than by hand."
+        },
+        {
+          "id": "d",
+          "text": "Set a start-no-earlier-than constraint of 1 March on every external pour activity in the schedule model.",
+          "correct": false,
+          "rationale": "The constraint is right only if every pour would otherwise fall in winter. Pours that could happen in the autumn are pushed to March, and the schedule stops responding to its own logic."
+        },
+        {
+          "id": "e",
+          "text": "Add a three-week contingency activity before practical completion to absorb both of the restrictions together.",
+          "correct": false,
+          "rationale": "Contingency is for uncertainty, and these restrictions are known. Lumping them at the end leaves every intermediate date wrong and hides which activities are affected."
+        }
+      ],
+      "explanation": "Restrictions on when work can happen belong in calendars, because a calendar lets the network recalculate correctly wherever the logic places an activity. Lags, date constraints and contingency activities each hard-code an assumption about where the work falls, so they are right only until the dates move, which is when the schedule matters most. Known working-time limits are part of the model, not reserve.",
+      "mindset": "Model when work can happen in calendars, so the schedule still tells the truth after dates move."
+    },
+    {
+      "id": "pmp-pr8-134",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "capacity-planning",
+        "unplanned-work",
+        "release-forecasting",
+        "archetype-make-visible"
+      ],
+      "stem": "Your team builds an insurance broker's quoting portal and also handles production support. Planned velocity is 40 points, but planned work completed has varied between 22 and 38 points over six sprints, because urgent support requests arrive unpredictably and are worked without being recorded. The release forecast still assumes 40 points a sprint. Which two actions will give the team a more reliable forecast?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record support requests on the team board as they arrive, so the team can see how much capacity they take each sprint.",
+          "correct": true,
+          "rationale": "Unrecorded work is the reason the forecast keeps missing. Once support is visible the team can measure its typical share of capacity and discuss it with the product owner."
+        },
+        {
+          "id": "b",
+          "text": "Estimate each support request in story points and add them to velocity, so that the figure reflects all the work done.",
+          "correct": false,
+          "rationale": "This raises velocity without raising the rate at which the release backlog is burned. The forecast would divide backlog points by a figure that includes work the backlog does not contain."
+        },
+        {
+          "id": "c",
+          "text": "Base the release forecast on the planned work actually completed per sprint after support, rather than on the 40-point plan.",
+          "correct": true,
+          "rationale": "The release depends on how fast backlog items are finished, and six sprints show that rate is 22 to 38 points. Forecasting from that range replaces an aspiration with evidence."
+        },
+        {
+          "id": "d",
+          "text": "Ask the team to defer non-critical support requests to the following sprint, so the planned 40 points are protected each time.",
+          "correct": false,
+          "rationale": "Deferral may help at the margin, but the requests are described as urgent and the support load does not disappear. The candidate protects the plan rather than correcting the forecast."
+        },
+        {
+          "id": "e",
+          "text": "Increase the estimates on all remaining backlog items by a quarter to cover the support work expected in each sprint.",
+          "correct": false,
+          "rationale": "Inflating estimates hides the support load inside the backlog, distorts relative sizing and makes the variation harder to see, not easier to manage."
+        }
+      ],
+      "explanation": "A release forecast divides the remaining backlog by the rate at which that backlog is actually being completed. Work that competes for the same capacity but is not recorded makes the planned rate look achievable while the real rate wanders, and the gap appears only as missed dates. Making all demand visible and forecasting from demonstrated throughput on the forecast work are what turn a plan figure into a forecast.",
+      "mindset": "A forecast is only as honest as the capacity it assumes, so make every claim on that capacity visible."
+    },
+    {
+      "id": "pmp-pr8-135",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "rollout-waves",
+        "re-forecasting",
+        "schedule-baseline",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Your ERP rollout covers 12 countries in predictive deployment waves, with an agile team configuring local variants before each wave. Wave 1 in Portugal took nine weeks instead of the planned seven. The causes were local tax configuration the team had underestimated and a data load that failed once because of a supplier outage. Eleven waves remain, each planned at seven weeks. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the seven-week plan for the remaining waves, since wave 1 was a learning wave and the team should be quicker from now on.",
+          "correct": false,
+          "rationale": "A learning effect is plausible but unproven, and tax configuration differs by country. The candidate keeps the plan on hope while ignoring the only actual data the programme has."
+        },
+        {
+          "id": "b",
+          "text": "Re-estimate the remaining waves from wave 1's actual durations, separating the cause likely to recur from the one-off outage.",
+          "correct": true,
+          "rationale": "Actuals from the first unit of repeated work are the best estimating data available. Separating recurring tax complexity from the one-off outage stops the forecast being either too optimistic or too pessimistic."
+        },
+        {
+          "id": "c",
+          "text": "Add two weeks to every remaining wave, matching wave 1's overrun so that the plan reflects what the team has just experienced.",
+          "correct": false,
+          "rationale": "Copying the whole overrun forward treats a one-off supplier outage as recurring and assumes every country's tax rules are as complex as Portugal's. It uses the data without analysing it."
+        },
+        {
+          "id": "d",
+          "text": "Take the revised forecast through change control if the baseline finish moves, and tell the steering group what the forecast rests on.",
+          "correct": true,
+          "rationale": "If the re-estimate moves the baselined finish, the baseline changes only through governance. Stating the assumptions lets the steering group judge the forecast rather than just receive it."
+        },
+        {
+          "id": "e",
+          "text": "Ask the agile team to configure the next three countries in parallel, so the overrun is recovered within the current baseline.",
+          "correct": false,
+          "rationale": "Compressing before re-forecasting commits the team to recovery before anyone knows how large the gap will be, and parallel configuration stretches the team that has just underestimated one country."
+        }
+      ],
+      "explanation": "In repeated work, the first unit's actuals are the strongest estimating evidence available, but they have to be analysed before they are applied: causes that will recur belong in every future estimate, while one-off events belong in risk. When the re-estimate moves the baselined end date, the change goes through governance with its assumptions stated, rather than being absorbed silently or promised away.",
+      "mindset": "Let the first unit of repeated work reset the estimate for the rest, after sorting what will recur from what will not."
+    },
+    {
+      "id": "pmp-pr8-136",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "estimating-techniques",
+        "duration-estimating",
+        "hybrid-scheduling",
+        "archetype-trade-off"
+      ],
+      "stem": "Your hybrid programme is building a science visitor centre and its ticket-booking app, and different parts of the work reach estimating with very different information behind them. Match each situation to the duration estimating technique that fits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "At the feasibility stage, the only information available is how long two similar visitor centres took from groundbreaking to opening."
+        },
+        {
+          "id": "s2",
+          "text": "Electricians will install 3,200 metres of data cabling, and the contractor's records show a crew consistently installs about 160 metres a day."
+        },
+        {
+          "id": "s3",
+          "text": "A first-of-its-kind suspended planetarium dome has never been installed by anyone on the team, and the specialists' views of its duration differ widely."
+        }
+      ],
+      "options": [
+        {
+          "id": "analogous",
+          "text": "Analogous estimating from comparable past projects",
+          "correct": true,
+          "match": "s1",
+          "rationale": "With nothing but the totals of similar projects, scaling from those comparisons is the only defensible basis. It is quick and coarse, which suits a feasibility decision."
+        },
+        {
+          "id": "parametric",
+          "text": "Parametric estimating from a reliable unit rate",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A known quantity and a consistent productivity rate give a calculable duration: 3,200 metres at 160 metres a day is 20 crew-days. The precision comes from the quality of the rate."
+        },
+        {
+          "id": "threepoint",
+          "text": "Three-point estimating from optimistic, most likely and pessimistic views",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Novel work with widely differing expert views calls for an estimate that carries its uncertainty. A range built from three points shows the spread instead of hiding it in one figure."
+        },
+        {
+          "id": "points",
+          "text": "Relative sizing in story points by the delivery team",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Relative sizing suits backlog items for a stable team with a velocity history to convert points into time. None of the three situations is that, even though the programme includes an app."
+        }
+      ],
+      "explanation": "The right estimating technique is set by the information available, not by preference. Comparisons with whole past projects suit early decisions with little detail; a reliable unit rate and a known quantity allow calculation; novel work with disputed durations needs a range that carries the uncertainty. Choosing a precise technique without the data it depends on produces false confidence, and choosing a coarse one when better data exists wastes it.",
+      "mindset": "Choose the estimating technique the available information can actually support."
+    },
+    {
+      "id": "pmp-pr8-137",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "planning-levels",
+        "release-planning",
+        "daily-scrum",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your Scrum team builds a rail operator's journey-planning app and plans at several levels. Match each new piece of information to the planning event where it should be dealt with first. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "A rule change means accessibility features must now go in the summer release rather than the autumn one, which reshuffles that release's contents."
+        },
+        {
+          "id": "p2",
+          "text": "On day four of a sprint, a developer finds that a committed story is about twice as large as the team thought, putting the sprint goal at risk."
+        },
+        {
+          "id": "p3",
+          "text": "The marketing lead asks for a new promotional banner feature to be considered for the team's next sprint, which starts in a week."
+        }
+      ],
+      "options": [
+        {
+          "id": "release",
+          "text": "Release planning, revisiting the release's scope and order with stakeholders",
+          "correct": true,
+          "match": "p1",
+          "rationale": "Moving features between releases changes the release-level plan. It is decided where the product owner and stakeholders weigh release contents, not inside a single sprint."
+        },
+        {
+          "id": "daily",
+          "text": "The daily scrum, followed by the team re-planning the sprint backlog with the product owner",
+          "correct": true,
+          "match": "p2",
+          "rationale": "A threat to the sprint goal discovered mid-sprint is dealt with by the team at its next daily inspection, involving the product owner if scope within the sprint must change."
+        },
+        {
+          "id": "refine",
+          "text": "Product backlog refinement, where the product owner orders and clarifies new items",
+          "correct": true,
+          "match": "p3",
+          "rationale": "A new request first enters the product backlog, where the product owner decides its order and the team makes it ready. Only then can sprint planning consider it."
+        },
+        {
+          "id": "retro",
+          "text": "The sprint retrospective, where the team inspects how it worked",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The retrospective improves the team's way of working. It may later examine why a story was underestimated, but it is not where any of these pieces of information is first acted on."
+        }
+      ],
+      "explanation": "Agile teams plan at nested horizons, from release to sprint to day, and each piece of new information belongs at the horizon whose plan it changes. Changes to release contents go to release planning; threats to the current sprint are handled by the team within the sprint; new requests enter the backlog through the product owner. Taking information to the wrong level either churns plans that did not need to change or delays the ones that did.",
+      "mindset": "Take new information to the planning horizon it actually changes."
+    },
+    {
+      "id": "pmp-pr8-138",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "progress-measurement",
+        "schedule-updating",
+        "status-reporting",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "You are setting the progress-measurement rules for a 60 km rural road resurfacing project before status reporting starts. Complete each sentence with the method that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Hundreds of short activities, such as installing a single drainage gully, each take two or three days, well under the weekly reporting period. These should be measured using"
+        },
+        {
+          "id": "c2",
+          "text": "Resurfacing is laid lane-kilometre by lane-kilometre, and the site engineer records the quantity laid each day. It should be measured using"
+        },
+        {
+          "id": "c3",
+          "text": "Pavement design lasts twelve weeks and passes through defined stages: survey, draft design, independent check and client approval. It should be measured using"
+        }
+      ],
+      "options": [
+        {
+          "id": "split",
+          "text": "a fixed split, such as 0/100 or 50/50, credited at start and finish",
+          "correct": true,
+          "match": "c1",
+          "rationale": "For activities shorter than the reporting period, estimating partial progress adds effort and little accuracy. A fixed split is simple, objective and errs by at most a few days on any one item."
+        },
+        {
+          "id": "units",
+          "text": "units completed as a share of the total quantity",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Where the work is a measurable quantity recorded daily, progress is simply the share laid. It is objective and leaves no room for optimistic judgement."
+        },
+        {
+          "id": "weighted",
+          "text": "weighted milestones, with a set share credited as each stage is passed",
+          "correct": true,
+          "match": "c3",
+          "rationale": "A long activity with defined stages can earn credit at each verifiable stage, which gives regular progress without relying on anyone's sense of how far along the work feels."
+        },
+        {
+          "id": "estimate",
+          "text": "the activity owner's own estimate of percent complete each week",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Subjective estimates tend to run ahead of reality and stall near the end, the familiar pattern of an activity reported 90 percent complete for weeks. Each situation here has a more objective measure."
+        }
+      ],
+      "explanation": "Progress measurement should be as objective as the work allows, and the right method depends on the shape of the activity. Short activities are best credited by a fixed rule at start and finish; quantity-based work by units installed; long activities with defined stages by weighted milestones. Subjective percent complete is the method of last resort, because it is where optimistic reporting hides a slip until it can no longer be recovered.",
+      "mindset": "Measure progress by something you can verify, not by how far along the work feels."
+    },
+    {
+      "id": "pmp-pr8-139",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "relationship-types",
+        "leads-and-lags",
+        "network-calculation",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A 1.2 km sewer replacement is planned with overlapping activities. Trenching takes 12 days and starts at the beginning of day 1. Pipe laying takes 10 days and is linked start-to-start to trenching with a 3-day lag. Backfilling takes 6 days and is linked finish-to-finish to pipe laying with a 2-day lag. Days are whole working days numbered from 1.",
+      "blanks": [
+        {
+          "id": "plf",
+          "label": "Day on which pipe laying finishes (at the end of that day)",
+          "numeric": true,
+          "expect": 13,
+          "tol": 0,
+          "unit": "day",
+          "rationale": "Start-to-start plus 3 means pipe laying can start three days after trenching starts, at the beginning of day 4. Ten days of work from day 4 runs to the end of day 13."
+        },
+        {
+          "id": "bfs",
+          "label": "Day on which backfilling starts (at the beginning of that day)",
+          "numeric": true,
+          "expect": 10,
+          "tol": 0,
+          "unit": "day",
+          "rationale": "Finish-to-finish plus 2 means backfilling finishes two days after pipe laying, at the end of day 15. Counting back six days of work gives a start at the beginning of day 10."
+        },
+        {
+          "id": "saved",
+          "label": "Working days saved compared with running all three activities finish-to-start",
+          "numeric": true,
+          "expect": 13,
+          "tol": 0,
+          "unit": "days",
+          "rationale": "In strict sequence the work takes 12 + 10 + 6 = 28 days. Overlapped, the last activity finishes at the end of day 15, so the relationships save 28 − 15 = 13 days."
+        }
+      ],
+      "explanation": "Start-to-start and finish-to-finish relationships with lags model work that can overlap while keeping a physical spacing between crews. The lag on a start-to-start link counts from the predecessor's start, and on a finish-to-finish link from its finish, so the successor's other date is found by its own duration. The overlap is only as real as the spacing the lag represents; a lag chosen to make the dates fit, rather than to reflect how far ahead one crew must stay, makes the saving fictional.",
+      "mindset": "Overlap work only as far as the physical spacing between crews really allows."
+    },
+    {
+      "id": "pmp-pr8-140",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-8",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "cumulative-flow-diagram",
+        "bottleneck",
+        "flow-metrics",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A publisher's digital team works in Kanban, and its delivery forecasts have slipped for six weeks. Each band of the cumulative flow diagram is labelled with how it has behaved since week 6. Select the stage whose capacity is limiting how fast work reaches Done.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Cumulative flow diagram with five stacked workflow bands over twelve weeks",
+        "caption": "Select a band. Use Tab or the arrow keys to move between bands, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "backlog",
+          "n": 1,
+          "label": "Backlog: new items arriving steadily at about 8 a week throughout",
+          "x": 60,
+          "y": 20,
+          "w": 560,
+          "h": 50,
+          "correct": false,
+          "rationale": "Arrivals have not changed, so demand is not what altered in week 6. The backlog explains how much work is waiting to start, not why finished work has slowed."
+        },
+        {
+          "id": "dev",
+          "n": 2,
+          "label": "In development: band steady at about 6 items, passing on about 8 a week",
+          "x": 60,
+          "y": 80,
+          "w": 560,
+          "h": 50,
+          "correct": false,
+          "rationale": "Development is still handing on about eight items a week, matching arrivals. It is keeping pace; if anything it is feeding the queue faster than the next stage can take work from it."
+        },
+        {
+          "id": "queue",
+          "n": 3,
+          "label": "Ready for test: band widened from 2 to 18 items since week 6",
+          "x": 60,
+          "y": 140,
+          "w": 560,
+          "h": 70,
+          "correct": false,
+          "rationale": "This is where the problem is easiest to see, but a queue is the symptom of a constraint downstream, not the constraint itself. Items wait here because the next stage cannot take them."
+        },
+        {
+          "id": "test",
+          "n": 4,
+          "label": "In test: band steady at 3 items, finishing about 4 a week since week 6",
+          "x": 60,
+          "y": 220,
+          "w": 560,
+          "h": 50,
+          "correct": true,
+          "rationale": "Test is taking in work at the same width but finishing only four a week against eight arriving. That stage's capacity has fallen, which is why the queue in front of it grows and Done has slowed."
+        },
+        {
+          "id": "done",
+          "n": 5,
+          "label": "Done: slope fell from about 8 to 4 items a week since week 6",
+          "x": 60,
+          "y": 280,
+          "w": 560,
+          "h": 60,
+          "correct": false,
+          "rationale": "The flattening Done line is the outcome being explained. It shows that delivery has halved, but not which stage caused it."
+        }
+      ],
+      "explanation": "On a cumulative flow diagram, a band that widens is a queue growing because the stage after it is draining more slowly than work arrives. The constraint is the stage whose exit rate has fallen below the arrival rate, which usually sits immediately downstream of the widening band. Forecasts recover only when that stage's capacity is addressed; starting more work upstream just makes the queue wider.",
+      "mindset": "Look past where work is piling up to the stage that is not letting it through."
+    }
+  ]
+}

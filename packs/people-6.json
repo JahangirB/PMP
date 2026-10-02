@@ -1,0 +1,1921 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "People 6 — Customer expectations",
+  "questions": [
+    {
+      "id": "pmp-p6-101",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "customer-expectations",
+        "scope-baseline",
+        "hospitality"
+      ],
+      "stem": "You are managing the refurbishment of a 120-room hotel under a fixed-price contract with an agreed specification. During a site walk, the hotel's general manager asks whether the new corridor lighting will be dimmable at night, and says she has assumed it would be. You do not remember whether dimming is in the specification, and the electrical first fix starts next week. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tell her that dimmable lighting is normal for hotel corridors and will almost certainly be included, so that she is not left worrying before the first fix.",
+          "correct": false,
+          "rationale": "The candidate answers from industry custom to reassure the customer. If dimming is not specified, a casual yes has now created an expectation that someone must either fund on a fixed-price contract or retract later."
+        },
+        {
+          "id": "b",
+          "text": "Tell her you will check the agreed specification today and come back to her with a confirmed answer before the first fix starts.",
+          "correct": true,
+          "rationale": "The specification is what the customer bought, so it is the only sound source for the answer. Checking it and replying with a date keeps her expectation tied to the agreement and leaves time to act either way before the first fix."
+        },
+        {
+          "id": "c",
+          "text": "Explain that anything she has not seen written into the contract is outside the scope, and that she should raise a change request if she wants it.",
+          "correct": false,
+          "rationale": "The candidate reaches for change control before establishing the facts. Dimming may well be specified, in which case this answer is wrong as well as defensive, and it teaches the customer that questions are met with procedure."
+        },
+        {
+          "id": "d",
+          "text": "Ask the electrical subcontractor what their quotation allowed for, and pass on to her whatever they say once they have looked through their pricing.",
+          "correct": false,
+          "rationale": "The candidate treats the subcontractor's pricing as the definition of scope. What the customer is owed is set by the agreed specification, and the subcontractor's reading of their own quote may not match it."
+        }
+      ],
+      "explanation": "When a customer asks whether something is included, the answer comes from the agreed baseline, not from memory, industry custom or a third party's reading of it. A confident guess in either direction creates an expectation that someone later has to honour or retract, and on a fixed-price contract both are costly. Checking first and replying with a date keeps the customer's expectation anchored to what was actually agreed.",
+      "mindset": "Answer a customer's scope question from the agreed documents, not from what seems likely."
+    },
+    {
+      "id": "pmp-p6-102",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "customer-expectations",
+        "sprint-review",
+        "proxy-customer",
+        "healthcare"
+      ],
+      "stem": "Your team is building a stock-management app for a hospital pharmacy. The product owner comes from the hospital's IT department, attends every sprint review and accepts each increment. No pharmacist or pharmacy technician has seen the product in eight sprints. The first release to the pharmacy is planned three sprints from now, and the product owner says he already knows what they need. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the product owner to gather written comments from the pharmacy team on the release notes from the last eight sprints before the next review.",
+          "correct": false,
+          "rationale": "The candidate collects feedback on documents rather than on the product. Release notes describe what was built; they do not show pharmacy staff how it behaves in their hands, which is where the gaps in expectation will appear."
+        },
+        {
+          "id": "b",
+          "text": "Work with the product owner to bring pharmacy staff into the next sprint reviews so that they can react to the working product before release.",
+          "correct": true,
+          "rationale": "Putting the working increment in front of the people who will use it is the only way to see whether their expectations match it, and three sprints still leave room to act on what they say."
+        },
+        {
+          "id": "c",
+          "text": "Plan a full user-acceptance test with pharmacy staff in the release sprint, so that their feedback is collected once the product is complete and stable.",
+          "correct": false,
+          "rationale": "The candidate treats customer reaction as an end-of-project event. Feedback gathered in the release sprint arrives when the cost of acting on it is at its highest and the time to do so is at its lowest."
+        },
+        {
+          "id": "d",
+          "text": "Accept the product owner's judgement, since in an agile team he is accountable for representing the customer's needs and maximising the value delivered.",
+          "correct": false,
+          "rationale": "The candidate confuses accountability for prioritisation with knowledge of the users' experience. The product owner may be right, but nothing has tested that, and the team is the one placed to make the gap visible."
+        }
+      ],
+      "explanation": "A proxy can prioritise on the customer's behalf but cannot experience the product on their behalf. The longer the people who will use a product go without seeing it, the further their expectations and the product can drift apart unobserved, and the release becomes the first time the gap is measured. Direct exposure to working increments is how expectations get tested while they are still cheap to correct.",
+      "mindset": "A customer's expectations are known once the customer has seen the product, not once someone has spoken for them."
+    },
+    {
+      "id": "pmp-p6-103",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "customer-satisfaction",
+        "communications-plan",
+        "infrastructure"
+      ],
+      "stem": "You are managing a three-year bridge strengthening programme for a county council. At the annual review every milestone is on schedule and the cost forecast is within 2%. The council's satisfaction return, however, scores your team 2 out of 5 for communication, down from 4 last year. You still issue the same monthly report, and since the spring the council has been publishing weekly traffic notices to residents. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Meet the council's sponsor to find out what they now need from project communication that the monthly report is not giving them.",
+          "correct": true,
+          "rationale": "The score has moved while the output has not, so something about the council's needs has changed. Asking what is missing before changing anything is the only way to fix the right thing."
+        },
+        {
+          "id": "b",
+          "text": "Add more detail to the monthly report, including the full risk register and earned value figures, so that the council has everything available to it.",
+          "correct": false,
+          "rationale": "The candidate assumes the problem is volume. The weekly resident notices hint that timing may be the issue, and a longer monthly report answers a question nobody has asked."
+        },
+        {
+          "id": "c",
+          "text": "Point out to the council that every milestone and cost target has been met, so the low score does not reflect the programme's real performance.",
+          "correct": false,
+          "rationale": "The candidate treats satisfaction as a misreading of performance. The customer's view of communication is the measure here, and defending the plan's numbers does nothing to change it."
+        },
+        {
+          "id": "d",
+          "text": "Update the communications management plan to the content, format and frequency agreed with the council, and review it again next quarter.",
+          "correct": true,
+          "rationale": "Once the new need is understood, the plan has to change to match it and be checked again, otherwise the team will drift back to the old report out of habit."
+        },
+        {
+          "id": "e",
+          "text": "Record the score in the lessons learned register so that the next programme can plan its communication differently from the very start.",
+          "correct": false,
+          "rationale": "The candidate defers the learning to a future project. This programme has two years left to run, and the council's dissatisfaction will compound over that time if nothing changes now."
+        }
+      ],
+      "explanation": "Customer satisfaction measures performance against what the customer expects, and it can fall while every plan metric is green when the expectation has moved and the plan has not. The response is to find out what changed before touching the output, then rebuild the plan around the new expectation. Producing more of the old thing, or defending it with good numbers, answers a question the customer did not ask.",
+      "mindset": "When satisfaction falls while delivery holds steady, look for an expectation that has moved."
+    },
+    {
+      "id": "pmp-p6-104",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "acceptance-criteria",
+        "accessibility",
+        "public-sector"
+      ],
+      "stem": "Your agency is building a public information website for a government department under a contract requiring conformance with WCAG 2.1 level AA. During user acceptance testing, the department's digital lead rejects four pages because they fail criteria added in WCAG 2.2. She says the department expects its sites to meet current standards. The project holds six weeks of schedule contingency. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Fix the four pages to meet WCAG 2.2 using the contingency, since meeting current accessibility standards is in everyone's interest and the effort is small.",
+          "correct": false,
+          "rationale": "The candidate spends contingency on a new requirement. Contingency covers risks within the agreed scope, and quietly absorbing a higher standard moves the acceptance basis without anyone deciding to."
+        },
+        {
+          "id": "b",
+          "text": "Escalate the rejection to your own sponsor as a contract dispute, and ask for a ruling on which standard applies before any further testing continues.",
+          "correct": false,
+          "rationale": "The candidate escalates something the contract already answers. Turning a clarification into a dispute damages the relationship and stalls testing for no gain in certainty."
+        },
+        {
+          "id": "c",
+          "text": "Confirm with her that the contract specifies 2.1, then offer to assess the 2.2 gaps so the department can decide whether to request a change.",
+          "correct": true,
+          "rationale": "This holds acceptance to what was agreed while taking the new expectation seriously. The department gets the information it needs to decide whether to buy the higher standard."
+        },
+        {
+          "id": "d",
+          "text": "Record the four pages as passed against the contracted standard and close user acceptance testing, leaving any later upgrade to the department itself.",
+          "correct": false,
+          "rationale": "The candidate is right on the contract but closes the conversation. The department has a real expectation, and walking away from it wins the argument while leaving the customer unsatisfied."
+        }
+      ],
+      "explanation": "Acceptance is judged against the criteria that were agreed, and a customer expectation that has moved beyond them is a new requirement rather than a defect. The response separates the two: hold acceptance to the agreed basis, and give the customer what they need to decide whether to buy the new expectation. Absorbing it silently changes the baseline without a decision, while refusing to discuss it protects the contract and loses the customer.",
+      "mindset": "Judge acceptance against what was agreed, and treat a moved expectation as a decision for the customer."
+    },
+    {
+      "id": "pmp-p6-105",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "sprint-review",
+        "senior-stakeholders",
+        "insurance"
+      ],
+      "stem": "You lead an agile team building a claims app for an insurance broker. The broker's operations manager, who acts as product owner, asks you to stop showing unfinished features at sprint reviews. Two directors have started attending, and after seeing a half-styled screen last week one of them asked her whether the project was in trouble. She still wants the team's feedback loop, but not more worried directors. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep showing every increment to all attendees, and explain to the directors at the start of each review that unfinished work is normal in agile delivery.",
+          "correct": false,
+          "rationale": "The candidate defends the ceremony instead of meeting the customer's concern. The directors' need for confidence is a real expectation, and a short lecture each fortnight will not satisfy it."
+        },
+        {
+          "id": "b",
+          "text": "Show only fully finished and styled features at each review from now on, holding back any work that might give the directors the wrong impression.",
+          "correct": false,
+          "rationale": "The candidate protects appearances at the cost of the feedback loop the product owner said she still wants. Reaction to work in progress is the point of a review, and polishing first delays it."
+        },
+        {
+          "id": "c",
+          "text": "Keep the working review with her and the users, and agree a separate showcase every few sprints that presents completed features to the directors.",
+          "correct": true,
+          "rationale": "Each audience gets the event that serves it: users and the product owner keep reacting to work in progress, and the directors see a coherent picture of finished value at a pace that suits them."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to stop inviting the directors to sprint reviews and send them a short written status summary after each sprint instead.",
+          "correct": false,
+          "rationale": "The candidate removes the directors from the product just as they have become interested in it. A written summary gives them less to be confident in, and can reinforce the worry it was meant to calm."
+        }
+      ],
+      "explanation": "Different customer audiences expect different things from the same event: users need to react to work in progress, while senior stakeholders need confidence that the whole is on course. When one format starts serving both badly, change the format rather than give up either purpose. Defending the ceremony as it stands, or sanitising it, each meets one expectation by abandoning the other.",
+      "mindset": "Shape how work is shown to what each audience needs from seeing it."
+    },
+    {
+      "id": "pmp-p6-106",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "customer-expectations",
+        "fixed-price",
+        "commissioning"
+      ],
+      "stem": "On a fixed-price contract to supply and install a laboratory's ventilation system, the client raises three expectations shortly before commissioning. Match each to the response it calls for. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The extract rate measured at two fume cupboards is below the figure written into the signed performance specification."
+        },
+        {
+          "id": "s2",
+          "text": "The lab manager says she expected the system to be quieter, but noise levels were never specified or discussed."
+        },
+        {
+          "id": "s3",
+          "text": "The client asks for a third fume cupboard to be connected, which the specification lists as a future option to be priced separately."
+        }
+      ],
+      "options": [
+        {
+          "id": "fix",
+          "text": "Correct it as non-conforming work, at the supplier's cost and within the contract",
+          "correct": true,
+          "match": "s1",
+          "rationale": "The performance figure was promised in the signed specification, so falling short of it is a defect. Putting it right is completing the agreed scope, not a change, and the customer pays nothing extra."
+        },
+        {
+          "id": "explore",
+          "text": "Find out what level she needs and why, then decide with her whether to price an improvement",
+          "correct": true,
+          "match": "s2",
+          "rationale": "An expectation that was never discussed is neither owed nor out of the question. Understanding the need first shows whether it is a real operating problem worth buying a fix for, or a preference to be noted."
+        },
+        {
+          "id": "quote",
+          "text": "Price the option on the terms the contract already sets out and give the client a quotation",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The contract anticipated this request and said how it would be handled. Following that mechanism meets the client's expectation exactly as both parties agreed it would be met."
+        },
+        {
+          "id": "goodwill",
+          "text": "Provide it at no charge as a goodwill gesture to protect the relationship before handover",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The first item is already owed, so calling it goodwill misdescribes it; the second is not yet understood; and the third has a price both sides agreed. None calls for a free concession."
+        }
+      ],
+      "explanation": "A customer expectation near acceptance usually comes from one of three places: it was promised, it was never discussed, or it was anticipated and priced. What was promised is owed and is fixed without argument; what was never discussed needs understanding before it is bought or declined; what was anticipated follows the mechanism agreed for it. Treating all three alike, by conceding everything or refusing everything outside the specification, mistakes the source of an expectation for its size.",
+      "mindset": "Find where an expectation came from before deciding who pays to meet it."
+    },
+    {
+      "id": "pmp-p6-107",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "transparency",
+        "supplier-substitution",
+        "manufacturing"
+      ],
+      "stem": "You are delivering a bespoke packaging line to a food manufacturer for €2.4 million. Acceptance tests passed last month and the client is delighted. Your engineering lead now tells you a bearing supplier substituted a component during the build; it meets the specification, but its expected life is about three years rather than the seven the client was told during the sales process. Handover is in two weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Complete the handover as planned, since the component meets the agreed specification, and add an earlier bearing replacement to the maintenance schedule you hand over.",
+          "correct": false,
+          "rationale": "The candidate relies on the contract and treats the gap as a maintenance detail. The seven-year figure came from your side, and the client will discover the difference in three years at their own cost."
+        },
+        {
+          "id": "b",
+          "text": "Ask procurement to source the original bearing and refit the line before handover without involving the client, so that it matches what was promised.",
+          "correct": false,
+          "rationale": "The instinct to make good is right, but the candidate decides alone about the client's line and handover date. The client may prefer another remedy, and a quiet refit leaves them unaware of a real risk to their schedule."
+        },
+        {
+          "id": "c",
+          "text": "Raise it with your own sponsor and the supplier first, and agree a commercial position before deciding whether the client needs to be informed at all.",
+          "correct": false,
+          "rationale": "The candidate makes disclosure conditional on the commercial outcome. Internal alignment is sensible, but whether the client hears about a gap in what they were told is not a negotiable point."
+        },
+        {
+          "id": "d",
+          "text": "Tell the client now what was substituted and what it means for service life, and set out the options for addressing it before handover.",
+          "correct": true,
+          "rationale": "Disclosing while the client can still choose turns a hidden shortfall into a decision they control, and arriving with options keeps the conversation about remedies rather than blame."
+        }
+      ],
+      "explanation": "An expectation the customer holds because your side set it is yours to manage, even where the contract is silent. A known gap between what the customer believes and what they will get grows in cost the longer it is held back, and disclosure is strongest when it arrives with options and before the customer has lost the ability to choose. Fixing it quietly, or settling the commercial position first, both take the customer's decision away from them.",
+      "mindset": "Tell the customer about a gap you know of while they can still choose what to do about it."
+    },
+    {
+      "id": "pmp-p6-108",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "product-owner",
+        "approval-delays",
+        "financial-services"
+      ],
+      "stem": "Your team is building an online banking feature for a building society. Its product owner has started insisting on approving a pixel-perfect mock-up of every story before development begins, and stories now wait an average of six days for sign-off. Velocity has halved. Until this sprint she approved stories from rough sketches and gave her feedback on the working increment. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask her what has changed, and what she is worried will happen if the team goes back to building from sketches as it did before.",
+          "correct": true,
+          "rationale": "An abrupt change in how a customer checks work usually signals a new concern. Finding out what it is makes it possible to address the concern directly, which may need a much lighter control than a mock-up of every story."
+        },
+        {
+          "id": "b",
+          "text": "Explain to her how the approval step is reducing velocity, and propose returning to sketch-level sign-off with feedback given at the sprint review.",
+          "correct": false,
+          "rationale": "The data is useful, but the candidate offers a solution before understanding the cause. If something has shaken her confidence, a proposal to go back to the old way will simply be refused."
+        },
+        {
+          "id": "c",
+          "text": "Agree to the mock-ups, but bring in a designer to produce them faster so that the average wait for her approval drops below two days.",
+          "correct": false,
+          "rationale": "The candidate accepts the new expectation at face value and spends money treating the symptom. The extra step may not be needed at all once the underlying concern is known."
+        },
+        {
+          "id": "d",
+          "text": "Raise the delay at the next retrospective so that the team can agree its own way of working around the approval step in future sprints.",
+          "correct": false,
+          "rationale": "The candidate treats a change in the customer's expectations as an internal process problem. Working around her approval avoids the conversation that would explain why she wants it."
+        }
+      ],
+      "explanation": "A sudden change in how a customer wants to review work usually signals a new concern rather than a new preference: an incident, criticism from above, a loss of confidence. Responding to the behaviour by arguing it down, accommodating it or working around it leaves the concern in place to resurface elsewhere. Find the cause first, because the right control is the one that addresses what the customer is now worried about.",
+      "mindset": "Treat a change in how a customer checks your work as a cue to ask what worried them."
+    },
+    {
+      "id": "pmp-p6-109",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "delegated-authority",
+        "change-control",
+        "fit-out"
+      ],
+      "stem": "You are managing the fit-out of three office floors for a law firm. The contract delegates to you authority to agree variations up to £5,000 each, reported monthly to the client's change board. The firm's office manager asks for two floor sockets to be moved 1.5 metres to suit a revised desk layout, priced by your electrician at £800. Screeding starts on Monday; the change board next meets in three weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a change request for the board's next meeting, and ask the office manager whether screeding on that floor can wait until the board has decided.",
+          "correct": false,
+          "rationale": "The candidate treats every change as needing the board. Holding the screed for three weeks costs far more than the change itself and ignores the authority delegated for exactly this kind of request."
+        },
+        {
+          "id": "b",
+          "text": "Ask the office manager to email the chair of the firm's change board for an urgent approval outside the meeting, so that the change is properly authorised.",
+          "correct": false,
+          "rationale": "The candidate does not recognise that authorisation already sits with them. Sending the customer to chase an approval they do not need makes a small request feel difficult."
+        },
+        {
+          "id": "c",
+          "text": "Tell the office manager the sockets can be moved after screeding by fitting surface trunking, and note the option in the change log for the board.",
+          "correct": false,
+          "rationale": "The candidate protects the plan at the expense of the customer's result. Surface trunking is an inferior outcome offered to avoid a cheap change that the project manager is already authorised to make."
+        },
+        {
+          "id": "d",
+          "text": "Approve the change under your delegated authority, record it in the change log, and include it in this month's report to the change board.",
+          "correct": true,
+          "rationale": "The change sits well inside the threshold and the timing matters. Approving it now meets the customer's need before screeding, and recording and reporting it keeps the board fully informed."
+        }
+      ],
+      "explanation": "Delegated change authority exists so that small changes can be made at the speed the work demands, with the governance body informed afterwards rather than consulted beforehand. Routing a change that sits inside your threshold upwards costs the customer time and teaches them that small requests are hard, while declining it to protect the plan protects the wrong thing. Use the authority you were given, and keep the record that makes using it accountable.",
+      "mindset": "Use delegated authority at the speed it was designed for, and record that you did."
+    },
+    {
+      "id": "pmp-p6-110",
+      "type": "fillblank",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "service-levels",
+        "hypercare",
+        "utilities"
+      ],
+      "stem": "After rolling out a new field-service system to a water utility, your team runs a six-week hypercare period. The utility expects 95% of priority tickets to be resolved within four hours. In week three, the team resolved 1,147 of 1,240 priority tickets within four hours. Work out the figures you will report to the utility.",
+      "blanks": [
+        {
+          "id": "rate",
+          "label": "Percentage of priority tickets resolved within four hours in week three, to one decimal place",
+          "numeric": true,
+          "expect": 92.5,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "1,147 ÷ 1,240 = 0.925, so 92.5% of priority tickets met the four-hour target, 2.5 points short of the 95% the utility expects."
+        },
+        {
+          "id": "gap",
+          "label": "Number of additional priority tickets that needed resolving within four hours to meet 95%",
+          "numeric": true,
+          "expect": 31,
+          "tol": 0,
+          "rationale": "95% of 1,240 is 1,178 tickets. 1,178 − 1,147 = 31 more tickets would have had to be resolved within four hours for the week to meet the expectation."
+        }
+      ],
+      "explanation": "A customer expectation stated as a service level can be measured exactly, and reporting both the rate and the gap in absolute terms tells the customer how far off the target the service is in a form they can act on. A percentage alone hides scale: 2.5 points sounds small, while 31 late priority tickets in a week is what the customer's field crews actually experienced. Reporting the shortfall plainly, rather than a trend or an average across weeks, keeps the measure honest about the expectation it tracks.",
+      "mindset": "Report performance against a customer's expectation in the units they experience it in."
+    },
+    {
+      "id": "pmp-p6-111",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "launch-date",
+        "load-testing",
+        "retail"
+      ],
+      "stem": "Your hybrid team is delivering a loyalty app for a fashion retailer. The retailer's marketing lead has a national campaign launching on 1 November that tells 400,000 members to download the app that day. Development will finish on time, but the planned two-week load test cannot complete before launch. Without it, the team's own estimate is a one-in-four chance of the app failing under peak demand. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Set out the risk of launching untested for the marketing lead and ask her to choose between keeping the 1 November date and completing the full load test.",
+          "correct": false,
+          "rationale": "Making the risk visible is right, but the candidate frames a binary choice when a third option exists. The customer is asked to give up either the campaign or the reliability, when she could keep most of both."
+        },
+        {
+          "id": "b",
+          "text": "Bring in additional performance engineers from another programme so that the load test can be compressed and completed in full before the campaign date.",
+          "correct": false,
+          "rationale": "The candidate assumes test duration scales with people. Load testing is bounded by environment set-up, runs and fixes between runs, and new engineers would spend the first week learning the system."
+        },
+        {
+          "id": "c",
+          "text": "Recommend moving the campaign back by two weeks so the app launches fully tested, since a public failure would damage the brand more than a short delay.",
+          "correct": false,
+          "rationale": "The candidate protects reliability by spending the customer's campaign, which is booked media with a date the customer cares about most. It treats the date as negotiable before looking for a way to keep it."
+        },
+        {
+          "id": "d",
+          "text": "Propose to the marketing lead a 1 November launch to an invited cohort of members, opening it to everyone once the load test has completed.",
+          "correct": true,
+          "rationale": "The campaign keeps its date and its story, while exposure to an untested system is capped at a level it can handle. The cost is reach in the first fortnight, which is the cheapest thing to give up."
+        }
+      ],
+      "explanation": "When a customer's two expectations collide, the strongest response usually gives up the dimension that matters least to them rather than the one that matters most, and that often means reducing scope or reach instead of moving a date or accepting a risk. Offering the customer a straight choice between date and quality is honest but incomplete if a structured option keeps most of both. The project manager's job is to find the trade that costs the customer least, then put it to them.",
+      "mindset": "When two customer expectations collide, look for the trade that costs them least before offering a straight choice."
+    },
+    {
+      "id": "pmp-p6-112",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "forecasting",
+        "commitment",
+        "logistics"
+      ],
+      "stem": "You lead an agile team building a route-planning platform for a logistics firm. Its chief operating officer tells you she has promised her board that all 46 remaining backlog items will be live by the industry trade show in six sprints. The team's last eight sprints forecast 30 to 38 items in that time. The product owner says every item matters. The COO asks for your commitment so that she can reassure the board. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Commit to the low end of the forecast, 30 items in the product owner's priority order, and present the remaining 16 as stretch goals for the board.",
+          "correct": false,
+          "rationale": "The candidate gives an honest number but assumes the board's need is a count. Thirty items chosen by backlog order may still miss what the trade show requires, so the board ends up reassured about the wrong thing."
+        },
+        {
+          "id": "b",
+          "text": "Share the forecast range with her, and ask what the board needs to see working at the trade show so that the team can commit firmly to that part.",
+          "correct": true,
+          "rationale": "The promise of 46 items is a proxy for something the board actually cares about. Finding that out turns an impossible commitment into a firm one on what matters, backed by the team's own data."
+        },
+        {
+          "id": "c",
+          "text": "Explain that agile teams forecast rather than commit to fixed scope, and offer her the burnup chart with its forecast range to share with the board.",
+          "correct": false,
+          "rationale": "The candidate is correct about forecasting but leaves the COO alone with a board expecting 46 items. Handing over a chart without engaging with what she promised does not help her manage the expectation she has created."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to work with the COO on which 16 items could be cut, so that the remaining scope fits what the team has shown it can deliver.",
+          "correct": false,
+          "rationale": "The candidate trims scope to fit capacity without asking what the target was for. Cutting 16 items is a sensible tool, but deciding which ones depends on a purpose nobody has yet stated."
+        }
+      ],
+      "explanation": "A customer's demand for a fixed amount of scope by a date is often a proxy for an outcome they have not named, such as something that must be demonstrable at an event. When the demanded scope exceeds what evidence supports, the first move is to recover the outcome behind it, because a commitment to the outcome may be achievable where a commitment to the number is not. Forecasting honestly, cutting scope and offering ranges are all useful, but each works best once the real target is known.",
+      "mindset": "Before negotiating the size of a customer's commitment, ask what it is meant to achieve."
+    },
+    {
+      "id": "pmp-p6-113",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "product-owner",
+        "informal-requests",
+        "contact-centre"
+      ],
+      "stem": "Your team is building a case-management tool for a utility's contact centre. Agents in the pilot group have started messaging developers directly with requests, and developers have told several agents that their changes will be in 'the next release'. The product owner, the contact centre's operations manager, has not seen most of these requests. Agents are now asking why the promised changes are missing. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with the developers that new requests from agents go to the product owner, and that they will not make delivery promises to agents themselves.",
+          "correct": true,
+          "rationale": "Priorities belong to the product owner, and promises made outside the backlog create expectations nobody has agreed to meet. Redirecting the channel stops new ones without cutting off contact with agents."
+        },
+        {
+          "id": "b",
+          "text": "Give the product owner a list of the promises already made so that she can decide which to schedule and tell the agents what to expect.",
+          "correct": true,
+          "rationale": "The existing promises are live expectations that need a decision from the person who owns priorities. She is also the right person to reset them with her own staff."
+        },
+        {
+          "id": "c",
+          "text": "Pull the promised changes into the next sprint so that the team keeps its word to the agents, then tighten the request process from that point on.",
+          "correct": false,
+          "rationale": "The candidate honours commitments the team had no authority to make, which displaces the product owner's priorities and confirms to agents that going round her works."
+        },
+        {
+          "id": "d",
+          "text": "Ask the contact centre's senior manager to instruct agents to stop messaging developers, and send all feedback through a formal request form.",
+          "correct": false,
+          "rationale": "The candidate escalates past the product owner and shuts down a useful source of user insight. The problem is where requests end up, not that agents are talking to the team."
+        },
+        {
+          "id": "e",
+          "text": "Have the team lead keep a separate log of agent requests, triage them each week, and pass the most important ones to the product owner.",
+          "correct": false,
+          "rationale": "The candidate creates a second backlog with a second prioritiser. Expectations would still be set by someone other than the product owner, only more tidily."
+        }
+      ],
+      "explanation": "In agile delivery, customer expectations about what will be built and when are set through the product owner and the backlog. Promises made outside that channel are expectations nobody with authority has agreed to, and they surface later as broken commitments. The fix is to send both the new requests and the existing promises to the person who owns priorities, without closing the direct contact that gives the team insight into its users.",
+      "mindset": "Route customer requests to the person who owns priorities, and let them set the expectation."
+    },
+    {
+      "id": "pmp-p6-114",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 1,
+      "tags": [
+        "archetype-act-now",
+        "rollback",
+        "live-service",
+        "healthcare"
+      ],
+      "stem": "Yesterday your team released an update to the online booking service of a chain of physiotherapy clinics. This morning the clinics' operations manager calls: since the release, the booking page has been showing slots that are already taken, and three clinics have double-booked patients. The release plan agreed with her pre-authorises your team to roll back within 48 hours of a release. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Roll back to the previous version under the agreed plan, tell her when it is done, and then investigate the cause of the fault before re-releasing.",
+          "correct": true,
+          "rationale": "The customer's service is harming patients now and the authority to stop it already exists. Restoring the known-good version first, then investigating, is the order the release plan was written for."
+        },
+        {
+          "id": "b",
+          "text": "Collect full logs and booking records so that the team can find the root cause of the fault before making any further changes to the live service.",
+          "correct": false,
+          "rationale": "The candidate puts diagnosis before containment. Every hour spent investigating on the live system creates more double-bookings for real patients, when a pre-agreed way to stop the harm is available."
+        },
+        {
+          "id": "c",
+          "text": "Ask her to have the clinics take bookings by phone for the moment while the team prepares and tests a fix for release later this week.",
+          "correct": false,
+          "rationale": "The candidate shifts the cost of the fault onto the customer's staff and patients for days, when the means to end it today has already been agreed."
+        },
+        {
+          "id": "d",
+          "text": "Raise an emergency change request with the clinics' change board for approval to roll back, then brief her once the decision is recorded.",
+          "correct": false,
+          "rationale": "The candidate seeks permission that has already been given. The release plan pre-authorised rollback precisely so that an incident like this does not wait for a board."
+        }
+      ],
+      "explanation": "When a delivered change is actively harming a customer's operation and a recovery path has been agreed in advance, the first move is to use it and contain the harm, then diagnose. Investigation, workarounds and fresh approvals all have their place, but each lets the damage continue while it happens. Pre-agreed authority exists so that speed and governance do not have to compete in the moment.",
+      "mindset": "When a customer is being harmed and the remedy is already authorised, contain first and diagnose after."
+    },
+    {
+      "id": "pmp-p6-115",
+      "type": "pulldown",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "information-radiators",
+        "acceptance-criteria",
+        "public-library"
+      ],
+      "stem": "A library service is the customer for an agile team building its new catalogue search. Complete each sentence with the response that best makes the customer's expectations visible and testable. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The head of libraries wants to know, sprint by sprint, whether her top-priority features will be ready for the March launch. The team should share"
+        },
+        {
+          "id": "c2",
+          "text": "Librarians say search must be 'fast', but each of them means something different by it when asked. The team should"
+        },
+        {
+          "id": "c3",
+          "text": "Branch staff keep asking about features the product owner has ranked low, and are surprised not to see them in each release. The team should"
+        }
+      ],
+      "options": [
+        {
+          "id": "burnup",
+          "text": "a release burnup showing completed work, the scope line and a forecast range to March",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A burnup shows progress and scope on one chart, so she can see both how fast work is getting done and whether the scope she expects is moving. The forecast range answers her question directly."
+        },
+        {
+          "id": "criterion",
+          "text": "agree a measurable acceptance criterion for search speed with the product owner and librarians",
+          "correct": true,
+          "match": "c2",
+          "rationale": "An expectation that means different things to different people cannot be met. Turning 'fast' into a measured threshold gives everyone the same target and a way to tell when it has been reached."
+        },
+        {
+          "id": "roadmap",
+          "text": "publish a product roadmap showing the order of upcoming features and review it with them",
+          "correct": true,
+          "match": "c3",
+          "rationale": "The surprise comes from staff not knowing the priority order. A visible roadmap, reviewed with them, sets their expectation before each release instead of after it."
+        },
+        {
+          "id": "spec",
+          "text": "ask the customer to sign off a detailed requirements specification for the whole catalogue",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Freezing all requirements up front works against the adaptive approach the library chose, and it would not answer any of the three questions about progress, meaning or priority."
+        }
+      ],
+      "explanation": "Customer expectations are easiest to manage when they are visible and testable: progress against scope on a chart, vague qualities turned into measurable criteria, and priorities shown before delivery rather than discovered after it. Each tool answers a different question, so the skill lies in matching the tool to the expectation that is unclear. A comprehensive specification seems to cover everything but leaves each of those questions unanswered.",
+      "mindset": "Make an expectation visible in the form that answers the question the customer is actually asking."
+    },
+    {
+      "id": "pmp-p6-116",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "contract-scope",
+        "training",
+        "public-sector"
+      ],
+      "stem": "Your company is implementing a records system for a regional health authority. The contract, managed by the authority's contracts officer, specifies train-the-trainer sessions for 20 nominated staff. Three weeks before go-live, ward managers tell you they expect your trainers to train all 300 of their staff on site, and say they were promised this. The contracts officer has not mentioned it. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the gap with the contracts officer, and ask her to resolve with the ward managers what was promised and what the authority wants to buy.",
+          "correct": true,
+          "rationale": "The expectation and the agreement both sit inside the customer's organisation, and the contracts officer owns the agreement. She can establish what was promised and decide whether to buy more."
+        },
+        {
+          "id": "b",
+          "text": "Explain to the ward managers that the contract covers 20 trainers only, and ask them to work with their nominated trainers to cascade the training to their staff.",
+          "correct": false,
+          "rationale": "The candidate is right about the contract but settles a dispute inside the customer's organisation with the people who have no authority over it. If someone at the authority did make a promise, the ward managers will feel brushed off by the supplier."
+        },
+        {
+          "id": "c",
+          "text": "Quote the ward managers directly for on-site training of all 300 staff, so that they have a price to take back to their own budget holders before go-live.",
+          "correct": false,
+          "rationale": "The candidate offers to sell to the users without going through the authority's contracts officer, who owns the agreement. It risks a side deal that the authority never sanctioned and cannot pay for."
+        },
+        {
+          "id": "d",
+          "text": "Run additional on-site sessions within your existing training budget for the wards with the most staff, to protect adoption and go-live without changing the contract.",
+          "correct": false,
+          "rationale": "The candidate absorbs an unagreed expectation to protect adoption. It sets a precedent that unofficial promises bind the supplier and leaves the authority's real need undecided."
+        }
+      ],
+      "explanation": "When different parts of a customer organisation hold different expectations, the conflict has to be resolved inside that organisation by whoever owns the agreement. A supplier who settles it directly with users, by refusing, conceding or selling, takes a decision that belongs to the customer and may contradict it. The supplier's role is to surface the gap promptly to the right owner, with enough time left for that person to act.",
+      "mindset": "When a customer's own people disagree about what was promised, take it to the person who owns the agreement."
+    },
+    {
+      "id": "pmp-p6-117",
+      "type": "hotspot",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "kano-model",
+        "customer-needs",
+        "public-library"
+      ],
+      "stem": "A council is piloting self-service kiosks in its libraries. In interviews, no user mentioned printed loan receipts. When receipts started printing faster, satisfaction did not change. On the day the receipt printers failed, complaints tripled. The diagram shows the four Kano categories. Select the category into which printed receipts fall.",
+      "graphic": {
+        "viewBox": "0 0 600 400",
+        "title": "Kano model showing four categories of customer expectation",
+        "caption": "Select a category. Use Tab or the arrow keys to move between categories, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "basic",
+          "n": 1,
+          "label": "Basic (must-be) expectation",
+          "x": 40,
+          "y": 220,
+          "w": 250,
+          "h": 140,
+          "correct": true,
+          "rationale": "Customers take a basic expectation for granted, so they neither mention it nor reward it when it improves, but its absence causes strong dissatisfaction. Receipts match all three signals."
+        },
+        {
+          "id": "perf",
+          "n": 2,
+          "label": "Performance (one-dimensional) expectation",
+          "x": 310,
+          "y": 220,
+          "w": 250,
+          "h": 140,
+          "correct": false,
+          "rationale": "A performance expectation raises satisfaction as it improves. The candidate notices that failure caused complaints, but misses that faster printing produced no gain at all."
+        },
+        {
+          "id": "delight",
+          "n": 3,
+          "label": "Attractive (delighter) expectation",
+          "x": 40,
+          "y": 40,
+          "w": 250,
+          "h": 140,
+          "correct": false,
+          "rationale": "A delighter is not expected, so its absence goes unnoticed. The candidate reads the silence in interviews as a lack of expectation, when tripled complaints show the opposite."
+        },
+        {
+          "id": "indiff",
+          "n": 4,
+          "label": "Indifferent attribute",
+          "x": 310,
+          "y": 40,
+          "w": 250,
+          "h": 140,
+          "correct": false,
+          "rationale": "An indifferent attribute changes satisfaction neither way. The candidate weighs the interviews and the faster printing but ignores the clear reaction on the day the printers failed."
+        }
+      ],
+      "explanation": "Customers do not voice the expectations they take for granted, so what they ask for in interviews is a poor guide to what will cause dissatisfaction if it fails. Reading an expectation correctly means looking at how satisfaction responds both when a feature improves and when it is missing. Basic expectations protect against complaints but earn no credit, which is why they are easy to underinvest in and costly to get wrong.",
+      "mindset": "Judge what a customer expects by how they react when it is missing, not by what they mention."
+    },
+    {
+      "id": "pmp-p6-118",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "release-cadence",
+        "change-fatigue",
+        "education"
+      ],
+      "stem": "Your team supports a university's student-records system and has moved from monthly to weekly releases, as the registry director had asked. Six weeks on, the director says faculty administrators are complaining that screens change every week, and that staff guides are always out of date. She still wants fixes to reach users quickly. The team's pipeline supports feature toggles. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Return to monthly releases for all changes, since the administrators' complaints show that the faster pace has outrun what the university can absorb.",
+          "correct": false,
+          "rationale": "The candidate gives up the speed the director still wants in order to stop the disruption. Monthly releases would delay fixes as well as visible changes, which is more than the complaint requires."
+        },
+        {
+          "id": "b",
+          "text": "Keep weekly releases, and provide administrators with short release notes and a video for each one so that the guides can be updated each week.",
+          "correct": false,
+          "rationale": "The candidate treats the problem as a communication gap. More material each week adds to the load the administrators are already complaining about, rather than reducing the change they must absorb."
+        },
+        {
+          "id": "c",
+          "text": "Keep releasing weekly behind toggles, and agree with the director a monthly date on which changes to what users see are switched on together.",
+          "correct": true,
+          "rationale": "Fixes keep flowing at the speed she wants, while visible change arrives at a pace the administrators can absorb. The team adapts how it releases to the customer's capacity rather than choosing one expectation over the other."
+        },
+        {
+          "id": "d",
+          "text": "Ask the director to nominate a group of administrators to trial each weekly release first, so that they can flag the most disruptive changes before release.",
+          "correct": false,
+          "rationale": "The candidate adds a review step that slows every release and asks busy staff to absorb change earlier and more often. It manages disruption one release at a time instead of changing the pattern."
+        }
+      ],
+      "explanation": "A customer can want speed of delivery and stability of experience at the same time, and the two are only in conflict if every change reaches users the moment it is deployed. Separating deployment from release lets a team meet both: work flows at its own pace, and what users see changes at the pace they can absorb. When a customer complains about a change they asked for, adapt how it is delivered before reversing it.",
+      "mindset": "Adapt how change reaches the customer before giving up the change they asked for."
+    },
+    {
+      "id": "pmp-p6-119",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "emerging-requirements",
+        "design-review",
+        "flood-defence"
+      ],
+      "stem": "Your consultancy is designing a flood defence wall for an environment agency under an agreed brief that covers capacity, durability and cost. Over the last three draft reviews, more and more of the agency's comments concern how the wall will look from the riverside path, which the brief does not mention. No one at the agency has raised appearance formally. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the agency's project lead whether appearance has become a requirement, and how it should be weighed against capacity, durability and cost.",
+          "correct": true,
+          "rationale": "The comments suggest an expectation is forming that the brief does not capture. Asking the owner of the brief turns a pattern in the comments into a decision about requirements."
+        },
+        {
+          "id": "b",
+          "text": "Record the emerging expectation in the requirements log and assess what treating appearance as a requirement would do to the design, cost and schedule.",
+          "correct": true,
+          "rationale": "Logging it keeps the expectation visible, and an impact assessment gives the agency what it needs to decide whether to add it to the brief and on what terms."
+        },
+        {
+          "id": "c",
+          "text": "Include a landscaped finish in the next draft so that the agency can see how the wall might look before anyone has to decide on a change.",
+          "correct": false,
+          "rationale": "The candidate designs for an unconfirmed requirement and spends fee on it. It also signals that appearance is included, which may create the very expectation the agency has not agreed to fund."
+        },
+        {
+          "id": "d",
+          "text": "Respond to each appearance comment by noting that it falls outside the agreed brief, so that the design stays aligned with what was commissioned.",
+          "correct": false,
+          "rationale": "The candidate defends the brief comment by comment and misses the pattern. The expectation will keep growing unaddressed and surface at final review as dissatisfaction."
+        },
+        {
+          "id": "e",
+          "text": "Wait for the agency to submit a formal change request, since a requirement that has not been raised formally is not yet part of the project scope.",
+          "correct": false,
+          "rationale": "The candidate is right that it is not yet in scope but leaves the customer to notice their own shifting expectation. The supplier is the one seeing the pattern and is best placed to raise it."
+        }
+      ],
+      "explanation": "Customer expectations often change gradually in what the customer comments on before they change in anything the customer asks for formally. Spotting that pattern and confirming it with the owner of the requirements, with the impact laid out, turns an informal drift into a decision. Building ahead of a decision and ruling comments out one at a time both leave the expectation unexamined while it grows.",
+      "mindset": "Watch what a customer keeps commenting on, because it shows where their expectations are moving."
+    },
+    {
+      "id": "pmp-p6-120",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "elicitation",
+        "customer-research",
+        "banking"
+      ],
+      "stem": "During a hybrid rollout of a new customer-relationship system for a bank, the project manager needs to understand what different internal customers expect. Match each situation to the technique best suited to it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Call-centre agents say the system 'feels slow', but none of them can say at which point in a call it happens."
+        },
+        {
+          "id": "s2",
+          "text": "Staff in 40 branches need to say which of 12 proposed features would help their work most before the next release is planned."
+        },
+        {
+          "id": "s3",
+          "text": "The sales director and the service director disagree about what the shared customer dashboard should show first."
+        }
+      ],
+      "options": [
+        {
+          "id": "observe",
+          "text": "Observe agents handling live calls and note where they wait",
+          "correct": true,
+          "match": "s1",
+          "rationale": "When users feel a problem but cannot describe it, watching the work shows what interviews cannot. The point in the call where agents wait becomes a concrete expectation the team can test against."
+        },
+        {
+          "id": "survey",
+          "text": "Run a short prioritisation survey across the branches",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A large, dispersed group answering a defined question about known options is what a survey suits. It reaches every branch quickly and gives a ranking the team can plan from."
+        },
+        {
+          "id": "workshop",
+          "text": "Facilitate a joint workshop with both directors",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Conflicting expectations between two customers have to be resolved together. A facilitated session lets them see each other's reasons and agree a priority, rather than having the team choose between them."
+        },
+        {
+          "id": "interview",
+          "text": "Hold one-to-one interviews with the project sponsor",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The sponsor's view matters, but none of the three situations turns on it: each needs input from the people who hold the expectation themselves."
+        }
+      ],
+      "explanation": "The right way to learn what a customer expects depends on the kind of uncertainty involved. Expectations people feel but cannot articulate are found by observing the work; expectations spread across a large group about known options are measured by survey; and expectations that conflict between customers are resolved by bringing them together. Using one technique for all three either misses the unspoken need, takes too long to reach everyone, or leaves the team to referee.",
+      "mindset": "Choose how to learn a customer's expectation by what makes it hard to know."
+    },
+    {
+      "id": "pmp-p6-121",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-route-to-owner",
+        "confidentiality",
+        "customer-trust",
+        "healthcare"
+      ],
+      "stem": "Your software company is three months into implementing a patient-administration system for a hospital trust under a fixed-scope contract. Your marketing director wants to publish a case study naming the trust and quoting its early results, and asks you to send her the project's performance figures this week. The contract says nothing about publicity. The trust's project sponsor has been pleased with progress so far. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Send the figures to your marketing director with the trust's name removed, so that the case study can go ahead without identifying the client at this early stage.",
+          "correct": false,
+          "rationale": "The candidate assumes anonymising settles it. Early results from a named type of system at a three-month-old project are easy to trace back, and the decision about the client's data still belongs to the client."
+        },
+        {
+          "id": "b",
+          "text": "Agree to provide the figures once the project has closed, so that the case study reflects final results and the trust has less reason to object to early numbers.",
+          "correct": false,
+          "rationale": "The candidate changes the timing and treats the issue as one of accuracy. Final results are still the trust's information, and delaying the request does not replace asking for its consent."
+        },
+        {
+          "id": "c",
+          "text": "Ask your company's legal team to confirm whether the contract's silence on publicity allows the company to publish, and proceed on the basis of their advice.",
+          "correct": false,
+          "rationale": "The candidate treats a customer expectation as a legal question. Even if publishing is permitted, a client who finds itself in a case study it was never asked about will feel its trust was used."
+        },
+        {
+          "id": "d",
+          "text": "Tell your marketing director that the trust has to agree first, and ask the trust's sponsor whether, and on what terms, it is willing to be named and quoted.",
+          "correct": true,
+          "rationale": "The project's results and the trust's name are the customer's to share. Asking the sponsor before anything leaves the project meets the expectation of discretion that a pleased client still holds, contract or not."
+        }
+      ],
+      "explanation": "Information about a customer's project, including its name, results and difficulties, is held in trust, and customers expect to control how it is used even where a contract is silent. Whether a client is willing to be publicised is the client's decision, so the request goes to the person who can give or withhold consent before anything is shared. Legal permission and anonymisation answer different questions from whether the customer would expect to be asked.",
+      "mindset": "Treat a customer's information as theirs to share, whatever the contract leaves unsaid."
+    },
+    {
+      "id": "pmp-p6-122",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "bad-news",
+        "spike",
+        "housing"
+      ],
+      "stem": "Your team is building a mobile inspection app for a housing association. At the last review the association's head of property was told offline working would arrive in two sprints, and she has briefed her surveyors. Today, mid-sprint, a spike shows that offline photo capture cannot work on the association's locked-down tablets, although offline forms can. The next sprint review is in nine days. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Finish the spike's write-up and present the findings and the alternatives at the next sprint review, where the head of property will see the full picture in context.",
+          "correct": false,
+          "rationale": "The candidate treats the review as the place where news must wait. Nine more days of surveyors preparing for offline photos is nine days of plans built on something the team already knows is untrue."
+        },
+        {
+          "id": "b",
+          "text": "Tell the product owner today and arrange to speak with the head of property this week about what offline working can now include and what options exist for photos.",
+          "correct": true,
+          "rationale": "The head of property is already planning her surveyors' work around a capability that has just changed. Telling her now, with what is still possible, lets her adjust those plans while it is cheap to do so."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to keep investigating workarounds for photo capture for the rest of the sprint, so that you can bring the customer a solution rather than only a problem.",
+          "correct": false,
+          "rationale": "The candidate wants to soften the message with a fix. A solution may never come, and the customer's expectation stays wrong for as long as the search goes on."
+        },
+        {
+          "id": "d",
+          "text": "Deliver offline forms on the promised date as planned, and add offline photo capture to the backlog as a separate item for the product owner to prioritise later.",
+          "correct": false,
+          "rationale": "The candidate quietly redefines what was promised. The customer discovers on delivery that half of what she briefed her surveyors on is missing, which damages trust more than the news itself."
+        }
+      ],
+      "explanation": "When something a customer has been told is no longer true, the cost of the outdated expectation grows every day it stays in place, because the customer keeps making plans on it. The regular review cycle is a minimum for sharing information, not a gate that news must wait for. Telling the customer early, together with what is still possible, keeps their decisions grounded and protects trust in what the team says next.",
+      "mindset": "Correct an expectation the moment you know it is wrong, not at the next scheduled meeting."
+    },
+    {
+      "id": "pmp-p6-123",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "prototyping",
+        "release-planning",
+        "museum"
+      ],
+      "stem": "Your hybrid team is replacing the online ticketing system for a science museum. To test the booking journey, the designer built a clickable prototype that looks exactly like the finished site. After seeing it, the museum's director tells her trustees the new system will launch next month. None of the payment, capacity or membership integrations behind the screens exists yet, and the release plan shows launch in five months. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Meet the director promptly, show her what the prototype does and does not do, and walk through the release plan so that she can correct the date with her trustees.",
+          "correct": true,
+          "rationale": "Her belief comes from what she saw, so it has to be corrected by showing her what lies behind it. Once she understands the gap she can give her trustees a date she can stand behind."
+        },
+        {
+          "id": "b",
+          "text": "Send the director the release plan with a covering note confirming the five-month launch date, so that her trustees' information can be updated from the official schedule.",
+          "correct": false,
+          "rationale": "The candidate relies on a document to undo an impression. She will see a date that contradicts what she watched working, and without understanding why she may assume the schedule is cautious."
+        },
+        {
+          "id": "c",
+          "text": "Ask the designer to label future prototypes clearly as mock-ups and to reduce their visual polish, so that customers do not mistake them for working software again.",
+          "correct": false,
+          "rationale": "The candidate fixes the cause for next time and leaves the present damage alone. The trustees still have the wrong date, and it is the director who will be embarrassed when it slips."
+        },
+        {
+          "id": "d",
+          "text": "Look at whether a cut-down version could launch next month using the existing payment system, so that the date the director has given her trustees can still be met.",
+          "correct": false,
+          "rationale": "The candidate reshapes delivery around a promise made on a misunderstanding. Once the director knows what launch next month would really involve, she may not want it at all."
+        }
+      ],
+      "explanation": "What a customer sees shapes their expectations more strongly than what they are told, so a polished prototype can create the belief that a product is nearly finished. When an expectation rests on a misunderstanding, the fix is to show the customer the gap between appearance and reality directly, in terms they can repeat to their own stakeholders. Adjusting the plan to fit the misunderstanding, or correcting it only on paper, leaves the cause in place.",
+      "mindset": "Make sure the customer understands what they have seen, not only what they have been told."
+    },
+    {
+      "id": "pmp-p6-124",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "supplier-transition",
+        "facilities-management",
+        "higher-education"
+      ],
+      "stem": "Your firm has taken over a university's building-maintenance contract from a long-standing incumbent. The new contract requires all work to be requested through a helpdesk and prioritised by severity. Within a month, the university's estates manager forwards complaints from academic departments that your engineers 'refuse to help' when stopped in corridors, something they say the previous engineers did routinely. Your contract performance figures are all green. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Brief the engineers to help with small requests when stopped, provided each one is logged on the helpdesk afterwards so that the contract records stay complete and accurate.",
+          "correct": false,
+          "rationale": "The candidate restores goodwill quickly but commits the firm to unpriced work of unknown volume. It also decides on the university's behalf what its departments should get."
+        },
+        {
+          "id": "b",
+          "text": "Write to the academic departments explaining the helpdesk process and the priority levels, with examples of how to request quick jobs correctly under the new contract.",
+          "correct": false,
+          "rationale": "The candidate assumes the problem is awareness of the process. Departments may have relied on services the new contract does not cover at all, and explaining the route will not supply them."
+        },
+        {
+          "id": "c",
+          "text": "Work with the estates manager to find out which informal services departments relied on before, and how often, so that you can decide together which to bring into the contract.",
+          "correct": true,
+          "rationale": "The complaints point to a baseline set by the previous supplier that nobody wrote down. Its size and content have to be known before anyone can sensibly decide whether to absorb, price or decline it."
+        },
+        {
+          "id": "d",
+          "text": "Share the green performance figures with the estates manager and agree with him that the complaints reflect a transition period that will settle as people adjust to the change.",
+          "correct": false,
+          "rationale": "The candidate reads green measures as proof of met expectations. The figures measure what the contract measures, and the expectations the incumbent created sit outside them."
+        }
+      ],
+      "explanation": "A customer's expectations are shaped by what they experienced before, including services a previous supplier gave informally and nobody recorded. When complaints arise despite good contract performance, the gap usually lies between the contract and that inherited baseline, and its size and content need to be understood before choosing to absorb, price or decline the work. Acting before that is known either gives away unmeasured scope or dismisses a real need.",
+      "mindset": "Find out what the customer was used to before judging whether their complaint is fair."
+    },
+    {
+      "id": "pmp-p6-125",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "warranty",
+        "disputed-cause",
+        "manufacturing"
+      ],
+      "stem": "Two months after handing over a warehouse management system to a furniture manufacturer, its interface to a carrier's booking service fails. The client logs it as a warranty defect and expects a fix within the five-day warranty response time. Your support lead suspects a firewall change the client's IT team made last week, which would fall outside warranty. Dispatch is being booked by hand, at a cost the client puts at €4,000 a day. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tell the client that the likely cause is their own firewall change, and offer to fix it as chargeable support work, with a quote they can approve before the end of today.",
+          "correct": false,
+          "rationale": "The candidate treats a suspicion as a finding. If the support lead is wrong, the firm has refused a warranty obligation and accused the client in the same message."
+        },
+        {
+          "id": "b",
+          "text": "Fix the interface immediately at your own cost without raising the firewall question, so that the client's dispatch problem ends quickly and the relationship is protected.",
+          "correct": false,
+          "rationale": "The candidate buys goodwill now and sets an expectation that client-caused failures are covered. If the firewall is the cause, it may also break the interface again."
+        },
+        {
+          "id": "c",
+          "text": "Start investigating under the warranty process now, inviting the client's IT team to examine the firewall change with you, and share the evidence before discussing who pays.",
+          "correct": true,
+          "rationale": "The client's expectation of a prompt response is met while the cause is still open, and a joint investigation turns a likely argument about blame into a shared reading of the evidence."
+        },
+        {
+          "id": "d",
+          "text": "Ask the client's IT team to reverse the firewall change first, and agree to open a warranty investigation only if the interface still fails once the change has been rolled back.",
+          "correct": false,
+          "rationale": "The candidate makes the client do the diagnosis and puts a condition on the warranty response. Every day of delay costs the client €4,000 while the supplier waits."
+        }
+      ],
+      "explanation": "When responsibility for a failure is disputed, the customer's expectation that the supplier will respond should be met while the question of cause is still open. Diagnosing jointly turns a disagreement about blame into a shared look at evidence, and the commercial conversation then rests on facts both sides have seen. Asserting the cause before it is shown, or absorbing the cost silently, each sets an expectation that is hard to undo later.",
+      "mindset": "Respond first and establish the cause with the customer, then settle who pays."
+    },
+    {
+      "id": "pmp-p6-126",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "definition-of-done",
+        "release-management",
+        "aviation"
+      ],
+      "stem": "Your team builds features for an airport operator's passenger app. Stories accepted at each sprint review go into a release that the operator's own operations team deploys quarterly. The operator's terminal managers, who attend the reviews, have started telling staff that new features are 'live' as soon as they are accepted, and staff are now directing passengers to features that have not yet been released. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the operator's operations team to release more often, so that the gap between acceptance at the review and availability to passengers becomes too short to matter.",
+          "correct": false,
+          "rationale": "The candidate tries to remove the gap instead of showing it. Release cadence is the operator's decision with its own constraints, and the misunderstanding continues until anything changes."
+        },
+        {
+          "id": "b",
+          "text": "Ask the product owner to remind the terminal managers at the end of each review that accepted stories are not available to passengers until the next quarterly release.",
+          "correct": false,
+          "rationale": "The candidate relies on a verbal caveat. Terminal managers still do not know when each feature will arrive, which is the information they need to brief staff correctly."
+        },
+        {
+          "id": "c",
+          "text": "Stop demonstrating features to the terminal managers until they have been deployed, and hold a separate release showcase each quarter that is aimed at operational staff.",
+          "correct": false,
+          "rationale": "The candidate removes the customer from the feedback loop to solve a communication problem. The team loses early reactions from the people who know how the app is used in the terminal."
+        },
+        {
+          "id": "d",
+          "text": "Show at each review where every accepted item sits on the path to release, with its planned release date, and agree with the terminal managers how 'done' and 'live' differ.",
+          "correct": true,
+          "rationale": "The terminal managers act on what they see at reviews, so that is where the gap between acceptance and availability has to appear, with the dates they need to brief their staff."
+        }
+      ],
+      "explanation": "Words such as 'done', 'accepted' and 'live' mean different things to a delivery team and to a customer's operational staff, and customers act on the meaning they assume. Where the team's completion and the customer's availability are separated by another step, the gap has to be shown routinely, with dates, at the point where the customer forms their view. Removing the customer from reviews or relying on reminders treats a visibility problem as a behaviour problem.",
+      "mindset": "Show customers where finished work actually is, because 'done' means different things on each side."
+    },
+    {
+      "id": "pmp-p6-127",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "product-owner",
+        "prioritisation",
+        "veterinary"
+      ],
+      "stem": "You are the project manager for an agile team building an appointment app for a chain of veterinary practices. The product owner, the chain's digital manager, has decided not to build text-message reminders this year. A group of practice managers asks you to overrule her, saying clients expect reminders and missed appointments cost each practice about £600 a month. They have not raised this with her. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add text-message reminders to the backlog as a high-priority item, since the practice managers' figures show a clear cost and they are closest to what clients expect.",
+          "correct": false,
+          "rationale": "The candidate is persuaded by the evidence and acts on it. Backlog priority is the product owner's call, and overriding her teaches customers to go around her next time."
+        },
+        {
+          "id": "b",
+          "text": "Explain to the practice managers that backlog priorities are the product owner's decision and that you cannot change them, so they should accept her decision for this year.",
+          "correct": false,
+          "rationale": "The candidate is right about authority but closes the door. New evidence goes unheard, and the practice managers leave with an expectation nobody has addressed."
+        },
+        {
+          "id": "c",
+          "text": "Raise the disagreement with the chain's operations director, who sponsors the project, so that a decision on reminders can be taken at a level above the product owner.",
+          "correct": false,
+          "rationale": "The candidate escalates before the decision owner has even seen the evidence. The sponsor would reasonably ask why the product owner was never asked."
+        },
+        {
+          "id": "d",
+          "text": "Arrange for the practice managers to put their evidence on missed appointments to the product owner, and support her in deciding whether it changes her priorities.",
+          "correct": true,
+          "rationale": "The practice managers hold evidence the product owner has not seen, and she holds the decision. Bringing the two together lets the decision be made, or confirmed, by the person who owns it."
+        }
+      ],
+      "explanation": "When customer groups disagree with a prioritisation decision, the project manager's role is to get their evidence in front of the person who owns the decision, rather than to make it or to defend it on that person's behalf. New information may change the decision; if it does not, the customer group at least hears the reasoning from its owner. Overruling, refusing and escalating early each take the decision away from where it belongs.",
+      "mindset": "Bring customer evidence to the decision owner instead of deciding for them or shielding them from it."
+    },
+    {
+      "id": "pmp-p6-128",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "goodwill",
+        "service-boundaries",
+        "ferry-operator"
+      ],
+      "stem": "Your team delivers quarterly releases of a booking system for a ferry operator. For the first two releases, as goodwill, your engineers supported the overnight weekend cutover at no charge. The operator's operations manager has now scheduled the next cutover for a Saturday night and assumes your team will be there. The contract covers weekday support only, and two engineers have said they cannot keep giving up their weekends. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support this cutover as the operator expects, then write to the operations manager to explain that from the following release weekend support will be charged at the agreed rates.",
+          "correct": false,
+          "rationale": "The candidate avoids a clash now, but a third free weekend strengthens the expectation it then tries to withdraw. It also ignores the two engineers who have already reached their limit."
+        },
+        {
+          "id": "b",
+          "text": "Explain to the operations manager that the weekend cover was goodwill, and agree with him before this release how future cutovers will be supported, whether paid or on weekdays.",
+          "correct": true,
+          "rationale": "The expectation was created by the team's own generosity, so the team has to name it. Doing so before this release leaves time for the operator to choose between paying for cover and moving the window."
+        },
+        {
+          "id": "c",
+          "text": "Ask for volunteers from the wider engineering team for this cutover, so that the operator's plan is not disrupted and the two tired engineers can take this weekend off.",
+          "correct": false,
+          "rationale": "The candidate solves the staffing problem and leaves the commercial one growing. The operator keeps receiving unpriced cover and has no reason to think it will ever stop."
+        },
+        {
+          "id": "d",
+          "text": "Tell the operations manager that the contract covers weekday support only and ask him to move the cutover to a weekday, since that is the arrangement the agreement provides for.",
+          "correct": false,
+          "rationale": "The candidate is contractually right but ignores that the supplier created the expectation. Withdrawing it by pointing at the contract, with no options, feels like a broken promise."
+        }
+      ],
+      "explanation": "Unpriced extras given as goodwill quickly become part of what a customer regards as normal, and the longer they continue without comment, the more their withdrawal feels like a broken promise. The fix is to name the extra for what it was and agree an explicit arrangement while there is still time to choose between options. Continuing silently, or withdrawing it by citing the contract, each leaves the customer without a say in how the gap is closed.",
+      "mindset": "Name a goodwill gesture before it becomes an entitlement nobody agreed to."
+    },
+    {
+      "id": "pmp-p6-129",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "customer-satisfaction",
+        "outcomes-over-output",
+        "recruitment"
+      ],
+      "stem": "Your team builds a candidate-matching platform for a recruitment agency. At the end of each sprint the agency's head of operations rates her satisfaction from 1 to 5, and it has averaged 4. Last sprint the team completed 41 points, its best ever, mostly small admin-screen stories. Her rating fell to 2, with no comment. The product owner wants to keep the same approach, since velocity is up. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prioritise the largest outstanding customer-facing story for the next sprint, since a run of small admin items is the most likely reason that the rating has dropped.",
+          "correct": false,
+          "rationale": "The candidate guesses the cause and acts on the guess. It may be right, but if her disappointment was about something else the team spends a sprint on the wrong fix."
+        },
+        {
+          "id": "b",
+          "text": "Present the velocity trend at the next review so that the head of operations can see the team's output has increased, and ask whether that changes her view of the sprint.",
+          "correct": false,
+          "rationale": "The candidate treats the customer's judgement as a misreading of output. Her rating measures value to her, and more points do not answer that."
+        },
+        {
+          "id": "c",
+          "text": "Ask the head of operations what she had expected to see from that sprint, and review with the product owner how sprint goals are being chosen and shared with her.",
+          "correct": true,
+          "rationale": "The drop is information about an expectation the team has not understood. Asking her, and checking how goals are set, finds the cause instead of guessing at it."
+        },
+        {
+          "id": "d",
+          "text": "Add three specific questions to the end-of-sprint rating, so that future low scores come with enough detail for the team to understand what lies behind them.",
+          "correct": false,
+          "rationale": "The candidate improves the next signal and leaves this one unexplained. The customer is available to ask now, which is quicker and richer than a survey."
+        }
+      ],
+      "explanation": "Output measures such as velocity describe how much the team did, not whether it was what the customer expected from that period. When a customer's satisfaction moves against the team's own measures, the gap is information about their expectations, and the quickest way to understand it is to ask them directly and look at how the work was chosen. Guessing the cause, defending the numbers or waiting for better survey data all postpone that conversation.",
+      "mindset": "When the customer's verdict and the team's metrics disagree, find out what the customer was looking for."
+    },
+    {
+      "id": "pmp-p6-130",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-route-to-owner",
+        "benefits-realisation",
+        "internal-customer",
+        "transport"
+      ],
+      "stem": "You are the internal project manager for a new vehicle-scheduling system at a regional bus company. The business case, owned by the operations director who sponsors the project, shows fuel savings building from month one after go-live to full value by month six. The finance director has entered the full monthly saving from month one into next year's draft budget. Go-live is in four months, and the budget is approved next month. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Give the operations director the benefits profile alongside the budget figures, and ask her to resolve the difference with the finance director before the budget is approved.",
+          "correct": true,
+          "rationale": "The benefits and their timing belong to the sponsor who owns the business case. Giving her the evidence now lets her decide, with her peer, whether the budget or the expectation should move."
+        },
+        {
+          "id": "b",
+          "text": "Meet the finance director, explain the six-month ramp in the business case and its assumptions, and offer to help her rephase the savings in next year's budget.",
+          "correct": false,
+          "rationale": "The candidate makes the gap visible but negotiates someone else's business case with that person's peer. The sponsor may know something that changes the profile, and she is bypassed."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team whether starting with the highest-mileage depots could bring some savings forward, and present that option to both directors alongside the current profile.",
+          "correct": false,
+          "rationale": "The candidate reshapes delivery around a budget built on a misunderstanding. It may become a useful option, but only after the benefit owner has decided whether the plan or the budget should change."
+        },
+        {
+          "id": "d",
+          "text": "Record the mismatch as a risk in the project risk register, with the operations director as owner, and report it in the next monthly highlight report to the board.",
+          "correct": false,
+          "rationale": "The candidate names the right owner but chooses a slow channel. The budget is approved next month, so the report may arrive after the expectation has been locked in."
+        }
+      ],
+      "explanation": "Benefits belong to the business owner of the case, not to the project, and a disagreement between executives about when benefits will arrive is theirs to settle. The project manager's contribution is to surface the mismatch early and supply the evidence, so that the owner can decide whether the budget, the plan or both should change. Negotiating it directly with another executive, or redesigning delivery around the misunderstanding, takes a decision that sits elsewhere.",
+      "mindset": "Surface a benefits mismatch to the person who owns the benefits, and let them settle it."
+    },
+    {
+      "id": "pmp-p6-131",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "stated-priorities",
+        "contingency",
+        "charity"
+      ],
+      "stem": "You are managing the refurbishment of a charity's head office on a £1.2 million budget. At the start, its chief executive said cost was the overriding priority. Since then, at each design review, the charity's working group has chosen the higher-specification option, and 70% of the contingency has now been used with the building only half complete. Each choice was within the group's delegated authority. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Recommend the lower-cost option at each future design review, explaining that this follows the chief executive's original statement that cost is the overriding priority.",
+          "correct": false,
+          "rationale": "The candidate assumes the original statement is still the real expectation. The working group's choices suggest the charity's view may have moved, and nobody has asked."
+        },
+        {
+          "id": "b",
+          "text": "Show the chief executive and the working group the combined effect of their choices on budget and contingency, and ask them to confirm which matters more for the remaining decisions.",
+          "correct": true,
+          "rationale": "The stated priority and the pattern of choices now point in different directions. Showing the cumulative effect lets the charity make the trade-off deliberately instead of one review at a time."
+        },
+        {
+          "id": "c",
+          "text": "Raise a change request to increase the contingency, since the working group's choices were each properly authorised and appear to reflect what the charity now values most.",
+          "correct": false,
+          "rationale": "The candidate assumes the opposite: that the choices are the real expectation. Extra money may not exist, and nobody at the charity has weighed specification against cost as a whole."
+        },
+        {
+          "id": "d",
+          "text": "Ask the working group to get the chief executive's approval for any higher-specification choice from now on, so that each decision is checked against the cost priority.",
+          "correct": false,
+          "rationale": "The candidate adds a control but still presents decisions one at a time. It also changes the charity's own delegations, which is the customer's call to make."
+        }
+      ],
+      "explanation": "A customer's stated priorities and the choices they make can drift apart, especially when decisions are taken one at a time by people who each see only part of the picture. When that happens, neither the original statement nor the pattern of choices can be assumed to be the real expectation. Showing the cumulative effect and asking the customer to choose deliberately puts the trade-off with the people entitled to make it.",
+      "mindset": "When what a customer says and what they choose diverge, show them both and let them decide."
+    },
+    {
+      "id": "pmp-p6-132",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "cutover",
+        "operational-impact",
+        "logistics"
+      ],
+      "stem": "Six weeks before migrating a parcel firm's warehouse system to a new data centre, you review the cutover plan with its site managers. The plan needs a six-hour outage, which has been in the project schedule since it was baselined. One site manager says the warehouses run around the clock and nobody told them the system would be down. The sponsor has asked you to keep disruption to the sites low. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the site managers to find the six hours that would least affect their operations, and plan with them how the sites will keep working during the outage.",
+          "correct": true,
+          "rationale": "The outage is necessary, but when it falls and how the sites cope are open. The site managers know their operation, so planning it with them is what keeps disruption low."
+        },
+        {
+          "id": "b",
+          "text": "Point out that the outage has been in the baselined schedule since the start, and ask the site managers to arrange cover for the window that has already been planned.",
+          "correct": false,
+          "rationale": "The candidate treats a line in the schedule as having informed the customer. The site managers did not know, and insisting on the window does nothing to reduce disruption."
+        },
+        {
+          "id": "c",
+          "text": "Ask the technical team to redesign the migration to avoid an outage altogether, even if this means moving the cutover date back by several weeks to make it possible.",
+          "correct": false,
+          "rationale": "The candidate pays a large cost before finding out what the sites can tolerate. A well-chosen six-hour window may be entirely acceptable to the people who run them."
+        },
+        {
+          "id": "d",
+          "text": "Escalate to the sponsor that the site managers object to the outage, and ask her to decide whether the migration should go ahead on the current plan or be redesigned.",
+          "correct": false,
+          "rationale": "The candidate escalates a planning detail the project manager can resolve directly with the people affected. The sponsor has already said what she wants."
+        }
+      ],
+      "explanation": "An expectation the customer has never been asked about is not settled just because it appears in a project document. When a necessary constraint meets an operation that cannot easily stop, the most useful step is usually to plan the constraint around the customer's operation with the people who run it. Insisting on the plan as written, or redesigning it at great cost before asking, both skip that conversation.",
+      "mindset": "Fit unavoidable disruption around how the customer actually works, and plan it with them."
+    },
+    {
+      "id": "pmp-p6-133",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "sprint-review",
+        "customer-feedback",
+        "pharmaceutical"
+      ],
+      "stem": "Your team is building a training platform for a pharmaceutical company. Its learning and development director, the main customer stakeholder, has missed the last three sprint reviews. She now asks for an emailed summary instead, saying the reviews take two hours and she is busy with an audit until the end of the quarter. Five sprints remain, and two of them deliver the assessment features she asked for most. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with her which of the remaining reviews will show the assessment features, and book short, focused sessions with her for those reviews now.",
+          "correct": true,
+          "rationale": "Her time is scarce, so it goes on the work she cares about most. A short session on those increments keeps her judgement where it matters without asking for two hours."
+        },
+        {
+          "id": "b",
+          "text": "Offer her a short recorded walkthrough of each increment, with two or three specific questions she can answer in writing when she has time.",
+          "correct": true,
+          "rationale": "A recording lets her see working software on her own schedule, and pointed questions draw out real feedback rather than general approval."
+        },
+        {
+          "id": "c",
+          "text": "Send the emailed summary she has asked for after each review, listing what was completed and asking her to raise any concerns by reply.",
+          "correct": false,
+          "rationale": "The candidate gives the customer exactly what she asked for. A list of completed items does not let her see the product, so silence will be taken as approval it is not."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to accept the assessment features on her behalf until the audit ends, so that the team is not held up waiting for her views.",
+          "correct": false,
+          "rationale": "The candidate replaces the customer's judgement with a proxy on the very features she cares about most, which is where a mismatch would cost the most."
+        },
+        {
+          "id": "e",
+          "text": "Move the assessment features into the final sprint, after the audit ends, so that she can attend that review in person and give her feedback directly.",
+          "correct": false,
+          "rationale": "The candidate protects her attendance by delaying feedback to the end, when any rework on her priority features has no sprint left to happen in."
+        }
+      ],
+      "explanation": "When a key customer cannot keep up with the team's feedback cadence, the aim is to keep their judgement in the loop at the points where it matters most, in a form they can actually give. That usually means fitting the format to the customer's constraints and concentrating their time on the work they care about, rather than accepting a channel that cannot carry real feedback or handing their judgement to someone else.",
+      "mindset": "Adapt how the customer gives feedback, but keep their feedback on the work that matters to them."
+    },
+    {
+      "id": "pmp-p6-134",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "time-and-materials",
+        "forecasting",
+        "fintech"
+      ],
+      "stem": "Your agile team works on a time-and-materials contract for a payments start-up, billed at €52,000 a month. After six months, the start-up's finance director tells you the forecast cost to finish the backlog is far higher than she expected. She had assumed velocity would keep rising, so each month would deliver more for the same money. The founder, who agreed the contract, has never raised cost. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Explain to her how the team's velocity has behaved and why it has levelled off, and walk through the current forecast cost to finish with her.",
+          "correct": true,
+          "rationale": "Her expectation came from an assumption about velocity that nobody corrected. Showing her how it has actually behaved replaces the assumption with evidence."
+        },
+        {
+          "id": "b",
+          "text": "Agree with her and the founder to show spend to date and the forecast cost to finish, as a range, at every sprint review from now on.",
+          "correct": true,
+          "rationale": "A routine view of spend and forecast stops the next assumption forming. Both the finance director and the founder see the same numbers at the same time."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to look for ways to raise velocity over the next three sprints, so that the forecast moves closer to what the finance director expected.",
+          "correct": false,
+          "rationale": "The candidate chases an expectation built on a misunderstanding. Pressure on velocity tends to inflate estimates or cut quality rather than deliver more."
+        },
+        {
+          "id": "d",
+          "text": "Refer her to the founder, who agreed the time-and-materials terms, since cost expectations under the contract are a matter for the start-up to settle internally.",
+          "correct": false,
+          "rationale": "The candidate treats the issue as the client's internal business. Her expectation rested on delivery data the team holds, so the team is best placed to correct it."
+        },
+        {
+          "id": "e",
+          "text": "Propose converting the remaining backlog to a fixed-price contract, so that the finance director has the cost certainty she evidently expected from the start.",
+          "correct": false,
+          "rationale": "The candidate assumes certainty is what she wants. Fixing the price of an emergent backlog adds a risk premium and solves a problem she has not raised."
+        }
+      ],
+      "explanation": "Customers fill gaps in what they are shown with assumptions, and a common one on time-and-materials work is that the team will keep speeding up. Expectations about cost stay realistic only when the customer routinely sees spend and the forecast to finish, explained in terms of how the team's delivery rate actually behaves. Changing the commercial model or pushing the team faster responds to the symptom rather than the missing information.",
+      "mindset": "Keep the cost forecast in front of the customer, so their assumptions never have to fill the gap."
+    },
+    {
+      "id": "pmp-p6-135",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "live-site",
+        "construction",
+        "education"
+      ],
+      "stem": "You are managing a £3.1 million extension to a secondary school, built while the school stays open. The contract allows noisy work from 8am to 6pm on weekdays, and your site complies. The head teacher writes to complain that drilling is disrupting lessons, and that GCSE exams start in five weeks. She says she expected the contractor to work around the school day. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Meet the head teacher to find out which rooms, lessons and exam sessions are most affected, and when quieter working would matter most to the school.",
+          "correct": true,
+          "rationale": "The complaint is real but not yet specific. Knowing exactly which rooms and times matter is what lets the work be reshaped without stopping it."
+        },
+        {
+          "id": "b",
+          "text": "Re-plan the noisiest activities into the windows the school identifies, such as half-term and late afternoons, and confirm the revised plan with her in writing.",
+          "correct": true,
+          "rationale": "Re-sequencing within the permitted hours meets the school's need at little cost, and confirming it in writing gives the head teacher something she can rely on."
+        },
+        {
+          "id": "c",
+          "text": "Reply that the site is working within the hours the contract allows, and offer to share the noise-monitoring results with the school each week from now on.",
+          "correct": false,
+          "rationale": "The candidate answers a complaint about lessons with evidence of compliance. The school's expectation was about its teaching, which the data does nothing to protect."
+        },
+        {
+          "id": "d",
+          "text": "Pause all noisy work until the exams finish, accepting the schedule delay, so that the school cannot be disrupted during its most sensitive period.",
+          "correct": false,
+          "rationale": "The candidate reacts with a blanket stop before learning which periods matter. The delay may cost far more than a targeted re-plan and the school may not want it."
+        },
+        {
+          "id": "e",
+          "text": "Refer the complaint to the local authority's contract manager, who signed the contract, and ask whether the working hours should be formally varied.",
+          "correct": false,
+          "rationale": "The candidate reaches for formal change when the sequencing of work inside the agreed hours is already the project manager's to adjust."
+        }
+      ],
+      "explanation": "Meeting the contract is the minimum, and on a site shared with a live operation the customer's real expectation is that the work fits around what they are doing. The useful response finds out precisely which activities and times matter and reshapes the work within the agreed limits, so the customer's priorities are protected without unnecessary cost. Pointing to compliance, or reacting with a blanket stop, both avoid learning what the customer actually needs.",
+      "mindset": "Comply with the contract, then fit the work around what the customer is trying to do."
+    },
+    {
+      "id": "pmp-p6-136",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "requirements",
+        "benefits-management",
+        "payroll"
+      ],
+      "stem": "During planning for a payroll replacement at a retail group, the client's finance team states three expectations. Match each expectation to the place in the project's documentation where it should be captured so that it can be tracked. One choice is not used.",
+      "prompts": [
+        {
+          "id": "e1",
+          "text": "The monthly payroll run for 18,000 staff must complete within two hours of being started."
+        },
+        {
+          "id": "e2",
+          "text": "Processing costs should fall by 30% within nine months of go-live, as the business case promised."
+        },
+        {
+          "id": "e3",
+          "text": "The finance director wants to hear within two working days if the forecast cost rises by more than 5%."
+        }
+      ],
+      "options": [
+        {
+          "id": "nfr",
+          "text": "A non-functional requirement with a measurable acceptance criterion",
+          "correct": true,
+          "match": "e1",
+          "rationale": "A performance expectation becomes trackable when it is written as a requirement with a test the delivered system can pass or fail at acceptance."
+        },
+        {
+          "id": "ben",
+          "text": "The benefits management plan, with an owner and measurement dates",
+          "correct": true,
+          "match": "e2",
+          "rationale": "A cost saving after go-live is an outcome, not a deliverable. It needs an owner and dates for measurement, which is what the benefits plan provides."
+        },
+        {
+          "id": "comm",
+          "text": "The communications management plan, as an escalation trigger",
+          "correct": true,
+          "match": "e3",
+          "rationale": "An expectation about being told, by when and at what threshold, is a communication commitment. Writing it as a trigger makes it something the project checks every reporting cycle."
+        },
+        {
+          "id": "chg",
+          "text": "The change log, as an approved change to the baseline",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of these alters an agreed baseline; they are expectations being captured at planning, before there is a baseline to change."
+        }
+      ],
+      "explanation": "An expectation can only be tracked once it is written where the project already looks for that kind of commitment. Performance expectations become testable requirements, outcome expectations become benefits with owners and dates, and expectations about being kept informed become part of the communication approach. An expectation left only in meeting notes is likely to be rediscovered at acceptance, when it is most expensive to meet.",
+      "mindset": "Write each customer expectation where the project will check it, not where it was first heard."
+    },
+    {
+      "id": "pmp-p6-137",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "satisfaction-measures",
+        "service-design",
+        "social-housing"
+      ],
+      "stem": "A housing association's repairs service is being redesigned by a hybrid team, and the association wants evidence of how well it meets tenants' expectations. Match each question the association wants answered to the measure that best answers it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "q1",
+          "text": "Were tenants satisfied with how their individual repair was handled once the job was closed?"
+        },
+        {
+          "id": "q2",
+          "text": "How much effort did tenants have to put in to report a repair through the new online form?"
+        },
+        {
+          "id": "q3",
+          "text": "Would tenants recommend the association's repairs service to a friend moving into social housing?"
+        }
+      ],
+      "options": [
+        {
+          "id": "csat",
+          "text": "A short satisfaction rating sent after each completed job",
+          "correct": true,
+          "match": "q1",
+          "rationale": "A transactional rating taken straight after the job captures how that one interaction felt, while the tenant still remembers it."
+        },
+        {
+          "id": "ces",
+          "text": "A customer effort score asked straight after the form is submitted",
+          "correct": true,
+          "match": "q2",
+          "rationale": "Effort scores ask how easy a specific task was. Asking at the moment of submission ties the answer to the form rather than to the repair that follows."
+        },
+        {
+          "id": "nps",
+          "text": "A likelihood-to-recommend score from a periodic tenant survey",
+          "correct": true,
+          "match": "q3",
+          "rationale": "Likelihood to recommend reflects the tenant's view of the service as a whole, which is best asked periodically rather than after a single job."
+        },
+        {
+          "id": "usage",
+          "text": "Weekly counts of repairs reported online compared with by phone",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Channel counts show what tenants did, not how they felt. Tenants may use the form because the phone line is busy, not because it meets their expectations."
+        }
+      ],
+      "explanation": "Each satisfaction measure answers a different question: how a single interaction felt, how hard a task was, or how the customer regards the relationship overall. Choosing the measure means deciding first which expectation is being tested and at what point in the customer's experience. Behavioural data such as usage is useful alongside these, but it records what customers did, not whether their expectations were met.",
+      "mindset": "Pick the measure for the question about expectations you are trying to answer."
+    },
+    {
+      "id": "pmp-p6-138",
+      "type": "pulldown",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "agile-roles",
+        "customer-requests",
+        "sports-clubs"
+      ],
+      "stem": "An agile team is building a membership app for a network of sports clubs. Complete each sentence with who should take the customer's request, so that it is handled by the person or forum that owns it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "r1",
+          "text": "Midway through a sprint, the clubs' membership lead asks for an urgent new story to replace one the team has already started. The request should go to"
+        },
+        {
+          "id": "r2",
+          "text": "During a review, the membership lead points out that a story being demonstrated does not meet one of the acceptance criteria agreed for it. The request should go to"
+        },
+        {
+          "id": "r3",
+          "text": "The clubs' procurement officer asks for the day rates in the contract to be reduced for the next phase of work. The request should go to"
+        }
+      ],
+      "options": [
+        {
+          "id": "po",
+          "text": "the product owner, who decides with the team whether to change the sprint",
+          "correct": true,
+          "match": "r1",
+          "rationale": "Swapping work in a running sprint changes what the team is building and why. That trade-off belongs to the product owner, with the team advising on what it would disrupt."
+        },
+        {
+          "id": "team",
+          "text": "the development team, which keeps the story open as not done and fixes it",
+          "correct": true,
+          "match": "r2",
+          "rationale": "A story that misses an agreed criterion is unfinished, not changed. It stays with the team as incomplete work rather than becoming a new request to prioritise."
+        },
+        {
+          "id": "comm",
+          "text": "the supplier's commercial manager, who owns the contract terms",
+          "correct": true,
+          "match": "r3",
+          "rationale": "Day rates are a commercial term outside the delivery team's authority. Routing the request to the contract owner gets the client a real answer."
+        },
+        {
+          "id": "sm",
+          "text": "the scrum master, who decides how customer requests are prioritised",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The scrum master facilitates and coaches but owns neither the backlog's priorities nor the contract, so a request routed there has to be passed on again."
+        }
+      ],
+      "explanation": "Customer requests on an agile project arrive through many channels, but each kind has an owner: changes to what the team is working on belong to the product owner, work that fails its agreed criteria stays with the team as unfinished, and commercial terms sit outside the team altogether. Routing a request correctly is what lets the customer get a real answer rather than a sympathetic one from someone who cannot give it.",
+      "mindset": "Before answering a customer's request, ask who actually owns the answer."
+    },
+    {
+      "id": "pmp-p6-139",
+      "type": "fillblank",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "service-levels",
+        "availability",
+        "online-grocery"
+      ],
+      "stem": "An online grocer's operations director is about to sign a hosting contract offering 99.5% monthly availability. She says this matches her expectation of 'no more than about 20 minutes of downtime a month'. Using a 30-day month, work out what the contract allows and what her expectation would actually require.",
+      "blanks": [
+        {
+          "id": "allowed",
+          "label": "Downtime allowed by 99.5% availability in a 30-day month, in minutes",
+          "numeric": true,
+          "expect": 216,
+          "tol": 1,
+          "unit": "minutes",
+          "rationale": "A 30-day month has 30 × 24 × 60 = 43,200 minutes. 0.5% of 43,200 is 216 minutes, about three and a half hours, which is more than ten times her expectation."
+        },
+        {
+          "id": "needed",
+          "label": "Availability needed for no more than 20 minutes of downtime in a 30-day month, as a percentage to two decimal places",
+          "numeric": true,
+          "expect": 99.95,
+          "tol": 0.01,
+          "unit": "%",
+          "rationale": "(43,200 − 20) ÷ 43,200 = 0.99954, or 99.95%. Her expectation needs roughly 'three and a half nines', not the 99.5% she is about to sign."
+        }
+      ],
+      "explanation": "Customers often express expectations in everyday terms and then agree to figures that sound close but mean something quite different. Converting a percentage into the quantity the customer will actually experience, such as minutes of downtime, shows whether the number and the expectation match before either side is bound by it. The time to test that is before signature, because afterwards the gap becomes a dispute.",
+      "mindset": "Translate a customer's numbers into what they will experience before agreeing them."
+    },
+    {
+      "id": "pmp-p6-140",
+      "type": "hotspot",
+      "domain": "people",
+      "ecoTask": "people-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "early-warning",
+        "customer-reviews",
+        "warehouse-automation"
+      ],
+      "stem": "You are delivering a warehouse automation project for a pharmaceutical distributor. The diagram is a timeline of the monthly customer reviews, showing the client's satisfaction score and a note from each meeting. In month 8 the client formally complained that operator training was late. Select the earliest month at which you should have acted on the client's training expectation.",
+      "graphic": {
+        "viewBox": "0 0 700 300",
+        "title": "Timeline of monthly customer reviews, months 4 to 8, with satisfaction scores and meeting notes",
+        "caption": "Select a month. Use Tab or the arrow keys to move between months, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "m4",
+          "n": 1,
+          "label": "Month 4 — score 4.3. Client asks for shorter review meetings.",
+          "x": 20,
+          "y": 70,
+          "w": 120,
+          "h": 160,
+          "correct": false,
+          "rationale": "This is a real expectation, but about meetings rather than training. The candidate picks the earliest note without checking whether it relates to the later complaint."
+        },
+        {
+          "id": "m5",
+          "n": 2,
+          "label": "Month 5 — score 4.2. Client asks when the operator training plan will be issued.",
+          "x": 155,
+          "y": 70,
+          "w": 120,
+          "h": 160,
+          "correct": true,
+          "rationale": "The first question about training is the first sign of what the client is waiting for. Answering it with a plan and a date then would have shaped the expectation before it hardened."
+        },
+        {
+          "id": "m6",
+          "n": 3,
+          "label": "Month 6 — score 4.2. Client asks again about training; its go-live shift rota is being set.",
+          "x": 290,
+          "y": 70,
+          "w": 120,
+          "h": 160,
+          "correct": false,
+          "rationale": "The signal is now unmistakable, but it is the second time of asking and the client is already planning its rota without the information. The candidate waits for repetition before acting."
+        },
+        {
+          "id": "m7",
+          "n": 4,
+          "label": "Month 7 — score 3.6. Client's operations manager is quieter than usual and raises no questions.",
+          "x": 425,
+          "y": 70,
+          "w": 120,
+          "h": 160,
+          "correct": false,
+          "rationale": "The candidate waits for the score to move. Satisfaction scores lag behind expectations, and a customer who stops asking may simply have stopped expecting an answer."
+        },
+        {
+          "id": "m8",
+          "n": 5,
+          "label": "Month 8 — score 2.9. Formal complaint that operator training is late.",
+          "x": 560,
+          "y": 70,
+          "w": 120,
+          "h": 160,
+          "correct": false,
+          "rationale": "A formal complaint confirms that the expectation has already been missed. The candidate treats the escalation as the trigger, when it is the result of earlier signals going unanswered."
+        }
+      ],
+      "explanation": "Customer expectations usually show up first as questions and requests, well before they appear in a satisfaction score, which tends to move only once the customer already feels let down. The earliest point to act is the first time the customer signals what they are waiting for, because that is when a date or a plan can still shape the expectation. Scores and complaints confirm a problem; questions predict one.",
+      "mindset": "Treat a customer's question as an early signal of an expectation, not as routine traffic."
+    }
+  ]
+}

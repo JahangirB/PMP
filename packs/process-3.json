@@ -1,0 +1,1960 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 3 — Value delivery",
+  "questions": [
+    {
+      "id": "pmp-pr3-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "benefits-realisation",
+        "benefit-owner",
+        "closure",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your project is rolling out electronic prescribing across a hospital trust's four sites and closes next month. The business case promises a 30 per cent fall in medication errors, but the trust expects the reduction to show only twelve to eighteen months after go-live. The benefits management plan names the chief pharmacist as benefit owner. The finance director asks how the benefit will be tracked once the project team has disbanded. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the project open with a reduced core team until the eighteen-month review confirms whether the promised error reduction has actually been achieved.",
+          "correct": false,
+          "rationale": "This treats benefit tracking as project work. It keeps project cost and governance running for a year and a half to do a job the business owner is already assigned to do."
+        },
+        {
+          "id": "b",
+          "text": "Commit to running the benefit reviews personally after closure, reporting the medication-error figures to the finance director every quarter.",
+          "correct": false,
+          "rationale": "Well meant, but it attaches the benefit to an individual whose role ends at closure and bypasses the owner the plan names. It lasts only as long as the project manager's next assignment allows."
+        },
+        {
+          "id": "c",
+          "text": "Ask the PMO to record the benefit as realised at closure, given that the system went live on time, within budget and to the agreed specification.",
+          "correct": false,
+          "rationale": "This confuses delivering the output with achieving the outcome. A working system is the means to fewer errors; whether errors actually fall is unknown until it has been measured."
+        },
+        {
+          "id": "d",
+          "text": "Hand the measures, baseline data and review dates to the chief pharmacist as part of closure, so tracking continues under the benefit owner.",
+          "correct": true,
+          "rationale": "Benefits that arrive after closure have to be measured by someone who will still be in the organisation. Transferring the measures, baseline and review schedule to the named owner is what makes the later reviews happen at all."
+        }
+      ],
+      "explanation": "Most benefits arrive after a project has closed, so responsibility for measuring them must sit with someone in the business who will still be there. The project's job at closure is to transfer measures, baselines and the review schedule to that owner — not to stay open for years, and not to declare an outcome realised because the outputs were delivered.",
+      "mindset": "Outputs end with the project; benefits need an owner who outlasts it."
+    },
+    {
+      "id": "pmp-pr3-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "backlog-prioritisation",
+        "customer-value",
+        "evidence",
+        "archetype-diagnose-first"
+      ],
+      "stem": "You lead an agile team building a scheduling app for home-care agencies. The sales director has asked the product owner to move an offline mode to the top of the backlog because your largest competitor launched one last month, and says two deals were lost to it. Offline mode is estimated at four sprints. The product owner asks for your view before the next refinement session. What should you advise?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move offline mode to the top now, because matching a competitor in a contested market protects revenue more reliably than any feature on the current roadmap.",
+          "correct": false,
+          "rationale": "This assumes parity is the value without testing it. The candidate who picks it treats a competitor's roadmap as evidence about their own customers, and commits four sprints on an anecdote."
+        },
+        {
+          "id": "b",
+          "text": "Leave the backlog unchanged, since a competitor's release reflects their customers' priorities rather than the evidence the product owner has already gathered.",
+          "correct": false,
+          "rationale": "It dismisses a real signal from the market. Lost deals are data about your own prospects, and refusing to look at them is as unexamined as acting on them immediately."
+        },
+        {
+          "id": "c",
+          "text": "Review the two lost deals and current customers' usage with the sales director to establish whether offline access was the deciding need before reordering.",
+          "correct": true,
+          "rationale": "Two lost deals and a competitor launch are signals worth taking seriously, and the evidence to test them is cheap and already available. Four sprints is a large bet to place before checking what customers actually needed."
+        },
+        {
+          "id": "d",
+          "text": "Build a thin offline version within one sprint so the sales team has something to show prospects while the full feature is being scoped.",
+          "correct": false,
+          "rationale": "It feels like a cheap experiment, but it spends a sprint building before anyone knows whether offline access is what lost the deals. A conversation and a look at the data would answer that in days."
+        }
+      ],
+      "explanation": "A competitor's move and an anecdote about lost deals are signals, not evidence of value. Before reordering a backlog around a request, establish what customer problem it solves and how much it matters, using the data that is cheapest to get. Ignoring the signal and acting on it straight away are both ways of skipping that step.",
+      "mindset": "Ask what problem a request solves before deciding where it ranks."
+    },
+    {
+      "id": "pmp-pr3-103",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "benefits-baseline",
+        "benefits-register",
+        "go-live",
+        "archetype-act-now"
+      ],
+      "stem": "Your project replaces a water company's billing platform, with go-live in three weeks. One benefit in the business case is a 25 per cent cut in the time taken to resolve billing disputes. Preparing the benefits register, you find nobody has recorded the current resolution time, and the legacy platform's reporting database will be switched off at go-live. The benefit owner is on leave until the week after go-live. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Wait for the benefit owner to return and agree how the baseline should be defined, since the measure belongs to the business rather than to the project.",
+          "correct": false,
+          "rationale": "The ownership point is right but the timing is fatal: by the time the owner returns, the only source of the 'before' figure has been switched off. Deferring to the owner here means there will be nothing left to define."
+        },
+        {
+          "id": "b",
+          "text": "Raise a change request to keep the legacy reporting database running after go-live until a baseline has been agreed with the benefit owner.",
+          "correct": false,
+          "rationale": "It protects the data, but at the cost of extra licences, support and a formal change for something that can be done in a few days now. It reaches for governance when a simple extract solves the problem."
+        },
+        {
+          "id": "c",
+          "text": "Extract and record the current dispute-resolution figures from the legacy reports now, then have the benefit owner confirm the baseline on return.",
+          "correct": true,
+          "rationale": "The data will disappear in three weeks and capturing it is within the project manager's remit. Taking it now and asking the owner to confirm the definition later keeps both the evidence and the owner's authority."
+        },
+        {
+          "id": "d",
+          "text": "Use the first month of figures from the new platform as the baseline and measure the 25 per cent improvement against that point onwards.",
+          "correct": false,
+          "rationale": "A baseline taken after the change measures the new system against itself. Any improvement the platform brings on day one would be invisible, so the benefit could never be demonstrated."
+        }
+      ],
+      "explanation": "A benefit can only be shown against a baseline taken before the change, and some baselines can only be captured while the old way of working still exists. When that window is closing, capture the data first and settle definitions afterwards; a baseline that can be refined later beats one that can never be recovered.",
+      "mindset": "Capture the 'before' while it still exists."
+    },
+    {
+      "id": "pmp-pr3-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "release-cadence",
+        "undelivered-value",
+        "flow",
+        "archetype-make-visible"
+      ],
+      "stem": "Your team at a retail bank completes features every two weeks, but the bank's release board approves production releases once a quarter. Fourteen finished features are now waiting in a staging environment, including a card-freeze function the contact centre estimates would remove 6,000 calls a month. Team members have started calling the sprint review 'theatre'. The release schedule is owned by the head of IT operations. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Quantify the value tied up in the waiting features and present it to the head of IT operations alongside the evidence on release risk.",
+          "correct": true,
+          "rationale": "The cost of the quarterly cadence is real but invisible, because nobody counts finished-but-unreleased work. Putting a figure on it and taking it to the person who owns the schedule is the step that can change the constraint."
+        },
+        {
+          "id": "b",
+          "text": "Ask the release board for an exceptional release of the card-freeze function, since its contact-centre saving clearly justifies breaking the quarterly cycle.",
+          "correct": false,
+          "rationale": "It rescues one feature and leaves the cause untouched. Thirteen others keep waiting, the next batch will queue the same way, and the board learns only that the team wants exceptions."
+        },
+        {
+          "id": "c",
+          "text": "Lengthen the team's sprints to align with the quarterly release, so the review shows stakeholders work that is genuinely about to reach customers.",
+          "correct": false,
+          "rationale": "This adapts the team to the bottleneck instead of questioning it. Feedback slows to match the release cycle and the value already waiting is still not reaching anyone."
+        },
+        {
+          "id": "d",
+          "text": "Keep the sprint reviews running as planned and remind the team that completed work still counts as delivered progress against the product roadmap.",
+          "correct": false,
+          "rationale": "It equates completion with delivery. The team's frustration is pointing at a genuine problem — finished work earning nothing — and reassurance does not change that."
+        }
+      ],
+      "explanation": "Work that is finished but not in users' hands has cost money and delivered nothing, and the gap is usually invisible because progress reporting counts completion rather than release. When a release constraint sits outside the team's authority, the lever is to put a figure on the value it holds back and take it to whoever owns the constraint, rather than working around it once or adapting the team to it.",
+      "mindset": "Value starts when users have the work, not when the team finishes it."
+    },
+    {
+      "id": "pmp-pr3-105",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "benefits-realisation",
+        "business-change",
+        "incentives",
+        "archetype-route-to-owner"
+      ],
+      "stem": "A third-party logistics firm goes live with a new warehouse management system in six weeks. The forecast benefit is an 18 per cent rise in picking productivity from switching pickers to zone picking. You learn that the pickers' bonus scheme, owned by the operations director, still rewards the volume measure used under the old batch method, and that shift supervisors have not yet seen the new process. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the operations director to review the bonus scheme so that it rewards the zone-picking measure from go-live.",
+          "correct": true,
+          "rationale": "People work to what they are paid on. While the bonus rewards the old method, pickers have a reason to resist the change the benefit depends on, and only the scheme's owner can alter it."
+        },
+        {
+          "id": "b",
+          "text": "Involve shift supervisors in walkthroughs of the zone-picking process now, so they can coach pickers through the change.",
+          "correct": true,
+          "rationale": "Supervisors are the people pickers will ask on day one. Bringing them in six weeks out turns them into the change's front line rather than its first sceptics."
+        },
+        {
+          "id": "c",
+          "text": "Delay go-live until the bonus scheme has been redesigned and approved, so the new process and incentives start together.",
+          "correct": false,
+          "rationale": "It assumes the scheme cannot be changed in six weeks and takes a schedule decision on that assumption. Asking the owner comes before moving the date."
+        },
+        {
+          "id": "d",
+          "text": "Add extra system training for pickers in the final week, focusing on scanner screens and the new pick-list format.",
+          "correct": false,
+          "rationale": "This treats the gap as a skills problem with the tool. Pickers who can use the scanners perfectly will still batch-pick if that is what earns their bonus."
+        },
+        {
+          "id": "e",
+          "text": "Record the bonus scheme as a risk to the benefit and review it at the first post-go-live benefit review.",
+          "correct": false,
+          "rationale": "The conflict is already known and has an owner. Logging it for review after go-live lets the benefit fail first and be explained afterwards."
+        }
+      ],
+      "explanation": "Systems deliver outputs; benefits depend on people working differently, and people work to the measures they are rewarded on and the supervisors who coach them. Before go-live, look for incentives and line management that still reinforce the old way of working, route each to whoever owns it, and do not assume tool training alone will change behaviour.",
+      "mindset": "If the incentives still reward the old way, the benefit will not arrive."
+    },
+    {
+      "id": "pmp-pr3-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "technical-debt",
+        "capacity-allocation",
+        "backlog-prioritisation",
+        "archetype-trade-off"
+      ],
+      "stem": "In a hybrid programme for a hotel group, check-in kiosks are being installed in 40 hotels to a fixed plan, and an agile team builds the kiosk software. The team's throughput has fallen from 40 to 28 points per sprint over six sprints, mostly because manual regression testing now takes two days each sprint. The product owner keeps declining test-automation stories as delivering 'nothing guests can see'. Installations depend on agreed software dates. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the team to absorb the automation work alongside the feature stories, so the product owner's guest-facing priorities are not disturbed.",
+          "correct": false,
+          "rationale": "It hides a trade-off instead of making it. The team carries extra work on top of falling throughput, and the product owner never sees the cost of the choice they keep making."
+        },
+        {
+          "id": "b",
+          "text": "Escalate to the programme sponsor that the product owner's backlog decisions are now putting the hotel installation dates at risk.",
+          "correct": false,
+          "rationale": "The product owner has never been shown the consequence in terms they own. Escalating before making that case goes over the decision-maker's head on an argument they have not heard."
+        },
+        {
+          "id": "c",
+          "text": "Show the product owner which features falling throughput will push past installation dates, and propose reserving a fixed share of capacity for automation.",
+          "correct": true,
+          "rationale": "It translates enabling work into the outcomes the product owner cares about, and offers an explicit allocation rather than a hidden one. The product owner can then make the trade-off knowingly."
+        },
+        {
+          "id": "d",
+          "text": "Re-plan the hotel installations around the current throughput of 28 points, so the fixed plan reflects the software team's real capacity.",
+          "correct": false,
+          "rationale": "It accepts a decline that has not stopped. With regression time still growing, a plan built on today's throughput will be wrong again within a few sprints."
+        }
+      ],
+      "explanation": "Work with no visible customer feature can still be the most valuable item when it protects the rate at which customer value is delivered. The way to get it prioritised is to express its cost in the product owner's own terms — which outcomes slip and by how much — and propose an explicit allocation, rather than hiding it in team capacity, re-planning around the decline or going over the product owner's head.",
+      "mindset": "Put enabling work in the currency of the outcomes it protects."
+    },
+    {
+      "id": "pmp-pr3-107",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "prioritisation-techniques",
+        "kano",
+        "moscow",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A product team at a regional bus operator uses several techniques to decide what to build next. Match each situation to the technique that fits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "Answers from a rider survey need sorting into features passengers expect as standard, features that would delight them, and features they would not notice."
+        },
+        {
+          "id": "p2",
+          "text": "Six councils that fund the service each want their own features, and the team needs them to show how much each request really matters when not everything can be built."
+        },
+        {
+          "id": "p3",
+          "text": "A release tied to a fixed timetable-change date needs its scope split into what must ship, what should, what could, and what will wait."
+        }
+      ],
+      "options": [
+        {
+          "id": "kano",
+          "text": "Kano analysis",
+          "correct": true,
+          "match": "p1",
+          "rationale": "Kano classifies features by how their presence or absence affects satisfaction — basic expectations, performance features and delighters. That is exactly the sorting the survey needs."
+        },
+        {
+          "id": "buy",
+          "text": "Buy a feature",
+          "correct": true,
+          "match": "p2",
+          "rationale": "Giving each funder a limited budget to spend on features forces them to reveal relative value, because they cannot ask for everything at once. It suits several stakeholders competing for the same capacity."
+        },
+        {
+          "id": "moscow",
+          "text": "MoSCoW prioritisation",
+          "correct": true,
+          "match": "p3",
+          "rationale": "MoSCoW partitions scope against a fixed constraint such as a date, so that the must-haves are protected and the rest can flex if time runs short."
+        },
+        {
+          "id": "poker",
+          "text": "Planning poker",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Planning poker is an estimation technique: it sizes the effort of items, but says nothing about which of them is worth more to riders or funders."
+        }
+      ],
+      "explanation": "Prioritisation techniques answer different questions. Kano asks how a feature affects satisfaction, buy-a-feature makes stakeholders reveal relative value by spending a limited budget, and MoSCoW partitions scope against a fixed constraint. Choosing a technique starts with which question is open — and estimation techniques size effort rather than rank value.",
+      "mindset": "Pick the technique for the question being asked, not the one the team used last time."
+    },
+    {
+      "id": "pmp-pr3-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "benefit-owner",
+        "governance",
+        "benefits-register",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your project is implementing a repairs-scheduling system for a city council's housing department. The benefit owner named in the approved business case, the head of repairs, has left the council. Her successor tells you he did not agree the target of 20 per cent fewer repeat visits and does not intend to report against it. Go-live is four months away, and the sponsor chairs the project board. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the gap in benefit ownership with the sponsor and ask the board to confirm who owns the target and whether it still stands.",
+          "correct": true,
+          "rationale": "The board approved the business case and assigned ownership; only it can reassign the role or change the target. The project manager's part is to surface the gap early with the facts."
+        },
+        {
+          "id": "b",
+          "text": "Meet the successor to walk him through the business case and persuade him that the repeat-visit target is achievable with the new system.",
+          "correct": false,
+          "rationale": "Persuasion may help later, but the project manager has no authority to make him the owner or hold him to the target. If he still declines, the gap is unchanged and four months shorter."
+        },
+        {
+          "id": "c",
+          "text": "Record the project manager as interim benefit owner in the register so that the repeat-visit measure continues to be tracked until go-live.",
+          "correct": false,
+          "rationale": "It keeps the register tidy while making it misleading. The project manager cannot realise an operational benefit, and an interim entry lets the real ownership question drift past go-live."
+        },
+        {
+          "id": "d",
+          "text": "Revise the benefits register to use the measures the successor prefers, since the person accountable for realising a benefit should agree its target.",
+          "correct": false,
+          "rationale": "The principle is sound but the authority is missing. Changing an approved benefit target on the say-so of one manager rewrites the business case without the body that approved it."
+        }
+      ],
+      "explanation": "Benefit ownership is assigned by the sponsor or board that approved the business case, and a change of owner reopens both who is accountable and whether the target still holds. The project manager can surface the gap and supply the facts, but cannot appoint an owner, accept a new target on the board's behalf, or quietly absorb the role.",
+      "mindset": "When a benefit loses its owner, take the question to whoever approved the benefit."
+    },
+    {
+      "id": "pmp-pr3-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "dis-benefits",
+        "benefits-register",
+        "net-value",
+        "archetype-make-visible"
+      ],
+      "stem": "Your project is moving a university's written examinations onto a digital platform. The business case counts two benefits: marking turnaround falling from fifteen days to five, and £80,000 a year saved on printing. Pilot sessions show that the exams office, a separate department, needs an extra ninety minutes of staff time per session for device checks, which it estimates at £35,000 a year. The business case does not mention this. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the extra staff time to the risk register with a mitigation plan, since the cost could escalate once the platform runs across every exam session.",
+          "correct": false,
+          "rationale": "The cost is not uncertain — the pilots show it happening. Treating a known consequence of the change as a risk leaves it out of the net value the sponsor is relying on."
+        },
+        {
+          "id": "b",
+          "text": "Record the extra exams-office cost in the benefits register as a dis-benefit with an owner, and report the net position to the sponsor.",
+          "correct": true,
+          "rationale": "A predictable negative consequence of the change belongs beside the benefits it offsets. Recording it with an owner and reporting the net figure keeps the business case honest and lets the sponsor decide with the full picture."
+        },
+        {
+          "id": "c",
+          "text": "Log it as an issue and ask the technical team to redesign the device-check process to remove the extra time before the full rollout.",
+          "correct": false,
+          "rationale": "Reducing the cost is worth trying, but this assumes it can be engineered away. Meanwhile the business case still overstates the net benefit, and if the redesign fails nobody has been told."
+        },
+        {
+          "id": "d",
+          "text": "Ask the exams office to submit a budget request for the additional staff time through the university's normal annual planning cycle.",
+          "correct": false,
+          "rationale": "It funds the cost but moves it off the project's books. The project then reports gross benefits while another department quietly absorbs a cost equal to nearly half of the printing saving."
+        }
+      ],
+      "explanation": "A dis-benefit is a predictable negative consequence of the change itself, often felt by a group outside the project, and it belongs in the benefits register beside the benefits it offsets. Recording it there, with an owner and a measure, keeps the business case honest about net value; treating it only as a risk, an issue or another department's budget line lets the gross figure stand in for the net one.",
+      "mindset": "Report the net value of a change, including what it costs people who did not ask for it."
+    },
+    {
+      "id": "pmp-pr3-110",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "benefits-tracking",
+        "adoption",
+        "business-case",
+        "archetype-make-visible"
+      ],
+      "stem": "A lift-maintenance company rolled out a mobile job app to its field engineers three months ago. The business case assumed 600 engineers would each save 2.5 hours a week, valued at €40 an hour over 46 working weeks a year. Usage data now shows 360 engineers using the app, saving an average of 2 hours a week each. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "case",
+          "label": "Annual benefit assumed in the business case, in €",
+          "numeric": true,
+          "expect": 2760000,
+          "tol": 1000,
+          "unit": "€",
+          "rationale": "600 engineers × 2.5 hours × €40 × 46 weeks = €2,760,000 a year. This is the figure the investment was approved on."
+        },
+        {
+          "id": "run",
+          "label": "Annual benefit at the current run rate, in €",
+          "numeric": true,
+          "expect": 1324800,
+          "tol": 1000,
+          "unit": "€",
+          "rationale": "360 engineers × 2 hours × €40 × 46 weeks = €1,324,800 a year, using the same valuation drivers as the business case so the two figures are comparable."
+        },
+        {
+          "id": "pct",
+          "label": "Share of the business-case benefit being realised, in per cent",
+          "numeric": true,
+          "expect": 48,
+          "tol": 0.5,
+          "unit": "%",
+          "rationale": "1,324,800 ÷ 2,760,000 = 0.48, so 48 per cent. Equivalently, 60 per cent adoption (360 of 600) multiplied by 80 per cent of the expected saving per user (2 of 2.5 hours)."
+        },
+        {
+          "id": "driver",
+          "label": "Which driver accounts for more of the shortfall — adoption or time saved per user",
+          "accept": [
+            "adoption",
+            "adoption rate",
+            "uptake",
+            "number of users",
+            "users",
+            "the adoption rate"
+          ],
+          "rationale": "Adoption is at 60 per cent of plan while time saved per user is at 80 per cent, so too few engineers using the app explains more of the gap than each one saving too little."
+        }
+      ],
+      "explanation": "Tracking benefits against a business case means recomputing the forecast from the same drivers the case used, so that a shortfall can be traced to the assumption that failed. Splitting the gap into its drivers — how many people use the change and how much each one gains — tells you whether the remedy is adoption work or improvement of the change itself.",
+      "mindset": "Trace a benefit shortfall to the assumption that failed, not just the total."
+    },
+    {
+      "id": "pmp-pr3-111",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "sprint-review",
+        "feedback",
+        "backlog-reprioritisation",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Your team is building a donation app for a national charity. At the sprint review, pilot donors say the monthly-giving screen confuses them and ask instead for a one-tap way to repeat their last donation. The product owner moves that request to the top of the backlog and defers two planned features. A developer tells you afterwards that the team's planning is being thrown away. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the product owner to hold the change until the planned features are finished, so the team completes the work it has already prepared.",
+          "correct": false,
+          "rationale": "This puts the plan ahead of what users have just said they need. Finishing prepared work that donors find confusing spends capacity on lower value because it was planned first."
+        },
+        {
+          "id": "b",
+          "text": "Take the change to the charity's trustees for approval first, since the original release plan was presented to them at the start.",
+          "correct": false,
+          "rationale": "Ordering the backlog is the product owner's responsibility. Treating a routine reprioritisation as a change to an approved baseline adds delay to the very feedback loop the reviews exist for."
+        },
+        {
+          "id": "c",
+          "text": "Ask the developer to record the concern as a risk in the team's register so that repeated changes of direction can be tracked over time.",
+          "correct": false,
+          "rationale": "It treats responding to feedback as a threat to be monitored. The developer's concern is a misunderstanding about how agile planning works, and that is better addressed by explaining than by logging."
+        },
+        {
+          "id": "d",
+          "text": "Support the product owner's decision and explain to the developer that reordering after review feedback is how the team maximises value.",
+          "correct": true,
+          "rationale": "The sprint review exists to gather feedback that changes what is built next. The developer's frustration is understandable, and the answer is to explain why the change is the process working rather than failing."
+        }
+      ],
+      "explanation": "In adaptive delivery, plans are a forecast of what is most valuable based on what is known so far, and reviews exist to change that forecast. When user feedback reorders the backlog, the process is working; the leader's job is to help the team see changed plans as learning rather than waste.",
+      "mindset": "A plan that changes because users spoke is a plan doing its job."
+    },
+    {
+      "id": "pmp-pr3-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "sequencing",
+        "early-benefits",
+        "delegated-authority",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are installing solar panels across 30 schools in a multi-academy trust, planned in five waves of six schools in alphabetical order. The charter lets you resequence work within the approved budget and end date. New meter data shows that eight schools have energy bills twice the trust's average, and three of them are in the final wave. Swapping waves would not change cost or finish date. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a change request to the project board to resequence the waves, since the alphabetical order formed part of the approved plan.",
+          "correct": false,
+          "rationale": "A change request is for changes to the baseline, and the baseline here is the budget and end date, neither of which moves. Routing a decision the charter already delegates wastes the board's time and delays the savings."
+        },
+        {
+          "id": "b",
+          "text": "Keep the alphabetical order, because the schools have already been told their installation dates and changing them would disrupt their planning.",
+          "correct": false,
+          "rationale": "Disruption to schools is a real consideration, but it can be managed by communicating new dates. Keeping the order forgoes savings to avoid a conversation."
+        },
+        {
+          "id": "c",
+          "text": "Ask the trust's finance director to decide the installation order, since the savings will show up in the finance director's budget.",
+          "correct": false,
+          "rationale": "The finance director benefits from the savings but does not own the project's sequencing. Handing over a decision the charter gives to the project manager confuses who benefits with who decides."
+        },
+        {
+          "id": "d",
+          "text": "Resequence the waves so the eight highest-cost schools are installed first, and inform the sponsor in the next status report.",
+          "correct": true,
+          "rationale": "The change brings savings forward at no cost to the baseline and sits squarely inside the authority the charter grants. Informing the sponsor keeps the decision visible without turning it into a request."
+        }
+      ],
+      "explanation": "When work can be resequenced without touching the agreed baseline, delivering the highest-value parts first brings benefits forward at no extra cost. If that decision is delegated to the project manager, take it and keep the sponsor informed; escalating a delegated decision is as much a governance error as taking one that is not delegated.",
+      "mindset": "Use the authority you have to bring value forward."
+    },
+    {
+      "id": "pmp-pr3-113",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "value-metrics",
+        "outcomes",
+        "dashboards",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "An agile team at a motor insurer has been building a self-service claims portal for nine months. The sponsor asks for a dashboard showing whether the portal is delivering value, and the team proposes plotting velocity and the number of features released each quarter. The business case was built on cutting handling costs and settling claims faster. Which two measures would best show whether the portal is delivering value?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The share of portal claims that reach settlement without the customer needing to contact a claims handler.",
+          "correct": true,
+          "rationale": "Handling cost falls only when claims go through without a handler. This measures the behaviour change the business case depends on, not the team's activity."
+        },
+        {
+          "id": "b",
+          "text": "Team velocity per sprint, showing how much work the team is completing as the portal grows in scope.",
+          "correct": false,
+          "rationale": "Velocity is a planning aid for the team. Choosing it confuses the rate of output with the value that output creates; a team can be fast while building things nobody uses."
+        },
+        {
+          "id": "c",
+          "text": "The number of portal features released to production each quarter, compared with the roadmap.",
+          "correct": false,
+          "rationale": "Features released measures delivery against a plan. It is the measure the team proposed and the one the sponsor's question is really asking to look past."
+        },
+        {
+          "id": "d",
+          "text": "Average days from first notification to settlement for portal claims, compared with claims made by phone.",
+          "correct": true,
+          "rationale": "Faster settlement is one of the two outcomes the investment was made for, and comparing channels isolates the portal's contribution from wider changes in claims handling."
+        },
+        {
+          "id": "e",
+          "text": "The number of customers who have registered a portal account since launch, tracked month by month.",
+          "correct": false,
+          "rationale": "Registrations look like adoption but show only that people signed up. A customer can register and still phone the handler for every claim, so the figure can rise while no cost is saved."
+        }
+      ],
+      "explanation": "Value measures track the outcomes the investment was made for, which usually means changes in customer or operational behaviour. Delivery measures such as velocity and feature counts describe the team's output; sign-up counts describe interest. Start from the business case and ask which observable behaviour has to change for the benefit to arrive.",
+      "mindset": "Measure the change the investment was for, not the work that went into it."
+    },
+    {
+      "id": "pmp-pr3-114",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "sunk-cost",
+        "continue-or-stop",
+        "business-case",
+        "archetype-trade-off"
+      ],
+      "stem": "A parcel courier's programme is building a bespoke route-planning system in sprints, with depot rollouts scheduled in fixed waves. £2.4 million of the £3.4 million budget is spent. A commercial product launched this quarter covers the courier's core needs, though not the multi-drop loading rules two large depots depend on. Switching would cost £350,000 plus £180,000 a year in licences. The sponsor asks for your recommendation at Thursday's board. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Compare the cost still to spend and the benefits still to gain on each path, excluding the £2.4 million spent, and present it to the board.",
+          "correct": true,
+          "rationale": "Only future costs and benefits differ between the paths, and the board owns the decision. Presenting a forward-looking comparison of both sides lets it make the trade-off knowingly."
+        },
+        {
+          "id": "b",
+          "text": "Recommend continuing the build, as most of the budget is already spent and the bespoke system meets the loading needs of both large depots.",
+          "correct": false,
+          "rationale": "The loading point is legitimate, but the reasoning leans on money already spent, which neither path can recover. The candidate picking this lets the sunk £2.4 million weigh in a decision that should rest only on what is still to come."
+        },
+        {
+          "id": "c",
+          "text": "Recommend switching to the product, as its five-year cost is close to the build's remaining £1 million and it removes the delivery risk on the rest.",
+          "correct": false,
+          "rationale": "It looks forward correctly but compares cost only. It leaves out the value of the loading rules the two largest depots rely on, so the board would decide without the benefit side of the trade-off."
+        },
+        {
+          "id": "d",
+          "text": "Continue the build but reorder the backlog so the multi-drop loading rules are delivered next, as they are the part the product cannot provide.",
+          "correct": false,
+          "rationale": "Building the differentiating feature first is sound backlog thinking if the build continues. But it settles the continue-or-switch question by default, before the board has seen that a choice exists."
+        }
+      ],
+      "explanation": "Whether to continue an investment depends only on the costs and benefits still ahead on each path; money already spent is the same whichever way the decision goes. A useful recommendation sets out both the remaining cost and the remaining value of each option, because comparing on cost alone, or acting in a way that forecloses the choice, hands the decision-maker a narrower question than the one they have.",
+      "mindset": "Decide on what is still to be spent and gained, not on what is gone."
+    },
+    {
+      "id": "pmp-pr3-115",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "backlog-reprioritisation",
+        "release-planning",
+        "changing-value",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "A ferry operator's programme installs ticket gates at terminals to a fixed plan while an agile team builds the booking and gate software. The product owner has authority over release content. Complete each sentence with the response that best protects value. Two choices are not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The gate installation at the two largest terminals has slipped by six weeks, so the gate software the team finishes this month cannot be used there. The team should"
+        },
+        {
+          "id": "c2",
+          "text": "A rival operator's free rebooking offer means a paid flexible-ticket feature planned for the third release would now attract almost no buyers. The product owner should"
+        }
+      ],
+      "options": [
+        {
+          "id": "reorder",
+          "text": "move forward backlog items that can reach passengers without the gates, such as online rebooking",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The slip is a fact the team cannot change, so the response is to put capacity where value can still reach users. Building more gate features now would only lengthen the queue of unusable work."
+        },
+        {
+          "id": "remove",
+          "text": "take the feature out of the release and give its capacity to the next most valuable item",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A feature's value can collapse after it was planned. Since release content sits with the product owner, dropping it is a decision within their authority rather than a formal change."
+        },
+        {
+          "id": "keep",
+          "text": "keep it in the release, since it formed part of the scope presented when the programme was approved",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Holding to planned scope after its value has gone treats the plan as the objective. Release content here is the product owner's to adjust as value changes."
+        },
+        {
+          "id": "pressure",
+          "text": "ask the installation contractor to recover the original gate dates by adding crews at the two terminals",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Recovery may be worth exploring with the contractor, but it is not a response the software team can take, and it ignores what the team should build in the meantime."
+        }
+      ],
+      "explanation": "The value of planned work changes with circumstances — a dependency slips, a competitor moves — and adaptive delivery responds by redirecting capacity to where value can still be realised. Keeping work in a plan after its value has gone, or waiting for the world to return to the plan, both treat the plan as the goal rather than the outcome it was meant to produce.",
+      "mindset": "When the value of planned work changes, change the plan."
+    },
+    {
+      "id": "pmp-pr3-116",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "value-stream-mapping",
+        "lead-time",
+        "waste",
+        "archetype-diagnose-first"
+      ],
+      "stem": "An agile team at an online pharmacy has mapped how a change travels from an agreed idea to customers. Average lead time is 41 days. Each stage shows its hands-on work time and the waiting time before the next stage starts. Select the stage where an improvement would most reduce lead time.",
+      "graphic": {
+        "viewBox": "0 0 700 200",
+        "title": "Value stream map of five stages with work and waiting times",
+        "caption": "Select a stage. Use Tab or the arrow keys to move between stages, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "s1",
+          "n": 1,
+          "label": "Refinement — 2 days work, then 4 days waiting",
+          "x": 15,
+          "y": 50,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "Six days in total, with four of them waiting. Worth improving later, but it accounts for less of the 41 days than the compliance queue."
+        },
+        {
+          "id": "s2",
+          "n": 2,
+          "label": "Development — 6 days work, then 2 days waiting",
+          "x": 150,
+          "y": 50,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "The largest block of hands-on work, which is why it draws attention. But it is mostly value-adding time, and even halving it saves less than the compliance queue costs."
+        },
+        {
+          "id": "s3",
+          "n": 3,
+          "label": "Compliance sign-off — 1 day work, then 17 days waiting",
+          "x": 285,
+          "y": 50,
+          "w": 120,
+          "h": 100,
+          "correct": true,
+          "rationale": "Eighteen of the 41 days sit here, and seventeen of those are waiting. The work takes a day; the queue is the delay. Changing how sign-off is scheduled is the largest single lever on lead time."
+        },
+        {
+          "id": "s4",
+          "n": 4,
+          "label": "Testing — 3 days work, then 3 days waiting",
+          "x": 420,
+          "y": 50,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "Testing is often the first suspect, but here it accounts for six days. Automating it would help, though by far less than the wait for compliance."
+        },
+        {
+          "id": "s5",
+          "n": 5,
+          "label": "Release — 1 day work, then 2 days waiting",
+          "x": 555,
+          "y": 50,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "Three days is already short. Faster deployment is a common improvement target, but it cannot shift lead time much when it is this small a share."
+        }
+      ],
+      "explanation": "In most value streams the delay lives in the waiting between stages rather than in the work itself, so lead time falls fastest by attacking the longest queue, not the busiest stage. Mapping work and waiting separately is what makes this visible; without the map, attention goes to wherever people look busiest.",
+      "mindset": "Look for where work waits, not where people work hardest."
+    },
+    {
+      "id": "pmp-pr3-117",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "outputs-outcomes-benefits",
+        "benefits-review",
+        "value-chain",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A housing association's hybrid programme has delivered a tenant portal. Match each statement from the programme's benefits review to what it evidences. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "The tenant portal went live in all fourteen regions on schedule, with every agreed function accepted by the business."
+        },
+        {
+          "id": "p2",
+          "text": "Sixty-two per cent of repair requests are now raised through the portal instead of by phoning the contact centre."
+        },
+        {
+          "id": "p3",
+          "text": "Contact-centre running costs have fallen by £410,000 a year since the portal was launched."
+        }
+      ],
+      "options": [
+        {
+          "id": "output",
+          "text": "Output",
+          "correct": true,
+          "match": "p1",
+          "rationale": "A delivered, accepted portal is the thing the programme produced. It says nothing yet about whether anyone works differently because of it."
+        },
+        {
+          "id": "outcome",
+          "text": "Outcome",
+          "correct": true,
+          "match": "p2",
+          "rationale": "Tenants choosing the portal over the phone is the change in behaviour that the output was meant to bring about. It is necessary for the benefit, but is not the benefit itself."
+        },
+        {
+          "id": "benefit",
+          "text": "Benefit",
+          "correct": true,
+          "match": "p3",
+          "rationale": "A measurable improvement valued by the organisation, flowing from the outcome. It is the reason the investment was made."
+        },
+        {
+          "id": "disbenefit",
+          "text": "Dis-benefit",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A dis-benefit is a negative consequence of the change for some stakeholder, and none of the three statements describes one."
+        }
+      ],
+      "explanation": "Value flows along a chain: a project produces outputs, outputs enable outcomes when people change what they do, and outcomes yield benefits the organisation can measure. Classifying evidence along that chain shows how far value has travelled — and where it has stalled when an output exists but the outcome has not followed.",
+      "mindset": "Ask how far along the chain from output to benefit the evidence reaches."
+    },
+    {
+      "id": "pmp-pr3-118",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "status-reporting",
+        "benefits-forecast",
+        "pilot-results",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your project is delivering a case-management system for a county council's children's services. The business case rests on each social worker handling 10 per cent more cases. Schedule and cost indices are at 1.0 and 1.02, and your status report is green. A two-month pilot now shows each case takes four minutes longer to record than in the old system. Rollout to 300 social workers is due to be approved at next week's steering board. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a change request to add workflow streamlining to the scope, so that recording time is reduced before the system reaches all 300 social workers.",
+          "correct": false,
+          "rationale": "It may well be part of the answer, but it selects a solution before the board has heard about the problem. The candidate who picks this acts on the finding without first making it visible to the people deciding."
+        },
+        {
+          "id": "b",
+          "text": "Report the pilot finding beside the green performance indicators, with its forecast effect on caseloads, and ask the board whether rollout should proceed.",
+          "correct": true,
+          "rationale": "The project is on plan but the benefit it exists for is in doubt, and the board is about to make the decision this affects. Putting both facts in front of it lets it judge the rollout on value rather than on progress."
+        },
+        {
+          "id": "c",
+          "text": "Keep the status green as scope, time and cost are on track, and pass the pilot finding to the business-change lead to address after rollout.",
+          "correct": false,
+          "rationale": "It rests on the premise that a project performing to plan is a project delivering value. Here the plan is being delivered and the benefit is going backwards, and the board would approve rollout without knowing."
+        },
+        {
+          "id": "d",
+          "text": "Extend the pilot by a month to test whether the extra recording time falls as users gain familiarity, before raising the finding with the board.",
+          "correct": false,
+          "rationale": "A learning curve is a fair hypothesis and more data would help. But the board meets next week to approve rollout, and it should decide whether to wait for that data rather than be shielded from the finding."
+        }
+      ],
+      "explanation": "Schedule and cost performance show whether a project is delivering its plan, not whether the plan still delivers value. When evidence emerges that the intended benefit is in doubt, it belongs in front of whoever is about to commit to the next stage, alongside the performance data, so that they decide on value rather than on progress. A status report that can be green while the benefit erodes is measuring the wrong thing.",
+      "mindset": "On plan is not the same as worth doing; report both."
+    },
+    {
+      "id": "pmp-pr3-119",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "sprint-goal",
+        "product-owner",
+        "obsolete-work",
+        "archetype-route-to-owner"
+      ],
+      "stem": "You are the agile lead for a fintech team in the third day of a two-week sprint. The sprint goal is to complete an open-banking integration with a partner bank. This morning the partner bank announced it is withdrawing from the scheme. Three integration stories are half built. The product owner is in the office but has not yet heard. The team asks you what to do with the rest of the sprint. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the team to finish the integration stories as planned, since they are half built and the partner bank may return to the scheme next year.",
+          "correct": false,
+          "rationale": "It leans on effort already invested and a hope about the future. Finishing work for an integration that cannot be used turns the rest of the sprint into inventory with no buyer."
+        },
+        {
+          "id": "b",
+          "text": "Take the news to the product owner straight away so they can decide whether to cancel the sprint and re-plan it around the backlog.",
+          "correct": true,
+          "rationale": "When the sprint goal may have lost its value, the decision whether to continue sits with the product owner, and every hour spent before they decide may be wasted. Getting the facts to them now is what lets them act."
+        },
+        {
+          "id": "c",
+          "text": "Have the team swap the integration stories for the next items of similar size in the backlog, so the sprint keeps running without disruption.",
+          "correct": false,
+          "rationale": "The instinct to keep the team productive is sound, but whether the sprint goal still holds — and so whether to cancel or re-plan — is the product owner's call. The team would be reshaping the sprint around a decision nobody has made."
+        },
+        {
+          "id": "d",
+          "text": "Let the team carry on and raise the withdrawal at the sprint review, when stakeholders can discuss together what it means for the integration.",
+          "correct": false,
+          "rationale": "The review is the right forum for stakeholder discussion, but waiting about seven working days spends most of the sprint on work that may already be worthless. Timing is the error here."
+        }
+      ],
+      "explanation": "When the value behind committed work disappears mid-cycle, the cost of carrying on accrues by the day, so the information needs to reach whoever owns the decision immediately. In Scrum that is the product owner, who can cancel or re-plan the sprint; the team should neither continue on momentum nor quietly substitute work on its own authority.",
+      "mindset": "When work loses its value, get the news to the decision-maker today."
+    },
+    {
+      "id": "pmp-pr3-120",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "value-engineering",
+        "whole-life-cost",
+        "cost-pressure",
+        "archetype-trade-off"
+      ],
+      "stem": "A hospital is building a new outpatient wing to a fixed design through a contractor, while an internal agile team builds the patient check-in software. The latest cost report forecasts the building €900,000 over its €12 million budget, and the board has said the budget will not increase. The wing exists to cut outpatient waiting times. Which two actions best protect the value the wing is meant to deliver?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Remove the lowest-priced items from the fit-out schedule until the €900,000 overrun has been recovered.",
+          "correct": false,
+          "rationale": "It recovers money by price rather than by function. Cheap items can be essential to how a clinic runs, so cutting them without asking what they do can remove value out of all proportion to the saving."
+        },
+        {
+          "id": "b",
+          "text": "Run a value-engineering review of the design with clinicians and estates staff to find cheaper ways of delivering the same functions.",
+          "correct": true,
+          "rationale": "Value engineering starts from what each element is for and looks for a cheaper way to provide that function. Involving clinicians keeps the waiting-time purpose in view while costs come down."
+        },
+        {
+          "id": "c",
+          "text": "Reduce every work package budget by 7.5 per cent so that the saving is shared evenly across the contractor's trades.",
+          "correct": false,
+          "rationale": "An even cut feels fair and is simple to administer, but it treats every element as equally valuable. It will take as much from the consulting rooms as from the decorative finishes."
+        },
+        {
+          "id": "d",
+          "text": "Test each proposed saving against whole-life running and maintenance costs rather than the construction price alone.",
+          "correct": true,
+          "rationale": "A saving at build that raises running costs for thirty years destroys value rather than protecting it. Checking whole-life cost stops the overrun being moved into the hospital's operating budget."
+        },
+        {
+          "id": "e",
+          "text": "Transfer €900,000 from the check-in software budget, since the agile team can reprioritise its backlog to fit.",
+          "correct": false,
+          "rationale": "It assumes the software is the more flexible budget and therefore the less valuable one. The check-in system serves the same waiting-time goal, and the transfer needs the board's approval in any case."
+        }
+      ],
+      "explanation": "Under cost pressure, protecting value means cutting by function rather than by price or proportion: ask what each element is for, find a cheaper way to provide that function, and judge savings over the life of the asset, not just the build. Cuts chosen for convenience or fairness usually remove value out of proportion to the money saved.",
+      "mindset": "Cut cost by asking what each part is for, not what it costs."
+    },
+    {
+      "id": "pmp-pr3-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "gold-plating",
+        "scope-baseline",
+        "unrequested-work",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are managing delivery of a berth-booking system for a port authority against an approved scope baseline. At a progress check you find that a senior developer has spent the past week building a vessel-tracking dashboard that nobody requested, because he is sure the harbour master will love it. The dashboard is not in the scope statement, and the next milestone is three weeks away. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let him finish the dashboard, since a week of effort has already gone into it, and present it to the harbour master as an extra at the milestone review.",
+          "correct": false,
+          "rationale": "This is the classic gold-plating error: treating effort already spent and a guess about the customer's delight as reasons to deliver work nobody agreed. The extra feature still has to be tested and supported, and it competes with the milestone for the same capacity."
+        },
+        {
+          "id": "b",
+          "text": "Have the dashboard code taken out of the build and raise the week of unplanned work with his line manager as a performance concern to be followed up.",
+          "correct": false,
+          "rationale": "It treats well-meant initiative as misconduct and throws away an idea that may be worth having. Escalating to a line manager is unnecessary when the project manager can simply redirect the work and route the idea properly."
+        },
+        {
+          "id": "c",
+          "text": "Ask him to stop work on the dashboard and return to the planned work, and record the idea so the harbour master can consider it through change control.",
+          "correct": true,
+          "rationale": "Redirecting work the team is doing is squarely within the project manager's authority. Stopping the unrequested build protects the milestone, and recording the idea keeps any genuine value it has available for the person who decides scope."
+        },
+        {
+          "id": "d",
+          "text": "Add the dashboard to the scope baseline yourself, as the extra cost is small and the harbour master is very likely to value having vessel tracking.",
+          "correct": false,
+          "rationale": "A project manager does not change an approved baseline on the strength of an assumption about what the customer will like. However small the cost, adding scope is a decision for whoever owns scope, made through change control."
+        }
+      ],
+      "explanation": "Work that adds features the customer did not ask for is not extra value; it is unapproved scope that consumes capacity, adds testing and support burden, and creates expectations nobody agreed to fund. A good idea discovered during delivery is captured and put to the scope owner, while the team's effort stays on the work that delivers the agreed benefits. The project manager can redirect effort without escalating it.",
+      "mindset": "Value is what the customer agreed to receive, so redirect unrequested work and route the idea to the person who decides."
+    },
+    {
+      "id": "pmp-pr3-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "experimentation",
+        "value-hypothesis",
+        "minimum-viable-product",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A gym chain's agile team plans to build a class-recommendation engine that suggests sessions to members, on the hypothesis that personal suggestions will raise class bookings by 15 per cent. The team estimates twelve weeks for a working version. Nobody has yet tested whether members act on suggestions at all. The product owner asks how to reduce the risk of building something members ignore. What should you advise?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Build a reduced version of the engine in six weeks covering only the three most popular class types, then release it to every member and track bookings.",
+          "correct": false,
+          "rationale": "A smaller build is still a build before learning, and halving the cost is not the same as testing cheaply. Releasing to every member also removes any comparison, so a change in bookings cannot be separated from everything else going on."
+        },
+        {
+          "id": "b",
+          "text": "Survey a sample of members about whether they would welcome class suggestions and how often, and commit to the build if most say they would use them.",
+          "correct": false,
+          "rationale": "A survey tests opinion, and what people say they would use is a weak predictor of what they do. The hypothesis is about booking behaviour, so the evidence needs to come from behaviour."
+        },
+        {
+          "id": "c",
+          "text": "Have staff at two gyms send hand-picked class suggestions to 300 members for four weeks, and compare their bookings with similar members who received none.",
+          "correct": true,
+          "rationale": "This imitates the outcome without building the engine, and it measures the behaviour the hypothesis depends on: whether members book after a suggestion. The comparison group means any rise in bookings can be attributed to the suggestions rather than to the season."
+        },
+        {
+          "id": "d",
+          "text": "Ask the gym managers, who know members' habits best, to review the hypothesis and estimate the likely rise in bookings before the team commits to the build.",
+          "correct": false,
+          "rationale": "An expert estimate replaces one opinion with another. The managers may be right, but their belief does not show whether members act on suggestions, which is the uncertainty that makes the build risky."
+        }
+      ],
+      "explanation": "When the value of a feature rests on an untested assumption about customer behaviour, the cheapest useful step is the smallest experiment that observes that behaviour directly. Delivering the outcome manually to a small group, with a comparison group alongside, can answer the question in weeks for a fraction of the build cost. Opinions, surveys and smaller builds each feel like de-risking but leave the core assumption untested.",
+      "mindset": "Test the behaviour the value depends on before paying to build the thing that depends on it."
+    },
+    {
+      "id": "pmp-pr3-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "early-benefits",
+        "partial-handover",
+        "change-control",
+        "archetype-trade-off"
+      ],
+      "stem": "Your project is building a six-gate extension to a regional airport terminal, due for completion in October. The first three gates are physically finished in May. The airport's commercial director asks you to open them for the summer peak, saying the extra flights would earn about €1.2 million. The contract provides for handover only at overall completion, and the gates still need fire certification. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Decline the request, explaining that the contract provides only for handover at overall completion and that reopening its terms now would put the October completion date at risk.",
+          "correct": false,
+          "rationale": "It treats the contract as fixed when its terms can be changed by agreement. The candidate who picks this protects the plan at the cost of the value it exists to produce, without finding out what early use would actually involve."
+        },
+        {
+          "id": "b",
+          "text": "Assess what early use of the three gates would need and cost, including certification and separating them from the site, and put it to the client as a proposed change to the handover terms.",
+          "correct": true,
+          "rationale": "€1.2 million is a strong reason to look for a way to release value early, and partial handover is a recognised option. Pricing the certification, separation and insurance and presenting it as a change to the agreed terms lets the client weigh the real costs against the earnings."
+        },
+        {
+          "id": "c",
+          "text": "Agree to open the gates in June, since they are physically complete, and arrange the fire certification and site separation in parallel with the remaining construction work.",
+          "correct": false,
+          "rationale": "It commits to operational use before certification exists and changes the handover terms without the client's agreement. Wanting to capture the value is right, but safety and contract are conditions on it, not tasks to run alongside it."
+        },
+        {
+          "id": "d",
+          "text": "Ask the contractor to accelerate the other three gates so that the whole extension can be handed over in July, in time for the larger part of the summer peak.",
+          "correct": false,
+          "rationale": "It chases the same value by compressing the whole schedule, at unknown cost and risk, while overlooking the simpler option of using what is already built. Acceleration may still be worth pricing, but it answers a different question."
+        }
+      ],
+      "explanation": "Completed portions of a predictive project can often start delivering value before overall completion, but early use changes what was agreed about handover, safety and liability. The project manager's job is to turn an early-use request into a priced option — what it needs, what it costs, what risk it moves — and put it to the party who can change the terms. Refusing on contract grounds and agreeing on value grounds both skip that evaluation.",
+      "mindset": "When finished work could earn early, price the conditions and put the option to the owner rather than refusing or improvising."
+    },
+    {
+      "id": "pmp-pr3-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "decommissioning",
+        "benefits-realisation",
+        "backlog-prioritisation",
+        "archetype-trade-off"
+      ],
+      "stem": "A pensions administrator's hybrid programme is moving members from a legacy platform to a new one. The business case rests on switching the legacy platform off, saving €1.4 million a year in licence and support fees. Ninety-four per cent of members have moved; the remaining 6 per cent have unusual benefit histories needing manual mapping, estimated at three sprints. The product owner wants to start the new self-service features members have been asking for. What should the project manager recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Start the self-service features now, since members are asking for them, and complete the remaining migration in parallel whenever the team has spare capacity left over in a sprint.",
+          "correct": false,
+          "rationale": "Migration done with spare capacity is migration that drags, and every month it drags the full legacy cost continues. The candidate who picks this weighs visible demand against a benefit that only appears at the very end."
+        },
+        {
+          "id": "b",
+          "text": "Schedule the remaining migration ahead of the self-service features, so the legacy platform can be switched off and the €1.4 million saving starts, then turn to self-service.",
+          "correct": true,
+          "rationale": "The saving is all-or-nothing: the licence and support fees run until the last member has moved. Three sprints of migration therefore unlock the programme's main benefit, which outweighs starting a feature that members want but that the business case does not depend on."
+        },
+        {
+          "id": "c",
+          "text": "Negotiate a reduced licence with the legacy vendor to cover only the remaining 6 per cent of members, so most of the saving is secured while self-service goes ahead.",
+          "correct": false,
+          "rationale": "It assumes the legacy cost scales with the number of members, when platform licences and support are largely fixed while the platform runs. It also makes the business case depend on a vendor concession nobody has offered."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor to approve administering the remaining members by hand outside any system, so the legacy platform can be switched off now and self-service can start.",
+          "correct": false,
+          "rationale": "It switches the cost from licences to a permanent manual process, and the members left are precisely those with the most complex histories, where manual handling carries the highest error risk. It creates a dis-benefit the business case never counted."
+        }
+      ],
+      "explanation": "When a benefit depends on retiring something, it arrives only when the last dependency is removed, so the final few per cent of a migration often carry the whole saving. Work that unlocks a large all-or-nothing benefit should be weighed by the benefit it releases, not by how small or unglamorous it looks. Partial progress towards a switch-off earns nothing while both systems are still running.",
+      "mindset": "Find the piece of work the benefit is waiting on, and value it by what it releases."
+    },
+    {
+      "id": "pmp-pr3-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "experimentation",
+        "feature-toggles",
+        "evidence-based-decisions",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "An online grocer's team spent three sprints redesigning checkout. The new design was released behind a feature toggle to half of customers for a planned four-week test. The test has finished: customers on the new checkout completed 2.8 per cent fewer orders, and the analyst confirms the difference is not down to chance. The product owner prefers the new design's look and suggests releasing it to everyone and fixing conversion later. What should you advise?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Switch the toggle so all customers get the old checkout, then work with the analyst to find which part of the new design is losing orders.",
+          "correct": true,
+          "rationale": "The test was run to answer whether the redesign adds value, and it has answered no. The toggle makes reverting cheap, and finding where orders are lost turns three sprints of work into learning the next design can use."
+        },
+        {
+          "id": "b",
+          "text": "Release the new design to everyone as the product owner suggests, and put the conversion fixes at the top of the backlog for the next sprint.",
+          "correct": false,
+          "rationale": "It knowingly doubles a measured loss across the whole customer base, on the assumption that the cause is known and quick to fix. Three sprints of effort and a preferred look are not evidence of value."
+        },
+        {
+          "id": "c",
+          "text": "Extend the test for four more weeks to see whether conversion recovers once customers have become used to the new design and its layout.",
+          "correct": false,
+          "rationale": "Customers can take time to adjust, but the planned period was chosen to allow for that and the result is confirmed. Extending a finished test because the answer is unwelcome moves the goalposts and costs orders every week it runs."
+        },
+        {
+          "id": "d",
+          "text": "Keep the half-and-half split running while the team designs a third version that combines the old checkout flow with the new design's visual style.",
+          "correct": false,
+          "rationale": "Iterating towards a better design is reasonable, but leaving half of customers on a version known to lose orders while doing it pays for the next experiment with lost revenue."
+        }
+      ],
+      "explanation": "An experiment only protects value if its result is acted on. When evidence shows a change is destroying value, the first move is to stop the loss, which is what toggles and staged releases make cheap, and the second is to learn why. Effort already spent and attachment to a design are not inputs to the decision; the measured outcome is.",
+      "mindset": "Let the evidence decide what customers get, and treat a failed test as something learned rather than something to rescue."
+    },
+    {
+      "id": "pmp-pr3-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "risk-reduction",
+        "spike",
+        "backlog-ordering",
+        "archetype-trade-off"
+      ],
+      "stem": "A physiotherapy clinic chain's agile team is building a booking app whose business case depends on submitting claims directly to three health insurers. Nobody has yet connected to the insurers' claims interfaces, and one insurer's documentation is incomplete. The product owner plans to spend the first four sprints on booking and reminder screens, so the board sees visible progress at its quarterly review. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Follow the product owner's plan, since visible screens will help secure the board's continued support, and schedule the insurer connections once the booking flow is stable.",
+          "correct": false,
+          "rationale": "It puts the riskiest assumption last. If the claims link turns out to be unworkable, four sprints will have gone into an app that has lost its business case, and the board will learn that after the review rather than at it."
+        },
+        {
+          "id": "b",
+          "text": "Ask the insurers to complete their documentation and confirm their interface specifications in writing before the team starts any work on the claims feature.",
+          "correct": false,
+          "rationale": "It waits on third parties instead of learning by trying. Even complete documentation is not proof that the connection works in practice, and the risk sits untested while the team builds elsewhere."
+        },
+        {
+          "id": "c",
+          "text": "Build the full claims feature first, before any of the screens, because the business case depends on it and the board can follow progress through the claims work.",
+          "correct": false,
+          "rationale": "It over-corrects. Reducing the risk needs a small learning step, not the complete feature, and building it in full before anything else delays every other piece of value."
+        },
+        {
+          "id": "d",
+          "text": "Bring a time-boxed spike on the insurer connections into the first sprint, alongside the booking screens, so the board's review also covers whether the claims link is feasible.",
+          "correct": true,
+          "rationale": "The claims link is the assumption the whole business case rests on, and nobody knows yet whether it works. A small, time-boxed spike tests it early while the screens still give the board something to see, balancing visible value against the biggest threat to it."
+        }
+      ],
+      "explanation": "Early backlog ordering in adaptive work balances visible value against reducing the uncertainty that threatens all of the value. An assumption the business case depends on, which nobody has yet tested, belongs near the front, in the smallest form that will prove or disprove it. Leaving it until later makes progress look good while increasing how much is lost if it fails.",
+      "mindset": "Test the assumption that could sink the product while it is still cheap to find out."
+    },
+    {
+      "id": "pmp-pr3-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "benefits-register",
+        "double-counting",
+        "portfolio",
+        "archetype-make-visible"
+      ],
+      "stem": "You manage a predictive project replacing a rail operator's procurement system. Its business case claims £900,000 a year from better supplier pricing. Reviewing the portfolio benefits register, you notice that a supplier-consolidation project run by another manager claims £1.1 million a year from the same supplier contracts, against the same baseline spend. Different boards approved the two business cases last year. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the overlap with the portfolio office and both sponsors, so the savings from those contracts are attributed once and each business case is restated on that basis.",
+          "correct": true,
+          "rationale": "The overlap affects two approved business cases and the portfolio's reported return, so it belongs with the people who own those decisions. Bringing it to them lets the saving be attributed once and each project be judged on what it really adds."
+        },
+        {
+          "id": "b",
+          "text": "Agree a split of the savings with the other project manager, so that the two benefit figures add up to a credible total before either of them is reported again.",
+          "correct": false,
+          "rationale": "Two project managers re-allocating approved benefits between themselves are deciding something neither owns. It also hides from both boards that their investment decisions rested on overstated figures."
+        },
+        {
+          "id": "c",
+          "text": "Reduce your own project's benefit figure to a conservative estimate in the next report, so your project is not the one left exposed when the overlap comes to light.",
+          "correct": false,
+          "rationale": "It protects one project while leaving the portfolio total overstated and the other case unchallenged. It is also a unilateral change to an approved business case, made for self-protection rather than accuracy."
+        },
+        {
+          "id": "d",
+          "text": "Ask the other project manager to confirm their baseline and calculations privately before raising anything, in case the two claims relate to different parts of the spend.",
+          "correct": false,
+          "rationale": "Checking is sensible when the overlap is uncertain, but the stem establishes the same contracts and the same baseline. Further private checking delays the people who need to correct the record."
+        }
+      ],
+      "explanation": "Across a portfolio each benefit can be counted only once, and two projects claiming the same saving overstate the return and may justify investments that would not stand alone. Attribution is a governance decision, because it changes approved business cases, so an overlap found by a project manager is surfaced to the portfolio and the sponsors rather than settled locally or quietly absorbed.",
+      "mindset": "A benefit claimed twice is a governance problem, so make it visible to the people who approved both."
+    },
+    {
+      "id": "pmp-pr3-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "intangible-benefits",
+        "benefit-measures",
+        "benefits-plan",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A fire and rescue service's project is replacing paper rostering with a self-service system. Two benefits are listed: lower overtime spend, and better firefighter wellbeing through fairer, more predictable shifts. The sponsor proposes deleting the wellbeing benefit from the benefits plan, saying it cannot be given a cash value and so cannot be tracked. The plan is due for approval next week. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the wellbeing benefit and propose measurable indicators for it, such as short-notice shift changes, sickness absence and staff survey scores, each with a baseline.",
+          "correct": true,
+          "rationale": "A benefit without a cash value can still be measured through indicators that move when it is realised. Setting baselines now, before go-live, is what makes it possible to show later whether the change happened."
+        },
+        {
+          "id": "b",
+          "text": "Remove the wellbeing benefit as the sponsor asks, and describe it in the business case narrative instead, so it is acknowledged without needing to be tracked.",
+          "correct": false,
+          "rationale": "It accepts the premise that only cash benefits can be tracked. A benefit that is described but never measured cannot be shown to have been realised, and one of the reasons for the project quietly drops out of view."
+        },
+        {
+          "id": "c",
+          "text": "Convert wellbeing into a cash figure using a national average cost per day of sickness absence, and add it to the overtime saving as one financial total.",
+          "correct": false,
+          "rationale": "Forcing a non-financial benefit into money using a borrowed average gives spurious precision and reduces wellbeing to a single indicator. Adding it to the overtime saving also mixes a cash-releasing saving with one that releases no cash."
+        },
+        {
+          "id": "d",
+          "text": "Keep the wellbeing benefit in the plan without measures for now, and ask the benefit owner to decide after go-live how it should best be assessed and reported to the board.",
+          "correct": false,
+          "rationale": "Deciding the measures after go-live means there is no baseline to compare against, because the old position has already gone. Measurement has to be designed while the before picture can still be captured."
+        }
+      ],
+      "explanation": "Benefits that cannot be expressed in money are measured through observable indicators that change when the benefit is realised, each with a baseline taken before the change. Lacking a cash value is not the same as being unmeasurable, and dropping non-financial benefits leaves a project judged only on part of what it was approved to achieve.",
+      "mindset": "If a benefit matters enough to justify the work, find the evidence that would show it happened."
+    },
+    {
+      "id": "pmp-pr3-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "requirements",
+        "like-for-like",
+        "usage-evidence",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A mining company has contracted a supplier to replace its maintenance management system. The approved requirement, set by the operations director, is to reproduce all 46 reports from the old system. The supplier's design phase starts next month, and building the reports is estimated at 30 per cent of development cost. Access logs you have obtained show that only 11 of the 46 reports were opened in the past year. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Instruct the supplier to design only the 11 reports in use, since building the unused ones would waste around a fifth of the development budget on reports nobody opens.",
+          "correct": false,
+          "rationale": "The reading of the logs is probably right, but the candidate acts on it alone. It changes an approved requirement and a contract without the requirement's owner, and some unopened reports may exist for rare events such as audits or incidents."
+        },
+        {
+          "id": "b",
+          "text": "Proceed with all 46 reports as approved, and recommend in the lessons learned that future projects check how existing reports are actually used before setting their requirements.",
+          "correct": false,
+          "rationale": "It sees the waste and records it for others while the decision point for this project is still a month away. Lessons learned are for what can no longer be changed, and this still can."
+        },
+        {
+          "id": "c",
+          "text": "Share the access logs with the operations director and propose confirming which reports are needed before design starts, making any reduction through a contract change.",
+          "correct": true,
+          "rationale": "The evidence questions an approved requirement, so it goes to the person who owns that requirement while the cost is still uncommitted. Any reduction then follows the contract's change route rather than an instruction to the supplier."
+        },
+        {
+          "id": "d",
+          "text": "Ask the supplier to price each report separately at the end of the design phase, so the operations director can see what the less-used reports are costing.",
+          "correct": false,
+          "rationale": "Making cost visible is useful, but doing it after design is under way gives up the cheapest point to change course. It also shows the price without the usage evidence that makes the price meaningful."
+        }
+      ],
+      "explanation": "A requirement to replicate an existing system carries forward everything it does, including the parts nobody uses. Evidence that a requirement will spend money without delivering value should reach the requirement's owner before the cost is committed, and any change should go through the agreed route rather than around it. Value is protected most cheaply at the point where scope is still being shaped.",
+      "mindset": "Question a requirement with evidence, early, and through the person who owns it."
+    },
+    {
+      "id": "pmp-pr3-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "outcomes-over-output",
+        "existing-capability",
+        "simplest-solution",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "A veterinary practice group wants to cut missed appointments, which cost it about £18,000 a month. The product owner has asked your agile team to build an automated reminder app with two-way confirmation, estimated at three sprints. During refinement, a receptionist mentions that the booking system the practices already use can send text reminders, but the setting has never been switched on. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Start building the app as planned, and recommend that the practices switch on the existing text reminders as an interim measure until the app is ready.",
+          "correct": false,
+          "rationale": "It treats the cheap option as a stopgap rather than a possible solution. Three sprints are committed before anyone knows whether the existing feature already delivers most of the outcome."
+        },
+        {
+          "id": "b",
+          "text": "Suggest the product owner has the existing text reminders switched on at a few practices now, and decides on the app once the effect on missed appointments is known.",
+          "correct": true,
+          "rationale": "The goal is fewer missed appointments, not an app. Switching on a capability the group already pays for tests the cheapest route to that outcome within days, and the result tells the product owner whether the app is still worth three sprints."
+        },
+        {
+          "id": "c",
+          "text": "Raise the existing feature with the product owner after the first sprint, when the team has a working prototype of the app to compare it against.",
+          "correct": false,
+          "rationale": "It spends a sprint before sharing information that could remove the need for that sprint. Waiting for a prototype to compare against biases the comparison towards the thing already being built."
+        },
+        {
+          "id": "d",
+          "text": "Ask the receptionist to write up the text-reminder setting as a backlog item, so the product owner can rank it against the app at the next refinement session.",
+          "correct": false,
+          "rationale": "It treats an option that might make the app unnecessary as one more item competing for priority. The useful step is a quick test before the app is committed, not a place in the queue."
+        }
+      ],
+      "explanation": "Value is the outcome the work is meant to change, and the build is only one way of getting there. Before committing capacity, check whether a simpler route — a process change, a setting, a capability already owned — achieves most of the outcome, and use a quick test of it to decide whether the larger build is still worth doing. Maximising the work not done is a value decision, not a shortcut.",
+      "mindset": "Ask what outcome the request is for, and try the cheapest route to it first."
+    },
+    {
+      "id": "pmp-pr3-131",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "benefit-conflict",
+        "release-decisions",
+        "business-case",
+        "archetype-route-to-owner"
+      ],
+      "stem": "An insurer's hybrid programme is replacing its claims platform. The agile team's next increment auto-approves low-value home claims, cutting settlement time from nine days to one, a headline benefit in the approved business case. Testing against last year's claims shows it would also wave through about a third of the fraudulent claims the manual check now catches, eroding a fraud-savings benefit owned by the head of counter-fraud. The product owner, who decides release content, wants to ship it. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support the product owner's decision to release, since release content is hers to decide, and add a stronger fraud-screening rule to the top of the backlog for the following sprint.",
+          "correct": false,
+          "rationale": "The candidate rightly recognises the product owner's authority over release content but stretches it to cover a trade between benefits that other executives are accountable for. Backlog authority covers how value is delivered within the agreed case, not deciding that another owner's approved benefit can be reduced."
+        },
+        {
+          "id": "b",
+          "text": "Release the auto-approval to a tenth of eligible claims for one month, so the real fraud impact can be measured against the historical test before anyone decides on a full rollout.",
+          "correct": false,
+          "rationale": "Measuring before scaling is usually sound, which is what makes this attractive. But the historical test already shows the effect, a live trial knowingly pays out fraudulent claims to confirm it, and the trial itself is still a trade-off decision taken without the people who own the benefits."
+        },
+        {
+          "id": "c",
+          "text": "Hold the increment back until the team has reworked the auto-approval rules to keep the fraud catch rate at its current level, then release it with both of the benefits intact.",
+          "correct": false,
+          "rationale": "Looking for a design that keeps both benefits is reasonable, but holding the release delays the headline benefit for an unknown period on the project manager's own judgement that fraud savings matter more. That is still choosing between benefits, just in the other direction and still without their owners."
+        },
+        {
+          "id": "d",
+          "text": "Put the quantified gain and loss to the sponsor, with both benefit owners present, so the trade between two approved benefits is decided before the increment is released.",
+          "correct": true,
+          "rationale": "The product owner decides what goes into a release, but the business case allocates benefits to named owners and was approved by the sponsor. A release that knowingly gives up part of one approved benefit to gain another changes the investment's benefit profile, which is the sponsor's call, made with both owners' figures in front of them."
+        }
+      ],
+      "explanation": "When delivering one benefit erodes another in the approved business case, the conflict stops being a delivery decision and becomes an investment decision. Backlog and release authority govern how value is delivered within the agreed case; trading benefits that different owners are accountable for changes the case itself, so it goes to whoever approved the case, with the figures from both sides. Neither shipping nor holding is a neutral default, because each is a choice between benefits.",
+      "mindset": "When one benefit can only be gained by giving up another, take the trade to whoever owns the whole case."
+    },
+    {
+      "id": "pmp-pr3-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "pilot-results",
+        "benefits-forecasting",
+        "rollout-decision",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Your project has piloted a new appointment-booking process at one of a dental group's 28 practices for twelve weeks. Missed appointments fell 38 per cent, against a business-case target of 20 per cent. Throughout the pilot, two of your floor-walkers were on site daily, and the practice manager had volunteered for the pilot. The floor-walkers left a fortnight ago. The sponsor wants Monday's board to approve rollout to every practice and to record 38 per cent as the expected benefit. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support approval on Monday, since the pilot beat its target by a wide margin, and present the 38 per cent with a written caveat that later practices are likely to see somewhat smaller gains.",
+          "correct": false,
+          "rationale": "The caveat shows the candidate has noticed the issue, but the unrepresentative figure still goes into the benefits plan as the expectation. It treats an unknown as a slight overstatement, and the board commits to a number that nobody actually expects to see."
+        },
+        {
+          "id": "b",
+          "text": "Recommend a second twelve-week pilot at a practice with no volunteer manager and no floor-walkers, so that the board approves rollout on results from typical working conditions.",
+          "correct": false,
+          "rationale": "Testing under typical conditions is the right instinct, but another three months delays the benefit at 27 practices when data that answers much of the question already exists. The candidate reaches for the most expensive way of learning before using the cheapest."
+        },
+        {
+          "id": "c",
+          "text": "Recommend rollout on Monday with floor-walkers placed at every practice for its first twelve weeks, so that each practice gets the same support that produced the pilot's result.",
+          "correct": false,
+          "rationale": "Repeating the support might reproduce the result, but it adds a cost the business case never included and commits to it before anyone knows how much of the gain the support produced. The candidate buys certainty without first finding out its price."
+        },
+        {
+          "id": "d",
+          "text": "Before Monday, compare the fortnight since the floor-walkers left with the rest of the pilot, and give the board a forecast stating which pilot conditions rollout will not repeat.",
+          "correct": true,
+          "rationale": "The pilot's result mixes the effect of the new process with conditions rollout will not reproduce: daily support and a volunteer manager. The two weeks without floor-walkers are data already in hand and the cheapest test of how much of the gain survives, and a forecast that names its assumptions lets the board approve on a figure it can rely on."
+        }
+      ],
+      "explanation": "A pilot's result is evidence about the pilot's conditions. Before extrapolating, separate the effect of the change from the effects of piloting itself, such as extra support, volunteer sites and management attention, and use whatever data already exists to estimate how much will carry over. A benefits forecast for rollout should say which conditions it assumes, so the decision-maker knows what the number depends on.",
+      "mindset": "Ask what made the pilot different before promising its result everywhere."
+    },
+    {
+      "id": "pmp-pr3-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "user-feedback",
+        "sprint-review",
+        "validation",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "An agile team at a pharmacy chain has spent five months building a stock-ordering tool for branch pharmacists. Every sprint review is attended by the product owner and two head-office managers, who have accepted each increment so far. No pharmacist has yet seen or used the tool, and the first branch release is planned for month eight. Which two actions would best help the team find out whether the tool delivers value?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Invite a few branch pharmacists to the next sprint reviews to try the latest increment on realistic orders and say what gets in their way.",
+          "correct": true,
+          "rationale": "The people who will use the tool are the only ones who can show whether it works in their day. Bringing them into reviews now gives the team evidence about value while three months of work can still be steered by it."
+        },
+        {
+          "id": "b",
+          "text": "Release the current increment to two branches now and watch how pharmacists use it for their real orders, alongside their existing ordering process.",
+          "correct": true,
+          "rationale": "A small live release tests the tool against real workload, interruptions and stock patterns that no review room can reproduce. Running it alongside the existing process keeps the risk to the branches low."
+        },
+        {
+          "id": "c",
+          "text": "Ask the head-office managers to write more detailed acceptance criteria for each story, drawing on their own knowledge of how branches place their orders.",
+          "correct": false,
+          "rationale": "The candidate tightens the definition of done but keeps the same proxies as the judges of value. More detailed criteria written without users make conformance easier to check, not value easier to see."
+        },
+        {
+          "id": "d",
+          "text": "Keep the month-eight release date but add a dedicated user-acceptance testing phase with branch pharmacists in the sprint just before the branch rollout.",
+          "correct": false,
+          "rationale": "It does involve real users, but at the point where their feedback is most expensive to act on. The candidate treats user involvement as a final gate rather than as the feedback loop that should shape the remaining months."
+        },
+        {
+          "id": "e",
+          "text": "Ask the product owner to survey all branch pharmacists about the ordering features they want most, and then reorder the remaining backlog by the results.",
+          "correct": false,
+          "rationale": "A survey gathers stated wishes about features nobody has seen, not evidence about whether the built tool helps. The candidate mistakes asking users about the product for letting them use it."
+        },
+        {
+          "id": "f",
+          "text": "Have the team shadow the head-office ordering analysts for a week, since they handle branch queries and know where the current ordering process fails.",
+          "correct": false,
+          "rationale": "The analysts know the problems second-hand, and learning from them is useful context. But it adds another proxy rather than putting the product in front of the people whose work it is meant to change."
+        }
+      ],
+      "explanation": "Value is judged by the people who will use the product, in the conditions they will use it, and the sooner the better. Proxies such as product owners, managers and analysts can accept increments, but their acceptance is evidence of their view rather than of the product's value. Put increments in front of real users early, through reviews and small live releases, so the feedback loop measures usefulness and not just conformance.",
+      "mindset": "Let the people who will use the product tell you whether it works for them, early and often."
+    },
+    {
+      "id": "pmp-pr3-134",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "change-absorption",
+        "release-planning",
+        "adoption",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "A building society's hybrid programme is replacing its branch teller system. The agile team releases new teller features to all 60 branches every two weeks. Branch managers report that staff are struggling to keep up: keying errors have risen 15 per cent since the releases began, and two features released last quarter are barely used because staff never had time to learn them. Which two actions best protect the value of what the team delivers?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep deploying every two weeks but hide new teller features behind switches, turning them on for branches in planned monthly bundles with short training notes.",
+          "correct": true,
+          "rationale": "It separates deployment from release. The team keeps its fast, low-risk engineering cadence, while branches receive change at a pace they can learn, with the support to use what arrives."
+        },
+        {
+          "id": "b",
+          "text": "Ask branch managers to nominate staff to join release planning, so the team learns what branches can absorb and schedules changes around their busiest periods.",
+          "correct": true,
+          "rationale": "The branches' capacity to absorb change is now the constraint on value, and the people who live with it are the ones who can describe it. Bringing them into planning lets the team shape releases around that capacity instead of guessing at it."
+        },
+        {
+          "id": "c",
+          "text": "Lengthen the team's sprints to six weeks, so that fewer releases reach branches and each one has been through more thorough testing before it is deployed.",
+          "correct": false,
+          "rationale": "The candidate fixes a problem in the receiving organisation by slowing the team's feedback loop. Longer sprints delay learning and enlarge each change without giving branches any more support to adopt it."
+        },
+        {
+          "id": "d",
+          "text": "Pause new features until keying errors return to their earlier level, and use the team's capacity in the meantime to fix the defects that branches have reported.",
+          "correct": false,
+          "rationale": "It treats rising errors as a quality problem in the software, when the stem points to the pace of change and lack of time to learn. Pausing stops the symptom briefly and leaves the cause in place for when releases resume."
+        },
+        {
+          "id": "e",
+          "text": "Continue releasing every two weeks, since frequent delivery is how value reaches users soonest, and ask HR to schedule extra teller training sessions each month.",
+          "correct": false,
+          "rationale": "The candidate equates deployment with delivered value. Training helps, but adding classroom time on top of fortnightly change asks branches to absorb even more, and features nobody uses still deliver nothing."
+        }
+      ],
+      "explanation": "Value is delivered when the receiving organisation can use what is released, not when the code is deployed. When users' capacity to absorb change becomes the constraint, separate deployment from release: keep the engineering cadence and group what users see into changes they can learn, planned with them. Slowing the team down or pushing harder on the users both miss that the bottleneck sits outside the team.",
+      "mindset": "Pace what users receive to what they can absorb, because features nobody uses deliver nothing."
+    },
+    {
+      "id": "pmp-pr3-135",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "benefit-attribution",
+        "benefits-measurement",
+        "baseline-adjustment",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Your project retrofitted insulation and heat pumps in 120 council-owned buildings, with a business case promising a 25 per cent cut in heating costs. A year after completion, the facilities director reports heating bills down 31 per cent and wants to declare the benefit exceeded. You note that the winter was unusually mild and that the council moved to a cheaper energy tariff mid-year. Which two actions would give the most reliable view of the benefit?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Measure the energy the buildings consumed rather than the money spent on it, and adjust that consumption for the mild winter using heating degree-day data for the area.",
+          "correct": true,
+          "rationale": "Measuring energy in kilowatt-hours removes the tariff change, and degree-day normalisation removes the weather. What remains is much closer to the effect of the retrofit itself, which is what the business case claimed."
+        },
+        {
+          "id": "b",
+          "text": "Compare the change in the retrofitted buildings with the change over the same period in similar council buildings that were not retrofitted at all.",
+          "correct": true,
+          "rationale": "A comparison group experiences the same winter and the same tariff, so the difference between the two groups isolates what the retrofit added. It also catches influences nobody has thought to adjust for."
+        },
+        {
+          "id": "c",
+          "text": "Report the 31 per cent saving as achieved, with a note explaining that the mild winter and the new tariff may have contributed to part of the reduction.",
+          "correct": false,
+          "rationale": "The candidate makes the confounders visible but still reports a figure known to include them. A footnote does not stop the headline becoming the baseline future periods are judged against."
+        },
+        {
+          "id": "d",
+          "text": "Wait for a second full year of bills before reporting any figure, so that the effect of one unusually mild winter is averaged out of the results.",
+          "correct": false,
+          "rationale": "Another year may be mild or harsh, so averaging two winters does not reliably remove weather, and the tariff effect remains in the bills. The candidate delays the review without correcting the measure."
+        },
+        {
+          "id": "e",
+          "text": "Ask the retrofit contractor to calculate the saving from their design models, since the models isolate the effect of the measures they installed.",
+          "correct": false,
+          "rationale": "Design models show the saving the measures were expected to produce, not what was realised in use. The candidate swaps a confounded measurement for a forecast, which cannot confirm a benefit."
+        },
+        {
+          "id": "f",
+          "text": "Survey the people working in the buildings on comfort and heating use, to confirm the fall in bills reflects the retrofit rather than changed behaviour.",
+          "correct": false,
+          "rationale": "Behaviour is one possible influence, but a survey cannot quantify the weather or the tariff, which are the two known distortions here. The candidate investigates a minor confounder and leaves the major ones in place."
+        }
+      ],
+      "explanation": "A benefit can be claimed only to the extent that other causes have been removed from the measure. Measure the physical quantity the change affects rather than a money figure that prices also move, normalise for known external drivers, and where possible compare with a group that did not receive the change. Reporting a headline that includes windfalls overstates value and sets a baseline later periods cannot meet.",
+      "mindset": "Before claiming a benefit, strip out what would have happened anyway."
+    },
+    {
+      "id": "pmp-pr3-136",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "benefits-management",
+        "roles",
+        "accountability",
+        "archetype-route-to-owner"
+      ],
+      "stem": "A predictive project is delivering a fleet-telematics system for a water utility, with fuel and maintenance benefits expected to appear over two years. Match each benefits-management task to the person who should own it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "Keeping the benefits register current during delivery, and handing over the agreed measures and baselines when the project closes."
+        },
+        {
+          "id": "p2",
+          "text": "Changing depot working practices so that drivers act on the route data, then reporting fuel savings every quarter for two years after closure."
+        },
+        {
+          "id": "p3",
+          "text": "Deciding at a stage gate whether the forecast benefits still justify the spending that remains on the project."
+        }
+      ],
+      "options": [
+        {
+          "id": "pm",
+          "text": "The project manager",
+          "correct": true,
+          "match": "p1",
+          "rationale": "During delivery the project manager maintains the benefits register and makes sure the measures and baselines are ready to hand over. The role ends at closure, which is why the handover itself is part of the task."
+        },
+        {
+          "id": "owner",
+          "text": "The benefit owner in fleet operations",
+          "correct": true,
+          "match": "p2",
+          "rationale": "Benefits appear in the business, through changed working practices, long after the project has gone. The benefit owner controls those practices and stays in post to report, so both the change and the reporting sit with them."
+        },
+        {
+          "id": "sponsor",
+          "text": "The project sponsor",
+          "correct": true,
+          "match": "p3",
+          "rationale": "Whether the investment is still worth continuing is a decision about the business case, which the sponsor owns. The project manager supplies the forecast; the sponsor decides what it means for the remaining spend."
+        },
+        {
+          "id": "supplier",
+          "text": "The telematics supplier",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The supplier delivers the system and may offer dashboards that show savings, but it controls neither the utility's working practices nor its investment decisions, so it cannot own any of these tasks."
+        }
+      ],
+      "explanation": "Benefits management assigns each task to the role that controls the thing being managed. The project manager controls delivery and so maintains the record and prepares the handover; the business controls the working practices through which benefits appear, and so owns realising and reporting them after closure; the sponsor owns the investment, and so decides whether it is still justified. A task given to someone who does not control its outcome tends to be reported on rather than achieved.",
+      "mindset": "Give each benefits task to the person who controls the result, not the person who is nearest to the data."
+    },
+    {
+      "id": "pmp-pr3-137",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "release-strategy",
+        "validated-learning",
+        "risk-to-value",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "An agile team at an online travel agency chooses how to put each change in front of customers so that its value can be confirmed without putting revenue at risk. Match each situation to the release approach that fits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "A new hotel-ranking algorithm could lower bookings if it is wrong, so the team wants it shown first to two per cent of visitors, widening only while bookings hold."
+        },
+        {
+          "id": "p2",
+          "text": "A rebuilt search service must cope with peak-season traffic, but its launch is six weeks away, so the team wants it running on live traffic without customers seeing its results."
+        },
+        {
+          "id": "p3",
+          "text": "Two wordings for the booking button are ready, and the product owner wants to know which of them produces more completed bookings."
+        }
+      ],
+      "options": [
+        {
+          "id": "canary",
+          "text": "Canary release",
+          "correct": true,
+          "match": "p1",
+          "rationale": "A canary exposes a change to a small share of real traffic and widens it in steps while the key measure holds. If bookings fall, only a small group was affected and the change is withdrawn cheaply."
+        },
+        {
+          "id": "dark",
+          "text": "Dark launch",
+          "correct": true,
+          "match": "p2",
+          "rationale": "A dark launch runs new code in production on real load while customers still see the existing results. It proves the service copes before anyone depends on it, without revealing it ahead of the planned launch."
+        },
+        {
+          "id": "ab",
+          "text": "A/B test",
+          "correct": true,
+          "match": "p3",
+          "rationale": "When the question is which of two versions performs better, an A/B test splits traffic between them at the same time and compares the outcome measure. Running them together removes the effects of season and demand from the comparison."
+        },
+        {
+          "id": "bigbang",
+          "text": "Single release to all customers on one date",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Releasing to everyone at once gives the widest exposure and the least chance to learn before value is at risk. None of the three situations needs everyone switched over on the same day."
+        }
+      ],
+      "explanation": "Release approaches differ in what they let the team learn and how much value they put at risk while learning it. Progressive exposure suits a change that might do harm, production running without exposure suits a question about capacity or stability, and a simultaneous split suits a choice between versions. Choosing the approach from the question being asked keeps each release both a delivery of value and a test of it.",
+      "mindset": "Decide what a release needs to prove, then expose customers only as far as proving it requires."
+    },
+    {
+      "id": "pmp-pr3-138",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "benefit-categories",
+        "business-case",
+        "cash-releasing",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A city council's hybrid programme is digitising its waste, housing and finance services, and the finance team is classifying the benefits before they go into the business case. Complete each sentence with the category that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Route-planning software lets the existing 40 refuse crews cover 3,000 new homes being built, so the four extra crews that would otherwise be hired are not needed. This benefit is"
+        },
+        {
+          "id": "c2",
+          "text": "An online repairs service lets the council end a £250,000 call-handling contract when it expires next year. This benefit is"
+        },
+        {
+          "id": "c3",
+          "text": "Finance officers each save four hours a week on reconciliations, but no posts are cut and the time goes to answering residents' queries faster. This benefit is"
+        }
+      ],
+      "options": [
+        {
+          "id": "avoid",
+          "text": "cost avoidance, because it prevents spending that would otherwise arise rather than reducing today's budget",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The four crews are not in today's budget; they are a cost the council would have had to take on. Preventing that future cost is avoidance, and it cannot be removed from any current budget line."
+        },
+        {
+          "id": "cash",
+          "text": "a cash-releasing saving, because money can be taken out of a budget line once it is realised",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Ending a contract the council currently pays for removes a real sum from a real budget. That is what makes a saving cash-releasing, and it is the only category here that frees money for other uses."
+        },
+        {
+          "id": "noncash",
+          "text": "a non-cash-releasing efficiency, because time is freed for other work but the budget does not fall",
+          "correct": true,
+          "match": "c3",
+          "rationale": "The officers' time is worth something and is put to better use, but the pay bill stays the same. Counting it as a cash saving would let the business case promise money that never leaves the budget."
+        },
+        {
+          "id": "revenue",
+          "text": "a revenue gain, because the council collects more income as a direct result of the change",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of the three changes brings in new income; each either avoids, removes or redeploys cost. Calling a cost benefit revenue confuses where the value shows up in the accounts."
+        }
+      ],
+      "explanation": "Benefits are classified by where their value shows up, because the category decides what can be done with it. Only cash-releasing savings can be taken out of a budget; cost avoidance prevents future spending that was never budgeted; non-cash-releasing efficiencies free capacity that is redeployed rather than banked. Adding the three together as if they were one kind of money overstates what the business case can actually return.",
+      "mindset": "Know where a benefit will show up in the accounts before adding it to anything else."
+    },
+    {
+      "id": "pmp-pr3-139",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "value-of-information",
+        "experimentation",
+        "expected-value",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A meal-kit company's product owner is weighing a family-plan feature that costs £120,000 to build. If families take it up, it earns £400,000 net margin in its first year; if not, £20,000. She judges take-up 40 per cent likely. A four-week fake-door test costing £15,000 would show reliably whether families take it up, and she would build only if they do. Ignore the delay and any value beyond the first year. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "build",
+          "label": "Expected first-year net value of building now without the test, in £",
+          "numeric": true,
+          "expect": 52000,
+          "tol": 500,
+          "unit": "£",
+          "rationale": "Expected margin is 0.4 × 400,000 + 0.6 × 20,000 = 160,000 + 12,000 = £172,000. Subtracting the £120,000 build cost leaves an expected net value of £52,000."
+        },
+        {
+          "id": "test",
+          "label": "Expected first-year net value of testing first and building only if families take it up, after paying for the test, in £",
+          "numeric": true,
+          "expect": 97000,
+          "tol": 500,
+          "unit": "£",
+          "rationale": "With 40 per cent probability the test shows take-up and the build earns 400,000 − 120,000 = £280,000. With 60 per cent probability nothing is built and the value is zero. That gives 0.4 × 280,000 = £112,000, less the £15,000 test, which is £97,000."
+        },
+        {
+          "id": "max",
+          "label": "The most it would be worth paying for the test, in £",
+          "numeric": true,
+          "expect": 60000,
+          "tol": 500,
+          "unit": "£",
+          "rationale": "Before the test's cost, testing first is worth £112,000 against £52,000 for building blind. The difference, £60,000, is the value of knowing the answer before committing, so any test cheaper than that is worth running."
+        }
+      ],
+      "explanation": "An experiment is worth running when its answer could change the decision and the cost of deciding wrongly is larger than the cost of finding out. The value of the information is the expected value of the decision made with it minus the expected value made without it, and that figure is the ceiling on what the test should cost. When most of the downside comes from building something nobody uses, a cheap test that can prevent the build is usually worth more than it first appears.",
+      "mindset": "Price what you would learn before you price what you would build."
+    },
+    {
+      "id": "pmp-pr3-140",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-3",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "story-mapping",
+        "first-release",
+        "incremental-delivery",
+        "archetype-trade-off"
+      ],
+      "stem": "A hybrid programme is building a new central library to a fixed opening date. The agile team building its online room-booking service has time for only one slice of its story map before opening day, and the library wants residents able to book and pay for rooms from that day. Each slice lists the stories it contains. Select the slice that should form the first release.",
+      "graphic": {
+        "viewBox": "0 0 640 380",
+        "title": "Story map for room booking, with four candidate release slices",
+        "caption": "Select a slice. Use Tab or the arrow keys to move between slices, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "s1",
+          "n": 1,
+          "label": "Slice A — search rooms by date; book one slot; pay by card; receive an email confirmation",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 75,
+          "correct": true,
+          "rationale": "This is the only slice that crosses every step of the journey, so on opening day a resident can actually find, book, pay for and confirm a room. Each step is basic, but a thin complete journey delivers value where a rich partial one delivers none."
+        },
+        {
+          "id": "s2",
+          "n": 2,
+          "label": "Slice B — search by date, capacity, equipment and accessibility; compare rooms side by side; save favourite rooms",
+          "x": 20,
+          "y": 110,
+          "w": 600,
+          "h": 75,
+          "correct": false,
+          "rationale": "Rich searching is valuable, and the accessibility filter makes it tempting, but a resident who finds the perfect room still cannot book or pay for it. The candidate perfects the first step of the journey at the cost of the rest."
+        },
+        {
+          "id": "s3",
+          "n": 3,
+          "label": "Slice C — pay by card, invoice, account or voucher; split payment across a group; automatic refunds",
+          "x": 20,
+          "y": 200,
+          "w": 600,
+          "h": 75,
+          "correct": false,
+          "rationale": "Payment matters to the library's income, which is why a candidate may start here, but with no way to search or book there is nothing to pay for. Depth in one step does not add up to a usable service."
+        },
+        {
+          "id": "s4",
+          "n": 4,
+          "label": "Slice D — book recurring weekly slots; change and cancel bookings; join waiting lists; receive text reminders",
+          "x": 20,
+          "y": 290,
+          "w": 600,
+          "h": 75,
+          "correct": false,
+          "rationale": "These are the features regular users will value most later, so the slice looks customer-focused, but it assumes a booking journey that does not yet exist. It builds refinements before the basic service they refine."
+        }
+      ],
+      "explanation": "A first release earns value only if a user can complete the journey it supports, so it is cut horizontally across every step of the story map, taking the simplest story under each. Richer stories in any single step wait for later slices. When time is fixed, the trade is between depth and completeness, and a thin end-to-end journey beats a deep partial one because a partial journey delivers nothing usable.",
+      "mindset": "Make the whole journey work simply before making any part of it work well."
+    }
+  ]
+}

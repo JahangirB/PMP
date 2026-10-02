@@ -1,0 +1,1969 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "People 2 — Conflict",
+  "questions": [
+    {
+      "id": "pmp-p2-101",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "conflict-source",
+        "schedule",
+        "construction",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a hospital extension, the main contractor's site manager and the mechanical and electrical subcontractor's foreman have argued twice this week about access to the level 2 ceiling void, and the second argument stopped work for half a day. Each accuses the other of ignoring the agreed sequence. Ten days ago you issued a revised three-week look-ahead programme after a steel delivery slipped. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bring the site manager and the foreman together on site to agree a daily access rota for the void, and record the agreed rota in the site diary.",
+          "correct": false,
+          "rationale": "This is the choice of a candidate who jumps to a collaborative fix for the symptom. A rota negotiated on top of a programme that may itself be contradictory will break the next time the look-ahead is followed."
+        },
+        {
+          "id": "b",
+          "text": "Check the revised look-ahead to see whether it now places both trades in the level 2 void at the same time, before meeting either of them.",
+          "correct": true,
+          "rationale": "Both parties claim to be following the agreed sequence, and the sequence was reissued ten days ago by the project manager. Testing that document first is quick and can settle the dispute outright, because if it double-books the void, neither party is in the wrong."
+        },
+        {
+          "id": "c",
+          "text": "Remind both parties that under the subcontract the main contractor controls site access, and ask the foreman to follow the site manager's instructions on the void.",
+          "correct": false,
+          "rationale": "This picks contractual authority over diagnosis. It may be right on paper, but if the revised programme put the subcontractor in the void, ruling against the foreman penalises the party who was following the plan."
+        },
+        {
+          "id": "d",
+          "text": "Ask each of them to send you a short written account of both incidents, so that you can establish the facts properly before deciding how to respond.",
+          "correct": false,
+          "rationale": "The instinct to gather facts is sound, but this gathers accounts of behaviour when the evidence that settles the question is a document you issued. It also frames the matter as conduct to be investigated rather than a sequencing problem."
+        }
+      ],
+      "explanation": "When two parties each claim to be following the agreed plan, the first hypothesis to test is that the plan itself has changed or contradicts itself. Conflicts often originate in an artefact the project manager controls, such as a revised schedule, a reissued drawing or an updated responsibility chart, and checking that source is quick and decisive. Mediating, ruling or investigating behaviour before ruling out your own documents treats a structural cause as a personal one.",
+      "mindset": "When both sides say they are following the plan, check the plan first."
+    },
+    {
+      "id": "pmp-p2-102",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "stand-up",
+        "working-agreement",
+        "facilitation",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "During the daily stand-up of a mobile banking team, two developers start debating whether to adopt a new state-management library. After three minutes the rest of the team are checking their phones. The team's working agreement, written at the start of the release, says that technical debates raised at stand-up are parked and taken up straight afterwards by the people involved. As the team's facilitator, what should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Point to the working agreement, park the library question, and finish the stand-up before the two developers and anyone interested continue straight afterwards.",
+          "correct": true,
+          "rationale": "The team has already decided how to handle this situation. Applying its own agreement protects the stand-up's purpose and still gives the library question a proper discussion with the people who care about it."
+        },
+        {
+          "id": "b",
+          "text": "Let the debate run on to a conclusion, because a library choice affects the whole team and settling it now saves arranging a separate meeting later in the day.",
+          "correct": false,
+          "rationale": "This mistakes the importance of the topic for a reason to hold it in the wrong forum. Most of the team has disengaged, and letting it run overrides the rule the team set for exactly this case."
+        },
+        {
+          "id": "c",
+          "text": "Make the library decision yourself on the spot, so that the stand-up can move on and the two developers stop debating the question in front of the whole team.",
+          "correct": false,
+          "rationale": "This confuses ending the debate with resolving it. A technical choice imposed by the facilitator removes ownership from the developers and leaves their disagreement unaddressed."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner, who is present, to say whether the library question is a priority for this sprint before the two developers continue their debate in the stand-up.",
+          "correct": false,
+          "rationale": "This routes a technical question to someone who owns priorities rather than implementation, and it keeps the debate running inside the stand-up while the product owner considers it."
+        }
+      ],
+      "explanation": "A team's working agreement is the rule it set for itself in calm conditions, and the facilitator's job in a heated moment is to apply it rather than improvise a new one. Parking a debate is not suppressing it: it moves the discussion to a time and group suited to it, while protecting the purpose of the meeting it interrupted. Deciding for the team, or letting one discussion consume everyone's time, both undermine the agreement the team made.",
+      "mindset": "Use the rules the team wrote for itself before inventing new ones in the moment."
+    },
+    {
+      "id": "pmp-p2-103",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "conflict-modes",
+        "accommodating",
+        "documentation",
+        "archetype-trade-off"
+      ],
+      "stem": "Your firm is delivering a telemetry upgrade for a water company. The client's records manager, who owns its document standards, wants all design documents in the company template, which the client will maintain for fifteen years. Your lead architect insists his own template is clearer, and on presentation he is right; content is unaffected. The disagreement has held up document reviews for a week, acceptance is three weeks away, and conversion would take the architect two days. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold a joint session with the records manager and the architect to design a combined template that keeps the clearest features of each, then apply it to every document.",
+          "correct": false,
+          "rationale": "Collaboration is the reflex answer, and the right one when both sides' core concerns are at stake. Here only presentation is at stake, and designing a new template three weeks before acceptance asks the client to bend a corporate standard for one project."
+        },
+        {
+          "id": "b",
+          "text": "Let the architect keep his own template through design, then convert every document to the client's template in a single pass immediately before acceptance.",
+          "correct": false,
+          "rationale": "This looks like a way to have both, but reviews are stalled now because the documents are in the wrong template. Deferring the conversion keeps them stalled and moves the same two days of rework to the most pressured point in the project."
+        },
+        {
+          "id": "c",
+          "text": "Ask the architect to adopt the client's template, acknowledge that his layout is clearer, and record his suggested improvements for the client in the handover notes.",
+          "correct": true,
+          "rationale": "The issue matters far more to the records manager, who owns the standard and will live with the documents for fifteen years, than to anything the project is accountable for. Yielding costs two days, unblocks reviews and keeps the architect's point on record rather than discarding it."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor to decide which template is used, so that neither the records manager nor the architect is seen to back down in front of the other.",
+          "correct": false,
+          "rationale": "This protects both parties' standing at the cost of sponsor attention on a presentation question. It also takes the decision away from the records manager, who already owns the standard in question."
+        }
+      ],
+      "explanation": "The right conflict-handling mode depends on what is at stake for each side, not on who has the better argument. Where an issue matters far more to the other party than to the outcome you are accountable for, and that party owns the standard in question, yielding is a deliberate investment rather than a defeat, provided the conceding side's point is acknowledged and not lost. Collaboration is worth its cost when both parties' core concerns are at risk; spending it on presentation weeks before acceptance is poor value.",
+      "mindset": "Concede deliberately on what matters little to the outcome, and say why you are doing it."
+    },
+    {
+      "id": "pmp-p2-104",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "conflict-source",
+        "incentives",
+        "manufacturing",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "On a line-automation project at a food plant near Lyon, the production planning lead and the quality lead clash at every weekly review: one pushes to run trial batches faster, the other keeps holding them. The HR business partner offers to arrange mediation. Looking at the plant's scorecard, you notice that the planning lead's bonus is tied to output volume and the quality lead's to scrap rate, and both measures apply to the trial batches. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the offer of mediation, so that the two leads can work through their frustrations with a trained neutral party and rebuild a working relationship.",
+          "correct": false,
+          "rationale": "This treats a structural conflict as an interpersonal one. Mediation may improve the tone, but both leads will leave it with the same opposing targets and the clash will resume at the next review."
+        },
+        {
+          "id": "b",
+          "text": "Facilitate a working session with both leads to agree decision rules for when a trial batch is released or held, and record those rules in the quality plan.",
+          "correct": false,
+          "rationale": "This is a strong collaborative move that a good project manager would consider. Its flaw is that it asks two people to trade off targets they did not set and are paid on, so any rules they agree are undercut by the scorecard."
+        },
+        {
+          "id": "c",
+          "text": "Raise the conflicting targets with the two leads' line managers and the sponsor, and ask them to agree how the trial batches will be measured for this project.",
+          "correct": true,
+          "rationale": "Each lead is acting rationally on what the plant rewards. The measures belong to their line managers, so that is where the conflict can actually be removed, and the sponsor needs to know that the scorecard is working against the project."
+        },
+        {
+          "id": "d",
+          "text": "Restructure the weekly review so that the two leads report on trial batches separately, which limits their direct contact until the automation work completes.",
+          "correct": false,
+          "rationale": "This chooses withdrawal to reduce visible friction. The opposing pressures on the trial batches remain, and moving them out of the review means the project manager stops seeing the conflict while it carries on in the work."
+        }
+      ],
+      "explanation": "Before choosing how to resolve a conflict, check whether the people in it are acting rationally on what the organisation rewards. When incentives point in opposite directions, the disagreement is a symptom of a structural conflict, and neither mediation nor a facilitated agreement between the parties can remove it, because they do not own the measures. The fix lies with whoever sets the targets, and the project manager's contribution is to put the misalignment in front of them.",
+      "mindset": "Look at what people are rewarded for before concluding that they cannot get along."
+    },
+    {
+      "id": "pmp-p2-105",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "distributed-teams",
+        "decision-making",
+        "transparency",
+        "archetype-make-visible"
+      ],
+      "stem": "Your payments team is split between Leeds and Pune. Pune developers have started posting terse comments and missing refinement sessions. In a one-to-one, the Pune lead tells you they keep learning about design decisions after Leeds colleagues have settled them over coffee or at the whiteboard, and are then asked to build against them. Leeds developers say nothing is being hidden and that Pune can just ask. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move the regular refinement session to a time that suits both sites better, and ask the Leeds developers to join it from their own desks rather than a meeting room.",
+          "correct": false,
+          "rationale": "This addresses a real equity problem in meetings, which is why it appeals. But the decisions the Pune lead describes are being made outside meetings, so the change leaves the actual cause untouched."
+        },
+        {
+          "id": "b",
+          "text": "Arrange for two Pune developers to spend a sprint working in Leeds, so that the two groups build personal relationships that make informal conversations easier.",
+          "correct": false,
+          "rationale": "This bets on relationships to fix a process problem. It is costly and temporary, and once the visitors return the same pattern resumes, because informal conversations in one office are still where decisions get made."
+        },
+        {
+          "id": "c",
+          "text": "Agree with both sites that a design decision counts only once it is posted in the shared channel, with a set window for either site to comment before work starts.",
+          "correct": true,
+          "rationale": "The conflict comes from unequal access to decisions, not bad intent. Changing where a decision becomes real removes the asymmetry without asking anyone to stop talking informally."
+        },
+        {
+          "id": "d",
+          "text": "Reassure the Pune lead that the Leeds developers mean well, and ask him to encourage his developers to raise questions in the channel whenever they need more context.",
+          "correct": false,
+          "rationale": "This places the burden of fixing the problem on the group being excluded. It also confirms the Leeds view that Pune should simply ask, which is the attitude fuelling the friction."
+        }
+      ],
+      "explanation": "In a distributed team, conflict often comes from unequal access to decisions rather than from bad intent on either side. Making the decision process itself visible and shared, so that a decision counts only when it is recorded where everyone can see it and others have had time to respond, removes the asymmetry without asking anyone to change how they talk. Remedies aimed at goodwill or relationships help, but they leave the structural cause in place.",
+      "mindset": "Make where decisions happen visible before asking people to trust each other more."
+    },
+    {
+      "id": "pmp-p2-106",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "conflict-of-interest",
+        "facilitation",
+        "impartiality",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "On a council housing-repairs system rollout, the test lead and the business analyst are in a running dispute about whether failed test cases reflect defects or unclear requirements. You have worked with the test lead for eight years and play in the same five-a-side team. The business analyst has told a colleague she expects you to side with him. The sponsor has asked you to get the dispute resolved this week. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Run the resolution session yourself, and make a point of giving the business analyst's arguments full and visible weight so that she can see the outcome is fair.",
+          "correct": false,
+          "rationale": "This relies on conduct to overcome perception. However even-handed the session, she will read any outcome favouring the test lead as bias, and overcorrecting to prove fairness risks being unfair to him."
+        },
+        {
+          "id": "b",
+          "text": "Ask the sponsor to resolve the dispute instead, explaining that your long working relationship with the test lead means you cannot be seen as impartial here.",
+          "correct": false,
+          "rationale": "This rightly recognises the conflict of interest but responds by handing back accountability. A team-level dispute lands on the sponsor, who asked you to get it resolved, not to pass it up."
+        },
+        {
+          "id": "c",
+          "text": "Set the personal angle aside and settle the dispute on the evidence, reviewing each failed test case against the signed-off requirements with both of them present.",
+          "correct": false,
+          "rationale": "An evidence-based review is the right content for the session, which is why this tempts. But it ignores the perception problem, so even a correct finding may be rejected by the business analyst as the friend's verdict."
+        },
+        {
+          "id": "d",
+          "text": "Tell both of them about the friendship openly, and ask a neutral colleague such as the PMO lead to facilitate the session, while you stay accountable for the outcome.",
+          "correct": true,
+          "rationale": "Declaring the relationship removes the suspicion of a hidden one, and a neutral facilitator gives both parties a process they can accept. Keeping accountability means the dispute still gets resolved this week."
+        }
+      ],
+      "explanation": "A resolution only holds if both parties accept the process that produced it, and a facilitator one party sees as biased cannot deliver that, however fair they intend to be. When the project manager has a relationship with one side, the conflict of interest should be declared and the facilitation handed to someone neutral, without passing on accountability for getting the dispute settled. Being fair is necessary; being seen to be fair is what makes the outcome stick.",
+      "mindset": "Declare your own stake in a dispute before offering to settle it."
+    },
+    {
+      "id": "pmp-p2-107",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "conflict-source",
+        "data-quality",
+        "insurance",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a claims-reserving project for a motor insurer, two actuarial analysts present reserve forecasts for the same portfolio that differ by 8 per cent. Each insists the other's model is flawed, the discussion at the project review became heated, and both have asked you to back their method in the steering report due next Thursday. You learn that one extracted the claims data at month-end and the other ten days later. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the chief actuary to review both models and decide which method the project should use, since the choice of method is a professional judgement outside your expertise.",
+          "correct": false,
+          "rationale": "Routing a method choice to its professional owner is reasonable later. Doing it first assumes the gap comes from method, and asks the chief actuary to adjudicate a dispute that may disappear once the inputs match."
+        },
+        {
+          "id": "b",
+          "text": "Ask both analysts to rerun their models on one agreed data extract, and see how much of the 8 per cent gap remains before any discussion of method.",
+          "correct": true,
+          "rationale": "The two forecasts rest on different data, so nobody yet knows whether the methods disagree. Holding the input constant is quick, and it either dissolves the dispute or shrinks it to the part that is genuinely about method."
+        },
+        {
+          "id": "c",
+          "text": "Report both forecasts in the steering report as a range, with a note explaining that the analysts disagree on method and that work to reconcile them is under way.",
+          "correct": false,
+          "rationale": "Transparency is a good instinct, but this tells the steering committee there is a method dispute when there may only be a data-timing difference. It reports a diagnosis that has not been made."
+        },
+        {
+          "id": "d",
+          "text": "Facilitate a working session in which the analysts walk through each other's assumptions line by line and agree a blended approach that both of them can support.",
+          "correct": false,
+          "rationale": "This is the collaborative answer applied to the wrong problem. If the gap comes from data timing, blending two methods to split the difference produces a forecast that is wrong in a new way."
+        }
+      ],
+      "explanation": "Many technical disagreements are not about method at all but about inputs: the parties are reasoning correctly from different facts. Before facilitating, adjudicating or reporting a dispute between experts, hold the inputs constant and see whether the disagreement survives. If it vanishes, there was no conflict to resolve; if it shrinks, the remaining gap is the real one and is far easier to discuss.",
+      "mindset": "Make sure both sides are looking at the same facts before asking whose reasoning is right."
+    },
+    {
+      "id": "pmp-p2-108",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "communication-channel",
+        "escalation",
+        "utilities",
+        "archetype-act-now"
+      ],
+      "stem": "On a substation replacement project for an electricity network operator, an email thread between the asset manager and your design lead about earthing specifications has grown to fourteen messages in two days. Each reply is sharper than the last, and this morning the design lead copied in two directors. Neither person has spoken to the other since the thread began. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reply to the whole thread with a clear summary of both technical positions, so that the directors can see the facts and the tone of the thread is reset.",
+          "correct": false,
+          "rationale": "This tries to calm the thread from inside it. Another message to a wider audience extends the written exchange that is driving the escalation and invites both parties to reply to your summary."
+        },
+        {
+          "id": "b",
+          "text": "Speak to each of them today, arrange a call between the two of them this week, and reply on the thread only to say the discussion is moving to a conversation.",
+          "correct": true,
+          "rationale": "The conflict is escalating because of the medium as much as the content. Changing to a direct conversation quickly stops the spiral, and the short reply tells the directors it is being handled."
+        },
+        {
+          "id": "c",
+          "text": "Ask both of them to take the directors off the thread and to continue the technical discussion between themselves by email until they reach agreement.",
+          "correct": false,
+          "rationale": "Narrowing the audience helps, which is why this tempts. But it keeps the medium that is hardening their positions, and two people who have not spoken in two days are unlikely to settle this in writing."
+        },
+        {
+          "id": "d",
+          "text": "Wait a day to see whether the directors respond, because their involvement may settle the earthing specification question faster than further discussion at project level.",
+          "correct": false,
+          "rationale": "This treats the directors as a resolution route. It lets the escalation run unmanaged and pulls senior people into a question the project should be able to settle itself."
+        }
+      ],
+      "explanation": "Written exchanges escalate conflict because tone is lost, each reply is composed for an audience, and there is no chance to repair a misreading in the moment. When a thread is visibly deteriorating, the quick move is to change the medium to a direct conversation and to say so on the thread, so that the wider audience knows it is being handled. The longer the written exchange runs, the more positions harden in front of witnesses.",
+      "mindset": "Move a heated exchange off email and into a conversation before it hardens."
+    },
+    {
+      "id": "pmp-p2-109",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "retrospective",
+        "psychological-safety",
+        "artificial-harmony",
+        "archetype-make-visible"
+      ],
+      "stem": "On a retail e-commerce team, retrospectives have been short and positive for four sprints. Yet you have heard in corridors that several developers are frustrated with the product owner adding stories after sprint planning, and one has said retrospectives are pointless because the product owner attends. Velocity has dropped by a fifth. Which two actions should you take as the team's facilitator?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the late additions with the product owner yourself, quoting the velocity drop, so that the developers do not have to confront the issue in front of her.",
+          "correct": false,
+          "rationale": "This carries the team's complaint by proxy. The developers' concern is handled without them, the product owner hears it second-hand, and the team learns that conflict is something the facilitator takes away rather than something they work through."
+        },
+        {
+          "id": "b",
+          "text": "Open the next retrospective with an anonymous safety check, and change the format to collect written input before discussion if it shows people do not feel free to speak.",
+          "correct": true,
+          "rationale": "Silence plus corridor complaints suggests the room does not feel safe. Measuring that anonymously, and lowering the cost of speaking if needed, lets the issue surface in the forum where the team and product owner can deal with it together."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to stay away from the next few retrospectives, so that the developers can speak openly about how the sprints are currently being run.",
+          "correct": false,
+          "rationale": "This buys openness by removing the one person who can change the behaviour. The issue would be discussed without her, and excluding a member of the Scrum team from its own retrospective deepens the divide."
+        },
+        {
+          "id": "d",
+          "text": "Tell the team you have heard there are frustrations they are not raising, and invite anyone who feels strongly to come and see you privately during the week.",
+          "correct": false,
+          "rationale": "This acknowledges the problem but moves it into private channels. It may expose who spoke in the corridor, and it again resolves nothing between the team and the product owner."
+        },
+        {
+          "id": "e",
+          "text": "Track stories added after sprint planning on the team board, with when and why each was added, so that the pattern is visible data at the next retrospective.",
+          "correct": true,
+          "rationale": "Shared facts make a hard conversation easier to start. Visible data about mid-sprint additions lets the team discuss a pattern rather than accuse a person, and gives the product owner something concrete to respond to."
+        }
+      ],
+      "explanation": "Unspoken conflict is still conflict, and a team that only says positive things in its retrospective has usually concluded that disagreement is unsafe or pointless. The facilitator's job is to lower the cost of raising the issue and to put shared facts on the table, so that the team can address it directly with the person involved. Carrying complaints on the team's behalf, or removing the person concerned, resolves nothing and teaches the team to route conflict around rather than through.",
+      "mindset": "Treat silence in a retrospective as a signal to investigate, not as evidence of harmony."
+    },
+    {
+      "id": "pmp-p2-110",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "estimation",
+        "team-formation",
+        "definition-of-done",
+        "archetype-make-visible"
+      ],
+      "stem": "A public-sector digital team has been formed by merging four in-house developers with four from a contracted supplier. In the first two sprints, the supplier developers' estimates were consistently lower, and the in-house developers now say they are being made to look slow. The supplier developers say the in-house group pads its numbers. Tension is showing in refinement. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move to whole-team estimation, such as planning poker, so that each estimate belongs to the team and gaps between individual estimates are discussed when they appear.",
+          "correct": true,
+          "rationale": "Separate estimates by group created the 'their numbers against ours' framing. Estimating together turns each gap into a short conversation about the work rather than evidence for an accusation."
+        },
+        {
+          "id": "b",
+          "text": "Keep the two groups estimating separately for another two sprints and compare their estimates with actual effort, so that the data shows which group is closer.",
+          "correct": false,
+          "rationale": "This looks evidence-based, but it institutionalises the split and turns estimation into a contest one group must lose. It also delays the joint understanding the merged team needs now."
+        },
+        {
+          "id": "c",
+          "text": "Ask the supplier's delivery manager to remind his developers to allow for the client's review and approval steps when they put estimates on their work.",
+          "correct": false,
+          "rationale": "This assumes the supplier side is the one that is wrong, and routes a team matter to a manager outside it. Even if the supplier's estimates omit something, the in-house developers have not been asked what theirs include."
+        },
+        {
+          "id": "d",
+          "text": "Ask the two groups to compare what each currently counts as done, including testing and documentation, and agree one definition of done for the merged team.",
+          "correct": true,
+          "rationale": "Different numbers often mean different work being counted. Making each group's definition of done explicit is likely to explain much of the gap and gives the merged team one standard to estimate against."
+        },
+        {
+          "id": "e",
+          "text": "Stop reporting estimates and velocity outside the team for the time being, so that nobody feels judged on their numbers while the merged team settles in.",
+          "correct": false,
+          "rationale": "This lowers the pressure, which is a reasonable aim, but it hides the disagreement rather than resolving it. The two groups will still clash in refinement because the cause of the gap is unchanged."
+        }
+      ],
+      "explanation": "When two groups' numbers diverge, the disagreement is usually about what is being counted rather than about anyone's honesty or skill. Making the assumptions behind the numbers explicit, such as what 'done' includes and what each estimate covers, turns an accusation into a comparison, and making estimation a shared activity removes the us-and-them framing that feeds factional conflict.",
+      "mindset": "When numbers become accusations, surface the assumptions behind them."
+    },
+    {
+      "id": "pmp-p2-111",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "conflict-source",
+        "project-records",
+        "aviation",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On an airport baggage-system upgrade, three disagreements have reached you this week. Match each disagreement to the record that would most directly settle it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The airport's operations lead and your designer disagree about whether replacement reclaim-hall screens were agreed as part of the project three months ago."
+        },
+        {
+          "id": "s2",
+          "text": "The conveyor supplier and your test engineer disagree about whether a sorter that routed 98.5 per cent of test bags correctly has passed its factory test."
+        },
+        {
+          "id": "s3",
+          "text": "The installation supervisor says the night crew was told to stop work at 04:00; the crew leader says 05:00 was agreed at Tuesday's coordination meeting."
+        }
+      ],
+      "options": [
+        {
+          "id": "scope",
+          "text": "The approved scope baseline together with the change log",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Whether something is in the project is answered by what was baselined and what has been formally added since. Recollections of a conversation three months ago cannot settle it; the baseline and change log can."
+        },
+        {
+          "id": "fat",
+          "text": "The signed-off factory acceptance test procedure and its pass thresholds",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Whether a result is a pass is answered by the threshold both parties signed off before the test ran. If the procedure states no threshold for routing accuracy, that gap in the procedure is the real cause of the dispute and needs fixing."
+        },
+        {
+          "id": "mins",
+          "text": "The minutes and action log of Tuesday's coordination meeting",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A disagreement about what a specific meeting agreed is settled by the record of that meeting. This is the reason action logs carry times, owners and dates rather than general summaries."
+        },
+        {
+          "id": "lessons",
+          "text": "The lessons learned register from earlier upgrades",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A candidate may pick it because it feels like the place where past problems are recorded, but it holds what earlier projects learned, not what this project agreed, so it cannot settle any of these disputes."
+        }
+      ],
+      "explanation": "Many disagreements are really disputes about a fact that should already be on record: what was agreed, what counts as a pass, what a meeting concluded. Before mediating, identify which record would settle the question and go to it, because a documented answer ends the argument without anyone having to back down. Where the record is silent or contradictory, the gap in the record is the root cause to correct.",
+      "mindset": "Ask which record would settle a dispute before treating it as a clash of personalities."
+    },
+    {
+      "id": "pmp-p2-112",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "decision-ownership",
+        "escalation",
+        "energy",
+        "archetype-route-to-owner"
+      ],
+      "stem": "You manage a hybrid upgrade of a biomass power plant: agile teams build the control software while a contractor carries out the mechanical works. Match each disagreement to the person best placed to resolve it. Two choices are not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "Two software teams disagree about which of their features should go into the next shared release of the plant control system."
+        },
+        {
+          "id": "p2",
+          "text": "A developer and a tester on one software team disagree about whether a story meets the definition of done that the team wrote for itself."
+        },
+        {
+          "id": "p3",
+          "text": "The mechanical contractor's supervisor and your commissioning engineer disagree about whether a lock-out step in the safe system of work can be skipped during a re-test."
+        }
+      ],
+      "options": [
+        {
+          "id": "po",
+          "text": "The product owner who orders the shared release backlog",
+          "correct": true,
+          "match": "p1",
+          "rationale": "Which features go into a shared release is an ordering decision about value, and the person who owns the shared backlog owns that decision. Facilitation can help, but the teams cannot settle it by negotiating between themselves."
+        },
+        {
+          "id": "team",
+          "text": "The team members concerned, working from their own definition of done",
+          "correct": true,
+          "match": "p2",
+          "rationale": "The definition of done belongs to the team that wrote it, so applying it is the team's call. Lifting it out of the team takes away the ownership that makes the definition mean anything."
+        },
+        {
+          "id": "safety",
+          "text": "The site safety manager who owns the safe system of work",
+          "correct": true,
+          "match": "p3",
+          "rationale": "Whether a step in a safe system of work can be varied is decided by whoever owns that system. Neither the project schedule nor a negotiated compromise between the two parties has any standing to change it."
+        },
+        {
+          "id": "sponsor",
+          "text": "The project sponsor",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Choosing the sponsor reflects the assumption that any persistent disagreement should go up. None of these needs sponsor authority, and escalating them bypasses the people who already own each decision."
+        },
+        {
+          "id": "pm",
+          "text": "The project manager",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The project manager can facilitate any of these and should make sure each reaches its owner, but owns none of the underlying decisions. Choosing this treats being in charge of the project as owning every decision in it."
+        }
+      ],
+      "explanation": "Resolving a conflict often means taking it to the person who owns the decision underneath it, rather than settling it yourself or escalating it by default. Ask what kind of decision is in dispute: value ordering belongs with whoever owns the backlog, a team's own working standard belongs with the team, and anything governed by a safety or regulatory system belongs with that system's owner. Facilitation helps people reach the owner; it does not replace them.",
+      "mindset": "Find who owns the decision under a dispute before deciding who should settle it."
+    },
+    {
+      "id": "pmp-p2-113",
+      "type": "pulldown",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "facilitation",
+        "decision-making",
+        "games",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You facilitate a Scrum team at a games studio. Complete each sentence with the facilitation move that best fits the disagreement described. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The team keeps reopening its decision on the save-file format, made three sprints ago, although nothing about the target platforms has changed. The facilitator should"
+        },
+        {
+          "id": "c2",
+          "text": "In refinement, two senior developers argue about the physics engine while the five other developers stay silent. Before any more discussion, the facilitator should"
+        },
+        {
+          "id": "c3",
+          "text": "The team has argued about a level-loading approach for forty minutes and no new points are being made. The facilitator should"
+        }
+      ],
+      "options": [
+        {
+          "id": "newinfo",
+          "text": "ask what new information has emerged since the decision and, if there is none, hold the team to it",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A decision can be reopened for a reason, and new information is the reason. Without it, repeated reopening is unresolved disagreement wearing the clothes of review, and holding the team to its decision protects the time it spent making it."
+        },
+        {
+          "id": "silent",
+          "text": "ask everyone to note their own view privately, then reveal all the views together",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Two confident voices can make a disagreement look like a two-person contest when the rest of the team has views too. Collecting views independently before discussion stops the first speakers anchoring everyone else."
+        },
+        {
+          "id": "how",
+          "text": "name the deadlock and ask the team to agree how the decision will now be made",
+          "correct": true,
+          "match": "c3",
+          "rationale": "When arguments stop being new, more discussion of the content will not help. Moving the conversation to the decision method, such as a time-boxed spike, consent or a fallback decider, gives the team a way out it owns."
+        },
+        {
+          "id": "pochoice",
+          "text": "ask the product owner to choose an approach so that the team can move on",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. It is tempting because it ends the argument quickly, but the product owner owns what is built and in what order, not technical approach. Handing technical disputes to the product owner strips the team of ownership and leaves the disagreement underneath."
+        }
+      ],
+      "explanation": "A facilitator's authority is over the process of a discussion, not its outcome, and different stalls need different process moves. Repeated reopening is tested against new information; a discussion dominated by a few voices is fixed by gathering views independently; a discussion that has run out of arguments is moved on to how the decision will be made. Passing the content to someone outside the team ends the argument without resolving it.",
+      "mindset": "Use your authority over how a team decides, and leave what it decides with the team."
+    },
+    {
+      "id": "pmp-p2-114",
+      "type": "fillblank",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "negotiation",
+        "expected-value",
+        "subcontractor",
+        "archetype-trade-off"
+      ],
+      "stem": "On a museum fit-out in Rotterdam, the joinery subcontractor claims €90,000 for work it says was added after award, and has offered to settle at €45,000. Referring the claim to adjudication would cost €18,000 in fees whatever the outcome. Your commercial lead estimates a 35% chance the adjudicator awards the full €90,000 and a 65% chance it awards nothing. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "ev",
+          "label": "Expected total cost of adjudication, in €",
+          "numeric": true,
+          "expect": 49500,
+          "tol": 100,
+          "unit": "€",
+          "rationale": "Expected award is 0.35 × 90,000 = €31,500. Adding the €18,000 of fees, which are paid whatever happens, gives €49,500."
+        },
+        {
+          "id": "breakeven",
+          "label": "Probability of losing at which adjudication and the €45,000 settlement have equal expected cost, in %",
+          "numeric": true,
+          "expect": 30,
+          "tol": 0.5,
+          "unit": "%",
+          "rationale": "Set 18,000 + p × 90,000 = 45,000, so p = 27,000 ÷ 90,000 = 0.30, or 30%. The commercial lead's 35% estimate is only five points above this, so the comparison is sensitive to that one judgement."
+        },
+        {
+          "id": "which",
+          "label": "Which route has the lower expected cost — settle or adjudicate",
+          "accept": [
+            "settle",
+            "settlement",
+            "settling",
+            "the settlement",
+            "negotiated settlement",
+            "accept the settlement"
+          ],
+          "rationale": "Settlement costs €45,000 against an expected €49,500 for adjudication, a difference of €4,500. The difference is small, so the relationship with a subcontractor still on site and the time adjudication takes should weigh in the decision too."
+        }
+      ],
+      "explanation": "Expected value turns a dispute's options into comparable figures, but it is a starting point rather than a verdict. Work out the break-even probability as well as the expected cost, because when the estimate sits close to break-even the answer depends on one person's judgement and should be treated as a close call. Costs that do not appear in the figures, such as a damaged working relationship or management time spent on a formal process, belong in the comparison too.",
+      "mindset": "Price the options in a dispute, then ask how much the answer depends on one estimate."
+    },
+    {
+      "id": "pmp-p2-115",
+      "type": "hotspot",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "raci",
+        "role-clarity",
+        "higher-education",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a university research-data platform, the data architect and the data engineering lead have clashed three times this month, each time over who may sign off a change. The diagram shows rows of the project's responsibility assignment matrix (A accountable, R responsible, C consulted, I informed). Select the row most likely to be the structural source of their conflict.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "Five rows of a responsibility assignment matrix for a research-data platform",
+        "caption": "Select a row. Use Tab or the arrow keys to move between rows, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "r1",
+          "n": 1,
+          "label": "Reporting views — Architect: R, Engineering lead: A, Research analysts: C",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "Both roles appear here, which draws the eye, but only one is accountable. Doing the work while someone else signs it off is a normal split and does not by itself create a sign-off dispute."
+        },
+        {
+          "id": "r2",
+          "n": 2,
+          "label": "Schema changes — Architect: A, Engineering lead: A, Database team: R",
+          "x": 20,
+          "y": 94,
+          "w": 600,
+          "h": 64,
+          "correct": true,
+          "rationale": "Two people accountable for the same decision means each can legitimately believe the sign-off is theirs. Every disputed change will reproduce the clash until the matrix names one accountable role."
+        },
+        {
+          "id": "r3",
+          "n": 3,
+          "label": "Ingestion pipelines — Architect: C, Engineering lead: A, Platform team: R",
+          "x": 20,
+          "y": 168,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "A candidate may assume that being consulted rather than deciding breeds resentment. That can cause friction, but the row is clear about who signs off, so it does not explain repeated disputes over sign-off."
+        },
+        {
+          "id": "r4",
+          "n": 4,
+          "label": "Data model standards — Architect: A, Engineering lead: C, Research analysts: I",
+          "x": 20,
+          "y": 242,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "This mirrors the ingestion-pipelines row with the roles reversed and one clear accountable owner. Picking it treats any row where the engineering lead does not decide as contested."
+        },
+        {
+          "id": "r5",
+          "n": 5,
+          "label": "Access permissions — Architect: I, Engineering lead: R, Information security: A",
+          "x": 20,
+          "y": 316,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "Accountability sits with a third party here, so neither of the two people in conflict can claim the sign-off. Choosing it confuses a row they both appear in with a row they could both claim."
+        }
+      ],
+      "explanation": "Recurring conflict over who decides is very often written into the project's own role definitions, and a responsibility matrix with more than one accountable role for a decision manufactures that conflict on every occurrence. When the same two people clash repeatedly over authority, read the documents that assign authority before treating it as a personality problem. The rule a matrix must satisfy is exactly one accountable role per decision.",
+      "mindset": "When the same two people keep clashing over who decides, check what the role documents say first."
+    },
+    {
+      "id": "pmp-p2-116",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "disagree-and-commit",
+        "decision-acceptance",
+        "pharmaceutical",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "On a packaging-line upgrade for a pharmaceutical manufacturer, your validation lead and the client's engineering lead disagreed about validating the new line in one campaign or in three stages. After hearing both cases in full, the steering group, which includes the client's head of quality assurance, chose the single campaign. Two weeks on, your validation lead still raises his objections at every progress meeting and has drafted a memo to the client's operations director. He has no new evidence. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add his objections to the agenda of the next steering group meeting, so that he can present them in person to the members who made the decision and the matter can be closed properly.",
+          "correct": false,
+          "rationale": "This mistakes persistence for new information. Reopening a properly made decision without new evidence teaches the team that decisions stay open for whoever objects longest, and spends steering time hearing the same case twice."
+        },
+        {
+          "id": "b",
+          "text": "Help him redraft his memo into a balanced note for the client's operations director, so that his concerns reach the client through a route that the project has reviewed and approved.",
+          "correct": false,
+          "rationale": "This tries to channel the objection rather than close it. It takes a decided matter outside the governance that decided it, to a director who was not part of the decision, and invites a second ruling on the same question."
+        },
+        {
+          "id": "c",
+          "text": "Tell him that the decision is final and ask him to stop raising it at progress meetings, so that the whole team can concentrate on preparing for the single validation campaign.",
+          "correct": false,
+          "rationale": "The aim is right but the method suppresses rather than settles. Without acknowledgement or a route for his concerns, he is likely to keep disagreeing outside the meeting, and any real risk he sees goes unrecorded."
+        },
+        {
+          "id": "d",
+          "text": "Meet him privately to acknowledge that his case was heard, confirm that the decision stands, and record his specific concerns as risks with triggers that would justify a review.",
+          "correct": true,
+          "rationale": "The decision was made properly, by the right people, after hearing him, and nothing new has emerged. Acknowledging him and turning his worries into monitored risks gives his concerns a legitimate home while letting the project move on."
+        }
+      ],
+      "explanation": "A disagreement that has been heard and decided by the right authority should be accepted rather than relitigated, and the project manager's task is to help the person who lost the argument commit to the outcome. That means acknowledging the case was heard, holding the decision, and giving residual concerns a legitimate place, such as the risk register with defined triggers, so that new evidence can reopen the question but repetition cannot. Suppressing the objection or reopening it without new information both leave the conflict live.",
+      "mindset": "Once a disagreement has been fairly decided, help people commit and give their concerns a place to be watched."
+    },
+    {
+      "id": "pmp-p2-117",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "backlog-ownership",
+        "stakeholder-pressure",
+        "charity",
+        "archetype-route-to-owner"
+      ],
+      "stem": "On a charity's online donations platform, the head of fundraising and the digital accessibility lead have each been approaching developers directly, asking them to start their request first: a new gift-aid journey and a fix to the donation form. Two developers have started on different requests, and at stand-up they argued about which matters more. Neither request is in the current sprint. The product owner is on leave and returns tomorrow. As the team's agile coach, what should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bring the two developers together today to agree between themselves which of the two requests to finish first, taking into account the work each has already started on it.",
+          "correct": false,
+          "rationale": "This respects self-organisation, which is why it appeals. But the team organises how it delivers committed work, not which stakeholder's new request outranks another's, and neither request has been committed."
+        },
+        {
+          "id": "b",
+          "text": "Decide the order yourself for today, based on which request has the nearer external deadline, and let the product owner confirm or change your decision when she returns tomorrow.",
+          "correct": false,
+          "rationale": "This fills a one-day gap by taking a decision that belongs to someone else. The coach becomes the person stakeholders lobby next time, and the product owner returns to a backlog already reordered around her."
+        },
+        {
+          "id": "c",
+          "text": "Ask the head of fundraising and the accessibility lead to meet and agree a single priority between themselves, so that the developers are no longer caught between two requests.",
+          "correct": false,
+          "rationale": "This routes the conflict to the requesters, who each have a stake in the answer and no authority over the backlog. Any deal they strike would still need the product owner, and the weaker negotiator's request loses."
+        },
+        {
+          "id": "d",
+          "text": "Ask both developers to return to the sprint's committed items, and take both new requests to the product owner tomorrow so that she can order them in the backlog.",
+          "correct": true,
+          "rationale": "The developers are arguing about a decision that is not theirs and that the sprint has not asked them to make. Returning to committed work removes the clash at once, and the product owner, back in a day, owns the ordering."
+        }
+      ],
+      "explanation": "A conflict inside the team is often the visible end of a conflict between stakeholders that has bypassed the person who should resolve it. When requests reach the team directly and pull its members in different directions, return the team to its commitments and route the competing requests to whoever owns ordering, even if that means a short wait. Resolving the priority anywhere else trains stakeholders to lobby whoever is nearest.",
+      "mindset": "When team members fight over a priority, ask whose priority call it really is."
+    },
+    {
+      "id": "pmp-p2-118",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "team-norms",
+        "respect",
+        "travel",
+        "archetype-act-now"
+      ],
+      "stem": "During a sprint planning call for a travel-booking team, a tester asks how the new fare-caching service will handle currency changes. A senior developer replies that it is the sort of question only someone who has never written code would ask, and two people laugh. The tester stays silent for the rest of the call. As the team's Scrum Master, what should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Step in at once on the call, say calmly that the team discusses questions rather than the people asking them, and bring the conversation back to her currency question.",
+          "correct": true,
+          "rationale": "The remark was public, so the correction needs to be public and immediate to show the team where the line is. Returning to her question shows it was a fair one and draws the call back to the work."
+        },
+        {
+          "id": "b",
+          "text": "Let the call continue without comment, then speak privately to the developer straight afterwards about the effect of his remark and the standard of behaviour the team expects.",
+          "correct": false,
+          "rationale": "Speaking to him privately is worth doing, which is why this tempts. But staying silent on the call leaves the tester unsupported in front of the team and lets everyone present conclude the remark was acceptable."
+        },
+        {
+          "id": "c",
+          "text": "Note what happened and raise the team's communication norms as a theme at the next retrospective, without naming either of the people who were involved in the exchange.",
+          "correct": false,
+          "rationale": "This chooses a team forum and avoids blame, both sensible in general. Here it delays the response by up to a sprint, and an unnamed discussion of norms will not repair the moment the tester experienced."
+        },
+        {
+          "id": "d",
+          "text": "Send the tester a private message during the call to check she is all right, and offer to raise the developer's remark with his line manager on her behalf afterwards.",
+          "correct": false,
+          "rationale": "Supporting the tester matters, but this moves the problem out of the team and up a reporting line before the Scrum Master has used the simplest tool available, which is addressing it in the room."
+        }
+      ],
+      "explanation": "Behaviour that targets a person rather than an idea needs a response at the moment it happens, especially when it happens in front of the team, because silence is read as acceptance by everyone present. The response can be brief and calm: name the standard, redirect to the substance, and follow up privately afterwards if needed. Waiting for a later forum or a different channel lets a norm erode in public and be repaired only in private.",
+      "mindset": "Address a remark aimed at a person in the moment it is made."
+    },
+    {
+      "id": "pmp-p2-119",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "decision-authority",
+        "deadlock",
+        "mobility",
+        "archetype-use-own-authority"
+      ],
+      "stem": "Your hybrid programme is delivering connected e-bike docks for a city. The hardware lead wants the next firmware drop moved from the 14th to the 21st to complete a week of thermal testing; the app lead wants the 14th so field-trial feedback arrives before a design freeze. Each has argued fully in two meetings, both call the other's concerns fair, and a split drop was examined and ruled out. Either date is within your delegated schedule tolerance. Both ask you to decide. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Decide the date yourself now, explain the reasoning to both leads together, and record the decision along with the risk it leaves for the team that did not get its date.",
+          "correct": true,
+          "rationale": "The parties have exhausted collaboration, asked for a decision, and the decision sits within your authority. Deciding promptly, explaining why, and recording the consequence for the losing side is what they asked for and what the role is for."
+        },
+        {
+          "id": "b",
+          "text": "Take the choice to the sponsor with a short paper setting out both cases, since the decision favours one team's priorities over the other's and should be seen to be made neutrally.",
+          "correct": false,
+          "rationale": "This is a careful, defensible instinct about perceived fairness. But the decision is within the tolerance delegated to you, and passing it up spends sponsor attention on a call you were given authority to make."
+        },
+        {
+          "id": "c",
+          "text": "Run one more facilitated session focused on the interests behind each date, aiming for an outcome that both leads can genuinely support rather than simply accept from you.",
+          "correct": false,
+          "rationale": "Collaboration is usually the strongest mode, which makes this attractive. Here it has been tried twice, the obvious integrative option was ruled out, and both parties have asked for a decision, so another session delays without adding information."
+        },
+        {
+          "id": "d",
+          "text": "Set the drop for the 17th as a midpoint, which gives the hardware team extra testing days and the app team earlier feedback, and review how the date is working next week.",
+          "correct": false,
+          "rationale": "Splitting the difference feels even-handed. But a week of thermal testing is not divisible, so the midpoint gives the hardware team incomplete testing and the app team later feedback: both needs are partly unmet."
+        }
+      ],
+      "explanation": "Collaboration is the preferred way through a conflict while it is still producing new options, but once the parties have explored the interests, ruled out the integrative options and asked for a decision, the person with authority should make the call. Escalating a decision that sits within your delegated tolerance, or forcing another round of discussion, withholds the very thing the parties need. A compromise is only sound when the needs on each side can be divided without losing their purpose.",
+      "mindset": "When collaboration has run its course and the call is yours, make it and explain it."
+    },
+    {
+      "id": "pmp-p2-120",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "escalation-path",
+        "team-charter",
+        "logistics",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "On an ERP rollout for a logistics firm, the project charter sets a conflict escalation path: parties try to resolve a dispute directly for five working days, then the project manager facilitates, then the steering group decides. The finance lead and the warehouse lead have disagreed about the cut-over weekend for six working days. This morning the warehouse lead emailed the steering group chair asking him to rule. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Speak to the steering group chair, explain that the charter's next stage is a session you facilitate, and agree a date by which any unresolved point comes to the group.",
+          "correct": true,
+          "rationale": "The charter's path is the agreed rule and the dispute has reached its second stage, not its third. Explaining that to the chair, with a date for the group to take over, keeps him informed without letting one party skip a step."
+        },
+        {
+          "id": "b",
+          "text": "Arrange a facilitated session with both leads this week, starting from the criteria that each of them needs the chosen cut-over weekend to meet.",
+          "correct": true,
+          "rationale": "This is the stage the charter prescribes, and the parties have used up the direct stage. Starting from criteria rather than preferred dates gives the session a basis for agreement and a clear record if it has to go up."
+        },
+        {
+          "id": "c",
+          "text": "Ask the chair to rule on the weekend now, since the cut-over date is a steering group matter in the end and an early ruling would save the team a further week.",
+          "correct": false,
+          "rationale": "This values speed over the agreed process. Skipping the facilitated stage rewards the party who went to the chair first and teaches everyone that the charter's path is optional for whoever moves fastest."
+        },
+        {
+          "id": "d",
+          "text": "Ask both leads to keep working on it directly for another week, since they have only just passed the five days and may still reach an agreement without any help.",
+          "correct": false,
+          "rationale": "This repeats a stage the charter says is complete. Extending direct negotiation without new help leaves the dispute where it has been for six days, and the cut-over weekend draws closer."
+        },
+        {
+          "id": "e",
+          "text": "Invite the finance lead to send her own case to the chair as well, so that the chair hears both positions evenly if he does decide to rule on the matter himself.",
+          "correct": false,
+          "rationale": "This tries to make the bypass fair rather than undo it. It accepts that the dispute is now with the chair and turns the steering group into the second stage, which the charter gives to the project manager."
+        }
+      ],
+      "explanation": "An agreed escalation path is a rule the team set before the dispute, and its value lies in applying it when one party wants to skip ahead. When a party goes over the path, the response is to bring the dispute back to the stage it has reached and to keep the next level informed of when it will receive the matter if needed. Equalising the bypass or letting it stand teaches that the path binds only those who follow it.",
+      "mindset": "Apply the escalation path the team agreed, especially when someone tries to skip it."
+    },
+    {
+      "id": "pmp-p2-121",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "conflict-timing",
+        "rail",
+        "client-confidence",
+        "archetype-act-now"
+      ],
+      "stem": "On a train maintenance depot upgrade, you are showing a delegation from the rail operator's board around the site. From the site office beside the meeting room, you hear your electrical supervisor and the civil works supervisor shouting at each other about a delayed cable trench, loudly enough for the visitors to hear every word. The delegation is due in that meeting room in five minutes. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Carry on with the tour as planned and take the cable trench dispute to tomorrow morning's site coordination meeting with both supervisors present.",
+          "correct": false,
+          "rationale": "This picks a sensible forum for the substance but gets the timing wrong. Leaving a shouting match running within earshot of the client's board for the length of a visit lets the damage continue when it could be stopped in a minute."
+        },
+        {
+          "id": "b",
+          "text": "Ask the site administrator to take a note into the site office asking both supervisors to keep the noise down while the board delegation is on site.",
+          "correct": false,
+          "rationale": "This treats the problem as noise rather than conflict. It may quieten the room, but it sends the message through a third party, gives the supervisors no route for the trench dispute, and leaves them to carry on arguing more quietly."
+        },
+        {
+          "id": "c",
+          "text": "Go into the site office now, stop the argument, and arrange to sit down with both supervisors about the cable trench as soon as the delegation has left.",
+          "correct": true,
+          "rationale": "The argument is doing damage right now, to the client's confidence and to the two supervisors' standing, so it has to stop now. The substance still needs resolving, and committing to a time straight after the visit makes clear it is being parked, not dismissed."
+        },
+        {
+          "id": "d",
+          "text": "Move the delegation's meeting to the canteen across the yard, and ask the civil works contractor's manager to deal with both supervisors and report back to you on the trench.",
+          "correct": false,
+          "rationale": "Moving the visitors avoids the symptom rather than dealing with it, and the contractor's manager has authority over only one of the two supervisors. A candidate choosing this is protecting appearances while handing the conflict to someone who cannot settle it."
+        }
+      ],
+      "explanation": "When a conflict is causing harm as it happens, whether to safety, to a client's confidence or to the people involved, the first step is to stop it in the moment and the second is to resolve it somewhere that allows a proper conversation. Separating the two steps lets the project manager act fast without pretending that a few words at the door settle the underlying disagreement. The commitment to return to the issue is what stops the intervention reading as suppression.",
+      "mindset": "Stop a conflict that is doing damage now, then resolve it once there is room to do it properly."
+    },
+    {
+      "id": "pmp-p2-122",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "team-norms",
+        "working-agreement",
+        "online-grocery",
+        "archetype-route-to-owner"
+      ],
+      "stem": "A fully remote data-platform team at an online grocer has started arguing about cameras in meetings. Three developers keep their cameras off; two others say this makes them look disengaged, and yesterday one of them said so pointedly in the retrospective chat. The company leaves meeting etiquette to each team, and the team's working agreement says nothing about it. As the team's Scrum Master, what should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Facilitate a session in which each side explains what cameras give or cost them, and let the team agree an entry for its working agreement.",
+          "correct": true,
+          "rationale": "The company has left this to the team, so the team owns the answer. Hearing what each side actually needs, such as connection for some and focus or privacy for others, usually shows the positions are closer than the argument suggests, and a norm the team wrote is one it will keep."
+        },
+        {
+          "id": "b",
+          "text": "Set a simple rule yourself, with cameras on for planning and reviews and optional elsewhere, so the team has a clear standard and can move on.",
+          "correct": false,
+          "rationale": "The compromise may be sensible, which is why it appeals. But the Scrum Master is imposing a norm on something the team owns, nobody's reasons are heard, and the 'disengaged' grievance is left exactly where it was."
+        },
+        {
+          "id": "c",
+          "text": "Ask the engineering manager whether the company will issue a camera policy, since one consistent rule would stop teams arguing about it.",
+          "correct": false,
+          "rationale": "The stem says the company deliberately leaves this to teams. A candidate choosing this routes upward a decision that already has an owner, and waits on a policy that is not coming while the tension grows."
+        },
+        {
+          "id": "d",
+          "text": "Tell the team that camera use is a personal choice, and speak privately to the developer whose comment in the retrospective chat was pointed.",
+          "correct": false,
+          "rationale": "A private word about the comment is reasonable, but declaring camera use a personal choice settles the disagreement for one side, by the Scrum Master, and leaves the other side's concern about engagement unheard."
+        }
+      ],
+      "explanation": "Where a disagreement concerns how a team works together and no organisational rule decides it, the team owns the answer, and a facilitator's job is to help it reach one rather than to supply one. Surfacing what each side needs usually shows that the positions are less opposed than the argument suggests. An agreement the team wrote for itself is one it will police itself, whereas a rule handed down settles the logistics and leaves the grievance behind.",
+      "mindset": "Hand a team's disagreement about its own norms back to the team, with help to resolve it."
+    },
+    {
+      "id": "pmp-p2-123",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "resource-contention",
+        "pm-error",
+        "public-sector",
+        "archetype-make-visible"
+      ],
+      "stem": "On a flood defence scheme for a county council, the hydraulic modelling lead and the environmental assessment lead are openly arguing about the project's only GIS analyst. Each says you promised them the analyst for the fortnight starting Monday. Checking your email, you find that you did promise both, three weeks apart. Both workstreams have critical-path tasks that fortnight, and each lead now accuses the other of poaching. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Check the schedule logic for both workstreams, give the analyst to whichever task carries less float, and explain the reasoning to the other lead.",
+          "correct": false,
+          "rationale": "Float is a sound way to allocate a scarce resource, which is why this is tempting. But it leaves both leads believing the other tried to poach, so the grievance between them survives the allocation, and your own error stays hidden."
+        },
+        {
+          "id": "b",
+          "text": "Ask the GIS analyst's line manager whether a second analyst could be borrowed from another team, so that both leads get what they were promised.",
+          "correct": false,
+          "rationale": "This jumps to adding capacity, which may not exist, and does nothing about the accusation the two leads are trading. A candidate choosing it is solving the resource problem while ignoring the conflict the project manager created."
+        },
+        {
+          "id": "c",
+          "text": "Speak to each lead separately, apologise for the confusion over the booking, and confirm each one's allocation once you have reviewed both plans.",
+          "correct": false,
+          "rationale": "The apology is right but separate conversations keep the two leads apart, each hearing a version of events tailored to them. The accusation of poaching was made between them and needs correcting between them, and the decision is still taken without them."
+        },
+        {
+          "id": "d",
+          "text": "Meet both leads together, tell them the double booking was your error, and work out with them how the analyst's fortnight should be split or sequenced.",
+          "correct": true,
+          "rationale": "Each lead is accusing the other of something neither did. Owning the error with both present removes the false grievance at once, and planning the allocation with them turns two rivals for a resource into joint owners of a scheduling problem."
+        }
+      ],
+      "explanation": "When a conflict between two people has been caused by the project manager's own decision or mistake, they are arguing about something neither of them did. Correcting the record openly, with both parties present, removes the misattributed blame that is fuelling the conflict, and only then can the underlying resource problem be solved on its merits. Fixing the allocation quietly while letting the false grievance stand resolves the logistics and leaves the relationship damaged.",
+      "mindset": "If you caused the conflict, say so first, because it removes the blame the parties are placing on each other."
+    },
+    {
+      "id": "pmp-p2-124",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "ultimatum",
+        "medical-devices",
+        "interpersonal",
+        "archetype-diagnose-first"
+      ],
+      "stem": "On a hybrid programme building firmware for an infusion pump, your most experienced firmware engineer asks to see you and says: 'Either Priya comes off the firmware team or I resign.' Priya joined four months ago from another division and is well regarded by the verification team. He has raised no complaint before, and the next regulatory design review is in seven weeks. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tell him calmly that you will not make staffing decisions under an ultimatum, and that you expect him to work out any difficulty with Priya directly.",
+          "correct": false,
+          "rationale": "Refusing to be governed by threats is a defensible principle, which is what makes this attractive. But it closes the conversation before you know what is behind it, and on a safety-critical product the cause could be a quality concern you need to hear."
+        },
+        {
+          "id": "b",
+          "text": "Reassure him that you value his experience, and arrange for Priya to move across to the verification team, where she is already well regarded.",
+          "correct": false,
+          "rationale": "This protects a key person and the review date, but it acts against Priya with no facts at all. It also teaches the team that an ultimatum works, which guarantees the next conflict arrives in the same form."
+        },
+        {
+          "id": "c",
+          "text": "Ask him to describe the specific incidents behind his request, and listen without agreeing or refusing to anything before deciding how to respond.",
+          "correct": true,
+          "rationale": "An ultimatum states a position at its most extreme and says nothing about the cause. Hearing the specific incidents first is the only way to know whether this is a performance issue, a safety concern or a personal clash, and each needs a different response."
+        },
+        {
+          "id": "d",
+          "text": "Refer the matter to the HR business partner straight away, since a threat to resign could turn into a formal employee relations case.",
+          "correct": false,
+          "rationale": "HR may well be needed later, but nothing yet suggests a policy breach. A candidate picking this hands the matter off before anyone knows whether it is about conduct, competence, safety or working style."
+        }
+      ],
+      "explanation": "An ultimatum signals how strongly someone feels, not why. Accepting its terms rewards the method and may harm someone without cause; rejecting them outright may silence a legitimate concern. The responsible first step is to get the specific behaviour or events underneath it on the table, without committing either way, because the right response depends entirely on what those turn out to be.",
+      "mindset": "Treat an ultimatum as a measure of intensity, and find out what lies beneath it before answering."
+    },
+    {
+      "id": "pmp-p2-125",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "client-conflict",
+        "requirements",
+        "retail",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your company is implementing a purchasing system for a furniture retailer. In a requirements workshop, the retailer's finance director wants every order over £5,000 to need her team's approval; the operations director says that would stall store replenishment. After twenty minutes, both turn to you and ask you to decide, since you have seen other clients do this. The contract names the retailer's chief operating officer as owner of all requirements. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Recommend the approval threshold your other clients most commonly use, as a starting point that both directors can adjust once the system is live.",
+          "correct": false,
+          "rationale": "Sharing experience is part of the value a supplier brings, which is why this is tempting. But making the recommendation the decision turns the supplier into a party to the client's internal dispute, and the losing director will hold the supplier responsible."
+        },
+        {
+          "id": "b",
+          "text": "Facilitate a compromise in the room, such as a higher threshold for replenishment orders only, and record it as the agreed requirement.",
+          "correct": false,
+          "rationale": "A compromise might be a good answer, and facilitation is a real skill. The error is recording it as agreed when the two people in the room are not the requirement owner, so the agreement can be overturned and the build reworked."
+        },
+        {
+          "id": "c",
+          "text": "Build the approval threshold as a configurable setting, so the retailer can change its value after go-live without needing a change request.",
+          "correct": false,
+          "rationale": "Configurability defers the conflict rather than resolving it, since the system still needs an initial value and someone must choose it. A candidate picking this has found a technical way to avoid a decision that belongs to the client."
+        },
+        {
+          "id": "d",
+          "text": "Set out both positions with their delivery and control impacts, and take the decision to the chief operating officer with both directors involved.",
+          "correct": true,
+          "rationale": "The contract says who decides requirements, and it is neither director nor the supplier. Making the trade-off clear and putting it before the named owner, with both directors heard, gives a decision that will hold and keeps the supplier neutral."
+        }
+      ],
+      "explanation": "When a client's own stakeholders disagree about a requirement, a supplier's project manager should make the trade-off visible and get it to whoever the client has authorised to decide, rather than settling it. Deciding for the client, or brokering an agreement among people without the authority to make it, makes the supplier a party to an internal conflict and produces decisions that do not hold. Expertise belongs in the analysis of the options, not in the choice.",
+      "mindset": "Inform the client's decision; do not make it for them."
+    },
+    {
+      "id": "pmp-p2-126",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "workload-fairness",
+        "kanban-data",
+        "logistics",
+        "archetype-make-visible"
+      ],
+      "stem": "On a parcel-tracking app team, a developer tells you in a one-to-one that she has picked up almost all the production support tickets for three sprints, because the others leave them on the board and take new feature work. She says she is tired of 'carrying the team'. The two colleagues she names have told others they simply take the next item at the top. As the team's coach, what should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pull the board history for the last three sprints showing who took which type of item, and bring it to the retrospective for the team to discuss.",
+          "correct": true,
+          "rationale": "The two sides disagree about facts that the board can show. Putting the data in front of the whole team lets them see the pattern without anyone being accused, and the team that owns the work can then agree how support should be shared."
+        },
+        {
+          "id": "b",
+          "text": "Set up a weekly rota for production support yourself, so that every developer takes an equal share of the tickets from the next sprint onwards.",
+          "correct": false,
+          "rationale": "A rota may well be where the team ends up, which is why this appeals. But the coach is making a work-allocation decision that belongs to the team, and the resentment between the developers is left untouched by a rule handed down from outside."
+        },
+        {
+          "id": "c",
+          "text": "Talk privately with the two colleagues she named, explain how she feels, and ask them to pick up more of the support tickets in future sprints.",
+          "correct": false,
+          "rationale": "This acts on one account of events, exposes her complaint to the people she complained about, and turns a pattern in how work flows into a personal accusation that they will feel obliged to defend."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to order support tickets above feature items on the backlog, so that whoever picks up the next item is given them in turn.",
+          "correct": false,
+          "rationale": "This is a clever system fix, but it changes product priorities to solve a fairness problem, and that is not what backlog ordering is for. The developers' grievance about each other is also left unspoken."
+        }
+      ],
+      "explanation": "A conflict about fairness is often a conflict about facts that one side sees and the other does not. Making the pattern visible with data the whole team can examine turns a personal grievance into a shared problem, and leaves the solution with the people who own the work. Acting on one person's account, or fixing allocation by decree, settles the logistics while leaving the parties with competing stories about each other.",
+      "mindset": "Put a fairness complaint on shared data before anyone has to defend themselves."
+    },
+    {
+      "id": "pmp-p2-127",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "interpersonal",
+        "unresolved-conflict",
+        "museums",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "On a regional museum's gallery refit, the lead curator and the exhibition designer have disliked each other for a year. You have run two facilitated sessions and, with HR, a formal mediation. Both are courteous in meetings and their individual work is strong, but every gallery layout they must both approve takes days of back-and-forth by email. Seven months remain, and neither can be replaced without serious loss of knowledge. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the museum's directors to plan a phased replacement of one of the two over two months, with a structured handover to protect the knowledge.",
+          "correct": false,
+          "rationale": "Removing one party ends the conflict, which is why this is defensible. But the stem says replacement costs serious knowledge, and the conflict is slowing approvals rather than damaging the quality of either person's work."
+        },
+        {
+          "id": "b",
+          "text": "Commission a second formal mediation with an external mediator, since an internal one may not have had the independence and authority that both of them needed.",
+          "correct": false,
+          "rationale": "This keeps faith with repairing the relationship, but it is the fourth attempt, and the claim that the first mediator lacked independence is speculation. A candidate picking it has not yet accepted that the relationship may not change."
+        },
+        {
+          "id": "c",
+          "text": "Hold a joint session with both of them to set out what the slow approvals are costing the schedule, and ask them to produce a joint plan to fix it.",
+          "correct": false,
+          "rationale": "Making the impact visible and handing ownership to the parties is often right. Here it asks two people who have shown they cannot collaborate to collaborate on the fix, which repeats the earlier sessions under a different heading."
+        },
+        {
+          "id": "d",
+          "text": "Set a fixed joint review for each layout with agreed inputs, decision criteria and turnaround, and stop making their relationship the thing to fix.",
+          "correct": true,
+          "rationale": "After three serious attempts, the relationship is not going to carry the work. A fixed review with agreed inputs, criteria and timing removes the dependence on goodwill, and their courtesy and strong individual work show that structure is all that is missing."
+        }
+      ],
+      "explanation": "Not every interpersonal conflict can be resolved, and after reasonable attempts to repair a relationship have failed, the project manager's task shifts from changing how two people feel about each other to making their work independent of it. Defined review points, decision criteria and turnaround times can carry what goodwill cannot. Persisting with relationship repair past that point spends time and credibility, and removing people is a large cost to pay for friction that structure can absorb.",
+      "mindset": "When a relationship will not mend, design the work so that it does not depend on it."
+    },
+    {
+      "id": "pmp-p2-128",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "harassment",
+        "policy",
+        "housing",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "On a housing association's tenant portal programme, a junior analyst tells you privately that the data lead has repeatedly mocked her accent in front of others, and that she now avoids his meetings. She asks you not to act or tell anyone, because she fears it will make things worse. The association's dignity-at-work policy requires any manager who receives such a report to refer it to HR. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Respect her request for the moment, watch the data lead's behaviour in meetings yourself, and act firmly if you see or hear such comments made directly.",
+          "correct": false,
+          "rationale": "Respecting her wishes feels supportive, which is the pull of this option. But it breaches the policy, leaves the behaviour continuing, and makes action depend on the project manager happening to witness it."
+        },
+        {
+          "id": "b",
+          "text": "Speak informally to the data lead about respectful language in meetings, without mentioning her name or anything that she has told you.",
+          "correct": false,
+          "rationale": "This tries to honour both her request and the problem, but it sidesteps a policy that removes the informal route, and in a small team he is likely to work out who complained, which is exactly what she feared."
+        },
+        {
+          "id": "c",
+          "text": "Tell her that you cannot keep it confidential under the policy, explain what a referral to HR will involve for her, and then make the referral.",
+          "correct": true,
+          "rationale": "The policy decides the route, and she needs to know that honestly. Explaining what happens next gives her as much control as the situation allows, and the referral puts the matter with the people equipped to protect her and investigate fairly."
+        },
+        {
+          "id": "d",
+          "text": "Suggest that she keeps a written record of each incident, so that she has evidence ready if she later decides to make a formal complaint.",
+          "correct": false,
+          "rationale": "Keeping a record is sensible advice, but it leaves the whole burden on her and delays a duty the policy has already triggered. A candidate choosing it is treating the report as hers to pursue rather than the manager's to act on."
+        }
+      ],
+      "explanation": "Some conflicts are not the project manager's to resolve informally. Where behaviour may amount to harassment or discrimination, organisational policy usually fixes the route, and the manager's choice is only how well to follow it. Promising confidentiality the policy does not allow, or trying a quiet word instead, can leave the person exposed and the organisation in breach. Being honest early about what must happen, and why, is part of treating the person who reported it with respect.",
+      "mindset": "Do not promise a confidentiality your obligations will not let you keep."
+    },
+    {
+      "id": "pmp-p2-129",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "new-joiner",
+        "engineering-practice",
+        "utilities",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A developer who joined your energy-billing team two months ago keeps proposing contract testing between services. Each time, two long-standing developers dismiss it with 'we tried that in 2022 and it was a disaster', and refinement turns tense. The newcomer has started saying the team is closed to new ideas, and he has stopped proposing anything else. As the team's Scrum Master, what should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Propose a time-boxed spike on one service, with success measures agreed by the whole team in advance, so that the team can settle the question with evidence.",
+          "correct": false,
+          "rationale": "Settling a disagreement with an experiment is often right, which is why this is attractive. But it skips the team's own history: the long-standing developers may feel overruled, and the spike may repeat whatever went wrong in 2022."
+        },
+        {
+          "id": "b",
+          "text": "Facilitate a session in which the two longer-standing developers explain what went wrong in 2022, and the team checks whether those conditions still apply.",
+          "correct": true,
+          "rationale": "'We tried that' is both evidence and a defence. Asking what actually failed turns it into evidence the whole team can examine, respects the experience behind it, and gives the newcomer a fair test of whether his idea fits the team as it is now."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner whether contract testing is worth the investment for the product, since it would take capacity away from feature work.",
+          "correct": false,
+          "rationale": "Capacity is a fair concern, but how the developers test their own services is an engineering decision for them. A candidate choosing this has routed a dispute about practice to someone who owns value, not technique."
+        },
+        {
+          "id": "d",
+          "text": "Speak privately with the two long-standing developers and ask them to give new ideas a fairer hearing in refinement from now on.",
+          "correct": false,
+          "rationale": "This treats the problem as attitude and implies their experience does not count. If something genuinely failed in 2022, they may be right, and asking them to be more open does not tell anyone whether they are."
+        }
+      ],
+      "explanation": "When a proposal is blocked by appeal to past experience, the conflict is between a claim about the past and a hope about the future, and neither side can win by assertion. Unpacking what happened before, and whether the conditions that caused it still hold, gives both sides a factual basis and respects each of them. Only after that does it make sense to experiment, decide or move on.",
+      "mindset": "Treat past experience as evidence to examine, not as a verdict or an obstacle."
+    },
+    {
+      "id": "pmp-p2-130",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "recognition",
+        "steering-reporting",
+        "pensions",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You manage a pension administration system replacement and prepare the monthly steering group pack. At this month's meeting, the data migration lead presented a reconciliation model as his team's work. It was built by a junior analyst in the finance workstream, who was not at the meeting. She is now upset and has refused to share her further work with the migration team. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Encourage the analyst to raise the matter with the migration lead herself, and offer to coach her on how to approach that conversation.",
+          "correct": false,
+          "rationale": "Coaching her to handle it builds her confidence, which is why it appeals. But it leaves a junior person to correct a record in a forum she does not attend and the project manager controls, and the work-sharing stand-off continues meanwhile."
+        },
+        {
+          "id": "b",
+          "text": "Speak to the migration lead privately about what happened, and use next month's steering pack to credit the analyst for the model she built.",
+          "correct": true,
+          "rationale": "The project manager owns the steering pack, so correcting the record is within their own authority and needs no one's permission. Speaking to the lead first, privately, deals with the behaviour without humiliating him and allows for an honest oversight."
+        },
+        {
+          "id": "c",
+          "text": "Raise the matter with the migration lead's line manager, since presenting another person's work as your own is a conduct issue for them.",
+          "correct": false,
+          "rationale": "This escalates before anyone has asked the lead what happened, and it may have been careless rather than deliberate. A candidate picking it reaches for someone else's authority when the project manager has the means to put it right."
+        },
+        {
+          "id": "d",
+          "text": "Email the steering group members today with a short correction crediting the analyst, copying in the migration lead so that the record is clear.",
+          "correct": false,
+          "rationale": "The aim is right but the method publicly embarrasses the lead before he has had any chance to explain, which hardens a conflict that a private word might resolve. Speed is not the issue here; the record can wait a month."
+        }
+      ],
+      "explanation": "Conflicts over credit are about recognition, and they damage collaboration quickly because the person overlooked stops sharing. Where the project manager controls the channel in which recognition is given, such as reports, minutes or packs, the record can be put right there without escalation. The behaviour is best addressed privately with the person concerned first, because it allows for honest error and avoids turning a correction into a public contest.",
+      "mindset": "Use the channels you own to put the record right, and deal with the behaviour face to face."
+    },
+    {
+      "id": "pmp-p2-131",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "task-conflict",
+        "design",
+        "education",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "On a new secondary school building, the structural engineer and the architect have argued at the last three design meetings about the sports hall roof: long-span steel trusses or a glulam timber frame. Both bring cost data and fire assessments, and each round has produced a better option than the last. The sponsor tells you the bickering is unprofessional and asks you to stop it. Design freeze is six weeks away. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask both of them to keep the disagreement out of the full design meetings and settle the roof question between themselves in a separate session.",
+          "correct": false,
+          "rationale": "This does what the sponsor asked, which is its appeal. But it moves a debate that is improving the design out of the forum where others can test it, and leaves it with no deadline, so it may end in stalemate or a private deal."
+        },
+        {
+          "id": "b",
+          "text": "Explain to the sponsor that the debate is improving the design, and agree a decision date and criteria so that it reaches a conclusion before the freeze.",
+          "correct": true,
+          "rationale": "The premise of the sponsor's request is wrong: this is productive task conflict, and each round has produced a better option. The project manager's job is to protect it while bounding it, and a date and criteria ensure it converges in time."
+        },
+        {
+          "id": "c",
+          "text": "Review both options yourself against the budget and the fire strategy, and make the decision now so that the design meetings can move on.",
+          "correct": false,
+          "rationale": "Taking the decision ends the noise, but it cuts off a debate that is still producing better options, six weeks before it needs to end. A candidate picking this treats the existence of the conflict as the problem."
+        },
+        {
+          "id": "d",
+          "text": "Remind both of them of the team's agreed meeting behaviours, and ask them to present their cost and fire evidence more calmly and concisely at the next design meeting.",
+          "correct": false,
+          "rationale": "This treats a disagreement about substance as a conduct problem, though the stem describes evidence-based argument, not misconduct. Asking for calm can chill exactly the challenge that has been improving the roof design."
+        }
+      ],
+      "explanation": "Conflict over the substance of the work, argued with evidence, is one of the main ways a team reaches a better answer. The project manager's job is to keep it focused on the task and bounded in time, not to suppress it because it looks uncomfortable to people watching. Whether a conflict needs to stop depends on what it is producing and whether it is turning personal, not on how heated it sounds.",
+      "mindset": "Judge a conflict by what it is producing, not by how it sounds."
+    },
+    {
+      "id": "pmp-p2-132",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "supplier-dispute",
+        "accommodation",
+        "warehousing",
+        "archetype-trade-off"
+      ],
+      "stem": "You are leading a hybrid warehouse-system rollout for a Belgian distributor. The software supplier's account manager and your procurement lead are in a bitter dispute over a €6,000 invoice for extra training days that procurement says were never ordered. The supplier's support responses have slowed noticeably, and cut-over is in nine days. You hold a €20,000 contingency to spend at your discretion, and the contract allows invoices to be paid under protest. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Authorise payment of the €6,000 under protest from contingency, so the cut-over support is protected, and settle the entitlement question after go-live.",
+          "correct": true,
+          "rationale": "This is a deliberate trade: a small, recoverable sum in exchange for removing friction from the riskiest nine days of the project. Paying under protest preserves the right to recover the money, and the decision is within the project manager's own authority."
+        },
+        {
+          "id": "b",
+          "text": "Back your procurement lead and tell the account manager that the invoice will not be paid until a signed order for the training days is produced.",
+          "correct": false,
+          "rationale": "Procurement may well be right on entitlement, which makes this feel principled. But it stakes a nine-day cut-over on winning a €6,000 argument, and a candidate choosing it has not weighed the size of the issue against the size of the risk."
+        },
+        {
+          "id": "c",
+          "text": "Escalate the dispute to the supplier's account director and your own procurement director, asking them jointly to resolve the invoice before the cut-over date.",
+          "correct": false,
+          "rationale": "Escalation is a reasonable route for a commercial dispute, but with nine days left it adds time and uncertainty, and it passes up an authority the project manager already holds to remove the problem today."
+        },
+        {
+          "id": "d",
+          "text": "Raise the slower support responses with the account manager as a separate service-level issue, keeping that apart from the invoice dispute.",
+          "correct": false,
+          "rationale": "Separating the two issues is good negotiating practice in principle. In practice the supplier has already linked them, and a candidate choosing this hopes the friction will disappear because it has been relabelled."
+        }
+      ],
+      "explanation": "Giving way on a smaller point to protect a larger one is a legitimate resolution, provided it is a deliberate trade made with the costs understood, rather than a reflex to avoid friction. The questions are what each side of the trade is worth, whether the concession can be recovered later, and whether the decision is within your own authority. Holding firm on a principle is not automatically stronger than yielding, if holding firm puts a bigger objective at risk.",
+      "mindset": "Know what you are trading when you give way, and give way only where the trade is worth it."
+    },
+    {
+      "id": "pmp-p2-133",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "resolution-follow-through",
+        "interfaces",
+        "ports",
+        "archetype-make-visible"
+      ],
+      "stem": "On a container terminal automation project, the crane-controls lead and the yard-systems lead agreed in a facilitated meeting two months ago that interface changes would be reviewed by the other team within two working days. Complaints have started again, each saying the other is ignoring the agreement. The agreement exists only in the notes you circulated after that meeting. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Meet both leads together to compare what was agreed with what has actually happened to the interface changes raised since the meeting.",
+          "correct": true,
+          "rationale": "Both say the other is breaking the agreement, so the first need is a shared view of the facts. Reviewing the actual changes against the commitment shows whether the agreement is being ignored, is unworkable, or is being read differently by each side."
+        },
+        {
+          "id": "b",
+          "text": "Write to both leads restating the agreement they made, and ask each of them to confirm that they will keep to it from now on.",
+          "correct": false,
+          "rationale": "Restating the agreement assumes the problem is memory or willingness. A candidate choosing this has not asked why it is failing, and a reconfirmed agreement with the same flaw will fail again in the same way."
+        },
+        {
+          "id": "c",
+          "text": "Escalate the renewed dispute to the sponsor, since a second breakdown shows the facilitated approach has not worked for these two leads.",
+          "correct": false,
+          "rationale": "This treats one relapse as proof that collaboration has failed. The dispute is about keeping an agreement nobody has been tracking, which the project manager can fix without spending the sponsor's attention."
+        },
+        {
+          "id": "d",
+          "text": "Add the two-day review commitment to the project's interface management procedure, with turnaround tracked and reported at the weekly progress meeting.",
+          "correct": true,
+          "rationale": "An agreement that lives only in meeting notes has no owner and no measure, so each side can believe the other is breaking it. Building it into the procedure and reporting turnaround makes compliance visible and keeps it from decaying again."
+        },
+        {
+          "id": "e",
+          "text": "Appoint a single integration coordinator to review all interface changes from both teams, so that neither lead depends on the other's turnaround.",
+          "correct": false,
+          "rationale": "This might be the right structure eventually, but it abandons the agreement before learning why it is failing and adds a role to work around two people. A candidate picking it has jumped to redesign without diagnosis."
+        }
+      ],
+      "explanation": "Reaching an agreement is only half of resolving a conflict; the other half is making sure it holds. Agreements that exist only in meeting notes tend to decay, because nobody measures them and each party remembers them differently. When a resolved conflict resurfaces, check the agreement against what has actually happened, then embed it in the project's normal procedures with a measure that makes compliance visible to both sides.",
+      "mindset": "A conflict is resolved when the agreement holds, not when it is reached."
+    },
+    {
+      "id": "pmp-p2-134",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "personal-conflict",
+        "team-behaviour",
+        "media",
+        "archetype-use-own-authority"
+      ],
+      "stem": "Two developers on your video-streaming team were close friends until a falling-out outside work last month. Since then they have stopped speaking at stand-up, one walks out when the other presents at sprint reviews, and pairing sessions between them end early. Others on the team say they feel uncomfortable. Neither developer has raised anything with you. As the team's Scrum Master, which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bring the two of them together for a facilitated conversation to talk through the falling-out and agree how they can move past it.",
+          "correct": false,
+          "rationale": "Facilitated conversation is a standard conflict tool, which is why this is tempting. But the cause is a private matter outside work, and a Scrum Master has no standing to mediate a personal relationship that neither person has brought to them."
+        },
+        {
+          "id": "b",
+          "text": "Speak privately to each of them about the specific behaviours seen at work and their effect on the team, without asking about the falling-out.",
+          "correct": true,
+          "rationale": "Walking out of reviews and silence at stand-up are workplace behaviours affecting the team, and addressing them is within the Scrum Master's remit. Keeping to what has been observed at work respects their privacy while making the expectation clear."
+        },
+        {
+          "id": "c",
+          "text": "Raise the tension openly at the next retrospective, so that the whole team can say how the situation is affecting their work.",
+          "correct": false,
+          "rationale": "Openness is usually healthy in a retrospective, but this puts two people's private dispute in front of the team without their agreement. A candidate choosing it has confused team transparency with exposing individuals."
+        },
+        {
+          "id": "d",
+          "text": "Agree with the team a temporary change to the pairing rotation so that the two are not paired together while things settle down.",
+          "correct": true,
+          "rationale": "Forced close contact is where the friction is costing the most, and a temporary rotation change is a team-level adjustment the Scrum Master can facilitate without singling anyone out. It reduces harm while the working relationship recovers."
+        },
+        {
+          "id": "e",
+          "text": "Leave it for now, since neither of them has raised it and the cause lies outside work, and check again on how things are in a month.",
+          "correct": false,
+          "rationale": "Respecting privacy is right, but the behaviour is already affecting other team members. A candidate choosing this has treated the private origin of the conflict as a reason not to address its public effects."
+        }
+      ],
+      "explanation": "When a conflict starts outside work, the project manager's remit is its effect at work: the observable behaviour, the impact on others, and how the work is arranged. Addressing specific behaviour privately, and adjusting working arrangements to reduce friction, are within that remit; mediating the private relationship or exposing it to the team are not. Waiting because the cause is personal lets a private matter become the team's problem.",
+      "mindset": "Manage the behaviour you can see at work, and leave the private cause with the people who own it."
+    },
+    {
+      "id": "pmp-p2-135",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "reporting",
+        "pmo",
+        "government",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Your supplier team is building a grants management system for a government department using Scrum, inside the department's stage-gated programme. The programme office requires a weekly report showing percentage complete for each work package. Your team lead says this is meaningless for agile work and has stopped sending it, and the programme office has now escalated to your director. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Instruct the team lead to resume the weekly report in the required format, because the programme office's reporting rules bind the supplier.",
+          "correct": false,
+          "rationale": "The rules may well bind the supplier, which makes this look safe. But it forces compliance without addressing the team lead's valid point, and the likely result is percentage figures nobody believes, which serves neither side."
+        },
+        {
+          "id": "b",
+          "text": "Ask the programme office which decisions the percentage-complete figures feed, and what would happen if those decisions had to be made without them.",
+          "correct": true,
+          "rationale": "The programme office's position is a report format; its interest is the decisions the report supports, such as gate approvals and funding forecasts. Finding that interest opens options that satisfy it without inventing numbers."
+        },
+        {
+          "id": "c",
+          "text": "Send the programme office a briefing on why percentage complete is not a valid measure for agile work, with the burn-up offered as a replacement.",
+          "correct": false,
+          "rationale": "This tells a customer that its need is wrong before understanding it. A candidate choosing it is arguing for the team's position rather than looking for what the programme office actually requires."
+        },
+        {
+          "id": "d",
+          "text": "Work with the team lead to derive the figures the programme office needs from the release burn-up, with the method stated on the report.",
+          "correct": true,
+          "rationale": "Translating the team's real progress data into the form the programme office uses accepts the governance context while keeping the figures honest. Stating the method lets both sides trust what the numbers mean."
+        },
+        {
+          "id": "e",
+          "text": "Ask your director to agree with the programme office that your team be exempted from the weekly report for the rest of the build.",
+          "correct": false,
+          "rationale": "An exemption ends the argument but leaves the programme office without what it needs for its gate decisions. A candidate choosing it is using escalation to win the position rather than resolve the conflict."
+        }
+      ],
+      "explanation": "Conflicts between delivery approaches usually show up as arguments about artefacts such as reports, documents and sign-offs. Underneath, each side has a legitimate interest: governance needs information to make decisions, and the team needs to report truthfully about how it works. The resolution is usually to identify the decision the artefact serves and supply that information in a form the work can honestly produce, rather than to make either side give in.",
+      "mindset": "Find the decision a report serves, and supply that in whatever form the work can honestly give."
+    },
+    {
+      "id": "pmp-p2-136",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "interests-positions",
+        "negotiation",
+        "ticketing",
+        "archetype-diagnose-first"
+      ],
+      "stem": "A concert-ticketing product team is in conflict over the next release. In one-to-ones, three stakeholders told you more than their stated positions. Match each stated position to the interest that most likely sits underneath it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "Head of marketing: 'The virtual queue must be live by 1 March.' She mentioned that a major spring tour goes on sale on 3 March."
+        },
+        {
+          "id": "p2",
+          "text": "Lead developer: 'We are not shipping the queue until the load test passes at 50,000 users.' He was on call when the site crashed during last year's festival sale."
+        },
+        {
+          "id": "p3",
+          "text": "Customer service manager: 'No release at all in March.' A third of her advisers are away on a training programme that month."
+        }
+      ],
+      "options": [
+        {
+          "id": "o1",
+          "text": "Having the queue working for a known high-demand on-sale date",
+          "correct": true,
+          "match": "p1",
+          "rationale": "The date matters because of the tour on-sale two days later. Seeing that, the team can explore what the queue must do by then, rather than arguing about the date itself."
+        },
+        {
+          "id": "o2",
+          "text": "Avoiding a repeat of a public failure under peak load",
+          "correct": true,
+          "match": "p2",
+          "rationale": "The specific load-test figure stands in for not reliving last year's crash. That interest might be met in other ways too, such as a capped queue or a staged rollout."
+        },
+        {
+          "id": "o3",
+          "text": "Having enough advisers available to handle customer questions after a change",
+          "correct": true,
+          "match": "p3",
+          "rationale": "The objection is to releasing when her team is short-staffed, not to releasing as such. Extra support cover or a release outside the training weeks could meet her interest."
+        },
+        {
+          "id": "o4",
+          "text": "Protecting the team's velocity figures ahead of a quarterly review",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Nothing any stakeholder said points to velocity figures, and assuming a self-protective motive no one has expressed is the kind of attribution that hardens conflicts."
+        }
+      ],
+      "explanation": "A position is what someone says they want; an interest is why they want it. Positions in a conflict are often incompatible while the interests behind them are not, so the useful work is to uncover the interests and look for options that satisfy them together. Listening for the reason behind each demand, especially the event or experience someone mentions alongside it, is how a deadlock over positions becomes a solvable problem.",
+      "mindset": "Ask why someone wants what they are demanding, because the answer is usually easier to satisfy than the demand."
+    },
+    {
+      "id": "pmp-p2-137",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "conflict-timing",
+        "rollout",
+        "food-retail",
+        "archetype-act-now"
+      ],
+      "stem": "On a predictive rollout of new tills across a bakery chain's 140 shops, three disagreements reach you on the same day. Match each one to when and how the project manager should step in. One choice is not used.",
+      "prompts": [
+        {
+          "id": "t1",
+          "text": "Two installation team leaders are giving one shop's staff contradictory instructions about whether to switch off the old tills at 14:00 or at 17:00 today."
+        },
+        {
+          "id": "t2",
+          "text": "In a weekly review attended by the client's retail director, your training lead sharply contradicts your deployment lead's account of why three shops went live late."
+        },
+        {
+          "id": "t3",
+          "text": "Two trainers disagree about whether to teach refunds before or after loyalty-card sales; both sequences are covered by the approved training plan."
+        }
+      ],
+      "options": [
+        {
+          "id": "i1",
+          "text": "Intervene straight away and give a single clear instruction",
+          "correct": true,
+          "match": "t1",
+          "rationale": "Shop staff are acting on conflicting orders today, so the harm is immediate and operational. Settling it is within the project manager's authority, and the reasons can be discussed with the two leaders afterwards."
+        },
+        {
+          "id": "i2",
+          "text": "Move the meeting on, then take it up privately with both leads straight afterwards",
+          "correct": true,
+          "match": "t2",
+          "rationale": "The disagreement is about facts that matter, but working it through in front of the client's director damages confidence and puts both leads on the defensive. It needs resolving today, just not in that room."
+        },
+        {
+          "id": "i3",
+          "text": "Leave it with the people involved and keep an eye on how it settles",
+          "correct": true,
+          "match": "t3",
+          "rationale": "Either sequence is within the approved plan, so nothing depends on the project manager deciding. Stepping in would take a choice away from the people best placed to make it."
+        },
+        {
+          "id": "i4",
+          "text": "Refer it to the project sponsor for a decision at the next steering meeting",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of the three needs the sponsor's authority: one needs action within the hour, one needs a private conversation, and one needs no intervention at all."
+        }
+      ],
+      "explanation": "Deciding when to step into a conflict depends on three questions: is harm happening now, who is watching, and does the matter need the project manager at all. Immediate operational harm calls for intervention on the spot; a disagreement on substance in front of an audience calls for deferral to a private setting the same day; and a disagreement within people's own discretion is often best left to them. Choosing the timing is as much a part of conflict management as choosing the approach.",
+      "mindset": "Decide when to step in before deciding how, and sometimes the answer is not at all."
+    },
+    {
+      "id": "pmp-p2-138",
+      "type": "pulldown",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "conflict-levels",
+        "agile-coaching",
+        "agritech",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "You coach an agile team building a farm management app. Complete each sentence with the coaching response that fits the level the conflict has reached. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Two developers disagree about the logging format. They share information openly and are both looking for the best answer, so the coach should"
+        },
+        {
+          "id": "c2",
+          "text": "Team members now refer to 'the mobile camp' and 'the platform camp', bring up old defeats and lobby colleagues before meetings, so the coach should"
+        },
+        {
+          "id": "c3",
+          "text": "One developer refuses to attend any meeting the other attends, says the other is acting in bad faith and wants them removed from the team, so the coach should"
+        }
+      ],
+      "options": [
+        {
+          "id": "r1",
+          "text": "let the team work it through and observe without stepping in",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A disagreement about a problem, conducted openly, is healthy conflict. Intervening would take a learning opportunity away from the team and signal that disagreement itself is a problem."
+        },
+        {
+          "id": "r2",
+          "text": "help both sides separate their interests from their positions and rebuild a shared set of facts",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Camps, score-keeping and lobbying show the conflict has become a contest about winning. Bringing people back to interests and agreed facts is what moves it back towards problem-solving."
+        },
+        {
+          "id": "r3",
+          "text": "protect the people involved, separate them for now and bring in their managers or HR",
+          "correct": true,
+          "match": "c3",
+          "rationale": "When one party wants the other gone and attributes bad faith, the conflict has moved beyond what facilitation can fix. Protecting people comes first, and line management or HR have authority a coach lacks."
+        },
+        {
+          "id": "r4",
+          "text": "call a team vote so that the majority view settles the question",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A vote creates winners and losers, so it would harden camps at the middle level and is no answer where people are at risk. Even at the lowest level the team does not need a vote imposed."
+        }
+      ],
+      "explanation": "Conflict escalates through recognisable levels, from a shared problem, through disagreement and contest, to a crusade or open hostility, and the right response changes with the level. At low levels the team should be left to resolve it; at middle levels the coach helps restore a focus on interests and facts; at the highest levels the priority is protecting people and involving those with formal authority. Applying a low-level response to a high-level conflict, or the reverse, makes it worse.",
+      "mindset": "Read how far a conflict has escalated before choosing how to respond to it."
+    },
+    {
+      "id": "pmp-p2-139",
+      "type": "fillblank",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "objective-criteria",
+        "weighted-scoring",
+        "laboratory",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Two leads on a veterinary diagnostics firm's hybrid programme disagree about which laboratory information system to buy. Before seeing any scores, they agreed these weights: data security 40%, five-year cost 25%, integration effort 20%, staff familiarity 15%. They then jointly scored each system from 1 to 5. System A scored 4, 2, 3 and 5; System B scored 3, 5, 4 and 2. Having seen the totals, the lead favouring System A proposes moving familiarity to 25% and cost to 15%. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "a1",
+          "label": "Weighted score of System A under the agreed weights, to two decimal places",
+          "numeric": true,
+          "expect": 3.45,
+          "tol": 0.01,
+          "rationale": "System A: 4 × 0.40 + 2 × 0.25 + 3 × 0.20 + 5 × 0.15 = 1.60 + 0.50 + 0.60 + 0.75 = 3.45."
+        },
+        {
+          "id": "b1",
+          "label": "Weighted score of System B under the agreed weights, to two decimal places",
+          "numeric": true,
+          "expect": 3.55,
+          "tol": 0.01,
+          "rationale": "System B: 3 × 0.40 + 5 × 0.25 + 4 × 0.20 + 2 × 0.15 = 1.20 + 1.25 + 0.80 + 0.30 = 3.55, so B leads by 0.10 under the weights both leads agreed in advance."
+        },
+        {
+          "id": "a2",
+          "label": "Weighted score of System A under the proposed new weights, to two decimal places",
+          "numeric": true,
+          "expect": 3.75,
+          "tol": 0.01,
+          "rationale": "With cost at 15% and familiarity at 25%: 4 × 0.40 + 2 × 0.15 + 3 × 0.20 + 5 × 0.25 = 1.60 + 0.30 + 0.60 + 1.25 = 3.75. System B falls to 3.25, so the proposal reverses the result."
+        },
+        {
+          "id": "pick",
+          "label": "Which system the method agreed before scoring selects (A or B)",
+          "accept": [
+            "B",
+            "system b",
+            "b system",
+            "option b"
+          ],
+          "rationale": "Under the weights agreed before anyone saw the scores, System B wins at 3.55 against 3.45. The reweighting was proposed only after the totals were known, which is why it should not be adopted."
+        }
+      ],
+      "explanation": "Agreeing objective criteria and their weights before options are scored takes the personal element out of a disagreement, because both parties have committed to a method before knowing which answer it favours. That commitment only works if the method is protected afterwards: changing weights once the totals are visible reopens the conflict and turns the method into a tool for whoever is losing. A close result is a reason to look harder at the evidence, not to change the rules.",
+      "mindset": "Agree how a dispute will be decided before anyone knows which way the method points, then keep to it."
+    },
+    {
+      "id": "pmp-p2-140",
+      "type": "hotspot",
+      "domain": "people",
+      "ecoTask": "people-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "feedback",
+        "coaching",
+        "fintech",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "On a fintech app team, a tester asks you, as Scrum Master, to look over a message she plans to send a developer who keeps merging to the main branch without the review the team agreed. The diagram shows her draft, one sentence per box. Select the sentence most likely to escalate the conflict rather than resolve it.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "A five-sentence draft message, one sentence per box",
+        "caption": "Select a sentence. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "s1",
+          "n": 1,
+          "label": "On three occasions this sprint, you merged to main without the one review our working agreement asks for.",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "Pointing out a repeated breach can feel accusatory, which is why candidates pick it. But it is specific, checkable and tied to a rule the team wrote, so the developer can answer it without defending his character."
+        },
+        {
+          "id": "s2",
+          "n": 2,
+          "label": "Two of those merges broke the nightly build, and I spent most of Tuesday putting it right.",
+          "x": 20,
+          "y": 94,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "Stating the cost can read as blame, but it describes a concrete consequence rather than a judgement. It is what tells the developer why the request matters, and it can be discussed on its facts."
+        },
+        {
+          "id": "s3",
+          "n": 3,
+          "label": "It is hard not to conclude that you think the team's rules do not apply to you.",
+          "x": 20,
+          "y": 168,
+          "w": 600,
+          "h": 64,
+          "correct": true,
+          "rationale": "This moves from what he did to what he supposedly thinks of the team. An attributed motive cannot be discussed, only denied, so it invites him to defend his character instead of talking about the merges."
+        },
+        {
+          "id": "s4",
+          "n": 4,
+          "label": "I am frustrated by this, and I would like us to sort it out before the release.",
+          "x": 20,
+          "y": 242,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "Candidates often assume that naming a feeling inflames things. Owning the feeling in the first person, alongside a wish to resolve it, is honest and gives the other person nothing to rebut."
+        },
+        {
+          "id": "s5",
+          "n": 5,
+          "label": "Could we agree that you wait for one approval before merging, even for small changes?",
+          "x": 20,
+          "y": 316,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "A request can sound like a demand, which makes this tempting. But it is specific and answerable, and it offers a way forward that the developer can accept, discuss or counter."
+        }
+      ],
+      "explanation": "In a conflict conversation, the sentences that escalate are the ones that move from what someone did to who they are or what they intend. Observed behaviour, its concrete impact, the speaker's own feelings and a specific request can all be heard and answered; an attributed motive can only be denied, so the other person defends their character instead of discussing the behaviour. Coaching someone before a difficult conversation is largely helping them notice where description has slipped into interpretation.",
+      "mindset": "Describe what someone did and what it cost, and leave their motives out of it."
+    }
+  ]
+}

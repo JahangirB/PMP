@@ -1,0 +1,1916 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "People 5 — Expectation alignment",
+  "questions": [
+    {
+      "id": "pmp-p5-101",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "acceptance-criteria",
+        "terminology",
+        "healthcare",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Your project is replacing a hospital pathology laboratory's information system under a fixed-price contract. At a progress meeting ten weeks before go-live, the laboratory manager mentions she is relying on the system arriving 'fully validated', so her staff can report patient results from day one. The supplier's plan uses 'validation' to mean its own factory acceptance tests. The contract's acceptance schedule refers to validation without defining it. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the supplier to price an extension of its testing to cover the laboratory's own regulatory validation, and prepare a change request so the board can decide well before go-live.",
+          "correct": false,
+          "rationale": "This treats the gap as a scope change before anyone knows whether it is one. If the undefined term in the acceptance schedule turns out to include the laboratory's meaning, the client would be paying for work already owed."
+        },
+        {
+          "id": "b",
+          "text": "Log the differing interpretations as a high-impact risk to the go-live date, assign it an owner, and brief the sponsor at the next steering meeting with costed options for protecting the date.",
+          "correct": false,
+          "rationale": "It escalates a question the project can answer itself in a single meeting. The sponsor cannot choose between options until someone has established what the contract actually requires, so the briefing arrives without its key fact."
+        },
+        {
+          "id": "c",
+          "text": "Bring the laboratory manager and the supplier's lead together to set out what each means by validation, compare both readings with the acceptance schedule, and record the agreed meaning.",
+          "correct": true,
+          "rationale": "Nobody yet knows whether this is a misunderstanding, missing scope or a contractual dispute. Putting both readings side by side against the governing document is the step that tells you which, and recording the outcome stops the word drifting again."
+        },
+        {
+          "id": "d",
+          "text": "Advise the laboratory manager to plan her own verification exercise after go-live, because the supplier's factory testing is the only validation it has formally committed to.",
+          "correct": false,
+          "rationale": "It adopts the supplier's reading as if it were settled, when the contract leaves the term open. A candidate choosing this has quietly decided the dispute in the supplier's favour without checking the document both parties signed."
+        }
+      ],
+      "explanation": "When an expectation gap turns on a word, the first job is to establish what each party means and what the governing document says, because until then nobody knows whether the gap is a misunderstanding, missing scope or a contractual disagreement. Pricing a change, escalating, or advising one side all presume the answer to that question. Once the meaning is agreed it should be written down where both parties will find it, so the term cannot drift again.",
+      "mindset": "When two people use the same word for different things, define the word before managing its consequences."
+    },
+    {
+      "id": "pmp-p5-102",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "sprint-review",
+        "product-backlog",
+        "feedback",
+        "archetype-route-to-owner"
+      ],
+      "stem": "During a sprint review for a travel company's booking app, the head of customer service watches the new itinerary screen and says it is of little use without a way to export the itinerary as a PDF. The story the team delivered, which the product owner wrote and accepted, does not mention export. She asks you, as the team's agile project lead, to make sure it gets built. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Thank her for the feedback and ask the product owner to capture PDF export as a backlog item, so it can be prioritised against the other work.",
+          "correct": true,
+          "rationale": "New expectations surfaced at a review belong on the backlog, and the product owner decides where they sit. This welcomes the feedback and puts it in front of its owner without committing the team."
+        },
+        {
+          "id": "b",
+          "text": "Ask the developers whether PDF export could be added before the end of the current sprint, since the feedback has come from a senior stakeholder.",
+          "correct": false,
+          "rationale": "It lets seniority decide what the team works on and disrupts a sprint the team has already planned. The choice reflects a belief that responsiveness means acting on feedback immediately rather than routing it to the person who orders the work."
+        },
+        {
+          "id": "c",
+          "text": "Explain that the delivered story has been accepted as complete, and that export can be looked at again if it appears in a future release plan.",
+          "correct": false,
+          "rationale": "It is accurate about scope but leaves her with no route for a reasonable request. A candidate picking this has confused protecting the team with closing down the conversation, which teaches stakeholders that reviews are not worth attending."
+        },
+        {
+          "id": "d",
+          "text": "Add PDF export to the definition of done for the itinerary feature, so that the team treats the current story as unfinished until export is built.",
+          "correct": false,
+          "rationale": "The definition of done sets quality standards that apply to every item, not the scope of one feature. Using it to smuggle in a new requirement misreads what the artefact is for and reopens accepted work."
+        }
+      ],
+      "explanation": "In agile delivery, new expectations raised at a review are inputs to the backlog, and the product owner is the person who decides where they sit against everything else. The agile lead's job is to make sure feedback reaches that owner in usable form, not to commit the team or to close the conversation. Feedback that is welcomed and routed keeps stakeholders engaged; feedback that is dismissed or fast-tracked teaches them to go round the process.",
+      "mindset": "Welcome new expectations, then hand them to the person who owns the order of work."
+    },
+    {
+      "id": "pmp-p5-103",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "handover",
+        "construction",
+        "milestone-definition",
+        "archetype-make-visible"
+      ],
+      "stem": "Your firm is building a teaching block for a university under a standard construction contract. Practical completion is due in four weeks. The contract allows handover at practical completion with minor defects outstanding, to be cleared during a twelve-month defects period. You learn that the university's estates team has booked furniture installation and staff moves for the week after handover, assuming the building will be free of snagging work. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Instruct the subcontractors to clear every outstanding snagging item before practical completion, using overtime and extra labour where needed, so the estates team receives a clean building for the moves.",
+          "correct": false,
+          "rationale": "It buys out the client's misunderstanding at the contractor's expense and may delay practical completion itself. The underlying expectation is never corrected, so it will resurface on the next defect."
+        },
+        {
+          "id": "b",
+          "text": "Rely on the contract's definition of practical completion, which the university signed, and deal with any complaints about snagging work as they come up.",
+          "correct": false,
+          "rationale": "Being right on paper does not stop furniture lorries and snagging teams arriving in the same corridors. A candidate choosing this has mistaken contractual protection for expectation management."
+        },
+        {
+          "id": "c",
+          "text": "Write formally to the university's contract administrator confirming the definition of practical completion, attaching the forecast snagging list and noting that the estates bookings for that week may be affected.",
+          "correct": false,
+          "rationale": "The letter states the position but leaves the estates team to work out the consequences alone. It records the gap rather than closing it, and the people whose plans need to change are not in the conversation."
+        },
+        {
+          "id": "d",
+          "text": "Meet the estates team and the contract administrator now to walk through what practical completion will include, share the forecast snagging list and agree how defect work runs around the moves.",
+          "correct": true,
+          "rationale": "The estates team are planning around a picture of the milestone that is wrong. Showing them its real content, with four weeks still in hand, lets them adjust the moves while the formal channel stays involved."
+        }
+      ],
+      "explanation": "A contract can be clear and still leave a stakeholder with the wrong picture of what a milestone delivers. When that picture will collide with someone's operational plans, the useful move is to show the milestone's real content to the people planning around it while there is time to adjust, rather than relying on the document or absorbing the cost of their assumption. A position stated only in correspondence does not change anyone's diary.",
+      "mindset": "Show people what a milestone will actually look like before they plan their lives around it."
+    },
+    {
+      "id": "pmp-p5-104",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "velocity",
+        "team-capacity",
+        "forecasting",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your team of six developers on a payments app has delivered a steady 30 points a sprint for five sprints. The sponsor has funded two more developers, who join next week, and has told her director that velocity will rise to 40 from the next sprint, so a regulatory feature worth €2 million in avoided penalties can land a month earlier. Neither newcomer knows the codebase. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Plan the next sprint at 40 points to honour the sponsor's commitment, and ask the existing developers to pair with the newcomers using whatever spare capacity they have.",
+          "correct": false,
+          "rationale": "It accepts the proportional-scaling premise and then overloads the people who must do the onboarding. The likely result is a missed sprint goal that damages the sponsor's credibility more than an early correction would."
+        },
+        {
+          "id": "b",
+          "text": "Ask the sponsor to delay the two developers' start until after the regulatory feature ships, so that onboarding cannot slow down the team's current velocity.",
+          "correct": false,
+          "rationale": "It rejects the resource instead of the faulty expectation, and gives up longer-term capacity to protect a short-term number. The candidate has spotted the onboarding cost but drawn the wrong conclusion from it."
+        },
+        {
+          "id": "c",
+          "text": "Forecast 35 points for the next sprint as a compromise between current and target velocity, and tell the sponsor that the full 40 points should follow within one or two further sprints.",
+          "correct": false,
+          "rationale": "Splitting the difference keeps the same unfounded premise and simply shrinks the number. A compromise forecast still has no evidence behind it, so it is just as likely to be missed."
+        },
+        {
+          "id": "d",
+          "text": "Explain to the sponsor that velocity is likely to dip while the newcomers are onboarded, and agree to re-forecast the regulatory feature after three sprints of real data.",
+          "correct": true,
+          "rationale": "The expectation rests on the assumption that capacity converts straight into throughput. Challenging that premise, and replacing it with measured data, gives the sponsor something she can defend to her director."
+        }
+      ],
+      "explanation": "Capacity added to a team does not convert into throughput straight away: newcomers need onboarding, and the people who onboard them lose time. An expectation built on proportional scaling should be challenged at its premise, with a plan to replace the assumption with measured data, rather than negotiated down to a smaller figure of the same kind. Committing to the number, or to a compromise on it, produces a forecast nobody has evidence for.",
+      "mindset": "Question the arithmetic behind an expectation before negotiating its size."
+    },
+    {
+      "id": "pmp-p5-105",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "success-criteria",
+        "co-sponsors",
+        "public-sector",
+        "archetype-trade-off"
+      ],
+      "stem": "Two district councils have merged and are jointly sponsoring a new resident contact system. One co-sponsor measures success by cost per contact and wants self-service pushed hard; the other measures it by resident satisfaction and wants easy access to a human adviser. The team, working in quarterly releases built in fortnightly iterations, keeps receiving contradictory priorities from each sponsor's staff. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Facilitate a joint session in which both co-sponsors agree how the two success measures will be weighted when a decision pulls them in different directions.",
+          "correct": true,
+          "rationale": "The contradiction is between two definitions of success, and only the people who own those definitions can agree how to weigh them. Once the weighting exists, the team can apply it without referring every choice upwards."
+        },
+        {
+          "id": "b",
+          "text": "For the next release's candidate features, show both co-sponsors the expected effect of each one on cost per contact and on resident satisfaction.",
+          "correct": true,
+          "rationale": "Making the trade-off concrete turns an argument about values into a set of decisions about specific features. Co-sponsors can agree much more readily on a visible exchange than on an abstract principle."
+        },
+        {
+          "id": "c",
+          "text": "Alternate between the two sponsors' priorities from one iteration to the next, so that each co-sponsor sees steady progress on the outcome they care about.",
+          "correct": false,
+          "rationale": "It looks even-handed but avoids the trade-off entirely, producing a product that zigzags between two strategies. The candidate has mistaken fairness between people for coherence in the product."
+        },
+        {
+          "id": "d",
+          "text": "Decide the order of features yourself using the approved business case, and explain the reasoning to both co-sponsors at the next programme board.",
+          "correct": false,
+          "rationale": "The business case was written before the conflict surfaced and does not settle it. Choosing on the sponsors' behalf takes a decision about strategic outcomes that belongs to them, not to the project manager."
+        },
+        {
+          "id": "e",
+          "text": "Ask the merged council's chief executive to nominate one of the two as sole sponsor, so the team receives a single consistent set of priorities.",
+          "correct": false,
+          "rationale": "It may become necessary, but as a first move it escalates a structural change before the co-sponsors have been asked to align. It also risks losing one legitimate view of success rather than reconciling the two."
+        }
+      ],
+      "explanation": "When stakeholders measure success in ways that pull against each other, the conflict is not resolved by serving each in turn or by someone quietly choosing. It is resolved by making the trade-off explicit, showing how much of one outcome each decision costs in the other, and having the owners of those outcomes agree how to weigh them. A shared weighting lets day-to-day choices be made consistently below sponsor level.",
+      "mindset": "Make competing definitions of success trade against each other in the open, with their owners at the table."
+    },
+    {
+      "id": "pmp-p5-106",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "benefits-realisation",
+        "business-case",
+        "sponsor",
+        "archetype-route-to-owner"
+      ],
+      "stem": "You are managing a route-optimisation system for a logistics company. The business case, owned by the sponsor, forecasts €400,000 of annual fuel savings, ramping up from six months after go-live as depots adopt the new routes. Go-live is in January. You discover that the finance director has already built the full €400,000 into next year's depot budgets, cutting fuel allowances from January. The sponsor is unaware. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Send the finance director the benefits profile from the business case directly, explaining that savings start from July, so the depot budgets can be revised in time.",
+          "correct": false,
+          "rationale": "The information is right but the route is not. The sponsor owns the benefits forecast and the relationship with the finance director, and correcting an executive's budget decision over the sponsor's head leaves the owner blindsided."
+        },
+        {
+          "id": "b",
+          "text": "Brief the sponsor on the mismatch, with the business case extract and the adoption plan, and ask her to agree a corrected budget profile with the finance director.",
+          "correct": true,
+          "rationale": "The forecast being misread is the sponsor's, and so is the senior relationship that has to carry the correction. Bringing her the evidence quickly lets the owner fix it before depots operate on a fuel allowance they cannot meet."
+        },
+        {
+          "id": "c",
+          "text": "Revise the deployment plan to bring depot adoption forward, so that more of the savings land in the first half of the year and the budget shortfall narrows.",
+          "correct": false,
+          "rationale": "It bends delivery to make someone's mistaken expectation come true, adding adoption risk to protect a budget the project did not set. The candidate has treated the gap as a delivery problem rather than an expectation problem."
+        },
+        {
+          "id": "d",
+          "text": "Record the budget assumption as a high-probability risk to depot operations, assign it to the finance director, and report it in the next monthly status report.",
+          "correct": false,
+          "rationale": "Logging the gap is not the same as closing it, and a monthly cycle lets the budgets harden. Assigning the risk to the finance director also skips the sponsor, who owns the forecast that was misread."
+        }
+      ],
+      "explanation": "When a senior stakeholder has acted on an expectation that contradicts the business case, the correction belongs to whoever owns the benefits, because it is their forecast being misread and their relationship that must carry the conversation. The project manager's part is to surface the gap quickly, with evidence, and put it in front of that owner. Correcting an executive directly, logging the gap, or reshaping delivery to make the error true each take on, or delay, a decision that is not the project's to make.",
+      "mindset": "Put a misread forecast in front of the person who owns it, with evidence, before others act on it further."
+    },
+    {
+      "id": "pmp-p5-107",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "success-measures",
+        "machine-learning",
+        "insurance",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your team is building a model that routes motor insurance claims either to fast-track settlement or to an investigator. The sponsor expects 95% accuracy, a figure a vendor quoted at a conference. After six sprints the model is 88% accurate on real claims. Analysis shows most errors are low-value claims sent to investigators unnecessarily; it rarely fast-tracks a claim later found to be fraudulent. The sponsor's quarterly review is in two weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Explain to the sponsor that 88% is a realistic ceiling for real claims data, and ask her to reset her expectation of overall accuracy to around that level.",
+          "correct": false,
+          "rationale": "It argues about the level of the number while keeping the number as the measure of success. The candidate has also asserted a ceiling the team has no evidence for, which the sponsor can reasonably challenge."
+        },
+        {
+          "id": "b",
+          "text": "Work with the sponsor to restate success in terms of fraud missed and investigator hours saved, and show where the model stands against those two measures.",
+          "correct": true,
+          "rationale": "The expectation is wrong in what it measures, not just in its level. Reconnecting it to the outcomes the business needs shows the model is strong where it counts and makes its real weakness, wasted investigator time, the target."
+        },
+        {
+          "id": "c",
+          "text": "Spend the next two sprints tuning the model towards 95%, and present the improved figure at the quarterly review together with the gap that remains.",
+          "correct": false,
+          "rationale": "Chasing a headline figure can trade away the property that matters most, catching fraud, for gains on cheap claims. The candidate has accepted a borrowed metric as the definition of value without examining it."
+        },
+        {
+          "id": "d",
+          "text": "Commission an independent benchmark of comparable claims models, so that the sponsor's 95% expectation can be tested against evidence from real deployments.",
+          "correct": false,
+          "rationale": "Evidence-based, but it tests whether the number is achievable rather than whether it is the right number. It also takes weeks and keeps the conversation anchored on overall accuracy."
+        }
+      ],
+      "explanation": "An expectation can be mistaken not in its level but in what it measures. A single headline figure borrowed from another context often hides the outcome the business actually needs, and arguing about the figure, whether upwards, downwards or by benchmark, keeps everyone anchored to it. The stronger move is to reconnect the expectation to the business outcome and derive the measure from that, so progress is judged on what matters.",
+      "mindset": "Before debating whether a target is achievable, ask whether it measures the thing that matters."
+    },
+    {
+      "id": "pmp-p5-108",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "project-artefacts",
+        "assumptions",
+        "scope-exclusions",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your hybrid digitisation project for a regional museum has surfaced several expectation gaps. Each has been resolved in conversation, and you now want the agreed position recorded where it will govern future work. Match each situation to the artefact that should hold the agreed position. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The senior curator expected 3D scans of every object; the board has agreed that fragile items will be photographed only, and anyone reading the scope must see this."
+        },
+        {
+          "id": "s2",
+          "text": "The plan relies on volunteers being available three days a week, as the archive team believes they will be, but nobody has yet confirmed it."
+        },
+        {
+          "id": "s3",
+          "text": "The web team and the curators disagreed about when an image counts as finished; they have now agreed it must be colour-checked and carry full catalogue metadata."
+        }
+      ],
+      "options": [
+        {
+          "id": "scope",
+          "text": "Project scope statement, as an explicit exclusion",
+          "correct": true,
+          "match": "s1",
+          "rationale": "What the project will not do is part of its scope, and stating exclusions explicitly is what stops the original expectation returning later. A decision held only in board minutes is hard for future readers to find."
+        },
+        {
+          "id": "assume",
+          "text": "Assumption log",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Volunteer availability is a condition the plan treats as true without proof. Logging it with an owner and a date for confirmation keeps the archive team's belief visible and testable rather than silently built in."
+        },
+        {
+          "id": "dod",
+          "text": "Definition of done",
+          "correct": true,
+          "match": "s3",
+          "rationale": "An agreed threshold for when any image is complete is a quality standard applying to every item the team produces. The definition of done is where the iterative web team will check it every time."
+        },
+        {
+          "id": "risk",
+          "text": "Risk register",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of the three is an uncertain future event with a response plan. The volunteer assumption could become a risk if it proves shaky, but until it is tested it belongs with assumptions, not risks."
+        }
+      ],
+      "explanation": "An expectation gap is only closed when the agreed position is written into the artefact that governs that kind of decision. What is in or out belongs in the scope statement, unproven conditions the plan depends on belong in the assumption log, and the standard for finished work belongs in the definition of done or acceptance criteria. Agreement left in conversation or minutes decays, and the original expectation quietly returns.",
+      "mindset": "An agreement that is not recorded where people will look for it has not really been reached."
+    },
+    {
+      "id": "pmp-p5-109",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "information-needs",
+        "status-reporting",
+        "agriculture",
+        "archetype-diagnose-first"
+      ],
+      "stem": "You lead an agile team building a members' app for an agricultural co-operative. Progress is shown on a live board, and every fortnightly sprint review is open to all stakeholders. The co-operative's regional director has complained to the sponsor that she is 'kept in the dark' and wants a weekly written status report like the ones her previous projects provided. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Start sending her a weekly written status report in the format she asked for, since producing one costs the team little and settles the complaint quickly.",
+          "correct": false,
+          "rationale": "It treats the request as the need. A report that answers questions she is not asking will not stop her feeling uninformed, and the candidate has skipped finding out what is actually missing."
+        },
+        {
+          "id": "b",
+          "text": "Invite her to the fortnightly sprint reviews and walk her through how to read the live board, which already holds everything a weekly written status report would contain.",
+          "correct": false,
+          "rationale": "It assumes the existing channels meet her need before finding out what the need is. The candidate has defended the agile method rather than understood the stakeholder."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to explain to her that agile teams report progress through reviews and the board rather than through written weekly status reports.",
+          "correct": false,
+          "rationale": "It routes a relationship issue through a third party and frames it as a lesson in method. She is likely to hear that her concern has been dismissed by people she cannot easily challenge."
+        },
+        {
+          "id": "d",
+          "text": "Meet the regional director to find out what decisions she needs to make and what information she feels she is missing, then agree a format that gives her that.",
+          "correct": true,
+          "rationale": "A request for a particular report is usually a proxy for an information need. Finding out the need first lets the format follow from its purpose, whether that ends up being a report, a briefing or something else."
+        }
+      ],
+      "explanation": "A request for a particular report is usually a proxy for an information need, and it is the need that has to be met. Supplying exactly what was asked for, or insisting the existing channels are enough, both skip the question of what the stakeholder is trying to decide or reassure herself about. Finding that out first lets the format follow from the purpose, whatever the delivery approach.",
+      "mindset": "Ask what a stakeholder needs to know before deciding how to tell them."
+    },
+    {
+      "id": "pmp-p5-110",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "transition",
+        "hypercare",
+        "operations-support",
+        "archetype-use-own-authority"
+      ],
+      "stem": "Your project is replacing an airline's maintenance planning system, built iteratively but released through a single planned cutover. The transition plan, which you own, provides four weeks of hypercare by the project team before support passes to the IT service desk. At a planning workshop, the engineering manager says his planners expect the project developers to stay on hand for six months, as happened on a previous project. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Define measurable exit criteria for hypercare in the transition plan, so support passes to the service desk once stability is shown rather than on a fixed date.",
+          "correct": true,
+          "rationale": "The planners' real worry is being left unsupported before the system is stable. Criteria-based exit answers that worry within the plan the project manager owns, without conceding an arbitrary six months."
+        },
+        {
+          "id": "b",
+          "text": "Walk the engineering manager and the service desk lead through the support model together, including how planners will raise and escalate issues after hypercare.",
+          "correct": true,
+          "rationale": "The expectation comes from a previous project, so the new arrangement has to be shown, not just stated. Having the receiving and consuming sides hear it together removes the gap between them."
+        },
+        {
+          "id": "c",
+          "text": "Extend hypercare to six months in the transition plan, because the planners' confidence in a safety-related system matters more than the cost of retaining developers.",
+          "correct": false,
+          "rationale": "It concedes the expectation without testing it, and ties up a delivery team for months on the strength of what happened elsewhere. The candidate has confused reassurance with the duration of support."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor to rule on the length of hypercare, because the engineering manager's expectation conflicts with the approved transition plan.",
+          "correct": false,
+          "rationale": "The transition plan is within the project manager's authority, and nothing has yet been tried to align the expectation with it. Escalating first hands the sponsor a decision the project should be able to settle."
+        },
+        {
+          "id": "e",
+          "text": "Arrange for two project developers to join the service desk on six-month secondments, so planners keep access to people who know the new system well.",
+          "correct": false,
+          "rationale": "It institutionalises the dependency the transition is meant to end, and commits service desk staffing that the project does not control. The candidate has solved the request rather than the underlying need."
+        }
+      ],
+      "explanation": "When a stakeholder's expectation is carried over from a previous project and the matter sits within your own plan, use that authority to make the plan credible and then show it to everyone who depends on it. Tying handover to evidence of stability addresses the fear behind the request, and briefing the giving and receiving sides together aligns them in one step. Conceding, escalating, or engineering a workaround all leave the expectation unexamined.",
+      "mindset": "Answer the fear behind an inherited expectation with a plan you own, shown to everyone it affects."
+    },
+    {
+      "id": "pmp-p5-111",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "external-communications",
+        "approved-change",
+        "utilities",
+        "archetype-act-now"
+      ],
+      "stem": "You are managing a billing system upgrade for a water company. Three weeks ago the change control board approved removing paperless direct debit sign-up from the first release; it moves to a second release in the autumn. This afternoon you see a draft customer newsletter, due to be printed and posted to 80,000 households tomorrow morning, announcing paperless sign-up from next month. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the newsletter to the agenda of next week's stakeholder meeting so communications can plan a correction notice for customers in the following issue.",
+          "correct": false,
+          "rationale": "It waits until the error is already in 80,000 homes and then plans to undo it. The candidate has recognised the gap but treated a time-critical issue as routine business."
+        },
+        {
+          "id": "b",
+          "text": "Ask the development team to estimate whether paperless sign-up could be brought back into the first release, so the newsletter can go out as written.",
+          "correct": false,
+          "rationale": "It lets a draft newsletter reopen a decision the change control board has already made. The candidate is bending the approved scope to fit an announcement rather than correcting the announcement."
+        },
+        {
+          "id": "c",
+          "text": "Contact the head of customer communications today, explain the approved change, and ask for the newsletter to be corrected before it goes to print.",
+          "correct": true,
+          "rationale": "Once 80,000 newsletters are posted the wrong expectation is set in public and cannot be recalled. A short, direct call today costs little and stops the gap from being created at all."
+        },
+        {
+          "id": "d",
+          "text": "Send the communications team a copy of the approved change request and the revised release plan, so they can check their material against the current scope.",
+          "correct": false,
+          "rationale": "The right information sent the wrong way: an email with attachments may not be read before the print run tomorrow. The candidate has made the change visible without making sure it lands in time."
+        }
+      ],
+      "explanation": "When someone is about to set a public expectation that contradicts an approved decision, the cost of correcting it rises sharply the moment it is published. The response should match that urgency: reach the person who can stop it, directly and before the deadline, rather than relying on routine channels or reopening the decision to fit the message. Approved changes need to reach everyone who speaks for the project, not only those who build it.",
+      "mindset": "Stop a wrong expectation before it is published, because correcting it afterwards costs far more."
+    },
+    {
+      "id": "pmp-p5-112",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "user-expectations",
+        "release-planning",
+        "warehousing",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "Your team is building a stock-scanning app for a frozen food distributor. At the third sprint review, pickers said they expected it to work in the cold store, where there is no Wi-Fi. The team had assumed constant connectivity. A one-sprint spike has now confirmed the pickers are right: half of all picks happen inside the cold store. The sponsor has promised the board a pilot release in six weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the product owner to make offline working part of the pilot scope, re-plan the release, and take the revised forecast to the sponsor with the spike findings.",
+          "correct": true,
+          "rationale": "The users' expectation was right and the team's assumption was wrong. Accepting that, adapting the plan, and giving the sponsor the evidence to reset the board's expectation keeps the pilot worth running."
+        },
+        {
+          "id": "b",
+          "text": "Release the pilot in six weeks for ambient areas only, and ask the product owner to schedule offline working for the following release once the pilot has proved the core flow.",
+          "correct": false,
+          "rationale": "Defensible as incremental delivery, but a pilot that cannot be used for half of all picks will not prove the core flow. The candidate has protected the date and the sponsor's promise at the expense of what the pilot is for."
+        },
+        {
+          "id": "c",
+          "text": "Ask the distributor's facilities team to price Wi-Fi coverage inside the cold store, so that the app can go ahead as designed and the six-week pilot date holds.",
+          "correct": false,
+          "rationale": "It tries to change the environment to fit the product, moving cost and dependency onto another department. The candidate is defending the original assumption rather than accepting what the spike showed."
+        },
+        {
+          "id": "d",
+          "text": "Hold the pilot date, and ask the team to add offline working on top of the current sprint plans by reducing the time spent on testing and refactoring.",
+          "correct": false,
+          "rationale": "It accepts the requirement but quietly pays for it with quality. The candidate has adapted the scope without adapting the plan, which moves the expectation gap to the defect queue."
+        }
+      ],
+      "explanation": "Expectation alignment is not always about bringing stakeholders round to the plan; sometimes the plan is what is wrong. When evidence shows a stakeholder's expectation is valid and the team's assumption was not, the right move is to accept it, adapt scope and plan openly, and give senior stakeholders the evidence they need to reset expectations further up. Protecting the date, changing the environment or squeezing quality all avoid admitting the plan has changed.",
+      "mindset": "When the evidence says the stakeholder was right, change the plan and say so."
+    },
+    {
+      "id": "pmp-p5-113",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "requirements-sign-off",
+        "delegation",
+        "healthcare",
+        "archetype-make-visible"
+      ],
+      "stem": "During requirements sign-off for a hospital's electronic prescribing system, the director of nursing sent her deputy, who agreed with pharmacy and IT to defer bedside barcode scanning to a later phase to protect the go-live date. Two months on, the director tells you she expects barcode scanning at go-live, as she promised her ward managers. The signed-off requirements and the steering group minutes both record the deferral. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a change request on the director's behalf to bring barcode scanning back into the go-live scope, so the steering group can weigh the cost and schedule impact.",
+          "correct": false,
+          "rationale": "It starts the change process before the director knows why the decision was made. She may well accept the deferral once she sees the reasoning, and the candidate has skipped the conversation that would show that."
+        },
+        {
+          "id": "b",
+          "text": "Ask the deputy to explain the deferral to the director, since the deputy represented nursing at sign-off and agreed the phasing on her behalf.",
+          "correct": false,
+          "rationale": "It puts a junior colleague in the position of defending the decision to her own director. The candidate has treated the gap as an internal nursing matter rather than one the project needs to close."
+        },
+        {
+          "id": "c",
+          "text": "Meet the director to walk through the deferral decision and its reasons, and explain how she can raise a change request if she still wants scanning at go-live.",
+          "correct": true,
+          "rationale": "She is holding an expectation formed without the information her deputy had. Showing her the decision, its reasoning and the route to challenge it respects both the record and her authority."
+        },
+        {
+          "id": "d",
+          "text": "Remind the director that the requirements were signed off by her authorised delegate, and confirm that barcode scanning remains planned for the second phase.",
+          "correct": false,
+          "rationale": "It is correct on the record but treats sign-off as closing the matter. A senior stakeholder who feels overruled by her own delegate is unlikely to stay engaged, and her ward managers still hold the wrong expectation."
+        }
+      ],
+      "explanation": "A decision taken by a delegate can bind a stakeholder formally while leaving them with no idea why it was made. The gap is closed by showing the decision and its reasoning to the person whose expectation is out of line, and making clear how they can challenge it if they still disagree. Relying on the signature, passing the conversation back to the delegate, or reopening the decision for them all skip the step where the stakeholder actually understands it.",
+      "mindset": "A signature records agreement; only explanation creates it."
+    },
+    {
+      "id": "pmp-p5-114",
+      "type": "fillblank",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "three-point-estimate",
+        "forecasting",
+        "confidence",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "The sponsor of a laboratory relocation has been telling the board it will take 20 weeks, which is the team's most likely estimate. The full estimate is optimistic 18 weeks, most likely 20 weeks and pessimistic 34 weeks. You want to show the board a range instead. Using a beta (PERT) distribution, work out the figures below.",
+      "blanks": [
+        {
+          "id": "mean",
+          "label": "Expected duration, in weeks",
+          "numeric": true,
+          "expect": 22,
+          "tol": 0.05,
+          "unit": "weeks",
+          "rationale": "The PERT mean is (O + 4M + P) ÷ 6 = (18 + 80 + 34) ÷ 6 = 132 ÷ 6 = 22 weeks. The long pessimistic tail pulls the expected value two weeks past the most likely figure the sponsor has been quoting."
+        },
+        {
+          "id": "sd",
+          "label": "Standard deviation, in weeks, to two decimal places",
+          "numeric": true,
+          "expect": 2.67,
+          "tol": 0.01,
+          "unit": "weeks",
+          "rationale": "The PERT standard deviation is (P − O) ÷ 6 = (34 − 18) ÷ 6 = 16 ÷ 6 = 2.67 weeks. It measures how wide the spread of plausible outcomes is around the mean."
+        },
+        {
+          "id": "p84",
+          "label": "Duration at roughly 84% confidence (mean plus one standard deviation), in weeks, to two decimal places",
+          "numeric": true,
+          "expect": 24.67,
+          "tol": 0.02,
+          "unit": "weeks",
+          "rationale": "Mean plus one standard deviation is 22 + 2.67 = 24.67 weeks, roughly the 84th percentile under a normal approximation. That is nearly five weeks beyond the figure the board has been hearing."
+        }
+      ],
+      "explanation": "The most likely value of a skewed estimate is not the expected value, and it is rarely a safe commitment. When risks sit mostly on the late side, the mean moves past the most likely figure and any date with meaningful confidence moves further still. Expressing a forecast as a range with a stated confidence level lets stakeholders set their expectations against the real uncertainty rather than the single number that sounds best.",
+      "mindset": "Give stakeholders a range with a confidence level, not the single number that is most comfortable to hear."
+    },
+    {
+      "id": "pmp-p5-115",
+      "type": "hotspot",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "burnup-chart",
+        "scope-growth",
+        "release-forecast",
+        "archetype-make-visible"
+      ],
+      "stem": "The sponsor of a council's planning portal expects release at sprint 10, based on the original 250-point scope and a velocity of 25. The release burnup at sprint 6 is shown. Select the element you should put in front of the sponsor to explain why the forecast has moved.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Release burnup at sprint 6 showing completed work, total scope and the sprint 10 marker",
+        "caption": "Select an element. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "done",
+          "n": 1,
+          "label": "Completed-work line: rising steadily by 25 points a sprint, at 150 points by sprint 6",
+          "x": 60,
+          "y": 200,
+          "w": 260,
+          "h": 110,
+          "correct": false,
+          "rationale": "Velocity has held at exactly the rate the original forecast assumed. Pointing at this line would suggest a delivery problem that the data does not show, and invite pressure on the team."
+        },
+        {
+          "id": "scope",
+          "n": 2,
+          "label": "Total-scope line: 250 points at sprint 0, rising to 310 points by sprint 6",
+          "x": 60,
+          "y": 40,
+          "w": 260,
+          "h": 70,
+          "correct": true,
+          "rationale": "The forecast has moved because 60 points have been added, not because the team has slowed. At 25 points a sprint the 160 remaining points take about 6.4 more sprints, so release lands around sprint 13. Showing the added scope ties the new date to decisions the sponsor can see."
+        },
+        {
+          "id": "gap",
+          "n": 3,
+          "label": "Gap between the two lines at sprint 6: 160 points still to deliver",
+          "x": 330,
+          "y": 110,
+          "w": 70,
+          "h": 90,
+          "correct": false,
+          "rationale": "The remaining work is the result, not the cause. Presenting it alone shows the sponsor that the date has moved without showing why, which invites the question rather than answering it."
+        },
+        {
+          "id": "marker",
+          "n": 4,
+          "label": "Vertical marker at sprint 10: the release date the sponsor announced",
+          "x": 480,
+          "y": 30,
+          "w": 50,
+          "h": 290,
+          "correct": false,
+          "rationale": "This shows the expectation, not the reason it no longer holds. It is useful context on the chart, but it cannot by itself explain the gap between what was announced and what is now forecast."
+        }
+      ],
+      "explanation": "A burnup chart separates two reasons a release date moves: the team delivering more slowly, or the target growing. Before resetting a stakeholder's expectation about a date, identify which line has changed, because the conversation is quite different in each case. When the scope line has risen, the date has moved as a consequence of decisions to add work, and showing that keeps the discussion on trade-offs rather than on team performance.",
+      "mindset": "Before explaining why a date moved, check whether the work grew or the pace slowed."
+    },
+    {
+      "id": "pmp-p5-116",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "elicitation",
+        "unstated-expectations",
+        "libraries",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "A county library service is introducing self-service kiosks through a hybrid project. Before release planning you want to surface the expectations each group holds but has not stated. Match each group to the technique most likely to bring its expectations to light. One choice is not used.",
+      "prompts": [
+        {
+          "id": "g1",
+          "text": "Counter staff who find it hard to describe their routine in the abstract but handle hundreds of loans and returns a day."
+        },
+        {
+          "id": "g2",
+          "text": "Twenty-eight branch managers spread across the county, each with local priorities and little time to travel."
+        },
+        {
+          "id": "g3",
+          "text": "Three senior heads of service whose expectations for the kiosks are known to conflict with one another."
+        }
+      ],
+      "options": [
+        {
+          "id": "observe",
+          "text": "Observation of the work as it happens",
+          "correct": true,
+          "match": "g1",
+          "rationale": "People who do a task fluently often cannot describe it, and their expectations sit in what they do rather than what they say. Watching the counter at work surfaces those expectations directly."
+        },
+        {
+          "id": "survey",
+          "text": "Structured questionnaire",
+          "correct": true,
+          "match": "g2",
+          "rationale": "A questionnaire reaches a large, dispersed group cheaply and gives comparable answers. It suits branch managers who need a voice but cannot easily be brought together."
+        },
+        {
+          "id": "workshop",
+          "text": "Facilitated workshop",
+          "correct": true,
+          "match": "g3",
+          "rationale": "Conflicting expectations held by a few senior people need to be heard in the same room, so the differences surface and can be worked through with a neutral facilitator."
+        },
+        {
+          "id": "docs",
+          "text": "Review of existing documentation",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Documents show what was written down in the past, not the expectations people now hold but have not voiced, so none of the three groups is best reached this way."
+        }
+      ],
+      "explanation": "Unstated expectations come to light only when the technique fits how a group holds and expresses them. Tacit expertise is best observed, a large dispersed group is reached most efficiently through structured questions, and conflicting views among a few senior people need a facilitated space where they can be compared. Choosing one technique for every group leaves some expectations hidden until they surface as complaints.",
+      "mindset": "Choose how to ask by how people hold what they know."
+    },
+    {
+      "id": "pmp-p5-117",
+      "type": "pulldown",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "hybrid-governance",
+        "baselines",
+        "manufacturing",
+        "archetype-make-visible"
+      ],
+      "stem": "A packaging plant upgrade combines a baselined equipment installation with software features delivered in fortnightly iterations. Stakeholders hold mismatched expectations about how each part is governed. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The plant director assumes every software feature on the current roadmap is guaranteed for the commissioning date, just like the equipment. The project manager should"
+        },
+        {
+          "id": "c2",
+          "text": "The finance manager expects a formal change request each time the product owner reorders the software backlog. The project manager should"
+        }
+      ],
+      "options": [
+        {
+          "id": "split",
+          "text": "show which items are baselined commitments and which are forecasts that will be refined each iteration",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The director has carried the certainty of the baselined installation over to an iterative stream. Making the boundary between commitment and forecast visible resets the expectation without weakening either part."
+        },
+        {
+          "id": "boundary",
+          "text": "explain that reordering within the agreed release budget and goal is the product owner's call, and change control applies when those move",
+          "correct": true,
+          "match": "c2",
+          "rationale": "The finance manager expects predictive controls to apply at the level of individual backlog items. Showing where the formal threshold sits keeps governance meaningful without slowing iterative decisions."
+        },
+        {
+          "id": "single",
+          "text": "bring both streams under one change control process so that all stakeholders follow the same rules",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A single process removes the mismatch by making the iterative stream predictive, which throws away the flexibility the hybrid approach was chosen for."
+        }
+      ],
+      "explanation": "In a hybrid project, stakeholders often carry the expectations of one governance model into the other part of the work. The fix is to make the boundary visible: what is baselined and committed, what is forecast and expected to evolve, and where the threshold for formal change control sits. Collapsing everything into one model removes the confusion by removing the reason for running a hybrid.",
+      "mindset": "In a hybrid project, show people which rules apply to which part of the work."
+    },
+    {
+      "id": "pmp-p5-118",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "definition-of-done",
+        "team-expectations",
+        "release-readiness",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are the agile lead for a team building a ticketing platform for a theatre group. The product owner expects every sprint increment to be releasable. The developers expect a two-week hardening sprint before each release, as on their previous product, and leave performance testing until then. Neither side knows the other's assumption. A first public release is planned in eight weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bring the product owner and developers together to agree what releasable means, update the definition of done to match, and make any work that cannot yet be done each sprint visible.",
+          "correct": true,
+          "rationale": "The two sides hold different meanings of done, and the definition of done is the team's tool for aligning them. Facilitating that agreement is within the agile lead's remit and turns hidden deferred work into visible, plannable work."
+        },
+        {
+          "id": "b",
+          "text": "Schedule a hardening sprint before the release as a compromise, and ask the product owner to plan the release date around the extra two weeks.",
+          "correct": false,
+          "rationale": "It settles the immediate clash in the developers' favour and builds the hidden work into the plan, but it does so without the product owner understanding why, and keeps increments that are not releasable."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to state at the next sprint planning session that every increment must be releasable, and to decline at review any story that has not been performance tested.",
+          "correct": false,
+          "rationale": "It treats the gap as a communication failure in one direction and enforces one side's meaning without agreement. The developers' expectation has a practical basis, and until the team agrees what releasable involves it will simply defer different work."
+        },
+        {
+          "id": "d",
+          "text": "Add performance testing as separate backlog items for the product owner to prioritise each sprint, so the deferred work is visible, estimated and ordered against new features before the release.",
+          "correct": false,
+          "rationale": "Making the work visible is right, but turning a quality standard into optional backlog items lets it be traded away against features. The candidate has fixed the visibility problem and created a prioritisation one."
+        }
+      ],
+      "explanation": "When a product owner and a team hold different meanings of done, the misalignment is hidden until a release exposes it, and the definition of done is the instrument that makes the meaning explicit. Aligning on it is the agile lead's own job rather than something to escalate or leave to one party. Work that genuinely cannot yet be completed each sprint should be made visible as part of that agreement, not quietly deferred or turned into optional backlog items.",
+      "mindset": "Make sure 'done' means the same thing to everyone before anyone relies on it."
+    },
+    {
+      "id": "pmp-p5-119",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "communications-plan",
+        "site-operations",
+        "outages",
+        "archetype-accept-and-adapt"
+      ],
+      "stem": "You are managing an electrical upgrade at a food processing plant, carried out in planned shutdowns. The communications management plan, which you own, gives 24 hours' notice of each power outage. At the kick-off meeting, the production manager says he needs 48 hours to run down chilled lines safely. Moving to 48 hours costs nothing and does not affect the schedule. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep 24 hours' notice in the plan, and ask the production manager to request longer notice for any outage that affects the chilled lines.",
+          "correct": false,
+          "rationale": "It puts the burden of a known, recurring need onto the stakeholder outage by outage. The candidate has kept the plan intact at the cost of a predictable and avoidable risk to production."
+        },
+        {
+          "id": "b",
+          "text": "Update the communications management plan to give 48 hours' notice of outages, and confirm the change with the production manager.",
+          "correct": true,
+          "rationale": "The request is reasonable, safety-related, free and within the plan the project manager owns. Accepting it and confirming it closes the gap at once."
+        },
+        {
+          "id": "c",
+          "text": "Raise a change request for the steering group to approve 48 hours' notice, because the communications plan was baselined before kick-off.",
+          "correct": false,
+          "rationale": "A cost-free adjustment to a plan the project manager owns does not need a board's decision. The candidate has over-applied formal control to something within their own authority."
+        },
+        {
+          "id": "d",
+          "text": "Ask the production manager to put his notice requirement in writing, so it can be assessed against the other site teams' needs before the plan is changed.",
+          "correct": false,
+          "rationale": "It adds an assessment step whose answer is already known: the change costs nothing and affects nothing else. The candidate has treated a simple, valid request as if it needed investigation."
+        }
+      ],
+      "explanation": "Not every expectation gap needs negotiation. When a stakeholder's expectation is reasonable, costs nothing to meet and sits within a plan you own, the quickest route to alignment is to adapt the plan and confirm the change. Formal control, written requests and case-by-case workarounds are for decisions that carry real impact or sit outside your authority.",
+      "mindset": "When a reasonable request costs nothing and is yours to grant, grant it and confirm it."
+    },
+    {
+      "id": "pmp-p5-120",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "user-acceptance-testing",
+        "service-levels",
+        "financial-services",
+        "archetype-trade-off"
+      ],
+      "stem": "Your team is delivering a pensions administration system to a client in Dublin under a time-and-materials contract. During a six-week user acceptance test, the client's test manager expects your developers to answer defect queries the same day, including weekends. Your developers expect to work normal hours, as in the statement of work. Weekend cover would add about €18,000. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree response times with the test manager by defect severity, so that critical defects receive a same-day answer and lower severities follow within agreed working hours.",
+          "correct": true,
+          "rationale": "Most of the value in a same-day answer comes from the few defects that block testing. Tiering response by severity gives the client fast answers where they matter without demanding round-the-clock cover for everything."
+        },
+        {
+          "id": "b",
+          "text": "Identify the weekends when the test schedule depends most on fast turnaround, and offer the client weekend cover for those dates only, with the cost set out.",
+          "correct": true,
+          "rationale": "It turns an all-or-nothing request into a priced trade-off the client can choose. The client sees what each weekend buys and pays only for the cover that protects the schedule."
+        },
+        {
+          "id": "c",
+          "text": "Provide full weekend cover for the six weeks and absorb the €18,000 within the contract margin, because a smooth acceptance test protects the client relationship.",
+          "correct": false,
+          "rationale": "It meets the expectation by giving away cost and team goodwill without testing whether the need is real. The candidate has confused generosity with alignment, and set a precedent for later phases."
+        },
+        {
+          "id": "d",
+          "text": "Confirm to the test manager that support is provided during normal hours as set out in the statement of work, and ask the client to plan its testing around that.",
+          "correct": false,
+          "rationale": "Contractually sound, but it ignores a real need: some defects will block testing over a weekend. The candidate has defended the agreement rather than looking for the arrangement both sides can live with."
+        },
+        {
+          "id": "e",
+          "text": "Ask your developers to volunteer for an informal weekend rota, so that the test manager's expectation is met without raising the cost with the client.",
+          "correct": false,
+          "rationale": "It hides a real cost inside unpaid goodwill and creates an expectation the team may not sustain over six weeks. The candidate has avoided the conversation with the client rather than aligning expectations."
+        }
+      ],
+      "explanation": "When two parties' expectations conflict and both have a reasonable basis, the gap is usually closed by breaking the request into parts and pricing them, rather than by conceding it all or refusing it all. Distinguishing the cases where the need is real from those where it is not, and showing what each option costs, lets the party with the budget make an informed choice. Hidden goodwill and absorbed cost both disguise a trade-off that should have been made in the open.",
+      "mindset": "Break an all-or-nothing expectation into parts and put a price on each."
+    },
+    {
+      "id": "pmp-p5-121",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "hospitality",
+        "specification",
+        "superseded-artefacts",
+        "archetype-make-visible"
+      ],
+      "stem": "You are managing the refurbishment of 120 guest bathrooms for a hotel group in Edinburgh. The approved specification and budget use porcelain wall tiles. At a site visit, the owner's asset manager mentions how much guests will like the marble shown in the architect's concept images, which were produced before the budget was set. Tile orders are placed in three weeks. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Before tiles are ordered, show the asset manager the approved porcelain samples beside the concept images and confirm she understands what will be installed.",
+          "correct": true,
+          "rationale": "The asset manager is holding an expectation formed from an image the budget later overtook. Putting the approved material next to the picture she remembers closes the gap while ordering can still change cheaply, and leaves any wish to upgrade as her decision to make knowingly."
+        },
+        {
+          "id": "b",
+          "text": "Proceed with the porcelain order as specified, noting that the specification and budget were formally approved and that the concept images did not form part of the contract.",
+          "correct": false,
+          "rationale": "This is right about the record and wrong about the person. A candidate choosing it assumes an approved document settles an expectation, when it only ensures the disappointment arrives at handover, when nothing can be done about it."
+        },
+        {
+          "id": "c",
+          "text": "Raise a change request pricing marble for all 120 bathrooms, so that the owner can decide whether to fund the upgrade before the tile orders are placed.",
+          "correct": false,
+          "rationale": "It jumps to a solution for a request nobody has made. The asset manager believes marble is already included; until she knows it is not, nobody can say whether she wants to pay for it, and pricing it first implies the project thinks she should."
+        },
+        {
+          "id": "d",
+          "text": "Ask the architect to reissue the concept images marked as indicative only, and circulate them to the owner's team with the next monthly progress report.",
+          "correct": false,
+          "rationale": "It corrects the document rather than the belief. A stamp on an old render, sent in a report she may skim, does little to change what one person has already pictured for 120 bathrooms."
+        }
+      ],
+      "explanation": "An expectation formed from an early artefact — a render, a brochure, a demonstration — does not disappear because a later document overrides it. The person holding it has to see the difference between what they pictured and what was approved, at a point where the decision can still change at low cost. Whether they then want to pay for something different is a separate decision that only makes sense once the gap is visible to them.",
+      "mindset": "Superseded documents leave live expectations behind, so retire the expectation and not just the document."
+    },
+    {
+      "id": "pmp-p5-122",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "post-go-live",
+        "ports",
+        "promise-tracing",
+        "archetype-diagnose-first"
+      ],
+      "stem": "Your project delivered a berth-booking portal for a container port. It passed every user acceptance test against the signed-off requirements and went live a fortnight ago. Several shipping-line agents have now told the port's commercial director that the portal 'does not do what we were promised', without saying what they mean. Before launch, the port's commercial team briefed the agents on the portal at a series of customer events. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the agents to list the capabilities they expected to see, and raise each one as a change request so the board can assess it for the second release.",
+          "correct": false,
+          "rationale": "It treats every gap as new scope before anyone knows its cause. The candidate choosing this is being responsive, but some items may be defects or features that already exist, and logging them as changes confirms the agents' belief that they were promised something extra."
+        },
+        {
+          "id": "b",
+          "text": "Arrange refresher sessions for the agents on the portal's existing features, since it passed acceptance testing and the gap most likely lies in how it is being used.",
+          "correct": false,
+          "rationale": "It picks a cause because it is the one the project can fix cheaply. The candidate choosing this reads a passed acceptance test as proof the product is right for these users, when the agents may have been told about capabilities the requirements never contained."
+        },
+        {
+          "id": "c",
+          "text": "Collect the agents' specific complaints and the commercial team's pre-launch briefing material, and compare both with the signed-off requirements to see where the gap arises.",
+          "correct": true,
+          "rationale": "The complaint could be a defect, a training need or a promise made in a briefing the project never saw, and each calls for a different response. Tracing what agents expected, and where they got it, is what tells the project manager which conversation to have and with whom."
+        },
+        {
+          "id": "d",
+          "text": "Send the commercial director the signed acceptance results and requirements, so that she can explain to the agents what the portal was contracted to deliver.",
+          "correct": false,
+          "rationale": "It defends the record and hands the problem back to the stakeholder who raised it. The candidate picking this assumes the documents settle the matter, when the commercial team's own briefings may be where the expectation was set."
+        }
+      ],
+      "explanation": "A vague complaint that a deliverable is 'not what was promised' can come from a defect, a gap in how people were prepared to use it, or a promise made somewhere outside the project's own documents. The responses to those are different, and choosing one before the cause is known usually fixes the wrong thing. The first step is to find out what people expected and trace where that expectation came from, including briefings and sales material the project did not write.",
+      "mindset": "Find out where an expectation came from before deciding how to answer it."
+    },
+    {
+      "id": "pmp-p5-123",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "contracts",
+        "intellectual-property",
+        "supplier-side",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your company is building a bespoke permit-management module for a city council under a fixed-price contract, and you are the supplier's project manager. In a handover planning session, the council's IT manager says his team will take over the source code to maintain the module in-house. The contract, negotiated by the council's procurement office, grants the council a perpetual licence and places the code in escrow. Handover is in eight weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tell the IT manager that the contract grants a licence with escrow rather than ownership, and update the handover plan so it reflects that position.",
+          "correct": false,
+          "rationale": "It is accurate but settles a contractual gap with someone who does not own the contract. The candidate choosing it assumes the IT manager's belief is the whole problem, when the council's own operating model may have been planned around it and its contract owner needs to know."
+        },
+        {
+          "id": "b",
+          "text": "Prepare a priced option for transferring the source code, and send it to the IT manager so that the council can decide well before handover.",
+          "correct": false,
+          "rationale": "It makes a commercial offer through the wrong people on both sides. The supplier's commercial manager has not agreed to sell the code, and the IT manager has no authority to accept a contract change on the council's behalf."
+        },
+        {
+          "id": "c",
+          "text": "Add a knowledge-transfer phase so the council's IT team learns the module's design, which supports them however the ownership question is eventually settled.",
+          "correct": false,
+          "rationale": "It hedges by adding unpriced work to a fixed-price contract and leaves the actual disagreement untouched. The candidate picking it is trying to be helpful, but it avoids the conversation and may strengthen the IT manager's belief that the code is coming."
+        },
+        {
+          "id": "d",
+          "text": "Raise the gap with your commercial manager and ask the council's contract owner to confirm the position, pointing both to the licence and escrow clauses.",
+          "correct": true,
+          "rationale": "The expectation conflicts with the contract, so it has to be resolved by the people who own the contract on each side. Raising it now, with the clauses in front of them, gives both parties eight weeks to agree whether anything changes before handover forces the issue."
+        }
+      ],
+      "explanation": "Where a stakeholder's expectation conflicts with a contract, the gap is resolved between the parties who own the contract, not between the people who happen to discover it. The project manager's job is to make sure the contract owners on both sides know early, with the relevant clauses in hand, so any change is negotiated with authority. Settling it informally — by asserting, offering or quietly absorbing — leaves the formal position and the stakeholder's belief further apart.",
+      "mindset": "Take a contractual expectation gap to the people who signed the contract."
+    },
+    {
+      "id": "pmp-p5-124",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "contingency-reserve",
+        "cost-management",
+        "change-control",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your £6 million rail depot upgrade carries a £300,000 contingency reserve tied to risks in the risk register. The cost management plan states that contingency for a risk that closes is released back to the sponsor. Two risks worth £90,000 have now closed without occurring. At a planning meeting, three workstream leads propose using the £90,000 for enhancements they deferred earlier, such as extra CCTV coverage. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Release the £90,000 to the sponsor as the cost management plan requires, and ask the leads to raise the enhancements as change requests for her to judge.",
+          "correct": true,
+          "rationale": "The leads expect closed-risk money to become theirs; the plan says otherwise. Applying the rule resets that expectation cleanly, and change control gives the enhancements a fair hearing on their own merits, with their schedule and cost impacts assessed."
+        },
+        {
+          "id": "b",
+          "text": "Agree to fund the enhancements from the £90,000, since the money already sits inside the approved project budget and needs no additional funding from the sponsor.",
+          "correct": false,
+          "rationale": "It treats contingency as a spare pot within the budget. The candidate choosing it confuses money being available with money being approved for a purpose, and turns risk funding into an unapproved scope increase."
+        },
+        {
+          "id": "c",
+          "text": "Keep the £90,000 in contingency for now in case the remaining risks prove larger than estimated, and revisit the enhancements nearer to closure.",
+          "correct": false,
+          "rationale": "It sounds prudent but breaks the plan's rule and misstates the project's position to the sponsor. Contingency is sized risk by risk; holding released money back hides it and leaves the leads expecting to spend it later."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor whether the £90,000 may be used for the enhancements, setting out the benefits each workstream lead expects from the additional work.",
+          "correct": false,
+          "rationale": "This is close, because the sponsor is the right person. But it frames new scope as a use for released money rather than a change, inviting the sponsor to bypass her own plan and skipping the impact assessment that change control would carry out."
+        }
+      ],
+      "explanation": "Contingency reserve exists to absorb the cost of specific identified risks; once those risks close, the money that covered them stops being part of the working budget. Treating it as a fund for deferred scope converts risk funding into an unapproved scope increase, and holding it back 'just in case' misstates the project's position. New scope competes for funding on its own merits through change control, whatever money happens to be unspent at the time.",
+      "mindset": "Money set aside for a risk belongs to the risk, not to whoever finds it unspent."
+    },
+    {
+      "id": "pmp-p5-125",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "benefits",
+        "pilots",
+        "healthcare",
+        "archetype-challenge-the-premise"
+      ],
+      "stem": "Your hybrid programme is rolling out a new outpatient booking system to 14 hospital clinics in waves of two. The pilot clinic, chosen because its manager volunteered, cut missed appointments by 30%; during the same months it also ran its first SMS reminder campaign. The rollout business case, approved by the board, now promises a 30% reduction at every clinic. Wave two starts next month. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Continue the rollout against the approved target, measure each wave's reduction against a common baseline, and report any shortfall against 30% to the board as soon as it emerges.",
+          "correct": false,
+          "rationale": "Measuring well is necessary but it lets a weak premise govern until it fails. The candidate choosing this respects the approved case, yet clinic managers will spend a year being judged against a figure the evidence never supported."
+        },
+        {
+          "id": "b",
+          "text": "Ask the benefits manager to restate the target as 15%, halving the pilot result to allow for the SMS campaign and the volunteer clinic, and take the revised figure to the board for approval.",
+          "correct": false,
+          "rationale": "It replaces one unevidenced number with another. The candidate picking it sees the flaw correctly, but a judgement-based halving has no better basis than the original and will be challenged in exactly the same way."
+        },
+        {
+          "id": "c",
+          "text": "Show the board that the volunteer clinic and the SMS campaign may account for part of the pilot result, and propose testing the figure against wave two before it becomes every clinic's target.",
+          "correct": true,
+          "rationale": "The board's expectation rests on a result produced under unusual conditions. Naming those conditions and offering a near-term test turns a promise into a hypothesis the next wave can confirm or correct, before fourteen clinics are held to it."
+        },
+        {
+          "id": "d",
+          "text": "Run the SMS reminder campaign at every clinic alongside the new system, so that the conditions which produced the pilot result are repeated in each wave and the approved target stays realistic.",
+          "correct": false,
+          "rationale": "It may well reduce missed appointments, but it adds scope to protect a number rather than test it. The volunteer effect cannot be replicated, and mixing two interventions everywhere makes it impossible to say what the system itself delivered."
+        }
+      ],
+      "explanation": "A pilot result is evidence about the pilot's conditions, and a target built on it inherits everything that made the pilot unusual: a self-selected site, a concurrent intervention, a novelty effect. When stakeholders have taken a pilot figure as a promise for every site, the honest move is to name the conditions that may not transfer and replace the single number with one the next phase can test. Waiting for shortfalls, substituting another guess or recreating the conditions all leave the original premise unexamined.",
+      "mindset": "Ask what made the pilot unusual before letting its result become everyone's target."
+    },
+    {
+      "id": "pmp-p5-126",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "working-agreements",
+        "distributed-teams",
+        "team-norms",
+        "archetype-use-own-authority"
+      ],
+      "stem": "You are the agile lead for a newly formed team split between Lisbon and Kraków, building a booking platform for a chain of dental practices. After the first sprint, two developers complain that colleagues expect replies to chat messages within minutes, while others treat chat as something to check twice a day. Nobody has discussed how the team will work together. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Set a team rule that chat messages must be answered within an hour during the working day, and announce it at the next daily stand-up.",
+          "correct": false,
+          "rationale": "A rule handed down settles one assumption and leaves the rest unspoken. The candidate choosing it confuses a facilitator's role with a manager's, and the team has no ownership of a norm it never discussed."
+        },
+        {
+          "id": "b",
+          "text": "Ask the two developers who raised the issue to talk directly with the colleagues concerned and agree a way of working between them.",
+          "correct": false,
+          "rationale": "It treats a team-wide gap as a dispute between individuals. Several sets of assumptions are in play, and pairwise deals leave everyone else still working to their own."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to decide the expected response times, since she is the person who most often needs quick answers from the developers.",
+          "correct": false,
+          "rationale": "The product owner owns what is built, not how the team organises itself. The candidate choosing this hands a team norm to one stakeholder whose own needs would shape the answer."
+        },
+        {
+          "id": "d",
+          "text": "Facilitate a session in which the team agrees a working agreement covering response times, core hours and which channel to use for what.",
+          "correct": true,
+          "rationale": "The team holds incompatible expectations about how it works, and nobody has made them explicit. A working agreement the team writes itself surfaces those assumptions and gives everyone a shared reference when friction recurs."
+        }
+      ],
+      "explanation": "Unspoken assumptions about how a team works — how fast to reply, when people are reachable, which channel signals urgency — are expectations like any other, and a newly formed team will hold several incompatible sets of them. A working agreement the team writes itself makes them explicit and gives everyone something to point to when friction appears. Rules imposed from outside, or left to individuals to settle in pairs, leave most of the team's assumptions untouched.",
+      "mindset": "Get a new team to say out loud how it will work, before friction says it for them."
+    },
+    {
+      "id": "pmp-p5-127",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "product-owner",
+        "capacity",
+        "housing",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Your agile team is building an inspections app for a housing association. The product owner, a senior surveyor, has been given one day a week for the product by her line manager, the head of asset management. The developers expected her to be available daily, and stories now sit blocked for days waiting for her decisions. She says she cannot give more time without her manager's agreement. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the business analyst on the team to act as a proxy product owner for day-to-day questions, referring only the larger decisions to the product owner.",
+          "correct": false,
+          "rationale": "A proxy without authority produces decisions that get revisited, and it hides the real cost of the allocation from the one person who could change it. The candidate choosing this treats a resourcing gap as a process problem."
+        },
+        {
+          "id": "b",
+          "text": "Batch the developers' questions into a single weekly session with the product owner, and plan each sprint around the answers she gives on that day.",
+          "correct": false,
+          "rationale": "It adapts to a constraint nobody with authority has examined. The candidate picking it is being pragmatic, but builds a week's delay into every decision and accepts it as the product's permanent pace."
+        },
+        {
+          "id": "c",
+          "text": "Show the head of asset management how long stories are waiting for decisions, and agree with him how much of the product owner's time the product needs.",
+          "correct": true,
+          "rationale": "The expectation that needs resetting belongs to the person who allocated the time. The product owner cannot change an allocation she does not control, and evidence of work waiting on her turns an abstract request for more time into a decision he can take."
+        },
+        {
+          "id": "d",
+          "text": "Coach the developers to make reasonable, documented assumptions on blocked stories so work keeps moving, and confirm those assumptions with the product owner at each sprint review.",
+          "correct": false,
+          "rationale": "It keeps work moving by moving product decisions to the team, with rework whenever an assumption is wrong. The candidate choosing this mistakes throughput for progress and still leaves the allocation unchallenged."
+        }
+      ],
+      "explanation": "When a role is under-resourced, the expectation that needs resetting is often that of the person who set the allocation, not the person filling the role. Workarounds such as proxies, batching or assumption-making hide the real cost from the one person who could change it. Evidence of the effect — work waiting for decisions — turns an abstract request for more time into a concrete trade-off the allocator can actually weigh.",
+      "mindset": "Take a capacity problem to the person who set the capacity."
+    },
+    {
+      "id": "pmp-p5-128",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "dependencies",
+        "multi-team",
+        "utilities",
+        "archetype-make-visible"
+      ],
+      "stem": "Two agile teams work on a utility company's customer platform, each with its own product owner. The billing team's plan for sprint 5 relies on an address-validation API that its architect discussed informally with the identity team's architect. The identity team's product owner has the API ranked thirtieth in her backlog and did not know anyone was relying on it. Sprint 5 planning for both teams is in ten days. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bring both product owners together with the dependency shown on a shared board, so they decide whether and when the API is built and plan on it.",
+          "correct": true,
+          "rationale": "The billing team's expectation was set by people who do not own priorities. Putting the dependency where both product owners can weigh it against their backlogs makes the outcome — now, later or never — a deliberate choice both teams plan around."
+        },
+        {
+          "id": "b",
+          "text": "Ask the identity team's product owner to move the API up her backlog, explaining that the billing team's sprint 5 plan depends on having it.",
+          "correct": false,
+          "rationale": "It presents the dependency as a request to concede rather than a choice to weigh. She may comply, displacing work she valued more, without either product owner seeing what was traded away."
+        },
+        {
+          "id": "c",
+          "text": "Escalate to the head of digital, who sets priorities across both products, and ask for a decision on the API's priority before either team's sprint 5 planning begins.",
+          "correct": false,
+          "rationale": "The head of digital may be needed eventually, but the two product owners own the ordering of their backlogs and have not yet discussed it. Escalating first takes a decision away from the people best placed to make it."
+        },
+        {
+          "id": "d",
+          "text": "Have the billing team build a temporary address-validation service within its own sprint 5, removing its dependency on the identity team.",
+          "correct": false,
+          "rationale": "It avoids the conversation by duplicating work, creating two versions of the same capability to reconcile later. The informal arrangement between architects remains the only plan anyone knew about."
+        }
+      ],
+      "explanation": "Dependencies agreed informally between individuals create expectations that the people who own priorities have never seen. In agile delivery the cure is to put the dependency where every affected product owner can weigh it against the rest of their work, so whatever is decided becomes a shared plan rather than one team's hope. Asking one side to concede, jumping to a higher authority or building around the gap all leave the informal arrangement standing as the real plan.",
+      "mindset": "A dependency is only real once the people who order the work have both seen it."
+    },
+    {
+      "id": "pmp-p5-129",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "subject-matter-experts",
+        "involvement",
+        "payroll",
+        "archetype-act-now"
+      ],
+      "stem": "Your hybrid project is replacing a university's payroll system: configuration is done in fortnightly iterations, followed by a planned parallel run and cutover. The payroll manager, the key subject matter expert, has declined tomorrow's first backlog refinement session, saying her team will 'get involved at testing, as usual'. The plan relies on her judging configuration choices every fortnight from now on. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold tomorrow's session using the team's own payroll knowledge, and send the payroll manager the decisions taken so that she can review them afterwards.",
+          "correct": false,
+          "rationale": "It builds the first iteration on assumptions and reproduces the after-the-fact review she already expects. The candidate choosing this keeps the calendar moving but confirms her belief that she is needed only at the end."
+        },
+        {
+          "id": "b",
+          "text": "Speak to her today to explain what the iterative stream needs from her and why, and agree a fortnightly time commitment she and her manager can support.",
+          "correct": true,
+          "rationale": "Her expectation of her role comes from previous projects, and nobody has explained how this one differs. Reaching her before the first session she declines, and agreeing the time with her manager, aligns the role before work starts without her."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to instruct the payroll manager to attend every refinement session, since the plan approved by the steering group depends on her presence.",
+          "correct": false,
+          "rationale": "It uses authority before explanation. Her expectation is reasonable given past projects, and an instruction may get her into the room without her understanding why her judgement is needed there."
+        },
+        {
+          "id": "d",
+          "text": "Record her limited availability in the risk register and review it with the steering group at its next monthly meeting, together with the response options.",
+          "correct": false,
+          "rationale": "The gap is already happening, so it is an issue rather than a risk, and a month of iterations would run without her before anyone acted. The candidate choosing this applies the right tool on the wrong timescale."
+        }
+      ],
+      "explanation": "A stakeholder's expectations about their own role are usually set by the last project they worked on, and iterative delivery asks for a very different kind of involvement. The moment to reset that is before the first event they decline: explain what is needed, why and how much time it takes, and agree it with whoever controls their workload. Every iteration that runs without them builds work on assumptions that will only be found at testing.",
+      "mindset": "Tell people what a new way of working asks of them before they decide they are not needed yet."
+    },
+    {
+      "id": "pmp-p5-130",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "funders",
+        "user-research",
+        "charity",
+        "archetype-trade-off"
+      ],
+      "stem": "Your agile team is building a benefits-advice app for a charity, funded by a foundation grant that lists six features in its approved application. Four sprints of user research show that two listed features attract almost no use in prototypes, while an unlisted feature — booking a call-back from an adviser — is what users ask for most. The foundation reports against the application's feature list. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Build the six listed features as funded, and add the call-back feature to the backlog as a candidate for the charity's next funding application.",
+          "correct": false,
+          "rationale": "It honours the letter of the grant while knowingly spending it on features users do not want. The candidate choosing this treats a funded list as unchangeable when the evidence gives good grounds to ask."
+        },
+        {
+          "id": "b",
+          "text": "Take the research to the foundation with the charity's sponsor and propose swapping the call-back feature for the two low-use features, agreeing it before the backlog changes.",
+          "correct": true,
+          "rationale": "The evidence argues for a substitution, and the foundation holds the agreement it would change. Offering a concrete swap backed by research lets the funder trade two features for one more valuable one, and keeps its reporting aligned with what is built."
+        },
+        {
+          "id": "c",
+          "text": "Reorder the backlog to build the call-back feature in place of the two low-use features, and explain the change and the research behind it in the next scheduled report to the foundation.",
+          "correct": false,
+          "rationale": "The direction is right but the sequence is wrong. Changing funded deliverables first and reporting afterwards leaves the foundation discovering, rather than agreeing, that what it paid for has changed."
+        },
+        {
+          "id": "d",
+          "text": "Build all seven features by reducing the depth of each, so that the foundation's list is met in full and users still receive the call-back facility.",
+          "correct": false,
+          "rationale": "It avoids the trade-off by thinning everything, so the most-wanted feature ships as shallow as the unwanted ones. The candidate picking this protects both expectations on paper and weakens the product for everyone."
+        }
+      ],
+      "explanation": "When evidence shows that what a funder agreed to buy is not what users need, the trade-off belongs to the party who holds the agreement. Agile delivery welcomes the change, but a funded commitment is still a commitment: the evidence should reach the funder with a concrete substitution before the work changes, so that what they report against is what is actually built. Delivering the list regardless, or changing it unilaterally, both leave the funder's expectation and the product apart.",
+      "mindset": "Let evidence change the plan, but let the people who funded it agree the change."
+    },
+    {
+      "id": "pmp-p5-131",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "design-principles",
+        "packaged-software",
+        "human-resources",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "Your hybrid programme is implementing a cloud HR system for a logistics group. The steering group approved an 'adopt, not adapt' principle: standard configuration unless a legal or contractual requirement makes it impossible. In the first design sprint, the HR business partners present a list of 40 reports from the old system that they expect to see replicated exactly. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the 40 reports to the backlog and ask the product owner to prioritise them alongside the other configuration work over the coming sprints.",
+          "correct": false,
+          "rationale": "It treats every report as a legitimate candidate without applying the principle the steering group set. Putting them on the backlog signals they are in scope and confirms the expectation the principle was meant to manage."
+        },
+        {
+          "id": "b",
+          "text": "Work through the list with the HR business partners against the standard reports, keeping only those that meet the steering group's test and routing them to design authority.",
+          "correct": true,
+          "rationale": "The principle has a stated test, so applying it item by item with the people who raised the list shows them why most reports fall away and which survive as genuine gaps. That is what makes the principle credible rather than merely approved."
+        },
+        {
+          "id": "c",
+          "text": "Ask the steering group to confirm whether the adopt-not-adapt principle should apply to reporting at all, given how strongly the HR business partners feel about the reports they rely on.",
+          "correct": false,
+          "rationale": "It reopens an approved decision before anyone has tested whether it causes a problem. The candidate choosing this mistakes the strength of a reaction for evidence that the principle is wrong."
+        },
+        {
+          "id": "d",
+          "text": "Tell the HR business partners that the steering group's principle rules out custom reports, and that they should plan to work from the standard report set.",
+          "correct": false,
+          "rationale": "It applies the principle as a blanket refusal and ignores its legal and contractual exception. Some reports may meet that test, and refusing them unseen leaves the business partners convinced the principle is arbitrary."
+        }
+      ],
+      "explanation": "An approved design principle only aligns expectations when it is applied to real requests in front of the people making them. Each expectation should be tested against the principle's stated criteria, so stakeholders see why most requests fall away and which survive as genuine exceptions. Waving everything through, refusing everything or reopening the principle all avoid the one step that makes the principle credible to the people it constrains.",
+      "mindset": "A principle earns acceptance when people see it applied to their own requests."
+    },
+    {
+      "id": "pmp-p5-132",
+      "type": "single",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 1,
+      "tags": [
+        "pilots",
+        "release-status",
+        "brewing",
+        "archetype-act-now"
+      ],
+      "stem": "Your hybrid project is replacing a brewing company's production-scheduling software. The equipment interfaces are baselined; scheduling features are released iteratively, and the first release is in a four-week pilot at one brewery, running alongside the old system. This morning you learn that the brewery's plant manager, pleased with the first week, plans to switch the old system off at the end of today's shift. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the switch-off plan at Thursday's weekly pilot review, where the plant manager and the product owner can agree measurable criteria for retiring the old system safely.",
+          "correct": false,
+          "rationale": "The review is the right forum for exit criteria, but it falls days after the switch-off. The candidate choosing this follows the project's normal rhythm when the stakeholder is about to act today on a mistaken view of what the pilot release is."
+        },
+        {
+          "id": "b",
+          "text": "Email all pilot users today restating the pilot's terms, including the requirement to keep the old system running in parallel for the full four weeks.",
+          "correct": false,
+          "rationale": "It sends the right message through the wrong channel. A general email may not be read before the shift ends, and it does not engage the one person who has made the decision or find out why he thinks the release is ready."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to instruct the plant manager to keep the old system running, since the pilot terms were approved by the steering group at the outset.",
+          "correct": false,
+          "rationale": "It reaches for authority before explanation and adds a step when time is short. The plant manager's enthusiasm is a good sign; he needs to understand what a pilot release is, not to be overruled from above."
+        },
+        {
+          "id": "d",
+          "text": "Call the plant manager now to explain that the pilot release is not yet cleared for sole use, and agree that the old system stays running until the pilot exit review.",
+          "correct": true,
+          "rationale": "He believes a pilot release is ready for production and is about to act on that belief within hours. Speaking to him directly, before the shift ends, corrects the expectation while the old system is still there to fall back on."
+        }
+      ],
+      "explanation": "When a stakeholder is about to take an irreversible step on a mistaken expectation, the response has to reach them, directly, before they act. Scheduled forums, broadcast messages and escalation all have their place, but each is slower or less personal than the moment allows. Correct the belief with the person making the decision, then use the normal routines to agree what happens next.",
+      "mindset": "When someone is about to act on a wrong belief, reach them before they act, not after."
+    },
+    {
+      "id": "pmp-p5-133",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "works-council",
+        "consultation",
+        "release-cadence",
+        "archetype-trade-off"
+      ],
+      "stem": "Your hybrid project is introducing new warehouse workflows for a distribution company in the Netherlands. The handheld hardware rollout is planned and baselined, while workflow software is released every two weeks. The works council expects to be consulted on any change affecting employees' roles, and assumed this would happen once, on a final design. The team expected to release changes continuously. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with the works council criteria that separate releases affecting roles, which need consultation, from those that do not, and plan releases around them.",
+          "correct": true,
+          "rationale": "Most fortnightly releases will not touch anyone's role. Agreeing where the line sits lets consultation happen for the changes that warrant it while everything else keeps moving, so both expectations survive."
+        },
+        {
+          "id": "b",
+          "text": "Invite a works council representative to the fortnightly reviews, so that emerging role changes are seen well before they reach the consultation stage.",
+          "correct": true,
+          "rationale": "The council expected one look at a finished design; early sight of what is emerging replaces that with something more useful to them. Consultation then starts from changes they have already seen, not from surprises."
+        },
+        {
+          "id": "c",
+          "text": "Hold all workflow releases until the full design is complete, then consult the works council once on the whole package, as it expected.",
+          "correct": false,
+          "rationale": "It meets the council's expectation by abandoning the iterative approach entirely. The candidate choosing this sees only one legitimate expectation in the room and gives up the feedback the project chose fortnightly releases to get."
+        },
+        {
+          "id": "d",
+          "text": "Continue fortnightly releases and consult the works council afterwards on any change that turns out to have affected employees' roles.",
+          "correct": false,
+          "rationale": "Consultation after the change is not consultation. The candidate picking this protects the release cadence by overriding a formal right, which will damage trust and may breach the council's entitlement."
+        },
+        {
+          "id": "e",
+          "text": "Ask the sponsor to seek a single advance consent from the works council covering all workflow changes the project might make over its lifetime.",
+          "correct": false,
+          "rationale": "Blanket consent for unknown changes asks the council to give up the right it is there to exercise. The candidate choosing this tries to make the expectation disappear rather than align it, and is likely to be refused."
+        }
+      ],
+      "explanation": "When a stakeholder's formal right is built around a single decision point and the delivery approach produces many small ones, neither expectation can simply win. The workable middle is to agree which changes trigger the right and to give the stakeholder early sight of what is emerging, so the right is exercised where it matters without stopping everything else. Abandoning the cadence, bypassing the right or asking for blanket consent each sacrifice one side's legitimate expectation to the other's.",
+      "mindset": "When two legitimate expectations collide, look for the line that lets both hold."
+    },
+    {
+      "id": "pmp-p5-134",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "decision-rights",
+        "responsibility-matrix",
+        "aviation",
+        "archetype-route-to-owner"
+      ],
+      "stem": "Midway through a terminal expansion at a regional airport, a new head of security joins the steering group. She tells you she expects to approve every design package before issue, as she did at her previous airport. The responsibility matrix, approved by the sponsor, shows security as consulted on design packages, with approval resting with the design authority. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add her as an approver on all design packages, since a head of security's sign-off reduces the risk of security findings later in the project.",
+          "correct": false,
+          "rationale": "It changes decision rights the project manager does not own and adds a bottleneck to every package. The candidate choosing this mistakes reducing one risk for having the authority to redesign governance."
+        },
+        {
+          "id": "b",
+          "text": "Meet her to understand which security risks are driving her expectation, and which of the design packages actually raise them.",
+          "correct": true,
+          "rationale": "A new stakeholder asking for a decision right is usually carrying a concern, and hers may be legitimate. Understanding it shows whether her need is approval of everything or meaningful influence over a few packages."
+        },
+        {
+          "id": "c",
+          "text": "Explain that the approved responsibility matrix shows security as consulted, and send her the design review procedure for her reference.",
+          "correct": false,
+          "rationale": "It closes the conversation with a document and ignores the concern behind the request. The candidate picking this treats an approved matrix as the end of the matter when its owner may want to revisit it."
+        },
+        {
+          "id": "d",
+          "text": "Take her request to the sponsor, as owner of the responsibility matrix, with your view of its likely impact on design review and the schedule.",
+          "correct": true,
+          "rationale": "Whether security gains approval rights is a governance decision, and the sponsor owns the matrix. Bringing the request with its consequences lets the person with authority decide rather than leaving the gap to fester."
+        },
+        {
+          "id": "e",
+          "text": "Route design packages to her informally for comment before issue, without changing the responsibility matrix, to keep her on side.",
+          "correct": false,
+          "rationale": "It creates a shadow approval step with no accountability attached. She will reasonably come to expect a veto that the governance does not give her, which widens the gap it was meant to close."
+        }
+      ],
+      "explanation": "A stakeholder who arrives expecting a different decision right is usually carrying a concern, not just a habit, and the concern may be legitimate. Find out what is driving the expectation, then take any change to decision rights to whoever owns them, with the consequences laid out. Granting the right yourself, refusing by citing the matrix or creating an informal workaround all decide a governance question at the wrong level.",
+      "mindset": "Understand why someone wants a decision right, then let the owner of decision rights decide."
+    },
+    {
+      "id": "pmp-p5-135",
+      "type": "multi",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "shared-capacity",
+        "backlog-ordering",
+        "banking",
+        "archetype-make-visible"
+      ],
+      "stem": "One agile team serves both the retail and commercial divisions of a bank, with a single product owner ordering the backlog by estimated customer value. For three months, retail items have mostly ranked higher. The commercial director, who expected roughly half of the team's capacity because both divisions fund it equally, has complained to the sponsor that his division is being ignored. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Show the commercial director how the product owner scores and orders items, using his division's recent items as worked examples.",
+          "correct": true,
+          "rationale": "The director cannot see the rule being applied, so the outcome looks like neglect. Walking through his own items shows whether the ordering is principled, and gives him a way to argue for his items on the same terms."
+        },
+        {
+          "id": "b",
+          "text": "Agree with the product owner to split each sprint's capacity equally between retail and commercial items, so it matches the funding.",
+          "correct": false,
+          "rationale": "It imposes a funding-based split nobody with authority has chosen and abandons value ordering. The candidate choosing this resolves the complaint by making a governance decision at the wrong level."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to decide whether equal funding should mean a guaranteed share of capacity, and record the decision in the product's governance.",
+          "correct": true,
+          "rationale": "The director's expectation rests on an unstated rule that conflicts with the one in use. Only the sponsor can say which rule governs, and recording it stops the same disagreement returning each quarter."
+        },
+        {
+          "id": "d",
+          "text": "Alternate sprints between the two divisions so each has a predictable turn, while keeping the product owner's ordering within each sprint.",
+          "correct": false,
+          "rationale": "It looks fair and keeps some ordering, but still substitutes a capacity rule nobody authorised. The candidate picking this answers the funding question without asking the person who owns it."
+        },
+        {
+          "id": "e",
+          "text": "Ask the product owner to raise the ranking of the commercial division's top three items to restore the director's confidence in the process.",
+          "correct": false,
+          "rationale": "Adjusting rankings to appease one party undermines the ordering method and the product owner's credibility. It treats the symptom and confirms that complaining is how priority is won."
+        }
+      ],
+      "explanation": "Expectations about how shared capacity is divided often rest on an unstated rule — equal funding means an equal share — that conflicts with the rule actually being applied. Both rules need to be made explicit: the ordering method, so the disadvantaged party can see decisions are not arbitrary, and the funding question, so someone with authority decides whether a guaranteed share is wanted. Splitting or adjusting the backlog on the project's own initiative answers a governance question nobody has asked the right person.",
+      "mindset": "When people disagree about how something is shared, surface the rule each of them is using."
+    },
+    {
+      "id": "pmp-p5-136",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "acceptance-criteria",
+        "office-fit-out",
+        "measurable-expectations",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "You are planning an office fit-out for an engineering consultancy. In interviews, partners described their expectations in general terms, and you want each turned into an acceptance criterion the handover can be tested against. Match each stated expectation to the criterion that makes it testable. One choice is not used.",
+      "prompts": [
+        {
+          "id": "e1",
+          "text": "The head of the structures team says the open-plan floor must be quiet enough for people to concentrate."
+        },
+        {
+          "id": "e2",
+          "text": "The managing partner says there must be plenty of meeting space, without the constant hunt for a free room."
+        },
+        {
+          "id": "e3",
+          "text": "The office manager says a colleague who uses a wheelchair must be able to get everywhere the rest of the staff can."
+        }
+      ],
+      "options": [
+        {
+          "id": "noise",
+          "text": "Background noise in open-plan areas no higher than 45 dB(A) with the floor occupied",
+          "correct": true,
+          "match": "e1",
+          "rationale": "'Quiet enough to concentrate' becomes a measured sound level under real conditions. It can be designed to, tested at handover and argued about with numbers rather than impressions."
+        },
+        {
+          "id": "rooms",
+          "text": "At least one bookable meeting room for every 10 desks, with a booking system showing live availability",
+          "correct": true,
+          "match": "e2",
+          "rationale": "'Plenty of space' and 'no hunting' are two separate complaints: too few rooms and no way to see which are free. A ratio plus visible availability turns both into checkable facts."
+        },
+        {
+          "id": "access",
+          "text": "Step-free routes to every floor and room, with clear door openings of at least 850 mm",
+          "correct": true,
+          "match": "e3",
+          "rationale": "'Get everywhere' becomes a route and a dimension that can be inspected. It tests the whole journey rather than individual rooms, which is what the office manager actually described."
+        },
+        {
+          "id": "temp",
+          "text": "Temperature held between 20 °C and 23 °C in all occupied zones during working hours",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. It is a perfectly testable comfort criterion, but nobody raised temperature. Adding criteria no stakeholder expressed inflates scope without aligning any expectation."
+        }
+      ],
+      "explanation": "A stated expectation such as 'quiet' or 'plenty of space' cannot be met or missed, so at handover it will be judged against whatever each person privately imagined. Converting each into a measurable criterion, agreed with the person who holds it, turns a feeling into something that can be designed to, tested and signed off. Every criterion should trace back to an expectation someone actually stated; a measurable criterion nobody asked for adds cost without aligning anything.",
+      "mindset": "If an expectation cannot be tested, it will be judged by memory at handover."
+    },
+    {
+      "id": "pmp-p5-137",
+      "type": "matching",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "agile-roles",
+        "accountability",
+        "logistics",
+        "archetype-route-to-owner"
+      ],
+      "stem": "On an agile team building a parcel-tracking app, several stakeholders hold expectations that someone needs to reset. As the team's agile lead, you want each conversation held by the person accountable for the decision it depends on. Match each situation to the person who should hold the conversation. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "A regional manager believes his delivery-slot filter will be added to the current sprint because he mentioned it to a developer."
+        },
+        {
+          "id": "s2",
+          "text": "A marketing director expects a firm points estimate today for a loyalty feature the developers have never discussed."
+        },
+        {
+          "id": "s3",
+          "text": "The sponsor's chief of staff expects the team to switch to one-week sprints next quarter so that it 'goes faster'."
+        }
+      ],
+      "options": [
+        {
+          "id": "po",
+          "text": "The product owner",
+          "correct": true,
+          "match": "s1",
+          "rationale": "What enters the backlog, and whether anything displaces sprint work, is the product owner's call. A word with a developer is not a route into the sprint, and the product owner is the person who can say so with authority."
+        },
+        {
+          "id": "devs",
+          "text": "The developers who will build it",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Estimates belong to the people doing the work. Only they can explain why an unrefined feature has no honest estimate yet and what refinement would be needed to produce one."
+        },
+        {
+          "id": "lead",
+          "text": "You, as the agile lead",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Sprint length is a question about the team's process, which the agile lead coaches on. The expectation that shorter sprints mean faster delivery is a misunderstanding of what cadence is for, and correcting it is a coaching conversation."
+        },
+        {
+          "id": "sponsor",
+          "text": "The sponsor",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of these needs the sponsor's authority, and routing them upwards would take decisions away from the roles that own them and teach stakeholders to go over the team's head."
+        }
+      ],
+      "explanation": "An expectation is reset most effectively by the person accountable for the decision it depends on, because only they can explain it with authority and change it if it should change. In agile teams, backlog content belongs to the product owner, estimates to the people doing the work and process to the team supported by its agile lead. Routing every expectation gap through one person, or upwards to a sponsor, weakens the roles that are meant to own those decisions.",
+      "mindset": "Reset an expectation through the person who owns the decision it depends on."
+    },
+    {
+      "id": "pmp-p5-138",
+      "type": "pulldown",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "community-stakeholders",
+        "construction",
+        "public-works",
+        "archetype-make-visible"
+      ],
+      "stem": "You are managing a sewer replacement along a residential street. At a residents' meeting, three expectations were raised, each needing a different response. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Residents expect no work on Sundays, and the planning consent for the scheme already prohibits Sunday working. The project manager should"
+        },
+        {
+          "id": "c2",
+          "text": "Residents expect the street to stay open throughout, but the main connection needs a three-week full closure next spring. The project manager should"
+        },
+        {
+          "id": "c3",
+          "text": "Residents expect bin collections to continue as normal, which is possible only if the council's waste team agrees to a new collection time. The project manager should"
+        }
+      ],
+      "options": [
+        {
+          "id": "confirm",
+          "text": "confirm the commitment in writing in the next residents' bulletin, so that it is on record",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The expectation already matches what the project must do. Putting it in writing turns a reassurance given in a meeting into a commitment residents can hold the project to, at no cost."
+        },
+        {
+          "id": "explain",
+          "text": "explain the closure now, with its dates, reason and diversion, well before it is booked",
+          "correct": true,
+          "match": "c2",
+          "rationale": "This expectation cannot be met. Explaining it months ahead, with the reason and the alternative, lets residents plan around it rather than discover it from a road sign."
+        },
+        {
+          "id": "arrange",
+          "text": "agree the revised collection time with the council's waste team before telling residents what will happen",
+          "correct": true,
+          "match": "c3",
+          "rationale": "The expectation can be met, but only with a decision another party owns. Securing that decision first avoids promising residents something the waste team then declines."
+        },
+        {
+          "id": "register",
+          "text": "record the expectation in the stakeholder register and review it if complaints are received",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Each of these expectations calls for an active response now; waiting for complaints treats a known expectation as a risk that may never arise."
+        }
+      ],
+      "explanation": "Stakeholder expectations fall into different kinds, and each needs a different move: one that already matches the plan should be confirmed on record, one that cannot be met should be explained early with the reason and the alternative, and one that depends on a third party should be secured with that party before anything is promised. Sorting expectations by which kind they are, before responding, stops a project from over-promising, under-explaining or simply waiting.",
+      "mindset": "Before answering an expectation, work out whether it can be met, cannot be met or depends on someone else."
+    },
+    {
+      "id": "pmp-p5-139",
+      "type": "fillblank",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "service-levels",
+        "availability",
+        "contact-centre",
+        "archetype-make-visible"
+      ],
+      "stem": "A supplier's contract for a new contact-centre telephony platform guarantees 99.5% availability, measured over each 30-day month with no exclusions. The contact-centre manager has told her team to expect 'no more than an hour of downtime a month'. Work out the figures below so that you can show her the gap.",
+      "blanks": [
+        {
+          "id": "mins",
+          "label": "Downtime the 99.5% guarantee permits in a 30-day month, in minutes",
+          "numeric": true,
+          "expect": 216,
+          "tol": 1,
+          "unit": "minutes",
+          "rationale": "A 30-day month has 30 × 24 × 60 = 43,200 minutes. The guarantee allows 0.5% of that to be lost: 43,200 × 0.005 = 216 minutes, or 3.6 hours."
+        },
+        {
+          "id": "avail",
+          "label": "Availability the supplier would need to guarantee for no more than 60 minutes of downtime a month, as a percentage to two decimal places",
+          "numeric": true,
+          "expect": 99.86,
+          "tol": 0.01,
+          "unit": "%",
+          "rationale": "Sixty minutes out of 43,200 is 0.139% downtime, so availability must be 100 − 0.139 = 99.861%, which rounds to 99.86%. A difference that looks tiny as a percentage is large in minutes."
+        },
+        {
+          "id": "ratio",
+          "label": "How many times the manager's expected maximum the contract actually permits, to one decimal place",
+          "numeric": true,
+          "expect": 3.6,
+          "tol": 0.05,
+          "rationale": "The contract permits 216 minutes against her expected 60: 216 ÷ 60 = 3.6. Her team is planning for under a third of the downtime the supplier is entitled to have."
+        }
+      ],
+      "explanation": "A service level stated as a percentage hides its meaning until it is converted into time over the measurement period, and stakeholders routinely read a high-sounding percentage as near-perfect. Translating it into minutes per period, and setting that beside what the stakeholder assumes, shows the gap before an outage does. The measurement period and any exclusions matter as much as the figure: the same percentage means different things measured monthly or annually.",
+      "mindset": "Translate a percentage into hours before anyone relies on it."
+    },
+    {
+      "id": "pmp-p5-140",
+      "type": "hotspot",
+      "domain": "people",
+      "ecoTask": "people-5",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "product-roadmap",
+        "external-commitments",
+        "transport",
+        "archetype-apply-the-rule"
+      ],
+      "stem": "The roadmap for a ferry operator's booking app is shown with each item's current state. The commercial director wants to write one item into a partner agreement as a dated commitment for three weeks from today. The team releases at the end of every two-week sprint, and the current sprint ends in nine days. Select the item for which a dated commitment is defensible.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Now, Next and Later roadmap columns with four items and their current state",
+        "caption": "Select an item. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "multileg",
+          "n": 1,
+          "label": "Now — Multi-leg booking: in the current sprint, all stories built, final testing under way, due in the release in nine days",
+          "x": 20,
+          "y": 60,
+          "w": 190,
+          "h": 130,
+          "correct": true,
+          "rationale": "The work is understood, almost finished and inside the team's own sprint, with a release before the date in question. It is the only item where the date rests on observed progress rather than on a forecast or on someone else's plan."
+        },
+        {
+          "id": "fares",
+          "n": 2,
+          "label": "Next — Partner fares API: estimated at 40–60 points; velocity has ranged from 25 to 30 points a sprint",
+          "x": 225,
+          "y": 60,
+          "w": 190,
+          "h": 130,
+          "correct": false,
+          "rationale": "Even at the top of the velocity range, 40–60 points needs about two full sprints after the current one, which ends well beyond three weeks. The estimate itself is a range, so a single date would hide its uncertainty."
+        },
+        {
+          "id": "groups",
+          "n": 3,
+          "label": "Next — Group bookings: 20 points, fits in one sprint, but needs the payments team's API, which is not yet scheduled",
+          "x": 225,
+          "y": 210,
+          "w": 190,
+          "h": 130,
+          "correct": false,
+          "rationale": "It is the tempting choice because it is small and well sized. But its date depends on another team's backlog that nobody has committed to, so promising it would commit the payments team without its agreement."
+        },
+        {
+          "id": "loyalty",
+          "n": 4,
+          "label": "Later — Loyalty points: idea stage, not yet refined or estimated",
+          "x": 430,
+          "y": 60,
+          "w": 190,
+          "h": 130,
+          "correct": false,
+          "rationale": "An unrefined idea has no size and no plan, so any date attached to it would be a guess presented as a promise. Items in a 'Later' column signal direction, not delivery."
+        }
+      ],
+      "explanation": "A roadmap mixes items at very different levels of certainty, and stakeholders tend to read every item on it as a promise. A dated external commitment is defensible only where the work is understood, sized to fit the time available at observed velocity, and free of dependencies the team does not control. Checking each condition before agreeing a date keeps the roadmap a forecast and stops a partner agreement from turning a forecast into a contract.",
+      "mindset": "Commit dates only to work that is understood, sized and in the team's own hands."
+    }
+  ]
+}

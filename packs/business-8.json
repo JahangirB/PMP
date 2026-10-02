@@ -1,0 +1,1691 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Business 8 — External environment",
+  "questions": [
+    {
+      "id": "pmp-b8-101",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "sanctions",
+        "geopolitics",
+        "subcontractors"
+      ],
+      "stem": "You manage a rail signalling upgrade. At 14:00 the procurement team forwards a government notice: the parent company of your cabling subcontractor was added to the national sanctions list this morning. The weekly payment run executes at 16:00 and includes £84,000 to the subcontractor for work completed and certified last month. Your organisation has a sanctions compliance team that determines how listed parties are dealt with. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Allow the payment to proceed, because the work was certified before the listing and the subcontract obliges the project to pay certified sums on time.",
+          "correct": false,
+          "rationale": "This treats a contractual obligation as if it overrides a legal prohibition. Sanctions can bar a payment regardless of when the work was done, and the candidate who picks this is reasoning about fairness to the supplier rather than about what the law now permits."
+        },
+        {
+          "id": "b",
+          "text": "Have the £84,000 removed from today's payment run and notify the sanctions compliance team, leaving the decision on the relationship to them.",
+          "correct": true,
+          "rationale": "A held payment can be released tomorrow; a sent payment cannot be recalled. Stopping the one irreversible step inside the project's own control buys the compliance team the time to make the determination that only they can make."
+        },
+        {
+          "id": "c",
+          "text": "Ask the subcontractor to confirm in writing by tomorrow whether the listed parent owns or controls it, and release the payment only if it does not.",
+          "correct": false,
+          "rationale": "Ownership and control is the right question, but a self-declaration from the affected party is not a determination, and the answer arrives after the 16:00 run has already sent the money. The error is gathering facts while leaving the irreversible step running."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the notice to the sponsor straight away and ask for an instruction on the payment before the run executes at 16:00 this afternoon.",
+          "correct": false,
+          "rationale": "The sponsor is not the authority on sanctions exposure either, and relying on a reply inside two hours leaves the payment to chance. The candidate is escalating a step the project manager can take alone, to someone who cannot decide the substance."
+        }
+      ],
+      "explanation": "When an external event makes an imminent step both irreversible and possibly unlawful, the first move is to stop that step, because a hold costs little and can be undone while a completed transaction cannot. The judgement about the underlying relationship then goes to the function that owns it. Acting fast on the reversible pause and slowly on the substantive decision is the correct split, not a contradiction.",
+      "mindset": "Pause the irreversible step first, then let the people who own the substance decide it."
+    },
+    {
+      "id": "pmp-b8-102",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "open-source",
+        "licensing",
+        "technology-change"
+      ],
+      "stem": "Your team's SaaS product uses an open-source search engine. Its maintainers announce that future versions will be released under a licence prohibiting anyone from offering the software as a managed service to third parties; the current version keeps its existing licence. Several customers call your public search API directly. The developers, alarmed, propose spending the next three sprints replacing the engine. The product owner asks what you recommend. What is the best response?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Get a legal view on whether exposing search through your API counts as a managed service, and confirm how long the current version receives security fixes, before committing sprints.",
+          "correct": true,
+          "rationale": "Two facts size this problem: whether your usage falls under the new terms, and how long the version you run stays safe. Both can be established in days, and every other response commits weeks of capacity on the strength of a guess about them."
+        },
+        {
+          "id": "b",
+          "text": "Support the replacement now, because migrating while the current version is still supported and the team has time is cheaper than migrating later under the pressure of a deadline.",
+          "correct": false,
+          "rationale": "The reasoning about migration timing is sound if a migration is needed, but nobody has yet established that it is. The candidate is treating the alarm as the diagnosis and spending three sprints on a restriction that may not reach this product at all."
+        },
+        {
+          "id": "c",
+          "text": "Pin the product to the current version, which keeps its existing licence, and revisit the question only when a security fix next requires an upgrade.",
+          "correct": false,
+          "rationale": "Freezing feels safe because the old licence still applies, but it defers the question to the worst possible moment: an urgent security fix with no compliant version to take it in. The candidate has not asked how long the pinned version will be patched."
+        },
+        {
+          "id": "d",
+          "text": "Fork the last openly licensed release into your own repository, so the team controls the code and its patches whatever the maintainers decide to do next.",
+          "correct": false,
+          "rationale": "A fork removes licence uncertainty by taking on the maintenance of a search engine indefinitely, a far larger commitment than the one being avoided. The candidate has chosen the most expensive certainty before checking whether any uncertainty applies."
+        }
+      ],
+      "explanation": "A change in the terms of an external dependency is a question of applicability and timing before it is a question of response. Whether your particular use is caught, and how long the present arrangement stays safe, are the facts that decide between migrating, freezing and forking; choosing among those without them is committing capacity on a guess. A short, targeted diagnosis is cheap insurance for the sprints it protects.",
+      "mindset": "Find out whether an external change actually applies to you before paying to escape it."
+    },
+    {
+      "id": "pmp-b8-103",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "tariffs",
+        "contingency",
+        "procurement-timing"
+      ],
+      "stem": "Your office refurbishment imports aluminium cladding. The government has announced a 25% tariff on such goods arriving after 1 June. Your shipment is booked to arrive on 10 June, so the tariff would add £48,000. The supplier can move it to an earlier vessel arriving 26 May for a £7,500 surcharge if you confirm by Friday, and site storage is available. Your delegated authority allows contingency spending up to £10,000. The project board next meets in three weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a change request for the £7,500 surcharge so that the board can consider and approve the spend at its meeting in three weeks' time.",
+          "correct": false,
+          "rationale": "Routing a decision upward feels like good governance, but this one is already within the project manager's authority and the vessel option lapses on Friday. The candidate is deferring to a forum that will meet after the choice has disappeared."
+        },
+        {
+          "id": "b",
+          "text": "Ask procurement to identify a domestic cladding supplier unaffected by the tariff, so that the project avoids the import cost altogether.",
+          "correct": false,
+          "rationale": "Substituting a cladding product means design approval, fire performance evidence and a new lead time, none of which fit inside a six-week window. The candidate is swapping a certain small cost for a large, uncertain one to avoid a tariff that can be sidestepped cheaply."
+        },
+        {
+          "id": "c",
+          "text": "Approve the earlier vessel from contingency before Friday's deadline, then report the decision and the avoided tariff at the next board meeting.",
+          "correct": true,
+          "rationale": "The spend is inside delegated authority, the saving is more than six times the cost, and the option expires before the board meets. Delegated limits exist so that a project manager can take exactly this kind of time-bound decision and account for it afterwards."
+        },
+        {
+          "id": "d",
+          "text": "Accept the tariff as an external cost outside the project's control, update the cost forecast by £48,000 and brief the sponsor on the increase ahead of the next board meeting.",
+          "correct": false,
+          "rationale": "Reporting the impact is honest, but it treats an external change as something that can only be absorbed when a cheap response is available and in hand. The candidate has confused not controlling the cause with having no control over the exposure."
+        }
+      ],
+      "explanation": "An external change with a known effective date often creates a short window in which the exposure can be avoided cheaply. If the response sits within delegated authority and the window closes before the next governance meeting, the authority is there to be used, with the decision reported afterwards. Escalating what you are empowered to decide is not caution when the delay itself removes the option.",
+      "mindset": "Use the authority you have been given while the window it was given for is still open."
+    },
+    {
+      "id": "pmp-b8-104",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "market-shift",
+        "backlog",
+        "customer-behaviour"
+      ],
+      "stem": "You are the agile delivery lead for a home-energy monitoring app. Over the last two quarters, 72% of new sign-ups have come through the mobile app, up from 30%, and mobile users cancel twice as often as desktop users, citing missing features. The product backlog, ordered a year ago, has the next six months of work aimed at the desktop dashboard. The product owner asks how to respond. What should happen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The product owner reorders the backlog around the mobile gaps the evidence points to, with the team re-estimating the newly prioritised items at refinement.",
+          "correct": true,
+          "rationale": "The market has moved and the product's own data show where. An ordered backlog is meant to be reordered when the evidence about value changes, and two quarters of behaviour from your own users is strong evidence."
+        },
+        {
+          "id": "b",
+          "text": "The team finishes the desktop work already planned for the next six months and then turns to mobile, so the roadmap that stakeholders were shown stays credible.",
+          "correct": false,
+          "rationale": "The candidate is protecting a year-old plan at the expense of the users who are now arriving and leaving. A roadmap's credibility comes from tracking value, and six more months of desktop work builds for a shrinking share of the market."
+        },
+        {
+          "id": "c",
+          "text": "The product owner commissions a market study to confirm the shift before any backlog item moves, so that the reprioritisation rests on more than two quarters of data.",
+          "correct": false,
+          "rationale": "Independent confirmation sounds rigorous, but the product's own sign-up and cancellation data are more direct than any study. The candidate is delaying adaptation while users continue to cancel for the very reasons already known."
+        },
+        {
+          "id": "d",
+          "text": "The team splits its capacity evenly between desktop and mobile items so that neither user group is neglected while the trend settles down.",
+          "correct": false,
+          "rationale": "An even split feels balanced, but it ignores where value now lies and halves the speed at which the cancellation problem gets fixed. The candidate is hedging against a trend that has already settled into two quarters of consistent data."
+        }
+      ],
+      "explanation": "In adaptive delivery the backlog order is a current best judgement of value, not a commitment made when it was first written. When the market moves and the product's own data show the direction, the order should change at the next opportunity, with the team re-estimating what moves up. Adapting to evidence is the method working, not the plan failing.",
+      "mindset": "Reorder the backlog when the market moves, because its order was only ever a judgement about value."
+    },
+    {
+      "id": "pmp-b8-105",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "interest-rates",
+        "business-case",
+        "viability"
+      ],
+      "stem": "A district council is building an £18m leisure centre funded by borrowing. Construction is 40% complete. A rise in interest rates has increased the annual financing cost by £270,000, and on the business case's own method the benefit-cost ratio has fallen from 1.3 to 1.05. The council approves projects only above 1.2. The project board meets next week. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Update the business case with the current financing cost and report to the project board that the project no longer meets the approval threshold.",
+          "correct": true,
+          "rationale": "The business case is the basis on which the board keeps authorising spend, and its central figure has crossed the threshold. The board can only exercise its judgement on viability if the project manager puts the changed number in front of it."
+        },
+        {
+          "id": "b",
+          "text": "Prepare costed options, such as phasing or rescoping, showing the effect of each one on the benefit-cost ratio for the board to weigh.",
+          "correct": true,
+          "rationale": "A breached threshold is a decision for the board, and a decision without options is only a choice between continuing and stopping. Showing what each alternative does to the ratio gives the board something to decide between."
+        },
+        {
+          "id": "c",
+          "text": "Continue as planned, since interest rates are outside the project's control and 40% of the construction cost has already been committed.",
+          "correct": false,
+          "rationale": "Two errors combine here: treating spend already made as a reason to keep spending, and treating an external cause as if it were not the project's concern. The project cannot control rates, but it must report what they have done to its viability."
+        },
+        {
+          "id": "d",
+          "text": "Suspend construction until the board has decided, so that no further money is committed while the business case is in doubt.",
+          "correct": false,
+          "rationale": "Stopping a site carries demobilisation and contractor claims, and it pre-empts a decision that belongs to the board meeting next week. The candidate is taking a governance decision under the banner of caution."
+        },
+        {
+          "id": "e",
+          "text": "Reduce the building's specification enough to bring the ratio back above 1.2, then report the restored figure to the board at its meeting.",
+          "correct": false,
+          "rationale": "This changes what the council is buying without the council deciding to, and it presents the board with a fixed problem rather than a choice. The candidate has solved the number while hiding the event that moved it."
+        }
+      ],
+      "explanation": "External economic change can move a project's viability without anything inside the project going wrong. The business case is a living control, so when an input such as financing cost changes, the case is restated on current figures and the people who authorise spend see the result along with alternatives. Neither the size of the commitment so far nor the external origin of the change removes the need for that decision.",
+      "mindset": "Restate the business case when the world changes its inputs, and let the people who own it decide."
+    },
+    {
+      "id": "pmp-b8-106",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "labour-market",
+        "price-adjustment",
+        "contract-administration"
+      ],
+      "stem": "Your hospital wing build has an electrical subcontract with a clause adjusting labour rates in line with the national wage agreement for electricians. A new agreement raises rates by 7% from April. The subcontractor has submitted revised rates citing the clause, and your quantity surveyor has confirmed the figures match the agreement. The cost controller wants to dispute the rise because the estimate did not allow for it. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Dispute the increase with the subcontractor, on the basis that the project's estimate was prepared and approved before the new wage agreement was published.",
+          "correct": false,
+          "rationale": "The project's estimate is an internal planning assumption and does not bind the subcontractor. The candidate is treating the buyer's own forecasting gap as if it limited a price mechanism both parties signed."
+        },
+        {
+          "id": "b",
+          "text": "Propose to the subcontractor that the two parties split the 7% increase between them, so that each shares part of a cost that neither of them caused.",
+          "correct": false,
+          "rationale": "A split sounds fair, but it reopens a term already settled and asks the subcontractor to give up something the contract gives them. The candidate is negotiating a risk the contract has already allocated."
+        },
+        {
+          "id": "c",
+          "text": "Accept the revised rates as the clause provides, update the cost forecast for the remaining electrical work, and fund the rise through contingency as the plan allows.",
+          "correct": true,
+          "rationale": "The parties agreed in advance who would carry wage movements, and the figures have been verified. Applying the clause honours the contract, and the forecast and contingency draw are the internal consequence that the project then has to manage."
+        },
+        {
+          "id": "d",
+          "text": "Hold the revised rates until the change control board has approved them as a change to the project baseline, then issue the subcontractor a formal variation confirming the new rates.",
+          "correct": false,
+          "rationale": "Nothing about the scope has changed; an agreed price mechanism has operated. The candidate is confusing contract administration with change control, and withholding payment meanwhile would put the project in breach."
+        }
+      ],
+      "explanation": "When a contract already allocates an external risk, such as wages, a commodity index or exchange rates, the external event is handled by applying the mechanism rather than by reopening the bargain. The buyer's estimate was a planning assumption; the clause is the agreed answer to what happens when that assumption fails. What remains is internal work: reforecast and fund the change through the route the plan provides.",
+      "mindset": "Where the contract has already allocated a risk, apply the allocation rather than re-arguing it."
+    },
+    {
+      "id": "pmp-b8-107",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "risk-register",
+        "issue-log",
+        "change-control"
+      ],
+      "stem": "Your hybrid project is delivering a grid battery storage site, with its control software built in sprints. Match each external development to the record and response it belongs in. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "An amendment to grid connection rules has been passed and applies to sites energised after March; your energisation is planned for May."
+        },
+        {
+          "id": "s2",
+          "text": "The government has opened a review of planning rules for battery sites; its conclusions are due before your planning application is decided."
+        },
+        {
+          "id": "s3",
+          "text": "A port strike that began this morning has stranded the transformer due on site tomorrow; the installation crew is booked from Thursday."
+        }
+      ],
+      "options": [
+        {
+          "id": "cr",
+          "text": "A change request to bring the new requirement into the baseline",
+          "correct": true,
+          "match": "s1",
+          "rationale": "The amendment is enacted, dated and applies to this site, so it is no longer uncertain: it is a requirement the current baseline does not meet. Change control is how it enters scope with its cost and schedule effect assessed."
+        },
+        {
+          "id": "risk",
+          "text": "A risk register entry with an owner, a trigger and a planned response",
+          "correct": true,
+          "match": "s2",
+          "rationale": "The review may or may not change the rules, and its outcome lands at a known point that matters to the project. An uncertain future event with a consequence is a risk, and the trigger is the publication of the conclusions."
+        },
+        {
+          "id": "issue",
+          "text": "An issue log entry with an owner and an immediate response",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The strike has already happened and the delivery has already failed. Recording it as a risk would understate it; it needs an owner working on a response today, before the crew arrives to an empty site."
+        },
+        {
+          "id": "paper",
+          "text": "A decision paper to the sponsor on whether the project should continue",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of the three developments threatens the business case on its own, and each has a routine instrument that handles it. Sending them to the sponsor as continuation questions would bypass those instruments and spend senior attention on work the project can manage."
+        }
+      ],
+      "explanation": "An external development is classified by its certainty and timing before a tool is chosen. If it is certain and binding on the deliverable, it changes the baseline; if it is an uncertain future event with a consequence, it is a risk; if it is already happening, it is an issue. The same external source can land in any of the three, so the register follows the state of the event, not where it came from.",
+      "mindset": "Let an external event's certainty and timing choose its register, not its source."
+    },
+    {
+      "id": "pmp-b8-108",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "experiments",
+        "spikes",
+        "backlog"
+      ],
+      "stem": "You coach the team behind a subscription meal-kit app. Match each development in the outside world to the agile response that fits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Cancellations have risen four points since a regional economic downturn began, and exit surveys do not show whether price or missing features drive them."
+        },
+        {
+          "id": "s2",
+          "text": "The main phone operating system's release in four weeks requires apps to request notification permission at the moment of use, and your onboarding asks for it upfront."
+        },
+        {
+          "id": "s3",
+          "text": "Customers have asked in interviews to photograph their fridge and get recipes; a new image-recognition service might do it, but nobody knows whether it copes with real kitchen lighting."
+        }
+      ],
+      "options": [
+        {
+          "id": "exp",
+          "text": "A time-boxed market experiment, such as offering a cheaper plan to a sample of customers",
+          "correct": true,
+          "match": "s1",
+          "rationale": "The cause is unknown and the market itself can answer the question. A controlled test of price separates the two explanations far faster than more surveys, and its result tells the product owner what to build."
+        },
+        {
+          "id": "item",
+          "text": "A backlog item ordered so that it is done before the release date",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Here nothing is uncertain: the requirement and the date are both known. The response is simply sequencing, making sure the change is done and released before the operating system update breaks onboarding."
+        },
+        {
+          "id": "spike",
+          "text": "A research spike to test feasibility before any feature work is committed",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Customers have already said they want it, so the open question is technical. A short spike against real kitchen photographs establishes whether the service works before the team commits to building on it."
+        },
+        {
+          "id": "ccb",
+          "text": "A formal change request to the steering group before the backlog is altered",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. In adaptive delivery the backlog absorbs external change through the product owner's ordering, and none of these developments touches a governance threshold. Routing them through a board adds delay to exactly the responses that need to be fast."
+        }
+      ],
+      "explanation": "In adaptive work, the right response to an external signal depends on what is still unknown about it. If the cause is unknown, test in the market; if what is needed and when are both known, order it into the backlog; if feasibility is unknown, run a spike. Responding to every outside change with the same tool either over-investigates the obvious or under-investigates the uncertain.",
+      "mindset": "Match the response to what you do not yet know about the change."
+    },
+    {
+      "id": "pmp-b8-109",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "standards",
+        "change-in-law",
+        "contract-terms"
+      ],
+      "stem": "Your hybrid project is upgrading a water treatment plant under a design-and-build contract. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The contract cites a pipework standard by its 2019 edition. A 2026 edition is published mid-project, so the new edition becomes part of the requirements"
+        },
+        {
+          "id": "c2",
+          "text": "The contract requires compliance with the drinking water regulations 'as amended from time to time'. An amendment comes into force mid-project, so the amended requirement applies"
+        }
+      ],
+      "options": [
+        {
+          "id": "dated",
+          "text": "only once a change adopting it has been approved, because the contract fixes the edition",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A dated reference freezes the requirement at the cited edition. A newer edition may be better practice, but it enters the project only through a decision to adopt it, with its cost and time assessed like any other change."
+        },
+        {
+          "id": "undated",
+          "text": "without any change to the contract wording, leaving its cost and time effect to be assessed under the change-in-law clause",
+          "correct": true,
+          "match": "c2",
+          "rationale": "An 'as amended' reference imports future changes automatically, so the obligation moves when the law does. The project's work is not to decide whether to comply but to establish the effect and apply whatever relief the contract provides."
+        },
+        {
+          "id": "renewal",
+          "text": "at the next contract review, when the two parties agree to refresh the documents it refers to",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Neither reference waits for a review: the dated one needs a specific change decision, and the undated one has already moved. Treating either as a matter for periodic housekeeping leaves the project building to the wrong requirement in the meantime."
+        }
+      ],
+      "explanation": "How an external standard or law reaches a project depends on how the contract refers to it. A reference fixed to an edition freezes the requirement until someone decides to change it; a reference to the instrument as amended carries every later change with it, so the question becomes cost, time and relief rather than whether to comply. Reading the form of the reference is the first step in assessing any external change of this kind.",
+      "mindset": "Read how the contract refers to a standard before deciding whether its change is yours."
+    },
+    {
+      "id": "pmp-b8-110",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "commodity-prices",
+        "price-adjustment",
+        "indexation"
+      ],
+      "stem": "Your bridge refurbishment contract is worth €2,400,000, of which 35% is subject to a steel price adjustment clause. The clause pays only for index movement beyond 5% of the base index. The base index was 118 and the index at the adjustment date is 136. Work out the adjustment the contractor is due.",
+      "blanks": [
+        {
+          "id": "move",
+          "label": "Index movement as a percentage of the base index, to one decimal place",
+          "numeric": true,
+          "expect": 15.3,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "Movement is (136 − 118) ÷ 118 = 18 ÷ 118 = 0.1525, or 15.3% of the base index. This is the full movement before the clause's band is applied."
+        },
+        {
+          "id": "adj",
+          "label": "Price adjustment payable to the contractor, in €",
+          "numeric": true,
+          "expect": 86136,
+          "tol": 500,
+          "unit": "€",
+          "rationale": "Only 35% of the contract is exposed: 2,400,000 × 0.35 = €840,000. Only movement beyond the 5% band is paid: 15.25% − 5% = 10.25%. So 840,000 × 0.1025 ≈ €86,136."
+        },
+        {
+          "id": "who",
+          "label": "Which party carries the first 5% of index movement — buyer or contractor",
+          "accept": [
+            "contractor",
+            "the contractor",
+            "seller",
+            "the seller",
+            "supplier",
+            "the supplier"
+          ],
+          "rationale": "The band means movement up to 5% is not paid, so it stays with the contractor, who is expected to have priced for it. The buyer takes only the movement beyond the band, on the exposed share."
+        }
+      ],
+      "explanation": "An index-linked price adjustment is calculated on the exposed share of the contract and only on movement beyond any band, so the working is exposed value multiplied by movement minus band. The band is a risk split: small movements stay with the seller, who prices for them, and large ones pass to the buyer. Reading the share and the band before applying the index is what stops the adjustment being overstated several times over.",
+      "mindset": "Read a clause's exposed share and band before applying an index to a contract price."
+    },
+    {
+      "id": "pmp-b8-111",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "environmental-scanning",
+        "product-lifecycle",
+        "grid-rules"
+      ],
+      "stem": "Your team keeps an external environment scan for a solar farm due for handover in March 2028. The grid operator has announced that from May 2029 all connected sites must support remote output curtailment, which your specified inverters cannot do. Select where this factor belongs on the scan.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "External environment scan: when a factor takes effect against its effect on the product",
+        "caption": "Select a zone. Use Tab or the arrow keys to move between zones, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "z1",
+          "n": 1,
+          "label": "Takes effect before handover — high effect on the product",
+          "x": 40,
+          "y": 40,
+          "w": 260,
+          "h": 140,
+          "correct": false,
+          "rationale": "The design decision is needed now, which is why this zone tempts, but the scan records when the factor bites, and that is fourteen months after handover. Misplacing it hides the most useful fact for the sponsor: an asset accepted as compliant would need retrofitting soon after."
+        },
+        {
+          "id": "z2",
+          "n": 2,
+          "label": "Takes effect after handover — high effect on the product",
+          "x": 340,
+          "y": 40,
+          "w": 260,
+          "h": 140,
+          "correct": true,
+          "rationale": "The rule applies in May 2029, after the March 2028 handover, and it makes the specified inverters non-compliant for operation. Recording both facts makes visible that the cheapest moment to respond is during delivery, even though the rule arrives later."
+        },
+        {
+          "id": "z3",
+          "n": 3,
+          "label": "Takes effect before handover — low effect on the product",
+          "x": 40,
+          "y": 200,
+          "w": 260,
+          "h": 140,
+          "correct": false,
+          "rationale": "Both dimensions are wrong. The candidate who picks this has probably read 'announced' as 'in effect' and then underweighted a rule that stops the site operating as designed."
+        },
+        {
+          "id": "z4",
+          "n": 4,
+          "label": "Takes effect after handover — low effect on the product",
+          "x": 340,
+          "y": 200,
+          "w": 260,
+          "h": 140,
+          "correct": false,
+          "rationale": "The timing is right but the effect is not low: inverters that cannot curtail would leave the site unable to stay connected. The candidate is judging the effect on the project's delivery rather than on the product it hands over."
+        },
+        {
+          "id": "z5",
+          "n": 5,
+          "label": "Outside the scan — beyond the project's lifecycle, not recorded",
+          "x": 40,
+          "y": 350,
+          "w": 560,
+          "h": 40,
+          "correct": false,
+          "rationale": "This is the most consequential error: treating the project's horizon as the product's. The project ends at handover, but the solar farm operates for decades, and a scan that ignores the operating environment misses the changes a project can still address cheaply."
+        }
+      ],
+      "explanation": "A project's environmental scan covers the environment its product will operate in, not only the period of delivery. Factors that take effect after handover but change what the product must do are exactly the ones a project can address cheaply now and expensively later. Recording timing and effect as separate dimensions keeps both facts in front of the people deciding.",
+      "mindset": "Scan the environment the product will live in, not just the one it is built in."
+    },
+    {
+      "id": "pmp-b8-112",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "archetype-trade-off",
+        "industry-standards",
+        "external-deadline",
+        "integration"
+      ],
+      "stem": "Your team is building a payments app that connects to a partner bank. The bank will accept only the new version of the industry API standard from its switchover in nine months. A release candidate is published; the final is due in five months, with changes expected only to error codes. Your launch on the current version is in hardening, due in four months. The team estimates the new-version integration at three months, plus six weeks of the bank's certification. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Launch on the current version, then begin the new-version work when the final standard is published, so that nothing has to be built twice and the team works from settled requirements.",
+          "correct": false,
+          "rationale": "Avoiding rework is a sound instinct, but starting at month five with three months of build and six weeks of certification ends at about month nine and a half, after the switchover. The candidate has not worked back from the external deadline."
+        },
+        {
+          "id": "b",
+          "text": "Start building against the release candidate now, keeping error handling behind an adapter so that changes in the final version stay contained.",
+          "correct": true,
+          "rationale": "Waiting for the final leaves four months against four and a half months of build and certification. The release candidate is stable except in one known area, so isolating that area bounds the rework while leaving comfortable time before the switchover."
+        },
+        {
+          "id": "c",
+          "text": "Move the launch to coincide with the bank's switchover and build only the new version, so the team integrates once rather than twice.",
+          "correct": false,
+          "rationale": "This removes the timing risk by giving up five months of market presence to avoid a rework that the stem bounds to error codes. The candidate is paying a large, certain cost to avoid a small, contained one."
+        },
+        {
+          "id": "d",
+          "text": "Join the standard body's working group to get early sight of changes, and start the new-version build once the final text is confirmed.",
+          "correct": false,
+          "rationale": "Early sight of the changes is useful, but this still starts the build at the same point as waiting for the final, so it misses the switchover by the same margin. Information does not buy calendar time."
+        }
+      ],
+      "explanation": "When an external standard is still moving but has a hard adoption date, plan backwards from the date: build time plus any third-party certification, set against the time left once the information becomes final. If waiting for certainty leaves less time than the work needs, building on a stable draft and isolating the parts expected to change is usually cheaper than a missed date or a deferred launch. Rework that can be bounded is a better trade than a deadline that cannot be met.",
+      "mindset": "Work back from an external deadline before deciding to wait for certainty."
+    },
+    {
+      "id": "pmp-b8-113",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "energy-prices",
+        "testing",
+        "quality-margin"
+      ],
+      "stem": "Your hybrid project is fitting out a data centre hall, with its monitoring software built in sprints. The test plan your team wrote specifies a six-week full-load burn-in. Since then, wholesale electricity prices have tripled, raising the burn-in's energy cost from €70,000 to €210,000. The client contract requires a minimum 14-day burn-in, and the equipment maker's data show 90% of early-life failures appear within ten days. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Revise the team's test plan to the 14-day contractual minimum, which still covers the window where most failures appear, and record the residual risk.",
+          "correct": true,
+          "rationale": "The six weeks was the team's own margin, not a requirement. Fourteen days meets the contract and covers the period in which nine in ten failures show, at about a third of the new cost, and the remaining risk is recorded rather than hidden."
+        },
+        {
+          "id": "b",
+          "text": "Run the six-week burn-in as planned, because the test plan was approved on quality grounds and energy prices are outside the project's control, funding the €140,000 rise from contingency.",
+          "correct": false,
+          "rationale": "The candidate is treating a margin the team chose as if it were a fixed requirement. Paying an extra €140,000 for assurance beyond the failure window is a trade that made sense at the old price and has not been re-examined at the new one."
+        },
+        {
+          "id": "c",
+          "text": "Defer the burn-in for three months in the hope that electricity prices fall back, and bring the software sprints forward to fill the gap.",
+          "correct": false,
+          "rationale": "This trades a certain delay to handover for an uncertain saving that depends on a market nobody on the project can forecast. The candidate is speculating on the external factor instead of adjusting to it."
+        },
+        {
+          "id": "d",
+          "text": "Ask the client to accept a seven-day burn-in, sharing the energy saving with them in return for agreeing to the shorter test duration.",
+          "correct": false,
+          "rationale": "Seven days falls below both the contract and the window in which most failures appear. The candidate is cutting into the assurance the test exists to provide and asking the client to absorb the quality risk for a share of the saving."
+        }
+      ],
+      "explanation": "A margin built into a plan is a trade-off decision taken at the prices of the day. When an external shock changes its cost, the trade has to be made again against the requirement it serves and the evidence about where the risk sits, rather than simply funded or postponed. The floor is the obligation and the evidence; anything above it is a choice that should be repriced.",
+      "mindset": "When the price of a margin changes, decide the margin again."
+    },
+    {
+      "id": "pmp-b8-114",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "climate",
+        "flood-risk",
+        "fitness-for-purpose"
+      ],
+      "stem": "You are managing a primary school extension. Planning consent was granted on flood data placing the 1-in-100-year flood level 0.3 m below the designed floor. The environment agency has now published revised modelling putting that level 0.1 m above the floor. The consent remains valid and building control has no objection. The client's estates manager says, 'We're consented, so build as designed.' The ground floor slabs are poured in five weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Proceed as designed, recording the revised data and the estates manager's instruction in the decision log so that the project's position is protected.",
+          "correct": false,
+          "rationale": "This protects the project manager rather than the school. The candidate accepts an instruction resting on a premise about approvals, not about flooding, from someone who may not hold the authority to accept the risk."
+        },
+        {
+          "id": "b",
+          "text": "Raise the floor level by 0.4 m in the design now, since it is far cheaper before the slabs are poured, and inform the client of the cost and programme effect once the design team confirms them.",
+          "correct": false,
+          "rationale": "The technical instinct is right, but changing the design, cost and possibly the consent is the client's decision. The candidate has replaced one unexamined premise with their own unilateral judgement."
+        },
+        {
+          "id": "c",
+          "text": "Put the revised flood level and its consequences to the client's decision-makers, with costed options for raising the floor, before the slabs are poured.",
+          "correct": true,
+          "rationale": "Being consented answers whether the building may be built, not whether it will stay dry. The client must decide, but only the project can bring the new evidence and the options to them while changing the floor is still cheap."
+        },
+        {
+          "id": "d",
+          "text": "Ask the environment agency whether the revised modelling is likely to be confirmed or revised again before deciding anything about the design.",
+          "correct": false,
+          "rationale": "Published modelling is the best available evidence, and a further review could take longer than five weeks. The candidate is seeking certainty that will not arrive before the decision it would inform is locked in by the pour."
+        }
+      ],
+      "explanation": "Compliance with an approval granted on older data is not the same as fitness for the conditions the asset will face. When external evidence moves, an instruction resting on 'we are approved' needs testing against the purpose the asset serves. The decision remains the client's; the project's duty is to put the evidence and costed options in front of people with the authority to accept the risk, while the choice is still cheap.",
+      "mindset": "Being permitted is not the same as being fit for purpose, so check which one an instruction rests on."
+    },
+    {
+      "id": "pmp-b8-115",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "security-vulnerability",
+        "sprint-goal",
+        "dependencies"
+      ],
+      "stem": "Mid-sprint, a critical vulnerability is published in a logging library your e-commerce platform uses in production. It is being actively exploited elsewhere, and the library's maintainers have released a patched version. Your organisation's security policy requires critical, actively exploited vulnerabilities to be patched within 48 hours. The sprint goal is a new checkout flow due for review in six days. What should the team do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the patch to the top of the product backlog so that it is taken into the next sprint, protecting the sprint goal the team committed to.",
+          "correct": false,
+          "rationale": "Protecting the sprint is a good habit against discretionary change, but the next sprint starts after the 48-hour deadline. The candidate is applying a rule meant for new requests to an external threat that is already active."
+        },
+        {
+          "id": "b",
+          "text": "Pull the patch into the current sprint now, accepting that the checkout sprint goal may slip, and tell the product owner and stakeholders why.",
+          "correct": true,
+          "rationale": "The threat is live, the fix exists and the policy has already set the deadline. The sprint goal is what gives way, and saying so openly keeps the product owner and stakeholders able to plan around the slip."
+        },
+        {
+          "id": "c",
+          "text": "Ask the security team to assess whether the platform's configuration is actually exposed before the team spends any sprint capacity on the patch.",
+          "correct": false,
+          "rationale": "Checking exposure is sensible when a threat is theoretical, but this one is being exploited, a patch exists and the policy has decided the response. The candidate is diagnosing a question the organisation has already answered."
+        },
+        {
+          "id": "d",
+          "text": "Raise the vulnerability at tomorrow's daily scrum so that the whole team can agree how to fit the patch around the planned checkout work.",
+          "correct": false,
+          "rationale": "This loses a day of a 48-hour window and frames the patch as something to fit around the sprint. The candidate is treating an urgent obligation as a planning conversation."
+        }
+      ],
+      "explanation": "An external threat that is active, has a fix and is covered by a policy deadline is not a prioritisation question. Sprint commitments protect the team from discretionary change; they are not a reason to defer an urgent obligation. When one arrives, the team does the work and makes the effect on the sprint goal visible straight away, so the plan adjusts around it.",
+      "mindset": "A sprint protects against discretionary change, not against an active external threat."
+    },
+    {
+      "id": "pmp-b8-116",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "court-ruling",
+        "employment-status",
+        "contractors"
+      ],
+      "stem": "Your hybrid programme at a streaming company relies on 40 freelance developers engaged through an online platform. A court has ruled, in a case involving another firm, that freelancers working under similar day-rate arrangements were in fact employees. Your delivery lead wants to convert all 40 to fixed-term employment contracts immediately; finance suggests ending the engagements at the next renewal. The company has an employment legal team. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Convert the 40 freelancers to fixed-term employment contracts now, because that removes the classification exposure before any of them can bring a claim.",
+          "correct": false,
+          "rationale": "This commits the company to employment costs and terms that are an HR and legal decision, and it may not even address exposure for the period already worked. The candidate is acting decisively on a question nobody with authority has answered."
+        },
+        {
+          "id": "b",
+          "text": "Plan to end the freelance engagements at their next renewal and backfill the roles through a managed-service supplier that employs its own staff, phasing the handovers to protect delivery.",
+          "correct": false,
+          "rationale": "Changing the sourcing model disrupts delivery and still leaves any past liability in place. The candidate has chosen a remedy before anyone has established whether the ruling reaches these arrangements."
+        },
+        {
+          "id": "c",
+          "text": "Rewrite the statements of work so that they pay for defined deliverables rather than days worked, moving the arrangements further from the ruling's facts.",
+          "correct": false,
+          "rationale": "Restructuring contracts can be a legitimate response, but deciding how to respond to a court ruling by redrafting terms is itself a legal judgement. The candidate is designing the remedy without the people who can tell whether it works."
+        },
+        {
+          "id": "d",
+          "text": "Refer the ruling and the programme's engagement terms to the employment legal team for an assessment, continuing current work and logging the risk meanwhile.",
+          "correct": true,
+          "rationale": "Whether a ruling about another firm's arrangements applies to these ones is a legal judgement, and so is the remedy. The project manager's part is to get it to the people who own that judgement quickly and keep delivery stable while they decide."
+        }
+      ],
+      "explanation": "When a legal development elsewhere may change the status of the project's arrangements, applicability and remedy are both judgements for the function that owns that law, not for the project. The project manager's contribution is speed and stability: get the facts to the owner, keep work running and record the risk. Acting on a remedy before applicability is known can create cost or exposure that the ruling never required.",
+      "mindset": "Take legal change to the people who own the law, and keep the work steady while they decide."
+    },
+    {
+      "id": "pmp-b8-117",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "data-localisation",
+        "regulation",
+        "spike"
+      ],
+      "stem": "Your team builds a cloud HR platform. A country that provides 12% of your revenue has passed a law, effective in ten months, requiring certain personal data about its residents to be stored inside the country. Your platform stores all customer data in two regions elsewhere. Leadership wants a recommendation within a month. Which two actions should the product owner and team take first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Confirm with legal which categories of data and which users the law actually covers, since that sets the size of what must move.",
+          "correct": true,
+          "rationale": "'Certain personal data' may be a narrow slice or nearly everything, and the answer changes every option leadership will see. Establishing scope first stops the team costing a solution to a larger problem than the one the law creates."
+        },
+        {
+          "id": "b",
+          "text": "Run a time-boxed spike to establish what hosting that data in-country would take within the current architecture and team capacity.",
+          "correct": true,
+          "rationale": "A recommendation needs an estimate, and the architecture is the unknown that only the team can resolve. A spike gives leadership a costed option within the month without committing to build anything yet."
+        },
+        {
+          "id": "c",
+          "text": "Begin provisioning in-country hosting in the next sprint, since ten months is a short time for an infrastructure change of that size.",
+          "correct": false,
+          "rationale": "Urgency is real, but this commits to one response before knowing which data are covered or whether leadership will choose to stay. The candidate is mistaking a deadline for a decision already made."
+        },
+        {
+          "id": "d",
+          "text": "Recommend leaving the market, since 12% of revenue may not justify a separate region and the effort it would take to run one.",
+          "correct": false,
+          "rationale": "Exit may turn out to be right, but recommending it without knowing the scope of the law or the cost of compliance is a guess presented as advice. The candidate is skipping the analysis leadership asked for."
+        },
+        {
+          "id": "e",
+          "text": "Wait for the regulator's implementing guidance, which will settle the detail, before spending any team capacity on the question.",
+          "correct": false,
+          "rationale": "Guidance may come late or not at all, and leadership wants a recommendation in a month. The candidate is treating missing detail as a reason for inaction rather than a gap that legal and the team can narrow now."
+        }
+      ],
+      "explanation": "A new external requirement is sized by two unknowns: what exactly it covers, and what meeting it would take in your system. Resolving both quickly and cheaply turns a vague threat into options leadership can choose between. Building, exiting or waiting before either is known commits the organisation on a guess, whichever way the guess points.",
+      "mindset": "Size an external requirement's reach and cost before choosing how to meet it."
+    },
+    {
+      "id": "pmp-b8-118",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "low-emission-zones",
+        "scope-decisions",
+        "steering-group"
+      ],
+      "stem": "Your hybrid programme is building a route-planning platform for courier firms, launching in five months. The sales director tells the steering group that 'new rules ban diesel vans from city centres from January' and asks for electric-vehicle routing in the launch scope, slipping it two months. You have checked: three of the 40 cities your customers serve are introducing low-emission zones, phased over three years, and diesel vans meeting current emission standards are exempt. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add electric-vehicle routing to the launch scope as requested, since sales is closest to the customers and the steering group is the right forum to decide.",
+          "correct": false,
+          "rationale": "The forum is right and sales' customer insight is real, but the decision would be taken on a misstatement the project manager knows to be wrong. The candidate is deferring to position over evidence."
+        },
+        {
+          "id": "b",
+          "text": "Interview a sample of courier customers to find out how many plan fleet changes before the steering group makes any decision on the launch scope.",
+          "correct": false,
+          "rationale": "Customer plans are worth knowing later, but the question in front of the group is a factual one about the rule, and it is already answered. The candidate is gathering new data while leaving the known error uncorrected."
+        },
+        {
+          "id": "c",
+          "text": "Add a configurable zone-restriction feature to the launch scope instead, which handles the three cities without the full two months of routing work.",
+          "correct": false,
+          "rationale": "This may well be where the group lands, but the project manager is choosing a compromise to a premise that has not been corrected. The candidate is solving the problem quietly instead of putting the facts in front of the people deciding."
+        },
+        {
+          "id": "d",
+          "text": "Set out the rule's actual reach and phasing for the steering group before it decides, and propose electric-vehicle routing as a post-launch increment if still wanted.",
+          "correct": true,
+          "rationale": "The scope request rests on a description of the regulation that the facts do not support. The steering group should decide, but on the real reach of the rule; once it has that, a later increment becomes a credible alternative to a two-month slip."
+        }
+      ],
+      "explanation": "When a scope request rests on a claim about the external environment, the claim is checked before the request is weighed. Decision-makers who hear a broad version of a regulation will buy a broad response; putting the actual reach and timing in front of them lets them choose proportionately. Correcting a premise in the open is different from overruling a stakeholder, because the decision stays with the people who own it.",
+      "mindset": "Check the claim about the outside world before weighing the request built on it."
+    },
+    {
+      "id": "pmp-b8-119",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "regulation",
+        "working-conditions",
+        "schedule-replanning"
+      ],
+      "stem": "You are managing a €6m resurfacing contract on a regional motorway. The road-space permit covers July and August only and allows night working on weekdays, but your schedule assumes day shifts from 07:00 to 19:00. The government has just enacted a heat-stress rule: from June, heavy outdoor work must stop between 12:00 and 16:00 whenever the forecast exceeds 33°C, which historical data suggest will apply on about 60% of your working days. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Apply to the labour inspectorate for an exemption for the resurfacing crews, citing the fixed summer programme and the traffic cost of the work overrunning into autumn.",
+          "correct": false,
+          "rationale": "This treats the project's programme as a reason the law should bend. A safety rule enacted for the whole economy is unlikely to yield to one contract's dates, and planning on an exemption leaves no plan at all if it is refused."
+        },
+        {
+          "id": "b",
+          "text": "Keep the current day-shift plan, record the restriction in the risk register, and add extra crews to recover lost hours if the hot days do materialise this summer.",
+          "correct": false,
+          "rationale": "Something expected on 60% of working days is not an uncertainty to watch; it is a near-certain condition. The candidate who picks this applies risk-register thinking to a known constraint and leaves the re-plan until crews are standing idle."
+        },
+        {
+          "id": "c",
+          "text": "Ask the road authority to bring the start forward to late May, so that more of the resurfacing is finished before the restriction begins to apply in June.",
+          "correct": false,
+          "rationale": "The permit was granted for July and August, so this reopens a separate approval, and even a four-week shift leaves most of the work inside the restricted months. It moves the problem rather than designing around it."
+        },
+        {
+          "id": "d",
+          "text": "Rebuild the schedule around split shifts and the weekday night working the permit already allows, then submit the revised dates and costs for approval as a change.",
+          "correct": true,
+          "rationale": "The rule is in force and will bite on most working days, so it is a planning constraint rather than a risk. The permit already contains the flexibility needed to work around it, and the cost and date consequences then go through the normal approval route."
+        }
+      ],
+      "explanation": "When an external rule changes the conditions under which work may be done, and the condition will almost certainly occur, the response is to re-plan inside the constraint, starting with flexibilities the project already holds, and to make the resulting cost and date effect visible through the approval route. Seeking an exemption or watching it as a risk both defer the re-plan to the point where it is most expensive.",
+      "mindset": "A new rule about how work may be done is a constraint to plan around, not an obstacle to argue with."
+    },
+    {
+      "id": "pmp-b8-120",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "accessibility-law",
+        "definition-of-done",
+        "regulation"
+      ],
+      "stem": "Your agile team runs the website and app for an online rail-ticket retailer. The company's legal team has confirmed that a new accessibility law applies to your ticket purchase journey from next March, eight months away, and requires it to meet a published accessibility standard. An audit found 40 failures against that standard across existing pages. The team's definition of done does not mention accessibility. What should happen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the standard's checks to the definition of done for all new work, and put the 40 audit failures into the backlog for the product owner to order before March.",
+          "correct": true,
+          "rationale": "Changing the definition of done stops every new story adding to the gap, and putting the known failures in the backlog lets the product owner order them against the March date alongside everything else."
+        },
+        {
+          "id": "b",
+          "text": "Plan a dedicated accessibility sprint in February to fix all 40 audit failures together, so feature work continues uninterrupted and the fixes are tested as one set before March.",
+          "correct": false,
+          "rationale": "Six months of new work built to the old standard will add failures the February sprint was never sized for. The candidate is treating a standing requirement as a one-off clean-up and leaving no margin if the sprint overruns."
+        },
+        {
+          "id": "c",
+          "text": "Commission a second, independent audit to confirm the 40 failures and their severity before committing any of the team's capacity to accessibility work this quarter.",
+          "correct": false,
+          "rationale": "Legal has confirmed the law applies and an audit has already been done. Repeating the diagnosis spends weeks of an eight-month window confirming what is known, while new non-compliant work continues to ship."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to add an accessibility epic to the roadmap after the current release, attaching the standard so that developers can consult it as they build.",
+          "correct": false,
+          "rationale": "Attaching a standard as reference material does not make it a condition of finishing work. Without it in the definition of done, consulting the standard stays optional and the gap keeps growing until the epic begins."
+        }
+      ],
+      "explanation": "When a legal requirement applies to everything a team produces, it belongs in the definition of done, which stops the problem growing, while the existing gap is handled as ordinary backlog work ordered against the deadline. Fixing past failures without changing the standard for new work means the debt is refilled as fast as it is paid down.",
+      "mindset": "Stop the gap widening before you start closing it."
+    },
+    {
+      "id": "pmp-b8-121",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-route-to-owner",
+        "geopolitics",
+        "visa-restrictions",
+        "supplier-obligations"
+      ],
+      "stem": "Your project is installing a new packaging line at a dairy. The equipment is supplied under a supply-and-commission contract that makes the manufacturer responsible for commissioning, with delay damages if the line is not handed over by 30 September. The government has suspended short-term business visas for nationals of the manufacturer's home country, where its commissioning engineers are based. Commissioning starts in ten weeks. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Engage a local commissioning contractor now, so that the dairy has qualified engineers available in ten weeks whatever the manufacturer is able to arrange in time.",
+          "correct": false,
+          "rationale": "This takes on an obligation the manufacturer has already priced and accepted, and it muddies who is liable for delay damages or for a line commissioned by a third party. The candidate is solving a problem the contract has already allocated."
+        },
+        {
+          "id": "b",
+          "text": "Ask the dairy's HR team to sponsor longer-term work visas for the manufacturer's engineers under a category the suspension does not cover, so they can still travel.",
+          "correct": false,
+          "rationale": "The client's HR team has no role in staffing the supplier's obligation, and sponsoring another firm's employees creates commitments the dairy has not agreed to. The candidate is taking ownership of a route the manufacturer should be exploring."
+        },
+        {
+          "id": "c",
+          "text": "Write to the manufacturer about the visa suspension and require its revised commissioning plan, with named engineers and dates, by a deadline you set.",
+          "correct": true,
+          "rationale": "The contract already places commissioning, and the risk of failing to deliver it, on the manufacturer. Requiring its plan puts the problem with the party that holds both the obligation and the means, such as engineers of other nationalities or a local partner."
+        },
+        {
+          "id": "d",
+          "text": "Move the handover date to the end of the year in the schedule now, so that the dairy plans production around a realistic date rather than one already in doubt.",
+          "correct": false,
+          "rationale": "This concedes a delay before the party responsible has said whether it can avoid one, and it weakens the dairy's position on delay damages. Re-baselining comes after the manufacturer's plan shows the real effect, not before."
+        }
+      ],
+      "explanation": "When an external event hits an obligation that a contract has already allocated, the first move is to put it formally to the party who holds that obligation and require their plan. They carry the risk and usually have options the buyer cannot see. Stepping in, or conceding the date, takes the obligation back without its price.",
+      "mindset": "Before solving an external problem, check whose contract already owns it."
+    },
+    {
+      "id": "pmp-b8-122",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "technology-change",
+        "product-metrics",
+        "browser-privacy"
+      ],
+      "stem": "You are the agile delivery lead for a language-learning app. Three weeks ago the most widely used web browser began blocking third-party cookies by default. Since then, the marketing dashboard shows trial-to-paid conversions from web adverts down 35%. The product owner wants the next two sprints spent redesigning the web sign-up flow. The finance team's count of new paid subscriptions, taken from the billing system, shows no change over the same period. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Compare the dashboard's web conversion figures with sign-ups recorded in billing before any redesign, to establish whether conversions fell or only the tracking of them did.",
+          "correct": true,
+          "rationale": "Billing is a source the browser change cannot affect, and it disagrees with the dashboard. Reconciling the two establishes whether there is a product problem at all before two sprints are committed to solving one."
+        },
+        {
+          "id": "b",
+          "text": "Begin the redesign as a series of small A/B experiments in the next sprint, so the team learns which changes recover conversion rather than redesigning the whole flow blind.",
+          "correct": false,
+          "rationale": "Experiments are a sound way to redesign, but they would be judged on the same dashboard whose readings are in doubt. The candidate has chosen a good method for a problem that has not yet been shown to exist."
+        },
+        {
+          "id": "c",
+          "text": "Replace the cookie-based tracking with server-side analytics over the next sprint, so the marketing dashboard reports conversions accurately again before any redesign decisions are made.",
+          "correct": false,
+          "rationale": "This jumps to the likely conclusion and commits a sprint to it. The comparison with billing is cheaper, faster and might show the tracking fix is the right work, but the candidate is building the remedy before confirming the diagnosis."
+        },
+        {
+          "id": "d",
+          "text": "Recommend that marketing pause web advertising spend until the fall is explained, so the company stops paying for adverts that appear to have stopped converting trial users.",
+          "correct": false,
+          "rationale": "Advertising spend is marketing's decision, and pausing it on the strength of a reading that billing contradicts could cut the channel that is actually still working. The candidate is acting on the signal instead of testing it."
+        }
+      ],
+      "explanation": "When an external technology change coincides with a sudden shift in a metric, first establish whether the world changed or only the measurement did, by checking against a source the change could not have touched. Platform and privacy changes often break the instruments before they change customer behaviour, and redesigning a product to fix a measurement fault wastes the capacity and the evidence.",
+      "mindset": "When the outside world changes, check your instruments before you change your product."
+    },
+    {
+      "id": "pmp-b8-123",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "archetype-trade-off",
+        "inflation",
+        "fixed-price",
+        "supplier-viability"
+      ],
+      "stem": "Your hybrid project is redeveloping a maritime museum: the building works are fixed-price and the digital exhibits are built in sprints. The supplier of 120 bespoke display cases, under a €900,000 fixed-price contract with no price adjustment clause, writes that glass and aluminium costs have risen 22% since signing. It asks for a €110,000 increase, warning that it may otherwise struggle to finish. Half the cases are delivered; the rest are needed in four months, and re-tendering would take five. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reply that the contract is fixed-price with no adjustment clause, so the risk of rising material prices sits with the supplier, and expect delivery as agreed.",
+          "correct": false,
+          "rationale": "Contractually correct, and the instinct to protect the agreed allocation is sound. But it ignores that a failing supplier cannot be replaced before the need date, so the risk the contract assigns to the supplier would be paid in schedule by the museum."
+        },
+        {
+          "id": "b",
+          "text": "Agree the €110,000 through the project's change process, since a supplier failure on the remaining cases would cost the museum far more than the sum requested.",
+          "correct": false,
+          "rationale": "The reasoning about exposure is right, but it pays the full figure without testing it. Half the cases are already made at the old cost, so a claim made in the supplier's own terms needs evidence about the remaining cases before it is accepted, and paying unevidenced claims invites more of them."
+        },
+        {
+          "id": "c",
+          "text": "Ask the supplier to show its costs for the remaining cases, then decide what relief, if any, is cheaper than the delay that a failure would cause.",
+          "correct": true,
+          "rationale": "The fixed price puts the cost rise on the supplier on paper, but a failure would land on the museum, because replacement takes longer than the time left. Evidence on the 60 undelivered cases shows whether the claim is real, since half the cases were made before the rise, and lets relief be bought only if it is worth more than the delay it prevents."
+        },
+        {
+          "id": "d",
+          "text": "Start re-tendering the remaining cases now as a fallback while telling the supplier the contract price stands, so the project is protected if the supplier does fail.",
+          "correct": false,
+          "rationale": "A fallback is prudent in principle, but a five-month re-tender cannot meet a four-month need, so it protects less than it appears to. It also signals distrust to a supplier whose continued effort the project depends on, and may hasten the failure it insures against."
+        }
+      ],
+      "explanation": "A fixed price allocates the cost of an external price shock on paper, but it does not remove the buyer's exposure to the seller failing. Where replacement would take longer than the time available, the real decision is a commercial trade-off grounded in evidence of the seller's actual position, not a choice between standing on principle and paying whatever is asked.",
+      "mindset": "Contract terms say who should bear a shock; evidence tells you who would actually end up bearing it."
+    },
+    {
+      "id": "pmp-b8-124",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "insurance-market",
+        "design-decisions",
+        "construction"
+      ],
+      "stem": "You are the client-side project manager for a seven-storey student residence designed in cross-laminated timber, due to start on site in four months. After fires in timber buildings abroad, the architect reports that 'timber buildings over 18 metres are now uninsurable' and recommends redesigning the frame in concrete, adding £1.2m and ten weeks. Your building is 23 metres. The trade press reports that some insurers have withdrawn from this market while others are quoting higher premiums. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the architect's recommendation and raise a change request for the concrete redesign now, so that the ten weeks are absorbed before the contractor starts on site.",
+          "correct": false,
+          "rationale": "The timing logic is sound, but it takes an architect's reading of the insurance market as fact. Insurability is a question for the insurance market, and the evidence in hand says cover is dearer rather than unavailable."
+        },
+        {
+          "id": "b",
+          "text": "Ask the architect to produce a whole-life cost comparison of the timber and concrete frames, including insurance, for the sponsor to choose between at the next board.",
+          "correct": false,
+          "rationale": "A comparison is the right shape of decision, but the insurance line in it would still be the architect's guess. The candidate has asked the wrong party for the one figure the comparison turns on."
+        },
+        {
+          "id": "c",
+          "text": "Keep the timber design and add the fire-engineering upgrades insurers have generally asked for, such as sprinklers throughout, so that cover remains available at handover.",
+          "correct": false,
+          "rationale": "This may well be part of the answer, but it designs to an assumption about what insurers want instead of asking them. Sprinklers throughout cost real money and may be neither necessary nor sufficient for the terms actually on offer."
+        },
+        {
+          "id": "d",
+          "text": "Ask the organisation's insurance broker to obtain indicative terms for insuring the completed timber building, and take them to the sponsor before any decision on the frame.",
+          "correct": true,
+          "rationale": "The architect's claim is the premise of a £1.2m decision, and the trade press already contradicts it. A broker can test the real market quickly, and the sponsor can then weigh a known premium against a known redesign cost."
+        }
+      ],
+      "explanation": "A large change justified by a claim about the external market should be tested against the market itself before it is approved, especially when other evidence points a different way. The person reporting an external change is not always the authority on it, and the cheapest step is usually to get a direct reading from the party who actually sets the terms.",
+      "mindset": "Test the claim about the outside world before paying to react to it."
+    },
+    {
+      "id": "pmp-b8-125",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "emerging-technology",
+        "spike",
+        "build-or-adopt"
+      ],
+      "stem": "Your team at a freight forwarder has four sprints of backlog to build a tool that extracts data from scanned customs documents. Your company's cloud provider has just launched a managed document-extraction service, and the developers want to drop the planned work and adopt it. Two constraints are non-negotiable for the product owner: documents must not leave the EU, and handwritten amendments, which appear on about a fifth of documents, must be read. The launch announcement mentions neither. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Run a short, time-boxed spike that tests the service against both constraints using real customs documents, before the backlog is re-ordered either way.",
+          "correct": true,
+          "rationale": "Both constraints can be tested cheaply: data location from the service's configuration, handwriting accuracy only by trying it on the team's own documents. A spike turns an attractive announcement into evidence before either plan is abandoned."
+        },
+        {
+          "id": "b",
+          "text": "Keep the planned four sprints, because the design the team has already refined and estimated meets both of the product owner's constraints with no open questions.",
+          "correct": false,
+          "rationale": "Certainty about the existing plan is real, but it ignores an option that might deliver the same outcome for a fraction of the effort. The candidate is valuing work already estimated over work that may not need doing."
+        },
+        {
+          "id": "c",
+          "text": "Re-order the backlog to adopt the service now, adding stories to cover any gaps against the two constraints as they appear during integration testing.",
+          "correct": false,
+          "rationale": "Data residency is not a gap that later stories can patch; if the service processes outside the EU it is disqualified outright. The candidate commits to the new route before checking the constraints that could rule it out."
+        },
+        {
+          "id": "d",
+          "text": "Ask the provider's account manager for written confirmation of where documents are processed and whether handwriting is supported, and decide on the backlog once the reply arrives.",
+          "correct": false,
+          "rationale": "A written answer can settle data location, but 'supported' says nothing about accuracy on your own documents, which is what the product owner needs. The candidate seeks assurance where an experiment is the only reliable evidence."
+        }
+      ],
+      "explanation": "When a new technology appears that might replace planned work, test it early and cheaply against the constraints that would disqualify it, using your own data, before changing plans in either direction. Vendor announcements describe capability in general; only a trial shows whether it holds for your conditions.",
+      "mindset": "Let a cheap experiment choose between the plan you have and the shortcut you have just been offered."
+    },
+    {
+      "id": "pmp-b8-126",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "political-environment",
+        "public-consultation",
+        "pre-election-period"
+      ],
+      "stem": "You manage a council project to redesign a town-centre junction. A six-week public consultation, with leaflets and drop-in events, is due to launch on 2 April. Last week a local election was called for 7 May. The council's pre-election guidance prohibits publicity on proposals that could affect the election from 27 March until polling day, and lists highway schemes among the proposals it covers. Detailed design and surveys are unaffected. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Launch on 2 April as planned but remove councillors' names, quotes and photographs from the leaflets, so the consultation reads as officer-led rather than political.",
+          "correct": false,
+          "rationale": "The guidance restricts publicity on the proposal itself, not just political branding. The candidate is complying with the appearance of the rule while carrying out exactly the activity it prohibits."
+        },
+        {
+          "id": "b",
+          "text": "Move the consultation launch to after 7 May, keep the design and survey work running, and tell the sponsor what the move does to the programme.",
+          "correct": true,
+          "rationale": "The guidance names highway schemes and the consultation falls wholly inside the restricted period. Moving only the restricted activity keeps the unaffected work on track and limits the delay to what the rule actually requires."
+        },
+        {
+          "id": "c",
+          "text": "Bring the launch forward to 20 March, so that the leaflets are delivered and the first drop-in events are held before the restricted period starts on 27 March.",
+          "correct": false,
+          "rationale": "A six-week consultation starting on 20 March runs for five weeks inside the restricted period, including most of its events. The candidate has looked at the launch date rather than at the whole activity the rule covers."
+        },
+        {
+          "id": "d",
+          "text": "Ask the council's monitoring officer to confirm in writing whether this junction scheme is covered by the guidance, and hold the launch date until the answer arrives.",
+          "correct": false,
+          "rationale": "The guidance already lists highway schemes, so the question has been answered. The candidate is seeking a ruling the text provides, and holding a date that is days away while waiting for it."
+        }
+      ],
+      "explanation": "When an external, time-bound restriction applies to one activity, move that activity clear of the restricted period and keep the unaffected work running. Workarounds that keep the substance of a restricted activity while changing its surface do not comply, and the test is whether any part of the activity falls inside the period, not only its start.",
+      "mindset": "Move what the rule restricts, and keep moving what it does not."
+    },
+    {
+      "id": "pmp-b8-127",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "geopolitics",
+        "distributed-teams",
+        "working-agreements"
+      ],
+      "stem": "You coach a nine-person team building an insurance claims portal. Four developers work from a city abroad where, during political unrest, the authorities have imposed a nightly internet shutdown for an indefinite period. Because of the time difference, it cuts them off for the rest of the team's whole afternoon, when the daily stand-up and most pairing sessions take place. Velocity has fallen 30% for two sprints, and the team keeps committing to its old level. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move the four developers' current stories to the other five and give them independent work needing little collaboration until the shutdowns end and normal pairing can resume.",
+          "correct": false,
+          "rationale": "This protects the sprint in the short term but splits one team into two for an indefinite period, building knowledge silos and reducing the four to a side-line. The candidate is restructuring around the people instead of adapting the way of working."
+        },
+        {
+          "id": "b",
+          "text": "Facilitate the team in reworking its working agreements and ceremony times around the hours everyone is online, and plan the next sprints on the capacity that results.",
+          "correct": true,
+          "rationale": "The shutdown is indefinite, so the team's working pattern has to fit the new conditions. Moving ceremonies and pairing into shared hours, and planning on observed capacity, stops the repeated over-commitment while keeping the team whole."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to approve relocating the four developers temporarily to the company's office in a neighbouring country until the unrest in their city has passed.",
+          "correct": false,
+          "rationale": "Relocation is a large personal decision for the four and a significant cost, proposed before the team has tried changing its own practices. The candidate escalates a problem the team can largely solve itself."
+        },
+        {
+          "id": "d",
+          "text": "Keep the ceremonies and pairing at their current times and log the lost hours, so that sprint reviews show stakeholders the shutdowns' real effect on delivery.",
+          "correct": false,
+          "rationale": "Making the effect visible is useful, but nothing about how the team works changes, so the loss continues sprint after sprint. The candidate is reporting an impediment the team has the means to work around."
+        }
+      ],
+      "explanation": "When an external condition changes a team's working environment for the foreseeable future, the team should adapt how it works, its agreements, ceremony times and planned capacity, rather than wait for the old conditions to return or restructure around the people affected. Planning from the capacity actually observed is what ends a pattern of repeated over-commitment.",
+      "mindset": "When the environment changes for the foreseeable future, change how the team works rather than waiting for the old conditions."
+    },
+    {
+      "id": "pmp-b8-128",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "public-holidays",
+        "cutover-planning",
+        "delegated-authority"
+      ],
+      "stem": "Your hybrid project is moving a ferry operator's booking system to a new platform; the migration tooling is built in sprints and the cutover follows a fixed runbook. Cutover is planned for 14–15 June, after the final rehearsal on 7 June. The government has just announced a one-off public holiday on Monday 16 June, expected to be one of the season's busiest booking days, when the platform vendor's support desk will be closed. The approved plan lets the project manager move the cutover by up to two weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the steering group to approve moving the cutover to a later weekend at its next meeting, keeping 14 June in the plan until it has made the decision.",
+          "correct": false,
+          "rationale": "The approved plan already gives the project manager this authority. Escalating it spends governance time on a delegated decision and leaves teams preparing for a date that is unlikely to hold."
+        },
+        {
+          "id": "b",
+          "text": "Move the cutover to the weekend of 21–22 June, inside the approved window, and confirm the new date with the business, the vendor and the steering group.",
+          "correct": true,
+          "rationale": "The plan delegates exactly this decision, and the new date keeps the rehearsal in place and puts the first live day on a normal working Monday with vendor support open. Informing the steering group keeps governance aware without asking it to decide what it has delegated."
+        },
+        {
+          "id": "c",
+          "text": "Keep 14 June and negotiate paid holiday cover from the vendor's support desk, so that support is available on the Monday when the first live bookings are taken.",
+          "correct": false,
+          "rationale": "Paid cover solves the vendor gap but still puts the first live day on one of the busiest booking days of the season. The candidate fixes the visible constraint and misses that the holiday changes the business load as well."
+        },
+        {
+          "id": "d",
+          "text": "Bring the cutover forward to the weekend of 7–8 June, so that the vendor's support desk is open on the first working day after the new platform goes live.",
+          "correct": false,
+          "rationale": "That weekend is the final rehearsal, so moving forward means going live without it or squeezing it out. The candidate solves the support gap by removing the step that tells the team whether cutover is safe."
+        }
+      ],
+      "explanation": "When an external calendar change affects a planned event, first check what the approved plan already lets you decide. If the response sits inside delegated limits, take it and inform governance rather than asking it to decide; and choose the option that clears every effect of the change, both on support and on business load, not only the most visible one.",
+      "mindset": "Use the authority you have been given, and tell people you have used it."
+    },
+    {
+      "id": "pmp-b8-129",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "labour-market",
+        "resource-risk",
+        "subcontractors"
+      ],
+      "stem": "You manage the construction of a district heating network that will need 60 qualified pipe welders from September, four months away. Your welding subcontractor's crews are not contracted beyond July. A nuclear power station starting construction 40 miles away has begun recruiting 1,500 welders at rates 20% above those in your subcontract, and local agencies report welders already leaving other sites. Which two actions should the project manager take now?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the subcontractor to commit named crews for September now, agreeing any retention payment needed through the project's change process.",
+          "correct": true,
+          "rationale": "The labour market is tightening week by week, so the crews available now may not be available in a month. Securing commitment early, with the cost routed through change control, acts while the option still exists."
+        },
+        {
+          "id": "b",
+          "text": "Update the labour risk, cost forecast and schedule for the market change and report them to the project board at its next meeting.",
+          "correct": true,
+          "rationale": "A competing project of this size changes the cost and availability assumptions the plan rests on. The board needs the revised forecast to decide on funding before the shortage arrives, not after."
+        },
+        {
+          "id": "c",
+          "text": "Wait until the power station's recruitment drive is complete in the summer, then set rates once its effect on the local market is clear.",
+          "correct": false,
+          "rationale": "Waiting for clarity sounds prudent, but by the time the effect is clear the welders will already have moved. The candidate treats a market that is moving now as one that will hold still until it has been measured."
+        },
+        {
+          "id": "d",
+          "text": "Ask the designers to switch the network's joints to mechanical couplings wherever possible, so the project depends on far fewer qualified welders.",
+          "correct": false,
+          "rationale": "Reducing dependence on welders may have a place, but redesigning joints on a pressurised heating network is a major technical change with approvals of its own. The candidate jumps to a redesign before trying to secure the labour the design assumes."
+        },
+        {
+          "id": "e",
+          "text": "Recruit welders directly onto the project's own payroll at rates matching the power station, so the project controls its own supply of labour.",
+          "correct": false,
+          "rationale": "This bypasses the subcontract, takes on employment the organisation has not planned for, and joins a wage contest with a much larger buyer. The candidate is acting outside the project's commercial model rather than through it."
+        }
+      ],
+      "explanation": "When an external market shift threatens a resource the project will need later, the window to secure it is now, while it is still available, and the cost of doing so belongs in the forecast the sponsor sees. Waiting to measure the effect of a moving market usually means measuring a shortage that has already happened.",
+      "mindset": "Secure scarce resources while the market still offers them, and show what doing so costs."
+    },
+    {
+      "id": "pmp-b8-130",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "consumer-protection",
+        "acceptance-criteria",
+        "regulation"
+      ],
+      "stem": "Your team builds a fitness streaming app sold by monthly subscription. A consumer protection law, effective in five months, requires that subscribers can cancel online in no more steps than it took to sign up. Your sign-up takes two screens; cancelling currently takes five, including three retention offers that marketing credits with saving 9% of cancellations. Marketing asks whether one offer can stay. Which two actions should the product owner take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the law's step limit to the cancellation stories as acceptance criteria, and order them to ship well before the effective date.",
+          "correct": true,
+          "rationale": "Writing the legal limit into acceptance criteria makes compliance testable in the team's normal flow, and ordering the work early leaves room for the legal answer to change the design."
+        },
+        {
+          "id": "b",
+          "text": "Ask the company's legal team whether one retention offer can be shown within the permitted steps, and build the flow to their answer.",
+          "correct": true,
+          "rationale": "Whether an offer counts as a step is a legal interpretation, and 9% of cancellations rides on it. The team should not guess in either direction when the people who own that judgement can give it."
+        },
+        {
+          "id": "c",
+          "text": "Remove all three retention offers in the next release, on the basis that the strictest reading of a new consumer law is the safest one to build to.",
+          "correct": false,
+          "rationale": "It is safe, but it gives up measurable value on the team's own reading of the law. The candidate is substituting caution for interpretation when an interpretation is available."
+        },
+        {
+          "id": "d",
+          "text": "Keep one retention offer, then monitor complaints and regulator contact after the law takes effect, and adjust the cancellation flow if either begins to rise.",
+          "correct": false,
+          "rationale": "Experimenting and adjusting suits product questions, not legal ones. The candidate treats compliance as something to learn by trial, where the first signal of error may be enforcement."
+        },
+        {
+          "id": "e",
+          "text": "Defer the cancellation work until the regulator publishes its guidance on retention offers, so that the team avoids building the flow twice.",
+          "correct": false,
+          "rationale": "Avoiding rework is a fair aim, but guidance may never arrive or may arrive late, and five months is not long for design, build and testing. The candidate bets the deadline on someone else's timetable."
+        }
+      ],
+      "explanation": "A new legal requirement enters an agile backlog as testable acceptance criteria ordered against its effective date, while the parts that need interpretation go to the people who own that interpretation. Teams should neither guess at the law nor treat it as something to learn by experiment; they should build to the answer from the function accountable for it.",
+      "mindset": "Build to the law's requirements, and let those who own the interpretation interpret it."
+    },
+    {
+      "id": "pmp-b8-131",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "cyber-threat",
+        "critical-infrastructure",
+        "go-live-readiness"
+      ],
+      "stem": "Your hybrid project is delivering remote monitoring for a water company's 140 pumping stations: the field hardware is installed to a fixed plan and the monitoring software is built in sprints. Go-live is in six weeks, and the design includes remote access for the hardware vendor's engineers. The national cyber security agency has just raised the threat level for the water sector after attacks on remote-access tools at two utilities abroad. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the water company's security team to review the vendor remote-access design against the agency's new advisory before go-live.",
+          "correct": true,
+          "rationale": "The design was approved against the old threat picture. The organisation's security function owns the judgement of what the new level requires, and asking now leaves six weeks to act on the answer."
+        },
+        {
+          "id": "b",
+          "text": "Tell the steering group now that the advisory may change the access design and the go-live date, and record it in the risk register.",
+          "correct": true,
+          "rationale": "A possible change to design and date is something governance should hear about before it is certain, not after. Making it visible now lets the sponsor prepare instead of being surprised at go-live."
+        },
+        {
+          "id": "c",
+          "text": "Remove vendor remote access from scope, with the vendor's engineers attending stations in person for all support until the threat level falls again.",
+          "correct": false,
+          "rationale": "This may be where the review ends up, but it decides a security question without the security function and commits to site visits across 140 stations. The candidate reaches for the most drastic response before the threat has been assessed."
+        },
+        {
+          "id": "d",
+          "text": "Proceed to go-live as planned, because the remote-access design passed independent penetration testing last month and nothing in the project itself has changed.",
+          "correct": false,
+          "rationale": "The project has not changed, but the environment it will operate in has. A test passed against last month's threat picture does not show that the design is adequate for this month's."
+        },
+        {
+          "id": "e",
+          "text": "Ask the hardware vendor to confirm in writing that its remote-access tool is not the one attacked abroad, and proceed with go-live once it has.",
+          "correct": false,
+          "rationale": "A reasonable question to ask, but a raised threat level concerns the class of attack, not one product, and the vendor is not neutral on whether its own access route is safe. The candidate narrows a sector-wide warning to a single supplier assurance."
+        }
+      ],
+      "explanation": "A change in the external threat environment can make a design that was adequate yesterday inadequate today, even though nothing inside the project has changed. The response is to have the function that owns the risk reassess the design against the new conditions and to tell governance early that scope or dates may move, rather than either proceeding on old assurance or deciding the remedy alone.",
+      "mindset": "Re-test past approvals when the world they were made in changes."
+    },
+    {
+      "id": "pmp-b8-132",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "environmental-scanning",
+        "responsibility",
+        "laboratory-construction"
+      ],
+      "stem": "You manage the build of a new research laboratory for a university. Match each external development to the party who owns the first response to it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The government announces an enhanced tax credit for capital spending on research facilities, which the university might claim if costs are recorded in a particular way from now on."
+        },
+        {
+          "id": "s2",
+          "text": "A revised national standard for laboratory fume extraction is published; it applies to designs submitted for building approval after June, and your detailed design goes in for approval in July."
+        },
+        {
+          "id": "s3",
+          "text": "The country where your fume cupboards are made sharply raises its export duty on them; the supply contract is on delivered duty paid terms."
+        }
+      ],
+      "options": [
+        {
+          "id": "tax",
+          "text": "The university's finance and tax function",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Whether the university can and should claim a tax credit is a tax judgement for the organisation, not the project. The project's part is to change how it records costs once finance says what is needed."
+        },
+        {
+          "id": "design",
+          "text": "The lead designer responsible for the building services design",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A standard that will apply at submission is a design requirement, and assessing what it changes is the designer's professional responsibility. Cost and time effects then follow through the project's normal change process."
+        },
+        {
+          "id": "supplier",
+          "text": "The fume cupboard supplier, under its contract",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Delivered duty paid terms put export and import duties on the seller. The rise is the supplier's cost to absorb, and the project's role is to hold the contract rather than to solve it."
+        },
+        {
+          "id": "board",
+          "text": "The project board, as a change to the approved scope",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of these developments is yet a scope change: each first needs assessment or action by the party that holds the relevant expertise or obligation. The board may later receive consequences, but routing every external change to it first skips the owner."
+        }
+      ],
+      "explanation": "External developments arrive at the project, but the first response to each belongs to whoever holds the relevant expertise or contractual obligation: tax questions to the tax function, requirements to the designer, cost risks to the party the contract assigns them to. The project manager's job is to route each one to its owner and then integrate the consequences, not to absorb them all as project decisions.",
+      "mindset": "Ask who already owns an external change before deciding how the project absorbs it."
+    },
+    {
+      "id": "pmp-b8-133",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "contract-clauses",
+        "force-majeure",
+        "change-in-law"
+      ],
+      "stem": "Your organisation is building a container terminal under a contract with a force majeure clause, a change-in-law clause, a price adjustment clause and a liquidated damages clause. Complete each sentence with the clause the contractor would rely on. Two choices are not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "After the contract was signed, a new national regulation required every crane to carry an extra anti-collision system. The contractor's claim for the added cost is made under the"
+        },
+        {
+          "id": "c2",
+          "text": "A volcanic eruption closed the region's airspace for nine days, so specialist commissioning staff could not reach site. The contractor's claim for extra time without penalty is made under the"
+        }
+      ],
+      "options": [
+        {
+          "id": "law",
+          "text": "change-in-law clause",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A legal requirement introduced after signature could not have been priced at tender. The change-in-law clause exists to move that cost to the employer, because it is a change in the rules rather than in the market."
+        },
+        {
+          "id": "fm",
+          "text": "force majeure clause",
+          "correct": true,
+          "match": "c2",
+          "rationale": "An eruption is an event outside either party's control that neither could reasonably have prevented. Force majeure typically relieves the affected party of delay penalties for that period, usually as time rather than money."
+        },
+        {
+          "id": "pa",
+          "text": "price adjustment clause",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Price adjustment covers movement in market prices against an index. A new legal requirement adds work rather than changing the price of existing work, so treating it as indexation misclassifies the event."
+        },
+        {
+          "id": "ld",
+          "text": "liquidated damages clause",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Liquidated damages are what the employer recovers for the contractor's delay, so the contractor never relies on this clause to claim. The other clauses decide whether those damages apply at all."
+        }
+      ],
+      "explanation": "Contracts sort external events by kind: a change in the law after signature, an event beyond either party's control, and a movement in market prices each have their own mechanism and remedy, often money for the first and time for the second. Classifying the event correctly comes first, because it decides which clause applies and what relief is available.",
+      "mindset": "Classify the external event before reaching for a remedy, because the contract sorts them by kind."
+    },
+    {
+      "id": "pmp-b8-134",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "environmental-tax",
+        "waste-management",
+        "cost-analysis"
+      ],
+      "stem": "Your hybrid project is replacing a distribution warehouse, with its stock-control software built in sprints. Demolition will send 4,000 tonnes of mixed waste to landfill: 1,500 tonnes before 1 April and 2,500 tonnes after. Landfill costs a £35.00 per tonne gate fee plus landfill tax, which rises from £103.70 to £126.15 per tonne on 1 April. A recycling contractor can take 60% of the post-April tonnage for £58.00 per tonne, plus a one-off £12,000 set-up charge. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "rise",
+          "label": "Extra landfill tax caused by the rise if nothing changes, in £",
+          "numeric": true,
+          "expect": 56125,
+          "tol": 1,
+          "unit": "£",
+          "rationale": "Only the 2,500 tonnes after 1 April are affected. The rise is 126.15 − 103.70 = £22.45 per tonne, and 2,500 × 22.45 = £56,125."
+        },
+        {
+          "id": "saving",
+          "label": "Net saving from sending 60% of the post-April waste to the recycling contractor, in £",
+          "numeric": true,
+          "expect": 142725,
+          "tol": 1,
+          "unit": "£",
+          "rationale": "Diverted tonnage is 60% of 2,500 = 1,500 tonnes. Landfill would cost 1,500 × (126.15 + 35.00) = £241,725. Recycling costs 1,500 × 58.00 + 12,000 = £99,000. The net saving is 241,725 − 99,000 = £142,725."
+        }
+      ],
+      "explanation": "An external tax change should be costed on the quantities it actually touches, which here is only the work falling after its effective date, and then used to re-test options that were not worth it under the old rate. A rise in the cost of one route often turns an alternative from marginal to clearly better, and the comparison must include every cost on both sides, including one-off charges and fees that do not change.",
+      "mindset": "When the outside world reprices one option, re-run the comparison with all the others."
+    },
+    {
+      "id": "pmp-b8-135",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-8",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "regulatory-deadlines",
+        "release-planning",
+        "healthcare"
+      ],
+      "stem": "Your agile team ships releases of a pharmacy dispensing system on fixed dates. A national rule takes effect on 1 November: systems must reject electronic prescriptions that lack a new verification code. The health ministry requires each supplier's change to have been live in every pharmacy for at least six weeks before that date. Select the latest release that meets the ministry's requirement.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Release timeline for the dispensing system, with the rule's effective date of 1 November",
+        "caption": "Select a release. Use Tab or the arrow keys to move between releases, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "r14",
+          "n": 1,
+          "label": "Release 14 — live in all pharmacies 3 June",
+          "x": 20,
+          "y": 60,
+          "w": 140,
+          "h": 160,
+          "correct": false,
+          "rationale": "Release 14 meets the requirement with five months to spare, but it is not the latest that does. Pulling the change into June displaces work already planned for that release without any regulatory need."
+        },
+        {
+          "id": "r15",
+          "n": 2,
+          "label": "Release 15 — live in all pharmacies 1 September",
+          "x": 175,
+          "y": 60,
+          "w": 140,
+          "h": 160,
+          "correct": true,
+          "rationale": "Six weeks before 1 November is 20 September. Release 15 is live on 1 September, about eight and a half weeks before the rule takes effect, and it is the last release that clears the six-week requirement."
+        },
+        {
+          "id": "r16",
+          "n": 3,
+          "label": "Release 16 — live in all pharmacies 22 September",
+          "x": 330,
+          "y": 60,
+          "w": 140,
+          "h": 160,
+          "correct": false,
+          "rationale": "Release 16 is live before the rule takes effect, which is what makes it tempting, but only five weeks and five days before. The candidate has checked the effective date and not the ministry's six-week live-running condition."
+        },
+        {
+          "id": "r17",
+          "n": 4,
+          "label": "Release 17 — live in all pharmacies 3 November",
+          "x": 485,
+          "y": 60,
+          "w": 140,
+          "h": 160,
+          "correct": false,
+          "rationale": "This arrives after the rule is already in force, so pharmacies would be running a non-compliant system for two days and the six-week condition would not be met at all."
+        },
+        {
+          "id": "patch",
+          "n": 5,
+          "label": "Emergency patch channel — any date, for urgent defect fixes only",
+          "x": 20,
+          "y": 250,
+          "w": 605,
+          "h": 80,
+          "correct": false,
+          "rationale": "The patch channel is reserved for urgent defects. Using it for a known, dated regulatory change misuses an exception route and still has to satisfy the six-week condition, which planning into a release already does."
+        }
+      ],
+      "explanation": "A regulatory deadline is often not the date the rule takes effect but an earlier date implied by conditions attached to it, such as a period of live running or certification. Work back from the effective date through every condition to find the true deadline, then plan the change into the last regular release that meets it, so it neither misses the rule nor displaces other work early.",
+      "mindset": "Find the real deadline by working back through every condition attached to the rule."
+    }
+  ]
+}

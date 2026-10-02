@@ -1,0 +1,1715 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Business 2 — Compliance",
+  "questions": [
+    {
+      "id": "pmp-b2-101",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "permit-conditions",
+        "construction",
+        "schedule-recovery"
+      ],
+      "stem": "You manage the construction of a four-storey medical centre on a residential street. The planning permission carries a condition limiting noisy works to 08:00–18:00 on weekdays. The concrete subcontractor is two days behind and proposes a Saturday pour to recover the time, pointing out that the pour takes only six hours and that neighbours could be warned by letter beforehand. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Decline the Saturday pour unless the local authority first agrees a variation to the working-hours condition, and look for other ways to recover the two days.",
+          "correct": true,
+          "rationale": "The condition binds the site whatever the schedule says. The two lawful routes are to work within it or to have the body that set it vary it, and recovery has to be found inside whichever applies."
+        },
+        {
+          "id": "b",
+          "text": "Approve the Saturday pour on condition that every neighbouring household receives a letter a week ahead, giving the date, the hours and a named site contact for complaints.",
+          "correct": false,
+          "rationale": "Telling neighbours is good practice, but the candidate is confusing consultation with permission. A courteous breach of a planning condition is still a breach, and the authority can stop the site for it."
+        },
+        {
+          "id": "c",
+          "text": "Approve the pour but require the subcontractor to start no earlier than 09:00 and finish by 15:00 on the Saturday, keeping the disturbance as short as the work allows.",
+          "correct": false,
+          "rationale": "This reduces the impact but not the non-compliance. The condition limits which days noisy work may happen, not just how long it lasts, so shortening the hours misreads what the obligation actually says."
+        },
+        {
+          "id": "d",
+          "text": "Ask the subcontractor to confirm in writing that it will bear the cost of any enforcement action before you agree to the Saturday pour going ahead as proposed.",
+          "correct": false,
+          "rationale": "Shifting the financial consequence does not make the work lawful. The candidate treats compliance as a cost to be allocated, when enforcement can halt the whole project, not just the subcontractor's package."
+        }
+      ],
+      "explanation": "A condition attached to a permit or consent is a compliance obligation in its own right, and it applies however strong the schedule case is. The only routes are to meet it or to have the body that imposed it formally change it. Measures that soften the effect of a breach, or move its consequences onto someone else, leave the work in breach, so schedule recovery has to be found within the conditions as they stand.",
+      "mindset": "A permit condition is met or formally varied; it is not traded against the schedule."
+    },
+    {
+      "id": "pmp-b2-102",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-use-own-authority",
+        "open-source-licensing",
+        "software-release",
+        "company-policy"
+      ],
+      "stem": "Your agile team ships a downloadable desktop app to paying customers every two weeks. Company policy, set by the legal team, bans components under strong copyleft licences from any distributed product. Midway through the sprint, a developer notices that a charting library added earlier this sprint is under such a licence. A permissively licensed alternative exists, and swapping it would take two of the six remaining days. What should the team do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Replace the library within this sprint so the release ships without it, and record the change and the reason in the team's component inventory.",
+          "correct": true,
+          "rationale": "The policy is clear, the fix fits the sprint and nothing has shipped yet. Choosing an alternative component is squarely within the team's own authority, so it needs no one's permission to comply."
+        },
+        {
+          "id": "b",
+          "text": "Ask the legal team for a one-off exception for this release, given the rework involved, and plan the replacement of the library for the following sprint.",
+          "correct": false,
+          "rationale": "An exception request suits a policy whose application is unclear or a fix that cannot be done in time. Here neither is true, so the candidate is asking permission for a breach the team can simply avoid."
+        },
+        {
+          "id": "c",
+          "text": "Keep the library and ship the full licence text with a written offer of the source code, so that the terms of the licence itself are fully met.",
+          "correct": false,
+          "rationale": "This satisfies the licence but not the company's policy, which bans such components regardless of whether their terms are honoured. The candidate has complied with the wrong obligation."
+        },
+        {
+          "id": "d",
+          "text": "Raise the replacement as a backlog item for the product owner to prioritise against the features that are already planned for the next sprint.",
+          "correct": false,
+          "rationale": "Putting a compliance blocker in the backlog makes it look optional, and the current release would ship in breach while it waits. The candidate treats an obligation as a preference to be ranked."
+        }
+      ],
+      "explanation": "When a team finds a clear breach of a known obligation that it can correct within its own remit and capacity, it corrects it before release rather than seeking exceptions or deferring it. Exceptions are for obligations that genuinely cannot be met in time, and the backlog is for choices, not for requirements that have no option attached. Meeting a different obligation from the one that applies is not compliance with either.",
+      "mindset": "If the fix is yours to make and fits the time, make it before the breach ships."
+    },
+    {
+      "id": "pmp-b2-103",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "internal-audit",
+        "design-controls",
+        "medical-devices"
+      ],
+      "stem": "Your hybrid programme develops software for an infusion pump under a regulated design-control process. An internal audit sampled 40 change records from last quarter and found that 12 have no recorded approval from the design authority. The report goes to the quality board in ten days, and the board chair wants your response plan. The engineering lead says all 12 changes were discussed and agreed at stand-ups. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the design authority review and sign the 12 change records now, so that every record in the audit sample carries an approval before the quality board meets.",
+          "correct": false,
+          "rationale": "Signing now produces records that say approval existed when nobody yet knows whether it did. The candidate treats the missing signature as the problem rather than as a symptom, and risks misleading the board."
+        },
+        {
+          "id": "b",
+          "text": "Extend the audit to every change record from the quarter, so that the response plan presented to the board reflects the full extent of the problem rather than a sample.",
+          "correct": false,
+          "rationale": "Extent matters, but the candidate is measuring how many records lack a signature before knowing what a missing signature means here. Nature before scale: the sample already shows a pattern worth explaining."
+        },
+        {
+          "id": "c",
+          "text": "Add a mandatory approval step in the change tool that blocks merging until the design authority approves, and present that control to the board as the corrective action.",
+          "correct": false,
+          "rationale": "This may well be the right fix eventually, but the candidate is fixing before diagnosing. If unapproved changes reached the product, the board needs an impact assessment, which a future-facing control does not give."
+        },
+        {
+          "id": "d",
+          "text": "Check each of the 12 records against meeting notes, messages and test evidence to establish whether approval was given but not recorded, or not given at all.",
+          "correct": true,
+          "rationale": "The two possibilities lead to different responses: one is a recording gap, the other means unreviewed changes may be in a medical device. The board's plan depends on knowing which, so this comes first."
+        }
+      ],
+      "explanation": "When an audit finds missing compliance evidence, the first question is whether the control failed or only its record did. A recording failure calls for repairing the evidence trail and making recording reliable; a control failure means unassessed changes may be in the product and need impact review. Fixing, re-signing or widening the audit before that is known risks solving the wrong problem or creating records that misstate what happened.",
+      "mindset": "Establish whether the control or only its evidence failed before deciding what to fix."
+    },
+    {
+      "id": "pmp-b2-104",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "compliance-register",
+        "new-jurisdiction",
+        "energy"
+      ],
+      "stem": "Your firm has built wind farms only in its home country and has just won a contract to build one abroad. The contract makes your firm responsible for meeting all applicable local law, standards and permit conditions. Detailed planning starts next month. Which two actions should come first to establish what the project must comply with?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Engage local legal and permitting advisers to identify the statutes, permits and technical standards that apply at the site and to the work.",
+          "correct": true,
+          "rationale": "Nobody on a team new to the jurisdiction can know what applies there. Identifying the obligations is the first step, and it needs people who know the local regime."
+        },
+        {
+          "id": "b",
+          "text": "Set up a compliance register that links each obligation, once identified, to an owner, the requirement it creates and the evidence that will show it is met.",
+          "correct": true,
+          "rationale": "Identification is only useful if every obligation lands somewhere with an owner and a planned proof. The register turns a list of laws into work the plan can carry."
+        },
+        {
+          "id": "c",
+          "text": "Adopt the home-country standards across the whole project, since they are among the strictest in the region and are likely to exceed most local requirements.",
+          "correct": false,
+          "rationale": "Stricter is not the same as covering. Local regimes impose obligations of different kinds, such as permits, notifications, language and local content rules, which no home standard addresses, however demanding."
+        },
+        {
+          "id": "d",
+          "text": "Require the turbine manufacturer and civil subcontractors to warrant in their contracts that all of their work will comply with the local law that applies.",
+          "correct": false,
+          "rationale": "Warranties allocate the cost of a breach; they do not tell your firm what the obligations are. The candidate passes the question down the supply chain while the contract keeps the responsibility with your firm."
+        },
+        {
+          "id": "e",
+          "text": "Wait until the permitting phase, when the local authority will set out in the permit conditions which requirements the project has to satisfy.",
+          "correct": false,
+          "rationale": "Permit conditions are only one source of obligation, and design decisions taken before then will already have fixed much of what can comply. The candidate leaves identification until it is too late to shape the plan."
+        }
+      ],
+      "explanation": "Compliance planning starts by identifying every source of obligation that applies — law, permits, standards and contract — using people who know the regime, and then giving each obligation an owner and a defined form of evidence. Assuming familiar standards cover unfamiliar ground, pushing the question onto suppliers, or waiting for one source to speak all leave obligations undiscovered until they are expensive to meet.",
+      "mindset": "Find out what applies before planning how to comply, and give every obligation an owner."
+    },
+    {
+      "id": "pmp-b2-105",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "safety-case",
+        "rail",
+        "acceptance"
+      ],
+      "stem": "Your project is upgrading the signalling on a regional rail line. The line may return to passenger service only once the independent safety assessor has accepted the safety case, and that review is booked for 14 days' time. The operator's operations director asks you to reopen the line a week earlier under a temporary 40 mph speed limit, arguing that the restriction removes any real risk. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to the earlier reopening provided the operations director confirms in writing that the operator accepts the risk of running under the temporary restriction.",
+          "correct": false,
+          "rationale": "The director's acceptance of risk is not the acceptance the rule requires. The candidate substitutes a senior signature for the specific approval the obligation names, which leaves the line operating unlawfully."
+        },
+        {
+          "id": "b",
+          "text": "Decline and keep the original date, explaining that a submitted safety case cannot be altered and so a restricted opening could not be considered before the review.",
+          "correct": false,
+          "rationale": "The outcome may turn out the same, but the reason is wrong: safety cases can be revised and assessed. The candidate closes a legitimate question that the proper owner might have been able to answer."
+        },
+        {
+          "id": "c",
+          "text": "Ask the independent safety assessor whether a restricted earlier reopening could be assessed, and tell the director that the decision rests with that process.",
+          "correct": true,
+          "rationale": "The obligation names who decides. Putting the proposal to the assessor tests it in the only forum that can approve it, and is honest with the director about where the decision sits."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the request to the project sponsor and ask for a decision on whether the operational benefit of reopening a week earlier justifies the change.",
+          "correct": false,
+          "rationale": "The sponsor owns the business case, not safety acceptance. The candidate routes a compliance decision to the most senior person available rather than to the party the requirement actually designates."
+        }
+      ],
+      "explanation": "Where a compliance requirement names a specific party whose acceptance is needed, no other authority can stand in for it, however senior or however well argued the case. The project manager's job is to bring a proposal to that party, not to approve it, reject it or escalate it elsewhere. Pressure to proceed is answered by showing where the decision lies and getting it there quickly.",
+      "mindset": "When a rule names who must approve, take the question to them and nobody else."
+    },
+    {
+      "id": "pmp-b2-106",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "financial-promotions",
+        "release-flow",
+        "compliance-review"
+      ],
+      "stem": "Your agile team at an investment platform releases weekly. Regulation requires any change to customer-facing financial promotions to be approved by a compliance-qualified person before publication. The compliance team's practice is to review every release in full, which takes six working days, so finished work now waits longer than it took to build. Roughly one release in five touches promotional content. Delivery pressure is rising. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move to monthly releases, so that each six-day compliance review covers four weeks of change and the queue of finished work stops growing.",
+          "correct": false,
+          "rationale": "This removes the queue by giving up the frequent delivery the team exists to provide. The candidate accepts the review practice as fixed and reshapes delivery around it without asking whether it has to be that way."
+        },
+        {
+          "id": "b",
+          "text": "Ask for a compliance analyst to be embedded in the team, so that every release is reviewed inside the sprint rather than queued for the central team.",
+          "correct": false,
+          "rationale": "Faster review of everything is a real improvement, but it spends scarce compliance capacity reviewing four releases in five that the rule may not cover. The candidate scales the practice before testing its scope."
+        },
+        {
+          "id": "c",
+          "text": "Escalate to the sponsor that compliance review is now the main constraint on delivery, and ask for a service-level target on review turnaround.",
+          "correct": false,
+          "rationale": "A turnaround target may help, but the candidate escalates before engaging the control owner and leaves unexamined whether most of the reviews are needed. It treats a scoping question as a capacity dispute."
+        },
+        {
+          "id": "d",
+          "text": "Work with the compliance team to agree which changes the rule actually covers, so that only releases touching promotions wait for their approval.",
+          "correct": true,
+          "rationale": "The regulation covers promotions; the full review of every release is a practice built on top. Testing that premise with the control's owner could release most of the flow while keeping the obligation fully met."
+        }
+      ],
+      "explanation": "A compliance control is an organisation's chosen way of meeting an obligation, and it often covers more than the obligation requires. When a control constrains delivery, the first move is to compare it with the requirement it serves, together with the control's owner, before changing cadence, adding capacity or escalating. Narrowing a control to what the obligation needs keeps compliance intact while removing cost that the rule never imposed.",
+      "mindset": "Separate what the rule requires from how the organisation has chosen to meet it."
+    },
+    {
+      "id": "pmp-b2-107",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "sources-of-obligation",
+        "waivers",
+        "authority"
+      ],
+      "stem": "On your hospital extension project, three requirements are causing friction, and each comes from a different source. Match each requirement to the party, if any, who can relax it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The client's contract requires every test report in the client's own template; your team wants to use the testing tool's built-in format and save two weeks."
+        },
+        {
+          "id": "s2",
+          "text": "Your company's information-security policy requires two approvers for production database changes; an urgent overnight fix has only one approver available."
+        },
+        {
+          "id": "s3",
+          "text": "Building regulations require a fire-safety completion certificate before the new wing is occupied; the client wants staff moved in a week before the inspection."
+        }
+      ],
+      "options": [
+        {
+          "id": "client",
+          "text": "The client, through an agreed contract variation",
+          "correct": true,
+          "match": "s1",
+          "rationale": "A contractual requirement belongs to the parties to the contract. Only the client can agree to accept something different, and that agreement should be recorded as a variation, not taken on trust."
+        },
+        {
+          "id": "owner",
+          "text": "The policy owner, through the exception route the policy sets out",
+          "correct": true,
+          "match": "s2",
+          "rationale": "An internal policy is the organisation's own rule, so the organisation can relax it, but only through the person and procedure the policy names. A project manager deciding alone would be breaching the policy, not using it."
+        },
+        {
+          "id": "nobody",
+          "text": "Nobody on either side; it has to be met or the date moved",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A statutory requirement cannot be waived by the client, the sponsor or the project. The only levers are meeting it sooner or moving the occupation date."
+        },
+        {
+          "id": "sponsor",
+          "text": "The sponsor, by formally accepting the risk on the organisation's behalf",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Sponsors accept project risks within their authority, but none of these is that: one belongs to the client, one to the policy owner, and one to the law. Risk acceptance does not confer the right to waive someone else's requirement."
+        }
+      ],
+      "explanation": "Who can relax a requirement depends on where it comes from. Contract terms can be changed only by the parties to the contract, internal policies only by their owners through their own exception routes, and statutory obligations by no one on the project at all. Identifying the source first tells you whether a request for relief is possible and who must grant it, and stops seniority being mistaken for authority.",
+      "mindset": "Ask where a requirement comes from before asking who can relax it."
+    },
+    {
+      "id": "pmp-b2-108",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "card-data",
+        "security-incident",
+        "retail"
+      ],
+      "stem": "On a hybrid programme replacing a retailer's online checkout, a tester notices that the payment service released three weeks ago writes full card numbers into its application logs in plain text. The logs are kept for 90 days and are readable by about 60 support staff. Card-data rules the retailer is bound by prohibit storing full card numbers unprotected. The next planned release is in nine days. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a high-priority defect so the masking fix ships in the release in nine days, and ask the security team to review who can read the logs meanwhile.",
+          "correct": false,
+          "rationale": "The candidate treats a live breach as a defect on the normal release path. Nine more days of card numbers accumulating in readable logs is exposure the organisation could have stopped today."
+        },
+        {
+          "id": "b",
+          "text": "Have the logging stopped and access to the affected logs restricted today under the security incident procedure, then plan the permanent fix and the purge.",
+          "correct": true,
+          "rationale": "An ongoing breach is contained first. Stopping the writes and restricting access ends the growing exposure today, and invoking the incident procedure brings in the people who decide on investigation and disclosure."
+        },
+        {
+          "id": "c",
+          "text": "First establish how many card numbers have been logged and who has viewed the logs, so the response can be sized properly before anything is changed.",
+          "correct": false,
+          "rationale": "Investigation is needed, but not before containment. The candidate sequences analysis ahead of stopping an exposure that is still growing; the two can run in parallel once the leak is shut."
+        },
+        {
+          "id": "d",
+          "text": "Report the issue directly to the card scheme, since a breach of card-data rules has to be disclosed by the organisation and delay could make it worse.",
+          "correct": false,
+          "rationale": "Disclosure may well be required, but deciding it belongs to the organisation's incident and compliance owners. The candidate bypasses them, and the report still leaves card numbers being written to the logs."
+        }
+      ],
+      "explanation": "When a compliance breach is still happening, containment comes before analysis, normal release planning and external reporting. Stopping the cause and limiting exposure today shrinks the harm while the facts are gathered, and using the incident procedure puts disclosure and investigation decisions with their owners. A breach handled on the ordinary delivery cadence keeps growing for as long as the cadence takes.",
+      "mindset": "Stop a breach that is still happening before working out how big it was."
+    },
+    {
+      "id": "pmp-b2-109",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "compliance-records",
+        "food-safety",
+        "monitoring"
+      ],
+      "stem": "Under its hygiene approval, a food plant your project is commissioning must record the temperature of each of its 3 cold rooms every 4 hours, around the clock. Before the inspector visits, you count the records for the first 30 days and find 498. Of the missing records, 36 are from cold room B, all on night shifts; the rest are spread across the other two rooms. Work out the figures you will report.",
+      "blanks": [
+        {
+          "id": "req",
+          "label": "Records required for the 30 days, as a count",
+          "numeric": true,
+          "expect": 540,
+          "tol": 0,
+          "rationale": "Every 4 hours around the clock is 24 ÷ 4 = 6 readings per room per day. Across 3 rooms that is 18 a day, and over 30 days 18 × 30 = 540 records."
+        },
+        {
+          "id": "miss",
+          "label": "Records missing, as a count",
+          "numeric": true,
+          "expect": 42,
+          "tol": 0,
+          "rationale": "Required minus found: 540 − 498 = 42 missing records, which is about 7.8% of the total. That figure alone makes it look like a general lapse."
+        },
+        {
+          "id": "roomb",
+          "label": "Records missing for cold room B, as a percentage of that room's required records",
+          "numeric": true,
+          "expect": 20,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "Room B needs 6 × 30 = 180 records and is missing 36: 36 ÷ 180 = 20%. Against 6 missing across the other two rooms' 360, the gap is concentrated in one room on one shift, which points to a specific cause."
+        }
+      ],
+      "explanation": "Compliance that depends on records is demonstrated by showing how many were required, how many exist and where the gaps fall. An overall completion rate hides patterns, and the pattern is what identifies the cause: gaps concentrated in one place, shift or person point to a process that is failing there, while scattered gaps point to general discipline. Reporting the gap honestly with its pattern and cause is stronger evidence of control than a total alone.",
+      "mindset": "Count the gaps, then look at where they fall, because the pattern names the cause."
+    },
+    {
+      "id": "pmp-b2-110",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "age-verification",
+        "interim-controls",
+        "grocery-delivery"
+      ],
+      "stem": "Your agile team runs the ordering app for a grocery delivery firm that also sells alcohol, about 12% of revenue. A new law takes effect in five weeks requiring couriers to check photo ID on every alcohol delivery and keep a record of the check; it does not say how. The team's automated ID-scanning feature needs nine more weeks. The compliance manager has confirmed that a courier checklist completed in the existing driver app would satisfy the law. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Put the courier checklist in place for the four-week gap, accepting the extra time it adds to each delivery, and keep the automated scanning feature as the lasting solution.",
+          "correct": true,
+          "rationale": "The law prescribes an outcome, not a method, and a compliant interim method is available. Paying some courier time for four weeks keeps both the revenue and the compliance, while the better control is finished."
+        },
+        {
+          "id": "b",
+          "text": "Suspend alcohol sales from the day the law takes effect until the automated ID-scanning feature is live, so that no alcohol is delivered without the full control.",
+          "correct": false,
+          "rationale": "This is compliant but needlessly costly. The candidate treats the ideal control as the only compliant one, when the obligation's owner has already confirmed a cheaper interim route that keeps the revenue."
+        },
+        {
+          "id": "c",
+          "text": "Re-prioritise the backlog so that the whole team works only on the scanning feature, aiming to bring nine weeks down to five, and decide on alcohol sales in week four.",
+          "correct": false,
+          "rationale": "The candidate gambles compliance on compressing an estimate and leaves the fallback decision until there is no time to put one in place. Swarming may shorten the work, but it is not a plan for the gap."
+        },
+        {
+          "id": "d",
+          "text": "Ask the regulator for a short transitional period for firms whose technical solution is already in development, and keep delivering as now while the request is considered.",
+          "correct": false,
+          "rationale": "A pending request is not a granted one. The candidate plans to keep delivering on the assumption of relief, which would leave every alcohol delivery after the start date in breach if the answer is no or late."
+        }
+      ],
+      "explanation": "When an obligation specifies an outcome rather than a method, any method that achieves it is compliant, and a temporary, less efficient control can bridge the time until the preferred one is ready. The decision is then an ordinary trade-off of cost against value among compliant options, not between compliance and delivery. Suspending the activity, betting on a compressed estimate or relying on relief not yet granted all ignore a cheaper compliant route.",
+      "mindset": "Check whether the rule prescribes the method before assuming only the ideal control complies."
+    },
+    {
+      "id": "pmp-b2-111",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "supplier-certification",
+        "contract-requirements",
+        "manufacturing"
+      ],
+      "stem": "You are running a hybrid programme to install a new bottling line for a drinks manufacturer. The client's contract requires every equipment supplier to hold a current quality-management certification. A routine check shows that the conveyor supplier's certificate expired five weeks ago. The supplier says its renewal audit is booked for three weeks' time and nothing about its processes has changed. Conveyors are due on site next month. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Note the renewal date and check the supplier's new certificate when it arrives, since the audit is already booked and the supplier's processes have not changed.",
+          "correct": false,
+          "rationale": "The candidate treats an administrative lapse as no lapse. The contract requires a current certificate, so the gap is a non-compliance the client is entitled to know about, whatever its likely outcome."
+        },
+        {
+          "id": "b",
+          "text": "Tell the client about the lapse now, record it in the compliance register with the renewal date, and agree with the client how the conveyor delivery is treated meanwhile.",
+          "correct": true,
+          "rationale": "The requirement is the client's, so the client decides what to accept. Raising it promptly, with the facts and the expected renewal, lets them choose while there is still a month before delivery."
+        },
+        {
+          "id": "c",
+          "text": "Suspend the conveyor order and start sourcing from a certified alternative supplier, so that every supplier on the line meets the contract requirement without exception.",
+          "correct": false,
+          "rationale": "This acts on the client's behalf without asking the client. The candidate jumps to the most disruptive remedy for a gap the contract's other party may be willing to accept for three weeks."
+        },
+        {
+          "id": "d",
+          "text": "Ask the supplier for written confirmation from its certification body that the audit is booked, and file it in the project records as evidence covering the lapse period.",
+          "correct": false,
+          "rationale": "A booking is not a certificate. Filing it as evidence makes a gap look covered in the records, and the candidate has still not told the party whose requirement is unmet."
+        }
+      ],
+      "explanation": "A known gap against a contractual or regulatory requirement is reported to the party who owns the requirement as soon as it is found, even when it looks minor and likely to resolve itself. That party decides whether to accept, mitigate or reject, and the register records the gap so the decision can be shown later. Waiting quietly, papering over the gap or acting unilaterally all take that decision away from its owner.",
+      "mindset": "Surface a compliance gap to the requirement's owner while they still have choices."
+    },
+    {
+      "id": "pmp-b2-112",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "accessibility",
+        "definition-of-done",
+        "public-sector"
+      ],
+      "stem": "Your agile team builds the ticket-buying app for a public transport authority and releases every two weeks. The authority must show that its public digital services meet the national accessibility standard, and its auditors can ask for evidence at any time, not only at launch. The product owner wants compliance demonstrated without slowing the release cadence. Which two practices best let the team demonstrate compliance continuously?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the accessibility criteria to the definition of done, with automated checks in the build and manual checks using assistive technology for each new screen.",
+          "correct": true,
+          "rationale": "Building the criteria into done means every increment is checked as it is made, so the live app conforms release by release rather than only after a clean-up."
+        },
+        {
+          "id": "b",
+          "text": "Keep an accessibility conformance record that is updated each release, linking each criterion to the tests that show it is met and listing any known gaps.",
+          "correct": true,
+          "rationale": "Compliance has to be demonstrable, not just achieved. A record kept current with each release gives auditors evidence for the version that is actually live, gaps included."
+        },
+        {
+          "id": "c",
+          "text": "Schedule a dedicated accessibility sprint before each major release, in which the whole team tests and fixes the app against the full standard.",
+          "correct": false,
+          "rationale": "The candidate batches compliance work. Between those sprints, each fortnightly release can drift out of conformance, and an auditor asking mid-cycle would find neither conformance nor evidence."
+        },
+        {
+          "id": "d",
+          "text": "Commission an annual external accessibility audit and use its report as the evidence the authority provides whenever its auditors ask.",
+          "correct": false,
+          "rationale": "An external audit is valuable, but it describes one version at one moment. With 26 releases a year, the candidate offers evidence that is out of date for almost the whole year."
+        },
+        {
+          "id": "e",
+          "text": "Appoint one developer as accessibility champion, responsible for reviewing every story against the standard before the product owner accepts it.",
+          "correct": false,
+          "rationale": "The candidate concentrates the check in one person, creating a bottleneck and a single point of failure, and a review held in one person's head leaves no record an auditor can see."
+        }
+      ],
+      "explanation": "Under frequent delivery, compliance is demonstrated continuously by building the obligation into the definition of done and keeping evidence current with each release. Periodic sprints, annual audits and individual gatekeepers each produce compliance or evidence for a moment, while the product keeps changing. The test is whether the team could show an auditor, on any given day, that the live version conforms.",
+      "mindset": "If the product changes every fortnight, the proof of compliance has to change with it."
+    },
+    {
+      "id": "pmp-b2-113",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "non-conformance",
+        "corrective-action",
+        "pharmaceutical-packaging"
+      ],
+      "stem": "On a hybrid programme commissioning a pharmaceutical packaging line, the quality team has logged three findings against the approved labelling requirements. Match each finding to the response it calls for. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "One run of 2,000 cartons was printed with the dose in a smaller font than the approved artwork allows; the cause was a one-off operator error at set-up."
+        },
+        {
+          "id": "s2",
+          "text": "The same font-size error has now appeared in three separate runs, because the label template lets operators edit the dosage field."
+        },
+        {
+          "id": "s3",
+          "text": "A sister site using the same printer model found its print heads drifting out of calibration; your printers are in tolerance but share that site's calibration interval."
+        }
+      ],
+      "options": [
+        {
+          "id": "correction",
+          "text": "Correction: quarantine and reprint the affected cartons",
+          "correct": true,
+          "match": "s1",
+          "rationale": "With a one-off cause already understood, the job is to deal with the non-conforming product itself. Changing the process for a single slip would not remove anything that is likely to recur."
+        },
+        {
+          "id": "corrective",
+          "text": "Corrective action: lock the dosage field in the template",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Recurrence shows a cause in the process, not in a person. Reprinting each run would fix the cartons but leave the template free to produce the same error again."
+        },
+        {
+          "id": "preventive",
+          "text": "Preventive action: shorten the calibration interval now",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Nothing has gone wrong here yet. A failure seen elsewhere in identical equipment is a reason to act on the potential cause before it produces non-conforming product on this line."
+        },
+        {
+          "id": "concession",
+          "text": "Concession: ask the quality unit to release the product as printed",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A concession accepts a known deviation as fit for use, which is hard to justify for dosage text on a medicine below its approved size, and none of the three findings asks for product to be released as it is."
+        }
+      ],
+      "explanation": "The response to a compliance finding depends on whether there is non-conforming output and whether its cause is likely to recur. Fixing the output deals with the instance; removing a cause that has produced repeated failures deals with the process; acting on a cause that has not yet produced a failure here prevents one. Matching the response to the finding avoids both over-engineering one-off slips and repeatedly fixing symptoms of the same cause.",
+      "mindset": "Ask whether a finding is about the product, the process or a failure yet to happen before choosing the fix."
+    },
+    {
+      "id": "pmp-b2-114",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "environmental-permit",
+        "monitoring",
+        "civil-engineering"
+      ],
+      "stem": "Your predictive project is building a flood-defence embankment, and its environmental permit limits suspended solids in water discharged to the river to 30 mg/l. Complete each sentence with how the situation should be recorded. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Last week's sample at the discharge point measured 42 mg/l. This should be recorded as"
+        },
+        {
+          "id": "c2",
+          "text": "Samples have risen from 14 to 26 mg/l over four weeks as excavation moves closer to the river. This should be recorded as"
+        },
+        {
+          "id": "c3",
+          "text": "All samples are within the limit and logged as the permit requires, but the log is kept only on paper in the site cabin. This should be recorded as"
+        }
+      ],
+      "options": [
+        {
+          "id": "nc",
+          "text": "a non-compliance, reported under the permit and corrected",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A measured exceedance of a permit limit has already happened, so it is a breach to be reported through the route the permit sets and put right, not a possibility to be watched."
+        },
+        {
+          "id": "risk",
+          "text": "a risk, with a response planned before the limit is reached",
+          "correct": true,
+          "match": "c2",
+          "rationale": "No limit has been breached, but the trend points towards one. Recording it as a risk with a response gives the project the chance to act while it is still compliant."
+        },
+        {
+          "id": "obs",
+          "text": "an observation, noted as an improvement to site procedures",
+          "correct": true,
+          "match": "c3",
+          "rationale": "The permit is being met and the record exists. A single paper copy is a weakness worth fixing, but calling it a breach would overstate it and dilute what non-compliance means."
+        },
+        {
+          "id": "assume",
+          "text": "an assumption, to be confirmed with the environmental regulator",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Each situation rests on measured data against a stated limit, so nothing is being assumed. Recording facts as assumptions to check would delay action on the one that is already a breach."
+        }
+      ],
+      "explanation": "Compliance monitoring sorts what it finds by what has actually happened. A breach that has occurred is a non-compliance and follows the reporting route the obligation sets; a trend towards a breach is a risk to be managed while still compliant; a weakness that has not caused a breach is an improvement. Classifying correctly decides who must be told, how fast and what record is kept.",
+      "mindset": "Record what has happened as what it is: a breach, a threat of one, or room to improve."
+    },
+    {
+      "id": "pmp-b2-115",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "compliance-register",
+        "refurbishment",
+        "protected-species"
+      ],
+      "stem": "Your predictive project is refurbishing a 1960s office block, and stripping the roof is due to start in ten days. The excerpt shows five entries from the project's compliance register, with each entry's owner and status. Select the entry that needs action from you this week.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "Five entries from a refurbishment project's compliance register",
+        "caption": "Select an entry. Use Tab or the arrow keys to move between entries, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "asb",
+          "n": 1,
+          "label": "Asbestos survey before demolition — owner: site manager — report filed, none found in roof — complete",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "This obligation is met and evidenced. Choosing it confuses the most serious-sounding hazard with the entry that actually needs attention now."
+        },
+        {
+          "id": "waste",
+          "n": 2,
+          "label": "Waste carrier licences checked — owner: logistics lead — 3 of 4 carriers verified — next collection in 6 weeks",
+          "x": 20,
+          "y": 92,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "The gap is real but owned, partly done and six weeks from mattering. The candidate picks an incomplete entry over one that is unowned and due before work starts in ten days."
+        },
+        {
+          "id": "noise",
+          "n": 3,
+          "label": "Weekly noise monitoring — owner: environmental adviser — all readings within limit — on track",
+          "x": 20,
+          "y": 164,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "An owned, ongoing obligation with clean results needs no intervention. The candidate may be anticipating noise from roof works, but the monitoring is already in place to catch it."
+        },
+        {
+          "id": "bat",
+          "n": 4,
+          "label": "Protected-species (bat) survey before any roof works — owner: not assigned — not started",
+          "x": 20,
+          "y": 236,
+          "w": 600,
+          "h": 64,
+          "correct": true,
+          "rationale": "It has no owner, has not started and is a precondition for work due in ten days. Surveys take time to commission and carry out, so this is the entry that will stop the roof works unless someone acts this week."
+        },
+        {
+          "id": "fire",
+          "n": 5,
+          "label": "Fire-door certification — owner: fit-out lead — not started — due at completion in 7 months",
+          "x": 20,
+          "y": 308,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "Not started, but owned and seven months from its deadline. The candidate reads 'not started' as urgent without weighing it against when the obligation actually bites."
+        }
+      ],
+      "explanation": "A compliance register is read for urgency by combining three things for each obligation: whether it has an owner, how far it has progressed and when it becomes a precondition for work. An unowned obligation that gates imminent work is the most urgent, because nobody else will pick it up and its lead time may already exceed the time left. Severity of the underlying hazard or a status of 'not started' alone does not set priority.",
+      "mindset": "Read a compliance register for the obligation with no owner and the nearest deadline."
+    },
+    {
+      "id": "pmp-b2-116",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "product-certification",
+        "radio-equipment",
+        "release-planning"
+      ],
+      "stem": "Your agile team builds firmware for a smart thermostat sold across Europe, releasing every fortnight. The device's radio conformity certification covers its current firmware. A change that alters radio power-saving timings, extending battery life by a feature customers rank highly, is ready. The test laboratory has reviewed the change log and confirmed that the change affects the radio emissions profile, so the device needs re-testing, which takes five weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Send the laboratory further evidence that the timing change keeps emissions within limits, and ask it to reconsider whether a full re-test is really needed.",
+          "correct": false,
+          "rationale": "The laboratory has already reviewed the change and given its view. The candidate re-argues a determination with no new facts, spending time that could have gone into planning around it."
+        },
+        {
+          "id": "b",
+          "text": "Accept the re-test, release work that does not touch the radio firmware on the usual cadence, and group radio changes into planned certification windows.",
+          "correct": true,
+          "rationale": "The constraint is confirmed, so the work is to plan around it. Separating radio-affecting changes from the rest keeps value flowing and turns re-testing into a predictable event rather than a recurring stall."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to fund the laboratory's expedited service, cutting the re-test to three weeks, and hold the next two releases until the result comes back.",
+          "correct": false,
+          "rationale": "Paying to shorten the test may be worthwhile, but the candidate also holds back unrelated work that needs no re-test, letting one constrained change stop the whole release stream."
+        },
+        {
+          "id": "d",
+          "text": "Drop the timing change from the roadmap so the existing certification stays valid, and redirect the effort to features that leave the certified radio behaviour alone.",
+          "correct": false,
+          "rationale": "The candidate abandons a feature customers value to avoid a constraint that is only a matter of scheduling. Compliance cost is a reason to plan the work differently, not usually to give it up."
+        }
+      ],
+      "explanation": "When the body responsible for a conformity assessment confirms that a change needs it, the constraint becomes part of the plan rather than an obstacle to argue with. Decoupling work that triggers assessment from work that does not keeps delivery flowing, and batching the triggering changes turns an unpredictable cost into a scheduled one. Re-arguing settled rulings, freezing unrelated work or abandoning valued features each let one constraint cost more than it has to.",
+      "mindset": "Once a compliance constraint is confirmed, design the plan around it instead of against it."
+    },
+    {
+      "id": "pmp-b2-117",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-use-own-authority",
+        "export-control",
+        "contractors",
+        "drones"
+      ],
+      "stem": "Your agile team develops flight-control software for commercial survey drones. To speed delivery, the company has contracted a development team based abroad, due to start on Monday. The export-compliance manager has classified the flight-control and navigation modules as controlled technology that cannot be shared with the contractors until an export licence is granted, expected in about eight weeks. The mapping interface, reporting tools and test harness are not controlled. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Postpone the contractors' start until the export licence is granted, so that they can join the team with access to the whole codebase from their first day.",
+          "correct": false,
+          "rationale": "This is compliant but wastes eight weeks of contracted capacity. The candidate treats the licence as a gate on all work when the classification already shows which work can be shared now."
+        },
+        {
+          "id": "b",
+          "text": "Bring the contractors on as planned under strict confidentiality agreements, and log every access they make to the controlled flight-control and navigation code.",
+          "correct": false,
+          "rationale": "Confidentiality and audit logging protect commercial interests; they do not authorise an export. The candidate mistakes controls on how technology is used for permission to share it at all."
+        },
+        {
+          "id": "c",
+          "text": "Start the contractors on the mapping, reporting and test work, with repository access limited to those modules, while the licence application proceeds.",
+          "correct": true,
+          "rationale": "The classification has drawn the line, and deciding who works on what is the team's own call. Shaping the contractors' backlog and access to the uncontrolled modules uses the capacity now without crossing it."
+        },
+        {
+          "id": "d",
+          "text": "Ask the contracting firm to confirm in writing that it holds the export authorisations it needs, and start the contractors on the full backlog once it has done so.",
+          "correct": false,
+          "rationale": "The licence is needed by the party sending the technology, which is your company, not the recipient. The candidate places the obligation on the wrong side of the transfer."
+        }
+      ],
+      "explanation": "Once the owner of an obligation has defined its boundary, the project can usually act freely inside it using its ordinary authority over work allocation, access and sequencing. Treating the whole activity as blocked wastes capacity, while protective measures that do not address the obligation itself, or transferring it to a party it does not fall on, leave the breach in place. Find the line, then organise the work on the compliant side of it.",
+      "mindset": "Use the freedom a compliance boundary leaves rather than stopping at the boundary."
+    },
+    {
+      "id": "pmp-b2-118",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "archetype-trade-off",
+        "data-protection",
+        "record-retention",
+        "financial-services"
+      ],
+      "stem": "Your hybrid programme is replacing a consumer lender's customer-management system: data migration follows a fixed plan while features are built in sprints. A former customer has asked for all their personal data to be erased. Anti-money-laundering law requires the lender to keep identity and transaction records for five years after an account closes, and this customer's account closed two years ago. The team asks how the new system's erasure feature should handle such requests. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the feature anonymise the customer's whole record, so that no personal data remains while the transaction history stays intact for the lender's reporting.",
+          "correct": false,
+          "rationale": "Anonymising satisfies the erasure request but destroys what the retention law exists to preserve: proof of who was identified and what they did. The candidate keeps the numbers and loses the evidence."
+        },
+        {
+          "id": "b",
+          "text": "Have the feature decline erasure for any customer whose account closed within the retention period, and tell them that the law requires their data to be kept.",
+          "correct": false,
+          "rationale": "The retention law covers identity and transaction records, not everything held about the customer. The candidate stretches one obligation over all the data and keeps far more than the law permits."
+        },
+        {
+          "id": "c",
+          "text": "Have the feature erase all data except the identity and transaction records the law requires, and restrict those from any other use until the five years end.",
+          "correct": true,
+          "rationale": "Both obligations apply, each to a different part of the data. Keeping only what the retention law names, ring-fenced from other use and deleted when the period ends, meets both laws as far as each reaches."
+        },
+        {
+          "id": "d",
+          "text": "Have the feature delete the whole record when asked, since an individual's erasure request takes priority over the lender's own record-keeping preferences.",
+          "correct": false,
+          "rationale": "The candidate reads a statutory retention duty as a business preference. Erasure rights give way to a legal obligation to keep records, so full deletion would put the lender in breach of the other law."
+        }
+      ],
+      "explanation": "When two obligations appear to conflict, the first step is to establish exactly what each one covers, because they rarely claim the same data or the same activity in full. The compliant design usually satisfies each obligation within its own scope: keeping only what one requires, for only as long as it requires, and honouring the other for everything else. Letting either obligation absorb the whole question breaches the other.",
+      "mindset": "When obligations collide, map what each one actually covers before letting either win."
+    },
+    {
+      "id": "pmp-b2-119",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "record-retention",
+        "project-closure",
+        "grant-funding"
+      ],
+      "stem": "Your predictive project to build a tram depot is closing. It was part-funded by a European grant whose agreement requires all project records, including procurement files and timesheets, to be kept for five years after the final grant payment, which is expected next month. To cut storage costs, the IT lead proposes deleting the project's shared drive at closure, since the depot has been handed over and the contractor's accounts are settled. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to the deletion once the finance team confirms in writing that the final grant payment has been received and the grant account is formally closed.",
+          "correct": false,
+          "rationale": "The candidate reads the final payment as the end of the obligation when it is the start of the five-year retention clock. Deleting at that point destroys exactly the records the funder can still ask to audit."
+        },
+        {
+          "id": "b",
+          "text": "Have the records the grant agreement covers archived with a named custodian until five years after the final payment, then release the remaining storage.",
+          "correct": true,
+          "rationale": "The retention duty survives closure and is defined by the grant agreement, not by handover or settled accounts. A defined archive with a named custodian meets it while still letting the rest of the storage go."
+        },
+        {
+          "id": "c",
+          "text": "Keep the whole shared drive running unchanged until the funder's final audit of the grant is complete, and then delete it as the IT lead has proposed.",
+          "correct": false,
+          "rationale": "The candidate assumes one audit discharges the duty, but the agreement sets five years whatever audits occur. It also keeps everything, unsorted and unowned, at the cost the IT lead was trying to cut."
+        },
+        {
+          "id": "d",
+          "text": "Ask each workstream lead to export the files they consider important to their own team's drive before closure, and then delete the project's shared drive.",
+          "correct": false,
+          "rationale": "The candidate leaves the scope of a defined obligation to individual judgement. Records end up scattered across teams with no custodian, and procurement files or timesheets nobody thought important are lost."
+        }
+      ],
+      "explanation": "Compliance obligations do not end when the deliverable is handed over; some, such as record retention under contracts or funding agreements, run long after closure. Closure planning should identify each surviving obligation, what it covers and for how long, and hand it to a named owner with the means to meet it. Disposal decisions are then made against that retention schedule, not against storage cost or the end of the project.",
+      "mindset": "Closing the project does not close its obligations; hand each surviving one to someone who will still be there."
+    },
+    {
+      "id": "pmp-b2-120",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-use-own-authority",
+        "marketing-consent",
+        "data-protection",
+        "e-commerce"
+      ],
+      "stem": "Your agile team is rebuilding an online furniture retailer's checkout. Company policy, written to meet data-protection law, says marketing consent must be given by a positive action, so consent boxes must start unticked. The marketing manager has added a story asking for the newsletter box at checkout to be pre-ticked, citing a 30% fall in sign-ups at a competitor after it switched to unticked boxes. The story is next in the sprint. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Build the box pre-ticked as requested, because marketing owns the content of the checkout page and the product owner has already accepted the story into the sprint.",
+          "correct": false,
+          "rationale": "The candidate treats content ownership and backlog acceptance as authority over a legal requirement. Neither the marketing manager nor the product owner can waive a rule the company has adopted to meet the law."
+        },
+        {
+          "id": "b",
+          "text": "Pause the story and ask the legal team for a formal opinion on whether a pre-ticked box would be acceptable before the team does any work on it.",
+          "correct": false,
+          "rationale": "Legal review is for genuine uncertainty, and the written policy already answers this. Referring a settled question adds delay and signals to the stakeholder that the rule might be negotiable."
+        },
+        {
+          "id": "c",
+          "text": "Have the team build the box unticked as the policy requires, explain the reason to the marketing manager and offer to test other ways of raising sign-ups.",
+          "correct": true,
+          "rationale": "The policy already settles the question, so the team can apply it without escalation. Offering to work on the marketing manager's real goal, more sign-ups, keeps the relationship while the rule is met."
+        },
+        {
+          "id": "d",
+          "text": "Build the box pre-ticked but place a clear link to the privacy notice beside it, so that customers can see how to unsubscribe if they did not want the newsletter.",
+          "correct": false,
+          "rationale": "The candidate substitutes a different safeguard for the one required. Transparency and an easy way out do not turn a default setting into the positive action the policy demands."
+        }
+      ],
+      "explanation": "When a requirement is clear and already written into policy, the team applies it within its own authority rather than escalating or seeking fresh opinions; referral is for genuine ambiguity. A stakeholder's ownership of content or of a backlog item gives authority over what is built within the rules, not over the rules themselves. Pairing a refusal with help toward the stakeholder's underlying goal protects both the relationship and the compliance.",
+      "mindset": "Apply a clear rule yourself, and spend your effort helping the stakeholder reach their goal another way."
+    },
+    {
+      "id": "pmp-b2-121",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "compliance-register",
+        "sources-of-obligation",
+        "visitor-attraction"
+      ],
+      "stem": "You are starting a hybrid programme to build a visitor centre in a national park, with a ticketing app developed in sprints. You are setting up the compliance register, which will list every obligation the programme must meet and how each will be evidenced. The team has proposed six entries for it. Which three belong in the compliance register?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The sponsor's requirement that the centre opens to visitors before the start of the summer school holidays next year.",
+          "correct": false,
+          "rationale": "The candidate mistakes a firm objective for an obligation. An opening date is a schedule constraint managed through the baseline; no party outside the organisation can enforce it, and mixing it in dilutes the register."
+        },
+        {
+          "id": "b",
+          "text": "The planning consent condition requiring all landscaping around the centre to use plant species native to the park.",
+          "correct": true,
+          "rationale": "A condition attached to a planning consent is a legal obligation the planning authority can enforce. It needs an owner and evidence, such as planting schedules and supplier records."
+        },
+        {
+          "id": "c",
+          "text": "The risk that the main contractor, whose accounts show losses for the last two years, may become insolvent during construction.",
+          "correct": false,
+          "rationale": "The candidate merges two registers. Contractor insolvency is an uncertain event that belongs in the risk register; no rule requires the programme to do anything about it."
+        },
+        {
+          "id": "d",
+          "text": "The grant agreement clause requiring the funder's logo on all permanent signage and on the ticketing app's home screen.",
+          "correct": true,
+          "rationale": "A contractual obligation belongs in the register as much as a legal one. Breaching a grant condition can lead to funds being reclaimed, and it needs evidence that the logo appears where required."
+        },
+        {
+          "id": "e",
+          "text": "The park authority's own procurement policy requiring three written quotes for any purchase over £10,000 made with programme funds.",
+          "correct": true,
+          "rationale": "The organisation's binding internal policies are obligations too, and auditors test them. A register limited to external rules misses the obligations most often found broken."
+        },
+        {
+          "id": "f",
+          "text": "The architect's recommendation to use certified sustainable timber throughout, which the board has agreed to consider at the next design review.",
+          "correct": false,
+          "rationale": "The candidate records a proposal as an obligation. It becomes one only if it is adopted as a requirement or written into a contract; until then it is a design option under consideration."
+        }
+      ],
+      "explanation": "A compliance register records obligations — requirements imposed by law, regulation, contract, consent conditions or the organisation's own binding policy — together with how each will be met and evidenced. Objectives, risks and design proposals are managed elsewhere, however important they are; something becomes a compliance item when a party with standing can require it. Testing each candidate entry for its source and enforceability keeps the register complete without filling it with things no one can hold the programme to.",
+      "mindset": "Ask who can hold the project to it; if no one can, it is not a compliance obligation."
+    },
+    {
+      "id": "pmp-b2-122",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "consequences-of-non-compliance",
+        "emissions-limits",
+        "waste-to-energy"
+      ],
+      "stem": "Your predictive project is upgrading a waste-to-energy plant. A tightened emissions limit takes effect in eight months, and the filter needed to meet it costs £420,000, which is not in the budget. The sponsor notes that the regulator's typical fine for an exceedance is £15,000, and asks you to plan on running over the limit and absorbing fines until the next budget year, some eighteen months away. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Show the sponsor what a planned breach would really risk, including enforcement notices and suspension of the permit, and bring options for funding or phasing the filter in time.",
+          "correct": true,
+          "rationale": "The sponsor's plan rests on the premise that a fine is the whole consequence. Correcting that premise and offering ways to comply puts the decision on an accurate footing."
+        },
+        {
+          "id": "b",
+          "text": "Build the expected fines into the cost forecast and the risk register, so that the decision to defer the filter is documented and its financial impact is tracked.",
+          "correct": false,
+          "rationale": "The candidate records a planned breach as if it were an ordinary cost trade-off. Documenting the decision does not make it a legitimate option, and pricing it by fines alone understates what is at stake."
+        },
+        {
+          "id": "c",
+          "text": "Ask the regulator whether it would grant the plant a time-limited exemption while the filter is funded, and plan the upgrade work around its response.",
+          "correct": false,
+          "rationale": "Some regimes allow exemptions, but the candidate approaches the regulator before the sponsor has seen the real consequences or the options for complying. Regulator contact also normally runs through the organisation's own regulatory lead."
+        },
+        {
+          "id": "d",
+          "text": "Recalculate the business case for the filter against eighteen months of expected fines, and recommend to the sponsor whichever option costs the organisation less over that period.",
+          "correct": false,
+          "rationale": "The candidate accepts that compliance is a cost to be minimised against the penalty. Legal obligations are not priced options, and the comparison leaves out every consequence that is not a fine."
+        }
+      ],
+      "explanation": "Legal obligations are constraints the project must meet, not costs to be weighed against the penalty for breaching them. When a sponsor treats a fine as the price of non-compliance, the project manager's job is to surface the full consequences — escalating enforcement, loss of the licence to operate, personal liability and reputational harm — and to bring workable ways of complying, such as reprioritised funding or phasing. The decision then rests on an accurate picture rather than a narrow piece of arithmetic.",
+      "mindset": "A penalty is not a price; treat legal obligations as constraints and find a way to meet them."
+    },
+    {
+      "id": "pmp-b2-123",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "regulatory-perimeter",
+        "consumer-credit",
+        "backlog-refinement"
+      ],
+      "stem": "Your agile team builds the membership app for a chain of gyms. The product owner wants members to be able to pay for annual memberships in twelve monthly instalments, with the gym itself carrying the debt, and has asked the team to start refining the story next sprint. A developer mentions that a previous employer needed a licence from the financial regulator before it could offer instalment payments. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the compliance team to confirm whether offering instalments this way would be a regulated activity before the story is refined, and build its answer into the acceptance criteria.",
+          "correct": true,
+          "rationale": "Whether the feature crosses a regulatory boundary is still unknown, and the answer shapes everything after it. Getting it before refinement costs little and lets the obligations shape the design."
+        },
+        {
+          "id": "b",
+          "text": "Let refinement go ahead as planned and add a task to the story for the compliance team to review the finished feature before it is released to members.",
+          "correct": false,
+          "rationale": "The candidate treats compliance as a release check. If instalments are a regulated activity, the answer could change the design or stop the feature, and finding out after the build wastes the work."
+        },
+        {
+          "id": "c",
+          "text": "Propose that the gym offers instalments through an authorised third-party credit provider, since that removes any need for the gym to hold a licence of its own.",
+          "correct": false,
+          "rationale": "It may turn out to be the answer, but the candidate designs around an obligation nobody has confirmed. It also changes the commercial model, with fees and a third party owning the customer, before the question is even asked."
+        },
+        {
+          "id": "d",
+          "text": "Remove the story from the backlog until the legal team has completed a full review of all the app's existing and planned payment features, so that every obligation is captured together.",
+          "correct": false,
+          "rationale": "The candidate turns one focused question into a broad review and stalls a valued feature while it runs. Diagnosis should be targeted at the specific trigger the developer has raised."
+        }
+      ],
+      "explanation": "A new feature can move a product across a regulatory boundary, bringing obligations that did not apply before. When a backlog item might do that, the question goes to the people who can answer it before the work is shaped, because the answer can change the design, the commercial model or whether the feature is possible at all. Checking at refinement is cheaper than discovering the obligation at release, and narrower than pausing everything for a general review.",
+      "mindset": "When a feature might change which rules apply, find out before you shape the work."
+    },
+    {
+      "id": "pmp-b2-124",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "permit-to-work",
+        "site-safety",
+        "refinery-shutdown"
+      ],
+      "stem": "You are managing a planned two-week maintenance shutdown at an oil refinery. Site rules, required under the refinery's safety licence, prohibit any welding or cutting without a signed hot-work permit. Walking the site at 06:15, you find a contractor's crew welding on a pipe rack. The supervisor says the permit office opens at 07:00, that his own crew carried out a gas test which was clear, and that the permit will be signed then. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the crew finish the weld in progress under close supervision, since the gas test was clear, and make sure the permit is signed as soon as the office opens at 07:00.",
+          "correct": false,
+          "rationale": "The candidate accepts the crew's own gas test in place of the permit's independent checks. The breach carries on while being watched, and supervision does not supply the checks the permit exists for."
+        },
+        {
+          "id": "b",
+          "text": "Record the breach and raise it with the contractor's manager at the morning coordination meeting, asking for a written explanation and a corrective action plan.",
+          "correct": false,
+          "rationale": "Recording and pursuing the breach is right, but the timing is wrong. The breach is live, and dealing with it at a later meeting leaves the hazard in place for the rest of the hour."
+        },
+        {
+          "id": "c",
+          "text": "Phone the permit office's on-call coordinator and ask for the permit to be issued remotely, so that the crew can keep working without losing the rest of the shift.",
+          "correct": false,
+          "rationale": "The candidate tries to regularise the paperwork after the fact. The issuer is meant to inspect the area before work starts, so a remote signature makes the record match without the check having happened."
+        },
+        {
+          "id": "d",
+          "text": "Have the crew stop welding now and make the area safe, restart only once a signed permit is issued, and then report the incident to the site safety lead.",
+          "correct": true,
+          "rationale": "A live breach of a safety-critical condition is stopped first. Once the exposure has ended, the permit can be issued properly and the incident reported and investigated."
+        }
+      ],
+      "explanation": "A safety-critical permit is a precondition for starting work, not a form to be completed alongside it. When work is found running in breach of such a condition, the first duty is to stop it and make the situation safe; reporting, investigating and regularising follow once the exposure has ended. Substitute checks by the people doing the work, or paperwork completed afterwards, do not provide the independent assurance the permit is there to give.",
+      "mindset": "When a live breach puts people at risk, stop it first and deal with the paperwork after."
+    },
+    {
+      "id": "pmp-b2-125",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "data-protection",
+        "third-party-processors",
+        "insurance"
+      ],
+      "stem": "Your agile team at a motor insurer plans to release, in two sprints, a feature that sends customers' support-chat transcripts to an external AI service, which returns a summary for the claims handler. Transcripts can include health details from injury claims, and the supplier processes the data outside the country. The insurer has a data protection officer and a procurement team that manages supplier contracts. Which two actions should come before release?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Strip customer names and policy numbers from each transcript before it is sent, so that the data the supplier receives is no longer personal data.",
+          "correct": false,
+          "rationale": "The candidate assumes a technical step removes the obligation. Free text describing injuries, dates and places can still identify people, so this is a useful safeguard but not a substitute for the assessment or the contract."
+        },
+        {
+          "id": "b",
+          "text": "Ask the data protection officer to assess whether the processing needs a data-protection impact assessment, and complete any that is required before release.",
+          "correct": true,
+          "rationale": "Sending health data to a new external processor is the kind of change that can require a formal assessment. The data protection officer owns that judgement, and its findings may change the design."
+        },
+        {
+          "id": "c",
+          "text": "Release the feature to a pilot group of claims handlers first, and review how the supplier handles the data before extending the feature to all claims.",
+          "correct": false,
+          "rationale": "A pilot still sends live customer data. The obligations apply from the first transcript, so the candidate limits the scale of exposure without meeting any of the requirements."
+        },
+        {
+          "id": "d",
+          "text": "Rely on the supplier's published statement that its service complies with data-protection law, and keep a copy of that statement on file as evidence.",
+          "correct": false,
+          "rationale": "The candidate treats a supplier's general assurance as covering the insurer's own use. Accountability stays with the insurer, which needs its own agreement and its own assessment."
+        },
+        {
+          "id": "e",
+          "text": "Have procurement put a data-processing agreement in place with the supplier covering health data and its transfer abroad, before any live transcripts are sent.",
+          "correct": true,
+          "rationale": "A binding contract with the processor, covering what it may do with the data and where, is a requirement before any data flows. Procurement owns supplier contracts, so the action goes to them."
+        }
+      ],
+      "explanation": "When a product change sends personal data, especially sensitive data, to a third party, two kinds of obligation arise: an assessment of the processing itself, owned by the organisation's data protection function, and a contract that binds the supplier, owned by procurement or legal. Both have to be in place before live data flows. Technical safeguards, pilots and supplier assurances reduce risk but do not replace either, because accountability stays with the organisation that decided to share the data.",
+      "mindset": "Bring the owners of the obligations in before the data moves, not after."
+    },
+    {
+      "id": "pmp-b2-126",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "obligation-timing",
+        "handover",
+        "healthcare"
+      ],
+      "stem": "Your hybrid programme is opening an outpatient unit for a regional hospital: the building fit-out follows a fixed plan, and a patient booking app is built in sprints. Three obligations sit on the compliance register with no planned point of action. Match each obligation to when the programme should address it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "The booking app will process patients' health data, and hospital policy requires an impact assessment whose findings may change how the app stores and shares that data."
+        },
+        {
+          "id": "p2",
+          "text": "The X-ray room's radiation shielding must be certified by a qualified radiation protection adviser before the first patient is examined there."
+        },
+        {
+          "id": "p3",
+          "text": "Once the unit is open, the hospital must test the X-ray equipment's safety interlocks every month and keep the records for as long as the unit operates."
+        }
+      ],
+      "options": [
+        {
+          "id": "early",
+          "text": "Early, before the design it could affect is settled",
+          "correct": true,
+          "match": "p1",
+          "rationale": "An assessment that may change the design has to be done while the design can still change. Done later, its findings arrive as rework or are quietly waived."
+        },
+        {
+          "id": "gate",
+          "text": "As a gate that must be passed before the deliverable is first used",
+          "correct": true,
+          "match": "p2",
+          "rationale": "Certification is a precondition for use, so it becomes a readiness gate with its lead time planned back from the first clinic date."
+        },
+        {
+          "id": "handover",
+          "text": "At handover, by transferring the obligation and its records to a named operational owner",
+          "correct": true,
+          "match": "p3",
+          "rationale": "The obligation outlives the programme. The programme's job is to set it up, with procedures and a place for the records, and hand it to someone in the hospital who will carry it out."
+        },
+        {
+          "id": "lessons",
+          "text": "At closure, by recording it in the lessons-learned register for future programmes",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A lessons-learned entry assigns nobody to do anything, and none of the three is a lesson; each is an obligation with a point in time at which it must be met."
+        }
+      ],
+      "explanation": "Each compliance obligation has a point in the lifecycle where action is effective. Obligations that can change the design are addressed before the design is fixed; preconditions for use become gates with their lead time planned; and obligations that continue in operation are built into handover with a named owner, procedures and records. Planning the point of action is part of identifying the obligation, because an obligation met at the wrong time is usually not met at all.",
+      "mindset": "For every obligation, decide not only what must be done but when doing it still counts."
+    },
+    {
+      "id": "pmp-b2-127",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "flow-down-clauses",
+        "subcontracts",
+        "defence"
+      ],
+      "stem": "Your predictive project is building an integration facility for a naval combat system. The prime contract requires every subcontractor holding project technical data to meet a stated cyber-security standard, and requires your firm to include that obligation in its subcontracts. You have authority to instruct contract variations. A review finds two subcontracts, signed four months ago from an out-of-date template, that omit the clause. Both suppliers already hold project drawings. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Recall the project drawings from both suppliers and suspend their access to project data until signed variations are in place and their compliance has been verified.",
+          "correct": false,
+          "rationale": "It removes the exposure but halts two suppliers' work for weeks. The candidate takes the most disruptive step before knowing whether either supplier already meets the standard in practice."
+        },
+        {
+          "id": "b",
+          "text": "Report the omission to the client's commercial manager and ask how the client would like it remedied, holding any change to the subcontracts until the client replies.",
+          "correct": false,
+          "rationale": "The obligation to flow the clause down, and the authority to do it, already sit with you. Waiting for the client to direct a remedy leaves both suppliers holding data under no binding requirement in the meantime."
+        },
+        {
+          "id": "c",
+          "text": "Ask both suppliers to sign a letter confirming that they already meet the cyber-security standard, file the signed letters as evidence of the flow-down, and switch to the current template for future subcontracts.",
+          "correct": false,
+          "rationale": "The candidate mistakes an assurance for the mechanism the contract requires. Fixing the template helps later subcontracts, but a letter is not a contractual obligation and cannot be enforced or audited the way a flowed-down clause can."
+        },
+        {
+          "id": "d",
+          "text": "Instruct variations adding the clause to both subcontracts, have the security lead assess both suppliers against the standard now, and correct the template.",
+          "correct": true,
+          "rationale": "This uses the authority you hold to close the contractual gap, checks whether actual practice already meets the requirement and fixes the cause, so later subcontracts do not repeat it."
+        }
+      ],
+      "explanation": "When an obligation must be passed down a supply chain, compliance means it is binding on each party that triggers it, not merely that those parties happen to behave well. Finding a gap calls for the project manager to use the authority they hold: close the contractual gap, check whether actual practice already meets the requirement, and fix the process that created the gap. Waiting for others to direct the fix, or accepting an assurance in place of the required mechanism, leaves the obligation unmet while the exposure continues.",
+      "mindset": "If you hold the authority to close a compliance gap, close it rather than asking permission."
+    },
+    {
+      "id": "pmp-b2-128",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "regulatory-deadline",
+        "backlog-ordering",
+        "energy-retail"
+      ],
+      "stem": "Your agile team maintains the billing platform for an energy supplier. A new regulation requires bills to show a tariff comparison from 1 March, in 20 weeks. The team estimates the work at three two-week sprints, and the compliance team needs four weeks after that to verify it. The product owner has ordered the backlog so the story starts after four revenue epics, about eight sprints away, saying customers have not asked for it. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Show the product owner that the work must start within ten weeks to be verified by 1 March, and ask them to reorder the backlog with that date in view.",
+          "correct": true,
+          "rationale": "Counting build and verification back from the deadline gives a latest start of week ten; the current order starts it at week sixteen. The product owner made the call without that date, so the first move is to put it in front of them."
+        },
+        {
+          "id": "b",
+          "text": "Reorder the backlog yourself so that the regulatory story comes next, because a legal deadline outranks the product owner's view of what customers are asking for.",
+          "correct": false,
+          "rationale": "The outcome may be right but the authority is wrong. The product owner owns the ordering, and overriding them undermines the role when they have not yet seen the arithmetic that would likely change their mind."
+        },
+        {
+          "id": "c",
+          "text": "Escalate to the sponsor that the product owner's ordering will make the supplier miss a regulatory deadline, and ask the sponsor to direct a change in priorities.",
+          "correct": false,
+          "rationale": "The candidate escalates before informing the decision-maker. The product owner ordered the backlog on incomplete information rather than in defiance of the rule; escalation is for when the informed owner still declines."
+        },
+        {
+          "id": "d",
+          "text": "Ask the compliance team whether their verification could be cut to two weeks, so that the story can start later without the backlog order needing to change.",
+          "correct": false,
+          "rationale": "The candidate tries to fit the plan by squeezing the control's owner. Even at two weeks, sixteen weeks of waiting plus six of build and two of checking reaches week 24, so it neither works nor respects the verification."
+        }
+      ],
+      "explanation": "A regulatory deadline is fixed, so it translates into a latest responsible start date once build and verification lead times are counted back from it. Many prioritisation conflicts dissolve when that date is made visible to the person who owns the ordering decision, because the earlier choice was made without it. Overriding the owner, escalating past them or compressing someone else's control are steps for when the informed owner still declines, not substitutes for informing them.",
+      "mindset": "Turn a compliance deadline into a start date and put it in front of the person who orders the work."
+    },
+    {
+      "id": "pmp-b2-129",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "compliance-measurement",
+        "waste-recycling",
+        "construction"
+      ],
+      "stem": "Your hybrid programme is building a university science campus. Its planning consent requires at least 70% by weight of all construction waste across the whole build to be recycled. So far 1,240 tonnes of waste have been produced, of which 790 tonnes were recycled. The site team forecasts 860 tonnes more before completion. Work out where the programme stands and what the rest of the build must achieve.",
+      "blanks": [
+        {
+          "id": "rate",
+          "label": "Recycling rate achieved so far, as a percentage to one decimal place",
+          "numeric": true,
+          "expect": 63.7,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "790 ÷ 1,240 = 0.637, so 63.7% has been recycled to date, 6.3 points below the 70% the consent requires across the whole build."
+        },
+        {
+          "id": "tonnes",
+          "label": "Tonnes still to be recycled from the remaining waste to meet the condition",
+          "numeric": true,
+          "expect": 680,
+          "tol": 0,
+          "unit": "t",
+          "rationale": "Total forecast waste is 1,240 + 860 = 2,100 tonnes, and 70% of that is 1,470 tonnes. With 790 already recycled, 1,470 − 790 = 680 tonnes must come from what is left."
+        },
+        {
+          "id": "required",
+          "label": "Recycling rate the remaining waste must achieve, as a percentage to one decimal place",
+          "numeric": true,
+          "expect": 79.1,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "680 ÷ 860 = 0.791, so the rest of the build must recycle 79.1% of its waste, well above the 70% headline, to recover the shortfall to date."
+        }
+      ],
+      "explanation": "Where an obligation is set on a cumulative total, compliance is measured against the whole, not period by period. A shortfall to date has to be recovered by the remaining work, so the useful figure is the rate the remainder must achieve, which can sit far above the headline limit. Calculating it early shows whether recovery is realistic while there is still time to change how waste is handled, rather than discovering at completion that the target was lost months before.",
+      "mindset": "Measure a cumulative obligation by what the remaining work must achieve, not by the average so far."
+    },
+    {
+      "id": "pmp-b2-130",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "conflict-of-interest",
+        "procurement-rules",
+        "local-government"
+      ],
+      "stem": "Your predictive project for a city council is procuring a new parking-enforcement system. Council procurement rules require evaluators to declare any conflict of interest, including family links to a bidder's staff, and to step aside from any tender where one exists. On the morning scoring begins, one of the five evaluators tells you her brother is a senior engineer at one of the four bidders. She says they never discuss work and she can score fairly. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record her declaration and let her continue, but exclude her scores for her brother's company and use the other evaluators' average for that bidder instead.",
+          "correct": false,
+          "rationale": "The candidate applies a partial recusal the rules do not provide for. Her scores for the competing bidders still shape the ranking relative to her brother's firm, so the conflict remains in the result."
+        },
+        {
+          "id": "b",
+          "text": "Accept her assurance that she can score fairly, and ask the panel chair to watch her scoring closely for any sign of bias during the moderation meeting.",
+          "correct": false,
+          "rationale": "The candidate treats the rule as a judgement about her honesty. It exists to protect the award from perceived as well as actual bias, and monitoring is not the stepping aside the rules require."
+        },
+        {
+          "id": "c",
+          "text": "Record her declaration, thank her for raising it, and replace her on the panel for this tender with another qualified evaluator before scoring starts.",
+          "correct": true,
+          "rationale": "The rules prescribe both the declaration and the response. Applying them in full before scoring begins keeps the evaluation sound and the award defensible if a losing bidder challenges it."
+        },
+        {
+          "id": "d",
+          "text": "Postpone scoring until the council's legal team has advised whether a sibling relationship counts as a conflict of interest under the procurement rules.",
+          "correct": false,
+          "rationale": "The rules already name family links, so there is no genuine ambiguity to resolve. Postponing delays every bidder for a question the rules answer, and legal advice is for cases they do not."
+        }
+      ],
+      "explanation": "Procurement conflict-of-interest rules exist to protect the fairness of the award and its defensibility against challenge, so they apply regardless of the individual's actual integrity. Where a rule prescribes the response, the project applies it in full and promptly, rather than substituting partial measures or seeking advice on a question the rule already answers. Acting before the evaluation starts is what keeps the result sound.",
+      "mindset": "A conflict rule protects the decision, so apply it whatever you think of the person."
+    },
+    {
+      "id": "pmp-b2-131",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "compliance-evidence",
+        "assurance-methods",
+        "health-technology"
+      ],
+      "stem": "Your agile team builds a symptom-checker app for a digital health company and releases weekly. Three obligations each need a way of demonstrating compliance that fits how the obligation can be broken and who must be convinced. Complete each sentence with the most suitable method. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The rule that every patient record field is encrypted at rest could be broken by any code change, so it is best demonstrated by"
+        },
+        {
+          "id": "c2",
+          "text": "The hospital trusts buying the app require proof, from a body independent of the company, that its information-security management meets the national standard, so it is best demonstrated by"
+        },
+        {
+          "id": "c3",
+          "text": "Company policy requires every developer to complete clinical-safety training each year, so it is best demonstrated by"
+        }
+      ],
+      "options": [
+        {
+          "id": "pipeline",
+          "text": "an automated check in the release pipeline that fails any build breaking the rule, with its results kept",
+          "correct": true,
+          "match": "c1",
+          "rationale": "An obligation that any weekly change could break needs evidence produced every time the product changes. A failing build both prevents the breach and leaves a record for each release."
+        },
+        {
+          "id": "cert",
+          "text": "certification by an accredited external body, renewed on the cycle the standard sets",
+          "correct": true,
+          "match": "c2",
+          "rationale": "The buyers have asked for independence, which only a third party can supply. Accredited certification is the form of evidence the audience has said it will rely on."
+        },
+        {
+          "id": "records",
+          "text": "completion records from the training system, checked against the team list each quarter",
+          "correct": true,
+          "match": "c3",
+          "rationale": "The obligation is about people's status, so the authoritative records of that status are the evidence. A periodic check against the current team catches joiners and expiries."
+        },
+        {
+          "id": "attest",
+          "text": "a statement in each release note, signed by the product owner, confirming the obligation is met",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A signed statement records belief rather than verification, so it does not satisfy any of the three: it cannot catch a broken build, is not independent and does not check anyone's training."
+        }
+      ],
+      "explanation": "The method used to demonstrate compliance should match how the obligation can be broken and who needs to be convinced. Obligations that any change can break need continuous, automated evidence; obligations whose audience requires independence need third-party assurance; and obligations about people's status are evidenced from authoritative records checked periodically. A signed declaration is the weakest form, because it records what someone believes rather than what has been verified.",
+      "mindset": "Choose evidence that would convince the person who has to rely on it."
+    },
+    {
+      "id": "pmp-b2-132",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "compliance-reporting",
+        "audit-findings",
+        "data-centre"
+      ],
+      "stem": "Your predictive project is building a data centre for a bank. An independent audit has checked the facility against 400 requirements in the bank's resilience standard and found 392 met. The eight gaps include an untested fire-suppression release in one data hall; the rest are minor documentation issues. The sponsor wants to tell the bank's board next week that the facility is '98% compliant' and ready to accept live systems. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to report the 98% figure to the board, as it is accurate and comes from an independent audit, and attach the auditor's full list of the eight gaps as an appendix to the board paper.",
+          "correct": false,
+          "rationale": "The figure is accurate but the framing misleads. A board reading the headline will infer readiness, and an appendix does not make visible the one gap that decides it."
+        },
+        {
+          "id": "b",
+          "text": "Advise the sponsor to report the gaps by their consequence, stating that the untested fire suppression blocks live use, alongside the 98% figure and a date to close it.",
+          "correct": true,
+          "rationale": "One unmet safety-critical requirement determines readiness, whatever the percentage. Raising it first with the sponsor lets them give the board an accurate picture and a plan."
+        },
+        {
+          "id": "c",
+          "text": "Ask the commissioning engineers to test the fire-suppression release before the board meets, so that the board can be told the facility is fully compliant and ready.",
+          "correct": false,
+          "rationale": "Closing the gap is right, but the candidate builds the board's message on a hoped-for result. If the test slips or fails within the week, the board has still been prepared to hear a misleading headline."
+        },
+        {
+          "id": "d",
+          "text": "Tell the bank's chief risk officer that the sponsor intends to give the board a misleading picture of the facility's readiness, so that the risk function can intervene.",
+          "correct": false,
+          "rationale": "The candidate goes around the sponsor before advising them. A draft headline is not yet a misrepresentation, and escalation is for when the sponsor insists after hearing the concern."
+        }
+      ],
+      "explanation": "The extent of compliance is measured by the consequence of the gaps, not by the proportion of requirements met. A single unmet safety-critical requirement can make a deliverable unfit for use while the headline percentage stays high, so reports to decision-makers should lead with the gaps that determine readiness and what it will take to close them. Raising this first with the person who owns the report gives them the chance to present it accurately.",
+      "mindset": "Report compliance by what the gaps would cost, not by how many boxes are ticked."
+    },
+    {
+      "id": "pmp-b2-133",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "grant-conditions",
+        "funder-approval",
+        "tourism"
+      ],
+      "stem": "Your hybrid programme for a regional tourism body is part-funded by a development grant of €1.2 million. The grant agreement lists the programme's outputs and requires the funder's written approval before any of them is changed. After user research, the product owner wants to drop one funded output, an online training portal for local businesses, and spend the effort on a booking feature instead. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the team start on the booking feature now, and report the change to the funder in the next quarterly progress claim together with the supporting research.",
+          "correct": false,
+          "rationale": "The candidate gets the timing wrong. The agreement requires approval before the change, so reporting it afterwards is a breach even if the funder would have agreed."
+        },
+        {
+          "id": "b",
+          "text": "Put the proposed change, with the user research behind it, to the funder and ask for written approval before the team moves its effort away from the portal.",
+          "correct": true,
+          "rationale": "The agreement reserves this decision to the funder. Taking the case to them with the evidence is the route that can get the better outcome approved."
+        },
+        {
+          "id": "c",
+          "text": "Keep a minimal version of the training portal in the plan, so that the funded output is still technically delivered, and move the remaining effort to booking.",
+          "correct": false,
+          "rationale": "The candidate meets the letter rather than the purpose. Funders judge outputs against their agreed description, so a token portal risks being treated as undelivered, and it keeps the change from the party with authority over it."
+        },
+        {
+          "id": "d",
+          "text": "Work out with finance how much grant could be reclaimed if the funder refuses, so the sponsor knows what is at stake when deciding how to proceed.",
+          "correct": true,
+          "rationale": "Breaching a grant condition can mean repaying funds. Quantifying that exposure lets the sponsor weigh the change properly while the funder considers it."
+        },
+        {
+          "id": "e",
+          "text": "Decline the product owner's request, because outputs named in a grant agreement are fixed and cannot be changed while the programme is running.",
+          "correct": false,
+          "rationale": "The candidate treats a controlled obligation as frozen. The agreement allows change with approval, so refusing outright gives up a better outcome without asking the party who could permit it."
+        }
+      ],
+      "explanation": "Funding agreements often allow change but reserve the decision to the funder, and approval has to come before the change, not with the next report. When a better option conflicts with a funded commitment, the route is to put the case to the party with authority and to make the financial exposure clear to the sponsor meanwhile. Refusing all change, or keeping only the letter of the commitment, avoids the decision rather than getting it made by the right party.",
+      "mindset": "When a condition reserves a decision to someone, take your case to them before you act."
+    },
+    {
+      "id": "pmp-b2-134",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "consent-conditions",
+        "schedule-review",
+        "telecoms-infrastructure"
+      ],
+      "stem": "Your predictive project is laying a fibre-optic cable along a coastal route, and you are reviewing the draft schedule before it is baselined. Three consent conditions apply: drilling under the river may start only from 1 September; trenching in the scheduled monument zone needs an archaeologist on site throughout; and town-centre street works must fall within the permit for weeks 30–32. Select the activity that breaches a condition.",
+      "graphic": {
+        "viewBox": "0 0 640 400",
+        "title": "Five activities from a draft cable-laying schedule",
+        "caption": "Select an activity. Use Tab or the arrow keys to move between activities, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "town",
+          "n": 1,
+          "label": "Town-centre street works — weeks 30 to 32 — permit reference on file",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "The works fall entirely inside the permitted weeks and the permit is held. The candidate picks the most disruptive-looking activity rather than testing it against the condition."
+        },
+        {
+          "id": "monument",
+          "n": 2,
+          "label": "Monument-zone trenching — week 27, Monday to Friday — archaeologist booked for all five days",
+          "x": 20,
+          "y": 92,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "The condition is an archaeologist present throughout, and one is booked for every trenching day. The candidate reads 'scheduled monument' as a ban rather than as the condition actually written."
+        },
+        {
+          "id": "setup",
+          "n": 3,
+          "label": "River-bank site set-up and rig delivery — 18 to 22 August — no drilling",
+          "x": 20,
+          "y": 164,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "The condition restricts drilling, not preparation. The candidate reads it more broadly than it is written, and moving the set-up would cost time without any compliance benefit."
+        },
+        {
+          "id": "drill",
+          "n": 4,
+          "label": "River-crossing drilling — 25 August to 5 September",
+          "x": 20,
+          "y": 236,
+          "w": 600,
+          "h": 64,
+          "correct": true,
+          "rationale": "Drilling is scheduled to begin a week before the consent allows it. Caught before baselining, the fix is simply to start drilling on or after 1 September."
+        },
+        {
+          "id": "dune",
+          "n": 5,
+          "label": "Dune-section cable ploughing — week 26 — no consent condition applies to this section",
+          "x": 20,
+          "y": 308,
+          "w": 600,
+          "h": 64,
+          "correct": false,
+          "rationale": "No condition covers this section. The candidate reacts to how environmentally sensitive dunes sound rather than to the conditions the consent actually imposes."
+        }
+      ],
+      "explanation": "Checking a schedule for compliance means reading each condition for exactly what it restricts — the activity, the place and the time — and testing each scheduled activity against it. Conditions often restrict one activity while allowing the preparatory work around it, and sensitive-sounding locations are not constrained unless a condition says so. Doing this before the schedule is baselined turns a future breach into a simple re-sequencing.",
+      "mindset": "Test the plan against what each condition actually says, before the plan becomes the commitment."
+    },
+    {
+      "id": "pmp-b2-135",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-2",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "archetype-route-to-owner",
+        "regulatory-interpretation",
+        "risk-appetite",
+        "telecoms"
+      ],
+      "stem": "Your agile team builds the online shop for a mobile network operator, working in two-week sprints. A new consumer rule requires 'the total cost over the minimum term' to be shown before purchase. Legal advises it could mean the handset and airtime only, which takes one sprint, or every optional add-on the customer has selected too, which takes three. Legal rates the narrower reading as more likely but untested. The rule applies in nine weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Build to the broader reading so the shop is compliant under either interpretation, and re-plan the rest of the backlog to make room for the three sprints it needs.",
+          "correct": false,
+          "rationale": "It is the safest legal position and may be the right choice, but the candidate makes a costly risk-appetite decision on the organisation's behalf without the person accountable for the shop ever seeing it."
+        },
+        {
+          "id": "b",
+          "text": "Put both readings to the executive accountable for the shop, with each one's delivery cost and legal's view of enforcement risk, and record the decision and its basis.",
+          "correct": true,
+          "rationale": "Choosing an interpretation is a decision about risk appetite, and it belongs to the owner of the business risk. Framing the options and recording the basis also leaves evidence of good faith if the rule is later tested."
+        },
+        {
+          "id": "c",
+          "text": "Build to the narrower reading that legal considers more likely, and add the broader one to the backlog so it can be delivered if the regulator signals otherwise.",
+          "correct": false,
+          "rationale": "A reasonable position, but the candidate lets an estimate of likelihood decide how much regulatory risk to accept. Legal advises on likelihood; an accountable executive decides what risk the business carries."
+        },
+        {
+          "id": "d",
+          "text": "Ask the regulator for guidance on which reading it intends, and hold the work until its answer arrives so that the team builds the right thing only once.",
+          "correct": false,
+          "rationale": "Seeking clarification can run in parallel, but regulators rarely answer individual firms quickly. Holding all the work on it risks missing the date under either reading."
+        }
+      ],
+      "explanation": "Where an obligation's meaning is uncertain, choosing an interpretation is a decision about how much regulatory risk the organisation accepts, and that belongs to whoever is accountable for the business area, informed by legal advice on likelihood and by the delivery cost of each reading. The project's role is to frame the options clearly and record the basis of the decision, which is itself evidence of good faith if the rule is later tested. Defaulting to the cautious or the likely reading quietly transfers that decision to the team.",
+      "mindset": "When the law is unclear, make the choice of reading a visible decision by the person who owns the risk."
+    }
+  ]
+}

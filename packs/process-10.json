@@ -1,0 +1,1945 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 10 — Closure",
+  "questions": [
+    {
+      "id": "pmp-pr10-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-act-now",
+        "resource-release",
+        "cost-control",
+        "construction"
+      ],
+      "stem": "The extension to a secondary school was handed over last Friday and the snagging list is closed. Two site cabins, a 100 kVA generator and a scaffold tower remain on site, hired at a combined £2,300 a week. The site manager suggests leaving them until the close-out meeting with the school in three weeks, although none of the remaining activities need them. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the equipment on site until the close-out meeting, so that the school can confirm at that meeting that nothing further is required from the contractor.",
+          "correct": false,
+          "rationale": "This treats the close-out meeting as the trigger for releasing resources. The snagging list is already closed, so the meeting confirms nothing that needs a generator, and the wait costs about £6,900."
+        },
+        {
+          "id": "b",
+          "text": "Ask the school whether it would like to take over the hire agreements directly, so that the cabins and generator remain available for its own use on site.",
+          "correct": false,
+          "rationale": "The school has not asked for the equipment, and offering it delays the release while the question is considered. It confuses being helpful with the project's job, which is to stop paying for what it no longer uses."
+        },
+        {
+          "id": "c",
+          "text": "Arrange for the cabins, generator and scaffold tower to be off-hired and collected this week, and confirm the final hire charges with each supplier.",
+          "correct": true,
+          "rationale": "Nothing left on the programme needs the equipment, so every further week is £2,300 spent for no return. Releasing resources is a closure activity in its own right and it is due when the need ends, not when the paperwork does."
+        },
+        {
+          "id": "d",
+          "text": "Record the weekly hire cost as an item in the closure log and review at the close-out meeting whether the equipment should then be off-hired.",
+          "correct": false,
+          "rationale": "Logging a cost that is already known and avoidable is not managing it. The choice of whether to off-hire has no open question attached, so deferring it to a meeting only adds three weeks of charges."
+        }
+      ],
+      "explanation": "Resources acquired for a project are released as soon as the work that needs them is finished, and each kind of resource is released on its own timetable rather than all together at the end. Idle plant, hired staff and leased space cost the same whether or not anything is happening, so the test for each is simply whether any remaining activity depends on it. If none does, the release is due now.",
+      "mindset": "Release what the project no longer needs at the moment it stops needing it."
+    },
+    {
+      "id": "pmp-pr10-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "definition-of-done",
+        "closure-report",
+        "transparency"
+      ],
+      "stem": "An online fashion retailer's checkout team is holding its final sprint review before the team is disbanded and the product moves to a support team. Six stories passed every acceptance test in staging but missed this week's production change window. The team's definition of done includes 'deployed to production'. The product owner wants the closure report to show all planned stories as complete, because the next window is only four days away. What should the delivery lead do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Report the six stories as complete with a footnote, since the build work is finished and only the release step remains, which the support team can do in four days.",
+          "correct": false,
+          "rationale": "A footnote does not change what the headline says. The candidate is reasoning that the hard part is finished, but the definition of done was written precisely so that 'nearly released' is not counted as delivered."
+        },
+        {
+          "id": "b",
+          "text": "Keep the current team together for four more days so that they can deploy the six stories in the next window themselves, and issue the closure report once they are live.",
+          "correct": false,
+          "rationale": "It is a defensible way to finish the work, but it holds a whole team in place for a deployment the support team is about to own anyway. The candidate is solving the reporting problem by changing the facts rather than reporting them."
+        },
+        {
+          "id": "c",
+          "text": "Report the six stories as not done, list each with its status in the closure report, and hand them to the support team's backlog with the next window noted.",
+          "correct": true,
+          "rationale": "The definition of done is the agreed test of completion, and the six stories do not meet it. Showing them accurately and handing them to the team that will deploy them keeps the report honest and the work owned."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to amend the definition of done for this final sprint so that passing in staging counts, and record that amendment in the closure report.",
+          "correct": false,
+          "rationale": "Changing the completion standard at the moment it becomes inconvenient makes every earlier sprint's figures incomparable with this one. Recording the change openly does not make it a sound basis for a closure claim."
+        }
+      ],
+      "explanation": "A closure report is a record that other people will rely on long after the team has gone, so it states what met the agreed completion standard and what did not. Work that is nearly finished is handed over as open work with an owner and a next step, not rounded up to done. The standard used throughout delivery is the standard used at the end; changing it at closure turns the report into an argument.",
+      "mindset": "Report closure against the standard you used all along, and hand over what falls short of it by name."
+    },
+    {
+      "id": "pmp-pr10-103",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "risk-transfer",
+        "operations-handover",
+        "open-risks"
+      ],
+      "stem": "Your hybrid project is installing a crane-scheduling system at a container port and closes at the end of the month. One risk remains open: the vendor ends support for the system's database version in nine months, and upgrading will need about €60,000 and a planned outage. The terminal operations manager will own the system after closure. The sponsor wants the risk register closed with the project. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise a change request to carry out the database upgrade before closure, so that the risk is removed altogether and nothing is left open when the project ends.",
+          "correct": false,
+          "rationale": "This adds unfunded scope and an outage to a project that is finishing, to remove a risk that is nine months away and belongs to operations. The candidate is treating a tidy register as the goal rather than a managed risk."
+        },
+        {
+          "id": "b",
+          "text": "Hand the risk to the terminal operations manager, confirm that she accepts it, and record the transfer, its trigger date and the cost estimate in the handover pack.",
+          "correct": true,
+          "rationale": "The risk outlives the project, so it needs an owner who will still be there when it matures. A transfer only counts if the receiver accepts it, and the date and estimate let her plan the budget and outage."
+        },
+        {
+          "id": "c",
+          "text": "Close the risk in the register with a note that it falls outside the project's life, as the sponsor has asked, and describe it in the final report's open-items section.",
+          "correct": false,
+          "rationale": "A note in a final report is read once and filed. The candidate has recorded the risk but left nobody responsible for acting on it, which is how a known end-of-support date turns into an unplanned outage."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the risk to the portfolio board so it can be logged at portfolio level and funded from the portfolio's contingency when the upgrade falls due.",
+          "correct": false,
+          "rationale": "The portfolio board does not run the system and will not schedule its outage. The candidate has moved the risk upwards instead of to the person who will own the asset it threatens."
+        }
+      ],
+      "explanation": "Closing a project does not close its risks; it changes who holds them. Any risk that can still occur after closure is transferred to a named owner in the receiving organisation, who explicitly accepts it along with the information needed to act: trigger, timing and likely cost. A register that is empty at closure because entries were closed rather than transferred is a register that has lost information.",
+      "mindset": "A risk that outlives the project leaves with an owner, not with a note."
+    },
+    {
+      "id": "pmp-pr10-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "contingency",
+        "financial-closure",
+        "scope-control"
+      ],
+      "stem": "A county council's library digitisation project has been completed and accepted with £48,000 of its contingency reserve unspent. The sponsor, who also heads the library service, asks you to keep the project open for two more months and spend the £48,000 on three enhancements that branch staff requested after acceptance. She points out that the money is already approved and that a new business case would take longer than the work. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to keep the project open for two months, on condition that each enhancement is raised as a change request, assessed for its impact and approved before work starts.",
+          "correct": false,
+          "rationale": "Change control is the right process for changes to an open project, which is why this is tempting. But the project is complete and accepted; using change requests here extends it to absorb new scope that was never in the business case."
+        },
+        {
+          "id": "b",
+          "text": "Explain that the contingency was approved for this project's risks, return it to the funding body at closure, and help the sponsor put the enhancements forward as new work.",
+          "correct": true,
+          "rationale": "Contingency is authorised against the risks of the approved scope, not as a spare budget for whatever comes next. Returning it and helping the enhancements find proper funding respects both the sponsor's aim and the funder's decision."
+        },
+        {
+          "id": "c",
+          "text": "Close the project as planned and transfer the £48,000 into the library service's operating budget, so that branch staff can commission the three enhancements at their own pace.",
+          "correct": false,
+          "rationale": "The project manager has no authority to move capital contingency into an operating budget. The candidate has accepted the sponsor's premise that the money belongs to the library service and simply found a different route to spend it."
+        },
+        {
+          "id": "d",
+          "text": "Use the contingency on the single highest-value enhancement, which can be finished within a month, and return whatever balance remains to the funding body at closure.",
+          "correct": false,
+          "rationale": "Scaling the request down feels like a reasonable compromise, but it still spends risk money on unapproved scope. The candidate is negotiating the amount when the problem is the purpose."
+        }
+      ],
+      "explanation": "Unspent contingency at closure is returned to whoever authorised it, because it was released against the risks of a defined scope and that scope is now delivered. New requests that arise after acceptance are new work and need their own decision, however small and however convenient the leftover money looks. The question to ask is not whether the funds are approved but what they were approved for.",
+      "mindset": "Money approved for a project's risks is not money approved for the project's next idea."
+    },
+    {
+      "id": "pmp-pr10-105",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "operational-handover",
+        "knowledge-capture",
+        "team-release"
+      ],
+      "stem": "A payments team has finished its last sprint and is being released next Friday. The only engineer who has ever rotated the service's production TLS certificates leaves the company that same day. The certificates expire in five weeks, after which card payments will fail. The operations team taking over the service has a runbook template but nobody with this experience. What should the delivery lead do this week?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the departing engineer to write a detailed, step-by-step runbook for certificate rotation before Friday, and have the operations lead review it for completeness and clarity.",
+          "correct": false,
+          "rationale": "A runbook that has never been followed by anyone else is an untested assumption. The candidate is relying on documentation alone for a task whose failure stops card payments."
+        },
+        {
+          "id": "b",
+          "text": "Have the departing engineer carry out the rotation with an operations engineer this week, renewing the certificates early, and write the runbook from what they actually did.",
+          "correct": true,
+          "rationale": "Doing the real task together this week both removes the five-week deadline and proves that the operations engineer can repeat it. A runbook written from a live rotation is tested by construction."
+        },
+        {
+          "id": "c",
+          "text": "Ask the engineer's line manager to arrange for the engineer to be retained as a paid contractor for six weeks, so the rotation can be done by the person who knows it.",
+          "correct": false,
+          "rationale": "This depends on someone who is leaving agreeing to come back, and it defers the transfer rather than completing it. The next rotation will face the same gap with no one to call."
+        },
+        {
+          "id": "d",
+          "text": "Raise the expiry as a risk with the operations team and ask them to schedule the rotation in their change calendar well before the five-week deadline.",
+          "correct": false,
+          "rationale": "Scheduling the work does not give the operations team the ability to do it. The candidate has handed over the date but not the knowledge, which leaves Friday as the last chance."
+        }
+      ],
+      "explanation": "When a team is released, knowledge that exists in only one person's head is the most perishable thing the project owns, and the window for transferring it closes on a known date. The strongest transfer is doing the real task together while both people are available, with documentation written from that experience. When the alternative is a service failure, act before the window shuts rather than after.",
+      "mindset": "Transfer critical know-how by doing the task together while both people are still in the room."
+    },
+    {
+      "id": "pmp-pr10-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "benefits",
+        "closure-criteria",
+        "performance-data"
+      ],
+      "stem": "An insurer's new claims-handling system went live four weeks ago and project closure is due next week. The business case promised a 20% cut in average handling time, measured at six months. The latest weekly report shows handling time 12% higher than before go-live. The sponsor, alarmed, wants closure postponed until the figure improves. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Postpone closure as the sponsor asks, and keep the project team in place until weekly handling time has returned to below the figure recorded before go-live.",
+          "correct": false,
+          "rationale": "This ties closure to a measure that may improve for reasons unrelated to the project, and holds the team without knowing what they would fix. The candidate is responding to alarm rather than to a cause."
+        },
+        {
+          "id": "b",
+          "text": "Close the project on schedule, since the benefit is only measured at six months and the benefits owner is responsible for tracking it once the project has closed.",
+          "correct": false,
+          "rationale": "The point about measurement timing is correct, but if the rise is caused by a defect the project would be closing with known unfinished work. The candidate is applying the rule before checking whether it fits."
+        },
+        {
+          "id": "c",
+          "text": "Arrange refresher training for every claims handler next week, since a rise in handling time in the first month after go-live usually reflects unfamiliarity with new screens.",
+          "correct": false,
+          "rationale": "Training may well be part of the answer, but it is chosen on a general assumption. If the rise is concentrated in one claim type with a defect, training every handler spends a week on the wrong cause."
+        },
+        {
+          "id": "d",
+          "text": "Break the handling-time figures down by claim type, team and week since go-live to see whether the rise is a learning dip, a defect or a process gap.",
+          "correct": true,
+          "rationale": "The right response depends on the cause. A learning dip belongs to operations, a defect is unfinished project work, and a process gap may need both. A breakdown by type, team and week usually shows which."
+        }
+      ],
+      "explanation": "A bad number near closure is a question, not a verdict. Whether it should delay closure depends on whether its cause lies in the project's deliverables, in the organisation's adoption of them, or in neither, and those causes call for different owners. Segmenting the data before acting is what separates closing with open defects from closing on schedule with a transitional dip handed to the right people.",
+      "mindset": "Find out what a worrying figure is made of before deciding whose problem it is."
+    },
+    {
+      "id": "pmp-pr10-107",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "hypercare",
+        "transition",
+        "exit-criteria"
+      ],
+      "stem": "A water utility's new billing platform has been in hypercare for six weeks. Four of the five agreed exit criteria are met. The fifth, fewer than ten priority incidents a week, is running at about thirteen, eight of them from one recurring fault in a third-party payment gateway. The gateway supplier has committed a fix in its release seven weeks from now. The service desk manager wants hypercare extended until the fix lands. What should the project manager propose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Extend hypercare for seven weeks as the service desk manager asks, keeping the project team in place until the gateway fix is released and the incident count falls.",
+          "correct": false,
+          "rationale": "This keeps a project team on standby for a fix it cannot influence. The candidate is reading the exit criterion literally without asking what the extra weeks would actually change."
+        },
+        {
+          "id": "b",
+          "text": "Exit hypercare now, since four of the five criteria are met and the remaining incidents come from a third-party gateway that sits outside the project's own scope.",
+          "correct": false,
+          "rationale": "The conclusion is close, but this leaves the service desk holding eight incidents a week with no defined handling or follow-up. The candidate has dismissed the gap instead of transferring it."
+        },
+        {
+          "id": "c",
+          "text": "Exit hypercare on the four met criteria and transfer the gateway fault to the service desk as a known error, with its workaround, an owner and the supplier's fix date.",
+          "correct": true,
+          "rationale": "Without the gateway fault the platform is inside every criterion, and that fault has a workaround and a committed fix that the project team cannot speed up. Transferring it as a managed known error balances the cost of seven idle weeks against an operational gap that can be handled."
+        },
+        {
+          "id": "d",
+          "text": "Ask the steering group to amend the fifth criterion so that incidents caused by third-party systems are excluded from the weekly count, and then exit hypercare.",
+          "correct": false,
+          "rationale": "Rewriting a criterion so that it is met sets a precedent that criteria bend when they become inconvenient. It also hides the gateway problem rather than giving anyone responsibility for it."
+        }
+      ],
+      "explanation": "Exit criteria for hypercare exist to show that operations can run the service without the project team, not to require a perfect service. When a shortfall is fully explained, has a workaround and has a fix the project cannot accelerate, the sound trade-off is to exit with that shortfall explicitly transferred, rather than either holding the team indefinitely or pretending the gap is not there. The proposal still needs the receiving side's agreement.",
+      "mindset": "Ask what extending a transition would actually change before paying for it."
+    },
+    {
+      "id": "pmp-pr10-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "financial-closure",
+        "accruals",
+        "cost-codes"
+      ],
+      "stem": "Your rail signalling upgrade has been accepted, and finance plans to close the project's cost codes at month end, in ten days. You know of two supplier invoices still to arrive for accepted work: £14,500 for cable testing and £6,200 for as-built drawings, both expected next month. Neither has been recorded in the finance system. What should the project manager do before the codes are closed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the codes close at month end as planned, and ask both suppliers to send their invoices to the operations budget holder when they are ready.",
+          "correct": false,
+          "rationale": "This understates the project's final cost by £20,700 and charges project work to an operating budget. The candidate is treating closure as a date to meet rather than a record to get right."
+        },
+        {
+          "id": "b",
+          "text": "Ask both suppliers to bring their invoices forward and submit them before month end, so that the full costs are recorded in the system before the codes close.",
+          "correct": false,
+          "rationale": "The project cannot control the suppliers' billing cycles, and if either invoice is late the liability is lost. The candidate is relying on others to fix a recording problem the project can fix itself."
+        },
+        {
+          "id": "c",
+          "text": "Record both expected invoices in the final report's list of outstanding items, so the sponsor knows the final project cost is not yet complete when she signs it off.",
+          "correct": false,
+          "rationale": "The sponsor will know, but the finance system will not, and that is where the codes are closed and the final cost is reported. Visibility has to reach the system of record, not just the report."
+        },
+        {
+          "id": "d",
+          "text": "Give finance the details of both invoices so the amounts are accrued against the project, and agree how they will be paid once the codes have closed.",
+          "correct": true,
+          "rationale": "Accruing known liabilities puts the true final cost on the project's books before closure, and agreeing the payment route means the invoices will not arrive with nowhere to go."
+        }
+      ],
+      "explanation": "Financial closure needs every known cost to be in the books, whether or not it has been invoiced. Known liabilities for work already accepted are accrued before cost codes close, and their payment route is agreed in advance, so the project's final cost is true and late invoices have somewhere to go. Information that only exists in the project manager's head or in a report does not count as recorded.",
+      "mindset": "If you know a cost is coming, make sure the books know it too before they close."
+    },
+    {
+      "id": "pmp-pr10-109",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "early-closure",
+        "funding",
+        "supportability"
+      ],
+      "stem": "A charity's donations platform team has been told its funding ends after two more sprints rather than six, because the trustees have moved money to an emergency appeal. The decision is final. The platform has no runbook and two known defects in its receipting service. The next large backlog item, gift-aid automation, would take about four sprints. Some developers want to start it anyway so it is partly done for whoever picks it up. What should the delivery lead do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use the two sprints to fix the receipting defects, write the runbook and finish small in-flight items, leaving gift-aid automation unstarted but with its analysis documented.",
+          "correct": true,
+          "rationale": "With the end date fixed, the most valuable use of the remaining sprints is leaving what exists in a state that someone else can run. Documenting the analysis preserves the thinking without leaving half-built code."
+        },
+        {
+          "id": "b",
+          "text": "Start gift-aid automation straight away and build as much of it as the two sprints allow, documenting the partial code so a future team can resume where this one stopped.",
+          "correct": false,
+          "rationale": "Half-built features rarely get resumed as planned, and they add code that has to be understood and supported. The candidate values progress on new work over the stability of the product being handed over."
+        },
+        {
+          "id": "c",
+          "text": "Ask the trustees to reconsider their decision and fund the four sprints needed, presenting the value that gift-aid automation would return to the charity each year.",
+          "correct": false,
+          "rationale": "The stem says the decision is final and the money has gone to an emergency. The candidate is spending the remaining time contesting the constraint instead of working within it."
+        },
+        {
+          "id": "d",
+          "text": "Split gift-aid automation into the thinnest slice that delivers value on its own, and aim to release only that slice within the two sprints that remain.",
+          "correct": false,
+          "rationale": "Thin slicing is good agile practice, which makes this attractive. But it commits the last sprints to new scope while the existing product still has defects and no runbook for whoever runs it next."
+        }
+      ],
+      "explanation": "When an end date is brought forward by a decision that will not change, the question becomes what state the product should be left in. Usable, supportable and honestly documented beats more features, because whoever inherits the product has to run it before they can extend it. Accepting the constraint early leaves time to close well; arguing with it or racing it uses that time up.",
+      "mindset": "When the end moves closer, spend what is left on leaving things runnable."
+    },
+    {
+      "id": "pmp-pr10-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "archetype-act-now",
+        "vendor-exit",
+        "ip-transfer",
+        "contract-closure"
+      ],
+      "stem": "An airline's loyalty app has been built by a supplier's agile team under a time-and-materials contract that ends in three weeks. The source code repository and build pipeline sit in the supplier's cloud account. The contract transfers ownership of the code to the airline on final payment, and the airline's in-house team will take over. Nobody in the in-house team has yet built or deployed the app. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the supplier move the repository and pipeline into the airline's account now, and run the remaining sprints' releases from there with the in-house team doing the deployments.",
+          "correct": true,
+          "rationale": "Moving now means the transfer is tested while the people who built the pipeline are still available to fix what breaks. Three weeks of real releases by the in-house team prove the handover in a way no document can."
+        },
+        {
+          "id": "b",
+          "text": "Make the final payment conditional on the supplier handing over the repository, pipeline credentials and full build documentation on the last day of the contract, as the clause allows.",
+          "correct": false,
+          "rationale": "The leverage is real and the clause supports it, but the handover happens on the day the supplier's team leaves. The candidate has secured ownership of the code without securing the ability to use it."
+        },
+        {
+          "id": "c",
+          "text": "Ask the supplier to provide a complete export of the repository and a written build-and-deploy guide in the final week, and have the in-house team review both.",
+          "correct": false,
+          "rationale": "Reviewing a guide is not the same as following it under pressure. The candidate has planned the transfer for the last week, which leaves no margin if the export or the guide turns out to be incomplete."
+        },
+        {
+          "id": "d",
+          "text": "Extend the time-and-materials contract by one month so that the supplier's team can support the in-house team through its first few releases after takeover.",
+          "correct": false,
+          "rationale": "Extra support may help, but it adds cost and delays closure to solve a problem that the remaining three weeks could solve. The candidate is buying time instead of using the time already available."
+        }
+      ],
+      "explanation": "Ownership of an asset and the ability to operate it are transferred separately, and a contract clause only secures the first. When a supplier's team is about to leave, the time they remain is the only time in which a handover can be tested and corrected with their help. Moving the real work into the receiving environment while that time remains turns the transfer from an event on the last day into something already proven.",
+      "mindset": "Prove a handover while the people who can fix it are still there."
+    },
+    {
+      "id": "pmp-pr10-111",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "lessons-learned",
+        "organisational-process-assets",
+        "contracts"
+      ],
+      "stem": "Your fibre rollout across three market towns is closing. Its largest delay, six weeks, came from a dispute over who was responsible for migrating customer records, because your organisation's standard installation contract is silent on it. You have entered this in the lessons-learned register, which the PMO publishes quarterly. Two other rollouts are about to sign contracts using the same template. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Send the lesson directly to the commercial team that owns the contract template, with the clause gap, the six-week impact and the two contracts about to be signed.",
+          "correct": true,
+          "rationale": "The template's owner is the only person who can fix the cause for every future contract, and the two imminent signings give the change urgency. Lessons change practice when they reach whoever owns the asset."
+        },
+        {
+          "id": "b",
+          "text": "Present the lesson at the closure review with the sponsor, and ask the PMO to give it prominence in the next quarterly publication so other project managers see it.",
+          "correct": false,
+          "rationale": "Publication spreads awareness but does not change the template, and the next issue may appear after both contracts are signed. The candidate has treated recording a lesson as acting on it."
+        },
+        {
+          "id": "c",
+          "text": "Contact the project managers of the two other rollouts directly and advise each of them to add a data-migration clause to their own contract before they sign.",
+          "correct": false,
+          "rationale": "This helps two projects but leaves the template unchanged for every one after them, and project managers may not have authority to alter a standard contract. It treats the symptom rather than the source."
+        },
+        {
+          "id": "d",
+          "text": "Draft a replacement clause covering migration responsibility and attach it to the lessons-register entry, so that it is ready for whoever updates the template.",
+          "correct": false,
+          "rationale": "The drafting is useful, but it waits for someone to find it. The candidate has done the owner's work without telling the owner, so the clause may sit in the register while both contracts are signed."
+        }
+      ],
+      "explanation": "A lesson learned has value only when it changes something the organisation will reuse, such as a template, standard, estimate or checklist. The practical step is to identify who owns that asset and put the lesson in front of them with its evidence and its urgency. Registers and publications support this but do not replace it, because they rely on the right person happening to read them in time.",
+      "mindset": "Deliver a lesson to whoever can change the thing that caused it."
+    },
+    {
+      "id": "pmp-pr10-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "retrospective",
+        "lessons-learned",
+        "end-of-project-review"
+      ],
+      "stem": "A pharmaceutical packaging line has been delivered by a hybrid project: predictive procurement and installation of the equipment, with the control software built in two-week sprints. At closure, the software team proposes skipping the end-of-project review because it has already held 22 sprint retrospectives and 'every lesson is captured'. The installation and validation phases had no retrospectives. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the proposal for the software work, and run a separate lessons-learned session covering only the installation and validation phases that had no retrospectives.",
+          "correct": false,
+          "rationale": "This fills the obvious gap but splits the review along the same lines as the project, so the interfaces between software and installation are examined by nobody. The candidate has accepted that the parts add up to the whole."
+        },
+        {
+          "id": "b",
+          "text": "Ask the PMO to rule on whether 22 sprint retrospectives satisfy the organisation's closure requirement for lessons learned, and then plan the closure activities around its decision.",
+          "correct": false,
+          "rationale": "The PMO can answer the compliance question, but the issue is what the review would learn, which is the project manager's call. The candidate is passing on a judgement they are well placed to make."
+        },
+        {
+          "id": "c",
+          "text": "Hold a short session to confirm that every action raised in the 22 retrospectives was completed, and record the project's lessons on the basis of that check.",
+          "correct": false,
+          "rationale": "Checking that actions were completed is good housekeeping, but it only looks again at what the software team already saw. Lessons from installation, validation and the handoffs remain uncollected."
+        },
+        {
+          "id": "d",
+          "text": "Hold the end-of-project review across all phases, focusing on the handoffs between procurement, installation, software and validation that no sprint retrospective could see.",
+          "correct": true,
+          "rationale": "Sprint retrospectives look inward at one team's working practices over two weeks. The most expensive lessons on a hybrid project usually sit at the boundaries between phases and teams, which only a whole-project review can examine."
+        }
+      ],
+      "explanation": "Iteration retrospectives and an end-of-project review answer different questions. The first improves how one team works sprint by sprint; the second looks at the whole lifecycle, including the interfaces between phases, teams and methods, where problems often begin. On hybrid work in particular, the claim that everything is already captured usually means everything visible from inside one team is captured.",
+      "mindset": "Ask what each kind of review is able to see before deciding one can replace another."
+    },
+    {
+      "id": "pmp-pr10-113",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "final-account",
+        "delegated-authority",
+        "supplier-claims"
+      ],
+      "stem": "You managed this year's city marathon and are closing the project. Your delegated authority lets you settle individual supplier final accounts up to €5,000. Two claims remain. The barrier hire firm claims €3,800 for an extra day that your own logistics lead requested by email. The medical provider claims €12,000 for four additional ambulances that the police required on race morning. Both claims are supported by evidence. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Approve and settle the barrier hire claim yourself now, attaching your logistics lead's email to the final account as the evidence for the extra day.",
+          "correct": true,
+          "rationale": "The claim is within your limit, it is evidenced and your own team caused the cost. Settling it is exactly what the delegated authority exists for, and doing it now removes an open item from closure."
+        },
+        {
+          "id": "b",
+          "text": "Send the medical claim to the sponsor for a decision, with the police requirement and the provider's evidence, because it is above your settlement limit.",
+          "correct": true,
+          "rationale": "The claim may well be valid, but €12,000 is outside what you can approve. Sending it with the evidence lets the person who holds that authority decide quickly."
+        },
+        {
+          "id": "c",
+          "text": "Send both claims to the sponsor together, so that every final-account settlement on the project carries the same level of approval and is consistent.",
+          "correct": false,
+          "rationale": "Consistency sounds prudent, but it pushes a decision you are authorised to make up to someone whose time is scarcer. The candidate is under-using delegated authority, which slows closure and teaches the sponsor to expect every decision."
+        },
+        {
+          "id": "d",
+          "text": "Settle both claims yourself, since the ambulances were a police safety requirement on the day and delaying payment would damage a supplier relationship the event relies on.",
+          "correct": false,
+          "rationale": "The reasoning about safety and relationships is sound, but it does not change the limit. The candidate is treating a strong case as if it extended their authority."
+        },
+        {
+          "id": "e",
+          "text": "Hold both settlements until next month's post-event debrief, where all final costs can be reviewed together with the sponsor and the finance team.",
+          "correct": false,
+          "rationale": "Batching settlements for a meeting delays a decision you can make today and leaves suppliers waiting for no added benefit. The candidate is confusing a review forum with an approval route."
+        }
+      ],
+      "explanation": "Delegated authority works in both directions at closure. Decisions within your limits should be made promptly by you, because pushing them upwards wastes the time of those above and slows closure. Decisions above your limits go to whoever holds that authority, with the evidence they need, however strong the case. The merits of a claim and the authority to settle it are separate questions.",
+      "mindset": "Use the authority you have in full, and pass on cleanly what lies beyond it."
+    },
+    {
+      "id": "pmp-pr10-114",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "records-retention",
+        "data-protection",
+        "decommissioning"
+      ],
+      "stem": "A university research consortium's agile team has finished building a data platform for a three-year sleep study. The consortium's records policy requires audit logs and research datasets to be kept for seven years. The volunteers' consent forms say their contact details will be deleted when the project ends. The team proposes deleting the whole cloud account next week to stop about 4,000 a month in hosting charges. Which two actions should the delivery lead take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move the audit logs and research datasets to the consortium's approved long-term archive and confirm they can be retrieved before any environment is shut down.",
+          "correct": true,
+          "rationale": "The seven-year retention rule outlives the project, so the records must reach a store that will exist for that long. Confirming retrieval before shutting anything down is what makes the archive real rather than assumed."
+        },
+        {
+          "id": "b",
+          "text": "Delete the volunteers' contact details as the consent forms promise, and keep a dated record of the deletion with the study's closure documents.",
+          "correct": true,
+          "rationale": "Consent terms are a commitment made to the participants, and closure is the trigger they name. A record of deletion shows the commitment was kept without retaining the data itself."
+        },
+        {
+          "id": "c",
+          "text": "Delete the whole cloud account next week as the team proposes, since the hosting charges are a real cost and the study's findings have already been published.",
+          "correct": false,
+          "rationale": "Publication does not discharge the retention policy, which applies to the logs and datasets themselves. The candidate is letting a cost saving override an obligation that runs for seven years."
+        },
+        {
+          "id": "d",
+          "text": "Keep the full environment running unchanged until the consortium's governance board meets next quarter and decides what should happen to the data.",
+          "correct": false,
+          "rationale": "The rules for both kinds of data are already clear, so waiting for a board adds months of cost and delays the deletion the volunteers were promised. The candidate is seeking a decision that has already been made."
+        },
+        {
+          "id": "e",
+          "text": "Archive everything including the volunteers' contact details, so that the consortium can invite the same participants to a follow-up study in future.",
+          "correct": false,
+          "rationale": "A follow-up study is a reasonable research ambition, but the consent forms do not allow it. The candidate is putting future convenience ahead of a promise made to the people who gave the data."
+        }
+      ],
+      "explanation": "Closing a project's data is governed by commitments that outlive the project: retention policies that say what must be kept and for how long, and consent or contract terms that say what must be destroyed. Both are applied before the environment that holds the data is switched off, and each action is evidenced. Cost pressure decides how quickly this is done, not whether it is done.",
+      "mindset": "Before switching anything off, know what the rules say must be kept and what must be destroyed."
+    },
+    {
+      "id": "pmp-pr10-115",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "configuration-audit",
+        "as-built",
+        "handover"
+      ],
+      "stem": "Your hybrid project is rolling out a manufacturing execution system at a bottling plant. The final configuration audit before handover finds that 11 of 140 configuration items differ from the baseline documentation. The development team says they are all small changes agreed in sprint reviews. The plant's operations team will support the system using that documentation. Which two actions should the project manager take first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reconcile each of the 11 differences against the change log and sprint review records, to separate approved changes that were not documented from changes that nobody with authority approved.",
+          "correct": true,
+          "rationale": "The team's account may be right, but each difference has a different fix depending on whether it was approved. Checking the records turns one claim into eleven verified answers."
+        },
+        {
+          "id": "b",
+          "text": "Ask the operations team which of the 11 configuration items their support procedures and fault diagnosis rely on, to see where the discrepancies would cause real harm.",
+          "correct": true,
+          "rationale": "Not every discrepancy matters equally to the people who will run the system. Knowing which ones affect support lets the project prioritise the corrections that protect operations."
+        },
+        {
+          "id": "c",
+          "text": "Update the baseline documentation for all 11 items to match the system as built, since the team confirms each one was agreed in a sprint review.",
+          "correct": false,
+          "rationale": "If the team is right, this is where you will end up, but it accepts their account untested. Any unapproved change would be written into the baseline as if it had been agreed."
+        },
+        {
+          "id": "d",
+          "text": "Roll the 11 configuration items back to the documented baseline before handover, so that the system the operations team receives matches its documentation exactly.",
+          "correct": false,
+          "rationale": "This assumes every difference was unauthorised and may undo changes the business asked for. The candidate is fixing the mismatch from the wrong end before knowing which end is wrong."
+        },
+        {
+          "id": "e",
+          "text": "Hand over on schedule and give operations a list of the 11 discrepancies as known issues, to be resolved by the project team during the hypercare period.",
+          "correct": false,
+          "rationale": "Listing them is better than hiding them, but it passes on documentation that is known to be wrong in unknown ways. The candidate has made the problem visible without understanding it."
+        },
+        {
+          "id": "f",
+          "text": "Raise a retrospective change request for each of the 11 items and submit them together to the change control board for formal approval before handover.",
+          "correct": false,
+          "rationale": "Formal approval may be needed for some items, but submitting all eleven assumes none was already approved. The candidate is choosing a remedy before establishing which items need one."
+        }
+      ],
+      "explanation": "When an audit at closure finds that what was built differs from what is documented, the first job is to establish the cause of each difference and its consequence, because approved-but-unrecorded changes, unauthorised changes and harmless drift each have a different remedy. Updating the records, reversing the change and regularising the approval are all valid fixes, but only once you know which applies. Prioritise by the effect on the people who will depend on the documentation.",
+      "mindset": "Find out why the record and the reality differ before deciding which one to correct."
+    },
+    {
+      "id": "pmp-pr10-116",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "organisational-process-assets",
+        "closure-audit",
+        "records"
+      ],
+      "stem": "During the final closure audit of a regional hospital's patient-records migration project, three findings are raised. Match each finding to the closure action that deals with it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "An approved change added a second data-cleansing pass, but the scope baseline in the project file was never updated to include it."
+        },
+        {
+          "id": "s2",
+          "text": "The data-extraction supplier missed its contracted turnaround times in four of the six months it worked on the project."
+        },
+        {
+          "id": "s3",
+          "text": "Data-mapping effort came in at three times its estimate, for reasons the team has analysed and now understands."
+        }
+      ],
+      "options": [
+        {
+          "id": "baseline",
+          "text": "Update the archived baseline so the project file reflects the scope that was approved",
+          "correct": true,
+          "match": "s1",
+          "rationale": "The change was approved, so the scope did change. The archive is what future audits and projects will read, and it has to show the approved scope rather than the original one."
+        },
+        {
+          "id": "supplier",
+          "text": "Complete a supplier performance evaluation and file it in the procurement records",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Procurement records are where future buyers look when choosing suppliers. A documented evaluation of missed service levels is the evidence they will need, and it belongs there rather than in a project note."
+        },
+        {
+          "id": "estimating",
+          "text": "Add the actual effort and its causes to the organisation's estimating data",
+          "correct": true,
+          "match": "s3",
+          "rationale": "An overrun that is understood is the most useful input an estimating database can receive. Feeding it back is how the next migration's estimate starts from experience rather than optimism."
+        },
+        {
+          "id": "ccb",
+          "text": "Raise a change request for the change control board to approve before closure",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of the findings is a proposed change to what the project will deliver. The first is an approved change that was not recorded, and the others are performance information for future use."
+        }
+      ],
+      "explanation": "Closure is when a project's experience is turned into the organisation's assets: corrected baselines, supplier records, estimating data, templates. Each kind of finding has a home where it will be found and used by someone else later, and the closure audit's job is to put it there. A finding left only in the project's own files is effectively lost when the project is archived.",
+      "mindset": "Put each closure finding where the next person who needs it will actually look."
+    },
+    {
+      "id": "pmp-pr10-117",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-route-to-owner",
+        "handover",
+        "backlog",
+        "architecture-decisions"
+      ],
+      "stem": "A logistics firm's agile team that built its delivery-driver app is being disbanded, and a product team in another division will take the app over. Match each item the team still holds to where it should go at handover. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "Forty backlog items that the outgoing product owner still believes would add value to drivers."
+        },
+        {
+          "id": "p2",
+          "text": "A medium-severity security vulnerability found in the final sprint, with a vendor patch available but not yet applied."
+        },
+        {
+          "id": "p3",
+          "text": "The team's reasoning for choosing an offline-first design over a simpler always-connected one."
+        }
+      ],
+      "options": [
+        {
+          "id": "po",
+          "text": "The receiving team's product owner, to prioritise in their own backlog",
+          "correct": true,
+          "match": "p1",
+          "rationale": "Whoever owns the product from now on decides what it does next. The backlog is input to their decisions, not a commitment they inherit."
+        },
+        {
+          "id": "vuln",
+          "text": "The receiving team's vulnerability process, with a named owner and a patch date",
+          "correct": true,
+          "match": "p2",
+          "rationale": "A known vulnerability needs someone accountable for closing it once the old team has gone. Putting it in the process that will track it, with an owner and a date, is what stops it being forgotten."
+        },
+        {
+          "id": "adr",
+          "text": "A written decision record kept in the code repository alongside the design",
+          "correct": true,
+          "match": "p3",
+          "rationale": "Design reasoning is needed by whoever later changes the code. Keeping it with the code means the next developer finds it at the moment they are tempted to reverse the decision."
+        },
+        {
+          "id": "report",
+          "text": "The sponsor's closure report, for a decision at the closure meeting",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of these items needs a sponsor decision. Each already has a natural owner in the receiving team or in the codebase, and routing it through a report only delays it."
+        }
+      ],
+      "explanation": "At handover, each piece of unfinished business goes to the person or system that will own it after the team has gone: product choices to the product owner, operational risks to the process that tracks them, design knowledge to wherever the design lives. Sending everything to one summary document or one senior person is easier for the departing team but leaves the receiving side to sort it out without the context.",
+      "mindset": "Give every leftover item to whoever will own it tomorrow, not to whoever is senior today."
+    },
+    {
+      "id": "pmp-pr10-118",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "late-requests",
+        "team-release",
+        "handover"
+      ],
+      "stem": "A council's parking-permit app team disbands on Friday and a support team takes over on Monday. Two requests arrive on Wednesday. Complete each sentence with the response that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "A service manager asks for a one-line wording change on the permit renewal screen that takes an hour and carries no risk. The team should"
+        },
+        {
+          "id": "c2",
+          "text": "The product owner asks for a new payment option for residents, which the team estimates at about two sprints. The team should"
+        }
+      ],
+      "options": [
+        {
+          "id": "now",
+          "text": "make the change this week, since doing it costs less than handing it over",
+          "correct": true,
+          "match": "c1",
+          "rationale": "An hour of work is cheaper than writing it up, explaining it and having another team pick it up. With no risk attached, finishing it is the economical choice."
+        },
+        {
+          "id": "backlog",
+          "text": "add it to the backlog passed to the support team, with the analysis so far",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Two sprints of work cannot be done in two days. Handing it over with the thinking already done gives the next team a head start without leaving half-built code behind."
+        },
+        {
+          "id": "extend",
+          "text": "ask the sponsor to extend the team's end date so the work can be finished",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Neither request justifies keeping a team on: one fits within the week, and the other belongs with the team that will own the product."
+        }
+      ],
+      "explanation": "Late requests near team release are a comparison of costs: what it costs to do the work now against what it costs to hand it over well. Small, low-risk work is usually cheaper to finish than to explain; substantial work is better handed over cleanly than started and abandoned. Extending a team to absorb late requests is rarely justified by the requests themselves.",
+      "mindset": "Near the end, compare the cost of doing a thing with the cost of handing it over."
+    },
+    {
+      "id": "pmp-pr10-119",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "retention",
+        "contract-closure",
+        "defects-period"
+      ],
+      "stem": "A museum gallery fit-out has a final account of £640,000. The contract holds 5% retention, half released at practical completion and the rest at the end of the 12-month defects period. During that period the contractor failed to remedy a lighting defect, so the museum paid another firm £3,400 to fix it, which the contract allows it to deduct from retention.",
+      "blanks": [
+        {
+          "id": "held",
+          "label": "Total retention held, in £",
+          "numeric": true,
+          "expect": 32000,
+          "tol": 0,
+          "unit": "£",
+          "rationale": "Retention is 5% of the final account: 640,000 × 0.05 = £32,000."
+        },
+        {
+          "id": "pc",
+          "label": "Retention released at practical completion, in £",
+          "numeric": true,
+          "expect": 16000,
+          "tol": 0,
+          "unit": "£",
+          "rationale": "Half of the retention is released at practical completion: 32,000 ÷ 2 = £16,000."
+        },
+        {
+          "id": "final",
+          "label": "Retention payable to the contractor at the end of the defects period, in £",
+          "numeric": true,
+          "expect": 12600,
+          "tol": 0,
+          "unit": "£",
+          "rationale": "The second half is £16,000, less the £3,400 the museum spent remedying the defect: 16,000 − 3,400 = £12,600."
+        }
+      ],
+      "explanation": "Retention keeps part of the payment back as security for the contractor's obligations after handover, and is released in stages tied to contract milestones. Costs the client incurs because the contractor did not meet those obligations are recovered from the retention before it is released. Contract closure is therefore not complete at handover; it ends when the defects period is over and the final release is settled.",
+      "mindset": "A contract is closed when every obligation on both sides has been settled, not when the work is handed over."
+    },
+    {
+      "id": "pmp-pr10-120",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-apply-the-rule",
+        "completion-criteria",
+        "transition",
+        "benefits"
+      ],
+      "stem": "A ferry operator's online booking service was built in sprints and launched through a planned cut-over. The charter defines project completion as 'the service accepted into business-as-usual operation by the operations director'. Benefits are owned by the commercial director and measured at six and twelve months. The timeline shows five milestones. Select the point at which the project should formally close.",
+      "graphic": {
+        "viewBox": "0 0 700 260",
+        "title": "Timeline of five delivery and post-delivery milestones for the booking service",
+        "caption": "Select a milestone. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "m1",
+          "n": 1,
+          "label": "Final sprint review: all release features demonstrated",
+          "x": 20,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "The features are built and shown, but nothing has yet been accepted into operation. This is the end of development, which many candidates confuse with the end of the project."
+        },
+        {
+          "id": "m2",
+          "n": 2,
+          "label": "Go-live: operations director signs the cut-over approval and the service is switched on for customers",
+          "x": 155,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "The operations director's signature here authorises the cut-over, not acceptance into business-as-usual: the project team is still running hypercare. Mistaking a go-live approval for operational acceptance is the error this option rewards."
+        },
+        {
+          "id": "m3",
+          "n": 3,
+          "label": "End of hypercare: exit criteria met and support passed to the operations team",
+          "x": 290,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": true,
+          "rationale": "This is the first point at which the service is running as business-as-usual under the operations director, which is the charter's definition of completion. Formal acceptance at hypercare exit is the condition the project was chartered to reach."
+        },
+        {
+          "id": "m4",
+          "n": 4,
+          "label": "Six-month benefits review: first benefits measured",
+          "x": 425,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "Benefits are owned by the commercial director and measured after the project. Keeping the project open until they appear confuses delivering the capability with realising its value."
+        },
+        {
+          "id": "m5",
+          "n": 5,
+          "label": "Twelve-month benefits review: full-year benefits confirmed",
+          "x": 560,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "This holds the project open for a full year to observe outcomes that belong to the business. The candidate is treating the business case as the project's completion criterion."
+        }
+      ],
+      "explanation": "A project closes when the completion condition in its charter is met, not when work stops, not when the product goes live and not when benefits arrive. Where the charter defines completion as acceptance into operation, the closure point is the moment the named owner accepts it. Benefits realisation continues afterwards under a business owner, which is why the two are tracked separately.",
+      "mindset": "Close against the completion condition you were chartered to meet."
+    },
+    {
+      "id": "pmp-pr10-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "records-management",
+        "archiving",
+        "organisational-process-assets"
+      ],
+      "stem": "A bridge-strengthening project for a county highways authority closes next week. The authority's records policy requires design calculations, inspection reports and approvals to be filed in the corporate document management system and kept for 25 years. Most of them sit in the project's online collaboration workspace, which deletes its contents automatically 90 days after the project's licence ends. The design lead suggests leaving them there because everyone knows where to find them. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the team move the records the policy names into the document management system, indexed, before the project closes.",
+          "correct": true,
+          "rationale": "The policy names both the records and where they must live. Moving them while the people who know which file is which are still on the project is the only point at which this is cheap and reliable."
+        },
+        {
+          "id": "b",
+          "text": "Ask IT to extend the collaboration workspace licence for another year so the files stay in the place the team knows to look for them.",
+          "correct": false,
+          "rationale": "This buys time without meeting the policy. In a year the team has gone, nobody remembers why the workspace exists, and the same deletion arrives with nobody left to sort the files."
+        },
+        {
+          "id": "c",
+          "text": "Export the whole workspace to a compressed archive and store it on the department's shared network drive, with a short index file alongside it.",
+          "correct": false,
+          "rationale": "It saves the files from deletion but puts them outside the system the retention rules are applied to. A candidate choosing this treats keeping a copy as the same thing as filing a record."
+        },
+        {
+          "id": "d",
+          "text": "Leave the files in the workspace and record its location and the automatic deletion date in the closure report for the PMO to act on.",
+          "correct": false,
+          "rationale": "Writing down when the records will be destroyed does not stop it happening. It hands a known loss to a PMO that did not create the files and cannot tell which ones matter."
+        }
+      ],
+      "explanation": "Projects run on temporary tools — workspaces, shared drives, chat channels — and closure is when those tools are switched off. Any record the organisation must keep has to be moved into its permanent system of record before that happens, while the people who can identify and index it are still available. A retention policy is met by where a record is filed, not by the fact that a copy exists somewhere.",
+      "mindset": "Project tools are temporary; the records they hold have to outlive them."
+    },
+    {
+      "id": "pmp-pr10-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-make-visible",
+        "final-report",
+        "cost-baseline",
+        "transparency"
+      ],
+      "stem": "A regional airport's baggage-hall upgrade is closing. The original budget was €4.2 million. Two approved change requests, for extra screening equipment and an upgrade to the fire doors, raised the cost baseline to €4.75 million, and the final cost is €4.71 million. The sponsor asks you to show only the comparison with €4.75 million in the final report, because the board 'will only see a big overrun' if the original figure appears. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Report against the revised €4.75 million baseline only, since it is the approved baseline and both changes went through change control properly.",
+          "correct": false,
+          "rationale": "The revised baseline is the right measure of execution, which is why this is tempting. But on its own it hides that the original authorisation was €550,000 short, which is exactly what the board needs when it next approves an estimate."
+        },
+        {
+          "id": "b",
+          "text": "Report against the original €4.2 million only, adding a footnote that lists the two change requests and their values for the board's reference.",
+          "correct": false,
+          "rationale": "This presents approved, funded changes as an overrun and buries the explanation in a footnote. A candidate choosing it confuses showing the original figure with leading on it."
+        },
+        {
+          "id": "c",
+          "text": "Agree with the sponsor to brief the board chair on the original figure separately, while the written report shows the revised baseline only.",
+          "correct": false,
+          "rationale": "A verbal briefing leaves the permanent record incomplete. Future readers of the final report, who never had the conversation, will draw the wrong conclusion about the original estimate."
+        },
+        {
+          "id": "d",
+          "text": "Show the final cost against both the original and the revised budget, with the two approved changes explaining the difference.",
+          "correct": true,
+          "rationale": "Both comparisons are true and they answer different questions: how well the project delivered against what was approved, and how far the approved figure moved from the first one. Showing the bridge between them answers the sponsor's worry with facts."
+        }
+      ],
+      "explanation": "A final report is the organisation's lasting record of the project, and its readers include people who will set future budgets. It should compare the outcome with the approved baseline and also show how that baseline moved from the original authorisation, with the approved changes that moved it. Execution performance and estimating accuracy are separate lessons, and dropping either comparison removes one of them.",
+      "mindset": "A final report is written for people who were not in the room, so it shows how the target moved as well as where you landed."
+    },
+    {
+      "id": "pmp-pr10-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "product-operating-model",
+        "tailoring",
+        "team-continuity"
+      ],
+      "stem": "A building society funded its mortgage-application app as a two-year project, and that funding ends this month. The executive has since moved to a product operating model: the same seven-person team will continue working on the app indefinitely, funded from the digital department's annual budget. The PMO's closure checklist requires every project team member to be released to the resource pool and the product to be handed over to an operations owner. What should the delivery lead do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Close the project's funding, reporting and governance and record its outcomes, while transferring product ownership to the continuing team's product owner instead of releasing the team.",
+          "correct": true,
+          "rationale": "What is ending is a temporary funding and governance arrangement, so that is what gets closed: outcomes confirmed against what was funded, the budget closed, lessons recorded. The team and the product carry on, so releasing and handing over would close things that are not ending."
+        },
+        {
+          "id": "b",
+          "text": "Keep the project open through a change request extending its end date, so the team's continuing work stays under existing governance until the PMO updates its checklist.",
+          "correct": false,
+          "rationale": "It keeps governance visible, which is attractive, but it turns permanent product work into an open-ended project and bypasses the annual funding decision the new model relies on."
+        },
+        {
+          "id": "c",
+          "text": "Follow the checklist in full: release all seven people to the resource pool, hand the app to operations, then request the same people back for the product team.",
+          "correct": false,
+          "rationale": "This satisfies the form of the procedure at the cost of its purpose. A checklist written for teams that disperse is being applied to one that does not, and the round trip risks losing people and disrupts a working team."
+        },
+        {
+          "id": "d",
+          "text": "Skip formal closure altogether, since nothing changes for the team or the app, and move the running costs to the digital department's budget from next month.",
+          "correct": false,
+          "rationale": "It correctly sees that the team continues, but it loses the confirmation of what the two-year funding delivered, the financial close and the lessons. The project still ends even when the work does not."
+        }
+      ],
+      "explanation": "Closure ends a temporary arrangement — its funding, its governance and its accountability for a defined outcome. When an organisation moves work into a permanent product model, that arrangement still ends and still needs closing, but team release and operational handover may not apply because the team and product continue. Tailoring closure means identifying exactly what is ending and closing that, rather than running every step of a procedure designed for a different end state.",
+      "mindset": "Close what is ending, and carry forward what is not."
+    },
+    {
+      "id": "pmp-pr10-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "customer-satisfaction",
+        "closure-feedback",
+        "user-adoption"
+      ],
+      "stem": "A housing association's tenant portal was delivered through a hybrid project and has met every acceptance criterion. The closure survey of the association's housing officers, who use the portal daily, returned an average satisfaction score of 2.1 out of 5, with few written comments. The sponsor is pleased with the delivery and suggests noting the score in the final report and closing on schedule in two weeks. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Close on schedule as the sponsor suggests, recording the score in the final report and recommending that operations look into it after handover.",
+          "correct": false,
+          "rationale": "It hands over an unexplained warning sign to people who were not involved in building the portal. The project team is best placed to interpret it, and in two weeks it will be gone."
+        },
+        {
+          "id": "b",
+          "text": "Hold short follow-up conversations with a sample of housing officers to find out what lies behind the low score.",
+          "correct": true,
+          "rationale": "A score says something is wrong but not what. Until the cause is known nobody can tell whether it is a defect, a training gap or a process change, and each of those belongs to a different owner."
+        },
+        {
+          "id": "c",
+          "text": "Raise change requests for usability improvements to the screens housing officers use most, funded from the remaining contingency before closure.",
+          "correct": false,
+          "rationale": "It acts on the signal, which is to its credit, but on a guessed cause. Low scores at go-live often come from training or workload rather than screen design, and the contingency would be spent on the wrong fix."
+        },
+        {
+          "id": "d",
+          "text": "Rerun the survey with a larger sample and more specific questions, so the score in the final report is statistically reliable.",
+          "correct": false,
+          "rationale": "A more precise number still does not explain itself. A candidate choosing this mistakes measuring the dissatisfaction better for understanding it, and spends the remaining time doing so."
+        }
+      ],
+      "explanation": "When closure feedback contradicts the acceptance evidence, the gap is information to act on rather than a figure to record. The first step is to understand the cause, because the cause decides the route: a defect goes to the project, a training need to the business, a working-practice issue to operations. Closure is the last point at which the people who can explain the product are still together.",
+      "mindset": "An unexplained signal at closure is information you are about to lose; find out what it means while the people who can act are still here."
+    },
+    {
+      "id": "pmp-pr10-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "contract-closure",
+        "claims",
+        "seller-side"
+      ],
+      "stem": "You are the contractor's project manager on a flood defence scheme for a river authority. The works are complete and the client has sent its completion certificate for signature. It includes a clause confirming that the contractor 'has no further claims arising from the works'. Your firm has submitted a £86,000 claim for delays caused by late access to land, which the client has not yet assessed. The client's engineer says the clause is standard wording. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sign the certificate so completion is recorded on time, and send a covering letter stating that the £86,000 claim remains outstanding.",
+          "correct": false,
+          "rationale": "The covering letter shows good intent, but a signed clause will usually outweigh a separate letter. The candidate is settling the firm's commercial position alone and hoping the paperwork is read generously."
+        },
+        {
+          "id": "b",
+          "text": "Strike the clause out, initial the amendment and sign, so the completion date is protected and the claim stays open.",
+          "correct": false,
+          "rationale": "Amending a client's contract document by hand is a commercial act beyond most project managers' authority, and the client may treat the certificate as not signed at all."
+        },
+        {
+          "id": "c",
+          "text": "Pass the certificate to your firm's commercial manager before signing, so the claim's position is settled by the person who owns it.",
+          "correct": true,
+          "rationale": "The wording affects an £86,000 claim the project manager does not own. Completion can wait a few days for the commercial owner to agree wording with the client; a waived claim cannot be recovered."
+        },
+        {
+          "id": "d",
+          "text": "Ask the client's engineer to confirm by email that the clause will not be applied to the land-access claim, and then sign it.",
+          "correct": false,
+          "rationale": "An email from the engineer does not amend a certificate signed by the parties. The candidate is relying on an informal assurance from someone who may not have authority to give it."
+        }
+      ],
+      "explanation": "Closure documents are often where rights are given up — waivers, final-account statements, discharges — and signing them is a commercial act, not an administrative one. A project manager whose authority does not extend to settling claims should send any wording that affects them to whoever owns them before signing. A short delay to completion paperwork is recoverable; a right signed away is not.",
+      "mindset": "Read what a closure document gives away before treating it as a formality."
+    },
+    {
+      "id": "pmp-pr10-126",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "sponsor",
+        "sign-off",
+        "governance"
+      ],
+      "stem": "Your hybrid project has refitted 60 stores for a homeware retailer, with the in-store stock app built in sprints, and is ready to close. The sponsor who approved the business case left the company a month ago and has not been replaced. The closure procedure requires the sponsor to sign off acceptance and the transfer of benefits ownership. The retail operations director, who will run the refitted stores, offers to sign in the sponsor's place. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the operations director's signature, since she will own the stores and the benefits, and record the sponsor's departure in the closure report.",
+          "correct": false,
+          "rationale": "She is the natural receiver, which makes this attractive, but the receiver signing to accept her own handover removes the check the sponsor's sign-off provides. Nobody has given her the sponsor's authority."
+        },
+        {
+          "id": "b",
+          "text": "Sign the closure yourself as project manager under a documented exception, and pass benefits ownership to the operations director in the handover pack.",
+          "correct": false,
+          "rationale": "Recording the exception is honest, but the project manager would be accepting their own deliverables. The candidate is filling a gap in authority with the nearest available signature."
+        },
+        {
+          "id": "c",
+          "text": "Ask the investment board that appointed the sponsor to name who holds the sponsor's authority for closure, and seek sign-off from that person.",
+          "correct": true,
+          "rationale": "Authority to accept and close belongs to the sponsor role, and when the role is empty it sits with the body that filled it. The board can name an interim quickly, which keeps both authority and pace."
+        },
+        {
+          "id": "d",
+          "text": "Keep the project open until a permanent replacement sponsor is appointed, with the team on minimal staffing to answer queries in the meantime.",
+          "correct": false,
+          "rationale": "It respects the sponsor role but makes closure wait on a recruitment the project does not control. The cost runs on with no end date when an interim decision-maker could be named."
+        }
+      ],
+      "explanation": "Closure sign-off belongs to a role, not to whoever happens to be senior and willing. When that role falls vacant, its authority goes back to the body that created it — usually an investment board or steering group — and that body can name an interim holder. Two signatures are especially weak substitutes: the receiving owner's, because it removes the independent check on the handover, and the project manager's, because it means accepting one's own work.",
+      "mindset": "When the person with authority leaves, find where the authority went, not who is willing to sign."
+    },
+    {
+      "id": "pmp-pr10-127",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "client-property",
+        "confidentiality",
+        "contract-closure"
+      ],
+      "stem": "Your engineering firm has finished durability testing on prototype battery packs for a car manufacturer. The contract and its non-disclosure agreement require the client's prototypes and design files to be returned or destroyed, with written confirmation, at the end of the engagement. The test report has been accepted. Your lab manager wants to keep two packs and the design files for six months as reference for future bids. The team disperses next week. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep two packs and the files in the lab's secure store, logged as client property, and return them to the client after six months.",
+          "correct": false,
+          "rationale": "Logging and securing the items is careful, but the contract says when they go back and it is not in six months. A candidate choosing this treats good custody as permission to keep."
+        },
+        {
+          "id": "b",
+          "text": "Return the packs now and keep the design files in an access-restricted folder, since files take no space and carry no safety risk.",
+          "correct": false,
+          "rationale": "The physical items are handled correctly, but the agreement covers the files as well. Digital copies are often the more sensitive part of a client's property, not the less."
+        },
+        {
+          "id": "c",
+          "text": "Leave everything in the secure store and note in the closure report that the client's property must be returned once the lab has capacity.",
+          "correct": false,
+          "rationale": "It records the obligation without meeting it. Once the team disperses, nobody will own the task and nobody will know which items are complete."
+        },
+        {
+          "id": "d",
+          "text": "Arrange the return or certified destruction of all the client's packs and files this week, and send the client written confirmation.",
+          "correct": true,
+          "rationale": "This is a closure deliverable with a contractual deadline, and the people who know where every pack and file is will be gone next week. Doing it now means it gets done completely."
+        }
+      ],
+      "explanation": "Obligations about a client's property and information — return, destruction, confirmation — are closure deliverables in their own right, and the contract rather than usefulness decides what a supplier may keep. They are best done before the team disperses, because after that nobody knows where everything is or owns the task of finding it.",
+      "mindset": "What belongs to the client goes back before the team that knows where it is goes away."
+    },
+    {
+      "id": "pmp-pr10-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-use-own-authority",
+        "administrative-closure",
+        "delegation",
+        "cost-codes"
+      ],
+      "stem": "Your project installing rooftop solar panels at four distribution depots has been accepted by the client, the final supplier invoices are paid and the lessons-learned report is filed. The sponsor's delegation letter authorises you to approve administrative closure once those three conditions are met. The sponsor is on leave for three weeks. The PMO coordinator suggests waiting for her return 'to be safe', although the open cost code attracts a £1,400 weekly overhead charge. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Wait for the sponsor's return as the coordinator suggests, and ask finance to suspend the weekly overhead charge on the code in the meantime.",
+          "correct": false,
+          "rationale": "It limits the cost, but it hands finance a workaround for a decision you are already authorised to take. The candidate treats delegated authority as something to be confirmed before use."
+        },
+        {
+          "id": "b",
+          "text": "Email the sponsor on leave asking her to confirm by reply that you may close, and close the code as soon as she answers.",
+          "correct": false,
+          "rationale": "This asks for permission that has already been given in writing, and intrudes on her leave to do it. The candidate is seeking reassurance rather than authority."
+        },
+        {
+          "id": "c",
+          "text": "Approve the administrative closure now under the delegation, close the cost code and send the sponsor a note of what was done.",
+          "correct": true,
+          "rationale": "The sponsor set the conditions in advance precisely so closure would not depend on her availability. All three are met, so acting and reporting is using the delegation as intended."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor's deputy to sign the closure instead, so a senior person's approval is on file while the sponsor is away.",
+          "correct": false,
+          "rationale": "The deputy has not been given this decision and the project manager has. Adding a more senior signature dilutes a clear delegation instead of using it."
+        }
+      ],
+      "explanation": "A delegation that sets its conditions in advance exists so that the decision does not wait for the delegator. When the conditions are met, the person holding the delegation acts and reports. Deferring upwards for comfort costs money, adds load to people who chose not to carry it, and signals that the delegation is not trusted.",
+      "mindset": "Authority delegated to you is a responsibility to act, not a permission to wait."
+    },
+    {
+      "id": "pmp-pr10-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "acceptance",
+        "known-limitations",
+        "customer-decision"
+      ],
+      "stem": "An agile team has built a new booking engine for a hotel group. In final acceptance testing, the client found that group bookings of more than 40 rooms take up to 20 seconds to confirm, against a 5-second target. The client's product owner has decided to accept the product now with this recorded as a known limitation, because such bookings are rare and peak season starts soon. The team wants two more sprints to fix it first. What should the delivery lead do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the client to delay acceptance by two sprints so the team can meet the 5-second target, and offer the extra time at no cost to the client.",
+          "correct": false,
+          "rationale": "It comes from pride in the work, but it overrides a value judgement that belongs to the client. The client has weighed peak season against a rare case and decided; free sprints do not change that."
+        },
+        {
+          "id": "b",
+          "text": "Support the client's decision, record the limitation and its workaround in the acceptance record, and add the fix to the backlog being handed over.",
+          "correct": true,
+          "rationale": "The client owns the decision about what is good enough to accept. The delivery lead's job is to make the gap explicit, give it a workaround and hand the fix to whoever will own the product."
+        },
+        {
+          "id": "c",
+          "text": "Accept on the client's terms but keep the team on for two sprints to fix the issue before formal closure, so the product is handed over complete.",
+          "correct": false,
+          "rationale": "It looks like a compromise, but it keeps the project open against the client's decision and spends two sprints the client has not asked for."
+        },
+        {
+          "id": "d",
+          "text": "Raise a change request to relax the performance target to 20 seconds for large group bookings, so the product passes acceptance as written.",
+          "correct": false,
+          "rationale": "It produces a clean pass on paper by rewriting the criterion after the result is known. A recorded concession is the honest record: it shows a target was missed and accepted, rather than redefining success."
+        }
+      ],
+      "explanation": "Acceptance criteria belong to the customer, and so does the decision to accept a product that misses one of them. A customer can accept with a documented concession, and when they do, the team's job is to make the shortfall explicit, agree how users work around it and transfer the remaining fix to the product's next owner. Keeping a project open to meet a standard the customer has chosen to waive serves the team's view of quality rather than the customer's.",
+      "mindset": "The customer decides what is good enough to accept; the team makes sure the gap is written down."
+    },
+    {
+      "id": "pmp-pr10-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "contract-closure",
+        "statement-of-work",
+        "agile-contracts"
+      ],
+      "stem": "An external supplier's agile team has built a self-service portal for an energy retailer under a fixed-budget contract whose statement of work lists six epics. Over the year, the retailer's product owner swapped two of those epics for others, recording each decision in sprint review notes. The budget is spent and the product owner is satisfied. Procurement now asks you, as the retailer's project manager, to confirm that all statement-of-work deliverables are complete so the contract can be closed. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Confirm completion, since the product owner holds authority over the backlog and the substituted epics were worth as much to the retailer as the originals.",
+          "correct": false,
+          "rationale": "The product owner's authority over the backlog is real, which is why this appeals. But it is not authority to amend a contract, so confirming would put a false statement on the contract file."
+        },
+        {
+          "id": "b",
+          "text": "Report that two statement-of-work epics were not delivered and recommend that procurement withhold part of the final payment until they are.",
+          "correct": false,
+          "rationale": "It is accurate about the paperwork but treats a substitution the retailer itself asked for as a supplier failure. The candidate reads the contract literally and ignores how the retailer directed the work."
+        },
+        {
+          "id": "c",
+          "text": "Ask the supplier to deliver the two original epics at a reduced rate, so the statement of work can be confirmed as delivered exactly as written.",
+          "correct": false,
+          "rationale": "This buys work nobody wants in order to make the records match. Updating the record is cheaper and more honest than changing reality to fit it."
+        },
+        {
+          "id": "d",
+          "text": "Document the two substitutions and the product owner's approvals, and ask procurement to record them as a contract variation before closure.",
+          "correct": true,
+          "rationale": "The substitutions were legitimate product decisions but never reached the contract. Making them visible and formalised lets the contract be closed against what it says, with an accurate record of what was delivered."
+        }
+      ],
+      "explanation": "In agile engagements, scope often changes through backlog decisions that never reach the contract. At closure, what was delivered has to be reconciled against what the contract says, and any difference made visible and formalised by people with contractual authority. Confirming completion without that reconciliation misstates the record, and treating sanctioned changes as defaults misreads it.",
+      "mindset": "Close a contract against what it says, which means first making it say what actually happened."
+    },
+    {
+      "id": "pmp-pr10-131",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-act-now",
+        "contract-termination",
+        "procurement-closure",
+        "work-in-progress"
+      ],
+      "stem": "Your university's sports centre project has dropped its planned swimming pool after a funding review, so the board has terminated the specialist pool-design consultant's contract for convenience. The rest of the project continues. The termination clause pays for work performed up to the date of notice plus reasonable demobilisation costs, and gives the university ownership of all design work produced. The consultant is part-way through detailed design. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with the consultant a record of the design work completed at the date of notice, as the basis for valuing the final payment.",
+          "correct": true,
+          "rationale": "The clause pays for work performed to the notice date, so that is what has to be established and agreed. Doing it now, while the work is fresh and the consultant still engaged, avoids a later dispute over what existed."
+        },
+        {
+          "id": "b",
+          "text": "Obtain all the design files and calculations produced so far, including work in progress, under the contract's ownership clause.",
+          "correct": true,
+          "rationale": "The university is paying for this work and owns it. If the pool is revived it is the starting point, and once the consultant moves on, partial files are the first thing to go missing."
+        },
+        {
+          "id": "c",
+          "text": "Ask the consultant to finish the current detailed design stage first, so the university receives a complete and usable package for its fee.",
+          "correct": false,
+          "rationale": "A finished stage feels like better value, but the board has stopped the work. Instructing more of it after notice incurs costs the termination was meant to avoid and contradicts the board's decision."
+        },
+        {
+          "id": "d",
+          "text": "Withhold all payment until a replacement consultant has reviewed the work and confirmed its quality and its usefulness to the project.",
+          "correct": false,
+          "rationale": "Checking quality is reasonable, but a termination for convenience pays for work performed whether or not the client still wants it. Making payment depend on usefulness breaches the clause."
+        },
+        {
+          "id": "e",
+          "text": "Offer the consultant a negotiated lump sum based on the total fee, prorated by elapsed contract time, to avoid a detailed valuation.",
+          "correct": false,
+          "rationale": "It is quick, but elapsed time is not work performed. A design firm can be well ahead of or behind its programme, and the clause asks for the second measure, not the first."
+        }
+      ],
+      "explanation": "A contract ended early still has to be closed, and its termination clause sets the terms: what is payable, on what basis, and who owns what was produced. The two things that slip away fastest are an agreed record of the work done at the notice date and the work products themselves, so both are secured first. Neither the client's change of mind nor the deliverable's future usefulness alters what the clause entitles each party to.",
+      "mindset": "An early-terminated contract still needs a clean close, and the clause decides how."
+    },
+    {
+      "id": "pmp-pr10-132",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "decommissioning",
+        "legacy-systems",
+        "transition"
+      ],
+      "stem": "A logistics firm's new transport management system was accepted three months ago, and the hybrid project's scope includes switching off the old system once users have moved across. The old system still costs £9,000 a month because 35 of 400 planners keep using it, and nobody has asked them why. Closure is due in four weeks, and the old system's business owner has not set a switch-off date. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Find out from the 35 planners what the old system still gives them that the new one does not, and agree with the business owner how each gap will be met.",
+          "correct": true,
+          "rationale": "Continued use of the old system is a symptom. Until the reason is known, a switch-off risks breaking real planning work, and the gaps may be quick to close once they are named."
+        },
+        {
+          "id": "b",
+          "text": "Ask the business owner to set and announce a switch-off date once the gaps are known, and build that date into the closure plan.",
+          "correct": true,
+          "rationale": "Switching off a business system is the business owner's decision, and without a date nothing compels the remaining move. Tying the date to the closure plan keeps the scope item inside the project."
+        },
+        {
+          "id": "c",
+          "text": "Set the old system to read-only now so the remaining planners have to move across, and handle any complaints through the service desk.",
+          "correct": false,
+          "rationale": "It forces the move the plan requires, but without knowing what the 35 are relying on. If one of them runs a process the new system cannot support, the cost lands on live operations."
+        },
+        {
+          "id": "d",
+          "text": "Close the project on schedule and transfer the old system's decommissioning to IT operations as a business-as-usual task.",
+          "correct": false,
+          "rationale": "This hands over an unfinished scope item together with an unexplained adoption problem. Decommissioning was in the project's scope, and IT operations has no authority over planners' working practices."
+        },
+        {
+          "id": "e",
+          "text": "Arrange refresher training on the new system for the 35 planners, since continued use of an old system usually reflects low confidence.",
+          "correct": false,
+          "rationale": "Training is a sensible response if confidence is the cause, but nothing here shows that it is. The candidate is acting on the common cause rather than the actual one."
+        }
+      ],
+      "explanation": "Retiring the system being replaced is often part of a project's scope, and the business case usually depends on it. When some users keep using the old system, that is a sign of an unmet need, a missing report or a workaround, and it has to be understood before the old system is removed. The switch-off date itself belongs to the business owner, and making it a dated item in the closure plan stops it drifting into operations unfinished.",
+      "mindset": "When people keep using the old way, find out what it still does for them before taking it away."
+    },
+    {
+      "id": "pmp-pr10-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "handover",
+        "feature-usage",
+        "support-cost"
+      ],
+      "stem": "Over a year, an agile team has built 22 operational dashboards for a supermarket chain's supply-chain analysts. The team disbands in three weeks and a small business intelligence support team will take over. Usage logs show that six dashboards account for nearly all views and nine have not been opened in four months. Each dashboard handed over adds monitoring and data-refresh work for the support team. Which two actions should the delivery lead take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with the product owner which unused dashboards to retire, checking with the people who originally requested them, before preparing the handover.",
+          "correct": true,
+          "rationale": "Each dashboard handed over carries a support cost, and closure is the cheapest point to stop carrying the ones that are unused. Checking with the requesters catches dashboards used only at year end or for audits."
+        },
+        {
+          "id": "b",
+          "text": "Include the usage figures in the closure report, so the benefits owner can see which parts of the product are actually delivering value.",
+          "correct": true,
+          "rationale": "Usage is the clearest evidence of value the team has. Putting it in the closure report gives the benefits owner and future funders an accurate picture instead of a count of features delivered."
+        },
+        {
+          "id": "c",
+          "text": "Hand over all 22 dashboards, since each was accepted by the product owner and retiring them would throw away work the organisation has already paid for.",
+          "correct": false,
+          "rationale": "The money spent building the unused dashboards is gone whichever way the decision goes. Handing them over adds a running cost to protect a cost that cannot be recovered."
+        },
+        {
+          "id": "d",
+          "text": "Spend the final sprints improving the nine unused dashboards so that analysts are more likely to adopt them after the team has left.",
+          "correct": false,
+          "rationale": "It invests the last of the team's time in the least proven part of the product, with nobody left afterwards to see whether adoption follows."
+        },
+        {
+          "id": "e",
+          "text": "Hand over the six popular dashboards only and delete the other sixteen now, because the logs show that nobody is using them.",
+          "correct": false,
+          "rationale": "The direction is right but the decision is taken alone, and the logs cover only four months. Dashboards used quarterly or annually, and those between the two groups, would be lost without anyone being asked."
+        }
+      ],
+      "explanation": "A handover transfers running cost as well as value, and the receiving team pays for every feature it inherits. Closure is the natural point to retire what is not used, with the product owner's agreement and a check for infrequent use, and to report actual usage so that value is judged on evidence rather than on what was built. Money already spent is not a reason to keep spending.",
+      "mindset": "Hand over what earns its upkeep; retiring the rest is a delivery decision, not a loss."
+    },
+    {
+      "id": "pmp-pr10-134",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "acceptance",
+        "deemed-acceptance",
+        "contract-terms"
+      ],
+      "stem": "You manage three equipment-installation contracts for different clients. Each contract requires the client to accept or reject the works in writing, with reasons, within 15 working days of the acceptance tests, and treats the works as accepted if the client does neither in that time. Match each situation to the closure response that fits it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "A print works has signed acceptance and attached a list of four cosmetic items, such as a scratched guard panel, none of which affects operation."
+        },
+        {
+          "id": "s2",
+          "text": "A dairy has neither accepted nor rejected the works, and 17 working days have passed since it witnessed the acceptance tests."
+        },
+        {
+          "id": "s3",
+          "text": "A brewery has rejected the works in writing because its new filling line ran at 82% of the contracted throughput during the tests."
+        }
+      ],
+      "options": [
+        {
+          "id": "punch",
+          "text": "Record the acceptance and agree dated completion of the listed items, tracked through to closure",
+          "correct": true,
+          "match": "s1",
+          "rationale": "The client has accepted. Minor items listed with an acceptance do not reopen it; they are finished against agreed dates and tracked so the contract can close cleanly."
+        },
+        {
+          "id": "deemed",
+          "text": "Record deemed acceptance under the contract and notify the client of it in writing",
+          "correct": true,
+          "match": "s2",
+          "rationale": "The contract says what silence means, and the period has passed. Recording it and telling the client in writing makes the position clear without waiting indefinitely for a signature."
+        },
+        {
+          "id": "remedy",
+          "text": "Correct the shortfall and repeat the relevant tests before seeking acceptance again",
+          "correct": true,
+          "match": "s3",
+          "rationale": "A written rejection against a contracted performance figure is valid. The work has not met its criterion, so it is put right and retested rather than argued over."
+        },
+        {
+          "id": "rerun",
+          "text": "Treat the silence as rejection and arrange a full repeat of the acceptance tests",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. This reads the dairy's silence as a rejection, which is the opposite of what the contract says, and repeats testing nobody has challenged."
+        }
+      ],
+      "explanation": "Acceptance is a contractual event, and the contract defines how it happens: by signature, by deemed acceptance when the client neither accepts nor rejects in time, or not at all when a criterion is properly failed. Minor items attached to a signed acceptance are tracked to completion without reopening it, while a genuine failure against a contracted measure is remedied and retested. Reading each situation against the contract's mechanism keeps closure from depending on goodwill or impatience.",
+      "mindset": "Let the contract's acceptance terms, not the mood of the moment, decide when the work is accepted."
+    },
+    {
+      "id": "pmp-pr10-135",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "financial-closure",
+        "purchase-orders",
+        "budget-holder"
+      ],
+      "stem": "A concert hall's hybrid project, which replaced its stage lighting rig and built a new ticketing app in sprints, is closing. Your financial closure review finds three loose ends, all within your authority as budget holder. Match each one to the action that clears it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "A purchase order for lighting-technician training still has an uncommitted £8,000 balance, because the supplier's course turned out not to be needed."
+        },
+        {
+          "id": "s2",
+          "text": "Two developers released to another project last month have carried on booking their time to this project's cost code."
+        },
+        {
+          "id": "s3",
+          "text": "The rigging supplier issued a £3,100 credit note for a late delivery, and its final invoice for £22,400 has arrived but is not yet paid."
+        }
+      ],
+      "options": [
+        {
+          "id": "cancel",
+          "text": "Cancel the remaining commitment so the funds are released back to the budget",
+          "correct": true,
+          "match": "s1",
+          "rationale": "An open balance on an order nobody will use still reads as committed money. Cancelling it returns the funds and stops anyone raising an invoice against it later."
+        },
+        {
+          "id": "journal",
+          "text": "Have the bookings moved to the correct cost code and tell the other project's manager",
+          "correct": true,
+          "match": "s2",
+          "rationale": "The cost belongs to the project that used the time. Correcting it keeps both projects' actuals honest, and telling the other manager stops the error recurring."
+        },
+        {
+          "id": "offset",
+          "text": "Deduct the credit from the final invoice before approving it for payment",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The final invoice is the last chance to recover the credit without chasing a supplier the project no longer deals with. Once paid in full, the credit tends to be forgotten."
+        },
+        {
+          "id": "defer",
+          "text": "Leave the item open on the cost code and note it for the year-end audit to resolve",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Each loose end here can be cleared now by the budget holder. Leaving any of them for audit pushes the work onto people with less context and leaves the figures wrong until then."
+        }
+      ],
+      "explanation": "Financial closure means the project's books show only what the project actually committed and consumed. Uncommitted balances are released, costs booked to the wrong place are moved to where they belong, and money owed to the project is recovered before the final payment goes out. Where these sit within the budget holder's authority, they are cleared at closure rather than left for finance or audit to rebuild later from less information.",
+      "mindset": "Leave the books as you would want to inherit them: every commitment used, released or recovered."
+    },
+    {
+      "id": "pmp-pr10-136",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "access-management",
+        "team-release",
+        "security"
+      ],
+      "stem": "An online travel agency's search-platform team disbands on Friday and its service passes to a support team on Monday. Complete each sentence with the action that fits. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "Three contract developers finish on Friday and still hold administrator access to production. Their accounts should be"
+        },
+        {
+          "id": "c2",
+          "text": "The deployment pipeline uses a shared service-account password that every team member has seen. Before handover, that credential should be"
+        }
+      ],
+      "options": [
+        {
+          "id": "remove",
+          "text": "removed on their last working day, with the removal confirmed in the access log",
+          "correct": true,
+          "match": "c1",
+          "rationale": "Access is granted for a need, and the need ends on Friday. Removing it then, and confirming it, closes a door that otherwise stays open with nobody watching it."
+        },
+        {
+          "id": "rotate",
+          "text": "rotated, with the new value held only by the support team in the secrets vault",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A secret known to people who are leaving should be treated as exposed. Rotating it at handover gives the support team sole control of the pipeline they now own."
+        },
+        {
+          "id": "grace",
+          "text": "left active for 30 days so the support team can call on them if something goes wrong",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Knowledge can be kept available by agreement without leaving production access open. A grace period turns a convenience into an unmonitored risk."
+        }
+      ],
+      "explanation": "Access granted for a project should end when the project's need for it ends, and credentials known to people who are leaving should be treated as compromised. Both are closure tasks with a clear moment — the last working day and the handover — and missing that moment usually means nobody notices until an audit or an incident.",
+      "mindset": "Access should end when the need for it ends, not when someone remembers to remove it."
+    },
+    {
+      "id": "pmp-pr10-137",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "contract-closure",
+        "story-points",
+        "final-payment"
+      ],
+      "stem": "An agile supplier is paid €1,150 per accepted story point, up to a contract ceiling of €460,000. Before the final sprint, 371 points had been accepted and paid for. In the final sprint the team delivered 52 points, of which 41 were accepted and 11 rejected. The contract has now ended.",
+      "blanks": [
+        {
+          "id": "value",
+          "label": "Total value of all accepted story points at the contract rate, in €",
+          "numeric": true,
+          "expect": 473800,
+          "tol": 0,
+          "unit": "€",
+          "rationale": "Accepted points are 371 + 41 = 412. At €1,150 each, 412 × 1,150 = €473,800. The 11 rejected points earn nothing."
+        },
+        {
+          "id": "final",
+          "label": "Final payment due to the supplier, in €",
+          "numeric": true,
+          "expect": 33350,
+          "tol": 0,
+          "unit": "€",
+          "rationale": "Paid so far is 371 × 1,150 = €426,650. The ceiling caps total payment at €460,000, below the €473,800 earned, so the final payment is 460,000 − 426,650 = €33,350."
+        },
+        {
+          "id": "excess",
+          "label": "Value of accepted work that the ceiling leaves unpaid, in €",
+          "numeric": true,
+          "expect": 13800,
+          "tol": 0,
+          "unit": "€",
+          "rationale": "Accepted value above the ceiling is 473,800 − 460,000 = €13,800. Under the contract, this is work the supplier delivered at its own risk."
+        }
+      ],
+      "explanation": "Closing a unit-rate contract means applying every term that governs payment, not only the rate: only accepted units are payable, and a ceiling limits the total whatever is delivered. The final payment is the lower of the earned value and the ceiling, less what has already been paid. A ceiling moves the risk of over-delivery to the supplier, which is why both sides should track it sprint by sprint rather than discover it at closure.",
+      "mindset": "Close a contract by applying every term that limits payment, not only the rate."
+    },
+    {
+      "id": "pmp-pr10-138",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "closure-criteria",
+        "ownership-transfer",
+        "open-items"
+      ],
+      "stem": "A coastal path restoration project's closure board lists six items. The organisation's policy allows closure once every item is either complete or transferred to a named owner who has confirmed acceptance in writing. Select the item that prevents the project from closing.",
+      "graphic": {
+        "viewBox": "0 0 640 420",
+        "title": "Closure board listing six items with their status",
+        "caption": "Select an item. Use Tab or the arrow keys to move between items, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "r1",
+          "n": 1,
+          "label": "Client acceptance — signed by the national park's estates manager on 3 June",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 56,
+          "correct": false,
+          "rationale": "Acceptance is signed by the client's named authority, so this item is complete and does not hold up closure."
+        },
+        {
+          "id": "r2",
+          "n": 2,
+          "label": "Benefits tracking — visitor counts transferred to the park's visitor services lead, accepted in writing",
+          "x": 20,
+          "y": 85,
+          "w": 600,
+          "h": 56,
+          "correct": false,
+          "rationale": "Benefits are measured after closure by design. The item has a named owner who has accepted it in writing, which is exactly what the policy asks for."
+        },
+        {
+          "id": "r3",
+          "n": 3,
+          "label": "Two loose handrails — passed to the ranger team's maintenance list; acceptance confirmed in writing by the head ranger",
+          "x": 20,
+          "y": 150,
+          "w": 600,
+          "h": 56,
+          "correct": false,
+          "rationale": "Open defects are allowed under this policy as long as someone has accepted them. The head ranger has, so the handrails are a transferred item rather than a blocker."
+        },
+        {
+          "id": "r4",
+          "n": 4,
+          "label": "Lessons learned — captured and submitted; the PMO publishes them next quarter",
+          "x": 20,
+          "y": 215,
+          "w": 600,
+          "h": 56,
+          "correct": false,
+          "rationale": "The project's part is complete once the lessons are captured and submitted. Publishing them is the PMO's own process and does not keep the project open."
+        },
+        {
+          "id": "r5",
+          "n": 5,
+          "label": "Contractor warranty claims — passed to procurement; acceptance requested three weeks ago, no reply yet",
+          "x": 20,
+          "y": 280,
+          "w": 600,
+          "h": 56,
+          "correct": true,
+          "rationale": "This item has been sent to procurement but not accepted by it. Until a named owner confirms in writing, the warranty claims still belong to the project, so the project cannot close."
+        },
+        {
+          "id": "r6",
+          "n": 6,
+          "label": "Project team — all eight members released to their line managers",
+          "x": 20,
+          "y": 345,
+          "w": 600,
+          "h": 56,
+          "correct": false,
+          "rationale": "Release of the team is complete. It is a closure activity, not an outstanding condition."
+        }
+      ],
+      "explanation": "A project can close with work still outstanding, provided each open item has an owner who has agreed to take it. The test is acceptance by the receiver, not dispatch by the sender: an item sent but not accepted still belongs to the project. Items that are measured or published after closure by design, such as benefits and lessons, are not blockers once their owner has accepted them.",
+      "mindset": "An item is handed over when someone has accepted it, not when it has been sent."
+    },
+    {
+      "id": "pmp-pr10-139",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "operational-acceptance",
+        "handover",
+        "operability"
+      ],
+      "stem": "An agile team has built an eSIM activation service for a mobile network operator and is due to be reassigned in three weeks. The site reliability team that will run the service has declined to sign the handover, saying only that it is 'not operable yet'. The product owner says every story met the definition of done, and the sponsor wants the handover signed this week. What should the delivery lead do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Escalate to the sponsor to direct the site reliability team to accept the service, since every story met the agreed definition of done.",
+          "correct": false,
+          "rationale": "The definition of done is a real agreement, but it may never have included what operators need. Escalating a vague objection forces a decision before anyone knows whether the objection is right."
+        },
+        {
+          "id": "b",
+          "text": "Meet the site reliability lead to establish which specific operability criteria the service fails and what evidence would satisfy them.",
+          "correct": true,
+          "rationale": "'Not operable' could mean a missing runbook or no alerting at all. Turning it into a list is the step that tells everyone whether to fix, fund or push back, and three weeks leaves time to act on the answer."
+        },
+        {
+          "id": "c",
+          "text": "Plan two hardening sprints covering monitoring, alerting and runbooks, the usual operability gaps, and ask the sponsor to fund the extension.",
+          "correct": false,
+          "rationale": "These are the usual gaps, which makes this a reasonable guess. But it commits money and time to a cause nobody has confirmed, and may miss the actual concern."
+        },
+        {
+          "id": "d",
+          "text": "Hand the service over this week with the delivery team on call for a month, so the site reliability team has support while concerns come out.",
+          "correct": false,
+          "rationale": "It gives support, but it moves the service to a team that has refused it without finding out why. The concern surfaces as an incident instead of as a requirement."
+        }
+      ],
+      "explanation": "A receiving team's refusal to accept a handover is a request for information, not a verdict to override or obey. The first step is to turn the objection into specific criteria and evidence, which then shows whether the gap is real work, a misunderstanding or an unreasonable demand. When the gap turns out to be operational requirements missing from the definition of done, that is also a lesson for how future teams agree it.",
+      "mindset": "Turn a vague 'not ready' into a specific list before deciding whether to fix, fund or push back."
+    },
+    {
+      "id": "pmp-pr10-140",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-10",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "operational-handover",
+        "contracts",
+        "subscriptions"
+      ],
+      "stem": "Your hybrid project has installed 1,200 air-quality sensors across a city, with the public data dashboard built in sprints. The sensors' mobile data contracts were bought on the project's cost centre with you named as account holder, and they auto-renew for a year in seven weeks. The city's environmental health manager will run the network after closure next month and has a budget line for running costs. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Transfer the contracts' account ownership, billing and renewal to the environmental health manager, with her written acceptance, before closure.",
+          "correct": true,
+          "rationale": "She owns the service and has the budget. Moving the contracts into her name before the renewal means the obligation sits with the person who will run the network for its whole life."
+        },
+        {
+          "id": "b",
+          "text": "Let the contracts auto-renew on the project cost centre, and ask finance to recharge the environmental health budget each month afterwards.",
+          "correct": false,
+          "rationale": "The service keeps running and the cost ends up in the right budget, but a closed project stays the account holder for a year. The candidate is solving the money and leaving the ownership where it was."
+        },
+        {
+          "id": "c",
+          "text": "Give the environmental health manager the account login details and renewal date in the handover pack, so she can take over when she is ready.",
+          "correct": false,
+          "rationale": "Handing over information is not handing over the contract. The account, the renewal and the liability stay with the project until someone formally takes them on."
+        },
+        {
+          "id": "d",
+          "text": "Renew the contracts for a year from the project's remaining budget before closure, so the sensors keep working while ownership is arranged.",
+          "correct": false,
+          "rationale": "It protects continuity, but spends project funds on a year of operations and postpones the transfer it is meant to enable."
+        }
+      ],
+      "explanation": "Anything the project holds in its own name that the product needs in order to keep running — contracts, accounts, licences, permits, subscriptions — has to be formally transferred to the operational owner before closure. Passing on information about it is not a transfer, and a closed project cannot meet an obligation that is still in its name. Renewal dates set the real deadline.",
+      "mindset": "If the project's name is on it and the product still needs it, it has to change hands before closure."
+    }
+  ]
+}

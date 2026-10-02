@@ -1,0 +1,1705 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Business 6 — Continuous improvement",
+  "questions": [
+    {
+      "id": "pmp-b6-101",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "lessons-learned",
+        "root-cause",
+        "rework"
+      ],
+      "stem": "You are managing a three-phase window and door replacement across 40 blocks for a housing association. Phase 1 has finished with 18% of installations needing rework, against a 5% allowance. At the phase-end lessons session, the site supervisor proposes a mandatory 20-point installation checklist for every crew in phase 2, which starts in three weeks. The rework log records the block, crew, window type and defect for each case. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Adopt the supervisor's checklist for every crew in phase 2, since it covers the installation steps where the defects were found and can be ready well within the three weeks.",
+          "correct": false,
+          "rationale": "The candidate accepts a solution before the cause is known. If the rework is concentrated in a single crew or a faulty window type, a universal checklist adds effort to every crew while missing what actually went wrong."
+        },
+        {
+          "id": "b",
+          "text": "Raise the 18% rework rate formally with the installation subcontractor under the quality clauses of the contract, and ask for its corrective action plan before phase 2 begins.",
+          "correct": false,
+          "rationale": "This assumes the cause is workmanship owned by the subcontractor. The defects might come from a product or a design detail, in which case a contractual demand produces a plan that answers the wrong question and sours the relationship."
+        },
+        {
+          "id": "c",
+          "text": "Break the rework log down by crew, window type and defect category to find where the rework concentrates, then choose the phase 2 countermeasure to fit that pattern.",
+          "correct": true,
+          "rationale": "The log already holds the attributes needed to locate the problem, so analysing it costs days, not weeks. If rework clusters in one crew or one window type, the right countermeasure is targeted, and the data will say so before phase 2 starts."
+        },
+        {
+          "id": "d",
+          "text": "Record the rework rate and the checklist proposal in the lessons learned register, and agree with the supervisor to review the phase 2 rework rate after the first ten blocks.",
+          "correct": false,
+          "rationale": "Capturing the lesson is right, but it postpones diagnosis until the problem has had ten more blocks to recur. The data needed to diagnose it exist now, and waiting turns a lesson into a repeat."
+        }
+      ],
+      "explanation": "An improvement countermeasure is only as good as the diagnosis behind it. When defect records already carry attributes such as who, where and what, stratifying them is cheap and usually shows that problems cluster, which changes the fix from a blanket control to a targeted one. Choosing a countermeasure before the data are analysed spreads effort evenly across a problem that is not evenly spread.",
+      "mindset": "Let the pattern in the defect data choose the fix, not the first plausible proposal."
+    },
+    {
+      "id": "pmp-b6-102",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "retrospective",
+        "psychological-safety",
+        "facilitation"
+      ],
+      "stem": "You are the scrum master for a team building a savings app. The team missed its sprint goal, and the head of digital has asked to sit in on the retrospective so she can understand who dropped the ball. In the last retrospective she attended, the team said very little and agreed no improvements. She is generally supportive of the team. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let her attend, but open the session by reminding everyone that it is a blame-free discussion and ask her to listen rather than ask questions during it.",
+          "correct": false,
+          "rationale": "A ground rule announced at the start does not change who is in the room. The candidate assumes a statement of intent restores candour, when the last session has already shown that it does not."
+        },
+        {
+          "id": "b",
+          "text": "Run the retrospective with her present, then hold a second, team-only session the next day to capture the issues people did not want to raise in front of her.",
+          "correct": false,
+          "rationale": "Running two sessions concedes that the first one will not work, doubles the time spent, and signals to the team that the real conversation happens out of sight of management."
+        },
+        {
+          "id": "c",
+          "text": "Give her a written account of the missed goal, the tasks that slipped and who held them, so she has what she needs and does not feel a need to attend the session.",
+          "correct": false,
+          "rationale": "This keeps her out of the room by giving her exactly the individual attribution that makes retrospectives unsafe. The team will learn that what is said internally becomes a list of names."
+        },
+        {
+          "id": "d",
+          "text": "Explain that the retrospective works only if the team can speak openly, keep it to the team, and offer her a summary of the improvements they agree afterwards.",
+          "correct": true,
+          "rationale": "The retrospective exists for the team to inspect its own way of working, and the evidence from last time is that her presence stops that happening. She still gets what she legitimately needs: what will change."
+        }
+      ],
+      "explanation": "A retrospective is the team inspecting its own way of working, and what it produces depends on candour. Anything that turns it into a performance review, such as an audience with authority or a search for individual fault, reduces what people say and so what can be improved. Stakeholders are entitled to know what the team will change, and that is shared after the session; the session itself belongs to the team.",
+      "mindset": "Protect the conditions for candour, because improvement can only work on what people are willing to say."
+    },
+    {
+      "id": "pmp-b6-103",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "improvement-metrics",
+        "counter-metrics",
+        "pmo"
+      ],
+      "stem": "Your telecoms company's PMO set an improvement target for your hybrid programme: cut the average time to resolve defects raised in user acceptance testing by 30%. Within two months the average fell by 41%, and the PMO wants to feature it in the quarterly portfolio review. Looking closer, you find that many of the defects that would have taken longest are now being logged as change requests, which sit outside the measure. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let the PMO feature the result, adding a clear note that part of the improvement comes from a change in how some defects are classified, so the figure is not overstated.",
+          "correct": false,
+          "rationale": "A footnote does not change what a 41% headline tells the portfolio review. The candidate treats disclosure as correction, when decision-makers will act on the number rather than on the caveat beneath it."
+        },
+        {
+          "id": "b",
+          "text": "Tell the PMO the figure reflects reclassification rather than faster fixing, and propose reporting it alongside the number of defects reclassified and the defects that escape into live service.",
+          "correct": true,
+          "rationale": "It corrects the claim before it informs portfolio decisions and adds the balancing measures that would expose displacement in future. The target is kept, but it can no longer be met by moving work out of view."
+        },
+        {
+          "id": "c",
+          "text": "Instruct the test leads to stop logging defects as change requests and to apply the classification rules exactly as written, so that the measure reflects reality from the next period.",
+          "correct": false,
+          "rationale": "It treats the displacement as a discipline problem when the single target created the incentive for it. It also leaves the inflated figure standing in this quarter's review, which is the decision actually in front of you."
+        },
+        {
+          "id": "d",
+          "text": "Ask the PMO to replace the resolution-time target with a defect-density target for the next quarter, since the current measure has proven too easy for teams to influence.",
+          "correct": false,
+          "rationale": "Swapping one lone measure for another invites the same behaviour against the new one. The candidate also lets the current misleading result go to the review uncorrected while fixing only the future."
+        }
+      ],
+      "explanation": "When a measure becomes a target, work tends to move to wherever it is not counted, so an improvement figure has to be checked against what it is meant to represent before it is reported. The safeguard is pairing a target with balancing measures that would reveal displacement, and correcting a claim before it informs decisions rather than annotating it afterwards.",
+      "mindset": "Ask whether the work improved or only the number did, before anyone celebrates."
+    },
+    {
+      "id": "pmp-b6-104",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "root-cause-analysis",
+        "pareto",
+        "qualification"
+      ],
+      "stem": "You are managing installation of a new tablet-coating line at a pharmaceutical plant. Three successive operational qualification runs have failed, with eleven out-of-limit readings across several instruments. The validation lead believes technicians are making set-up errors and wants all eight retrained before the next run in ten days. The equipment vendor says its instruments are within tolerance. Which two actions should you take before deciding on a corrective action?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Arrange refresher training for all eight technicians now, so that the next run is not lost to set-up errors while any wider investigation continues.",
+          "correct": false,
+          "rationale": "It acts on the most confident theory before it has been tested. If the readings come from instruments or materials, the run is lost anyway and the training budget has been spent on the wrong cause."
+        },
+        {
+          "id": "b",
+          "text": "Compile the deviation records from all three runs and sort the eleven failures by cause category, to see whether one category accounts for most of them.",
+          "correct": true,
+          "rationale": "Eleven failures are enough to show a pattern. Grouping them shows whether the problem is concentrated in set-up, a type of instrument or a stage of the run, which is the evidence the competing theories lack."
+        },
+        {
+          "id": "c",
+          "text": "Ask the vendor to send a field engineer to recalibrate every instrument on the line before the next qualification run takes place.",
+          "correct": false,
+          "rationale": "This picks the other side of the argument and acts on it. It may be needed, but committing to it before the failures are analysed is the same error as retraining first, aimed at the vendor instead."
+        },
+        {
+          "id": "d",
+          "text": "Add a second technician's sign-off to each set-up step for the next run, so that any set-up error is caught before the run starts.",
+          "correct": false,
+          "rationale": "A control on set-up is a corrective action built on the unconfirmed set-up theory. It adds effort to every step and, if the cause lies elsewhere, gives false assurance going into the next run."
+        },
+        {
+          "id": "e",
+          "text": "Hold a structured cause-and-effect session with the technicians, the validation lead and the vendor's engineer, covering methods, materials, machines and environment.",
+          "correct": true,
+          "rationale": "Bringing everyone who holds a theory into one structured review tests the theories against each other and against the data, rather than letting the most senior or most certain voice decide the cause."
+        },
+        {
+          "id": "f",
+          "text": "Reschedule the next run to allow more time, and inform the steering committee that qualification is likely to slip by several weeks.",
+          "correct": false,
+          "rationale": "Reporting a slip may become necessary, but forecasting several weeks before the cause is known is guesswork. The candidate manages the schedule consequence instead of the problem producing it."
+        }
+      ],
+      "explanation": "Recurring failures with competing explanations are a signal to analyse before correcting. Grouping the recorded failures shows where they concentrate, and a structured cause-and-effect review with everyone who holds a theory tests those theories against the evidence. Corrective actions chosen before that step tend to treat the cause someone expected rather than the one actually present.",
+      "mindset": "Test competing explanations against the evidence before spending money on any one of them."
+    },
+    {
+      "id": "pmp-b6-105",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "improvement-techniques",
+        "value-stream-mapping",
+        "post-incident-review"
+      ],
+      "stem": "An online retailer's delivery team has three improvement needs from its latest retrospective. Match each need to the technique that fits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The team suspects most of a feature's eleven-day lead time is spent waiting between handoffs rather than being worked on."
+        },
+        {
+          "id": "s2",
+          "text": "Some developers think pairing on every story would cut defects, but others doubt it is worth the lost throughput."
+        },
+        {
+          "id": "s3",
+          "text": "A checkout outage on Saturday cost three hours of sales, and the team wants to learn from it without anyone becoming defensive."
+        }
+      ],
+      "options": [
+        {
+          "id": "vsm",
+          "text": "Value stream mapping",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Mapping each step with its working time and waiting time shows exactly where the eleven days go, which is the question the team is asking about its lead time."
+        },
+        {
+          "id": "exp",
+          "text": "A time-boxed experiment with a stated hypothesis and measures",
+          "correct": true,
+          "match": "s2",
+          "rationale": "A disputed idea is settled by trying it for a fixed period against agreed measures of defects and throughput, so the team decides on evidence rather than on who argues more strongly."
+        },
+        {
+          "id": "pir",
+          "text": "A blameless post-incident review",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Examining the sequence of events and the conditions that allowed them, without assigning fault, is what lets people describe what really happened during an outage."
+        },
+        {
+          "id": "bench",
+          "text": "Benchmarking against a competitor's published delivery figures",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Benchmarking compares outcomes with another organisation and can set an ambition, but it does not show where time goes in the team's own process or why a specific failure happened."
+        }
+      ],
+      "explanation": "Improvement techniques answer different questions: where time goes in a flow, whether a proposed change actually helps, and why a specific failure happened. Choosing the technique starts from the question being asked, because a method suited to one question produces confident but irrelevant answers to another.",
+      "mindset": "Name the question first, then pick the technique that answers it."
+    },
+    {
+      "id": "pmp-b6-106",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "organisational-process-assets",
+        "estimating",
+        "templates"
+      ],
+      "stem": "You manage signalling upgrades for a rail engineering consultancy. Comparing your last three projects, you find the company's standard estimating template understated testing effort by 35–45% each time, because it predates the current certification regime. The template is owned by the PMO's methods team, although every project manager has edit rights to the shared file. You are estimating a new €4 million project this week. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Update the shared template's testing factors yourself from the three projects' actuals, since you have edit rights, and email every project manager so they know the template has been corrected and why.",
+          "correct": false,
+          "rationale": "Edit access is not ownership. The candidate fixes a company standard without its owner, who may know of dependencies, other evidence or version controls, and leaves the methods team responsible for a template it did not change."
+        },
+        {
+          "id": "b",
+          "text": "Use the template unchanged for this estimate so that it stays comparable with the company's other estimates, and add the testing shortfall to the lessons learned register at project closure.",
+          "correct": false,
+          "rationale": "Comparability is not worth a known 35–45% error in one cost element. It also holds the lesson back until closure, so every estimate produced in the meantime inherits the same fault."
+        },
+        {
+          "id": "c",
+          "text": "Adjust your own testing estimate using the three projects' actuals, and brief the other project managers at the next community-of-practice meeting so that they can make the same adjustment.",
+          "correct": false,
+          "rationale": "It spreads a workaround instead of fixing the asset. Anyone not at the meeting, and every new starter, still uses a template that is known to be wrong, and its owner never learns of the problem."
+        },
+        {
+          "id": "d",
+          "text": "Send the methods team your three projects' actuals with a proposed correction to the template, and meanwhile adjust your own testing estimate and record why in its basis of estimate.",
+          "correct": true,
+          "rationale": "The fault is in a shared asset, so the fix belongs to its owner, who now has evidence and a proposal. Your own estimate is protected from a known error in a documented way while the owner acts."
+        }
+      ],
+      "explanation": "A lesson that exposes a fault in a shared organisational asset is resolved by changing the asset, and that change belongs to whoever owns it. The project manager's part is to bring evidence and a proposal to the owner while protecting the current project from the known fault in a documented way. Fixing the asset unilaterally, or only working around it locally, leaves the organisation with either an uncontrolled standard or a known error still in place.",
+      "mindset": "Fix your own plan now, and get the shared asset fixed by the person who owns it."
+    },
+    {
+      "id": "pmp-b6-107",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "improvement-capacity",
+        "technical-debt",
+        "product-owner"
+      ],
+      "stem": "Your team on a travel-booking platform normally reserves about 20% of each sprint for improvement work such as test clean-up and tooling. A competitor has launched a feature that the product owner must match within three sprints, and she asks the team to drop the improvement allocation until then. Two developers point out that past pauses quietly became permanent. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold the 20% allocation through all three sprints, and explain to the product owner that cutting improvement work under deadline pressure is exactly how quality problems build up.",
+          "correct": false,
+          "rationale": "It treats improvement capacity as untouchable regardless of business need. The candidate protects a habit at the cost of a real, time-bound market deadline that the product owner is right to prioritise."
+        },
+        {
+          "id": "b",
+          "text": "Drop the improvement allocation for the three sprints as the product owner asks, and put a dedicated improvement sprint into the plan straight after the competitor feature ships.",
+          "correct": false,
+          "rationale": "It removes the improvements that would protect the release itself, and a catch-up sprint planned for later is exactly the kind of commitment the developers say has been dropped before."
+        },
+        {
+          "id": "c",
+          "text": "Agree a reduced improvement allocation for the three sprints, keeping only the items that directly protect the release, and record a date by which the full allocation returns.",
+          "correct": true,
+          "rationale": "It gives the product owner most of the capacity she needs, keeps the improvements that reduce risk to this very release, and answers the developers' concern with an explicit, dated return to the norm."
+        },
+        {
+          "id": "d",
+          "text": "Let the developers decide sprint by sprint how much improvement work to take on, since they understand the technical risk of each item better than the product owner does.",
+          "correct": false,
+          "rationale": "It turns a business trade-off into a technical one and takes it away from the product owner, who owns the balance between value and investment. It also leaves the outcome unplanned for three sprints."
+        }
+      ],
+      "explanation": "Capacity for improvement competes with delivery, and treating it as either untouchable or optional both fail. A deliberate, time-bound reduction that keeps the improvement items protecting the work under pressure, and states when normal capacity resumes, lets the business respond to a real deadline without the temporary cut becoming the new norm by default.",
+      "mindset": "Trade improvement capacity deliberately and for a stated period, not by quiet erosion."
+    },
+    {
+      "id": "pmp-b6-108",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "cost-of-quality",
+        "process-improvement",
+        "break-even"
+      ],
+      "stem": "An insurer's claims team handles 1,200 claims a month. Before an improvement, 15% of claims were returned for rework, each return costing 40 minutes. A new intake check adds 3 minutes to every claim, and the rework rate has since fallen to 6%. Work out the effect of the change.",
+      "blanks": [
+        {
+          "id": "before",
+          "label": "Rework time per month before the change, in hours",
+          "numeric": true,
+          "expect": 120,
+          "tol": 0,
+          "unit": "hours",
+          "rationale": "1,200 claims × 15% = 180 returns, × 40 minutes = 7,200 minutes, which is 120 hours of rework a month."
+        },
+        {
+          "id": "net",
+          "label": "Net time saved per month after the change, in hours (rework saved minus the added check time)",
+          "numeric": true,
+          "expect": 12,
+          "tol": 0.5,
+          "unit": "hours",
+          "rationale": "Rework now is 1,200 × 6% × 40 = 2,880 minutes, or 48 hours. The check costs 1,200 × 3 = 3,600 minutes, or 60 hours. The saving is 120 − 48 − 60 = 12 hours a month, far less than the fall in rework suggests."
+        },
+        {
+          "id": "breakeven",
+          "label": "Rework rate at which the intake check stops saving any time at all, in %",
+          "numeric": true,
+          "expect": 7.5,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "The check pays off only while total time stays below the original 7,200 minutes: 3,600 + 1,200 × r × 40 = 7,200 gives r = 3,600 ÷ 48,000 = 7.5%. If rework creeps back above 7.5%, the check costs more than it saves."
+        }
+      ],
+      "explanation": "An improvement that adds a step to every unit and removes rework from some of them pays only while the rework it prevents outweighs the effort it adds. Measuring the net effect, and knowing the break-even point, turns a falling defect rate into a judgement about whether the process actually got cheaper, and identifies the number to watch to keep it that way.",
+      "mindset": "Count what an improvement adds as well as what it removes."
+    },
+    {
+      "id": "pmp-b6-109",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "lessons-learned",
+        "applying-lessons",
+        "contract-type"
+      ],
+      "stem": "You are planning conservation surveys of six listed buildings for a city council. The lessons repository holds a lesson from a similar programme: survey contracts on time and materials overran by 60%, so use fixed price. That programme's report shows the overrun came from surveyors' hours never being tracked against any ceiling. Your scope is genuinely uncertain, because structural condition is unknown until fabric is opened up. The sponsor wants the lesson applied as written. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Explain to the sponsor that the lesson's cause was untracked effort, and propose time and materials with a not-to-exceed ceiling per building and weekly reporting of hours against it.",
+          "correct": true,
+          "rationale": "It carries forward what the earlier programme actually learned, that effort must be bounded and visible, in a form that suits genuinely uncertain scope, and it gives the sponsor the reasoning rather than simply overruling the lesson."
+        },
+        {
+          "id": "b",
+          "text": "Apply the lesson as written and tender the surveys at fixed price, accepting that bidders will build the structural uncertainty into their prices as contingency the council pays for.",
+          "correct": false,
+          "rationale": "It follows the lesson's prescription without its cause. The earlier overrun came from untracked effort, not from the contract type, and fixed price on truly uncertain scope buys inflated contingency or later claims."
+        },
+        {
+          "id": "c",
+          "text": "Tender a fixed price for the visible-condition survey of each building and treat any opening-up work as priced variations under the contract, so most of the scope gets cost certainty.",
+          "correct": false,
+          "rationale": "It still reads the lesson as being about contract type. The uncertain work, which is where the cost lies, moves into variations priced without competition, so the uncontrolled-cost problem reappears there."
+        },
+        {
+          "id": "d",
+          "text": "Use time and materials, since the uncertain scope makes fixed price unrealistic, and add a new lesson to the repository explaining why the earlier lesson did not fit these six listed buildings.",
+          "correct": false,
+          "rationale": "The contract choice suits the scope, but the candidate dismisses the lesson instead of using it. Time and materials without a ceiling or tracking recreates the exact conditions that caused the 60% overrun."
+        }
+      ],
+      "explanation": "A lesson is a cause plus a recommendation, and the recommendation was written for its original context. Applying a lesson well means carrying forward the cause it identified and checking whether its prescription fits the new situation. Where it does not, the lesson is honoured by controlling the same cause in a way that suits the new conditions, and by explaining that to whoever expects the original prescription.",
+      "mindset": "Apply a lesson's reason, not just its recipe."
+    },
+    {
+      "id": "pmp-b6-110",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "control-chart",
+        "improvement-measurement",
+        "statistical-signal"
+      ],
+      "stem": "A warehouse software team changed its code review process after week 8. The control chart plots escaped defects per week, with the centre line and control limits calculated from weeks 1–8. Each region marks a feature of weeks 9–20. Select the one that is statistical evidence that the process has genuinely changed.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Control chart of weekly escaped defects, weeks 1 to 20, with limits set from weeks 1 to 8",
+        "caption": "Select a region. Use Tab or the arrow keys to move between regions, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "w9",
+          "n": 1,
+          "label": "Week 9: lowest value so far, but inside the control limits",
+          "x": 284,
+          "y": 200,
+          "w": 28,
+          "h": 80,
+          "correct": false,
+          "rationale": "A single low point inside the limits is within the range the old process produced by chance. Reading it as success is the commonest error after a change: crediting the first good week."
+        },
+        {
+          "id": "w11",
+          "n": 2,
+          "label": "Weeks 10–11: a 30% fall from one week to the next, both points inside the limits",
+          "x": 312,
+          "y": 170,
+          "w": 56,
+          "h": 80,
+          "correct": false,
+          "rationale": "Comparing two neighbouring points measures week-to-week noise. A large percentage change between two values that are both inside the limits is not, on its own, a signal of anything."
+        },
+        {
+          "id": "run",
+          "n": 3,
+          "label": "Weeks 12–19: eight consecutive points below the centre line",
+          "x": 368,
+          "y": 210,
+          "w": 224,
+          "h": 80,
+          "correct": true,
+          "rationale": "A run of eight points on one side of the centre line is very unlikely under the old process's random variation, so it is a recognised signal that the process mean has shifted, here in the improving direction."
+        },
+        {
+          "id": "w20",
+          "n": 4,
+          "label": "Week 20: one point close to, but inside, the upper control limit",
+          "x": 592,
+          "y": 40,
+          "w": 28,
+          "h": 80,
+          "correct": false,
+          "rationale": "A point near but inside a limit is still common-cause variation. The candidate who picks it is reacting to how alarming the point looks rather than to whether it breaks a rule."
+        }
+      ],
+      "explanation": "Points that vary inside the control limits are common-cause noise, and comparing any one of them with its neighbour says nothing about whether a change worked. Evidence of a real shift comes from patterns that random variation rarely produces, such as a point beyond a limit or a long run on one side of the centre line. Reading improvement results this way stops a team claiming success, or abandoning a change, on the strength of one good or bad week.",
+      "mindset": "Judge an improvement by signals in the data, not by the latest point."
+    },
+    {
+      "id": "pmp-b6-111",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "sustaining-improvement",
+        "release-practice",
+        "incident-learning"
+      ],
+      "stem": "After a failed release corrupted appointment data at a hospital trust last quarter, your team added a step: verify that the database backup restores cleanly before any production deployment. It takes about 20 minutes. Today a hotfix for a misaligned label on the booking screen is due out at 17:00, and at 16:45 the release engineer suggests skipping the verification just this once, because the fix touches no database code. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Deploy at 17:00 without the verification, since the fix touches no database code, and note the exception in the release log so it can be discussed at the next retrospective.",
+          "correct": false,
+          "rationale": "The step exists precisely to remove judgement calls like this one at release time. Agreed safeguards erode one reasonable-sounding exception at a time, and logging the exception does not undo the exposure."
+        },
+        {
+          "id": "b",
+          "text": "Run the backup verification before deploying and accept that the hotfix goes out at around 17:20, letting the service desk know about the short delay.",
+          "correct": true,
+          "rationale": "The cost of keeping the safeguard is twenty minutes on a non-urgent cosmetic fix, against the risk the step was introduced to remove. Telling the service desk handles the only real consequence of the delay."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner whether a twenty-minute delay to the hotfix matters more to the hospital than the risk of skipping the backup verification step.",
+          "correct": false,
+          "rationale": "The release practice is the team's own agreed safeguard, and the cost of following it is small and known. The candidate escalates a decision the team can take in the fifteen minutes available, and invites the step to be traded away."
+        },
+        {
+          "id": "d",
+          "text": "Deploy at 17:00 and run the backup verification immediately afterwards, so that the check still happens today and the hotfix is not delayed at all.",
+          "correct": false,
+          "rationale": "Verifying a backup after deployment defeats its purpose. The point is to know you can restore before you change production, and finding a bad backup afterwards is finding it too late."
+        }
+      ],
+      "explanation": "An improvement adopted after an incident holds only if it is applied when it is inconvenient, because inconvenient moments are when the original failure tends to recur. When the cost of following an agreed safeguard is small and known, the response is to follow it now; any case for dropping or changing it belongs in the team's next review of its practices, not in a decision made against the clock.",
+      "mindset": "Keep an agreed improvement on the day it is inconvenient, and debate it afterwards."
+    },
+    {
+      "id": "pmp-b6-112",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "lessons-learned",
+        "sponsor",
+        "decision-latency"
+      ],
+      "stem": "You are managing the design of a water treatment works upgrade. At the end of the detailed design phase, the lessons session finds that the main cause of the phase's five-week slip was the sponsor taking seven weeks, against an agreed two, to approve the process design. Team members suggest leaving this out of the lessons register because the sponsor reads it. The next phase has four similar approval points. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record the lesson factually, with dates, the agreed turnaround and the impact, and discuss it with the sponsor before the register is circulated, including how the four coming approvals will be handled.",
+          "correct": true,
+          "rationale": "It keeps the lesson accurate and about the decision process rather than the person, and it gives the sponsor the first chance to act on it, where it matters most: the four approvals still ahead."
+        },
+        {
+          "id": "b",
+          "text": "Record a general lesson that design approvals took longer than planned, without naming the approver or the dates, so the point is captured for future projects without damaging the working relationship with the sponsor.",
+          "correct": false,
+          "rationale": "A lesson stripped of its specifics cannot be acted on. The candidate protects the relationship by removing exactly the information that would let the next four approvals go differently."
+        },
+        {
+          "id": "c",
+          "text": "Leave the lesson out of the register and protect the next phase instead by building three weeks of float around each of the four approval points in the schedule baseline.",
+          "correct": false,
+          "rationale": "It treats the symptom by absorbing up to twelve weeks of delay, hides the cause from the one person who could remove it, and leaves the organisation's record of the project inaccurate."
+        },
+        {
+          "id": "d",
+          "text": "Raise the approval delay at the next steering committee as the main lesson from the phase, with its dates and impact, so that the committee can ask the sponsor to commit to the agreed turnaround.",
+          "correct": false,
+          "rationale": "The content is right but the first audience is wrong. Presenting it to the committee before the sponsor has seen it turns a process lesson into a public criticism and makes the sponsor defensive rather than willing to change."
+        }
+      ],
+      "explanation": "Lessons are most valuable where they are least comfortable, and a lesson about a senior stakeholder's behaviour is still a lesson about the process. Recording it factually, as what was agreed, what happened and what it cost, keeps it about the decision process rather than the person, and taking it to that person first gives them the chance to act on it before anyone else reads it.",
+      "mindset": "Record uncomfortable lessons accurately and take them to the person concerned first."
+    },
+    {
+      "id": "pmp-b6-113",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "kanban",
+        "wip-limits",
+        "flow"
+      ],
+      "stem": "You coach a marketing content team that uses a Kanban board. Over two months, average lead time for a campaign asset has risen from six days to eleven. The work-in-progress limit on the In review column is three, but the column has held between five and eight items for most of that time, and nobody has mentioned it at the weekly replenishment meeting. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use the cumulative flow diagram to show the team where items have been accumulating and when the build-up began, alongside the lead-time trend for the same period.",
+          "correct": true,
+          "rationale": "The team's own flow data show the problem without anyone having to assert it, and they show when it started, which is often the quickest route to what changed."
+        },
+        {
+          "id": "b",
+          "text": "Ask the head of marketing to assign a second reviewer to the team, since review is clearly the stage at which work has been backing up for two months.",
+          "correct": false,
+          "rationale": "It jumps to a resourcing fix before the team has looked at why review is congested. The cause might be unclear review criteria or items arriving half-finished, which another reviewer would not solve."
+        },
+        {
+          "id": "c",
+          "text": "Lower the In review limit from three to two, so that the team is forced to finish reviews before it pulls new campaign assets into the work in progress.",
+          "correct": false,
+          "rationale": "Tightening a limit that is already being ignored changes nothing about why it is ignored. The candidate imposes a rule from outside instead of finding out what the team believes the current rule is for."
+        },
+        {
+          "id": "d",
+          "text": "Put the repeated breach of the review limit on the agenda for the next replenishment meeting as a question about the team's policy: what should happen when the limit is reached?",
+          "correct": true,
+          "rationale": "A limit breached without discussion means the policy is not working as a policy. Asking the team what should happen at the limit puts the improvement decision with the people who own the board."
+        },
+        {
+          "id": "e",
+          "text": "Send the campaign stakeholders a revised delivery forecast based on eleven-day lead times, so that their expectations match current performance while the cause is investigated.",
+          "correct": false,
+          "rationale": "Honest forecasting matters, but this adopts the degraded lead time as the new baseline before the team has tried to recover it. It manages the consequence rather than the cause."
+        },
+        {
+          "id": "f",
+          "text": "Remove the WIP limits for the time being, since the team is not following them and an unenforced limit gives stakeholders a misleading picture of the process.",
+          "correct": false,
+          "rationale": "It removes the very mechanism that is surfacing the problem. An ignored limit is useful feedback about the team's working agreement, and deleting it hides that feedback."
+        }
+      ],
+      "explanation": "In a pull system, a policy that is breached without discussion is feedback nobody is reading. The first improvement move is to make the pattern visible with the team's own flow data and to treat the breach as a question about the team's working agreement, so that the team decides what to change rather than receiving a fix chosen for it.",
+      "mindset": "When a limit is broken quietly, make it a conversation before making it a new rule."
+    },
+    {
+      "id": "pmp-b6-114",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "improvement-measurement",
+        "pilots",
+        "data-interpretation"
+      ],
+      "stem": "A retail bank's operations programme is reviewing results from three improvement pilots. Match each result to the check that should be made first, before the result is believed. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "The pilot was given to the branch with the worst error rate last quarter, and its error rate fell sharply in the first month."
+        },
+        {
+          "id": "p2",
+          "text": "After peer checking was introduced, the number of errors found in quality control rose by 40% in the first month."
+        },
+        {
+          "id": "p3",
+          "text": "Processing time per mortgage application fell by a quarter, while customer complaints about missing documents doubled."
+        }
+      ],
+      "options": [
+        {
+          "id": "ctrl",
+          "text": "Compare the branch with similar branches that did not get the change, over the same months",
+          "correct": true,
+          "match": "p1",
+          "rationale": "A branch chosen for its worst quarter is likely to look better next quarter whatever is done. Only a comparison group shows how much of the fall is the change and how much is a return to normal."
+        },
+        {
+          "id": "detect",
+          "text": "Check whether the errors now found are ones that previously reached customers undetected",
+          "correct": true,
+          "match": "p2",
+          "rationale": "A new check finds errors that were already there. If the extra errors are ones that used to escape, the rise means detection improved, which is the opposite of what the raw number suggests."
+        },
+        {
+          "id": "trace",
+          "text": "Trace where the work removed from processing has gone, and whether it now reappears later as rework",
+          "correct": true,
+          "match": "p3",
+          "rationale": "Faster processing alongside more complaints about missing documents suggests work was dropped rather than removed. The saving may simply have moved downstream, where it costs more."
+        },
+        {
+          "id": "longer",
+          "text": "Repeat the measurement with a larger sample over a longer period",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Each result has a specific alternative explanation built into how it was measured, and collecting more of the same data reproduces the same bias rather than exposing it."
+        }
+      ],
+      "explanation": "An improvement result is a comparison, and each kind of comparison has a typical way of misleading: starting from an extreme point, changing what gets detected, or moving cost somewhere unmeasured. Before believing a result, identify which of these the design of the pilot invites, and run the check that would expose it.",
+      "mindset": "Ask what else would produce this number before crediting the change."
+    },
+    {
+      "id": "pmp-b6-115",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "lessons-learned-register",
+        "organisational-process-assets"
+      ],
+      "stem": "Complete each sentence about handling lessons on a fourteen-month predictive project with the response that fits. Two choices are not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "In month two, onboarding the first supplier took three weeks longer than planned because security vetting started late. The lesson should be"
+        },
+        {
+          "id": "c2",
+          "text": "At project closure, the lessons learned register, with its causes and recommendations, should be"
+        }
+      ],
+      "options": [
+        {
+          "id": "now",
+          "text": "recorded in the lessons learned register now and applied to the four supplier onboardings still to come",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The lesson is most valuable inside the project that produced it, because four more onboardings can still benefit. Recording it when it happens also keeps the cause and dates accurate."
+        },
+        {
+          "id": "repo",
+          "text": "transferred to the organisation's lessons repository as an update to its process assets",
+          "correct": true,
+          "match": "c2",
+          "rationale": "At closure the register's value passes to the organisation. Adding it to the repository is what lets the next project start from these lessons instead of rediscovering them."
+        },
+        {
+          "id": "hold",
+          "text": "held for the closure workshop, so that all lessons are reviewed together with the full team",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Saving lessons for the end means the project repeats its own mistakes for a year and the details have faded by the time they are written down."
+        },
+        {
+          "id": "file",
+          "text": "kept in the project file only, since lessons are specific to the project that produced them",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Many lessons, such as late security vetting, apply well beyond one project, and filing them away locally denies them to the organisation."
+        }
+      ],
+      "explanation": "Lessons are captured when they occur and used while they can still change the outcome, which on a long project means within the project itself. At closure, the project's register becomes an input to the organisation, so that the next project starts from it rather than rediscovering it.",
+      "mindset": "Use a lesson while it can still help, then pass it on."
+    },
+    {
+      "id": "pmp-b6-116",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 5,
+      "tags": [
+        "archetype-trade-off",
+        "improvement-experiment",
+        "mob-programming",
+        "throughput"
+      ],
+      "stem": "Your team at an energy retailer ran a four-sprint experiment doing all its work by mob programming. Escaped defects fell by 60%, almost all of the reduction in the billing engine, but story throughput fell by 35%. Billing defects had been generating around 400 customer complaints a month; the rest of the team's work is mostly low-risk reporting screens. The team is split on whether to continue. What should you recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Adopt mob programming for all of the team's work, because a 60% fall in escaped defects is a larger and more lasting gain than the throughput the team gives up to achieve it.",
+          "correct": false,
+          "rationale": "It reads the headline figure without asking where the gain came from. Almost all of it was in billing, so mobbing the low-risk reporting screens pays the throughput cost for very little benefit."
+        },
+        {
+          "id": "b",
+          "text": "Keep mob programming for billing-engine changes where defects reach customers, return to the usual way of working for the reporting screens, and track both measures for four more sprints.",
+          "correct": true,
+          "rationale": "The data show the benefit concentrated in billing and the cost spread across everything. Applying the practice where it pays, and measuring whether the narrower use holds its benefit, follows the evidence."
+        },
+        {
+          "id": "c",
+          "text": "Return to the previous way of working, since a 35% fall in throughput across the team is too high a price for the product owner to absorb in the coming quarter.",
+          "correct": false,
+          "rationale": "It reads the cost figure in the same undifferentiated way and gives up a large reduction in customer complaints. The candidate treats the result as a single verdict rather than looking at where it fell."
+        },
+        {
+          "id": "d",
+          "text": "Extend the experiment unchanged for another four sprints, because four sprints are too few to separate the effect of mobbing from the team simply growing used to working that way.",
+          "correct": false,
+          "rationale": "More data is a defensible instinct, but the existing data already show where the benefit lies. Continuing unchanged pays another four sprints of throughput cost on work that is not gaining from it."
+        }
+      ],
+      "explanation": "An improvement experiment rarely ends in a simple adopt-or-abandon verdict, because its benefits and costs are seldom spread evenly across the work. Reading where the gain and the cost actually fell lets a practice be kept where it pays and dropped where it does not, and continued measurement tests whether the narrower application keeps its benefit.",
+      "mindset": "Apply a practice where its benefit outweighs its cost, not everywhere or nowhere."
+    },
+    {
+      "id": "pmp-b6-117",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "process-tailoring",
+        "reporting",
+        "waste"
+      ],
+      "stem": "You run a hybrid campus redevelopment programme for a university. Each week, four team leads spend about six hours between them compiling a status report you designed at mobilisation; most of its content repeats what is already on the programme's live delivery board. The PMO requires only a monthly dashboard, which this report does not feed. Two recipients have told you they read only its risks section. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the PMO to approve dropping the weekly report before you change anything, since any change to programme reporting could affect how the PMO and the sponsor see the programme's status.",
+          "correct": false,
+          "rationale": "The report is your own artefact and the PMO's requirement is the monthly dashboard, which is unaffected. Seeking approval for a change within your own authority delays a cheap improvement and teaches others to do the same."
+        },
+        {
+          "id": "b",
+          "text": "Raise the report's cost at the next retrospective and let the team leads decide together what should change, so that any change to their own workload has their support behind it.",
+          "correct": false,
+          "rationale": "The team leads bear the cost but are not the report's users. Deciding by their consensus misses what the recipients actually need and hands off a decision that is yours to make."
+        },
+        {
+          "id": "c",
+          "text": "Replace the weekly report with a link to the board and a short exceptions note covering risks, trial it for four weeks, and ask the recipients whether anything they need is missing.",
+          "correct": true,
+          "rationale": "The report is yours to change, the evidence shows it costs more than it returns, and the trial with its recipients tests the change cheaply and makes it easy to reverse if something needed was lost."
+        },
+        {
+          "id": "d",
+          "text": "Have one of the team leads automate the report so that it pulls its content from the board every week, while keeping the full format the recipients are already used to reading.",
+          "correct": false,
+          "rationale": "Automation cuts the compiling time but preserves a document most recipients do not read, and spends a team lead's effort building tooling for it. The candidate makes waste more efficient instead of removing it."
+        }
+      ],
+      "explanation": "Where a process sits within your own authority and the evidence shows it costs more than it returns, improving it is part of the job rather than something to seek permission for. The safeguard is not approval but a short trial with the people who use the output, which tests the change cheaply and is easily reversed if something needed was lost.",
+      "mindset": "Improve what you own without waiting to be told, and check the change with the people it serves."
+    },
+    {
+      "id": "pmp-b6-118",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "quality-control",
+        "inspection",
+        "cost-of-quality"
+      ],
+      "stem": "On an offshore wind farm construction project, you introduced full incoming inspection of every turbine component delivery after a supplier sent a damaged batch in phase 1. Over the 14 deliveries since, the inspection has found no defects and has delayed each delivery's release to the installation vessel by about nine days. The supplier has since introduced its own certified pre-shipment checks. The inspection is written into the baselined quality management plan. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Propose replacing full inspection with sampling of one delivery in five, through the project's change process, citing the 14 clean deliveries and the supplier's new pre-shipment checks.",
+          "correct": true,
+          "rationale": "It scales the control to the evidence while keeping some assurance, and it changes a baselined plan through the process that governs the baseline rather than around it."
+        },
+        {
+          "id": "b",
+          "text": "Keep the full inspection exactly as it is, since nine days per delivery is a modest price to pay for protection against another damaged batch reaching the installation vessel.",
+          "correct": false,
+          "rationale": "It treats a control as permanent once introduced. Fourteen clean deliveries and a new supplier check are evidence that the risk has changed, and nine days per delivery is not modest on a vessel-dependent schedule."
+        },
+        {
+          "id": "c",
+          "text": "Stop the full inspection with immediate effect, since the 14 clean deliveries show that it no longer adds value, and record the decision in the lessons learned register.",
+          "correct": false,
+          "rationale": "The judgement about value may be right, but the inspection is part of the baselined quality plan. The candidate changes the baseline unilaterally and removes all assurance at once instead of scaling it down."
+        },
+        {
+          "id": "d",
+          "text": "Commission an independent audit of the supplier's new pre-shipment checks, and keep the full inspection unchanged until the audit has reported on whether those checks can be relied on.",
+          "correct": false,
+          "rationale": "Checking the supplier's process is reasonable, but it ignores the evidence already in hand and keeps paying nine days per delivery while the audit runs, when a sampled inspection would protect against the same risk."
+        }
+      ],
+      "explanation": "Controls added in response to a problem are improvements with a cost, and they should be reviewed when the evidence about the problem changes. Scaling a control back on evidence is as much part of continuous improvement as adding one, but a control written into a baselined plan is changed through the same process that put it there.",
+      "mindset": "Let evidence retire a control as readily as it introduced one, through the proper channel."
+    },
+    {
+      "id": "pmp-b6-119",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "lessons-learned",
+        "early-termination",
+        "project-closure"
+      ],
+      "stem": "You are managing a €14 million replacement of the baggage-handling system at a regional airport. After two airlines moved their operations elsewhere, the board cancelled the project at 60% complete. The team of 22 is being released to other work from Friday. The sponsor tells you not to run a lessons learned session, because the project was stopped for commercial reasons and there is nothing useful to learn from a job that will not be finished. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Follow the sponsor's direction, and write up your own observations in the closure report so that the main delivery issues are at least captured somewhere for later projects.",
+          "correct": false,
+          "rationale": "The candidate accepts the premise that an unfinished project has nothing to teach and settles for one person's view. The team's knowledge of estimating, procurement and supplier performance leaves with them on Friday."
+        },
+        {
+          "id": "b",
+          "text": "Send the team a lessons questionnaire to complete once they are settled in their new roles over the next month, so that the session does not hold up their release.",
+          "correct": false,
+          "rationale": "The candidate protects the release date at the cost of the lessons. Response rates and recall both fall sharply once people are absorbed in new work, and a questionnaire loses the discussion that turns observations into causes."
+        },
+        {
+          "id": "c",
+          "text": "Escalate the sponsor's instruction to the PMO, on the basis that a lessons session is a standard closure step that the sponsor should not be able to waive on one project.",
+          "correct": false,
+          "rationale": "The candidate goes around the sponsor before making the case to them, and relies on a closure rule the stem does not establish. A conversation with the sponsor is quicker and keeps the relationship intact."
+        },
+        {
+          "id": "d",
+          "text": "Explain to the sponsor that the delivery to date still holds lessons for future projects, and hold a short lessons session with the team before they disperse on Friday.",
+          "correct": true,
+          "rationale": "The commercial reason for stopping does not cancel what the team learned about delivering 60% of the work. Keeping the session short and before Friday is what makes it possible while the knowledge is still in one room."
+        }
+      ],
+      "explanation": "Lessons come from how the work was done, not from whether the product was finished, so a cancelled or terminated project closes with a lessons review like any other, and it often holds the most candid evidence about estimating, procurement and decision-making. Timing matters more than format: the knowledge lives in the team, and it becomes much harder to collect once people have moved on to other work.",
+      "mindset": "How a project ends does not decide whether it has something to teach."
+    },
+    {
+      "id": "pmp-b6-120",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "archetype-use-own-authority",
+        "retrospective",
+        "team-tooling",
+        "self-management"
+      ],
+      "stem": "On day three of a ten-day sprint, your logistics-app team realises that its own test-data reset script, which every developer runs several times a day, now takes 40 minutes and is holding up work. One developer knows a fix that would take about two hours. Another suggests noting it for next week's retrospective, since that is where improvements are agreed. The script belongs to the team. As scrum master, what should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Encourage the team to decide now whether to make the two-hour fix this sprint, since the script is theirs to change and the delay is costing them every day.",
+          "correct": true,
+          "rationale": "The fix is cheap, the cost of waiting is daily, and the change sits entirely within the team's own authority. Nothing about it needs the retrospective's wider agreement, so the team can act as soon as it sees the problem."
+        },
+        {
+          "id": "b",
+          "text": "Add the script to the retrospective agenda, so that the whole team can weigh the fix against the other improvement ideas that come up over the rest of the sprint.",
+          "correct": false,
+          "rationale": "The candidate treats the retrospective as the only place improvement can happen. The team pays 40 minutes per run for another week to defer a two-hour fix it already has the authority to make."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to add the fix to the product backlog, so that it can be ordered against the features at the next sprint planning in a week's time.",
+          "correct": false,
+          "rationale": "The candidate routes the team's own internal tooling through product prioritisation, as if it were product scope. The product owner does not need to decide how the team runs its own scripts."
+        },
+        {
+          "id": "d",
+          "text": "Write the fix yourself during the sprint, so that the developers can stay focused on the sprint backlog without being drawn into work on their tooling.",
+          "correct": false,
+          "rationale": "The candidate takes over work that belongs to the team and the decision that goes with it. The scrum master's job is to help the team improve, not to do the improvement for them."
+        }
+      ],
+      "explanation": "Continuous improvement is not confined to the retrospective. The retrospective is a guaranteed checkpoint rather than a gate, and a team that spots a cheap fix to its own way of working can act on it as soon as it sees it. Waiting only makes sense when a change needs wider agreement, more evidence or someone else's authority.",
+      "mindset": "Improve as soon as you can, and keep the retrospective for what cannot be fixed on the spot."
+    },
+    {
+      "id": "pmp-b6-121",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "velocity",
+        "improvement-measurement",
+        "good-practice-sharing"
+      ],
+      "stem": "The head of engineering at an online insurer wants to spread good practice across her five Scrum teams. She has noticed that Team Atlas completes about 60 story points a sprint while the other four complete between 25 and 35. She asks you to have the other four teams adopt Atlas's practices, and to use velocity to track whether they catch up. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Arrange for Atlas to run a session for the other teams on how it works, and track each team's velocity for three sprints afterwards to see whether it rises.",
+          "correct": false,
+          "rationale": "The candidate accepts velocity as evidence that Atlas performs better. A rise afterwards could simply mean teams have started sizing stories larger, which tells nobody whether anything improved."
+        },
+        {
+          "id": "b",
+          "text": "Ask the four teams to recalibrate their story points against Atlas's reference stories, so that the velocity comparison is made on a fair and consistent basis.",
+          "correct": false,
+          "rationale": "The candidate tries to repair the comparison rather than question it. Normalising points across teams turns an estimate into a target, and teams under pressure to catch up will inflate their sizing."
+        },
+        {
+          "id": "c",
+          "text": "Explain that each team sizes its own story points so velocity cannot be compared, and suggest comparing measures such as lead time and escaped defects instead.",
+          "correct": true,
+          "rationale": "Points are a team-specific planning scale, so 60 for one team and 30 for another may describe the same output. Measures that mean the same thing in every team are needed before deciding whose practices are worth spreading."
+        },
+        {
+          "id": "d",
+          "text": "Have each of the four teams pick one Atlas practice to try for two sprints, using its own velocity trend as the measure of whether the practice helped.",
+          "correct": false,
+          "rationale": "The candidate improves the method of adoption but keeps the starting assumption that Atlas is the better team, which rests only on velocity. A team's own points trend is also easy to move without real change."
+        }
+      ],
+      "explanation": "Velocity is a team's internal planning measure: each team sizes its own points, so the number says nothing about one team's output relative to another's, and turning it into a cross-team target invites inflation. Before spreading a practice, establish that the team using it actually performs better on measures that mean the same thing everywhere, such as lead time, delivered outcomes or defect rates.",
+      "mindset": "Check that the evidence for 'better' means the same thing for everyone before copying what produced it."
+    },
+    {
+      "id": "pmp-b6-122",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "lessons-learned",
+        "knowledge-sharing",
+        "construction"
+      ],
+      "stem": "You are managing a housebuilder's 120-home development. Water tests on the first completed terrace showed leaks at a window-head detail taken from the company's standard detail library, and your team has worked out a corrected detail. Your project closes in eight months. Two other company sites are due to start installing windows with the same standard detail next month. What should you do about the lesson?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record it now in your lessons learned register with the corrected detail attached, so that it transfers to the company's lessons repository and reaches every site when your project closes.",
+          "correct": false,
+          "rationale": "The candidate applies the normal route for lessons without checking who needs this one and when. The other two sites install the faulty detail next month, seven months before the repository receives it."
+        },
+        {
+          "id": "b",
+          "text": "Present it with the corrected detail at the quarterly project managers' forum in ten weeks, where lessons with relevance across the company are reviewed and shared with every site.",
+          "correct": false,
+          "rationale": "The candidate chooses the right audience but the wrong timetable. By the time the forum meets, both sites will have been installing the leaking detail for several weeks."
+        },
+        {
+          "id": "c",
+          "text": "Ask the owner of the detail library to correct the standard detail, and let the change reach the other sites through the library's normal revision cycle.",
+          "correct": false,
+          "rationale": "Fixing the source is necessary, but the candidate assumes the revision will reach sites in time. Sites working from drawings already issued will not see a library revision before they start installing."
+        },
+        {
+          "id": "d",
+          "text": "Send the finding and the corrected detail now to the other two sites' project managers and to the owner of the detail library, so all three can act on it.",
+          "correct": true,
+          "rationale": "Two live projects are about to repeat the defect, so the lesson has to reach them directly and before they start. Copying the library owner starts the permanent fix at the same time."
+        }
+      ],
+      "explanation": "A lesson's value depends on who can still use it and when. Most lessons can wait for the register and the transfer at closure, but one that another live project is about to repeat has to reach that project directly and immediately, alongside the formal route that corrects the source. Ask who will meet the same conditions next, and get the lesson to them before they do.",
+      "mindset": "Send a lesson to whoever is about to need it, on their timetable rather than yours."
+    },
+    {
+      "id": "pmp-b6-123",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "sustaining-improvement",
+        "operational-handover",
+        "control-plan"
+      ],
+      "stem": "Your project redesigned the dispensing process in a hospital pharmacy, and dispensing errors have fallen from 1.2% to 0.5% over three months. The project closes in four weeks and the team will disband. A previous improvement project at the hospital achieved similar gains, but errors were back near their old level within six months of handover. The pharmacy manager says the new process is working well. What should you do before closure?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with the pharmacy manager who will own the process, which measures they will track, and what they will do if errors rise, then hand this over formally.",
+          "correct": true,
+          "rationale": "The earlier project's gains faded because nobody in operations was watching or knew what to do when the rate moved. A named owner, a few measures and an agreed response are what keep the improvement in place after the team has gone."
+        },
+        {
+          "id": "b",
+          "text": "Extend the project by three months to keep monitoring the error rate, so that the team is still in place to correct any slippage before the process is handed over.",
+          "correct": false,
+          "rationale": "The candidate keeps the project responsible for something operations has to own permanently. Three more months of monitoring delays the handover without changing what happens after the team finally leaves."
+        },
+        {
+          "id": "c",
+          "text": "Write the new process into a detailed standard operating procedure, train every dispensing technician on it, and file it in the pharmacy's document system.",
+          "correct": false,
+          "rationale": "The candidate relies on documentation and training, which the previous project very likely had too. A procedure describes the new way of working but does nothing to detect when practice starts to drift from it."
+        },
+        {
+          "id": "d",
+          "text": "Schedule a post-implementation review for six months after closure, so that the organisation can check whether the reduction in errors has been sustained.",
+          "correct": false,
+          "rationale": "The candidate arranges to find out about erosion after it has happened. Six months is exactly how long the last project's gains took to disappear, and nobody is responsible for acting in between."
+        }
+      ],
+      "explanation": "Improvements tend to drift back once the people who made them leave, because nobody is watching the measure and nobody has agreed what to do when it moves. Before an improvement project closes, sustaining the gain has to become part of operations, with an owner, a small set of measures and a reaction plan for when they deteriorate. Documentation and training support that, but they do not detect slippage.",
+      "mindset": "An improvement is finished when someone in operations owns keeping it, not when the numbers first look good."
+    },
+    {
+      "id": "pmp-b6-124",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-route-to-owner",
+        "lessons-learned",
+        "contractor-relationship",
+        "commercial-dispute"
+      ],
+      "stem": "You are closing a £38 million railway station refurbishment. Late design information caused delays on both sides, and the main contractor has submitted a £400,000 delay claim that your organisation disputes. You want a joint lessons session with the contractor on design information handover before both teams disperse next month. The contractor's project manager is willing, but his director fears that anything said could be used against them in the claim. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold the session with your own team only, and ask the contractor for a written submission of its lessons on design information to merge into your register.",
+          "correct": false,
+          "rationale": "The candidate avoids the dispute by giving up the joint discussion, which is where a two-sided handover problem gets understood. A party in a live claim will write a guarded submission that defends its position."
+        },
+        {
+          "id": "b",
+          "text": "Ask your commercial and legal team to agree terms with the contractor for holding the session without prejudice to the claim, then run it before the teams disperse.",
+          "correct": true,
+          "rationale": "The obstacle is legal exposure, which the people managing the claim own and can address with proper terms. Getting them to set the conditions keeps the learning and protects both sides, within the time the teams are still available."
+        },
+        {
+          "id": "c",
+          "text": "Postpone the joint session until the claim is settled, so that both sides can speak openly about design information without any risk to their commercial positions.",
+          "correct": false,
+          "rationale": "The candidate lets caution win outright. Claims of this size can take many months to settle, and by then both teams have dispersed and the detail of what happened has gone with them."
+        },
+        {
+          "id": "d",
+          "text": "Hold the joint session as planned, but limit the agenda to forward-looking recommendations and keep no record of who said what about past events.",
+          "correct": false,
+          "rationale": "The candidate decides on the organisation's claim exposure alone and offers ground rules with no legal standing. The director's concern is not resolved, so the contractor is likely to say little of value."
+        }
+      ],
+      "explanation": "When a lessons review touches a live commercial dispute, the obstacle is legal exposure, and the decision about how to manage it belongs to whoever owns the dispute, not to the project manager. The aim is to keep the learning without prejudicing either side: get the people with commercial authority to set the conditions, and hold the review while those who know what happened are still available.",
+      "mindset": "Clear a blocker through whoever owns it, so that learning is not traded away for caution."
+    },
+    {
+      "id": "pmp-b6-125",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-apply-the-rule",
+        "pareto-analysis",
+        "rework",
+        "improvement-prioritisation"
+      ],
+      "stem": "You are managing the refurbishment of a 300-room hotel. The chart shows snagging defects from the first four floors by category, with the count and the average cost to put each one right. The sponsor's improvement goal for the remaining floors is to reduce the cost of rework. Select the category the first improvement effort should target.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Bar chart of snagging defects on floors 1 to 4 by category, sorted by count, with average rectification cost per defect",
+        "caption": "Select a bar. Use Tab or the arrow keys to move between bars, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "paint",
+          "n": 1,
+          "label": "Paint finish: 140 defects, average €45 each",
+          "x": 30,
+          "y": 80,
+          "w": 100,
+          "h": 240,
+          "correct": false,
+          "rationale": "The most frequent category totals about €6,300. The candidate ranks by count, which is right only when every defect costs about the same, and here the unit costs differ more than fourteen-fold."
+        },
+        {
+          "id": "doors",
+          "n": 2,
+          "label": "Joinery doors: 60 defects, average €120 each",
+          "x": 150,
+          "y": 217,
+          "w": 100,
+          "h": 103,
+          "correct": false,
+          "rationale": "At about €7,200 this is the second-largest cost, and the candidate who picks it has started weighting by cost but stopped at the first category that looks larger than paint."
+        },
+        {
+          "id": "seal",
+          "n": 3,
+          "label": "Bathroom sealant: 35 defects, average €90 each",
+          "x": 270,
+          "y": 260,
+          "w": 100,
+          "h": 60,
+          "correct": false,
+          "rationale": "About €3,150 in total. It is neither the most frequent nor the most costly, so choosing it reflects a view of which defect seems most fixable rather than which matters most to the goal."
+        },
+        {
+          "id": "waste",
+          "n": 4,
+          "label": "Shower waste leaks: 22 defects, average €650 each",
+          "x": 390,
+          "y": 282,
+          "w": 100,
+          "h": 38,
+          "correct": true,
+          "rationale": "Twenty-two defects at €650 each come to about €14,300, roughly 45% of all rework cost on the four floors. A short bar on a count chart is the largest category once each bar is weighted by what it costs."
+        },
+        {
+          "id": "plates",
+          "n": 5,
+          "label": "Electrical faceplates: 18 defects, average €30 each",
+          "x": 510,
+          "y": 289,
+          "w": 100,
+          "h": 31,
+          "correct": false,
+          "rationale": "About €540 in total. The candidate reaches for a quick win that is cheap to fix but does almost nothing for the stated goal of reducing rework cost."
+        }
+      ],
+      "explanation": "A Pareto analysis ranks causes in whatever units the objective is measured in. Counting occurrences works when each occurrence costs roughly the same; when the cost per occurrence varies widely, weight each category by its total impact, frequency multiplied by unit cost, before choosing where to start. The tallest bar on a count chart is not necessarily the biggest problem.",
+      "mindset": "Rank problems in the units of the goal you are trying to move."
+    },
+    {
+      "id": "pmp-b6-126",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "rolled-throughput-yield",
+        "process-improvement",
+        "public-sector"
+      ],
+      "stem": "A council project is improving how householder planning applications are processed. Each application passes through three steps in sequence, and the share passing each step first time, without being returned, is: validation 80%, consultation 95%, assessment 90%. Work out the rolled throughput yield now, and then the yield if validation is raised to 95% with the other two steps unchanged.",
+      "blanks": [
+        {
+          "id": "now",
+          "label": "Rolled throughput yield now, as a percentage to one decimal place",
+          "numeric": true,
+          "expect": 68.4,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "Rolled throughput yield multiplies the first-pass yields: 0.80 × 0.95 × 0.90 = 0.684, so only 68.4% of applications get through all three steps without being returned."
+        },
+        {
+          "id": "after",
+          "label": "Rolled throughput yield with validation at 95%, as a percentage to one decimal place",
+          "numeric": true,
+          "expect": 81.2,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "0.95 × 0.95 × 0.90 = 0.81225, about 81.2%. Lifting the weakest step by 15 points raises the whole process's first-time yield by nearly 13 points."
+        },
+        {
+          "id": "compare",
+          "label": "If assessment were raised to 100% instead, with validation left at 80%, would the yield be higher or lower than in your second answer",
+          "accept": [
+            "lower",
+            "it would be lower",
+            "lower yield",
+            "lower than 81.2%"
+          ],
+          "rationale": "0.80 × 0.95 × 1.00 = 0.76, or 76%, which is lower than 81.2%. Even a perfect assessment step cannot make up for the losses at validation, the weakest step in the chain."
+        }
+      ],
+      "explanation": "Rolled throughput yield multiplies the first-pass yields of every step, so it shows the chance that an item gets through the whole process with no rework at all, which is usually far lower than any single step suggests. Because the yields multiply, the step with the lowest first-pass yield tends to cap the whole process, and improving it does more than polishing a step that already performs well.",
+      "mindset": "Look at the whole chain's yield before deciding which link to improve."
+    },
+    {
+      "id": "pmp-b6-127",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "improvement-experiment",
+        "hypothesis",
+        "team-practices"
+      ],
+      "stem": "A games studio's development team wants to try 'no-meeting Wednesdays' to give developers longer uninterrupted time, hoping to finish stories faster. The team lead is keen to start next week. You support the idea, but the team's last process change was argued about for months afterwards because nobody could say whether it had helped. Which two things should the team agree before starting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The measure the team expects to move, such as story cycle time, and the result that would count as success",
+          "correct": true,
+          "rationale": "Stating the expected effect in advance is what lets the team judge the change on evidence. Without it, any result can be read as success or failure after the event, which is exactly what happened last time."
+        },
+        {
+          "id": "b",
+          "text": "Approval from the head of studio, since the change alters when the team is available to the rest of the studio",
+          "correct": false,
+          "rationale": "The candidate assumes the team needs permission to arrange its own working week, which the stem does not suggest. Approval also does nothing to make the trial's result easier to judge."
+        },
+        {
+          "id": "c",
+          "text": "A fixed trial period, with a date on which the team reviews the results and decides whether to keep, adapt or drop it",
+          "correct": true,
+          "rationale": "A review date turns an open-ended change into a trial with an end. It forces the decision the team failed to make last time, while the evidence is fresh."
+        },
+        {
+          "id": "d",
+          "text": "A commitment that the change becomes a permanent team rule if most developers say they prefer it after the first month",
+          "correct": false,
+          "rationale": "The candidate substitutes a preference vote for the outcome the change was meant to deliver. Developers may enjoy quieter Wednesdays whether or not stories finish any faster."
+        },
+        {
+          "id": "e",
+          "text": "A survey of developers' satisfaction with their focus time, run at the end of the trial to show whether the change was worthwhile",
+          "correct": false,
+          "rationale": "The candidate measures only afterwards, with no baseline, and measures how people feel rather than the result the team hoped for. A survey cannot show whether stories finished faster."
+        }
+      ],
+      "explanation": "A process change is an experiment, and it has to be set up so that it can be judged: state what you expect to change and by how much, and fix when you will look and decide. Without both, a change either drifts on by default or is dropped on impressions, and the team learns nothing it can use next time.",
+      "mindset": "Decide how you will judge a change before you make it."
+    },
+    {
+      "id": "pmp-b6-128",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-diagnose-first",
+        "lean-waste",
+        "value-stream",
+        "public-sector"
+      ],
+      "stem": "A benefits agency's digital team is looking for waste in the way it delivers changes to its online claims service. Match each observation to the type of waste it represents. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Each change request needs a signed paper form as well as an identical entry in the tracking tool, and nobody refers to the paper copy afterwards."
+        },
+        {
+          "id": "s2",
+          "text": "Finished features pass all their tests but then sit for up to eight weeks waiting for the quarterly release before any claimant can use them."
+        },
+        {
+          "id": "s3",
+          "text": "An eligibility report built at stakeholders' request a year ago has not been opened by anyone since it went live."
+        }
+      ],
+      "options": [
+        {
+          "id": "extra-processing",
+          "text": "Extra processing",
+          "correct": true,
+          "match": "s1",
+          "rationale": "The paper form duplicates the tracking entry and is never used, so it is effort that adds nothing the customer or the team needs. The remedy is to remove the step, not to speed it up."
+        },
+        {
+          "id": "partially-done",
+          "text": "Partially done work",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Tested features that nobody can use are inventory: money spent with no value returned yet, and a growing risk that they no longer fit by the time they ship. Smaller, more frequent releases reduce it."
+        },
+        {
+          "id": "extra-features",
+          "text": "Extra features",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Building something nobody uses is the costliest waste of all, because it consumed design, build and test effort and still carries maintenance. Validating demand before building is the remedy."
+        },
+        {
+          "id": "defects",
+          "text": "Defects",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of the three observations involves work that has to be redone because it was wrong. The features in the second case pass their tests; their problem is that they wait."
+        }
+      ],
+      "explanation": "Naming the type of waste matters because each type has a different remedy: extra processing is removed by deleting steps nobody uses, partially done work by releasing smaller batches more often, and extra features by building only what users have shown they need. Classifying the waste first stops a team applying the remedy for one kind to another.",
+      "mindset": "Name the waste before choosing how to remove it."
+    },
+    {
+      "id": "pmp-b6-129",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "pdca",
+        "pilot",
+        "logistics"
+      ],
+      "stem": "A parcel courier's hybrid programme is using plan-do-check-act to improve how vans are loaded at its depots. Complete each sentence with the step that fits. Two choices are not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The team has designed a new loading sequence and predicted that it will cut loading time by 15%. The operations director wants it introduced at all six depots next week. The team should first"
+        },
+        {
+          "id": "c2",
+          "text": "The four-week trial at one depot has finished, and the depot manager reports that drivers like the new sequence. The team should next"
+        }
+      ],
+      "options": [
+        {
+          "id": "trial",
+          "text": "try the sequence at one depot for a set period, recording loading times as it runs",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A small-scale trial produces evidence at low cost and contains the damage if the prediction is wrong. Rolling out to six depots at once skips the step that tests whether the plan works."
+        },
+        {
+          "id": "check",
+          "text": "compare the recorded loading times with the predicted 15% before deciding what to do next",
+          "correct": true,
+          "match": "c2",
+          "rationale": "Drivers liking the sequence is welcome but is not the result the change was designed for. Comparing the data with the prediction is what tells the team whether to standardise, adjust or drop it."
+        },
+        {
+          "id": "standardise",
+          "text": "write the sequence into the loading procedures for every depot and train the staff on it",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Standardising is the act step, and it is only justified once the check has confirmed the change works. In either sentence it would skip a step."
+        },
+        {
+          "id": "replan",
+          "text": "go back and redesign the sequence, since one depot's results cannot be generalised",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Returning to planning is a response to a check that shows the change did not work, and neither sentence has reached that point. One depot is a legitimate trial scope."
+        }
+      ],
+      "explanation": "Plan-do-check-act guards against two opposite errors: rolling out a change before it has been tried on a small scale, and judging a trial by impressions instead of against the prediction made when it was planned. Each step has a job, the trial producing evidence and the check comparing it with the expectation, and skipping either turns an improvement cycle into a guess.",
+      "mindset": "Try small, then judge the trial against what you predicted."
+    },
+    {
+      "id": "pmp-b6-130",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "improvement-experiment",
+        "trial-evaluation",
+        "utilities"
+      ],
+      "stem": "On a hybrid data-migration programme for a water utility, you persuaded the workstream leads to replace monthly integration rehearsals with weekly ones for a six-week trial. Everyone agreed the weekly rehearsals would continue only if defects found in the formal integration test fell. Six weeks on, the defect count is unchanged and the rehearsals have cost each lead about ten hours a week. You still believe they will pay off with more time. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Extend the trial by four more weeks, explain to the leads that changes of this kind often take longer than six weeks to show in defect counts, and review the count again then.",
+          "correct": false,
+          "rationale": "The candidate moves the goalposts once the result is in, because the idea is their own. The leads agreed a rule, and changing it after the fact makes the next trial harder to agree."
+        },
+        {
+          "id": "b",
+          "text": "Keep the weekly rehearsals but cut each one to two hours, so that the leads spend less time, and check the defect count again at the next integration test.",
+          "correct": false,
+          "rationale": "The candidate redesigns the change without evidence that a shorter version would work, and continues it against the agreed rule. It reduces the cost of something that has not shown a benefit."
+        },
+        {
+          "id": "c",
+          "text": "End the weekly rehearsals as agreed, return to the monthly cycle, and record what the trial showed so that the idea can be revisited with a different design.",
+          "correct": true,
+          "rationale": "The agreed measure did not move, so the agreed consequence follows. Recording the result keeps what was learned, and honouring the rule on your own idea is what makes the leads willing to trial the next one."
+        },
+        {
+          "id": "d",
+          "text": "Look for another measure the rehearsals might have improved, such as rework hours, and present that to the leads as the basis for continuing the trial.",
+          "correct": false,
+          "rationale": "The candidate searches for a measure that supports the conclusion they already hold. With enough measures something will appear to improve by chance, which is why the measure was fixed in advance."
+        }
+      ],
+      "explanation": "A trial's continuation rule is agreed in advance precisely so that the result, rather than anyone's enthusiasm, decides what happens next. When the agreed measure does not move, the credible response is to stop as agreed and capture what was learned; changing the measure or the timescale afterwards spends the team's trust and makes every future trial easier to dismiss.",
+      "mindset": "Let the agreed result decide, especially when it is your own idea being tested."
+    },
+    {
+      "id": "pmp-b6-131",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "technical-debt",
+        "backlog-transparency",
+        "product-owner"
+      ],
+      "stem": "Your e-learning platform team has been quietly adding a day or two to most story estimates to cover refactoring and test clean-up, which the developers see as essential. The product owner does not know this. Last sprint, refactoring hidden inside a reporting story overran, the story slipped, and she was surprised and frustrated. The developers want to keep doing the improvement work. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Help the team put its improvement work on the backlog as visible items, so that the product owner can see it and agree its share of capacity with them.",
+          "correct": true,
+          "rationale": "Visible items let the product owner understand the work and make the trade-off with the team, and they replace surprise with a discussion. The developers keep the improvement work, now on agreed terms."
+        },
+        {
+          "id": "b",
+          "text": "Coach the developers to estimate the time they add for improvement work more accurately, so that it stops causing slips without the product owner having to be involved.",
+          "correct": false,
+          "rationale": "The candidate fixes the accuracy of the hidden work but keeps it hidden. The product owner still cannot see or weigh it, and the next overrun will surprise her in the same way."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to pause the refactoring until the reporting backlog is clear, then bring it back once delivery has been stable for a few sprints.",
+          "correct": false,
+          "rationale": "The candidate treats the improvement work as the cause of the slip, when the cause was that it was invisible. Pausing it lets the codebase decay and does nothing to rebuild trust."
+        },
+        {
+          "id": "d",
+          "text": "Agree with the product owner that the team reserves a fixed share of each sprint for technical work, and decides internally how that time is spent.",
+          "correct": false,
+          "rationale": "The candidate makes the time visible but keeps the content hidden. The product owner still could not have seen that refactoring inside the reporting story was large enough to put it at risk."
+        }
+      ],
+      "explanation": "Improvement work hidden inside other estimates cannot be planned, weighed or protected, and when it overruns it looks like a delivery failure. Making it explicit, as items the team and product owner can both see and discuss, keeps the work and turns a surprise into a trade-off the product owner can actually make.",
+      "mindset": "Improvement work earns its place by being seen, not by being smuggled in."
+    },
+    {
+      "id": "pmp-b6-132",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "improvement-adoption",
+        "timing",
+        "medical-devices"
+      ],
+      "stem": "Your medical device programme runs software in sprints and hardware through stage gates. Another programme has proven an automated requirements-traceability tool that cut design-review preparation from ten days to three. Adopting it means migrating your traceability records, which the vendor estimates will cause two weeks of disruption. Your design verification gate is in five weeks, and four more gates follow over the next eighteen months. The team is divided. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Start the migration now, so that the team has the new tool when it prepares for the verification gate and gains the time saving in five weeks' time.",
+          "correct": false,
+          "rationale": "The candidate chases the benefit at the nearest gate and puts two weeks of disruption into the five weeks before it. Any overrun in the migration lands directly on the gate."
+        },
+        {
+          "id": "b",
+          "text": "Plan the migration for immediately after the verification gate, so that the tool is in place for the four later gates without putting this one at risk.",
+          "correct": true,
+          "rationale": "The disruption is paid at a natural break, and most of the benefit, four of the five gates, still lies ahead. The nearest gate goes ahead on the method the team already knows."
+        },
+        {
+          "id": "c",
+          "text": "Stay with the current method until the programme ends, since changing tools midway through a regulated programme adds avoidable risk to every remaining gate.",
+          "correct": false,
+          "rationale": "The candidate weighs the one-off risk of change against nothing, and gives up a proven saving at four later gates over eighteen months. Avoiding all disruption is itself a costly choice."
+        },
+        {
+          "id": "d",
+          "text": "Run the new tool alongside the current records for the verification gate, then switch over fully once the team has seen both produce the same output.",
+          "correct": false,
+          "rationale": "Parallel running looks like a safe compromise, but the candidate takes on the full migration plus double maintenance in exactly the window the gate needs, which is more disruption rather than less."
+        }
+      ],
+      "explanation": "When an improvement has a one-off adoption cost and a recurring benefit, the question is when to pay the cost as well as whether to pay it. Pay it at a natural break where the disruption threatens least and enough of the benefit still lies ahead to justify it; adopting at the worst moment and never adopting both give value away.",
+      "mindset": "Time an improvement so its cost lands where it hurts least and its benefit where it counts most."
+    },
+    {
+      "id": "pmp-b6-133",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "supplier-performance",
+        "root-cause",
+        "manufacturing"
+      ],
+      "stem": "You manage packaging changeovers for a food manufacturer's product relaunch, with 20 more deliveries due from the film supplier over the next year. Seven of the first twelve film deliveries arrived late, each delaying a line changeover. The contract allows a late-delivery charge, and your procurement lead suggests applying it from the next delivery. Which two actions should you take first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Review the twelve deliveries with the supplier to find what the late ones had in common, using your order dates and its production records",
+          "correct": true,
+          "rationale": "Seven late deliveries out of twelve is a pattern, and the two sets of records together are what reveal its cause. A joint review also gives the supplier a reason to improve rather than defend itself."
+        },
+        {
+          "id": "b",
+          "text": "Check your own side of the process, such as how much notice your orders gave and how often quantities changed after ordering",
+          "correct": true,
+          "rationale": "Short notice and late changes to orders are common causes of late delivery. If the cause is on the buyer's side, no amount of pressure on the supplier will fix it."
+        },
+        {
+          "id": "c",
+          "text": "Apply the late-delivery charge from the next delivery, to give the supplier a clear financial reason to improve its performance",
+          "correct": false,
+          "rationale": "The candidate reaches for the contractual lever before knowing the cause. If your own ordering is part of the problem, the charge punishes the wrong party and damages the relationship needed to fix it."
+        },
+        {
+          "id": "d",
+          "text": "Add five days of buffer to each future delivery date in the schedule, so that a late delivery no longer delays a changeover",
+          "correct": false,
+          "rationale": "The candidate absorbs the problem instead of removing it. Buffers cost schedule and stock on every delivery and leave the cause of lateness exactly where it was."
+        },
+        {
+          "id": "e",
+          "text": "Start qualifying a second film supplier, so that future orders can be moved if the current supplier's performance does not improve",
+          "correct": false,
+          "rationale": "Qualifying a new food-contact packaging supplier is slow and expensive. The candidate commits to it before finding out whether the problem lies with the supplier at all."
+        }
+      ],
+      "explanation": "When a supplier's performance is poor across a run of deliveries, improvement starts with a joint look at the data, including the buyer's own part in it, since late orders and changed quantities are frequent causes of late delivery. Penalties, buffers and second sources each have a place, but chosen before the cause is known they either punish the wrong party or hide a problem that could have been removed.",
+      "mindset": "Find out why a partner is failing, including what you are doing to cause it, before deciding what to do about it."
+    },
+    {
+      "id": "pmp-b6-134",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "cross-team-retrospective",
+        "interfaces",
+        "energy"
+      ],
+      "stem": "On a smart-meter programme, three software squads hold fortnightly retrospectives, while the hardware workstream records lessons at its quarterly stage gates. Most of the programme's serious problems in the past six months arose where firmware releases met hardware test schedules, yet these issues rarely appear in either set of records. Each side assumes the other is dealing with them. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the hardware workstream to adopt fortnightly retrospectives, so that its improvement cycle matches the cadence of the software squads",
+          "correct": false,
+          "rationale": "The candidate aligns the cadences but leaves each side reviewing only its own work. Interface problems would still fall between two sets of retrospectives, just more frequent ones."
+        },
+        {
+          "id": "b",
+          "text": "Hold a regular cross-workstream retrospective with members of the squads and the hardware team, focused on the interface between them",
+          "correct": true,
+          "rationale": "Problems that arise between teams need a forum where both sides are present. Focusing it on the interface brings the issues each side has assumed the other owns into one discussion."
+        },
+        {
+          "id": "c",
+          "text": "Collect the squads' retrospective outputs at each stage gate, and add any interface items to the hardware lessons register for review",
+          "correct": false,
+          "rationale": "The candidate routes interface issues through one side's quarterly process. It is too slow for fortnightly releases and still leaves the software squads out of the review of their own interface problems."
+        },
+        {
+          "id": "d",
+          "text": "Keep a shared log of interface issues and improvement actions that both sides can see, with each action assigned to a named owner",
+          "correct": true,
+          "rationale": "The issues go unrecorded because each side assumes the other has them. A shared, visible log with owners removes that assumption and makes interface problems trackable."
+        },
+        {
+          "id": "e",
+          "text": "Raise the interface problems with the programme sponsor at the next steering meeting, and ask for a decision on which side should own them",
+          "correct": false,
+          "rationale": "The candidate escalates something within the programme manager's own authority to organise. Interface problems are shared by nature, so assigning them wholesale to one side misreads the cause."
+        }
+      ],
+      "explanation": "Improvement routines tend to follow team boundaries, so problems that arise between teams fall outside every team's retrospective and lessons register. In a hybrid environment the seams between delivery methods need their own improvement forum and a shared, visible record, so that issues nobody owns by default are given an owner and acted on.",
+      "mindset": "Look for improvement where teams meet, because that is where nobody is looking."
+    },
+    {
+      "id": "pmp-b6-135",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-6",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "cycle-time",
+        "flow-metrics",
+        "charity"
+      ],
+      "stem": "Your team on a charity's donations platform wants to reduce cycle time, which averages nine days per story, and proposes splitting stories smaller. On the cycle-time scatterplot for the last three months, you see that most stories finished in four to seven days, but eight stories took between 25 and 40 days, pulling the average up. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Support the team's proposal to split stories smaller, since smaller stories tend to reduce cycle time and the team is motivated to try it.",
+          "correct": false,
+          "rationale": "The candidate backs a general remedy that targets typical stories, which already finish in under a week. If the eight long stories were held up by something other than size, splitting changes little."
+        },
+        {
+          "id": "b",
+          "text": "Look at the eight long-running stories with the team to find out what they had in common, before agreeing on a change to make.",
+          "correct": true,
+          "rationale": "The high average is driven by a few outliers, and outliers usually share a specific cause such as an external dependency or a blocked environment. Finding it points the improvement at what is really pushing cycle time up."
+        },
+        {
+          "id": "c",
+          "text": "Report the median cycle time instead of the average, so that the measure reflects typical stories and is not distorted by a few exceptions.",
+          "correct": false,
+          "rationale": "The candidate changes the measure rather than the process. The median would look better immediately while the stories taking five weeks carry on exactly as before."
+        },
+        {
+          "id": "d",
+          "text": "Set a work-in-progress limit on the team's board, because cycle time across the board falls when fewer stories are started at the same time.",
+          "correct": false,
+          "rationale": "The candidate applies a sound flow practice without checking it fits the problem. A WIP limit helps when queues are the cause, which nothing yet shows about the eight outliers."
+        }
+      ],
+      "explanation": "When a few items take far longer than the rest, they are usually held up by something specific, such as an external dependency, an unclear requirement or a blocked environment, rather than by the way typical work flows. Examine the outliers before choosing a general remedy, because a change aimed at the typical item can leave the real cause of a high average untouched.",
+      "mindset": "Study the exceptions before changing the rule."
+    }
+  ]
+}

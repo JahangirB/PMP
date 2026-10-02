@@ -1,0 +1,1955 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Process 7 — Quality",
+  "questions": [
+    {
+      "id": "pmp-pr7-101",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "quality-planning",
+        "acceptance-criteria",
+        "requirements"
+      ],
+      "stem": "You are planning a £410,000 project to design and install wayfinding signage across a 600-bed hospital. The estates director says the acceptance criteria can be settled after installation, 'once we see how the signs look on the walls'. The contract makes final payment conditional on the signs being accepted. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Proceed with installation as the director suggests, and record in the plan that the acceptance criteria will be agreed at the final walk-round before payment.",
+          "correct": false,
+          "rationale": "Recording the gap does not close it. The candidate defers to the client's preference and leaves the team building to an unknown standard, so any disagreement surfaces when the work is finished and the payment is at stake."
+        },
+        {
+          "id": "b",
+          "text": "Adopt the signage manufacturer's published quality specification as the acceptance criteria, since the manufacturer knows what a well-made sign should look like.",
+          "correct": false,
+          "rationale": "A manufacturer's specification covers how a sign is made, not whether it guides patients through this hospital. The candidate substitutes a supplier's standard for the customer's requirement, which is the thing acceptance has to test."
+        },
+        {
+          "id": "c",
+          "text": "Agree measurable acceptance criteria with the estates director now, such as reading distance, colour contrast and mounting height, and how each will be checked.",
+          "correct": true,
+          "rationale": "Acceptance criteria are inputs to design and installation, not a verdict reached afterwards. Agreeing them now, with a method for checking each, gives the designers a target and gives both sides an objective basis for the payment decision."
+        },
+        {
+          "id": "d",
+          "text": "Log the open acceptance criteria as a risk with the estates director named as owner, and review the risk at each monthly progress meeting until installation.",
+          "correct": false,
+          "rationale": "This treats a planning task the project can complete today as an uncertainty to be watched. The candidate reaches for the risk register when the real fix is simply to define the requirement before the work starts."
+        }
+      ],
+      "explanation": "Quality requirements and the way they will be verified are set during planning, before the work that has to meet them. A standard defined after delivery is not a standard but an opinion, and it turns acceptance into a negotiation. Where a stakeholder finds it hard to state criteria in the abstract, the answer is to make them concrete with measurable attributes or a sample, not to postpone them.",
+      "mindset": "Decide how the work will be judged before the work is done."
+    },
+    {
+      "id": "pmp-pr7-102",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-diagnose-first",
+        "control-chart",
+        "special-cause",
+        "control-quality"
+      ],
+      "stem": "A bottling line installed for a drinks launch fills 500 ml bottles. The customer specification allows 495 to 505 ml, and the line's control chart has limits of 498.2 and 501.8 ml. This morning's sample averaged 502.6 ml. The shift supervisor points out that this is still well inside specification and wants to keep running with no further action. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the line team to find out what changed on the filler this morning before deciding whether any adjustment or hold is needed.",
+          "correct": true,
+          "rationale": "A point outside the control limits says the process has changed, whatever the specification says. Finding the cause first is what tells you whether to adjust, hold or simply carry on, and stops a drift that has not yet reached the specification limit from doing so."
+        },
+        {
+          "id": "b",
+          "text": "Have the operators turn the filler setting down by 0.8 ml so that the next sample returns to the centre line of the control chart.",
+          "correct": false,
+          "rationale": "Adjusting before the cause is known is tampering. The candidate treats the symptom as the cause, and if the shift came from something other than the setting, the adjustment adds a second source of variation to the first."
+        },
+        {
+          "id": "c",
+          "text": "Agree with the supervisor to keep running, because product that falls within the 495 to 505 ml specification meets the customer's requirement.",
+          "correct": false,
+          "rationale": "The candidate reads the control chart against the specification. Specification limits say whether this bottle is acceptable; control limits say whether the process is stable, and an unstable process is one that will not stay inside specification for long."
+        },
+        {
+          "id": "d",
+          "text": "Move the line to checking the weight of every bottle until several consecutive samples have fallen back inside the control limits.",
+          "correct": false,
+          "rationale": "Full inspection sorts the output but explains nothing about the process. The candidate adds appraisal cost in place of investigation, and the line could pass every bottle while the unknown cause keeps pushing the mean upwards."
+        }
+      ],
+      "explanation": "Control limits describe what a stable process produces; specification limits describe what the customer will accept. A point outside the control limits signals a special cause even when the product is still in specification, and the response is to look for that cause before acting. Adjusting without a cause is tampering, and adding inspection sorts the output without explaining it.",
+      "mindset": "Treat a signal from the process as a question to answer, not a number to correct."
+    },
+    {
+      "id": "pmp-pr7-103",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "grade-and-quality",
+        "precision-and-accuracy",
+        "quality-concepts"
+      ],
+      "stem": "Match each situation from a hotel and laboratory refurbishment project to the description that fits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The budget guest-house wing has basic fixtures and fittings, and every room passes snagging with no defects at handover."
+        },
+        {
+          "id": "s2",
+          "text": "A new laboratory balance gives repeat readings within 0.001 g of each other, but every reading is 0.05 g above the certified reference mass."
+        },
+        {
+          "id": "s3",
+          "text": "The executive suite has imported marble and app-controlled lighting, yet a third of its light fittings fail commissioning."
+        }
+      ],
+      "options": [
+        {
+          "id": "lghq",
+          "text": "Low grade, high quality",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Grade is the category of features chosen; quality is how well the delivered work meets its requirements. Basic fittings delivered with no defects is a deliberate low grade achieved at high quality, which is a perfectly good outcome."
+        },
+        {
+          "id": "pna",
+          "text": "Precise but not accurate",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Readings that agree closely with each other are precise; readings that sit away from the true value are inaccurate. A consistent offset like this one is usually a calibration problem, and it is invisible if only repeatability is checked."
+        },
+        {
+          "id": "hglq",
+          "text": "High grade, low quality",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Expensive specification says nothing about whether the work conforms. Premium fittings that fail commissioning are high grade delivered at low quality, which is the outcome that should worry a project manager most."
+        },
+        {
+          "id": "anp",
+          "text": "Accurate but not precise",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. This would describe readings scattered widely whose average sits close to the true value. The balance does the opposite: its readings are tightly grouped but consistently wrong."
+        }
+      ],
+      "explanation": "Grade and quality are independent: grade is a choice about features made by the customer and the budget, while quality is conformance to whatever grade was chosen. Low grade is a legitimate decision; low quality is a problem. In the same way, precision is about consistency and accuracy is about closeness to the truth, and a measurement system can have one without the other, so each needs checking separately.",
+      "mindset": "Ask what was chosen separately from how well it was delivered."
+    },
+    {
+      "id": "pmp-pr7-104",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "definition-of-done",
+        "accessibility",
+        "scope-negotiation"
+      ],
+      "stem": "Your team builds a clinic-booking app in two-week sprints, and its Definition of Done includes accessibility checks against the agreed standard. A trade show in nine days is the product owner's biggest sales opportunity this year. She asks the team to skip the accessibility checks this sprint so that all six planned stories can be shown. The team estimates that four of the stories can meet the full Definition of Done in time. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to the exception for this sprint only, and add a backlog item to complete the accessibility checks on all six stories early next sprint.",
+          "correct": false,
+          "rationale": "This feels controlled because the debt is recorded, but it accepts the premise that quality is the thing to trade. The candidate also overlooks that work shown publicly as finished will be expected to ship, accessibility gaps included."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to work two extra days before the trade show so that all six stories can meet the full Definition of Done in time.",
+          "correct": false,
+          "rationale": "Overtime appears to satisfy everyone, but it buys the date with the team's sustainability and often with hidden defects from tired work. The candidate reaches for capacity before asking whether all six stories are needed."
+        },
+        {
+          "id": "c",
+          "text": "Escalate the request to the sponsor, since relaxing the Definition of Done affects the whole product and is not the product owner's decision alone.",
+          "correct": false,
+          "rationale": "Escalation moves a decision the team and product owner can resolve together to someone further from the work. The candidate treats a scope conversation as a governance dispute, and loses days the team needs to finish."
+        },
+        {
+          "id": "d",
+          "text": "Keep the Definition of Done unchanged and help the product owner choose which four stories will make the strongest demonstration at the trade show.",
+          "correct": true,
+          "rationale": "The request assumes the date can only be met by lowering quality, but scope is the variable that can move. Four finished stories chosen for their sales value protect both the show and the integrity of what the team calls done."
+        }
+      ],
+      "explanation": "When a deadline and a quality standard collide, the first lever is scope, not the standard. A Definition of Done is only useful if it holds under pressure; once it bends for an important date, every later date will look important enough too. Negotiating which items are delivered keeps the date and the meaning of done intact, and puts the trade-off with the person who owns value.",
+      "mindset": "When time is fixed and quality is agreed, let scope be the thing that moves."
+    },
+    {
+      "id": "pmp-pr7-105",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "continuous-improvement",
+        "pdca",
+        "code-review"
+      ],
+      "stem": "A retail group's e-commerce programme has six delivery teams: four agile teams and two working to a phased plan on the warehouse integration. One team lead has drafted a 15-point code-review checklist that she believes will cut the defects reaching user acceptance testing. The programme director wants it mandated for all six teams from next month. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trial the checklist with one or two teams for a defined period before any decision is taken about using it more widely.",
+          "correct": true,
+          "rationale": "A promising improvement is still a hypothesis. A small trial shows whether it works, what it costs in review time and what needs adjusting, before six teams absorb the overhead."
+        },
+        {
+          "id": "b",
+          "text": "Agree how defects reaching user acceptance testing will be counted, and record the current rate before the checklist is used.",
+          "correct": true,
+          "rationale": "Without a baseline, nobody can tell afterwards whether the checklist made a difference. Defining the measure first is what turns the trial into evidence rather than an impression."
+        },
+        {
+          "id": "c",
+          "text": "Mandate the checklist for all six teams next month as the director asks, and review its effect at the programme's quarterly lessons-learned session.",
+          "correct": false,
+          "rationale": "This complies with the director and schedules a review, which looks responsible. The candidate skips the test step, so if defects fall or rise there will be no way to attribute the change to the checklist."
+        },
+        {
+          "id": "d",
+          "text": "Ask each of the six teams to adapt the checklist to their own codebase before adopting it, so that every team owns its version from the outset.",
+          "correct": false,
+          "rationale": "Ownership matters, but six variants introduced at once make the improvement impossible to evaluate. The candidate optimises for buy-in before knowing whether the underlying idea works."
+        },
+        {
+          "id": "e",
+          "text": "Commission a static-analysis tool to automate the checklist's points first, so that the reviews add no effort to any team's delivery work.",
+          "correct": false,
+          "rationale": "Automating a practice before testing it locks in an unproven design and spends money on it. The candidate solves the cost of the checklist before confirming it has any benefit."
+        }
+      ],
+      "explanation": "Process improvement follows a plan-do-check-act cycle: define the measure and the baseline, try the change on a small scale, check the result, and only then standardise. Skipping straight to rollout is the most common failure, because it makes the result unmeasurable and turns a hypothesis into policy. The size of the trial should match the cost of being wrong.",
+      "mindset": "Treat every improvement as an experiment until the data says otherwise."
+    },
+    {
+      "id": "pmp-pr7-106",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "sprint-review",
+        "acceptance-criteria",
+        "fitness-for-use"
+      ],
+      "stem": "At a sprint review for a council tenant-repairs portal, the housing manager rejects the 'report a repair' story. It passed every acceptance criterion agreed in refinement, but she says tenants will be confused because the photo upload comes before the description of the problem. The developers point out that the criteria said nothing about the order of the steps. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the story as done against its criteria, and ask the product owner to add the change to the step order to the backlog as new work.",
+          "correct": true,
+          "rationale": "The story conformed to what was agreed, and the review has revealed something nobody knew at refinement. Capturing that as new work respects both facts and lets the product owner weigh it against everything else."
+        },
+        {
+          "id": "b",
+          "text": "Reopen the story and have the developers reorder the steps within this sprint, since a feature the customer rejects has not delivered its value.",
+          "correct": false,
+          "rationale": "The candidate treats new feedback as a failure of the original work. Reopening a story that met its agreed criteria blurs what done means and pulls unplanned work into a sprint the team has already committed."
+        },
+        {
+          "id": "c",
+          "text": "Record the rejection as a defect against the story and fix it before the next release, so that the defect metrics reflect what the customer found.",
+          "correct": false,
+          "rationale": "A defect is a failure to meet an agreed requirement, and this was not one. The candidate pollutes the defect data with learning, which makes the team look worse and hides the real lesson about how criteria are written."
+        },
+        {
+          "id": "d",
+          "text": "Ask the housing manager to sign off the story as it stands, pointing out that the acceptance criteria she agreed in refinement were all met.",
+          "correct": false,
+          "rationale": "This is right that the story is done but wrong to stop there. The candidate wins the argument about conformance and loses the insight about tenants, which is exactly what a review exists to surface."
+        }
+      ],
+      "explanation": "Quality has two halves: conformance to agreed requirements and fitness for the user's real need. A sprint review often exposes a gap in the second that was never written into the first. That gap is learning, not failure, and belongs in the backlog where it can be prioritised, while the meaning of done stays tied to what was agreed.",
+      "mindset": "Welcome what the review teaches, and keep it separate from whether the work met its agreement."
+    },
+    {
+      "id": "pmp-pr7-107",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-route-to-owner",
+        "nonconformance",
+        "concession",
+        "modular-construction"
+      ],
+      "stem": "Your hybrid project delivers 60 factory-built classroom modules, with interior layouts refined with the school in fortnightly iterations. The client's specification limits floor deviation to 3 mm over 2 m. Factory inspection finds 14 completed modules at 4 mm; the cause, a warped casting bed, has been corrected for the remaining modules. The factory manager notes that building regulations allow 5 mm and asks you to accept the 14 modules. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the 14 modules, since they comply with building regulations, and record the deviation and its corrected cause in the project's quality log.",
+          "correct": false,
+          "rationale": "The candidate confuses the regulatory minimum with the customer's requirement. The client chose a tighter tolerance than the law requires, and only the client can decide that the looser one is acceptable for these modules."
+        },
+        {
+          "id": "b",
+          "text": "Put the deviation to the client as a concession request, with the inspection data, the corrected cause and the cost and time of rework.",
+          "correct": true,
+          "rationale": "A departure from the client's specification is the client's decision. Presenting the data, the fix and the cost of rework lets the owner of the requirement choose between rework, acceptance or acceptance on revised terms."
+        },
+        {
+          "id": "c",
+          "text": "Reject the 14 modules and instruct the factory to rework them to 3 mm, since the client's specification is the standard the contract sets.",
+          "correct": false,
+          "rationale": "Enforcing the specification is defensible, but it commits time and money to rework the client might not want. The candidate makes the trade-off on the client's behalf when the client may prefer a price reduction or acceptance."
+        },
+        {
+          "id": "d",
+          "text": "Ask the factory to investigate whether the 14 modules share any other defects before deciding what to do about the floor deviation itself.",
+          "correct": false,
+          "rationale": "Checking for related defects is reasonable, but the cause is already found and corrected. The candidate delays the decision that actually needs making, and the 14 modules sit in the factory while it waits."
+        }
+      ],
+      "explanation": "When delivered work does not meet the customer's specification, the decision to accept it belongs to whoever owns that specification, not to the supplier or the project manager. The project's job is to contain the cause, quantify the deviation and lay out the options. A regulatory or industry standard is a floor, and a customer who specified above it has made a choice only they can relax.",
+      "mindset": "A requirement can only be waived by the person who set it."
+    },
+    {
+      "id": "pmp-pr7-108",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "cost-of-poor-quality",
+        "rework",
+        "quality-metrics"
+      ],
+      "stem": "Halfway through a €3.2 million substation upgrade, the cost performance index is 0.98 and the steering group is satisfied. Reviewing timesheets, you find that crews book rework to the work package being redone, so 'cable installation' includes hours spent re-terminating joints that failed testing. You estimate rework at about 18 per cent of labour hours. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the 18 per cent estimate with the steering group at its next meeting and propose drawing down contingency to cover the expected rework to completion.",
+          "correct": false,
+          "rationale": "This surfaces the issue but frames rework as a cost to fund rather than waste to reduce. The candidate also takes an unmeasured estimate to governance as if it were a figure, before the project can show where the rework falls."
+        },
+        {
+          "id": "b",
+          "text": "Ask the cable contractor to add a second inspection of every joint before testing, so that fewer joints fail and need re-terminating later.",
+          "correct": false,
+          "rationale": "More inspection might catch failures earlier, but nobody yet knows why the joints are failing. The candidate adds appraisal cost on an assumption, when the first need is data showing where and why rework happens."
+        },
+        {
+          "id": "c",
+          "text": "Leave the reporting arrangement as it is, since the cost performance index already reflects the effect of rework on the project's overall cost.",
+          "correct": false,
+          "rationale": "The index does include the money, which is why this sounds reasonable. The candidate misses that a blended figure cannot show how much is waste, so the steering group cannot see the problem or judge whether fixing it is worth it."
+        },
+        {
+          "id": "d",
+          "text": "Set up a separate booking code so that rework hours and their causes are recorded and reported to the steering group alongside the cost index.",
+          "correct": true,
+          "rationale": "Rework booked to the original task disappears into a healthy-looking index. Recording it separately, with its cause, makes the cost of poor quality visible to the people who fund the project and gives any root-cause work data to start from."
+        }
+      ],
+      "explanation": "Cost of poor quality is easily hidden when rework is charged to the task being repaired, because aggregate performance indices still look acceptable. A quality problem that cannot be seen in the reporting cannot be prioritised, funded or improved. Separating the cost of failure from the cost of the work is usually the first step, because it turns an impression into a number people can act on.",
+      "mindset": "Make the cost of failure visible before arguing about how to reduce it."
+    },
+    {
+      "id": "pmp-pr7-109",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "inspection",
+        "sampling",
+        "medical-devices"
+      ],
+      "stem": "Complete each sentence from a medical-device project's quality management plan with the inspection approach that fits it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "An implantable pump housing, where a single undetected crack could injure a patient, will be checked by"
+        },
+        {
+          "id": "c2",
+          "text": "Burst testing destroys a pressure seal, so each production lot of 5,000 seals will be judged by"
+        },
+        {
+          "id": "c3",
+          "text": "A moulding press whose part dimensions drift slowly as its tool wears will be watched by"
+        }
+      ],
+      "options": [
+        {
+          "id": "all",
+          "text": "inspecting every unit individually before release",
+          "correct": true,
+          "match": "c1",
+          "rationale": "When one escaped defect could cause serious harm, the cost of checking everything is small next to the cost of a single miss. Sampling accepts some escapes by design, which this item cannot tolerate."
+        },
+        {
+          "id": "sample",
+          "text": "testing a statistically drawn sample from each lot",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A destructive test cannot be applied to every unit, or nothing would be left to ship. A properly drawn sample gives a known level of confidence about the lot at a known cost."
+        },
+        {
+          "id": "chart",
+          "text": "measuring parts at set intervals and plotting them on a control chart",
+          "correct": true,
+          "match": "c3",
+          "rationale": "Gradual drift is a change in the process over time, which is what a control chart is built to reveal. Plotting measurements in sequence catches the trend before parts leave tolerance."
+        },
+        {
+          "id": "cert",
+          "text": "relying on the supplier's certificate of conformance for each delivery",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A certificate transfers the inspection to the supplier rather than performing it. It may suit low-risk bought-in parts, but none of these three gives the project the evidence it needs."
+        }
+      ],
+      "explanation": "The inspection approach follows from the consequence of an escape and the nature of the test. Severe consequences justify checking everything; destructive or costly tests require sampling with known confidence; and problems that develop over time are caught by monitoring the process rather than judging finished batches. Choosing one approach for every item either wastes money or accepts risk the project has not chosen.",
+      "mindset": "Match how hard you look to what a miss would cost and to what the test does to the part."
+    },
+    {
+      "id": "pmp-pr7-110",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "test-automation",
+        "flaky-tests",
+        "continuous-integration"
+      ],
+      "stem": "Your team ships a payments API weekly. Its end-to-end suite of 400 tests takes 70 minutes and fails about one run in eight for reasons unrelated to the code, so developers have started re-running it until it passes. Last week a genuine failure was re-run away and reached production. The team has capacity for about one week of test work this quarter. What should the project manager support?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Spend the week adding build agents so the suite runs in parallel in under 20 minutes, removing much of the incentive to re-run it until it passes.",
+          "correct": false,
+          "rationale": "A faster suite is welcome, but it fails just as often. The candidate addresses the cost of each run rather than the trust problem, so a quicker re-run makes it even easier to wave a real failure through."
+        },
+        {
+          "id": "b",
+          "text": "Require a developer to investigate and record the cause of every failed run before a re-run is allowed, starting from the next merge to the main branch.",
+          "correct": false,
+          "rationale": "This restores discipline but spends the team's time investigating noise roughly once in every eight runs. The candidate applies a control to the people when the defect is in the test suite itself."
+        },
+        {
+          "id": "c",
+          "text": "Take the unreliable tests out of the gating run, and spend the week replacing the most valuable of them with faster tests at a lower level.",
+          "correct": true,
+          "rationale": "A gate that fails at random teaches people to ignore it, which is how the real failure got through. Accepting a temporary loss of coverage to get back a gate people trust, and rebuilding the most important checks reliably, is the better exchange."
+        },
+        {
+          "id": "d",
+          "text": "Spend the week diagnosing and fixing the flaky tests one at a time, keeping the full suite as the release gate while that work goes on.",
+          "correct": false,
+          "rationale": "This keeps full coverage on paper, which makes it attractive. But one week will not fix every flaky test, and in the meantime the re-run habit that let a defect through stays in place."
+        }
+      ],
+      "explanation": "A quality check is only as useful as the trust people place in it, and a check that fails for no reason trains people to override it. When a check has become noise, removing its unreliable parts can raise effective quality even though nominal coverage falls. The trade is judged on what actually stops defects, not on how much checking appears to happen.",
+      "mindset": "Prefer a smaller check people believe over a larger one they have learned to ignore."
+    },
+    {
+      "id": "pmp-pr7-111",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "containment",
+        "feature-flags",
+        "production-defect"
+      ],
+      "stem": "Your team maintains billing software for an energy retailer. Yesterday it released, behind a feature flag, a new way of calculating VAT; with the flag off, the previous and correct calculation is used. This morning a developer finds the new code charging 20 per cent instead of 5 per cent on some domestic bills. About 300 invoices are issued at 18:00 each day, and a tested fix will take two days. The team's working agreement lets any developer switch off a flag that is harming customers. The product owner is at an off-site until tomorrow. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Have the developer switch off the flag before the 18:00 run, then brief the product owner and start working out how the defect got through.",
+          "correct": true,
+          "rationale": "The flag is the fastest safe way to stop wrong invoices, and the team already has authority to use it. Containing the harm first buys time for the fix and the investigation without more customers being overcharged."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to drop its sprint work and build a hot fix today, so that the evening invoices are correct, and brief the product owner once it is deployed.",
+          "correct": false,
+          "rationale": "The candidate races to correct the defect when containment is available. A tested fix needs two days, so a rushed one either misses 18:00 or ships untested code into billing on top of the original fault."
+        },
+        {
+          "id": "c",
+          "text": "Call the product owner at the off-site and ask whether she wants the flag switched off, since the new VAT calculation is part of her release.",
+          "correct": false,
+          "rationale": "The candidate seeks permission that has already been delegated. Waiting on a call to someone at an off-site risks the 18:00 run, and the working agreement exists precisely so that this decision does not wait for her."
+        },
+        {
+          "id": "d",
+          "text": "Let the 18:00 run go ahead and arrange for the billing operations team to hold back the affected invoices until corrected versions can be produced.",
+          "correct": false,
+          "rationale": "Holding invoices is a form of containment, which makes it attractive. The candidate leaves the faulty calculation running and relies on another team to catch its output by hand every evening, when the source can be switched off."
+        }
+      ],
+      "explanation": "When a defect is actively harming customers, containment comes before correction and before root-cause analysis. Use the quickest safe mechanism already within the team's authority to stop the damage, then fix and investigate on a timescale that allows the work to be done properly. Rushed fixes and manual workarounds both leave the source running while looking like action.",
+      "mindset": "Stop the harm first; the fix and the explanation can follow."
+    },
+    {
+      "id": "pmp-pr7-112",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-trade-off",
+        "cost-of-quality",
+        "inspection",
+        "utilities"
+      ],
+      "stem": "Your project is replacing 40,000 water meters for a utility, and 9,000 are done. Installers self-certify, and an independent inspector checks a 5 per cent sample at about £22 a visit. Sampling has found 0.4 per cent faulty installations, each costing about £180 to put right later. Last week a meter fitted by an experienced installer leaked into a customer's kitchen and made the local news; its compression fitting had not been tightened, which a two-minute pressure test would have shown. The utility asks for every remaining installation to be independently inspected. What should the project manager recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to independent inspection of all 31,000 remaining installations, and raise a change request so the utility funds the extra cost of about £680,000.",
+          "correct": false,
+          "rationale": "This is responsive and properly funded, which makes it defensible. The candidate lets a vivid incident set the level of appraisal: at 0.4 per cent the remaining failures would cost roughly £22,000 to fix, and inspection after the fact still does nothing at the moment the fitting is tightened."
+        },
+        {
+          "id": "b",
+          "text": "Add a recorded pressure test by the installer to every installation, and keep the independent sample at 5 per cent to confirm the tests are being done.",
+          "correct": true,
+          "rationale": "This puts a cheap, reliable check at the exact point where the fault was created and aims it at the failure mode that occurred. The independent sample keeps the self-checks honest, so the utility's concern is met at a fraction of the cost of full inspection."
+        },
+        {
+          "id": "c",
+          "text": "Keep the 5 per cent sample, and show the utility figures proving that full inspection would cost many times more than the failures it could prevent.",
+          "correct": false,
+          "rationale": "The arithmetic is right, which is why this tempts. The candidate treats the cost of a failure as the £180 repair alone, ignoring flood damage and reputation, and leaves the failure mode that caused the incident with no new control at all."
+        },
+        {
+          "id": "d",
+          "text": "Raise independent sampling to 20 per cent for the next two months, to establish whether the rate of faulty installations has risen since the leak.",
+          "correct": false,
+          "rationale": "Gathering data before acting is often right. Here the cause of the incident is already known, so the candidate spends more on inspection to measure a rate while the same untightened fitting can recur on every installation that is not sampled."
+        }
+      ],
+      "explanation": "The cost of quality is lowest when the cheapest check that reliably catches a failure mode is placed where the failure is created. Independent inspection afterwards is usually the most expensive way to find what the worker could have caught in the moment. A serious incident deserves a response proportionate to its cause rather than its publicity, and when self-checks carry more weight, a smaller independent sample keeps them credible.",
+      "mindset": "Put the check where the fault is made, and size it to the cause rather than the headline."
+    },
+    {
+      "id": "pmp-pr7-113",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-make-visible",
+        "quality-metrics",
+        "supplier-incentives",
+        "defect-severity"
+      ],
+      "stem": "On your hybrid programme for a housing association, a supplier builds a tenant self-service portal in sprints while the association runs phased user acceptance testing. The contract pays the supplier a monthly bonus if no severity-1 defects are open at month end. Reviewing the defect log, you notice that for three months running several severity-1 defects were downgraded to severity 2 in the last two days of the month and upgraded again in the first week of the next. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the pattern with the supplier's delivery manager, restate the agreed severity definitions, and ask that severities are not changed near month end.",
+          "correct": false,
+          "rationale": "A direct conversation feels proportionate, but the candidate acts on a pattern before establishing what it means. Some changes may be legitimate, the contract owner stays unaware, and the supplier is put on notice before anyone holds the facts."
+        },
+        {
+          "id": "b",
+          "text": "Propose to procurement that the bonus is changed to reward the speed of fixing severity-1 defects, so that the incentive no longer rewards a downgrade.",
+          "correct": false,
+          "rationale": "Redesigning the incentive may well be the right end point. The candidate jumps to it before knowing how many downgrades were improper, which leaves the bonuses already paid unexamined and gives procurement no evidence to negotiate with."
+        },
+        {
+          "id": "c",
+          "text": "Recommend that the contract owner withholds the bonus for the three affected months and opens a formal dispute under the contract's quality clause.",
+          "correct": false,
+          "rationale": "This takes the contract seriously, but it imposes a sanction on suspicion. If even a few downgrades were justified the association is exposed, and a formal dispute is a heavy first step when the facts can be checked in days."
+        },
+        {
+          "id": "d",
+          "text": "Have your test lead re-triage every defect that changed severity near month end against the agreed definitions, and report the findings to the contract owner.",
+          "correct": true,
+          "rationale": "An independent re-triage turns a suspicious pattern into a verified figure, and taking it to the contract owner puts it with the person who decides what happens next. Any later sanction or contract change can then rest on evidence."
+        }
+      ],
+      "explanation": "Once a quality metric is tied to reward, the metric becomes a target and the data behind it can bend. The first task is to establish the true position independently and put it in front of whoever owns the relationship or contract. Sanctions and redesigned incentives may follow, but they should rest on verified figures rather than on a pattern that has not been tested.",
+      "mindset": "When a number earns someone money, check it independently before you trust it or act on it."
+    },
+    {
+      "id": "pmp-pr7-114",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "non-functional-requirements",
+        "performance-testing",
+        "acceptance-criteria"
+      ],
+      "stem": "Your team builds a ticket-booking web app for a concert promoter in two-week sprints. Every story has met its acceptance criteria and been accepted by the product owner. At a load rehearsal a month before the first big on-sale, pages took nine seconds to load with 5,000 simultaneous users; the promoter expects 40,000. No story, and nothing in the Definition of Done, mentions response times. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Work with the product owner to agree measurable response-time targets under load, and add them to the acceptance criteria or the Definition of Done.",
+          "correct": true,
+          "rationale": "Speed under load was always a requirement, but nobody wrote it down, so nobody built or tested to it. Turning it into a measurable target gives the team something to design against and the product owner something to accept against."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to add an automated load test to the build pipeline so that every change is checked against the agreed response-time targets.",
+          "correct": true,
+          "rationale": "A target that is only checked at rehearsals is rediscovered late. Running the check on every change shows exactly which change made things slower, while it is still cheap to put right."
+        },
+        {
+          "id": "c",
+          "text": "Plan a dedicated performance sprint before the on-sale, in which the team tunes the slowest pages and takes on no new stories until the rehearsal is passed.",
+          "correct": false,
+          "rationale": "A tuning sprint may be needed, which makes this attractive. The candidate treats performance as a one-off phase, so with no stated target and no ongoing check, response times will drift again as soon as feature work resumes."
+        },
+        {
+          "id": "d",
+          "text": "Ask the promoter's IT team to provision larger servers for the on-sale, since the stories themselves have all met the acceptance criteria that were agreed.",
+          "correct": false,
+          "rationale": "Extra capacity is a legitimate lever, but the candidate buys hardware without knowing the target or the bottleneck. Leaning on the accepted criteria also confuses conformance to an incomplete specification with fitness for the event."
+        },
+        {
+          "id": "e",
+          "text": "Ask the product owner to postpone the on-sale until the team has profiled the whole application and documented where every delay arises.",
+          "correct": false,
+          "rationale": "Diagnosis matters, but the candidate makes the promoter's commercial date hostage to a full investigation. A month is enough to set targets and fix the worst bottlenecks; the missing requirement, not the date, is the root problem."
+        }
+      ],
+      "explanation": "Non-functional qualities such as speed, capacity and security are requirements even when nobody writes them down, and an unstated requirement is never tested. Make each one explicit and measurable, then check it continuously so that a regression shows up with the change that caused it. Otherwise these qualities are rediscovered late, as emergencies, after every story has been accepted.",
+      "mindset": "If a quality matters, state it as a number and test it every time."
+    },
+    {
+      "id": "pmp-pr7-115",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "verification-and-validation",
+        "quality-audit",
+        "healthcare"
+      ],
+      "stem": "A hospital ward refurbishment is delivered in phases, while the nurse-call software for the ward is built in sprints. Match each activity on the project to the quality purpose it serves. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "A clerk of works measures the installed bedhead trunking against the drawings and the specification."
+        },
+        {
+          "id": "s2",
+          "text": "Night-shift nurses use a mock-up bay to find out whether they can reach a collapsed patient with the new bed layout."
+        },
+        {
+          "id": "s3",
+          "text": "An assessor from the trust's quality office checks whether the software team is following its own documented code-review procedure."
+        }
+      ],
+      "options": [
+        {
+          "id": "ver",
+          "text": "Verification: confirming the work conforms to its specification",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Measuring installed work against drawings and specification asks whether it was built as specified. That is verification, and it says nothing about whether the specification itself serves the nurses."
+        },
+        {
+          "id": "val",
+          "text": "Validation: confirming the product meets the users' real need",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Asking the people who will use the bay to try a real task tests fitness for use rather than conformance. A layout can match its drawings exactly and still fail this test."
+        },
+        {
+          "id": "aud",
+          "text": "Quality audit: confirming the project follows its agreed processes",
+          "correct": true,
+          "match": "s3",
+          "rationale": "The assessor is examining how the team works, not what it has produced. An audit checks that the agreed processes are being followed, which is a quality assurance activity rather than a product check."
+        },
+        {
+          "id": "bench",
+          "text": "Benchmarking: comparing practices with those of other organisations",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Benchmarking looks outward to other organisations for comparison or ideas. None of the three activities compares the project with anyone else's practice."
+        }
+      ],
+      "explanation": "Verification asks whether the work was built as specified; validation asks whether it serves the people who will use it; an audit asks whether the project is following its own processes. Each catches a different kind of failure, so a project that only verifies can deliver work that is exactly to specification and still unusable, and one that never audits cannot tell whether its controls are real.",
+      "mindset": "Know whether you are checking the product against the specification, the product against the need, or the process against itself."
+    },
+    {
+      "id": "pmp-pr7-116",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "pareto-analysis",
+        "snagging",
+        "housebuilding"
+      ],
+      "stem": "Handover snagging on a 120-home development has logged 250 defects: 112 sealant gaps (about £40 each to put right), 64 sticking doors (£150 each), 38 poor paint finishes (£90 each), 21 faulty sockets (£120 each) and 15 plumbing leaks (£1,800 each). The site manager wants to target whatever causes most of the problem. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "count",
+          "label": "Share of all 250 defects that fall in the two most frequent categories, in %, to one decimal place",
+          "numeric": true,
+          "expect": 70.4,
+          "tol": 0.2,
+          "unit": "%",
+          "rationale": "The two most frequent categories are sealant gaps and sticking doors: 112 + 64 = 176 defects, and 176 ÷ 250 = 70.4 per cent. By count, these two dominate the list."
+        },
+        {
+          "id": "cost",
+          "label": "Share of total rectification cost that comes from plumbing leaks, in %, to one decimal place",
+          "numeric": true,
+          "expect": 57.4,
+          "tol": 0.2,
+          "unit": "%",
+          "rationale": "Costs are 4,480 + 9,600 + 3,420 + 2,520 + 27,000 = £47,020. Plumbing leaks account for 15 × 1,800 = £27,000, and 27,000 ÷ 47,020 = 57.4 per cent, from only 6 per cent of the defects."
+        },
+        {
+          "id": "which",
+          "label": "The category to target first if the aim is to cut rectification cost",
+          "accept": [
+            "plumbing",
+            "plumbing leaks",
+            "leaks",
+            "plumbing leak",
+            "the plumbing leaks"
+          ],
+          "rationale": "Ranked by cost, plumbing leaks come first by a wide margin, even though they are the least frequent category. Fixing their cause would remove more cost than eliminating sealant gaps and sticking doors together."
+        }
+      ],
+      "explanation": "A Pareto analysis is only as useful as the measure it ranks by. Ranking by count shows where the work most often goes wrong; ranking by cost, safety or customer impact shows where it matters most, and the two frequently point at different categories. Decide which problem you are trying to reduce before you rank the causes, and say which measure the chart uses when you present it.",
+      "mindset": "Choose the measure before you rank the causes."
+    },
+    {
+      "id": "pmp-pr7-117",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "prevention",
+        "defect-origin",
+        "root-cause"
+      ],
+      "stem": "Your hybrid programme traced each of last quarter's 40 production defects back to the stage where it was introduced. Each box names a stage, how many of the 40 began there, and how many defects that stage's own checks caught. Select the stage where a new prevention measure would remove the most production defects.",
+      "graphic": {
+        "viewBox": "0 0 700 260",
+        "title": "Five delivery stages with defects introduced and caught at each",
+        "caption": "Select a stage. Use Tab or the arrow keys to move between stages, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "req",
+          "n": 1,
+          "label": "Requirements workshops: introduced 22 of the 40; caught 0",
+          "x": 20,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": true,
+          "rationale": "More than half the production defects began here, and nothing at this stage catches them. Prevention at the source, such as worked examples agreed with users, removes defects that every later stage can only try to find."
+        },
+        {
+          "id": "build",
+          "n": 2,
+          "label": "Sprint build and code review: introduced 10; caught 35",
+          "x": 155,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "This stage introduces the second-largest share and already catches many defects. Improving it would help, but the candidate picks a stage responsible for a quarter of production defects over one responsible for more than half."
+        },
+        {
+          "id": "int",
+          "n": 3,
+          "label": "Integration testing: introduced 3; caught 48",
+          "x": 290,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "The highest catch count draws the eye, but it is evidence of defects arriving from upstream, not of defects starting here. The candidate confuses where problems are found with where they begin."
+        },
+        {
+          "id": "uat",
+          "n": 4,
+          "label": "Phased user acceptance testing: introduced 0; caught 26",
+          "x": 425,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "Adding checks here strengthens appraisal late in the flow, where every defect found is expensive to fix. No defects begin at this stage, so prevention here has nothing to prevent."
+        },
+        {
+          "id": "rel",
+          "n": 5,
+          "label": "Release and deployment: introduced 5; caught 2",
+          "x": 560,
+          "y": 80,
+          "w": 120,
+          "h": 100,
+          "correct": false,
+          "rationale": "This stage has the weakest checks relative to what it introduces, which makes it look like the obvious gap. It still accounts for only five of the 40, so fixing it first is a smaller gain."
+        }
+      ],
+      "explanation": "Prevention belongs where defects are created, not where they are detected. A stage that catches many defects is usually a sign of injection further upstream, and strengthening it raises appraisal cost while leaving the source untouched. Tracing each defect back to its point of origin is what shows where prevention will pay the most.",
+      "mindset": "Look upstream of where defects are found to where they begin."
+    },
+    {
+      "id": "pmp-pr7-118",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "hold-point",
+        "inspection-and-test-plan",
+        "construction"
+      ],
+      "stem": "On a hospital multi-storey car park, the inspection and test plan you own sets a hold point: no slab is poured until the structural engineer, or her named deputy, has inspected the reinforcement in person. Both are held up by a motorway closure and cannot arrive until tomorrow. Six concrete lorries are due in 40 minutes, and cancelling them costs £3,200. The site foreman says the steel is exactly to drawing and offers photographs. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Send the engineer the foreman's photographs and a live video walk-round, and go ahead with the pour if she confirms by phone that she is satisfied.",
+          "correct": false,
+          "rationale": "This keeps the engineer involved, so it feels like the control is honoured. The candidate swaps an in-person inspection for a remote one without changing the plan, and photographs cannot show cover depth or tie quality the way a hand and a tape can."
+        },
+        {
+          "id": "b",
+          "text": "Let the pour go ahead on the foreman's assurance, and arrange for cores to be cut and tested when the engineer arrives tomorrow to confirm the slab.",
+          "correct": false,
+          "rationale": "Cores test the strength of the concrete, not where the steel sits inside it. The candidate turns a cheap check before concealment into a destructive one afterwards that cannot answer the question the hold point asks."
+        },
+        {
+          "id": "c",
+          "text": "Postpone the pour and cancel today's lorries, then rebook the pour once the engineer has inspected the reinforcement and released the hold point.",
+          "correct": true,
+          "rationale": "The hold point exists for the moment when going ahead is tempting, and the project manager owns the plan that sets it. Accepting a modest, known cost to keep the control intact is a decision within the role."
+        },
+        {
+          "id": "d",
+          "text": "Ask the sponsor to decide between the £3,200 cancellation cost and pouring today, since either choice has a cost the plan did not budget for.",
+          "correct": false,
+          "rationale": "The candidate escalates a decision that sits with the owner of the inspection plan and is well within normal authority. With 40 minutes to go, passing it upwards also risks the lorries arriving before anyone has decided."
+        }
+      ],
+      "explanation": "A hold point is a control built for the moment when proceeding is most tempting, and it matters most where the work will be concealed and cannot be checked afterwards. Whoever owns the plan has both the authority and the duty to enforce it and to accept the modest cost of doing so, rather than trading it away under time pressure or passing the decision upwards.",
+      "mindset": "Enforce the controls you own at the moment they cost something; that is what they were for."
+    },
+    {
+      "id": "pmp-pr7-119",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "security-testing",
+        "release-cadence",
+        "insurance"
+      ],
+      "stem": "Your team releases an insurer's online claims portal to production twice a week. After a breach elsewhere in the group, the chief information security officer now requires a manual penetration test before any release that changes customer-facing code. Tests are booked through a central team with a five-working-day lead time, and the policy applies to every product in the group. The product owner wants to keep the twice-weekly rhythm. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the security officer to exempt the portal, citing the team's automated security scanning and two years without a security defect reaching production.",
+          "correct": false,
+          "rationale": "The team's record is genuinely good, which makes an exemption feel earned. The candidate challenges a group-wide control introduced after a breach, spends credibility on a request with little chance of success, and leaves releases in limbo meanwhile."
+        },
+        {
+          "id": "b",
+          "text": "Book a standing weekly test slot and group customer-facing changes into one weekly release, while changes behind the scenes keep shipping twice a week.",
+          "correct": true,
+          "rationale": "The policy is set above the project and applies everywhere, so the useful move is to design around it. A standing slot removes the lead-time problem, and only the changes the policy covers wait for it."
+        },
+        {
+          "id": "c",
+          "text": "Keep releasing twice a week and send each release for penetration testing afterwards, fixing anything the testers find in the following release.",
+          "correct": false,
+          "rationale": "This preserves the rhythm and still gets every change tested. The candidate reverses the order the policy requires, so customer-facing code reaches production before the check that is meant to stand in front of it."
+        },
+        {
+          "id": "d",
+          "text": "Pause customer-facing releases until the central team can offer a lead time short enough to support the twice-weekly rhythm again.",
+          "correct": false,
+          "rationale": "This complies with the policy, but it waits for a change nobody has promised. The candidate stops the flow of value instead of reshaping the delivery pattern to fit a constraint that is likely to stay."
+        }
+      ],
+      "explanation": "When a quality or security control is set above the project and applies across the organisation, the productive response is to fit the delivery pattern around it rather than to work around it or wait for it to change. Adjust cadence, batching or sequencing so the control is met and value keeps flowing. Challenging a control is appropriate when you have standing and new evidence, not as the opening move.",
+      "mindset": "Design your delivery around the controls you cannot change, not around the hope that they will."
+    },
+    {
+      "id": "pmp-pr7-120",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "release-criteria",
+        "defect-severity",
+        "pharmacy"
+      ],
+      "stem": "Your team builds a pharmacy chain's repeat-prescription app and releases at the end of every sprint. After a customer complaint reached the board, the sponsor rules that no release may go ahead while any defect is open. The backlog holds 37 open defects: one high-severity defect affecting dose reminders, and 36 cosmetic or minor ones. The team estimates that clearing all 37 would take three sprints. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Show the sponsor the open defects by severity, and how the new rule would hold back the next three releases, including the fix for the dose-reminder defect.",
+          "correct": true,
+          "rationale": "The rule's own effect is the strongest argument against it: the one defect that threatens patients could not reach users until 36 cosmetic ones were cleared. Making that visible lets the sponsor see the rule working against the concern behind it."
+        },
+        {
+          "id": "b",
+          "text": "Propose severity-based release criteria, agreed with the product owner and the chain's clinical safety lead, that allow no high-severity defect to be open at release.",
+          "correct": true,
+          "rationale": "This meets the sponsor's real concern, which is that serious defects should not reach patients, with a rule that can be applied every sprint. Involving the clinical safety lead gives the severity scale the authority it needs."
+        },
+        {
+          "id": "c",
+          "text": "Adopt the rule and plan three stabilisation sprints to clear all 37 defects, telling stakeholders that new feature work will resume after the third.",
+          "correct": false,
+          "rationale": "Literal compliance looks disciplined and respectful of the sponsor. The candidate accepts a rule that holds the dose-reminder fix back for three sprints behind cosmetic work, the opposite of what the sponsor wants."
+        },
+        {
+          "id": "d",
+          "text": "Adopt the rule, but ask the product owner to reclassify the cosmetic defects as backlog enhancements so that they no longer count against a release.",
+          "correct": false,
+          "rationale": "This gets releases moving quickly, which is why it appeals. The candidate games the metric instead of questioning it, hiding real quality information and eroding the sponsor's trust in the defect log once it is noticed."
+        },
+        {
+          "id": "e",
+          "text": "Invite the sponsor to the next sprint review so the team can explain how defects are triaged, prioritised and fixed within its normal sprint work.",
+          "correct": false,
+          "rationale": "Engaging the sponsor is worthwhile, but explaining the current process offers no alternative to the rule. The candidate leaves the ruling in force until the review and treats a governance concern as a misunderstanding."
+        }
+      ],
+      "explanation": "A blanket quality rule can defeat the outcome it was written to protect: treating every defect alike means the most serious one waits behind the trivial ones. Challenge such a rule with evidence of its actual effect and offer a risk-based alternative that meets the concern behind it, rather than complying literally or quietly gaming it.",
+      "mindset": "Respect the concern behind a quality rule, and question the rule when it defeats that concern."
+    },
+    {
+      "id": "pmp-pr7-121",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-use-own-authority",
+        "gold-plating",
+        "conformance-to-requirements",
+        "engineering"
+      ],
+      "stem": "Your team is building a hydraulic test rig for an aerospace customer to a signed, fixed-price specification. During a walk-through you find that a senior engineer has added a second data-logging channel that the specification does not ask for, using spare hours from a quiet fortnight. He says it makes the rig a higher-quality product and costs the customer nothing. Verification testing of the rig starts next week. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the channel in the build because it adds useful capability at no charge, and describe it in the test documentation so the customer knows it is there.",
+          "correct": false,
+          "rationale": "The candidate equates more capability with higher quality. An unrequested addition still has to be verified and supported, it creates expectations nobody priced, and 'no charge' ignores the effort and risk it adds to next week's testing."
+        },
+        {
+          "id": "b",
+          "text": "Ask the sponsor to decide whether the extra channel stays in the build, since it changes the deliverable that the signed specification describes.",
+          "correct": false,
+          "rationale": "The candidate escalates a decision that is not the sponsor's to make: taking unrequested work out of the team's build is the project manager's call, and changing the specification is the customer's."
+        },
+        {
+          "id": "c",
+          "text": "Leave the channel physically fitted but disabled in the control software, so the rig matches the specification while the engineer's work is preserved.",
+          "correct": false,
+          "rationale": "This looks like a tidy compromise, but the delivered rig still differs from what was specified and must be verified as built. The candidate hides the addition rather than putting the decision about it to the customer."
+        },
+        {
+          "id": "d",
+          "text": "Have the extra channel left out of the delivered build, and offer it to the customer as a proposed change that they can accept or decline.",
+          "correct": true,
+          "rationale": "Quality here means meeting the agreed specification. Directing the team's own work back to the baseline is within the project manager's authority, while the customer, who owns the requirements, decides whether the addition is worth its testing and support consequences."
+        }
+      ],
+      "explanation": "Quality is conformance to agreed requirements and fitness for the use the customer described, not the amount of capability delivered. Additions nobody asked for — gold plating — bring verification effort, support obligations and expectations that were never priced or approved. A project manager can bring the team's own output back to the baseline; whether an enhancement is worth having is a decision for whoever owns the requirements.",
+      "mindset": "Deliver what was agreed, and let the requirement owner decide whether more is worth having."
+    },
+    {
+      "id": "pmp-pr7-122",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "continuous-integration",
+        "stop-the-line",
+        "working-agreement"
+      ],
+      "stem": "Your team builds a parcel-tracking app and integrates code continuously. The main build has been failing for a day and a half because of one integration test, and developers have carried on merging new work on top of it, each assuming someone else is looking at the failure. The team's working agreement says a broken main build is its first priority. At this morning's stand-up nobody mentions it. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Put the broken build on the agenda for the sprint retrospective, so that the team can discuss why its own working agreement is not being followed.",
+          "correct": false,
+          "rationale": "The candidate rightly sees a process problem but defers action on a live defect. By the retrospective, days of further merges will sit on top of a failing build and the fault will be far harder to trace."
+        },
+        {
+          "id": "b",
+          "text": "Ask the developer who last changed the failing test to investigate it, while the rest of the team carries on with their sprint work as planned.",
+          "correct": false,
+          "rationale": "Naming an owner feels decisive, but the candidate keeps merges flowing onto a red build and assumes the last person to touch the test caused the failure, which is often untrue once many changes have stacked up."
+        },
+        {
+          "id": "c",
+          "text": "Ask a developer to switch off the failing integration test for now, so the build turns green and merges can continue without disrupting the sprint.",
+          "correct": false,
+          "rationale": "A green build is restored, which is why this tempts. The candidate removes the signal rather than the fault: whatever the test was catching is still in the code and is now invisible to everyone."
+        },
+        {
+          "id": "d",
+          "text": "Raise the broken build at the stand-up now and ask the team to pause new merges until someone has taken it on and the build is green again.",
+          "correct": true,
+          "rationale": "Every change merged onto an unexplained failure makes the cause harder to isolate. The team's own agreement already sets the priority; what is missing is someone invoking it, and the cheapest time to do that is now."
+        }
+      ],
+      "explanation": "Continuous integration only works as a quality control if a failing build stops the line. Each change merged on top of an unexplained failure makes the cause harder to isolate and lets defects compound, so the cheapest moment to fix a broken build is as soon as it breaks. A team agreement to treat it as top priority is worth only as much as someone's willingness to call on it.",
+      "mindset": "Stop and fix a failing signal before adding more work on top of it."
+    },
+    {
+      "id": "pmp-pr7-123",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "root-cause-analysis",
+        "error-proofing",
+        "warehousing"
+      ],
+      "stem": "Your hybrid programme is automating a distribution warehouse: conveyors are installed to a fixed plan while the picking software is built in sprints. For the third time in two months, wrong-size cartons have been shipped to customers. Each root-cause analysis has concluded 'picker error: two similar product codes misread' and recommended retraining. The pickers have been retrained twice. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the analysis team to keep going past 'picker error' and find why the process lets a misread code reach dispatch, including whether the software could block it.",
+          "correct": true,
+          "rationale": "The analysis stopped one question too early. Asking why a slip can become a shipped defect leads to error-proofing, such as a scan check in the picking software, which removes the cause instead of relying on people never misreading."
+        },
+        {
+          "id": "b",
+          "text": "Arrange a third and more thorough round of training, with a competence test that each picker must pass before returning to the line and a refresher whenever errors recur.",
+          "correct": false,
+          "rationale": "The candidate accepts 'human error' as a root cause and responds with more of what has already failed twice. People misread at some rate however well trained; the process still lets the misread reach the customer."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to rename one of the two products in the catalogue so that the codes no longer look alike, and brief every picker on the new code before the next shift.",
+          "correct": false,
+          "rationale": "This is a genuine error-proofing idea, which makes it attractive. The candidate jumps to one fix from an analysis that never asked how the process detects a mismatch, so other look-alike codes would still slip through."
+        },
+        {
+          "id": "d",
+          "text": "Add a check at the dispatch bay where a supervisor compares each carton's size with the order before it is sealed and loaded, and log every mismatch the check catches.",
+          "correct": false,
+          "rationale": "The candidate adds appraisal to catch the defect rather than removing its cause. Manual checks are costly, also depend on attention, and leave the underlying weakness in the process untouched. Logging the catches measures the problem but does nothing to stop it being created."
+        }
+      ],
+      "explanation": "A root-cause analysis that ends at 'human error' has usually stopped one question too early. People will misread, mistype and mis-pick at some rate; the useful question is why the process allowed that slip to become a defect that reached the customer. Error-proofing — designing work so a mistake cannot be made or cannot pass unnoticed — removes the cause, whereas retraining and extra inspection rely on people doing better or catching more.",
+      "mindset": "Treat human error as the start of the analysis, not its conclusion."
+    },
+    {
+      "id": "pmp-pr7-124",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "common-cause-variation",
+        "run-chart",
+        "shared-services"
+      ],
+      "stem": "You are implementing a payroll shared-service centre for a university. For 20 weeks the percentage of payroll queries resolved within two days has varied between 87 and 94 per cent, with no trend and no week outside that band. This week it fell to 88 per cent from 94 the week before. The HR director asks you to require a written root-cause investigation every week the figure drops by more than three points. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to the rule but set the trigger at five points rather than three, so the team is not writing reports on small week-to-week movements.",
+          "correct": false,
+          "rationale": "The candidate keeps the faulty premise, that a week-on-week fall is itself a signal, and only adjusts the threshold. In a process that ranges over seven points, a five-point fall can still be ordinary noise."
+        },
+        {
+          "id": "b",
+          "text": "Show the director the 20-week run chart, explain that this week lies within the normal band, and propose investigating only points outside it or sustained runs.",
+          "correct": true,
+          "rationale": "Movements inside a stable band are common-cause variation. Investigating each one finds a different 'cause' every week and invites adjustments that make the process more variable; agreed signal rules point effort at genuine changes."
+        },
+        {
+          "id": "c",
+          "text": "Run this week's investigation as the director asks, then use what it finds to judge whether a weekly report adds enough value to keep doing it.",
+          "correct": false,
+          "rationale": "This sounds responsive and evidence-based. But an investigation into noise will usually 'find' a cause, which then appears to justify the rule; the candidate lets one week decide what the 20-week record already shows."
+        },
+        {
+          "id": "d",
+          "text": "Set the team a target of 95 per cent from next month and report against it weekly, so attention moves from explaining dips to raising the level.",
+          "correct": false,
+          "rationale": "The candidate assumes a target changes the process. A system producing 87 to 94 per cent will not reach 95 because it is asked to; the usual result is pressure on how queries are counted rather than how they are handled."
+        }
+      ],
+      "explanation": "A stable process produces results that move within a predictable band for reasons built into the system. Treating each movement as a special event, and reacting with investigations or adjustments, wastes effort and can increase variation — a pattern known as tampering. Investigation is warranted when the data shows a signal; if the stable level itself is not good enough, the response is to change the process, not to explain individual weeks.",
+      "mindset": "Separate signal from noise before asking anyone to explain a number."
+    },
+    {
+      "id": "pmp-pr7-125",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "improvement-experiment",
+        "retrospective",
+        "retail"
+      ],
+      "stem": "Your team builds a supermarket's loyalty app. To cut escaped defects, it agreed at a retrospective to trial a rule that every change needs two code reviewers, judged on escaped defects per sprint over three sprints. Escaped defects stayed at 10 to 12 a sprint, as before, while cycle time rose by 30 per cent. Most escaped defects arise in the points provider's interface, whose behaviour code review does not exercise. The developer who proposed the rule wants three more sprints for it to bed in. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "correct": false,
+          "text": "Support three more sprints of the trial, since review habits take time to settle, and agree in advance the fall in escaped defects that would justify keeping the rule after that.",
+          "rationale": "Bedding-in is a real effect, which makes this persuasive. But the defect analysis already shows why the practice cannot reach the cause, so the candidate spends three more sprints of slower delivery confirming a result the evidence has explained."
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "text": "Keep the two-reviewer rule, but make the developer who knows the points provider's interface a reviewer on every change touching it, so that reviews focus where defects arise.",
+          "rationale": "This aims at the right part of the system, which makes it attractive. The candidate keeps the same tool, though: interface defects show up in how the provider's system behaves when called, which reading the code does not reveal."
+        },
+        {
+          "id": "c",
+          "correct": true,
+          "text": "Help the team close the trial as tried and not effective, and take the defect analysis to the next retrospective so the team can choose an experiment aimed at the interface.",
+          "rationale": "The trial was judged against the measure the team chose, and the evidence also explains the result. Recording the outcome stops the 30 per cent cycle-time cost and points the next experiment at the place defects actually come from."
+        },
+        {
+          "id": "d",
+          "correct": false,
+          "text": "Keep the rule for the knowledge-sharing benefits that a defect count cannot capture, and ask the team to add contract tests for the points provider's interface alongside it.",
+          "rationale": "The contract tests may well help, which makes this tempting. But the candidate redefines the trial's purpose after it failed against the agreed measure, keeping a 30 per cent cycle-time cost for benefits nobody set out to measure."
+        }
+      ],
+      "explanation": "An improvement experiment is worth running only if its result is allowed to decide what happens next. When a trial judged against an agreed measure shows no effect, and the evidence explains why, the disciplined response is to record the result, stop paying the practice's cost and redirect effort at the cause the data points to. Extending, retuning or redefining a trial after it has failed keeps a practice alive on hope rather than evidence.",
+      "mindset": "Let a failed experiment teach you something, then move on to the next one."
+    },
+    {
+      "id": "pmp-pr7-126",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "calibration",
+        "measurement",
+        "pipelines"
+      ],
+      "stem": "On a gas pipeline project, a pressure gauge used for hydrostatic testing fails its scheduled calibration check: it reads 6 per cent high. Records show it was used to sign off 23 test sections since its last good calibration four months ago, and nine of those passed with less than 6 per cent margin over the required test pressure. Several of the 23 sections are due to be backfilled this week. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Place a hold on backfilling every section that was tested with this gauge until its test result has been reassessed.",
+          "correct": true,
+          "rationale": "Backfilling buries pipe whose test may not have reached the required pressure, making any retest far more expensive. Holding that work now keeps the options open while the results are checked."
+        },
+        {
+          "id": "b",
+          "text": "Reassess all 23 results against the 6 per cent error and plan retests for the sections whose margin no longer covers it.",
+          "correct": true,
+          "rationale": "A gauge reading high means the real pressure was lower than recorded. Sections with less than 6 per cent margin may never have been tested to the requirement, so their sign-off cannot stand without a retest."
+        },
+        {
+          "id": "c",
+          "text": "Recalibrate the gauge, record the adjustment in the calibration register and carry on testing the remaining sections with it.",
+          "correct": false,
+          "rationale": "The candidate fixes the instrument going forward and forgets what it has already accepted. Four months of sign-offs rest on readings now known to be wrong, and nothing here looks back at them."
+        },
+        {
+          "id": "d",
+          "text": "Retest all 23 sections with a newly calibrated gauge before any further pipeline work goes ahead anywhere on the project.",
+          "correct": false,
+          "rationale": "This is thorough but not proportionate. Fourteen sections passed with enough margin to absorb the error, and stopping every activity on the project turns a contained measurement problem into a programme-wide delay."
+        },
+        {
+          "id": "e",
+          "text": "Report the calibration failure to the gauge's hire company and ask for a credit against the four months of hire charges.",
+          "correct": false,
+          "rationale": "Recovering cost from the supplier may be reasonable later, but the candidate deals with the commercial consequence first and leaves possibly untested pipe on its way into the ground."
+        }
+      ],
+      "explanation": "When measuring equipment is found out of calibration, the problem is not only the instrument but every result it produced since it was last known to be accurate. Those results must be traced, judged against the size and direction of the error, and repeated where the margin no longer covers it, and work that would make retesting impossible or costly should be held meanwhile. Correcting the instrument without looking back leaves accepted work that was never truly verified.",
+      "mindset": "When a measuring tool is found wrong, look back at everything it was used to accept."
+    },
+    {
+      "id": "pmp-pr7-127",
+      "type": "pulldown",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "definition-of-done",
+        "definition-of-ready",
+        "acceptance-criteria"
+      ],
+      "stem": "A team building a gym chain's membership app is deciding where several quality expectations should be recorded. Complete each sentence with the right place for it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "A rule that every story must pass the automated accessibility scan before it counts as finished belongs in"
+        },
+        {
+          "id": "c2",
+          "text": "The condition that a member may freeze a membership for no longer than three months belongs in"
+        },
+        {
+          "id": "c3",
+          "text": "The expectation that a story's payment-provider details are confirmed before the team commits to it belongs in"
+        }
+      ],
+      "options": [
+        {
+          "id": "dod",
+          "text": "the team's Definition of Done",
+          "correct": true,
+          "match": "c1",
+          "rationale": "A quality standard that every item must meet before it is finished applies across the whole backlog, which is exactly what the Definition of Done records."
+        },
+        {
+          "id": "ac",
+          "text": "that story's acceptance criteria",
+          "correct": true,
+          "match": "c2",
+          "rationale": "The three-month limit is a business rule specific to one piece of functionality. Acceptance criteria hold the conditions a particular story must satisfy."
+        },
+        {
+          "id": "dor",
+          "text": "the team's Definition of Ready",
+          "correct": true,
+          "match": "c3",
+          "rationale": "This is a condition for starting work, not for finishing it. A Definition of Ready sets out what a story needs before the team takes it into a sprint."
+        },
+        {
+          "id": "goal",
+          "text": "the sprint goal",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A sprint goal states the objective of a single sprint. It is not where standing quality rules, story-specific conditions or entry criteria are kept."
+        }
+      ],
+      "explanation": "Agile teams keep quality expectations at three levels. Standards every item must meet to be finished go in the Definition of Done; conditions specific to one item go in its acceptance criteria; conditions for starting work go in a Definition of Ready, where a team uses one. Putting an expectation at the wrong level means it is either applied to items it does not concern or missed on the items it does.",
+      "mindset": "Record each quality expectation at the level where it applies."
+    },
+    {
+      "id": "pmp-pr7-128",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "process-capability",
+        "acceptance",
+        "manufacturing"
+      ],
+      "stem": "You are managing your company's project to commission an injection-moulding tool for the battery housings of its new electric scooter, to be produced at 200,000 a year. The contract's acceptance test is 30 consecutive parts within specification, and the trial met it. The toolmaker's capability study, which you have just read, gives a capability index of 0.9: about 7 in every 1,000 housings would fall outside specification at full volume. Tomorrow the steering group is due to approve acceptance and the €260,000 final payment. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "correct": false,
+          "text": "Put acceptance on hold and ask the toolmaker to raise the capability index to 1.33, the level commonly expected of production tooling, before submitting a fresh study.",
+          "rationale": "A higher index may well be the right outcome, which makes this attractive. But the candidate imposes a criterion the contract does not contain, risking a claim, and takes a cost and timing decision that belongs to the steering group."
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "text": "Let acceptance go ahead, since the contract test has been met, and add 100 per cent inspection of housings to the production plan so that out-of-specification parts are caught.",
+          "rationale": "The candidate commits the business to permanent appraisal cost and some 1,400 rejects a year without telling the people approving acceptance, and lets the cheapest moment to have the tool improved pass."
+        },
+        {
+          "id": "c",
+          "correct": true,
+          "text": "Add the capability study and the expected reject volume to tomorrow's acceptance paper, with options for having the tool adjusted or adding inspection, so the group decides knowingly.",
+          "rationale": "Passing the contract test does not settle whether the tool is fit for production at volume. The steering group owns the acceptance decision, and putting the capability evidence and options in front of it keeps every choice open before payment is made."
+        },
+        {
+          "id": "d",
+          "correct": false,
+          "text": "Let acceptance go ahead as the contract requires, and pass the capability study to the production manager at handover so the line can plan for the expected rejects.",
+          "rationale": "The information does reach someone, which makes this feel responsible. But it arrives after the decision it should have informed, when the unpaid €260,000 no longer gives the company any leverage with the toolmaker."
+        }
+      ],
+      "explanation": "Passing an agreed acceptance test shows that a deliverable met the check written into the contract, not that it will meet the need at the scale it will be used. When the project holds evidence that a product will underperform in use, that evidence belongs in front of the decision-makers before acceptance, while remedies are still cheap. Neither quietly absorbing the consequence nor imposing a stricter criterion of your own replaces an informed decision by the people who own it.",
+      "mindset": "Surface what you know about future quality while there is still time to act on it."
+    },
+    {
+      "id": "pmp-pr7-129",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "data-quality",
+        "data-migration",
+        "veterinary"
+      ],
+      "stem": "Your hybrid programme is replacing the practice-management system for a group of 60 veterinary surgeries; the software is configured in sprints and the data migration follows a phased plan. The final rehearsal migrated 480,000 animal records, of which 1.8 per cent failed validation, mostly for missing owner contact details or duplicate entries. Go-live is in three weeks. The migration lead wants to go live and clean the data afterwards. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hold go-live until every record passes validation, since loading known bad data into the new system would undermine the surgeries' trust in it from their first day of using it.",
+          "correct": false,
+          "rationale": "The candidate sets the threshold at perfection without asking what the failures cost. Some failure types may not matter to surgeries at all, and delaying go-live has its own costs that nobody has weighed."
+        },
+        {
+          "id": "b",
+          "text": "Agree to the migration lead's plan, scheduling a clean-up sprint in the first month after go-live and reporting progress on it to the steering group weekly.",
+          "correct": false,
+          "rationale": "The candidate lets the team that produces the data decide how good it needs to be. Missing contact details could, for example, stop vaccination reminders, an operational effect the migration lead is not placed to judge."
+        },
+        {
+          "id": "c",
+          "text": "Have the team build automated fixes for every failure category before go-live, adding a sprint to the plan if the work turns out to need more than the three weeks that remain.",
+          "correct": false,
+          "rationale": "This takes quality seriously but spends effort without knowing which failures matter, and adding a sprint quietly moves go-live. The candidate decides on acceptability by default instead of asking whoever owns it."
+        },
+        {
+          "id": "d",
+          "text": "Break the failed records down by type and effect on surgeries, and ask the clinical operations director, who owns the data, to decide which types must be fixed first.",
+          "correct": true,
+          "rationale": "Whether 1.8 per cent is acceptable depends on what those records are used for. A breakdown by consequence lets the business owner set a fit-for-purpose threshold before go-live, rather than discovering one afterwards."
+        }
+      ],
+      "explanation": "Data quality is judged against the use the business will make of the data, so the acceptance threshold for migrated records belongs to the business owner, not the migration team. A raw failure rate says little until it is broken down by type and consequence: some failures stop operations, others are cosmetic. Presenting that breakdown before go-live lets the owner set a fit-for-purpose threshold while there is still time to act on it.",
+      "mindset": "Let the person who relies on the data decide how good it needs to be."
+    },
+    {
+      "id": "pmp-pr7-130",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "legacy-code",
+        "regression-testing",
+        "pensions"
+      ],
+      "stem": "Your team has taken over a 12-year-old pension calculation engine that has no automated tests. Three changes required by new regulations must be live in ten weeks. The developers propose freezing all change for eight weeks to build a full regression suite first, saying that without one they cannot change the code safely. The product owner says the regulatory date cannot move. What should the project manager support?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The eight-week freeze, because the team's judgement that it cannot change the code safely without tests should carry more weight than the delivery schedule.",
+          "correct": false,
+          "rationale": "This respects the team and takes quality seriously. But the candidate accepts a plan that leaves two weeks for three regulatory changes, trading a legal deadline for blanket coverage of code that may never change."
+        },
+        {
+          "id": "b",
+          "text": "Making the three changes with careful manual testing by the most experienced developer, then starting a full regression suite as soon as the regulatory date has passed.",
+          "correct": false,
+          "rationale": "This meets the date and uses real expertise. The candidate accepts the highest risk of breaking existing calculations exactly where the code is changing, and work deferred until 'after the deadline' often never starts."
+        },
+        {
+          "id": "c",
+          "text": "Writing tests that pin down the engine's current behaviour around the code each change touches, as part of that change, and extending them as later work arrives.",
+          "correct": true,
+          "rationale": "Test effort goes exactly where the risk of change lies, the regulatory date is protected, and the safety net grows in the areas the team actually works in. Coverage follows change rather than having to precede all of it."
+        },
+        {
+          "id": "d",
+          "text": "Asking the regulator, through the client's compliance team, whether the three changes could be phased in after the deadline given the engine's age and condition.",
+          "correct": false,
+          "rationale": "Seeking more time sounds prudent, but the product owner has said the date is fixed. The candidate looks for relief from an external constraint instead of shaping the work to fit within it."
+        }
+      ],
+      "explanation": "When test coverage is missing and time is short, the choice is not between all tests and none. Tests that pin down current behaviour where code is about to change give the most protection per hour, because risk concentrates where change happens. Building coverage incrementally alongside change protects the deadline and leaves the codebase a little safer each time it is touched.",
+      "mindset": "Put quality effort where the risk of change actually is."
+    },
+    {
+      "id": "pmp-pr7-131",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-apply-the-rule",
+        "quality-planning",
+        "design-of-experiments",
+        "benchmarking"
+      ],
+      "stem": "During quality planning for a new cold-store warehouse, the project manager faces three decisions. Match each situation to the planning technique that suits it best. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The floor contractor must choose among two sealants, three curing temperatures and two curing times, and can afford only eight trial slabs."
+        },
+        {
+          "id": "s2",
+          "text": "The client wants a target for temperature excursions in the finished store, but has never run one and has no history to set it from."
+        },
+        {
+          "id": "s3",
+          "text": "The team must decide whether a £45,000 automated door-seal tester would save enough in avoided failures to justify buying it."
+        }
+      ],
+      "options": [
+        {
+          "id": "doe",
+          "text": "Design of experiments",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Twelve combinations of three factors cannot all be trialled in eight slabs. A designed experiment chooses the runs so that the effect of each factor, and how they interact, can still be estimated."
+        },
+        {
+          "id": "bench",
+          "text": "Benchmarking against comparable facilities",
+          "correct": true,
+          "match": "s2",
+          "rationale": "With no history of its own, the client can set a realistic target by looking at what similar cold stores achieve. Benchmarking supplies a reference point where internal data does not exist."
+        },
+        {
+          "id": "cba",
+          "text": "Cost-benefit analysis",
+          "correct": true,
+          "match": "s3",
+          "rationale": "This is a cost-of-quality decision: an appraisal investment set against the failure costs it would avoid. Comparing the two is what a cost-benefit analysis does."
+        },
+        {
+          "id": "samp",
+          "text": "Statistical sampling of completed work",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Sampling decides how many finished items to inspect to judge a whole population, which is a control activity. None of the three situations is about inspecting completed work."
+        }
+      ],
+      "explanation": "Quality planning uses different techniques for different questions. Where several factors could affect a result and trials are limited, designed experiments get the most information from the fewest runs; where a target has no internal basis, benchmarking borrows one from comparable work; where a quality investment must justify itself, cost-benefit analysis sets it against the failures it prevents. Choosing the technique starts with naming the question being asked.",
+      "mindset": "Name the quality question first, then pick the technique built to answer it."
+    },
+    {
+      "id": "pmp-pr7-132",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 2,
+      "tags": [
+        "archetype-diagnose-first",
+        "operational-definition",
+        "quality-metrics",
+        "field-service"
+      ],
+      "stem": "Your hybrid programme is rolling out a new field-service app to boiler engineers in three regions. The dashboard shows first-time fix rates of 91 per cent in the north, 84 per cent in the midlands and 68 per cent in the south. The operations director wants the southern manager to retrain her engineers. You notice that the north counts a job as fixed if there is no repeat visit within seven days, while the south uses 30 days. What should the project manager do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree one definition of a first-time fix for all three regions and recalculate the figures before anyone acts on the comparison between them.",
+          "correct": true,
+          "rationale": "The figures do not measure the same thing, so the comparison cannot yet support any action. A shared definition shows whether a real gap exists and how large it is before anyone is retrained."
+        },
+        {
+          "id": "b",
+          "text": "Support the retraining in the south, since a gap of 23 points between regions is too large to be explained by a difference in how jobs are counted.",
+          "correct": false,
+          "rationale": "The candidate assumes the size of the gap proves it is real. A 30-day window can catch far more repeat visits than a seven-day one, so nobody yet knows how much of the gap is performance."
+        },
+        {
+          "id": "c",
+          "text": "Report the three figures with a footnote explaining the different counting rules, and let the operations director decide what to do about the south.",
+          "correct": false,
+          "rationale": "The candidate discloses the problem but leaves a misleading comparison as the basis for a decision. A footnote rarely changes how a headline figure is read, especially by someone who has already drawn a conclusion."
+        },
+        {
+          "id": "d",
+          "text": "Ask the southern manager to adopt the seven-day rule used in the north so that her region's figure can be compared with the north directly.",
+          "correct": false,
+          "rationale": "This aligns two regions but picks one rule without agreeing which reflects the outcome that matters, and ignores the midlands, whose rule is unknown. The candidate standardises by convenience rather than by agreement."
+        }
+      ],
+      "explanation": "A quality metric is comparable only when everyone measures it the same way, which needs an operational definition: what is counted, over what period, by what rule. Before acting on differences between teams, sites or suppliers, check that the numbers describe the same thing. Otherwise corrective action is aimed at a measurement artefact, and any real performance gap stays unknown.",
+      "mindset": "Make sure a number means the same thing everywhere before comparing it."
+    },
+    {
+      "id": "pmp-pr7-133",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "kanban",
+        "wip-limits",
+        "whole-team-quality"
+      ],
+      "stem": "Your team supports a travel company's booking site using Kanban. Over the past month the 'awaiting test' column has grown from three items to fourteen while 'in development' keeps filling. The team's single tester is working late, and lead time for small changes has doubled. Some developers say testing is not their job. There is no budget this quarter for another tester. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree a work-in-progress limit for the testing column with the team, so developers stop starting new items when it is full.",
+          "correct": true,
+          "rationale": "Work is being started faster than it can be finished. A limit makes the bottleneck visible on the board and stops new work piling up behind it, which is a change the team can make itself."
+        },
+        {
+          "id": "b",
+          "text": "Ask developers to help clear the testing queue by pairing with the tester and adding automated checks to the items they build.",
+          "correct": true,
+          "rationale": "Quality is a whole-team responsibility, and spare capacity upstream is the fastest help the constrained step can get. Automated checks written by developers also reduce the testing load on future items."
+        },
+        {
+          "id": "c",
+          "text": "Ask the resourcing manager to lend a tester from another product team until the queue is back under five items.",
+          "correct": false,
+          "rationale": "Borrowed capacity may clear today's queue, but the candidate treats a flow problem as a staffing one. With nothing else changed, the queue rebuilds as soon as the loan ends."
+        },
+        {
+          "id": "d",
+          "text": "Group the waiting items into a weekly release so the tester can work through them in one batch with a single regression run.",
+          "correct": false,
+          "rationale": "Batching looks efficient for the tester, but the candidate lengthens lead time further, since every item now waits for the slowest one in its batch, and larger releases are harder to diagnose when they fail."
+        },
+        {
+          "id": "e",
+          "text": "Let changes estimated at under a day go straight to release after code review, so the tester can focus on larger items.",
+          "correct": false,
+          "rationale": "Risk-based testing has its place, but here the candidate lowers the quality bar to match current capacity, without evidence that small changes are low-risk, rather than changing how the work flows."
+        }
+      ],
+      "explanation": "A growing queue in front of one step signals a flow problem, not only a staffing one: work is being started faster than it can be finished. Limiting work in progress exposes the bottleneck and stops new work piling up, and treating quality as a whole-team responsibility lets idle capacity upstream help the constrained step. Adding capacity, batching or skipping checks without changing the flow tends to move the queue rather than remove it.",
+      "mindset": "Stop starting and start finishing — quality belongs to the whole team, not one role."
+    },
+    {
+      "id": "pmp-pr7-134",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "acceptance-sampling",
+        "supplier-quality",
+        "wind-energy"
+      ],
+      "stem": "Your project is building foundations for 30 wind turbines. The contract's sampling plan for anchor bolts says: from each lot of 2,000, inspect 80, and reject the lot if three or more fail the thread gauge. Today's lot had four failures. The supplier asks for a second sample of 80, arguing the first was unlucky, and proposes accepting the lot if that sample has two or fewer failures. Bolting is due to start on Monday. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Allow the second sample but judge the lot on all 160 bolts together, accepting it only if no more than six fail, which keeps the agreed rejection rate.",
+          "correct": false,
+          "rationale": "Doubling both sample and limit looks statistically fair. But the candidate rewrites the acceptance rule after seeing a failing result, and the combined rule carries a different risk from the one both parties agreed."
+        },
+        {
+          "id": "b",
+          "text": "Reject the lot as the plan specifies, and ask the supplier to gauge every bolt in it at its own cost before resubmitting the lot for sampling.",
+          "correct": true,
+          "rationale": "The plan's protection depends on acting on the sample drawn. Re-sampling a failed lot until one passes raises the chance of accepting a bad lot, and supplier screening keeps the cost of the failure with the party that caused it."
+        },
+        {
+          "id": "c",
+          "text": "Accept today's lot under tightened inspection, sampling the next three lots at double the size, so a genuine quality problem would show up quickly.",
+          "correct": false,
+          "rationale": "Tightened inspection after a failure is a real feature of sampling schemes, which makes this attractive. But it applies to future lots; it does not make a rejected lot acceptable, and these bolts go into concrete."
+        },
+        {
+          "id": "d",
+          "text": "Have your own site team gauge all 2,000 bolts over the weekend, so the good ones can be used on Monday and the failures returned to the supplier.",
+          "correct": false,
+          "rationale": "This protects Monday and finds every bad bolt, so it is defensible. The candidate takes on appraisal cost and responsibility that belong to the supplier, and rewards the failed lot with free screening."
+        }
+      ],
+      "explanation": "An acceptance sampling plan is a pre-agreed balance of risk between buyer and seller, and it works only if the result of the sample is acted on. Drawing further samples from a failed lot until one passes, or rewriting the rule once a result is known, shifts that balance in the seller's favour. A rejected lot is handled through the remedies the plan or contract provides, such as screening, rework or replacement, with the cost resting where the failure arose.",
+      "mindset": "Act on the sample you agreed to take, not on the one you hope to draw next."
+    },
+    {
+      "id": "pmp-pr7-135",
+      "type": "matching",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "engineering-practices",
+        "built-in-quality",
+        "banking"
+      ],
+      "stem": "A digital bank's development team has listed three recurring problems from its retrospectives. Match each problem to the practice most likely to address it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "Code from different developers is merged only on the last day of the sprint, and conflicts break features that worked in isolation."
+        },
+        {
+          "id": "p2",
+          "text": "Only one developer understands the interest-calculation module, and nobody else can review her changes effectively."
+        },
+        {
+          "id": "p3",
+          "text": "Developers write the code first and add tests afterwards, so the tests confirm what the code does rather than what it should do."
+        }
+      ],
+      "options": [
+        {
+          "id": "ci",
+          "text": "Continuous integration",
+          "correct": true,
+          "match": "p1",
+          "rationale": "Merging small changes to a shared branch many times a day, with an automated build and tests, surfaces conflicts within hours instead of on the last day of the sprint."
+        },
+        {
+          "id": "pair",
+          "text": "Pair programming",
+          "correct": true,
+          "match": "p2",
+          "rationale": "Working in pairs on the module spreads understanding of it and provides review as the code is written, which removes the single point of knowledge and of review."
+        },
+        {
+          "id": "tdd",
+          "text": "Test-driven development",
+          "correct": true,
+          "match": "p3",
+          "rationale": "Writing the test before the code forces the expected behaviour to be stated first, so the test checks what the code should do rather than echoing what it happens to do."
+        },
+        {
+          "id": "harden",
+          "text": "A hardening sprint before each release",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A hardening sprint moves testing and integration into a separate block at the end. It postpones all three problems rather than removing any of them, and lets defects live longer."
+        }
+      ],
+      "explanation": "Agile quality is built in through engineering practices that shorten the time between making a mistake and finding it. Frequent integration finds conflicts early, pairing spreads knowledge and reviews code as it is written, and writing tests first makes intended behaviour explicit. Deferring quality work to a dedicated phase at the end does the opposite, lengthening the feedback loop the practices are meant to shorten.",
+      "mindset": "Build quality in by shortening the time between a mistake and its discovery."
+    },
+    {
+      "id": "pmp-pr7-136",
+      "type": "fillblank",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "first-pass-yield",
+        "process-metrics",
+        "grant-funding"
+      ],
+      "stem": "A research funder's hybrid programme has rebuilt its grant-application process in three stages. Last quarter, 96 per cent of applications passed eligibility checks first time, 90 per cent passed financial review first time and 98 per cent passed the panel paperwork check first time. Each stage manager reports a healthy figure. The funder handles 5,000 applications a quarter. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "rty",
+          "label": "Percentage of applications that pass all three stages first time, to one decimal place",
+          "numeric": true,
+          "expect": 84.7,
+          "tol": 0.1,
+          "unit": "%",
+          "rationale": "The stages are passed in sequence, so the first-time yields multiply: 0.96 × 0.90 × 0.98 = 0.8467, or 84.7 per cent. No single stage looks poor, yet roughly one application in six needs rework somewhere."
+        },
+        {
+          "id": "rework",
+          "label": "Number of applications a quarter that need rework at one or more stages, to the nearest whole number",
+          "numeric": true,
+          "expect": 766,
+          "tol": 1,
+          "rationale": "Applications not passing every stage first time are 1 − 0.8467 = 0.1533 of the total: 5,000 × 0.1533 = 766.4, so about 766 applications a quarter."
+        },
+        {
+          "id": "stage",
+          "label": "Which stage, if brought to 100 per cent first time, would raise the overall figure most — eligibility, financial review or panel paperwork",
+          "accept": [
+            "financial review",
+            "financial",
+            "the financial review",
+            "finance review",
+            "finance"
+          ],
+          "rationale": "Perfecting eligibility gives 0.90 × 0.98 = 88.2 per cent; perfecting financial review gives 0.96 × 0.98 = 94.1 per cent; perfecting panel paperwork gives 0.96 × 0.90 = 86.4 per cent. Financial review has the lowest yield, so it gains most."
+        }
+      ],
+      "explanation": "A process is only as good as the product of its stages: first-time yields multiply, so several stages that each look healthy can combine into a poor end-to-end result. Measuring the whole flow, rather than each stage in isolation, reveals how much rework the process really carries and shows which stage limits it. Improvement effort belongs where the lowest yield is, because that stage holds the whole figure down.",
+      "mindset": "Judge a process by its end-to-end yield, not by how good each stage looks on its own."
+    },
+    {
+      "id": "pmp-pr7-137",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-route-to-owner",
+        "quality-management-plan",
+        "quality-audit",
+        "civil-engineering"
+      ],
+      "stem": "Your firm is repainting a steel railway bridge. The quality management plan, approved by the client's engineer as a contract document, requires paint-thickness readings at ten marked points on each girder. The site team has switched to an electronic gauge that logs thousands of readings per girder and finds thin spots the ten-point method missed. An internal audit has just recorded the switch as a nonconformance with the plan. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Submit a revision of the plan describing the electronic method to the client's engineer, and take the ten-point readings alongside it until approval is given.",
+          "correct": true,
+          "rationale": "The new method is better, but the plan is part of the contract and its approver is the client's engineer. Revising it through that route adopts the improvement properly, and keeping the agreed readings meanwhile means every girder still has the evidence the contract calls for."
+        },
+        {
+          "id": "b",
+          "text": "Return to the ten-point method straight away, since the approved plan is the baseline, and record the electronic gauge as a lesson for future bridge contracts.",
+          "correct": false,
+          "rationale": "This restores compliance cleanly, which is why careful managers choose it. The candidate discards a method that is finding real defects and treats the plan as fixed rather than as a baseline with its own change route."
+        },
+        {
+          "id": "c",
+          "text": "Close the audit finding as an observation, because the electronic method exceeds what the plan requires, and record the reasoning in the project's quality log.",
+          "correct": false,
+          "rationale": "Substance over form is appealing when the new method is plainly more thorough. But the contract sets the evidence the client will accept at handover, and only the client's engineer can agree that another method meets it."
+        },
+        {
+          "id": "d",
+          "text": "Ask the firm's quality manager to update the plan to the electronic method and reissue it to the site team, so that plan and practice match once again.",
+          "correct": false,
+          "rationale": "Aligning plan and practice is the right instinct, and the quality manager owns the firm's quality system. The candidate overlooks that this plan was approved by the client as a contract document, so an internal reissue changes nothing the contract requires."
+        }
+      ],
+      "explanation": "When practice departs from an approved plan, the remedy depends on who approved the plan and what it is for, not only on which method is better. A plan that forms part of a contract can be changed only by the party that accepted it, and until it is changed the evidence it requires is still owed. Improvements should be brought into the baseline through its change route rather than abandoned or quietly adopted.",
+      "mindset": "Bring a better practice into the baseline through whoever owns the baseline."
+    },
+    {
+      "id": "pmp-pr7-138",
+      "type": "single",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "defect-backlog",
+        "cost-of-poor-quality",
+        "higher-education"
+      ],
+      "stem": "Your team runs a university's online learning platform. The product owner consistently ranks new features above defect fixes, and 140 defects are now open, some more than a year old. She says new features win more course enrolments. Support staff tell you that three of the oldest defects generate around 200 help-desk tickets a month, but this has never been raised in backlog refinement. What should the project manager do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree with the developers to reserve a fifth of each sprint's capacity for defect fixes, so the oldest defects are cleared without reopening the priority debate.",
+          "correct": false,
+          "rationale": "Reserving capacity for defects is a common practice, which makes this attractive. Agreed with the developers alone, it overrides the product owner's ordering of the backlog on information she has never seen."
+        },
+        {
+          "id": "b",
+          "text": "Bring the ticket volumes and handling cost for the oldest defects to the next refinement, so the product owner can rank them against features on the same evidence.",
+          "correct": true,
+          "rationale": "The product owner owns the ordering, but she is ranking defects without knowing what they cost. Expressing that cost in the terms she uses for value lets defects compete fairly with features in every future decision."
+        },
+        {
+          "id": "c",
+          "text": "Ask the sponsor to direct the product owner to fix every defect older than six months before any further features are taken into a sprint.",
+          "correct": false,
+          "rationale": "The candidate escalates before the product owner has been given the evidence, and replaces her judgement with a blanket rule that treats a trivial old defect the same as a costly one."
+        },
+        {
+          "id": "d",
+          "text": "Plan a dedicated defect sprint next month, so the backlog is brought down in one concentrated push and feature work resumes straight afterwards.",
+          "correct": false,
+          "rationale": "A clean-up push feels decisive, but the candidate decides the product owner's priorities for her and changes nothing about the information she ranks with, so the backlog will grow again."
+        }
+      ],
+      "explanation": "Owning priority does not guarantee good prioritisation if the owner cannot see what quality failures cost. Defects compete fairly with features only when their cost — support load, lost users, workarounds — is expressed in the same terms used for value. The project manager's job is to put that evidence in front of the decision-maker, not to take the decision away from her.",
+      "mindset": "Show the decision-maker the cost of poor quality before questioning her decisions."
+    },
+    {
+      "id": "pmp-pr7-139",
+      "type": "multi",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "measurement-system",
+        "inspection",
+        "fit-out"
+      ],
+      "stem": "You are managing the fit-out of 400 cabins on a cruise ship. Two inspectors check veneer panels for finish defects. In a weekly comparison, they reached different pass or fail decisions on 30 per cent of the panels both had inspected, and the joinery subcontractor is disputing rejections. The specification says panels must be 'free of visible blemishes'. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree physical reference panels with the client that show the boundary between an acceptable and a rejectable finish.",
+          "correct": true,
+          "rationale": "'Free of visible blemishes' leaves each inspector to supply their own standard. Boundary samples agreed with the client turn the words into a shared, checkable definition of acceptable."
+        },
+        {
+          "id": "b",
+          "text": "Have both inspectors assess the same set of panels twice, without knowing which they have seen, to measure their consistency.",
+          "correct": true,
+          "rationale": "This tests whether each inspector agrees with themselves and with the other. Until the inspection itself is shown to be consistent, its results cannot settle disputes with the subcontractor."
+        },
+        {
+          "id": "c",
+          "text": "Replace the inspector who rejects more panels, since the subcontractor's complaints suggest that standard is too strict.",
+          "correct": false,
+          "rationale": "The candidate assumes the stricter inspector is wrong. With no agreed standard, nobody knows which inspector is closer to what the client expects, and the disagreement would simply continue with someone new."
+        },
+        {
+          "id": "d",
+          "text": "Ask the subcontractor to rework every disputed panel, so only panels that both inspectors would pass go into the cabins.",
+          "correct": false,
+          "rationale": "This protects the client but treats inconsistent inspection as a product defect. The candidate pays for rework the specification may not require and leaves the measurement problem in place."
+        },
+        {
+          "id": "e",
+          "text": "Have both inspectors check every panel, so that each pass or fail decision is confirmed by a second person before it stands.",
+          "correct": false,
+          "rationale": "Double inspection sounds rigorous, but two inconsistent judgements do not make a reliable one. The candidate doubles appraisal cost and multiplies the disagreements without fixing their cause."
+        }
+      ],
+      "explanation": "Before inspection results are used to judge a product, check that the measurement itself can be trusted. Frequent disagreement between inspectors usually stems from an undefined standard or an inconsistent measurement process, and the remedies are a shared operational definition — often physical boundary samples — and a check of how repeatable and reproducible the inspectors' decisions are. Adding inspection on top of an unreliable measurement multiplies the disagreement.",
+      "mindset": "Check that the measurement is trustworthy before trusting what it says about the product."
+    },
+    {
+      "id": "pmp-pr7-140",
+      "type": "hotspot",
+      "domain": "process",
+      "ecoTask": "process-7",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "control-chart",
+        "rule-of-seven",
+        "food-manufacturing"
+      ],
+      "stem": "Your hybrid programme is commissioning a new bread line: equipment is installed to a fixed plan and its control software is tuned in sprints. A control chart tracks the average weight of each hourly sample of loaves, and every point so far lies within the control limits. Each box describes one stretch of the chart. Select the stretch that most warrants investigation for a special cause.",
+      "graphic": {
+        "viewBox": "0 0 720 240",
+        "title": "Loaf-weight control chart divided into five stretches of hourly samples",
+        "caption": "Select a stretch. Use Tab or the arrow keys to move between stretches, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "h1",
+          "n": 1,
+          "label": "Hours 1–8: points scattered either side of the centre line, none near a limit",
+          "x": 10,
+          "y": 60,
+          "w": 130,
+          "h": 120,
+          "correct": false,
+          "rationale": "Random scatter about the centre line, well inside the limits, is what a stable process looks like. There is nothing here to investigate."
+        },
+        {
+          "id": "h2",
+          "n": 2,
+          "label": "Hours 9–16: eight consecutive points above the centre line, all inside the limits",
+          "x": 150,
+          "y": 60,
+          "w": 130,
+          "h": 120,
+          "correct": true,
+          "rationale": "Eight points in a row on one side of the centre line is very unlikely by chance even though none breaches a limit. A run like this suggests the process mean has shifted, for example a change in dough mix or oven setting, and calls for investigation."
+        },
+        {
+          "id": "h3",
+          "n": 3,
+          "label": "Hour 17: one point close to, but inside, the upper control limit",
+          "x": 290,
+          "y": 60,
+          "w": 130,
+          "h": 120,
+          "correct": false,
+          "rationale": "A single point near a limit is eye-catching, which is why it is chosen. Occasional points near the limits are expected in a stable process; on its own, one point inside the limits is not a signal."
+        },
+        {
+          "id": "h4",
+          "n": 4,
+          "label": "Hours 18–24: points either side of the centre line, slightly more spread than hours 1–8",
+          "x": 430,
+          "y": 60,
+          "w": 130,
+          "h": 120,
+          "correct": false,
+          "rationale": "A little more spread over a few hours, still well within the limits and centred, is within normal variation. Reading it as a change confuses ordinary fluctuation with a pattern."
+        },
+        {
+          "id": "h5",
+          "n": 5,
+          "label": "Hour 25: one point just below the centre line, taken just after the flour hopper was refilled",
+          "x": 570,
+          "y": 60,
+          "w": 130,
+          "h": 120,
+          "correct": false,
+          "rationale": "A known event beside a point invites a causal story, but the point itself is unremarkable. Investigating it because of the coincidence treats noise as a signal."
+        }
+      ],
+      "explanation": "A process can be out of control while every point is within the control limits. Non-random patterns — such as seven or more consecutive points on one side of the centre line — signal that something in the process has changed, even though no single point is extreme. Reading a control chart means looking for patterns as well as breaches, and leaving isolated, unremarkable points alone.",
+      "mindset": "Look for patterns on a control chart, not only for points outside the lines."
+    }
+  ]
+}

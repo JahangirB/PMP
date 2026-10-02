@@ -1,0 +1,1689 @@
+{
+  "type": "pmp-pack",
+  "schemaVersion": 2,
+  "ecoVersion": "2026-07",
+  "name": "Business 4 — Impediments and issues",
+  "questions": [
+    {
+      "id": "pmp-b4-101",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-apply-the-rule",
+        "issue-log",
+        "risk-to-issue",
+        "construction"
+      ],
+      "stem": "You are managing construction of a new outpatient wing for a hospital trust. The risk register lists the insolvency of the specialist glazing subcontractor, with a planned contingency response: switch to a pre-qualified alternative supplier. This morning the subcontractor announced that it has entered administration. Glazing is due to start in five weeks. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Record the event in the issue log with a named owner and begin carrying out the planned contingency response with the alternative supplier.",
+          "correct": true,
+          "rationale": "The risk has happened, so it is now an issue that needs an owner and action. The contingency response was prepared for exactly this moment, and five weeks is enough to use it if work starts now."
+        },
+        {
+          "id": "b",
+          "text": "Raise the probability of the insolvency risk to 100% in the risk register and schedule it for discussion at the next monthly risk review meeting.",
+          "correct": false,
+          "rationale": "The candidate keeps treating an event that has occurred as something still to be assessed. A risk review weeks away is the wrong forum for a problem already affecting the work, and the planned response sits unused."
+        },
+        {
+          "id": "c",
+          "text": "Ask the administrators whether the subcontractor's contract can still be honoured before deciding whether to approach the pre-qualified alternative supplier.",
+          "correct": false,
+          "rationale": "The candidate waits on an uncertain outcome controlled by someone else. Administrators rarely give quick answers, and every week spent waiting comes out of the five weeks the planned response needs."
+        },
+        {
+          "id": "d",
+          "text": "Commission a fresh market search for glazing suppliers so that the project can compare several replacement quotes before committing to any one of them.",
+          "correct": false,
+          "rationale": "The candidate ignores the response that was already planned and pre-qualified. Starting the selection again throws away the preparation the risk register paid for and spends time the schedule does not have."
+        }
+      ],
+      "explanation": "Once a risk event occurs it stops being a risk and becomes an issue: something already affecting the project that needs an owner and an action, not a fresh assessment of likelihood. The response planned while it was still a risk is the starting point, because it was prepared precisely so that no time is lost deciding what to do when the event happens. The register entry is then updated to show the risk has materialised, and any secondary risks the response creates are logged.",
+      "mindset": "When a risk happens, stop assessing it and start executing the response you planned for it."
+    },
+    {
+      "id": "pmp-b4-102",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-act-now",
+        "daily-standup",
+        "impediment-removal",
+        "banking-app"
+      ],
+      "stem": "At the daily stand-up of a team building a mobile banking app, a developer says her payment-sandbox credentials expired overnight and she cannot test the card-payments story she is finishing. The partner bank's support desk reissues credentials within an hour of a request from the named contact, who is the team facilitator. Six more people have yet to give their update. What should the facilitator do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pause the stand-up briefly to phone the partner's support desk while the whole team is present, so that everyone hears when access will return.",
+          "correct": false,
+          "rationale": "The candidate treats urgency as a reason to solve the blocker inside the stand-up. Six people wait on a call that one person could make ten minutes later, and the stand-up turns into a working session."
+        },
+        {
+          "id": "b",
+          "text": "Note the blocker, let the stand-up finish, then contact the partner's support desk straight afterwards to have the credentials reissued.",
+          "correct": true,
+          "rationale": "The stand-up surfaces the blocker and the person best placed to clear it acts as soon as it ends. The developer is back at work within the hour and the other six updates are not held up."
+        },
+        {
+          "id": "c",
+          "text": "Ask the developer to raise a support ticket with the partner herself and to pick up another story from the sprint backlog in the meantime.",
+          "correct": false,
+          "rationale": "The candidate hands the blocker back to the person it blocks. The facilitator is the named contact who can get it cleared within the hour, so routing it through the developer only adds delay."
+        },
+        {
+          "id": "d",
+          "text": "Add the expired credentials to the impediment board and propose a reminder process for credential renewals at the next sprint retrospective.",
+          "correct": false,
+          "rationale": "Preventing a repeat is worth doing, but the candidate puts it in place of clearing today's blocker. The developer stays stuck until someone acts, and the retrospective may be days away."
+        }
+      ],
+      "explanation": "A blocker raised at a stand-up is acknowledged there and worked immediately afterwards by whoever is best placed to clear it. The stand-up exists to make blockers visible, not to solve them in front of the whole team, and the person who is blocked is often the worst placed to chase the fix. Preventing recurrence is a separate, later conversation that should not stand in for clearing the blocker in front of you today.",
+      "mindset": "Surface blockers in the stand-up and clear them straight after it."
+    },
+    {
+      "id": "pmp-b4-103",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "delegated-authority",
+        "test-tooling",
+        "insurance"
+      ],
+      "stem": "Your hybrid project is replacing an insurer's claims system. On Monday the licence for the automated regression-testing tool expired, and the four testers in the current iteration cannot run their suites. Renewal costs €1,800. The project management plan lets you approve unplanned spend up to €5,000 from the project budget. The finance team's normal purchasing route takes about three weeks, but the project office's corporate card can buy the renewal online the same day. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Submit a purchase request through the finance team's normal route, and ask the testers to run the most important regression checks manually until the licence arrives.",
+          "correct": false,
+          "rationale": "The candidate treats the standard route as the only proper one. Three weeks of manual regression testing by four people costs far more than the licence, and the plan already gives you a faster route."
+        },
+        {
+          "id": "b",
+          "text": "Raise the expiry with the sponsor as an issue, asking for approval to renew the licence quickly because of its effect on this iteration's testing.",
+          "correct": false,
+          "rationale": "The candidate escalates a decision that is already within delegated limits. It adds a wait, spends the sponsor's attention on something routine, and suggests the delegation is not to be relied on."
+        },
+        {
+          "id": "c",
+          "text": "Approve the €1,800 renewal under your spending limit, buy it the same day on the project office's card, and record the spend in the cost log.",
+          "correct": true,
+          "rationale": "The decision sits inside the authority the plan gives you, and the same-day route exists. Using the authority, with the spend recorded, clears the blocker for four testers today rather than in three weeks."
+        },
+        {
+          "id": "d",
+          "text": "Ask the tool vendor for a free thirty-day extension of the licence while the renewal goes through the finance team's normal purchasing route.",
+          "correct": false,
+          "rationale": "The candidate relies on a favour the vendor may not grant, when an authorised way to fix the problem today is available. If the vendor says no, the testers have lost another day or more."
+        }
+      ],
+      "explanation": "Delegated authority exists so that impediments inside agreed limits can be cleared at the speed the work needs. When a blocker can be removed by a decision you are allowed to take, the professional move is to take it, record it and report it, rather than routing it through a slower process or a more senior person out of caution. Escalation is for decisions outside your limits, not for decisions you would prefer someone else to own.",
+      "mindset": "If clearing a blocker is within your authority, clearing it is your job."
+    },
+    {
+      "id": "pmp-b4-104",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "contract-notice",
+        "site-access",
+        "manufacturing"
+      ],
+      "stem": "Your company is installing a new filling line at a customer's bottling plant under a fixed-price contract that obliges the customer to provide site access. After an unrelated chemical spill, the customer's safety team has closed the building to all contractors for an estimated four weeks. Your installation crew of nine is due on site on Monday. Which two actions should the project manager take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Give the customer formal written notice under the contract that site access is unavailable, setting out the expected effect on cost and dates.",
+          "correct": true,
+          "rationale": "Access is the customer's obligation, and notice given now records who owns the delay while it is happening. It also makes the impact visible to the customer early enough for both sides to plan."
+        },
+        {
+          "id": "b",
+          "text": "Re-sequence the work so that the crew carries out off-site pre-assembly and factory testing of the line while the building remains closed.",
+          "correct": true,
+          "rationale": "The closure blocks on-site work, not all work. Moving forward the tasks that can be done elsewhere keeps the crew productive and shortens the delay that will remain when the building reopens."
+        },
+        {
+          "id": "c",
+          "text": "Ask the customer's operations director to let the crew work in an unaffected part of the building despite the safety team's closure.",
+          "correct": false,
+          "rationale": "The candidate tries to get round a safety decision by going to someone more senior. A contractor pressing a client to override its own safety team is using the wrong lever, whatever the schedule pressure."
+        },
+        {
+          "id": "d",
+          "text": "Submit a change request now to re-baseline the installation schedule by four weeks, so that the plan reflects the customer's closure.",
+          "correct": false,
+          "rationale": "The candidate fixes the plan around an estimate before the impact is known or reduced. Re-sequencing may shrink the delay, and the contractual route for a customer-caused delay starts with notice, not a re-baseline."
+        },
+        {
+          "id": "e",
+          "text": "Stand the whole crew down until the customer confirms a reopening date, to avoid paying nine people while there is nothing for them to install.",
+          "correct": false,
+          "rationale": "The candidate assumes idle time is the only alternative to site work. Standing the crew down risks losing them to other jobs and ignores the off-site work that could be brought forward."
+        }
+      ],
+      "explanation": "An impediment caused by something outside the project's control is handled on two tracks at once: protect the project's position formally, and keep as much work moving as the constraint allows. Notice under the contract records who owns the delay while it is happening, which is far easier than reconstructing it later. Re-sequencing finds the work the constraint does not block. Trying to override the constraint, or freezing until it lifts, both treat it as something other than a fact to plan around.",
+      "mindset": "Record the impact of a constraint you cannot remove, then plan the work it still allows."
+    },
+    {
+      "id": "pmp-b4-105",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-route-to-owner",
+        "escalation",
+        "issue-ownership",
+        "public-sector"
+      ],
+      "stem": "On a predictive project to build a new records system for a county council, three issues have been raised this week. Match each issue to the route that should resolve it. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "Two members of the project team have each booked the only performance-test rig for the same Thursday."
+        },
+        {
+          "id": "s2",
+          "text": "Finance and Operations each insist the new invoicing workflow follow their own approval rules, and build cannot start until one set is chosen. Both directors report to the sponsor."
+        },
+        {
+          "id": "s3",
+          "text": "A sister project in the same programme has slipped delivery of the data feed your reporting module needs, and its manager says your date is not his priority."
+        }
+      ],
+      "options": [
+        {
+          "id": "pm",
+          "text": "The project manager resolves it directly",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Scheduling a shared project resource between two team members sits within the project manager's own authority. Escalating it would spend other people's time on a decision the project manager can take in minutes."
+        },
+        {
+          "id": "sponsor",
+          "text": "Escalate to the sponsor for a decision",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Each director has authority over their own area, and the project manager cannot choose between them. The sponsor is the lowest level with authority over both, so the decision belongs there."
+        },
+        {
+          "id": "prog",
+          "text": "Raise it with the programme manager, who owns dependencies between projects",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Priority between two projects in one programme is the programme manager's call. Neither project manager can settle it, and arguing it out between them only hardens positions."
+        },
+        {
+          "id": "ccb",
+          "text": "Submit a change request to the change control board",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. None of the three changes the approved baseline yet; each is a problem needing a decision from someone with authority. A change request may follow if the resolution alters scope or dates, but it is not how the issue gets resolved."
+        }
+      ],
+      "explanation": "An issue goes to the lowest level that has authority over everything involved in resolving it. Within the project team that is the project manager; between departments it is whoever both report to; between projects it is whoever owns the programme or portfolio they share. Sending an issue too low leaves it with someone who cannot decide, and sending it too high wastes attention and weakens the levels in between.",
+      "mindset": "Find who has authority over every party to an issue, and take it there."
+    },
+    {
+      "id": "pmp-b4-106",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "self-organisation",
+        "test-automation",
+        "online-retail"
+      ],
+      "stem": "A team building an online grocery checkout keeps losing time to its own automated test suite, which fails at random about one run in four. The team built the suite and maintains it. At the retrospective the developers ask you, as team facilitator, to 'get someone to sort out the flaky tests' so they can stay focused on sprint goals. What is the most appropriate response?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Agree to find a specialist from the platform group to stabilise the suite for the team, so that the developers can keep their full capacity on customer features.",
+          "correct": false,
+          "rationale": "The candidate accepts the premise that removing impediments means finding someone else to remove them. A specialist without the team's knowledge of the suite will be slower, and the team learns nothing about keeping it stable."
+        },
+        {
+          "id": "b",
+          "text": "Log the flaky suite on the impediment board with yourself as the owner, and chase progress on it at each daily stand-up until the failures have been resolved.",
+          "correct": false,
+          "rationale": "The candidate makes the facilitator the owner of a problem only the team can fix. Tracking it daily changes nothing while no one has been given the time to work on it."
+        },
+        {
+          "id": "c",
+          "text": "Ask the team to configure failed tests to rerun automatically up to three times, so that random failures stop interrupting sprint work while the cause is investigated.",
+          "correct": false,
+          "rationale": "The candidate reaches for a workaround that hides the symptom. Automatic reruns also mask genuine failures, and with the interruptions gone the investigation is likely to drift."
+        },
+        {
+          "id": "d",
+          "text": "Help the team see the flaky suite as its own work, and ask the product owner to make room in the next sprint for the team to fix it.",
+          "correct": true,
+          "rationale": "The team built the suite and understands it best, so it is best placed to fix it. The facilitator's contribution is to make that work legitimate by getting it capacity, rather than moving it out of the team."
+        }
+      ],
+      "explanation": "Removing impediments does not mean that the facilitator, or someone the facilitator finds, removes every impediment. When the cause sits inside the team's own work, the team is usually best placed to fix it, and the facilitator's job is to make that work legitimate by securing capacity for it rather than taking it away. Moving team-owned problems outside the team builds dependency and leaves the knowledge of the fix with someone else.",
+      "mindset": "Before taking a blocker off the team, ask whether the team is the one best placed to clear it."
+    },
+    {
+      "id": "pmp-b4-107",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "root-cause",
+        "issue-log",
+        "pensions"
+      ],
+      "stem": "You are leading a hybrid project to move a pension administrator onto a new platform. Three issues have been open for a week, each with a different owner: overnight data loads into the test environment fail on some nights, member statements show reconciliation mismatches, and morning batch jobs overrun. Each owner is working on a fix in their own area. You notice all three began the week the legacy system's nightly extract was rescheduled. What should you do next?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask each owner to speed up their own fix and report progress to you daily, since three issues open for a week now threaten the next release date.",
+          "correct": false,
+          "rationale": "The candidate pushes harder on the symptoms. If the three share a cause, faster separate fixes waste effort and may not hold, because the thing producing all three is still in place."
+        },
+        {
+          "id": "b",
+          "text": "Ask the legacy system team to move the nightly extract back to its old time and see whether the three issues then disappear on their own.",
+          "correct": false,
+          "rationale": "The candidate acts on a hunch by changing another team's system. The extract may have been moved for a reason the legacy team owns, and reverting it before the link is confirmed is a fix in search of a diagnosis."
+        },
+        {
+          "id": "c",
+          "text": "Bring the three owners together to test whether the extract rescheduling explains all three issues before more effort goes into separate fixes.",
+          "correct": true,
+          "rationale": "The timing points to a shared cause but does not prove one. A short joint check is cheap, and if it confirms the link, three separate fixes for symptoms can be replaced by one fix for the cause."
+        },
+        {
+          "id": "d",
+          "text": "Merge the three entries into one issue in the log under a single owner, so the pattern is tracked in one place with one accountable person.",
+          "correct": false,
+          "rationale": "The candidate records a common cause before anyone has confirmed it. If the issues turn out to be unrelated, one owner now holds three problems in areas they do not know."
+        }
+      ],
+      "explanation": "When several issues start at the same time, the first question is whether they share a cause, because separate fixes for the symptoms of one cause multiply the effort and may not hold. Testing a suspected common cause with the people who own each symptom is cheap and quick. Acting on the suspicion, whether by reverting a change or merging the records, commits the project to a diagnosis nobody has confirmed.",
+      "mindset": "When problems arrive together, check for a shared cause before fixing them one by one."
+    },
+    {
+      "id": "pmp-b4-108",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 5,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "issue-closure",
+        "verification",
+        "data-centre"
+      ],
+      "stem": "Your project is moving a building society's core systems to a new data centre. A high-severity issue, nightly backups failing, was raised two weeks ago because cutover depends on being able to restore from backup. The vendor applied a patch, and the issue owner now reports it resolved: the last three nightly backups completed without error. Cutover is in four days. The steering group asks whether the issue can be closed. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Close the issue on the evidence of three clean backups, and add a risk to the register that the backup failures could recur before cutover.",
+          "correct": false,
+          "rationale": "The candidate accepts the absence of the error as proof of resolution. A backup job can complete cleanly and still produce something that will not restore, which is the failure cutover cannot afford."
+        },
+        {
+          "id": "b",
+          "text": "Keep the issue open until a full test restore from one of the new backups has succeeded, then close it with that result recorded.",
+          "correct": true,
+          "rationale": "The issue mattered because cutover needs a restorable backup, and only a restore proves that. A test restore fits inside the four days and closes the issue on the evidence the dependency actually needs."
+        },
+        {
+          "id": "c",
+          "text": "Close the issue, but keep the vendor's engineer on standby through the cutover weekend so that any recurring backup failure can be handled at once.",
+          "correct": false,
+          "rationale": "The candidate guards against the fault returning but never confirms that the project's need is met. Standby support helps if backups fail again; it does nothing if they are already unusable."
+        },
+        {
+          "id": "d",
+          "text": "Ask the steering group to defer cutover by a week, so that a longer run of successful nightly backups can confirm that the patch has held.",
+          "correct": false,
+          "rationale": "The candidate looks for more of the same evidence. A longer run of clean backups still says nothing about restorability, and it costs a week that a single test restore would not."
+        }
+      ],
+      "explanation": "An issue is resolved when the effect it was having on the project is gone, which is not always the same as the symptom stopping. Closure should be tested against what the issue was blocking, and the evidence chosen accordingly. Defining closure evidence by the dependency rather than by the original fault report prevents issues being closed only to return at the worst possible moment.",
+      "mindset": "Close an issue on evidence that the project's need is met, not that the error has stopped."
+    },
+    {
+      "id": "pmp-b4-109",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-apply-the-rule",
+        "issue-prioritisation",
+        "float",
+        "construction"
+      ],
+      "stem": "You manage construction of a secondary school's sports hall. The diagram lists four open issues. Each label gives the activity the issue blocks, the days remaining until that activity's latest start (float already included) and how long the issue is expected to take to resolve. Select the issue that most needs your attention today.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Four open issues, each with its blocked activity, time to latest start and expected resolution time",
+        "caption": "Select an issue. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "i14",
+          "n": 1,
+          "label": "Issue 14, soil report: blocks Foundations (critical path); latest start in 20 days; resolution expected in 8 days",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 70,
+          "correct": false,
+          "rationale": "Twelve days of margin remain between the expected resolution and the latest start, so this issue needs tracking rather than intervention today. Being on the critical path makes lateness costly; it does not make the issue late."
+        },
+        {
+          "id": "i17",
+          "n": 2,
+          "label": "Issue 17, crane permit: blocks Steel erection (6 days float); latest start in 15 days; permit office quotes 21 days",
+          "x": 20,
+          "y": 105,
+          "w": 600,
+          "h": 70,
+          "correct": true,
+          "rationale": "The only issue whose expected resolution, 21 days, outlasts the time left before its activity's latest start, 15 days. Left alone it will use all six days of float and then delay the finish by six more, so it needs action now even though it is not on the critical path today."
+        },
+        {
+          "id": "i19",
+          "n": 3,
+          "label": "Issue 19, signage dispute: blocks Signage fit-out (40 days float); latest start in 70 days; resolution expected in 25 days",
+          "x": 20,
+          "y": 190,
+          "w": 600,
+          "h": 70,
+          "correct": false,
+          "rationale": "The longest resolution time on the list, but also the widest window, leaving 45 days of margin. Choosing it confuses the issue that takes longest to clear with the one most likely to delay the project."
+        },
+        {
+          "id": "i21",
+          "n": 4,
+          "label": "Issue 21, cladding samples: blocks Cladding approval (critical path); latest start in 12 days; supplier promises 10 days",
+          "x": 20,
+          "y": 275,
+          "w": 600,
+          "h": 70,
+          "correct": false,
+          "rationale": "The tightest margin among the critical-path issues, two days, and worth watching closely. It is still forecast to clear in time, whereas another issue is already forecast to cause a delay."
+        }
+      ],
+      "explanation": "Issues are prioritised by comparing how long each will take to clear with how long the project can wait before it hurts, using latest start dates because they already include float. An issue off the critical path can be the most urgent if its resolution will outlast its float, and an issue on the critical path can safely wait if it will clear in time. Critical-path status tells you the consequence of lateness; the margin tells you whether lateness is coming.",
+      "mindset": "Rank issues by whether they will clear in time, not by where they sit in the network."
+    },
+    {
+      "id": "pmp-b4-110",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "cost-of-delay",
+        "blocker-resolution",
+        "logistics"
+      ],
+      "stem": "Midway through an iteration, a hybrid logistics software project loses its shared integration environment. Four developers are blocked and have no other useful work; each blocked developer-day costs £640. The infrastructure team can rebuild the environment in 6 working days at no charge to the project. A specialist contractor can rebuild it in 2 working days for a fixed £5,500. Compare the two routes on cost.",
+      "blanks": [
+        {
+          "id": "wait",
+          "label": "Cost of blocked developer time if the infrastructure team rebuilds the environment, in £",
+          "numeric": true,
+          "expect": 15360,
+          "tol": 10,
+          "unit": "£",
+          "rationale": "Four developers blocked for six days at £640 a day: 4 × 6 × 640 = £15,360. The rebuild itself is free to the project, but the waiting is not."
+        },
+        {
+          "id": "contractor",
+          "label": "Total cost of the contractor route, including blocked developer time, in £",
+          "numeric": true,
+          "expect": 10620,
+          "tol": 10,
+          "unit": "£",
+          "rationale": "Blocked time for two days is 4 × 2 × 640 = £5,120, plus the contractor's fixed £5,500, giving £10,620. The fee is more than offset by the four days of waiting it removes."
+        },
+        {
+          "id": "saving",
+          "label": "Saving from using the contractor rather than waiting for the infrastructure team, in £",
+          "numeric": true,
+          "expect": 4740,
+          "tol": 10,
+          "unit": "£",
+          "rationale": "£15,360 − £10,620 = £4,740. The paid route is cheaper overall because it shortens the period in which four people cannot work, even though it is the only route with an invoice attached."
+        }
+      ],
+      "explanation": "The cost of an impediment is not only what it takes to remove it but what the project loses while it stays in place. A free fix that takes longer can be the expensive option once idle time is priced, and paying to shorten a blockage is justified when the time it saves is worth more than the fee. The comparison rests on the blocked people genuinely having nothing else useful to do; if they can be redeployed, the cost of waiting falls and the answer can change.",
+      "mindset": "Price the waiting, not just the fix, before deciding how to clear a blocker."
+    },
+    {
+      "id": "pmp-b4-111",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "product-owner",
+        "decision-latency",
+        "travel"
+      ],
+      "stem": "Three stories in a travel-booking team's current sprint are waiting on decisions about how refunds should work for partly used multi-city tickets. The product owner, the only person who can make those decisions, is in the office today but starts two weeks' leave tomorrow. The sprint has eight working days left. The developers have drafted their questions but not yet sent them. What should the team facilitator do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Send the drafted questions to the product owner by email today, asking her to reply before she leaves so that the developers have the answers in writing.",
+          "correct": false,
+          "rationale": "The candidate relies on a written exchange on someone's busiest day. Email answers tend to raise follow-up questions, and by the time those arrive the product owner is already on leave."
+        },
+        {
+          "id": "b",
+          "text": "Ask the product owner to name a delegate who can make the refund decisions for the next two weeks while she is away on leave.",
+          "correct": false,
+          "rationale": "The candidate reaches for a stand-in when the owner of the decisions is still in the building. A delegate has to rebuild her context and may defer the harder calls until she returns."
+        },
+        {
+          "id": "c",
+          "text": "Ask the developers to build the stories on their best assumptions about the refund rules, and adjust them once the product owner is back from leave.",
+          "correct": false,
+          "rationale": "The candidate trades a short wait for likely rework on rules that involve customers' money. Building on assumptions is for when the decision maker cannot be reached, which is not the case today."
+        },
+        {
+          "id": "d",
+          "text": "Book time with the product owner and the developers this afternoon to settle the three refund decisions before she goes on leave.",
+          "correct": true,
+          "rationale": "The decision maker is available for one more day, and a conversation resolves follow-up questions on the spot. Clearing all three blockers today keeps the stories moving for the rest of the sprint."
+        }
+      ],
+      "explanation": "When a blocker depends on one person's decision and that person's availability is about to end, the cheapest moment to clear it is before the window closes. A short conversation with the decision maker usually resolves questions faster than written exchanges, and far faster than a delegate who has to rebuild the context. Workarounds such as building on assumptions or appointing stand-ins are for when the owner genuinely cannot be reached.",
+      "mindset": "Clear a blocker while the person who can clear it is still within reach."
+    },
+    {
+      "id": "pmp-b4-112",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "issue-log",
+        "risk-register",
+        "warehousing"
+      ],
+      "stem": "On a predictive project to build a regional distribution warehouse, the project manager is deciding where each new item should first be recorded. Complete each sentence with the right record. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "The steel erector's only crane broke down this morning and no steel can be lifted this week, so the item belongs in the"
+        },
+        {
+          "id": "c2",
+          "text": "Ground surveys suggest unrecorded utilities may lie under the car park, which would halt excavation if confirmed, so the item belongs in the"
+        },
+        {
+          "id": "c3",
+          "text": "The client has asked for a second loading bay to be added to the approved design, so the item belongs in the"
+        }
+      ],
+      "options": [
+        {
+          "id": "issue",
+          "text": "issue log, with an owner and a target resolution date",
+          "correct": true,
+          "match": "c1",
+          "rationale": "The breakdown has already happened and is stopping work now. It needs someone to own the fix and a date to work to, which is what the issue log provides."
+        },
+        {
+          "id": "risk",
+          "text": "risk register, with a probability, impact and planned response",
+          "correct": true,
+          "match": "c2",
+          "rationale": "The utilities may or may not be there, so this is an uncertainty rather than a problem in hand. It needs assessing and a response planning before excavation reaches the car park."
+        },
+        {
+          "id": "change",
+          "text": "change log, pending assessment and a decision by the change control board",
+          "correct": true,
+          "match": "c3",
+          "rationale": "A second loading bay alters the approved design, so it is a request to change the baseline. It needs its impact assessed and a decision from whoever holds that authority."
+        },
+        {
+          "id": "lessons",
+          "text": "lessons learned register, for review at the next phase gate",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Any of the three may yield a lesson later, but none is primarily a lesson. Recording one there first would leave an issue unowned, a risk unassessed or a change undecided."
+        }
+      ],
+      "explanation": "Where an item is recorded first depends on what it is. Something already happening is an issue that needs an owner and action; something uncertain is a risk that needs assessment and a response; a request to alter what was agreed is a change that needs a decision. The classification matters because each record drives a different process, and an item in the wrong record is handled by the wrong one.",
+      "mindset": "Classify before you record: it has happened, it might happen, or someone wants it changed."
+    },
+    {
+      "id": "pmp-b4-113",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-diagnose-first",
+        "impediment-response",
+        "workaround",
+        "retail"
+      ],
+      "stem": "A hybrid team is building a retail chain's click-and-collect app. Three impediments are on its board this week. Match each impediment to the response that should come first. One choice is not used.",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "The build pipeline fails about one run in six, on a different stage each time, and nobody has yet worked out why."
+        },
+        {
+          "id": "p2",
+          "text": "A security sign-off that only the information security office can give has waited nine days; two working-level reminders have gone unanswered and the release is in three weeks."
+        },
+        {
+          "id": "p3",
+          "text": "The shared design-system library has a layout bug that its owning team will fix next quarter; a local style override takes an hour and is easy to remove later."
+        }
+      ],
+      "options": [
+        {
+          "id": "diag",
+          "text": "Collect data on the failures before choosing a fix",
+          "correct": true,
+          "match": "p1",
+          "rationale": "The cause is unknown and the symptoms move around, so any fix chosen now is a guess. Evidence about when and where the failures happen is what turns the next step from a guess into a decision."
+        },
+        {
+          "id": "esc",
+          "text": "Escalate one level up, stating the effect on the release date",
+          "correct": true,
+          "match": "p2",
+          "rationale": "Only one office can remove this blocker and working-level contact has not moved it. Escalating with the release impact stated gives the next level a reason to act and a basis for weighing it."
+        },
+        {
+          "id": "wa",
+          "text": "Apply a documented workaround and log it for later removal",
+          "correct": true,
+          "match": "p3",
+          "rationale": "The proper fix belongs to another team and is months away, while a cheap, reversible workaround exists. Logging it ensures it is taken out once the library is fixed rather than becoming permanent."
+        },
+        {
+          "id": "replan",
+          "text": "Re-plan the release to drop the features the impediment affects",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. Descoping is a legitimate last resort, but it is premature for all three: one can be diagnosed, one escalated and one worked around, and each of those keeps the features in the release."
+        }
+      ],
+      "explanation": "The right first response to an impediment depends on what is known about it and who controls it. A blocker whose cause is unknown needs evidence before a fix, or the fix is a guess. One that only someone else can remove, and that working-level contact has not shifted, needs escalation framed by its impact. One whose proper fix belongs to another team and is distant can be bridged by a workaround, provided it is recorded so it is removed later. Cutting scope is for when none of these will work in time.",
+      "mindset": "Match the response to what you know about a blocker and who can remove it."
+    },
+    {
+      "id": "pmp-b4-114",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "hidden-impediment",
+        "sustainable-pace",
+        "games"
+      ],
+      "stem": "A games studio team's velocity has looked steady for six sprints, and management considers the team healthy. In a one-to-one, a developer tells you the team has been working late most evenings because a full build now takes forty minutes, up from eight, and nobody wanted to report a problem they thought they should solve themselves. Which two actions should you take as team facilitator?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Measure how much time the team loses waiting for builds each sprint, and present the figures at the next sprint review.",
+          "correct": true,
+          "rationale": "The cost of the slow builds has been invisible because the team absorbed it. Showing it in hours lost puts it in front of the people who can fund a fix, in terms they can weigh."
+        },
+        {
+          "id": "b",
+          "text": "Talk with the team about why it kept the problem quiet, and agree that blockers are raised at the stand-up even when the team expects to fix them itself.",
+          "correct": true,
+          "rationale": "The build time is the symptom; the habit of hiding blockers is what let it grow for six sprints. Changing the team's norm stops the next impediment disappearing the same way."
+        },
+        {
+          "id": "c",
+          "text": "Arrange for the team to spend the next sprint optimising the build, so that the problem is solved before management needs to be involved.",
+          "correct": false,
+          "rationale": "The candidate repeats the team's instinct to fix it quietly. The cost stays hidden, and management may have options, such as faster hardware, that the team cannot authorise for itself."
+        },
+        {
+          "id": "d",
+          "text": "Ask management to approve paid overtime for the evenings already worked, so that the team's extra effort is recognised and rewarded fairly.",
+          "correct": false,
+          "rationale": "The candidate rewards the heroics that are masking the impediment. Paying for the overtime makes it part of the arrangement and does nothing to bring the build time down."
+        },
+        {
+          "id": "e",
+          "text": "Ask the team to stop working late from now on, so that velocity falls and management sees the effect of the slow builds for itself.",
+          "correct": false,
+          "rationale": "The candidate lets a metric carry the message without the explanation. A sudden fall in velocity is as likely to be read as a performance problem as a tooling one."
+        }
+      ],
+      "explanation": "An impediment the team absorbs through extra hours is still an impediment; it has simply been made invisible, along with its cost. Making it visible means showing its effect in terms that the people who can fund or authorise a fix understand, and changing the team habit that led to it being hidden. Heroics keep the metrics steady while the cause grows, and a metric that changes without explanation is just as likely to be misread.",
+      "mindset": "A blocker absorbed by overtime is hidden, not handled."
+    },
+    {
+      "id": "pmp-b4-115",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "supplier-performance",
+        "evidence",
+        "civil-engineering"
+      ],
+      "stem": "On a multi-storey car park build, three of the last five scheduled concrete pours were cancelled on the morning. Your site manager blames the ready-mix supplier and wants to switch to another, which would add £12,000 across the remaining pours. The supplier says two of the three cancellations came from your own site team. Eleven pours remain. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Approve the switch to the alternative supplier, because further cancelled pours would cost more in delay than the extra £12,000 across the remaining pours.",
+          "correct": false,
+          "rationale": "The candidate acts on one side's account. If the site team caused the cancellations, a new supplier costs £12,000 and the pours keep being cancelled."
+        },
+        {
+          "id": "b",
+          "text": "Review the delivery tickets, site diary and cancellation calls with the site manager and the supplier to establish who cancelled each pour and why.",
+          "correct": true,
+          "rationale": "The two accounts conflict, and every remedy assumes one of them. Records both sides accept can settle who cancelled each pour quickly, so the response is aimed at the real cause."
+        },
+        {
+          "id": "c",
+          "text": "Issue the supplier with a formal performance notice under the supply contract, setting out the cancellations and requiring a recovery plan from them.",
+          "correct": false,
+          "rationale": "The candidate uses a contractual remedy on disputed facts. If the notice turns out to be wrong it damages the relationship and the project's credibility for the eleven pours still to come."
+        },
+        {
+          "id": "d",
+          "text": "Keep the current supplier, but book a second supplier on standby for each remaining pour so that any cancellation can be covered the same morning.",
+          "correct": false,
+          "rationale": "The candidate pays for cover without knowing the cause. If the site team is cancelling pours, a standby lorry waits just as idly as the first one."
+        }
+      ],
+      "explanation": "When the cause of a recurring issue is disputed, the first step is to establish the facts from records both sides accept, because every remedy assumes a cause. Switching suppliers, invoking the contract or buying standby capacity are each sensible responses to one cause and wasteful responses to another. Records that already exist are usually enough to settle who did what, and settling it first keeps the remedy aimed at the real problem.",
+      "mindset": "When people disagree about why something keeps going wrong, settle the facts before choosing the fix."
+    },
+    {
+      "id": "pmp-b4-116",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "constraint",
+        "integration-testing",
+        "utilities"
+      ],
+      "stem": "Your hybrid project is building a customer portal for a water utility, with development done by a team in another country. The utility's security office has formally refused remote access to its network for any external party, and the sponsor has confirmed the policy will not change. Integration testing against the utility's billing system is due to start in six weeks. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Plan integration testing around the policy, for example with a small on-site test team or a sanitised replica of the billing system.",
+          "correct": true,
+          "rationale": "The refusal is formal and the sponsor has confirmed it, so it is a constraint rather than an obstacle to negotiate. Six weeks is enough to set up testing that works within it."
+        },
+        {
+          "id": "b",
+          "text": "Ask the sponsor to take one more request for a time-limited exception to the utility's board, setting out the cost of not having remote access.",
+          "correct": false,
+          "rationale": "The candidate reopens a decision that has been made and confirmed. Each week spent on another request is a week not spent preparing a way to test that the policy allows."
+        },
+        {
+          "id": "c",
+          "text": "Have the offshore team test against mocked billing interfaces, and leave full integration testing to the user acceptance phase at the end of the project.",
+          "correct": false,
+          "rationale": "The candidate defers the integration risk to the point where defects are most expensive to fix. Mocks are useful, but they are not a substitute when a compliant way to test the real system exists."
+        },
+        {
+          "id": "d",
+          "text": "Raise the refusal as a high-impact risk and monitor it at each steering group meeting until integration testing is due to begin in six weeks.",
+          "correct": false,
+          "rationale": "The candidate treats a certainty as an uncertainty. The refusal has already happened, so monitoring it adds nothing, and the six weeks pass without a plan."
+        }
+      ],
+      "explanation": "Some impediments are constraints: decided, legitimate and not going to move. Once that has been established, effort spent trying to remove them is effort not spent working within them. The useful question changes from how to get the rule lifted to how to deliver the outcome the rule still allows, and the earlier that switch is made, the more options remain.",
+      "mindset": "Once a constraint is confirmed, stop pushing against it and design around it."
+    },
+    {
+      "id": "pmp-b4-117",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-trade-off",
+        "production-support",
+        "capacity",
+        "energy"
+      ],
+      "stem": "On an energy retailer's billing team, one developer is the only person who understands the legacy tariff engine. Production support requests now take about a third of her time, arriving unpredictably, and two sprint goals in a row have been missed because her stories stalled. The head of operations says the support must continue because billing errors reach customers. What should the team facilitator do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reserve a set share of her capacity for support each sprint, plan sprint goals on the remainder, and pair a colleague with her on support work.",
+          "correct": true,
+          "rationale": "The support is legitimate, so the trade-off is made openly: a known allowance, honest planning on what is left, and a start on reducing the single-person dependency that makes the interruptions so costly."
+        },
+        {
+          "id": "b",
+          "text": "Route each support request through the product owner, who weighs it against the sprint goal and decides whether it should interrupt the developer's work.",
+          "correct": false,
+          "rationale": "The candidate adds a gate instead of a plan. Billing errors still need fixing, so most requests will pass the gate anyway, and the product owner becomes a new source of delay for customer-facing fixes."
+        },
+        {
+          "id": "c",
+          "text": "Ask the head of operations to set up a separate support team for the tariff engine, so that the billing team keeps its full capacity for sprint goals.",
+          "correct": false,
+          "rationale": "The candidate moves the problem elsewhere without its cause. Nobody else understands the engine, so a new team would still depend on the same developer, just through a longer route."
+        },
+        {
+          "id": "d",
+          "text": "Remove the developer from sprint commitments altogether, make her the full-time support contact for the engine, and plan the sprints without her.",
+          "correct": false,
+          "rationale": "The candidate overcorrects, turning a third of her time into all of it. It deepens the single point of failure and loses her development knowledge to the team."
+        }
+      ],
+      "explanation": "When an impediment cannot be removed because the work causing it is legitimate, the trade-off is made explicit: decide how much capacity the competing demand gets, plan the rest honestly, and reduce the dependency that makes the demand so disruptive. Protecting the sprint completely ignores a real business need, and surrendering to the demand completely deepens the single point of failure. Predictable allocation turns an unpredictable interruption into planned work.",
+      "mindset": "When two legitimate demands compete for one person, ration the capacity openly and work on the dependency."
+    },
+    {
+      "id": "pmp-b4-118",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-route-to-owner",
+        "cross-team-dependency",
+        "scaled-agile",
+        "media"
+      ],
+      "stem": "Your team works in a streaming company's scaled agile setup. This morning another team released a change to its recommendations API that broke your team's build. One of your developers has write access to the other team's repository and proposes reverting their change himself, which he says would take ten minutes. The other team sits on the same floor and has its own product owner. What should you advise?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let him revert the change, since it restores both builds within minutes, and then tell the other team what was done and the reason for it.",
+          "correct": false,
+          "rationale": "The candidate treats access as authority. Reverting another team's release takes a product decision that is theirs, and may break work of theirs that already depends on the change."
+        },
+        {
+          "id": "b",
+          "text": "Raise the break at the next scaled planning event, where dependencies between the teams are reviewed with all of the product owners present.",
+          "correct": false,
+          "rationale": "The candidate picks the right kind of forum at the wrong time. The build is broken today, and the owning team sits on the same floor."
+        },
+        {
+          "id": "c",
+          "text": "Pin your build to the previous API version for now, and raise the breaking change with the other team's product owner straight away.",
+          "correct": true,
+          "rationale": "Pinning restores your build using means entirely within your team's control. Taking the break to the owning team at once lets the people who made the change decide whether it was intended."
+        },
+        {
+          "id": "d",
+          "text": "Ask the developer to adapt your code to the new API today, since the other team released the change deliberately and may well have good reasons.",
+          "correct": false,
+          "rationale": "The candidate assumes the change is intended and permanent without asking. If it was a mistake the other team will revert it, and the adaptation becomes wasted work."
+        }
+      ],
+      "explanation": "Access to another team's code or system is not authority over it. When another team's change blocks you, protect your own work by means within your control and take the problem to whoever owns the change quickly, so that they can decide whether it was intended. Fixing it for them, however fast, takes a decision that is not yours, and waiting for a scheduled forum leaves the block in place for no reason.",
+      "mindset": "Clear what is yours to clear, and take the rest to its owner straight away."
+    },
+    {
+      "id": "pmp-b4-119",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 1,
+      "tags": [
+        "archetype-route-to-owner",
+        "issue-ownership",
+        "issue-log",
+        "heritage"
+      ],
+      "stem": "You are managing the refurbishment of a city museum's galleries. At the weekly issue review you notice that an open issue, a dispute with the fire-door hardware supplier over a missing certificate, was owned by a procurement officer who left the organisation ten days ago. Nobody has picked it up, and its target date is in three days. The head of procurement is at the review. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Take ownership of the supplier dispute yourself until procurement appoints a replacement officer, so that the certificate request keeps moving meanwhile.",
+          "correct": false,
+          "rationale": "The candidate confuses being accountable for the issue log with personally owning every issue in it. A project manager who absorbs orphaned issues soon becomes the bottleneck, and the procurement relationship sits with procurement."
+        },
+        {
+          "id": "b",
+          "text": "Record in the issue log that the owner has left, and move the target date back two weeks so that procurement has time to appoint a replacement.",
+          "correct": false,
+          "rationale": "The candidate updates the record instead of the situation. Moving the date without an owner documents the delay rather than preventing it, and the fire-door sign-off still waits."
+        },
+        {
+          "id": "c",
+          "text": "Ask the head of procurement to name a new owner for the issue today, and confirm with that person whether the three-day target still holds.",
+          "correct": true,
+          "rationale": "The issue's only problem is that nobody owns it, and the person who controls procurement staff is in the room. Getting a named owner today restores accountability before the target date passes, and the new owner is the right person to say whether the date is still realistic."
+        },
+        {
+          "id": "d",
+          "text": "Email the supplier directly to chase the missing certificate, and leave the ownership question for procurement to settle at their next team meeting.",
+          "correct": false,
+          "rationale": "The candidate treats the symptom and leaves the gap open. A one-off chase may produce a reply, but with no owner nobody will follow it up, and the ownership question drifts to a meeting that may come after the target date."
+        }
+      ],
+      "explanation": "Every open issue needs one named person accountable for moving it, and ownership lapses silently when people leave or change roles. The regular issue review is where orphaned items should be caught and reassigned through whoever controls the relevant people, before anyone touches the dates. A target date with no owner behind it is a prediction nobody is working to meet.",
+      "mindset": "An issue without a current owner is an issue nobody is resolving."
+    },
+    {
+      "id": "pmp-b4-120",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 1,
+      "tags": [
+        "archetype-route-to-owner",
+        "interruptions",
+        "product-owner",
+        "charity"
+      ],
+      "stem": "On a team building a charity's online donations platform, a developer says at stand-up that the head of fundraising has come to his desk four times this week with small wording and layout changes, and he has been making them. His sprint story on recurring gift payments is now two days behind. The team has a product owner who manages the backlog. What should the team facilitator do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ask the developer to finish the current wording requests quickly, then politely decline any further ones from fundraising until the sprint review.",
+          "correct": false,
+          "rationale": "The candidate leaves the developer as the gatekeeper for a senior stakeholder, which is the position that created the problem. Requests will keep arriving at his desk, and nobody with authority over priority has seen them."
+        },
+        {
+          "id": "b",
+          "text": "Raise the interruptions at the next retrospective so that the team can agree a working agreement for handling requests from stakeholders.",
+          "correct": false,
+          "rationale": "The candidate defers a live impediment to a ceremony that may be over a week away, and the stakeholder causing it will not be there. A working agreement may help later, but the interruptions need dealing with now."
+        },
+        {
+          "id": "c",
+          "text": "Ask the product owner to move the recurring gift story into the next sprint, since the delay came from changes that fundraising evidently valued.",
+          "correct": false,
+          "rationale": "The candidate lets the interruptions set priority by default. Moving committed work to make room for requests nobody prioritised rewards the bypass and leaves the product owner deciding after the fact."
+        },
+        {
+          "id": "d",
+          "text": "Speak with the head of fundraising, explain the effect on the sprint, and ask her to take future requests to the product owner for the backlog.",
+          "correct": true,
+          "rationale": "The impediment is work entering the team outside the agreed channel. Redirecting the stakeholder to the product owner protects the sprint and still gives her requests a fair hearing against everything else."
+        }
+      ],
+      "explanation": "Shielding the team from work that arrives outside the agreed channel is one of the facilitator's most basic impediment-removal duties. The fix is to send the requester to the person who owns priority, rather than make a developer the gatekeeper or wait for a ceremony, because every untriaged request quietly displaces committed work.",
+      "mindset": "Send new requests to the person who owns priority, not to whoever is easiest to reach."
+    },
+    {
+      "id": "pmp-b4-121",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "escalation",
+        "options-analysis",
+        "ports"
+      ],
+      "stem": "You are upgrading the passenger walkways at a ferry terminal. Piling has struck an uncharted concrete obstruction, and removing it will cost an estimated £60,000 and two weeks. Your delegated limit is £20,000, so the issue must go to the sponsor, whom you are meeting tomorrow. Your site engineer has identified three different ways to deal with the obstruction. What should you take to the meeting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A request for authority to spend up to £60,000, with the site engineer's preferred method attached, so that the sponsor can approve the work quickly.",
+          "correct": false,
+          "rationale": "The candidate presents one pre-chosen answer as a request for money. The sponsor cannot weigh a choice that has not been shown, and if the preferred method is rejected the meeting ends with nothing decided."
+        },
+        {
+          "id": "b",
+          "text": "A short paper setting out the impact on cost and dates, the three options with their consequences, and the option you recommend with your reasons.",
+          "correct": true,
+          "rationale": "The sponsor holds the authority, and the paper supplies everything needed to use it in one meeting: what the issue does to the project, what the choices are, and what the person closest to it would do."
+        },
+        {
+          "id": "c",
+          "text": "A full briefing on the obstruction and its effect on the project, leaving the sponsor free to choose a way forward without being steered by the team.",
+          "correct": false,
+          "rationale": "The candidate mistakes neutrality for good escalation. Handing up the problem without the options and a view on them pushes the analysis to the person least placed to do it."
+        },
+        {
+          "id": "d",
+          "text": "A proposal to raise your delegated limit to £75,000 for ground issues, so that similar obstructions can be handled on site without needing a meeting.",
+          "correct": false,
+          "rationale": "The candidate reaches for a governance change when a decision is needed. Revisiting limits may be sensible later, but tomorrow's meeting has to resolve this obstruction, and asking for more authority does not do that."
+        }
+      ],
+      "explanation": "An issue escalated beyond your authority should arrive with the analysis done: what it does to the project, what can be done about it, and what you would do. The people above you have the authority but not the detail, so a bare problem and a single pre-selected answer both leave them unable to decide well. Escalation passes the decision upward, not the thinking.",
+      "mindset": "Escalate with options and a recommendation, not just a problem."
+    },
+    {
+      "id": "pmp-b4-122",
+      "type": "pulldown",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 2,
+      "tags": [
+        "archetype-apply-the-rule",
+        "impediment-raising",
+        "agile-events",
+        "housing"
+      ],
+      "stem": "A team building a housing repairs booking app holds a daily stand-up, a fortnightly retrospective and a weekly sync with the two teams whose services it shares. Complete each sentence with when the impediment should be raised. One choice is not used.",
+      "prompts": [
+        {
+          "id": "c1",
+          "text": "At two in the afternoon a tester finds that the overnight data refresh wiped the accounts she prepared, and she cannot continue. She should raise it"
+        },
+        {
+          "id": "c2",
+          "text": "Over several sprints the team has quietly got used to a code-review queue that adds about a day to most stories. It should be raised"
+        },
+        {
+          "id": "c3",
+          "text": "Changes to the shared address-lookup service, owned by another team, keep arriving without notice and breaking this team's tests. It should be raised"
+        }
+      ],
+      "options": [
+        {
+          "id": "now",
+          "text": "with the facilitator straight away, without waiting for the next stand-up",
+          "correct": true,
+          "match": "c1",
+          "rationale": "She is stopped now, and the stand-up is a minimum cadence for raising blockers, not a queue to wait in. Raising it at once saves the rest of the afternoon."
+        },
+        {
+          "id": "retro",
+          "text": "at the retrospective, where the team examines its own way of working",
+          "correct": true,
+          "match": "c2",
+          "rationale": "A slow review queue is a problem in the team's own process, which the team itself can change. The retrospective is built for exactly that inspection."
+        },
+        {
+          "id": "sync",
+          "text": "at the cross-team sync, where both teams can agree how changes are handled",
+          "correct": true,
+          "match": "c3",
+          "rationale": "The problem sits at the boundary between two teams and recurs, so neither can fix it alone. The forum where both meet is where a lasting agreement on change notice can be made."
+        },
+        {
+          "id": "review",
+          "text": "at the sprint review, where stakeholders can see its effect on the increment",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. The sprint review inspects the product with stakeholders. None of these impediments is owned by those stakeholders, and waiting for the review would delay all three."
+        }
+      ],
+      "explanation": "An impediment should go to the forum that matches both its urgency and whoever can fix it. Anything stopping work today goes to the facilitator at once; a problem in the team's own process belongs at the retrospective; and a recurring problem at a boundary between teams belongs where both teams meet. Waiting for a ceremony that the owner does not attend only adds delay.",
+      "mindset": "Raise a blocker where it can be fixed, as soon as it can be fixed there."
+    },
+    {
+      "id": "pmp-b4-123",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 4,
+      "tags": [
+        "archetype-apply-the-rule",
+        "issue-resolution",
+        "change-control",
+        "water"
+      ],
+      "stem": "Your company is building a water treatment works for a regional utility to drawings the utility has approved. The filtration-stage pumps have failed factory acceptance testing. The supplier offers a larger model from another range at no extra cost, available in time to protect the schedule. It meets every performance requirement but needs a bigger plinth and a different pipe connection from the approved drawings. Your site engineer wants to accept it today. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept the larger pumps today to protect the schedule, then update the drawings and brief the utility on the substitution at the next progress meeting.",
+          "correct": false,
+          "rationale": "The candidate treats a cost-neutral fix as within the project's own gift. The plinth and pipework depart from drawings the utility approved, so the utility has to agree before the change is made, not hear about it afterwards."
+        },
+        {
+          "id": "b",
+          "text": "Reject the offer and require the supplier to rectify the original pumps, since the contract entitles you to the equipment that was specified.",
+          "correct": false,
+          "rationale": "The candidate protects the baseline by refusing to consider any change to it. Contractual entitlement is real, but it may cost the schedule a better resolution that the utility would happily approve if asked."
+        },
+        {
+          "id": "c",
+          "text": "Raise a change request showing the effect on design, cost and schedule, and obtain the utility's approval before committing to the larger pumps.",
+          "correct": true,
+          "rationale": "The offer may well be the best resolution, but it alters an approved baseline. Taking it through change control with its impacts set out lets the utility approve it quickly while keeping the design record true."
+        },
+        {
+          "id": "d",
+          "text": "Have your design team confirm that the larger plinth and new pipework are buildable, then accept the pumps as soon as they confirm it.",
+          "correct": false,
+          "rationale": "The candidate answers whether the change can be built, not who may approve it. Technical feasibility is necessary but does not supply the authority to depart from drawings the client has signed off."
+        }
+      ],
+      "explanation": "Resolving an issue is still governed by the baselines the resolution touches. When the fix for a problem alters approved scope, design or specification, it becomes a change and needs the approval of whoever owns that baseline, however attractive or cost-neutral it is. The test is not whether the resolution is good but whether it alters something someone else signed off.",
+      "mindset": "A fix that changes what was approved is a change, however good the fix."
+    },
+    {
+      "id": "pmp-b4-124",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-use-own-authority",
+        "tolerances",
+        "issue-resolution",
+        "healthcare"
+      ],
+      "stem": "You are installing an automated dispensing system in a hospital pharmacy. The project management plan lets you resolve issues yourself where the fix costs up to €20,000 and moves no milestone by more than ten working days; anything beyond either limit goes to the steering group. Five issues are open. Which two can you resolve without escalating?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A missing barcode-scanner licence that can be bought for €8,000 from the project budget, with no effect on any milestone.",
+          "correct": true,
+          "rationale": "Inside both limits and a straightforward fix. Escalating it would spend steering-group time on a decision the plan has already delegated to you."
+        },
+        {
+          "id": "b",
+          "text": "A vendor engineer's absence that pushes a non-critical cabling activity back seven working days, absorbed within its float.",
+          "correct": true,
+          "rationale": "No cost and no milestone moves, because the slip sits inside float. Re-sequencing it is ordinary schedule management within your authority."
+        },
+        {
+          "id": "c",
+          "text": "A configuration fix costing €18,000 that would push the go-live milestone back by twelve working days.",
+          "correct": false,
+          "rationale": "The candidate checks the cost limit and stops. The twelve-day slip breaches the schedule limit, and a breach on either dimension sends the decision upward."
+        },
+        {
+          "id": "d",
+          "text": "An extra integration module costing €24,000 that would keep every milestone on its current date.",
+          "correct": false,
+          "rationale": "The candidate is reassured by the unchanged schedule. The cost is over the €20,000 limit, so the steering group must decide however neat the fix."
+        },
+        {
+          "id": "e",
+          "text": "A change to the agreed dispensing rules asked for by the chief pharmacist, costing €5,000 and three days.",
+          "correct": false,
+          "rationale": "The candidate applies issue tolerances to a scope change. The figures fit inside the limits, but altering agreed rules is a change request, and issue-resolution authority does not cover it."
+        }
+      ],
+      "explanation": "Delegated authority to resolve issues is usually set on more than one dimension, and a resolution must sit inside every limit to stay with the project manager; a breach on any one sends it upward. Inside those limits the project manager is expected to act rather than escalate, because routine escalation slows fixes and dilutes the attention governance needs for the large ones. Issue authority also stops where scope changes begin.",
+      "mindset": "Use the authority you have been given fully, after checking every dimension of it."
+    },
+    {
+      "id": "pmp-b4-125",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "stakeholder-blocker",
+        "permits",
+        "hospitality"
+      ],
+      "stem": "Your firm is refurbishing a hotel's bedrooms floor by floor while the hotel stays open. Each floor needs a permit to work from the hotel's chief engineer. He has delayed the last three permits by three or four days each, citing errors in method statements that your supervisors say were minor or absent. The hotel's general manager, his line manager, has offered to have a word with him. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Meet the chief engineer to find out what lies behind the delays and what he needs to see in your permit submissions from now on.",
+          "correct": true,
+          "rationale": "A pattern of objections your team cannot see usually reflects something the objector needs or fears. A direct conversation is cheap, keeps the relationship intact and shows which response will actually work."
+        },
+        {
+          "id": "b",
+          "text": "Accept the general manager's offer, so that the chief engineer hears directly that the hotel's own priority is finishing the refurbishment on time.",
+          "correct": false,
+          "rationale": "The candidate escalates before knowing the cause. Pressure from his manager may hide the reason for the delays rather than remove it, and it turns a working relationship into a management matter."
+        },
+        {
+          "id": "c",
+          "text": "Submit each permit application a week earlier than now, so that the chief engineer's review time no longer threatens the floor-by-floor schedule.",
+          "correct": false,
+          "rationale": "The candidate adapts around a symptom without knowing what drives it. If the delays come from a concern the submissions fail to address, earlier submission just moves the delay earlier."
+        },
+        {
+          "id": "d",
+          "text": "Write formally to the hotel recording each delay and its cost, so that the record supports a claim for time if the permit delays continue.",
+          "correct": false,
+          "rationale": "The candidate protects the contractual position before trying to solve the problem. A formal letter at this stage signals a dispute and is likely to make the chief engineer more cautious, not less."
+        }
+      ],
+      "explanation": "When an impediment comes from a person, its cause is usually something that person needs or fears, and escalating or working around it before finding out tends to entrench it. A direct conversation is the cheapest diagnostic available and tells you whether the right lever is better submissions, a different process or escalation after all. Find the human cause before choosing the lever.",
+      "mindset": "Find out why someone is blocking before deciding how to unblock them."
+    },
+    {
+      "id": "pmp-b4-126",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "issue-reporting",
+        "transparency",
+        "aviation"
+      ],
+      "stem": "You are managing an upgrade to a regional airport's baggage handling system. A software fault is misrouting one bag in fifty during testing, and the supplier expects a fix in two weeks; go-live is six weeks away. The sponsor asks you to leave the fault out of this month's report to the airport board, because she expects it to be fixed before the board next meets. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Leave the fault out of the board report as she asks, but record it fully in the issue log so there is a clear record if the supplier's fix slips.",
+          "correct": false,
+          "rationale": "The candidate relies on an internal record to cover a gap in the report the board actually reads. If the fix slips, the board learns about the fault and the omission at the same time."
+        },
+        {
+          "id": "b",
+          "text": "Include the fault in the report with its impact, the supplier's fix plan and the date you will confirm it is resolved, and explain your reasons to the sponsor.",
+          "correct": true,
+          "rationale": "The board gets an open issue with a credible plan, which is what it needs to govern, and the sponsor hears the reasoning from you before the report goes out rather than discovering it there."
+        },
+        {
+          "id": "c",
+          "text": "Include the fault but describe it as a minor testing matter with a fix in hand, so that the board is not alarmed by an issue likely to close soon.",
+          "correct": false,
+          "rationale": "The candidate reports the issue in name while understating it. A misrouting rate that would block go-live is not minor, and softened reporting misleads the board as surely as omission."
+        },
+        {
+          "id": "d",
+          "text": "Send the board chair a separate note about the fault, so that the board is informed while the sponsor's report goes out in the form she prefers.",
+          "correct": false,
+          "rationale": "The candidate informs the board by going round the sponsor. It damages the reporting line the project depends on, and the board receives two inconsistent accounts of the same project."
+        }
+      ],
+      "explanation": "Status reports exist so that governance bodies can act on the real state of the project, and an open issue with a credible plan is exactly what they should see. Omitting or softening an issue because it is expected to close is a bet on a forecast; if the forecast fails, the board learns of the issue and the concealment together. Report it through the normal line with its plan, and explain the choice to whoever asked otherwise.",
+      "mindset": "Report issues with their plan attached rather than hoping they close before anyone asks."
+    },
+    {
+      "id": "pmp-b4-127",
+      "type": "matching",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "predictive",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "root-cause",
+        "analysis-techniques",
+        "food-manufacturing"
+      ],
+      "stem": "You are commissioning a new packing line at a food factory, and the commissioning team has three open problems to investigate. Match each problem to the analysis technique that should be used first. One choice is not used.",
+      "prompts": [
+        {
+          "id": "s1",
+          "text": "The case sealer stops on every night shift. The immediate cause is known, a sensor trips, but nobody yet knows why the sensor trips."
+        },
+        {
+          "id": "s2",
+          "text": "The commissioning log holds 140 faults across nine categories, and the team has capacity to tackle only two categories this month."
+        },
+        {
+          "id": "s3",
+          "text": "Operators believe conveyor jams rise on humid days, and the team wants to check whether jams and humidity actually move together."
+        }
+      ],
+      "options": [
+        {
+          "id": "why",
+          "text": "Five whys",
+          "correct": true,
+          "match": "s1",
+          "rationale": "Each answer becomes the next question, which suits a single chain of cause whose first link is already known. It walks back from the tripping sensor to something the team can change."
+        },
+        {
+          "id": "pareto",
+          "text": "Pareto analysis",
+          "correct": true,
+          "match": "s2",
+          "rationale": "Ranking categories by how many faults they hold shows which few account for most of the problem, which is the question when capacity allows only two to be tackled."
+        },
+        {
+          "id": "scatter",
+          "text": "Scatter diagram",
+          "correct": true,
+          "match": "s3",
+          "rationale": "Plotting jams against humidity shows whether the two vary together, which tests the operators' belief directly before anyone acts on it."
+        },
+        {
+          "id": "control",
+          "text": "Control chart",
+          "correct": false,
+          "match": null,
+          "rationale": "Not used. A control chart shows whether one measure is stable over time or has shifted. None of these problems asks that: they ask for a cause, a ranking and a relationship."
+        }
+      ],
+      "explanation": "Issue analysis starts by naming the question: a chain of causes behind one fault, a ranking among many faults, or a suspected link between two variables. Each technique answers one of these well and the others poorly, so the wrong choice produces a confident answer to a different question. Decide what you need to know, then pick the method.",
+      "mindset": "Decide what you need to know before deciding how to analyse it."
+    },
+    {
+      "id": "pmp-b4-128",
+      "type": "hotspot",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-diagnose-first",
+        "burndown",
+        "hidden-impediment",
+        "recruitment"
+      ],
+      "stem": "Your team builds a recruitment platform. The stand-up notes for the last sprint record no blockers raised on any day. The diagram divides that sprint's burndown into four segments, each labelled with what the data shows. Select the segment that most strongly suggests an impediment went unreported.",
+      "graphic": {
+        "viewBox": "0 0 640 360",
+        "title": "Sprint burndown divided into four labelled segments",
+        "caption": "Select a segment. Use Tab or the arrow keys to move between them, then Enter or Space."
+      },
+      "regions": [
+        {
+          "id": "d13",
+          "n": 1,
+          "label": "Days 1–3: remaining work falls about 10 points a day; four stories closed; scope unchanged",
+          "x": 20,
+          "y": 20,
+          "w": 600,
+          "h": 70,
+          "correct": false,
+          "rationale": "Steady completion with stable scope is what healthy flow looks like. Nothing here suggests work was held up."
+        },
+        {
+          "id": "d46",
+          "n": 2,
+          "label": "Days 4–6: line flat; no stories closed; five stories in progress throughout; scope unchanged",
+          "x": 20,
+          "y": 105,
+          "w": 600,
+          "h": 70,
+          "correct": true,
+          "rationale": "Five stories were being worked for three days and none finished while scope stayed the same. That is work stopping, and with no blocker raised at three stand-ups it is the clearest sign of something the team did not report."
+        },
+        {
+          "id": "d78",
+          "n": 3,
+          "label": "Days 7–8: line flat; two stories closed, offset by a 9-point story the product owner added",
+          "x": 20,
+          "y": 190,
+          "w": 600,
+          "h": 70,
+          "correct": false,
+          "rationale": "The line is as flat as days 4 to 6, which is the trap. Here work was finishing and new scope cancelled it out on the chart, so this is a scope question, not a blockage."
+        },
+        {
+          "id": "d910",
+          "n": 4,
+          "label": "Days 9–10: remaining work falls 26 points as five stories close in two days",
+          "x": 20,
+          "y": 275,
+          "w": 600,
+          "h": 70,
+          "correct": false,
+          "rationale": "The sharpest movement on the chart, so it draws attention, but a burst of completions is what happens when a blockage clears. It shows where the stalled work was released, not where it stalled."
+        }
+      ],
+      "explanation": "A burndown plots the net of finished and added work, so a flat line can mean stalled work or new scope, and only the counts underneath tell them apart. An impediment shows as work in progress that stops finishing while scope stays put; a burst of completions afterwards is the blockage releasing, not its location. When the data and the stand-up reports disagree, the data is the prompt for a conversation with the team.",
+      "mindset": "Read what lies under the line before deciding what the line means."
+    },
+    {
+      "id": "pmp-b4-129",
+      "type": "fillblank",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-make-visible",
+        "flow-efficiency",
+        "cycle-time",
+        "telecoms"
+      ],
+      "stem": "A team at a telecoms provider finished 40 work items last quarter. Summed across those items, they spent 600 item-days between starting and finishing: 240 in active work, 210 waiting in queues between stages and 150 blocked awaiting approval from the network security team. Work out the figures below.",
+      "blanks": [
+        {
+          "id": "fe",
+          "label": "Flow efficiency (active time as a share of total cycle time), in %",
+          "numeric": true,
+          "expect": 40,
+          "tol": 0.5,
+          "unit": "%",
+          "rationale": "Active time divided by total time: 240 ÷ 600 = 0.40, or 40%. Six days in ten of every item's life were spent not being worked on."
+        },
+        {
+          "id": "avg",
+          "label": "Average cycle time per item, in days",
+          "numeric": true,
+          "expect": 15,
+          "tol": 0.1,
+          "unit": "days",
+          "rationale": "Total item-days divided by items finished: 600 ÷ 40 = 15 days from start to finish on average."
+        },
+        {
+          "id": "unblocked",
+          "label": "Average cycle time per item if the security-approval blocking were removed and nothing else changed, in days",
+          "numeric": true,
+          "expect": 11.25,
+          "tol": 0.05,
+          "unit": "days",
+          "rationale": "Removing the 150 blocked item-days leaves 600 − 150 = 450, and 450 ÷ 40 = 11.25 days. The approval wait alone adds 3.75 days, a quarter of every item's cycle time."
+        }
+      ],
+      "explanation": "Measuring where elapsed time goes turns a general complaint about blockers into a figure that people outside the team can weigh. Flow efficiency is usually low, so most gains come from removing waiting rather than from working faster, and showing an impediment's share of cycle time is what earns it attention from whoever owns it. State the cost of a blocker in units the decision-maker already uses.",
+      "mindset": "Put a number on what a blocker costs before asking someone else to remove it."
+    },
+    {
+      "id": "pmp-b4-130",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 3,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "swarming",
+        "wip-limits",
+        "public-libraries"
+      ],
+      "stem": "A team building a public library's e-lending app has a sprint goal that depends on one story, loan renewals. That story has been stuck for three days on a difficult defect that one developer is tackling alone. Meanwhile the other four developers have each started a new story to stay busy, and nothing else on the board is close to done. Which two actions should the team facilitator take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Point out at today's stand-up that the sprint goal now rests on the stuck story, and ask the team how it wants to respond to that.",
+          "correct": true,
+          "rationale": "The team is acting as if the goal were safe because everyone is busy. Making the risk to the goal explicit lets the team decide to swarm, which is a decision it owns."
+        },
+        {
+          "id": "b",
+          "text": "Suggest the team agree a limit on work in progress, so that a stalled item draws people to it instead of prompting new starts.",
+          "correct": true,
+          "rationale": "A limit on work in progress changes the default the team fell into. When nobody can start new work, helping on the stuck item becomes the obvious move without anyone being told to do it."
+        },
+        {
+          "id": "c",
+          "text": "Ask the developer working on the defect for an estimate of the remaining effort, so the team can plan its other work around that forecast.",
+          "correct": false,
+          "rationale": "The candidate forecasts the blockage instead of attacking it. An estimate leaves one person alone on the item the goal depends on, and estimates for unknown defects are rarely reliable."
+        },
+        {
+          "id": "d",
+          "text": "Ask the product owner to swap the renewal story for a smaller one, so that a revised sprint goal can still be met by the end of the sprint.",
+          "correct": false,
+          "rationale": "The candidate gives up on the goal before the team has tried putting more people on the problem. Renegotiating may become necessary, but not while four developers are working on lower-priority items."
+        },
+        {
+          "id": "e",
+          "text": "Assign the two most senior developers to pair with their colleague on the defect until it is fixed, and pause their new stories meanwhile.",
+          "correct": false,
+          "rationale": "The direction is right but the authority is wrong. Assigning people overrides the team's self-organisation, and a team told to swarm learns nothing about why it did not do so unprompted."
+        }
+      ],
+      "explanation": "When the critical item stalls, starting more work raises activity but not throughput, and the blocked item becomes everyone's problem only once someone makes the risk visible. The facilitator's part is to surface that risk and help the team adopt rules, such as limits on work in progress, that make swarming the default, while leaving the team to decide who helps. Being busy and finishing are different measures.",
+      "mindset": "Stop starting and start finishing when the work that matters is stuck."
+    },
+    {
+      "id": "pmp-b4-131",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "agile",
+      "difficulty": 4,
+      "tags": [
+        "archetype-use-own-authority",
+        "reporting-overhead",
+        "waste",
+        "agriculture"
+      ],
+      "stem": "You facilitate a team building an ordering app for a farmers' cooperative. Three months ago you asked each developer to fill in a weekly progress spreadsheet so that you could brief the cooperative's board. At the retrospective the team says the spreadsheet takes each of them about two hours a week and duplicates what is already on the team board. The board still expects a monthly briefing. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Drop the spreadsheet and prepare the board briefing yourself from the team board, asking the team only to keep the board itself up to date.",
+          "correct": true,
+          "rationale": "The impediment is a process the facilitator introduced, so the facilitator can remove it at once. The board already holds the information, and turning it into a briefing is the facilitator's work, not the developers'."
+        },
+        {
+          "id": "b",
+          "text": "Ask the cooperative's board whether it would accept a shorter monthly briefing, so that the spreadsheet can be cut back to the items the board reads.",
+          "correct": false,
+          "rationale": "The candidate seeks permission for something already within their own control. The spreadsheet was the facilitator's request, not the board's, and the board's need can be met without it."
+        },
+        {
+          "id": "c",
+          "text": "Simplify the spreadsheet to five fields agreed with the team, so that the board briefing keeps its detail at a much lower cost to the developers.",
+          "correct": false,
+          "rationale": "The candidate optimises the impediment instead of removing it. A smaller spreadsheet still duplicates the board and still takes developer time to produce information that already exists."
+        },
+        {
+          "id": "d",
+          "text": "Rotate responsibility for the spreadsheet among the developers each week, so that the time it takes falls on one person rather than the whole team.",
+          "correct": false,
+          "rationale": "The candidate redistributes the waste rather than eliminating it. Someone still spends hours copying what the board already shows, and the duplication remains."
+        }
+      ],
+      "explanation": "Impediments are not only external; a process the facilitator introduced can become one, and that kind can be removed fastest, because no one else's agreement is needed. Information needed for governance reporting should be drawn from artefacts the team already maintains rather than collected a second time. Asking permission, slimming the burden or sharing it out are all slower than removing it when the burden is your own.",
+      "mindset": "Check your own requests first when looking for what slows the team."
+    },
+    {
+      "id": "pmp-b4-132",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "hybrid",
+      "difficulty": 5,
+      "tags": [
+        "archetype-challenge-the-premise",
+        "workaround",
+        "data-protection",
+        "healthcare"
+      ],
+      "stem": "Your hybrid project is building a patient booking portal for a private healthcare provider. The synthetic test data generator broke a week ago, and to keep the iteration moving the developers have been testing against a copy of live patient records, masked only by removing names. Testing has gone well and release is in nine days. The data protection officer has not been told. The team lead proposes finishing the release this way and fixing the generator afterwards. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Stop all use of the live copy now, tell the data protection officer what has happened, and replan the remaining testing around a repaired or interim data set.",
+          "correct": true,
+          "rationale": "The workaround has turned a test-data impediment into a data protection breach. Stopping it ends the exposure, disclosure lets the data protection officer decide what follows, and only then is the release date worth protecting."
+        },
+        {
+          "id": "b",
+          "text": "Inform the data protection officer today, apply stronger masking to the live copy, and ask whether it may stay in use until the release in nine days.",
+          "correct": false,
+          "rationale": "The candidate rightly involves the data protection officer but keeps the exposure running while asking. Stopping the processing is within the project's control and does not need anyone's permission; continuing it does."
+        },
+        {
+          "id": "c",
+          "text": "Have the team apply full masking to the live copy today, keep testing on data that no longer identifies patients, and schedule the generator fix after release.",
+          "correct": false,
+          "rationale": "The candidate repairs the workaround instead of questioning it. Better masking does not undo a week of processing identifiable records, and whether the data is truly anonymous is not the team's call to make alone."
+        },
+        {
+          "id": "d",
+          "text": "Accept the team lead's plan, add the use of live data to the risk register with an owner, and review it at each stand-up until the generator is fixed.",
+          "correct": false,
+          "rationale": "The candidate treats a present breach as a future risk. Recording a decision makes it visible but does not make it permissible, and the person who owns the rule still has not been consulted."
+        }
+      ],
+      "explanation": "A workaround that clears an impediment by breaching a legal or policy constraint swaps a delivery problem for a compliance problem, usually a larger one. Once found, the breach is stopped and disclosed to whoever owns the constraint, and only then is the schedule replanned; seeking permission to continue, improving the workaround or logging it as a risk all still treat the date as the thing to protect. Judge a workaround by what it costs outside the project, not by how well it kept work moving.",
+      "mindset": "A workaround is only a solution if you could defend it to the owner of the rule it bends."
+    },
+    {
+      "id": "pmp-b4-133",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-act-now",
+        "professional-network",
+        "blocker-removal",
+        "automotive"
+      ],
+      "stem": "Your hybrid project is building a dealer portal for a car manufacturer. The team cannot test the parts-ordering feature until the network team opens a firewall route, and that team's ticket queue currently runs at fifteen working days. Without the route, the iteration ending in eight days will miss its main goal. You worked closely with the network team's manager on a previous project. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Raise the delay with the sponsor, set out what it is costing, and ask her to request that the network team's director prioritise your ticket.",
+          "correct": false,
+          "rationale": "The candidate escalates formally before trying the direct route. It spends the sponsor's influence on something a conversation might settle, and it can sour relations with a team the project will need again."
+        },
+        {
+          "id": "b",
+          "text": "Call the network manager today, explain what the delay is costing, and ask whether the ticket can be prioritised within the team's own process.",
+          "correct": true,
+          "rationale": "A direct conversation is the fastest way to get the cost of the delay in front of someone who can reprioritise, and it leaves the network team's controls intact. If it fails, escalation and replanning are still available."
+        },
+        {
+          "id": "c",
+          "text": "Leave the ticket in the queue and ask the product owner to replan the iteration around stories that do not need the firewall route.",
+          "correct": false,
+          "rationale": "The candidate adapts to a blocker that might be cleared with one call. Replanning is a sensible fallback, but accepting fifteen days without asking whether the queue can move gives up too early."
+        },
+        {
+          "id": "d",
+          "text": "Call the network manager, explain the iteration deadline, and ask for the route to be opened informally today with the ticket completed afterwards.",
+          "correct": false,
+          "rationale": "The candidate uses the relationship to skip the control rather than move within it. A firewall change made outside its process bypasses the review it exists for, and puts the manager in a difficult position."
+        }
+      ],
+      "explanation": "Relationships are a legitimate tool for clearing blockers when they are used to get a request seen and weighed sooner, not to get around the controls that govern it. A direct approach to someone who can prioritise is quicker and cheaper than formal escalation and should normally come first. The line is crossed when the relationship is used to skip the process rather than to move faster within it.",
+      "mindset": "Use your network to move faster within the process, not to step around it."
+    },
+    {
+      "id": "pmp-b4-134",
+      "type": "multi",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "hybrid",
+      "difficulty": 3,
+      "tags": [
+        "archetype-trade-off",
+        "workaround",
+        "cost-of-delay",
+        "social-housing"
+      ],
+      "stem": "A hybrid team is replacing a housing association's repairs system. Four months ago, when an interface from the contractor scheduling platform began dropping job updates, the team added a manual daily reconciliation as a temporary workaround. The platform team, which owns the interface, logged the fault but ranked it low. The reconciliation now takes about six hours each sprint, and nobody has reviewed it since. Which two actions should you take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Total the hours the workaround has used so far and will use if left in place, and put those figures to the platform team's product owner.",
+          "correct": true,
+          "rationale": "The fault was ranked low without its downstream cost in view. Putting a figure in front of the person who owns the fix lets them weigh it properly against their other work."
+        },
+        {
+          "id": "b",
+          "text": "Ask the team to automate the reconciliation themselves, so that the workaround costs less time each sprint while the platform team's fix is pending.",
+          "correct": false,
+          "rationale": "The candidate invests further in a workaround for a fault owned elsewhere, before testing whether the owner would fix it once shown the cost. It can make the workaround permanent by making it tolerable."
+        },
+        {
+          "id": "c",
+          "text": "Put the workaround back on the team's impediment board as an open item, with a date by which its cost and the fix are reviewed again.",
+          "correct": true,
+          "rationale": "A temporary workaround that drops off the board stops being questioned, which is how four months passed. Reinstating it with a review date keeps the trade-off under active decision."
+        },
+        {
+          "id": "d",
+          "text": "Escalate the interface fault to the programme sponsor so that the platform team is directed to fix it in its next scheduled release.",
+          "correct": false,
+          "rationale": "The candidate goes over the owner's head before giving the owner the information needed to reprioritise. The low ranking was made without the cost, so the first step is to supply it."
+        },
+        {
+          "id": "e",
+          "text": "Accept the reconciliation as part of the team's routine work and take it off the impediment board, since its cost is now known and stable.",
+          "correct": false,
+          "rationale": "The candidate mistakes a known cost for an accepted one. Nobody with the authority to choose between paying it and fixing the fault has yet made that choice."
+        }
+      ],
+      "explanation": "A workaround is a decision to pay a recurring cost in place of a one-off fix, and that trade-off needs revisiting as the cost accumulates. The owner of the underlying fault can only prioritise sensibly if the cost the workaround imposes elsewhere is put in front of them, and a temporary workaround that leaves the board stops being reviewed at all. Keep workarounds visible and priced until the root fix arrives or the cost is consciously accepted.",
+      "mindset": "Price every workaround and keep asking whether it is still cheaper than the fix."
+    },
+    {
+      "id": "pmp-b4-135",
+      "type": "single",
+      "domain": "business",
+      "ecoTask": "business-4",
+      "approach": "hybrid",
+      "difficulty": 4,
+      "tags": [
+        "archetype-accept-and-adapt",
+        "organisational-policy",
+        "procurement-lead-time",
+        "higher-education"
+      ],
+      "stem": "Your hybrid project is building a research data platform for a university. Finance requires three quotes and a five-working-day approval for any purchase over €1,000. Twice in five months a story has been held up for most of a week waiting for test hardware or cloud credits. The team asks you to get the project exempted from the policy, and the finance director has said exemptions need a strong case. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prepare a case for the finance director using the two delays, setting out the time lost and asking for a project exemption up to €5,000.",
+          "correct": false,
+          "rationale": "The candidate fights the rule with thin evidence. Two delays in five months make a weak case, and spending goodwill with finance on it is poor value when the delays came from late requests rather than the rule."
+        },
+        {
+          "id": "b",
+          "text": "Ask the sponsor to hold a small pre-approved budget for hardware and cloud credits, so that the team can buy without waiting for three quotes.",
+          "correct": false,
+          "rationale": "The candidate seeks the same exemption through a different door. A sponsor's budget does not override finance policy, and the request carries the same weak case as a direct one."
+        },
+        {
+          "id": "c",
+          "text": "Buy a stock of spare test hardware and prepaid cloud credits in one approved order, so that the team draws on stock instead of buying per story.",
+          "correct": false,
+          "rationale": "The candidate commits money up front against guessed needs to avoid a delay that earlier requests would remove for nothing. It treats an occasional inconvenience as worth a standing cost."
+        },
+        {
+          "id": "d",
+          "text": "Treat purchase lead time as part of planning, raising requests when a story enters refinement so that approval is complete before work starts.",
+          "correct": true,
+          "rationale": "The rule costs five days only when a purchase is requested at the moment work starts. Moving the request to refinement absorbs the lead time at no cost and leaves a legitimate control untouched."
+        }
+      ],
+      "explanation": "Not every impediment should be removed; some are controls that serve the wider organisation and cost little once planned for. Weigh how often an impediment bites and what it costs against the effort and goodwill needed to change it, and where the cost comes from late notice rather than the rule itself, move the work earlier rather than challenge the rule. Fight the impediments that are expensive and plan around those that are merely inconvenient.",
+      "mindset": "Before trying to remove an impediment, check whether planning ahead removes its cost."
+    }
+  ]
+}
