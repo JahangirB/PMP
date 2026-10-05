@@ -187,7 +187,7 @@ module.exports = [
       var used = {};
       body.replace(/PMP\.([A-Za-z_]+)/g, function (_, k) { used[k] = true; });
       var allowed = ["Coach", "Metrics", "Planner", "Learn", "Journal", "Cards", "Store", "time", "fmt",
-                     "COACH_LINES", "COACH_MESSAGES", "ECO_TASK_BY_ID", "ECO_TASKS", "READINESS", "EXAM"];
+                     "COACH_LINES", "COACH_MESSAGES", "ECO", "ECO_TASK_BY_ID", "ECO_TASKS", "READINESS", "EXAM"];
       Object.keys(used).forEach(function (k) { assert.ok(allowed.indexOf(k) >= 0, "uses PMP." + k); });
       var commits = body.match(/PMP\.Store\.commit\(\[[^\]]*\]/g) || [];
       assert.deepStrictEqual(commits, ['PMP.Store.commit(["coach"]']);

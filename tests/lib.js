@@ -59,7 +59,7 @@ Harness.prototype.open = async function (fixture, opts) {
   page.on("pageerror", function (e) { errors.push("pageerror: " + e.message); });
   page.on("console", function (m) { if (m.type() === "error") errors.push("console: " + m.text()); });
   page.errors = errors;
-  await page.goto(FILE + (opts.hash || ""));
+  await page.goto((opts.file || FILE) + (opts.hash || ""));
   await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
   await page.waitForTimeout(50);
   page.ctx = ctx;
