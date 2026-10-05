@@ -2373,7 +2373,7 @@ a.btn { text-decoration: none; }
               the one place a figure is derived 10.09 Study planner · built
         10.01 Dashboard + readiness · built    10.10 Mistake journal · built
         10.02 Practice engine · built          10.11 Analytics · built
-        10.03 Mock exam simulator · built      10.12 Settings, About, help
+        10.03 Mock exam simulator · built      10.12 Settings, About, help · built
         10.04 Question renderers · built
               5 renderers, 7 accepted type ids
         10.05 Flashcards (SM-2) · built        10.13 Data portability · built
@@ -19397,9 +19397,9 @@ PMP.Exporter = (function () {
           10.03 mock exam simulator, 10.04 question renderers,
           10.05 flashcards, 10.06 formula lab, 10.07 reference library,
           10.08 scenario trainer, 10.09 study planner, 10.10 mistake
-          journal, 10.11 analytics, 10.13 data portability,
-          10.14 content audit, 10.15 learn.
-   Still a stub: 10.12 settings and About, served by §12.3 for now.
+          journal, 10.11 analytics, 10.12 settings, About and help,
+          10.13 data portability, 10.14 content audit, 10.15 learn.
+   Still stubs: none.
    ════════════════════════════════════════════════════════════════════ */
 
 /* ── 10.02  PRACTICE ENGINE ─────────────────────────────────────────────────
@@ -31567,6 +31567,192 @@ PMP.Dashboard = (function () {
 
 
 
+/* ── 10.12  SETTINGS, ABOUT AND HELP ────────────────────────────────────────
+   The five preferences that already live in state.settings, the About notices,
+   and a short way in for someone new. Replaces the §12.3 stub, which stands
+   aside once this route is registered.
+
+   Every figure on this page is read from §01 at render time. The stub this
+   replaces wrote the weighting and exam layout out by hand, which meant an
+   outline change would have left it quietly wrong.
+
+   Each control saves as soon as it changes. There is no Save button to
+   forget, and nothing here is expensive enough to need batching. */
+PMP.Settings = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on;
+
+  function save(mutate, message) {
+    PMP.Store.commit(["settings"], function (s) { mutate(s.settings); });
+    PMP.UI.toast(message || "Saved.", "ok");
+  }
+
+  function field(id, label, control, hint) {
+    return el("label", { class: "field", for: id }, [
+      el("span", { class: "lbl", text: label }),
+      control,
+      hint ? el("span", { class: "hint", text: hint }) : null
+    ]);
+  }
+
+  function onOff(id, value) {
+    var sel = el("select", { class: "select", id: id });
+    sel.appendChild(el("option", { value: "on", text: "On", selected: !!value }));
+    sel.appendChild(el("option", { value: "off", text: "Off", selected: !value }));
+    return sel;
+  }
+
+  /* ── 10.12.1  PREFERENCES ──────────────────────────────────────────────── */
+  function prefsCard(state) {
+    var st = state.settings;
+    var card = el("section", { class: "card", "aria-labelledby": "set-prefs" }, [
+      el("span", { class: "eyebrow", text: "Preferences" }),
+      el("h2", { id: "set-prefs", text: "How the suite works for you" }),
+      el("p", { text: "Changes save as you make them and travel with your backup file." })
+    ]);
+
+    var date = el("input", { class: "input", type: "date", id: "set-date", value: st.examDate ? String(st.examDate).slice(0, 10) : "" });
+    on(date, "change", function () {
+      var v = date.value || null;
+      save(function (s) { s.examDate = v; }, v ? "Exam date saved." : "Exam date cleared.");
+      paintPlanNote();
+    });
+    var planNote = el("span", { class: "hint" });
+    function paintPlanNote() {
+      var p = PMP.Store.state.planner, cur = PMP.Store.state.settings.examDate;
+      var planned = p && p.inputs && p.inputs.examDate;
+      planNote.textContent = planned && cur && String(planned).slice(0, 10) !== String(cur).slice(0, 10)
+        ? "Your study plan was built for " + PMP.fmt.dateShort(planned) + ". Rebuild it in the planner to use the new date."
+        : "The dashboard counts down to this date, and the planner builds towards it.";
+    }
+    paintPlanNote();
+
+    var target = el("input", { class: "input", type: "number", id: "set-target", min: "5", max: "200", step: "5", value: String(st.dailyTarget || 30) });
+    on(target, "change", function () {
+      var n = parseInt(target.value, 10);
+      if (!(n >= 5 && n <= 200)) { PMP.UI.toast("Choose a daily target between 5 and 200 questions.", "warn"); target.value = String(PMP.Store.state.settings.dailyTarget || 30); return; }
+      save(function (s) { s.dailyTarget = n; }, "Daily target saved.");
+    });
+
+    var theme = el("select", { class: "select", id: "set-theme" });
+    [["system", "Follow this device"], ["light", "Light"], ["dark", "Dark"]].forEach(function (o) {
+      theme.appendChild(el("option", { value: o[0], text: o[1], selected: (st.theme || "system") === o[0] }));
+    });
+    on(theme, "change", function () {
+      var v = theme.value;
+      save(function (s) { s.theme = v; }, "Theme saved.");
+      PMP.Shell.applyTheme(v);
+    });
+
+    var shuffle = onOff("set-shuffle", st.shuffleOptions !== false);
+    on(shuffle, "change", function () {
+      var v = shuffle.value === "on";
+      save(function (s) { s.shuffleOptions = v; }, v ? "Options will be shuffled." : "Options will keep their authored order.");
+    });
+
+    var conf = onOff("set-conf", !!st.confidenceTracking);
+    on(conf, "change", function () {
+      var v = conf.value === "on";
+      save(function (s) { s.confidenceTracking = v; }, v ? "Confidence tracking on." : "Confidence tracking off.");
+    });
+
+    card.appendChild(el("div", { class: "filters", style: "margin-top:var(--sp-4)" }, [
+      field("set-date", "Exam date", date),
+      field("set-target", "Daily target, in questions", target),
+      field("set-theme", "Theme", theme),
+      field("set-shuffle", "Shuffle answer options", shuffle),
+      field("set-conf", "Ask how sure you are", conf)
+    ]));
+    card.appendChild(el("p", { class: "hint", style: "margin-top:var(--sp-3)" }, [planNote]));
+    card.appendChild(el("ul", { class: "keylist", style: "margin-top:var(--sp-4)" }, [
+      el("li", null, [el("span", { class: "chip", text: "Shuffle" }), el("span", { text: "Presents options in a fresh order each time, so you learn the answer rather than its position. Drills already started keep their order." })]),
+      el("li", null, [el("span", { class: "chip", text: "Sure" }), el("span", { text: "Adds Sure and Not sure buttons to each drill item. Analytics uses them to show whether your confidence matches your accuracy." })])
+    ]));
+    return card;
+  }
+
+  /* ── 10.12.2  ABOUT ────────────────────────────────────────────────────── */
+  function aboutCard() {
+    var E = PMP.EXAM, D = PMP.ECO;
+    var card = el("section", { class: "card", "aria-labelledby": "set-eco" }, [
+      el("span", { class: "eyebrow", text: "About this build" }),
+      el("h2", { id: "set-eco", text: "Exam content outline" }),
+      el("dl", { class: "kv", style: "margin-top:var(--sp-3)" }, [
+        el("dt", { text: "Version" }), el("dd", { text: D.LABEL }),
+        el("dt", { text: "Checked" }), el("dd", { text: PMP.fmt.dateShort(D.RETRIEVED) }),
+        el("dt", { text: "Weighting" }), el("dd", { text: D.DOMAINS.map(function (d) { return D.DOMAIN_LABELS[d] + " " + PMP.fmt.pct(D.DOMAIN_WEIGHTS[d]); }).join(" · ") }),
+        el("dt", { text: "Tasks" }), el("dd", { text: D.TASK_COUNT + " — " + D.DOMAINS.map(function (d) { return D.DOMAIN_TASK_COUNTS[d]; }).join(" / ") }),
+        el("dt", { text: "Approach" }), el("dd", { text: PMP.fmt.pct(D.APPROACH_SPLIT.predictive) + " predictive · " + PMP.fmt.pct(1 - D.APPROACH_SPLIT.predictive) + " adaptive and hybrid" }),
+        el("dt", { text: "Exam" }), el("dd", { text: E.TOTAL_ITEMS + " items, " + E.SCORED_ITEMS + " scored, " + E.MINUTES + " minutes" }),
+        el("dt", { text: "Breaks" }), el("dd", { text: E.BREAK_COUNT + " optional, " + E.BREAK_MINUTES + " minutes each" }),
+        el("dt", { text: "Pace" }), el("dd", { text: E.PACE_TARGET_SEC.toFixed(1) + " s per question" })
+      ]),
+      el("p", { style: "margin-top:var(--sp-4)", text: "Confirm the weightings, question count and format against PMI's current published outline before you sit. PMI does not publish the size of the case-study block, so this build assumes " + E.CASE_BLOCK_ITEMS + " items, which places the first break there and the second at item " + E.BREAK_2_AFTER + "." })
+    ]);
+    return card;
+  }
+
+  function contentCard(state) {
+    return el("section", { class: "card", "aria-labelledby": "set-content" }, [
+      el("span", { class: "eyebrow", text: "What is loaded" }),
+      el("h2", { id: "set-content", text: "Content and storage" }),
+      el("dl", { class: "kv", style: "margin-top:var(--sp-3)" }, [
+        el("dt", { text: "Questions" }), el("dd", { text: PMP.Packs.provenance() }),
+        el("dt", { text: "Scenarios" }), el("dd", { text: String((PMP.SCENARIOS || []).length) }),
+        el("dt", { text: "Flashcards" }), el("dd", { text: (PMP.FLASHCARDS || []).length + " in " + (PMP.DECKS || []).length + " decks" }),
+        el("dt", { text: "Lessons" }), el("dd", { text: (PMP.LESSONS || []).length + " in " + (PMP.MODULES || []).length + " modules" }),
+        el("dt", { text: "Progress" }), el("dd", { text: state.sys.storageMode === "persistent" ? "Saved on this device" : state.sys.storageMode === "session" ? "Session only — export before closing" : "Checking" })
+      ]),
+      el("div", { class: "filter-bar" }, [
+        el("a", { class: "btn btn--sm", href: "#/data" }, [icon("data"), "Backup and packs"]),
+        el("a", { class: "btn btn--sm", href: "#/audit" }, "Content audit")
+      ])
+    ]);
+  }
+
+  /* ── 10.12.3  HELP ─────────────────────────────────────────────────────── */
+  function helpCard() {
+    return el("section", { class: "card", "aria-labelledby": "set-help" }, [
+      el("span", { class: "eyebrow", text: "Help" }),
+      el("h2", { id: "set-help", text: "Where to start" }),
+      el("ul", { class: "keylist", style: "margin-top:var(--sp-4)" }, [
+        el("li", null, [el("a", { class: "chip", href: "#/learn?lesson=F1", text: "Lesson F1" }), el("span", { text: "How the exam works and how to study with this suite. The best first read." })]),
+        el("li", null, [el("a", { class: "chip", href: "#/planner", text: "Planner" }), el("span", { text: "Take the diagnostic, set your hours, and get a plan whose chips tick themselves." })]),
+        el("li", null, [el("a", { class: "chip", href: "#/practice", text: "Practice" }), el("span", { text: "Press ? in any drill to see the keyboard shortcuts." })]),
+        el("li", null, [el("a", { class: "chip", href: "#/data", text: "Backup" }), el("span", { text: "Export your progress to a file before switching device or clearing the browser." })])
+      ])
+    ]);
+  }
+
+  function noticesCard() {
+    return el("section", { class: "card", "aria-labelledby": "set-notices" }, [
+      el("span", { class: "eyebrow", text: "Notices" }),
+      el("h2", { id: "set-notices", text: "Trademarks and content" }),
+      el("p", { text: "PMP, PMI and PMBOK are registered marks of the Project Management Institute, Inc. This application is not affiliated with, endorsed by, or sponsored by PMI." }),
+      el("p", { text: "All lessons, questions and explanations here are original practice material written for study. They are not actual exam questions, and no PMI text is reproduced." })
+    ]);
+  }
+
+  /* ── 10.12.4  ROUTE ────────────────────────────────────────────────────── */
+  function view(host) {
+    var state = PMP.Store.state;
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Settings and About" }),
+      el("h2", { text: "Settings" }),
+      el("p", { text: "Your preferences, what this build contains, and where to begin." })
+    ]));
+    host.appendChild(prefsCard(state));
+    host.appendChild(helpCard());
+    host.appendChild(aboutCard());
+    host.appendChild(contentCard(state));
+    host.appendChild(noticesCard());
+  }
+
+  PMP.Router.register("settings", { title: "Settings and About", render: view });
+
+  return { view: view };
+})();
+
+
 /* ── 10.15  LEARN ───────────────────────────────────────────────────────────
    Reads §05.10 and teaches a topic before anything tests it.
 
@@ -33218,6 +33404,7 @@ PMP.Shell = (function () {
     ])
   });
 
+  /* §10.12 has landed and registered "settings" already. */
   register("settings", {
     title: "Settings and About",
     render: function (host) {
