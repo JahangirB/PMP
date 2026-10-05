@@ -2077,6 +2077,29 @@ a.btn { text-decoration: none; }
 }
 .td-opt:focus-within { box-shadow: var(--ring); }
 .td-err { color: var(--c-danger); font-size: var(--t-sm); margin-top: var(--sp-2); }
+
+/* The strip: one line, an optional action, a way to hide it. */
+.coach-strip {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--sp-3); align-items: start;
+  margin-bottom: var(--sp-4); padding: var(--sp-3) var(--sp-4);
+  border: var(--border); border-left: 3px solid var(--c-signal); border-radius: var(--r-2); background: var(--s-wash);
+}
+.ln-part .coach-strip { margin: var(--sp-4) 0 0; }
+.coach-strip > .i { width: var(--icon); height: var(--icon); color: var(--c-signal); margin-top: 2px; }
+.coach-strip-b { display: grid; gap: var(--sp-2); font-size: var(--t-sm); line-height: var(--lh-body); }
+.coach-strip-b p { max-width: var(--measure); }
+.coach-strip-m { color: var(--fg-muted); font-size: var(--t-xs); }
+.coach-strip-a { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.coach-debrief { display: grid; gap: var(--sp-1); }
+
+/* Hint ladder (§10.02.6a). A struck option stays selectable: the hint
+   says it is wrong, it does not take the choice away. */
+.q-hints { margin-top: var(--sp-3); display: grid; gap: var(--sp-2); justify-items: start; }
+.q-hints-list { display: grid; gap: var(--sp-2); width: 100%; }
+.q-hint { padding: var(--sp-3) var(--sp-4); border-left: 3px solid var(--c-signal); background: var(--s-wash); border-radius: var(--r-1); }
+.q-hint p { font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); margin-top: var(--sp-1); }
+.q-hint .q-hint-t { font-weight: var(--w-semi); }
+.opt[data-struck="true"] .txt > span:first-child { text-decoration: line-through; text-decoration-thickness: 1px; color: var(--fg-muted); }
 @media (max-width: 600px) {
   .td-step, .td-extra { padding: var(--sp-3); }
   .td-cta {
@@ -18670,7 +18693,9 @@ PMP.Store = (function () {
          order that was on screen, so a review can reproduce it exactly. */
       attempts: [],   /* { id, qid, ecoTask, domain, approach, type, difficulty,
                          correct, credit, ms, at, confidence, mode, order,
-                         lessonId? }  — lessonId only on mode "lesson" */
+                         lessonId?, hinted? }  — lessonId only on mode "lesson";
+                         hinted is the number of hint rungs used (§10.02),
+                         and such rows stay out of accuracy and pace (§10.00) */
       /* One record per card that has been reviewed at least once; a card with
          no record is new, so an unstudied pack costs no storage at all. */
       srs: {},        /* cardId -> { ease, interval, reps, lapses, due, suspended,
@@ -20244,7 +20269,53 @@ PMP.Practice = (function () {
       order: item.p.order
     };
     if (session.lessonId) attempt.lessonId = session.lessonId;
+    if (item.hints) attempt.hinted = item.hints;
     PMP.Store.commit(["attempts"], function (s) { s.attempts.push(attempt); });
+  }
+
+  /* ── 10.02.6a  HINTS ─────────────────────────────────────────────────────
+     The coach's hint ladder (§10.16), offered in practice and adaptive
+     drills only. The timed drill, the diagnostic and a lesson's set are
+     measurements, and the exam gives no hints, so they get none either.
+     Each press shows the next rung; none shows or marks the right option,
+     and the button goes once the answer is checked. An answer given after
+     a hint is recorded with `hinted`, which keeps it out of accuracy and
+     pace (§10.00). */
+  function hintsOn() {
+    return (session.mode === "practice" || session.mode === "adaptive") &&
+      !!PMP.Coach && PMP.Coach.slice(PMP.Store.state).hints;
+  }
+
+  function hintTools(item) {
+    var list = el("div", { class: "q-hints-list" });
+    var btn = el("button", {
+      class: "btn btn--sm", type: "button",
+      onclick: function () { nextHint(item); }
+    }, [icon("info"), "Hint"]);
+    item.ui.hintBtn = btn;
+    item.ui.hintList = list;
+    return el("div", { class: "q-hints" }, [btn, list]);
+  }
+
+  function nextHint(item) {
+    if (session.finished || item.committed || (item.hints || 0) >= PMP.Coach.HINT_RUNGS) return;
+    item.hints = (item.hints || 0) + 1;
+    var h = PMP.Coach.hint(item.q, item.hints, item.p, item.ctrl.value());
+    if (item.hints === 1) item.ui.hintList.appendChild(el("p", { class: "hint", text: PMP.Coach.line("hint_note") }));
+    item.ui.hintList.appendChild(el("div", { class: "q-hint" }, [
+      el("span", { class: "eyebrow", text: "Hint " + item.hints + " of " + PMP.Coach.HINT_RUNGS }),
+      el("p", { class: "q-hint-t", text: h.text }),
+      h.detail ? el("p", { text: h.detail }) : null
+    ]));
+    if (h.strike) {
+      Array.prototype.forEach.call(item.ui.panel.querySelectorAll(".opt"), function (row) {
+        if (row.getAttribute("data-opt") === h.strike) row.setAttribute("data-struck", "true");
+      });
+    }
+    var left = PMP.Coach.HINT_RUNGS - item.hints;
+    item.ui.hintBtn.lastChild.textContent = left ? "Another hint" : "No more hints";
+    item.ui.hintBtn.disabled = !left;
+    PMP.UI.announce(h.text + (h.detail ? " " + h.detail : ""));
   }
 
   /* ── 10.02.5  DRILL VIEW ─────────────────────────────────────────────── */
@@ -20398,6 +20469,8 @@ PMP.Practice = (function () {
 
     var body = el("div");
     panel.appendChild(body);
+    item.ui = { panel: panel };
+    if (hintsOn()) panel.appendChild(hintTools(item));
     var feedback = el("div");
     panel.appendChild(feedback);
 
@@ -20469,7 +20542,8 @@ PMP.Practice = (function () {
 
     item.ui = {
       panel: panel, feedback: feedback, primary: primary, skip: skipBtn, back: backBtn,
-      flagBtn: flagBtn, noteBtn: noteBtn, noteBox: noteBox, conf: confBtns, foot: foot, last: last
+      flagBtn: flagBtn, noteBtn: noteBtn, noteBox: noteBox, conf: confBtns, foot: foot, last: last,
+      hintBtn: item.ui.hintBtn || null, hintList: item.ui.hintList || null
     };
     item.panel = panel;
     onAnswerChanged(item);
@@ -20497,6 +20571,7 @@ PMP.Practice = (function () {
     showVerdict(item);
 
     item.ui.skip.hidden = true;
+    if (item.ui.hintBtn) item.ui.hintBtn.hidden = true;
     item.ui.primary.textContent = item.ui.last ? "Finish drill" : "Next question";
     item.ui.primary.disabled = false;
     item.ui.primary.focus();
@@ -20539,9 +20614,14 @@ PMP.Practice = (function () {
        inside that lesson's own set, which already ends with a way back. */
     var lesson = PMP.Learn && PMP.Learn.forTask(item.q.ecoTask);
     if (lesson && lesson.id !== session.lessonId) {
+      /* After a miss the coach points back at the teaching itself, opening
+         the lesson at its concept sections. It names no cause: tagging is
+         the journal's job, later (§10.10). */
+      var coachLink = !r.correct && !!PMP.Coach && !PMP.Coach.slice(PMP.Store.state).muted;
       item.ui.feedback.appendChild(el("p", { class: "ln-links" }, [
-        el("a", { href: "#/learn?lesson=" + encodeURIComponent(lesson.id) },
-          "Learn this topic: " + lesson.id + " " + lesson.title)
+        el("a", { href: "#/learn?lesson=" + encodeURIComponent(lesson.id) + (coachLink ? "&part=3" : "") },
+          coachLink ? PMP.Coach.line("wrong_link", { id: lesson.id }) + " →"
+                    : "Learn this topic: " + lesson.id + " " + lesson.title)
       ]));
     }
   }
@@ -20763,6 +20843,9 @@ PMP.Practice = (function () {
         : "This drill ended without a committed answer, so nothing was recorded." })
     ]));
 
+    var cs = PMP.CoachUI && PMP.CoachUI.strip("practice-summary", { items: session.items, mode: session.mode });
+    if (cs) host.appendChild(cs);
+
     if (session.opts.summary && session.result) {
       var extra = null;
       try { extra = session.opts.summary(session.result); } catch (e) { extra = null; }
@@ -20801,6 +20884,7 @@ PMP.Practice = (function () {
       }
       item.revealed = true;
       if (item.ui.foot) item.ui.foot.hidden = true;
+      if (item.ui.hintBtn) item.ui.hintBtn.hidden = true;
       var state = item.result ? (item.result.correct ? "correct" : item.result.partial ? "flagged" : "incorrect") : null;
       var det = el("details", { class: "review" }, [
         el("summary", null, [
@@ -23419,6 +23503,9 @@ PMP.Scenarios = (function () {
       })
     ]));
 
+    var cs = PMP.CoachUI && PMP.CoachUI.strip("scenarios-summary");
+    if (cs) host.appendChild(cs);
+
     var card = el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Where your answers fell" })
     ]);
@@ -24091,6 +24178,9 @@ PMP.Cards = (function () {
         ? "Recalled " + recalled + " of " + done + " on first sight, over about " + PMP.fmt.plural(mins, "minute") + "."
         : "Nothing was graded in this session." })
     ]));
+
+    var cs = PMP.CoachUI && PMP.CoachUI.strip("cards-summary");
+    if (cs) host.appendChild(cs);
 
     var stats = el("div", { class: "card" }, [el("span", { class: "eyebrow", text: "How you graded" })]);
     var row = el("div", { class: "filters" });
@@ -29773,6 +29863,17 @@ PMP.Metrics = (function () {
     return typeof a.credit === "number" ? clamp01(a.credit) : (a.correct ? 1 : 0);
   }
 
+  /* An answer given after the coach's hint ladder (§10.02, §10.16) carries
+     `hinted`, the number of rungs used. Such rows are kept out of accuracy
+     and pace and nothing else, on the same reasoning that keeps lesson
+     quick checks out of `attempts` altogether: assisted practice is
+     learning, and counting it would lift the figure the readiness score is
+     built on for answers the person did not reach alone. They still count
+     for coverage, which measures breadth and makes no claim about scoring,
+     and they still reach the mistake journal. This is the only place the
+     coach changes a figure. */
+  function unassisted(a) { return !a.hinted; }
+
   /* ── 10.00.2  ACCURACY, DECAYED ──────────────────────────────────────────
      A weighted mean over the last ACCURACY_WINDOW answers, where an answer's
      weight halves every ACCURACY_HALFLIFE_DAYS. Two things are deliberate.
@@ -29787,7 +29888,7 @@ PMP.Metrics = (function () {
      100%: the figure is pulled toward the middle until there is enough
      evidence to move it, which is the behaviour a study signal should have. */
   function accuracy(state, filter) {
-    var list = attempts(state);
+    var list = attempts(state).filter(unassisted);
     if (filter) list = list.filter(filter);
     list = list.slice(-R.ACCURACY_WINDOW);
     var now = Date.now();
@@ -29845,7 +29946,7 @@ PMP.Metrics = (function () {
      to describe how the candidate works rather than how their evening went.
      Samples under half a second are dropped as instrument error. */
   function pace(state) {
-    var secs = attempts(state).slice(-R.ACCURACY_WINDOW)
+    var secs = attempts(state).filter(unassisted).slice(-R.ACCURACY_WINDOW)
       .filter(function (a) { return a.ms > 500; })
       .map(function (a) { return a.ms / 1000; })
       .sort(function (x, y) { return x - y; });
@@ -32429,6 +32530,8 @@ PMP.Learn = (function () {
     host.appendChild(el("div", { class: "filter-bar ln-top" }, [
       el("a", { class: "btn btn--ghost btn--sm", href: href("learn") }, "All lessons")
     ]));
+    var cs = PMP.CoachUI && PMP.CoachUI.strip("lesson", { lesson: lesson });
+    if (cs) host.appendChild(cs);
 
     /* Part 1 ── header: title, task, minutes, prerequisites, objectives */
     var prereqs = (lesson.prereqs || []).map(function (pid) {
@@ -32577,9 +32680,10 @@ PMP.Learn = (function () {
 
     /* Part 7 ── quick checks */
     var checkHost = el("div");
+    ui.coach = el("div");
     host.appendChild(part(7, PARTS[6], [
       el("p", { text: "For learning, not scoring. Answers here are kept on the lesson only, and never count towards accuracy or readiness." }),
-      checkHost
+      checkHost, ui.coach
     ]));
     lesson.checks.forEach(function (c, i) { checkHost.appendChild(renderCheck(lesson, c, i, refresh)); });
 
@@ -32669,6 +32773,13 @@ PMP.Learn = (function () {
         ])
       ]));
       ui.mastery.appendChild(el("p", { class: "ln-note", text: masteryNote(rec) }));
+
+      /* Every check tried and no set taken yet: the coach suggests the set
+         now, while the teaching is fresh. */
+      ui.coach.innerHTML = "";
+      var cs2 = c.tried === c.checks && !prc && PMP.CoachUI &&
+        PMP.CoachUI.strip("lesson-checks", { start: function () { startSet(lesson); } });
+      if (cs2) ui.coach.appendChild(cs2);
     }
     refresh();
   }
@@ -33416,7 +33527,37 @@ PMP.Coach = (function () {
     });
   }
 
-  /* ── 10.16.10  AUDIT FIXTURES ────────────────────────────────────────────
+  /* ── 10.16.10  THE HINT LADDER ───────────────────────────────────────────
+     Three rungs, each from the item or its lesson, none naming the answer:
+     the lens of the item's delivery approach, the item's own mindset
+     sentence, then one wrong option struck out with its rationale. The
+     struck option is always one the person has not chosen, so the ladder
+     never says their pick is right or wrong. On a type with no options to
+     strike, the third rung is a trap from the lesson for the task.
+     `p` is the item as presented (§10.04 present()), `chosen` its current
+     value. Returns { rung, text, detail, strike? }. */
+  function hint(q, rung, p, chosen) {
+    var lesson = PMP.Learn ? PMP.Learn.forTask(q.ecoTask) : null;
+    if (rung <= 1) {
+      if (q.approach && PMP.ECO.APPROACH_LABELS[q.approach]) {
+        return { rung: 1, text: line("hint_lens", { approach: q.approach }),
+                 detail: (lesson && lesson.lenses && lesson.lenses[q.approach]) || null };
+      }
+      return { rung: 1, text: line("hint_lens_none"), detail: null };
+    }
+    if (rung === 2) return { rung: 2, text: line("hint_principle"), detail: q.mindset || null };
+    if (p && (p.type === "single" || p.type === "multi")) {
+      var picked = Object.create(null);
+      (Array.isArray(chosen) ? chosen : chosen == null ? [] : [chosen]).forEach(function (id) { picked[id] = true; });
+      var o = p.options.filter(function (x) { return !x.correct && !picked[x.id]; })[0];
+      if (o) return { rung: 3, text: line("hint_eliminate"), detail: o.rationale || null, strike: o.id };
+    }
+    var trap = lesson && lesson.traps && lesson.traps[0];
+    if (trap) return { rung: 3, text: line("hint_trap"), detail: trap };
+    return { rung: 3, text: line("hint_principle"), detail: q.mindset || null };
+  }
+
+  /* ── 10.16.11  AUDIT FIXTURES ────────────────────────────────────────────
      Synthetic contexts that between them make every message in §05.11
      apply, so §10.14 can render each one without a live state. Shaped
      exactly like context() returns. */
@@ -33467,6 +33608,7 @@ PMP.Coach = (function () {
     markShown: markShown, dismiss: dismiss, acted: acted,
     slice: slice, setProfile: setProfile, setPref: setPref, setOutcome: setOutcome,
     weeklySummary: weeklySummary, completeWeekly: completeWeekly,
+    hint: hint, HINT_RUNGS: 3,
     line: line, fixtures: fixtures,
     REENTRY_GAP_DAYS: REENTRY_GAP_DAYS, WEEKLY_EVERY_DAYS: WEEKLY_EVERY_DAYS, TRIAGE_MIN: TRIAGE_MIN
   };
@@ -33883,7 +34025,116 @@ PMP.CoachUI = (function () {
 
   PMP.Router.register("today", { title: "Today", render: view });
 
-  /* ── 10.17.6  SETTINGS ───────────────────────────────────────────────── */
+  /* ── 10.17.6  STRIP AND DEBRIEF ──────────────────────────────────────────
+     One component for every summary and the lesson reader, appended by a
+     single line in each module. It appears only when the person came from
+     Today (ui.coachRun, today), and never when the coach is muted. Every
+     figure in the debrief is one the drill's own summary already shows:
+     right of asked per task, answers inside the pace target, and misses
+     well under the median §10.00 reports, the journal's own test. */
+  var stripHidden = { day: null };
+
+  function fromToday(state) {
+    var r = state.ui.coachRun;
+    return !!(r && r.fromToday && sod(r.startedAt) === sod(Date.now()));
+  }
+
+  function nextButton(ses) {
+    return el("button", { class: "btn btn--sm", type: "button", onclick: function () { startStep(ses.next); } },
+      [icon(ses.next.icon), line("debrief_next", { next: ses.next.label }) + " →"]);
+  }
+
+  function debriefLines(items, ses) {
+    var answered = items.filter(function (i) { return i.committed && i.result; });
+    var by = Object.create(null);
+    answered.forEach(function (i) {
+      var t = PMP.ECO_TASK_BY_ID[i.q.ecoTask];
+      if (!t) return;
+      var g = by[t.id] || (by[t.id] = { task: t, n: 0, right: 0 });
+      g.n++;
+      if (i.result.correct) g.right++;
+    });
+    var groups = Object.keys(by).map(function (k) { return by[k]; }).filter(function (g) { return g.n >= 3; });
+    var best = groups.slice().sort(function (a, b) { return (b.right / b.n - a.right / a.n) || (b.n - a.n); })[0];
+    var worst = groups.slice().sort(function (a, b) { return (a.right / a.n - b.right / b.n) || (b.n - a.n); })[0];
+
+    var good;
+    var target = PMP.PRACTICE.PACE_TARGET_SEC;
+    var onPace = answered.filter(function (i) { return i.clock.elapsed() <= target * 1000; }).length;
+    if (best && best.right > 0) good = line("debrief_good_task", { task: best.task.label, right: best.right, n: best.n });
+    else if (onPace) good = line("debrief_good_pace", { k: onPace, n: answered.length, t: target });
+    else good = line("debrief_good_none");
+
+    var watch;
+    var median = PMP.Metrics.pace(PMP.Store.state).median;
+    var fast = median ? answered.filter(function (i) {
+      return !i.result.correct && i.clock.elapsed() < median * 1000 * 0.6;
+    }).length : 0;
+    if (worst && worst !== best && worst.right < worst.n) {
+      var ls = PMP.Learn && PMP.Learn.forTask(worst.task.id);
+      var st = ls && PMP.Learn.status(ls);
+      watch = line("debrief_watch_task", { task: worst.task.label, right: worst.right, n: worst.n,
+        lesson: ls && st !== "complete" && st !== "mastered" ? ls.id : null });
+    } else if (fast) watch = line("debrief_watch_fast", { k: fast });
+    else watch = line("debrief_watch_none");
+
+    return el("ul", { class: "coach-debrief" }, [
+      el("li", { text: good }),
+      el("li", { text: watch }),
+      el("li", null, [ses.next ? nextButton(ses) : el("span", { text: line("debrief_next_done") })])
+    ]);
+  }
+
+  function strip(surface, ctx) {
+    var state = PMP.Store.state;
+    if (!fromToday(state) || C.slice(state).muted || stripHidden.day === sod(Date.now())) return null;
+    ctx = ctx || {};
+    var box = el("aside", { class: "coach-strip", "aria-label": "Coach", dataset: { surface: surface } });
+    var body = el("div", { class: "coach-strip-b" });
+    box.appendChild(icon("today"));
+    box.appendChild(body);
+    box.appendChild(el("button", {
+      class: "icon-btn", type: "button", "aria-label": "Hide the coach for today",
+      onclick: function () { stripHidden.day = sod(Date.now()); box.remove(); }
+    }, [icon("x")]));
+
+    if (surface === "lesson") {
+      var l = ctx.lesson;
+      var ses0 = C.session(state);
+      var onPlan = ses0.source === "plan" && ses0.steps.some(function (s) { return s.kind === "lesson" && s.params && s.params.lesson === l.id; });
+      var rt = C.context(state).retake;
+      body.appendChild(el("p", { text: rt && rt.id === l.id ? line("lesson_why_retake", { pct: rt.pct })
+        : onPlan ? line("lesson_why_plan") : line("lesson_why_path") }));
+      if (l.mindset) body.appendChild(el("p", { class: "coach-strip-m", text: l.mindset }));
+      return box;
+    }
+    if (surface === "lesson-checks") {
+      body.appendChild(el("p", { text: line("after_checks") }));
+      body.appendChild(el("div", { class: "coach-strip-a" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: ctx.start }, [icon("target"), "Start the practice set"])
+      ]));
+      return box;
+    }
+
+    var ses = C.session(state);
+    if (ctx.items) {
+      body.appendChild(debriefLines(ctx.items, ses));
+    } else {
+      var done = ses.steps.filter(function (s) { return s.done; }).length;
+      body.appendChild(el("p", { text: ses.next
+        ? line("strip_next", { done: done, total: ses.steps.length, next: ses.next.label })
+        : line("strip_done") }));
+      if (ses.next) body.appendChild(el("div", { class: "coach-strip-a" }, [nextButton(ses)]));
+    }
+    var m = C.messages(state, "strip", 1)[0];
+    if (m) {
+      C.markShown(m.id);
+      body.appendChild(el("p", { class: "coach-strip-m", text: m.text }));
+    }
+    return box;
+  }
+
+  /* ── 10.17.7  SETTINGS ───────────────────────────────────────────────── */
   function settingsCard(state) {
     var sl = C.slice(state);
     function onOff(id, value) {
@@ -33918,7 +34169,7 @@ PMP.CoachUI = (function () {
     ]);
   }
 
-  return { view: view, intake: intake, settingsCard: settingsCard, startStep: startStep };
+  return { view: view, intake: intake, settingsCard: settingsCard, startStep: startStep, strip: strip };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
