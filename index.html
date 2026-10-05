@@ -13334,6 +13334,359 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["process"], from: {} }
   },
   {
+    id: "P1", module: "process", order: 6, ecoTask: "process-1", minutes: 35,
+    prereqs: ["F3", "F5"],
+    title: "Integrated planning and tailoring",
+    objectives: [
+      "Explain what the charter authorises and what the management plan adds.",
+      "Describe the baselines and why they are set and changed under control.",
+      "Integrate separate plans into one coherent whole.",
+      "Use rolling wave planning where detail is not yet available.",
+      "Tailor planning to the size, risk and approach of the work."
+    ],
+    examWeight: "Planning items rarely ask you to name a document. They describe plans that do not fit together, or a plan too heavy or too light for the work. The marks go to the response that keeps one coherent plan and tailors it sensibly.",
+    sections: [
+      { id: "s1", heading: "The charter: authority to begin",
+        body: "A project starts formally with a charter. It names the project, states why it exists and gives the project manager authority to use resources.\n\n"
+          + "The charter is short. It sets high-level objectives, major milestones, a summary budget and the main risks known at the start. It also names the sponsor, who issues it.\n\n"
+          + "Without a charter, a project manager is negotiating for resources with no mandate. With one, they can act within agreed limits.\n\n"
+          + "The charter is not a plan. It says what and why at a high level. Planning works out how." },
+      { id: "s2", heading: "The management plan and its baselines",
+        body: "The project management plan explains how the project will be run. It brings together the subsidiary plans for scope, schedule, cost, quality, resources, communication, risk, procurement and stakeholders.\n\n"
+          + "Inside it sit the baselines. The scope baseline fixes what will be delivered. The schedule baseline fixes when. The cost baseline fixes the time-phased budget. Together they form the measure of performance.\n\n"
+          + "A baseline is changed only through change control. That is what makes it useful. A baseline that moves whenever reality does measures nothing.\n\n"
+          + "The plan is a living document, however. Its approach, assumptions and subsidiary plans can be refined as the project learns, with the right approvals." },
+      { id: "s3", heading: "One plan, not many",
+        body: "Large projects often produce separate plans for scope, schedule, cost and procurement. Each can be credible on its own and still fail to fit with the others.\n\n"
+          + "Integration is the work of making them consistent. The schedule must allow for procurement lead times. The budget must reflect the resources the schedule assumes. The risk plan must fund the responses it proposes.\n\n"
+          + "The project manager owns this integration. Specialists can own their parts, but someone must look across them and resolve conflicts.\n\n"
+          + "When plans disagree, do not simply pick one. Find out which assumption differs, agree the right one with the people involved, and update every plan it touches." },
+      { id: "s4", heading: "Planning as you learn",
+        body: "Detail cannot always be planned at the start. Some work depends on decisions or discoveries that have not happened yet.\n\n"
+          + "Rolling wave planning handles this. Near-term work is planned in detail. Later work is held at a higher level and refined as it approaches. Progressive elaboration is the general idea behind it: plans grow more precise as information arrives.\n\n"
+          + "This is not an excuse for vague planning. Later work still needs enough shape to estimate cost and spot risks. It simply avoids inventing detail that will be wrong.\n\n"
+          + "In adaptive work, the same idea runs through every cycle. A release plan sets direction, and each iteration plans its own detail." },
+      { id: "s5", heading: "Tailoring and hybrid seams",
+        body: "Tailoring means fitting the planning effort to the project. A six-week, three-person change needs far less formal planning than a multi-year infrastructure programme.\n\n"
+          + "Consider the size, the risk, the regulatory demands and the delivery approach. Then decide which documents, reviews and controls add value. Record the choices, so others know what was left out and why.\n\n"
+          + "Over-planning wastes effort and slows learning. Under-planning leaves risks unseen and stakeholders unsure.\n\n"
+          + "On hybrid projects, plan the seams explicitly. Where does a fixed date depend on an iterative team? Which decisions must the agile side make by when? A plan that leaves seams implicit usually fails there." },
+      { id: "s6", heading: "Assumptions and constraints",
+        body: "Every plan rests on assumptions: things taken as true without proof. A supplier will deliver on time. A key specialist will be available. The site will be clear by spring.\n\n"
+          + "Record them in an assumption log and give each an owner. Review them as the project runs. A wrong assumption is a risk that has quietly come true.\n\n"
+          + "Constraints are limits the plan must respect, such as a fixed budget, a regulatory date or a single available test rig. They shape the options open to you.\n\n"
+          + "When a plan starts to fail, check its assumptions first. The cause is often there rather than in the work itself." }
+    ],
+    lenses: {
+      predictive: "The charter authorises, the management plan explains how, and the baselines are set before execution. Later work may be planned in waves, but changes to baselines go through formal control.",
+      agile: "A product vision and roadmap replace much of the up-front plan. Release and iteration planning add detail just in time, and the backlog absorbs change without a formal baseline.",
+      hybrid: "Fixed elements carry baselines while iterative elements plan by release and iteration. The project manager integrates the two and plans the dependencies between them."
+    },
+    worked: {
+      stem: "You are planning a new regional blood-testing laboratory. The equipment plan assumes delivery in month four, but the procurement lead's plan shows a nine-month tender for the same equipment. Both plans have been shared with the sponsor already. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Bring the equipment and procurement leads together to establish the realistic delivery date and the assumptions behind each plan." },
+        { id: "b", text: "Inform the sponsor that the two plans conflict and that the opening date may slip." },
+        { id: "c", text: "Ask procurement to shorten the tender to fit the equipment plan's month-four date." },
+        { id: "d", text: "Keep the equipment plan, since it was produced first, and ask procurement to align." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Integration starts by understanding why the plans differ. Agreeing the real date and assumptions lets every affected plan be corrected together." },
+        { option: "b", rank: "acceptable", why: "The sponsor will need to know, and telling them is honest. Without first establishing the real date, the message is vague and may cause needless alarm." },
+        { option: "c", rank: "premature", why: "A shorter tender may be possible, but asking for it before understanding why nine months is planned may break procurement rules or raise risk." },
+        { option: "d", rank: "wrong", why: "Which plan came first says nothing about which is right. Forcing one onto the other hides the conflict rather than resolving it." }
+      ],
+      mindset: "Resolve conflicting plans by finding the assumption that differs, not by picking a winner."
+    },
+    traps: [
+      "Treating the charter as a detailed plan.",
+      "Letting a baseline move whenever reality does.",
+      "Accepting separate plans that are credible alone but inconsistent together.",
+      "Producing every planning document regardless of the project's size and risk.",
+      "Leaving the seams between predictive and agile parts implicit."
+    ],
+    checks: [
+      {
+        id: "P1-c1", type: "single",
+        stem: "Months into a library refurbishment, the sponsor asks why the project manager can approve some changes but not others. Which document set out that authority at the start?",
+        options: [
+          { id: "a", text: "The project charter, which authorised the project and the project manager's use of resources.", correct: true,
+            rationale: "The charter formally authorises the project and grants the project manager authority within stated limits." },
+          { id: "b", text: "The risk register, which lists who owns each risk.",
+            rationale: "The register assigns risk owners. It does not set the project manager's overall authority." },
+          { id: "c", text: "The work breakdown structure, which divides the scope.",
+            rationale: "The breakdown structure organises deliverables. It grants no authority to anyone." },
+          { id: "d", text: "The communications management plan.",
+            rationale: "This plan sets how information flows. It does not grant decision-making authority." }
+        ],
+        explanation: "The charter is issued by the sponsor to authorise the project. It names the project manager and sets the limits of their authority. Governance thresholds in the management plan then add detail on who approves which changes.",
+        mindset: "Know where your authority comes from before you use it."
+      },
+      {
+        id: "P1-c2", type: "single",
+        stem: "A two-year rail signalling upgrade has firm designs for year one, but year-two work depends on a technology choice due in month ten. How should the year-two work be planned now?",
+        options: [
+          { id: "a", text: "Plan year two at a summary level now, then add detail as the technology choice approaches.", correct: true,
+            rationale: "This is rolling wave planning: enough shape to estimate and spot risks, with detail added when it can be known." },
+          { id: "b", text: "Plan year two in full detail now, using the most likely technology.",
+            rationale: "Detailed plans built on an unmade choice create false precision and rework." },
+          { id: "c", text: "Leave year two out of the plan until month ten.",
+            rationale: "Without any shape, year two cannot be budgeted or risk-assessed, and stakeholders cannot see the whole project." },
+          { id: "d", text: "Delay the whole project until the technology choice is made.",
+            rationale: "Year one is ready to proceed. Delaying it wastes time that rolling wave planning would save." }
+        ],
+        explanation: "Rolling wave planning details near-term work and keeps later work at a summary level. The summary is enough for budgeting and risk planning. Detail is added as the deciding information arrives.",
+        mindset: "Plan in the detail you can actually know, and refine the rest as you learn."
+      }
+    ],
+    terms: ["Charter", "Project management plan", "Scope baseline", "Schedule baseline", "Cost baseline", "Rolling wave planning", "Progressive elaboration", "Tailoring"],
+    recap: [
+      "The charter authorises the project and the project manager.",
+      "The management plan explains how; the baselines measure performance.",
+      "Integrate the plans by resolving the assumptions they disagree on.",
+      "Plan near work in detail and later work in waves.",
+      "Tailor planning to size, risk and approach, and plan hybrid seams explicitly."
+    ],
+    mindset: "Hold one coherent plan, as detailed as the work allows and no heavier than it needs.",
+    practice: { count: 10, decks: ["process"] }
+  },
+  {
+    id: "P2", module: "process", order: 7, ecoTask: "process-2", minutes: 35,
+    prereqs: ["P1"],
+    title: "Scope",
+    objectives: [
+      "Collect requirements and trace them to their source.",
+      "Write a scope statement that says what is and is not included.",
+      "Build a work breakdown structure that obeys the 100 per cent rule.",
+      "Manage a product backlog with clear acceptance criteria.",
+      "Tell the definition of done from acceptance criteria."
+    ],
+    examWeight: "Scope items test whether you can keep scope clear and controlled without freezing it. Expect stems about unrequested additions, vague requirements, breakdowns at the wrong level, and backlogs that have drifted. The best answer usually clarifies or routes the change rather than quietly absorbing it.",
+    sections: [
+      { id: "s1", heading: "Requirements and where they come from",
+        body: "Requirements describe what the result must do or be. They come from stakeholders, regulation, standards and the business case.\n\n"
+          + "Collecting them well means asking the right people in the right way. Interviews, workshops, observation and prototypes each reveal different things. Users often cannot describe a need until they see something working.\n\n"
+          + "Every requirement should trace back to a source and forward to the work that delivers it. A traceability matrix does this. It shows why each requirement exists and whether it has been met.\n\n"
+          + "Traceability also exposes requirements nobody asked for. If a feature traces to no stakeholder need, question why it is there." },
+      { id: "s2", heading: "The scope statement",
+        body: "The scope statement describes the work and its deliverables. It also names what is excluded, which is often the more useful part.\n\n"
+          + "Exclusions prevent arguments later. If a new building's scope excludes landscaping, nobody can claim later that it was implied.\n\n"
+          + "The statement also records acceptance criteria for the major deliverables, plus the assumptions and constraints the scope rests on.\n\n"
+          + "Product scope describes the features of the result. Project scope describes the work needed to deliver it. Both matter, and they are easy to confuse." },
+      { id: "s3", heading: "The work breakdown structure",
+        body: "A work breakdown structure divides the total scope into smaller, manageable pieces. It is organised by deliverables, not by activities or departments.\n\n"
+          + "The 100 per cent rule governs it. The pieces at each level must add up to exactly the whole of the level above. Nothing is left out, and nothing extra is added.\n\n"
+          + "The lowest level is the work package. It should be small enough to estimate, assign and track, but not so small that managing it costs more than doing it.\n\n"
+          + "A dictionary describes each element in detail: what it includes, who owns it and how its completion is judged. Together, the scope statement, the breakdown and its dictionary form the scope baseline." },
+      { id: "s4", heading: "Backlogs and acceptance",
+        body: "In adaptive work, scope lives in the product backlog. It holds everything that might be built, ranked by value. The product owner owns the ranking.\n\n"
+          + "Items near the top are refined into small, clear user stories. Items further down can stay rough. Refinement is continuous, not a one-off phase.\n\n"
+          + "Each story carries acceptance criteria. These state what this particular item must do to be accepted.\n\n"
+          + "The definition of done is different. It applies to every item and sets a common quality bar, such as tested, reviewed and documented. A story is complete when it meets its own acceptance criteria and the definition of done." },
+      { id: "s5", heading: "Keeping scope under control",
+        body: "Scope creep is the gradual addition of work without control. Each addition seems small and reasonable. Together they consume time and money nobody approved.\n\n"
+          + "Gold plating is a related trap. It means adding features nobody asked for, often with good intentions. It adds cost and risk without agreed value.\n\n"
+          + "The response is not to refuse all change. It is to route change properly. In predictive work, requests go through change control and update the baseline. In adaptive work, new items join the backlog and are ranked against everything else.\n\n"
+          + "Accepted deliverables are confirmed through scope validation, where the customer formally accepts them. Quality control checks correctness first; validation confirms acceptance." },
+      { id: "s6", heading: "Splitting large items",
+        body: "Large backlog items are hard to estimate and slow to deliver. Splitting them well is a core scope skill in adaptive work.\n\n"
+          + "Split by value, not by technical layer. A thin slice that works end to end, such as booking one type of appointment, can be shown and tested. A database layer on its own cannot.\n\n"
+          + "Useful splits include simple cases before complex ones, one user type at a time, and core paths before exceptions.\n\n"
+          + "Each slice should still be valuable, testable and small enough to finish within one iteration. If a slice delivers nothing usable, split it differently." }
+    ],
+    lenses: {
+      predictive: "Requirements are collected early and baselined with the scope statement and breakdown structure. Changes go through formal control, and deliverables are validated against agreed criteria.",
+      agile: "The product backlog holds the scope, ranked by value and refined continuously. Each story has acceptance criteria, every item meets the definition of done, and change is absorbed by re-ranking.",
+      hybrid: "Fixed elements are baselined with a breakdown structure, while iterative elements are managed through a backlog. The project manager agrees which changes need formal control and which the product owner can absorb."
+    },
+    worked: {
+      stem: "During testing of a council's new parking permit system, you find the vendor's team has added a vehicle emissions lookup that no requirement mentions. It works well, and the council's transport officer is delighted with it. The contract is fixed price. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Find out why the feature was added and what it affects. Then route it through change control for a deliberate decision." },
+        { id: "b", text: "Thank the vendor and keep the feature, since the customer likes it and it cost the council nothing." },
+        { id: "c", text: "Ask the vendor to remove the feature immediately because it was not in the requirements." },
+        { id: "d", text: "Add the feature to the requirements document so that the documents match what was built." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Understanding the cause and impact first lets the right people decide. Routing it through change control turns an uncontrolled addition into a deliberate choice." },
+        { option: "c", rank: "acceptable", why: "Removing unrequested work enforces scope, which is sound. Doing it before understanding the impact may waste effort the council would gladly keep." },
+        { option: "d", rank: "premature", why: "Updating the documents may be the eventual outcome. Doing it first legitimises gold plating without any decision or assessment." },
+        { option: "b", rank: "wrong", why: "Unrequested features carry hidden costs in testing, support and risk. Keeping it silently also tells the vendor that uncontrolled additions are welcome." }
+      ],
+      mindset: "Treat unrequested work as a change to be decided, not a gift to be kept."
+    },
+    traps: [
+      "Adding a feature nobody asked for because it seems helpful.",
+      "Organising the breakdown structure by department instead of deliverable.",
+      "Confusing the definition of done with a story's acceptance criteria.",
+      "Absorbing small requests directly instead of routing them.",
+      "Writing a scope statement with no exclusions."
+    ],
+    checks: [
+      {
+        id: "P2-c1", type: "single",
+        stem: "A breakdown structure for a museum exhibition has three level-two elements: design, build and install. The marketing campaign appears nowhere, yet it is in the agreed scope. What principle has been broken?",
+        options: [
+          { id: "a", text: "The 100 per cent rule, because the elements no longer add up to the whole scope.", correct: true,
+            rationale: "Every level must account for all of the work above it. Missing in-scope work breaks the rule." },
+          { id: "b", text: "Rolling wave planning, because marketing is far in the future.",
+            rationale: "Rolling wave planning can defer detail, but the work must still appear in the breakdown." },
+          { id: "c", text: "The definition of done, because marketing cannot be tested.",
+            rationale: "The definition of done concerns completed items, not whether work is included in the breakdown." },
+          { id: "d", text: "Traceability, because marketing has no requirement.",
+            rationale: "The stem says marketing is in the agreed scope, so it does trace to a need." }
+        ],
+        explanation: "The 100 per cent rule requires the children of every element to cover exactly all of its work. In-scope work missing from the breakdown will go unestimated and unplanned. Adding a marketing element restores the rule.",
+        mindset: "If it is in scope, it belongs in the breakdown."
+      },
+      {
+        id: "P2-c2", type: "single",
+        stem: "A story for a booking app says a user can cancel online. The team's definition of done requires automated tests and a security review. The cancellation works, but the security review has not happened. Is the story done?",
+        options: [
+          { id: "a", text: "No, because it meets its acceptance criteria but not the definition of done.", correct: true,
+            rationale: "A story must satisfy both its own criteria and the shared quality bar. Missing the review leaves it unfinished." },
+          { id: "b", text: "Yes, because the cancellation works as the story describes.",
+            rationale: "Working functionality meets the acceptance criteria only. The definition of done applies to every item as well." },
+          { id: "c", text: "Yes, if the product owner accepts it at the review.",
+            rationale: "The product owner cannot waive the team's quality bar for one item without changing it for all." },
+          { id: "d", text: "No, because the story needs new acceptance criteria.",
+            rationale: "The criteria are met. The gap is the shared definition of done." }
+        ],
+        explanation: "Acceptance criteria are specific to each story, while the definition of done applies to all of them. An item is complete only when it satisfies both. Skipping part of the definition builds hidden debt.",
+        mindset: "Done means the story's criteria and the team's shared standard are both met."
+      }
+    ],
+    terms: ["Requirement", "Requirements traceability matrix", "Project scope statement", "Work breakdown structure", "Work package", "WBS dictionary", "Scope baseline", "Product backlog", "User story", "Acceptance criteria", "Definition of done", "Scope creep", "Gold plating", "Validate Scope"],
+    recap: [
+      "Trace every requirement to a source and to the work that delivers it.",
+      "A scope statement's exclusions prevent later disputes.",
+      "Build the breakdown by deliverable and keep to the 100 per cent rule.",
+      "Stories need their own acceptance criteria and must meet the definition of done.",
+      "Route every change; never absorb or gold plate quietly."
+    ],
+    mindset: "Keep scope clear and every change deliberate, whatever the delivery approach.",
+    practice: { count: 10, decks: ["process"] }
+  },
+  {
+    id: "P3", module: "process", order: 8, ecoTask: "process-8", minutes: 40,
+    prereqs: ["P2"],
+    title: "Schedule",
+    objectives: [
+      "Sequence activities and identify the critical path.",
+      "Use total and free float to judge how much an activity can slip.",
+      "Choose between crashing and fast tracking to shorten a schedule.",
+      "Plan releases from velocity and a ranked backlog.",
+      "Respond to schedule slippage in the right order."
+    ],
+    examWeight: "Schedule items mix calculation with judgement. Some ask for float or a critical path. More ask what to do when a date is at risk. The marks usually go to the answer that works on the right activities and keeps the schedule honest.",
+    sections: [
+      { id: "s1", heading: "From activities to a network", formulaGroup: "schedule",
+        body: "A schedule starts from the work packages in the breakdown structure. Each is decomposed into activities, the actions needed to produce it.\n\n"
+          + "Activities are then sequenced. Some must follow others because of the nature of the work, such as walls before a roof. Some follow by choice, based on good practice. Some depend on things outside the project, such as a permit.\n\n"
+          + "Durations are estimated for each activity. Three-point estimates help when uncertainty is high, combining optimistic, most likely and pessimistic views.\n\n"
+          + "Linked together, the activities form a network diagram. It shows every path from start to finish." },
+      { id: "s2", heading: "The critical path and float",
+        body: "The critical path is the longest path through the network. It sets the shortest possible project duration. Any delay to a critical activity delays the finish.\n\n"
+          + "Other activities have float. Total float is how long an activity can slip without delaying the project end. Free float is how long it can slip without delaying the next activity.\n\n"
+          + "Float is a shared resource. If one team uses it all, later work loses its cushion. Watch float being consumed, not just whether dates are met.\n\n"
+          + "The critical path can change. A non-critical path that keeps slipping can become critical. Re-examine the network as the work progresses." },
+      { id: "s3", heading: "Shortening a schedule",
+        body: "When a date must come earlier, two main techniques apply. Both work only on the critical path.\n\n"
+          + "Crashing adds resources to critical activities, such as extra shifts or more people. It costs money. Choose the activities that save the most time for the least cost.\n\n"
+          + "Fast tracking overlaps activities that were planned in sequence. Design and build might run partly in parallel. It costs little money but adds risk, because later work may need redoing.\n\n"
+          + "Before either, check the cheaper options. Is the estimate realistic? Can scope be reduced with agreement? Does the date really need to move?\n\n"
+          + "After shortening, check the network again. Another path may now be critical." },
+      { id: "s4", heading: "Adaptive scheduling", formulaGroup: "agile",
+        body: "Adaptive teams schedule differently. Work is timeboxed into iterations of fixed length. The team pulls the highest-value items it can complete in each one.\n\n"
+          + "Velocity is how much work the team completes per iteration, measured in its own units. Over several iterations it becomes a reliable guide to capacity.\n\n"
+          + "Release planning uses velocity to forecast. Divide the remaining backlog by velocity to estimate how many iterations remain. Give the forecast as a range, because velocity varies.\n\n"
+          + "When the date is fixed, scope flexes. The question becomes which features will be ready by the date, not when everything will be finished." },
+      { id: "s5", heading: "Managing slippage",
+        body: "When a schedule slips, follow a steady sequence. First, find out how much, why, and whether the activity is critical.\n\n"
+          + "If the slipping work has enough float, the end date is safe. Record it and watch that float.\n\n"
+          + "If it is critical, look at options within your authority: resequencing, crashing, fast tracking or a recovery plan. Assess the cost and risk of each.\n\n"
+          + "If no option recovers the date within tolerance, escalate with the analysis and a recommendation. Never quietly move the baseline.\n\n"
+          + "Report honestly throughout. A schedule shown on track while it is slipping removes the chance for others to help." },
+      { id: "s6", heading: "Honest estimates",
+        body: "Schedules fail as often from poor estimates as from poor delivery. Two habits do most of the damage.\n\n"
+          + "Hidden padding is the first. People add private safety to their own estimates. The work then expands to fill the time, and the safety is spent without anyone seeing it.\n\n"
+          + "False precision is the second. A single date given for uncertain work sounds confident and is usually wrong.\n\n"
+          + "Better practice is to estimate openly, as a range, with the assumptions stated. Hold contingency visibly at project level rather than hidden in each task. Then everyone can see how much buffer remains and decide together how to use it." }
+    ],
+    lenses: {
+      predictive: "Activities are sequenced into a network, the critical path is calculated and the schedule baseline is set. Slippage is managed through float, compression and formal change.",
+      agile: "Work is timeboxed into iterations, capacity comes from velocity, and release plans forecast from the remaining backlog. A fixed date flexes scope rather than adding iterations.",
+      hybrid: "A predictive milestone schedule frames fixed commitments, while agile teams plan within it by iteration. The project manager maps team forecasts against the milestones and flags risk early."
+    },
+    worked: {
+      stem: "A hospital car park extension must open before winter. The ground-works subcontractor reports a three-week delay on drainage, which is on the critical path. The concrete and lighting work have float. The sponsor has not yet been told. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Assess options to recover the three weeks on the critical path, such as extra crews or overlapping later work, with their cost and risk." },
+        { id: "b", text: "Tell the sponsor today that the opening will be three weeks late." },
+        { id: "c", text: "Add crews to the concrete and lighting work so that they finish earlier." },
+        { id: "d", text: "Move the schedule baseline by three weeks to reflect the new forecast." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The delay sits on the critical path, so recovery must happen there. Assessing options with cost and risk gives the sponsor a real choice, possibly with no delay at all." },
+        { option: "b", rank: "acceptable", why: "Early honesty with the sponsor is right in spirit. Reporting a three-week delay before checking recovery options may overstate the problem." },
+        { option: "c", rank: "premature", why: "Adding crews is a reasonable tool, but applying it to work with float spends money without saving any time." },
+        { option: "d", rank: "wrong", why: "A baseline changes only through change control. Moving it quietly hides the variance from those who need to decide." }
+      ],
+      mindset: "Recover time on the critical path, and treat the baseline as something you report against, not edit."
+    },
+    traps: [
+      "Shortening activities that are not on the critical path.",
+      "Fast tracking without accepting the rework risk it brings.",
+      "Treating float as belonging to one activity rather than the whole schedule.",
+      "Comparing velocity between different teams.",
+      "Moving the baseline to hide a slip."
+    ],
+    checks: [
+      {
+        id: "P3-c1", type: "single",
+        stem: "A conference build has two paths to opening. Path A takes 18 days and path B takes 22 days. An activity on path A slips by 3 days. What happens to the opening date?",
+        options: [
+          { id: "a", text: "Nothing, because path A had four days of float and the slip uses three of them.", correct: true,
+            rationale: "Path B is critical at twenty-two days. Path A had four days of float, so a three-day slip is absorbed." },
+          { id: "b", text: "It moves three days later.",
+            rationale: "Only a slip on the critical path moves the end date directly. Path A was not critical." },
+          { id: "c", text: "It moves one day later.",
+            rationale: "Path A now takes twenty-one days, still shorter than path B. The end date holds." },
+          { id: "d", text: "Path A becomes the critical path.",
+            rationale: "Path A is still a day shorter than path B, so B remains critical." }
+        ],
+        explanation: "The critical path is the longest, here path B at twenty-two days. Path A has four days of total float. A three-day slip consumes most of that float but leaves the end date unchanged.",
+        mindset: "Check whether a slip is on the critical path before reacting to it."
+      },
+      {
+        id: "P3-c2", type: "single",
+        stem: "A team's velocity has ranged from 28 to 34 points over six sprints. About 300 points remain in the release backlog. How should the release date be forecast?",
+        options: [
+          { id: "a", text: "As a range of sprints, using the lower and upper velocity to bound it.", correct: true,
+            rationale: "Velocity varies, so a range is more honest than a single figure and helps stakeholders plan." },
+          { id: "b", text: "As a single date, using the highest velocity to motivate the team.",
+            rationale: "Planning on the best sprint makes the date likely to slip and pressures the team to inflate estimates." },
+          { id: "c", text: "As a single date, using the team's commitment in the next planning meeting.",
+            rationale: "One sprint's commitment is weaker evidence than six sprints of actual delivery." },
+          { id: "d", text: "By asking the team to estimate the full backlog in hours.",
+            rationale: "Converting to hours discards the team's own calibrated measure without improving the forecast." }
+        ],
+        explanation: "Release forecasts divide the remaining work by velocity. Because velocity varies, using its range gives an honest window. The forecast is refined each sprint as the backlog and velocity change.",
+        mindset: "Forecast from what the team has actually delivered, and show the range."
+      }
+    ],
+    terms: ["Network diagram", "Critical path", "Total float", "Free float", "Crashing", "Fast tracking", "Schedule compression", "Velocity", "Release", "Timebox", "Schedule baseline"],
+    recap: [
+      "Sequence activities into a network; the longest path is critical.",
+      "Total float protects the end date; free float protects the next activity.",
+      "Crash or fast track only the critical path, then re-check it.",
+      "Forecast releases from the range of observed velocity.",
+      "When a date slips, assess, try options, then escalate with analysis."
+    ],
+    mindset: "Know which work drives the date, and spend your recovery effort there.",
+    practice: { count: 10, decks: ["agile"] }
+  },
+  {
     id: "P4", module: "process", order: 9, ecoTask: "process-6", minutes: 35,
     prereqs: ["F3", "P1"],
     title: "Project finance",
@@ -13470,6 +13823,712 @@ PMP.LESSONS = Object.freeze([
     ],
     mindset: "Know why the numbers moved before you decide what to do about them.",
     practice: { count: 10, decks: ["evm"] }
+  },
+  {
+    id: "P5", module: "process", order: 10, ecoTask: "process-4", minutes: 35,
+    prereqs: ["P3"],
+    title: "Resources",
+    objectives: [
+      "Plan the people and physical resources the work needs.",
+      "Tell resource levelling from resource smoothing and choose between them.",
+      "Acquire team members and negotiate for shared resources.",
+      "Recognise why adding people late can slow a project down.",
+      "Keep resources available as the plan changes."
+    ],
+    examWeight: "Resource items describe a person, team or piece of equipment that is overcommitted, unavailable or contested. They ask what the project manager should do. The marks go to answers that use the schedule's flexibility first and negotiate openly for what it cannot absorb.",
+    sections: [
+      { id: "s1", heading: "Planning what the work needs",
+        body: "Resource planning starts from the activities in the schedule. For each one, ask what people, skills, equipment, materials and facilities it needs, and for how long.\n\n"
+          + "A resource breakdown structure organises this by type. It helps spot shared needs, such as several activities using the same crane or the same database specialist.\n\n"
+          + "Estimate quantities honestly. A specialist available half-time takes longer than one available full-time, and part-time people also lose time switching between commitments.\n\n"
+          + "Record the result in the resource management plan. It sets out how resources are identified, acquired, managed and released. Release matters too, because people need to know when they will be free for other work." },
+      { id: "s2", heading: "Levelling and smoothing",
+        body: "A first schedule often asks for more of a resource than exists at some point. A specialist might be needed at one and a half times their availability for three weeks.\n\n"
+          + "Resource levelling resolves this by moving activities until demand fits supply. It may push the end date later, because work waits for the resource.\n\n"
+          + "Resource smoothing works only within float. Activities move inside their slack, so the end date does not change. It cannot resolve every peak.\n\n"
+          + "Choose by the constraint that matters more. If the date is fixed, smooth first and then look for more resource. If the resource is fixed, level and accept the new date, after agreeing it with the sponsor." },
+      { id: "s3", heading: "Acquiring the team",
+        body: "People come from several places. Some are assigned in advance, some are negotiated from functional managers, and some are hired or contracted.\n\n"
+          + "In a matrix organisation, negotiation is constant. Functional managers balance your project against operations and other projects. Agree availability in writing, and agree what happens if priorities change.\n\n"
+          + "When the right person is not available, consider the options openly. A less experienced person with support, a contractor, or a schedule change may all work. Each carries cost and risk.\n\n"
+          + "Physical resources need the same care. Equipment, test rigs and facilities are often shared. Book them early, confirm bookings, and have a fallback for single points of failure." },
+      { id: "s4", heading: "Adding people late",
+        body: "When a project falls behind, adding people looks like an obvious fix. It often makes things worse in the short term.\n\n"
+          + "New people need onboarding. Existing team members stop to teach them. Communication paths multiply as the team grows. For a while, output falls before it rises.\n\n"
+          + "Adding people works best early, on work that divides cleanly, and when newcomers already know the domain. It works worst late, on tightly connected work, with a team already under pressure.\n\n"
+          + "Before accepting extra people, ask the team. They usually know whether help can be absorbed and where it would actually speed things up." },
+      { id: "s5", heading: "Keeping resources available",
+        body: "Resource plans drift. People are pulled onto urgent operational work. Shared equipment is double-booked. A supplier's delivery slips.\n\n"
+          + "Watch actual availability, not just planned availability. A named person who attends meetings but delivers nothing is not available, whatever the plan says.\n\n"
+          + "When availability falls short, raise it early with the person who controls the resource. Show the effect on the schedule and offer options. Do not quietly absorb the shortfall with overtime.\n\n"
+          + "Team members split across several projects deserve special attention. Frequent switching costs real time. Fewer, longer assignments usually deliver more than many fragments." },
+      { id: "s6", heading: "Resources in adaptive teams",
+        body: "Adaptive delivery prefers stable, dedicated, cross-functional teams. The team has all the skills it needs to deliver an increment without waiting on others.\n\n"
+          + "Stability matters because velocity and trust both take time to build. Moving people in and out resets them.\n\n"
+          + "Capacity planning is simpler. The team's capacity is roughly known, so the question is what to put into it, not who to assign to each task.\n\n"
+          + "Where a specialist must be shared, make the dependency visible on the board and plan around it. Better still, help the team grow the skill so the dependency shrinks over time." }
+    ],
+    lenses: {
+      predictive: "Resources are estimated per activity, allocated against the schedule, and levelled or smoothed to remove peaks. Acquisition is negotiated and booked well ahead.",
+      agile: "A stable, dedicated, cross-functional team brings its own capacity. Work is pulled to fit that capacity, and shared specialists are made visible as dependencies.",
+      hybrid: "Fixed elements book specialists and equipment against a schedule, while agile teams stay stable. The project manager protects team stability when the predictive side's peaks put pressure on it."
+    },
+    worked: {
+      stem: "Your schedule for a bridge inspection programme needs the only certified rope-access engineer at twice her availability for four weeks. The completion date is fixed by a safety regulator. The affected activities have some float but not enough. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Smooth her work within the available float, then size the remaining gap and look for another certified engineer to cover it." },
+        { id: "b", text: "Level the schedule so her work fits her availability, and move the completion date accordingly." },
+        { id: "c", text: "Ask her to work overtime for four weeks so that the schedule stays intact." },
+        { id: "d", text: "Escalate to the sponsor immediately to request a second certified engineer." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The date is fixed, so smoothing within float comes first at no cost. Sizing what remains then gives a precise, justified request for extra cover." },
+        { option: "d", rank: "acceptable", why: "A second engineer may well be needed and the sponsor may need to approve it. Escalating before smoothing asks for more than may be necessary." },
+        { option: "b", rank: "premature", why: "Levelling is right when the date can move. Here the regulator fixes it, so moving the date should be a last resort, not the first move." },
+        { option: "c", rank: "wrong", why: "Doubling one person's hours for a month on safety-critical work is unsafe and unsustainable. It hides the shortfall rather than resolving it." }
+      ],
+      mindset: "Use the schedule's own flexibility first, then ask openly for what it cannot absorb."
+    },
+    traps: [
+      "Levelling a schedule whose end date is fixed, without agreement.",
+      "Treating a named but unavailable person as available.",
+      "Adding people late to tightly connected work and expecting immediate gains.",
+      "Absorbing a resource shortfall with sustained overtime.",
+      "Breaking up a stable agile team to cover other work."
+    ],
+    checks: [
+      {
+        id: "P5-c1", type: "single",
+        stem: "A software rollout's end date is fixed by contract. A tester is overloaded in weeks six and seven, but some of her activities have float. Which technique should be applied first?",
+        options: [
+          { id: "a", text: "Resource smoothing, moving her work within float so the end date is unaffected.", correct: true,
+            rationale: "Smoothing respects the fixed end date by using only available float." },
+          { id: "b", text: "Resource levelling, accepting a later end date.",
+            rationale: "Levelling may move the end date, which the contract does not allow." },
+          { id: "c", text: "Fast tracking her testing alongside development.",
+            rationale: "Fast tracking shortens a schedule. It does not resolve an overloaded person and adds rework risk." },
+          { id: "d", text: "Crashing the testing activities.",
+            rationale: "Crashing adds resources to shorten critical work. The problem here is overload, not duration." }
+        ],
+        explanation: "When the end date is fixed, smoothing is the first tool because it works within float. If smoothing cannot remove the whole peak, the remaining gap needs extra resource or an agreed change.",
+        mindset: "Protect a fixed date by using float before anything else."
+      },
+      {
+        id: "P5-c2", type: "single",
+        stem: "Four months from launch, a sponsor offers three experienced developers to an eight-person team that is two sprints behind. The newcomers do not know the product's codebase. What should the project manager do first?",
+        options: [
+          { id: "a", text: "Discuss with the team how much help they can absorb and where it would genuinely speed delivery.", correct: true,
+            rationale: "The team knows the onboarding cost and where work divides. Their view decides whether extra people help or hinder." },
+          { id: "b", text: "Accept all three at once, since more people means more output.",
+            rationale: "New people slow an existing team at first. The assumption ignores onboarding and coordination costs." },
+          { id: "c", text: "Decline the offer, since adding people never helps.",
+            rationale: "Extra people can help on work that divides cleanly. Refusing without assessing loses a possible benefit." },
+          { id: "d", text: "Accept them and assign them the most complex remaining stories.",
+            rationale: "Unfamiliar people on the hardest, most connected work maximise onboarding drag and risk." }
+        ],
+        explanation: "Adding people can slow a team in the short term through onboarding and extra communication. Whether it helps depends on how the work divides and how much support newcomers need. The team is best placed to judge that.",
+        mindset: "Ask the team before adding people to it."
+      }
+    ],
+    terms: ["Resource breakdown structure", "Resource levelling", "Resource smoothing", "Resource calendar", "Matrix organisation", "Cross-functional team", "Plan Resource Management", "Acquire Resources"],
+    recap: [
+      "Plan people, skills, equipment and facilities from the schedule's activities.",
+      "Levelling may move the end date; smoothing stays within float.",
+      "Agree availability in writing, especially in a matrix organisation.",
+      "Adding people late often slows work before it speeds it up.",
+      "Watch real availability and raise shortfalls early with options."
+    ],
+    mindset: "Fit resources to the plan honestly, and protect the people doing the work.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "P6", module: "process", order: 11, ecoTask: "process-7", minutes: 35,
+    prereqs: ["P2"],
+    title: "Quality",
+    objectives: [
+      "Tell quality from grade, and precision from accuracy.",
+      "Explain the cost of quality and why prevention beats inspection.",
+      "Separate managing quality from controlling it.",
+      "Build quality into adaptive work through the definition of done.",
+      "Use root cause analysis to stop defects recurring."
+    ],
+    examWeight: "Quality items rarely test definitions alone. They describe rising defects, a test phase under pressure or a deliverable that passes tests but disappoints. The marks go to the answer that finds the cause and prevents recurrence, rather than adding more inspection.",
+    sections: [
+      { id: "s1", heading: "Quality and grade",
+        body: "Quality is the degree to which a result meets its requirements. Grade is a category of features or capability.\n\n"
+          + "A basic hatchback can be high quality: it does exactly what it promises, reliably. A luxury car can be low quality if it is full of faults. Low grade is a choice; low quality is a problem.\n\n"
+          + "Precision and accuracy differ too. Precise measurements are tightly grouped. Accurate measurements are close to the true value. A process can be precise but consistently wrong.\n\n"
+          + "Quality requirements come from the customer, standards and regulation. Agree them early, with measurable criteria. Vague quality goals cannot be managed or tested." },
+      { id: "s2", heading: "The cost of quality",
+        body: "Quality costs money, and so does its absence. The cost of quality groups spending into two kinds.\n\n"
+          + "The cost of conformance is money spent to get things right. Prevention includes training, good design and clear standards. Appraisal includes testing, inspection and audits.\n\n"
+          + "The cost of non-conformance is money lost to getting things wrong. Internal failures are defects found before delivery, causing rework and scrap. External failures are found by the customer, causing warranty claims, lost trust and sometimes legal action.\n\n"
+          + "Prevention is usually cheapest. A defect avoided costs nothing to fix. A defect found by the customer costs the most, in money and reputation." },
+      { id: "s3", heading: "Managing quality and controlling it",
+        body: "Managing quality is about the process. It asks whether the way the work is done will produce quality results. Quality audits check that the agreed processes are followed and are working.\n\n"
+          + "Controlling quality is about the product. It checks deliverables against requirements through inspection and testing. Its output is verified deliverables, ready for the customer's acceptance.\n\n"
+          + "Both matter. Good processes reduce defects; good checks catch what slips through.\n\n"
+          + "Be wary of relying on control alone. Adding testers to a defect-heavy project finds more defects, but it does not stop them being made. The fix usually lies upstream." },
+      { id: "s4", heading: "Finding root causes",
+        body: "When a defect recurs, fixing each instance is not enough. Find why it keeps happening.\n\n"
+          + "Root cause analysis asks why, repeatedly, until it reaches a cause that can be changed. A cause-and-effect diagram groups possible causes by category, such as methods, materials, people and equipment.\n\n"
+          + "A Pareto diagram ranks causes by frequency. Often a few causes produce most of the defects. Fixing those first gives the biggest improvement.\n\n"
+          + "Control charts show whether a process is stable over time. Points outside the control limits, or unusual patterns within them, signal that something has changed and needs investigation." },
+      { id: "s5", heading: "Quality in adaptive work",
+        body: "Adaptive teams build quality in rather than inspecting it at the end. The definition of done sets a shared quality bar, such as tested, reviewed and documented.\n\n"
+          + "Practices such as automated tests, continuous integration and pair programming catch problems within minutes. A late hardening phase is a warning sign that quality is being deferred.\n\n"
+          + "Technical debt is the cost of shortcuts taken now that must be repaid later. Some debt is a deliberate trade-off. Unmanaged debt slows the team steadily until velocity collapses.\n\n"
+          + "Retrospectives are the team's quality improvement loop. They look at how the work was done and pick changes to try next time." },
+      { id: "s6", heading: "Passing tests is not the same as fit for use",
+        body: "A deliverable can pass every agreed test and still disappoint. The tests may have checked the wrong things, or the requirements may have missed what users needed.\n\n"
+          + "When this happens, do not argue about whether the tests were passed. Ask what the result is for and whether it serves that purpose.\n\n"
+          + "Coverage figures can mislead in the same way. High test coverage shows code was run during tests, not that it behaves correctly where it matters.\n\n"
+          + "Review the measures themselves from time to time. A quality metric that can be met without delivering quality will eventually be met that way." }
+    ],
+    lenses: {
+      predictive: "Quality requirements and metrics are planned up front, audits check the processes, and control checks deliverables before validation. Changes to standards go through change control.",
+      agile: "Quality is built into each increment through the definition of done, automated testing and frequent review. Retrospectives improve the process every iteration.",
+      hybrid: "Fixed deliverables follow planned inspection and acceptance, while iterative parts rely on the definition of done. The project manager aligns the two so integration testing does not become a late surprise."
+    },
+    worked: {
+      stem: "On a new ambulance dispatch system, user acceptance testing keeps finding the same kind of defect: addresses on new housing estates fail to geocode. The development team fixes each one as it is reported. The test lead wants two more testers. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Run a root cause analysis with the developers and testers to find why new-estate addresses keep failing." },
+        { id: "b", text: "Approve the two extra testers so that more of these defects are found before go-live." },
+        { id: "c", text: "Add a specific test for each newly reported address to the regression suite." },
+        { id: "d", text: "Ask the developers to work faster on fixes so the defect queue clears before go-live." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The defects share a pattern, which points to one underlying cause. Fixing that cause stops the whole class of defect rather than chasing instances." },
+        { option: "c", rank: "acceptable", why: "Regression tests stop fixed defects returning, which is useful. They do not prevent new instances of the same underlying problem." },
+        { option: "b", rank: "premature", why: "More testers find more defects but do not stop them being created. Adding them before knowing the cause spends money on the symptom." },
+        { option: "d", rank: "wrong", why: "Pushing for faster fixes treats the queue, not the cause. It also risks rushed fixes in a safety-critical system." }
+      ],
+      mindset: "When a defect keeps recurring, fix the cause rather than inspect harder."
+    },
+    traps: [
+      "Treating low grade as low quality.",
+      "Responding to rising defects by adding inspection alone.",
+      "Confusing quality audits of the process with inspection of the product.",
+      "Deferring quality to a hardening phase at the end.",
+      "Trusting a coverage figure as proof that quality is high."
+    ],
+    checks: [
+      {
+        id: "P6-c1", type: "single",
+        stem: "A furniture maker spends heavily on final inspection, rejecting about one chair in twelve. A sponsor asks where extra quality spending would do most good. What is the best answer?",
+        options: [
+          { id: "a", text: "On prevention, such as better jigs and operator training, so fewer defective chairs are made.", correct: true,
+            rationale: "Prevention stops defects at source, which is usually cheaper than finding and scrapping them later." },
+          { id: "b", text: "On more inspectors, so no defective chair leaves the factory.",
+            rationale: "More inspection catches defects but still pays for every chair that is made wrongly and scrapped." },
+          { id: "c", text: "On warranty cover for chairs that fail in use.",
+            rationale: "Warranty manages external failure after the fact. It does not reduce the defects themselves." },
+          { id: "d", text: "On a more expensive grade of wood.",
+            rationale: "Grade is a feature choice. A better wood does not fix defects caused by the process." }
+        ],
+        explanation: "Spending on prevention reduces the number of defects made, which also cuts appraisal and failure costs. Heavy reliance on final inspection pays for every defect twice: once to make it and once to reject it.",
+        mindset: "Prevent defects rather than paying to find them."
+      },
+      {
+        id: "P6-c2", type: "single",
+        stem: "An agile team's velocity has fallen for five sprints while escaped defects have risen. The team says shortcuts taken for an earlier launch are slowing everything down. What is the most appropriate response?",
+        options: [
+          { id: "a", text: "Work with the product owner to make paying down the technical debt visible and plan it into the backlog.", correct: true,
+            rationale: "Debt is slowing delivery and causing defects. Making it visible lets the product owner weigh repaying it against new features." },
+          { id: "b", text: "Ask the team to increase its velocity back to its previous level.",
+            rationale: "Pressure on velocity without addressing the debt is likely to add more shortcuts and more defects." },
+          { id: "c", text: "Add a hardening sprint before every release to fix defects.",
+            rationale: "This defers quality to the end and leaves the underlying debt in place." },
+          { id: "d", text: "Relax the definition of done so more stories can be completed.",
+            rationale: "Lowering the quality bar adds more debt and is likely to raise defects further." }
+        ],
+        explanation: "Technical debt from earlier shortcuts slows delivery and lets defects escape. The sustainable response is to make the debt visible and plan its repayment alongside new work. That decision belongs with the product owner and the team.",
+        mindset: "Repay quality debt deliberately before it repays itself in defects."
+      }
+    ],
+    terms: ["Quality", "Grade", "Cost of quality", "Quality audit", "Control Quality", "Root cause analysis", "Pareto diagram", "Control chart", "Cause-and-effect diagram", "Definition of done", "Technical debt"],
+    recap: [
+      "Low grade is a choice; low quality is a problem.",
+      "Prevention is usually the cheapest part of the cost of quality.",
+      "Manage quality through the process; control it through the product.",
+      "Recurring defects need root cause analysis, not more inspection.",
+      "In adaptive work, build quality in through the definition of done."
+    ],
+    mindset: "Build quality into how the work is done, rather than inspecting it in at the end.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "P7", module: "process", order: 12, ecoTask: "process-5", minutes: 40,
+    prereqs: ["P4"],
+    title: "Procurement",
+    objectives: [
+      "Decide whether to make or buy, using cost and risk.",
+      "Match a contract type to how well the work can be defined.",
+      "Explain how risk shifts between buyer and seller across contract types.",
+      "Run a fair selection and manage a supplier through delivery.",
+      "Handle supplier problems through the contract and the relationship."
+    ],
+    examWeight: "Procurement items describe a buying decision or a supplier problem. Expect to choose a contract type, respond to a missed milestone or handle a disputed claim. The marks go to answers that use the contract properly while keeping the relationship working.",
+    sections: [
+      { id: "s1", heading: "Make or buy", formulaGroup: "procure",
+        body: "Every procurement starts with a decision: do the work in-house or buy it in. A make-or-buy analysis compares the options.\n\n"
+          + "Cost is only part of it. Consider skills, capacity, control, confidentiality, and how long the capability is needed. Building something you use once may not be worth the investment. Buying something central to your business may leave you dependent on a supplier.\n\n"
+          + "Consider risk too. Buying can transfer some risk to a supplier, but never all of it. The project still owns the outcome.\n\n"
+          + "The decision and its reasons are recorded in the procurement management plan, which also sets how buying will be managed." },
+      { id: "s2", heading: "Contract types and risk",
+        body: "Contract types sit on a spectrum of risk. The right choice depends on how well the work can be described.\n\n"
+          + "Fixed-price contracts set a price for defined work. The seller carries most of the cost risk. They suit clear, stable scope. On vague scope they invite padded prices and endless change requests.\n\n"
+          + "Cost-reimbursable contracts pay the seller's actual costs plus a fee. The buyer carries most of the cost risk. They suit uncertain work, where nobody can price it fairly in advance.\n\n"
+          + "Time and materials contracts pay rates for effort used. They suit small or urgent work and staff augmentation. Without a cap, cost can grow without limit.\n\n"
+          + "Incentive and award fees adjust the fee to reward good performance. They help align the seller's interests with the buyer's." },
+      { id: "s3", heading: "Incentive contracts and the point of total assumption",
+        body: "Incentive contracts set a target cost and fee, and a share ratio for overruns and underruns. If the seller comes in under target, both share the saving. If over, both share the cost.\n\n"
+          + "Fixed-price incentive contracts also have a ceiling price. Above a certain cost, the seller absorbs every extra pound. That cost is the point of total assumption.\n\n"
+          + "The arithmetic is drilled in the formula lab. What matters here is the logic. Shared risk gives both parties a reason to control cost, and the ceiling protects the buyer from unlimited exposure.\n\n"
+          + "Choose incentives that reward what you actually value. An incentive on speed alone can buy speed at the cost of quality." },
+      { id: "s4", heading: "Selecting a supplier",
+        body: "A fair selection starts with clear bid documents. They describe the need, the terms and how bids will be judged.\n\n"
+          + "Source selection criteria should be set before bids arrive. They often weigh price against technical approach, experience, capacity and financial stability. Cheapest is rarely best when the work is complex.\n\n"
+          + "A bidder conference lets all potential suppliers ask questions and hear the same answers. Equal information keeps the competition fair.\n\n"
+          + "An independent cost estimate gives the buyer a benchmark. Bids far below it deserve scrutiny, because a seller who has underpriced may cut corners or claim later." },
+      { id: "s5", heading: "Managing the supplier",
+        body: "Signing the contract starts the real work. The buyer monitors performance against the contract's terms, milestones and quality standards.\n\n"
+          + "Problems are handled first through conversation. Find out why a milestone was missed and what the supplier proposes. Many issues are fixed faster through the relationship than through formal notices.\n\n"
+          + "The contract still matters. Follow its process for changes, disputes and remedies. Record decisions in writing. A change agreed verbally and never documented becomes a claim later.\n\n"
+          + "Claims and disputes are best settled by negotiation. Escalation to mediation, arbitration or the courts is a last resort, costly for both sides." },
+      { id: "s6", heading: "Procurement in adaptive work",
+        body: "Fixed-scope contracts sit awkwardly with adaptive delivery. Scope is expected to change, but the contract treats every change as a variation.\n\n"
+          + "Agile-friendly contracts handle this differently. Some fix the team, the price per iteration and the outcome, while scope flexes. Some break the work into small fixed-price pieces agreed one at a time. Some include an early exit if value is not being delivered.\n\n"
+          + "The relationship matters even more. Customer and supplier work as one team, with the customer's product owner involved throughout.\n\n"
+          + "Whatever the form, the contract should support collaboration, not replace it." }
+    ],
+    lenses: {
+      predictive: "Scope is defined first, so fixed-price contracts are common. The buyer manages the supplier against milestones, deliverables and formal change control.",
+      agile: "Contracts fix capacity or price per iteration and let scope flex, with early exit points. The supplier's team works closely with the customer's product owner throughout.",
+      hybrid: "Defined parts are bought on fixed price while uncertain parts use time and materials or capacity-based terms. The project manager aligns their milestones and change routes."
+    },
+    worked: {
+      stem: "A supplier building a hospital's new pharmacy robot has missed two of five milestones. The contract allows service credits after two misses. Their account manager says a key engineer was ill and offers a recovery plan. Your sponsor wants credits applied at once. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Review the recovery plan with the supplier and test its credibility. Then decide on credits under the contract." },
+        { id: "b", text: "Apply the service credits immediately, as the sponsor asks and the contract allows." },
+        { id: "c", text: "Accept the recovery plan and waive the credits to preserve the relationship." },
+        { id: "d", text: "Begin finding an alternative supplier in case this one fails a third time." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Understanding the cause and the credibility of the plan comes first. The contract's remedies stay available, and the decision on them is informed rather than reflexive." },
+        { option: "b", rank: "acceptable", why: "Credits are a legitimate contractual remedy and the sponsor's wish is reasonable. Applying them before assessing the plan may sour a relationship that could still recover." },
+        { option: "d", rank: "premature", why: "Contingency planning has a place if the risk is real. Starting a replacement search now, before assessing the recovery plan, wastes effort and signals distrust." },
+        { option: "c", rank: "wrong", why: "Waiving contractual rights without assessment gives away leverage and sets a precedent. The decision is also not the project manager's alone to make." }
+      ],
+      mindset: "Use the relationship to understand the problem, and the contract to frame the response."
+    },
+    traps: [
+      "Using a fixed-price contract for work nobody can yet describe.",
+      "Choosing the cheapest bid without weighing the other criteria.",
+      "Agreeing changes verbally and leaving them out of the contract.",
+      "Reaching for formal remedies before understanding the problem.",
+      "Assuming a contract transfers all of a risk to the supplier."
+    ],
+    checks: [
+      {
+        id: "P7-c1", type: "single",
+        stem: "A research council wants a supplier to build a prototype sensor using a technique nobody has tried at scale. The work cannot be specified in detail. Which contract type fits best?",
+        options: [
+          { id: "a", text: "A cost-reimbursable contract, with an incentive to control cost.", correct: true,
+            rationale: "Uncertain work cannot be priced fairly in advance. The buyer accepts the cost risk, and the incentive keeps the seller cost-conscious." },
+          { id: "b", text: "A firm fixed-price contract, to cap the council's exposure.",
+            rationale: "No supplier can price untried work fairly. Bids would be heavily padded or lead to repeated claims." },
+          { id: "c", text: "A fixed price with economic price adjustment.",
+            rationale: "This handles inflation over long contracts. It does not address uncertainty in the work itself." },
+          { id: "d", text: "No contract until the technique is fully specified.",
+            rationale: "The point of the work is to discover the technique. Waiting for a full specification means never starting." }
+        ],
+        explanation: "When scope is highly uncertain, cost-reimbursable contracts let work proceed without forcing a guessed price. The buyer carries more cost risk, so an incentive or award fee helps align the seller with the buyer's interest.",
+        mindset: "Match the contract to how well the work can be described."
+      },
+      {
+        id: "P7-c2", type: "single",
+        stem: "Midway through a fixed-price contract, your engineer and the supplier's lead agree on a call to add an extra integration test. Nothing is written down. Weeks later the supplier invoices for it. What should have happened?",
+        options: [
+          { id: "a", text: "The change should have gone through the contract's change process and been agreed in writing before work began.", correct: true,
+            rationale: "Contract changes need formal agreement on scope and price. A verbal agreement invites exactly this dispute." },
+          { id: "b", text: "The engineer should have refused any extra testing.",
+            rationale: "The test may have been valuable. The problem is how it was agreed, not that it was considered." },
+          { id: "c", text: "The supplier should have done the work free, as the contract is fixed price.",
+            rationale: "Fixed price covers the agreed scope only. Added work is a change, and changes can be priced." },
+          { id: "d", text: "The project manager should pay the invoice to avoid a dispute.",
+            rationale: "Paying without assessing whether the work was in scope skips the contract's own process." }
+        ],
+        explanation: "Changes to a contract should follow its change process and be recorded in writing, with scope and price agreed. Informal agreements are a frequent source of claims. Now, the claim should be assessed through the contract's dispute process.",
+        mindset: "If it changes the contract, write it down and agree it formally."
+      }
+    ],
+    terms: ["Make-or-buy analysis", "Firm fixed price", "Cost plus incentive fee", "Time and materials", "Fixed price incentive fee", "Point of total assumption", "Source selection criteria", "Bidder conference", "Independent cost estimate", "Procurement management plan", "Claims administration"],
+    recap: [
+      "Weigh cost, risk, skills and control when deciding to make or buy.",
+      "Fixed price suits defined work; cost-reimbursable suits uncertain work.",
+      "Incentives share risk, and the ceiling caps the buyer's exposure.",
+      "Set selection criteria before bids arrive and keep information equal.",
+      "Solve supplier problems through the relationship and record them through the contract."
+    ],
+    mindset: "Choose the contract that fits the uncertainty, then manage the supplier as a partner within it.",
+    practice: { count: 10, decks: ["contracts"] }
+  },
+  {
+    id: "P8", module: "process", order: 13, ecoTask: "process-3", minutes: 35,
+    prereqs: ["P1"],
+    title: "Value delivery",
+    objectives: [
+      "Explain how a business case and benefits plan justify a project.",
+      "Use financial measures to compare options, and know their limits.",
+      "Prioritise work by value, including the cost of delay.",
+      "Deliver value early through a minimum viable product and incremental release.",
+      "Keep checking that the work is still worth doing."
+    ],
+    examWeight: "Value items describe a project whose justification has shifted, a backlog ordered for the wrong reasons, or finished work that has not reached anyone. The marks go to answers that put value first and keep testing whether the work is still worth doing.",
+    sections: [
+      { id: "s1", heading: "The business case and benefits", formulaGroup: "finance",
+        body: "A business case explains why a project is worth doing. It sets out the problem or opportunity, the options considered, the expected costs and benefits, and the risks.\n\n"
+          + "Benefits are the improvements the organisation expects once the result is in use. Faster processing, lower costs or more customers are typical examples. They usually appear after the project ends.\n\n"
+          + "A benefits management plan says how and when each benefit will be measured, and who owns it. Often the owner sits in operations, not in the project.\n\n"
+          + "The business case is not a one-off hurdle. It should be revisited whenever costs, risks or the outside world change significantly." },
+      { id: "s2", heading: "Comparing options with numbers",
+        body: "Several financial measures help compare options. Net present value adds up future cash flows in today's money. Higher is better, and a negative figure means the project destroys value.\n\n"
+          + "Internal rate of return is the discount rate at which net present value is zero. Higher is better. Payback period is how long it takes to recover the investment. Shorter is better, but it ignores everything after payback.\n\n"
+          + "Each measure answers a different question, so they can disagree. Net present value is usually the most reliable for comparing options of different sizes.\n\n"
+          + "The formula lab drills the arithmetic. The judgement lies in remembering that numbers rest on assumptions. A strong figure built on optimistic benefits is a weak case." },
+      { id: "s3", heading: "Prioritising by value",
+        body: "When everything cannot be done at once, order matters. Value-based prioritisation puts the work that brings most benefit first.\n\n"
+          + "Cost of delay helps make this concrete. It asks what the organisation loses for each week a feature is not available. Dividing cost of delay by duration favours short, valuable work, which is often the best place to start.\n\n"
+          + "Prioritisation is the product owner's job in adaptive work. Asking each stakeholder to rank their own requests, then interleaving the lists, is not prioritisation. It hides the trade-offs instead of making them.\n\n"
+          + "Mandatory work, such as legal compliance, has value too: avoiding penalties or keeping the right to operate. Rank it honestly rather than deferring it indefinitely." },
+      { id: "s4", heading: "Delivering value early",
+        body: "Value only arrives when people can use the result. Holding finished work back until everything is complete delays every benefit.\n\n"
+          + "Incremental delivery releases usable pieces early. Each release starts paying back sooner and gives real feedback on what users need.\n\n"
+          + "A minimum viable product is the smallest version that tests whether an idea is worth pursuing. Its aim is learning, not a polished result. If the idea fails, little has been spent.\n\n"
+          + "Finished work that sits waiting for a release window is inventory. It has cost money and returns nothing. Shortening the path to release is one of the strongest ways to raise value." },
+      { id: "s5", heading: "Is it still worth doing?",
+        body: "Circumstances change. A competitor launches first. A regulation changes. The problem the project was meant to solve shrinks.\n\n"
+          + "When that happens, revisit the business case. Ask whether the remaining investment still buys enough value. Money already spent is gone and should not drive the decision.\n\n"
+          + "The options include continuing, changing scope, pivoting to a different goal or stopping. Stopping a project that no longer makes sense is a success of governance, not a failure of delivery.\n\n"
+          + "The project manager raises the question with evidence. The decision belongs to the sponsor or governance body." },
+      { id: "s6", heading: "Measuring value after delivery",
+        body: "Delivery is not the finish line for value. Usage data, customer feedback and operational measures show whether the expected benefits are appearing.\n\n"
+          + "Features that few people use are a signal. They may need improving, promoting or removing. Removing unused features cuts support costs and complexity.\n\n"
+          + "Where benefits fall short, find out why. Poor adoption, a changed market or a wrong assumption each call for a different response.\n\n"
+          + "Feed what you learn back into the backlog and into future business cases. Organisations that measure benefits honestly make better investment decisions next time." }
+    ],
+    lenses: {
+      predictive: "The business case justifies the project at the start and is reviewed at phase gates. Benefits are realised mostly after handover and measured by an operational owner.",
+      agile: "The product owner ranks the backlog by value, releases early and often, and uses feedback to adjust. A minimum viable product tests ideas before heavy investment.",
+      hybrid: "Fixed elements are justified through the business case, while iterative parts release value incrementally. The project manager tracks benefits across both and revisits the case as evidence arrives."
+    },
+    worked: {
+      stem: "Your team is eight months into building a route-planning feature for a delivery firm's drivers. A free mapping app now offers the same capability, and early user research shows drivers prefer it. Three months of work remain. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Assess what value the remaining work would still deliver, and bring that evidence to the sponsor with options including pivoting or stopping." },
+        { id: "b", text: "Finish the feature as planned, since eight months of investment would otherwise be wasted." },
+        { id: "c", text: "Stop all work on the feature immediately and release the team." },
+        { id: "d", text: "Add extra capabilities so the feature outperforms the free app." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The justification has changed, so the evidence must be re-examined. The sponsor then decides with a clear view of the remaining value and the options." },
+        { option: "c", rank: "acceptable", why: "Stopping may well be right, and it avoids further waste. Doing it unilaterally takes a governance decision away from the sponsor and skips the assessment." },
+        { option: "d", rank: "premature", why: "Competing on features is one possible pivot. Committing to it before assessing value and agreeing direction expands scope on a guess." },
+        { option: "b", rank: "wrong", why: "Past spending cannot be recovered and should not drive the decision. Finishing regardless risks spending three more months on something drivers will not use." }
+      ],
+      mindset: "Decide on future value, not on money already spent."
+    },
+    traps: [
+      "Continuing a project because of what has already been spent.",
+      "Treating the business case as a hurdle passed once at the start.",
+      "Prioritising by who asks loudest rather than by value.",
+      "Holding finished work back until everything is complete.",
+      "Measuring success by features delivered rather than benefits realised."
+    ],
+    checks: [
+      {
+        id: "P8-c1", type: "single",
+        stem: "Two features compete for the team's next month. Feature A brings large value but takes three months. Feature B brings half that value but takes two weeks. Using cost of delay divided by duration, which should usually come first?",
+        options: [
+          { id: "a", text: "Feature B, because its value per week of effort is much higher.", correct: true,
+            rationale: "Short, valuable work delivers benefit soonest. B's value divided by its short duration outranks A's." },
+          { id: "b", text: "Feature A, because its total value is larger.",
+            rationale: "Total value ignores how long it takes. Doing A first delays B's benefit by three months." },
+          { id: "c", text: "Whichever the most senior stakeholder prefers.",
+            rationale: "Seniority is not a measure of value. The method in the stem exists to avoid this." },
+          { id: "d", text: "Both in parallel, splitting the team.",
+            rationale: "Splitting delays both and adds switching cost. Sequencing by value per week is the point of the method." }
+        ],
+        explanation: "Dividing cost of delay by duration favours work that delivers value quickly. Doing the short, valuable feature first starts its benefit flowing while the larger feature is built afterwards.",
+        mindset: "Start the work that delivers the most value soonest."
+      },
+      {
+        id: "P8-c2", type: "single",
+        stem: "A team has completed and accepted thirty stories over four months, but none has reached users because releases happen once a year. What is the main problem?",
+        options: [
+          { id: "a", text: "Finished work is delivering no value while it waits, so the path to release needs shortening.", correct: true,
+            rationale: "Value arrives only on use. Accepted but unreleased work has cost money and returned nothing yet." },
+          { id: "b", text: "The team is working too fast for the release cycle.",
+            rationale: "Delivery speed is not the problem. The release process is holding value back." },
+          { id: "c", text: "The stories were not properly accepted.",
+            rationale: "The stem says they were accepted. The gap is between acceptance and release." },
+          { id: "d", text: "The team needs a larger annual release to justify the effort.",
+            rationale: "Bigger, rarer releases delay value further and raise release risk." }
+        ],
+        explanation: "Work that is finished but unreleased is inventory. It has consumed budget and returns no benefit until people can use it. Shortening the release cycle is one of the most effective ways to raise delivered value.",
+        mindset: "Value counts only when it reaches the people it is for."
+      }
+    ],
+    terms: ["Business case", "Benefits management plan", "Business value", "Net present value", "Internal rate of return", "Payback period", "Product roadmap", "Release"],
+    recap: [
+      "The business case justifies the work; benefits are measured after delivery.",
+      "Financial measures answer different questions and rest on assumptions.",
+      "Prioritise by value, using cost of delay divided by duration.",
+      "Release early; finished but unreleased work returns nothing.",
+      "Revisit the case when circumstances change, and ignore sunk cost."
+    ],
+    mindset: "Keep asking whether the work is still worth doing, and deliver its value as early as you can.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "P9", module: "process", order: 14, ecoTask: "process-9", minutes: 30,
+    prereqs: ["P3", "P4"],
+    title: "Status and artifacts",
+    objectives: [
+      "Measure progress in ways that reflect real completion.",
+      "Report status so that the audience can act on it.",
+      "Use information radiators and burn charts to make work visible.",
+      "Keep project artifacts current and useful.",
+      "Recognise and fix reporting that hides problems."
+    ],
+    examWeight: "Status items describe reports nobody reads, figures that hide trouble, or measures that drive the wrong behaviour. The marks go to answers that make progress honest and visible, and that give each audience what it needs to decide.",
+    sections: [
+      { id: "s1", heading: "Measuring real progress",
+        body: "Progress should measure completed work, not effort or time spent. A task that is ninety per cent complete for three weeks is not nearly done.\n\n"
+          + "Earned value measures progress against plan in predictive work. In adaptive work, completed items that meet the definition of done are the measure. Partially done items count for nothing.\n\n"
+          + "Avoid percentage-complete estimates for items in progress. They are optimistic by nature, because the hardest part is often the last.\n\n"
+          + "Work performance data is the raw record of what happened. Analysed against plan, it becomes work performance information. Packaged for an audience, it becomes a report." },
+      { id: "s2", heading: "Reporting that leads to action",
+        body: "A status report exists to help someone decide or act. Ask who reads it and what they need to know.\n\n"
+          + "Sponsors need exceptions, decisions and risks. Teams need detail about their own work. Users need dates and changes that affect them. One report for everyone usually serves nobody.\n\n"
+          + "State clearly when you need a decision. A request buried on page four will not be seen.\n\n"
+          + "Status colours help only if they mean something consistent. Amber reported for months with no change in commentary tells the reader nothing. Explain what would move the status and what is being done.\n\n"
+          + "Keep the effort proportionate. A report that takes days to assemble is often out of date by the time it is read. Automate what can be automated, and spend the saved time on the commentary that explains what the figures mean." },
+      { id: "s3", heading: "Information radiators and burn charts", formulaGroup: "agile",
+        body: "An information radiator is a large, visible display of key information, such as a task board or a chart on the wall. Anyone passing can see the state of the work without asking.\n\n"
+          + "A burndown chart shows work remaining over time. A healthy one slopes steadily down. A flat line followed by a sudden drop suggests work is being finished in large batches, or items are being closed late.\n\n"
+          + "A burnup chart shows work completed against total scope. It makes scope changes visible, because the scope line moves.\n\n"
+          + "Cumulative flow diagrams show how many items sit in each stage. A widening band reveals a bottleneck." },
+      { id: "s4", heading: "Keeping artifacts current",
+        body: "Projects produce many artifacts: registers, logs, plans, decision records, boards. Their value depends entirely on being current.\n\n"
+          + "An out-of-date risk register is worse than none, because it gives false comfort. A board that differs from what the team is actually doing misleads everyone who reads it.\n\n"
+          + "Keep artifacts light enough to maintain. A document nobody can keep current should be simplified or retired.\n\n"
+          + "Store them where people can find them, and agree who updates each one. When two versions exist, decide which is the source of truth and retire the other." },
+      { id: "s5", heading: "Reporting that hides problems",
+        body: "Some reporting looks healthy while the project is in trouble. Watch for the warning signs.\n\n"
+          + "Green status for months, followed by sudden red, usually means problems were not reported as they grew. Watermelon reporting, green outside and red inside, erodes trust once discovered.\n\n"
+          + "Measures that become targets distort behaviour. Velocity used to compare teams leads to inflated estimates. Coverage targets lead to tests that execute code without checking it.\n\n"
+          + "The fix is honesty and early warning. Report what you know, what it means and what you are doing about it, even when the news is bad." },
+      { id: "s6", heading: "Status across hybrid programmes",
+        body: "Hybrid programmes mix measures. Predictive workstreams report earned value. Agile teams report burnups, velocity and cycle time.\n\n"
+          + "Do not force one measure onto both. Converting story points into earned value creates false precision and pressure to game estimates.\n\n"
+          + "Instead, show each workstream in its own terms. Then add a common view for governance: forecast milestone dates, major risks and decisions needed.\n\n"
+          + "The project manager translates between the two worlds. That takes more thought than a single dashboard, but it keeps the figures honest." }
+    ],
+    lenses: {
+      predictive: "Progress is measured against baselines with earned value, reported at set intervals, and documented in formal reports and registers.",
+      agile: "Progress is shown through working increments, burn charts and boards that anyone can read. Status is visible continuously rather than reported periodically.",
+      hybrid: "Each workstream reports in its own measures, and the project manager provides a shared view of milestones, risks and decisions for governance."
+    },
+    worked: {
+      stem: "You have taken over a community health records project reported green for nine months. In your first week you find two key interfaces untested and the go-live date unlikely to hold. The next steering meeting is in three weeks. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Confirm the facts quickly, then tell the sponsor now what you have found, what it means and what you propose to do." },
+        { id: "b", text: "Change next month's report to amber, then red the month after, so the change does not alarm the steering group." },
+        { id: "c", text: "Wait until the steering meeting to present a full recovery plan alongside the revised status." },
+        { id: "d", text: "Keep the status green while you work on recovery, since the problems may yet be fixed." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Early, honest warning with facts and a proposed response gives the sponsor time to act. Waiting only shrinks the options." },
+        { option: "c", rank: "acceptable", why: "A full recovery plan is valuable, and the meeting is a natural forum. Three weeks of silence on a serious problem is too long, though." },
+        { option: "b", rank: "premature", why: "Moving the status is right, but staging it to manage reactions is not. It delays the truth for presentational reasons." },
+        { option: "d", rank: "wrong", why: "Reporting green while knowing the project is in trouble is dishonest. It removes the chance for anyone else to help." }
+      ],
+      mindset: "Report what you know when you know it, with what you plan to do about it."
+    },
+    traps: [
+      "Reporting percentage complete for work in progress.",
+      "Sending one report to every audience regardless of need.",
+      "Reporting green while problems grow underneath.",
+      "Using velocity or coverage as a target.",
+      "Keeping artifacts that nobody updates."
+    ],
+    checks: [
+      {
+        id: "P9-c1", type: "single",
+        stem: "A team's sprint burndown stays flat for most of each sprint, then drops sharply on the last day. Every sprint goal is reported as met. What does the pattern most likely show?",
+        options: [
+          { id: "a", text: "Work is being finished in large batches or closed late, so progress during the sprint is hidden.", correct: true,
+            rationale: "A flat line then a cliff means items are not reaching done until the end. Problems during the sprint go unseen." },
+          { id: "b", text: "The team is performing perfectly, since every goal is met.",
+            rationale: "Meeting the goal does not mean the flow is healthy. Late completion hides risk until it is too late to act." },
+          { id: "c", text: "The team's velocity is too low.",
+            rationale: "The goal is met, so capacity is not obviously the issue. The shape of the chart is the signal." },
+          { id: "d", text: "The burndown chart is being drawn incorrectly.",
+            rationale: "The chart may be accurate. It is the way work moves to done that it reveals." }
+        ],
+        explanation: "A healthy burndown slopes steadily down as items are finished through the sprint. A flat line followed by a sharp drop usually means work is batched or closed late. That hides problems until the last day, when little can be done.",
+        mindset: "Make progress visible as it happens, not all at the end."
+      },
+      {
+        id: "P9-c2", type: "single",
+        stem: "Your monthly report goes to forty people. The steering group reads only the summary, and a key decision request on page six has gone unanswered for two months. What should you change?",
+        options: [
+          { id: "a", text: "Tailor reporting to each audience and put decisions needed at the top of the steering group's summary.", correct: true,
+            rationale: "Each audience needs different information. Leading with the decisions needed gets them seen and answered." },
+          { id: "b", text: "Make the report longer so that nothing is missed.",
+            rationale: "A longer report is read even less. The problem is relevance and placement, not quantity." },
+          { id: "c", text: "Send the decision request as a separate email to all forty people.",
+            rationale: "The decision belongs to the steering group. A mass email adds noise and does not target the decision-makers." },
+          { id: "d", text: "Stop reporting until the steering group replies.",
+            rationale: "Withholding information harms transparency and does not get the decision made." }
+        ],
+        explanation: "Reports work when they give each audience what it needs to act. Decision-makers should see the decisions requested first, with the context they need. Generic reports bury exactly the information that matters most.",
+        mindset: "Write each report for the person who must act on it."
+      }
+    ],
+    terms: ["Work performance data", "Work performance information", "Work performance reports", "Information radiator", "Burndown chart", "Burnup chart", "Cumulative flow diagram", "Variance analysis"],
+    recap: [
+      "Measure completed work, not effort or partial completion.",
+      "Report for the audience, and lead with decisions needed.",
+      "Make work visible with radiators and burn charts.",
+      "Keep artifacts current or retire them.",
+      "Report bad news early, with what you are doing about it."
+    ],
+    mindset: "Make the true state of the work visible to those who need to act on it.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "P10", module: "process", order: 15, ecoTask: "process-10", minutes: 30,
+    prereqs: ["P2"],
+    title: "Closure",
+    objectives: [
+      "Confirm formal acceptance before closing a phase or project.",
+      "Hand over the result so that operations can run it.",
+      "Close contracts and release resources properly.",
+      "Capture lessons in a form that will actually be used.",
+      "Close a cancelled project as thoroughly as a successful one."
+    ],
+    examWeight: "Closure items describe a project that is nearly finished, or stopped early, with loose ends. Expect questions about acceptance, handover, contracts and lessons. The marks go to answers that finish the obligations properly rather than simply declaring the project done.",
+    sections: [
+      { id: "s1", heading: "Formal acceptance",
+        body: "A project or phase can only close once its deliverables have been formally accepted. Acceptance is the customer's agreement that the result meets the agreed criteria.\n\n"
+          + "Quality control first verifies that deliverables are correct. Scope validation then secures the customer's acceptance. Both steps matter, and the second depends on the first.\n\n"
+          + "Record acceptance in writing. A verbal approval in a meeting is easily disputed later.\n\n"
+          + "If the customer refuses acceptance despite meeting the criteria, find out why. The criteria may have missed something, or there may be another concern. Resolve it through the agreed process, not by declaring closure regardless.\n\n"
+          + "Small open defects need not block acceptance. Agree which can be fixed after handover, record them, and agree who will fix them and by when." },
+      { id: "s2", heading: "Handing over",
+        body: "The result must move into the hands of those who will run it. Usually this is an operations team, a client or a business unit.\n\n"
+          + "A good handover includes training, documentation, support arrangements and a clear point at which responsibility passes. The receiving team should confirm it is ready, not simply accept by default.\n\n"
+          + "Agree how remaining defects and small changes will be handled after handover. Without that, the project team stays on call indefinitely.\n\n"
+          + "Benefits ownership also passes at this point. Someone in the business should own measuring whether the expected benefits arrive." },
+      { id: "s3", heading: "Closing contracts and releasing resources",
+        body: "Each contract must be closed formally. Confirm all deliverables were received and accepted, settle final payments and resolve any open claims.\n\n"
+          + "Unresolved claims are best settled before the people who understand them leave. Months later, the facts are harder to establish.\n\n"
+          + "Release team members with notice, so they and their next managers can plan. Recognise their contribution, both publicly and in feedback to their managers. People remember how a project ended more than how it began.\n\n"
+          + "Archive the project records. Organisational process assets, such as templates and historical data, should be updated so future projects can use them." },
+      { id: "s4", heading: "Lessons that travel",
+        body: "Lessons learned are captured throughout the project in a register, not just at the end. By closure, early lessons are often forgotten.\n\n"
+          + "At closure, the register feeds the organisation's repository. But a repository nobody reads changes nothing.\n\n"
+          + "Lessons travel best when they are turned into something the next project uses by default: an updated checklist, a revised estimate, a standing risk. That way nobody needs to remember to look them up.\n\n"
+          + "Focus on the few lessons that would change future decisions. A short list of actionable lessons beats a long list of observations." },
+      { id: "s5", heading: "Closing a cancelled project",
+        body: "Projects are sometimes stopped before completion. The business need may change, funding may end or the organisation may be restructured.\n\n"
+          + "A cancelled project still needs closure. Contracts must be settled, records kept, people released and useful work preserved.\n\n"
+          + "Partial deliverables may have value elsewhere. A half-built component could be reused by another project. Document what exists and where it can go.\n\n"
+          + "Lessons from cancelled projects are often the most valuable. Capture why the project stopped and what could have revealed the problem sooner.\n\n"
+          + "Treat the decision to stop with respect. The team may feel their work was wasted. Explaining the reasons openly, and showing where their work will be used, helps people move on well." },
+      { id: "s6", heading: "Closure in adaptive work",
+        body: "Adaptive projects often close when the remaining backlog no longer justifies the cost. The product owner and sponsor decide that enough value has been delivered.\n\n"
+          + "Closure still includes handover. Operations or a product support team takes over the product, with the knowledge it needs to run it.\n\n"
+          + "Each iteration also has a small closure of its own. The review accepts the increment, and the retrospective captures lessons while they are fresh.\n\n"
+          + "Some products never close in the project sense. They move into continuous development by a long-lived team. The project ends; the product continues." }
+    ],
+    lenses: {
+      predictive: "Closure follows formal acceptance of all deliverables, contract closure, release of resources and a final lessons review. A phase closure can authorise the next phase.",
+      agile: "Each increment is accepted at review and lessons are captured in retrospectives. The project closes when remaining backlog value no longer justifies the cost, with a handover to operations.",
+      hybrid: "Fixed parts close through formal acceptance and contract closure, while iterative parts close by agreement on remaining value. The project manager coordinates one handover covering both."
+    },
+    worked: {
+      stem: "A regional bus operator's new depot management system has been live for a month. The sponsor wants the project closed this week. Operations has not confirmed it is ready to support the system, and the supplier's final invoice is disputed. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Agree with operations what they need to accept support, and settle the disputed invoice, before formally closing." },
+        { id: "b", text: "Close the project as the sponsor asks, and pass the open items to operations to resolve." },
+        { id: "c", text: "Hold a final lessons learned workshop with the team before they are released." },
+        { id: "d", text: "Keep the project open indefinitely until every issue, however small, has been resolved." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "A confirmed handover and a settled contract are core closure obligations. Resolving them now prevents the project leaving a support gap and a lingering dispute." },
+        { option: "c", rank: "acceptable", why: "Capturing lessons before people leave is valuable. It does not address the two obligations that actually block a proper close." },
+        { option: "b", rank: "premature", why: "Closing is the goal, but closing with handover unconfirmed and a dispute open simply moves the problems elsewhere." },
+        { option: "d", rank: "wrong", why: "Waiting for perfection keeps the team tied up and delays closure without limit. Closure needs agreed criteria, not every issue cleared." }
+      ],
+      mindset: "Close by finishing the obligations, not by declaring the work done."
+    },
+    traps: [
+      "Closing before formal acceptance is recorded.",
+      "Handing over without the receiving team confirming it is ready.",
+      "Leaving contract claims open after the project team disperses.",
+      "Filing lessons in a repository and expecting them to be read.",
+      "Skipping closure because the project was cancelled."
+    ],
+    checks: [
+      {
+        id: "P10-c1", type: "single",
+        stem: "A training centre build is complete and the client has moved in, but has not signed the acceptance certificate. The contractor wants to demobilise. What should the project manager do first?",
+        options: [
+          { id: "a", text: "Find out why the client has not signed and resolve any outstanding concern against the acceptance criteria.", correct: true,
+            rationale: "Formal acceptance is a precondition of closure. Understanding the reason is the step that unlocks it." },
+          { id: "b", text: "Treat occupation as acceptance and close the project.",
+            rationale: "Using the building is not formal acceptance. Without the certificate, disputes can arise later." },
+          { id: "c", text: "Let the contractor demobilise and deal with acceptance later.",
+            rationale: "Once the contractor leaves, fixing any remaining issue becomes harder and more costly." },
+          { id: "d", text: "Escalate to the client's director to demand a signature.",
+            rationale: "Escalating before understanding the client's concern skips the conversation most likely to resolve it." }
+        ],
+        explanation: "Closure depends on formal acceptance against agreed criteria. If acceptance is withheld, the first step is to understand why. The concern may be fixable quickly while the contractor is still on site.",
+        mindset: "Secure formal acceptance before you close."
+      },
+      {
+        id: "P10-c2", type: "single",
+        stem: "A software platform project is cancelled after a merger makes it redundant. The sponsor says to simply stop and send everyone home. What should the project manager do?",
+        options: [
+          { id: "a", text: "Carry out an orderly closure: settle contracts, preserve reusable work and records, release people and capture lessons.", correct: true,
+            rationale: "Cancelled projects still carry obligations and value. Orderly closure protects both and informs future decisions." },
+          { id: "b", text: "Stop immediately as instructed, since the project no longer matters.",
+            rationale: "Abrupt stopping leaves contracts, records and reusable assets unmanaged, creating cost and risk later." },
+          { id: "c", text: "Continue the project quietly in case the decision is reversed.",
+            rationale: "This ignores a governance decision and spends money without authority." },
+          { id: "d", text: "Hand everything to the acquiring company's team without documentation.",
+            rationale: "Undocumented handover wastes whatever value the work holds and leaves obligations unresolved." }
+        ],
+        explanation: "A cancelled project needs the same closure obligations as a completed one. Settling contracts, keeping records, preserving useful work and capturing lessons all protect the organisation. The decision to stop is the sponsor's; how to close well is the project manager's job.",
+        mindset: "Close a stopped project as carefully as a finished one."
+      }
+    ],
+    terms: ["Close Project or Phase", "Accepted deliverables", "Verified deliverables", "Validate Scope", "Lessons learned register", "Lessons learned repository", "Organisational process assets"],
+    recap: [
+      "Close only after formal acceptance is recorded.",
+      "Hand over with training, documentation, support and confirmed readiness.",
+      "Settle contracts and claims before the people who know them leave.",
+      "Turn lessons into defaults the next project inherits.",
+      "Cancelled projects need full closure too."
+    ],
+    mindset: "Finish what the project owes before calling it finished.",
+    practice: { count: 10, decks: [] }
   },
   {
     id: "X1", module: "skills", order: 32, ecoTask: "", minutes: 30,
