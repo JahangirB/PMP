@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark light">
-<meta name="description" content="Offline PMP exam preparation. Single file, no install, 300 questions embedded; optional extended packs when hosted.">
+<meta name="description" content="Offline PMP exam preparation. Single file, no install, 348 questions embedded; optional extended packs when hosted.">
 <title>PMP Prep Suite</title>
 
 <!-- ═══ §01  CONFIG & CONSTANTS ══════════════════════════════════════════════
@@ -2324,7 +2324,7 @@ a.btn { text-decoration: none; }
 
    §05  DATA — CONTENT PACKS ............. JS constants, frozen
         05.1  ECO_TASKS — 26 task records, ids and paraphrases
-        05.2  QUESTIONS — 300 items · 05.3 CASES
+        05.2  QUESTIONS — 348 items · 05.3 CASES
         05.4  SCENARIOS — 80 situational items, ranked options · built
         05.8  CONTENT INDEX — id lookup across shipped and imported packs
         05.9  EXTENDED PACK LOADER — optional shards fetched from packs/,
@@ -2444,9 +2444,10 @@ PMP.ECO_TASKS = Object.freeze([
 PMP.ECO_TASK_BY_ID = Object.freeze(PMP.ECO_TASKS.reduce(function (m, t) { m[t.id] = t; return m; }, {}));
 
 /* ── 05.2  QUESTIONS ────────────────────────────────────────────
-   300 original items, the full pack target. Phase 1 seeded the first 60;
-   batch two added 50; batch three took it to 160; batch four to 210; batch
-   five to 260; batch six adds the final 40.
+   348 original items. Phase 1 seeded the first 60; batch two added 50;
+   batch three took it to 160; batch four to 210; batch five to 260; batch
+   six added the final 40 of the 300-item target. Batch seven, written with
+   the teaching layer, adds 48 Business Environment items beyond it.
    Every figure here is re-derived by the audit in §10.14.
 
    Distribution, and how it was arrived at:
@@ -2539,7 +2540,18 @@ PMP.ECO_TASK_BY_ID = Object.freeze(PMP.ECO_TASKS.reduce(function (m, t) { m[t.id
    ceiling for genuinely distinct situations at this level of the outline.
 
    All wording is original. No PMI text is reproduced and none of these are
-   real exam questions. This is the full 300-item pack.
+   real exam questions. This is the full 300-item pack plus batch seven.
+
+   Batch seven: 48 Business items, six per task, ids 021 to 026 in each so
+   they sit clear of the core numbering and below the extended packs' 101.
+   The teaching plan asked for 32, four per task. That leaves each Business
+   task at 11 in a 332-item pack whose scaled floor is 12, still a gap. Six
+   per task lands every Business task on 13 in a 348-item pack whose floor
+   is 13. The pack then sits at People 32.2 / Process 37.9 / Business 29.9,
+   all inside MIX_TOLERANCE, and the approach mix moves to 143 predictive,
+   122 adaptive and 83 hybrid: 41.1 / 35.1 / 23.9 against 40 / 35 / 25.
+   Written as 40 multiple choice and 8 multiple response, each checked by
+   hand against the existing items and scenarios for its task.
 
    Shape (schema v2, validated by §09.6):
      id, type, domain, ecoTask, approach, difficulty 1–5, tags[]
@@ -8154,6 +8166,876 @@ PMP.QUESTIONS = [
     mindset: "You cannot control the external event; you can control what you have committed by the time it happens."
   },
 
+  /* ── BUSINESS ── batch seven: 48 Business Environment items, six per task ─
+     Added with the teaching layer so each Business task can run a full
+     lesson practice set and the pack clears the scaled floor. Written as
+     32 adaptive and 16 hybrid items to move the approach mix towards
+     the assumed split. Every situation was checked against the existing
+     items and scenarios for its task before being kept. */
+
+  {
+    id: "pmp-b1-021", type: "single", domain: "business", ecoTask: "business-1",
+    approach: "agile", difficulty: 3, tags: ["governance", "guardrails", "funding", "archetype-route-to-owner"],
+    stem: "Your product team is funded quarterly against agreed outcomes and guardrails. Mid-quarter, the product owner wants to pivot the product to serve a new customer segment that the funding case never mentioned. The team could start next sprint. What should the project manager do?",
+    options: [
+      { id: "a", text: "Take the proposed pivot to the funding body, because it changes the outcome the money was granted for.", correct: true,
+        rationale: "Day-to-day priorities sit with the product owner, but a change of target segment moves outside the agreed guardrails. That decision belongs to whoever granted the funding." },
+      { id: "b", text: "Let the product owner proceed, since product owners own the backlog.",
+        rationale: "This is the unlimited-authority error. Backlog ownership covers ordering work within the funded outcome, not redefining the outcome itself." },
+      { id: "c", text: "Block the pivot until the next quarterly review.",
+        rationale: "This is the calendar-as-governance error. Governance can usually decide sooner, and blocking a possibly valuable change without a decision wastes time." },
+      { id: "d", text: "Ask the team to start a small part of the pivot to test it before telling anyone.",
+        rationale: "This is the fait-accompli error. Spending funded capacity on an unapproved direction presents governance with a decision already half taken." }
+    ],
+    explanation: "Adaptive governance sets boundaries rather than approving every change. Inside them, the product owner decides freely. A change that alters what the funding was for crosses the boundary, so it goes back to the people who set it, with the evidence for the pivot.",
+    mindset: "Decide freely inside the guardrails, and take anything that moves the guardrails to whoever set them."
+  },
+
+  {
+    id: "pmp-b1-022", type: "single", domain: "business", ecoTask: "business-1",
+    approach: "agile", difficulty: 2, tags: ["governance", "pmo", "reporting", "archetype-diagnose-first"],
+    stem: "A controlling project office requires every project to submit a weekly Gantt chart. Your team works in two-week sprints from a ranked backlog and has no task-level schedule. The office has flagged your project as non-compliant. What should you do first?",
+    options: [
+      { id: "a", text: "Ask the office what decisions the Gantt chart supports, and agree an equivalent such as a release burnup with forecast milestone dates.", correct: true,
+        rationale: "Understanding the need behind the rule lets you meet it with artefacts that reflect how the team really works, which is what tailoring means." },
+      { id: "b", text: "Build a weekly Gantt chart from the backlog to satisfy the requirement.",
+        rationale: "This is the paper-compliance error. A chart invented for reporting misleads its readers and costs the team time." },
+      { id: "c", text: "Ignore the requirement, since agile teams do not use Gantt charts.",
+        rationale: "This is the exemption-by-assumption error. The office has legitimate oversight needs, and ignoring them damages trust and governance." },
+      { id: "d", text: "Escalate to the sponsor to have the project removed from the office's oversight.",
+        rationale: "This is the escalate-first error. A conversation with the office is likely to resolve the mismatch without involving the sponsor." }
+    ],
+    explanation: "Governance requirements usually exist to answer a question, such as whether a project will hit its dates. When a standard artefact does not fit the delivery approach, find out what question it serves and agree an honest alternative. Compliance in form only is worse than an open conversation.",
+    mindset: "Meet the purpose of a governance rule, and agree how to meet it when its form does not fit."
+  },
+
+  {
+    id: "pmp-b1-023", type: "single", domain: "business", ecoTask: "business-1",
+    approach: "agile", difficulty: 4, tags: ["governance", "product owner", "decision rights", "archetype-route-to-owner"],
+    stem: "One team serves two business units, and each unit has named its own product owner. Every sprint planning session ends in a stand-off over priorities, and the team has started choosing between them itself. Both product owners say the other is the problem. What is the best way to resolve this?",
+    options: [
+      { id: "a", text: "Raise it with the sponsor so that governance sets one decision-maker for priorities, or a clear rule for splitting capacity.", correct: true,
+        rationale: "Two owners with equal authority over one backlog is a governance gap. Only someone above both can set the decision rights." },
+      { id: "b", text: "Let the team keep choosing, since it knows the work best.",
+        rationale: "This is the default-decider error. The team is now making business priority calls it has no authority or context for." },
+      { id: "c", text: "Alternate sprints between the two business units.",
+        rationale: "This is the mechanical-fairness error. Splitting time evenly ignores value and leaves the underlying authority question unanswered." },
+      { id: "d", text: "Facilitate a workshop to help the two product owners agree a single ranking.",
+        rationale: "This may help in the short term, but without settled decision rights the stand-off will return at the next disagreement." }
+    ],
+    explanation: "A backlog needs one clear source of priority decisions. When two people hold equal authority over it, disputes cannot be settled inside the team. The fix is a governance decision: one owner, or an agreed rule for dividing capacity, set by someone with authority over both.",
+    mindset: "When decision rights are unclear, get them set by someone with the authority to set them."
+  },
+
+  {
+    id: "pmp-b1-024", type: "single", domain: "business", ecoTask: "business-1",
+    approach: "hybrid", difficulty: 3, tags: ["governance", "phase gate", "tailoring", "archetype-challenge-the-premise"],
+    stem: "A hybrid medical device programme has a gate that requires a complete design before manufacturing tooling is ordered. The device housing is fully designed, but its companion software is built iteratively and will keep evolving. The gate board refuses to pass the gate. What should the project manager do?",
+    options: [
+      { id: "a", text: "Agree with the gate board what evidence the iterative part should provide, such as fixed interfaces and agreed limits on change.", correct: true,
+        rationale: "The gate exists to protect the tooling investment. Agreeing criteria that fit the software's approach lets the gate do its job honestly." },
+      { id: "b", text: "Produce a complete software design document so the gate can pass.",
+        rationale: "This is the fiction-for-the-gate error. A full design for evolving software will be wrong within weeks and gives the board false assurance." },
+      { id: "c", text: "Order the tooling anyway, since the housing design is complete.",
+        rationale: "This is the bypassed-gate error. Proceeding without approval removes a control the organisation has chosen to apply." },
+      { id: "d", text: "Switch the software team to predictive delivery to satisfy the gate.",
+        rationale: "This is the one-size-fits-all error. Forcing the software into a fixed design discards the reason it was run iteratively." }
+    ],
+    explanation: "Gates written for predictive work can be tailored for iterative work without being weakened. The question is what the gate protects. Here it is the tooling order, so the board needs confidence that software changes will not affect the housing. That comes from stable interfaces and agreed limits, not a frozen design.",
+    mindset: "Tailor a gate to what it protects rather than faking the evidence it was written for."
+  },
+
+  {
+    id: "pmp-b1-025", type: "multi", domain: "business", ecoTask: "business-1",
+    approach: "agile", difficulty: 3, tags: ["governance", "decision rights", "product owner", "archetype-use-own-authority"],
+    stem: "A product team is funded for a year to deliver an agreed outcome, within a fixed budget and release date. Which two decisions can the product owner normally take without escalating to governance? Select two.",
+    options: [
+      { id: "a", text: "Reordering backlog items within the funded outcome.", correct: true,
+        rationale: "Ordering work by value inside the agreed outcome is the core of the product owner role." },
+      { id: "b", text: "Dropping a low-value feature from the next release.", correct: true,
+        rationale: "Choosing what to leave out within the outcome and the date is a scope decision the product owner is there to make." },
+      { id: "c", text: "Extending the release by two quarters and adding funding to match.",
+        rationale: "This is the budget-overreach error. Time and money beyond the agreed limits belong to whoever granted them." },
+      { id: "d", text: "Changing the terms of the contract with the team's development supplier.",
+        rationale: "This is the commercial-overreach error. Contract changes need commercial authority, which a product owner rarely holds." }
+    ],
+    explanation: "Adaptive governance gives the product owner authority over scope and order inside agreed limits of outcome, budget and date. Decisions that change those limits, or commit the organisation commercially, go to the people who hold that authority.",
+    mindset: "Know where your authority ends, and use it fully up to that line."
+  },
+
+  {
+    id: "pmp-b1-026", type: "single", domain: "business", ecoTask: "business-1",
+    approach: "hybrid", difficulty: 4, tags: ["governance", "supplier", "change", "archetype-diagnose-first"],
+    stem: "You learn that a member of your hybrid programme's steering group has been telling the integration supplier directly to add features. The supplier has started work on two of them. None went through the agreed change route, and the member is senior to you. What should you do first?",
+    options: [
+      { id: "a", text: "Speak to the steering group member privately, explain the effect, and agree to route the requests through change control.", correct: true,
+        rationale: "A direct conversation respects the person and usually resolves the bypass. It also brings the two features into a proper decision." },
+      { id: "b", text: "Tell the supplier to stop work on anything not approved through change control.",
+        rationale: "This is necessary soon, but acting on the supplier before talking to the member risks an open conflict that a conversation could avoid." },
+      { id: "c", text: "Raise the member's behaviour at the next steering group meeting.",
+        rationale: "This is the public-correction error. Exposing a senior colleague in front of peers makes them defensive rather than cooperative." },
+      { id: "d", text: "Accept the features, since a steering group member requested them.",
+        rationale: "This is the seniority-overrides-process error. Individual members do not hold the group's authority, and the costs are unassessed." }
+    ],
+    explanation: "Governance only works if decisions follow the agreed route, whoever wants them. When a senior person bypasses it, start with a private conversation about the effect and how to bring the requests back under control. Escalate only if the bypass continues.",
+    mindset: "Hold governance to its route, starting with a quiet word to the person going round it."
+  },
+
+  {
+    id: "pmp-b2-021", type: "single", domain: "business", ecoTask: "business-2",
+    approach: "agile", difficulty: 3, tags: ["compliance", "privacy", "definition of done", "archetype-make-visible"],
+    stem: "An agile team has shipped twelve increments of a patient feedback app. Preparing for a regulator's visit, you find the team's definition of done has never included a data-protection review. Nothing is known to be wrong yet. What is the best response?",
+    options: [
+      { id: "a", text: "Add a privacy review to the definition of done, and add reviews of the shipped increments to the backlog in priority order.", correct: true,
+        rationale: "This fixes the process for future work and gives the existing work a visible, ranked path to compliance." },
+      { id: "b", text: "Add the privacy review to the definition of done for new work only.",
+        rationale: "This is the forward-only error. Twelve increments that handle personal data remain unchecked." },
+      { id: "c", text: "Halt all development until every shipped increment has been reviewed.",
+        rationale: "This is the stop-everything error. With no known breach, a ranked review alongside development is proportionate." },
+      { id: "d", text: "Prepare a statement for the regulator that the app is compliant.",
+        rationale: "This is the claim-without-evidence error. Asserting compliance that has never been checked risks misleading the regulator." }
+    ],
+    explanation: "Compliance belongs inside the definition of done, so every increment is checked as it is built. When a gap is found late, close it in both directions: fix the process going forward and plan the checks for what has already shipped, in order of risk.",
+    mindset: "Close a compliance gap for the work already done as well as the work to come."
+  },
+
+  {
+    id: "pmp-b2-022", type: "single", domain: "business", ecoTask: "business-2",
+    approach: "agile", difficulty: 2, tags: ["compliance", "backlog", "prioritisation", "archetype-apply-the-rule"],
+    stem: "A product owner keeps ranking a mandatory record-retention feature near the bottom of the backlog because users never ask for it. The law requires it by a fixed date in five months. How should it be prioritised?",
+    options: [
+      { id: "a", text: "Ranked so that it is complete before the legal date, because a legal obligation is not optional.", correct: true,
+        rationale: "Mandatory work has value in avoiding penalties and keeping the right to operate. Its deadline must shape its ranking." },
+      { id: "b", text: "Left where it is, since the product owner ranks by user value.",
+        rationale: "This is the user-value-only error. Legal obligations carry value that users may never see." },
+      { id: "c", text: "Moved to a separate compliance project outside the backlog.",
+        rationale: "This is the shadow-backlog error. Splitting it off hides its cost from the team's capacity and its deadline from the plan." },
+      { id: "d", text: "Delivered in a later release once user features are finished.",
+        rationale: "This is the gamble-on-time error. A fixed legal date does not move because user features ran long." }
+    ],
+    explanation: "Value-based prioritisation includes the value of meeting obligations. Work required by law has a hard date and real consequences if missed. It should be ranked to finish in time, with its cost visible in the backlog alongside everything else.",
+    mindset: "Count meeting an obligation as value, and let its deadline set its place."
+  },
+
+  {
+    id: "pmp-b2-023", type: "single", domain: "business", ecoTask: "business-2",
+    approach: "agile", difficulty: 4, tags: ["compliance", "deployment", "evidence", "archetype-challenge-the-premise"],
+    stem: "Your team wants to release several times a day. The organisation's financial controls policy requires a documented approval for every production change, and the change board meets weekly. Compliance says the policy cannot be waived. What is the best way forward?",
+    options: [
+      { id: "a", text: "Work with compliance on an automated approval in the release pipeline that records who approved each change and the evidence they saw.", correct: true,
+        rationale: "This meets the policy's purpose, a documented and evidenced approval, while removing the delay the weekly board creates." },
+      { id: "b", text: "Release weekly to fit the change board, accepting slower delivery.",
+        rationale: "This keeps compliance but gives up the benefit without testing whether the control can be met another way." },
+      { id: "c", text: "Release frequently and record approvals in bulk at the weekly board.",
+        rationale: "This is the after-the-fact error. Approvals recorded after release do not meet a policy that requires approval before it." },
+      { id: "d", text: "Ask the sponsor to overrule compliance.",
+        rationale: "This is the override error. Compliance has said the policy cannot be waived, and a sponsor cannot remove a financial control." }
+    ],
+    explanation: "A control's purpose and its usual form are different things. Many controls require evidence and accountability rather than a particular meeting. Designing that evidence into an automated route often satisfies the policy fully while supporting fast delivery. Agree the design with the control's owner.",
+    mindset: "Meet a control's purpose in a form that fits the work, and agree it with the control's owner."
+  },
+
+  {
+    id: "pmp-b2-024", type: "single", domain: "business", ecoTask: "business-2",
+    approach: "hybrid", difficulty: 3, tags: ["compliance", "safety", "hybrid", "archetype-make-visible"],
+    stem: "A hybrid project is building a concert venue to fixed plans while an agile team develops its digital wayfinding screens. The team wants to move several screens in the next release. Screen positions affect the fire evacuation routes the building was certified against. What should the project manager ensure?",
+    options: [
+      { id: "a", text: "That each release of screen positions is checked against the evacuation requirements before it goes live.", correct: true,
+        rationale: "Safety certification applies to every change that touches it. Building the check into each release keeps the iterative work compliant." },
+      { id: "b", text: "That the screens are fixed in their original positions for good.",
+        rationale: "This is the freeze-everything error. Iterating on wayfinding is valuable, and a check per release allows it safely." },
+      { id: "c", text: "That the evacuation routes are re-certified once, after the final release.",
+        rationale: "This is the end-of-project error. The venue would operate with uncertified changes until then." },
+      { id: "d", text: "That the screen team decides whether a move affects safety.",
+        rationale: "This is the self-certification error. Safety compliance needs the people qualified to judge it." }
+    ],
+    explanation: "In hybrid work, a fixed obligation can be touched by the iterative side. The safe pattern is to build the compliance check into each iteration's definition of done, with the right specialist involved. Iteration then continues inside the constraint instead of breaking it.",
+    mindset: "Check every iteration that touches an obligation, not just the last one."
+  },
+
+  {
+    id: "pmp-b2-025", type: "multi", domain: "business", ecoTask: "business-2",
+    approach: "agile", difficulty: 3, tags: ["compliance", "evidence", "audit", "archetype-make-visible"],
+    stem: "An auditor asks your agile team to show that each release meets the organisation's security testing requirement. Which two would serve as evidence of compliance? Select two.",
+    options: [
+      { id: "a", text: "Automated test logs for each release, linked to the requirement they cover.", correct: true,
+        rationale: "Records produced as the work happens, and traceable to the requirement, are the strongest evidence." },
+      { id: "b", text: "Dated sign-off records from the security reviewer for each release.", correct: true,
+        rationale: "A named reviewer's dated approval shows the control operated for each release." },
+      { id: "c", text: "A line in the monthly status report saying all security controls are in place.",
+        rationale: "This is the assertion-as-evidence error. A summary statement claims compliance without showing it." },
+      { id: "d", text: "The team's confirmation in a retrospective that it always runs the tests.",
+        rationale: "This is the verbal-assurance error. Spoken confirmation leaves nothing an auditor can verify." }
+    ],
+    explanation: "Compliance must be demonstrated, not asserted. Good evidence is produced by the work as it happens, is dated and attributable, and links back to the requirement it satisfies. Summaries and verbal assurances describe compliance without proving it.",
+    mindset: "Keep the evidence as you go, so compliance can be shown rather than claimed."
+  },
+
+  {
+    id: "pmp-b2-026", type: "single", domain: "business", ecoTask: "business-2",
+    approach: "hybrid", difficulty: 4, tags: ["compliance", "supply chain", "ethics", "archetype-route-to-owner"],
+    stem: "An ethical audit finds that a subcontractor making uniforms for your hybrid rail project breaches your organisation's labour standards policy. The main supplier says the subcontractor is cheapest and the deadline is tight. What should the project manager do first?",
+    options: [
+      { id: "a", text: "Report the finding to the compliance and procurement leads and follow the policy's required steps, starting with confirming the facts with the supplier.", correct: true,
+        rationale: "Policy breaches in the supply chain have owners and set procedures. Involving them and confirming the facts is the right first step." },
+      { id: "b", text: "Accept the subcontractor this once to protect the deadline.",
+        rationale: "This is the deadline-over-ethics error. Knowingly accepting a policy breach exposes the organisation and the workers affected." },
+      { id: "c", text: "Terminate the main supplier's contract immediately.",
+        rationale: "This is the overreaction error. The contract and policy set the remedies, and the facts are not yet confirmed." },
+      { id: "d", text: "Ask the main supplier to quietly switch subcontractors and say nothing further.",
+        rationale: "This is the concealment error. The breach needs to be recorded and handled through the policy, not hidden." }
+    ],
+    explanation: "Compliance extends into the supply chain. When a breach is found, the organisation's policy and contracts set who decides and what remedies apply. The project manager's job is to raise it promptly with the owners, confirm the facts and follow the required steps, not to trade the policy for the schedule.",
+    mindset: "Treat a supply chain breach as the organisation's to handle, and never trade it for the schedule."
+  },
+
+  {
+    id: "pmp-b3-021", type: "single", domain: "business", ecoTask: "business-3",
+    approach: "agile", difficulty: 3, tags: ["change", "contract", "swap", "archetype-apply-the-rule"],
+    stem: "Your fixed-price agile contract lets the client swap backlog items of equal estimated size. At sprint planning, the client's product owner swaps in a new feature that is twice the size of the item it replaces. The team says committed items will now slip. What should the project manager do?",
+    options: [
+      { id: "a", text: "Point out that the swap exceeds the contract's like-for-like rule, and agree with the product owner what else drops or whether to raise a contract change.", correct: true,
+        rationale: "The contract allows equal swaps only. The excess is a change, and the client chooses between dropping work and changing the contract." },
+      { id: "b", text: "Accept the swap, since the contract allows swaps.",
+        rationale: "This is the half-read-clause error. The clause permits equal-sized swaps, not any swap." },
+      { id: "c", text: "Refuse the new feature outright.",
+        rationale: "This is the refusal error. The feature may be valuable, and the contract offers ways to include it." },
+      { id: "d", text: "Ask the team to absorb the extra work through overtime.",
+        rationale: "This is the hidden-cost error. Overtime conceals a scope change and wears down the team's pace." }
+    ],
+    explanation: "Agile contracts often allow scope to flex within rules, such as like-for-like swaps. Change control means applying those rules faithfully. Anything beyond them is a change the client must decide on, by giving something up or agreeing new terms.",
+    mindset: "Apply the contract's change rules as written, and let the client choose when a change exceeds them."
+  },
+
+  {
+    id: "pmp-b3-022", type: "single", domain: "business", ecoTask: "business-3",
+    approach: "agile", difficulty: 2, tags: ["change", "sprint", "product owner", "archetype-route-to-owner"],
+    stem: "Mid-sprint, a marketing manager asks a developer directly to change how a promotion banner behaves. The developer agrees and starts work, which puts a sprint backlog item at risk. What should the scrum master do?",
+    options: [
+      { id: "a", text: "Redirect the request to the product owner to be weighed against the backlog, and help the developer return to the sprint work.", correct: true,
+        rationale: "Changes enter through the product owner, who weighs them against everything else. This protects the sprint goal and the team." },
+      { id: "b", text: "Let the developer finish, since the change is small.",
+        rationale: "This is the small-change error. Each side request is small, but together they erode sprint goals and the product owner's role." },
+      { id: "c", text: "Add the change to the sprint and remove the at-risk item.",
+        rationale: "This is the self-appointed-owner error. Trading scope is the product owner's decision, not the scrum master's." },
+      { id: "d", text: "Tell the marketing manager that changes are not allowed during a sprint.",
+        rationale: "This is the closed-door error. The request may be valuable and should be heard by the person who prioritises." }
+    ],
+    explanation: "In adaptive work, change control runs through the product owner and the backlog. Requests that go straight to developers bypass that control and put the sprint goal at risk. Redirecting them keeps change welcome but deliberate.",
+    mindset: "Welcome change through the product owner, not through side doors to the team."
+  },
+
+  {
+    id: "pmp-b3-023", type: "single", domain: "business", ecoTask: "business-3",
+    approach: "agile", difficulty: 4, tags: ["change", "direction", "governance", "archetype-route-to-owner"],
+    stem: "Your product owner accepts a major change of direction that would make three months of completed work obsolete. The budget and release date stay the same. Your governance requires any change that alters a release's agreed outcome to go to the investment board. What should the project manager do?",
+    options: [
+      { id: "a", text: "Assess the impact, including the value written off, and take the change to the investment board.", correct: true,
+        rationale: "The change alters the release's outcome, which crosses the governance threshold whatever happens to budget and date." },
+      { id: "b", text: "Support the product owner, since the budget and date are unchanged.",
+        rationale: "This is the money-and-date-only error. The threshold is about the outcome, which this change alters." },
+      { id: "c", text: "Ask the team to carry on with the original direction until the board meets.",
+        rationale: "This is the stale-direction error. Continuing work the product owner believes is wrong may waste more capacity. Raise it promptly instead." },
+      { id: "d", text: "Reject the change because three months of work would be wasted.",
+        rationale: "This is the sunk-cost error. Past work should not decide future direction; the board should weigh future value." }
+    ],
+    explanation: "Even in adaptive work, some changes cross governance thresholds. A change that redefines what a release delivers needs the authority that agreed the outcome. Assess the impact honestly, including what is written off, and take it to that authority promptly.",
+    mindset: "Route a change by what it alters, not only by what it costs."
+  },
+
+  {
+    id: "pmp-b3-024", type: "single", domain: "business", ecoTask: "business-3",
+    approach: "hybrid", difficulty: 3, tags: ["change", "configuration management", "integration", "archetype-make-visible"],
+    stem: "An approved change altered your platform's external interface. The team implemented and released it, but the interface specification and the partner integration guide still describe the old version. Two partners have built against the old guide and their integrations now fail. What does this show?",
+    options: [
+      { id: "a", text: "Configuration management failed: an approved change must update every item it affects, not just the code.", correct: true,
+        rationale: "The change was approved and built, but related documents were not updated. Keeping all configuration items aligned is part of completing a change." },
+      { id: "b", text: "The partners should have tested against the live system instead of the guide.",
+        rationale: "This is the blame-the-user error. Partners rely on published documents, which the project failed to update." },
+      { id: "c", text: "The change should have been rejected.",
+        rationale: "This is the wrong-lesson error. The change may have been right; the failure was in implementing it completely." },
+      { id: "d", text: "Interface documents are not part of change control.",
+        rationale: "This is the code-only error. Any controlled item that a change affects must be updated with it." }
+    ],
+    explanation: "A change is not complete when the code ships. Every plan, specification and guide it touches must be updated and versioned together. Configuration management tracks those items, so nobody relies on a superseded version.",
+    mindset: "Finish a change by updating everything it touches, not just the part you built."
+  },
+
+  {
+    id: "pmp-b3-025", type: "multi", domain: "business", ecoTask: "business-3",
+    approach: "agile", difficulty: 3, tags: ["change", "impact", "assessment", "archetype-diagnose-first"],
+    stem: "A stakeholder asks your product team to add a new payment method to an online shop before the next release. Which two belong in the impact assessment the product owner uses to decide? Select two.",
+    options: [
+      { id: "a", text: "The effect on the release forecast and on other backlog items.", correct: true,
+        rationale: "Capacity spent here comes from somewhere. Showing what moves lets the product owner weigh the trade-off." },
+      { id: "b", text: "The testing, security and compliance work the new method would need.", correct: true,
+        rationale: "Payment changes carry hidden work. Leaving it out understates the true cost." },
+      { id: "c", text: "Which stakeholder asked first.",
+        rationale: "This is the queue-order error. Order of request says nothing about value or impact." },
+      { id: "d", text: "Whether the developers find the technology interesting.",
+        rationale: "This is the preference error. Team interest is not a measure of the change's value or cost." }
+    ],
+    explanation: "An impact assessment helps the decision-maker see the full cost and consequence of a change. That means effect on schedule and other work, and the hidden work such as testing and compliance. Factors that do not bear on value or cost do not belong in it.",
+    mindset: "Show the full cost of a change, including the work nobody mentioned."
+  },
+
+  {
+    id: "pmp-b3-026", type: "single", domain: "business", ecoTask: "business-3",
+    approach: "hybrid", difficulty: 4, tags: ["change", "change board", "ethics", "archetype-use-own-authority"],
+    stem: "The change board has rejected a request to extend a hybrid programme's data warehouse. A week later, the sponsor's deputy asks you to implement it anyway using spare team capacity and not to mention it in reports. What should you do?",
+    options: [
+      { id: "a", text: "Decline, explain that the board's decision stands, and offer to take the request back to the board with any new information.", correct: true,
+        rationale: "A rejected change cannot be implemented quietly. Returning to the board with new evidence is the legitimate route." },
+      { id: "b", text: "Implement it, since the sponsor's deputy has authority.",
+        rationale: "This is the borrowed-authority error. The deputy cannot overrule the board's decision informally." },
+      { id: "c", text: "Implement it but record it accurately in reports.",
+        rationale: "This is the honest-bypass error. Reporting it honestly does not make an unapproved change acceptable." },
+      { id: "d", text: "Report the deputy to the sponsor immediately.",
+        rationale: "This is the escalate-first error. Declining and explaining the proper route is the first step." }
+    ],
+    explanation: "Change control decisions bind the project until they are changed through the same route. A request to bypass them, especially with concealment, should be declined clearly. The requester can still bring new evidence to the board for a fresh decision.",
+    mindset: "Respect a change decision until it is changed properly, and never hide work from reporting."
+  },
+{
+    id: "pmp-b4-021", type: "single", domain: "business", ecoTask: "business-4",
+    approach: "agile", difficulty: 2, tags: ["impediments", "daily scrum", "safety", "archetype-make-visible"],
+    stem: "At the daily scrum, a developer mentions in passing that she has been stuck for two days waiting for a firewall rule. She did not raise it earlier because she thought she should solve it herself. What should the scrum master do?",
+    options: [
+      { id: "a", text: "Take on clearing the firewall rule today, and agree with the team that blockers are raised as soon as they stop work.", correct: true,
+        rationale: "This clears the current blocker quickly and fixes the habit that let it sit for two days." },
+      { id: "b", text: "Tell her she should have raised it sooner.",
+        rationale: "This is the reprimand error. Criticism makes people less likely to raise problems, which is the opposite of what is needed." },
+      { id: "c", text: "Ask her to keep trying to solve it herself, to build her skills.",
+        rationale: "This is the misplaced-development error. A firewall rule is outside her control, and two days are already lost." },
+      { id: "d", text: "Record it in the impediment log for review at the retrospective.",
+        rationale: "This is the log-and-wait error. A blocker stopping work now needs action now, not at the end of the sprint." }
+    ],
+    explanation: "Impediments cost time every day they sit. Teams need to feel safe raising them early, and the servant leader needs to act on them quickly. Fix both the immediate blocker and the reason it was not raised.",
+    mindset: "Make it safe to raise a blocker early, and clear it fast when it is raised."
+  },
+
+  {
+    id: "pmp-b4-022", type: "single", domain: "business", ecoTask: "business-4",
+    approach: "agile", difficulty: 3, tags: ["impediments", "self-organisation", "coaching", "archetype-use-own-authority"],
+    stem: "Your team's impediment board holds nine items, and every one is assigned to you as scrum master. Several are things the team could fix itself, such as an out-of-date build script and an unclear testing convention. What should you do?",
+    options: [
+      { id: "a", text: "Coach the team to take on the impediments within its control, and keep those that genuinely need you.", correct: true,
+        rationale: "A self-organising team clears what it can. The scrum master takes only what lies outside the team's reach." },
+      { id: "b", text: "Work through all nine yourself as quickly as possible.",
+        rationale: "This is the rescuer error. It slows clearance and teaches the team to hand over problems it could solve." },
+      { id: "c", text: "Remove the board, since it has become a to-do list for you.",
+        rationale: "This is the remove-the-signal error. The board is useful; the problem is how items are assigned." },
+      { id: "d", text: "Escalate all nine to management to share the load.",
+        rationale: "This is the wrong-level error. Most items can be solved inside the team and need no management attention." }
+    ],
+    explanation: "Impediments should be cleared at the lowest level able to clear them. When everything flows to the servant leader, the team loses ownership and blockers take longer to clear. Coaching the team to solve its own makes it faster and more capable.",
+    mindset: "Clear blockers at the lowest level that can, and help the team own its own."
+  },
+
+  {
+    id: "pmp-b4-023", type: "single", domain: "business", ecoTask: "business-4",
+    approach: "agile", difficulty: 4, tags: ["impediments", "recurring", "operations", "archetype-diagnose-first"],
+    stem: "Every Friday afternoon your team's deployments fail, because operations runs an infrastructure freeze that nobody told the team about until recently. The team now avoids releasing late in the week, which squeezes testing. What is the most effective response?",
+    options: [
+      { id: "a", text: "Meet the operations owner with evidence of the cost, and agree a freeze window or release route that meets both needs.", correct: true,
+        rationale: "The blocker recurs because of a process outside the team. Working with its owner on evidence addresses the cause." },
+      { id: "b", text: "Keep avoiding Friday releases, since the workaround now functions.",
+        rationale: "This is the permanent-workaround error. The team keeps paying the cost in squeezed testing." },
+      { id: "c", text: "Ask the team to release earlier in the week by shortening testing.",
+        rationale: "This is the quality-trade error. Cutting testing to dodge the blocker moves the cost into defects." },
+      { id: "d", text: "Escalate to the operations director to cancel the freeze.",
+        rationale: "This is the escalate-first error. The freeze may exist for good reason, and a conversation with its owner comes first." }
+    ],
+    explanation: "Recurring impediments usually have a cause in a process or policy. Working round them each time costs the team indefinitely. The lasting fix comes from the owner of that process, persuaded by evidence of the cost, looking for a solution that meets both needs.",
+    mindset: "Fix the cause of a recurring blocker with the person who owns it."
+  },
+
+  {
+    id: "pmp-b4-024", type: "single", domain: "business", ecoTask: "business-4",
+    approach: "hybrid", difficulty: 3, tags: ["impediments", "dependency", "hybrid", "archetype-use-own-authority"],
+    stem: "On a hybrid programme, an agile software team is waiting for a hardware prototype from the predictive workstream, which has slipped two weeks. Several of the team's stories cannot be tested without it. What should the project manager do first?",
+    options: [
+      { id: "a", text: "Work with the product owner to reorder the backlog around the dependency, while pressing the hardware lead for a firm new date.", correct: true,
+        rationale: "This keeps the team productive on valuable work now and attacks the blocker at the same time." },
+      { id: "b", text: "Let the team wait, since the dependency is outside its control.",
+        rationale: "This is the idle-team error. There is usually other valuable work the team can do while the blocker is cleared." },
+      { id: "c", text: "Ask the team to mark the affected stories done and test them later.",
+        rationale: "This is the false-done error. Untested work does not meet the definition of done and hides risk." },
+      { id: "d", text: "Escalate to the sponsor to change the hardware schedule.",
+        rationale: "This is the premature-escalation error. The project manager can work the dependency with the hardware lead first." }
+    ],
+    explanation: "Cross-workstream blockers are common in hybrid programmes. The project manager owns them. Keep the waiting side productive by reordering work around the dependency, and push for a firm date on the side causing the block.",
+    mindset: "Keep work flowing around a blocker while you work to remove it."
+  },
+
+  {
+    id: "pmp-b4-025", type: "multi", domain: "business", ecoTask: "business-4",
+    approach: "agile", difficulty: 3, tags: ["impediments", "issue", "risk", "archetype-apply-the-rule"],
+    stem: "Developers mention four things before the daily scrum. Which two are impediments the team should raise there for action today? Select two.",
+    options: [
+      { id: "a", text: "The shared test environment has been down since yesterday afternoon.", correct: true,
+        rationale: "It is stopping work now, so it needs action now." },
+      { id: "b", text: "A database access request has been waiting three days for approval.", correct: true,
+        rationale: "It is blocking a developer today, so it is a current impediment." },
+      { id: "c", text: "A supplier might deliver an API late next quarter.",
+        rationale: "This is the risk-as-impediment error. A possible future problem belongs in the risk register." },
+      { id: "d", text: "One developer would prefer a different code editor.",
+        rationale: "This is the preference-as-blocker error. It does not slow the team's delivery." }
+    ],
+    explanation: "An impediment is something slowing or stopping work now. Possible future problems are risks and are watched differently. Personal preferences that do not affect delivery are neither. Keeping the categories clear focuses action where it is needed.",
+    mindset: "Act today on what is blocking work today."
+  },
+
+  {
+    id: "pmp-b4-026", type: "single", domain: "business", ecoTask: "business-4",
+    approach: "hybrid", difficulty: 4, tags: ["issues", "escalation", "supplier", "archetype-route-to-owner"],
+    stem: "A dispute with a vendor has blocked integration on your hybrid programme for six weeks. The issue is owned by the vendor manager, who has no authority to settle it. The log shows a weekly update reading still in discussion. What should the project manager do?",
+    options: [
+      { id: "a", text: "Escalate the issue to someone with authority to resolve it, with its impact on the programme and the options.", correct: true,
+        rationale: "An issue owned by someone who cannot settle it will not move. It needs an owner with the authority to decide." },
+      { id: "b", text: "Ask the vendor manager to chase the vendor more often.",
+        rationale: "This is the more-of-the-same error. Six weeks show that chasing without authority will not resolve it." },
+      { id: "c", text: "Leave the issue with the vendor manager, since it is assigned.",
+        rationale: "This is the assigned-equals-handled error. An owner who cannot act is not really an owner." },
+      { id: "d", text: "Settle the dispute yourself by agreeing to the vendor's terms.",
+        rationale: "This is the overreach error. The project manager likely lacks the commercial authority to settle it." }
+    ],
+    explanation: "Every issue needs an owner who can act on it. When an issue stalls because its owner lacks authority, escalate it to someone who has that authority, with a clear picture of the impact and the options available.",
+    mindset: "Give an issue an owner with the authority to resolve it."
+  },
+
+  {
+    id: "pmp-b5-021", type: "single", domain: "business", ecoTask: "business-5",
+    approach: "agile", difficulty: 3, tags: ["risk", "spike", "backlog", "archetype-act-now"],
+    stem: "Your team plans to build a new feature on a framework nobody has used at scale. If its performance is poor, much of the next quarter's work would need redoing. The product owner has ranked the feature for two months' time. What is the best risk response?",
+    options: [
+      { id: "a", text: "Add a short spike early in the backlog to test the framework's performance before committing the larger work.", correct: true,
+        rationale: "Reducing uncertainty early with a small experiment is the adaptive way to mitigate a technical risk." },
+      { id: "b", text: "Record the risk and review it when the feature is started.",
+        rationale: "This is the late-discovery error. By then, dependent work may already be built on the framework." },
+      { id: "c", text: "Choose a different, familiar framework without testing this one.",
+        rationale: "This is the untested-avoidance error. It may discard a better option on a fear nobody has measured." },
+      { id: "d", text: "Add extra contingency time to the feature's estimate.",
+        rationale: "This accepts the risk without reducing it, when a cheap test could remove most of the uncertainty." }
+    ],
+    explanation: "Adaptive teams manage technical risk by learning early. A short spike or prototype ranked ahead of dependent work turns an uncertainty into evidence while change is still cheap. A risk-adjusted backlog places such work deliberately.",
+    mindset: "Buy down uncertainty early with a small, cheap test."
+  },
+
+  {
+    id: "pmp-b5-022", type: "single", domain: "business", ecoTask: "business-5",
+    approach: "agile", difficulty: 2, tags: ["risk", "ownership", "retrospective", "archetype-make-visible"],
+    stem: "Your team discusses risks at each retrospective and lists them on the board. Several have stayed on the list for weeks with nothing done. Nobody's name is against any of them. What is most likely missing?",
+    options: [
+      { id: "a", text: "A named owner for each risk, responsible for watching it and leading the response.", correct: true,
+        rationale: "Risks without owners are discussed but not managed. An owner turns a list into action." },
+      { id: "b", text: "A more detailed risk scoring scale.",
+        rationale: "This is the better-scoring error. Scores do not cause action; ownership does." },
+      { id: "c", text: "A separate risk meeting each week.",
+        rationale: "This is the more-meetings error. Discussion is already happening; responsibility is what is absent." },
+      { id: "d", text: "Moving the risks to a formal register.",
+        rationale: "This is the change-the-container error. A register without owners will stall in the same way." }
+    ],
+    explanation: "A risk is managed when someone is responsible for it. Owners watch for triggers, lead the response and report changes. Without them, risks are noted and repeated but nothing happens until one occurs.",
+    mindset: "Give every risk a name, or expect nobody to act on it."
+  },
+
+  {
+    id: "pmp-b5-023", type: "single", domain: "business", ecoTask: "business-5",
+    approach: "agile", difficulty: 4, tags: ["risk", "opportunity", "exploit", "archetype-trade-off"],
+    stem: "An open-source library released this month could replace a component your team planned to spend four sprints building. It is new and its long-term support is uncertain. How should the team treat this?",
+    options: [
+      { id: "a", text: "As an opportunity: run a short spike to test the library against your needs and support risks, then decide.", correct: true,
+        rationale: "Testing the opportunity cheaply lets the team capture the benefit while assessing the new risks it brings." },
+      { id: "b", text: "Ignore it and build the component as planned.",
+        rationale: "This is the threat-only error. Projects often miss opportunities by planning only for what might go wrong." },
+      { id: "c", text: "Adopt the library immediately to save four sprints.",
+        rationale: "This is the unexamined-opportunity error. The support risk could cost more than the time saved." },
+      { id: "d", text: "Escalate the decision to the sponsor.",
+        rationale: "This is the wrong-level error. A technical choice within the team's remit does not need sponsor approval." }
+    ],
+    explanation: "Opportunities deserve the same structured response as threats. A cheap test shows whether the benefit is real and what secondary risks come with it. The team can then exploit or enhance it deliberately rather than ignoring it or rushing in.",
+    mindset: "Treat an opportunity as seriously as a threat, and test it before you take it."
+  },
+
+  {
+    id: "pmp-b5-024", type: "single", domain: "business", ecoTask: "business-5",
+    approach: "hybrid", difficulty: 3, tags: ["risk", "hybrid", "ownership", "archetype-make-visible"],
+    stem: "On a hybrid programme, the predictive construction workstream keeps a formal risk register, while the agile teams track risks on their boards. A risk affecting both, a shared test laboratory that may close for refurbishment, appears in neither. What should the project manager do?",
+    options: [
+      { id: "a", text: "Set up a shared view of cross-cutting risks with a named owner for each, starting with the laboratory.", correct: true,
+        rationale: "Risks that span workstreams fall between separate tools. A shared view with owners closes that gap." },
+      { id: "b", text: "Move all risks into the formal register.",
+        rationale: "This is the one-tool-for-all error. The agile teams' boards work well for their own risks." },
+      { id: "c", text: "Ask each workstream to add the laboratory risk to its own list.",
+        rationale: "This is the double-ownership error. Two owners for one risk usually means nobody acts." },
+      { id: "d", text: "Wait until the laboratory announces its plans.",
+        rationale: "This is the wait-for-certainty error. The risk is known now and should be managed now." }
+    ],
+    explanation: "In hybrid programmes, each side can manage its own risks well while risks at the seam go unowned. The project manager makes those cross-cutting risks visible in one place, with clear owners, without forcing every team into the same tool.",
+    mindset: "Own the risks that fall between workstreams."
+  },
+
+  {
+    id: "pmp-b5-025", type: "multi", domain: "business", ecoTask: "business-5",
+    approach: "agile", difficulty: 3, tags: ["risk", "mitigation", "knowledge", "archetype-act-now"],
+    stem: "A key engineer, the only person who understands your payments service, may leave in the next few months. Which two are sensible mitigation responses? Select two.",
+    options: [
+      { id: "a", text: "Pair other engineers with her on payments work now.", correct: true,
+        rationale: "Pairing spreads tacit knowledge and reduces the impact if she leaves." },
+      { id: "b", text: "Keep decision records for the payments service up to date.", correct: true,
+        rationale: "Recorded reasoning reduces dependence on one person's memory." },
+      { id: "c", text: "Record the risk and review it at project closure.",
+        rationale: "This is the record-and-forget error. A review at closure is far too late to help." },
+      { id: "d", text: "Move her off payments so her leaving would not matter.",
+        rationale: "This is the self-inflicted-loss error. It throws away her expertise now to avoid losing it later." }
+    ],
+    explanation: "Mitigation reduces the probability or impact of a threat. For dependence on one person, spreading knowledge through pairing and keeping reasoning on record both reduce the impact if she leaves. They also make the team stronger even if she stays.",
+    mindset: "Mitigate a key-person risk by spreading what they know, starting now."
+  },
+
+  {
+    id: "pmp-b5-026", type: "single", domain: "business", ecoTask: "business-5",
+    approach: "hybrid", difficulty: 4, tags: ["risk", "appetite", "safety", "archetype-trade-off"],
+    stem: "Your hybrid programme is installing lifts in an occupied hospital. The sponsor's stated risk appetite is very low for patient safety and fairly high for schedule. One installation method is two weeks faster but needs temporary ward closures with a small safety risk. What should guide the choice?",
+    options: [
+      { id: "a", text: "Choose the method that keeps patient safety risk within appetite, accepting the slower schedule.", correct: true,
+        rationale: "Risk appetite tells you which objective to protect. Here safety is protected and schedule can flex." },
+      { id: "b", text: "Choose the faster method, since the schedule matters to the sponsor.",
+        rationale: "This is the misread-appetite error. The sponsor accepts schedule risk, not safety risk." },
+      { id: "c", text: "Choose the faster method and add extra safety checks.",
+        rationale: "This keeps a safety risk the sponsor has said is unacceptable, even if reduced." },
+      { id: "d", text: "Ask the team which method it prefers.",
+        rationale: "This is the preference error. The decision should follow the organisation's stated appetite." }
+    ],
+    explanation: "Risk appetite tells you how much risk an organisation will accept for each objective. When options trade one risk against another, choose the one that stays inside the appetite for the objective that matters most. Here that means protecting safety and letting the schedule move.",
+    mindset: "Let the organisation's risk appetite decide which objective to protect."
+  },
+
+  {
+    id: "pmp-b6-021", type: "single", domain: "business", ecoTask: "business-6",
+    approach: "agile", difficulty: 3, tags: ["improvement", "retrospective", "facilitation", "archetype-diagnose-first"],
+    stem: "Your team has used the same retrospective format for a year. Attendance is falling, the same points come up each time, and people say it feels like a chore. What should the scrum master do?",
+    options: [
+      { id: "a", text: "Vary the format and focus each retrospective on one theme backed by data, such as cycle time or escaped defects.", correct: true,
+        rationale: "A fresh format and a concrete focus bring new insight and make the time feel worth spending." },
+      { id: "b", text: "Make attendance compulsory.",
+        rationale: "This is the mandate error. Compulsory attendance without better content produces bodies, not engagement." },
+      { id: "c", text: "Hold retrospectives only once a quarter.",
+        rationale: "This is the less-often error. Less frequent reflection slows improvement further." },
+      { id: "d", text: "Let the team skip retrospectives when nothing has gone wrong.",
+        rationale: "This is the problems-only error. Improvement also comes from understanding what went well." }
+    ],
+    explanation: "Retrospectives lose value when they become routine. Changing the format and grounding the discussion in real data helps teams see new things. Engagement comes back when the session leads to visible, useful change.",
+    mindset: "Keep retrospectives fresh and grounded in evidence, so they keep producing change."
+  },
+
+  {
+    id: "pmp-b6-022", type: "single", domain: "business", ecoTask: "business-6",
+    approach: "agile", difficulty: 2, tags: ["improvement", "lean", "value stream", "archetype-diagnose-first"],
+    stem: "A value stream map shows that a typical change takes twenty working days from request to release, but only three of those days involve anyone working on it. Where is the greatest improvement opportunity?",
+    options: [
+      { id: "a", text: "In the waiting time between stages, which makes up most of the twenty days.", correct: true,
+        rationale: "Most of the elapsed time is waiting. Cutting it shortens delivery far more than speeding up the work itself." },
+      { id: "b", text: "In making the three working days faster.",
+        rationale: "This is the busy-time error. Even halving the work time barely changes the total." },
+      { id: "c", text: "In adding more people to the team.",
+        rationale: "This is the capacity error. More people do not reduce waiting caused by queues and handoffs." },
+      { id: "d", text: "In measuring the stream more often.",
+        rationale: "This is the measure-instead-of-act error. The map already shows where the delay sits." }
+    ],
+    explanation: "Value stream mapping separates time spent working from time spent waiting. In most processes, waiting dominates. Reducing queues, handoffs and approvals usually improves lead time far more than making individual tasks faster.",
+    mindset: "Look for improvement where work waits, not only where it is done."
+  },
+
+  {
+    id: "pmp-b6-023", type: "single", domain: "business", ecoTask: "business-6",
+    approach: "agile", difficulty: 4, tags: ["improvement", "metrics", "targets", "archetype-challenge-the-premise"],
+    stem: "A delivery director sets every team an improvement target of increasing velocity by twenty per cent over two quarters. Your team asks how it should respond. What is the best advice?",
+    options: [
+      { id: "a", text: "Propose improvement goals tied to outcomes, such as shorter cycle time or fewer escaped defects, and explain why a velocity target would mislead.", correct: true,
+        rationale: "Velocity rises easily through inflated estimates. Outcome measures show whether delivery has really improved." },
+      { id: "b", text: "Accept the target and increase story point estimates to meet it.",
+        rationale: "This is the gaming error. It hits the number while changing nothing real and damages trust." },
+      { id: "c", text: "Accept the target and work longer hours.",
+        rationale: "This is the overtime error. It may raise output briefly but harms quality and sustainability." },
+      { id: "d", text: "Refuse the target without offering an alternative.",
+        rationale: "This is the bare-refusal error. The director wants improvement, and a better measure meets that need." }
+    ],
+    explanation: "Improvement should be measured by outcomes that matter, such as lead time, quality or customer satisfaction. Targets on relative measures like velocity invite gaming. Offering a better measure keeps the shared goal while avoiding the distortion.",
+    mindset: "Measure improvement by outcomes that cannot be met by changing the units."
+  },
+
+  {
+    id: "pmp-b6-024", type: "single", domain: "business", ecoTask: "business-6",
+    approach: "hybrid", difficulty: 3, tags: ["improvement", "sharing", "hybrid", "archetype-make-visible"],
+    stem: "On a hybrid programme, an agile team has automated its regression tests and cut its test time from days to hours. The predictive integration workstream still runs a three-week manual test phase before each milestone. What should the project manager do?",
+    options: [
+      { id: "a", text: "Share the agile team's approach with the integration workstream and agree a pilot to see how much of it they can adopt.", correct: true,
+        rationale: "A proven improvement can help another part of the programme. A pilot tests how well it fits there." },
+      { id: "b", text: "Require the integration workstream to automate all its tests immediately.",
+        rationale: "This is the impose-wholesale error. What worked for one team may need adapting, and a mandate skips that." },
+      { id: "c", text: "Leave each workstream to its own methods.",
+        rationale: "This is the silo error. A clear improvement stays locked in one team." },
+      { id: "d", text: "Move the agile team's testers to the integration workstream.",
+        rationale: "This weakens the agile team and treats the improvement as a staffing issue rather than a practice to share." }
+    ],
+    explanation: "Improvements found in one part of a programme often help others. Sharing them, with the context of why they worked, and piloting their use elsewhere spreads the benefit without assuming one size fits all.",
+    mindset: "Spread a proven improvement, and let the receiving team adapt it."
+  },
+
+  {
+    id: "pmp-b6-025", type: "multi", domain: "business", ecoTask: "business-6",
+    approach: "agile", difficulty: 3, tags: ["improvement", "retrospective", "actions", "archetype-apply-the-rule"],
+    stem: "A team wants its retrospective actions to be completed rather than repeated sprint after sprint. Which two features make an action most likely to be completed? Select two.",
+    options: [
+      { id: "a", text: "A single named owner for the action.", correct: true,
+        rationale: "One owner makes responsibility clear. Actions owned by everyone are owned by nobody." },
+      { id: "b", text: "A stated expected result and a date to review whether it worked.", correct: true,
+        rationale: "A measurable aim and a review point turn an intention into an experiment." },
+      { id: "c", text: "A long list of actions so nothing is missed.",
+        rationale: "This is the overload error. Too many actions dilute effort, and few get done." },
+      { id: "d", text: "Assigning the action to the team as a whole.",
+        rationale: "This is the collective-ownership error. Shared responsibility often means nobody acts." }
+    ],
+    explanation: "Retrospective actions get done when they are few, owned by one person and framed as experiments with a review point. Long lists and collective ownership are the usual reasons actions are repeated without progress.",
+    mindset: "Make each improvement action small, owned and checkable."
+  },
+
+  {
+    id: "pmp-b6-026", type: "single", domain: "business", ecoTask: "business-6",
+    approach: "hybrid", difficulty: 3, tags: ["improvement", "kaizen", "manufacturing", "archetype-trade-off"],
+    stem: "As part of your hybrid factory programme, a week-long kaizen event on a packaging line produces thirty improvement ideas from operators. The plant manager asks what should happen next. What is the best answer?",
+    options: [
+      { id: "a", text: "Pick the few ideas with the most impact, give each an owner, trial and measure them, and standardise those that work.", correct: true,
+        rationale: "Focusing on a few, trialling and measuring them, then standardising success is how kaizen turns ideas into lasting gains." },
+      { id: "b", text: "Implement all thirty ideas at once to show the operators they were heard.",
+        rationale: "This is the all-at-once error. Too many changes together overwhelm the line and hide which ones worked." },
+      { id: "c", text: "File the ideas for consideration at the next annual planning round.",
+        rationale: "This is the shelf error. Delaying action wastes momentum and tells operators their input does not matter." },
+      { id: "d", text: "Ask engineers to review all thirty before any are tried.",
+        rationale: "This is the bottleneck error. Small, low-risk ideas can be trialled quickly by the people who suggested them." }
+    ],
+    explanation: "Continuous improvement works through many small, tested changes. Selecting the highest-impact ideas, trialling them with owners and measures, and standardising those that succeed keeps momentum without overwhelming the operation.",
+    mindset: "Turn improvement ideas into small, owned and measured trials."
+  },
+
+  {
+    id: "pmp-b7-021", type: "single", domain: "business", ecoTask: "business-7",
+    approach: "agile", difficulty: 3, tags: ["change", "release cadence", "fatigue", "archetype-trade-off"],
+    stem: "Your team releases new features to a hospital's staff rostering app every two weeks. Ward managers complain that the screens keep changing and they cannot keep up. Usage of new features is low. What is the best response?",
+    options: [
+      { id: "a", text: "Keep building iteratively, but release visible changes to staff on a predictable, less frequent cadence with clear notes on what changed.", correct: true,
+        rationale: "This keeps the team's fast feedback while giving users a rhythm of change they can absorb." },
+      { id: "b", text: "Stop releasing until all features are finished.",
+        rationale: "This is the big-bang error. It delays value and creates one large change instead of many small ones." },
+      { id: "c", text: "Continue releasing every two weeks, since iterative delivery requires it.",
+        rationale: "This is the cadence-over-people error. Ignoring change fatigue undermines adoption." },
+      { id: "d", text: "Ask ward managers to attend every sprint review.",
+        rationale: "This is the extra-burden error. Busy managers are unlikely to attend, and it adds to their load." }
+    ],
+    explanation: "Iterative delivery and organisational change move at different speeds. Teams can build and test often while releasing to users at a pace they can absorb. Predictable timing and clear communication help people adopt each change.",
+    mindset: "Release change at a pace people can absorb, even when you build faster."
+  },
+
+  {
+    id: "pmp-b7-022", type: "single", domain: "business", ecoTask: "business-7",
+    approach: "agile", difficulty: 2, tags: ["change", "pilot", "feedback", "archetype-act-now"],
+    stem: "A pilot group of twenty staff uses each new increment of an expenses system before it reaches the whole organisation. Their feedback shows that one approval workflow confuses most of them. The wider rollout is due next month. What should the project manager do?",
+    options: [
+      { id: "a", text: "Feed the feedback into the backlog so the workflow is fixed before wider rollout.", correct: true,
+        rationale: "The pilot exists to catch exactly this. Fixing the workflow first prevents confusion at scale." },
+      { id: "b", text: "Roll out on schedule and provide extra training on the confusing workflow.",
+        rationale: "This is the train-round-a-flaw error. Training cannot fully compensate for a workflow most people find confusing." },
+      { id: "c", text: "Replace the pilot group with more experienced users.",
+        rationale: "This is the change-the-testers error. The wider organisation will be no more experienced than the pilot." },
+      { id: "d", text: "Ignore the feedback, since pilot users always complain.",
+        rationale: "This is the dismissal error. Consistent feedback from most of the group is a strong signal." }
+    ],
+    explanation: "Pilots and early adopters let a change be tested on a small scale before it reaches everyone. Their feedback is most valuable when it changes the product before wider rollout. Fixing the design is usually better than training people round it.",
+    mindset: "Use what early adopters tell you to fix the change before it scales."
+  },
+
+  {
+    id: "pmp-b7-023", type: "single", domain: "business", ecoTask: "business-7",
+    approach: "agile", difficulty: 4, tags: ["change", "managers", "transformation", "archetype-diagnose-first"],
+    stem: "During an agile transformation, middle managers are slowing approvals and quietly discouraging teams from self-organising. In private, several say they no longer know what their role is. What should the transformation lead do first?",
+    options: [
+      { id: "a", text: "Involve the managers in defining their new role, such as growing capability and removing impediments, and address their concerns directly.", correct: true,
+        rationale: "The resistance comes from uncertainty about their role. Defining it with them addresses the cause." },
+      { id: "b", text: "Remove the managers' approval rights to stop the slowdown.",
+        rationale: "This is the force error. It confirms their fear of losing their role and deepens resistance." },
+      { id: "c", text: "Report the managers to senior leadership for undermining the change.",
+        rationale: "This is the blame error. It treats a reasonable concern as disloyalty." },
+      { id: "d", text: "Run more agile training for the teams.",
+        rationale: "This is the wrong-audience error. The resistance sits with the managers, not the teams." }
+    ],
+    explanation: "Resistance to change is often rational from the resister's view. Managers who fear losing their role will slow a change that seems to remove it. Involving them in defining a new, valued role turns potential resisters into supporters.",
+    mindset: "Address what people fear losing, and involve them in what they gain."
+  },
+
+  {
+    id: "pmp-b7-024", type: "single", domain: "business", ecoTask: "business-7",
+    approach: "hybrid", difficulty: 3, tags: ["change", "training", "timing", "archetype-act-now"],
+    stem: "On a hybrid warehouse programme, staff were trained on the new picking software three months before the new conveyor equipment arrived. The equipment has just been installed and go-live is next week. Supervisors say staff have forgotten most of the training. What should the project manager do?",
+    options: [
+      { id: "a", text: "Arrange short refresher sessions on the live equipment this week, and provide floor support during the first weeks after go-live.", correct: true,
+        rationale: "Training close to use, plus support while people practise, is what makes new skills stick." },
+      { id: "b", text: "Delay go-live by three months to rerun the full training.",
+        rationale: "This is the overreaction error. Short refreshers and floor support solve the problem without a long delay." },
+      { id: "c", text: "Go live as planned, since staff have already been trained.",
+        rationale: "This is the box-ticked error. Training that has been forgotten does not prepare anyone." },
+      { id: "d", text: "Ask supervisors to retrain their teams in their spare time.",
+        rationale: "This is the offload error. It adds to supervisors' load without proper materials or time." }
+    ],
+    explanation: "Training is most effective just before people need it, and skills need practice and support to stick. When training and use drift apart, a short refresher and hands-on support at go-live are usually more effective than starting over.",
+    mindset: "Train close to the moment of use, and support people while they practise."
+  },
+
+  {
+    id: "pmp-b7-025", type: "multi", domain: "business", ecoTask: "business-7",
+    approach: "agile", difficulty: 3, tags: ["change", "adoption", "measurement", "archetype-make-visible"],
+    stem: "Six weeks after a new case recording system went live, the sponsor asks whether the change has been adopted. Which two pieces of evidence best show real adoption? Select two.",
+    options: [
+      { id: "a", text: "Use of the old spreadsheet has fallen to almost nothing.", correct: true,
+        rationale: "The old way being retired is a strong sign that people have really switched." },
+      { id: "b", text: "Recording errors in the new system have fallen steadily week by week.", correct: true,
+        rationale: "Falling errors show people are becoming competent with the new way of working." },
+      { id: "c", text: "Every member of staff has completed the training.",
+        rationale: "This is the training-equals-adoption error. Completing training does not show people use the system." },
+      { id: "d", text: "The system went live on the planned date.",
+        rationale: "This is the delivery-equals-adoption error. Going live on time says nothing about whether people use it." }
+    ],
+    explanation: "Adoption is shown by behaviour, not by activities completed. Evidence that the old way has stopped and that people are using the new way well tells you the change has landed. Training records and go-live dates measure inputs.",
+    mindset: "Measure adoption by what people do, not by what the project did."
+  },
+
+  {
+    id: "pmp-b7-026", type: "single", domain: "business", ecoTask: "business-7",
+    approach: "hybrid", difficulty: 4, tags: ["change", "culture", "merger", "archetype-trade-off"],
+    stem: "Two teams merged for your hybrid programme have very different cultures. One documents every decision formally; the other works through conversation and writes little down. Each thinks the other's way is wrong, and you need one shared way of working. What should the project manager do?",
+    options: [
+      { id: "a", text: "Bring both teams together to design the shared way of working, keeping the strengths of each.", correct: true,
+        rationale: "People support what they help design. Drawing on both cultures produces a better process and wider buy-in." },
+      { id: "b", text: "Adopt the formal team's approach, since documentation is safer.",
+        rationale: "This is the winner-takes-all error. It alienates the other team and discards real strengths." },
+      { id: "c", text: "Adopt the conversational team's approach, since it is faster.",
+        rationale: "This is the same error in reverse. It loses valuable discipline and alienates the formal team." },
+      { id: "d", text: "Let each team keep its own way and coordinate through you.",
+        rationale: "This is the bottleneck error. It avoids the change and makes the project manager the only link between teams." }
+    ],
+    explanation: "Changes to how people work go best when the people affected shape them. When cultures clash, involving both sides in designing a shared approach respects each culture's strengths and builds ownership of the result.",
+    mindset: "Build a shared way of working with the people who will use it."
+  },
+
+  {
+    id: "pmp-b8-021", type: "single", domain: "business", ecoTask: "business-8",
+    approach: "agile", difficulty: 3, tags: ["external", "cloud", "cost", "archetype-diagnose-first"],
+    stem: "Your cloud provider announces that a service your product uses heavily will cost forty per cent more from next quarter. The product's business case depends on low running costs. What should the product team do first?",
+    options: [
+      { id: "a", text: "Assess the cost impact and the alternatives, add the investigation to the backlog, and brief the sponsor if the business case is affected.", correct: true,
+        rationale: "A certain external change needs assessing for its effect on cost and value, with the sponsor involved if the case changes." },
+      { id: "b", text: "Migrate to a different provider immediately.",
+        rationale: "This is the knee-jerk error. Migration has its own cost and risk, which need assessing first." },
+      { id: "c", text: "Absorb the cost, since it is the provider's decision.",
+        rationale: "This is the passive-acceptance error. A large cost rise may threaten the business case." },
+      { id: "d", text: "Wait until the new prices take effect before doing anything.",
+        rationale: "This is the late-reaction error. Waiting removes time to find alternatives." }
+    ],
+    explanation: "External changes with a known date and effect should be assessed promptly. Understanding the impact on cost and the business case, and exploring alternatives, lets the team and sponsor choose a response before the change takes effect.",
+    mindset: "Assess an external change as soon as it is known, while there is still time to choose."
+  },
+
+  {
+    id: "pmp-b8-022", type: "single", domain: "business", ecoTask: "business-8",
+    approach: "agile", difficulty: 2, tags: ["external", "scanning", "regulation", "archetype-make-visible"],
+    stem: "Your product serves a sector where the regulator publishes new guidance most months. The team only reviews external changes at its annual planning session, and twice this year it has had to rush work to meet new guidance. What would help most?",
+    options: [
+      { id: "a", text: "Give someone responsibility for scanning the regulator's publications regularly and adding relevant items to the backlog.", correct: true,
+        rationale: "Regular scanning matches the pace of change and gives the team time to plan work rather than rush it." },
+      { id: "b", text: "Hold the annual planning session twice a year.",
+        rationale: "This is the slightly-more-often error. Monthly guidance would still arrive months before it is seen." },
+      { id: "c", text: "Ask the regulator to publish less often.",
+        rationale: "This is the control-the-uncontrollable error. The project cannot change the regulator's schedule." },
+      { id: "d", text: "Keep extra capacity spare for unexpected regulatory work.",
+        rationale: "Some slack helps, but without scanning the team still learns of changes late." }
+    ],
+    explanation: "Environmental scanning should match how fast the environment changes. In a sector with frequent regulatory updates, regular scanning by a named person brings changes into the backlog early enough to plan them properly.",
+    mindset: "Watch the outside world as often as it changes."
+  },
+
+  {
+    id: "pmp-b8-023", type: "single", domain: "business", ecoTask: "business-8",
+    approach: "agile", difficulty: 4, tags: ["external", "standards", "roadmap", "archetype-act-now"],
+    stem: "Your invoicing product's main customer sector has announced it will require a new electronic invoicing standard in eighteen months. Customers have not yet asked for it, and the product owner has other priorities. How should the team treat the standard?",
+    options: [
+      { id: "a", text: "As a certain future requirement: plan it into the roadmap now with milestones that leave time to deliver and test it.", correct: true,
+        rationale: "The requirement is announced and dated. Planning it early avoids a rush and keeps customers able to trade." },
+      { id: "b", text: "As a low priority until customers start asking for it.",
+        rationale: "This is the wait-for-demand error. By the time customers ask, the deadline may be close." },
+      { id: "c", text: "As a risk to monitor until the standard is final.",
+        rationale: "This is the misclassification error. The requirement is already announced, so it is a planned change, not an uncertain risk." },
+      { id: "d", text: "As a reason to pause other work and build it now.",
+        rationale: "This is the overreaction error. Eighteen months allows it to be planned alongside other priorities." }
+    ],
+    explanation: "External changes that are announced and dated are not risks but requirements with a deadline. Planning them into the roadmap early, with milestones, avoids a late rush and protects customers who depend on the product.",
+    mindset: "Plan for an announced external change as soon as it is announced."
+  },
+
+  {
+    id: "pmp-b8-024", type: "single", domain: "business", ecoTask: "business-8",
+    approach: "hybrid", difficulty: 3, tags: ["external", "supply chain", "hybrid", "archetype-diagnose-first"],
+    stem: "Disruption on a major shipping route will delay imported transformers for your hybrid substation project by an unknown number of weeks. Installation is predictive and on the critical path; the control software is built iteratively. What should the project manager do first?",
+    options: [
+      { id: "a", text: "Assess the likely range of delay and its effect on the critical path, look at re-sequencing options, and update the sponsor.", correct: true,
+        rationale: "Understanding the range and the schedule impact comes first, so options and the sponsor's decisions rest on evidence." },
+      { id: "b", text: "Order replacement transformers from another supplier at once.",
+        rationale: "This is the costly-guess error. A second order may cost far more than the delay, and the delay's length is not yet known." },
+      { id: "c", text: "Ask the software team to slow down to match the hardware delay.",
+        rationale: "This is the drag-everything error. The software team can keep delivering value while the hardware is delayed." },
+      { id: "d", text: "Wait for the shipping company to confirm a new date.",
+        rationale: "This is the passive error. Assessment and re-sequencing can start now, before a firm date arrives." }
+    ],
+    explanation: "When an external event disrupts supply, assess the likely impact on the schedule before acting. Knowing whether the delay hits the critical path, and what can be re-sequenced, lets the sponsor choose between options such as waiting, re-planning or sourcing elsewhere.",
+    mindset: "Size the effect of an external shock before choosing how to respond to it."
+  },
+
+  {
+    id: "pmp-b8-025", type: "multi", domain: "business", ecoTask: "business-8",
+    approach: "agile", difficulty: 3, tags: ["external", "scanning", "fintech", "archetype-apply-the-rule"],
+    stem: "You lead a team building a personal finance app. Which two belong in your scan of the external environment? Select two.",
+    options: [
+      { id: "a", text: "Regulator consultations on data sharing between banks.", correct: true,
+        rationale: "Regulatory change can create new requirements or remove ones the product relies on." },
+      { id: "b", text: "New products launched by competitors.", correct: true,
+        rationale: "Market moves can change the value of features and the business case." },
+      { id: "c", text: "The team's velocity trend.",
+        rationale: "This is the internal-measure error. Velocity is about the team, not the outside world." },
+      { id: "d", text: "The length of the team's sprints.",
+        rationale: "This is the internal-process error. Sprint length is the team's own choice." }
+    ],
+    explanation: "Environmental scanning looks outward, at regulation, markets, technology, economics and wider events. Internal measures such as velocity and sprint length matter, but they belong to how the team runs, not to the environment around it.",
+    mindset: "Scan outward for changes the project cannot control but must respond to."
+  },
+
+  {
+    id: "pmp-b8-026", type: "single", domain: "business", ecoTask: "business-8",
+    approach: "hybrid", difficulty: 4, tags: ["external", "technology", "scope", "archetype-trade-off"],
+    stem: "Your hybrid programme is building a manual document review workflow for an insurer. The platform vendor has just released an automated review capability that could replace much of that workflow, though it is new and unproven. What should the project manager do?",
+    options: [
+      { id: "a", text: "Run a short evaluation of the new capability with the product owner, and bring the sponsor options for adapting the scope.", correct: true,
+        rationale: "A promising external change deserves a quick, evidence-based look and a scope decision by the right people." },
+      { id: "b", text: "Continue as planned, since the new capability is unproven.",
+        rationale: "This is the ignore-the-opportunity error. Without a look, the programme may build something that is soon obsolete." },
+      { id: "c", text: "Stop the workflow build and adopt the new capability at once.",
+        rationale: "This is the rush error. The capability is unproven, and switching without evaluation risks the programme." },
+      { id: "d", text: "Ask the vendor to guarantee the capability before considering it.",
+        rationale: "This is the impossible-assurance error. Vendors rarely guarantee new features, and the programme can test it itself." }
+    ],
+    explanation: "Technology change can make planned work less valuable. A quick evaluation shows whether a new capability is a real opportunity. The sponsor can then decide whether to adapt the scope, rather than the team ignoring the change or rushing to it.",
+    mindset: "Test a new external opportunity quickly, then let the right people decide what it changes."
+  }
+
 ];
 
 /* 05.3, 05.5–05.7  The other packs are still empty by design: §12.2 runs a
@@ -12400,7 +13282,7 @@ PMP.Content = (function () {
 })();
 
 /* ── 05.9  EXTENDED PACK LOADER ─────────────────────────────────────────────
-   The 300 items above are the core pack and they are embedded, so the file
+   The 348 items above are the core pack and they are embedded, so the file
    keeps working with no network, no server and no second file. This section
    adds an optional second tier: when the same file is *served* rather than
    opened from disk, it looks for a directory of extended shards beside itself
@@ -27769,11 +28651,15 @@ PMP.Audit = (function () {
     ]));
 
     /* ── ECO-task coverage counter ── */
-    var pctOfTarget = counts.total / 300;
+    var pctOfTarget = counts.total / RULE.TARGET_PACK;
     host.appendChild(el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "ECO task coverage" }),
       el("h2", { text: counts.total + " questions across " + (PMP.ECO.TASK_COUNT - counts.uncovered) + " of " + PMP.ECO.TASK_COUNT + " tasks" }),
-      el("p", { text: "The finished pack targets 300 questions with a floor of four per task. This build is at " + PMP.fmt.pct(pctOfTarget) + " of that target, which puts the arithmetic floor at " + counts.scaledFloor + " per task. A task at zero is a failure; a task under the floor is a gap." }),
+      el("p", { text: "The core pack targeted " + RULE.TARGET_PACK + " questions with a floor of " + RULE.TASK_FLOOR + " per task. "
+        + (pctOfTarget > 1
+          ? "This build holds " + (counts.total - RULE.TARGET_PACK) + " beyond that target"
+          : "This build is at " + PMP.fmt.pct(pctOfTarget) + " of that target")
+        + ", which puts the arithmetic floor at " + counts.scaledFloor + " per task. A task at zero is a failure; a task under the floor is a gap." }),
       el("div", { class: "sum-grid", style: "margin-top:var(--sp-4)" }, [
         el("div", { class: "stat" }, [
           el("span", { class: "stat-k", text: "Tasks covered" }),
