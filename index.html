@@ -1390,8 +1390,8 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .fx-trap b { font-weight: var(--w-semi); }
 
 /* ── 03.15  REFERENCE LIBRARY ───────────────────────────────────────────────
-   Five surfaces behind one tab strip, and they have almost nothing in common
-   visually, so this block is mostly five small vocabularies rather than one.
+   Six surfaces behind one tab strip, and they have almost nothing in common
+   visually, so this block is mostly six small vocabularies rather than one.
 
    The tab strip is deliberately the same .fx-tabs / .fx-tab from 03.14 rather
    than a second copy under a different prefix. It is a generic mode switch,
@@ -1618,6 +1618,31 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .lib-def-b { margin-top: var(--sp-3); font-size: var(--t-base); line-height: var(--lh-body); max-width: var(--measure); }
 .lib-rel { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-4); }
 .lib-rel .btn { min-height: 32px; font-size: var(--t-xs); padding: 0 var(--sp-3); }
+
+/* ── 03.15.7  ABBREVIATIONS ─────────────────────────────────────────────────
+   The memorisation table's furniture (.lib-tw, .lib-tbl), so the table
+   scrolls inside its own wrapper on a phone exactly as those do. What is
+   added: a monospace key column, the note line under an expansion, a group
+   heading row inside the table, and the clash callout's list. */
+.lib-ab-k {
+  font-family: var(--font-mono); font-weight: var(--w-semi); color: var(--fg);
+  white-space: nowrap; text-decoration: none;
+}
+.lib-ab tbody th[scope="row"] { width: 1%; }
+.lib-ab tbody tr + tr th { border-top: var(--border); }
+.lib-ab-f { color: var(--fg); }
+.lib-ab-n { display: block; margin-top: 2px; font-size: var(--t-xs); color: var(--fg-muted); }
+.lib-ab-l { width: 1%; white-space: nowrap; }
+.lib-ab-l a { font-size: var(--t-xs); }
+.lib-ab .lib-ab-g th {
+  padding-top: var(--sp-4); background: var(--s-sunk); color: var(--fg-muted);
+  font-size: var(--t-xs); font-weight: var(--w-semi); letter-spacing: var(--ls-cap); text-transform: uppercase;
+  border-top: var(--border);
+}
+.lib-ab-clash { margin: 0 0 var(--sp-3); }
+.lib-ab-cl { list-style: none; margin-top: var(--sp-2); display: grid; gap: var(--sp-1); }
+.lib-ab-cl li { display: flex; gap: var(--sp-3); align-items: baseline; }
+.lib-ab-cl .lib-ab-k { flex: 0 0 4.5em; }
 
 /* ── 03.16  CHARTS ──────────────────────────────────────────────────────────
    §11 draws SVG by hand. The rule here is that a chart is a figure, not a
@@ -2149,7 +2174,9 @@ a.btn { text-decoration: none; }
      thing to want on paper. */
   .fx-tabs, .fx-picker, .filter-bar, .fx-answer, .btn, .icon-btn { display: none !important; }
 
-  /* Reference library. The four reference pages print as pages. The
+  /* Reference library. The four reference pages and the abbreviations print
+     as pages; the abbreviations print whole, ungrouped by the search and
+     chips that are off the page (§10.07.10 repaints for beforeprint). The
      glossary deliberately does not: a virtualised list has only its
      visible window in the DOM, so printing it would yield whatever
      happened to be on screen, which is worse than printing nothing and
@@ -2171,6 +2198,9 @@ a.btn { text-decoration: none; }
   .lib-tbl { min-width: 0; font-size: 8pt; }
   .lib-tbl thead th { background: transparent; color: #000; border-bottom: 1pt solid #000; }
   .lib-key, .lib-note, .lib-trap { background: transparent; border: 1px solid #999; color: #000; }
+  .lib-ab-l { display: none; }
+  .lib-ab .lib-ab-g th { background: transparent; color: #000; border-top: 1pt solid #000; }
+  .lib-ab-k, .lib-ab-f { color: #000; }
   .lib-num { background: transparent; border: 1px solid #666; color: #000; }
   .lib-item-l { color: #000; font-weight: 600; }
 
@@ -2433,6 +2463,8 @@ a.btn { text-decoration: none; }
         05.6  FORMULAS — 9 groups, ~50 entries · built
         05.7  REFERENCE + GLOSSARY — 49 processes, 12 principles,
               8 domains, agile, 14 tables, 364 terms · built
+        05.7.3 ABBREVIATIONS — 121 rows, one per meaning; kept complete
+              by the coverage scan in 10.07.9
         05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS; pilot lesson P4
         05.11 COACH MESSAGES — every coach sentence, authored: the pool the
               coach picks from and the fixed lines it uses in place
@@ -2483,7 +2515,9 @@ a.btn { text-decoration: none; }
               (10.14.3 audits 05.4 against its own rules;
                10.14.5 audits 05.10 the same way)
         10.07 Reference library · built
-              (10.07.6 is the glossary matcher: trigram + token prefix)
+              (10.07.6 is the glossary matcher: trigram + token prefix;
+               10.07.10 the abbreviations tab, whose coverage scan
+               runs in 10.07.9)
         10.15 Learn — lesson hub and reader · #/learn, #/learn?lesson=P4
         10.16 Coach — stage, today's session, messages · derives, never renders
         10.17 Today, intake and the coach's surfaces · #/today, the home page
@@ -13752,6 +13786,206 @@ PMP.GLOSSARY = Object.freeze([
   { t: "Work performance information", g: "general", d: "Data compared to the baseline and given meaning. Produced by the controlling processes." },
   { t: "Work performance reports", g: "general", d: "Information compiled into a form for a decision or an audience. Produced by Monitor and Control Project Work." },
   { t: "Workaround", g: "risk", d: "An unplanned response to a risk that has already occurred and had no prepared response. Distinct from a contingency plan, which was prepared." }
+]);
+
+/* ── 05.7.3  ABBREVIATIONS ──────────────────────────────────────────────────
+   Every abbreviation the app uses, one row per meaning, for the sixth tab in
+   §10.07. A separate table rather than a filter over the glossary's `a`
+   field, because that field holds aliases as well as abbreviations ("Slack"
+   on Float, "Accommodate" on Smoothing) and because most of the formula lab's
+   symbols and the general business terms in questions have no glossary entry
+   at all.
+
+     abbr   exactly as the app writes it: T&M, FP-EPA, SM-2, CoQ.
+     full   the expansion. Copied from the file's own wording wherever the
+            file defines the term (a glossary headword, a formula name, a
+            calculator label), so the two never read differently.
+     group  a glossary group id where one fits, or one of the three this tab
+            adds (exam, notation, common). Labels live in §10.07.10.
+     see    optional. The exact glossary headword that defines the term. The
+            glossary owns definitions; this table only expands letters.
+     note   optional, one line. Required on every row whose letters are shared
+            with another row, because the same letters meaning two things is
+            the thing a learner most needs warning about.
+
+   Ordered by abbr, case-insensitively, by plain code-unit comparison of the
+   lower-cased string rather than localeCompare, so the order the self-check
+   asserts is the same in every engine. Rows sharing letters keep authoring
+   order, the commoner meaning first.
+
+   Completeness is not maintained by hand. §10.07.9 scans every learner-
+   visible string in the shipped packs for abbreviation-shaped tokens and fails
+   the boot check, by name, on any that is neither here nor in its ignore list.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.ABBREVIATIONS = Object.freeze([
+  { abbr: "AC", full: "Actual cost", group: "evm", see: "Actual cost" },
+  { abbr: "API", full: "Application programming interface", group: "common" },
+  { abbr: "B", full: "Business Environment", group: "exam",
+    note: "Lesson-id prefix: B2 is the second Business Environment lesson." },
+  { abbr: "BAC", full: "Budget at completion", group: "evm", see: "Budget at completion" },
+  { abbr: "BCR", full: "Benefit\u2013cost ratio", group: "business" },
+  { abbr: "C", full: "Number of channels", group: "notation", see: "Communication channels" },
+  { abbr: "CCB", full: "Change control board", group: "integration", see: "Change control board" },
+  { abbr: "CoQ", full: "Cost of quality", group: "quality", see: "Cost of quality" },
+  { abbr: "CP", full: "Critical path", group: "schedule", see: "Critical path",
+    note: "Formula lab symbol. CP is also ceiling price in the PTA calculator." },
+  { abbr: "CP", full: "Ceiling price", group: "procurement",
+    note: "Field in the point of total assumption calculator. Elsewhere CP is critical path." },
+  { abbr: "CPAF", full: "Cost plus award fee", group: "procurement", see: "Cost plus award fee" },
+  { abbr: "CPFF", full: "Cost plus fixed fee", group: "procurement", see: "Cost plus fixed fee" },
+  { abbr: "CPI", full: "Cost performance index", group: "evm", see: "Cost performance index" },
+  { abbr: "CPIF", full: "Cost plus incentive fee", group: "procurement", see: "Cost plus incentive fee" },
+  { abbr: "CT", full: "Cycle time", group: "agile", see: "Cycle time",
+    note: "Formula lab symbol." },
+  { abbr: "CV", full: "Cost variance", group: "evm", see: "Cost variance" },
+  { abbr: "C\u2080", full: "Initial outlay", group: "notation",
+    note: "Labelled initial investment in the NPV, IRR and payback calculator." },
+  { abbr: "C\u209C", full: "Cash flow in period t", group: "notation" },
+  { abbr: "DoD", full: "Definition of done", group: "agile", see: "Definition of done" },
+  { abbr: "EAC", full: "Estimate at completion", group: "evm", see: "Estimate at completion" },
+  { abbr: "ECO", full: "Examination Content Outline", group: "exam",
+    note: "The published outline this build is aligned to, July 2026 edition." },
+  { abbr: "EEF", full: "Enterprise environmental factors", group: "integration", see: "Enterprise environmental factors" },
+  { abbr: "EF", full: "Early finish", group: "schedule", see: "Early finish" },
+  { abbr: "EMV", full: "Expected monetary value", group: "risk", see: "Expected monetary value" },
+  { abbr: "ES", full: "Early start", group: "schedule", see: "Early start" },
+  { abbr: "ETC", full: "Estimate to complete", group: "evm", see: "Estimate to complete" },
+  { abbr: "EV", full: "Earned value", group: "evm", see: "Earned value" },
+  { abbr: "EVM", full: "Earned value management", group: "evm", see: "Earned value management" },
+  { abbr: "EVPI", full: "Expected value of perfect information", group: "risk",
+    note: "The formula lab titles it value of perfect information." },
+  { abbr: "F", full: "Foundations", group: "exam",
+    note: "Lesson-id prefix: F1 is the first Foundations lesson." },
+  { abbr: "FF", full: "Free float", group: "schedule", see: "Free float",
+    note: "Formula lab symbol. FF is also the finish-to-finish dependency." },
+  { abbr: "FF", full: "Finish-to-finish", group: "schedule", see: "Precedence diagramming method",
+    note: "A dependency type. In the formula lab FF is free float." },
+  { abbr: "FFP", full: "Firm fixed price", group: "procurement", see: "Firm fixed price" },
+  { abbr: "FP-EPA", full: "Fixed price with economic price adjustment", group: "procurement", see: "Fixed price with economic price adjustment" },
+  { abbr: "FPIF", full: "Fixed price incentive fee", group: "procurement", see: "Fixed price incentive fee" },
+  { abbr: "FS", full: "Finish-to-start", group: "schedule", see: "Precedence diagramming method",
+    note: "A dependency type." },
+  { abbr: "FV", full: "Future value", group: "business",
+    note: "Formula lab symbol, in the present value formula." },
+  { abbr: "HR", full: "Human resources", group: "common" },
+  { abbr: "IFB", full: "Invitation for bid", group: "procurement", see: "Invitation for bid" },
+  { abbr: "IRR", full: "Internal rate of return", group: "business", see: "Internal rate of return" },
+  { abbr: "IT", full: "Information technology", group: "common" },
+  { abbr: "ITTO", full: "Inputs, tools and techniques, outputs", group: "exam",
+    note: "How each process is described in the process view." },
+  { abbr: "JSON", full: "JavaScript Object Notation", group: "exam",
+    note: "The format of backup and pack files." },
+  { abbr: "KB", full: "Kilobyte", group: "exam" },
+  { abbr: "KPI", full: "Key performance indicator", group: "common" },
+  { abbr: "L", full: "Little's Law", group: "notation", see: "Little's Law",
+    note: "Formula lab tag. L is also the People lesson prefix." },
+  { abbr: "L", full: "People", group: "exam",
+    note: "Lesson-id prefix: L3 is the third People lesson. L is also Little's Law." },
+  { abbr: "LeSS", full: "Large-Scale Scrum", group: "agile" },
+  { abbr: "LF", full: "Late finish", group: "schedule", see: "Late finish" },
+  { abbr: "LOE", full: "Level of effort", group: "schedule", see: "Level of effort" },
+  { abbr: "LS", full: "Late start", group: "schedule", see: "Late start" },
+  { abbr: "LT", full: "Lead time", group: "agile", see: "Lead time",
+    note: "Formula lab symbol." },
+  { abbr: "M", full: "Most likely", group: "schedule", see: "Most likely" },
+  { abbr: "MB", full: "Megabyte", group: "exam" },
+  { abbr: "n", full: "Number of periods", group: "notation",
+    note: "In the present value formulas. n also counts people and iterations." },
+  { abbr: "n", full: "Everyone who communicates", group: "notation",
+    note: "In the channels formula, the project manager included. n\u2081 before, n\u2082 after." },
+  { abbr: "n", full: "Iterations remaining", group: "notation",
+    note: "In the velocity formula. n also counts periods and people." },
+  { abbr: "NPV", full: "Net present value", group: "business", see: "Net present value" },
+  { abbr: "O", full: "Optimistic", group: "schedule", see: "Optimistic",
+    note: "The best-case estimate in a three-point estimate." },
+  { abbr: "OC", full: "Opportunity cost", group: "business",
+    note: "Formula lab symbol." },
+  { abbr: "OPA", full: "Organisational process assets", group: "integration", see: "Organisational process assets" },
+  { abbr: "P", full: "Pessimistic", group: "schedule", see: "Pessimistic",
+    note: "The worst-case estimate. P is also probability, and the Process lesson prefix." },
+  { abbr: "P", full: "Probability", group: "notation",
+    note: "In the decision-tree roll-up. Elsewhere P is the pessimistic estimate." },
+  { abbr: "P", full: "Process", group: "exam",
+    note: "Lesson-id prefix: P4 is the fourth Process lesson. P is also a formula symbol." },
+  { abbr: "PB", full: "Payback period", group: "business", see: "Payback period",
+    note: "Formula lab symbol." },
+  { abbr: "PDM", full: "Precedence diagramming method", group: "schedule", see: "Precedence diagramming method" },
+  { abbr: "PERT", full: "Program evaluation and review technique", group: "schedule", see: "PERT" },
+  { abbr: "PM", full: "Project manager", group: "integration" },
+  { abbr: "PMB", full: "Performance measurement baseline", group: "evm", see: "Performance measurement baseline" },
+  { abbr: "PMBOK", full: "Project Management Body of Knowledge", group: "exam",
+    note: "PMP, PMI and PMBOK are registered marks of the Project Management Institute, Inc." },
+  { abbr: "PMI", full: "Project Management Institute", group: "exam" },
+  { abbr: "PMIS", full: "Project management information system", group: "integration", see: "Project management information system" },
+  { abbr: "PMO", full: "Project management office", group: "integration", see: "Project management office" },
+  { abbr: "PMP", full: "Project Management Professional", group: "exam" },
+  { abbr: "PTA", full: "Point of total assumption", group: "procurement", see: "Point of total assumption" },
+  { abbr: "PV", full: "Planned value", group: "evm", see: "Planned value",
+    note: "Also present value in the formula lab's finance group." },
+  { abbr: "PV", full: "Present value", group: "business",
+    note: "Formula lab, finance group. Elsewhere PV is planned value." },
+  { abbr: "Q3", full: "Third quarter", group: "common",
+    note: "Of the financial or calendar year." },
+  { abbr: "r", full: "Discount rate per period", group: "notation" },
+  { abbr: "RACI", full: "Responsible, accountable, consulted, informed", group: "resource", see: "RACI" },
+  { abbr: "RAM", full: "Responsibility assignment matrix", group: "resource", see: "Responsibility assignment matrix" },
+  { abbr: "RBS", full: "Risk breakdown structure", group: "risk", see: "Risk breakdown structure",
+    note: "RBS is also resource breakdown structure." },
+  { abbr: "RBS", full: "Resource breakdown structure", group: "resource", see: "Resource breakdown structure",
+    note: "RBS is also risk breakdown structure." },
+  { abbr: "RFI", full: "Request for information", group: "procurement", see: "Bid documents" },
+  { abbr: "RFP", full: "Request for proposal", group: "procurement", see: "Bid documents" },
+  { abbr: "RFQ", full: "Request for quotation", group: "procurement", see: "Bid documents" },
+  { abbr: "ROI", full: "Return on investment", group: "business" },
+  { abbr: "RTM", full: "Requirements traceability matrix", group: "scope", see: "Requirements traceability matrix" },
+  { abbr: "SAFe", full: "Scaled Agile Framework", group: "agile" },
+  { abbr: "SDK", full: "Software development kit", group: "common" },
+  { abbr: "SF", full: "Start-to-finish", group: "schedule", see: "Precedence diagramming method",
+    note: "A dependency type." },
+  { abbr: "SM-2", full: "SuperMemo 2", group: "exam",
+    note: "The spaced-repetition algorithm that schedules Flashcards." },
+  { abbr: "SOW", full: "Statement of work", group: "procurement", see: "Statement of work",
+    note: "The general term. The procurement version is the next row." },
+  { abbr: "SOW", full: "Procurement statement of work", group: "procurement", see: "Procurement statement of work",
+    note: "What is being bought, in enough detail to price." },
+  { abbr: "SPI", full: "Schedule performance index", group: "evm", see: "Schedule performance index" },
+  { abbr: "SS", full: "Start-to-start", group: "schedule", see: "Precedence diagramming method",
+    note: "A dependency type." },
+  { abbr: "SV", full: "Schedule variance", group: "evm", see: "Schedule variance" },
+  { abbr: "SWOT", full: "Strengths, weaknesses, opportunities and threats", group: "risk", see: "SWOT analysis" },
+  { abbr: "T&M", full: "Time and materials", group: "procurement", see: "Time and materials" },
+  { abbr: "takt", full: "Takt time", group: "notation", see: "Takt time" },
+  { abbr: "TC", full: "Target cost", group: "procurement",
+    note: "Field in the point of total assumption calculator." },
+  { abbr: "TCPI", full: "To-complete performance index", group: "evm", see: "To-complete performance index" },
+  { abbr: "TDD", full: "Test-driven development", group: "agile", see: "Test-driven development" },
+  { abbr: "tE", full: "Expected duration", group: "schedule", see: "Three-point estimating",
+    note: "Formula lab symbol, for both the PERT and the triangular forms." },
+  { abbr: "TF", full: "Total float", group: "schedule", see: "Total float",
+    note: "Formula lab symbol. TF is also target fee in the PTA calculator." },
+  { abbr: "TF", full: "Target fee", group: "procurement",
+    note: "Field in the point of total assumption calculator. Elsewhere TF is total float." },
+  { abbr: "TH", full: "Throughput", group: "agile", see: "Throughput",
+    note: "Formula lab symbol." },
+  { abbr: "UK", full: "United Kingdom", group: "common" },
+  { abbr: "US", full: "United States", group: "common" },
+  { abbr: "USD", full: "US dollars", group: "common" },
+  { abbr: "v", full: "Velocity", group: "notation", see: "Velocity" },
+  { abbr: "VAC", full: "Variance at completion", group: "evm", see: "Variance at completion" },
+  { abbr: "WBS", full: "Work breakdown structure", group: "scope", see: "Work breakdown structure" },
+  { abbr: "WIP", full: "Work in progress", group: "agile", see: "Work in progress" },
+  { abbr: "X", full: "Exam skills", group: "exam",
+    note: "Lesson-id prefix: X1 is the first Exam skills lesson." },
+  { abbr: "XP", full: "Extreme Programming", group: "agile", see: "Extreme Programming" },
+  { abbr: "\u0394", full: "Change in", group: "notation",
+    note: "\u0394C is the channels added by growth." },
+  { abbr: "\u03C3", full: "Standard deviation", group: "notation", see: "Standard deviation" },
+  { abbr: "\u03A3", full: "Sum of", group: "notation",
+    note: "On the formula sheet. In the flow metrics calculator \u03A3 is points remaining." },
+  { abbr: "\u03A3", full: "Points remaining", group: "notation",
+    note: "Field in the flow metrics calculator. On the formula sheet \u03A3 is a sum." },
+  { abbr: "\u03C3\u00B2", full: "Variance", group: "notation",
+    note: "The square of the standard deviation." }
 ]);
 
 /* ── 05.8  CONTENT INDEX ────────────────────────────────────────────────────
@@ -27057,6 +27291,9 @@ PMP.FormulaLab = (function () {
     irr: irr,
     mark: mark,
     generators: GENERATORS,
+    /* Read by §10.07.9, whose abbreviation scan covers each calculator's
+       field symbols and labels. Read-only use; nothing outside writes to it. */
+    calcs: CALCS,
     finalise: finalise,
     newProblem: newProblem,
     get problem() { return problem; },
@@ -27066,9 +27303,10 @@ PMP.FormulaLab = (function () {
 
 
 /* ── 10.07  REFERENCE LIBRARY ───────────────────────────────────────────────
-   Five views over §05.7 behind one tab strip: the legacy process view, the
-   principles and performance domains, agile, the memorisation tables, and a
-   glossary of around three hundred and sixty terms.
+   Six views over §05.7 behind one tab strip: the legacy process view, the
+   principles and performance domains, agile, the memorisation tables, a
+   glossary of around three hundred and sixty terms, and the abbreviations
+   used anywhere in the app (§05.7.3, rendered by §10.07.10).
 
    Three decisions worth knowing before reading the code:
 
@@ -27108,7 +27346,8 @@ PMP.Library = (function () {
     { id: "principles", label: "Principles",    icon: "book" },
     { id: "agile",      label: "Agile",         icon: "cards" },
     { id: "tables",     label: "Tables",        icon: "data" },
-    { id: "glossary",   label: "Glossary",      icon: "target" }
+    { id: "glossary",   label: "Glossary",      icon: "target" },
+    { id: "abbr",       label: "Abbreviations", icon: "info" }
   ];
 
   /* ── 10.07.1  MODULE STATE ──────────────────────────────────────────────
@@ -27124,6 +27363,10 @@ PMP.Library = (function () {
   var vlist = null;        /* live virtualiser handle, destroyed on re-render */
   var results = [];        /* current glossary result set */
   var nodes = {};          /* live nodes the glossary repaints without rebuilding */
+  var abQuery = "";        /* abbreviations search text, kept apart from the
+                              glossary's so moving between the tabs does not
+                              carry one search into the other */
+  var abGroup = "";        /* abbreviations group filter, "" for all */
 
   function reset() {
     teardown.forEach(function (fn) { try { fn(); } catch (e) {} });
@@ -27931,6 +28174,217 @@ PMP.Library = (function () {
     teardown.push(function () { if (rt) clearTimeout(rt); });
   }
 
+  /* ── 10.07.10  ABBREVIATIONS ────────────────────────────────────────────
+     A plain table over §05.7.3: grouped under headings when browsing, ranked
+     when searching. None of the glossary's machinery is needed at around 120
+     rows. Every row fits in the DOM without being felt, so there is no
+     virtualiser; a linear filter over 120 short strings is cheaper than
+     building an index, so there is no matcher; and the table is rebuilt on
+     each keystroke rather than patched, so there is no debounce.
+
+     Ranking is three tiers, in the order someone typing letters expects: the
+     letters exactly, then abbreviations starting with them, then the letters
+     anywhere in the expansion. Not inside a longer abbreviation: someone
+     typing "pv" wants PV, not NPV, which a search for "present" still finds.
+     Case is ignored throughout. Ties keep table order, which is alphabetical
+     and puts the commoner of two meanings first, so "pv" lists planned value
+     above present value.
+
+     Groups reuse the glossary's ids and take its labels, so a chip reads the
+     same on both tabs. Three are this tab's own, for things the glossary has
+     no group for. The general business terms are "common" rather than
+     "general", because "general" is already a glossary group and means
+     something else there. */
+  var AB_GROUPS = [
+    { id: "exam", label: "Exam and this app" },
+    { id: "evm" }, { id: "schedule" }, { id: "business" }, { id: "risk" },
+    { id: "procurement" }, { id: "quality" }, { id: "agile" }, { id: "scope" },
+    { id: "resource" }, { id: "integration" },
+    { id: "notation", label: "Formula symbols" },
+    { id: "common", label: "General business terms in questions" }
+  ];
+
+  /* Null for an id that is in neither list, which the self-check reads as an
+     unknown group. groupLabel() cannot serve: it falls back to the id. */
+  function abGroupLabel(id) {
+    var i;
+    for (i = 0; i < AB_GROUPS.length; i++) {
+      if (AB_GROUPS[i].id !== id) continue;
+      if (AB_GROUPS[i].label) return AB_GROUPS[i].label;
+      for (var j = 1; j < GROUPS.length; j++) if (GROUPS[j].id === id) return GROUPS[j].label;
+    }
+    return null;
+  }
+
+  /* Letters that stand for more than one thing, in table order, each with
+     its rows. Derived rather than listed, so the callout cannot fall behind
+     the table. */
+  function abClashes() {
+    var by = Object.create(null), order = [];
+    PMP.ABBREVIATIONS.forEach(function (r) {
+      if (!by[r.abbr]) { by[r.abbr] = []; order.push(r.abbr); }
+      by[r.abbr].push(r);
+    });
+    return order.filter(function (k) { return by[k].length > 1; })
+      .map(function (k) { return { abbr: k, rows: by[k] }; });
+  }
+
+  function abResults(q, grp) {
+    q = String(q || "").trim().toLowerCase();
+    var out = [];
+    PMP.ABBREVIATIONS.forEach(function (r, i) {
+      if (grp && r.group !== grp) return;
+      var a = r.abbr.toLowerCase(), tier = 0;
+      if (q) {
+        if (a === q) tier = 0;
+        else if (a.indexOf(q) === 0) tier = 1;
+        else if (r.full.toLowerCase().indexOf(q) >= 0) tier = 2;
+        else return;
+      }
+      out.push({ r: r, tier: tier, i: i });
+    });
+    out.sort(function (x, y) { return x.tier - y.tier || x.i - y.i; });
+    return out.map(function (x) { return x.r; });
+  }
+
+  function abRow(r, q) {
+    var full = el("td", null, [el("span", { class: "lib-ab-f" }, [highlight(r.full, q)])]);
+    if (r.note) full.appendChild(el("span", { class: "lib-ab-n", text: r.note }));
+    return el("tr", null, [
+      el("th", { scope: "row" }, [el("abbr", { class: "lib-ab-k", title: r.full }, [highlight(r.abbr, q)])]),
+      full,
+      el("td", { class: "lib-ab-l" }, [r.see ? el("a", {
+        href: PMP.Router.build("library", { tab: "glossary", sel: r.see }),
+        "aria-label": "Definition of " + r.see
+      }, "Definition \u2192") : null])
+    ]);
+  }
+
+  /* One table, so the columns line up from the first group to the last and a
+     screen reader announces one set of headers. Each group is its own tbody
+     with a heading row; a search drops the headings, because a ranked list
+     interleaves groups and a heading over every row would be noise. */
+  function abTable(list, q, grouped) {
+    var table = el("table", { class: "lib-tbl lib-ab" }, [
+      el("caption", { class: "sr-only", text: "Abbreviations used in this app and what they stand for" }),
+      el("thead", null, [el("tr", null, [
+        el("th", { scope: "col", text: "Abbreviation" }),
+        el("th", { scope: "col", text: "Stands for" }),
+        el("th", { scope: "col", class: "lib-ab-l", text: "Glossary" })
+      ])])
+    ]);
+    if (!grouped) {
+      table.appendChild(el("tbody", null, list.map(function (r) { return abRow(r, q); })));
+    } else {
+      AB_GROUPS.forEach(function (g) {
+        var rows = list.filter(function (r) { return r.group === g.id; });
+        if (!rows.length) return;
+        var body = el("tbody", null, [
+          el("tr", { class: "lib-ab-g" }, [el("th", { scope: "rowgroup", colspan: "3", text: abGroupLabel(g.id) })])
+        ]);
+        rows.forEach(function (r) { body.appendChild(abRow(r, q)); });
+        table.appendChild(body);
+      });
+    }
+    return el("div", { class: "lib-tw" }, [table]);
+  }
+
+  function abClashNote(list) {
+    return el("div", { class: "lib-note lib-ab-clash" }, [
+      el("b", { text: "Same letters, different meaning. " }),
+      el("span", { text: "These stand for more than one thing in this app. The formula, field or question around them decides which." }),
+      el("ul", { class: "lib-ab-cl" }, list.map(function (c) {
+        return el("li", null, [
+          el("span", { class: "lib-ab-k", text: c.abbr }),
+          el("span", { text: c.rows.map(function (r) { return r.full; }).join(" \u00B7 ") })
+        ]);
+      }))
+    ]);
+  }
+
+  function renderAbbr(host) {
+    host.appendChild(sectionHead(
+      "Abbreviations",
+      "Every abbreviation used in this app. Where a term has a glossary entry, the row links to it."
+    ));
+
+    var input = el("input", {
+      class: "input", type: "search", id: "lib-ab-q", autocomplete: "off",
+      placeholder: "Search letters or what they stand for", value: abQuery,
+      "aria-describedby": "lib-ab-count"
+    });
+    var count = el("span", { class: "lib-count", id: "lib-ab-count", role: "status" });
+    host.appendChild(el("div", { class: "lib-tools" }, [
+      el("label", { class: "field" }, [el("span", { class: "lbl", text: "Search" }), input]),
+      count
+    ]));
+
+    var chips = el("div", { class: "lib-chips", role: "group", "aria-label": "Filter by group" });
+    [{ id: "" }].concat(AB_GROUPS).forEach(function (g) {
+      chips.appendChild(el("button", {
+        class: "lib-fchip", type: "button",
+        dataset: { g: g.id },
+        "aria-pressed": abGroup === g.id ? "true" : "false",
+        onclick: function () {
+          abGroup = g.id;
+          var cs = chips.querySelectorAll(".lib-fchip");
+          for (var i = 0; i < cs.length; i++) cs[i].setAttribute("aria-pressed", cs[i].dataset.g === g.id ? "true" : "false");
+          paint();
+        }
+      }, g.id ? abGroupLabel(g.id) : "All"));
+    });
+    host.appendChild(chips);
+
+    var clashHost = el("div");
+    var listHost = el("div", { class: "lib-ab-wrap" });
+    host.appendChild(clashHost);
+    host.appendChild(listHost);
+
+    var clashes = abClashes();
+    var clashSet = Object.create(null);
+    clashes.forEach(function (c) { clashSet[c.abbr] = 1; });
+    var total = PMP.ABBREVIATIONS.length;
+
+    /* whole is true only for printing: paper gets every row whatever the
+       screen was filtered to, and the controls are off the page anyway. */
+    function paint(whole) {
+      var q = whole ? "" : abQuery, grp = whole ? "" : abGroup;
+      var list = abResults(q, grp);
+      var searching = !!q.trim();
+      count.textContent = searching
+        ? list.length + " of " + total + ", by match"
+        : (grp ? list.length + " of " + total : total + " abbreviations") + ", by group";
+
+      /* Shown above the list whenever nothing is typed, and kept while the
+         search has landed on any of the letters it warns about. */
+      clashHost.innerHTML = "";
+      if (!searching || list.some(function (r) { return clashSet[r.abbr]; })) {
+        clashHost.appendChild(abClashNote(clashes));
+      }
+
+      listHost.innerHTML = "";
+      if (!list.length) {
+        listHost.appendChild(PMP.UI.empty(
+          "Nothing matched",
+          searching
+            ? "No abbreviation or expansion contains \u201C" + abQuery.trim() + "\u201D."
+            : "No abbreviations in this group.",
+          "info"
+        ));
+        return;
+      }
+      listHost.appendChild(abTable(list, q, !searching));
+    }
+    paint();
+
+    teardown.push(on(input, "input", function () { abQuery = input.value; paint(); }));
+    teardown.push(on(input, "keydown", function (e) {
+      if (e.key === "Escape" && input.value) { input.value = ""; abQuery = ""; paint(); }
+    }));
+    teardown.push(on(window, "beforeprint", function () { if (abQuery || abGroup) paint(true); }));
+    teardown.push(on(window, "afterprint", function () { if (abQuery || abGroup) paint(); }));
+  }
+
   /* ── 10.07.8  ROUTE ─────────────────────────────────────────────────────
      Only the tab is carried in the hash. `q` and `sel` are honoured on entry
      so a link into a term or a process lands correctly, and are then owned by
@@ -27954,13 +28408,22 @@ PMP.Library = (function () {
     reset();
     params = params || {};
     if (params.tab && TABS.some(function (t) { return t.id === params.tab; })) tab = params.tab;
-    if (typeof params.q === "string") query = params.q;
+    if (typeof params.q === "string") {
+      if (tab === "abbr") abQuery = params.q; else query = params.q;
+    }
     if (typeof params.sel === "string" && params.sel) {
       if (tab === "glossary") {
         var hit = glossary().filter(function (e) {
           return e.t.toLowerCase() === params.sel.toLowerCase();
         })[0];
-        if (hit) selTerm = hit.t;
+        if (hit) {
+          selTerm = hit.t;
+          /* A link into a term is a jump to it, the same as a "compare with"
+             button, and for the same reason it widens the list: a search or
+             a chip left over from an earlier visit would otherwise select a
+             term the list is hiding. A link that names its own q keeps it. */
+          if (typeof params.q !== "string") { query = ""; group = ""; }
+        }
       } else if (procById(params.sel)) {
         selProc = params.sel;
       }
@@ -27979,6 +28442,7 @@ PMP.Library = (function () {
     else if (tab === "agile") renderAgile(panel);
     else if (tab === "tables") renderTables(panel);
     else if (tab === "glossary") renderGlossary(panel);
+    else if (tab === "abbr") renderAbbr(panel);
     else renderProcess(panel);
   }
 
@@ -28000,8 +28464,152 @@ PMP.Library = (function () {
                    If any of them stops returning the obvious answer, a change
                    to the scoring has broken something a person would notice.
 
+     And a third, over §05.7.3. Five assertions: every row has its fields
+     and a known group, with no duplicate and in order; every `see` is a
+     glossary headword; letters with two meanings carry a note on each row;
+     every abbreviation the glossary uses has a row linking back to it; and
+     every abbreviation-shaped token in the shipped text is in the table.
+     The last is the one that keeps the table complete, and it names each
+     missing token so the report says exactly what to add.
+
      Run from §12.2 at boot. Cheap enough to be unconditional: the index is
-     built once and the view needs it anyway. */
+     built once and the view needs it anyway, and the scan is one pass over
+     the shipped strings. */
+
+  /* The abbreviation coverage scan, used by check() below for the shipped
+     content and exported for §10.14, which runs it over imported packs.
+
+     A token is a run that starts with a capital, holds letters, digits, &
+     and hyphens, ends with a capital or a digit, is 2 to 8 characters long,
+     and is not glued to a word or a hyphen on either side: PV, T&M, FP-EPA,
+     SM-2, CoQ, Q3. The boundaries are checked by hand rather than with
+     lookbehind, which this file's ES5 target cannot assume. A trailing
+     plural s is allowed and dropped, so "PMs" counts as PM: without that,
+     every plural would be an abbreviation the scan could not see. */
+  var AB_RUN = /[A-Z][A-Za-z0-9&-]*/g;
+  var AB_END = /[A-Z0-9]/, AB_WORD = /\w/, AB_GLUE = /[\w-]/;
+
+  /* Tokens with the shape of an abbreviation that are not one: roman
+     numerals, all-caps emphasis, product names, option letters. Each entry
+     needs a comment saying which. None occurs in the shipped text today, so
+     the list is empty; a real abbreviation belongs in §05.7.3, never here. */
+  var ABBR_IGNORE = [];
+
+  /* Keys whose values are identifiers or metadata rather than text anyone
+     reads. Everything else that is a string, at any depth, is scanned, so a
+     field added to a pack later is covered without anyone remembering to
+     list it here. */
+  var AB_SKIP = {
+    id: 1, ecoTask: 1, tags: 1, prereqs: 1, terms: 1, domain: 1, approach: 1,
+    type: 1, deck: 1, module: 1, option: 1, rank: 1, match: 1, formulaGroup: 1,
+    viewBox: 1, practice: 1
+  };
+
+  function abTokens(s, into) {
+    var m, run, start, k, nx;
+    AB_RUN.lastIndex = 0;
+    while ((m = AB_RUN.exec(s))) {
+      run = m[0]; start = m.index;
+      if (start && AB_GLUE.test(s.charAt(start - 1))) continue;
+      /* Longest prefix of the run that ends on a capital or digit and is not
+         followed by a word character, the way a backtracking regex with a
+         lookahead would find it: "AB-CDe" yields AB. */
+      for (k = run.length; k >= 2; k--) {
+        if (!AB_END.test(run.charAt(k - 1))) continue;
+        nx = s.charAt(start + k);
+        if (!AB_WORD.test(nx)) break;
+        if (nx === "s" && k === run.length - 1 && !AB_WORD.test(s.charAt(start + k + 1))) break;
+      }
+      if (k >= 2 && k <= 8) into[run.slice(0, k)] = 1;
+    }
+  }
+
+  function abWalk(o, into) {
+    if (typeof o === "string") { abTokens(o, into); return; }
+    if (!o || typeof o !== "object") return;
+    if (Array.isArray(o)) { for (var i = 0; i < o.length; i++) abWalk(o[i], into); return; }
+    for (var key in o) {
+      if (Object.prototype.hasOwnProperty.call(o, key) && !AB_SKIP[key]) abWalk(o[key], into);
+    }
+  }
+
+  /* Every abbreviation-shaped token in the given roots that is neither in
+     §05.7.3 nor ignored, sorted, each named once. */
+  function abbrMissing(roots) {
+    var found = Object.create(null), known = Object.create(null);
+    PMP.ABBREVIATIONS.forEach(function (r) { known[r.abbr] = 1; });
+    ABBR_IGNORE.forEach(function (t) { known[t] = 1; });
+    (roots || []).forEach(function (r) { abWalk(r, found); });
+    return Object.keys(found).filter(function (t) { return !known[t]; }).sort();
+  }
+
+  /* The shipped, learner-visible text. Questions stop at the core count,
+     because imported packs have joined PMP.QUESTIONS by the time the boot
+     check runs and are not this build's writing. */
+  function shippedRoots() {
+    return [
+      PMP.QUESTIONS.slice(0, PMP.Packs.core), PMP.CASES, PMP.SCENARIOS,
+      PMP.FLASHCARDS, PMP.DECKS, PMP.LESSONS, PMP.MODULES, PMP.ECO_TASKS,
+      PMP.GLOSSARY, PMP.FORMULAS, (PMP.FormulaLab && PMP.FormulaLab.calcs) || [],
+      PMP.REFERENCE
+    ];
+  }
+
+  /* Glossary text that should have a row: an `a` that is an abbreviation
+     rather than an alias, or a headword that is itself one (PERT, RACI). The
+     pattern alone misses mixed forms that end in a lower-case letter. */
+  var AB_SHAPE = /^[A-Z][A-Za-z0-9&-]*[A-Z0-9]$/;
+  var AB_MIXED = ["CoQ", "DoD", "SAFe", "LeSS", "SM-2"];
+  function looksAbbr(x) { return AB_SHAPE.test(x) || AB_MIXED.indexOf(x) >= 0; }
+
+  /* The five assertions over §05.7.3, appended to check()'s list. */
+  function checkAbbreviations(bad) {
+    var AB = PMP.ABBREVIATIONS;
+    var gloss = Object.create(null), by = Object.create(null), pairs = Object.create(null);
+    PMP.GLOSSARY.forEach(function (e) { gloss[e.t] = 1; });
+
+    /* 1. Shape, and 2. links resolve. */
+    AB.forEach(function (r, i) {
+      if (!r || !r.abbr || !r.full || !r.group) {
+        bad.push("Abbreviation row " + i + " is missing its abbr, full or group.");
+        return;
+      }
+      if (!abGroupLabel(r.group)) bad.push("Abbreviation " + r.abbr + " (" + r.full + ") sits in an unknown group " + r.group + ".");
+      var key = r.abbr + "\u0000" + r.full;
+      if (pairs[key]) bad.push("Duplicate abbreviation row " + r.abbr + " = " + r.full + ".");
+      pairs[key] = 1;
+      var prev = i ? AB[i - 1] : null;
+      if (prev && prev.abbr && prev.abbr.toLowerCase() > r.abbr.toLowerCase()) {
+        bad.push("Abbreviations out of order: " + prev.abbr + " comes before " + r.abbr + ".");
+      }
+      if (r.see && !gloss[r.see]) bad.push("Abbreviation " + r.abbr + " links to \u201C" + r.see + "\u201D, which is not a glossary headword.");
+      (by[r.abbr] || (by[r.abbr] = [])).push(r);
+    });
+
+    /* 3. Letters with more than one meaning carry a note on every row. */
+    Object.keys(by).forEach(function (k) {
+      if (by[k].length < 2) return;
+      by[k].forEach(function (r) {
+        if (!r.note) bad.push("Abbreviation " + k + " has " + by[k].length + " meanings and the row for " + r.full + " has no note saying so.");
+      });
+    });
+
+    /* 4. Glossary agreement, so the two tables cannot drift apart. */
+    PMP.GLOSSARY.forEach(function (e) {
+      [e.a, e.t].forEach(function (x) {
+        if (!x || !looksAbbr(x)) return;
+        var ok = (by[x] || []).some(function (r) { return r.see === e.t; });
+        if (!ok) bad.push("Glossary term " + e.t + " is abbreviated " + x + ", and no abbreviation row for " + x + " links to it.");
+      });
+    });
+
+    /* 5. Coverage. This is what "every abbreviation" means. */
+    var missing = abbrMissing(shippedRoots());
+    if (missing.length) {
+      bad.push("Abbreviations used in the shipped content but missing from \u00A705.7.3: " + missing.join(", ") + ".");
+    }
+  }
+
   function check() {
     var bad = [];
     function want(cond, msg) { if (!cond) bad.push(msg); }
@@ -28045,6 +28653,8 @@ PMP.Library = (function () {
       want(top === probe[1], "Matcher: \u201C" + probe[0] + "\u201D returned " + top + " rather than " + probe[1] + ".");
     });
 
+    checkAbbreviations(bad);
+
     return { pass: bad.length === 0, problems: bad };
   }
 
@@ -28054,6 +28664,8 @@ PMP.Library = (function () {
        be exercised from a console against the pack that is actually loaded. */
     check: check,
     search: function (q, limit) { return Matcher.search(glossIndex(), q, limit); },
+    /* §10.14 runs the coverage scan over imported packs, as information. */
+    abbrMissing: abbrMissing,
     counts: function () {
       return {
         processes: R.processes.length,
@@ -28061,7 +28673,8 @@ PMP.Library = (function () {
         domains: R.domains.length,
         agile: R.agile.reduce(function (n, g) { return n + g.items.length; }, 0),
         tables: R.tables.length,
-        glossary: PMP.GLOSSARY.length
+        glossary: PMP.GLOSSARY.length,
+        abbreviations: PMP.ABBREVIATIONS.length
       };
     }
   };
@@ -29590,6 +30203,21 @@ PMP.Audit = (function () {
        pool, and which pool that is has to be settled before any of them can
        be read. */
     host.appendChild(sourcesCard());
+
+    /* ── Abbreviations in packs beyond the core ── §10.07.9's coverage scan,
+       as information rather than a rule. The boot check owns the shipped
+       text; a pack someone imported is their writing, and an abbreviation
+       it uses that the list lacks is worth knowing, not a broken build. */
+    var extra = PMP.QUESTIONS.slice(PMP.Packs.core);
+    if (extra.length) {
+      var abMiss = PMP.Library.abbrMissing([extra]);
+      host.appendChild(el("div", { class: "card" }, [
+        el("span", { class: "eyebrow", text: "Abbreviations" }),
+        el("p", { text: abMiss.length
+          ? PMP.fmt.plural(abMiss.length, "abbreviation") + " in imported or extended packs " + (abMiss.length === 1 ? "is" : "are") + " not in the list: " + abMiss.join(", ") + "."
+          : "Every abbreviation in imported or extended packs is in the list." })
+      ]));
+    }
 
     host.appendChild(el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Rules" }),
