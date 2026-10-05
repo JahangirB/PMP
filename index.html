@@ -15481,6 +15481,979 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
+    id: "B1", module: "business", order: 24, ecoTask: "business-1", minutes: 30,
+    prereqs: ["P1"],
+    title: "Governance",
+    objectives: [
+      "Explain how governance sets decision rights, thresholds and escalation paths.",
+      "Act within delegated authority and tolerance, and escalate beyond it.",
+      "Describe the main types of project management office.",
+      "Work effectively when several governance bodies overlap.",
+      "Fit governance to adaptive delivery without smothering it."
+    ],
+    examWeight: "Governance items describe a decision near a threshold, a board that has stopped meeting, or two bodies giving conflicting instructions. The marks go to answers that respect decision rights, escalate cleanly when tolerance is exceeded, and fix governance gaps rather than working round them.",
+    sections: [
+      { id: "s1", heading: "What governance is for",
+        body: "Governance is the framework of authority, accountability and oversight a project runs under. It answers who decides what, how decisions are made and how the project is held to account.\n\n"
+          + "Good governance protects the organisation's investment. It makes sure projects stay aligned with strategy, spend money properly and surface problems to the people who can act.\n\n"
+          + "It also protects the project manager. Clear decision rights mean you know what you may decide and what you must refer.\n\n"
+          + "Governance is set early, usually in the charter and management plan. It names the sponsor, the steering body and any boards or authorities with a say.\n\n"
+          + "Governance should be proportionate. A small internal project needs a light touch; a large public programme needs more. Too little leaves risks unseen, and too much slows every decision." },
+      { id: "s2", heading: "Decision rights and tolerance",
+        body: "Decision rights say who may decide what. A project manager might approve changes up to a certain cost. A steering group decides anything larger or anything that moves a key date.\n\n"
+          + "Tolerances set the allowed variation from plan before escalation is needed. A project might have a tolerance of two weeks on schedule and a percentage on cost.\n\n"
+          + "Within tolerance, the project manager manages. When a forecast breaches tolerance, the project manager escalates promptly with the facts and options.\n\n"
+          + "Do not split decisions to stay under a threshold. Breaking one large change into several small ones to avoid board approval defeats the purpose of governance and erodes trust." },
+      { id: "s3", heading: "Escalation paths",
+        body: "An escalation path says where an issue goes when it is beyond the current level's authority. Typical paths run from the team to the project manager, then to the sponsor and steering body.\n\n"
+          + "Escalate at the right time. Too early, and senior people are asked to solve problems you could have handled. Too late, and their options have shrunk.\n\n"
+          + "Escalate well. Bring the facts, the impact, what has been tried and a recommendation. A clear request gets a clear decision.\n\n"
+          + "Respect the path. Going directly to a senior executive past the agreed route undermines the sponsor and the governance structure." },
+      { id: "s4", heading: "The project management office",
+        body: "Many organisations have a project management office. Its role varies.\n\n"
+          + "A supportive office provides templates, training and lessons from past projects. It has little control over how projects are run.\n\n"
+          + "A controlling office requires compliance with standards, methods and reporting. It reviews projects against them.\n\n"
+          + "A directive office manages projects directly, often supplying the project managers.\n\n"
+          + "Understand which type you work with. It shapes what you must follow, what you may tailor and where you can get help." },
+      { id: "s5", heading: "When governance breaks down",
+        body: "Governance can fail quietly. A steering group stops meeting. Members send delegates who cannot decide. Two bodies issue conflicting instructions.\n\n"
+          + "Do not simply work round the gap by making decisions yourself. That may solve today's problem but leaves decisions without proper authority.\n\n"
+          + "Raise the problem with the sponsor. Propose a fix: a smaller decision group, delegated authority for certain decisions, or a clear rule for which body decides what.\n\n"
+          + "Where two bodies overlap, agree in writing how they relate. A simple rule, such as technical matters to one board and spending to the other, removes most conflict." },
+      { id: "s6", heading: "Governance for adaptive delivery",
+        body: "Traditional governance reviews detailed plans and approves changes one by one. Adaptive delivery changes scope continuously, which can collide with that model.\n\n"
+          + "Adaptive governance sets boundaries rather than approving each change. It funds a team or a product for a period, agrees outcomes and guardrails, and reviews results at regular intervals.\n\n"
+          + "Within the boundaries, the product owner and team decide. Outside them, such as a major change of direction or budget, governance decides.\n\n"
+          + "Hybrid programmes need both: formal approval for fixed elements and boundary-based governance for iterative ones. Agree which applies where." }
+    ],
+    lenses: {
+      predictive: "Governance approves baselines, sets tolerances and reviews progress at stage gates. Changes beyond the project manager's authority go to the change board or steering group.",
+      agile: "Governance funds teams or products and sets boundaries and outcomes. The product owner decides within them, and governance reviews delivered value at regular intervals.",
+      hybrid: "Fixed elements are governed through approvals and gates, iterative elements through boundaries. The project manager agrees which decisions sit where so neither side stalls."
+    },
+    worked: {
+      stem: "Your county council's school building programme has a steering group that has not met for three months because members keep cancelling. Two decisions above your authority are waiting, and one affects a contractor's start date next month. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Raise the governance gap with the sponsor, set out the two pending decisions, and propose a way to get them decided in time." },
+        { id: "b", text: "Make the two decisions yourself, since waiting will delay the contractor." },
+        { id: "c", text: "Email all steering group members asking them to approve the decisions by reply." },
+        { id: "d", text: "Delay the contractor's start date until the steering group meets again." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The sponsor owns the governance arrangements. Raising the gap with the pending decisions and a proposal gets them decided properly, and fixes the structure for the future." },
+        { option: "c", rank: "acceptable", why: "Seeking approval by email may get the decisions made. It bypasses the sponsor and may not meet the group's own rules for decisions." },
+        { option: "d", rank: "premature", why: "Delaying the contractor may become necessary, but it accepts the cost of the gap before trying to close it." },
+        { option: "b", rank: "wrong", why: "The decisions are above your authority. Making them anyway leaves them without proper approval and exposes you and the project." }
+      ],
+      mindset: "When governance stalls, fix the governance rather than deciding beyond your authority."
+    },
+    traps: [
+      "Splitting a change to keep each part under an approval threshold.",
+      "Making decisions above your authority because the board is slow.",
+      "Escalating past the sponsor directly to a senior executive.",
+      "Waiting until a tolerance breach is certain before warning anyone.",
+      "Applying item-by-item approval to adaptive work that changes daily."
+    ],
+    checks: [
+      {
+        id: "B1-c1", type: "single",
+        stem: "Your approval limit for changes is a set amount. A stakeholder suggests splitting a larger change into three smaller requests so each falls within your limit. What should you do?",
+        options: [
+          { id: "a", text: "Treat it as one change and send it to the body with authority to approve it.", correct: true,
+            rationale: "Thresholds exist so larger decisions get the right oversight. Splitting to avoid them defeats that purpose." },
+          { id: "b", text: "Approve the three requests, since each is within your limit.",
+            rationale: "This uses the letter of the rule to defeat its purpose and would erode trust once noticed." },
+          { id: "c", text: "Approve two now and send the third to the board.",
+            rationale: "It is still one change. Partial approval avoids the oversight the whole change needs." },
+          { id: "d", text: "Ask the stakeholder to fund the change from their own budget.",
+            rationale: "A different budget does not remove the need for the change to be governed properly." }
+        ],
+        explanation: "Decision thresholds route larger changes to people with the authority and context to decide. Splitting a change to slip under a threshold undermines governance. The change should be assessed as a whole and approved at the right level.",
+        mindset: "Respect the purpose of a threshold, not just its letter."
+      },
+      {
+        id: "B1-c2", type: "single",
+        stem: "An agile product team is required to get board approval for every backlog change. Delivery has slowed to a crawl. What governance change would help most?",
+        options: [
+          { id: "a", text: "Agree boundaries within which the product owner decides, with board review of outcomes at set intervals.", correct: true,
+            rationale: "Boundary-based governance keeps oversight of what matters while letting the team adapt quickly within agreed limits." },
+          { id: "b", text: "Remove board oversight entirely so the team can move quickly.",
+            rationale: "Some oversight is still needed for major direction and funding. Removing it entirely trades one problem for another." },
+          { id: "c", text: "Batch backlog changes into a monthly approval pack.",
+            rationale: "Batching reduces meetings but still delays every change by weeks." },
+          { id: "d", text: "Freeze the backlog until the end of the release.",
+            rationale: "Freezing the backlog removes the adaptability that is the point of agile delivery." }
+        ],
+        explanation: "Item-by-item approval suits fixed scope, not adaptive delivery. Setting boundaries, outcomes and review points keeps governance meaningful while letting the product owner prioritise day to day.",
+        mindset: "Govern adaptive work by boundaries and outcomes, not by approving every change."
+      }
+    ],
+    terms: ["Sponsor", "Project management office", "Phase gate", "Change control board", "Escalate", "Risk threshold"],
+    recap: [
+      "Governance sets who decides what, and how the project is held to account.",
+      "Manage within tolerance; escalate promptly when it is breached.",
+      "Escalate along the agreed path, with facts and options.",
+      "Know which type of PMO you work with.",
+      "Fix governance gaps with the sponsor rather than working round them."
+    ],
+    mindset: "Decide within your authority, escalate beyond it, and keep governance working rather than bypassing it.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "B2", module: "business", order: 25, ecoTask: "business-3", minutes: 30,
+    prereqs: ["B1", "P2"],
+    title: "Change control",
+    objectives: [
+      "Route a change through integrated change control from request to update.",
+      "Assess a change's impact on scope, schedule, cost, quality and risk before deciding.",
+      "Explain the role of the change control board.",
+      "Handle emergency changes without abandoning control.",
+      "Manage change through the backlog in adaptive work."
+    ],
+    examWeight: "Change items describe someone who wants to skip the process, work started before approval, or an agile team questioned about control. The marks go to answers that assess impact first, route the decision to the right authority and keep records aligned.",
+    sections: [
+      { id: "s1", heading: "Why change control exists",
+        body: "Projects change. Requirements evolve, risks occur and opportunities appear. Change itself is not a problem.\n\n"
+          + "Uncontrolled change is. When changes are made without assessment or approval, baselines stop meaning anything, costs rise without anyone deciding, and work conflicts.\n\n"
+          + "Integrated change control makes sure every change is considered against the whole project. A change to scope may affect schedule, cost, quality, risk and resources at once.\n\n"
+          + "The aim is not to block change. It is to make each change a deliberate decision by the right person, with full knowledge of its effects." },
+      { id: "s2", heading: "The change process",
+        body: "A typical process has clear steps. A change request is raised and recorded in a change log. Its impact is assessed across the project. The appropriate authority decides.\n\n"
+          + "If approved, the plan and baselines are updated and the change is implemented. If rejected, the requester is told why. Either way, the decision is recorded.\n\n"
+          + "Work on a change should not begin before approval. Starting early commits money and effort to something that may be rejected.\n\n"
+          + "Communicate decisions to everyone affected. A change approved but not communicated causes as much confusion as one never made.\n\n"
+          + "Keep the documents aligned. An approved change updates every plan, register and specification it touches. Configuration management tracks which version of each item is current, so nobody builds to an old drawing." },
+      { id: "s3", heading: "Assessing impact",
+        body: "Before deciding, understand what the change would do. Look at scope, schedule, cost, quality, risk and resources.\n\n"
+          + "A change that seems small may have large knock-on effects. Adding a field to a form may require new testing, data migration and training.\n\n"
+          + "Also consider the cost of not changing. Rejecting a change may leave the result less useful or expose the organisation to risk.\n\n"
+          + "Present the assessment with options. The decision-maker may approve, reject, defer or approve a modified version.\n\n"
+          + "Track the change after approval too. If its real cost or effort grows well beyond the assessment, bring it back for a fresh decision rather than letting it run on." },
+      { id: "s4", heading: "The change control board",
+        body: "A change control board is a group with authority to approve or reject changes. Its members usually include the sponsor or their delegate, key stakeholders and technical experts.\n\n"
+          + "Not every change needs the board. Governance often delegates smaller changes to the project manager, within set limits.\n\n"
+          + "The board should decide on evidence. The project manager brings the impact assessment and a recommendation.\n\n"
+          + "Once the board decides, the project manager implements the decision and updates records, even if they personally disagreed with it." },
+      { id: "s5", heading: "Emergency changes",
+        body: "Sometimes a change cannot wait. A live system is failing, a safety risk has appeared or a legal deadline looms.\n\n"
+          + "Good change processes include an emergency route. A smaller group, or a named individual, can approve urgent changes quickly.\n\n"
+          + "Use the emergency route, not no route. Record what was changed and why, and take the change through the full process retrospectively.\n\n"
+          + "If emergency changes become routine, the normal process is too slow or the planning is weak. Fix the cause.\n\n"
+          + "Agree in advance what counts as an emergency. Without a definition, every urgent request starts to look like one." },
+      { id: "s6", heading: "Change in adaptive work",
+        body: "Adaptive delivery expects change. New ideas go into the product backlog and are ranked by the product owner against everything else. Most change needs no formal request.\n\n"
+          + "Control still exists. It sits in the backlog's ranking, the sprint boundary and the product owner's authority. Within a sprint, the team protects its goal from mid-sprint changes.\n\n"
+          + "Larger changes may still need governance, such as a change to the overall budget, a fixed release date or a contract.\n\n"
+          + "In hybrid programmes, agree which changes the product owner can absorb and which must go to formal control. Write the rule down." }
+    ],
+    lenses: {
+      predictive: "Every change is requested, logged, assessed and decided by the right authority before work begins. Baselines and plans are updated after approval.",
+      agile: "Change enters the backlog and is ranked by the product owner. The sprint goal is protected, and changes to budget, dates or contracts go to governance.",
+      hybrid: "Fixed elements use formal change control while iterative elements use the backlog. The project manager agrees and documents which route applies to which kind of change."
+    },
+    worked: {
+      stem: "On a new sports centre, the client's facilities manager asks the contractor to add solar panels to the roof. The contractor's site team has already started ordering fixings because the request seemed sensible. No change request has been raised. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Pause the ordering, raise a change request, and assess the impact on structure, cost, schedule and risk before a decision is made." },
+        { id: "b", text: "Let the ordering continue, since the client wants the panels." },
+        { id: "c", text: "Reject the request outright because it was not in the original scope." },
+        { id: "d", text: "Add the panels to the scope baseline now so the documents match the work." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Work has started without approval. Pausing it and routing the request through assessment makes the change a deliberate decision before more money is committed." },
+        { option: "c", rank: "acceptable", why: "Refusing to proceed without approval protects the baseline. Rejecting outright skips the assessment that might show the change is worthwhile." },
+        { option: "d", rank: "premature", why: "Updating the baseline is the last step of an approved change. Doing it first legitimises an unassessed change." },
+        { option: "b", rank: "wrong", why: "Continuing commits money to an unapproved change whose structural and cost impact nobody has assessed." }
+      ],
+      mindset: "Assess and decide a change before committing work to it."
+    },
+    traps: [
+      "Starting work on a change before it is approved.",
+      "Treating change control as a way to block all change.",
+      "Skipping the process entirely in an emergency.",
+      "Updating baselines before a change is approved.",
+      "Assuming agile delivery has no change control at all."
+    ],
+    checks: [
+      {
+        id: "B2-c1", type: "single",
+        stem: "At two in the morning a live booking system fails. The on-call engineer fixes it with a configuration change that bypasses the change board. What should happen next?",
+        options: [
+          { id: "a", text: "Record the change and take it through the change process retrospectively, and review whether an emergency route is needed.", correct: true,
+            rationale: "The fix was justified. Recording it and reviewing it afterwards restores control and shows whether the process needs an emergency path." },
+          { id: "b", text: "Reverse the change because it bypassed the board.",
+            rationale: "Reversing a working fix would bring the failure back. The issue is recording and review, not undoing." },
+          { id: "c", text: "Discipline the engineer for bypassing the process.",
+            rationale: "The engineer acted reasonably in an emergency. Blame discourages people from fixing urgent problems." },
+          { id: "d", text: "Take no further action, since the system now works.",
+            rationale: "Unrecorded changes leave configuration records wrong and repeat the risk next time." }
+        ],
+        explanation: "Emergency changes sometimes have to be made before formal approval. They should still be recorded and reviewed afterwards, and a recurring need for them shows the process needs a faster route.",
+        mindset: "In an emergency, act, then bring the change back under control."
+      },
+      {
+        id: "B2-c2", type: "single",
+        stem: "A finance director asks why an agile team needs change control when the product owner reorders the backlog freely. What is the best explanation?",
+        options: [
+          { id: "a", text: "Backlog changes are controlled by the product owner's ranking, while changes to budget, dates or contracts still go to governance.", correct: true,
+            rationale: "Control in agile work sits at different levels. Day-to-day scope is managed in the backlog; wider commitments still need governance." },
+          { id: "b", text: "It does not need change control at all.",
+            rationale: "Changes to funding, release dates and contracts still affect the organisation and need proper approval." },
+          { id: "c", text: "Every backlog change should go to a change board.",
+            rationale: "This would slow adaptive delivery to a crawl and defeat its purpose." },
+          { id: "d", text: "The team controls change by refusing new work.",
+            rationale: "Agile teams welcome change through the backlog. Refusing it is not control." }
+        ],
+        explanation: "Agile delivery does not remove change control; it moves much of it into the backlog. The product owner manages scope by ranking, while changes that affect wider commitments still go through governance.",
+        mindset: "Put each kind of change under the control that suits it."
+      }
+    ],
+    terms: ["Integrated change control", "Change request", "Change log", "Change control board", "Change management plan", "Configuration management", "Perform Integrated Change Control"],
+    recap: [
+      "Change is normal; uncontrolled change is the problem.",
+      "Request, log, assess, decide, update and communicate.",
+      "Assess impact across the whole project before deciding.",
+      "Use an emergency route, then record and review afterwards.",
+      "In agile work, the backlog absorbs scope change; governance handles wider commitments."
+    ],
+    mindset: "Make every change a deliberate decision by the right person, with its full effects understood.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "B3", module: "business", order: 26, ecoTask: "business-5", minutes: 40,
+    prereqs: ["P4", "B1"],
+    title: "Risk",
+    objectives: [
+      "Identify risks, both threats and opportunities, and record them usefully.",
+      "Analyse risks qualitatively and, where useful, quantitatively.",
+      "Choose a response strategy that fits the risk and the appetite.",
+      "Size reserves from risk analysis.",
+      "Keep risk management alive throughout the project."
+    ],
+    examWeight: "Risk items describe a register gone stale, a response that is wrong for the risk, or a risk that has turned into an issue. The marks go to answers that keep risks current and owned, choose responses that fit, and act on triggers rather than waiting.",
+    sections: [
+      { id: "s1", heading: "Identifying risks",
+        body: "A risk is an uncertain event that, if it occurs, would affect a project objective. Risks can be threats, with negative effects, or opportunities, with positive ones.\n\n"
+          + "Identify risks with the people who know the work: the team, suppliers, experts and stakeholders. Use brainstorming, checklists, past lessons and assumption reviews.\n\n"
+          + "Write risks clearly and specifically. A useful statement names the cause, the uncertain event and the effect on an objective. Vague entries such as supplier issues cannot be analysed or owned.\n\n"
+          + "Record risks in a risk register with an owner for each. The owner watches the risk and leads the response." },
+      { id: "s2", heading: "Analysing risks", formulaGroup: "risk",
+        body: "Qualitative analysis rates each risk's probability and impact, often on a simple scale. A probability and impact matrix then ranks risks, so attention goes to the most significant.\n\n"
+          + "Quantitative analysis puts numbers on the effect. Expected monetary value multiplies probability by impact. Decision trees compare options with uncertain outcomes. Simulation shows the range of likely results for the whole project.\n\n"
+          + "Use quantitative analysis where it adds value, such as for large risks or when sizing reserves. Not every risk needs it.\n\n"
+          + "Be wary of registers where every risk has the same score. That usually means nobody is really assessing them." },
+      { id: "s3", heading: "Responding to threats",
+        body: "Several strategies respond to threats. Avoid removes the threat, for example by changing the plan. Transfer shifts the impact to another party, such as through insurance or a contract. Mitigate reduces probability or impact.\n\n"
+          + "Accept acknowledges the threat without action now. Active acceptance sets aside a contingency reserve. Passive acceptance simply monitors.\n\n"
+          + "Escalate passes a threat outside the project's authority to the level that can manage it.\n\n"
+          + "Transfer never removes all of a risk. A supplier may carry the cost, but the project still suffers the delay. Check what remains after any response." },
+      { id: "s4", heading: "Responding to opportunities",
+        body: "Opportunities deserve the same attention as threats. Exploit makes sure the opportunity happens. Enhance increases its probability or benefit. Share involves a partner better placed to capture it.\n\n"
+          + "Accept takes the benefit if it comes, without active effort. Escalate passes it to a level that can act.\n\n"
+          + "Projects often overlook opportunities, focusing only on what might go wrong. A supplier offering early delivery or a partner offering to fund an interface may add real value.\n\n"
+          + "Assess opportunities honestly. Some come with hidden costs or new threats.\n\n"
+          + "Record opportunities in the same register as threats, with owners and planned responses. What is not recorded is rarely pursued." },
+      { id: "s5", heading: "Reserves and residual risk",
+        body: "Contingency reserves fund responses to identified risks. They can be sized from risk analysis, for example by adding the expected values of key risks.\n\n"
+          + "Management reserves cover unknown risks and sit outside the project's baseline.\n\n"
+          + "After a response, some risk usually remains. This residual risk should be recorded and watched. A response can also create new risks, called secondary risks, which need their own assessment.\n\n"
+          + "Risk appetite and thresholds set how much risk the organisation will accept. Responses should bring risk within those limits.\n\n"
+          + "Draw on contingency only for the risks it was sized for. Using it to pay for new scope leaves the project unprotected when a planned-for risk occurs." },
+      { id: "s6", heading: "Keeping risk management alive",
+        body: "A risk register reviewed once and filed is worse than useless. It gives false comfort.\n\n"
+          + "Review risks regularly. Retire those that have passed, add new ones and update ratings as things change. Watch triggers, the early signs that a risk is about to occur.\n\n"
+          + "When a risk occurs, it becomes an issue. Implement the planned response, record what happened and check whether related risks have changed.\n\n"
+          + "In adaptive work, short iterations reduce some risks naturally, because problems surface quickly. Risk is often discussed in planning and retrospectives and shown on the board." }
+    ],
+    lenses: {
+      predictive: "Risks are identified and analysed during planning, recorded in a register, and reviewed regularly. Contingency reserves are sized from analysis and released under control.",
+      agile: "Frequent delivery and feedback reduce risk early. Risks are discussed in planning and retrospectives, and risk-reducing work is ranked in the backlog alongside features.",
+      hybrid: "Fixed elements carry formal registers and reserves while iterative parts manage risk through short cycles. The project manager watches risks that cross between them."
+    },
+    worked: {
+      stem: "Your offshore wind maintenance project has a risk that a specialist vessel may be unavailable during the summer window. The trigger, a booking clash notice from the operator, has just arrived. The risk owner is on leave. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Confirm the clash with the operator and put the planned response into action, covering for the absent owner." },
+        { id: "b", text: "Update the risk's probability rating in the register to high." },
+        { id: "c", text: "Escalate the risk to the sponsor for a decision on the summer programme." },
+        { id: "d", text: "Wait for the risk owner to return next week to decide the response." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The trigger has fired, so the planned response should start now. Confirming the facts and acting on the plan protects the summer window." },
+        { option: "b", rank: "acceptable", why: "Updating the register is part of good practice. On its own it records the change without doing anything about it." },
+        { option: "c", rank: "premature", why: "The sponsor may need to decide if the response fails. Escalating before using the planned response skips the preparation the risk process exists for." },
+        { option: "d", rank: "wrong", why: "Triggers exist to prompt timely action. Waiting a week may lose the vessel and the window." }
+      ],
+      mindset: "When a trigger fires, act on the planned response rather than just recording it."
+    },
+    traps: [
+      "Writing vague risk entries that cannot be owned or analysed.",
+      "Treating transfer as removing all of a risk.",
+      "Ignoring opportunities and managing only threats.",
+      "Filing the risk register and never reviewing it.",
+      "Recording a fired trigger without starting the response."
+    ],
+    checks: [
+      {
+        id: "B3-c1", type: "single",
+        stem: "A threat has a 25 per cent chance of causing a 40,000 loss. A second threat has an 8 per cent chance of causing a 150,000 loss. What contingency would cover both on an expected value basis?",
+        options: [
+          { id: "a", text: "22,000", correct: true,
+            rationale: "Expected values are 10,000 and 12,000, which sum to 22,000." },
+          { id: "b", text: "190,000",
+            rationale: "This adds the full impacts. Expected value weights each impact by its probability." },
+          { id: "c", text: "31,350",
+            rationale: "This applies the average probability to the combined impact. Each risk needs its own probability times impact." },
+          { id: "d", text: "12,000",
+            rationale: "This covers only the second threat. Both risks need to be included." }
+        ],
+        explanation: "Expected monetary value multiplies each risk's probability by its impact: 0.25 times 40,000 is 10,000, and 0.08 times 150,000 is 12,000. Adding them gives 22,000 as a contingency based on expected value.",
+        mindset: "Weight every impact by how likely it is."
+      },
+      {
+        id: "B3-c2", type: "single",
+        stem: "You transfer the risk of data loss to a cloud backup provider under contract. A team member points out the provider itself could fail. What does this describe?",
+        options: [
+          { id: "a", text: "A secondary risk created by the response, which needs its own assessment.", correct: true,
+            rationale: "Transferring the risk introduced a new dependency. That new risk arises from the response itself." },
+          { id: "b", text: "A residual risk that is fully covered by the contract.",
+            rationale: "Contracts may compensate, but the project would still lose data. The risk is not fully covered." },
+          { id: "c", text: "An issue that has already occurred.",
+            rationale: "The provider has not failed. It is still an uncertain event, so it is a risk." },
+          { id: "d", text: "An opportunity to renegotiate the contract.",
+            rationale: "Renegotiation might help, but the situation describes a new risk created by the transfer." }
+        ],
+        explanation: "Risk responses can create new risks. Here, relying on a provider introduces the possibility of provider failure. Secondary risks are added to the register and assessed in their own right.",
+        mindset: "Check what new risks each response creates."
+      }
+    ],
+    terms: ["Risk", "Risk register", "Threat", "Opportunity", "Probability and impact matrix", "Expected monetary value", "Avoid", "Transfer", "Mitigate", "Exploit", "Enhance", "Share", "Residual risk", "Secondary risk", "Triggers", "Risk appetite"],
+    recap: [
+      "Write risks with cause, event and effect, and give each an owner.",
+      "Analyse qualitatively first, and quantitatively where it adds value.",
+      "Avoid, transfer, mitigate, accept or escalate threats; exploit, enhance, share, accept or escalate opportunities.",
+      "Size contingency from analysis and watch residual and secondary risks.",
+      "Review risks regularly and act when triggers fire."
+    ],
+    mindset: "Treat risk as a live part of the project: owned, current and acted on when it moves.",
+    practice: { count: 10, decks: ["risk"] }
+  },
+  {
+    id: "B4", module: "business", order: 27, ecoTask: "business-4", minutes: 30,
+    prereqs: ["B3"],
+    title: "Impediments and issues",
+    objectives: [
+      "Tell an issue from a risk and an impediment from a minor annoyance.",
+      "Keep an issue log that drives action rather than recording history.",
+      "Prioritise impediments by their effect on delivery.",
+      "Clear blockers at the lowest level able to remove them.",
+      "Spot bottlenecks in the flow of work."
+    ],
+    examWeight: "Impediment items describe a team blocked by something outside its control, a log full of stale entries, or a blocker that keeps returning. The marks go to answers that act quickly on what is stopping work, at the right level, and fix causes rather than symptoms.",
+    sections: [
+      { id: "s1", heading: "Issues, risks and impediments",
+        body: "A risk is something that might happen. An issue is something that has happened and needs action. When a risk occurs, it becomes an issue.\n\n"
+          + "An impediment is anything that slows or stops the team's work. The term is used most in agile settings, but the idea applies everywhere. A missing test environment, an unanswered question or a slow approval can all be impediments.\n\n"
+          + "Keep the categories clear. Recording a current blocker as a risk delays action, because risks are watched while issues are worked.\n\n"
+          + "Not every complaint is an impediment. A minor irritation that does not slow delivery may be worth noting, but it should not crowd out real blockers.\n\n"
+          + "Ask one question of every item: is this stopping or slowing work now? If yes, it needs action now." },
+      { id: "s2", heading: "An issue log that drives action",
+        body: "An issue log records each issue, its owner, its priority, the action agreed and a target date. Its purpose is to drive resolution, not to keep a history.\n\n"
+          + "Review it often. Items open for weeks with no update are a warning sign. Either nobody owns them, or nobody believes they can be fixed.\n\n"
+          + "Give every issue a named owner who can act on it, not just a team or department. Agree the next step and when it will happen.\n\n"
+          + "Close issues when they are resolved, and record how. A log full of resolved but open items hides the ones that still matter.\n\n"
+          + "Keep the log visible. Teams that see open blockers every day are quicker to raise new ones and to chase old ones." },
+      { id: "s3", heading: "Prioritising blockers",
+        body: "When several impediments exist, deal first with those stopping the most valuable work. A blocker on a critical path item or a sprint goal matters more than one on a low-priority task.\n\n"
+          + "Look for blockers that affect several items at once. A single external review holding up four stories is worth more attention than four separate minor delays.\n\n"
+          + "Consider duration too. A blocker that will last weeks needs a different response from one that will clear tomorrow.\n\n"
+          + "Separate what is blocked now from what might be blocked later. Possible future blockers are risks and belong in the risk register.\n\n"
+          + "Share the priorities with the team, so everyone knows which blockers are being worked first and why." },
+      { id: "s4", heading: "Clearing blockers at the right level",
+        body: "Many impediments can be cleared by the team itself. Encourage that first. A team that solves its own blockers moves faster and grows more capable.\n\n"
+          + "When the team cannot clear a blocker, the scrum master or project manager takes it on. That usually means contacting another team, department or supplier.\n\n"
+          + "When the project manager cannot clear it either, escalate to someone who can. Bring the facts, the effect on delivery and what has been tried.\n\n"
+          + "Act quickly. An impediment left for a week costs a week of the team's time. The servant leader's job is to remove blockers fast.\n\n"
+          + "Keep the team informed of progress. A blocker being worked on visibly is less demoralising than one that seems forgotten." },
+      { id: "s5", heading: "Bottlenecks in the flow",
+        body: "Some impediments are not single events but patterns. Work piles up at one stage of the process, such as testing, review or approval.\n\n"
+          + "Visual boards and cumulative flow diagrams show bottlenecks clearly. Columns that grow while others shrink reveal where work is waiting.\n\n"
+          + "Work-in-progress limits help. When a stage reaches its limit, the team stops starting new work and helps clear the bottleneck.\n\n"
+          + "Fixing a bottleneck often means changing the process, not just pushing harder. Automating a manual step, adding capacity at that stage or removing an unnecessary handoff can all help.\n\n"
+          + "After one bottleneck is cleared, another stage often becomes the constraint. Keep watching the flow." },
+      { id: "s6", heading: "Recurring impediments",
+        body: "When the same blocker keeps returning, clearing each instance is not enough. Find the cause.\n\n"
+          + "A test environment that is regularly unavailable may need a booking system, or a second environment. An approval that always takes weeks may need delegated authority.\n\n"
+          + "Use retrospectives to look for patterns in impediments. The team often knows the root cause even if it has never been asked.\n\n"
+          + "Some causes lie outside the project, such as corporate policies or shared infrastructure. Raise them with the people who own them, with evidence of the cost to delivery.\n\n"
+          + "Fixing a recurring cause pays back every time the blocker would have returned." }
+    ],
+    lenses: {
+      predictive: "Issues are recorded in an issue log with owners and dates, reviewed regularly and escalated through governance when beyond the project manager's authority.",
+      agile: "Impediments are raised at the daily scrum and shown on the board. The scrum master removes those the team cannot, quickly, and the team looks for patterns in retrospectives.",
+      hybrid: "Impediments often arise at the seam between parts, such as an agile team waiting on a fixed approval. The project manager owns these cross-boundary blockers."
+    },
+    worked: {
+      stem: "Your team building a ferry company's booking app has four stories blocked, three of them waiting for the same security review from another department. The review usually takes two weeks. The sprint ends in eight days. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Contact the security team today to agree how the shared review can finish in time. Meanwhile, agree with the product owner what can move forward." },
+        { id: "b", text: "Remove the three stories from the sprint and replace them with unblocked work." },
+        { id: "c", text: "Ask the developers to keep coding the three stories so they are ready when the review arrives." },
+        { id: "d", text: "Add the security review to the risk register for monitoring." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "One blocker affects three stories, so clearing it has the greatest effect. Acting today, while working with the product owner on what can proceed, protects the sprint goal." },
+        { option: "b", rank: "acceptable", why: "Replanning may be needed if the review cannot be sped up. Doing it first accepts the blocker without trying to remove it." },
+        { option: "c", rank: "premature", why: "Continuing work may be sensible in parts. On its own it piles up unreviewed work and leaves the blocker untouched." },
+        { option: "d", rank: "wrong", why: "The review is already stopping work, so it is an impediment, not a risk. Monitoring it lets it keep costing time." }
+      ],
+      mindset: "Clear the blocker that stops the most work, and do it quickly."
+    },
+    traps: [
+      "Recording a current blocker as a risk to monitor.",
+      "Leaving impediments with the team when it cannot clear them.",
+      "Keeping an issue log full of stale entries with no owners.",
+      "Clearing each instance of a recurring blocker without finding the cause.",
+      "Treating a minor annoyance as a priority impediment."
+    ],
+    checks: [
+      {
+        id: "B4-c1", type: "single",
+        stem: "A developer raises as an impediment that the expenses system is awkward to use. It costs him a few minutes a month and does not affect his work. How should the scrum master respond?",
+        options: [
+          { id: "a", text: "Acknowledge it, note it for the relevant owner, and keep the team's focus on impediments that slow delivery.", correct: true,
+            rationale: "It is a real irritation but not a blocker. Noting it respects the developer without diverting effort from what slows the team." },
+          { id: "b", text: "Make it the top impediment and work to change the expenses system.",
+            rationale: "Prioritising a minor irritation diverts the scrum master from blockers that actually slow delivery." },
+          { id: "c", text: "Tell the developer that it is not the scrum master's concern.",
+            rationale: "Dismissing the concern discourages people from raising real impediments in future." },
+          { id: "d", text: "Add it to the risk register.",
+            rationale: "It is neither a risk nor a blocker. The register is not the right place for it." }
+        ],
+        explanation: "Impediments are things that slow or stop the team's work. A minor administrative irritation is worth noting and passing on, but it should not take priority over blockers that affect delivery.",
+        mindset: "Focus impediment effort on what actually slows delivery."
+      },
+      {
+        id: "B4-c2", type: "single",
+        stem: "Your team's board shows work steadily piling up in the review column while the in-progress column empties. What does this most likely show?",
+        options: [
+          { id: "a", text: "Review is a bottleneck, and the team should help clear it before starting more work.", correct: true,
+            rationale: "Work accumulating at one stage signals a constraint there. Swarming on it restores flow." },
+          { id: "b", text: "The team is working efficiently, since in-progress work is low.",
+            rationale: "Low in-progress work is good only if items are flowing through. Here they are stuck in review." },
+          { id: "c", text: "Developers should start more items to keep busy.",
+            rationale: "Starting more work adds to the queue in front of review and slows delivery further." },
+          { id: "d", text: "The review column should be removed from the board.",
+            rationale: "Removing the column hides the bottleneck instead of fixing it." }
+        ],
+        explanation: "When work accumulates at one stage, that stage is a bottleneck. Limiting work in progress and helping clear the constrained stage improves flow. Over time, the process at that stage may need changing.",
+        mindset: "Find where work is waiting and help it move."
+      }
+    ],
+    terms: ["Impediment", "Issue", "Issue log", "Kanban board", "Cumulative flow diagram", "Work in progress", "Root cause analysis", "Daily scrum"],
+    recap: [
+      "A risk might happen; an issue has happened; an impediment slows work now.",
+      "Keep an issue log with named owners, next steps and dates.",
+      "Prioritise blockers that stop the most valuable work.",
+      "Clear blockers at the lowest level able to, and act fast.",
+      "Look for bottlenecks and recurring causes, not just single events."
+    ],
+    mindset: "Keep work flowing by removing what blocks it quickly and at its cause.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "B5", module: "business", order: 28, ecoTask: "business-2", minutes: 30,
+    prereqs: ["B1"],
+    title: "Compliance",
+    objectives: [
+      "Identify the legal, regulatory and policy obligations a project must meet.",
+      "Build compliance into requirements and plans rather than checking it at the end.",
+      "Keep evidence that shows compliance, not just claims it.",
+      "Respond to a compliance gap promptly and through the right route.",
+      "Prepare for audits as a normal part of delivery."
+    ],
+    examWeight: "Compliance items describe a rule discovered late, a shortcut that breaches policy, or an audit that finds processes followed but evidence missing. The marks go to answers that treat compliance as non-negotiable, act quickly and involve the right specialists.",
+    sections: [
+      { id: "s1", heading: "Identifying obligations",
+        body: "Projects must comply with laws, regulations, industry standards, contracts and internal policies. These cover areas such as data protection, health and safety, accessibility, environmental rules, security and financial controls.\n\n"
+          + "Identify obligations early. Ask legal, compliance, security and safety specialists what applies. Check contracts and industry standards. Review lessons from similar projects.\n\n"
+          + "Record obligations as requirements, with owners. A requirement that says the service must meet a named accessibility standard is testable. A general hope that the service will be accessible is not.\n\n"
+          + "Watch for obligations that change during the project. Regulations are updated, new standards appear and contracts are amended.\n\n"
+          + "Obligations discovered late are expensive. Discovery is cheapest at the start." },
+      { id: "s2", heading: "Building compliance in",
+        body: "Compliance is cheapest when it is designed in from the start. Retrofitting it to a finished product is slow, costly and sometimes impossible.\n\n"
+          + "Include compliance requirements in the scope, the definition of done and the acceptance criteria. Plan the reviews and tests needed to confirm them.\n\n"
+          + "Involve specialists early. A privacy expert who reviews a design is more useful than one who reviews a finished system.\n\n"
+          + "In adaptive work, build compliance into each increment rather than leaving it for a final check. A story that handles personal data is not done until the privacy controls are in place.\n\n"
+          + "Make compliance visible on the board or in the plan, so it is never quietly deferred." },
+      { id: "s3", heading: "Evidence, not claims",
+        body: "Compliance must be demonstrated, not just asserted. Auditors and regulators want evidence: records, test results, approvals and logs.\n\n"
+          + "Plan what evidence each obligation needs and how it will be produced. A monthly access review is only compliant if it is recorded.\n\n"
+          + "Keep evidence as the work happens. Reconstructing it later is unreliable and often impossible.\n\n"
+          + "Check that the evidence shows what it claims to. A signed checklist proves someone signed it, not that the checks were done well.\n\n"
+          + "Store evidence where it can be found quickly. An audit is no time to search through old emails." },
+      { id: "s4", heading: "Responding to a compliance gap",
+        body: "When a compliance gap is found, act quickly. The longer it continues, the greater the exposure.\n\n"
+          + "First, understand it. What obligation is affected, how serious is the gap and who needs to know? Involve the compliance or legal specialist.\n\n"
+          + "Contain any immediate harm. If personal data is exposed or a safety rule is broken, stop the activity first.\n\n"
+          + "Then plan the fix and route any scope, cost or schedule change through the proper process. Some breaches must be reported to a regulator within a fixed time; follow the organisation's procedure.\n\n"
+          + "Never hide a compliance gap or proceed hoping nobody notices. The consequences of concealment are usually far worse than the gap itself." },
+      { id: "s5", heading: "Shortcuts and pressure",
+        body: "Under schedule pressure, people sometimes propose shortcuts that breach policy. Copying live customer data into an unsecured test environment is a common example.\n\n"
+          + "Do not agree to a shortcut that breaches law or policy, however convenient. Explain the obligation and look for a compliant alternative, such as anonymised data.\n\n"
+          + "If the policy genuinely blocks delivery, raise it with the policy owner. There may be an approved exception route, or the policy may need review.\n\n"
+          + "Compliance is not the project manager's personal judgement call. It is a constraint the project works within.\n\n"
+          + "Model the behaviour you expect. A team that sees its leader bend rules will bend them too." },
+      { id: "s6", heading: "Audits",
+        body: "Audits check whether a project is meeting its obligations and following its processes. They may be internal or external.\n\n"
+          + "Treat audits as a normal part of delivery, not an interruption. A project that keeps good evidence and follows its processes has little to fear.\n\n"
+          + "Prepare by checking readiness well before the audit. Find gaps while there is still time to fix them.\n\n"
+          + "Be open with auditors. Answer questions honestly and provide evidence promptly. Disclosing a known gap yourself, with a plan to fix it, builds far more confidence than having it discovered.\n\n"
+          + "Act on audit findings and record what you did. An unaddressed finding is likely to reappear." }
+    ],
+    lenses: {
+      predictive: "Obligations are identified early, built into requirements and plans, and confirmed through planned reviews, tests and audits before acceptance.",
+      agile: "Compliance requirements are part of the backlog and the definition of done, so each increment is compliant. Specialists review work continuously rather than at the end.",
+      hybrid: "Fixed compliance obligations may follow formal checks while iterative parts build compliance into each increment. The project manager makes sure no obligation falls between them."
+    },
+    worked: {
+      stem: "Five weeks before a council's online planning portal launches, an accessibility specialist reports that it fails a statutory standard the council must meet. The standard was never in the requirements. The launch date has been announced publicly. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Work with the specialist to establish exactly which failures exist and how serious they are, and inform the sponsor of the compliance gap." },
+        { id: "b", text: "Launch on the announced date and fix accessibility in a later release." },
+        { id: "c", text: "Delay the launch until every accessibility issue is fixed." },
+        { id: "d", text: "Ask the development team to work overtime to fix everything before launch." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "A statutory obligation is at stake. Understanding the gap precisely and informing the sponsor lets the right decision be made quickly on the evidence." },
+        { option: "c", rank: "acceptable", why: "Delaying may well be necessary, and it respects the obligation. Deciding it before understanding the gap may delay longer than needed." },
+        { option: "d", rank: "premature", why: "Extra effort may be part of the fix. Committing to overtime before knowing the scope of the failures risks rushed, incomplete work." },
+        { option: "b", rank: "wrong", why: "Knowingly launching a service that breaches a statutory standard exposes the council to legal risk and excludes users. It is not an acceptable trade-off." }
+      ],
+      mindset: "Treat a legal or regulatory obligation as a constraint, never as an option."
+    },
+    traps: [
+      "Checking compliance only at the end of the project.",
+      "Agreeing to a shortcut that breaches policy because time is short.",
+      "Claiming compliance without evidence.",
+      "Launching with a known compliance gap and planning to fix it later.",
+      "Waiting for an audit to discover a gap you already know about."
+    ],
+    checks: [
+      {
+        id: "B5-c1", type: "single",
+        stem: "A tester proposes copying live patient records into the test system to make testing more realistic. The test system does not meet the security policy for personal data. What should the project manager do?",
+        options: [
+          { id: "a", text: "Decline, and work with the team on a compliant alternative such as anonymised or synthetic data.", correct: true,
+            rationale: "The proposal breaches policy and privacy law. A compliant alternative meets the testing need without the exposure." },
+          { id: "b", text: "Approve it for a short period to speed up testing.",
+            rationale: "A short period is still a breach. Convenience does not override data protection obligations." },
+          { id: "c", text: "Approve it if the tester promises to delete the data afterwards.",
+            rationale: "Deleting later does not prevent exposure while the data sits in an insecure system." },
+          { id: "d", text: "Let the tester decide, since testing is their area.",
+            rationale: "Compliance with data protection is the project's obligation, not an individual's choice." }
+        ],
+        explanation: "Using real personal data in a system that does not meet security policy breaches obligations, however briefly. The right response is to decline and find a compliant way to meet the need, such as anonymised data.",
+        mindset: "Meet the need without breaking the rule."
+      },
+      {
+        id: "B5-c2", type: "single",
+        stem: "An internal audit finds that your project's monthly access reviews were carried out but never recorded. What does this mean for compliance?",
+        options: [
+          { id: "a", text: "Compliance cannot be demonstrated, so the reviews must be recorded from now on and the gap addressed.", correct: true,
+            rationale: "Without records there is no evidence the control operated. Compliance depends on being able to show it." },
+          { id: "b", text: "The project is compliant because the reviews happened.",
+            rationale: "Auditors and regulators need evidence. Unrecorded activity cannot be verified." },
+          { id: "c", text: "The reviews should be recreated from memory to satisfy the audit.",
+            rationale: "Reconstructed records are unreliable and could be misleading." },
+          { id: "d", text: "The finding is minor and can be ignored.",
+            rationale: "Unaddressed audit findings tend to recur and erode trust in the project's controls." }
+        ],
+        explanation: "Compliance must be demonstrated with evidence. A control that operates without records cannot be shown to work. The fix is to record future reviews and agree how to address the period that lacks evidence.",
+        mindset: "If it is not evidenced, it cannot be shown to be compliant."
+      }
+    ],
+    terms: ["Audit", "Quality audit", "Constraint", "Requirement", "Definition of done", "Enterprise environmental factors"],
+    recap: [
+      "Identify legal, regulatory, contractual and policy obligations early.",
+      "Build compliance into requirements, plans and the definition of done.",
+      "Keep evidence as you go; compliance must be shown, not claimed.",
+      "Act fast on gaps, contain harm and involve specialists.",
+      "Never trade compliance for speed, and be open with auditors."
+    ],
+    mindset: "Treat compliance as a fixed constraint and be able to prove you met it.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "B6", module: "business", order: 29, ecoTask: "business-6", minutes: 30,
+    prereqs: ["L8"],
+    title: "Continuous improvement",
+    objectives: [
+      "Run retrospectives that lead to real change.",
+      "Turn improvement ideas into small, testable experiments.",
+      "Measure whether an improvement worked.",
+      "Spread proven improvements beyond the team.",
+      "Judge which improvements are worth their cost."
+    ],
+    examWeight: "Improvement items describe retrospectives with no follow-through, improvements nobody measures, or a good practice that never spreads. The marks go to answers that make improvement small, owned and measured, and that share what works.",
+    sections: [
+      { id: "s1", heading: "Why improve continuously",
+        body: "Every team and project can get better. Continuous improvement means looking regularly at how work is done and making small changes that add up over time.\n\n"
+          + "The idea comes from lean thinking and kaizen. Many small improvements, made by the people doing the work, beat occasional large reforms imposed from above.\n\n"
+          + "Improvement is not only about speed. Quality, safety, team wellbeing and customer satisfaction all count.\n\n"
+          + "The habit matters more than any single change. A team that improves a little every few weeks soon outperforms one that waits for a major overhaul.\n\n"
+          + "Leaders make improvement possible by giving teams time, permission and support to change how they work." },
+      { id: "s2", heading: "Retrospectives that work",
+        body: "A retrospective is a regular meeting where the team reviews how it worked and agrees what to change. In agile teams it happens at the end of every iteration.\n\n"
+          + "Good retrospectives are safe. People speak openly about problems without fear of blame. The focus is on the system and the process, not on individuals.\n\n"
+          + "They are also focused. Pick one or two improvements, not ten. Give each an owner and a way to know whether it worked.\n\n"
+          + "Review last time's actions at the start of each retrospective. If the same issues keep returning and actions are never completed, the retrospective has become a ritual.\n\n"
+          + "Vary the format now and then. The same questions every time produce the same answers." },
+      { id: "s3", heading: "Small experiments",
+        body: "Treat each improvement as an experiment. State what you will change, what you expect to happen and how you will measure it.\n\n"
+          + "Keep experiments small and time-boxed. Try a new review practice for two iterations, then decide whether to keep it.\n\n"
+          + "Small experiments carry little risk. If one fails, little is lost, and the team has learned something.\n\n"
+          + "Avoid changing many things at once. If several changes happen together, you cannot tell which one made the difference.\n\n"
+          + "Record what was tried and what happened. A failed experiment is useful knowledge for the next team." },
+      { id: "s4", heading: "Measuring improvement",
+        body: "An improvement is only real if it can be seen in results. Choose a measure before making the change.\n\n"
+          + "Useful measures include cycle time, defect rates, rework, customer satisfaction and the time spent waiting between stages.\n\n"
+          + "Measure over long enough to see a trend. One good week can be chance.\n\n"
+          + "Watch for side effects. Faster delivery that brings more defects is not an improvement.\n\n"
+          + "Share the results with the team. Seeing that a change worked builds momentum for the next one." },
+      { id: "s5", heading: "Spreading what works",
+        body: "A team that finds a better way of working often keeps it to itself. Other teams repeat the old problems.\n\n"
+          + "Share proven improvements through communities of practice, short demonstrations, updated templates or changes to standard processes.\n\n"
+          + "Explain the context. A practice that worked for one team may need adapting for another. Share why it worked, not just what was done.\n\n"
+          + "Turn proven improvements into defaults where appropriate. If every project would benefit, update the organisation's standard so new projects start with it.\n\n"
+          + "Recognise the team that found it. Recognition encourages others to share their own improvements." },
+      { id: "s6", heading: "Improvements worth their cost",
+        body: "Not every improvement is worth doing. Each takes time and effort, and some cost more than they save.\n\n"
+          + "Compare the expected benefit with the cost. Automating a manual task that takes an hour a week may pay back quickly. Automating one done twice a year may not.\n\n"
+          + "Look at mandated changes critically too. A new organisation-wide check may suit some projects and burden others. Give evidence-based feedback to whoever owns it.\n\n"
+          + "Prioritise improvements like other work. Some teams keep improvement items in the backlog and rank them against features.\n\n"
+          + "Protect time for improvement. A team that never has slack to improve will keep working the same way, however inefficient." }
+    ],
+    lenses: {
+      predictive: "Improvement happens at milestones and phase ends through lessons reviews and process audits. Proven improvements update the organisation's processes and templates.",
+      agile: "Retrospectives drive improvement every iteration. Experiments are small and measured, and improvement items may sit in the backlog alongside features.",
+      hybrid: "Each part improves in its own rhythm, but improvements at the seams need joint review. The project manager brings both sides together to improve how they work across the boundary."
+    },
+    worked: {
+      stem: "Your team at a logistics firm has held six retrospectives in a row with the same three actions. They are better story refinement, faster code review and clearer acceptance criteria. None has been completed. The team is starting to see retrospectives as pointless. What should the scrum master do first?",
+      options: [
+        { id: "a", text: "Help the team pick one action, make it specific and owned with a way to measure it, and review it at the next retrospective." },
+        { id: "b", text: "Cancel retrospectives for a few sprints until the team has time to act." },
+        { id: "c", text: "Assign each of the three actions to a team member with a deadline." },
+        { id: "d", text: "Report to management that the team is not following through on improvements." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Too many vague actions is the cause. One specific, owned and measured action gives the team a real chance of success and rebuilds faith in the retrospective." },
+        { option: "c", rank: "acceptable", why: "Assigning owners and deadlines helps. Imposing all three at once repeats the overload, and the scrum master assigning them weakens team ownership." },
+        { option: "b", rank: "premature", why: "Pausing retrospectives removes the forum where the problem could be fixed. It treats the symptom by abandoning the practice." },
+        { option: "d", rank: "wrong", why: "Escalating to management blames the team for a process problem the scrum master should help fix." }
+      ],
+      mindset: "Make each improvement small, owned and measured, so it actually happens."
+    },
+    traps: [
+      "Agreeing many improvement actions and completing none.",
+      "Changing several things at once and not knowing what worked.",
+      "Declaring an improvement successful without measuring it.",
+      "Keeping a proven improvement inside one team.",
+      "Adopting every improvement without weighing its cost."
+    ],
+    checks: [
+      {
+        id: "B6-c1", type: "single",
+        stem: "A team cut its average cycle time sharply over six months after changing how it handles code reviews. Other teams in the organisation still struggle with the same delays. What is the best next step?",
+        options: [
+          { id: "a", text: "Share the practice, and why it worked, with other teams through a community of practice or demonstration.", correct: true,
+            rationale: "Spreading a proven improvement, with its context, lets others benefit without repeating the same struggles." },
+          { id: "b", text: "Mandate the exact practice for every team immediately.",
+            rationale: "What worked for one team may need adapting. Imposing it without context may fail elsewhere." },
+          { id: "c", text: "Keep the practice within the team to protect its advantage.",
+            rationale: "Improvement benefits the organisation most when it spreads." },
+          { id: "d", text: "Wait another six months to be sure it lasts.",
+            rationale: "Six months of evidence is already strong. Waiting delays benefits for other teams." }
+        ],
+        explanation: "Proven improvements should travel. Sharing the practice and the reasons it worked lets other teams adapt it to their context. Where it suits every team, it can later become a standard.",
+        mindset: "Share what works, with the reasons it works."
+      },
+      {
+        id: "B6-c2", type: "single",
+        stem: "A team proposes automating a manual report that takes thirty minutes and is produced twice a year. Automation would take about two weeks of effort. What is the most sensible view?",
+        options: [
+          { id: "a", text: "It is probably not worth it, because the saving is tiny compared with the cost.", correct: true,
+            rationale: "One hour a year saved would take many years to repay two weeks of effort." },
+          { id: "b", text: "It should be done, because automation is always an improvement.",
+            rationale: "Automation has a cost. It is an improvement only when the benefit outweighs it." },
+          { id: "c", text: "It should be done because the team suggested it.",
+            rationale: "Team ownership matters, but the idea should still be judged on its value." },
+          { id: "d", text: "It should be done if the report is ever late.",
+            rationale: "Lateness is not suggested. The decision should rest on cost and benefit." }
+        ],
+        explanation: "Improvements should be weighed like any other work. Saving one hour a year does not justify two weeks of effort. That time is better spent on improvements with larger, more frequent payback.",
+        mindset: "Improve where the benefit clearly outweighs the cost."
+      }
+    ],
+    terms: ["Kaizen", "Lean", "Retrospective", "Lessons learned register", "Value stream mapping", "Cycle time", "Benchmarking"],
+    recap: [
+      "Improve continuously through many small changes by the people doing the work.",
+      "Keep retrospectives safe and focused on one or two owned actions.",
+      "Treat improvements as small, measured experiments.",
+      "Measure results and watch for side effects.",
+      "Share what works and weigh each improvement against its cost."
+    ],
+    mindset: "Get a little better every cycle, prove it with evidence, and share what works.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "B7", module: "business", order: 30, ecoTask: "business-7", minutes: 30,
+    prereqs: ["L4", "B6"],
+    title: "Organisational change",
+    objectives: [
+      "Explain why delivering a result is not the same as people adopting it.",
+      "Read the organisation's culture and its readiness for change.",
+      "Diagnose resistance and respond to its real cause.",
+      "Plan the transition from the old way of working to the new.",
+      "Measure and support adoption after go-live."
+    ],
+    examWeight: "Change items describe a system that works but is not used, or people who say yes and keep the old way. Some describe a team overloaded by several changes at once. The marks go to answers that diagnose the cause of resistance and support people through the transition.",
+    sections: [
+      { id: "s1", heading: "Delivery is not adoption",
+        body: "A project can deliver a result on time and on budget, and still fail if people do not use it. Benefits arrive only when the organisation actually changes how it works.\n\n"
+          + "Adoption depends on people. They must understand why the change matters, know how to work the new way and want to do it.\n\n"
+          + "Plan for adoption from the start, not as an afterthought at go-live. Involve the people affected in design, testing and rollout.\n\n"
+          + "Agree who owns adoption. Often it is a business leader rather than the project, but the project must support them.\n\n"
+          + "Measure adoption, not just delivery. Usage, error rates and the persistence of old workarounds all tell you how the change is landing." },
+      { id: "s2", heading: "Culture and readiness",
+        body: "Every organisation has a culture: shared habits, beliefs and unwritten rules about how work gets done. Change that clashes with culture meets resistance, however well designed.\n\n"
+          + "Assess readiness before rollout. How much change are people already absorbing? How have past changes gone? Do managers support this one?\n\n"
+          + "A team already coping with a restructure, a new policy and a new manager may not have capacity for another change this quarter. Timing matters.\n\n"
+          + "Look for change champions: respected people who support the change and can influence their colleagues.\n\n"
+          + "Work with the culture where you can. A change framed in terms people already value is easier to adopt." },
+      { id: "s3", heading: "Understanding resistance",
+        body: "Resistance is normal and usually rational from the resister's point of view. Treat it as information, not obstruction.\n\n"
+          + "People resist for different reasons. Some do not understand why the change is needed. Some fear losing status, skills or jobs. Some see real flaws the project has missed. Some are simply overloaded.\n\n"
+          + "Each cause needs a different response: explanation, reassurance, design changes or better timing. Applying the same response to all of them rarely works.\n\n"
+          + "Watch for quiet resistance. People who publicly support a change while keeping the old process alive are resisting just as much as open critics.\n\n"
+          + "Listen first. Resisters often know something the project needs to hear." },
+      { id: "s4", heading: "Planning the transition",
+        body: "A transition plan takes people from the old way of working to the new. It covers communication, training, support and the retirement of old processes.\n\n"
+          + "Communicate early and often, explaining why the change is happening and what it means for each group.\n\n"
+          + "Train people close to the moment they will need the skills. Training months before go-live is forgotten.\n\n"
+          + "Provide support after go-live: floor walkers, help lines, quick reference guides. The first weeks are when people decide whether the new way works.\n\n"
+          + "Retire the old way deliberately. While the old spreadsheet or form remains available, many people will keep using it." },
+      { id: "s5", heading: "Managers make or break change",
+        body: "People take their cue from their own manager more than from the project. A manager who uses the new system visibly sends a strong signal. A manager who quietly sticks to the old way undoes the training.\n\n"
+          + "Engage managers early. Make sure they understand the change, support it and know what is expected of them.\n\n"
+          + "Give managers the information they need to lead their teams through it, such as usage data and common problems.\n\n"
+          + "Where adoption varies across teams, compare the managers' behaviour. Differences in adoption often trace back to differences in local leadership.\n\n"
+          + "Address a resistant manager directly and privately, as you would any important stakeholder." },
+      { id: "s6", heading: "Change in agile transformations",
+        body: "Adopting agile ways of working is itself an organisational change. Teams can adopt the ceremonies while the organisation around them stays the same.\n\n"
+          + "Signs of surface adoption include detailed requirements still arriving fixed, managers still assigning tasks and teams measured on output rather than outcomes.\n\n"
+          + "Real change needs the wider organisation to adapt: funding, governance, management behaviour and how success is measured.\n\n"
+          + "Start where the change will have the most effect and show results. Success in one area builds support for change in others.\n\n"
+          + "Be patient. Changing culture takes longer than changing processes." }
+    ],
+    lenses: {
+      predictive: "Organisational change is planned as part of deployment, with communication, training and support scheduled around go-live. Adoption is measured after handover.",
+      agile: "Users are involved throughout, and frequent releases let people adapt gradually. Feedback from early adopters shapes later increments and the rollout approach.",
+      hybrid: "Large changes may roll out in planned waves while features evolve iteratively. The project manager coordinates training and support with each wave."
+    },
+    worked: {
+      stem: "A housing association put a new case management system live in its twelve offices two months ago. Usage is high in four offices and low in eight. Training scores were similar everywhere. In the four high-use offices, the managers use the system themselves. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Work with the eight office managers to understand their concerns and help them lead adoption visibly in their teams." },
+        { id: "b", text: "Run refresher training for all staff in the eight low-use offices." },
+        { id: "c", text: "Switch off the old process in all offices so staff must use the new system." },
+        { id: "d", text: "Report the eight offices to senior management for non-compliance." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The evidence points to local leadership, not training. Engaging the managers addresses the cause and enlists the people their teams follow." },
+        { option: "c", rank: "acceptable", why: "Retiring the old process is part of a complete transition. Doing it before the managers are on board risks disruption and resentment." },
+        { option: "b", rank: "premature", why: "Training scores were similar everywhere, so more training is unlikely to fix the difference." },
+        { option: "d", rank: "wrong", why: "Reporting offices for non-compliance treats a change management problem as a disciplinary one and hardens resistance." }
+      ],
+      mindset: "Find the real cause of low adoption before choosing how to respond."
+    },
+    traps: [
+      "Treating go-live as the end of the change.",
+      "Responding to all resistance with more training.",
+      "Leaving the old process available indefinitely.",
+      "Ignoring managers' influence on their teams' adoption.",
+      "Adopting agile ceremonies without changing the surrounding organisation."
+    ],
+    checks: [
+      {
+        id: "B7-c1", type: "single",
+        stem: "A frontline team is about to receive a new rostering system while also absorbing a restructure and a new manager this quarter. Several staff say they are overwhelmed. What should the project manager consider first?",
+        options: [
+          { id: "a", text: "Whether the rollout timing or approach should change, given how much change the team is already absorbing.", correct: true,
+            rationale: "Readiness affects adoption. Adding a change to an overloaded team risks failure, so timing and support need review." },
+          { id: "b", text: "Proceeding as planned, since the system is ready.",
+            rationale: "A ready system does not mean a ready team. Ignoring overload risks poor adoption." },
+          { id: "c", text: "Adding extra training sessions before go-live.",
+            rationale: "More training adds to the load on an already overwhelmed team." },
+          { id: "d", text: "Asking the new manager to enforce use of the system.",
+            rationale: "Enforcement by a new manager during a restructure is likely to deepen resistance." }
+        ],
+        explanation: "Change capacity is limited. When a team is already absorbing several changes, adding another can overwhelm it. Reviewing timing, phasing or extra support improves the chance that the change will stick.",
+        mindset: "Consider how much change people can absorb before adding more."
+      },
+      {
+        id: "B7-c2", type: "single",
+        stem: "Eleven category managers publicly support a new procurement platform that removes an approval step they currently perform. Usage shows they are still running the old approval in parallel. What does this most likely indicate?",
+        options: [
+          { id: "a", text: "Quiet resistance, possibly from a sense of losing control or status, which needs to be understood directly.", correct: true,
+            rationale: "Public support with private reversion is a classic sign of quiet resistance. Understanding the reason is the first step." },
+          { id: "b", text: "The platform has a defect that prevents approvals.",
+            rationale: "Nothing suggests a defect. They are choosing to keep the old step." },
+          { id: "c", text: "The managers need more training on the platform.",
+            rationale: "They can use it; they are choosing to keep their old role as well." },
+          { id: "d", text: "The change has been adopted successfully.",
+            rationale: "Running the old process in parallel means the change has not truly landed." }
+        ],
+        explanation: "When people keep an old process alive while publicly supporting the new one, they are resisting quietly. The cause is often a loss of control or status. Talking with them directly is the way to understand and address it.",
+        mindset: "Read resistance from behaviour, not just from what people say."
+      }
+    ],
+    terms: ["Stakeholder", "Coaching", "Motivation", "Emotional intelligence", "Organisational process assets"],
+    recap: [
+      "A result delivers value only when people adopt it.",
+      "Assess culture and readiness, including change already under way.",
+      "Treat resistance as information and respond to its cause.",
+      "Plan the transition: communicate, train in time, support and retire the old way.",
+      "Engage managers, because teams follow their lead."
+    ],
+    mindset: "Help people make the change, rather than assuming delivery will make it for them.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "B8", module: "business", order: 31, ecoTask: "business-8", minutes: 30,
+    prereqs: ["P8", "B3"],
+    title: "External environment",
+    objectives: [
+      "Scan regulatory, market, technological and geopolitical change for effects on the project.",
+      "Assess how an external change affects scope, risk and the business case.",
+      "Respond to external change through the right decision route.",
+      "Track dependencies on external suppliers, platforms and standards.",
+      "Reassess the business case when the outside world shifts."
+    ],
+    examWeight: "External items describe a new regulation, a competitor's launch, a supplier's end of support or a currency swing. The marks go to answers that assess the impact on the project and its justification. They then route the decision to the right people, neither ignoring the news nor overreacting.",
+    sections: [
+      { id: "s1", heading: "Scanning the environment",
+        body: "Projects do not run in isolation. Laws change, markets move, technologies age and world events disrupt supply chains.\n\n"
+          + "Scan the environment regularly. Useful sources include regulators' consultations, industry bodies, supplier announcements, market reports and news about key countries or materials.\n\n"
+          + "A simple structure helps: look at political, economic, social, technological, legal and environmental factors in turn.\n\n"
+          + "Assign people to watch areas that matter most. A project dependent on one overseas supplier should watch trade rules for that country.\n\n"
+          + "Record what you find as risks, issues or opportunities, depending on how certain and how close each one is." },
+      { id: "s2", heading: "Assessing the impact",
+        body: "When an external change appears, assess what it means for the project. Does it change scope, cost, schedule, risk or the expected benefits?\n\n"
+          + "Some changes are certain and immediate, such as a new law with a fixed start date. Others are uncertain, such as a proposed rule still under consultation.\n\n"
+          + "Treat uncertain changes as risks. Monitor them, plan responses and set triggers for action.\n\n"
+          + "Treat certain changes as issues. Assess the impact and route the necessary changes through the agreed process.\n\n"
+          + "Involve specialists. Legal, commercial and technical experts can judge the real impact better than a quick reading of a headline." },
+      { id: "s3", heading: "Responding through the right route",
+        body: "External changes often require changes to the project. Route them properly rather than reacting on impulse.\n\n"
+          + "A new regulation may require new scope. That goes through change control or into the backlog, with an impact assessment.\n\n"
+          + "A competitor's launch may change the value of features. The product owner or sponsor should decide whether to reprioritise.\n\n"
+          + "A supplier's price rise may need a contract discussion and a cost forecast update.\n\n"
+          + "Do not ignore external change because it is inconvenient. Nor should you rush to rebuild the project on the first rumour. Assess, then decide with the right people." },
+      { id: "s4", heading: "External dependencies",
+        body: "Many projects depend on things outside their control: third-party services, platforms, standards and suppliers.\n\n"
+          + "Track these dependencies explicitly. Know which versions you rely on, when support ends and what the alternatives are.\n\n"
+          + "Plan ahead for known end dates. A platform reaching end of support during or shortly after the project should be considered now, not when it fails.\n\n"
+          + "Reduce single points of failure where they matter. A component available from only one country or one supplier is a concentrated risk.\n\n"
+          + "Agree with suppliers how they will notify you of changes, and check contracts for how such changes are handled." },
+      { id: "s5", heading: "Reassessing the business case",
+        body: "Some external changes affect not just how the project runs but whether it is still worth doing. A competitor may offer the same capability for free. A subsidy the business case relied on may end.\n\n"
+          + "When the justification is affected, reassess the business case. Work out what value the remaining work would still deliver, given the new conditions.\n\n"
+          + "Bring the analysis to the sponsor with options: continue, adjust scope, pivot or stop.\n\n"
+          + "Base the decision on future value, not on what has already been spent.\n\n"
+          + "A project that adapts to its environment, or stops when it should, protects the organisation's investment." },
+      { id: "s6", heading: "Opportunities from outside",
+        body: "External change is not only a threat. New technology may make the work cheaper. A new standard may make the product more valuable. A partner may offer to collaborate.\n\n"
+          + "Watch for these opportunities and assess them as you would any other. Some carry hidden costs or new dependencies.\n\n"
+          + "Certifications and standards without legal force can still matter. If customers start requiring one, it may become essential to the business case.\n\n"
+          + "Adaptive delivery helps here. Short cycles and a flexible backlog make it easier to respond to new information.\n\n"
+          + "Keep the sponsor informed of significant external opportunities as well as threats. An opportunity reported late is often an opportunity lost." }
+    ],
+    lenses: {
+      predictive: "External changes are assessed against the baselines and business case, then handled through risk management and change control. Major shifts trigger a business case review at the next gate or sooner.",
+      agile: "The backlog is re-ranked as the environment changes, and frequent releases allow quick response. The product owner weighs external shifts against current priorities.",
+      hybrid: "Fixed elements may need formal change for external shifts while iterative parts adapt through the backlog. The project manager makes sure both sides respond consistently."
+    },
+    worked: {
+      stem: "Your eighteen-month project to retrofit heat pumps in social housing depends on a government grant covering part of the cost. The government announces a consultation on ending the grant next year, before your project finishes. Nothing is decided yet. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Record it as a risk, assess its effect on the business case, and brief the sponsor with options and the trigger for acting." },
+        { id: "b", text: "Pause all work until the consultation outcome is known." },
+        { id: "c", text: "Ignore it until the government makes a final decision." },
+        { id: "d", text: "Ask the team to speed up installations so more homes qualify before any change." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "An uncertain change is a risk. Assessing its impact on the business case and briefing the sponsor with options prepares a timely, informed decision." },
+        { option: "d", rank: "acceptable", why: "Accelerating may well be a sensible response. Committing to it before assessing feasibility and cost, or agreeing it with the sponsor, is too early." },
+        { option: "b", rank: "premature", why: "Pausing reacts to a proposal as if it were decided. It delays benefits and may be unnecessary." },
+        { option: "c", rank: "wrong", why: "Ignoring a known threat to the business case removes time to prepare. When the decision comes, options will have narrowed." }
+      ],
+      mindset: "Assess external change for its effect on the project and its justification, then decide with the sponsor."
+    },
+    traps: [
+      "Ignoring external change because it is inconvenient.",
+      "Rebuilding the project on an unconfirmed rumour.",
+      "Failing to track end-of-support dates for platforms you depend on.",
+      "Continuing a project whose business case has collapsed because of past spending.",
+      "Overlooking opportunities created by external change."
+    ],
+    checks: [
+      {
+        id: "B8-c1", type: "single",
+        stem: "A third-party address service your product relies on will retire the version you use in nine months. A new version with a different interface is available now. Your project delivers in five months. What should you do?",
+        options: [
+          { id: "a", text: "Assess the effort to move to the new version and plan it, either within the project or as an agreed handover item.", correct: true,
+            rationale: "A known end date is a certain change. Planning the migration now avoids a forced, rushed change after delivery." },
+          { id: "b", text: "Ignore it, since the project ends before the retirement date.",
+            rationale: "The product will still depend on the service after delivery. Ignoring it hands a problem to operations." },
+          { id: "c", text: "Switch immediately without assessing the impact.",
+            rationale: "Switching without assessment may disrupt the current schedule more than necessary." },
+          { id: "d", text: "Ask the supplier to keep the old version running.",
+            rationale: "The supplier has announced retirement. Relying on a change of mind is not a plan." }
+        ],
+        explanation: "External dependencies with known end dates should be planned for, even if the date falls after the project ends. Assessing the migration and either including it or handing it over explicitly protects the product's future.",
+        mindset: "Plan for known external changes before they force your hand."
+      },
+      {
+        id: "B8-c2", type: "single",
+        stem: "Six months into building a paid reporting feature for small businesses, a large competitor launches the same capability free. What should the project manager do first?",
+        options: [
+          { id: "a", text: "Reassess the value the feature will still deliver and present options to the sponsor.", correct: true,
+            rationale: "The competitor's move may undermine the business case. The sponsor needs a fresh assessment to decide the way forward." },
+          { id: "b", text: "Finish the feature as planned, since half the work is done.",
+            rationale: "Past effort should not decide future investment. The value case may have changed fundamentally." },
+          { id: "c", text: "Stop the feature immediately.",
+            rationale: "Stopping may be right, but the decision belongs to the sponsor, on evidence." },
+          { id: "d", text: "Add more features so the product beats the competitor.",
+            rationale: "Expanding scope before reassessing the value case may compound the problem." }
+        ],
+        explanation: "A competitor offering the same capability for free can remove the value a project was built to create. Reassessing the business case and bringing options to the sponsor allows a deliberate decision about continuing, changing or stopping.",
+        mindset: "Let changes in the outside world reopen the question of value."
+      }
+    ],
+    terms: ["Enterprise environmental factors", "Business case", "Risk", "Opportunity", "Dependency", "External dependency", "SWOT analysis"],
+    recap: [
+      "Scan political, economic, social, technological, legal and environmental change.",
+      "Treat uncertain changes as risks and certain ones as issues.",
+      "Route required changes through the agreed process.",
+      "Track external dependencies and their end dates.",
+      "Reassess the business case when the outside world shifts."
+    ],
+    mindset: "Keep watching the world outside the project, and adapt the project when it changes.",
+    practice: { count: 10, decks: [] }
+  },
+  {
     id: "X1", module: "skills", order: 32, ecoTask: "", minutes: 30,
     prereqs: ["F2"],
     title: "Question technique",
