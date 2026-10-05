@@ -12749,6 +12749,591 @@ PMP.MODULES = Object.freeze([
 
 PMP.LESSONS = Object.freeze([
   {
+    id: "F1", module: "foundations", order: 1, ecoTask: "", minutes: 30,
+    prereqs: [],
+    title: "How the exam works and how to study with this suite",
+    objectives: [
+      "Describe what the exam is really testing, beyond recall of terms.",
+      "Recognise each question type you will meet and how it is marked.",
+      "Explain how the three domains and three delivery approaches shape the paper.",
+      "Use the suite's study loop: learn, check, practise, review, retain.",
+      "Build a study plan from an honest diagnostic and the hours you really have."
+    ],
+    examWeight: "This lesson covers the exam as a whole rather than one task. The figures above come straight from the build's own settings, so they change in one place if the outline changes. Check them against the current published outline before you book. What matters most is the balance. No single topic carries the exam, and most items ask what you would do, not what a term means.",
+    sections: [
+      { id: "s1", heading: "What the exam is really testing",
+        body: "The exam is not a vocabulary test. Most items describe a situation and ask what a project manager should do. Some ask what to do first, some ask what to do next, and some ask for the best response.\n\n"
+          + "The answer it wants is the response of a capable, ethical project manager working in a well-run organisation. That is not always what happens in your own workplace. Many experienced managers lose marks by answering from habit.\n\n"
+          + "So the exam rewards judgement built on understanding. You need to know why a practice exists, not just its name. A learner who knows why issues are raised early can answer a question about a situation they have never met.\n\n"
+          + "Terms still matter, because the options use them precisely. But they are the vocabulary of the test, not its subject." },
+      { id: "s2", heading: "The question types you will meet",
+        body: "Most items are single answer: four options, one correct. Read all four before choosing, because two often look reasonable and only one fits every detail.\n\n"
+          + "Multiple response items ask you to choose two or more. The stem tells you how many. There is no credit for choosing too many.\n\n"
+          + "Matching items ask you to pair each prompt with an option. Drop-down items put a choice inside a sentence. Hotspot and graphic items ask you to select a region of a diagram or chart. Fill-in items ask for a value, usually from a calculation.\n\n"
+          + "This suite uses all of these types, so nothing on the day should look unfamiliar. Practise every type at least once before your first full mock.\n\n"
+          + "Some items on the real exam are unscored trials. You cannot tell which, so treat every item as if it counts." },
+      { id: "s3", heading: "Domains and delivery approaches",
+        body: "The outline groups the work into three domains: People, Process and Business Environment. Each domain is split into tasks. The weights shown above tell you roughly how many items each domain contributes.\n\n"
+          + "Every lesson in this suite is tied to one of those tasks, except the foundation and exam-skills lessons. That tie is what lets the suite join a lesson to its questions, scenarios and cards.\n\n"
+          + "Cutting across the domains are delivery approaches. Some items assume predictive delivery, with a plan and baselines set early. More assume adaptive or hybrid delivery, with short cycles and a changing backlog.\n\n"
+          + "This changes how you read a question. The same problem can have a different best answer in a predictive project and an agile team. So the first thing to notice in any stem is the approach it describes." },
+      { id: "s4", heading: "The study loop in this suite",
+        body: "The suite is built around one loop. Learn a topic, check your understanding, practise it under exam conditions, review what went wrong, then hold on to it.\n\n"
+          + "Lessons do the teaching. Quick checks inside a lesson are for learning only and never touch your scores. The practice set at the end of each lesson is real practice and counts.\n\n"
+          + "Every wrong answer then lands in the mistake journal. Tagging why you got it wrong is more useful than the score itself. A knowledge gap sends you back to the lesson; a misread sends you to slower reading.\n\n"
+          + "Flashcards hold terms and formulas over time, using spaced repetition. Mock exams test stamina and pacing across the whole outline.\n\n"
+          + "The readiness score on the dashboard draws all of this together. It is a study signal, not a prediction of your result." },
+      { id: "s5", heading: "Building a plan you will keep",
+        body: "Start with the diagnostic in the planner. It is a short mixed set that shows where you stand in each domain. Take it cold, without revising first, or it measures your revision rather than you.\n\n"
+          + "Then give the planner your exam date and honest hours. An honest figure beats an ambitious one. A plan built on hours you do not have is abandoned within a fortnight.\n\n"
+          + "The plan puts lessons first, then shifts towards mixed practice, scenarios and mocks as the date approaches. Its chips tick themselves from your actual activity, so it cannot be gamed.\n\n"
+          + "If you fall behind, rebuild rather than catch up. The rebuild targets what is still weak, using your live results.\n\n"
+          + "Finally, protect your last few days. New material that late mostly adds anxiety. Review your journal, skim the formula sheet and rest." }
+    ],
+    lenses: {
+      predictive: "Items set in predictive work mention plans, baselines, phase gates, change boards and formal acceptance. The best answer usually follows the agreed process and keeps the baselines honest.",
+      agile: "Items set in adaptive work mention sprints, backlogs, product owners, reviews and retrospectives. The best answer usually empowers the team, keeps the customer close and adapts the plan from evidence.",
+      hybrid: "Items set in hybrid work combine both, often a fixed part beside an iterative part. The best answer usually respects each part's own rules and manages the seam between them."
+    },
+    worked: {
+      stem: "You have just opened the suite with ten weeks until your exam. You have run construction projects for years but have never worked on an agile team. You can study for about an hour on weekdays and three hours at weekends. What should you do first?",
+      options: [
+        { id: "a", text: "Take the planner's diagnostic cold, then build a plan from your exam date and those real hours." },
+        { id: "b", text: "Sit a full mock exam today to find out exactly where you stand across the whole outline." },
+        { id: "c", text: "Read the reference library from start to finish before attempting any questions at all." },
+        { id: "d", text: "Drill agile questions every day until your agile scores catch up with the rest." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "A short diagnostic gives evidence across all three domains at low cost. The plan then spends your real hours where the evidence says they are needed, and it adjusts as you go." },
+        { option: "d", rank: "acceptable", why: "Agile is a likely gap and closing it matters. But this acts on an assumption rather than evidence, and it may leave a weaker area untouched for weeks." },
+        { option: "b", rank: "premature", why: "A full mock is valuable later, once you have covered the outline. Taken on day one it costs a whole session and mostly measures material you have not studied yet." },
+        { option: "c", rank: "wrong", why: "A reference has no sequence and no checks. Reading it end to end feels productive but builds little recall, and it delays practice that would show what you actually need." }
+      ],
+      mindset: "Gather evidence about where you stand before deciding where to spend your time."
+    },
+    traps: [
+      "Answering from how your own organisation works instead of how a well-run one would.",
+      "Choosing the first option that sounds right without reading all four.",
+      "Ignoring whether the stem describes predictive, agile or hybrid delivery.",
+      "Revising before the diagnostic, so it measures your revision instead of you.",
+      "Planning around the hours you wish you had rather than the hours you have."
+    ],
+    checks: [
+      {
+        id: "F1-c1", type: "single", ecoTask: "process-1",
+        stem: "A practice item describes a team that plans in two-week cycles and keeps a ranked backlog. It shows its work to the customer after each cycle. Before reading the options, what should you note first?",
+        options: [
+          { id: "a", text: "That the item is set in adaptive delivery, so the best answer will fit how an agile team works.", correct: true,
+            rationale: "The approach shapes the best answer. Spotting it first stops you choosing a predictive response for an agile team." },
+          { id: "b", text: "That the item is about scope, because the backlog is mentioned.",
+            rationale: "A backlog appears in many agile items whatever their topic. The delivery approach is the more useful first signal." },
+          { id: "c", text: "That the answer will probably involve the change control board.",
+            rationale: "Formal change boards belong mainly to predictive work. Expecting one here would bias you towards the wrong lens." },
+          { id: "d", text: "That the item is likely to be an unscored trial item.",
+            rationale: "Trial items cannot be identified, so guessing which they are wastes attention and should never change how you answer." }
+        ],
+        explanation: "Many situations have a different best response depending on the delivery approach. Reading the approach first sets the lens for the whole item. Here the cycles, ranked backlog and regular demonstrations all point to adaptive delivery.",
+        mindset: "Notice the delivery approach before you weigh the options."
+      },
+      {
+        id: "F1-c2", type: "single", ecoTask: "people-8",
+        stem: "After a week of study you have twelve wrong answers waiting in your mistake journal. You are short of time and tempted to skip tagging them. Why is tagging worth the few minutes it takes?",
+        options: [
+          { id: "a", text: "The causes show what kind of work will fix the misses, which the score alone cannot tell you.", correct: true,
+            rationale: "A knowledge gap needs teaching while a misread needs slower reading. Only the cause tells you which fix to apply." },
+          { id: "b", text: "Tagging a miss removes it from your accuracy figures.",
+            rationale: "Tagging never changes your results. Every answer still counts exactly as it was given." },
+          { id: "c", text: "Untagged misses stop the planner from building a plan.",
+            rationale: "The planner builds plans whether or not misses are tagged. The journal is for your own diagnosis." },
+          { id: "d", text: "The exam itself asks you to classify your own mistakes.",
+            rationale: "The exam asks nothing about your study habits. Tagging is a tool for choosing what to study next." }
+        ],
+        explanation: "Two learners with the same score may need opposite next steps. One is losing marks to material they have not learnt, the other to reading too fast. The journal's cause distribution separates them, and each cause points to a different fix.",
+        mindset: "Find out why an answer was wrong before deciding how to fix it."
+      }
+    ],
+    terms: ["Tailoring", "Predictive life cycle", "Adaptive life cycle", "Hybrid approach"],
+    recap: [
+      "The exam tests judgement in situations, not recall of definitions.",
+      "Know every question type before your first full mock.",
+      "Read the delivery approach first; it changes the best answer.",
+      "Learn, check, practise, review and retain, in that order.",
+      "Plan on honest hours, and rebuild rather than catch up."
+    ],
+    mindset: "Answer as a capable project manager in a well-run organisation would, not as your own workplace does.",
+    practice: { count: 10, decks: [], from: {} }
+  },
+  {
+    id: "F2", module: "foundations", order: 2, ecoTask: "", minutes: 35,
+    prereqs: ["F1"],
+    title: "The PMI mindset",
+    objectives: [
+      "State the handful of principles the exam's preferred answers rest on.",
+      "Explain why assessing a situation comes before acting on it.",
+      "Choose talking to the person directly over escalating or working round them.",
+      "Read “first”, “next” and “best” in a stem and answer the question actually asked.",
+      "Spot options that are good actions taken at the wrong moment."
+    ],
+    examWeight: "The mindset is not a task of its own, yet it decides more items than any single topic. Situational items often offer four defensible actions. Only one fits the order a capable project manager would follow. This lesson teaches that order, and every later lesson applies it.",
+    sections: [
+      { id: "s1", heading: "Serve the team and keep value in view",
+        body: "The exam pictures the project manager as a servant leader. Your job is to help the team succeed, not to command it. You clear obstacles, protect focus and help people grow.\n\n"
+          + "That does not mean being passive. A servant leader still sets direction, holds people to agreements and makes hard calls. The difference is the motive: the team's success, not your own control.\n\n"
+          + "Alongside the team sits value. Projects exist to deliver an outcome someone needs. When two options look equally sensible, prefer the one that protects the outcome. Protecting a plan, a document or a reputation comes second.\n\n"
+          + "Ethics sits underneath both. Honesty, fairness and respect are never traded away. An option that hides a problem, bends a rule or blames someone else is almost never correct." },
+      { id: "s2", heading: "Understand before you act",
+        body: "The most common wrong answer is a reasonable action taken too early. Something goes wrong and the option jumps straight to a fix, an escalation or a change request.\n\n"
+          + "The preferred first move is usually to understand the situation. Find out what happened, why, and how far it reaches. Look at the relevant plan, register or agreement. Talk to the people involved.\n\n"
+          + "This is not delay for its own sake. A fix built on a guess often fixes the wrong thing. An escalation without facts wastes a senior person's time and weakens your standing.\n\n"
+          + "There are exceptions. A safety risk, a legal breach or an imminent harm calls for immediate action first. Read the stem for urgency. Without it, assess first." },
+      { id: "s3", heading: "Talk to the person, then follow the process",
+        body: "When the problem involves a person, the preferred move is a direct, private conversation with that person. Not their manager, not the sponsor, not an email to the whole team.\n\n"
+          + "Going round someone damages trust and rarely solves the cause. Most people respond well to being asked what is happening and what they need.\n\n"
+          + "When the problem involves the project's agreements, follow the agreed process. A change to scope goes through change control. A risk goes on the register with an owner. A contract dispute follows the contract.\n\n"
+          + "Process is not bureaucracy for its own sake. It is how the organisation has agreed decisions will be made. Skipping it, even for a good reason, takes a decision away from whoever owns it." },
+      { id: "s4", heading: "Escalate last, and with options",
+        body: "Escalation is a legitimate tool, and sometimes the right one. But it comes after you have done what is within your own authority.\n\n"
+          + "Before escalating, ask three questions. Have I understood the problem? Have I tried what I am allowed to try? Is this genuinely beyond my authority or tolerance?\n\n"
+          + "When the answer to all three is yes, escalate promptly. Holding back a problem that needs a senior decision is as wrong as escalating too soon.\n\n"
+          + "Escalate well. Bring the facts, the impact, the options you considered and your recommendation. A sponsor asked to decide deserves enough to decide well.\n\n"
+          + "In agile settings the same rule applies at team level. The team tries to solve a problem itself first. The scrum master or project manager removes what the team cannot." },
+      { id: "s5", heading: "Reading first, next and best",
+        body: "Situational stems use small words that change the answer. Read them as instructions.\n\n"
+          + "“First” asks for the earliest correct step. Several options may be things you will do eventually. Choose the one that must come before the others, which is usually understanding the situation.\n\n"
+          + "“Next” tells you something has already happened. Work out where in the sequence you now are. An option that repeats a step already taken is wrong, however sensible.\n\n"
+          + "“Best” asks for the most complete and appropriate response. A partial answer can be true and still not be best.\n\n"
+          + "Watch for absolutes too. Options that say always, never or immediately are sometimes right, but they deserve a second look. The scenario trainer ranks all four options so you can see these distinctions in practice." }
+    ],
+    lenses: {
+      predictive: "Following the agreed process means the management plan, the change board and the baselines. Understanding comes from the registers, the plan and the people. Escalation follows the governance thresholds set at the start.",
+      agile: "The team owns how it works and solves its own problems first. The servant leader removes impediments, coaches and protects the team's focus. Understanding comes from conversation, the board and the data the team already shows.",
+      hybrid: "Each part keeps its own rules: formal control for the fixed elements, team ownership for the iterative ones. The project manager watches the seams, where a habit from one side can break the other."
+    },
+    worked: {
+      stem: "A vendor's lead engineer tells you in passing that their team will miss next week's integration date by about a fortnight. Your contract manager has not been told, the sponsor expects the date, and two of your own teams depend on it. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Meet the vendor's lead engineer to find out the cause, the real new date and what the delay affects." },
+        { id: "b", text: "Inform the sponsor today that the integration date will slip by two weeks." },
+        { id: "c", text: "Ask the contract manager to issue a formal notice of breach to the vendor." },
+        { id: "d", text: "Tell your two dependent teams to stop work until the vendor confirms a new date." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "A remark in passing is not yet a fact. Understanding the cause, the new date and the knock-on effects comes first, and it makes every later step accurate." },
+        { option: "b", rank: "acceptable", why: "Telling the sponsor early is honest, and they will need to know. But reporting an unverified figure risks a wrong message, and a day of analysis makes the report far more useful." },
+        { option: "c", rank: "premature", why: "The contract may well matter later. Reaching for it first, on an unconfirmed remark, damages the relationship before you know whether the delay is even the vendor's fault." },
+        { option: "d", rank: "wrong", why: "Stopping two teams on a rumour wastes capacity and may be unnecessary. It acts dramatically before anyone knows what is actually happening." }
+      ],
+      mindset: "Confirm what is really happening before you report it, escalate it or act on it."
+    },
+    traps: [
+      "Escalating to the sponsor before speaking to the person who knows the facts.",
+      "Raising a change request before the impact of the change is understood.",
+      "Emailing the whole team about one person's behaviour instead of talking to them privately.",
+      "Choosing a step that will be needed later when the stem asks what to do first.",
+      "Bending an agreed process because the outcome seems obviously right."
+    ],
+    checks: [
+      {
+        id: "F2-c1", type: "single", ecoTask: "people-2",
+        stem: "A tester tells you a developer keeps rejecting her defect reports without explanation. She is thinking of copying in the head of development next time. What should you suggest first?",
+        options: [
+          { id: "a", text: "That she talks with the developer directly about why the reports are being rejected, and you offer to help if that fails.", correct: true,
+            rationale: "A direct conversation is the first step for a problem between two people. Your offer keeps support available without taking it over." },
+          { id: "b", text: "That she copies in the head of development so there is a record.",
+            rationale: "Going above someone before talking to them damages trust and skips the step most likely to fix the cause." },
+          { id: "c", text: "That you raise it at the next retrospective with the whole team.",
+            rationale: "A team forum suits shared problems. Airing one person's behaviour there first is likely to embarrass rather than resolve." },
+          { id: "d", text: "That you move defect triage away from the developer.",
+            rationale: "Changing roles is a fix built before anyone has understood why the reports are being rejected." }
+        ],
+        explanation: "When a problem sits between two people, the preferred first move is a direct, private conversation. It treats both with respect and is most likely to uncover the real cause. Escalation and structural fixes come later if that conversation fails.",
+        mindset: "Talk to the person involved before you talk about them."
+      },
+      {
+        id: "F2-c2", type: "single", ecoTask: "business-1",
+        stem: "Your forecast shows the project will exceed its agreed cost tolerance. You have checked the figures, tried the savings within your authority, and they are not enough. What should you do next?",
+        options: [
+          { id: "a", text: "Escalate to the sponsor promptly with the forecast, the cause, the options tried and a recommendation.", correct: true,
+            rationale: "The breach is confirmed and beyond your authority, so escalation is now correct. Bringing options helps the sponsor decide well." },
+          { id: "b", text: "Keep looking for further savings before saying anything to the sponsor.",
+            rationale: "Your own options are exhausted. Holding back a confirmed tolerance breach delays a decision that belongs to someone else." },
+          { id: "c", text: "Re-check the figures with the finance team once more.",
+            rationale: "The stem says the figures have been checked. Repeating a step already done is not the next step." },
+          { id: "d", text: "Quietly reduce scope so that the cost stays within tolerance.",
+            rationale: "Cutting scope without agreement changes what the customer receives and hides the problem from those who own the decision." }
+        ],
+        explanation: "“Next” means the earlier steps are done. Understanding and local action have both been tried. A confirmed breach of tolerance is exactly when escalation becomes right, and it should be prompt and come with options.",
+        mindset: "Escalate once you have understood and tried what is yours, and not before."
+      },
+      {
+        id: "F2-c3", type: "single", ecoTask: "people-3",
+        stem: "During a stand-up, a developer says for the second day that she is waiting on database access from another department. The team cannot route round it. What is the most appropriate response from the servant leader?",
+        options: [
+          { id: "a", text: "Take ownership of the blocker, contact the other department today, and keep the team informed.", correct: true,
+            rationale: "Removing an impediment the team cannot clear itself is the servant leader's core job. Acting today stops it costing another day." },
+          { id: "b", text: "Ask the developer to keep chasing the other department herself.",
+            rationale: "She has already tried for two days. Leaving it with her wastes team capacity on something outside its control." },
+          { id: "c", text: "Add the blocker to the risk register and review it next week.",
+            rationale: "It is already happening, so it is an impediment, not a risk. Waiting a week lets it keep stopping work." },
+          { id: "d", text: "Reassign the developer to other work and drop the story from the sprint.",
+            rationale: "This may sometimes be needed, but it accepts the blocker without trying to clear it first." }
+        ],
+        explanation: "A servant leader protects the team's flow. When a blocker sits outside the team's reach, the leader takes it on and works to clear it quickly. Logging it for later or leaving it with the developer both let it keep costing time.",
+        mindset: "Remove what the team cannot remove itself, and do it quickly."
+      }
+    ],
+    terms: ["Servant leadership", "Escalate", "Code of ethics", "Impediment", "Emotional intelligence"],
+    recap: [
+      "Serve the team, keep value in view and never trade away honesty.",
+      "Understand a situation before acting, unless safety or law demands speed.",
+      "Talk to the person directly, then follow the agreed process.",
+      "Escalate last, promptly when needed, and always with options.",
+      "Read first, next and best as instructions about sequence."
+    ],
+    mindset: "Understand first, talk directly, follow the process, protect the team and escalate last.",
+    practice: { count: 10, decks: ["conflict"], from: { tag: "archetype-diagnose-first" } }
+  },
+  {
+    id: "F3", module: "foundations", order: 3, ecoTask: "", minutes: 35,
+    prereqs: ["F1"],
+    title: "Projects, value and delivery approaches",
+    objectives: [
+      "Tell a project from operations, and a programme from a portfolio.",
+      "Explain how a project creates value, not just deliverables.",
+      "Describe predictive, iterative, incremental and adaptive life cycles.",
+      "Choose a delivery approach from how much is known and how fast things change.",
+      "Recognise when a hybrid approach fits better than either pure form."
+    ],
+    examWeight: "Delivery approaches are the lens for most items, so this lesson underpins the whole outline. It introduces ideas that the integrated planning lesson develops in depth. Expect stems that ask which approach suits a piece of work, or that test whether you apply the right habits for the approach described.",
+    sections: [
+      { id: "s1", heading: "Projects, operations and the bigger picture",
+        body: "A project is temporary work to create something new. It has a start and an end, and it produces a unique result. Building a clinic is a project. Running the clinic afterwards is operations.\n\n"
+          + "Operations are ongoing and repetitive. They keep the organisation working. Projects change the organisation, and operations then run what the project delivered.\n\n"
+          + "Related projects are often grouped into a programme. A programme exists because managing the projects together yields benefits that managing them apart would not. A new transport system might combine track, trains and ticketing projects.\n\n"
+          + "A portfolio is a collection of programmes, projects and operations managed to meet strategic goals. Its question is which work to do at all, and in what priority." },
+      { id: "s2", heading: "Value, not just deliverables",
+        body: "A deliverable is a thing the project produces: a building, a system, a report. Value is the benefit that thing brings once people use it.\n\n"
+          + "The two can come apart. A system delivered on time and on budget creates no value if nobody adopts it. A smaller system that people use every day may be worth far more.\n\n"
+          + "This is why the exam keeps returning to outcomes. The business case explains why the work is worth doing. Benefits are measured after delivery, often by someone outside the project.\n\n"
+          + "Good project managers keep checking that the work is still worth doing. When the reason for a project disappears, the right response may be to change course or stop." },
+      { id: "s3", heading: "Four ways to run the life cycle",
+        body: "A predictive life cycle plans the whole project early. Scope, schedule and cost are set at the start and changes go through control. It suits work that is well understood, such as a repeat installation.\n\n"
+          + "An iterative life cycle repeats cycles to refine a solution. Each pass improves understanding, often through prototypes. It suits work where the answer emerges through trying.\n\n"
+          + "An incremental life cycle delivers the result in usable pieces. Each piece adds capability that people can use early. It suits work where early partial value matters.\n\n"
+          + "An adaptive life cycle combines both. Short cycles deliver usable increments, and the plan changes from what each cycle teaches. Agile methods such as Scrum are adaptive.\n\n"
+          + "None of these is better in general. Each fits a different kind of uncertainty." },
+      { id: "s4", heading: "Choosing an approach",
+        body: "Two questions guide the choice. How well are the requirements understood? How stable is the technology or method?\n\n"
+          + "When both are clear and stable, predictive delivery is efficient. Detailed planning pays off because the plan will hold.\n\n"
+          + "When requirements are uncertain or likely to change, adaptive delivery reduces waste. You learn what people need by showing them working results early.\n\n"
+          + "Other factors matter too. A hard regulatory deadline, a fixed-price contract or a physical build may push towards predictive control. A customer able to take part often favours adaptive work.\n\n"
+          + "The organisation's culture counts as well. An adaptive approach needs empowered teams and engaged customers. Without them it can collapse into unplanned work." },
+      { id: "s5", heading: "Hybrid and tailoring",
+        body: "Many real projects mix approaches. A new hospital wing may build its structure predictively while its patient software is developed in sprints. That mix is a hybrid approach.\n\n"
+          + "Hybrid works when each part uses the approach that suits it. It fails when one part's habits are forced on the other. Demanding a fixed specification from the software team breaks it. Letting the structural work drift without a baseline breaks the build.\n\n"
+          + "The hardest work in hybrid delivery sits at the seams. Where does the iterative part depend on a fixed date? Where must a fixed design wait for a decision the team has not yet made? The project manager plans those handovers explicitly.\n\n"
+          + "Tailoring is the wider skill behind all of this. It means adapting processes, documents and controls to the project in front of you. A small, low-risk project needs lighter control than a large, regulated one." }
+    ],
+    lenses: {
+      predictive: "Requirements are known and stable, so the team plans in detail early, sets baselines and controls change formally. Progress is measured against the plan.",
+      agile: "Requirements emerge, so the team delivers in short cycles, reviews each result with the customer and re-plans from what it learns. Progress is measured by working output.",
+      hybrid: "Stable parts are planned predictively while uncertain parts run in cycles. The project manager tailors each part and plans the handovers between them."
+    },
+    worked: {
+      stem: "Your organisation is funding a new visitor centre at a nature reserve. The building has full planning consent and a fixed design. The interactive exhibits are still an idea, and the trustees want to test them with visitors first. Which delivery approach should the project manager propose?",
+      options: [
+        { id: "a", text: "A hybrid approach: build predictively to the fixed design, and develop the exhibits in short cycles tested with visitors." },
+        { id: "b", text: "An adaptive approach for the whole project, so that everything can change as the trustees learn more." },
+        { id: "c", text: "A predictive approach for everything, specifying the exhibits fully before any building work starts." },
+        { id: "d", text: "Delay the decision until the exhibit ideas are fully defined, then choose one approach for both parts." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Each part gets the approach its uncertainty calls for. The consented building benefits from a firm plan, and the exhibits benefit from testing with real visitors." },
+        { option: "b", rank: "acceptable", why: "Adaptive delivery suits the exhibits well. Applied to a building with fixed consent and design, it adds churn without adding learning." },
+        { option: "c", rank: "premature", why: "Fixing exhibit specifications now commits to designs the trustees have not tested. It is a decision made before the evidence exists." },
+        { option: "d", rank: "wrong", why: "Waiting holds up a building that is ready to proceed. It also assumes one approach must fit both, which the situation does not require." }
+      ],
+      mindset: "Match the approach to each part's uncertainty, not to one rule for the whole project."
+    },
+    traps: [
+      "Treating agile as always better, or predictive as always safer.",
+      "Measuring success by deliverables shipped rather than value realised.",
+      "Forcing one part of a hybrid project to work by the other part's rules.",
+      "Applying the full process to a small, low-risk project instead of tailoring it.",
+      "Calling a group of unrelated projects a programme."
+    ],
+    checks: [
+      {
+        id: "F3-c1", type: "single", ecoTask: "process-1",
+        stem: "A charity wants to replace its donor database. The data rules are fixed by law, but how staff will use the new reporting is unclear. Which statement best guides the choice of approach?",
+        options: [
+          { id: "a", text: "Control the legally fixed data rules firmly, and develop the reporting iteratively with the staff who will use it.", correct: true,
+            rationale: "Stable, mandated parts suit firm control, while unclear needs suit iteration. Matching each part to its uncertainty is the core of tailoring." },
+          { id: "b", text: "Use predictive delivery throughout, because the law is involved.",
+            rationale: "The law fixes only the data rules. Locking the unclear reporting needs too would build to guesses." },
+          { id: "c", text: "Use adaptive delivery throughout, because the users are unsure.",
+            rationale: "The legal rules are not uncertain. Treating them as open to change adds risk without adding learning." },
+          { id: "d", text: "Ask the staff to define every report in detail before choosing an approach.",
+            rationale: "Staff are unsure precisely because they have not seen the system. Demanding detail now produces guesses dressed as requirements." }
+        ],
+        explanation: "The approach should follow the uncertainty of each part. Fixed legal rules are stable and suit firm control. Reporting needs that people cannot yet describe are best discovered by showing them working versions early.",
+        mindset: "Let how much is known decide how much is planned up front."
+      },
+      {
+        id: "F3-c2", type: "single", ecoTask: "process-3",
+        stem: "A ticketing app for a theatre group was delivered on time and on budget. Three months later, most customers still buy by phone. How should the project's success be judged?",
+        options: [
+          { id: "a", text: "The deliverable succeeded, but the value it was meant to bring has not yet been realised.", correct: true,
+            rationale: "Delivery and value are different measures. Low adoption means the expected benefit has not arrived." },
+          { id: "b", text: "As a full success, because time and budget were met.",
+            rationale: "Meeting time and budget measures delivery only. The project existed to change how customers buy tickets." },
+          { id: "c", text: "As a failure of the development team.",
+            rationale: "Adoption depends on far more than the build, such as promotion and support. Blaming one team skips the analysis." },
+          { id: "d", text: "As not yet measurable, until the next financial year.",
+            rationale: "Adoption is already measurable and is already telling you something important about the benefit." }
+        ],
+        explanation: "A project creates value only when its result is used and the expected benefit appears. An app few customers use is a delivered output with little realised value. Recognising that gap is the start of fixing it.",
+        mindset: "Judge a project by the value it brings, not only by what it delivered."
+      }
+    ],
+    terms: ["Project", "Programme", "Portfolio", "Predictive life cycle", "Iterative life cycle", "Incremental life cycle", "Adaptive life cycle", "Hybrid approach", "Tailoring"],
+    recap: [
+      "Projects are temporary and change the organisation; operations run what they deliver.",
+      "Deliverables are outputs; value is the benefit once people use them.",
+      "Predictive, iterative, incremental and adaptive suit different uncertainties.",
+      "Choose by how well requirements are known and how stable the method is.",
+      "Hybrid works when each part keeps the rules that suit it."
+    ],
+    mindset: "Fit the approach to the uncertainty of the work, and keep the value it should bring in view.",
+    practice: { count: 10, decks: ["process"], from: { ecoTask: "process-1" } }
+  },
+  {
+    id: "F4", module: "foundations", order: 4, ecoTask: "", minutes: 40,
+    prereqs: ["F3"],
+    title: "Agile fundamentals",
+    objectives: [
+      "Explain the values behind agile delivery and why they exist.",
+      "Name the Scrum roles, events and artifacts, and the purpose of each.",
+      "Describe Kanban and how limiting work in progress improves flow.",
+      "Contrast a servant leader with a command-and-control manager.",
+      "Spot practices that look agile but miss its intent."
+    ],
+    examWeight: "Most items are set in adaptive or hybrid work, as the split above shows. They rarely ask you to define Scrum. They describe a team and ask how a servant leader or product owner should respond. You need the roles and events well enough to see when one is being misused.",
+    sections: [
+      { id: "s1", heading: "Why agile exists",
+        body: "Agile delivery grew from a simple observation. On complex work, detailed plans made early are often wrong. Teams then spend effort defending the plan instead of building what is needed.\n\n"
+          + "The agile values shift the emphasis. They favour people and conversation over heavy process, working results over exhaustive documents, and collaboration with the customer over contract negotiation. They also favour responding to change over following a fixed plan.\n\n"
+          + "The items on the right still matter. Agile teams plan, document and agree contracts. They simply value the items on the left more when the two conflict.\n\n"
+          + "The underlying idea is fast feedback. Build a small piece, show it, learn, adjust. Short cycles turn a large uncertain bet into many small, safer ones." },
+      { id: "s2", heading: "Scrum roles",
+        body: "Scrum is the most common agile framework. It has three roles.\n\n"
+          + "The product owner decides what the team builds and in what order. They own and rank the product backlog, guided by value. One person holds this role, so priorities do not conflict.\n\n"
+          + "The developers build the product. In Scrum this means everyone doing the work, whatever their specialism. They decide how to do the work and how much they can take on.\n\n"
+          + "The scrum master serves the team and the organisation. They coach the team in Scrum, remove impediments and protect the team from disruption. They do not assign tasks or direct the work.\n\n"
+          + "There is no project manager role inside Scrum itself. In larger settings, a project manager often works around several teams, handling budgets, dependencies and stakeholders." },
+      { id: "s3", heading: "Scrum events and artifacts",
+        body: "Work happens in sprints, fixed timeboxes usually one to four weeks long. Each sprint aims to produce a usable increment.\n\n"
+          + "Sprint planning opens the sprint. The team agrees a sprint goal and selects backlog items to meet it. The daily scrum is a short daily meeting where developers coordinate the next day's work.\n\n"
+          + "The sprint review closes the sprint with stakeholders. The team shows what it built and gathers feedback that shapes the backlog. The retrospective follows, and the team looks at how it worked and picks improvements.\n\n"
+          + "Three artifacts make the work visible. The product backlog lists everything that might be built, in priority order. The sprint backlog holds the items chosen for this sprint and the plan to deliver them. The increment is the usable result.\n\n"
+          + "The definition of done states what complete means. An item is not finished until it meets it." },
+      { id: "s4", heading: "Kanban and flow",
+        body: "Kanban comes from manufacturing and focuses on flow. Work moves across a board through columns such as to do, in progress and done.\n\n"
+          + "Its key practice is limiting work in progress. Each column has a cap on how many items it may hold. When a column is full, the team helps finish work before starting more.\n\n"
+          + "This sounds slower but is usually faster. Fewer items in progress means less switching and shorter waits. Bottlenecks become visible because work piles up in front of them.\n\n"
+          + "Kanban has no fixed sprints or prescribed roles. Teams measure cycle time and throughput, and improve the flow step by step. Many teams blend Kanban with Scrum." },
+      { id: "s5", heading: "Servant leadership and agile in name only",
+        body: "In agile settings, leadership shifts from directing to enabling. The leader sets context, protects focus and removes obstacles. The team decides how to do the work.\n\n"
+          + "This changes the right answer to many situations. A team struggling with a technical choice is coached, not told. A missed sprint goal leads to a retrospective, not a reprimand.\n\n"
+          + "Watch for practices that copy the form but miss the intent. Daily meetings that become status reports to a manager. Sprints whose scope a manager changes halfway. A product owner who is a committee. Velocity used to compare or rank teams.\n\n"
+          + "The exam often offers an option that keeps the ceremony but breaks its purpose. Ask what each practice is for, and choose the response that serves that purpose." }
+    ],
+    lenses: {
+      predictive: "A predictive manager plans and directs the work, tracks it against a baseline and controls change formally. Some agile tools, such as daily coordination or visual boards, still help a predictive team.",
+      agile: "The team self-organises within a timebox, the product owner ranks the backlog by value, and the scrum master removes impediments. Change is expected and absorbed through the backlog.",
+      hybrid: "Agile teams often deliver within a wider predictive frame, such as a fixed release date or a stage gate. The project manager translates between team metrics and programme reporting without forcing either side to change how it works."
+    },
+    worked: {
+      stem: "Halfway through a sprint, a senior manager asks a developer on your team to add an urgent report for a board meeting next week. The developer has started it, and the sprint goal is now at risk. As the scrum master, what should you do first?",
+      options: [
+        { id: "a", text: "Talk with the senior manager and the product owner so the request is weighed against the sprint goal by the person who owns priorities." },
+        { id: "b", text: "Tell the developer to stop work on the report immediately and return to the sprint backlog." },
+        { id: "c", text: "Add the report to the sprint and remove another item so the team's total effort stays the same." },
+        { id: "d", text: "Let the developer finish the report, since a board request outranks normal sprint work." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The product owner owns priorities, and the senior manager may have a real need. Bringing them together protects the sprint without dismissing the request." },
+        { option: "b", rank: "acceptable", why: "Protecting the sprint is part of the role, so stopping is defensible. But it brushes aside a senior stakeholder without involving the person who should decide." },
+        { option: "c", rank: "premature", why: "Swapping work may be the outcome, but it is the product owner's call. Making the trade yourself takes a priority decision out of the right hands." },
+        { option: "d", rank: "wrong", why: "This lets anyone with seniority redirect the team mid-sprint. It undermines the product owner and makes sprint goals meaningless." }
+      ],
+      mindset: "Route priority decisions to the product owner and protect the team's focus while they decide."
+    },
+    traps: [
+      "Letting the scrum master assign tasks to developers.",
+      "Using velocity to compare or rank different teams.",
+      "Treating the daily scrum as a status report to a manager.",
+      "Changing sprint scope mid-sprint without the product owner.",
+      "Assuming agile means no planning or no documentation."
+    ],
+    checks: [
+      {
+        id: "F4-c1", type: "single", ecoTask: "people-3",
+        stem: "A Kanban team has a limit of three items in testing. Testing is full, and two developers have finished their coding. What should the developers do?",
+        options: [
+          { id: "a", text: "Help move items through testing before starting new coding work.", correct: true,
+            rationale: "The limit exists to stop work piling up. Swarming on the bottleneck finishes work and improves flow." },
+          { id: "b", text: "Start new items, since their own column has space.",
+            rationale: "Starting more while testing is full only grows the queue. It raises work in progress and slows delivery." },
+          { id: "c", text: "Raise the testing limit to five so their work can move on.",
+            rationale: "Lifting the limit hides the bottleneck instead of fixing it. The cap is there to make problems visible." },
+          { id: "d", text: "Wait idle until a testing slot opens.",
+            rationale: "Waiting wastes capacity. Helping clear the bottleneck is the purpose of the limit." }
+        ],
+        explanation: "Work-in-progress limits expose bottlenecks and push the team to finish before starting. When a downstream column is full, the right response is to help clear it. That shortens cycle time for everyone.",
+        mindset: "Stop starting and start finishing."
+      },
+      {
+        id: "F4-c2", type: "single", ecoTask: "process-9",
+        stem: "A director wants to publish each team's velocity in a monthly league table to encourage healthy competition. What is the best advice?",
+        options: [
+          { id: "a", text: "Advise against it, because velocity is relative to each team's own estimates and ranking it invites inflated points.", correct: true,
+            rationale: "Story points are calibrated inside each team. Comparing them across teams is meaningless and quickly distorts estimates." },
+          { id: "b", text: "Support it, because visible competition raises output.",
+            rationale: "Teams can raise velocity simply by inflating estimates. The table would reward the number, not the delivery." },
+          { id: "c", text: "Support it if the points are first converted to hours.",
+            rationale: "Converting points to hours turns a planning aid into a time-tracking measure. It still does not make teams comparable." },
+          { id: "d", text: "Publish it, but only to the teams themselves.",
+            rationale: "The problem is the ranking, not the audience. Teams would still be pushed to inflate their numbers." }
+        ],
+        explanation: "Velocity helps a single team forecast its own work. Because every team sizes in its own units, cross-team comparison means nothing. Turning it into a target encourages teams to game estimates rather than deliver more value.",
+        mindset: "Use a team's metrics to help that team, never to rank it against others."
+      }
+    ],
+    terms: ["Scrum", "Product owner", "Scrum master", "Product backlog", "Sprint", "Daily scrum", "Retrospective", "Definition of done", "Kanban", "Work in progress"],
+    recap: [
+      "Agile favours people, working results, collaboration and responding to change.",
+      "The product owner ranks the backlog; developers decide how; the scrum master serves.",
+      "Each sprint has planning, daily scrums, a review and a retrospective.",
+      "Kanban limits work in progress to improve flow and expose bottlenecks.",
+      "Keep the purpose of each practice, not just its form."
+    ],
+    mindset: "In agile work, enable the team and protect its focus rather than directing its every move.",
+    practice: { count: 10, decks: ["agile"], from: { approach: "agile" } }
+  },
+  {
+    id: "F5", module: "foundations", order: 5, ecoTask: "", minutes: 30,
+    prereqs: ["F3"],
+    title: "The framework map",
+    objectives: [
+      "Explain how principles, performance domains and processes relate.",
+      "Use the principles to judge an option when no rule applies.",
+      "Describe what the performance domains cover and why they overlap.",
+      "Use the process groups as a cross-reference, not a sequence to memorise.",
+      "Place the exam's three domains alongside the standards' frameworks."
+    ],
+    examWeight: "Few items ask about a framework by name. Instead, the frameworks shape what the preferred answer looks like. Knowing the map lets you reason from principle when a stem describes something unfamiliar. It also stops you mixing up the exam's domains with the standards' performance domains.",
+    sections: [
+      { id: "s1", heading: "Three layers of guidance",
+        body: "Project management guidance comes in layers. At the top are principles: broad statements of good practice that hold in any approach. In the middle are performance domains: areas of activity every project must handle. At the base are processes and methods: specific ways of doing the work.\n\n"
+          + "The layers serve different purposes. Principles tell you what good looks like. Domains tell you what to pay attention to. Processes and methods give you tools.\n\n"
+          + "Older guidance led with processes, set out as inputs, tools and outputs. Current guidance leads with principles and outcomes. Processes remain useful, but as a toolbox rather than a script." },
+      { id: "s2", heading: "Principles: reasoning when no rule applies",
+        body: "The principles describe how a good project practitioner behaves. They cover stewardship, teamwork, engaging stakeholders and focusing on value. They also cover thinking in systems, showing leadership, tailoring, building in quality, navigating complexity, optimising risk responses, embracing adaptability and enabling change.\n\n"
+          + "You do not need to recite them. You need to use them. When an option protects value, involves the right people and treats others fairly, it is aligned with the principles.\n\n"
+          + "This matters most on unfamiliar items. If a stem describes something you have never studied, ask which option a responsible steward of the project would choose. That usually narrows the field to one.\n\n"
+          + "Principles can also pull against each other. Embracing change can strain stewardship of a fixed budget. When they conflict, look for the option that serves the project's purpose and treats people fairly. Then make the trade-off visible to those it affects." },
+      { id: "s3", heading: "Performance domains: what every project handles",
+        body: "The standards describe performance domains, groups of related activity that every project must manage well. They include stakeholders, team, development approach and life cycle, and planning. They also include project work, delivery, measurement and uncertainty.\n\n"
+          + "The domains are not phases. They run at the same time and overlap constantly. Planning affects the team, the team affects delivery, and uncertainty touches everything.\n\n"
+          + "Each domain has outcomes that show it is going well. For stakeholders, that might be productive working relationships. For delivery, it might be that the project contributes to business objectives.\n\n"
+          + "Do not confuse these with the exam's three domains. The exam's People, Process and Business Environment domains organise the test. The standards' performance domains organise the practice." },
+      { id: "s4", heading: "Process groups as a cross-reference",
+        body: "The process view groups work into initiating, planning, executing, monitoring and controlling, and closing. Many people learned project management this way.\n\n"
+          + "These groups are not a strict sequence. Planning continues throughout a project, and monitoring runs alongside execution. On an adaptive project, all five happen inside every cycle.\n\n"
+          + "The process view is still useful for one thing: finding the right tool. Want to understand how scope is defined or how risks are analysed? The process view names the activity and its typical inputs and outputs.\n\n"
+          + "The library holds the full process view as a reference. Use it when a term in a stem is unfamiliar, not as a list to memorise.\n\n"
+          + "One habit from the process view is worth keeping. Every activity takes something in and produces something out. Asking what a step needs and what it should produce is a quick way to spot a missing input in a stem." },
+      { id: "s5", heading: "How the pieces fit the exam",
+        body: "The exam outline is built from tasks within its three domains. Each lesson in this suite covers one task. The principles and performance domains run beneath all of them.\n\n"
+          + "Picture it as a grid. Each exam task asks you to do something, such as manage conflict or plan quality. The principles shape how you do it well. The performance domains remind you what it touches.\n\n"
+          + "So when you study a lesson, look for three things. What is the task? Which principles decide the preferred answer? Which other areas does it affect?\n\n"
+          + "Seen this way, the frameworks stop being lists to learn. They become a way of reasoning that carries from one topic to the next." }
+    ],
+    lenses: {
+      predictive: "The process view maps closely onto predictive work, with planning up front and formal monitoring and control. The principles still decide how each process is carried out.",
+      agile: "Adaptive teams rarely name processes, but the performance domains still apply. Planning, delivery and measurement happen in every iteration, guided by the same principles.",
+      hybrid: "The project manager uses the process view for the controlled parts and the team's own practices for the iterative parts. The principles provide one consistent standard across both."
+    },
+    worked: {
+      stem: "Your team is installing a new irrigation system for a regional farming cooperative. A member asks you to include a sensor network the contract never mentioned, and offers to pay extra informally. Nothing in your methodology covers informal payments. What should guide your response first?",
+      options: [
+        { id: "a", text: "Treat it as a scope change through the agreed process and decline any informal payment, as stewardship and honesty require." },
+        { id: "b", text: "Ask the cooperative's board whether it wants the sensor network before discussing payment at all." },
+        { id: "c", text: "Price the sensor network quickly so the member can decide whether the extra cost is worth it." },
+        { id: "d", text: "Accept the informal payment and install the sensors, since the member is a customer and wants them." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "When no specific rule applies, the principles decide. Stewardship and integrity rule out side payments, and the agreed change process keeps the decision with the right people." },
+        { option: "b", rank: "acceptable", why: "Checking that the cooperative as a whole wants the change is sensible. It leaves the informal payment unaddressed, which is the most pressing issue." },
+        { option: "c", rank: "premature", why: "Pricing the work treats it as a commercial question before the integrity issue and the proper change route have been dealt with." },
+        { option: "d", rank: "wrong", why: "This takes an informal payment and changes the scope outside any agreement. It breaches integrity and bypasses the cooperative's control of its own contract." }
+      ],
+      mindset: "When the rules are silent, reason from the principles: honesty, stewardship and value."
+    },
+    traps: [
+      "Treating the process groups as a strict sequence that runs once.",
+      "Confusing the exam's three domains with the standards' performance domains.",
+      "Memorising inputs and outputs instead of understanding what each process is for.",
+      "Choosing an option that follows a process but clearly harms value or fairness.",
+      "Assuming a framework rule exists for every situation."
+    ],
+    checks: [
+      {
+        id: "F5-c1", type: "single", ecoTask: "process-1",
+        stem: "A new project manager plans to run initiating, planning, executing, monitoring and closing once each, in order, on a six-month agile product build. What is the flaw in this plan?",
+        options: [
+          { id: "a", text: "On adaptive work, planning, executing and monitoring repeat within every cycle rather than happening once.", correct: true,
+            rationale: "The process groups are a cross-reference, not a timeline. Adaptive projects cycle through them repeatedly." },
+          { id: "b", text: "The process groups apply only to construction projects.",
+            rationale: "The groups describe kinds of activity found on any project. The flaw is treating them as a single sequence." },
+          { id: "c", text: "Closing should come before monitoring.",
+            rationale: "Closing ends a phase or project. Reordering the groups does not fix treating them as one pass." },
+          { id: "d", text: "Initiating is not needed on agile projects.",
+            rationale: "Agile work still needs authorisation and a shared purpose. The problem is the single pass, not initiating." }
+        ],
+        explanation: "The process groups describe types of activity, and they overlap in practice. On adaptive projects, planning, delivery and monitoring recur in every cycle. Running each once suits only the most stable predictive work.",
+        mindset: "Use the process view as a toolbox, not as a script to run once."
+      },
+      {
+        id: "F5-c2", type: "single", ecoTask: "business-2",
+        stem: "A supplier offers your project manager a holiday as a thank-you during a contract renewal. Your organisation has no written gift policy. How should she decide what to do?",
+        options: [
+          { id: "a", text: "Decline it, because accepting would compromise her impartiality whatever the policy says.", correct: true,
+            rationale: "Integrity does not depend on a written rule. A gift during a renewal creates a clear conflict of interest." },
+          { id: "b", text: "Accept it, since no policy forbids it.",
+            rationale: "The absence of a rule is not permission. The principles of honesty and fairness still apply." },
+          { id: "c", text: "Accept it but declare it after the renewal is signed.",
+            rationale: "Declaring it later does not remove the conflict during the decision. It also risks looking like concealment." },
+          { id: "d", text: "Ask the supplier to give the holiday to the team instead.",
+            rationale: "Redirecting the gift does not remove the supplier's attempt to influence the renewal." }
+        ],
+        explanation: "Principles guide behaviour where specific rules are silent. A valuable gift from a supplier during a renewal threatens fair treatment of other suppliers and the organisation's interests. Declining it protects both.",
+        mindset: "Where no rule applies, act as an honest steward of the project would."
+      }
+    ],
+    terms: ["Process group", "Initiating", "Planning", "Closing", "Tailoring", "Organisational process assets", "Enterprise environmental factors"],
+    recap: [
+      "Principles say what good looks like; domains say what to watch; processes give tools.",
+      "Reason from the principles when no specific rule applies.",
+      "Performance domains overlap and run together, not in sequence.",
+      "Process groups are a cross-reference, repeated within each cycle on adaptive work.",
+      "The exam's domains organise the test; the standards organise the practice."
+    ],
+    mindset: "When no rule fits, choose what an honest steward focused on value would do.",
+    practice: { count: 10, decks: ["process"], from: {} }
+  },
+  {
     id: "P4", module: "process", order: 9, ecoTask: "process-6", minutes: 35,
     prereqs: ["F3", "P1"],
     title: "Project finance",
@@ -12885,6 +13470,350 @@ PMP.LESSONS = Object.freeze([
     ],
     mindset: "Know why the numbers moved before you decide what to do about them.",
     practice: { count: 10, decks: ["evm"] }
+  },
+  {
+    id: "X1", module: "skills", order: 32, ecoTask: "", minutes: 30,
+    prereqs: ["F2"],
+    title: "Question technique",
+    objectives: [
+      "Read a stem in a fixed order: the question, the situation, then the options.",
+      "Identify the delivery approach and the role you are playing.",
+      "Eliminate options using the four ways a choice can be wrong.",
+      "Separate the best answer from answers that are merely true.",
+      "Manage doubt by marking an item and moving on."
+    ],
+    examWeight: "Technique cannot replace knowledge, but it protects the marks your knowledge has earned. Most lost marks on situational items come from answering a slightly different question from the one asked. This lesson gives you a repeatable routine for every item.",
+    sections: [
+      { id: "s1", heading: "Read the last sentence first",
+        body: "Long stems tempt you to read from the top and form an opinion early. Resist it. Read the final sentence first, because that is the actual question.\n\n"
+          + "Is it asking what to do first, next or best? Is it asking what caused something, or what to do about it? Is it asking about a process, a document or a behaviour?\n\n"
+          + "Then read the situation with that question in mind. Details now sort themselves into relevant and background.\n\n"
+          + "Read the options last. If you read them early, the stem starts to look like it supports whichever option caught your eye.\n\n"
+          + "Before you look at the options, try to predict the answer in your own words. Then look for the option closest to your prediction. This keeps the options from steering your reading of the situation." },
+      { id: "s2", heading: "Find the approach and your role",
+        body: "Two facts in the stem shape every answer. The first is the delivery approach. Words such as sprint, backlog and product owner signal adaptive work. Baseline, change board and phase gate signal predictive work. A mix suggests hybrid.\n\n"
+          + "The second is your role. Most items cast you as the project manager. Some cast you as a scrum master, an agile coach or a team member. The right action depends on what your role allows.\n\n"
+          + "Note also where you are in time. Planning, mid-delivery and closure each favour different responses.\n\n"
+          + "Finally, look for constraints: a contract type, a deadline, a regulation or a stakeholder's authority. These often decide between two otherwise sensible options." },
+      { id: "s3", heading: "The four ways an option is wrong",
+        body: "Situational options usually fall into four kinds. The scenario trainer uses the same four, so practise spotting them there.\n\n"
+          + "The best option is the right action at the right moment. An acceptable option is a reasonable action that is not quite the best, often because it is less complete.\n\n"
+          + "A premature option is a good action taken too early. Escalating before understanding, or raising a change before analysing impact, are classic examples. These are the most tempting wrong answers.\n\n"
+          + "A wrong option breaks a principle. It hides information, bypasses a process, blames someone or harms value.\n\n"
+          + "Eliminate the wrong options first; they are usually easy. Then compare the remaining two by asking which must come first." },
+      { id: "s4", heading: "True is not the same as best",
+        body: "Many options describe something a good project manager would do at some point. That does not make them the answer.\n\n"
+          + "When two options both seem right, test each against the exact wording. Does it answer the question asked? Does it fit the approach and the role? Does it come before the other in a sensible sequence?\n\n"
+          + "Prefer options that are proactive and specific. Talking to the person who knows the facts beats sending a general email. Updating the risk register with an owner beats discussing the risk at some later meeting.\n\n"
+          + "Be wary of options that rely on information the stem does not give. If the stem does not say a stakeholder is hostile, do not assume it.\n\n"
+          + "Watch for options that are correct in content but wrong in scope. Telling the whole steering group about one engineer's mistake is honest but disproportionate. The best answer is usually the smallest effective step taken by the right person." },
+      { id: "s5", heading: "Handling doubt",
+        body: "You will meet items where you cannot decide. That is normal, and it is not a sign of failure.\n\n"
+          + "Set yourself a rough limit for each item. If you reach it without a clear answer, choose your best option, mark the item and move on. Never leave an item blank, because there is no penalty for a wrong answer.\n\n"
+          + "Return to marked items if time allows. Change an answer only for a clear reason, such as a detail you missed. Second thoughts driven by anxiety are wrong more often than first thoughts driven by reasoning.\n\n"
+          + "Afterwards, in practice, record why you hesitated. Patterns in your doubts are often the clearest map of what to study next." }
+    ],
+    lenses: {
+      predictive: "In predictive stems, look for the plan, the baseline or the governance threshold that applies. The best answer usually works through them rather than around them.",
+      agile: "In agile stems, look for who owns the decision: the team, the product owner or the scrum master. The best answer usually leaves the decision with its owner and keeps the team self-organising.",
+      hybrid: "In hybrid stems, work out which part of the project the problem sits in. Apply that part's rules, and watch for options that impose one part's habits on the other."
+    },
+    worked: {
+      stem: "You are reviewing a practice item. The stem describes a product owner on a hybrid programme who keeps reprioritising features that a fixed hardware schedule depends on. It asks what the project manager should do first. You have narrowed the options to two. How should you choose between them?",
+      options: [
+        { id: "a", text: "Ask which of the two must logically happen before the other, given what the stem says has already been done." },
+        { id: "b", text: "Pick the option that sounds most like the way your own organisation would handle it." },
+        { id: "c", text: "Pick the longer option, because it usually contains more of the correct detail." },
+        { id: "d", text: "Re-read the whole stem from the top and choose whichever option feels right on the second reading." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The stem asks what to do first, so sequence decides. Checking which action must precede the other turns a feeling into a reasoned choice." },
+        { option: "d", rank: "acceptable", why: "Re-reading can surface a missed detail, so it is not wasted. Choosing by feel afterwards still leaves the key test, sequence, unapplied." },
+        { option: "c", rank: "premature", why: "Length sometimes correlates with completeness, but it is a guess rather than a reason. Relying on it skips the analysis the item is testing." },
+        { option: "b", rank: "wrong", why: "The exam rewards how a well-run organisation would act, not your own workplace habits. This is the most common way experienced managers lose marks." }
+      ],
+      mindset: "When two options both seem right, let the question's wording and the sequence decide."
+    },
+    traps: [
+      "Reading the options before you know what the question is asking.",
+      "Answering from your own workplace's habits instead of good practice.",
+      "Choosing a true statement that does not answer the question asked.",
+      "Inventing facts the stem does not give, such as a hostile stakeholder.",
+      "Changing a reasoned first answer out of anxiety."
+    ],
+    checks: [
+      {
+        id: "X1-c1", type: "single", ecoTask: "people-4",
+        stem: "A stem ends: “What should the project manager do next?” It says you have already met the unhappy stakeholder and listened to her concerns. Which kind of option should you rule out at once?",
+        options: [
+          { id: "a", text: "An option that proposes meeting the stakeholder to understand her concerns.", correct: true,
+            rationale: "That step is already done. Repeating it cannot be the next step, however sensible it sounds." },
+          { id: "b", text: "An option that updates the engagement approach for that stakeholder.",
+            rationale: "This builds on what you learned, so it could well be the next step." },
+          { id: "c", text: "An option that addresses the specific concern she raised.",
+            rationale: "Acting on a concern you now understand is a natural next step." },
+          { id: "d", text: "An option that agrees a follow-up with her to confirm the response worked.",
+            rationale: "This could be correct later in the sequence, so it should be weighed rather than ruled out." }
+        ],
+        explanation: "“Next” tells you where in the sequence you are. Anything the stem says has already happened cannot be the answer. Ruling those options out first narrows the choice quickly.",
+        mindset: "Place yourself in the sequence before choosing the next step."
+      },
+      {
+        id: "X1-c2", type: "single", ecoTask: "process-9",
+        stem: "In a practice mock you spend four minutes on one item and still cannot decide between two options. What is the best thing to do?",
+        options: [
+          { id: "a", text: "Choose the better of the two, mark the item for review and move on.", correct: true,
+            rationale: "This banks a reasoned answer, protects your time for later items and lets you return if time allows." },
+          { id: "b", text: "Keep working on it until you are sure, however long it takes.",
+            rationale: "Time spent here is taken from items you could answer quickly. One item is not worth several." },
+          { id: "c", text: "Leave it blank and come back later.",
+            rationale: "If you run out of time it stays blank and earns nothing. A marked best guess is always better." },
+          { id: "d", text: "Pick an option at random to save time.",
+            rationale: "You have already narrowed it to two. Using that reasoning gives better odds than chance." }
+        ],
+        explanation: "Pace matters across the whole paper. When an item stalls, commit to your best reasoned choice and mark it. You keep the chance of a mark, protect time for other items and can revisit it if time allows.",
+        mindset: "Bank your best answer, mark it and keep moving."
+      }
+    ],
+    terms: ["Product owner", "Baseline", "Phase gate", "Escalate"],
+    recap: [
+      "Read the question first, then the situation, then the options.",
+      "Identify the approach, your role, the timing and any constraint.",
+      "Eliminate wrong options, then use sequence to separate the last two.",
+      "A true statement is not the answer unless it answers the question asked.",
+      "When stuck, choose, mark and move on."
+    ],
+    mindset: "Answer the question that was asked, in the approach and role the stem sets.",
+    practice: { count: 10, decks: [], from: { difficulty: "4" } }
+  },
+  {
+    id: "X2", module: "skills", order: 33, ecoTask: "", minutes: 30,
+    prereqs: ["P3", "P4"],
+    title: "Calculations under time",
+    objectives: [
+      "Recognise which family of formula a calculation stem needs.",
+      "Avoid the common traps in earned value, float and forecasting items.",
+      "Run a quick sense check on any answer before committing to it.",
+      "Decide when a calculation is worth doing and when reading the figures is enough.",
+      "Use the formula lab to build speed without losing accuracy."
+    ],
+    examWeight: "Calculation items are a small share of the paper, but they are some of the most reliable marks available. They also hide in situational stems, where a figure must be read before the right action is clear. This lesson focuses on speed and accuracy rather than teaching each formula again.",
+    sections: [
+      { id: "s1", heading: "Recognise the family first",
+        body: "Most calculation items belong to a small set of families. Earned value measures performance against plan. Forecasting projects the final cost. Network analysis finds the critical path and float. Estimating combines optimistic and pessimistic views. Risk and decision analysis weigh probability and impact. Agile flow metrics relate work in progress, throughput and cycle time.\n\n"
+          + "Before reaching for a formula, name the family. The words in the stem usually give it away. Planned and earned value point to earned value. Early start and late finish point to network analysis.\n\n"
+          + "Naming the family first stops you grabbing a formula from the wrong set. It also tells you what kind of answer to expect.\n\n"
+          + "Write down the given figures before calculating. Label each one with its name. Most errors come from using the right formula with the wrong figure, especially when a stem lists several values in an unusual order." },
+      { id: "s2", heading: "Earned value and forecasting traps", formulaGroup: "evm",
+        body: "Earned value comes first in every variance and index. A positive variance or an index above one is good news. Mixing the order flips the meaning.\n\n"
+          + "Never compare actual cost directly with planned value. That compares money spent with work scheduled, and it says nothing reliable about either cost or schedule.\n\n"
+          + "For forecasts, ask why performance drifted before choosing a formula. A one-off problem suggests the remaining work will run to budget. A lasting trend suggests scaling by the cost index. A broken plan suggests a fresh estimate.\n\n"
+          + "The to-complete index asks how efficiently the remaining work must run to hit a target. A value well above one is a warning, not a plan." },
+      { id: "s3", heading: "Schedule and estimating traps", formulaGroup: "schedule",
+        body: "The critical path is the longest path through the network, not the shortest. It has zero total float when the schedule has no slack.\n\n"
+          + "Total float is how long an activity can slip without delaying the project. Free float is how long it can slip without delaying the next activity. Items often test the difference.\n\n"
+          + "When shortening a schedule, only work on the critical path helps. Shortening a non-critical activity costs money and saves nothing. Watch for a second path becoming critical once the first is shortened.\n\n"
+          + "For three-point estimates, check which weighting the stem asks for. One gives the most likely value extra weight; the other treats all three equally. Both appear in practice." },
+      { id: "s4", heading: "Sense checks that take seconds",
+        body: "Before committing, ask whether the answer is plausible. A forecast lower than the money already spent is impossible. A cost index of four on a struggling project is almost certainly a slip.\n\n"
+          + "Check the direction. If the project is behind schedule, the schedule index should be below one. If the answer says otherwise, recheck the order of the terms.\n\n"
+          + "Check the scale. Are the figures in thousands or units? A forecast that differs from the budget by a factor of ten usually means a misplaced digit.\n\n"
+          + "Round sensibly at the end, not the middle. Rounding early compounds small errors into wrong options." },
+      { id: "s5", heading: "When not to calculate",
+        body: "Many situational stems include figures but do not need a sum. They ask what the figures mean or what to do about them.\n\n"
+          + "If the stem already gives the index, interpret it. Spending a minute recomputing a given value wastes time and invites mistakes.\n\n"
+          + "If the question asks for an action, the figure is evidence, not the answer. A poor cost index leads to analysis and a forecast, not to a number.\n\n"
+          + "Build speed in the formula lab, where drills give worked solutions. Aim first for accuracy, then for pace. A fast wrong answer is worth nothing.\n\n"
+          + "Agile flow items deserve a mention. Average cycle time equals work in progress divided by throughput. Read which two of the three the stem gives, and the third follows. The formula lab covers these alongside velocity-based release forecasts." }
+    ],
+    lenses: {
+      predictive: "Predictive stems lean on earned value, critical path analysis, float and forecasts against a cost baseline. The arithmetic supports a decision about the baseline or a change.",
+      agile: "Agile stems lean on velocity, burn charts and flow metrics. The figures support forecasting a release or spotting a bottleneck, never ranking teams.",
+      hybrid: "Hybrid stems may combine both, for example earned value on a fixed workstream beside throughput on an agile one. Keep each figure in its own frame before comparing them."
+    },
+    worked: {
+      stem: "A calculation item gives a project's budget, earned value and actual cost. It then explains that a one-off supplier penalty caused all of the overspend so far. It asks for the estimate at completion. You have already worked out the cost performance index. What should you do next?",
+      options: [
+        { id: "a", text: "Use the forecast that assumes the remaining work runs at the budgeted rate, because the cause will not repeat." },
+        { id: "b", text: "Scale the whole budget by the cost index, since that is the most common forecasting formula." },
+        { id: "c", text: "Re-estimate all of the remaining work from the bottom up before choosing any figure." },
+        { id: "d", text: "Report the cost index itself as the answer, since it already summarises cost performance." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The stem says the overspend came from a one-off event. That points to the forecast in which remaining work proceeds at budgeted rates." },
+        { option: "b", rank: "acceptable", why: "Scaling by the index is a valid forecast when poor performance will continue. Here the stem rules that out, so it gives the wrong figure." },
+        { option: "c", rank: "premature", why: "A fresh bottom-up estimate is right when the original plan has failed. Nothing in the stem suggests that, and it is not something an exam item can calculate." },
+        { option: "d", rank: "wrong", why: "The question asks for a forecast cost, not an index. Answering with the index answers a different question." }
+      ],
+      mindset: "Let the cause of a variance choose the formula, not habit."
+    },
+    traps: [
+      "Putting actual cost or planned value first in a variance or index.",
+      "Comparing actual cost directly with planned value.",
+      "Shortening a non-critical activity to save time.",
+      "Using the wrong weighting in a three-point estimate.",
+      "Recomputing a figure the stem already gives."
+    ],
+    checks: [
+      {
+        id: "X2-c1", type: "single", ecoTask: "process-6",
+        stem: "You calculate a schedule performance index of 1.2 for a project the stem describes as running well behind its plan. What is the most likely explanation?",
+        options: [
+          { id: "a", text: "You have reversed the terms, dividing planned value by earned value.", correct: true,
+            rationale: "A project behind plan must have an index below one. Inverting the terms is the usual cause of the wrong direction." },
+          { id: "b", text: "The project is really ahead of schedule despite the description.",
+            rationale: "The stem's description is a fact you are given. When your result contradicts it, check your working first." },
+          { id: "c", text: "The index measures cost, not schedule.",
+            rationale: "This index does measure schedule. Confusing it with the cost index does not explain the wrong direction." },
+          { id: "d", text: "Indices above one always indicate a problem.",
+            rationale: "For these indices, above one means better than plan. That is exactly why the result contradicts the stem." }
+        ],
+        explanation: "A direction check catches most earned value slips. A project behind schedule has earned less than planned, so its schedule index must be below one. A result above one almost always means the terms were inverted.",
+        mindset: "Check that an answer points the way the situation says it should."
+      },
+      {
+        id: "X2-c2", type: "single", ecoTask: "process-8",
+        stem: "To recover time, a team proposes adding overtime to an activity with eight days of total float. The critical path runs elsewhere. What is the effect on the project end date?",
+        options: [
+          { id: "a", text: "None, because the activity is not on the critical path.", correct: true,
+            rationale: "An activity with float does not drive the end date. Shortening it spends money and saves no time." },
+          { id: "b", text: "The end date moves earlier by the time saved.",
+            rationale: "Only shortening critical activities moves the end date. This one already has slack." },
+          { id: "c", text: "The end date moves later, because overtime reduces efficiency.",
+            rationale: "Overtime may reduce efficiency, but it does not delay a project end date driven by another path." },
+          { id: "d", text: "The activity joins the critical path.",
+            rationale: "Shortening an activity increases its float. It moves further from the critical path, not onto it." }
+        ],
+        explanation: "The end date is set by the critical path. Spending effort to shorten an activity that already has float buys nothing. Recovery effort belongs on critical activities, watching for a second path becoming critical.",
+        mindset: "Spend schedule recovery effort only where it moves the end date."
+      }
+    ],
+    terms: ["Earned value", "Cost performance index", "Schedule performance index", "Estimate at completion", "Critical path", "Total float", "Free float", "Three-point estimating"],
+    recap: [
+      "Name the formula family before choosing a formula.",
+      "Earned value leads every variance and index.",
+      "Let the cause of a variance choose the forecast.",
+      "Only critical path work moves the end date.",
+      "Sense-check direction and scale, and interpret given figures rather than recomputing them."
+    ],
+    mindset: "Know what a figure means before you work it out, and check it before you trust it.",
+    practice: { count: 10, decks: ["evm"], from: { type: "fillblank" } }
+  },
+  {
+    id: "X3", module: "skills", order: 34, ecoTask: "", minutes: 25,
+    prereqs: ["X1", "X2"],
+    title: "Final review and exam day",
+    objectives: [
+      "Plan the last two weeks around review, not new material.",
+      "Review a mock exam so that it changes what you study.",
+      "Set a pacing plan for the day using the breaks.",
+      "Prepare the practical arrangements that remove avoidable stress.",
+      "Recover calmly from a run of difficult items."
+    ],
+    examWeight: "This lesson covers preparation and conduct rather than content. The figures above show the length of the paper and how the breaks fall. Use them to set your pacing checkpoints. Good preparation will not raise your knowledge, but it stops nerves and fatigue from costing marks you have earned.",
+    sections: [
+      { id: "s1", heading: "The last two weeks",
+        body: "In the final fortnight, stop learning new material. Your aim is to consolidate what you know and fix known weak spots.\n\n"
+          + "Sit your final full mock about a week before the exam. That leaves time to act on what it shows without crowding the last few days.\n\n"
+          + "Spend most of the remaining time on your mistake journal and the topics it flags. Re-read the lessons behind your knowledge gaps. Keep flashcard reviews going daily.\n\n"
+          + "In the last two or three days, taper. Skim the formula sheet and your own notes. Sleep properly. Cramming at this point adds anxiety far more than marks.\n\n"
+          + "Plan the fortnight in the planner if you have not already. Its taper days hold back new topics automatically. If you are behind, rebuild the plan rather than squeezing missed work into the last days." },
+      { id: "s2", heading: "Reviewing a mock properly",
+        body: "A mock score tells you where you stand. The review tells you what to do next, and it is where most of the value lies.\n\n"
+          + "Go through every wrong answer and tag its cause in the journal. Was it a knowledge gap, a misread, a rushed answer, the wrong instinct or a close call between two options?\n\n"
+          + "Then look at the pattern. Knowledge gaps point to lessons. Misreads and rushing point to technique and pacing. Wrong instincts point to the mindset lesson and the scenario trainer.\n\n"
+          + "Review your correct answers too, briefly. A right answer reached by guessing is a gap that happened to score.\n\n"
+          + "Allow as long for the review as for the mock itself. A mock without a review is mostly lost effort." },
+      { id: "s3", heading: "Pacing and breaks",
+        body: "Divide the paper into blocks between the breaks. Set a target point for each block so you know whether you are on pace.\n\n"
+          + "Check the clock at each target point, not after every item. Constant clock-watching costs more time than it saves.\n\n"
+          + "If you fall behind, speed up by marking hard items and moving on, not by rushing every item. A slow item is cheaper to leave than a quick item is to get wrong.\n\n"
+          + "Take the breaks. Stand up, drink some water and rest your eyes. A few minutes away restores more focus than they cost.\n\n"
+          + "Once a block is closed at a break, you usually cannot return to it. Review your marked items before each break, not at the very end." },
+      { id: "s4", heading: "Practical preparation",
+        body: "Remove every avoidable source of stress before the day. Confirm the time, the location or online setup, and the identification you need.\n\n"
+          + "For an online exam, test your equipment and room in advance. Clear the desk and the walls of anything the rules forbid. A late technical problem can unsettle you before the first item.\n\n"
+          + "For a test centre, plan your journey with spare time. Arriving rushed puts you behind before you begin.\n\n"
+          + "Eat something sustaining beforehand. Avoid trying anything new on the day, whether food, routine or study technique.\n\n"
+          + "Prepare the evening before as well. Lay out what you need, set two alarms and stop studying early. A rested mind reads stems more accurately than a crammed one, and accurate reading is where many marks are won." },
+      { id: "s5", heading: "Staying steady on the day",
+        body: "Expect a run of hard items at some point. Difficulty often comes in clusters, and some items are unscored trials you cannot identify. A hard patch is not evidence that you are failing.\n\n"
+          + "When you feel stuck or anxious, use your routine. Read the question first, find the approach and role, eliminate, choose, mark and move on. The routine keeps you working when confidence dips.\n\n"
+          + "Do not try to estimate your score as you go. You cannot do it accurately, and the attempt drains focus.\n\n"
+          + "Trust the work you have done. The suite measured your readiness across many sittings. One difficult hour on the day does not undo it." }
+    ],
+    lenses: {
+      predictive: "Expect items on plans, baselines and formal control throughout the paper. In review weeks, re-read the predictive lessons your journal flags most often.",
+      agile: "Agile and hybrid settings appear in most items, so practise reading roles and ownership quickly. In review weeks, run scenario sets to sharpen the ordering of agile responses.",
+      hybrid: "Hybrid items reward spotting which part of the work a problem sits in. In review weeks, practise naming the part before choosing a response."
+    },
+    worked: {
+      stem: "Your exam is in nine days. Your final full mock, taken yesterday, shows strong results in Process but a cluster of misses in Business Environment items about governance and compliance. You also scored poorly on a few earned value items. How should you plan your remaining days?",
+      options: [
+        { id: "a", text: "Tag every miss in the journal, re-read the governance and compliance lessons, drill those tasks and do a short earned value set, then taper." },
+        { id: "b", text: "Sit two more full mocks this week to build stamina and confirm the weak areas." },
+        { id: "c", text: "Work through the whole reference library again so that nothing is missed in the final week." },
+        { id: "d", text: "Spend every remaining day on earned value drills, since calculations are the easiest marks to gain." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "It acts on the mock's evidence, targets the largest cluster first, still covers the calculation gap, and leaves room to taper before the day." },
+        { option: "d", rank: "acceptable", why: "Calculation drills are a sound use of time and fix a real gap. They ignore the larger cluster of governance and compliance misses, which costs more marks." },
+        { option: "b", rank: "premature", why: "More mocks measure again what you already know. Without time to review and study between them, they add fatigue rather than marks." },
+        { option: "c", rank: "wrong", why: "Re-reading everything spreads effort thinly and ignores the specific evidence the mock produced. It also crowds out the taper." }
+      ],
+      mindset: "Let your latest evidence decide the final days, and leave time to rest before the exam."
+    },
+    traps: [
+      "Learning new material in the last few days instead of consolidating.",
+      "Sitting mocks back to back without reviewing them.",
+      "Watching the clock after every item instead of at checkpoints.",
+      "Skipping the breaks to save time.",
+      "Treating a run of hard items as proof that the exam is going badly."
+    ],
+    checks: [
+      {
+        id: "X3-c1", type: "single", ecoTask: "business-6",
+        stem: "After a practice mock, most of your misses are tagged as misread questions, and you knew the material behind nearly all of them. What should you change first?",
+        options: [
+          { id: "a", text: "Slow down on the stem and read the question sentence first, before looking at the options.", correct: true,
+            rationale: "Misreads come from reading technique, not missing knowledge. Fixing how you read the stem targets the actual cause." },
+          { id: "b", text: "Re-read every lesson to strengthen your knowledge.",
+            rationale: "The journal shows you knew the material. More study treats a cause you do not have." },
+          { id: "c", text: "Sit another full mock straight away to see if the pattern repeats.",
+            rationale: "Repeating the test without changing technique is likely to repeat the same misreads." },
+          { id: "d", text: "Answer faster so you have more time to check at the end.",
+            rationale: "Speeding up is likely to cause more misreads, not fewer." }
+        ],
+        explanation: "The cause decides the fix. Misreads mean the knowledge was there and the question was not read accurately. Reading the question sentence first, and the stem with it in mind, targets that cause directly.",
+        mindset: "Fix the cause of your mistakes, not just the topic they appear in."
+      },
+      {
+        id: "X3-c2", type: "single", ecoTask: "people-8",
+        stem: "Midway through the exam you hit six hard items in a row and start to feel you are failing. What is the most useful response?",
+        options: [
+          { id: "a", text: "Return to your routine for each item, choose and mark where unsure, and keep to your pacing checkpoints.", correct: true,
+            rationale: "A routine keeps you working steadily when confidence dips. Hard clusters are normal and say little about your overall result." },
+          { id: "b", text: "Spend extra time on each hard item to make sure you get them right.",
+            rationale: "This drains time from easier items later. A hard item is not worth more than an easy one." },
+          { id: "c", text: "Go back and re-check earlier answers to rebuild confidence.",
+            rationale: "This uses time without improving the items in front of you, and may introduce anxious changes." },
+          { id: "d", text: "Estimate your score so far to decide how hard to try.",
+            rationale: "You cannot estimate accurately, and the attempt distracts from answering well." }
+        ],
+        explanation: "Difficulty often clusters, and some items do not count at all. Treating a hard run as proof of failure is a mistake that costs marks. A steady routine and the pacing plan keep you collecting marks through the rest of the paper.",
+        mindset: "Keep to your routine when the items get hard."
+      }
+    ],
+    terms: ["Lessons learned register", "Retrospective", "Variance analysis", "Root cause analysis"],
+    recap: [
+      "Stop new learning in the last fortnight and consolidate instead.",
+      "Review every mock as carefully as you sat it.",
+      "Pace by checkpoints between the breaks, and take the breaks.",
+      "Remove avoidable stress with practical preparation.",
+      "Expect hard clusters and keep to your routine through them."
+    ],
+    mindset: "Prepare so that nothing on the day is a surprise, then trust the work you have done.",
+    practice: { count: 10, decks: [], from: {} }
   }
 ]);
 
@@ -26613,6 +27542,17 @@ PMP.Learn = (function () {
       var w = PMP.ECO.DOMAIN_WEIGHTS[task.domain];
       why.push(el("p", { text: "This lesson covers task " + task.n + " of the " + PMP.ECO.DOMAIN_LABELS[task.domain]
         + " domain, which carries " + PMP.fmt.pct(w) + " of the exam across " + PMP.ECO.DOMAIN_TASK_COUNTS[task.domain] + " tasks." }));
+    }
+    if (!task) {
+      /* A lesson with no single task still sits inside the whole exam, so
+         it gets the layout itself. Every figure comes from §01. */
+      var E = PMP.EXAM, D = PMP.ECO;
+      why.push(el("p", { text: "The exam has " + E.TOTAL_ITEMS + " items, of which " + E.SCORED_ITEMS + " are scored and "
+        + E.PRETEST_ITEMS + " are unscored trial items you cannot tell apart. You have " + E.MINUTES + " minutes, with "
+        + E.BREAK_COUNT + " optional breaks of " + E.BREAK_MINUTES + " minutes. That is about " + Math.round(E.PACE_TARGET_SEC) + " seconds an item." }));
+      why.push(el("p", { text: D.DOMAINS.map(function (d) {
+          return D.DOMAIN_LABELS[d] + " " + PMP.fmt.pct(D.DOMAIN_WEIGHTS[d]) + " (" + D.DOMAIN_TASK_COUNTS[d] + " tasks)";
+        }).join(", ") + ". About " + PMP.fmt.pct(D.APPROACH_SPLIT.predictive) + " of items assume predictive delivery; the rest are set in adaptive or hybrid work." }));
     }
     why = why.concat(paragraphs(lesson.examWeight));
     if (task) {
