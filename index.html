@@ -2069,6 +2069,9 @@ a.btn { text-decoration: none; }
 .td-done { margin-top: var(--sp-4); font-size: var(--t-sm); }
 .td-cta { margin-top: var(--sp-5); }
 .td-foot { border-top: 0; }
+.td-weekly { margin-bottom: var(--sp-4); }
+.td-weekly + .td-msgs, .td-weekly + .card { margin-top: 0; }
+.td-why-said { font-size: var(--t-sm); }
 .td-choice { border: 0; padding: 0; margin: var(--sp-4) 0 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .td-choice > legend { padding: 0; margin-bottom: var(--sp-2); font-size: var(--t-sm); font-weight: var(--w-semi); }
 .td-opt {
@@ -18430,7 +18433,7 @@ PMP.COACH_LINES = Object.freeze({
   weekly_adherence: { sample: { pct: "72%" }, text: function (c) { return "You did " + c.pct + " of the minutes the plan asked for this week."; } },
   weekly_noplan:    { text: function () { return "There was no plan to measure against this week."; } },
   weekly_readiness: { sample: { now: 48, prev: 41 }, text: function (c) { return "Readiness " + c.now + (c.prev === null || c.prev === undefined ? ", your first review." : ", against " + c.prev + " at the last review."); } },
-  weekly_cause:     { sample: { cause: "Misread the question", n: 6, total: 12 }, text: function (c) { return "Your commonest miss is “" + c.cause + "”, " + c.n + " of " + c.total + " tagged."; } },
+  weekly_cause:     { sample: { cause: "Misread the question", n: 6, total: 12 }, text: function (c) { return "Your commonest miss is \u201C" + c.cause + "\u201D, " + c.n + " of " + c.total + " tagged."; } },
   weekly_gap:       { sample: { label: "Mock exams", figure: "none sat" }, text: function (c) { return "The biggest gap in your readiness is " + c.label + " (" + c.figure + ")."; } },
   weekly_pick:      { text: function () { return "Pick one focus for next week. It changes what the coach suggests, never the plan."; } },
   weekly_note:      { text: function () { return "What got in the way? Optional, and it stays on this device."; } },
@@ -19011,7 +19014,7 @@ PMP.Router = (function () {
   function handle() {
     var to = parse(window.location.hash);
     if (!routes[to.name]) {
-      PMP.UI.toast("No section called “" + to.name + "”. Showing Today.", "warn");
+      PMP.UI.toast("No section called \u201C" + to.name + "\u201D. Showing Today.", "warn");
       return navigate("today", null, true);
     }
 
@@ -19685,9 +19688,11 @@ PMP.Exporter = (function () {
     return prefix + "-" + d.getFullYear() + "-" + PMP.fmt.pad(d.getMonth() + 1) + "-" + PMP.fmt.pad(d.getDate()) + ".json";
   }
 
-  function tryDownload(text, name) {
+  /* type is optional and defaults to JSON, which is every caller but the
+     coach's calendar export (§10.17), which saves an .ics file. */
+  function tryDownload(text, name, type) {
     try {
-      var blob = new Blob([text], { type: "application/json" });
+      var blob = new Blob([text], { type: type || "application/json" });
       var url = URL.createObjectURL(blob);
       var a = el("a", { href: url, download: name, style: "display:none" });
       document.body.appendChild(a);
@@ -20620,7 +20625,7 @@ PMP.Practice = (function () {
       var coachLink = !r.correct && !!PMP.Coach && !PMP.Coach.slice(PMP.Store.state).muted;
       item.ui.feedback.appendChild(el("p", { class: "ln-links" }, [
         el("a", { href: "#/learn?lesson=" + encodeURIComponent(lesson.id) + (coachLink ? "&part=3" : "") },
-          coachLink ? PMP.Coach.line("wrong_link", { id: lesson.id }) + " →"
+          coachLink ? PMP.Coach.line("wrong_link", { id: lesson.id }) + " \u2192"
                     : "Learn this topic: " + lesson.id + " " + lesson.title)
       ]));
     }
@@ -29349,7 +29354,7 @@ PMP.Audit = (function () {
     var out = { failures: [], gaps: [], checks: [], counts: { messages: 0, lines: 0, rendered: 0 } };
     function fail(where, msg) { out.failures.push({ where: where, msg: msg }); }
     if (!PMP.COACH_MESSAGES || !PMP.COACH_LINES || !PMP.Coach) {
-      fail("05.11", "The coach tables or §10.16 are missing.");
+      fail("05.11", "The coach tables or \u00A710.16 are missing.");
       out.pass = false;
       return out;
     }
@@ -29358,7 +29363,7 @@ PMP.Audit = (function () {
     function check(where, text) {
       out.counts.rendered++;
       if (typeof text !== "string" || !text.trim()) { fail(where, "Rendered empty."); leakBad++; return; }
-      if (CRULE.BAD.test(text)) { fail(where, "Leaks a placeholder: “" + text + "”"); leakBad++; }
+      if (CRULE.BAD.test(text)) { fail(where, "Leaks a placeholder: \u201C" + text + "\u201D"); leakBad++; }
       if (text.length > CRULE.MAX) { fail(where, text.length + " characters; the ceiling is " + CRULE.MAX + "."); lenBad++; }
     }
     var ids = Object.create(null);
@@ -33557,7 +33562,55 @@ PMP.Coach = (function () {
     return { rung: 3, text: line("hint_principle"), detail: q.mindset || null };
   }
 
-  /* ── 10.16.11  AUDIT FIXTURES ────────────────────────────────────────────
+  /* ── 10.16.11  CALENDAR ──────────────────────────────────────────────────
+     The plan's remaining study days as an iCalendar file, one event a day at
+     the time of day the person chose in the intake, lasting the day's planned
+     minutes. Built here and handed to §09.8 to save, so the reminders live
+     in the person's own calendar: no network, no notification permission.
+     Times are floating local times (no zone), which is what "19:00 on the
+     day" means wherever the file is opened. */
+  var STUDY_HOUR = { morning: [7, 0], midday: [12, 30], evening: [19, 0], varies: [19, 0] };
+
+  function calendar(state) {
+    state = state || PMP.Store.state;
+    var cp = currentPlan(state);
+    if (!cp) return null;
+    var today = sod(Date.now());
+    var sl = slice(state);
+    var hm = STUDY_HOUR[(sl.profile && sl.profile.when) || "varies"] || STUDY_HOUR.varies;
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function esc(s) { return String(s).replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n"); }
+    /* RFC 5545 folds content lines at 75 octets; continuation lines start
+       with a space. Counted in characters, which is safe for this ASCII-
+       heavy text and only ever folds earlier than required otherwise. */
+    function fold(lineText) {
+      var out = [], s = lineText;
+      while (s.length > 74) { out.push(s.slice(0, 74)); s = " " + s.slice(74); }
+      out.push(s);
+      return out.join("\r\n");
+    }
+    var now = new Date();
+    var stamp = now.getUTCFullYear() + pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + "T" +
+      pad(now.getUTCHours()) + pad(now.getUTCMinutes()) + pad(now.getUTCSeconds()) + "Z";
+    var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//PMP Prep Suite//Coach//EN", "CALSCALE:GREGORIAN"];
+    var events = 0;
+    cp.plan.days.forEach(function (day) {
+      if (day.d < today || day.rest || !day.tasks.length) return;
+      var d = new Date(day.d);
+      var ymd = d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
+      var total = day.tasks.reduce(function (a, t) { return a + (t.mins || 0); }, 0);
+      lines.push("BEGIN:VEVENT", "UID:pmp-study-" + ymd + "@pmp-prep-suite", "DTSTAMP:" + stamp,
+        "DTSTART:" + ymd + "T" + pad(hm[0]) + pad(hm[1]) + "00", "DURATION:PT" + Math.max(15, total) + "M",
+        fold("SUMMARY:" + esc("PMP study: " + day.tasks[0].label + (day.tasks.length > 1 ? " and " + (day.tasks.length - 1) + " more" : ""))),
+        fold("DESCRIPTION:" + esc(day.tasks.map(function (t) { return t.label; }).join("\n"))),
+        "END:VEVENT");
+      events++;
+    });
+    lines.push("END:VCALENDAR");
+    return { text: lines.join("\r\n") + "\r\n", events: events };
+  }
+
+  /* ── 10.16.12  AUDIT FIXTURES ────────────────────────────────────────────
      Synthetic contexts that between them make every message in §05.11
      apply, so §10.14 can render each one without a live state. Shaped
      exactly like context() returns. */
@@ -33608,7 +33661,7 @@ PMP.Coach = (function () {
     markShown: markShown, dismiss: dismiss, acted: acted,
     slice: slice, setProfile: setProfile, setPref: setPref, setOutcome: setOutcome,
     weeklySummary: weeklySummary, completeWeekly: completeWeekly,
-    hint: hint, HINT_RUNGS: 3,
+    hint: hint, HINT_RUNGS: 3, calendar: calendar, STUDY_HOUR: STUDY_HOUR,
     line: line, fixtures: fixtures,
     REENTRY_GAP_DAYS: REENTRY_GAP_DAYS, WEEKLY_EVERY_DAYS: WEEKLY_EVERY_DAYS, TRIAGE_MIN: TRIAGE_MIN
   };
@@ -33705,8 +33758,8 @@ PMP.CoachUI = (function () {
 
   /* ── 10.17.3  THE SESSION ───────────────────────────────────────────── */
   function stepRow(s, primaryId) {
-    var meta = mins(s.minutes) + (s.soft ? " · estimate" : "") +
-      (s.done ? " · done" : s.frac > 0 ? " · " + Math.round(s.frac * 100) + "% so far" : "");
+    var meta = mins(s.minutes) + (s.soft ? " \u00B7 estimate" : "") +
+      (s.done ? " \u00B7 done" : s.frac > 0 ? " \u00B7 " + Math.round(s.frac * 100) + "% so far" : "");
     var act;
     if (s.done) act = el("span", { class: "chip chip--correct" }, [icon("check"), "Done"]);
     else if (s.manual) {
@@ -33784,10 +33837,10 @@ PMP.CoachUI = (function () {
       if (ses.extra) card.appendChild(extraRow(ses.extra, cta === "extra"));
     }
 
-    if (cta === "next") {
+    if (ses.next && (cta === "next" || cta === "none")) {
       card.appendChild(el("div", { class: "td-cta" }, [
         el("button", {
-          class: "btn btn--primary btn--block", type: "button",
+          class: "btn btn--block" + (cta === "next" ? " btn--primary" : ""), type: "button",
           onclick: function () { startStep(ses.next); }
         }, [icon(ses.next.icon), "Start next step"])
       ]));
@@ -33800,7 +33853,7 @@ PMP.CoachUI = (function () {
       el("span", { class: "td-ic" }, [icon(x.icon || "target")]),
       el("div", { class: "td-main" }, [
         el("span", { class: "td-l", text: x.label }),
-        el("span", { class: "td-m", text: mins(x.minutes) + (x.soft ? " · estimate" : "") + " · optional" }),
+        el("span", { class: "td-m", text: mins(x.minutes) + (x.soft ? " \u00B7 estimate" : "") + " \u00B7 optional" }),
         x.why ? el("details", { class: "td-why" }, [el("summary", { text: "Why this?" }), el("p", { text: x.why })]) : null
       ]),
       el("button", {
@@ -33920,7 +33973,7 @@ PMP.CoachUI = (function () {
         actions.push({ id: "next", label: "Next", primary: true });
       }
       PMP.UI.sheet({
-        title: line("intake_head") + " · " + (i + 1) + " of " + screens.length + ": " + scr.title,
+        title: line("intake_head") + " \u00B7 " + (i + 1) + " of " + screens.length + ": " + scr.title,
         body: frag([i === 0 ? el("p", { class: "hint", text: line("intake_intro") }) : null].concat(scr.body)),
         actions: actions
       }).then(function (choice) {
@@ -33970,7 +34023,7 @@ PMP.CoachUI = (function () {
       : st === "reentry" ? "Welcome back"
       : "Today's session";
     return el("div", { class: "view-hd td-hd" }, [
-      el("span", { class: "eyebrow", text: "Today · " + DOW[new Date().getDay()] }),
+      el("span", { class: "eyebrow", text: "Today \u00B7 " + DOW[new Date().getDay()] }),
       el("h2", { text: title }),
       cd && !cd.past && cd.days > 0
         ? el("span", { class: "chip td-count", text: PMP.fmt.plural(cd.days, "day") + " to go" }) : null
@@ -34000,6 +34053,121 @@ PMP.CoachUI = (function () {
     ]);
   }
 
+  /* ── 10.17.5a  THE RHYTHM ABOVE THE DAY ──────────────────────────────────
+     The weekly review, exam day and after the exam. Every figure in the
+     review is one §10.16 read from §10.00 or the plan's own assessment; the
+     person chooses next week's focus, and the focus only changes the coach's
+     copy and the optional extra, never the plan. */
+  function weeklyCard(primary) {
+    var w = C.weeklySummary(PMP.Store.state);
+    var card = el("section", { class: "card td-weekly", "aria-labelledby": "td-weekly-h" }, [
+      el("span", { class: "eyebrow", text: "Weekly review" }),
+      el("h2", { id: "td-weekly-h", text: line("weekly_head") })
+    ]);
+    var facts = [line("weekly_days", { n: w.daysActive }),
+      w.adherence === null ? line("weekly_noplan") : line("weekly_adherence", { pct: PMP.fmt.pct(w.adherence) }),
+      line("weekly_readiness", { now: w.readiness, prev: w.prev })];
+    if (w.lead) facts.push(line("weekly_cause", { cause: w.lead.short, n: w.lead.n, total: w.tagged }));
+    card.appendChild(el("ul", { class: "ln-bullets" }, facts.map(function (t) { return el("li", { text: t }); })));
+    var reading = w.reading || (w.gap ? line("weekly_gap", w.gap) : null);
+    if (reading) card.appendChild(el("p", { text: reading }));
+    if (w.why) card.appendChild(el("p", { class: "td-why-said" }, [el("b", { text: line("weekly_why") + " " }), w.why]));
+
+    /* Nothing is chosen for the person: the current focus, if there is one,
+       is ticked, and otherwise the choice starts empty. */
+    var cur = C.slice(PMP.Store.state).focus;
+    var at = cur ? w.options.map(function (o) { return o.kind + ":" + (o.id || ""); }).indexOf(cur.kind + ":" + (cur.id || "")) : -1;
+    var pick = choiceGroup("focus", line("weekly_pick"), w.options.map(function (o, i) {
+      return [String(i), o.label];
+    }), at >= 0 ? String(at) : "");
+    card.appendChild(pick.node);
+    var note = el("textarea", { class: "textarea", id: "td-note", maxlength: "500", rows: "2" });
+    card.appendChild(el("label", { class: "field", for: "td-note", style: "margin-top:var(--sp-4)" }, [
+      el("span", { class: "lbl", text: line("weekly_note") }), note
+    ]));
+    card.appendChild(el("div", { class: "filter-bar" }, [
+      el("button", { class: "btn" + (primary ? " btn--primary" : ""), type: "button", onclick: function () {
+        var o = w.options[parseInt(pick.value(), 10)] || null;
+        C.completeWeekly({ focus: o, note: note.value });
+        PMP.UI.announce("Weekly review saved.");
+        repaint();
+      } }, [icon("check"), "Save the review"]),
+      el("span", { class: "spacer" }),
+      el("span", { class: "hint", text: "Next review in seven days." })
+    ]));
+    return card;
+  }
+
+  function examdayCard() {
+    var items = [line("examday_rest"), line("examday_id"), line("examday_arrive"),
+      line("examday_breaks", { n: PMP.EXAM.BREAK_COUNT }),
+      line("examday_pace", { s: Math.round(PMP.EXAM.PACE_TARGET_SEC) }), line("examday_approach")];
+    return el("section", { class: "card", "aria-labelledby": "td-day-h" }, [
+      el("span", { class: "eyebrow", text: "Checklist" }),
+      el("h2", { id: "td-day-h", text: line("examday_head") }),
+      el("ul", { class: "ln-bullets" }, items.map(function (t) { return el("li", { text: t }); }))
+    ]);
+  }
+
+  function afterCard(state) {
+    var oc = C.slice(state).outcome;
+    var card = el("section", { class: "card", "aria-labelledby": "td-after-h" }, [
+      el("span", { class: "eyebrow", text: "After the exam" }),
+      el("h2", { id: "td-after-h", text: line("after_q") })
+    ]);
+    if (!oc) {
+      card.appendChild(el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn", type: "button", onclick: function () { C.setOutcome("passed"); repaint(); } }, "Passed"),
+        el("button", { class: "btn", type: "button", onclick: function () {
+          C.setOutcome("not");
+          /* A new attempt starts from a new date, so the old one goes and
+             the intake opens with the date empty. */
+          PMP.Store.commit(["settings"], function (s) { s.settings.examDate = null; });
+          intake({ redo: true, clearDate: true });
+        } }, "Not this time"),
+        el("button", { class: "btn", type: "button", onclick: function () { C.setOutcome("notsat"); repaint(); } }, "Not sat yet")
+      ]));
+      return { node: card, primary: false };
+    }
+    if (oc.result === "passed") {
+      card.appendChild(el("p", { text: line("after_passed") }));
+      card.appendChild(el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--primary", type: "button", onclick: function () { PMP.Exporter.exportProgress(); } },
+          [icon("data"), "Export a backup"])
+      ]));
+      return { node: card, primary: true };
+    }
+    if (oc.result === "not") {
+      card.appendChild(el("p", { text: line("after_not") }));
+      card.appendChild(el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--primary", type: "button", onclick: function () { intake({ redo: true, clearDate: true }); } },
+          [icon("calendar"), "Set a new date"])
+      ]));
+      return { node: card, primary: true };
+    }
+    var date = el("input", { class: "input", type: "date", id: "td-newdate", "aria-label": "New exam date" });
+    var err = el("p", { class: "td-err", hidden: true, role: "alert" });
+    card.appendChild(el("p", { text: line("after_notsat") }));
+    card.appendChild(el("label", { class: "field", for: "td-newdate" }, [el("span", { class: "lbl", text: "New exam date" }), date]));
+    card.appendChild(err);
+    card.appendChild(el("div", { class: "filter-bar" }, [
+      el("button", { class: "btn btn--primary", type: "button", onclick: function () {
+        if (!futureDate(date.value)) { err.hidden = false; err.textContent = line("intake_date_err"); return; }
+        var v = date.value;
+        PMP.Store.commit(["settings"], function (s) { s.settings.examDate = v; });
+        C.setOutcome(null);
+        var pi = PMP.Store.state.planner && PMP.Store.state.planner.inputs;
+        if (pi) {
+          var inputs = { examDate: v, weekdayMin: pi.weekdayMin, weekendMin: pi.weekendMin };
+          var plan = PMP.Planner.build(inputs, PMP.Store.state);
+          if (!plan.error) PMP.Planner.save(plan, inputs);
+        }
+        repaint();
+      } }, [icon("calendar"), "Save the new date"])
+    ]));
+    return { node: card, primary: true };
+  }
+
   function view(host) {
     var state = PMP.Store.state;
     /* Arriving on Today ends whatever run was started from here. */
@@ -34012,13 +34180,28 @@ PMP.CoachUI = (function () {
       host.appendChild(footer(false));
       return;
     }
+    /* Exam day and after: no study steps and no messages. */
+    if (st === "examday") {
+      host.appendChild(examdayCard());
+      host.appendChild(footer(true));
+      return;
+    }
+    if (st === "after") {
+      var ac = afterCard(state);
+      host.appendChild(ac.node);
+      host.appendChild(footer(!ac.primary));
+      return;
+    }
+
+    if (st === "weekly") host.appendChild(weeklyCard(true));
 
     var msgs = todaysMessages(state);
     if (msgs.length) host.appendChild(el("div", { class: "td-msgs" }, msgs.map(msgNode)));
 
     var ses = C.session(state);
     announceTicks(ses.steps);
-    var cta = ses.next ? "next" : ses.extra ? "extra" : "footer";
+    /* The review, while it waits, is the one primary action on the page. */
+    var cta = st === "weekly" ? "none" : ses.next ? "next" : ses.extra ? "extra" : "footer";
     host.appendChild(sessionCard(ses, cta));
     host.appendChild(footer(cta === "footer"));
   }
@@ -34041,7 +34224,7 @@ PMP.CoachUI = (function () {
 
   function nextButton(ses) {
     return el("button", { class: "btn btn--sm", type: "button", onclick: function () { startStep(ses.next); } },
-      [icon(ses.next.icon), line("debrief_next", { next: ses.next.label }) + " →"]);
+      [icon(ses.next.icon), line("debrief_next", { next: ses.next.label }) + " \u2192"]);
   }
 
   function debriefLines(items, ses) {
@@ -34163,13 +34346,32 @@ PMP.CoachUI = (function () {
       el("div", { class: "filter-bar" }, [
         el("button", { class: "btn btn--sm", type: "button", onclick: function () { intake({ redo: true }); } },
           [icon("today"), "Redo intake"]),
+        el("button", { class: "btn btn--sm", type: "button", onclick: exportCalendar },
+          [icon("calendar"), "Export study times to calendar"]),
         el("span", { class: "spacer" }),
         el("span", { class: "hint", text: "Off hides the messages and strips. Today still shows the session." })
       ])
     ]);
   }
 
-  return { view: view, intake: intake, settingsCard: settingsCard, startStep: startStep, strip: strip };
+  /* Saved through §09.8, with the copy route as the fallback it uses
+     everywhere: a browser that refuses the download still has the text. */
+  function exportCalendar() {
+    var cal = C.calendar(PMP.Store.state);
+    if (!cal || !cal.events) { PMP.UI.toast("There is no plan with study days left to export. Build one first.", "warn"); return; }
+    var d = new Date();
+    var name = "pmp-study-" + d.getFullYear() + "-" + PMP.fmt.pad(d.getMonth() + 1) + "-" + PMP.fmt.pad(d.getDate()) + ".ics";
+    if (PMP.Exporter.tryDownload(cal.text, name, "text/calendar")) {
+      PMP.UI.toast("Saved " + name + " with " + PMP.fmt.plural(cal.events, "study session") + ". Open it to add them to your calendar.", "ok");
+    } else {
+      PMP.Exporter.copyText(cal.text).then(function (ok) {
+        PMP.UI.toast(ok ? "The download was blocked, so the calendar was copied. Paste it into a file ending .ics." : "This browser blocked both the download and the clipboard.", ok ? "ok" : "warn");
+      });
+    }
+  }
+
+  return { view: view, intake: intake, settingsCard: settingsCard, startStep: startStep, strip: strip,
+           exportCalendar: exportCalendar };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
@@ -35111,8 +35313,8 @@ PMP.Shell = (function () {
   register("today", {
     title: "Today",
     render: stub("Today", "The coach's home: one session for today, built from your plan.", [
-      ["§10.16", "Stage, session and messages, derived from the plan, lessons, journal and cards"],
-      ["§10.17", "Intake, the session list with one Start button, and the weekly review"]
+      ["\u00A710.16", "Stage, session and messages, derived from the plan, lessons, journal and cards"],
+      ["\u00A710.17", "Intake, the session list with one Start button, and the weekly review"]
     ])
   });
 
