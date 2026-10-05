@@ -986,8 +986,10 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .rank[data-you="true"] { box-shadow: inset 4px 0 0 var(--fg); }
 .chip--you { background: var(--s-sunk); color: var(--fg); border-color: var(--fg-muted); }
 
-/* Mindset line ── the one sentence meant to outlive the scenario. */
-.mindset {
+/* Mindset line ── the one sentence meant to outlive the scenario. The
+   icon-led variant only; a plain heading-and-paragraph block keeps the
+   03.7 layout, with its heading above the text. */
+.mindset--icon {
   display: grid; grid-template-columns: auto 1fr; gap: var(--sp-3); align-items: start;
   margin-top: var(--sp-4); padding: var(--sp-4);
   border: var(--border); border-left: 3px solid var(--fg-muted);
@@ -13605,7 +13607,9 @@ PMP.fmt = (function () {
     if (!iso) return "\u2014";
     var d = new Date(iso);
     if (isNaN(d)) return "\u2014";
-    return d.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
+    /* en-GB rather than the browser's locale: the build is written in
+       British English, so a date reads "7 Oct 2026" everywhere. */
+    return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
   }
   function relDays(iso) {
     if (!iso) return null;
@@ -13858,16 +13862,12 @@ PMP.validate = (function () {
 
       /* Every item states the disposition it turns on, in one sentence, so the
          lesson outlives the particular scenario — the last of the §05.2
-         authoring rules. This is a warning rather than an error on purpose.
-         The 60 items of the phase-one seed predate the rule and do not carry
-         the field; raising it as an error would fail 300-item pack against its
-         own self-check in §10.14, and would refuse the build's own exported
-         pack on the way back in. As a warning it is still indexed and still
-         listed — §10.14 routes validator warnings into its gaps table, where
-         missing content belongs — and it holds new authoring to the rule
-         without retroactively breaking what already shipped. The seed has
-         since been backfilled, so this is now r.err: every item must carry a
-         mindset, and the audit stays green because every shipped item does. */
+         authoring rules. This is an error: a pack with an item that has no
+         mindset is refused. It began as a warning, because the 60 items of
+         the phase-one seed predated the rule and an error would have failed
+         the shipped pack against its own self-check in §10.14. The seed has
+         since been backfilled, and every shipped item carries one, so the
+         audit stays green with the rule enforced. */
       if (!q.mindset || !String(q.mindset).trim()) {
         r.err(at + ".mindset", "No mindset principle. Every item should state the disposition it turns on in one sentence, so the lesson transfers past this scenario.");
       }
@@ -14182,11 +14182,13 @@ PMP.Exporter = (function () {
 /* ═══ §10  FEATURE MODULES ════════════════════════════════════════════════
    One IIFE each. A module that has landed registers its own route here, and
    the stubs in §12.3 stand aside for it rather than overwriting it.
-   Built: 10.02 practice engine, 10.03 mock exam simulator,
-          10.04 question renderers, 10.05 flashcards, 10.06 formula lab,
-          10.07 reference library, 10.08 scenario trainer,
-          10.13 data portability, 10.14 content audit.
-   Still stubs: 10.01, 10.09 to 10.12.
+   Built: 10.00 metrics, 10.01 dashboard, 10.02 practice engine,
+          10.03 mock exam simulator, 10.04 question renderers,
+          10.05 flashcards, 10.06 formula lab, 10.07 reference library,
+          10.08 scenario trainer, 10.09 study planner, 10.10 mistake
+          journal, 10.11 analytics, 10.13 data portability,
+          10.14 content audit, 10.15 learn.
+   Still a stub: 10.12 settings and About, served by §12.3 for now.
    ════════════════════════════════════════════════════════════════════ */
 
 /* ── 10.02  PRACTICE ENGINE ─────────────────────────────────────────────────
@@ -15341,9 +15343,13 @@ PMP.Practice = (function () {
   /* ── 10.02.10  ROUTE ─────────────────────────────────────────────────── */
   function view(host, params) {
     cleanup();
-    if (!filters) {
+    /* A link like #/practice?domain=process&type=multi lands pre-filtered,
+       on every visit and not only the first: a link that carries a filter
+       replaces whatever was set before. A bare #/practice, and the repaints
+       below that pass no params, keep the filters already chosen. */
+    var linked = !!params && Object.keys(defaultFilters()).some(function (k) { return !!params[k]; });
+    if (!filters || linked) {
       filters = defaultFilters();
-      /* A link like #/practice?domain=process&type=multi lands pre-filtered. */
       if (params) Object.keys(filters).forEach(function (k) {
         if (params[k]) filters[k] = params[k];
       });
@@ -17703,14 +17709,14 @@ PMP.Scenarios = (function () {
       if (item.committed) {
         body.appendChild(el("p", { class: "eyebrow", text: "How a project manager would order these" }));
         body.appendChild(renderRanking(item));
-        body.appendChild(el("div", { class: "mindset" }, [
+        body.appendChild(el("div", { class: "mindset mindset--icon" }, [
           icon("target"),
           el("div", null, [
             el("span", { class: "eyebrow", text: "The mindset" }),
             el("p", { text: scn.mindset })
           ])
         ]));
-        body.appendChild(el("div", { class: "mindset" }, [
+        body.appendChild(el("div", { class: "mindset mindset--icon" }, [
           icon("book"),
           el("div", null, [
             el("span", { class: "eyebrow", text: "Why, in general" }),
@@ -18043,7 +18049,10 @@ PMP.Scenarios = (function () {
   /* ── 10.08.7  ROUTE ────────────────────────────────────────────────────── */
   function view(host, params) {
     cleanup();
-    if (!filters) {
+    /* Same rule as §10.02.10: a link that carries a filter replaces the
+       filters set earlier in the session; a bare route keeps them. */
+    var linked = !!params && Object.keys(defaultFilters()).some(function (k) { return !!params[k]; });
+    if (!filters || linked) {
       filters = defaultFilters();
       if (params) Object.keys(filters).forEach(function (k) {
         if (params[k]) filters[k] = params[k];
@@ -26549,7 +26558,7 @@ PMP.Learn = (function () {
   }
 
   function mindsetBlock(label, text, ic) {
-    return el("div", { class: "mindset" }, [
+    return el("div", { class: "mindset mindset--icon" }, [
       icon(ic || "target"),
       el("div", null, [
         el("span", { class: "eyebrow", text: label }),

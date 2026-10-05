@@ -85,7 +85,7 @@ If `questions` is missing or is not an array, the whole file is refused.
 | `tags` | string[] | **yes** | Lower-case, hyphenated. Drives the tag filter. An item with no tags cannot be found by it. |
 | `stem` | string | **yes** | The situation and the question. |
 | `explanation` | string | **yes** | The rule that transfers. |
-| `mindset` | string | **yes in practice** | One sentence naming the disposition the item turns on. Formally a warning rather than a refusal, for one historical reason given in §6.3 — write it anyway. |
+| `mindset` | string | **yes** | One sentence naming the disposition the item turns on. A missing one refuses the whole shard; see §6.3. |
 
 Then, depending on type: `options`, `prompts`, `regions`, `blanks`, `graphic`.
 
@@ -470,6 +470,7 @@ and field path. Other shards still load.
 
 - Missing or duplicate `id`; unknown `type`, `domain` or `ecoTask`
 - `stem` under 10 characters, or missing `explanation`
+- Missing or empty `mindset`
 - Missing `options` on a type that needs them (`single`, `multi`, `matching`, `pulldown`)
 - No option marked `correct`, or any option with no `rationale`
 - `matching`/`pulldown` with no `prompts`, or a prompt without exactly one option matched to it
@@ -504,14 +505,13 @@ this list as the real bar.
 Missing `tags` is a gap rather than a failure, but the item becomes invisible to
 the tag filter. Always tag.
 
-### 6.3 Why `mindset` is only a warning
+### 6.3 `mindset` is required
 
-The 60 items of the core pack's phase-one seed predate the mindset rule and do
-not carry the field. Raising it as a refusal would fail the shipped 300-item
-pack against its own self-check and make the app refuse its own exported pack on
-re-import. It is therefore a **warning**: indexed, listed in the audit's gaps
-table, and not blocking. **Write it anyway.** Every extended item is expected to
-have one, and once the seed is backfilled this becomes a hard error.
+A missing or empty `mindset` is a refusal: the whole shard is rejected, with the
+item index and field path. The rule started as a warning, because the 60 items
+of the core pack's phase-one seed predated it. That seed has since been
+backfilled, every shipped item carries a mindset, and the validator now enforces
+it as an error.
 
 ---
 
