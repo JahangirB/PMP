@@ -129,7 +129,7 @@ PMP.STORE_CFG = Object.freeze({
   PRUNE_KEEP_ATTEMPTS: 1000,
   PERSISTED: Object.freeze([
     "settings", "attempts", "srs", "exams", "notes", "flags", "journal", "planner",
-    "issues", "examRun", "packs", "queue", "scenarioRuns"
+    "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons"
   ])
 });
 
@@ -1940,6 +1940,80 @@ button.task[data-done="true"]:hover { filter: brightness(0.97); }
 .cause-key-row .cd { color: var(--fg-muted); line-height: var(--lh-body); margin-top: 2px; }
 
 
+/* ── 03.20  LEARN ───────────────────────────────────────────────────────────
+   Hub and reader for §10.15. Existing tokens only. The reader borrows the
+   question engine (03.7), the ranked reveal (03.12) and the disclosure rows
+   from 03.11; this block only adds the reading layout around them. */
+.ln-list { display: grid; gap: var(--sp-2); margin-top: var(--sp-4); }
+.ln-row {
+  display: flex; align-items: center; gap: var(--sp-3);
+  min-height: var(--hit-min); padding: var(--sp-3) var(--sp-4);
+  border: var(--border-hi); border-radius: var(--r-2);
+  background: var(--s-raise); color: var(--fg); text-decoration: none;
+}
+.ln-row:hover { background: var(--s-sunk); }
+.ln-id {
+  flex: 0 0 auto; min-width: 32px; text-align: center;
+  font-family: var(--font-mono); font-size: var(--t-xs); font-weight: var(--w-bold); color: var(--fg-muted);
+}
+.ln-t { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: var(--sp-0); }
+.ln-name { font-size: var(--t-sm); font-weight: var(--w-semi); }
+.ln-sub { font-size: var(--t-xs); color: var(--fg-muted); }
+
+/* Learn navigates with links rather than buttons, so a link styled as a
+   button drops the underline. No other section renders an a.btn. */
+a.btn { text-decoration: none; }
+
+.ln-top { margin-top: 0; padding-top: 0; border-top: 0; margin-bottom: var(--sp-4); }
+.ln-part > .ln-prose, .ln-part > .keylist, .ln-part > div > .keylist { margin-top: var(--sp-3); }
+/* A worked-example stem sits directly in a card, where .card > p would mute
+   it; it reads as the question, as it does in a drill. */
+.ln-part > p.q-stem { color: var(--fg); font-size: var(--t-md); margin-top: var(--sp-4); }
+.ln-meta { margin-top: var(--sp-3); }
+.ln-meta a.chip, .ln-chips a.chip { text-decoration: none; }
+.ln-prog { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-top: var(--sp-4); }
+.ln-h3 {
+  margin-top: var(--sp-5); font-family: var(--font-mono); font-size: var(--t-xs);
+  letter-spacing: var(--ls-cap); text-transform: uppercase; color: var(--fg-muted); font-weight: var(--w-med);
+}
+
+/* Reading measure. Teaching text is the one place in the file long enough
+   for line length to matter, so it is held to --measure throughout. */
+.ln-prose p, .ln-bullets li, .ln-note { font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); }
+.ln-prose p + p { margin-top: var(--sp-3); }
+.ln-part > p { max-width: var(--measure); }
+.ln-bullets { display: grid; gap: var(--sp-2); margin-top: var(--sp-3); padding-left: var(--sp-5); list-style: disc; }
+.ln-note { margin-top: var(--sp-3); color: var(--fg-muted); }
+.ln-links { margin-top: var(--sp-4); }
+
+/* Concept sections. The 03.11 disclosure row truncates its label to one
+   line, which suits an error table and not a heading at 320px. */
+.ln-sec > summary .s { white-space: normal; font-weight: var(--w-semi); }
+.ln-sec > summary .chip { flex: 0 0 auto; }
+.ln-part > .ln-sec:first-of-type { margin-top: var(--sp-4); }
+
+.ln-lens th[scope="row"] { white-space: nowrap; vertical-align: top; color: var(--fg); }
+.ln-lens td { line-height: var(--lh-body); }
+
+.ln-opts { display: grid; gap: var(--sp-2); margin-top: var(--sp-4); }
+.ln-opts li { display: flex; gap: var(--sp-3); align-items: flex-start; font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); }
+.ln-opts .key {
+  flex: 0 0 24px; height: 24px; display: grid; place-items: center;
+  border: var(--border-hi); border-radius: var(--r-1);
+  font-family: var(--font-mono); font-size: var(--t-xs); color: var(--fg-muted);
+}
+
+.ln-check + .ln-check { margin-top: var(--sp-6); padding-top: var(--sp-5); border-top: var(--border); }
+.ln-check:first-child { margin-top: var(--sp-4); }
+.ln-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-3); }
+.ln-chips .chip { min-height: 36px; padding: var(--sp-1) var(--sp-3); }
+.ln-pager { margin-top: var(--sp-5); }
+
+@media (max-width: 600px) {
+  .ln-lens th[scope="row"] { white-space: normal; }
+  .ln-pager .btn { width: 100%; }
+}
+
 /* ── 03.8  RESPONSIVE ───────────────────────────────────────────────────── */
 @media (min-width: 600px) {
   .view { padding-left: var(--sp-6); padding-right: var(--sp-6); }
@@ -2039,6 +2113,7 @@ button.task[data-done="true"]:hover { filter: brightness(0.97); }
 <symbol id="i-cards" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6.5" width="14" height="11" rx="2"/><path d="M7 4h11a2 2 0 0 1 2 2v9"/></symbol>
 <symbol id="i-sigma" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 5H6.5l5.5 7-5.5 7h11"/></symbol>
 <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h9a3 3 0 0 1 3 3V20a2.5 2.5 0 0 0-2.5-2.5H4z"/><path d="M20 4.5h-2a2 2 0 0 0-2 2V20a2.5 2.5 0 0 1 2.5-2.5H20z"/></symbol>
+<symbol id="i-learn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9 12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11v4.6c1.6 1.6 3.4 2.4 5.5 2.4s3.9-.8 5.5-2.4V11M21.5 9v5.5"/></symbol>
 <symbol id="i-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5.5" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="6" cy="18.5" r="2.2"/><path d="M6 7.7v8.6M8.2 5.9c5 .6 6.4 2.6 7.7 5.4M8.2 18.1c5-.6 6.4-2.6 7.7-5.4"/></symbol>
 <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
 <symbol id="i-journal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h11a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6z"/><path d="M6 3.5a2 2 0 0 0 0 4h2M10 11h6M10 15h4"/></symbol>
@@ -2074,6 +2149,7 @@ button.task[data-done="true"]:hover { filter: brightness(0.97); }
     <div class="nav" id="nav">
       <div class="nav-grp">
         <span class="eyebrow">Study</span>
+        <a class="nav-i" href="#/learn"     data-route="learn"><svg class="i"><use href="#i-learn"></use></svg>Learn</a>
         <a class="nav-i" href="#/dashboard" data-route="dashboard"><svg class="i"><use href="#i-gauge"></use></svg>Dashboard</a>
         <a class="nav-i" href="#/practice"  data-route="practice"><svg class="i"><use href="#i-target"></use></svg>Practice</a>
         <a class="nav-i" href="#/exam"      data-route="exam"><svg class="i"><use href="#i-timer"></use></svg>Mock exam</a>
@@ -2229,6 +2305,7 @@ button.task[data-done="true"]:hover { filter: brightness(0.97); }
         03.17 dashboard — segmented readiness bar, mastery, streak, actions
         03.18 study planner — week grid, day column, self-ticking chips
         03.19 mistake journal — triage item, cause picker, cause ramp
+        03.20 learn — lesson hub rows, reader parts, reading measure
         03.7  question engine — filters, options, hotspot, blanks, pace meter
         03.14 formula lab — sheet, calculators, network nodes, worked steps
         03.15 reference library — process matrix, ITTO panel, virtual list
@@ -2251,6 +2328,7 @@ button.task[data-done="true"]:hover { filter: brightness(0.97); }
         05.6  FORMULAS — 9 groups, ~50 entries · built
         05.7  REFERENCE + GLOSSARY — 49 processes, 12 principles,
               8 domains, agile, 14 tables, 364 terms · built
+        05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS; pilot lesson P4
 
    §06  STORAGE ADAPTER
         06.1  probe() — write/read/delete, catches throws AND silent no-ops
@@ -2264,7 +2342,8 @@ button.task[data-done="true"]:hover { filter: brightness(0.97); }
         07.2  subscribe / notify, selector memoisation
         07.3  actions — the only writers; no feature touches §06 directly
               persisted: … examRun (the sitting in progress), packs, queue,
-              scenarioRuns (§10.08; ranked, so not folded into attempts)
+              scenarioRuns (§10.08; ranked, so not folded into attempts),
+              lessons (§10.15; quick checks, never folded into attempts)
         07.4  persistence bridge + beforeunload guard
 
    §08  ROUTER ........................... hash-based
@@ -2292,9 +2371,11 @@ button.task[data-done="true"]:hover { filter: brightness(0.97); }
               5 renderers, 7 accepted type ids
         10.05 Flashcards (SM-2) · built        10.13 Data portability · built
         10.06 Formula lab · built              10.14 Content audit panel · built
-              (10.14.3 audits 05.4 against its own rules)
+              (10.14.3 audits 05.4 against its own rules;
+               10.14.5 audits 05.10 the same way)
         10.07 Reference library · built
               (10.07.6 is the glossary matcher: trigram + token prefix)
+        10.15 Learn — lesson hub and reader · #/learn, #/learn?lesson=P4
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
         11.1  accuracy trend  · 11.2  ECO heat map (low-sample cells greyed)
@@ -12611,6 +12692,191 @@ PMP.Packs = (function () {
 })();
 
 
+/* ── 05.10  LESSONS ─────────────────────────────────────────────────────────
+   The teaching layer read by §10.15 and checked by §10.14 (auditLessons).
+   One lesson per ECO task, plus foundation and exam-skills lessons that have
+   no single task. The ecoTask id is the join key back into the question
+   bank, the scenario pack and the flashcard decks, exactly as it is for
+   every other pack in this section.
+
+   Shape, per lesson:
+     id, module, order    "P4"; a PMP.MODULES id; position on the study path
+     ecoTask              a §05.1 id; empty only for foundation and skills
+     minutes, prereqs     reading time; lesson ids to read first
+     title, objectives    3–5 lines, each finishing "After this lesson you can\u2026"
+     examWeight           how the task is usually tested. Never a figure:
+                          weights and counts are read from §01 at render time
+     sections             { id, heading, body, formulaGroup? } — body is plain
+                          text, paragraphs split on a blank line, rendered with
+                          textContent only, so a lesson cannot carry markup
+     lenses               { predictive, agile, hybrid }
+     worked               a scenario in the 05.4 shape without the metadata:
+                          { stem, options[{id,text}], ranking[{option,rank,why}], mindset }
+     traps, recap         short lines
+     checks               2–4 items in the 05.2 question schema. domain and
+                          ecoTask may be left out and are taken from the lesson.
+                          They are rendered by §10.04 and are never recorded
+                          as attempts.
+     terms                §05.7.2 glossary headwords
+     mindset              the one sentence to carry out of the lesson
+     practice             { count, decks[] } — deck ids from 05.5
+
+   Phase 1 ships the engine with one pilot lesson, P4. Every sentence below
+   is original; nothing is taken from PMI material. ─────────────────────── */
+PMP.MODULES = Object.freeze([
+  { id: "foundations", order: 1, prefix: "F", label: "Foundations",
+    blurb: "How the exam works, the mindset it rewards, and the delivery approaches every later lesson assumes." },
+  { id: "process", order: 2, prefix: "P", domain: "process",
+    blurb: "Plans, baselines, money, time and quality: the vocabulary the other two domains take for granted." },
+  { id: "people", order: 3, prefix: "L", domain: "people",
+    blurb: "Leading the team, working with stakeholders, and handling conflict without escalating first." },
+  { id: "business", order: 4, prefix: "B", domain: "business",
+    blurb: "Governance, change control, risk and the organisation the project sits inside." },
+  { id: "skills", order: 5, prefix: "X", label: "Exam skills",
+    blurb: "Reading the question, working calculations against the clock, and the final fortnight." }
+]);
+
+PMP.LESSONS = Object.freeze([
+  {
+    id: "P4", module: "process", order: 9, ecoTask: "process-6", minutes: 35,
+    prereqs: ["F3", "P1"],
+    title: "Project finance",
+    objectives: [
+      "Choose an estimating method that matches what is known about the work.",
+      "Tell a contingency reserve from a management reserve, and say who can release each.",
+      "Read planned value, earned value and actual cost as one story about the project.",
+      "Pick the forecast that fits the cause of a variance.",
+      "Respond to a cost problem in the right order: understand it, then act."
+    ],
+    examWeight: "Finance questions rarely ask for arithmetic on its own. Most give you a status report or a request for money and ask what the project manager should do. Expect a figure to interpret, a reserve to choose or a forecast to defend. The sum is usually the easy half. The judgement about what it means is where marks are lost.",
+    sections: [
+      { id: "s1", heading: "From estimate to budget",
+        body: "Every project budget starts life as a set of estimates. An estimate is a forecast with a range around it. It is not a promise.\n\n"
+          + "Early estimates are rough because little is known yet. A new clinic might be costed by scaling from a similar clinic built last year. That is quick, but loose.\n\n"
+          + "Later, once the work has been broken down, each package can be costed and the figures rolled up. That takes longer and is far more reliable. Between the two sit methods based on a rate, such as a cost per square metre.\n\n"
+          + "The method should match what you know. A detailed method on vague scope gives false precision. A rough method on settled scope throws away information you already have.\n\n"
+          + "The estimates then become a budget. The package costs are added together and spread across time. Once approved, that time-phased figure is the cost baseline, and performance is measured against it." },
+      { id: "s2", heading: "Reserves: two pots, two owners",
+        body: "Some risks can be named in advance. A supplier might deliver late, or ground conditions might be poor. You can size these risks and set money aside for them. That money is the contingency reserve.\n\n"
+          + "Contingency sits inside the cost baseline. When a risk you planned for occurs, the project manager can use it under the agreed process.\n\n"
+          + "Other problems cannot be foreseen at all. For these the organisation holds a management reserve. It sits outside the cost baseline, so the project does not own it. Releasing it needs approval from whoever holds it, and the baseline is then updated.\n\n"
+          + "The total project budget is the cost baseline plus the management reserve.\n\n"
+          + "The exam tests ownership more than definitions. Ask two questions. Was this risk identified? Whose money is it? A planned-for risk draws on contingency. A genuine surprise needs a request for management reserve, not a quiet transfer.\n\n"
+          + "Watch what reserves are spent on. Neither pot exists to pay for new scope. New scope is a change, and it goes through change control." },
+      { id: "s3", heading: "Earned value: three numbers, one story", formulaGroup: "evm",
+        body: "Spending alone tells you very little. A project that has spent half its budget may be ahead, behind or exactly on plan. Earned value fixes this by comparing three figures taken on the same date.\n\n"
+          + "Planned value is the budgeted cost of the work that should be finished by now. Earned value is the budgeted cost of the work actually finished. Actual cost is what that finished work really cost.\n\n"
+          + "Each comparison answers one question. Earned value against planned value tells you whether delivery is ahead of or behind the schedule. Earned value against actual cost tells you whether the finished work cost more or less than it should have.\n\n"
+          + "Earned value comes first in both, because it is the only figure that measures delivery. Actual cost is never compared directly with planned value. That comparison mixes up being late with being cheap.\n\n"
+          + "For the two indices, 1.0 means on plan and anything below it is worse than plan. The arithmetic is short, and the formula lab drills it. What the exam rewards is reading the result and saying what it means for the sponsor." },
+      { id: "s4", heading: "Forecasting the final cost", formulaGroup: "forecast",
+        body: "A forecast answers the question every sponsor actually asks: what will this cost when it is finished? The estimate at completion is that answer. The estimate to complete is the part still to be spent.\n\n"
+          + "No single formula is always right. The choice depends on why performance has drifted from the plan.\n\n"
+          + "If an overspend came from a one-off event that will not repeat, the remaining work should cost what was planned. If it reflects how the work is really going, expect it to continue, and scale the forecast by the cost index.\n\n"
+          + "If the original plan no longer describes the work, re-estimate what remains from the bottom up. That is slower, but it is the only option built on fresh information.\n\n"
+          + "The to-complete index turns the question round. It shows how efficiently the remaining work must be done to hit a target. A figure well above 1.0 asks for performance the team has not yet shown. Raise that early, with the evidence." },
+      { id: "s5", heading: "Cost control is a conversation",
+        body: "Measuring only helps if it leads to a decision. When a variance appears, the exam expects a steady sequence.\n\n"
+          + "First, understand it. Find the cause and decide whether it will repeat. Next, forecast its effect on the final cost. Then look at the options within your own authority, such as a cheaper method or contingency for a planned-for risk.\n\n"
+          + "Only after that do you raise a change or escalate, and you take the analysis with you. A sponsor asked to approve money deserves to know why it is needed and what else was tried.\n\n"
+          + "Reporting is part of control, not a chore beside it. Sponsors need early, honest figures and a view on what they mean. A report that hides a poor index for a month buys nothing and costs trust.\n\n"
+          + "Cash matters as well as cost. Organisations often release money in stages. Planned spending in each period has to fit the funding available, or the work has to be rescheduled." }
+    ],
+    lenses: {
+      predictive: "The budget is built from the work breakdown and baselined early. Contingency is sized from the risk register. Earned value is measured at each reporting date, and forecasts are refreshed from the indices or from a new estimate.",
+      agile: "A stable team is usually funded for a period at a steady run rate, so cost is largely fixed and scope flexes. Finance questions turn on burn rate and the value delivered for the spend. Forecasts come from the remaining backlog and the team's pace, and are revisited every iteration.",
+      hybrid: "Fixed elements such as equipment, facilities or supplier contracts are budgeted and tracked predictively, often with earned value. Iterative work is funded by capacity. The project manager keeps one financial picture across both, and agrees in advance how reserves apply to each part."
+    },
+    worked: {
+      stem: "Three months into a twelve-month office relocation, the monthly report shows a cost performance index of 0.91. The team lead explains that flooring materials cost more than estimated after a market price rise, and the remaining fit-out packages use similar materials. The sponsor has not seen the figures yet. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Raise a change request to increase the cost baseline by the expected effect of the price rise." },
+        { id: "b", text: "Work out how much of the variance the price rise explains, whether it will hit the later packages, and prepare a revised forecast with options." },
+        { id: "c", text: "Send the sponsor the index and the team lead's explanation today, and promise a fuller analysis next week." },
+        { id: "d", text: "Bring cheaper packages forward so that next month's index recovers before the sponsor reviews the figures." }
+      ],
+      ranking: [
+        { option: "b", rank: "best", why: "Analysis comes first. Knowing the cause, and whether it will repeat, turns one bad month into a forecast the sponsor can act on. Bringing options keeps the decision with the right person." },
+        { option: "c", rank: "acceptable", why: "Telling the sponsor early is honest and right in spirit. But a bare index with no cause or forecast invites a guess. A short pause to analyse produces a far more useful report." },
+        { option: "a", rank: "premature", why: "The baseline may well need to change, so the instinct is sound. Asking now skips the analysis that would size the change and show whether cheaper options exist." },
+        { option: "d", rank: "wrong", why: "Reordering work to flatter an index hides the problem rather than solving it. The overrun on the later packages is still coming, and trust is lost when it lands." }
+      ],
+      mindset: "Understand a variance before you act on it or report it as settled."
+    },
+    traps: [
+      "Releasing management reserve on your own authority because the money is \u201Cin the budget\u201D.",
+      "Paying for scope the customer asked for out of contingency, instead of raising a change.",
+      "Comparing actual cost with planned value and calling the project under budget.",
+      "Choosing a forecast formula from habit rather than from the cause of the variance.",
+      "Holding back a poor cost index until it has been fixed, or reporting it with no cause attached."
+    ],
+    checks: [
+      {
+        id: "P4-c1", type: "single",
+        stem: "A hospital ward refurbishment uncovers asbestos in a ceiling void. The site survey did not flag it, and nothing on the risk register covers it. The project still holds unused contingency. How should the removal be funded?",
+        options: [
+          { id: "a", text: "Draw it from the contingency reserve, since unused contingency is available.",
+            rationale: "Contingency is sized for identified risks. This one was never identified, so it is not what that money was set aside for." },
+          { id: "b", text: "Request release of management reserve through the agreed approval route.", correct: true,
+            rationale: "An unforeseen event is what management reserve exists for. It sits outside the baseline, so releasing it needs approval and a baseline update." },
+          { id: "c", text: "Absorb the cost by trimming the scope of the remaining work.",
+            rationale: "Cutting scope to hide an unplanned cost changes what the customer receives without their agreement. That is a change, not a funding source." },
+          { id: "d", text: "Pause the refurbishment until the next annual budget round.",
+            rationale: "Stopping leaves a hazard on site and delays everything else. A route for unforeseen costs already exists and should be used first." }
+        ],
+        explanation: "Identified risks are funded from contingency, which sits inside the cost baseline. Unforeseen events fall to management reserve, which sits outside it and needs approval to release. Once released, the cost baseline is updated through change control.",
+        mindset: "Ask whether the risk was foreseen, then ask whose money it is."
+      },
+      {
+        id: "P4-c2", type: "single",
+        stem: "A software rollout to forty branches reports, in thousands, planned value of 200, earned value of 160 and actual cost of 150. Which statement describes the project accurately?",
+        options: [
+          { id: "a", text: "It is behind schedule, and the work done so far has cost less than budgeted.", correct: true,
+            rationale: "Earned value is below planned value, so less work is done than scheduled. It is above actual cost, so that work came in under budget." },
+          { id: "b", text: "It is ahead of schedule and over budget.",
+            rationale: "This reverses both readings. Earned value is below planned value and above actual cost." },
+          { id: "c", text: "It is on budget, because actual cost is below planned value.",
+            rationale: "Actual cost is never compared with planned value. That mixes up being late with being cheap." },
+          { id: "d", text: "It is behind schedule and over budget.",
+            rationale: "The schedule half is right. The cost half is not: 160 of work was earned for 150 spent." }
+        ],
+        explanation: "Put earned value first in every comparison. Against planned value it measures schedule: 160 earned against 200 planned is behind. Against actual cost it measures cost: 160 earned for 150 spent is under budget. The formula lab drills the indices themselves.",
+        mindset: "Measure delivery first: earned value leads every comparison."
+      },
+      {
+        id: "P4-c3", type: "single",
+        stem: "A product team of six is funded at a fixed cost for each two-week iteration. Halfway through a release, the product owner wants a new reporting feature that was not in the backlog. What does this mean for cost?",
+        options: [
+          { id: "a", text: "Cost per iteration stays the same. The feature either displaces lower-value work or adds iterations, and the product owner weighs that on value.", correct: true,
+            rationale: "With a stable team the run rate is fixed. New work changes what is left out or how long it takes, and that is a value decision." },
+          { id: "b", text: "The team should estimate the feature and request a budget increase before starting it.",
+            rationale: "This treats the team like a fixed-scope contract. The funding already pays for capacity, so the question is priority, not a new budget line." },
+          { id: "c", text: "The feature should be paid for from the contingency reserve.",
+            rationale: "A new feature is a change in scope, not a risk occurring. Contingency is not a fund for added requirements." },
+          { id: "d", text: "The team should absorb it by working longer hours this iteration.",
+            rationale: "Overtime hides the real cost and wears down a sustainable pace. It also skips the prioritisation the product owner is there to make." }
+        ],
+        explanation: "In adaptive delivery, cost is usually fixed by team capacity and scope is what flexes. New work joins the backlog and is ranked against everything else. It then pushes lower-value items out or extends the timeline, and extending it is a funding decision for the sponsor.",
+        mindset: "In adaptive delivery, hold cost steady and let value decide the scope."
+      }
+    ],
+    terms: [
+      "Contingency reserve", "Management reserve", "Cost baseline", "Budget at completion",
+      "Earned value", "Cost performance index", "Estimate at completion",
+      "To-complete performance index", "Bottom-up estimating", "Analogous estimating"
+    ],
+    recap: [
+      "Match the estimating method to what you know: rough early, detailed once the work is broken down.",
+      "Contingency covers identified risks, sits inside the baseline, and is the project manager's to use.",
+      "Management reserve covers surprises, sits outside the baseline, and needs approval to release.",
+      "Earned value leads every comparison, and an index below 1.0 is worse than plan.",
+      "Choose the forecast that fits the cause of the variance, not the one you remember first."
+    ],
+    mindset: "Know why the numbers moved before you decide what to do about them.",
+    practice: { count: 10, decks: ["evm"] }
+  }
+]);
+
 /* ═══ §06  STORAGE ADAPTER ════════════════════════════════════════════════
    No feature module ever touches localStorage, IndexedDB or this object
    directly. §07 is the only caller. The API is async throughout so the three
@@ -12886,8 +13152,11 @@ PMP.Store = (function () {
          correct flag: folding it in would either skew the accuracy figures
          §10.01 and §10.11 are built on, or require both to special-case a
          type of row that has no question type. */
-      scenarioRuns: [] /* { id, sid, domain, ecoTask, approach, difficulty,
+      scenarioRuns: [], /* { id, sid, domain, ecoTask, approach, difficulty,
                            chosen, rank, credit, ms, at, order } */
+      /* Lesson progress (§10.15), keyed by lesson id. Quick-check answers
+         live here and never in `attempts`, so they cannot move accuracy. */
+      lessons: {}     /* { P4: { opened: [sid], checks: {cid: 1|0}, completedAt } } */
     };
   }
 
@@ -22161,7 +22430,7 @@ PMP.Data = (function () {
      incoming value on a clash, which is the only rule that behaves sensibly
      when the file is newer than the device. Replace wipes first. */
   var LIST_SLICES = ["attempts", "exams", "journal", "issues", "scenarioRuns"];
-  var MAP_SLICES = ["srs", "notes", "flags"];
+  var MAP_SLICES = ["srs", "notes", "flags", "lessons"];
   var WHOLE_SLICES = ["settings", "planner", "packs", "queue", "examRun"];
 
   function planProgressMerge(obj) {
@@ -23017,6 +23286,306 @@ PMP.Audit = (function () {
     return out;
   }
 
+  /* ── 10.14.5  LESSONS ────────────────────────────────────────────────────
+     §05.10 against its own rules. The same split as everywhere else in this
+     panel: a failure is a lesson that is wrong or that §10.15 could not
+     render faithfully; a gap is teaching that has not been written yet.
+
+     Two things are gaps on purpose. An ECO task with no lesson is a gap,
+     because the curriculum is built one lesson at a time and calling 25 of
+     26 tasks a failure would make the panel useless while that happens. A
+     prerequisite that names a lesson not yet written is also a gap, for the
+     same reason. A prerequisite that is malformed, points at itself or forms
+     a cycle is a failure: no amount of further writing fixes it.
+
+     Coverage is counted over the three domain modules only. A foundation
+     lesson may carry an ecoTask as an introduction, and that is not a second
+     lesson for the task.
+
+     The worked example is checked with the scenario thresholds in SRULE, and
+     each quick check goes through PMP.validate.pack, the importer's own
+     validator, with domain and ecoTask filled in from the lesson as §10.15
+     does before rendering it. */
+  var LRULE = {
+    OBJECTIVES: [3, 5],
+    MIN_SECTIONS: 3,
+    WORDS: [600, 1200],       /* below the floor fails; above the ceiling is a gap */
+    TRAPS: [3, 5],
+    CHECKS: [2, 4],
+    RECAP: [3, 6],
+    MIN_MINDSET: 40,
+    ID: /^[A-Z][0-9]{1,2}$/
+  };
+
+  function auditLessons(list) {
+    var out = { failures: [], gaps: [], checks: [], counts: {} };
+    var ls = list || [];
+    function fail(where, msg) { out.failures.push({ where: where, msg: msg }); }
+    function gap(where, msg) { out.gaps.push({ where: where, msg: msg }); }
+    function text(v) { return String(v == null ? "" : v).trim(); }
+    function inRange(n, r) { return n >= r[0] && n <= r[1]; }
+
+    var modById = Object.create(null);
+    (PMP.MODULES || []).forEach(function (m) { modById[m.id] = m; });
+    var glossary = Object.create(null);
+    PMP.GLOSSARY.forEach(function (e) { glossary[String(e.t).toLowerCase()] = true; });
+    var groups = Object.create(null);
+    PMP.FORMULAS.forEach(function (g) { groups[g.id] = true; });
+    var decks = Object.create(null);
+    PMP.DECKS.forEach(function (d) { decks[d.id] = true; });
+    var bankIds = Object.create(null);
+    PMP.Content.all().forEach(function (q) { if (q && q.id) bankIds[q.id] = true; });
+
+    var bad = { id: 0, task: 0, prereq: 0, obj: 0, body: 0, lens: 0, worked: 0, checks: 0, terms: 0, links: 0, recap: 0, parts: 0 };
+    var ids = Object.create(null), checkIds = Object.create(null);
+    var perTask = Object.create(null);
+    var words = Object.create(null);
+
+    ls.forEach(function (L, i) {
+      var at = "lessons[" + i + "]";
+      if (!L || typeof L !== "object") { fail(at, "Not an object."); bad.parts++; return; }
+
+      /* Identity */
+      if (!LRULE.ID.test(text(L.id))) { fail(at + ".id", "Id " + JSON.stringify(L.id) + " is malformed. Expected a module letter and a number, such as P4."); bad.id++; }
+      else if (ids[L.id] !== undefined) { fail(at + ".id", "Duplicate id \u201C" + L.id + "\u201D (first at index " + ids[L.id] + ")."); bad.id++; }
+      else ids[L.id] = i;
+
+      var mod = modById[L.module];
+      if (!mod) { fail(at + ".module", "Unknown module \u201C" + L.module + "\u201D. Expected one of: " + Object.keys(modById).join(", ") + "."); bad.id++; }
+      else if (LRULE.ID.test(text(L.id)) && L.id.charAt(0) !== mod.prefix) {
+        fail(at + ".id", "Id \u201C" + L.id + "\u201D does not start with " + mod.prefix + ", the prefix of module \u201C" + mod.id + "\u201D."); bad.id++;
+      }
+      if (typeof L.order !== "number" || !isFinite(L.order)) { fail(at + ".order", "Order must be a number; it sets the lesson's place on the study path."); bad.parts++; }
+      if (!text(L.title)) { fail(at + ".title", "Missing title."); bad.parts++; }
+      if (typeof L.minutes !== "number" || L.minutes <= 0) { fail(at + ".minutes", "Minutes must be a positive number."); bad.parts++; }
+
+      /* ECO task */
+      if (L.ecoTask) {
+        var t = PMP.ECO_TASK_BY_ID[L.ecoTask];
+        if (!t) { fail(at + ".ecoTask", "Unknown ECO task \u201C" + L.ecoTask + "\u201D for outline " + PMP.ECO.VERSION + "."); bad.task++; }
+        else if (mod && mod.domain && t.domain !== mod.domain) { fail(at + ".ecoTask", "Task \u201C" + L.ecoTask + "\u201D belongs to " + PMP.ECO.DOMAIN_LABELS[t.domain] + ", not to module \u201C" + mod.id + "\u201D."); bad.task++; }
+        else if (mod && mod.domain) (perTask[L.ecoTask] = perTask[L.ecoTask] || []).push(i);
+      } else if (mod && mod.domain) {
+        fail(at + ".ecoTask", "A lesson in a domain module must name its ECO task."); bad.task++;
+      }
+
+      /* Prerequisites: shape here; existence and cycles once every id is known */
+      if (L.prereqs != null && !Array.isArray(L.prereqs)) { fail(at + ".prereqs", "Prerequisites must be an array of lesson ids."); bad.prereq++; }
+      (Array.isArray(L.prereqs) ? L.prereqs : []).forEach(function (p, j) {
+        if (!LRULE.ID.test(text(p))) { fail(at + ".prereqs[" + j + "]", "Prerequisite " + JSON.stringify(p) + " is malformed."); bad.prereq++; }
+        else if (p === L.id) { fail(at + ".prereqs[" + j + "]", "A lesson cannot be its own prerequisite."); bad.prereq++; }
+      });
+
+      /* Part 1: objectives */
+      var obj = Array.isArray(L.objectives) ? L.objectives.filter(function (o) { return text(o); }) : [];
+      if (!inRange(obj.length, LRULE.OBJECTIVES)) { fail(at + ".objectives", "Has " + obj.length + " objectives; a lesson states " + LRULE.OBJECTIVES[0] + " to " + LRULE.OBJECTIVES[1] + "."); bad.obj++; }
+
+      /* Part 2: how it is tested */
+      if (!text(L.examWeight)) { fail(at + ".examWeight", "Missing \u201Cwhy it matters on the exam\u201D. Write how the task is tested; figures come from \u00A701."); bad.parts++; }
+
+      /* Part 3: the concept */
+      var secs = Array.isArray(L.sections) ? L.sections : [];
+      if (secs.length < LRULE.MIN_SECTIONS) { fail(at + ".sections", "Has " + secs.length + " sections; the floor is " + LRULE.MIN_SECTIONS + "."); bad.body++; }
+      var secIds = Object.create(null), w = 0;
+      secs.forEach(function (s, j) {
+        var sat = at + ".sections[" + j + "]";
+        if (!s || !text(s.id)) { fail(sat + ".id", "Missing section id. Progress is recorded against it."); bad.body++; return; }
+        if (secIds[s.id]) { fail(sat + ".id", "Duplicate section id \u201C" + s.id + "\u201D."); bad.body++; }
+        secIds[s.id] = true;
+        if (!text(s.heading)) { fail(sat + ".heading", "Missing heading."); bad.body++; }
+        if (!text(s.body)) { fail(sat + ".body", "Empty body."); bad.body++; }
+        w += text(s.body).split(/\s+/).filter(Boolean).length;
+        if (s.formulaGroup != null && !groups[s.formulaGroup]) { fail(sat + ".formulaGroup", "Formula group \u201C" + s.formulaGroup + "\u201D does not exist in \u00A705.6."); bad.links++; }
+      });
+      words[L.id] = w;
+      if (w < LRULE.WORDS[0]) { fail(at + ".sections", "Section bodies total " + w + " words; the floor is " + LRULE.WORDS[0] + "."); bad.body++; }
+      else if (w > LRULE.WORDS[1]) gap(at + ".sections", "Section bodies total " + w + " words, over the " + LRULE.WORDS[1] + " a single sitting is planned around.");
+
+      /* Part 4: three lenses */
+      ["predictive", "agile", "hybrid"].forEach(function (k) {
+        if (!L.lenses || !text(L.lenses[k])) { fail(at + ".lenses." + k, "The " + k + " lens is empty. Every concept is shown in all three approaches."); bad.lens++; }
+      });
+
+      /* Part 5: worked example, on the scenario thresholds */
+      var wk = L.worked || {};
+      var wat = at + ".worked";
+      var wstem = text(wk.stem);
+      if (wstem.length < SRULE.MIN_STEM) { fail(wat + ".stem", "Stem is " + wstem.length + " characters; the floor for a scenario is " + SRULE.MIN_STEM + "."); bad.worked++; }
+      else if (wstem.charAt(wstem.length - 1) !== "?") { fail(wat + ".stem", "Stem does not end in a question."); bad.worked++; }
+      if (text(wk.mindset).length < SRULE.MIN_MINDSET) { fail(wat + ".mindset", "Mindset is " + text(wk.mindset).length + " characters; the floor is " + SRULE.MIN_MINDSET + "."); bad.worked++; }
+      var wopts = Array.isArray(wk.options) ? wk.options : [];
+      if (wopts.length !== SRULE.OPTIONS) { fail(wat + ".options", "A worked example carries exactly " + SRULE.OPTIONS + " options; this one has " + wopts.length + "."); bad.worked++; }
+      var wIds = Object.create(null);
+      wopts.forEach(function (o, j) {
+        var oat = wat + ".options[" + j + "]";
+        if (!o || o.id == null) { fail(oat + ".id", "Missing option id."); bad.worked++; return; }
+        if (wIds[o.id]) { fail(oat + ".id", "Duplicate option id \u201C" + o.id + "\u201D."); bad.worked++; }
+        wIds[o.id] = true;
+        if ("correct" in o) { fail(oat + ".correct", "A worked-example option must not carry a correct flag; the ranking discriminates."); bad.worked++; }
+        if (text(o.text).length < SRULE.MIN_OPTION) { fail(oat + ".text", "Option text is " + text(o.text).length + " characters; the floor is " + SRULE.MIN_OPTION + "."); bad.worked++; }
+      });
+      var wrk = Array.isArray(wk.ranking) ? wk.ranking : [];
+      if (wrk.length !== SRULE.OPTIONS) { fail(wat + ".ranking", "The ranking must order all " + SRULE.OPTIONS + " options; found " + wrk.length + " entries."); bad.worked++; }
+      else {
+        var seenOpt = Object.create(null);
+        wrk.forEach(function (r, j) {
+          var rat = wat + ".ranking[" + j + "]";
+          if (!r || RANK_ORDER[j] !== r.rank) { fail(rat + ".rank", "Position " + j + " must be \u201C" + RANK_ORDER[j] + "\u201D; found " + JSON.stringify(r && r.rank) + ". Rankings are authored best first."); bad.worked++; }
+          if (!r || !wIds[r.option]) { fail(rat + ".option", "Ranks option " + JSON.stringify(r && r.option) + ", which is not one of the options."); bad.worked++; }
+          else if (seenOpt[r.option]) { fail(rat + ".option", "Option \u201C" + r.option + "\u201D is ranked twice."); bad.worked++; }
+          if (r) seenOpt[r.option] = true;
+          if (text(r && r.why).length < SRULE.MIN_WHY) { fail(rat + ".why", "Reasoning is " + text(r && r.why).length + " characters; the floor is " + SRULE.MIN_WHY + "."); bad.worked++; }
+        });
+      }
+
+      /* Part 6: traps */
+      var traps = Array.isArray(L.traps) ? L.traps.filter(function (x) { return text(x); }) : [];
+      if (!inRange(traps.length, LRULE.TRAPS)) { fail(at + ".traps", "Has " + traps.length + " traps; a lesson names " + LRULE.TRAPS[0] + " to " + LRULE.TRAPS[1] + "."); bad.parts++; }
+
+      /* Part 7: quick checks, through the importer's validator */
+      var cks = Array.isArray(L.checks) ? L.checks : [];
+      if (!inRange(cks.length, LRULE.CHECKS)) { fail(at + ".checks", "Has " + cks.length + " quick checks; a lesson carries " + LRULE.CHECKS[0] + " to " + LRULE.CHECKS[1] + "."); bad.checks++; }
+      var filled = cks.map(function (c) {
+        if (!c || typeof c !== "object") return c;
+        var q = {}, k;
+        for (k in c) if (Object.prototype.hasOwnProperty.call(c, k)) q[k] = c[k];
+        q.ecoTask = c.ecoTask || L.ecoTask;
+        var tk = PMP.ECO_TASK_BY_ID[q.ecoTask];
+        q.domain = c.domain || (tk ? tk.domain : undefined);
+        return q;
+      });
+      var res = PMP.validate.pack(PMP.Data.packObject(filled, "lesson " + L.id));
+      res.errors.forEach(function (e) {
+        fail(String(e.where).replace(/^questions\[/, at + ".checks["), e.msg); bad.checks++;
+      });
+      cks.forEach(function (c, j) {
+        var cid = c && c.id;
+        if (!cid) return;
+        if (String(cid).indexOf(L.id + "-") !== 0) { fail(at + ".checks[" + j + "].id", "Check id \u201C" + cid + "\u201D must start with \u201C" + L.id + "-\u201D so it cannot collide with another lesson's."); bad.checks++; }
+        if (checkIds[cid] !== undefined) { fail(at + ".checks[" + j + "].id", "Check id \u201C" + cid + "\u201D is also used by " + checkIds[cid] + "."); bad.checks++; }
+        else checkIds[cid] = at;
+        if (bankIds[cid]) { fail(at + ".checks[" + j + "].id", "Check id \u201C" + cid + "\u201D is also a question id in the bank."); bad.checks++; }
+      });
+
+      /* Part 8: key terms resolve to the glossary */
+      var terms = Array.isArray(L.terms) ? L.terms : [];
+      if (!terms.length) { fail(at + ".terms", "No key terms."); bad.terms++; }
+      terms.forEach(function (term, j) {
+        if (!glossary[text(term).toLowerCase()]) { fail(at + ".terms[" + j + "]", "\u201C" + term + "\u201D is not a headword in the \u00A705.7.2 glossary, so its chip would open nothing."); bad.terms++; }
+      });
+
+      /* Part 9: recap and mindset */
+      var recap = Array.isArray(L.recap) ? L.recap.filter(function (x) { return text(x); }) : [];
+      if (!inRange(recap.length, LRULE.RECAP)) { fail(at + ".recap", "Recap has " + recap.length + " lines; the range is " + LRULE.RECAP[0] + " to " + LRULE.RECAP[1] + "."); bad.recap++; }
+      if (text(L.mindset).length < LRULE.MIN_MINDSET) { fail(at + ".mindset", "Mindset is " + text(L.mindset).length + " characters; the floor is " + LRULE.MIN_MINDSET + "."); bad.recap++; }
+
+      /* Part 10: practice set */
+      var pr = L.practice;
+      if (!pr || typeof pr.count !== "number" || pr.count < 1) { fail(at + ".practice.count", "Practice set size must be a positive number."); bad.parts++; }
+      ((pr && pr.decks) || []).forEach(function (d, j) {
+        if (!decks[d]) { fail(at + ".practice.decks[" + j + "]", "Deck \u201C" + d + "\u201D does not exist in \u00A705.5."); bad.links++; }
+      });
+      if (pr && L.ecoTask && PMP.ECO_TASK_BY_ID[L.ecoTask]) {
+        var have = PMP.Content.all().filter(function (q) { return q.ecoTask === L.ecoTask; }).length;
+        if (have < pr.count) gap(at + ".practice", "The bank holds " + have + " questions for " + L.ecoTask + ", fewer than the " + pr.count + "-question practice set.");
+      }
+    });
+
+    /* Prerequisites that name lessons not written yet, then cycles */
+    var cyc = 0;
+    ls.forEach(function (L, i) {
+      if (!L || !Array.isArray(L.prereqs)) return;
+      L.prereqs.forEach(function (p, j) {
+        if (LRULE.ID.test(text(p)) && p !== L.id && ids[p] === undefined) {
+          gap("lessons[" + i + "].prereqs[" + j + "]", "Prerequisite \u201C" + p + "\u201D is not written yet. The reader shows it as pending.");
+        }
+      });
+    });
+    var stateOf = Object.create(null);   /* 1 = on the stack, 2 = finished */
+    function visit(id, trail) {
+      if (stateOf[id] === 2) return;
+      if (stateOf[id] === 1) {
+        var loop = trail.slice(trail.indexOf(id)).concat(id);
+        fail("lessons[" + ids[id] + "].prereqs", "Prerequisite cycle: " + loop.join(" \u2192 ") + ".");
+        cyc++;
+        return;
+      }
+      stateOf[id] = 1;
+      var L = ls[ids[id]];
+      (Array.isArray(L.prereqs) ? L.prereqs : []).forEach(function (p) {
+        if (p !== id && ids[p] !== undefined) visit(p, trail.concat(id));
+      });
+      stateOf[id] = 2;
+    }
+    Object.keys(ids).forEach(function (id) { visit(id, []); });
+    bad.prereq += cyc;
+
+    /* Coverage: exactly one domain lesson per ECO task */
+    var uncovered = 0, doubled = 0;
+    PMP.ECO_TASKS.forEach(function (t) {
+      var hits = perTask[t.id] || [];
+      if (!hits.length) { uncovered++; gap("coverage." + t.id, "No lesson yet for " + t.label + "."); }
+      else if (hits.length > 1) {
+        doubled++;
+        fail("coverage." + t.id, t.label + " is taught by " + hits.length + " lessons (indexes " + hits.join(", ") + "). One lesson per task.");
+      }
+    });
+
+    out.checks.push({ id: "l-id", label: "Unique, well-formed id in a known module", n: ls.length, bad: bad.id });
+    out.checks.push({ id: "l-task", label: "ECO task valid, and in the lesson's domain", n: ls.length, bad: bad.task });
+    out.checks.push({ id: "l-cover", label: "No ECO task taught by more than one lesson", n: PMP.ECO.TASK_COUNT, bad: doubled });
+    out.checks.push({ id: "l-prereq", label: "Prerequisites well-formed, with no cycles", n: ls.length, bad: bad.prereq });
+    out.checks.push({ id: "l-obj", label: LRULE.OBJECTIVES[0] + "\u2013" + LRULE.OBJECTIVES[1] + " objectives", n: ls.length, bad: bad.obj });
+    out.checks.push({ id: "l-body", label: "At least " + LRULE.MIN_SECTIONS + " sections and " + LRULE.WORDS[0] + " words of teaching", n: ls.length, bad: bad.body });
+    out.checks.push({ id: "l-lens", label: "Predictive, agile and hybrid lenses all filled", n: ls.length * 3, bad: bad.lens });
+    out.checks.push({ id: "l-worked", label: "Worked example is a four-option total order (scenario rules)", n: ls.length, bad: bad.worked });
+    out.checks.push({ id: "l-checks", label: LRULE.CHECKS[0] + "\u2013" + LRULE.CHECKS[1] + " quick checks, each passing the pack validator", n: ls.length, bad: bad.checks });
+    out.checks.push({ id: "l-terms", label: "Every key term resolves to a glossary entry", n: ls.length, bad: bad.terms });
+    out.checks.push({ id: "l-links", label: "Every formula group and deck id exists", n: ls.length, bad: bad.links });
+    out.checks.push({ id: "l-recap", label: "Recap of " + LRULE.RECAP[0] + "\u2013" + LRULE.RECAP[1] + " lines and a mindset of " + LRULE.MIN_MINDSET + "+ characters", n: ls.length, bad: bad.recap });
+    out.checks.push({ id: "l-parts", label: "Every other part present: title, minutes, order, exam note, traps, practice set", n: ls.length, bad: bad.parts });
+
+    out.counts = { total: ls.length, uncovered: uncovered, doubled: doubled, words: words };
+    out.pass = out.failures.length === 0;
+    return out;
+  }
+
+  function lessonsCard() {
+    var lr = auditLessons(PMP.LESSONS);
+    var card = el("div", { class: "card" }, [
+      el("span", { class: "eyebrow", text: "\u00A705.10 \u00B7 Lessons" }),
+      el("h2", { text: lr.pass
+        ? (lr.counts.total === 1 ? "The lesson passes every rule" : "All " + lr.counts.total + " lessons pass every rule")
+        : PMP.fmt.plural(lr.failures.length, "failure") + " in the lessons" }),
+      el("p", { text: "Lessons are checked against their own rules: every one of the eleven parts present, a worked example ranked as a total order, quick checks that pass the importer's validator, and key terms that open a real glossary entry." })
+    ]);
+    card.appendChild(el("div", { class: "sum-grid", style: "margin-top:var(--sp-4)" }, [
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "Lessons" }),
+        el("span", { class: "stat-v", text: String(lr.counts.total) })
+      ]),
+      el("div", { class: "stat" }, [
+        el("span", { class: "stat-k", text: "Tasks taught" }),
+        el("span", { class: "stat-v", text: (PMP.ECO.TASK_COUNT - lr.counts.uncovered) + " / " + PMP.ECO.TASK_COUNT })
+      ])
+    ]));
+    card.appendChild(el("p", { style: "margin-top:var(--sp-4)", text: (PMP.LESSONS || []).map(function (L) {
+      return L.id + " " + L.title + ": " + (lr.counts.words[L.id] || 0) + " words";
+    }).join(" \u00B7 ") }));
+    card.appendChild(ruleTable(lr.checks));
+    if (lr.failures.length) {
+      card.appendChild(el("span", { class: "eyebrow", style: "display:block;margin-top:var(--sp-5)", text: "Lesson failures" }));
+      card.appendChild(issueTable(lr.failures, "fail"));
+    }
+    if (lr.gaps.length) {
+      card.appendChild(el("details", { class: "review" }, [
+        el("summary", null, [el("span", { class: "s", text: PMP.fmt.plural(lr.gaps.length, "gap") + " \u2014 missing content, not broken content" })]),
+        el("div", { class: "review-bd" }, [issueTable(lr.gaps, "gap")])
+      ]));
+    }
+    return card;
+  }
+
   /* ── 10.14.4  VIEW ───────────────────────────────────────────────────── */
   function coverageGrid(counts) {
     var wrap = el("div", { class: "eco-grid" });
@@ -23391,6 +23960,10 @@ PMP.Audit = (function () {
       host.appendChild(sGapCard);
     }
 
+    /* Lessons ── 10.14.5. Its own block, on the same terms as the scenario
+       pack: different rules, so a combined pass would hide which one failed. */
+    host.appendChild(lessonsCard());
+
     host.appendChild(el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Sourcing" }),
       el("p", { text: "Every stem, option, rationale and explanation in this build is original writing. No PMI text is reproduced, these are not retired exam questions, and nothing here was scraped from a question bank. The ECO task labels are this build's own paraphrases of the outline's task titles." }),
@@ -23400,7 +23973,7 @@ PMP.Audit = (function () {
 
   PMP.Router.register("audit", { title: "Content audit", render: view });
 
-  return { audit: audit, auditScenarios: auditScenarios, RULE: RULE, SRULE: SRULE };
+  return { audit: audit, auditScenarios: auditScenarios, auditLessons: auditLessons, RULE: RULE, SRULE: SRULE, LRULE: LRULE };
 })();
 
 
@@ -25628,6 +26201,520 @@ PMP.Dashboard = (function () {
 })();
 
 
+
+/* ── 10.15  LEARN ───────────────────────────────────────────────────────────
+   Reads §05.10 and teaches a topic before anything tests it.
+
+     #/learn                the hub: five modules in path order, each lesson
+                            with its status, and a Continue button
+     #/learn?lesson=P4      the reader: the eleven parts of one lesson
+
+   What this module writes, and what it does not:
+
+   · Progress goes to the `lessons` slice and nowhere else. One record per
+     lesson the person has opened: which concept sections have been opened,
+     the latest result of each quick check, and when the lesson first became
+     complete. Complete means every concept section opened and every quick
+     check tried.
+
+   · Quick checks are rendered by §10.04, the same renderer every drill uses,
+     and are deliberately NOT written to `attempts`. They come straight after
+     the teaching and are easy by design; counted as attempts they would lift
+     accuracy and readiness for reading a page. Their only record is the 1 or
+     0 kept on the lesson.
+
+   · The practice set links into the practice engine pre-filtered to the
+     lesson's ECO task. That drill records attempts in the normal way. It is
+     not yet tied back to the lesson, so Mastered cannot be awarded here; the
+     Mastery part says so rather than showing a badge it cannot earn.
+
+   Every piece of lesson text is set with textContent. Section bodies are
+   split into paragraphs on blank lines; nothing in a lesson is parsed as
+   markup.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.Learn = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on;
+
+  var MASTERY_SHARE = 0.7;   /* practice-set score that earns Mastered */
+  var PARTS = [
+    "Overview", "Why it matters on the exam", "The concept", "Three lenses",
+    "Worked example", "Traps", "Quick checks", "Key terms", "Recap",
+    "Practice set", "Mastery"
+  ];
+  var STATUS_LABEL = { none: "Not started", progress: "In progress", complete: "Complete", mastered: "Mastered" };
+  var STATUS_CHIP = { none: "chip", progress: "chip chip--answered", complete: "chip chip--correct", mastered: "chip chip--correct" };
+  var RANK_LABEL = { best: "Best first move", acceptable: "Acceptable", premature: "Premature", wrong: "Wrong" };
+
+  /* ── 10.15.1  LOOKUPS ──────────────────────────────────────────────────── */
+  function modules() {
+    return PMP.MODULES.slice().sort(function (a, b) { return a.order - b.order; });
+  }
+  function moduleLabel(m) {
+    return m.label || (m.domain && PMP.ECO.DOMAIN_LABELS[m.domain]) || m.id;
+  }
+  function moduleById(id) {
+    return PMP.MODULES.filter(function (m) { return m.id === id; })[0] || null;
+  }
+  function path() {
+    var mOrder = {};
+    PMP.MODULES.forEach(function (m) { mOrder[m.id] = m.order; });
+    return PMP.LESSONS.slice().sort(function (a, b) {
+      return (a.order - b.order) || ((mOrder[a.module] || 0) - (mOrder[b.module] || 0));
+    });
+  }
+  function lessonById(id) {
+    return PMP.LESSONS.filter(function (l) { return l.id === id; })[0] || null;
+  }
+
+  function recordOf(id) {
+    var all = PMP.Store.state.lessons || {};
+    return all[id] || null;
+  }
+
+  function counts(lesson, rec) {
+    var opened = 0, tried = 0;
+    var have = rec && Array.isArray(rec.opened) ? rec.opened : [];
+    var checks = rec && rec.checks ? rec.checks : {};
+    lesson.sections.forEach(function (s) { if (have.indexOf(s.id) >= 0) opened++; });
+    lesson.checks.forEach(function (c) { if (c.id in checks) tried++; });
+    return {
+      opened: opened, sections: lesson.sections.length,
+      tried: tried, checks: lesson.checks.length,
+      done: opened + tried, total: lesson.sections.length + lesson.checks.length
+    };
+  }
+
+  function status(lesson) {
+    var rec = recordOf(lesson.id);
+    if (!rec) return "none";
+    if (rec.masteredAt) return "mastered";
+    if (rec.completedAt) return "complete";
+    var c = counts(lesson, rec);
+    return c.done ? "progress" : "none";
+  }
+
+  /* The only writer. Creates the record on first touch and stamps
+     completedAt once, the first time both conditions hold. */
+  function touch(lesson, mutate) {
+    PMP.Store.commit(["lessons"], function (s) {
+      if (!s.lessons || typeof s.lessons !== "object") s.lessons = {};
+      var rec = s.lessons[lesson.id];
+      if (!rec) rec = s.lessons[lesson.id] = { opened: [], checks: {} };
+      if (!Array.isArray(rec.opened)) rec.opened = [];
+      if (!rec.checks || typeof rec.checks !== "object") rec.checks = {};
+      mutate(rec);
+      var c = counts(lesson, rec);
+      if (!rec.completedAt && c.done === c.total) rec.completedAt = new Date().toISOString();
+    });
+  }
+
+  function href(name, params) {
+    var q = [];
+    Object.keys(params || {}).forEach(function (k) {
+      q.push(encodeURIComponent(k) + "=" + encodeURIComponent(params[k]));
+    });
+    return "#/" + name + (q.length ? "?" + q.join("&") : "");
+  }
+
+  function paragraphs(text) {
+    return String(text || "").split(/\n\s*\n/).map(function (t) { return t.trim(); })
+      .filter(Boolean).map(function (t) { return el("p", { text: t }); });
+  }
+
+  /* ── 10.15.2  THE HUB ──────────────────────────────────────────────────── */
+  function renderHub(host) {
+    var lessons = path();
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Learn" }),
+      el("h2", { text: "Lessons" }),
+      el("p", { text: "Each lesson teaches one part of the outline before anything tests it. Read the concept, try the quick checks, then run the practice set for that task." })
+    ]));
+
+    var next = lessons.filter(function (l) { var st = status(l); return st !== "complete" && st !== "mastered"; })[0];
+    var cont = el("div", { class: "card" });
+    if (next) {
+      var st = status(next);
+      cont.appendChild(el("span", { class: "eyebrow", text: st === "progress" ? "Continue where you left off" : "Next on the path" }));
+      cont.appendChild(el("h2", { text: next.id + " \u00B7 " + next.title }));
+      cont.appendChild(el("p", { text: next.minutes + " minutes. " + PMP.fmt.plural(next.sections.length, "section") + " and " + PMP.fmt.plural(next.checks.length, "quick check") + "." }));
+      cont.appendChild(el("div", { class: "filter-bar" }, [
+        el("a", { class: "btn btn--primary", href: href("learn", { lesson: next.id }) },
+          [icon("book"), st === "progress" ? "Continue" : "Start lesson"])
+      ]));
+    } else if (lessons.length) {
+      cont.appendChild(el("span", { class: "eyebrow", text: "Path" }));
+      cont.appendChild(el("h2", { text: "Every lesson here is complete" }));
+      cont.appendChild(el("p", { text: "Revisit any lesson below, or keep going with practice and mock exams." }));
+    } else {
+      cont.appendChild(el("h2", { text: "No lessons yet" }));
+    }
+    host.appendChild(cont);
+
+    modules().forEach(function (m) {
+      var mine = lessons.filter(function (l) { return l.module === m.id; });
+      var card = el("section", { class: "card", "aria-labelledby": "ln-mod-" + m.id }, [
+        el("span", { class: "eyebrow", text: "Module " + m.order }),
+        el("h2", { id: "ln-mod-" + m.id, text: moduleLabel(m) }),
+        el("p", { text: m.blurb })
+      ]);
+      if (!mine.length) {
+        card.appendChild(el("p", { class: "hint", text: "The lessons for this module have not been written yet." }));
+      } else {
+        var list = el("ul", { class: "ln-list" });
+        mine.forEach(function (l) {
+          var stl = status(l);
+          var task = PMP.ECO_TASK_BY_ID[l.ecoTask];
+          list.appendChild(el("li", null, [
+            el("a", { class: "ln-row", href: href("learn", { lesson: l.id }) }, [
+              el("span", { class: "ln-id", text: l.id }),
+              el("span", { class: "ln-t" }, [
+                el("span", { class: "ln-name", text: l.title }),
+                el("span", { class: "ln-sub", text: (task ? "ECO " + PMP.ECO.DOMAIN_LABELS[task.domain] + " " + task.n + " \u00B7 " : "") + l.minutes + " min" })
+              ]),
+              el("span", { class: STATUS_CHIP[stl], text: STATUS_LABEL[stl] })
+            ])
+          ]));
+        });
+        card.appendChild(list);
+      }
+      host.appendChild(card);
+    });
+  }
+
+  /* ── 10.15.3  THE READER ───────────────────────────────────────────────── */
+  function part(n, title, children) {
+    var id = "ln-part-" + n;
+    return el("section", { class: "card ln-part", "aria-labelledby": id }, [
+      el("span", { class: "eyebrow", text: "Part " + n + " of " + PARTS.length }),
+      el("h2", { id: id, text: title })
+    ].concat(children || []));
+  }
+
+  function mindsetBlock(label, text, ic) {
+    return el("div", { class: "mindset" }, [
+      icon(ic || "target"),
+      el("div", null, [
+        el("span", { class: "eyebrow", text: label }),
+        el("p", { text: text })
+      ])
+    ]);
+  }
+
+  function renderReader(host, lesson) {
+    var task = PMP.ECO_TASK_BY_ID[lesson.ecoTask] || null;
+    var mod = moduleById(lesson.module);
+    var lessons = path();
+    var idx = lessons.indexOf(lesson);
+    var ui = {};
+
+    host.appendChild(el("div", { class: "filter-bar ln-top" }, [
+      el("a", { class: "btn btn--ghost btn--sm", href: href("learn") }, "All lessons")
+    ]));
+
+    /* Part 1 ── header: title, task, minutes, prerequisites, objectives */
+    var prereqs = (lesson.prereqs || []).map(function (pid) {
+      var p = lessonById(pid);
+      return p
+        ? el("a", { class: "chip", href: href("learn", { lesson: pid }), text: "Read first: " + pid + " " + p.title })
+        : el("span", { class: "chip", text: "Read first: " + pid + " (not written yet)" });
+    });
+    ui.status = el("span", { class: "chip" });
+    ui.bar = el("i", { style: "width:0%" });
+    ui.progress = el("div", {
+      class: "progress", role: "progressbar", "aria-label": "Lesson progress",
+      "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": "0"
+    }, [ui.bar]);
+    ui.progressText = el("span", { class: "ln-sub" });
+
+    host.appendChild(el("section", { class: "card ln-part", "aria-labelledby": "ln-title" }, [
+      el("span", { class: "eyebrow", text: "Part 1 of " + PARTS.length + " \u00B7 Lesson " + lesson.id + (mod ? " \u00B7 " + moduleLabel(mod) : "") }),
+      el("h2", { id: "ln-title", text: lesson.title }),
+      el("div", { class: "q-meta ln-meta" }, [
+        task ? el("span", { class: "chip", text: "ECO " + PMP.ECO.DOMAIN_LABELS[task.domain] + " " + task.n + " \u00B7 " + task.label }) : null,
+        el("span", { class: "chip", text: lesson.minutes + " min" }),
+        ui.status
+      ].concat(prereqs)),
+      el("div", { class: "ln-prog" }, [ui.progress, ui.progressText]),
+      el("h3", { class: "ln-h3", text: "After this lesson you can" }),
+      el("ul", { class: "ln-bullets" }, lesson.objectives.map(function (o) { return el("li", { text: o }); }))
+    ]));
+
+    /* Part 2 ── why it matters. Every figure is read from §01 and the live
+       pool, never written into the lesson. */
+    var why = [];
+    if (task) {
+      var w = PMP.ECO.DOMAIN_WEIGHTS[task.domain];
+      why.push(el("p", { text: "This lesson covers task " + task.n + " of the " + PMP.ECO.DOMAIN_LABELS[task.domain]
+        + " domain, which carries " + PMP.fmt.pct(w) + " of the exam across " + PMP.ECO.DOMAIN_TASK_COUNTS[task.domain] + " tasks." }));
+    }
+    why = why.concat(paragraphs(lesson.examWeight));
+    if (task) {
+      var qs = PMP.Content.all().filter(function (q) { return q.ecoTask === task.id; });
+      var byType = {};
+      qs.forEach(function (q) { var lb = PMP.QRender.label(q.type); byType[lb] = (byType[lb] || 0) + 1; });
+      var typeText = Object.keys(byType).sort().map(function (k) { return k.toLowerCase() + " " + byType[k]; }).join(", ");
+      var scn = PMP.SCENARIOS.filter(function (s) { return s.ecoTask === task.id; }).length;
+      why.push(el("p", { class: "hint", text: "In this build: " + PMP.fmt.plural(qs.length, "question") + " on this task"
+        + (typeText ? " (" + typeText + ")" : "") + ", and " + PMP.fmt.plural(scn, "scenario") + "." }));
+    }
+    host.appendChild(part(2, PARTS[1], [el("div", { class: "ln-prose" }, why)]));
+
+    /* Part 3 ── the concept, one disclosure per idea. Opening one records it. */
+    ui.secChips = {};
+    var secs = lesson.sections.map(function (s, i) {
+      var chip = el("span", { class: "chip chip--correct", hidden: true }, [icon("check"), "Read"]);
+      ui.secChips[s.id] = chip;
+      var bodyKids = paragraphs(s.body);
+      if (s.formulaGroup) {
+        var grp = PMP.FORMULAS.filter(function (g) { return g.id === s.formulaGroup; })[0];
+        bodyKids.push(el("p", { class: "ln-links" }, [
+          el("a", { href: href("formulas", { tab: "drill", group: s.formulaGroup }) },
+            "Practise the arithmetic in the formula lab" + (grp ? ": " + grp.label : ""))
+        ]));
+      }
+      var d = el("details", { class: "review ln-sec" }, [
+        el("summary", null, [
+          el("span", { class: "n", text: String(i + 1) }),
+          el("span", { class: "s", text: s.heading }),
+          chip
+        ]),
+        el("div", { class: "review-bd ln-prose" }, bodyKids)
+      ]);
+      on(d, "toggle", function () {
+        if (!d.open) return;
+        var rec = recordOf(lesson.id);
+        if (rec && rec.opened && rec.opened.indexOf(s.id) >= 0) return;
+        touch(lesson, function (r) { if (r.opened.indexOf(s.id) < 0) r.opened.push(s.id); });
+        refresh();
+      });
+      return d;
+    });
+    host.appendChild(part(3, PARTS[2], [
+      el("p", { text: "Open each section to read it. The lesson counts a section as read once it has been opened." })
+    ].concat(secs)));
+
+    /* Part 4 ── three lenses */
+    var lensRows = ["predictive", "agile", "hybrid"].map(function (k) {
+      return el("tr", null, [
+        el("th", { scope: "row", text: PMP.ECO.APPROACH_LABELS[k] }),
+        el("td", { text: lesson.lenses[k] })
+      ]);
+    });
+    host.appendChild(part(4, PARTS[3], [
+      el("table", { class: "tbl ln-lens" }, [
+        el("thead", null, [el("tr", null, [el("th", { scope: "col", text: "Approach" }), el("th", { scope: "col", text: "How it looks" })])]),
+        el("tbody", null, lensRows)
+      ])
+    ]));
+
+    /* Part 5 ── worked example, the coach thinks aloud. Options in authored
+       order first, so the reader can choose before opening the ranking. */
+    var wk = lesson.worked;
+    var byOpt = {};
+    var letters = {};
+    wk.options.forEach(function (o, i) { byOpt[o.id] = o; letters[o.id] = String.fromCharCode(65 + i); });
+    var rankList = el("div", { class: "rank-list", role: "list" }, wk.ranking.map(function (r, i) {
+      var o = byOpt[r.option] || { text: "" };
+      return el("div", { class: "rank", role: "listitem", dataset: { rank: r.rank } }, [
+        el("span", { class: "ord", text: String(i + 1) }),
+        el("div", { class: "body" }, [
+          el("div", { class: "lbl-row" }, [
+            el("span", { class: "verdict", text: RANK_LABEL[r.rank] || r.rank }),
+            el("span", { class: "chip", text: "Option " + (letters[r.option] || "?") })
+          ]),
+          el("p", { class: "opt-text", text: o.text }),
+          el("p", { class: "why", text: r.why })
+        ])
+      ]);
+    }));
+    host.appendChild(part(5, PARTS[4], [
+      el("p", { class: "q-stem", text: wk.stem }),
+      el("ol", { class: "ln-opts" }, wk.options.map(function (o, i) {
+        return el("li", null, [el("span", { class: "key", text: String.fromCharCode(65 + i) }), el("span", { text: o.text })]);
+      })),
+      el("p", { class: "hint", text: "Pick the one you would do first, then open the reasoning." }),
+      el("details", { class: "review ln-sec" }, [
+        el("summary", null, [el("span", { class: "s", text: "How a coach would rank these" })]),
+        el("div", { class: "review-bd" }, [rankList, mindsetBlock("The mindset", wk.mindset)])
+      ])
+    ]));
+
+    /* Part 6 ── traps */
+    host.appendChild(part(6, PARTS[5], [
+      el("p", { text: "Instincts the exam rewards you for resisting." }),
+      el("ul", { class: "ln-bullets" }, lesson.traps.map(function (t) { return el("li", { text: t }); }))
+    ]));
+
+    /* Part 7 ── quick checks */
+    var checkHost = el("div");
+    host.appendChild(part(7, PARTS[6], [
+      el("p", { text: "For learning, not scoring. Answers here are kept on the lesson only, and never count towards accuracy or readiness." }),
+      checkHost
+    ]));
+    lesson.checks.forEach(function (c, i) { checkHost.appendChild(renderCheck(lesson, c, i, refresh)); });
+
+    /* Part 8 ── key terms, each opening its glossary entry */
+    host.appendChild(part(8, PARTS[7], [
+      el("div", { class: "ln-chips" }, lesson.terms.map(function (t) {
+        return el("a", { class: "chip", href: href("library", { tab: "glossary", sel: t }), text: t });
+      }))
+    ]));
+
+    /* Part 9 ── recap */
+    host.appendChild(part(9, PARTS[8], [
+      el("ul", { class: "ln-bullets" }, lesson.recap.map(function (t) { return el("li", { text: t }); })),
+      mindsetBlock("Carry this out of the lesson", lesson.mindset)
+    ]));
+
+    /* Part 10 ── practice set: the bank, scenarios and cards for this task */
+    var pr = lesson.practice || {};
+    var links = [];
+    if (task) {
+      var nq = PMP.Content.all().filter(function (q) { return q.ecoTask === task.id; }).length;
+      links.push(el("a", { class: "btn btn--primary", href: href("practice", { ecoTask: task.id }) },
+        [icon("target"), "Practise " + task.label.toLowerCase()]));
+      links.push(el("a", { class: "btn", href: href("scenarios", { ecoTask: task.id }) }, [icon("branch"), "Scenarios"]));
+    }
+    (pr.decks || []).forEach(function (d) {
+      var deck = PMP.DECKS.filter(function (x) { return x.id === d; })[0];
+      if (deck) links.push(el("a", { class: "btn", href: href("cards", { deck: d }) }, [icon("cards"), "Cards: " + deck.label]));
+    });
+    host.appendChild(part(10, PARTS[9], [
+      el("p", { text: task
+        ? "Opens the practice drill filtered to " + task.label.toLowerCase() + ". Aim for a set of about " + (pr.count || 10) + " questions; the bank holds " + nq + " on this task. These answers are recorded like any drill."
+        : "This lesson has no single ECO task, so there is no filtered practice set." }),
+      el("div", { class: "filter-bar" }, links)
+    ]));
+
+    /* Part 11 ── mastery */
+    ui.mastery = el("div");
+    host.appendChild(part(11, PARTS[10], [ui.mastery]));
+
+    /* Previous / next on the path */
+    var prev = lessons[idx - 1], nxt = lessons[idx + 1];
+    host.appendChild(el("nav", { class: "filter-bar ln-pager", "aria-label": "Lesson navigation" }, [
+      prev ? el("a", { class: "btn", href: href("learn", { lesson: prev.id }) }, "Previous: " + prev.id + " " + prev.title) : null,
+      el("span", { class: "spacer" }),
+      nxt ? el("a", { class: "btn", href: href("learn", { lesson: nxt.id }) }, "Next: " + nxt.id + " " + nxt.title)
+          : el("a", { class: "btn", href: href("learn") }, "Back to all lessons")
+    ]));
+
+    function refresh() {
+      var rec = recordOf(lesson.id);
+      var c = counts(lesson, rec);
+      var st = status(lesson);
+      var pct = c.total ? Math.round(c.done / c.total * 100) : 0;
+      ui.bar.style.width = pct + "%";
+      ui.progress.setAttribute("aria-valuenow", String(pct));
+      ui.progressText.textContent = c.done + " of " + c.total + " steps";
+      ui.status.className = STATUS_CHIP[st];
+      ui.status.textContent = STATUS_LABEL[st];
+      lesson.sections.forEach(function (s) {
+        ui.secChips[s.id].hidden = !(rec && rec.opened && rec.opened.indexOf(s.id) >= 0);
+      });
+
+      ui.mastery.innerHTML = "";
+      ui.mastery.appendChild(el("ul", { class: "keylist" }, [
+        el("li", null, [
+          el("span", { class: c.opened === c.sections ? "chip chip--correct" : "chip", text: c.opened + " / " + c.sections }),
+          el("span", { text: "Concept sections opened" })
+        ]),
+        el("li", null, [
+          el("span", { class: c.tried === c.checks ? "chip chip--correct" : "chip", text: c.tried + " / " + c.checks }),
+          el("span", { text: "Quick checks tried" })
+        ])
+      ]));
+      ui.mastery.appendChild(el("p", { class: "ln-note", text: rec && rec.completedAt
+        ? "Complete since " + PMP.fmt.dateShort(rec.completedAt) + "."
+        : "The lesson is complete once every concept section has been opened and every quick check tried." }));
+      ui.mastery.appendChild(el("p", { class: "ln-note", text: "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE)
+        + " or more on this lesson's practice set. Practice results are not linked back to lessons in this build yet, so the lesson cannot be marked Mastered here." }));
+    }
+    refresh();
+  }
+
+  /* ── 10.15.4  QUICK CHECKS ─────────────────────────────────────────────────
+     A check is a 05.2 item rendered by §10.04 and scored by it. The result is
+     written to the lesson record only. Nothing here touches `attempts`. */
+  function asItem(lesson, c) {
+    var task = PMP.ECO_TASK_BY_ID[c.ecoTask || lesson.ecoTask];
+    var q = {};
+    Object.keys(c).forEach(function (k) { q[k] = c[k]; });
+    q.ecoTask = c.ecoTask || lesson.ecoTask;
+    q.domain = c.domain || (task ? task.domain : "");
+    return q;
+  }
+
+  function renderCheck(lesson, c, i, after) {
+    var q = asItem(lesson, c);
+    var wrap = el("div", { class: "ln-check" });
+    var round = 0;
+
+    function paint() {
+      round++;
+      wrap.innerHTML = "";
+      var p = PMP.QRender.present(q, { shuffle: PMP.Store.state.settings.shuffleOptions !== false });
+      wrap.appendChild(el("div", { class: "q-meta" }, [
+        el("span", { class: "eyebrow", text: "Check " + (i + 1) + " of " + lesson.checks.length }),
+        el("span", { class: "chip", text: PMP.QRender.label(q.type) })
+      ]));
+      wrap.appendChild(el("p", { class: "q-stem", text: q.stem }));
+      wrap.appendChild(el("p", { class: "q-instr", text: PMP.QRender.instruction(q) }));
+      var body = el("div");
+      var feedback = el("div");
+      wrap.appendChild(body);
+      wrap.appendChild(feedback);
+      var btn = el("button", { class: "btn btn--primary", type: "button", disabled: true }, "Check answer");
+      wrap.appendChild(el("div", { class: "q-tools" }, [el("span", { class: "spacer" }), btn]));
+
+      var done = false;
+      var ctrl = PMP.QRender.render(p, q, body, {
+        nonce: "ln-" + lesson.id + "-" + round,
+        onChange: function () { if (!done) btn.disabled = !ctrl.answered(); }
+      });
+
+      on(btn, "click", function () {
+        if (done) { paint(); return; }
+        if (!ctrl.answered()) return;
+        done = true;
+        var r = PMP.QRender.score(q, p, ctrl.value());
+        ctrl.reveal(r);
+        var kind = r.correct ? "right" : r.partial ? "part" : "wrong";
+        var word = r.correct ? "Correct" : r.partial ? "Partly correct" : "Not quite";
+        feedback.appendChild(el("div", { class: "verdict verdict--" + kind, role: "status" }, [
+          icon(r.correct ? "check" : r.partial ? "alert" : "x"),
+          el("div", null, [el("div", { class: "t", text: word })])
+        ]));
+        if (q.explanation) feedback.appendChild(el("div", { class: "explain" }, [el("h3", { text: "Why" }), el("p", { text: q.explanation })]));
+        if (q.mindset) feedback.appendChild(mindsetBlock("Mindset", q.mindset));
+        touch(lesson, function (rec) { rec.checks[c.id] = r.correct ? 1 : 0; });
+        btn.textContent = "Try again";
+        btn.focus();
+        if (after) after();
+      });
+    }
+    paint();
+    return wrap;
+  }
+
+  /* ── 10.15.5  ROUTE ────────────────────────────────────────────────────── */
+  function view(host, params) {
+    var id = params && params.lesson;
+    if (!id) return renderHub(host);
+    var lesson = lessonById(id);
+    if (!lesson) {
+      host.appendChild(PMP.UI.empty("No lesson called \u201C" + id + "\u201D",
+        "It may not have been written yet. The lessons that exist are listed on the Learn page.", "book"));
+      host.appendChild(el("div", { class: "filter-bar" }, [el("a", { class: "btn", href: href("learn") }, "All lessons")]));
+      return;
+    }
+    renderReader(host, lesson);
+  }
+
+  PMP.Router.register("learn", { title: "Learn", render: view });
+
+  return { path: path, status: status, lessonById: lessonById, MASTERY_SHARE: MASTERY_SHARE };
+})();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
    Hand-rolled SVG. No charting library, no network, no canvas.
