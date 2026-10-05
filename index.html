@@ -14531,6 +14531,956 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
+    id: "L1", module: "people", order: 16, ecoTask: "people-3", minutes: 35,
+    prereqs: ["F2", "F4"],
+    title: "Leading the team",
+    objectives: [
+      "Set clear expectations through a team charter and ground rules.",
+      "Adapt your leadership style to the person and the situation.",
+      "Empower the team while keeping accountability clear.",
+      "Recognise the stages a team moves through and what each needs.",
+      "Handle performance and behaviour problems directly and fairly."
+    ],
+    examWeight: "Leadership items describe a team that is stuck, a person who is struggling or a leader who is too controlling or too absent. The marks go to the response that helps the team solve its own problems. A leader still deals directly with what only a leader can fix.",
+    sections: [
+      { id: "s1", heading: "Setting expectations",
+        body: "Teams work best when everyone knows what is expected. A team charter records this. It covers shared values, working agreements, how decisions are made and how conflict is handled.\n\n"
+          + "Ground rules are part of the charter. They set behaviour such as being on time, responding to messages and raising problems early.\n\n"
+          + "The charter works best when the team writes it together. Rules imposed from outside are followed reluctantly. Rules the team agreed are enforced by the team itself.\n\n"
+          + "Revisit the charter when the team changes or when the rules stop working. A charter written in week one and never read again does little.\n\n"
+          + "Expectations run both ways. Tell the team what to expect from you. Say how quickly you will respond and which decisions you will take. Explain how you will support them when things go wrong." },
+      { id: "s2", heading: "Adapting your style",
+        body: "No single leadership style fits every situation. Situational leadership matches the style to the person's competence and commitment for a particular task.\n\n"
+          + "Someone new to a task needs clear direction. Someone gaining skill but losing confidence needs coaching. Someone capable but hesitant needs support. Someone capable and confident needs delegation.\n\n"
+          + "The same person may need different styles for different tasks. An expert engineer may need direction when first chairing a client meeting.\n\n"
+          + "Emotional intelligence underpins all of this. Notice how people are feeling, manage your own reactions and respond to what is actually happening, not to what you assume." },
+      { id: "s3", heading: "Empowering the team",
+        body: "Empowered teams make decisions about their own work. They respond faster, own the results and stay more engaged.\n\n"
+          + "Empowerment is not abandonment. Be clear about which decisions the team owns and which it does not. Agree boundaries, such as budget limits or architectural standards.\n\n"
+          + "Expect mistakes as the team learns. Treat them as learning, not failure. A leader who takes back control after the first mistake teaches the team not to try.\n\n"
+          + "Grow the boundaries over time. As the team shows sound judgement, hand over more. Empowerment is a direction of travel, not a switch." },
+      { id: "s4", heading: "How teams develop",
+        body: "Teams tend to move through stages. The Tuckman model names them forming, storming, norming, performing and adjourning.\n\n"
+          + "In forming, people are polite and uncertain. They need clear direction and purpose. In storming, differences surface and conflict rises. They need help working through disagreement constructively.\n\n"
+          + "In norming, the team agrees how it works. In performing, it works well with little direction. Adjourning comes when the work ends and the team disperses.\n\n"
+          + "Teams can slip back. A new member or a major change can return a performing team to storming. Recognise the stage and adjust what you provide." },
+      { id: "s5", heading: "Supporting performance",
+        body: "When someone is struggling, start with a private conversation. Ask what is happening before deciding what is wrong. The cause may be skill, workload, unclear expectations or something outside work.\n\n"
+          + "Agree specific, achievable steps and offer support, such as pairing or training. Follow up as agreed.\n\n"
+          + "Recognise good work too. Specific recognition, given promptly, reinforces what you want to see more of.\n\n"
+          + "If a problem persists after support, involve the person's line manager or human resources as your organisation's process requires. Do not let it fester in front of the team; that undermines everyone." },
+      { id: "s6", heading: "Behaviour that harms the team",
+        body: "Sometimes a capable person behaves in ways that damage the team: dismissing ideas, interrupting or belittling colleagues. Their skill does not excuse it.\n\n"
+          + "Address it privately and specifically. Describe the behaviour and its effect, not the person's character. Ask for their view, then agree what will change.\n\n"
+          + "Protect psychological safety. People who fear ridicule stop raising problems, and hidden problems grow.\n\n"
+          + "Lead by example. A leader who interrupts, blames or hides mistakes will see the same behaviour spread through the team." }
+    ],
+    lenses: {
+      predictive: "The project manager often assigns work and sets direction, especially early. Leadership still means clear expectations, coaching and dealing with problems directly.",
+      agile: "The team self-organises and owns how it works. The servant leader coaches, protects focus and removes impediments, stepping in directly only where the team cannot.",
+      hybrid: "Some parts are directed, others self-organising. The project manager adapts leadership to each part and prevents a directive habit from undermining the agile team."
+    },
+    worked: {
+      stem: "A recently formed team of seven building a hospital's appointment system has started arguing openly in planning meetings about coding standards. Two members have stopped contributing. Delivery is still on track for now. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Facilitate a session where the team agrees its own coding standards and working agreements, and records them in the team charter." },
+        { id: "b", text: "Decide the coding standards yourself and announce them, to end the argument quickly." },
+        { id: "c", text: "Speak privately with the two quiet members to understand why they have stopped contributing." },
+        { id: "d", text: "Leave the team to sort it out, since delivery is still on track." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The team is storming, which is normal. Helping it agree its own standards resolves the cause and builds ownership of the outcome." },
+        { option: "c", rank: "acceptable", why: "Understanding the quiet members matters, and their silence is a warning. It addresses a symptom, though, while the shared disagreement continues." },
+        { option: "b", rank: "premature", why: "Imposing standards may sometimes be needed, but doing it first removes the team's chance to agree and invites resentment." },
+        { option: "d", rank: "wrong", why: "Two people have already withdrawn. Waiting until delivery suffers lets a fixable problem harden." }
+      ],
+      mindset: "Help a storming team agree its own way of working rather than imposing one."
+    },
+    traps: [
+      "Imposing ground rules instead of agreeing them with the team.",
+      "Taking back control after the team's first mistake.",
+      "Excusing harmful behaviour because the person is highly skilled.",
+      "Raising a performance concern in front of the team.",
+      "Using one leadership style for everyone and every task."
+    ],
+    checks: [
+      {
+        id: "L1-c1", type: "single",
+        stem: "A highly experienced data engineer has just been asked to lead a client workshop for the first time and seems anxious. Which leadership style fits this task best?",
+        options: [
+          { id: "a", text: "Directing or coaching on the workshop, while continuing to delegate her engineering work.", correct: true,
+            rationale: "Competence is task-specific. She needs more support for the new task and none for the familiar one." },
+          { id: "b", text: "Delegating, because she is highly experienced.",
+            rationale: "Her experience is in engineering, not workshops. Delegating a new task to an anxious person leaves her unsupported." },
+          { id: "c", text: "Directing all of her work until the workshop is over.",
+            rationale: "This removes autonomy she has earned in her own field and may undermine her confidence further." },
+          { id: "d", text: "Running the workshop yourself instead.",
+            rationale: "This avoids the development opportunity and signals a lack of trust." }
+        ],
+        explanation: "Situational leadership matches style to a person's competence and commitment for each task. An expert in one area may need direction or coaching in a new one. Adjusting per task supports growth without micromanaging.",
+        mindset: "Lead each person according to the task in front of them."
+      },
+      {
+        id: "L1-c2", type: "single",
+        stem: "Your strongest analyst repeatedly dismisses junior colleagues' ideas in meetings. Two juniors have stopped speaking up. What should you do first?",
+        options: [
+          { id: "a", text: "Talk with the analyst privately, describe the specific behaviour and its effect, and agree what will change.", correct: true,
+            rationale: "A private, specific conversation addresses the behaviour without humiliation and gives the analyst a chance to respond." },
+          { id: "b", text: "Remind the whole team in the next meeting to respect each other's ideas.",
+            rationale: "A general reminder avoids the real issue and may leave the analyst unaware it concerns them." },
+          { id: "c", text: "Ignore it, since the analyst's output is excellent.",
+            rationale: "The behaviour is silencing others. Strong individual output does not offset a weaker team." },
+          { id: "d", text: "Report the analyst to human resources.",
+            rationale: "Formal escalation before a direct conversation is premature for behaviour that has not yet been raised." }
+        ],
+        explanation: "Behaviour that silences others damages psychological safety and the team's output. The first step is a private, specific conversation about the behaviour and its effect. Formal routes follow only if it continues.",
+        mindset: "Address harmful behaviour directly and privately, whoever it comes from."
+      }
+    ],
+    terms: ["Team charter", "Ground rules", "Tuckman model", "Forming", "Storming", "Norming", "Performing", "Emotional intelligence", "Coaching", "Servant leadership", "Self-organising team"],
+    recap: [
+      "Agree expectations with the team in a charter it owns.",
+      "Match leadership style to the person and the task.",
+      "Empower within clear boundaries, and widen them over time.",
+      "Recognise the team's stage and give it what that stage needs.",
+      "Deal with performance and behaviour privately, specifically and early."
+    ],
+    mindset: "Lead so the team can solve its own problems, and step in directly where only you can.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "L2", module: "people", order: 17, ecoTask: "people-1", minutes: 30,
+    prereqs: ["L1"],
+    title: "Shared purpose",
+    objectives: [
+      "Build a common picture of what the project is for.",
+      "Use the vision and charter as working tools, not filed documents.",
+      "Keep purpose aligned when people, sponsors or teams change.",
+      "Spot when different groups hold different versions of the goal.",
+      "Refresh the purpose when the organisation's direction moves."
+    ],
+    examWeight: "Purpose items describe teams pulling in different directions, a new sponsor with a different view, or a goal that has quietly drifted. The marks go to the answer that surfaces the difference and rebuilds a shared, current understanding.",
+    sections: [
+      { id: "s1", heading: "Why shared purpose matters",
+        body: "People make hundreds of small decisions every week. When they share a clear picture of what the project is for, those decisions point the same way. When they do not, effort pulls in different directions.\n\n"
+          + "A shared purpose also motivates. People work harder for an outcome they understand and care about than for a list of tasks.\n\n"
+          + "Purpose is more than objectives. It answers why the work matters and for whom. Objectives then say what success looks like.\n\n"
+          + "Building shared purpose is an early task, but not a one-off. It needs tending throughout." },
+      { id: "s2", heading: "Vision and charter as tools",
+        body: "A product vision states the outcome in a sentence or two that anyone can remember. A project charter records the purpose, objectives and success measures the sponsor has authorised.\n\n"
+          + "These documents only work if they are used. Refer to them when making trade-offs. Ask whether a proposed change serves the purpose. Show them to new members on day one.\n\n"
+          + "A vision on a wall that nobody consults is decoration. A vision used to settle a backlog debate is a tool.\n\n"
+          + "Keep them short. Long purpose statements are not remembered, and what is not remembered does not guide decisions." },
+      { id: "s3", heading: "Different versions of the goal",
+        body: "Groups often hold different versions of the purpose without realising it. An operations director may see a project as a cost cut. A plant manager may see it as a safety upgrade. A team may see it as a technology refresh.\n\n"
+          + "Each version leads to different priorities. The conflict surfaces later as arguments about scope or quality.\n\n"
+          + "Bring the versions into the open early. Ask each group what success looks like to them. Then work with the sponsor to agree one statement of purpose, with the trade-offs made explicit.\n\n"
+          + "Do not paper over differences with vague wording. A purpose everyone can agree with because it says nothing guides nothing.\n\n"
+          + "Success measures help here. Agreeing how success will be measured forces the versions into the open. A cost cut and a safety upgrade are measured very differently." },
+      { id: "s4", heading: "Keeping purpose through change",
+        body: "Purpose is most at risk when people change. A new sponsor may bring a different view. New team members may never hear the original reasoning.\n\n"
+          + "When a sponsor changes, meet early and walk through the purpose and objectives. Ask whether they still hold. If the new sponsor wants something different, agree it explicitly and update the charter through the proper route.\n\n"
+          + "When teams join, share the purpose as part of onboarding, with the story of why it matters.\n\n"
+          + "When work is handed between teams or suppliers, check that the purpose travels with it. Handovers often pass on tasks but lose the why." },
+      { id: "s5", heading: "When the organisation's direction moves",
+        body: "Organisations change strategy. A project aligned with last year's direction may not fit this year's.\n\n"
+          + "Watch for signals: new strategic priorities, reorganisations, budget shifts. Ask whether the project's purpose still connects to what the organisation now wants.\n\n"
+          + "If it no longer does, raise it with the sponsor with evidence. The options include adjusting the purpose, reshaping the scope or stopping.\n\n"
+          + "Avoid quietly redefining the purpose yourself. A purpose changed without the sponsor's agreement creates two versions again." },
+      { id: "s6", heading: "Purpose in adaptive teams",
+        body: "Adaptive teams rely on purpose even more than predictive ones. They make many decisions without asking, so they need a clear sense of direction.\n\n"
+          + "A sprint goal links each iteration to the wider vision. It tells the team what this sprint is for, not just which items it contains.\n\n"
+          + "Product owners should explain why items are ranked as they are. A team that understands the reasoning can suggest better ways to achieve it.\n\n"
+          + "When a team builds whatever sits at the top of the backlog without asking why, purpose has faded. Reconnect each item to the outcome it serves." }
+    ],
+    lenses: {
+      predictive: "Purpose is set in the business case and charter, confirmed at the start and revisited at phase gates or when the sponsor changes.",
+      agile: "A product vision and sprint goals keep the team aligned. The product owner explains the why behind priorities, and reviews test whether increments serve the purpose.",
+      hybrid: "One purpose must span both the fixed and iterative parts. The project manager checks that suppliers and teams on each side share the same picture of success."
+    },
+    worked: {
+      stem: "Halfway through a regional library network's digital lending project, the groups are pulling apart. The technical team optimises for speed, the librarians for ease of use, and the finance lead for licence cost. Each group believes it is serving the project's goal. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Bring the groups together with the sponsor to surface each view of success and agree one shared purpose with its trade-offs." },
+        { id: "b", text: "Re-send the original charter to everyone so they can see the agreed objectives." },
+        { id: "c", text: "Ask the sponsor to decide which group's priority should win." },
+        { id: "d", text: "Let each group continue, since all three priorities are reasonable." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The groups hold different versions of the goal. Surfacing and reconciling them with the sponsor builds a shared purpose that each group understands and owns." },
+        { option: "b", rank: "acceptable", why: "Pointing back to the charter is sensible. If it allows all three readings, simply resending it will not settle the difference." },
+        { option: "c", rank: "premature", why: "The sponsor may need to make the call. Asking before the views have been surfaced and understood gives them too little to decide on." },
+        { option: "d", rank: "wrong", why: "Three teams optimising for different goals will produce a result that satisfies none. The divergence will grow, not fade." }
+      ],
+      mindset: "Surface differing pictures of success before they turn into conflicts about scope."
+    },
+    traps: [
+      "Writing a vision once and never using it to make decisions.",
+      "Using vague wording to hide genuine disagreement about purpose.",
+      "Assuming a new sponsor shares the old sponsor's view.",
+      "Redefining the purpose without the sponsor's agreement.",
+      "Handing work over without the reasoning behind it."
+    ],
+    checks: [
+      {
+        id: "L2-c1", type: "single",
+        stem: "A new sponsor joins a museum's visitor-app project four months in. In her first meeting she describes the goal quite differently from the charter. What should the project manager do?",
+        options: [
+          { id: "a", text: "Walk through the purpose and objectives with her, and agree explicitly whether they still hold or need updating.", correct: true,
+            rationale: "A change of sponsor is a key moment for purpose. An explicit conversation avoids two competing versions of the goal." },
+          { id: "b", text: "Quietly adjust the team's priorities to match her description.",
+            rationale: "Changing direction without agreement or updating the charter creates confusion and bypasses governance." },
+          { id: "c", text: "Remind her that the charter has already been approved.",
+            rationale: "The sponsor may have good reason to change direction. Defending the document avoids the real conversation." },
+          { id: "d", text: "Wait to see whether her view settles after a few weeks.",
+            rationale: "Waiting lets two versions of the goal coexist and drive conflicting decisions." }
+        ],
+        explanation: "A new sponsor is one of the most common moments for purpose to drift. Meeting early to compare their view with the charter brings any difference into the open. Any agreed change then goes through the proper route.",
+        mindset: "Re-confirm the purpose whenever the people who own it change."
+      },
+      {
+        id: "L2-c2", type: "single",
+        stem: "An agile team completes its sprint backlog every time. Yet it never asks why items matter, and its demos miss the users' real needs. What would help most?",
+        options: [
+          { id: "a", text: "Set a clear sprint goal tied to the product vision, and explain the reasoning behind priorities.", correct: true,
+            rationale: "Connecting each sprint to the outcome lets the team judge how best to deliver it, not just what to build." },
+          { id: "b", text: "Write more detailed acceptance criteria for every item.",
+            rationale: "More detail tells the team what to do, but not why. It deepens the problem of building without purpose." },
+          { id: "c", text: "Reduce the number of items in each sprint.",
+            rationale: "Fewer items does not connect the work to the outcome." },
+          { id: "d", text: "Replace the team with one that has more domain knowledge.",
+            rationale: "The gap is in shared purpose, which the product owner can close without replacing anyone." }
+        ],
+        explanation: "Teams that deliver items without understanding their purpose miss chances to serve users better. A sprint goal linked to the vision, and priorities explained, gives the team the context to make good decisions.",
+        mindset: "Tell the team why, not only what."
+      }
+    ],
+    terms: ["Charter", "Sprint goal", "Product owner", "Business case", "Stakeholder"],
+    recap: [
+      "Shared purpose makes everyday decisions point the same way.",
+      "Use the vision and charter to make trade-offs, not as wall decoration.",
+      "Surface different versions of the goal early and reconcile them.",
+      "Re-confirm purpose when sponsors, teams or suppliers change.",
+      "Connect every sprint and backlog item to the outcome it serves."
+    ],
+    mindset: "Keep one clear, current picture of why the work matters, shared by everyone doing it.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "L3", module: "people", order: 18, ecoTask: "people-2", minutes: 35,
+    prereqs: ["L1"],
+    title: "Conflict",
+    objectives: [
+      "Trace a conflict to its real source.",
+      "Choose among the five conflict-handling approaches for the situation.",
+      "Explain why collaborating is usually preferred, and when it is not.",
+      "Keep disagreement about ideas from becoming conflict between people.",
+      "Escalate conflict only after the parties have tried to resolve it."
+    ],
+    examWeight: "Conflict items describe two people, teams or organisations at odds, and ask what to do first. The marks go to the response that looks for the source, involves the parties directly and chooses the approach that fits the situation.",
+    sections: [
+      { id: "s1", heading: "Conflict is normal",
+        body: "Conflict is a natural part of project work. People have different goals, priorities and ways of working. Some conflict is healthy: disagreement about ideas often leads to better solutions.\n\n"
+          + "Conflict becomes harmful when it turns personal or is avoided until it festers. It also harms when power settles it instead of reason.\n\n"
+          + "The project manager's role is not to eliminate conflict but to keep it productive. Help people disagree about the problem without attacking each other.\n\n"
+          + "Team charters help by agreeing in advance how disagreements will be handled.\n\n"
+          + "Watch for conflict that goes underground. Silence in meetings, side conversations and slow responses can signal disagreement that nobody is voicing. Hidden conflict is harder to resolve than open conflict, so draw it out gently." },
+      { id: "s2", heading: "Finding the source",
+        body: "Conflicts on projects usually come from a few sources: schedules, priorities, resources, technical opinions, procedures, costs and personalities.\n\n"
+          + "The visible argument is often not the real cause. Two leads arguing about an interface may really be competing for the same scarce specialist.\n\n"
+          + "Before choosing how to respond, find out what the conflict is really about. Talk to each party privately. Listen actively and ask what they need, not just what they want.\n\n"
+          + "Separate interests from positions. A position is what someone demands. An interest is why they want it. Interests often overlap even when positions clash." },
+      { id: "s3", heading: "Five ways to handle conflict",
+        body: "There are five common approaches. Collaborating, also called problem solving, works with both parties to find a solution that meets everyone's interests. It takes time but produces lasting results.\n\n"
+          + "Compromising finds a middle ground where each side gives something up. It is quicker but may leave both partly dissatisfied.\n\n"
+          + "Smoothing, or accommodating, emphasises agreement and plays down differences. It can preserve relationships when the issue is minor.\n\n"
+          + "Forcing, or directing, imposes a solution. It is fast but can damage relationships. It suits emergencies or decisions that must be made now.\n\n"
+          + "Withdrawing, or avoiding, steps back from the conflict. It can let tempers cool or defer a trivial issue, but it resolves nothing." },
+      { id: "s4", heading: "Choosing the approach",
+        body: "Collaborating is usually the preferred answer, because it addresses the source and builds trust. Choose it when time allows and the relationship matters.\n\n"
+          + "Other approaches fit specific situations. When safety is at stake and there is no time, forcing may be right. When the issue is trivial and the relationship important, smoothing may be enough. When emotions are high, a brief withdrawal to let people calm down can help before collaborating.\n\n"
+          + "Compromise suits cases where both parties have equal power and a quick, workable answer is needed.\n\n"
+          + "Read the stem for urgency, importance and relationships. They point to the right approach." },
+      { id: "s5", heading: "Ideas, not people",
+        body: "Healthy teams argue hard about ideas and stay respectful of each other. Keep the focus on the problem.\n\n"
+          + "When a disagreement turns personal, step in. Acknowledge the strength of feeling, restate the shared goal and bring the discussion back to the facts.\n\n"
+          + "Use data where possible. A test, a prototype or a measurement can settle a technical argument that opinions cannot.\n\n"
+          + "Avoid taking sides in public. If one party is clearly behaving badly, deal with that privately." },
+      { id: "s6", heading: "When to escalate",
+        body: "Conflicts should first be handled by the people involved. If they cannot resolve it, the project manager facilitates.\n\n"
+          + "Escalate further only when the parties and the project manager cannot resolve it, or when it involves authority the project manager does not hold. A dispute between two functional managers over shared staff may need their own managers.\n\n"
+          + "Some conflicts follow formal routes. Contract disputes follow the contract. Grievances and harassment follow human resources policy. Do not try to handle these informally.\n\n"
+          + "When escalating, bring the facts, the steps already taken and the options. Escalation is a request for help, not a handover of blame." }
+    ],
+    lenses: {
+      predictive: "Conflicts over scope, schedule and resources are common, often across functional lines. The project manager facilitates resolution and escalates through governance when authority runs out.",
+      agile: "The team resolves most conflict itself, guided by its working agreements. The scrum master facilitates, coaches the team in healthy disagreement and protects psychological safety.",
+      hybrid: "Conflict often arises at the seams, between predictive and agile parts with different rhythms and expectations. The project manager brings both sides to agree how the seam will work."
+    },
+    worked: {
+      stem: "Two senior designers on a new tram line disagree about where to place a station entrance. One argues for passenger flow, the other for construction cost. Their argument has turned personal in meetings, and other team members are taking sides. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Meet each designer privately to understand their interests, then bring them together to solve the problem against the project's objectives." },
+        { id: "b", text: "Make the decision yourself, choosing the lower-cost option to protect the budget." },
+        { id: "c", text: "Ask them to split the difference with an entrance halfway between the two positions." },
+        { id: "d", text: "Escalate the disagreement to the sponsor to decide." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Understanding each designer's interests, then collaborating against the shared objectives, addresses the source and repairs the relationship." },
+        { option: "c", rank: "acceptable", why: "Compromise can end the argument quickly. A halfway entrance may serve neither flow nor cost well, and the personal tension remains." },
+        { option: "b", rank: "premature", why: "Forcing a decision may sometimes be needed. Doing it first skips the collaboration that would find a better solution and leaves one designer resentful." },
+        { option: "d", rank: "wrong", why: "This is within the project's ability to resolve. Escalating now hands a design dispute to the sponsor and avoids the project manager's job." }
+      ],
+      mindset: "Look for the interests behind positions and solve the problem together before forcing or escalating."
+    },
+    traps: [
+      "Treating the visible argument as the real cause.",
+      "Forcing a decision when there is time to collaborate.",
+      "Smoothing over an important issue just to keep the peace.",
+      "Escalating before the parties have tried to resolve it.",
+      "Handling grievances or contract disputes informally."
+    ],
+    checks: [
+      {
+        id: "L3-c1", type: "single",
+        stem: "A fire alarm fault is found on a building site during an unsafe concrete pour. The site foreman and the safety officer disagree about whether to stop work. What approach fits best?",
+        options: [
+          { id: "a", text: "Forcing: stop work immediately on safety grounds, then discuss afterwards.", correct: true,
+            rationale: "Where safety is at stake and time is short, a firm decision comes first. Discussion follows once people are safe." },
+          { id: "b", text: "Collaborating: bring both together to find a solution that meets both views.",
+            rationale: "Collaboration is usually best, but not when an immediate safety risk leaves no time." },
+          { id: "c", text: "Compromising: continue with half the crew while the fault is checked.",
+            rationale: "Half the crew in an unsafe situation is still people at risk." },
+          { id: "d", text: "Withdrawing: let the foreman and safety officer sort it out between them.",
+            rationale: "Stepping back from a safety dispute leaves the risk unmanaged." }
+        ],
+        explanation: "Forcing is rarely the first choice, but urgency and safety change the answer. When people may be harmed and there is no time, a firm decision to stop work is correct. The disagreement can be worked through once everyone is safe.",
+        mindset: "Let urgency and safety decide when forcing is right."
+      },
+      {
+        id: "L3-c2", type: "single",
+        stem: "Two team leads keep clashing over who owns a shared reporting service. You discover both are short of database skills and each wants the other to staff the service. What is the real source of the conflict?",
+        options: [
+          { id: "a", text: "Competition for a scarce resource, presented as a dispute about ownership.", correct: true,
+            rationale: "The ownership argument is the position. Both leads' underlying interest is avoiding a skills gap they cannot fill." },
+          { id: "b", text: "A personality clash between the two leads.",
+            rationale: "The stem gives a concrete cause. Assuming personality hides the fixable resource problem." },
+          { id: "c", text: "A technical disagreement about the design of the service.",
+            rationale: "Nothing suggests a design dispute. The argument is about who supplies the skills." },
+          { id: "d", text: "Poor communication between the two teams.",
+            rationale: "Communication may not be perfect, but the cause is a shared shortage of skills." }
+        ],
+        explanation: "The visible conflict is about ownership, but the interest behind it is resources. Resolving the skills shortage, for example by securing a shared database specialist, removes the reason for the dispute.",
+        mindset: "Find the interest behind the position before trying to settle the argument."
+      }
+    ],
+    terms: ["Conflict management", "Collaborate", "Compromise", "Smoothing", "Force", "Withdraw", "Active listening", "Negotiation", "Emotional intelligence"],
+    recap: [
+      "Conflict about ideas can be healthy; keep it away from personalities.",
+      "Find the source and the interests behind the positions.",
+      "Collaborate when time and relationships allow.",
+      "Force for safety and urgency; smooth or withdraw for trivial or heated moments.",
+      "Escalate only after the parties have tried, and use formal routes where required."
+    ],
+    mindset: "Resolve conflict at its source, with the people involved, using the approach the situation calls for.",
+    practice: { count: 10, decks: ["conflict"] }
+  },
+  {
+    id: "L4", module: "people", order: 19, ecoTask: "people-4", minutes: 35,
+    prereqs: ["L2"],
+    title: "Stakeholder engagement",
+    objectives: [
+      "Identify stakeholders early and keep the register current.",
+      "Analyse stakeholders by power, interest and attitude.",
+      "Compare current and desired engagement and plan to close the gap.",
+      "Tailor engagement to each stakeholder rather than treating all alike.",
+      "Respond to a stakeholder who is newly found, hostile or disengaged."
+    ],
+    examWeight: "Stakeholder items describe someone missed, someone obstructing or someone who never engages. The marks go to answers that identify and understand the stakeholder first, then tailor engagement, rather than escalating or simply sending more information.",
+    sections: [
+      { id: "s1", heading: "Identifying stakeholders",
+        body: "A stakeholder is anyone who affects or is affected by the project, or believes they are. That includes people who never attend a meeting: end users, regulators, neighbours, unions and support teams.\n\n"
+          + "Identify stakeholders early and keep looking. New stakeholders appear as the project progresses, and missed ones surface at the worst moments, often at sign-off.\n\n"
+          + "Record them in a stakeholder register. Note their role, interests, influence and expectations. Keep it current; an outdated register gives false confidence.\n\n"
+          + "Ask existing stakeholders who else should be involved. People inside an organisation usually know who has been left out.\n\n"
+          + "Look beyond the obvious too. Teams who will support the result, and groups affected by its side effects, are often missed until late." },
+      { id: "s2", heading: "Analysing stakeholders",
+        body: "Not every stakeholder needs the same attention. Analysis helps you decide where to focus.\n\n"
+          + "A power and interest grid places stakeholders in four groups. High power, high interest: manage closely. High power, low interest: keep satisfied. Low power, high interest: keep informed. Low power, low interest: monitor.\n\n"
+          + "Other models add urgency or legitimacy. The salience model, for example, considers power, urgency and legitimacy together.\n\n"
+          + "Attitude matters too. A supportive stakeholder with little power and a resistant one with great power need very different approaches. Analysis is only useful if it changes what you do." },
+      { id: "s3", heading: "Current and desired engagement",
+        body: "A stakeholder engagement assessment matrix compares where each stakeholder is now with where you need them to be. Typical levels are unaware, resistant, neutral, supportive and leading.\n\n"
+          + "The gap between current and desired shows where effort is needed. A sponsor who is merely supportive may need to become leading before a difficult phase. A key user who is unaware needs to become at least neutral.\n\n"
+          + "Plan specific actions to close each gap. Then check periodically whether engagement has moved.\n\n"
+          + "Do not aim to make everyone a champion. Desired engagement should match each stakeholder's role." },
+      { id: "s4", heading: "Tailoring engagement",
+        body: "Engagement works when it fits the person. A busy executive may want a five-minute briefing on decisions needed. A technical lead may want detailed design reviews. Frontline users may want to try the product early.\n\n"
+          + "Ask stakeholders how they prefer to be engaged. Do not assume the format that suits you suits them.\n\n"
+          + "Silence is not agreement. A stakeholder who attends meetings and never objects may not be engaged at all. Check understanding directly, especially with people who hold a veto at sign-off.\n\n"
+          + "In adaptive work, reviews are a main engagement tool. Invite the right stakeholders, not just the product owner, so feedback reflects real users." },
+      { id: "s5", heading: "Difficult stakeholders",
+        body: "A stakeholder who criticises the project or blocks progress usually has a reason. Start by understanding it. Meet privately and listen to their concerns.\n\n"
+          + "Resistance often comes from feeling ignored, fearing loss of control or seeing a real risk others have missed. Each calls for a different response: involvement, reassurance or action on the risk.\n\n"
+          + "Do not go round a resistant stakeholder to their manager as a first step. That confirms their fear of being sidelined.\n\n"
+          + "When a stakeholder you missed appears late, add them to the register, understand their needs quickly and involve them. Then ask why they were missed, so the gap does not recur." },
+      { id: "s6", heading: "Keeping engagement alive",
+        body: "Engagement is not a one-off exercise at the start. Interests and influence change as the project moves.\n\n"
+          + "Monitor engagement through attendance, feedback, questions and decisions. A stakeholder who stops sending their own people, or sends a junior delegate, may be disengaging.\n\n"
+          + "Review the register and the engagement plan regularly, and after any major change: a new phase, a reorganisation or a change of sponsor.\n\n"
+          + "Distributed stakeholders need extra effort. People far from the core team often receive summaries after decisions are made. Find ways to involve them before decisions, not after." }
+    ],
+    lenses: {
+      predictive: "Stakeholders are identified and analysed early, with an engagement plan and register maintained throughout. Engagement often runs through formal reviews and governance meetings.",
+      agile: "Stakeholders engage through frequent reviews of working increments. The product owner represents their needs day to day, and the team seeks feedback from real users.",
+      hybrid: "Stakeholders may meet both formal governance and iterative reviews. The project manager ensures neither channel is neglected and that each stakeholder knows where their input counts."
+    },
+    worked: {
+      stem: "Six weeks before go-live of a new hospital rostering system, the head of nursing writes to object. She was never listed as a stakeholder, and says the system breaks agreed shift rules. Her support is essential for adoption. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Meet her promptly to understand the shift rules at issue and how the system affects them, and add her to the register." },
+        { id: "b", text: "Escalate to the sponsor to secure the head of nursing's support from above." },
+        { id: "c", text: "Send her the full requirements and the sign-off record to show the rules were agreed." },
+        { id: "d", text: "Raise a change request to adjust the shift rules in the system." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "A missed stakeholder with a real concern must be understood and involved quickly. Meeting her directly finds out whether the rules were truly broken and builds the support adoption needs." },
+        { option: "d", rank: "acceptable", why: "A change may well be needed. Raising it before understanding exactly which rules are affected risks fixing the wrong thing." },
+        { option: "c", rank: "premature", why: "The documents may matter later. Leading with them treats a key stakeholder as an opponent before her concern is understood." },
+        { option: "b", rank: "wrong", why: "Going over her head confirms the feeling of being excluded and is unlikely to win the support adoption needs." }
+      ],
+      mindset: "Understand and involve a stakeholder before trying to persuade or overrule them."
+    },
+    traps: [
+      "Treating silence as agreement.",
+      "Analysing stakeholders but never changing how you engage them.",
+      "Going over a resistant stakeholder's head as a first step.",
+      "Engaging only the product owner in agile reviews.",
+      "Letting the stakeholder register go out of date."
+    ],
+    checks: [
+      {
+        id: "L4-c1", type: "single",
+        stem: "A finance director has high power over your project but shows little interest and rarely reads updates. Using a power and interest grid, how should she be engaged?",
+        options: [
+          { id: "a", text: "Keep her satisfied, with brief, targeted updates and early warning of anything that needs her decision.", correct: true,
+            rationale: "High power with low interest calls for keeping satisfied. Short, relevant contact avoids surprises without overloading her." },
+          { id: "b", text: "Manage her closely, with weekly detailed meetings.",
+            rationale: "Close management suits high power and high interest. Heavy engagement may irritate someone with little interest." },
+          { id: "c", text: "Keep her informed with the full weekly report.",
+            rationale: "Detailed reports suit interested stakeholders. She rarely reads updates, so this will not engage her." },
+          { id: "d", text: "Monitor her with minimal contact.",
+            rationale: "Her high power means a surprise could derail the project. Minimal contact is too little." }
+        ],
+        explanation: "The grid suggests keeping high-power, low-interest stakeholders satisfied. Brief updates and early warning of decisions protect the project without demanding more of her attention than she will give.",
+        mindset: "Engage each stakeholder in proportion to their power and interest."
+      },
+      {
+        id: "L4-c2", type: "single",
+        stem: "A department head has attended every steering meeting for a records system and never raised an objection. A colleague hints she has serious doubts. What should the project manager do?",
+        options: [
+          { id: "a", text: "Meet her one to one to ask directly about her view of the project and any concerns.", correct: true,
+            rationale: "Silence in meetings is not agreement. A private conversation makes it safe to voice doubts before they block sign-off." },
+          { id: "b", text: "Assume she supports the project, as she has never objected.",
+            rationale: "The hint suggests otherwise. Relying on silence risks a late objection at sign-off." },
+          { id: "c", text: "Raise her doubts at the next steering meeting.",
+            rationale: "Exposing rumoured doubts publicly may embarrass her and make her defensive." },
+          { id: "d", text: "Ask the colleague to report on what she says privately.",
+            rationale: "Gathering information indirectly erodes trust. Talking to her directly is both respectful and more reliable." }
+        ],
+        explanation: "Stakeholders who stay quiet in group settings may hold unspoken concerns. A direct, private conversation is the best way to surface and address them early, before they become a late obstacle.",
+        mindset: "Check engagement directly rather than reading it from silence."
+      }
+    ],
+    terms: ["Stakeholder", "Stakeholder register", "Identify Stakeholders", "Power/interest grid", "Salience model", "Stakeholder engagement assessment matrix", "Plan Stakeholder Engagement", "Manage Stakeholder Engagement"],
+    recap: [
+      "Identify stakeholders early, keep looking, and keep the register current.",
+      "Analyse power, interest and attitude, and let the analysis change your actions.",
+      "Compare current with desired engagement and plan to close the gap.",
+      "Tailor engagement to each person; silence is not agreement.",
+      "Understand resistance before trying to overcome it."
+    ],
+    mindset: "Know who matters, understand what they need, and engage each of them in the way that works for them.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "L5", module: "people", order: 20, ecoTask: "people-5", minutes: 30,
+    prereqs: ["L4"],
+    title: "Aligning expectations",
+    objectives: [
+      "Spot gaps between what stakeholders expect and what the project will deliver.",
+      "Trace an expectation gap to its cause.",
+      "Negotiate commitments that are honest and achievable.",
+      "Communicate forecasts with their uncertainty.",
+      "Reset expectations promptly and constructively when they must change."
+    ],
+    examWeight: "Expectation items describe a sponsor who promised a date, stakeholders told different things, or a forecast taken as a guarantee. The marks go to answers that surface the gap early, explain the cause and agree a realistic way forward.",
+    sections: [
+      { id: "s1", heading: "Where expectation gaps come from",
+        body: "An expectation gap opens when someone believes the project will deliver something it will not. The causes are usually simple.\n\n"
+          + "Different groups are told different things. A sales team promises a feature the delivery team never planned. A sponsor tells the board an optimistic date.\n\n"
+          + "Information goes stale. A stakeholder heard a date months ago and has not heard it change.\n\n"
+          + "Words mean different things. A minimum viable product means a test to one person and a finished release to another.\n\n"
+          + "Each cause needs a different fix, so diagnose before you act.\n\n"
+          + "Optimism bias plays a part as well. People hear the best case and remember it as the plan. A sponsor told a range of dates tends to recall the earliest one. Repeating the full range, and why it exists, keeps the uncertainty in view." },
+      { id: "s2", heading: "Surfacing gaps early",
+        body: "The earlier a gap is found, the cheaper it is to close. A gap discovered at go-live costs trust and money.\n\n"
+          + "Check expectations directly. Ask key stakeholders what they expect to receive, and when. Compare their answers with the plan.\n\n"
+          + "Listen for signs of drift: a stakeholder quoting an old date, describing features that are not planned, or planning their own work around assumptions.\n\n"
+          + "Make the plan visible. A roadmap or schedule that stakeholders can see reduces the room for private assumptions. Label what is committed and what is only intended." },
+      { id: "s3", heading: "Negotiating honest commitments",
+        body: "Commitments should be achievable, not just welcome. A promise made to please someone today becomes a broken promise tomorrow.\n\n"
+          + "When a stakeholder asks for more than is possible, explore the trade-offs. Usually scope, time, cost and quality cannot all be fixed at once. Ask which matters most.\n\n"
+          + "Look for interests behind demands. A sponsor insisting on a date may really need a demonstration for a board meeting. A smaller, earlier delivery might meet that need.\n\n"
+          + "Record what is agreed. Shared written understanding prevents later disputes about who promised what.\n\n"
+          + "Saying no is sometimes necessary. Decline clearly, explain the reason and offer an alternative where one exists. A clear no today is kinder than a quiet yes that fails later." },
+      { id: "s4", heading: "Forecasts are not promises",
+        body: "Forecasts carry uncertainty. Present them as ranges or with confidence levels, not as single dates that sound certain.\n\n"
+          + "A team whose velocity varies cannot honestly promise a single delivery date for a large backlog. It can offer a range and narrow it as work progresses.\n\n"
+          + "Explain what the forecast depends on. If a date assumes a supplier delivers on time, say so.\n\n"
+          + "Update forecasts as you learn. A forecast that never changes is either remarkably lucky or not being maintained.\n\n"
+          + "Show how the range narrows over time. Stakeholders gain confidence when they see uncertainty shrinking as evidence builds." },
+      { id: "s5", heading: "Resetting expectations",
+        body: "Sometimes expectations must change: a date slips, a feature is cut, a cost rises. How you deliver that news matters.\n\n"
+          + "Tell affected stakeholders promptly and directly. Explain what has changed, why, and what it means for them. Offer options where you can.\n\n"
+          + "Avoid surprises. A sponsor who learns of a slip from someone else loses confidence in you.\n\n"
+          + "If a sponsor has made a public commitment the plan cannot meet, help them correct it. Bring the evidence and options so they can reset the message with their own stakeholders." },
+      { id: "s6", heading: "Alignment across groups",
+        body: "Large projects serve many groups whose expectations can drift apart. Finance expects savings, operations expects stability, users expect ease.\n\n"
+          + "Bring the expectations together where they conflict. A single conversation with the sponsor present often resolves what separate meetings cannot.\n\n"
+          + "Use the same language with everyone. A name or label that suggests more than the project delivers creates gaps by itself.\n\n"
+          + "Check alignment again at key moments, such as phase gates, major releases and changes of sponsor." }
+    ],
+    lenses: {
+      predictive: "Expectations are set through the baselines and confirmed at phase gates. Gaps are closed through governance and, where needed, change control.",
+      agile: "Expectations are shaped by visible backlogs and regular reviews. Forecasts come from velocity as ranges, and scope flexes to meet fixed dates.",
+      hybrid: "Different groups may expect predictive certainty from iterative parts. The project manager explains which commitments are fixed and which flex, so neither side is surprised."
+    },
+    worked: {
+      stem: "Your sponsor tells a regional council that the new flood-warning service will launch in May. Your approved schedule shows a September launch with a limited May pilot. The council is planning a public campaign around May. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Meet the sponsor promptly to clarify the difference between the May pilot and the September launch, and help agree how to correct the message." },
+        { id: "b", text: "Contact the council directly to correct the date before the campaign is printed." },
+        { id: "c", text: "Look for ways to bring the full launch forward to May." },
+        { id: "d", text: "Say nothing, since the schedule the sponsor approved shows the right date." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The gap began with the sponsor's message. Clarifying with the sponsor first lets them correct their own commitment, with the evidence and options to do it well." },
+        { option: "b", rank: "acceptable", why: "The council does need accurate information soon. Going to them without the sponsor undermines the sponsor publicly and may contradict a decision you do not know about." },
+        { option: "c", rank: "premature", why: "Recovery options may be worth exploring later. Starting there accepts an unplanned commitment before anyone has confirmed it is wanted or feasible." },
+        { option: "d", rank: "wrong", why: "Staying silent lets the council plan a campaign around a date that will not be met. The gap will cost far more when it surfaces." }
+      ],
+      mindset: "Close an expectation gap at its source, before others build on it."
+    },
+    traps: [
+      "Promising what pleases rather than what is achievable.",
+      "Presenting a forecast as a fixed promise.",
+      "Letting stakeholders learn of a change from someone else.",
+      "Correcting a sponsor's public commitment without involving the sponsor.",
+      "Using labels that suggest more than the project will deliver."
+    ],
+    checks: [
+      {
+        id: "L5-c1", type: "single",
+        stem: "A director asks when a new payroll system will be ready. The team's forecast range is eight to twelve weeks, depending on a supplier interface. How should the project manager answer?",
+        options: [
+          { id: "a", text: "Give the range, explain that the supplier interface drives it, and commit to narrowing it as that becomes clear.", correct: true,
+            rationale: "An honest range with its main assumption sets accurate expectations and builds trust as the forecast firms up." },
+          { id: "b", text: "Say eight weeks, since that is what the director will want to hear.",
+            rationale: "Quoting the best case makes a slip likely and damages credibility when it comes." },
+          { id: "c", text: "Say twelve weeks, to be safe.",
+            rationale: "Padding hides information and may lead the director to plan around a later date than needed." },
+          { id: "d", text: "Decline to give a date until the interface is finished.",
+            rationale: "The director needs information to plan. A range with assumptions is more useful than silence." }
+        ],
+        explanation: "Forecasts are uncertain and should be presented that way. A range, the factor that drives it and a promise to refine it give the director an honest basis for planning.",
+        mindset: "Share forecasts with their uncertainty, not as promises."
+      },
+      {
+        id: "L5-c2", type: "single",
+        stem: "Your programme is called “Complete Customer Platform”, but it delivers only a shared data layer. Several business units now expect new customer-facing screens. What is the root cause of the gap?",
+        options: [
+          { id: "a", text: "The name suggests far more than the scope delivers, and nobody has corrected the impression.", correct: true,
+            rationale: "Language shapes expectations. A label promising a complete platform creates a gap by itself." },
+          { id: "b", text: "The business units did not read the requirements.",
+            rationale: "Blaming stakeholders ignores how the project's own messaging created the misunderstanding." },
+          { id: "c", text: "The scope is too small and should be expanded.",
+            rationale: "Expanding scope to match a misleading name is an expensive response to a communication problem." },
+          { id: "d", text: "The sponsor approved the wrong scope.",
+            rationale: "Nothing suggests the scope is wrong. The gap lies between the scope and how it is described." }
+        ],
+        explanation: "Expectations follow the words people hear most often. When a project's name or label promises more than it delivers, gaps appear across every audience. Correcting the language, and checking understanding, closes the gap at its cause.",
+        mindset: "Make sure the words used about the project match what it will deliver."
+      }
+    ],
+    terms: ["Negotiation", "Forecast", "Stakeholder", "Assumption", "Product roadmap"],
+    recap: [
+      "Expectation gaps come from mixed messages, stale information and loose language.",
+      "Check expectations directly and make the plan visible.",
+      "Negotiate achievable commitments by exploring trade-offs and interests.",
+      "Present forecasts as ranges with their assumptions.",
+      "Reset expectations promptly, directly and with options."
+    ],
+    mindset: "Keep what people expect and what the project will deliver honestly in line.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "L6", module: "people", order: 21, ecoTask: "people-6", minutes: 30,
+    prereqs: ["L5"],
+    title: "Customer expectations",
+    objectives: [
+      "Build feedback loops that show early whether the customer is satisfied.",
+      "Tell meeting the specification from meeting the customer's need.",
+      "Respond to changing customer needs through the agreed route.",
+      "Manage acceptance so it reflects genuine fitness for use.",
+      "Handle an unhappy customer by understanding before defending."
+    ],
+    examWeight: "Customer items describe a customer whose needs have changed, or who accepts work and then rejects it. Some describe a customer unhappy despite the contract being met. The marks go to answers that seek feedback early and respond to the real need through the proper route.",
+    sections: [
+      { id: "s1", heading: "Who the customer is",
+        body: "The customer is whoever receives and uses what the project delivers. It may be an external client, an internal department or the public.\n\n"
+          + "Customers are not always one voice. A buyer, a user and a technical approver may have different needs. Find out who they are and what each one values.\n\n"
+          + "Internal customers deserve the same care as external ones, even when no contract exists. A department that will run a system after handover is a customer, and its satisfaction decides whether the project's benefits appear.\n\n"
+          + "Customer satisfaction is not just politeness. It is evidence that the project is delivering value.\n\n"
+          + "Agree early who speaks for the customer on each kind of decision. That avoids conflicting instructions later." },
+      { id: "s2", heading: "Feedback loops",
+        body: "The best way to know whether the customer is satisfied is to ask early and often. Feedback loops make this routine.\n\n"
+          + "In adaptive work, reviews of working increments give feedback every iteration. Prototypes and demonstrations do the same in predictive work.\n\n"
+          + "Watch for feedback from the right people. A customer representative who approves everything may not reflect what users need. Bring real users into reviews when possible.\n\n"
+          + "Usage data is feedback too. A feature that is barely used is telling you something, whatever the customer said in the requirements.\n\n"
+          + "Close the loop. Tell customers what changed because of their feedback. People who see their input acted on keep giving it; people who do not soon stop." },
+      { id: "s3", heading: "Specification versus need",
+        body: "A result can meet its specification exactly and still fail the customer. The specification may have missed something, or the need may have changed.\n\n"
+          + "When this happens, avoid arguing about the letter of the requirements. Ask what the customer needs the result to do, and why the current version falls short.\n\n"
+          + "Then decide how to respond. Some gaps are defects to fix. Some are new requirements, which go through change control or the backlog.\n\n"
+          + "Prevention is better. Involve customers in shaping acceptance criteria, and test against real use, not just written rules." },
+      { id: "s4", heading: "Changing needs",
+        body: "Customer needs change: their market shifts, their organisation restructures, a competitor launches something new.\n\n"
+          + "Welcome the information. A need that has changed is better learned during the project than after it.\n\n"
+          + "Route the change properly. In predictive work, assess its impact and take it through change control. In adaptive work, add it to the backlog and let the product owner rank it.\n\n"
+          + "Be wary of accepting small changes informally to keep the customer happy. Each may seem minor, but together they can consume time and money nobody agreed." },
+      { id: "s5", heading: "Acceptance that means something",
+        body: "Acceptance should confirm the result is fit for use, not just that a meeting took place. If a customer accepts work and then reports problems later, acceptance is not working.\n\n"
+          + "Agree clear acceptance criteria in advance. Test against realistic scenarios. Involve the people who will actually use the result.\n\n"
+          + "Formal acceptance should be recorded, with any agreed exceptions. It protects both the customer and the supplier from later disagreement.\n\n"
+          + "If acceptance keeps being followed by defect reports, find out why. The criteria, the testing or the people involved may need to change." },
+      { id: "s6", heading: "The unhappy customer",
+        body: "When a customer is unhappy, start by listening. Find out exactly what is wrong and why it matters to them.\n\n"
+          + "Do not defend first. Pointing to the signed specification may be accurate and still lose the relationship.\n\n"
+          + "Separate the issues. Some will be defects, some misunderstandings and some new needs. Each needs a different response, and the customer should hear which is which.\n\n"
+          + "Agree next steps, with dates, and follow through on every one. A customer who sees their concern taken seriously often becomes more supportive than before. If the issue was caused by something the project promised and did not deliver, own it." }
+    ],
+    lenses: {
+      predictive: "Customer needs are captured in requirements and checked through formal acceptance. Changes go through change control, and satisfaction is reviewed at milestones.",
+      agile: "The customer or product owner sees working increments every iteration and shapes the backlog continuously. Changing needs are expected and absorbed through re-ranking.",
+      hybrid: "Fixed parts are accepted formally while iterative parts gather feedback each cycle. The project manager makes sure the customer understands which parts can still change."
+    },
+    worked: {
+      stem: "Three weeks after go-live, the client's operations manager complains that the new fleet tracking dashboard is unusable for night shifts. The dashboard meets every signed requirement. The client's director has copied in your managing director. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Meet the operations manager and night-shift users to understand exactly what fails for them and why." },
+        { id: "b", text: "Reply to both directors that the dashboard meets every signed requirement." },
+        { id: "c", text: "Raise a change request for a night-shift version of the dashboard." },
+        { id: "d", text: "Ask your team to redesign the dashboard immediately to calm the situation." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Understanding the real problem with the people affected comes first. It shows whether this is a defect, a misunderstanding or a new need, and how to respond." },
+        { option: "c", rank: "acceptable", why: "A change request may be the right route if the need is new. Raising it before understanding the problem may scope the wrong solution." },
+        { option: "b", rank: "premature", why: "The contractual position may matter later. Leading with it treats a genuine user problem as a dispute and escalates tension." },
+        { option: "d", rank: "wrong", why: "Rushing into a redesign without understanding the problem wastes effort and bypasses the agreed change route." }
+      ],
+      mindset: "Understand the customer's real problem before defending the specification or rushing a fix."
+    },
+    traps: [
+      "Defending the specification before understanding the complaint.",
+      "Treating one approving representative as the voice of all users.",
+      "Absorbing small customer changes informally.",
+      "Accepting deliverables in a meeting without testing real use.",
+      "Assuming internal customers need less care than external ones."
+    ],
+    checks: [
+      {
+        id: "L6-c1", type: "single",
+        stem: "An internal HR team accepts each sprint's demo, then reports defects in the same features a few weeks later. What is the most likely problem?",
+        options: [
+          { id: "a", text: "Acceptance is not testing real use, so problems surface only when people start relying on the features.", correct: true,
+            rationale: "Repeated defects after acceptance show the reviews are not checking what users actually need to do." },
+          { id: "b", text: "The HR team is changing its mind about requirements.",
+            rationale: "The stem describes defects in accepted features, not new requirements." },
+          { id: "c", text: "The sprints are too short to build quality features.",
+            rationale: "Sprint length does not explain why defects pass acceptance." },
+          { id: "d", text: "The team should stop demonstrating until features are perfect.",
+            rationale: "Demonstrations are valuable feedback. The fix is better acceptance, not fewer reviews." }
+        ],
+        explanation: "Acceptance that does not exercise real use lets defects through. Involving actual users, testing realistic scenarios and agreeing clear criteria make acceptance meaningful and catch problems earlier.",
+        mindset: "Make acceptance test real use, not just the demo."
+      },
+      {
+        id: "L6-c2", type: "single",
+        stem: "Halfway through a twelve-month build of a customer ordering site, the client says a competitor's same-day delivery option has changed their priorities. What should the project manager do?",
+        options: [
+          { id: "a", text: "Welcome the information, assess the impact and route the new priority through the agreed change process.", correct: true,
+            rationale: "Changing needs are best learned during the project. Routing them properly keeps the decision controlled and visible." },
+          { id: "b", text: "Remind the client that the scope was agreed at the start.",
+            rationale: "The need has really changed. Holding rigidly to the original scope risks delivering something no longer wanted." },
+          { id: "c", text: "Add the feature immediately to keep the client happy.",
+            rationale: "Adding it without assessment bypasses change control and may disrupt cost and schedule." },
+          { id: "d", text: "Finish the original scope first and consider the change afterwards.",
+            rationale: "Waiting may mean building features the client no longer values while delaying the one they need." }
+        ],
+        explanation: "When a customer's needs change, the project should respond rather than resist. Assessing the impact and routing the change properly lets the right people decide on priorities, cost and schedule.",
+        mindset: "Respond to changing customer needs, through the agreed route."
+      }
+    ],
+    terms: ["Voice of the customer", "Acceptance criteria", "Sprint review", "Change request", "Validate Scope"],
+    recap: [
+      "Know every customer voice: buyer, user and approver.",
+      "Build frequent feedback loops with real users.",
+      "Meeting the specification is not always meeting the need.",
+      "Route changing needs through the agreed process.",
+      "Listen to an unhappy customer before defending the specification."
+    ],
+    mindset: "Keep checking that the customer's real needs are being met, and respond openly when they change.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "L7", module: "people", order: 22, ecoTask: "people-8", minutes: 35,
+    prereqs: ["L4"],
+    title: "Communication",
+    objectives: [
+      "Plan communication around what each audience needs to know and do.",
+      "Choose between push, pull and interactive communication.",
+      "Explain why communication grows harder as a team grows.",
+      "Deliver bad news promptly, clearly and with options.",
+      "Keep distributed teams informed and included."
+    ],
+    examWeight: "Communication items describe reports nobody reads, bad news held back, or messages sent through the wrong channel. Some describe decisions that never reach remote team members. The marks go to answers that match the message, audience and method, and that deliver difficult news early and directly.",
+    sections: [
+      { id: "s1", heading: "Planning communication",
+        body: "A communications management plan sets out who needs what information, when, in what format and from whom. It starts from the stakeholder register.\n\n"
+          + "Plan from the audience's point of view. Ask what each group needs to know to do its job or make its decisions. Then decide how often and in what form.\n\n"
+          + "Not everyone needs everything. Sending every update to everyone buries what matters. Tailor the content and level of detail.\n\n"
+          + "Review the plan as the project changes. A plan written at the start rarely suits the closing months unchanged.\n\n"
+          + "Communication takes much of a project manager's time. Planning it well makes that time count." },
+      { id: "s2", heading: "Push, pull and interactive",
+        body: "Communication methods fall into three groups. Push communication sends information to people: emails, reports, memos. It ensures delivery but not understanding.\n\n"
+          + "Pull communication makes information available for people to find when they need it: a shared site, a knowledge base, a dashboard. It suits large audiences and reference material.\n\n"
+          + "Interactive communication involves two-way exchange: meetings, calls, workshops. It is the most effective for complex, sensitive or urgent matters, because questions can be asked and answered at once.\n\n"
+          + "Choose the method that fits the message. Difficult news, conflict and decisions usually need interactive communication. Routine status suits push or pull." },
+      { id: "s3", heading: "Channels grow faster than teams", formulaGroup: "comms",
+        body: "Every pair of people on a team is a potential communication channel. As a team grows, the number of channels grows much faster than the number of people.\n\n"
+          + "A team of five has far fewer channels than a team of ten. Doubling the people roughly quadruples the paths along which information can be lost or misunderstood.\n\n"
+          + "This is one reason large teams need more structure: clearer roles, regular coordination points and shared sources of truth. It is also one reason small teams often move faster.\n\n"
+          + "The formula lab drills the arithmetic. The lesson for practice is simple. When adding people, plan for the extra communication they bring." },
+      { id: "s4", heading: "Delivering bad news",
+        body: "Bad news does not improve with age. A delay, an overrun or a failure is best reported as soon as it is confirmed.\n\n"
+          + "Confirm the facts quickly first, so the message is accurate. Then tell the people who need to know, directly and in person or by call where possible.\n\n"
+          + "Explain what happened, what it means and what you propose. Bring options. A sponsor told only of a problem is left to solve it alone. A sponsor told of a problem and three options can decide.\n\n"
+          + "Never soften bad news until it is misleading. A message that hides the size of a problem destroys trust when the truth emerges." },
+      { id: "s5", heading: "Distributed and diverse teams",
+        body: "Teams spread across sites or time zones face extra barriers. Decisions made in one location may never reach the others. Informal conversation, which carries so much information in a shared office, disappears.\n\n"
+          + "Make important decisions and their reasons visible in a shared place. Rotate meeting times so the same people are not always inconvenienced. Use overlap hours for interactive work, and write things down for those outside them.\n\n"
+          + "Consider language and culture too. People working in a second language may follow written messages better than fast spoken discussion. Plain language helps everyone.\n\n"
+          + "Check understanding, not just delivery. A message sent is not a message understood." },
+      { id: "s6", heading: "Communication in adaptive teams",
+        body: "Adaptive teams rely heavily on face-to-face or video conversation. Daily coordination, reviews and retrospectives are all interactive.\n\n"
+          + "Information radiators, such as visible boards and charts, act as pull communication for anyone interested. They reduce the need for status reports.\n\n"
+          + "Colocated teams benefit from osmotic communication: overhearing useful information simply by sitting together. Distributed teams lose this and need to replace it deliberately, for example through open channels and recorded decisions.\n\n"
+          + "Even in adaptive settings, some audiences still need tailored reports. Executives and governance bodies may want a short summary rather than the team's board." }
+    ],
+    lenses: {
+      predictive: "Communication follows a plan with set reports, meetings and audiences. Status is reported against baselines at agreed intervals.",
+      agile: "Communication is frequent and interactive, centred on the team's events and visible boards. Stakeholders see working results at reviews rather than reading reports.",
+      hybrid: "Formal reports serve governance while agile teams communicate through their own events. The project manager translates between them so neither audience misses what it needs."
+    },
+    worked: {
+      stem: "On a Thursday you confirm that a key supplier will deliver the ticket gates for a new railway station five weeks late. The opening date depends on them. The sponsor is presenting progress to the transport board on Monday. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Call the sponsor today with the confirmed facts, the effect on the opening and the options being assessed." },
+        { id: "b", text: "Include the delay in next week's written status report." },
+        { id: "c", text: "Wait until you have a full recovery plan, then brief the sponsor before Monday if possible." },
+        { id: "d", text: "Ask the supplier to write to the sponsor explaining the delay." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "The sponsor is about to present to the board and needs confirmed bad news now, in a direct conversation. Bringing the options being assessed helps them prepare." },
+        { option: "c", rank: "acceptable", why: "A recovery plan adds value, and briefing before Monday is the right instinct. Waiting for it risks the sponsor hearing too late to prepare." },
+        { option: "b", rank: "premature", why: "Written reports suit routine status. Saving serious news for next week's report means the sponsor presents without it." },
+        { option: "d", rank: "wrong", why: "Communicating the delay to the sponsor is the project manager's job. Handing it to the supplier removes control of the message and the options." }
+      ],
+      mindset: "Deliver confirmed bad news early, directly and with options."
+    },
+    traps: [
+      "Sending every update to everyone.",
+      "Using email for news that needs a conversation.",
+      "Holding bad news until there is a full solution.",
+      "Assuming a message sent is a message understood.",
+      "Adding people without planning for extra communication."
+    ],
+    checks: [
+      {
+        id: "L7-c1", type: "single",
+        stem: "A team spread across three countries finds that design decisions made during the short overlap call never reach engineers working outside it. What would help most?",
+        options: [
+          { id: "a", text: "Record each decision and its reasoning in a shared place everyone checks, and rotate meeting times fairly.", correct: true,
+            rationale: "Written, visible decisions reach people outside the overlap, and rotating times shares the inconvenience." },
+          { id: "b", text: "Move all decisions into the overlap call and ask everyone to attend.",
+            rationale: "People outside the overlap cannot attend without working unreasonable hours." },
+          { id: "c", text: "Ask the engineers to read the full call transcript each day.",
+            rationale: "A full transcript is hard to use. Decisions and reasons need to be easy to find." },
+          { id: "d", text: "Reduce the number of decisions made.",
+            rationale: "The problem is how decisions travel, not how many are made." }
+        ],
+        explanation: "Distributed teams lose the informal communication of a shared office. Recording decisions and their reasons in a shared place, and sharing meeting inconvenience fairly, keeps everyone informed and included.",
+        mindset: "Make decisions visible to everyone who must act on them."
+      },
+      {
+        id: "L7-c2", type: "single",
+        stem: "You need to tell a client's operations team that a cutover weekend has moved, which affects their staff rotas. Which communication method is most appropriate first?",
+        options: [
+          { id: "a", text: "An interactive conversation with the operations lead, followed by written confirmation.", correct: true,
+            rationale: "The change affects people's plans and will raise questions. A conversation allows those questions; the written note records the outcome." },
+          { id: "b", text: "An email to the whole operations team.",
+            rationale: "Push communication delivers the message but leaves no room for questions about rotas." },
+          { id: "c", text: "An update to the project's shared website.",
+            rationale: "Pull communication relies on people finding the change in time, which is risky for something affecting rotas." },
+          { id: "d", text: "A note in the next monthly report.",
+            rationale: "A monthly report is too late and too general for a change affecting staff planning." }
+        ],
+        explanation: "Changes that affect people's plans call for interactive communication, so questions can be answered straight away. A written confirmation afterwards gives everyone a reliable record.",
+        mindset: "Match the method to the message and the questions it will raise."
+      }
+    ],
+    terms: ["Communications management plan", "Communication channels", "Push communication", "Pull communication", "Osmotic communication", "Information radiator", "Virtual team", "Active listening"],
+    recap: [
+      "Plan communication around what each audience needs to know and do.",
+      "Use interactive methods for complex, sensitive or urgent messages.",
+      "Communication channels multiply as teams grow.",
+      "Deliver confirmed bad news early, directly and with options.",
+      "Make decisions visible to distributed team members, and check understanding."
+    ],
+    mindset: "Communicate so the right people understand in time to act.",
+    practice: { count: 10, decks: [] }
+  },
+  {
+    id: "L8", module: "people", order: 23, ecoTask: "people-7", minutes: 30,
+    prereqs: ["L7"],
+    title: "Knowledge transfer",
+    objectives: [
+      "Tell tacit knowledge from explicit knowledge and transfer each appropriately.",
+      "Reduce the risk of knowledge held by one person.",
+      "Capture lessons learned throughout, not just at the end.",
+      "Plan handovers so knowledge travels with the work.",
+      "Turn lessons into changes the next project inherits."
+    ],
+    examWeight: "Knowledge items describe a key person leaving, a team that relies on one expert, lessons nobody reads or a handover that loses the why. The marks go to answers that move knowledge early, through people as well as documents, and make lessons part of how work is done.",
+    sections: [
+      { id: "s1", heading: "Two kinds of knowledge",
+        body: "Explicit knowledge can be written down: procedures, designs, data, decisions. It transfers through documents, databases and training material.\n\n"
+          + "Tacit knowledge lives in people's heads: judgement, experience, how to handle a tricky supplier or why a design looks the way it does. It is hard to write down and transfers mainly through people working together.\n\n"
+          + "Projects need both. A handover that passes only documents loses the tacit knowledge that makes them usable.\n\n"
+          + "Choose transfer methods to fit. Documents and knowledge bases for explicit knowledge. Pairing, mentoring, shadowing and storytelling for tacit knowledge.\n\n"
+          + "Storytelling deserves more credit than it gets. A short account of what went wrong on a past project, and why, is remembered long after a procedure is forgotten." },
+      { id: "s2", heading: "The single expert",
+        body: "Many projects depend on one person who understands a critical system or relationship. If they leave, fall ill or move on, the project is exposed.\n\n"
+          + "Treat this as a risk and act early. Pair others with the expert on real work. Ask the expert to explain while doing, not just to write documentation.\n\n"
+          + "If the expert has resigned, make the remaining time count. Prioritise the knowledge that is hardest to rebuild and most critical to the project. Record walkthroughs where possible.\n\n"
+          + "Afterwards, ask how the dependency arose. Teams that rotate work and pair regularly rarely end up relying on a single person." },
+      { id: "s3", heading: "Lessons throughout the project",
+        body: "Lessons learned should be captured as they happen, in a lessons learned register. By the end of a long project, early lessons are forgotten.\n\n"
+          + "Retrospectives in adaptive work capture lessons every iteration and act on them straight away. Predictive projects can do the same at milestones and phase ends.\n\n"
+          + "A good lesson says what happened, why, and what should be done differently. Vague observations, such as communication could be better, help nobody.\n\n"
+          + "Share lessons while the project is still running. Another team facing the same problem this month can use them now." },
+      { id: "s4", heading: "Making lessons travel",
+        body: "Organisations often store lessons in a repository that nobody reads. The problem is rarely capture. It is reuse.\n\n"
+          + "Lessons travel best when they change the defaults: a checklist, an estimating guide, a risk template or a standard. Then the next project benefits without anyone needing to search.\n\n"
+          + "People also carry lessons. Moving experienced staff between projects, communities of practice and short briefings at project start all help.\n\n"
+          + "When starting a project, look actively for relevant lessons from earlier work. A short search at the start can save months of repeated mistakes." },
+      { id: "s5", heading: "Handovers",
+        body: "Whenever work moves between people, teams or organisations, knowledge must move with it. Handovers happen at phase ends, at closure, when suppliers change and when people rotate off.\n\n"
+          + "Plan handovers early. Agree what the receiving party needs to know, and test their readiness, not just the completeness of the documents.\n\n"
+          + "Overlap helps. A period when both the outgoing and incoming people work together transfers far more than documents alone.\n\n"
+          + "Include the reasons behind decisions. A design that looks odd may have a good reason. Without it, the next team may undo it and repeat an old mistake.\n\n"
+          + "Agree a contact for questions after the handover. Even a good transfer leaves gaps, and a named person to ask closes them quickly." },
+      { id: "s6", heading: "Knowledge as the team grows or changes",
+        body: "When new people join, knowledge transfer is part of onboarding. Pair newcomers with experienced members. Point them to the decisions log and the team charter.\n\n"
+          + "Teams that work only through conversation can struggle as they grow. Some lightweight documentation, such as decision records, becomes necessary.\n\n"
+          + "Teams that quietly specialise build risk. If only two people can work on one part of the system, spread that knowledge before it becomes a bottleneck.\n\n"
+          + "Knowledge transfer is not a final-phase activity. It is continuous, and it protects the project every time someone leaves or joins." }
+    ],
+    lenses: {
+      predictive: "Knowledge is captured in documents and registers, with lessons reviewed at milestones and closure. Handovers are planned at phase ends and contract transitions.",
+      agile: "Knowledge spreads through pairing, shared ownership and retrospectives. Lightweight decision records supplement conversation as teams grow.",
+      hybrid: "Formal documents serve fixed elements and handovers, while agile teams share knowledge through collaboration. The project manager makes sure knowledge crosses the seam between them."
+    },
+    worked: {
+      stem: "The only engineer who understands how your water utility's new metering platform connects to its billing system has resigned and leaves in five weeks. Her documentation is thin. Testing of the interface begins in three months. What should the project manager do first?",
+      options: [
+        { id: "a", text: "Pair another engineer with her on live interface work now, prioritising the knowledge that would be hardest to rebuild." },
+        { id: "b", text: "Ask her to spend her remaining weeks writing full documentation of the interface." },
+        { id: "c", text: "Hire a contractor experienced in billing interfaces to take over after she leaves." },
+        { id: "d", text: "Offer her a retention bonus to stay until testing is complete." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "Much of her knowledge is tacit and moves best through working together. Starting now, on the most critical areas, makes the five weeks count." },
+        { option: "b", rank: "acceptable", why: "Better documentation is valuable and should be part of the plan. On its own it captures explicit knowledge and misses the judgement she carries." },
+        { option: "d", rank: "premature", why: "Retaining her might help, but it may not be possible or approved. Relying on it delays the transfer that is needed regardless." },
+        { option: "c", rank: "wrong", why: "A contractor arriving after she leaves inherits the same thin documentation and none of her knowledge. It addresses capacity, not the knowledge gap." }
+      ],
+      mindset: "Move tacit knowledge through people working together, and start before the expert leaves."
+    },
+    traps: [
+      "Relying on documents to transfer tacit knowledge.",
+      "Leaving lessons learned to a single session at the end.",
+      "Filing lessons in a repository and assuming they will be used.",
+      "Handing over tasks without the reasons behind decisions.",
+      "Letting one person become the only holder of critical knowledge."
+    ],
+    checks: [
+      {
+        id: "L8-c1", type: "single",
+        stem: "A senior negotiator knows how to handle a difficult supplier's commercial team, but has never written any of it down. Which method best transfers this knowledge?",
+        options: [
+          { id: "a", text: "Having a colleague shadow the negotiator through the next few supplier meetings, with debriefs afterwards.", correct: true,
+            rationale: "Judgement about people is tacit. Watching it in action and discussing it afterwards transfers it far better than a document." },
+          { id: "b", text: "Asking the negotiator to write a guide to the supplier.",
+            rationale: "A guide captures facts, but much of the skill lies in judgement that is hard to write down." },
+          { id: "c", text: "Adding the supplier's contact details to the knowledge base.",
+            rationale: "Contact details are explicit and easy to share, but they are not the knowledge that matters." },
+          { id: "d", text: "Running a classroom course on negotiation.",
+            rationale: "General training does not transfer the specific experience of handling this supplier." }
+        ],
+        explanation: "Tacit knowledge, such as how to read and handle a particular counterpart, is learned best through shadowing, mentoring and discussion. Documents help with explicit facts but miss the judgement.",
+        mindset: "Transfer judgement by working alongside the person who has it."
+      },
+      {
+        id: "L8-c2", type: "single",
+        stem: "Your organisation's lessons repository holds the same integration lesson from several past projects, yet the mistake keeps recurring. What change would help most?",
+        options: [
+          { id: "a", text: "Build the lesson into the default integration checklist that every project uses at planning.", correct: true,
+            rationale: "Lessons travel best when they change the defaults. A checklist applies the lesson without anyone needing to search." },
+          { id: "b", text: "Remind project managers to search the repository more often.",
+            rationale: "Repeated failures show that relying on people to search does not work." },
+          { id: "c", text: "Capture the lesson in more detail next time.",
+            rationale: "The lesson is already captured several times. The gap is reuse, not capture." },
+          { id: "d", text: "Delete older copies of the lesson to tidy the repository.",
+            rationale: "Tidying the repository does not change how projects plan their integration work." }
+        ],
+        explanation: "Repeated mistakes despite recorded lessons show that capture is working and reuse is not. Turning the lesson into a standard checklist, template or estimate makes the next project apply it by default.",
+        mindset: "Turn lessons into defaults so they are used without anyone having to look."
+      }
+    ],
+    terms: ["Tacit knowledge", "Lessons learned register", "Lessons learned repository", "Manage Project Knowledge", "Pair programming", "Retrospective", "Organisational process assets"],
+    recap: [
+      "Explicit knowledge travels through documents; tacit knowledge through people.",
+      "Treat a single expert as a risk and spread their knowledge early.",
+      "Capture lessons throughout and share them while they are useful.",
+      "Make lessons travel by changing checklists, templates and standards.",
+      "Plan handovers with overlap, readiness checks and the reasons behind decisions."
+    ],
+    mindset: "Move knowledge to where it is needed before it is needed, through people as well as documents.",
+    practice: { count: 10, decks: [] }
+  },
+  {
     id: "X1", module: "skills", order: 32, ecoTask: "", minutes: 30,
     prereqs: ["F2"],
     title: "Question technique",
