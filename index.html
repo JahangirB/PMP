@@ -457,6 +457,7 @@ svg { display: block; }
 .nav-grp { margin-top: var(--sp-4); }
 .nav-grp:first-child { margin-top: 0; }
 .nav-grp > .eyebrow { padding: var(--sp-2) var(--sp-3) var(--sp-1); display: block; }
+.nav-grp--foot { padding-top: var(--sp-3); border-top: var(--border); }
 .nav-i {
   display: flex; align-items: center; gap: var(--sp-3);
   width: 100%; min-height: var(--hit-min);
@@ -536,6 +537,12 @@ svg { display: block; }
   max-width: 1120px; width: 100%; margin: 0 auto;
   padding-bottom: max(var(--sp-8), env(safe-area-inset-bottom));
 }
+/* §08.3 focuses the view on every route change so keyboard and screen-reader
+   users land in the new content. That focus is programmatic and stays; the
+   ring is suppressed here only, because round the whole column it reads as
+   two stray full-height lines rather than as a focus indicator. Controls
+   inside the view keep theirs. */
+#view:focus-visible { box-shadow: none; }
 .view-hd { margin-bottom: var(--sp-5); }
 .view-hd h2 { font-size: var(--t-xl); font-weight: var(--w-semi); line-height: var(--lh-tight); margin-top: var(--sp-1); }
 .view-hd p { margin-top: var(--sp-2); color: var(--fg-muted); font-size: var(--t-md); line-height: var(--lh-body); max-width: var(--measure); }
@@ -680,8 +687,10 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .mode-opt[data-sel="true"] { border-color: var(--c-signal); background: var(--s-wash); }
 .mode-opt .i { width: var(--icon-lg); height: var(--icon-lg); flex: 0 0 var(--icon-lg); color: var(--fg-faint); margin-top: var(--sp-0); }
 .mode-opt[data-sel="true"] .i { color: var(--c-signal); }
-.mode-opt .t { font-size: var(--t-sm); font-weight: var(--w-semi); }
-.mode-opt .d { margin-top: var(--sp-1); font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-body); }
+/* Both spans are inline by default, so .d's margin did nothing and the title
+   ran straight into the description. Block puts them on their own lines. */
+.mode-opt .t { display: block; font-size: var(--t-sm); font-weight: var(--w-semi); }
+.mode-opt .d { display: block; margin-top: var(--sp-1); font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-body); }
 
 /* Drill header ── progress, clock, pace */
 .drill-hd { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-bottom: var(--sp-4); }
@@ -2153,13 +2162,20 @@ a.btn { text-decoration: none; }
 
     <div class="nav" id="nav">
       <div class="nav-grp">
-        <span class="eyebrow">Study</span>
+        <span class="eyebrow">Learn</span>
         <a class="nav-i" href="#/learn"     data-route="learn"><svg class="i"><use href="#i-learn"></use></svg>Learn</a>
-        <a class="nav-i" href="#/dashboard" data-route="dashboard"><svg class="i"><use href="#i-gauge"></use></svg>Dashboard</a>
         <a class="nav-i" href="#/practice"  data-route="practice"><svg class="i"><use href="#i-target"></use></svg>Practice</a>
-        <a class="nav-i" href="#/exam"      data-route="exam"><svg class="i"><use href="#i-timer"></use></svg>Mock exam</a>
         <a class="nav-i" href="#/scenarios" data-route="scenarios"><svg class="i"><use href="#i-branch"></use></svg>Scenarios</a>
         <a class="nav-i" href="#/cards"     data-route="cards"><svg class="i"><use href="#i-cards"></use></svg>Flashcards<span class="badge num" id="due-badge">0</span></a>
+        <a class="nav-i" href="#/exam"      data-route="exam"><svg class="i"><use href="#i-timer"></use></svg>Mock exam</a>
+      </div>
+
+      <div class="nav-grp">
+        <span class="eyebrow">Progress</span>
+        <a class="nav-i" href="#/dashboard" data-route="dashboard"><svg class="i"><use href="#i-gauge"></use></svg>Dashboard</a>
+        <a class="nav-i" href="#/planner"   data-route="planner"><svg class="i"><use href="#i-calendar"></use></svg>Study plan</a>
+        <a class="nav-i" href="#/journal"   data-route="journal"><svg class="i"><use href="#i-journal"></use></svg>Mistake journal</a>
+        <a class="nav-i" href="#/analytics" data-route="analytics"><svg class="i"><use href="#i-chart"></use></svg>Analytics</a>
       </div>
 
       <div class="nav-grp">
@@ -2168,18 +2184,11 @@ a.btn { text-decoration: none; }
         <a class="nav-i" href="#/library"   data-route="library"><svg class="i"><use href="#i-book"></use></svg>Reference library</a>
       </div>
 
-      <div class="nav-grp">
-        <span class="eyebrow">Track</span>
-        <a class="nav-i" href="#/planner"   data-route="planner"><svg class="i"><use href="#i-calendar"></use></svg>Study planner</a>
-        <a class="nav-i" href="#/journal"   data-route="journal"><svg class="i"><use href="#i-journal"></use></svg>Mistake journal</a>
-        <a class="nav-i" href="#/analytics" data-route="analytics"><svg class="i"><use href="#i-chart"></use></svg>Analytics</a>
-      </div>
-
-      <div class="nav-grp">
-        <span class="eyebrow">Manage</span>
-        <a class="nav-i" href="#/data"      data-route="data"><svg class="i"><use href="#i-data"></use></svg>Backup and packs</a>
+      <!-- Housekeeping sits apart from study. The content audit is an
+           authoring tool, so it is reached from Settings and About. -->
+      <div class="nav-grp nav-grp--foot">
         <a class="nav-i" href="#/settings"  data-route="settings"><svg class="i"><use href="#i-settings"></use></svg>Settings and About</a>
-        <a class="nav-i" href="#/audit"     data-route="audit"><svg class="i"><use href="#i-audit"></use></svg>Content audit</a>
+        <a class="nav-i" href="#/data"      data-route="data"><svg class="i"><use href="#i-data"></use></svg>Backup and packs</a>
       </div>
     </div>
 
@@ -19677,7 +19686,7 @@ PMP.Practice = (function () {
     }
 
     var fcard = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.2 \u00B7 Filters" }),
+      el("span", { class: "eyebrow", text: "Filters" }),
       el("h2", { text: "What do you want to practise?" })
     ]);
     fcard.appendChild(el("div", { class: "filters" }, [
@@ -19740,7 +19749,7 @@ PMP.Practice = (function () {
 
     /* Mode ── §3.2 */
     var mcard = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.2 \u00B7 Mode" }),
+      el("span", { class: "eyebrow", text: "Mode" }),
       el("h2", { text: "How should it run?" })
     ]);
     var modeWrap = el("div", { class: "modes" });
@@ -19784,7 +19793,7 @@ PMP.Practice = (function () {
     host.appendChild(mcard);
 
     host.appendChild(el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.4 \u00B7 Keyboard" }),
+      el("span", { class: "eyebrow", text: "Keyboard" }),
       el("h2", { text: "Everything is reachable without a mouse" }),
       keyHelpList()
     ]));
@@ -22523,7 +22532,7 @@ PMP.Exam = (function () {
     var saved = resumable();
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.3 \u00B7 Mock exam" }),
+      el("span", { class: "eyebrow", text: "Mock exam" }),
       el("h2", { text: "A full sitting, under exam conditions" }),
       el("p", { text: "One clock, two breaks, no feedback until you hand it in. The point is not the score; it is finding out what your judgement does at question 140 with forty minutes left." })
     ]));
@@ -23133,7 +23142,7 @@ PMP.Scenarios = (function () {
     });
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.9 \u00B7 Situational judgement" }),
+      el("span", { class: "eyebrow", text: "Situational judgement" }),
       el("h2", { text: "Situational judgement" }),
       el("p", {
         text: "Short scenarios in which all four options are defensible. Pick the one you would do first, "
@@ -23620,7 +23629,7 @@ PMP.Cards = (function () {
 
     host.appendChild(el("div", { class: "view-hd card-hd" }, [
       el("div", null, [
-        el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 " + meta.label }),
+        el("span", { class: "eyebrow", text: meta.label }),
         el("h2", { text: "Review" })
       ]),
       el("span", { class: "spacer" }),
@@ -23830,7 +23839,7 @@ PMP.Cards = (function () {
     var overall = counts(PMP.Store.state, null);
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 Spaced repetition" }),
+      el("span", { class: "eyebrow", text: "Spaced repetition" }),
       el("h2", { text: "Flashcards" }),
       el("p", { text: "Cards are scheduled with SM-2. Grade honestly and the algorithm spreads its own workload: "
         + "what you know moves out to weeks and months, what you do not comes back tomorrow. New cards are capped at "
@@ -26574,7 +26583,7 @@ PMP.FormulaLab = (function () {
     }
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.7" }),
+      el("span", { class: "eyebrow", text: "Reference" }),
       el("h2", { text: "Formula lab" }),
       el("p", { text: "A reference sheet built for paper, calculators for the awkward ones, and randomised problems that show the whole working rather than the answer." })
     ]));
@@ -27512,7 +27521,7 @@ PMP.Library = (function () {
     }
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.8" }),
+      el("span", { class: "eyebrow", text: "Reference" }),
       el("h2", { text: "Reference library" }),
       el("p", { text: "Everything offline and in this build's own words. The process view is kept as a cross-reference; the principles, the domains and the agile section are how the current outline talks." })
     ]));
@@ -28001,7 +28010,7 @@ PMP.Data = (function () {
     var state = PMP.Store.state;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.13 \u00B7 Backup and packs" }),
+      el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Everything this app knows about you lives on this device and travels in a file you control. Nothing about you is sent anywhere, and there is no analytics, no telemetry and no account. Opened from disk the file makes no network requests at all. Served over http it makes exactly one kind: a request for its own extended question packs, at a fixed path beside itself, carrying no credentials and no information about you \u2014 the same request the browser would make for an image. What came back, or did not, is itemised in the content audit." })
     ]));
@@ -28069,7 +28078,7 @@ PMP.Data = (function () {
 
     /* Schema documentation. A format nobody can write to is not portable. */
     host.appendChild(el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A75 \u00B7 Pack format, schema v2" }),
+      el("span", { class: "eyebrow", text: "Pack format, schema v2" }),
       el("p", { text: "A pack is one JSON object. Every question needs an id unique within the file, a type, a domain, an ECO task id from the outline this build targets, a stem, an explanation, and a rationale on every option \u2014 including the ones nobody should choose, because those are the instructive ones." }),
       el("pre", { class: "code", text: SAMPLE }),
       el("div", { style: "display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-4)" }, [
@@ -28854,7 +28863,7 @@ PMP.Audit = (function () {
   function lessonsCard() {
     var lr = auditLessons(PMP.LESSONS);
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A705.10 \u00B7 Lessons" }),
+      el("span", { class: "eyebrow", text: "Lessons" }),
       el("h2", { text: lr.pass
         ? (lr.counts.total === 1 ? "The lesson passes every rule" : "All " + lr.counts.total + " lessons pass every rule")
         : PMP.fmt.plural(lr.failures.length, "failure") + " in the lessons" }),
@@ -28964,7 +28973,7 @@ PMP.Audit = (function () {
   function sourcesCard() {
     var s = PMP.Packs.summary();
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A705.9 \u00B7 Content sources" }),
+      el("span", { class: "eyebrow", text: "Content sources" }),
       el("h2", { text: PMP.Packs.provenance() })
     ]);
 
@@ -29039,7 +29048,7 @@ PMP.Audit = (function () {
     var counts = r.counts;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.14 \u00B7 Build self-check" }),
+      el("span", { class: "eyebrow", text: "Build self-check" }),
       el("h2", { text: "Content audit" }),
       el("p", { text: "Acceptance test 10: every shipped item satisfies the content rules in \u00A74 and \u00A73.5. This panel runs those rules against the pack that is actually loaded, in front of you, rather than reporting a number somebody typed." })
     ]));
@@ -29171,7 +29180,7 @@ PMP.Audit = (function () {
     var sr = auditScenarios(PMP.SCENARIOS);
     var sc = sr.counts;
     var scenCard = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A705.4 \u00B7 Scenario pack" }),
+      el("span", { class: "eyebrow", text: "Scenario pack" }),
       el("h2", { text: sr.pass ? "The scenario pack passes every rule" : PMP.fmt.plural(sr.failures.length, "failure") + " in the scenario pack" }),
       el("p", {
         text: "Situational items are checked against their own rules. The one that matters most is that "
@@ -30357,7 +30366,7 @@ PMP.Planner = (function () {
     var cd = PMP.Metrics.countdown(state);
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.10 \u00B7 Study planner" }),
+      el("span", { class: "eyebrow", text: "Study planner" }),
       el("h2", { text: "Your plan to " + PMP.fmt.dateShort(plan.inputs.examDate) }),
       el("p", { text: "Chips tick themselves off your actual history \u2014 answering twenty questions on Risk is what completes a chip that asks for twenty questions on Risk. Lessons tick when you complete them in Learn. Only the formula-sheet skim in the last few days takes a click, because skimming is the one thing this file cannot see you do." })
     ]));
@@ -30499,7 +30508,7 @@ PMP.Planner = (function () {
     var diag = diagnostic(state);
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.10 \u00B7 Study planner" }),
+      el("span", { class: "eyebrow", text: "Study planner" }),
       el("h2", { text: "Build a plan" }),
       el("p", { text: "Three inputs: when you sit, how long you have on an ordinary day, and where you are starting from. The plan that comes out ticks itself off as you work, and rebuilds itself when you fall behind rather than quietly accumulating a backlog." })
     ]));
@@ -30648,7 +30657,7 @@ PMP.Planner = (function () {
     var last = p.days[p.days.length - 1];
     if (last.d < sod(Date.now())) {
       host.appendChild(el("div", { class: "view-hd" }, [
-        el("span", { class: "eyebrow", text: "\u00A73.10 \u00B7 Study planner" }),
+        el("span", { class: "eyebrow", text: "Study planner" }),
         el("h2", { text: "That plan has run its course" }),
         el("p", { text: "Every day in it is in the past. Build a new one if the date has moved." })
       ]));
@@ -30701,7 +30710,7 @@ PMP.Analytics = (function () {
     var n = M.attempts(state).length;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.12 \u00B7 Analytics" }),
+      el("span", { class: "eyebrow", text: "Analytics" }),
       el("h2", { text: "What the history says" }),
       el("p", { text: "Five views of everything you have answered. Drawn in this file with no charting library and no network. Where a figure would come from too small a sample it is greyed and shows its count instead of a rate." })
     ]));
@@ -30722,32 +30731,32 @@ PMP.Analytics = (function () {
     }
 
     host.appendChild(card(
-      "\u00A711.1 \u00B7 Trend",
+      "Trend",
       "Are you getting better?",
       C.accuracyTrend(state)
     ));
 
     host.appendChild(card(
-      "\u00A711.2 \u00B7 Coverage and strength",
+      "Coverage and strength",
       "Where are the cold spots?",
       C.ecoHeat(state),
       "The 26 tasks of the examination content outline, in the outline's own three columns. This is the chart to plan from: a grey cell is a task the exam can ask about and you have no evidence on."
     ));
 
     host.appendChild(card(
-      "\u00A711.3 \u00B7 Pace",
+      "Pace",
       "Are you working at exam speed?",
       C.paceHistogram(state)
     ));
 
     host.appendChild(card(
-      "\u00A711.4 \u00B7 Sittings",
+      "Sittings",
       "Which way are the mocks moving?",
       C.mockHistory(state)
     ));
 
     host.appendChild(card(
-      "\u00A711.5 \u00B7 Calibration",
+      "Calibration",
       "Can you tell when you are right?",
       C.calibration(state),
       "Recorded as one bit \u2014 Sure or Not sure \u2014 so this is a comparison of two rates rather than a reliability curve. The row that matters is Sure: those are the ones a second look on the day will not catch."
@@ -30955,7 +30964,7 @@ PMP.Journal = (function () {
     var total = (state.journal || []).length;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.11 \u00B7 Mistake journal" }),
+      el("span", { class: "eyebrow", text: "Mistake journal" }),
       el("h2", { text: "Why you got them wrong" }),
       el("p", { text: "Every answer that missed full marks, waiting to be given a cause. The distribution across the five causes is usually a better guide to what to do next than the score is." })
     ]));
@@ -31003,7 +31012,7 @@ PMP.Journal = (function () {
 
   function distributionCard(cs, total, state) {
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A711.7 \u00B7 Root cause" }),
+      el("span", { class: "eyebrow", text: "Root cause" }),
       el("h2", { text: "Where your marks are going" }),
       el("p", { text: reading(cs, total) })
     ]);
@@ -31128,7 +31137,7 @@ PMP.Dashboard = (function () {
   function scoreCard(state) {
     var rd = PMP.Metrics.readiness(state);
     var card = el("div", { class: "card" });
-    card.appendChild(el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Readiness" }));
+    card.appendChild(el("span", { class: "eyebrow", text: "Readiness" }));
 
     var hd = el("div", { class: "score-hd", dataset: { provisional: String(rd.provisional) } }, [
       el("span", { class: "score-n", text: String(rd.score) }),
@@ -31198,7 +31207,7 @@ PMP.Dashboard = (function () {
     var MIN = PMP.Metrics.MIN_SAMPLE;
 
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Mastery" }),
+      el("span", { class: "eyebrow", text: "Mastery" }),
       el("h2", { text: "Where you stand" })
     ]);
 
@@ -31258,7 +31267,7 @@ PMP.Dashboard = (function () {
     var doneToday = st.today.items || st.today.cards || st.today.exams;
 
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Habit" }),
+      el("span", { class: "eyebrow", text: "Habit" }),
       el("h2", { text: st.current
         ? PMP.fmt.plural(st.current, "day") + " in a row"
         : doneToday ? "Started today" : "No streak running" })
@@ -31299,7 +31308,7 @@ PMP.Dashboard = (function () {
   function countdownCard(state) {
     var cd = PMP.Metrics.countdown(state);
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Exam date" })
+      el("span", { class: "eyebrow", text: "Exam date" })
     ]);
 
     if (!cd) {
@@ -31365,7 +31374,7 @@ PMP.Dashboard = (function () {
   function actionCard(state) {
     var na = PMP.Metrics.nextActions(state);
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Next best action" }),
+      el("span", { class: "eyebrow", text: "Next best action" }),
       el("h2", { text: na.ranked.length ? na.ranked[0].label : "Keep going" }),
       el("p", { text: "Ranked by how many readiness points each would add per minute spent. The rates are worth exactly as much as the assumptions under them, which is why each row states its own." })
     ]);
@@ -31412,7 +31421,7 @@ PMP.Dashboard = (function () {
   function duePanel(state) {
     var c = PMP.Cards.counts(state);
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 Flashcards" }),
+      el("span", { class: "eyebrow", text: "Flashcards" }),
       el("h2", { text: c.today ? PMP.fmt.plural(c.today, "card") + " due today" : "No cards due today" })
     ]);
     card.appendChild(el("div", { class: "filters" }, [
@@ -31453,7 +31462,7 @@ PMP.Dashboard = (function () {
     var n = PMP.Metrics.attempts(state).length;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Dashboard" }),
+      el("span", { class: "eyebrow", text: "Dashboard" }),
       el("h2", { text: n ? "Where you are" : "Start here" }),
       el("p", {
         text: n
@@ -31534,7 +31543,7 @@ PMP.Dashboard = (function () {
     var total = (state.journal || []).length;
 
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.11 \u00B7 Mistake journal" }),
+      el("span", { class: "eyebrow", text: "Mistake journal" }),
       el("h2", { text: untagged ? PMP.fmt.plural(untagged, "miss", "misses") + " waiting to be tagged" : total ? "All misses tagged" : "Nothing missed yet" })
     ]);
     if (total) {
@@ -33278,7 +33287,7 @@ PMP.Shell = (function () {
   function dueToday() {
     var c = PMP.Cards.counts(PMP.Store.state);
     var card = el("div", { class: "card due-panel" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 Flashcards" }),
+      el("span", { class: "eyebrow", text: "Flashcards" }),
       el("h2", { text: c.today ? PMP.fmt.plural(c.today, "card") + " due today" : "No cards due today" })
     ]);
     card.appendChild(el("div", { class: "filters" }, [
