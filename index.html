@@ -2028,6 +2028,65 @@ a.btn { text-decoration: none; }
   .ln-pager .btn { width: 100%; }
 }
 
+/* ── 03.21  TODAY AND THE COACH ─────────────────────────────────────────────
+   §10.17. Existing tokens only. A step row is the planner's chip given room
+   to explain itself: tick, label and minutes, a "Why this?" disclosure, and
+   its own Start. The one primary button sits under the list and, on a
+   phone, stays in reach at the bottom of the screen without covering the
+   last step once the list has been scrolled to its end. */
+.td-hd { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--sp-3); }
+.td-hd .eyebrow { flex: 1 0 100%; }
+.td-count { font-family: var(--font-mono); }
+.td-msgs { display: grid; gap: var(--sp-2); margin-bottom: var(--sp-4); }
+.coach-msg {
+  display: flex; align-items: flex-start; gap: var(--sp-3); flex-wrap: wrap;
+  padding: var(--sp-3) var(--sp-4); border: var(--border); border-left: 3px solid var(--c-signal);
+  border-radius: var(--r-2); background: var(--s-wash);
+}
+.coach-msg > .i { width: var(--icon); height: var(--icon); flex: 0 0 var(--icon); color: var(--c-signal); margin-top: 2px; }
+.coach-msg > p { flex: 1 1 220px; font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); }
+.coach-msg-a { display: flex; align-items: center; gap: var(--sp-2); margin-left: auto; }
+.td-meter { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-top: var(--sp-4); }
+.td-steps { display: grid; gap: var(--sp-2); margin-top: var(--sp-4); }
+.td-step, .td-extra {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--sp-3); align-items: start;
+  padding: var(--sp-3) var(--sp-4); border: var(--border-hi); border-radius: var(--r-2); background: var(--s-raise);
+}
+.td-extra { margin-top: var(--sp-3); border-style: dashed; }
+.td-step[data-next="true"] { border-color: var(--c-signal); background: var(--s-wash); }
+.td-step[data-done="true"] { background: var(--st-correct-bg); border-color: var(--st-correct-fg); }
+.td-step[data-done="true"] .td-l { text-decoration: line-through; text-decoration-thickness: 1px; }
+.td-ic .i { width: var(--icon-lg); height: var(--icon-lg); color: var(--fg-faint); margin-top: 2px; }
+.td-step[data-next="true"] .td-ic .i { color: var(--c-signal); }
+.td-step[data-done="true"] .td-ic .i { color: var(--st-correct-fg); }
+.td-main { min-width: 0; display: grid; gap: var(--sp-1); }
+.td-l { font-size: var(--t-sm); font-weight: var(--w-semi); }
+.td-m { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--fg-muted); }
+.td-why > summary { cursor: pointer; font-size: var(--t-xs); color: var(--c-signal); width: max-content; }
+.td-why > summary:focus-visible { box-shadow: var(--ring); border-radius: var(--r-1); }
+.td-why > p { margin-top: var(--sp-1); font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-body); max-width: var(--measure); }
+.td-act { display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: flex-end; }
+.td-done { margin-top: var(--sp-4); font-size: var(--t-sm); }
+.td-cta { margin-top: var(--sp-5); }
+.td-foot { border-top: 0; }
+.td-choice { border: 0; padding: 0; margin: var(--sp-4) 0 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.td-choice > legend { padding: 0; margin-bottom: var(--sp-2); font-size: var(--t-sm); font-weight: var(--w-semi); }
+.td-opt {
+  display: inline-flex; align-items: center; gap: var(--sp-2); min-height: var(--hit-min);
+  padding: var(--sp-1) var(--sp-3); border: var(--border-hi); border-radius: var(--r-full); cursor: pointer; font-size: var(--t-sm);
+}
+.td-opt:focus-within { box-shadow: var(--ring); }
+.td-err { color: var(--c-danger); font-size: var(--t-sm); margin-top: var(--sp-2); }
+@media (max-width: 600px) {
+  .td-step, .td-extra { padding: var(--sp-3); }
+  .td-cta {
+    position: sticky; bottom: 0; z-index: 5;
+    margin: var(--sp-4) calc(-1 * var(--sp-5)) calc(-1 * var(--sp-5));
+    padding: var(--sp-3) var(--sp-5) calc(var(--sp-3) + env(safe-area-inset-bottom));
+    background: var(--s-raise); border-top: var(--border);
+  }
+}
+
 /* ── 03.8  RESPONSIVE ───────────────────────────────────────────────────── */
 @media (min-width: 600px) {
   .view { padding-left: var(--sp-6); padding-right: var(--sp-6); }
@@ -2121,6 +2180,7 @@ a.btn { text-decoration: none; }
 
 <!-- 04.3  Icon sprite. Inline SVG only — no icon font, no external file. -->
 <svg class="sr-only" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-today" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18.5h18M6.5 18.5a5.5 5.5 0 0 1 11 0M12 5.5v3M5.4 9.4l1.9 1.9M18.6 9.4l-1.9 1.9"/></symbol>
 <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 18a9 9 0 1 1 17 0"/><path d="M12 18l4.2-5.6"/><circle cx="12" cy="18" r="1.6"/></symbol>
 <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
 <symbol id="i-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 2M9.5 2.5h5"/></symbol>
@@ -2162,6 +2222,10 @@ a.btn { text-decoration: none; }
 
     <div class="nav" id="nav">
       <div class="nav-grp">
+        <a class="nav-i" href="#/today"     data-route="today"><svg class="i"><use href="#i-today"></use></svg>Today</a>
+      </div>
+
+      <div class="nav-grp">
         <span class="eyebrow">Learn</span>
         <a class="nav-i" href="#/learn"     data-route="learn"><svg class="i"><use href="#i-learn"></use></svg>Learn</a>
         <a class="nav-i" href="#/practice"  data-route="practice"><svg class="i"><use href="#i-target"></use></svg>Practice</a>
@@ -2172,7 +2236,7 @@ a.btn { text-decoration: none; }
 
       <div class="nav-grp">
         <span class="eyebrow">Progress</span>
-        <a class="nav-i" href="#/dashboard" data-route="dashboard"><svg class="i"><use href="#i-gauge"></use></svg>Dashboard</a>
+        <a class="nav-i" href="#/dashboard" data-route="dashboard"><svg class="i"><use href="#i-gauge"></use></svg>Progress</a>
         <a class="nav-i" href="#/planner"   data-route="planner"><svg class="i"><use href="#i-calendar"></use></svg>Study plan</a>
         <a class="nav-i" href="#/journal"   data-route="journal"><svg class="i"><use href="#i-journal"></use></svg>Mistake journal</a>
         <a class="nav-i" href="#/analytics" data-route="analytics"><svg class="i"><use href="#i-chart"></use></svg>Analytics</a>
@@ -2211,7 +2275,7 @@ a.btn { text-decoration: none; }
               aria-label="Open navigation" aria-expanded="false" aria-controls="rail">
         <svg class="i" aria-hidden="true"><use href="#i-menu"></use></svg>
       </button>
-      <h1 id="view-title">Dashboard</h1>
+      <h1 id="view-title">Today</h1>
       <span class="spacer"></span>
       <span class="mode-tag" id="mode-tag" data-mode="probing" title="Where your progress is being stored">
         <span class="dot" aria-hidden="true"></span><span id="mode-text">Checking</span>
@@ -2320,6 +2384,7 @@ a.btn { text-decoration: none; }
         03.18 study planner — week grid, day column, self-ticking chips
         03.19 mistake journal — triage item, cause picker, cause ramp
         03.20 learn — lesson hub rows, reader parts, reading measure
+        03.21 today and the coach — step rows, messages, sticky start
         03.7  question engine — filters, options, hotspot, blanks, pace meter
         03.14 formula lab — sheet, calculators, network nodes, worked steps
         03.15 reference library — process matrix, ITTO panel, virtual list
@@ -2343,6 +2408,8 @@ a.btn { text-decoration: none; }
         05.7  REFERENCE + GLOSSARY — 49 processes, 12 principles,
               8 domains, agile, 14 tables, 364 terms · built
         05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS; pilot lesson P4
+        05.11 COACH MESSAGES — every coach sentence, authored: the pool the
+              coach picks from and the fixed lines it uses in place
 
    §06  STORAGE ADAPTER
         06.1  probe() — write/read/delete, catches throws AND silent no-ops
@@ -2392,6 +2459,9 @@ a.btn { text-decoration: none; }
         10.07 Reference library · built
               (10.07.6 is the glossary matcher: trigram + token prefix)
         10.15 Learn — lesson hub and reader · #/learn, #/learn?lesson=P4
+        10.16 Coach — stage, today's session, messages · derives, never renders
+        10.17 Today, intake and the coach's surfaces · #/today, the home page
+              (10.14.6 audits 05.11 against fixture contexts)
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
         11.1  accuracy trend  · 11.2  ECO heat map (low-sample cells greyed)
@@ -18117,7 +18187,8 @@ PMP.LESSONS = Object.freeze([
    any message shown within its cooldown, doubles the cooldown of one that
    has been dismissed three times running, and shows at most two on Today and
    one in a strip. `stages` limits a message to the stages it makes sense in;
-   left out, it is normal days and the weekly review.
+   left out, it is normal days and the weekly review. `surfaces` limits it to
+   Today or to the strip; left out, it may appear on either.
 
    COACH_LINES are the fixed sentences the coach uses in a known place: the
    strip, the hint ladder, the debrief, the reasons behind each step, exam
@@ -18145,6 +18216,11 @@ PMP.COACH_MESSAGES = Object.freeze([
   { id: "behind_plan", stages: ["normal", "weekly", "reentry"], priority: 80, cooldownDays: 2,
     when: function (c) { return !!c.plan && c.plan.behind; },
     text: function (c) { return "You're " + c.plan.behindLabel + " behind the plan. Rebuilding beats catching up: the new plan targets what's still weak."; },
+    action: { label: "Rebuild the plan", run: function () { PMP.Planner.rebuild(); } } },
+
+  { id: "diagnostic_rebuild", priority: 78, cooldownDays: 2,
+    when: function (c) { return !!c.plan && c.diagnosticDone && !c.plan.diagnostic; },
+    text: function () { return "Your diagnostic is in. Rebuilding the plan lets it aim at the domains that came out lowest."; },
     action: { label: "Rebuild the plan", run: function () { PMP.Planner.rebuild(); } } },
 
   { id: "plan_offer", priority: 75, cooldownDays: 2,
@@ -18188,7 +18264,8 @@ PMP.COACH_MESSAGES = Object.freeze([
     when: function (c) { return c.pace.ready && c.pace.slow; },
     text: function (c) { return "Your median is " + c.pace.median + "s against " + c.pace.target + "s on the day. A timed drill twice a week closes it slowly, and that's normal."; } },
 
-  { id: "cards_due", priority: 50, cooldownDays: 2,
+  /* Strip only: on Today the session already lists the cards as a step. */
+  { id: "cards_due", surfaces: ["strip"], priority: 50, cooldownDays: 2,
     when: function (c) { return c.cards.today >= 20; },
     text: function (c) { return c.cards.today + " cards are waiting. Ten minutes now saves twenty later in the week."; },
     action: { label: "Review cards", route: "cards" } },
@@ -18201,7 +18278,8 @@ PMP.COACH_MESSAGES = Object.freeze([
     },
     action: { label: "Practise them", route: "practice" } },
 
-  { id: "journal_waiting", priority: 45, cooldownDays: 3,
+  /* Strip only, for the same reason: Today has a triage step at this count. */
+  { id: "journal_waiting", surfaces: ["strip"], priority: 45, cooldownDays: 3,
     when: function (c) { return c.journal.untagged >= 5; },
     text: function (c) { return c.journal.untagged + " misses haven't got a cause yet. Tagging them is the cheapest insight on the board."; },
     action: { label: "Open the journal", route: "journal" } },
@@ -18235,6 +18313,16 @@ PMP.COACH_MESSAGES = Object.freeze([
 ]);
 
 PMP.COACH_LINES = Object.freeze({
+  /* Intake, five short screens */
+  intake_head:      { text: function () { return "Set up your coach"; } },
+  intake_intro:     { text: function () { return "Five short questions, about three minutes. Skip any of them; you can redo this from Settings."; } },
+  intake_date:      { text: function () { return "When are you sitting the exam? A target date works if it isn't booked yet."; } },
+  intake_time:      { text: function () { return "How long can you study? An honest figure beats an ambitious one."; } },
+  intake_background:{ text: function () { return "How much have you done before? This changes how the coach talks to you, not the plan."; } },
+  intake_when:      { text: function () { return "When will you usually study? Deciding now makes it likelier to happen."; } },
+  intake_start:     { text: function () { return "Last step. A 25-question diagnostic, taken cold, lets the plan aim at where you're actually weak."; } },
+  intake_date_err:  { text: function () { return "Pick a date after today, booked or target. You can change it later."; } },
+
   /* Today */
   today_fallback:   { text: function () { return "No plan is behind this list yet, so it's built from what would help most right now."; } },
   today_reentry:    { text: function () { return "A short session to pick the thread back up."; } },
@@ -18841,7 +18929,9 @@ PMP.Router = (function () {
         params[k] = v;
       });
     }
-    return { name: name || "dashboard", params: params };
+    /* No route means Today, the coach's home (§10.17). #/dashboard still
+       works and shows Progress, so old bookmarks keep their page. */
+    return { name: name || "today", params: params };
   }
 
   function build(name, params) {
@@ -18896,8 +18986,8 @@ PMP.Router = (function () {
   function handle() {
     var to = parse(window.location.hash);
     if (!routes[to.name]) {
-      PMP.UI.toast("No section called \u201C" + to.name + "\u201D. Showing the dashboard.", "warn");
-      return navigate("dashboard", null, true);
+      PMP.UI.toast("No section called “" + to.name + "”. Showing Today.", "warn");
+      return navigate("today", null, true);
     }
 
     var blocked = checkGuards(to);
@@ -18945,7 +19035,7 @@ PMP.Router = (function () {
     if (started) return;
     started = true;
     window.addEventListener("hashchange", handle);
-    if (!window.location.hash) navigate("dashboard", null, true);
+    if (!window.location.hash) navigate("today", null, true);
     else handle();
   }
 
@@ -19652,7 +19742,8 @@ PMP.Exporter = (function () {
           10.05 flashcards, 10.06 formula lab, 10.07 reference library,
           10.08 scenario trainer, 10.09 study planner, 10.10 mistake
           journal, 10.11 analytics, 10.12 settings, About and help,
-          10.13 data portability, 10.14 content audit, 10.15 learn.
+          10.13 data portability, 10.14 content audit, 10.15 learn,
+          10.16 coach, 10.17 today and the coach's surfaces.
    Still stubs: none.
    ════════════════════════════════════════════════════════════════════ */
 
@@ -20812,12 +20903,27 @@ PMP.Practice = (function () {
        on every visit and not only the first: a link that carries a filter
        replaces whatever was set before. A bare #/practice, and the repaints
        below that pass no params, keep the filters already chosen. */
-    var linked = !!params && Object.keys(defaultFilters()).some(function (k) { return !!params[k]; });
+    /* n starts a drill of that many straight away, in `mode` if one is
+       given. It is how a step on Today (§10.17) starts its questions through
+       this engine's own picker rather than a second one; the filters it
+       carries replace the old ones even when there are none, so ten mixed
+       questions are mixed. */
+    var n = params ? parseInt(params.n, 10) : 0;
+    var linked = !!params && (n > 0 || Object.keys(defaultFilters()).some(function (k) { return !!params[k]; }));
     if (!filters || linked) {
       filters = defaultFilters();
       if (params) Object.keys(filters).forEach(function (k) {
         if (params[k]) filters[k] = params[k];
       });
+    }
+    if (n > 0 && !(session && !session.finished)) {
+      var mode = params.mode && MODES[params.mode] && !MODES[params.mode].hidden ? params.mode : CFG.DEFAULT_MODE;
+      var picked = choose(pool(), n, mode);
+      /* Drop the count from the address once the drill exists, so a later
+         visit to the same entry in history does not start another. */
+      setTimeout(function () { PMP.Router.navigate("practice", null, true); }, 0);
+      if (picked.length) { startWith(picked, mode); return; }
+      PMP.UI.toast("Nothing matches those filters.", "warn");
     }
     /* A live drill always wins: coming back to Practice after wandering off to
        the dashboard drops you where you left off, on the question you left off
@@ -31802,25 +31908,23 @@ PMP.Dashboard = (function () {
     var n = PMP.Metrics.attempts(state).length;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "Dashboard" }),
-      el("h2", { text: n ? "Where you are" : "Start here" }),
+      el("span", { class: "eyebrow", text: "Progress" }),
+      el("h2", { text: n ? "Where you are" : "Nothing measured yet" }),
       el("p", {
         text: n
           ? "Everything on this screen is derived from what you have actually answered. Nothing is entered by hand and nothing is remembered that you did not do."
-          : "Nothing has been answered yet, so most of this screen is empty and honestly so. The quickest way to make it useful is twenty questions."
+          : "Nothing has been answered yet, so most of this screen is empty and honestly so. Today has your first steps."
       })
     ]));
 
+    /* The first run belongs to Today and its intake (§10.17), which give one
+       next step instead of the three this screen used to offer. */
     if (!n) {
       host.appendChild(el("div", { class: "card" }, [
         el("span", { class: "eyebrow", text: "First run" }),
-        el("h2", { text: "Two ways in" }),
-        el("p", { text: "Either answer some questions and let the score build itself, or run the planner's 25-question diagnostic, which does the same thing and hands you a week-by-week plan at the end of it." }),
+        el("h2", { text: "Start from Today" }),
         el("div", { class: "filter-bar" }, [
-          el("button", { class: "btn btn--primary", type: "button", onclick: function () { PMP.Router.navigate("practice"); } },
-            [icon("target"), "Answer some questions"]),
-          el("button", { class: "btn", type: "button", onclick: function () { PMP.Router.navigate("planner"); } },
-            [icon("calendar"), "Build a study plan"])
+          el("a", { class: "btn btn--primary", href: "#/today" }, [icon("today"), "Go to Today"])
         ])
       ]));
       var lc0 = learnCard();
@@ -31909,7 +32013,7 @@ PMP.Dashboard = (function () {
     return card;
   }
 
-  PMP.Router.register("dashboard", { title: "Dashboard", render: view });
+  PMP.Router.register("dashboard", { title: "Progress", render: view });
 
   return { view: view };
 })();
@@ -32090,6 +32194,7 @@ PMP.Settings = (function () {
       el("p", { text: "Your preferences, what this build contains, and where to begin." })
     ]));
     host.appendChild(prefsCard(state));
+    if (PMP.CoachUI) host.appendChild(PMP.CoachUI.settingsCard(state));
     host.appendChild(helpCard());
     host.appendChild(aboutCard());
     host.appendChild(contentCard(state));
@@ -32729,6 +32834,14 @@ PMP.Learn = (function () {
       return;
     }
     renderReader(host, lesson);
+    /* part=N opens the reader at that part, for the links from a wrong
+       answer and from Today. Deferred because the router scrolls to the top
+       after rendering. */
+    var pn = parseInt(params.part, 10);
+    if (pn > 1) setTimeout(function () {
+      var t = document.getElementById("ln-part-" + pn);
+      if (t && t.scrollIntoView) t.scrollIntoView({ block: "start" });
+    }, 0);
   }
 
   PMP.Router.register("learn", { title: "Learn", render: view });
@@ -33157,6 +33270,7 @@ PMP.Coach = (function () {
      Filter by stage and by `when`, drop anything inside its cooldown, take
      the highest priorities. Muted means none at all. */
   var DEFAULT_STAGES = ["normal", "weekly"];
+  var DEFAULT_SURFACES = ["today", "strip"];
 
   function cooldownMs(m, sl) {
     var back = (sl.dismissStreak[m.id] || 0) >= DISMISS_BACKOFF ? 2 : 1;
@@ -33181,10 +33295,25 @@ PMP.Coach = (function () {
     var sl = slice(state);
     if (sl.muted) return [];
     var c = context(state), now = Date.now();
-    return PMP.COACH_MESSAGES.filter(function (m) { return eligible(m, c, sl, now); })
+    surface = surface || "today";
+    return PMP.COACH_MESSAGES.filter(function (m) {
+      return (m.surfaces || DEFAULT_SURFACES).indexOf(surface) >= 0 && eligible(m, c, sl, now);
+    })
       .sort(function (a, b) { return b.priority - a.priority; })
       .slice(0, Math.max(0, max === undefined ? 2 : max))
       .map(function (m) { return render(m, c); });
+  }
+
+  /* One message by id, rendered if it still applies, whatever its cooldown.
+     Today keeps the messages it chose for the rest of the day, and needs
+     their current text when it is drawn again. */
+  function message(id, state) {
+    state = state || PMP.Store.state;
+    var m = PMP.COACH_MESSAGES.filter(function (x) { return x.id === id; })[0];
+    if (!m) return null;
+    var c = context(state), ok = false;
+    try { ok = (m.stages || DEFAULT_STAGES).indexOf(c.stage) >= 0 && !!m.when(c); } catch (e) { ok = false; }
+    return ok ? render(m, c) : null;
   }
 
   function markShown(id) {
@@ -33326,6 +33455,7 @@ PMP.Coach = (function () {
           pace: { ready: true, median: 104, fast: false, slow: true, target: 80 },
           mocks: { n: 2, lastDays: 52 } }),
       v({ plan: null, journal: { untagged: 2, tagged: 10, lead: { id: "knowledge", short: "Knowledge gap", n: 5, share: 0.5 }, tagsToday: 0 } }),
+      v({ plan: { behind: false, debt: 0, behindLabel: "0s", phase: "build", rest: false, todayMins: 60, todayDone: 0, daysLeft: 40, diagnostic: false } }),
       v({ stage: "reentry", plan: { behind: true, debt: 1336, behindLabel: "22h 16m", phase: "consolidate", rest: false, todayMins: 60, todayDone: 0, daysLeft: 40, diagnostic: true } }),
       v({ stage: "examweek", countdown: { days: 1, past: false } }),
       v({ stage: "examweek", countdown: { days: 6, past: false } })
@@ -33333,13 +33463,462 @@ PMP.Coach = (function () {
   }
 
   return {
-    stage: stage, context: context, session: session, messages: messages,
+    stage: stage, context: context, session: session, messages: messages, message: message,
     markShown: markShown, dismiss: dismiss, acted: acted,
     slice: slice, setProfile: setProfile, setPref: setPref, setOutcome: setOutcome,
     weeklySummary: weeklySummary, completeWeekly: completeWeekly,
     line: line, fixtures: fixtures,
     REENTRY_GAP_DAYS: REENTRY_GAP_DAYS, WEEKLY_EVERY_DAYS: WEEKLY_EVERY_DAYS, TRIAGE_MIN: TRIAGE_MIN
   };
+})();
+
+/* ── 10.17  TODAY AND THE COACH'S SURFACES ──────────────────────────────────
+   Everything of the coach that is drawn: the Today view (#/today, the home
+   page), the intake, and the Coach group in Settings. §10.16 decides; this
+   module only draws what it decided and routes the person through the
+   existing entry points of each module.
+
+   One primary button per screen. Today always has exactly one: Start next
+   step while there is a step, the extra once the day is done, and See your
+   progress when there is nothing else to do.
+
+   Messages hold for the day. The engine will not offer a message again
+   inside its cooldown, so the ones Today picks are remembered (in memory,
+   for this day) and drawn again on every visit until they are dismissed or
+   stop applying. Otherwise a message would vanish the second time the page
+   was drawn. ═══════════════════════════════════════════════════════════ */
+PMP.CoachUI = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on, frag = PMP.dom.frag;
+  var C = PMP.Coach;
+  var DOW = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var picks = { day: null, ids: [] };
+  var seenDone = { day: null, ids: null };
+
+  function line(id, c) { return C.line(id, c); }
+  function sod(t) { return PMP.time.startOfDay(t); }
+
+  function repaint() {
+    if (PMP.Router.current && PMP.Router.current.name !== "today") return;
+    var host = document.getElementById("view");
+    if (!host) return;
+    host.innerHTML = "";
+    view(host);
+  }
+
+  function mins(n) {
+    n = Math.round(n);
+    if (n < 60) return n + " min";
+    var h = Math.floor(n / 60), m = n % 60;
+    return m ? h + "h " + m + "m" : h + "h";
+  }
+
+  /* ── 10.17.1  STARTING A STEP ────────────────────────────────────────────
+     ui.coachRun tells the module's summary that the person came from
+     Today, so its strip can offer the next step. Session-only. */
+  function startStep(s) {
+    PMP.Store.commit(["ui"], function (st) {
+      st.ui.coachRun = { startedAt: Date.now(), fromToday: true, stepId: s.id || null };
+    }, { transient: true });
+    if (s.run) s.run();
+    else PMP.Router.navigate(s.route, s.params || null);
+  }
+
+  function runAction(m) {
+    var a = m.action;
+    if (!a) return;
+    C.acted(m.id);
+    if (a.run) { a.run(); repaint(); }
+    else PMP.Router.navigate(a.route, a.params || null);
+  }
+
+  /* ── 10.17.2  MESSAGES ──────────────────────────────────────────────── */
+  function todaysMessages(state) {
+    var today = sod(Date.now());
+    if (C.slice(state).muted) return [];
+    if (picks.day !== today) {
+      picks = { day: today, ids: C.messages(state, "today", 2).map(function (m) { return m.id; }) };
+      picks.ids.forEach(function (id) { C.markShown(id); });
+    }
+    return picks.ids.map(function (id) { return C.message(id, state); }).filter(Boolean);
+  }
+
+  function msgNode(m) {
+    return el("div", { class: "coach-msg", role: "note" }, [
+      icon("info"),
+      el("p", { text: m.text }),
+      el("span", { class: "coach-msg-a" }, [
+        m.action ? el("button", { class: "btn btn--sm", type: "button", onclick: function () { runAction(m); } }, m.action.label) : null,
+        el("button", {
+          class: "icon-btn", type: "button", "aria-label": "Dismiss this message",
+          onclick: function () {
+            C.dismiss(m.id);
+            picks.ids = picks.ids.filter(function (id) { return id !== m.id; });
+            PMP.UI.announce("Message dismissed");
+            repaint();
+          }
+        }, [icon("x")])
+      ])
+    ]);
+  }
+
+  /* ── 10.17.3  THE SESSION ───────────────────────────────────────────── */
+  function stepRow(s, primaryId) {
+    var meta = mins(s.minutes) + (s.soft ? " · estimate" : "") +
+      (s.done ? " · done" : s.frac > 0 ? " · " + Math.round(s.frac * 100) + "% so far" : "");
+    var act;
+    if (s.done) act = el("span", { class: "chip chip--correct" }, [icon("check"), "Done"]);
+    else if (s.manual) {
+      act = el("span", { class: "td-act" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () { startStep(s); } }, "Open"),
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () {
+          PMP.Planner.toggleManual(s.chipId);
+          repaint();
+        } }, [icon("clip"), "Mark done"])
+      ]);
+    } else {
+      act = el("button", {
+        class: "btn btn--sm", type: "button", "aria-label": "Start: " + s.label,
+        onclick: function () { startStep(s); }
+      }, "Start");
+    }
+    return el("li", { class: "td-step", dataset: { done: String(!!s.done), next: String(s.id === primaryId) } }, [
+      el("span", { class: "td-ic" }, [icon(s.done ? "check" : s.icon)]),
+      el("div", { class: "td-main" }, [
+        el("span", { class: "td-l", text: s.label }),
+        el("span", { class: "td-m", text: meta }),
+        s.why ? el("details", { class: "td-why" }, [
+          el("summary", { text: "Why this?" }),
+          el("p", { text: s.why })
+        ]) : null
+      ]),
+      act
+    ]);
+  }
+
+  /* A step that has ticked since Today was last drawn is announced once.
+     The work happens elsewhere, so this is the first chance to say so. */
+  function announceTicks(steps) {
+    var today = sod(Date.now());
+    var done = steps.filter(function (s) { return s.done; }).map(function (s) { return s.id; });
+    if (seenDone.day === today && seenDone.ids) {
+      var fresh = steps.filter(function (s) { return s.done && seenDone.ids.indexOf(s.id) < 0; });
+      if (fresh.length) {
+        setTimeout(function () {
+          PMP.UI.announce("Step done: " + fresh.map(function (s) { return s.label; }).join("; ") + ".");
+        }, 400);
+      }
+    }
+    seenDone = { day: today, ids: done };
+  }
+
+  function sessionCard(ses, cta) {
+    var card = el("section", { class: "card td-session", "aria-labelledby": "td-session-h" });
+    var head = ses.source === "fallback" ? line("today_fallback")
+      : ses.source === "reentry" ? line("today_reentry")
+      : ses.stage === "examweek" && PMP.Metrics.countdown(PMP.Store.state)
+        ? line("today_examweek", { days: PMP.Metrics.countdown(PMP.Store.state).days }) : null;
+    card.appendChild(el("span", { class: "eyebrow", text: "Session" }));
+    card.appendChild(el("h2", { id: "td-session-h", text: ses.rest && !ses.steps.length ? "Rest day"
+      : ses.allDone ? "Done for today" : ses.steps.length ? PMP.fmt.plural(ses.steps.length, "step") + ", about " + mins(ses.plannedMins) : "Nothing scheduled" }));
+    if (head) card.appendChild(el("p", { text: head }));
+
+    if (ses.steps.length) {
+      var pct = ses.plannedMins ? Math.round(ses.doneMins / ses.plannedMins * 100) : 0;
+      card.appendChild(el("div", { class: "td-meter" }, [
+        el("div", {
+          class: "progress", role: "progressbar", "aria-label": "Today's session",
+          "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(pct)
+        }, [el("i", { style: "width:" + pct + "%" })]),
+        el("span", { class: "td-m", text: mins(ses.doneMins) + " of " + mins(ses.plannedMins) })
+      ]));
+      card.appendChild(el("ol", { class: "td-steps" }, ses.steps.map(function (s) {
+        return stepRow(s, ses.next && ses.next.id);
+      })));
+    }
+
+    if (ses.allDone || ses.rest || (!ses.steps.length && ses.extra)) {
+      card.appendChild(el("p", { class: "td-done", text: ses.extra
+        ? (ses.rest && !ses.allDone ? line("today_rest") : line("today_done")) : line("today_done_none") }));
+      if (ses.extra) card.appendChild(extraRow(ses.extra, cta === "extra"));
+    }
+
+    if (cta === "next") {
+      card.appendChild(el("div", { class: "td-cta" }, [
+        el("button", {
+          class: "btn btn--primary btn--block", type: "button",
+          onclick: function () { startStep(ses.next); }
+        }, [icon(ses.next.icon), "Start next step"])
+      ]));
+    }
+    return card;
+  }
+
+  function extraRow(x, primary) {
+    return el("div", { class: "td-extra" }, [
+      el("span", { class: "td-ic" }, [icon(x.icon || "target")]),
+      el("div", { class: "td-main" }, [
+        el("span", { class: "td-l", text: x.label }),
+        el("span", { class: "td-m", text: mins(x.minutes) + (x.soft ? " · estimate" : "") + " · optional" }),
+        x.why ? el("details", { class: "td-why" }, [el("summary", { text: "Why this?" }), el("p", { text: x.why })]) : null
+      ]),
+      el("button", {
+        class: "btn btn--sm" + (primary ? " btn--primary" : ""), type: "button",
+        onclick: function () { startStep(x); }
+      }, "Start")
+    ]);
+  }
+
+  /* ── 10.17.4  INTAKE ─────────────────────────────────────────────────────
+     Five short screens in the shared sheet, each skippable. Exam date and
+     hours go where they already live (settings.examDate, planner.inputs,
+     through the planner's own save); the rest is the coach profile. Run
+     again from Settings, Skip means Cancel and nothing is written. */
+  function choiceGroup(name, legend, opts, value) {
+    var inputs = [];
+    var fs = el("fieldset", { class: "td-choice" }, [el("legend", { text: legend })]);
+    opts.forEach(function (o, i) {
+      var id = "ik-" + name + "-" + i;
+      var input = el("input", { type: "radio", name: "ik-" + name, id: id, value: o[0], checked: o[0] === value });
+      inputs.push(input);
+      fs.appendChild(el("label", { for: id, class: "td-opt" }, [input, el("span", { text: o[1] })]));
+    });
+    return { node: fs, value: function () {
+      var hit = inputs.filter(function (x) { return x.checked; })[0];
+      return hit ? hit.value : value;
+    } };
+  }
+
+  function numField(id, label, value) {
+    var input = el("input", { class: "input", id: id, type: "number", min: "0", max: "600", step: "15", value: String(value) });
+    return { node: el("label", { class: "field", for: id }, [el("span", { class: "lbl", text: label }), input]),
+             value: function () { return Math.max(0, parseInt(input.value, 10) || 0); } };
+  }
+
+  function futureDate(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || "");
+    if (!m) return false;
+    return new Date(+m[1], +m[2] - 1, +m[3]).getTime() > sod(Date.now());
+  }
+
+  function intake(opts) {
+    opts = opts || {};
+    var state = PMP.Store.state;
+    var prof = C.slice(state).profile || {};
+    var pi = (state.planner && state.planner.inputs) || {};
+    var a = {
+      booked: "booked",
+      date: opts.clearDate ? "" : (state.settings.examDate ? String(state.settings.examDate).slice(0, 10) : ""),
+      weekdayMin: pi.weekdayMin || 60, weekendMin: pi.weekendMin || 150,
+      experience: prof.experience || "some", agile: prof.agile || "some",
+      when: prof.when || "evening", why: prof.why || ""
+    };
+    var LEVELS = [["new", "New to it"], ["some", "Some"], ["lots", "A lot"]];
+
+    var screens = [
+      function (err) {
+        var booked = choiceGroup("booked", "Is it booked?", [["booked", "Booked"], ["target", "Not booked yet: I'm aiming for"]], a.booked);
+        var date = el("input", { class: "input", id: "ik-date", type: "date", value: a.date });
+        return {
+          title: "Exam date",
+          body: [el("p", { text: line("intake_date") }), booked.node,
+                 el("label", { class: "field", for: "ik-date" }, [el("span", { class: "lbl", text: "Date" }), date]),
+                 err ? el("p", { class: "td-err", role: "alert", text: err }) : null],
+          read: function () { a.booked = booked.value(); a.date = date.value; },
+          check: function () { return futureDate(a.date) ? null : line("intake_date_err"); }
+        };
+      },
+      function () {
+        var wd = numField("ik-wd", "Minutes on a weekday", a.weekdayMin);
+        var we = numField("ik-we", "Minutes on a weekend day", a.weekendMin);
+        return {
+          title: "Your time",
+          body: [el("p", { text: line("intake_time") }), wd.node, we.node],
+          read: function () { a.weekdayMin = wd.value(); a.weekendMin = we.value(); }
+        };
+      },
+      function () {
+        var ex = choiceGroup("exp", "Managing projects", LEVELS, a.experience);
+        var ag = choiceGroup("agile", "Agile and hybrid work", LEVELS, a.agile);
+        return {
+          title: "Background",
+          body: [el("p", { text: line("intake_background") }), ex.node, ag.node],
+          read: function () { a.experience = ex.value(); a.agile = ag.value(); }
+        };
+      },
+      function () {
+        var wh = choiceGroup("when", "Usually", [["morning", "Mornings"], ["midday", "Middle of the day"], ["evening", "Evenings"], ["varies", "It varies"]], a.when);
+        var why = el("input", { class: "input", id: "ik-why", type: "text", maxlength: "280", value: a.why });
+        return {
+          title: "When you'll study",
+          body: [el("p", { text: line("intake_when") }), wh.node,
+                 el("label", { class: "field", for: "ik-why" }, [el("span", { class: "lbl", text: "Why you're doing this, optional" }), why])],
+          read: function () { a.when = wh.value(); a.why = why.value.trim(); }
+        };
+      },
+      function () {
+        var first = PMP.Learn && PMP.Learn.path()[0];
+        return {
+          title: "Start",
+          body: [el("p", { text: line("intake_start") })],
+          read: function () {},
+          last: true, first: first
+        };
+      }
+    ];
+
+    function show(i, err) {
+      var scr = screens[i](err);
+      var actions = [];
+      if (i > 0) actions.push({ id: "back", label: "Back" });
+      actions.push({ id: "skip", label: opts.redo ? "Cancel" : "Skip" });
+      if (scr.last) {
+        if (scr.first) actions.push({ id: "lesson", label: "Lesson " + scr.first.id + " first" });
+        actions.push({ id: "diag", label: "Diagnostic now, about 50 min", primary: true });
+      } else {
+        actions.push({ id: "next", label: "Next", primary: true });
+      }
+      PMP.UI.sheet({
+        title: line("intake_head") + " · " + (i + 1) + " of " + screens.length + ": " + scr.title,
+        body: frag([i === 0 ? el("p", { class: "hint", text: line("intake_intro") }) : null].concat(scr.body)),
+        actions: actions
+      }).then(function (choice) {
+        scr.read();
+        if (choice === "back") return show(i - 1);
+        if (choice === "next") {
+          var bad = scr.check ? scr.check() : null;
+          return bad ? show(i, bad) : show(i + 1);
+        }
+        if (choice === "diag" || choice === "lesson") return finish(choice, scr.first);
+        return skip();
+      });
+    }
+
+    function skip() {
+      if (opts.redo) { repaint(); return; }
+      C.setProfile(a);
+      if (futureDate(a.date)) PMP.Store.commit(["settings"], function (s) { s.settings.examDate = a.date; });
+      repaint();
+    }
+
+    function finish(choice, firstLesson) {
+      C.setProfile(a);
+      if (futureDate(a.date)) {
+        var inputs = { examDate: a.date, weekdayMin: a.weekdayMin, weekendMin: a.weekendMin };
+        var plan = PMP.Planner.build(inputs, PMP.Store.state);
+        if (plan.error) PMP.UI.toast(plan.error, "warn");
+        else PMP.Planner.save(plan, inputs);
+      }
+      if (choice === "diag") {
+        startStep({ id: "intake:diagnostic", run: function () { PMP.Planner.startDiagnostic(); } });
+      } else if (firstLesson) {
+        startStep({ id: "intake:lesson", route: "learn", params: { lesson: firstLesson.id } });
+      } else repaint();
+    }
+
+    show(0);
+  }
+
+  /* ── 10.17.5  THE VIEW ───────────────────────────────────────────────── */
+  function header(state, st) {
+    var cd = PMP.Metrics.countdown(state);
+    var title = st === "intake" ? line("intake_head")
+      : st === "examday" ? "Exam day"
+      : st === "after" ? "After the exam"
+      : st === "examweek" ? "Exam week"
+      : st === "reentry" ? "Welcome back"
+      : "Today's session";
+    return el("div", { class: "view-hd td-hd" }, [
+      el("span", { class: "eyebrow", text: "Today · " + DOW[new Date().getDay()] }),
+      el("h2", { text: title }),
+      cd && !cd.past && cd.days > 0
+        ? el("span", { class: "chip td-count", text: PMP.fmt.plural(cd.days, "day") + " to go" }) : null
+    ]);
+  }
+
+  function footer(primary) {
+    return el("div", { class: "filter-bar td-foot" }, [
+      el("a", { class: "btn" + (primary ? " btn--primary" : " btn--sm"), href: "#/dashboard" }, [icon("gauge"), "See your progress"]),
+      el("a", { class: "btn btn--sm", href: "#/planner" }, [icon("calendar"), "Open the plan"])
+    ]);
+  }
+
+  function intakeCard() {
+    return el("section", { class: "card", "aria-labelledby": "td-intake-h" }, [
+      el("span", { class: "eyebrow", text: "First, a few questions" }),
+      el("h2", { id: "td-intake-h", text: line("intake_head") }),
+      el("p", { text: line("intake_intro") }),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--primary", type: "button", onclick: function () { intake(); } }, [icon("today"), "Set up"]),
+        el("span", { class: "spacer" }),
+        el("button", { class: "btn btn--sm btn--ghost", type: "button", onclick: function () {
+          C.setProfile({});
+          repaint();
+        } }, "Skip for now")
+      ])
+    ]);
+  }
+
+  function view(host) {
+    var state = PMP.Store.state;
+    /* Arriving on Today ends whatever run was started from here. */
+    if (state.ui.coachRun) PMP.Store.commit(["ui"], function (s) { s.ui.coachRun = null; }, { transient: true });
+    var st = C.stage(state);
+    host.appendChild(header(state, st));
+
+    if (st === "intake") {
+      host.appendChild(intakeCard());
+      host.appendChild(footer(false));
+      return;
+    }
+
+    var msgs = todaysMessages(state);
+    if (msgs.length) host.appendChild(el("div", { class: "td-msgs" }, msgs.map(msgNode)));
+
+    var ses = C.session(state);
+    announceTicks(ses.steps);
+    var cta = ses.next ? "next" : ses.extra ? "extra" : "footer";
+    host.appendChild(sessionCard(ses, cta));
+    host.appendChild(footer(cta === "footer"));
+  }
+
+  PMP.Router.register("today", { title: "Today", render: view });
+
+  /* ── 10.17.6  SETTINGS ───────────────────────────────────────────────── */
+  function settingsCard(state) {
+    var sl = C.slice(state);
+    function onOff(id, value) {
+      var sel = el("select", { class: "select", id: id });
+      sel.appendChild(el("option", { value: "on", text: "On", selected: !!value }));
+      sel.appendChild(el("option", { value: "off", text: "Off", selected: !value }));
+      return sel;
+    }
+    var msgs = onOff("set-coach-msgs", !sl.muted);
+    on(msgs, "change", function () {
+      C.setPref("muted", msgs.value !== "on");
+      PMP.UI.toast(msgs.value === "on" ? "Coach messages on." : "Coach messages off. Today still shows your session.", "ok");
+    });
+    var hints = onOff("set-coach-hints", sl.hints);
+    on(hints, "change", function () {
+      C.setPref("hints", hints.value === "on");
+      PMP.UI.toast(hints.value === "on" ? "Hints on in practice drills." : "Hints off.", "ok");
+    });
+    return el("section", { class: "card", "aria-labelledby": "set-coach" }, [
+      el("span", { class: "eyebrow", text: "Coach" }),
+      el("h2", { id: "set-coach", text: "How the coach works with you" }),
+      el("div", { class: "filters", style: "margin-top:var(--sp-4)" }, [
+        el("label", { class: "field", for: "set-coach-msgs" }, [el("span", { class: "lbl", text: "Show coach messages" }), msgs]),
+        el("label", { class: "field", for: "set-coach-hints" }, [el("span", { class: "lbl", text: "Show hints in practice" }), hints])
+      ]),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () { intake({ redo: true }); } },
+          [icon("today"), "Redo intake"]),
+        el("span", { class: "spacer" }),
+        el("span", { class: "hint", text: "Off hides the messages and strips. Today still shows the session." })
+      ])
+    ]);
+  }
+
+  return { view: view, intake: intake, settingsCard: settingsCard, startStep: startStep };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
@@ -34276,10 +34855,20 @@ PMP.Shell = (function () {
     return card;
   }
 
+  /* §10.17 has landed and registered "today" already. Kept so that deleting
+     the coach leaves a described placeholder rather than a dead home page. */
+  register("today", {
+    title: "Today",
+    render: stub("Today", "The coach's home: one session for today, built from your plan.", [
+      ["§10.16", "Stage, session and messages, derived from the plan, lessons, journal and cards"],
+      ["§10.17", "Intake, the session list with one Start button, and the weekly review"]
+    ])
+  });
+
   /* §10.01 has landed and registered "dashboard" already, so register() leaves
      this alone. Kept as the description of what the section owes. */
   register("dashboard", {
-    title: "Dashboard",
+    title: "Progress",
     render: stub("Dashboard", "Your readiness score, domain mastery, streak and next best action will open here.", [
       ["\u00A73.1", "Readiness score 0\u2013100 with the five-component breakdown on click"],
       ["\u00A73.1", "Domain mastery bars at the 33 / 41 / 26 weighting, and the predictive versus adaptive split"],
