@@ -96,6 +96,8 @@ module.exports = [
       var page = await h.open("planned_behind");
       var r = await page.evaluate(function () {
         var DAY = 86400000, out = {};
+        /* Today is the home route and has already shown its picks. */
+        PMP.Store.commit(["coach"], function (s) { s.coach.shown = {}; s.coach.dismissStreak = {}; });
         var all = PMP.Coach.messages(PMP.Store.state, "today", 99);
         out.all = all.map(function (m) { return m.id; });
         out.two = PMP.Coach.messages(PMP.Store.state, "today", 2).length;
@@ -177,7 +179,7 @@ module.exports = [
     fn: async function () {
       var src = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
       var start = src.indexOf("/* ── 10.16  COACH");
-      var end = src.indexOf("/* ═══ §11  CHARTS");
+      var end = src.indexOf("/* ── 10.17  TODAY");
       var body = src.slice(start, end);
       assert.ok(start > 0 && end > start);
       assert.ok(body.indexOf("PMP.Storage") < 0, "touches PMP.Storage");
