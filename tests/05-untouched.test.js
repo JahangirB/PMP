@@ -2,7 +2,9 @@
 /* Routes the coach does not touch render pixel-for-pixel as they did before
    the coach landed. The reference is index.html at the Phase 0b commit
    (UI fixes in, no coach), written to a temporary file; only #view is
-   compared, because the rail gained Today and Progress on purpose. */
+   compared, because the rail gained Today and Progress on purpose. On
+   #/library only the tab panel is compared: the tab strip gained
+   Abbreviations on purpose, and 07-abbreviations checks the strip itself. */
 var assert = require("assert");
 var fs = require("fs");
 var os = require("os");
@@ -25,8 +27,9 @@ module.exports = [
         for (var r of ROUTES) {
           await lib.go(a, "#/" + r);
           await lib.go(b, "#/" + r);
-          var pa = await a.locator("#view").screenshot();
-          var pb = await b.locator("#view").screenshot();
+          var sel = r === "library" ? '#view [role="tabpanel"]' : "#view";
+          var pa = await a.locator(sel).screenshot();
+          var pb = await b.locator(sel).screenshot();
           if (!pa.equals(pb)) {
             diff.push(fx + " #/" + r);
             fs.mkdirSync(path.join(__dirname, "screenshots", "untouched"), { recursive: true });
