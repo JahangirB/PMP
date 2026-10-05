@@ -129,7 +129,7 @@ PMP.STORE_CFG = Object.freeze({
   PRUNE_KEEP_ATTEMPTS: 1000,
   PERSISTED: Object.freeze([
     "settings", "attempts", "srs", "exams", "notes", "flags", "journal", "planner",
-    "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons"
+    "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons", "coach"
   ])
 });
 
@@ -457,6 +457,7 @@ svg { display: block; }
 .nav-grp { margin-top: var(--sp-4); }
 .nav-grp:first-child { margin-top: 0; }
 .nav-grp > .eyebrow { padding: var(--sp-2) var(--sp-3) var(--sp-1); display: block; }
+.nav-grp--foot { padding-top: var(--sp-3); border-top: var(--border); }
 .nav-i {
   display: flex; align-items: center; gap: var(--sp-3);
   width: 100%; min-height: var(--hit-min);
@@ -536,6 +537,12 @@ svg { display: block; }
   max-width: 1120px; width: 100%; margin: 0 auto;
   padding-bottom: max(var(--sp-8), env(safe-area-inset-bottom));
 }
+/* §08.3 focuses the view on every route change so keyboard and screen-reader
+   users land in the new content. That focus is programmatic and stays; the
+   ring is suppressed here only, because round the whole column it reads as
+   two stray full-height lines rather than as a focus indicator. Controls
+   inside the view keep theirs. */
+#view:focus-visible { box-shadow: none; }
 .view-hd { margin-bottom: var(--sp-5); }
 .view-hd h2 { font-size: var(--t-xl); font-weight: var(--w-semi); line-height: var(--lh-tight); margin-top: var(--sp-1); }
 .view-hd p { margin-top: var(--sp-2); color: var(--fg-muted); font-size: var(--t-md); line-height: var(--lh-body); max-width: var(--measure); }
@@ -680,8 +687,10 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .mode-opt[data-sel="true"] { border-color: var(--c-signal); background: var(--s-wash); }
 .mode-opt .i { width: var(--icon-lg); height: var(--icon-lg); flex: 0 0 var(--icon-lg); color: var(--fg-faint); margin-top: var(--sp-0); }
 .mode-opt[data-sel="true"] .i { color: var(--c-signal); }
-.mode-opt .t { font-size: var(--t-sm); font-weight: var(--w-semi); }
-.mode-opt .d { margin-top: var(--sp-1); font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-body); }
+/* Both spans are inline by default, so .d's margin did nothing and the title
+   ran straight into the description. Block puts them on their own lines. */
+.mode-opt .t { display: block; font-size: var(--t-sm); font-weight: var(--w-semi); }
+.mode-opt .d { display: block; margin-top: var(--sp-1); font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-body); }
 
 /* Drill header ── progress, clock, pace */
 .drill-hd { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-bottom: var(--sp-4); }
@@ -2019,6 +2028,91 @@ a.btn { text-decoration: none; }
   .ln-pager .btn { width: 100%; }
 }
 
+/* ── 03.21  TODAY AND THE COACH ─────────────────────────────────────────────
+   §10.17. Existing tokens only. A step row is the planner's chip given room
+   to explain itself: tick, label and minutes, a "Why this?" disclosure, and
+   its own Start. The one primary button sits under the list and, on a
+   phone, stays in reach at the bottom of the screen without covering the
+   last step once the list has been scrolled to its end. */
+.td-hd { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--sp-3); }
+.td-hd .eyebrow { flex: 1 0 100%; }
+.td-count { font-family: var(--font-mono); }
+.td-msgs { display: grid; gap: var(--sp-2); margin-bottom: var(--sp-4); }
+.coach-msg {
+  display: flex; align-items: flex-start; gap: var(--sp-3); flex-wrap: wrap;
+  padding: var(--sp-3) var(--sp-4); border: var(--border); border-left: 3px solid var(--c-signal);
+  border-radius: var(--r-2); background: var(--s-wash);
+}
+.coach-msg > .i { width: var(--icon); height: var(--icon); flex: 0 0 var(--icon); color: var(--c-signal); margin-top: 2px; }
+.coach-msg > p { flex: 1 1 220px; font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); }
+.coach-msg-a { display: flex; align-items: center; gap: var(--sp-2); margin-left: auto; }
+.td-meter { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-top: var(--sp-4); }
+.td-steps { display: grid; gap: var(--sp-2); margin-top: var(--sp-4); }
+.td-step, .td-extra {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--sp-3); align-items: start;
+  padding: var(--sp-3) var(--sp-4); border: var(--border-hi); border-radius: var(--r-2); background: var(--s-raise);
+}
+.td-extra { margin-top: var(--sp-3); border-style: dashed; }
+.td-step[data-next="true"] { border-color: var(--c-signal); background: var(--s-wash); }
+.td-step[data-done="true"] { background: var(--st-correct-bg); border-color: var(--st-correct-fg); }
+.td-step[data-done="true"] .td-l { text-decoration: line-through; text-decoration-thickness: 1px; }
+.td-ic .i { width: var(--icon-lg); height: var(--icon-lg); color: var(--fg-faint); margin-top: 2px; }
+.td-step[data-next="true"] .td-ic .i { color: var(--c-signal); }
+.td-step[data-done="true"] .td-ic .i { color: var(--st-correct-fg); }
+.td-main { min-width: 0; display: grid; gap: var(--sp-1); }
+.td-l { font-size: var(--t-sm); font-weight: var(--w-semi); }
+.td-m { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--fg-muted); }
+.td-why > summary { cursor: pointer; font-size: var(--t-xs); color: var(--c-signal); width: max-content; }
+.td-why > summary:focus-visible { box-shadow: var(--ring); border-radius: var(--r-1); }
+.td-why > p { margin-top: var(--sp-1); font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-body); max-width: var(--measure); }
+.td-act { display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: flex-end; }
+.td-done { margin-top: var(--sp-4); font-size: var(--t-sm); }
+.td-cta { margin-top: var(--sp-5); }
+.td-foot { border-top: 0; }
+.td-weekly { margin-bottom: var(--sp-4); }
+.td-weekly + .td-msgs, .td-weekly + .card { margin-top: 0; }
+.td-why-said { font-size: var(--t-sm); }
+.td-choice { border: 0; padding: 0; margin: var(--sp-4) 0 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.td-choice > legend { padding: 0; margin-bottom: var(--sp-2); font-size: var(--t-sm); font-weight: var(--w-semi); }
+.td-opt {
+  display: inline-flex; align-items: center; gap: var(--sp-2); min-height: var(--hit-min);
+  padding: var(--sp-1) var(--sp-3); border: var(--border-hi); border-radius: var(--r-full); cursor: pointer; font-size: var(--t-sm);
+}
+.td-opt:focus-within { box-shadow: var(--ring); }
+.td-err { color: var(--c-danger); font-size: var(--t-sm); margin-top: var(--sp-2); }
+
+/* The strip: one line, an optional action, a way to hide it. */
+.coach-strip {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--sp-3); align-items: start;
+  margin-bottom: var(--sp-4); padding: var(--sp-3) var(--sp-4);
+  border: var(--border); border-left: 3px solid var(--c-signal); border-radius: var(--r-2); background: var(--s-wash);
+}
+.ln-part .coach-strip { margin: var(--sp-4) 0 0; }
+.coach-strip > .i { width: var(--icon); height: var(--icon); color: var(--c-signal); margin-top: 2px; }
+.coach-strip-b { display: grid; gap: var(--sp-2); font-size: var(--t-sm); line-height: var(--lh-body); }
+.coach-strip-b p { max-width: var(--measure); }
+.coach-strip-m { color: var(--fg-muted); font-size: var(--t-xs); }
+.coach-strip-a { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.coach-debrief { display: grid; gap: var(--sp-1); }
+
+/* Hint ladder (§10.02.6a). A struck option stays selectable: the hint
+   says it is wrong, it does not take the choice away. */
+.q-hints { margin-top: var(--sp-3); display: grid; gap: var(--sp-2); justify-items: start; }
+.q-hints-list { display: grid; gap: var(--sp-2); width: 100%; }
+.q-hint { padding: var(--sp-3) var(--sp-4); border-left: 3px solid var(--c-signal); background: var(--s-wash); border-radius: var(--r-1); }
+.q-hint p { font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); margin-top: var(--sp-1); }
+.q-hint .q-hint-t { font-weight: var(--w-semi); }
+.opt[data-struck="true"] .txt > span:first-child { text-decoration: line-through; text-decoration-thickness: 1px; color: var(--fg-muted); }
+@media (max-width: 600px) {
+  .td-step, .td-extra { padding: var(--sp-3); }
+  .td-cta {
+    position: sticky; bottom: 0; z-index: 5;
+    margin: var(--sp-4) calc(-1 * var(--sp-5)) calc(-1 * var(--sp-5));
+    padding: var(--sp-3) var(--sp-5) calc(var(--sp-3) + env(safe-area-inset-bottom));
+    background: var(--s-raise); border-top: var(--border);
+  }
+}
+
 /* ── 03.8  RESPONSIVE ───────────────────────────────────────────────────── */
 @media (min-width: 600px) {
   .view { padding-left: var(--sp-6); padding-right: var(--sp-6); }
@@ -2112,6 +2206,7 @@ a.btn { text-decoration: none; }
 
 <!-- 04.3  Icon sprite. Inline SVG only — no icon font, no external file. -->
 <svg class="sr-only" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-today" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18.5h18M6.5 18.5a5.5 5.5 0 0 1 11 0M12 5.5v3M5.4 9.4l1.9 1.9M18.6 9.4l-1.9 1.9"/></symbol>
 <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 18a9 9 0 1 1 17 0"/><path d="M12 18l4.2-5.6"/><circle cx="12" cy="18" r="1.6"/></symbol>
 <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
 <symbol id="i-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 2M9.5 2.5h5"/></symbol>
@@ -2153,13 +2248,24 @@ a.btn { text-decoration: none; }
 
     <div class="nav" id="nav">
       <div class="nav-grp">
-        <span class="eyebrow">Study</span>
+        <a class="nav-i" href="#/today"     data-route="today"><svg class="i"><use href="#i-today"></use></svg>Today</a>
+      </div>
+
+      <div class="nav-grp">
+        <span class="eyebrow">Learn</span>
         <a class="nav-i" href="#/learn"     data-route="learn"><svg class="i"><use href="#i-learn"></use></svg>Learn</a>
-        <a class="nav-i" href="#/dashboard" data-route="dashboard"><svg class="i"><use href="#i-gauge"></use></svg>Dashboard</a>
         <a class="nav-i" href="#/practice"  data-route="practice"><svg class="i"><use href="#i-target"></use></svg>Practice</a>
-        <a class="nav-i" href="#/exam"      data-route="exam"><svg class="i"><use href="#i-timer"></use></svg>Mock exam</a>
         <a class="nav-i" href="#/scenarios" data-route="scenarios"><svg class="i"><use href="#i-branch"></use></svg>Scenarios</a>
         <a class="nav-i" href="#/cards"     data-route="cards"><svg class="i"><use href="#i-cards"></use></svg>Flashcards<span class="badge num" id="due-badge">0</span></a>
+        <a class="nav-i" href="#/exam"      data-route="exam"><svg class="i"><use href="#i-timer"></use></svg>Mock exam</a>
+      </div>
+
+      <div class="nav-grp">
+        <span class="eyebrow">Progress</span>
+        <a class="nav-i" href="#/dashboard" data-route="dashboard"><svg class="i"><use href="#i-gauge"></use></svg>Progress</a>
+        <a class="nav-i" href="#/planner"   data-route="planner"><svg class="i"><use href="#i-calendar"></use></svg>Study plan</a>
+        <a class="nav-i" href="#/journal"   data-route="journal"><svg class="i"><use href="#i-journal"></use></svg>Mistake journal</a>
+        <a class="nav-i" href="#/analytics" data-route="analytics"><svg class="i"><use href="#i-chart"></use></svg>Analytics</a>
       </div>
 
       <div class="nav-grp">
@@ -2168,18 +2274,11 @@ a.btn { text-decoration: none; }
         <a class="nav-i" href="#/library"   data-route="library"><svg class="i"><use href="#i-book"></use></svg>Reference library</a>
       </div>
 
-      <div class="nav-grp">
-        <span class="eyebrow">Track</span>
-        <a class="nav-i" href="#/planner"   data-route="planner"><svg class="i"><use href="#i-calendar"></use></svg>Study planner</a>
-        <a class="nav-i" href="#/journal"   data-route="journal"><svg class="i"><use href="#i-journal"></use></svg>Mistake journal</a>
-        <a class="nav-i" href="#/analytics" data-route="analytics"><svg class="i"><use href="#i-chart"></use></svg>Analytics</a>
-      </div>
-
-      <div class="nav-grp">
-        <span class="eyebrow">Manage</span>
-        <a class="nav-i" href="#/data"      data-route="data"><svg class="i"><use href="#i-data"></use></svg>Backup and packs</a>
+      <!-- Housekeeping sits apart from study. The content audit is an
+           authoring tool, so it is reached from Settings and About. -->
+      <div class="nav-grp nav-grp--foot">
         <a class="nav-i" href="#/settings"  data-route="settings"><svg class="i"><use href="#i-settings"></use></svg>Settings and About</a>
-        <a class="nav-i" href="#/audit"     data-route="audit"><svg class="i"><use href="#i-audit"></use></svg>Content audit</a>
+        <a class="nav-i" href="#/data"      data-route="data"><svg class="i"><use href="#i-data"></use></svg>Backup and packs</a>
       </div>
     </div>
 
@@ -2202,7 +2301,7 @@ a.btn { text-decoration: none; }
               aria-label="Open navigation" aria-expanded="false" aria-controls="rail">
         <svg class="i" aria-hidden="true"><use href="#i-menu"></use></svg>
       </button>
-      <h1 id="view-title">Dashboard</h1>
+      <h1 id="view-title">Today</h1>
       <span class="spacer"></span>
       <span class="mode-tag" id="mode-tag" data-mode="probing" title="Where your progress is being stored">
         <span class="dot" aria-hidden="true"></span><span id="mode-text">Checking</span>
@@ -2311,6 +2410,7 @@ a.btn { text-decoration: none; }
         03.18 study planner — week grid, day column, self-ticking chips
         03.19 mistake journal — triage item, cause picker, cause ramp
         03.20 learn — lesson hub rows, reader parts, reading measure
+        03.21 today and the coach — step rows, messages, sticky start
         03.7  question engine — filters, options, hotspot, blanks, pace meter
         03.14 formula lab — sheet, calculators, network nodes, worked steps
         03.15 reference library — process matrix, ITTO panel, virtual list
@@ -2334,6 +2434,8 @@ a.btn { text-decoration: none; }
         05.7  REFERENCE + GLOSSARY — 49 processes, 12 principles,
               8 domains, agile, 14 tables, 364 terms · built
         05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS; pilot lesson P4
+        05.11 COACH MESSAGES — every coach sentence, authored: the pool the
+              coach picks from and the fixed lines it uses in place
 
    §06  STORAGE ADAPTER
         06.1  probe() — write/read/delete, catches throws AND silent no-ops
@@ -2383,6 +2485,9 @@ a.btn { text-decoration: none; }
         10.07 Reference library · built
               (10.07.6 is the glossary matcher: trigram + token prefix)
         10.15 Learn — lesson hub and reader · #/learn, #/learn?lesson=P4
+        10.16 Coach — stage, today's session, messages · derives, never renders
+        10.17 Today, intake and the coach's surfaces · #/today, the home page
+              (10.14.6 audits 05.11 against fixture contexts)
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
         11.1  accuracy trend  · 11.2  ECO heat map (low-sample cells greyed)
@@ -18096,6 +18201,247 @@ PMP.LESSONS = Object.freeze([
   }
 ]);
 
+/* ── 05.11  COACH MESSAGES ──────────────────────────────────────────────────
+   Every sentence the coach (§10.16, §10.17) ever says, authored here and
+   nowhere else, so §10.14 can check the lot and nothing is generated.
+
+   Two tables.
+
+   COACH_MESSAGES is the pool the coach chooses from. Each entry says when it
+   applies (`when`, read against the context §10.16 builds once per render),
+   what it says, an optional action, a priority and a cooldown. §10.16 drops
+   any message shown within its cooldown, doubles the cooldown of one that
+   has been dismissed three times running, and shows at most two on Today and
+   one in a strip. `stages` limits a message to the stages it makes sense in;
+   left out, it is normal days and the weekly review. `surfaces` limits it to
+   Today or to the strip; left out, it may appear on either.
+
+   COACH_LINES are the fixed sentences the coach uses in a known place: the
+   strip, the hint ladder, the debrief, the reasons behind each step, exam
+   day, the weekly review. Each carries a `sample` so the audit can render it
+   without a live state.
+
+   Voice: plain British English, second person, one sentence or two, never
+   over 160 characters. No exclamation marks, no emoji, no guilt, no pass
+   prediction, and nothing about streaks being lost. A projected figure says
+   that it is one. ─────────────────────────────────────────────────────── */
+PMP.COACH_MESSAGES = Object.freeze([
+  { id: "welcome_back", stages: ["reentry"], priority: 100, cooldownDays: 1,
+    when: function (c) { return c.stage === "reentry"; },
+    text: function () { return "Welcome back. Short session today: cards and ten mixed questions. Then we'll see if the plan needs rebuilding."; } },
+
+  { id: "taper", stages: ["examweek"], priority: 100, cooldownDays: 1,
+    when: function (c) { return c.stage === "examweek" && !!c.countdown; },
+    text: function (c) { return "Exam in " + PMP.fmt.plural(c.countdown.days, "day") + ". Nothing new now. Re-read your journal, skim the formula sheet, sleep."; },
+    action: { label: "Formula sheet", route: "formulas" } },
+
+  { id: "welcome_first", priority: 90, cooldownDays: 30,
+    when: function (c) { return !!c.plan && c.attempts === 0 && !!c.nextLesson; },
+    text: function (c) { return "Your plan starts today. First up is lesson " + c.nextLesson.id + ". Everything after that adjusts to how you do."; } },
+
+  { id: "behind_plan", stages: ["normal", "weekly", "reentry"], priority: 80, cooldownDays: 2,
+    when: function (c) { return !!c.plan && c.plan.behind; },
+    text: function (c) { return "You're " + c.plan.behindLabel + " behind the plan. Rebuilding beats catching up: the new plan targets what's still weak."; },
+    action: { label: "Rebuild the plan", run: function () { PMP.Planner.rebuild(); } } },
+
+  { id: "diagnostic_rebuild", priority: 78, cooldownDays: 2,
+    when: function (c) { return !!c.plan && c.diagnosticDone && !c.plan.diagnostic; },
+    text: function () { return "Your diagnostic is in. Rebuilding the plan lets it aim at the domains that came out lowest."; },
+    action: { label: "Rebuild the plan", run: function () { PMP.Planner.rebuild(); } } },
+
+  { id: "plan_offer", priority: 75, cooldownDays: 2,
+    when: function (c) { return !c.plan; },
+    text: function () { return "Today's list is a best guess, not a plan. Building one takes a minute and fits the work to your exam date."; },
+    action: { label: "Build a plan", route: "planner" } },
+
+  { id: "diagnostic_first", priority: 70, cooldownDays: 3,
+    when: function (c) { return !!c.plan && !c.diagnosticDone; },
+    text: function () { return "The plan is guessing where you're weak. A 25-question diagnostic, taken cold, lets it stop guessing."; },
+    action: { label: "Take the diagnostic", run: function () { PMP.Planner.startDiagnostic(); } } },
+
+  { id: "first_mock_due", priority: 65, cooldownDays: 5,
+    when: function (c) { return !!c.plan && c.mocks.n === 0 && !!c.plan.phase && c.plan.phase !== "build"; },
+    text: function () { return "Time for a first full mock. It's the only evidence you can hold accuracy for four hours. Block out a weekend morning."; },
+    action: { label: "Open the mock exam", route: "exam" } },
+
+  { id: "cause_misread", priority: 60, cooldownDays: 7,
+    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "misread"; },
+    text: function () { return "Most of your misses are reading, not knowledge. Find the qualifier (first, next, best, except) before looking at the options."; } },
+
+  { id: "cause_mindset", priority: 60, cooldownDays: 7,
+    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "mindset"; },
+    text: function () { return "Most misses are the right move at the wrong moment. Two scenario sets this week will help more than more questions."; },
+    action: { label: "Open scenarios", route: "scenarios" } },
+
+  { id: "cause_knowledge", priority: 60, cooldownDays: 7,
+    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "knowledge"; },
+    text: function () { return "Most misses are material you hadn't met. Lessons first, then the questions on them."; },
+    action: { label: "Open lessons", route: "learn" } },
+
+  { id: "retake_ready", priority: 58, cooldownDays: 2,
+    when: function (c) { return !!c.retake && !c.retake.done; },
+    text: function (c) { return "Lesson " + c.retake.id + "'s practice set scored " + c.retake.pct + ". It's been " + PMP.fmt.plural(c.retake.days, "day") + ", so a retake now tests whether it stuck."; } },
+
+  { id: "pace_fast", priority: 55, cooldownDays: 7,
+    when: function (c) { return c.pace.ready && c.pace.fast; },
+    text: function (c) { return "Your median is " + c.pace.median + "s. Fast answers are missing marks, and you have the time to read the stem twice."; } },
+
+  { id: "pace_slow", priority: 55, cooldownDays: 7,
+    when: function (c) { return c.pace.ready && c.pace.slow; },
+    text: function (c) { return "Your median is " + c.pace.median + "s against " + c.pace.target + "s on the day. A timed drill twice a week closes it slowly, and that's normal."; } },
+
+  /* Strip only: on Today the session already lists the cards as a step. */
+  { id: "cards_due", surfaces: ["strip"], priority: 50, cooldownDays: 2,
+    when: function (c) { return c.cards.today >= 20; },
+    text: function (c) { return c.cards.today + " cards are waiting. Ten minutes now saves twenty later in the week."; },
+    action: { label: "Review cards", route: "cards" } },
+
+  { id: "coverage_gap", priority: 50, cooldownDays: 5,
+    when: function (c) { return c.attempts >= 50 && c.coverage.untouched > 0 && c.topAction === "coverage"; },
+    text: function (c) {
+      var n = c.coverage.untouched;
+      return (n === 1 ? "One task hasn't" : n + " tasks haven't") + " been touched yet. Coverage is worth more readiness per minute than anything else right now.";
+    },
+    action: { label: "Practise them", route: "practice" } },
+
+  /* Strip only, for the same reason: Today has a triage step at this count. */
+  { id: "journal_waiting", surfaces: ["strip"], priority: 45, cooldownDays: 3,
+    when: function (c) { return c.journal.untagged >= 5; },
+    text: function (c) { return c.journal.untagged + " misses haven't got a cause yet. Tagging them is the cheapest insight on the board."; },
+    action: { label: "Open the journal", route: "journal" } },
+
+  { id: "mock_stale", priority: 45, cooldownDays: 10,
+    when: function (c) { return c.mocks.lastDays !== null && c.mocks.lastDays > PMP.READINESS.MOCK_STALE_AFTER_DAYS; },
+    text: function (c) { return "Your last mock was " + c.mocks.lastDays + " days ago, so it's counting for less. Another one will show where you are now."; },
+    action: { label: "Open the mock exam", route: "exam" } },
+
+  { id: "leech", priority: 40, cooldownDays: 7,
+    when: function (c) { return c.cards.leech >= 1; },
+    text: function (c) {
+      var one = c.cards.leech === 1;
+      return (one ? "One card keeps" : c.cards.leech + " cards keep") + " slipping. Decide what to do with " + (one ? "it" : "them") + ": suspend, reset, or study the lesson behind " + (one ? "it." : "them.");
+    },
+    action: { label: "Open flashcards", route: "cards" } },
+
+  { id: "provisional", priority: 30, cooldownDays: 7,
+    when: function (c) { return c.readiness.provisional && c.attempts > 0; },
+    text: function (c) { return "Your readiness score is provisional for now: " + c.readiness.gatesText + ". It firms up on its own as you work."; } },
+
+  /* Background answers change copy only. Someone new to agile hears about
+     the delivery lens more often; the plan itself is unchanged. */
+  { id: "agile_lens", priority: 25, cooldownDays: 7,
+    when: function (c) { return !!c.profile && c.profile.agile === "new"; },
+    text: function () { return "New to agile? Check the delivery approach in each stem first. Adaptive teams act differently from predictive ones."; } },
+
+  { id: "focus_reminder", priority: 20, cooldownDays: 2,
+    when: function (c) { return !!c.focusLabel; },
+    text: function (c) { return "This week's focus: " + c.focusLabel + ". Today's extra leans that way."; } }
+]);
+
+PMP.COACH_LINES = Object.freeze({
+  /* Intake, five short screens */
+  intake_head:      { text: function () { return "Set up your coach"; } },
+  intake_intro:     { text: function () { return "Five short questions, about three minutes. Skip any of them; you can redo this from Settings."; } },
+  intake_date:      { text: function () { return "When are you sitting the exam? A target date works if it isn't booked yet."; } },
+  intake_time:      { text: function () { return "How long can you study? An honest figure beats an ambitious one."; } },
+  intake_background:{ text: function () { return "How much have you done before? This changes how the coach talks to you, not the plan."; } },
+  intake_when:      { text: function () { return "When will you usually study? Deciding now makes it likelier to happen."; } },
+  intake_start:     { text: function () { return "Last step. A 25-question diagnostic, taken cold, lets the plan aim at where you're actually weak."; } },
+  intake_date_err:  { text: function () { return "Pick a date after today, booked or target. You can change it later."; } },
+
+  /* Today */
+  today_fallback:   { text: function () { return "No plan is behind this list yet, so it's built from what would help most right now."; } },
+  today_reentry:    { text: function () { return "A short session to pick the thread back up."; } },
+  today_examweek:   { sample: { days: 4 }, text: function (c) { return "Exam in " + PMP.fmt.plural(c.days, "day") + ". Light work only: nothing new goes in now."; } },
+  today_done:       { text: function () { return "That's today's session done. If you want more, this is the most useful extra."; } },
+  today_done_none:  { text: function () { return "That's today's session done. Nothing else is pressing."; } },
+  today_rest:       { text: function () { return "Rest day on the plan. Nothing is due. If you want something, this is the most useful extra."; } },
+
+  /* Why each step is there. One per kind of step. */
+  why_cards:        { text: function () { return "Reviews first. They hold up the accuracy your score is built on, and they make a good warm-up."; } },
+  why_lesson:       { text: function () { return "Teaching comes before the questions on it, so lessons take the front of the day."; } },
+  why_lesson_next:  { text: function () { return "The next lesson on your path, so the questions that follow have something to stand on."; } },
+  why_task:         { text: function () { return "The plan gives every task a block until it has enough answers to count, then adds depth where you were weakest."; } },
+  why_domain:       { text: function () { return "Your diagnostic put this domain lowest, so spare time goes there."; } },
+  why_mixed:        { text: function () { return "Mixed questions keep every domain warm once coverage is built."; } },
+  why_timed:        { text: function () { return "Exam conditions. This late in the plan, questions go under the clock."; } },
+  why_scenarios:    { text: function () { return "Ordering the right moves is what situational items test, and it's the last skill to come good."; } },
+  why_mock:         { text: function () { return "A full sitting is the only evidence you can hold accuracy for four hours."; } },
+  why_journal:      { text: function () { return "Knowing why you missed is what turns a sitting into a plan for the next week."; } },
+  why_read:         { text: function () { return "The one step this file can't see you do, so it takes a tick from you."; } },
+  why_retake:       { sample: { pct: "60%", days: 3 }, text: function (c) { return "Your last set here scored " + c.pct + ", " + PMP.fmt.plural(c.days, "day") + " ago. A retake now tests what stuck, not what you just read."; } },
+  why_triage:       { text: function () { return "Tagged a while after the miss, not at the moment, so the cause you pick is the honest one."; } },
+  why_reentry_cards:{ text: function () { return "The schedule has been waiting. Ten minutes clears the most overdue cards."; } },
+  why_reentry_qs:   { text: function () { return "Ten mixed questions show where things stand without asking much of you."; } },
+  why_light_qs:     { text: function () { return "Light mixed practice keeps you sharp without opening anything new."; } },
+  why_focus:        { sample: { focus: "Risk" }, text: function (c) { return "Your focus this week is " + c.focus + "."; } },
+
+  /* Steps the coach writes itself. Plan steps use the plan's own labels. */
+  step_retake:      { sample: { id: "P4" }, text: function (c) { return "Retake the lesson " + c.id + " practice set"; } },
+  step_triage:      { text: function () { return "Tag 5 misses in the journal"; } },
+  step_cards_short: { text: function () { return "Flashcards, ten minutes"; } },
+  step_mixed:       { sample: { n: 10 }, text: function (c) { return PMP.fmt.plural(c.n, "mixed question"); } },
+  step_lesson:      { sample: { id: "F1", title: "How the exam works" }, text: function (c) { return "Lesson " + c.id + ": " + c.title; } },
+  step_scenarios:   { sample: { n: 5 }, text: function (c) { return PMP.fmt.plural(c.n, "situational scenario"); } },
+  step_task:        { sample: { n: 10, task: "Risk" }, text: function (c) { return PMP.fmt.plural(c.n, "question") + " on " + c.task; } },
+
+  /* The strip at the top of a summary or the lesson reader */
+  strip_next:       { sample: { done: 2, total: 4, next: "20 questions on Risk" }, text: function (c) { return "Step " + c.done + " of " + c.total + " done. Next: " + c.next + "."; } },
+  strip_done:       { text: function () { return "That's today's session done. Anything more from here is a bonus."; } },
+  lesson_why_plan:  { text: function () { return "This lesson is on today's plan, ahead of the questions on the same task."; } },
+  lesson_why_path:  { text: function () { return "This is the next lesson on your path. Teaching comes before the questions that test it."; } },
+  lesson_why_retake:{ sample: { pct: "60%" }, text: function (c) { return "Your last practice set here scored " + c.pct + ". Re-read the parts behind the misses, then retake the set."; } },
+  after_checks:     { text: function () { return "Quick checks done. Run the practice set now, while the lesson is fresh."; } },
+
+  /* Hint ladder. None of these names the right answer. */
+  hint_lens:        { sample: { approach: "agile" }, text: function (c) { return "Read the stem through the " + c.approach + " lens. What would that kind of team usually do first?"; } },
+  hint_lens_none:   { text: function () { return "Read the stem for the role you hold and the stage the work is at. What comes first from there?"; } },
+  hint_principle:   { text: function () { return "The principle this turns on:"; } },
+  hint_eliminate:   { text: function () { return "One option you can rule out, and why:"; } },
+  hint_trap:        { text: function () { return "A trap the lesson on this task warns about:"; } },
+  hint_note:        { text: function () { return "Hints keep the thinking yours. An answer given after one is kept out of your accuracy and pace."; } },
+  wrong_link:       { sample: { id: "P4" }, text: function (c) { return "Lesson " + c.id + " covers this. Re-read the concept"; } },
+
+  /* Debrief, three lines after a drill started from Today */
+  debrief_good_task:  { sample: { task: "Risk", right: 4, n: 5 }, text: function (c) { return "Went well: " + c.task + ", " + c.right + " of " + c.n + " right."; } },
+  debrief_good_pace:  { sample: { k: 8, n: 10, t: 76 }, text: function (c) { return "Went well: " + c.k + " of " + c.n + " answers inside the " + c.t + "-second target."; } },
+  debrief_good_none:  { text: function () { return "Went well: you finished the set, and every answer is in your history."; } },
+  debrief_watch_task: { sample: { task: "Scope", right: 1, n: 4, lesson: "P2" }, text: function (c) { return "Watch: " + c.task + ", " + c.right + " of " + c.n + " right." + (c.lesson ? " Lesson " + c.lesson + " teaches it." : ""); } },
+  debrief_watch_fast: { sample: { k: 3 }, text: function (c) { return "Watch: " + c.k + " of your misses came well under your median time. Read the stem twice before the options."; } },
+  debrief_watch_none: { text: function () { return "Watch: nothing stood out in this set."; } },
+  debrief_next:       { sample: { next: "Lesson P4: Project finance" }, text: function (c) { return "Next: " + c.next; } },
+  debrief_next_done:  { text: function () { return "Next: nothing. That's today's session done."; } },
+
+  /* Exam day */
+  examday_head:     { text: function () { return "Exam day. No study today; this is the checklist."; } },
+  examday_rest:     { text: function () { return "Rest beats revision now. Nothing you read this morning will outweigh a clear head."; } },
+  examday_id:       { text: function () { return "Take the ID your booking asks for, with the name exactly as it is on the booking."; } },
+  examday_arrive:   { text: function () { return "Arrive, or log in, 30 minutes early. Rushing in costs more than it saves."; } },
+  examday_breaks:   { sample: { n: 2 }, text: function (c) { return "Plan your " + c.n + " optional breaks. Taking them is part of the pacing, not time lost."; } },
+  examday_pace:     { sample: { s: 80 }, text: function (c) { return "Pace is about " + c.s + " seconds a question. Check the clock at each break, not after every item."; } },
+  examday_approach: { text: function () { return "Read the approach in each stem first: predictive, agile or hybrid decides what comes first."; } },
+
+  /* After the exam */
+  after_q:          { text: function () { return "How did the exam go?"; } },
+  after_passed:     { text: function () { return "Well done. Your history stays here; export a backup if you want to keep it."; } },
+  after_not:        { text: function () { return "That happens to plenty of people who pass next time. Your history carries over; set a new date and the plan rebuilds round it."; } },
+  after_notsat:     { text: function () { return "Then the date has moved. Set the new one and the plan rebuilds round it."; } },
+
+  /* Weekly review */
+  weekly_head:      { text: function () { return "Your week, in under two minutes."; } },
+  weekly_days:      { sample: { n: 5 }, text: function (c) { return c.n + " of the last 7 days had study on them."; } },
+  weekly_adherence: { sample: { pct: "72%" }, text: function (c) { return "You did " + c.pct + " of the minutes the plan asked for this week."; } },
+  weekly_noplan:    { text: function () { return "There was no plan to measure against this week."; } },
+  weekly_readiness: { sample: { now: 48, prev: 41 }, text: function (c) { return "Readiness " + c.now + (c.prev === null || c.prev === undefined ? ", your first review." : ", against " + c.prev + " at the last review."); } },
+  weekly_cause:     { sample: { cause: "Misread the question", n: 6, total: 12 }, text: function (c) { return "Your commonest miss is \u201C" + c.cause + "\u201D, " + c.n + " of " + c.total + " tagged."; } },
+  weekly_gap:       { sample: { label: "Mock exams", figure: "none sat" }, text: function (c) { return "The biggest gap in your readiness is " + c.label + " (" + c.figure + ")."; } },
+  weekly_pick:      { text: function () { return "Pick one focus for next week. It changes what the coach suggests, never the plan."; } },
+  weekly_note:      { text: function () { return "What got in the way? Optional, and it stays on this device."; } },
+  weekly_why:       { text: function () { return "Why you started:"; } },
+  focus_pace:       { text: function () { return "Pace"; } },
+  focus_scenarios:  { text: function () { return "Scenario ordering"; } }
+});
+
 /* ═══ §06  STORAGE ADAPTER ════════════════════════════════════════════════
    No feature module ever touches localStorage, IndexedDB or this object
    directly. §07 is the only caller. The API is async throughout so the three
@@ -18332,7 +18678,11 @@ PMP.Store = (function () {
         route: null,
         navOpen: false,
         examActive: false,
-        lastError: null
+        lastError: null,
+        /* Set by Today (§10.17) when a step is started from there, so the
+           strip on the module's summary knows to offer the next step.
+           { startedAt, fromToday: true, stepId }. Session-only. */
+        coachRun: null
       },
       settings: {
         theme: PMP.THEME_PREF || "system",
@@ -18346,7 +18696,9 @@ PMP.Store = (function () {
          order that was on screen, so a review can reproduce it exactly. */
       attempts: [],   /* { id, qid, ecoTask, domain, approach, type, difficulty,
                          correct, credit, ms, at, confidence, mode, order,
-                         lessonId? }  — lessonId only on mode "lesson" */
+                         lessonId?, hinted? }  — lessonId only on mode "lesson";
+                         hinted is the number of hint rungs used (§10.02),
+                         and such rows stay out of accuracy and pace (§10.00) */
       /* One record per card that has been reviewed at least once; a card with
          no record is new, so an unstudied pack costs no storage at all. */
       srs: {},        /* cardId -> { ease, interval, reps, lapses, due, suspended,
@@ -18376,8 +18728,26 @@ PMP.Store = (function () {
                            chosen, rank, credit, ms, at, order } */
       /* Lesson progress (§10.15), keyed by lesson id. Quick-check answers
          live here and never in `attempts`, so they cannot move accuracy. */
-      lessons: {}     /* { P4: { opened: [sid], checks: {cid: 1|0}, completedAt,
+      lessons: {},    /* { P4: { opened: [sid], checks: {cid: 1|0}, completedAt,
                          practice: { at, credit, n }, masteredAt } } */
+      /* The coach (§10.16). Only what cannot be derived: the intake answers,
+         which messages were shown when, the weekly reviews and the focus the
+         person chose. Exam date and study hours are not here — they stay in
+         settings.examDate and planner.inputs. Stage, session and messages
+         are computed on every render and never stored. */
+      coach: {
+        profile: null,      /* { at, experience, agile, when, why } — set by intake;
+                               experience and agile are "new" | "some" | "lots",
+                               when is "morning" | "midday" | "evening" | "varies" */
+        shown: {},          /* messageId -> ISO of last showing or dismissal */
+        dismissStreak: {},  /* messageId -> consecutive dismissals */
+        lastWeekly: null,   /* ISO of the last weekly review */
+        weekly: [],         /* { at, readiness, adherence, daysActive, focus, note }, last 52 */
+        focus: null,        /* { kind: "task" | "pace" | "scenarios", id?, setAt } */
+        outcome: null,      /* { at, result: "passed" | "not" | "notsat" } after the date */
+        muted: false,       /* hides messages and strips; Today still shows the session */
+        hints: true         /* offer the hint ladder in practice and adaptive drills */
+      }
     };
   }
 
@@ -18587,7 +18957,9 @@ PMP.Router = (function () {
         params[k] = v;
       });
     }
-    return { name: name || "dashboard", params: params };
+    /* No route means Today, the coach's home (§10.17). #/dashboard still
+       works and shows Progress, so old bookmarks keep their page. */
+    return { name: name || "today", params: params };
   }
 
   function build(name, params) {
@@ -18642,8 +19014,8 @@ PMP.Router = (function () {
   function handle() {
     var to = parse(window.location.hash);
     if (!routes[to.name]) {
-      PMP.UI.toast("No section called \u201C" + to.name + "\u201D. Showing the dashboard.", "warn");
-      return navigate("dashboard", null, true);
+      PMP.UI.toast("No section called \u201C" + to.name + "\u201D. Showing Today.", "warn");
+      return navigate("today", null, true);
     }
 
     var blocked = checkGuards(to);
@@ -18691,7 +19063,7 @@ PMP.Router = (function () {
     if (started) return;
     started = true;
     window.addEventListener("hashchange", handle);
-    if (!window.location.hash) navigate("dashboard", null, true);
+    if (!window.location.hash) navigate("today", null, true);
     else handle();
   }
 
@@ -19316,9 +19688,11 @@ PMP.Exporter = (function () {
     return prefix + "-" + d.getFullYear() + "-" + PMP.fmt.pad(d.getMonth() + 1) + "-" + PMP.fmt.pad(d.getDate()) + ".json";
   }
 
-  function tryDownload(text, name) {
+  /* type is optional and defaults to JSON, which is every caller but the
+     coach's calendar export (§10.17), which saves an .ics file. */
+  function tryDownload(text, name, type) {
     try {
-      var blob = new Blob([text], { type: "application/json" });
+      var blob = new Blob([text], { type: type || "application/json" });
       var url = URL.createObjectURL(blob);
       var a = el("a", { href: url, download: name, style: "display:none" });
       document.body.appendChild(a);
@@ -19398,7 +19772,8 @@ PMP.Exporter = (function () {
           10.05 flashcards, 10.06 formula lab, 10.07 reference library,
           10.08 scenario trainer, 10.09 study planner, 10.10 mistake
           journal, 10.11 analytics, 10.12 settings, About and help,
-          10.13 data portability, 10.14 content audit, 10.15 learn.
+          10.13 data portability, 10.14 content audit, 10.15 learn,
+          10.16 coach, 10.17 today and the coach's surfaces.
    Still stubs: none.
    ════════════════════════════════════════════════════════════════════ */
 
@@ -19677,7 +20052,7 @@ PMP.Practice = (function () {
     }
 
     var fcard = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.2 \u00B7 Filters" }),
+      el("span", { class: "eyebrow", text: "Filters" }),
       el("h2", { text: "What do you want to practise?" })
     ]);
     fcard.appendChild(el("div", { class: "filters" }, [
@@ -19740,7 +20115,7 @@ PMP.Practice = (function () {
 
     /* Mode ── §3.2 */
     var mcard = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.2 \u00B7 Mode" }),
+      el("span", { class: "eyebrow", text: "Mode" }),
       el("h2", { text: "How should it run?" })
     ]);
     var modeWrap = el("div", { class: "modes" });
@@ -19784,7 +20159,7 @@ PMP.Practice = (function () {
     host.appendChild(mcard);
 
     host.appendChild(el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.4 \u00B7 Keyboard" }),
+      el("span", { class: "eyebrow", text: "Keyboard" }),
       el("h2", { text: "Everything is reachable without a mouse" }),
       keyHelpList()
     ]));
@@ -19899,7 +20274,53 @@ PMP.Practice = (function () {
       order: item.p.order
     };
     if (session.lessonId) attempt.lessonId = session.lessonId;
+    if (item.hints) attempt.hinted = item.hints;
     PMP.Store.commit(["attempts"], function (s) { s.attempts.push(attempt); });
+  }
+
+  /* ── 10.02.6a  HINTS ─────────────────────────────────────────────────────
+     The coach's hint ladder (§10.16), offered in practice and adaptive
+     drills only. The timed drill, the diagnostic and a lesson's set are
+     measurements, and the exam gives no hints, so they get none either.
+     Each press shows the next rung; none shows or marks the right option,
+     and the button goes once the answer is checked. An answer given after
+     a hint is recorded with `hinted`, which keeps it out of accuracy and
+     pace (§10.00). */
+  function hintsOn() {
+    return (session.mode === "practice" || session.mode === "adaptive") &&
+      !!PMP.Coach && PMP.Coach.slice(PMP.Store.state).hints;
+  }
+
+  function hintTools(item) {
+    var list = el("div", { class: "q-hints-list" });
+    var btn = el("button", {
+      class: "btn btn--sm", type: "button",
+      onclick: function () { nextHint(item); }
+    }, [icon("info"), "Hint"]);
+    item.ui.hintBtn = btn;
+    item.ui.hintList = list;
+    return el("div", { class: "q-hints" }, [btn, list]);
+  }
+
+  function nextHint(item) {
+    if (session.finished || item.committed || (item.hints || 0) >= PMP.Coach.HINT_RUNGS) return;
+    item.hints = (item.hints || 0) + 1;
+    var h = PMP.Coach.hint(item.q, item.hints, item.p, item.ctrl.value());
+    if (item.hints === 1) item.ui.hintList.appendChild(el("p", { class: "hint", text: PMP.Coach.line("hint_note") }));
+    item.ui.hintList.appendChild(el("div", { class: "q-hint" }, [
+      el("span", { class: "eyebrow", text: "Hint " + item.hints + " of " + PMP.Coach.HINT_RUNGS }),
+      el("p", { class: "q-hint-t", text: h.text }),
+      h.detail ? el("p", { text: h.detail }) : null
+    ]));
+    if (h.strike) {
+      Array.prototype.forEach.call(item.ui.panel.querySelectorAll(".opt"), function (row) {
+        if (row.getAttribute("data-opt") === h.strike) row.setAttribute("data-struck", "true");
+      });
+    }
+    var left = PMP.Coach.HINT_RUNGS - item.hints;
+    item.ui.hintBtn.lastChild.textContent = left ? "Another hint" : "No more hints";
+    item.ui.hintBtn.disabled = !left;
+    PMP.UI.announce(h.text + (h.detail ? " " + h.detail : ""));
   }
 
   /* ── 10.02.5  DRILL VIEW ─────────────────────────────────────────────── */
@@ -20053,6 +20474,8 @@ PMP.Practice = (function () {
 
     var body = el("div");
     panel.appendChild(body);
+    item.ui = { panel: panel };
+    if (hintsOn()) panel.appendChild(hintTools(item));
     var feedback = el("div");
     panel.appendChild(feedback);
 
@@ -20124,7 +20547,8 @@ PMP.Practice = (function () {
 
     item.ui = {
       panel: panel, feedback: feedback, primary: primary, skip: skipBtn, back: backBtn,
-      flagBtn: flagBtn, noteBtn: noteBtn, noteBox: noteBox, conf: confBtns, foot: foot, last: last
+      flagBtn: flagBtn, noteBtn: noteBtn, noteBox: noteBox, conf: confBtns, foot: foot, last: last,
+      hintBtn: item.ui.hintBtn || null, hintList: item.ui.hintList || null
     };
     item.panel = panel;
     onAnswerChanged(item);
@@ -20152,6 +20576,7 @@ PMP.Practice = (function () {
     showVerdict(item);
 
     item.ui.skip.hidden = true;
+    if (item.ui.hintBtn) item.ui.hintBtn.hidden = true;
     item.ui.primary.textContent = item.ui.last ? "Finish drill" : "Next question";
     item.ui.primary.disabled = false;
     item.ui.primary.focus();
@@ -20194,9 +20619,14 @@ PMP.Practice = (function () {
        inside that lesson's own set, which already ends with a way back. */
     var lesson = PMP.Learn && PMP.Learn.forTask(item.q.ecoTask);
     if (lesson && lesson.id !== session.lessonId) {
+      /* After a miss the coach points back at the teaching itself, opening
+         the lesson at its concept sections. It names no cause: tagging is
+         the journal's job, later (§10.10). */
+      var coachLink = !r.correct && !!PMP.Coach && !PMP.Coach.slice(PMP.Store.state).muted;
       item.ui.feedback.appendChild(el("p", { class: "ln-links" }, [
-        el("a", { href: "#/learn?lesson=" + encodeURIComponent(lesson.id) },
-          "Learn this topic: " + lesson.id + " " + lesson.title)
+        el("a", { href: "#/learn?lesson=" + encodeURIComponent(lesson.id) + (coachLink ? "&part=3" : "") },
+          coachLink ? PMP.Coach.line("wrong_link", { id: lesson.id }) + " \u2192"
+                    : "Learn this topic: " + lesson.id + " " + lesson.title)
       ]));
     }
   }
@@ -20418,6 +20848,9 @@ PMP.Practice = (function () {
         : "This drill ended without a committed answer, so nothing was recorded." })
     ]));
 
+    var cs = PMP.CoachUI && PMP.CoachUI.strip("practice-summary", { items: session.items, mode: session.mode });
+    if (cs) host.appendChild(cs);
+
     if (session.opts.summary && session.result) {
       var extra = null;
       try { extra = session.opts.summary(session.result); } catch (e) { extra = null; }
@@ -20456,6 +20889,7 @@ PMP.Practice = (function () {
       }
       item.revealed = true;
       if (item.ui.foot) item.ui.foot.hidden = true;
+      if (item.ui.hintBtn) item.ui.hintBtn.hidden = true;
       var state = item.result ? (item.result.correct ? "correct" : item.result.partial ? "flagged" : "incorrect") : null;
       var det = el("details", { class: "review" }, [
         el("summary", null, [
@@ -20558,12 +20992,27 @@ PMP.Practice = (function () {
        on every visit and not only the first: a link that carries a filter
        replaces whatever was set before. A bare #/practice, and the repaints
        below that pass no params, keep the filters already chosen. */
-    var linked = !!params && Object.keys(defaultFilters()).some(function (k) { return !!params[k]; });
+    /* n starts a drill of that many straight away, in `mode` if one is
+       given. It is how a step on Today (§10.17) starts its questions through
+       this engine's own picker rather than a second one; the filters it
+       carries replace the old ones even when there are none, so ten mixed
+       questions are mixed. */
+    var n = params ? parseInt(params.n, 10) : 0;
+    var linked = !!params && (n > 0 || Object.keys(defaultFilters()).some(function (k) { return !!params[k]; }));
     if (!filters || linked) {
       filters = defaultFilters();
       if (params) Object.keys(filters).forEach(function (k) {
         if (params[k]) filters[k] = params[k];
       });
+    }
+    if (n > 0 && !(session && !session.finished)) {
+      var mode = params.mode && MODES[params.mode] && !MODES[params.mode].hidden ? params.mode : CFG.DEFAULT_MODE;
+      var picked = choose(pool(), n, mode);
+      /* Drop the count from the address once the drill exists, so a later
+         visit to the same entry in history does not start another. */
+      setTimeout(function () { PMP.Router.navigate("practice", null, true); }, 0);
+      if (picked.length) { startWith(picked, mode); return; }
+      PMP.UI.toast("Nothing matches those filters.", "warn");
     }
     /* A live drill always wins: coming back to Practice after wandering off to
        the dashboard drops you where you left off, on the question you left off
@@ -22523,7 +22972,7 @@ PMP.Exam = (function () {
     var saved = resumable();
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.3 \u00B7 Mock exam" }),
+      el("span", { class: "eyebrow", text: "Mock exam" }),
       el("h2", { text: "A full sitting, under exam conditions" }),
       el("p", { text: "One clock, two breaks, no feedback until you hand it in. The point is not the score; it is finding out what your judgement does at question 140 with forty minutes left." })
     ]));
@@ -23059,6 +23508,9 @@ PMP.Scenarios = (function () {
       })
     ]));
 
+    var cs = PMP.CoachUI && PMP.CoachUI.strip("scenarios-summary");
+    if (cs) host.appendChild(cs);
+
     var card = el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Where your answers fell" })
     ]);
@@ -23133,7 +23585,7 @@ PMP.Scenarios = (function () {
     });
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.9 \u00B7 Situational judgement" }),
+      el("span", { class: "eyebrow", text: "Situational judgement" }),
       el("h2", { text: "Situational judgement" }),
       el("p", {
         text: "Short scenarios in which all four options are defensible. Pick the one you would do first, "
@@ -23620,7 +24072,7 @@ PMP.Cards = (function () {
 
     host.appendChild(el("div", { class: "view-hd card-hd" }, [
       el("div", null, [
-        el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 " + meta.label }),
+        el("span", { class: "eyebrow", text: meta.label }),
         el("h2", { text: "Review" })
       ]),
       el("span", { class: "spacer" }),
@@ -23732,6 +24184,9 @@ PMP.Cards = (function () {
         : "Nothing was graded in this session." })
     ]));
 
+    var cs = PMP.CoachUI && PMP.CoachUI.strip("cards-summary");
+    if (cs) host.appendChild(cs);
+
     var stats = el("div", { class: "card" }, [el("span", { class: "eyebrow", text: "How you graded" })]);
     var row = el("div", { class: "filters" });
     S.GRADES.forEach(function (k) {
@@ -23830,7 +24285,7 @@ PMP.Cards = (function () {
     var overall = counts(PMP.Store.state, null);
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 Spaced repetition" }),
+      el("span", { class: "eyebrow", text: "Spaced repetition" }),
       el("h2", { text: "Flashcards" }),
       el("p", { text: "Cards are scheduled with SM-2. Grade honestly and the algorithm spreads its own workload: "
         + "what you know moves out to weeks and months, what you do not comes back tomorrow. New cards are capped at "
@@ -26574,7 +27029,7 @@ PMP.FormulaLab = (function () {
     }
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.7" }),
+      el("span", { class: "eyebrow", text: "Reference" }),
       el("h2", { text: "Formula lab" }),
       el("p", { text: "A reference sheet built for paper, calculators for the awkward ones, and randomised problems that show the whole working rather than the answer." })
     ]));
@@ -27512,7 +27967,7 @@ PMP.Library = (function () {
     }
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.8" }),
+      el("span", { class: "eyebrow", text: "Reference" }),
       el("h2", { text: "Reference library" }),
       el("p", { text: "Everything offline and in this build's own words. The process view is kept as a cross-reference; the principles, the domains and the agile section are how the current outline talks." })
     ]));
@@ -27723,7 +28178,7 @@ PMP.Data = (function () {
      when the file is newer than the device. Replace wipes first. */
   var LIST_SLICES = ["attempts", "exams", "journal", "issues", "scenarioRuns"];
   var MAP_SLICES = ["srs", "notes", "flags", "lessons"];
-  var WHOLE_SLICES = ["settings", "planner", "packs", "queue", "examRun"];
+  var WHOLE_SLICES = ["settings", "planner", "packs", "queue", "examRun", "coach"];
 
   function planProgressMerge(obj) {
     var state = PMP.Store.state;
@@ -28001,7 +28456,7 @@ PMP.Data = (function () {
     var state = PMP.Store.state;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.13 \u00B7 Backup and packs" }),
+      el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Everything this app knows about you lives on this device and travels in a file you control. Nothing about you is sent anywhere, and there is no analytics, no telemetry and no account. Opened from disk the file makes no network requests at all. Served over http it makes exactly one kind: a request for its own extended question packs, at a fixed path beside itself, carrying no credentials and no information about you \u2014 the same request the browser would make for an image. What came back, or did not, is itemised in the content audit." })
     ]));
@@ -28069,7 +28524,7 @@ PMP.Data = (function () {
 
     /* Schema documentation. A format nobody can write to is not portable. */
     host.appendChild(el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A75 \u00B7 Pack format, schema v2" }),
+      el("span", { class: "eyebrow", text: "Pack format, schema v2" }),
       el("p", { text: "A pack is one JSON object. Every question needs an id unique within the file, a type, a domain, an ECO task id from the outline this build targets, a stem, an explanation, and a rationale on every option \u2014 including the ones nobody should choose, because those are the instructive ones." }),
       el("pre", { class: "code", text: SAMPLE }),
       el("div", { style: "display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-4)" }, [
@@ -28854,7 +29309,7 @@ PMP.Audit = (function () {
   function lessonsCard() {
     var lr = auditLessons(PMP.LESSONS);
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A705.10 \u00B7 Lessons" }),
+      el("span", { class: "eyebrow", text: "Lessons" }),
       el("h2", { text: lr.pass
         ? (lr.counts.total === 1 ? "The lesson passes every rule" : "All " + lr.counts.total + " lessons pass every rule")
         : PMP.fmt.plural(lr.failures.length, "failure") + " in the lessons" }),
@@ -28883,6 +29338,82 @@ PMP.Audit = (function () {
         el("summary", null, [el("span", { class: "s", text: PMP.fmt.plural(lr.gaps.length, "gap") + " \u2014 missing content, not broken content" })]),
         el("div", { class: "review-bd" }, [issueTable(lr.gaps, "gap")])
       ]));
+    }
+    return card;
+  }
+
+  /* ── 10.14.6  COACH COPY ─────────────────────────────────────────────────
+     §05.11 against its own rules. Every message is rendered against each of
+     §10.16's fixture contexts it applies to, and every line against its own
+     sample. A rendered sentence fails if it leaks "undefined", "NaN" or a
+     template brace, or runs past 160 characters; a message that no fixture
+     exercises fails too, because then nothing here has checked it. */
+  var CRULE = { MAX: 160, BAD: /undefined|NaN|[{}]/ };
+
+  function auditCoach() {
+    var out = { failures: [], gaps: [], checks: [], counts: { messages: 0, lines: 0, rendered: 0 } };
+    function fail(where, msg) { out.failures.push({ where: where, msg: msg }); }
+    if (!PMP.COACH_MESSAGES || !PMP.COACH_LINES || !PMP.Coach) {
+      fail("05.11", "The coach tables or \u00A710.16 are missing.");
+      out.pass = false;
+      return out;
+    }
+    var fx = PMP.Coach.fixtures();
+    var lenBad = 0, leakBad = 0, unexercised = 0, threw = 0;
+    function check(where, text) {
+      out.counts.rendered++;
+      if (typeof text !== "string" || !text.trim()) { fail(where, "Rendered empty."); leakBad++; return; }
+      if (CRULE.BAD.test(text)) { fail(where, "Leaks a placeholder: \u201C" + text + "\u201D"); leakBad++; }
+      if (text.length > CRULE.MAX) { fail(where, text.length + " characters; the ceiling is " + CRULE.MAX + "."); lenBad++; }
+    }
+    var ids = Object.create(null);
+    PMP.COACH_MESSAGES.forEach(function (m, i) {
+      var at = "COACH_MESSAGES[" + i + "] " + m.id;
+      out.counts.messages++;
+      if (ids[m.id]) fail(at, "Duplicate id.");
+      ids[m.id] = true;
+      var hits = 0;
+      fx.forEach(function (c, k) {
+        var applies = false;
+        try { applies = !!m.when(c); } catch (e) { fail(at + " fixture " + k, "when() threw: " + e.message); threw++; return; }
+        if (!applies) return;
+        hits++;
+        try { check(at + " fixture " + k, m.text(c)); }
+        catch (e) { fail(at + " fixture " + k, "text() threw: " + e.message); threw++; }
+      });
+      if (!hits) { fail(at, "No fixture context makes this message apply, so it is never checked."); unexercised++; }
+    });
+    Object.keys(PMP.COACH_LINES).forEach(function (id) {
+      var L = PMP.COACH_LINES[id];
+      out.counts.lines++;
+      try { check("COACH_LINES." + id, L.text(L.sample || {})); }
+      catch (e) { fail("COACH_LINES." + id, "text() threw: " + e.message); threw++; }
+    });
+    var n = out.counts.messages + out.counts.lines;
+    out.checks.push({ id: "coach-leak", label: "Every coach sentence renders with no undefined, NaN or template brace", n: out.counts.rendered, bad: leakBad + threw });
+    out.checks.push({ id: "coach-len", label: "Every coach sentence is " + CRULE.MAX + " characters or fewer", n: out.counts.rendered, bad: lenBad });
+    out.checks.push({ id: "coach-cover", label: "Every message is exercised by at least one fixture context", n: out.counts.messages, bad: unexercised });
+    out.counts.templates = n;
+    out.pass = !out.failures.length;
+    return out;
+  }
+
+  function coachCard() {
+    var cr = auditCoach();
+    var card = el("div", { class: "card" }, [
+      el("span", { class: "eyebrow", text: "Coach copy" }),
+      el("h2", { text: cr.pass ? "Every coach sentence passes" : PMP.fmt.plural(cr.failures.length, "failure") + " in the coach copy" }),
+      el("p", { text: "Everything the coach says is written in advance and filled only from the content and from your own figures. Each message is rendered against test contexts and each fixed line against a sample, and none may leak a placeholder or run past " + CRULE.MAX + " characters." })
+    ]);
+    card.appendChild(el("div", { class: "sum-grid", style: "margin-top:var(--sp-4)" }, [
+      el("div", { class: "stat" }, [el("span", { class: "stat-k", text: "Messages" }), el("span", { class: "stat-v", text: String(cr.counts.messages || 0) })]),
+      el("div", { class: "stat" }, [el("span", { class: "stat-k", text: "Fixed lines" }), el("span", { class: "stat-v", text: String(cr.counts.lines || 0) })]),
+      el("div", { class: "stat" }, [el("span", { class: "stat-k", text: "Renders checked" }), el("span", { class: "stat-v", text: String(cr.counts.rendered || 0) })])
+    ]));
+    card.appendChild(ruleTable(cr.checks));
+    if (cr.failures.length) {
+      card.appendChild(el("span", { class: "eyebrow", style: "display:block;margin-top:var(--sp-5)", text: "Coach failures" }));
+      card.appendChild(issueTable(cr.failures, "fail"));
     }
     return card;
   }
@@ -28964,7 +29495,7 @@ PMP.Audit = (function () {
   function sourcesCard() {
     var s = PMP.Packs.summary();
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A705.9 \u00B7 Content sources" }),
+      el("span", { class: "eyebrow", text: "Content sources" }),
       el("h2", { text: PMP.Packs.provenance() })
     ]);
 
@@ -29039,7 +29570,7 @@ PMP.Audit = (function () {
     var counts = r.counts;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.14 \u00B7 Build self-check" }),
+      el("span", { class: "eyebrow", text: "Build self-check" }),
       el("h2", { text: "Content audit" }),
       el("p", { text: "Acceptance test 10: every shipped item satisfies the content rules in \u00A74 and \u00A73.5. This panel runs those rules against the pack that is actually loaded, in front of you, rather than reporting a number somebody typed." })
     ]));
@@ -29171,7 +29702,7 @@ PMP.Audit = (function () {
     var sr = auditScenarios(PMP.SCENARIOS);
     var sc = sr.counts;
     var scenCard = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A705.4 \u00B7 Scenario pack" }),
+      el("span", { class: "eyebrow", text: "Scenario pack" }),
       el("h2", { text: sr.pass ? "The scenario pack passes every rule" : PMP.fmt.plural(sr.failures.length, "failure") + " in the scenario pack" }),
       el("p", {
         text: "Situational items are checked against their own rules. The one that matters most is that "
@@ -29269,6 +29800,9 @@ PMP.Audit = (function () {
        pack: different rules, so a combined pass would hide which one failed. */
     host.appendChild(lessonsCard());
 
+    /* Coach copy ── 10.14.6, its own block for the same reason. */
+    host.appendChild(coachCard());
+
     host.appendChild(el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Sourcing" }),
       el("p", { text: "Every stem, option, rationale and explanation in this build is original writing. No PMI text is reproduced, these are not retired exam questions, and nothing here was scraped from a question bank. The ECO task labels are this build's own paraphrases of the outline's task titles." }),
@@ -29278,7 +29812,8 @@ PMP.Audit = (function () {
 
   PMP.Router.register("audit", { title: "Content audit", render: view });
 
-  return { audit: audit, auditScenarios: auditScenarios, auditLessons: auditLessons, RULE: RULE, SRULE: SRULE, LRULE: LRULE };
+  return { audit: audit, auditScenarios: auditScenarios, auditLessons: auditLessons, auditCoach: auditCoach,
+           RULE: RULE, SRULE: SRULE, LRULE: LRULE, CRULE: CRULE };
 })();
 
 
@@ -29333,6 +29868,17 @@ PMP.Metrics = (function () {
     return typeof a.credit === "number" ? clamp01(a.credit) : (a.correct ? 1 : 0);
   }
 
+  /* An answer given after the coach's hint ladder (§10.02, §10.16) carries
+     `hinted`, the number of rungs used. Such rows are kept out of accuracy
+     and pace and nothing else, on the same reasoning that keeps lesson
+     quick checks out of `attempts` altogether: assisted practice is
+     learning, and counting it would lift the figure the readiness score is
+     built on for answers the person did not reach alone. They still count
+     for coverage, which measures breadth and makes no claim about scoring,
+     and they still reach the mistake journal. This is the only place the
+     coach changes a figure. */
+  function unassisted(a) { return !a.hinted; }
+
   /* ── 10.00.2  ACCURACY, DECAYED ──────────────────────────────────────────
      A weighted mean over the last ACCURACY_WINDOW answers, where an answer's
      weight halves every ACCURACY_HALFLIFE_DAYS. Two things are deliberate.
@@ -29347,7 +29893,7 @@ PMP.Metrics = (function () {
      100%: the figure is pulled toward the middle until there is enough
      evidence to move it, which is the behaviour a study signal should have. */
   function accuracy(state, filter) {
-    var list = attempts(state);
+    var list = attempts(state).filter(unassisted);
     if (filter) list = list.filter(filter);
     list = list.slice(-R.ACCURACY_WINDOW);
     var now = Date.now();
@@ -29405,7 +29951,7 @@ PMP.Metrics = (function () {
      to describe how the candidate works rather than how their evening went.
      Samples under half a second are dropped as instrument error. */
   function pace(state) {
-    var secs = attempts(state).slice(-R.ACCURACY_WINDOW)
+    var secs = attempts(state).filter(unassisted).slice(-R.ACCURACY_WINDOW)
       .filter(function (a) { return a.ms > 500; })
       .map(function (a) { return a.ms / 1000; })
       .sort(function (x, y) { return x - y; });
@@ -29781,12 +30327,20 @@ PMP.Metrics = (function () {
     return { ranked: out, aside: aside };
   }
 
-  /* ── 10.00.12  EXAM COUNTDOWN ──────────────────────────────────────────── */
+  /* ── 10.00.12  EXAM COUNTDOWN ──────────────────────────────────────────────
+     Counted in calendar days, not in 24-hour periods from now. The date
+     inputs store "2026-10-05", which Date.parse reads as UTC midnight; a
+     rounded millisecond difference then called the afternoon of the exam
+     "1 day ago" and its morning "today", depending on the clock and the time
+     zone. Exam day is exam day all day, and the coach's exam-day stage
+     (§10.16) depends on it. */
   function countdown(state) {
     var iso = state.settings.examDate;
     if (!iso) return null;
-    var days = PMP.fmt.relDays(iso);
-    if (days === null || isNaN(days)) return null;
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso));
+    var t = m ? new Date(+m[1], +m[2] - 1, +m[3]).getTime() : Date.parse(iso);
+    if (isNaN(t)) return null;
+    var days = PMP.time.daysBetween(Date.now(), t);
     return {
       iso: iso, days: days, past: days < 0,
       weeks: Math.floor(Math.abs(days) / 7),
@@ -29851,6 +30405,10 @@ PMP.Planner = (function () {
   function repaint() {
     var host = document.getElementById("view");
     if (!host) return;
+    /* save() and rebuild() are also called from Today (§10.17). Painting
+       the planner into whatever view is on screen would replace Today with
+       it, so only the planner's own route is repainted. */
+    if (PMP.Router.current && PMP.Router.current.name !== "planner") return;
     host.innerHTML = "";
     view(host);
   }
@@ -30357,7 +30915,7 @@ PMP.Planner = (function () {
     var cd = PMP.Metrics.countdown(state);
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.10 \u00B7 Study planner" }),
+      el("span", { class: "eyebrow", text: "Study planner" }),
       el("h2", { text: "Your plan to " + PMP.fmt.dateShort(plan.inputs.examDate) }),
       el("p", { text: "Chips tick themselves off your actual history \u2014 answering twenty questions on Risk is what completes a chip that asks for twenty questions on Risk. Lessons tick when you complete them in Learn. Only the formula-sheet skim in the last few days takes a click, because skimming is the one thing this file cannot see you do." })
     ]));
@@ -30499,7 +31057,7 @@ PMP.Planner = (function () {
     var diag = diagnostic(state);
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.10 \u00B7 Study planner" }),
+      el("span", { class: "eyebrow", text: "Study planner" }),
       el("h2", { text: "Build a plan" }),
       el("p", { text: "Three inputs: when you sit, how long you have on an ordinary day, and where you are starting from. The plan that comes out ticks itself off as you work, and rebuilds itself when you fall behind rather than quietly accumulating a backlog." })
     ]));
@@ -30648,7 +31206,7 @@ PMP.Planner = (function () {
     var last = p.days[p.days.length - 1];
     if (last.d < sod(Date.now())) {
       host.appendChild(el("div", { class: "view-hd" }, [
-        el("span", { class: "eyebrow", text: "\u00A73.10 \u00B7 Study planner" }),
+        el("span", { class: "eyebrow", text: "Study planner" }),
         el("h2", { text: "That plan has run its course" }),
         el("p", { text: "Every day in it is in the past. Build a new one if the date has moved." })
       ]));
@@ -30666,7 +31224,10 @@ PMP.Planner = (function () {
 
   return {
     build: build, assess: assess, diagnostic: diagnostic,
-    startDiagnostic: startDiagnostic, DIAG_N: DIAG_N
+    startDiagnostic: startDiagnostic, DIAG_N: DIAG_N,
+    /* For the coach's intake and its behind-schedule message (§10.16): the
+       same writers this view uses, not a second way to store a plan. */
+    save: save, rebuild: rebuild, toggleManual: toggleManual
   };
 })();
 
@@ -30701,7 +31262,7 @@ PMP.Analytics = (function () {
     var n = M.attempts(state).length;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.12 \u00B7 Analytics" }),
+      el("span", { class: "eyebrow", text: "Analytics" }),
       el("h2", { text: "What the history says" }),
       el("p", { text: "Five views of everything you have answered. Drawn in this file with no charting library and no network. Where a figure would come from too small a sample it is greyed and shows its count instead of a rate." })
     ]));
@@ -30722,32 +31283,32 @@ PMP.Analytics = (function () {
     }
 
     host.appendChild(card(
-      "\u00A711.1 \u00B7 Trend",
+      "Trend",
       "Are you getting better?",
       C.accuracyTrend(state)
     ));
 
     host.appendChild(card(
-      "\u00A711.2 \u00B7 Coverage and strength",
+      "Coverage and strength",
       "Where are the cold spots?",
       C.ecoHeat(state),
       "The 26 tasks of the examination content outline, in the outline's own three columns. This is the chart to plan from: a grey cell is a task the exam can ask about and you have no evidence on."
     ));
 
     host.appendChild(card(
-      "\u00A711.3 \u00B7 Pace",
+      "Pace",
       "Are you working at exam speed?",
       C.paceHistogram(state)
     ));
 
     host.appendChild(card(
-      "\u00A711.4 \u00B7 Sittings",
+      "Sittings",
       "Which way are the mocks moving?",
       C.mockHistory(state)
     ));
 
     host.appendChild(card(
-      "\u00A711.5 \u00B7 Calibration",
+      "Calibration",
       "Can you tell when you are right?",
       C.calibration(state),
       "Recorded as one bit \u2014 Sure or Not sure \u2014 so this is a comparison of two rates rather than a reliability curve. The row that matters is Sure: those are the ones a second look on the day will not catch."
@@ -30955,7 +31516,7 @@ PMP.Journal = (function () {
     var total = (state.journal || []).length;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.11 \u00B7 Mistake journal" }),
+      el("span", { class: "eyebrow", text: "Mistake journal" }),
       el("h2", { text: "Why you got them wrong" }),
       el("p", { text: "Every answer that missed full marks, waiting to be given a cause. The distribution across the five causes is usually a better guide to what to do next than the score is." })
     ]));
@@ -31003,7 +31564,7 @@ PMP.Journal = (function () {
 
   function distributionCard(cs, total, state) {
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A711.7 \u00B7 Root cause" }),
+      el("span", { class: "eyebrow", text: "Root cause" }),
       el("h2", { text: "Where your marks are going" }),
       el("p", { text: reading(cs, total) })
     ]);
@@ -31083,7 +31644,7 @@ PMP.Journal = (function () {
 
   PMP.Router.register("journal", { title: "Mistake journal", render: view });
 
-  return { CAUSES: CAUSES, counts: counts, misses: misses };
+  return { CAUSES: CAUSES, counts: counts, misses: misses, reading: reading };
 })();
 
 
@@ -31128,7 +31689,7 @@ PMP.Dashboard = (function () {
   function scoreCard(state) {
     var rd = PMP.Metrics.readiness(state);
     var card = el("div", { class: "card" });
-    card.appendChild(el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Readiness" }));
+    card.appendChild(el("span", { class: "eyebrow", text: "Readiness" }));
 
     var hd = el("div", { class: "score-hd", dataset: { provisional: String(rd.provisional) } }, [
       el("span", { class: "score-n", text: String(rd.score) }),
@@ -31198,7 +31759,7 @@ PMP.Dashboard = (function () {
     var MIN = PMP.Metrics.MIN_SAMPLE;
 
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Mastery" }),
+      el("span", { class: "eyebrow", text: "Mastery" }),
       el("h2", { text: "Where you stand" })
     ]);
 
@@ -31258,7 +31819,7 @@ PMP.Dashboard = (function () {
     var doneToday = st.today.items || st.today.cards || st.today.exams;
 
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Habit" }),
+      el("span", { class: "eyebrow", text: "Habit" }),
       el("h2", { text: st.current
         ? PMP.fmt.plural(st.current, "day") + " in a row"
         : doneToday ? "Started today" : "No streak running" })
@@ -31299,7 +31860,7 @@ PMP.Dashboard = (function () {
   function countdownCard(state) {
     var cd = PMP.Metrics.countdown(state);
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Exam date" })
+      el("span", { class: "eyebrow", text: "Exam date" })
     ]);
 
     if (!cd) {
@@ -31365,7 +31926,7 @@ PMP.Dashboard = (function () {
   function actionCard(state) {
     var na = PMP.Metrics.nextActions(state);
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Next best action" }),
+      el("span", { class: "eyebrow", text: "Next best action" }),
       el("h2", { text: na.ranked.length ? na.ranked[0].label : "Keep going" }),
       el("p", { text: "Ranked by how many readiness points each would add per minute spent. The rates are worth exactly as much as the assumptions under them, which is why each row states its own." })
     ]);
@@ -31412,7 +31973,7 @@ PMP.Dashboard = (function () {
   function duePanel(state) {
     var c = PMP.Cards.counts(state);
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 Flashcards" }),
+      el("span", { class: "eyebrow", text: "Flashcards" }),
       el("h2", { text: c.today ? PMP.fmt.plural(c.today, "card") + " due today" : "No cards due today" })
     ]);
     card.appendChild(el("div", { class: "filters" }, [
@@ -31453,25 +32014,23 @@ PMP.Dashboard = (function () {
     var n = PMP.Metrics.attempts(state).length;
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.1 \u00B7 Dashboard" }),
-      el("h2", { text: n ? "Where you are" : "Start here" }),
+      el("span", { class: "eyebrow", text: "Progress" }),
+      el("h2", { text: n ? "Where you are" : "Nothing measured yet" }),
       el("p", {
         text: n
           ? "Everything on this screen is derived from what you have actually answered. Nothing is entered by hand and nothing is remembered that you did not do."
-          : "Nothing has been answered yet, so most of this screen is empty and honestly so. The quickest way to make it useful is twenty questions."
+          : "Nothing has been answered yet, so most of this screen is empty and honestly so. Today has your first steps."
       })
     ]));
 
+    /* The first run belongs to Today and its intake (§10.17), which give one
+       next step instead of the three this screen used to offer. */
     if (!n) {
       host.appendChild(el("div", { class: "card" }, [
         el("span", { class: "eyebrow", text: "First run" }),
-        el("h2", { text: "Two ways in" }),
-        el("p", { text: "Either answer some questions and let the score build itself, or run the planner's 25-question diagnostic, which does the same thing and hands you a week-by-week plan at the end of it." }),
+        el("h2", { text: "Start from Today" }),
         el("div", { class: "filter-bar" }, [
-          el("button", { class: "btn btn--primary", type: "button", onclick: function () { PMP.Router.navigate("practice"); } },
-            [icon("target"), "Answer some questions"]),
-          el("button", { class: "btn", type: "button", onclick: function () { PMP.Router.navigate("planner"); } },
-            [icon("calendar"), "Build a study plan"])
+          el("a", { class: "btn btn--primary", href: "#/today" }, [icon("today"), "Go to Today"])
         ])
       ]));
       var lc0 = learnCard();
@@ -31534,7 +32093,7 @@ PMP.Dashboard = (function () {
     var total = (state.journal || []).length;
 
     var card = el("div", { class: "card" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.11 \u00B7 Mistake journal" }),
+      el("span", { class: "eyebrow", text: "Mistake journal" }),
       el("h2", { text: untagged ? PMP.fmt.plural(untagged, "miss", "misses") + " waiting to be tagged" : total ? "All misses tagged" : "Nothing missed yet" })
     ]);
     if (total) {
@@ -31560,7 +32119,7 @@ PMP.Dashboard = (function () {
     return card;
   }
 
-  PMP.Router.register("dashboard", { title: "Dashboard", render: view });
+  PMP.Router.register("dashboard", { title: "Progress", render: view });
 
   return { view: view };
 })();
@@ -31741,6 +32300,7 @@ PMP.Settings = (function () {
       el("p", { text: "Your preferences, what this build contains, and where to begin." })
     ]));
     host.appendChild(prefsCard(state));
+    if (PMP.CoachUI) host.appendChild(PMP.CoachUI.settingsCard(state));
     host.appendChild(helpCard());
     host.appendChild(aboutCard());
     host.appendChild(contentCard(state));
@@ -31975,6 +32535,8 @@ PMP.Learn = (function () {
     host.appendChild(el("div", { class: "filter-bar ln-top" }, [
       el("a", { class: "btn btn--ghost btn--sm", href: href("learn") }, "All lessons")
     ]));
+    var cs = PMP.CoachUI && PMP.CoachUI.strip("lesson", { lesson: lesson });
+    if (cs) host.appendChild(cs);
 
     /* Part 1 ── header: title, task, minutes, prerequisites, objectives */
     var prereqs = (lesson.prereqs || []).map(function (pid) {
@@ -32123,9 +32685,10 @@ PMP.Learn = (function () {
 
     /* Part 7 ── quick checks */
     var checkHost = el("div");
+    ui.coach = el("div");
     host.appendChild(part(7, PARTS[6], [
       el("p", { text: "For learning, not scoring. Answers here are kept on the lesson only, and never count towards accuracy or readiness." }),
-      checkHost
+      checkHost, ui.coach
     ]));
     lesson.checks.forEach(function (c, i) { checkHost.appendChild(renderCheck(lesson, c, i, refresh)); });
 
@@ -32215,6 +32778,13 @@ PMP.Learn = (function () {
         ])
       ]));
       ui.mastery.appendChild(el("p", { class: "ln-note", text: masteryNote(rec) }));
+
+      /* Every check tried and no set taken yet: the coach suggests the set
+         now, while the teaching is fresh. */
+      ui.coach.innerHTML = "";
+      var cs2 = c.tried === c.checks && !prc && PMP.CoachUI &&
+        PMP.CoachUI.strip("lesson-checks", { start: function () { startSet(lesson); } });
+      if (cs2) ui.coach.appendChild(cs2);
     }
     refresh();
   }
@@ -32380,12 +32950,1428 @@ PMP.Learn = (function () {
       return;
     }
     renderReader(host, lesson);
+    /* part=N opens the reader at that part, for the links from a wrong
+       answer and from Today. Deferred because the router scrolls to the top
+       after rendering. */
+    var pn = parseInt(params.part, 10);
+    if (pn > 1) setTimeout(function () {
+      var t = document.getElementById("ln-part-" + pn);
+      if (t && t.scrollIntoView) t.scrollIntoView({ block: "start" });
+    }, 0);
   }
 
   PMP.Router.register("learn", { title: "Learn", render: view });
 
   return { path: path, status: status, lessonById: lessonById, forTask: forTask, bankFor: bankFor,
-           POOL_KEYS: POOL_KEYS, MASTERY_SHARE: MASTERY_SHARE };
+           POOL_KEYS: POOL_KEYS, MASTERY_SHARE: MASTERY_SHARE, RETAKE_DAYS: RETAKE_DAYS };
+})();
+
+/* ── 10.16  COACH ───────────────────────────────────────────────────────────
+   One voice and one next step. The coach is an orchestration layer over the
+   modules that already know things: the plan (§10.09) is the commitment,
+   §10.00 says where the person stands, the lesson path (§10.15), the journal
+   (§10.10) and the card schedule (§10.05) say what is waiting. This module
+   reconciles them into a single ordered session for today and chooses which
+   of the authored messages in §05.11 to say. It computes no figure of its
+   own and renders nothing; §10.17 draws Today and the in-flow pieces.
+
+   Four rules, each the reason for something below.
+
+   · Derived, never stored. Stage, session and messages are worked out on
+     every call from live state. The `coach` slice holds only what cannot be
+     derived: the intake answers, when each message was last shown, the
+     weekly reviews and the focus the person chose.
+
+   · The plan is the commitment. When there is a plan, today's steps are its
+     chips for today, in the order warm-up, lessons, questions, the coach's
+     own additions, journal. They tick themselves through Planner.assess, so
+     the coach adds no second way of deciding what is done. The coach adds at
+     most two steps the plan cannot know about: a lesson set due a retake,
+     and journal triage when misses are piling up. Triage goes last, never
+     first: tagging works best at a distance from the miss (§10.10).
+
+   · Steps are stable within a day. Each stage that changes the session is
+     decided on what happened before today, so finishing the first step of a
+     comeback session does not flip the rest of it into a different list.
+
+   · It backs off. A message shown is not shown again inside its cooldown,
+     and one dismissed three times running waits twice as long. Nothing
+     escalates.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.Coach = (function () {
+  var DAY = 86400000;
+  var REENTRY_GAP_DAYS = 4;   /* a gap this long gets a comeback session */
+  var WEEKLY_EVERY_DAYS = 7;
+  var EXAM_WEEK_DAYS = 6;     /* the six days before the exam taper */
+  var TRIAGE_MIN = 5;         /* untagged misses before triage joins the session */
+  var WEEKLY_KEEP = 52;
+  var DISMISS_BACKOFF = 3;    /* dismissals in a row before the cooldown doubles */
+  var SHORT_CARDS = 25;       /* ten minutes at the 0.4 min a card §10.00.11 assumes */
+  var LIGHT_QS = 10;
+  /* The journal's own floor and lead share for reading a distribution
+     (§10.10.3): under eight tags a leading cause is arithmetic, not news. */
+  var CAUSE_MIN = 8, CAUSE_LEAD = 0.3;
+  /* §10.00.11 prices a question at two minutes and a drill block at twenty. */
+  var MIN_PER_Q = 2, BLOCK_QS = 20;
+  var MAX_ADDITIONS = 2;
+
+  function sod(t) { return PMP.time.startOfDay(t); }
+  function ts(v) { var t = Date.parse(v); return isNaN(t) ? 0 : t; }
+  function line(id, c) { var L = PMP.COACH_LINES[id]; return L ? L.text(c || {}) : ""; }
+
+  /* ── 10.16.1  THE SLICE ──────────────────────────────────────────────────
+     Read with defaults filled in, so a backup from before a field existed
+     reads the same as a fresh one. */
+  function slice(state) {
+    var c = (state && state.coach) || {};
+    return {
+      profile: c.profile || null,
+      shown: c.shown && typeof c.shown === "object" ? c.shown : {},
+      dismissStreak: c.dismissStreak && typeof c.dismissStreak === "object" ? c.dismissStreak : {},
+      lastWeekly: c.lastWeekly || null,
+      weekly: Array.isArray(c.weekly) ? c.weekly : [],
+      focus: c.focus || null,
+      outcome: c.outcome || null,
+      muted: !!c.muted,
+      hints: c.hints !== false
+    };
+  }
+
+  /* The only writer, and it writes nothing but `coach`. */
+  function write(mutate) {
+    PMP.Store.commit(["coach"], function (s) {
+      var c = slice(s);
+      c.shown = Object.assign({}, c.shown);
+      c.dismissStreak = Object.assign({}, c.dismissStreak);
+      c.weekly = c.weekly.slice();
+      mutate(c);
+      s.coach = c;
+    });
+  }
+
+  /* ── 10.16.2  ACTIVITY ───────────────────────────────────────────────────
+     Read off §10.00's day index, on its own rule for what counts as a study
+     day: a question, a card, a sitting or a scenario. */
+  function activeDays(state) {
+    var idx = PMP.Metrics.dayIndex(state);
+    return Object.keys(idx).map(Number).filter(function (d) {
+      var e = idx[d];
+      return e.items > 0 || e.cards > 0 || e.exams > 0 || e.scenarios > 0;
+    }).sort(function (a, b) { return a - b; });
+  }
+
+  function todayIndex(state) {
+    var idx = PMP.Metrics.dayIndex(state);
+    return idx[sod(Date.now())] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0 };
+  }
+
+  /* ── 10.16.3  STAGE ──────────────────────────────────────────────────────
+     Exactly one, first match wins. Re-entry and the weekly review are judged
+     on what happened before today, so they hold for the whole of the day
+     they start rather than ending at the first card reviewed. */
+  function stage(state) {
+    var sl = slice(state);
+    if (!sl.profile) return "intake";
+    var cd = PMP.Metrics.countdown(state);
+    if (cd && cd.past) return "after";
+    if (cd && cd.days === 0) return "examday";
+    if (cd && cd.days >= 1 && cd.days <= EXAM_WEEK_DAYS) return "examweek";
+
+    var now = Date.now(), today = sod(now);
+    var days = activeDays(state);
+    var before = days.filter(function (d) { return d < today; });
+    var ref = Math.max(before.length ? before[before.length - 1] : 0, sod(ts(sl.profile.at)));
+    if (ref && today - ref >= REENTRY_GAP_DAYS * DAY) return "reentry";
+
+    var since = ts(sl.lastWeekly) || ts(sl.profile.at);
+    if (since && now - since >= WEEKLY_EVERY_DAYS * DAY &&
+        days.some(function (d) { return d >= sod(since); })) return "weekly";
+    return "normal";
+  }
+
+  /* ── 10.16.4  THE PLAN, AS THE COACH SEES IT ─────────────────────────────
+     A plan whose last day has passed is a finished plan, as the planner
+     itself treats it, so it is not today's commitment. */
+  function currentPlan(state) {
+    var p = state.planner;
+    if (!p || !Array.isArray(p.days) || !p.days.length) return null;
+    var today = sod(Date.now());
+    if (p.days[p.days.length - 1].d < today) return null;
+    var a = PMP.Planner.assess(p, state);
+    var day = p.days.filter(function (d) { return d.d === today; })[0] || null;
+    return { plan: p, a: a, day: day };
+  }
+
+  function retakeOf(state) {
+    if (!PMP.Learn) return null;
+    var lessons = state.lessons || {};
+    var now = Date.now(), today = sod(now);
+    var att = PMP.Metrics.attempts(state);
+    var path = PMP.Learn.path();
+    for (var i = 0; i < path.length; i++) {
+      var l = path[i], rec = lessons[l.id];
+      if (!rec || !rec.practice) continue;
+      var at = ts(rec.practice.at);
+      if (sod(at) === today) {
+        /* Retaken today: the set was also sat on an earlier day. */
+        var earlier = att.some(function (a) { return a.mode === "lesson" && a.lessonId === l.id && ts(a.at) < today; });
+        if (earlier) return { id: l.id, title: l.title, lesson: l, pct: PMP.fmt.pct(rec.practice.credit), days: 0, done: true };
+        continue;
+      }
+      if (rec.masteredAt || rec.practice.credit >= PMP.Learn.MASTERY_SHARE) continue;
+      var days = PMP.time.daysBetween(at, now);
+      if (days >= PMP.Learn.RETAKE_DAYS) {
+        return { id: l.id, title: l.title, lesson: l, pct: PMP.fmt.pct(rec.practice.credit), days: days, done: false };
+      }
+    }
+    return null;
+  }
+
+  function nextLesson() {
+    if (!PMP.Learn) return null;
+    return PMP.Learn.path().filter(function (l) {
+      var st = PMP.Learn.status(l);
+      return st !== "complete" && st !== "mastered";
+    })[0] || null;
+  }
+
+  function focusLabel(f) {
+    if (!f) return null;
+    if (f.kind === "pace") return line("focus_pace");
+    if (f.kind === "scenarios") return line("focus_scenarios");
+    var t = f.kind === "task" && PMP.ECO_TASK_BY_ID[f.id];
+    return t ? t.label : null;
+  }
+
+  /* ── 10.16.5  CONTEXT ────────────────────────────────────────────────────
+     The one object every template in §05.11 reads, built from the public
+     APIs of §10.00, §10.05, §10.09, §10.10 and §10.15 and nothing else. */
+  function context(state) {
+    state = state || PMP.Store.state;
+    var sl = slice(state), now = Date.now(), today = sod(now);
+    var R = PMP.READINESS;
+    var rd = PMP.Metrics.readiness(state);
+    var cd = PMP.Metrics.countdown(state);
+    var cp = currentPlan(state);
+    var cards = PMP.Cards ? PMP.Cards.counts(state) : { today: 0, due: 0, leech: 0 };
+
+    var misses = PMP.Journal.misses(state);
+    var untagged = misses.filter(function (r) { return !r.entry; }).length;
+    var jc = PMP.Journal.counts(state);
+    var tagged = (state.journal || []).length;
+    var tagsToday = (state.journal || []).filter(function (j) { return j && sod(ts(j.at)) === today; }).length;
+    var lead = null;
+    if (tagged >= CAUSE_MIN) {
+      var top = PMP.Journal.CAUSES.map(function (c) { return { c: c, n: jc[c.id] || 0 }; })
+        .sort(function (a, b) { return b.n - a.n; })[0];
+      if (top.n / tagged >= CAUSE_LEAD) lead = { id: top.c.id, short: top.c.short, n: top.n, share: top.n / tagged };
+    }
+
+    var pc = PMP.Metrics.pace(state);
+    var cov = PMP.Metrics.coverage(state);
+    var mk = PMP.Metrics.mocks(state);
+    var na = PMP.Metrics.nextActions(state);
+    var dg = PMP.Planner.diagnostic(state);
+    var nl = nextLesson();
+    var rt = retakeOf(state);
+
+    return {
+      stage: stage(state),
+      profile: sl.profile,
+      focus: sl.focus,
+      focusLabel: focusLabel(sl.focus),
+      attempts: PMP.Metrics.attempts(state).length,
+      readiness: { score: rd.score, provisional: rd.provisional, gates: rd.gates, gatesText: rd.gates.join(", and "), components: rd.components },
+      countdown: cd,
+      plan: cp ? {
+        behind: cp.a.behind, debt: cp.a.debt, behindLabel: PMP.fmt.duration(cp.a.debt * 60),
+        phase: cp.day ? cp.day.phase : null,
+        rest: !!(cp.day && (cp.day.rest || !cp.day.tasks.length)),
+        todayMins: cp.a.todayMins, todayDone: cp.a.todayDone, daysLeft: cp.a.daysLeft,
+        diagnostic: !!cp.plan.diagnostic
+      } : null,
+      diagnosticDone: !!(dg && dg.complete),
+      cards: { today: cards.today, due: cards.due, leech: cards.leech },
+      journal: { untagged: untagged, tagged: tagged, lead: lead, tagsToday: tagsToday },
+      pace: {
+        ready: pc.ready, median: pc.median === null ? null : Math.round(pc.median),
+        fast: pc.ready && pc.median < R.PACE_BAND[0], slow: pc.ready && pc.median > R.PACE_BAND[1],
+        target: Math.round(PMP.EXAM.PACE_TARGET_SEC)
+      },
+      coverage: { touched: cov.touched, of: cov.of, untouched: cov.of - cov.touched,
+                  firstShort: cov.short.length ? cov.short[0].task.id : null },
+      mocks: { n: mk.length, lastDays: mk.length ? Math.floor((now - mk[0].at) / DAY) : null },
+      actions: na,
+      topAction: na.ranked.length ? na.ranked[0].id : null,
+      retake: rt,
+      nextLesson: nl ? { id: nl.id, title: nl.title } : null
+    };
+  }
+
+  /* ── 10.16.6  TODAY'S SESSION ────────────────────────────────────────────
+     A step is { id, kind, icon, label, minutes, done, frac, why, route,
+     params, run?, manual?, chipId?, soft? }. A step with `run` starts
+     through that function; every other step starts by routing to `route`
+     with `params`, which are the existing entry points of each module. */
+  var GROUP = { cards: 0, lesson: 1, practice: 2, timed: 2, scenarios: 2, mock: 2, read: 2, retake: 3, triage: 3, journal: 4 };
+  var ICON = { cards: "cards", lesson: "learn", practice: "target", timed: "timer", scenarios: "branch",
+               mock: "timer", read: "clip", retake: "learn", triage: "journal", journal: "journal" };
+
+  function step(o) {
+    o.icon = o.icon || ICON[o.kind] || "target";
+    o.frac = o.done ? 1 : (o.frac || 0);
+    return o;
+  }
+
+  function fromChip(c) {
+    var remaining = Math.max(1, (c.need || c.count || 1) - (c.have || 0));
+    var s = { id: "plan:" + c.id, kind: c.k, label: c.label, minutes: c.mins, done: !!c.done, frac: c.frac || 0,
+              chipId: c.id, manual: !!c.manual };
+    if (c.k === "cards") { s.route = "cards"; s.why = line("why_cards"); }
+    else if (c.k === "lesson") { s.route = "learn"; s.params = { lesson: c.lessonId }; s.why = line("why_lesson"); }
+    else if (c.k === "timed") { s.route = "practice"; s.params = { mode: "timed", n: remaining }; s.why = line("why_timed"); }
+    else if (c.k === "scenarios") { s.route = "scenarios"; s.why = line("why_scenarios"); }
+    else if (c.k === "mock") { s.route = "exam"; s.why = line("why_mock"); }
+    else if (c.k === "journal") { s.route = "journal"; s.why = line("why_journal"); }
+    else if (c.k === "read") { s.route = "formulas"; s.why = line("why_read"); }
+    else {
+      s.kind = "practice"; s.route = "practice";
+      s.params = { n: remaining };
+      if (c.ecoTask) { s.params.ecoTask = c.ecoTask; s.why = line("why_task"); }
+      else if (c.domain) { s.params.domain = c.domain; s.why = line("why_domain"); }
+      else s.why = line("why_mixed");
+    }
+    return step(s);
+  }
+
+  function cardsStep(state, c, short) {
+    var reviewed = todayIndex(state).cards;
+    if (!c.cards.today && !reviewed) return null;
+    var aside = c.actions.aside;
+    if (short) {
+      return step({ id: "coach:cards", kind: "cards", route: "cards", label: line("step_cards_short"), minutes: 10,
+                    done: !c.cards.today || reviewed >= SHORT_CARDS, why: line("why_reentry_cards") });
+    }
+    return step({ id: "coach:cards", kind: "cards", route: "cards",
+                  label: aside ? aside.label : line("step_cards_short"), minutes: aside ? aside.minutes : 10,
+                  done: !c.cards.today, why: aside ? aside.why : line("why_cards") });
+  }
+
+  function mixedStep(state, why) {
+    return step({ id: "coach:mixed", kind: "practice", route: "practice", params: { n: LIGHT_QS },
+                  label: line("step_mixed", { n: LIGHT_QS }), minutes: LIGHT_QS * MIN_PER_Q,
+                  done: todayIndex(state).items >= LIGHT_QS, why: line(why) });
+  }
+
+  /* The coach's own additions: never more than two, and never in the
+     comeback session or exam week, which are short on purpose. */
+  function additions(state, c, plannedKinds) {
+    var out = [];
+    if (c.retake) {
+      out.push(step({ id: "coach:retake:" + c.retake.id, kind: "retake", route: "learn",
+                      params: { lesson: c.retake.id, part: 10 },
+                      label: line("step_retake", { id: c.retake.id }),
+                      minutes: ((c.retake.lesson.practice && c.retake.lesson.practice.count) || 10) * MIN_PER_Q,
+                      done: c.retake.done,
+                      why: c.retake.done ? line("why_lesson") : line("why_retake", { pct: c.retake.pct, days: c.retake.days }) }));
+    }
+    var j = c.journal;
+    if (plannedKinds.indexOf("journal") < 0 &&
+        (j.untagged >= TRIAGE_MIN || (j.tagsToday > 0 && j.untagged + j.tagsToday >= TRIAGE_MIN))) {
+      out.push(step({ id: "coach:triage", kind: "triage", route: "journal", label: line("step_triage"),
+                      minutes: 10, done: j.tagsToday >= TRIAGE_MIN, why: line("why_triage") }));
+    }
+    return out.slice(0, MAX_ADDITIONS);
+  }
+
+  function groupOf(kind) { return kind in GROUP ? GROUP[kind] : 2; }
+
+  function ordered(steps) {
+    return steps.map(function (s, i) { return { s: s, i: i }; }).sort(function (a, b) {
+      return (groupOf(a.s.kind) - groupOf(b.s.kind)) || (a.i - b.i);
+    }).map(function (x) { return x.s; });
+  }
+
+  /* The single optional extra once the day is done. The top row of next
+     best action, never a mock exam; a focus chosen in the weekly review
+     goes first, which is the only thing a focus changes. */
+  function extra(state, c) {
+    var f = c.focus;
+    var ranked = c.actions.ranked.filter(function (a) { return a.id !== "mock"; });
+    if (f && f.kind === "pace") {
+      var pa = ranked.filter(function (a) { return a.id === "pace"; })[0];
+      if (pa) return { kind: "timed", label: pa.label, minutes: pa.minutes, why: pa.why, soft: !!pa.soft, run: pa.run, icon: pa.icon };
+    }
+    if (f && f.kind === "scenarios") {
+      return { kind: "scenarios", label: line("step_scenarios", { n: 5 }), minutes: 15, route: "scenarios",
+               why: line("why_focus", { focus: c.focusLabel }), icon: "branch" };
+    }
+    if (f && f.kind === "task" && PMP.ECO_TASK_BY_ID[f.id]) {
+      return { kind: "practice", label: line("step_task", { n: LIGHT_QS, task: PMP.ECO_TASK_BY_ID[f.id].label }),
+               minutes: LIGHT_QS * MIN_PER_Q, route: "practice", params: { ecoTask: f.id, n: LIGHT_QS },
+               why: line("why_focus", { focus: c.focusLabel }), icon: "target" };
+    }
+    var a = ranked[0];
+    if (a) return { kind: "practice", label: a.label, minutes: a.minutes, why: a.why, soft: !!a.soft, run: a.run, icon: a.icon };
+    var as = c.actions.aside;
+    if (as) return { kind: "cards", label: as.label, minutes: as.minutes, why: as.why, route: "cards", icon: "cards" };
+    return null;
+  }
+
+  function session(state) {
+    state = state || PMP.Store.state;
+    var c = context(state);
+    var st = c.stage;
+    var steps = [], source = "none", rest = false;
+
+    if (st === "reentry") {
+      source = "reentry";
+      steps = [cardsStep(state, c, true), mixedStep(state, "why_reentry_qs")];
+    } else if (st === "examweek") {
+      var cpw = currentPlan(state);
+      if (cpw && cpw.day) {
+        source = "plan";
+        rest = !!cpw.day.rest || !cpw.day.tasks.length;
+        steps = ordered(cpw.day.tasks.filter(function (t) { return t.k !== "lesson"; }).map(fromChip));
+      } else {
+        source = "taper";
+        steps = [cardsStep(state, c, true), mixedStep(state, "why_light_qs")];
+      }
+    } else if (st === "normal" || st === "weekly") {
+      var cp = currentPlan(state);
+      if (cp && cp.day) {
+        source = "plan";
+        rest = !!cp.day.rest || !cp.day.tasks.length;
+        var planned = cp.day.tasks.map(fromChip);
+        var kinds = cp.day.tasks.map(function (t) { return t.k; });
+        steps = ordered(planned.concat(rest ? [] : additions(state, c, kinds)));
+      } else {
+        source = "fallback";
+        var nl = PMP.Learn ? PMP.Learn.path().filter(function (l) {
+          var r = (state.lessons || {})[l.id];
+          return r && r.completedAt && sod(ts(r.completedAt)) === sod(Date.now());
+        })[0] || nextLesson() : null;
+        var top = c.actions.ranked.filter(function (a) { return a.id !== "mock"; })[0];
+        var fb = [cardsStep(state, c, false)];
+        if (nl) {
+          var lr = (state.lessons || {})[nl.id];
+          fb.push(step({ id: "coach:lesson:" + nl.id, kind: "lesson", route: "learn", params: { lesson: nl.id },
+                         label: line("step_lesson", { id: nl.id, title: nl.title }), minutes: nl.minutes,
+                         done: !!(lr && lr.completedAt && sod(ts(lr.completedAt)) === sod(Date.now())),
+                         why: line("why_lesson_next") }));
+        }
+        if (top) {
+          var count = top.id === "coverage" ? Math.round(top.minutes / MIN_PER_Q) : BLOCK_QS;
+          fb.push(step({ id: "coach:action:" + top.id, kind: top.id === "pace" ? "timed" : "practice",
+                         label: top.label, minutes: top.minutes, soft: !!top.soft, run: top.run,
+                         done: todayIndex(state).items >= count, why: top.why }));
+        }
+        steps = ordered(fb.filter(Boolean).concat(additions(state, c, [])));
+      }
+    }
+    steps = steps.filter(Boolean);
+
+    var plannedMins = steps.reduce(function (a, s) { return a + (s.minutes || 0); }, 0);
+    var doneMins = steps.reduce(function (a, s) { return a + (s.minutes || 0) * s.frac; }, 0);
+    var allDone = steps.length > 0 && steps.every(function (s) { return s.done; });
+    var ex = (allDone || rest || (!steps.length && source !== "none")) ? extra(state, c) : null;
+    return {
+      stage: st, steps: steps, plannedMins: plannedMins, doneMins: doneMins,
+      allDone: allDone, rest: rest, extra: ex, source: source,
+      next: steps.filter(function (s) { return !s.done; })[0] || null
+    };
+  }
+
+  /* ── 10.16.7  MESSAGES ───────────────────────────────────────────────────
+     Filter by stage and by `when`, drop anything inside its cooldown, take
+     the highest priorities. Muted means none at all. */
+  var DEFAULT_STAGES = ["normal", "weekly"];
+  var DEFAULT_SURFACES = ["today", "strip"];
+
+  function cooldownMs(m, sl) {
+    var back = (sl.dismissStreak[m.id] || 0) >= DISMISS_BACKOFF ? 2 : 1;
+    return m.cooldownDays * DAY * back;
+  }
+
+  function eligible(m, c, sl, now) {
+    if ((m.stages || DEFAULT_STAGES).indexOf(c.stage) < 0) return false;
+    var ok = false;
+    try { ok = !!m.when(c); } catch (e) { ok = false; }
+    if (!ok) return false;
+    var last = ts(sl.shown[m.id]);
+    return !last || now - last >= cooldownMs(m, sl);
+  }
+
+  function render(m, c) {
+    return { id: m.id, text: m.text(c), action: m.action || null, priority: m.priority };
+  }
+
+  function messages(state, surface, max) {
+    state = state || PMP.Store.state;
+    var sl = slice(state);
+    if (sl.muted) return [];
+    var c = context(state), now = Date.now();
+    surface = surface || "today";
+    return PMP.COACH_MESSAGES.filter(function (m) {
+      return (m.surfaces || DEFAULT_SURFACES).indexOf(surface) >= 0 && eligible(m, c, sl, now);
+    })
+      .sort(function (a, b) { return b.priority - a.priority; })
+      .slice(0, Math.max(0, max === undefined ? 2 : max))
+      .map(function (m) { return render(m, c); });
+  }
+
+  /* One message by id, rendered if it still applies, whatever its cooldown.
+     Today keeps the messages it chose for the rest of the day, and needs
+     their current text when it is drawn again. */
+  function message(id, state) {
+    state = state || PMP.Store.state;
+    var m = PMP.COACH_MESSAGES.filter(function (x) { return x.id === id; })[0];
+    if (!m) return null;
+    var c = context(state), ok = false;
+    try { ok = (m.stages || DEFAULT_STAGES).indexOf(c.stage) >= 0 && !!m.when(c); } catch (e) { ok = false; }
+    return ok ? render(m, c) : null;
+  }
+
+  function markShown(id) {
+    write(function (c) { c.shown[id] = new Date().toISOString(); });
+  }
+  /* A dismissal counts as a showing, and three in a row double the wait. */
+  function dismiss(id) {
+    write(function (c) {
+      c.shown[id] = new Date().toISOString();
+      c.dismissStreak[id] = (c.dismissStreak[id] || 0) + 1;
+    });
+  }
+  /* Taking a message's action is the opposite of ignoring it. */
+  function acted(id) {
+    write(function (c) {
+      c.shown[id] = new Date().toISOString();
+      c.dismissStreak[id] = 0;
+    });
+  }
+
+  /* ── 10.16.8  PROFILE, PREFERENCES, OUTCOME ──────────────────────────── */
+  function setProfile(p) {
+    write(function (c) {
+      c.profile = {
+        at: new Date().toISOString(),
+        experience: p.experience || "some", agile: p.agile || "some",
+        when: p.when || "varies", why: String(p.why || "").slice(0, 280)
+      };
+      c.outcome = null;
+    });
+  }
+  function setPref(key, value) {
+    if (key !== "muted" && key !== "hints") return;
+    write(function (c) { c[key] = !!value; });
+  }
+  function setOutcome(result) {
+    write(function (c) { c.outcome = result ? { at: new Date().toISOString(), result: result } : null; });
+  }
+
+  /* ── 10.16.9  WEEKLY REVIEW ──────────────────────────────────────────────
+     Every figure is one §10.00 or the plan's own assessment already gives;
+     the review only puts this week's beside the last review's. */
+  function weeklySummary(state) {
+    state = state || PMP.Store.state;
+    var sl = slice(state), c = context(state);
+    var today = sod(Date.now()), from = today - 6 * DAY;
+    var days = activeDays(state).filter(function (d) { return d >= from && d <= today; }).length;
+
+    var adherence = null;
+    var cp = currentPlan(state);
+    if (cp) {
+      var week = cp.plan.days.filter(function (d) { return d.d >= from && d.d <= today; });
+      var planned = week.reduce(function (a, d) { return a + (d.total || 0); }, 0);
+      var done = week.reduce(function (a, d) { return a + (d.doneMins || 0); }, 0);
+      if (planned > 0) adherence = done / planned;
+    }
+
+    var prev = sl.weekly.length ? sl.weekly[sl.weekly.length - 1].readiness : null;
+    var reading = null;
+    if (c.journal.tagged >= CAUSE_MIN) reading = PMP.Journal.reading(PMP.Journal.counts(state), c.journal.tagged);
+    var gap = c.readiness.components.slice().sort(function (a, b) {
+      return (b.weight - b.points) - (a.weight - a.points);
+    })[0];
+
+    /* The three weakest tasks with enough answers to say so; while too few
+       have that, the three with the fewest answers, which is where the
+       evidence is thinnest. */
+    var by = PMP.Metrics.byTask(state);
+    var MIN = PMP.Metrics.MIN_SAMPLE;
+    var solid = PMP.ECO_TASKS.filter(function (t) { return by[t.id] && by[t.id].n >= MIN; })
+      .sort(function (a, b) { return by[a.id].acc - by[b.id].acc; });
+    var pool = solid.length >= 3 ? solid : PMP.ECO_TASKS.slice().sort(function (a, b) {
+      return ((by[a.id] && by[a.id].n) || 0) - ((by[b.id] && by[b.id].n) || 0);
+    });
+    var options = pool.slice(0, 3).map(function (t) { return { kind: "task", id: t.id, label: t.label }; })
+      .concat([{ kind: "pace", label: line("focus_pace") }, { kind: "scenarios", label: line("focus_scenarios") }]);
+
+    return {
+      daysActive: days, adherence: adherence, readiness: c.readiness.score, provisional: c.readiness.provisional,
+      prev: prev, lead: c.journal.lead, tagged: c.journal.tagged, reading: reading,
+      gap: gap ? { label: gap.label, figure: gap.figure } : null,
+      options: options, why: sl.profile && sl.profile.why ? sl.profile.why : ""
+    };
+  }
+
+  function completeWeekly(choice) {
+    choice = choice || {};
+    var sum = weeklySummary(PMP.Store.state);
+    var at = new Date().toISOString();
+    write(function (c) {
+      var f = choice.focus && choice.focus.kind ? { kind: choice.focus.kind, id: choice.focus.id || null, setAt: at } : null;
+      c.weekly.push({
+        at: at, readiness: sum.readiness,
+        adherence: sum.adherence === null ? null : Math.round(sum.adherence * 1000) / 1000,
+        daysActive: sum.daysActive, focus: f, note: String(choice.note || "").slice(0, 500)
+      });
+      if (c.weekly.length > WEEKLY_KEEP) c.weekly = c.weekly.slice(-WEEKLY_KEEP);
+      c.lastWeekly = at;
+      c.focus = f;
+    });
+  }
+
+  /* ── 10.16.10  THE HINT LADDER ───────────────────────────────────────────
+     Three rungs, each from the item or its lesson, none naming the answer:
+     the lens of the item's delivery approach, the item's own mindset
+     sentence, then one wrong option struck out with its rationale. The
+     struck option is always one the person has not chosen, so the ladder
+     never says their pick is right or wrong. On a type with no options to
+     strike, the third rung is a trap from the lesson for the task.
+     `p` is the item as presented (§10.04 present()), `chosen` its current
+     value. Returns { rung, text, detail, strike? }. */
+  function hint(q, rung, p, chosen) {
+    var lesson = PMP.Learn ? PMP.Learn.forTask(q.ecoTask) : null;
+    if (rung <= 1) {
+      if (q.approach && PMP.ECO.APPROACH_LABELS[q.approach]) {
+        return { rung: 1, text: line("hint_lens", { approach: q.approach }),
+                 detail: (lesson && lesson.lenses && lesson.lenses[q.approach]) || null };
+      }
+      return { rung: 1, text: line("hint_lens_none"), detail: null };
+    }
+    if (rung === 2) return { rung: 2, text: line("hint_principle"), detail: q.mindset || null };
+    if (p && (p.type === "single" || p.type === "multi")) {
+      var picked = Object.create(null);
+      (Array.isArray(chosen) ? chosen : chosen == null ? [] : [chosen]).forEach(function (id) { picked[id] = true; });
+      var o = p.options.filter(function (x) { return !x.correct && !picked[x.id]; })[0];
+      if (o) return { rung: 3, text: line("hint_eliminate"), detail: o.rationale || null, strike: o.id };
+    }
+    var trap = lesson && lesson.traps && lesson.traps[0];
+    if (trap) return { rung: 3, text: line("hint_trap"), detail: trap };
+    return { rung: 3, text: line("hint_principle"), detail: q.mindset || null };
+  }
+
+  /* ── 10.16.11  CALENDAR ──────────────────────────────────────────────────
+     The plan's remaining study days as an iCalendar file, one event a day at
+     the time of day the person chose in the intake, lasting the day's planned
+     minutes. Built here and handed to §09.8 to save, so the reminders live
+     in the person's own calendar: no network, no notification permission.
+     Times are floating local times (no zone), which is what "19:00 on the
+     day" means wherever the file is opened. */
+  var STUDY_HOUR = { morning: [7, 0], midday: [12, 30], evening: [19, 0], varies: [19, 0] };
+
+  function calendar(state) {
+    state = state || PMP.Store.state;
+    var cp = currentPlan(state);
+    if (!cp) return null;
+    var today = sod(Date.now());
+    var sl = slice(state);
+    var hm = STUDY_HOUR[(sl.profile && sl.profile.when) || "varies"] || STUDY_HOUR.varies;
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function esc(s) { return String(s).replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n"); }
+    /* RFC 5545 folds content lines at 75 octets; continuation lines start
+       with a space. Counted in characters, which is safe for this ASCII-
+       heavy text and only ever folds earlier than required otherwise. */
+    function fold(lineText) {
+      var out = [], s = lineText;
+      while (s.length > 74) { out.push(s.slice(0, 74)); s = " " + s.slice(74); }
+      out.push(s);
+      return out.join("\r\n");
+    }
+    var now = new Date();
+    var stamp = now.getUTCFullYear() + pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + "T" +
+      pad(now.getUTCHours()) + pad(now.getUTCMinutes()) + pad(now.getUTCSeconds()) + "Z";
+    var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//PMP Prep Suite//Coach//EN", "CALSCALE:GREGORIAN"];
+    var events = 0;
+    cp.plan.days.forEach(function (day) {
+      if (day.d < today || day.rest || !day.tasks.length) return;
+      var d = new Date(day.d);
+      var ymd = d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
+      var total = day.tasks.reduce(function (a, t) { return a + (t.mins || 0); }, 0);
+      lines.push("BEGIN:VEVENT", "UID:pmp-study-" + ymd + "@pmp-prep-suite", "DTSTAMP:" + stamp,
+        "DTSTART:" + ymd + "T" + pad(hm[0]) + pad(hm[1]) + "00", "DURATION:PT" + Math.max(15, total) + "M",
+        fold("SUMMARY:" + esc("PMP study: " + day.tasks[0].label + (day.tasks.length > 1 ? " and " + (day.tasks.length - 1) + " more" : ""))),
+        fold("DESCRIPTION:" + esc(day.tasks.map(function (t) { return t.label; }).join("\n"))),
+        "END:VEVENT");
+      events++;
+    });
+    lines.push("END:VCALENDAR");
+    return { text: lines.join("\r\n") + "\r\n", events: events };
+  }
+
+  /* ── 10.16.12  AUDIT FIXTURES ────────────────────────────────────────────
+     Synthetic contexts that between them make every message in §05.11
+     apply, so §10.14 can render each one without a live state. Shaped
+     exactly like context() returns. */
+  function fixtures() {
+    function base() {
+      return {
+        stage: "normal", profile: { at: "", experience: "some", agile: "some", when: "evening", why: "" },
+        focus: null, focusLabel: null, attempts: 120,
+        readiness: { score: 52, provisional: false, gates: [], gatesText: "", components: [] },
+        countdown: { days: 40, past: false },
+        plan: { behind: false, debt: 0, behindLabel: "0s", phase: "build", rest: false, todayMins: 60, todayDone: 0, daysLeft: 40, diagnostic: true },
+        diagnosticDone: true,
+        cards: { today: 5, due: 5, leech: 0 },
+        journal: { untagged: 0, tagged: 3, lead: null, tagsToday: 0 },
+        pace: { ready: true, median: 62, fast: false, slow: false, target: 80 },
+        coverage: { touched: 26, of: 26, untouched: 0, firstShort: null },
+        mocks: { n: 1, lastDays: 10 }, actions: { ranked: [], aside: null }, topAction: "weak",
+        retake: null, nextLesson: { id: "P4", title: "Project finance" }
+      };
+    }
+    function v(o) { var b = base(); Object.keys(o).forEach(function (k) { b[k] = o[k]; }); return b; }
+    return [
+      v({}),
+      v({ attempts: 60, diagnosticDone: false, focus: { kind: "pace" }, focusLabel: "Pace",
+          profile: { at: "", experience: "new", agile: "new", when: "morning", why: "" },
+          readiness: { score: 31, provisional: true, gates: ["40 more answers needed", "9 more ECO tasks to touch"], gatesText: "40 more answers needed, and 9 more ECO tasks to touch", components: [] },
+          plan: { behind: true, debt: 416, behindLabel: "6h 56m", phase: "consolidate", rest: false, todayMins: 60, todayDone: 0, daysLeft: 30, diagnostic: false },
+          cards: { today: 25, due: 20, leech: 1 },
+          journal: { untagged: 7, tagged: 12, lead: { id: "misread", short: "Misread the question", n: 6, share: 0.5 }, tagsToday: 0 },
+          pace: { ready: true, median: 31, fast: true, slow: false, target: 80 },
+          coverage: { touched: 22, of: 26, untouched: 4, firstShort: "x" }, topAction: "coverage",
+          mocks: { n: 0, lastDays: null },
+          retake: { id: "P4", title: "Project finance", pct: "55%", days: 3, done: false } }),
+      v({ attempts: 0, cards: { today: 40, due: 0, leech: 3 }, nextLesson: { id: "F1", title: "How the exam works" },
+          journal: { untagged: 0, tagged: 9, lead: { id: "mindset", short: "Wrong mindset", n: 4, share: 0.44 }, tagsToday: 0 },
+          pace: { ready: true, median: 104, fast: false, slow: true, target: 80 },
+          mocks: { n: 2, lastDays: 52 } }),
+      v({ plan: null, journal: { untagged: 2, tagged: 10, lead: { id: "knowledge", short: "Knowledge gap", n: 5, share: 0.5 }, tagsToday: 0 } }),
+      v({ plan: { behind: false, debt: 0, behindLabel: "0s", phase: "build", rest: false, todayMins: 60, todayDone: 0, daysLeft: 40, diagnostic: false } }),
+      v({ stage: "reentry", plan: { behind: true, debt: 1336, behindLabel: "22h 16m", phase: "consolidate", rest: false, todayMins: 60, todayDone: 0, daysLeft: 40, diagnostic: true } }),
+      v({ stage: "examweek", countdown: { days: 1, past: false } }),
+      v({ stage: "examweek", countdown: { days: 6, past: false } })
+    ];
+  }
+
+  return {
+    stage: stage, context: context, session: session, messages: messages, message: message,
+    markShown: markShown, dismiss: dismiss, acted: acted,
+    slice: slice, setProfile: setProfile, setPref: setPref, setOutcome: setOutcome,
+    weeklySummary: weeklySummary, completeWeekly: completeWeekly,
+    hint: hint, HINT_RUNGS: 3, calendar: calendar, STUDY_HOUR: STUDY_HOUR,
+    line: line, fixtures: fixtures,
+    REENTRY_GAP_DAYS: REENTRY_GAP_DAYS, WEEKLY_EVERY_DAYS: WEEKLY_EVERY_DAYS, TRIAGE_MIN: TRIAGE_MIN
+  };
+})();
+
+/* ── 10.17  TODAY AND THE COACH'S SURFACES ──────────────────────────────────
+   Everything of the coach that is drawn: the Today view (#/today, the home
+   page), the intake, and the Coach group in Settings. §10.16 decides; this
+   module only draws what it decided and routes the person through the
+   existing entry points of each module.
+
+   One primary button per screen. Today always has exactly one: Start next
+   step while there is a step, the extra once the day is done, and See your
+   progress when there is nothing else to do.
+
+   Messages hold for the day. The engine will not offer a message again
+   inside its cooldown, so the ones Today picks are remembered (in memory,
+   for this day) and drawn again on every visit until they are dismissed or
+   stop applying. Otherwise a message would vanish the second time the page
+   was drawn. ═══════════════════════════════════════════════════════════ */
+PMP.CoachUI = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on, frag = PMP.dom.frag;
+  var C = PMP.Coach;
+  var DOW = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var picks = { day: null, ids: [] };
+  var seenDone = { day: null, ids: null };
+
+  function line(id, c) { return C.line(id, c); }
+  function sod(t) { return PMP.time.startOfDay(t); }
+
+  function repaint() {
+    if (PMP.Router.current && PMP.Router.current.name !== "today") return;
+    var host = document.getElementById("view");
+    if (!host) return;
+    host.innerHTML = "";
+    view(host);
+  }
+
+  function mins(n) {
+    n = Math.round(n);
+    if (n < 60) return n + " min";
+    var h = Math.floor(n / 60), m = n % 60;
+    return m ? h + "h " + m + "m" : h + "h";
+  }
+
+  /* ── 10.17.1  STARTING A STEP ────────────────────────────────────────────
+     ui.coachRun tells the module's summary that the person came from
+     Today, so its strip can offer the next step. Session-only. */
+  function startStep(s) {
+    PMP.Store.commit(["ui"], function (st) {
+      st.ui.coachRun = { startedAt: Date.now(), fromToday: true, stepId: s.id || null };
+    }, { transient: true });
+    if (s.run) s.run();
+    else PMP.Router.navigate(s.route, s.params || null);
+  }
+
+  function runAction(m) {
+    var a = m.action;
+    if (!a) return;
+    C.acted(m.id);
+    if (a.run) { a.run(); repaint(); }
+    else PMP.Router.navigate(a.route, a.params || null);
+  }
+
+  /* ── 10.17.2  MESSAGES ──────────────────────────────────────────────── */
+  function todaysMessages(state) {
+    var today = sod(Date.now());
+    if (C.slice(state).muted) return [];
+    if (picks.day !== today) {
+      picks = { day: today, ids: C.messages(state, "today", 2).map(function (m) { return m.id; }) };
+      picks.ids.forEach(function (id) { C.markShown(id); });
+    }
+    return picks.ids.map(function (id) { return C.message(id, state); }).filter(Boolean);
+  }
+
+  function msgNode(m) {
+    return el("div", { class: "coach-msg", role: "note" }, [
+      icon("info"),
+      el("p", { text: m.text }),
+      el("span", { class: "coach-msg-a" }, [
+        m.action ? el("button", { class: "btn btn--sm", type: "button", onclick: function () { runAction(m); } }, m.action.label) : null,
+        el("button", {
+          class: "icon-btn", type: "button", "aria-label": "Dismiss this message",
+          onclick: function () {
+            C.dismiss(m.id);
+            picks.ids = picks.ids.filter(function (id) { return id !== m.id; });
+            PMP.UI.announce("Message dismissed");
+            repaint();
+          }
+        }, [icon("x")])
+      ])
+    ]);
+  }
+
+  /* ── 10.17.3  THE SESSION ───────────────────────────────────────────── */
+  function stepRow(s, primaryId) {
+    var meta = mins(s.minutes) + (s.soft ? " \u00B7 estimate" : "") +
+      (s.done ? " \u00B7 done" : s.frac > 0 ? " \u00B7 " + Math.round(s.frac * 100) + "% so far" : "");
+    var act;
+    if (s.done) act = el("span", { class: "chip chip--correct" }, [icon("check"), "Done"]);
+    else if (s.manual) {
+      act = el("span", { class: "td-act" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () { startStep(s); } }, "Open"),
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () {
+          PMP.Planner.toggleManual(s.chipId);
+          repaint();
+        } }, [icon("clip"), "Mark done"])
+      ]);
+    } else {
+      act = el("button", {
+        class: "btn btn--sm", type: "button", "aria-label": "Start: " + s.label,
+        onclick: function () { startStep(s); }
+      }, "Start");
+    }
+    return el("li", { class: "td-step", dataset: { done: String(!!s.done), next: String(s.id === primaryId) } }, [
+      el("span", { class: "td-ic" }, [icon(s.done ? "check" : s.icon)]),
+      el("div", { class: "td-main" }, [
+        el("span", { class: "td-l", text: s.label }),
+        el("span", { class: "td-m", text: meta }),
+        s.why ? el("details", { class: "td-why" }, [
+          el("summary", { text: "Why this?" }),
+          el("p", { text: s.why })
+        ]) : null
+      ]),
+      act
+    ]);
+  }
+
+  /* A step that has ticked since Today was last drawn is announced once.
+     The work happens elsewhere, so this is the first chance to say so. */
+  function announceTicks(steps) {
+    var today = sod(Date.now());
+    var done = steps.filter(function (s) { return s.done; }).map(function (s) { return s.id; });
+    if (seenDone.day === today && seenDone.ids) {
+      var fresh = steps.filter(function (s) { return s.done && seenDone.ids.indexOf(s.id) < 0; });
+      if (fresh.length) {
+        setTimeout(function () {
+          PMP.UI.announce("Step done: " + fresh.map(function (s) { return s.label; }).join("; ") + ".");
+        }, 400);
+      }
+    }
+    seenDone = { day: today, ids: done };
+  }
+
+  function sessionCard(ses, cta) {
+    var card = el("section", { class: "card td-session", "aria-labelledby": "td-session-h" });
+    var head = ses.source === "fallback" ? line("today_fallback")
+      : ses.source === "reentry" ? line("today_reentry")
+      : ses.stage === "examweek" && PMP.Metrics.countdown(PMP.Store.state)
+        ? line("today_examweek", { days: PMP.Metrics.countdown(PMP.Store.state).days }) : null;
+    card.appendChild(el("span", { class: "eyebrow", text: "Session" }));
+    card.appendChild(el("h2", { id: "td-session-h", text: ses.rest && !ses.steps.length ? "Rest day"
+      : ses.allDone ? "Done for today" : ses.steps.length ? PMP.fmt.plural(ses.steps.length, "step") + ", about " + mins(ses.plannedMins) : "Nothing scheduled" }));
+    if (head) card.appendChild(el("p", { text: head }));
+
+    if (ses.steps.length) {
+      var pct = ses.plannedMins ? Math.round(ses.doneMins / ses.plannedMins * 100) : 0;
+      card.appendChild(el("div", { class: "td-meter" }, [
+        el("div", {
+          class: "progress", role: "progressbar", "aria-label": "Today's session",
+          "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(pct)
+        }, [el("i", { style: "width:" + pct + "%" })]),
+        el("span", { class: "td-m", text: mins(ses.doneMins) + " of " + mins(ses.plannedMins) })
+      ]));
+      card.appendChild(el("ol", { class: "td-steps" }, ses.steps.map(function (s) {
+        return stepRow(s, ses.next && ses.next.id);
+      })));
+    }
+
+    if (ses.allDone || ses.rest || (!ses.steps.length && ses.extra)) {
+      card.appendChild(el("p", { class: "td-done", text: ses.extra
+        ? (ses.rest && !ses.allDone ? line("today_rest") : line("today_done")) : line("today_done_none") }));
+      if (ses.extra) card.appendChild(extraRow(ses.extra, cta === "extra"));
+    }
+
+    if (ses.next && (cta === "next" || cta === "none")) {
+      card.appendChild(el("div", { class: "td-cta" }, [
+        el("button", {
+          class: "btn btn--block" + (cta === "next" ? " btn--primary" : ""), type: "button",
+          onclick: function () { startStep(ses.next); }
+        }, [icon(ses.next.icon), "Start next step"])
+      ]));
+    }
+    return card;
+  }
+
+  function extraRow(x, primary) {
+    return el("div", { class: "td-extra" }, [
+      el("span", { class: "td-ic" }, [icon(x.icon || "target")]),
+      el("div", { class: "td-main" }, [
+        el("span", { class: "td-l", text: x.label }),
+        el("span", { class: "td-m", text: mins(x.minutes) + (x.soft ? " \u00B7 estimate" : "") + " \u00B7 optional" }),
+        x.why ? el("details", { class: "td-why" }, [el("summary", { text: "Why this?" }), el("p", { text: x.why })]) : null
+      ]),
+      el("button", {
+        class: "btn btn--sm" + (primary ? " btn--primary" : ""), type: "button",
+        onclick: function () { startStep(x); }
+      }, "Start")
+    ]);
+  }
+
+  /* ── 10.17.4  INTAKE ─────────────────────────────────────────────────────
+     Five short screens in the shared sheet, each skippable. Exam date and
+     hours go where they already live (settings.examDate, planner.inputs,
+     through the planner's own save); the rest is the coach profile. Run
+     again from Settings, Skip means Cancel and nothing is written. */
+  function choiceGroup(name, legend, opts, value) {
+    var inputs = [];
+    var fs = el("fieldset", { class: "td-choice" }, [el("legend", { text: legend })]);
+    opts.forEach(function (o, i) {
+      var id = "ik-" + name + "-" + i;
+      var input = el("input", { type: "radio", name: "ik-" + name, id: id, value: o[0], checked: o[0] === value });
+      inputs.push(input);
+      fs.appendChild(el("label", { for: id, class: "td-opt" }, [input, el("span", { text: o[1] })]));
+    });
+    return { node: fs, value: function () {
+      var hit = inputs.filter(function (x) { return x.checked; })[0];
+      return hit ? hit.value : value;
+    } };
+  }
+
+  function numField(id, label, value) {
+    var input = el("input", { class: "input", id: id, type: "number", min: "0", max: "600", step: "15", value: String(value) });
+    return { node: el("label", { class: "field", for: id }, [el("span", { class: "lbl", text: label }), input]),
+             value: function () { return Math.max(0, parseInt(input.value, 10) || 0); } };
+  }
+
+  function futureDate(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || "");
+    if (!m) return false;
+    return new Date(+m[1], +m[2] - 1, +m[3]).getTime() > sod(Date.now());
+  }
+
+  function intake(opts) {
+    opts = opts || {};
+    var state = PMP.Store.state;
+    var prof = C.slice(state).profile || {};
+    var pi = (state.planner && state.planner.inputs) || {};
+    var a = {
+      booked: "booked",
+      date: opts.clearDate ? "" : (state.settings.examDate ? String(state.settings.examDate).slice(0, 10) : ""),
+      weekdayMin: pi.weekdayMin || 60, weekendMin: pi.weekendMin || 150,
+      experience: prof.experience || "some", agile: prof.agile || "some",
+      when: prof.when || "evening", why: prof.why || ""
+    };
+    var LEVELS = [["new", "New to it"], ["some", "Some"], ["lots", "A lot"]];
+
+    var screens = [
+      function (err) {
+        var booked = choiceGroup("booked", "Is it booked?", [["booked", "Booked"], ["target", "Not booked yet: I'm aiming for"]], a.booked);
+        var date = el("input", { class: "input", id: "ik-date", type: "date", value: a.date });
+        return {
+          title: "Exam date",
+          body: [el("p", { text: line("intake_date") }), booked.node,
+                 el("label", { class: "field", for: "ik-date" }, [el("span", { class: "lbl", text: "Date" }), date]),
+                 err ? el("p", { class: "td-err", role: "alert", text: err }) : null],
+          read: function () { a.booked = booked.value(); a.date = date.value; },
+          check: function () { return futureDate(a.date) ? null : line("intake_date_err"); }
+        };
+      },
+      function () {
+        var wd = numField("ik-wd", "Minutes on a weekday", a.weekdayMin);
+        var we = numField("ik-we", "Minutes on a weekend day", a.weekendMin);
+        return {
+          title: "Your time",
+          body: [el("p", { text: line("intake_time") }), wd.node, we.node],
+          read: function () { a.weekdayMin = wd.value(); a.weekendMin = we.value(); }
+        };
+      },
+      function () {
+        var ex = choiceGroup("exp", "Managing projects", LEVELS, a.experience);
+        var ag = choiceGroup("agile", "Agile and hybrid work", LEVELS, a.agile);
+        return {
+          title: "Background",
+          body: [el("p", { text: line("intake_background") }), ex.node, ag.node],
+          read: function () { a.experience = ex.value(); a.agile = ag.value(); }
+        };
+      },
+      function () {
+        var wh = choiceGroup("when", "Usually", [["morning", "Mornings"], ["midday", "Middle of the day"], ["evening", "Evenings"], ["varies", "It varies"]], a.when);
+        var why = el("input", { class: "input", id: "ik-why", type: "text", maxlength: "280", value: a.why });
+        return {
+          title: "When you'll study",
+          body: [el("p", { text: line("intake_when") }), wh.node,
+                 el("label", { class: "field", for: "ik-why" }, [el("span", { class: "lbl", text: "Why you're doing this, optional" }), why])],
+          read: function () { a.when = wh.value(); a.why = why.value.trim(); }
+        };
+      },
+      function () {
+        var first = PMP.Learn && PMP.Learn.path()[0];
+        return {
+          title: "Start",
+          body: [el("p", { text: line("intake_start") })],
+          read: function () {},
+          last: true, first: first
+        };
+      }
+    ];
+
+    function show(i, err) {
+      var scr = screens[i](err);
+      var actions = [];
+      if (i > 0) actions.push({ id: "back", label: "Back" });
+      actions.push({ id: "skip", label: opts.redo ? "Cancel" : "Skip" });
+      if (scr.last) {
+        if (scr.first) actions.push({ id: "lesson", label: "Lesson " + scr.first.id + " first" });
+        actions.push({ id: "diag", label: "Diagnostic now, about 50 min", primary: true });
+      } else {
+        actions.push({ id: "next", label: "Next", primary: true });
+      }
+      PMP.UI.sheet({
+        title: line("intake_head") + " \u00B7 " + (i + 1) + " of " + screens.length + ": " + scr.title,
+        body: frag([i === 0 ? el("p", { class: "hint", text: line("intake_intro") }) : null].concat(scr.body)),
+        actions: actions
+      }).then(function (choice) {
+        scr.read();
+        if (choice === "back") return show(i - 1);
+        if (choice === "next") {
+          var bad = scr.check ? scr.check() : null;
+          return bad ? show(i, bad) : show(i + 1);
+        }
+        if (choice === "diag" || choice === "lesson") return finish(choice, scr.first);
+        return skip();
+      });
+    }
+
+    function skip() {
+      if (opts.redo) { repaint(); return; }
+      C.setProfile(a);
+      if (futureDate(a.date)) PMP.Store.commit(["settings"], function (s) { s.settings.examDate = a.date; });
+      repaint();
+    }
+
+    function finish(choice, firstLesson) {
+      C.setProfile(a);
+      if (futureDate(a.date)) {
+        var inputs = { examDate: a.date, weekdayMin: a.weekdayMin, weekendMin: a.weekendMin };
+        var plan = PMP.Planner.build(inputs, PMP.Store.state);
+        if (plan.error) PMP.UI.toast(plan.error, "warn");
+        else PMP.Planner.save(plan, inputs);
+      }
+      if (choice === "diag") {
+        startStep({ id: "intake:diagnostic", run: function () { PMP.Planner.startDiagnostic(); } });
+      } else if (firstLesson) {
+        startStep({ id: "intake:lesson", route: "learn", params: { lesson: firstLesson.id } });
+      } else repaint();
+    }
+
+    show(0);
+  }
+
+  /* ── 10.17.5  THE VIEW ───────────────────────────────────────────────── */
+  function header(state, st) {
+    var cd = PMP.Metrics.countdown(state);
+    var title = st === "intake" ? line("intake_head")
+      : st === "examday" ? "Exam day"
+      : st === "after" ? "After the exam"
+      : st === "examweek" ? "Exam week"
+      : st === "reentry" ? "Welcome back"
+      : "Today's session";
+    return el("div", { class: "view-hd td-hd" }, [
+      el("span", { class: "eyebrow", text: "Today \u00B7 " + DOW[new Date().getDay()] }),
+      el("h2", { text: title }),
+      cd && !cd.past && cd.days > 0
+        ? el("span", { class: "chip td-count", text: PMP.fmt.plural(cd.days, "day") + " to go" }) : null
+    ]);
+  }
+
+  function footer(primary) {
+    return el("div", { class: "filter-bar td-foot" }, [
+      el("a", { class: "btn" + (primary ? " btn--primary" : " btn--sm"), href: "#/dashboard" }, [icon("gauge"), "See your progress"]),
+      el("a", { class: "btn btn--sm", href: "#/planner" }, [icon("calendar"), "Open the plan"])
+    ]);
+  }
+
+  function intakeCard() {
+    return el("section", { class: "card", "aria-labelledby": "td-intake-h" }, [
+      el("span", { class: "eyebrow", text: "First, a few questions" }),
+      el("h2", { id: "td-intake-h", text: line("intake_head") }),
+      el("p", { text: line("intake_intro") }),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--primary", type: "button", onclick: function () { intake(); } }, [icon("today"), "Set up"]),
+        el("span", { class: "spacer" }),
+        el("button", { class: "btn btn--sm btn--ghost", type: "button", onclick: function () {
+          C.setProfile({});
+          repaint();
+        } }, "Skip for now")
+      ])
+    ]);
+  }
+
+  /* ── 10.17.5a  THE RHYTHM ABOVE THE DAY ──────────────────────────────────
+     The weekly review, exam day and after the exam. Every figure in the
+     review is one §10.16 read from §10.00 or the plan's own assessment; the
+     person chooses next week's focus, and the focus only changes the coach's
+     copy and the optional extra, never the plan. */
+  function weeklyCard(primary) {
+    var w = C.weeklySummary(PMP.Store.state);
+    var card = el("section", { class: "card td-weekly", "aria-labelledby": "td-weekly-h" }, [
+      el("span", { class: "eyebrow", text: "Weekly review" }),
+      el("h2", { id: "td-weekly-h", text: line("weekly_head") })
+    ]);
+    var facts = [line("weekly_days", { n: w.daysActive }),
+      w.adherence === null ? line("weekly_noplan") : line("weekly_adherence", { pct: PMP.fmt.pct(w.adherence) }),
+      line("weekly_readiness", { now: w.readiness, prev: w.prev })];
+    if (w.lead) facts.push(line("weekly_cause", { cause: w.lead.short, n: w.lead.n, total: w.tagged }));
+    card.appendChild(el("ul", { class: "ln-bullets" }, facts.map(function (t) { return el("li", { text: t }); })));
+    var reading = w.reading || (w.gap ? line("weekly_gap", w.gap) : null);
+    if (reading) card.appendChild(el("p", { text: reading }));
+    if (w.why) card.appendChild(el("p", { class: "td-why-said" }, [el("b", { text: line("weekly_why") + " " }), w.why]));
+
+    /* Nothing is chosen for the person: the current focus, if there is one,
+       is ticked, and otherwise the choice starts empty. */
+    var cur = C.slice(PMP.Store.state).focus;
+    var at = cur ? w.options.map(function (o) { return o.kind + ":" + (o.id || ""); }).indexOf(cur.kind + ":" + (cur.id || "")) : -1;
+    var pick = choiceGroup("focus", line("weekly_pick"), w.options.map(function (o, i) {
+      return [String(i), o.label];
+    }), at >= 0 ? String(at) : "");
+    card.appendChild(pick.node);
+    var note = el("textarea", { class: "textarea", id: "td-note", maxlength: "500", rows: "2" });
+    card.appendChild(el("label", { class: "field", for: "td-note", style: "margin-top:var(--sp-4)" }, [
+      el("span", { class: "lbl", text: line("weekly_note") }), note
+    ]));
+    card.appendChild(el("div", { class: "filter-bar" }, [
+      el("button", { class: "btn" + (primary ? " btn--primary" : ""), type: "button", onclick: function () {
+        var o = w.options[parseInt(pick.value(), 10)] || null;
+        C.completeWeekly({ focus: o, note: note.value });
+        PMP.UI.announce("Weekly review saved.");
+        repaint();
+      } }, [icon("check"), "Save the review"]),
+      el("span", { class: "spacer" }),
+      el("span", { class: "hint", text: "Next review in seven days." })
+    ]));
+    return card;
+  }
+
+  function examdayCard() {
+    var items = [line("examday_rest"), line("examday_id"), line("examday_arrive"),
+      line("examday_breaks", { n: PMP.EXAM.BREAK_COUNT }),
+      line("examday_pace", { s: Math.round(PMP.EXAM.PACE_TARGET_SEC) }), line("examday_approach")];
+    return el("section", { class: "card", "aria-labelledby": "td-day-h" }, [
+      el("span", { class: "eyebrow", text: "Checklist" }),
+      el("h2", { id: "td-day-h", text: line("examday_head") }),
+      el("ul", { class: "ln-bullets" }, items.map(function (t) { return el("li", { text: t }); }))
+    ]);
+  }
+
+  function afterCard(state) {
+    var oc = C.slice(state).outcome;
+    var card = el("section", { class: "card", "aria-labelledby": "td-after-h" }, [
+      el("span", { class: "eyebrow", text: "After the exam" }),
+      el("h2", { id: "td-after-h", text: line("after_q") })
+    ]);
+    if (!oc) {
+      card.appendChild(el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn", type: "button", onclick: function () { C.setOutcome("passed"); repaint(); } }, "Passed"),
+        el("button", { class: "btn", type: "button", onclick: function () {
+          C.setOutcome("not");
+          /* A new attempt starts from a new date, so the old one goes and
+             the intake opens with the date empty. */
+          PMP.Store.commit(["settings"], function (s) { s.settings.examDate = null; });
+          intake({ redo: true, clearDate: true });
+        } }, "Not this time"),
+        el("button", { class: "btn", type: "button", onclick: function () { C.setOutcome("notsat"); repaint(); } }, "Not sat yet")
+      ]));
+      return { node: card, primary: false };
+    }
+    if (oc.result === "passed") {
+      card.appendChild(el("p", { text: line("after_passed") }));
+      card.appendChild(el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--primary", type: "button", onclick: function () { PMP.Exporter.exportProgress(); } },
+          [icon("data"), "Export a backup"])
+      ]));
+      return { node: card, primary: true };
+    }
+    if (oc.result === "not") {
+      card.appendChild(el("p", { text: line("after_not") }));
+      card.appendChild(el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--primary", type: "button", onclick: function () { intake({ redo: true, clearDate: true }); } },
+          [icon("calendar"), "Set a new date"])
+      ]));
+      return { node: card, primary: true };
+    }
+    var date = el("input", { class: "input", type: "date", id: "td-newdate", "aria-label": "New exam date" });
+    var err = el("p", { class: "td-err", hidden: true, role: "alert" });
+    card.appendChild(el("p", { text: line("after_notsat") }));
+    card.appendChild(el("label", { class: "field", for: "td-newdate" }, [el("span", { class: "lbl", text: "New exam date" }), date]));
+    card.appendChild(err);
+    card.appendChild(el("div", { class: "filter-bar" }, [
+      el("button", { class: "btn btn--primary", type: "button", onclick: function () {
+        if (!futureDate(date.value)) { err.hidden = false; err.textContent = line("intake_date_err"); return; }
+        var v = date.value;
+        PMP.Store.commit(["settings"], function (s) { s.settings.examDate = v; });
+        C.setOutcome(null);
+        var pi = PMP.Store.state.planner && PMP.Store.state.planner.inputs;
+        if (pi) {
+          var inputs = { examDate: v, weekdayMin: pi.weekdayMin, weekendMin: pi.weekendMin };
+          var plan = PMP.Planner.build(inputs, PMP.Store.state);
+          if (!plan.error) PMP.Planner.save(plan, inputs);
+        }
+        repaint();
+      } }, [icon("calendar"), "Save the new date"])
+    ]));
+    return { node: card, primary: true };
+  }
+
+  function view(host) {
+    var state = PMP.Store.state;
+    /* Arriving on Today ends whatever run was started from here. */
+    if (state.ui.coachRun) PMP.Store.commit(["ui"], function (s) { s.ui.coachRun = null; }, { transient: true });
+    var st = C.stage(state);
+    host.appendChild(header(state, st));
+
+    if (st === "intake") {
+      host.appendChild(intakeCard());
+      host.appendChild(footer(false));
+      return;
+    }
+    /* Exam day and after: no study steps and no messages. */
+    if (st === "examday") {
+      host.appendChild(examdayCard());
+      host.appendChild(footer(true));
+      return;
+    }
+    if (st === "after") {
+      var ac = afterCard(state);
+      host.appendChild(ac.node);
+      host.appendChild(footer(!ac.primary));
+      return;
+    }
+
+    if (st === "weekly") host.appendChild(weeklyCard(true));
+
+    var msgs = todaysMessages(state);
+    if (msgs.length) host.appendChild(el("div", { class: "td-msgs" }, msgs.map(msgNode)));
+
+    var ses = C.session(state);
+    announceTicks(ses.steps);
+    /* The review, while it waits, is the one primary action on the page. */
+    var cta = st === "weekly" ? "none" : ses.next ? "next" : ses.extra ? "extra" : "footer";
+    host.appendChild(sessionCard(ses, cta));
+    host.appendChild(footer(cta === "footer"));
+  }
+
+  PMP.Router.register("today", { title: "Today", render: view });
+
+  /* ── 10.17.6  STRIP AND DEBRIEF ──────────────────────────────────────────
+     One component for every summary and the lesson reader, appended by a
+     single line in each module. It appears only when the person came from
+     Today (ui.coachRun, today), and never when the coach is muted. Every
+     figure in the debrief is one the drill's own summary already shows:
+     right of asked per task, answers inside the pace target, and misses
+     well under the median §10.00 reports, the journal's own test. */
+  var stripHidden = { day: null };
+
+  function fromToday(state) {
+    var r = state.ui.coachRun;
+    return !!(r && r.fromToday && sod(r.startedAt) === sod(Date.now()));
+  }
+
+  function nextButton(ses) {
+    return el("button", { class: "btn btn--sm", type: "button", onclick: function () { startStep(ses.next); } },
+      [icon(ses.next.icon), line("debrief_next", { next: ses.next.label }) + " \u2192"]);
+  }
+
+  function debriefLines(items, ses) {
+    var answered = items.filter(function (i) { return i.committed && i.result; });
+    var by = Object.create(null);
+    answered.forEach(function (i) {
+      var t = PMP.ECO_TASK_BY_ID[i.q.ecoTask];
+      if (!t) return;
+      var g = by[t.id] || (by[t.id] = { task: t, n: 0, right: 0 });
+      g.n++;
+      if (i.result.correct) g.right++;
+    });
+    var groups = Object.keys(by).map(function (k) { return by[k]; }).filter(function (g) { return g.n >= 3; });
+    var best = groups.slice().sort(function (a, b) { return (b.right / b.n - a.right / a.n) || (b.n - a.n); })[0];
+    var worst = groups.slice().sort(function (a, b) { return (a.right / a.n - b.right / b.n) || (b.n - a.n); })[0];
+
+    var good;
+    var target = PMP.PRACTICE.PACE_TARGET_SEC;
+    var onPace = answered.filter(function (i) { return i.clock.elapsed() <= target * 1000; }).length;
+    if (best && best.right > 0) good = line("debrief_good_task", { task: best.task.label, right: best.right, n: best.n });
+    else if (onPace) good = line("debrief_good_pace", { k: onPace, n: answered.length, t: target });
+    else good = line("debrief_good_none");
+
+    var watch;
+    var median = PMP.Metrics.pace(PMP.Store.state).median;
+    var fast = median ? answered.filter(function (i) {
+      return !i.result.correct && i.clock.elapsed() < median * 1000 * 0.6;
+    }).length : 0;
+    if (worst && worst !== best && worst.right < worst.n) {
+      var ls = PMP.Learn && PMP.Learn.forTask(worst.task.id);
+      var st = ls && PMP.Learn.status(ls);
+      watch = line("debrief_watch_task", { task: worst.task.label, right: worst.right, n: worst.n,
+        lesson: ls && st !== "complete" && st !== "mastered" ? ls.id : null });
+    } else if (fast) watch = line("debrief_watch_fast", { k: fast });
+    else watch = line("debrief_watch_none");
+
+    return el("ul", { class: "coach-debrief" }, [
+      el("li", { text: good }),
+      el("li", { text: watch }),
+      el("li", null, [ses.next ? nextButton(ses) : el("span", { text: line("debrief_next_done") })])
+    ]);
+  }
+
+  function strip(surface, ctx) {
+    var state = PMP.Store.state;
+    if (!fromToday(state) || C.slice(state).muted || stripHidden.day === sod(Date.now())) return null;
+    ctx = ctx || {};
+    var box = el("aside", { class: "coach-strip", "aria-label": "Coach", dataset: { surface: surface } });
+    var body = el("div", { class: "coach-strip-b" });
+    box.appendChild(icon("today"));
+    box.appendChild(body);
+    box.appendChild(el("button", {
+      class: "icon-btn", type: "button", "aria-label": "Hide the coach for today",
+      onclick: function () { stripHidden.day = sod(Date.now()); box.remove(); }
+    }, [icon("x")]));
+
+    if (surface === "lesson") {
+      var l = ctx.lesson;
+      var ses0 = C.session(state);
+      var onPlan = ses0.source === "plan" && ses0.steps.some(function (s) { return s.kind === "lesson" && s.params && s.params.lesson === l.id; });
+      var rt = C.context(state).retake;
+      body.appendChild(el("p", { text: rt && rt.id === l.id ? line("lesson_why_retake", { pct: rt.pct })
+        : onPlan ? line("lesson_why_plan") : line("lesson_why_path") }));
+      if (l.mindset) body.appendChild(el("p", { class: "coach-strip-m", text: l.mindset }));
+      return box;
+    }
+    if (surface === "lesson-checks") {
+      body.appendChild(el("p", { text: line("after_checks") }));
+      body.appendChild(el("div", { class: "coach-strip-a" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: ctx.start }, [icon("target"), "Start the practice set"])
+      ]));
+      return box;
+    }
+
+    var ses = C.session(state);
+    if (ctx.items) {
+      body.appendChild(debriefLines(ctx.items, ses));
+    } else {
+      var done = ses.steps.filter(function (s) { return s.done; }).length;
+      body.appendChild(el("p", { text: ses.next
+        ? line("strip_next", { done: done, total: ses.steps.length, next: ses.next.label })
+        : line("strip_done") }));
+      if (ses.next) body.appendChild(el("div", { class: "coach-strip-a" }, [nextButton(ses)]));
+    }
+    var m = C.messages(state, "strip", 1)[0];
+    if (m) {
+      C.markShown(m.id);
+      body.appendChild(el("p", { class: "coach-strip-m", text: m.text }));
+    }
+    return box;
+  }
+
+  /* ── 10.17.7  SETTINGS ───────────────────────────────────────────────── */
+  function settingsCard(state) {
+    var sl = C.slice(state);
+    function onOff(id, value) {
+      var sel = el("select", { class: "select", id: id });
+      sel.appendChild(el("option", { value: "on", text: "On", selected: !!value }));
+      sel.appendChild(el("option", { value: "off", text: "Off", selected: !value }));
+      return sel;
+    }
+    var msgs = onOff("set-coach-msgs", !sl.muted);
+    on(msgs, "change", function () {
+      C.setPref("muted", msgs.value !== "on");
+      PMP.UI.toast(msgs.value === "on" ? "Coach messages on." : "Coach messages off. Today still shows your session.", "ok");
+    });
+    var hints = onOff("set-coach-hints", sl.hints);
+    on(hints, "change", function () {
+      C.setPref("hints", hints.value === "on");
+      PMP.UI.toast(hints.value === "on" ? "Hints on in practice drills." : "Hints off.", "ok");
+    });
+    return el("section", { class: "card", "aria-labelledby": "set-coach" }, [
+      el("span", { class: "eyebrow", text: "Coach" }),
+      el("h2", { id: "set-coach", text: "How the coach works with you" }),
+      el("div", { class: "filters", style: "margin-top:var(--sp-4)" }, [
+        el("label", { class: "field", for: "set-coach-msgs" }, [el("span", { class: "lbl", text: "Show coach messages" }), msgs]),
+        el("label", { class: "field", for: "set-coach-hints" }, [el("span", { class: "lbl", text: "Show hints in practice" }), hints])
+      ]),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () { intake({ redo: true }); } },
+          [icon("today"), "Redo intake"]),
+        el("button", { class: "btn btn--sm", type: "button", onclick: exportCalendar },
+          [icon("calendar"), "Export study times to calendar"]),
+        el("span", { class: "spacer" }),
+        el("span", { class: "hint", text: "Off hides the messages and strips. Today still shows the session." })
+      ])
+    ]);
+  }
+
+  /* Saved through §09.8, with the copy route as the fallback it uses
+     everywhere: a browser that refuses the download still has the text. */
+  function exportCalendar() {
+    var cal = C.calendar(PMP.Store.state);
+    if (!cal || !cal.events) { PMP.UI.toast("There is no plan with study days left to export. Build one first.", "warn"); return; }
+    var d = new Date();
+    var name = "pmp-study-" + d.getFullYear() + "-" + PMP.fmt.pad(d.getMonth() + 1) + "-" + PMP.fmt.pad(d.getDate()) + ".ics";
+    if (PMP.Exporter.tryDownload(cal.text, name, "text/calendar")) {
+      PMP.UI.toast("Saved " + name + " with " + PMP.fmt.plural(cal.events, "study session") + ". Open it to add them to your calendar.", "ok");
+    } else {
+      PMP.Exporter.copyText(cal.text).then(function (ok) {
+        PMP.UI.toast(ok ? "The download was blocked, so the calendar was copied. Paste it into a file ending .ics." : "This browser blocked both the download and the clipboard.", ok ? "ok" : "warn");
+      });
+    }
+  }
+
+  return { view: view, intake: intake, settingsCard: settingsCard, startStep: startStep, strip: strip,
+           exportCalendar: exportCalendar };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
@@ -33212,7 +35198,16 @@ PMP.Shell = (function () {
     PMP.dom.on(document.getElementById("theme-btn"), "click", cycleTheme);
     PMP.dom.on(document.getElementById("export-btn"), "click", function () { PMP.Exporter.exportProgress(); });
     PMP.dom.delegate(document.getElementById("sheet"), "click", "[data-sheet-close]", function () { PMP.UI.closeSheet(null); });
-    PMP.dom.on(document.getElementById("sheet"), "close", function () { PMP.UI.closeSheet(null); });
+    /* The 'close' event is queued, not fired synchronously, in current
+       Chromium. When one sheet's action opens another (import, then its
+       "Replace everything?" confirm), the first sheet's event arrives after
+       the second has opened and would cancel it. An event that arrives
+       while the dialog is open again belongs to a sheet already settled, so
+       it is ignored; Escape still closes, because then the dialog is shut. */
+    PMP.dom.on(document.getElementById("sheet"), "close", function () {
+      if (document.getElementById("sheet").open) return;
+      PMP.UI.closeSheet(null);
+    });
 
     /* Follow the OS only while the person has not chosen for themselves. */
     if (window.matchMedia) {
@@ -33278,7 +35273,7 @@ PMP.Shell = (function () {
   function dueToday() {
     var c = PMP.Cards.counts(PMP.Store.state);
     var card = el("div", { class: "card due-panel" }, [
-      el("span", { class: "eyebrow", text: "\u00A73.6 \u00B7 Flashcards" }),
+      el("span", { class: "eyebrow", text: "Flashcards" }),
       el("h2", { text: c.today ? PMP.fmt.plural(c.today, "card") + " due today" : "No cards due today" })
     ]);
     card.appendChild(el("div", { class: "filters" }, [
@@ -33313,10 +35308,20 @@ PMP.Shell = (function () {
     return card;
   }
 
+  /* §10.17 has landed and registered "today" already. Kept so that deleting
+     the coach leaves a described placeholder rather than a dead home page. */
+  register("today", {
+    title: "Today",
+    render: stub("Today", "The coach's home: one session for today, built from your plan.", [
+      ["\u00A710.16", "Stage, session and messages, derived from the plan, lessons, journal and cards"],
+      ["\u00A710.17", "Intake, the session list with one Start button, and the weekly review"]
+    ])
+  });
+
   /* §10.01 has landed and registered "dashboard" already, so register() leaves
      this alone. Kept as the description of what the section owes. */
   register("dashboard", {
-    title: "Dashboard",
+    title: "Progress",
     render: stub("Dashboard", "Your readiness score, domain mastery, streak and next best action will open here.", [
       ["\u00A73.1", "Readiness score 0\u2013100 with the five-component breakdown on click"],
       ["\u00A73.1", "Domain mastery bars at the 33 / 41 / 26 weighting, and the predictive versus adaptive split"],
