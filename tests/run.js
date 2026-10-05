@@ -28,7 +28,7 @@ var lib = require("./lib");
       } catch (e) {
         fail++;
         failures.push(label);
-        console.log("  ✗ " + label + "\n      " + String(e && e.stack || e).split("\n").slice(0, 4).join("\n      "));
+        console.log("  ✗ " + label + "\n      " + String(e && e.stack || e).split("\n").slice(0, 30).join("\n      "));
       }
     }
   }
