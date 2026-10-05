@@ -12,6 +12,7 @@ accept. This file is self-sufficient by design: you should not need to read
 - [6. Hard limits the app enforces](#6-hard-limits-the-app-enforces)
 - [7. Adding a batch](#7-adding-a-batch)
 - [8. Checklist](#8-checklist)
+- [9. Authoring lessons](#9-authoring-lessons)
 
 ---
 
@@ -32,13 +33,15 @@ load.
 Every item in `people-3.json` is tagged `ecoTask: "people-3"`. A batch is
 single-task by construction; that is what makes 26 independent files possible.
 
-Those counts are not arbitrary. The 300-item core pack embedded in the app sits
-at People 37.3% / Process 44.0% / Business 18.7% against a published weighting of
-33 / 41 / 26 — Business is 7.3 points light and cannot be corrected inside 300
-items. The batch sizes above are chosen to fix that: the full 1300-item pool
-lands at **33.2 / 40.9 / 25.8**. If you change a batch size, you move the pool
-off the published weighting, and a domain more than 8 points out is a *failure*
-in the content audit, not a warning.
+Those counts are not arbitrary. The original 300-item core pack sat at People
+37.3% / Process 44.0% / Business 18.7% against a published weighting of
+33 / 41 / 26, with Business 7.3 points light. The batch sizes above were chosen
+to fix that. Since then the core pack has gained 48 Business items (batch seven,
+ids `021`–`026` in each Business task), so it now holds 348 items at
+32.2 / 37.9 / 29.9, and the full 1348-item pool lands at **32.0 / 39.5 / 28.5**.
+If you change a batch size, you move the pool off the published weighting, and
+a domain more than 8 points out is a *failure* in the content audit, not a
+warning.
 
 **A batch is also a valid import file.** The same file can be pasted or
 uploaded through *Backup and packs* inside the app, which works offline. That is
@@ -85,7 +88,7 @@ If `questions` is missing or is not an array, the whole file is refused.
 | `tags` | string[] | **yes** | Lower-case, hyphenated. Drives the tag filter. An item with no tags cannot be found by it. |
 | `stem` | string | **yes** | The situation and the question. |
 | `explanation` | string | **yes** | The rule that transfers. |
-| `mindset` | string | **yes in practice** | One sentence naming the disposition the item turns on. Formally a warning rather than a refusal, for one historical reason given in §6.3 — write it anyway. |
+| `mindset` | string | **yes** | One sentence naming the disposition the item turns on. A missing one refuses the whole shard; see §6.3. |
 
 Then, depending on type: `options`, `prompts`, `regions`, `blanks`, `graphic`.
 
@@ -470,6 +473,7 @@ and field path. Other shards still load.
 
 - Missing or duplicate `id`; unknown `type`, `domain` or `ecoTask`
 - `stem` under 10 characters, or missing `explanation`
+- Missing or empty `mindset`
 - Missing `options` on a type that needs them (`single`, `multi`, `matching`, `pulldown`)
 - No option marked `correct`, or any option with no `rationale`
 - `matching`/`pulldown` with no `prompts`, or a prompt without exactly one option matched to it
@@ -504,14 +508,13 @@ this list as the real bar.
 Missing `tags` is a gap rather than a failure, but the item becomes invisible to
 the tag filter. Always tag.
 
-### 6.3 Why `mindset` is only a warning
+### 6.3 `mindset` is required
 
-The 60 items of the core pack's phase-one seed predate the mindset rule and do
-not carry the field. Raising it as a refusal would fail the shipped 300-item
-pack against its own self-check and make the app refuse its own exported pack on
-re-import. It is therefore a **warning**: indexed, listed in the audit's gaps
-table, and not blocking. **Write it anyway.** Every extended item is expected to
-have one, and once the seed is backfilled this becomes a hard error.
+A missing or empty `mindset` is a refusal: the whole shard is rejected, with the
+item index and field path. The rule started as a warning, because the 60 items
+of the core pack's phase-one seed predated it. That seed has since been
+backfilled, every shipped item carries a mindset, and the validator now enforces
+it as an error.
 
 ---
 
@@ -572,3 +575,67 @@ Per batch:
 - [ ] Approach, difficulty and type mixes roughly on target
 - [ ] Envelope has `type`, `schemaVersion: 2`, `ecoVersion: "2026-07"`
 - [ ] Dry-run imported through *Backup and packs* with no problems reported
+
+---
+
+## 9. Authoring lessons
+
+Lessons are the teaching layer: one per ECO task, plus five foundation lessons
+(F1–F5) and three exam-skills lessons (X1–X3). They live in `PMP.LESSONS` in
+§05.10 of `index.html`, are rendered by §10.15 at `#/learn`, and are checked by
+the lesson audit in §10.14.5. Unlike question packs, lessons are embedded and
+are **not** loaded from `packs/` in this release.
+
+### 9.1 The lesson object
+
+| Field | Required | Notes |
+|---|---|---|
+| `id` | yes | Module letter and a number: `F1`, `P4`, `L3`, `B8`, `X2`. The letter must match the module's prefix. |
+| `module` | yes | `foundations` (F), `process` (P), `people` (L), `business` (B) or `skills` (X). |
+| `order` | yes | Position on the study path, 1 to 34. |
+| `ecoTask` | domain modules | The task the lesson teaches. Empty for F and X lessons. Exactly one domain lesson per task. |
+| `minutes` | yes | Reading time. |
+| `prereqs` | no | Lesson ids to read first. No self-reference and no cycles. |
+| `title`, `objectives` | yes | 3–5 objectives, each completing "After this lesson you can…". |
+| `examWeight` | yes | How the task is usually tested. **No figures** — weights, item counts and minutes are read from §01 at render time. |
+| `sections` | yes | At least 3 `{ id, heading, body, formulaGroup? }`; 600–1,200 words of body in total. Paragraphs split on a blank line. Rendered with `textContent`, so no markup. |
+| `lenses` | yes | `{ predictive, agile, hybrid }`, all three filled. |
+| `worked` | yes | A scenario in the §05.4 shape: stem ≥ 120 characters ending in `?`, exactly four options with no `correct` flag, a ranking in the order best, acceptable, premature, wrong, each `why` ≥ 60 characters, and a `mindset` ≥ 40 characters. |
+| `traps` | yes | 3–5 lines, each naming a specific wrong instinct. |
+| `checks` | yes | 2–4 quick checks in the §3 item schema. Ids start with the lesson id (`P4-c1`). They inherit `ecoTask` and `domain` from the lesson; F and X lessons must give each check its own `ecoTask`. Checks never write to the attempt history. |
+| `terms` | yes | Glossary headwords, matched exactly (case aside). |
+| `recap`, `mindset` | yes | 3–6 recap lines; one mindset sentence ≥ 40 characters. |
+| `practice` | yes | `{ count, decks[], from? }`. The set is drawn from the lesson's ECO task. A lesson with no task names its pool in `from`, using the practice filter keys `domain`, `ecoTask`, `approach`, `type`, `difficulty` and `tag`; `{}` means the whole bank. |
+
+### 9.2 Writing rules
+
+These sit on top of the item rules in §5, which apply to quick checks too.
+
+- Original wording only. Process, principle and domain names may be titles;
+  every sentence is new.
+- Teach the why before the what, one idea per section, in sentences under 25
+  words. British spelling.
+- Show every concept in predictive, agile and hybrid terms in the lenses.
+- Use varied, neutral examples: construction, IT, healthcare, public sector,
+  events, manufacturing. No real companies or people.
+- The worked example and checks must not restate a situation already used by a
+  question or scenario for the same task. Check by hand.
+- Apply one consistent mindset (lesson F2): understand before acting, talk to
+  the person directly, follow the agreed process, protect the team, escalate
+  last, keep value in view.
+- Teach what a formula means and when to use it; link to the formula lab with
+  `formulaGroup` for the arithmetic.
+
+### 9.3 Cards for a lesson
+
+Each lesson adds three flashcards for distinctions it teaches, filed in the
+nearest existing deck and tagged `lesson-<id>`. Follow the card rules in §05.5:
+one fact per card, a front that narrows to one answer, and a note that never
+carries the answer.
+
+### 9.4 Checking a lesson
+
+Open **Content audit** in the app. The *Lessons* card lists every failure with
+its field path, such as `lessons[12].worked.ranking[1].rank`. Gaps, such as a
+prerequisite not yet written or a practice pool smaller than the set, are listed
+separately and do not fail the build.
