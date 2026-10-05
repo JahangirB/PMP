@@ -12726,8 +12726,11 @@ PMP.Packs = (function () {
                           as attempts.
      terms                §05.7.2 glossary headwords
      mindset              the one sentence to carry out of the lesson
-     practice             { count, decks[] } — deck ids from 05.5; count is
-                          the size of the set §10.15 hands to §10.02
+     practice             { count, decks[], from? } — deck ids from 05.5; count
+                          is the size of the set §10.15 hands to §10.02.
+                          A lesson with no ecoTask names its pool in from,
+                          with the practice filter keys (domain, ecoTask,
+                          approach, type, difficulty, tag); {} is the bank.
 
    Phase 1 ships the engine with one pilot lesson, P4. Every sentence below
    is original; nothing is taken from PMI material. ─────────────────────── */
@@ -23566,9 +23569,18 @@ PMP.Audit = (function () {
       ((pr && pr.decks) || []).forEach(function (d, j) {
         if (!decks[d]) { fail(at + ".practice.decks[" + j + "]", "Deck \u201C" + d + "\u201D does not exist in \u00A705.5."); bad.links++; }
       });
-      if (pr && L.ecoTask && PMP.ECO_TASK_BY_ID[L.ecoTask]) {
-        var have = PMP.Content.all().filter(function (q) { return q.ecoTask === L.ecoTask; }).length;
-        if (have < pr.count) gap(at + ".practice", "The bank holds " + have + " questions for " + L.ecoTask + ", fewer than the " + pr.count + "-question practice set.");
+      if (pr && pr.from != null) {
+        if (L.ecoTask) { fail(at + ".practice.from", "A lesson with an ECO task draws its set from that task; practice.from is for lessons without one."); bad.parts++; }
+        else if (typeof pr.from !== "object") { fail(at + ".practice.from", "practice.from must be an object of practice filters."); bad.parts++; }
+        else Object.keys(pr.from).forEach(function (k) {
+          if (PMP.Learn && PMP.Learn.POOL_KEYS.indexOf(k) < 0) { fail(at + ".practice.from." + k, "Unknown filter \u201C" + k + "\u201D. Use: " + PMP.Learn.POOL_KEYS.join(", ") + "."); bad.parts++; }
+          if (k === "ecoTask" && !PMP.ECO_TASK_BY_ID[pr.from[k]]) { fail(at + ".practice.from.ecoTask", "Unknown ECO task \u201C" + pr.from[k] + "\u201D."); bad.parts++; }
+        });
+      }
+      if (pr && PMP.Learn && (!L.ecoTask || PMP.ECO_TASK_BY_ID[L.ecoTask])) {
+        var have = PMP.Learn.bankFor(L).length;
+        if (!have) { fail(at + ".practice", "No question in the bank fits this lesson's practice set."); bad.parts++; }
+        else if (have < pr.count) gap(at + ".practice", "The bank holds " + have + " questions for " + (L.ecoTask || "this lesson's pool") + ", fewer than the " + pr.count + "-question practice set.");
       }
     });
 
@@ -24592,8 +24604,10 @@ PMP.Metrics = (function () {
    honesty, not study — and the one thing a candidate under pressure will do
    is tick the box. So a chip that says twenty questions on Risk is satisfied
    by twenty answered questions tagged to Risk on that day and by nothing
-   else. The only chips that take a click are the ones this file genuinely
-   cannot observe: reading a reference section. They carry a checkbox glyph so
+   else. Reading is observed too: lesson chips tick when the lesson is
+   completed in §10.15. The only chip that takes a click is the one this
+   file genuinely cannot observe, skimming the formula sheet in the taper
+   phase. It carries a checkbox glyph so
    the difference is visible rather than implied.
 
    Work is credited to the day it happened. Not "on or after", which would let
@@ -24617,6 +24631,8 @@ PMP.Planner = (function () {
   var MIN_PER_Q = 2;        /* answering plus reading the explanation */
   var MIN_PER_SCENARIO = 3;
   var CARD_MIN = 10;
+  var LESSONS_PER_DAY = 3;   /* ceiling in the build phase */
+  var LESSON_KEEP = 20;      /* minutes kept for questions before a second lesson */
   var DIAG_N = 25;
   var DOW = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -24799,18 +24815,15 @@ PMP.Planner = (function () {
       weakDomain = worst;
     }
 
-    var readTopics = [
-      "the principles and performance domains",
-      "conflict modes and leadership styles",
-      "contract types and risk responses",
-      "Scrum, Kanban and hybrid tailoring",
-      "the process matrix as a cross-reference"
-    ];
-    var readIdx = 0;
-
-    /* Lessons not yet complete, in path order, one a day during the build
-       phase. Teaching comes before the questions on it, so a lesson takes the
-       front of its day; one that will not fit waits for a roomier day. */
+    /* Lessons not yet complete, in path order. They replace the manual
+       reading blocks this plan used to carry: a lesson ticks itself when it
+       is completed, so the plan can see the study it asks for. Teaching
+       comes before the questions on it, so lessons take the front of a day.
+       The first lesson of a day needs only its own minutes. In the build
+       phase a day then takes more while each leaves LESSON_KEEP minutes for
+       questions, up to LESSONS_PER_DAY; any not placed by then spill into
+       consolidation at one a day. A lesson that will not fit waits for a
+       roomier day. */
     var lessonQueue = PMP.Learn ? PMP.Learn.path().filter(function (l) {
       var st = PMP.Learn.status(l);
       return st !== "complete" && st !== "mastered";
@@ -24864,12 +24877,16 @@ PMP.Planner = (function () {
         return;
       }
 
-      if (phase === "build" && lessonQueue.length && left >= lessonQueue[0].minutes) {
+      var lessonsToday = phase === "build" ? LESSONS_PER_DAY : phase === "consolidate" ? 1 : 0;
+      var placed = 0;
+      while (placed < lessonsToday && lessonQueue.length &&
+             left - lessonQueue[0].minutes >= (placed ? LESSON_KEEP : 0)) {
         var ls = lessonQueue.shift();
         day.tasks.push(chip("lesson", {
           label: "Lesson " + ls.id + ": " + ls.title, lessonId: ls.id, mins: ls.minutes
         }));
         left -= ls.minutes;
+        placed++;
       }
 
       if (phase === "sharpen" && left >= 30) {
@@ -24891,23 +24908,6 @@ PMP.Planner = (function () {
           label: PMP.fmt.plural(sn, "situational scenario"), count: sn, mins: sn * MIN_PER_SCENARIO
         }));
         left -= sn * MIN_PER_SCENARIO;
-      }
-
-      if (phase === "build" && idx < 4 && left >= 20) {
-        day.tasks.push(chip("read", {
-          label: "Formula lab: work through " + (idx === 0 ? "earned value" : idx === 1 ? "forecasting and TCPI" : idx === 2 ? "float and critical path" : "agile metrics"),
-          mins: 20, manual: true
-        }));
-        left -= 20;
-      }
-
-      /* One reading block a week, aimed at the weakest domain. */
-      if (idx % 7 === 4 && left >= 20 && phase !== "taper") {
-        day.tasks.push(chip("read", {
-          label: "Read up on " + readTopics[readIdx % readTopics.length], mins: 20, manual: true
-        }));
-        readIdx++;
-        left -= 20;
       }
 
       /* Whatever is left goes on questions, drawn from the coverage queue
@@ -25103,7 +25103,7 @@ PMP.Planner = (function () {
     var attrs = {
       class: "task", dataset: { done: String(c.done) },
       title: c.manual
-        ? "Tick this yourself \u2014 reading is the one thing this file cannot observe."
+        ? "Tick this yourself \u2014 skimming a sheet is the one thing this file cannot observe."
         : "Ticks itself when the work shows up in your history."
     };
     if (c.manual && editable) {
@@ -25147,7 +25147,7 @@ PMP.Planner = (function () {
     host.appendChild(el("div", { class: "view-hd" }, [
       el("span", { class: "eyebrow", text: "\u00A73.10 \u00B7 Study planner" }),
       el("h2", { text: "Your plan to " + PMP.fmt.dateShort(plan.inputs.examDate) }),
-      el("p", { text: "Chips tick themselves off your actual history \u2014 answering twenty questions on Risk is what completes a chip that asks for twenty questions on Risk. Only the reading blocks take a click, because reading is the one thing this file cannot see you do." })
+      el("p", { text: "Chips tick themselves off your actual history \u2014 answering twenty questions on Risk is what completes a chip that asks for twenty questions on Risk. Lessons tick when you complete them in Learn. Only the formula-sheet skim in the last few days takes a click, because skimming is the one thing this file cannot see you do." })
     ]));
 
     /* Behind, or over-committed. Both are told plainly and both offer the
@@ -26736,22 +26736,21 @@ PMP.Learn = (function () {
     /* Part 10 ── practice set: the bank, scenarios and cards for this task */
     var pr = lesson.practice || {};
     var links = [];
-    if (task) {
-      var nq = bankFor(lesson).length;
-      links.push(el("button", {
-        class: "btn btn--primary", type: "button", disabled: nq ? null : true,
-        onclick: function () { startSet(lesson); }
-      }, [icon("target"), "Start the practice set"]));
-      links.push(el("a", { class: "btn", href: href("scenarios", { ecoTask: task.id }) }, [icon("branch"), "Scenarios"]));
-    }
+    var nq = bankFor(lesson).length;
+    links.push(el("button", {
+      class: "btn btn--primary", type: "button", disabled: nq ? null : true,
+      onclick: function () { startSet(lesson); }
+    }, [icon("target"), "Start the practice set"]));
+    if (task) links.push(el("a", { class: "btn", href: href("scenarios", { ecoTask: task.id }) }, [icon("branch"), "Scenarios"]));
     (pr.decks || []).forEach(function (d) {
       var deck = PMP.DECKS.filter(function (x) { return x.id === d; })[0];
       if (deck) links.push(el("a", { class: "btn", href: href("cards", { deck: d }) }, [icon("cards"), "Cards: " + deck.label]));
     });
     host.appendChild(part(10, PARTS[9], [
-      el("p", { text: task
-        ? PMP.fmt.plural(Math.min(pr.count || 10, nq), "question") + " on " + task.label.toLowerCase() + ", drawn from the " + nq + " in the bank and marked as you go. Score " + PMP.fmt.pct(MASTERY_SHARE) + " or more to master the lesson. These answers are recorded like any drill, so they count towards accuracy and readiness."
-        : "This lesson has no single ECO task, so there is no practice set." }),
+      el("p", { text: PMP.fmt.plural(Math.min(pr.count || 10, nq), "question")
+        + (task ? " on " + task.label.toLowerCase() + ", drawn from the " + nq + " in the bank"
+                : ", drawn from the " + nq + " in the bank that fit this lesson")
+        + " and marked as you go. Score " + PMP.fmt.pct(MASTERY_SHARE) + " or more to master the lesson. These answers are recorded like any drill, so they count towards accuracy and readiness." }),
       el("div", { class: "filter-bar" }, links)
     ]));
 
@@ -26815,9 +26814,23 @@ PMP.Learn = (function () {
      The set is drawn fresh each time from the bank for the lesson's task and
      handed to the practice engine. The engine records the attempts; this
      module records only what the set meant for the lesson. */
+  /* A lesson with an ECO task draws its set from that task. A foundation or
+     exam-skills lesson has none, so it names a pool in practice.from with
+     the practice filter keys: domain, ecoTask, approach, type, difficulty,
+     tag. Empty means the whole bank. */
+  var POOL_KEYS = ["domain", "ecoTask", "approach", "type", "difficulty", "tag"];
   function bankFor(lesson) {
-    if (!lesson.ecoTask) return [];
-    return PMP.Content.all().filter(function (q) { return q.ecoTask === lesson.ecoTask; });
+    if (lesson.ecoTask) return PMP.Content.all().filter(function (q) { return q.ecoTask === lesson.ecoTask; });
+    var f = (lesson.practice && lesson.practice.from) || {};
+    return PMP.Content.all().filter(function (q) {
+      if (f.domain && q.domain !== f.domain) return false;
+      if (f.ecoTask && q.ecoTask !== f.ecoTask) return false;
+      if (f.approach && q.approach !== f.approach) return false;
+      if (f.type && PMP.QRender.base(q.type) !== f.type && q.type !== f.type) return false;
+      if (f.difficulty && String(q.difficulty || "") !== String(f.difficulty)) return false;
+      if (f.tag && (q.tags || []).indexOf(f.tag) < 0) return false;
+      return true;
+    });
   }
 
   function startSet(lesson) {
@@ -26962,7 +26975,8 @@ PMP.Learn = (function () {
 
   PMP.Router.register("learn", { title: "Learn", render: view });
 
-  return { path: path, status: status, lessonById: lessonById, forTask: forTask, MASTERY_SHARE: MASTERY_SHARE };
+  return { path: path, status: status, lessonById: lessonById, forTask: forTask, bankFor: bankFor,
+           POOL_KEYS: POOL_KEYS, MASTERY_SHARE: MASTERY_SHARE };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
