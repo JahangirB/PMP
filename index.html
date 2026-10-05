@@ -2008,6 +2008,9 @@ a.btn { text-decoration: none; }
 .ln-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-3); }
 .ln-chips .chip { min-height: 36px; padding: var(--sp-1) var(--sp-3); }
 .ln-pager { margin-top: var(--sp-5); }
+/* Phase 2 hooks outside the reader: the journal's lesson link takes its own
+   line under the row, so a narrow screen keeps the stem column. */
+.jr-row .jr-lesson { grid-column: 1 / -1; justify-self: start; }
 
 @media (max-width: 600px) {
   .ln-lens th[scope="row"] { white-space: normal; }
@@ -2343,7 +2346,9 @@ a.btn { text-decoration: none; }
         07.3  actions — the only writers; no feature touches §06 directly
               persisted: … examRun (the sitting in progress), packs, queue,
               scenarioRuns (§10.08; ranked, so not folded into attempts),
-              lessons (§10.15; quick checks, never folded into attempts)
+              lessons (§10.15; quick checks, never folded into attempts,
+              and the latest practice-set score; the set's own answers are
+              attempts with mode "lesson" and a lessonId)
         07.4  persistence bridge + beforeunload guard
 
    §08  ROUTER ........................... hash-based
@@ -12719,7 +12724,8 @@ PMP.Packs = (function () {
                           as attempts.
      terms                §05.7.2 glossary headwords
      mindset              the one sentence to carry out of the lesson
-     practice             { count, decks[] } — deck ids from 05.5
+     practice             { count, decks[] } — deck ids from 05.5; count is
+                          the size of the set §10.15 hands to §10.02
 
    Phase 1 ships the engine with one pilot lesson, P4. Every sentence below
    is original; nothing is taken from PMI material. ─────────────────────── */
@@ -13126,7 +13132,8 @@ PMP.Store = (function () {
          `correct` is the all-or-nothing item mark; `order` is the option
          order that was on screen, so a review can reproduce it exactly. */
       attempts: [],   /* { id, qid, ecoTask, domain, approach, type, difficulty,
-                         correct, credit, ms, at, confidence, mode, order } */
+                         correct, credit, ms, at, confidence, mode, order,
+                         lessonId? }  — lessonId only on mode "lesson" */
       /* One record per card that has been reviewed at least once; a card with
          no record is new, so an unstudied pack costs no storage at all. */
       srs: {},        /* cardId -> { ease, interval, reps, lapses, due, suspended,
@@ -13156,7 +13163,8 @@ PMP.Store = (function () {
                            chosen, rank, credit, ms, at, order } */
       /* Lesson progress (§10.15), keyed by lesson id. Quick-check answers
          live here and never in `attempts`, so they cannot move accuracy. */
-      lessons: {}     /* { P4: { opened: [sid], checks: {cid: 1|0}, completedAt } } */
+      lessons: {}     /* { P4: { opened: [sid], checks: {cid: 1|0}, completedAt,
+                         practice: { at, credit, n }, masteredAt } } */
     };
   }
 
@@ -14608,6 +14616,13 @@ PMP.Practice = (function () {
     diagnostic: {
       name: "Diagnostic", icon: "gauge", hidden: true,
       blurb: "The study planner's baseline. Marked as you go, like practice."
+    },
+    /* Not offered in the picker either. §10.15 runs a lesson's practice set
+       through here, and each attempt carries the lesson id so the set can be
+       found again. Marked as you go, like practice. */
+    lesson: {
+      name: "Lesson practice set", icon: "learn", hidden: true,
+      blurb: "A lesson's practice set. Marked as you go, like practice."
     }
   };
 
@@ -14618,11 +14633,18 @@ PMP.Practice = (function () {
     startWith(picked, mode);
   }
 
-  function startWith(questions, mode) {
+  /* opts is optional. opts.lessonId tags every attempt with the lesson the
+     set belongs to; opts.onFinish(result) and opts.summary(result) let the
+     caller record and show what the set meant, without this module knowing
+     what a lesson is. */
+  function startWith(questions, mode, opts) {
     var shuffle = PMP.Store.state.settings.shuffleOptions !== false;
+    opts = opts || {};
     session = {
       id: PMP.rng.id("drill"),
       mode: mode,
+      lessonId: opts.lessonId || null,
+      opts: opts,
       startedAt: Date.now(),
       filters: JSON.parse(JSON.stringify(filters)),
       i: 0,
@@ -14663,6 +14685,7 @@ PMP.Practice = (function () {
          options back exactly where they were. */
       order: item.p.order
     };
+    if (session.lessonId) attempt.lessonId = session.lessonId;
     PMP.Store.commit(["attempts"], function (s) { s.attempts.push(attempt); });
   }
 
@@ -14954,6 +14977,15 @@ PMP.Practice = (function () {
         el("p", { text: item.q.mindset })
       ]));
     }
+    /* The lesson that teaches this item's task, if one is written. Left off
+       inside that lesson's own set, which already ends with a way back. */
+    var lesson = PMP.Learn && PMP.Learn.forTask(item.q.ecoTask);
+    if (lesson && lesson.id !== session.lessonId) {
+      item.ui.feedback.appendChild(el("p", { class: "ln-links" }, [
+        el("a", { href: "#/learn?lesson=" + encodeURIComponent(lesson.id) },
+          "Learn this topic: " + lesson.id + " " + lesson.title)
+      ]));
+    }
   }
 
   /* Advance. In a timed drill this is also where the answer is committed,
@@ -15135,8 +15167,25 @@ PMP.Practice = (function () {
     if (session.clock) session.clock.pause();
     session.finished = true;
     session.finishedAt = Date.now();
+    session.result = result();
+    if (session.opts.onFinish) {
+      try { session.opts.onFinish(session.result); } catch (e) { /* the drill is saved either way */ }
+    }
     cleanup();
     repaint();
+  }
+
+  /* What the set came to. Skipped items count in n and earn nothing, so
+     leaving the hard ones out cannot raise a score. */
+  function result() {
+    var r = { n: session.items.length, answered: 0, correct: 0, credit: 0, missed: [] };
+    session.items.forEach(function (item) {
+      if (!item.committed || !item.result) { r.missed.push(item.q); return; }
+      r.answered++;
+      r.credit += item.result.credit;
+      if (item.result.correct) r.correct++; else r.missed.push(item.q);
+    });
+    return r;
   }
 
   function renderSummary(host) {
@@ -15155,6 +15204,12 @@ PMP.Practice = (function () {
         ? right.length + " of " + PMP.fmt.plural(answered.length, "answered question") + " right, in " + PMP.fmt.duration(totalMs / 1000) + ". Every one of them is already saved to your history."
         : "This drill ended without a committed answer, so nothing was recorded." })
     ]));
+
+    if (session.opts.summary && session.result) {
+      var extra = null;
+      try { extra = session.opts.summary(session.result); } catch (e) { extra = null; }
+      if (extra) host.appendChild(extra);
+    }
 
     host.appendChild(el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "The numbers" }),
@@ -15203,6 +15258,23 @@ PMP.Practice = (function () {
     host.appendChild(reviewCard);
 
     var wrong = items.filter(function (i2) { return i2.result && !i2.result.correct; }).map(function (i2) { return i2.q; });
+    /* A lesson set ends back at its lesson. A redo of the misses runs as an
+       ordinary drill: three questions already seen once are not the set, and
+       must not be able to earn Mastered for it. */
+    if (session.lessonId) {
+      host.appendChild(el("div", { class: "card" }, [
+        el("span", { class: "eyebrow", text: "Next" }),
+        el("div", { style: "display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-3)" }, [
+          el("a", { class: "btn btn--primary", href: "#/learn?lesson=" + encodeURIComponent(session.lessonId) },
+            [icon("learn"), "Back to lesson"]),
+          wrong.length ? el("button", {
+            class: "btn", type: "button",
+            onclick: function () { startWith(PMP.rng.shuffle(wrong).items, "practice"); }
+          }, [icon("target"), "Redo the " + wrong.length + " you missed"]) : null
+        ])
+      ]));
+      return;
+    }
     host.appendChild(el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Next" }),
       el("div", { style: "display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-3)" }, [
@@ -24727,6 +24799,14 @@ PMP.Planner = (function () {
     ];
     var readIdx = 0;
 
+    /* Lessons not yet complete, in path order, one a day during the build
+       phase. Teaching comes before the questions on it, so a lesson takes the
+       front of its day; one that will not fit waits for a roomier day. */
+    var lessonQueue = PMP.Learn ? PMP.Learn.path().filter(function (l) {
+      var st = PMP.Learn.status(l);
+      return st !== "complete" && st !== "mastered";
+    }) : [];
+
     days.forEach(function (day, idx) {
       var f = idx / span;
       var phase = f < 0.40 ? "build" : f < 0.75 ? "consolidate" : f < 0.93 ? "sharpen" : "taper";
@@ -24773,6 +24853,14 @@ PMP.Planner = (function () {
           }));
         }
         return;
+      }
+
+      if (phase === "build" && lessonQueue.length && left >= lessonQueue[0].minutes) {
+        var ls = lessonQueue.shift();
+        day.tasks.push(chip("lesson", {
+          label: "Lesson " + ls.id + ": " + ls.title, lessonId: ls.id, mins: ls.minutes
+        }));
+        left -= ls.minutes;
       }
 
       if (phase === "sharpen" && left >= 30) {
@@ -24860,7 +24948,8 @@ PMP.Planner = (function () {
      exactly what a naive count-what-matches would do. */
   function activityIndex(state) {
     var att = Object.create(null), exams = Object.create(null),
-        scen = Object.create(null), cards = Object.create(null), jr = Object.create(null);
+        scen = Object.create(null), cards = Object.create(null), jr = Object.create(null),
+        lessons = Object.create(null);
     PMP.Metrics.attempts(state).forEach(function (a) {
       var d = sod(Date.parse(a.at));
       (att[d] || (att[d] = [])).push(a);
@@ -24882,7 +24971,14 @@ PMP.Planner = (function () {
       var r = srs[id];
       if (r && r.last) cards[sod(r.last)] = (cards[sod(r.last)] || 0) + 1;
     });
-    return { att: att, exams: exams, scen: scen, cards: cards, jr: jr };
+    /* completedAt is stamped once, so a lesson ticks the chip on the day it
+       was finished and no other. */
+    var lr = state.lessons || {};
+    Object.keys(lr).forEach(function (id) {
+      var t = lr[id] && Date.parse(lr[id].completedAt);
+      if (t) (lessons[sod(t)] || (lessons[sod(t)] = {}))[id] = true;
+    });
+    return { att: att, exams: exams, scen: scen, cards: cards, jr: jr, lessons: lessons };
   }
 
   function matches(a, c) {
@@ -24911,6 +25007,8 @@ PMP.Planner = (function () {
           c.have = idx.scen[day.d] || 0; c.need = c.count;
         } else if (c.k === "journal") {
           c.have = idx.jr[day.d] || 0; c.need = c.count;
+        } else if (c.k === "lesson") {
+          c.have = idx.lessons[day.d] && idx.lessons[day.d][c.lessonId] ? 1 : 0; c.need = 1;
         } else {
           var taken = 0;
           for (var i = pool.length - 1; i >= 0 && taken < c.count; i--) {
@@ -24975,13 +25073,15 @@ PMP.Planner = (function () {
     var sub;
     if (c.manual) sub = c.done ? "done" : mins(c.mins);
     else if (c.k === "mock") sub = c.done ? "sat" : mins(c.mins);
+    else if (c.k === "lesson") sub = c.done ? "complete" : mins(c.mins);
     else sub = c.have + " / " + c.need;
 
     var kids = [
       icon(c.manual ? (c.done ? "check" : "clip")
         : c.done ? "check"
         : c.k === "mock" ? "timer" : c.k === "cards" ? "cards"
-        : c.k === "scenarios" ? "branch" : c.k === "journal" ? "journal" : "target"),
+        : c.k === "scenarios" ? "branch" : c.k === "journal" ? "journal"
+        : c.k === "lesson" ? "learn" : "target"),
       el("span", { class: "tt" }, [
         el("span", { class: "tn", text: c.label }),
         el("span", { class: "tm", text: sub + (c.note ? " \u00B7 " + c.note : "") })
@@ -25011,6 +25111,7 @@ PMP.Planner = (function () {
     if (c.k === "cards") return PMP.Router.navigate("cards");
     if (c.k === "scenarios") return PMP.Router.navigate("scenarios");
     if (c.k === "journal") return PMP.Router.navigate("journal");
+    if (c.k === "lesson") return PMP.Router.navigate("learn", { lesson: c.lessonId });
     var params = {};
     if (c.ecoTask) params.ecoTask = c.ecoTask;
     if (c.domain) params.domain = c.domain;
@@ -25718,6 +25819,18 @@ PMP.Journal = (function () {
     return card;
   }
 
+  /* A knowledge gap answers to teaching, so a miss tagged that way links to
+     the lesson for its task when one is written. */
+  function lessonLink(r) {
+    if (r.entry.cause !== "knowledge" || !PMP.Learn) return null;
+    var lesson = PMP.Learn.forTask(r.entry.ecoTask || r.attempt.ecoTask);
+    if (!lesson) return null;
+    return el("a", {
+      class: "btn btn--sm jr-lesson", href: "#/learn?lesson=" + encodeURIComponent(lesson.id),
+      title: lesson.id + " " + lesson.title
+    }, [icon("learn"), "Re-read the lesson"]);
+  }
+
   function archiveCard(tagged) {
     var card = el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Tagged" }),
@@ -25736,7 +25849,8 @@ PMP.Journal = (function () {
             class: "icon-btn", type: "button", "aria-label": "Remove this tag",
             onclick: function () { untag(r.entry); }
           }, [icon("x")])
-        ])
+        ]),
+        lessonLink(r)
       ]));
     });
     card.appendChild(list);
@@ -26139,6 +26253,8 @@ PMP.Dashboard = (function () {
             [icon("calendar"), "Build a study plan"])
         ])
       ]));
+      var lc0 = learnCard();
+      if (lc0) host.appendChild(lc0);
       host.appendChild(countdownCard(state));
       host.appendChild(duePanel(state));
       return;
@@ -26146,6 +26262,9 @@ PMP.Dashboard = (function () {
 
     var top = el("div", { class: "dash-2" }, [scoreCard(state), actionCard(state)]);
     host.appendChild(top);
+
+    var lc = learnCard();
+    if (lc) host.appendChild(el("div", { style: "margin-top:var(--sp-4)" }, [lc]));
 
     var mid = el("div", { class: "dash-2", style: "margin-top:var(--sp-4)" }, [
       masteryCard(state),
@@ -26158,6 +26277,31 @@ PMP.Dashboard = (function () {
       journalNudge(state)
     ]);
     host.appendChild(bottom);
+  }
+
+  /* ── 10.01.7  CONTINUE LEARNING ──────────────────────────────────────────
+     The next lesson on the path that is not yet complete, on the same rule as
+     the Learn hub. Nothing is shown once every written lesson is complete. */
+  function learnCard() {
+    if (!PMP.Learn) return null;
+    var next = PMP.Learn.path().filter(function (l) {
+      var st = PMP.Learn.status(l);
+      return st !== "complete" && st !== "mastered";
+    })[0];
+    if (!next) return null;
+    var started = PMP.Learn.status(next) === "progress";
+    return el("div", { class: "card" }, [
+      el("span", { class: "eyebrow", text: "Learn \u00B7 Continue learning" }),
+      el("h2", { text: next.id + " \u00B7 " + next.title }),
+      el("p", { text: (started ? "You have started this lesson. " : "The next lesson on the path. ")
+        + next.minutes + " minutes, then a practice set on the same task." }),
+      el("div", { class: "filter-bar" }, [
+        el("a", { class: "btn btn--primary", href: "#/learn?lesson=" + encodeURIComponent(next.id) },
+          [icon("learn"), started ? "Continue the lesson" : "Start the lesson"]),
+        el("span", { class: "spacer" }),
+        el("a", { class: "btn btn--sm", href: "#/learn" }, "All lessons")
+      ])
+    ]);
   }
 
   /* A miss that has never been given a cause is the cheapest readiness point
@@ -26223,10 +26367,13 @@ PMP.Dashboard = (function () {
      accuracy and readiness for reading a page. Their only record is the 1 or
      0 kept on the lesson.
 
-   · The practice set links into the practice engine pre-filtered to the
-     lesson's ECO task. That drill records attempts in the normal way. It is
-     not yet tied back to the lesson, so Mastered cannot be awarded here; the
-     Mastery part says so rather than showing a badge it cannot earn.
+   · The practice set runs through the practice engine in its hidden
+     "lesson" mode. Those answers are real attempts, recorded like any drill
+     and tagged with the lesson id. When the set finishes, its score is kept
+     on the lesson as practice: { at, credit, n }, where credit is the share
+     of the set earned, skipped items counting as nothing. The first set at
+     MASTERY_SHARE or better stamps masteredAt, once. A later, weaker set
+     replaces practice but never takes Mastered away.
 
    Every piece of lesson text is set with textContent. Section bodies are
    split into paragraphs on blank lines; nothing in a lesson is parsed as
@@ -26236,6 +26383,7 @@ PMP.Learn = (function () {
   var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on;
 
   var MASTERY_SHARE = 0.7;   /* practice-set score that earns Mastered */
+  var RETAKE_DAYS = 2;       /* suggested gap before retaking a set below it */
   var PARTS = [
     "Overview", "Why it matters on the exam", "The concept", "Three lenses",
     "Worked example", "Traps", "Quick checks", "Key terms", "Recap",
@@ -26264,6 +26412,16 @@ PMP.Learn = (function () {
   }
   function lessonById(id) {
     return PMP.LESSONS.filter(function (l) { return l.id === id; })[0] || null;
+  }
+  /* The lesson that teaches an ECO task. Domain modules only, on the same
+     rule as the audit's coverage check: a foundation lesson that introduces
+     a task is not the lesson for it. */
+  function forTask(ecoTask) {
+    if (!ecoTask) return null;
+    return PMP.LESSONS.filter(function (l) {
+      var m = moduleById(l.module);
+      return l.ecoTask === ecoTask && m && m.domain;
+    })[0] || null;
   }
 
   function recordOf(id) {
@@ -26570,9 +26728,11 @@ PMP.Learn = (function () {
     var pr = lesson.practice || {};
     var links = [];
     if (task) {
-      var nq = PMP.Content.all().filter(function (q) { return q.ecoTask === task.id; }).length;
-      links.push(el("a", { class: "btn btn--primary", href: href("practice", { ecoTask: task.id }) },
-        [icon("target"), "Practise " + task.label.toLowerCase()]));
+      var nq = bankFor(lesson).length;
+      links.push(el("button", {
+        class: "btn btn--primary", type: "button", disabled: nq ? null : true,
+        onclick: function () { startSet(lesson); }
+      }, [icon("target"), "Start the practice set"]));
       links.push(el("a", { class: "btn", href: href("scenarios", { ecoTask: task.id }) }, [icon("branch"), "Scenarios"]));
     }
     (pr.decks || []).forEach(function (d) {
@@ -26581,8 +26741,8 @@ PMP.Learn = (function () {
     });
     host.appendChild(part(10, PARTS[9], [
       el("p", { text: task
-        ? "Opens the practice drill filtered to " + task.label.toLowerCase() + ". Aim for a set of about " + (pr.count || 10) + " questions; the bank holds " + nq + " on this task. These answers are recorded like any drill."
-        : "This lesson has no single ECO task, so there is no filtered practice set." }),
+        ? PMP.fmt.plural(Math.min(pr.count || 10, nq), "question") + " on " + task.label.toLowerCase() + ", drawn from the " + nq + " in the bank and marked as you go. Score " + PMP.fmt.pct(MASTERY_SHARE) + " or more to master the lesson. These answers are recorded like any drill, so they count towards accuracy and readiness."
+        : "This lesson has no single ECO task, so there is no practice set." }),
       el("div", { class: "filter-bar" }, links)
     ]));
 
@@ -26627,10 +26787,90 @@ PMP.Learn = (function () {
       ui.mastery.appendChild(el("p", { class: "ln-note", text: rec && rec.completedAt
         ? "Complete since " + PMP.fmt.dateShort(rec.completedAt) + "."
         : "The lesson is complete once every concept section has been opened and every quick check tried." }));
-      ui.mastery.appendChild(el("p", { class: "ln-note", text: "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE)
-        + " or more on this lesson's practice set. Practice results are not linked back to lessons in this build yet, so the lesson cannot be marked Mastered here." }));
+      var prc = rec && rec.practice;
+      ui.mastery.appendChild(el("ul", { class: "keylist" }, [
+        el("li", null, [
+          el("span", { class: rec && rec.masteredAt ? "chip chip--correct" : "chip",
+            text: prc ? PMP.fmt.pct(prc.credit) : "\u2014" }),
+          el("span", { text: prc
+            ? "Last practice set, " + PMP.fmt.plural(prc.n, "question") + " on " + PMP.fmt.dateShort(prc.at)
+            : "Practice set not taken yet" })
+        ])
+      ]));
+      ui.mastery.appendChild(el("p", { class: "ln-note", text: masteryNote(rec) }));
     }
     refresh();
+  }
+
+  /* ── 10.15.3a  PRACTICE SET AND MASTERY ──────────────────────────────────
+     The set is drawn fresh each time from the bank for the lesson's task and
+     handed to the practice engine. The engine records the attempts; this
+     module records only what the set meant for the lesson. */
+  function bankFor(lesson) {
+    if (!lesson.ecoTask) return [];
+    return PMP.Content.all().filter(function (q) { return q.ecoTask === lesson.ecoTask; });
+  }
+
+  function startSet(lesson) {
+    var bank = bankFor(lesson);
+    var n = Math.min((lesson.practice && lesson.practice.count) || 10, bank.length);
+    if (!n) { PMP.UI.toast("There are no questions on this task in the loaded bank.", "warn"); return; }
+    var set = PMP.rng.shuffle(bank).items.slice(0, n);
+    PMP.Practice.startWith(set, "lesson", {
+      lessonId: lesson.id,
+      onFinish: function (r) { recordSet(lesson, r); },
+      summary: function (r) { return setCard(lesson, r); }
+    });
+    PMP.Router.navigate("practice");
+  }
+
+  function recordSet(lesson, r) {
+    if (!r.answered) return;
+    var at = new Date().toISOString();
+    var share = r.n ? r.credit / r.n : 0;
+    touch(lesson, function (rec) {
+      rec.practice = { at: at, credit: Math.round(share * 1000) / 1000, n: r.n };
+      if (!rec.masteredAt && share >= MASTERY_SHARE) rec.masteredAt = at;
+    });
+  }
+
+  function retakeDate(prc) {
+    return new Date(Date.parse(prc.at) + RETAKE_DAYS * 86400000).toISOString();
+  }
+
+  function masteryNote(rec) {
+    var prc = rec && rec.practice;
+    if (rec && rec.masteredAt) return "Mastered since " + PMP.fmt.dateShort(rec.masteredAt) + ".";
+    if (prc) return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on the practice set. Re-read the sections behind your misses, then retake the set on or after " + PMP.fmt.dateShort(retakeDate(prc)) + ".";
+    return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on this lesson's practice set. Skipped questions count as wrong.";
+  }
+
+  /* Shown at the top of the practice summary when a lesson set ends. */
+  function setCard(lesson, r) {
+    var rec = recordOf(lesson.id);
+    var share = r.n ? r.credit / r.n : 0;
+    var passed = share >= MASTERY_SHARE;
+    var card = el("div", { class: "card" }, [
+      el("span", { class: "eyebrow", text: "Lesson " + lesson.id + " \u00B7 " + lesson.title }),
+      el("h2", { text: !r.answered ? "Set not scored"
+        : passed ? "Lesson mastered"
+        : rec && rec.masteredAt ? "Below the mastery mark this time" : "Not mastered yet" }),
+      el("p", { text: "This set scored " + PMP.fmt.pct(share) + " across " + PMP.fmt.plural(r.n, "question")
+        + ", with part marks counted and skipped questions counted as wrong. Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + "." })
+    ]);
+    if (!r.answered) {
+      card.lastChild.textContent = "Nothing in this set was answered, so the lesson record is unchanged.";
+    } else if (!passed) {
+      card.appendChild(el("p", { text: rec && rec.masteredAt
+        ? "The lesson stays Mastered from an earlier set. The misses below are still worth reading."
+        : "Every question you missed is open below, with the reasoning for each option. Re-read the lesson, then retake the set on or after "
+          + PMP.fmt.dateShort(retakeDate(rec.practice)) + ". A gap of a couple of days tests what you kept, not what you just read." }));
+    }
+    card.appendChild(el("div", { class: "filter-bar" }, [
+      el("a", { class: passed ? "btn" : "btn btn--primary", href: href("learn", { lesson: lesson.id }) },
+        [icon("learn"), "Back to lesson"])
+    ]));
+    return card;
   }
 
   /* ── 10.15.4  QUICK CHECKS ─────────────────────────────────────────────────
@@ -26713,7 +26953,7 @@ PMP.Learn = (function () {
 
   PMP.Router.register("learn", { title: "Learn", render: view });
 
-  return { path: path, status: status, lessonById: lessonById, MASTERY_SHARE: MASTERY_SHARE };
+  return { path: path, status: status, lessonById: lessonById, forTask: forTask, MASTERY_SHARE: MASTERY_SHARE };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
