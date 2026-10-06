@@ -135,5 +135,26 @@ module.exports = [
         await page.ctx.close();
       }
     }
+  },
+  {
+    name: "pane stays put while the page scrolls, like the rail",
+    fn: async function (h, lib) {
+      for (var vp of [{ width: 1400, height: 900 }, { width: 390, height: 800 }]) {
+        var page = await h.open("day3", { viewport: vp, hash: "#/formulas" });
+        await page.click("#np-toggle");
+        var before = await page.evaluate(function () { return document.getElementById("np").getBoundingClientRect().top; });
+        await page.evaluate(function () { window.scrollTo(0, 2500); });
+        await page.waitForTimeout(100);
+        var after = await page.evaluate(function () {
+          var r = document.getElementById("np").getBoundingClientRect();
+          return { y: window.scrollY, top: r.top, bottom: r.bottom, h: window.innerHeight };
+        });
+        assert.ok(after.y > 1000, "page did not scroll at " + vp.width);
+        assert.strictEqual(after.top, before, "pane moved with the page at " + vp.width);
+        assert.ok(Math.abs(after.bottom - after.h) < 2, "pane does not fill the viewport height at " + vp.width);
+        await lib.clean(page);
+        await page.ctx.close();
+      }
+    }
   }
 ];

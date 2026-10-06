@@ -2186,7 +2186,9 @@ html[data-notepad="open"] .np { display: flex; }
 @media (max-width: 599px) { .np-toggle-t { display: none; } .np-toggle { min-width: var(--hit-min); justify-content: center; } }
 @media (min-width: 900px) {
   .np {
-    position: sticky; top: 0; inset: auto; z-index: auto;
+    /* inset first: written after top it would reset top to auto, and a
+       sticky box with no top offset scrolls away with the page. */
+    position: sticky; inset: auto; top: 0; z-index: auto;
     height: 100vh; align-self: flex-start;
     flex: 0 0 var(--np-w); width: var(--np-w); box-shadow: none;
   }
