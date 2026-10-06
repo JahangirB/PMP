@@ -129,7 +129,8 @@ PMP.STORE_CFG = Object.freeze({
   PRUNE_KEEP_ATTEMPTS: 1000,
   PERSISTED: Object.freeze([
     "settings", "attempts", "srs", "exams", "notes", "flags", "journal", "planner",
-    "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons", "coach"
+    "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons", "coach",
+    "notepad"
   ])
 });
 
@@ -147,6 +148,14 @@ PMP.STORE_CFG = Object.freeze({
   document.documentElement.setAttribute("data-theme", theme);
   PMP.INITIAL_THEME = theme;
   PMP.THEME_PREF = stored || "system";
+
+  /* The notes pane (§12.2.1) is mirrored here for the same reason: hydrate
+     is async, and a pane that was open before a refresh should be open on
+     the first paint rather than sliding in a moment later. The store slice
+     stays the source of truth; this key only spares the flash. */
+  var pad = null;
+  try { pad = window.localStorage.getItem("pmp.notepad"); } catch (e) { pad = null; }
+  document.documentElement.setAttribute("data-notepad", pad === "open" ? "open" : "closed");
 })();
 
 /* ── 01.7  PRACTICE / DRILL ──────────────────────────────────────────────
@@ -2138,6 +2147,52 @@ a.btn { text-decoration: none; }
   }
 }
 
+/* ── 03.22  NOTES PANE — §12.2.1 ────────────────────────────────────────────
+   An overlay from the right below 900px; a sticky column beside the view
+   at 900px and up, so notes and the question sit side by side. Visibility
+   is driven by <html data-notepad>, which §01.6 sets before paint. */
+:root { --np-w: 340px; }
+.np-toggle[aria-expanded="true"] { border-color: var(--c-signal); background: var(--s-wash); color: var(--fg); }
+.np {
+  position: fixed; inset: 0 0 0 auto; z-index: 45;
+  width: min(92vw, 380px);
+  display: none; flex-direction: column;
+  background: var(--s-raise); border-left: var(--border); box-shadow: var(--lift-2);
+  padding-top: env(safe-area-inset-top);
+}
+html[data-notepad="open"] .np { display: flex; }
+.np .spacer { flex: 1 1 auto; }
+.np-hd {
+  display: flex; align-items: center; gap: var(--sp-2);
+  min-height: 56px; padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-4);
+  border-bottom: var(--border); flex: 0 0 auto;
+}
+.np-hd > .i { width: var(--icon); height: var(--icon); color: var(--c-signal); }
+.np-hd h2 { font-size: var(--t-base); font-weight: var(--w-semi); }
+.np-text {
+  flex: 1 1 auto; min-height: 0; width: 100%; resize: none;
+  padding: var(--sp-4); border: 0; background: transparent;
+  font-size: var(--t-sm); line-height: var(--lh-body);
+}
+.np-text::placeholder { color: var(--fg-muted); }
+.np-text:focus-visible { box-shadow: inset 0 0 0 var(--ring-w) var(--c-signal); }
+.np-ft {
+  display: flex; align-items: center; gap: var(--sp-2); flex: 0 0 auto;
+  padding: var(--sp-2) var(--sp-3); border-top: var(--border);
+  padding-bottom: max(var(--sp-2), env(safe-area-inset-bottom));
+}
+.np-stat { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--fg-muted); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.np-stat[data-mode="session"] { color: var(--c-warn); }
+@media (max-width: 599px) { .np-toggle-t { display: none; } .np-toggle { min-width: var(--hit-min); justify-content: center; } }
+@media (min-width: 900px) {
+  .np {
+    position: sticky; top: 0; inset: auto; z-index: auto;
+    height: 100vh; align-self: flex-start;
+    flex: 0 0 var(--np-w); width: var(--np-w); box-shadow: none;
+  }
+}
+@media (min-width: 1500px) { :root { --np-w: 400px; } }
+
 /* ── 03.8  RESPONSIVE ───────────────────────────────────────────────────── */
 @media (min-width: 600px) {
   .view { padding-left: var(--sp-6); padding-right: var(--sp-6); }
@@ -2161,7 +2216,7 @@ a.btn { text-decoration: none; }
 @media print {
   /* The only place raw colours are allowed: paper is white and ink is black,
      whichever screen theme the person is using. */
-  .rail, .topbar, .scrim, .toasts, .banner { display: none !important; }
+  .rail, .topbar, .scrim, .toasts, .banner, .np { display: none !important; }
   body { background: #fff; color: #000; }
   .view { max-width: none; padding: 0; }
   .card { box-shadow: none; border: 1px solid #999; break-inside: avoid; }
@@ -2259,6 +2314,7 @@ a.btn { text-decoration: none; }
 <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
 <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8v.2"/></symbol>
 <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 21V3.5M5.5 4.5h11l-2 3.5 2 3.5h-11"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.5z"/><path d="M14 3.5v6h6M8 13h8M8 16.5h5"/></symbol>
 <symbol id="i-clip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
 </defs></svg>
 
@@ -2336,6 +2392,11 @@ a.btn { text-decoration: none; }
       <span class="mode-tag" id="mode-tag" data-mode="probing" title="Where your progress is being stored">
         <span class="dot" aria-hidden="true"></span><span id="mode-text">Checking</span>
       </span>
+      <!-- 04.1  Notes toggle. On every route; §12.2.1 owns it. -->
+      <button class="btn btn--sm np-toggle" id="np-toggle" type="button"
+              aria-controls="np" aria-expanded="false" title="Show or hide your notes">
+        <svg class="i" aria-hidden="true"><use href="#i-note"></use></svg><span class="np-toggle-t">Notes</span>
+      </button>
     </header>
 
     <!-- 04.1  Banner host. §06 raises the non-persistent-storage warning and
@@ -2344,6 +2405,27 @@ a.btn { text-decoration: none; }
 
     <main class="view" id="view" tabindex="-1"></main>
   </div>
+
+  <!-- 04.1  Notes pane. A right-hand column at ≥900px, an overlay below.
+       Open or shut is persisted (§12.2.1), so it outlives route changes and
+       refreshes; only the toggle or the close button changes it. -->
+  <aside class="np" id="np" aria-labelledby="np-title">
+    <div class="np-hd">
+      <svg class="i" aria-hidden="true"><use href="#i-note"></use></svg>
+      <h2 id="np-title">My notes</h2>
+      <span class="spacer"></span>
+      <button class="icon-btn" id="np-close" type="button" aria-label="Hide notes"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
+    </div>
+    <label class="sr-only" for="np-text">Your notes</label>
+    <textarea class="np-text" id="np-text" spellcheck="true"
+              placeholder="Jot down anything you want in front of you while you study: a formula, a mnemonic, a trap you fell for, a question to come back to. It is saved on this device as you type."></textarea>
+    <div class="np-ft">
+      <span class="np-stat" id="np-stat" aria-live="off">Empty</span>
+      <span class="spacer"></span>
+      <button class="btn btn--sm" id="np-copy" type="button"><svg class="i" aria-hidden="true"><use href="#i-clip"></use></svg>Copy</button>
+      <button class="btn btn--sm btn--ghost" id="np-clear" type="button">Clear</button>
+    </div>
+  </aside>
 </div>
 
 <!-- 04.2  Live regions. One polite, one assertive. Nothing else announces. -->
@@ -2441,6 +2523,7 @@ a.btn { text-decoration: none; }
         03.19 mistake journal — triage item, cause picker, cause ramp
         03.20 learn — lesson hub rows, reader parts, reading measure
         03.21 today and the coach — step rows, messages, sticky start
+        03.22 notes pane — top-bar toggle, right column ≥900px, overlay below
         03.7  question engine — filters, options, hotspot, blanks, pace meter
         03.14 formula lab — sheet, calculators, network nodes, worked steps
         03.15 reference library — process matrix, ITTO panel, virtual list
@@ -2535,6 +2618,8 @@ a.btn { text-decoration: none; }
         12.1  global error + unhandledrejection → readable message,
               "Export progress" offered before anything else
         12.2  storage probe, state hydrate, content audit self-check
+        12.2.1 notes pane — free text beside every view; text and open
+              state in the `notepad` slice, mirrored pre-paint by 01.6
         12.3  router start, first render, resume-exam prompt,
               extended pack load (after paint, never blocking it)
    ───────────────────────────────────────────────────────────────────────────
@@ -18981,7 +19066,11 @@ PMP.Store = (function () {
         outcome: null,      /* { at, result: "passed" | "not" | "notsat" } after the date */
         muted: false,       /* hides messages and strips; Today still shows the session */
         hints: true         /* offer the hint ladder in practice and adaptive drills */
-      }
+      },
+      /* The free-form notes pane (§12.2.1). One running page of the person's
+         own text, not tied to any question — per-question notes stay in
+         `notes`. `open` is persisted so the pane survives a refresh. */
+      notepad: { open: false, text: "", updatedAt: null }
     };
   }
 
@@ -28791,7 +28880,7 @@ PMP.Data = (function () {
      when the file is newer than the device. Replace wipes first. */
   var LIST_SLICES = ["attempts", "exams", "journal", "issues", "scenarioRuns"];
   var MAP_SLICES = ["srs", "notes", "flags", "lessons"];
-  var WHOLE_SLICES = ["settings", "planner", "packs", "queue", "examRun", "coach"];
+  var WHOLE_SLICES = ["settings", "planner", "packs", "queue", "examRun", "coach", "notepad"];
 
   function planProgressMerge(obj) {
     var state = PMP.Store.state;
@@ -35863,6 +35952,114 @@ PMP.Shell = (function () {
 })();
 
 
+/* ── 12.2.1  NOTES PANE ────────────────────────────────────────────────────
+   One running page of free text beside every view, for the notes a person
+   would otherwise keep on paper while reading or drilling. It is shell, not
+   a route: it lives outside #view, so no route change or re-render touches
+   it, and only the top-bar toggle or its own close button opens or shuts it.
+
+   Text and open/shut state are the `notepad` store slice, so they persist
+   through §06 like everything else and travel in a progress export. Commits
+   are silent: the views have nothing to repaint when a note changes, and a
+   notify per keystroke would make every subscriber do work for nothing. The
+   open state is also mirrored to localStorage for §01.6's pre-paint read. */
+PMP.Notepad = (function () {
+  var rootEl, paneEl, toggleEl, textEl, statEl, typing = null;
+
+  function isOpen() { return rootEl.getAttribute("data-notepad") === "open"; }
+
+  function paint(open) {
+    rootEl.setAttribute("data-notepad", open ? "open" : "closed");
+    toggleEl.setAttribute("aria-expanded", open ? "true" : "false");
+    toggleEl.setAttribute("aria-label", open ? "Hide notes" : "Show notes");
+    try { window.localStorage.setItem("pmp.notepad", open ? "open" : ""); } catch (e) { /* the store still holds it */ }
+  }
+
+  function setOpen(open) {
+    paint(open);
+    PMP.Store.commit(["notepad"], function (s) { s.notepad.open = open; }, { silent: true });
+    if (open) textEl.focus();
+    else toggleEl.focus();
+    PMP.UI.announce(open ? "Notes shown" : "Notes hidden");
+  }
+
+  function renderStat() {
+    var text = textEl.value;
+    var words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    var session = PMP.Store.state.sys.storageMode === "session";
+    statEl.setAttribute("data-mode", session ? "session" : "persistent");
+    statEl.textContent = !words ? (session ? "Not saved: session only" : "Empty")
+      : PMP.fmt.plural(words, "word") + (session ? " · not saved: session only" : " · saved");
+    statEl.title = session
+      ? "This browser cannot store data for this page, so these notes will be lost when the tab closes. Copy them somewhere safe."
+      : "Saved on this device as you type.";
+  }
+
+  function onInput() {
+    var text = textEl.value;
+    PMP.Store.commit(["notepad"], function (s) {
+      s.notepad.text = text;
+      s.notepad.updatedAt = new Date().toISOString();
+    }, { silent: true });
+    clearTimeout(typing);
+    typing = setTimeout(renderStat, 150);
+  }
+
+  /* Store → pane. Called after hydrate and after an import replaces the
+     slice. The textarea is left alone while it holds the same text, so the
+     caret never jumps under someone who is typing. */
+  function sync() {
+    var np = PMP.Store.state.notepad || {};
+    var text = typeof np.text === "string" ? np.text : "";
+    if (textEl.value !== text) textEl.value = text;
+    paint(!!np.open);
+    renderStat();
+  }
+
+  function init() {
+    rootEl = document.documentElement;
+    paneEl = document.getElementById("np");
+    toggleEl = document.getElementById("np-toggle");
+    textEl = document.getElementById("np-text");
+    statEl = document.getElementById("np-stat");
+    paint(isOpen());
+
+    PMP.dom.on(toggleEl, "click", function () { setOpen(!isOpen()); });
+    PMP.dom.on(document.getElementById("np-close"), "click", function () { setOpen(false); });
+    PMP.dom.on(textEl, "input", onInput);
+    PMP.dom.on(document.getElementById("np-copy"), "click", function () {
+      if (!textEl.value) { PMP.UI.toast("There is nothing to copy yet.", "warn"); return; }
+      PMP.Exporter.copyText(textEl.value).then(function (ok) {
+        PMP.UI.toast(ok ? "Notes copied to the clipboard." : "Copying was blocked. Select the text and copy it by hand.", ok ? "ok" : "err");
+      });
+    });
+    PMP.dom.on(document.getElementById("np-clear"), "click", function () {
+      if (!textEl.value) return;
+      PMP.UI.confirm("Clear your notes?", "Everything in the notes pane will be deleted. This cannot be undone, so copy anything you want to keep first.", "Clear notes", true)
+        .then(function (yes) {
+          if (!yes) return;
+          textEl.value = "";
+          onInput();
+          renderStat();
+          textEl.focus();
+        });
+    });
+    /* The last few keystrokes before a refresh are still inside §07.4's
+       debounce; write them on the way out. */
+    PMP.dom.on(window, "pagehide", function () { PMP.Store.flush(); });
+    PMP.dom.on(document, "visibilitychange", function () { if (document.hidden) PMP.Store.flush(); });
+
+    PMP.Store.subscribe(function (state, changed) {
+      if (changed.indexOf("notepad") >= 0) sync();
+      else if (changed.indexOf("sys") >= 0) renderStat();
+    });
+    renderStat();
+  }
+
+  return { init: init, sync: sync, isOpen: isOpen, setOpen: setOpen };
+})();
+
+
 /* ── 12.3  ROUTE REGISTRATION ──────────────────────────────────────────────
    Stub renderers. Each is replaced in place by its §10 module as that module
    lands; the route names, titles and nav links do not change. */
@@ -36075,6 +36272,7 @@ PMP.Shell = (function () {
 (function boot() {
   function run() {
     PMP.Shell.init();
+    PMP.Notepad.init();
     PMP.Shell.applyTheme(PMP.Store.state.settings.theme || "system");
 
     PMP.Storage.probe()
@@ -36091,6 +36289,7 @@ PMP.Shell = (function () {
       })
       .then(function () {
         PMP.Shell.applyTheme(PMP.Store.state.settings.theme || "system");
+        PMP.Notepad.sync();
         /* Imported packs join PMP.QUESTIONS before the first render, so the
            pool counts every view shows are right the first time rather than
            after a repaint. */
