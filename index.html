@@ -2584,6 +2584,7 @@ html[data-notepad="open"] .np { display: flex; }
         09.4  rng — seeded PRNG, shuffle with correct-answer remapping,
               weighted sample without replacement (adaptive drill)
         09.5  text — normalise, trigram index, fuzzy search
+        09.5a abbreviations — first use spelled out in learning text only
         09.6  validate — pack and progress schema validators, indexed errors
         09.7  ui — dialog, toast, confirm, empty state, icon
 
@@ -19684,6 +19685,228 @@ PMP.text = (function () {
   return { normalise: normalise, trigrams: trigrams, index: index, search: search, escapeHtml: escapeHtml };
 })();
 
+/* ── 09.5a  ABBREVIATIONS IN LEARNING TEXT ─────────────────────────────────
+   Spells an abbreviation out on its first use within a unit of learning
+   text: "Cost performance index (CPI)", then plain "CPI" for the rest of the
+   unit. Called only by the learning renderers (§10.05 cards, §10.06 sheet,
+   §10.07 library, §10.15 lessons), never by practice, the mock exam, the
+   scenario trainer or the question renderers, so those stay as authored.
+   Input and output are plain strings for textContent; nothing here makes
+   markup.
+
+   Expansions come from §05.7.3 alone. Left alone, by design: one-letter and
+   lower-case notation (C, n, tE, Σ), a token inside a formula (next to an
+   operator), a token the unit already defines (its full name within NEAR
+   characters, either order), and letters with two meanings that the
+   caller's context groups do not settle. The last are logged for review. */
+PMP.Abbr = (function () {
+  var SHAPE = /^[A-Z][A-Za-z0-9&-]*[A-Z0-9]$/, MIXED = { CoQ: 1, DoD: 1, SAFe: 1, LeSS: 1 };
+  var RUN = /[A-Z][A-Za-z0-9&-]*/;
+  var OPS = "=×÷/*^+<>≤≥", MINUS = "-−–";
+  var NEAR = 40;
+  var byAbbr = null, skipped = Object.create(null);
+
+  /* Context words (deck, formula group, glossary group, lesson task) to the
+     §05.7.3 groups they settle a shared abbreviation towards. Schedule
+     context takes earned value too: SV and SPI are schedule measures, and
+     PV beside them is planned value. */
+  var GROUPS = {
+    evm: "evm", forecast: "evm", cost: "evm", "process-6": "evm",
+    schedule: ["schedule", "evm"], network: "schedule", compression: "schedule", estimate: "schedule", "process-8": ["schedule", "evm"],
+    procure: "procurement", procurement: "procurement", contracts: "procurement", "t-contract": "procurement", "process-5": "procurement",
+    finance: "business", business: "business", benefits: "business",
+    risk: "risk", "t-risk-threat": "risk", "t-risk-opp": "risk", "business-5": "risk",
+    resource: "resource", resources: "resource"
+  };
+  function groups(keys) {
+    var out = [];
+    (keys || []).forEach(function (k) {
+      [].concat(GROUPS[k] || []).forEach(function (g) { if (out.indexOf(g) < 0) out.push(g); });
+    });
+    return out;
+  }
+
+  function table() {
+    if (byAbbr) return byAbbr;
+    byAbbr = Object.create(null);
+    PMP.ABBREVIATIONS.forEach(function (r) {
+      if (!SHAPE.test(r.abbr) && !MIXED[r.abbr]) return;
+      (byAbbr[r.abbr] || (byAbbr[r.abbr] = [])).push(r);
+    });
+    return byAbbr;
+  }
+
+  /* Calls fn(abbr, start, end) for each known abbreviation, longest match
+     first, not glued to a word or a hyphen on the left nor to a word on the
+     right. A plural s is taken with it ("PMs"); a hyphenated compound
+     ("EV-based") is not a use. */
+  function each(text, fn) {
+    var T = table(), re = new RegExp(RUN.source, "g"), m, run, start, k, cand, nx, plural;
+    while ((m = re.exec(text))) {
+      run = m[0]; start = m.index;
+      if (start && /[\w-]/.test(text.charAt(start - 1))) continue;
+      for (k = run.length; k >= 2; k--) {
+        cand = run.slice(0, k);
+        if (!T[cand]) continue;
+        nx = text.charAt(start + k); plural = false;
+        if (nx === "s" && !/\w/.test(text.charAt(start + k + 1))) plural = true;
+        else if (/\w/.test(nx)) continue;
+        else if (nx === "-" && /[A-Za-z]/.test(text.charAt(start + k + 1))) break;
+        fn(cand, start, start + k + (plural ? 1 : 0));
+        break;
+      }
+    }
+  }
+
+  function skipSp(text, i, step) { while (i >= 0 && i < text.length && text.charAt(i) === " ") i += step; return i; }
+  function isOp(text, i, step) {
+    var c = text.charAt(i);
+    if (!c) return false;
+    if (OPS.indexOf(c) >= 0) return true;
+    /* A coefficient: "0.2 SPI" after an operator is still the formula. */
+    if (step < 0 && /[0-9]/.test(c)) {
+      while (i >= 0 && /[0-9.,]/.test(text.charAt(i))) i--;
+      return text.charAt(i) === " " && isOp(text, skipSp(text, i, -1), -1);
+    }
+    if ((c === "x" || c === "X") && text.charAt(i - 1) === " " && text.charAt(i + 1) === " ") return true;
+    if (c && MINUS.indexOf(c) >= 0) return /[A-Z0-9()]/.test(text.charAt(skipSp(text, i + step, step)));
+    return false;
+  }
+  function inFormula(text, start, end) {
+    return isOp(text, skipSp(text, start - 1, -1), -1) || isOp(text, skipSp(text, end, 1), 1);
+  }
+
+  function definedIn(text, abbr, full) {
+    var low = text.toLowerCase(), f = full.toLowerCase(), hit = false, at = low.indexOf(f);
+    while (at >= 0 && !hit) {
+      each(text, function (a, s0, e0) {
+        if (a === abbr && s0 <= at + f.length + NEAR && e0 >= at - NEAR) hit = true;
+      });
+      at = low.indexOf(f, at + 1);
+    }
+    return hit;
+  }
+
+  /* One row, or null. Shared letters take the caller's groups; failing
+     that, a meaning that every other one contains (SOW: "Statement of work"
+     inside "Procurement statement of work"). */
+  function pick(abbr, ctx) {
+    var list = table()[abbr], g = (ctx && ctx.groups) || [];
+    if (list.length === 1) return list[0];
+    var narrowed = list.filter(function (r) { return g.indexOf(r.group) >= 0; });
+    if (narrowed.length === 1) return narrowed[0];
+    var pool = narrowed.length ? narrowed : list;
+    var base = pool.slice().sort(function (a, b) { return a.full.length - b.full.length; })[0];
+    if (pool.every(function (r) { return r.full.toLowerCase().indexOf(base.full.toLowerCase()) >= 0; })) return base;
+    var key = abbr + " (" + list.map(function (r) { return r.full; }).join(" / ") + ")";
+    (skipped[key] || (skipped[key] = [])).indexOf(ctx && ctx.where) < 0 && skipped[key].push(ctx && ctx.where);
+    return null;
+  }
+
+  function proper(full) {
+    var w = full.split(/[\s-]+/);
+    return /^[A-Z]{2}/.test(w[0]) || /[a-z][A-Z]/.test(w[0]) || w.slice(1).some(function (x) { return /^[A-Z]/.test(x); });
+  }
+  function pluralise(full) {
+    var m = full.match(/^(.*?)(\s(?:of|for|at|in|to|on|with)\s.*)$/), head = m ? m[1] : full, tail = m ? m[2] : "";
+    head = /[^aeiou]y$/.test(head) ? head.slice(0, -1) + "ies" : /(s|x|ch|sh)$/.test(head) ? head + "es" : head + "s";
+    return head + tail;
+  }
+
+  /* The abbreviations a unit already spells out, plus any the caller names
+     (a glossary headword's own alias), as a seen-set for expand(). */
+  function seed(strings, known) {
+    var seen = Object.create(null);
+    (known || []).forEach(function (a) { seen[a] = 1; });
+    (strings || []).forEach(function (t) {
+      if (!t) return;
+      t = String(t);
+      each(t, function (a) {
+        if (seen[a]) return;
+        if (table()[a].some(function (r) { return definedIn(t, a, r.full); })) seen[a] = 1;
+      });
+    });
+    return seen;
+  }
+
+  /* Abbreviations on a flashcard front whose meaning the back gives: the
+     card is testing the letters, so the front must not answer it. "Gives"
+     is the full name, or three quarters of its words (RACI's back lists
+     "Responsible, Accountable, Consulted or Informed" in its own order). */
+  function answered(front, back) {
+    var hold = Object.create(null), b = String(back || "").toLowerCase();
+    each(String(front || ""), function (a) {
+      if (table()[a].some(function (r) {
+        var f = r.full.toLowerCase(), w = f.split(/[^a-z]+/).filter(function (x) { return x.length > 3; });
+        return b.indexOf(f) >= 0 || (w.length > 1 && w.filter(function (x) { return b.indexOf(x) >= 0; }).length / w.length >= 0.75);
+      })) hold[a] = 1;
+    });
+    return hold;
+  }
+
+  /* A token inside a formula is never rewritten, since "Estimate at
+     completion (EAC) = BAC / CPI" no longer reads as a formula. When a
+     formula is where the unit first uses an abbreviation, a key follows
+     the sentence instead: "EAC = BAC / CPI (BAC: budget at completion;
+     CPI: cost performance index)." */
+  function lower(row, text, start) {
+    var at = skipSp(text, start - 1, -1);
+    return at >= 0 && !/[.!?\n\u2022]/.test(text.charAt(at)) && !proper(row.full);
+  }
+  function sentenceEnd(text, from) {
+    var m = /[.;](?=\s|$)|\n/.exec(text.slice(from));
+    return m ? from + m.index : text.length;
+  }
+
+  function expand(text, seen, ctx) {
+    if (!text) return text;
+    text = String(text);
+    var edits = [], keys = {}, hold = (ctx && ctx.hold) || {};
+    each(text, function (a, start, end) {
+      if (seen[a] || hold[a]) return;
+      var formula = inFormula(text, start, end);
+      var row = pick(a, ctx);
+      if (!row) return;
+      seen[a] = 1;
+      if (formula) {
+        var at = sentenceEnd(text, end), f = proper(row.full) ? row.full : row.full.charAt(0).toLowerCase() + row.full.slice(1);
+        (keys[at] || (keys[at] = [])).push(a + ": " + f);
+        return;
+      }
+      var token = text.slice(start, end);
+      var full = end - start > a.length ? pluralise(row.full) : row.full;
+      if (lower(row, text, start)) full = full.charAt(0).toLowerCase() + full.slice(1);
+      var wrapped = text.charAt(start - 1) === "(" && text.charAt(end) === ")";
+      /* "an SPI" reads "a schedule performance index (SPI)", and back. */
+      var art = /(^|[^\w])([Aa]n?) $/.exec(text.slice(Math.max(0, start - 4), start)), from = start, pre = "";
+      if (art) {
+        var an = /^[aeiou]/i.test(full) ? "n" : "";
+        from = start - art[2].length - 1;
+        pre = art[2].charAt(0) + an + " ";
+      }
+      edits.push([from, end, pre + (wrapped ? full + ", " + token : full + " (" + token + ")")]);
+    });
+    Object.keys(keys).forEach(function (k) { edits.push([+k, +k, " (" + keys[k].join("; ") + ")"]); });
+    edits.sort(function (x, y) { return y[0] - x[0] || y[1] - x[1]; });
+    edits.forEach(function (e) { text = text.slice(0, e[0]) + e[2] + text.slice(e[1]); });
+    return text;
+  }
+
+  /* A unit in one call: unit(strings, ctx).x(text) expands each part in
+     reading order against one seen-set. */
+  function unit(strings, ctx) {
+    var seen = seed(strings, ctx && ctx.known);
+    return { x: function (text, extra) {
+      return expand(text, seen, extra ? Object.assign({}, ctx, extra) : ctx);
+    } };
+  }
+
+  return {
+    unit: unit, expand: expand, seed: seed, answered: answered, groups: groups,
+    skipped: function () { return Object.keys(skipped).sort().map(function (k) { return k + ": " + skipped[k].join(", "); }); }
+  };
+})();
+
 /* ── 09.6  VALIDATE ─────────────────────────────────────────────────────────
    Every import path runs through here before a single byte reaches the store.
    Errors are indexed and name the offending field, per acceptance test 8. */
@@ -24419,7 +24642,10 @@ PMP.Cards = (function () {
       tags.appendChild(el("span", { class: "chip", text: PMP.ECO_TASK_BY_ID[card.ecoTask].label }));
     }
     body.appendChild(tags);
-    body.appendChild(el("p", { class: "cardface-front", text: card.front }));
+    /* §09.5a: one card is one unit, front + back + note. */
+    var ab = PMP.Abbr.unit([card.front, card.back, card.note],
+      { groups: PMP.Abbr.groups([card.deck].concat(card.tags || [])), where: "card " + card.id });
+    body.appendChild(el("p", { class: "cardface-front", text: ab.x(card.front, { hold: PMP.Abbr.answered(card.front, card.back) }) }));
 
     if (!session.revealed) {
       body.appendChild(el("div", { class: "cardface-actions" }, [
@@ -24431,12 +24657,12 @@ PMP.Cards = (function () {
       ]));
     } else {
       body.appendChild(el("div", { class: "cardface-back" }, [
-        el("p", { text: card.back })
+        el("p", { text: ab.x(card.back) })
       ]));
       if (card.note) {
         body.appendChild(el("div", { class: "cardface-note" }, [
           el("span", { class: "eyebrow", text: "Why it matters" }),
-          el("p", { text: card.note })
+          el("p", { text: ab.x(card.note) })
         ]));
       }
       var grades = el("div", { class: "grades" });
@@ -24571,7 +24797,8 @@ PMP.Cards = (function () {
           el("span", { class: "chip", text: deckMeta(card.deck).label }),
           el("span", { class: "num", text: PMP.fmt.plural(rec.lapses, "lapse") })
         ]),
-        el("p", { class: "leech-f", text: card.front }),
+        el("p", { class: "leech-f", text: PMP.Abbr.unit([card.front], { groups: PMP.Abbr.groups([card.deck].concat(card.tags || [])), where: "card " + card.id })
+          .x(card.front, { hold: PMP.Abbr.answered(card.front, card.back) }) }),
         el("div", { class: "leech-a" }, [
           el("button", {
             class: "btn btn--sm", type: "button",
@@ -24678,7 +24905,7 @@ PMP.Cards = (function () {
       tb.appendChild(el("tr", null, [
         el("td", null, [
           el("b", { text: d.label }),
-          el("p", { class: "hint", text: d.summary })
+          el("p", { class: "hint", text: PMP.Abbr.unit([d.summary], { groups: PMP.Abbr.groups([d.id]), where: "deck " + d.id }).x(d.summary) })
         ]),
         el("td", { class: "num", text: String(c.total) }),
         el("td", { class: "num", text: String(c.due) }),
@@ -24874,15 +25101,17 @@ PMP.FormulaLab = (function () {
      search box, and the thing being built here is the single sheet of paper
      someone takes into the last hour before an exam. Everything in 05.6 is
      on it, in 05.6's order, and 03.9 prints it two-up without the chrome. */
-  function sheetRow(f) {
+  function sheetRow(f, gid) {
+    /* §09.5a: one row is one unit, and its own tag counts as defined. */
+    var ab = PMP.Abbr.unit([f.where, f.reads], { groups: PMP.Abbr.groups([gid]), known: [f.tag], where: "formula " + f.id });
     return el("div", { class: "fx-row" }, [
       el("div", { class: "fx-row-t" }, [
         el("span", { text: f.name }),
         f.tag ? el("span", { class: "fx-tag", text: f.tag }) : null
       ]),
       el("div", { class: "fx-expr", text: f.expr }),
-      f.where ? el("p", { class: "fx-where", text: f.where }) : null,
-      f.reads ? el("p", { class: "fx-reads", text: f.reads }) : null
+      f.where ? el("p", { class: "fx-where", text: ab.x(f.where) }) : null,
+      f.reads ? el("p", { class: "fx-reads", text: ab.x(f.reads) }) : null
     ]);
   }
 
@@ -24903,10 +25132,10 @@ PMP.FormulaLab = (function () {
     PMP.FORMULAS.forEach(function (g) {
       var card = el("div", { class: "card fx-grp" }, [
         el("h3", { text: g.label }),
-        g.blurb ? el("p", { class: "hint", text: g.blurb }) : null
+        g.blurb ? el("p", { class: "hint", text: PMP.Abbr.unit([g.blurb], { groups: PMP.Abbr.groups([g.id]), where: "formula group " + g.id }).x(g.blurb) }) : null
       ]);
       var list = el("div", { class: "fx-list" });
-      g.items.forEach(function (f) { list.appendChild(sheetRow(f)); });
+      g.items.forEach(function (f) { list.appendChild(sheetRow(f, g.id)); });
       card.appendChild(list);
       sheet.appendChild(card);
     });
@@ -24916,7 +25145,7 @@ PMP.FormulaLab = (function () {
        its length; collected here they read as a checklist. */
     var traps = [];
     PMP.FORMULAS.forEach(function (g) {
-      g.items.forEach(function (f) { if (f.trap) traps.push([g.label, f.name, f.trap]); });
+      g.items.forEach(function (f) { if (f.trap) traps.push([g.label, f.name, f.trap, f.tag, g.id, f.id]); });
     });
     var tcard = el("div", { class: "card fx-grp", style: "margin-top:var(--sp-4)" }, [
       el("span", { class: "eyebrow", text: "Where the marks go" }),
@@ -24930,7 +25159,7 @@ PMP.FormulaLab = (function () {
           el("span", { text: t[1] }),
           el("span", { class: "fx-tag", text: t[0] })
         ]),
-        el("p", { class: "fx-where", text: t[2] })
+        el("p", { class: "fx-where", text: PMP.Abbr.unit([t[2]], { groups: PMP.Abbr.groups([t[4]]), known: [t[3]], where: "formula trap " + t[5] }).x(t[2]) })
       ]));
     });
     tcard.appendChild(tlist);
@@ -27568,10 +27797,10 @@ PMP.Library = (function () {
     }
   }
 
-  function ittoColumn(title, items) {
+  function ittoColumn(title, items, ab) {
     return el("section", null, [
       el("h4", { text: title }),
-      el("ul", null, items.map(function (s) { return el("li", { text: s }); }))
+      el("ul", null, items.map(function (s) { return el("li", { text: ab ? ab.x(s) : s }); }))
     ]);
   }
 
@@ -27585,24 +27814,26 @@ PMP.Library = (function () {
       );
     }
     var a = areaOf(p.area), g = groupOf(p.group);
+    /* §09.5a: one process is one unit. */
+    var ab = PMP.Abbr.unit([p.purpose].concat(p.inputs, p.tools, p.outputs, [p.key]), { groups: PMP.Abbr.groups([p.area]), where: "process " + p.id });
     var card = el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: p.n + " \u00B7 " + (a ? a.label : "") }),
       el("h2", { text: p.name }),
-      el("p", { text: p.purpose })
+      el("p", { text: ab.x(p.purpose) })
     ]);
     card.appendChild(el("div", { class: "lib-tags" }, [
       el("span", { class: "chip" }, [icon("branch"), g ? g.label : ""]),
       el("span", { class: "chip" }, [icon("book"), a ? a.label : ""])
     ]));
     card.appendChild(el("div", { class: "lib-itto" }, [
-      ittoColumn("Inputs", p.inputs),
-      ittoColumn("Tools and techniques", p.tools),
-      ittoColumn("Outputs", p.outputs)
+      ittoColumn("Inputs", p.inputs, ab),
+      ittoColumn("Tools and techniques", p.tools, ab),
+      ittoColumn("Outputs", p.outputs, ab)
     ]));
     card.appendChild(el("p", { class: "hint", style: "margin-top:var(--sp-3)", text: "Condensed, not transcribed. Only the entries that change an answer are listed." }));
     card.appendChild(el("div", { class: "lib-key" }, [
       el("b", { text: "What it turns on. " }),
-      el("span", { text: p.key })
+      el("span", { text: ab.x(p.key) })
     ]));
     return card;
   }
@@ -27673,7 +27904,7 @@ PMP.Library = (function () {
             el("span", { class: "lib-num", text: String(a.n) }),
             el("h4", { text: a.label })
           ]),
-          el("p", { class: "lib-item-b", text: a.blurb }),
+          el("p", { class: "lib-item-b", text: PMP.Abbr.unit([a.blurb], { groups: PMP.Abbr.groups([a.id]), where: "area " + a.id }).x(a.blurb) }),
           el("p", { class: "lib-code", style: "margin-top:var(--sp-2)", text: PMP.fmt.plural(a.count, "process", "processes") })
         ]);
       }))
@@ -27686,39 +27917,41 @@ PMP.Library = (function () {
      and left there is not usable in an exam, and the useful form is the
      question it makes you ask of a scenario. */
   function principleCard(p) {
+    var ab = PMP.Abbr.unit([p.line, p.body].concat(p.practice, [p.trap]), { where: "principle " + p.n });
     var card = el("div", { class: "lib-item" }, [
       el("div", { class: "lib-item-h" }, [
         el("span", { class: "lib-num", text: String(p.n) }),
         el("h4", { text: p.label })
       ]),
-      el("p", { class: "lib-item-l", text: p.line }),
-      el("p", { class: "lib-item-b", text: p.body })
+      el("p", { class: "lib-item-l", text: ab.x(p.line) }),
+      el("p", { class: "lib-item-b", text: ab.x(p.body) })
     ]);
     card.appendChild(el("ul", { class: "lib-pts" }, p.practice.map(function (s) {
-      return el("li", { text: s });
+      return el("li", { text: ab.x(s) });
     })));
     if (p.trap) {
       card.appendChild(el("div", { class: "lib-trap" }, [
         el("b", { text: "In an item. " }),
-        el("span", { text: p.trap })
+        el("span", { text: ab.x(p.trap) })
       ]));
     }
     return card;
   }
 
   function domainCard(d) {
+    var ab = PMP.Abbr.unit([d.line, d.body].concat(d.outcomes, d.checks), { where: "domain " + d.n });
     var card = el("div", { class: "lib-item" }, [
       el("div", { class: "lib-item-h" }, [
         el("span", { class: "lib-num", text: String(d.n) }),
         el("h4", { text: d.label })
       ]),
-      el("p", { class: "lib-item-l", text: d.line }),
-      el("p", { class: "lib-item-b", text: d.body })
+      el("p", { class: "lib-item-l", text: ab.x(d.line) }),
+      el("p", { class: "lib-item-b", text: ab.x(d.body) })
     ]);
     card.appendChild(el("h5", { class: "eyebrow", style: "display:block;margin-top:var(--sp-4)", text: "Outcomes" }));
-    card.appendChild(el("ul", { class: "lib-pts" }, d.outcomes.map(function (s) { return el("li", { text: s }); })));
+    card.appendChild(el("ul", { class: "lib-pts" }, d.outcomes.map(function (s) { return el("li", { text: ab.x(s) }); })));
     card.appendChild(el("h5", { class: "eyebrow", style: "display:block;margin-top:var(--sp-4)", text: "Ask of a scenario" }));
-    card.appendChild(el("ul", { class: "lib-pts lib-pts--check" }, d.checks.map(function (s) { return el("li", { text: s }); })));
+    card.appendChild(el("ul", { class: "lib-pts lib-pts--check" }, d.checks.map(function (s) { return el("li", { text: ab.x(s) }); })));
     return card;
   }
 
@@ -27749,15 +27982,16 @@ PMP.Library = (function () {
     R.agile.forEach(function (grp) {
       var sec = el("div", { class: "lib-sec" }, [
         el("h3", { text: grp.label }),
-        el("p", { class: "lib-lead", text: grp.blurb })
+        el("p", { class: "lib-lead", text: PMP.Abbr.unit([grp.blurb], { where: "agile " + grp.id }).x(grp.blurb) })
       ]);
       sec.appendChild(el("div", { class: "lib-cards" }, grp.items.map(function (it) {
+        var ab = PMP.Abbr.unit([it.body].concat(it.points), { where: "agile " + grp.id + " " + it.name });
         var card = el("div", { class: "lib-item" }, [
           el("div", { class: "lib-item-h" }, [el("h4", { text: it.name })]),
-          el("p", { class: "lib-item-b", text: it.body })
+          el("p", { class: "lib-item-b", text: ab.x(it.body) })
         ]);
         card.appendChild(el("ul", { class: "lib-pts" }, it.points.map(function (s) {
-          return el("li", { text: s });
+          return el("li", { text: ab.x(s) });
         })));
         return card;
       })));
@@ -27771,9 +28005,11 @@ PMP.Library = (function () {
      §03.9 can then treat these as reference pages. The first cell of each row
      is a th, because it is the row's label rather than one of its values. */
   function renderTable(t) {
+    /* §09.5a: one table is one unit, read blurb, rows, note. */
+    var ab = PMP.Abbr.unit([t.blurb].concat([].concat.apply([], t.rows), [t.note]), { groups: PMP.Abbr.groups([t.id]), where: "table " + t.id });
     var sec = el("div", { class: "lib-sec" }, [
       el("h3", { text: t.label }),
-      el("p", { class: "lib-lead", text: t.blurb })
+      el("p", { class: "lib-lead", text: ab.x(t.blurb) })
     ]);
     var table = el("table", { class: "lib-tbl" });
     table.appendChild(el("thead", null, [
@@ -27781,11 +28017,11 @@ PMP.Library = (function () {
     ]));
     table.appendChild(el("tbody", null, t.rows.map(function (row) {
       return el("tr", null, row.map(function (cell, i) {
-        return i === 0 ? el("th", { scope: "row", text: cell }) : el("td", { text: cell });
+        return i === 0 ? el("th", { scope: "row", text: ab.x(cell) }) : el("td", { text: ab.x(cell) });
       }));
     })));
     sec.appendChild(el("div", { class: "lib-tw" }, [table]));
-    if (t.note) sec.appendChild(el("div", { class: "lib-note", text: t.note }));
+    if (t.note) sec.appendChild(el("div", { class: "lib-note", text: ab.x(t.note) }));
     return sec;
   }
 
@@ -28027,6 +28263,11 @@ PMP.Library = (function () {
     return id;
   }
 
+  /* §09.5a: one entry is one unit; its headword and alias are defined. */
+  function glossDef(e) {
+    return PMP.Abbr.unit([e.d], { groups: [e.g].concat(PMP.Abbr.groups([e.g])), known: [e.a, e.t], where: "glossary " + e.t }).x(e.d);
+  }
+
   function glossRow(i) {
     var e = results[i];
     var row = el("button", {
@@ -28038,7 +28279,7 @@ PMP.Library = (function () {
     t.appendChild(highlight(e.t, query));
     if (e.a) t.appendChild(el("span", { class: "ab", text: e.a }));
     row.appendChild(t);
-    row.appendChild(el("span", { class: "lib-row-d", text: e.d }));
+    row.appendChild(el("span", { class: "lib-row-d", text: glossDef(e) }));
     return row;
   }
 
@@ -28093,7 +28334,7 @@ PMP.Library = (function () {
         el("h3", { text: e.t }),
         e.a ? el("span", { class: "lib-code", text: e.a }) : null
       ]),
-      el("p", { class: "lib-def-b", text: e.d })
+      el("p", { class: "lib-def-b", text: glossDef(e) })
     ]);
 
     /* Nearby terms, found by running the matcher on this term rather than by
@@ -33199,7 +33440,7 @@ PMP.Learn = (function () {
       var card = el("section", { class: "card", "aria-labelledby": "ln-mod-" + m.id }, [
         el("span", { class: "eyebrow", text: "Module " + m.order }),
         el("h2", { id: "ln-mod-" + m.id, text: moduleLabel(m) }),
-        el("p", { text: m.blurb })
+        el("p", { text: PMP.Abbr.unit([m.blurb], { where: "module " + m.id }).x(m.blurb) })
       ]);
       if (!mine.length) {
         card.appendChild(el("p", { class: "hint", text: "The lessons for this module have not been written yet." }));
@@ -33250,6 +33491,10 @@ PMP.Learn = (function () {
     var lessons = path();
     var idx = lessons.indexOf(lesson);
     var ui = {};
+    /* §09.5a. Each part below is its own unit; shared letters are settled by
+       the section's formula group, else by the lesson's groups and task. */
+    var abCtx = { where: "lesson " + lesson.id, groups: PMP.Abbr.groups(lesson.sections.map(function (s) { return s.formulaGroup; }).concat([lesson.ecoTask])) };
+    function abUnit(strings, part) { return PMP.Abbr.unit(strings, Object.assign({}, abCtx, { where: abCtx.where + " " + part })); }
 
     host.appendChild(el("div", { class: "filter-bar ln-top" }, [
       el("a", { class: "btn btn--ghost btn--sm", href: href("learn") }, "All lessons")
@@ -33282,7 +33527,7 @@ PMP.Learn = (function () {
       ].concat(prereqs)),
       el("div", { class: "ln-prog" }, [ui.progress, ui.progressText]),
       el("h3", { class: "ln-h3", text: "After this lesson you can" }),
-      el("ul", { class: "ln-bullets" }, lesson.objectives.map(function (o) { return el("li", { text: o }); }))
+      el("ul", { class: "ln-bullets" }, (function (ab) { return lesson.objectives.map(function (o) { return el("li", { text: ab.x(o) }); }); })(abUnit(lesson.objectives, "objectives")))
     ]));
 
     /* Part 2 ── why it matters. Every figure is read from §01 and the live
@@ -33304,7 +33549,7 @@ PMP.Learn = (function () {
           return D.DOMAIN_LABELS[d] + " " + PMP.fmt.pct(D.DOMAIN_WEIGHTS[d]) + " (" + D.DOMAIN_TASK_COUNTS[d] + " tasks)";
         }).join(", ") + ". About " + PMP.fmt.pct(D.APPROACH_SPLIT.predictive) + " of items assume predictive delivery; the rest are set in adaptive or hybrid work." }));
     }
-    why = why.concat(paragraphs(lesson.examWeight));
+    why = why.concat(paragraphs(abUnit([lesson.examWeight], "examWeight").x(lesson.examWeight)));
     if (task) {
       var qs = PMP.Content.all().filter(function (q) { return q.ecoTask === task.id; });
       var byType = {};
@@ -33321,7 +33566,9 @@ PMP.Learn = (function () {
     var secs = lesson.sections.map(function (s, i) {
       var chip = el("span", { class: "chip chip--correct", hidden: true }, [icon("check"), "Read"]);
       ui.secChips[s.id] = chip;
-      var bodyKids = paragraphs(s.body);
+      var bodyKids = paragraphs(PMP.Abbr.unit([s.body], {
+        where: abCtx.where + " " + s.id, groups: s.formulaGroup ? PMP.Abbr.groups([s.formulaGroup]) : abCtx.groups
+      }).x(s.body));
       if (s.formulaGroup) {
         var grp = PMP.FORMULAS.filter(function (g) { return g.id === s.formulaGroup; })[0];
         bodyKids.push(el("p", { class: "ln-links" }, [
@@ -33351,10 +33598,11 @@ PMP.Learn = (function () {
     ].concat(secs)));
 
     /* Part 4 ── three lenses */
+    var abLens = abUnit([lesson.lenses.predictive, lesson.lenses.agile, lesson.lenses.hybrid], "lenses");
     var lensRows = ["predictive", "agile", "hybrid"].map(function (k) {
       return el("tr", null, [
         el("th", { scope: "row", text: PMP.ECO.APPROACH_LABELS[k] }),
-        el("td", { text: lesson.lenses[k] })
+        el("td", { text: abLens.x(lesson.lenses[k]) })
       ]);
     });
     host.appendChild(part(4, PARTS[3], [
@@ -33369,7 +33617,12 @@ PMP.Learn = (function () {
     var wk = lesson.worked;
     var byOpt = {};
     var letters = {};
-    wk.options.forEach(function (o, i) { byOpt[o.id] = o; letters[o.id] = String.fromCharCode(65 + i); });
+    /* One unit in reading order: stem, options, the ranking's reasons, the
+       mindset. An option repeated in the ranking repeats its first form. */
+    var abWk = abUnit([wk.stem].concat(wk.options.map(function (o) { return o.text; }),
+      wk.ranking.map(function (r) { return r.why; }), [wk.mindset]), "worked");
+    var wkStem = abWk.x(wk.stem), optX = {};
+    wk.options.forEach(function (o, i) { byOpt[o.id] = o; letters[o.id] = String.fromCharCode(65 + i); optX[o.id] = abWk.x(o.text); });
     var rankList = el("div", { class: "rank-list", role: "list" }, wk.ranking.map(function (r, i) {
       var o = byOpt[r.option] || { text: "" };
       return el("div", { class: "rank", role: "listitem", dataset: { rank: r.rank } }, [
@@ -33379,27 +33632,27 @@ PMP.Learn = (function () {
             el("span", { class: "verdict", text: RANK_LABEL[r.rank] || r.rank }),
             el("span", { class: "chip", text: "Option " + (letters[r.option] || "?") })
           ]),
-          el("p", { class: "opt-text", text: o.text }),
-          el("p", { class: "why", text: r.why })
+          el("p", { class: "opt-text", text: optX[r.option] || o.text }),
+          el("p", { class: "why", text: abWk.x(r.why) })
         ])
       ]);
     }));
     host.appendChild(part(5, PARTS[4], [
-      el("p", { class: "q-stem", text: wk.stem }),
+      el("p", { class: "q-stem", text: wkStem }),
       el("ol", { class: "ln-opts" }, wk.options.map(function (o, i) {
-        return el("li", null, [el("span", { class: "key", text: String.fromCharCode(65 + i) }), el("span", { text: o.text })]);
+        return el("li", null, [el("span", { class: "key", text: String.fromCharCode(65 + i) }), el("span", { text: optX[o.id] })]);
       })),
       el("p", { class: "hint", text: "Pick the one you would do first, then open the reasoning." }),
       el("details", { class: "review ln-sec" }, [
         el("summary", null, [el("span", { class: "s", text: "How a coach would rank these" })]),
-        el("div", { class: "review-bd" }, [rankList, mindsetBlock("The mindset", wk.mindset)])
+        el("div", { class: "review-bd" }, [rankList, mindsetBlock("The mindset", abWk.x(wk.mindset))])
       ])
     ]));
 
     /* Part 6 ── traps */
     host.appendChild(part(6, PARTS[5], [
       el("p", { text: "Instincts the exam rewards you for resisting." }),
-      el("ul", { class: "ln-bullets" }, lesson.traps.map(function (t) { return el("li", { text: t }); }))
+      el("ul", { class: "ln-bullets" }, (function (ab) { return lesson.traps.map(function (t) { return el("li", { text: ab.x(t) }); }); })(abUnit(lesson.traps, "traps")))
     ]));
 
     /* Part 7 ── quick checks */
@@ -33419,9 +33672,10 @@ PMP.Learn = (function () {
     ]));
 
     /* Part 9 ── recap */
+    var abRecap = abUnit(lesson.recap.concat([lesson.mindset]), "recap");
     host.appendChild(part(9, PARTS[8], [
-      el("ul", { class: "ln-bullets" }, lesson.recap.map(function (t) { return el("li", { text: t }); })),
-      mindsetBlock("Carry this out of the lesson", lesson.mindset)
+      el("ul", { class: "ln-bullets" }, lesson.recap.map(function (t) { return el("li", { text: abRecap.x(t) }); })),
+      mindsetBlock("Carry this out of the lesson", abRecap.x(lesson.mindset))
     ]));
 
     /* Part 10 ── practice set: the bank, scenarios and cards for this task */
