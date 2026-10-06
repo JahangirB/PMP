@@ -4,7 +4,9 @@
    (UI fixes in, no coach), written to a temporary file; only #view is
    compared, because the rail gained Today and Progress on purpose. On
    #/library only the tab panel is compared: the tab strip gained
-   Abbreviations on purpose, and 07-abbreviations checks the strip itself. */
+   Abbreviations on purpose, and 07-abbreviations checks the strip itself.
+   The sticky top bar is masked in both: it overlaps a full-length element
+   screenshot, and it gained the Notes toggle on purpose (08-notepad). */
 var assert = require("assert");
 var fs = require("fs");
 var os = require("os");
@@ -28,8 +30,8 @@ module.exports = [
           await lib.go(a, "#/" + r);
           await lib.go(b, "#/" + r);
           var sel = r === "library" ? '#view [role="tabpanel"]' : "#view";
-          var pa = await a.locator(sel).screenshot();
-          var pb = await b.locator(sel).screenshot();
+          var pa = await a.locator(sel).screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
+          var pb = await b.locator(sel).screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
           if (!pa.equals(pb)) {
             diff.push(fx + " #/" + r);
             fs.mkdirSync(path.join(__dirname, "screenshots", "untouched"), { recursive: true });

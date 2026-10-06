@@ -251,8 +251,8 @@ module.exports = [
       for (var t of ["process", "principles", "agile", "tables", "glossary"]) {
         await lib.go(a, "#/library?tab=" + t);
         await lib.go(b, "#/library?tab=" + t);
-        var pa = await a.locator('#view [role="tabpanel"]').screenshot();
-        var pb = await b.locator('#view [role="tabpanel"]').screenshot();
+        var pa = await a.locator('#view [role="tabpanel"]').screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
+        var pb = await b.locator('#view [role="tabpanel"]').screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
         if (!pa.equals(pb)) diff.push(t);
       }
       await a.ctx.close();
