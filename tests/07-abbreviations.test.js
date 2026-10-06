@@ -241,14 +241,16 @@ module.exports = [
     }
   },
   {
-    name: "the other five tabs render as they did before this change",
+    name: "the other tabs render as they did before this change",
     fn: async function (h, lib) {
       var ref = path.join(os.tmpdir(), "pmp-ref-" + PRE_ABBR + ".html");
       fs.writeFileSync(ref, cp.execSync("git show " + PRE_ABBR + ":index.html", { cwd: path.join(__dirname, ".."), maxBuffer: 64 << 20 }));
       var a = await h.open("fresh", { file: "file://" + ref });
       var b = await h.open("fresh");
       var diff = [];
-      for (var t of ["process", "principles", "agile", "tables", "glossary"]) {
+      /* Agile and Tables now spell abbreviations out on first use (§09.5a),
+         on purpose; 09-learning-abbr checks that text instead. */
+      for (var t of ["process", "principles", "glossary"]) {
         await lib.go(a, "#/library?tab=" + t);
         await lib.go(b, "#/library?tab=" + t);
         var pa = await a.locator('#view [role="tabpanel"]').screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });

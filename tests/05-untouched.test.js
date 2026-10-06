@@ -14,7 +14,10 @@ var path = require("path");
 var cp = require("child_process");
 
 var REF_COMMIT = "3f6ff75";
-var ROUTES = ["formulas", "library", "analytics", "journal", "exam", "data", "practice", "scenarios", "cards"];
+/* #/formulas and #/cards are learning surfaces that now spell abbreviations
+   out on first use (§09.5a), on purpose; 09-learning-abbr covers them. The
+   practice surfaces stay here precisely because they must not change. */
+var ROUTES = ["library", "analytics", "journal", "exam", "data", "practice", "scenarios"];
 
 module.exports = [
   {
