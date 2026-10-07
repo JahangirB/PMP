@@ -1,25 +1,18 @@
 "use strict";
-/* The AI tab in the notes pane (§12.2.2): ChatGPT, Gemini, Claude or a
-   custom link, opened in a window of its own beside the app. Outbound
-   requests are stubbed; what is checked is the address each press opens. */
+/* The Gemini tab in the notes pane (§12.2.2): the person's own Google AI
+   Studio key, chat in the pane, Flash models from 3.0. Google's API is
+   stubbed throughout; nothing reaches the real service. */
 var assert = require("assert");
 
-/* Records every window the page opens and stubs every http(s) request, so
-   the test never reaches the real services and can see that nothing is
-   requested before a press. */
-async function watch(page) {
-  var w = { opened: [], requests: [] };
-  await page.ctx.route(/^https?:/, function (r) {
-    w.requests.push(r.request().url());
-    r.fulfill({ status: 200, contentType: "text/html", body: "stub" });
-  });
-  page.ctx.on("page", function (p) { w.opened.push(p); });
-  return w;
-}
-async function lastUrl(w) {
-  await new Promise(function (r) { setTimeout(r, 250); });
-  return w.opened.length ? w.opened[w.opened.length - 1].url() : null;
-}
+var MODELS = [
+  { name: "models/gemini-2.5-flash", displayName: "Gemini 2.5 Flash", supportedGenerationMethods: ["generateContent"] },
+  { name: "models/gemini-3-pro", displayName: "Gemini 3 Pro", supportedGenerationMethods: ["generateContent"] },
+  { name: "models/gemini-3-flash", displayName: "Gemini 3 Flash", supportedGenerationMethods: ["generateContent"] },
+  { name: "models/gemini-3-flash-lite", displayName: "Gemini 3 Flash-Lite", supportedGenerationMethods: ["generateContent"] },
+  { name: "models/gemini-3.1-flash-preview", displayName: "Gemini 3.1 Flash Preview", supportedGenerationMethods: ["generateContent"] },
+  { name: "models/gemini-3-flash-image", displayName: "Gemini 3 Flash Image", supportedGenerationMethods: ["generateContent"] },
+  { name: "models/text-embedding-004", supportedGenerationMethods: ["embedContent"] }
+];
 
 module.exports = [
   {
@@ -28,14 +21,14 @@ module.exports = [
       var page = await h.open("fresh");
       await page.click("#np-toggle");
       assert.strictEqual(await page.isVisible("#np-text"), true);
-      assert.strictEqual(await page.isVisible("#np-q"), false);
+      assert.strictEqual(await page.isVisible("#np-key"), false);
       await page.click("#np-tab-ai");
-      assert.strictEqual(await page.isVisible("#np-q"), true);
+      assert.strictEqual(await page.isVisible("#np-key"), true);
       assert.strictEqual(await page.getAttribute("#np-tab-ai", "aria-selected"), "true");
       await page.waitForTimeout(700);
       await page.reload();
       await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
-      assert.strictEqual(await page.isVisible("#np-q"), true, "AI tab is still the open one");
+      assert.strictEqual(await page.isVisible("#np-key"), true, "Gemini tab is still the open one");
       await page.focus("#np-tab-ai");
       await page.keyboard.press("ArrowLeft");
       assert.strictEqual(await page.isVisible("#np-text"), true);
@@ -45,102 +38,60 @@ module.exports = [
     }
   },
   {
-    name: "nothing is opened or requested until a button is pressed",
+    name: "Gemini only: no other services; nothing is requested until a key is given",
     fn: async function (h, lib) {
       var page = await h.open("fresh");
-      var w = await watch(page);
+      var requests = [];
+      await page.ctx.route(/^https?:/, function (r) { requests.push(r.request().url()); r.abort(); });
       await page.click("#np-toggle");
       await page.click("#np-tab-ai");
-      await page.fill("#np-q", "What is a CCB?");
-      for (var p of ["gemini", "claude", "custom", "chatgpt"]) await page.click('.np-prov-b[data-p="' + p + '"]');
+      var text = await page.textContent("#np-ai");
+      assert.ok(!/ChatGPT|Claude|Other/.test(text), text);
       await page.waitForTimeout(300);
-      assert.deepStrictEqual(w.requests, []);
-      assert.strictEqual(w.opened.length, 0);
-      await page.ctx.close();
-    }
-  },
-  {
-    name: "Ask prefills ChatGPT and Claude, copies for Gemini; Open starts a blank chat",
-    fn: async function (h, lib) {
-      var page = await h.open("fresh");
-      var w = await watch(page);
-      await page.click("#np-toggle");
-      await page.click("#np-tab-ai");
-      var q = "Explain CPI & SPI";
-
-      await page.fill("#np-q", q);
-      await page.click("#np-ask");
-      assert.strictEqual(await lastUrl(w), "https://chatgpt.com/?q=Explain%20CPI%20%26%20SPI");
-      assert.strictEqual(await page.inputValue("#np-q"), "", "a sent question is cleared");
-
-      await page.click('.np-prov-b[data-p="claude"]');
-      assert.strictEqual(await page.textContent("#np-ask"), "Ask Claude");
-      await page.fill("#np-q", q);
-      await page.click("#np-ask");
-      assert.strictEqual(await lastUrl(w), "https://claude.ai/new?q=Explain%20CPI%20%26%20SPI");
-
-      await page.click('.np-prov-b[data-p="gemini"]');
-      await page.fill("#np-q", q);
-      await page.click("#np-ask");
-      assert.strictEqual(await lastUrl(w), "https://gemini.google.com/app");
-      assert.strictEqual(await page.inputValue("#np-q"), q, "kept, because it still has to be pasted");
-      assert.ok((await page.textContent("#toasts")).indexOf("Question copied") >= 0);
-
-      await page.click("#np-open");
-      assert.strictEqual(await lastUrl(w), "https://gemini.google.com/app");
-      /* One named window, reused: five presses across three services. */
-      assert.strictEqual(w.opened.length, 1);
+      assert.deepStrictEqual(requests, []);
       await lib.clean(page);
       await page.ctx.close();
     }
   },
   {
-    name: "a custom link: refused unless http(s), {q} prefills, kept after a refresh",
+    name: "model list: Flash only, version 3.0 and later; defaults to the newest stable",
     fn: async function (h, lib) {
       var page = await h.open("fresh");
-      var w = await watch(page);
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
+        r.fulfill({ status: 200, headers: { "access-control-allow-origin": "*" }, contentType: "application/json", body: JSON.stringify({ models: MODELS }) });
+      });
       await page.click("#np-toggle");
       await page.click("#np-tab-ai");
-      await page.click('.np-prov-b[data-p="custom"]');
-      assert.strictEqual(await page.isDisabled("#np-ask"), true, "nothing to ask until a link is saved");
-      await page.fill("#np-c-url", "javascript:alert(1)");
-      await page.click("#np-c-save");
-      assert.strictEqual(await page.evaluate(function () { return PMP.Store.state.notepad.ai.customUrl; }), "");
-      await page.fill("#np-c-name", "Perplexity");
-      await page.fill("#np-c-url", "https://www.perplexity.ai/search?q={q}");
-      await page.click("#np-c-save");
-      assert.strictEqual(await page.textContent('.np-prov-b[data-p="custom"]'), "Perplexity");
-      await page.fill("#np-q", "RACI vs RAM");
-      await page.click("#np-ask");
-      assert.strictEqual(await lastUrl(w), "https://www.perplexity.ai/search?q=RACI%20vs%20RAM");
-      /* A link of the person's own gets no handle back on this page. */
-      assert.strictEqual(await w.opened[w.opened.length - 1].evaluate(function () { return window.opener; }), null);
+      await page.fill("#np-key", "GOOD");
+      await page.click("#np-key-save");
+      await page.waitForTimeout(300);
+      assert.deepStrictEqual(await page.$$eval("#np-model option", function (o) { return o.map(function (x) { return x.value; }); }),
+        ["models/gemini-3.1-flash-preview", "models/gemini-3-flash", "models/gemini-3-flash-lite"]);
+      assert.strictEqual(await page.inputValue("#np-model"), "models/gemini-3-flash", "defaults to the newest stable");
+      await page.selectOption("#np-model", "models/gemini-3.1-flash-preview");
       await page.waitForTimeout(700);
       await page.reload();
       await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
-      assert.strictEqual(await page.textContent("#np-ask"), "Ask Perplexity");
-      assert.strictEqual(await page.inputValue("#np-c-url"), "https://www.perplexity.ai/search?q={q}");
+      await page.waitForTimeout(200);
+      assert.strictEqual(await page.inputValue("#np-model"), "models/gemini-3.1-flash-preview", "the choice is kept");
       await lib.clean(page);
       await page.ctx.close();
     }
   },
   {
-    name: "an unsent question survives a refresh; an older notes slice still loads",
+    name: "a key with no Flash 3 model says so and cannot send",
     fn: async function (h, lib) {
       var page = await h.open("fresh");
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
+        r.fulfill({ status: 200, headers: { "access-control-allow-origin": "*" }, contentType: "application/json", body: JSON.stringify({ models: MODELS.slice(0, 2) }) });
+      });
       await page.click("#np-toggle");
       await page.click("#np-tab-ai");
-      await page.type("#np-q", "half-typed");
-      await page.waitForTimeout(900);
-      await page.reload();
-      await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
-      assert.strictEqual(await page.inputValue("#np-q"), "half-typed");
-      /* A slice saved before the AI tab existed has no tab and no ai. */
-      var r = await page.evaluate(function () {
-        PMP.Store.commit(["notepad"], function (s) { s.notepad = { open: true, text: "old", updatedAt: null }; });
-        return { ask: document.getElementById("np-ask").textContent, notes: !document.getElementById("np-notes").hidden };
-      });
-      assert.deepStrictEqual(r, { ask: "Ask ChatGPT", notes: true });
+      await page.fill("#np-key", "OLD");
+      await page.click("#np-key-save");
+      await page.waitForTimeout(300);
+      assert.ok((await page.textContent("#np-log")).indexOf("version 3.0") >= 0);
+      assert.strictEqual(await page.isDisabled("#np-send"), true);
       await lib.clean(page);
       await page.ctx.close();
     }
@@ -156,16 +107,12 @@ module.exports = [
         if (k !== "GOOD") return r.fulfill({ status: 400, headers: H, contentType: "application/json",
           body: JSON.stringify({ error: { code: 400, message: "API key not valid.", details: [{ reason: "API_KEY_INVALID" }] } }) });
         if (q.method() === "GET") return r.fulfill({ status: 200, headers: H, contentType: "application/json", body: JSON.stringify({ models: [
-          { name: "models/gemini-2.5-pro", displayName: "Gemini 2.5 Pro", supportedGenerationMethods: ["generateContent"] },
-          { name: "models/gemini-2.5-flash", displayName: "Gemini 2.5 Flash", supportedGenerationMethods: ["generateContent"] },
-          { name: "models/text-embedding-004", supportedGenerationMethods: ["embedContent"] }] }) });
+          { name: "models/gemini-3-flash", displayName: "Gemini 3 Flash", supportedGenerationMethods: ["generateContent"] }] }) });
         return r.fulfill({ status: 200, headers: H, contentType: "application/json", body: JSON.stringify({
           candidates: [{ content: { role: "model", parts: [{ text: "**CPI** is EV / AC.\n\n- Below 1: over budget\n- <img src=x onerror=alert(1)>" }] } }] }) });
       });
       await page.click("#np-toggle");
       await page.click("#np-tab-ai");
-      await page.click('.np-prov-b[data-p="gemini"]');
-      await page.click('#np-gmode button[data-m="key"]');
 
       await page.fill("#np-key", "BAD");
       await page.click("#np-key-save");
@@ -176,9 +123,7 @@ module.exports = [
       await page.fill("#np-key", "GOOD");
       await page.click("#np-key-save");
       await page.waitForTimeout(300);
-      assert.deepStrictEqual(await page.$$eval("#np-model option", function (o) { return o.map(function (x) { return x.value; }); }),
-        ["models/gemini-2.5-pro", "models/gemini-2.5-flash"], "chat models only");
-      assert.strictEqual(await page.inputValue("#np-model"), "models/gemini-2.5-flash");
+      assert.strictEqual(await page.inputValue("#np-model"), "models/gemini-3-flash");
 
       await page.fill("#np-msg", "What is CPI?");
       await page.keyboard.press("Control+Enter");
@@ -188,7 +133,7 @@ module.exports = [
       await page.waitForTimeout(300);
       var post = calls.filter(function (c) { return c.method === "POST"; });
       assert.strictEqual(post.length, 2);
-      assert.ok(/models\/gemini-2\.5-flash:generateContent$/.test(post[1].url));
+      assert.ok(/models\/gemini-3-flash:generateContent$/.test(post[1].url));
       assert.deepStrictEqual(post[1].body.contents.map(function (c) { return c.role; }), ["user", "model", "user"], "the conversation goes with each turn");
       assert.ok(calls.every(function (c) { return c.url.indexOf("GOOD") < 0; }), "the key travels in a header, never the URL");
 
@@ -223,12 +168,10 @@ module.exports = [
       var page = await h.open("fresh");
       await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
         r.fulfill({ status: 200, headers: { "access-control-allow-origin": "*" }, contentType: "application/json",
-          body: JSON.stringify({ models: [{ name: "models/gemini-2.5-flash", supportedGenerationMethods: ["generateContent"] }] }) });
+          body: JSON.stringify({ models: [{ name: "models/gemini-3-flash", supportedGenerationMethods: ["generateContent"] }] }) });
       });
       await page.click("#np-toggle");
       await page.click("#np-tab-ai");
-      await page.click('.np-prov-b[data-p="gemini"]');
-      await page.click('#np-gmode button[data-m="key"]');
       await page.fill("#np-key", "SESSION");
       await page.uncheck("#np-key-keep");
       await page.click("#np-key-save");
