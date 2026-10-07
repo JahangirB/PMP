@@ -2180,35 +2180,11 @@ html[data-notepad="open"] .np { display: flex; }
 .np-tab[aria-selected="true"] .i { color: var(--c-signal); }
 .np-panel { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
 .np-panel[hidden] { display: none; }
-.np-ai { overflow-y: auto; padding: var(--sp-4); gap: var(--sp-3); overscroll-behavior: contain; }
+.np-ai { padding: var(--sp-4); overflow: hidden; }
 .np-ai .field { margin-bottom: 0; }
 .np-ai-lead { font-size: var(--t-sm); line-height: var(--lh-body); color: var(--fg-muted); }
-.np-prov { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); }
-.np-prov-b {
-  min-height: var(--hit-min); padding: 0 var(--sp-3);
-  border: var(--border-hi); border-radius: var(--r-2); background: var(--s-raise);
-  font-size: var(--t-sm); font-weight: var(--w-semi);
-}
-.np-prov-b:hover { background: var(--s-sunk); }
-.np-prov-b[aria-pressed="true"] { border-color: var(--c-signal); background: var(--s-wash); box-shadow: inset 0 0 0 1px var(--c-signal); }
-.np-custom { display: grid; gap: var(--sp-2); padding: var(--sp-3); border: var(--border); border-radius: var(--r-2); }
-.np-custom[hidden] { display: none; }
-.np-custom code { font-family: var(--font-mono); font-size: var(--t-xs); overflow-wrap: anywhere; }
-.np-custom .btn { justify-self: start; }
-.np-q-t { min-height: 120px; resize: vertical; font-size: var(--t-sm); line-height: var(--lh-body); }
-.np-ai-act { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .np-ai .hint { font-size: var(--t-xs); line-height: var(--lh-body); color: var(--fg-muted); }
-.np-ai-priv { margin-top: auto; padding-top: var(--sp-3); border-top: var(--border); }
-.np-acct { display: grid; gap: var(--sp-3); }
-.np-acct[hidden], .np-chat[hidden], .np-convo[hidden], .np-keyset[hidden], .np-seg[hidden] { display: none; }
-.np-seg { display: flex; border: var(--border-hi); border-radius: var(--r-2); overflow: hidden; }
-.np-seg button { flex: 1 1 0; min-height: 36px; padding: 0 var(--sp-2); font-size: var(--t-xs); font-weight: var(--w-semi); color: var(--fg-muted); }
-.np-seg button + button { border-left: var(--border-hi); }
-.np-seg button[aria-pressed="true"] { background: var(--s-wash); color: var(--fg); box-shadow: inset 0 -2px 0 var(--c-signal); }
-/* With a key in use the pane is the chat: the log takes the height and
-   scrolls on its own, the composer stays at the bottom. */
-.np-ai[data-chat="on"] { overflow: hidden; }
-.np-ai[data-chat="on"] .np-ai-lead, .np-ai[data-chat="on"] .np-ai-priv { display: none; }
+.np-convo[hidden], .np-keyset[hidden] { display: none; }
 .np-chat { display: flex; flex-direction: column; gap: var(--sp-3); flex: 1 1 auto; min-height: 0; }
 .np-keyset { display: grid; gap: var(--sp-2); }
 .np-keyset .btn { justify-self: start; }
@@ -2230,12 +2206,65 @@ html[data-notepad="open"] .np { display: flex; }
 .np-compose { display: flex; gap: var(--sp-2); align-items: flex-end; flex: 0 0 auto; }
 .np-msg { flex: 1 1 auto; min-height: 64px; max-height: 160px; resize: vertical; font-size: var(--t-sm); line-height: var(--lh-body); }
 .np-text {
-  flex: 1 1 auto; min-height: 0; width: 100%; resize: none;
-  padding: var(--sp-4); border: 0; background: transparent;
-  font-size: var(--t-sm); line-height: var(--lh-body);
+  flex: 1 1 auto; min-height: 0; width: 100%; overflow-y: auto; position: relative;
+  padding: var(--sp-4); border: 0; background: transparent; outline: none;
+  font-size: var(--t-sm); line-height: var(--lh-body); overflow-wrap: anywhere;
 }
-.np-text::placeholder { color: var(--fg-muted); }
-.np-text:focus-visible { box-shadow: inset 0 0 0 var(--ring-w) var(--c-signal); }
+.np-text[data-empty="true"]::before {
+  content: attr(data-placeholder); position: absolute; inset: var(--sp-4) var(--sp-4) auto;
+  color: var(--fg-muted); pointer-events: none;
+}
+.np-text ul { list-style: disc; padding-left: 1.5em; }
+.np-text ol { list-style: decimal; padding-left: 1.6em; }
+.np-text li { margin: 2px 0; }
+
+/* The ribbon. Colours are classes over theme tokens rather than stored
+   hex, so a note written in the light theme stays readable in the dark. */
+:root {
+  --nc-red: #B3382A; --nc-orange: #B45309; --nc-green: #0E7A57; --nc-blue: #1D5FBF; --nc-purple: #7342C6;
+  --nh-yellow: #FCEB8F; --nh-green: #C9EED8; --nh-blue: #CFE3FA; --nh-pink: #F9D2E3;
+}
+:root[data-theme="dark"] {
+  --nc-red: #FF8F80; --nc-orange: #F7A85F; --nc-green: #62D6A1; --nc-blue: #86B6FF; --nc-purple: #C6A6FF;
+  --nh-yellow: rgba(250, 204, 21, 0.34); --nh-green: rgba(52, 211, 153, 0.30); --nh-blue: rgba(96, 165, 250, 0.32); --nh-pink: rgba(244, 114, 182, 0.32);
+}
+.np-c-red { color: var(--nc-red); } .np-c-orange { color: var(--nc-orange); } .np-c-green { color: var(--nc-green); }
+.np-c-blue { color: var(--nc-blue); } .np-c-purple { color: var(--nc-purple); } .np-c-none { color: var(--fg); }
+mark.np-h-yellow, .np-sw.np-h-yellow { background: var(--nh-yellow); } mark.np-h-green, .np-sw.np-h-green { background: var(--nh-green); }
+mark.np-h-blue, .np-sw.np-h-blue { background: var(--nh-blue); } mark.np-h-pink, .np-sw.np-h-pink { background: var(--nh-pink); }
+mark.np-h-none { background: transparent; }
+.np-text mark { color: inherit; border-radius: 2px; padding: 0 1px; }
+.np-o { text-decoration: overline; }
+.np-rib {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 2px; flex: 0 0 auto;
+  padding: var(--sp-1) var(--sp-2); border-bottom: var(--border); background: var(--s-base);
+}
+.np-rb {
+  display: inline-grid; place-items: center; position: relative;
+  min-width: 28px; height: 32px; padding: 0 2px; border-radius: var(--r-1);
+  color: var(--fg); font-size: var(--t-sm);
+}
+.np-rb:hover { background: var(--s-sunk); }
+.np-rb[aria-pressed="true"], .np-rb[aria-expanded="true"] { background: var(--s-wash); box-shadow: inset 0 0 0 1px var(--c-signal); }
+.np-rb .i { width: var(--icon); height: var(--icon); }
+.np-rb b, .np-rb i, .np-rb u, .np-rb s, .np-rb .np-o { font-family: Georgia, "Times New Roman", serif; font-size: 15px; }
+.np-rb-a { font-weight: var(--w-bold); line-height: 1; margin-top: -4px; }
+.np-rb-bar { position: absolute; left: 8px; right: 8px; bottom: 5px; height: 3px; border-radius: 2px; background: var(--fg); }
+#np-h-now { background: var(--nh-yellow); }
+.np-rb-tx { font-weight: var(--w-semi); }
+.np-rb-tx sub { font-size: 9px; }
+.np-rsep { width: 1px; height: 20px; margin: 0 2px; background: var(--s-edge); }
+.np-pop {
+  display: flex; gap: var(--sp-1); flex-wrap: wrap; flex: 0 0 auto;
+  padding: var(--sp-2); border-bottom: var(--border); background: var(--s-raise);
+}
+.np-pop[hidden] { display: none; }
+.np-pop button { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--r-1); }
+.np-pop button:hover { background: var(--s-sunk); }
+.np-sw { display: block; width: 20px; height: 20px; border-radius: var(--r-full); border: 1px solid var(--s-edge-hi); }
+.np-sw.np-c-red, .np-sw.np-c-orange, .np-sw.np-c-green, .np-sw.np-c-blue, .np-sw.np-c-purple { background: currentColor; }
+.np-sw--none { background: linear-gradient(135deg, transparent 45%, var(--c-danger) 45%, var(--c-danger) 55%, transparent 55%), var(--s-raise); }
+.np-text:focus-visible, .np-text:focus { box-shadow: inset 0 0 0 var(--ring-w) var(--c-signal); }
 .np-ft {
   display: flex; align-items: center; gap: var(--sp-2); flex: 0 0 auto;
   padding: var(--sp-2) var(--sp-3); border-top: var(--border);
@@ -2378,6 +2407,9 @@ html[data-notepad="open"] .np { display: flex; }
 <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 21V3.5M5.5 4.5h11l-2 3.5 2 3.5h-11"/></symbol>
 <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.5z"/><path d="M14 3.5v6h6M8 13h8M8 16.5h5"/></symbol>
 <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></symbol>
+<symbol id="i-ul" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9.5 6.5H20M9.5 12H20M9.5 17.5H20"/><circle cx="5" cy="6.5" r="1" fill="currentColor"/><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="5" cy="17.5" r="1" fill="currentColor"/></symbol>
+<symbol id="i-ol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6.5H20M10 12H20M10 17.5H20"/><path d="M4 5l1.5-1v5M4 13.5c0-1 .7-1.5 1.4-1.5s1.3.5 1.3 1.2c0 1-2.7 2.1-2.7 3.3h2.8" stroke-width="1.4"/></symbol>
+<symbol id="i-marker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5l5 5-8 8H8.5L7 16l-.5-3z"/><path d="M6.5 13l4.5 4.5M3.5 20.5h7"/></symbol>
 <symbol id="i-clip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
 </defs></svg>
 
@@ -2477,16 +2509,47 @@ html[data-notepad="open"] .np { display: flex; }
       <h2 class="sr-only" id="np-title">Notes and AI assistant</h2>
       <div class="np-tabs" role="tablist" aria-label="Side pane">
         <button class="np-tab" id="np-tab-notes" type="button" role="tab" aria-controls="np-notes" aria-selected="true" data-tab="notes"><svg class="i" aria-hidden="true"><use href="#i-note"></use></svg>Notes</button>
-        <button class="np-tab" id="np-tab-ai" type="button" role="tab" aria-controls="np-ai" aria-selected="false" tabindex="-1" data-tab="ai"><svg class="i" aria-hidden="true"><use href="#i-spark"></use></svg>AI assistant</button>
+        <button class="np-tab" id="np-tab-ai" type="button" role="tab" aria-controls="np-ai" aria-selected="false" tabindex="-1" data-tab="ai"><svg class="i" aria-hidden="true"><use href="#i-spark"></use></svg>Gemini</button>
       </div>
       <span class="spacer"></span>
       <button class="icon-btn" id="np-close" type="button" aria-label="Hide notes"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
     </div>
 
     <div class="np-panel" id="np-notes" role="tabpanel" aria-labelledby="np-tab-notes">
-      <label class="sr-only" for="np-text">Your notes</label>
-      <textarea class="np-text" id="np-text" spellcheck="true"
-                placeholder="Jot down anything you want in front of you while you study: a formula, a mnemonic, a trap you fell for, a question to come back to. It is saved on this device as you type."></textarea>
+      <!-- 04.1  Formatting ribbon (§12.2.1). Buttons keep the editor's
+           selection: mousedown is cancelled, and the last range is restored
+           before any command runs, so keyboard use works too. -->
+      <div class="np-rib" id="np-rib" role="toolbar" aria-label="Formatting" aria-controls="np-text">
+        <button class="np-rb" type="button" data-cmd="bold" aria-pressed="false" title="Bold (Ctrl+B)" aria-label="Bold"><b>B</b></button>
+        <button class="np-rb" type="button" data-cmd="italic" aria-pressed="false" title="Italic (Ctrl+I)" aria-label="Italic"><i>I</i></button>
+        <button class="np-rb" type="button" data-cmd="underline" aria-pressed="false" title="Underline (Ctrl+U)" aria-label="Underline"><u>U</u></button>
+        <button class="np-rb" type="button" data-cmd="strikeThrough" aria-pressed="false" title="Line through" aria-label="Line through"><s>S</s></button>
+        <button class="np-rb" type="button" data-cmd="overline" aria-pressed="false" title="Overline" aria-label="Overline"><span class="np-o">O</span></button>
+        <span class="np-rsep" aria-hidden="true"></span>
+        <button class="np-rb" type="button" data-cmd="insertUnorderedList" aria-pressed="false" title="Bulleted list" aria-label="Bulleted list"><svg class="i" aria-hidden="true"><use href="#i-ul"></use></svg></button>
+        <button class="np-rb" type="button" data-cmd="insertOrderedList" aria-pressed="false" title="Numbered list" aria-label="Numbered list"><svg class="i" aria-hidden="true"><use href="#i-ol"></use></svg></button>
+        <span class="np-rsep" aria-hidden="true"></span>
+        <button class="np-rb np-rb--menu" type="button" data-menu="c" aria-haspopup="true" aria-expanded="false" aria-controls="np-pop-c" title="Text colour" aria-label="Text colour"><span class="np-rb-a">A</span><i class="np-rb-bar" id="np-c-now"></i></button>
+        <button class="np-rb np-rb--menu" type="button" data-menu="h" aria-haspopup="true" aria-expanded="false" aria-controls="np-pop-h" title="Highlight" aria-label="Highlight"><svg class="i" aria-hidden="true"><use href="#i-marker"></use></svg><i class="np-rb-bar" id="np-h-now"></i></button>
+        <button class="np-rb" type="button" data-cmd="clear" title="Clear formatting from the selection" aria-label="Clear formatting"><span class="np-rb-tx">T<sub>x</sub></span></button>
+      </div>
+      <div class="np-pop" id="np-pop-c" role="group" aria-label="Text colour" hidden>
+        <button type="button" data-c="none" aria-label="Default colour"><i class="np-sw np-sw--none"></i></button>
+        <button type="button" data-c="red" aria-label="Red"><i class="np-sw np-c-red"></i></button>
+        <button type="button" data-c="orange" aria-label="Orange"><i class="np-sw np-c-orange"></i></button>
+        <button type="button" data-c="green" aria-label="Green"><i class="np-sw np-c-green"></i></button>
+        <button type="button" data-c="blue" aria-label="Blue"><i class="np-sw np-c-blue"></i></button>
+        <button type="button" data-c="purple" aria-label="Purple"><i class="np-sw np-c-purple"></i></button>
+      </div>
+      <div class="np-pop" id="np-pop-h" role="group" aria-label="Highlight" hidden>
+        <button type="button" data-h="none" aria-label="No highlight"><i class="np-sw np-sw--none"></i></button>
+        <button type="button" data-h="yellow" aria-label="Yellow"><i class="np-sw np-h-yellow"></i></button>
+        <button type="button" data-h="green" aria-label="Green"><i class="np-sw np-h-green"></i></button>
+        <button type="button" data-h="blue" aria-label="Blue"><i class="np-sw np-h-blue"></i></button>
+        <button type="button" data-h="pink" aria-label="Pink"><i class="np-sw np-h-pink"></i></button>
+      </div>
+      <div class="np-text" id="np-text" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Your notes" spellcheck="true" data-empty="true"
+           data-placeholder="Jot down anything you want in front of you while you study: a formula, a mnemonic, a trap you fell for, a question to come back to. Select text and use the ribbon to format it. It is saved on this device as you type."></div>
       <div class="np-ft">
         <span class="np-stat" id="np-stat" aria-live="off">Empty</span>
         <span class="spacer"></span>
@@ -2495,41 +2558,13 @@ html[data-notepad="open"] .np { display: flex; }
       </div>
     </div>
 
-    <!-- 04.1  AI tab (§12.2.2). Optional and off until used: nothing is
-         opened or sent until the person presses Open or Ask. -->
+    <!-- 04.1  AI tab (§12.2.2). Gemini, with the person's own Google AI
+         Studio key; the chat runs in the pane, from this page to Google.
+         Nothing is sent until they press Send. -->
     <div class="np-panel np-ai" id="np-ai" role="tabpanel" aria-labelledby="np-tab-ai" hidden>
-      <p class="np-ai-lead">Use your own ChatGPT, Gemini or Claude account. These services do not allow themselves to be shown inside another site, so the one you pick opens in its own window beside this one. Sign in there once and your browser keeps you signed in.</p>
-      <div class="np-prov" role="group" aria-label="AI service">
-        <button class="np-prov-b" type="button" data-p="chatgpt" aria-pressed="true">ChatGPT</button>
-        <button class="np-prov-b" type="button" data-p="gemini" aria-pressed="false">Gemini</button>
-        <button class="np-prov-b" type="button" data-p="claude" aria-pressed="false">Claude</button>
-        <button class="np-prov-b" type="button" data-p="custom" aria-pressed="false">Other</button>
-      </div>
-      <div class="np-seg" id="np-gmode" role="group" aria-label="How to use Gemini" hidden>
-        <button type="button" data-m="account" aria-pressed="true">Google account</button>
-        <button type="button" data-m="key" aria-pressed="false">API key, chat here</button>
-      </div>
-      <div class="np-custom" id="np-custom" hidden>
-        <label class="field"><span class="lbl">Name</span><input class="input" id="np-c-name" type="text" maxlength="40" placeholder="For example, Copilot" autocomplete="off"></label>
-        <label class="field"><span class="lbl">Link</span><input class="input" id="np-c-url" type="url" inputmode="url" placeholder="https://" autocomplete="off" spellcheck="false"></label>
-        <p class="hint">Any chat site you can sign in to. If it can take a question from its link, put <code>{q}</code> where the question goes, for example <code>https://www.perplexity.ai/search?q={q}</code>.</p>
-        <button class="btn btn--sm" id="np-c-save" type="button">Save link</button>
-      </div>
-      <div class="np-acct" id="np-acct">
-      <label class="field np-q"><span class="lbl">Your question</span>
-        <textarea class="input np-q-t" id="np-q" rows="5" spellcheck="true" placeholder="For example: explain the difference between a CPI below 1 and an SPI below 1, with an exam-style example."></textarea>
-      </label>
-      <div class="np-ai-act">
-        <button class="btn btn--primary" id="np-ask" type="button">Ask ChatGPT</button>
-        <button class="btn" id="np-open" type="button">Open ChatGPT</button>
-      </div>
-      <p class="hint" id="np-ai-how"></p>
-      </div>
-
-      <!-- Gemini with the person's own Google AI Studio key: the chat runs
-           in this pane, straight from this page to Google (§12.2.3). -->
-      <div class="np-chat" id="np-chat" hidden>
+      <div class="np-chat" id="np-chat">
         <div class="np-keyset" id="np-keyset">
+          <p class="np-ai-lead">Chat with Gemini about anything you are studying, using your own Google AI Studio API key.</p>
           <label class="field"><span class="lbl">Gemini API key</span>
             <input class="input" id="np-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your key from Google AI Studio"></label>
           <label class="np-check"><input type="checkbox" id="np-key-keep" checked> Remember the key on this device</label>
@@ -2551,7 +2586,6 @@ html[data-notepad="open"] .np { display: flex; }
           </div>
         </div>
       </div>
-      <p class="hint np-ai-priv" id="np-ai-priv">Your question goes to the service you pick, under your own account, and only when you press Ask. This app keeps your choice, your link and an unsent question on this device, and nothing else.</p>
     </div>
   </aside>
 </div>
@@ -2747,12 +2781,13 @@ html[data-notepad="open"] .np { display: flex; }
         12.1  global error + unhandledrejection → readable message,
               "Export progress" offered before anything else
         12.2  storage probe, state hydrate, content audit self-check
-        12.2.1 notes pane — free text beside every view; text and open
-              state in the `notepad` slice, mirrored pre-paint by 01.6
-        12.2.2 AI tab — ChatGPT, Gemini, Claude or a custom link, opened in
-              a window beside this one; the only outbound action, on a press
-        12.2.3 Gemini by API key — chat in the pane, page to Google direct;
-              the key kept outside the store and out of every export
+        12.2.1 notes pane — formatted notes beside every view (bold, italic,
+              underline, line-through, overline, lists, colour, highlight);
+              html, text and open state in the `notepad` slice, the html
+              sanitised by allowlist on every load; mirrored pre-paint by 01.6
+        12.2.2 Gemini tab — chat in the pane with the person's own API key,
+              page to Google direct; Flash models from 3.0; the key kept
+              outside the store and out of every export
         12.3  router start, first render, resume-exam prompt,
               extended pack load (after paint, never blocking it)
    ───────────────────────────────────────────────────────────────────────────
@@ -19203,12 +19238,12 @@ PMP.Store = (function () {
       /* The free-form notes pane (§12.2.1). One running page of the person's
          own text, not tied to any question — per-question notes stay in
          `notes`. `open` is persisted so the pane survives a refresh. */
-      notepad: { open: false, text: "", updatedAt: null, tab: "notes",
-        /* The AI tab (§12.2.2): the chosen service, a custom link, and the
-           question not yet sent. No account, token or answer is stored. */
-        ai: { provider: "chatgpt", customName: "", customUrl: "", draft: "",
-          /* Gemini by API key (§12.2.3). The key itself is never here. */
-          geminiMode: "account", model: "", chat: [] } }
+      /* `html` is the formatted note (§12.2.1, sanitised on every load);
+         `text` is its plain-text mirror for counting and older readers. */
+      notepad: { open: false, text: "", html: "", updatedAt: null, tab: "notes",
+        /* The Gemini tab (§12.2.2): the chosen model and the conversation.
+           The API key itself is never here. */
+        ai: { model: "", chat: [] } }
     };
   }
 
@@ -29539,7 +29574,7 @@ PMP.Data = (function () {
       el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Everything this app knows about you lives on this device and travels in a file you control. Nothing about you is sent anywhere, and there is no analytics, no telemetry and no account. Opened from disk the file makes no network requests at all. Served over http it makes exactly one kind: a request for its own extended question packs, at a fixed path beside itself, carrying no credentials and no information about you \u2014 the same request the browser would make for an image. What came back, or did not, is itemised in the content audit." }),
-      el("p", { text: "The one exception is optional and yours to trigger: the AI assistant tab in the notes pane. When you press Ask or Open there, the AI service you picked opens in its own window and you sign in to it directly; Ask also hands it the question you typed. Nothing else goes with it, nothing is sent until you press, and no account details or answers ever pass through this app. If you give the tab a Gemini API key instead, the chat runs in the pane: each message you send goes from this page straight to Google under that key. The key stays on this device, outside your backup file, and goes nowhere but Google." })
+      el("p", { text: "The one exception is optional and yours to trigger: the Gemini tab in the notes pane. If you give it your own Google AI Studio API key, each message you send there goes from this page straight to Google under that key. Nothing is sent until you press Send, nothing else goes with it, and the key stays on this device, outside your backup file, and goes nowhere but Google." })
     ]));
 
     host.appendChild(el("div", { class: "card" }, [
@@ -36345,12 +36380,14 @@ PMP.Shell = (function () {
 
 
 /* ── 12.2.1  NOTES PANE ────────────────────────────────────────────────────
-   One running page of free text beside every view, for the notes a person
-   would otherwise keep on paper while reading or drilling. It is shell, not
+   One running page of formatted notes beside every view, for the notes a
+   person would otherwise keep on paper while reading or drilling, with a
+   Gemini tab beside it (§12.2.2). It is shell, not
    a route: it lives outside #view, so no route change or re-render touches
    it, and only the top-bar toggle or its own close button opens or shuts it.
 
-   Text and open/shut state are the `notepad` store slice, so they persist
+   The note (as html, plus a plain-text mirror) and open/shut state are the
+   `notepad` store slice, so they persist
    through §06 like everything else and travel in a progress export. Commits
    are silent: the views have nothing to repaint when a note changes, and a
    notify per keystroke would make every subscriber do work for nothing. The
@@ -36387,11 +36424,7 @@ PMP.Notepad = (function () {
     });
   }
   function focusTab() {
-    if (currentTab() === "ai") {
-      var chat = document.getElementById("np-chat");
-      if (!chat.hidden) PMP.GeminiChat.focus();
-      else document.getElementById("np-q").focus();
-    }
+    if (currentTab() === "ai") PMP.GeminiChat.focus();
     else textEl.focus();
   }
   function setTab(tab, focus) {
@@ -36400,8 +36433,11 @@ PMP.Notepad = (function () {
     if (focus) document.getElementById("np-tab-" + tab).focus();
   }
 
+  function plain() { return textEl.innerText.replace(/\u200B/g, ""); }
+
   function renderStat() {
-    var text = textEl.value;
+    var text = plain();
+    textEl.setAttribute("data-empty", text.trim() || textEl.querySelector("li") ? "false" : "true");
     var words = text.trim() ? text.trim().split(/\s+/).length : 0;
     var session = PMP.Store.state.sys.storageMode === "session";
     statEl.setAttribute("data-mode", session ? "session" : "persistent");
@@ -36413,13 +36449,183 @@ PMP.Notepad = (function () {
   }
 
   function onInput() {
-    var text = textEl.value;
+    var text = plain(), html = textEl.innerHTML;
+    if (!text.trim() && !textEl.querySelector("li")) html = "";
     PMP.Store.commit(["notepad"], function (s) {
       s.notepad.text = text;
+      s.notepad.html = html;
       s.notepad.updatedAt = new Date().toISOString();
     }, { silent: true });
     clearTimeout(typing);
     typing = setTimeout(renderStat, 150);
+  }
+
+  /* ── Formatting ─────────────────────────────────────────────────────────
+     Bold, italic, underline, line-through and the two lists are the
+     browser's own editing commands, so Ctrl+B/I/U and undo work as people
+     expect. Overline, text colour and highlight have no such command; they
+     wrap each selected run of text in a span or mark carrying one class
+     from a fixed set, which is what makes the stored note safe to sanitise
+     by allowlist and lets colours follow the theme. */
+  var ALLOW = { B: 1, STRONG: 1, I: 1, EM: 1, U: 1, S: 1, STRIKE: 1, DEL: 1, SPAN: 1, MARK: 1, UL: 1, OL: 1, LI: 1, P: 1, DIV: 1, BR: 1 };
+  var DROP = { SCRIPT: 1, STYLE: 1, IFRAME: 1, OBJECT: 1, EMBED: 1, TEMPLATE: 1, SVG: 1, MATH: 1, LINK: 1, META: 1, IMG: 1, VIDEO: 1, AUDIO: 1, FORM: 1, INPUT: 1, TEXTAREA: 1, SELECT: 1, BUTTON: 1 };
+  var CLASS = /^np-(?:c-(?:red|orange|green|blue|purple|none)|h-(?:yellow|green|blue|pink|none)|o)$/;
+  var lastRange = null;
+
+  /* Stored HTML may come from a backup file someone else wrote, so it is
+     parsed inert (a template runs nothing and loads nothing) and rebuilt
+     from the allowlist: unknown elements give up their text, dangerous ones
+     go whole, and the only attribute that survives is a known class. */
+  function sanitise(html) {
+    var t = document.createElement("template");
+    t.innerHTML = String(html || "");
+    (function clean(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) return;
+        if (c.nodeType !== 1) { node.removeChild(c); return; }
+        var tag = c.tagName.toUpperCase();
+        if (DROP[tag]) { node.removeChild(c); return; }
+        clean(c);
+        if (!ALLOW[tag]) { while (c.firstChild) node.insertBefore(c.firstChild, c); node.removeChild(c); return; }
+        var keep = (c.getAttribute("class") || "").split(/\s+/).filter(function (k) { return CLASS.test(k); }).join(" ");
+        Array.prototype.slice.call(c.attributes).forEach(function (a) { c.removeAttribute(a.name); });
+        if (keep) c.setAttribute("class", keep);
+      });
+    })(t.content);
+    var box = document.createElement("div");
+    box.appendChild(t.content);
+    return box.innerHTML;
+  }
+  function textToHtml(text) {
+    return PMP.text.escapeHtml(String(text || "")).replace(/\n/g, "<br>");
+  }
+
+  function inEditor(node) { return node && (node === textEl || textEl.contains(node)); }
+  function restore() {
+    textEl.focus();
+    if (!lastRange) return null;
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(lastRange);
+    return lastRange;
+  }
+  function selected(range) {
+    var root = range.commonAncestorContainer, out = [];
+    if (root.nodeType === 3) return root.length ? [root] : [];
+    var walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), n;
+    while ((n = walk.nextNode())) {
+      if (n.length && range.intersectsNode(n) && !/^(UL|OL)$/.test(n.parentNode.tagName)) out.push(n);
+    }
+    return out;
+  }
+  /* Wraps exactly the selected characters: boundary text nodes are split
+     so that a word half-selected is half-coloured. */
+  function wrapSelection(tag, cls) {
+    var r = restore();
+    if (!r || !inEditor(r.commonAncestorContainer)) return;
+    if (r.collapsed) {
+      /* Nothing selected: colour what is typed next. */
+      var w0 = document.createElement(tag);
+      w0.className = cls;
+      w0.appendChild(document.createTextNode("\u200B"));
+      r.insertNode(w0);
+      var c = document.createRange();
+      c.setStart(w0.firstChild, 1);
+      c.collapse(true);
+      lastRange = c;
+      restore();
+      onInput();
+      return;
+    }
+    var sc = r.startContainer, so = r.startOffset, ec = r.endContainer, eo = r.endOffset;
+    var nodes = selected(r).map(function (n) {
+      var end = n === ec ? eo : n.length, start = n === sc ? so : 0;
+      if (end < n.length) n.splitText(end);
+      if (start > 0) n = n.splitText(start);
+      return n;
+    }).filter(function (n) { return n.length; });
+    if (!nodes.length) return;
+    var first = null, last = null;
+    nodes.forEach(function (n) {
+      var w = document.createElement(tag);
+      w.className = cls;
+      n.parentNode.insertBefore(w, n);
+      w.appendChild(n);
+      first = first || w;
+      last = w;
+    });
+    var nr = document.createRange();
+    nr.setStartBefore(first);
+    nr.setEndAfter(last);
+    lastRange = nr;
+    restore();
+    onInput();
+  }
+  function unwrap(el) {
+    var p = el.parentNode;
+    while (el.firstChild) p.insertBefore(el.firstChild, el);
+    p.removeChild(el);
+  }
+  function ancestor(node, sel) {
+    for (var n = node; n && n !== textEl; n = n.parentNode) if (n.nodeType === 1 && n.matches(sel)) return n;
+    return null;
+  }
+  function toggleOverline() {
+    var r = restore();
+    if (!r) return;
+    var on = selected(r).filter(function (n) { return ancestor(n, ".np-o"); });
+    if (on.length && on.length === selected(r).length) {
+      on.map(function (n) { return ancestor(n, ".np-o"); }).forEach(function (el) { if (el.parentNode) unwrap(el); });
+      onInput();
+    } else wrapSelection("span", "np-o");
+  }
+  /* The ribbon's own wrappers (colour, highlight, overline) around the
+     selected text come off first, while the selection still names those
+     text nodes; then the browser's removeFormat takes bold, italic,
+     underline and line-through off exactly the selected characters. */
+  function clearFormat() {
+    var r = restore();
+    if (!r || r.collapsed) return;
+    var nodes = selected(r), sc = r.startContainer, so = r.startOffset, ec = r.endContainer, eo = r.endOffset;
+    nodes.forEach(function (n) {
+      for (var w = ancestor(n, "span[class], mark"); w; w = ancestor(n, "span[class], mark")) unwrap(w);
+    });
+    var nr = document.createRange();
+    try { nr.setStart(sc, so); nr.setEnd(ec, eo); } catch (e) { nr.selectNodeContents(textEl); }
+    lastRange = nr;
+    restore();
+    document.execCommand("removeFormat", false, null);
+    onInput();
+  }
+  function run(cmd) {
+    if (cmd === "overline") toggleOverline();
+    else if (cmd === "clear") clearFormat();
+    else {
+      restore();
+      document.execCommand(cmd, false, null);
+      onInput();
+    }
+    paintRibbon();
+  }
+
+  /* Which buttons are on for the text at the caret. */
+  function paintRibbon() {
+    var sel = window.getSelection();
+    var inside = sel.rangeCount && inEditor(sel.anchorNode);
+    Array.prototype.forEach.call(document.querySelectorAll("#np-rib [data-cmd]"), function (b) {
+      var c = b.getAttribute("data-cmd"), on = false;
+      if (inside && c === "overline") on = !!ancestor(sel.anchorNode, ".np-o");
+      else if (inside && c !== "clear") { try { on = document.queryCommandState(c); } catch (e) { on = false; } }
+      if (c !== "clear") b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
+  function menu(which, open) {
+    ["c", "h"].forEach(function (k) {
+      var show = k === which && open;
+      document.getElementById("np-pop-" + k).hidden = !show;
+      document.querySelector('#np-rib [data-menu="' + k + '"]').setAttribute("aria-expanded", show ? "true" : "false");
+    });
   }
 
   /* Store → pane. Called after hydrate and after an import replaces the
@@ -36427,8 +36633,9 @@ PMP.Notepad = (function () {
      caret never jumps under someone who is typing. */
   function sync() {
     var np = PMP.Store.state.notepad || {};
-    var text = typeof np.text === "string" ? np.text : "";
-    if (textEl.value !== text) textEl.value = text;
+    /* A note saved before formatting existed has only `text`. */
+    var html = sanitise(typeof np.html === "string" && np.html ? np.html : textToHtml(np.text));
+    if (textEl.innerHTML !== html) textEl.innerHTML = html;
     paint(!!np.open);
     paintTab(currentTab());
     renderStat();
@@ -36454,19 +36661,91 @@ PMP.Notepad = (function () {
         setTab(t === "notes" ? "ai" : "notes", true);
       });
     });
+    try { document.execCommand("styleWithCSS", false, false); } catch (e) { /* tags are the default */ }
     PMP.dom.on(textEl, "input", onInput);
+    /* Pasted and dropped content arrives as plain text, so nothing from a
+       web page or a document brings its own markup or styles in. */
+    PMP.dom.on(textEl, "paste", function (e) {
+      e.preventDefault();
+      document.execCommand("insertText", false, (e.clipboardData || window.clipboardData).getData("text/plain"));
+    });
+    PMP.dom.on(textEl, "drop", function (e) {
+      e.preventDefault();
+      var t = e.dataTransfer && e.dataTransfer.getData("text/plain");
+      if (t) document.execCommand("insertText", false, t);
+    });
+    PMP.dom.on(document, "selectionchange", function () {
+      var sel = window.getSelection();
+      if (sel.rangeCount && inEditor(sel.anchorNode)) {
+        lastRange = sel.getRangeAt(0).cloneRange();
+        paintRibbon();
+      }
+    });
+    var rib = document.getElementById("np-rib");
+    /* Clicking a button must not take the selection out of the note. */
+    ["np-rib", "np-pop-c", "np-pop-h"].forEach(function (id) {
+      PMP.dom.on(document.getElementById(id), "mousedown", function (e) { if (e.target.closest("button")) e.preventDefault(); });
+    });
+    PMP.dom.on(rib, "click", function (e) {
+      var b = e.target.closest("button");
+      if (!b) return;
+      if (b.hasAttribute("data-menu")) {
+        var k = b.getAttribute("data-menu");
+        menu(k, b.getAttribute("aria-expanded") !== "true");
+        return;
+      }
+      menu(null, false);
+      run(b.getAttribute("data-cmd"));
+    });
+    PMP.dom.on(document.getElementById("np-pop-c"), "click", function (e) {
+      var b = e.target.closest("button[data-c]");
+      if (!b) return;
+      var c = b.getAttribute("data-c");
+      menu(null, false);
+      wrapSelection("span", "np-c-" + c);
+      document.getElementById("np-c-now").style.background = c === "none" ? "" : "var(--nc-" + c + ")";
+    });
+    PMP.dom.on(document.getElementById("np-pop-h"), "click", function (e) {
+      var b = e.target.closest("button[data-h]");
+      if (!b) return;
+      var h = b.getAttribute("data-h");
+      menu(null, false);
+      wrapSelection("mark", "np-h-" + h);
+      document.getElementById("np-h-now").style.background = h === "none" ? "transparent" : "var(--nh-" + h + ")";
+    });
+    PMP.dom.on(document, "keydown", function (e) {
+      if (e.key === "Escape" && (!document.getElementById("np-pop-c").hidden || !document.getElementById("np-pop-h").hidden)) {
+        menu(null, false);
+        restore();
+      }
+    });
+    PMP.dom.on(document, "click", function (e) {
+      if (!e.target.closest("#np-rib, .np-pop")) menu(null, false);
+    });
     PMP.dom.on(document.getElementById("np-copy"), "click", function () {
-      if (!textEl.value) { PMP.UI.toast("There is nothing to copy yet.", "warn"); return; }
-      PMP.Exporter.copyText(textEl.value).then(function (ok) {
-        PMP.UI.toast(ok ? "Notes copied to the clipboard." : "Copying was blocked. Select the text and copy it by hand.", ok ? "ok" : "err");
+      if (!plain().trim()) { PMP.UI.toast("There is nothing to copy yet.", "warn"); return; }
+      /* Copy the formatting too, by copying a selection of the note itself;
+         plain text is the fallback. */
+      var ok = false, sel = window.getSelection(), keep = sel.rangeCount ? sel.getRangeAt(0).cloneRange() : null;
+      try {
+        var all = document.createRange();
+        all.selectNodeContents(textEl);
+        sel.removeAllRanges();
+        sel.addRange(all);
+        ok = document.execCommand("copy");
+      } catch (e) { ok = false; }
+      sel.removeAllRanges();
+      if (keep) sel.addRange(keep);
+      (ok ? Promise.resolve(true) : PMP.Exporter.copyText(plain())).then(function (done) {
+        PMP.UI.toast(done ? "Notes copied to the clipboard." : "Copying was blocked. Select the text and copy it by hand.", done ? "ok" : "err");
       });
     });
     PMP.dom.on(document.getElementById("np-clear"), "click", function () {
-      if (!textEl.value) return;
+      if (!plain().trim() && !textEl.querySelector("li")) return;
       PMP.UI.confirm("Clear your notes?", "Everything in the notes pane will be deleted. This cannot be undone, so copy anything you want to keep first.", "Clear notes", true)
         .then(function (yes) {
           if (!yes) return;
-          textEl.value = "";
+          textEl.innerHTML = "";
           onInput();
           renderStat();
           textEl.focus();
@@ -36484,202 +36763,16 @@ PMP.Notepad = (function () {
     renderStat();
   }
 
-  return { init: init, sync: sync, isOpen: isOpen, setOpen: setOpen, setTab: setTab };
+  return { init: init, sync: sync, isOpen: isOpen, setOpen: setOpen, setTab: setTab, sanitise: sanitise };
 })();
 
 
-/* ── 12.2.2  AI TAB ────────────────────────────────────────────────────────
-   Optional. The person picks ChatGPT, Gemini, Claude or a link of their
-   own, and it opens in a separate window placed beside this one, where they
-   sign in with their own account. It is a window rather than a frame
-   because all three refuse to be framed by another site (frame-ancestors /
-   X-Frame-Options), which is also what keeps their sign-in safe; a frame
-   would show a blank refusal.
-
-   "Ask" hands the typed question over in the service's own link where it
-   accepts one (ChatGPT ?q=, Claude ?q=, a custom link with {q}); where it
-   does not (Gemini) the question is copied to the clipboard to paste. This
-   is the only place the app sends anything anywhere, and only on a press.
-   No account, token or answer passes through or is kept here. */
-PMP.Assist = (function () {
-  var PROVIDERS = {
-    chatgpt: { name: "ChatGPT", open: "https://chatgpt.com/", ask: "https://chatgpt.com/?q={q}" },
-    gemini:  { name: "Gemini",  open: "https://gemini.google.com/app", ask: null },
-    claude:  { name: "Claude",  open: "https://claude.ai/new", ask: "https://claude.ai/new?q={q}" }
-  };
-  var WINDOW = "pmp-ai";
-  var nodes = {}, typing = null;
-
-  function ai() {
-    var a = (PMP.Store.state.notepad && PMP.Store.state.notepad.ai) || {};
-    return {
-      provider: PROVIDERS[a.provider] || a.provider === "custom" ? a.provider : "chatgpt",
-      customName: a.customName || "", customUrl: a.customUrl || "", draft: a.draft || "",
-      geminiMode: a.geminiMode === "key" ? "key" : "account", model: a.model || "",
-      chat: Array.isArray(a.chat) ? a.chat : []
-    };
-  }
-  function save(patch) {
-    PMP.Store.commit(["notepad"], function (s) {
-      s.notepad.ai = Object.assign(ai(), s.notepad.ai || {}, patch);
-    }, { silent: true });
-  }
-
-  /* A link is accepted only as http(s): anything else (javascript:, data:)
-     would run in this page's name rather than open a site. */
-  function validLink(u) {
-    try {
-      var x = new URL(String(u).replace("{q}", "q"));
-      return x.protocol === "https:" || x.protocol === "http:";
-    } catch (e) { return false; }
-  }
-
-  /* The selected service as { name, open, ask }, or null for an unsaved
-     custom link. */
-  function current() {
-    var a = ai();
-    if (a.provider !== "custom") return PROVIDERS[a.provider];
-    if (!validLink(a.customUrl)) return null;
-    var has = a.customUrl.indexOf("{q}") >= 0;
-    return { name: a.customName || "your AI", open: has ? a.customUrl.replace("{q}", "") : a.customUrl, ask: has ? a.customUrl : null, own: true };
-  }
-
-  /* Beside this window, on its right edge, full height. On a phone the
-     browser turns this into a new tab, which is the right thing there.
-
-     The three named services share one named window, so switching service
-     or asking again reuses it rather than stacking windows. That needs the
-     opener link kept: a window whose opener is cut cannot be navigated or
-     closed from here. A custom link is someone's own choice of site, so it
-     gets the cautious form instead: its opener is cut, so the site can never
-     steer this page, and each press opens a window of its own. */
-  function launch(url, own) {
-    var w = Math.round(Math.min(560, Math.max(380, (window.screen.availWidth || 1200) * 0.33)));
-    var left = Math.max(0, (window.screenX || 0) + (window.outerWidth || w) - w);
-    var feat = "popup=yes,width=" + w + ",height=" + (window.outerHeight || 800) + ",left=" + left + ",top=" + (window.screenY || 0);
-    var win = null;
-    try { win = window.open(url, own ? "_blank" : WINDOW, feat); } catch (e) { win = null; }
-    if (!win) {
-      PMP.UI.toast("Your browser blocked the window. Allow pop-ups for this page and press the button again.", "err");
-      return false;
-    }
-    try { if (own) win.opener = null; win.focus(); } catch (e) { /* cross-origin already; nothing to tidy */ }
-    return true;
-  }
-
-  function paint() {
-    var a = ai(), p = current();
-    Array.prototype.forEach.call(nodes.prov, function (b) {
-      b.setAttribute("aria-pressed", b.getAttribute("data-p") === a.provider ? "true" : "false");
-    });
-    if (a.provider === "custom" && a.customName) nodes.prov[3].textContent = a.customName;
-    else nodes.prov[3].textContent = "Other";
-    nodes.custom.hidden = a.provider !== "custom";
-    /* Gemini alone has a second way in: the person's own API key, with the
-       chat in this pane (§12.2.3). */
-    var keyed = a.provider === "gemini" && a.geminiMode === "key";
-    nodes.gmode.hidden = a.provider !== "gemini";
-    Array.prototype.forEach.call(nodes.gmode.querySelectorAll("button"), function (b) {
-      b.setAttribute("aria-pressed", b.getAttribute("data-m") === a.geminiMode ? "true" : "false");
-    });
-    nodes.acct.hidden = keyed;
-    nodes.chat.hidden = !keyed;
-    nodes.panel.setAttribute("data-chat", keyed ? "on" : "off");
-    if (keyed) PMP.GeminiChat.paint();
-    if (document.activeElement !== nodes.cName) nodes.cName.value = a.customName;
-    if (document.activeElement !== nodes.cUrl) nodes.cUrl.value = a.customUrl;
-    if (nodes.q.value !== a.draft && document.activeElement !== nodes.q) nodes.q.value = a.draft;
-    var name = p ? p.name : (a.customName || "your AI");
-    nodes.ask.textContent = "Ask " + name;
-    nodes.open.textContent = "Open " + name;
-    nodes.ask.disabled = nodes.open.disabled = !p;
-    nodes.how.textContent = !p ? "Add a link above to use your own AI."
-      : p.ask ? "Ask opens " + p.name + " with your question already typed in. Check it and press send there."
-      : "Ask copies your question and opens " + p.name + ". Paste it there with Ctrl+V (\u2318V on a Mac) and send.";
-  }
-
-  function ask() {
-    var p = current(), q = nodes.q.value.trim();
-    if (!p) return;
-    if (!q) { PMP.UI.toast("Type a question first, or press Open to start a blank chat.", "warn"); nodes.q.focus(); return; }
-    if (p.ask) {
-      if (launch(p.ask.replace("{q}", encodeURIComponent(q)), p.own)) {
-        nodes.q.value = "";
-        save({ draft: "" });
-      }
-      return;
-    }
-    /* Copy first, while this click still counts as a user gesture. */
-    PMP.Exporter.copyText(q).then(function (ok) {
-      PMP.UI.toast(ok ? "Question copied. Paste it into " + p.name + "." : "Copying was blocked. Select your question and copy it by hand.", ok ? "ok" : "err");
-    });
-    launch(p.open, p.own);
-  }
-
-  function saveCustom() {
-    var name = nodes.cName.value.trim(), url = nodes.cUrl.value.trim();
-    if (!validLink(url)) {
-      PMP.UI.toast("That link does not look right. It should start with https:// and be the address of the chat page.", "err");
-      nodes.cUrl.focus();
-      return;
-    }
-    save({ customName: name, customUrl: url });
-    paint();
-    PMP.UI.toast((name || "Your AI") + " saved.", "ok");
-  }
-
-  function init() {
-    nodes.prov = document.querySelectorAll("#np-ai .np-prov-b");
-    nodes.custom = document.getElementById("np-custom");
-    nodes.cName = document.getElementById("np-c-name");
-    nodes.cUrl = document.getElementById("np-c-url");
-    nodes.q = document.getElementById("np-q");
-    nodes.ask = document.getElementById("np-ask");
-    nodes.open = document.getElementById("np-open");
-    nodes.how = document.getElementById("np-ai-how");
-    nodes.panel = document.getElementById("np-ai");
-    nodes.gmode = document.getElementById("np-gmode");
-    nodes.acct = document.getElementById("np-acct");
-    nodes.chat = document.getElementById("np-chat");
-    Array.prototype.forEach.call(nodes.gmode.querySelectorAll("button"), function (b) {
-      PMP.dom.on(b, "click", function () {
-        save({ geminiMode: b.getAttribute("data-m") });
-        paint();
-        PMP.GeminiChat.focus();
-      });
-    });
-
-    Array.prototype.forEach.call(nodes.prov, function (b) {
-      PMP.dom.on(b, "click", function () {
-        save({ provider: b.getAttribute("data-p") });
-        paint();
-        if (b.getAttribute("data-p") === "custom" && !current()) nodes.cUrl.focus();
-      });
-    });
-    PMP.dom.on(document.getElementById("np-c-save"), "click", saveCustom);
-    PMP.dom.on(nodes.cUrl, "keydown", function (e) { if (e.key === "Enter") saveCustom(); });
-    PMP.dom.on(nodes.q, "input", function () {
-      clearTimeout(typing);
-      typing = setTimeout(function () { save({ draft: nodes.q.value }); }, 300);
-    });
-    /* Ctrl/Cmd+Enter asks, the way chat boxes do; plain Enter is a newline. */
-    PMP.dom.on(nodes.q, "keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); ask(); } });
-    PMP.dom.on(nodes.ask, "click", ask);
-    PMP.dom.on(nodes.open, "click", function () { var p = current(); if (p) launch(p.open, p.own); });
-
-    PMP.Store.subscribe(function (state, changed) { if (changed.indexOf("notepad") >= 0) paint(); });
-    paint();
-  }
-
-  return { init: init, sync: paint, PROVIDERS: PROVIDERS, validLink: validLink, ai: ai, save: save };
-})();
-
-
-/* ── 12.2.3  GEMINI BY API KEY ─────────────────────────────────────────────
-   For someone with a Google AI Studio key: the chat runs in the pane, from
-   this page straight to Google's Generative Language API. Google answers
-   cross-origin requests from any page, including a file opened from disk,
-   so there is no server in between and none is needed.
+/* ── 12.2.2  GEMINI TAB ────────────────────────────────────────────────────
+   Optional. For someone with a Google AI Studio key: the chat runs in the
+   pane, from this page straight to Google's Generative Language API. Google
+   answers cross-origin requests from any page, including a file opened from
+   disk, so there is no server in between and none is needed. Nothing is
+   sent until the person presses Send (or checks a key with Use this key).
 
    The key is the one thing here that is a secret, so it is kept apart from
    the store: in memory, and in localStorage under its own name only if the
@@ -36691,13 +36784,24 @@ PMP.GeminiChat = (function () {
   var el = PMP.dom.el;
   var API = "https://generativelanguage.googleapis.com/v1beta";
   var KEY_STORE = "pmp.gemini.key";
-  var FALLBACK_MODEL = "models/gemini-2.5-flash";
   var KEEP = 60, SEND = 30;
   var SYSTEM = "You are a study assistant for someone preparing for the PMP exam (PMI's Project Management Professional certification). "
     + "Answer accurately and concisely in plain English. Explain the reasoning the exam rewards, not just the answer, and when a question is about what a project manager should do, "
     + "reason the way PMI expects: collaborative, proactive, following the agreed process, and fitted to whether the work is predictive, agile or hybrid. "
     + "Use short paragraphs and short lists. If you are not sure of something, say so.";
-  var nodes = {}, key = "", models = null, busy = null;
+  var nodes = {}, key = "", models = null, busy = null, loading = false;
+
+  /* The slice's ai part: the chosen model and the conversation. An older
+     slice may carry fields from earlier versions; they are ignored. */
+  function ai() {
+    var a = (PMP.Store.state.notepad && PMP.Store.state.notepad.ai) || {};
+    return { model: a.model || "", chat: Array.isArray(a.chat) ? a.chat : [] };
+  }
+  function save(patch) {
+    PMP.Store.commit(["notepad"], function (s) {
+      s.notepad.ai = Object.assign({}, s.notepad.ai || {}, patch);
+    }, { silent: true });
+  }
 
   function readKey() {
     try { return window.localStorage.getItem(KEY_STORE) || ""; } catch (e) { return ""; }
@@ -36738,30 +36842,40 @@ PMP.GeminiChat = (function () {
     return "Google returned an error: " + e.message;
   }
 
-  /* Models this key may use for chat, newest Google naming as listed. A
-     key that cannot list models is refused here, which doubles as the
-     check that the pasted key works. */
+  /* Flash models only, version 3.0 and later, as this key may use them for
+     chat: "gemini-3-flash", "gemini-3.1-flash-lite-preview" and so on.
+     Newest version first; within a version the stable full model leads,
+     then lite, then previews. The default is the newest stable one. A key that cannot list models is refused
+     here, which doubles as the check that the pasted key works. */
+  function flashVersion(name) {
+    var m = /gemini-(\d+(?:\.\d+)?)-flash/i.exec(name);
+    return m ? parseFloat(m[1]) : 0;
+  }
   function loadModels(k) {
     return call("/models?pageSize=1000", { key: k }).then(function (data) {
       return (data.models || []).filter(function (m) {
-        return /gemini/i.test(m.name) && (m.supportedGenerationMethods || []).indexOf("generateContent") >= 0
+        return flashVersion(m.name) >= 3 && (m.supportedGenerationMethods || []).indexOf("generateContent") >= 0
           && !/(tts|image|embedding|audio|live)/i.test(m.name);
-      }).map(function (m) { return { name: m.name, label: m.displayName || m.name.replace(/^models\//, "") }; });
+      }).map(function (m) {
+        var n = m.name;
+        return { name: n, label: m.displayName || n.replace(/^models\//, ""),
+          rank: flashVersion(n) * 100 - (/(preview|exp)/i.test(n) ? 2 : 0) - (/lite/i.test(n) ? 1 : 0) };
+      }).sort(function (a, b) { return b.rank - a.rank || (a.name < b.name ? -1 : 1); });
     });
   }
-  function pickModel(list) {
-    var want = PMP.Assist.ai().model;
-    if (list.some(function (m) { return m.name === want; })) return want;
-    var flash = list.filter(function (m) { return /flash/i.test(m.name) && !/(lite|preview|exp|thinking)/i.test(m.name); });
-    return (flash[flash.length - 1] || list[0] || { name: FALLBACK_MODEL }).name;
-  }
   function fillModels() {
-    var list = models && models.length ? models : [{ name: FALLBACK_MODEL, label: "Gemini 2.5 Flash" }];
-    var chosen = pickModel(list);
+    var list = models || [];
+    var want = ai().model;
+    /* The default is the newest stable model; a preview is there to pick,
+       not to land on, since previews change and are withdrawn. */
+    var stable = list.filter(function (m) { return !/(preview|exp)/i.test(m.name); })[0] || list[0];
+    var chosen = list.some(function (m) { return m.name === want; }) ? want : (stable ? stable.name : "");
     nodes.model.innerHTML = "";
     list.forEach(function (m) { nodes.model.appendChild(el("option", { value: m.name, text: m.label })); });
     nodes.model.value = chosen;
-    if (PMP.Assist.ai().model !== chosen) PMP.Assist.save({ model: chosen });
+    nodes.model.disabled = !list.length;
+    nodes.send.disabled = !!busy || !chosen;
+    if (chosen && ai().model !== chosen) save({ model: chosen });
   }
 
   /* A reply's light markdown as DOM, never as HTML: paragraphs, bullet
@@ -36805,7 +36919,7 @@ PMP.GeminiChat = (function () {
     return el("div", { class: "np-m", dataset: { role: role } }, role === "model" ? markdown(text) : [text]);
   }
   function renderLog() {
-    var chat = PMP.Assist.ai().chat;
+    var chat = ai().chat;
     nodes.log.innerHTML = "";
     if (!chat.length && !busy) {
       nodes.log.appendChild(el("p", { class: "np-log-empty", text: "Ask anything about the exam: a term, a formula, why an answer is right. Replies come from Gemini under your key." }));
@@ -36821,9 +36935,9 @@ PMP.GeminiChat = (function () {
 
   function send() {
     var text = nodes.msg.value.trim();
-    if (!text || busy || !key) return;
-    var history = PMP.Assist.ai().chat.concat([{ role: "user", text: text, at: new Date().toISOString() }]);
-    PMP.Assist.save({ chat: history.slice(-KEEP) });
+    if (!text || busy || !key || !nodes.model.value) return;
+    var history = ai().chat.concat([{ role: "user", text: text, at: new Date().toISOString() }]);
+    save({ chat: history.slice(-KEEP) });
     nodes.msg.value = "";
     busy = new AbortController();
     var mine = busy;
@@ -36846,7 +36960,7 @@ PMP.GeminiChat = (function () {
         showError("Gemini did not answer this one (" + String(why).toLowerCase().replace(/_/g, " ") + "). Try rephrasing the question.");
         return;
       }
-      PMP.Assist.save({ chat: PMP.Assist.ai().chat.concat([{ role: "model", text: reply, at: new Date().toISOString() }]).slice(-KEEP) });
+      save({ chat: ai().chat.concat([{ role: "model", text: reply, at: new Date().toISOString() }]).slice(-KEEP) });
       renderLog();
     }).catch(function (e) {
       if (busy !== mine) return;
@@ -36855,7 +36969,7 @@ PMP.GeminiChat = (function () {
       var msg = explain(e);
       if (msg) showError(msg);
     }).then(function () {
-      nodes.send.disabled = false;
+      nodes.send.disabled = !nodes.model.value;
       if (document.activeElement === document.body) nodes.msg.focus();
     });
   }
@@ -36896,22 +37010,29 @@ PMP.GeminiChat = (function () {
     nodes.keyset.hidden = !!key;
     nodes.convo.hidden = !key;
     if (!key) return;
-    if (!models) {
-      models = [];
-      loadModels(key).then(function (list) { models = list; fillModels(); }).catch(function (e) {
-        models = null;
+    if (!models && !loading) {
+      loading = true;
+      loadModels(key).then(function (list) {
+        loading = false;
+        models = list;
+        fillModels();
+        noModels();
+      }).catch(function (e) {
+        loading = false;
         var msg = explain(e);
         if (msg) showError(msg);
       });
     }
     fillModels();
     renderLog();
+    noModels();
   }
 
-  function focus() {
-    if (nodes.chat.hidden) return;
-    (key ? nodes.msg : nodes.key).focus();
+  function noModels() {
+    if (models && !models.length && key) showError("This key has no Gemini Flash model from version 3.0 onwards that it can chat with. Check the key's project in Google AI Studio.");
   }
+
+  function focus() { (key ? nodes.msg : nodes.key).focus(); }
 
   function init() {
     ["chat", "keyset", "convo", "key", "keep", "model", "log", "msg", "send"].forEach(function (n) {
@@ -36925,16 +37046,18 @@ PMP.GeminiChat = (function () {
     PMP.dom.on(document.getElementById("np-new"), "click", function () {
       if (busy) { busy.abort(); busy = null; }
       nodes.send.disabled = false;
-      PMP.Assist.save({ chat: [] });
+      save({ chat: [] });
       renderLog();
       nodes.msg.focus();
     });
-    PMP.dom.on(nodes.model, "change", function () { PMP.Assist.save({ model: nodes.model.value }); });
+    PMP.dom.on(nodes.model, "change", function () { save({ model: nodes.model.value }); });
+    PMP.Store.subscribe(function (state, changed) { if (changed.indexOf("notepad") >= 0) paint(); });
+    paint();
     PMP.dom.on(nodes.send, "click", send);
     PMP.dom.on(nodes.msg, "keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); send(); } });
   }
 
-  return { init: init, paint: paint, focus: focus, markdown: markdown };
+  return { init: init, sync: paint, focus: focus, markdown: markdown };
 })();
 
 
@@ -37152,7 +37275,6 @@ PMP.GeminiChat = (function () {
     PMP.Shell.init();
     PMP.Notepad.init();
     PMP.GeminiChat.init();
-    PMP.Assist.init();
     PMP.Shell.applyTheme(PMP.Store.state.settings.theme || "system");
 
     PMP.Storage.probe()
@@ -37170,7 +37292,7 @@ PMP.GeminiChat = (function () {
       .then(function () {
         PMP.Shell.applyTheme(PMP.Store.state.settings.theme || "system");
         PMP.Notepad.sync();
-        PMP.Assist.sync();
+        PMP.GeminiChat.sync();
         /* Imported packs join PMP.QUESTIONS before the first render, so the
            pool counts every view shows are right the first time rather than
            after a repaint. */
