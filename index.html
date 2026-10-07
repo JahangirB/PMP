@@ -2167,8 +2167,38 @@ html[data-notepad="open"] .np { display: flex; }
   min-height: 56px; padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-4);
   border-bottom: var(--border); flex: 0 0 auto;
 }
-.np-hd > .i { width: var(--icon); height: var(--icon); color: var(--c-signal); }
-.np-hd h2 { font-size: var(--t-base); font-weight: var(--w-semi); }
+.np-tabs { display: flex; gap: var(--sp-1); align-self: stretch; }
+.np-tab {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  min-height: var(--hit-min); padding: 0 var(--sp-2);
+  color: var(--fg-muted); font-size: var(--t-sm); font-weight: var(--w-semi);
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.np-tab .i { width: var(--icon); height: var(--icon); }
+.np-tab:hover { color: var(--fg); }
+.np-tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--c-signal); }
+.np-tab[aria-selected="true"] .i { color: var(--c-signal); }
+.np-panel { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
+.np-panel[hidden] { display: none; }
+.np-ai { overflow-y: auto; padding: var(--sp-4); gap: var(--sp-3); overscroll-behavior: contain; }
+.np-ai .field { margin-bottom: 0; }
+.np-ai-lead { font-size: var(--t-sm); line-height: var(--lh-body); color: var(--fg-muted); }
+.np-prov { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); }
+.np-prov-b {
+  min-height: var(--hit-min); padding: 0 var(--sp-3);
+  border: var(--border-hi); border-radius: var(--r-2); background: var(--s-raise);
+  font-size: var(--t-sm); font-weight: var(--w-semi);
+}
+.np-prov-b:hover { background: var(--s-sunk); }
+.np-prov-b[aria-pressed="true"] { border-color: var(--c-signal); background: var(--s-wash); box-shadow: inset 0 0 0 1px var(--c-signal); }
+.np-custom { display: grid; gap: var(--sp-2); padding: var(--sp-3); border: var(--border); border-radius: var(--r-2); }
+.np-custom[hidden] { display: none; }
+.np-custom code { font-family: var(--font-mono); font-size: var(--t-xs); overflow-wrap: anywhere; }
+.np-custom .btn { justify-self: start; }
+.np-q-t { min-height: 120px; resize: vertical; font-size: var(--t-sm); line-height: var(--lh-body); }
+.np-ai-act { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.np-ai .hint { font-size: var(--t-xs); line-height: var(--lh-body); color: var(--fg-muted); }
+.np-ai-priv { margin-top: auto; padding-top: var(--sp-3); border-top: var(--border); }
 .np-text {
   flex: 1 1 auto; min-height: 0; width: 100%; resize: none;
   padding: var(--sp-4); border: 0; background: transparent;
@@ -2317,6 +2347,7 @@ html[data-notepad="open"] .np { display: flex; }
 <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8v.2"/></symbol>
 <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 21V3.5M5.5 4.5h11l-2 3.5 2 3.5h-11"/></symbol>
 <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.5z"/><path d="M14 3.5v6h6M8 13h8M8 16.5h5"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></symbol>
 <symbol id="i-clip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
 </defs></svg>
 
@@ -2413,19 +2444,52 @@ html[data-notepad="open"] .np { display: flex; }
        refreshes; only the toggle or the close button changes it. -->
   <aside class="np" id="np" aria-labelledby="np-title">
     <div class="np-hd">
-      <svg class="i" aria-hidden="true"><use href="#i-note"></use></svg>
-      <h2 id="np-title">My notes</h2>
+      <h2 class="sr-only" id="np-title">Notes and AI assistant</h2>
+      <div class="np-tabs" role="tablist" aria-label="Side pane">
+        <button class="np-tab" id="np-tab-notes" type="button" role="tab" aria-controls="np-notes" aria-selected="true" data-tab="notes"><svg class="i" aria-hidden="true"><use href="#i-note"></use></svg>Notes</button>
+        <button class="np-tab" id="np-tab-ai" type="button" role="tab" aria-controls="np-ai" aria-selected="false" tabindex="-1" data-tab="ai"><svg class="i" aria-hidden="true"><use href="#i-spark"></use></svg>AI assistant</button>
+      </div>
       <span class="spacer"></span>
       <button class="icon-btn" id="np-close" type="button" aria-label="Hide notes"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
     </div>
-    <label class="sr-only" for="np-text">Your notes</label>
-    <textarea class="np-text" id="np-text" spellcheck="true"
-              placeholder="Jot down anything you want in front of you while you study: a formula, a mnemonic, a trap you fell for, a question to come back to. It is saved on this device as you type."></textarea>
-    <div class="np-ft">
-      <span class="np-stat" id="np-stat" aria-live="off">Empty</span>
-      <span class="spacer"></span>
-      <button class="btn btn--sm" id="np-copy" type="button"><svg class="i" aria-hidden="true"><use href="#i-clip"></use></svg>Copy</button>
-      <button class="btn btn--sm btn--ghost" id="np-clear" type="button">Clear</button>
+
+    <div class="np-panel" id="np-notes" role="tabpanel" aria-labelledby="np-tab-notes">
+      <label class="sr-only" for="np-text">Your notes</label>
+      <textarea class="np-text" id="np-text" spellcheck="true"
+                placeholder="Jot down anything you want in front of you while you study: a formula, a mnemonic, a trap you fell for, a question to come back to. It is saved on this device as you type."></textarea>
+      <div class="np-ft">
+        <span class="np-stat" id="np-stat" aria-live="off">Empty</span>
+        <span class="spacer"></span>
+        <button class="btn btn--sm" id="np-copy" type="button"><svg class="i" aria-hidden="true"><use href="#i-clip"></use></svg>Copy</button>
+        <button class="btn btn--sm btn--ghost" id="np-clear" type="button">Clear</button>
+      </div>
+    </div>
+
+    <!-- 04.1  AI tab (§12.2.2). Optional and off until used: nothing is
+         opened or sent until the person presses Open or Ask. -->
+    <div class="np-panel np-ai" id="np-ai" role="tabpanel" aria-labelledby="np-tab-ai" hidden>
+      <p class="np-ai-lead">Use your own ChatGPT, Gemini or Claude account. These services do not allow themselves to be shown inside another site, so the one you pick opens in its own window beside this one. Sign in there once and your browser keeps you signed in.</p>
+      <div class="np-prov" role="group" aria-label="AI service">
+        <button class="np-prov-b" type="button" data-p="chatgpt" aria-pressed="true">ChatGPT</button>
+        <button class="np-prov-b" type="button" data-p="gemini" aria-pressed="false">Gemini</button>
+        <button class="np-prov-b" type="button" data-p="claude" aria-pressed="false">Claude</button>
+        <button class="np-prov-b" type="button" data-p="custom" aria-pressed="false">Other</button>
+      </div>
+      <div class="np-custom" id="np-custom" hidden>
+        <label class="field"><span class="lbl">Name</span><input class="input" id="np-c-name" type="text" maxlength="40" placeholder="For example, Copilot" autocomplete="off"></label>
+        <label class="field"><span class="lbl">Link</span><input class="input" id="np-c-url" type="url" inputmode="url" placeholder="https://" autocomplete="off" spellcheck="false"></label>
+        <p class="hint">Any chat site you can sign in to. If it can take a question from its link, put <code>{q}</code> where the question goes, for example <code>https://www.perplexity.ai/search?q={q}</code>.</p>
+        <button class="btn btn--sm" id="np-c-save" type="button">Save link</button>
+      </div>
+      <label class="field np-q"><span class="lbl">Your question</span>
+        <textarea class="input np-q-t" id="np-q" rows="5" spellcheck="true" placeholder="For example: explain the difference between a CPI below 1 and an SPI below 1, with an exam-style example."></textarea>
+      </label>
+      <div class="np-ai-act">
+        <button class="btn btn--primary" id="np-ask" type="button">Ask ChatGPT</button>
+        <button class="btn" id="np-open" type="button">Open ChatGPT</button>
+      </div>
+      <p class="hint" id="np-ai-how"></p>
+      <p class="hint np-ai-priv">Your question goes to the service you pick, under your own account, and only when you press Ask. This app keeps your choice, your link and an unsent question on this device, and nothing else.</p>
     </div>
   </aside>
 </div>
@@ -2623,6 +2687,8 @@ html[data-notepad="open"] .np { display: flex; }
         12.2  storage probe, state hydrate, content audit self-check
         12.2.1 notes pane — free text beside every view; text and open
               state in the `notepad` slice, mirrored pre-paint by 01.6
+        12.2.2 AI tab — ChatGPT, Gemini, Claude or a custom link, opened in
+              a window beside this one; the only outbound action, on a press
         12.3  router start, first render, resume-exam prompt,
               extended pack load (after paint, never blocking it)
    ───────────────────────────────────────────────────────────────────────────
@@ -19073,7 +19139,10 @@ PMP.Store = (function () {
       /* The free-form notes pane (§12.2.1). One running page of the person's
          own text, not tied to any question — per-question notes stay in
          `notes`. `open` is persisted so the pane survives a refresh. */
-      notepad: { open: false, text: "", updatedAt: null }
+      notepad: { open: false, text: "", updatedAt: null, tab: "notes",
+        /* The AI tab (§12.2.2): the chosen service, a custom link, and the
+           question not yet sent. No account, token or answer is stored. */
+        ai: { provider: "chatgpt", customName: "", customUrl: "", draft: "" } }
     };
   }
 
@@ -29403,7 +29472,8 @@ PMP.Data = (function () {
     host.appendChild(el("div", { class: "view-hd" }, [
       el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
-      el("p", { text: "Everything this app knows about you lives on this device and travels in a file you control. Nothing about you is sent anywhere, and there is no analytics, no telemetry and no account. Opened from disk the file makes no network requests at all. Served over http it makes exactly one kind: a request for its own extended question packs, at a fixed path beside itself, carrying no credentials and no information about you \u2014 the same request the browser would make for an image. What came back, or did not, is itemised in the content audit." })
+      el("p", { text: "Everything this app knows about you lives on this device and travels in a file you control. Nothing about you is sent anywhere, and there is no analytics, no telemetry and no account. Opened from disk the file makes no network requests at all. Served over http it makes exactly one kind: a request for its own extended question packs, at a fixed path beside itself, carrying no credentials and no information about you \u2014 the same request the browser would make for an image. What came back, or did not, is itemised in the content audit." }),
+      el("p", { text: "The one exception is optional and yours to trigger: the AI assistant tab in the notes pane. When you press Ask or Open there, the AI service you picked opens in its own window and you sign in to it directly; Ask also hands it the question you typed. Nothing else goes with it, nothing is sent until you press, and no account details or answers ever pass through this app." })
     ]));
 
     host.appendChild(el("div", { class: "card" }, [
@@ -36234,9 +36304,30 @@ PMP.Notepad = (function () {
   function setOpen(open) {
     paint(open);
     PMP.Store.commit(["notepad"], function (s) { s.notepad.open = open; }, { silent: true });
-    if (open) textEl.focus();
+    if (open) focusTab();
     else toggleEl.focus();
     PMP.UI.announce(open ? "Notes shown" : "Notes hidden");
+  }
+
+  /* Two tabs, Notes and AI assistant. The chosen one is persisted with the
+     rest of the slice; an older slice without `tab` opens on Notes. */
+  function currentTab() { return PMP.Store.state.notepad.tab === "ai" ? "ai" : "notes"; }
+  function paintTab(tab) {
+    ["notes", "ai"].forEach(function (t) {
+      var b = document.getElementById("np-tab-" + t);
+      b.setAttribute("aria-selected", t === tab ? "true" : "false");
+      b.tabIndex = t === tab ? 0 : -1;
+      document.getElementById("np-" + t).hidden = t !== tab;
+    });
+  }
+  function focusTab() {
+    if (currentTab() === "ai") document.getElementById("np-q").focus();
+    else textEl.focus();
+  }
+  function setTab(tab, focus) {
+    PMP.Store.commit(["notepad"], function (s) { s.notepad.tab = tab; }, { silent: true });
+    paintTab(tab);
+    if (focus) document.getElementById("np-tab-" + tab).focus();
   }
 
   function renderStat() {
@@ -36269,6 +36360,7 @@ PMP.Notepad = (function () {
     var text = typeof np.text === "string" ? np.text : "";
     if (textEl.value !== text) textEl.value = text;
     paint(!!np.open);
+    paintTab(currentTab());
     renderStat();
   }
 
@@ -36282,6 +36374,16 @@ PMP.Notepad = (function () {
 
     PMP.dom.on(toggleEl, "click", function () { setOpen(!isOpen()); });
     PMP.dom.on(document.getElementById("np-close"), "click", function () { setOpen(false); });
+    ["notes", "ai"].forEach(function (t) {
+      var b = document.getElementById("np-tab-" + t);
+      PMP.dom.on(b, "click", function () { setTab(t, false); });
+      /* Arrow keys move between the two tabs, as a tablist should. */
+      PMP.dom.on(b, "keydown", function (e) {
+        if (e.key !== "ArrowLeft" && e.key !== "ArrowRight" && e.key !== "Home" && e.key !== "End") return;
+        e.preventDefault();
+        setTab(t === "notes" ? "ai" : "notes", true);
+      });
+    });
     PMP.dom.on(textEl, "input", onInput);
     PMP.dom.on(document.getElementById("np-copy"), "click", function () {
       if (!textEl.value) { PMP.UI.toast("There is nothing to copy yet.", "warn"); return; }
@@ -36312,7 +36414,170 @@ PMP.Notepad = (function () {
     renderStat();
   }
 
-  return { init: init, sync: sync, isOpen: isOpen, setOpen: setOpen };
+  return { init: init, sync: sync, isOpen: isOpen, setOpen: setOpen, setTab: setTab };
+})();
+
+
+/* ── 12.2.2  AI TAB ────────────────────────────────────────────────────────
+   Optional. The person picks ChatGPT, Gemini, Claude or a link of their
+   own, and it opens in a separate window placed beside this one, where they
+   sign in with their own account. It is a window rather than a frame
+   because all three refuse to be framed by another site (frame-ancestors /
+   X-Frame-Options), which is also what keeps their sign-in safe; a frame
+   would show a blank refusal.
+
+   "Ask" hands the typed question over in the service's own link where it
+   accepts one (ChatGPT ?q=, Claude ?q=, a custom link with {q}); where it
+   does not (Gemini) the question is copied to the clipboard to paste. This
+   is the only place the app sends anything anywhere, and only on a press.
+   No account, token or answer passes through or is kept here. */
+PMP.Assist = (function () {
+  var PROVIDERS = {
+    chatgpt: { name: "ChatGPT", open: "https://chatgpt.com/", ask: "https://chatgpt.com/?q={q}" },
+    gemini:  { name: "Gemini",  open: "https://gemini.google.com/app", ask: null },
+    claude:  { name: "Claude",  open: "https://claude.ai/new", ask: "https://claude.ai/new?q={q}" }
+  };
+  var WINDOW = "pmp-ai";
+  var nodes = {}, typing = null;
+
+  function ai() {
+    var a = (PMP.Store.state.notepad && PMP.Store.state.notepad.ai) || {};
+    return {
+      provider: PROVIDERS[a.provider] || a.provider === "custom" ? a.provider : "chatgpt",
+      customName: a.customName || "", customUrl: a.customUrl || "", draft: a.draft || ""
+    };
+  }
+  function save(patch) {
+    PMP.Store.commit(["notepad"], function (s) {
+      s.notepad.ai = Object.assign(ai(), s.notepad.ai || {}, patch);
+    }, { silent: true });
+  }
+
+  /* A link is accepted only as http(s): anything else (javascript:, data:)
+     would run in this page's name rather than open a site. */
+  function validLink(u) {
+    try {
+      var x = new URL(String(u).replace("{q}", "q"));
+      return x.protocol === "https:" || x.protocol === "http:";
+    } catch (e) { return false; }
+  }
+
+  /* The selected service as { name, open, ask }, or null for an unsaved
+     custom link. */
+  function current() {
+    var a = ai();
+    if (a.provider !== "custom") return PROVIDERS[a.provider];
+    if (!validLink(a.customUrl)) return null;
+    var has = a.customUrl.indexOf("{q}") >= 0;
+    return { name: a.customName || "your AI", open: has ? a.customUrl.replace("{q}", "") : a.customUrl, ask: has ? a.customUrl : null, own: true };
+  }
+
+  /* Beside this window, on its right edge, full height. On a phone the
+     browser turns this into a new tab, which is the right thing there.
+
+     The three named services share one named window, so switching service
+     or asking again reuses it rather than stacking windows. That needs the
+     opener link kept: a window whose opener is cut cannot be navigated or
+     closed from here. A custom link is someone's own choice of site, so it
+     gets the cautious form instead: its opener is cut, so the site can never
+     steer this page, and each press opens a window of its own. */
+  function launch(url, own) {
+    var w = Math.round(Math.min(560, Math.max(380, (window.screen.availWidth || 1200) * 0.33)));
+    var left = Math.max(0, (window.screenX || 0) + (window.outerWidth || w) - w);
+    var feat = "popup=yes,width=" + w + ",height=" + (window.outerHeight || 800) + ",left=" + left + ",top=" + (window.screenY || 0);
+    var win = null;
+    try { win = window.open(url, own ? "_blank" : WINDOW, feat); } catch (e) { win = null; }
+    if (!win) {
+      PMP.UI.toast("Your browser blocked the window. Allow pop-ups for this page and press the button again.", "err");
+      return false;
+    }
+    try { if (own) win.opener = null; win.focus(); } catch (e) { /* cross-origin already; nothing to tidy */ }
+    return true;
+  }
+
+  function paint() {
+    var a = ai(), p = current();
+    Array.prototype.forEach.call(nodes.prov, function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-p") === a.provider ? "true" : "false");
+    });
+    if (a.provider === "custom" && a.customName) nodes.prov[3].textContent = a.customName;
+    else nodes.prov[3].textContent = "Other";
+    nodes.custom.hidden = a.provider !== "custom";
+    if (document.activeElement !== nodes.cName) nodes.cName.value = a.customName;
+    if (document.activeElement !== nodes.cUrl) nodes.cUrl.value = a.customUrl;
+    if (nodes.q.value !== a.draft && document.activeElement !== nodes.q) nodes.q.value = a.draft;
+    var name = p ? p.name : (a.customName || "your AI");
+    nodes.ask.textContent = "Ask " + name;
+    nodes.open.textContent = "Open " + name;
+    nodes.ask.disabled = nodes.open.disabled = !p;
+    nodes.how.textContent = !p ? "Add a link above to use your own AI."
+      : p.ask ? "Ask opens " + p.name + " with your question already typed in. Check it and press send there."
+      : "Ask copies your question and opens " + p.name + ". Paste it there with Ctrl+V (\u2318V on a Mac) and send.";
+  }
+
+  function ask() {
+    var p = current(), q = nodes.q.value.trim();
+    if (!p) return;
+    if (!q) { PMP.UI.toast("Type a question first, or press Open to start a blank chat.", "warn"); nodes.q.focus(); return; }
+    if (p.ask) {
+      if (launch(p.ask.replace("{q}", encodeURIComponent(q)), p.own)) {
+        nodes.q.value = "";
+        save({ draft: "" });
+      }
+      return;
+    }
+    /* Copy first, while this click still counts as a user gesture. */
+    PMP.Exporter.copyText(q).then(function (ok) {
+      PMP.UI.toast(ok ? "Question copied. Paste it into " + p.name + "." : "Copying was blocked. Select your question and copy it by hand.", ok ? "ok" : "err");
+    });
+    launch(p.open, p.own);
+  }
+
+  function saveCustom() {
+    var name = nodes.cName.value.trim(), url = nodes.cUrl.value.trim();
+    if (!validLink(url)) {
+      PMP.UI.toast("That link does not look right. It should start with https:// and be the address of the chat page.", "err");
+      nodes.cUrl.focus();
+      return;
+    }
+    save({ customName: name, customUrl: url });
+    paint();
+    PMP.UI.toast((name || "Your AI") + " saved.", "ok");
+  }
+
+  function init() {
+    nodes.prov = document.querySelectorAll("#np-ai .np-prov-b");
+    nodes.custom = document.getElementById("np-custom");
+    nodes.cName = document.getElementById("np-c-name");
+    nodes.cUrl = document.getElementById("np-c-url");
+    nodes.q = document.getElementById("np-q");
+    nodes.ask = document.getElementById("np-ask");
+    nodes.open = document.getElementById("np-open");
+    nodes.how = document.getElementById("np-ai-how");
+
+    Array.prototype.forEach.call(nodes.prov, function (b) {
+      PMP.dom.on(b, "click", function () {
+        save({ provider: b.getAttribute("data-p") });
+        paint();
+        if (b.getAttribute("data-p") === "custom" && !current()) nodes.cUrl.focus();
+      });
+    });
+    PMP.dom.on(document.getElementById("np-c-save"), "click", saveCustom);
+    PMP.dom.on(nodes.cUrl, "keydown", function (e) { if (e.key === "Enter") saveCustom(); });
+    PMP.dom.on(nodes.q, "input", function () {
+      clearTimeout(typing);
+      typing = setTimeout(function () { save({ draft: nodes.q.value }); }, 300);
+    });
+    /* Ctrl/Cmd+Enter asks, the way chat boxes do; plain Enter is a newline. */
+    PMP.dom.on(nodes.q, "keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); ask(); } });
+    PMP.dom.on(nodes.ask, "click", ask);
+    PMP.dom.on(nodes.open, "click", function () { var p = current(); if (p) launch(p.open, p.own); });
+
+    PMP.Store.subscribe(function (state, changed) { if (changed.indexOf("notepad") >= 0) paint(); });
+    paint();
+  }
+
+  return { init: init, sync: paint, PROVIDERS: PROVIDERS, validLink: validLink };
 })();
 
 
@@ -36529,6 +36794,7 @@ PMP.Notepad = (function () {
   function run() {
     PMP.Shell.init();
     PMP.Notepad.init();
+    PMP.Assist.init();
     PMP.Shell.applyTheme(PMP.Store.state.settings.theme || "system");
 
     PMP.Storage.probe()
@@ -36546,6 +36812,7 @@ PMP.Notepad = (function () {
       .then(function () {
         PMP.Shell.applyTheme(PMP.Store.state.settings.theme || "system");
         PMP.Notepad.sync();
+        PMP.Assist.sync();
         /* Imported packs join PMP.QUESTIONS before the first render, so the
            pool counts every view shows are right the first time rather than
            after a repaint. */
