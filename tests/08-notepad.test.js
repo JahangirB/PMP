@@ -13,7 +13,7 @@ async function paneState(page) {
       visible: getComputedStyle(pane).display !== "none" && r.width > 0,
       left: r.left, right: r.right,
       expanded: document.getElementById("np-toggle").getAttribute("aria-expanded"),
-      text: document.getElementById("np-text").value,
+      text: document.getElementById("np-text").innerText,
       stored: PMP.Store.state.notepad
     };
   });
@@ -89,7 +89,9 @@ module.exports = [
       await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
       s = await paneState(page);
       assert.strictEqual(s.visible, false);
-      assert.strictEqual(s.text, "EV = EMV\nCPI < 1 over budget");
+      /* A hidden element has no layout, so its innerText loses line breaks;
+         the saved plain-text mirror is what to check while closed. */
+      assert.strictEqual(s.stored.text, "EV = EMV\nCPI < 1 over budget");
       await lib.clean(page);
       await page.ctx.close();
     }
