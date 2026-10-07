@@ -2199,6 +2199,36 @@ html[data-notepad="open"] .np { display: flex; }
 .np-ai-act { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .np-ai .hint { font-size: var(--t-xs); line-height: var(--lh-body); color: var(--fg-muted); }
 .np-ai-priv { margin-top: auto; padding-top: var(--sp-3); border-top: var(--border); }
+.np-acct { display: grid; gap: var(--sp-3); }
+.np-acct[hidden], .np-chat[hidden], .np-convo[hidden], .np-keyset[hidden], .np-seg[hidden] { display: none; }
+.np-seg { display: flex; border: var(--border-hi); border-radius: var(--r-2); overflow: hidden; }
+.np-seg button { flex: 1 1 0; min-height: 36px; padding: 0 var(--sp-2); font-size: var(--t-xs); font-weight: var(--w-semi); color: var(--fg-muted); }
+.np-seg button + button { border-left: var(--border-hi); }
+.np-seg button[aria-pressed="true"] { background: var(--s-wash); color: var(--fg); box-shadow: inset 0 -2px 0 var(--c-signal); }
+/* With a key in use the pane is the chat: the log takes the height and
+   scrolls on its own, the composer stays at the bottom. */
+.np-ai[data-chat="on"] { overflow: hidden; }
+.np-ai[data-chat="on"] .np-ai-lead, .np-ai[data-chat="on"] .np-ai-priv { display: none; }
+.np-chat { display: flex; flex-direction: column; gap: var(--sp-3); flex: 1 1 auto; min-height: 0; }
+.np-keyset { display: grid; gap: var(--sp-2); }
+.np-keyset .btn { justify-self: start; }
+.np-keyset a { color: var(--c-signal); overflow-wrap: anywhere; }
+.np-check { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--t-sm); min-height: 32px; }
+.np-convo { display: flex; flex-direction: column; gap: var(--sp-2); flex: 1 1 auto; min-height: 0; }
+.np-chat-bar { display: flex; align-items: center; gap: var(--sp-1); flex-wrap: wrap; }
+.np-model { flex: 1 1 140px; min-width: 0; min-height: 36px; font-size: var(--t-xs); padding: 0 var(--sp-2); }
+.np-log { flex: 1 1 auto; min-height: 120px; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-1) 0; }
+.np-log-empty { margin: auto 0; text-align: center; font-size: var(--t-sm); color: var(--fg-muted); line-height: var(--lh-body); }
+.np-m { padding: var(--sp-2) var(--sp-3); border-radius: var(--r-3); font-size: var(--t-sm); line-height: var(--lh-body); max-width: 92%; overflow-wrap: anywhere; }
+.np-m p + p, .np-m p + ul, .np-m ul + p { margin-top: var(--sp-2); }
+.np-m ul { padding-left: var(--sp-5); list-style: disc; }
+.np-m pre { margin-top: var(--sp-2); padding: var(--sp-2); background: var(--s-sunk); border-radius: var(--r-1); font-family: var(--font-mono); font-size: var(--t-xs); white-space: pre-wrap; }
+.np-m[data-role="user"] { align-self: flex-end; background: var(--s-wash); border: 1px solid var(--c-signal); white-space: pre-wrap; }
+.np-m[data-role="model"] { align-self: flex-start; background: var(--s-sunk); }
+.np-m[data-role="error"] { align-self: stretch; max-width: none; background: var(--st-incorrect-bg); color: var(--st-incorrect-fg); }
+.np-m[data-role="wait"] { align-self: flex-start; color: var(--fg-muted); font-style: italic; }
+.np-compose { display: flex; gap: var(--sp-2); align-items: flex-end; flex: 0 0 auto; }
+.np-msg { flex: 1 1 auto; min-height: 64px; max-height: 160px; resize: vertical; font-size: var(--t-sm); line-height: var(--lh-body); }
 .np-text {
   flex: 1 1 auto; min-height: 0; width: 100%; resize: none;
   padding: var(--sp-4); border: 0; background: transparent;
@@ -2475,12 +2505,17 @@ html[data-notepad="open"] .np { display: flex; }
         <button class="np-prov-b" type="button" data-p="claude" aria-pressed="false">Claude</button>
         <button class="np-prov-b" type="button" data-p="custom" aria-pressed="false">Other</button>
       </div>
+      <div class="np-seg" id="np-gmode" role="group" aria-label="How to use Gemini" hidden>
+        <button type="button" data-m="account" aria-pressed="true">Google account</button>
+        <button type="button" data-m="key" aria-pressed="false">API key, chat here</button>
+      </div>
       <div class="np-custom" id="np-custom" hidden>
         <label class="field"><span class="lbl">Name</span><input class="input" id="np-c-name" type="text" maxlength="40" placeholder="For example, Copilot" autocomplete="off"></label>
         <label class="field"><span class="lbl">Link</span><input class="input" id="np-c-url" type="url" inputmode="url" placeholder="https://" autocomplete="off" spellcheck="false"></label>
         <p class="hint">Any chat site you can sign in to. If it can take a question from its link, put <code>{q}</code> where the question goes, for example <code>https://www.perplexity.ai/search?q={q}</code>.</p>
         <button class="btn btn--sm" id="np-c-save" type="button">Save link</button>
       </div>
+      <div class="np-acct" id="np-acct">
       <label class="field np-q"><span class="lbl">Your question</span>
         <textarea class="input np-q-t" id="np-q" rows="5" spellcheck="true" placeholder="For example: explain the difference between a CPI below 1 and an SPI below 1, with an exam-style example."></textarea>
       </label>
@@ -2489,7 +2524,34 @@ html[data-notepad="open"] .np { display: flex; }
         <button class="btn" id="np-open" type="button">Open ChatGPT</button>
       </div>
       <p class="hint" id="np-ai-how"></p>
-      <p class="hint np-ai-priv">Your question goes to the service you pick, under your own account, and only when you press Ask. This app keeps your choice, your link and an unsent question on this device, and nothing else.</p>
+      </div>
+
+      <!-- Gemini with the person's own Google AI Studio key: the chat runs
+           in this pane, straight from this page to Google (§12.2.3). -->
+      <div class="np-chat" id="np-chat" hidden>
+        <div class="np-keyset" id="np-keyset">
+          <label class="field"><span class="lbl">Gemini API key</span>
+            <input class="input" id="np-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your key from Google AI Studio"></label>
+          <label class="np-check"><input type="checkbox" id="np-key-keep" checked> Remember the key on this device</label>
+          <button class="btn btn--primary btn--sm" id="np-key-save" type="button">Use this key</button>
+          <p class="hint">No key yet? Create one free at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">aistudio.google.com/apikey</a>. The key is kept apart from your progress, so it is never in a backup file, and it is sent only to Google.</p>
+        </div>
+        <div class="np-convo" id="np-convo" hidden>
+          <div class="np-chat-bar">
+            <label class="sr-only" for="np-model">Gemini model</label>
+            <select class="select np-model" id="np-model"></select>
+            <button class="btn btn--sm btn--ghost" id="np-new" type="button">New chat</button>
+            <button class="btn btn--sm btn--ghost" id="np-key-forget" type="button">Forget key</button>
+          </div>
+          <div class="np-log" id="np-log" role="log" aria-live="polite" aria-label="Conversation with Gemini"></div>
+          <div class="np-compose">
+            <label class="sr-only" for="np-msg">Message Gemini</label>
+            <textarea class="input np-msg" id="np-msg" rows="3" spellcheck="true" placeholder="Ask Gemini. Ctrl+Enter to send."></textarea>
+            <button class="btn btn--primary" id="np-send" type="button">Send</button>
+          </div>
+        </div>
+      </div>
+      <p class="hint np-ai-priv" id="np-ai-priv">Your question goes to the service you pick, under your own account, and only when you press Ask. This app keeps your choice, your link and an unsent question on this device, and nothing else.</p>
     </div>
   </aside>
 </div>
@@ -2689,6 +2751,8 @@ html[data-notepad="open"] .np { display: flex; }
               state in the `notepad` slice, mirrored pre-paint by 01.6
         12.2.2 AI tab — ChatGPT, Gemini, Claude or a custom link, opened in
               a window beside this one; the only outbound action, on a press
+        12.2.3 Gemini by API key — chat in the pane, page to Google direct;
+              the key kept outside the store and out of every export
         12.3  router start, first render, resume-exam prompt,
               extended pack load (after paint, never blocking it)
    ───────────────────────────────────────────────────────────────────────────
@@ -19142,7 +19206,9 @@ PMP.Store = (function () {
       notepad: { open: false, text: "", updatedAt: null, tab: "notes",
         /* The AI tab (§12.2.2): the chosen service, a custom link, and the
            question not yet sent. No account, token or answer is stored. */
-        ai: { provider: "chatgpt", customName: "", customUrl: "", draft: "" } }
+        ai: { provider: "chatgpt", customName: "", customUrl: "", draft: "",
+          /* Gemini by API key (§12.2.3). The key itself is never here. */
+          geminiMode: "account", model: "", chat: [] } }
     };
   }
 
@@ -29473,7 +29539,7 @@ PMP.Data = (function () {
       el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Everything this app knows about you lives on this device and travels in a file you control. Nothing about you is sent anywhere, and there is no analytics, no telemetry and no account. Opened from disk the file makes no network requests at all. Served over http it makes exactly one kind: a request for its own extended question packs, at a fixed path beside itself, carrying no credentials and no information about you \u2014 the same request the browser would make for an image. What came back, or did not, is itemised in the content audit." }),
-      el("p", { text: "The one exception is optional and yours to trigger: the AI assistant tab in the notes pane. When you press Ask or Open there, the AI service you picked opens in its own window and you sign in to it directly; Ask also hands it the question you typed. Nothing else goes with it, nothing is sent until you press, and no account details or answers ever pass through this app." })
+      el("p", { text: "The one exception is optional and yours to trigger: the AI assistant tab in the notes pane. When you press Ask or Open there, the AI service you picked opens in its own window and you sign in to it directly; Ask also hands it the question you typed. Nothing else goes with it, nothing is sent until you press, and no account details or answers ever pass through this app. If you give the tab a Gemini API key instead, the chat runs in the pane: each message you send goes from this page straight to Google under that key. The key stays on this device, outside your backup file, and goes nowhere but Google." })
     ]));
 
     host.appendChild(el("div", { class: "card" }, [
@@ -36321,7 +36387,11 @@ PMP.Notepad = (function () {
     });
   }
   function focusTab() {
-    if (currentTab() === "ai") document.getElementById("np-q").focus();
+    if (currentTab() === "ai") {
+      var chat = document.getElementById("np-chat");
+      if (!chat.hidden) PMP.GeminiChat.focus();
+      else document.getElementById("np-q").focus();
+    }
     else textEl.focus();
   }
   function setTab(tab, focus) {
@@ -36444,7 +36514,9 @@ PMP.Assist = (function () {
     var a = (PMP.Store.state.notepad && PMP.Store.state.notepad.ai) || {};
     return {
       provider: PROVIDERS[a.provider] || a.provider === "custom" ? a.provider : "chatgpt",
-      customName: a.customName || "", customUrl: a.customUrl || "", draft: a.draft || ""
+      customName: a.customName || "", customUrl: a.customUrl || "", draft: a.draft || "",
+      geminiMode: a.geminiMode === "key" ? "key" : "account", model: a.model || "",
+      chat: Array.isArray(a.chat) ? a.chat : []
     };
   }
   function save(patch) {
@@ -36503,6 +36575,17 @@ PMP.Assist = (function () {
     if (a.provider === "custom" && a.customName) nodes.prov[3].textContent = a.customName;
     else nodes.prov[3].textContent = "Other";
     nodes.custom.hidden = a.provider !== "custom";
+    /* Gemini alone has a second way in: the person's own API key, with the
+       chat in this pane (§12.2.3). */
+    var keyed = a.provider === "gemini" && a.geminiMode === "key";
+    nodes.gmode.hidden = a.provider !== "gemini";
+    Array.prototype.forEach.call(nodes.gmode.querySelectorAll("button"), function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-m") === a.geminiMode ? "true" : "false");
+    });
+    nodes.acct.hidden = keyed;
+    nodes.chat.hidden = !keyed;
+    nodes.panel.setAttribute("data-chat", keyed ? "on" : "off");
+    if (keyed) PMP.GeminiChat.paint();
     if (document.activeElement !== nodes.cName) nodes.cName.value = a.customName;
     if (document.activeElement !== nodes.cUrl) nodes.cUrl.value = a.customUrl;
     if (nodes.q.value !== a.draft && document.activeElement !== nodes.q) nodes.q.value = a.draft;
@@ -36554,6 +36637,17 @@ PMP.Assist = (function () {
     nodes.ask = document.getElementById("np-ask");
     nodes.open = document.getElementById("np-open");
     nodes.how = document.getElementById("np-ai-how");
+    nodes.panel = document.getElementById("np-ai");
+    nodes.gmode = document.getElementById("np-gmode");
+    nodes.acct = document.getElementById("np-acct");
+    nodes.chat = document.getElementById("np-chat");
+    Array.prototype.forEach.call(nodes.gmode.querySelectorAll("button"), function (b) {
+      PMP.dom.on(b, "click", function () {
+        save({ geminiMode: b.getAttribute("data-m") });
+        paint();
+        PMP.GeminiChat.focus();
+      });
+    });
 
     Array.prototype.forEach.call(nodes.prov, function (b) {
       PMP.dom.on(b, "click", function () {
@@ -36577,7 +36671,270 @@ PMP.Assist = (function () {
     paint();
   }
 
-  return { init: init, sync: paint, PROVIDERS: PROVIDERS, validLink: validLink };
+  return { init: init, sync: paint, PROVIDERS: PROVIDERS, validLink: validLink, ai: ai, save: save };
+})();
+
+
+/* ── 12.2.3  GEMINI BY API KEY ─────────────────────────────────────────────
+   For someone with a Google AI Studio key: the chat runs in the pane, from
+   this page straight to Google's Generative Language API. Google answers
+   cross-origin requests from any page, including a file opened from disk,
+   so there is no server in between and none is needed.
+
+   The key is the one thing here that is a secret, so it is kept apart from
+   the store: in memory, and in localStorage under its own name only if the
+   person ticks Remember. It is therefore never in a progress export. It
+   travels in a request header, never in a URL, and only to Google. The
+   conversation itself is ordinary study material and is kept in the
+   notepad slice, capped, so it survives a refresh like the notes do. */
+PMP.GeminiChat = (function () {
+  var el = PMP.dom.el;
+  var API = "https://generativelanguage.googleapis.com/v1beta";
+  var KEY_STORE = "pmp.gemini.key";
+  var FALLBACK_MODEL = "models/gemini-2.5-flash";
+  var KEEP = 60, SEND = 30;
+  var SYSTEM = "You are a study assistant for someone preparing for the PMP exam (PMI's Project Management Professional certification). "
+    + "Answer accurately and concisely in plain English. Explain the reasoning the exam rewards, not just the answer, and when a question is about what a project manager should do, "
+    + "reason the way PMI expects: collaborative, proactive, following the agreed process, and fitted to whether the work is predictive, agile or hybrid. "
+    + "Use short paragraphs and short lists. If you are not sure of something, say so.";
+  var nodes = {}, key = "", models = null, busy = null;
+
+  function readKey() {
+    try { return window.localStorage.getItem(KEY_STORE) || ""; } catch (e) { return ""; }
+  }
+  function writeKey(k, keep) {
+    key = k;
+    try {
+      if (k && keep) window.localStorage.setItem(KEY_STORE, k);
+      else window.localStorage.removeItem(KEY_STORE);
+    } catch (e) { /* kept in memory for this session only */ }
+  }
+
+  function call(path, opts) {
+    opts = opts || {};
+    return fetch(API + path, {
+      method: opts.body ? "POST" : "GET",
+      headers: Object.assign({ "x-goog-api-key": opts.key || key }, opts.body ? { "Content-Type": "application/json" } : {}),
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+      signal: opts.signal
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (data) {
+        if (!res.ok) { var e = new Error((data.error && data.error.message) || ("HTTP " + res.status)); e.status = res.status; e.data = data; throw e; }
+        return data;
+      });
+    });
+  }
+
+  /* Google's error, in words a learner can act on. */
+  function explain(e) {
+    if (e && e.name === "AbortError") return null;
+    var reason = "";
+    try { reason = JSON.stringify(e.data || {}); } catch (x) { reason = ""; }
+    if (reason.indexOf("API_KEY_INVALID") >= 0) return "Google says this key is not valid. Check you copied all of it, or create a new one in AI Studio.";
+    if (e.status === 429) return "Google is limiting requests on this key: the free quota or the per-minute rate is used up. Wait a minute and try again, or pick a lighter model.";
+    if (e.status === 403) return "This key is not allowed to use the Gemini API. In AI Studio, check the key's project has the Generative Language API enabled.";
+    if (e.status === 404) return "That model is not available to this key. Pick another from the list.";
+    if (!e.status) return "Could not reach Google. Check your internet connection and try again.";
+    return "Google returned an error: " + e.message;
+  }
+
+  /* Models this key may use for chat, newest Google naming as listed. A
+     key that cannot list models is refused here, which doubles as the
+     check that the pasted key works. */
+  function loadModels(k) {
+    return call("/models?pageSize=1000", { key: k }).then(function (data) {
+      return (data.models || []).filter(function (m) {
+        return /gemini/i.test(m.name) && (m.supportedGenerationMethods || []).indexOf("generateContent") >= 0
+          && !/(tts|image|embedding|audio|live)/i.test(m.name);
+      }).map(function (m) { return { name: m.name, label: m.displayName || m.name.replace(/^models\//, "") }; });
+    });
+  }
+  function pickModel(list) {
+    var want = PMP.Assist.ai().model;
+    if (list.some(function (m) { return m.name === want; })) return want;
+    var flash = list.filter(function (m) { return /flash/i.test(m.name) && !/(lite|preview|exp|thinking)/i.test(m.name); });
+    return (flash[flash.length - 1] || list[0] || { name: FALLBACK_MODEL }).name;
+  }
+  function fillModels() {
+    var list = models && models.length ? models : [{ name: FALLBACK_MODEL, label: "Gemini 2.5 Flash" }];
+    var chosen = pickModel(list);
+    nodes.model.innerHTML = "";
+    list.forEach(function (m) { nodes.model.appendChild(el("option", { value: m.name, text: m.label })); });
+    nodes.model.value = chosen;
+    if (PMP.Assist.ai().model !== chosen) PMP.Assist.save({ model: chosen });
+  }
+
+  /* A reply's light markdown as DOM, never as HTML: paragraphs, bullet
+     lists, **bold**, `code` and fenced blocks. Anything else reads as the
+     plain text it is. */
+  function inline(text) {
+    var out = [], re = /\*\*([^*]+)\*\*|`([^`]+)`/g, last = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > last) out.push(text.slice(last, m.index));
+      out.push(m[1] !== undefined ? el("b", { text: m[1] }) : el("code", { text: m[2] }));
+      last = re.lastIndex;
+    }
+    if (last < text.length) out.push(text.slice(last));
+    return out;
+  }
+  function markdown(text) {
+    var blocks = [], para = [], list = null, code = null;
+    function endPara() { if (para.length) { blocks.push(el("p", null, inline(para.join(" ")))); para = []; } }
+    function endList() { if (list) { blocks.push(list); list = null; } }
+    String(text).split("\n").forEach(function (line) {
+      if (/^\s*```/.test(line)) {
+        if (code !== null) { blocks.push(el("pre", { text: code.join("\n") })); code = null; }
+        else { endPara(); endList(); code = []; }
+        return;
+      }
+      if (code !== null) { code.push(line); return; }
+      var li = /^\s*(?:[-*\u2022]|\d+[.)])\s+(.*)$/.exec(line);
+      if (li) { endPara(); (list || (list = el("ul"))).appendChild(el("li", null, inline(li[1]))); return; }
+      var h = /^\s*#{1,6}\s+(.*)$/.exec(line);
+      if (h) { endPara(); endList(); blocks.push(el("p", null, [el("b", { text: h[1] })])); return; }
+      if (!line.trim()) { endPara(); endList(); return; }
+      endList();
+      para.push(line.trim());
+    });
+    if (code !== null) blocks.push(el("pre", { text: code.join("\n") }));
+    endPara(); endList();
+    return blocks;
+  }
+
+  function bubble(role, text) {
+    return el("div", { class: "np-m", dataset: { role: role } }, role === "model" ? markdown(text) : [text]);
+  }
+  function renderLog() {
+    var chat = PMP.Assist.ai().chat;
+    nodes.log.innerHTML = "";
+    if (!chat.length && !busy) {
+      nodes.log.appendChild(el("p", { class: "np-log-empty", text: "Ask anything about the exam: a term, a formula, why an answer is right. Replies come from Gemini under your key." }));
+    }
+    chat.forEach(function (m) { nodes.log.appendChild(bubble(m.role, m.text)); });
+    if (busy) nodes.log.appendChild(el("div", { class: "np-m", dataset: { role: "wait" }, text: "Gemini is thinking\u2026" }));
+    nodes.log.scrollTop = nodes.log.scrollHeight;
+  }
+  function showError(msg) {
+    nodes.log.appendChild(el("div", { class: "np-m", dataset: { role: "error" }, role: "alert", text: msg }));
+    nodes.log.scrollTop = nodes.log.scrollHeight;
+  }
+
+  function send() {
+    var text = nodes.msg.value.trim();
+    if (!text || busy || !key) return;
+    var history = PMP.Assist.ai().chat.concat([{ role: "user", text: text, at: new Date().toISOString() }]);
+    PMP.Assist.save({ chat: history.slice(-KEEP) });
+    nodes.msg.value = "";
+    busy = new AbortController();
+    var mine = busy;
+    nodes.send.disabled = true;
+    renderLog();
+    call("/" + nodes.model.value + ":generateContent", {
+      signal: mine.signal,
+      body: {
+        systemInstruction: { parts: [{ text: SYSTEM }] },
+        contents: history.slice(-SEND).map(function (m) { return { role: m.role, parts: [{ text: m.text }] }; })
+      }
+    }).then(function (data) {
+      if (busy !== mine) return;
+      var cand = (data.candidates || [])[0];
+      var reply = cand && cand.content && (cand.content.parts || []).map(function (p) { return p.text || ""; }).join("").trim();
+      busy = null;
+      if (!reply) {
+        var why = (data.promptFeedback && data.promptFeedback.blockReason) || (cand && cand.finishReason) || "no reason given";
+        renderLog();
+        showError("Gemini did not answer this one (" + String(why).toLowerCase().replace(/_/g, " ") + "). Try rephrasing the question.");
+        return;
+      }
+      PMP.Assist.save({ chat: PMP.Assist.ai().chat.concat([{ role: "model", text: reply, at: new Date().toISOString() }]).slice(-KEEP) });
+      renderLog();
+    }).catch(function (e) {
+      if (busy !== mine) return;
+      busy = null;
+      renderLog();
+      var msg = explain(e);
+      if (msg) showError(msg);
+    }).then(function () {
+      nodes.send.disabled = false;
+      if (document.activeElement === document.body) nodes.msg.focus();
+    });
+  }
+
+  function useKey() {
+    var k = nodes.key.value.trim();
+    if (!k) { nodes.key.focus(); return; }
+    nodes.save.disabled = true;
+    nodes.save.textContent = "Checking the key\u2026";
+    loadModels(k).then(function (list) {
+      models = list;
+      writeKey(k, nodes.keep.checked);
+      nodes.key.value = "";
+      PMP.UI.toast(nodes.keep.checked ? "Key saved on this device." : "Key in use until you close this tab.", "ok");
+      paint();
+      nodes.msg.focus();
+    }).catch(function (e) {
+      PMP.UI.toast(explain(e) || "The key could not be checked.", "err");
+    }).then(function () {
+      nodes.save.disabled = false;
+      nodes.save.textContent = "Use this key";
+    });
+  }
+
+  function forget() {
+    PMP.UI.confirm("Forget the key?", "The Gemini API key will be removed from this device. Your conversation stays until you start a new chat.", "Forget key", true)
+      .then(function (yes) {
+        if (!yes) return;
+        if (busy) { busy.abort(); busy = null; }
+        writeKey("", false);
+        models = null;
+        paint();
+        nodes.key.focus();
+      });
+  }
+
+  function paint() {
+    nodes.keyset.hidden = !!key;
+    nodes.convo.hidden = !key;
+    if (!key) return;
+    if (!models) {
+      models = [];
+      loadModels(key).then(function (list) { models = list; fillModels(); }).catch(function (e) {
+        models = null;
+        var msg = explain(e);
+        if (msg) showError(msg);
+      });
+    }
+    fillModels();
+    renderLog();
+  }
+
+  function focus() {
+    if (nodes.chat.hidden) return;
+    (key ? nodes.msg : nodes.key).focus();
+  }
+
+  function init() {
+    ["chat", "keyset", "convo", "key", "keep", "model", "log", "msg", "send"].forEach(function (n) {
+      nodes[n] = document.getElementById(n === "chat" ? "np-chat" : n === "keep" ? "np-key-keep" : "np-" + n);
+    });
+    nodes.save = document.getElementById("np-key-save");
+    key = readKey();
+    PMP.dom.on(nodes.save, "click", useKey);
+    PMP.dom.on(nodes.key, "keydown", function (e) { if (e.key === "Enter") useKey(); });
+    PMP.dom.on(document.getElementById("np-key-forget"), "click", forget);
+    PMP.dom.on(document.getElementById("np-new"), "click", function () {
+      if (busy) { busy.abort(); busy = null; }
+      nodes.send.disabled = false;
+      PMP.Assist.save({ chat: [] });
+      renderLog();
+      nodes.msg.focus();
+    });
+    PMP.dom.on(nodes.model, "change", function () { PMP.Assist.save({ model: nodes.model.value }); });
+    PMP.dom.on(nodes.send, "click", send);
+    PMP.dom.on(nodes.msg, "keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); send(); } });
+  }
+
+  return { init: init, paint: paint, focus: focus, markdown: markdown };
 })();
 
 
@@ -36794,6 +37151,7 @@ PMP.Assist = (function () {
   function run() {
     PMP.Shell.init();
     PMP.Notepad.init();
+    PMP.GeminiChat.init();
     PMP.Assist.init();
     PMP.Shell.applyTheme(PMP.Store.state.settings.theme || "system");
 
