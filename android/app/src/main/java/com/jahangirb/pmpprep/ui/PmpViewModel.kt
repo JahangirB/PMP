@@ -42,6 +42,12 @@ import com.jahangirb.pmpprep.data.ScenarioRun
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.data.Srs
 import com.jahangirb.pmpprep.data.WidgetStats
+import com.jahangirb.pmpprep.data.SittingEvent
+import com.jahangirb.pmpprep.data.CheckIn
+import com.jahangirb.pmpprep.data.ExamFitness
+import com.jahangirb.pmpprep.data.FitnessInput
+import com.jahangirb.pmpprep.data.FitnessReport
+import com.jahangirb.pmpprep.data.WeeklyReports
 import com.jahangirb.pmpprep.data.QuestionPicker
 import com.jahangirb.pmpprep.data.Mastery
 import com.jahangirb.pmpprep.data.ReminderBrain
@@ -76,6 +82,8 @@ enum class Dest(val title: String) {
     COACH("Coach and notes"),
     MENU("Menu"),
     GUIDE("How it works"),
+    FITNESS("Exam fitness"),
+    REPORTS("Weekly reports"),
     SESSION("Session"),
 }
 
@@ -125,6 +133,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 launch {
                     store.revision.collectLatest {
                         delay(1000)
+                        runCatching { publishWeekly() }
                         runCatching { publishWidget() }
                         runCatching { publishReminders() }
                     }
@@ -171,7 +180,23 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     /* ── practice ────────────────────────────────────────────────────────── */
 
     var filter by mutableStateOf(PracticeFilter())
-    var practice by mutableStateOf<QuizSession?>(null)
+    private var practiceState by mutableStateOf<QuizSession?>(null)
+    /** The practice set on screen. Replacing or clearing one part-way records it as left (Exam fitness). */
+    var practice: QuizSession?
+        get() = practiceState
+        set(v) {
+            val old = practiceState
+            if (old != null && old !== v && !old.finished && !old.reviewOnly && !old.diagnostic && old.checkedCount > 0) {
+                store.recordSitting(SittingEvent(old.key, "practice", System.currentTimeMillis(), old.questions.size, old.checkedCount, false))
+            }
+            practiceState = v
+        }
+
+    /** A practice set reached its end. */
+    fun finishQuiz(s: QuizSession) {
+        s.finished = true
+        if (!s.reviewOnly && !s.diagnostic) store.recordSitting(SittingEvent(s.key, "practice", System.currentTimeMillis(), s.questions.size, s.checkedCount, true))
+    }
 
     fun pool(): List<Question> = repo.pool()
 
@@ -204,7 +229,28 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
 
     fun answer(s: QuizSession, q: Question, a: Answer) {
         if (s.isChecked(q)) return
+        val now = System.currentTimeMillis()
+        s.touch(now)
+        if (s.firstTapAt == 0L) { s.firstTapAt = now; s.awayAtFirstTap = s.awayMs }
+        changeDirection(q, s.answers[q.id], a)?.let { if (it) s.wrongToRight++ else s.rightToWrong++ }
         s.answers[q.id] = a
+    }
+
+    /** For pick-type questions: true if a change went wrong → right, false if right → wrong, null otherwise. */
+    private fun changeDirection(q: Question, before: Answer?, after: Answer): Boolean? {
+        if (q.base != QType.SINGLE && q.base != QType.MULTI && q.base != QType.HOTSPOT) return null
+        if (before == null || !Scoring.isAnswered(q, before) || !Scoring.isAnswered(q, after)) return null
+        val was = Scoring.score(q, before).correct
+        val now = Scoring.score(q, after).correct
+        return if (was == now) null else now
+    }
+
+    /** Reading drill: you've said what the question is asking; the options appear. */
+    fun showOptions(s: QuizSession) {
+        val now = System.currentTimeMillis()
+        s.touch(now)
+        if (s.firstTapAt == 0L) { s.firstTapAt = now; s.awayAtFirstTap = s.awayMs }
+        s.optionsShown = true
     }
 
     fun check(s: QuizSession, source: String = Readiness.SOURCE_PRACTICE) {
@@ -212,18 +258,44 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         if (s.isChecked(q) || !Scoring.isAnswered(q, s.answers[q.id])) return
         val r = Scoring.score(q, s.answers[q.id])
         s.results[q.id] = r
-        store.record(attempt(q, r.credit, r.correct, System.currentTimeMillis() - s.shownAt, source))
+        val now = System.currentTimeMillis()
+        s.touch(now)
+        s.totalRightToWrong += s.rightToWrong
+        s.totalWrongToRight += s.wrongToRight
+        store.record(attempt(q, r.credit, r.correct, now - s.shownAt - s.awayMs, source,
+            firstTapMs = if (s.firstTapAt > 0) s.firstTapAt - s.shownAt - s.awayAtFirstTap else 0L,
+            idleMs = s.maxIdle, rightToWrong = s.rightToWrong, wrongToRight = s.wrongToRight,
+            words = wordsOf(q, withOptions = !s.readingDrill), timed = s.timed))
     }
 
     fun moveTo(s: QuizSession, i: Int) {
         s.index = i.coerceIn(0, s.questions.size - 1)
         s.shownAt = System.currentTimeMillis()
+        s.resetTracking(s.shownAt)
     }
 
-    private fun attempt(q: Question, credit: Double, correct: Boolean, ms: Long, source: String) = Attempt(
+    private fun attempt(
+        q: Question, credit: Double, correct: Boolean, ms: Long, source: String,
+        firstTapMs: Long = 0, idleMs: Long = 0, rightToWrong: Int = 0, wrongToRight: Int = 0, words: Int = wordsOf(q), timed: Boolean = false,
+    ) = Attempt(
         qid = q.id, ecoTask = q.ecoTask, domain = q.domain, approach = q.approach, type = q.type,
-        credit = credit, correct = correct, ms = ms, at = System.currentTimeMillis(), source = source,
+        credit = credit, correct = correct, ms = ms.coerceAtLeast(0), at = System.currentTimeMillis(), source = source,
+        firstTapMs = firstTapMs.coerceAtLeast(0), idleMs = idleMs.coerceAtLeast(0), rightToWrong = rightToWrong,
+        wrongToRight = wrongToRight, words = words, timed = timed,
     )
+
+    /** Words to read: the stem, plus the options unless they're hidden (reading drill). */
+    private fun wordsOf(q: Question, withOptions: Boolean = true): Int {
+        val w = Regex("\\w+")
+        return w.findAll(q.stem).count() + if (withOptions) q.options.sumOf { w.findAll(it.text).count() } else 0
+    }
+
+    /** No touch for this long on a practice question brings up the gentle "take a breath" prompt. */
+    fun freezePromptMs(): Long {
+        val times = store.attempts.takeLast(100).filter { it.ms > 500 && !it.timed }.map { it.ms }.sorted()
+        val median = if (times.isEmpty()) 76_000L else times[times.size / 2]
+        return maxOf(150_000L, 3 * median)
+    }
 
     /* ── mock exam ───────────────────────────────────────────────────────── */
 
@@ -294,6 +366,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                     if (m.breakRemainingMs <= 0) endBreak()
                 } else {
                     m.remainingMs -= dt
+                    m.spentMs[m.current.id] = (m.spentMs[m.current.id] ?: 0L) + dt
                     if (m.remainingMs <= 0) { m.remainingMs = 0; submitMock(); break }
                 }
                 sinceSave += dt
@@ -302,8 +375,19 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    /** Set by the activity; the exam clock stops while the app is in the background. */
+    private var awaySince = 0L
+    /** Set by the activity. The exam clock stops while the app is in the background, and practice timings leave that time out. */
     var appVisible = true
+        set(v) {
+            val now = System.currentTimeMillis()
+            if (!v && field) awaySince = now
+            if (v && !field && awaySince > 0) {
+                val away = now - awaySince
+                listOfNotNull(practice, run?.current).forEach { it.awayMs += away; it.awayTotal += away }
+                awaySince = 0
+            }
+            field = v
+        }
 
     fun clearScorecard() {
         lastMock = null
@@ -313,6 +397,10 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun mockAnswer(q: Question, a: Answer) {
         val m = mock ?: return
         if (m.questions.indexOf(q) !in m.inSection) return
+        if (q.id !in m.firstTapMs) m.firstTapMs[q.id] = (m.spentMs[q.id] ?: 0L).coerceAtLeast(1L)
+        changeDirection(q, m.answers[q.id], a)?.let { up ->
+            if (up) m.wrongToRight[q.id] = (m.wrongToRight[q.id] ?: 0) + 1 else m.rightToWrong[q.id] = (m.rightToWrong[q.id] ?: 0) + 1
+        }
         m.answers[q.id] = a
         saveMock()
     }
@@ -369,11 +457,13 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             e[1]++
             if (r.correct) e[0]++
             // Only answered items feed history; a blank at the bell says nothing about the question.
-            if (Scoring.isAnswered(q, a)) store.record(attempt(q, r.credit, r.correct, perQ, Readiness.SOURCE_EXAM))
+            if (Scoring.isAnswered(q, a)) store.record(attempt(q, r.credit, r.correct, m.spentMs[q.id] ?: perQ, Readiness.SOURCE_EXAM,
+                firstTapMs = m.firstTapMs[q.id] ?: 0L, rightToWrong = m.rightToWrong[q.id] ?: 0, wrongToRight = m.wrongToRight[q.id] ?: 0, timed = true))
         }
         val result = MockResult(now, m.title, m.questions.size, right, m.durationMs - m.remainingMs.coerceAtLeast(0),
             dom.mapValues { it.value[0] to it.value[1] })
         store.recordMock(result)
+        store.recordSitting(SittingEvent("mock:${m.startedAt}", "mock", now, m.questions.size, m.answeredCount, true))
         lastMock = result
         finishedMock = m
         mock = null
@@ -381,6 +471,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun abandonMock() {
+        mock?.let { m -> if (m.answeredCount > 0) store.recordSitting(SittingEvent("mock:${m.startedAt}", "mock", System.currentTimeMillis(), m.questions.size, m.answeredCount, false)) }
         timerJob?.cancel()
         mock = null
         mockFile.delete()
@@ -503,14 +594,38 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         val date = p.examDate ?: return null
         val leeches = repo.extras.flashcards.filter { c -> c.ecoTask != null && store.cards[c.id]?.let { srs.isLeech(it) } == true }
             .groupingBy { it.ecoTask!! }.eachCount()
+        val f = fitness(now)
         return PlanEngine.build(PlanInput(repo.extras, store.attempts, store.lessonsDone, store.sessionResults,
             store.mocks, store.diagnostic, PlanSettings(date, p.hoursPerWeek, p.studyDays), now,
-            mistakeTags = store.mistakeTags.mapValues { it.value.cause }, leeches = leeches))
+            mistakeTags = store.mistakeTags.mapValues { it.value.cause }, leeches = leeches,
+            ladderNext = f.ladderNext, readingSlow = f.wpm?.let { it < ExamFitness.TARGET_WPM * 0.9 } == true))
+    }
+
+    /* ── exam fitness ────────────────────────────────────────────────────── */
+
+    fun fitness(now: Long = System.currentTimeMillis()): FitnessReport = ExamFitness.report(FitnessInput(
+        store.attempts, store.sittings, store.checkIns, store.sessionResults, store.plan.studyDays, store.plan.hoursPerWeek, now))
+
+    fun recordCheckIn(kind: String, value: Int, items: List<Int> = emptyList()) =
+        store.recordCheckIn(CheckIn(System.currentTimeMillis(), kind, value, items))
+
+    /** The weekly five-statement check is offered once a week, once you've started studying. */
+    fun weeklyCheckDue(now: Long = System.currentTimeMillis()): Boolean =
+        store.attempts.isNotEmpty() && store.checkIns.none { it.kind == "weekly" && now - it.at < 6 * PlanEngine.DAY }
+
+    /** Keeps this week's report current; last week's stays as it was when the week ended. */
+    private fun publishWeekly() {
+        val now = System.currentTimeMillis()
+        val tasks = PlanEngine.taskStates(repo.extras, store.attempts, now)
+        store.putWeekly(WeeklyReports.build(now, readiness.report(store, now), tasks.count { it.answers > 0 },
+            tasks.count { it.mastery == Mastery.MASTERED }, store.attempts, store.sessionResults, store.mocks, fitness(now)))
     }
 
     /** A session being played. Kept while the app runs, so closing it and coming back resumes at the same step. */
     class PathRun(val session: Session, val startedAt: Long, val mocksAtStart: Int) {
         var step by mutableStateOf(0)
+        /** The once-a-day "how do you feel" check-in has been answered or skipped. */
+        var checkedIn by mutableStateOf(false)
         val practices = ArrayList<QuizSession>()
         var current by mutableStateOf<QuizSession?>(null)
     }
@@ -519,7 +634,10 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         private set
 
     fun startSession(s: Session) {
-        if (run?.session?.key != s.key) run = PathRun(s, System.currentTimeMillis(), store.mocks.size)
+        if (run?.session?.key != s.key) run = PathRun(s, System.currentTimeMillis(), store.mocks.size).apply {
+            val today = PlanEngine.startOfDay(System.currentTimeMillis())
+            checkedIn = store.checkIns.any { it.kind == "pre" && PlanEngine.startOfDay(it.at) == today }
+        }
         navigate(Dest.SESSION)
     }
 
@@ -540,6 +658,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             PmpWidget.SYLLABUS -> navigate(Dest.LEARN)
             Reminders.SHORT -> (run?.session ?: plan()?.next)?.let { startSession(shortVersion(it)) }
             Reminders.CARDS -> { navigate(Dest.FLASHCARDS); startDeck(null) }
+            PmpWidget.FITNESS -> navigate(Dest.FITNESS)
+            PmpWidget.REPORTS -> navigate(Dest.REPORTS)
         }
     }
 
@@ -554,6 +674,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             readiness = readiness.report(store, now).score,
             lessonsDone = lessons.count { it.id in store.lessonsDone },
             lessonsTotal = lessons.size,
+            fitness = fitness(now).score ?: -1,
         ))
     }
 
@@ -648,7 +769,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             StepKind.PRACTICE -> if (r.current == null) {
                 val qs = questionsFor(r.session, st)
                 if (qs.isEmpty()) nextStep(r)
-                else QuizSession(r.session.title, qs).also { r.current = it; r.practices += it }
+                else QuizSession(r.session.title, qs, timed = st.timed, readingDrill = st.reading).also { r.current = it; r.practices += it }
             }
             else -> {}
         }
@@ -671,7 +792,11 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         return if (checked.isEmpty()) 1.0 else checked.sumOf { it.credit } / checked.size
     }
 
+    private fun pathQuestions(r: PathRun) = r.session.steps.filter { it.kind == StepKind.PRACTICE }.sumOf { it.count }
+    private fun pathAnswered(r: PathRun) = r.practices.sumOf { it.checkedCount }
+
     fun finishSession(r: PathRun) {
+        store.recordSitting(SittingEvent(r.session.key, "path", System.currentTimeMillis(), pathQuestions(r), pathAnswered(r), true))
         val minutes = ((System.currentTimeMillis() - r.startedAt) / 60_000).toInt().coerceIn(5, r.session.minutes.coerceAtLeast(5))
         store.recordSession(SessionResult(r.session.key, r.session.kind, r.session.taskId, r.session.domain, sessionScore(r), minutes, System.currentTimeMillis()))
         run = null
@@ -681,6 +806,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Leaves the player; the run is kept so Continue resumes it. */
     fun closeSession() {
+        run?.let { r -> if (pathAnswered(r) > 0) store.recordSitting(SittingEvent(r.session.key, "path", System.currentTimeMillis(), pathQuestions(r), pathAnswered(r), false)) }
         cardQueue = null
         back()
     }

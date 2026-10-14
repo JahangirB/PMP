@@ -174,8 +174,8 @@ object Reminders {
                 n.addAction(0, "Not today", notTodayIntent(ctx, id))
             }
             ReminderKind.SUMMARY -> {
-                n.setContentIntent(open(ctx, id, PmpWidget.READY, 0))
-                n.addAction(0, "See analytics", open(ctx, id, PmpWidget.READY, 1))
+                n.setContentIntent(open(ctx, id, PmpWidget.REPORTS, 0))
+                n.addAction(0, "See the weekly report", open(ctx, id, PmpWidget.REPORTS, 1))
             }
         }
         NotificationManagerCompat.from(ctx).notify(NOTIFICATION_ID + p.kind.ordinal, n.build())

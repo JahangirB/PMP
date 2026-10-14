@@ -67,6 +67,7 @@ A 5×1 widget (`widget/PmpWidget.kt`, built with Glance) shows four clay tiles:
 
 | Tile | Shows | Tap opens |
 |---|---|---|
+| Fitness | Exam fitness out of 100 | Exam fitness |
 | Days left | Days to your exam date | Plan and schedule |
 | Today | Minutes studied against today's plan, as a percentage with a bar | Today's session, or resumes the one in progress |
 | Ready | The readiness score out of 100 | Analytics |
@@ -118,6 +119,33 @@ also:
 
 Practice questions lean toward your weakest approach (predictive, agile or hybrid) when it is
 clearly behind (`data/QuestionPicker.kt`). `PlanEngineTest` and `GapsTest` cover each of these.
+
+## Exam fitness and weekly reports
+
+Exam fitness (`data/ExamFitness.kt`, tested in `ExamFitnessTest`) asks whether you can *sit* the
+exam, not whether you know it. It is behaviour-based and never a diagnosis.
+
+- **Stamina 40%**: longest sitting (180 = full), accuracy fade and pace drift between the first
+  and last quarter of long sittings, and long sittings finished rather than abandoned. Scored once
+  there are two sittings of 40+ questions.
+- **Composure 35%**: reading pace (words before the first tap; about 200 a minute leaves ~30 s of a
+  ~76 s budget to decide on a typical 150-word question), freezes (no touch for over 3× your usual
+  time and 2½ minutes), rushing after a slow question, accuracy against the clock versus relaxed,
+  and right-to-wrong answer changes.
+- **Consistency 25%**: regular days, hours kept, momentum (this week against the three before),
+  sessions finished, bouncing back after breaks.
+- Training follows from it: a weekly stamina-ladder sitting (20 → 45 → 70 → 100 → 140 → 180,
+  moving up when the last quarter holds), reading drills (scenario first, options after), a
+  gentle prompt after a long freeze in practice, pacing checkpoints at questions 60 and 120,
+  a first-instinct debrief, a write-it-down option before mocks, and lighter weeks when momentum
+  falls.
+- Optional check-ins: one tap before the day's first session and after a mock, and a weekly
+  five-statement check. Three weeks of high worry bring a gentle suggestion to talk to someone.
+- The widget's fifth tile shows the score.
+
+Weekly reports (`data/WeeklyReport.kt`) keep one report per Monday-to-Sunday week, compare every
+figure with the week before or the first week (▲ better, ▼ worse), and draw trend lines. The
+Sunday reminder opens them.
 
 ## How the path adapts
 

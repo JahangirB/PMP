@@ -77,6 +77,8 @@ fun PathScreen(vm: PmpViewModel) {
     val coachLine = remember(rev) { vm.coach().report(now).messages.firstOrNull() }
     val ctx = LocalContext.current
     val remindersAsked = remember(rev) { com.jahangirb.pmpprep.reminders.Reminders.load(ctx).settings.asked }
+    val fit = remember(rev) { vm.fitness(now) }
+    var weeklyOpen by remember { mutableStateOf(false) }
 
     LazyColumn(Modifier.fillMaxSize().padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
@@ -86,7 +88,27 @@ fun PathScreen(vm: PmpViewModel) {
                     Text(if (plan.daysLeft > 0) "${plan.daysLeft} days to the exam" else "Exam day", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold)
                     Text("${plan.phase} · readiness ${report.score} · ${streak.current}-day streak", fontSize = 13.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Exam fitness ${fit.score?.let { "$it" } ?: "–"} · weekly report", fontSize = 13.sp, fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.clickable { vm.navigate(com.jahangirb.pmpprep.ui.Dest.FITNESS) }.padding(vertical = 6.dp))
                 }
+            }
+        }
+
+        // Momentum falling: a lighter week of minimum days, not catch-up pressure.
+        if (fit.momentumLow) item {
+            PmpCard(container = MaterialTheme.colorScheme.secondaryContainer) {
+                Text("A lighter week", fontWeight = FontWeight.Bold)
+                Text("Your study time has dropped from recent weeks. That happens. For now, a minimum day counts: 10 cards or 10 questions. The rhythm matters more than the amount.",
+                    fontSize = 13.sp, lineHeight = 18.sp)
+                next?.let { n -> TextButton(onClick = { vm.startSession(vm.shortVersion(n)) }) { Text("Start a 15-minute version") } }
+            }
+        }
+        if (vm.weeklyCheckDue(now)) item {
+            PmpCard {
+                Text("Weekly check · 30 seconds", fontWeight = FontWeight.Bold)
+                Text("Five statements about how the exam feels. It shows whether worry eases as you prepare.", fontSize = 13.sp)
+                TextButton(onClick = { weeklyOpen = true }) { Text("Take it") }
             }
         }
 
@@ -213,6 +235,7 @@ fun PathScreen(vm: PmpViewModel) {
             dismissButton = { TextButton(onClick = { ahead = null }) { Text("Not now") } },
         )
     }
+    if (weeklyOpen) WeeklyCheckDialog(onDone = { vm.recordCheckIn("weekly", 0, it); weeklyOpen = false }, onDismiss = { weeklyOpen = false })
 }
 
 private fun dayLabel(day: Long, today: Long): String = when ((day - today + PlanEngine.DAY / 2) / PlanEngine.DAY) {
