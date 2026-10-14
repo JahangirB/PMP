@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -131,6 +134,7 @@ private fun CoachToday(vm: PmpViewModel) {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun CoachChat(vm: PmpViewModel) {
     if (vm.geminiKey.isEmpty()) { KeySetup(vm); return }
@@ -138,7 +142,8 @@ private fun CoachChat(vm: PmpViewModel) {
     LaunchedEffect(vm.geminiKey) { vm.loadModels() }
     val list = rememberLazyListState()
     val chat = vm.store.chat.toList()
-    LaunchedEffect(chat.size, vm.aiBusy, rev) { if (chat.isNotEmpty()) list.animateScrollToItem(chat.size + 1) }
+    val typing = WindowInsets.isImeVisible
+    LaunchedEffect(chat.size, vm.aiBusy, rev, typing) { if (chat.isNotEmpty()) list.animateScrollToItem(chat.size + 1) }
 
     Column(Modifier.fillMaxSize().imePadding()) {
         LazyColumn(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 12.dp), state = list, verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -168,7 +173,8 @@ private fun CoachChat(vm: PmpViewModel) {
                 Spacer(Modifier.height(4.dp))
             }
         }
-        Row(Modifier.horizontalScroll(rememberScrollState()).padding(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        // While typing, the conversation needs the room more than the shortcuts do.
+        if (!WindowInsets.isImeVisible) Row(Modifier.horizontalScroll(rememberScrollState()).padding(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             listOf(
                 "How am I doing?" to REVIEW_PROMPT,
                 "What should I improve?" to "What are the three weakest areas in my figures, and exactly what should I do about each this week in this app?",
