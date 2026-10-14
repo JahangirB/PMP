@@ -42,6 +42,10 @@ import com.jahangirb.pmpprep.data.ScenarioRun
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.data.Srs
 import com.jahangirb.pmpprep.data.WidgetStats
+import com.jahangirb.pmpprep.data.Mastery
+import com.jahangirb.pmpprep.data.ReminderBrain
+import com.jahangirb.pmpprep.data.ReminderSnapshot
+import com.jahangirb.pmpprep.reminders.Reminders
 import com.jahangirb.pmpprep.widget.PmpWidget
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.Dispatchers
@@ -116,7 +120,13 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 restoreMock()
                 ready = true
                 // Keep the home-screen widget current: a second after progress settles.
-                launch { store.revision.collectLatest { delay(1000); runCatching { publishWidget() } } }
+                launch {
+                    store.revision.collectLatest {
+                        delay(1000)
+                        runCatching { publishWidget() }
+                        runCatching { publishReminders() }
+                    }
+                }
             } catch (e: Exception) {
                 loadError = e.message ?: e.toString()
             }
@@ -523,6 +533,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             PmpWidget.TODAY -> (run?.session ?: plan()?.next)?.let { startSession(it) }
             PmpWidget.READY -> navigate(Dest.ANALYTICS)
             PmpWidget.SYLLABUS -> navigate(Dest.LEARN)
+            Reminders.SHORT -> (run?.session ?: plan()?.next)?.let { startSession(shortVersion(it)) }
+            Reminders.CARDS -> { navigate(Dest.FLASHCARDS); startDeck(null) }
         }
     }
 
@@ -538,6 +550,60 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             lessonsDone = lessons.count { it.id in store.lessonsDone },
             lessonsTotal = lessons.size,
         ))
+    }
+
+    /* ── smart reminders ─────────────────────────────────────────────────── */
+
+    /** Hands the reminders what they need to write themselves while the app is closed, then re-sets today's alarms. */
+    private suspend fun publishReminders() {
+        val now = System.currentTimeMillis()
+        val snapshot = reminderSnapshot(now)
+        val results = store.sessionResults.toList()
+        val attempts = store.attempts.toList()
+        withContext(Dispatchers.IO) { Reminders.publish(getApplication(), snapshot, results, attempts) }
+    }
+
+    private fun reminderSnapshot(now: Long): ReminderSnapshot {
+        val p = plan(now)
+        val next = run?.session ?: p?.next
+        val today = PlanEngine.startOfDay(now)
+        val weekAhead = p?.sessions?.filter { it.day > today && it.day <= today + 7 * PlanEngine.DAY }.orEmpty()
+        val focus = weekAhead.mapNotNull { it.domain }.groupingBy { it }.eachCount().maxByOrNull { it.value }?.key
+            ?.let { "${it.title} domain" + if (weekAhead.any { s -> s.kind == SessionKind.MOCK }) " and a full mock" else "" }
+        return ReminderSnapshot(
+            day = today,
+            nextTitle = next?.title,
+            nextMinutes = next?.minutes ?: 0,
+            nextWhat = next?.let { describeSteps(it) },
+            cardsDue = deckCounts(null).due,
+            streak = readiness.streak(store, now).current,
+            studyDays = store.plan.studyDays,
+            todayMinutes = WidgetStats.minutesToday(store.sessionResults, store.attempts, now),
+            targetMinutes = p?.minutesPerDay ?: 0,
+            lastStudyAt = maxOf(store.attempts.maxOfOrNull { it.at } ?: 0L, store.sessionResults.maxOfOrNull { it.at } ?: 0L),
+            finalWeek = next?.kind == SessionKind.TAPER,
+            readiness = readiness.report(store, now).score,
+            mastered = p?.tasks?.count { it.mastery == Mastery.MASTERED } ?: 0,
+            weekMinutes = ReminderBrain.studyMinutes(store.sessionResults, store.attempts, now - 7 * PlanEngine.DAY, now),
+            nextWeekFocus = focus,
+        )
+    }
+
+    /** "Warm-up cards, a lesson and 15 questions" */
+    private fun describeSteps(s: Session): String {
+        val parts = s.steps.mapNotNull {
+            when (it.kind) {
+                StepKind.CARDS -> "warm-up cards"
+                StepKind.LESSON -> "a lesson"
+                StepKind.PRACTICE -> "${it.count} questions"
+                StepKind.SCENARIOS -> "${it.count} scenarios"
+                StepKind.MOCK -> "a full mock exam"
+                StepKind.REFLECT -> "a quick reflect"
+                StepKind.DEBRIEF -> null
+            }
+        }
+        val text = if (parts.size > 1) parts.dropLast(1).joinToString(", ") + " and " + parts.last() else parts.firstOrNull().orEmpty()
+        return text.replaceFirstChar { it.uppercase() }
     }
 
     /** A 15-minute version of a session for a short day: warm-up cards and 10 questions on the same ground. */

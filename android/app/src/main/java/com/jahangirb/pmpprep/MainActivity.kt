@@ -30,6 +30,7 @@ import com.jahangirb.pmpprep.data.StepKind
 import com.jahangirb.pmpprep.ui.theme.ClayBackdrop
 import com.jahangirb.pmpprep.ui.theme.ClayRim
 import com.jahangirb.pmpprep.widget.PmpWidget
+import com.jahangirb.pmpprep.reminders.Reminders
 import androidx.compose.foundation.background
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -117,19 +118,32 @@ class MainActivity : ComponentActivity() {
         widgetTarget(intent)
     }
 
-    /** A tap on one of the home-screen widget's tiles names the screen to open. */
+    /** A tap on a widget tile or a reminder names the screen to open; a reminder also notes that it worked. */
     private fun widgetTarget(i: Intent?) {
-        i?.getStringExtra(PmpWidget.OPEN)?.let { vm.pendingOpen = it }
+        if (i == null) return
+        i.getStringExtra(PmpWidget.OPEN)?.let { vm.pendingOpen = it }
+        val reminder = i.getLongExtra(Reminders.EXTRA_REMINDER, 0L)
+        if (reminder > 0) {
+            i.removeExtra(Reminders.EXTRA_REMINDER)
+            Reminders.opened(this, reminder)
+        }
     }
+
+    /** When the app came to the front, for "how long is it open at each hour". */
+    private var frontSince = 0L
 
     override fun onStart() {
         super.onStart()
         vm.appVisible = true
+        frontSince = System.currentTimeMillis()
+        // Opening the app on your own soon after a reminder also counts as answering it.
+        Reminders.opened(this, null)
     }
 
     override fun onStop() {
         vm.appVisible = false
         vm.saveMock()
+        if (frontSince > 0) Reminders.foreground(this, frontSince)
         super.onStop()
     }
 
