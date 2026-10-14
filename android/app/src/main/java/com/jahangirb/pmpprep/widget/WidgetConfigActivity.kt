@@ -128,7 +128,7 @@ private fun Preview(s: ColorScheme) {
         Modifier.fillMaxWidth().height(60.dp).background(s.surface, RoundedCornerShape(24.dp)).padding(5.dp),
         horizontalArrangement = Arrangement.spacedBy(5.dp),
     ) {
-        listOf(Triple("42", "days left", null), Triple("58%", "today", 0.58f), Triple("68", "ready", null), Triple("53%", "syllabus", 0.53f)).forEach { (v, l, p) ->
+        listOf(Triple("42", "days left", null), Triple("58%", "today", 0.58f), Triple("68", "ready", null), Triple("53%", "syllabus", 0.53f), Triple("62", "fitness", null)).forEach { (v, l, p) ->
             Box(Modifier.weight(1f).fillMaxSize().background(s.secondaryContainer, RoundedCornerShape(19.dp)), contentAlignment = Alignment.Center) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(v, color = s.onSurface, fontSize = 15.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Monospace)

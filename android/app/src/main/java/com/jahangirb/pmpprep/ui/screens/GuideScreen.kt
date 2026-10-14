@@ -139,6 +139,31 @@ fun GuideScreen(vm: PmpViewModel) {
         }
 
         item {
+            Section("Exam fitness: ready to sit it") {
+                Bullets(
+                    "Readiness asks whether you know the material. Exam fitness asks whether you can sit for four hours, read 180 long questions calmly, and keep preparing until the day.",
+                    "Stamina (40%): your longest sitting, how much accuracy fades and pace drifts in the last quarter of long sittings, and whether you finish them.",
+                    "Composure (35%): reading speed (about ${com.jahangirb.pmpprep.data.ExamFitness.TARGET_WPM.toInt()} words a minute leaves time to decide), freezes, rushing after a slow question, accuracy against the clock, and changing right answers to wrong.",
+                    "Consistency (25%): regular days, hours kept, the trend in your weekly minutes, finishing sessions, and bouncing back after breaks.",
+                    "It trains what it finds: a weekly stamina sitting that climbs 20 → 45 → 70 → 100 → 140 → 180 questions, reading drills, a gentle prompt after a long freeze in practice, pacing checkpoints, and lighter weeks when momentum dips.",
+                    "Optional check-ins (one tap before a session or after a mock, and five statements once a week) show how feelings and study relate. It describes what you did; it isn't a diagnosis.",
+                )
+                TextButton(onClick = { vm.navigate(Dest.FITNESS) }) { Text("See your exam fitness") }
+            }
+        }
+
+        item {
+            Section("Weekly reports") {
+                Bullets(
+                    "Every week (Monday to Sunday) is kept as a report: readiness, accuracy, tasks, mocks, exam fitness, reading pace, longest sitting, minutes and days.",
+                    "Each figure is compared with the week before, or with your first week, and marked better or worse. Trend lines show the weeks together.",
+                    "The Sunday evening reminder opens it.",
+                )
+                TextButton(onClick = { vm.navigate(Dest.REPORTS) }) { Text("See your weekly reports") }
+            }
+        }
+
+        item {
             Section("The other checks") {
                 Bullets(
                     "Diagnostic: 25 questions taken cold (8 People, 10 Process, 7 Business). It sets which domain comes first until you have enough practice there.",

@@ -72,7 +72,7 @@ fun PracticeScreen(vm: PmpViewModel) {
     val s = vm.practice
     if (s == null) PracticeSetup(vm)
     else if (s.finished) QuizResults(vm, s, onAgain = { vm.practice = null })
-    else QuizRunner(vm, s, onFinish = { s.finished = true })
+    else QuizRunner(vm, s, onFinish = { vm.finishQuiz(s) })
 }
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -192,11 +192,39 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
 
         Column(Modifier.weight(1f).verticalScroll(scroll).padding(16.dp)) {
             if (!revealed && !s.reviewOnly) {
-                PacingBar(((now - s.shownAt) / 1000).coerceAtLeast(0), vm.repo.extras.practicePaceSec)
+                PacingBar(((now - s.shownAt - s.awayMs) / 1000).coerceAtLeast(0), vm.repo.extras.practicePaceSec)
                 Spacer(Modifier.height(12.dp))
             }
+            // Long sittings: a checkpoint at questions 60 and 120, so the clock feels known rather than looming.
+            if (!s.reviewOnly && !s.diagnostic && s.questions.size >= 60 && (s.index == 60 || s.index == 120) && !revealed) {
+                val used = ((now - s.startedAt - s.awayTotal) / 60_000).toInt()
+                val exam = s.index * 76 / 60
+                PmpCard(container = MaterialTheme.colorScheme.primaryContainer) {
+                    Text("Checkpoint: ${s.index} questions done", fontWeight = FontWeight.Bold)
+                    Text(if (used <= exam) "$used minutes so far; exam pace is $exam. You're on pace." else "$used minutes so far; exam pace is $exam. Take the next ones at your usual speed, not faster.",
+                        fontSize = 13.sp)
+                }
+                Spacer(Modifier.height(10.dp))
+            }
+            // A long stop on a question in practice (never in mocks or the diagnostic): one gentle prompt.
+            val freezeAt = remember(q.id) { vm.freezePromptMs() }
+            var calmed by remember(q.id) { mutableStateOf(false) }
+            if (!revealed && !s.reviewOnly && !s.diagnostic && !calmed && now - s.lastTouchAt - (s.awayMs - s.awayAtLastTouch) > freezeAt) {
+                PmpCard(container = MaterialTheme.colorScheme.secondaryContainer) {
+                    Text("Take a breath.", fontWeight = FontWeight.Bold)
+                    Text("Breathe out slowly. Read the last sentence first: what is it asking? Then rule out two options.", fontSize = 13.sp, lineHeight = 18.sp)
+                    TextButton(onClick = { calmed = true }) { Text("OK") }
+                }
+                Spacer(Modifier.height(10.dp))
+            }
             QuestionHeader(q, task?.let { "${it.code} · ${it.label}" })
-            QuestionBody(q, s.order[q.id] ?: q.options, s.answers[q.id], revealed) { a -> vm.answer(s, q, a) }
+            if (!s.optionsShown && !revealed) {
+                // Reading drill: the scenario alone first.
+                Text("Before the options: what is this question asking you to decide?", fontSize = 14.sp, fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary)
+                Spacer(Modifier.height(8.dp))
+                Button(onClick = { vm.showOptions(s) }, modifier = Modifier.fillMaxWidth()) { Text("I know what it's asking: show the options") }
+            } else QuestionBody(q, s.order[q.id] ?: q.options, s.answers[q.id], revealed) { a -> vm.answer(s, q, a) }
             if (result != null) {
                 Spacer(Modifier.height(14.dp))
                 Feedback(q, result, Scoring.isAnswered(q, s.answers[q.id]))
@@ -259,6 +287,10 @@ fun QuizResults(vm: PmpViewModel, s: QuizSession, onAgain: () -> Unit) {
             Text(pct(score), fontSize = 44.sp, fontWeight = FontWeight.Black,
                 color = if (score >= 0.7) ColorSuccess else if (score >= 0.6) ColorWarning else ColorError)
             Text("$right of ${checked.size} checked answers correct", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        if (s.totalRightToWrong + s.totalWrongToRight > 0) PmpCard {
+            Text("Changed answers: ${s.totalWrongToRight} wrong → right, ${s.totalRightToWrong} right → wrong.", fontSize = 14.sp, fontWeight = FontWeight.Bold)
+            if (s.totalRightToWrong > s.totalWrongToRight) Text("Your first instinct was right more often than your changes.", fontSize = 13.sp)
         }
         PmpCard {
             SectionLabel("By domain")

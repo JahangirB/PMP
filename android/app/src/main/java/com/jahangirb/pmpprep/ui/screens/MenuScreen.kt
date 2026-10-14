@@ -16,6 +16,8 @@ import androidx.compose.material.icons.automirrored.filled.LibraryBooks
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.automirrored.filled.Notes
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
+import androidx.compose.material.icons.filled.SelfImprovement
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Assignment
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Calculate
@@ -87,6 +89,8 @@ fun MenuScreen(vm: PmpViewModel) {
         ),
         "My progress" to listOf(
             Entry(Icons.Default.AutoAwesome, "Coach", if (vm.geminiKey.isEmpty()) "How you're doing; connect Gemini to chat" else "How you're doing, and Gemini chat") { vm.coachTab = 0; vm.navigate(Dest.COACH) },
+            Entry(Icons.Default.SelfImprovement, "Exam fitness", "Stamina, composure and consistency") { vm.navigate(Dest.FITNESS) },
+            Entry(Icons.Default.DateRange, "Weekly reports", "Each week compared with the one before") { vm.navigate(Dest.REPORTS) },
             Entry(Icons.Default.Insights, "Analytics", "Readiness ${vm.readiness.report(vm.store).score}, by task and type") { vm.navigate(Dest.ANALYTICS) },
             Entry(Icons.Default.ErrorOutline, "Mistake journal", "Tag causes, retry") { vm.navigate(Dest.MISTAKES) },
             Entry(Icons.AutoMirrored.Filled.Notes, "Notes", "Your notes page, also in the coach bubble") { vm.coachTab = 2; vm.navigate(Dest.COACH) },
