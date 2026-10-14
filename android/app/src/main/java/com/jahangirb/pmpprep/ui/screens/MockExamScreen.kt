@@ -35,6 +35,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -44,6 +45,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -52,7 +55,9 @@ import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.Domain
 import com.jahangirb.pmpprep.data.MockResult
 import com.jahangirb.pmpprep.data.Scoring
+import com.jahangirb.pmpprep.ui.Focus
 import com.jahangirb.pmpprep.ui.MockSession
+import com.jahangirb.pmpprep.ui.components.BreathingReset
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.BulletList
 import com.jahangirb.pmpprep.ui.components.PmpCard
@@ -74,6 +79,16 @@ import java.util.Date
 fun MockExamScreen(vm: PmpViewModel) {
     val m = vm.mock
     val review = vm.mockReview
+    // Focus mode: Do Not Disturb and the screen kept awake while the exam is on screen.
+    if (m != null && vm.focusMock) {
+        val ctx = LocalContext.current
+        val view = LocalView.current
+        DisposableEffect(Unit) {
+            Focus.begin(ctx)
+            view.keepScreenOn = true
+            onDispose { Focus.end(ctx); view.keepScreenOn = false }
+        }
+    }
     when {
         m != null && m.onBreak -> BreakScreen(vm, m)
         m != null -> ExamRunner(vm, m)
@@ -95,6 +110,10 @@ private fun band(p: Double): Pair<String, Color> = when {
 @Composable
 private fun MockIntro(vm: PmpViewModel) {
     val rev by vm.revision.collectAsState()
+    var offer by remember { mutableStateOf<Int?>(null) }
+    var breathing by remember { mutableStateOf(false) }
+    if (breathing) { BreathingReset { breathing = false }; return }
+    offer?.let { n -> FocusDialog(vm, onStart = { focus -> offer = null; vm.changeFocusMock(focus); vm.startMock(n) }, onDismiss = { offer = null }) }
     val x = vm.repo.extras.exam
     val pool = remember(vm.contentVersion) { vm.pool().size }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -119,7 +138,10 @@ private fun MockIntro(vm: PmpViewModel) {
             SectionLabel("Before you start (optional)")
             Text("Nervous about it? Spend about 10 minutes writing down exactly what worries you about this sitting. Getting it on paper frees up the attention it was using. Nothing you write is saved.",
                 fontSize = 13.sp, lineHeight = 19.sp)
-            if (!writing) TextButton(onClick = { writing = true }) { Text("Write it down") }
+            if (!writing) Row {
+                TextButton(onClick = { writing = true }) { Text("Write it down") }
+                TextButton(onClick = { breathing = true }) { Text("Two-minute breathing reset") }
+            }
             else {
                 androidx.compose.material3.OutlinedTextField(value = worries, onValueChange = { worries = it }, minLines = 5,
                     placeholder = { Text("What's on your mind about this exam?") }, modifier = Modifier.fillMaxWidth())
@@ -134,7 +156,7 @@ private fun MockIntro(vm: PmpViewModel) {
         )
         sizes.forEach { (n, label) ->
             val minutes = Math.round(x.minutes.toDouble() * n / x.totalItems)
-            Button(onClick = { vm.startMock(n) }, enabled = pool > 0, modifier = Modifier.fillMaxWidth().height(52.dp)) {
+            Button(onClick = { if (vm.focusOffer) offer = n else vm.startMock(n) }, enabled = pool > 0, modifier = Modifier.fillMaxWidth().height(52.dp)) {
                 Text("$label · $n questions · $minutes min", fontWeight = FontWeight.Bold)
             }
         }
@@ -143,6 +165,39 @@ private fun MockIntro(vm: PmpViewModel) {
             vm.store.mocks.sortedByDescending { it.at }.forEach { r -> HistoryRow(r) }
         }
     }
+}
+
+/** Offered when a mock starts: Do Not Disturb until you finish, and the screen kept awake. */
+@Composable
+private fun FocusDialog(vm: PmpViewModel, onStart: (Boolean) -> Unit, onDismiss: () -> Unit) {
+    val ctx = LocalContext.current
+    var access by remember { mutableStateOf(Focus.hasAccess(ctx)) }
+    // Coming back from Settings: check again.
+    val lifecycle = androidx.compose.ui.platform.LocalLifecycleOwner.current
+    DisposableEffect(lifecycle) {
+        val obs = androidx.lifecycle.LifecycleEventObserver { _, e -> if (e == androidx.lifecycle.Lifecycle.Event.ON_RESUME) access = Focus.hasAccess(ctx) }
+        lifecycle.lifecycle.addObserver(obs)
+        onDispose { lifecycle.lifecycle.removeObserver(obs) }
+    }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Focus mode?") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("Silence notifications with Do Not Disturb while the exam is on screen, and keep the screen awake. Both go back to normal when you finish, pause or leave it.")
+                if (!access) Text("Do Not Disturb needs a one-time switch: Settings › Do Not Disturb access › PMP Prep. Without it, focus mode only keeps the screen awake.",
+                    fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                TextButton(onClick = { vm.changeFocusOffer(false); onStart(false) }) { Text("Don't ask again") }
+            }
+        },
+        confirmButton = {
+            Row {
+                if (!access) TextButton(onClick = { runCatching { ctx.startActivity(Focus.accessIntent()) } }) { Text("Allow access") }
+                TextButton(onClick = { onStart(true) }) { Text("Start in focus mode", fontWeight = FontWeight.Bold) }
+            }
+        },
+        dismissButton = { TextButton(onClick = { onStart(false) }) { Text("Start without") } },
+    )
 }
 
 @Composable
@@ -197,8 +252,9 @@ private fun ExamRunner(vm: PmpViewModel, m: MockSession) {
             }
         }
         Column(Modifier.weight(1f).verticalScroll(scroll).padding(16.dp)) {
-            QuestionHeader(q, vm.repo.task(q.ecoTask)?.let { "${it.code} · ${it.label}" })
-            QuestionBody(q, m.order[q.id] ?: q.options, m.answers[q.id], revealed = false) { a -> vm.mockAnswer(q, a) }
+            QuestionHeader(q, vm.repo.task(q.ecoTask)?.let { "${it.code} · ${it.label}" }, m.marks[q.id]) { w -> vm.mockMarks(q, w) }
+            QuestionBody(q, m.order[q.id] ?: q.options, m.answers[q.id], revealed = false, struck = m.struck[q.id].orEmpty(),
+                onStrike = { id -> vm.mockStrike(q, id) }) { a -> vm.mockAnswer(q, a) }
             Spacer(Modifier.height(24.dp))
             TextButton(onClick = { leave = true }) { Text("Leave or abandon this exam") }
         }

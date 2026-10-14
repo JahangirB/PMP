@@ -40,6 +40,8 @@ import com.jahangirb.pmpprep.data.RootCause
 import com.jahangirb.pmpprep.data.StepKind
 import com.jahangirb.pmpprep.ui.Dest
 import com.jahangirb.pmpprep.ui.PmpViewModel
+import com.jahangirb.pmpprep.ui.components.BreathingReset
+import com.jahangirb.pmpprep.ui.components.ClayOutlinedButton as OutlinedButton
 import com.jahangirb.pmpprep.ui.components.PmpCard
 import com.jahangirb.pmpprep.ui.components.SectionLabel
 import com.jahangirb.pmpprep.ui.components.pct
@@ -70,11 +72,28 @@ fun SessionScreen(vm: PmpViewModel) {
             }
         }
         Box(Modifier.weight(1f)) {
+            var offer by remember(r) { mutableStateOf(false) }
+            var breathing by remember(r) { mutableStateOf(false) }
             // Once a day, before the first session: how do you feel about studying right now? (optional)
             if (!r.checkedIn && r.step == 0) Column(Modifier.padding(16.dp)) {
-                CheckInRow("How do you feel about studying right now?", onPick = { vm.recordCheckIn("pre", it); r.checkedIn = true }, onSkip = { r.checkedIn = true })
+                CheckInRow("How do you feel about studying right now?", onPick = { vm.recordCheckIn("pre", it); r.checkedIn = true; offer = it <= 2 },
+                    onSkip = { r.checkedIn = true })
+            } else if (breathing) BreathingReset { breathing = false }
+            else if (offer) Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                PmpCard {
+                    Text("Want a two-minute reset first?", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    Text("Slow breathing before you start makes the first questions easier to read. Optional.", fontSize = 13.sp, lineHeight = 18.sp)
+                    Spacer(Modifier.height(8.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Button(onClick = { offer = false; breathing = true }, modifier = Modifier.weight(1f)) { Text("Breathe for 2 minutes") }
+                        OutlinedButton(onClick = { offer = false }, modifier = Modifier.weight(1f)) { Text("Skip") }
+                    }
+                }
             } else when (st?.kind) {
-                StepKind.CARDS -> if (vm.cardQueue != null) CardSession(vm) { vm.nextStep(r) }
+                StepKind.CARDS -> when {
+                    vm.cardQueue != null -> CardSession(vm) { vm.cardsDone(r) }
+                    r.review != null -> QuizRunner(vm, r.review!!, onFinish = { vm.nextStep(r) })
+                }
                 StepKind.LESSON -> LessonStep(vm, r)
                 StepKind.PRACTICE -> r.current?.let { q -> QuizRunner(vm, q, onFinish = { vm.nextStep(r) }) }
                 StepKind.REFLECT -> ReflectStep(vm, r)

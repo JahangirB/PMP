@@ -42,11 +42,23 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      # The Listen-mode voice and speech library (pinned and checked by fetchVoice), kept between builds.
+      - uses: actions/cache@v4
+        with:
+          path: android/.voice-cache
+          key: voice-sherpa-1.13.8-kokoro-int8-en-v0_19
+
       - name: Test and build the APK
         working-directory: android
         env:
           VERSION_CODE: ${{ github.run_number }}
-        run: ./gradlew --no-daemon --stacktrace testDebugUnitTest assembleRelease
+        # Compiler errors and failed tests are also raised as annotations, so they show on the run's summary.
+        run: |
+          set -o pipefail
+          ./gradlew --no-daemon --stacktrace testDebugUnitTest assembleRelease 2>&1 | tee build.log || {
+            grep -E '^e: |FAILED|AssertionError|ComparisonFailure' build.log | head -40 | sed 's/^/::error::/'
+            exit 1
+          }
 
       - name: Name the APK
         run: cp android/app/build/outputs/apk/release/app-release.apk PMP-Prep.apk

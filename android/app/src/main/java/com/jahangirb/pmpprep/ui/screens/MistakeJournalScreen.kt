@@ -51,7 +51,9 @@ fun MistakeJournalScreen(vm: PmpViewModel) {
     var cause by rememberSaveable { mutableStateOf<String?>(null) }
     var tagging by remember { mutableStateOf<Question?>(null) }
     val missed = remember(rev, vm.contentVersion) {
-        vm.store.last.values.filter { !it.correct }.sortedByDescending { it.at }.mapNotNull { vm.repo.byId[it.qid] }
+        // Sure-but-wrong first: the most dangerous kind of mistake on exam day.
+        vm.store.last.values.filter { !it.correct }.sortedWith(compareByDescending<com.jahangirb.pmpprep.data.Attempt> { it.sureWrong }.thenByDescending { it.at })
+            .mapNotNull { vm.repo.byId[it.qid] }
     }
     val shown = missed.filter { q ->
         when (cause) {
@@ -89,7 +91,8 @@ fun MistakeJournalScreen(vm: PmpViewModel) {
             PmpCard {
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     DomainChip(q.domain)
-                    if (task != null) Pill(task.label, MaterialTheme.colorScheme.onSurfaceVariant)
+                    if (vm.store.last[q.id]?.sureWrong == true) Pill("You were sure", ColorError)
+                    if (task != null) Pill(task.label, MaterialTheme.colorScheme.onSurfaceVariant, Modifier.weight(1f, fill = false))
                 }
                 Spacer(Modifier.height(6.dp))
                 Text(q.stem, fontSize = 14.sp, lineHeight = 20.sp, maxLines = 4, overflow = TextOverflow.Ellipsis)

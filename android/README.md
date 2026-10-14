@@ -147,6 +147,40 @@ Weekly reports (`data/WeeklyReport.kt`) keep one report per Monday-to-Sunday wee
 figure with the week before or the first week (▲ better, ▼ worse), and draw trend lines. The
 Sunday reminder opens them.
 
+## Study tools
+
+- **Confidence** (`Attempt.confidence`): with an answer ready, Sure / Think so / Guess checks it.
+  Right guesses are left out of mastery; sure-but-wrong answers lead the mistake journal. Weekly
+  reports count both. Not asked in mocks; can be switched off.
+- **Strike out and highlight**: long-press an option to cross it out, long-press and drag over the
+  question to highlight words. In practice and mocks (saved with a paused mock). Practice results
+  compare accuracy with and without crossing out.
+- **Missed questions come back** (`data/QuestionReview.kt`): 1, 3, 7 and 21 days after a miss;
+  only a right, non-guess answer on or after the due day moves it on. Up to 5 a day follow the
+  warm-up cards; the practice screen offers all that are due.
+- **My cards**: a missed question can become your own flashcard (included in backups).
+  **Explain it back** sends your explanation of a question or lesson to Gemini for feedback.
+- **Study settings**: text size, line spacing and a reading guide for questions and lessons;
+  focus mode for mocks (Do Not Disturb, only with Do Not Disturb access, switched back afterwards;
+  screen kept awake); rest days (one missed day a week keeps the streak; the streak reminder
+  respects it, and readiness still counts real study days).
+- **Two-minute breathing reset** (in 4, out 6) offered when the pre-session check-in is low, and
+  from the mock screen.
+- **Am I ready to book?** (`data/Booking.kt`): readiness 75+, exam fitness 70+ and two full mocks
+  at Target. A projected date from the weekly reports' trend: rough from two weeks, a range from
+  four; flagged when it falls after the exam date. The thresholds are the app's, not PMI's.
+- **Search everything**: lessons, glossary, abbreviations, formulas, your notes and question
+  explanations.
+- Weekly reports also compare mistake causes tagged that week.
+- **Listen mode** (`listen/`): lessons, flashcard decks and explanations read aloud, offline, by
+  the Kokoro v0.19 English voice ("af_bella", int8) through the sherpa-onnx speech library, both
+  Apache-2.0. The build (`fetchVoice`, `prepareVoice` in `app/build.gradle.kts`) downloads them
+  from sherpa-onnx's GitHub releases, pinned to exact versions and SHA-256 hashes, and packs them
+  into the APK (pronunciation data trimmed to English); nothing large is committed, and the phone
+  downloads nothing. It adds about 150 MB to the APK, which is built for 64-bit ARM phones only.
+  One sentence is generated while the previous one plays; a foreground service keeps it reading
+  with the screen off, and it pauses for calls and other audio.
+
 ## How the path adapts
 
 The plan is never stored as a calendar; it is recomputed from what you have done each time you open

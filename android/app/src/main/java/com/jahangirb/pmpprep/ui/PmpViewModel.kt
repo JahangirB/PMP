@@ -50,6 +50,11 @@ import com.jahangirb.pmpprep.data.FitnessReport
 import com.jahangirb.pmpprep.data.WeeklyReports
 import com.jahangirb.pmpprep.data.QuestionPicker
 import com.jahangirb.pmpprep.data.Mastery
+import com.jahangirb.pmpprep.data.Booking
+import com.jahangirb.pmpprep.data.BookingReport
+import com.jahangirb.pmpprep.data.Deck
+import com.jahangirb.pmpprep.data.QuestionReview
+import com.jahangirb.pmpprep.ui.components.ReadingPrefs
 import com.jahangirb.pmpprep.data.ReminderBrain
 import com.jahangirb.pmpprep.data.ReminderSnapshot
 import com.jahangirb.pmpprep.reminders.Reminders
@@ -85,6 +90,9 @@ enum class Dest(val title: String) {
     FITNESS("Exam fitness"),
     REPORTS("Weekly reports"),
     SESSION("Session"),
+    SETTINGS("Study settings"),
+    BOOK("Ready to book?"),
+    SEARCH("Search"),
 }
 
 /** What to practise. Null means "any". */
@@ -128,6 +136,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 readiness = Readiness(repo.extras.readiness, repo.extras.exam, repo.extras.tasks, repo.extras.domainWeights)
                 srs = Srs(repo.extras.srs)
                 restoreMock()
+                // Switch back a Do Not Disturb left on if the app was closed mid-mock; the exam screen turns it on again.
+                Focus.end(app)
+                if (mock == null) changeFocusMock(false)
                 ready = true
                 // Keep the home-screen widget current: a second after progress settles.
                 launch {
@@ -143,6 +154,32 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
     }
+
+    /* ── study settings ──────────────────────────────────────────────────── */
+
+    private val settings = app.getSharedPreferences("settings", android.content.Context.MODE_PRIVATE)
+    /** Ask "how sure?" before checking a practice answer. */
+    var askConfidence by mutableStateOf(settings.getBoolean("confidence", true))
+        private set
+    var reading by mutableStateOf(ReadingPrefs(settings.getFloat("scale", 1f), settings.getBoolean("roomy", false), settings.getBoolean("guide", false)))
+        private set
+    /** Offer Do Not Disturb and keep the screen on when a mock starts. */
+    var focusOffer by mutableStateOf(settings.getBoolean("focus", true))
+        private set
+
+    /** The running mock uses focus mode: Do Not Disturb while it's on screen, and the screen kept awake. */
+    var focusMock by mutableStateOf(settings.getBoolean("focusMock", false))
+        private set
+
+    fun changeFocusMock(on: Boolean) { focusMock = on; settings.edit().putBoolean("focusMock", on).apply() }
+
+    fun changeAskConfidence(on: Boolean) { askConfidence = on; settings.edit().putBoolean("confidence", on).apply() }
+    fun changeFocusOffer(on: Boolean) { focusOffer = on; settings.edit().putBoolean("focus", on).apply() }
+    fun changeReading(r: ReadingPrefs) {
+        reading = r
+        settings.edit().putFloat("scale", r.scale).putBoolean("roomy", r.roomy).putBoolean("guide", r.guide).apply()
+    }
+    fun setRestDays(on: Boolean) = store.setPlan(store.plan.copy(restDays = on))
 
     /* ── navigation ──────────────────────────────────────────────────────── */
 
@@ -234,6 +271,17 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         if (s.firstTapAt == 0L) { s.firstTapAt = now; s.awayAtFirstTap = s.awayMs }
         changeDirection(q, s.answers[q.id], a)?.let { if (it) s.wrongToRight++ else s.rightToWrong++ }
         s.answers[q.id] = a
+        // Choosing a crossed-out option brings it back.
+        s.struck[q.id]?.let { st -> if (a.choices.any { it in st }) s.struck[q.id] = st - a.choices }
+    }
+
+    /** Crosses an option out, or restores it. Crossing out the chosen option unchooses it. */
+    fun toggleStrike(s: QuizSession, q: Question, optionId: String) {
+        if (s.isChecked(q)) return
+        s.touch(System.currentTimeMillis())
+        val st = s.struck[q.id].orEmpty()
+        s.struck[q.id] = if (optionId in st) st - optionId else st + optionId
+        s.answers[q.id]?.let { a -> if (optionId in a.choices && optionId !in st) s.answers[q.id] = a.copy(choices = a.choices - optionId) }
     }
 
     /** For pick-type questions: true if a change went wrong → right, false if right → wrong, null otherwise. */
@@ -253,19 +301,22 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         s.optionsShown = true
     }
 
-    fun check(s: QuizSession, source: String = Readiness.SOURCE_PRACTICE) {
+    /** [confidence] is [Attempt.SURE], [Attempt.THINK], [Attempt.GUESS], or 0 when not asked. */
+    fun check(s: QuizSession, confidence: Int = 0) {
         val q = s.current
         if (s.isChecked(q) || !Scoring.isAnswered(q, s.answers[q.id])) return
         val r = Scoring.score(q, s.answers[q.id])
+        if (confidence > 0) s.confidence[q.id] = confidence
         s.results[q.id] = r
         val now = System.currentTimeMillis()
         s.touch(now)
         s.totalRightToWrong += s.rightToWrong
         s.totalWrongToRight += s.wrongToRight
-        store.record(attempt(q, r.credit, r.correct, now - s.shownAt - s.awayMs, source,
+        store.record(attempt(q, r.credit, r.correct, now - s.shownAt - s.awayMs, s.source,
             firstTapMs = if (s.firstTapAt > 0) s.firstTapAt - s.shownAt - s.awayAtFirstTap else 0L,
             idleMs = s.maxIdle, rightToWrong = s.rightToWrong, wrongToRight = s.wrongToRight,
-            words = wordsOf(q, withOptions = !s.readingDrill), timed = s.timed))
+            words = wordsOf(q, withOptions = !s.readingDrill), timed = s.timed,
+            confidence = confidence, eliminated = s.struck[q.id]?.size ?: 0))
     }
 
     fun moveTo(s: QuizSession, i: Int) {
@@ -277,12 +328,21 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     private fun attempt(
         q: Question, credit: Double, correct: Boolean, ms: Long, source: String,
         firstTapMs: Long = 0, idleMs: Long = 0, rightToWrong: Int = 0, wrongToRight: Int = 0, words: Int = wordsOf(q), timed: Boolean = false,
+        confidence: Int = 0, eliminated: Int = 0,
     ) = Attempt(
         qid = q.id, ecoTask = q.ecoTask, domain = q.domain, approach = q.approach, type = q.type,
         credit = credit, correct = correct, ms = ms.coerceAtLeast(0), at = System.currentTimeMillis(), source = source,
         firstTapMs = firstTapMs.coerceAtLeast(0), idleMs = idleMs.coerceAtLeast(0), rightToWrong = rightToWrong,
-        wrongToRight = wrongToRight, words = words, timed = timed,
+        wrongToRight = wrongToRight, words = words, timed = timed, confidence = confidence, eliminated = eliminated,
     )
+
+    /** Accuracy with and without crossing options out first, over answers where it was possible; null until both have 10. */
+    fun eliminationEffect(): Pair<Double, Double>? {
+        val pick = store.attempts.filter { (it.type.base == QType.SINGLE || it.type.base == QType.MULTI) && it.source != Readiness.SOURCE_LESSON }.takeLast(400)
+        val (with, without) = pick.partition { it.eliminated > 0 }
+        if (with.size < 10 || without.size < 10) return null
+        return with.count { it.correct }.toDouble() / with.size to without.count { it.correct }.toDouble() / without.size
+    }
 
     /** Words to read: the stem, plus the options unless they're hidden (reading drill). */
     private fun wordsOf(q: Question, withOptions: Boolean = true): Int {
@@ -295,6 +355,26 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         val times = store.attempts.takeLast(100).filter { it.ms > 500 && !it.timed }.map { it.ms }.sorted()
         val median = if (times.isEmpty()) 76_000L else times[times.size / 2]
         return maxOf(150_000L, 3 * median)
+    }
+
+    /* ── review of missed questions ──────────────────────────────────────── */
+
+    private fun dueReviews(now: Long): List<Question> {
+        val enabled = pool().associateBy { it.id }
+        return QuestionReview.due(store.attempts, now).mapNotNull { enabled[it.qid] }
+    }
+
+    fun reviewDueCount(now: Long = System.currentTimeMillis()): Int = dueReviews(now).size
+
+    /** For a warm-up: due reviews, within today's allowance. */
+    private fun warmUpReviews(now: Long): List<Question> = dueReviews(now).take(QuestionReview.allowance(store.attempts, now))
+
+    /** Every due review, from the practice screen. */
+    fun startReview() {
+        val qs = dueReviews(System.currentTimeMillis())
+        if (qs.isEmpty()) return
+        practice = QuizSession("Missed questions, back for review", qs, source = QuestionReview.SOURCE)
+        if (screen != Dest.PRACTICE) navigate(Dest.PRACTICE)
     }
 
     /* ── mock exam ───────────────────────────────────────────────────────── */
@@ -330,6 +410,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun startMock(n: Int) {
         val qs = buildMock(n)
         if (qs.isEmpty()) return
+        com.jahangirb.pmpprep.listen.Listen.stop() // exam conditions
         val layout = repo.extras.exam
         val full = n >= layout.totalItems
         val minutes = (layout.minutes.toDouble() * n / layout.totalItems).roundToInt().coerceAtLeast(5)
@@ -383,7 +464,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             if (!v && field) awaySince = now
             if (v && !field && awaySince > 0) {
                 val away = now - awaySince
-                listOfNotNull(practice, run?.current).forEach { it.awayMs += away; it.awayTotal += away }
+                listOfNotNull(practice, run?.current, run?.review).forEach { it.awayMs += away; it.awayTotal += away }
                 awaySince = 0
             }
             field = v
@@ -402,6 +483,22 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             if (up) m.wrongToRight[q.id] = (m.wrongToRight[q.id] ?: 0) + 1 else m.rightToWrong[q.id] = (m.rightToWrong[q.id] ?: 0) + 1
         }
         m.answers[q.id] = a
+        m.struck[q.id]?.let { st -> if (a.choices.any { it in st }) m.struck[q.id] = st - a.choices }
+        saveMock()
+    }
+
+    fun mockStrike(q: Question, optionId: String) {
+        val m = mock ?: return
+        if (m.questions.indexOf(q) !in m.inSection) return
+        val st = m.struck[q.id].orEmpty()
+        m.struck[q.id] = if (optionId in st) st - optionId else st + optionId
+        m.answers[q.id]?.let { a -> if (optionId in a.choices && optionId !in st) m.answers[q.id] = a.copy(choices = a.choices - optionId) }
+        saveMock()
+    }
+
+    fun mockMarks(q: Question, words: Set<Int>) {
+        val m = mock ?: return
+        m.marks[q.id] = words
         saveMock()
     }
 
@@ -458,12 +555,14 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             if (r.correct) e[0]++
             // Only answered items feed history; a blank at the bell says nothing about the question.
             if (Scoring.isAnswered(q, a)) store.record(attempt(q, r.credit, r.correct, m.spentMs[q.id] ?: perQ, Readiness.SOURCE_EXAM,
-                firstTapMs = m.firstTapMs[q.id] ?: 0L, rightToWrong = m.rightToWrong[q.id] ?: 0, wrongToRight = m.wrongToRight[q.id] ?: 0, timed = true))
+                firstTapMs = m.firstTapMs[q.id] ?: 0L, rightToWrong = m.rightToWrong[q.id] ?: 0, wrongToRight = m.wrongToRight[q.id] ?: 0, timed = true,
+                eliminated = m.struck[q.id]?.size ?: 0))
         }
         val result = MockResult(now, m.title, m.questions.size, right, m.durationMs - m.remainingMs.coerceAtLeast(0),
             dom.mapValues { it.value[0] to it.value[1] })
         store.recordMock(result)
         store.recordSitting(SittingEvent("mock:${m.startedAt}", "mock", now, m.questions.size, m.answeredCount, true))
+        endFocus()
         lastMock = result
         finishedMock = m
         mock = null
@@ -475,6 +574,12 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         timerJob?.cancel()
         mock = null
         mockFile.delete()
+        endFocus()
+    }
+
+    private fun endFocus() {
+        Focus.end(getApplication<Application>())
+        changeFocusMock(false)
     }
 
     fun reviewMock(onlyWrong: Boolean) {
@@ -532,11 +637,44 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
 
     fun cardState(id: String): CardState = store.cards[id] ?: srs.fresh()
 
+    /** The built-in decks, plus "My cards" once you've made one. */
+    fun decks(): List<Deck> = repo.extras.decks +
+        if (store.myCards.isEmpty()) emptyList() else listOf(Deck(ProgressStore.MY_DECK, "My cards", null, "Cards you made from your own mistakes."))
+
+    fun allCards(): List<Flashcard> = repo.extras.flashcards + store.myCards
+
+    /** A card drafted from a missed question: the situation in one line, then the right move and why. */
+    fun cardDraft(q: Question): Pair<String, String> {
+        val first = q.stem.split(Regex("(?<=[.?!])\\s+")).firstOrNull().orEmpty().trim()
+        val front = if (first.length > 160) first.take(157).trimEnd() + "…" else first
+        val right = when (q.base) {
+            QType.SINGLE, QType.MULTI -> q.options.filter { it.correct }.joinToString("; ") { it.text }
+            QType.HOTSPOT -> q.regions.filter { it.correct }.joinToString("; ") { it.label }
+            QType.MATCHING -> q.prompts.mapNotNull { p -> q.options.firstOrNull { it.match == p.id }?.let { "${p.text} → ${it.text}" } }.joinToString("; ")
+            QType.FILLBLANK -> q.blanks.joinToString("; ") { "${it.label} ${Scoring.blankAnswer(it)}" }
+            else -> ""
+        }
+        val back = listOf(right.takeIf { it.isNotBlank() }?.let { "Right move: $it." }, q.explanation.takeIf { it.isNotBlank() }, q.mindset.takeIf { it.isNotBlank() })
+            .filterNotNull().joinToString("\n\n")
+        return front to back
+    }
+
+    fun makeCard(q: Question, front: String, back: String) {
+        if (front.isBlank() || back.isBlank()) return
+        store.addMyCard(Flashcard("my:${q.id}", ProgressStore.MY_DECK, q.ecoTask, front.trim(), back.trim(), ""))
+    }
+
+    fun deleteMyCard(id: String) {
+        store.removeMyCard(id)
+        cardQueue = cardQueue?.filter { it.id != id }
+        cardFlipped = false
+    }
+
     data class DeckCounts(val total: Int, val due: Int, val new: Int, val leeches: Int)
 
     fun deckCounts(deck: String?): DeckCounts {
         val now = System.currentTimeMillis()
-        val cards = repo.extras.flashcards.filter { deck == null || it.deck == deck }
+        val cards = allCards().filter { deck == null || it.deck == deck }
         var due = 0; var new = 0; var leech = 0
         for (c in cards) {
             val s = store.cards[c.id]
@@ -554,7 +692,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
 
     fun startDeck(deck: String?) {
         val now = System.currentTimeMillis()
-        val cards = repo.extras.flashcards.filter { deck == null || it.deck == deck }
+        val cards = allCards().filter { deck == null || it.deck == deck }
         val due = cards.filter { c -> store.cards[c.id]?.let { !it.isNew && it.due <= now } == true }.sortedBy { store.cards[it.id]?.due }
         val allowance = (repo.extras.srs.newPerDay - newIntroducedToday()).coerceAtLeast(0)
         val fresh = cards.filter { c -> store.cards[c.id]?.isNew != false }.take(allowance)
@@ -567,7 +705,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Practise a whole deck regardless of schedule; grades still update it. */
     fun cramDeck(deck: String?) {
-        cardQueue = repo.extras.flashcards.filter { deck == null || it.deck == deck }.shuffled()
+        cardQueue = allCards().filter { deck == null || it.deck == deck }.shuffled()
         cardIndex = 0
         cardFlipped = false
         newLeeches.clear()
@@ -592,7 +730,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun plan(now: Long = System.currentTimeMillis()): Plan? {
         val p = store.plan
         val date = p.examDate ?: return null
-        val leeches = repo.extras.flashcards.filter { c -> c.ecoTask != null && store.cards[c.id]?.let { srs.isLeech(it) } == true }
+        val leeches = allCards().filter { c -> c.ecoTask != null && store.cards[c.id]?.let { srs.isLeech(it) } == true }
             .groupingBy { it.ecoTask!! }.eachCount()
         val f = fitness(now)
         return PlanEngine.build(PlanInput(repo.extras, store.attempts, store.lessonsDone, store.sessionResults,
@@ -609,6 +747,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun recordCheckIn(kind: String, value: Int, items: List<Int> = emptyList()) =
         store.recordCheckIn(CheckIn(System.currentTimeMillis(), kind, value, items))
 
+    fun booking(now: Long = System.currentTimeMillis()): BookingReport = Booking.check(
+        readiness.report(store, now).score, fitness(now).score, store.mocks, repo.extras.exam.totalItems, store.weekly, store.plan.examDate)
+
     /** The weekly five-statement check is offered once a week, once you've started studying. */
     fun weeklyCheckDue(now: Long = System.currentTimeMillis()): Boolean =
         store.attempts.isNotEmpty() && store.checkIns.none { it.kind == "weekly" && now - it.at < 6 * PlanEngine.DAY }
@@ -618,7 +759,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         val now = System.currentTimeMillis()
         val tasks = PlanEngine.taskStates(repo.extras, store.attempts, now)
         store.putWeekly(WeeklyReports.build(now, readiness.report(store, now), tasks.count { it.answers > 0 },
-            tasks.count { it.mastery == Mastery.MASTERED }, store.attempts, store.sessionResults, store.mocks, fitness(now)))
+            tasks.count { it.mastery == Mastery.MASTERED }, store.attempts, store.sessionResults, store.mocks, fitness(now),
+            store.mistakeTags.values))
     }
 
     /** A session being played. Kept while the app runs, so closing it and coming back resumes at the same step. */
@@ -628,6 +770,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         var checkedIn by mutableStateOf(false)
         val practices = ArrayList<QuizSession>()
         var current by mutableStateOf<QuizSession?>(null)
+        /** Missed questions due for review, after the warm-up cards. */
+        var review by mutableStateOf<QuizSession?>(null)
     }
 
     var run by mutableStateOf<PathRun?>(null)
@@ -712,6 +856,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             mastered = p?.tasks?.count { it.mastery == Mastery.MASTERED } ?: 0,
             weekMinutes = ReminderBrain.studyMinutes(store.sessionResults, store.attempts, now - 7 * PlanEngine.DAY, now),
             nextWeekFocus = focus,
+            restDayFree = readiness.streak(store, now).restDayFree,
         )
     }
 
@@ -760,11 +905,12 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         val st = r.session.steps.getOrNull(r.step) ?: return
         when (st.kind) {
             StepKind.CARDS -> {
+                if (r.review != null) return
                 val now = System.currentTimeMillis()
-                cardQueue = repo.extras.flashcards.filter { c -> store.cards[c.id]?.let { !it.isNew && it.due <= now } == true }
+                cardQueue = allCards().filter { c -> store.cards[c.id]?.let { !it.isNew && it.due <= now } == true }
                     .sortedBy { store.cards[it.id]?.due }.take(15)
                 cardIndex = 0; cardFlipped = false; newLeeches.clear()
-                if (cardQueue.isNullOrEmpty()) { cardQueue = null; nextStep(r) }
+                if (cardQueue.isNullOrEmpty()) cardsDone(r)
             }
             StepKind.PRACTICE -> if (r.current == null) {
                 val qs = questionsFor(r.session, st)
@@ -775,11 +921,20 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    /** Warm-up cards are done: due reviews of missed questions follow, if any. */
+    fun cardsDone(r: PathRun) {
+        cardQueue = null
+        val qs = warmUpReviews(System.currentTimeMillis())
+        if (qs.isEmpty()) nextStep(r)
+        else r.review = QuizSession("Missed questions, back for review", qs, source = QuestionReview.SOURCE)
+    }
+
     fun nextStep(r: PathRun) {
         val st = r.session.steps.getOrNull(r.step)
         if (st?.kind == StepKind.LESSON) r.session.lessonId?.let { store.setLessonDone(it, true) }
         if (st?.kind == StepKind.CARDS) cardQueue = null
         r.current = null
+        r.review = null
         r.step = (r.step + 1).coerceAtMost(r.session.steps.size)
     }
 
@@ -968,6 +1123,37 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 aiError = e.message ?: "Something went wrong."
             } finally {
                 aiBusy = false
+            }
+        }
+    }
+
+    /** Explain-it-back: what Gemini made of your explanation. Not kept in the chat. */
+    var explainReply by mutableStateOf<String?>(null)
+        private set
+    var explainBusy by mutableStateOf(false)
+        private set
+    var explainError by mutableStateOf<String?>(null)
+        private set
+
+    fun clearExplain() { explainReply = null; explainError = null }
+
+    /** Sends your own explanation of [topic] for feedback: what you got right, and what you missed. */
+    fun explainBack(topic: String, text: String) {
+        val t = text.trim()
+        if (t.isEmpty() || explainBusy || geminiKey.isEmpty()) return
+        explainBusy = true
+        explainError = null
+        explainReply = null
+        val key = geminiKey
+        val model = geminiModel.ifEmpty { "models/gemini-3-flash" }
+        val turns = listOf(ChatTurn("user", "What I was studying:\n$topic\n\nMy explanation in my own words:\n$t", System.currentTimeMillis()))
+        viewModelScope.launch {
+            try {
+                explainReply = withContext(Dispatchers.IO) { Gemini.generate(key, model, Coach.EXPLAIN_SYSTEM, turns) }
+            } catch (e: Exception) {
+                explainError = e.message ?: "Something went wrong."
+            } finally {
+                explainBusy = false
             }
         }
     }
