@@ -75,6 +75,8 @@ fun PathScreen(vm: PmpViewModel) {
     var ahead by remember { mutableStateOf<Session?>(null) }
     var showChanges by remember { mutableStateOf(false) }
     val coachLine = remember(rev) { vm.coach().report(now).messages.firstOrNull() }
+    val ctx = LocalContext.current
+    val remindersAsked = remember(rev) { com.jahangirb.pmpprep.reminders.Reminders.load(ctx).settings.asked }
 
     LazyColumn(Modifier.fillMaxSize().padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
@@ -85,6 +87,17 @@ fun PathScreen(vm: PmpViewModel) {
                     Text("${plan.phase} · readiness ${report.score} · ${streak.current}-day streak", fontSize = 13.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
+            }
+        }
+
+        // For anyone who finished setup before smart reminders existed: one prompt until it's answered.
+        if (!remindersAsked) item {
+            PmpCard {
+                Text("Reminders that learn your rhythm", fontWeight = FontWeight.Bold)
+                Text("Tell the app when you usually study. It tries a few times a day at first, then keeps to the hours that get you studying.",
+                    fontSize = 13.sp, lineHeight = 18.sp)
+                Spacer(Modifier.height(6.dp))
+                Button(onClick = { vm.navigate(com.jahangirb.pmpprep.ui.Dest.PLANNER) }) { Text("Set up reminders") }
             }
         }
 
@@ -246,7 +259,7 @@ private fun Onboarding(vm: PmpViewModel) {
     val p = if (rev >= 0) vm.store.plan else StudyPlan()
     val ctx = LocalContext.current
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("Step ${step + 1} of 4", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("Step ${step + 1} of 5", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         when (step) {
             0 -> {
                 Text("Your PMP study, planned for you", fontSize = 26.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 32.sp)
@@ -278,6 +291,7 @@ private fun Onboarding(vm: PmpViewModel) {
                 StudyDayChips(p) { vm.store.setPlan(it) }
                 Button(onClick = { step = 3 }, enabled = p.studyDays.isNotEmpty(), modifier = Modifier.fillMaxWidth().height(52.dp)) { Text("Next", fontWeight = FontWeight.Bold) }
             }
+            3 -> ReminderSetupStep { step = 4 }
             else -> {
                 Text("Where do you stand?", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
                 Text("25 questions across the three domains, about 30 minutes. Take it cold, without revising first: it measures you, not your last hour of reading. " +

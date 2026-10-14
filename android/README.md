@@ -76,6 +76,32 @@ midnight, when the day count and Today roll over. On Android 12 and newer, placi
 for **app colours** or **system colours** (taken from your wallpaper); long-press it and tap its
 settings button to change. Older Android uses the app colours, with square corners.
 
+## Smart reminders
+
+Reminders learn which hours get you studying (`data/Reminders.kt`, tested in `RemindersTest`;
+the Android side is `reminders/Reminders.kt`). Everything stays on the phone.
+
+- **Starting guess.** At setup you say when you usually study and when you wake and sleep. If you
+  switch on Usage access (the most Android allows: only you can turn it on, in Settings), the app
+  also reads when your screen was on or unlocked over the last two weeks, never which apps.
+- **Learning.** Each hour has a score for "a reminder here gets me studying". Each day the app
+  picks a few hours by Thompson sampling: up to 3 a day while it learns (the first 20 reminders),
+  then 2. After that, reminders go to the hours that have proven themselves, plus a try of another
+  hour about one day in four. Older results fade (half weight after 30 days), so a changed routine
+  is picked up; the tests show the switch from evenings to mornings being followed.
+- **What counts.** Opening a reminder, or opening the app on your own within an hour of one, and
+  then studying. *Not today* counts against the day more than the hour. How long the app is open at
+  each hour, and when you study, feed the starting guess too.
+- **Timing.** If you usually open an hour's reminder late, it goes out earlier: the median delay of
+  the last five, minus 10 minutes, up to 30 minutes.
+- **Manners.** Nothing on rest days, once today's plan is done, or after *Not today*. Four ignored
+  in a row drop it to one a day for three days. One evening streak-saver (two hours before sleep)
+  when you haven't studied yet. A summary on Sunday at 18:30.
+- **Control.** *Plan and schedule → Smart reminders* shows each hour's score; tap an hour to pin
+  it (always) or block it (never). Pause for a day or three, or switch reminders off.
+- Alarms are inexact (a few minutes either way) so they need no special permission, survive
+  battery saving, and are set again after a restart.
+
 ## How the path adapts
 
 The plan is never stored as a calendar; it is recomputed from what you have done each time you open
