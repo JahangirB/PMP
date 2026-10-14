@@ -17,6 +17,8 @@ data class WidgetStats(
     val readiness: Int,
     val lessonsDone: Int,
     val lessonsTotal: Int,
+    /** Exam fitness 0–100, or −1 until there's enough evidence. */
+    val fitness: Int = -1,
 ) {
     fun daysLeft(now: Long): Int? = examDate?.let { max(0, ((PlanEngine.startOfDay(it) - PlanEngine.startOfDay(now)) / PlanEngine.DAY).toInt()) }
 

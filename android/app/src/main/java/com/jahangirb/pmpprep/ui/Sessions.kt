@@ -31,8 +31,44 @@ class QuizSession(
     /** For review: the answers given and the order they were shown in. */
     givenAnswers: Map<String, Answer> = emptyMap(),
     givenOrder: Map<String, List<Option>>? = null,
+    /** Against the clock: answers count as timed for the pressure gap. */
+    val timed: Boolean = false,
+    /** Reading drill: the stem shows alone until you say you know what it's asking. */
+    val readingDrill: Boolean = false,
 ) {
     private val rnd = Random(System.nanoTime())
+    val startedAt = System.currentTimeMillis()
+    val key = "practice:$startedAt"
+
+    /* How the current question is being handled, for Exam fitness. Times exclude time spent outside the app. */
+    var firstTapAt = 0L
+    var awayAtFirstTap = 0L
+    var lastTouchAt = System.currentTimeMillis()
+    var awayAtLastTouch = 0L
+    var maxIdle = 0L
+    var rightToWrong = 0
+    var wrongToRight = 0
+    /** Time spent outside the app while this question was showing, and in the whole set. */
+    var awayMs = 0L
+    var awayTotal = 0L
+    /** Whole-set totals, for the debrief. */
+    var totalRightToWrong by mutableIntStateOf(0)
+    var totalWrongToRight by mutableIntStateOf(0)
+    var optionsShown by mutableStateOf(!readingDrill)
+
+    /** A touch: closes the idle stretch that ran since the last one. */
+    fun touch(now: Long) {
+        maxIdle = maxOf(maxIdle, now - lastTouchAt - (awayMs - awayAtLastTouch))
+        lastTouchAt = now
+        awayAtLastTouch = awayMs
+    }
+
+    /** A new question is on screen. */
+    fun resetTracking(now: Long) {
+        firstTapAt = 0L; awayAtFirstTap = 0L; lastTouchAt = now; awayAtLastTouch = 0L
+        maxIdle = 0L; rightToWrong = 0; wrongToRight = 0; awayMs = 0L
+        optionsShown = !readingDrill
+    }
     val order: Map<String, List<Option>> = givenOrder ?: questions.associate { it.id to shuffledOptions(it, rnd) }
     var index by mutableIntStateOf(0)
     val answers = mutableStateMapOf<String, Answer>().apply { putAll(givenAnswers) }
@@ -72,6 +108,11 @@ class MockSession(
     var breakRemainingMs by mutableLongStateOf(0L)
     var finished by mutableStateOf(false)
     var startedAt: Long = System.currentTimeMillis()
+    /** Per question: time on screen, time to first answer, and answer changes (for Exam fitness). */
+    val spentMs = HashMap<String, Long>()
+    val firstTapMs = HashMap<String, Long>()
+    val rightToWrong = HashMap<String, Int>()
+    val wrongToRight = HashMap<String, Int>()
 
     val sectionCount: Int get() = breakAfter.size + 1
     fun sectionStart(s: Int): Int = if (s == 0) 0 else breakAfter[s - 1]
@@ -91,6 +132,8 @@ class MockSession(
         put("index", index); put("section", section)
         put("onBreak", onBreak); put("breakRemaining", breakRemainingMs)
         put("startedAt", startedAt)
+        put("spent", JSONObject(spentMs as Map<*, *>)); put("firstTap", JSONObject(firstTapMs as Map<*, *>))
+        put("rw", JSONObject(rightToWrong as Map<*, *>)); put("wr", JSONObject(wrongToRight as Map<*, *>))
     }
 
     companion object {
@@ -119,6 +162,10 @@ class MockSession(
             s.onBreak = o.optBoolean("onBreak")
             s.breakRemainingMs = o.optLong("breakRemaining")
             s.startedAt = o.optLong("startedAt", System.currentTimeMillis())
+            o.optJSONObject("spent")?.let { j -> j.keys().forEach { s.spentMs[it] = j.optLong(it) } }
+            o.optJSONObject("firstTap")?.let { j -> j.keys().forEach { s.firstTapMs[it] = j.optLong(it) } }
+            o.optJSONObject("rw")?.let { j -> j.keys().forEach { s.rightToWrong[it] = j.optInt(it) } }
+            o.optJSONObject("wr")?.let { j -> j.keys().forEach { s.wrongToRight[it] = j.optInt(it) } }
             return s
         }
 

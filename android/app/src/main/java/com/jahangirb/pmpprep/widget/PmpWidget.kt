@@ -85,6 +85,9 @@ class PmpWidget : GlanceAppWidget() {
                     Gap()
                     val syllabus = stats?.syllabus() ?: 0f
                     Tile("${(syllabus * 100).roundToInt()}%", null, "syllabus", syllabus, SYLLABUS)
+                    Gap()
+                    val fit = stats?.fitness ?: -1
+                    Tile(if (fit < 0) "–" else "$fit", null, "fitness", null, FITNESS)
                 }
             }
         }
@@ -121,6 +124,8 @@ class PmpWidget : GlanceAppWidget() {
         const val TODAY = "today"
         const val READY = "ready"
         const val SYLLABUS = "syllabus"
+        const val FITNESS = "fitness"
+        const val REPORTS = "reports"
         private val OpenKey = ActionParameters.Key<String>(OPEN)
 
         private val AppColors = ColorProviders(light = LightColors, dark = DarkColors)
@@ -143,6 +148,7 @@ class PmpWidget : GlanceAppWidget() {
                 readiness = p.getInt("readiness", 0),
                 lessonsDone = p.getInt("lessonsDone", 0),
                 lessonsTotal = p.getInt("lessonsTotal", 0),
+                fitness = p.getInt("fitness", -1),
             )
         }
 
@@ -152,6 +158,7 @@ class PmpWidget : GlanceAppWidget() {
                 .putLong("exam", s.examDate ?: 0L).putLong("day", s.day)
                 .putInt("todayMinutes", s.todayMinutes).putInt("targetMinutes", s.targetMinutes)
                 .putInt("readiness", s.readiness).putInt("lessonsDone", s.lessonsDone).putInt("lessonsTotal", s.lessonsTotal)
+                .putInt("fitness", s.fitness)
                 .apply()
             PmpWidget().updateAll(context)
         }

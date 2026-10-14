@@ -20,7 +20,24 @@ data class Attempt(
     val ms: Long,
     val at: Long,
     val source: String,
+    /** Time from the question appearing to the first touch of an answer (reading time); 0 if not captured. */
+    val firstTapMs: Long = 0,
+    /** Longest stretch with no touch while the question was on screen; 0 if not captured. */
+    val idleMs: Long = 0,
+    /** Answer changes before checking that went from right to wrong, and from wrong to right. */
+    val rightToWrong: Int = 0,
+    val wrongToRight: Int = 0,
+    /** Words to read: the stem plus the options. */
+    val words: Int = 0,
+    /** Answered against a clock: a mock, or timed practice. */
+    val timed: Boolean = false,
 )
+
+/** A sitting started or ended: a practice set, a guided session or a mock. Used to tell finished from abandoned. */
+data class SittingEvent(val key: String, val kind: String, val at: Long, val planned: Int, val answered: Int, val finished: Boolean)
+
+/** A one-tap check-in. [kind] is "pre" (before a session), "post" (after a mock) or "weekly"; values 1–5. */
+data class CheckIn(val at: Long, val kind: String, val value: Int, val items: List<Int> = emptyList())
 
 enum class RootCause(val title: String, val description: String) {
     KNOWLEDGE_GAP("Knowledge gap", "Didn't know the process, term or formula"),
@@ -101,6 +118,10 @@ class ProgressStore(private val dir: File) {
     val coachSnoozed = HashMap<String, Long>()
     /** Every guided-path session finished, newest last. */
     val sessionResults = ArrayList<SessionResult>()
+    val sittings = ArrayList<SittingEvent>()
+    val checkIns = ArrayList<CheckIn>()
+    /** One report per week, the current week's kept up to date until the week ends. */
+    val weekly = ArrayList<WeeklyReport>()
 
     /** Latest attempt per question. */
     val last = HashMap<String, Attempt>()
@@ -173,6 +194,29 @@ class ProgressStore(private val dir: File) {
     }
 
     @Synchronized
+    fun recordSitting(e: SittingEvent) {
+        sittings += e
+        if (sittings.size > 2000) sittings.subList(0, sittings.size - 2000).clear()
+        changed()
+    }
+
+    @Synchronized
+    fun recordCheckIn(c: CheckIn) {
+        checkIns += c
+        changed()
+    }
+
+    /** Saves this week's report, replacing the week's earlier version. Doesn't bump the revision: it's derived. */
+    @Synchronized
+    fun putWeekly(r: WeeklyReport) {
+        val i = weekly.indexOfFirst { it.weekStart == r.weekStart }
+        if (i >= 0) { if (weekly[i] == r) return; weekly[i] = r } else weekly += r
+        weekly.sortBy { it.weekStart }
+        if (weekly.size > 104) weekly.subList(0, weekly.size - 104).clear()
+        save()
+    }
+
+    @Synchronized
     fun setNotepad(text: String) {
         if (text == notepad) return
         notepad = text
@@ -211,6 +255,7 @@ class ProgressStore(private val dir: File) {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear(); plan = StudyPlan()
         notepad = ""; diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
+        sittings.clear(); checkIns.clear(); weekly.clear()
         changed()
     }
 
@@ -224,6 +269,10 @@ class ProgressStore(private val dir: File) {
 
     private fun changed() {
         _revision.value = _revision.value + 1
+        save()
+    }
+
+    private fun save() {
         val snapshot = toJson().toString()
         io.execute {
             try {
@@ -246,6 +295,12 @@ class ProgressStore(private val dir: File) {
                 put(JSONObject().apply {
                     put("q", a.qid); put("t", a.ecoTask); put("d", a.domain.id); put("ap", a.approach?.id ?: "")
                     put("ty", a.type.id); put("cr", a.credit); put("ok", a.correct); put("ms", a.ms); put("at", a.at); put("src", a.source)
+                    if (a.firstTapMs > 0) put("ft", a.firstTapMs)
+                    if (a.idleMs > 0) put("idle", a.idleMs)
+                    if (a.rightToWrong > 0) put("rw", a.rightToWrong)
+                    if (a.wrongToRight > 0) put("wr", a.wrongToRight)
+                    if (a.words > 0) put("w", a.words)
+                    if (a.timed) put("tm", true)
                 })
             }
         })
@@ -290,13 +345,35 @@ class ProgressStore(private val dir: File) {
         })
         put("chat", JSONArray().apply { chat.forEach { put(JSONObject().put("r", it.role).put("t", it.text).put("at", it.at)) } })
         put("snoozed", JSONObject(coachSnoozed as Map<*, *>))
+        put("sittings", JSONArray().apply {
+            sittings.forEach { put(JSONObject().put("k", it.key).put("kind", it.kind).put("at", it.at).put("p", it.planned).put("a", it.answered).put("f", it.finished)) }
+        })
+        put("checkins", JSONArray().apply {
+            checkIns.forEach { put(JSONObject().put("at", it.at).put("kind", it.kind).put("v", it.value).put("items", JSONArray(it.items))) }
+        })
+        put("weekly", JSONArray().apply { weekly.forEach { put(it.toJson()) } })
     }
 
     private fun fromJson(o: JSONObject) {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear()
         diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
+        sittings.clear(); checkIns.clear(); weekly.clear()
         notepad = o.optString("notepad", "")
+        o.optJSONArray("sittings")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val e = arr.optJSONObject(i) ?: continue
+                sittings += SittingEvent(e.optString("k"), e.optString("kind"), e.optLong("at"), e.optInt("p"), e.optInt("a"), e.optBoolean("f"))
+            }
+        }
+        o.optJSONArray("checkins")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val c = arr.optJSONObject(i) ?: continue
+                val items = c.optJSONArray("items")
+                checkIns += CheckIn(c.optLong("at"), c.optString("kind"), c.optInt("v"), (0 until (items?.length() ?: 0)).map { items!!.optInt(it) })
+            }
+        }
+        o.optJSONArray("weekly")?.let { arr -> for (i in 0 until arr.length()) arr.optJSONObject(i)?.let { weekly += WeeklyReport.fromJson(it) } }
         o.optJSONArray("sessions")?.let { arr ->
             for (i in 0 until arr.length()) {
                 val r = arr.optJSONObject(i) ?: continue
@@ -328,6 +405,8 @@ class ProgressStore(private val dir: File) {
                     domain = Domain.of(a.optString("d")) ?: Domain.PROCESS, approach = Approach.of(a.optString("ap")),
                     type = QType.of(a.optString("ty")) ?: QType.SINGLE, credit = a.optDouble("cr", 0.0),
                     correct = a.optBoolean("ok"), ms = a.optLong("ms"), at = a.optLong("at"), source = a.optString("src"),
+                    firstTapMs = a.optLong("ft"), idleMs = a.optLong("idle"), rightToWrong = a.optInt("rw"), wrongToRight = a.optInt("wr"),
+                    words = a.optInt("w"), timed = a.optBoolean("tm"),
                 )
                 attempts += at
                 last[at.qid] = at
