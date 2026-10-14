@@ -77,7 +77,7 @@ class WidgetConfigActivity : ComponentActivity() {
                     Text("Widget colours", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold)
                     Text("Light and dark follow your phone in both.", fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     val dark = isSystemInDarkTheme()
-                    Choice("App colours", "The app's own leaf green and cream.", !system, if (dark) DarkColors else LightColors) { system = false }
+                    Choice("App colours", "The app's own sky blue and lilac.", !system, if (dark) DarkColors else LightColors) { system = false }
                     if (Build.VERSION.SDK_INT >= 31) {
                         val ctx = LocalContext.current
                         val dynamic = if (dark) dynamicDarkColorScheme(ctx) else dynamicLightColorScheme(ctx)

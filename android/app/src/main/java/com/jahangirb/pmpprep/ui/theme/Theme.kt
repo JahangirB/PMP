@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import com.jahangirb.pmpprep.R
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -61,10 +63,27 @@ private val ClayShapes = Shapes(
     extraLarge = RoundedCornerShape(ClayRadius),
 )
 
-private val AppTypography = Typography(
-    bodyLarge = TextStyle(fontFamily = FontFamily.Default, fontWeight = FontWeight.Normal, fontSize = 16.sp, lineHeight = 24.sp, letterSpacing = 0.2.sp),
-    bodyMedium = TextStyle(fontFamily = FontFamily.Default, fontWeight = FontWeight.Normal, fontSize = 14.sp, lineHeight = 20.sp),
+/** Nunito, bundled in res/font: rounded and friendly, readable at small sizes. */
+val Nunito = FontFamily(
+    Font(R.font.nunito_regular, FontWeight.Normal),
+    Font(R.font.nunito_semibold, FontWeight.Medium),
+    Font(R.font.nunito_semibold, FontWeight.SemiBold),
+    Font(R.font.nunito_bold, FontWeight.Bold),
+    Font(R.font.nunito_extrabold, FontWeight.ExtraBold),
+    Font(R.font.nunito_extrabold, FontWeight.Black),
 )
+
+/** Material's type scale, set in Nunito. Body text keeps its slightly looser reading spacing. */
+private val AppTypography = Typography().run {
+    fun TextStyle.n() = copy(fontFamily = Nunito)
+    Typography(
+        displayLarge = displayLarge.n(), displayMedium = displayMedium.n(), displaySmall = displaySmall.n(),
+        headlineLarge = headlineLarge.n(), headlineMedium = headlineMedium.n(), headlineSmall = headlineSmall.n(),
+        titleLarge = titleLarge.n(), titleMedium = titleMedium.n(), titleSmall = titleSmall.n(),
+        bodyLarge = bodyLarge.n().copy(lineHeight = 24.sp, letterSpacing = 0.2.sp), bodyMedium = bodyMedium.n(), bodySmall = bodySmall.n(),
+        labelLarge = labelLarge.n(), labelMedium = labelMedium.n(), labelSmall = labelSmall.n(),
+    )
+}
 
 @Composable
 fun PmpTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
