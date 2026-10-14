@@ -1,8 +1,9 @@
 # PMP Prep Suite
 
-Offline PMP exam preparation: practice questions across all 26 ECO tasks,
-timed mock exams, a situational trainer, lessons, spaced-repetition
-flashcards, a formula lab, a reference library and readiness analytics.
+Offline PMP exam preparation: a starting-level diagnostic, practice questions
+across all 26 ECO tasks, timed mock exams, a situational trainer, lessons,
+spaced-repetition flashcards, a formula lab, a reference library, notes,
+readiness analytics, and a coach that can talk it through with you on Gemini.
 
 ## Android app
 

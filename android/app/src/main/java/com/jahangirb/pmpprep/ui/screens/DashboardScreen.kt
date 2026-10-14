@@ -111,6 +111,24 @@ fun DashboardScreen(vm: PmpViewModel) {
             }
         }
 
+        if (vm.store.diagnostic == null || vm.store.plan.examDate == null) {
+            item {
+                PmpCard(container = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f), border = MaterialTheme.colorScheme.primary) {
+                    Text("Set up your plan", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    Text("Two steps, and the planner and the coach stop guessing.", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Spacer(Modifier.height(8.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        androidx.compose.material3.OutlinedButton(onClick = { vm.navigate(Dest.PLANNER) }, modifier = Modifier.weight(1f)) {
+                            Text(if (vm.store.plan.examDate == null) "1. Exam date" else "1. Date set ✓")
+                        }
+                        Button(onClick = { vm.startDiagnostic() }, enabled = vm.store.diagnostic == null, modifier = Modifier.weight(1f)) {
+                            Text(if (vm.store.diagnostic == null) "2. Diagnostic" else "2. Done ✓")
+                        }
+                    }
+                }
+            }
+        }
+
         item {
             ReadinessMeterCard(report.score, status, report.gates, report.nextAction) {
                 vm.navigate(

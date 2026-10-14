@@ -48,6 +48,21 @@ data class MockResult(
 
 data class StudyPlan(val examDate: Long? = null, val hoursPerWeek: Int = 10)
 
+/** The cold 25-question level check the plan and the coach aim from. */
+data class DiagnosticResult(
+    val at: Long,
+    val n: Int,
+    val right: Int,
+    /** domain → (right, of) */
+    val domains: Map<Domain, Pair<Int, Int>>,
+) {
+    val pct: Double get() = if (n == 0) 0.0 else right.toDouble() / n
+    fun domainPct(d: Domain): Double? = domains[d]?.let { if (it.second == 0) null else it.first.toDouble() / it.second }
+}
+
+/** One turn of the conversation with the coach. role is "user" or "model". */
+data class ChatTurn(val role: String, val text: String, val at: Long)
+
 /**
  * Everything the person has done, in one JSON file in the app's private
  * storage. Every change bumps [revision] (which the UI observes) and is
@@ -70,6 +85,13 @@ class ProgressStore(private val dir: File) {
     val lessonsDone = LinkedHashSet<String>()
     var plan = StudyPlan()
         private set
+    /** The free-form notes page, in the light markup the notes editor writes. */
+    var notepad = ""
+        private set
+    val diagnostics = ArrayList<DiagnosticResult>()
+    val chat = ArrayList<ChatTurn>()
+    /** Coach message id → time before which it stays hidden. */
+    val coachSnoozed = HashMap<String, Long>()
 
     /** Latest attempt per question. */
     val last = HashMap<String, Attempt>()
@@ -136,9 +158,44 @@ class ProgressStore(private val dir: File) {
     }
 
     @Synchronized
+    fun setNotepad(text: String) {
+        if (text == notepad) return
+        notepad = text
+        changed()
+    }
+
+    @Synchronized
+    fun recordDiagnostic(d: DiagnosticResult) {
+        diagnostics += d
+        changed()
+    }
+
+    val diagnostic: DiagnosticResult? get() = diagnostics.maxByOrNull { it.at }
+
+    @Synchronized
+    fun addChat(t: ChatTurn) {
+        chat += t
+        if (chat.size > MAX_CHAT) chat.subList(0, chat.size - MAX_CHAT).clear()
+        changed()
+    }
+
+    @Synchronized
+    fun clearChat() {
+        chat.clear()
+        changed()
+    }
+
+    @Synchronized
+    fun snooze(id: String, until: Long) {
+        coachSnoozed[id] = until
+        changed()
+    }
+
+    @Synchronized
     fun reset() {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear(); plan = StudyPlan()
+        notepad = ""; diagnostics.clear(); chat.clear(); coachSnoozed.clear()
         changed()
     }
 
@@ -200,11 +257,39 @@ class ProgressStore(private val dir: File) {
         })
         put("lessons", JSONArray(lessonsDone.toList()))
         put("plan", JSONObject().put("examDate", plan.examDate ?: 0L).put("hours", plan.hoursPerWeek))
+        put("notepad", notepad)
+        put("diagnostics", JSONArray().apply {
+            diagnostics.forEach { d ->
+                put(JSONObject().apply {
+                    put("at", d.at); put("n", d.n); put("right", d.right)
+                    put("domains", JSONObject().apply { d.domains.forEach { (k, p) -> put(k.id, JSONArray().put(p.first).put(p.second)) } })
+                })
+            }
+        })
+        put("chat", JSONArray().apply { chat.forEach { put(JSONObject().put("r", it.role).put("t", it.text).put("at", it.at)) } })
+        put("snoozed", JSONObject(coachSnoozed as Map<*, *>))
     }
 
     private fun fromJson(o: JSONObject) {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear()
+        diagnostics.clear(); chat.clear(); coachSnoozed.clear()
+        notepad = o.optString("notepad", "")
+        o.optJSONArray("diagnostics")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val d = arr.optJSONObject(i) ?: continue
+                val dm = d.optJSONObject("domains")
+                diagnostics += DiagnosticResult(d.optLong("at"), d.optInt("n"), d.optInt("right"),
+                    Domain.entries.mapNotNull { x -> dm?.optJSONArray(x.id)?.let { x to (it.optInt(0) to it.optInt(1)) } }.toMap())
+            }
+        }
+        o.optJSONArray("chat")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val c = arr.optJSONObject(i) ?: continue
+                chat += ChatTurn(c.optString("r"), c.optString("t"), c.optLong("at"))
+            }
+        }
+        o.optJSONObject("snoozed")?.let { sn -> sn.keys().forEach { coachSnoozed[it] = sn.optLong(it) } }
         o.optJSONArray("attempts")?.let { arr ->
             for (i in 0 until arr.length()) {
                 val a = arr.optJSONObject(i) ?: continue
@@ -262,5 +347,6 @@ class ProgressStore(private val dir: File) {
     companion object {
         const val TYPE = "pmp-android-progress"
         private const val MAX_ATTEMPTS = 20000
+        private const val MAX_CHAT = 60
     }
 }

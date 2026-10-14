@@ -16,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.EditNote
 import androidx.compose.material.icons.filled.Flag
+import androidx.compose.material.icons.filled.Psychology
 import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -147,8 +148,12 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
             Column(Modifier.padding(horizontal = 16.dp, vertical = 6.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text("Question ${s.index + 1} of ${s.questions.size}", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
-                    if (!s.reviewOnly) Text("${s.correctCount}/${s.checkedCount} right", fontSize = 12.sp,
+                    if (!s.reviewOnly && !s.diagnostic) Text("${s.correctCount}/${s.checkedCount} right", fontSize = 12.sp,
                         fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    if (s.diagnostic) Text("Diagnostic · no feedback until the end", fontSize = 11.sp, color = MaterialTheme.colorScheme.primary)
+                    if (!s.diagnostic) IconButton(onClick = { vm.askAbout(q, s) }) {
+                        Icon(Icons.Default.Psychology, contentDescription = "Ask the coach about this question", tint = MaterialTheme.colorScheme.primary)
+                    }
                     IconButton(onClick = { noteOpen = true }) {
                         Icon(Icons.Default.EditNote, contentDescription = "Note",
                             tint = if (vm.store.notes.containsKey(q.id)) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
@@ -191,7 +196,11 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
         Row(Modifier.fillMaxWidth().padding(12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = { vm.moveTo(s, s.index - 1) }, enabled = s.index > 0, modifier = Modifier.weight(1f)) { Text("Back") }
             val last = s.index == s.questions.size - 1
-            when {
+            if (s.diagnostic) {
+                Button(onClick = { if (last) vm.finishDiagnostic(s) else vm.moveTo(s, s.index + 1) }, modifier = Modifier.weight(1.6f)) {
+                    Text(if (last) "Finish diagnostic" else if (Scoring.isAnswered(q, s.answers[q.id])) "Next" else "Skip", fontWeight = FontWeight.Bold)
+                }
+            } else when {
                 revealed -> Button(onClick = { if (last) onFinish() else vm.moveTo(s, s.index + 1) }, modifier = Modifier.weight(1.6f)) {
                     Text(if (last) "See results" else "Next", fontWeight = FontWeight.Bold)
                 }
@@ -219,6 +228,7 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
 
 @Composable
 fun QuizResults(vm: PmpViewModel, s: QuizSession, onAgain: () -> Unit) {
+    if (s.diagnostic) { DiagnosticResults(vm, s); return }
     val checked = s.questions.filter { s.isChecked(it) }
     val right = checked.count { s.results[it.id]?.correct == true }
     val score = if (checked.isEmpty()) 0.0 else right.toDouble() / checked.size
@@ -248,5 +258,41 @@ fun QuizResults(vm: PmpViewModel, s: QuizSession, onAgain: () -> Unit) {
         }
         OutlinedButton(onClick = onAgain, modifier = Modifier.fillMaxWidth()) { Text("New drill") }
         Spacer(Modifier.width(1.dp))
+    }
+}
+
+
+@Composable
+private fun DiagnosticResults(vm: PmpViewModel, s: QuizSession) {
+    val d = vm.store.diagnostic ?: return
+    var reviewing by remember { mutableStateOf(false) }
+    if (reviewing) {
+        val review = remember { QuizSession("Diagnostic review", s.questions, reviewOnly = true, givenAnswers = s.answers.toMap(), givenOrder = s.order) }
+        QuizRunner(vm, review, onFinish = { reviewing = false })
+        return
+    }
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text("Your starting point", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold)
+        PmpCard {
+            Text(pct(d.pct), fontSize = 44.sp, fontWeight = FontWeight.Black, color = MaterialTheme.colorScheme.primary)
+            Text("${d.right} of ${d.n} right, taken cold.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        PmpCard {
+            SectionLabel("By domain")
+            Spacer(Modifier.height(8.dp))
+            Domain.entries.forEach { dm ->
+                d.domains[dm]?.let { (r, of) ->
+                    ProgressRow(dm.title, if (of == 0) 0.0 else r.toDouble() / of, "$r/$of", domainColor(dm))
+                    Spacer(Modifier.height(10.dp))
+                }
+            }
+            val weakest = Domain.entries.minByOrNull { d.domainPct(it) ?: 1.0 }
+            if (weakest != null) Text("Your plan will give ${weakest.title} the most practice time.", fontSize = 13.sp)
+        }
+        Button(onClick = { vm.practice = null; vm.navigate(com.jahangirb.pmpprep.ui.Dest.PLANNER) }, modifier = Modifier.fillMaxWidth().height(50.dp)) {
+            Text("Build my study plan", fontWeight = FontWeight.Bold)
+        }
+        OutlinedButton(onClick = { reviewing = true }, modifier = Modifier.fillMaxWidth()) { Text("Review the answers") }
+        OutlinedButton(onClick = { vm.practice = null; vm.coachTab = 0; vm.navigate(com.jahangirb.pmpprep.ui.Dest.COACH) }, modifier = Modifier.fillMaxWidth()) { Text("See what the coach suggests") }
     }
 }
