@@ -84,6 +84,7 @@ fun MockExamScreen(vm: PmpViewModel) {
 }
 
 /** A rough guide only: PMI reports bands per domain but does not publish the cut scores behind them. */
+@Composable
 private fun band(p: Double): Pair<String, Color> = when {
     p >= 0.80 -> "Above Target" to ColorSuccess
     p >= 0.65 -> "Target" to ColorInfo
@@ -143,7 +144,7 @@ private fun HistoryRow(r: MockResult) {
             }
             Column(horizontalAlignment = Alignment.End) {
                 Text(pct(r.pct), fontSize = 22.sp, fontWeight = FontWeight.Black, color = color)
-                Text(label, fontSize = 10.sp, color = color, fontWeight = FontWeight.Bold)
+                Text(label, fontSize = 11.sp, color = color, fontWeight = FontWeight.Bold)
             }
         }
     }

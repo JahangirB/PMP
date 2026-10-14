@@ -30,6 +30,31 @@ All seven question types render natively: multiple choice, multiple response,
 matching, drop-down, hotspot and graphic (drawn on a canvas), and fill in the
 blank. Scoring follows the web app exactly.
 
+## Design decisions
+
+The layout follows published mobile-usability research; when changing it, keep to these.
+
+- **Navigation bar of five, by frequency.** Home, Practice, Learn, Cards and More. Material 3 limits a
+  navigation bar to 3–5 top-level destinations. The four used daily get a tab; everything else is a
+  labelled grid on **More** (with the mock exam first and a live status on each tile), not an icon-only
+  overflow menu in the top corner: that corner is the hardest to reach one-handed (Hoober's thumb-zone
+  studies) and hidden navigation is used far less (Nielsen Norman Group). Tabs replace the back history
+  rather than adding to it, so Back from any tab goes Home.
+- **One primary action per screen, in the thumb zone.** Home leads with the coach's next step as its
+  only large filled button. Practice setup keeps *Start practice* in a fixed bar at the bottom with
+  quick-start presets at the top, instead of the button sitting below a long form. In drills and the
+  mock exam the advancing action (Check, Next, Finish) is always bottom-right.
+- **Destructive actions apart.** *Delete this bank* sits on its own line, not beside the on/off switch,
+  and *Reset all progress* is in a separate Danger zone; both confirm first.
+- **Nothing floats over answers.** The coach bubble hides during drills, the diagnostic and the mock
+  exam (each practice question has its own coach button), and can be dragged anywhere else.
+- **Touch targets** are at least 48 dp (Material; WCAG 2.2 asks for 24 px minimum), whole cards and
+  tiles are tappable, and the Home stat tiles open what they count.
+- **Contrast measured, not assumed.** Status, domain and accent colours are tuned per theme so text
+  meets WCAG AA (4.5:1) in both: the earlier single values measured 2.2–4.1:1 on white. The measured
+  pairs are listed in `ui/theme/Color.kt`. No text is smaller than 11 sp.
+- **Motion** uses Compose's animations, which follow Android's *Remove animations* setting.
+
 ## The Gemini key
 
 Create a free key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey) and paste it into

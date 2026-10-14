@@ -83,13 +83,32 @@ private fun PracticeSetup(vm: PmpViewModel) {
     val cv = vm.contentVersion
     val matches = remember(f, rev, cv) { vm.matching(f).size }
     val x = vm.repo.extras
+    val missed = remember(rev, cv) { vm.store.last.values.count { !it.correct } }
+    val flagged = remember(rev, cv) { vm.store.flags.size }
+    Column(Modifier.fillMaxSize()) {
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text("Build a drill", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold)
         Text("You see whether you were right, and why every option is right or wrong, after each answer.",
             fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+
+        // Quick starts first: the drills people run most need no form at all.
+        SectionLabel("Quick start")
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(onClick = { vm.startPractice(PracticeFilter(count = 10), "Mixed practice") }) { Text("10 mixed") }
+            OutlinedButton(onClick = { vm.startPractice(PracticeFilter(which = PracticeFilter.Which.NEW, count = 20), "New questions") }) { Text("20 new") }
+            OutlinedButton(onClick = { vm.startPractice(PracticeFilter(which = PracticeFilter.Which.MISSED, count = 40), "Mistakes") },
+                enabled = missed > 0) { Text("Redo $missed mistakes") }
+            OutlinedButton(onClick = { vm.startPractice(PracticeFilter(which = PracticeFilter.Which.FLAGGED, count = 40), "Flagged") },
+                enabled = flagged > 0) { Text("$flagged flagged") }
+        }
+        Spacer(Modifier.height(4.dp))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            SectionLabel("Or choose exactly", Modifier.weight(1f))
+            TextButton(onClick = { vm.filter = PracticeFilter() }) { Text("Reset filters") }
+        }
 
         Selector("Domain", listOf<Pair<Domain?, String>>(null to "All domains") + Domain.entries.map { it to it.title }, f.domain,
             { vm.filter = f.copy(domain = it, task = if (it != null && x.tasks.firstOrNull { t -> t.id == f.task }?.domain != it) null else f.task) })
@@ -113,17 +132,20 @@ private fun PracticeSetup(vm: PmpViewModel) {
             }
         }
 
-        Text(if (matches == 0) "No questions match these choices." else "$matches questions match · you'll get ${minOf(matches, f.count)}",
-            fontSize = 13.sp, color = if (matches == 0) ColorError else MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
-        Button(onClick = { vm.startPractice() }, enabled = matches > 0, modifier = Modifier.fillMaxWidth().height(50.dp)) {
-            Text("Start practice", fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(8.dp))
+    }
+    // The primary action stays in the thumb zone instead of below the fold.
+    HorizontalDivider()
+    Surface(color = MaterialTheme.colorScheme.surface) {
+        Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text(if (matches == 0) "No questions match" else "$matches match\nyou'll get ${minOf(matches, f.count)}",
+                fontSize = 13.sp, lineHeight = 17.sp, color = if (matches == 0) ColorError else MaterialTheme.colorScheme.onSurfaceVariant,
+                fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
+            Button(onClick = { vm.startPractice() }, enabled = matches > 0, modifier = Modifier.height(52.dp)) {
+                Text("Start practice", fontWeight = FontWeight.Bold)
+            }
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedButton(onClick = { vm.filter = PracticeFilter() }, modifier = Modifier.weight(1f)) { Text("Reset filters") }
-            OutlinedButton(onClick = {
-                vm.startPractice(PracticeFilter(which = PracticeFilter.Which.MISSED, count = 40), "Mistakes")
-            }, modifier = Modifier.weight(1f)) { Text("Redo mistakes") }
-        }
+    }
     }
 }
 
