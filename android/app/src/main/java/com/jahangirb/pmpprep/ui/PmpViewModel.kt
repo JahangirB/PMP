@@ -18,6 +18,15 @@ import com.jahangirb.pmpprep.data.Coach
 import com.jahangirb.pmpprep.data.CoachAction
 import com.jahangirb.pmpprep.data.DiagnosticResult
 import com.jahangirb.pmpprep.data.Gemini
+import com.jahangirb.pmpprep.data.Plan
+import com.jahangirb.pmpprep.data.PlanEngine
+import com.jahangirb.pmpprep.data.PlanInput
+import com.jahangirb.pmpprep.data.PlanSettings
+import com.jahangirb.pmpprep.data.Session
+import com.jahangirb.pmpprep.data.SessionKind
+import com.jahangirb.pmpprep.data.SessionResult
+import com.jahangirb.pmpprep.data.Step
+import com.jahangirb.pmpprep.data.StepKind
 import com.jahangirb.pmpprep.data.ContentRepository
 import com.jahangirb.pmpprep.data.Domain
 import com.jahangirb.pmpprep.data.Flashcard
@@ -58,7 +67,8 @@ enum class Dest(val title: String) {
     DATA("Banks & Backup"),
     COACH("Coach"),
     NOTES("Notes"),
-    MORE("More"),
+    MENU("Menu"),
+    SESSION("Session"),
 }
 
 /** What to practise. Null means "any". */
@@ -121,16 +131,10 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         screen = d
     }
 
-    /**
-     * Bottom-bar tabs are top-level places, not steps in a journey: switching
-     * replaces the history, so Back from any tab returns Home rather than
-     * replaying every tab tapped. A drill or deck in progress is kept.
-     */
-    fun switchTab(d: Dest) {
-        if (d == screen) return
+    /** Back to the path, forgetting the trail. */
+    fun home() {
         backStack.clear()
-        if (d != Dest.DASHBOARD) backStack += Dest.DASHBOARD
-        screen = d
+        screen = Dest.DASHBOARD
     }
 
     /** Returns false when there is nowhere to go back to. */
@@ -473,6 +477,112 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         if (g == Grade.AGAIN) cardQueue = q + card
         cardIndex++
         cardFlipped = false
+    }
+
+    /* ── guided path ─────────────────────────────────────────────────────── */
+
+    /** Rebuilt from scratch on every call: the plan is a view of the current state, never a stored calendar. */
+    fun plan(now: Long = System.currentTimeMillis()): Plan? {
+        val p = store.plan
+        val date = p.examDate ?: return null
+        return PlanEngine.build(PlanInput(repo.extras, store.attempts, store.lessonsDone, store.sessionResults,
+            store.mocks, store.diagnostic, PlanSettings(date, p.hoursPerWeek, p.studyDays), now))
+    }
+
+    /** A session being played. Kept while the app runs, so closing it and coming back resumes at the same step. */
+    class PathRun(val session: Session, val startedAt: Long, val mocksAtStart: Int) {
+        var step by mutableStateOf(0)
+        val practices = ArrayList<QuizSession>()
+        var current by mutableStateOf<QuizSession?>(null)
+    }
+
+    var run by mutableStateOf<PathRun?>(null)
+        private set
+
+    fun startSession(s: Session) {
+        if (run?.session?.key != s.key) run = PathRun(s, System.currentTimeMillis(), store.mocks.size)
+        navigate(Dest.SESSION)
+    }
+
+    /** A 15-minute version of a session for a short day: warm-up cards and 10 questions on the same ground. */
+    fun shortVersion(s: Session): Session = s.copy(
+        key = "short:" + s.key, title = "Short day: " + s.title, minutes = 15,
+        why = "A quick version so the day still counts.",
+        steps = listOf(Step(StepKind.CARDS), Step(StepKind.PRACTICE, 10), Step(StepKind.DEBRIEF)),
+    )
+
+    /** Questions for a practice step: the session's task or domain, least-recently-right first. */
+    fun questionsFor(s: Session, st: Step): List<Question> {
+        var qs = pool()
+        when {
+            s.taskId != null -> qs = qs.filter { it.ecoTask == s.taskId }
+            s.domain != null -> qs = qs.filter { it.domain == s.domain }
+            s.kind == SessionKind.REENTRY -> {
+                val recent = store.attempts.sortedByDescending { it.at }.map { it.ecoTask }.distinct().take(3).toSet()
+                if (recent.isNotEmpty()) qs = qs.filter { it.ecoTask in recent }
+            }
+        }
+        if (st.easy) qs = qs.filter { it.difficulty <= 3 }.ifEmpty { qs }
+        // Unseen first, then the ones missed last time, then the rest; shuffled within each group.
+        val unseen = qs.filter { it.id !in store.last }.shuffled()
+        val missed = qs.filter { store.last[it.id]?.correct == false }.shuffled()
+        val rest = qs.filter { store.last[it.id]?.correct == true }.shuffled()
+        return (unseen + missed + rest).take(st.count)
+    }
+
+    /** Called when a step is shown, so the step has what it needs. */
+    fun prepareStep(r: PathRun) {
+        val st = r.session.steps.getOrNull(r.step) ?: return
+        when (st.kind) {
+            StepKind.CARDS -> {
+                val now = System.currentTimeMillis()
+                cardQueue = repo.extras.flashcards.filter { c -> store.cards[c.id]?.let { !it.isNew && it.due <= now } == true }
+                    .sortedBy { store.cards[it.id]?.due }.take(15)
+                cardIndex = 0; cardFlipped = false; newLeeches.clear()
+                if (cardQueue.isNullOrEmpty()) { cardQueue = null; nextStep(r) }
+            }
+            StepKind.PRACTICE -> if (r.current == null) {
+                val qs = questionsFor(r.session, st)
+                if (qs.isEmpty()) nextStep(r)
+                else QuizSession(r.session.title, qs).also { r.current = it; r.practices += it }
+            }
+            else -> {}
+        }
+    }
+
+    fun nextStep(r: PathRun) {
+        val st = r.session.steps.getOrNull(r.step)
+        if (st?.kind == StepKind.LESSON) r.session.lessonId?.let { store.setLessonDone(it, true) }
+        if (st?.kind == StepKind.CARDS) cardQueue = null
+        r.current = null
+        r.step = (r.step + 1).coerceAtMost(r.session.steps.size)
+    }
+
+    /** Practice score for the session, or 1.0 when it was reading only. Mocks score as the sitting did. */
+    fun sessionScore(r: PathRun): Double {
+        if (r.session.steps.any { it.kind == StepKind.MOCK }) {
+            return store.mocks.drop(r.mocksAtStart).lastOrNull()?.pct ?: 0.0
+        }
+        val checked = r.practices.flatMap { p -> p.questions.mapNotNull { p.results[it.id] } }
+        return if (checked.isEmpty()) 1.0 else checked.sumOf { it.credit } / checked.size
+    }
+
+    fun finishSession(r: PathRun) {
+        val minutes = ((System.currentTimeMillis() - r.startedAt) / 60_000).toInt().coerceIn(5, r.session.minutes.coerceAtLeast(5))
+        store.recordSession(SessionResult(r.session.key, r.session.kind, r.session.taskId, r.session.domain, sessionScore(r), minutes, System.currentTimeMillis()))
+        run = null
+        cardQueue = null
+        home()
+    }
+
+    /** Leaves the player; the run is kept so Continue resumes it. */
+    fun closeSession() {
+        cardQueue = null
+        back()
+    }
+
+    fun finishOnboarding() {
+        store.setPlan(store.plan.copy(onboarded = true))
     }
 
     /* ── diagnostic ──────────────────────────────────────────────────────── */

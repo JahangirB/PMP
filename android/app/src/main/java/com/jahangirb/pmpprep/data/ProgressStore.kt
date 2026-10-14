@@ -46,7 +46,14 @@ data class MockResult(
     val pct: Double get() = if (n == 0) 0.0 else right.toDouble() / n
 }
 
-data class StudyPlan(val examDate: Long? = null, val hoursPerWeek: Int = 10)
+data class StudyPlan(
+    val examDate: Long? = null,
+    val hoursPerWeek: Int = 10,
+    /** java.util.Calendar.DAY_OF_WEEK values; Monday to Friday unless chosen otherwise. */
+    val studyDays: Set<Int> = setOf(2, 3, 4, 5, 6),
+    /** Set when the first-run setup (date, hours, days, diagnostic) has been finished or skipped. */
+    val onboarded: Boolean = false,
+)
 
 /** The cold 25-question level check the plan and the coach aim from. */
 data class DiagnosticResult(
@@ -92,6 +99,8 @@ class ProgressStore(private val dir: File) {
     val chat = ArrayList<ChatTurn>()
     /** Coach message id → time before which it stays hidden. */
     val coachSnoozed = HashMap<String, Long>()
+    /** Every guided-path session finished, newest last. */
+    val sessionResults = ArrayList<SessionResult>()
 
     /** Latest attempt per question. */
     val last = HashMap<String, Attempt>()
@@ -158,6 +167,12 @@ class ProgressStore(private val dir: File) {
     }
 
     @Synchronized
+    fun recordSession(r: SessionResult) {
+        sessionResults += r
+        changed()
+    }
+
+    @Synchronized
     fun setNotepad(text: String) {
         if (text == notepad) return
         notepad = text
@@ -195,7 +210,7 @@ class ProgressStore(private val dir: File) {
     fun reset() {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear(); plan = StudyPlan()
-        notepad = ""; diagnostics.clear(); chat.clear(); coachSnoozed.clear()
+        notepad = ""; diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
         changed()
     }
 
@@ -256,7 +271,14 @@ class ProgressStore(private val dir: File) {
             }
         })
         put("lessons", JSONArray(lessonsDone.toList()))
-        put("plan", JSONObject().put("examDate", plan.examDate ?: 0L).put("hours", plan.hoursPerWeek))
+        put("plan", JSONObject().put("examDate", plan.examDate ?: 0L).put("hours", plan.hoursPerWeek)
+            .put("days", JSONArray(plan.studyDays.toList())).put("onboarded", plan.onboarded))
+        put("sessions", JSONArray().apply {
+            sessionResults.forEach { r ->
+                put(JSONObject().put("k", r.key).put("kind", r.kind.name).put("t", r.taskId ?: "").put("d", r.domain?.id ?: "")
+                    .put("s", r.score).put("m", r.minutes).put("at", r.at))
+            }
+        })
         put("notepad", notepad)
         put("diagnostics", JSONArray().apply {
             diagnostics.forEach { d ->
@@ -273,8 +295,16 @@ class ProgressStore(private val dir: File) {
     private fun fromJson(o: JSONObject) {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear()
-        diagnostics.clear(); chat.clear(); coachSnoozed.clear()
+        diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
         notepad = o.optString("notepad", "")
+        o.optJSONArray("sessions")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val r = arr.optJSONObject(i) ?: continue
+                val kind = runCatching { SessionKind.valueOf(r.optString("kind")) }.getOrNull() ?: continue
+                sessionResults += SessionResult(r.optString("k"), kind, r.optString("t").ifEmpty { null }, Domain.of(r.optString("d")),
+                    r.optDouble("s", 0.0), r.optInt("m"), r.optLong("at"))
+            }
+        }
         o.optJSONArray("diagnostics")?.let { arr ->
             for (i in 0 until arr.length()) {
                 val d = arr.optJSONObject(i) ?: continue
@@ -340,7 +370,10 @@ class ProgressStore(private val dir: File) {
         o.optJSONArray("lessons")?.let { for (i in 0 until it.length()) lessonsDone += it.optString(i) }
         o.optJSONObject("plan")?.let {
             val date = it.optLong("examDate")
-            plan = StudyPlan(if (date > 0) date else null, it.optInt("hours", 10))
+            val days = it.optJSONArray("days")?.let { a -> (0 until a.length()).map { i -> a.optInt(i) }.toSet() }
+            // Older backups have no onboarded flag: a date plus a diagnostic means setup was done.
+            plan = StudyPlan(if (date > 0) date else null, it.optInt("hours", 10), days?.ifEmpty { null } ?: StudyPlan().studyDays,
+                it.optBoolean("onboarded", date > 0 && diagnostics.isNotEmpty()))
         }
     }
 

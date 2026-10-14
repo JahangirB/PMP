@@ -17,60 +17,27 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.LibraryBooks
-import androidx.compose.material.icons.automirrored.filled.MenuBook
-import androidx.compose.material.icons.automirrored.filled.Notes
-import androidx.compose.material.icons.filled.Assignment
-import androidx.compose.material.icons.filled.AutoAwesome
-import androidx.compose.material.icons.filled.Calculate
-import androidx.compose.material.icons.filled.CalendarMonth
-import androidx.compose.material.icons.filled.Dashboard
-import androidx.compose.material.icons.filled.ErrorOutline
-import androidx.compose.material.icons.filled.GridView
-import androidx.compose.material.icons.filled.Insights
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Psychology
-import androidx.compose.material.icons.filled.Quiz
-import androidx.compose.material.icons.filled.Storage
-import androidx.compose.material.icons.filled.Style
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.IntOffset
-import kotlin.math.roundToInt
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -79,8 +46,9 @@ import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.screens.AnalyticsScreen
 import com.jahangirb.pmpprep.ui.screens.CoachScreen
 import com.jahangirb.pmpprep.ui.screens.NotesScreen
-import com.jahangirb.pmpprep.ui.screens.MoreScreen
-import com.jahangirb.pmpprep.ui.screens.DashboardScreen
+import com.jahangirb.pmpprep.ui.screens.MenuScreen
+import com.jahangirb.pmpprep.ui.screens.PathScreen
+import com.jahangirb.pmpprep.ui.screens.SessionScreen
 import com.jahangirb.pmpprep.ui.screens.DataScreen
 import com.jahangirb.pmpprep.ui.screens.FlashcardsScreen
 import com.jahangirb.pmpprep.ui.screens.FormulaLabScreen
@@ -157,8 +125,6 @@ private fun Loading(error: String?) {
     }
 }
 
-private data class NavItem(val dest: Dest, val icon: ImageVector, val label: String)
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> Unit) {
@@ -173,29 +139,23 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
 
     BackHandler(enabled = vm.screen != Dest.DASHBOARD) { vm.back() }
 
-    // Bottom bar: the four places people go every day, by frequency, plus More.
-    // Material keeps a navigation bar to 3–5 destinations; everything else is a
-    // labelled grid on More rather than an icon-only overflow menu in the top
-    // corner, which is the hardest spot to reach one-handed and the least
-    // discoverable (NN/g found hidden navigation used about half as often).
-    val bottom = listOf(
-        NavItem(Dest.DASHBOARD, Icons.Default.Dashboard, "Home"),
-        NavItem(Dest.PRACTICE, Icons.Default.Quiz, "Practice"),
-        NavItem(Dest.LEARN, Icons.AutoMirrored.Filled.MenuBook, "Learn"),
-        NavItem(Dest.FLASHCARDS, Icons.Default.Style, "Cards"),
-        NavItem(Dest.MORE, Icons.Default.GridView, "More"),
-    )
-    val tabFor = { d: Dest -> if (bottom.any { it.dest == d }) d else Dest.MORE }
-    // A running mock exam takes the whole screen: no tabs to wander off through.
+    // A running mock exam and a guided session take the whole screen: nothing to wander off through.
     val examRunning = vm.screen == Dest.MOCK && vm.mock != null
+    val fullScreen = examRunning || vm.screen == Dest.SESSION
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            if (!fullScreen) TopAppBar(
                 title = { Text(vm.screen.title, fontSize = 18.sp, fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     if (vm.screen != Dest.DASHBOARD) {
                         IconButton(onClick = { vm.back() }) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") }
+                    }
+                },
+                // The path leads; everything beside it is one tap away in the menu.
+                actions = {
+                    if (vm.screen != Dest.MENU) IconButton(onClick = { vm.navigate(Dest.MENU) }) {
+                        Icon(Icons.Default.Menu, contentDescription = "Menu: extra practice, tests, study tools and settings")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -204,26 +164,12 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                 ),
             )
         },
-        bottomBar = {
-            if (!examRunning) {
-                NavigationBar(containerColor = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp) {
-                    bottom.forEach { item ->
-                        NavigationBarItem(
-                            selected = tabFor(vm.screen) == item.dest,
-                            onClick = { vm.switchTab(item.dest) },
-                            icon = { Icon(item.icon, contentDescription = item.label) },
-                            label = { Text(item.label, fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
-                        )
-                    }
-                }
-            }
-        },
     ) { inner ->
         // consumeWindowInsets: the bars' space is already in `inner`, so a screen's
         // imePadding adds only the part of the keyboard that rises above them.
         Box(Modifier.fillMaxSize().padding(inner).consumeWindowInsets(inner)) {
             when (vm.screen) {
-                Dest.DASHBOARD -> DashboardScreen(vm)
+                Dest.DASHBOARD -> PathScreen(vm)
                 Dest.PRACTICE -> PracticeScreen(vm)
                 Dest.MOCK -> MockExamScreen(vm)
                 Dest.SITUATIONAL -> SituationalScreen(vm)
@@ -237,13 +183,8 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                 Dest.DATA -> DataScreen(vm)
                 Dest.COACH -> CoachScreen(vm)
                 Dest.NOTES -> NotesScreen(vm)
-                Dest.MORE -> MoreScreen(vm)
-            }
-            // The coach floats over everything except itself, a running mock and the cold diagnostic.
-            // In a drill it would sit over the answer options; each question has its own coach button instead.
-            val drilling = vm.practice?.let { !it.finished } == true && vm.screen == Dest.PRACTICE
-            if (vm.screen != Dest.COACH && !examRunning && !drilling) {
-                CoachBubble(vm) { vm.coachTab = 0; vm.navigate(Dest.COACH) }
+                Dest.MENU -> MenuScreen(vm)
+                Dest.SESSION -> SessionScreen(vm)
             }
         }
     }
@@ -255,41 +196,5 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
             title = { Text("Import") },
             text = { Text(report) },
         )
-    }
-}
-
-/** The coach, a draggable bubble that carries a count of what it has to say. */
-@Composable
-private fun CoachBubble(vm: PmpViewModel, onOpen: () -> Unit) {
-    val rev by vm.revision.collectAsState()
-    val count = remember(rev, vm.contentVersion) { vm.coach().report().messages.size }
-    val density = LocalDensity.current
-    var offset by remember { mutableStateOf(Offset.Zero) }
-    BoxWithConstraints(Modifier.fillMaxSize()) {
-        val maxX = with(density) { (maxWidth - 72.dp).toPx() }
-        val maxY = with(density) { (maxHeight - 72.dp).toPx() }
-        Box(
-            Modifier
-                .align(Alignment.BottomEnd)
-                .padding(end = 16.dp, bottom = 96.dp)
-                .offset { IntOffset(offset.x.roundToInt(), offset.y.roundToInt()) }
-                .pointerInput(Unit) {
-                    detectDragGestures { change, drag ->
-                        change.consume()
-                        offset = Offset((offset.x + drag.x).coerceIn(-maxX, 0f), (offset.y + drag.y).coerceIn(-maxY, 0f))
-                    }
-                },
-        ) {
-            FloatingActionButton(
-                onClick = onOpen,
-                shape = CircleShape,
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-            ) {
-                BadgedBox(badge = { if (count > 0) Badge { Text("$count") } }) {
-                    Icon(Icons.Default.AutoAwesome, contentDescription = "Coach")
-                }
-            }
-        }
     }
 }
