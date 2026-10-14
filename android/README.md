@@ -10,7 +10,9 @@ questions, scenarios, lessons, flashcards, glossary, formulas and reference.
 
 | Screen | What it does |
 |---|---|
-| Home | Readiness score (the web app's five-part model), streak, cards due, mistakes, domain accuracy |
+| Coach (floating bubble) | On every screen except a running mock or the diagnostic. **Today** works offline: how you're doing, what's going well, what to improve, the coach's messages and today's session, each with a Go button. **Ask Gemini** is a chat with Google's Gemini Flash on your own API key: every message carries a snapshot of your progress, so it can review how you're doing, say what to improve and answer PMP questions. Practice questions have an "Ask coach" button |
+| Home | Setup (exam date + diagnostic), readiness score (the web app's five-part model), streak, cards due, mistakes, domain accuracy |
+| Diagnostic | 25 questions (8 People / 10 Process / 7 Business) across the difficulty range, taken cold with no feedback until the end; the planner and the coach aim from it |
 | Practice | Filter by domain, ECO task, bank, type, approach and new / missed / flagged; check each answer and see why every option is right or wrong; pace bar; flags and notes |
 | Mock exam | 180 / 90 / 45 / 20 questions, weighted by domain; timed, three sections with optional breaks, mark for review, question grid; saved if you leave; scorecard by domain; review |
 | Learn | All lessons by module: sections, approach lenses, worked example, traps, quick checks, recap |
@@ -20,12 +22,21 @@ questions, scenarios, lessons, flashcards, glossary, formulas and reference.
 | Reference | ECO tasks with your accuracy, glossary, abbreviations, principles, performance domains, processes with ITTOs, agile, comparison tables |
 | Analytics | How the readiness score is built, study days, mock trend, accuracy by task, approach and type, pace |
 | Mistake journal | Every question wrong last time; tag the root cause; retry |
-| Study planner | Exam date and weekly hours turned into a week-by-week plan weighted to your weak domains |
+| Study planner | Your diagnostic, exam date and weekly hours turned into a week-by-week plan weighted to your weak domains |
+| Notes | One running page with a formatting ribbon (bold, italic, underline, strike, highlight, lists) and a read view, plus every note you wrote on a question. "Ask coach" sends the page to Gemini for a check |
 | Banks & backup | Import `.json` banks, switch banks on or off, delete imported ones, content audit, backup / restore / reset |
 
 All seven question types render natively: multiple choice, multiple response,
 matching, drop-down, hotspot and graphic (drawn on a canvas), and fill in the
 blank. Scoring follows the web app exactly.
+
+## The Gemini key
+
+Create a free key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey) and paste it into
+**Coach → Ask Gemini**. The app checks it by listing the Flash models it may use and picks the newest
+stable one (you can change it). The key stays in the app's private storage: it is excluded from
+Android backups and from the progress backup file, and it is sent only to Google, in a request header.
+Only the chat uses the network; everything else works offline.
 
 ## Building
 

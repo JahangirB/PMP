@@ -13,6 +13,11 @@ import com.jahangirb.pmpprep.data.Answer
 import com.jahangirb.pmpprep.data.Approach
 import com.jahangirb.pmpprep.data.Attempt
 import com.jahangirb.pmpprep.data.CardState
+import com.jahangirb.pmpprep.data.ChatTurn
+import com.jahangirb.pmpprep.data.Coach
+import com.jahangirb.pmpprep.data.CoachAction
+import com.jahangirb.pmpprep.data.DiagnosticResult
+import com.jahangirb.pmpprep.data.Gemini
 import com.jahangirb.pmpprep.data.ContentRepository
 import com.jahangirb.pmpprep.data.Domain
 import com.jahangirb.pmpprep.data.Flashcard
@@ -51,6 +56,8 @@ enum class Dest(val title: String) {
     MISTAKES("Mistake Journal"),
     PLANNER("Study Planner"),
     DATA("Banks & Backup"),
+    COACH("Coach"),
+    NOTES("Notes"),
 }
 
 /** What to practise. Null means "any". */
@@ -455,6 +462,182 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         cardFlipped = false
     }
 
+    /* ── diagnostic ──────────────────────────────────────────────────────── */
+
+    /**
+     * Twenty-five questions split 8 / 10 / 7, the closest whole-number split to
+     * the domain weights, drawn from the core pack across the difficulty range
+     * (§10.09.1): the figure being estimated is where you stand, and a set at
+     * one difficulty would estimate something else.
+     */
+    fun diagnosticSet(): List<Question> {
+        val core = repo.packs.firstOrNull { it.id == "core" }?.questions.orEmpty().ifEmpty { pool() }
+        val want = mapOf(Domain.PEOPLE to 8, Domain.PROCESS to 10, Domain.BUSINESS to 7)
+        val out = ArrayList<Question>()
+        for ((d, n) in want) {
+            val byDiff = core.filter { it.domain == d }.shuffled().groupBy { it.difficulty }.mapValues { it.value.toMutableList() }
+            val levels = byDiff.keys.sorted()
+            var i = 0
+            while (out.count { it.domain == d } < n && byDiff.values.any { it.isNotEmpty() }) {
+                byDiff[levels[i % levels.size]]?.let { l -> if (l.isNotEmpty()) out += l.removeAt(0) }
+                i++
+            }
+        }
+        return out.shuffled()
+    }
+
+    fun startDiagnostic() {
+        val qs = diagnosticSet()
+        if (qs.size < 5) return
+        practice = QuizSession("Diagnostic", qs, diagnostic = true)
+        if (screen != Dest.PRACTICE) navigate(Dest.PRACTICE)
+    }
+
+    fun finishDiagnostic(s: QuizSession) {
+        val now = System.currentTimeMillis()
+        val dom = HashMap<Domain, IntArray>()
+        var right = 0
+        for (q in s.questions) {
+            val a = s.answers[q.id]
+            val r = Scoring.score(q, a)
+            s.results[q.id] = r
+            if (r.correct) right++
+            val e = dom.getOrPut(q.domain) { IntArray(2) }
+            e[1]++
+            if (r.correct) e[0]++
+            if (Scoring.isAnswered(q, a)) store.record(attempt(q, r.credit, r.correct, 0, SOURCE_DIAGNOSTIC))
+        }
+        store.recordDiagnostic(DiagnosticResult(now, s.questions.size, right, dom.mapValues { it.value[0] to it.value[1] }))
+        s.index = 0
+        s.finished = true
+    }
+
+    /* ── coach ───────────────────────────────────────────────────────────── */
+
+    fun coach(): Coach = Coach(repo.extras, pool(), store, readiness)
+
+    /** Where a coach line or step sends you. */
+    fun coachGo(action: CoachAction, arg: String?) {
+        when (action) {
+            CoachAction.PLANNER -> navigate(Dest.PLANNER)
+            CoachAction.DIAGNOSTIC -> startDiagnostic()
+            CoachAction.PRACTICE -> startPractice(PracticeFilter(count = 10), "Mixed practice")
+            CoachAction.TASK -> if (arg != null) startPractice(PracticeFilter(task = arg, count = 10), "Practice: ${repo.task(arg)?.label ?: ""}") else navigate(Dest.PRACTICE)
+            CoachAction.MOCK -> navigate(Dest.MOCK)
+            CoachAction.LEARN -> { openLesson = arg; navigate(Dest.LEARN) }
+            CoachAction.CARDS -> navigate(Dest.FLASHCARDS)
+            CoachAction.SCENARIOS -> navigate(Dest.SITUATIONAL)
+            CoachAction.JOURNAL -> navigate(Dest.MISTAKES)
+            CoachAction.FORMULAS -> navigate(Dest.FORMULAS)
+            CoachAction.ANALYTICS -> navigate(Dest.ANALYTICS)
+        }
+    }
+
+    fun snoozeCoach(id: String, days: Int) {
+        store.snooze(id, System.currentTimeMillis() + days * Srs.DAY_MS)
+    }
+
+    /* The key is the one secret here, so it lives in its own preferences file,
+       kept out of progress backups and out of Android's cloud backup. */
+    private val aiPrefs = app.getSharedPreferences("gemini", android.content.Context.MODE_PRIVATE)
+    var geminiKey by mutableStateOf(aiPrefs.getString("key", "").orEmpty())
+        private set
+    var geminiModel by mutableStateOf(aiPrefs.getString("model", "").orEmpty())
+        private set
+    var geminiModels by mutableStateOf<List<Gemini.Model>>(emptyList())
+        private set
+    var aiBusy by mutableStateOf(false)
+        private set
+    var aiError by mutableStateOf<String?>(null)
+    /** Text waiting in the coach's input, e.g. a question sent from practice. */
+    var coachDraft by mutableStateOf("")
+    var coachTab by mutableStateOf(0)
+
+    /** Checks a pasted key by listing its models, then keeps it. */
+    fun useKey(key: String) {
+        val k = key.trim()
+        if (k.isEmpty() || aiBusy) return
+        aiBusy = true
+        aiError = null
+        viewModelScope.launch {
+            try {
+                val models = withContext(Dispatchers.IO) { Gemini.listModels(k) }
+                geminiModels = models
+                val keep = models.firstOrNull { it.name == geminiModel } ?: Gemini.defaultModel(models)
+                geminiKey = k
+                geminiModel = keep?.name.orEmpty()
+                aiPrefs.edit().putString("key", k).putString("model", geminiModel).apply()
+            } catch (e: Exception) {
+                aiError = e.message
+            } finally {
+                aiBusy = false
+            }
+        }
+    }
+
+    fun loadModels() {
+        if (geminiKey.isEmpty() || geminiModels.isNotEmpty() || aiBusy) return
+        viewModelScope.launch {
+            runCatching { withContext(Dispatchers.IO) { Gemini.listModels(geminiKey) } }.onSuccess { m ->
+                geminiModels = m
+                if (m.none { it.name == geminiModel }) setModel(Gemini.defaultModel(m)?.name.orEmpty())
+            }
+        }
+    }
+
+    fun setModel(name: String) {
+        geminiModel = name
+        aiPrefs.edit().putString("model", name).apply()
+    }
+
+    fun forgetKey() {
+        geminiKey = ""
+        geminiModels = emptyList()
+        aiPrefs.edit().remove("key").apply()
+    }
+
+    /** Sends a message with a fresh snapshot of the person's progress. */
+    fun ask(text: String) {
+        val t = text.trim()
+        if (t.isEmpty() || aiBusy || geminiKey.isEmpty()) return
+        store.addChat(ChatTurn("user", t, System.currentTimeMillis()))
+        aiBusy = true
+        aiError = null
+        val system = Coach.SYSTEM + "\n\nLearner progress snapshot, computed by the app just now:\n" + coach().snapshot()
+        val turns = store.chat.takeLast(SEND_TURNS).toList()
+        val key = geminiKey
+        val model = geminiModel.ifEmpty { "models/gemini-3-flash" }
+        viewModelScope.launch {
+            try {
+                val reply = withContext(Dispatchers.IO) { Gemini.generate(key, model, system, turns) }
+                store.addChat(ChatTurn("model", reply, System.currentTimeMillis()))
+            } catch (e: Exception) {
+                aiError = e.message ?: "Something went wrong."
+            } finally {
+                aiBusy = false
+            }
+        }
+    }
+
+    /** Opens the coach's chat with a question from practice ready to send. */
+    fun askAbout(q: Question, s: QuizSession) {
+        val opts = s.order[q.id] ?: q.options
+        val a = s.answers[q.id]
+        val sb = StringBuilder("Help me with this question:\n\n").append(q.stem).append("\n")
+        opts.forEachIndexed { i, o -> sb.append("\n").append("ABCDEFGH"[i % 8]).append(") ").append(o.text) }
+        q.prompts.forEach { sb.append("\n• ").append(it.text) }
+        q.regions.forEach { sb.append("\n").append(it.n).append(") ").append(it.label) }
+        q.blanks.forEach { sb.append("\n• ").append(it.label) }
+        if (a != null && a.choices.isNotEmpty() && opts.isNotEmpty()) {
+            sb.append("\n\nI chose ").append(a.choices.joinToString { id -> opts.indexOfFirst { it.id == id }.let { if (it >= 0) "ABCDEFGH"[it].toString() else id } }).append(".")
+        }
+        if (s.isChecked(q)) sb.append(" I've seen the answer; explain why it is right and the others are not.")
+        else sb.append("\n\nDon't give me the answer yet: give me a hint about how to think about it.")
+        coachDraft = sb.toString()
+        coachTab = 1
+        navigate(Dest.COACH)
+    }
+
     /* ── banks and backup ────────────────────────────────────────────────── */
 
     fun setPackEnabled(p: QuestionPack, on: Boolean) {
@@ -508,6 +691,11 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         } catch (e: Exception) {
             "Could not restore: ${e.message}"
         }
+    }
+
+    companion object {
+        const val SOURCE_DIAGNOSTIC = "diagnostic"
+        private const val SEND_TURNS = 30
     }
 
     fun resetProgress() {
