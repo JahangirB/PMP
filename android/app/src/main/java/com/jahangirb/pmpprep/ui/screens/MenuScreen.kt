@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.LibraryBooks
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.automirrored.filled.Notes
+import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.filled.Assignment
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Calculate
@@ -61,6 +62,9 @@ fun MenuScreen(vm: PmpViewModel) {
     val missed = if (rev >= 0) vm.store.last.values.count { !it.correct } else 0
     val flagged = vm.store.flags.size
     val groups = listOf(
+        "Start here" to listOf(
+            Entry(Icons.AutoMirrored.Filled.HelpOutline, "How it works", "What you get, what's measured, how weak spots are handled") { vm.navigate(Dest.GUIDE) },
+        ),
         "Practise" to listOf(
             Entry(Icons.Default.Quiz, "Build a drill", "Pick domain, task, type, approach, bank") { vm.navigate(Dest.PRACTICE) },
             Entry(Icons.Default.Replay, "Redo mistakes", if (missed == 0) "None right now" else "$missed wrong last time") {

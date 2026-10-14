@@ -81,6 +81,7 @@ import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.screens.AnalyticsScreen
 import com.jahangirb.pmpprep.ui.screens.CoachScreen
 import com.jahangirb.pmpprep.ui.screens.MenuScreen
+import com.jahangirb.pmpprep.ui.screens.GuideScreen
 import com.jahangirb.pmpprep.ui.screens.PathScreen
 import com.jahangirb.pmpprep.ui.screens.SessionScreen
 import com.jahangirb.pmpprep.ui.screens.DataScreen
@@ -250,6 +251,7 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                         Dest.DATA -> DataScreen(vm)
                         Dest.COACH -> CoachScreen(vm)
                         Dest.MENU -> MenuScreen(vm)
+                        Dest.GUIDE -> GuideScreen(vm)
                         Dest.SESSION -> SessionScreen(vm)
                     }
                 }

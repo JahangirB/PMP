@@ -44,13 +44,16 @@ class PlanEngineTest {
         val lessons = HashSet<String>()
         val results = ArrayList<SessionResult>()
         val mocks = ArrayList<MockResult>()
+        val tags = HashMap<String, com.jahangirb.pmpprep.data.RootCause>()
+        val leeches = HashMap<String, Int>()
+        var ms = 60_000L
 
-        fun plan(now: Long): Plan = PlanEngine.build(PlanInput(x, attempts, lessons, results, mocks, diag, settings, now))
+        fun plan(now: Long): Plan = PlanEngine.build(PlanInput(x, attempts, lessons, results, mocks, diag, settings, now, tags, leeches))
 
         fun answer(task: String, n: Int, score: Double, at: Long, source: String = "path") {
             val t = x.tasks.first { it.id == task }
             val right = Math.round(n * score).toInt()
-            repeat(n) { i -> attempts += Attempt("$task-${attempts.size}", task, t.domain, null, QType.SINGLE, if (i < right) 1.0 else 0.0, i < right, 60_000, at + i, source) }
+            repeat(n) { i -> attempts += Attempt("$task-${attempts.size}", task, t.domain, null, QType.SINGLE, if (i < right) 1.0 else 0.0, i < right, ms, at + i, source) }
         }
 
         fun doSession(s: Session, at: Long, score: Double = skill) {
@@ -104,7 +107,7 @@ class PlanEngineTest {
                 p.sessions.filter { it.kind != SessionKind.MOCK }.groupBy { it.day }.forEach { (_, l2) ->
                     assertTrue("day over budget: ${l2.sumOf { it.minutes }} vs ${p.minutesPerDay}", l2.sumOf { it.minutes } <= p.minutesPerDay + 60)
                 }
-                if (exam - t <= days(7)) assertTrue(p.sessions.filter { it.day == PlanEngine.startOfDay(t) }.all { it.kind == SessionKind.TAPER })
+                if (exam - t <= days(7)) assertTrue("taper only: ${p.sessions.filter { it.day == PlanEngine.startOfDay(t) }.map { it.key + " " + it.why }}", p.sessions.filter { it.day == PlanEngine.startOfDay(t) }.all { it.kind == SessionKind.TAPER })
                 l.studyDay(t)
             }
             t = PlanEngine.nextDay(t)
@@ -202,5 +205,60 @@ class PlanEngineTest {
         assertEquals(0, l.plan(start + days(1)).sessions.count { it.taskId == t.id })
         val later = l.plan(start + days(20))
         assertTrue(later.sessions.any { it.kind == SessionKind.REVIEW && it.taskId == t.id })
+    }
+
+    /* ── the six fixes from the assessment review ── */
+
+    private fun taskWithLesson() = x.tasks.first { t -> x.lessons.any { it.ecoTask == t.id } }
+    private fun lessonOf(task: String) = x.lessons.first { it.ecoTask == task }
+
+    @Test
+    fun aDomainThatSlipsAfterItsCheckpointIsReChecked() {
+        val l = Learner(PlanSettings(start + days(60), 10, weekdays), 0.8)
+        l.results += SessionResult("checkpoint:people", SessionKind.CHECKPOINT, null, Domain.PEOPLE, 0.8, 35, start)
+        val people = x.tasks.filter { it.domain == Domain.PEOPLE }.map { it.id }
+        people.forEachIndexed { i, t -> l.answer(t, 5, 0.8, start + 3_600_000 + i * 1000L) }
+        assertTrue("holding up: no re-check", l.plan(start + days(1)).sessions.none { it.title == "Re-check: People" })
+        people.forEachIndexed { i, t -> l.answer(t, 4, 0.25, start + days(1) + i * 1000L) }
+        assertTrue("slipped under 70%: re-check planned", l.plan(start + days(2)).sessions.any { it.title == "Re-check: People" })
+    }
+
+    @Test
+    fun taggedCausesShapeTheTasksDrills() {
+        val t = taskWithLesson()
+        val l = Learner(PlanSettings(start + days(60), 10, weekdays), 0.5)
+        l.lessons += lessonOf(t.id).id
+        l.answer(t.id, 12, 0.5, start)
+        l.attempts.filter { !it.correct }.take(3).forEach { l.tags[it.qid] = com.jahangirb.pmpprep.data.RootCause.KNOWLEDGE_GAP }
+        val drill = l.plan(start + days(1)).sessions.first { it.key == "drill:${t.id}:0" }
+        assertEquals("knowledge gap: lesson first", StepKind.LESSON, drill.steps.first().kind)
+        l.tags.keys.forEach { l.tags[it] = com.jahangirb.pmpprep.data.RootCause.WRONG_MINDSET }
+        val drill2 = l.plan(start + days(1)).sessions.first { it.key == "drill:${t.id}:0" }
+        assertTrue("mindset: scenarios added", drill2.steps.any { it.kind == StepKind.SCENARIOS })
+    }
+
+    @Test
+    fun accurateButSlowGetsAPacedDrill() {
+        val t = taskWithLesson()
+        val l = Learner(PlanSettings(start + days(60), 10, weekdays), 1.0)
+        l.lessons += lessonOf(t.id).id
+        l.answer(t.id, 15, 1.0, start)
+        assertTrue("quick and right: no paced drill", l.plan(start + days(1)).sessions.none { it.key == "pace:${t.id}" })
+        l.ms = 150_000
+        l.answer(t.id, 15, 1.0, start + 1000)
+        assertTrue("right but slow: paced drill", l.plan(start + days(1)).sessions.any { it.key == "pace:${t.id}" })
+    }
+
+    @Test
+    fun leechCardsBringTheLessonBack() {
+        val t = taskWithLesson()
+        val l = Learner(PlanSettings(start + days(60), 10, weekdays), 1.0)
+        l.lessons += lessonOf(t.id).id
+        l.answer(t.id, 15, 1.0, start)
+        l.leeches[t.id] = 2
+        val s = l.plan(start + days(1)).sessions.first { it.key == "relearn:${t.id}:2" }
+        assertEquals(StepKind.LESSON, s.steps.first().kind)
+        l.doSession(s, start + days(1))
+        assertTrue("done once: gone until another card slips", l.plan(start + days(2)).sessions.none { it.key.startsWith("relearn:${t.id}") })
     }
 }

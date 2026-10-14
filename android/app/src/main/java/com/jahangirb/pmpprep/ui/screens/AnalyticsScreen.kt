@@ -58,6 +58,7 @@ fun AnalyticsScreen(vm: PmpViewModel) {
             Text("Readiness ${report.score} / 100", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold)
             Text(if (report.provisional) "Provisional: " + report.gates.joinToString("; ") else "Built on enough evidence to mean something.",
                 fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            androidx.compose.material3.TextButton(onClick = { vm.navigate(com.jahangirb.pmpprep.ui.Dest.GUIDE) }) { Text("How the score works") }
         }
         item {
             PmpCard {
