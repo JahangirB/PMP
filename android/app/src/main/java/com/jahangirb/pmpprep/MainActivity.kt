@@ -19,7 +19,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.LibraryBooks
 import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.automirrored.filled.Notes
 import androidx.compose.material.icons.filled.Assignment
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Dashboard
@@ -45,7 +47,20 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
+import kotlin.math.roundToInt
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -60,6 +75,8 @@ import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.ui.Dest
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.screens.AnalyticsScreen
+import com.jahangirb.pmpprep.ui.screens.CoachScreen
+import com.jahangirb.pmpprep.ui.screens.NotesScreen
 import com.jahangirb.pmpprep.ui.screens.DashboardScreen
 import com.jahangirb.pmpprep.ui.screens.DataScreen
 import com.jahangirb.pmpprep.ui.screens.FlashcardsScreen
@@ -152,7 +169,7 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
         }
     }
 
-    BackHandler(enabled = vm.screen != Dest.DASHBOARD || vm.practice != null) { vm.back() }
+    BackHandler(enabled = vm.screen != Dest.DASHBOARD) { vm.back() }
 
     val bottom = listOf(
         NavItem(Dest.DASHBOARD, Icons.Default.Dashboard, "Home"),
@@ -162,6 +179,8 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
         NavItem(Dest.FLASHCARDS, Icons.Default.Style, "Cards"),
     )
     val more = listOf(
+        NavItem(Dest.COACH, Icons.Default.AutoAwesome, "Coach"),
+        NavItem(Dest.NOTES, Icons.AutoMirrored.Filled.Notes, "Notes"),
         NavItem(Dest.SITUATIONAL, Icons.Default.Psychology, "Situational Trainer"),
         NavItem(Dest.FORMULAS, Icons.Default.Calculate, "Formula Lab"),
         NavItem(Dest.REFERENCE, Icons.AutoMirrored.Filled.LibraryBooks, "ECO Tasks & Reference"),
@@ -231,6 +250,13 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                 Dest.MISTAKES -> MistakeJournalScreen(vm)
                 Dest.PLANNER -> PlannerScreen(vm)
                 Dest.DATA -> DataScreen(vm)
+                Dest.COACH -> CoachScreen(vm)
+                Dest.NOTES -> NotesScreen(vm)
+            }
+            // The coach floats over everything except itself, a running mock and the cold diagnostic.
+            val diagnosing = vm.practice?.let { it.diagnostic && !it.finished } == true && vm.screen == Dest.PRACTICE
+            if (vm.screen != Dest.COACH && !examRunning && !diagnosing) {
+                CoachBubble(vm) { vm.coachTab = 0; vm.navigate(Dest.COACH) }
             }
         }
     }
@@ -242,5 +268,41 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
             title = { Text("Import") },
             text = { Text(report) },
         )
+    }
+}
+
+/** The coach, a draggable bubble that carries a count of what it has to say. */
+@Composable
+private fun CoachBubble(vm: PmpViewModel, onOpen: () -> Unit) {
+    val rev by vm.revision.collectAsState()
+    val count = remember(rev, vm.contentVersion) { vm.coach().report().messages.size }
+    val density = LocalDensity.current
+    var offset by remember { mutableStateOf(Offset.Zero) }
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+        val maxX = with(density) { (maxWidth - 72.dp).toPx() }
+        val maxY = with(density) { (maxHeight - 72.dp).toPx() }
+        Box(
+            Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 16.dp, bottom = 96.dp)
+                .offset { IntOffset(offset.x.roundToInt(), offset.y.roundToInt()) }
+                .pointerInput(Unit) {
+                    detectDragGestures { change, drag ->
+                        change.consume()
+                        offset = Offset((offset.x + drag.x).coerceIn(-maxX, 0f), (offset.y + drag.y).coerceIn(-maxY, 0f))
+                    }
+                },
+        ) {
+            FloatingActionButton(
+                onClick = onOpen,
+                shape = CircleShape,
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+            ) {
+                BadgedBox(badge = { if (count > 0) Badge { Text("$count") } }) {
+                    Icon(Icons.Default.AutoAwesome, contentDescription = "Coach")
+                }
+            }
+        }
     }
 }
