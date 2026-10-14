@@ -1,3 +1,5 @@
+# Pull-request check for the Android app: runs the unit tests and a debug
+# build. Publishing the APK is android-apk.yml's job.
 name: Android CI
 
 on:
@@ -13,14 +15,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: set up JDK 11
+    - name: set up JDK 17
       uses: actions/setup-java@v4
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'temurin'
         cache: gradle
+    # The build extracts the app's content from index.html with Node.
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '20'
 
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: chmod +x android/gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      working-directory: android
+      run: ./gradlew testDebugUnitTest assembleDebug
