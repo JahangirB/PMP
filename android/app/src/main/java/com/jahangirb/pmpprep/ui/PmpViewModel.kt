@@ -65,8 +65,7 @@ enum class Dest(val title: String) {
     MISTAKES("Mistake Journal"),
     PLANNER("Study Planner"),
     DATA("Banks & Backup"),
-    COACH("Coach"),
-    NOTES("Notes"),
+    COACH("Coach and notes"),
     MENU("Menu"),
     SESSION("Session"),
 }

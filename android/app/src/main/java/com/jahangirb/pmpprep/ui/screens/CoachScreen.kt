@@ -31,7 +31,7 @@ import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.material3.AssistChip
-import androidx.compose.material3.Button
+import com.jahangirb.pmpprep.ui.components.ClayButton as Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -76,8 +76,13 @@ fun CoachScreen(vm: PmpViewModel) {
         TabRow(selectedTabIndex = vm.coachTab) {
             Tab(selected = vm.coachTab == 0, onClick = { vm.coachTab = 0 }, text = { Text("Today") })
             Tab(selected = vm.coachTab == 1, onClick = { vm.coachTab = 1 }, text = { Text("Ask Gemini") })
+            Tab(selected = vm.coachTab == 2, onClick = { vm.coachTab = 2 }, text = { Text("Notes") })
         }
-        if (vm.coachTab == 0) CoachToday(vm) else CoachChat(vm)
+        when (vm.coachTab) {
+            0 -> CoachToday(vm)
+            1 -> CoachChat(vm)
+            else -> NotesScreen(vm)
+        }
     }
 }
 

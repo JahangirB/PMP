@@ -85,7 +85,7 @@ fun MenuScreen(vm: PmpViewModel) {
             Entry(Icons.Default.AutoAwesome, "Coach", if (vm.geminiKey.isEmpty()) "How you're doing; connect Gemini to chat" else "How you're doing, and Gemini chat") { vm.coachTab = 0; vm.navigate(Dest.COACH) },
             Entry(Icons.Default.Insights, "Analytics", "Readiness ${vm.readiness.report(vm.store).score}, by task and type") { vm.navigate(Dest.ANALYTICS) },
             Entry(Icons.Default.ErrorOutline, "Mistake journal", "Tag causes, retry") { vm.navigate(Dest.MISTAKES) },
-            Entry(Icons.AutoMirrored.Filled.Notes, "Notes", "Your notes page") { vm.navigate(Dest.NOTES) },
+            Entry(Icons.AutoMirrored.Filled.Notes, "Notes", "Your notes page, also in the coach bubble") { vm.coachTab = 2; vm.navigate(Dest.COACH) },
         ),
         "Settings" to listOf(
             Entry(Icons.Default.CalendarMonth, "Plan and schedule", "Exam date, hours, study days") { vm.navigate(Dest.PLANNER) },
