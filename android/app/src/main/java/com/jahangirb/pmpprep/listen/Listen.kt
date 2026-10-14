@@ -102,9 +102,7 @@ object Listen {
             val pause = FloatArray(engine.sampleRate() * 6 / 10)
             r.texts.forEachIndexed { i, text ->
                 if (r.cancelled) return
-                engine.generateWithCallback(text, VOICE, speed) { samples ->
-                    if (r.cancelled) 0 else { r.queue.put(samples.copyOf()); 1 }
-                }
+                engine.generateWithCallback(text, VOICE, speed, Sink(r))
                 r.queue.put(MARK)
                 if (i < r.texts.size - 1) r.queue.put(pause)
             }
@@ -114,7 +112,28 @@ object Listen {
         }
     }
 
+    /**
+     * Receives each generated stretch of speech. The speech library finds this by JNI as a method
+     * `invoke(float[]): Integer`, which a Kotlin lambda doesn't have (lambdas compile to
+     * invokedynamic), so it must be a real class, kept by name in proguard-rules.pro.
+     */
+    private class Sink(private val r: Run) : (FloatArray) -> Int {
+        override fun invoke(samples: FloatArray): Int {
+            if (r.cancelled) return 0
+            r.queue.put(samples.copyOf())
+            return 1
+        }
+    }
+
     private fun playback(r: Run) {
+        try { play(r) } catch (e: Throwable) {
+            if (!r.cancelled) error = "Playback stopped: ${e.message ?: e}"
+            r.cancelled = true
+            if (run === r) stop()
+        }
+    }
+
+    private fun play(r: Run) {
         var started = false
         while (!r.cancelled) {
             val chunk = r.queue.poll(200, TimeUnit.MILLISECONDS) ?: continue
