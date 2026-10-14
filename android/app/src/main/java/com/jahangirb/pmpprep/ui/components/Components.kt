@@ -1,7 +1,16 @@
 package com.jahangirb.pmpprep.ui.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
+import com.jahangirb.pmpprep.ui.theme.kineticEnter
+import com.jahangirb.pmpprep.ui.theme.clay
+import com.jahangirb.pmpprep.ui.theme.ClayShade
+import com.jahangirb.pmpprep.ui.theme.ClayRim
+import com.jahangirb.pmpprep.ui.theme.ClayRadius
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.material3.contentColorFor
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,14 +25,11 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.Speed
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -40,7 +46,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -53,9 +58,7 @@ import com.jahangirb.pmpprep.ui.theme.BusinessAccent
 import com.jahangirb.pmpprep.ui.theme.ColorPaceDanger
 import com.jahangirb.pmpprep.ui.theme.ColorPaceGood
 import com.jahangirb.pmpprep.ui.theme.ColorPaceWarn
-import com.jahangirb.pmpprep.ui.theme.ColorSuccess
 import com.jahangirb.pmpprep.ui.theme.PeopleAccent
-import com.jahangirb.pmpprep.ui.theme.PmpGoldTertiary
 import com.jahangirb.pmpprep.ui.theme.ProcessAccent
 
 @Composable
@@ -133,65 +136,23 @@ fun SectionLabel(text: String, modifier: Modifier = Modifier) {
     )
 }
 
+/** A clay card. Tappable cards float up while pressed, pop back on release, and light where touched. */
 @Composable
 fun PmpCard(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null, container: Color? = null, border: Color? = null, content: @Composable ColumnScope.() -> Unit) {
-    Card(
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = container ?: MaterialTheme.colorScheme.surface),
-        border = BorderStroke(1.dp, border ?: MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)),
-        modifier = modifier.fillMaxWidth().let { if (onClick != null) it.clickable(onClick = onClick) else it },
-    ) {
-        Column(modifier = Modifier.padding(14.dp), content = content)
+    val shape = RoundedCornerShape(ClayRadius)
+    val bg = container ?: MaterialTheme.colorScheme.surface
+    val interaction = remember(onClick != null) { if (onClick != null) MutableInteractionSource() else null }
+    CompositionLocalProvider(LocalContentColor provides contentColorFor(bg)) {
+        Column(
+            modifier = modifier.fillMaxWidth()
+                .kineticEnter()
+                .clay(shape, bg, border ?: ClayRim, ClayShade, MaterialTheme.colorScheme.primary, interaction)
+                .let { if (onClick != null && interaction != null) it.clickable(interaction, LocalIndication.current, onClick = onClick) else it }
+                .padding(horizontal = 20.dp, vertical = 18.dp),
+            content = content,
+        )
     }
 }
-
-@Composable
-fun StatTile(title: String, value: String, sub: String, modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
-    Surface(
-        color = MaterialTheme.colorScheme.surface,
-        shape = RoundedCornerShape(12.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)),
-        modifier = if (onClick != null) modifier.clickable(onClick = onClick) else modifier,
-    ) {
-        Column(modifier = Modifier.padding(12.dp)) {
-            Text(title, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Medium)
-            Spacer(Modifier.height(2.dp))
-            Text(value, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
-            Text(sub, fontSize = 11.sp, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-        }
-    }
-}
-
-@Composable
-fun ActionCard(title: String, description: String, icon: ImageVector, badge: String, onClick: () -> Unit) {
-    Card(
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)),
-        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
-    ) {
-        Row(modifier = Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-            Surface(color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f), shape = RoundedCornerShape(10.dp), modifier = Modifier.size(42.dp)) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(24.dp))
-                }
-            }
-            Spacer(Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-                    Text(title, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(1f))
-                    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(6.dp)) {
-                        Text(badge, fontSize = 11.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
-                    }
-                }
-                Spacer(Modifier.height(2.dp))
-                Text(description, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 16.sp)
-            }
-        }
-    }
-}
-
 @Composable
 fun ProgressRow(label: String, value: Double, right: String, color: Color = MaterialTheme.colorScheme.primary) {
     Column {
@@ -233,52 +194,6 @@ fun PacingBar(secondsSpent: Long, targetSeconds: Int, modifier: Modifier = Modif
             trackColor = MaterialTheme.colorScheme.surfaceVariant,
             modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
         )
-    }
-}
-
-@Composable
-fun ReadinessMeterCard(score: Int, status: String, provisional: List<String>, nextAction: String, onAction: () -> Unit) {
-    val scoreColor = when {
-        score >= 75 -> ColorSuccess
-        score >= 60 -> MaterialTheme.colorScheme.primary
-        else -> PmpGoldTertiary
-    }
-    Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)),
-        shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)),
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text("EXAM READINESS", fontSize = 11.sp, fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f), letterSpacing = 1.sp)
-                    Text(status, fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = scoreColor)
-                    if (provisional.isNotEmpty()) {
-                        Text("Provisional: ${provisional.joinToString("; ")}", fontSize = 11.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 14.sp)
-                    }
-                }
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.size(60.dp).clip(CircleShape).background(scoreColor.copy(alpha = 0.15f)).border(2.dp, scoreColor, CircleShape),
-                ) {
-                    Text("$score", fontSize = 20.sp, fontWeight = FontWeight.Black, fontFamily = FontFamily.Monospace, color = scoreColor)
-                }
-            }
-            Spacer(Modifier.height(12.dp))
-            Surface(color = MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(10.dp), modifier = Modifier.fillMaxWidth().clickable(onClick = onAction)) {
-                Row(modifier = Modifier.padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Default.Lightbulb, contentDescription = null, tint = PmpGoldTertiary, modifier = Modifier.size(18.dp))
-                    Spacer(Modifier.width(8.dp))
-                    Column {
-                        Text("Next best action", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f))
-                        Text(nextAction, fontSize = 12.sp, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onSurface)
-                    }
-                }
-            }
-        }
     }
 }
 
