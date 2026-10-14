@@ -11,6 +11,7 @@ questions, scenarios, lessons, flashcards, glossary, formulas and reference.
 | Screen | What it does |
 |---|---|
 | Your path (home) | First run asks for the exam date, weekly hours, study days and the diagnostic. From then on the app leads: one **Continue** button opens the next session (cards, lesson, practice, reflect, debrief), with a 15-minute version for short days, what's coming up, and why the plan changed. `data/PlanEngine.kt` rebuilds the plan from your progress every time, so missed days, weak scores and practice done elsewhere all re-shape it (see below) |
+| How it works | In the ☰ menu under *Start here*: a user guide covering what you get, how a study day runs, the readiness score with your own figures, how each exam task is judged, how weak spots are found and worked on, the other checks, reminders, and your data |
 | ☰ Menu | Everything beside the path: extra drills, mistakes, flagged, situational trainer, formula lab, mock, diagnostic, lessons, cards, reference, coach, analytics, notes, plan settings, banks |
 | Coach bubble | A draggable bubble on every screen, hidden while you pick answers. Three tabs: **Today** works offline: how you're doing, what's going well, what to improve, the coach's messages and today's session, each with a Go button. **Ask Gemini** is a chat with Google's Gemini Flash on your own API key: every message carries a snapshot of your progress, so it can review how you're doing, say what to improve and answer PMP questions. **Notes** is your notes page (below). Practice questions have an "Ask coach" button |
 | Diagnostic | 25 questions (8 People / 10 Process / 7 Business) across the difficulty range, taken cold with no feedback until the end; the planner and the coach aim from it |
@@ -101,6 +102,22 @@ the Android side is `reminders/Reminders.kt`). Everything stays on the phone.
   it (always) or block it (never). Pause for a day or three, or switch reminders off.
 - Alarms are inexact (a few minutes either way) so they need no special permission, survive
   battery saving, and are set again after a restart.
+
+## Assessment
+
+Readiness (`data/Readiness.kt`) has five parts: accuracy 35, mock exams 25, coverage 20, pace 10,
+habit 10. Accuracy is worked out per domain and weighted like the exam (People 33%, Process 41%,
+Business 26%), so a weak domain can't hide behind a strong one. The plan (`data/PlanEngine.kt`)
+also:
+
+- re-checks a domain whose answers fall under 65% after its checkpoint was passed (never in the final week);
+- shapes a task's sessions by the cause you tag most on its misses: the lesson first for knowledge
+  gaps, situational scenarios for mindset, a reading or calculation tip otherwise;
+- adds a paced drill for a mastered task answered slower than 110 s a question;
+- brings a task's lesson back when its flashcards become leeches.
+
+Practice questions lean toward your weakest approach (predictive, agile or hybrid) when it is
+clearly behind (`data/QuestionPicker.kt`). `PlanEngineTest` and `GapsTest` cover each of these.
 
 ## How the path adapts
 
