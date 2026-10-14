@@ -41,6 +41,9 @@ import com.jahangirb.pmpprep.data.Scenario
 import com.jahangirb.pmpprep.data.ScenarioRun
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.data.Srs
+import com.jahangirb.pmpprep.data.WidgetStats
+import com.jahangirb.pmpprep.widget.PmpWidget
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -112,6 +115,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 srs = Srs(repo.extras.srs)
                 restoreMock()
                 ready = true
+                // Keep the home-screen widget current: a second after progress settles.
+                launch { store.revision.collectLatest { delay(1000); runCatching { publishWidget() } } }
             } catch (e: Exception) {
                 loadError = e.message ?: e.toString()
             }
@@ -501,6 +506,38 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun startSession(s: Session) {
         if (run?.session?.key != s.key) run = PathRun(s, System.currentTimeMillis(), store.mocks.size)
         navigate(Dest.SESSION)
+    }
+
+    /* ── home-screen widget ──────────────────────────────────────────────── */
+
+    /** Set when a widget tile opened the app; acted on once content has loaded. */
+    var pendingOpen by mutableStateOf<String?>(null)
+
+    fun openPending() {
+        val target = pendingOpen ?: return
+        pendingOpen = null
+        if (screen == Dest.MOCK && mock != null) return // never pull you out of a running mock
+        home()
+        when (target) {
+            PmpWidget.DAYS -> navigate(Dest.PLANNER)
+            PmpWidget.TODAY -> (run?.session ?: plan()?.next)?.let { startSession(it) }
+            PmpWidget.READY -> navigate(Dest.ANALYTICS)
+            PmpWidget.SYLLABUS -> navigate(Dest.LEARN)
+        }
+    }
+
+    private suspend fun publishWidget() {
+        val now = System.currentTimeMillis()
+        val lessons = repo.extras.lessons
+        PmpWidget.publish(getApplication(), WidgetStats(
+            examDate = store.plan.examDate,
+            day = PlanEngine.startOfDay(now),
+            todayMinutes = WidgetStats.minutesToday(store.sessionResults, store.attempts, now),
+            targetMinutes = plan(now)?.minutesPerDay ?: 0,
+            readiness = readiness.report(store, now).score,
+            lessonsDone = lessons.count { it.id in store.lessonsDone },
+            lessonsTotal = lessons.size,
+        ))
     }
 
     /** A 15-minute version of a session for a short day: warm-up cards and 10 questions on the same ground. */

@@ -40,13 +40,13 @@ The layout follows published mobile-usability research; when changing it, keep t
 - **The coach is a bubble** you can drag anywhere. It opens Coach, Ask Gemini and Notes. It hides
   wherever there are answers to pick (drills, the guided session's practice and mock steps, a running
   mock), so it never covers an option.
-- **Clay look** (`ui/theme/Clay.kt`): fluffy pastel surfaces at hue 195, 32 dp corners, a 2 dp light
-  rim, and a soft shadow tinted with the theme colour. Light and dark follow the system.
-- **Motion** runs at 0.5x speed: a spring with damping 0.56 and stiffness 375 (the 1500 of the spec,
-  quartered). Cards slide in from 36 dp left with a 4° skew that straightens, 90 ms apart. Pressed
-  cards float up, light where your finger is, and pop back on release. Buttons lift, lean toward your
-  finger and glow, with Material's ink ripple on tap. There's no idle pulsing. All of it is switched
-  off when Android's *Remove animations* is on.
+- **Clay look** (`ui/theme/Clay.kt`): cream cards on a sage-to-straw gradient with leaf-green
+  accents, 32 dp corners, a 2 dp light rim, and a soft shadow tinted green. Light and dark follow the
+  system. The sheen and rim are clipped to each card's shape, so nothing pale shows past the corners.
+- **Motion is calm**: no springs, no overshoot. Cards glide in from 36 dp left while fading up
+  (700 ms, easing to a stop), 90 ms apart. Pressed cards lift 3 dp and glow under the finger. Buttons
+  lift 2 dp and glow, with Material's ink ripple on tap. There's no idle pulsing. All of it is
+  switched off when Android's *Remove animations* is on.
 - **No glass blur.** Compose's blur only blurs a view's own content, not what's behind it, so a frosted
   panel would need a custom backdrop. The 8 px glass blur from the spec is left out rather than faked.
 - **Sessions are full screen** with a step counter and progress bar; ✕ leaves and *Continue* resumes
@@ -58,6 +58,22 @@ The layout follows published mobile-usability research; when changing it, keep t
 - **Contrast measured, not assumed.** Status, domain and accent colours are tuned per theme so text
   meets WCAG AA (4.5:1) in both: the earlier single values measured 2.2–4.1:1 on white. The measured
   pairs are listed in `ui/theme/Color.kt`. No text is smaller than 11 sp.
+
+## Home-screen widget
+
+A 5×1 widget (`widget/PmpWidget.kt`, built with Glance) shows four clay tiles:
+
+| Tile | Shows | Tap opens |
+|---|---|---|
+| Days left | Days to your exam date | Plan and schedule |
+| Today | Minutes studied against today's plan, as a percentage with a bar | Today's session, or resumes the one in progress |
+| Ready | The readiness score out of 100 | Analytics |
+| Syllabus | Lessons completed out of all lessons, as a percentage with a bar | Lessons |
+
+The app saves the figures whenever your progress changes; the widget redraws then and just after
+midnight, when the day count and Today roll over. On Android 12 and newer, placing the widget asks
+for **app colours** or **system colours** (taken from your wallpaper); long-press it and tap its
+settings button to change. Older Android uses the app colours, with square corners.
 
 ## How the path adapts
 
