@@ -49,6 +49,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Badge
@@ -236,7 +237,9 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
             }
         },
     ) { inner ->
-        Box(Modifier.fillMaxSize().padding(inner)) {
+        // consumeWindowInsets: the bars' space is already in `inner`, so a screen's
+        // imePadding adds only the part of the keyboard that rises above them.
+        Box(Modifier.fillMaxSize().padding(inner).consumeWindowInsets(inner)) {
             when (vm.screen) {
                 Dest.DASHBOARD -> DashboardScreen(vm)
                 Dest.PRACTICE -> PracticeScreen(vm)
