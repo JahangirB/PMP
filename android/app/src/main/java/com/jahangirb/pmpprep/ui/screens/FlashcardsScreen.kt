@@ -91,8 +91,9 @@ private fun DeckList(vm: PmpViewModel) {
     }
 }
 
+/** onDone: shown inside a guided-path session, which moves on instead of returning to the decks. */
 @Composable
-private fun CardSession(vm: PmpViewModel) {
+fun CardSession(vm: PmpViewModel, onDone: (() -> Unit)? = null) {
     val q = vm.cardQueue ?: return
     if (vm.cardIndex >= q.size) {
         Column(Modifier.fillMaxSize().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
@@ -108,7 +109,7 @@ private fun CardSession(vm: PmpViewModel) {
                 }
             }
             Spacer(Modifier.height(16.dp))
-            Button(onClick = { vm.back() }) { Text("Back to decks") }
+            if (onDone != null) Button(onClick = onDone) { Text("Continue") } else Button(onClick = { vm.back() }) { Text("Back to decks") }
         }
         return
     }

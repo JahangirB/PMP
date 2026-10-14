@@ -311,8 +311,8 @@ private fun DiagnosticResults(vm: PmpViewModel, s: QuizSession) {
             val weakest = Domain.entries.minByOrNull { d.domainPct(it) ?: 1.0 }
             if (weakest != null) Text("Your plan will give ${weakest.title} the most practice time.", fontSize = 13.sp)
         }
-        Button(onClick = { vm.practice = null; vm.navigate(com.jahangirb.pmpprep.ui.Dest.PLANNER) }, modifier = Modifier.fillMaxWidth().height(50.dp)) {
-            Text("Build my study plan", fontWeight = FontWeight.Bold)
+        Button(onClick = { vm.practice = null; vm.home() }, modifier = Modifier.fillMaxWidth().height(50.dp)) {
+            Text("See my study path", fontWeight = FontWeight.Bold)
         }
         OutlinedButton(onClick = { reviewing = true }, modifier = Modifier.fillMaxWidth()) { Text("Review the answers") }
         OutlinedButton(onClick = { vm.practice = null; vm.coachTab = 0; vm.navigate(com.jahangirb.pmpprep.ui.Dest.COACH) }, modifier = Modifier.fillMaxWidth()) { Text("See what the coach suggests") }

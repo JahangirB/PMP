@@ -92,8 +92,9 @@ private fun LessonList(vm: PmpViewModel) {
     }
 }
 
+/** inSession: shown inside a guided-path session, which handles marking done and moving on. */
 @Composable
-private fun LessonView(vm: PmpViewModel, l: Lesson) {
+fun LessonView(vm: PmpViewModel, l: Lesson, inSession: Boolean = false) {
     val rev by vm.revision.collectAsState()
     val scroll = rememberScrollState()
     LaunchedEffect(l.id) { scroll.scrollTo(0) }
@@ -155,10 +156,10 @@ private fun LessonView(vm: PmpViewModel, l: Lesson) {
         if (l.recap.isNotEmpty()) PmpCard { SectionLabel("Recap"); Spacer(Modifier.height(6.dp)); BulletList(l.recap) }
         MindsetCallout(l.mindset)
         val done = rev >= 0 && l.id in vm.store.lessonsDone
-        Button(onClick = { vm.store.setLessonDone(l.id, !done) }, modifier = Modifier.fillMaxWidth()) {
+        if (!inSession) Button(onClick = { vm.store.setLessonDone(l.id, !done) }, modifier = Modifier.fillMaxWidth()) {
             Text(if (done) "Mark as not done" else "Mark lesson done", fontWeight = FontWeight.Bold)
         }
-        if (l.ecoTask.isNotBlank()) {
+        if (!inSession && l.ecoTask.isNotBlank()) {
             OutlinedButton(onClick = {
                 vm.startPractice(com.jahangirb.pmpprep.ui.PracticeFilter(task = l.ecoTask, count = 10), "Practice: ${l.title}")
             }, modifier = Modifier.fillMaxWidth()) { Text("Practise this task (10 questions)") }
