@@ -2,6 +2,7 @@ package com.jahangirb.pmpprep.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
@@ -92,7 +93,10 @@ fun PmpTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable ()
             colorScheme = if (darkTheme) DarkColors else LightColors,
             typography = AppTypography,
             shapes = ClayShapes,
-            content = content,
-        )
+        ) {
+            // Text with no colour of its own reads as onBackground everywhere, never Compose's default
+            // black, which vanished on the dark backgrounds.
+            CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground, content = content)
+        }
     }
 }
