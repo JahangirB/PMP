@@ -166,12 +166,12 @@ object Reminders {
                 n.setContentIntent(open(ctx, id, PmpWidget.TODAY, 0))
                 n.addAction(0, "Start", open(ctx, id, PmpWidget.TODAY, 1))
                 n.addAction(0, "15-minute version", open(ctx, id, SHORT, 2))
-                n.addAction(0, "Not today", notToday(ctx, id))
+                n.addAction(0, "Not today", notTodayIntent(ctx, id))
             }
             ReminderKind.STREAK -> {
                 n.setContentIntent(open(ctx, id, CARDS, 0))
                 n.addAction(0, "Review cards", open(ctx, id, CARDS, 1))
-                n.addAction(0, "Not today", notToday(ctx, id))
+                n.addAction(0, "Not today", notTodayIntent(ctx, id))
             }
             ReminderKind.SUMMARY -> {
                 n.setContentIntent(open(ctx, id, PmpWidget.READY, 0))
@@ -189,7 +189,7 @@ object Reminders {
         return PendingIntent.getActivity(ctx, 200 + slot, i, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
 
-    private fun notToday(ctx: Context, id: Long): PendingIntent {
+    private fun notTodayIntent(ctx: Context, id: Long): PendingIntent {
         val i = Intent(ctx, ReminderReceiver::class.java).setAction(ACTION_NOT_TODAY).putExtra(EXTRA_REMINDER, id)
         return PendingIntent.getBroadcast(ctx, 300, i, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
