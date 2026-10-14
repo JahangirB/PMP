@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12 and newer: back up and transfer progress, never the Gemini key. -->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="gemini.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="gemini.xml" />
+    </device-transfer>
+</data-extraction-rules>

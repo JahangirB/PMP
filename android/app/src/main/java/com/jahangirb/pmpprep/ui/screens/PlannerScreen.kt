@@ -55,6 +55,31 @@ fun PlannerScreen(vm: PmpViewModel) {
         Text("Built from your exam date, your hours and what your answers say is weakest.", fontSize = 13.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant)
 
+        val diag = vm.store.diagnostic
+        PmpCard(
+            container = if (diag == null) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f) else null,
+            border = if (diag == null) MaterialTheme.colorScheme.primary else null,
+        ) {
+            SectionLabel("Your starting level")
+            Spacer(Modifier.height(6.dp))
+            if (diag == null) {
+                Text("Take the 25-question diagnostic first, cold, without revising. It shows where you stand in each domain, and the plan below aims at whatever comes out lowest.",
+                    fontSize = 14.sp, lineHeight = 20.sp)
+                Spacer(Modifier.height(8.dp))
+                Button(onClick = { vm.startDiagnostic() }, modifier = Modifier.fillMaxWidth()) { Text("Take the diagnostic (about 30 minutes)", fontWeight = FontWeight.Bold) }
+            } else {
+                Text("Diagnostic ${pct(diag.pct)} (${diag.right}/${diag.n}), ${DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(diag.at))}",
+                    fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Domain.entries.forEach { d ->
+                    diag.domains[d]?.let { (r, of) ->
+                        Spacer(Modifier.height(6.dp))
+                        ProgressRow(d.title, if (of == 0) 0.0 else r.toDouble() / of, "$r/$of", domainColor(d))
+                    }
+                }
+                androidx.compose.material3.TextButton(onClick = { vm.startDiagnostic() }) { Text("Retake the diagnostic") }
+            }
+        }
+
         PmpCard {
             SectionLabel("Exam date")
             Spacer(Modifier.height(6.dp))
@@ -100,8 +125,10 @@ fun PlannerScreen(vm: PmpViewModel) {
             }
             val practiceHours = (totalHours - lessonHours - mocksPlanned * mockHours).coerceAtLeast(0.0)
             // Weak domains get more of the practice time: weight ÷ accuracy, normalised.
+            // Accuracy comes from practice once there is enough of it, otherwise from the diagnostic.
             val need = Domain.entries.associateWith { d ->
-                val acc = byDomain[d.id]?.accuracy ?: 0.6
+                val g = byDomain[d.id]
+                val acc = if (g != null && g.n >= 30) g.accuracy else diag?.domainPct(d) ?: g?.accuracy ?: 0.6
                 (x.domainWeights[d] ?: 0.0) / acc.coerceIn(0.3, 1.0)
             }
             val sum = need.values.sum().takeIf { it > 0 } ?: 1.0
@@ -122,7 +149,9 @@ fun PlannerScreen(vm: PmpViewModel) {
             }
             PmpCard {
                 SectionLabel("Where practice time should go")
-                Text("Exam weight, adjusted for how you're doing in each domain.", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(if (diag == null) "Exam weight, adjusted for how you're doing in each domain. Take the diagnostic to aim this properly."
+                    else "Exam weight, adjusted by your diagnostic and, as it builds up, your practice accuracy.",
+                    fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Domain.entries.forEach { d ->
                     val share = need[d]!! / sum
                     Spacer(Modifier.height(8.dp))

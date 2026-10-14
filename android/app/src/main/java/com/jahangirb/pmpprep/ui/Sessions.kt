@@ -26,6 +26,8 @@ class QuizSession(
     val title: String,
     val questions: List<Question>,
     val reviewOnly: Boolean = false,
+    /** The cold level check: no feedback until the end, scored as one set. */
+    val diagnostic: Boolean = false,
     /** For review: the answers given and the order they were shown in. */
     givenAnswers: Map<String, Answer> = emptyMap(),
     givenOrder: Map<String, List<Option>>? = null,
