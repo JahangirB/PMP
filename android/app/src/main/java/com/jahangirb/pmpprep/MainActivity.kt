@@ -27,7 +27,12 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.IntOffset
 import com.jahangirb.pmpprep.data.StepKind
+import com.jahangirb.pmpprep.ui.theme.ClayBackdrop
 import com.jahangirb.pmpprep.ui.theme.ClayRim
+import com.jahangirb.pmpprep.widget.PmpWidget
+import androidx.compose.foundation.background
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import com.jahangirb.pmpprep.ui.theme.ClayShade
 import com.jahangirb.pmpprep.ui.theme.EnterStagger
 import com.jahangirb.pmpprep.ui.theme.LocalEnter
@@ -98,7 +103,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        if (savedInstanceState == null) incoming = urisFrom(intent)
+        if (savedInstanceState == null) { incoming = urisFrom(intent); widgetTarget(intent) }
         setContent {
             PmpTheme {
                 if (!vm.ready) Loading(vm.loadError) else App(vm, incoming) { incoming = emptyList() }
@@ -109,6 +114,12 @@ class MainActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         incoming = urisFrom(intent)
+        widgetTarget(intent)
+    }
+
+    /** A tap on one of the home-screen widget's tiles names the screen to open. */
+    private fun widgetTarget(i: Intent?) {
+        i?.getStringExtra(PmpWidget.OPEN)?.let { vm.pendingOpen = it }
     }
 
     override fun onStart() {
@@ -158,6 +169,8 @@ private fun Loading(error: String?) {
 private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> Unit) {
     var importReport by remember { mutableStateOf<String?>(null) }
 
+    LaunchedEffect(vm.ready, vm.pendingOpen) { if (vm.ready) vm.openPending() }
+
     LaunchedEffect(incoming) {
         if (incoming.isNotEmpty()) {
             importReport = vm.importPacks(incoming)
@@ -177,6 +190,9 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
     val fullScreen = examRunning || vm.screen == Dest.SESSION
 
     Scaffold(
+        // The clay backdrop: a soft gradient behind every screen.
+        modifier = Modifier.background(Brush.verticalGradient(ClayBackdrop)),
+        containerColor = Color.Transparent,
         topBar = {
             if (!fullScreen) TopAppBar(
                 title = { Text(vm.screen.title, fontSize = 18.sp, fontWeight = FontWeight.Bold) },
@@ -192,7 +208,7 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
+                    containerColor = Color.Transparent,
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
                 ),
             )
