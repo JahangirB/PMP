@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# Builds android/PMP-Prep.apk from ../index.html and ../packs/ without Gradle.
+# Builds android/PMP-Prep.apk, the native app, without Gradle. The questions
+# come from ../packs/*.json plus content/core.json and content/extras.json
+# (the built-in pack, flashcards, glossary and formulas, extracted from
+# ../index.html by tools/extract-content.js).
 #
 # Needs: a JDK, aapt, dalvik-exchange (dx), zipalign, apksigner
 #   (Debian/Ubuntu: apt-get install aapt dalvik-exchange zipalign apksigner)
@@ -20,7 +23,7 @@ KS_PASS="${KS_PASS:-pmpprep}"
 
 rm -rf build
 mkdir -p build/gen build/classes build/assets
-cp ../index.html build/assets/
+cp -r content build/assets/content
 cp -r ../packs build/assets/packs
 
 aapt package -f -m \
