@@ -160,7 +160,7 @@ private fun CardSession(vm: PmpViewModel) {
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(g.title, fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                            Text(if (g == Grade.AGAIN) "again today" else days(preview[g] ?: 1), fontSize = 10.sp)
+                            Text(if (g == Grade.AGAIN) "again today" else days(preview[g] ?: 1), fontSize = 11.sp)
                         }
                     }
                 }

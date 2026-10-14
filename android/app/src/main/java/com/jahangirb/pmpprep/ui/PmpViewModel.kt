@@ -44,7 +44,7 @@ import kotlin.math.roundToInt
 import kotlin.random.Random
 
 enum class Dest(val title: String) {
-    DASHBOARD("PMP Prep Suite"),
+    DASHBOARD("PMP Prep"),
     PRACTICE("Practice"),
     MOCK("Mock Exam"),
     SITUATIONAL("Situational Trainer"),
@@ -58,6 +58,7 @@ enum class Dest(val title: String) {
     DATA("Banks & Backup"),
     COACH("Coach"),
     NOTES("Notes"),
+    MORE("More"),
 }
 
 /** What to practise. Null means "any". */
@@ -117,6 +118,18 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun navigate(d: Dest) {
         if (d == screen) return
         backStack += screen
+        screen = d
+    }
+
+    /**
+     * Bottom-bar tabs are top-level places, not steps in a journey: switching
+     * replaces the history, so Back from any tab returns Home rather than
+     * replaying every tab tapped. A drill or deck in progress is kept.
+     */
+    fun switchTab(d: Dest) {
+        if (d == screen) return
+        backStack.clear()
+        if (d != Dest.DASHBOARD) backStack += Dest.DASHBOARD
         screen = d
     }
 

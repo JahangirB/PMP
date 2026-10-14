@@ -94,8 +94,12 @@ fun DataScreen(vm: PmpViewModel) {
                             if (p.invalid > 0) append(" · ${p.invalid} invalid")
                         }, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
-                    if (!p.builtin) IconButton(onClick = { deleting = p }) { Icon(Icons.Default.Delete, contentDescription = "Delete", tint = ColorError) }
                     Switch(checked = cv >= 0 && vm.repo.isEnabled(p), onCheckedChange = { vm.setPackEnabled(p, it) })
+                }
+                // Not beside the switch: a slip on the toggle must never land on Delete.
+                if (!p.builtin) TextButton(onClick = { deleting = p }) {
+                    Icon(Icons.Default.Delete, contentDescription = null, tint = ColorError)
+                    Text(" Delete this bank", color = ColorError)
                 }
             }
         }
@@ -125,7 +129,17 @@ fun DataScreen(vm: PmpViewModel) {
             exportLauncher.launch("pmp-progress-" + SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date()) + ".json")
         }, modifier = Modifier.fillMaxWidth()) { Text("Save progress backup") }
         OutlinedButton(onClick = { restoreLauncher.launch(arrayOf("*/*")) }, modifier = Modifier.fillMaxWidth()) { Text("Restore from backup") }
-        OutlinedButton(onClick = { confirmReset = true }, modifier = Modifier.fillMaxWidth()) { Text("Reset all progress", color = ColorError) }
+
+        // Destructive actions sit apart from everyday ones, and ask first.
+        Spacer(Modifier.height(16.dp))
+        SectionLabel("Danger zone")
+        PmpCard(border = ColorError.copy(alpha = 0.5f)) {
+            Text("Reset deletes every answer, flag, note, card schedule, mock result and your plan on this phone. Save a backup first if you might want them back.",
+                fontSize = 13.sp, lineHeight = 18.sp)
+            Spacer(Modifier.height(8.dp))
+            OutlinedButton(onClick = { confirmReset = true }, modifier = Modifier.fillMaxWidth(),
+                border = androidx.compose.foundation.BorderStroke(1.dp, ColorError)) { Text("Reset all progress", color = ColorError) }
+        }
 
         Spacer(Modifier.height(8.dp))
         Text("PMP, PMBOK and PMI are registered marks of the Project Management Institute, Inc. This is an independent study aid, not endorsed by or affiliated with PMI.",

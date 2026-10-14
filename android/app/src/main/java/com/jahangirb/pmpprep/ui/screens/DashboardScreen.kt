@@ -1,6 +1,7 @@
 package com.jahangirb.pmpprep.ui.screens
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -55,6 +56,7 @@ fun DashboardScreen(vm: PmpViewModel) {
     val rev by vm.revision.collectAsState()
     val cv = vm.contentVersion
     val report = remember(rev, cv) { vm.readiness.report(vm.store) }
+    val coach = remember(rev, cv) { vm.coach().report() }
     val streak = remember(rev) { vm.readiness.streak(vm.store, System.currentTimeMillis()) }
     val pool = remember(cv) { vm.pool() }
     val cards = remember(rev) { vm.deckCounts(null) }
@@ -76,7 +78,7 @@ fun DashboardScreen(vm: PmpViewModel) {
             Spacer(Modifier.height(8.dp))
             Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text("PMP Prep Suite", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
+                    Text("Today", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
                     Text(x.ecoLabel.ifBlank { "Examination Content Outline" }, fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
                 }
@@ -111,18 +113,27 @@ fun DashboardScreen(vm: PmpViewModel) {
             }
         }
 
-        if (vm.store.diagnostic == null || vm.store.plan.examDate == null) {
+        // One primary action per screen: the coach's next step, at the top, as the
+        // only filled button above the fold. The rest of the session sits under it.
+        val steps = coach.steps.filter { !it.done }
+        steps.firstOrNull()?.let { first ->
             item {
-                PmpCard(container = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f), border = MaterialTheme.colorScheme.primary) {
-                    Text("Set up your plan", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                    Text("Two steps, and the planner and the coach stop guessing.", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Spacer(Modifier.height(8.dp))
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        androidx.compose.material3.OutlinedButton(onClick = { vm.navigate(Dest.PLANNER) }, modifier = Modifier.weight(1f)) {
-                            Text(if (vm.store.plan.examDate == null) "1. Exam date" else "1. Date set ✓")
-                        }
-                        Button(onClick = { vm.startDiagnostic() }, enabled = vm.store.diagnostic == null, modifier = Modifier.weight(1f)) {
-                            Text(if (vm.store.diagnostic == null) "2. Diagnostic" else "2. Done ✓")
+                PmpCard(container = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f), border = MaterialTheme.colorScheme.primary) {
+                    SectionLabel(if (coach.steps.size > steps.size) "Continue today's session · ${coach.steps.size - steps.size}/${coach.steps.size} done" else "Today's session")
+                    Spacer(Modifier.height(6.dp))
+                    Text(first.title, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                    Text(first.why, fontSize = 13.sp, lineHeight = 18.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Spacer(Modifier.height(10.dp))
+                    Button(onClick = { vm.coachGo(first.action, first.arg) }, modifier = Modifier.fillMaxWidth().height(52.dp)) {
+                        Text("Start", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    }
+                    if (steps.size > 1) {
+                        Spacer(Modifier.height(6.dp))
+                        steps.drop(1).take(3).forEach { st ->
+                            Row(Modifier.fillMaxWidth().clickable { vm.coachGo(st.action, st.arg) }.padding(vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
+                                Text("Then: ${st.title}", fontSize = 14.sp, modifier = Modifier.weight(1f))
+                                Text("›", fontSize = 20.sp, color = MaterialTheme.colorScheme.primary)
+                            }
                         }
                     }
                 }
@@ -144,26 +155,20 @@ fun DashboardScreen(vm: PmpViewModel) {
         item {
             val total = vm.store.last.size
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                StatTile("Answered", "$total", "${vm.store.last.values.count { it.correct }} right last time", Modifier.weight(1f))
-                StatTile("Cards due", "${cards.due}", "${cards.new} new", Modifier.weight(1f))
-                StatTile("Mistakes", "$missed", "to review", Modifier.weight(1f))
+                StatTile("Answered", "$total", "${vm.store.last.values.count { it.correct }} right last time", Modifier.weight(1f)) { vm.navigate(Dest.ANALYTICS) }
+                StatTile("Cards due", "${cards.due}", "${cards.new} new", Modifier.weight(1f)) { vm.switchTab(Dest.FLASHCARDS) }
+                StatTile("Mistakes", "$missed", "to review", Modifier.weight(1f)) { vm.navigate(Dest.MISTAKES) }
             }
         }
 
         item {
-            SectionLabel("Study modules")
+            SectionLabel("More ways to study")
             Spacer(Modifier.height(8.dp))
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                ActionCard("Question Bank & Practice", "Filter by domain, ECO task, bank, type and approach. Every option explained.",
-                    Icons.Default.Quiz, "${pool.size} items") { vm.navigate(Dest.PRACTICE) }
                 ActionCard("Mock Exam Simulator", "${x.exam.totalItems} questions, ${x.exam.minutes} minutes, optional ${x.exam.breakMinutes}-minute breaks, real scoring.",
                     Icons.Default.Assignment, "Timed") { vm.navigate(Dest.MOCK) }
                 ActionCard("Situational Trainer", "${x.scenarios.size} dilemmas where every option is tempting: ranked Best, Acceptable, Premature, Wrong.",
                     Icons.Default.Psychology, "Mindset") { vm.navigate(Dest.SITUATIONAL) }
-                ActionCard("Learn", "${x.lessons.size} lessons across ${x.modules.size} modules with worked examples and quick checks.",
-                    Icons.AutoMirrored.Filled.MenuBook, "${vm.store.lessonsDone.size}/${x.lessons.size} done") { vm.navigate(Dest.LEARN) }
-                ActionCard("Spaced-Repetition Flashcards", "${x.flashcards.size} cards in ${x.decks.size} decks on the SM-2 schedule.",
-                    Icons.Default.Style, "${cards.due} due") { vm.navigate(Dest.FLASHCARDS) }
                 ActionCard("Formula Lab", "EVM, PERT, PTA, EMV, finance and agile calculators with the working shown.",
                     Icons.Default.Calculate, "${x.formulas.sumOf { it.items.size }} formulas") { vm.navigate(Dest.FORMULAS) }
             }
