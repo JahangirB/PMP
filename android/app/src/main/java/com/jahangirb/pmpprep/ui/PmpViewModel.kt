@@ -138,7 +138,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 restoreMock()
                 // Switch back a Do Not Disturb left on if the app was closed mid-mock; the exam screen turns it on again.
                 Focus.end(app)
-                if (mock == null) setFocusMock(false)
+                if (mock == null) changeFocusMock(false)
                 ready = true
                 // Keep the home-screen widget current: a second after progress settles.
                 launch {
@@ -171,11 +171,11 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     var focusMock by mutableStateOf(settings.getBoolean("focusMock", false))
         private set
 
-    fun setFocusMock(on: Boolean) { focusMock = on; settings.edit().putBoolean("focusMock", on).apply() }
+    fun changeFocusMock(on: Boolean) { focusMock = on; settings.edit().putBoolean("focusMock", on).apply() }
 
-    fun setAskConfidence(on: Boolean) { askConfidence = on; settings.edit().putBoolean("confidence", on).apply() }
-    fun setFocusOffer(on: Boolean) { focusOffer = on; settings.edit().putBoolean("focus", on).apply() }
-    fun setReading(r: ReadingPrefs) {
+    fun changeAskConfidence(on: Boolean) { askConfidence = on; settings.edit().putBoolean("confidence", on).apply() }
+    fun changeFocusOffer(on: Boolean) { focusOffer = on; settings.edit().putBoolean("focus", on).apply() }
+    fun changeReading(r: ReadingPrefs) {
         reading = r
         settings.edit().putFloat("scale", r.scale).putBoolean("roomy", r.roomy).putBoolean("guide", r.guide).apply()
     }
@@ -578,7 +578,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun endFocus() {
         Focus.end(getApplication<Application>())
-        setFocusMock(false)
+        changeFocusMock(false)
     }
 
     fun reviewMock(onlyWrong: Boolean) {

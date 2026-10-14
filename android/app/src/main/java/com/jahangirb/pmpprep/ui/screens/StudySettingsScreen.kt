@@ -47,11 +47,11 @@ fun StudySettingsScreen(vm: PmpViewModel) {
             Text("Text size", fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 ReadingPrefs.SIZES.forEach { (scale, label) ->
-                    FilterChip(selected = r.scale == scale, onClick = { vm.setReading(r.copy(scale = scale)) }, label = { Text(label) })
+                    FilterChip(selected = r.scale == scale, onClick = { vm.changeReading(r.copy(scale = scale)) }, label = { Text(label) })
                 }
             }
-            Toggle("More space between lines", null, r.roomy) { vm.setReading(r.copy(roomy = it)) }
-            Toggle("Reading guide", "A soft band on one line of the question; tap a line to move it.", r.guide) { vm.setReading(r.copy(guide = it)) }
+            Toggle("More space between lines", null, r.roomy) { vm.changeReading(r.copy(roomy = it)) }
+            Toggle("Reading guide", "A soft band on one line of the question; tap a line to move it.", r.guide) { vm.changeReading(r.copy(guide = it)) }
             Spacer(Modifier.height(8.dp))
             SectionLabel("Preview")
             StemText("A team member keeps missing stand-ups and the sprint goal is at risk. What should the project manager do FIRST?", 16, 23)
@@ -60,8 +60,8 @@ fun StudySettingsScreen(vm: PmpViewModel) {
         PmpCard {
             SectionLabel("While answering")
             Toggle("Ask how sure I am", "Sure, Think so or Guess, before each practice answer is checked. A right guess won't count toward mastery; a sure-but-wrong answer goes to the top of the mistake journal. Never asked in mocks.",
-                vm.askConfidence) { vm.setAskConfidence(it) }
-            Toggle("Offer focus mode for mocks", "Do Not Disturb and the screen kept awake while a mock is on screen.", vm.focusOffer) { vm.setFocusOffer(it) }
+                vm.askConfidence) { vm.changeAskConfidence(it) }
+            Toggle("Offer focus mode for mocks", "Do Not Disturb and the screen kept awake while a mock is on screen.", vm.focusOffer) { vm.changeFocusOffer(it) }
         }
 
         PmpCard {
