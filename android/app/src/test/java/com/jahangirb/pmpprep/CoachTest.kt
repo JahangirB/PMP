@@ -14,6 +14,8 @@ import com.jahangirb.pmpprep.data.Readiness
 import com.jahangirb.pmpprep.data.RootCause
 import com.jahangirb.pmpprep.data.Srs
 import com.jahangirb.pmpprep.data.StudyPlan
+import com.jahangirb.pmpprep.data.SessionResult
+import com.jahangirb.pmpprep.data.SessionKind
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -84,12 +86,16 @@ class CoachTest {
         s.setNotepad("**EAC** = BAC / CPI")
         s.recordDiagnostic(DiagnosticResult(1L, 25, 20, mapOf(Domain.PEOPLE to (7 to 8))))
         s.addChat(ChatTurn("user", "hi", 1L))
+        s.setPlan(StudyPlan(5_000L, 6, setOf(1, 7), onboarded = true))
+        s.recordSession(SessionResult("build:people-3", SessionKind.BUILD, "people-3", Domain.PEOPLE, 0.8, 55, 9L))
         Thread.sleep(500) // the store writes in the background
         val back = ProgressStore(d)
         assertEquals("**EAC** = BAC / CPI", back.notepad)
         assertEquals(20, back.diagnostic!!.right)
         assertEquals(7 to 8, back.diagnostic!!.domains[Domain.PEOPLE])
         assertEquals("hi", back.chat.single().text)
+        assertEquals(StudyPlan(5_000L, 6, setOf(1, 7), onboarded = true), back.plan)
+        assertEquals(SessionResult("build:people-3", SessionKind.BUILD, "people-3", Domain.PEOPLE, 0.8, 55, 9L), back.sessionResults.single())
         // The key is never part of a backup.
         assertFalse(back.toJson().toString().contains("key"))
     }
