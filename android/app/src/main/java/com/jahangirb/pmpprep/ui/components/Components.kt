@@ -58,6 +58,7 @@ import com.jahangirb.pmpprep.ui.theme.PeopleAccent
 import com.jahangirb.pmpprep.ui.theme.PmpGoldTertiary
 import com.jahangirb.pmpprep.ui.theme.ProcessAccent
 
+@Composable
 fun domainColor(d: Domain?): Color = when (d) {
     Domain.PEOPLE -> PeopleAccent
     Domain.PROCESS -> ProcessAccent
@@ -85,7 +86,7 @@ fun Pill(text: String, color: Color, modifier: Modifier = Modifier, filled: Bool
     ) {
         Text(
             text = text,
-            color = if (filled) Color.White else color,
+            color = if (filled) com.jahangirb.pmpprep.ui.theme.OnStatus else color,
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
@@ -145,18 +146,18 @@ fun PmpCard(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null, contai
 }
 
 @Composable
-fun StatTile(title: String, value: String, sub: String, modifier: Modifier = Modifier) {
+fun StatTile(title: String, value: String, sub: String, modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
     Surface(
         color = MaterialTheme.colorScheme.surface,
         shape = RoundedCornerShape(12.dp),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)),
-        modifier = modifier,
+        modifier = if (onClick != null) modifier.clickable(onClick = onClick) else modifier,
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(title, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Medium)
             Spacer(Modifier.height(2.dp))
             Text(value, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
-            Text(sub, fontSize = 10.sp, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(sub, fontSize = 11.sp, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
     }
 }
@@ -180,7 +181,7 @@ fun ActionCard(title: String, description: String, icon: ImageVector, badge: Str
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
                     Text(title, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(1f))
                     Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(6.dp)) {
-                        Text(badge, fontSize = 10.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        Text(badge, fontSize = 11.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
                     }
                 }

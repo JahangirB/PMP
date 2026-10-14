@@ -349,6 +349,8 @@ fun HotspotDiagram(q: Question, selected: Set<String>, revealed: Boolean, onTap:
     val primary = MaterialTheme.colorScheme.primary
     val text = MaterialTheme.colorScheme.onSurface
     val muted = MaterialTheme.colorScheme.onSurfaceVariant
+    val ok = ColorSuccess
+    val bad = ColorError
     val density = LocalDensity.current
     val sp = density.fontScale * density.density
 
@@ -386,8 +388,8 @@ fun HotspotDiagram(q: Question, selected: Set<String>, revealed: Boolean, onTap:
         for (r in q.regions) {
             val sel = r.id in selected
             val (fill, stroke) = when {
-                revealed && r.correct -> ColorSuccess.copy(alpha = 0.18f) to ColorSuccess
-                revealed && sel -> ColorError.copy(alpha = 0.18f) to ColorError
+                revealed && r.correct -> ok.copy(alpha = 0.18f) to ok
+                revealed && sel -> bad.copy(alpha = 0.18f) to bad
                 sel -> primary.copy(alpha = 0.16f) to primary
                 else -> surface.copy(alpha = 0.6f) to line
             }

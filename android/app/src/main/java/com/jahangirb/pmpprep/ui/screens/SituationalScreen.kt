@@ -43,6 +43,7 @@ import com.jahangirb.pmpprep.ui.theme.ColorInfo
 import com.jahangirb.pmpprep.ui.theme.ColorSuccess
 import com.jahangirb.pmpprep.ui.theme.ColorWarning
 
+@Composable
 fun rankColor(r: Rank): Color = when (r) {
     Rank.BEST -> ColorSuccess
     Rank.ACCEPTABLE -> ColorInfo
