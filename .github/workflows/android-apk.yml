@@ -46,7 +46,13 @@ jobs:
         working-directory: android
         env:
           VERSION_CODE: ${{ github.run_number }}
-        run: ./gradlew --no-daemon --stacktrace testDebugUnitTest assembleRelease
+        # Compiler errors and failed tests are also raised as annotations, so they show on the run's summary.
+        run: |
+          set -o pipefail
+          ./gradlew --no-daemon --stacktrace testDebugUnitTest assembleRelease 2>&1 | tee build.log || {
+            grep -E '^e: |FAILED|AssertionError|ComparisonFailure' build.log | head -40 | sed 's/^/::error::/'
+            exit 1
+          }
 
       - name: Name the APK
         run: cp android/app/build/outputs/apk/release/app-release.apk PMP-Prep.apk
