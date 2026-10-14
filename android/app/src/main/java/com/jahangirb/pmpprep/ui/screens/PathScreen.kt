@@ -59,6 +59,7 @@ import java.util.Date
 import kotlin.math.roundToInt
 
 /** Home. One path from today to the exam, one Continue button. */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun PathScreen(vm: PmpViewModel) {
     val rev by vm.revision.collectAsState()
