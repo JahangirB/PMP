@@ -8,6 +8,7 @@ import com.jahangirb.pmpprep.ui.theme.ClayRim
 import com.jahangirb.pmpprep.ui.theme.ClayRadius
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.material3.contentColorFor
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.LocalIndication
@@ -142,7 +143,8 @@ fun PmpCard(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null, contai
     val shape = RoundedCornerShape(ClayRadius)
     val bg = container ?: MaterialTheme.colorScheme.surface
     val interaction = remember(onClick != null) { if (onClick != null) MutableInteractionSource() else null }
-    CompositionLocalProvider(LocalContentColor provides contentColorFor(bg)) {
+    // A tinted card (e.g. primaryContainer at half strength) matches no scheme colour; fall back to onSurface, never black.
+    CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.contentColorFor(bg).takeOrElse { MaterialTheme.colorScheme.onSurface }) {
         Column(
             modifier = modifier.fillMaxWidth()
                 .kineticEnter()
