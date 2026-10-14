@@ -26,6 +26,7 @@ import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material.icons.filled.ErrorOutline
+import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Insights
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Psychology
@@ -78,6 +79,7 @@ import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.screens.AnalyticsScreen
 import com.jahangirb.pmpprep.ui.screens.CoachScreen
 import com.jahangirb.pmpprep.ui.screens.NotesScreen
+import com.jahangirb.pmpprep.ui.screens.MoreScreen
 import com.jahangirb.pmpprep.ui.screens.DashboardScreen
 import com.jahangirb.pmpprep.ui.screens.DataScreen
 import com.jahangirb.pmpprep.ui.screens.FlashcardsScreen
@@ -160,7 +162,6 @@ private data class NavItem(val dest: Dest, val icon: ImageVector, val label: Str
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> Unit) {
-    var menuOpen by remember { mutableStateOf(false) }
     var importReport by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(incoming) {
@@ -172,24 +173,19 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
 
     BackHandler(enabled = vm.screen != Dest.DASHBOARD) { vm.back() }
 
+    // Bottom bar: the four places people go every day, by frequency, plus More.
+    // Material keeps a navigation bar to 3–5 destinations; everything else is a
+    // labelled grid on More rather than an icon-only overflow menu in the top
+    // corner, which is the hardest spot to reach one-handed and the least
+    // discoverable (NN/g found hidden navigation used about half as often).
     val bottom = listOf(
         NavItem(Dest.DASHBOARD, Icons.Default.Dashboard, "Home"),
         NavItem(Dest.PRACTICE, Icons.Default.Quiz, "Practice"),
-        NavItem(Dest.MOCK, Icons.Default.Assignment, "Mock"),
         NavItem(Dest.LEARN, Icons.AutoMirrored.Filled.MenuBook, "Learn"),
         NavItem(Dest.FLASHCARDS, Icons.Default.Style, "Cards"),
+        NavItem(Dest.MORE, Icons.Default.GridView, "More"),
     )
-    val more = listOf(
-        NavItem(Dest.COACH, Icons.Default.AutoAwesome, "Coach"),
-        NavItem(Dest.NOTES, Icons.AutoMirrored.Filled.Notes, "Notes"),
-        NavItem(Dest.SITUATIONAL, Icons.Default.Psychology, "Situational Trainer"),
-        NavItem(Dest.FORMULAS, Icons.Default.Calculate, "Formula Lab"),
-        NavItem(Dest.REFERENCE, Icons.AutoMirrored.Filled.LibraryBooks, "ECO Tasks & Reference"),
-        NavItem(Dest.ANALYTICS, Icons.Default.Insights, "Analytics & Readiness"),
-        NavItem(Dest.MISTAKES, Icons.Default.ErrorOutline, "Mistake Journal"),
-        NavItem(Dest.PLANNER, Icons.Default.CalendarMonth, "Study Planner"),
-        NavItem(Dest.DATA, Icons.Default.Storage, "Question Banks & Backup"),
-    )
+    val tabFor = { d: Dest -> if (bottom.any { it.dest == d }) d else Dest.MORE }
     // A running mock exam takes the whole screen: no tabs to wander off through.
     val examRunning = vm.screen == Dest.MOCK && vm.mock != null
 
@@ -200,20 +196,6 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                 navigationIcon = {
                     if (vm.screen != Dest.DASHBOARD) {
                         IconButton(onClick = { vm.back() }) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") }
-                    }
-                },
-                actions = {
-                    Box {
-                        IconButton(onClick = { menuOpen = true }) { Icon(Icons.Default.MoreVert, contentDescription = "More") }
-                        DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
-                            more.forEach { item ->
-                                DropdownMenuItem(
-                                    text = { Text(item.label) },
-                                    leadingIcon = { Icon(item.icon, contentDescription = null) },
-                                    onClick = { menuOpen = false; vm.navigate(item.dest) },
-                                )
-                            }
-                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -227,8 +209,8 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                 NavigationBar(containerColor = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp) {
                     bottom.forEach { item ->
                         NavigationBarItem(
-                            selected = vm.screen == item.dest,
-                            onClick = { vm.navigate(item.dest) },
+                            selected = tabFor(vm.screen) == item.dest,
+                            onClick = { vm.switchTab(item.dest) },
                             icon = { Icon(item.icon, contentDescription = item.label) },
                             label = { Text(item.label, fontSize = 11.sp, fontWeight = FontWeight.SemiBold) },
                         )
@@ -255,10 +237,12 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                 Dest.DATA -> DataScreen(vm)
                 Dest.COACH -> CoachScreen(vm)
                 Dest.NOTES -> NotesScreen(vm)
+                Dest.MORE -> MoreScreen(vm)
             }
             // The coach floats over everything except itself, a running mock and the cold diagnostic.
-            val diagnosing = vm.practice?.let { it.diagnostic && !it.finished } == true && vm.screen == Dest.PRACTICE
-            if (vm.screen != Dest.COACH && !examRunning && !diagnosing) {
+            // In a drill it would sit over the answer options; each question has its own coach button instead.
+            val drilling = vm.practice?.let { !it.finished } == true && vm.screen == Dest.PRACTICE
+            if (vm.screen != Dest.COACH && !examRunning && !drilling) {
                 CoachBubble(vm) { vm.coachTab = 0; vm.navigate(Dest.COACH) }
             }
         }

@@ -6,6 +6,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -43,7 +44,7 @@ private val LightColors = lightColorScheme(
     onSecondary = SlateOnSecondary,
     secondaryContainer = SlateSecondaryContainer,
     onSecondaryContainer = SlateOnSecondaryContainer,
-    tertiary = PmpGoldTertiary,
+    tertiary = PmpGoldTertiaryLight,
     onTertiary = PmpGoldOnTertiary,
     tertiaryContainer = PmpGoldContainer,
     onTertiaryContainer = PmpGoldOnContainer,
@@ -64,9 +65,11 @@ private val AppTypography = Typography(
 
 @Composable
 fun PmpTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    MaterialTheme(
-        colorScheme = if (darkTheme) DarkColors else LightColors,
-        typography = AppTypography,
-        content = content,
-    )
+    CompositionLocalProvider(LocalDarkTheme provides darkTheme) {
+        MaterialTheme(
+            colorScheme = if (darkTheme) DarkColors else LightColors,
+            typography = AppTypography,
+            content = content,
+        )
+    }
 }
