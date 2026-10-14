@@ -210,6 +210,9 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
         // The clay backdrop: a soft gradient behind every screen.
         modifier = Modifier.background(Brush.verticalGradient(ClayBackdrop)),
         containerColor = Color.Transparent,
+        // A transparent container has no matching text colour, so say it: without this, text with no
+        // colour of its own fell back to black, unreadable in dark mode.
+        contentColor = MaterialTheme.colorScheme.onBackground,
         topBar = {
             if (!fullScreen) TopAppBar(
                 title = { Text(vm.screen.title, fontSize = 18.sp, fontWeight = FontWeight.Bold) },
