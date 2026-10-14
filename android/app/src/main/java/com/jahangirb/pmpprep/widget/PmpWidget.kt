@@ -38,7 +38,6 @@ import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.layout.width
 import androidx.glance.material3.ColorProviders
-import androidx.glance.text.FontFamily
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
@@ -104,7 +103,7 @@ class PmpWidget : GlanceAppWidget() {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Row(verticalAlignment = Alignment.Bottom) {
-                Text(value, style = TextStyle(color = c.onSurface, fontSize = 17.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Monospace), maxLines = 1)
+                Text(value, style = TextStyle(color = c.onSurface, fontSize = 17.sp, fontWeight = FontWeight.Bold), maxLines = 1)
                 if (unit != null) Text(unit, style = TextStyle(color = c.onSurfaceVariant, fontSize = 10.sp), maxLines = 1)
             }
             if (progress != null) {

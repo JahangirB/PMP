@@ -43,7 +43,7 @@ import kotlinx.coroutines.delay
 val ClayRadius = 32.dp
 val ClayBorder = 2.dp
 
-private const val ENTER_MS = 700
+private const val ENTER_MS = 800
 private const val PRESS_MS = 260
 private const val STAGGER_MS = 90L
 private const val MAX_STAGGERED = 10
@@ -139,7 +139,7 @@ val ClayRim: Color @Composable @ReadOnlyComposable
     get() = if (LocalDarkTheme.current) Color.White.copy(alpha = 0.07f) else Color.White.copy(alpha = 0.9f)
 /** The tinted shadow under a clay surface. */
 val ClayShade: Color @Composable @ReadOnlyComposable
-    get() = if (LocalDarkTheme.current) Color.Black else Color(0xFF3B5A1A)
+    get() = if (LocalDarkTheme.current) Color.Black else Color(0xFF0B6684)
 /** The app's backdrop gradient. */
 val ClayBackdrop: List<Color> @Composable @ReadOnlyComposable
     get() = if (LocalDarkTheme.current) DarkGradient else LightGradient
