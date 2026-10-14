@@ -1,64 +1,44 @@
 # PMP Prep for Android
 
-`PMP-Prep.apk` is a native Android app (Java, Android SDK only, no WebView).
-It ships with every question in `packs/` plus the 348 built-in questions,
-flashcards, glossary and formula sheet from `index.html`: 2,930 questions in all.
+A native Android app (Kotlin, Jetpack Compose, Material 3) built from this
+repository's content. Nothing is copied into this folder: every build runs
+`tools/extract-content.mjs`, which reads `../index.html` and `../packs/` and
+writes the app's assets, so the app and the web app always carry the same
+questions, scenarios, lessons, flashcards, glossary, formulas and reference.
 
-## What it does
+## What's in it
 
-- **Practice**: filter by domain, ECO task, question bank, question type and
-  approach, and by new, missed-last-time or flagged questions. After each
-  answer you see whether you were right, why each option is right or wrong,
-  the explanation and the mindset.
-- **Mock exams**: 180, 90, 45 or 20 questions, weighted 33/41/26 across
-  People, Process and Business, favouring questions you haven't seen. Timed,
-  with mark-for-review and a question grid. A mock in progress is saved if you
-  leave the app. Afterwards you get a score by domain, your weakest tasks and a
-  review of every answer.
-- **All seven question types**: multiple choice, multiple response, matching,
-  drop-down, hotspot (the diagram is drawn natively), graphic and fill in the
-  blank. Scoring follows the web app's rules.
-- **Flashcards, Glossary, Formulas**, and a mock exam history.
-- Light and dark mode follow the phone.
+| Screen | What it does |
+|---|---|
+| Home | Readiness score (the web app's five-part model), streak, cards due, mistakes, domain accuracy |
+| Practice | Filter by domain, ECO task, bank, type, approach and new / missed / flagged; check each answer and see why every option is right or wrong; pace bar; flags and notes |
+| Mock exam | 180 / 90 / 45 / 20 questions, weighted by domain; timed, three sections with optional breaks, mark for review, question grid; saved if you leave; scorecard by domain; review |
+| Learn | All lessons by module: sections, approach lenses, worked example, traps, quick checks, recap |
+| Flashcards | SM-2 spaced repetition with the web app's settings, daily new-card cap, leech detection |
+| Situational trainer | Dilemmas ranked Best / Acceptable / Premature / Wrong, with the reason for each |
+| Formula lab | EVM, PERT, PTA, EMV, channels, finance and agile calculators with the working shown; formula sheet; calculation drills |
+| Reference | ECO tasks with your accuracy, glossary, abbreviations, principles, performance domains, processes with ITTOs, agile, comparison tables |
+| Analytics | How the readiness score is built, study days, mock trend, accuracy by task, approach and type, pace |
+| Mistake journal | Every question wrong last time; tag the root cause; retry |
+| Study planner | Exam date and weekly hours turned into a week-by-week plan weighted to your weak domains |
+| Banks & backup | Import `.json` banks, switch banks on or off, delete imported ones, content audit, backup / restore / reset |
 
-## Install
+All seven question types render natively: multiple choice, multiple response,
+matching, drop-down, hotspot and graphic (drawn on a canvas), and fill in the
+blank. Scoring follows the web app exactly.
 
-Copy `PMP-Prep.apk` to the phone, open it, and allow "Install unknown apps"
-when asked. Needs Android 7.0 or later. It installs over the earlier
-WebView build (same package and signing key).
+## Building
 
-## Adding question banks later
-
-No rebuild needed. **Question banks and backup → Add a question bank (.json)**
-and pick one or more pack files (the format in `AUTHORING.md`; a bare JSON
-array of questions also works). You can also open or share a `.json` file into
-the app from a file manager. Questions whose id is already loaded are skipped,
-and invalid ones are listed with the reason. Each bank can be switched off or
-deleted. Imported banks, progress and flags are stored inside the app.
-
-The same screen saves a progress backup and restores it.
-
-## Rebuilding
+The [Android APK workflow](../.github/workflows/android-apk.yml) builds and
+publishes it; that is the normal route. To build locally you need JDK 17,
+Node.js and the Android SDK (or open this folder in Android Studio):
 
 ```
-apt-get install aapt dalvik-exchange zipalign apksigner   # plus a JDK
-ANDROID_JAR=$ANDROID_HOME/platforms/android-34/android.jar android/build.sh
+cd android
+./gradlew assembleRelease        # app/build/outputs/apk/release/app-release.apk
+./gradlew testDebugUnitTest      # parses every pack and checks scoring, SM-2 and readiness
 ```
 
-After changing `index.html`'s built-in questions, flashcards, glossary or
-formulas, run `node android/tools/extract-content.js` first (needs Playwright)
-to refresh `android/content/`. Files in `packs/` are picked up by the build
-directly.
-
-Tests (Robolectric, run on the JVM without a device; build the APK first):
-
-```
-cd android/test && ANDROID_JAR=... mvn -q test
-```
-
-`ScreenshotTest` writes PNGs of the main screens to `android/test/target/screens`.
-
-The version code is the git commit count, so a rebuild installs over the old
-one. `pmp-prep.keystore` (password `pmpprep`) signs it; keep using the same
-keystore, because Android refuses an update signed by a different key, and
-uninstalling to get round that deletes the app's saved progress.
+`pmp-prep.keystore` (password `pmpprep`) signs every build so each one
+installs over the last. It is committed on purpose for a sideloaded study app;
+use your own key before publishing to a store.
