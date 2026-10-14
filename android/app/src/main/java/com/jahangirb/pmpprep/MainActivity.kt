@@ -4,6 +4,35 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.key
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.IntOffset
+import com.jahangirb.pmpprep.data.StepKind
+import com.jahangirb.pmpprep.ui.theme.ClayRim
+import com.jahangirb.pmpprep.ui.theme.ClayShade
+import com.jahangirb.pmpprep.ui.theme.EnterStagger
+import com.jahangirb.pmpprep.ui.theme.LocalEnter
+import com.jahangirb.pmpprep.ui.theme.clay
+import kotlin.math.roundToInt
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -45,7 +74,6 @@ import com.jahangirb.pmpprep.ui.Dest
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.screens.AnalyticsScreen
 import com.jahangirb.pmpprep.ui.screens.CoachScreen
-import com.jahangirb.pmpprep.ui.screens.NotesScreen
 import com.jahangirb.pmpprep.ui.screens.MenuScreen
 import com.jahangirb.pmpprep.ui.screens.PathScreen
 import com.jahangirb.pmpprep.ui.screens.SessionScreen
@@ -139,6 +167,11 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
 
     BackHandler(enabled = vm.screen != Dest.DASHBOARD) { vm.back() }
 
+    val context = LocalContext.current
+    val reduceMotion = remember {
+        Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+    }
+
     // A running mock exam and a guided session take the whole screen: nothing to wander off through.
     val examRunning = vm.screen == Dest.MOCK && vm.mock != null
     val fullScreen = examRunning || vm.screen == Dest.SESSION
@@ -168,23 +201,35 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
         // consumeWindowInsets: the bars' space is already in `inner`, so a screen's
         // imePadding adds only the part of the keyboard that rises above them.
         Box(Modifier.fillMaxSize().padding(inner).consumeWindowInsets(inner)) {
-            when (vm.screen) {
-                Dest.DASHBOARD -> PathScreen(vm)
-                Dest.PRACTICE -> PracticeScreen(vm)
-                Dest.MOCK -> MockExamScreen(vm)
-                Dest.SITUATIONAL -> SituationalScreen(vm)
-                Dest.LEARN -> LearnScreen(vm)
-                Dest.FLASHCARDS -> FlashcardsScreen(vm)
-                Dest.FORMULAS -> FormulaLabScreen(vm)
-                Dest.REFERENCE -> ReferenceScreen(vm)
-                Dest.ANALYTICS -> AnalyticsScreen(vm)
-                Dest.MISTAKES -> MistakeJournalScreen(vm)
-                Dest.PLANNER -> PlannerScreen(vm)
-                Dest.DATA -> DataScreen(vm)
-                Dest.COACH -> CoachScreen(vm)
-                Dest.NOTES -> NotesScreen(vm)
-                Dest.MENU -> MenuScreen(vm)
-                Dest.SESSION -> SessionScreen(vm)
+            // A fresh stagger per screen visit, so its cards slide in one after another.
+            key(vm.screen) {
+                val enter = remember { EnterStagger(reduce = reduceMotion) }
+                CompositionLocalProvider(LocalEnter provides enter) {
+                    when (vm.screen) {
+                        Dest.DASHBOARD -> PathScreen(vm)
+                        Dest.PRACTICE -> PracticeScreen(vm)
+                        Dest.MOCK -> MockExamScreen(vm)
+                        Dest.SITUATIONAL -> SituationalScreen(vm)
+                        Dest.LEARN -> LearnScreen(vm)
+                        Dest.FLASHCARDS -> FlashcardsScreen(vm)
+                        Dest.FORMULAS -> FormulaLabScreen(vm)
+                        Dest.REFERENCE -> ReferenceScreen(vm)
+                        Dest.ANALYTICS -> AnalyticsScreen(vm)
+                        Dest.MISTAKES -> MistakeJournalScreen(vm)
+                        Dest.PLANNER -> PlannerScreen(vm)
+                        Dest.DATA -> DataScreen(vm)
+                        Dest.COACH -> CoachScreen(vm)
+                        Dest.MENU -> MenuScreen(vm)
+                        Dest.SESSION -> SessionScreen(vm)
+                    }
+                }
+            }
+            // The coach floats over everything except itself and anything with answers to pick:
+            // there it would cover the options (each practice question has its own coach button).
+            val answering = (vm.screen == Dest.PRACTICE && vm.practice?.let { !it.finished } == true) ||
+                (vm.screen == Dest.SESSION && vm.run?.let { r -> r.session.steps.getOrNull(r.step)?.kind in setOf(StepKind.PRACTICE, StepKind.MOCK) } == true)
+            if (vm.screen != Dest.COACH && !examRunning && !answering) {
+                CoachBubble(vm) { vm.coachTab = 0; vm.navigate(Dest.COACH) }
             }
         }
     }
@@ -196,5 +241,44 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
             title = { Text("Import") },
             text = { Text(report) },
         )
+    }
+}
+
+/** The coach, a draggable clay bubble that carries a count of what it has to say. Notes live inside it. */
+@Composable
+private fun CoachBubble(vm: PmpViewModel, onOpen: () -> Unit) {
+    val rev by vm.revision.collectAsState()
+    val count = remember(rev, vm.contentVersion) { vm.coach().report().messages.size }
+    val density = LocalDensity.current
+    var offset by remember { mutableStateOf(Offset.Zero) }
+    val interaction = remember { MutableInteractionSource() }
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+        val maxX = with(density) { (maxWidth - 88.dp).toPx() }
+        val maxY = with(density) { (maxHeight - 88.dp).toPx() }
+        Box(
+            Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 20.dp, bottom = 28.dp)
+                .offset { IntOffset(offset.x.roundToInt(), offset.y.roundToInt()) }
+                .pointerInput(Unit) {
+                    detectDragGestures { change, drag ->
+                        change.consume()
+                        offset = Offset((offset.x + drag.x).coerceIn(-maxX, 0f), (offset.y + drag.y).coerceIn(-maxY, 0f))
+                    }
+                },
+        ) {
+            BadgedBox(badge = { if (count > 0) Badge { Text("$count") } }) {
+                Box(
+                    Modifier
+                        .size(60.dp)
+                        .clay(CircleShape, MaterialTheme.colorScheme.primary, ClayRim, ClayShade, MaterialTheme.colorScheme.primary, interaction, elevation = 14f)
+                        .clickable(interaction, LocalIndication.current, onClickLabel = "Open coach and notes", onClick = onOpen)
+                        .semantics { contentDescription = "Coach and notes" + if (count > 0) ", $count messages" else "" },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(Icons.Default.AutoAwesome, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimary)
+                }
+            }
+        }
     }
 }
