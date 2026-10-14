@@ -40,7 +40,25 @@ data class Group(val n: Int, val credit: Double, val right: Int, val meanSec: Do
  * shared out, and the total is marked provisional until enough has been
  * answered across enough tasks.
  */
-class Readiness(private val r: ReadinessConfig, private val exam: ExamLayout, private val tasks: List<EcoTask>) {
+class Readiness(
+    private val r: ReadinessConfig,
+    private val exam: ExamLayout,
+    private val tasks: List<EcoTask>,
+    /**
+     * The exam's domain split. When given, accuracy is each domain's accuracy weighted by it, as
+     * the exam weighs them, so a weak domain can't hide behind a strong one. Without it, one overall figure.
+     */
+    private val domainWeights: Map<Domain, Double> = emptyMap(),
+) {
+
+    /** Accuracy for the score: per domain and weighted like the exam, or overall. Also each domain's figure. */
+    fun weightedAccuracy(attempts: List<Attempt>, now: Long): Triple<Double, Int, Map<Domain, Double>> {
+        val (overall, n) = accuracy(attempts, now)
+        if (domainWeights.isEmpty()) return Triple(overall, n, emptyMap())
+        val byDomain = Domain.entries.associateWith { d -> accuracy(attempts, now) { it.domain == d }.first }
+        val total = domainWeights.values.sum().takeIf { it > 0 } ?: return Triple(overall, n, byDomain)
+        return Triple(Domain.entries.sumOf { (domainWeights[it] ?: 0.0) * byDomain[it]!! } / total, n, byDomain)
+    }
 
     private fun ratio(v: Double, lo: Double, hi: Double) = if (hi == lo) 0.0 else ((v - lo) / (hi - lo)).coerceIn(0.0, 1.0)
 
@@ -126,7 +144,7 @@ class Readiness(private val r: ReadinessConfig, private val exam: ExamLayout, pr
 
     fun report(store: ProgressStore, now: Long = System.currentTimeMillis()): ReadinessReport {
         val atts = store.attempts
-        val (acc, accN) = accuracy(atts, now)
+        val (acc, accN, accByDomain) = weightedAccuracy(atts, now)
         val (cov, touched, short) = coverage(atts)
 
         val recent = store.mocks.sortedByDescending { it.at }.take(r.mockWeights.size)
@@ -157,8 +175,10 @@ class Readiness(private val r: ReadinessConfig, private val exam: ExamLayout, pr
         val comps = listOf(
             Component("accuracy", "Accuracy", r.wAccuracy, ratio(acc, r.accuracyMin, r.accuracyMax), accN > 0,
                 if (accN > 0) pct(acc) else "—",
-                if (accN > 0) "Recent answers count more (half-life ${r.accuracyHalflifeDays.toInt()} days). Full marks at ${pct(r.accuracyMax)}, none below ${pct(r.accuracyMin)}. Across $accN answers."
-                else "No questions answered yet."),
+                if (accN == 0) "No questions answered yet."
+                else (if (accByDomain.isNotEmpty()) "Each domain weighted as on the exam: " +
+                    Domain.entries.joinToString(", ") { "${it.short} ${pct(accByDomain[it]!!)} × ${pct(domainWeights[it] ?: 0.0)}" } + ". A domain you haven't practised counts as 50%. " else "") +
+                    "Recent answers count more (half-life ${r.accuracyHalflifeDays.toInt()} days). Full marks at ${pct(r.accuracyMax)}, none below ${pct(r.accuracyMin)}. Across $accN answers."),
             Component("coverage", "ECO coverage", r.wCoverage, cov, touched > 0, "$touched / ${tasks.size}",
                 "Counts up to ${r.coverageTargetPerTask} answers on each of the ${tasks.size} tasks, so breadth earns this, not volume."),
             Component("mocks", "Mock exams", r.wMocks, mockScore, recent.isNotEmpty(),

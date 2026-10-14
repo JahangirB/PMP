@@ -42,6 +42,7 @@ import com.jahangirb.pmpprep.data.ScenarioRun
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.data.Srs
 import com.jahangirb.pmpprep.data.WidgetStats
+import com.jahangirb.pmpprep.data.QuestionPicker
 import com.jahangirb.pmpprep.data.Mastery
 import com.jahangirb.pmpprep.data.ReminderBrain
 import com.jahangirb.pmpprep.data.ReminderSnapshot
@@ -74,6 +75,7 @@ enum class Dest(val title: String) {
     DATA("Banks & Backup"),
     COACH("Coach and notes"),
     MENU("Menu"),
+    GUIDE("How it works"),
     SESSION("Session"),
 }
 
@@ -115,7 +117,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) { repo.load() }
-                readiness = Readiness(repo.extras.readiness, repo.extras.exam, repo.extras.tasks)
+                readiness = Readiness(repo.extras.readiness, repo.extras.exam, repo.extras.tasks, repo.extras.domainWeights)
                 srs = Srs(repo.extras.srs)
                 restoreMock()
                 ready = true
@@ -499,8 +501,11 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun plan(now: Long = System.currentTimeMillis()): Plan? {
         val p = store.plan
         val date = p.examDate ?: return null
+        val leeches = repo.extras.flashcards.filter { c -> c.ecoTask != null && store.cards[c.id]?.let { srs.isLeech(it) } == true }
+            .groupingBy { it.ecoTask!! }.eachCount()
         return PlanEngine.build(PlanInput(repo.extras, store.attempts, store.lessonsDone, store.sessionResults,
-            store.mocks, store.diagnostic, PlanSettings(date, p.hoursPerWeek, p.studyDays), now))
+            store.mocks, store.diagnostic, PlanSettings(date, p.hoursPerWeek, p.studyDays), now,
+            mistakeTags = store.mistakeTags.mapValues { it.value.cause }, leeches = leeches))
     }
 
     /** A session being played. Kept while the app runs, so closing it and coming back resumes at the same step. */
@@ -625,11 +630,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
         if (st.easy) qs = qs.filter { it.difficulty <= 3 }.ifEmpty { qs }
-        // Unseen first, then the ones missed last time, then the rest; shuffled within each group.
-        val unseen = qs.filter { it.id !in store.last }.shuffled()
-        val missed = qs.filter { store.last[it.id]?.correct == false }.shuffled()
-        val rest = qs.filter { store.last[it.id]?.correct == true }.shuffled()
-        return (unseen + missed + rest).take(st.count)
+        // Unseen first, then the ones missed last time, then the rest, leaning toward your weakest approach.
+        return QuestionPicker.order(qs, { store.last[it]?.correct }, QuestionPicker.weakApproach(store.attempts), st.count)
     }
 
     /** Called when a step is shown, so the step has what it needs. */
