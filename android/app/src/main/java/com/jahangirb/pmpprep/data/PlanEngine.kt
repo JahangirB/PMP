@@ -115,7 +115,8 @@ object PlanEngine {
     fun taskStates(x: Extras, attempts: List<Attempt>, now: Long): List<TaskState> {
         val byTask = attempts.filter { it.source != Readiness.SOURCE_LESSON }.groupBy { it.ecoTask }
         return x.tasks.map { t ->
-            val list = byTask[t.id].orEmpty().sortedBy { it.at }
+            // A right answer you called a guess isn't evidence you know it.
+            val list = byTask[t.id].orEmpty().filter { !it.luckyGuess }.sortedBy { it.at }
             val recent = list.takeLast(RECENT)
             val acc = if (recent.isEmpty()) 0.0 else recent.sumOf { it.credit } / recent.size
             val last = list.lastOrNull()?.at ?: 0L

@@ -27,7 +27,13 @@ data class ReadinessReport(
     val nextRoute: String,
 )
 
-data class Streak(val current: Int, val longest: Int, val last14: List<Boolean>, val activeInWindow: Int)
+data class Streak(
+    val current: Int, val longest: Int, val last14: List<Boolean>, val activeInWindow: Int,
+    /** Today hasn't been studied yet but can be this week's rest day, so the streak isn't at risk. */
+    val restDayFree: Boolean = false,
+    /** Days kept by a rest day inside the current streak. */
+    val restDays: Int = 0,
+)
 
 data class Group(val n: Int, val credit: Double, val right: Int, val meanSec: Double?) {
     val accuracy: Double get() = if (n == 0) 0.0 else credit / n
@@ -107,22 +113,28 @@ class Readiness(
         store.scenarioRuns.forEach { days += Srs.startOfDay(it.at) }
         store.cards.values.forEach { if (it.last > 0) days += Srs.startOfDay(it.last) }
         val today = Srs.startOfDay(now)
-        var cursor = if (today in days) today else prevDay(today)
-        var cur = 0
-        while (cursor in days) { cur++; cursor = prevDay(cursor) }
+        val kept = if (store.plan.restDays) withRestDays(days, today) else days
+        var cursor = if (today in kept) today else prevDay(today)
+        var cur = 0; var rested = 0
+        while (cursor in kept) { cur++; if (cursor !in days) rested++; cursor = prevDay(cursor) }
         var best = 0; var run = 0; var prev: Long? = null
-        for (d in days.sorted()) {
+        for (d in kept.sorted()) {
             run = if (prev != null && prevDay(d) == prev) run + 1 else 1
             best = max(best, run)
             prev = d
         }
+        // The habit part of readiness counts real study days only.
         val window = (r.habitWindowDays - 1 downTo 0).map { i ->
             var d = today
             repeat(i) { d = prevDay(d) }
             d in days
         }
-        return Streak(cur, best, window, window.count { it })
+        val week = WeeklyReports.weekStart(today)
+        val free = store.plan.restDays && today !in days && prevDay(today) in kept &&
+            kept.none { it >= week && it < today && it !in days }
+        return Streak(cur, best, window, window.count { it }, free, rested)
     }
+
 
     /** Calendar-correct across daylight-saving changes. */
     private fun prevDay(d: Long): Long = Srs.startOfDay(d - Srs.DAY_MS / 2)
@@ -213,6 +225,26 @@ class Readiness(
     }
 
     companion object {
+        /**
+         * Study days plus rest days: at most one missed day a week (Monday to Sunday) is kept,
+         * when it sits between two study days.
+         */
+        fun withRestDays(days: Set<Long>, today: Long): Set<Long> {
+            val out = HashSet(days)
+            if (days.isEmpty()) return out
+            val used = HashSet<Long>()
+            var d = days.min()
+            while (d < today) {
+                val next = Srs.startOfDay(d + Srs.DAY_MS + Srs.DAY_MS / 2)
+                if (d !in days && Srs.startOfDay(d - Srs.DAY_MS / 2) in out && next in days) {
+                    val w = WeeklyReports.weekStart(d)
+                    if (used.add(w)) out += d
+                }
+                d = next
+            }
+            return out
+        }
+
         const val SOURCE_PRACTICE = "practice"
         const val SOURCE_EXAM = "exam"
         const val SOURCE_LESSON = "lesson"

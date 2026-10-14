@@ -21,6 +21,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import com.jahangirb.pmpprep.ui.components.ClayOutlinedButton as OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -35,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.Grade
 import com.jahangirb.pmpprep.ui.PmpViewModel
+import com.jahangirb.pmpprep.ui.components.ListenButton
 import com.jahangirb.pmpprep.ui.components.PmpCard
 import com.jahangirb.pmpprep.ui.components.ProgressRow
 import com.jahangirb.pmpprep.ui.components.SectionLabel
@@ -71,7 +73,7 @@ private fun DeckList(vm: PmpViewModel) {
                 Text("Study all decks · ${all.due} due · ${all.new} new", fontWeight = FontWeight.Bold)
             }
         }
-        items(x.decks, key = { it.id }) { d ->
+        items(vm.decks(), key = { it.id }) { d ->
             val c = remember(rev) { vm.deckCounts(d.id) }
             PmpCard {
                 Text(d.label, fontSize = 16.sp, fontWeight = FontWeight.Bold)
@@ -84,6 +86,10 @@ private fun DeckList(vm: PmpViewModel) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = { vm.startDeck(d.id) }, enabled = c.due + c.new > 0, modifier = Modifier.weight(1f)) { Text("Study") }
                     OutlinedButton(onClick = { vm.cramDeck(d.id) }, modifier = Modifier.weight(1f)) { Text("Go through all") }
+                }
+                // Each card read as its front, then its back: revision for a walk or a commute.
+                ListenButton("Listen to this deck", d.label) {
+                    vm.allCards().filter { it.deck == d.id }.take(60).map { c -> c.front + ". … " + c.back + (if (c.note.isNotBlank()) " " + c.note else "") }
                 }
             }
         }
@@ -117,11 +123,12 @@ fun CardSession(vm: PmpViewModel, onDone: (() -> Unit)? = null) {
     val state = vm.cardState(card.id)
     val preview = vm.srs.preview(state, System.currentTimeMillis())
     val rot by animateFloatAsState(if (vm.cardFlipped) 180f else 0f, tween(350), label = "flip")
-    val deck = vm.repo.extras.decks.firstOrNull { it.id == card.deck }
+    val deck = vm.decks().firstOrNull { it.id == card.deck }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Text("${vm.cardIndex + 1} / ${q.size}", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+            ListenButton("Listen", "Flashcard") { listOf(card.front) + if (vm.cardFlipped) listOf(card.back) else emptyList() }
             Text(deck?.label ?: "", fontSize = 12.sp, color = MaterialTheme.colorScheme.primary)
         }
         PmpCard(
@@ -168,6 +175,9 @@ fun CardSession(vm: PmpViewModel, onDone: (() -> Unit)? = null) {
             }
             if (state.lapses > 0) Text("Forgotten ${state.lapses} time(s) · ease ${"%.2f".format(state.ease)}", fontSize = 11.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (card.deck == com.jahangirb.pmpprep.data.ProgressStore.MY_DECK) {
+                TextButton(onClick = { vm.deleteMyCard(card.id) }) { Text("Delete this card", color = ColorError) }
+            }
         }
     }
 }

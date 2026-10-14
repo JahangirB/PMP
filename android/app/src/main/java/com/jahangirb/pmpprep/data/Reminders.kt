@@ -71,6 +71,8 @@ data class ReminderSnapshot(
     val mastered: Int,
     val weekMinutes: Int,
     val nextWeekFocus: String?,
+    /** Today can be this week's rest day: no streak-saver. */
+    val restDayFree: Boolean = false,
 )
 
 /** A reminder planned for a time today. */
@@ -118,7 +120,7 @@ class ReminderState {
                 .put("nextWhat", n.nextWhat ?: "").put("cardsDue", n.cardsDue).put("streak", n.streak)
                 .put("studyDays", JSONArray(n.studyDays.toList())).put("todayMinutes", n.todayMinutes).put("targetMinutes", n.targetMinutes)
                 .put("lastStudyAt", n.lastStudyAt).put("finalWeek", n.finalWeek).put("readiness", n.readiness).put("mastered", n.mastered)
-                .put("weekMinutes", n.weekMinutes).put("nextWeekFocus", n.nextWeekFocus ?: ""))
+                .put("weekMinutes", n.weekMinutes).put("nextWeekFocus", n.nextWeekFocus ?: "").put("restDayFree", n.restDayFree))
         }
         put("lastSummaryReadiness", lastSummaryReadiness); put("lastSummaryMastered", lastSummaryMastered)
         put("backoffUntil", backoffUntil); put("notTodayDay", notTodayDay); put("planDay", planDay)
@@ -155,7 +157,7 @@ class ReminderState {
                 val d = n.optJSONArray("studyDays")
                 snapshot = ReminderSnapshot(n.optLong("day"), str(n, "nextTitle"), n.optInt("nextMinutes"), str(n, "nextWhat"), n.optInt("cardsDue"),
                     n.optInt("streak"), (0 until (d?.length() ?: 0)).map { d!!.getInt(it) }.toSet(), n.optInt("todayMinutes"), n.optInt("targetMinutes"),
-                    n.optLong("lastStudyAt"), n.optBoolean("finalWeek"), n.optInt("readiness"), n.optInt("mastered"), n.optInt("weekMinutes"), str(n, "nextWeekFocus"))
+                    n.optLong("lastStudyAt"), n.optBoolean("finalWeek"), n.optInt("readiness"), n.optInt("mastered"), n.optInt("weekMinutes"), str(n, "nextWeekFocus"), n.optBoolean("restDayFree"))
             }
             lastSummaryReadiness = o.optInt("lastSummaryReadiness", -1); lastSummaryMastered = o.optInt("lastSummaryMastered", -1)
             backoffUntil = o.optLong("backoffUntil", 0L); notTodayDay = o.optLong("notTodayDay", 0L); planDay = o.optLong("planDay", 0L)
@@ -286,7 +288,7 @@ object ReminderBrain {
             val cap = max(0, cap(st, now) - sentToday)
             val learning = st.logs.count { it.kind != ReminderKind.SUMMARY && outcome(it, now) != null } < LEARNING_REMINDERS
             val scores = scores(st, now).associateBy { it.hour }
-            val streakHour = (s.sleep - 2).takeIf { it in hours && (snap?.streak ?: 0) >= 1 && cap >= 2 && now < at(it) }
+            val streakHour = (s.sleep - 2).takeIf { it in hours && (snap?.streak ?: 0) >= 1 && snap?.restDayFree != true && cap >= 2 && now < at(it) }
             val studySlots = cap - if (streakHour != null) 1 else 0
             val open = hours.filter { scores[it]!!.rule != HourRule.BLOCKED && it != streakHour }
             val chosen = ArrayList<Int>()
@@ -328,7 +330,7 @@ object ReminderBrain {
         val snap = st.snapshot ?: return true
         val todayMinutes = if (snap.day == today) snap.todayMinutes else 0
         return when (p.kind) {
-            ReminderKind.STREAK -> todayMinutes == 0
+            ReminderKind.STREAK -> todayMinutes == 0 && !(snap.day == today && snap.restDayFree)
             else -> snap.targetMinutes <= 0 || todayMinutes < snap.targetMinutes
         }
     }

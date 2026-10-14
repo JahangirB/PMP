@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.Domain
 import com.jahangirb.pmpprep.data.Mastery
 import com.jahangirb.pmpprep.data.PlanEngine
+import com.jahangirb.pmpprep.data.QuestionReview
 import com.jahangirb.pmpprep.data.QuestionPicker
 import com.jahangirb.pmpprep.ui.Dest
 import com.jahangirb.pmpprep.ui.PmpViewModel
@@ -173,6 +174,22 @@ fun GuideScreen(vm: PmpViewModel) {
                     "Flashcards: spaced repetition. A card comes back just before you'd forget it; one forgotten ${x.srs.leechThreshold} times is a leech, and its task's lesson comes back as a review.",
                     "Credit per question: single choice is all or nothing; multiple response loses a point for each wrong pick; matching and fill-in give credit for each part right.",
                 )
+            }
+        }
+
+        item {
+            Section("Tools while you study") {
+                Bullets(
+                    "How sure? When an answer is ready, tap Sure, Think so or Guess to check it. A right guess doesn't count toward mastery; a sure-but-wrong answer goes to the top of the mistake journal. Never asked in mocks; switch it off in Study settings.",
+                    "Strike out and highlight, like the exam: long-press an option to cross it out; long-press words in the question and drag to highlight them. The results show whether crossing out first helps you.",
+                    "Missed questions come back: after 1 day, then 3, 7 and 21, and they leave once you've got them right a week or more later. Up to ${QuestionReview.PER_DAY} a day join the warm-up.",
+                    "Make a card: on a missed question, turn it into your own flashcard in My cards. Explain it back: write what you understood and Gemini says what you got right and missed (needs your key).",
+                    "Reading comfort: text size, line spacing and a reading guide in Study settings. Focus mode for mocks: Do Not Disturb and the screen kept awake. A two-minute breathing reset is offered when your check-in is low.",
+                    "Rest days: one missed day a week doesn't break your streak.",
+                    "Listen mode: lessons, flashcard decks and explanations read aloud by a natural voice built into the app. It works offline and with the screen off, with pause and stop in the notification.",
+                )
+                TextButton(onClick = { vm.navigate(Dest.SETTINGS) }) { Text("Study settings") }
+                TextButton(onClick = { vm.navigate(Dest.BOOK) }) { Text("Am I ready to book?") }
             }
         }
 

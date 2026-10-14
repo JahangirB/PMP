@@ -9,6 +9,7 @@ import androidx.compose.runtime.setValue
 import com.jahangirb.pmpprep.data.Answer
 import com.jahangirb.pmpprep.data.Option
 import com.jahangirb.pmpprep.data.Question
+import com.jahangirb.pmpprep.data.Readiness
 import com.jahangirb.pmpprep.data.ScoreResult
 import com.jahangirb.pmpprep.data.Scoring
 import org.json.JSONArray
@@ -35,7 +36,13 @@ class QuizSession(
     val timed: Boolean = false,
     /** Reading drill: the stem shows alone until you say you know what it's asking. */
     val readingDrill: Boolean = false,
+    /** Where the answers are recorded as coming from. */
+    val source: String = Readiness.SOURCE_PRACTICE,
 ) {
+    /** Options crossed out, highlighted words of the stem, and how sure you were, per question. */
+    val struck = mutableStateMapOf<String, Set<String>>()
+    val marks = mutableStateMapOf<String, Set<Int>>()
+    val confidence = mutableStateMapOf<String, Int>()
     private val rnd = Random(System.nanoTime())
     val startedAt = System.currentTimeMillis()
     val key = "practice:$startedAt"
@@ -103,6 +110,8 @@ class MockSession(
     var section by mutableIntStateOf(0)
     val answers = mutableStateMapOf<String, Answer>()
     val marked = mutableStateMapOf<String, Boolean>()
+    val struck = mutableStateMapOf<String, Set<String>>()
+    val marks = mutableStateMapOf<String, Set<Int>>()
     var remainingMs by mutableLongStateOf(durationMs)
     var onBreak by mutableStateOf(false)
     var breakRemainingMs by mutableLongStateOf(0L)
@@ -134,6 +143,8 @@ class MockSession(
         put("startedAt", startedAt)
         put("spent", JSONObject(spentMs as Map<*, *>)); put("firstTap", JSONObject(firstTapMs as Map<*, *>))
         put("rw", JSONObject(rightToWrong as Map<*, *>)); put("wr", JSONObject(wrongToRight as Map<*, *>))
+        put("struck", JSONObject().apply { struck.forEach { (k, v) -> put(k, JSONArray(v.toList())) } })
+        put("marks", JSONObject().apply { marks.forEach { (k, v) -> put(k, JSONArray(v.toList())) } })
     }
 
     companion object {
@@ -166,6 +177,8 @@ class MockSession(
             o.optJSONObject("firstTap")?.let { j -> j.keys().forEach { s.firstTapMs[it] = j.optLong(it) } }
             o.optJSONObject("rw")?.let { j -> j.keys().forEach { s.rightToWrong[it] = j.optInt(it) } }
             o.optJSONObject("wr")?.let { j -> j.keys().forEach { s.wrongToRight[it] = j.optInt(it) } }
+            o.optJSONObject("struck")?.let { j -> j.keys().forEach { k -> j.optJSONArray(k)?.let { a -> s.struck[k] = (0 until a.length()).map { a.optString(it) }.toSet() } } }
+            o.optJSONObject("marks")?.let { j -> j.keys().forEach { k -> j.optJSONArray(k)?.let { a -> s.marks[k] = (0 until a.length()).map { a.optInt(it) }.toSet() } } }
             return s
         }
 
