@@ -39,6 +39,7 @@ import com.jahangirb.pmpprep.data.Lesson
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.ExplainBackDialog
+import com.jahangirb.pmpprep.ui.components.ListenButton
 import com.jahangirb.pmpprep.ui.components.LocalReading
 import com.jahangirb.pmpprep.ui.components.StemText
 import com.jahangirb.pmpprep.ui.components.BulletList
@@ -112,6 +113,16 @@ fun LessonView(vm: PmpViewModel, l: Lesson, inSession: Boolean = false) {
         Text(l.title, fontSize = 22.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 28.sp)
         Text("${l.id} · ${l.minutes} minutes" + (vm.repo.task(l.ecoTask)?.let { " · ${it.code} ${it.label}" } ?: ""),
             fontSize = 12.sp, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+        ListenButton("Listen to this lesson", l.title) {
+            buildList {
+                add(l.title + ".")
+                if (l.objectives.isNotEmpty()) add("You will be able to: " + l.objectives.joinToString("; ") + ".")
+                l.sections.forEach { add(it.heading + ". " + it.body) }
+                if (l.traps.isNotEmpty()) add("Traps to avoid. " + l.traps.joinToString(" "))
+                if (l.recap.isNotEmpty()) add("Recap. " + l.recap.joinToString(" "))
+                if (l.mindset.isNotBlank()) add("Exam mindset. " + l.mindset)
+            }
+        }
         if (l.objectives.isNotEmpty()) PmpCard { SectionLabel("You will be able to"); Spacer(Modifier.height(6.dp)); BulletList(l.objectives) }
         l.sections.forEach { s ->
             Column {

@@ -21,6 +21,61 @@ val prepareContent = tasks.register<Exec>("prepareContent") {
     commandLine("node", script.absolutePath, repoRoot.absolutePath, generatedAssets.get().asFile.absolutePath)
 }
 
+// Listen mode's offline voice: the sherpa-onnx speech library and the Kokoro English voice
+// (both Apache-2.0), downloaded from sherpa-onnx's GitHub releases at build time and packed
+// into the APK, so nothing large lives in this repository and nothing is downloaded on the
+// phone. Each file is pinned to an exact release and checked against its SHA-256.
+val voiceCache: File = rootProject.file(".voice-cache")
+val voiceAssets = layout.buildDirectory.dir("generated/voiceAssets")
+val voiceFiles = mapOf(
+    "sherpa-onnx-1.13.8.aar" to (
+        "https://github.com/k2-fsa/sherpa-onnx/releases/download/v1.13.8/sherpa-onnx-1.13.8.aar" to
+            "633c24321e06b1fe79feafa03ea16cbc0f8a286641e2da3559bac91bdb13bd96"),
+    "kokoro-int8-en-v0_19.tar.bz2" to (
+        "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-int8-en-v0_19.tar.bz2" to
+            "c9f0dd393615805b0bab050c340834d5e684e732aec91c0e860cd30e982c08bd"),
+)
+val sherpaAar = File(voiceCache, "sherpa-onnx-1.13.8.aar")
+val voiceTar = File(voiceCache, "kokoro-int8-en-v0_19.tar.bz2")
+
+fun sha256(f: File): String {
+    val md = java.security.MessageDigest.getInstance("SHA-256")
+    f.inputStream().use { input -> val buf = ByteArray(1 shl 16); while (true) { val n = input.read(buf); if (n < 0) break; md.update(buf, 0, n) } }
+    return md.digest().joinToString("") { "%02x".format(it) }
+}
+
+val fetchVoice = tasks.register("fetchVoice") {
+    description = "Downloads the pinned speech library and voice for Listen mode, and checks their SHA-256."
+    outputs.files(voiceFiles.keys.map { File(voiceCache, it) })
+    doLast {
+        voiceCache.mkdirs()
+        voiceFiles.forEach { (name, source) ->
+            val (url, hash) = source
+            val f = File(voiceCache, name)
+            if (f.exists() && sha256(f) == hash) return@forEach
+            logger.lifecycle("Downloading $url")
+            val tmp = File(voiceCache, "$name.part")
+            java.net.URI(url).toURL().openStream().use { input -> tmp.outputStream().use { input.copyTo(it) } }
+            val got = sha256(tmp)
+            if (got != hash) { tmp.delete(); throw GradleException("$name: SHA-256 is $got, expected $hash. The upstream file changed; check it before updating the pin.") }
+            if (!tmp.renameTo(f)) { f.delete(); tmp.renameTo(f) }
+        }
+    }
+}
+
+val prepareVoice = tasks.register<Sync>("prepareVoice") {
+    description = "Unpacks the voice into the app's assets: the model, its voices and tokens, and English-only pronunciation data."
+    dependsOn(fetchVoice)
+    from(java.util.concurrent.Callable { tarTree(resources.bzip2(voiceTar)) }) {
+        include("*/model.int8.onnx", "*/voices.bin", "*/tokens.txt", "*/LICENSE", "*/espeak-ng-data/**")
+        // The voice is English: every other language's pronunciation dictionary is left out (19 MB → 2 MB).
+        exclude { it.name.endsWith("_dict") && it.name != "en_dict" }
+        eachFile { relativePath = RelativePath(true, "tts", *relativePath.segments.drop(1).toTypedArray()) }
+        includeEmptyDirs = false
+    }
+    into(voiceAssets)
+}
+
 android {
     namespace = "com.jahangirb.pmpprep"
     compileSdk = 35
@@ -33,6 +88,8 @@ android {
         val build = (System.getenv("VERSION_CODE") ?: "0").toIntOrNull() ?: 0
         versionCode = 100 + build
         versionName = "2.0.$build"
+        // The speech library is native code; only 64-bit ARM, which every current phone uses.
+        ndk { abiFilters += "arm64-v8a" }
     }
 
     signingConfigs {
@@ -60,6 +117,9 @@ android {
     }
 
     sourceSets["main"].assets.srcDir(generatedAssets)
+    sourceSets["main"].assets.srcDir(voiceAssets)
+    // Stored uncompressed: they barely compress, and the voice loads faster.
+    androidResources { noCompress += listOf("onnx", "bin") }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -76,7 +136,7 @@ android {
     }
 }
 
-tasks.named("preBuild") { dependsOn(prepareContent) }
+tasks.named("preBuild") { dependsOn(prepareContent, prepareVoice) }
 
 // Unit tests read the generated assets straight from disk.
 tasks.withType<Test>().configureEach {
@@ -85,6 +145,7 @@ tasks.withType<Test>().configureEach {
 }
 
 dependencies {
+    implementation(files(sherpaAar).builtBy(fetchVoice))
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
