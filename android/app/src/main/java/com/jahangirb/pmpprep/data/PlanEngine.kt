@@ -1,0 +1,329 @@
+package com.jahangirb.pmpprep.data
+
+import java.util.Calendar
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.roundToInt
+
+/*
+ * The guided path. Nothing here is a stored calendar: every build starts from
+ * what the person still needs (lessons not done, tasks not mastered, mocks not
+ * sat) and the study time left before the exam, so skipped days are absorbed
+ * rather than piling up, and results change what comes next.
+ */
+
+enum class Mastery { NOT_STARTED, LEARNING, SHAKY, MASTERED, FADING }
+
+data class TaskState(val task: EcoTask, val answers: Int, val recentAccuracy: Double, val lastAt: Long, val mastery: Mastery)
+
+enum class SessionKind { REENTRY, REMEDIATION, FOUNDATION, BUILD, DRILL, REVIEW, CHECKPOINT, SKILLS, MIXED, MOCK, TAPER }
+
+enum class StepKind { CARDS, LESSON, PRACTICE, REFLECT, SCENARIOS, MOCK, DEBRIEF }
+
+/** count: questions or scenarios; for PRACTICE, easy = drawn from difficulty 1–3 only. */
+data class Step(val kind: StepKind, val count: Int = 0, val timed: Boolean = false, val easy: Boolean = false)
+
+data class Session(
+    /** Stable for the same piece of work across rebuilds, e.g. "build:people-3". */
+    val key: String,
+    val kind: SessionKind,
+    val title: String,
+    val why: String,
+    val minutes: Int,
+    val steps: List<Step>,
+    val taskId: String? = null,
+    val domain: Domain? = null,
+    val lessonId: String? = null,
+    /** Start of the study day this is planned for. */
+    val day: Long = 0L,
+    internal val priority: Double = 0.0,
+    internal val notBefore: Long = 0L,
+)
+
+data class SessionResult(val key: String, val kind: SessionKind, val taskId: String?, val domain: Domain?, val score: Double, val minutes: Int, val at: Long)
+
+data class PlanSettings(val examDate: Long, val hoursPerWeek: Int, val studyDays: Set<Int>)
+
+data class Plan(
+    val sessions: List<Session>,
+    val phase: String,
+    val daysLeft: Int,
+    val minutesPerDay: Int,
+    val neededMinutes: Int,
+    val availableMinutes: Int,
+    /** True when the work left does not fit the time left even after trimming. */
+    val behind: Boolean,
+    val dropped: List<String>,
+    val adjustments: List<String>,
+    val tasks: List<TaskState>,
+) {
+    val next: Session? get() = sessions.firstOrNull()
+}
+
+class PlanInput(
+    val x: Extras,
+    val attempts: List<Attempt>,
+    val lessonsDone: Set<String>,
+    val results: List<SessionResult>,
+    val mocks: List<MockResult>,
+    val diagnostic: DiagnosticResult?,
+    val settings: PlanSettings,
+    val now: Long,
+)
+
+object PlanEngine {
+    const val DAY = Srs.DAY_MS
+    const val MASTERY_ANSWERS = 10
+    const val MASTERY_ACCURACY = 0.75
+    const val FADE_DAYS = 14
+    const val PASS = 0.70
+    const val REENTRY_DAYS = 5
+    const val TAPER_DAYS = 7
+    private const val RECENT = 15
+
+    fun startOfDay(t: Long) = Srs.startOfDay(t)
+
+    /** Next calendar day, correct across daylight-saving changes. */
+    fun nextDay(d: Long) = startOfDay(d + DAY + DAY / 2)
+
+    private fun weekday(d: Long) = Calendar.getInstance().apply { timeInMillis = d }.get(Calendar.DAY_OF_WEEK)
+
+    private fun pct(v: Double) = "${(v * 100).roundToInt()}%"
+
+    fun taskStates(x: Extras, attempts: List<Attempt>, now: Long): List<TaskState> {
+        val byTask = attempts.filter { it.source != Readiness.SOURCE_LESSON }.groupBy { it.ecoTask }
+        return x.tasks.map { t ->
+            val list = byTask[t.id].orEmpty().sortedBy { it.at }
+            val recent = list.takeLast(RECENT)
+            val acc = if (recent.isEmpty()) 0.0 else recent.sumOf { it.credit } / recent.size
+            val last = list.lastOrNull()?.at ?: 0L
+            val m = when {
+                list.isEmpty() -> Mastery.NOT_STARTED
+                list.size < MASTERY_ANSWERS -> Mastery.LEARNING
+                acc < MASTERY_ACCURACY -> Mastery.SHAKY
+                now - last > FADE_DAYS * DAY -> Mastery.FADING
+                else -> Mastery.MASTERED
+            }
+            TaskState(t, list.size, acc, last, m)
+        }
+    }
+
+    fun build(inp: PlanInput): Plan {
+        val x = inp.x
+        val now = inp.now
+        val today = startOfDay(now)
+        val exam = startOfDay(inp.settings.examDate)
+        val studyDays = inp.settings.studyDays.ifEmpty { (1..7).toSet() }
+        val perDay = max(15, inp.settings.hoursPerWeek * 60 / studyDays.size)
+        val tasks = taskStates(x, inp.attempts, now)
+        val adjustments = ArrayList<String>()
+
+        /* ── how weak each domain is: practice once there is enough, else the diagnostic ── */
+        val domainAcc = Domain.entries.associateWith { d ->
+            val a = inp.attempts.filter { it.domain == d && it.source != Readiness.SOURCE_LESSON }
+            if (a.size >= 30) a.sumOf { it.credit } / a.size else inp.diagnostic?.domainPct(d) ?: 0.6
+        }
+        fun taskPriority(s: TaskState): Double {
+            val acc = if (s.answers >= 5) s.recentAccuracy else domainAcc[s.task.domain] ?: 0.6
+            return (x.domainWeights[s.task.domain] ?: 0.3) * (1.0 - acc.coerceIn(0.0, 0.95)) * 10
+        }
+
+        val items = ArrayList<Session>()
+        val lessonsByTask = x.lessons.filter { it.ecoTask.isNotBlank() }.associateBy { it.ecoTask }
+        val lastResult = inp.results.groupBy { it.taskId }.mapValues { (_, l) -> l.maxByOrNull { it.at }!! }
+        val worked = tasks.filter { s -> inp.results.any { it.taskId == s.task.id && startOfDay(it.at) == today } }.map { it.task.id }.toSet()
+
+        /* ── 1. coming back after a gap ── */
+        val lastActivity = listOfNotNull(inp.attempts.maxOfOrNull { it.at }, inp.results.maxOfOrNull { it.at }, inp.mocks.maxOfOrNull { it.at }).maxOrNull()
+        val gapDays = if (lastActivity == null) 0 else ((today - startOfDay(lastActivity)) / DAY).toInt()
+        if (gapDays >= REENTRY_DAYS) {
+            items += Session("reentry:${startOfDay(lastActivity!!)}", SessionKind.REENTRY, "Welcome back: warm-up",
+                "Your last study was $gapDays days ago. Due cards and 10 questions on what you learned last, before anything new.",
+                25, listOf(Step(StepKind.CARDS), Step(StepKind.PRACTICE, 10), Step(StepKind.DEBRIEF)), priority = 1000.0)
+            adjustments += "Re-entry warm-up added: your last study was $gapDays days ago."
+        }
+
+        /* ── 2. per task: remediation, build, drills, reviews ── */
+        for (s in tasks) {
+            val t = s.task
+            val res = lastResult[t.id]
+            val pri = taskPriority(s)
+            val lesson = lessonsByTask[t.id]
+            val tomorrowIfWorked = if (t.id in worked) nextDay(today) else 0L
+            if (res != null && res.score < 0.5 && now - res.at < 3 * DAY && res.kind != SessionKind.REMEDIATION) {
+                items += Session("remediation:${t.id}:${res.at}", SessionKind.REMEDIATION, "Fix: ${t.label}",
+                    "Your last session on ${t.label} scored ${pct(res.score)}. Re-read the lesson, then easier questions to rebuild it.",
+                    30, listOfNotNull(lesson?.let { Step(StepKind.LESSON) }, Step(StepKind.PRACTICE, 10, easy = true), Step(StepKind.REFLECT), Step(StepKind.DEBRIEF)),
+                    t.id, t.domain, lesson?.id, priority = 900.0)
+                adjustments += "Fix-up session for ${t.label}: your last session there scored ${pct(res.score)}."
+                continue
+            }
+            if (lesson != null && lesson.id !in inp.lessonsDone) {
+                if (s.mastery == Mastery.MASTERED) {
+                    adjustments += "${t.label}: already mastered through your own practice, so only the lesson stays (as reading)."
+                }
+                items += Session("build:${t.id}", SessionKind.BUILD, "${t.code} · ${t.label}",
+                    when (s.mastery) {
+                        Mastery.MASTERED -> "You already answer ${t.label} well; this is the lesson for completeness."
+                        else -> "Learn it, check it, then practise it. " + (inp.diagnostic?.domainPct(t.domain)?.let { "${t.domain.title} scored ${pct(it)} in your diagnostic." } ?: "")
+                    },
+                    lesson.minutes + if (s.mastery == Mastery.MASTERED) 0 else 20,
+                    if (s.mastery == Mastery.MASTERED) listOf(Step(StepKind.LESSON), Step(StepKind.DEBRIEF))
+                    else listOf(Step(StepKind.CARDS), Step(StepKind.LESSON), Step(StepKind.PRACTICE, 10), Step(StepKind.REFLECT), Step(StepKind.DEBRIEF)),
+                    t.id, t.domain, lesson.id, priority = pri + 5)
+                continue
+            }
+            when (s.mastery) {
+                Mastery.NOT_STARTED, Mastery.LEARNING, Mastery.SHAKY -> {
+                    val drills = if (s.mastery == Mastery.SHAKY && s.recentAccuracy < 0.5) 2 else 1
+                    repeat(drills) { i ->
+                        items += Session("drill:${t.id}:$i", SessionKind.DRILL, "Drill: ${t.label}",
+                            if (s.answers == 0) "No answers on ${t.label} yet." else "${t.label} is at ${pct(s.recentAccuracy)} over your last ${min(s.answers, RECENT)} answers; the bar is ${pct(MASTERY_ACCURACY)}.",
+                            25, listOf(Step(StepKind.PRACTICE, 15), Step(StepKind.REFLECT), Step(StepKind.DEBRIEF)),
+                            t.id, t.domain, priority = pri - i, notBefore = max(tomorrowIfWorked, if (i > 0) nextDay(nextDay(today)) else 0L))
+                    }
+                    if (res != null && res.score in 0.5..0.799 && now - res.at < 3 * DAY) {
+                        adjustments += "Review of ${t.label} spaced 2 days out: your last session there scored ${pct(res.score)}."
+                    }
+                }
+                Mastery.FADING -> {
+                    items += Session("review:${t.id}", SessionKind.REVIEW, "Review: ${t.label}",
+                        "You had ${t.label} mastered, but it's been ${((now - s.lastAt) / DAY)} days. A short refresher keeps it.",
+                        15, listOf(Step(StepKind.PRACTICE, 10), Step(StepKind.DEBRIEF)), t.id, t.domain, priority = pri, notBefore = tomorrowIfWorked)
+                    adjustments += "${t.label} is fading (${(now - s.lastAt) / DAY} days since practice): review added."
+                }
+                Mastery.MASTERED -> if (inp.results.none { it.taskId == t.id }) adjustments += "${t.label}: mastered through your own practice, so no drill is planned."
+            }
+            // A middling session result books a spaced review even after mastery is reached.
+            if (s.mastery == Mastery.MASTERED && res != null && res.score in 0.5..0.799 && res.kind != SessionKind.REVIEW) {
+                items += Session("review:${t.id}", SessionKind.REVIEW, "Review: ${t.label}",
+                    "Your last session on ${t.label} scored ${pct(res.score)}. A spaced review makes it stick.",
+                    15, listOf(Step(StepKind.PRACTICE, 10), Step(StepKind.DEBRIEF)), t.id, t.domain, priority = pri, notBefore = res.at + 2 * DAY)
+            }
+        }
+
+        /* ── 3. foundations, checkpoints, exam skills, mocks ── */
+        x.lessons.filter { it.module == "foundations" && it.id !in inp.lessonsDone }.forEachIndexed { i, l ->
+            items += Session("lesson:${l.id}", SessionKind.FOUNDATION, l.title, "Foundations come first: how the exam works and the mindset it rewards.",
+                l.minutes, listOf(Step(StepKind.LESSON), Step(StepKind.DEBRIEF)), lessonId = l.id, priority = if (i == 0) 800.0 else 60.0 - i)
+        }
+        for (d in Domain.entries) {
+            val passed = inp.results.any { it.kind == SessionKind.CHECKPOINT && it.domain == d && it.score >= PASS }
+            if (passed) continue
+            val failed = inp.results.filter { it.kind == SessionKind.CHECKPOINT && it.domain == d }.maxByOrNull { it.at }
+            items += Session("checkpoint:${d.id}", SessionKind.CHECKPOINT, "Checkpoint: ${d.title}",
+                if (failed != null) "Last checkpoint scored ${pct(failed.score)}; ${pct(PASS)} moves you on. Retest after the reviews." else "20 mixed ${d.title} questions. ${pct(PASS)} or more moves you on.",
+                35, listOf(Step(StepKind.PRACTICE, 20), Step(StepKind.REFLECT), Step(StepKind.DEBRIEF)), domain = d, priority = 4.0,
+                notBefore = if (failed != null) failed.at + DAY else 0L)
+        }
+        x.lessons.filter { it.module == "skills" && it.id !in inp.lessonsDone }.forEach { l ->
+            items += Session("lesson:${l.id}", SessionKind.SKILLS, l.title, "Exam technique, once the content is in place.",
+                l.minutes, listOf(Step(StepKind.LESSON), Step(StepKind.DEBRIEF)), lessonId = l.id, priority = 2.0)
+        }
+
+        /* ── 4. capacity ── */
+        val taperStart = max(today, startOfDay(exam - TAPER_DAYS * DAY))
+        val days = ArrayList<Long>()
+        var d = today
+        while (d < exam) { if (weekday(d) in studyDays) days += d; d = nextDay(d) }
+        val doneToday = inp.results.filter { startOfDay(it.at) == today }.sumOf { it.minutes }
+        fun cap(day: Long) = if (day == today) max(0, perDay - doneToday) else perDay
+        val buildDays = days.filter { it < taperStart }
+        val available = buildDays.sumOf { cap(it) }
+
+        val weeksLeft = ((exam - today) / (7 * DAY)).toInt()
+        val recentMocks = inp.mocks.count { now - it.at < 45 * DAY }
+        val mockTarget = if (weeksLeft >= 4) 3 else 2
+        var mocksNeeded = max(0, mockTarget - recentMocks)
+        val mockMinimum = max(0, 2 - recentMocks)
+
+        var needed = items.sumOf { it.minutes } + mocksNeeded * perDay
+        val dropped = ArrayList<String>()
+        if (needed > available) {
+            // Trim the least valuable work first: second drills, then reviews, extra foundations, skills, extra mocks.
+            val order = items.filter { it.kind in setOf(SessionKind.DRILL, SessionKind.REVIEW, SessionKind.FOUNDATION, SessionKind.SKILLS) && it.priority < 500 }
+                .sortedWith(compareBy({ dropRank(it.kind, it.key) }, { it.priority }))
+            for (s in order) {
+                if (needed <= available) break
+                items.remove(s); needed -= s.minutes; dropped += s.title
+            }
+            while (needed > available && mocksNeeded > mockMinimum) { mocksNeeded--; needed -= perDay; dropped += "A full mock exam" }
+            if (dropped.isNotEmpty()) adjustments += "Time is short, so ${dropped.size} lower-value sessions were trimmed."
+        }
+        val behind = needed > available
+
+        /* ── 5. order: urgent, foundations, weakest domains first, checkpoints closing each domain ── */
+        val domainOrder = Domain.entries.sortedBy { domainAcc[it] ?: 0.6 }
+        fun orderKey(s: Session): Double = when (s.kind) {
+            SessionKind.REENTRY, SessionKind.REMEDIATION -> -1000.0 - s.priority
+            SessionKind.FOUNDATION -> if (s.priority >= 800) -900.0 else -500.0 - s.priority
+            SessionKind.BUILD, SessionKind.DRILL, SessionKind.REVIEW ->
+                domainOrder.indexOf(s.domain) * 100.0 - s.priority - (if (s.kind == SessionKind.BUILD) 50 else 0)
+            SessionKind.CHECKPOINT -> domainOrder.indexOf(s.domain) * 100.0 + 90
+            SessionKind.SKILLS -> 400.0 - s.priority
+            else -> 500.0
+        }
+        val queue = items.sortedBy { orderKey(it) }.toMutableList()
+
+        /* ── 6. lay the queue onto study days, then mocks and mixed practice in what's left ── */
+        val planned = ArrayList<Session>()
+        val used = HashMap<Long, Int>()
+        for (day in buildDays) {
+            var i = 0
+            while (i < queue.size && (used[day] ?: 0) < cap(day)) {
+                val s = queue[i]
+                if (s.notBefore > day) { i++; continue }
+                planned += s.copy(day = day); used[day] = (used[day] ?: 0) + s.minutes
+                queue.removeAt(i)
+            }
+        }
+        // Anything that did not fit still shows, on the last build day, so nothing silently vanishes.
+        val lastBuild = buildDays.lastOrNull() ?: today
+        queue.forEach { planned += it.copy(day = max(lastBuild, it.notBefore.coerceAtMost(lastBuild))) }
+
+        val free = buildDays.filter { (used[it] ?: 0) == 0 && cap(it) > 0 }
+        val mockDays = if (mocksNeeded == 0) emptyList() else spread(free, mocksNeeded, lastBuild)
+        mockDays.forEachIndexed { i, day ->
+            planned += Session("mock:${recentMocks + i + 1}", SessionKind.MOCK, "Full mock exam ${recentMocks + i + 1}",
+                "The only evidence you can hold accuracy for ${x.exam.minutes} minutes. Set aside the whole sitting.",
+                x.exam.minutes + 30, listOf(Step(StepKind.MOCK), Step(StepKind.DEBRIEF)), day = day, priority = 3.0)
+        }
+        free.filter { it !in mockDays }.forEach { day ->
+                planned += Session("mixed:$day", SessionKind.MIXED, "Mixed timed practice",
+                    "Every domain mixed, against the clock, the way the exam asks.",
+                    min(perDay, 45), listOf(Step(StepKind.CARDS), Step(StepKind.PRACTICE, 20, timed = true), Step(StepKind.SCENARIOS, 3), Step(StepKind.DEBRIEF)), day = day)
+            }
+        days.filter { it >= taperStart && it < startOfDay(exam - DAY) }.forEach { day ->
+            planned += Session("taper:$day", SessionKind.TAPER, "Light review",
+                "Final week: nothing new. Cards, a few mixed questions, then rest.",
+                min(perDay, 30), listOf(Step(StepKind.CARDS), Step(StepKind.PRACTICE, 10), Step(StepKind.DEBRIEF)), day = day)
+        }
+
+        val sessions = planned.sortedWith(compareBy({ it.day }, { orderKey(it) }))
+        val first = sessions.firstOrNull()
+        val phase = when (first?.kind) {
+            null -> "Exam day"
+            SessionKind.FOUNDATION -> "Foundations"
+            SessionKind.SKILLS, SessionKind.MOCK, SessionKind.MIXED -> "Exam readiness"
+            SessionKind.TAPER -> "Final week"
+            else -> "Build"
+        }
+        if (behind) adjustments += "Behind: about ${needed / 60} hours of work for ${available / 60} hours left. Add hours, a study day, or move the date."
+        return Plan(sessions, phase, ((exam - today) / DAY).toInt(), perDay, needed, available, behind, dropped, adjustments, tasks)
+    }
+
+    private fun dropRank(k: SessionKind, key: String): Int = when {
+        k == SessionKind.DRILL && key.endsWith(":1") -> 0
+        k == SessionKind.REVIEW -> 1
+        k == SessionKind.FOUNDATION -> 2
+        k == SessionKind.SKILLS -> 3
+        else -> 4
+    }
+
+    /** n days spread over the free days, the last as late as possible. */
+    private fun spread(free: List<Long>, n: Int, fallback: Long): List<Long> {
+        if (free.isEmpty()) return List(n) { fallback }
+        if (free.size <= n) return free + List(n - free.size) { free.last() }
+        return (1..n).map { i -> free[((free.size - 1) * i.toDouble() / n).roundToInt()] }.distinct()
+    }
+}

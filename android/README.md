@@ -10,8 +10,9 @@ questions, scenarios, lessons, flashcards, glossary, formulas and reference.
 
 | Screen | What it does |
 |---|---|
-| Coach (floating bubble) | On every screen except a running mock or the diagnostic. **Today** works offline: how you're doing, what's going well, what to improve, the coach's messages and today's session, each with a Go button. **Ask Gemini** is a chat with Google's Gemini Flash on your own API key: every message carries a snapshot of your progress, so it can review how you're doing, say what to improve and answer PMP questions. Practice questions have an "Ask coach" button |
-| Home | Setup (exam date + diagnostic), readiness score (the web app's five-part model), streak, cards due, mistakes, domain accuracy |
+| Your path (home) | First run asks for the exam date, weekly hours, study days and the diagnostic. From then on the app leads: one **Continue** button opens the next session (cards, lesson, practice, reflect, debrief), with a 15-minute version for short days, what's coming up, and why the plan changed. `data/PlanEngine.kt` rebuilds the plan from your progress every time, so missed days, weak scores and practice done elsewhere all re-shape it (see below) |
+| ☰ Menu | Everything beside the path: extra drills, mistakes, flagged, situational trainer, formula lab, mock, diagnostic, lessons, cards, reference, coach, analytics, notes, plan settings, banks |
+| Coach | In the menu and on the path. **Today** works offline: how you're doing, what's going well, what to improve, the coach's messages and today's session, each with a Go button. **Ask Gemini** is a chat with Google's Gemini Flash on your own API key: every message carries a snapshot of your progress, so it can review how you're doing, say what to improve and answer PMP questions. Practice questions have an "Ask coach" button |
 | Diagnostic | 25 questions (8 People / 10 Process / 7 Business) across the difficulty range, taken cold with no feedback until the end; the planner and the coach aim from it |
 | Practice | Filter by domain, ECO task, bank, type, approach and new / missed / flagged; check each answer and see why every option is right or wrong; pace bar; flags and notes |
 | Mock exam | 180 / 90 / 45 / 20 questions, weighted by domain; timed, three sections with optional breaks, mark for review, question grid; saved if you leave; scorecard by domain; review |
@@ -22,7 +23,7 @@ questions, scenarios, lessons, flashcards, glossary, formulas and reference.
 | Reference | ECO tasks with your accuracy, glossary, abbreviations, principles, performance domains, processes with ITTOs, agile, comparison tables |
 | Analytics | How the readiness score is built, study days, mock trend, accuracy by task, approach and type, pace |
 | Mistake journal | Every question wrong last time; tag the root cause; retry |
-| Study planner | Your diagnostic, exam date and weekly hours turned into a week-by-week plan weighted to your weak domains |
+| Plan and schedule | Diagnostic, exam date, weekly hours and study days; the path re-plans as soon as any of them changes |
 | Notes | One running page with a formatting ribbon (bold, italic, underline, strike, highlight, lists) and a read view, plus every note you wrote on a question. "Ask coach" sends the page to Gemini for a check |
 | Banks & backup | Import `.json` banks, switch banks on or off, delete imported ones, content audit, backup / restore / reset |
 
@@ -34,26 +35,39 @@ blank. Scoring follows the web app exactly.
 
 The layout follows published mobile-usability research; when changing it, keep to these.
 
-- **Navigation bar of five, by frequency.** Home, Practice, Learn, Cards and More. Material 3 limits a
-  navigation bar to 3–5 top-level destinations. The four used daily get a tab; everything else is a
-  labelled grid on **More** (with the mock exam first and a live status on each tile), not an icon-only
-  overflow menu in the top corner: that corner is the hardest to reach one-handed (Hoober's thumb-zone
-  studies) and hidden navigation is used far less (Nielsen Norman Group). Tabs replace the back history
-  rather than adding to it, so Back from any tab goes Home.
-- **One primary action per screen, in the thumb zone.** Home leads with the coach's next step as its
-  only large filled button. Practice setup keeps *Start practice* in a fixed bar at the bottom with
-  quick-start presets at the top, instead of the button sitting below a long form. In drills and the
-  mock exam the advancing action (Check, Next, Finish) is always bottom-right.
+- **One path, one button.** The home screen is the guided path with a single large *Continue*. Extra work
+  is one tap away under ☰ in the top bar, as a labelled, grouped list. There is no bottom bar and no
+  floating bubble: a learner who is led doesn't need five tabs, and nothing covers the content.
+- **Sessions are full screen** with a step counter and progress bar; ✕ leaves and *Continue* resumes
+  where you were. In drills and the mock exam the advancing action (Check, Next, Finish) is bottom-right.
 - **Destructive actions apart.** *Delete this bank* sits on its own line, not beside the on/off switch,
   and *Reset all progress* is in a separate Danger zone; both confirm first.
-- **Nothing floats over answers.** The coach bubble hides during drills, the diagnostic and the mock
-  exam (each practice question has its own coach button), and can be dragged anywhere else.
 - **Touch targets** are at least 48 dp (Material; WCAG 2.2 asks for 24 px minimum), whole cards and
-  tiles are tappable, and the Home stat tiles open what they count.
+  tiles are tappable, and menu rows show a live count.
 - **Contrast measured, not assumed.** Status, domain and accent colours are tuned per theme so text
   meets WCAG AA (4.5:1) in both: the earlier single values measured 2.2–4.1:1 on white. The measured
   pairs are listed in `ui/theme/Color.kt`. No text is smaller than 11 sp.
 - **Motion** uses Compose's animations, which follow Android's *Remove animations* setting.
+
+## How the path adapts
+
+The plan is never stored as a calendar; it is recomputed from what you have done each time you open
+the app, so it cannot fall out of date. Each ECO task is *not started*, *learning* (fewer than 10
+answers), *shaky* (under 75% over its last 15), *mastered*, or *fading* (mastered but untouched for 14
+days). From that:
+
+- **Days missed** just mean less time left: the remaining work is spread over the study days that are
+  left. After 5 or more days away the next session is a short warm-up on what you studied last.
+- **A session under 50%** is followed by a remediation session on that task next time.
+- **Behind schedule**: lower-value work is dropped first (second drills, reviews, extra foundations and exam-skill lessons, a third mock), never the
+  checkpoints or the last two mocks; if it still doesn't fit, the path says so and offers more hours,
+  another study day or a later date.
+- **Practice outside the path counts**: a drill from the menu moves a task's status like any session.
+- **Checkpoints** close each domain (pass at 70%), then mocks (three, or two with under four weeks
+  left), and the last seven days taper to light review.
+
+`PlanEngineTest` drives simulated learners through these cases (diligent, a week off, three weeks lost,
+a failed session, practice off the path, fading mastery).
 
 ## The Gemini key
 
