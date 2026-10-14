@@ -410,6 +410,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun startMock(n: Int) {
         val qs = buildMock(n)
         if (qs.isEmpty()) return
+        com.jahangirb.pmpprep.listen.Listen.stop() // exam conditions
         val layout = repo.extras.exam
         val full = n >= layout.totalItems
         val minutes = (layout.minutes.toDouble() * n / layout.totalItems).roundToInt().coerceAtLeast(5)
