@@ -47,8 +47,10 @@ class PlanEngineTest {
         val tags = HashMap<String, com.jahangirb.pmpprep.data.RootCause>()
         val leeches = HashMap<String, Int>()
         var ms = 60_000L
+        var ladderNext: Int? = null
+        var readingSlow = false
 
-        fun plan(now: Long): Plan = PlanEngine.build(PlanInput(x, attempts, lessons, results, mocks, diag, settings, now, tags, leeches))
+        fun plan(now: Long): Plan = PlanEngine.build(PlanInput(x, attempts, lessons, results, mocks, diag, settings, now, tags, leeches, ladderNext, readingSlow))
 
         fun answer(task: String, n: Int, score: Double, at: Long, source: String = "path") {
             val t = x.tasks.first { it.id == task }
@@ -260,5 +262,21 @@ class PlanEngineTest {
         assertEquals(StepKind.LESSON, s.steps.first().kind)
         l.doSession(s, start + days(1))
         assertTrue("done once: gone until another card slips", l.plan(start + days(2)).sessions.none { it.key.startsWith("relearn:${t.id}") })
+    }
+
+    @Test
+    fun examFitnessAddsAWeeklyStaminaSittingAndReadingDrill() {
+        val l = Learner(PlanSettings(start + days(60), 10, weekdays), 0.8)
+        l.ladderNext = 45
+        l.readingSlow = true
+        val p = l.plan(start)
+        val ladder = p.sessions.first { it.key.startsWith("ladder:45:") }
+        assertEquals(45, ladder.steps.first().count)
+        assertTrue(ladder.steps.first().timed)
+        val reading = p.sessions.first { it.key.startsWith("reading:") }
+        assertTrue(reading.steps.first().reading)
+        l.doSession(ladder, start)
+        assertTrue("one stamina sitting a week", l.plan(start + days(2)).sessions.none { it.key.startsWith("ladder:") })
+        assertTrue("back the next week", l.plan(start + days(7)).sessions.any { it.key.startsWith("ladder:") })
     }
 }

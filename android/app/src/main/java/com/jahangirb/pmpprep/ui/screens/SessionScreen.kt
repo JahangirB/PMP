@@ -70,7 +70,10 @@ fun SessionScreen(vm: PmpViewModel) {
             }
         }
         Box(Modifier.weight(1f)) {
-            when (st?.kind) {
+            // Once a day, before the first session: how do you feel about studying right now? (optional)
+            if (!r.checkedIn && r.step == 0) Column(Modifier.padding(16.dp)) {
+                CheckInRow("How do you feel about studying right now?", onPick = { vm.recordCheckIn("pre", it); r.checkedIn = true }, onSkip = { r.checkedIn = true })
+            } else when (st?.kind) {
                 StepKind.CARDS -> if (vm.cardQueue != null) CardSession(vm) { vm.nextStep(r) }
                 StepKind.LESSON -> LessonStep(vm, r)
                 StepKind.PRACTICE -> r.current?.let { q -> QuizRunner(vm, q, onFinish = { vm.nextStep(r) }) }
@@ -215,6 +218,13 @@ private fun Debrief(vm: PmpViewModel, r: PmpViewModel.PathRun) {
                 }
                 val best = byTask.maxByOrNull { it.value }
                 val worst = byTask.minByOrNull { it.value }
+                val rw = r.practices.sumOf { it.totalRightToWrong }
+                val wr = r.practices.sumOf { it.totalWrongToRight }
+                if (rw + wr > 0) PmpCard {
+                    Text("Changed answers: $wr wrong → right, $rw right → wrong.", fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                    Text(if (rw > wr) "Your first instinct was right more often than your changes. Change an answer only when you find a specific reason."
+                        else "Your changes helped. Keep checking, but don't reopen answers without a reason.", fontSize = 13.sp, lineHeight = 18.sp)
+                }
                 PmpCard {
                     best?.let { (t, v) -> Text("Went well: ${vm.repo.task(t)?.label ?: t}, ${pct(v)}", fontSize = 14.sp) }
                     if (worst != null && worst.value < 0.8) {

@@ -152,6 +152,9 @@ class Coach(
         }
         if (paceReady && median != null && median < x.readiness.paceBand[0]) msgs += CoachMessage("pace_fast", "Your median is ${median.roundToInt()}s. Fast answers are missing marks, and you have the time to read the stem twice.", 55, 7)
         if (paceReady && median != null && median > x.readiness.paceBand[1]) msgs += CoachMessage("pace_slow", "Your median is ${median.roundToInt()}s against ${x.exam.paceTargetSec}s on the day. A timed drill twice a week closes it slowly, and that's normal.", 55, 7, CoachAction.PRACTICE)
+        val fit = fitness(now)
+        if (fit.momentumLow) msgs += CoachMessage("momentum", "Your study time has dipped compared with recent weeks. That's normal over a long preparation. Try a lighter week of minimum days: 10 cards or 10 questions keep the habit going without pressure.", 60, 3)
+        if (fit.finding != null && fit.next != null) msgs += CoachMessage("fitness", "Exam fitness: ${fit.finding} ${fit.next}", 45, 5)
         if (due >= 20) msgs += CoachMessage("cards_due", "$due cards are waiting. Ten minutes now saves twenty later in the week.", 50, 2, CoachAction.CARDS)
         if (atts.size >= 50 && untouched > 0) msgs += CoachMessage("coverage_gap", (if (untouched == 1) "One task hasn't" else "$untouched tasks haven't") + " been touched yet. Coverage is worth more readiness per minute than anything else right now.", 50, 5, CoachAction.PRACTICE)
         if (untagged >= 5) msgs += CoachMessage("journal_waiting", "$untagged misses haven't got a cause yet. Tagging them is the cheapest insight on the board.", 45, 3, CoachAction.JOURNAL)
@@ -199,6 +202,9 @@ class Coach(
      * The person's progress as plain text, sent with every message to Gemini so
      * its answers rest on real figures. Nothing personal: only study numbers.
      */
+    private fun fitness(now: Long) = ExamFitness.report(FitnessInput(store.attempts, store.sittings, store.checkIns,
+        store.sessionResults, store.plan.studyDays, store.plan.hoursPerWeek, now))
+
     fun snapshot(now: Long = System.currentTimeMillis()): String {
         val r = readiness.report(store, now)
         val atts = store.attempts.filter { it.source != Readiness.SOURCE_LESSON }
@@ -216,6 +222,12 @@ class Coach(
         val days = daysToExam(now)
         sb.appendLine("Exam date: " + (store.plan.examDate?.let { "in $days days" } ?: "not set") + "; planned study ${store.plan.hoursPerWeek} h/week")
         sb.appendLine("Readiness: ${r.score}/100" + if (r.provisional) " (provisional: ${r.gates.joinToString("; ")})" else "")
+        val fit = fitness(now)
+        sb.appendLine("Exam fitness (stamina, composure under the clock, consistency; behaviour-based, not a diagnosis): ${fit.score ?: "not enough evidence yet"}" +
+            fit.parts.joinToString(prefix = " — ", separator = ", ") { p -> "${p.label} ${p.score?.let { (it * 100).toInt() } ?: "n/a"}" } +
+            (fit.wpm?.let { "; reading about ${it.toInt()} words a minute (exam needs ~${ExamFitness.TARGET_WPM.toInt()})" } ?: "") +
+            "; longest sitting ${fit.longest} questions" + (fit.worry?.let { "; self-reported exam worry $it/100" } ?: "") +
+            (fit.finding?.let { ". Main finding: $it" } ?: ""))
         r.components.forEach { sb.appendLine("  - ${it.label} (${it.weight} pts): ${it.figure}, earning ${"%.1f".format(it.points)}") }
         store.diagnostic?.let { d ->
             sb.appendLine("Diagnostic: ${d.right}/${d.n} (${pct(d.pct)}); " + Domain.entries.joinToString { dm -> "${dm.short} " + (d.domainPct(dm)?.let(::pct) ?: "-") })

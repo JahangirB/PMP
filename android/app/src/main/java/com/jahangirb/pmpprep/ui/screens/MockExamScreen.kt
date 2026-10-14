@@ -112,6 +112,20 @@ private fun MockIntro(vm: PmpViewModel) {
                 "Scored at the end with every question type marked the same way as practice.",
             ))
         }
+        // Writing worries out before a test improved scores for anxious students (Ramirez & Beilock, Science, 2011).
+        var writing by remember { mutableStateOf(false) }
+        var worries by remember { mutableStateOf("") }
+        PmpCard {
+            SectionLabel("Before you start (optional)")
+            Text("Nervous about it? Spend about 10 minutes writing down exactly what worries you about this sitting. Getting it on paper frees up the attention it was using. Nothing you write is saved.",
+                fontSize = 13.sp, lineHeight = 19.sp)
+            if (!writing) TextButton(onClick = { writing = true }) { Text("Write it down") }
+            else {
+                androidx.compose.material3.OutlinedTextField(value = worries, onValueChange = { worries = it }, minLines = 5,
+                    placeholder = { Text("What's on your mind about this exam?") }, modifier = Modifier.fillMaxWidth())
+                TextButton(onClick = { writing = false; worries = "" }) { Text("Done, clear it") }
+            }
+        }
         val sizes = listOf(
             x.totalItems to "Full exam",
             x.totalItems / 2 to "Half exam",
@@ -287,6 +301,9 @@ private fun BreakScreen(vm: PmpViewModel, m: MockSession) {
             color = MaterialTheme.colorScheme.onSurfaceVariant)
         Spacer(Modifier.height(16.dp))
         Text(clock(m.breakRemainingMs), fontSize = 40.sp, fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Black)
+        Spacer(Modifier.height(12.dp))
+        Text("Use it: stand up, drink some water, look at something far away. Then the reset for the next section: breathe out slowly, and on each question read the last sentence first.",
+            textAlign = TextAlign.Center, fontSize = 14.sp, lineHeight = 20.sp)
         Spacer(Modifier.height(16.dp))
         Button(onClick = { vm.endBreak() }) { Text("Start section ${m.section + 2} now") }
     }
@@ -297,6 +314,8 @@ private fun Scorecard(vm: PmpViewModel, r: MockResult) {
     val (label, color) = band(r.pct)
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("Mock exam scorecard", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold)
+        var asked by remember(r.at) { mutableStateOf(false) }
+        if (!asked) CheckInRow("How tense did you feel during it?", onPick = { vm.recordCheckIn("post", it); asked = true }, onSkip = { asked = true }, labels = TENSION)
         PmpCard(container = color.copy(alpha = 0.08f), border = color) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {

@@ -25,7 +25,11 @@ enum class SessionKind { REENTRY, REMEDIATION, FOUNDATION, BUILD, DRILL, REVIEW,
 enum class StepKind { CARDS, LESSON, PRACTICE, REFLECT, SCENARIOS, MOCK, DEBRIEF }
 
 /** count: questions or scenarios; for PRACTICE, easy = drawn from difficulty 1–3 only. */
-data class Step(val kind: StepKind, val count: Int = 0, val timed: Boolean = false, val easy: Boolean = false)
+data class Step(
+    val kind: StepKind, val count: Int = 0, val timed: Boolean = false, val easy: Boolean = false,
+    /** Reading drill: each stem is shown alone first, and you say what it's asking before the options appear. */
+    val reading: Boolean = false,
+)
 
 data class Session(
     /** Stable for the same piece of work across rebuilds, e.g. "build:people-3". */
@@ -77,6 +81,10 @@ class PlanInput(
     val mistakeTags: Map<String, RootCause> = emptyMap(),
     /** ECO task id → how many of its flashcards are leeches (forgotten 6+ times). */
     val leeches: Map<String, Int> = emptyMap(),
+    /** Exam fitness: the next rung of the stamina ladder (questions in one sitting), or null when done. */
+    val ladderNext: Int? = null,
+    /** Exam fitness: reading pace is below what the exam needs. */
+    val readingSlow: Boolean = false,
 )
 
 object PlanEngine {
@@ -285,6 +293,19 @@ object PlanEngine {
                 35, listOf(Step(StepKind.PRACTICE, 20), Step(StepKind.REFLECT), Step(StepKind.DEBRIEF)), domain = d, priority = 4.0,
                 notBefore = if (failed != null) failed.at + DAY else 0L)
         }
+        /* ── exam fitness: one stamina sitting and, if reading is slow, one reading drill a week ── */
+        val week = today / (7 * DAY)
+        fun doneThisWeek(prefix: String) = inp.results.any { it.key.startsWith(prefix) && now - it.at < 6 * DAY }
+        inp.ladderNext?.takeIf { it < x.exam.totalItems && !doneThisWeek("ladder:") }?.let { n ->
+            items += Session("ladder:$n:$week", SessionKind.MIXED, "Stamina sitting: $n questions",
+                "The next rung of your stamina ladder: $n mixed questions at exam pace, in one go. You move up when your accuracy holds in the last quarter.",
+                (n * 76 / 60) + 5, listOf(Step(StepKind.PRACTICE, n, timed = true), Step(StepKind.DEBRIEF)), priority = 3.5)
+        }
+        if (inp.readingSlow && !doneThisWeek("reading:")) {
+            items += Session("reading:$week", SessionKind.SKILLS, "Reading drill",
+                "Each question shows its scenario first. Say to yourself what it's asking, then reveal the options. It trains reading speed and calm on long questions.",
+                15, listOf(Step(StepKind.PRACTICE, 10, reading = true), Step(StepKind.DEBRIEF)), priority = 3.0)
+        }
         x.lessons.filter { it.module == "skills" && it.id !in inp.lessonsDone }.forEach { l ->
             items += Session("lesson:${l.id}", SessionKind.SKILLS, l.title, "Exam technique, once the content is in place.",
                 l.minutes, listOf(Step(StepKind.LESSON), Step(StepKind.DEBRIEF)), lessonId = l.id, priority = 2.0)
@@ -330,6 +351,7 @@ object PlanEngine {
                 domainOrder.indexOf(s.domain) * 100.0 - s.priority - (if (s.kind == SessionKind.BUILD) 50 else 0)
             SessionKind.CHECKPOINT -> domainOrder.indexOf(s.domain) * 100.0 + 90
             SessionKind.SKILLS -> 400.0 - s.priority
+            SessionKind.MIXED -> if (s.key.startsWith("ladder:")) 300.0 else 500.0
             else -> 500.0
         }
         val queue = items.sortedBy { orderKey(it) }.toMutableList()
