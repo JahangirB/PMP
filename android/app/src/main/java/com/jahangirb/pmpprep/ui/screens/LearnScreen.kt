@@ -38,6 +38,9 @@ import com.jahangirb.pmpprep.data.Answer
 import com.jahangirb.pmpprep.data.Lesson
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.ui.PmpViewModel
+import com.jahangirb.pmpprep.ui.components.ExplainBackDialog
+import com.jahangirb.pmpprep.ui.components.LocalReading
+import com.jahangirb.pmpprep.ui.components.StemText
 import com.jahangirb.pmpprep.ui.components.BulletList
 import com.jahangirb.pmpprep.ui.components.Feedback
 import com.jahangirb.pmpprep.ui.components.MindsetCallout
@@ -102,6 +105,8 @@ fun LessonView(vm: PmpViewModel, l: Lesson, inSession: Boolean = false) {
     var workedShown by remember(l.id) { mutableStateOf(false) }
     val checkAnswers = remember(l.id) { mutableStateMapOf<String, Answer>() }
     val checked = remember(l.id) { mutableStateMapOf<String, Boolean>() }
+    var explaining by remember(l.id) { mutableStateOf(false) }
+    val reading = LocalReading.current
 
     Column(Modifier.fillMaxSize().verticalScroll(scroll).padding(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         Text(l.title, fontSize = 22.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 28.sp)
@@ -110,9 +115,9 @@ fun LessonView(vm: PmpViewModel, l: Lesson, inSession: Boolean = false) {
         if (l.objectives.isNotEmpty()) PmpCard { SectionLabel("You will be able to"); Spacer(Modifier.height(6.dp)); BulletList(l.objectives) }
         l.sections.forEach { s ->
             Column {
-                Text(s.heading, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(s.heading, fontSize = reading.size(18), fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(6.dp))
-                Text(s.body, fontSize = 15.sp, lineHeight = 23.sp)
+                StemText(s.body, 15, 23)
             }
         }
         if (l.lenses.isNotEmpty()) {
@@ -155,6 +160,7 @@ fun LessonView(vm: PmpViewModel, l: Lesson, inSession: Boolean = false) {
         if (l.terms.isNotEmpty()) PmpCard { SectionLabel("Key terms"); Spacer(Modifier.height(6.dp)); Text(l.terms.joinToString(" · "), fontSize = 14.sp) }
         if (l.recap.isNotEmpty()) PmpCard { SectionLabel("Recap"); Spacer(Modifier.height(6.dp)); BulletList(l.recap) }
         MindsetCallout(l.mindset)
+        OutlinedButton(onClick = { explaining = true }, modifier = Modifier.fillMaxWidth()) { Text("Explain it back in your words") }
         val done = rev >= 0 && l.id in vm.store.lessonsDone
         if (!inSession) Button(onClick = { vm.store.setLessonDone(l.id, !done) }, modifier = Modifier.fillMaxWidth()) {
             Text(if (done) "Mark as not done" else "Mark lesson done", fontWeight = FontWeight.Bold)
@@ -166,4 +172,6 @@ fun LessonView(vm: PmpViewModel, l: Lesson, inSession: Boolean = false) {
         }
         Spacer(Modifier.height(16.dp))
     }
+    if (explaining) ExplainBackDialog(vm, "The lesson \"${l.title}\". Its main points:\n" + (l.recap.ifEmpty { l.objectives }).joinToString("\n") { "• $it" },
+        "Explain the main idea of this lesson as if teaching a colleague: what it is, when it applies, and the trap to avoid.") { explaining = false }
 }

@@ -31,7 +31,22 @@ data class Attempt(
     val words: Int = 0,
     /** Answered against a clock: a mock, or timed practice. */
     val timed: Boolean = false,
-)
+    /** How sure you were before checking: [SURE], [THINK], [GUESS], or 0 if not asked. */
+    val confidence: Int = 0,
+    /** Options crossed out before checking. */
+    val eliminated: Int = 0,
+) {
+    /** Right, but by your own account a guess: not evidence that you know it. */
+    val luckyGuess: Boolean get() = correct && confidence == GUESS
+    /** Wrong while sure: the most dangerous kind of mistake on exam day. */
+    val sureWrong: Boolean get() = !correct && confidence == SURE
+
+    companion object {
+        const val GUESS = 1
+        const val THINK = 2
+        const val SURE = 3
+    }
+}
 
 /** A sitting started or ended: a practice set, a guided session or a mock. Used to tell finished from abandoned. */
 data class SittingEvent(val key: String, val kind: String, val at: Long, val planned: Int, val answered: Int, val finished: Boolean)
@@ -70,6 +85,8 @@ data class StudyPlan(
     val studyDays: Set<Int> = setOf(2, 3, 4, 5, 6),
     /** Set when the first-run setup (date, hours, days, diagnostic) has been finished or skipped. */
     val onboarded: Boolean = false,
+    /** One missed day a week doesn't break the streak. */
+    val restDays: Boolean = true,
 )
 
 /** The cold 25-question level check the plan and the coach aim from. */
@@ -122,6 +139,8 @@ class ProgressStore(private val dir: File) {
     val checkIns = ArrayList<CheckIn>()
     /** One report per week, the current week's kept up to date until the week ends. */
     val weekly = ArrayList<WeeklyReport>()
+    /** Flashcards you made from your own mistakes (deck [MY_DECK]). */
+    val myCards = ArrayList<Flashcard>()
 
     /** Latest attempt per question. */
     val last = HashMap<String, Attempt>()
@@ -217,6 +236,20 @@ class ProgressStore(private val dir: File) {
     }
 
     @Synchronized
+    fun addMyCard(c: Flashcard) {
+        myCards.removeAll { it.id == c.id }
+        myCards += c
+        changed()
+    }
+
+    @Synchronized
+    fun removeMyCard(id: String) {
+        myCards.removeAll { it.id == id }
+        cards.remove(id)
+        changed()
+    }
+
+    @Synchronized
     fun setNotepad(text: String) {
         if (text == notepad) return
         notepad = text
@@ -255,7 +288,7 @@ class ProgressStore(private val dir: File) {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear(); plan = StudyPlan()
         notepad = ""; diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
-        sittings.clear(); checkIns.clear(); weekly.clear()
+        sittings.clear(); checkIns.clear(); weekly.clear(); myCards.clear()
         changed()
     }
 
@@ -301,6 +334,8 @@ class ProgressStore(private val dir: File) {
                     if (a.wrongToRight > 0) put("wr", a.wrongToRight)
                     if (a.words > 0) put("w", a.words)
                     if (a.timed) put("tm", true)
+                    if (a.confidence > 0) put("cf", a.confidence)
+                    if (a.eliminated > 0) put("el", a.eliminated)
                 })
             }
         })
@@ -327,7 +362,7 @@ class ProgressStore(private val dir: File) {
         })
         put("lessons", JSONArray(lessonsDone.toList()))
         put("plan", JSONObject().put("examDate", plan.examDate ?: 0L).put("hours", plan.hoursPerWeek)
-            .put("days", JSONArray(plan.studyDays.toList())).put("onboarded", plan.onboarded))
+            .put("days", JSONArray(plan.studyDays.toList())).put("onboarded", plan.onboarded).put("rest", plan.restDays))
         put("sessions", JSONArray().apply {
             sessionResults.forEach { r ->
                 put(JSONObject().put("k", r.key).put("kind", r.kind.name).put("t", r.taskId ?: "").put("d", r.domain?.id ?: "")
@@ -352,14 +387,23 @@ class ProgressStore(private val dir: File) {
             checkIns.forEach { put(JSONObject().put("at", it.at).put("kind", it.kind).put("v", it.value).put("items", JSONArray(it.items))) }
         })
         put("weekly", JSONArray().apply { weekly.forEach { put(it.toJson()) } })
+        put("mycards", JSONArray().apply {
+            myCards.forEach { put(JSONObject().put("id", it.id).put("t", it.ecoTask ?: "").put("f", it.front).put("b", it.back).put("n", it.note)) }
+        })
     }
 
     private fun fromJson(o: JSONObject) {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear()
         diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
-        sittings.clear(); checkIns.clear(); weekly.clear()
+        sittings.clear(); checkIns.clear(); weekly.clear(); myCards.clear()
         notepad = o.optString("notepad", "")
+        o.optJSONArray("mycards")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val c = arr.optJSONObject(i) ?: continue
+                myCards += Flashcard(c.optString("id"), MY_DECK, c.optString("t").ifEmpty { null }, c.optString("f"), c.optString("b"), c.optString("n"))
+            }
+        }
         o.optJSONArray("sittings")?.let { arr ->
             for (i in 0 until arr.length()) {
                 val e = arr.optJSONObject(i) ?: continue
@@ -406,7 +450,7 @@ class ProgressStore(private val dir: File) {
                     type = QType.of(a.optString("ty")) ?: QType.SINGLE, credit = a.optDouble("cr", 0.0),
                     correct = a.optBoolean("ok"), ms = a.optLong("ms"), at = a.optLong("at"), source = a.optString("src"),
                     firstTapMs = a.optLong("ft"), idleMs = a.optLong("idle"), rightToWrong = a.optInt("rw"), wrongToRight = a.optInt("wr"),
-                    words = a.optInt("w"), timed = a.optBoolean("tm"),
+                    words = a.optInt("w"), timed = a.optBoolean("tm"), confidence = a.optInt("cf"), eliminated = a.optInt("el"),
                 )
                 attempts += at
                 last[at.qid] = at
@@ -452,12 +496,13 @@ class ProgressStore(private val dir: File) {
             val days = it.optJSONArray("days")?.let { a -> (0 until a.length()).map { i -> a.optInt(i) }.toSet() }
             // Older backups have no onboarded flag: a date plus a diagnostic means setup was done.
             plan = StudyPlan(if (date > 0) date else null, it.optInt("hours", 10), days?.ifEmpty { null } ?: StudyPlan().studyDays,
-                it.optBoolean("onboarded", date > 0 && diagnostics.isNotEmpty()))
+                it.optBoolean("onboarded", date > 0 && diagnostics.isNotEmpty()), it.optBoolean("rest", true))
         }
     }
 
     companion object {
         const val TYPE = "pmp-android-progress"
+        const val MY_DECK = "mine"
         private const val MAX_ATTEMPTS = 20000
         private const val MAX_CHAT = 60
     }

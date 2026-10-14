@@ -97,6 +97,10 @@ import com.jahangirb.pmpprep.ui.screens.PracticeScreen
 import com.jahangirb.pmpprep.ui.screens.ReferenceScreen
 import com.jahangirb.pmpprep.ui.screens.SituationalScreen
 import com.jahangirb.pmpprep.ui.theme.PmpTheme
+import com.jahangirb.pmpprep.ui.components.LocalReading
+import com.jahangirb.pmpprep.ui.screens.BookScreen
+import com.jahangirb.pmpprep.ui.screens.SearchScreen
+import com.jahangirb.pmpprep.ui.screens.StudySettingsScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -240,7 +244,7 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
             // A fresh stagger per screen visit, so its cards slide in one after another.
             key(vm.screen) {
                 val enter = remember { EnterStagger(reduce = reduceMotion) }
-                CompositionLocalProvider(LocalEnter provides enter) {
+                CompositionLocalProvider(LocalEnter provides enter, LocalReading provides vm.reading) {
                     when (vm.screen) {
                         Dest.DASHBOARD -> PathScreen(vm)
                         Dest.PRACTICE -> PracticeScreen(vm)
@@ -260,6 +264,9 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                         Dest.FITNESS -> FitnessScreen(vm)
                         Dest.REPORTS -> ReportsScreen(vm)
                         Dest.SESSION -> SessionScreen(vm)
+                        Dest.SETTINGS -> StudySettingsScreen(vm)
+                        Dest.BOOK -> BookScreen(vm)
+                        Dest.SEARCH -> SearchScreen(vm)
                     }
                 }
             }

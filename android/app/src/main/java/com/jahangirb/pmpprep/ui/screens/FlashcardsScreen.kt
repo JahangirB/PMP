@@ -21,6 +21,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import com.jahangirb.pmpprep.ui.components.ClayOutlinedButton as OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -71,7 +72,7 @@ private fun DeckList(vm: PmpViewModel) {
                 Text("Study all decks · ${all.due} due · ${all.new} new", fontWeight = FontWeight.Bold)
             }
         }
-        items(x.decks, key = { it.id }) { d ->
+        items(vm.decks(), key = { it.id }) { d ->
             val c = remember(rev) { vm.deckCounts(d.id) }
             PmpCard {
                 Text(d.label, fontSize = 16.sp, fontWeight = FontWeight.Bold)
@@ -117,7 +118,7 @@ fun CardSession(vm: PmpViewModel, onDone: (() -> Unit)? = null) {
     val state = vm.cardState(card.id)
     val preview = vm.srs.preview(state, System.currentTimeMillis())
     val rot by animateFloatAsState(if (vm.cardFlipped) 180f else 0f, tween(350), label = "flip")
-    val deck = vm.repo.extras.decks.firstOrNull { it.id == card.deck }
+    val deck = vm.decks().firstOrNull { it.id == card.deck }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Row {
@@ -168,6 +169,9 @@ fun CardSession(vm: PmpViewModel, onDone: (() -> Unit)? = null) {
             }
             if (state.lapses > 0) Text("Forgotten ${state.lapses} time(s) · ease ${"%.2f".format(state.ease)}", fontSize = 11.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (card.deck == com.jahangirb.pmpprep.data.ProgressStore.MY_DECK) {
+                TextButton(onClick = { vm.deleteMyCard(card.id) }) { Text("Delete this card", color = ColorError) }
+            }
         }
     }
 }
