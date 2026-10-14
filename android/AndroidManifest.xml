@@ -2,25 +2,45 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jahangirb.pmpprep">
 
-    <!-- Only the optional Gemini tab and external links use the network.
-         The app itself and every bundled question pack are served from the APK. -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
         android:allowBackup="true"
         android:supportsRtl="true">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize"
-            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation">
+
+        <activity android:name=".MainActivity" android:exported="true" android:label="@string/app_name"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".PracticeSetupActivity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".QuizActivity" android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden" />
+        <activity android:name=".ResultActivity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".HistoryActivity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".FlashcardsActivity" android:parentActivityName=".MainActivity"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden" />
+        <activity android:name=".GlossaryActivity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".FormulasActivity" android:parentActivityName=".MainActivity" />
+
+        <!-- Also opens .json question packs shared or opened from other apps. -->
+        <activity android:name=".PacksActivity" android:parentActivityName=".MainActivity"
+            android:exported="true" android:launchMode="singleTop" android:label="Add to PMP Prep">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" android:mimeType="application/json" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/json" />
             </intent-filter>
         </activity>
     </application>
