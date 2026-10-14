@@ -113,7 +113,7 @@ private fun MockIntro(vm: PmpViewModel) {
     var offer by remember { mutableStateOf<Int?>(null) }
     var breathing by remember { mutableStateOf(false) }
     if (breathing) { BreathingReset { breathing = false }; return }
-    offer?.let { n -> FocusDialog(vm, onStart = { focus -> offer = null; vm.setFocusMock(focus); vm.startMock(n) }, onDismiss = { offer = null }) }
+    offer?.let { n -> FocusDialog(vm, onStart = { focus -> offer = null; vm.changeFocusMock(focus); vm.startMock(n) }, onDismiss = { offer = null }) }
     val x = vm.repo.extras.exam
     val pool = remember(vm.contentVersion) { vm.pool().size }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -187,7 +187,7 @@ private fun FocusDialog(vm: PmpViewModel, onStart: (Boolean) -> Unit, onDismiss:
                 Text("Silence notifications with Do Not Disturb while the exam is on screen, and keep the screen awake. Both go back to normal when you finish, pause or leave it.")
                 if (!access) Text("Do Not Disturb needs a one-time switch: Settings › Do Not Disturb access › PMP Prep. Without it, focus mode only keeps the screen awake.",
                     fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                TextButton(onClick = { vm.setFocusOffer(false); onStart(false) }) { Text("Don't ask again") }
+                TextButton(onClick = { vm.changeFocusOffer(false); onStart(false) }) { Text("Don't ask again") }
             }
         },
         confirmButton = {
