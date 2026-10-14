@@ -25,6 +25,11 @@ data class WeeklyReport(
     val longest: Int,
     val freezePct: Int?,
     val worry: Int?,
+    /** Answers you were sure of that were wrong, and right answers you marked as guesses; null if confidence wasn't asked. */
+    val sureWrong: Int? = null,
+    val luckyGuesses: Int? = null,
+    /** Mistakes tagged this week, by cause. */
+    val causes: Map<RootCause, Int> = emptyMap(),
 ) {
     fun toJson(): JSONObject = JSONObject().apply {
         put("w", weekStart); put("u", updatedAt); put("r", readiness); put("acc", accuracy); put("tt", tasksTouched)
@@ -32,6 +37,8 @@ data class WeeklyReport(
         mockAvg?.let { put("mka", it) }; fitness?.let { put("f", it) }; stamina?.let { put("st", it) }
         composure?.let { put("co", it) }; consistency?.let { put("cn", it) }; wpm?.let { put("wpm", it) }
         put("lg", longest); freezePct?.let { put("fr", it) }; worry?.let { put("wo", it) }
+        sureWrong?.let { put("sw", it) }; luckyGuesses?.let { put("lk", it) }
+        if (causes.isNotEmpty()) put("cz", JSONObject().apply { causes.forEach { (c, n) -> put(c.name, n) } })
     }
 
     companion object {
@@ -40,6 +47,8 @@ data class WeeklyReport(
             o.optLong("w"), o.optLong("u"), o.optInt("r"), o.optInt("acc"), o.optInt("tt"), o.optInt("ma"), o.optInt("min"),
             o.optInt("d"), o.optInt("n"), o.optInt("mk"), o.intOrNull("mka"), o.intOrNull("f"), o.intOrNull("st"),
             o.intOrNull("co"), o.intOrNull("cn"), o.intOrNull("wpm"), o.optInt("lg"), o.intOrNull("fr"), o.intOrNull("wo"),
+            o.intOrNull("sw"), o.intOrNull("lk"),
+            o.optJSONObject("cz")?.let { c -> RootCause.entries.filter { c.has(it.name) }.associateWith { c.optInt(it.name) } } ?: emptyMap(),
         )
     }
 }
@@ -61,6 +70,7 @@ object WeeklyReports {
     fun build(
         now: Long, readiness: ReadinessReport, tasksTouched: Int, mastered: Int,
         attempts: List<Attempt>, results: List<SessionResult>, mocks: List<MockResult>, fitness: FitnessReport,
+        tags: Collection<MistakeTag> = emptyList(),
     ): WeeklyReport {
         val from = weekStart(now)
         val week = attempts.filter { it.at >= from && it.source != Readiness.SOURCE_LESSON }
@@ -79,6 +89,9 @@ object WeeklyReports {
             fitness = fitness.score, stamina = part("stamina"), composure = part("composure"), consistency = part("consistency"),
             wpm = fitness.wpm?.roundToInt(), longest = fitness.longest, freezePct = fitness.freezeRate?.let { (it * 100).roundToInt() },
             worry = fitness.worry,
+            sureWrong = week.takeIf { w -> w.any { it.confidence > 0 } }?.count { it.sureWrong },
+            luckyGuesses = week.takeIf { w -> w.any { it.confidence > 0 } }?.count { it.luckyGuess },
+            causes = tags.filter { it.at >= from }.groupingBy { it.cause }.eachCount(),
         )
     }
 
@@ -115,5 +128,13 @@ object WeeklyReports {
             Row("Questions answered", r.answers, p?.answers, ""),
             Row("Mocks sat", r.mocks, p?.mocks, ""),
         )),
-    )
+        Section("Confidence", listOf(
+            Row("Sure but wrong", r.sureWrong, p?.sureWrong, "", higherIsBetter = false),
+            Row("Right by guessing", r.luckyGuesses, p?.luckyGuesses, "", higherIsBetter = false),
+        )),
+        // Only causes tagged in one of the two weeks; a cause not tagged in a week counts as none.
+        Section("Mistake causes", RootCause.entries.filter { (r.causes[it] ?: 0) + (p?.causes?.get(it) ?: 0) > 0 }.map { c ->
+            Row(c.title, r.causes[c] ?: 0, p?.let { it.causes[c] ?: 0 }, "", higherIsBetter = false)
+        }),
+    ).filter { it.rows.any { r -> r.value != null } }
 }

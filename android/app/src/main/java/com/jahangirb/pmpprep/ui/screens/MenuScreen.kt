@@ -38,6 +38,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.material.icons.filled.EventAvailable
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.TextFields
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -66,6 +69,7 @@ fun MenuScreen(vm: PmpViewModel) {
     val groups = listOf(
         "Start here" to listOf(
             Entry(Icons.AutoMirrored.Filled.HelpOutline, "How it works", "What you get, what's measured, how weak spots are handled") { vm.navigate(Dest.GUIDE) },
+            Entry(Icons.Default.Search, "Search everything", "Lessons, glossary, formulas, your notes, explanations") { vm.navigate(Dest.SEARCH) },
         ),
         "Practise" to listOf(
             Entry(Icons.Default.Quiz, "Build a drill", "Pick domain, task, type, approach, bank") { vm.navigate(Dest.PRACTICE) },
@@ -84,11 +88,12 @@ fun MenuScreen(vm: PmpViewModel) {
         ),
         "Study" to listOf(
             Entry(Icons.AutoMirrored.Filled.MenuBook, "Lessons", "${vm.store.lessonsDone.size} of ${x.lessons.size} done") { vm.navigate(Dest.LEARN) },
-            Entry(Icons.Default.Style, "Flashcards", "${vm.deckCounts(null).due} due") { vm.navigate(Dest.FLASHCARDS) },
+            Entry(Icons.Default.Style, "Flashcards", "${vm.deckCounts(null).due} due" + if (vm.store.myCards.isNotEmpty()) " · ${vm.store.myCards.size} of your own" else "") { vm.navigate(Dest.FLASHCARDS) },
             Entry(Icons.AutoMirrored.Filled.LibraryBooks, "Reference and glossary", "ECO tasks, ${x.glossary.size} terms, processes") { vm.navigate(Dest.REFERENCE) },
         ),
         "My progress" to listOf(
             Entry(Icons.Default.AutoAwesome, "Coach", if (vm.geminiKey.isEmpty()) "How you're doing; connect Gemini to chat" else "How you're doing, and Gemini chat") { vm.coachTab = 0; vm.navigate(Dest.COACH) },
+            Entry(Icons.Default.EventAvailable, "Am I ready to book?", if (vm.booking().ready) "Yes: all three conditions met" else "What's left, and a projected date") { vm.navigate(Dest.BOOK) },
             Entry(Icons.Default.SelfImprovement, "Exam fitness", "Stamina, composure and consistency") { vm.navigate(Dest.FITNESS) },
             Entry(Icons.Default.DateRange, "Weekly reports", "Each week compared with the one before") { vm.navigate(Dest.REPORTS) },
             Entry(Icons.Default.Insights, "Analytics", "Readiness ${vm.readiness.report(vm.store).score}, by task and type") { vm.navigate(Dest.ANALYTICS) },
@@ -97,6 +102,7 @@ fun MenuScreen(vm: PmpViewModel) {
         ),
         "Settings" to listOf(
             Entry(Icons.Default.CalendarMonth, "Plan and schedule", "Exam date, hours, study days") { vm.navigate(Dest.PLANNER) },
+            Entry(Icons.Default.TextFields, "Study settings", "Text size, reading guide, confidence, focus mode, rest days") { vm.navigate(Dest.SETTINGS) },
             Entry(Icons.Default.Storage, "Question banks and backup", "${vm.pool().size} questions enabled") { vm.navigate(Dest.DATA) },
         ),
     )

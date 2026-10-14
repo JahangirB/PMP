@@ -52,7 +52,10 @@ import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.PracticeFilter
 import com.jahangirb.pmpprep.ui.QuizSession
+import com.jahangirb.pmpprep.ui.components.ExplainBackDialog
 import com.jahangirb.pmpprep.ui.components.Feedback
+import com.jahangirb.pmpprep.ui.components.MakeCardDialog
+import com.jahangirb.pmpprep.ui.components.questionTopic
 import com.jahangirb.pmpprep.ui.components.PacingBar
 import com.jahangirb.pmpprep.ui.components.PmpCard
 import com.jahangirb.pmpprep.ui.components.ProgressRow
@@ -85,6 +88,7 @@ private fun PracticeSetup(vm: PmpViewModel) {
     val x = vm.repo.extras
     val missed = remember(rev, cv) { vm.store.last.values.count { !it.correct } }
     val flagged = remember(rev, cv) { vm.store.flags.size }
+    val reviews = remember(rev, cv) { vm.reviewDueCount() }
     Column(Modifier.fillMaxSize()) {
     Column(
         Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(16.dp),
@@ -97,6 +101,7 @@ private fun PracticeSetup(vm: PmpViewModel) {
         // Quick starts first: the drills people run most need no form at all.
         SectionLabel("Quick start")
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            if (reviews > 0) Button(onClick = { vm.startReview() }) { Text("$reviews missed, due for review") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(count = 10), "Mixed practice") }) { Text("10 mixed") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(which = PracticeFilter.Which.NEW, count = 20), "New questions") }) { Text("20 new") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(which = PracticeFilter.Which.MISSED, count = 40), "Mistakes") },
@@ -158,6 +163,7 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
     val task = vm.repo.task(q.ecoTask)
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
     var noteOpen by remember { mutableStateOf(false) }
+    var tool by remember(q.id) { mutableStateOf<String?>(null) }
     val scroll = rememberScrollState()
 
     LaunchedEffect(q.id, revealed) {
@@ -217,17 +223,47 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
                 }
                 Spacer(Modifier.height(10.dp))
             }
-            QuestionHeader(q, task?.let { "${it.code} · ${it.label}" })
+            QuestionHeader(q, task?.let { "${it.code} · ${it.label}" }, s.marks[q.id], if (s.reviewOnly) null else { m -> s.marks[q.id] = m })
             if (!s.optionsShown && !revealed) {
                 // Reading drill: the scenario alone first.
                 Text("Before the options: what is this question asking you to decide?", fontSize = 14.sp, fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary)
                 Spacer(Modifier.height(8.dp))
                 Button(onClick = { vm.showOptions(s) }, modifier = Modifier.fillMaxWidth()) { Text("I know what it's asking: show the options") }
-            } else QuestionBody(q, s.order[q.id] ?: q.options, s.answers[q.id], revealed) { a -> vm.answer(s, q, a) }
+            } else {
+                QuestionBody(q, s.order[q.id] ?: q.options, s.answers[q.id], revealed, s.struck[q.id].orEmpty(),
+                    if (revealed || s.reviewOnly) null else { id -> vm.toggleStrike(s, q, id) }) { a -> vm.answer(s, q, a) }
+                if (!revealed && !s.reviewOnly && s.index < 2 && s.struck[q.id].isNullOrEmpty() && s.marks[q.id].isNullOrEmpty()) {
+                    Spacer(Modifier.height(8.dp))
+                    Text("Tip: long-press an option to cross it out; long-press words in the question to highlight them.", fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
             if (result != null) {
                 Spacer(Modifier.height(14.dp))
+                val conf = s.confidence[q.id]
+                if (conf == com.jahangirb.pmpprep.data.Attempt.SURE && !result.correct) {
+                    PmpCard(container = ColorError.copy(alpha = 0.10f), border = ColorError) {
+                        Text("You were sure, and it was wrong.", fontWeight = FontWeight.Bold)
+                        Text("These are the ones to catch before exam day. It's at the top of your mistake journal: tag why it went wrong.", fontSize = 13.sp, lineHeight = 18.sp)
+                    }
+                    Spacer(Modifier.height(10.dp))
+                } else if (conf == com.jahangirb.pmpprep.data.Attempt.GUESS && result.correct) {
+                    PmpCard(container = MaterialTheme.colorScheme.secondaryContainer) {
+                        Text("Right, but a guess.", fontWeight = FontWeight.Bold)
+                        Text("It won't count toward mastery. Read the why below so next time you know it.", fontSize = 13.sp, lineHeight = 18.sp)
+                    }
+                    Spacer(Modifier.height(10.dp))
+                }
                 Feedback(q, result, Scoring.isAnswered(q, s.answers[q.id]))
+                if (!result.correct) {
+                    Spacer(Modifier.height(10.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        val made = rev >= 0 && vm.store.myCards.any { it.id == "my:${q.id}" }
+                        OutlinedButton(onClick = { tool = "card" }, modifier = Modifier.weight(1f)) { Text(if (made) "Edit my card" else "Make a card") }
+                        OutlinedButton(onClick = { tool = "explain" }, modifier = Modifier.weight(1f)) { Text("Explain it back") }
+                    }
+                }
                 vm.store.notes[q.id]?.let {
                     Spacer(Modifier.height(10.dp))
                     PmpCard { SectionLabel("Your note"); Spacer(Modifier.height(4.dp)); Text(it, fontSize = 14.sp) }
@@ -254,6 +290,21 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
                 revealed -> Button(onClick = { if (last) onFinish() else vm.moveTo(s, s.index + 1) }, modifier = Modifier.weight(1.6f)) {
                     Text(if (last) "See results" else "Next", fontWeight = FontWeight.Bold)
                 }
+                vm.askConfidence && !s.reviewOnly && Scoring.isAnswered(q, s.answers[q.id]) -> {
+                    // One tap says how sure you are and checks the answer.
+                    Column(Modifier.weight(3f)) {
+                        Text("How sure are you? Tap to check.", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            listOf(com.jahangirb.pmpprep.data.Attempt.SURE to "Sure", com.jahangirb.pmpprep.data.Attempt.THINK to "Think so",
+                                com.jahangirb.pmpprep.data.Attempt.GUESS to "Guess").forEach { (c, label) ->
+                                Button(onClick = { vm.check(s, c) }, modifier = Modifier.weight(1f),
+                                    contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 4.dp, vertical = 8.dp)) {
+                                    Text(label, fontWeight = FontWeight.Bold, fontSize = 13.sp, maxLines = 1)
+                                }
+                            }
+                        }
+                    }
+                }
                 else -> {
                     if (!last) TextButton(onClick = { vm.moveTo(s, s.index + 1) }, modifier = Modifier.weight(0.8f)) { Text("Skip") }
                     Button(onClick = { vm.check(s) }, enabled = Scoring.isAnswered(q, s.answers[q.id]), modifier = Modifier.weight(1.6f)) {
@@ -262,6 +313,12 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
                 }
             }
         }
+    }
+
+    when (tool) {
+        "card" -> MakeCardDialog(vm, q) { tool = null }
+        "explain" -> ExplainBackDialog(vm, questionTopic(q),
+            "Why is the right answer right, and why was your choice wrong? Write it as if teaching a friend.") { tool = null }
     }
 
     if (noteOpen) {
@@ -291,6 +348,13 @@ fun QuizResults(vm: PmpViewModel, s: QuizSession, onAgain: () -> Unit) {
         if (s.totalRightToWrong + s.totalWrongToRight > 0) PmpCard {
             Text("Changed answers: ${s.totalWrongToRight} wrong → right, ${s.totalRightToWrong} right → wrong.", fontSize = 14.sp, fontWeight = FontWeight.Bold)
             if (s.totalRightToWrong > s.totalWrongToRight) Text("Your first instinct was right more often than your changes.", fontSize = 13.sp)
+        }
+        vm.eliminationEffect()?.let { (with, without) ->
+            PmpCard {
+                Text("Crossing options out: ${pct(with)} right when you did, ${pct(without)} when you didn't.", fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                Text(if (with > without + 0.03) "Ruling out two options first is working for you. Keep doing it on long questions."
+                    else "No clear gain yet. On situational questions, try ruling out the two weakest options before choosing.", fontSize = 13.sp, lineHeight = 18.sp)
+            }
         }
         PmpCard {
             SectionLabel("By domain")

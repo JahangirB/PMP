@@ -6,7 +6,9 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -45,7 +47,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -84,11 +90,13 @@ fun QuestionBody(
     options: List<Option>,
     answer: Answer?,
     revealed: Boolean,
+    struck: Set<String> = emptySet(),
+    onStrike: ((String) -> Unit)? = null,
     onAnswer: (Answer) -> Unit,
 ) {
     val a = answer ?: Answer()
     when (q.base) {
-        QType.SINGLE, QType.MULTI -> Choices(q, options, a, revealed, onAnswer)
+        QType.SINGLE, QType.MULTI -> Choices(q, options, a, revealed, struck, onStrike, onAnswer)
         QType.MATCHING -> Matching(q, options, a, revealed, onAnswer)
         QType.HOTSPOT -> Hotspot(q, a, revealed, onAnswer)
         QType.FILLBLANK -> Blanks(q, a, revealed, onAnswer)
@@ -97,14 +105,14 @@ fun QuestionBody(
 }
 
 @Composable
-fun QuestionHeader(q: Question, taskLabel: String?) {
+fun QuestionHeader(q: Question, taskLabel: String?, highlights: Set<Int>? = null, onHighlights: ((Set<Int>) -> Unit)? = null) {
     Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
         DomainChip(q.domain)
         if (taskLabel != null) Pill(taskLabel, MaterialTheme.colorScheme.onSurfaceVariant, Modifier.weight(1f, fill = false))
         Pill(q.type.title, MaterialTheme.colorScheme.primary)
     }
     Spacer(Modifier.height(10.dp))
-    Text(q.stem, fontSize = 16.sp, lineHeight = 23.sp, color = MaterialTheme.colorScheme.onSurface)
+    StemText(q.stem, 16, 23, highlights, onHighlights)
     Spacer(Modifier.height(12.dp))
 }
 
@@ -119,7 +127,10 @@ private fun countWord(n: Int) = when (n) { 2 -> "two"; 3 -> "three"; 4 -> "four"
 /* ── single and multiple response ───────────────────────────────────────── */
 
 @Composable
-private fun Choices(q: Question, options: List<Option>, a: Answer, revealed: Boolean, onAnswer: (Answer) -> Unit) {
+private fun Choices(
+    q: Question, options: List<Option>, a: Answer, revealed: Boolean,
+    struck: Set<String>, onStrike: ((String) -> Unit)?, onAnswer: (Answer) -> Unit,
+) {
     val multi = q.base == QType.MULTI
     if (multi) Hint("Select ${countWord(q.correctCount)}.")
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -134,6 +145,8 @@ private fun Choices(q: Question, options: List<Option>, a: Answer, revealed: Boo
                 revealed = revealed,
                 rationale = o.rationale,
                 missedNote = multi,
+                struck = o.id in struck,
+                onLongClick = onStrike?.let { f -> { f(o.id) } },
             ) {
                 onAnswer(if (multi) a.copy(choices = if (sel) a.choices - o.id else a.choices + o.id) else Answer(choices = setOf(o.id)))
             }
@@ -141,6 +154,7 @@ private fun Choices(q: Question, options: List<Option>, a: Answer, revealed: Boo
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ChoiceCard(
     letter: String,
@@ -151,8 +165,13 @@ fun ChoiceCard(
     revealed: Boolean,
     rationale: String,
     missedNote: Boolean = false,
+    /** Crossed out: long-press toggles it, as on the exam's strike-out tool. */
+    struck: Boolean = false,
+    onLongClick: (() -> Unit)? = null,
     onClick: () -> Unit,
 ) {
+    val reading = LocalReading.current
+    val haptic = LocalHapticFeedback.current
     val border by animateColorAsState(
         when {
             revealed && correct -> ColorSuccess
@@ -173,9 +192,13 @@ fun ChoiceCard(
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = fill),
         border = BorderStroke(if (selected || (revealed && correct)) 2.dp else 1.dp, border),
-        modifier = Modifier.fillMaxWidth().clickable(enabled = !revealed, onClick = onClick),
+        modifier = Modifier.fillMaxWidth().combinedClickable(
+            enabled = !revealed, onClick = onClick,
+            onLongClickLabel = if (onLongClick != null) (if (struck) "Restore option" else "Cross out option") else null,
+            onLongClick = onLongClick?.let { f -> { haptic.performHapticFeedback(HapticFeedbackType.LongPress); f() } },
+        ),
     ) {
-        Column(modifier = Modifier.padding(14.dp)) {
+        Column(modifier = Modifier.padding(14.dp).alpha(if (struck && !revealed) 0.5f else 1f)) {
             Row(verticalAlignment = Alignment.Top) {
                 Box(
                     contentAlignment = Alignment.Center,
@@ -186,7 +209,8 @@ fun ChoiceCard(
                         color = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Spacer(Modifier.width(12.dp))
-                Text(text, fontSize = 15.sp, lineHeight = 21.sp, color = MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(1f))
+                Text(text, fontSize = reading.size(15), lineHeight = reading.line(21), color = MaterialTheme.colorScheme.onSurface,
+                    textDecoration = if (struck) TextDecoration.LineThrough else null, modifier = Modifier.weight(1f))
             }
             if (revealed && rationale.isNotBlank()) {
                 Spacer(Modifier.height(10.dp))
