@@ -111,6 +111,8 @@ fun PlannerScreen(vm: PmpViewModel) {
             Text("Your path spreads the week's hours over these days. Miss one and it re-plans from where you are.", fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
+
+        RemindersCard()
         Spacer(Modifier.height(16.dp))
     }
 }
