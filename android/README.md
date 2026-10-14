@@ -40,11 +40,12 @@ The layout follows published mobile-usability research; when changing it, keep t
 - **The coach is a bubble** you can drag anywhere. It opens Coach, Ask Gemini and Notes. It hides
   wherever there are answers to pick (drills, the guided session's practice and mock steps, a running
   mock), so it never covers an option.
-- **Clay look** (`ui/theme/Clay.kt`): cream cards on a sage-to-straw gradient with leaf-green
-  accents, 32 dp corners, a 2 dp light rim, and a soft shadow tinted green. Light and dark follow the
-  system. The sheen and rim are clipped to each card's shape, so nothing pale shows past the corners.
+- **Sky Clay look** (`ui/theme/Clay.kt`, `Color.kt`): pastel sky-blue cards on a sky-to-lilac
+  gradient, deep sky blue for anything you can press, 32 dp corners, a 2 dp light rim and a soft
+  blue-tinted shadow. Light and dark follow the system. Type is Nunito throughout, bundled in
+  `res/font` (SIL Open Font License, `app/NUNITO_OFL.txt`); timers, formulas and code stay monospaced.
 - **Motion is calm**: no springs, no overshoot. Cards glide in from 36 dp left while fading up
-  (700 ms, easing to a stop), 90 ms apart. Pressed cards lift 3 dp and glow under the finger. Buttons
+  (800 ms, easing to a stop), 90 ms apart. Pressed cards lift 3 dp and glow under the finger. Buttons
   lift 2 dp and glow, with Material's ink ripple on tap. There's no idle pulsing. All of it is
   switched off when Android's *Remove animations* is on.
 - **No glass blur.** Compose's blur only blurs a view's own content, not what's behind it, so a frosted
