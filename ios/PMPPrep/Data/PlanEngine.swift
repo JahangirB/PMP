@@ -81,8 +81,6 @@ struct PlanInput {
     var readingSlow: Bool = false
 }
 
-private func pct(_ v: Double) -> String { "\(Int((v * 100).rounded()))%" }
-
 enum PlanEngine {
     static let DAY = Time.dayMs
     static let MASTERY_ANSWERS = 10

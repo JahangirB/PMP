@@ -72,13 +72,28 @@ private struct CalculatorTab: View {
     @State private var calc = 0
     private let names = ["EVM", "PERT", "PTA", "EMV", "Channels", "Finance", "Agile"]
 
-    @State private var pv = "80000", ev = "70000", ac = "84000", bac = "200000"
-    @State private var o = "10", ml = "14", p = "24"
-    @State private var tc = "1000000", tp = "1100000", cp = "1200000", share = "0.8"
-    @State private var prob = "30", impact = "-50000"
+    @State private var pv = "80000"
+    @State private var ev = "70000"
+    @State private var ac = "84000"
+    @State private var bac = "200000"
+    @State private var o = "10"
+    @State private var ml = "14"
+    @State private var p = "24"
+    @State private var tc = "1000000"
+    @State private var tp = "1100000"
+    @State private var cp = "1200000"
+    @State private var share = "0.8"
+    @State private var prob = "30"
+    @State private var impact = "-50000"
     @State private var people = "12"
-    @State private var inv = "500000", ben = "150000", yrs = "5", rate = "8"
-    @State private var wip = "24", thr = "6", rem = "120", vel = "25"
+    @State private var inv = "500000"
+    @State private var ben = "150000"
+    @State private var yrs = "5"
+    @State private var rate = "8"
+    @State private var wip = "24"
+    @State private var thr = "6"
+    @State private var rem = "120"
+    @State private var vel = "25"
 
     var body: some View {
         ScreenScroll(spacing: 10) {
