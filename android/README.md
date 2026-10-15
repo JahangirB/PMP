@@ -63,15 +63,21 @@ The layout follows published mobile-usability research; when changing it, keep t
 
 ## Home-screen widget
 
-A 5×1 widget (`widget/PmpWidget.kt`, built with Glance) shows four clay tiles:
+A 5×1 widget (`widget/PmpWidget.kt`, built with Glance) shows six clay tiles:
 
 | Tile | Shows | Tap opens |
 |---|---|---|
-| Fitness | Exam fitness out of 100 | Exam fitness |
 | Days left | Days to your exam date | Plan and schedule |
-| Today | Minutes studied against today's plan, as a percentage with a bar | Today's session, or resumes the one in progress |
+| Today | Minutes studied against today's plan, as a percentage | Today's session, or resumes the one in progress |
 | Ready | The readiness score out of 100 | Analytics |
-| Syllabus | Lessons completed out of all lessons, as a percentage with a bar | Lessons |
+| Syllabus | Lessons completed out of all lessons, as a percentage | Lessons |
+| Fitness | Exam fitness out of 100 | Exam fitness |
+| Ready by | The date your weekly trend says you'll reach readiness 75 and fitness 70 ("Now" once you have, "Stalled" when a score isn't rising) | Am I ready to book? |
+
+Each tile's bar runs from red when the figure is low, through amber, to green
+(`WidgetStats.heat`). The countdown runs the other way: green with two months or more to go,
+red in the final week. The ready-by date is green when it falls on or before your exam date and
+red when it's after.
 
 The app saves the figures whenever your progress changes; the widget redraws then and just after
 midnight, when the day count and Today roll over. On Android 12 and newer, placing the widget asks
@@ -172,14 +178,6 @@ Sunday reminder opens them.
 - **Search everything**: lessons, glossary, abbreviations, formulas, your notes and question
   explanations.
 - Weekly reports also compare mistake causes tagged that week.
-- **Listen mode** (`listen/`): lessons, flashcard decks and explanations read aloud, offline, by
-  the Kokoro v0.19 English voice ("af_bella", int8) through the sherpa-onnx speech library, both
-  Apache-2.0. The build (`fetchVoice`, `prepareVoice` in `app/build.gradle.kts`) downloads them
-  from sherpa-onnx's GitHub releases, pinned to exact versions and SHA-256 hashes, and packs them
-  into the APK (pronunciation data trimmed to English); nothing large is committed, and the phone
-  downloads nothing. It adds about 150 MB to the APK, which is built for 64-bit ARM phones only.
-  One sentence is generated while the previous one plays; a foreground service keeps it reading
-  with the screen off, and it pauses for calls and other audio.
 
 ## How the path adapts
 

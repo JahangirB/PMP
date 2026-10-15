@@ -33,6 +33,36 @@ class WidgetStatsTest {
         assertEquals(0f, stats().today(noon + day), 0f)
     }
 
+    @Test fun heatRunsRedThroughAmberToGreen() {
+        assertEquals(0xFFD64545L, WidgetStats.heat(0f))
+        assertEquals(0xFFE3A21AL, WidgetStats.heat(0.5f))
+        assertEquals(0xFF2E9E5BL, WidgetStats.heat(1f))
+        assertEquals("out of range is clamped", WidgetStats.heat(1f), WidgetStats.heat(3f))
+        // Halfway from red to amber: each channel halfway.
+        val q = WidgetStats.heat(0.25f)
+        assertEquals((0xD6 + 0xE3 + 1) / 2, ((q shr 16) and 0xFF).toInt())
+    }
+
+    @Test fun countdownIsGreenFarOffAndRedInTheLastWeek() {
+        assertEquals(1f, stats(examDate = noon + 90 * day).daysLevel(noon)!!, 0f)
+        assertEquals(0f, stats(examDate = noon + 5 * day).daysLevel(noon)!!, 0f)
+        assertEquals(0.5f, stats(examDate = noon + 33 * day).daysLevel(noon)!!, 0.02f)
+        assertNull(stats(examDate = null).daysLevel(noon))
+    }
+
+    @Test fun readyByIsOnTrackWhenItIsNotAfterTheExam() {
+        val exam = noon + 42 * day
+        fun ready(state: Int, at: Long = 0L, examDate: Long? = exam) =
+            WidgetStats(examDate, PlanEngine.startOfDay(noon), 0, 60, 68, 18, 34, readyBy = at, readyState = state).onTrack()
+        assertEquals(true, ready(WidgetStats.READY_PROJECTED, noon + 30 * day))
+        assertEquals(true, ready(WidgetStats.READY_PROJECTED, exam))
+        assertEquals(false, ready(WidgetStats.READY_PROJECTED, exam + day))
+        assertEquals(true, ready(WidgetStats.READY_NOW))
+        assertEquals(false, ready(WidgetStats.READY_STALLED))
+        assertNull(ready(WidgetStats.READY_UNKNOWN))
+        assertNull("no exam date to compare with", ready(WidgetStats.READY_PROJECTED, noon, examDate = null))
+    }
+
     @Test fun syllabusIsLessonsDone() {
         assertEquals(18f / 34, stats().syllabus(), 1e-4f)
     }

@@ -186,7 +186,6 @@ fun GuideScreen(vm: PmpViewModel) {
                     "Make a card: on a missed question, turn it into your own flashcard in My cards. Explain it back: write what you understood and Gemini says what you got right and missed (needs your key).",
                     "Reading comfort: text size, line spacing and a reading guide in Study settings. Focus mode for mocks: Do Not Disturb and the screen kept awake. A two-minute breathing reset is offered when your check-in is low.",
                     "Rest days: one missed day a week doesn't break your streak.",
-                    "Listen mode: lessons, flashcard decks and explanations read aloud by a natural voice built into the app. It works offline and with the screen off, with pause and stop in the notification.",
                 )
                 TextButton(onClick = { vm.navigate(Dest.SETTINGS) }) { Text("Study settings") }
                 TextButton(onClick = { vm.navigate(Dest.BOOK) }) { Text("Am I ready to book?") }
