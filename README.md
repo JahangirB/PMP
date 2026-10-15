@@ -30,7 +30,7 @@ Backup → Add question bank**), with no rebuild. See [`android/README.md`](andr
 > **Please read first.** The iPhone app was converted from the Android version
 > by AI and has **never been tested on a real iPhone**. It builds and passes its
 > automated tests on the iOS simulator, but some things may not work. If you hit
-> a problem, please reach me on LinkedIn: **[LINKEDIN_URL]**. Include your
+> a problem, please reach me on LinkedIn: **[Jahangir Babayev](https://www.linkedin.com/in/jahangir-babayev-a432a5145)**. Include your
 > iPhone model, iOS version and what you were doing.
 
 The app isn't on the App Store, so you install it yourself ("sideloading") with
