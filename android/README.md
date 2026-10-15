@@ -203,12 +203,15 @@ a failed session, practice off the path, fading mastery).
 ## The Gemini key
 
 Create a free key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey) and paste it into
-**Coach → Ask Gemini**. The app checks it by listing the Flash models it may use. By default the
-model is **Automatic: newest Flash**: the list is asked for again at most once a day, and each
-message goes to the newest stable full Flash (a Lite only if no full Flash is offered), so a new
-Gemini release is picked up with no app update. You can pin one model instead; if Google retires
-it, or any model answers "not available", the app fetches the list again, switches to the newest
-Flash and retries once. The key stays in the app's private storage: it is excluded from
+**Coach → Ask Gemini**. That's the only setting: once the key works, the coach shows just the chat.
+
+The app keeps its own line-up of models (`Gemini.lineup`), refreshed from Google once a week, so
+new releases arrive with no app update: full Flash models from **Gemini 3.5** up (never older, no
+Lite), newest first, at most five, with 3.5 keeping its place until Google stops offering it. Each
+message starts with the model that last answered in this app session (the newest at first); if it
+returns an error, the message goes to the next model down until one answers, and that model is used
+from then on. A refused key or no connection is reported at once; if every model fails, the error
+says so, including when the key's limit is used up. The key stays in the app's private storage: it is excluded from
 Android backups and from the progress backup file, and it is sent only to Google, in a request header.
 Only the chat uses the network; everything else works offline.
 
