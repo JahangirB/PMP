@@ -31,7 +31,7 @@ struct Streak {
     var restDays: Int = 0
 }
 
-struct Group {
+struct GroupStat {
     let n: Int; let credit: Double; let right: Int; let meanSec: Double?
     var accuracy: Double { n == 0 ? 0 : credit / Double(n) }
 }
@@ -81,7 +81,7 @@ struct Readiness {
         return (cSum / wSum, list.count)
     }
 
-    func group(_ attempts: [Attempt], _ key: (Attempt) -> String?) -> [String: Group] {
+    func group(_ attempts: [Attempt], _ key: (Attempt) -> String?) -> [String: GroupStat] {
         var m: [String: [Attempt]] = [:]
         for a in attempts where a.source != Self.SOURCE_LESSON {
             guard let k = key(a), !k.isEmpty else { continue }
@@ -89,7 +89,7 @@ struct Readiness {
         }
         return m.mapValues { l in
             let timed = l.filter { $0.ms > 500 }
-            return Group(n: l.count, credit: l.reduce(0) { $0 + $1.credit }, right: l.filter(\.correct).count,
+            return GroupStat(n: l.count, credit: l.reduce(0) { $0 + $1.credit }, right: l.filter(\.correct).count,
                          meanSec: timed.isEmpty ? nil : Double(timed.reduce(0) { $0 + $1.ms } / Int64(timed.count)) / 1000)
         }
     }
