@@ -1,7 +1,3 @@
-import java.net.URI
-import java.security.MessageDigest
-import java.util.concurrent.Callable
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -43,7 +39,7 @@ val sherpaAar = File(voiceCache, "sherpa-onnx-1.13.8.aar")
 val voiceTar = File(voiceCache, "kokoro-int8-en-v0_19.tar.bz2")
 
 fun sha256(f: File): String {
-    val md = MessageDigest.getInstance("SHA-256")
+    val md = java.security.MessageDigest.getInstance("SHA-256")
     f.inputStream().use { input -> val buf = ByteArray(1 shl 16); while (true) { val n = input.read(buf); if (n < 0) break; md.update(buf, 0, n) } }
     return md.digest().joinToString("") { "%02x".format(it) }
 }
@@ -59,7 +55,7 @@ val fetchVoice = tasks.register("fetchVoice") {
             if (f.exists() && sha256(f) == hash) return@forEach
             logger.lifecycle("Downloading $url")
             val tmp = File(voiceCache, "$name.part")
-            URI(url).toURL().openStream().use { input -> tmp.outputStream().use { input.copyTo(it) } }
+            java.net.URI(url).toURL().openStream().use { input -> tmp.outputStream().use { input.copyTo(it) } }
             val got = sha256(tmp)
             if (got != hash) { tmp.delete(); throw GradleException("$name: SHA-256 is $got, expected $hash. The upstream file changed; check it before updating the pin.") }
             if (!tmp.renameTo(f)) { f.delete(); tmp.renameTo(f) }
@@ -70,7 +66,7 @@ val fetchVoice = tasks.register("fetchVoice") {
 val prepareVoice = tasks.register<Sync>("prepareVoice") {
     description = "Unpacks the voice into the app's assets: the model, its voices and tokens, and English-only pronunciation data."
     dependsOn(fetchVoice)
-    from(Callable { tarTree(resources.bzip2(voiceTar)) }) {
+    from(java.util.concurrent.Callable { tarTree(resources.bzip2(voiceTar)) }) {
         include("*/model.int8.onnx", "*/voices.bin", "*/tokens.txt", "*/LICENSE", "*/espeak-ng-data/**")
         // The voice is English: every other language's pronunciation dictionary is left out (19 MB → 2 MB).
         exclude { it.name.endsWith("_dict") && it.name != "en_dict" }
