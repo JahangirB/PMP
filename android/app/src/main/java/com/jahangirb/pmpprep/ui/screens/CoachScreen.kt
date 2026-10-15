@@ -58,13 +58,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.CoachReport
-import com.jahangirb.pmpprep.data.Gemini
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.BulletList
 import com.jahangirb.pmpprep.ui.components.MarkdownText
 import com.jahangirb.pmpprep.ui.components.PmpCard
 import com.jahangirb.pmpprep.ui.components.SectionLabel
-import com.jahangirb.pmpprep.ui.components.Selector
 import com.jahangirb.pmpprep.ui.theme.ColorError
 import com.jahangirb.pmpprep.ui.theme.ColorSuccess
 import com.jahangirb.pmpprep.ui.theme.ColorWarning
@@ -145,7 +143,7 @@ private fun CoachToday(vm: PmpViewModel) {
 private fun CoachChat(vm: PmpViewModel) {
     if (vm.geminiKey.isEmpty()) { KeySetup(vm); return }
     val rev by vm.revision.collectAsState()
-    LaunchedEffect(vm.geminiKey) { vm.loadModels() }
+    LaunchedEffect(vm.geminiKey) { vm.checkModels() }
     val list = rememberLazyListState()
     val chat = vm.store.chat.toList()
     val typing = WindowInsets.isImeVisible
@@ -155,12 +153,6 @@ private fun CoachChat(vm: PmpViewModel) {
         LazyColumn(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 12.dp), state = list, verticalArrangement = Arrangement.spacedBy(8.dp)) {
             item {
                 Spacer(Modifier.height(8.dp))
-                if (vm.geminiModels.isNotEmpty()) {
-                    // Automatic follows Google's newest stable Flash, checked daily; or pin one model.
-                    val newest = vm.geminiModels.firstOrNull { it.name == vm.autoModel }?.label
-                    Selector("Model", listOf(Gemini.AUTO to ("Automatic: newest Flash" + (newest?.let { " (now $it)" } ?: ""))) +
-                        vm.geminiModels.map { it.name to it.label }, vm.geminiModel, { vm.setModel(it) })
-                }
                 TextButton(onClick = { vm.forgetKey() }) { Text("Disconnect this key", fontSize = 12.sp) }
                 Text("Every message carries a snapshot of your progress (scores, tasks, mocks, habits), so the coach answers about you. It goes only to Google, with your key.",
                     fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 6.dp))
@@ -228,7 +220,7 @@ private fun KeySetup(vm: PmpViewModel) {
     val uri = LocalUriHandler.current
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).imePadding().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("Connect Gemini", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold)
-        Text("The coach's chat runs on Google's Gemini Flash with your own API key. It reads a snapshot of your progress with each message, so it can tell you how you're doing and what to improve, and it answers your PMP questions.",
+        Text("The coach's chat runs on Google's newest Gemini Flash (3.5 or later) with your own API key; the app keeps up with new models by itself. It reads a snapshot of your progress with each message, so it can tell you how you're doing and what to improve, and it answers your PMP questions.",
             fontSize = 14.sp, lineHeight = 20.sp)
         PmpCard {
             SectionLabel("Get a free key")

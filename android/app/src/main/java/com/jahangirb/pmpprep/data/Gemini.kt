@@ -14,7 +14,8 @@ import java.net.URL
 object Gemini {
     const val API = "https://generativelanguage.googleapis.com/v1beta"
 
-    class GeminiException(message: String, val status: Int = 0) : IOException(message)
+    /** [status] is Google's HTTP status, 0 when Google wasn't reached; [keyProblem] when the key itself was refused. */
+    class GeminiException(message: String, val status: Int = 0, val keyProblem: Boolean = false) : IOException(message)
 
     data class Model(val name: String, val label: String, val rank: Double) {
         val stable: Boolean get() = !Regex("(preview|exp)", RegexOption.IGNORE_CASE).containsMatchIn(name)
@@ -52,18 +53,34 @@ object Gemini {
     fun defaultModel(models: List<Model>): Model? =
         models.firstOrNull { it.stable && !it.name.contains("lite", ignoreCase = true) } ?: models.firstOrNull { it.stable } ?: models.firstOrNull()
 
-    /** The setting that follows Google's newest Flash instead of one fixed model. */
-    const val AUTO = "auto"
-
-    /** Google's own alias for its latest Flash: used only if the list of models can't be fetched. */
-    const val FALLBACK = "models/gemini-flash-latest"
+    /** The oldest Flash the coach will use. */
+    const val BASE_VERSION = 3.5
+    /** The most models kept in the line-up. */
+    const val MAX_MODELS = 5
 
     /**
-     * The model to call for the setting [chosen]: a pinned model while Google still lists it, otherwise
-     * (automatic, or the pinned one has been retired) the newest stable Flash. Null if the list is empty.
+     * The coach's line-up, tried in this order: full Flash models (no Lite) from [BASE_VERSION] up,
+     * newest first, stable before preview within a version, at most [MAX_MODELS]. A [BASE_VERSION]
+     * model keeps its place while Google still lists one, even when newer ones would fill the list.
      */
-    fun choose(models: List<Model>, chosen: String): String? =
-        models.firstOrNull { chosen != AUTO && it.name == chosen }?.name ?: defaultModel(models)?.name
+    fun lineup(models: List<Model>): List<Model> {
+        val eligible = models.filter { flashVersion(it.name) >= BASE_VERSION - 1e-9 && !it.name.contains("lite", ignoreCase = true) }
+            .sortedWith(compareByDescending<Model> { it.rank }.thenBy { it.name })
+        if (eligible.size <= MAX_MODELS) return eligible
+        val top = eligible.take(MAX_MODELS)
+        if (top.any { isBase(it) }) return top
+        val base = eligible.firstOrNull { isBase(it) } ?: return top
+        return top.take(MAX_MODELS - 1) + base
+    }
+
+    private fun isBase(m: Model) = kotlin.math.abs(flashVersion(m.name) - BASE_VERSION) < 1e-9
+
+    /**
+     * Whether a failed request is worth trying on the next model down: yes for a model that's busy,
+     * retired, rate-limited (limits are per model) or failing; no when the key was refused or Google
+     * couldn't be reached, which no other model would change.
+     */
+    fun tryNextModel(e: GeminiException): Boolean = !e.keyProblem && e.status != 0
 
     fun requestBody(system: String, turns: List<ChatTurn>): String = JSONObject().apply {
         put("systemInstruction", JSONObject().put("parts", JSONArray().put(JSONObject().put("text", system))))
@@ -96,9 +113,9 @@ object Gemini {
         val message = runCatching { JSONObject(body).optJSONObject("error")?.optString("message") }.getOrNull().orEmpty()
         return when {
             body.contains("API_KEY_INVALID") -> "Google says this key is not valid. Check you copied all of it, or create a new one in AI Studio."
-            status == 429 -> "Google is limiting requests on this key: the free quota or the per-minute rate is used up. Wait a minute and try again, or pick a lighter model."
+            status == 429 -> "Google is limiting requests on this key: its free quota or per-minute rate is used up. Wait a minute and try again; a daily limit resets the next day."
             status == 403 -> "This key is not allowed to use the Gemini API. In AI Studio, check the key's project has the Generative Language API enabled."
-            status == 404 -> "That model is not available to this key. Pick another one."
+            status == 404 -> "That model is not available to this key."
             else -> "Google returned an error ($status)" + if (message.isNotBlank()) ": $message" else "."
         }
     }
@@ -124,7 +141,8 @@ object Gemini {
             if (body != null) conn.outputStream.use { it.write(body.toByteArray()) }
             val status = conn.responseCode
             val text = (if (status in 200..299) conn.inputStream else conn.errorStream)?.bufferedReader()?.use { it.readText() }.orEmpty()
-            if (status !in 200..299) throw GeminiException(explain(status, text), status)
+            if (status !in 200..299) throw GeminiException(explain(status, text), status,
+                keyProblem = text.contains("API_KEY_INVALID") || status == 401 || status == 403)
             return text
         } catch (e: GeminiException) {
             throw e
