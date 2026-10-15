@@ -130,7 +130,7 @@ PMP.STORE_CFG = Object.freeze({
   PERSISTED: Object.freeze([
     "settings", "attempts", "srs", "exams", "notes", "flags", "journal", "planner",
     "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons", "coach",
-    "notepad"
+    "notepad", "drills", "shared"
   ])
 });
 
@@ -180,6 +180,65 @@ PMP.PRACTICE = Object.freeze({
     PRIOR: 0.5, PRIOR_N: 4, EXPONENT: 1.5, FLOOR: 0.05,
     UNSEEN_BOOST: 1.4, RIGHT_DAMP: 0.5
   })
+});
+
+/* ── 01.8  SHARED RULES ─────────────────────────────────────────────────────
+   The figures the web, Android and iPhone apps must agree on, so that a
+   result means the same thing whichever device produced it. Defined here and
+   nowhere else: android/tools/extract-content.mjs copies this object into
+   extras.json as `rules`, and the phone apps read every value from there.
+   docs/progress-format.md §1 is the contract; when it and this object
+   disagree, this object is the one to fix.
+
+     mockBands       Score bands for a sitting and for each domain in it:
+                     at or over `above` reads Above Target, `target` Target,
+                     `below` Below Target, anything less Needs Improvement.
+     scenarioCredit  Credit per rank in the scenario trainer (§10.08).
+     mastery         A task is mastered with at least minAnswers answers and
+                     `accuracy` or better over the last `window` of them; it
+                     fades after fadeDays with no answer on it (§10.15).
+     causes          The mistake journal's root causes, in display order
+                     (§10.10). `label` is first person, for the tag button.
+     reentryDays     Days away before the coach's welcome-back stage (§10.16).
+     confidence      Stored values for "how sure are you"; 0 is not asked.
+
+   Frozen all the way down, because a shared rule that one module could
+   quietly edit at runtime is not shared. */
+PMP.RULES = (function deepFreeze(o) {
+  Object.keys(o).forEach(function (k) {
+    if (o[k] && typeof o[k] === "object") deepFreeze(o[k]);
+  });
+  return Object.freeze(o);
+})({
+  mockBands: { above: 0.80, target: 0.65, below: 0.50 },
+  scenarioCredit: { best: 1, acceptable: 0.5, premature: 0.25, wrong: 0 },
+  mastery: { minAnswers: 10, window: 15, accuracy: 0.75, fadeDays: 14 },
+  causes: [
+    { id: "KNOWLEDGE_GAP", short: "Knowledge gap",
+      label: "I did not know this",
+      hint: "The material itself was missing. This is the cause that answers to study time." },
+    { id: "MISREAD_STEM", short: "Misread the question",
+      label: "I misread it",
+      hint: "You knew the material and answered a question that was not quite the one asked \u2014 a missed \"first\", \"except\", or a role you read past." },
+    { id: "WRONG_MINDSET", short: "Wrong mindset",
+      label: "Wrong instinct",
+      hint: "A defensible action, out of order. Escalating before gathering facts, or fixing before asking. The PMI-preferred move was a step you skipped." },
+    { id: "TWO_PLAUSIBLE", short: "Two plausible answers",
+      label: "Two answers both worked",
+      hint: "You narrowed it to two and chose wrong. The discriminator was there and was not visible to you." },
+    { id: "CALCULATION", short: "Calculation slip",
+      label: "I slipped on the arithmetic",
+      hint: "You knew the method and slipped on the arithmetic, or inverted a ratio. Write the formula down first and check the result against what it should be." },
+    { id: "RUSHED", short: "Rushed",
+      label: "I rushed",
+      hint: "You had it and moved before you had it. Usually visible as a time well under your own median." }
+  ],
+  reentryDays: 5,
+  confidence: [
+    { v: 3, id: "sure", label: "Sure" },
+    { v: 2, id: "think", label: "Think so" },
+    { v: 1, id: "guess", label: "Guess" }
+  ]
 });
 </script>
 
@@ -1959,23 +2018,26 @@ button.task[data-done="true"]:hover { filter: brightness(0.97); }
 .jr-row .jr-q { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--fg-muted); }
 .jr-row .jr-when { font-family: var(--font-mono); color: var(--fg-faint); white-space: nowrap; }
 
-/* The five causes are an ordered set, not five unrelated categories: they run
-   from not knowing the material to knowing it and losing the mark to how the
-   question was worked. The ramp encodes that order. Colour is never the only
-   carrier — every bar is labelled with its name and its count. */
+/* The six causes (§01.8) are an ordered set, not six unrelated categories:
+   they run from not knowing the material to knowing it and losing the mark
+   to how the question was worked. The ramp encodes that order. Colour is
+   never the only carrier — every bar is labelled with its name and its
+   count. Token names are the shared ids in lower case with dashes. */
 :root {
-  --cause-knowledge: #B3382A;
-  --cause-misread:   #9A6510;
-  --cause-rushed:    #7A6A1F;
-  --cause-mindset:   #3D6B7A;
-  --cause-tossup:    #52657A;
+  --cause-knowledge-gap:  #B3382A;
+  --cause-misread-stem:   #9A6510;
+  --cause-wrong-mindset:  #3D6B7A;
+  --cause-two-plausible:  #52657A;
+  --cause-calculation:    #6B5A8E;
+  --cause-rushed:         #7A6A1F;
 }
 :root[data-theme="dark"] {
-  --cause-knowledge: #F0705E;
-  --cause-misread:   #E8A33D;
-  --cause-rushed:    #C9B65A;
-  --cause-mindset:   #6FB6CC;
-  --cause-tossup:    #93A7BB;
+  --cause-knowledge-gap:  #F0705E;
+  --cause-misread-stem:   #E8A33D;
+  --cause-wrong-mindset:  #6FB6CC;
+  --cause-two-plausible:  #93A7BB;
+  --cause-calculation:    #B9A6E0;
+  --cause-rushed:         #C9B65A;
 }
 
 .cause-key { display: grid; gap: var(--sp-3); margin-top: var(--sp-4); }
@@ -2611,7 +2673,9 @@ mark.np-h-none { background: transparent; }
    PMP PREP SUITE                                                  index.html
    Single file · no build · opens from file://
    ECO target ......... PMP Examination Content Outline, July 2026
-   Schema version ..... 2          (question packs and progress exports)
+   Schema version ..... 2          (question packs and stored slices)
+   Progress format .... 3          (pmp-progress, shared with Android and
+                                    iPhone; docs/progress-format.md)
    Not affiliated with, endorsed by, or sponsored by PMI. See §10.12 About.
    ───────────────────────────────────────────────────────────────────────────
    WHAT THIS FILE IS, AND WHAT IS OPTIONAL
@@ -2626,12 +2690,12 @@ mark.np-h-none { background: transparent; }
    There is one optional second tier. When the file is *served* over http
    rather than opened from disk, §05.9 looks for a directory named packs/
    beside it and folds any extended question batches it finds there into the
-   same pool. This is how the pack grows past 300 without the file growing
+   same pool. This is how the pack grows past 348 without the file growing
    with it. Three consequences follow, and they are the whole of the deal:
 
      · Extended packs need hosting. A fetch from a file:// document has no
        origin to fetch from, so on disk the loader does not run at all — it is
-       skipped, silently, and the pool is the 300 embedded items. Any static
+       skipped, silently, and the pool is the 348 embedded items. Any static
        host works: GitHub Pages, an S3 bucket, `python3 -m http.server` in the
        directory. All paths are resolved relative to the document, so a
        GitHub Pages project subpath (user.github.io/repo/) is fine.
@@ -2647,7 +2711,7 @@ mark.np-h-none { background: transparent; }
 
    TO ADD A BATCH:  author packs/<name>.json against AUTHORING.md, drop it in
    packs/, and it is picked up on the next load — packs/index.json already
-   lists all 26 batches, so there is no manifest to edit. Until the file is
+   lists all 28 batches, so there is no manifest to edit. Until the file is
    there its entry reads as pending in the audit panel, which is not an error.
    Full instructions, the schema and a worked example of all seven item types
    are in AUTHORING.md.
@@ -2662,6 +2726,8 @@ mark.np-h-none { background: transparent; }
         01.5  STORAGE_KEYS, SCHEMA_VERSION, DEBOUNCE_MS
         01.6  theme resolution + <html data-theme> (only pre-paint work)
         01.7  PRACTICE — drill pace target (76 s), lengths, adaptive weights
+        01.8  RULES — shared with Android and iPhone: mock bands, scenario
+              credit, mastery, mistake causes, re-entry days, confidence
 
    §02  DESIGN TOKENS ..................... <style>
         02.1  palette · 02.2 surfaces · 02.3 foreground · 02.4 state fills
@@ -2686,6 +2752,7 @@ mark.np-h-none { background: transparent; }
         03.20 learn — lesson hub rows, reader parts, reading measure
         03.21 today and the coach — step rows, messages, sticky start
         03.22 notes pane — top-bar toggle, right column ≥900px, overlay below
+        03.23 cloud sync — numbered setup steps, script box, status line
         03.7  question engine — filters, options, hotspot, blanks, pace meter
         03.14 formula lab — sheet, calculators, network nodes, worked steps
         03.15 reference library — process matrix, ITTO panel, virtual list
@@ -2710,7 +2777,7 @@ mark.np-h-none { background: transparent; }
               8 domains, agile, 14 tables, 364 terms · built
         05.7.3 ABBREVIATIONS — 121 rows, one per meaning; kept complete
               by the coverage scan in 10.07.9
-        05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS; pilot lesson P4
+        05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS (34 lessons)
         05.11 COACH MESSAGES — every coach sentence, authored: the pool the
               coach picks from and the fixed lines it uses in place
 
@@ -2722,14 +2789,18 @@ mark.np-h-none { background: transparent; }
         06.5  mode → 'persistent' | 'session', published to §07
 
    §07  STORE / STATE
-        07.1  shape, defaults, migrations (schema 1 → 2)
+        07.1  shape, defaults, migrations (schema 1 → 2), and the 01.8
+              upgrade of stored rows (cause ids, confidence, scenario credit)
         07.2  subscribe / notify, selector memoisation
         07.3  actions — the only writers; no feature touches §06 directly
               persisted: … examRun (the sitting in progress), packs, queue,
               scenarioRuns (§10.08; ranked, so not folded into attempts),
               lessons (§10.15; quick checks, never folded into attempts,
               and the latest practice-set score; the set's own answers are
-              attempts with mode "lesson" and a lessonId)
+              attempts with mode "lesson" and a lessonId), drills (§10.06
+              formula drill answers, kept out of accuracy), shared (§10.18:
+              the parts of a phone's progress this build keeps but does not
+              use itself)
         07.4  persistence bridge + beforeunload guard
 
    §08  ROUTER ........................... hash-based
@@ -2750,8 +2821,8 @@ mark.np-h-none { background: transparent; }
 
    §10  FEATURE MODULES ................. one IIFE each
         10.00 Metrics · built                  10.08 Scenario trainer · built
-              the one place a figure is derived 10.09 Study planner · built
-        10.01 Dashboard + readiness · built    10.10 Mistake journal · built
+              the one place a figure is derived 10.09 Study plan · built
+        10.01 Progress + readiness · built     10.10 Mistake journal · built
         10.02 Practice engine · built          10.11 Analytics · built
         10.03 Mock exam simulator · built      10.12 Settings, About, help · built
         10.04 Question renderers · built
@@ -2767,6 +2838,8 @@ mark.np-h-none { background: transparent; }
         10.15 Learn — lesson hub and reader · #/learn, #/learn?lesson=P4
         10.16 Coach — stage, today's session, messages · derives, never renders
         10.17 Today, intake and the coach's surfaces · #/today, the home page
+        10.18 Cloud sync — shared progress format v3, three-way merge, the
+              Apps Script client and its setup guide · #/sync
               (10.14.6 audits 05.11 against fixture contexts)
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
@@ -2842,7 +2915,10 @@ PMP.ECO_TASK_BY_ID = Object.freeze(PMP.ECO_TASKS.reduce(function (m, t) { m[t.id
    the teaching layer, adds 48 Business Environment items beyond it.
    Every figure here is re-derived by the audit in §10.14.
 
-   Distribution, and how it was arrived at:
+   Distribution, and how it was arrived at. The figures below describe the
+   first 300 items, the pack as batch six closed it; with batch seven's 48
+   the pack stands at People 112 · Process 132 · Business 104 and at
+   143 predictive · 122 adaptive · 83 hybrid.
      Domain    People 112 · Process 132 · Business 56, which lands at
                37.3 / 44.0 / 18.7 percent against the published 33 / 41 / 26.
                Batch six was commissioned at People 42 / Process 50 /
@@ -2884,8 +2960,10 @@ PMP.ECO_TASK_BY_ID = Object.freeze(PMP.ECO_TASKS.reduce(function (m, t) { m[t.id
                subtraction happens to round favourably. 19 keeps 0.33 points
                of real margin and leaves all three approach checks clear,
                which the pack has not previously managed.
-     Type      177 multiple choice, 47 multiple response, 19 matching,
-               18 drop-down, 25 fill-in-the-blank, 14 hotspot. All five
+     Type      Across all 348: 217 multiple choice, 55 multiple response,
+               19 matching, 18 drop-down, 25 fill-in-the-blank, 14 hotspot
+               (the first 300 were 177 / 47 / 19 / 18 / 25 / 14; batch seven
+               added 40 multiple choice and 8 multiple response). All five
                renderers and six of the seven accepted type ids are exercised.
                Still no item uses the graphic type, for the reason recorded
                against batch four: §09.6 accepts it but that validator's
@@ -9430,9 +9508,9 @@ PMP.QUESTIONS = [
 
 ];
 
-/* 05.3, 05.5–05.7  The other packs are still empty by design: §12.2 runs a
-   content audit and the views report the real count rather than pretending.
-   05.4 is no longer among them; it is the scenario pack below. */
+/* 05.3  Case studies. Still empty by design: §12.2 runs a content audit and
+   the views report the real count rather than pretending. 05.4 to 05.7 are
+   all authored; they follow below. */
 PMP.CASES      = [];
 /* ── 05.4  SCENARIOS ────────────────────────────────────────────────────────
    80 situational judgement items. These are not questions with a right answer
@@ -14314,7 +14392,7 @@ PMP.Content = (function () {
      app finds its packs wherever it is mounted, including a subdirectory of a
      subdirectory, and including a local dev server at the root.
 
-   · A missing shard is not a failure. The manifest lists all 26 batches from
+   · A missing shard is not a failure. The manifest lists all 28 batches from
      the start so it never needs hand-editing; the shards themselves land one
      at a time as they are authored. A 404 therefore means "not written yet",
      which is the normal state of most of the manifest for most of its life.
@@ -14621,8 +14699,8 @@ PMP.Packs = (function () {
                           with the practice filter keys (domain, ecoTask,
                           approach, type, difficulty, tag); {} is the bank.
 
-   Phase 1 ships the engine with one pilot lesson, P4. Every sentence below
-   is original; nothing is taken from PMI material. ─────────────────────── */
+   34 lessons across the five modules, P4 the first one written. Every
+   sentence below is original; nothing is taken from PMI material. ─────────────────────── */
 PMP.MODULES = Object.freeze([
   { id: "foundations", order: 1, prefix: "F", label: "Foundations",
     blurb: "How the exam works, the mindset it rewards, and the delivery approaches every later lesson assumes." },
@@ -19243,11 +19321,58 @@ PMP.Store = (function () {
       notepad: { open: false, text: "", html: "", updatedAt: null, tab: "notes",
         /* The Gemini tab (§12.2.2): the chosen model and the conversation.
            The API key itself is never here. */
-        ai: { model: "", chat: [] } }
+        ai: { model: "", chat: [] } },
+      /* Formula lab drill answers (§10.06), one row per problem marked or
+         shown. Kept apart from `attempts` on purpose: a generated numeric
+         problem is not an item in the bank, has no ECO task and no option
+         order, and counting it would move accuracy for arithmetic practice.
+         It does count as a study day (§10.00.6), and analytics lists it. */
+      drills: [],     /* { id, at, group, gen, verdict: right|near|wrong|shown }, last 2000 */
+      /* What another device keeps in the shared progress file that this
+         build does not use itself (§10.18): a phone's sessions, sittings,
+         check-ins, weekly reports, its own cards, its chat, mock summaries
+         without the web's paper behind them, the rest of its plan, the
+         `native` block, any key a later version adds, and under `web` any
+         web-block key this build does not know. Kept so that nothing from a
+         phone is lost when this device saves, and written back unchanged. */
+      shared: {}
     };
   }
 
   var state = defaults();
+
+  /* ── 07.1a  SHARED-RULE UPGRADE ────────────────────────────────────────
+     Rows written before §01.8 existed carry the web's own vocabulary: five
+     lower-case cause ids, confidence as "sure" or "unsure", and scenario
+     credit on the old 0.6 curve. Every stored row is read through here, on
+     every load and on every import, so the rest of the file only ever sees
+     the shared values. Idempotent: a row already in the new form passes
+     through untouched, which is what lets this run on every hydrate rather
+     than once behind a version bump. */
+  var OLD_CAUSE = { knowledge: "KNOWLEDGE_GAP", misread: "MISREAD_STEM", rushed: "RUSHED",
+                    mindset: "WRONG_MINDSET", tossup: "TWO_PLAUSIBLE" };
+  var OLD_CONFIDENCE = { sure: 3, unsure: 2, "Not sure": 2 };
+  function normalise(key, value) {
+    if (key === "journal" && Array.isArray(value)) {
+      return value.map(function (j) {
+        return j && OLD_CAUSE[j.cause] ? Object.assign({}, j, { cause: OLD_CAUSE[j.cause] }) : j;
+      });
+    }
+    if (key === "attempts" && Array.isArray(value)) {
+      return value.map(function (a) {
+        return a && typeof a.confidence === "string"
+          ? Object.assign({}, a, { confidence: OLD_CONFIDENCE[a.confidence] || null }) : a;
+      });
+    }
+    if (key === "scenarioRuns" && Array.isArray(value)) {
+      var credit = PMP.RULES.scenarioCredit;
+      return value.map(function (r) {
+        return r && r.rank in credit && r.credit !== credit[r.rank]
+          ? Object.assign({}, r, { credit: credit[r.rank] }) : r;
+      });
+    }
+    return value;
+  }
 
   /* Migration hook. Progress files and stored slices carry schemaVersion; a
      v1 slice is upgraded here, an unknown major is refused by §09.6 before it
@@ -19318,14 +19443,25 @@ PMP.Store = (function () {
       if (!(k in state)) throw new Error("Unknown store slice: " + k);
     }
     mutate(state);
+    var wrote = false;
     for (i = 0; i < keys.length; i++) {
       k = keys[i];
       bump(k);
-      if (CFG.PERSISTED.indexOf(k) >= 0 && !opts.transient) dirty[k] = true;
+      if (CFG.PERSISTED.indexOf(k) >= 0 && !opts.transient) { dirty[k] = true; wrote = true; }
+    }
+    /* Write hooks see every persisted commit, silent ones included, which
+       is what lets §10.18 know when this device last changed anything
+       without every keystroke in the notes pane notifying the views. */
+    if (wrote) {
+      for (i = 0; i < writeHooks.length; i++) {
+        try { writeHooks[i](keys, opts); } catch (e) { /* a hook never blocks a write */ }
+      }
     }
     if (!opts.silent) notify(keys);
     schedule();
   }
+  var writeHooks = [];
+  function onWrite(fn) { writeHooks.push(fn); }
 
   /* ── 07.4  PERSISTENCE BRIDGE ──────────────────────────────────────────
      Debounced ~500 ms and batched: a slice touched fifty times in a burst is
@@ -19361,7 +19497,7 @@ PMP.Store = (function () {
           var version = wrapped.v || 1;
           var data = ("d" in wrapped) ? wrapped.d : wrapped;
           if (data === null || data === undefined) return;
-          state[keys[i]] = migrate(keys[i], data, version);
+          state[keys[i]] = normalise(keys[i], migrate(keys[i], data, version));
           bump(keys[i]);
         });
       });
@@ -19408,9 +19544,11 @@ PMP.Store = (function () {
   return {
     get state() { return state; },
     defaults: defaults,
+    normalise: normalise,
     subscribe: subscribe,
     selector: selector,
     commit: commit,
+    onWrite: onWrite,
     hydrate: hydrate,
     flush: flush,
     pruneAttempts: pruneAttempts,
@@ -21224,13 +21362,16 @@ PMP.Practice = (function () {
 
     var tools = el("div", { class: "q-tools" }, [flagBtn, noteBtn, reportBtn, el("span", { class: "spacer" })]);
 
+    /* Two buttons, stored on the shared scale in §01.8: Sure is 3 and Not
+       sure is 2, the value a phone stores for "Think so". Guess (1) is not
+       offered here yet; the calibration chart reads it as Not sure. */
     var confBtns = null;
     if (state.settings.confidenceTracking) {
-      confBtns = ["sure", "unsure"].map(function (k) {
+      confBtns = [[3, "Sure"], [2, "Not sure"]].map(function (c) {
         return el("button", {
-          class: "btn btn--sm", type: "button", dataset: { on: "false", conf: k },
-          onclick: function () { setConfidence(item, k); }
-        }, k === "sure" ? "Sure" : "Not sure");
+          class: "btn btn--sm", type: "button", dataset: { on: String(item.confidence === c[0]), conf: String(c[0]) },
+          onclick: function () { setConfidence(item, c[0]); }
+        }, c[1]);
       });
       tools.appendChild(el("span", { class: "eyebrow", text: "Confidence" }));
       confBtns.forEach(function (b) { tools.appendChild(b); });
@@ -21442,7 +21583,7 @@ PMP.Practice = (function () {
   function setConfidence(item, k) {
     item.confidence = item.confidence === k ? null : k;
     item.ui.conf.forEach(function (b) {
-      b.setAttribute("data-on", b.getAttribute("data-conf") === item.confidence ? "true" : "false");
+      b.setAttribute("data-on", b.getAttribute("data-conf") === String(item.confidence) ? "true" : "false");
     });
   }
 
@@ -22483,11 +22624,13 @@ PMP.Exam = (function () {
   /* Proficiency bands. PMI reports Above Target / Target / Below Target /
      Needs Improvement per domain and publishes neither the cut score nor the
      band boundaries, so these four thresholds are this build's own scale and
-     are labelled as such everywhere they are shown. */
+     are labelled as such everywhere they are shown. The boundaries are the
+     shared ones in §01.8, so a sitting reads the same band on every device. */
+  var MB = PMP.RULES.mockBands;
   var BANDS = [
-    { id: "above",  label: "Above Target",      min: 0.75 },
-    { id: "target", label: "Target",            min: 0.60 },
-    { id: "below",  label: "Below Target",      min: 0.45 },
+    { id: "above",  label: "Above Target",      min: MB.above },
+    { id: "target", label: "Target",            min: MB.target },
+    { id: "below",  label: "Below Target",      min: MB.below },
     { id: "needs",  label: "Needs Improvement", min: 0 }
   ];
   var MIN_BAND_SAMPLE = 5;     /* fewer items than this and no band is claimed */
@@ -23825,14 +23968,15 @@ PMP.Exam = (function () {
 
    · There is no correct answer, so there is no right or wrong marking. An
      answer earns partial credit by where it sits in the ordering. The credit
-     curve is 1 / 0.6 / 0.25 / 0, and the shape carries an editorial claim:
-     picking the acceptable option is a small miss, because the candidate has
-     chosen a defensible action out of sequence; picking the premature one is
-     a larger miss but the most instructive, because the instinct was right
-     and a step was skipped; picking the wrong one earns nothing. 0.6 rather
-     than 0.75 because the exam does not award part marks for second best,
-     and a curve that is too generous lets someone average 0.7 while never
-     once identifying the first thing to do.
+     curve is 1 / 0.5 / 0.25 / 0, shared with the phone apps through §01.8,
+     and the shape carries an editorial claim: picking the acceptable option
+     is a real miss, because the candidate has chosen a defensible action out
+     of sequence; picking the premature one is a larger miss but the most
+     instructive, because the instinct was right and a step was skipped;
+     picking the wrong one earns nothing. Half rather than more because the
+     exam does not award part marks for second best, and a curve that is too
+     generous lets someone average 0.7 while never once identifying the first
+     thing to do.
 
    · Every option is shown after answering, not just the chosen one and the
      best one. The whole teaching of this pack is the ordering, and an item
@@ -23866,7 +24010,7 @@ PMP.Scenarios = (function () {
     wrong: "Wrong"
   };
   var RANK_SHORT = { best: "Best", acceptable: "Acceptable", premature: "Premature", wrong: "Wrong" };
-  var CREDIT = { best: 1, acceptable: 0.6, premature: 0.25, wrong: 0 };
+  var CREDIT = PMP.RULES.scenarioCredit;
   var LENGTHS = [5, 10, 20];
 
   var filters = null;
@@ -27571,6 +27715,22 @@ PMP.FormulaLab = (function () {
     return s + " " + p.unit;
   }
 
+  /* ── 10.06.10a  THE DRILL LOG ────────────────────────────────────────────
+     The tally above is per visit, by design: a streak is a mood, not a
+     record. What is kept is one row per problem marked or shown, in the
+     `drills` slice rather than in `attempts` (see §07.1 for why). §10.00
+     counts a day with a drill on it as a study day, and §10.11 lists the
+     log by group. Capped at the newest DRILL_KEEP rows. */
+  var DRILL_KEEP = 2000;
+  function logDrill(p, verdict) {
+    var row = { id: PMP.rng.id("fxd"), at: new Date().toISOString(), group: p.group || null,
+                gen: p.label || null, verdict: verdict };
+    PMP.Store.commit(["drills"], function (s) {
+      var list = Array.isArray(s.drills) ? s.drills.concat([row]) : [row];
+      s.drills = list.length > DRILL_KEEP ? list.slice(-DRILL_KEEP) : list;
+    }, { silent: true });
+  }
+
   /* ── 10.06.11  DRILL VIEW ─────────────────────────────────────────────── */
   function renderDrill(host) {
     if (!problem) newProblem();
@@ -27656,6 +27816,7 @@ PMP.FormulaLab = (function () {
       }
       lastMark = res;
       revealed = true;
+      logDrill(p, res.verdict);
       paintTally();
       paintResult();
     }
@@ -27665,6 +27826,7 @@ PMP.FormulaLab = (function () {
       tally.streak = 0;
       lastMark = { verdict: "shown" };
       revealed = true;
+      logDrill(p, "shown");
       paintTally();
       paintResult();
     }
@@ -31008,7 +31170,10 @@ PMP.Metrics = (function () {
      for coverage, which measures breadth and makes no claim about scoring,
      and they still reach the mistake journal. This is the only place the
      coach changes a figure. */
-  function unassisted(a) { return !a.hinted; }
+  /* A phone's lesson quick check (`check`, set by §10.18 on import) is kept
+     out on the same terms: on the web quick checks never reach `attempts`,
+     and one arriving from a phone should not lift accuracy either. */
+  function unassisted(a) { return !a.hinted && !a.check; }
 
   /* ── 10.00.2  ACCURACY, DECAYED ──────────────────────────────────────────
      A weighted mean over the last ACCURACY_WINDOW answers, where an answer's
@@ -31095,9 +31260,15 @@ PMP.Metrics = (function () {
 
   /* ── 10.00.5  MOCK SITTINGS ──────────────────────────────────────────────
      Newest first. `pct` is the item mark rather than the part mark, because
-     it has to agree with the figure §10.03 printed on the results screen. */
+     it has to agree with the figure §10.03 printed on the results screen.
+
+     A sitting finished on a phone arrives through §10.18 as a summary only:
+     a score and a per-domain split, with no paper behind it. It counts here
+     like any other sitting, marked `foreign` and with no rows, and is
+     matched to the web's own sittings by finish time and title so a web
+     sitting that went to a phone and back is not counted twice. */
   function mocks(state) {
-    return (state.exams || [])
+    var own = (state.exams || [])
       .filter(function (e) { return e && e.score && e.finishedAt; })
       .map(function (e) {
         return {
@@ -31105,13 +31276,23 @@ PMP.Metrics = (function () {
           right: e.score.right, of: e.score.of,
           rows: e.rows || [], layout: e.layout || null
         };
-      })
-      .sort(function (x, y) { return y.at - x.at; });
+      });
+    var mine = Object.create(null);
+    (state.exams || []).forEach(function (e) {
+      if (e && e.finishedAt && PMP.Sync) mine[PMP.Sync.mockKey(e)] = true;
+    });
+    var sh = state.shared && Array.isArray(state.shared.mocks) ? state.shared.mocks : [];
+    sh.forEach(function (m) {
+      if (!m || !m.at || !(m.n > 0) || mine[m.at + "|" + (m.title || "")]) return;
+      own.push({ id: "mock-" + m.at, at: m.at, pct: (m.right || 0) / m.n, right: m.right || 0, of: m.n,
+                 rows: [], layout: null, foreign: true, title: m.title || "" });
+    });
+    return own.sort(function (x, y) { return y.at - x.at; });
   }
 
   /* ── 10.00.6  DAYS STUDIED ───────────────────────────────────────────────
      A day counts if anything happened on it: a question answered, a sitting
-     finished, or a card reviewed. Cards are read from each record's `last`
+     finished, a scenario ranked, a formula drill marked, or a card reviewed. Cards are read from each record's `last`
      stamp, which is the only per-day evidence §10.05 keeps — a card reviewed
      twice in one day is one card here, which understates volume and gets the
      only thing this index is asked for, whether the day was a study day,
@@ -31121,17 +31302,18 @@ PMP.Metrics = (function () {
     function touch(t, key, n) {
       if (!t) return;
       var d = PMP.time.startOfDay(t);
-      var e = m[d] || (m[d] = { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0 });
+      var e = m[d] || (m[d] = { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0, drills: 0 });
       e[key] += n;
     }
     attempts(state).forEach(function (a) {
       var d = PMP.time.startOfDay(ts(a.at));
-      var e = m[d] || (m[d] = { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0 });
+      var e = m[d] || (m[d] = { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0, drills: 0 });
       e.items++; e.credit += creditOf(a);
       if (a.ms > 500) e.ms += a.ms;
     });
-    (state.exams || []).forEach(function (e) { touch(ts(e.finishedAt), "exams", 1); });
+    mocks(state).forEach(function (mk) { touch(mk.at, "exams", 1); });
     (state.scenarioRuns || []).forEach(function (r) { touch(ts(r.at), "scenarios", 1); });
+    (state.drills || []).forEach(function (r) { touch(ts(r && r.at), "drills", 1); });
     var srs = state.srs || {};
     Object.keys(srs).forEach(function (id) {
       var r = srs[id];
@@ -31140,7 +31322,7 @@ PMP.Metrics = (function () {
     return m;
   }
 
-  function activeDay(e) { return !!e && (e.items > 0 || e.cards > 0 || e.exams > 0 || e.scenarios > 0); }
+  function activeDay(e) { return !!e && (e.items > 0 || e.cards > 0 || e.exams > 0 || e.scenarios > 0 || e.drills > 0); }
 
   /* ── 10.00.7  STREAK ─────────────────────────────────────────────────────
      Counted back from today, and a day with nothing on it only breaks the
@@ -31172,7 +31354,7 @@ PMP.Metrics = (function () {
     return {
       current: cur, longest: best, days: days,
       activeInWindow: days.filter(function (d) { return d.on; }).length,
-      today: idx[today] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0 }
+      today: idx[today] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0, drills: 0 }
     };
   }
 
@@ -31292,7 +31474,7 @@ PMP.Metrics = (function () {
       ready: st.activeInWindow > 0,
       figure: st.activeInWindow + " / " + R.HABIT_TARGET_DAYS,
       detail: "Days you studied in the last " + R.HABIT_WINDOW_DAYS + ", against a target of " +
-        R.HABIT_TARGET_DAYS + ". Anything counts \u2014 a question, a card, a sitting.",
+        R.HABIT_TARGET_DAYS + ". Anything counts \u2014 a question, a card, a sitting, a formula drill.",
       route: "cards", cta: "Do something small today"
     });
 
@@ -31483,7 +31665,7 @@ PMP.Metrics = (function () {
     MIN_SAMPLE: MIN_SAMPLE,
     attempts: attempts, creditOf: creditOf,
     accuracy: accuracy, byTask: byTask, byDomain: byDomain, byApproach: byApproach,
-    pace: pace, mocks: mocks, dayIndex: dayIndex, streak: streak, coverage: coverage,
+    pace: pace, mocks: mocks, dayIndex: dayIndex, activeDay: activeDay, streak: streak, coverage: coverage,
     components: components, readiness: readiness, nextActions: nextActions,
     countdown: countdown, clamp01: clamp01
   };
@@ -32351,7 +32533,7 @@ PMP.Planner = (function () {
     renderPlan(host, p, a);
   }
 
-  PMP.Router.register("planner", { title: "Study planner", render: view });
+  PMP.Router.register("planner", { title: "Study plan", render: view });
 
   return {
     build: build, assess: assess, diagnostic: diagnostic,
@@ -32410,6 +32592,8 @@ PMP.Analytics = (function () {
           onclick: function () { PMP.Router.navigate("practice"); }
         }, [PMP.dom.icon("target"), "Start a drill"])
       ]));
+      var d0 = drillsCard(state);
+      if (d0) host.appendChild(d0);
       return;
     }
 
@@ -32444,6 +32628,52 @@ PMP.Analytics = (function () {
       C.calibration(state),
       "Recorded as one bit \u2014 Sure or Not sure \u2014 so this is a comparison of two rates rather than a reliability curve. The row that matters is Sure: those are the ones a second look on the day will not catch."
     ));
+
+    var dc = drillsCard(state);
+    if (dc) host.appendChild(dc);
+  }
+
+  /* The formula lab's drill log (§10.06.10a), by group. A table rather than
+     a chart: the rows are few, and the useful reading is which group still
+     has misses in it, not a shape. Shown only once a drill has been marked,
+     and never folded into the accuracy figures above. */
+  function drillsCard(state) {
+    var rows = (state.drills || []).filter(function (r) { return r && r.at; });
+    if (!rows.length) return null;
+    var by = Object.create(null), order = [];
+    rows.forEach(function (r) {
+      var k = r.group || "other";
+      if (!by[k]) { by[k] = { n: 0, right: 0, near: 0, shown: 0, last: 0 }; order.push(k); }
+      var e = by[k];
+      e.n++;
+      if (r.verdict === "right") e.right++;
+      else if (r.verdict === "near") e.near++;
+      else if (r.verdict === "shown") e.shown++;
+      e.last = Math.max(e.last, Date.parse(r.at) || 0);
+    });
+    var label = {};
+    (PMP.FORMULAS || []).forEach(function (g) { label[g.id] = g.label; });
+    var body = el("tbody");
+    order.forEach(function (k) {
+      var e = by[k];
+      body.appendChild(el("tr", null, [
+        el("td", { text: label[k] || k }),
+        el("td", { class: "n", text: String(e.n) }),
+        el("td", { class: "n", text: String(e.right) }),
+        el("td", { class: "n", text: String(e.near) }),
+        el("td", { class: "n", text: String(e.shown) }),
+        el("td", { text: PMP.fmt.dateShort(new Date(e.last).toISOString()) })
+      ]));
+    });
+    var tbl = el("table", { class: "tbl" }, [
+      el("thead", null, [el("tr", null, [
+        el("th", { text: "Group" }), el("th", { class: "n", text: "Problems" }), el("th", { class: "n", text: "Right" }),
+        el("th", { class: "n", text: "Close" }), el("th", { class: "n", text: "Shown" }), el("th", { text: "Last" })
+      ])]),
+      body
+    ]);
+    return card("Formula drills", "Which calculations still slip?", el("div", { style: "overflow-x:auto" }, [tbl]),
+      PMP.fmt.plural(rows.length, "problem") + " marked in the formula lab. They count as study days but stay out of accuracy: a generated sum is practice at arithmetic, not an exam item.");
   }
 
   PMP.Router.register("analytics", { title: "Analytics", render: view });
@@ -32455,13 +32685,15 @@ PMP.Analytics = (function () {
 /* ── 10.10  MISTAKE JOURNAL ─────────────────────────────────────────────────
    Every wrong answer, grouped by why it was wrong rather than by what it was
    about. The claim behind the feature, and it is a strong one, is that the
-   distribution across these five causes is more actionable than the score:
+   distribution across these six causes is more actionable than the score:
    two candidates at 62% need completely different next fortnights if one is
    losing marks to gaps and the other to misreading.
 
-   The five causes are fixed and they are exhaustive by construction — the
-   fifth is the residue. They are ordered from furthest from the mark to
-   closest, which is also roughly the order of how much work each implies.
+   The six causes are fixed and shared with the phone apps: ids, names and
+   order all come from §01.8, so a miss tagged on a phone lands under the
+   same cause here. Rows stored before then used five lower-case ids; §07.1a
+   upgrades them on load. This module adds only what is the web's own: the
+   colour token, the reading for a leading cause, and where it sends you.
 
    Where entries come from. Tagging happens here rather than in the drill, on
    purpose. Asked immediately after getting something wrong, a candidate will
@@ -32478,24 +32710,14 @@ PMP.Analytics = (function () {
 PMP.Journal = (function () {
   var el = PMP.dom.el, icon = PMP.dom.icon;
 
-  var CAUSES = [
-    { id: "knowledge", short: "Knowledge gap",
-      label: "I did not know this",
-      hint: "The material itself was missing. This is the cause that answers to study time." },
-    { id: "misread", short: "Misread the question",
-      label: "I misread it",
-      hint: "You knew the material and answered a question that was not quite the one asked \u2014 a missed \"first\", \"except\", or a role you read past." },
-    { id: "rushed", short: "Rushed",
-      label: "I rushed",
-      hint: "You had it and moved before you had it. Usually visible as a time well under your own median." },
-    { id: "mindset", short: "Wrong mindset",
-      label: "Wrong instinct",
-      hint: "A defensible action, out of order. Escalating before gathering facts, or fixing before asking. The PMI-preferred move was a step you skipped." },
-    { id: "tossup", short: "Two plausible answers",
-      label: "Two answers both worked",
-      hint: "You narrowed it to two and chose wrong. The discriminator was there and was not visible to you." }
-  ];
+  /* The colour token is the id in lower case with dashes, so the stylesheet
+     (03.19) can name it: --cause-knowledge-gap and so on. */
+  var CAUSES = PMP.RULES.causes.map(function (c) {
+    return { id: c.id, short: c.short, label: c.label, hint: c.hint,
+             css: "var(--cause-" + c.id.toLowerCase().replace(/_/g, "-") + ")" };
+  });
   var BY_ID = CAUSES.reduce(function (m, c) { m[c.id] = c; return m; }, {});
+  function colourOf(id) { return BY_ID[id] ? BY_ID[id].css : "var(--fg-muted)"; }
   var MAX_QUEUE = 12;
 
   function repaint() {
@@ -32629,11 +32851,12 @@ PMP.Journal = (function () {
       return "No single cause dominates, which usually means the gaps are real and spread out rather than one habit costing you marks. Work the cold tasks on the analytics heat map.";
     }
     var MSG = {
-      knowledge: "Most of your misses are material you had not learnt. That is the most fixable cause on the list and the one that answers directly to study time \u2014 work the cold tasks and let the flashcards hold them.",
-      misread: "Most of your misses are questions you could have answered. Nothing here is a knowledge problem: slow down on the stem and find the qualifier before you look at the options. Your pace histogram will tell you if you have the seconds to spare.",
-      rushed: "Most of your misses are pace, not knowledge. Check your time-per-question histogram \u2014 if your median is under the band, the marks are being left on the table by speed you do not need.",
-      mindset: "Most of your misses are ordering rather than knowledge: the right action taken at the wrong point. That is what the scenario trainer drills, and it is the cause that most often separates a resit from a pass.",
-      tossup: "Most of your misses are two-answer splits. The discriminator is usually in the stem's constraints rather than in the options \u2014 the scenario trainer's ranked reveal is built to make that visible."
+      KNOWLEDGE_GAP: "Most of your misses are material you had not learnt. That is the most fixable cause on the list and the one that answers directly to study time \u2014 work the cold tasks and let the flashcards hold them.",
+      MISREAD_STEM: "Most of your misses are questions you could have answered. Nothing here is a knowledge problem: slow down on the stem and find the qualifier before you look at the options. Your pace histogram will tell you if you have the seconds to spare.",
+      RUSHED: "Most of your misses are pace, not knowledge. Check your time-per-question histogram \u2014 if your median is under the band, the marks are being left on the table by speed you do not need.",
+      WRONG_MINDSET: "Most of your misses are ordering rather than knowledge: the right action taken at the wrong point. That is what the scenario trainer drills, and it is the cause that most often separates a resit from a pass.",
+      TWO_PLAUSIBLE: "Most of your misses are two-answer splits. The discriminator is usually in the stem's constraints rather than in the options \u2014 the scenario trainer's ranked reveal is built to make that visible.",
+      CALCULATION: "Most of your misses are arithmetic slips on methods you know. Write the formula before the numbers, carry full precision to the end, and check the answer reads the right way round \u2014 a CPI over 1 is under budget. The formula lab's drill is the place to make that a habit."
     };
     return MSG[top.c.id];
   }
@@ -32649,7 +32872,7 @@ PMP.Journal = (function () {
     host.appendChild(el("div", { class: "view-hd" }, [
       el("span", { class: "eyebrow", text: "Mistake journal" }),
       el("h2", { text: "Why you got them wrong" }),
-      el("p", { text: "Every answer that missed full marks, waiting to be given a cause. The distribution across the five causes is usually a better guide to what to do next than the score is." })
+      el("p", { text: "Every answer that missed full marks, waiting to be given a cause. The distribution across the six causes is usually a better guide to what to do next than the score is." })
     ]));
 
     if (!rows.length) {
@@ -32705,7 +32928,7 @@ PMP.Journal = (function () {
     var key = el("div", { class: "cause-key" });
     CAUSES.forEach(function (c) {
       key.appendChild(el("div", { class: "cause-key-row" }, [
-        el("span", { class: "sw", style: "background:var(--cause-" + c.id + ")" }),
+        el("span", { class: "sw", style: "background:" + c.css }),
         el("span", null, [
           el("span", { class: "cn", text: c.short }),
           el("span", { class: "cd", text: c.hint })
@@ -32718,13 +32941,14 @@ PMP.Journal = (function () {
     var lead = CAUSES.map(function (c) { return { c: c, n: cs[c.id] || 0 }; })
       .sort(function (a, b) { return b.n - a.n; })[0];
     if (total >= 8 && lead.n / total >= 0.3) {
-      var target = { knowledge: "practice", misread: "practice", rushed: "practice", mindset: "scenarios", tossup: "scenarios" }[lead.c.id];
+      var target = { KNOWLEDGE_GAP: "practice", MISREAD_STEM: "practice", RUSHED: "practice",
+                     WRONG_MINDSET: "scenarios", TWO_PLAUSIBLE: "scenarios", CALCULATION: "formulas" }[lead.c.id];
       card.appendChild(el("div", { class: "filter-bar" }, [
         el("button", {
           class: "btn btn--primary", type: "button",
           onclick: function () { PMP.Router.navigate(target); }
-        }, [icon(target === "scenarios" ? "branch" : "target"),
-            target === "scenarios" ? "Drill the ordering" : "Work on it"]),
+        }, [icon(target === "scenarios" ? "branch" : target === "formulas" ? "sigma" : "target"),
+            target === "scenarios" ? "Drill the ordering" : target === "formulas" ? "Drill the formulas" : "Work on it"]),
         el("span", { class: "spacer" }),
         el("span", { class: "hint", text: PMP.fmt.plural(total, "tagged mistake") + " on record." })
       ]));
@@ -32735,7 +32959,7 @@ PMP.Journal = (function () {
   /* A knowledge gap answers to teaching, so a miss tagged that way links to
      the lesson for its task when one is written. */
   function lessonLink(r) {
-    if (r.entry.cause !== "knowledge" || !PMP.Learn) return null;
+    if (r.entry.cause !== "KNOWLEDGE_GAP" || !PMP.Learn) return null;
     var lesson = PMP.Learn.forTask(r.entry.ecoTask || r.attempt.ecoTask);
     if (!lesson) return null;
     return el("a", {
@@ -32754,7 +32978,7 @@ PMP.Journal = (function () {
     tagged.slice(0, 40).forEach(function (r) {
       var c = BY_ID[r.entry.cause];
       list.appendChild(el("div", { class: "jr-row" }, [
-        el("span", { class: "chip", style: "border-color:var(--cause-" + r.entry.cause + ");color:var(--cause-" + r.entry.cause + ")", text: c ? c.short : r.entry.cause }),
+        el("span", { class: "chip", style: "border-color:" + colourOf(r.entry.cause) + ";color:" + colourOf(r.entry.cause), text: c ? c.short : r.entry.cause }),
         el("span", { class: "jr-q", text: r.q ? r.q.stem : r.entry.qid }),
         el("span", { style: "display:flex;gap:var(--sp-2);align-items:center" }, [
           el("span", { class: "jr-when", text: PMP.fmt.dateShort(r.entry.at) }),
@@ -32775,11 +32999,15 @@ PMP.Journal = (function () {
 
   PMP.Router.register("journal", { title: "Mistake journal", render: view });
 
-  return { CAUSES: CAUSES, counts: counts, misses: misses, reading: reading };
+  return { CAUSES: CAUSES, counts: counts, misses: misses, reading: reading, colourOf: colourOf };
 })();
 
 
-/* ── 10.01  DASHBOARD AND READINESS SCORE ───────────────────────────────────
+/* ── 10.01  PROGRESS (DASHBOARD) AND READINESS SCORE ────────────────────────
+   Called Progress everywhere a person sees it: the rail, the title bar and
+   the page itself. The module keeps its first name, PMP.Dashboard, and its
+   route, #/dashboard, so links people have saved still open it.
+
    The first screen, and the one most likely to be read in ten seconds on the
    way to doing something else. It answers four questions in that order: how
    ready am I, where am I weak, am I keeping at it, and what should I do next.
@@ -33236,7 +33464,7 @@ PMP.Dashboard = (function () {
           : PMP.fmt.plural(total, "mistake") + " tagged so far. The distribution starts meaning something at about eight."
       }));
     } else {
-      card.appendChild(el("p", { text: "Once something goes wrong it lands there to be given a cause. The distribution across the five causes is usually a better guide to the next fortnight than the score is." }));
+      card.appendChild(el("p", { text: "Once something goes wrong it lands there to be given a cause. The distribution across the six causes is usually a better guide to the next fortnight than the score is." }));
     }
     card.appendChild(el("div", { class: "filter-bar" }, [
       el("button", {
@@ -33469,9 +33697,20 @@ PMP.Settings = (function () {
      "lesson" mode. Those answers are real attempts, recorded like any drill
      and tagged with the lesson id. When the set finishes, its score is kept
      on the lesson as practice: { at, credit, n }, where credit is the share
-     of the set earned, skipped items counting as nothing. The first set at
-     MASTERY_SHARE or better stamps masteredAt, once. A later, weaker set
-     replaces practice but never takes Mastered away.
+     of the set earned, skipped items counting as nothing.
+
+   · Mastered is the shared task rule in §01.8, applied to the lesson's ECO
+     task, so a lesson reads Mastered here exactly when its task does on a
+     phone: at least `minAnswers` answers on the task, `accuracy` or better
+     across the last `window` of them, and an answer within `fadeDays`. It is
+     derived on every read and never stored, so it fades as well as arrives.
+     Counted: every answer on the task, the practice set's included, since on
+     the web those are ordinary drill answers. Left out: hinted answers, a
+     right answer marked as a guess, and a phone's lesson quick checks
+     (`check`, §10.18), the same rows the shared rule leaves out. A lesson
+     with no task of its own (foundations, exam skills) is mastered by its
+     practice set scoring `accuracy` or better. masteredAt still records the
+     first time the badge was earned, as history.
 
    Every piece of lesson text is set with textContent. Section bodies are
    split into paragraphs on blank lines; nothing in a lesson is parsed as
@@ -33480,7 +33719,8 @@ PMP.Settings = (function () {
 PMP.Learn = (function () {
   var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on;
 
-  var MASTERY_SHARE = 0.7;   /* practice-set score that earns Mastered */
+  var MR = PMP.RULES.mastery;
+  var MASTERY_SHARE = MR.accuracy;   /* the share that earns Mastered, §01.8 */
   var RETAKE_DAYS = 2;       /* suggested gap before retaking a set below it */
   var PARTS = [
     "Overview", "Why it matters on the exam", "The concept", "Three lenses",
@@ -33540,10 +33780,38 @@ PMP.Learn = (function () {
     };
   }
 
+  /* ── 10.15.1a  MASTERY ─────────────────────────────────────────────────
+     The task rule, as described above. Returns the figures as well as the
+     verdict, because the reader prints them. */
+  function taskMastery(state, ecoTask) {
+    var rows = PMP.Metrics.attempts(state).filter(function (a) {
+      if (a.ecoTask !== ecoTask || a.hinted || a.check) return false;
+      return !(a.confidence === 1 && PMP.Metrics.creditOf(a) >= 1);
+    });
+    var last = rows.slice(-MR.window);
+    var acc = last.length ? last.reduce(function (t, a) { return t + PMP.Metrics.creditOf(a); }, 0) / last.length : 0;
+    var lastAt = rows.length ? Date.parse(rows[rows.length - 1].at) : 0;
+    var idle = lastAt ? Math.floor((Date.now() - lastAt) / 86400000) : null;
+    var faded = idle !== null && idle > MR.fadeDays;
+    var earned = rows.length >= MR.minAnswers && acc >= MR.accuracy;
+    return { n: rows.length, window: last.length, acc: acc, idleDays: idle,
+             earned: earned, faded: earned && faded, mastered: earned && !faded };
+  }
+
+  function mastery(lesson, state) {
+    state = state || PMP.Store.state;
+    if (lesson.ecoTask) return taskMastery(state, lesson.ecoTask);
+    var rec = (state.lessons || {})[lesson.id];
+    var prc = rec && rec.practice;
+    var ok = !!prc && prc.credit >= MR.accuracy;
+    return { set: true, mastered: ok, earned: ok, faded: false, acc: prc ? prc.credit : 0, n: prc ? prc.n : 0 };
+  }
+  function isMastered(lesson) { return mastery(lesson).mastered; }
+
   function status(lesson) {
     var rec = recordOf(lesson.id);
     if (!rec) return "none";
-    if (rec.masteredAt) return "mastered";
+    if (isMastered(lesson)) return "mastered";
     if (rec.completedAt) return "complete";
     var c = counts(lesson, rec);
     return c.done ? "progress" : "none";
@@ -33866,7 +34134,8 @@ PMP.Learn = (function () {
       el("p", { text: PMP.fmt.plural(Math.min(pr.count || 10, nq), "question")
         + (task ? " on " + task.label.toLowerCase() + ", drawn from the " + nq + " in the bank"
                 : ", drawn from the " + nq + " in the bank that fit this lesson")
-        + " and marked as you go. Score " + PMP.fmt.pct(MASTERY_SHARE) + " or more to master the lesson. These answers are recorded like any drill, so they count towards accuracy and readiness." }),
+        + " and marked as you go. These answers are recorded like any drill, so they count towards accuracy and readiness"
+        + (task ? ", and towards mastering the task: " + masteryRuleText() + "." : ". Score " + PMP.fmt.pct(MASTERY_SHARE) + " or more to master the lesson.") }),
       el("div", { class: "filter-bar" }, links)
     ]));
 
@@ -33914,14 +34183,14 @@ PMP.Learn = (function () {
       var prc = rec && rec.practice;
       ui.mastery.appendChild(el("ul", { class: "keylist" }, [
         el("li", null, [
-          el("span", { class: rec && rec.masteredAt ? "chip chip--correct" : "chip",
+          el("span", { class: isMastered(lesson) ? "chip chip--correct" : "chip",
             text: prc ? PMP.fmt.pct(prc.credit) : "\u2014" }),
           el("span", { text: prc
             ? "Last practice set, " + PMP.fmt.plural(prc.n, "question") + " on " + PMP.fmt.dateShort(prc.at)
             : "Practice set not taken yet" })
         ])
       ]));
-      ui.mastery.appendChild(el("p", { class: "ln-note", text: masteryNote(rec) }));
+      ui.mastery.appendChild(el("p", { class: "ln-note", text: masteryNote(lesson, rec) }));
 
       /* Every check tried and no set taken yet: the coach suggests the set
          now, while the teaching is fresh. */
@@ -33975,40 +34244,57 @@ PMP.Learn = (function () {
     var share = r.n ? r.credit / r.n : 0;
     touch(lesson, function (rec) {
       rec.practice = { at: at, credit: Math.round(share * 1000) / 1000, n: r.n };
-      if (!rec.masteredAt && share >= MASTERY_SHARE) rec.masteredAt = at;
     });
+    /* Read after the set is on the record: a set-mastered lesson needs it. */
+    if (isMastered(lesson) && !(recordOf(lesson.id) || {}).masteredAt) {
+      touch(lesson, function (rec) { rec.masteredAt = at; });
+    }
+  }
+
+  function masteryRuleText() {
+    return "at least " + MR.minAnswers + " answers on it, " + PMP.fmt.pct(MR.accuracy) + " or better across your last " +
+      MR.window + ", and an answer in the last " + MR.fadeDays + " days";
   }
 
   function retakeDate(prc) {
     return new Date(Date.parse(prc.at) + RETAKE_DAYS * 86400000).toISOString();
   }
 
-  function masteryNote(rec) {
+  function masteryNote(lesson, rec) {
     var prc = rec && rec.practice;
-    if (rec && rec.masteredAt) return "Mastered since " + PMP.fmt.dateShort(rec.masteredAt) + ".";
-    if (prc) return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on the practice set. Re-read the sections behind your misses, then retake the set on or after " + PMP.fmt.dateShort(retakeDate(prc)) + ".";
-    return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on this lesson's practice set. Skipped questions count as wrong.";
+    var m = mastery(lesson);
+    if (m.set) {
+      if (m.mastered) return "Mastered: the last practice set scored " + PMP.fmt.pct(m.acc) + ".";
+      if (prc) return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on the practice set. Re-read the sections behind your misses, then retake the set on or after " + PMP.fmt.dateShort(retakeDate(prc)) + ".";
+      return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on this lesson's practice set. Skipped questions count as wrong.";
+    }
+    var where = PMP.fmt.plural(m.n, "answer") + " on this task so far" +
+      (m.window ? ", " + PMP.fmt.pct(m.acc) + " across the last " + m.window : "") + ".";
+    if (m.mastered) return "Mastered: " + where + " It stays mastered while you answer on the task at least every " + MR.fadeDays + " days.";
+    if (m.faded) return "Mastered once, and faded: nothing has been answered on this task for " + PMP.fmt.plural(m.idleDays, "day") + ". A practice set brings it back.";
+    return "Mastered needs " + masteryRuleText() + ". You have " + where +
+      (prc && m.n >= MR.minAnswers ? " Re-read the sections behind your misses, then retake the set on or after " + PMP.fmt.dateShort(retakeDate(prc)) + "." : "");
   }
 
   /* Shown at the top of the practice summary when a lesson set ends. */
   function setCard(lesson, r) {
     var rec = recordOf(lesson.id);
     var share = r.n ? r.credit / r.n : 0;
-    var passed = share >= MASTERY_SHARE;
+    var m = mastery(lesson);
+    var passed = m.mastered;
     var card = el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Lesson " + lesson.id + " \u00B7 " + lesson.title }),
       el("h2", { text: !r.answered ? "Set not scored"
-        : passed ? "Lesson mastered"
-        : rec && rec.masteredAt ? "Below the mastery mark this time" : "Not mastered yet" }),
+        : passed ? "Lesson mastered" : "Not mastered yet" }),
       el("p", { text: "This set scored " + PMP.fmt.pct(share) + " across " + PMP.fmt.plural(r.n, "question")
-        + ", with part marks counted and skipped questions counted as wrong. Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + "." })
+        + ", with part marks counted and skipped questions counted as wrong. " + (m.set
+          ? "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + "."
+          : "Mastering the task needs " + masteryRuleText() + "; you have " + PMP.fmt.plural(m.n, "answer") + " on it, " + PMP.fmt.pct(m.acc) + " across the last " + m.window + ".") })
     ]);
     if (!r.answered) {
       card.lastChild.textContent = "Nothing in this set was answered, so the lesson record is unchanged.";
-    } else if (!passed) {
-      card.appendChild(el("p", { text: rec && rec.masteredAt
-        ? "The lesson stays Mastered from an earlier set. The misses below are still worth reading."
-        : "Every question you missed is open below, with the reasoning for each option. Re-read the lesson, then retake the set on or after "
+    } else if (!passed && rec && rec.practice) {
+      card.appendChild(el("p", { text: "Every question you missed is open below, with the reasoning for each option. Re-read the lesson, then retake the set on or after "
           + PMP.fmt.dateShort(retakeDate(rec.practice)) + ". A gap of a couple of days tests what you kept, not what you just read." }));
     }
     card.appendChild(el("div", { class: "filter-bar" }, [
@@ -34107,6 +34393,7 @@ PMP.Learn = (function () {
   PMP.Router.register("learn", { title: "Learn", render: view });
 
   return { path: path, status: status, lessonById: lessonById, forTask: forTask, bankFor: bankFor,
+           mastery: mastery, taskMastery: taskMastery, isMastered: isMastered,
            POOL_KEYS: POOL_KEYS, MASTERY_SHARE: MASTERY_SHARE, RETAKE_DAYS: RETAKE_DAYS };
 })();
 
@@ -34144,7 +34431,9 @@ PMP.Learn = (function () {
    ═════════════════════════════════════════════════════════════════════════ */
 PMP.Coach = (function () {
   var DAY = 86400000;
-  var REENTRY_GAP_DAYS = 4;   /* a gap this long gets a comeback session */
+  /* A gap this long gets a comeback session. Shared with the phone apps
+     through §01.8, so a week away reads as a week away on every device. */
+  var REENTRY_GAP_DAYS = PMP.RULES.reentryDays;
   var WEEKLY_EVERY_DAYS = 7;
   var EXAM_WEEK_DAYS = 6;     /* the six days before the exam taper */
   var TRIAGE_MIN = 5;         /* untagged misses before triage joins the session */
@@ -34195,18 +34484,17 @@ PMP.Coach = (function () {
 
   /* ── 10.16.2  ACTIVITY ───────────────────────────────────────────────────
      Read off §10.00's day index, on its own rule for what counts as a study
-     day: a question, a card, a sitting or a scenario. */
+     day: a question, a card, a sitting, a scenario or a formula drill. */
   function activeDays(state) {
     var idx = PMP.Metrics.dayIndex(state);
     return Object.keys(idx).map(Number).filter(function (d) {
-      var e = idx[d];
-      return e.items > 0 || e.cards > 0 || e.exams > 0 || e.scenarios > 0;
+      return PMP.Metrics.activeDay(idx[d]);
     }).sort(function (a, b) { return a - b; });
   }
 
   function todayIndex(state) {
     var idx = PMP.Metrics.dayIndex(state);
-    return idx[sod(Date.now())] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0 };
+    return idx[sod(Date.now())] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0, drills: 0 };
   }
 
   /* ── 10.16.3  STAGE ──────────────────────────────────────────────────────
@@ -34262,7 +34550,7 @@ PMP.Coach = (function () {
         if (earlier) return { id: l.id, title: l.title, lesson: l, pct: PMP.fmt.pct(rec.practice.credit), days: 0, done: true };
         continue;
       }
-      if (rec.masteredAt || rec.practice.credit >= PMP.Learn.MASTERY_SHARE) continue;
+      if (PMP.Learn.isMastered(l) || rec.practice.credit >= PMP.Learn.MASTERY_SHARE) continue;
       var days = PMP.time.daysBetween(at, now);
       if (days >= PMP.Learn.RETAKE_DAYS) {
         return { id: l.id, title: l.title, lesson: l, pct: PMP.fmt.pct(rec.practice.credit), days: days, done: false };
@@ -34715,6 +35003,14 @@ PMP.Coach = (function () {
      day" means wherever the file is opened. */
   var STUDY_HOUR = { morning: [7, 0], midday: [12, 30], evening: [19, 0], varies: [19, 0] };
 
+  /* RFC 5545 §3.3.11 TEXT: a backslash, a semicolon and a comma are escaped
+     with a backslash, and a line break becomes the two characters \n. The
+     backslash goes first, or the escapes the later steps add would
+     themselves be doubled. */
+  function icsText(str) {
+    return String(str).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r\n|\r|\n/g, "\\n");
+  }
+
   function calendar(state) {
     state = state || PMP.Store.state;
     var cp = currentPlan(state);
@@ -34723,7 +35019,7 @@ PMP.Coach = (function () {
     var sl = slice(state);
     var hm = STUDY_HOUR[(sl.profile && sl.profile.when) || "varies"] || STUDY_HOUR.varies;
     function pad(n) { return (n < 10 ? "0" : "") + n; }
-    function esc(s) { return String(s).replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n"); }
+    var esc = icsText;
     /* RFC 5545 folds content lines at 75 octets; continuation lines start
        with a space. Counted in characters, which is safe for this ASCII-
        heavy text and only ever folds earlier than required otherwise. */
@@ -34783,16 +35079,16 @@ PMP.Coach = (function () {
           readiness: { score: 31, provisional: true, gates: ["40 more answers needed", "9 more ECO tasks to touch"], gatesText: "40 more answers needed, and 9 more ECO tasks to touch", components: [] },
           plan: { behind: true, debt: 416, behindLabel: "6h 56m", phase: "consolidate", rest: false, todayMins: 60, todayDone: 0, daysLeft: 30, diagnostic: false },
           cards: { today: 25, due: 20, leech: 1 },
-          journal: { untagged: 7, tagged: 12, lead: { id: "misread", short: "Misread the question", n: 6, share: 0.5 }, tagsToday: 0 },
+          journal: { untagged: 7, tagged: 12, lead: { id: "MISREAD_STEM", short: "Misread the question", n: 6, share: 0.5 }, tagsToday: 0 },
           pace: { ready: true, median: 31, fast: true, slow: false, target: 80 },
           coverage: { touched: 22, of: 26, untouched: 4, firstShort: "x" }, topAction: "coverage",
           mocks: { n: 0, lastDays: null },
           retake: { id: "P4", title: "Project finance", pct: "55%", days: 3, done: false } }),
       v({ attempts: 0, cards: { today: 40, due: 0, leech: 3 }, nextLesson: { id: "F1", title: "How the exam works" },
-          journal: { untagged: 0, tagged: 9, lead: { id: "mindset", short: "Wrong mindset", n: 4, share: 0.44 }, tagsToday: 0 },
+          journal: { untagged: 0, tagged: 9, lead: { id: "WRONG_MINDSET", short: "Wrong mindset", n: 4, share: 0.44 }, tagsToday: 0 },
           pace: { ready: true, median: 104, fast: false, slow: true, target: 80 },
           mocks: { n: 2, lastDays: 52 } }),
-      v({ plan: null, journal: { untagged: 2, tagged: 10, lead: { id: "knowledge", short: "Knowledge gap", n: 5, share: 0.5 }, tagsToday: 0 } }),
+      v({ plan: null, journal: { untagged: 2, tagged: 10, lead: { id: "KNOWLEDGE_GAP", short: "Knowledge gap", n: 5, share: 0.5 }, tagsToday: 0 } }),
       v({ plan: { behind: false, debt: 0, behindLabel: "0s", phase: "build", rest: false, todayMins: 60, todayDone: 0, daysLeft: 40, diagnostic: false } }),
       v({ stage: "reentry", plan: { behind: true, debt: 1336, behindLabel: "22h 16m", phase: "consolidate", rest: false, todayMins: 60, todayDone: 0, daysLeft: 40, diagnostic: true } }),
       v({ stage: "examweek", countdown: { days: 1, past: false } }),
@@ -34805,7 +35101,7 @@ PMP.Coach = (function () {
     markShown: markShown, dismiss: dismiss, acted: acted,
     slice: slice, setProfile: setProfile, setPref: setPref, setOutcome: setOutcome,
     weeklySummary: weeklySummary, completeWeekly: completeWeekly,
-    hint: hint, HINT_RUNGS: 3, calendar: calendar, STUDY_HOUR: STUDY_HOUR,
+    hint: hint, HINT_RUNGS: 3, calendar: calendar, icsText: icsText, STUDY_HOUR: STUDY_HOUR,
     line: line, fixtures: fixtures,
     REENTRY_GAP_DAYS: REENTRY_GAP_DAYS, WEEKLY_EVERY_DAYS: WEEKLY_EVERY_DAYS, TRIAGE_MIN: TRIAGE_MIN
   };
@@ -35572,13 +35868,15 @@ PMP.Chart = (function () {
   }
 
   /* The four-step accuracy ramp, plus "thin". Boundaries are the same ones
-     §10.03 uses for its proficiency bands so that a task reading band 4 here
-     and a sitting reading Above Target there mean the same thing. */
+     §10.03 uses for its proficiency bands, read from §01.8, so that a task
+     reading band 4 here and a sitting reading Above Target there mean the
+     same thing. */
+  var MB = PMP.RULES.mockBands;
   function band(acc, n) {
     if (n < M.MIN_SAMPLE) return "thin";
-    if (acc >= 0.75) return "4";
-    if (acc >= 0.60) return "3";
-    if (acc >= 0.45) return "2";
+    if (acc >= MB.above) return "4";
+    if (acc >= MB.target) return "3";
+    if (acc >= MB.below) return "2";
     return "1";
   }
 
@@ -35763,10 +36061,10 @@ PMP.Chart = (function () {
       caption: opts.caption || ("Your accuracy on each of the 26 tasks. Grey cells are the ones you have answered fewer than " + M.MIN_SAMPLE + " questions on \u2014 they show what is missing rather than a percentage, because a rate from two answers is not a rate. Choose any cell to drill it."),
       legend: legend([
         { band: "thin", label: "Under " + M.MIN_SAMPLE + " answers" },
-        { band: "1", label: "Below 45%" },
-        { band: "2", label: "45\u201360%" },
-        { band: "3", label: "60\u201375%" },
-        { band: "4", label: "75% and above" }
+        { band: "1", label: "Below " + PMP.fmt.pct(MB.below) },
+        { band: "2", label: PMP.fmt.pct(MB.below).replace("%", "") + "\u2013" + PMP.fmt.pct(MB.target) },
+        { band: "3", label: PMP.fmt.pct(MB.target).replace("%", "") + "\u2013" + PMP.fmt.pct(MB.above) },
+        { band: "4", label: PMP.fmt.pct(MB.above) + " and above" }
       ]),
       draw: function (svg) {
         doms.forEach(function (d, ci) {
@@ -36008,9 +36306,10 @@ PMP.Chart = (function () {
      Not a reliability diagram, and deliberately not.
 
      A reliability diagram plots stated probability against observed frequency
-     and needs confidence on a graded scale. §10.02 collects one bit — Sure or
-     Not sure — so the honest rendering of what was actually recorded is a two
-     by two: how often each of the two states was right.
+     and needs confidence on a graded scale. §10.02 collects one bit — Sure (3)
+     or Not sure (2), on the shared scale in §01.8 — so the honest rendering of
+     what was actually recorded is a two by two: how often each of the two
+     states was right. A phone's Guess (1) is read as Not sure.
 
      The quadrant that matters is sure and wrong. Those are the questions that
      will not be caught by more time or a second look on the day, because
@@ -36021,8 +36320,9 @@ PMP.Chart = (function () {
     opts = opts || {};
     var rows = { sure: { n: 0, right: 0 }, unsure: { n: 0, right: 0 } };
     M.attempts(state).forEach(function (a) {
-      if (a.confidence !== "sure" && a.confidence !== "unsure") return;
-      var e = rows[a.confidence];
+      var cf = a.confidence;
+      if (typeof cf !== "number" || cf < 1) return;
+      var e = rows[cf >= 3 ? "sure" : "unsure"];
       e.n++;
       e.right += M.creditOf(a);
     });
@@ -36167,7 +36467,7 @@ PMP.Chart = (function () {
     return figure({
       w: W, h: H,
       title: "Why answers were missed",
-      desc: "Distribution of " + PMP.fmt.plural(total, "tagged mistake") + " across the five causes.",
+      desc: "Distribution of " + PMP.fmt.plural(total, "tagged mistake") + " across the six causes.",
       caption: opts.caption || ("Across " + PMP.fmt.plural(total, "tagged mistake") + ". The order is fixed so this chart can be compared with itself over time."),
       draw: function (svg) {
         causes.forEach(function (c, i) {
@@ -36179,7 +36479,7 @@ PMP.Chart = (function () {
           if (n) {
             svg.appendChild(s("rect", {
               x: L, y: y, width: Math.max(3, (n / peak) * pw), height: rowH, rx: 3,
-              fill: "var(--cause-" + c.id + ")"
+              fill: c.css || "var(--cause-" + c.id.toLowerCase().replace(/_/g, "-") + ")"
             }));
           }
           svg.appendChild(s("text", {
@@ -36282,17 +36582,30 @@ PMP.Shell = (function () {
     }
     document.documentElement.setAttribute("data-theme", resolved);
     document.getElementById("theme-icon").setAttribute("href", resolved === "dark" ? "#i-moon" : "#i-sun");
-    document.getElementById("theme-label").textContent = resolved === "dark" ? "Dark" : "Light";
+    /* The label names the preference, not the colours on screen, so that
+       "follow this device" stays visible as a choice once it is made. */
+    var name = pref === "system" ? "System" : resolved === "dark" ? "Dark" : "Light";
+    document.getElementById("theme-label").textContent = name;
+    var btn = document.getElementById("theme-btn");
+    btn.setAttribute("title", "Theme: " + (pref === "system" ? "follows this device, " + resolved + " now" : resolved) +
+      ". Press for " + THEME_LABEL[THEME_NEXT[pref] || "system"] + ".");
+    btn.setAttribute("aria-label", "Theme: " + name + ". Change theme");
     /* Written outside the store namespace so §01.6 can read it before paint. */
     try { window.localStorage.setItem("pmp.theme", pref === "system" ? "" : pref); } catch (e) { /* not persistent; the toggle still works for the session */ }
   }
 
+  /* Three states, in a fixed order: follow the device, light, dark. Two
+     states would lose "follow the device" for good after the first press,
+     which is what this button used to do: the OS listener below only acts
+     while the preference is "system", and nothing could set it back. */
+  var THEME_NEXT = { system: "light", light: "dark", dark: "system" };
+  var THEME_LABEL = { system: "following this device", light: "light", dark: "dark" };
   function cycleTheme() {
-    var cur = document.documentElement.getAttribute("data-theme");
-    var next = cur === "dark" ? "light" : "dark";
+    var cur = PMP.Store.state.settings.theme || "system";
+    var next = THEME_NEXT[cur] || "system";
     PMP.Store.commit(["settings"], function (s) { s.settings.theme = next; });
     applyTheme(next);
-    PMP.UI.announce(next === "dark" ? "Dark theme" : "Light theme");
+    PMP.UI.announce(next === "system" ? "Theme follows this device" : next === "dark" ? "Dark theme" : "Light theme");
   }
 
   function renderStatus(state) {
@@ -37148,7 +37461,7 @@ PMP.GeminiChat = (function () {
      this alone. Kept as the description of what the section owes. */
   register("dashboard", {
     title: "Progress",
-    render: stub("Dashboard", "Your readiness score, domain mastery, streak and next best action will open here.", [
+    render: stub("Progress", "Your readiness score, domain mastery, streak and next best action will open here.", [
       ["\u00A73.1", "Readiness score 0\u2013100 with the five-component breakdown on click"],
       ["\u00A73.1", "Domain mastery bars at the 33 / 41 / 26 weighting, and the predictive versus adaptive split"],
       ["\u00A73.1", "Streak, questions answered today against your daily target, minutes studied"],
@@ -37206,8 +37519,8 @@ PMP.GeminiChat = (function () {
 
   /* §10.09 has landed and registered "planner" already. */
   register("planner", {
-    title: "Study planner",
-    render: stub("Study planner", "A week-by-week plan built from your exam date, your available hours and a diagnostic.", [
+    title: "Study plan",
+    render: stub("Study plan", "A week-by-week plan built from your exam date, your available hours and a diagnostic.", [
       ["\u00A73.10", "Inputs: exam date, weekday and weekend hours, 25-question diagnostic baseline"],
       ["\u00A73.10", "Daily task chips that tick off as the underlying activity is completed"],
       ["\u00A73.10", "Recalculates when you fall behind rather than accumulating silent debt"]
@@ -37218,7 +37531,7 @@ PMP.GeminiChat = (function () {
   register("journal", {
     title: "Mistake journal",
     render: stub("Mistake journal", "Every wrong answer, grouped by why you got it wrong.", [
-      ["\u00A73.11", "Causes: knowledge gap, misread question, rushed, mindset, two plausible answers"],
+      ["\u00A73.11", "Causes: knowledge gap, misread question, wrong mindset, two plausible answers, calculation slip, rushed"],
       ["\u00A73.11", "Root-cause distribution chart, which is usually more actionable than the score"]
     ])
   });
@@ -37242,7 +37555,7 @@ PMP.GeminiChat = (function () {
       host.appendChild(el("div", { class: "view-hd" }, [
         el("span", { class: "eyebrow", text: "About this build" }),
         el("h2", { text: "Settings and About" }),
-        el("p", { text: "Full settings arrive with Phase 1. The notices below are final." })
+        el("p", { text: "The settings module is missing from this copy of the file, so only the outline and the notices are shown." })
       ]));
       host.appendChild(el("div", { class: "card" }, [
         el("span", { class: "eyebrow", text: "Exam content outline" }),
