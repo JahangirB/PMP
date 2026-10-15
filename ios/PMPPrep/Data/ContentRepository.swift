@@ -25,7 +25,9 @@ final class ContentRepository {
 
     func load() throws {
         packs = []; byId = [:]
-        extras = try ContentParser.extras(try resource("content/extras.json"))
+        let x: Extras = try ContentParser.extras(try resource("content/extras.json"))
+        extras = x
+        Rules.current = x.rules
         add(try ContentParser.parsePack(try resource("content/core.json"), id: "core", fallbackName: "Core pack (built in)", file: nil, builtin: true))
         let packDir = bundle.resourceURL?.appendingPathComponent("packs")
         let files = ((packDir.flatMap { try? FileManager.default.contentsOfDirectory(atPath: $0.path) }) ?? [])

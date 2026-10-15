@@ -5,7 +5,7 @@ import UIKit
 
 enum Dest: String, CaseIterable {
     case DASHBOARD, PRACTICE, MOCK, SITUATIONAL, LEARN, FLASHCARDS, FORMULAS, REFERENCE, ANALYTICS, MISTAKES, PLANNER, DATA,
-         COACH, MENU, GUIDE, FITNESS, REPORTS, SESSION, SETTINGS, BOOK, SEARCH
+         COACH, MENU, GUIDE, FITNESS, REPORTS, SESSION, SETTINGS, BOOK, SEARCH, SYNC
     var title: String {
         switch self {
         case .DASHBOARD: "PMP Prep"; case .PRACTICE: "Practice"; case .MOCK: "Mock Exam"; case .SITUATIONAL: "Situational Trainer"
@@ -13,6 +13,7 @@ enum Dest: String, CaseIterable {
         case .ANALYTICS: "Analytics"; case .MISTAKES: "Mistake Journal"; case .PLANNER: "Study Planner"; case .DATA: "Banks & Backup"
         case .COACH: "Coach and notes"; case .MENU: "Menu"; case .GUIDE: "How it works"; case .FITNESS: "Exam fitness"
         case .REPORTS: "Weekly reports"; case .SESSION: "Session"; case .SETTINGS: "Study settings"; case .BOOK: "Ready to book?"; case .SEARCH: "Search"
+        case .SYNC: "Cloud sync"
         }
     }
 }
@@ -85,6 +86,9 @@ final class AppModel: ObservableObject {
         reading = ReadingPrefs(scale: defaults.object(forKey: "scale") as? Double ?? 1, roomy: defaults.bool(forKey: "roomy"), guide: defaults.bool(forKey: "guide"))
         geminiKey = KeyStore.read() ?? ""
         geminiModels = Self.savedLineup()
+        syncURL = SyncKeyStore.read(SyncKeyStore.URL_ACCOUNT) ?? ""
+        syncCode = SyncKeyStore.read(SyncKeyStore.CODE_ACCOUNT) ?? ""
+        lastSyncAt = Int64(UserDefaults.standard.double(forKey: "lastSyncAt"))
         store.$revision.receive(on: RunLoop.main).sink { [weak self] r in
             self?.revision = r
             self?.scheduleDerived()
@@ -101,6 +105,7 @@ final class AppModel: ObservableObject {
             ready = true
             scheduleDerived()
             checkModels()
+            autoSync()
         } catch {
             loadError = error.localizedDescription
         }
@@ -186,6 +191,7 @@ final class AppModel: ObservableObject {
             store.recordSitting(SittingEvent(key: s.key, kind: "practice", at: Time.now(), planned: s.questions.count, answered: s.checkedCount, finished: true))
         }
         objectWillChange.send()
+        autoSync()
     }
 
     func pool() -> [Question] { repo.pool() }
@@ -282,7 +288,7 @@ final class AppModel: ObservableObject {
         Attempt(qid: q.id, ecoTask: q.ecoTask, domain: q.domain, approach: q.approach, type: q.type, credit: credit, correct: correct,
                 ms: max(0, ms), at: Time.now(), source: source, firstTapMs: max(0, firstTapMs), idleMs: max(0, idleMs),
                 rightToWrong: rightToWrong, wrongToRight: wrongToRight, words: words ?? wordsOf(q), timed: timed,
-                confidence: confidence, eliminated: eliminated)
+                confidence: confidence, eliminated: eliminated, difficulty: q.difficulty)
     }
 
     /** Accuracy with and without crossing options out first; nil until both have 10. */
@@ -494,6 +500,7 @@ final class AppModel: ObservableObject {
         finishedMock = m
         mock = nil
         try? FileManager.default.removeItem(at: mockFile)
+        autoSync()
     }
 
     func abandonMock() {
@@ -602,6 +609,7 @@ final class AppModel: ObservableObject {
         var due = 0, new = 0, leech = 0
         for c in cards {
             let s = store.cards[c.id]
+            if let st = s, st.suspended { continue }
             if s == nil || s!.isNew { new += 1 } else if s!.due <= now { due += 1 }
             if let s, srs.isLeech(s) { leech += 1 }
         }
@@ -616,9 +624,9 @@ final class AppModel: ObservableObject {
     func startDeck(_ deck: String?) {
         let now = Time.now()
         let cards = allCards().filter { deck == nil || $0.deck == deck }
-        let due = cards.filter { c in store.cards[c.id].map { !$0.isNew && $0.due <= now } ?? false }.sorted { (store.cards[$0.id]?.due ?? 0) < (store.cards[$1.id]?.due ?? 0) }
+        let due = cards.filter { c in store.cards[c.id].map { $0.isDue(now) } ?? false }.sorted { (store.cards[$0.id]?.due ?? 0) < (store.cards[$1.id]?.due ?? 0) }
         let allowance = max(0, repo.extras.srs.newPerDay - newIntroducedToday())
-        let fresh = cards.filter { c in store.cards[c.id]?.isNew ?? true }.prefix(allowance)
+        let fresh = cards.filter { c in store.cards[c.id].map { $0.isNew && !$0.suspended } ?? true }.prefix(allowance)
         cardQueue = due + fresh
         cardIndex = 0; cardFlipped = false; newLeeches = []
     }
@@ -640,6 +648,7 @@ final class AppModel: ObservableObject {
         if g == .again { cardQueue = q + [card] }
         cardIndex += 1
         cardFlipped = false
+        if cardIndex >= (cardQueue?.count ?? 0) { autoSync() }
     }
 
     /* ── guided path ── */
@@ -738,7 +747,7 @@ final class AppModel: ObservableObject {
         case .CARDS:
             if r.review != nil { return }
             let now = Time.now()
-            let q = repo.extras.flashcards.filter { c in store.cards[c.id].map { !$0.isNew && $0.due <= now } ?? false }
+            let q = repo.extras.flashcards.filter { c in store.cards[c.id].map { $0.isDue(now) } ?? false }
                 .sorted { (store.cards[$0.id]?.due ?? 0) < (store.cards[$1.id]?.due ?? 0) }.prefix(15)
             cardQueue = Array(q); cardIndex = 0; cardFlipped = false; newLeeches = []
             if q.isEmpty { cardsDone(r) }
@@ -789,6 +798,7 @@ final class AppModel: ObservableObject {
         run = nil
         cardQueue = nil
         home()
+        autoSync()
     }
 
     /** Leaves the player; the run is kept so Continue resumes it. */
@@ -1050,6 +1060,183 @@ final class AppModel: ObservableObject {
         finishedMock = nil
     }
 
+    /* ── cloud sync through the person's own Google Apps Script (docs/progress-format.md §4) ── */
+
+    /** The script's /exec URL and the sync code, from the Keychain. Both empty: sync is off. */
+    @Published private(set) var syncURL: String
+    @Published private(set) var syncCode: String
+    /** When the last sync finished without an error (ms), or 0. */
+    @Published private(set) var lastSyncAt: Millis
+    @Published private(set) var syncBusy = false
+    /** Shown on the Cloud sync screen, never as a pop-up. */
+    @Published private(set) var syncError: String? = nil
+    /** A trigger arrived while a sync was running: run once more when it ends. */
+    private var syncAgain = false
+    private var syncBackgroundTask: UIBackgroundTaskIdentifier = .invalid
+
+    var syncEnabled: Bool { !syncURL.isEmpty && !syncCode.isEmpty }
+    private var deviceBlock: [String: Any] { ["app": "ios", "id": ProgressStore.deviceId] }
+
+    /** One line for the menu. */
+    var syncStatusLine: String {
+        if !syncEnabled { return "Off · keep this phone, the web app and Android in step" }
+        if syncBusy { return "Syncing…" }
+        if syncError != nil { return "The last sync failed · tap to see why" }
+        if lastSyncAt == 0 { return "Connected · not synced yet" }
+        return "Synced " + Self.relative(lastSyncAt)
+    }
+
+    static func relative(_ t: Millis) -> String {
+        if Time.now() - t < 60_000 { return "just now" }
+        let f = RelativeDateTimeFormatter()
+        f.unitsStyle = .full
+        return f.localizedString(for: Time.date(t), relativeTo: Date())
+    }
+
+    /** The code shown in the setup guide: made once and kept until a script is connected. */
+    func syncDraftCode() -> String {
+        if let c = SyncKeyStore.read(SyncKeyStore.DRAFT_ACCOUNT), !c.isEmpty { return c }
+        let c = CloudSync.newCode()
+        SyncKeyStore.write(SyncKeyStore.DRAFT_ACCOUNT, c)
+        return c
+    }
+
+    /** A fresh code for the guide, before anything is connected. */
+    func newSyncDraftCode() -> String {
+        let c = CloudSync.newCode()
+        SyncKeyStore.write(SyncKeyStore.DRAFT_ACCOUNT, c)
+        return c
+    }
+
+    /** The script as the guide shows it, with the code filled in; "" when the content carries no script. */
+    func syncScript(_ code: String) -> String {
+        let x: Extras = repo.extras
+        if x.syncScript.isEmpty { return "" }
+        return CloudSync.script(x.syncScript, code: code)
+    }
+
+    /** Test connection: pings the script with the code, and on success keeps both and syncs. */
+    func connectSync(url: String, code: String) {
+        let u = url.trimmingCharacters(in: .whitespacesAndNewlines)
+        let c = code.trimmingCharacters(in: .whitespacesAndNewlines)
+        if syncBusy { return }
+        guard let target = URL(string: u), target.scheme?.lowercased() == "https", target.host != nil else {
+            syncError = "Paste the Web app URL from the deployment. It starts with https://script.google.com/macros/s/ and ends in /exec."
+            return
+        }
+        if c.count < 8 {
+            syncError = "Enter the sync code from the script (SYNC_CODE)."
+            return
+        }
+        syncBusy = true
+        syncError = nil
+        let transport = HTTPSyncTransport(url: target)
+        Task { [weak self] in
+            do {
+                _ = try await CloudSync.ping(transport, code: c)
+                guard let self else { return }
+                SyncKeyStore.write(SyncKeyStore.URL_ACCOUNT, u)
+                SyncKeyStore.write(SyncKeyStore.CODE_ACCOUNT, c)
+                self.syncURL = u
+                self.syncCode = c
+                self.syncBusy = false
+                // A fresh start: whatever the cloud holds is united with this phone's progress.
+                SyncBase.delete(AppModel.docs)
+                self.runSync(manual: true)
+            } catch {
+                self?.syncBusy = false
+                self?.syncError = error.localizedDescription
+            }
+        }
+    }
+
+    /** Forgets the URL and code on this phone. Progress here and in the cloud copy is kept. */
+    func disconnectSync() {
+        SyncKeyStore.delete(SyncKeyStore.URL_ACCOUNT)
+        SyncKeyStore.delete(SyncKeyStore.CODE_ACCOUNT)
+        SyncBase.delete(Self.docs)
+        syncURL = ""
+        syncCode = ""
+        syncError = nil
+        lastSyncAt = 0
+        defaults.removeObject(forKey: "lastSyncAt")
+    }
+
+    /** The Sync now button. */
+    func syncNow() { runSync(manual: true) }
+
+    /** Opening, returning to the app, and the end of a session, practice set, mock or card session. */
+    func autoSync() { runSync(manual: false) }
+
+    /** Going to the background: asks iOS for a little time so the sync can finish. */
+    func syncOnBackground() {
+        guard ready, syncEnabled, mock == nil, syncBackgroundTask == .invalid else { return }
+        syncBackgroundTask = UIApplication.shared.beginBackgroundTask(withName: "pmp-sync") { [weak self] in
+            Task { @MainActor in self?.endSyncBackgroundTask() }
+        }
+        runSync(manual: false)
+        if !syncBusy { endSyncBackgroundTask() }
+    }
+
+    private func endSyncBackgroundTask() {
+        if syncBackgroundTask == .invalid { return }
+        UIApplication.shared.endBackgroundTask(syncBackgroundTask)
+        syncBackgroundTask = .invalid
+    }
+
+    private func runSync(manual: Bool) {
+        guard ready, syncEnabled else { return }
+        // Never during a mock: the sitting isn't in the progress file until it ends.
+        if mock != nil { return }
+        if syncBusy { syncAgain = true; return }
+        guard let target = URL(string: syncURL) else { return }
+        syncBusy = true
+        if manual { syncError = nil }
+        let code = syncCode
+        let local: [String: Any] = store.toJson()
+        let startRevision: Int = store.revision
+        let base: [String: Any]? = SyncBase.load(Self.docs)
+        let device: [String: Any] = deviceBlock
+        let transport = HTTPSyncTransport(url: target)
+        Task { [weak self] in
+            do {
+                let result: SyncResult = try await CloudSync.sync(transport, code: code, base: base, local: local, now: Time.now(), device: device)
+                self?.syncFinished(result, sent: local, startRevision: startRevision)
+            } catch {
+                self?.syncFailed(error)
+            }
+        }
+    }
+
+    private func syncFinished(_ r: SyncResult, sent: [String: Any], startRevision: Int) {
+        var doc: [String: Any] = r.doc
+        if store.revision != startRevision {
+            // Answers made while the sync was on its way: keep them on top of the merged copy. They go up next time.
+            doc = SyncMerge.merge(base: sent, local: store.toJson(), remote: r.doc, now: Time.now(), device: deviceBlock)
+        }
+        SyncBase.save(r.doc, Self.docs)
+        if SyncMerge.differs(doc, store.toJson()) { store.replace(with: doc) }
+        lastSyncAt = Time.now()
+        defaults.set(Double(lastSyncAt), forKey: "lastSyncAt")
+        syncError = nil
+        syncDone()
+    }
+
+    private func syncFailed(_ e: Error) {
+        syncError = e.localizedDescription
+        syncAgain = false
+        syncDone()
+    }
+
+    private func syncDone() {
+        syncBusy = false
+        if syncAgain {
+            syncAgain = false
+            runSync(manual: false)
+        }
+        if !syncBusy { endSyncBackgroundTask() }
+    }
+
     /* ── home-screen widget ── */
 
     /** Set when a widget tile or a notification opened the app; acted on once content has loaded. */
@@ -1176,6 +1363,7 @@ final class AppModel: ObservableObject {
         case "coach": navigate(.COACH)
         case "menu": navigate(.MENU)
         case "settings": navigate(.SETTINGS)
+        case "sync": navigate(.SYNC)
         default: break
         }
     }

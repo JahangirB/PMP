@@ -13,6 +13,8 @@ struct GuideScreen: View {
         let report = m.readiness.report(m.store, now)
         let states = PlanEngine.taskStates(x, m.store.attempts, now)
         let weakApproach = QuestionPicker.weakApproach(m.store.attempts)
+        let rules: Rules = x.rules
+        let bands: String = "Mock exams: Above Target from \(pct(rules.bandAbove)), Target from \(pct(rules.bandTarget)), Below Target from \(pct(rules.bandBelow)), Needs Improvement under \(pct(rules.bandBelow)). Your last three count for the score, newest most."
         ScreenScroll {
             VStack(alignment: .leading, spacing: 4) {
                 Text("How PMP Prep works").font(.nunito(24, .heavy))
@@ -27,7 +29,7 @@ struct GuideScreen: View {
                     "An honest readiness score out of 100, built from five kinds of evidence, with the next thing that would raise it most.",
                     "Weak spots found and worked on automatically, and checked again until they hold.",
                     "Reminders at the hours that actually get you studying, learned from your own habits.",
-                    "Everything works offline and stays on this phone. Only the Gemini chat, which you choose to use, goes online.",
+                    "Everything works offline and stays on this phone. Only the Gemini chat and cloud sync, which you choose to use, go online.",
                 ])
             }
             GuideSection(title: "How a study day runs") {
@@ -81,7 +83,7 @@ struct GuideScreen: View {
                     "Diagnostic: 25 questions taken cold (8 People, 10 Process, 7 Business). It sets which domain comes first until you have enough practice there.",
                     "Accuracy by domain: each domain is weighted as on the exam (" + Domain.allCases.map { "\($0.short) \(pct(x.domainWeights[$0] ?? 0))" }.joined(separator: ", ") + "), so a weak domain can't hide behind a strong one.",
                     "Checkpoints: 20 mixed questions per domain; \(pct(PlanEngine.PASS)) to pass.",
-                    "Mock exams: Above Target 80%+, Target 65–79%, Below Target 50–64%, Needs Improvement under 50%. Your last three count for the score, newest most.",
+                    bands,
                     "Flashcards: spaced repetition. A card comes back just before you'd forget it; one forgotten \(x.srs.leechThreshold) times is a leech, and its task's lesson comes back as a review.",
                     "Credit per question: single choice is all or nothing; multiple response loses a point for each wrong pick; matching and fill-in give credit for each part right.",
                 ])
@@ -110,9 +112,11 @@ struct GuideScreen: View {
             GuideSection(title: "Your data") {
                 GuideBullets(lines: [
                     "Progress, notes and reminder learning are stored only on this phone.",
-                    "Back it up or move it with Question banks and backup in the menu. The backup file works with the Android app too.",
+                    "Back it up or move it with Question banks and backup in the menu. The backup file works with the Android and web apps too.",
+                    "Cloud sync keeps this phone, the web app and the Android app in step through one file in your own Google Drive, using a small script you deploy in your Google account. Nothing goes to anyone else's server.",
                     "The Gemini chat sends your question and a summary of your progress to Google, only when you send a message, using your own key.",
                 ])
+                Button("Set up cloud sync") { m.navigate(.SYNC) }.textButton()
             }
             }
             Spacer().frame(height: 24)

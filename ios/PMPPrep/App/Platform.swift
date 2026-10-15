@@ -28,6 +28,38 @@ enum KeyStore {
     static func delete() { SecItemDelete(query as CFDictionary) }
 }
 
+/** The cloud sync URL and code, in the Keychain like the Gemini key: on this device only, never in a backup file. */
+enum SyncKeyStore {
+    static let URL_ACCOUNT = "url"
+    static let CODE_ACCOUNT = "code"
+    /** A code made for a script not connected yet, kept so leaving the screen doesn't change it. */
+    static let DRAFT_ACCOUNT = "draft"
+    private static let service = "com.jahangirb.pmpprep.sync"
+
+    private static func query(_ account: String) -> [String: Any] {
+        [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service, kSecAttrAccount as String: account]
+    }
+
+    static func read(_ account: String) -> String? {
+        var q = query(account)
+        q[kSecReturnData as String] = true
+        q[kSecMatchLimit as String] = kSecMatchLimitOne
+        var out: AnyObject?
+        guard SecItemCopyMatching(q as CFDictionary, &out) == errSecSuccess, let d = out as? Data else { return nil }
+        return String(data: d, encoding: .utf8)
+    }
+
+    static func write(_ account: String, _ value: String) {
+        delete(account)
+        var q = query(account)
+        q[kSecValueData as String] = Data(value.utf8)
+        q[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+        SecItemAdd(q as CFDictionary, nil)
+    }
+
+    static func delete(_ account: String) { SecItemDelete(query(account) as CFDictionary) }
+}
+
 /** Asks the home-screen widget to redraw from the latest saved figures. */
 enum WidgetBridge {
     static func reload() { WidgetCenter.shared.reloadAllTimelines() }

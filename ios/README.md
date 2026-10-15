@@ -15,8 +15,10 @@ iPhone. Install steps for users are in the [main README](../README.md#iphone-app
   App Group `group.com.jahangirb.pmpprep`.
 - `PMPPrepTests`: unit tests for the data layer.
 
-Progress backups use the same JSON format as Android, so a backup moves between
-the two apps.
+Progress backups use the shared `pmp-progress` version 3 format
+(`docs/progress-format.md`), so a backup moves between the web, Android and iPhone
+apps. Cloud sync (`Data/SyncMerge.swift`, `Data/CloudSync.swift`, the Cloud sync
+screen) merges the same documents through the user's own Google Apps Script.
 
 ## Building
 
