@@ -172,14 +172,6 @@ Sunday reminder opens them.
 - **Search everything**: lessons, glossary, abbreviations, formulas, your notes and question
   explanations.
 - Weekly reports also compare mistake causes tagged that week.
-- **Listen mode** (`listen/`): lessons, flashcard decks and explanations read aloud, offline, by
-  the Kokoro v0.19 English voice ("af_bella", int8) through the sherpa-onnx speech library, both
-  Apache-2.0. The build (`fetchVoice`, `prepareVoice` in `app/build.gradle.kts`) downloads them
-  from sherpa-onnx's GitHub releases, pinned to exact versions and SHA-256 hashes, and packs them
-  into the APK (pronunciation data trimmed to English); nothing large is committed, and the phone
-  downloads nothing. It adds about 150 MB to the APK, which is built for 64-bit ARM phones only.
-  One sentence is generated while the previous one plays; a foreground service keeps it reading
-  with the screen off, and it pauses for calls and other audio.
 
 ## How the path adapts
 

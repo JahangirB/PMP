@@ -98,8 +98,6 @@ import com.jahangirb.pmpprep.ui.screens.ReferenceScreen
 import com.jahangirb.pmpprep.ui.screens.SituationalScreen
 import com.jahangirb.pmpprep.ui.theme.PmpTheme
 import com.jahangirb.pmpprep.ui.components.LocalReading
-import com.jahangirb.pmpprep.ui.components.ListenBar
-import com.jahangirb.pmpprep.listen.Listen
 import com.jahangirb.pmpprep.ui.screens.BookScreen
 import com.jahangirb.pmpprep.ui.screens.SearchScreen
 import com.jahangirb.pmpprep.ui.screens.StudySettingsScreen
@@ -276,11 +274,9 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
             // there it would cover the options (each practice question has its own coach button).
             val answering = (vm.screen == Dest.PRACTICE && vm.practice?.let { !it.finished } == true) ||
                 (vm.screen == Dest.SESSION && vm.run?.let { r -> r.session.steps.getOrNull(r.step)?.kind in setOf(StepKind.PRACTICE, StepKind.MOCK) } == true)
-            val listening = Listen.status != Listen.Status.IDLE || Listen.error != null
-            if (vm.screen != Dest.COACH && !examRunning && !answering && !listening) {
+            if (vm.screen != Dest.COACH && !examRunning && !answering) {
                 CoachBubble(vm) { vm.coachTab = 0; vm.navigate(Dest.COACH) }
             }
-            if (!examRunning) ListenBar(Modifier.align(Alignment.BottomCenter))
         }
     }
 
