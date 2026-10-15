@@ -63,6 +63,13 @@ data class WidgetStats(
             return if (t < 0.5f) mix(RED, AMBER, t * 2) else mix(AMBER, GREEN, (t - 0.5f) * 2)
         }
 
+        /**
+         * A tile's background for [level]: the [heat] colour softened toward white in light mode,
+         * toward near-black in dark mode, so dark and light text respectively stay readable on it.
+         */
+        fun tint(level: Float, dark: Boolean): Long =
+            if (dark) mix(0xFF1F1F23L, heat(level), 0.42f) else mix(0xFFFFFFFFL, heat(level), 0.34f)
+
         private fun mix(a: Long, b: Long, t: Float): Long {
             fun ch(c: Long, shift: Int) = ((c shr shift) and 0xFF).toInt()
             var out = 0xFF000000L
