@@ -22,6 +22,51 @@ one APK, so adding a pack to `packs/` and pushing is all it takes to ship it.
 You can also add your own `.json` banks inside the app (**⋮ → Question Banks &
 Backup → Add question bank**), with no rebuild. See [`android/README.md`](android/README.md).
 
+## iPhone app
+
+[![Download IPA](https://img.shields.io/badge/Download-iPhone%20IPA-000000?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/JahangirB/PMP/releases/download/ios/PMP-Prep.ipa)
+[![iOS build](https://github.com/JahangirB/PMP/actions/workflows/ios.yml/badge.svg)](https://github.com/JahangirB/PMP/actions/workflows/ios.yml)
+
+> **Please read first.** The iPhone app was converted from the Android version
+> by AI and has **never been tested on a real iPhone**. It builds and passes its
+> automated tests on the iOS simulator, but some things may not work. If you hit
+> a problem, please reach me on LinkedIn: **[LINKEDIN_URL]**. Include your
+> iPhone model, iOS version and what you were doing.
+
+The app isn't on the App Store, so you install it yourself ("sideloading") with
+a free Apple ID. You need iOS 17 or later and a computer (Windows, Mac or
+Linux) for the first setup only.
+
+**Install with SideStore (recommended, refreshes on the phone):**
+
+1. Follow the SideStore install guide at <https://docs.sidestore.io> to put
+   SideStore on your iPhone. You sign in with your own Apple ID; a free one is
+   fine.
+2. On the iPhone turn on **Settings → Privacy & Security → Developer Mode** and
+   restart when asked.
+3. In SideStore open **Sources → +** and add
+   `https://github.com/JahangirB/PMP/releases/download/ios/source.json`.
+   PMP Prep then appears in SideStore and installs with one tap, and updates show
+   up there too.
+   Or download the **IPA** above, then in SideStore go to **My Apps → +** and pick
+   the file.
+4. If iOS says "Untrusted Developer", go to **Settings → General → VPN & Device
+   Management**, tap your Apple ID and choose **Trust**.
+
+**Other ways:** [AltStore](https://altstore.io) (add the same source URL) or
+[Sideloadly](https://sideloadly.io) (drag the IPA in from a computer) both work
+with a free Apple ID.
+
+**Limits of a free Apple ID:** the app must be refreshed every **7 days**.
+SideStore and AltStore do this for you; Sideloadly means reinstalling from the
+computer. Your progress stays in place. A free ID can have at most 3 sideloaded
+apps at a time. Back up your progress now and then from **⋮ → Question Banks &
+Backup**. The backup file works on both Android and iPhone.
+
+The IPA is built by [`.github/workflows/ios.yml`](.github/workflows/ios.yml) on
+a macOS runner whenever `ios/`, `packs/` or `index.html` changes on `main`. It
+uses the same question banks as the Android app. See [`ios/README.md`](ios/README.md).
+
 ## Web app
 
 Open `index.html` in a browser. It is the whole app in one file and works
