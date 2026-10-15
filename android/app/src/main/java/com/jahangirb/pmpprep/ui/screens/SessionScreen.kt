@@ -36,7 +36,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jahangirb.pmpprep.data.RootCause
 import com.jahangirb.pmpprep.data.StepKind
 import com.jahangirb.pmpprep.ui.Dest
 import com.jahangirb.pmpprep.ui.PmpViewModel
@@ -152,8 +151,8 @@ private fun ReflectStep(vm: PmpViewModel, r: PmpViewModel.PathRun) {
                     Spacer(Modifier.height(6.dp))
                     val tag = if (rev >= 0) vm.store.mistakeTags[q.id]?.cause else null
                     androidx.compose.foundation.layout.FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        RootCause.entries.forEach { c ->
-                            FilterChip(selected = tag == c, onClick = { vm.store.tagMistake(q.id, c, "") }, label = { Text(c.title, fontSize = 12.sp) })
+                        vm.repo.extras.rules.causeOrder.forEach { c ->
+                            FilterChip(selected = tag == c, onClick = { vm.store.tagMistake(q.id, c, "") }, label = { Text(vm.repo.extras.rules.cause(c).short, fontSize = 12.sp) })
                         }
                     }
                 }

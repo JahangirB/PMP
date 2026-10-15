@@ -112,10 +112,10 @@ fun GuideScreen(vm: PmpViewModel) {
                 Spacer(Modifier.height(6.dp))
                 val counts = states.groupingBy { it.mastery }.eachCount()
                 Ladder(Mastery.NOT_STARTED, "Not started", "no answers yet", counts)
-                Ladder(Mastery.LEARNING, "Learning", "fewer than ${PlanEngine.MASTERY_ANSWERS} answers", counts)
-                Ladder(Mastery.SHAKY, "Shaky", "under ${pct(PlanEngine.MASTERY_ACCURACY)} correct", counts)
-                Ladder(Mastery.MASTERED, "Mastered", "${pct(PlanEngine.MASTERY_ACCURACY)} or better", counts)
-                Ladder(Mastery.FADING, "Fading", "mastered, but untouched for ${PlanEngine.FADE_DAYS}+ days", counts)
+                Ladder(Mastery.LEARNING, "Learning", "fewer than ${x.rules.mastery.minAnswers} answers", counts)
+                Ladder(Mastery.SHAKY, "Shaky", "under ${pct(x.rules.mastery.accuracy)} correct", counts)
+                Ladder(Mastery.MASTERED, "Mastered", "${pct(x.rules.mastery.accuracy)} or better", counts)
+                Ladder(Mastery.FADING, "Fading", "mastered, but untouched for ${x.rules.mastery.fadeDays}+ days", counts)
                 Spacer(Modifier.height(6.dp))
                 Text("A mastered task that you answer slower than ${PlanEngine.SLOW_SEC.toInt()} seconds a question also gets a paced drill: the exam allows about ${x.exam.paceTargetSec}.",
                     fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -125,12 +125,12 @@ fun GuideScreen(vm: PmpViewModel) {
         item {
             Section("How the app works on weak spots") {
                 Steps(
-                    "Find" to "A task under ${pct(PlanEngine.MASTERY_ACCURACY)}, a session under 50%, a task fading, your weakest domain, untouched tasks, flashcards that keep slipping.",
+                    "Find" to "A task under ${pct(x.rules.mastery.accuracy)}, a session under 50%, a task fading, your weakest domain, untouched tasks, flashcards that keep slipping.",
                     "Rank" to "Exam weight × how much is missing. Fix-ups jump the queue; your weakest domain's work comes first.",
                     "Plan" to "A session under 50% gets a fix-up next (lesson, easier questions, reflect). A shaky task gets drills, a middling one a review two days later, a fading one a refresher.",
                     "Pick" to "Questions on that task: ones you haven't seen first, then ones you got wrong last time. If one approach (predictive, agile, hybrid) is clearly your weakest, it takes every other question.",
                     "Reflect" to "Tag why each miss happened. When most tagged misses on a task share a cause, its sessions change: the lesson first for knowledge gaps, scenarios for mindset, a reading tip for misread stems.",
-                    "Prove" to "Back to ${pct(PlanEngine.MASTERY_ACCURACY)} and drills stop. A domain checkpoint at ${pct(PlanEngine.PASS)} closes the domain, and it's re-checked if your answers there later fall under ${pct(PlanEngine.RECHECK_BELOW)}.",
+                    "Prove" to "Back to ${pct(x.rules.mastery.accuracy)} and drills stop. A domain checkpoint at ${pct(PlanEngine.PASS)} closes the domain, and it's re-checked if your answers there later fall under ${pct(PlanEngine.RECHECK_BELOW)}.",
                 )
                 if (weakApproach != null) {
                     Spacer(Modifier.height(6.dp))
@@ -170,7 +170,7 @@ fun GuideScreen(vm: PmpViewModel) {
                     "Diagnostic: 25 questions taken cold (8 People, 10 Process, 7 Business). It sets which domain comes first until you have enough practice there.",
                     "Accuracy by domain: each domain is weighted as on the exam (${Domain.entries.joinToString(", ") { "${it.short} ${pct(x.domainWeights[it] ?: 0.0)}" }}), so a weak domain can't hide behind a strong one.",
                     "Checkpoints: 20 mixed questions per domain; ${pct(PlanEngine.PASS)} to pass.",
-                    "Mock exams: Above Target 80%+, Target 65–79%, Below Target 50–64%, Needs Improvement under 50%. Your last three count for the score, newest most.",
+                    x.rules.mockBands.let { b -> "Mock exams: Above Target ${pct(b.above)}+, Target ${pct(b.target)} or more, Below Target ${pct(b.below)} or more, Needs Improvement under ${pct(b.below)}. Your last three count for the score, newest most." },
                     "Flashcards: spaced repetition. A card comes back just before you'd forget it; one forgotten ${x.srs.leechThreshold} times is a leech, and its task's lesson comes back as a review.",
                     "Credit per question: single choice is all or nothing; multiple response loses a point for each wrong pick; matching and fill-in give credit for each part right.",
                 )
@@ -207,10 +207,12 @@ fun GuideScreen(vm: PmpViewModel) {
         item {
             Section("Your data") {
                 Bullets(
-                    "Progress, notes and reminder learning are stored only on this phone.",
-                    "Back it up or move it with Question banks and backup in the menu.",
+                    "Progress, notes and reminder learning are stored on this phone.",
+                    "Back it up or move it with Question banks and backup in the menu. The backup file opens in the web app and the iPhone app too.",
+                    "Cloud sync (off until you set it up) keeps one copy of your progress and notes in your own Google Drive, through a small script you deploy in your Google account, and shares it with the web app and your other devices. Nothing goes to anyone else.",
                     "The Gemini chat sends your question and a summary of your progress to Google, only when you send a message, using your own key.",
                 )
+                TextButton(onClick = { vm.navigate(Dest.SYNC) }) { Text("Cloud sync") }
             }
         }
         item { Spacer(Modifier.height(24.dp)) }

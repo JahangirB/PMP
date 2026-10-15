@@ -16,8 +16,16 @@ data class CardState(
     val last: Long = 0L,
     /** When the card was first studied; drives the new-cards-per-day cap. */
     val first: Long = 0L,
+    /**
+     * Suspended in the web or iOS app: never due and never offered as new. Android has no
+     * suspend button; it keeps the flag so a sync doesn't undo it.
+     */
+    val suspended: Boolean = false,
 ) {
     val isNew: Boolean get() = last == 0L
+
+    /** Due for review: studied before, not suspended, and its day has come. */
+    fun isDue(now: Long): Boolean = !suspended && !isNew && due <= now
 }
 
 /** SM-2 exactly as the web app runs it (§10.05.1), with every number taken from its §01.4 settings. */
@@ -61,6 +69,7 @@ class Srs(private val c: SrsConfig) {
             due = startOfDay(now) + interval * DAY_MS,
             last = now,
             first = if (s.first == 0L) now else s.first,
+            suspended = s.suspended,
         )
     }
 

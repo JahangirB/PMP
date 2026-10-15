@@ -35,9 +35,15 @@ data class Attempt(
     val confidence: Int = 0,
     /** Options crossed out before checking. */
     val eliminated: Int = 0,
+    /** The question's difficulty, 1–5, when the app that recorded it kept it (df); 0 if not. */
+    val difficulty: Int = 0,
+    /** Hint rungs opened before answering (h, web only). */
+    val hints: Int = 0,
 ) {
     /** Right, but by your own account a guess: not evidence that you know it. */
     val luckyGuess: Boolean get() = correct && confidence == GUESS
+    /** Answered with a hint open (on the web): like a lucky guess, it stays out of accuracy, pace and mastery. */
+    val hinted: Boolean get() = hints > 0
     /** Wrong while sure: the most dangerous kind of mistake on exam day. */
     val sureWrong: Boolean get() = !correct && confidence == SURE
 
@@ -54,12 +60,29 @@ data class SittingEvent(val key: String, val kind: String, val at: Long, val pla
 /** A one-tap check-in. [kind] is "pre" (before a session), "post" (after a mock) or "weekly"; values 1–5. */
 data class CheckIn(val at: Long, val kind: String, val value: Int, val items: List<Int> = emptyList())
 
+/**
+ * Why a missed question went wrong, in the shared order (docs/progress-format.md §1). The words
+ * shown come from [Rules.causes]; these are the fallbacks, and the enum keeps the ids type-safe.
+ */
 enum class RootCause(val title: String, val description: String) {
     KNOWLEDGE_GAP("Knowledge gap", "Didn't know the process, term or formula"),
-    MISREAD_STEM("Misread the stem", "Missed a word like FIRST, NEXT, NOT or BEST"),
+    MISREAD_STEM("Misread the question", "Missed a word like FIRST, NEXT, NOT or BEST"),
     WRONG_MINDSET("Wrong mindset", "Escalated, avoided or acted before understanding"),
+    TWO_PLAUSIBLE("Two plausible answers", "Narrowed it to two and picked the weaker one"),
     CALCULATION("Calculation slip", "Arithmetic or an inverted ratio"),
-    RUSHED("Rushed", "Answered before reading every option"),
+    RUSHED("Rushed", "Answered before reading every option");
+
+    companion object {
+        /** A shared id, or one of the web's old ids. */
+        fun of(id: String?): RootCause? = entries.firstOrNull { it.name == id } ?: when (id) {
+            "knowledge" -> KNOWLEDGE_GAP
+            "misread" -> MISREAD_STEM
+            "rushed" -> RUSHED
+            "mindset" -> WRONG_MINDSET
+            "tossup" -> TWO_PLAUSIBLE
+            else -> null
+        }
+    }
 }
 
 data class MistakeTag(val cause: RootCause, val note: String, val at: Long)
@@ -108,10 +131,33 @@ data class ChatTurn(val role: String, val text: String, val at: Long)
  * Everything the person has done, in one JSON file in the app's private
  * storage. Every change bumps [revision] (which the UI observes) and is
  * written in the background.
+ *
+ * The file is the shared progress document (docs/progress-format.md §2), so a
+ * backup or a cloud sync copy moves between the web, Android and iOS apps.
+ * What Android doesn't understand (the web's own block, keys a newer app
+ * added) is kept as it came and written back unchanged.
  */
 class ProgressStore(private val dir: File) {
     private val file = File(dir, "progress.json")
     private val io = Executors.newSingleThreadExecutor()
+
+    /** When this phone's progress last changed (ms). The merge gives the later copy the win on a both-sides edit. */
+    var savedAt = 0L
+        private set
+
+    /**
+     * This install's id in the document's "device". Its own file, kept out of Android's cloud backup,
+     * so a phone restored from another's backup still gets an id of its own.
+     */
+    val deviceId: String by lazy {
+        val f = File(dir, DEVICE_FILE)
+        runCatching { f.readText().trim() }.getOrNull()?.takeIf { it.isNotEmpty() } ?: java.util.UUID.randomUUID().toString().also { id ->
+            runCatching { dir.mkdirs(); f.writeText(id) }
+        }
+    }
+
+    /** Top-level keys this app doesn't read (the web and native blocks, keys from newer apps), kept verbatim. */
+    private var passthrough = JSONObject()
 
     private val _revision = MutableStateFlow(0)
     val revision: StateFlow<Int> = _revision.asStateFlow()
@@ -292,15 +338,29 @@ class ProgressStore(private val dir: File) {
         changed()
     }
 
+    /** Replaces everything with a backup: this app's own, or the shared document from any of the apps. */
     @Synchronized
     fun restore(text: String) {
-        val o = JSONObject(text)
-        if (o.optString("type") != TYPE) throw IllegalArgumentException("This is not a PMP Prep progress backup.")
+        val o = try {
+            JSONObject(text.trim().removePrefix("\uFEFF"))
+        } catch (e: Exception) {
+            throw IllegalArgumentException("This file isn't a PMP Prep progress backup: it isn't valid JSON.")
+        }
+        checkReadable(o)
+        fromJson(o)
+        changed()
+    }
+
+    /** Takes the merged document from a cloud sync as this phone's progress. */
+    @Synchronized
+    fun applySynced(o: JSONObject) {
+        checkReadable(o)
         fromJson(o)
         changed()
     }
 
     private fun changed() {
+        savedAt = System.currentTimeMillis()
         _revision.value = _revision.value + 1
         save()
     }
@@ -321,8 +381,12 @@ class ProgressStore(private val dir: File) {
 
     @Synchronized
     fun toJson(): JSONObject = JSONObject().apply {
+        // Unknown keys first, so nothing they hold can shadow a slice this app writes.
+        passthrough.keys().forEach { k -> put(k, passthrough.get(k)) }
         put("type", TYPE)
-        put("version", 2)
+        put("version", VERSION)
+        put("savedAt", savedAt)
+        put("device", JSONObject().put("app", "android").put("id", deviceId))
         put("attempts", JSONArray().apply {
             attempts.forEach { a ->
                 put(JSONObject().apply {
@@ -336,6 +400,8 @@ class ProgressStore(private val dir: File) {
                     if (a.timed) put("tm", true)
                     if (a.confidence > 0) put("cf", a.confidence)
                     if (a.eliminated > 0) put("el", a.eliminated)
+                    if (a.difficulty > 0) put("df", a.difficulty)
+                    if (a.hints > 0) put("h", a.hints)
                 })
             }
         })
@@ -346,7 +412,8 @@ class ProgressStore(private val dir: File) {
         })
         put("cards", JSONObject().apply {
             cards.forEach { (k, s) ->
-                put(k, JSONArray().put(s.ease).put(s.interval).put(s.reps).put(s.lapses).put(s.due).put(s.last).put(s.first))
+                put(k, JSONArray().put(s.ease).put(s.interval).put(s.reps).put(s.lapses).put(s.due).put(s.last).put(s.first)
+                    .put(if (s.suspended) 1 else 0))
             }
         })
         put("scenarios", JSONArray().apply {
@@ -393,6 +460,8 @@ class ProgressStore(private val dir: File) {
     }
 
     private fun fromJson(o: JSONObject) {
+        passthrough = JSONObject().apply { o.keys().forEach { k -> if (k !in KNOWN) put(k, o.get(k)) } }
+        savedAt = o.optLong("savedAt", 0L)
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear()
         diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
@@ -450,7 +519,8 @@ class ProgressStore(private val dir: File) {
                     type = QType.of(a.optString("ty")) ?: QType.SINGLE, credit = a.optDouble("cr", 0.0),
                     correct = a.optBoolean("ok"), ms = a.optLong("ms"), at = a.optLong("at"), source = a.optString("src"),
                     firstTapMs = a.optLong("ft"), idleMs = a.optLong("idle"), rightToWrong = a.optInt("rw"), wrongToRight = a.optInt("wr"),
-                    words = a.optInt("w"), timed = a.optBoolean("tm"), confidence = a.optInt("cf"), eliminated = a.optInt("el"),
+                    words = a.optInt("w"), timed = a.optBoolean("tm"), confidence = confidenceOf(a.opt("cf")), eliminated = a.optInt("el"),
+                    difficulty = a.optInt("df"), hints = a.optInt("h"),
                 )
                 attempts += at
                 last[at.qid] = at
@@ -461,14 +531,16 @@ class ProgressStore(private val dir: File) {
         o.optJSONObject("mistakes")?.let { m ->
             m.keys().forEach { k ->
                 val v = m.optJSONObject(k) ?: return@forEach
-                val cause = runCatching { RootCause.valueOf(v.optString("c")) }.getOrDefault(RootCause.KNOWLEDGE_GAP)
+                val cause = RootCause.of(v.optString("c")) ?: RootCause.KNOWLEDGE_GAP
                 mistakeTags[k] = MistakeTag(cause, v.optString("n"), v.optLong("at"))
             }
         }
         o.optJSONObject("cards")?.let { c ->
             c.keys().forEach { k ->
                 val a = c.optJSONArray(k) ?: return@forEach
-                cards[k] = CardState(a.optDouble(0, 2.5), a.optInt(1), a.optInt(2), a.optInt(3), a.optLong(4), a.optLong(5), a.optLong(6))
+                // Seven numbers from older Android backups; the eighth, suspended, from the shared format.
+                cards[k] = CardState(a.optDouble(0, 2.5), a.optInt(1), a.optInt(2), a.optInt(3), a.optLong(4), a.optLong(5), a.optLong(6),
+                    suspended = a.optInt(7) != 0)
             }
         }
         o.optJSONArray("scenarios")?.let { arr ->
@@ -501,8 +573,47 @@ class ProgressStore(private val dir: File) {
     }
 
     companion object {
-        const val TYPE = "pmp-android-progress"
+        /** The shared document every app writes (docs/progress-format.md §2). */
+        const val TYPE = "pmp-progress"
+        const val VERSION = 3
+        /** What this app wrote before the shared format; still read. */
+        const val LEGACY_TYPE = "pmp-android-progress"
+        const val DEVICE_FILE = "device-id"
         const val MY_DECK = "mine"
+
+        /** Every top-level key this app reads and writes itself. The rest pass through untouched. */
+        val KNOWN = setOf(
+            "type", "version", "savedAt", "device", "attempts", "flags", "notes", "mistakes", "cards", "scenarios", "mocks",
+            "lessons", "plan", "sessions", "notepad", "diagnostics", "chat", "snoozed", "sittings", "checkins", "weekly", "mycards",
+        )
+
+        /**
+         * Throws, with a message to show, unless [o] is progress this app can read: the shared
+         * version 3 document (from any of the apps) or Android's own version 2.
+         */
+        fun checkReadable(o: JSONObject) {
+            when (val type = o.optString("type")) {
+                LEGACY_TYPE -> return
+                TYPE -> {
+                    val v = o.optInt("version", 0)
+                    if (v == VERSION) return
+                    if (v > VERSION) throw IllegalArgumentException("This backup was made by a newer version of PMP Prep. Update the app, then restore it.")
+                    throw IllegalArgumentException("This is a backup from an older version of the web app. Open it in the web app, " +
+                        "save a new backup there, and restore that one.")
+                }
+                "" -> throw IllegalArgumentException("This isn't a PMP Prep progress backup.")
+                "pmp-pack" -> throw IllegalArgumentException("This is a question pack, not a progress backup. Add it under Question banks.")
+                else -> throw IllegalArgumentException("This isn't a PMP Prep progress backup (its type is \"$type\").")
+            }
+        }
+
+        /** Confidence is 3 / 2 / 1; the web's old words map to it. */
+        private fun confidenceOf(v: Any?): Int = when (v) {
+            is Number -> v.toInt()
+            "sure" -> Attempt.SURE
+            "unsure", "Not sure" -> Attempt.THINK
+            else -> 0
+        }
         private const val MAX_ATTEMPTS = 20000
         private const val MAX_CHAT = 60
     }

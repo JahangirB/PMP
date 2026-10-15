@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.Approach
 import com.jahangirb.pmpprep.data.Domain
+import com.jahangirb.pmpprep.data.MockBands
 import com.jahangirb.pmpprep.data.QType
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.PmpCard
@@ -89,7 +90,7 @@ fun AnalyticsScreen(vm: PmpViewModel) {
                 PmpCard {
                     SectionLabel("Mock exam trend")
                     Spacer(Modifier.height(8.dp))
-                    MockTrend(vm.store.mocks.sortedBy { it.at }.map { it.pct })
+                    MockTrend(vm.store.mocks.sortedBy { it.at }.map { it.pct }, vm.repo.extras.rules.mockBands)
                 }
             }
         }
@@ -153,13 +154,13 @@ fun AnalyticsScreen(vm: PmpViewModel) {
 }
 
 @Composable
-private fun MockTrend(points: List<Double>) {
+private fun MockTrend(points: List<Double>, bands: MockBands) {
     val line = MaterialTheme.colorScheme.primary
     val grid = MaterialTheme.colorScheme.outline
     Canvas(Modifier.fillMaxWidth().height(140.dp)) {
         val w = size.width; val h = size.height
-        // 50 %, 65 % and 80 % guides.
-        listOf(0.5f, 0.65f, 0.8f).forEach { g ->
+        // Guides at the band cuts: Below Target, Target, Above Target.
+        listOf(bands.below.toFloat(), bands.target.toFloat(), bands.above.toFloat()).forEach { g ->
             val y = h - g * h
             drawLine(grid, Offset(0f, y), Offset(w, y), strokeWidth = 1f, pathEffect = PathEffect.dashPathEffect(floatArrayOf(8f, 8f)))
         }
@@ -172,6 +173,6 @@ private fun MockTrend(points: List<Double>) {
             prev = pt
         }
     }
-    Text("Dashed lines at 50%, 65% and 80%.", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    Text("Dashed lines at ${pct(bands.below)}, ${pct(bands.target)} and ${pct(bands.above)}.", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
     Spacer(Modifier.size(1.dp))
 }

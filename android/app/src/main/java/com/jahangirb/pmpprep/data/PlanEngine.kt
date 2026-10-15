@@ -89,11 +89,8 @@ class PlanInput(
 
 object PlanEngine {
     const val DAY = Srs.DAY_MS
-    const val MASTERY_ANSWERS = 10
-    const val MASTERY_ACCURACY = 0.75
-    const val FADE_DAYS = 14
+    /* The mastery bar and the re-entry gap are shared rules: see Extras.rules (MasteryRule, Rules.reentryDays). */
     const val PASS = 0.70
-    const val REENTRY_DAYS = 5
     const val TAPER_DAYS = 7
     /** A mastered task answered slower than this (median seconds) gets a paced drill. On the day it's about 80. */
     const val SLOW_SEC = 110.0
@@ -101,7 +98,6 @@ object PlanEngine {
     const val RECHECK_BELOW = 0.65
     /** Tagged misses on a task before its most common cause changes the task's sessions. */
     const val CAUSE_MIN = 2
-    private const val RECENT = 15
 
     fun startOfDay(t: Long) = Srs.startOfDay(t)
 
@@ -113,18 +109,19 @@ object PlanEngine {
     private fun pct(v: Double) = "${(v * 100).roundToInt()}%"
 
     fun taskStates(x: Extras, attempts: List<Attempt>, now: Long): List<TaskState> {
+        val rule = x.rules.mastery
         val byTask = attempts.filter { it.source != Readiness.SOURCE_LESSON }.groupBy { it.ecoTask }
         return x.tasks.map { t ->
-            // A right answer you called a guess isn't evidence you know it.
-            val list = byTask[t.id].orEmpty().filter { !it.luckyGuess }.sortedBy { it.at }
-            val recent = list.takeLast(RECENT)
+            // A right answer you called a guess, or got with a hint, isn't evidence you know it.
+            val list = byTask[t.id].orEmpty().filter { !it.luckyGuess && !it.hinted }.sortedBy { it.at }
+            val recent = list.takeLast(rule.window)
             val acc = if (recent.isEmpty()) 0.0 else recent.sumOf { it.credit } / recent.size
             val last = list.lastOrNull()?.at ?: 0L
             val m = when {
                 list.isEmpty() -> Mastery.NOT_STARTED
-                list.size < MASTERY_ANSWERS -> Mastery.LEARNING
-                acc < MASTERY_ACCURACY -> Mastery.SHAKY
-                now - last > FADE_DAYS * DAY -> Mastery.FADING
+                list.size < rule.minAnswers -> Mastery.LEARNING
+                acc < rule.accuracy -> Mastery.SHAKY
+                now - last > rule.fadeDays * DAY -> Mastery.FADING
                 else -> Mastery.MASTERED
             }
             val secs = recent.filter { it.ms > 500 }.map { it.ms / 1000.0 }.sorted()
@@ -160,7 +157,7 @@ object PlanEngine {
         /* ── 1. coming back after a gap ── */
         val lastActivity = listOfNotNull(inp.attempts.maxOfOrNull { it.at }, inp.results.maxOfOrNull { it.at }, inp.mocks.maxOfOrNull { it.at }).maxOrNull()
         val gapDays = if (lastActivity == null) 0 else ((today - startOfDay(lastActivity)) / DAY).toInt()
-        if (gapDays >= REENTRY_DAYS) {
+        if (gapDays >= x.rules.reentryDays) {
             items += Session("reentry:${startOfDay(lastActivity!!)}", SessionKind.REENTRY, "Welcome back: warm-up",
                 "Your last study was $gapDays days ago. Due cards and 10 questions on what you learned last, before anything new.",
                 25, listOf(Step(StepKind.CARDS), Step(StepKind.PRACTICE, 10), Step(StepKind.DEBRIEF)), priority = 1000.0)
@@ -187,6 +184,7 @@ object PlanEngine {
                     minutes = base.minutes + 8,
                     why = base.why + " Most misses you tagged on $label were mindset, so three situational scenarios are added.")
                 RootCause.MISREAD_STEM -> base.copy(why = base.why + " Most misses here were misread stems: read the last sentence first and look for FIRST, NEXT, NOT, BEST.")
+                RootCause.TWO_PLAUSIBLE -> base.copy(why = base.why + " Most misses here came down to two plausible answers: before choosing, name what makes one better (sooner, more collaborative, within your authority).")
                 RootCause.RUSHED -> base.copy(why = base.why + " Most misses here were rushed: read every option before choosing; the pace bar shows the time you have.")
                 RootCause.CALCULATION -> base.copy(why = base.why + " Most misses here were calculation slips: write the formula before the numbers. The Formula lab has the sheet.")
             }
@@ -227,7 +225,7 @@ object PlanEngine {
                     val drills = if (s.mastery == Mastery.SHAKY && s.recentAccuracy < 0.5) 2 else 1
                     repeat(drills) { i ->
                         items += shaped(Session("drill:${t.id}:$i", SessionKind.DRILL, "Drill: ${t.label}",
-                            if (s.answers == 0) "No answers on ${t.label} yet." else "${t.label} is at ${pct(s.recentAccuracy)} over your last ${min(s.answers, RECENT)} answers; the bar is ${pct(MASTERY_ACCURACY)}.",
+                            if (s.answers == 0) "No answers on ${t.label} yet." else "${t.label} is at ${pct(s.recentAccuracy)} over your last ${min(s.answers, x.rules.mastery.window)} answers; the bar is ${pct(x.rules.mastery.accuracy)}.",
                             25, listOf(Step(StepKind.PRACTICE, 15), Step(StepKind.REFLECT), Step(StepKind.DEBRIEF)),
                             t.id, t.domain, priority = pri - i, notBefore = max(tomorrowIfWorked, if (i > 0) nextDay(nextDay(today)) else 0L)), if (i == 0) lesson else null)
                     }

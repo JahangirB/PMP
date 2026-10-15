@@ -276,6 +276,41 @@ object ContentParser {
                     mindset = l.str("mindset"),
                 )
             },
+            rules = rules(o.optJSONObject("rules")),
+            syncScript = o.str("syncScript"),
+        )
+    }
+
+    /** PMP.RULES (docs/progress-format.md §1). Anything missing keeps the documented default. */
+    fun rules(r: JSONObject?): Rules {
+        val d = Rules()
+        if (r == null) return d
+        val mb = r.optJSONObject("mockBands")
+        val sc = r.optJSONObject("scenarioCredit")
+        val m = r.optJSONObject("mastery")
+        val causes = r.optJSONArray("causes").objects().mapNotNull { c ->
+            val id = c.str("id")
+            if (id.isEmpty()) return@mapNotNull null
+            val fallback = d.causes.firstOrNull { it.id == id }
+            val short = c.str("short").ifEmpty { fallback?.short ?: id }
+            CauseText(id, short, c.str("label").ifEmpty { fallback?.label ?: short }, c.str("hint").ifEmpty { fallback?.hint.orEmpty() })
+        }
+        val confidence = r.optJSONArray("confidence").objects().mapNotNull { c ->
+            val v = c.optInt("v")
+            if (v <= 0) null else ConfidenceLevel(v, c.str("id"), c.str("label"))
+        }
+        return Rules(
+            mockBands = if (mb == null) d.mockBands else MockBands(
+                mb.optDouble("above", d.mockBands.above), mb.optDouble("target", d.mockBands.target), mb.optDouble("below", d.mockBands.below),
+            ),
+            scenarioCredit = Rank.entries.associateWith { rank -> sc?.optDouble(rank.id, d.credit(rank))?.takeIf { !it.isNaN() } ?: d.credit(rank) },
+            mastery = if (m == null) d.mastery else MasteryRule(
+                m.optInt("minAnswers", d.mastery.minAnswers), m.optInt("window", d.mastery.window),
+                m.optDouble("accuracy", d.mastery.accuracy), m.optInt("fadeDays", d.mastery.fadeDays),
+            ),
+            causes = causes.ifEmpty { d.causes },
+            reentryDays = r.optInt("reentryDays", d.reentryDays),
+            confidence = confidence.ifEmpty { d.confidence },
         )
     }
 

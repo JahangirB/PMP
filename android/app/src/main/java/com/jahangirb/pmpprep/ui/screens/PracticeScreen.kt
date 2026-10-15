@@ -295,8 +295,8 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
                     Column(Modifier.weight(3f)) {
                         Text("How sure are you? Tap to check.", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                            listOf(com.jahangirb.pmpprep.data.Attempt.SURE to "Sure", com.jahangirb.pmpprep.data.Attempt.THINK to "Think so",
-                                com.jahangirb.pmpprep.data.Attempt.GUESS to "Guess").forEach { (c, label) ->
+                            // Sure / Think so / Guess, from the shared rules (3 / 2 / 1).
+                            vm.repo.extras.rules.confidence.map { it.v to it.label }.forEach { (c, label) ->
                                 Button(onClick = { vm.check(s, c) }, modifier = Modifier.weight(1f),
                                     contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 4.dp, vertical = 8.dp)) {
                                     Text(label, fontWeight = FontWeight.Bold, fontSize = 13.sp, maxLines = 1)

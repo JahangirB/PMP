@@ -23,7 +23,7 @@ object QuestionReview {
         var due = dueAfter(h[miss].at, 0)
         for (a in h.drop(miss + 1)) {
             // Right the same day proves little; only an answer on or after the due day moves it on.
-            if (a.correct && !a.luckyGuess && Srs.startOfDay(a.at) >= due) {
+            if (a.correct && !a.luckyGuess && !a.hinted && Srs.startOfDay(a.at) >= due) {
                 step++
                 if (step >= STEP_DAYS.size) return null
                 due = dueAfter(a.at, step)

@@ -56,7 +56,7 @@ and `unsure`/"Not sure"→`2`.
   "mocks":      [ { "at": ms, "title": "Full exam", "n": 180, "right": 120, "usedMs": 0,
                     "domains": { "people": [right, n] } } ],
   "lessons":    [ "lessonId done", ... ],
-  "plan":       { "examDate": ms|0, "hours": 10, "days": [1..7], "onboarded": true, "rest": true },
+  "plan":       { "examDate": ms|0, "hours": 10, "days": [1..7] /* Sunday=1 … Saturday=7 */, "onboarded": true, "rest": true },
   "sessions":   [ { "k": "key", "kind": "BUILD", "t": "task", "d": "domain", "s": 0.8, "m": 30, "at": ms } ],
   "notepad":    "light markup: **bold** *italic* __underline__ ~~strike~~ ==highlight== , - bullets, 1. numbers",
   "diagnostics":[ { "at": ms, "n": 25, "right": 15, "domains": { "people": [r, n] } } ],
