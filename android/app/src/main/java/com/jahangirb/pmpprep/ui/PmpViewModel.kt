@@ -803,12 +803,14 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             Reminders.CARDS -> { navigate(Dest.FLASHCARDS); startDeck(null) }
             PmpWidget.FITNESS -> navigate(Dest.FITNESS)
             PmpWidget.REPORTS -> navigate(Dest.REPORTS)
+            PmpWidget.BOOK -> navigate(Dest.BOOK)
         }
     }
 
     private suspend fun publishWidget() {
         val now = System.currentTimeMillis()
         val lessons = repo.extras.lessons
+        val ready = readyForWidget(now)
         PmpWidget.publish(getApplication(), WidgetStats(
             examDate = store.plan.examDate,
             day = PlanEngine.startOfDay(now),
@@ -818,7 +820,23 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             lessonsDone = lessons.count { it.id in store.lessonsDone },
             lessonsTotal = lessons.size,
             fitness = fitness(now).score ?: -1,
+            readyBy = ready.second,
+            readyState = ready.first,
         ))
+    }
+
+    /** The widget's ready-by tile: now, a projected date, stalled, or unknown. */
+    private fun readyForWidget(now: Long): Pair<Int, Long> {
+        val b = booking(now)
+        val p = b.projection
+        return when {
+            b.criteria.take(2).all { it.met } -> WidgetStats.READY_NOW to now
+            p == null -> WidgetStats.READY_UNKNOWN to 0L
+            p.stalled.isNotEmpty() -> WidgetStats.READY_STALLED to 0L
+            p.latest != null -> WidgetStats.READY_PROJECTED to p.latest
+            p.earliest != null -> WidgetStats.READY_PROJECTED to p.earliest
+            else -> WidgetStats.READY_UNKNOWN to 0L
+        }
     }
 
     /* ── smart reminders ─────────────────────────────────────────────────── */
