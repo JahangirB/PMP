@@ -100,7 +100,7 @@ struct AnalyticsScreen: View {
 
     private func paceCard(_ atts: [Attempt]) -> some View {
         let (median, n) = m.readiness.medianPace(atts)
-        let x = m.repo.extras
+        let x: Extras = m.repo.extras
         let band = x.readiness.paceBand
         let color: Color = median == nil ? Palette.onSurfaceVariant : (median! < band[0] ? Palette.warning : (median! <= band[1] ? Palette.success : Palette.error))
         let byDomain = m.readiness.group(atts) { $0.domain.id }

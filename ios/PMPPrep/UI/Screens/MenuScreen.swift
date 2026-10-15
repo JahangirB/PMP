@@ -17,7 +17,7 @@ struct MenuScreen: View {
     @EnvironmentObject private var m: AppModel
 
     private var groups: [(String, [MenuEntry])] {
-        let x = m.repo.extras
+        let x: Extras = m.repo.extras
         let missed = m.store.last.values.filter { !$0.correct }.count
         let flagged = m.store.flags.count
         let myCards = m.store.myCards.count

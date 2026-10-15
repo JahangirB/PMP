@@ -98,7 +98,8 @@ private func runSearch(_ m: AppModel, _ query: String) -> [SearchHit] {
     let x: Extras = m.repo.extras
     var out: [SearchHit] = []
     for l in x.lessons {
-        let body = l.sections.map { $0.heading + " " + $0.body }.joined(separator: " ") + " " + l.recap.joined(separator: " ") + " " + l.traps.joined(separator: " ")
+        let sectionText: String = l.sections.map { (sec) -> String in sec.heading + " " + sec.body }.joined(separator: " ")
+        let body: String = [sectionText, l.recap.joined(separator: " "), l.traps.joined(separator: " ")].joined(separator: " ")
         if matches(l.title, body) {
             let id = l.id
             out.append(SearchHit(kind: "Lesson", title: l.title, snippet: snip(matches(l.title) ? l.objectives.joined(separator: " ") : body), detail: nil) {
