@@ -99,7 +99,7 @@ struct DataScreen: View {
     }
 
     private func auditCard(_ pool: [Question]) -> some View {
-        let x = m.repo.extras
+        let x: Extras = m.repo.extras
         let thin = x.tasks.filter { t in pool.filter { $0.ecoTask == t.id }.count < 10 }
         return PmpCard {
             Text("Enabled pool against the published domain weights").font(.nunito(13, .semibold))

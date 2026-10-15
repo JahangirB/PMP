@@ -9,7 +9,7 @@ struct GuideScreen: View {
 
     var body: some View {
         let now = Time.now()
-        let x = m.repo.extras
+        let x: Extras = m.repo.extras
         let report = m.readiness.report(m.store, now)
         let states = PlanEngine.taskStates(x, m.store.attempts, now)
         let weakApproach = QuestionPicker.weakApproach(m.store.attempts)
