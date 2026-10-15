@@ -23,7 +23,11 @@ struct PMPPrepApp: App {
         }
         .onChange(of: phase) { _, p in
             model.appVisible = p == .active
-            if p == .active { model.openPending() }
+            if p == .active {
+                model.openPending()
+                model.autoSync()
+            }
+            if p == .background { model.syncOnBackground() }
         }
     }
 }

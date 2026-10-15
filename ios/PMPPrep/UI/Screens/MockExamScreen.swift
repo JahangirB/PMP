@@ -19,10 +19,13 @@ struct MockExamScreen: View {
 
 /** A rough guide only: PMI reports bands per domain but does not publish the cut scores behind them. */
 private func band(_ p: Double) -> (String, Color) {
-    if p >= 0.80 { return ("Above Target", Palette.success) }
-    if p >= 0.65 { return ("Target", Palette.info) }
-    if p >= 0.50 { return ("Below Target", Palette.warning) }
-    return ("Needs Improvement", Palette.error)
+    let b: MockBand = Rules.current.band(p)
+    switch b {
+    case .above: return (b.title, Palette.success)
+    case .target: return (b.title, Palette.info)
+    case .below: return (b.title, Palette.warning)
+    case .needs: return (b.title, Palette.error)
+    }
 }
 
 /** The sitting on screen. The screen stays awake while it is, so it doesn't lock mid-question. */

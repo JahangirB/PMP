@@ -234,7 +234,50 @@ enum ContentParser {
             glossary: o.objects("glossary").map { GlossaryTerm(term: $0.str("t"), group: $0.str("g"), definition: $0.str("d")) },
             abbreviations: o.objects("abbreviations").map { Abbreviation(abbr: $0.str("abbr"), full: $0.str("full"), group: $0.str("group"), note: $0.str("note")) },
             modules: modules,
-            lessons: lessons)
+            lessons: lessons,
+            rules: rules(o.obj("rules")),
+            syncScript: o.str("syncScript"))
+    }
+
+    /** PMP.RULES (docs/progress-format.md §1). Anything missing keeps its documented default. */
+    static func rules(_ j: JObj?) -> Rules {
+        var r = Rules()
+        guard let j else { return r }
+        if let b = j.obj("mockBands") {
+            r.bandAbove = b.optDouble("above", r.bandAbove)
+            r.bandTarget = b.optDouble("target", r.bandTarget)
+            r.bandBelow = b.optDouble("below", r.bandBelow)
+        }
+        if let c = j.obj("scenarioCredit") {
+            r.creditBest = c.optDouble("best", r.creditBest)
+            r.creditAcceptable = c.optDouble("acceptable", r.creditAcceptable)
+            r.creditPremature = c.optDouble("premature", r.creditPremature)
+            r.creditWrong = c.optDouble("wrong", r.creditWrong)
+        }
+        if let m = j.obj("mastery") {
+            r.masteryMinAnswers = m.optInt("minAnswers", r.masteryMinAnswers)
+            r.masteryWindow = m.optInt("window", r.masteryWindow)
+            r.masteryAccuracy = m.optDouble("accuracy", r.masteryAccuracy)
+            r.masteryFadeDays = m.optInt("fadeDays", r.masteryFadeDays)
+        }
+        let causes: [CauseRule] = j.objects("causes").compactMap { c -> CauseRule? in
+            let id = c.str("id")
+            if id.isEmpty { return nil }
+            let fallback: CauseRule? = Rules.defaultCauses.first { $0.id == id }
+            let short = c.str("short").isEmpty ? (fallback?.short ?? id) : c.str("short")
+            let label = c.str("label").isEmpty ? (fallback?.label ?? short) : c.str("label")
+            let hint = c.str("hint").isEmpty ? (fallback?.hint ?? "") : c.str("hint")
+            return CauseRule(id: id, short: short, label: label, hint: hint)
+        }
+        if !causes.isEmpty { r.causes = causes }
+        r.reentryDays = j.optInt("reentryDays", r.reentryDays)
+        let conf: [ConfidenceRule] = j.objects("confidence").compactMap { c -> ConfidenceRule? in
+            let v = c.optInt("v")
+            if v <= 0 { return nil }
+            return ConfidenceRule(v: v, id: c.str("id"), label: c.str("label"))
+        }
+        if !conf.isEmpty { r.confidence = conf }
+        return r
     }
 
     private static func scenario(_ s: JObj) -> Scenario {

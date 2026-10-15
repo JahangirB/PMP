@@ -72,6 +72,7 @@ private struct Shell: View {
         case .SETTINGS: StudySettingsScreen()
         case .BOOK: BookScreen()
         case .SEARCH: SearchScreen()
+        case .SYNC: SyncScreen()
         }
     }
 }

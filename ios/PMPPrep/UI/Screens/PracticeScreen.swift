@@ -385,9 +385,9 @@ struct QuizRunner: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("How sure are you? Tap to check.").font(.nunito(12)).foregroundStyle(Palette.onSurfaceVariant)
                     HStack(spacing: 6) {
-                        PSConfidenceButton(label: "Sure") { m.check(s, confidence: Attempt.SURE) }
-                        PSConfidenceButton(label: "Think so") { m.check(s, confidence: Attempt.THINK) }
-                        PSConfidenceButton(label: "Guess") { m.check(s, confidence: Attempt.GUESS) }
+                        PSConfidenceButton(label: Rules.current.confidenceLabel(Attempt.SURE)) { m.check(s, confidence: Attempt.SURE) }
+                        PSConfidenceButton(label: Rules.current.confidenceLabel(Attempt.THINK)) { m.check(s, confidence: Attempt.THINK) }
+                        PSConfidenceButton(label: Rules.current.confidenceLabel(Attempt.GUESS)) { m.check(s, confidence: Attempt.GUESS) }
                     }
                 }
                 .frame(maxWidth: .infinity)

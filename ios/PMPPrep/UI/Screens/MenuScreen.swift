@@ -65,6 +65,7 @@ struct MenuScreen: View {
                 MenuEntry(icon: "calendar.badge.clock", label: "Plan and schedule", detail: "Exam date, hours, study days, reminders") { m.navigate(.PLANNER) },
                 MenuEntry(icon: "textformat.size", label: "Study settings", detail: "Text size, reading guide, confidence, rest days") { m.navigate(.SETTINGS) },
                 MenuEntry(icon: "externaldrive", label: "Question banks and backup", detail: "\(m.pool().count) questions enabled") { m.navigate(.DATA) },
+                MenuEntry(icon: "arrow.triangle.2.circlepath", label: "Cloud sync", detail: m.syncStatusLine) { m.navigate(.SYNC) },
             ]),
         ]
     }

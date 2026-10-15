@@ -83,16 +83,17 @@ struct PlanInput {
 
 enum PlanEngine {
     static let DAY = Time.dayMs
-    static let MASTERY_ANSWERS = 10
-    static let MASTERY_ACCURACY = 0.75
-    static let FADE_DAYS: Int64 = 14
+    /** Mastery and re-entry come from the shared rules (docs/progress-format.md §1). */
+    static var MASTERY_ANSWERS: Int { Rules.current.masteryMinAnswers }
+    static var MASTERY_ACCURACY: Double { Rules.current.masteryAccuracy }
+    static var FADE_DAYS: Int64 { Int64(Rules.current.masteryFadeDays) }
     static let PASS = 0.70
-    static let REENTRY_DAYS = 5
+    static var REENTRY_DAYS: Int { Rules.current.reentryDays }
     static let TAPER_DAYS: Int64 = 7
     static let SLOW_SEC = 110.0
     static let RECHECK_BELOW = 0.65
     static let CAUSE_MIN = 2
-    private static let RECENT = 15
+    private static var RECENT: Int { Rules.current.masteryWindow }
 
     static func startOfDay(_ t: Millis) -> Millis { Time.startOfDay(t) }
     static func nextDay(_ d: Millis) -> Millis { Time.nextDay(d) }
@@ -100,8 +101,8 @@ enum PlanEngine {
     static func taskStates(_ x: Extras, _ attempts: [Attempt], _ now: Millis) -> [TaskState] {
         let byTask = Dictionary(grouping: attempts.filter { $0.source != Readiness.SOURCE_LESSON }, by: \.ecoTask)
         return x.tasks.map { t in
-            // A right answer you called a guess isn't evidence you know it.
-            let list = (byTask[t.id] ?? []).filter { !$0.luckyGuess }.sorted { $0.at < $1.at }
+            // A right answer you called a guess, or one reached with hints, isn't evidence you know it.
+            let list = (byTask[t.id] ?? []).filter { $0.isEvidence }.sorted { $0.at < $1.at }
             let recent = Array(list.suffix(RECENT))
             let acc = recent.isEmpty ? 0 : recent.reduce(0) { $0 + $1.credit } / Double(recent.count)
             let last = list.last?.at ?? 0
@@ -180,6 +181,10 @@ enum PlanEngine {
                 s.steps = base.steps.flatMap { $0.kind == .REFLECT ? [Step(kind: .SCENARIOS, count: 3), $0] : [$0] }
                 s.minutes = base.minutes + 8
                 s.why = base.why + " Most misses you tagged on \(label) were mindset, so three situational scenarios are added."
+            case .TWO_PLAUSIBLE:
+                s.steps = base.steps.flatMap { $0.kind == .REFLECT ? [Step(kind: .SCENARIOS, count: 3), $0] : [$0] }
+                s.minutes = base.minutes + 8
+                s.why = base.why + " Most misses you tagged on \(label) came down to two plausible answers, so three ranked scenarios are added: they show what separates the best move from the next best."
             case .MISREAD_STEM: s.why = base.why + " Most misses here were misread stems: read the last sentence first and look for FIRST, NEXT, NOT, BEST."
             case .RUSHED: s.why = base.why + " Most misses here were rushed: read every option before choosing; the pace bar shows the time you have."
             case .CALCULATION: s.why = base.why + " Most misses here were calculation slips: write the formula before the numbers. The Formula lab has the sheet."

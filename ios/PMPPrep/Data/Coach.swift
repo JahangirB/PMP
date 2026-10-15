@@ -53,7 +53,7 @@ struct Coach {
     func stage(_ now: Millis) -> String {
         if let d = daysToExam(now), (0...7).contains(d) { return "examweek" }
         let last = lastActivity()
-        if last > 0 && now - last >= 5 * day { return "reentry" }
+        if last > 0 && now - last >= Millis(Rules.current.reentryDays) * day { return "reentry" }
         return "normal"
     }
 
@@ -70,7 +70,7 @@ struct Coach {
             .first { !store.lessonsDone.contains($0.id) }
     }
 
-    private func cardsDue(_ now: Millis) -> Int { x.flashcards.filter { c in store.cards[c.id].map { !$0.isNew && $0.due <= now } ?? false }.count }
+    private func cardsDue(_ now: Millis) -> Int { x.flashcards.filter { c in store.cards[c.id].map { $0.isDue(now) } ?? false }.count }
     private func leeches() -> Int { store.cards.values.filter { $0.lapses >= x.srs.leechThreshold }.count }
 
     private func fitness(_ now: Millis) -> FitnessReport {
@@ -142,6 +142,7 @@ struct Coach {
         case .MISREAD_STEM?: msgs.append(CoachMessage(id: "cause_misread", text: "Most of your misses are reading, not knowledge. Find the qualifier (first, next, best, except) before looking at the options.", priority: 60, cooldownDays: 7))
         case .WRONG_MINDSET?: msgs.append(CoachMessage(id: "cause_mindset", text: "Most misses are the right move at the wrong moment. Two scenario sets this week will help more than more questions.", priority: 60, cooldownDays: 7, action: .SCENARIOS))
         case .KNOWLEDGE_GAP?: msgs.append(CoachMessage(id: "cause_knowledge", text: "Most misses are material you hadn't met. Lessons first, then the questions on them.", priority: 60, cooldownDays: 7, action: .LEARN, arg: next?.id))
+        case .TWO_PLAUSIBLE?: msgs.append(CoachMessage(id: "cause_tossup", text: "Most of your misses are two-answer splits. The discriminator is usually in the stem's constraints rather than in the options, and the scenario trainer's ranked reveal is built to make that visible.", priority: 60, cooldownDays: 7, action: .SCENARIOS))
         case .CALCULATION?: msgs.append(CoachMessage(id: "cause_calc", text: "Most misses are arithmetic. Work the Formula Lab drills until the formulas are automatic.", priority: 60, cooldownDays: 7, action: .FORMULAS))
         case .RUSHED?: msgs.append(CoachMessage(id: "cause_rushed", text: "Most misses come from rushing. Read all four options before choosing, even when the first looks right.", priority: 60, cooldownDays: 7))
         case nil: break
