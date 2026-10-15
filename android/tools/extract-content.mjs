@@ -8,7 +8,8 @@
 // both are plain data -- and writes:
 //   content/core.json    the built-in question pack (pmp-pack envelope)
 //   content/extras.json  exam layout, ECO tasks, scenarios, lessons, flashcards,
-//                        glossary, abbreviations, formulas and the reference library
+//                        glossary, abbreviations, formulas, the reference library,
+//                        the shared rules (PMP.RULES) and the cloud sync script
 //   packs/*.json         every pack file from packs/, copied as is
 // No dependencies beyond Node itself.
 import fs from 'node:fs';
@@ -45,7 +46,7 @@ vm.runInContext(data, sandbox, { filename: 'index.html#data' });
 const P = sandbox.PMP;
 
 const need = ['ECO', 'EXAM', 'SRS', 'READINESS', 'PRACTICE', 'ECO_TASKS', 'QUESTIONS', 'SCENARIOS', 'DECKS',
-  'FLASHCARDS', 'FORMULAS', 'REFERENCE', 'GLOSSARY', 'ABBREVIATIONS', 'MODULES', 'LESSONS'];
+  'FLASHCARDS', 'FORMULAS', 'REFERENCE', 'GLOSSARY', 'ABBREVIATIONS', 'MODULES', 'LESSONS', 'RULES'];
 for (const k of need) if (P[k] == null) throw new Error('index.html: PMP.' + k + ' is missing');
 
 // JSON.stringify evaluates getters, so PMP.EXAM's derived break points come through.
@@ -59,7 +60,9 @@ const extras = plain({
   eco: P.ECO, exam: P.EXAM, srs: P.SRS, readiness: P.READINESS, practice: P.PRACTICE,
   tasks: P.ECO_TASKS, scenarios: P.SCENARIOS, decks: P.DECKS, flashcards: P.FLASHCARDS,
   formulas: P.FORMULAS, reference: P.REFERENCE, glossary: P.GLOSSARY,
-  abbreviations: P.ABBREVIATIONS, modules: P.MODULES, lessons: P.LESSONS,
+  abbreviations: P.ABBREVIATIONS, modules: P.MODULES, lessons: P.LESSONS, rules: P.RULES,
+  // The Google Apps Script the Cloud sync screen shows (docs/progress-format.md §4).
+  syncScript: fs.readFileSync(path.join(root, 'sync', 'pmp-sync.gs'), 'utf8'),
 });
 
 fs.rmSync(out, { recursive: true, force: true });
