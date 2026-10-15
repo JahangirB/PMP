@@ -431,10 +431,10 @@ private struct ReminderSetupStep: View {
                     }
                 }
                 HStack(alignment: .top, spacing: 10) {
-                    Selector(label: "I wake up", options: (4...11).map { ($0, hourLabel($0)) }, selected: s.wake) { v in
+                    ChoiceSelector(label: "I wake up", options: (4...11).map { ($0, hourLabel($0)) }, selected: s.wake) { v in
                         m.updateReminders { $0.settings.wake = v }
                     }
-                    Selector(label: "I go to sleep", options: (20...23).map { ($0, hourLabel($0)) } + [(24, "Midnight")], selected: s.sleep) { v in
+                    ChoiceSelector(label: "I go to sleep", options: (20...23).map { ($0, hourLabel($0)) } + [(24, "Midnight")], selected: s.sleep) { v in
                         m.updateReminders { $0.settings.sleep = v }
                     }
                 }
