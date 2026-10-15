@@ -114,14 +114,24 @@ class CoachTest {
         val m = Gemini.parseModels(json)
         assertEquals(listOf("models/gemini-3.1-flash-lite", "models/gemini-3-flash", "models/gemini-3-flash-preview"), m.map { it.name })
         assertEquals("the newest full Flash, not a newer Lite", "models/gemini-3-flash", Gemini.defaultModel(m)!!.name)
-        // Automatic follows the newest; a pinned model is kept while Google lists it, and replaced once it's retired.
-        assertEquals("models/gemini-3-flash", Gemini.choose(m, Gemini.AUTO))
-        assertEquals("models/gemini-3-flash-preview", Gemini.choose(m, "models/gemini-3-flash-preview"))
-        assertEquals("models/gemini-3-flash", Gemini.choose(m, "models/gemini-2.0-flash"))
-        assertEquals(null, Gemini.choose(emptyList(), Gemini.AUTO))
-        // When Google releases a newer Flash, Automatic moves to it with no change in the app.
-        val newer = Gemini.parseModels(json.replace("gemini-3-flash-preview", "gemini-4-flash"))
-        assertEquals("models/gemini-4-flash", Gemini.choose(newer, Gemini.AUTO))
+        // The coach's line-up: full Flash from 3.5 up, newest first, at most five, 3.5 kept while listed.
+        fun models(vararg names: String) = Gemini.parseModels("""{"models":[""" + names.joinToString(",") {
+            """{"name":"models/$it","supportedGenerationMethods":["generateContent"]}""" } + "]}")
+        assertEquals("nothing below 3.5, and no Lite", emptyList<String>(), Gemini.lineup(m).map { it.name })
+        assertEquals(listOf("models/gemini-4-flash", "models/gemini-3.5-flash", "models/gemini-3.5-flash-preview"),
+            Gemini.lineup(models("gemini-3.5-flash", "gemini-3.5-flash-preview", "gemini-4-flash", "gemini-4-flash-lite", "gemini-3-flash")).map { it.name })
+        val crowded = Gemini.lineup(models("gemini-3.5-flash", "gemini-4-flash", "gemini-4.5-flash", "gemini-5-flash", "gemini-5.5-flash", "gemini-6-flash", "gemini-6-flash-preview"))
+        assertEquals(5, crowded.size)
+        assertEquals("newest first", "models/gemini-6-flash", crowded.first().name)
+        assertEquals("3.5 keeps its place until Google drops it", "models/gemini-3.5-flash", crowded.last().name)
+        val retired = Gemini.lineup(models("gemini-4-flash", "gemini-4.5-flash", "gemini-5-flash", "gemini-5.5-flash", "gemini-6-flash", "gemini-6.5-flash"))
+        assertEquals(listOf("models/gemini-6.5-flash", "models/gemini-6-flash", "models/gemini-5.5-flash", "models/gemini-5-flash", "models/gemini-4.5-flash"), retired.map { it.name })
+        // Which errors move a message on to the next model down.
+        assertTrue(Gemini.tryNextModel(Gemini.GeminiException("busy", 503)))
+        assertTrue("limits are per model", Gemini.tryNextModel(Gemini.GeminiException("limit", 429)))
+        assertTrue(Gemini.tryNextModel(Gemini.GeminiException("retired", 404)))
+        assertTrue(!Gemini.tryNextModel(Gemini.GeminiException("bad key", 400, keyProblem = true)))
+        assertTrue("no connection", !Gemini.tryNextModel(Gemini.GeminiException("offline", 0)))
         // A key with only older Flash models still gets something to use.
         val old = Gemini.parseModels("""{"models":[{"name":"models/gemini-2.5-flash","supportedGenerationMethods":["generateContent"]}]}""")
         assertEquals("models/gemini-2.5-flash", old.single().name)
