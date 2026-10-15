@@ -102,7 +102,7 @@ class PmpWidget : GlanceAppWidget() {
                         WidgetStats.READY_PROJECTED -> SimpleDateFormat("d MMM", Locale.getDefault()).format(Date(stats.readyBy))
                         else -> "–"
                     }
-                    Tile(readyText, "ready by", track?.let { if (it) 1f else 0f }, BOOK, colourValue = track != null)
+                    Tile(readyText, "ready by", track?.let { if (it) 1f else 0f }, BOOK)
                 }
             }
         }
@@ -111,23 +111,24 @@ class PmpWidget : GlanceAppWidget() {
     @Composable
     private fun Gap() = Spacer(GlanceModifier.width(4.dp))
 
-    /** [level] 0..1 fills the bar and sets its colour, red to green; null shows no bar. */
+    /** [level] 0..1 sets the tile's colour, red to green, and fills its bar; null leaves the tile neutral with no bar. */
     @Composable
-    private fun androidx.glance.layout.RowScope.Tile(value: String, label: String, level: Float?, open: String, colourValue: Boolean = false) {
+    private fun androidx.glance.layout.RowScope.Tile(value: String, label: String, level: Float?, open: String) {
         val heat = level?.let { Heat(it) }
         val c = GlanceTheme.colors
+        // The whole tile shows the state: red when it needs work, through amber, to green.
         Column(
-            GlanceModifier.defaultWeight().fillMaxHeight().background(c.secondaryContainer).cornerRadius(21.dp)
+            GlanceModifier.defaultWeight().fillMaxHeight().background(level?.let { Tint(it) } ?: c.secondaryContainer).cornerRadius(21.dp)
                 .clickable(actionStartActivity<MainActivity>(actionParametersOf(OpenKey to open))),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(value, style = TextStyle(color = if (colourValue && heat != null) heat else c.onSurface, fontSize = 15.sp, fontWeight = FontWeight.Bold), maxLines = 1)
+            Text(value, style = TextStyle(color = OnTint, fontSize = 15.sp, fontWeight = FontWeight.Bold), maxLines = 1)
             if (level != null && heat != null) {
                 Spacer(GlanceModifier.height(2.dp))
-                LinearProgressIndicator(level.coerceIn(0f, 1f), GlanceModifier.width(36.dp).height(4.dp), color = heat, backgroundColor = c.primaryContainer)
+                LinearProgressIndicator(level.coerceIn(0f, 1f), GlanceModifier.width(36.dp).height(4.dp), color = heat, backgroundColor = Track)
             }
-            Text(label, style = TextStyle(color = c.onSurfaceVariant, fontSize = 10.sp, fontWeight = FontWeight.Medium), maxLines = 1)
+            Text(label, style = TextStyle(color = OnTintSoft, fontSize = 10.sp, fontWeight = FontWeight.Medium), maxLines = 1)
         }
     }
 
@@ -146,6 +147,11 @@ class PmpWidget : GlanceAppWidget() {
         private val AppColors = ColorProviders(light = LightColors, dark = DarkColors)
         /** The red-to-green scale, one shade for light and dark alike: it reads on both tile colours. */
         private fun Heat(level: Float) = Color(WidgetStats.heat(level)).let { ColorProvider(day = it, night = it) }
+        private fun Tint(level: Float) = ColorProvider(day = Color(WidgetStats.tint(level, dark = false)), night = Color(WidgetStats.tint(level, dark = true)))
+        /** Text on a tinted tile (and on the neutral one): near-black by day, near-white at night. */
+        private val OnTint = ColorProvider(day = Color(0xFF1B1B1F), night = Color(0xFFF4F3F7))
+        private val OnTintSoft = ColorProvider(day = Color(0xCC1B1B1F), night = Color(0xCCF4F3F7))
+        private val Track = ColorProvider(day = Color.White.copy(alpha = 0.7f), night = Color.Black.copy(alpha = 0.35f))
         private val Rim = ColorProvider(day = Color.White.copy(alpha = 0.9f), night = Color.White.copy(alpha = 0.07f))
 
         private fun prefs(context: Context) = context.getSharedPreferences("widget", Context.MODE_PRIVATE)
