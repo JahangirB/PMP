@@ -51,9 +51,11 @@ jobs:
           dest="platform=iOS Simulator,name=$(xcrun simctl list devices available | grep -m1 -o 'iPhone 1[0-9][^(]*' | sed 's/ *$//')"
           echo "Testing on $dest"
           xcodebuild test -project PMPPrep.xcodeproj -scheme PMPPrep -destination "$dest" \
-            -derivedDataPath build/sim CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "error:|warning: unre|Test Case|\*\* TEST" || true
+            -derivedDataPath build/sim -continueBuildingAfterErrors CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "error:|warning: unre|Test Case|\*\* TEST" || true
           if ! grep -q "\*\* TEST SUCCEEDED \*\*" test.log; then
-            grep -E "error:|failed|XCTAssert" test.log | grep -v "^ld:" | sort -u | head -40 | sed 's/^/::error::/'
+            # A step shows at most 10 error annotations, so pack 20 lines into each one.
+            grep -E "error:|failed|XCTAssert" test.log | grep -v "^ld:" | sed 's|^.*/ios/||' | sort -u | head -180 \
+              | awk '{ buf = buf (n++ ? "%0A" : "") $0 } n == 20 { print "::error::" buf; buf = ""; n = 0 } END { if (n) print "::error::" buf }'
             exit 1
           fi
 
