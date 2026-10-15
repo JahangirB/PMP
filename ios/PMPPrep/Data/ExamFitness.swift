@@ -166,8 +166,11 @@ enum ExamFitness {
         if withIdle.count >= 30 {
             let mw = median(withIdle.map { Double($0.words) }) ?? 0
             let longQ = withIdle.filter { Double($0.words) > mw }, shortQ = withIdle.filter { Double($0.words) <= mw }
-            longStemFreeze = !longQ.isEmpty && !shortQ.isEmpty &&
-                Double(longQ.filter { Double($0.idleMs) >= freezeAt }.count) / Double(longQ.count) > 2 * Double(shortQ.filter { Double($0.idleMs) >= freezeAt }.count) / Double(shortQ.count)
+            if !longQ.isEmpty && !shortQ.isEmpty {
+                let longFrozen: Double = Double(longQ.filter { Double($0.idleMs) >= freezeAt }.count)
+                let shortFrozen: Double = Double(shortQ.filter { Double($0.idleMs) >= freezeAt }.count)
+                longStemFreeze = longFrozen / Double(longQ.count) > 2 * shortFrozen / Double(shortQ.count)
+            }
         }
         var slow = 0, panic = 0
         for s in sits.filter({ !$0.isEmpty && $0.first!.source != Readiness.SOURCE_EXAM }).suffix(20) {
@@ -222,7 +225,7 @@ enum ExamFitness {
         let momentum: Double? = ageDays < 14 ? nil : (prevAvg <= 0 ? (thisWeek > 0 ? 1 : 0) : ratio(Double(thisWeek) / prevAvg, 0.5, 1))
         let (finAll, leftAll) = abandoned(inp.sittings, since: now - 28 * DAY)
         let sortedDays = days.filter { $0 > today - 60 * DAY }.sorted()
-        let gapsOff = zip(sortedDays, sortedDays.dropFirst()).map { Int(($1 - $0) / DAY - 1) }.filter { $0 >= 3 }
+        let gapsOff: [Int] = zip(sortedDays, sortedDays.dropFirst()).map { (a: Millis, b: Millis) -> Int in Int((b - a) / DAY - 1) }.filter { $0 >= 3 }
         let gapMean = mean(gapsOff.map(Double.init))
         let consistency = FitnessPart(id: "consistency", label: "Consistency", weight: 25, signals: [
             FitnessSignal(id: "regular", label: "Regular days", weight: 25, score: ageDays >= 7 ? min(1, Double(studied28) / Double(max(planned28, 1))) : nil,
@@ -242,12 +245,22 @@ enum ExamFitness {
         /* ── overall ── */
         let parts = [stamina, composure, consistency]
         let scored = parts.filter { $0.score != nil }
-        let total = scored.isEmpty ? nil : Int((scored.reduce(0) { $0 + $1.score! * Double($1.weight) } / Double(scored.reduce(0) { $0 + $1.weight }) * 100).rounded())
+        let weightedSum: Double = scored.reduce(0.0) { (acc: Double, p: FitnessPart) -> Double in acc + p.score! * Double(p.weight) }
+        let weightSum: Int = scored.reduce(0) { (acc: Int, p: FitnessPart) -> Int in acc + p.weight }
+        let total: Int? = scored.isEmpty ? nil : Int((weightedSum / Double(weightSum) * 100).rounded())
 
         // The biggest shortfall among signals with evidence decides the finding and the next step.
-        let worst = parts.filter { $0.gate == nil }.flatMap { p in p.signals.filter { $0.score != nil }.map { (p, $0) } }
-            .max { (1 - $0.1.score!) * Double($0.1.weight * $0.0.weight) < (1 - $1.1.score!) * Double($1.1.weight * $1.0.weight) }
-            .flatMap { $0.1.score! < 0.9 ? $0.1 : nil }
+        func shortfall(_ p: FitnessPart, _ sig: FitnessSignal) -> Double {
+            let miss: Double = 1 - (sig.score ?? 1)
+            return miss * Double(sig.weight * p.weight)
+        }
+        var worstPair: (FitnessPart, FitnessSignal)? = nil
+        for p in parts where p.gate == nil {
+            for sig in p.signals where sig.score != nil {
+                if worstPair == nil || shortfall(p, sig) > shortfall(worstPair!.0, worstPair!.1) { worstPair = (p, sig) }
+            }
+        }
+        let worst: FitnessSignal? = worstPair.flatMap { ($0.1.score ?? 1) < 0.9 ? $0.1 : nil }
         let rung = LADDER.filter { r in sits.contains { s in s.count >= r && (s.count < 60 || fade(s) < 0.10) } }.max() ?? 0
         let nextRung = LADDER.first { $0 > rung }
         let (finding, next) = advice(worst, wpm, longest, longStemFreeze, nextRung)
