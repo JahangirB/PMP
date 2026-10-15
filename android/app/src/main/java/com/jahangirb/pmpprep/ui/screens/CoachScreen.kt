@@ -58,6 +58,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.CoachReport
+import com.jahangirb.pmpprep.data.Gemini
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.BulletList
 import com.jahangirb.pmpprep.ui.components.MarkdownText
@@ -155,7 +156,10 @@ private fun CoachChat(vm: PmpViewModel) {
             item {
                 Spacer(Modifier.height(8.dp))
                 if (vm.geminiModels.isNotEmpty()) {
-                    Selector("Model", vm.geminiModels.map { it.name to it.label }, vm.geminiModel, { vm.setModel(it) })
+                    // Automatic follows Google's newest stable Flash, checked daily; or pin one model.
+                    val newest = vm.geminiModels.firstOrNull { it.name == vm.autoModel }?.label
+                    Selector("Model", listOf(Gemini.AUTO to ("Automatic: newest Flash" + (newest?.let { " (now $it)" } ?: ""))) +
+                        vm.geminiModels.map { it.name to it.label }, vm.geminiModel, { vm.setModel(it) })
                 }
                 TextButton(onClick = { vm.forgetKey() }) { Text("Disconnect this key", fontSize = 12.sp) }
                 Text("Every message carries a snapshot of your progress (scores, tasks, mocks, habits), so the coach answers about you. It goes only to Google, with your key.",

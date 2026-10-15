@@ -48,8 +48,22 @@ object Gemini {
         return modern.ifEmpty { all }
     }
 
-    /** The newest stable model, or the newest of any kind. */
-    fun defaultModel(models: List<Model>): Model? = models.firstOrNull { it.stable } ?: models.firstOrNull()
+    /** The newest stable full Flash; failing that the newest stable model (a Lite), or the newest of any kind. */
+    fun defaultModel(models: List<Model>): Model? =
+        models.firstOrNull { it.stable && !it.name.contains("lite", ignoreCase = true) } ?: models.firstOrNull { it.stable } ?: models.firstOrNull()
+
+    /** The setting that follows Google's newest Flash instead of one fixed model. */
+    const val AUTO = "auto"
+
+    /** Google's own alias for its latest Flash: used only if the list of models can't be fetched. */
+    const val FALLBACK = "models/gemini-flash-latest"
+
+    /**
+     * The model to call for the setting [chosen]: a pinned model while Google still lists it, otherwise
+     * (automatic, or the pinned one has been retired) the newest stable Flash. Null if the list is empty.
+     */
+    fun choose(models: List<Model>, chosen: String): String? =
+        models.firstOrNull { chosen != AUTO && it.name == chosen }?.name ?: defaultModel(models)?.name
 
     fun requestBody(system: String, turns: List<ChatTurn>): String = JSONObject().apply {
         put("systemInstruction", JSONObject().put("parts", JSONArray().put(JSONObject().put("text", system))))
