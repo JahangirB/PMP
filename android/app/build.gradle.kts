@@ -82,6 +82,8 @@ tasks.named("preBuild") { dependsOn(prepareContent) }
 tasks.withType<Test>().configureEach {
     dependsOn(prepareContent)
     systemProperty("pmp.assets", generatedAssets.get().asFile.absolutePath)
+    // The merge fixture every app tests against (docs/progress-format.md §3).
+    systemProperty("pmp.fixtures", File(repoRoot, "tests/fixtures/sync").absolutePath)
 }
 
 dependencies {

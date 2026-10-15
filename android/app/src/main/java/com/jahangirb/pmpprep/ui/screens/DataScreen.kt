@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.Domain
 import com.jahangirb.pmpprep.data.QType
 import com.jahangirb.pmpprep.data.QuestionPack
+import com.jahangirb.pmpprep.ui.Dest
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.PmpCard
 import com.jahangirb.pmpprep.ui.components.ProgressRow
@@ -123,12 +124,24 @@ fun DataScreen(vm: PmpViewModel) {
         }
 
         SectionLabel("Backup")
-        Text("Answers, flags, notes, mistakes, flashcard schedule, mock results and your plan stay on this phone. Save a backup to keep them or move them to another phone.",
+        Text("Answers, flags, notes, mistakes, flashcard schedule, mock results and your plan stay on this phone unless you turn on cloud sync. Save a backup to keep them or move them to another phone.",
             fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         OutlinedButton(onClick = {
             exportLauncher.launch("pmp-progress-" + SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date()) + ".json")
         }, modifier = Modifier.fillMaxWidth()) { Text("Save progress backup") }
         OutlinedButton(onClick = { restoreLauncher.launch(arrayOf("*/*")) }, modifier = Modifier.fillMaxWidth()) { Text("Restore from backup") }
+        Text("Backups use the shared progress format, so one saved here also restores in the web app and on iPhone.",
+            fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+
+        SectionLabel("Cloud sync")
+        PmpCard(onClick = { vm.navigate(Dest.SYNC) }) {
+            Text("Keep progress in your own Google Drive", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Syncs this phone with the web app and your other devices through a small script in your Google account. Off until you set it up.",
+                fontSize = 13.sp, lineHeight = 18.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Spacer(Modifier.height(6.dp))
+            Text(vm.syncStatus(), fontSize = 13.sp, fontWeight = FontWeight.SemiBold,
+                color = if (vm.syncError != null) ColorError else MaterialTheme.colorScheme.primary)
+        }
 
         // Destructive actions sit apart from everyday ones, and ask first.
         Spacer(Modifier.height(16.dp))

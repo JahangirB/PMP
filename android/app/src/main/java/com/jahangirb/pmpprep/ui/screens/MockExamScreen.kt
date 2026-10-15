@@ -53,6 +53,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.Domain
+import com.jahangirb.pmpprep.data.MockBands
 import com.jahangirb.pmpprep.data.MockResult
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.ui.Focus
@@ -98,13 +99,13 @@ fun MockExamScreen(vm: PmpViewModel) {
     }
 }
 
-/** A rough guide only: PMI reports bands per domain but does not publish the cut scores behind them. */
+/** A rough guide only: PMI reports bands per domain but does not publish the cut scores behind them. The cuts are the shared rules'. */
 @Composable
-private fun band(p: Double): Pair<String, Color> = when {
-    p >= 0.80 -> "Above Target" to ColorSuccess
-    p >= 0.65 -> "Target" to ColorInfo
-    p >= 0.50 -> "Below Target" to ColorWarning
-    else -> "Needs Improvement" to ColorError
+private fun band(b: MockBands, p: Double): Pair<String, Color> = b.label(p) to when {
+    p >= b.above -> ColorSuccess
+    p >= b.target -> ColorInfo
+    p >= b.below -> ColorWarning
+    else -> ColorError
 }
 
 @Composable
@@ -162,7 +163,7 @@ private fun MockIntro(vm: PmpViewModel) {
         }
         if (rev >= 0 && vm.store.mocks.isNotEmpty()) {
             SectionLabel("Your sittings")
-            vm.store.mocks.sortedByDescending { it.at }.forEach { r -> HistoryRow(r) }
+            vm.store.mocks.sortedByDescending { it.at }.forEach { r -> HistoryRow(r, vm.repo.extras.rules.mockBands) }
         }
     }
 }
@@ -201,8 +202,8 @@ private fun FocusDialog(vm: PmpViewModel, onStart: (Boolean) -> Unit, onDismiss:
 }
 
 @Composable
-private fun HistoryRow(r: MockResult) {
-    val (label, color) = band(r.pct)
+private fun HistoryRow(r: MockResult, bands: MockBands) {
+    val (label, color) = band(bands, r.pct)
     PmpCard {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
@@ -367,7 +368,7 @@ private fun BreakScreen(vm: PmpViewModel, m: MockSession) {
 
 @Composable
 private fun Scorecard(vm: PmpViewModel, r: MockResult) {
-    val (label, color) = band(r.pct)
+    val (label, color) = band(vm.repo.extras.rules.mockBands, r.pct)
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("Mock exam scorecard", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold)
         var asked by remember(r.at) { mutableStateOf(false) }
@@ -390,7 +391,7 @@ private fun Scorecard(vm: PmpViewModel, r: MockResult) {
             Domain.entries.forEach { d ->
                 r.domains[d]?.let { (right, of) ->
                     val p = if (of == 0) 0.0 else right.toDouble() / of
-                    ProgressRow("${d.title} · ${band(p).first}", p, "$right/$of", domainColor(d))
+                    ProgressRow("${d.title} · ${vm.repo.extras.rules.mockBands.label(p)}", p, "$right/$of", domainColor(d))
                     Spacer(Modifier.height(10.dp))
                 }
             }

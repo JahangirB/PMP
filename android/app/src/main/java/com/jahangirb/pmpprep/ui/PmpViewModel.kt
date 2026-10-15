@@ -14,6 +14,7 @@ import com.jahangirb.pmpprep.data.Approach
 import com.jahangirb.pmpprep.data.Attempt
 import com.jahangirb.pmpprep.data.CardState
 import com.jahangirb.pmpprep.data.ChatTurn
+import com.jahangirb.pmpprep.data.CloudSync
 import com.jahangirb.pmpprep.data.Coach
 import com.jahangirb.pmpprep.data.CoachAction
 import com.jahangirb.pmpprep.data.DiagnosticResult
@@ -41,6 +42,7 @@ import com.jahangirb.pmpprep.data.Scenario
 import com.jahangirb.pmpprep.data.ScenarioRun
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.data.Srs
+import com.jahangirb.pmpprep.data.SyncMerge
 import com.jahangirb.pmpprep.data.WidgetStats
 import com.jahangirb.pmpprep.data.SittingEvent
 import com.jahangirb.pmpprep.data.CheckIn
@@ -60,6 +62,7 @@ import com.jahangirb.pmpprep.data.ReminderSnapshot
 import com.jahangirb.pmpprep.reminders.Reminders
 import com.jahangirb.pmpprep.widget.PmpWidget
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -93,6 +96,7 @@ enum class Dest(val title: String) {
     SETTINGS("Study settings"),
     BOOK("Ready to book?"),
     SEARCH("Search"),
+    SYNC("Cloud sync"),
 }
 
 /** What to practise. Null means "any". */
@@ -142,6 +146,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 // The weekly check of which Gemini models are current.
                 checkModels()
                 ready = true
+                // Opening the app syncs (onStart came before content was loaded).
+                autoSync()
                 // Keep the home-screen widget current: a second after progress settles.
                 launch {
                     store.revision.collectLatest {
@@ -235,6 +241,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun finishQuiz(s: QuizSession) {
         s.finished = true
         if (!s.reviewOnly && !s.diagnostic) store.recordSitting(SittingEvent(s.key, "practice", System.currentTimeMillis(), s.questions.size, s.checkedCount, true))
+        autoSync()
     }
 
     fun pool(): List<Question> = repo.pool()
@@ -568,6 +575,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         finishedMock = m
         mock = null
         mockFile.delete()
+        autoSync()
     }
 
     fun abandonMock() {
@@ -576,6 +584,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         mock = null
         mockFile.delete()
         endFocus()
+        autoSync()
     }
 
     private fun endFocus() {
@@ -679,7 +688,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         var due = 0; var new = 0; var leech = 0
         for (c in cards) {
             val s = store.cards[c.id]
-            if (s == null || s.isNew) new++ else if (s.due <= now) due++
+            // A card suspended in another app is neither new nor due here.
+            if (s != null && s.suspended) { if (srs.isLeech(s)) leech++; continue }
+            if (s == null || s.isNew) new++ else if (s.isDue(now)) due++
             if (s != null && srs.isLeech(s)) leech++
         }
         return DeckCounts(cards.size, due, new, leech)
@@ -694,9 +705,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun startDeck(deck: String?) {
         val now = System.currentTimeMillis()
         val cards = allCards().filter { deck == null || it.deck == deck }
-        val due = cards.filter { c -> store.cards[c.id]?.let { !it.isNew && it.due <= now } == true }.sortedBy { store.cards[it.id]?.due }
+        val due = cards.filter { c -> store.cards[c.id]?.isDue(now) == true }.sortedBy { store.cards[it.id]?.due }
         val allowance = (repo.extras.srs.newPerDay - newIntroducedToday()).coerceAtLeast(0)
-        val fresh = cards.filter { c -> store.cards[c.id]?.isNew != false }.take(allowance)
+        val fresh = cards.filter { c -> store.cards[c.id]?.let { it.isNew && !it.suspended } ?: true }.take(allowance)
         val q = due + fresh
         cardQueue = q
         cardIndex = 0
@@ -723,6 +734,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         if (g == Grade.AGAIN) cardQueue = q + card
         cardIndex++
         cardFlipped = false
+        // The last card of a deck session; a session on the path syncs when the whole session ends.
+        if (run == null && cardIndex >= (cardQueue?.size ?: 0)) autoSync()
     }
 
     /* ── guided path ─────────────────────────────────────────────────────── */
@@ -926,7 +939,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             StepKind.CARDS -> {
                 if (r.review != null) return
                 val now = System.currentTimeMillis()
-                cardQueue = allCards().filter { c -> store.cards[c.id]?.let { !it.isNew && it.due <= now } == true }
+                cardQueue = allCards().filter { c -> store.cards[c.id]?.isDue(now) == true }
                     .sortedBy { store.cards[it.id]?.due }.take(15)
                 cardIndex = 0; cardFlipped = false; newLeeches.clear()
                 if (cardQueue.isNullOrEmpty()) cardsDone(r)
@@ -976,6 +989,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         run = null
         cardQueue = null
         home()
+        autoSync()
     }
 
     /** Leaves the player; the run is kept so Continue resumes it. */
@@ -1037,6 +1051,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         store.recordDiagnostic(DiagnosticResult(now, s.questions.size, right, dom.mapValues { it.value[0] to it.value[1] }))
         s.index = 0
         s.finished = true
+        autoSync()
     }
 
     /* ── coach ───────────────────────────────────────────────────────────── */
@@ -1230,6 +1245,172 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         coachDraft = sb.toString()
         coachTab = 1
         navigate(Dest.COACH)
+    }
+
+    /* ── cloud sync ──────────────────────────────────────────────────────── */
+
+    /* The URL and code together can read and replace the person's progress, so like the Gemini key they
+       live in their own preferences file, kept out of progress backups and out of Android's cloud backup. */
+    private val syncPrefs = app.getSharedPreferences("sync", android.content.Context.MODE_PRIVATE)
+    private val cloud = CloudSync(CloudSync.Http())
+    /** The document as it was after this phone's last sync: the merge's base (docs/progress-format.md §3). */
+    private val syncBaseFile: File get() = File(getApplication<Application>().filesDir, "sync-base.json")
+    private var syncJob: Job? = null
+    /** A trigger came while a sync was running: run once more when it ends. */
+    private var syncAgain = false
+
+    var syncUrl by mutableStateOf(syncPrefs.getString("url", "").orEmpty())
+        private set
+    var syncCode by mutableStateOf(syncPrefs.getString("code", "").orEmpty())
+        private set
+    /** The code put into a new script. Kept until sync is disconnected, so the script copied earlier still matches. */
+    var syncDraftCode by mutableStateOf(syncPrefs.getString("draft", null) ?: newDraftCode())
+        private set
+    var syncBusy by mutableStateOf(false)
+        private set
+    /** When the last sync succeeded (ms), or 0. */
+    var syncLastAt by mutableStateOf(syncPrefs.getLong("lastAt", 0L))
+        private set
+    /** Why the last sync failed; shown on the Cloud sync screen, never as a pop-up. */
+    var syncError by mutableStateOf(syncPrefs.getString("error", null))
+        private set
+    /** What Test connection found, while setting up. */
+    var syncSetupError by mutableStateOf<String?>(null)
+        private set
+
+    val syncOn: Boolean get() = syncUrl.isNotEmpty() && syncCode.isNotEmpty()
+
+    private fun newDraftCode(): String = CloudSync.newCode().also { syncPrefs.edit().putString("draft", it).apply() }
+
+    /** The script to deploy, with this phone's new code in it; empty if the build carries no script. */
+    fun syncScript(): String = CloudSync.script(repo.extras.syncScript, syncDraftCode)
+
+    /** One line for the menu and the backup screen. */
+    fun syncStatus(now: Long = System.currentTimeMillis()): String = when {
+        !syncOn -> "Off · share progress through your own Google Drive"
+        syncBusy -> "Syncing…"
+        syncError != null -> "Last sync failed · tap to see why"
+        syncLastAt == 0L -> "On · not synced yet"
+        else -> "On · synced " + whenText(syncLastAt, now)
+    }
+
+    fun whenText(t: Long, now: Long = System.currentTimeMillis()): String =
+        if (Srs.startOfDay(t) == Srs.startOfDay(now)) "today at " + java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date(t))
+        else java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM, java.text.DateFormat.SHORT).format(java.util.Date(t))
+
+    /**
+     * Test connection: checks the URL and code with a ping, and when the script answers, keeps them
+     * and runs the first sync. A fresh connection starts from an empty base.
+     */
+    fun connectSync(rawUrl: String, rawCode: String) {
+        if (syncBusy) return
+        val url = CloudSync.cleanUrl(rawUrl)
+        if (url == null) { syncSetupError = "Paste the Web app URL: it starts with https://script.google.com/macros/s/ and ends with /exec."; return }
+        val code = CloudSync.cleanCode(rawCode)
+        if (code == null) { syncSetupError = "The sync code is the 32 letters and digits between the quotes on the SYNC_CODE line of the script."; return }
+        syncBusy = true
+        syncSetupError = null
+        viewModelScope.launch {
+            var ok = false
+            try {
+                withContext(Dispatchers.IO) {
+                    cloud.ping(url, code)
+                    syncBaseFile.delete()
+                }
+                syncPrefs.edit().putString("url", url).putString("code", code).putLong("lastAt", 0L).remove("error").apply()
+                syncUrl = url
+                syncCode = code
+                syncLastAt = 0L
+                syncError = null
+                ok = true
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                syncSetupError = e.message ?: e.toString()
+            } finally {
+                syncBusy = false
+            }
+            if (ok) syncNow()
+        }
+    }
+
+    /** Stops syncing on this phone. Progress here and the file in Drive are both kept. */
+    fun disconnectSync() {
+        syncJob?.cancel()
+        syncJob = null
+        syncAgain = false
+        syncBusy = false
+        syncPrefs.edit().remove("url").remove("code").remove("lastAt").remove("error").apply()
+        syncUrl = ""
+        syncCode = ""
+        syncLastAt = 0L
+        syncError = null
+        syncSetupError = null
+        syncDraftCode = newDraftCode()
+        viewModelScope.launch(Dispatchers.IO) { syncBaseFile.delete() }
+    }
+
+    /** The Sync now button. */
+    fun syncNow() = sync()
+
+    /** Opening, leaving, and finishing a session, set, mock or card review. Quiet: errors wait on the Cloud sync screen. */
+    fun autoSync() {
+        if (ready) sync()
+    }
+
+    /**
+     * One sync (docs/progress-format.md §4): this phone's progress against the cloud copy, the result
+     * taken as progress here and kept as the next base. Never during a mock: the exam's answers go
+     * in together when it's submitted.
+     */
+    private fun sync() {
+        if (!syncOn || mock != null) return
+        if (syncJob?.isActive == true) { syncAgain = true; return }
+        val url = syncUrl
+        val code = syncCode
+        syncBusy = true
+        syncJob = viewModelScope.launch {
+            try {
+                // A consistent snapshot: changes bump the revision inside the store's lock.
+                val (rev0, local) = withContext(Dispatchers.Default) { synchronized(store) { store.revision.value to store.toJson() } }
+                val device = local.getJSONObject("device")
+                val (result, localChanged) = withContext(Dispatchers.IO) {
+                    val base = runCatching { JSONObject(syncBaseFile.readText()) }.getOrNull()
+                    val r = cloud.sync(url, code, base, local, System.currentTimeMillis(), device)
+                    r to !SyncMerge.same(r.merged, local)
+                }
+                // Disconnected, or a mock started, while the network was busy: leave it all for next time.
+                if (syncUrl == url && syncCode == code && mock == null) {
+                    if (store.revision.value != rev0) {
+                        // Answers recorded during the sync go on top of the merge, and up to the cloud next time.
+                        store.applySynced(SyncMerge.merge(local, store.toJson(), result.merged, System.currentTimeMillis(), device))
+                    } else if (localChanged) {
+                        store.applySynced(result.merged)
+                    }
+                    val baseText = result.merged.toString()
+                    withContext(Dispatchers.IO) {
+                        val tmp = File(syncBaseFile.path + ".tmp")
+                        tmp.writeText(baseText)
+                        if (!tmp.renameTo(syncBaseFile)) { syncBaseFile.delete(); tmp.renameTo(syncBaseFile) }
+                    }
+                    syncLastAt = System.currentTimeMillis()
+                    syncError = null
+                    syncPrefs.edit().putLong("lastAt", syncLastAt).remove("error").apply()
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                syncError = e.message ?: e.toString()
+                syncPrefs.edit().putString("error", syncError).apply()
+            } finally {
+                syncBusy = false
+            }
+            if (syncAgain) {
+                syncAgain = false
+                syncJob = null  // this one is ending; let the next start
+                sync()
+            }
+        }
     }
 
     /* ── banks and backup ────────────────────────────────────────────────── */
