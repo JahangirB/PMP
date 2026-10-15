@@ -39,6 +39,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import com.jahangirb.pmpprep.data.WidgetStats
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontFamily
@@ -126,15 +128,18 @@ private fun Choice(title: String, hint: String, selected: Boolean, scheme: Color
 private fun Preview(s: ColorScheme) {
     Row(
         Modifier.fillMaxWidth().height(60.dp).background(s.surface, RoundedCornerShape(24.dp)).padding(5.dp),
-        horizontalArrangement = Arrangement.spacedBy(5.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        listOf(Triple("42", "days left", null), Triple("58%", "today", 0.58f), Triple("68", "ready", null), Triple("53%", "syllabus", 0.53f), Triple("62", "fitness", null)).forEach { (v, l, p) ->
-            Box(Modifier.weight(1f).fillMaxSize().background(s.secondaryContainer, RoundedCornerShape(19.dp)), contentAlignment = Alignment.Center) {
+        // Each bar red (low) to green (good); the ready date green when it's before the exam.
+        listOf(Triple("42", "days left", 0.66f), Triple("58%", "today", 0.58f), Triple("68", "ready", 0.68f), Triple("23%", "syllabus", 0.23f),
+            Triple("62", "fitness", 0.62f), Triple("12 Mar", "ready by", 1f)).forEachIndexed { i, (v, l, p) ->
+            Box(Modifier.weight(1f).fillMaxSize().background(s.secondaryContainer, RoundedCornerShape(17.dp)), contentAlignment = Alignment.Center) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(v, color = s.onSurface, fontSize = 15.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Monospace)
-                    if (p != null) LinearProgressIndicator(progress = { p }, color = s.primary, trackColor = s.primaryContainer,
-                        modifier = Modifier.width(36.dp).height(3.dp))
-                    Text(l, color = s.onSurfaceVariant, fontSize = 10.sp)
+                    val heat = Color(WidgetStats.heat(p))
+                    Text(v, color = if (i == 5) heat else s.onSurface, fontSize = 12.sp, fontWeight = FontWeight.Bold, maxLines = 1)
+                    LinearProgressIndicator(progress = { p }, color = heat, trackColor = s.primaryContainer,
+                        modifier = Modifier.width(28.dp).height(3.dp))
+                    Text(l, color = s.onSurfaceVariant, fontSize = 9.sp, maxLines = 1)
                 }
             }
         }
