@@ -207,7 +207,7 @@ struct MindsetCallout: View {
 }
 
 /** A labelled pop-up menu of choices. */
-struct Selector<T: Hashable>: View {
+struct ChoiceSelector<T: Hashable>: View {
     let label: String
     let options: [(T, String)]
     let selected: T
