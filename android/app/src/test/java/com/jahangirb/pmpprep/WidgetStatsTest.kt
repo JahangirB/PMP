@@ -9,6 +9,7 @@ import com.jahangirb.pmpprep.data.SessionResult
 import com.jahangirb.pmpprep.data.WidgetStats
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.Calendar
 
@@ -41,6 +42,19 @@ class WidgetStatsTest {
         // Halfway from red to amber: each channel halfway.
         val q = WidgetStats.heat(0.25f)
         assertEquals((0xD6 + 0xE3 + 1) / 2, ((q shr 16) and 0xFF).toInt())
+    }
+
+    @Test fun tileTintsKeepTheirHueAndStayReadable() {
+        fun rgb(c: Long) = Triple(((c shr 16) and 0xFF).toInt(), ((c shr 8) and 0xFF).toInt(), (c and 0xFF).toInt())
+        val (r, g, _) = rgb(WidgetStats.tint(0f, dark = false))
+        assertTrue("a low score's tile is reddish", r > g)
+        val (r2, g2, _) = rgb(WidgetStats.tint(1f, dark = true))
+        assertTrue("a good score's tile is greenish", g2 > r2)
+        // Light tiles stay light (dark text), dark tiles stay dark (light text).
+        for (t in listOf(0f, 0.5f, 1f)) {
+            assertTrue(rgb(WidgetStats.tint(t, false)).toList().average() > 180)
+            assertTrue(rgb(WidgetStats.tint(t, true)).toList().average() < 80)
+        }
     }
 
     @Test fun countdownIsGreenFarOffAndRedInTheLastWeek() {
