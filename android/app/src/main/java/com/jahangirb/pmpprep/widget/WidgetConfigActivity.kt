@@ -130,16 +130,18 @@ private fun Preview(s: ColorScheme) {
         Modifier.fillMaxWidth().height(60.dp).background(s.surface, RoundedCornerShape(24.dp)).padding(5.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        // Each bar red (low) to green (good); the ready date green when it's before the exam.
+        // Each tile red (low) to green (good); the ready date green when it's before the exam.
         listOf(Triple("42", "days left", 0.66f), Triple("58%", "today", 0.58f), Triple("68", "ready", 0.68f), Triple("23%", "syllabus", 0.23f),
-            Triple("62", "fitness", 0.62f), Triple("12 Mar", "ready by", 1f)).forEachIndexed { i, (v, l, p) ->
-            Box(Modifier.weight(1f).fillMaxSize().background(s.secondaryContainer, RoundedCornerShape(17.dp)), contentAlignment = Alignment.Center) {
+            Triple("62", "fitness", 0.62f), Triple("12 Mar", "ready by", 1f)).forEach { (v, l, p) ->
+            val dark = isSystemInDarkTheme()
+            val ink = if (dark) Color(0xFFF4F3F7) else Color(0xFF1B1B1F)
+            Box(Modifier.weight(1f).fillMaxSize().background(Color(WidgetStats.tint(p, dark)), RoundedCornerShape(17.dp)), contentAlignment = Alignment.Center) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     val heat = Color(WidgetStats.heat(p))
-                    Text(v, color = if (i == 5) heat else s.onSurface, fontSize = 12.sp, fontWeight = FontWeight.Bold, maxLines = 1)
-                    LinearProgressIndicator(progress = { p }, color = heat, trackColor = s.primaryContainer,
+                    Text(v, color = ink, fontSize = 12.sp, fontWeight = FontWeight.Bold, maxLines = 1)
+                    LinearProgressIndicator(progress = { p }, color = heat, trackColor = if (dark) Color.Black.copy(alpha = 0.35f) else Color.White.copy(alpha = 0.7f),
                         modifier = Modifier.width(28.dp).height(3.dp))
-                    Text(l, color = s.onSurfaceVariant, fontSize = 9.sp, maxLines = 1)
+                    Text(l, color = ink.copy(alpha = 0.8f), fontSize = 9.sp, maxLines = 1)
                 }
             }
         }

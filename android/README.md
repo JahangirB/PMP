@@ -74,8 +74,9 @@ A 5×1 widget (`widget/PmpWidget.kt`, built with Glance) shows six clay tiles:
 | Fitness | Exam fitness out of 100 | Exam fitness |
 | Ready by | The date your weekly trend says you'll reach readiness 75 and fitness 70 ("Now" once you have, "Stalled" when a score isn't rising) | Am I ready to book? |
 
-Each tile's bar runs from red when the figure is low, through amber, to green
-(`WidgetStats.heat`). The countdown runs the other way: green with two months or more to go,
+Each tile is coloured by its figure, from red when it's low, through amber, to green
+(`WidgetStats.heat` and `tint`: a soft shade in light mode, a deep one in dark mode, so the text
+stays readable), and its bar fills to match. A tile with nothing to show yet stays neutral. The countdown runs the other way: green with two months or more to go,
 red in the final week. The ready-by date is green when it falls on or before your exam date and
 red when it's after.
 
