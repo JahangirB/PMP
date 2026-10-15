@@ -139,6 +139,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 // Switch back a Do Not Disturb left on if the app was closed mid-mock; the exam screen turns it on again.
                 Focus.end(app)
                 if (mock == null) changeFocusMock(false)
+                // The weekly check of which Gemini models are current.
+                checkModels()
                 ready = true
                 // Keep the home-screen widget current: a second after progress settles.
                 launch {
@@ -1068,17 +1070,13 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     var geminiKey by mutableStateOf(aiPrefs.getString("key", "").orEmpty())
         private set
     /**
-     * [Gemini.AUTO] (the default) follows Google's newest stable Flash; otherwise a model you pinned.
-     * Older installs saved the model the app had picked for them, so only an explicit pin counts.
+     * The Flash models the coach uses, newest first (see [Gemini.lineup]). Kept on the phone and
+     * brought up to date from Google once a week, so new models are picked up with no app update.
      */
-    var geminiModel by mutableStateOf(
-        if (aiPrefs.getBoolean("pinned", false)) aiPrefs.getString("model", "").orEmpty().ifEmpty { Gemini.AUTO } else Gemini.AUTO)
+    var geminiModels by mutableStateOf(savedLineup())
         private set
-    /** The newest stable Flash Google listed for this key, last time it was asked. */
-    var autoModel by mutableStateOf(aiPrefs.getString("autoModel", "").orEmpty())
-        private set
-    var geminiModels by mutableStateOf<List<Gemini.Model>>(emptyList())
-        private set
+    /** The model that last answered in this app session: messages keep going to it until it fails. */
+    private var sessionModel: String? = null
     var aiBusy by mutableStateOf(false)
         private set
     var aiError by mutableStateOf<String?>(null)
@@ -1086,7 +1084,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     var coachDraft by mutableStateOf("")
     var coachTab by mutableStateOf(0)
 
-    /** Checks a pasted key by listing its models, then keeps it. */
+    /** Checks a pasted key by listing its models, then keeps it with its line-up. */
     fun useKey(key: String) {
         val k = key.trim()
         if (k.isEmpty() || aiBusy) return
@@ -1094,10 +1092,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         aiError = null
         viewModelScope.launch {
             try {
-                val models = withContext(Dispatchers.IO) { Gemini.listModels(k) }
+                updateModels(k)
                 geminiKey = k
                 aiPrefs.edit().putString("key", k).apply()
-                keepModels(models)
             } catch (e: Exception) {
                 aiError = e.message
             } finally {
@@ -1106,54 +1103,63 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    /** Fills the coach's model list; asks Google again at most once a day. */
-    fun loadModels() {
-        if (geminiKey.isEmpty() || aiBusy || (geminiModels.isNotEmpty() && !modelsStale())) return
-        viewModelScope.launch { runCatching { refreshModels() } }
+    /** The weekly check: when the line-up is a week old (or missing), asks Google which models are current. */
+    fun checkModels() {
+        if (geminiKey.isEmpty() || !lineupStale()) return
+        viewModelScope.launch { runCatching { updateModels(geminiKey) } }
     }
 
-    private fun modelsStale() = System.currentTimeMillis() - aiPrefs.getLong("modelsAt", 0L) > MODELS_MAX_AGE
+    private fun lineupStale() = geminiModels.isEmpty() || System.currentTimeMillis() - aiPrefs.getLong("lineupAt", 0L) > LINEUP_MAX_AGE
 
-    private suspend fun refreshModels() = keepModels(withContext(Dispatchers.IO) { Gemini.listModels(geminiKey) })
-
-    /** Keeps Google's current list, notes its newest stable Flash, and drops a pin on a retired model. */
-    private fun keepModels(models: List<Gemini.Model>) {
-        geminiModels = models
-        autoModel = Gemini.defaultModel(models)?.name.orEmpty()
-        if (geminiModel != Gemini.AUTO && models.none { it.name == geminiModel }) setModel(Gemini.AUTO)
-        aiPrefs.edit().putString("autoModel", autoModel).putLong("modelsAt", System.currentTimeMillis()).apply()
+    /** Fetches Google's current models for [key] and keeps the line-up: Flash 3.5 and newer, at most five. */
+    private suspend fun updateModels(key: String) {
+        val lineup = Gemini.lineup(withContext(Dispatchers.IO) { Gemini.listModels(key) })
+        if (lineup.isEmpty()) throw Gemini.GeminiException(
+            "This key works, but Google offers it no Gemini ${Gemini.BASE_VERSION} Flash or newer, and the coach doesn't use older models.")
+        geminiModels = lineup
+        if (lineup.none { it.name == sessionModel }) sessionModel = null
+        aiPrefs.edit().putString("lineup", org.json.JSONArray(lineup.map { org.json.JSONObject().put("n", it.name).put("l", it.label).put("r", it.rank) }).toString())
+            .putLong("lineupAt", System.currentTimeMillis()).apply()
     }
 
-    /** [Gemini.AUTO], or a model name to pin. */
-    fun setModel(name: String) {
-        geminiModel = name
-        aiPrefs.edit().putString("model", name).putBoolean("pinned", name != Gemini.AUTO).apply()
-    }
+    private fun savedLineup(): List<Gemini.Model> = runCatching {
+        val a = org.json.JSONArray(aiPrefs.getString("lineup", "[]"))
+        (0 until a.length()).map { a.getJSONObject(it).let { o -> Gemini.Model(o.getString("n"), o.getString("l"), o.getDouble("r")) } }
+    }.getOrDefault(emptyList())
 
-    /** The model to call now: the pinned one, or the newest Flash, refreshing Google's list when it's a day old. */
-    private suspend fun currentModel(force: Boolean = false): String {
-        if (force || modelsStale() || (geminiModel == Gemini.AUTO && autoModel.isEmpty())) runCatching { refreshModels() }
-        return (if (geminiModels.isEmpty()) null else Gemini.choose(geminiModels, geminiModel))
-            ?: geminiModel.takeIf { it != Gemini.AUTO } ?: autoModel.ifEmpty { Gemini.FALLBACK }
-    }
-
-    /** One call to Gemini. If Google has retired the model, the list is fetched again and it's retried once. */
+    /**
+     * Sends one request down the line-up: from the model that answered last this session (or the
+     * newest), each error moves it to the next model down, and the first that answers is used from
+     * then on. A refused key or no connection stops at once; when every model fails, the error says
+     * whether the key's limit is used up.
+     */
     private suspend fun callGemini(system: String, turns: List<ChatTurn>): String {
         val key = geminiKey
-        val model = currentModel()
-        return try {
-            withContext(Dispatchers.IO) { Gemini.generate(key, model, system, turns) }
-        } catch (e: Gemini.GeminiException) {
-            if (e.status != 404) throw e
-            val again = currentModel(force = true)
-            if (again == model) throw e
-            withContext(Dispatchers.IO) { Gemini.generate(key, again, system, turns) }
+        if (lineupStale()) runCatching { updateModels(key) }
+        val names = geminiModels.map { it.name }
+        if (names.isEmpty()) throw Gemini.GeminiException("Couldn't get the list of Gemini models from Google. Check your connection and try again.")
+        val start = names.indexOf(sessionModel).coerceAtLeast(0)
+        var last: Gemini.GeminiException? = null
+        var limited = false
+        for (model in names.drop(start)) {
+            try {
+                val reply = withContext(Dispatchers.IO) { Gemini.generate(key, model, system, turns) }
+                sessionModel = model
+                return reply
+            } catch (e: Gemini.GeminiException) {
+                if (!Gemini.tryNextModel(e)) throw e
+                last = e
+                if (e.status == 429) limited = true
+            }
         }
+        throw Gemini.GeminiException(
+            if (limited) "Your Gemini key has reached its limit on every model the coach uses. ${last?.message.orEmpty()}"
+            else "None of the Gemini models answered. Google said: ${last?.message.orEmpty()}", last?.status ?: 0)
     }
 
     fun forgetKey() {
         geminiKey = ""
-        geminiModels = emptyList()
+        sessionModel = null
         aiPrefs.edit().remove("key").apply()
     }
 
@@ -1284,8 +1290,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     companion object {
         const val SOURCE_DIAGNOSTIC = "diagnostic"
         private const val SEND_TURNS = 30
-        /** Google's list of models is asked for again after a day. */
-        private const val MODELS_MAX_AGE = 24 * 60 * 60 * 1000L
+        /** Google is asked which models are current once a week. */
+        private const val LINEUP_MAX_AGE = 7 * 24 * 60 * 60 * 1000L
     }
 
     fun resetProgress() {
