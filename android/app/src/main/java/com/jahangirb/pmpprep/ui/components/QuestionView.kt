@@ -65,6 +65,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -461,7 +462,7 @@ private fun wrap(s: String, p: Paint, max: Float): List<String> {
 @Composable
 private fun Blanks(q: Question, a: Answer, revealed: Boolean, onAnswer: (Answer) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        q.blanks.forEach { b ->
+        q.blanks.forEachIndexed { i, b ->
             val value = a.map[b.id].orEmpty()
             val ok = Scoring.blankIsRight(b, value)
             PmpCard(
@@ -478,7 +479,9 @@ private fun Blanks(q: Question, a: Answer, revealed: Boolean, onAnswer: (Answer)
                     singleLine = true,
                     prefix = if (prefixUnit) ({ Text(b.unit) }) else null,
                     suffix = if (!prefixUnit && b.unit.isNotEmpty()) ({ Text(b.unit) }) else null,
-                    keyboardOptions = KeyboardOptions(keyboardType = if (b.numeric) KeyboardType.Decimal else KeyboardType.Text),
+                    // The keyboard's action key moves to the next blank, and closes the keyboard on the last.
+                    keyboardOptions = KeyboardOptions(keyboardType = if (b.numeric) KeyboardType.Decimal else KeyboardType.Text,
+                        imeAction = if (i < q.blanks.size - 1) ImeAction.Next else ImeAction.Done),
                     modifier = Modifier.fillMaxWidth(),
                 )
                 if (revealed) {

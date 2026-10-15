@@ -65,6 +65,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -238,9 +239,11 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
             )
         },
     ) { inner ->
-        // consumeWindowInsets: the bars' space is already in `inner`, so a screen's
-        // imePadding adds only the part of the keyboard that rises above them.
-        Box(Modifier.fillMaxSize().padding(inner).consumeWindowInsets(inner)) {
+        // consumeWindowInsets: the bars' space is already in `inner`, so imePadding adds only the part
+        // of the keyboard that rises above them. Edge to edge, the system no longer resizes the window
+        // for the keyboard: this makes every screen end at the keyboard's top, and a scrolling screen
+        // then keeps the field being typed in on view.
+        Box(Modifier.fillMaxSize().padding(inner).consumeWindowInsets(inner).imePadding()) {
             // A fresh stagger per screen visit, so its cards slide in one after another.
             key(vm.screen) {
                 val enter = remember { EnterStagger(reduce = reduceMotion) }

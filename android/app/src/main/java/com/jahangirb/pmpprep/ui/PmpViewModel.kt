@@ -1067,7 +1067,15 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     private val aiPrefs = app.getSharedPreferences("gemini", android.content.Context.MODE_PRIVATE)
     var geminiKey by mutableStateOf(aiPrefs.getString("key", "").orEmpty())
         private set
-    var geminiModel by mutableStateOf(aiPrefs.getString("model", "").orEmpty())
+    /**
+     * [Gemini.AUTO] (the default) follows Google's newest stable Flash; otherwise a model you pinned.
+     * Older installs saved the model the app had picked for them, so only an explicit pin counts.
+     */
+    var geminiModel by mutableStateOf(
+        if (aiPrefs.getBoolean("pinned", false)) aiPrefs.getString("model", "").orEmpty().ifEmpty { Gemini.AUTO } else Gemini.AUTO)
+        private set
+    /** The newest stable Flash Google listed for this key, last time it was asked. */
+    var autoModel by mutableStateOf(aiPrefs.getString("autoModel", "").orEmpty())
         private set
     var geminiModels by mutableStateOf<List<Gemini.Model>>(emptyList())
         private set
@@ -1087,11 +1095,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             try {
                 val models = withContext(Dispatchers.IO) { Gemini.listModels(k) }
-                geminiModels = models
-                val keep = models.firstOrNull { it.name == geminiModel } ?: Gemini.defaultModel(models)
                 geminiKey = k
-                geminiModel = keep?.name.orEmpty()
-                aiPrefs.edit().putString("key", k).putString("model", geminiModel).apply()
+                aiPrefs.edit().putString("key", k).apply()
+                keepModels(models)
             } catch (e: Exception) {
                 aiError = e.message
             } finally {
@@ -1100,19 +1106,49 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    /** Fills the coach's model list; asks Google again at most once a day. */
     fun loadModels() {
-        if (geminiKey.isEmpty() || geminiModels.isNotEmpty() || aiBusy) return
-        viewModelScope.launch {
-            runCatching { withContext(Dispatchers.IO) { Gemini.listModels(geminiKey) } }.onSuccess { m ->
-                geminiModels = m
-                if (m.none { it.name == geminiModel }) setModel(Gemini.defaultModel(m)?.name.orEmpty())
-            }
-        }
+        if (geminiKey.isEmpty() || aiBusy || (geminiModels.isNotEmpty() && !modelsStale())) return
+        viewModelScope.launch { runCatching { refreshModels() } }
     }
 
+    private fun modelsStale() = System.currentTimeMillis() - aiPrefs.getLong("modelsAt", 0L) > MODELS_MAX_AGE
+
+    private suspend fun refreshModels() = keepModels(withContext(Dispatchers.IO) { Gemini.listModels(geminiKey) })
+
+    /** Keeps Google's current list, notes its newest stable Flash, and drops a pin on a retired model. */
+    private fun keepModels(models: List<Gemini.Model>) {
+        geminiModels = models
+        autoModel = Gemini.defaultModel(models)?.name.orEmpty()
+        if (geminiModel != Gemini.AUTO && models.none { it.name == geminiModel }) setModel(Gemini.AUTO)
+        aiPrefs.edit().putString("autoModel", autoModel).putLong("modelsAt", System.currentTimeMillis()).apply()
+    }
+
+    /** [Gemini.AUTO], or a model name to pin. */
     fun setModel(name: String) {
         geminiModel = name
-        aiPrefs.edit().putString("model", name).apply()
+        aiPrefs.edit().putString("model", name).putBoolean("pinned", name != Gemini.AUTO).apply()
+    }
+
+    /** The model to call now: the pinned one, or the newest Flash, refreshing Google's list when it's a day old. */
+    private suspend fun currentModel(force: Boolean = false): String {
+        if (force || modelsStale() || (geminiModel == Gemini.AUTO && autoModel.isEmpty())) runCatching { refreshModels() }
+        return (if (geminiModels.isEmpty()) null else Gemini.choose(geminiModels, geminiModel))
+            ?: geminiModel.takeIf { it != Gemini.AUTO } ?: autoModel.ifEmpty { Gemini.FALLBACK }
+    }
+
+    /** One call to Gemini. If Google has retired the model, the list is fetched again and it's retried once. */
+    private suspend fun callGemini(system: String, turns: List<ChatTurn>): String {
+        val key = geminiKey
+        val model = currentModel()
+        return try {
+            withContext(Dispatchers.IO) { Gemini.generate(key, model, system, turns) }
+        } catch (e: Gemini.GeminiException) {
+            if (e.status != 404) throw e
+            val again = currentModel(force = true)
+            if (again == model) throw e
+            withContext(Dispatchers.IO) { Gemini.generate(key, again, system, turns) }
+        }
     }
 
     fun forgetKey() {
@@ -1130,11 +1166,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         aiError = null
         val system = Coach.SYSTEM + "\n\nLearner progress snapshot, computed by the app just now:\n" + coach().snapshot()
         val turns = store.chat.takeLast(SEND_TURNS).toList()
-        val key = geminiKey
-        val model = geminiModel.ifEmpty { "models/gemini-3-flash" }
         viewModelScope.launch {
             try {
-                val reply = withContext(Dispatchers.IO) { Gemini.generate(key, model, system, turns) }
+                val reply = callGemini(system, turns)
                 store.addChat(ChatTurn("model", reply, System.currentTimeMillis()))
             } catch (e: Exception) {
                 aiError = e.message ?: "Something went wrong."
@@ -1161,12 +1195,10 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         explainBusy = true
         explainError = null
         explainReply = null
-        val key = geminiKey
-        val model = geminiModel.ifEmpty { "models/gemini-3-flash" }
         val turns = listOf(ChatTurn("user", "What I was studying:\n$topic\n\nMy explanation in my own words:\n$t", System.currentTimeMillis()))
         viewModelScope.launch {
             try {
-                explainReply = withContext(Dispatchers.IO) { Gemini.generate(key, model, Coach.EXPLAIN_SYSTEM, turns) }
+                explainReply = callGemini(Coach.EXPLAIN_SYSTEM, turns)
             } catch (e: Exception) {
                 explainError = e.message ?: "Something went wrong."
             } finally {
@@ -1252,6 +1284,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     companion object {
         const val SOURCE_DIAGNOSTIC = "diagnostic"
         private const val SEND_TURNS = 30
+        /** Google's list of models is asked for again after a day. */
+        private const val MODELS_MAX_AGE = 24 * 60 * 60 * 1000L
     }
 
     fun resetProgress() {
