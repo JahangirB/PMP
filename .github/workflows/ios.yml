@@ -1,0 +1,149 @@
+# Builds the iPhone app on a GitHub-hosted Mac: extracts the content, generates the Xcode
+# project, runs the unit tests on a simulator, takes simulator screenshots, and makes an
+# IPA for sideloading (SideStore, AltStore, Sideloadly). It is ad-hoc signed only, so each
+# installer re-signs it with the user's own Apple ID; the ad-hoc signature carries the
+# entitlements (the App Group the widget reads) for them to copy.
+# On the default branch the IPA and a SideStore/AltStore source file are published to the
+# fixed "ios" release, separate from the Android APK's latest release.
+name: iOS app
+
+on:
+  push:
+    paths:
+      - "ios/**"
+      - "packs/**"
+      - "index.html"
+      - "android/tools/extract-content.mjs"
+      - ".github/workflows/ios.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Extract content and generate the project
+        working-directory: ios
+        run: |
+          node ../android/tools/extract-content.mjs "$GITHUB_WORKSPACE" Resources
+          ls Resources Resources/content
+          brew install xcodegen
+          xcodegen generate
+
+      # Compiler errors and failed tests are raised as annotations, so they show on the run's summary.
+      - name: Unit tests on the simulator
+        working-directory: ios
+        run: |
+          set -o pipefail
+          dest="platform=iOS Simulator,name=$(xcrun simctl list devices available | grep -m1 -o 'iPhone 1[0-9][^(]*' | sed 's/ *$//')"
+          echo "Testing on $dest"
+          xcodebuild test -project PMPPrep.xcodeproj -scheme PMPPrep -destination "$dest" \
+            -derivedDataPath build/sim CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "error:|warning: unre|Test Case|\*\* TEST" || true
+          if ! grep -q "\*\* TEST SUCCEEDED \*\*" test.log; then
+            grep -E "error:|failed|XCTAssert" test.log | grep -v "^ld:" | sort -u | head -40 | sed 's/^/::error::/'
+            exit 1
+          fi
+
+      - name: Simulator screenshots
+        working-directory: ios
+        run: |
+          app=$(find build/sim -name "PMPPrep.app" -path "*iphonesimulator*" | head -1)
+          udid=$(xcrun simctl list devices available | grep -m1 -E 'iPhone 1[0-9]' | grep -oE '[0-9A-F-]{36}')
+          xcrun simctl boot "$udid" || true
+          xcrun simctl install "$udid" "$app"
+          mkdir -p screenshots
+          for mode in light dark; do
+            xcrun simctl ui "$udid" appearance $mode
+            for screen in path practice question mock flashcards learn analytics fitness reports book coach menu settings; do
+              xcrun simctl terminate "$udid" com.jahangirb.pmpprep 2>/dev/null || true
+              xcrun simctl launch "$udid" com.jahangirb.pmpprep -uiScreen $screen -uiDemo 1 >/dev/null
+              sleep 4
+              xcrun simctl io "$udid" screenshot "screenshots/$mode-$screen.png" >/dev/null
+            done
+          done
+          ls screenshots
+
+      - name: Build the IPA
+        working-directory: ios
+        run: |
+          set -o pipefail
+          xcodebuild archive -project PMPPrep.xcodeproj -scheme PMPPrep -configuration Release \
+            -destination "generic/platform=iOS" -archivePath build/PMPPrep.xcarchive \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" 2>&1 | tee archive.log | grep -E "error:|\*\* ARCHIVE" || true
+          if ! grep -q "\*\* ARCHIVE SUCCEEDED \*\*" archive.log; then
+            grep -E "error:" archive.log | sort -u | head -40 | sed 's/^/::error::/'
+            exit 1
+          fi
+          app=build/PMPPrep.xcarchive/Products/Applications/PMPPrep.app
+          # Ad-hoc sign, extension first, so the entitlements travel with the IPA.
+          codesign --force --sign - --entitlements PMPPrepWidget/PMPPrepWidget.entitlements "$app/PlugIns/PMPPrepWidget.appex"
+          codesign --force --sign - --entitlements PMPPrep/PMPPrep.entitlements "$app"
+          rm -rf Payload && mkdir Payload && cp -R "$app" Payload/
+          zip -qry PMP-Prep.ipa Payload
+          ls -l PMP-Prep.ipa
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PMP-Prep-ipa
+          path: |
+            ios/PMP-Prep.ipa
+            ios/screenshots
+
+      # Screenshots also go to a pre-release, where they can be looked at without downloading an archive.
+      - name: Publish screenshots
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="ios-screens-${GITHUB_REF_NAME//\//-}"
+          gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --prerelease --title "iOS screenshots ($GITHUB_REF_NAME)" --notes "Simulator screenshots from CI." --target "$GITHUB_SHA"
+          gh release upload "$tag" ios/screenshots/*.png --clobber
+
+      - name: Publish the IPA and the SideStore source
+        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          repo="${{ github.repository }}"
+          version="2.0.${{ github.run_number }}"
+          size=$(stat -f%z ios/PMP-Prep.ipa)
+          date=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          cat > source.json <<JSON
+          {
+            "name": "PMP Prep",
+            "identifier": "com.jahangirb.pmpprep.source",
+            "apps": [{
+              "name": "PMP Prep",
+              "bundleIdentifier": "com.jahangirb.pmpprep",
+              "developerName": "Jahangir B",
+              "subtitle": "Study for the PMP exam",
+              "localizedDescription": "A guided study path for the PMP exam: practice, mocks, lessons, flashcards and an optional Gemini coach. Converted from the Android app by AI and not tested on an iPhone.",
+              "iconURL": "https://raw.githubusercontent.com/$repo/main/ios/PMPPrep/Assets.xcassets/AppIcon.appiconset/icon-1024.png",
+              "tintColor": "0B6684",
+              "versions": [{
+                "version": "$version",
+                "date": "$date",
+                "downloadURL": "https://github.com/$repo/releases/download/ios/PMP-Prep.ipa",
+                "size": $size,
+                "minOSVersion": "17.0"
+              }],
+              "appPermissions": { "entitlements": ["com.apple.security.application-groups"], "privacy": {} }
+            }],
+            "news": []
+          }
+          JSON
+          gh release view ios >/dev/null 2>&1 || gh release create ios --title "PMP Prep for iPhone" --latest=false \
+            --notes "Sideload PMP-Prep.ipa with SideStore, AltStore or Sideloadly. See the README for steps. Converted from the Android app by AI and never tested on an iPhone."
+          gh release upload ios ios/PMP-Prep.ipa source.json --clobber
