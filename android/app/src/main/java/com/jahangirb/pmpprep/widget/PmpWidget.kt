@@ -47,11 +47,17 @@ import com.jahangirb.pmpprep.data.PlanEngine
 import com.jahangirb.pmpprep.data.WidgetStats
 import com.jahangirb.pmpprep.ui.theme.DarkColors
 import com.jahangirb.pmpprep.ui.theme.LightColors
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import kotlin.math.roundToInt
 
 /**
- * The 5×1 home-screen widget: days left, today's progress, readiness and syllabus,
- * as four clay tiles. Each tile opens its own screen in the app.
+ * The 5×1 home-screen widget: days left, today's progress, readiness, syllabus, exam fitness and
+ * the date your pace says you'll be ready, as six clay tiles. Each tile opens its own screen.
+ * Each bar runs from red (low) to green (good); the countdown runs the other way, from green
+ * with plenty of time to red in the last week. The ready date is green when it's on or before
+ * the exam, red when it's after.
  *
  * The app saves a [WidgetStats] snapshot whenever progress changes; the widget only reads it.
  */
@@ -76,28 +82,39 @@ class PmpWidget : GlanceAppWidget() {
             Box(GlanceModifier.fillMaxSize().background(Rim).cornerRadius(28.dp).padding(2.dp)) {
                 Row(GlanceModifier.fillMaxSize().background(c.surface).cornerRadius(26.dp).padding(5.dp), verticalAlignment = Alignment.CenterVertically) {
                     val days = stats?.daysLeft(now)
-                    Tile(if (days == null) "–" else "$days", null, "days left", null, DAYS)
+                    Tile(if (days == null) "–" else "$days", "days left", stats?.daysLevel(now), DAYS)
                     Gap()
                     val today = stats?.today(now) ?: 0f
-                    Tile("${(today * 100).roundToInt()}%", null, "today", today, TODAY)
+                    Tile("${(today * 100).roundToInt()}%", "today", today, TODAY)
                     Gap()
-                    Tile(stats?.readiness?.toString() ?: "–", "/100", "ready", null, READY)
+                    Tile(stats?.readiness?.toString() ?: "–", "ready", stats?.readiness?.let { it / 100f }, READY)
                     Gap()
                     val syllabus = stats?.syllabus() ?: 0f
-                    Tile("${(syllabus * 100).roundToInt()}%", null, "syllabus", syllabus, SYLLABUS)
+                    Tile("${(syllabus * 100).roundToInt()}%", "syllabus", syllabus, SYLLABUS)
                     Gap()
                     val fit = stats?.fitness ?: -1
-                    Tile(if (fit < 0) "–" else "$fit", null, "fitness", null, FITNESS)
+                    Tile(if (fit < 0) "–" else "$fit", "fitness", if (fit < 0) null else fit / 100f, FITNESS)
+                    Gap()
+                    val track = stats?.onTrack()
+                    val readyText = when (stats?.readyState) {
+                        WidgetStats.READY_NOW -> "Now"
+                        WidgetStats.READY_STALLED -> "Stalled"
+                        WidgetStats.READY_PROJECTED -> SimpleDateFormat("d MMM", Locale.getDefault()).format(Date(stats.readyBy))
+                        else -> "–"
+                    }
+                    Tile(readyText, "ready by", track?.let { if (it) 1f else 0f }, BOOK, colourValue = track != null)
                 }
             }
         }
     }
 
     @Composable
-    private fun Gap() = Spacer(GlanceModifier.width(5.dp))
+    private fun Gap() = Spacer(GlanceModifier.width(4.dp))
 
+    /** [level] 0..1 fills the bar and sets its colour, red to green; null shows no bar. */
     @Composable
-    private fun androidx.glance.layout.RowScope.Tile(value: String, unit: String?, label: String, progress: Float?, open: String) {
+    private fun androidx.glance.layout.RowScope.Tile(value: String, label: String, level: Float?, open: String, colourValue: Boolean = false) {
+        val heat = level?.let { Heat(it) }
         val c = GlanceTheme.colors
         Column(
             GlanceModifier.defaultWeight().fillMaxHeight().background(c.secondaryContainer).cornerRadius(21.dp)
@@ -105,13 +122,10 @@ class PmpWidget : GlanceAppWidget() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(verticalAlignment = Alignment.Bottom) {
-                Text(value, style = TextStyle(color = c.onSurface, fontSize = 17.sp, fontWeight = FontWeight.Bold), maxLines = 1)
-                if (unit != null) Text(unit, style = TextStyle(color = c.onSurfaceVariant, fontSize = 10.sp), maxLines = 1)
-            }
-            if (progress != null) {
+            Text(value, style = TextStyle(color = if (colourValue && heat != null) heat else c.onSurface, fontSize = 15.sp, fontWeight = FontWeight.Bold), maxLines = 1)
+            if (level != null && heat != null) {
                 Spacer(GlanceModifier.height(2.dp))
-                LinearProgressIndicator(progress, GlanceModifier.width(44.dp).height(4.dp), color = c.primary, backgroundColor = c.primaryContainer)
+                LinearProgressIndicator(level.coerceIn(0f, 1f), GlanceModifier.width(36.dp).height(4.dp), color = heat, backgroundColor = c.primaryContainer)
             }
             Text(label, style = TextStyle(color = c.onSurfaceVariant, fontSize = 10.sp, fontWeight = FontWeight.Medium), maxLines = 1)
         }
@@ -126,9 +140,12 @@ class PmpWidget : GlanceAppWidget() {
         const val SYLLABUS = "syllabus"
         const val FITNESS = "fitness"
         const val REPORTS = "reports"
+        const val BOOK = "book"
         private val OpenKey = ActionParameters.Key<String>(OPEN)
 
         private val AppColors = ColorProviders(light = LightColors, dark = DarkColors)
+        /** The red-to-green scale, one shade for light and dark alike: it reads on both tile colours. */
+        private fun Heat(level: Float) = Color(WidgetStats.heat(level)).let { ColorProvider(day = it, night = it) }
         private val Rim = ColorProvider(day = Color.White.copy(alpha = 0.9f), night = Color.White.copy(alpha = 0.07f))
 
         private fun prefs(context: Context) = context.getSharedPreferences("widget", Context.MODE_PRIVATE)
@@ -149,6 +166,8 @@ class PmpWidget : GlanceAppWidget() {
                 lessonsDone = p.getInt("lessonsDone", 0),
                 lessonsTotal = p.getInt("lessonsTotal", 0),
                 fitness = p.getInt("fitness", -1),
+                readyBy = p.getLong("readyBy", 0L),
+                readyState = p.getInt("readyState", WidgetStats.READY_UNKNOWN),
             )
         }
 
@@ -158,7 +177,7 @@ class PmpWidget : GlanceAppWidget() {
                 .putLong("exam", s.examDate ?: 0L).putLong("day", s.day)
                 .putInt("todayMinutes", s.todayMinutes).putInt("targetMinutes", s.targetMinutes)
                 .putInt("readiness", s.readiness).putInt("lessonsDone", s.lessonsDone).putInt("lessonsTotal", s.lessonsTotal)
-                .putInt("fitness", s.fitness)
+                .putInt("fitness", s.fitness).putLong("readyBy", s.readyBy).putInt("readyState", s.readyState)
                 .apply()
             PmpWidget().updateAll(context)
         }

@@ -54,7 +54,6 @@ import com.jahangirb.pmpprep.ui.PracticeFilter
 import com.jahangirb.pmpprep.ui.QuizSession
 import com.jahangirb.pmpprep.ui.components.ExplainBackDialog
 import com.jahangirb.pmpprep.ui.components.Feedback
-import com.jahangirb.pmpprep.ui.components.ListenButton
 import com.jahangirb.pmpprep.ui.components.MakeCardDialog
 import com.jahangirb.pmpprep.ui.components.questionTopic
 import com.jahangirb.pmpprep.ui.components.PacingBar
@@ -257,11 +256,6 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
                     Spacer(Modifier.height(10.dp))
                 }
                 Feedback(q, result, Scoring.isAnswered(q, s.answers[q.id]))
-                ListenButton("Listen to the explanation", "Explanation") {
-                    listOfNotNull(q.stem,
-                        q.options.filter { it.correct }.takeIf { it.isNotEmpty() }?.let { "The answer: " + it.joinToString("; ") { o -> o.text } + "." },
-                        q.explanation.takeIf { it.isNotBlank() }, q.mindset.takeIf { it.isNotBlank() })
-                }
                 if (!result.correct) {
                     Spacer(Modifier.height(10.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

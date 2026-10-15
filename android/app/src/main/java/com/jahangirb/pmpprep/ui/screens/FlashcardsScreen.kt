@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.Grade
 import com.jahangirb.pmpprep.ui.PmpViewModel
-import com.jahangirb.pmpprep.ui.components.ListenButton
 import com.jahangirb.pmpprep.ui.components.PmpCard
 import com.jahangirb.pmpprep.ui.components.ProgressRow
 import com.jahangirb.pmpprep.ui.components.SectionLabel
@@ -87,10 +86,6 @@ private fun DeckList(vm: PmpViewModel) {
                     Button(onClick = { vm.startDeck(d.id) }, enabled = c.due + c.new > 0, modifier = Modifier.weight(1f)) { Text("Study") }
                     OutlinedButton(onClick = { vm.cramDeck(d.id) }, modifier = Modifier.weight(1f)) { Text("Go through all") }
                 }
-                // Each card read as its front, then its back: revision for a walk or a commute.
-                ListenButton("Listen to this deck", d.label) {
-                    vm.allCards().filter { it.deck == d.id }.take(60).map { c -> c.front + ". … " + c.back + (if (c.note.isNotBlank()) " " + c.note else "") }
-                }
             }
         }
         item { Spacer(Modifier.height(16.dp)) }
@@ -126,9 +121,8 @@ fun CardSession(vm: PmpViewModel, onDone: (() -> Unit)? = null) {
     val deck = vm.decks().firstOrNull { it.id == card.deck }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row {
             Text("${vm.cardIndex + 1} / ${q.size}", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
-            ListenButton("Listen", "Flashcard") { listOf(card.front) + if (vm.cardFlipped) listOf(card.back) else emptyList() }
             Text(deck?.label ?: "", fontSize = 12.sp, color = MaterialTheme.colorScheme.primary)
         }
         PmpCard(
