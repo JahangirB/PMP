@@ -226,6 +226,7 @@ module.exports = [
           o.html = st.notepad.html;
           o.examDate = st.settings.examDate;
           o.dailyTarget = st.settings.dailyTarget;
+          o.attempts = o.attempts.slice().sort(function (x, y) { return x.at < y.at ? -1 : x.at > y.at ? 1 : x.id < y.id ? -1 : 1; });
           return JSON.parse(JSON.stringify(o));
         };
         return { doc: doc, before: pick(S.state), a0: a0 };
@@ -266,6 +267,8 @@ module.exports = [
         o.html = st.notepad.html;
         o.examDate = st.settings.examDate;
         o.dailyTarget = st.settings.dailyTarget;
+        /* Order is not part of the record: the store sorts by time on read. */
+        o.attempts = o.attempts.slice().sort(function (x, y) { return x.at < y.at ? -1 : x.at > y.at ? 1 : x.id < y.id ? -1 : 1; });
         return { st: JSON.parse(JSON.stringify(o)), same: PMP.Sync.sameDoc(PMP.Sync.toDoc(st), d) };
       }, doc);
       assert.deepStrictEqual(after.st, out.before);
