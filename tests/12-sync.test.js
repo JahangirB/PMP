@@ -593,5 +593,128 @@ module.exports = [
       assert.notStrictEqual(r[3], "mastered", "faded after 14 days");
       await page.ctx.close();
     }
+  },
+  {
+    name: "S4/S7/S9 slices: sittings, check-ins, weekly, sessions, answer signals and plan.rest travel both ways",
+    fn: async function (h, lib) {
+      var src = await h.open("misread_heavy");
+      var out = await src.evaluate(function () {
+        var S = PMP.Store, now = Date.now(), DAY = 86400000;
+        var a0 = S.state.attempts[0];
+        S.commit(["attempts", "sittings", "checkins", "weekly", "sessions", "settings"], function (s) {
+          s.attempts = s.attempts.concat([
+            Object.assign({}, a0, { id: "att-sig-1", at: new Date(now - DAY).toISOString(), ft: 21000, idle: 30000, w: 140, rw: 1, wr: 2 }),
+            Object.assign({}, a0, { id: "att-sig-2", at: new Date(now - DAY + 5000).toISOString(), mode: "exam", examId: "sit-x", order: null, ft: 9000, w: 90 })
+          ]);
+          s.sittings = [{ k: "practice:1", kind: "practice", at: now - DAY, p: 20, a: 12, f: false }];
+          s.checkins = [{ at: now - DAY, kind: "pre", v: 2, items: [] }, { at: now - 2 * DAY, kind: "weekly", v: 0, items: [4, 4, 3, 2, 3] }];
+          s.weekly = [{ w: PMP.Metrics.weekStart(now) - 7 * DAY, u: now - 3 * DAY, r: 40, acc: 60, tt: 12, ma: 1, min: 90, d: 3, n: 50, mk: 0, lg: 30, cz: { RUSHED: 1 } }];
+          s.sessions = [{ k: "s1", kind: "BUILD", t: "people-1", d: "people", s: 0.8, m: 30, at: now - 3 * DAY }];
+          s.settings = Object.assign({}, s.settings, { restDays: false, reading: { scale: 1.3, roomy: true, guide: true } });
+        });
+        var doc = PMP.Sync.toDoc(S.state);
+        var pick = function (st) { return JSON.parse(JSON.stringify({ sittings: st.sittings, checkins: st.checkins, weekly: st.weekly, sessions: st.sessions, rest: st.settings.restDays })); };
+        return { doc: doc, before: pick(S.state) };
+      });
+      await src.ctx.close();
+      var doc = out.doc;
+      assert.deepStrictEqual(doc.sittings, out.before.sittings);
+      assert.deepStrictEqual(doc.checkins.map(function (c) { return c.kind; }), ["weekly", "pre"], "sorted by time");
+      assert.deepStrictEqual(doc.weekly, out.before.weekly);
+      assert.deepStrictEqual(doc.sessions, out.before.sessions);
+      ["sittings", "checkins", "weekly", "sessions"].forEach(function (k) { assert.ok(!(k in (doc.web || {})), k + " is not duplicated in web"); });
+      var sig = doc.attempts.filter(function (r) { return r.id === "att-sig-1"; })[0];
+      assert.deepStrictEqual([sig.ft, sig.idle, sig.w, sig.rw, sig.wr, sig.wx && sig.wx.ft], [21000, 30000, 140, 1, 2, undefined]);
+      var ex = doc.attempts.filter(function (r) { return r.id === "att-sig-2"; })[0];
+      assert.deepStrictEqual([ex.tm, ex.ft, ex.w, ex.src], [true, 9000, 90, "practice"]);
+      assert.strictEqual(doc.plan.rest, false);
+      assert.ok(!("reading" in doc.web.settings) && !("restDays" in doc.web.settings));
+
+      var dst = await h.open("fresh");
+      await dst.evaluate(function (d) { PMP.Data.importProgress(JSON.stringify(d)); }, doc);
+      await clickSheet(dst, "Replace everything");
+      await clickSheet(dst, "Replace it all");
+      var after = await dst.evaluate(function (d) {
+        var st = PMP.Store.state;
+        return { st: JSON.parse(JSON.stringify({ sittings: st.sittings, checkins: st.checkins.slice().sort(function (a, b) { return b.at - a.at; }), weekly: st.weekly, sessions: st.sessions, rest: st.settings.restDays })),
+                 reading: st.settings.reading, shared: Object.keys(st.shared).filter(function (k) { return ["sittings", "checkins", "weekly", "sessions"].indexOf(k) >= 0; }),
+                 sig: st.attempts.filter(function (a) { return a.id === "att-sig-1"; })[0],
+                 worry: PMP.Fitness.report(st).worry, same: PMP.Sync.sameDoc(PMP.Sync.toDoc(st), d) };
+      }, doc);
+      out.before.checkins.sort(function (a, b) { return b.at - a.at; });
+      assert.deepStrictEqual(after.st, out.before);
+      assert.deepStrictEqual(after.shared, [], "kept in their own slices, not in shared");
+      assert.deepStrictEqual(after.reading, { scale: 1, roomy: false, guide: false }, "reading comfort is this device's own");
+      assert.deepStrictEqual([after.sig.ft, after.sig.idle, after.sig.w, after.sig.rw, after.sig.wr], [21000, 30000, 140, 1, 2]);
+      /* (4 + 4 + 3 + 2 + (6 − 3)) − 5 = 11, over 20: 55. */
+      assert.strictEqual(after.worry, 55);
+      assert.ok(after.same, "the second device writes the same document back");
+      await lib.clean(dst);
+      await dst.ctx.close();
+    }
+  },
+  {
+    name: "a phone's signals, sittings, check-ins and weekly reports are used here and go back out unchanged",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var r = await page.evaluate(function () {
+        var q = PMP.QUESTIONS[0], now = Date.now(), DAY = 86400000;
+        var phone = {
+          type: "pmp-progress", version: 3, savedAt: now, device: { app: "android", id: "p1" },
+          attempts: [
+            { q: q.id, t: q.ecoTask, d: q.domain, ap: q.approach, ty: "single", cr: 1, ok: true, ms: 50000, at: now - DAY, src: "practice", ft: 30000, idle: 31000, w: 100, rw: 1, el: 2 },
+            { q: q.id, t: q.ecoTask, d: q.domain, ap: q.approach, ty: "single", cr: 0, ok: false, ms: 70000, at: now - DAY + 1000, src: "exam", tm: true, ft: 8000, w: 120, wr: 1 },
+            { q: q.id, t: q.ecoTask, d: q.domain, ap: q.approach, ty: "single", cr: 1, ok: true, ms: 0, at: now - DAY + 2000, src: "exam" }
+          ],
+          plan: { examDate: 0, hours: 12, days: [2, 3, 4, 5, 6], onboarded: true, rest: false },
+          sittings: [{ k: "mock:1", kind: "mock", at: now - DAY, p: 180, a: 170, f: true }],
+          checkins: [{ at: now - 3 * DAY, kind: "weekly", v: 0, items: [5, 5, 5, 5, 1] }, { at: now - DAY, kind: "post", v: 2, items: [] }],
+          weekly: [{ w: PMP.Metrics.weekStart(now) - 14 * DAY, u: now - 8 * DAY, r: 30, acc: 50, tt: 5, ma: 0, min: 40, d: 2, n: 20, mk: 0, f: 41, lg: 15 }],
+          sessions: [{ k: "s9", kind: "BUILD", t: "", d: "", s: 0.5, m: 25, at: now - 2 * DAY }],
+          mycards: [], chat: [], diagnostics: [], snoozed: {}
+        };
+        var st = PMP.Sync.fromDoc(phone, PMP.Store.state);
+        var view = PMP.Store.defaults();
+        Object.keys(st).forEach(function (k) { view[k] = st[k]; });
+        var f = PMP.Fitness.report(view);
+        var back = PMP.Sync.toDoc(view);
+        return {
+          rest: st.settings.restDays, worry: f.worry, hours: f.signal("hours").detail,
+          ft: st.attempts[0].ft, mode: st.attempts.map(function (a) { return a.mode; }),
+          weeks: PMP.Fitness.weeks(view).length,
+          diff: ["attempts", "plan", "sittings", "checkins", "weekly", "sessions"].filter(function (k) { return PMP.Sync.canon(back[k]) !== PMP.Sync.canon(phone[k]); })
+        };
+      });
+      assert.strictEqual(r.rest, false, "plan.rest becomes the rest-day setting");
+      assert.strictEqual(r.worry, 100);
+      assert.ok(/planned 12 hours a week/.test(r.hours), r.hours);
+      assert.strictEqual(r.ft, 30000);
+      assert.deepStrictEqual(r.mode, ["practice", "exam", "exam"]);
+      assert.strictEqual(r.weeks, 2, "the phone's week and this week, live");
+      assert.deepStrictEqual(r.diff, [], "changed on the way back out: " + r.diff.join(", "));
+      await lib.clean(page);
+      await page.ctx.close();
+    }
+  },
+  {
+    name: "rows a phone left in `shared` before these slices existed are adopted on load",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      await page.evaluate(function () {
+        localStorage.setItem("pmp.v2.shared", JSON.stringify({ v: 2, d: { chat: [], sittings: [{ k: "x", kind: "practice", at: 5, p: 10, a: 10, f: true }],
+          checkins: [{ at: 7, kind: "pre", v: 4, items: [] }] } }));
+        localStorage.removeItem("pmp.v2.sittings");
+        localStorage.removeItem("pmp.v2.checkins");
+      });
+      await page.reload();
+      await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
+      var r = await page.evaluate(function () {
+        var st = PMP.Store.state;
+        return { sit: st.sittings.length, chk: st.checkins.length, shared: Object.keys(st.shared).sort(), doc: PMP.Sync.toDoc(st).sittings.length };
+      });
+      assert.deepStrictEqual(r, { sit: 1, chk: 1, shared: ["chat"], doc: 1 });
+      await lib.clean(page);
+      await page.ctx.close();
+    }
   }
 ];
