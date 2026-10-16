@@ -208,6 +208,12 @@ module.exports = [
           s.settings = Object.assign({}, s.settings, { examDate: "2026-12-01" });
         });
         var a0 = S.state.attempts[0];
+        /* A lesson practice-set answer: real practice, so it travels as src
+           "practice" with the lesson kept in wx. */
+        S.commit(["attempts"], function (s) {
+          s.attempts = s.attempts.concat([Object.assign({}, a0, { id: "att-lesson-1", at: "2026-09-03T09:00:00.000Z",
+            mode: "lesson", lessonId: "P4", correct: true, credit: 1 })]);
+        });
         S.commit(["srs", "scenarioRuns"], function (s) {
           s.srs = { "fc-1": { ease: 2.36, interval: 6, reps: 2, lapses: 1, due: 1760000000000, suspended: false, leech: false, first: 1759000000000, last: 1759500000000, reviews: 4 } };
           s.scenarioRuns = [{ id: "scnrun-1", sid: PMP.SCENARIOS[0].id, domain: "people", ecoTask: "people-1", approach: "agile", difficulty: 3,
@@ -235,6 +241,10 @@ module.exports = [
       assert.deepStrictEqual(doc.cards["fc-1"], [2.36, 6, 2, 1, 1760000000000, 1759500000000, 1759000000000, 0]);
       assert.deepStrictEqual(doc.flags, ["q-x"]);
       assert.deepStrictEqual(doc.lessons, ["P4"]);
+      var lr = doc.attempts.filter(function (r) { return r.id === "att-lesson-1"; })[0];
+      assert.strictEqual(lr.src, "practice");
+      assert.strictEqual(lr.wx.mode, "lesson");
+      assert.strictEqual(lr.wx.lessonId, "P4");
       assert.deepStrictEqual(doc.drills, [{ at: 1760000000000, g: "npv", ok: true }]);
       assert.strictEqual(doc.scenarios[0].r, "acceptable");
       assert.strictEqual(doc.notepad, "**EV** is *earned*\n- CPI");
