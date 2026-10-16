@@ -1,18 +1,38 @@
 "use strict";
 /* The Gemini tab in the notes pane (§12.2.2): the person's own Google AI
-   Studio key, chat in the pane, Flash models from 3.0. Google's API is
-   stubbed throughout; nothing reaches the real service. */
+   Studio key, chat in the pane, and the phones' automatic line-up of Flash
+   models from 3.5 with fallback down it. There is no model picker any more:
+   the old dropdown and its 3.0 rule are gone. Google's API is stubbed
+   throughout; nothing reaches the real service. */
 var assert = require("assert");
 
+var H = { "access-control-allow-origin": "*" };
+function M(name, display) { return { name: "models/" + name, displayName: display || name, supportedGenerationMethods: ["generateContent"] }; }
 var MODELS = [
-  { name: "models/gemini-2.5-flash", displayName: "Gemini 2.5 Flash", supportedGenerationMethods: ["generateContent"] },
-  { name: "models/gemini-3-pro", displayName: "Gemini 3 Pro", supportedGenerationMethods: ["generateContent"] },
-  { name: "models/gemini-3-flash", displayName: "Gemini 3 Flash", supportedGenerationMethods: ["generateContent"] },
-  { name: "models/gemini-3-flash-lite", displayName: "Gemini 3 Flash-Lite", supportedGenerationMethods: ["generateContent"] },
-  { name: "models/gemini-3.1-flash-preview", displayName: "Gemini 3.1 Flash Preview", supportedGenerationMethods: ["generateContent"] },
-  { name: "models/gemini-3-flash-image", displayName: "Gemini 3 Flash Image", supportedGenerationMethods: ["generateContent"] },
+  M("gemini-2.5-flash"), M("gemini-3-flash"), M("gemini-3-pro"),
+  M("gemini-3.5-flash", "Gemini 3.5 Flash"), M("gemini-3.5-flash-lite"),
+  M("gemini-3.6-flash"), M("gemini-3.6-flash-preview"),
+  M("gemini-4-flash"), M("gemini-4.1-flash"), M("gemini-4.2-flash-preview"), M("gemini-4.5-flash", "Gemini 4.5 Flash"),
+  M("gemini-4.5-flash-lite"), M("gemini-4.5-flash-image"), M("gemini-4.5-flash-tts"),
   { name: "models/text-embedding-004", supportedGenerationMethods: ["embedContent"] }
 ];
+function json(r, status, body) { return r.fulfill({ status: status, headers: H, contentType: "application/json", body: JSON.stringify(body) }); }
+function reply(text) { return { candidates: [{ content: { role: "model", parts: [{ text: text }] } }] }; }
+
+async function useKey(page, k, keep) {
+  await page.click("#np-toggle");
+  await page.click("#np-tab-ai");
+  await page.fill("#np-key", k);
+  if (keep === false) await page.uncheck("#np-key-keep");
+  await page.click("#np-key-save");
+  await page.waitForTimeout(300);
+}
+async function reload(page) {
+  await page.waitForTimeout(700);
+  await page.reload();
+  await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
+  await page.waitForTimeout(200);
+}
 
 module.exports = [
   {
@@ -25,9 +45,7 @@ module.exports = [
       await page.click("#np-tab-ai");
       assert.strictEqual(await page.isVisible("#np-key"), true);
       assert.strictEqual(await page.getAttribute("#np-tab-ai", "aria-selected"), "true");
-      await page.waitForTimeout(700);
-      await page.reload();
-      await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
+      await reload(page);
       assert.strictEqual(await page.isVisible("#np-key"), true, "Gemini tab is still the open one");
       await page.focus("#np-tab-ai");
       await page.keyboard.press("ArrowLeft");
@@ -54,66 +72,68 @@ module.exports = [
     }
   },
   {
-    name: "model list: Flash only, version 3.0 and later; defaults to the newest stable",
+    name: "line-up: Flash 3.5 and newer, no Lite, newest first, at most five, 3.5 kept; no picker; stored beside the key",
     fn: async function (h, lib) {
       var page = await h.open("fresh");
-      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
-        r.fulfill({ status: 200, headers: { "access-control-allow-origin": "*" }, contentType: "application/json", body: JSON.stringify({ models: MODELS }) });
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) { json(r, 200, { models: MODELS }); });
+      await useKey(page, "GOOD");
+      var r = await page.evaluate(function () {
+        var stored = JSON.parse(localStorage.getItem("pmp.gemini.lineup") || "[]");
+        return {
+          lineup: PMP.GeminiChat.lineup.map(function (m) { return m.n; }),
+          stored: stored.map(function (m) { return m.n; }),
+          at: Number(localStorage.getItem("pmp.gemini.lineupAt")),
+          picker: document.querySelectorAll("#np-model, #np-ai select").length,
+          shown: document.getElementById("np-lineup").textContent,
+          title: document.getElementById("np-lineup").getAttribute("title"),
+          inStore: JSON.stringify(PMP.Store.snapshot()).indexOf("gemini-4.5") >= 0,
+          inDoc: JSON.stringify(PMP.Sync.toDoc(PMP.Store.state)).indexOf("gemini-4.5") >= 0,
+          /* The rule itself, on a short list: everything eligible, in order. */
+          small: PMP.GeminiChat.lineupOf([{ n: "models/gemini-3.5-flash", r: 350 }, { n: "models/gemini-4-flash-preview", r: 398 },
+            { n: "models/gemini-4-flash", r: 400 }, { n: "models/gemini-3.5-flash-lite", r: 349 }]).map(function (m) { return m.n; })
+        };
       });
-      await page.click("#np-toggle");
-      await page.click("#np-tab-ai");
-      await page.fill("#np-key", "GOOD");
-      await page.click("#np-key-save");
-      await page.waitForTimeout(300);
-      assert.deepStrictEqual(await page.$$eval("#np-model option", function (o) { return o.map(function (x) { return x.value; }); }),
-        ["models/gemini-3.1-flash-preview", "models/gemini-3-flash", "models/gemini-3-flash-lite"]);
-      assert.strictEqual(await page.inputValue("#np-model"), "models/gemini-3-flash", "defaults to the newest stable");
-      await page.selectOption("#np-model", "models/gemini-3.1-flash-preview");
-      await page.waitForTimeout(700);
-      await page.reload();
-      await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
-      await page.waitForTimeout(200);
-      assert.strictEqual(await page.inputValue("#np-model"), "models/gemini-3.1-flash-preview", "the choice is kept");
+      assert.deepStrictEqual(r.lineup, ["models/gemini-4.5-flash", "models/gemini-4.2-flash-preview", "models/gemini-4.1-flash",
+        "models/gemini-4-flash", "models/gemini-3.5-flash"], "top four, and the 3.5 model kept in fifth place");
+      assert.deepStrictEqual(r.stored, r.lineup, "the line-up is kept in localStorage");
+      assert.ok(Date.now() - r.at < 60000, "with when it was fetched");
+      assert.strictEqual(r.picker, 0, "no model dropdown");
+      assert.ok(/Gemini 4\.5 Flash, with 4 fallbacks/.test(r.shown), r.shown);
+      assert.ok(/Gemini 3\.5 Flash/.test(r.title), r.title);
+      assert.strictEqual(r.inStore, false, "never in the store");
+      assert.strictEqual(r.inDoc, false, "never in the synced document");
+      assert.deepStrictEqual(r.small, ["models/gemini-4-flash", "models/gemini-4-flash-preview", "models/gemini-3.5-flash"]);
       await lib.clean(page);
       await page.ctx.close();
     }
   },
   {
-    name: "a key with no Flash 3 model says so and cannot send",
+    name: "a key with no Flash 3.5 or newer is refused, says so, and is not kept",
     fn: async function (h, lib) {
       var page = await h.open("fresh");
-      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
-        r.fulfill({ status: 200, headers: { "access-control-allow-origin": "*" }, contentType: "application/json", body: JSON.stringify({ models: MODELS.slice(0, 2) }) });
-      });
-      await page.click("#np-toggle");
-      await page.click("#np-tab-ai");
-      await page.fill("#np-key", "OLD");
-      await page.click("#np-key-save");
-      await page.waitForTimeout(300);
-      assert.ok((await page.textContent("#np-log")).indexOf("version 3.0") >= 0);
-      assert.strictEqual(await page.isDisabled("#np-send"), true);
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) { json(r, 200, { models: MODELS.slice(0, 3) }); });
+      await useKey(page, "OLD");
+      assert.ok((await page.textContent("#toasts")).indexOf("3.5 Flash or newer") >= 0);
+      assert.strictEqual(await page.isVisible("#np-msg"), false, "no chat opens");
+      assert.strictEqual(await page.evaluate(function () { return localStorage.getItem("pmp.gemini.key"); }), null);
       await lib.clean(page);
       await page.ctx.close();
     }
   },
   {
-    name: "Gemini by API key: checked, chat in the pane, key never in a backup or a URL",
+    name: "Gemini by API key: checked, snapshot and 30 turns with every message, chat slice, key never in a backup or a URL",
     fn: async function (h, lib) {
-      var page = await h.open("fresh");
+      var page = await h.open("day3");
       var calls = [];
       await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
-        var q = r.request(), k = q.headers()["x-goog-api-key"], H = { "access-control-allow-origin": "*" };
+        var q = r.request(), k = q.headers()["x-goog-api-key"];
         calls.push({ method: q.method(), url: q.url(), key: k, body: q.postData() ? JSON.parse(q.postData()) : null });
-        if (k !== "GOOD") return r.fulfill({ status: 400, headers: H, contentType: "application/json",
-          body: JSON.stringify({ error: { code: 400, message: "API key not valid.", details: [{ reason: "API_KEY_INVALID" }] } }) });
-        if (q.method() === "GET") return r.fulfill({ status: 200, headers: H, contentType: "application/json", body: JSON.stringify({ models: [
-          { name: "models/gemini-3-flash", displayName: "Gemini 3 Flash", supportedGenerationMethods: ["generateContent"] }] }) });
-        return r.fulfill({ status: 200, headers: H, contentType: "application/json", body: JSON.stringify({
-          candidates: [{ content: { role: "model", parts: [{ text: "**CPI** is EV / AC.\n\n- Below 1: over budget\n- <img src=x onerror=alert(1)>" }] } }] }) });
+        if (k !== "GOOD") return json(r, 400, { error: { code: 400, message: "API key not valid.", details: [{ reason: "API_KEY_INVALID" }] } });
+        if (q.method() === "GET") return json(r, 200, { models: [M("gemini-3.5-flash", "Gemini 3.5 Flash")] });
+        return json(r, 200, reply("**CPI** is EV / AC.\n\n- Below 1: over budget\n- <img src=x onerror=alert(1)>"));
       });
       await page.click("#np-toggle");
       await page.click("#np-tab-ai");
-
       await page.fill("#np-key", "BAD");
       await page.click("#np-key-save");
       await page.waitForTimeout(300);
@@ -123,8 +143,6 @@ module.exports = [
       await page.fill("#np-key", "GOOD");
       await page.click("#np-key-save");
       await page.waitForTimeout(300);
-      assert.strictEqual(await page.inputValue("#np-model"), "models/gemini-3-flash");
-
       await page.fill("#np-msg", "What is CPI?");
       await page.keyboard.press("Control+Enter");
       await page.waitForTimeout(300);
@@ -133,31 +151,137 @@ module.exports = [
       await page.waitForTimeout(300);
       var post = calls.filter(function (c) { return c.method === "POST"; });
       assert.strictEqual(post.length, 2);
-      assert.ok(/models\/gemini-3-flash:generateContent$/.test(post[1].url));
+      assert.ok(/models\/gemini-3\.5-flash:generateContent$/.test(post[1].url));
       assert.deepStrictEqual(post[1].body.contents.map(function (c) { return c.role; }), ["user", "model", "user"], "the conversation goes with each turn");
+      var sys = post[1].body.systemInstruction.parts[0].text;
+      assert.ok(/study coach inside a PMP exam preparation app/.test(sys), "the coach's system prompt");
+      ["Learner progress snapshot", "Readiness: ", "Weakest ECO tasks", "Tagged mistake causes", "Pace: ", "Mock exams", "Exam date: ", "App coach's suggestions today"].forEach(function (k) {
+        assert.ok(sys.indexOf(k) >= 0, "snapshot carries " + k);
+      });
+      assert.strictEqual(post[1].body.generationConfig.temperature, 0.6);
       assert.ok(calls.every(function (c) { return c.url.indexOf("GOOD") < 0; }), "the key travels in a header, never the URL");
 
-      var reply = await page.$eval('#np-log .np-m[data-role="model"]', function (m) { return { html: m.innerHTML, imgs: m.querySelectorAll("img").length }; });
-      assert.ok(reply.html.indexOf("<p><b>CPI</b>") === 0 && reply.html.indexOf("<li>") > 0, reply.html);
-      assert.strictEqual(reply.imgs, 0, "a reply is text, never markup");
+      var reply1 = await page.$eval('#np-log .np-m[data-role="model"]', function (m) { return { html: m.innerHTML, imgs: m.querySelectorAll("img").length }; });
+      assert.ok(reply1.html.indexOf("<p><b>CPI</b>") === 0 && reply1.html.indexOf("<li>") > 0, reply1.html);
+      assert.strictEqual(reply1.imgs, 0, "a reply is text, never markup");
 
-      var leak = await page.evaluate(function () { return JSON.stringify(PMP.Store.snapshot()).indexOf("GOOD") >= 0; });
-      assert.strictEqual(leak, false, "the key is not in a progress export");
+      var st = await page.evaluate(function () {
+        return { chat: PMP.Store.state.chat, leak: JSON.stringify(PMP.Store.snapshot()).indexOf("GOOD") >= 0,
+                 doc: PMP.Sync.toDoc(PMP.Store.state).chat, ai: "ai" in PMP.Store.state.notepad };
+      });
+      assert.deepStrictEqual(st.chat.map(function (c) { return c.r; }), ["user", "model", "user", "model"], "the shared chat slice");
+      assert.ok(st.chat.every(function (c) { return typeof c.at === "number" && typeof c.t === "string"; }));
+      assert.deepStrictEqual(st.doc, st.chat, "and it is the document's chat, as it is");
+      assert.strictEqual(st.ai, false, "no conversation left in the notepad slice");
+      assert.strictEqual(st.leak, false, "the key is not in a progress export");
 
-      await page.waitForTimeout(700);
-      await page.reload();
-      await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
-      await page.waitForTimeout(200);
+      /* Thirty turns at most go with a message, from the sixty kept. */
+      await page.evaluate(function () {
+        var list = [];
+        for (var i = 0; i < 70; i++) list.push({ r: i % 2 ? "model" : "user", t: "turn " + i, at: 1000 + i });
+        PMP.Store.commit(["chat"], function (s) { s.chat = list.slice(-60); });
+      });
+      await page.fill("#np-msg", "One more");
+      await page.click("#np-send");
+      await page.waitForTimeout(300);
+      post = calls.filter(function (c) { return c.method === "POST"; });
+      assert.strictEqual(post[post.length - 1].body.contents.length, 30);
+      assert.strictEqual(await page.evaluate(function () { return PMP.Store.state.chat.length; }), 60);
+
+      await page.click("#np-new");
+      await reload(page);
       assert.strictEqual(await page.isVisible("#np-msg"), true, "remembered key: straight back into the chat");
-      assert.strictEqual(await page.$$eval("#np-log .np-m", function (m) { return m.length; }), 4);
+      assert.strictEqual(calls.filter(function (c) { return c.method === "GET"; }).length, 2, "a fresh line-up is not fetched again on load");
 
       await page.click("#np-key-forget");
       await page.click('#sheet-foot button:has-text("Forget key")');
       await page.waitForTimeout(100);
       assert.strictEqual(await page.isVisible("#np-key"), true);
-      assert.strictEqual(await page.evaluate(function () { return localStorage.getItem("pmp.gemini.key"); }), null);
+      assert.deepStrictEqual(await page.evaluate(function () {
+        return [localStorage.getItem("pmp.gemini.key"), localStorage.getItem("pmp.gemini.lineup")];
+      }), [null, null]);
       /* Chrome logs the refused key's 400 itself; that one line is expected. */
       page.errors = page.errors.filter(function (e) { return e.indexOf("status of 400") < 0; });
+      await lib.clean(page);
+      await page.ctx.close();
+    }
+  },
+  {
+    name: "fallback: an error moves down the line-up and the model that answers is kept for the session",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var posts = [];
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
+        var q = r.request();
+        if (q.method() === "GET") return json(r, 200, { models: [M("gemini-4-flash"), M("gemini-3.5-flash")] });
+        posts.push(q.url().replace(/^.*models\//, "").replace(/:generateContent$/, ""));
+        if (/gemini-4-flash/.test(q.url())) return json(r, 503, { error: { code: 503, message: "The model is overloaded." } });
+        return json(r, 200, reply("Fine."));
+      });
+      await useKey(page, "GOOD");
+      for (var t of ["one", "two"]) {
+        await page.fill("#np-msg", t);
+        await page.click("#np-send");
+        await page.waitForTimeout(300);
+      }
+      assert.deepStrictEqual(posts, ["gemini-4-flash", "gemini-3.5-flash", "gemini-3.5-flash"], "sticky after the fallback");
+      assert.strictEqual(await page.$$eval('#np-log .np-m[data-role="model"]', function (m) { return m.length; }), 2);
+      assert.ok(/gemini-3\.5-flash/.test(await page.textContent("#np-lineup")), "the one answering is shown");
+      page.errors = page.errors.filter(function (e) { return e.indexOf("status of 503") < 0; });
+      await lib.clean(page);
+      await page.ctx.close();
+    }
+  },
+  {
+    name: "every model failing shows Google's error and names a 429 limit; a refused key stops at once",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var posts = 0, mode = "limit";
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
+        var q = r.request();
+        if (q.method() === "GET") return json(r, 200, { models: [M("gemini-4-flash"), M("gemini-3.6-flash"), M("gemini-3.5-flash")] });
+        posts++;
+        if (mode === "limit") return json(r, 429, { error: { code: 429, message: "Resource has been exhausted (e.g. check quota)." } });
+        return json(r, 400, { error: { code: 400, message: "API key expired.", details: [{ reason: "API_KEY_INVALID" }] } });
+      });
+      await useKey(page, "GOOD");
+      await page.fill("#np-msg", "Hello");
+      await page.click("#np-send");
+      await page.waitForTimeout(400);
+      var err = await page.textContent('#np-log .np-m[data-role="error"]');
+      assert.strictEqual(posts, 3, "all three tried");
+      assert.ok(/reached its limit on every model/.test(err) && /quota or per-minute rate/.test(err), err);
+
+      mode = "key";
+      posts = 0;
+      await page.fill("#np-msg", "Again");
+      await page.click("#np-send");
+      await page.waitForTimeout(400);
+      assert.strictEqual(posts, 1, "a key problem is not tried on another model");
+      var errs = await page.$$eval('#np-log .np-m[data-role="error"]', function (m) { return m.map(function (x) { return x.textContent; }); });
+      assert.ok(/not valid/.test(errs[errs.length - 1]), errs.join(" | "));
+      page.errors = page.errors.filter(function (e) { return !/status of (400|429)/.test(e); });
+      await lib.clean(page);
+      await page.ctx.close();
+    }
+  },
+  {
+    name: "the line-up is refreshed when a week old",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var gets = 0, list = [M("gemini-3.5-flash")];
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
+        if (r.request().method() === "GET") { gets++; return json(r, 200, { models: list }); }
+        return json(r, 200, reply("ok"));
+      });
+      await useKey(page, "GOOD");
+      assert.strictEqual(gets, 1);
+      list = [M("gemini-3.5-flash"), M("gemini-3.7-flash")];
+      await page.evaluate(function () { localStorage.setItem("pmp.gemini.lineupAt", String(Date.now() - 8 * 86400000)); });
+      await reload(page);
+      assert.strictEqual(gets, 2, "a stale line-up is fetched again");
+      assert.deepStrictEqual(await page.evaluate(function () { return PMP.GeminiChat.lineup.map(function (m) { return m.n; }); }),
+        ["models/gemini-3.7-flash", "models/gemini-3.5-flash"], "a new model arrives with no update");
       await lib.clean(page);
       await page.ctx.close();
     }
@@ -166,22 +290,29 @@ module.exports = [
     name: "Gemini key not remembered: gone after a refresh",
     fn: async function (h, lib) {
       var page = await h.open("fresh");
-      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
-        r.fulfill({ status: 200, headers: { "access-control-allow-origin": "*" }, contentType: "application/json",
-          body: JSON.stringify({ models: [{ name: "models/gemini-3-flash", supportedGenerationMethods: ["generateContent"] }] }) });
-      });
-      await page.click("#np-toggle");
-      await page.click("#np-tab-ai");
-      await page.fill("#np-key", "SESSION");
-      await page.uncheck("#np-key-keep");
-      await page.click("#np-key-save");
-      await page.waitForTimeout(300);
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) { json(r, 200, { models: [M("gemini-3.5-flash")] }); });
+      await useKey(page, "SESSION", false);
       assert.strictEqual(await page.isVisible("#np-msg"), true);
       assert.strictEqual(await page.evaluate(function () { return localStorage.getItem("pmp.gemini.key"); }), null);
-      await page.waitForTimeout(700);
-      await page.reload();
-      await page.waitForFunction(function () { return window.PMP && PMP.Store.state.sys.ready; });
+      await reload(page);
       assert.strictEqual(await page.isVisible("#np-key"), true, "asks for the key again");
+      await lib.clean(page);
+      await page.ctx.close();
+    }
+  },
+  {
+    name: "an older conversation in notepad.ai moves to the chat slice on load",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      await page.evaluate(function () {
+        localStorage.setItem("pmp.v2.notepad", JSON.stringify({ v: 2, d: { open: false, text: "", html: "", tab: "notes",
+          ai: { model: "models/gemini-3-flash", chat: [{ role: "user", text: "Hi", at: "2026-10-01T10:00:00.000Z" }, { role: "model", text: "Hello", at: "2026-10-01T10:00:01.000Z" }] } } }));
+        localStorage.removeItem("pmp.v2.chat");
+      });
+      await reload(page);
+      var r = await page.evaluate(function () { return { chat: PMP.Store.state.chat, ai: "ai" in PMP.Store.state.notepad }; });
+      assert.deepStrictEqual(r.chat, [{ r: "user", t: "Hi", at: Date.parse("2026-10-01T10:00:00.000Z") }, { r: "model", t: "Hello", at: Date.parse("2026-10-01T10:00:01.000Z") }]);
+      assert.strictEqual(r.ai, false);
       await lib.clean(page);
       await page.ctx.close();
     }
