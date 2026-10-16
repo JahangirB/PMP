@@ -38,7 +38,12 @@ final class LabTests: XCTestCase {
 
     func testCashFlowTreeAndPayback() throws {
         let c: CashResult = FormulaMath.cash(400000, [120000, 160000, 180000, 150000], 0.10)
-        XCTAssertEqual(c.pvIn, 120000 / 1.1 + 160000 / 1.21 + 180000 / 1.331 + 150000 / 1.4641, accuracy: 0.01)
+        let y1: Double = 120000.0 / 1.1
+        let y2: Double = 160000.0 / 1.21
+        let y3: Double = 180000.0 / 1.331
+        let y4: Double = 150000.0 / 1.4641
+        let expectedPv: Double = y1 + y2 + y3 + y4
+        XCTAssertEqual(c.pvIn, expectedPv, accuracy: 0.01)
         XCTAssertEqual(c.npv, c.pvIn - 400000, accuracy: 0.001)
         XCTAssertEqual(c.payback ?? 0, 2 + 120000.0 / 180000.0, accuracy: 1e-9)
         let irr: Double = try XCTUnwrap(c.irr)
