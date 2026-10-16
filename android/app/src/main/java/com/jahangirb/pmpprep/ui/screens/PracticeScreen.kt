@@ -16,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.EditNote
 import androidx.compose.material.icons.filled.Flag
+import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.Psychology
 import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material3.AlertDialog
@@ -47,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.Approach
 import com.jahangirb.pmpprep.data.Domain
+import com.jahangirb.pmpprep.data.HintLadder
 import com.jahangirb.pmpprep.data.QType
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.ui.PmpViewModel
@@ -89,6 +91,7 @@ private fun PracticeSetup(vm: PmpViewModel) {
     val missed = remember(rev, cv) { vm.store.last.values.count { !it.correct } }
     val flagged = remember(rev, cv) { vm.store.flags.size }
     val reviews = remember(rev, cv) { vm.reviewDueCount() }
+    val queued = remember(rev, cv, vm.mockQueue) { vm.queuedQuestions().size }
     Column(Modifier.fillMaxSize()) {
     Column(
         Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(16.dp),
@@ -102,6 +105,9 @@ private fun PracticeSetup(vm: PmpViewModel) {
         SectionLabel("Quick start")
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             if (reviews > 0) Button(onClick = { vm.startReview() }) { Text("$reviews missed, due for review") }
+            // Misses sent from a mock's results (the web's drill queue): up to 20 at a time, cleared as they're taken.
+            if (queued > 0) Button(onClick = { vm.startQueue() }) { Text("From your last mock ($queued)") }
+            OutlinedButton(onClick = { vm.startPractice(PracticeFilter(count = 20, adaptive = true), "Adaptive drill") }) { Text("Adaptive 20") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(count = 10), "Mixed practice") }) { Text("10 mixed") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(which = PracticeFilter.Which.NEW, count = 20), "New questions") }) { Text("20 new") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(which = PracticeFilter.Which.MISSED, count = 40), "Mistakes") },
@@ -129,6 +135,10 @@ private fun PracticeSetup(vm: PmpViewModel) {
         Selector("Approach", listOf<Pair<Approach?, String>>(null to "Any approach") + Approach.entries.map { it to it.title }, f.approach,
             { vm.filter = f.copy(approach = it) })
         Selector("Which questions", PracticeFilter.Which.entries.map { it to it.title }, f.which, { vm.filter = f.copy(which = it) })
+        Selector("How to choose them", listOf(false to "At random", true to "Adaptive: weakest tasks first"), f.adaptive,
+            { vm.filter = f.copy(adaptive = it) })
+        if (f.adaptive) Text("Drawn toward the ECO tasks you're weakest on, with questions you haven't seen favoured and ones you got right last time held back.",
+            fontSize = 12.sp, lineHeight = 16.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
 
         Text("How many", fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -146,7 +156,7 @@ private fun PracticeSetup(vm: PmpViewModel) {
             Text(if (matches == 0) "No questions match" else "$matches match\nyou'll get ${minOf(matches, f.count)}",
                 fontSize = 13.sp, lineHeight = 17.sp, color = if (matches == 0) ColorError else MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
-            Button(onClick = { vm.startPractice() }, enabled = matches > 0, modifier = Modifier.height(52.dp)) {
+            Button(onClick = { vm.startPractice(title = if (f.adaptive) "Adaptive drill" else "Practice") }, enabled = matches > 0, modifier = Modifier.height(52.dp)) {
                 Text("Start practice", fontWeight = FontWeight.Bold)
             }
         }
@@ -223,6 +233,10 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
                 }
                 Spacer(Modifier.height(10.dp))
             }
+            if (q.id in s.pretest) {
+                Text("Pretest item · not scored", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.tertiary)
+                Spacer(Modifier.height(6.dp))
+            }
             QuestionHeader(q, task?.let { "${it.code} · ${it.label}" }, s.marks[q.id], if (s.reviewOnly) null else { m -> s.marks[q.id] = m })
             if (!s.optionsShown && !revealed) {
                 // Reading drill: the scenario alone first.
@@ -233,6 +247,7 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
             } else {
                 QuestionBody(q, s.order[q.id] ?: q.options, s.answers[q.id], revealed, s.struck[q.id].orEmpty(),
                     if (revealed || s.reviewOnly) null else { id -> vm.toggleStrike(s, q, id) }) { a -> vm.answer(s, q, a) }
+                HintLadderView(vm, s, q)
                 if (!revealed && !s.reviewOnly && s.index < 2 && s.struck[q.id].isNullOrEmpty() && s.marks[q.id].isNullOrEmpty()) {
                     Spacer(Modifier.height(8.dp))
                     Text("Tip: long-press an option to cross it out; long-press words in the question to highlight them.", fontSize = 12.sp,
@@ -295,8 +310,8 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
                     Column(Modifier.weight(3f)) {
                         Text("How sure are you? Tap to check.", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                            listOf(com.jahangirb.pmpprep.data.Attempt.SURE to "Sure", com.jahangirb.pmpprep.data.Attempt.THINK to "Think so",
-                                com.jahangirb.pmpprep.data.Attempt.GUESS to "Guess").forEach { (c, label) ->
+                            // Sure / Think so / Guess, from the shared rules (3 / 2 / 1).
+                            vm.repo.extras.rules.confidence.map { it.v to it.label }.forEach { (c, label) ->
                                 Button(onClick = { vm.check(s, c) }, modifier = Modifier.weight(1f),
                                     contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 4.dp, vertical = 8.dp)) {
                                     Text(label, fontWeight = FontWeight.Bold, fontSize = 13.sp, maxLines = 1)
@@ -330,6 +345,35 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
             confirmButton = { TextButton(onClick = { vm.store.setNote(q.id, text); noteOpen = false }) { Text("Save") } },
             dismissButton = { TextButton(onClick = { noteOpen = false }) { Text("Cancel") } },
         )
+    }
+}
+
+/**
+ * The hint ladder under the options (index.html §10.02.6a): each press opens the next rung, none shows the
+ * answer, and the button goes once the answer is checked. Rungs already opened stay on screen.
+ */
+@Composable
+private fun HintLadderView(vm: PmpViewModel, s: QuizSession, q: com.jahangirb.pmpprep.data.Question) {
+    val opened = s.hints[q.id].orEmpty()
+    val can = vm.canHint(s, q)
+    if (opened.isEmpty() && !can) return
+    Spacer(Modifier.height(10.dp))
+    if (opened.isNotEmpty()) PmpCard(container = MaterialTheme.colorScheme.secondaryContainer) {
+        Text(HintLadder.NOTE, fontSize = 12.sp, lineHeight = 16.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        opened.forEach { h ->
+            Spacer(Modifier.height(8.dp))
+            SectionLabel("Hint ${h.rung} of ${HintLadder.RUNGS}")
+            Text(h.text, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+            h.detail?.let { Text(it, fontSize = 14.sp, lineHeight = 20.sp) }
+        }
+    }
+    if (!s.isChecked(q) && s.hintsAllowed && vm.showHints) {
+        val left = HintLadder.RUNGS - opened.size
+        TextButton(onClick = { vm.nextHint(s, q) }, enabled = can) {
+            Icon(Icons.Default.Lightbulb, contentDescription = null)
+            Spacer(Modifier.width(6.dp))
+            Text(when { opened.isEmpty() -> "Hint"; left > 0 -> "Another hint"; else -> "No more hints" })
+        }
     }
 }
 

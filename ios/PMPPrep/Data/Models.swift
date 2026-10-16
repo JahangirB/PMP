@@ -114,7 +114,8 @@ struct QuestionPack: Identifiable {
 enum Rank: String, CaseIterable {
     case best, acceptable, premature, wrong
     var title: String { rawValue.prefix(1).uppercased() + rawValue.dropFirst() }
-    var credit: Double { switch self { case .best: 1; case .acceptable: 0.5; case .premature: 0.25; case .wrong: 0 } }
+    /** Credit for picking an option of this rank, from the shared rules. */
+    var credit: Double { Rules.current.credit(self) }
     static func of(_ id: String?) -> Rank { id.flatMap { Rank(rawValue: $0) } ?? .wrong }
 }
 
@@ -234,4 +235,85 @@ struct Extras {
     let abbreviations: [Abbreviation]
     let modules: [LessonModule]
     let lessons: [Lesson]
+    /** The shared rules (PMP.RULES, docs/progress-format.md §1); the documented defaults when the content has none. */
+    var rules: Rules = Rules()
+    /** The Google Apps Script the Cloud sync screen shows, with __SYNC_CODE__ still in it. */
+    var syncScript: String = ""
+}
+
+/** A mistake root cause as the shared rules describe it. label is first person, for the tag button. */
+struct CauseRule: Hashable { let id: String; let short: String; let label: String; let hint: String }
+
+/** One answer to "how sure are you?": v is Attempt.SURE, THINK or GUESS. */
+struct ConfidenceRule: Hashable { let v: Int; let id: String; let label: String }
+
+/** The four score bands PMI reports, from the best down. */
+enum MockBand: Int, CaseIterable {
+    case above, target, below, needs
+    var title: String {
+        switch self { case .above: "Above Target"; case .target: "Target"; case .below: "Below Target"; case .needs: "Needs Improvement" }
+    }
+}
+
+/**
+ * The rules all three apps share (PMP.RULES in index.html, copied into extras.json as "rules").
+ * Every value has the documented default, so a content file without "rules" still behaves the same.
+ * Rules.current is set when the content loads.
+ */
+struct Rules {
+    var bandAbove: Double = 0.80
+    var bandTarget: Double = 0.65
+    var bandBelow: Double = 0.50
+    var creditBest: Double = 1
+    var creditAcceptable: Double = 0.5
+    var creditPremature: Double = 0.25
+    var creditWrong: Double = 0
+    var masteryMinAnswers: Int = 10
+    var masteryWindow: Int = 15
+    var masteryAccuracy: Double = 0.75
+    var masteryFadeDays: Int = 14
+    var causes: [CauseRule] = Rules.defaultCauses
+    var reentryDays: Int = 5
+    var confidence: [ConfidenceRule] = Rules.defaultConfidence
+
+    static var current = Rules()
+
+    static let defaultCauses: [CauseRule] = [
+        CauseRule(id: "KNOWLEDGE_GAP", short: "Knowledge gap", label: "I did not know this",
+                  hint: "The material itself was missing. This is the cause that answers to study time."),
+        CauseRule(id: "MISREAD_STEM", short: "Misread the question", label: "I misread it",
+                  hint: "You knew the material and answered a question that was not quite the one asked: a missed FIRST, NEXT, NOT or BEST."),
+        CauseRule(id: "WRONG_MINDSET", short: "Wrong mindset", label: "Wrong instinct",
+                  hint: "A defensible action, out of order: escalating before gathering facts, or fixing before asking."),
+        CauseRule(id: "TWO_PLAUSIBLE", short: "Two plausible answers", label: "Two answers both worked",
+                  hint: "You narrowed it to two and chose wrong. The discriminator was there and was not visible to you."),
+        CauseRule(id: "CALCULATION", short: "Calculation slip", label: "I slipped on the numbers",
+                  hint: "Arithmetic or an inverted ratio."),
+        CauseRule(id: "RUSHED", short: "Rushed", label: "I rushed",
+                  hint: "You had it and moved before you had it. Usually a time well under your own median."),
+    ]
+
+    static let defaultConfidence: [ConfidenceRule] = [
+        ConfidenceRule(v: 3, id: "sure", label: "Sure"),
+        ConfidenceRule(v: 2, id: "think", label: "Think so"),
+        ConfidenceRule(v: 1, id: "guess", label: "Guess"),
+    ]
+
+    func band(_ p: Double) -> MockBand {
+        if p >= bandAbove { return .above }
+        if p >= bandTarget { return .target }
+        if p >= bandBelow { return .below }
+        return .needs
+    }
+
+    func credit(_ r: Rank) -> Double {
+        switch r { case .best: return creditBest; case .acceptable: return creditAcceptable; case .premature: return creditPremature; case .wrong: return creditWrong }
+    }
+
+    func cause(_ id: String) -> CauseRule? { causes.first { $0.id == id } }
+
+    func confidenceLabel(_ v: Int) -> String {
+        if let c = confidence.first(where: { $0.v == v }) { return c.label }
+        switch v { case 3: return "Sure"; case 2: return "Think so"; case 1: return "Guess"; default: return "" }
+    }
 }

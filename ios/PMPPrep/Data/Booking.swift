@@ -18,7 +18,8 @@ enum Booking {
     static let READINESS = 75
     static let FITNESS = 70
     static let MOCKS = 2
-    static let MOCK_PASS = 0.65
+    /** The "Target" band from the shared rules. */
+    static var MOCK_PASS: Double { Rules.current.bandTarget }
     private static let WEEK = 7 * Time.dayMs
 
     static func check(readiness: Int, fitness: Int?, mocks: [MockResult], fullItems: Int, weekly: [WeeklyReport], examDate: Millis?) -> BookingReport {

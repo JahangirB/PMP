@@ -16,6 +16,7 @@ struct AnalyticsScreen: View {
                 Button("How the score works") { m.navigate(.GUIDE) }.textButton()
             }
             componentsCard(report)
+            AnalyticsCharts()
             studyDaysCard(streak)
             if m.store.mocks.count >= 2 {
                 PmpCard {
@@ -117,14 +118,15 @@ struct AnalyticsScreen: View {
     }
 }
 
-/** Mock scores over time, with dashed guides at 50%, 65% and 80%. */
+/** Mock scores over time, with dashed guides at the score bands. */
 private struct AnalyticsMockTrend: View {
     let points: [Double]
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Canvas { ctx, size in
                 let w = size.width, h = size.height
-                for g in [0.5, 0.65, 0.8] {
+                let guides: [Double] = [Rules.current.bandBelow, Rules.current.bandTarget, Rules.current.bandAbove]
+                for g in guides {
                     let y = h - CGFloat(g) * h
                     var p = Path(); p.move(to: CGPoint(x: 0, y: y)); p.addLine(to: CGPoint(x: w, y: y))
                     ctx.stroke(p, with: .color(Palette.outline), style: StrokeStyle(lineWidth: 1, dash: [4, 4]))
@@ -140,7 +142,7 @@ private struct AnalyticsMockTrend: View {
             .padding(.vertical, 4)
             .accessibilityElement()
             .accessibilityLabel("Mock exam scores, oldest to newest: " + points.map { pct($0) }.joined(separator: ", "))
-            Text("Dashed lines at 50%, 65% and 80%.").font(.nunito(11)).foregroundStyle(Palette.onSurfaceVariant)
+            Text("Dashed lines at \(pct(Rules.current.bandBelow)), \(pct(Rules.current.bandTarget)) and \(pct(Rules.current.bandAbove)).").font(.nunito(11)).foregroundStyle(Palette.onSurfaceVariant)
         }
     }
 }

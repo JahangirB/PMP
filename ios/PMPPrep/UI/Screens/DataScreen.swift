@@ -121,8 +121,13 @@ struct DataScreen: View {
     private var backupSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             SectionLabel("Backup")
-            Text("Answers, flags, notes, mistakes, flashcard schedule, mock results and your plan stay on this phone. Save a backup to keep them or move them to another phone. The backup file works with the Android app too, both ways.")
+            Text("Answers, flags, notes, mistakes, flashcard schedule, mock results and your plan stay on this phone. Save a backup to keep them or move them to another phone. The backup file works with the Android and web apps too, both ways.")
                 .font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
+            PmpCard(onTap: { m.navigate(.SYNC) }) {
+                Label("Cloud sync", systemImage: "arrow.triangle.2.circlepath").font(.nunito(15, .bold))
+                Text("Keep this phone, the web app and the Android app in step through one file in your own Google Drive. " + m.syncStatusLine + ".")
+                    .font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
+            }
             Button {
                 backup = BackupDocument(text: m.backupText())
                 exporting = true

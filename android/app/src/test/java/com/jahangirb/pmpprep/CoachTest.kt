@@ -67,7 +67,7 @@ class CoachTest {
         val snap = coach(s).snapshot(now)
         assertTrue(snap, snap.contains("Diagnostic: 15/25"))
         assertTrue(snap.contains("Exam date: in 30 days"))
-        assertTrue(snap.contains("Misread the stem 8"))
+        assertTrue(snap.contains("Misread the question 8"))
         assertTrue(snap.contains("PR6"))
     }
 

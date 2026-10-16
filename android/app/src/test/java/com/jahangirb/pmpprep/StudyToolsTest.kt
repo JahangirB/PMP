@@ -167,7 +167,7 @@ class StudyToolsTest {
         val secs = WeeklyReports.compare(r, p).associateBy { it.title }
         assertEquals(1, secs["Confidence"]!!.rows.first { it.label == "Sure but wrong" }.direction)
         val causes = secs["Mistake causes"]!!.rows.associateBy { it.label }
-        assertEquals(1, causes["Misread the stem"]!!.direction)
+        assertEquals(1, causes["Misread the question"]!!.direction)
         assertEquals(0, causes["Rushed"]!!.value)
         assertEquals(1, causes["Rushed"]!!.direction)
         // Round trip.

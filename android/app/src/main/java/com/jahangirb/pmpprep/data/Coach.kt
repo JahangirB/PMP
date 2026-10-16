@@ -60,7 +60,7 @@ class Coach(
         val d = daysToExam(now)
         if (d != null && d in 0..7) return "examweek"
         val last = lastActivity()
-        if (last > 0 && now - last >= 5 * day) return "reentry"
+        if (last > 0 && now - last >= x.rules.reentryDays * day) return "reentry"
         return "normal"
     }
 
@@ -76,7 +76,7 @@ class Coach(
         return x.lessons.sortedWith(compareBy({ order[it.module] ?: 99 }, { it.order })).firstOrNull { it.id !in store.lessonsDone }
     }
 
-    private fun cardsDue(now: Long): Int = x.flashcards.count { c -> store.cards[c.id]?.let { !it.isNew && it.due <= now } == true }
+    private fun cardsDue(now: Long): Int = x.flashcards.count { c -> store.cards[c.id]?.isDue(now) == true }
 
     private fun leeches(): Int = store.cards.values.count { it.lapses >= x.srs.leechThreshold }
 
@@ -146,6 +146,7 @@ class Coach(
             RootCause.MISREAD_STEM -> msgs += CoachMessage("cause_misread", "Most of your misses are reading, not knowledge. Find the qualifier (first, next, best, except) before looking at the options.", 60, 7)
             RootCause.WRONG_MINDSET -> msgs += CoachMessage("cause_mindset", "Most misses are the right move at the wrong moment. Two scenario sets this week will help more than more questions.", 60, 7, CoachAction.SCENARIOS)
             RootCause.KNOWLEDGE_GAP -> msgs += CoachMessage("cause_knowledge", "Most misses are material you hadn't met. Lessons first, then the questions on them.", 60, 7, CoachAction.LEARN, next?.id)
+            RootCause.TWO_PLAUSIBLE -> msgs += CoachMessage("cause_tossup", "Most misses come down to two plausible answers. Before you pick, say what makes one better: sooner, more collaborative, within your authority. The situational trainer drills exactly this.", 60, 7, CoachAction.SCENARIOS)
             RootCause.CALCULATION -> msgs += CoachMessage("cause_calc", "Most misses are arithmetic. Work the Formula Lab drills until the formulas are automatic.", 60, 7, CoachAction.FORMULAS)
             RootCause.RUSHED -> msgs += CoachMessage("cause_rushed", "Most misses come from rushing. Read all four options before choosing, even when the first looks right.", 60, 7)
             null -> {}
@@ -247,13 +248,13 @@ class Coach(
                     Domain.entries.joinToString { d -> m.domains[d]?.let { "${d.short} ${it.first}/${it.second}" } ?: "" })
             }
         }
-        val causes = store.mistakeTags.values.groupingBy { it.cause.title }.eachCount()
+        val causes = store.mistakeTags.values.groupingBy { x.rules.cause(it.cause).short }.eachCount()
         sb.appendLine("Tagged mistake causes: " + if (causes.isEmpty()) "none" else causes.entries.joinToString { "${it.key} ${it.value}" })
         sb.appendLine("Pace: " + (median?.let { "median ${it.roundToInt()}s over $paceN timed answers" } ?: "no timed answers") + "; target about ${x.exam.paceTargetSec}s")
         sb.appendLine("Flashcards: ${cardsDue(now)} due, ${x.flashcards.count { store.cards[it.id] == null }} never studied, ${leeches()} leeches, of ${x.flashcards.size}")
         sb.appendLine("Lessons done: ${store.lessonsDone.size} of ${x.lessons.size}" + (nextLesson()?.let { "; next: ${it.id} ${it.title}" } ?: ""))
         val sc = store.scenarioRuns
-        sb.appendLine("Situational scenarios: ${sc.size} answered" + if (sc.isNotEmpty()) ", average credit ${pct(sc.sumOf { it.rank.credit.toDouble() } / sc.size)}" else "")
+        sb.appendLine("Situational scenarios: ${sc.size} answered" + if (sc.isNotEmpty()) ", average credit ${pct(sc.sumOf { x.rules.credit(it.rank) } / sc.size)}" else "")
         sb.appendLine("Study days in the last ${streak.last14.size}: ${streak.activeInWindow}; current streak ${streak.current}")
         sb.appendLine("App coach's suggestions today: " + c.steps.joinToString { it.title + if (it.done) " (done)" else "" })
         return sb.toString()

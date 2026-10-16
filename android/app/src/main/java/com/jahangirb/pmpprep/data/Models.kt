@@ -219,6 +219,18 @@ data class Reference(
 data class ExamLayout(
     val totalItems: Int, val minutes: Int, val breakMinutes: Int,
     val breakAfter: List<Int>, val paceTargetSec: Int,
+    /** Of [totalItems], the ones that count; the rest are unscored pretest items (EXAM.SCORED_ITEMS, 170 of 180). */
+    val scoredItems: Int = 170,
+)
+
+/**
+ * The adaptive drill's weighting, PMP.PRACTICE.ADAPTIVE in index.html §01.7. [prior] and [priorN]
+ * stop a task with two answers from reading as settled evidence; [exponent] sharpens the pull to
+ * weak tasks; [unseenBoost] and [rightDamp] favour questions never seen and hold back ones right last time.
+ */
+data class AdaptiveConfig(
+    val prior: Double = 0.5, val priorN: Double = 4.0, val exponent: Double = 1.5, val floor: Double = 0.05,
+    val unseenBoost: Double = 1.4, val rightDamp: Double = 0.5,
 )
 
 data class SrsConfig(
@@ -256,4 +268,62 @@ data class Extras(
     val abbreviations: List<Abbreviation>,
     val modules: List<LessonModule>,
     val lessons: List<Lesson>,
+    /** The rules every app shares (docs/progress-format.md §1). */
+    val rules: Rules = Rules(),
+    /** How the adaptive drill weights questions (§10.02.2). */
+    val adaptive: AdaptiveConfig = AdaptiveConfig(),
+    /** The Google Apps Script the Cloud sync screen shows, with __SYNC_CODE__ still in it. */
+    val syncScript: String = "",
 )
+
+/*
+ * The shared rules, PMP.RULES in index.html, carried in extras.json as "rules". The web, Android
+ * and iOS read them from one place so a mock band or the mastery bar can't drift between apps.
+ * The defaults are the values in docs/progress-format.md §1, used when extras has no "rules".
+ */
+
+/** Mock score bands, overall and per domain. PMI reports these four but does not publish the cut scores. */
+data class MockBands(val above: Double = 0.80, val target: Double = 0.65, val below: Double = 0.50) {
+    fun label(p: Double): String = when {
+        p >= above -> "Above Target"
+        p >= target -> "Target"
+        p >= below -> "Below Target"
+        else -> "Needs Improvement"
+    }
+}
+
+/**
+ * A task is mastered with at least [minAnswers] answers (lesson answers, lucky guesses and hinted
+ * answers left out) and [accuracy] over the last [window]. It fades after [fadeDays] without an answer.
+ */
+data class MasteryRule(val minAnswers: Int = 10, val window: Int = 15, val accuracy: Double = 0.75, val fadeDays: Int = 14)
+
+/** How a mistake cause reads: [short] on chips and in reports, [label] (first person) on the tag button, [hint] under it. */
+data class CauseText(val id: String, val short: String, val label: String, val hint: String)
+
+/** One "how sure?" answer: [v] is what attempts store (3 sure, 2 think so, 1 guess). */
+data class ConfidenceLevel(val v: Int, val id: String, val label: String)
+
+data class Rules(
+    val mockBands: MockBands = MockBands(),
+    /** Scenario trainer credit per rank. */
+    val scenarioCredit: Map<Rank, Double> = Rank.entries.associateWith { it.credit.toDouble() },
+    val mastery: MasteryRule = MasteryRule(),
+    /** In the order the apps show them. */
+    val causes: List<CauseText> = RootCause.entries.map { CauseText(it.name, it.title, it.title, it.description) },
+    /** Days away before the welcome-back warm-up. */
+    val reentryDays: Int = 5,
+    val confidence: List<ConfidenceLevel> = listOf(
+        ConfidenceLevel(Attempt.SURE, "sure", "Sure"), ConfidenceLevel(Attempt.THINK, "think", "Think so"),
+        ConfidenceLevel(Attempt.GUESS, "guess", "Guess"),
+    ),
+) {
+    fun credit(r: Rank): Double = scenarioCredit[r] ?: r.credit.toDouble()
+
+    fun cause(c: RootCause): CauseText = causes.firstOrNull { it.id == c.name } ?: CauseText(c.name, c.title, c.title, c.description)
+
+    /** The causes as the enum, in the shared order; any the rules leave out follow at the end. */
+    val causeOrder: List<RootCause>
+        get() = causes.mapNotNull { c -> RootCause.entries.firstOrNull { it.name == c.id } }.distinct()
+            .let { it + RootCause.entries.filter { e -> e !in it } }
+}

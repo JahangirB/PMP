@@ -28,11 +28,19 @@ struct Attempt: Equatable {
     var confidence: Int = 0
     /** Options crossed out before checking. */
     var eliminated: Int = 0
+    /** The question's difficulty, 1–5, when it was recorded; 0 if not. */
+    var difficulty: Int = 0
+    /** Hint rungs used before answering (the web app has hints). Such answers stay out of accuracy, pace and mastery. */
+    var hints: Int = 0
+    /** The web app's row id, kept so a round trip through this app doesn't lose it. */
+    var rowId: String = ""
 
     /** Right, but by your own account a guess: not evidence that you know it. */
     var luckyGuess: Bool { correct && confidence == Attempt.GUESS }
     /** Wrong while sure: the most dangerous kind of mistake on exam day. */
     var sureWrong: Bool { !correct && confidence == Attempt.SURE }
+    /** Counts towards mastery: not a lucky guess, and no hints used. */
+    var isEvidence: Bool { !luckyGuess && hints == 0 }
 
     static let GUESS = 1, THINK = 2, SURE = 3
 }
@@ -43,22 +51,30 @@ struct SittingEvent: Equatable { var key: String; var kind: String; var at: Mill
 /** A one-tap check-in. kind is "pre" (before a session), "post" (after a mock) or "weekly"; values 1–5. */
 struct CheckIn: Equatable { var at: Millis; var kind: String; var value: Int; var items: [Int] = [] }
 
+/** Mistake root causes, in the shared rules' order. The words come from the rules (docs/progress-format.md §1). */
 enum RootCause: String, CaseIterable, Identifiable {
-    case KNOWLEDGE_GAP, MISREAD_STEM, WRONG_MINDSET, CALCULATION, RUSHED
+    case KNOWLEDGE_GAP, MISREAD_STEM, WRONG_MINDSET, TWO_PLAUSIBLE, CALCULATION, RUSHED
     var id: String { rawValue }
-    var title: String {
-        switch self {
-        case .KNOWLEDGE_GAP: "Knowledge gap"; case .MISREAD_STEM: "Misread the stem"; case .WRONG_MINDSET: "Wrong mindset"
-        case .CALCULATION: "Calculation slip"; case .RUSHED: "Rushed"
-        }
+    private var rule: CauseRule {
+        if let r = Rules.current.cause(rawValue) { return r }
+        if let r = Rules.defaultCauses.first(where: { $0.id == rawValue }) { return r }
+        return CauseRule(id: rawValue, short: rawValue, label: rawValue, hint: "")
     }
-    var description: String {
-        switch self {
-        case .KNOWLEDGE_GAP: "Didn't know the process, term or formula"
-        case .MISREAD_STEM: "Missed a word like FIRST, NEXT, NOT or BEST"
-        case .WRONG_MINDSET: "Escalated, avoided or acted before understanding"
-        case .CALCULATION: "Arithmetic or an inverted ratio"
-        case .RUSHED: "Answered before reading every option"
+    var title: String { rule.short }
+    /** First person, for the tag button. */
+    var label: String { rule.label }
+    var description: String { rule.hint }
+
+    /** Reads a cause id, including the web app's old ids. */
+    static func of(_ id: String) -> RootCause? {
+        if let c = RootCause(rawValue: id) { return c }
+        switch id {
+        case "knowledge": return .KNOWLEDGE_GAP
+        case "misread": return .MISREAD_STEM
+        case "rushed": return .RUSHED
+        case "mindset": return .WRONG_MINDSET
+        case "tossup": return .TWO_PLAUSIBLE
+        default: return nil
         }
     }
 }
@@ -98,24 +114,51 @@ struct DiagnosticResult: Equatable {
     func domainPct(_ d: Domain) -> Double? { domains[d].flatMap { $0[1] == 0 ? nil : Double($0[0]) / Double($0[1]) } }
 }
 
+/** One formula-lab drill problem marked or shown (shared slice `drills`). ok is false for close, wrong or shown. */
+struct DrillRun: Equatable { var at: Millis; var generator: String; var ok: Bool }
+
 /** One turn of the conversation with the coach. role is "user" or "model". */
 struct ChatTurn: Equatable { var role: String; var text: String; var at: Millis }
 
 /**
  * Everything the person has done, in one JSON file in the app's private storage, in the
- * same format as the Android app's backups. Every change bumps revision (which the UI
- * observes) and is written in the background.
+ * shared progress format (docs/progress-format.md §2, version 3) that the web and Android
+ * apps read too. Every change bumps revision (which the UI observes) and is written in the
+ * background. Keys this app doesn't know, and the web and native blocks, are kept as they
+ * came and written back unchanged.
  */
 final class ProgressStore: ObservableObject {
-    static let TYPE = "pmp-android-progress"
+    static let TYPE = "pmp-progress"
+    static let VERSION = 3
+    /** This app's and the Android app's own older format, still read. */
+    static let LEGACY_TYPE = "pmp-android-progress"
     static let MY_DECK = "mine"
+    /** The top-level keys this store writes from its own fields; anything else is carried through. */
+    static let ownKeys: Set<String> = ["type", "version", "savedAt", "device", "schemaVersion", "attempts", "flags", "notes", "mistakes",
+                                       "cards", "scenarios", "mocks", "lessons", "plan", "sessions", "notepad", "diagnostics", "chat",
+                                       "snoozed", "sittings", "checkins", "weekly", "mycards", "drills"]
+
+    /** This install's id in the document's device block. Made once and kept. */
+    static var deviceId: String {
+        let d = UserDefaults.standard
+        if let id = d.string(forKey: "deviceId"), !id.isEmpty { return id }
+        let id = UUID().uuidString.lowercased()
+        d.set(id, forKey: "deviceId")
+        return id
+    }
     private static let maxAttempts = 20000
     private static let maxChat = 60
+    static let maxDrills = 2000
 
     @Published private(set) var revision = 0
 
     private let file: URL
     private let io = DispatchQueue(label: "progress-save")
+    private let device: String
+    /** The document as last read, so unknown keys and the web and native blocks survive a save. */
+    private(set) var raw: [String: Any] = [:]
+    /** When this copy last changed (ms). The merge uses it to settle edits made on both sides. */
+    private(set) var savedAt: Millis = 0
 
     var attempts: [Attempt] = []
     var flags: [String] = []
@@ -135,11 +178,14 @@ final class ProgressStore: ObservableObject {
     var checkIns: [CheckIn] = []
     var weekly: [WeeklyReport] = []
     var myCards: [Flashcard] = []
+    /** Formula-lab drill log, oldest first. Counts as study days; never as answers. */
+    var drills: [DrillRun] = []
     /** Latest attempt per question. */
     var last: [String: Attempt] = [:]
 
     init(dir: URL) {
         file = dir.appendingPathComponent("progress.json")
+        device = ProgressStore.deviceId
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         if let text = try? String(contentsOf: file, encoding: .utf8), let o = try? JObj.parse(text) { fromJson(o) }
     }
@@ -177,6 +223,11 @@ final class ProgressStore: ObservableObject {
         changed()
     }
     func recordCheckIn(_ c: CheckIn) { checkIns.append(c); changed() }
+    func recordDrill(_ d: DrillRun) {
+        drills.append(d)
+        if drills.count > Self.maxDrills { drills.removeFirst(drills.count - Self.maxDrills) }
+        changed()
+    }
 
     /** Saves this week's report, replacing the week's earlier version. Doesn't bump the revision: it's derived. */
     func putWeekly(_ r: WeeklyReport) {
@@ -206,19 +257,40 @@ final class ProgressStore: ObservableObject {
         attempts = []; flags = []; notes = [:]; mistakeTags = [:]; cards = [:]
         scenarioRuns = []; mocks = []; lessonsDone = []; last = [:]; plan = StudyPlan()
         notepad = ""; diagnostics = []; chat = []; coachSnoozed = [:]; sessionResults = []
-        sittings = []; checkIns = []; weekly = []; myCards = []
+        sittings = []; checkIns = []; weekly = []; myCards = []; drills = []
         changed()
     }
 
-    /** Restores a backup, from this app or the Android app. */
+    /** Restores a backup, from this app, the Android app or the web app's shared format. */
     func restore(_ text: String) throws {
         let o = try JObj.parse(text)
-        if o.optString("type") != Self.TYPE { throw PackError("This is not a PMP Prep progress backup.") }
+        try Self.check(o)
         fromJson(o)
         changed()
     }
 
+    /** Throws unless this is a progress document this app can read: pmp-progress v3, or pmp-android-progress v2. */
+    static func check(_ o: JObj) throws {
+        let type = o.optString("type")
+        if type == TYPE {
+            if !o.has("version") && o.has("schemaVersion") {
+                throw PackError("This is the web app's older backup format. Open it in the web app and save a new backup, then restore that one here.")
+            }
+            if o.optInt("version", VERSION) > VERSION { throw PackError("This backup was made by a newer version of the app.") }
+            return
+        }
+        if type == LEGACY_TYPE { return }
+        throw PackError("This is not a PMP Prep progress backup.")
+    }
+
+    /** Replaces everything with a merged document (cloud sync). The result is saved and observed like any change. */
+    func replace(with doc: [String: Any]) {
+        fromJson(JObj(doc))
+        changed()
+    }
+
     private func changed() {
+        savedAt = Time.now()
         revision += 1
         save()
     }
@@ -236,10 +308,15 @@ final class ProgressStore: ObservableObject {
         }
     }
 
-    /* ── JSON: the Android app's format, field for field ─────────────────── */
+    /* ── JSON: the shared progress format, version 3 ─────────────────────── */
 
     func toJson() -> [String: Any] {
-        var o: [String: Any] = ["type": Self.TYPE, "version": 2]
+        var o: [String: Any] = [:]
+        for (k, v) in raw where !Self.ownKeys.contains(k) { o[k] = v }
+        o["type"] = Self.TYPE
+        o["version"] = Self.VERSION
+        o["savedAt"] = savedAt
+        o["device"] = ["app": "ios", "id": device] as [String: Any]
         o["attempts"] = attempts.map { a -> [String: Any] in
             var j: [String: Any] = ["q": a.qid, "t": a.ecoTask, "d": a.domain.rawValue, "ap": a.approach?.rawValue ?? "",
                                     "ty": a.type.rawValue, "cr": a.credit, "ok": a.correct, "ms": a.ms, "at": a.at, "src": a.source]
@@ -251,19 +328,22 @@ final class ProgressStore: ObservableObject {
             if a.timed { j["tm"] = true }
             if a.confidence > 0 { j["cf"] = a.confidence }
             if a.eliminated > 0 { j["el"] = a.eliminated }
+            if a.difficulty > 0 { j["df"] = a.difficulty }
+            if a.hints > 0 { j["h"] = a.hints }
+            if !a.rowId.isEmpty { j["id"] = a.rowId }
             return j
         }
-        o["flags"] = flags
+        o["flags"] = flags.sorted()
         o["notes"] = notes
         o["mistakes"] = mistakeTags.mapValues { ["c": $0.cause.rawValue, "n": $0.note, "at": $0.at] as [String: Any] }
-        o["cards"] = cards.mapValues { [$0.ease, $0.interval, $0.reps, $0.lapses, $0.due, $0.last, $0.first] as [Any] }
+        o["cards"] = cards.mapValues { c -> [Any] in [c.ease, c.interval, c.reps, c.lapses, c.due, c.last, c.first, c.suspended ? 1 : 0] }
         o["scenarios"] = scenarioRuns.map { ["id": $0.id, "p": $0.picked, "r": $0.rank.rawValue, "at": $0.at] as [String: Any] }
         o["mocks"] = mocks.map { m -> [String: Any] in
             ["at": m.at, "title": m.title, "n": m.n, "right": m.right, "usedMs": m.usedMs,
              "domains": Dictionary(uniqueKeysWithValues: m.domains.map { ($0.key.rawValue, $0.value) })]
         }
-        o["lessons"] = Array(lessonsDone)
-        o["plan"] = ["examDate": plan.examDate ?? 0, "hours": plan.hoursPerWeek, "days": Array(plan.studyDays),
+        o["lessons"] = lessonsDone.sorted()
+        o["plan"] = ["examDate": plan.examDate ?? 0, "hours": plan.hoursPerWeek, "days": plan.studyDays.sorted(),
                      "onboarded": plan.onboarded, "rest": plan.restDays] as [String: Any]
         o["sessions"] = sessionResults.map { r -> [String: Any] in
             ["k": r.key, "kind": r.kind.rawValue, "t": r.taskId ?? "", "d": r.domain?.rawValue ?? "", "s": r.score, "m": r.minutes, "at": r.at]
@@ -278,15 +358,24 @@ final class ProgressStore: ObservableObject {
         o["checkins"] = checkIns.map { ["at": $0.at, "kind": $0.kind, "v": $0.value, "items": $0.items] as [String: Any] }
         o["weekly"] = weekly.map { $0.toJson() }
         o["mycards"] = myCards.map { ["id": $0.id, "t": $0.ecoTask ?? "", "f": $0.front, "b": $0.back, "n": $0.note] as [String: Any] }
+        o["drills"] = drills.map { (d: DrillRun) -> [String: Any] in ["at": d.at, "g": d.generator, "ok": d.ok] }
         return o
     }
 
     private func fromJson(_ o: JObj) {
+        raw = o.d
+        savedAt = o.optLong("savedAt")
         attempts = []; flags = []; notes = [:]; mistakeTags = [:]; cards = [:]
         scenarioRuns = []; mocks = []; lessonsDone = []; last = [:]
         diagnostics = []; chat = []; coachSnoozed = [:]; sessionResults = []
-        sittings = []; checkIns = []; weekly = []; myCards = []
+        sittings = []; checkIns = []; weekly = []; myCards = []; drills = []
         notepad = o.optString("notepad")
+        let readDrills: [DrillRun] = o.objects("drills").compactMap { (d: JObj) -> DrillRun? in
+            let at: Millis = d.optLong("at")
+            if at <= 0 { return nil }
+            return DrillRun(at: at, generator: d.optString("g", "unknown"), ok: d.optBool("ok"))
+        }
+        drills = Array(readDrills.sorted { $0.at < $1.at }.suffix(Self.maxDrills))
         myCards = o.objects("mycards").map {
             Flashcard(id: $0.str("id"), deck: Self.MY_DECK, ecoTask: $0.str("t").isEmpty ? nil : $0.str("t"), front: $0.str("f"), back: $0.str("b"), note: $0.str("n"))
         }
@@ -316,7 +405,8 @@ final class ProgressStore: ObservableObject {
                 approach: Approach.of(a.optString("ap")), type: QType.of(a.optString("ty")) ?? .single,
                 credit: a.optDouble("cr"), correct: a.optBool("ok"), ms: a.optLong("ms"), at: a.optLong("at"), source: a.optString("src"),
                 firstTapMs: a.optLong("ft"), idleMs: a.optLong("idle"), rightToWrong: a.optInt("rw"), wrongToRight: a.optInt("wr"),
-                words: a.optInt("w"), timed: a.optBool("tm"), confidence: a.optInt("cf"), eliminated: a.optInt("el"))
+                words: a.optInt("w"), timed: a.optBool("tm"), confidence: a.optInt("cf"), eliminated: a.optInt("el"),
+                difficulty: a.optInt("df"), hints: a.optInt("h"), rowId: a.optString("id"))
             attempts.append(at)
             last[at.qid] = at
         }
@@ -325,15 +415,18 @@ final class ProgressStore: ObservableObject {
         if let m = o.obj("mistakes") {
             for k in m.keys {
                 guard let v = m.obj(k) else { continue }
-                mistakeTags[k] = MistakeTag(cause: RootCause(rawValue: v.str("c")) ?? .KNOWLEDGE_GAP, note: v.str("n"), at: v.optLong("at"))
+                mistakeTags[k] = MistakeTag(cause: RootCause.of(v.str("c")) ?? .KNOWLEDGE_GAP, note: v.str("n"), at: v.optLong("at"))
             }
         }
         if let c = o.obj("cards") {
             for k in c.keys {
                 guard let a = c.arr(k) else { continue }
                 func n(_ i: Int) -> NSNumber? { i < a.count ? a[i] as? NSNumber : nil }
+                // Seven elements (older files) or eight, the eighth being "suspended" (0 or 1).
+                let suspended: Bool = (n(7)?.intValue ?? 0) != 0
                 cards[k] = CardState(ease: n(0)?.doubleValue ?? 2.5, interval: n(1)?.intValue ?? 0, reps: n(2)?.intValue ?? 0,
-                                     lapses: n(3)?.intValue ?? 0, due: n(4)?.int64Value ?? 0, last: n(5)?.int64Value ?? 0, first: n(6)?.int64Value ?? 0)
+                                     lapses: n(3)?.intValue ?? 0, due: n(4)?.int64Value ?? 0, last: n(5)?.int64Value ?? 0, first: n(6)?.int64Value ?? 0,
+                                     suspended: suspended)
             }
         }
         scenarioRuns = o.objects("scenarios").map { ScenarioRun(id: $0.str("id"), picked: $0.str("p"), rank: Rank.of($0.str("r")), at: $0.optLong("at")) }

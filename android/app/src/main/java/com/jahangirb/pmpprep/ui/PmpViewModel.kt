@@ -14,6 +14,7 @@ import com.jahangirb.pmpprep.data.Approach
 import com.jahangirb.pmpprep.data.Attempt
 import com.jahangirb.pmpprep.data.CardState
 import com.jahangirb.pmpprep.data.ChatTurn
+import com.jahangirb.pmpprep.data.CloudSync
 import com.jahangirb.pmpprep.data.Coach
 import com.jahangirb.pmpprep.data.CoachAction
 import com.jahangirb.pmpprep.data.DiagnosticResult
@@ -41,6 +42,7 @@ import com.jahangirb.pmpprep.data.Scenario
 import com.jahangirb.pmpprep.data.ScenarioRun
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.data.Srs
+import com.jahangirb.pmpprep.data.SyncMerge
 import com.jahangirb.pmpprep.data.WidgetStats
 import com.jahangirb.pmpprep.data.SittingEvent
 import com.jahangirb.pmpprep.data.CheckIn
@@ -54,12 +56,21 @@ import com.jahangirb.pmpprep.data.Booking
 import com.jahangirb.pmpprep.data.BookingReport
 import com.jahangirb.pmpprep.data.Deck
 import com.jahangirb.pmpprep.data.QuestionReview
+import com.jahangirb.pmpprep.data.DrillProblem
+import com.jahangirb.pmpprep.data.DrillVerdict
+import com.jahangirb.pmpprep.data.FormulaDrills
+import com.jahangirb.pmpprep.data.Hint
+import com.jahangirb.pmpprep.data.HintLadder
+import com.jahangirb.pmpprep.data.MockPlan
+import com.jahangirb.pmpprep.data.MockRow
+import com.jahangirb.pmpprep.data.MockTimeReport
 import com.jahangirb.pmpprep.ui.components.ReadingPrefs
 import com.jahangirb.pmpprep.data.ReminderBrain
 import com.jahangirb.pmpprep.data.ReminderSnapshot
 import com.jahangirb.pmpprep.reminders.Reminders
 import com.jahangirb.pmpprep.widget.PmpWidget
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -93,6 +104,7 @@ enum class Dest(val title: String) {
     SETTINGS("Study settings"),
     BOOK("Ready to book?"),
     SEARCH("Search"),
+    SYNC("Cloud sync"),
 }
 
 /** What to practise. Null means "any". */
@@ -104,6 +116,8 @@ data class PracticeFilter(
     val approach: Approach? = null,
     val which: Which = Which.ALL,
     val count: Int = 20,
+    /** Drawn toward your weakest ECO tasks (index.html §10.02 adaptive drill) rather than at random. */
+    val adaptive: Boolean = false,
 ) {
     enum class Which(val title: String) {
         ALL("All questions"), NEW("Not answered yet"), MISSED("Wrong last time"), FLAGGED("Flagged"),
@@ -142,6 +156,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 // The weekly check of which Gemini models are current.
                 checkModels()
                 ready = true
+                // Opening the app syncs (onStart came before content was loaded).
+                autoSync()
                 // Keep the home-screen widget current: a second after progress settles.
                 launch {
                     store.revision.collectLatest {
@@ -172,6 +188,12 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     /** The running mock uses focus mode: Do Not Disturb while it's on screen, and the screen kept awake. */
     var focusMock by mutableStateOf(settings.getBoolean("focusMock", false))
         private set
+
+    /** Offer the hint ladder in practice (index.html "Show hints in practice"); on by default, as on the web. */
+    var showHints by mutableStateOf(settings.getBoolean("hints", true))
+        private set
+
+    fun changeShowHints(on: Boolean) { showHints = on; settings.edit().putBoolean("hints", on).apply() }
 
     fun changeFocusMock(on: Boolean) { focusMock = on; settings.edit().putBoolean("focusMock", on).apply() }
 
@@ -235,6 +257,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun finishQuiz(s: QuizSession) {
         s.finished = true
         if (!s.reviewOnly && !s.diagnostic) store.recordSitting(SittingEvent(s.key, "practice", System.currentTimeMillis(), s.questions.size, s.checkedCount, true))
+        autoSync()
     }
 
     fun pool(): List<Question> = repo.pool()
@@ -254,7 +277,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun startPractice(f: PracticeFilter = filter, title: String = "Practice") {
-        val qs = matching(f).shuffled().take(f.count)
+        val pool = matching(f)
+        val qs = if (f.adaptive) QuestionPicker.adaptive(pool, store.attempts, { store.last[it]?.correct }, f.count, repo.extras.adaptive)
+            else pool.shuffled().take(f.count)
         if (qs.isEmpty()) return
         practice = QuizSession(title, qs)
         if (screen != Dest.PRACTICE) navigate(Dest.PRACTICE)
@@ -284,6 +309,24 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         val st = s.struck[q.id].orEmpty()
         s.struck[q.id] = if (optionId in st) st - optionId else st + optionId
         s.answers[q.id]?.let { a -> if (optionId in a.choices && optionId !in st) s.answers[q.id] = a.copy(choices = a.choices - optionId) }
+    }
+
+    /** Whether the Hint button shows on this question: hints switched on, a practice set, not yet checked, rungs left. */
+    fun canHint(s: QuizSession, q: Question): Boolean =
+        showHints && s.hintsAllowed && !s.isChecked(q) && (s.hints[q.id]?.size ?: 0) < HintLadder.RUNGS
+
+    /** Opens the next rung of the hint ladder. Rung 3 may cross out one wrong option the person hasn't chosen. */
+    fun nextHint(s: QuizSession, q: Question) {
+        if (!canHint(s, q)) return
+        s.touch(System.currentTimeMillis())
+        val have = s.hints[q.id].orEmpty()
+        val lesson = HintLadder.lessonFor(repo.extras.lessons, repo.extras.modules, q.ecoTask)
+        val h = HintLadder.hint(q, have.size + 1, s.order[q.id] ?: q.options, s.answers[q.id]?.choices.orEmpty(), lesson)
+        s.hints[q.id] = have + h
+        h.strike?.let { id ->
+            s.hintStruck[q.id] = id
+            s.struck[q.id] = s.struck[q.id].orEmpty() + id
+        }
     }
 
     /** For pick-type questions: true if a change went wrong → right, false if right → wrong, null otherwise. */
@@ -318,7 +361,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             firstTapMs = if (s.firstTapAt > 0) s.firstTapAt - s.shownAt - s.awayAtFirstTap else 0L,
             idleMs = s.maxIdle, rightToWrong = s.rightToWrong, wrongToRight = s.wrongToRight,
             words = wordsOf(q, withOptions = !s.readingDrill), timed = s.timed,
-            confidence = confidence, eliminated = s.struck[q.id]?.size ?: 0))
+            // An option the hint crossed out wasn't the person's own elimination.
+            confidence = confidence, eliminated = (s.struck[q.id].orEmpty() - setOfNotNull(s.hintStruck[q.id])).size,
+            hints = s.hints[q.id]?.size ?: 0))
     }
 
     fun moveTo(s: QuizSession, i: Int) {
@@ -330,12 +375,13 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     private fun attempt(
         q: Question, credit: Double, correct: Boolean, ms: Long, source: String,
         firstTapMs: Long = 0, idleMs: Long = 0, rightToWrong: Int = 0, wrongToRight: Int = 0, words: Int = wordsOf(q), timed: Boolean = false,
-        confidence: Int = 0, eliminated: Int = 0,
+        confidence: Int = 0, eliminated: Int = 0, hints: Int = 0,
     ) = Attempt(
         qid = q.id, ecoTask = q.ecoTask, domain = q.domain, approach = q.approach, type = q.type,
         credit = credit, correct = correct, ms = ms.coerceAtLeast(0), at = System.currentTimeMillis(), source = source,
         firstTapMs = firstTapMs.coerceAtLeast(0), idleMs = idleMs.coerceAtLeast(0), rightToWrong = rightToWrong,
         wrongToRight = wrongToRight, words = words, timed = timed, confidence = confidence, eliminated = eliminated,
+        difficulty = q.difficulty.coerceIn(0, 5), hints = hints,
     )
 
     /** Accuracy with and without crossing options out first, over answers where it was possible; null until both have 10. */
@@ -389,6 +435,11 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     var finishedMock by mutableStateOf<MockSession?>(null)
         private set
     var mockReview by mutableStateOf<QuizSession?>(null)
+    /** The finished sitting's "where the time went" analysis, and the questions it missed (pretest included). */
+    var lastMockTime by mutableStateOf<MockTimeReport?>(null)
+        private set
+    var lastMockMissed by mutableStateOf<List<String>>(emptyList())
+        private set
     private var timerJob: Job? = null
     private val mockFile: File get() = File(getApplication<Application>().filesDir, "exam.json")
 
@@ -423,8 +474,12 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             durationMs = minutes * 60_000L,
             breakAfter = if (full) layout.breakAfter.filter { it in 1 until qs.size } else emptyList(),
             breakMs = layout.breakMinutes * 60_000L,
+            // Unscored pretest items, in proportion to the full 170 + 10 (index.html §10.03.1).
+            pretest = MockPlan.pickPretest(qs.map { it.id }, layout.totalItems, layout.scoredItems, rnd),
         )
         lastMock = null
+        lastMockTime = null
+        lastMockMissed = emptyList()
         finishedMock = null
         saveMock()
         startTimer()
@@ -474,6 +529,50 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun clearScorecard() {
         lastMock = null
         finishedMock = null
+        lastMockTime = null
+        lastMockMissed = emptyList()
+    }
+
+    /* ── the drill queue (index.html §10.03.12 "send misses to the drill queue") ── */
+
+    /** Question ids sent from mock results, waiting on the Practice screen. Device-only, as the web's queue is. */
+    var mockQueue by mutableStateOf(settings.getString("mockQueue", "").orEmpty().split(',').filter { it.isNotBlank() })
+        private set
+
+    private fun saveQueue(ids: List<String>) {
+        mockQueue = ids
+        settings.edit().putString("mockQueue", ids.joinToString(",")).apply()
+    }
+
+    /** Sends the last sitting's misses to the queue; returns how many were sent. */
+    fun sendMissesToQueue(): Int {
+        val ids = lastMockMissed
+        saveQueue(MockPlan.enqueue(mockQueue, ids))
+        return ids.size
+    }
+
+    /** The queue's questions that are still in an enabled bank. */
+    fun queuedQuestions(): List<Question> {
+        val enabled = pool().associateBy { it.id }
+        return mockQueue.mapNotNull { enabled[it] }
+    }
+
+    /** Drills up to 20 from the queue; the ones taken leave it. */
+    fun startQueue() {
+        val take = queuedQuestions().shuffled().take(20)
+        if (take.isEmpty()) return
+        val taken = take.map { it.id }.toSet()
+        saveQueue(mockQueue.filter { it !in taken })
+        startPracticeWith(take, "From your last mock")
+    }
+
+    fun clearQueue() = saveQueue(emptyList())
+
+    /* ── formula lab drills ──────────────────────────────────────────────── */
+
+    /** Logs a drill problem marked ([verdict]) or shown (null) to the shared drills log. */
+    fun recordDrill(p: DrillProblem, verdict: DrillVerdict?) {
+        store.recordDrill(FormulaDrills.logRow(p, verdict, System.currentTimeMillis()))
     }
 
     fun mockAnswer(q: Question, a: Answer) {
@@ -547,27 +646,37 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         var right = 0
         val dom = HashMap<Domain, IntArray>()
         val perQ = if (m.questions.isEmpty()) 0L else (m.durationMs - m.remainingMs) / m.questions.size
-        for (q in m.questions) {
+        val rows = ArrayList<MockRow>()
+        for ((i, q) in m.questions.withIndex()) {
             val a = m.answers[q.id]
             val r = Scoring.score(q, a)
-            if (r.correct) right++
-            val e = dom.getOrPut(q.domain) { IntArray(2) }
-            e[1]++
-            if (r.correct) e[0]++
+            val pre = q.id in m.pretest
+            rows += MockRow(q.id, MockPlan.blockOf(i, m.breakAfter), pre, Scoring.isAnswered(q, a), r.correct, m.marked[q.id] == true,
+                m.spentMs[q.id] ?: perQ)
+            // Pretest items don't count toward the score, as on the exam; their answers still go to history.
+            if (!pre) {
+                if (r.correct) right++
+                val e = dom.getOrPut(q.domain) { IntArray(2) }
+                e[1]++
+                if (r.correct) e[0]++
+            }
             // Only answered items feed history; a blank at the bell says nothing about the question.
             if (Scoring.isAnswered(q, a)) store.record(attempt(q, r.credit, r.correct, m.spentMs[q.id] ?: perQ, Readiness.SOURCE_EXAM,
                 firstTapMs = m.firstTapMs[q.id] ?: 0L, rightToWrong = m.rightToWrong[q.id] ?: 0, wrongToRight = m.wrongToRight[q.id] ?: 0, timed = true,
                 eliminated = m.struck[q.id]?.size ?: 0))
         }
-        val result = MockResult(now, m.title, m.questions.size, right, m.durationMs - m.remainingMs.coerceAtLeast(0),
+        val result = MockResult(now, m.title, m.questions.count { it.id !in m.pretest }, right, m.durationMs - m.remainingMs.coerceAtLeast(0),
             dom.mapValues { it.value[0] to it.value[1] })
         store.recordMock(result)
         store.recordSitting(SittingEvent("mock:${m.startedAt}", "mock", now, m.questions.size, m.answeredCount, true))
         endFocus()
         lastMock = result
         finishedMock = m
+        lastMockTime = MockPlan.timeReport(rows, repo.extras.exam.paceTargetSec, m.sectionCount)
+        lastMockMissed = rows.filter { !it.correct }.map { it.qid }
         mock = null
         mockFile.delete()
+        autoSync()
     }
 
     fun abandonMock() {
@@ -576,6 +685,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         mock = null
         mockFile.delete()
         endFocus()
+        autoSync()
     }
 
     private fun endFocus() {
@@ -587,7 +697,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         val m = finishedMock ?: return
         val qs = if (onlyWrong) m.questions.filter { !Scoring.score(it, m.answers[it.id]).correct } else m.questions
         if (qs.isEmpty()) return
-        mockReview = QuizSession("Review", qs, reviewOnly = true, givenAnswers = m.answers.toMap(), givenOrder = m.order)
+        mockReview = QuizSession("Review", qs, reviewOnly = true, givenAnswers = m.answers.toMap(), givenOrder = m.order, pretest = m.pretest)
     }
 
     fun saveMock() {
@@ -679,7 +789,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         var due = 0; var new = 0; var leech = 0
         for (c in cards) {
             val s = store.cards[c.id]
-            if (s == null || s.isNew) new++ else if (s.due <= now) due++
+            // A card suspended in another app is neither new nor due here.
+            if (s != null && s.suspended) { if (srs.isLeech(s)) leech++; continue }
+            if (s == null || s.isNew) new++ else if (s.isDue(now)) due++
             if (s != null && srs.isLeech(s)) leech++
         }
         return DeckCounts(cards.size, due, new, leech)
@@ -694,9 +806,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun startDeck(deck: String?) {
         val now = System.currentTimeMillis()
         val cards = allCards().filter { deck == null || it.deck == deck }
-        val due = cards.filter { c -> store.cards[c.id]?.let { !it.isNew && it.due <= now } == true }.sortedBy { store.cards[it.id]?.due }
+        val due = cards.filter { c -> store.cards[c.id]?.isDue(now) == true }.sortedBy { store.cards[it.id]?.due }
         val allowance = (repo.extras.srs.newPerDay - newIntroducedToday()).coerceAtLeast(0)
-        val fresh = cards.filter { c -> store.cards[c.id]?.isNew != false }.take(allowance)
+        val fresh = cards.filter { c -> store.cards[c.id]?.let { it.isNew && !it.suspended } ?: true }.take(allowance)
         val q = due + fresh
         cardQueue = q
         cardIndex = 0
@@ -723,6 +835,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         if (g == Grade.AGAIN) cardQueue = q + card
         cardIndex++
         cardFlipped = false
+        // The last card of a deck session; a session on the path syncs when the whole session ends.
+        if (run == null && cardIndex >= (cardQueue?.size ?: 0)) autoSync()
     }
 
     /* ── guided path ─────────────────────────────────────────────────────── */
@@ -926,7 +1040,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             StepKind.CARDS -> {
                 if (r.review != null) return
                 val now = System.currentTimeMillis()
-                cardQueue = allCards().filter { c -> store.cards[c.id]?.let { !it.isNew && it.due <= now } == true }
+                cardQueue = allCards().filter { c -> store.cards[c.id]?.isDue(now) == true }
                     .sortedBy { store.cards[it.id]?.due }.take(15)
                 cardIndex = 0; cardFlipped = false; newLeeches.clear()
                 if (cardQueue.isNullOrEmpty()) cardsDone(r)
@@ -976,6 +1090,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         run = null
         cardQueue = null
         home()
+        autoSync()
     }
 
     /** Leaves the player; the run is kept so Continue resumes it. */
@@ -1037,6 +1152,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         store.recordDiagnostic(DiagnosticResult(now, s.questions.size, right, dom.mapValues { it.value[0] to it.value[1] }))
         s.index = 0
         s.finished = true
+        autoSync()
     }
 
     /* ── coach ───────────────────────────────────────────────────────────── */
@@ -1230,6 +1346,172 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         coachDraft = sb.toString()
         coachTab = 1
         navigate(Dest.COACH)
+    }
+
+    /* ── cloud sync ──────────────────────────────────────────────────────── */
+
+    /* The URL and code together can read and replace the person's progress, so like the Gemini key they
+       live in their own preferences file, kept out of progress backups and out of Android's cloud backup. */
+    private val syncPrefs = app.getSharedPreferences("sync", android.content.Context.MODE_PRIVATE)
+    private val cloud = CloudSync(CloudSync.Http())
+    /** The document as it was after this phone's last sync: the merge's base (docs/progress-format.md §3). */
+    private val syncBaseFile: File get() = File(getApplication<Application>().filesDir, "sync-base.json")
+    private var syncJob: Job? = null
+    /** A trigger came while a sync was running: run once more when it ends. */
+    private var syncAgain = false
+
+    var syncUrl by mutableStateOf(syncPrefs.getString("url", "").orEmpty())
+        private set
+    var syncCode by mutableStateOf(syncPrefs.getString("code", "").orEmpty())
+        private set
+    /** The code put into a new script. Kept until sync is disconnected, so the script copied earlier still matches. */
+    var syncDraftCode by mutableStateOf(syncPrefs.getString("draft", null) ?: newDraftCode())
+        private set
+    var syncBusy by mutableStateOf(false)
+        private set
+    /** When the last sync succeeded (ms), or 0. */
+    var syncLastAt by mutableStateOf(syncPrefs.getLong("lastAt", 0L))
+        private set
+    /** Why the last sync failed; shown on the Cloud sync screen, never as a pop-up. */
+    var syncError by mutableStateOf(syncPrefs.getString("error", null))
+        private set
+    /** What Test connection found, while setting up. */
+    var syncSetupError by mutableStateOf<String?>(null)
+        private set
+
+    val syncOn: Boolean get() = syncUrl.isNotEmpty() && syncCode.isNotEmpty()
+
+    private fun newDraftCode(): String = CloudSync.newCode().also { syncPrefs.edit().putString("draft", it).apply() }
+
+    /** The script to deploy, with this phone's new code in it; empty if the build carries no script. */
+    fun syncScript(): String = CloudSync.script(repo.extras.syncScript, syncDraftCode)
+
+    /** One line for the menu and the backup screen. */
+    fun syncStatus(now: Long = System.currentTimeMillis()): String = when {
+        !syncOn -> "Off · share progress through your own Google Drive"
+        syncBusy -> "Syncing…"
+        syncError != null -> "Last sync failed · tap to see why"
+        syncLastAt == 0L -> "On · not synced yet"
+        else -> "On · synced " + whenText(syncLastAt, now)
+    }
+
+    fun whenText(t: Long, now: Long = System.currentTimeMillis()): String =
+        if (Srs.startOfDay(t) == Srs.startOfDay(now)) "today at " + java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date(t))
+        else java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM, java.text.DateFormat.SHORT).format(java.util.Date(t))
+
+    /**
+     * Test connection: checks the URL and code with a ping, and when the script answers, keeps them
+     * and runs the first sync. A fresh connection starts from an empty base.
+     */
+    fun connectSync(rawUrl: String, rawCode: String) {
+        if (syncBusy) return
+        val url = CloudSync.cleanUrl(rawUrl)
+        if (url == null) { syncSetupError = "Paste the Web app URL: it starts with https://script.google.com/macros/s/ and ends with /exec."; return }
+        val code = CloudSync.cleanCode(rawCode)
+        if (code == null) { syncSetupError = "The sync code is the 32 letters and digits between the quotes on the SYNC_CODE line of the script."; return }
+        syncBusy = true
+        syncSetupError = null
+        viewModelScope.launch {
+            var ok = false
+            try {
+                withContext(Dispatchers.IO) {
+                    cloud.ping(url, code)
+                    syncBaseFile.delete()
+                }
+                syncPrefs.edit().putString("url", url).putString("code", code).putLong("lastAt", 0L).remove("error").apply()
+                syncUrl = url
+                syncCode = code
+                syncLastAt = 0L
+                syncError = null
+                ok = true
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                syncSetupError = e.message ?: e.toString()
+            } finally {
+                syncBusy = false
+            }
+            if (ok) syncNow()
+        }
+    }
+
+    /** Stops syncing on this phone. Progress here and the file in Drive are both kept. */
+    fun disconnectSync() {
+        syncJob?.cancel()
+        syncJob = null
+        syncAgain = false
+        syncBusy = false
+        syncPrefs.edit().remove("url").remove("code").remove("lastAt").remove("error").apply()
+        syncUrl = ""
+        syncCode = ""
+        syncLastAt = 0L
+        syncError = null
+        syncSetupError = null
+        syncDraftCode = newDraftCode()
+        viewModelScope.launch(Dispatchers.IO) { syncBaseFile.delete() }
+    }
+
+    /** The Sync now button. */
+    fun syncNow() = sync()
+
+    /** Opening, leaving, and finishing a session, set, mock or card review. Quiet: errors wait on the Cloud sync screen. */
+    fun autoSync() {
+        if (ready) sync()
+    }
+
+    /**
+     * One sync (docs/progress-format.md §4): this phone's progress against the cloud copy, the result
+     * taken as progress here and kept as the next base. Never during a mock: the exam's answers go
+     * in together when it's submitted.
+     */
+    private fun sync() {
+        if (!syncOn || mock != null) return
+        if (syncJob?.isActive == true) { syncAgain = true; return }
+        val url = syncUrl
+        val code = syncCode
+        syncBusy = true
+        syncJob = viewModelScope.launch {
+            try {
+                // A consistent snapshot: changes bump the revision inside the store's lock.
+                val (rev0, local) = withContext(Dispatchers.Default) { synchronized(store) { store.revision.value to store.toJson() } }
+                val device = local.getJSONObject("device")
+                val (result, localChanged) = withContext(Dispatchers.IO) {
+                    val base = runCatching { JSONObject(syncBaseFile.readText()) }.getOrNull()
+                    val r = cloud.sync(url, code, base, local, System.currentTimeMillis(), device)
+                    r to !SyncMerge.same(r.merged, local)
+                }
+                // Disconnected, or a mock started, while the network was busy: leave it all for next time.
+                if (syncUrl == url && syncCode == code && mock == null) {
+                    if (store.revision.value != rev0) {
+                        // Answers recorded during the sync go on top of the merge, and up to the cloud next time.
+                        store.applySynced(SyncMerge.merge(local, store.toJson(), result.merged, System.currentTimeMillis(), device))
+                    } else if (localChanged) {
+                        store.applySynced(result.merged)
+                    }
+                    val baseText = result.merged.toString()
+                    withContext(Dispatchers.IO) {
+                        val tmp = File(syncBaseFile.path + ".tmp")
+                        tmp.writeText(baseText)
+                        if (!tmp.renameTo(syncBaseFile)) { syncBaseFile.delete(); tmp.renameTo(syncBaseFile) }
+                    }
+                    syncLastAt = System.currentTimeMillis()
+                    syncError = null
+                    syncPrefs.edit().putLong("lastAt", syncLastAt).remove("error").apply()
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                syncError = e.message ?: e.toString()
+                syncPrefs.edit().putString("error", syncError).apply()
+            } finally {
+                syncBusy = false
+            }
+            if (syncAgain) {
+                syncAgain = false
+                syncJob = null  // this one is ending; let the next start
+                sync()
+            }
+        }
     }
 
     /* ── banks and backup ────────────────────────────────────────────────── */

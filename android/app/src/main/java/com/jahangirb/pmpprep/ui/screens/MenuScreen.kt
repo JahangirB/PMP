@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Assignment
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Calculate
+import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Flag
@@ -104,6 +105,7 @@ fun MenuScreen(vm: PmpViewModel) {
             Entry(Icons.Default.CalendarMonth, "Plan and schedule", "Exam date, hours, study days") { vm.navigate(Dest.PLANNER) },
             Entry(Icons.Default.TextFields, "Study settings", "Text size, reading guide, confidence, focus mode, rest days") { vm.navigate(Dest.SETTINGS) },
             Entry(Icons.Default.Storage, "Question banks and backup", "${vm.pool().size} questions enabled") { vm.navigate(Dest.DATA) },
+            Entry(Icons.Default.Cloud, "Cloud sync", vm.syncStatus()) { vm.navigate(Dest.SYNC) },
         ),
     )
     LazyColumn(Modifier.fillMaxSize()) {

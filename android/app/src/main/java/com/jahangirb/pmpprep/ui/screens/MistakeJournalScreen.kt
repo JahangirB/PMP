@@ -1,6 +1,7 @@
 package com.jahangirb.pmpprep.ui.screens
 
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -62,6 +63,7 @@ fun MistakeJournalScreen(vm: PmpViewModel) {
             else -> vm.store.mistakeTags[q.id]?.cause?.name == cause
         }
     }
+    val rules = vm.repo.extras.rules
     val counts = RootCause.entries.associateWith { c -> missed.count { vm.store.mistakeTags[it.id]?.cause == c } }
 
     LazyColumn(Modifier.fillMaxSize().padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -75,8 +77,8 @@ fun MistakeJournalScreen(vm: PmpViewModel) {
                 FilterChip(selected = cause == null, onClick = { cause = null }, label = { Text("All ${missed.size}") })
                 FilterChip(selected = cause == "untagged", onClick = { cause = "untagged" },
                     label = { Text("Untagged ${missed.count { it.id !in vm.store.mistakeTags }}") })
-                RootCause.entries.forEach { c ->
-                    FilterChip(selected = cause == c.name, onClick = { cause = c.name }, label = { Text("${c.title} ${counts[c]}") })
+                rules.causeOrder.forEach { c ->
+                    FilterChip(selected = cause == c.name, onClick = { cause = c.name }, label = { Text("${rules.cause(c).short} ${counts[c]}") })
                 }
             }
             Spacer(Modifier.height(8.dp))
@@ -98,7 +100,7 @@ fun MistakeJournalScreen(vm: PmpViewModel) {
                 Text(q.stem, fontSize = 14.sp, lineHeight = 20.sp, maxLines = 4, overflow = TextOverflow.Ellipsis)
                 Spacer(Modifier.height(6.dp))
                 if (tag != null) {
-                    Text("Cause: ${tag.cause.title}", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = ColorError)
+                    Text("Cause: ${rules.cause(tag.cause).short}", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = ColorError)
                     if (tag.note.isNotBlank()) Text(tag.note, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 if (q.mindset.isNotBlank()) Text(q.mindset, fontSize = 12.sp, color = MaterialTheme.colorScheme.primary, lineHeight = 16.sp)
@@ -119,12 +121,13 @@ fun MistakeJournalScreen(vm: PmpViewModel) {
             onDismissRequest = { tagging = null },
             title = { Text("Why did this one go wrong?") },
             text = {
-                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    RootCause.entries.forEach { c ->
+                // Six causes with their hints can be taller than a small screen.
+                Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    rules.causeOrder.forEach { c ->
                         FilterChip(selected = pick == c, onClick = { pick = c }, label = {
                             Column(Modifier.padding(vertical = 4.dp)) {
-                                Text(c.title, fontWeight = FontWeight.Bold)
-                                Text(c.description, fontSize = 11.sp)
+                                Text(rules.cause(c).label, fontWeight = FontWeight.Bold)
+                                Text(rules.cause(c).hint, fontSize = 11.sp)
                             }
                         }, modifier = Modifier.fillMaxWidth())
                     }

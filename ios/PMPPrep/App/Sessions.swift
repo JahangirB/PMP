@@ -37,6 +37,9 @@ final class QuizSession: ObservableObject, Identifiable {
     @Published var optionsShown: Bool
     @Published var totalRightToWrong = 0
     @Published var totalWrongToRight = 0
+    /** Hint rungs used per question, and the hints shown so far (the ladder, web §10.16.10). */
+    @Published var hints: [String: Int] = [:]
+    @Published var hintsShown: [String: [HintLadder.Hint]] = [:]
 
     /* How the current question is being handled, for Exam fitness. Times exclude time spent outside the app. */
     var firstTapAt: Millis = 0
@@ -78,6 +81,8 @@ final class QuizSession: ObservableObject, Identifiable {
     }
 
     var current: Question { questions[min(max(index, 0), questions.count - 1)] }
+    /** Hints are for practice only: never a mock review, a lesson set, the diagnostic, a timed drill or a reading drill. */
+    var hintable: Bool { !reviewOnly && !diagnostic && !timed && !readingDrill && source != Readiness.SOURCE_LESSON }
     func isChecked(_ q: Question) -> Bool { results[q.id] != nil }
     var checkedCount: Int { results.count }
     var correctCount: Int { results.values.filter(\.correct).count }
@@ -104,6 +109,8 @@ final class MockSession: ObservableObject {
     @Published var breakRemainingMs: Int64 = 0
     @Published var finished = false
     var startedAt = Time.now()
+    /** Unscored pretest items, as on the real exam; revealed only on the results. */
+    var pretest: Set<String> = []
     /** Per question: time on screen, time to first answer, and answer changes (for Exam fitness). */
     var spentMs: [String: Int64] = [:]
     var firstTapMs: [String: Int64] = [:]
@@ -121,6 +128,7 @@ final class MockSession: ObservableObject {
     var inSection: Range<Int> { sectionStart(section)..<sectionEnd(section) }
     var current: Question { questions[min(max(index, 0), questions.count - 1)] }
     var answeredCount: Int { questions.filter { Scoring.isAnswered($0, answers[$0.id]) }.count }
+    func isPretest(_ q: Question) -> Bool { pretest.contains(q.id) }
 
     static func answerJson(_ a: Answer) -> [String: Any] { ["c": Array(a.choices), "m": a.map] }
     static func answerFrom(_ o: JObj?) -> Answer {
@@ -140,6 +148,7 @@ final class MockSession: ObservableObject {
             "duration": durationMs, "remaining": remainingMs, "breakAfter": breakAfter, "breakMs": breakMs,
             "index": index, "section": section, "onBreak": onBreak, "breakRemaining": breakRemainingMs, "startedAt": startedAt,
             "spent": spentMs, "firstTap": firstTapMs, "rw": rightToWrong, "wr": wrongToRight,
+            "pretest": Array(pretest).sorted(),
         ]
     }
 
@@ -170,6 +179,7 @@ final class MockSession: ObservableObject {
         if let j = o.obj("firstTap") { for k in j.keys { s.firstTapMs[k] = j.optLong(k) } }
         if let j = o.obj("rw") { for k in j.keys { s.rightToWrong[k] = j.optInt(k) } }
         if let j = o.obj("wr") { for k in j.keys { s.wrongToRight[k] = j.optInt(k) } }
+        s.pretest = Set(o.strings("pretest"))
         return s
     }
 }

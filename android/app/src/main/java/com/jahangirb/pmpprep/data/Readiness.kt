@@ -69,7 +69,8 @@ class Readiness(
     private fun ratio(v: Double, lo: Double, hi: Double) = if (hi == lo) 0.0 else ((v - lo) / (hi - lo)).coerceIn(0.0, 1.0)
 
     fun accuracy(attempts: List<Attempt>, now: Long, filter: ((Attempt) -> Boolean)? = null): Pair<Double, Int> {
-        var list = attempts.filter { it.source != SOURCE_LESSON }
+        // Hinted answers (web) say little about what you know unaided.
+        var list = attempts.filter { it.source != SOURCE_LESSON && !it.hinted }
         if (filter != null) list = list.filter(filter)
         list = list.takeLast(r.accuracyWindow)
         var wSum = r.accuracyPriorN
@@ -86,7 +87,7 @@ class Readiness(
     fun group(attempts: List<Attempt>, key: (Attempt) -> String?): Map<String, Group> {
         val m = HashMap<String, MutableList<Attempt>>()
         for (a in attempts) {
-            if (a.source == SOURCE_LESSON) continue
+            if (a.source == SOURCE_LESSON || a.hinted) continue
             val k = key(a) ?: continue
             if (k.isEmpty()) continue
             m.getOrPut(k) { ArrayList() } += a
@@ -98,7 +99,7 @@ class Readiness(
     }
 
     fun medianPace(attempts: List<Attempt>): Pair<Double?, Int> {
-        val secs = attempts.filter { it.source != SOURCE_LESSON }.takeLast(r.accuracyWindow)
+        val secs = attempts.filter { it.source != SOURCE_LESSON && !it.hinted }.takeLast(r.accuracyWindow)
             .filter { it.ms > 500 }.map { it.ms / 1000.0 }.sorted()
         if (secs.isEmpty()) return null to 0
         val mid = secs.size / 2
@@ -112,6 +113,8 @@ class Readiness(
         store.mocks.forEach { days += Srs.startOfDay(it.at) }
         store.scenarioRuns.forEach { days += Srs.startOfDay(it.at) }
         store.cards.values.forEach { if (it.last > 0) days += Srs.startOfDay(it.last) }
+        // A formula-lab drill makes a study day too (index.html §10.00.6), though it never touches accuracy.
+        store.drills.forEach { days += Srs.startOfDay(it.at) }
         val today = Srs.startOfDay(now)
         val kept = if (store.plan.restDays) withRestDays(days, today) else days
         var cursor = if (today in kept) today else prevDay(today)

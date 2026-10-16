@@ -18,7 +18,7 @@ enum QuestionReview {
         guard let miss = h.lastIndex(where: { !$0.correct }) else { return nil }
         var step = 0
         var due = dueAfter(h[miss].at, 0)
-        for a in h[(miss + 1)...] where a.correct && !a.luckyGuess && Time.startOfDay(a.at) >= due {
+        for a in h[(miss + 1)...] where a.correct && a.isEvidence && Time.startOfDay(a.at) >= due {
             step += 1
             if step >= STEP_DAYS.count { return nil }
             due = dueAfter(a.at, step)

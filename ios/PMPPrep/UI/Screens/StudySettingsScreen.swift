@@ -32,6 +32,9 @@ struct StudySettingsScreen: View {
                 SettingsSwitch(title: "Ask how sure I am",
                                detail: "Sure, Think so or Guess, before each practice answer is checked. A right guess won't count toward mastery; a sure-but-wrong answer goes to the top of the mistake journal. Never asked in mocks.",
                                on: m.askConfidence) { m.changeAskConfidence($0) }
+                SettingsSwitch(title: "Show hints in practice",
+                               detail: "A Hint button on practice questions: the approach's lens, then the principle, then one wrong option ruled out. An answer given after a hint stays out of your accuracy and pace. Never offered in mocks, the diagnostic, timed or reading drills.",
+                               on: m.showHints) { m.changeShowHints($0) }
             }
             PmpCard {
                 SectionLabel("Streak")
