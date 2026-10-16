@@ -2472,6 +2472,7 @@ mark.np-h-none { background: transparent; }
 <symbol id="i-ul" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9.5 6.5H20M9.5 12H20M9.5 17.5H20"/><circle cx="5" cy="6.5" r="1" fill="currentColor"/><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="5" cy="17.5" r="1" fill="currentColor"/></symbol>
 <symbol id="i-ol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6.5H20M10 12H20M10 17.5H20"/><path d="M4 5l1.5-1v5M4 13.5c0-1 .7-1.5 1.4-1.5s1.3.5 1.3 1.2c0 1-2.7 2.1-2.7 3.3h2.8" stroke-width="1.4"/></symbol>
 <symbol id="i-marker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5l5 5-8 8H8.5L7 16l-.5-3z"/><path d="M6.5 13l4.5 4.5M3.5 20.5h7"/></symbol>
+<symbol id="i-sync" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 9A7.5 7.5 0 0 0 6 6.5L4.5 8M4.5 15A7.5 7.5 0 0 0 18 17.5l1.5-1.5"/><path d="M4.5 4v4h4M19.5 20v-4h-4"/></symbol>
 <symbol id="i-clip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
 </defs></svg>
 
@@ -2522,6 +2523,7 @@ mark.np-h-none { background: transparent; }
       <div class="nav-grp nav-grp--foot">
         <a class="nav-i" href="#/settings"  data-route="settings"><svg class="i"><use href="#i-settings"></use></svg>Settings and About</a>
         <a class="nav-i" href="#/data"      data-route="data"><svg class="i"><use href="#i-data"></use></svg>Backup and packs</a>
+        <a class="nav-i" href="#/sync"      data-route="sync"><svg class="i"><use href="#i-sync"></use></svg>Cloud sync</a>
       </div>
     </div>
 
@@ -2666,6 +2668,79 @@ mark.np-h-none { background: transparent; }
   <div class="sheet-bd" id="sheet-body"></div>
   <div class="sheet-ft" id="sheet-foot"></div>
 </dialog>
+
+<!-- 04.4  The cloud sync script (§10.18), verbatim from sync/pmp-sync.gs.
+     Inert text: the Cloud sync page fills in the code and shows it for the
+     person to copy into their own Google account. A test keeps the two the
+     same. -->
+<script type="text/plain" id="pmp-sync-gs">/**
+ * PMP Prep cloud sync. Keeps your study progress and notes in one file in your Google Drive,
+ * "PMP Prep/pmp-sync.json", so the web, Android and iPhone apps can share it.
+ *
+ * Deploy: Deploy → New deployment → Web app → Execute as: Me, Who has access: Anyone.
+ * "Anyone" only means the URL answers without a Google sign-in. Every request must carry
+ * SYNC_CODE below, so keep the URL and the code private. To revoke access, change the
+ * code and deploy a new version.
+ *
+ * This script reads and writes only that one file. It sends nothing anywhere else.
+ */
+const SYNC_CODE = '__SYNC_CODE__';
+const FOLDER_NAME = 'PMP Prep';
+const FILE_NAME = 'pmp-sync.json';
+
+function doPost(e) {
+  let req;
+  try { req = JSON.parse(e.postData.contents); } catch (err) { return reply({ ok: false, error: 'bad-request' }); }
+  if (!req || req.code !== SYNC_CODE || SYNC_CODE.indexOf('__') === 0) return reply({ ok: false, error: 'bad-code' });
+
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(20000)) return reply({ ok: false, error: 'busy' });
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const rev = Number(props.getProperty('rev') || 0);
+    const file = findFile();
+    if (req.op === 'ping') return reply({ ok: true, rev: rev, savedAt: Number(props.getProperty('savedAt') || 0) });
+    if (req.op === 'get') return reply({ ok: true, rev: rev, doc: file ? JSON.parse(file.getBlob().getDataAsString()) : null });
+    if (req.op === 'put') {
+      if (Number(req.baseRev) !== rev) {
+        return reply({ ok: false, conflict: true, rev: rev, doc: file ? JSON.parse(file.getBlob().getDataAsString()) : null });
+      }
+      if (!req.doc || req.doc.type !== 'pmp-progress') return reply({ ok: false, error: 'bad-doc' });
+      const text = JSON.stringify(req.doc);
+      if (file) file.setContent(text); else folder().createFile(FILE_NAME, text, 'application/json');
+      props.setProperties({ rev: String(rev + 1), savedAt: String(Date.now()) });
+      return reply({ ok: true, rev: rev + 1 });
+    }
+    return reply({ ok: false, error: 'bad-op' });
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** Opening the URL in a browser shows this, so you can check the deployment works. */
+function doGet() {
+  return reply({ ok: true, app: 'PMP Prep sync', note: 'Working. The apps talk to this URL with your sync code.' });
+}
+
+function folder() {
+  const it = DriveApp.getFoldersByName(FOLDER_NAME);
+  return it.hasNext() ? it.next() : DriveApp.createFolder(FOLDER_NAME);
+}
+
+function findFile() {
+  const id = PropertiesService.getScriptProperties().getProperty('fileId');
+  if (id) { try { const f = DriveApp.getFileById(id); if (!f.isTrashed()) return f; } catch (err) {} }
+  const it = folder().getFilesByName(FILE_NAME);
+  if (!it.hasNext()) return null;
+  const f = it.next();
+  PropertiesService.getScriptProperties().setProperty('fileId', f.getId());
+  return f;
+}
+
+function reply(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+</script>
 
 <script>
 "use strict";
@@ -35819,6 +35894,1273 @@ PMP.CoachUI = (function () {
   return { view: view, intake: intake, settingsCard: settingsCard, startStep: startStep, strip: strip,
            exportCalendar: exportCalendar };
 })();
+
+/* ── 10.18  CLOUD SYNC ──────────────────────────────────────────────────────
+   One progress format for the web, Android and iPhone apps, a merge that all
+   three run identically, and a client for the person's own Google Apps
+   Script, which keeps the shared file in their Drive. docs/progress-format.md
+   is the contract for every part of this section; where the two disagree the
+   code is wrong.
+
+   Five decisions worth knowing before reading the code:
+
+   · The web keeps its own slices. Everything the views read is still the
+     store §07 describes, and the shared document is built from it on the
+     way out (toDoc) and folded back into it on the way in (fromDoc). Data
+     that starts on a phone therefore has to become web data to be seen: a
+     phone's answers become attempts, its card states become `srs`, its
+     mistake tags become journal entries, its mock summaries are listed by
+     §10.00 next to the web's own sittings. What the web has no slice for
+     (a phone's sessions, sittings, check-ins and so on) waits untouched in
+     the `shared` slice and goes back out exactly as it came in.
+
+   · Round trips are lossless, in both directions. A web row carries the
+     fields the shared row has no room for in `wx` (its option order, lesson
+     id, exam id, mode where the shared `src` cannot say it), and the rest of
+     the web's own state rides in the `web` block. A phone row is given an
+     id the web can recognise ("sx-" + question + time) and keeps whatever
+     the web did not understand in `sx`, so writing it back out reproduces
+     it field for field. Without that, each device would keep "improving"
+     the other's rows and every sync would upload the whole file again.
+
+   · The merge is pure. merge(base, local, remote) reads nothing but its
+     arguments and is the same function in every app; tests/fixtures/sync
+     checks this copy against the shared fixture.
+
+   · Sync is off until set up, and is never a pop-up. It runs when the page
+     opens, comes back to the foreground or is hidden, after a practice set,
+     a mock or a card session, and on Sync now. Never during a mock: the
+     sitting owns the page. Failures land on the Cloud sync screen with the
+     time of the last good sync, and nowhere else.
+
+   · The address and the code are not progress. They live in localStorage
+     beside the store, never in it, so they never reach a backup file, an
+     export or the synced document itself, and Disconnect forgets them.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.Sync = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, frag = PMP.dom.frag;
+  var R = PMP.RULES;
+  var DAY = 86400000;
+
+  /* ── 10.18.1  THE DOCUMENT ───────────────────────────────────────────────
+     The four kinds of slice from §3 of the contract. A log's identity is a
+     string built from the fields that name one record; `at` is where it
+     sorts (the weekly report sorts on its week start). */
+  var LOGS = {
+    attempts:    { id: function (r) { return r.q + "|" + r.at; }, cap: 20000 },
+    scenarios:   { id: function (r) { return r.id + "|" + r.at; } },
+    mocks:       { id: function (r) { return r.at + "|" + (r.title || ""); } },
+    sessions:    { id: function (r) { return r.k + "|" + r.at; } },
+    diagnostics: { id: function (r) { return String(r.at); } },
+    chat:        { id: function (r) { return r.at + "|" + r.r; }, cap: 60 },
+    sittings:    { id: function (r) { return r.k + "|" + r.at; }, cap: 2000 },
+    checkins:    { id: function (r) { return r.kind + "|" + r.at; } },
+    weekly:      { id: function (r) { return String(r.w); }, at: function (r) { return r.w; }, cap: 104 },
+    drills:      { id: function (r) { return r.at + "|" + r.g; }, cap: 2000 }
+  };
+  var SETS = ["flags", "lessons"];
+  var MAPS = ["notes", "mistakes", "cards", "snoozed", "mycards", "web", "native"];
+  var HEADER = { type: 1, version: 1, savedAt: 1, device: 1 };
+  /* Shared slices the web builds from its own store on every export. The
+     rest (plan, mocks, sessions …) are kept in `shared` and written back. */
+  var OWNED = { attempts: 1, flags: 1, notes: 1, mistakes: 1, cards: 1, scenarios: 1,
+                lessons: 1, notepad: 1, web: 1, mocks: 1, drills: 1 };
+
+  function isObj(v) { return !!v && typeof v === "object" && !Array.isArray(v); }
+  function arr(v) { return Array.isArray(v) ? v : []; }
+  function obj(v) { return isObj(v) ? v : {}; }
+  function clone(v) { return v === undefined ? undefined : JSON.parse(JSON.stringify(v)); }
+  function ts(v) { if (typeof v === "number") return v; var t = Date.parse(v); return isNaN(t) ? 0 : t; }
+  function iso(ms) { return new Date(ms).toISOString(); }
+
+  /* Canonical JSON: keys sorted at every depth, so two documents that say
+     the same thing compare equal whatever order their keys were written in. */
+  function canon(v) {
+    if (v === undefined) return "~";
+    if (v === null || typeof v !== "object") return JSON.stringify(v);
+    if (Array.isArray(v)) return "[" + v.map(canon).join(",") + "]";
+    return "{" + Object.keys(v).sort().filter(function (k) { return v[k] !== undefined; })
+      .map(function (k) { return JSON.stringify(k) + ":" + canon(v[k]); }).join(",") + "}";
+  }
+  function same(a, b) { return canon(a) === canon(b); }
+
+  function emptyOf(k) {
+    if (LOGS[k] || SETS.indexOf(k) >= 0 || k === "mycards") return [];
+    if (MAPS.indexOf(k) >= 0) return {};
+    if (k === "notepad") return "";
+    return undefined;
+  }
+  function slice(doc, k) {
+    var v = doc ? doc[k] : undefined;
+    if (v === undefined || v === null) return emptyOf(k);
+    return v;
+  }
+  function emptyDoc() { return { type: "pmp-progress", version: 3, savedAt: 0, device: { app: "", id: "" } }; }
+
+  /* Two documents hold the same progress when every slice is equal. When
+     they were written and by which device is not progress. */
+  function sameDoc(a, b) {
+    var keys = Object.create(null);
+    [a || {}, b || {}].forEach(function (d) { Object.keys(d).forEach(function (k) { if (!HEADER[k]) keys[k] = 1; }); });
+    Object.keys(LOGS).concat(SETS, MAPS, ["notepad"]).forEach(function (k) { keys[k] = 1; });
+    return Object.keys(keys).every(function (k) { return same(slice(a, k), slice(b, k)); });
+  }
+
+  /* ── 10.18.2  THE MERGE ──────────────────────────────────────────────────
+     Docs §3, line for line. Logs are a union and never lose a record; sets
+     and maps are three-way against the base, so a removal on one side
+     survives; values move whole. A tie on savedAt goes to local, so the
+     same inputs always give the same answer. */
+  function sortLog(k, list) {
+    var at = LOGS[k].at || function (r) { return r.at; }, id = LOGS[k].id;
+    return list.slice().sort(function (x, y) {
+      var d = (Number(at(x)) || 0) - (Number(at(y)) || 0);
+      if (d) return d;
+      var a = id(x), b = id(y);
+      return a < b ? -1 : a > b ? 1 : 0;
+    });
+  }
+
+  function mergeLog(k, local, remote) {
+    var id = LOGS[k].id, seen = Object.create(null), out = [];
+    arr(local).concat(arr(remote)).forEach(function (r) {
+      if (!r || typeof r !== "object") return;
+      var key = id(r);
+      if (seen[key]) return;
+      seen[key] = 1;
+      out.push(r);
+    });
+    out = sortLog(k, out);
+    var cap = LOGS[k].cap;
+    return cap && out.length > cap ? out.slice(out.length - cap) : out;
+  }
+
+  function mergeSet(base, local, remote) {
+    var b = Object.create(null), l = Object.create(null), r = Object.create(null), all = Object.create(null);
+    arr(base).forEach(function (x) { b[x] = 1; all[x] = 1; });
+    arr(local).forEach(function (x) { l[x] = 1; all[x] = 1; });
+    arr(remote).forEach(function (x) { r[x] = 1; all[x] = 1; });
+    return Object.keys(all).filter(function (x) {
+      return b[x] ? (l[x] && r[x]) : (l[x] || r[x]);
+    }).sort();
+  }
+
+  /* Both sides changed one key: cards keep the later review, mistakes the
+     later tag, everything else the side saved last. */
+  function decide(kind, l, r, localWins) {
+    if (kind === "cards") {
+      if (l === undefined) return r;
+      if (r === undefined) return l;
+      return (Number(r[5]) || 0) > (Number(l[5]) || 0) ? r : l;
+    }
+    if (kind === "mistakes") {
+      if (l === undefined) return r;
+      if (r === undefined) return l;
+      return (Number(r.at) || 0) > (Number(l.at) || 0) ? r : l;
+    }
+    return localWins ? l : r;
+  }
+
+  function mergeMap(kind, base, local, remote, localWins) {
+    var b = obj(base), l = obj(local), r = obj(remote), keys = Object.create(null), out = {};
+    [b, l, r].forEach(function (m) { Object.keys(m).forEach(function (k) { keys[k] = 1; }); });
+    Object.keys(keys).sort().forEach(function (k) {
+      var lc = !same(l[k], b[k]), rc = !same(r[k], b[k]), v;
+      if (!lc && !rc) v = l[k];
+      else if (lc && !rc) v = l[k];
+      else if (!lc && rc) v = r[k];
+      else v = same(l[k], r[k]) ? l[k] : decide(kind, l[k], r[k], localWins);
+      if (v !== undefined) out[k] = v;
+    });
+    return out;
+  }
+
+  /* mycards is a list keyed by id; it merges as a map and is written back
+     as a list sorted by id. */
+  function byId(list) {
+    var m = {};
+    arr(list).forEach(function (c) { if (c && c.id != null) m[c.id] = c; });
+    return m;
+  }
+
+  function mergeValue(b, l, r, localWins) {
+    var lc = !same(l, b), rc = !same(r, b);
+    if (lc && !rc) return l;
+    if (rc && !lc) return r;
+    if (!lc && !rc) return l;
+    return same(l, r) ? l : (localWins ? l : r);
+  }
+
+  function merge(base, local, remote, opts) {
+    opts = opts || {};
+    base = base || emptyDoc();
+    local = local || emptyDoc();
+    remote = remote || emptyDoc();
+    var localWins = (Number(local.savedAt) || 0) >= (Number(remote.savedAt) || 0);
+    var out = {
+      type: "pmp-progress", version: 3,
+      savedAt: opts.now || Date.now(),
+      device: opts.device || clone(local.device) || { app: "web", id: "" }
+    };
+    Object.keys(LOGS).forEach(function (k) { out[k] = mergeLog(k, slice(local, k), slice(remote, k)); });
+    SETS.forEach(function (k) { out[k] = mergeSet(slice(base, k), slice(local, k), slice(remote, k)); });
+    MAPS.forEach(function (k) {
+      if (k === "mycards") {
+        var m = mergeMap(k, byId(base.mycards), byId(local.mycards), byId(remote.mycards), localWins);
+        out[k] = Object.keys(m).sort().map(function (id) { return m[id]; });
+      } else {
+        out[k] = mergeMap(k, slice(base, k), slice(local, k), slice(remote, k), localWins);
+      }
+    });
+    var keys = Object.create(null);
+    [base, local, remote].forEach(function (d) { Object.keys(d).forEach(function (k) { keys[k] = 1; }); });
+    keys.plan = 1; keys.notepad = 1;
+    Object.keys(keys).sort().forEach(function (k) {
+      if (HEADER[k] || LOGS[k] || SETS.indexOf(k) >= 0 || MAPS.indexOf(k) >= 0) return;
+      var v = mergeValue(slice(base, k), slice(local, k), slice(remote, k), localWins);
+      if (v !== undefined) out[k] = v;
+    });
+    return out;
+  }
+
+  /* ── 10.18.3  WEB → SHARED ───────────────────────────────────────────────
+     An attempt row, both ways. core() is the shared row a web attempt maps
+     to; anything of the web's the shared row has no field for goes in `wx`;
+     anything of a phone's the web has no field for came in as `sx` and goes
+     back out unchanged. */
+  var ATTEMPT_MAPPED = { id: 1, qid: 1, ecoTask: 1, domain: 1, approach: 1, type: 1, difficulty: 1,
+                         correct: 1, credit: 1, ms: 1, at: 1, confidence: 1, hinted: 1, mode: 1,
+                         sx: 1, check: 1 };
+  function srcOf(mode) { return mode === "diagnostic" || mode === "lesson" ? mode : "practice"; }
+  function modeOf(r) {
+    if (r.src === "diagnostic" || r.src === "lesson" || r.src === "exam") return r.src;
+    return r.tm ? "timed" : "practice";
+  }
+  function phoneId(q, at) { return "sx-" + q + "-" + at; }
+
+  function attemptCore(a) {
+    var at = ts(a.at);
+    var r = {
+      q: a.qid, t: a.ecoTask || "", d: a.domain || "", ap: a.approach || "", ty: a.type || "",
+      cr: typeof a.credit === "number" ? a.credit : (a.correct ? 1 : 0),
+      ok: !!a.correct, ms: Number(a.ms) || 0, at: at, src: srcOf(a.mode)
+    };
+    if (a.id && a.id !== phoneId(a.qid, at)) r.id = a.id;
+    if (a.mode === "timed") r.tm = true;
+    if (typeof a.confidence === "number" && a.confidence > 0) r.cf = a.confidence;
+    if (a.difficulty) r.df = a.difficulty;
+    if (a.hinted) r.h = a.hinted;
+    return r;
+  }
+
+  function attemptOut(a) {
+    var r = attemptCore(a), wx = {}, n = 0;
+    Object.keys(a).forEach(function (k) {
+      if (!ATTEMPT_MAPPED[k]) { wx[k] = a[k]; n++; }
+    });
+    if (a.mode && a.mode !== modeOf(r)) { wx.mode = a.mode; n++; }
+    /* A phone's row goes back exactly as it came, so it never grows a wx. */
+    if (n && !a.sx) r.wx = wx;
+    if (a.sx) {
+      Object.keys(a.sx).forEach(function (k) { if (k !== "-") r[k] = a.sx[k]; });
+      arr(a.sx["-"]).forEach(function (k) { delete r[k]; });
+    }
+    return r;
+  }
+
+  function attemptIn(r) {
+    var x = obj(r.wx);
+    var a = {
+      id: r.id || phoneId(r.q, r.at), qid: r.q, ecoTask: r.t || null, domain: r.d || null,
+      approach: r.ap || null, type: r.ty || null, difficulty: r.df || null,
+      correct: !!r.ok, credit: typeof r.cr === "number" ? r.cr : (r.ok ? 1 : 0),
+      ms: Number(r.ms) || 0, at: iso(Number(r.at) || 0),
+      confidence: typeof r.cf === "number" && r.cf > 0 ? r.cf : null,
+      mode: x.mode || modeOf(r)
+    };
+    if (r.h) a.hinted = r.h;
+    Object.keys(x).forEach(function (k) { if (k !== "mode") a[k] = x[k]; });
+    if (!r.wx && !r.id) {
+      /* A phone's row. Its lesson rows are quick checks, which the web
+         keeps out of accuracy (§10.00.1). Whatever it carries that the web
+         does not model is kept so the row goes back out as it came in. */
+      if (r.src === "lesson") a.check = true;
+      var core = attemptCore(a), sx = {}, drop = [], n = 0;
+      Object.keys(r).forEach(function (k) { if (!same(r[k], core[k])) { sx[k] = r[k]; n++; } });
+      Object.keys(core).forEach(function (k) { if (!(k in r)) drop.push(k); });
+      if (drop.length) { sx["-"] = drop; n++; }
+      if (n) a.sx = sx;
+    }
+    return a;
+  }
+
+  /* A card's schedule as the shared eight-number row, and back. The web's
+     own extras (lifetime reviews, and a leech flag that a reset keeps)
+     ride in web.srs. */
+  function cardOut(rec) {
+    return [Number(rec.ease) || PMP.SRS.EASE_START, Number(rec.interval) || 0, Number(rec.reps) || 0,
+            Number(rec.lapses) || 0, Number(rec.due) || 0, Number(rec.last) || 0, Number(rec.first) || 0,
+            rec.suspended ? 1 : 0];
+  }
+  function cardIn(row, extra) {
+    var lapses = Number(row[3]) || 0;
+    var rec = {
+      ease: Number(row[0]) || PMP.SRS.EASE_START, interval: Number(row[1]) || 0, reps: Number(row[2]) || 0,
+      lapses: lapses, due: Number(row[4]) || 0, suspended: !!row[7],
+      leech: lapses >= PMP.SRS.LEECH_THRESHOLD, first: Number(row[6]) || null, last: Number(row[5]) || null,
+      reviews: (Number(row[2]) || 0) + lapses
+    };
+    if (Array.isArray(extra)) {
+      if (typeof extra[0] === "number") rec.reviews = extra[0];
+      if (extra[1]) rec.leech = true;
+    }
+    return rec;
+  }
+
+  var SCN_MAPPED = { sid: 1, chosen: 1, rank: 1, at: 1, credit: 1, sx: 1 };
+  function scenarioOut(run) {
+    var r = { id: run.sid, p: run.chosen || "", r: run.rank || "wrong", at: ts(run.at) };
+    var wx = {}, n = 0;
+    Object.keys(run).forEach(function (k) { if (!SCN_MAPPED[k]) { wx[k] = run[k]; n++; } });
+    if (n && !(run.sx)) r.wx = wx;
+    if (run.sx) {
+      Object.keys(run.sx).forEach(function (k) { if (k !== "-") r[k] = run.sx[k]; });
+      arr(run.sx["-"]).forEach(function (k) { delete r[k]; });
+    }
+    return r;
+  }
+  var SCN_BY_ID = null;
+  function scenarioIn(r) {
+    var credit = R.scenarioCredit;
+    var rank = r.r in credit ? r.r : "wrong";
+    if (r.wx) {
+      return Object.assign({ sid: r.id, chosen: r.p, rank: rank, credit: credit[rank], at: iso(Number(r.at) || 0) }, r.wx);
+    }
+    if (!SCN_BY_ID) {
+      SCN_BY_ID = Object.create(null);
+      (PMP.SCENARIOS || []).forEach(function (s) { SCN_BY_ID[s.id] = s; });
+    }
+    var scn = SCN_BY_ID[r.id] || {};
+    var run = {
+      id: phoneId(r.id, r.at), sid: r.id, domain: scn.domain || null, ecoTask: scn.ecoTask || null,
+      approach: scn.approach || null, difficulty: scn.difficulty || null,
+      chosen: r.p, rank: rank, credit: credit[rank], ms: 0, at: iso(Number(r.at) || 0), order: []
+    };
+    var core = { id: r.id, p: r.p, r: rank, at: Number(r.at) || 0 }, sx = {}, drop = [], n = 0;
+    Object.keys(r).forEach(function (k) { if (!same(r[k], core[k])) { sx[k] = r[k]; n++; } });
+    Object.keys(core).forEach(function (k) { if (!(k in r)) drop.push(k); });
+    if (drop.length) { sx["-"] = drop; n++; }
+    run.sx = sx;
+    return run;
+  }
+
+  /* A finished sitting as the shared summary. The title is part of the
+     summary's identity, so it is derived the same way every time. */
+  function mockTitle(e) {
+    var n = e.layout && e.layout.items;
+    return n === PMP.EXAM.TOTAL_ITEMS ? "Full exam" : "Mock exam, " + (n || (e.qids || []).length) + " items";
+  }
+  function mockKey(e) { return ts(e.finishedAt) + "|" + mockTitle(e); }
+  function mockOut(e) {
+    var domains = {};
+    (e.rows || []).forEach(function (r) {
+      if (r.pretest || !r.domain) return;
+      var d = domains[r.domain] || (domains[r.domain] = [0, 0]);
+      if (r.correct) d[0]++;
+      d[1]++;
+    });
+    return { at: ts(e.finishedAt), title: mockTitle(e), n: e.score.of, right: e.score.right,
+             usedMs: Number(e.elapsedMs) || 0, domains: domains };
+  }
+
+  /* Exam dates. The web stores the day ("2026-10-05"); the phones store a
+     moment on it, nine in the morning local time. A moment that already
+     falls on the same day is kept as it is, so a date nobody changed does
+     not read as changed. */
+  function ymdOf(ms) {
+    var d = new Date(ms);
+    return d.getFullYear() + "-" + PMP.fmt.pad(d.getMonth() + 1) + "-" + PMP.fmt.pad(d.getDate());
+  }
+  function msOf(ymd) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(ymd || ""));
+    return m ? new Date(+m[1], +m[2] - 1, +m[3], 9, 0, 0).getTime() : 0;
+  }
+
+  /* Web-only slices that travel in the `web` block. examRun, the sitting in
+     progress, does not: it belongs to the device it is being sat on. */
+  var WEB_SLICES = ["planner", "coach", "issues", "exams", "lessons", "queue", "journal", "packs"];
+  var WEB_KEYS = WEB_SLICES.concat(["settings", "notepadHtml", "ai", "srs"]);
+
+  function deviceId() {
+    var id = store.get("pmp.device");
+    if (!id) {
+      id = randomId(20);
+      store.set("pmp.device", id);
+    }
+    return id;
+  }
+
+  function toDoc(state, opts) {
+    opts = opts || {};
+    var sh = obj(state.shared);
+    var doc = {
+      type: "pmp-progress", version: 3,
+      savedAt: opts.savedAt != null ? opts.savedAt : Date.now(),
+      device: opts.device || { app: "web", id: deviceId() }
+    };
+    Object.keys(sh).forEach(function (k) {
+      if (k === "web" || k === "notepadSrc" || HEADER[k] || OWNED[k]) return;
+      doc[k] = clone(sh[k]);
+    });
+
+    doc.attempts = sortLog("attempts", arr(state.attempts).filter(function (a) {
+      return a && a.qid && ts(a.at);
+    }).map(attemptOut));
+    var flags = obj(state.flags);
+    doc.flags = Object.keys(flags).filter(function (k) { return flags[k]; }).sort();
+    var notes = obj(state.notes);
+    doc.notes = {};
+    Object.keys(notes).sort().forEach(function (k) {
+      if (typeof notes[k] === "string" && notes[k]) doc.notes[k] = notes[k];
+    });
+
+    /* The latest tag per question. The journal keeps one entry per missed
+       answer; the shared slice keeps one per question. */
+    var latest = {};
+    arr(state.journal).forEach(function (j) {
+      if (!j || !j.qid || !j.cause) return;
+      if (!latest[j.qid] || ts(j.at) > ts(latest[j.qid].at)) latest[j.qid] = j;
+    });
+    doc.mistakes = {};
+    Object.keys(latest).sort().forEach(function (q) {
+      var j = latest[q];
+      doc.mistakes[q] = { c: j.cause, n: j.note || "", at: ts(j.at) };
+    });
+
+    var srs = obj(state.srs), srsX = {};
+    doc.cards = {};
+    Object.keys(srs).sort().forEach(function (id) {
+      var rec = srs[id];
+      if (!rec) return;
+      doc.cards[id] = cardOut(rec);
+      var derivedLeech = (Number(rec.lapses) || 0) >= PMP.SRS.LEECH_THRESHOLD;
+      if (rec.reviews !== (Number(rec.reps) || 0) + (Number(rec.lapses) || 0) || !!rec.leech !== derivedLeech) {
+        srsX[id] = [Number(rec.reviews) || 0, rec.leech ? 1 : 0];
+      }
+    });
+
+    doc.scenarios = sortLog("scenarios", arr(state.scenarioRuns).filter(function (r) {
+      return r && r.sid && ts(r.at);
+    }).map(scenarioOut));
+
+    var mocks = {};
+    arr(sh.mocks).forEach(function (m) { if (m) mocks[LOGS.mocks.id(m)] = m; });
+    arr(state.exams).forEach(function (e) {
+      if (e && e.finishedAt && e.score) { var m = mockOut(e); mocks[LOGS.mocks.id(m)] = m; }
+    });
+    doc.mocks = sortLog("mocks", Object.keys(mocks).map(function (k) { return mocks[k]; }));
+
+    /* The formula drill log is already in the shared shape (§10.06.10a). */
+    doc.drills = sortLog("drills", arr(state.drills).filter(function (r) {
+      return r && typeof r.at === "number" && r.g;
+    }).map(clone));
+
+    var lessons = obj(state.lessons);
+    doc.lessons = Object.keys(lessons).filter(function (id) { return lessons[id] && lessons[id].completedAt; }).sort();
+
+    var settings = obj(state.settings);
+    var plan = isObj(sh.plan) ? clone(sh.plan) : null;
+    if (settings.examDate) {
+      if (!plan) plan = { examDate: 0, hours: 10, days: [1, 2, 3, 4, 5, 6, 7], onboarded: true, rest: true };
+      if (!plan.examDate || ymdOf(plan.examDate) !== String(settings.examDate).slice(0, 10)) plan.examDate = msOf(settings.examDate);
+    } else if (plan) {
+      plan.examDate = 0;
+    }
+    if (plan) doc.plan = plan;
+
+    var np = obj(state.notepad);
+    var html = typeof np.html === "string" && np.html ? np.html : textToHtml(np.text);
+    var src = obj(sh.notepadSrc);
+    doc.notepad = src.html === html && typeof src.markup === "string" ? src.markup : htmlToMarkup(html);
+
+    var web = clone(obj(sh.web)) || {};
+    var st = clone(settings);
+    delete st.theme;
+    web.settings = st;
+    WEB_SLICES.forEach(function (k) { if (state[k] !== undefined) web[k] = clone(state[k]); });
+    web.notepadHtml = html;
+    if (np.ai) web.ai = clone(np.ai);
+    web.srs = srsX;
+    doc.web = web;
+
+    Object.keys(LOGS).concat(SETS, MAPS).forEach(function (k) {
+      if (doc[k] === undefined) doc[k] = emptyOf(k);
+    });
+    return doc;
+  }
+
+  /* ── 10.18.4  SHARED → WEB ───────────────────────────────────────────────
+     The inverse: every slice the views read, rebuilt from a document. `cur`
+     supplies only what never travels: the theme, whether the notes pane is
+     open, and which tab it is on. */
+  function fromDoc(doc, cur) {
+    var d = PMP.Store.defaults();
+    var w = obj(doc.web);
+    var out = {};
+
+    out.attempts = arr(doc.attempts).filter(function (r) { return r && r.q && r.at; }).map(attemptIn);
+
+    var srs = {}, srsX = obj(w.srs), cards = obj(doc.cards);
+    Object.keys(cards).forEach(function (id) {
+      if (Array.isArray(cards[id])) srs[id] = cardIn(cards[id], srsX[id]);
+    });
+    out.srs = srs;
+
+    var flags = {};
+    arr(doc.flags).forEach(function (q) { flags[q] = true; });
+    out.flags = flags;
+    out.notes = clone(obj(doc.notes));
+    out.scenarioRuns = arr(doc.scenarios).filter(function (r) { return r && r.id && r.at; }).map(scenarioIn);
+    out.drills = arr(doc.drills).filter(function (r) { return r && typeof r.at === "number"; }).map(clone);
+
+    WEB_SLICES.forEach(function (k) { out[k] = w[k] !== undefined ? clone(w[k]) : d[k]; });
+
+    /* Lessons: the shared set says which are complete; the web record keeps
+       the detail. A lesson completed on a phone gets a record here. */
+    var lessons = obj(out.lessons), done = Object.create(null);
+    arr(doc.lessons).forEach(function (id) { done[id] = 1; });
+    Object.keys(done).forEach(function (id) {
+      var rec = lessons[id] || (lessons[id] = { opened: [], checks: {} });
+      if (!rec.completedAt) rec.completedAt = iso(Number(doc.savedAt) || Date.now());
+    });
+    Object.keys(lessons).forEach(function (id) {
+      if (lessons[id] && lessons[id].completedAt && !done[id]) delete lessons[id].completedAt;
+    });
+    out.lessons = lessons;
+
+    out.journal = reconcileJournal(arr(out.journal), obj(doc.mistakes), out.attempts);
+
+    var settings = Object.assign({}, d.settings, obj(w.settings));
+    settings.theme = (cur && cur.settings && cur.settings.theme) || settings.theme || "system";
+    if (isObj(doc.plan)) settings.examDate = doc.plan.examDate > 0 ? ymdOf(doc.plan.examDate) : null;
+    out.settings = settings;
+
+    var html = typeof w.notepadHtml === "string" ? w.notepadHtml : "";
+    var markup = typeof doc.notepad === "string" ? doc.notepad : "";
+    if (htmlToMarkup(html) !== markup) html = markupToHtml(markup);
+    var np = obj(cur && cur.notepad);
+    out.notepad = {
+      open: !!np.open, tab: np.tab === "ai" ? "ai" : "notes",
+      text: markupToText(markup), html: html,
+      updatedAt: html === np.html ? (np.updatedAt || null) : new Date().toISOString(),
+      ai: isObj(w.ai) ? clone(w.ai) : (np.ai ? clone(np.ai) : d.notepad.ai)
+    };
+
+    var shared = {};
+    Object.keys(doc).forEach(function (k) {
+      if (HEADER[k] || (OWNED[k] && k !== "mocks")) return;
+      shared[k] = clone(doc[k]);
+    });
+    var webExtra = {};
+    Object.keys(w).forEach(function (k) { if (WEB_KEYS.indexOf(k) < 0) webExtra[k] = clone(w[k]); });
+    if (Object.keys(webExtra).length) shared.web = webExtra;
+    shared.notepadSrc = { html: html, markup: markup };
+    out.shared = shared;
+
+    ["journal", "attempts", "scenarioRuns"].forEach(function (k) { out[k] = PMP.Store.normalise(k, out[k]); });
+    return out;
+  }
+
+  /* The journal against the shared tags. The latest entry for a question
+     is brought in line with its tag; a tag with no entry gets one, on the
+     latest missed answer to that question when there is one; a question
+     whose tag has gone loses its entries. */
+  function reconcileJournal(journal, mistakes, attempts) {
+    var latest = {};
+    journal.forEach(function (j) {
+      if (!j || !j.qid) return;
+      if (!latest[j.qid] || ts(j.at) > ts(latest[j.qid].at)) latest[j.qid] = j;
+    });
+    var out = journal.filter(function (j) { return j && j.qid && mistakes[j.qid]; });
+    var missed = {};
+    attempts.forEach(function (a) {
+      if (PMP.Metrics.creditOf(a) < 1 && (!missed[a.qid] || ts(a.at) > ts(missed[a.qid].at))) missed[a.qid] = a;
+    });
+    Object.keys(mistakes).sort().forEach(function (q) {
+      var m = mistakes[q], L = latest[q];
+      if (!m) return;
+      var at = Number(m.at) || 0;
+      if (L && L.cause === m.c && (L.note || "") === (m.n || "") && ts(L.at) === at) return;
+      if (L) {
+        var i = out.indexOf(L);
+        out[i] = Object.assign({}, L, { cause: m.c, note: m.n || "", at: iso(at) });
+        return;
+      }
+      var a = missed[q] || null, qq = PMP.Content && PMP.Content.byId(q);
+      out.push({
+        id: phoneId(q, at), attemptId: a ? a.id : null, qid: q,
+        ecoTask: (a && a.ecoTask) || (qq && qq.ecoTask) || null,
+        domain: (a && a.domain) || (qq && qq.domain) || null,
+        cause: m.c, at: iso(at), note: m.n || ""
+      });
+    });
+    return out;
+  }
+
+  /* Puts a document into the store and repaints. External, so §10.18.6
+     does not read it as a change made on this device. */
+  var SLICES = ["attempts", "srs", "flags", "notes", "scenarioRuns", "lessons", "journal", "settings",
+                "notepad", "shared", "drills"].concat(WEB_SLICES.filter(function (k) { return k !== "lessons" && k !== "journal"; }));
+  function apply(doc) {
+    var next = fromDoc(doc, PMP.Store.state);
+    var keys = SLICES.filter(function (k) { return k in next; });
+    PMP.Store.commit(keys, function (s) { keys.forEach(function (k) { s[k] = next[k]; }); }, { external: true });
+    PMP.Store.flush();
+    try { if (PMP.Data) PMP.Data.loadStoredPacks(); } catch (e) { /* the packs load again on the next start */ }
+    try { PMP.Notepad.sync(); } catch (e) { /* the pane catches up on the next load */ }
+    try { if (PMP.GeminiChat && PMP.GeminiChat.sync) PMP.GeminiChat.sync(); } catch (e) { /* likewise */ }
+    PMP.Shell.renderStatus(PMP.Store.state);
+  }
+
+  /* ── 10.18.5  FILES ──────────────────────────────────────────────────────
+     Any progress file this build reads, as a version 3 document: version 3
+     itself, a phone's version 2, and this app's own legacy version 2. */
+  function fromFile(o) {
+    if (o.type === "pmp-android-progress") {
+      var a = clone(o);
+      a.type = "pmp-progress";
+      a.version = 3;
+      a.savedAt = Number(o.savedAt) || 0;
+      a.device = isObj(o.device) ? o.device : { app: "android", id: "" };
+      return a;
+    }
+    if (o.version === 3 && o.schemaVersion === undefined) return clone(o);
+    var like = PMP.Store.defaults();
+    PMP.STORE_CFG.PERSISTED.forEach(function (k) {
+      if (k in o && o[k] != null) like[k] = PMP.Store.normalise(k, clone(o[k]));
+    });
+    return toDoc(like, { savedAt: ts(o.exportedAt), device: { app: "web", id: "" } });
+  }
+
+  function importReplace(doc) { apply(doc); }
+  function importMerge(doc) {
+    var local = toDoc(PMP.Store.state, { savedAt: changedAt() });
+    apply(merge(emptyDoc(), local, doc, { device: local.device }));
+  }
+
+  /* What merging a file would do, slice by slice, for the import sheet. */
+  function mergePlan(local, file) {
+    var rows = [], added = 0, clash = 0;
+    Object.keys(LOGS).forEach(function (k) {
+      var inFile = arr(file[k]);
+      if (!inFile.length) return;
+      var have = Object.create(null), id = LOGS[k].id;
+      arr(local[k]).forEach(function (r) { have[id(r)] = 1; });
+      var add = inFile.filter(function (r) { return r && !have[id(r)]; }).length;
+      added += add;
+      rows.push({ slice: k, keep: arr(local[k]).length, note: add + " new, " + (inFile.length - add) + " already here" });
+    });
+    SETS.forEach(function (k) {
+      var inFile = arr(file[k]);
+      if (!inFile.length) return;
+      var have = Object.create(null);
+      arr(local[k]).forEach(function (x) { have[x] = 1; });
+      var add = inFile.filter(function (x) { return !have[x]; }).length;
+      added += add;
+      rows.push({ slice: k, keep: arr(local[k]).length, note: add + " new, " + (inFile.length - add) + " already here" });
+    });
+    MAPS.forEach(function (k) {
+      var f = k === "mycards" ? byId(file[k]) : obj(file[k]);
+      var l = k === "mycards" ? byId(local[k]) : obj(local[k]);
+      var keys = Object.keys(f);
+      if (!keys.length) return;
+      var add = keys.filter(function (x) { return l[x] === undefined; }).length;
+      var diff = keys.filter(function (x) { return l[x] !== undefined && !same(l[x], f[x]); }).length;
+      added += add; clash += diff;
+      rows.push({ slice: k, keep: Object.keys(l).length,
+        note: add + " new, " + diff + " different" + (diff ? (k === "cards" ? " (the later review wins)" : k === "mistakes" ? " (the later tag wins)" : " (the newer copy wins)") : "") });
+    });
+    ["plan", "notepad"].forEach(function (k) {
+      if (file[k] === undefined) return;
+      rows.push({ slice: k, note: same(slice(local, k), slice(file, k)) ? "the same" : "the newer copy is kept" });
+    });
+    return { rows: rows, added: added, clash: clash };
+  }
+
+  /* ── 10.18.6  NOTES PANE ↔ LIGHT MARKUP ──────────────────────────────────
+     The phones keep notes as light markup: **bold** *italic* __underline__
+     ~~strike~~ ==highlight==, "- " bullets and "1. " numbers. The web's
+     note is html from §12.2.1's allowlist. Colours and overline have no
+     markup and are dropped on the way out; the html itself stays in the web
+     block, so this device loses nothing. */
+  var INLINE = { B: "**", STRONG: "**", I: "*", EM: "*", U: "__", S: "~~", STRIKE: "~~", DEL: "~~" };
+  function markOf(node) {
+    if (INLINE[node.tagName]) return INLINE[node.tagName];
+    if (node.tagName === "MARK" && /(^|\s)np-h-(yellow|green|blue|pink)(\s|$)/.test(node.getAttribute("class") || "")) return "==";
+    return "";
+  }
+  function inlineText(node, open) {
+    var out = "";
+    Array.prototype.forEach.call(node.childNodes, function (c) {
+      if (c.nodeType === 3) { out += c.nodeValue.replace(/​/g, "").replace(/\n/g, " "); return; }
+      if (c.nodeType !== 1) return;
+      if (c.tagName === "BR") { out += " "; return; }
+      var m = markOf(c);
+      if (m && !open[m]) {
+        var o2 = Object.assign({}, open); o2[m] = 1;
+        var body = inlineText(c, o2);
+        out += body.trim() ? m + body + m : body;
+      } else {
+        out += inlineText(c, open);
+      }
+    });
+    return out;
+  }
+  function blockLines(parent, out) {
+    var line = null;
+    function push() { if (line !== null) { out.push(line); line = null; } }
+    Array.prototype.forEach.call(parent.childNodes, function (c) {
+      if (c.nodeType === 3) { line = (line || "") + c.nodeValue.replace(/​/g, "").replace(/\n/g, " "); return; }
+      if (c.nodeType !== 1) return;
+      var tag = c.tagName;
+      if (tag === "BR") { out.push(line || ""); line = null; return; }
+      if (tag === "DIV" || tag === "P") {
+        push();
+        var sub = [];
+        blockLines(c, sub);
+        out.push.apply(out, sub.length ? sub : [""]);
+        return;
+      }
+      if (tag === "UL" || tag === "OL") {
+        push();
+        var n = 0;
+        Array.prototype.forEach.call(c.children, function (li) {
+          n++;
+          var sub = [];
+          blockLines(li, sub);
+          out.push((tag === "UL" ? "- " : n + ". ") + sub.join(" ").trim());
+        });
+        return;
+      }
+      line = (line || "") + (markOf(c) ? inlineText({ childNodes: [c] }, {}) : inlineText(c, {}));
+    });
+    push();
+  }
+  function htmlToMarkup(html) {
+    if (!html) return "";
+    var t = document.createElement("template");
+    t.innerHTML = String(html);
+    var lines = [];
+    blockLines(t.content, lines);
+    while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
+    return lines.join("\n");
+  }
+  function inlineHtml(text) {
+    return PMP.text.escapeHtml(text)
+      .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
+      .replace(/__(.+?)__/g, "<u>$1</u>")
+      .replace(/~~(.+?)~~/g, "<s>$1</s>")
+      .replace(/==(.+?)==/g, "<mark class=\"np-h-yellow\">$1</mark>")
+      .replace(/\*(.+?)\*/g, "<i>$1</i>");
+  }
+  function markupToHtml(markup) {
+    if (!markup) return "";
+    var out = "", list = null;
+    function close() { if (list) { out += "</" + list + ">"; list = null; } }
+    String(markup).split(/\r?\n/).forEach(function (ln) {
+      var b = /^\s*- (.*)$/.exec(ln), n = /^\s*\d+[.)] (.*)$/.exec(ln);
+      if (b || n) {
+        var want = b ? "ul" : "ol";
+        if (list !== want) { close(); out += "<" + want + ">"; list = want; }
+        out += "<li>" + inlineHtml((b || n)[1]) + "</li>";
+        return;
+      }
+      close();
+      out += "<div>" + (ln ? inlineHtml(ln) : "<br>") + "</div>";
+    });
+    close();
+    return out;
+  }
+  function markupToText(markup) {
+    return String(markup || "").split(/\r?\n/).map(function (ln) {
+      return ln.replace(/^\s*(?:- |\d+[.)] )/, "").replace(/\*\*|__|~~|==|\*/g, "");
+    }).join("\n");
+  }
+  function textToHtml(text) {
+    return text ? PMP.text.escapeHtml(String(text)).replace(/\n/g, "<br>") : "";
+  }
+
+  /* ── 10.18.7  SETTINGS OUTSIDE THE STORE ─────────────────────────────────
+     The script address, the code, the base document and the time of the
+     last change made here. localStorage, beside the store and never in it;
+     where that is refused (file:// in some browsers) they last the session. */
+  var memory = Object.create(null);
+  var store = {
+    get: function (k) {
+      try { var v = window.localStorage.getItem(k); if (v !== null) return v; } catch (e) { /* fall back */ }
+      return k in memory ? memory[k] : null;
+    },
+    set: function (k, v) {
+      memory[k] = v;
+      try { window.localStorage.setItem(k, v); } catch (e) { /* kept in memory for the session */ }
+    },
+    remove: function (k) {
+      delete memory[k];
+      try { window.localStorage.removeItem(k); } catch (e) { /* nothing to remove */ }
+    }
+  };
+  var K = { url: "pmp.sync.url", code: "pmp.sync.code", base: "pmp.sync.base", last: "pmp.sync.last",
+            error: "pmp.sync.error", changed: "pmp.sync.changedAt", pending: "pmp.sync.pending" };
+
+  function config() {
+    var url = store.get(K.url), code = store.get(K.code);
+    return url && code ? { url: url, code: code } : null;
+  }
+  function loadBase() {
+    try { var b = JSON.parse(store.get(K.base) || "null"); if (isObj(b) && isObj(b.doc)) return b; } catch (e) { /* a broken base is no base */ }
+    return { rev: 0, doc: null };
+  }
+  function saveBase(rev, doc) { store.set(K.base, JSON.stringify({ rev: rev, doc: doc })); }
+  function changedAt() { return Number(store.get(K.changed)) || 0; }
+
+  var lastMark = 0;
+  PMP.Store.onWrite(function (keys, opts) {
+    if (opts.external) return;
+    var now = Date.now();
+    lastMark = now;
+    if (now - (Number(memory[K.changed]) || 0) > 1000) store.set(K.changed, String(now));
+  });
+
+  /* A sync code: 32 letters and digits from the platform's random source.
+     Rejection sampling keeps every character equally likely. */
+  var ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  function randomId(len) {
+    var out = "", buf = new Uint8Array(64);
+    while (out.length < len) {
+      window.crypto.getRandomValues(buf);
+      for (var i = 0; i < buf.length && out.length < len; i++) {
+        if (buf[i] < 248) out += ALPHA.charAt(buf[i] % 62);
+      }
+    }
+    return out;
+  }
+  function newCode() { return randomId(32); }
+
+  /* The script, verbatim from sync/pmp-sync.gs (embedded in §04 so this
+     file still works on its own), with the code filled in. */
+  function scriptText(code) {
+    var node = document.getElementById("pmp-sync-gs");
+    var text = node ? node.textContent : "";
+    return code ? text.split("__SYNC_CODE__").join(code) : text;
+  }
+
+  /* ── 10.18.8  THE CLIENT ─────────────────────────────────────────────────
+     Every call is a POST with a text/plain body, which a browser sends
+     without a CORS preflight; fetch follows the redirect Google answers
+     with. A reply that is not the script's JSON is an error with a name. */
+  var TIMEOUT_MS = 30000;
+  function SyncError(code, detail) { this.code = code; this.detail = detail || ""; this.message = code; }
+  function request(cfg, body, opts) {
+    var text = JSON.stringify(Object.assign({ code: cfg.code }, body));
+    var init = {
+      method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: text, redirect: "follow", credentials: "omit", cache: "no-store"
+    };
+    /* keepalive lets a save started as the tab is hidden finish after it
+       closes, but browsers cap such bodies at 64 KB. */
+    if (opts && opts.keepalive && text.length < 60000) init.keepalive = true;
+    var ctl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = null;
+    if (ctl) { init.signal = ctl.signal; timer = setTimeout(function () { ctl.abort(); }, TIMEOUT_MS); }
+    if (typeof fetch !== "function") return Promise.reject(new SyncError("network"));
+    return fetch(cfg.url, init).then(function (res) {
+      if (!res.ok) throw new SyncError("http", String(res.status));
+      return res.text();
+    }, function () { throw new SyncError("network"); }).then(function (t) {
+      if (timer) clearTimeout(timer);
+      var o;
+      try { o = JSON.parse(t); } catch (e) { throw new SyncError("not-script"); }
+      if (!isObj(o)) throw new SyncError("not-script");
+      if (o.ok === false && !o.conflict) throw new SyncError(o.error || "refused");
+      return o;
+    }, function (e) { if (timer) clearTimeout(timer); throw e instanceof SyncError ? e : new SyncError("network"); });
+  }
+
+  var MESSAGES = {
+    "bad-code": "The script refused the sync code. Check that the code here is the one in the script, and that the deployment is the latest version.",
+    "network": "The script could not be reached. Check the address and your connection; nothing was changed.",
+    "http": "The address answered with an error rather than the script. Check that it is the Web app URL, ending in /exec.",
+    "not-script": "That address did not answer like the PMP sync script. Check that you copied the Web app URL, ending in /exec, and that access is set to Anyone.",
+    "busy": "The script was busy with another device. It will try again next time; you can also press Sync now.",
+    "bad-doc": "The script refused the progress file. Nothing was changed.",
+    "conflict": "Another device kept saving at the same moment. Nothing was lost; press Sync now to try again.",
+    "url": "Paste the Web app URL from the deployment. It starts with https:// and ends with /exec.",
+    "code": "The sync code is the 32 letters and digits in the script, between the quotes on the SYNC_CODE line."
+  };
+  function messageOf(e) {
+    var code = e && e.code ? e.code : "network";
+    return MESSAGES[code] || ("The script answered “" + code + "”. Nothing was changed.");
+  }
+
+  var status = { state: "idle", at: 0, error: null };
+  var running = null;
+  var lastTry = 0;
+
+  function setStatus(next) {
+    status = Object.assign({}, status, next);
+    if (next.error !== undefined) {
+      if (next.error) store.set(K.error, JSON.stringify(next.error)); else store.remove(K.error);
+    }
+    paintStatus();
+  }
+  function lastError() {
+    if (status.error) return status.error;
+    try { return JSON.parse(store.get(K.error) || "null"); } catch (e) { return null; }
+  }
+  function lastSynced() { return Number(store.get(K.last)) || 0; }
+
+  /* The algorithm in docs §4: get, merge, put if the merge says anything
+     the file does not, and on a conflict merge again with what the file
+     now holds, at most three more times. */
+  function run(reason, opts) {
+    var cfg = config();
+    if (!cfg) return Promise.resolve({ skipped: "off" });
+    var st = PMP.Store.state;
+    if (st.ui.examActive) return Promise.resolve({ skipped: "exam" });
+    if (!st.sys.ready) return Promise.resolve({ skipped: "starting" });
+    if (running) return running;
+    lastTry = Date.now();
+    setStatus({ state: "syncing" });
+    var base = loadBase();
+    var device = { app: "web", id: deviceId() };
+    var local = toDoc(PMP.Store.state, { savedAt: changedAt() || (base.doc && base.doc.savedAt) || 0, device: device });
+    var retries = 0;
+
+    function round(remote, rev) {
+      var merged = remote ? merge(base.doc, local, remote, { device: device })
+                          : Object.assign(clone(local), { savedAt: Date.now(), device: device });
+      if (remote && sameDoc(merged, remote)) return { doc: merged, rev: rev, uploaded: false };
+      return request(cfg, { op: "put", baseRev: rev, doc: merged }, opts).then(function (res) {
+        if (res.ok) return { doc: merged, rev: res.rev, uploaded: true };
+        if (res.conflict && retries < 3) { retries++; return round(isObj(res.doc) ? res.doc : null, res.rev); }
+        throw new SyncError(res.conflict ? "conflict" : (res.error || "refused"));
+      });
+    }
+
+    running = request(cfg, { op: "get" }, opts).then(function (res) {
+      return round(isObj(res.doc) ? res.doc : null, Number(res.rev) || 0);
+    }).then(function (out) {
+      var mine = toDoc(PMP.Store.state, { savedAt: out.doc.savedAt, device: device });
+      if (!sameDoc(mine, out.doc) && !PMP.Store.state.ui.examActive) { apply(out.doc); repaint(); }
+      saveBase(out.rev, out.doc);
+      var now = Date.now();
+      store.set(K.last, String(now));
+      setStatus({ state: "ok", at: now, error: null });
+      return { ok: true, uploaded: out.uploaded, rev: out.rev, retries: retries, reason: reason };
+    }, function (e) {
+      var err = { code: (e && e.code) || "network", message: messageOf(e), at: Date.now() };
+      setStatus({ state: "error", error: err });
+      return { ok: false, error: err.code, reason: reason };
+    }).then(function (r) { running = null; return r; });
+    return running;
+  }
+
+  /* The automatic triggers, deferred off the event that raised them and
+     spaced so that flicking between tabs does not sync on every flick. */
+  var AUTO_GAP_MS = 10000;
+  function auto(reason, opts) {
+    if (!config()) return;
+    if ((reason === "hidden" || reason === "foreground") && Date.now() - lastTry < AUTO_GAP_MS) return;
+    setTimeout(function () { run(reason, opts); }, 0);
+  }
+
+  /* After a merge lands, the view on screen is redrawn from the new state,
+     unless it holds something in progress: a drill, a sitting, a card
+     review or a scenario set keeps what it started with, and shows the
+     merged state the next time it is opened. */
+  var BUSY_ROUTES = ["practice", "exam", "cards", "scenarios", "formulas"];
+  function repaint() {
+    var cur = PMP.Router.current;
+    if (!cur || BUSY_ROUTES.indexOf(cur.name) >= 0) return;
+    var y = window.scrollY || 0;
+    PMP.Router.navigate(cur.name, cur.params, true);
+    if (y && window.scrollTo) window.scrollTo(0, y);
+  }
+
+  function connect(url, code) {
+    url = String(url || "").trim();
+    code = String(code || "").trim();
+    if (!/^https:\/\/\S+$/.test(url)) return Promise.reject(new SyncError("url"));
+    if (!/^[A-Za-z0-9]{16,}$/.test(code)) return Promise.reject(new SyncError("code"));
+    return request({ url: url, code: code }, { op: "ping" }).then(function (res) {
+      if (res.ok !== true) throw new SyncError("not-script");
+      store.set(K.url, url);
+      store.set(K.code, code);
+      store.remove(K.pending);
+      store.remove(K.base);
+      setStatus({ state: "idle", error: null });
+      return res;
+    });
+  }
+
+  function disconnect() {
+    [K.url, K.code, K.base, K.last, K.error, K.pending].forEach(store.remove);
+    status = { state: "idle", at: 0, error: null };
+  }
+
+  /* After "Delete all progress" the base no longer describes this device,
+     and a three-way merge against it would read every flag, note and card
+     as deleted here and delete them from the Drive file too. Forgetting it
+     turns the next sync into a plain union, which brings progress back. */
+  function forgetBase() { store.remove(K.base); }
+
+  /* ── 10.18.9  THE PAGE ───────────────────────────────────────────────────
+     Off until set up. Setting up is the guide in docs §4, step for step;
+     once connected, the page is the status, Sync now and Disconnect. */
+  var setupMode = "new";
+  var statusNode = null;
+
+  function paintStatus() {
+    if (!statusNode || !document.body.contains(statusNode)) return;
+    statusNode.innerHTML = "";
+    var err = lastError(), last = lastSynced();
+    var when = last ? new Date(last).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : null;
+    var kind = status.state === "syncing" ? "busy" : (status.state === "error" || (status.state !== "ok" && err)) ? "err" : "ok";
+    statusNode.setAttribute("data-kind", kind);
+    statusNode.appendChild(icon(kind === "err" ? "alert" : kind === "busy" ? "sync" : "check"));
+    statusNode.appendChild(el("span", { text:
+      kind === "busy" ? "Syncing…" :
+      kind === "err" ? err.message + (when ? " Last synced " + when + "." : " Not synced yet.") :
+      when ? "Last synced " + when + "." : "Connected. Not synced yet." }));
+  }
+
+  function copyButton(label, getText, done) {
+    return el("button", {
+      class: "btn", type: "button",
+      onclick: function () {
+        PMP.Exporter.copyText(getText()).then(function (ok) {
+          PMP.UI.toast(ok ? done : "Copying was blocked. Select the text and copy it by hand.", ok ? "ok" : "warn");
+        });
+      }
+    }, [icon("clip"), label]);
+  }
+
+  function inlineError(node, e) {
+    node.hidden = false;
+    node.textContent = messageOf(e);
+  }
+
+  function connectForm(getCode, opts) {
+    var urlIn = el("input", { class: "input", id: "sync-url", type: "url", inputmode: "url", autocomplete: "off",
+      spellcheck: "false", placeholder: "https://script.google.com/macros/s/…/exec" });
+    var codeIn = opts.askCode ? el("input", { class: "input", id: "sync-code-in", type: "text", autocomplete: "off",
+      spellcheck: "false", placeholder: "32 letters and digits" }) : null;
+    var msg = el("p", { class: "sync-msg", id: "sync-test-msg", role: "status", "aria-live": "polite", hidden: true });
+    var btn = el("button", { class: "btn btn--primary", type: "button", id: "sync-test" }, [icon("check"), "Test connection"]);
+    btn.addEventListener("click", function () {
+      msg.hidden = false;
+      msg.removeAttribute("data-kind");
+      msg.textContent = "Testing…";
+      btn.disabled = true;
+      connect(urlIn.value, codeIn ? codeIn.value : getCode()).then(function () {
+        msg.setAttribute("data-kind", "ok");
+        msg.textContent = "Connected. Syncing now…";
+        PMP.UI.announce("Cloud sync connected.");
+        return run("setup");
+      }).then(function () {
+        PMP.Router.navigate("sync", null, true);
+      }, function (e) {
+        btn.disabled = false;
+        msg.setAttribute("data-kind", "err");
+        inlineError(msg, e);
+      });
+    });
+    return el("div", { class: "sync-connect" }, [
+      el("label", { class: "field", for: "sync-url" }, [el("span", { class: "lbl", text: "Web app URL" }), urlIn]),
+      codeIn ? el("label", { class: "field", for: "sync-code-in" }, [el("span", { class: "lbl", text: "Sync code" }), codeIn]) : null,
+      el("div", { class: "filter-bar" }, [btn]),
+      msg
+    ]);
+  }
+
+  function pendingCode() {
+    var c = store.get(K.pending);
+    if (!c || !/^[A-Za-z0-9]{32}$/.test(c)) { c = newCode(); store.set(K.pending, c); }
+    return c;
+  }
+
+  function setupCard() {
+    var card = el("section", { class: "card", "aria-labelledby": "sync-setup" }, [
+      el("span", { class: "eyebrow", text: "Set up" }),
+      el("h2", { id: "sync-setup", text: "Connect a script in your Google account" })
+    ]);
+    var modes = el("div", { class: "seg", role: "group", "aria-label": "How to connect" });
+    [["new", "Set up a new script"], ["existing", "I already have a script"]].forEach(function (m) {
+      modes.appendChild(el("button", {
+        class: "btn btn--sm", type: "button", "aria-pressed": setupMode === m[0] ? "true" : "false",
+        onclick: function () { setupMode = m[0]; PMP.Router.navigate("sync", null, true); }
+      }, m[1]));
+    });
+    card.appendChild(modes);
+
+    if (setupMode === "existing") {
+      card.appendChild(el("p", { text: "On another device you have already set up sync. Paste the same Web app URL and sync code here; the Cloud sync page there shows both." }));
+      card.appendChild(connectForm(null, { askCode: true }));
+      return card;
+    }
+
+    var code = pendingCode();
+    var script = el("textarea", { class: "textarea sync-script", id: "sync-script", readonly: true, spellcheck: "false",
+      "aria-label": "The sync script, with your code filled in", rows: "10" });
+    script.value = scriptText(code);
+    var steps = el("ol", { class: "sync-steps" }, [
+      el("li", null, [
+        el("b", { text: "Copy the script. " }),
+        el("span", { text: "This device made a random sync code for you, and it is already filled into the script below. Every request has to carry it." }),
+        el("div", { class: "sync-code-row" }, [
+          el("span", { class: "lbl", text: "Your sync code" }),
+          el("code", { class: "sync-code", id: "sync-code", text: code })
+        ]),
+        script,
+        el("div", { class: "filter-bar" }, [
+          copyButton("Copy the script", function () { return scriptText(code); }, "Script copied, with your code in it."),
+          el("button", { class: "btn btn--ghost", type: "button",
+            onclick: function () { store.set(K.pending, newCode()); PMP.Router.navigate("sync", null, true); } }, "Make a new code")
+        ])
+      ]),
+      el("li", null, [
+        el("b", { text: "Create the project. " }),
+        "Open ", el("a", { href: "https://script.google.com", target: "_blank", rel: "noopener noreferrer", text: "script.google.com" }),
+        ", choose ", el("b", { text: "New project" }), ", replace everything in ", el("code", { text: "Code.gs" }),
+        " with the copied script and save it."
+      ]),
+      el("li", null, [
+        el("b", { text: "Deploy it. " }),
+        "Choose ", el("b", { text: "Deploy → New deployment → Select type: Web app" }), ". Set ",
+        el("b", { text: "Execute as: Me" }), " and ", el("b", { text: "Who has access: Anyone" }), ", then ", el("b", { text: "Deploy" }), "."
+      ]),
+      el("li", null, [
+        el("b", { text: "Authorise it. " }),
+        "Choose your Google account. On “Google hasn’t verified this app”, choose ",
+        el("b", { text: "Advanced → Go to (project) (unsafe)" }), " — it is your own script — then ", el("b", { text: "Allow" }), "."
+      ]),
+      el("li", null, [
+        el("b", { text: "Connect this device. " }),
+        "Copy the ", el("b", { text: "Web app URL" }), " (", el("code", { text: "https://script.google.com/macros/s/…/exec" }),
+        "), paste it here and press ", el("b", { text: "Test connection" }), ".",
+        connectForm(function () { return code; }, { askCode: false })
+      ]),
+      el("li", null, [
+        el("b", { text: "Add your other devices. " }),
+        "On each one, open Cloud sync, choose ", el("b", { text: "I already have a script" }),
+        ", and paste the same URL and sync code."
+      ])
+    ]);
+    card.appendChild(steps);
+    card.appendChild(el("p", { class: "hint", text: "“Anyone” only means the address answers without a Google sign-in. The script refuses every request without your sync code, but whoever has both the address and the code can read and replace your progress file, so keep them private. To shut a device out, change the code in the script and deploy a new version." }));
+    return card;
+  }
+
+  function statusCard(cfg) {
+    statusNode = el("p", { class: "sync-status", id: "sync-status", role: "status", "aria-live": "polite" });
+    var card = el("section", { class: "card", "aria-labelledby": "sync-on" }, [
+      el("span", { class: "eyebrow", text: "On" }),
+      el("h2", { id: "sync-on", text: "Syncing with your Drive" }),
+      el("p", { text: "This device syncs when it opens, when you come back to it, when you leave it, and after each practice set, mock and card session. Never during a mock." }),
+      statusNode,
+      el("dl", { class: "kv", style: "margin-top:var(--sp-3)" }, [
+        el("dt", { text: "Script" }), el("dd", { class: "sync-url", text: cfg.url }),
+        el("dt", { text: "File" }), el("dd", { text: "PMP Prep/pmp-sync.json in your Google Drive" })
+      ]),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--primary", type: "button", id: "sync-now",
+          onclick: function () { run("now"); } }, [icon("sync"), "Sync now"]),
+        el("button", { class: "btn btn--danger", type: "button", id: "sync-off",
+          onclick: function () {
+            PMP.UI.confirm("Disconnect cloud sync?",
+              "This device forgets the script address and the sync code. Your progress here and the file in your Drive are both left as they are, and other devices keep syncing.",
+              "Disconnect", true).then(function (yes) {
+              if (!yes) return;
+              disconnect();
+              PMP.UI.toast("Cloud sync is off on this device.", "ok");
+              PMP.Router.navigate("sync", null, true);
+            });
+          } }, "Disconnect")
+      ])
+    ]);
+    paintStatus();
+    return card;
+  }
+
+  function devicesCard(cfg) {
+    var reveal = el("details", { class: "sync-reveal" }, [
+      el("summary", { text: "Show the address and the code" }),
+      el("dl", { class: "kv", style: "margin-top:var(--sp-3)" }, [
+        el("dt", { text: "Web app URL" }), el("dd", null, [el("code", { class: "sync-code", text: cfg.url })]),
+        el("dt", { text: "Sync code" }), el("dd", null, [el("code", { class: "sync-code", text: cfg.code })])
+      ]),
+      el("div", { class: "filter-bar" }, [
+        copyButton("Copy the URL", function () { return cfg.url; }, "Address copied."),
+        copyButton("Copy the code", function () { return cfg.code; }, "Code copied."),
+        copyButton("Copy the script", function () { return scriptText(cfg.code); }, "Script copied, with your code in it.")
+      ])
+    ]);
+    return el("section", { class: "card", "aria-labelledby": "sync-more" }, [
+      el("span", { class: "eyebrow", text: "Another device" }),
+      el("h2", { id: "sync-more", text: "Add a phone or another browser" }),
+      el("p", { text: "Open Cloud sync there, choose “I already have a script”, and paste these two. They are private: anyone with both can read and replace your progress file." }),
+      reveal
+    ]);
+  }
+
+  function aboutCard() {
+    return el("section", { class: "card", "aria-labelledby": "sync-what" }, [
+      el("span", { class: "eyebrow", text: "What travels" }),
+      el("h2", { id: "sync-what", text: "Your progress, to your own Drive, and nowhere else" }),
+      el("p", { text: "Answers, card schedules, flags, notes, mistake tags, lessons, sittings, your plan and your notes page go to one file in your Google Drive, through a script you deploy in your own account. The web, Android and iPhone apps all read and write the same file, so you can switch between them." }),
+      el("p", { text: "Nothing goes to this app's authors or to anyone else. The Gemini key, the theme and the sync address and code stay on each device. Two devices that change the same thing are merged: answers from both are kept, and where they disagree about one note or one card, the most recent change wins." })
+    ]);
+  }
+
+  function view(host) {
+    var cfg = config();
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Cloud sync" }),
+      el("h2", { text: cfg ? "Your devices, in step" : "Keep your devices in step" }),
+      el("p", { text: cfg
+        ? "Progress on this device and in your Drive are merged each time it syncs. Problems are shown here and nowhere else."
+        : "Off until you set it up. It takes about five minutes, once, in your own Google account: no sign-up, no server of ours, no cost." })
+    ]));
+    if (cfg) {
+      host.appendChild(statusCard(cfg));
+      host.appendChild(devicesCard(cfg));
+    } else {
+      statusNode = null;
+      host.appendChild(setupCard());
+    }
+    host.appendChild(aboutCard());
+  }
+
+  PMP.Router.register("sync", { title: "Cloud sync", render: view });
+
+  /* Leaving and coming back. Hidden is the last chance to save before a
+     phone browser discards the tab, so it is a trigger of its own. */
+  document.addEventListener("visibilitychange", function () {
+    if (!PMP.Store.state.sys.ready) return;
+    if (document.visibilityState === "hidden") auto("hidden", { keepalive: true });
+    else auto("foreground");
+  });
+
+  return {
+    merge: merge, toDoc: toDoc, fromDoc: fromDoc, apply: apply, fromFile: fromFile, sameDoc: sameDoc,
+    canon: canon, emptyDoc: emptyDoc, mergePlan: mergePlan, importMerge: importMerge, importReplace: importReplace,
+    htmlToMarkup: htmlToMarkup, markupToHtml: markupToHtml, mockKey: mockKey, scriptText: scriptText,
+    newCode: newCode, config: config, connect: connect, disconnect: disconnect, forgetBase: forgetBase,
+    run: run, auto: auto, changedAt: changedAt,
+    get status() { return status; }
+  };
+})();
+
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
    Hand-rolled SVG. No charting library, no network, no canvas.
