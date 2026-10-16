@@ -19327,7 +19327,7 @@ PMP.Store = (function () {
          problem is not an item in the bank, has no ECO task and no option
          order, and counting it would move accuracy for arithmetic practice.
          It does count as a study day (§10.00.6), and analytics lists it. */
-      drills: [],     /* { id, at, group, gen, verdict: right|near|wrong|shown }, last 2000 */
+      drills: [],     /* { at: ms, g: generator id, ok }, last 2000; shared as is (§10.18) */
       /* What another device keeps in the shared progress file that this
          build does not use itself (§10.18): a phone's sessions, sittings,
          check-ins, weekly reports, its own cards, its chat, mock summaries
@@ -27560,25 +27560,28 @@ PMP.FormulaLab = (function () {
     };
   }
 
+  /* Each generator has a stable id. It names the problem kind in the drill
+     log (§10.06.10a), which the phone apps share as `drills`, so an id is
+     never reused for a different kind of problem. */
   var GENERATORS = [
-    { fn: gEvmVariance, group: "evm" },
-    { fn: gEvmForecast, group: "forecast" },
-    { fn: gTcpi,        group: "forecast" },
-    { fn: gPert,        group: "estimate" },
-    { fn: gPertPath,    group: "estimate" },
-    { fn: gChannels,    group: "comms" },
-    { fn: gEmv,         group: "risk" },
-    { fn: gTree,        group: "risk" },
-    { fn: gPta,         group: "procure" },
-    { fn: gFee,         group: "procure" },
-    { fn: gFloat,       group: "schedule" },
-    { fn: gNpv,         group: "finance" },
-    { fn: gPayback,     group: "finance" },
-    { fn: gIrr,         group: "finance" },
-    { fn: gBcr,         group: "finance" },
-    { fn: gLittle,      group: "agile" },
-    { fn: gVelocity,    group: "agile" },
-    { fn: gLeadTime,    group: "agile" }
+    { id: "evm-variance", fn: gEvmVariance, group: "evm" },
+    { id: "evm-forecast", fn: gEvmForecast, group: "forecast" },
+    { id: "tcpi", fn: gTcpi,        group: "forecast" },
+    { id: "pert", fn: gPert,        group: "estimate" },
+    { id: "pert-path", fn: gPertPath,    group: "estimate" },
+    { id: "channels", fn: gChannels,    group: "comms" },
+    { id: "emv", fn: gEmv,         group: "risk" },
+    { id: "decision-tree", fn: gTree,        group: "risk" },
+    { id: "pta", fn: gPta,         group: "procure" },
+    { id: "fee", fn: gFee,         group: "procure" },
+    { id: "float", fn: gFloat,       group: "schedule" },
+    { id: "npv", fn: gNpv,         group: "finance" },
+    { id: "payback", fn: gPayback,     group: "finance" },
+    { id: "irr", fn: gIrr,         group: "finance" },
+    { id: "bcr", fn: gBcr,         group: "finance" },
+    { id: "littles-law", fn: gLittle,      group: "agile" },
+    { id: "velocity", fn: gVelocity,    group: "agile" },
+    { id: "lead-time", fn: gLeadTime,    group: "agile" }
   ];
 
   /* Some draws are degenerate, and in a degenerate draw a named wrong turn
@@ -27674,6 +27677,7 @@ PMP.FormulaLab = (function () {
     var g = pool[Math.floor(rand() * pool.length)];
     problem = finalise(g.fn(rand));
     problem.seed = seed;
+    problem.gen = g.id;
     revealed = false;
     lastMark = null;
   }
@@ -27718,13 +27722,17 @@ PMP.FormulaLab = (function () {
   /* ── 10.06.10a  THE DRILL LOG ────────────────────────────────────────────
      The tally above is per visit, by design: a streak is a mood, not a
      record. What is kept is one row per problem marked or shown, in the
-     `drills` slice rather than in `attempts` (see §07.1 for why). §10.00
-     counts a day with a drill on it as a study day, and §10.11 lists the
-     log by group. Capped at the newest DRILL_KEEP rows. */
+     `drills` slice rather than in `attempts` (see §07.1 for why), in the
+     shape the phone apps share: { at: ms, g: generator id, ok }. "Close"
+     and "shown" are not ok. §10.00 counts a day with a drill on it as a
+     study day, and §10.11 lists the log by group. Capped at DRILL_KEEP. */
   var DRILL_KEEP = 2000;
+  function generatorGroup(id) {
+    for (var i = 0; i < GENERATORS.length; i++) if (GENERATORS[i].id === id) return GENERATORS[i].group;
+    return null;
+  }
   function logDrill(p, verdict) {
-    var row = { id: PMP.rng.id("fxd"), at: new Date().toISOString(), group: p.group || null,
-                gen: p.label || null, verdict: verdict };
+    var row = { at: Date.now(), g: p.gen || "unknown", ok: verdict === "right" };
     PMP.Store.commit(["drills"], function (s) {
       var list = Array.isArray(s.drills) ? s.drills.concat([row]) : [row];
       s.drills = list.length > DRILL_KEEP ? list.slice(-DRILL_KEEP) : list;
@@ -27934,6 +27942,7 @@ PMP.FormulaLab = (function () {
     /* Exported because these are the parts worth testing: every figure this
        view puts on screen comes out of one of them, and §12.2's boot check
        exercises evm() and network() against known values. */
+    generatorGroup: generatorGroup,
     evm: evm,
     pta: pta,
     network: network,
@@ -31313,7 +31322,7 @@ PMP.Metrics = (function () {
     });
     mocks(state).forEach(function (mk) { touch(mk.at, "exams", 1); });
     (state.scenarioRuns || []).forEach(function (r) { touch(ts(r.at), "scenarios", 1); });
-    (state.drills || []).forEach(function (r) { touch(ts(r && r.at), "drills", 1); });
+    (state.drills || []).forEach(function (r) { if (r) touch(typeof r.at === "number" ? r.at : ts(r.at), "drills", 1); });
     var srs = state.srs || {};
     Object.keys(srs).forEach(function (id) {
       var r = srs[id];
@@ -32642,14 +32651,12 @@ PMP.Analytics = (function () {
     if (!rows.length) return null;
     var by = Object.create(null), order = [];
     rows.forEach(function (r) {
-      var k = r.group || "other";
-      if (!by[k]) { by[k] = { n: 0, right: 0, near: 0, shown: 0, last: 0 }; order.push(k); }
+      var k = (PMP.FormulaLab && PMP.FormulaLab.generatorGroup(r.g)) || "other";
+      if (!by[k]) { by[k] = { n: 0, right: 0, last: 0 }; order.push(k); }
       var e = by[k];
       e.n++;
-      if (r.verdict === "right") e.right++;
-      else if (r.verdict === "near") e.near++;
-      else if (r.verdict === "shown") e.shown++;
-      e.last = Math.max(e.last, Date.parse(r.at) || 0);
+      if (r.ok) e.right++;
+      e.last = Math.max(e.last, typeof r.at === "number" ? r.at : (Date.parse(r.at) || 0));
     });
     var label = {};
     (PMP.FORMULAS || []).forEach(function (g) { label[g.id] = g.label; });
@@ -32657,18 +32664,17 @@ PMP.Analytics = (function () {
     order.forEach(function (k) {
       var e = by[k];
       body.appendChild(el("tr", null, [
-        el("td", { text: label[k] || k }),
+        el("td", { text: label[k] || (k === "other" ? "Other" : k) }),
         el("td", { class: "n", text: String(e.n) }),
         el("td", { class: "n", text: String(e.right) }),
-        el("td", { class: "n", text: String(e.near) }),
-        el("td", { class: "n", text: String(e.shown) }),
+        el("td", { class: "n", text: PMP.fmt.pct(e.right / e.n) }),
         el("td", { text: PMP.fmt.dateShort(new Date(e.last).toISOString()) })
       ]));
     });
     var tbl = el("table", { class: "tbl" }, [
       el("thead", null, [el("tr", null, [
         el("th", { text: "Group" }), el("th", { class: "n", text: "Problems" }), el("th", { class: "n", text: "Right" }),
-        el("th", { class: "n", text: "Close" }), el("th", { class: "n", text: "Shown" }), el("th", { text: "Last" })
+        el("th", { class: "n", text: "Share right" }), el("th", { text: "Last" })
       ])]),
       body
     ]);
