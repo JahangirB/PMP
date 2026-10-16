@@ -24,9 +24,12 @@ var REF_COMMIT = "3f6ff75";
    #/exam gained the optional "write it down" card before a sitting (§10.20)
    on purpose; it is taken out of the new page before the comparison, so
    everything else on the page is still held to the reference, and
-   13-wellbeing covers the card itself. */
+   13-wellbeing covers the card itself.
+   #/practice gained the Reading drill mode and three lines of keyboard help
+   for the answering tools (§10.02, S5) on purpose; both are taken out before
+   the comparison, and 16-answering covers them. */
 var ROUTES = ["library", "exam", "practice", "scenarios"];
-var ADDED = { exam: "#view .wb-write" };
+var ADDED = { exam: "#view .wb-write", practice: '#view .mode-opt[for="mode-reading"], #view .keylist li[data-k]' };
 
 module.exports = [
   {

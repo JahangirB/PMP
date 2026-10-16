@@ -255,7 +255,9 @@ module.exports = [
       assert.deepStrictEqual([r.freezes.delta, r.freezes.direction], [-6, 1], "fewer freezes is better");
       assert.deepStrictEqual([r.answers.delta, r.answers.direction], [-5, -1]);
       assert.deepStrictEqual([r.rushed.value, r.rushed.previous, r.rushed.direction], [0, 2, 1]);
-      assert.deepStrictEqual(r.sections, ["Knowledge", "Exam fitness", "Effort", "Mistake causes"]);
+      /* Checking an answer asks how sure (§10.02), so a week with answers in
+         it has the Confidence rows the phones show. */
+      assert.deepStrictEqual(r.sections, ["Knowledge", "Exam fitness", "Effort", "Confidence", "Mistake causes"]);
 
       /* Three weeks on file: the trend, and a choice of comparison. */
       await page.evaluate(function () {
