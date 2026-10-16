@@ -130,7 +130,7 @@ PMP.STORE_CFG = Object.freeze({
   PERSISTED: Object.freeze([
     "settings", "attempts", "srs", "exams", "notes", "flags", "journal", "planner",
     "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons", "coach",
-    "notepad", "drills", "shared"
+    "notepad", "drills", "shared", "sittings", "checkins", "weekly", "sessions"
   ])
 });
 
@@ -1908,6 +1908,9 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .dots { display: flex; gap: 3px; margin-top: var(--sp-3); }
 .dots i { width: 10px; height: 10px; border-radius: var(--r-1); background: var(--s-sunk); border: 1px solid var(--s-edge); }
 .dots i[data-on="true"] { background: var(--c-go); border-color: var(--c-go); }
+/* A rest day (§10.00.7) kept the run: outlined in the study colour, not
+   filled, because no study happened on it. */
+.dots i[data-rest="true"] { border-color: var(--c-go); border-style: dashed; }
 .dots i[data-today="true"] { box-shadow: 0 0 0 2px var(--s-raise), 0 0 0 3px var(--c-signal); }
 
 /* Next best action */
@@ -2366,6 +2369,122 @@ mark.np-h-none { background: transparent; }
 .sync-status[data-kind="ok"], .sync-msg[data-kind="ok"] { color: var(--st-correct-fg); }
 .sync-reveal summary { cursor: pointer; margin-top: var(--sp-3); }
 
+/* ── 03.24  EXAM FITNESS, BOOKING AND WEEKLY REPORTS — §10.21 ───────────────
+   The bars are the dashboard's (.rd-row); what is new is the ladder, the
+   booking checklist and the comparison tables. A change reads better or
+   worse by its arrow and its colour, and the words say it again. */
+.nav-k {
+  margin-left: auto; font-family: var(--font-mono); font-size: 11px; line-height: 1;
+  padding: 2px var(--sp-1); border: var(--border); border-radius: var(--r-1); color: var(--fg-muted);
+}
+.card .fit-none { margin-top: var(--sp-3); font-size: var(--t-xl); font-weight: var(--w-bold); }
+.fit-finding { margin-top: var(--sp-4); }
+.fit-next { margin-top: var(--sp-1); max-width: var(--measure); }
+.fit-worry { margin-top: var(--sp-3); }
+.fit-part-hd { display: flex; align-items: baseline; gap: var(--sp-3); flex-wrap: wrap; }
+.fit-part-hd h2 { margin: 0; }
+.fit-part-s { margin-left: auto; font-family: var(--font-mono); font-weight: var(--w-bold); color: var(--c-signal); }
+.fit-ladder { list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--sp-2); margin: var(--sp-3) 0 var(--sp-3); padding: 0; }
+.fit-ladder li {
+  display: grid; place-items: center; min-height: var(--hit-min); border-radius: var(--r-3);
+  font-family: var(--font-mono); font-weight: var(--w-bold); font-size: var(--t-sm);
+  background: var(--s-sunk); border: var(--border); color: var(--fg);
+}
+.fit-ladder li[data-state="done"] { background: var(--c-go); border-color: var(--c-go); color: var(--fg-on-acc); }
+.fit-ladder li[data-state="next"] { background: var(--s-wash); border: 2px solid var(--c-signal); }
+
+.bk-verdict[data-ready="true"] { border-color: var(--st-correct-fg); background: var(--st-correct-bg); }
+.bk-verdict h2 { font-size: var(--t-xl); }
+.bk-crit { list-style: none; margin: var(--sp-4) 0 0; padding: 0; display: grid; gap: var(--sp-2); }
+.bk-crit li { display: grid; grid-template-columns: var(--icon-lg) 1fr auto; gap: var(--sp-3); align-items: center; min-height: var(--hit-min); }
+.bk-crit .i { width: var(--icon-lg); height: var(--icon-lg); color: var(--st-correct-fg); }
+.bk-open { color: var(--fg-muted); font-weight: var(--w-bold); text-align: center; }
+.bk-v { font-family: var(--font-mono); font-weight: var(--w-bold); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bk-late { margin-top: var(--sp-3); font-weight: var(--w-bold); color: var(--c-danger); }
+
+.wk-spark { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) 3rem; gap: var(--sp-3); align-items: center; margin-top: var(--sp-3); }
+.wk-spark-t { font-size: var(--t-sm); }
+.wk-spark-g { width: 100%; height: 36px; }
+svg.wk-spark-g { display: block; overflow: visible; }
+.wk-spark-v { font-family: var(--font-mono); font-weight: var(--w-bold); text-align: right; }
+.wk-base { stroke: var(--s-edge); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.wk-line { fill: none; stroke: var(--c-signal); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.wk-dot { fill: var(--c-signal); }
+.wk-cmp { display: grid; gap: var(--sp-2); }
+.wk-tbl caption { text-align: left; margin-top: var(--sp-4); font-size: var(--t-xs); font-weight: var(--w-bold); color: var(--fg-muted); letter-spacing: var(--ls-cap); text-transform: uppercase; }
+.wk-tbl tbody th { font-family: var(--font-ui); font-size: var(--t-sm); text-transform: none; letter-spacing: 0; color: var(--fg); font-weight: var(--w-reg); }
+.wk-tbl .n { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.wk-d[data-dir="1"] { color: var(--st-correct-fg); }
+.wk-d[data-dir="-1"] { color: var(--st-incorrect-fg); }
+.wk-d[data-dir="0"] { color: var(--fg-muted); }
+.wk-earlier { margin-top: var(--sp-6); }
+.wk-week summary { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-3); cursor: pointer; min-height: var(--hit-min); align-items: center; }
+.wk-week-t { font-weight: var(--w-bold); }
+.wk-week-s { font-size: var(--t-sm); color: var(--fg-muted); }
+
+/* ── 03.25  WELLBEING — §10.20 ──────────────────────────────────────────────
+   Faces are buttons with their word beside them: an emoji alone is not a
+   label. The breathing circle grows over four seconds and shrinks over
+   six; with reduced motion it stays still and only the words change. */
+.card .wb-q { font-size: var(--t-md); }
+.wb-faces { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-3); }
+.wb-face { gap: var(--sp-2); }
+.wb-emoji { font-size: 1.25em; line-height: 1; }
+.wb-thanks { color: var(--fg-muted); }
+.wb-support { border-color: var(--st-flagged-fg); background: var(--st-flagged-bg); }
+.wb-support h2, .wb-light h2 { font-size: var(--t-md); }
+.wb-weekly { display: grid; gap: var(--sp-4); }
+.wb-st { border: 0; padding: 0; margin: 0; }
+.wb-st legend { font-weight: var(--w-semi); padding: 0; }
+.wb-scale { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-2); }
+.wb-opt, .rd-opt {
+  display: inline-flex; align-items: center; gap: var(--sp-2); min-height: var(--hit-min);
+  padding: 0 var(--sp-3); border: var(--border-hi); border-radius: var(--r-2); font-size: var(--t-sm); cursor: pointer;
+}
+.wb-opt:has(input:checked), .rd-opt:has(input:checked) { border-color: var(--c-signal); background: var(--s-wash); font-weight: var(--w-semi); }
+.wb-opt:focus-within, .rd-opt:focus-within { box-shadow: var(--ring); }
+.wb-ta { width: 100%; min-height: 8em; margin-top: var(--sp-3); }
+.breath { position: relative; display: grid; place-items: center; width: 220px; height: 220px; max-width: 100%; margin: var(--sp-5) auto; }
+.breath-c {
+  position: absolute; inset: 0; border-radius: 50%; background: var(--s-wash); border: 2px solid var(--c-signal);
+  transform: scale(0.55); transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.breath-c[data-still="true"] { transform: scale(0.8); transition: none; }
+.breath-p { position: relative; font-size: var(--t-lg); font-weight: var(--w-bold); }
+.breath-n, .breath-lead { text-align: center; color: var(--fg-muted); }
+
+/* ── 03.26  SEARCH AND READING — §10.22, §10.23 ─────────────────────────── */
+.sr-form .field { max-width: 46rem; }
+.sr-q { width: 100%; }
+.sr-list { list-style: none; margin: var(--sp-4) 0 0; padding: 0; display: grid; gap: var(--sp-3); }
+.sr-hit { padding: var(--sp-4); border: var(--border); border-radius: var(--r-3); background: var(--s-raise); min-width: 0; }
+.sr-h { margin: var(--sp-2) 0 0; font-size: var(--t-base); }
+.sr-t { font-weight: var(--w-semi); overflow-wrap: anywhere; }
+.sr-go { background: none; border: 0; padding: 0; text-align: left; color: var(--c-signal); text-decoration: underline; cursor: pointer; font: inherit; font-weight: var(--w-semi); min-height: 24px; }
+.sr-s { margin-top: var(--sp-1); font-size: var(--t-sm); color: var(--fg-muted); line-height: var(--lh-body); overflow-wrap: anywhere; }
+.sr-s mark { background: var(--st-flagged-bg); color: var(--fg); border-radius: 2px; }
+.sr-full { white-space: pre-line; color: var(--fg); }
+.sr-det summary { cursor: pointer; margin-top: var(--sp-2); min-height: 24px; }
+.sr-hit[data-open="true"] .sr-peek { display: none; }
+.rd-size { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
+.rd-size legend { width: 100%; margin-bottom: var(--sp-1); }
+.rd-preview { margin-top: var(--sp-4); padding: var(--sp-4); border: var(--border); border-radius: var(--r-2); background: var(--s-base); }
+
+/* Reading comfort applies only while something differs from the defaults,
+   so at the defaults every surface draws as it always has. */
+:root[data-read="on"] .q-stem { font-size: calc(var(--t-md) * var(--rd-scale, 1)); line-height: calc(var(--lh-body) * var(--rd-lh, 1)); }
+:root[data-read="on"] .opt .txt,
+:root[data-read="on"] .match-row .prompt,
+:root[data-read="on"] .ln-prose p,
+:root[data-read="on"] .ln-bullets li { font-size: calc(var(--t-sm) * var(--rd-scale, 1)); line-height: calc(var(--lh-body) * var(--rd-lh, 1)); }
+/* The guide: a soft band one line tall behind the stem's text. */
+.q-stem[data-guide="true"] { position: relative; isolation: isolate; cursor: pointer; border-radius: var(--r-2); }
+.rg-band {
+  position: absolute; left: calc(var(--sp-1) * -1); right: calc(var(--sp-1) * -1); z-index: -1; pointer-events: none;
+  top: calc(var(--rg-line, 0) * 1lh); height: 1lh; border-radius: var(--r-2); background: var(--s-wash);
+  box-shadow: inset 0 0 0 1px var(--s-edge-hi);
+}
+
 /* ── 03.8  RESPONSIVE ───────────────────────────────────────────────────── */
 @media (min-width: 600px) {
   .view { padding-left: var(--sp-6); padding-right: var(--sp-6); }
@@ -2493,6 +2612,10 @@ mark.np-h-none { background: transparent; }
 <symbol id="i-ol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6.5H20M10 12H20M10 17.5H20"/><path d="M4 5l1.5-1v5M4 13.5c0-1 .7-1.5 1.4-1.5s1.3.5 1.3 1.2c0 1-2.7 2.1-2.7 3.3h2.8" stroke-width="1.4"/></symbol>
 <symbol id="i-marker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5l5 5-8 8H8.5L7 16l-.5-3z"/><path d="M6.5 13l4.5 4.5M3.5 20.5h7"/></symbol>
 <symbol id="i-sync" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 9A7.5 7.5 0 0 0 6 6.5L4.5 8M4.5 15A7.5 7.5 0 0 0 18 17.5l1.5-1.5"/><path d="M4.5 4v4h4M19.5 20v-4h-4"/></symbol>
+<symbol id="i-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12.5h4l2.5-6 4 12 2.5-6h6"/></symbol>
+<symbol id="i-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></symbol>
+<symbol id="i-report" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h9l4 4v13H6z"/><path d="M15 3.5v4h4M9.5 17v-3M12.5 17v-6M15.5 17v-4"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></symbol>
 <symbol id="i-clip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
 </defs></svg>
 
@@ -2513,6 +2636,7 @@ mark.np-h-none { background: transparent; }
     <div class="nav" id="nav">
       <div class="nav-grp">
         <a class="nav-i" href="#/today"     data-route="today"><svg class="i"><use href="#i-today"></use></svg>Today</a>
+        <a class="nav-i" href="#/search"    data-route="search" aria-keyshortcuts="/"><svg class="i"><use href="#i-search"></use></svg>Search<kbd class="nav-k" aria-hidden="true">/</kbd></a>
       </div>
 
       <div class="nav-grp">
@@ -2530,6 +2654,9 @@ mark.np-h-none { background: transparent; }
         <a class="nav-i" href="#/planner"   data-route="planner"><svg class="i"><use href="#i-calendar"></use></svg>Study plan</a>
         <a class="nav-i" href="#/journal"   data-route="journal"><svg class="i"><use href="#i-journal"></use></svg>Mistake journal</a>
         <a class="nav-i" href="#/analytics" data-route="analytics"><svg class="i"><use href="#i-chart"></use></svg>Analytics</a>
+        <a class="nav-i" href="#/fitness"   data-route="fitness"><svg class="i"><use href="#i-pulse"></use></svg>Exam fitness</a>
+        <a class="nav-i" href="#/book"      data-route="book"><svg class="i"><use href="#i-ready"></use></svg>Ready to book?</a>
+        <a class="nav-i" href="#/reports"   data-route="reports"><svg class="i"><use href="#i-report"></use></svg>Weekly reports</a>
       </div>
 
       <div class="nav-grp">
@@ -19350,7 +19477,17 @@ PMP.Store = (function () {
         examDate: null,
         dailyTarget: 30,
         confidenceTracking: true,
-        shuffleOptions: true
+        shuffleOptions: true,
+        /* One missed day a week, between two study days, keeps the streak
+           (§10.00.7). On by default, as on the phones; plan.rest in the
+           shared document (§10.18). */
+        restDays: true,
+        /* Reading comfort (§10.23): text size ×1, ×1.15 or ×1.3 on question
+           stems, options and lesson text; roomier lines ×1.18; the reading
+           guide band on question stems. Device-only, like the theme: a
+           phone's screen and a laptop's want different sizes, so these
+           never travel in the shared document. */
+        reading: { scale: 1, roomy: false, guide: false }
       },
       /* One row per committed answer. `credit` is the part mark 0–1 and
          `correct` is the all-or-nothing item mark; `order` is the option
@@ -19424,9 +19561,28 @@ PMP.Store = (function () {
          order, and counting it would move accuracy for arithmetic practice.
          It does count as a study day (§10.00.6), and analytics lists it. */
       drills: [],     /* { at: ms, g: generator id, ok }, last 2000; shared as is (§10.18) */
+      /* Exam fitness (§10.19) and wellbeing (§10.20). All four are kept in
+         the shared document's own shape, field for field, so §10.18 copies
+         them both ways and a phone's rows come back out exactly as they
+         went in. Times are ms since the epoch, as in the shared slices.
+           sittings  a practice set or mock started and finished, or left
+                     part-way: { k, kind: "practice" | "mock" | "path",
+                     at, p: planned, a: answered, f: finished }, last 2000
+           checkins  { at, kind: "pre" | "post" | "weekly", v: 1–5,
+                     items: [1–5 × 5] on a weekly check }
+           weekly    one report per Monday-to-Sunday week, the current
+                     week's kept up to date (§10.19.4); { w: week start,
+                     u, r, acc, … } as WeeklyReport.toJson writes it, last 104
+           sessions  a phone's guided sessions, { k, kind, t, d, s, m, at }.
+                     The web writes none; their minutes and days count in
+                     exam fitness and the weekly report, as on the phone. */
+      sittings: [],
+      checkins: [],
+      weekly: [],
+      sessions: [],
       /* What another device keeps in the shared progress file that this
-         build does not use itself (§10.18): a phone's sessions, sittings,
-         check-ins, weekly reports, its own cards, its chat, mock summaries
+         build does not use itself (§10.18): a phone's own cards, its chat,
+         its diagnostics and snoozed messages, mock summaries
          without the web's paper behind them, the rest of its plan, the
          `native` block, any key a later version adds, and under `web` any
          web-block key this build does not know. Kept so that nothing from a
@@ -19596,7 +19752,39 @@ PMP.Store = (function () {
           state[keys[i]] = normalise(keys[i], migrate(keys[i], data, version));
           bump(keys[i]);
         });
+        adoptShared();
       });
+  }
+
+  /* Before exam fitness, a phone's sittings, check-ins, weekly reports and
+     sessions waited in `shared` (§10.18). They have slices of their own
+     now, so whatever is still waiting there is moved across once, as a
+     union by the same identities the merge uses, and written back. */
+  var ADOPT = {
+    sittings: function (r) { return r.k + "|" + r.at; },
+    checkins: function (r) { return r.kind + "|" + r.at; },
+    weekly: function (r) { return String(r.w); },
+    sessions: function (r) { return r.k + "|" + r.at; }
+  };
+  function adoptShared() {
+    var sh = state.shared;
+    if (!sh || typeof sh !== "object") return;
+    var moved = [];
+    Object.keys(ADOPT).forEach(function (k) {
+      if (!Array.isArray(sh[k])) return;
+      var seen = Object.create(null), out = [];
+      (Array.isArray(state[k]) ? state[k] : []).concat(sh[k]).forEach(function (r) {
+        if (!r || typeof r !== "object" || seen[ADOPT[k](r)]) return;
+        seen[ADOPT[k](r)] = 1;
+        out.push(r);
+      });
+      state[k] = out;
+      delete sh[k];
+      moved.push(k);
+    });
+    if (!moved.length) return;
+    moved.concat(["shared"]).forEach(function (k) { bump(k); dirty[k] = true; });
+    schedule();
   }
 
   /* Prune. Offered when the disk is full — drops the oldest attempts, which
@@ -20754,6 +20942,112 @@ PMP.Exporter = (function () {
 })();
 
 
+/* ── 09.9  ANSWER SIGNALS ───────────────────────────────────────────────────
+   What exam fitness (§10.19) reads from a single answer beyond whether it
+   was right, measured here the way the phones measure it so a row means the
+   same thing whichever device wrote it. Each lands on the attempt under the
+   shared field name (docs/progress-format.md), and only when there is
+   something to say, so a row written before this existed is simply silent:
+
+     ft    reading time: on-screen time from the question appearing to the
+           first touch of an answer, in ms
+     idle  the longest stretch with nothing touched while the question was
+           on screen: answering, a hint, a confidence button, checking
+     w     words to read, the stem plus the options' text
+     rw    answer changes before checking that went from right to wrong
+     wr    and from wrong to right
+
+   "On screen" means on screen. Time with the tab hidden or the person on
+   another page is not reading time and is not a freeze, so the tracker's
+   clock runs only while its question is shown and the document is
+   visible. A change only counts as right→wrong or wrong→right between two
+   complete answers to a pick-type item (single, multi, hotspot), as on
+   the phones: a half-built matching answer is neither. */
+PMP.signals = (function () {
+  var live = [];
+  var PICK = { single: 1, multi: 1, hotspot: 1 };
+
+  function words(q) {
+    var n = 0;
+    function count(t) { var m = String(t || "").match(/\w+/g); n += m ? m.length : 0; }
+    count(q && q.stem);
+    ((q && q.options) || []).forEach(function (o) { count(o && o.text); });
+    return n;
+  }
+
+  function Tracker(q) {
+    this.q = q;
+    this.vis = new PMP.time.Clock(0);
+    this.shown = false;
+    this.first = 0;
+    this.last = 0;
+    this.maxIdle = 0;
+    this.rw = 0;
+    this.wr = 0;
+    this.prev = null;
+    this.w = words(q);
+  }
+  /* The question is on screen. Its clock runs only while the tab is seen. */
+  Tracker.prototype.start = function () {
+    this.shown = true;
+    if (live.indexOf(this) < 0) live.push(this);
+    if (!document.hidden) this.vis.start();
+    return this;
+  };
+  Tracker.prototype.pause = function () {
+    this.shown = false;
+    this.vis.pause();
+    var i = live.indexOf(this);
+    if (i >= 0) live.splice(i, 1);
+    return this;
+  };
+  /* A touch closes the idle stretch that ran since the last one. */
+  Tracker.prototype.touch = function () {
+    var t = this.vis.elapsed();
+    if (t - this.last > this.maxIdle) this.maxIdle = t - this.last;
+    this.last = t;
+    return this;
+  };
+  /* The answer changed. `correct` is whether the answer now on screen
+     would score right, or null while it is incomplete. */
+  Tracker.prototype.answer = function (correct) {
+    this.touch();
+    if (!this.first) this.first = Math.max(1, Math.round(this.vis.elapsed()));
+    if (PICK[PMP.QRender.base(this.q.type)]) {
+      if (this.prev !== null && correct !== null && this.prev !== correct) {
+        if (correct) this.wr++; else this.rw++;
+      }
+      this.prev = correct;
+    }
+    return this;
+  };
+  /* The shared fields this answer has something to say about. */
+  Tracker.prototype.fields = function (withIdle) {
+    var o = {};
+    if (this.first > 0) o.ft = this.first;
+    if (withIdle !== false && this.maxIdle > 0) o.idle = Math.round(this.maxIdle);
+    if (this.w > 0) o.w = this.w;
+    if (this.rw > 0) o.rw = this.rw;
+    if (this.wr > 0) o.wr = this.wr;
+    return o;
+  };
+
+  /* Whether the answer on screen would score right; null while incomplete. */
+  function correctNow(q, p, ctrl) {
+    try {
+      if (!ctrl || !ctrl.answered()) return null;
+      return !!PMP.QRender.score(q, p, ctrl.value()).correct;
+    } catch (e) { return null; }
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    live.forEach(function (t) { if (document.hidden) t.vis.pause(); else if (t.shown) t.vis.start(); });
+  });
+
+  return { Tracker: Tracker, words: words, correctNow: correctNow };
+})();
+
+
 /* ═══ §10  FEATURE MODULES ════════════════════════════════════════════════
    One IIFE each. A module that has landed registers its own route here, and
    the stubs in §12.3 stand aside for it rather than overwriting it.
@@ -20763,7 +21057,9 @@ PMP.Exporter = (function () {
           10.08 scenario trainer, 10.09 study planner, 10.10 mistake
           journal, 10.11 analytics, 10.12 settings, About and help,
           10.13 data portability, 10.14 content audit, 10.15 learn,
-          10.16 coach, 10.17 today and the coach's surfaces.
+          10.16 coach, 10.17 today and the coach's surfaces, 10.18 cloud
+          sync, 10.19 exam fitness, 10.20 wellbeing, 10.21 the fitness,
+          booking and weekly report pages, 10.22 search, 10.23 reading.
    Still stubs: none.
    ════════════════════════════════════════════════════════════════════ */
 
@@ -20813,6 +21109,7 @@ PMP.Practice = (function () {
     if (session && !session.finished) {
       var item = session.items[session.i];
       if (item && !item.committed) item.clock.pause();
+      if (item && item.sig) item.sig.pause();
     }
   }
   function everySecond(fn) {
@@ -21218,6 +21515,13 @@ PMP.Practice = (function () {
   function startWith(questions, mode, opts) {
     var shuffle = PMP.Store.state.settings.shuffleOptions !== false;
     opts = opts || {};
+    /* A set replaced part-way, with something answered, was left rather
+       than finished (exam fitness, §10.19). */
+    if (session && !session.finished) {
+      var prev = session.items[session.i];
+      if (prev && prev.sig) prev.sig.pause();
+      sitting(false);
+    }
     session = {
       id: PMP.rng.id("drill"),
       mode: mode,
@@ -21234,7 +21538,8 @@ PMP.Practice = (function () {
           p: PMP.QRender.present(q, { shuffle: shuffle }),
           value: null, result: null, committed: false, recorded: false,
           confidence: null, seen: false, panel: null, ctrl: null, ui: {},
-          clock: new PMP.time.Clock(PACE_MS)
+          clock: new PMP.time.Clock(PACE_MS),
+          sig: new PMP.signals.Tracker(q)
         };
       })
     };
@@ -21265,7 +21570,25 @@ PMP.Practice = (function () {
     };
     if (session.lessonId) attempt.lessonId = session.lessonId;
     if (item.hints) attempt.hinted = item.hints;
+    /* Reading time, the longest idle stretch, words and answer changes
+       (§09.9), under their shared names. */
+    if (item.sig) {
+      var f = item.sig.fields();
+      Object.keys(f).forEach(function (k) { attempt[k] = f[k]; });
+    }
     PMP.Store.commit(["attempts"], function (s) { s.attempts.push(attempt); });
+  }
+
+  /* One sitting event per set, finished or left part-way (§10.19). The
+     diagnostic is a measurement taken once, not a sitting the person chose
+     the length of, so it is not one, as on the phones. */
+  function sitting(finished) {
+    if (!session || session.mode === "diagnostic" || session.sat) return;
+    var answered = session.items.filter(function (i2) { return i2.committed; }).length;
+    if (!finished && !answered) return;
+    session.sat = true;
+    if (PMP.Fitness) PMP.Fitness.recordSitting("practice:" + session.startedAt, "practice",
+      session.items.length, answered, finished);
   }
 
   /* ── 10.02.6a  HINTS ─────────────────────────────────────────────────────
@@ -21295,6 +21618,7 @@ PMP.Practice = (function () {
   function nextHint(item) {
     if (session.finished || item.committed || (item.hints || 0) >= PMP.Coach.HINT_RUNGS) return;
     item.hints = (item.hints || 0) + 1;
+    if (item.sig) item.sig.touch();
     var h = PMP.Coach.hint(item.q, item.hints, item.p, item.ctrl.value());
     if (item.hints === 1) item.ui.hintList.appendChild(el("p", { class: "hint", text: PMP.Coach.line("hint_note") }));
     item.ui.hintList.appendChild(el("div", { class: "q-hint" }, [
@@ -21409,11 +21733,11 @@ PMP.Practice = (function () {
 
   function show(idx) {
     var prev = session.items[session.i];
-    if (prev && prev !== session.items[idx]) prev.clock.pause();
+    if (prev && prev !== session.items[idx]) { prev.clock.pause(); if (prev.sig) prev.sig.pause(); }
     session.i = idx;
     var item = session.items[idx];
     item.seen = true;
-    if (!item.committed) item.clock.start();
+    if (!item.committed) { item.clock.start(); if (item.sig) item.sig.start(); }
 
     el_.card.innerHTML = "";
     el_.card.appendChild(panelFor(item, idx));
@@ -21459,7 +21783,7 @@ PMP.Practice = (function () {
       q.difficulty ? el("span", { class: "chip", text: "Difficulty " + q.difficulty }) : null,
       q.placeholder ? el("span", { class: "chip chip--flagged", text: "Placeholder item" }) : null
     ]));
-    panel.appendChild(el("p", { class: "q-stem", text: q.stem }));
+    panel.appendChild(PMP.Reading ? PMP.Reading.stem(q.stem) : el("p", { class: "q-stem", text: q.stem }));
     panel.appendChild(el("p", { class: "q-instr", text: PMP.QRender.instruction(q) }));
 
     var body = el("div");
@@ -21471,7 +21795,10 @@ PMP.Practice = (function () {
 
     item.ctrl = PMP.QRender.render(item.p, q, body, {
       nonce: idx,
-      onChange: function () { onAnswerChanged(item); }
+      onChange: function () {
+        if (item.sig && !item.committed) item.sig.answer(PMP.signals.correctNow(item.q, item.p, item.ctrl));
+        onAnswerChanged(item);
+      }
     });
 
     /* Tools ── flag, note, report an issue */
@@ -21560,6 +21887,7 @@ PMP.Practice = (function () {
     if (item.committed) return;
     if (!item.ctrl.answered()) return;
     item.clock.pause();
+    if (item.sig) item.sig.touch().pause();
     item.value = item.ctrl.value();
     item.result = PMP.QRender.score(item.q, item.p, item.value);
     item.committed = true;
@@ -21629,6 +21957,7 @@ PMP.Practice = (function () {
   function advance(item) {
     if (session.mode === "timed" && !item.committed && item.ctrl.answered()) {
       item.clock.pause();
+      if (item.sig) item.sig.touch().pause();
       item.value = item.ctrl.value();
       item.result = PMP.QRender.score(item.q, item.p, item.value);
       item.committed = true;
@@ -21716,6 +22045,7 @@ PMP.Practice = (function () {
 
   function setConfidence(item, k) {
     item.confidence = item.confidence === k ? null : k;
+    if (item.sig && !item.committed) item.sig.touch();
     item.ui.conf.forEach(function (b) {
       b.setAttribute("data-on", b.getAttribute("data-conf") === String(item.confidence) ? "true" : "false");
     });
@@ -21785,14 +22115,18 @@ PMP.Practice = (function () {
       "End this drill?",
       "You are on question " + (session.i + 1) + " of " + session.items.length + ". Everything you have already answered is saved, and you will see the summary for those.",
       "End drill", true
-    ).then(function (yes) { if (yes) finish(); });
+    ).then(function (yes) { if (yes) finish(true); });
   }
 
-  /* ── 10.02.9  SUMMARY ────────────────────────────────────────────────── */
-  function finish() {
+  /* ── 10.02.9  SUMMARY ────────────────────────────────────────────────────
+     `early` is End drill part-way. A set ended early with questions still
+     unanswered was left rather than finished, for exam fitness; reaching
+     the end, or the clock running out, is finishing it. */
+  function finish(early) {
     if (session.finished) return;
     session.items.forEach(function (item) {
       item.clock.pause();
+      if (item.sig) item.sig.pause();
       if (!item.committed && item.ctrl && item.ctrl.answered()) {
         item.value = item.ctrl.value();
         item.result = PMP.QRender.score(item.q, item.p, item.value);
@@ -21801,6 +22135,7 @@ PMP.Practice = (function () {
       }
     });
     if (session.clock) session.clock.pause();
+    sitting(early !== true || session.items.every(function (i2) { return i2.committed; }));
     session.finished = true;
     session.finishedAt = Date.now();
     session.result = result();
@@ -22776,6 +23111,8 @@ PMP.Exam = (function () {
   var teardown = [];
   var nodes = {};
   var reviewing = null;        /* a finished sitting opened from history */
+  var justFinished = null;     /* the sitting handed in on this page, for the
+                                  one-tap tension check-in (§10.20) */
 
   /* ── 10.03.1  LAYOUT ─────────────────────────────────────────────────────
      The published layout is 180 items in 240 minutes with two breaks. A pack
@@ -22911,6 +23248,10 @@ PMP.Exam = (function () {
       answers: {},        /* qid -> value, in the shape score() expects */
       flags: {},          /* qid -> true, local to the sitting */
       times: {},          /* qid -> ms on screen */
+      /* Exam fitness (§09.9): time on the item before its first answer, and
+         answer changes right→wrong and wrong→right, per qid. A sitting
+         saved before these existed resumes without them. */
+      ft: {}, rw: {}, wr: {}, ok: {},
       i: 0,
       unlockedFrom: 0,    /* index of the first item still editable */
       breaksTaken: [],
@@ -23078,6 +23419,12 @@ PMP.Exam = (function () {
       "The questions you answered in it are removed with it and will not appear in your history or your readiness score. This cannot be undone.",
       "Discard it", true).then(function (yes) {
       if (!yes) return;
+      /* Left part-way, for exam fitness (§10.19): the event says only that
+         a sitting of this length was started and not finished. */
+      var saved = PMP.Store.state.examRun;
+      var n = saved && saved.answers ? Object.keys(saved.answers).length : 0;
+      if (n && PMP.Fitness) PMP.Fitness.recordSitting("mock:" + saved.createdAt, "mock",
+        (saved.layout && saved.layout.items) || (saved.qids || []).length, n, false);
       clearSaved();
       PMP.UI.toast("Unfinished sitting discarded.", "ok");
       repaint();
@@ -23233,7 +23580,7 @@ PMP.Exam = (function () {
       el("span", { class: "eyebrow", text: "Question " + (idx + 1) + " of " + run.layout.items }),
       el("span", { class: "chip", text: PMP.QRender.label(q.type) })
     ]));
-    panel.appendChild(el("p", { class: "q-stem", text: q.stem }));
+    panel.appendChild(PMP.Reading ? PMP.Reading.stem(q.stem) : el("p", { class: "q-stem", text: q.stem }));
     panel.appendChild(el("p", { class: "q-instr", text: PMP.QRender.instruction(q) }));
 
     var body = el("div");
@@ -23241,9 +23588,15 @@ PMP.Exam = (function () {
 
     item.ctrl = PMP.QRender.render(item.p, q, body, {
       nonce: "x" + idx,
-      onChange: function () { onAnswerChanged(item, idx); }
+      onChange: function () {
+        if (!item.restoring) noteSignal(item, idx);
+        onAnswerChanged(item, idx);
+      }
     });
+    /* Putting a saved answer back is not the person answering. */
+    item.restoring = true;
     if (run.answers[q.id] !== undefined && item.ctrl.set) item.ctrl.set(run.answers[q.id]);
+    item.restoring = false;
 
     var lockNote = el("div", { class: "lock-note", hidden: true }, [
       icon("alert"),
@@ -23321,11 +23674,38 @@ PMP.Exam = (function () {
     save();
   }
 
+  /* The phones' measures for a sitting (§09.9): the time on the item before
+     its first answer, and changes between two complete answers to a
+     pick-type item. Idle time is not kept in a sitting, as on the phones;
+     the clock on screen is pressure enough to read the freeze signal
+     from practice alone. */
+  var PICK = { single: 1, multi: 1, hotspot: 1 };
+  function noteSignal(item, idx) {
+    var run = live.run, qid = item.q.id;
+    if (idx < run.unlockedFrom) return;
+    run.ft = run.ft || {}; run.rw = run.rw || {}; run.wr = run.wr || {}; run.ok = run.ok || {};
+    if (!run.ft[qid]) {
+      var on = (run.times[qid] || 0) + (itemEnteredAt !== null && run.qids[run.i] === qid ? Date.now() - itemEnteredAt : 0);
+      run.ft[qid] = Math.max(1, Math.round(on));
+    }
+    if (!PICK[PMP.QRender.base(item.q.type)]) return;
+    var now = PMP.signals.correctNow(item.q, item.p, item.ctrl);
+    var was = qid in run.ok ? run.ok[qid] : null;
+    if (was !== null && now !== null && was !== now) {
+      if (now) run.wr[qid] = (run.wr[qid] || 0) + 1;
+      else run.rw[qid] = (run.rw[qid] || 0) + 1;
+    }
+    run.ok[qid] = now;
+  }
+
   function clearAnswer(item, idx) {
     var run = live.run;
     if (idx < run.unlockedFrom) return;
     delete run.answers[item.q.id];
+    if (run.ok) run.ok[item.q.id] = null;
+    item.restoring = true;
     if (item.ctrl.set) item.ctrl.set(item.p.type === "matching" || item.p.type === "fillblank" ? {} : []);
+    item.restoring = false;
     syncTools(item, idx);
     updateNav();
     save();
@@ -23638,19 +24018,29 @@ PMP.Exam = (function () {
     PMP.Store.commit(["attempts", "exams", "examRun"], function (s) {
       rows.forEach(function (r) {
         if (!r.answered) return;
-        s.attempts.push({
+        var a = {
           id: PMP.rng.id("att"),
           qid: r.qid, ecoTask: r.ecoTask, domain: r.domain, approach: r.approach,
           type: r.type, difficulty: r.difficulty,
           correct: r.correct, credit: r.credit,
           ms: Math.round(r.ms), at: at, confidence: null, mode: "exam",
           examId: record.id, order: null
-        });
+        };
+        /* The shared signals (§09.9), as the phones record them for a mock. */
+        var ft = run.ft && run.ft[r.qid], w = PMP.signals.words(live.items[r.idx].q);
+        if (ft > 0) a.ft = ft;
+        if (w > 0) a.w = w;
+        if (run.rw && run.rw[r.qid] > 0) a.rw = run.rw[r.qid];
+        if (run.wr && run.wr[r.qid] > 0) a.wr = run.wr[r.qid];
+        s.attempts.push(a);
       });
       s.exams.push(record);
       s.examRun = null;
     });
     PMP.Store.flush();
+    if (PMP.Fitness) PMP.Fitness.recordSitting("mock:" + run.createdAt, "mock", L.items,
+      rows.filter(function (r) { return r.answered; }).length, true);
+    justFinished = record.id;
 
     PMP.Store.commit(["ui"], function (s) { s.ui.examActive = false; }, { transient: true });
     cleanup();
@@ -23734,6 +24124,15 @@ PMP.Exam = (function () {
       el("h2", { text: PMP.fmt.pct(pct) + " on the scored questions" }),
       el("p", { text: record.score.right + " of " + PMP.fmt.plural(record.score.of, "scored question") + " right, in " + PMP.fmt.duration(record.elapsedMs / 1000) + " of a " + L.minutes + " minute allowance." })
     ]));
+
+    /* One tap, optional, and only straight after handing the paper in: how
+       tense it felt (§10.20). Opening an old sitting from history does not
+       ask about a feeling that long gone. */
+    if (justFinished === record.id && PMP.Wellbeing) {
+      host.appendChild(PMP.Wellbeing.checkInCard("post", "How tense did you feel during it?", function () {
+        justFinished = null;
+      }));
+    }
 
     host.appendChild(el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "The paper" }),
@@ -24016,6 +24415,7 @@ PMP.Exam = (function () {
       ]));
       if (saved) setup.appendChild(el("p", { class: "hint", text: "Finish or discard the unfinished sitting above before starting another." }));
       host.appendChild(setup);
+      if (!saved && PMP.Wellbeing) host.appendChild(PMP.Wellbeing.writeItDownCard());
     }
 
     /* History */
@@ -31437,29 +31837,72 @@ PMP.Metrics = (function () {
      a thirty-day streak by not having started yet, and telling them they have
      is both wrong and the single most discouraging thing this screen could
      do. So today is skipped when empty, and yesterday is where counting
-     starts. */
+     starts. Days are stepped calendar-correct (prevDay), so a clock change
+     in spring cannot split a run in two. */
+  /* Rest days, the phones' rule line for line (Readiness.withRestDays):
+     with the setting on, at most one missed day in a Monday-to-Sunday week
+     is kept in the streak, and only when it sits between two study days. A
+     long gap is still a gap; a single day off after six on is not. The
+     streak and the best run count kept days. The habit part of readiness
+     does not: `activeInWindow` and the dots' `on` are real study days, so a
+     rest day never earns points, it only stops a run reading as broken. */
+  function prevDay(d) { return PMP.time.startOfDay(d - DAY / 2); }
+  function nextDay(d) { return PMP.time.startOfDay(d + DAY + DAY / 2); }
+
+  /* Monday 00:00 of the week holding `t`, local time (§10.19's weeks too). */
+  function weekStart(t) {
+    var d = new Date(PMP.time.startOfDay(t));
+    d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+    return PMP.time.startOfDay(d.getTime());
+  }
+
+  function withRestDays(days, today) {
+    var out = Object.create(null), used = Object.create(null), keys = Object.keys(days).map(Number);
+    keys.forEach(function (k) { out[k] = 1; });
+    if (!keys.length) return out;
+    var d = Math.min.apply(null, keys);
+    while (d < today) {
+      var next = nextDay(d);
+      if (!days[d] && out[prevDay(d)] && days[next]) {
+        var w = weekStart(d);
+        if (!used[w]) { used[w] = 1; out[d] = 1; }
+      }
+      d = next;
+    }
+    return out;
+  }
+
   function streak(state) {
     var idx = dayIndex(state);
     var today = PMP.time.startOfDay(Date.now());
-    var cur = 0, cursor = today;
-    if (!activeDay(idx[today])) cursor = today - DAY;
-    while (activeDay(idx[cursor])) { cur++; cursor -= DAY; }
+    var studied = Object.create(null);
+    Object.keys(idx).forEach(function (d) { if (activeDay(idx[d])) studied[Number(d)] = 1; });
+    var restOn = !state.settings || state.settings.restDays !== false;
+    var kept = restOn ? withRestDays(studied, today) : studied;
 
-    var keys = Object.keys(idx).map(Number).filter(function (d) { return activeDay(idx[d]); }).sort();
+    var cur = 0, rested = 0, cursor = kept[today] ? today : prevDay(today);
+    while (kept[cursor]) { cur++; if (!studied[cursor]) rested++; cursor = prevDay(cursor); }
+
+    var keys = Object.keys(kept).map(Number).sort(function (a, b) { return a - b; });
     var best = 0, run = 0, prev = null;
     keys.forEach(function (d) {
-      run = (prev !== null && d - prev === DAY) ? run + 1 : 1;
+      run = (prev !== null && prevDay(d) === prev) ? run + 1 : 1;
       if (run > best) best = run;
       prev = d;
     });
 
-    var days = [];
-    for (var i = R.HABIT_WINDOW_DAYS - 1; i >= 0; i--) {
-      var d = today - i * DAY;
-      days.push({ day: d, on: activeDay(idx[d]), today: i === 0 });
+    var days = [], cell = today;
+    for (var i = 0; i < R.HABIT_WINDOW_DAYS; i++) {
+      days.unshift({ day: cell, on: !!studied[cell], rest: !studied[cell] && !!kept[cell], today: i === 0 });
+      cell = prevDay(cell);
     }
+    /* Today has not been studied yet but can be this week's rest day, so
+       the run is not at risk tonight. */
+    var week = weekStart(today);
+    var restFree = restOn && !studied[today] && !!kept[prevDay(today)] &&
+      !keys.some(function (d) { return d >= week && d < today && !studied[d]; });
     return {
-      current: cur, longest: best, days: days,
+      current: cur, longest: best, days: days, restDays: rested, restFree: restFree, restOn: restOn,
       activeInWindow: days.filter(function (d) { return d.on; }).length,
       today: idx[today] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0, drills: 0 }
     };
@@ -31773,6 +32216,7 @@ PMP.Metrics = (function () {
     attempts: attempts, creditOf: creditOf,
     accuracy: accuracy, byTask: byTask, byDomain: byDomain, byApproach: byApproach,
     pace: pace, mocks: mocks, dayIndex: dayIndex, activeDay: activeDay, streak: streak, coverage: coverage,
+    withRestDays: withRestDays, weekStart: weekStart, prevDay: prevDay,
     components: components, readiness: readiness, nextActions: nextActions,
     countdown: countdown, clamp01: clamp01
   };
@@ -33303,18 +33747,24 @@ PMP.Dashboard = (function () {
       ])
     ]));
 
+    var rests = st.days.filter(function (d) { return d.rest; }).length;
     var dots = el("div", { class: "dots", role: "img",
-      "aria-label": st.activeInWindow + " of the last " + st.days.length + " days had study on them." });
+      "aria-label": st.activeInWindow + " of the last " + st.days.length + " days had study on them" +
+        (rests ? ", and " + PMP.fmt.plural(rests, "rest day") + " kept the run going." : ".") });
     st.days.forEach(function (d) {
       dots.appendChild(el("i", {
-        dataset: { on: String(d.on), today: String(d.today) },
-        title: PMP.fmt.dateShort(new Date(d.day).toISOString()) + (d.on ? " \u2014 studied" : " \u2014 nothing")
+        dataset: { on: String(d.on), rest: String(!!d.rest), today: String(d.today) },
+        title: PMP.fmt.dateShort(new Date(d.day).toISOString()) + (d.on ? " \u2014 studied" : d.rest ? " \u2014 rest day" : " \u2014 nothing")
       }));
     });
     card.appendChild(dots);
+    /* Rest days (§10.00.7) are a setting, so the line says which rule the
+       count above is using. */
     card.appendChild(el("p", {
       class: "hint",
-      text: "The last " + st.days.length + " days, oldest first. A quiet day only breaks the streak once it is over, so today counts until midnight."
+      text: "The last " + st.days.length + " days, oldest first. A quiet day only breaks the streak once it is over, so today counts until midnight." +
+        (st.restOn ? " With rest days on, one missed day a week between two study days keeps the run" +
+          (st.restFree ? "; today can be this week's." : ".") : "")
     }));
     return card;
   }
@@ -33764,6 +34214,7 @@ PMP.Settings = (function () {
       el("p", { text: "Your preferences, what this build contains, and where to begin." })
     ]));
     host.appendChild(prefsCard(state));
+    if (PMP.Reading) host.appendChild(PMP.Reading.settingsCard(state));
     if (PMP.CoachUI) host.appendChild(PMP.CoachUI.settingsCard(state));
     host.appendChild(helpCard());
     host.appendChild(aboutCard());
@@ -35745,9 +36196,16 @@ PMP.CoachUI = (function () {
 
     var ses = C.session(state);
     announceTicks(ses.steps);
+    /* Once a day, above the session and never in front of it: how do you
+       feel about studying right now? (§10.20) Optional, one tap. */
+    var pre = PMP.Wellbeing && ses.steps.length ? PMP.Wellbeing.preCard(state) : null;
+    if (pre) host.appendChild(pre);
     /* The review, while it waits, is the one primary action on the page. */
     var cta = st === "weekly" ? "none" : ses.next ? "next" : ses.extra ? "extra" : "footer";
     host.appendChild(sessionCard(ses, cta));
+    /* Below the session: a lighter week when momentum falls, the weekly
+       check when it is due, and support after three weeks of high worry. */
+    if (PMP.Wellbeing) PMP.Wellbeing.todayCards(state, repaint).forEach(function (n) { host.appendChild(n); });
     host.appendChild(footer(cta === "footer"));
   }
 
@@ -35934,9 +36392,12 @@ PMP.CoachUI = (function () {
      that starts on a phone therefore has to become web data to be seen: a
      phone's answers become attempts, its card states become `srs`, its
      mistake tags become journal entries, its mock summaries are listed by
-     §10.00 next to the web's own sittings. What the web has no slice for
-     (a phone's sessions, sittings, check-ins and so on) waits untouched in
-     the `shared` slice and goes back out exactly as it came in.
+     §10.00 next to the web's own sittings. Sittings, check-ins, weekly
+     reports and a phone's guided sessions have web slices of the same
+     names and the same row shape (§10.19, §10.20), so they are copied both
+     ways as they are. What the web still has no slice for (a phone's own
+     cards, its chat, its diagnostics) waits untouched in the `shared`
+     slice and goes back out exactly as it came in.
 
    · Round trips are lossless, in both directions. A web row carries the
      fields the shared row has no room for in `wx` (its option order, lesson
@@ -35986,9 +36447,13 @@ PMP.Sync = (function () {
   var MAPS = ["notes", "mistakes", "cards", "snoozed", "mycards", "web", "native"];
   var HEADER = { type: 1, version: 1, savedAt: 1, device: 1 };
   /* Shared slices the web builds from its own store on every export. The
-     rest (plan, mocks, sessions …) are kept in `shared` and written back. */
+     rest (plan, mocks, chat …) are kept in `shared` and written back. */
   var OWNED = { attempts: 1, flags: 1, notes: 1, mistakes: 1, cards: 1, scenarios: 1,
-                lessons: 1, notepad: 1, web: 1, mocks: 1, drills: 1 };
+                lessons: 1, notepad: 1, web: 1, mocks: 1, drills: 1,
+                sittings: 1, checkins: 1, weekly: 1, sessions: 1 };
+  /* Logs the web keeps in the shared row shape, copied both ways as they
+     are, like `drills`. */
+  var VERBATIM = ["sittings", "checkins", "weekly", "sessions"];
 
   function isObj(v) { return !!v && typeof v === "object" && !Array.isArray(v); }
   function arr(v) { return Array.isArray(v) ? v : []; }
@@ -36154,7 +36619,11 @@ PMP.Sync = (function () {
      back out unchanged. */
   var ATTEMPT_MAPPED = { id: 1, qid: 1, ecoTask: 1, domain: 1, approach: 1, type: 1, difficulty: 1,
                          correct: 1, credit: 1, ms: 1, at: 1, confidence: 1, hinted: 1, mode: 1,
-                         sx: 1, check: 1 };
+                         sx: 1, check: 1, ft: 1, idle: 1, w: 1, rw: 1, wr: 1 };
+  /* The answer signals of §09.9. A web row keeps them under the shared
+     names, so they go out and come in as they are, and only when positive,
+     which is how the phones write them. */
+  var SIGNALS = ["ft", "idle", "w", "rw", "wr"];
   /* A web lesson's practice-set answers are ordinary practice, so they go
      out as src "practice" (mode "lesson" and the lessonId ride in wx) and
      count towards mastery on the phones too. Only a phone's own src
@@ -36174,7 +36643,10 @@ PMP.Sync = (function () {
       ok: !!a.correct, ms: Number(a.ms) || 0, at: at, src: srcOf(a.mode)
     };
     if (a.id && a.id !== phoneId(a.qid, at)) r.id = a.id;
-    if (a.mode === "timed") r.tm = true;
+    /* Against a clock: a timed drill, and a mock, which the phones mark the
+       same way (Attempt.timed). Exam fitness reads it for the pressure gap. */
+    if (a.mode === "timed" || a.mode === "exam") r.tm = true;
+    SIGNALS.forEach(function (k) { if (Number(a[k]) > 0) r[k] = Number(a[k]); });
     if (typeof a.confidence === "number" && a.confidence > 0) r.cf = a.confidence;
     if (a.difficulty) r.df = a.difficulty;
     if (a.hinted) r.h = a.hinted;
@@ -36207,6 +36679,7 @@ PMP.Sync = (function () {
       mode: x.mode || modeOf(r)
     };
     if (r.h) a.hinted = r.h;
+    SIGNALS.forEach(function (k) { if (Number(r[k]) > 0) a[k] = Number(r[k]); });
     Object.keys(x).forEach(function (k) { if (k !== "mode") a[k] = x[k]; });
     if (!r.wx && !r.id) {
       /* A phone's row. Its lesson rows are quick checks, which the web
@@ -36393,6 +36866,13 @@ PMP.Sync = (function () {
       return r && typeof r.at === "number" && r.g;
     }).map(clone));
 
+    /* So are sittings, check-ins, weekly reports and a phone's sessions
+       (§10.19, §10.20). A copy still waiting in `shared` from before they
+       had slices of their own is folded in by identity, as the merge would. */
+    VERBATIM.forEach(function (k) {
+      doc[k] = mergeLog(k, arr(state[k]).filter(isObj).map(clone), arr(sh[k]).filter(isObj).map(clone));
+    });
+
     var lessons = obj(state.lessons);
     doc.lessons = Object.keys(lessons).filter(function (id) { return lessons[id] && lessons[id].completedAt; }).sort();
 
@@ -36406,6 +36886,12 @@ PMP.Sync = (function () {
     } else if (plan) {
       plan.examDate = 0;
     }
+    /* Rest days (§10.00.7) are plan.rest on the phones, true when absent.
+       The key is only written when the web's setting differs from what the
+       plan already says, so a plan nobody changed goes back out as it came. */
+    var rest = settings.restDays !== false;
+    if (!plan && !rest) plan = { examDate: 0, hours: 10, days: [1, 2, 3, 4, 5, 6, 7], onboarded: true, rest: false };
+    if (plan && (plan.rest === undefined ? true : !!plan.rest) !== rest) plan.rest = rest;
     if (plan) doc.plan = plan;
 
     var np = obj(state.notepad);
@@ -36415,7 +36901,11 @@ PMP.Sync = (function () {
 
     var web = clone(obj(sh.web)) || {};
     var st = clone(settings);
+    /* Device-only: the theme and reading comfort (§10.23). Rest days travel
+       as plan.rest above, so they are not written twice. */
     delete st.theme;
+    delete st.reading;
+    delete st.restDays;
     web.settings = st;
     WEB_SLICES.forEach(function (k) { if (state[k] !== undefined) web[k] = clone(state[k]); });
     web.notepadHtml = html;
@@ -36452,6 +36942,7 @@ PMP.Sync = (function () {
     out.notes = clone(obj(doc.notes));
     out.scenarioRuns = arr(doc.scenarios).filter(function (r) { return r && r.id && r.at; }).map(scenarioIn);
     out.drills = arr(doc.drills).filter(function (r) { return r && typeof r.at === "number"; }).map(clone);
+    VERBATIM.forEach(function (k) { out[k] = arr(doc[k]).filter(isObj).map(clone); });
 
     WEB_SLICES.forEach(function (k) { out[k] = w[k] !== undefined ? clone(w[k]) : d[k]; });
 
@@ -36473,6 +36964,8 @@ PMP.Sync = (function () {
     var settings = Object.assign({}, d.settings, obj(w.settings));
     settings.theme = (cur && cur.settings && cur.settings.theme) || settings.theme || "system";
     if (isObj(doc.plan)) settings.examDate = doc.plan.examDate > 0 ? ymdOf(doc.plan.examDate) : null;
+    settings.restDays = !isObj(doc.plan) || doc.plan.rest !== false;
+    settings.reading = clone(cur && cur.settings && isObj(cur.settings.reading) ? cur.settings.reading : d.settings.reading);
     out.settings = settings;
 
     var html = typeof w.notepadHtml === "string" ? w.notepadHtml : "";
@@ -36540,7 +37033,7 @@ PMP.Sync = (function () {
   /* Puts a document into the store and repaints. External, so §10.18.6
      does not read it as a change made on this device. */
   var SLICES = ["attempts", "srs", "flags", "notes", "scenarioRuns", "lessons", "journal", "settings",
-                "notepad", "shared", "drills"].concat(WEB_SLICES.filter(function (k) { return k !== "lessons" && k !== "journal"; }));
+                "notepad", "shared", "drills"].concat(VERBATIM, WEB_SLICES.filter(function (k) { return k !== "lessons" && k !== "journal"; }));
   function apply(doc) {
     var next = fromDoc(doc, PMP.Store.state);
     var keys = SLICES.filter(function (k) { return k in next; });
@@ -37190,6 +37683,1656 @@ PMP.Sync = (function () {
     run: run, auto: auto, changedAt: changedAt,
     get status() { return status; }
   };
+})();
+
+
+/* ── 10.19  EXAM FITNESS, BOOKING AND WEEKLY REPORTS ────────────────────────
+   Are you ready to sit the exam, not just to know it? Readiness (§10.00)
+   asks whether the material is there. This asks three other things:
+
+     Stamina (40%)      can you hold accuracy and pace to question 180?
+     Composure (35%)    can you read and decide steadily under the clock?
+     Consistency (25%)  will you keep showing up until exam day?
+
+   Ported line for line from the Android app (data/ExamFitness.kt,
+   Booking.kt, WeeklyReport.kt): the same signals, weights, thresholds,
+   ladder and wording, so a person who studies on both sees one number. The
+   phones are the reference; where this file and they disagree on a
+   formula, this file is the one to fix.
+
+   Four decisions worth knowing before reading the code:
+
+   · It describes what happened; it never diagnoses. Every signal is a
+     behaviour the person can see in their own history (a sitting's length,
+     a reading speed, a gap of days), and every one shows its figure and
+     the sentence that says how it is scored.
+
+   · A signal without enough evidence is left out and shown as "not yet",
+     never as a zero. A part is scored only once signals carrying at least
+     half its weight have evidence, and Stamina only after two sittings of
+     40 or more questions: a fitness score built on one 20-question set
+     would be measuring the sample.
+
+   · The raw behaviour comes from the answer signals of §09.9 (reading
+     time, idle time, words, answer changes) and from the sittings log,
+     which says whether a set or a mock was finished or left. Runs of
+     answers with no break over ten minutes are derived from `attempts`
+     here, exactly as the phones derive them, so a phone's answers and the
+     web's make one history.
+
+   · Nothing here renders or registers a route. §10.21 draws it. The only
+     writes are the sitting log (recordSitting, called by §10.02 and
+     §10.03) and the current week's report (§10.19.4).
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.Fitness = (function () {
+  var DAY = 86400000;
+  var MINUTE = 60000;
+  var WEEK = 7 * DAY;
+  /* A new sitting starts after a gap longer than this, or when a mock starts or ends. */
+  var SITTING_GAP = 10 * MINUTE;
+  var LADDER = [20, 45, 70, 100, 140, 180];
+  /* Reading speed for a typical question (about 150 words) to leave ~30 s of a ~76 s budget to decide. */
+  var TARGET_WPM = 200;
+  var LOW_WPM = 100;
+  /* The five statements of the weekly check; the fifth is reversed (agreeing is good). */
+  var WEEKLY_STATEMENTS = [
+    "When I see a long question, my mind goes blank.",
+    "I worry about running out of time.",
+    "Thinking about the exam makes it hard to start studying.",
+    "I change answers I was sure about.",
+    "I feel able to stay focused for four hours."
+  ];
+
+  function ts(v) { if (typeof v === "number") return v; var t = Date.parse(v); return isNaN(t) ? 0 : t; }
+  function sod(t) { return PMP.time.startOfDay(t); }
+  function ratio(v, lo, hi) { return hi === lo ? 0 : Math.min(1, Math.max(0, (v - lo) / (hi - lo))); }
+  function pct(v) { return Math.round(v * 100) + "%"; }
+  function median(xs) {
+    if (!xs.length) return null;
+    var s = xs.slice().sort(function (a, b) { return a - b; }), m = Math.floor(s.length / 2);
+    return s.length % 2 === 1 ? s[m] : (s[m - 1] + s[m]) / 2;
+  }
+  function mean(xs) { return xs.length ? xs.reduce(function (a, b) { return a + b; }, 0) / xs.length : 0; }
+  function sum(xs, f) { return xs.reduce(function (a, x) { return a + f(x); }, 0); }
+  function takeLast(xs, n) { return xs.length > n ? xs.slice(xs.length - n) : xs.slice(); }
+  function signed(v, unitUp, unitDown, suffix) {
+    return (v >= 0 ? unitUp : unitDown) + Math.round(Math.abs(v) * 100) + suffix;
+  }
+
+  /* ── 10.19.1  INPUT ──────────────────────────────────────────────────────
+     The store, read into the phones' shapes. An attempt's source is "exam"
+     for a mock answer, "lesson" for a phone's quick check (which the web
+     marks `check`) and "practice" for everything else, a lesson's
+     practice set included. Timed means against a clock: a timed drill or
+     a mock, as on the phones. */
+  function attemptsOf(state) {
+    return PMP.Metrics.attempts(state).map(function (a) {
+      var mode = a.mode || "practice";
+      return {
+        at: ts(a.at), ms: Number(a.ms) || 0, credit: PMP.Metrics.creditOf(a), correct: !!a.correct,
+        source: a.check ? "lesson" : mode === "exam" ? "exam" : "practice",
+        timed: mode === "timed" || mode === "exam",
+        firstTapMs: Number(a.ft) || 0, idleMs: Number(a.idle) || 0, words: Number(a.w) || 0,
+        rightToWrong: Number(a.rw) || 0, wrongToRight: Number(a.wr) || 0,
+        confidence: typeof a.confidence === "number" ? a.confidence : 0
+      };
+    });
+  }
+
+  /* Study days (Sunday 1 … Saturday 7) and hours a week. The web's own
+     planner inputs say both when it has been run; otherwise a phone's plan
+     from the shared document; otherwise every day and ten hours, the
+     phones' defaults for hours and the web's for days. */
+  function planOf(state) {
+    var pi = state.planner && state.planner.inputs;
+    if (pi && (Number(pi.weekdayMin) > 0 || Number(pi.weekendMin) > 0)) {
+      var days = [];
+      if (Number(pi.weekendMin) > 0) days.push(1, 7);
+      if (Number(pi.weekdayMin) > 0) days.push(2, 3, 4, 5, 6);
+      return { days: days, hours: Math.round(((Number(pi.weekdayMin) || 0) * 5 + (Number(pi.weekendMin) || 0) * 2) / 60) };
+    }
+    var p = state.shared && state.shared.plan;
+    if (p && typeof p === "object") {
+      return { days: Array.isArray(p.days) && p.days.length ? p.days.slice() : [1, 2, 3, 4, 5, 6, 7],
+               hours: Number(p.hours) || 10 };
+    }
+    return { days: [1, 2, 3, 4, 5, 6, 7], hours: 10 };
+  }
+
+  function input(state, now) {
+    var plan = planOf(state);
+    return {
+      attempts: attemptsOf(state),
+      sittings: (state.sittings || []).filter(function (e) { return e && typeof e.at === "number"; }),
+      checkIns: (state.checkins || []).filter(function (c) { return c && typeof c.at === "number"; }),
+      results: (state.sessions || []).filter(function (r) { return r && typeof r.at === "number"; })
+        .map(function (r) { return { at: r.at, minutes: Number(r.m) || 0 }; }),
+      studyDays: plan.days, hoursPerWeek: plan.hours,
+      now: now || Date.now()
+    };
+  }
+
+  /* ── 10.19.2  SITTINGS ───────────────────────────────────────────────────
+     Runs of answers with no long gap, in the order they were given. Mock
+     answers are their own sitting. */
+  function sittings(attempts) {
+    var out = [], prev = null;
+    attempts.forEach(function (a) {
+      if (a.source === "lesson") return;
+      var split = prev === null || a.at - prev.at > SITTING_GAP || (a.source === "exam") !== (prev.source === "exam");
+      if (split) out.push([]);
+      out[out.length - 1].push(a);
+      prev = a;
+    });
+    return out;
+  }
+
+  /* Accuracy drop from the first quarter of a sitting to the last. */
+  function fade(s) {
+    var q = Math.floor(s.length / 4);
+    if (q === 0) return 0;
+    return mean(s.slice(0, q).map(function (a) { return a.credit; })) - mean(takeLast(s, q).map(function (a) { return a.credit; }));
+  }
+
+  /* Last quarter's median time over the first quarter's, minus one; null when times weren't measured per question. */
+  function drift(s) {
+    var q = Math.floor(s.length / 4);
+    var distinct = Object.create(null), nd = 0;
+    s.forEach(function (a) { if (!distinct[a.ms]) { distinct[a.ms] = 1; nd++; } });
+    /* Older mock records share one average time per question; those can't show drift. */
+    if (q < 5 || nd < 3) return null;
+    var a = median(s.slice(0, q).map(function (x) { return x.ms; }));
+    var b = median(takeLast(s, q).map(function (x) { return x.ms; }));
+    if (a === null || b === null) return null;
+    return a <= 0 ? null : b / a - 1;
+  }
+
+  /* Sittings closed part-way and not finished within the window. */
+  function abandoned(events, since) {
+    var recent = events.filter(function (e) { return e.at >= since; });
+    var fin = Object.create(null), nFin = 0, left = Object.create(null), nLeft = 0;
+    recent.forEach(function (e) { if (e.f && !fin[e.k]) { fin[e.k] = 1; nFin++; } });
+    recent.forEach(function (e) {
+      if (!e.f && e.a > 0 && !fin[e.k] && !left[e.k]) { left[e.k] = 1; nLeft++; }
+    });
+    return [nFin, nLeft];
+  }
+
+  function studyDaySet(inp) {
+    var d = Object.create(null);
+    inp.attempts.forEach(function (a) { d[sod(a.at)] = 1; });
+    inp.results.forEach(function (r) { d[sod(r.at)] = 1; });
+    return Object.keys(d).map(Number);
+  }
+
+  function minutes(inp, from, to) {
+    var s = sum(inp.results.filter(function (r) { return r.at >= from && r.at < to; }), function (r) { return r.minutes; });
+    var a = Math.round(sum(inp.attempts.filter(function (x) { return x.at >= from && x.at < to; }), function (x) { return x.ms; }) / MINUTE);
+    return Math.max(s, a);
+  }
+
+  /* ── 10.19.3  THE REPORT ─────────────────────────────────────────────────
+     One measured behaviour per signal, score 0–1 or null while there isn't
+     enough evidence; a part weighted over the signals that have evidence,
+     once they carry at least half its weight. */
+  function signal(id, label, weight, score, figure, detail) {
+    return { id: id, label: label, weight: weight, score: score === undefined ? null : score, figure: figure, detail: detail };
+  }
+  function part(id, label, weight, signals, gate) {
+    var p = { id: id, label: label, weight: weight, signals: signals, gate: gate || null, score: null };
+    if (!p.gate) {
+      var ready = signals.filter(function (s) { return s.score !== null; });
+      var w = sum(ready, function (s) { return s.weight; });
+      var all = sum(signals, function (s) { return s.weight; });
+      p.score = (w === 0 || w * 2 < all) ? null : sum(ready, function (s) { return s.score * s.weight; }) / w;
+    }
+    return p;
+  }
+
+  function report(state, now) {
+    var inp = input(state, now);
+    now = inp.now;
+    var atts = inp.attempts.filter(function (a) { return a.source !== "lesson"; });
+    var sits = sittings(inp.attempts);
+    var firsts = [];
+    if (atts.length) firsts.push(Math.min.apply(null, atts.map(function (a) { return a.at; })));
+    if (inp.results.length) firsts.push(Math.min.apply(null, inp.results.map(function (r) { return r.at; })));
+    var ageDays = firsts.length ? Math.floor((now - Math.min.apply(null, firsts)) / DAY) : 0;
+
+    /* ── stamina ── */
+    var recentSits = sits.filter(function (s) { return s[s.length - 1].at >= now - 30 * DAY; });
+    var longest = recentSits.reduce(function (m, s) { return Math.max(m, s.length); }, 0);
+    var long = takeLast(sits.filter(function (s) { return s.length >= 60 && s[s.length - 1].at >= now - 60 * DAY; }), 3);
+    var fades = long.map(fade);
+    var drifts = long.map(drift).filter(function (d) { return d !== null; });
+    var fl = abandoned(inp.sittings.filter(function (e) { return e.p >= 40; }), now - 60 * DAY);
+    var finLong = fl[0], leftLong = fl[1];
+    var sits40 = sits.filter(function (s) { return s.length >= 40; }).length;
+    var avgFade = fades.length ? mean(fades) : null;
+    var avgDrift = drifts.length ? mean(drifts) : null;
+    var stamina = part("stamina", "Stamina", 40, [
+      signal("longest", "Longest sitting", 35, recentSits.length ? Math.min(1, longest / 180) : null,
+        longest + " questions", "Your longest run without a break over 10 minutes, in the last 30 days. Full marks at 180, the whole exam."),
+      signal("fade", "Accuracy fade", 30, avgFade === null ? null : 1 - ratio(avgFade, 0.05, 0.20),
+        avgFade === null ? "not yet" : signed(avgFade, "−", "+", " pts"),
+        avgFade === null ? "Needs a sitting of 60+ questions." : "Last quarter against first quarter of your last " + fades.length + " long sitting(s). Up to 5 points down is full marks; 20 or more is zero."),
+      signal("drift", "Pace drift", 20, avgDrift === null ? null
+          : avgDrift > 0.10 ? 1 - ratio(avgDrift, 0.10, 0.40) : avgDrift < -0.25 ? 1 - ratio(-avgDrift, 0.25, 0.50) : 1,
+        avgDrift === null ? "not yet" : signed(avgDrift, "+", "−", "%"),
+        avgDrift === null ? "Needs a long sitting with each question timed." : "Time per question in the last quarter against the first. Up to 10% slower is full marks; much faster late on counts too, as it usually means guessing to finish."),
+      signal("finish", "Finishing long sittings", 15, finLong + leftLong >= 2 ? finLong / (finLong + leftLong) : null,
+        finLong + leftLong === 0 ? "not yet" : finLong + " of " + (finLong + leftLong), "Mocks and sittings of 40+ questions finished rather than left part-way, last 60 days.")
+    ], sits40 >= 2 ? null : "Scored after two sittings of 40+ questions (you have " + sits40 + ").");
+
+    /* ── composure ── */
+    var recentAtts = takeLast(atts, 200);
+    var reading = recentAtts.filter(function (a) { return a.firstTapMs > 1000 && a.words > 0; });
+    var wpm = reading.length >= 30 ? median(reading.map(function (a) { return a.words / (a.firstTapMs / 60000); })) : null;
+    var withIdle = recentAtts.filter(function (a) { return a.idleMs > 0; });
+    var medianMs = median(recentAtts.filter(function (a) { return a.ms > 500 && !a.timed; }).map(function (a) { return a.ms; }));
+    if (medianMs === null) medianMs = 76000;
+    var freezeAt = Math.max(150000, 3 * medianMs);
+    var freezeRate = withIdle.length >= 30 ? withIdle.filter(function (a) { return a.idleMs >= freezeAt; }).length / withIdle.length : null;
+    var longStemFreeze = false;
+    if (withIdle.length >= 30) {
+      var mw = median(withIdle.map(function (a) { return a.words; })) || 0;
+      var longQ = withIdle.filter(function (a) { return a.words > mw; }), shortQ = withIdle.filter(function (a) { return a.words <= mw; });
+      longStemFreeze = longQ.length > 0 && shortQ.length > 0 &&
+        longQ.filter(function (a) { return a.idleMs >= freezeAt; }).length / longQ.length >
+        2 * shortQ.filter(function (a) { return a.idleMs >= freezeAt; }).length / shortQ.length;
+    }
+    var slow = 0, panic = 0;
+    takeLast(sits.filter(function (s) { return s.length && s[0].source !== "exam"; }), 20).forEach(function (s) {
+      var m = median(s.filter(function (a) { return a.ms > 500; }).map(function (a) { return a.ms; }));
+      if (m === null) return;
+      var avg = mean(s.map(function (a) { return a.credit; }));
+      for (var i = 0; i < s.length - 3; i++) {
+        if (s[i].ms > 2 * m) {
+          slow++;
+          var next = s.slice(i + 1, i + 4);
+          if (next.every(function (a) { return a.ms < 0.5 * m; }) && mean(next.map(function (a) { return a.credit; })) < avg) panic++;
+        }
+      }
+    });
+    var panicRate = slow >= 10 ? panic / slow : null;
+    var timedA = takeLast(atts.filter(function (a) { return a.timed; }), 200);
+    var untimedA = takeLast(atts.filter(function (a) { return !a.timed; }), 200);
+    var gap = timedA.length >= 20 && untimedA.length >= 20
+      ? mean(untimedA.map(function (a) { return a.credit; })) - mean(timedA.map(function (a) { return a.credit; })) : null;
+    var changes = takeLast(atts, 300);
+    var rw = sum(changes, function (a) { return a.rightToWrong; }), wr = sum(changes, function (a) { return a.wrongToRight; });
+    var composure = part("composure", "Composure", 35, [
+      signal("reading", "Reading pace", 30, wpm === null ? null : ratio(wpm, LOW_WPM, TARGET_WPM),
+        wpm === null ? "not yet" : Math.round(wpm) + " wpm",
+        wpm === null ? "Needs 30 answered questions with reading time recorded."
+          : "Words read per minute before your first tap. About " + TARGET_WPM + " reads a typical 150-word question in 45 seconds, leaving 30 to decide."),
+      signal("freeze", "Freezes", 20, freezeRate === null ? null : 1 - ratio(freezeRate, 0.02, 0.15),
+        freezeRate === null ? "not yet" : pct(freezeRate),
+        freezeRate === null ? "Needs 30 questions answered in practice." : "Questions where nothing happened for over " + Math.round(freezeAt / 60000) + " minutes" +
+          (longStemFreeze ? ". They happen mostly on long questions." : ".")),
+      signal("rush", "Rushing after a slow one", 20, panicRate === null ? null : 1 - ratio(panicRate, 0.10, 0.50),
+        panicRate === null ? "not yet" : pct(panicRate),
+        panicRate === null ? "Needs 10 slow questions in practice." : "After a question that took twice your usual time, how often the next three were rushed and went worse."),
+      signal("pressure", "Pressure gap", 15, gap === null ? null : 1 - ratio(gap, 0.05, 0.20),
+        gap === null ? "not yet" : signed(gap, "−", "+", " pts"),
+        gap === null ? "Needs 20 timed and 20 untimed answers." : "Accuracy against the clock compared with relaxed practice. Up to 5 points lower is full marks."),
+      signal("doubt", "Second-guessing", 15, rw + wr >= 10 ? ratio(wr / (rw + wr), 0.35, 0.60) : null,
+        rw + wr === 0 ? "not yet" : rw + " right→wrong, " + wr + " wrong→right",
+        "Answers changed before checking. More right-to-wrong than wrong-to-right means doubt is costing marks.")
+    ]);
+
+    /* ── consistency ── */
+    var days = studyDaySet(inp);
+    var today = sod(now);
+    var planned = inp.studyDays.length ? inp.studyDays : [1, 2, 3, 4, 5, 6, 7];
+    var planned28 = 0;
+    for (var i = 0; i < 28; i++) if (planned.indexOf(new Date(today - i * DAY).getDay() + 1) >= 0) planned28++;
+    var studied28 = days.filter(function (d) { return d > today - 28 * DAY; }).length;
+    var mins14 = minutes(inp, now - 14 * DAY, now + 1);
+    var target14 = inp.hoursPerWeek * 2 * 60;
+    var thisWeek = minutes(inp, now - 7 * DAY, now + 1);
+    var prevAvg = minutes(inp, now - 28 * DAY, now - 7 * DAY) / 3;
+    var momentum = ageDays < 14 ? null : prevAvg <= 0 ? (thisWeek > 0 ? 1 : 0) : ratio(thisWeek / prevAvg, 0.5, 1.0);
+    var fa = abandoned(inp.sittings, now - 28 * DAY);
+    var finAll = fa[0], leftAll = fa[1];
+    var sortedDays = days.filter(function (d) { return d > today - 60 * DAY; }).sort(function (a, b) { return a - b; });
+    var gapsOff = [];
+    for (var j = 1; j < sortedDays.length; j++) {
+      var off = Math.round((sortedDays[j] - sortedDays[j - 1]) / DAY) - 1;
+      if (off >= 3) gapsOff.push(off);
+    }
+    var consistency = part("consistency", "Consistency", 25, [
+      signal("regular", "Regular days", 25, ageDays >= 7 ? Math.min(1, studied28 / Math.max(1, planned28)) : null,
+        studied28 + " of " + planned28, "Days you studied in the last 28, against your planned study days."),
+      signal("hours", "Hours kept", 25, ageDays >= 7 && target14 > 0 ? Math.min(1, mins14 / target14) : null,
+        Math.floor(mins14 / 60) + " h " + (mins14 % 60) + " m", "Study time in the last 14 days against your planned " + inp.hoursPerWeek + " hours a week."),
+      signal("momentum", "Momentum", 20, momentum,
+        ageDays < 14 ? "not yet" : thisWeek + " min vs " + Math.round(prevAvg) + " avg",
+        "This week's minutes against your average for the three weeks before. A falling trend is the earliest sign motivation is slipping."),
+      signal("sessions", "Finishing sessions", 15, finAll + leftAll >= 3 ? finAll / (finAll + leftAll) : null,
+        finAll + leftAll === 0 ? "not yet" : finAll + " of " + (finAll + leftAll), "Sessions and practice sets finished rather than left part-way, last 28 days."),
+      signal("bounce", "Bouncing back", 15, ageDays >= 21 ? (gapsOff.length ? 1 - ratio(mean(gapsOff), 3, 10) : 1) : null,
+        gapsOff.length ? gapsOff.length + " gap(s), avg " + Math.round(mean(gapsOff)) + " days" : "no long gaps",
+        "Breaks of 3+ days in the last 60 days, and how long they lasted.")
+    ]);
+
+    /* ── overall ── */
+    var parts = [stamina, composure, consistency];
+    var scored = parts.filter(function (p) { return p.score !== null; });
+    var total = scored.length ? Math.round(sum(scored, function (p) { return p.score * p.weight; }) / sum(scored, function (p) { return p.weight; }) * 100) : null;
+
+    /* The biggest shortfall among signals with evidence decides the finding
+       and the next step, even before its part has enough evidence for a
+       score. A gated part (stamina before two long sittings) is left to the
+       ladder instead. */
+    var worst = null, worstCost = -1;
+    parts.forEach(function (p) {
+      if (p.gate) return;
+      p.signals.forEach(function (s) {
+        if (s.score === null) return;
+        var cost = (1 - s.score) * s.weight * p.weight;
+        if (cost > worstCost) { worstCost = cost; worst = s; }
+      });
+    });
+    if (worst && !(worst.score < 0.9)) worst = null;
+    var rung = 0;
+    LADDER.forEach(function (r) {
+      if (sits.some(function (s) { return s.length >= r && (s.length < 60 || fade(s) < 0.10); })) rung = Math.max(rung, r);
+    });
+    var nextRung = LADDER.filter(function (r) { return r > rung; })[0] || null;
+    var adv = advice(worst, wpm, longest, longStemFreeze, nextRung);
+
+    /* ── check-ins ── */
+    var weekly = inp.checkIns.filter(function (c) { return c.kind === "weekly" && Array.isArray(c.items) && c.items.length === WEEKLY_STATEMENTS.length; })
+      .sort(function (a, b) { return a.at - b.at; });
+    var worry = weekly.length ? worryOf(weekly[weekly.length - 1]) : null;
+    var worryHigh = weekly.length >= 3 && takeLast(weekly, 3).every(function (c) { return worryOf(c) >= 75; });
+
+    return {
+      parts: parts, score: total, provisional: scored.length < parts.length,
+      finding: adv[0], next: adv[1], ladderRung: rung, ladderNext: nextRung,
+      wpm: wpm, longest: longest, freezeRate: freezeRate,
+      worry: worry, worryHighForWeeks: worryHigh, link: feelingLink(inp),
+      momentumLow: momentum !== null && momentum < 0.5,
+      part: function (id) { return parts.filter(function (p) { return p.id === id; })[0]; },
+      signal: function (id) {
+        var all = [];
+        parts.forEach(function (p) { all = all.concat(p.signals); });
+        return all.filter(function (s) { return s.id === id; })[0];
+      }
+    };
+  }
+
+  function worryOf(c) {
+    var n = WEEKLY_STATEMENTS.length;
+    var adjusted = c.items.map(function (v, i) { return i === n - 1 ? 6 - v : v; });
+    return Math.round((sum(adjusted, function (v) { return v; }) - adjusted.length) * 100 / (adjusted.length * 4));
+  }
+
+  function advice(worst, wpm, longest, longStem, nextRung) {
+    switch (worst ? worst.id : null) {
+      case null: return [null, nextRung ? "A " + nextRung + "-question timed sitting: the next rung of your stamina ladder." : null];
+      case "longest": return ["Your longest sitting is " + longest + " questions; the exam is 180.", "A " + (nextRung || 45) + "-question timed sitting, the next rung of your stamina ladder."];
+      case "fade": return ["Your accuracy fades in the last part of long sittings.", "Keep to your ladder rung until the fade is under 10 points, and use the break points to stand, drink water and look away."];
+      case "drift": return ["You slow down, or rush, late in long sittings.", "Watch the pacing checkpoints at questions 60 and 120 in your next long sitting."];
+      case "finish": return ["Some long sittings were left part-way.", "Pick a sitting length you can finish; the ladder builds up from there."];
+      case "reading": return ["You read about " + Math.round(wpm) + " words a minute; the exam needs about " + TARGET_WPM + ".", "Reading drills: name what each question asks before you see the options, and read the last sentence first."];
+      case "freeze": return ["Some questions stop you for minutes" + (longStem ? ", mostly long ones." : "."), "When stuck: breathe out slowly, read the last sentence, rule out two options, then move on."];
+      case "rush": return ["After a slow question you tend to rush the next few.", "One slow question is normal. Take the next one at your usual pace; the clock has room for it."];
+      case "pressure": return ["You score noticeably lower against the clock.", "More timed practice, starting with generous time and tightening week by week."];
+      case "doubt": return ["Changing answers is costing you marks.", "Trust your first answer unless you find a specific reason; the debrief shows which changes cost marks."];
+      case "regular": return ["You're studying on fewer days than planned.", "Minimum days: even 10 cards or 10 questions keep the rhythm."];
+      case "hours": return ["You're short of your planned hours.", "Use the 15-minute version on busy days rather than skipping."];
+      case "momentum": return ["Your study time has dropped compared with recent weeks.", "A lighter week of minimum days rebuilds the habit without pressure."];
+      case "sessions": return ["Some sessions are left unfinished.", "Choose the 15-minute version when time is short, so the session gets finished."];
+      case "bounce": return ["Breaks of several days are taking a while to recover from.", "After a break, start with the warm-up, not catch-up."];
+    }
+    return [null, null];
+  }
+
+  /* One link between how you felt and how you read, if the check-ins show a clear one. */
+  function feelingLink(inp) {
+    var pre = inp.checkIns.filter(function (c) { return c.kind === "pre"; });
+    function wpmAfter(cs) {
+      var xs = [];
+      cs.forEach(function (c) {
+        inp.attempts.forEach(function (a) {
+          if (a.at >= c.at && a.at <= c.at + 3 * 3600000 && a.firstTapMs > 1000 && a.words > 0) xs.push(a.words / (a.firstTapMs / 60000));
+        });
+      });
+      return [median(xs), xs.length];
+    }
+    var lo = wpmAfter(pre.filter(function (c) { return c.v <= 2; }));
+    var hi = wpmAfter(pre.filter(function (c) { return c.v >= 4; }));
+    if (lo[0] === null || hi[0] === null || lo[1] < 10 || hi[1] < 10) return null;
+    var diff = 1 - lo[0] / hi[0];
+    return diff >= 0.10 ? "On days you felt low before studying, you read " + Math.round(diff * 100) + "% slower than on good days." : null;
+  }
+
+  /* The sitting log (§07.1 `sittings`), written by §10.02 and §10.03. */
+  function recordSitting(key, kind, planned, answered, finished) {
+    PMP.Store.commit(["sittings"], function (s) {
+      var list = Array.isArray(s.sittings) ? s.sittings : [];
+      list.push({ k: key, kind: kind, at: Date.now(), p: planned, a: answered, f: !!finished });
+      s.sittings = list.length > 2000 ? list.slice(list.length - 2000) : list;
+    });
+  }
+
+  /* ── 10.19.4  WEEKLY REPORTS ─────────────────────────────────────────────
+     Where you stood at the end of each Monday-to-Sunday week, from the same
+     figures the rest of the file shows. The current week's is kept up to
+     date as you study; a finished week stays as it was when it ended. The
+     row is the phones' WeeklyReport.toJson, key for key, so a week reported
+     on a phone and one reported here are one log (§10.18). */
+  function weekStart(t) { return PMP.Metrics.weekStart(t); }
+
+  /* The latest tag per question, as the shared `mistakes` slice keeps it. */
+  function tags(state) {
+    var latest = {};
+    (state.journal || []).forEach(function (j) {
+      if (!j || !j.qid || !j.cause) return;
+      if (!latest[j.qid] || ts(j.at) > ts(latest[j.qid].at)) latest[j.qid] = j;
+    });
+    return Object.keys(latest).map(function (q) { return { cause: latest[q].cause, at: ts(latest[q].at) }; });
+  }
+
+  function build(state, now, fit) {
+    now = now || Date.now();
+    fit = fit || report(state, now);
+    var inp = input(state, now);
+    var from = weekStart(now);
+    var week = inp.attempts.filter(function (a) { return a.at >= from && a.source !== "lesson"; });
+    var res = inp.results.filter(function (r) { return r.at >= from; });
+    var sessionMin = sum(res, function (r) { return r.minutes; });
+    var answerMin = Math.round(sum(week, function (a) { return a.ms; }) / MINUTE);
+    var dayset = Object.create(null);
+    week.forEach(function (a) { dayset[sod(a.at)] = 1; });
+    res.forEach(function (r) { dayset[sod(r.at)] = 1; });
+    var wm = PMP.Metrics.mocks(state).filter(function (m) { return m.at >= from; });
+    var rd = PMP.Metrics.readiness(state);
+    var acc = rd.components.filter(function (c) { return c.id === "accuracy"; })[0];
+    var mastered = PMP.Learn ? PMP.ECO_TASKS.filter(function (t) { return PMP.Learn.taskMastery(state, t.id).mastered; }).length : 0;
+    function partScore(id) { var p = fit.part(id); return p.score === null ? null : Math.round(p.score * 100); }
+    var asked = week.some(function (a) { return a.confidence > 0; });
+    var causes = {};
+    tags(state).forEach(function (t) { if (t.at >= from) causes[t.cause] = (causes[t.cause] || 0) + 1; });
+
+    var r = {
+      w: from, u: now, r: rd.score, acc: acc && /^\d+%$/.test(acc.figure) ? parseInt(acc.figure, 10) : 0,
+      tt: PMP.Metrics.coverage(state).touched, ma: mastered,
+      min: Math.max(sessionMin, answerMin), d: Object.keys(dayset).length, n: week.length, mk: wm.length
+    };
+    if (wm.length) r.mka = Math.round(mean(wm.map(function (m) { return m.pct; })) * 100);
+    if (fit.score !== null) r.f = fit.score;
+    if (partScore("stamina") !== null) r.st = partScore("stamina");
+    if (partScore("composure") !== null) r.co = partScore("composure");
+    if (partScore("consistency") !== null) r.cn = partScore("consistency");
+    if (fit.wpm !== null) r.wpm = Math.round(fit.wpm);
+    r.lg = fit.longest;
+    if (fit.freezeRate !== null) r.fr = Math.round(fit.freezeRate * 100);
+    if (fit.worry !== null) r.wo = fit.worry;
+    if (asked) {
+      r.sw = week.filter(function (a) { return !a.correct && a.confidence === 3; }).length;
+      r.lk = week.filter(function (a) { return a.correct && a.confidence === 1; }).length;
+    }
+    if (Object.keys(causes).length) r.cz = causes;
+    return r;
+  }
+
+  /* The figures without the stamp: two reports that say the same thing. */
+  function sameReport(a, b) {
+    if (!a || !b) return false;
+    var x = Object.assign({}, a), y = Object.assign({}, b);
+    delete x.u; delete y.u;
+    return PMP.Sync ? PMP.Sync.canon(x) === PMP.Sync.canon(y) : JSON.stringify(x) === JSON.stringify(y);
+  }
+
+  /* Keeps this week's report current. A finished week is never touched. */
+  function publish(now) {
+    var state = PMP.Store.state;
+    if (!state.sys.ready) return;
+    var r = build(state, now);
+    var list = Array.isArray(state.weekly) ? state.weekly : [];
+    var have = list.filter(function (w) { return w && w.w === r.w; })[0];
+    if (sameReport(have, r)) return;
+    PMP.Store.commit(["weekly"], function (s) {
+      var next = (Array.isArray(s.weekly) ? s.weekly : []).filter(function (w) { return w && w.w !== r.w; });
+      next.push(r);
+      next.sort(function (a, b) { return a.w - b.w; });
+      s.weekly = next.length > 104 ? next.slice(next.length - 104) : next;
+    });
+  }
+
+  /* Studying, on this device, updates the week: a second after the burst
+     of commits settles. A sync or an import is not studying, so it never
+     writes a report of its own (it could not be told apart from the
+     arriving one, and would upload a change nobody made). */
+  var ACTIVITY = ["attempts", "exams", "scenarioRuns", "srs", "drills", "journal", "checkins", "sittings"];
+  var publishTimer = null;
+  PMP.Store.onWrite(function (keys, opts) {
+    if (opts && opts.external) return;
+    if (!keys.some(function (k) { return ACTIVITY.indexOf(k) >= 0; })) return;
+    if (publishTimer) clearTimeout(publishTimer);
+    publishTimer = setTimeout(function () {
+      publishTimer = null;
+      try { publish(); } catch (e) { PMP.report(e, "weekly report"); }
+    }, 1000);
+  });
+
+  /* Stored weeks, newest first, with the current week rebuilt live so the
+     page never shows a figure older than the last answer. Before any study
+     at all there is nothing to report. */
+  function weeks(state, now) {
+    now = now || Date.now();
+    var list = (Array.isArray(state.weekly) ? state.weekly : []).filter(function (w) { return w && typeof w.w === "number"; });
+    var cur = weekStart(now);
+    var studied = (state.attempts || []).length || (state.sessions || []).length;
+    var out = list.filter(function (w) { return w.w !== cur; });
+    if (studied || list.some(function (w) { return w.w === cur; })) out.push(build(state, now));
+    return out.sort(function (a, b) { return b.w - a.w; });
+  }
+
+  /* One line of a comparison: this week's value, the week before's, and
+     which way is better. direction +1 better, −1 worse, 0 same or not
+     comparable. */
+  function row(label, value, previous, unit, higherIsBetter) {
+    var v = value === undefined ? null : value, p = previous === undefined ? null : previous;
+    var delta = v !== null && p !== null ? v - p : null;
+    var hib = higherIsBetter !== false;
+    return { label: label, value: v, previous: p, unit: unit, delta: delta,
+             direction: delta === null || delta === 0 ? 0 : ((delta > 0) === hib ? 1 : -1) };
+  }
+
+  function compare(r, p) {
+    function v(o, k) { return o && k in o ? o[k] : null; }
+    var cz = r.cz || {}, pz = (p && p.cz) || {};
+    return [
+      { title: "Knowledge", rows: [
+        row("Readiness", r.r, v(p, "r"), "/100"),
+        row("Accuracy", r.acc, v(p, "acc"), "%"),
+        row("Tasks practised", r.tt, v(p, "tt"), "/" + PMP.ECO_TASKS.length),
+        row("Tasks mastered", r.ma, v(p, "ma"), ""),
+        row("Mock average", v(r, "mka"), v(p, "mka"), "%")
+      ] },
+      { title: "Exam fitness", rows: [
+        row("Exam fitness", v(r, "f"), v(p, "f"), "/100"),
+        row("Stamina", v(r, "st"), v(p, "st"), "/100"),
+        row("Composure", v(r, "co"), v(p, "co"), "/100"),
+        row("Consistency", v(r, "cn"), v(p, "cn"), "/100"),
+        row("Reading pace", v(r, "wpm"), v(p, "wpm"), " wpm"),
+        row("Longest sitting", v(r, "lg"), v(p, "lg"), " q"),
+        row("Freezes", v(r, "fr"), v(p, "fr"), "%", false),
+        row("Exam worry", v(r, "wo"), v(p, "wo"), "/100", false)
+      ] },
+      { title: "Effort", rows: [
+        row("Minutes studied", r.min, v(p, "min"), " min"),
+        row("Study days", r.d, v(p, "d"), "/7"),
+        row("Questions answered", r.n, v(p, "n"), ""),
+        row("Mocks sat", r.mk, v(p, "mk"), "")
+      ] },
+      { title: "Confidence", rows: [
+        row("Sure but wrong", v(r, "sw"), v(p, "sw"), "", false),
+        row("Right by guessing", v(r, "lk"), v(p, "lk"), "", false)
+      ] },
+      /* Only causes tagged in one of the two weeks; a cause not tagged in a week counts as none. */
+      { title: "Mistake causes", rows: PMP.RULES.causes.filter(function (c) {
+          return (cz[c.id] || 0) + (pz[c.id] || 0) > 0;
+        }).map(function (c) {
+          return row(c.short, cz[c.id] || 0, p ? (pz[c.id] || 0) : null, "", false);
+        }) }
+    ].filter(function (sec) { return sec.rows.some(function (x) { return x.value !== null; }); });
+  }
+
+  /* ── 10.19.5  READY TO BOOK? ─────────────────────────────────────────────
+     Three conditions, and when the trend says the unmet scores will reach
+     their targets. The thresholds are the app's judgement, not PMI's:
+     readiness 75+, exam fitness 70+, and two full mocks at Target (65%) or
+     above. A full mock is one of the full paper's scored length: the
+     phones compare a sitting's scored count with the paper's total, which
+     a full paper's pretest items keep it from ever reaching, so the web
+     counts the scored length instead (PMP.EXAM.SCORED_ITEMS). */
+  var BOOK = { READINESS: 75, FITNESS: 70, MOCKS: 2, MOCK_PASS: 0.65 };
+
+  function examMs(state) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(state.settings.examDate || ""));
+    return m ? new Date(+m[1], +m[2] - 1, +m[3], 9, 0, 0).getTime() : null;
+  }
+
+  function booking(state, now) {
+    now = now || Date.now();
+    var readiness = PMP.Metrics.readiness(state).score;
+    var fitness = report(state, now).score;
+    var good = PMP.Metrics.mocks(state).filter(function (m) { return m.of >= PMP.EXAM.SCORED_ITEMS && m.pct >= BOOK.MOCK_PASS; }).length;
+    var criteria = [
+      { label: "Readiness", target: BOOK.READINESS + "+", now: String(readiness), met: readiness >= BOOK.READINESS },
+      { label: "Exam fitness", target: BOOK.FITNESS + "+", now: fitness === null ? "not yet" : String(fitness), met: (fitness || 0) >= BOOK.FITNESS },
+      { label: "Full mocks at Target or above", target: String(BOOK.MOCKS), now: String(good), met: good >= BOOK.MOCKS }
+    ];
+    var wk = weeks(state, now).slice().sort(function (a, b) { return a.w - b.w; });
+    var series = [];
+    if (readiness < BOOK.READINESS) series.push({ label: "Readiness", target: BOOK.READINESS, pts: wk.map(function (w) { return [w.w, w.r]; }) });
+    if ((fitness || 0) < BOOK.FITNESS) series.push({ label: "Exam fitness", target: BOOK.FITNESS,
+      pts: wk.filter(function (w) { return typeof w.f === "number"; }).map(function (w) { return [w.w, w.f]; }) });
+    var projection = !series.length || wk.length < 2 ? null : project(series, examMs(state));
+    return { criteria: criteria, projection: projection, mocksNeeded: Math.max(0, BOOK.MOCKS - good),
+             ready: criteria.every(function (c) { return c.met; }), examAt: examMs(state) };
+  }
+
+  function project(series, examDate) {
+    var stalled = [], earliest = 0, latest = 0, open = false;
+    var range = series.every(function (s) { return s.pts.length >= 4; });
+    series.forEach(function (s) {
+      var f = fit(s.pts);
+      if (!f || f.slope <= 0) { stalled.push(s.label); return; }
+      var lastX = s.pts[s.pts.length - 1][0];
+      var at = function (slope) {
+        var weeks = Math.max(0, (s.target - f.valueAt(lastX)) / slope);
+        return lastX + Math.ceil(weeks * 7 - 1e-6) * DAY;
+      };
+      if (range) {
+        earliest = Math.max(earliest, at(f.slope + f.se));
+        if (f.slope - f.se <= 0) open = true; else latest = Math.max(latest, at(f.slope - f.se));
+      } else {
+        latest = Math.max(latest, at(f.slope));
+      }
+    });
+    if (stalled.length) return { earliest: null, latest: null, rough: !range, stalled: stalled, afterExam: false };
+    var late = open ? null : latest;
+    var after = examDate !== null && (late === null || late > examDate);
+    return { earliest: range ? earliest : null, latest: late, rough: !range, stalled: stalled, afterExam: after };
+  }
+
+  /* Least squares in points per week, with the slope's standard error. */
+  function fit(pts) {
+    if (pts.length < 2) return null;
+    var xs = pts.map(function (p) { return p[0] / WEEK; }), ys = pts.map(function (p) { return p[1]; });
+    var mx = mean(xs), my = mean(ys);
+    var sxx = sum(xs, function (x) { return (x - mx) * (x - mx); });
+    if (sxx === 0) return null;
+    var sxy = 0;
+    for (var i = 0; i < xs.length; i++) sxy += (xs[i] - mx) * (ys[i] - my);
+    var slope = sxy / sxx, intercept = my - slope * mx;
+    var se = 0;
+    if (pts.length >= 3) {
+      var ss = 0;
+      for (var k = 0; k < xs.length; k++) { var res = ys[k] - (intercept + slope * xs[k]); ss += res * res; }
+      se = Math.sqrt(ss / (pts.length - 2) / sxx);
+    }
+    return { slope: slope, intercept: intercept, se: se, valueAt: function (x) { return intercept + slope * (x / WEEK); } };
+  }
+
+  return {
+    LADDER: LADDER, TARGET_WPM: TARGET_WPM, WEEKLY_STATEMENTS: WEEKLY_STATEMENTS, BOOK: BOOK, SITTING_GAP: SITTING_GAP,
+    report: report, sittings: sittings, fade: fade, drift: drift, worryOf: worryOf, input: input,
+    recordSitting: recordSitting,
+    weekStart: weekStart, build: build, publish: publish, weeks: weeks, compare: compare,
+    booking: booking, project: project, fit: fit
+  };
+})();
+
+
+/* ── 10.20  WELLBEING ───────────────────────────────────────────────────────
+   Optional check-ins, a two-minute breathing reset, a box for writing
+   worries down before a mock, and the two cards that answer to how the
+   preparation is going rather than what it has covered. Ported from the
+   Android app (FitnessScreen.kt's check-ins, Breathing.kt, SessionScreen,
+   PathScreen and MockExamScreen) with the same wording.
+
+   Four decisions worth knowing before reading the code:
+
+   · Every check-in is one tap and can be skipped, and none of it is scored
+     against anyone. The pre-session check-in is asked once a day, on
+     Today, above the session rather than in front of it: the person can
+     start without answering, and a skip holds for the rest of the day.
+
+   · Check-ins are stored exactly in the shared shape, { at, kind, v,
+     items }, kind "pre" (before a session, 1 very low … 5 very good),
+     "post" (after a mock, 1 very tense … 5 very calm) or "weekly" (v 0,
+     five answers 1 disagree … 5 agree). §10.18 copies them both ways, and
+     §10.19 reads them for the worry figure and the feeling link.
+
+   · The breathing reset is 4 seconds in and 6 out, twelve times, which is
+     two minutes. One button ends it. With reduced motion asked for, the
+     circle does not move and only the words change.
+
+   · What is written in the "write it down" box is never saved: not to the
+     store, not to the notes pane, not to a backup. Writing it is the point,
+     and keeping it would be the opposite of letting it go.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.Wellbeing = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on, frag = PMP.dom.frag;
+  var DAY = 86400000;
+  var FACES = [["😞", "Very low"], ["🙁", "Low"], ["😐", "OK"], ["🙂", "Good"], ["😄", "Very good"]];
+  /* How tense, for after a mock: 1 = very tense … 5 = calm. */
+  var TENSION = [["😣", "Very tense"], ["😟", "Tense"], ["😐", "So-so"], ["🙂", "Calm"], ["😌", "Very calm"]];
+  var SCALE = ["Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree"];
+  var BREATH = { inMs: 4000, outMs: 6000, cycles: 12 };
+  var SKIP_KEY = "pmp.checkin.skipped";
+
+  function sod(t) { return PMP.time.startOfDay(t); }
+  function list(state) { return (state.checkins || []).filter(function (c) { return c && typeof c.at === "number"; }); }
+
+  /* ── 10.20.1  CHECK-INS ──────────────────────────────────────────────── */
+  function record(kind, v, items) {
+    var row = { at: Date.now(), kind: kind, v: v, items: (items || []).slice() };
+    PMP.Store.commit(["checkins"], function (s) {
+      s.checkins = (Array.isArray(s.checkins) ? s.checkins : []).concat([row]);
+    });
+    return row;
+  }
+
+  /* A skip is remembered for the day on this device only. It is not a
+     check-in, and writing it to the shared log would tell the other
+     devices something the person chose not to say. */
+  function skippedToday() {
+    try { return Number(window.localStorage.getItem(SKIP_KEY)) === sod(Date.now()); } catch (e) { return memSkip === sod(Date.now()); }
+  }
+  var memSkip = 0;
+  function skipToday() {
+    memSkip = sod(Date.now());
+    try { window.localStorage.setItem(SKIP_KEY, String(memSkip)); } catch (e) { /* held in memory for this visit */ }
+  }
+
+  /* Once a day, before the day's session: how do you feel about studying right now? */
+  function preDue(state) {
+    var today = sod(Date.now());
+    return !skippedToday() && !list(state).some(function (c) { return c.kind === "pre" && sod(c.at) === today; });
+  }
+
+  /* The weekly five-statement check is offered once a week, once you've started studying. */
+  function weeklyDue(state) {
+    var now = Date.now();
+    return (state.attempts || []).length > 0 &&
+      !list(state).some(function (c) { return c.kind === "weekly" && now - c.at < 6 * DAY; });
+  }
+
+  /* One tap, five faces. Buttons rather than a radio group, because a tap
+     is the whole answer: there is nothing to confirm. */
+  function faces(labels, onPick) {
+    return el("div", { class: "wb-faces", role: "group", "aria-label": "Choose one" }, labels.map(function (f, i) {
+      return el("button", { class: "btn wb-face", type: "button", dataset: { v: String(i + 1) },
+        onclick: function () { onPick(i + 1, f[1]); } }, [
+        el("span", { class: "wb-emoji", "aria-hidden": "true", text: f[0] }), f[1]
+      ]);
+    }));
+  }
+
+  function checkInCard(kind, question, onDone, labels) {
+    labels = labels || (kind === "post" ? TENSION : FACES);
+    var card = el("section", { class: "card wb-card", "aria-label": question, dataset: { checkin: kind } });
+    function done(text) {
+      card.innerHTML = "";
+      card.appendChild(el("p", { class: "wb-thanks", text: text }));
+      if (onDone) onDone();
+    }
+    card.appendChild(el("h2", { class: "wb-q", text: question }));
+    card.appendChild(el("p", { class: "hint", text: "Optional. It helps the app show you how feelings and study relate." }));
+    card.appendChild(faces(labels, function (v, label) {
+      record(kind, v);
+      PMP.UI.announce("Noted: " + label + ".");
+      done("Noted: " + label + ". Thank you.");
+    }));
+    card.appendChild(el("div", { class: "filter-bar" }, [
+      el("button", { class: "btn btn--sm btn--ghost", type: "button", onclick: function () { done("Skipped."); } }, "Skip")
+    ]));
+    return card;
+  }
+
+  /* Today's card: the check-in, then, after a low answer, the offer of the
+     breathing reset. It stands aside for the day once answered or skipped. */
+  function preCard(state) {
+    if (!preDue(state)) return null;
+    var card = el("section", { class: "card wb-card", id: "wb-pre", "aria-labelledby": "wb-pre-h", dataset: { checkin: "pre" } });
+    function offer() {
+      card.innerHTML = "";
+      card.appendChild(el("h2", { id: "wb-pre-h", class: "wb-q", text: "Want a two-minute reset first?" }));
+      card.appendChild(el("p", { text: "Slow breathing before you start makes the first questions easier to read. Optional." }));
+      card.appendChild(el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn", type: "button", onclick: function () { card.remove(); breathe(); } }, "Breathe for 2 minutes"),
+        el("button", { class: "btn btn--ghost", type: "button", onclick: function () { card.remove(); } }, "Skip")
+      ]));
+      var first = card.querySelector("button");
+      if (first) first.focus();
+    }
+    card.appendChild(el("h2", { id: "wb-pre-h", class: "wb-q", text: "How do you feel about studying right now?" }));
+    card.appendChild(el("p", { class: "hint", text: "Optional. It helps the app show you how feelings and study relate." }));
+    card.appendChild(faces(FACES, function (v, label) {
+      record("pre", v);
+      PMP.UI.announce("Noted: " + label + ".");
+      if (v <= 2) offer(); else card.remove();
+    }));
+    card.appendChild(el("div", { class: "filter-bar" }, [
+      el("button", { class: "btn btn--sm btn--ghost", type: "button", onclick: function () { skipToday(); card.remove(); } }, "Skip")
+    ]));
+    return card;
+  }
+
+  /* ── 10.20.2  THE BREATHING RESET ────────────────────────────────────────
+     Two minutes of paced breathing: in for 4 seconds, out for 6, twelve
+     times. Ends on its own, or on one press. Resolves when it is over. */
+  function breathe() {
+    var still = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    var circle = el("div", { class: "breath-c", "aria-hidden": "true", dataset: { still: String(still) } });
+    var phase = el("span", { class: "breath-p", text: "Breathe in" });
+    var left = el("p", { class: "breath-n" });
+    var timers = [], n = BREATH.cycles, over = false;
+    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+    function stop() { over = true; timers.forEach(clearTimeout); timers = []; }
+    function count() { left.textContent = PMP.fmt.plural(n, "breath") + " to go"; }
+    function inhale() {
+      if (over) return;
+      if (n <= 0) { stop(); PMP.UI.closeSheet("done"); return; }
+      phase.textContent = "Breathe in";
+      PMP.UI.announce("Breathe in");
+      if (!still) { circle.style.transitionDuration = BREATH.inMs + "ms"; circle.style.transform = "scale(1)"; }
+      later(exhale, BREATH.inMs);
+    }
+    function exhale() {
+      if (over) return;
+      phase.textContent = "Breathe out";
+      PMP.UI.announce("Breathe out");
+      if (!still) { circle.style.transitionDuration = BREATH.outMs + "ms"; circle.style.transform = "scale(0.55)"; }
+      later(function () { n--; count(); inhale(); }, BREATH.outMs);
+    }
+    count();
+    var p = PMP.UI.sheet({
+      title: "A two-minute reset",
+      body: frag([
+        el("p", { class: "breath-lead", text: "Follow the circle. A longer breath out than in slows things down." }),
+        el("div", { class: "breath" }, [circle, phase]),
+        left
+      ]),
+      actions: [{ id: "skip", label: "I'm ready, start now", primary: true }]
+    });
+    /* The first frame paints at the small size, so the first breath in grows. */
+    later(inhale, 30);
+    return p.then(function (r) { stop(); return r; });
+  }
+
+  /* ── 10.20.3  THE WEEKLY CHECK ───────────────────────────────────────────
+     Five statements, each answered on a five-point scale. Save stays
+     disabled until all five have an answer. */
+  function weeklyCheck() {
+    var answers = PMP.Fitness.WEEKLY_STATEMENTS.map(function () { return 0; });
+    var body = el("div", { class: "wb-weekly" }, [el("p", { text: "How much do you agree? There are no right answers." })]);
+    PMP.Fitness.WEEKLY_STATEMENTS.forEach(function (st, i) {
+      var fs = el("fieldset", { class: "wb-st" }, [el("legend", { text: st })]);
+      var row = el("div", { class: "wb-scale" });
+      SCALE.forEach(function (label, v) {
+        var id = "wb-w" + i + "-" + v;
+        var input = el("input", { type: "radio", name: "wb-w" + i, id: id, value: String(v + 1) });
+        on(input, "change", function () {
+          answers[i] = v + 1;
+          var save = document.querySelector("#sheet-foot .btn--primary");
+          if (save) save.disabled = answers.some(function (a) { return !a; });
+        });
+        row.appendChild(el("label", { class: "wb-opt", for: id }, [input, el("span", { text: label })]));
+      });
+      fs.appendChild(row);
+      body.appendChild(fs);
+    });
+    var p = PMP.UI.sheet({
+      title: "This week's check",
+      body: body,
+      actions: [{ id: "later", label: "Not now" }, { id: "save", label: "Save", primary: true }]
+    });
+    var save = document.querySelector("#sheet-foot .btn--primary");
+    if (save) save.disabled = true;
+    var firstRadio = body.querySelector("input");
+    if (firstRadio) firstRadio.focus();
+    return p.then(function (r) {
+      if (r !== "save" || answers.some(function (a) { return !a; })) return null;
+      var row = record("weekly", 0, answers);
+      PMP.UI.toast("This week's check is saved.", "ok");
+      return row;
+    });
+  }
+
+  /* ── 10.20.4  CARDS ──────────────────────────────────────────────────────
+     For Today, below the session: a lighter week when momentum is falling,
+     this week's check when it is due, and the supportive card after three
+     weeks of high worry. None has a primary button: Today keeps exactly one. */
+  function worryCard() {
+    return el("section", { class: "card wb-support", "aria-labelledby": "wb-worry-h" }, [
+      el("h2", { id: "wb-worry-h", text: "Your weekly checks have shown a lot of worry for three weeks." }),
+      el("p", { text: "That's common before a big exam, and you don't have to carry it alone. Talking it through with someone you trust, or a doctor or counsellor, can help as much as more study." })
+    ]);
+  }
+
+  function lighterWeekCard() {
+    return el("section", { class: "card wb-light", "aria-labelledby": "wb-light-h" }, [
+      el("h2", { id: "wb-light-h", text: "A lighter week" }),
+      el("p", { text: "Your study time has dropped from recent weeks. That happens. For now, a minimum day counts: 10 cards or 10 questions. The rhythm matters more than the amount." }),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () { PMP.Router.navigate("cards"); } }, [icon("cards"), "10 cards"]),
+        el("button", { class: "btn btn--sm", type: "button", onclick: tenQuestions }, [icon("target"), "10 questions"])
+      ])
+    ]);
+  }
+
+  function tenQuestions() {
+    var pool = PMP.Content.all().filter(function (q) { return q && !q.retired; });
+    PMP.Practice.startWith(PMP.rng.shuffle(pool).items.slice(0, 10), "practice");
+    PMP.Router.navigate("practice");
+  }
+
+  function weeklyDueCard(after) {
+    return el("section", { class: "card wb-card", "aria-labelledby": "wb-weekly-h" }, [
+      el("h2", { id: "wb-weekly-h", text: "Weekly check · 30 seconds" }),
+      el("p", { text: "Five statements about how the exam feels. It shows whether worry eases as you prepare." }),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () {
+          weeklyCheck().then(function (row) { if (row && after) after(); });
+        } }, "Take it")
+      ])
+    ]);
+  }
+
+  function todayCards(state, after) {
+    var out = [];
+    var fit = PMP.Fitness.report(state);
+    if (fit.momentumLow) out.push(lighterWeekCard());
+    if (weeklyDue(state)) out.push(weeklyDueCard(after));
+    if (fit.worryHighForWeeks) out.push(worryCard());
+    return out;
+  }
+
+  /* Before a mock. Writing worries out before a test improved scores for
+     anxious students (Ramirez & Beilock, Science, 2011). */
+  function writeItDownCard() {
+    var card = el("section", { class: "card wb-write", "aria-labelledby": "wb-write-h" });
+    function closed() {
+      card.innerHTML = "";
+      card.appendChild(el("span", { class: "eyebrow", id: "wb-write-h", text: "Before you start (optional)" }));
+      card.appendChild(el("p", { text: "Nervous about it? Spend about 10 minutes writing down exactly what worries you about this sitting. Getting it on paper frees up the attention it was using. Nothing you write is saved." }));
+      card.appendChild(el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: open }, "Write it down"),
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () { breathe(); } }, "Two-minute breathing reset")
+      ]));
+    }
+    function open() {
+      var ta = el("textarea", { class: "textarea wb-ta", id: "wb-worries", rows: "6", autocomplete: "off",
+        "aria-label": "What's on your mind about this exam?", placeholder: "What's on your mind about this exam?" });
+      card.innerHTML = "";
+      card.appendChild(el("span", { class: "eyebrow", id: "wb-write-h", text: "Before you start (optional)" }));
+      card.appendChild(el("p", { class: "hint", text: "Nothing you write here is saved, sent or backed up." }));
+      card.appendChild(ta);
+      card.appendChild(el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () { ta.value = ""; closed(); PMP.UI.announce("Cleared."); } }, "Done, clear it")
+      ]));
+      ta.focus();
+    }
+    closed();
+    return card;
+  }
+
+  return {
+    FACES: FACES, TENSION: TENSION, SCALE: SCALE, BREATH: BREATH,
+    record: record, preDue: preDue, weeklyDue: weeklyDue,
+    checkInCard: checkInCard, preCard: preCard, breathe: breathe, weeklyCheck: weeklyCheck,
+    todayCards: todayCards, worryCard: worryCard, lighterWeekCard: lighterWeekCard, writeItDownCard: writeItDownCard
+  };
+})();
+
+
+/* ── 10.21  EXAM FITNESS, READY TO BOOK AND WEEKLY REPORTS — THE PAGES ──────
+   #/fitness, #/book and #/reports, in the rail under Progress. Each draws
+   what §10.19 derived and nothing else; the wording is the Android app's
+   (FitnessScreen, BookScreen, ReportsScreen).
+
+   Two choices worth knowing:
+
+   · Bars are the dashboard's (§03.17 .rd-row) so a part's score reads like
+     a readiness component's, and every bar carries its figure in text: a
+     signal with no evidence says "not yet" and draws an empty track rather
+     than a zero.
+
+   · The weekly comparison is a table, one per section, with the change in
+     its own column. ▲ and ▼ say better or worse, not up or down (fewer
+     freezes is ▲), so each change also carries "better" or "worse" in
+     words for a screen reader, which cannot see the colour either. */
+PMP.FitnessUI = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on;
+  var F = PMP.Fitness;
+  var against = "last";
+
+  function date(ms) { return PMP.fmt.dateShort(new Date(ms).toISOString()); }
+  function bar(label, score, figure, detail, thin) {
+    var w = score === null ? 0 : Math.round(score * 100);
+    return el("div", { class: "rd-row fit-row", dataset: { thin: String(score === null || !!thin) } }, [
+      el("span", { class: "rd-k", text: label }),
+      el("span", { class: "rd-p" }, [el("b", { text: figure })]),
+      el("span", { class: "rd-track", role: "img", "aria-label": label + ": " + figure }, [el("i", { style: "width:" + w + "%" })]),
+      detail ? el("span", { class: "rd-why", text: detail }) : null
+    ]);
+  }
+  function partFigure(p) { return p.score === null ? "not yet" : String(Math.floor(p.score * 100)); }
+
+  /* ── 10.21.1  EXAM FITNESS ───────────────────────────────────────────── */
+  function ladder(rung, next) {
+    var list = el("ol", { class: "fit-ladder", "aria-label": "Stamina ladder: reached " + rung + " questions" + (next ? ", next " + next : ", complete") });
+    F.LADDER.forEach(function (r) {
+      list.appendChild(el("li", { dataset: { state: r <= rung ? "done" : r === next ? "next" : "todo" } }, [
+        el("span", { text: String(r) }),
+        el("span", { class: "sr-only", text: r <= rung ? " reached" : r === next ? " next" : "" })
+      ]));
+    });
+    return el("section", { class: "card", "aria-labelledby": "fit-ladder-h" }, [
+      el("span", { class: "eyebrow", id: "fit-ladder-h", text: "Stamina ladder" }),
+      list,
+      el("p", { text: next
+        ? "Next: " + next + " questions in one sitting at exam pace. It's on your path once a week. You move up when your last-quarter accuracy stays within 10 points of the first."
+        : "You've held accuracy through a full 180-question sitting." })
+    ]);
+  }
+
+  function partCard(p) {
+    var card = el("section", { class: "card fit-part", "aria-labelledby": "fit-p-" + p.id, dataset: { part: p.id } }, [
+      el("div", { class: "fit-part-hd" }, [
+        el("h2", { id: "fit-p-" + p.id, text: p.label }),
+        el("span", { class: "fit-part-s", text: p.score === null ? "not yet" : Math.floor(p.score * 100) + " / 100" })
+      ]),
+      p.gate ? el("p", { class: "hint", text: p.gate }) : null
+    ]);
+    var rows = el("div", { class: "rd-rows fit-rows" });
+    p.signals.forEach(function (s) {
+      var r = bar(s.label + " · " + s.weight + "%", s.score, s.figure, s.detail);
+      r.setAttribute("data-signal", s.id);
+      rows.appendChild(r);
+    });
+    card.appendChild(rows);
+    return card;
+  }
+
+  function fitnessView(host) {
+    var state = PMP.Store.state;
+    var f = F.report(state);
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Exam fitness" }),
+      el("h2", { text: "Are you ready to sit it?" }),
+      el("p", { text: "Readiness asks whether you know the material. This asks whether you can sit for four hours, read 180 long questions calmly, and keep preparing until the day. It describes what you did; it isn't a diagnosis." })
+    ]));
+
+    var top = el("section", { class: "card", id: "fit-score", "aria-labelledby": "fit-score-h" }, [
+      el("span", { class: "eyebrow", id: "fit-score-h", text: "Exam fitness" }),
+      f.score === null
+        ? el("p", { class: "fit-none", text: "Not enough yet" })
+        : el("div", { class: "score-hd", dataset: { provisional: String(f.provisional) } }, [
+            el("span", { class: "score-n", text: String(f.score) }), el("span", { class: "score-of", text: "/ 100" })
+          ]),
+      f.provisional && f.score !== null ? el("p", { class: "hint", text: "Some parts still need evidence, so this is provisional." }) : null
+    ]);
+    var rows = el("div", { class: "rd-rows" });
+    f.parts.forEach(function (p) {
+      rows.appendChild(bar(p.label + " · " + p.weight + "%", p.score, partFigure(p)));
+    });
+    top.appendChild(rows);
+    if (f.finding) top.appendChild(el("p", { class: "fit-finding" }, [el("b", { text: f.finding })]));
+    if (f.next) top.appendChild(el("p", { class: "fit-next", text: "Next: " + f.next }));
+    host.appendChild(top);
+
+    host.appendChild(ladder(f.ladderRung, f.ladderNext));
+    if (f.worryHighForWeeks) host.appendChild(PMP.Wellbeing.worryCard());
+
+    var feel = el("section", { class: "card", "aria-labelledby": "fit-feel-h" }, [
+      el("span", { class: "eyebrow", id: "fit-feel-h", text: "How you feel" }),
+      el("p", { class: "fit-worry" }, [el("b", { text: f.worry === null ? "No weekly check yet." : "Exam worry: " + f.worry + " / 100 (last weekly check)" })]),
+      f.link ? el("p", { text: f.link }) : null,
+      el("p", { class: "hint", text: "Five statements, about 30 seconds, once a week. It isn't scored against you; it shows whether worry eases as your preparation builds." }),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--sm", type: "button", id: "fit-weekly", onclick: function () {
+          PMP.Wellbeing.weeklyCheck().then(function (row) { if (row) repaint("fitness"); });
+        } }, PMP.Wellbeing.weeklyDue(state) ? "Take this week's check" : "Take it again")
+      ])
+    ]);
+    host.appendChild(feel);
+
+    f.parts.forEach(function (p) { host.appendChild(partCard(p)); });
+    host.appendChild(el("div", { class: "filter-bar" }, [
+      el("a", { class: "btn", href: "#/reports" }, [icon("chart"), "Weekly reports and comparisons"]),
+      el("a", { class: "btn", href: "#/book" }, [icon("calendar"), "Am I ready to book?"])
+    ]));
+  }
+
+  /* ── 10.21.2  READY TO BOOK ──────────────────────────────────────────── */
+  function projectionText(b) {
+    var p = b.projection;
+    if (!p && b.criteria[0].met && b.criteria[1].met) return "Readiness and exam fitness are there already.";
+    if (!p) return "A projection needs at least two weekly reports. Keep studying and it appears next week.";
+    if (p.stalled.length) return p.stalled.join(" and ") + " " + (p.stalled.length === 1 ? "isn't" : "aren't") +
+      " rising yet, so there's no date to project. Weekly reports show how it moves.";
+    if (p.earliest !== null && p.latest !== null) return "At your current pace you'll reach readiness and fitness between " + date(p.earliest) + " and " + date(p.latest) + ".";
+    if (p.earliest !== null) return "At your current pace, from " + date(p.earliest) + "; the trend is too uneven yet to say how late.";
+    if (p.latest !== null) return "At your current pace you'll reach readiness and fitness around " + date(p.latest) + ". Rough: it's from fewer than four weeks of reports.";
+    return "Not enough of a trend yet.";
+  }
+
+  function bookView(host) {
+    var b = F.booking(PMP.Store.state);
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Ready to book?" }),
+      el("h2", { text: "Am I ready to book?" })
+    ]));
+    var crit = el("ul", { class: "bk-crit" });
+    b.criteria.forEach(function (c) {
+      crit.appendChild(el("li", { dataset: { met: String(c.met) } }, [
+        c.met ? icon("check") : el("span", { class: "bk-open", "aria-hidden": "true", text: "○" }),
+        el("span", { class: "bk-l" }, [c.label, el("span", { class: "sr-only", text: c.met ? ": met" : ": not yet met" })]),
+        el("span", { class: "bk-v", text: c.now + " / " + c.target })
+      ]));
+    });
+    host.appendChild(el("section", { class: "card bk-verdict", id: "bk-verdict", "aria-labelledby": "bk-h", dataset: { ready: String(b.ready) } }, [
+      el("h2", { id: "bk-h", text: b.ready ? "Yes. You meet all three." : "Not yet." }),
+      el("p", { text: b.ready ? "Knowledge, stamina and real exam practice are all where they need to be. Book it, and keep the plan going until the day."
+        : "Here's what's left, and when your trend says you'll get there." }),
+      crit
+    ]));
+    if (!b.ready) {
+      var proj = el("section", { class: "card", id: "bk-proj", "aria-labelledby": "bk-proj-h" }, [
+        el("span", { class: "eyebrow", id: "bk-proj-h", text: "Projected ready date" }),
+        el("p", { class: "bk-proj-t", text: projectionText(b) })
+      ]);
+      if (b.mocksNeeded > 0) proj.appendChild(el("p", { text: "Plus " + b.mocksNeeded + " more full " + (b.mocksNeeded === 1 ? "mock" : "mocks") + " at Target (65%) or above." }));
+      if (b.projection && b.projection.afterExam && b.examAt) {
+        proj.appendChild(el("p", { class: "bk-late", role: "note", text: "That's after your exam date, " + date(b.examAt) + ". Consider moving the exam, or adding study hours." }));
+        proj.appendChild(el("div", { class: "filter-bar" }, [el("a", { class: "btn btn--sm", href: "#/planner" }, [icon("calendar"), "Plan and schedule"])]));
+      }
+      host.appendChild(proj);
+    }
+    host.appendChild(el("p", { class: "hint", text: "The thresholds (readiness " + F.BOOK.READINESS + "+, exam fitness " + F.BOOK.FITNESS + "+, " + F.BOOK.MOCKS +
+      " full mocks at Target) are this app's judgement, not PMI's. PMI doesn't publish a pass mark." }));
+  }
+
+  /* ── 10.21.3  WEEKLY REPORTS ─────────────────────────────────────────── */
+  function weekLabel(w) { return date(w.w) + " – " + date(w.w + 6 * 86400000 + 3600000); }
+
+  /* One series over the weeks: a thin line, the latest week marked. */
+  function spark(title, values) {
+    var pts = [];
+    values.forEach(function (v, i) { if (typeof v === "number") pts.push([i, v]); });
+    var last = pts.length ? pts[pts.length - 1][1] : null;
+    var row = el("div", { class: "wk-spark" }, [el("span", { class: "wk-spark-t", text: title })]);
+    if (pts.length < 2) {
+      row.appendChild(el("span", { class: "wk-spark-g hint", text: "needs two weeks" }));
+    } else {
+      var lo = Math.min.apply(null, pts.map(function (p) { return p[1]; })), hi = Math.max.apply(null, pts.map(function (p) { return p[1]; }));
+      var n = Math.max(1, values.length - 1), W = 200, H = 36;
+      var xy = function (p) {
+        var y = H - 4 - (H - 8) * (hi === lo ? 0.5 : (p[1] - lo) / (hi - lo));
+        return [Math.round(W * p[0] / n * 10) / 10, Math.round(y * 10) / 10];
+      };
+      var NS = "http://www.w3.org/2000/svg";
+      var svg = document.createElementNS(NS, "svg");
+      svg.setAttribute("class", "wk-spark-g");
+      svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+      svg.setAttribute("preserveAspectRatio", "none");
+      svg.setAttribute("role", "img");
+      svg.setAttribute("aria-label", title + " by week: " + pts.map(function (p) { return p[1]; }).join(", "));
+      var base = document.createElementNS(NS, "line");
+      base.setAttribute("x1", "0"); base.setAttribute("x2", String(W)); base.setAttribute("y1", String(H - 1)); base.setAttribute("y2", String(H - 1));
+      base.setAttribute("class", "wk-base");
+      svg.appendChild(base);
+      var line = document.createElementNS(NS, "polyline");
+      line.setAttribute("points", pts.map(function (p) { return xy(p).join(","); }).join(" "));
+      line.setAttribute("class", "wk-line");
+      svg.appendChild(line);
+      var end = xy(pts[pts.length - 1]), dot = document.createElementNS(NS, "circle");
+      dot.setAttribute("cx", String(end[0])); dot.setAttribute("cy", String(end[1])); dot.setAttribute("r", "3.5");
+      dot.setAttribute("class", "wk-dot");
+      svg.appendChild(dot);
+      row.appendChild(svg);
+    }
+    row.appendChild(el("span", { class: "wk-spark-v", text: last === null ? "–" : String(last) }));
+    return row;
+  }
+
+  /* Every figure with its change; the arrow says better or worse, the sign says up or down. */
+  function comparison(r, p) {
+    var wrap = el("div", { class: "wk-cmp" });
+    F.compare(r, p).forEach(function (sec) {
+      var body = el("tbody");
+      sec.rows.forEach(function (x) {
+        var d = x.delta;
+        var text = d === null ? "new" : d === 0 ? "same" : (x.direction > 0 ? "▲ " : "▼ ") + (d > 0 ? "+" + d : String(d));
+        body.appendChild(el("tr", null, [
+          el("th", { scope: "row", text: x.label }),
+          el("td", { class: "n", text: x.value === null ? "–" : x.value + x.unit }),
+          el("td", { class: "n wk-d", dataset: { dir: String(x.direction) } }, [
+            text,
+            x.direction ? el("span", { class: "sr-only", text: x.direction > 0 ? ", better" : ", worse" }) : null
+          ])
+        ]));
+      });
+      wrap.appendChild(el("table", { class: "tbl wk-tbl", dataset: { section: sec.title } }, [
+        el("caption", { text: sec.title }),
+        el("thead", null, [el("tr", null, [
+          el("th", { scope: "col", text: "Measure" }), el("th", { scope: "col", class: "n", text: "Value" }), el("th", { scope: "col", class: "n", text: "Change" })
+        ])]),
+        body
+      ]));
+    });
+    return wrap;
+  }
+
+  function reportsView(host) {
+    var state = PMP.Store.state;
+    var weeks = F.weeks(state);
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Weekly reports" }),
+      el("h2", { text: "Weekly reports" }),
+      el("p", { text: "Each week's knowledge, exam fitness and effort, compared with the week before. ▲ and ▼ show better or worse, not just up or down." })
+    ]));
+    if (!weeks.length) {
+      host.appendChild(el("section", { class: "card" }, [
+        el("p", { text: "Your first report appears as soon as you study. It's updated through the week and kept when the week ends." })
+      ]));
+      return;
+    }
+    if (weeks.length >= 2) {
+      var ordered = weeks.slice().reverse();
+      host.appendChild(el("section", { class: "card", "aria-labelledby": "wk-trend-h" }, [
+        el("span", { class: "eyebrow", id: "wk-trend-h", text: "Trend" }),
+        spark("Readiness", ordered.map(function (w) { return w.r; })),
+        spark("Exam fitness", ordered.map(function (w) { return typeof w.f === "number" ? w.f : null; })),
+        spark("Minutes studied", ordered.map(function (w) { return w.min; }))
+      ]));
+    }
+    var cur = weeks[0], prev = weeks[1] || null, first = weeks.length > 2 ? weeks[weeks.length - 1] : null;
+    var curCard = el("section", { class: "card", id: "wk-cur", "aria-labelledby": "wk-cur-h" }, [
+      el("span", { class: "eyebrow", text: cur.w === F.weekStart(Date.now()) ? "This week so far" : "Last recorded week" }),
+      el("h2", { id: "wk-cur-h", text: weekLabel(cur) })
+    ]);
+    if (first) {
+      var seg = el("div", { class: "seg", role: "group", "aria-label": "Compare with" });
+      [["last", "vs last week"], ["first", "vs your first week"]].forEach(function (o) {
+        seg.appendChild(el("button", { class: "btn btn--sm", type: "button", "aria-pressed": String(against === o[0]), onclick: function () {
+          against = o[0];
+          repaint("reports");
+        } }, o[1]));
+      });
+      curCard.appendChild(seg);
+    }
+    curCard.appendChild(comparison(cur, against === "first" && first ? first : prev));
+    host.appendChild(curCard);
+
+    if (weeks.length > 1) {
+      host.appendChild(el("h2", { class: "wk-earlier", text: "Earlier weeks" }));
+      weeks.slice(1).forEach(function (w, i) {
+        var before = weeks[i + 2] || null;
+        var det = el("details", { class: "card wk-week" }, [
+          el("summary", null, [
+            el("span", { class: "wk-week-t", text: weekLabel(w) }),
+            el("span", { class: "wk-week-s", text: "Readiness " + w.r + " · fitness " + (typeof w.f === "number" ? w.f : "–") + " · " + w.min + " min" })
+          ])
+        ]);
+        var filled = false;
+        on(det, "toggle", function () { if (det.open && !filled) { filled = true; det.appendChild(comparison(w, before)); } });
+        host.appendChild(det);
+      });
+    }
+  }
+
+  function repaint(route) {
+    if (!PMP.Router.current || PMP.Router.current.name !== route) return;
+    PMP.Router.navigate(route, PMP.Router.current.params, true);
+  }
+
+  PMP.Router.register("fitness", { title: "Exam fitness", render: fitnessView });
+  PMP.Router.register("book", { title: "Ready to book?", render: bookView });
+  PMP.Router.register("reports", { title: "Weekly reports", render: reportsView });
+
+  return { fitnessView: fitnessView, bookView: bookView, reportsView: reportsView, projectionText: projectionText };
+})();
+
+
+/* ── 10.22  SEARCH ──────────────────────────────────────────────────────────
+   One search across everything the person might be trying to find again:
+   lessons, the glossary, the abbreviations, the formulas, their notes page,
+   their notes on questions, and the question bank itself. #/search, the
+   Search link at the top of the rail, and "/" from anywhere outside a box
+   or a running mock. Ported from the Android app's SearchScreen.
+
+   The rule is deliberately plain: every word typed must appear somewhere
+   in the item, as written, ignoring case. The library's own search (§09.5,
+   §10.07.6) forgives spelling, which is right for a glossary someone is
+   browsing; here the person is looking for a thing they have seen, and a
+   result containing the words they typed is easier to trust than a ranked
+   guess. At most 60 results, in the order above, so a lesson that
+   teaches the idea comes before the questions that test it.
+
+   A question opens as a practice set of one, recorded like any other
+   practice answer; a lesson opens in the reader; the notes page opens the
+   notes pane. Glossary, abbreviation and formula results open in place. */
+PMP.Search = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on;
+  var MAX = 60;
+  var MIN_CHARS = 2;
+  var last = "";
+
+  function wordsOf(query) {
+    return String(query || "").toLowerCase().split(/\s+/).filter(function (w) { return !!w; });
+  }
+
+  function run(query, state) {
+    state = state || PMP.Store.state;
+    var words = wordsOf(query);
+    if (String(query || "").trim().length < MIN_CHARS || !words.length) return [];
+    function matches() {
+      var t = Array.prototype.join.call(arguments, " ").toLowerCase();
+      return words.every(function (w) { return t.indexOf(w) >= 0; });
+    }
+    function snip(text) {
+      text = String(text || "");
+      var i = Math.max(0, text.toLowerCase().indexOf(words[0]));
+      var from = Math.max(0, i - 50);
+      return (from > 0 ? "…" : "") + text.substring(from, Math.min(text.length, from + 160)).replace(/\n/g, " ").trim() +
+        (from + 160 < text.length ? "…" : "");
+    }
+    var out = [];
+    (PMP.LESSONS || []).forEach(function (l) {
+      var body = (l.sections || []).map(function (s) { return s.heading + " " + s.body; }).join(" ") + " " +
+        (l.recap || []).join(" ") + " " + (l.traps || []).join(" ");
+      if (matches(l.title, body)) out.push({ kind: "Lesson", title: l.id + " " + l.title,
+        snippet: snip(matches(l.title) ? (l.objectives || []).join(" ") : body), href: "#/learn?lesson=" + encodeURIComponent(l.id) });
+    });
+    (PMP.GLOSSARY || []).forEach(function (g) {
+      if (matches(g.t, g.d)) out.push({ kind: "Glossary", title: g.t, snippet: snip(g.d), detail: g.d });
+    });
+    (PMP.ABBREVIATIONS || []).forEach(function (a) {
+      if (matches(a.abbr, a.full, a.note || "")) out.push({ kind: "Abbreviation", title: a.abbr + " · " + a.full,
+        snippet: snip(a.note || a.full), detail: a.note || null });
+    });
+    (PMP.FORMULAS || []).forEach(function (g) {
+      (g.items || []).forEach(function (f) {
+        if (!matches(f.name, f.expr, f.reads || "", f.where || "", f.trap || "")) return;
+        out.push({ kind: "Formula", title: f.name + ": " + f.expr, snippet: snip(f.reads || f.where),
+          detail: [f.expr, f.where, f.reads, f.trap ? "Trap: " + f.trap : null].filter(function (x) { return !!x; }).join("\n\n") });
+      });
+    });
+    var pad = (state.notepad && state.notepad.text) || "";
+    if (pad && matches(pad)) out.push({ kind: "Your notes", title: "Notes page", snippet: snip(pad), notes: true });
+    var notes = state.notes || {};
+    Object.keys(notes).forEach(function (id) {
+      var q = PMP.Content.byId(id), note = notes[id];
+      if (!q || typeof note !== "string" || !note) return;
+      if (matches(note, q.stem)) out.push({ kind: "Your note on a question", title: note.split("\n")[0], snippet: snip(q.stem), question: q });
+    });
+    var pool = PMP.Content.all();
+    for (var i = 0; i < pool.length && out.length < MAX; i++) {
+      var q = pool[i];
+      if (!q || q.retired) continue;
+      if (matches(q.stem, q.explanation || "", q.mindset || "")) out.push({ kind: "Question", title: q.stem.slice(0, 120),
+        snippet: snip(q.explanation || q.stem), question: q });
+    }
+    return out.slice(0, MAX);
+  }
+
+  /* The words typed, marked in a snippet. Text nodes only: content is
+     never parsed as markup. */
+  function marked(text, words) {
+    var node = el("span"), lower = text.toLowerCase(), i = 0;
+    while (i < text.length) {
+      var best = -1, len = 0;
+      words.forEach(function (w) {
+        var at = lower.indexOf(w, i);
+        if (at >= 0 && (best < 0 || at < best || (at === best && w.length > len))) { best = at; len = w.length; }
+      });
+      if (best < 0) { node.appendChild(document.createTextNode(text.slice(i))); break; }
+      if (best > i) node.appendChild(document.createTextNode(text.slice(i, best)));
+      node.appendChild(el("mark", { text: text.slice(best, best + len) }));
+      i = best + len;
+    }
+    return node;
+  }
+
+  function openQuestion(q) {
+    PMP.Practice.startWith([q], "practice");
+    PMP.Router.navigate("practice");
+  }
+
+  function hitNode(h, words) {
+    var li = el("li", { class: "sr-hit", dataset: { kind: h.kind } });
+    li.appendChild(el("span", { class: "chip", text: h.kind }));
+    var title;
+    if (h.href) title = el("a", { class: "sr-t", href: h.href, text: h.title });
+    else if (h.question) title = el("button", { class: "sr-t sr-go", type: "button", onclick: function () { openQuestion(h.question); } }, h.title);
+    else if (h.notes) title = el("button", { class: "sr-t sr-go", type: "button", onclick: function () {
+      PMP.Notepad.setOpen(true);
+      PMP.Notepad.setTab("notes");
+    } }, h.title);
+    if (title) {
+      li.appendChild(el("h3", { class: "sr-h" }, [title]));
+      li.appendChild(el("p", { class: "sr-s" }, [marked(h.snippet, words)]));
+      if (h.question) li.appendChild(el("p", { class: "hint", text: "Opens as a practice set of one." }));
+    } else {
+      /* Opens in place: the definition, the expansion or the formula. */
+      var det = el("details", { class: "sr-det" }, [
+        el("summary", null, [el("span", { class: "sr-t", text: h.title })]),
+        el("p", { class: "sr-s sr-full", text: h.detail || h.snippet })
+      ]);
+      li.appendChild(det);
+      li.appendChild(el("p", { class: "sr-s sr-peek" }, [marked(h.snippet, words)]));
+      on(det, "toggle", function () { li.setAttribute("data-open", String(det.open)); });
+    }
+    return li;
+  }
+
+  function view(host, params) {
+    var q0 = params && params.q ? String(params.q) : last;
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Search" }),
+      el("h2", { text: "Search everything" }),
+      el("p", { text: "Lessons, the glossary, abbreviations, formulas, your notes and the questions. Every word you type has to appear. Press / from anywhere to come back here." })
+    ]));
+    var input = el("input", { class: "input sr-q", id: "search-q", type: "search", autocomplete: "off", spellcheck: "false",
+      placeholder: "Search lessons, terms, formulas, notes…", "aria-describedby": "search-n" });
+    input.value = q0;
+    var status = el("p", { class: "hint sr-n", id: "search-n" });
+    var results = el("ol", { class: "sr-list", id: "search-results", "aria-label": "Results" });
+    host.appendChild(el("form", { class: "card sr-form", role: "search", onsubmit: function (e) { e.preventDefault(); paint(true); } }, [
+      el("label", { class: "field", for: "search-q" }, [el("span", { class: "lbl", text: "Search for" }), input]),
+      status
+    ]));
+    host.appendChild(results);
+
+    var timer = null;
+    function paint(say) {
+      var q = input.value;
+      last = q;
+      var words = wordsOf(q);
+      var hits = run(q);
+      results.innerHTML = "";
+      hits.forEach(function (h) { results.appendChild(hitNode(h, words)); });
+      var msg = q.trim().length < MIN_CHARS ? "Type at least two letters." :
+        !hits.length ? "Nothing found." : hits.length >= MAX ? "First " + MAX + " results." : PMP.fmt.plural(hits.length, "result") + " found.";
+      status.textContent = msg;
+      if (say) PMP.UI.announce(msg);
+    }
+    on(input, "input", function () {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function () { timer = null; paint(true); }, 200);
+    });
+    paint(false);
+    setTimeout(function () { try { input.focus(); } catch (e) { /* the view keeps focus */ } }, 0);
+  }
+
+  PMP.Router.register("search", { title: "Search", render: view });
+
+  /* "/" from anywhere: not while typing in a box, not with a dialog open,
+     and never during a mock, which owns the page. */
+  on(document, "keydown", function (e) {
+    if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target, tag = t && t.tagName ? t.tagName.toUpperCase() : "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
+    var dlg = document.getElementById("sheet");
+    if (dlg && dlg.open) return;
+    if (PMP.Store.state.ui.examActive) return;
+    e.preventDefault();
+    if (PMP.Router.current && PMP.Router.current.name === "search") {
+      var box = document.getElementById("search-q");
+      if (box) { box.focus(); box.select(); }
+      return;
+    }
+    PMP.Router.navigate("search");
+  });
+
+  return { run: run, MAX: MAX };
+})();
+
+
+/* ── 10.23  READING COMFORT AND THE STREAK SETTINGS ──────────────────────────
+   Text size, line spacing and a reading guide, for questions and lessons,
+   and the rest-day rule for the streak. Ported from the Android app's
+   Study settings (Reading.kt, StudySettingsScreen.kt): Normal, Large and
+   Larger are ×1, ×1.15 and ×1.3; roomier lines are ×1.18; the guide is a
+   soft band on one line of the question stem that moves to the line
+   clicked, or with the arrow keys once the stem has focus.
+
+   The sizes are applied by custom properties on <html>, and only while
+   something differs from the defaults (data-read), so at the defaults not
+   one rule here applies and every surface draws exactly as it did. The real
+   exam's screen cannot be changed this way, which the setting says, so the
+   reading drills still matter.
+
+   Reading comfort is device-only (§10.18 leaves it out of the shared
+   document): the size that suits a phone is not the size that suits a
+   desk. Rest days travel, as plan.rest. */
+PMP.Reading = (function () {
+  var el = PMP.dom.el, on = PMP.dom.on;
+  var SIZES = [[1, "Normal"], [1.15, "Large"], [1.3, "Larger"]];
+  var ROOMY = 1.18;
+
+  function prefs(state) {
+    var r = (state || PMP.Store.state).settings.reading || {};
+    var scale = SIZES.some(function (s) { return s[0] === r.scale; }) ? r.scale : 1;
+    return { scale: scale, roomy: !!r.roomy, guide: !!r.guide };
+  }
+
+  function apply(state) {
+    var p = prefs(state), root = document.documentElement;
+    var active = p.scale !== 1 || p.roomy;
+    if (active) {
+      root.setAttribute("data-read", "on");
+      root.style.setProperty("--rd-scale", String(p.scale));
+      root.style.setProperty("--rd-lh", String(p.roomy ? ROOMY : 1));
+    } else {
+      root.removeAttribute("data-read");
+      root.style.removeProperty("--rd-scale");
+      root.style.removeProperty("--rd-lh");
+    }
+  }
+
+  /* A question stem. Without the guide, exactly the element it always was. */
+  function stem(text) {
+    var p = el("p", { class: "q-stem", text: text });
+    if (!prefs().guide) return p;
+    var line = 0;
+    var band = el("span", { class: "rg-band", "aria-hidden": "true" });
+    p.appendChild(band);
+    p.setAttribute("data-guide", "true");
+    p.setAttribute("tabindex", "0");
+    p.setAttribute("title", "Reading guide: click a line, or use the up and down arrow keys, to move the band.");
+    function lines() {
+      var lh = parseFloat(getComputedStyle(p).lineHeight) || 24;
+      return { lh: lh, n: Math.max(1, Math.round(p.clientHeight / lh)) };
+    }
+    function move(to) {
+      var L = lines();
+      line = Math.max(0, Math.min(L.n - 1, to));
+      p.style.setProperty("--rg-line", String(line));
+      p.setAttribute("data-line", String(line));
+    }
+    on(p, "click", function (e) {
+      var r = p.getBoundingClientRect(), L = lines();
+      move(Math.floor((e.clientY - r.top) / L.lh));
+    });
+    on(p, "keydown", function (e) {
+      if (e.key === "ArrowDown") { e.preventDefault(); move(line + 1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); move(line - 1); }
+    });
+    return p;
+  }
+
+  function save(mutate, message) {
+    PMP.Store.commit(["settings"], function (s) {
+      var st = s.settings;
+      st.reading = Object.assign({ scale: 1, roomy: false, guide: false }, st.reading || {});
+      mutate(st);
+    });
+    PMP.UI.toast(message || "Saved.", "ok");
+  }
+
+  function onOff(id, value) {
+    var sel = el("select", { class: "select", id: id });
+    sel.appendChild(el("option", { value: "on", text: "On", selected: !!value }));
+    sel.appendChild(el("option", { value: "off", text: "Off", selected: !value }));
+    return sel;
+  }
+
+  /* ── 10.23.1  THE SETTINGS CARD ──────────────────────────────────────── */
+  function settingsCard(state) {
+    var p = prefs(state);
+    var card = el("section", { class: "card", id: "set-study", "aria-labelledby": "set-study-h" }, [
+      el("span", { class: "eyebrow", text: "Study settings" }),
+      el("h2", { id: "set-study-h", text: "Reading comfort and your streak" }),
+      el("p", { text: "For questions and lessons. The real exam's screen can't be changed this way, so the reading drills still matter. Kept on this device." })
+    ]);
+    var size = el("fieldset", { class: "rd-size" }, [el("legend", { class: "lbl", text: "Text size" })]);
+    SIZES.forEach(function (s, i) {
+      var id = "set-read-size-" + i;
+      var input = el("input", { type: "radio", name: "set-read-size", id: id, value: String(s[0]), checked: p.scale === s[0] });
+      on(input, "change", function () {
+        if (!input.checked) return;
+        save(function (st) { st.reading.scale = s[0]; }, "Text size: " + s[1] + ".");
+        paintPreview();
+      });
+      size.appendChild(el("label", { class: "rd-opt", for: id }, [input, el("span", { text: s[1] })]));
+    });
+    var roomy = onOff("set-read-roomy", p.roomy);
+    on(roomy, "change", function () {
+      var v = roomy.value === "on";
+      save(function (st) { st.reading.roomy = v; }, v ? "More space between lines." : "Normal line spacing.");
+      paintPreview();
+    });
+    var guide = onOff("set-read-guide", p.guide);
+    on(guide, "change", function () {
+      var v = guide.value === "on";
+      save(function (st) { st.reading.guide = v; }, v ? "Reading guide on." : "Reading guide off.");
+      paintPreview();
+    });
+    var rest = onOff("set-rest", state.settings.restDays !== false);
+    on(rest, "change", function () {
+      var v = rest.value === "on";
+      PMP.Store.commit(["settings"], function (s) { s.settings.restDays = v; });
+      PMP.UI.toast(v ? "Rest days on." : "Rest days off.", "ok");
+    });
+    card.appendChild(el("div", { class: "filters", style: "margin-top:var(--sp-4)" }, [
+      size,
+      el("label", { class: "field", for: "set-read-roomy" }, [el("span", { class: "lbl", text: "More space between lines" }), roomy]),
+      el("label", { class: "field", for: "set-read-guide" }, [el("span", { class: "lbl", text: "Reading guide" }), guide,
+        el("span", { class: "hint", text: "A soft band on one line of the question; click a line, or use the arrow keys, to move it." })])
+    ]));
+    var preview = el("div", { class: "rd-preview" });
+    function paintPreview() {
+      preview.innerHTML = "";
+      preview.appendChild(el("span", { class: "eyebrow", text: "Preview" }));
+      preview.appendChild(stem("A team member keeps missing stand-ups and the sprint goal is at risk. What should the project manager do FIRST?"));
+    }
+    paintPreview();
+    card.appendChild(preview);
+    card.appendChild(el("hr", { class: "rule" }));
+    card.appendChild(el("div", { class: "filters" }, [
+      el("label", { class: "field", for: "set-rest" }, [el("span", { class: "lbl", text: "Rest days" }), rest,
+        el("span", { class: "hint", text: "One missed day a week doesn't break your streak. Readiness still counts real study days." })])
+    ]));
+    return card;
+  }
+
+  PMP.Store.subscribe(function (state, changed) {
+    if (changed.indexOf("settings") >= 0 || changed.indexOf("sys") >= 0) apply(state);
+  });
+
+  return { SIZES: SIZES, ROOMY: ROOMY, prefs: prefs, apply: apply, stem: stem, settingsCard: settingsCard };
 })();
 
 
