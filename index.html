@@ -2346,6 +2346,26 @@ mark.np-h-none { background: transparent; }
 }
 @media (min-width: 1500px) { :root { --np-w: 400px; } }
 
+/* ── 03.23  CLOUD SYNC — §10.18 ─────────────────────────────────────────────
+   The setup guide is a numbered list a person works down with another tab
+   open beside it, so each step is a block with room around it, and the
+   values to copy (the code, the address) are set in the mono face so a
+   0 and an O cannot be confused. */
+.seg { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-4); }
+.seg .btn[aria-pressed="true"] { border-color: currentColor; font-weight: var(--w-semi); }
+.sync-steps { margin: var(--sp-5) 0 0; padding-left: 1.4em; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); }
+.sync-steps > li { line-height: var(--lh-body); padding-left: var(--sp-2); min-width: 0; overflow-wrap: anywhere; }
+.sync-steps .filter-bar { margin-top: var(--sp-3); }
+.sync-code-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: baseline; margin: var(--sp-3) 0; }
+.sync-code { font-family: var(--font-mono); overflow-wrap: anywhere; word-break: break-all; }
+.sync-script { font-family: var(--font-mono); font-size: var(--t-xs); min-height: 10em; width: 100%; }
+.sync-connect { margin-top: var(--sp-3); display: grid; gap: var(--sp-3); max-width: 46rem; }
+.sync-url { overflow-wrap: anywhere; word-break: break-all; }
+.sync-status, .sync-msg { display: flex; gap: var(--sp-2); align-items: flex-start; margin-top: var(--sp-3); }
+.sync-status[data-kind="err"], .sync-msg[data-kind="err"] { color: var(--st-incorrect-fg); }
+.sync-status[data-kind="ok"], .sync-msg[data-kind="ok"] { color: var(--st-correct-fg); }
+.sync-reveal summary { cursor: pointer; margin-top: var(--sp-3); }
+
 /* ── 03.8  RESPONSIVE ───────────────────────────────────────────────────── */
 @media (min-width: 600px) {
   .view { padding-left: var(--sp-6); padding-right: var(--sp-6); }
@@ -2838,6 +2858,7 @@ function reply(obj) {
         04.1  skip link, live regions, app frame, nav rail
         04.2  view mount points (empty; §10 renders into them)
         04.3  dialog + toast hosts, no-storage banner, SVG icon sprite
+        04.4  the cloud sync script, verbatim from sync/pmp-sync.gs (§10.18)
 
    §05  DATA — CONTENT PACKS ............. JS constants, frozen
         05.1  ECO_TASKS — 26 task records, ids and paraphrases
@@ -18905,16 +18926,16 @@ PMP.COACH_MESSAGES = Object.freeze([
     action: { label: "Open the mock exam", route: "exam" } },
 
   { id: "cause_misread", priority: 60, cooldownDays: 7,
-    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "misread"; },
+    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "MISREAD_STEM"; },
     text: function () { return "Most of your misses are reading, not knowledge. Find the qualifier (first, next, best, except) before looking at the options."; } },
 
   { id: "cause_mindset", priority: 60, cooldownDays: 7,
-    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "mindset"; },
+    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "WRONG_MINDSET"; },
     text: function () { return "Most misses are the right move at the wrong moment. Two scenario sets this week will help more than more questions."; },
     action: { label: "Open scenarios", route: "scenarios" } },
 
   { id: "cause_knowledge", priority: 60, cooldownDays: 7,
-    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "knowledge"; },
+    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "KNOWLEDGE_GAP"; },
     text: function () { return "Most misses are material you hadn't met. Lessons first, then the questions on them."; },
     action: { label: "Open lessons", route: "learn" } },
 
@@ -20433,10 +20454,42 @@ PMP.validate = (function () {
     return r;
   }
 
+  /* Three progress files are read (§10.18.5): the shared format, version 3;
+     a phone's own version 2 ("pmp-android-progress"), which has the same
+     slices; and this app's legacy version 2, which carries the store's
+     slices under schemaVersion. Only the shape is checked here. */
+  var SHARED_ARRAYS = ["attempts", "flags", "scenarios", "mocks", "lessons", "sessions", "diagnostics",
+                       "chat", "sittings", "checkins", "weekly", "mycards", "drills"];
+  var SHARED_OBJECTS = ["notes", "mistakes", "cards", "snoozed", "plan", "web", "native"];
+  function sharedShape(obj, r) {
+    SHARED_ARRAYS.forEach(function (k) {
+      if (k in obj && obj[k] != null && !Array.isArray(obj[k])) r.err(k, "Expected a list.");
+    });
+    SHARED_OBJECTS.forEach(function (k) {
+      if (k in obj && obj[k] != null && (typeof obj[k] !== "object" || Array.isArray(obj[k]))) r.err(k, "Expected an object.");
+    });
+    if ("notepad" in obj && obj.notepad != null && typeof obj.notepad !== "string") r.err("notepad", "Expected text.");
+    if (!Array.isArray(obj.attempts)) r.warn("attempts", "No answers in the file.");
+  }
+
   function progress(obj) {
     var r = new Result();
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) { r.err("file", "The file does not contain a JSON object."); return r; }
+    if (obj.type === "pmp-android-progress") {
+      if (obj.version !== 2) r.err("version", "This is an Android backup in format " + obj.version + ". This build reads format 2 from Android, and format 3 from any app.");
+      else sharedShape(obj, r);
+      return r;
+    }
+    if (obj.type === "pmp-progress" && obj.schemaVersion === undefined && obj.version !== undefined) {
+      if (typeof obj.version !== "number") r.err("version", "Missing a version number.");
+      else if (obj.version > 3) r.err("version", "This file uses progress format " + obj.version + ". This build reads up to 3. Update the app, or export again from the older version.");
+      else if (obj.version < 3) r.err("version", "Progress format " + obj.version + " is not one this build reads.");
+      else sharedShape(obj, r);
+      return r;
+    }
     if (!checkVersion(obj, "pmp-progress", r)) return r;
     PMP.STORE_CFG.PERSISTED.forEach(function (k) {
+      if (k === "drills" || k === "shared") return;
       if (!(k in obj)) { r.warn(k, "Not present in the file; the current value will be kept."); return; }
       var expected = Array.isArray(PMP.Store.defaults()[k]) ? "array" : typeof PMP.Store.defaults()[k];
       var actual = Array.isArray(obj[k]) ? "array" : typeof obj[k];
@@ -20684,10 +20737,16 @@ PMP.Exporter = (function () {
     });
   }
 
+  /* The shared format, version 3 (§10.18), which every app reads. If that
+     cannot be built — this is also the crash handler's way out — the raw
+     store goes out instead, which this app can still read back. */
   function exportProgress() {
     var text;
-    try { text = JSON.stringify(PMP.Store.snapshot(), null, 2); }
-    catch (e) { PMP.UI.toast("Your progress could not be turned into a backup file.", "err"); return Promise.resolve(); }
+    try { text = JSON.stringify(PMP.Sync.toDoc(PMP.Store.state, { savedAt: Date.now() }), null, 2); }
+    catch (e) {
+      try { text = JSON.stringify(PMP.Store.snapshot(), null, 2); }
+      catch (e2) { PMP.UI.toast("Your progress could not be turned into a backup file.", "err"); return Promise.resolve(); }
+    }
     return offer(text, filename("pmp-progress"), "Export progress");
   }
 
@@ -21750,6 +21809,7 @@ PMP.Practice = (function () {
     }
     cleanup();
     repaint();
+    if (PMP.Sync) PMP.Sync.auto("practice");
   }
 
   /* What the set came to. Skipped items count in n and earn nothing, so
@@ -23597,6 +23657,7 @@ PMP.Exam = (function () {
     live = null;
     reviewing = record.id;
     repaint();
+    if (PMP.Sync) PMP.Sync.auto("mock");
   }
 
   /* ── 10.03.12  RESULTS ───────────────────────────────────────────────── */
@@ -24954,7 +25015,10 @@ PMP.Cards = (function () {
 
     session.i++;
     session.revealed = false;
-    if (session.i >= session.queue.length) session.finished = true;
+    if (session.i >= session.queue.length) {
+      session.finished = true;
+      if (PMP.Sync) PMP.Sync.auto("cards");
+    }
     repaint();
   }
 
@@ -29533,70 +29597,13 @@ PMP.Data = (function () {
   function exportProgress() { return PMP.Exporter.exportProgress(); }
 
   /* ── 10.13.4  PROGRESS IN ────────────────────────────────────────────────
-     The list slices are unioned by id, so importing the same backup twice
-     does not double anyone's attempt history. The map slices take the
-     incoming value on a clash, which is the only rule that behaves sensibly
-     when the file is newer than the device. Replace wipes first. */
-  var LIST_SLICES = ["attempts", "exams", "journal", "issues", "scenarioRuns"];
-  var MAP_SLICES = ["srs", "notes", "flags", "lessons"];
-  var WHOLE_SLICES = ["settings", "planner", "packs", "queue", "examRun", "coach", "notepad"];
-
-  function planProgressMerge(obj) {
-    var state = PMP.Store.state;
-    var plan = { rows: [], newRecords: 0, updated: 0 };
-
-    LIST_SLICES.forEach(function (k) {
-      var incoming = Array.isArray(obj[k]) ? obj[k] : null;
-      if (!incoming) { plan.rows.push({ slice: k, note: "not in the file, kept as is", add: 0, keep: (state[k] || []).length }); return; }
-      var have = Object.create(null);
-      (state[k] || []).forEach(function (r) { if (r && r.id) have[r.id] = true; });
-      var add = incoming.filter(function (r) { return r && r.id && !have[r.id]; }).length;
-      var dupe = incoming.length - add;
-      plan.newRecords += add;
-      plan.rows.push({ slice: k, add: add, keep: (state[k] || []).length, dupe: dupe,
-        note: add + " new, " + dupe + " already here" });
-    });
-
-    MAP_SLICES.forEach(function (k) {
-      var incoming = obj[k] && typeof obj[k] === "object" ? obj[k] : null;
-      if (!incoming) { plan.rows.push({ slice: k, note: "not in the file, kept as is", add: 0, keep: Object.keys(state[k] || {}).length }); return; }
-      var keys = Object.keys(incoming);
-      var over = keys.filter(function (kk) { return (state[k] || {})[kk] !== undefined; }).length;
-      plan.newRecords += keys.length - over;
-      plan.updated += over;
-      plan.rows.push({ slice: k, add: keys.length - over, keep: Object.keys(state[k] || {}).length, dupe: over,
-        note: (keys.length - over) + " new, " + over + " overwritten by the file" });
-    });
-
-    WHOLE_SLICES.forEach(function (k) {
-      if (!(k in obj)) { plan.rows.push({ slice: k, note: "not in the file, kept as is" }); return; }
-      plan.rows.push({ slice: k, note: "kept as is unless you choose Replace" });
-    });
-
-    return plan;
-  }
-
-  function applyProgress(obj, mode) {
-    var keys = PMP.STORE_CFG.PERSISTED.slice();
-    PMP.Store.commit(keys, function (s) {
-      if (mode === "replace") {
-        var fresh = PMP.Store.defaults();
-        keys.forEach(function (k) { s[k] = (k in obj && obj[k] != null) ? obj[k] : fresh[k]; });
-        return;
-      }
-      LIST_SLICES.forEach(function (k) {
-        if (!Array.isArray(obj[k])) return;
-        var have = Object.create(null);
-        (s[k] || []).forEach(function (r) { if (r && r.id) have[r.id] = true; });
-        obj[k].forEach(function (r) { if (r && r.id && !have[r.id]) { s[k].push(r); have[r.id] = true; } });
-      });
-      MAP_SLICES.forEach(function (k) {
-        if (!obj[k] || typeof obj[k] !== "object") return;
-        Object.keys(obj[k]).forEach(function (kk) { s[k][kk] = obj[k][kk]; });
-      });
-    });
-    PMP.Store.flush();
-  }
+     Every progress file goes through §10.18: a version 3 file from any app,
+     a phone's version 2, or this app's own legacy version 2 is first turned
+     into one shared document. Merge is then the shared three-way merge with
+     an empty base, so nothing is ever lost from either side: answers and
+     other logs are united, and where a note, a tag or a card differs the
+     newer copy wins. Replace takes the file as it is. */
+  var APP_NAME = { web: "the web app", android: "Android", ios: "iPhone" };
 
   function importProgress(text) {
     var parsed = PMP.validate.parseJSON(text);
@@ -29619,8 +29626,16 @@ PMP.Data = (function () {
       return;
     }
 
-    var obj = parsed.value;
-    var plan = planProgressMerge(obj);
+    var raw = parsed.value, doc;
+    try { doc = PMP.Sync.fromFile(raw); }
+    catch (e) {
+      PMP.UI.sheet({ title: "That progress file was refused",
+        body: el("p", { text: "It passed the shape check but could not be read as progress. Nothing has been changed." }),
+        actions: [{ id: "close", label: "Close", primary: true }] });
+      return;
+    }
+    var local = PMP.Sync.toDoc(PMP.Store.state);
+    var plan = PMP.Sync.mergePlan(local, doc);
     var tbl = el("table", { class: "tbl" }, [
       el("thead", null, [el("tr", null, [
         el("th", { text: "Section" }), el("th", { class: "n", text: "Here now" }), el("th", { text: "What merging does" })
@@ -29636,11 +29651,16 @@ PMP.Data = (function () {
     });
     tbl.appendChild(body);
 
+    var from = raw.type === "pmp-android-progress" ? "Android, format 2"
+      : raw.schemaVersion !== undefined ? "the web app, legacy format v" + raw.schemaVersion
+      : (APP_NAME[(raw.device && raw.device.app) || ""] || "an app") + ", format 3";
+    var when = raw.exportedAt || (raw.savedAt ? new Date(raw.savedAt).toISOString() : null);
+
     PMP.UI.sheet({
       title: "Import this backup?",
       body: frag([
-        el("p", { text: "Exported " + PMP.fmt.dateShort(obj.exportedAt) + ", schema v" + obj.schemaVersion + "." }),
-        el("p", { text: "Merging adds " + PMP.fmt.plural(plan.newRecords, "record") + " and overwrites " + plan.updated + " where the same note, flag or card exists in both. Replacing throws away everything on this device first." }),
+        el("p", { text: "Saved " + PMP.fmt.dateShort(when) + " by " + from + "." }),
+        el("p", { text: "Merging adds " + PMP.fmt.plural(plan.added, "record") + " and keeps everything already here; where the same note, tag or card differs (" + plan.clash + " here), the newer copy wins. Replacing throws away everything on this device first." }),
         tbl,
         result.warnings.length ? el("p", { style: "margin-top:var(--sp-4)", text: "Warnings:" }) : null,
         result.warnings.length ? errorList(result.warnings, "warn") : null
@@ -29652,15 +29672,15 @@ PMP.Data = (function () {
       ]
     }).then(function (choice) {
       if (choice === "merge") {
-        applyProgress(obj, "merge");
-        PMP.UI.toast("Merged " + PMP.fmt.plural(plan.newRecords, "record") + ".", "ok");
+        PMP.Sync.importMerge(doc);
+        PMP.UI.toast("Merged " + PMP.fmt.plural(plan.added, "record") + ".", "ok");
         PMP.Router.navigate("data", null, true);
       } else if (choice === "replace") {
         PMP.UI.confirm("Replace everything on this device?",
           "Every attempt, sitting, note, flag and card schedule here is deleted and replaced by the contents of the file. This cannot be undone.",
           "Replace it all", true).then(function (yes) {
           if (!yes) return;
-          applyProgress(obj, "replace");
+          PMP.Sync.importReplace(doc);
           PMP.UI.toast("Progress replaced from the file.", "ok");
           PMP.Router.navigate("data", null, true);
         });
@@ -29820,7 +29840,9 @@ PMP.Data = (function () {
       el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Everything this app knows about you lives on this device and travels in a file you control. Nothing about you is sent anywhere, and there is no analytics, no telemetry and no account. Opened from disk the file makes no network requests at all. Served over http it makes exactly one kind: a request for its own extended question packs, at a fixed path beside itself, carrying no credentials and no information about you \u2014 the same request the browser would make for an image. What came back, or did not, is itemised in the content audit." }),
-      el("p", { text: "The one exception is optional and yours to trigger: the Gemini tab in the notes pane. If you give it your own Google AI Studio API key, each message you send there goes from this page straight to Google under that key. Nothing is sent until you press Send, nothing else goes with it, and the key stays on this device, outside your backup file, and goes nowhere but Google." })
+      el("p", { text: "The one exception is optional and yours to trigger: the Gemini tab in the notes pane. If you give it your own Google AI Studio API key, each message you send there goes from this page straight to Google under that key. Nothing is sent until you press Send, nothing else goes with it, and the key stays on this device, outside your backup file, and goes nowhere but Google." }),
+      el("p", null, ["The other is Cloud sync, off unless you set it up: your progress then goes to one file in your own Google Drive, through a script you deploy in your own account, so your other devices can share it. ",
+        el("a", { href: "#/sync", text: "Cloud sync" }), " explains it and sets it up."])
     ]));
 
     host.appendChild(el("div", { class: "card" }, [
@@ -29843,7 +29865,7 @@ PMP.Data = (function () {
     host.appendChild(importCard({
       eyebrow: "Import \u00B7 progress",
       title: "Restore a backup",
-      blurb: "Merging adds anything the file has that this device does not, and never duplicates a record you already have. Replacing deletes everything here first, and asks twice before it does.",
+      blurb: "Reads backups from this app, Android and iPhone. Merging adds anything the file has that this device does not, and never duplicates a record you already have. Replacing deletes everything here first, and asks twice before it does.",
       pickLabel: "Choose a progress file",
       label: "Progress backup JSON",
       onText: importProgress
@@ -29908,7 +29930,7 @@ PMP.Data = (function () {
     host.appendChild(el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Danger" }),
       el("h2", { text: "Delete everything" }),
-      el("p", { text: "Removes every attempt, sitting, note, flag, report and card schedule from this device. Export a backup first if any of it matters." }),
+      el("p", { text: "Removes every attempt, sitting, note, flag, report and card schedule from this device. Export a backup first if any of it matters. With cloud sync on, the next sync brings your progress back from your Drive; disconnect it first to start afresh." }),
       el("div", { style: "margin-top:var(--sp-4)" }, [
         el("button", {
           class: "btn btn--danger", type: "button",
@@ -29918,6 +29940,7 @@ PMP.Data = (function () {
               "Delete everything", true).then(function (yes) {
               if (!yes) return;
               PMP.Store.clearAll().then(function () {
+                if (PMP.Sync) PMP.Sync.forgetBase();
                 PMP.UI.toast("All progress deleted.", "ok");
                 PMP.Router.navigate("data", null, true);
               });
@@ -33703,6 +33726,7 @@ PMP.Settings = (function () {
       ]),
       el("div", { class: "filter-bar" }, [
         el("a", { class: "btn btn--sm", href: "#/data" }, [icon("data"), "Backup and packs"]),
+        el("a", { class: "btn btn--sm", href: "#/sync" }, [icon("sync"), "Cloud sync"]),
         el("a", { class: "btn btn--sm", href: "#/audit" }, "Content audit")
       ])
     ]);
@@ -36131,7 +36155,11 @@ PMP.Sync = (function () {
   var ATTEMPT_MAPPED = { id: 1, qid: 1, ecoTask: 1, domain: 1, approach: 1, type: 1, difficulty: 1,
                          correct: 1, credit: 1, ms: 1, at: 1, confidence: 1, hinted: 1, mode: 1,
                          sx: 1, check: 1 };
-  function srcOf(mode) { return mode === "diagnostic" || mode === "lesson" ? mode : "practice"; }
+  /* A web lesson's practice-set answers are ordinary practice, so they go
+     out as src "practice" (mode "lesson" and the lessonId ride in wx) and
+     count towards mastery on the phones too. Only a phone's own src
+     "lesson" rows, its quick checks, are kept out (`check`). */
+  function srcOf(mode) { return mode === "diagnostic" ? mode : "practice"; }
   function modeOf(r) {
     if (r.src === "diagnostic" || r.src === "lesson" || r.src === "exam") return r.src;
     return r.tm ? "timed" : "practice";
@@ -36371,6 +36399,8 @@ PMP.Sync = (function () {
     var settings = obj(state.settings);
     var plan = isObj(sh.plan) ? clone(sh.plan) : null;
     if (settings.examDate) {
+      /* `days` are calendar weekdays, Sunday 1 to Saturday 7 (not JS getDay,
+         which counts Sunday as 0). The web plans every day, so all seven. */
       if (!plan) plan = { examDate: 0, hours: 10, days: [1, 2, 3, 4, 5, 6, 7], onboarded: true, rest: true };
       if (!plan.examDate || ymdOf(plan.examDate) !== String(settings.examDate).slice(0, 10)) plan.examDate = msOf(settings.examDate);
     } else if (plan) {
@@ -37133,6 +37163,7 @@ PMP.Sync = (function () {
     ]));
     if (cfg) {
       host.appendChild(statusCard(cfg));
+      paintStatus();
       host.appendChild(devicesCard(cfg));
     } else {
       statusNode = null;
@@ -38972,6 +39003,8 @@ PMP.GeminiChat = (function () {
         PMP.Router.start();
         offerResume();
         loadExtendedPacks();
+        /* Off unless set up (§10.18); never during a sitting. */
+        PMP.Sync.auto("open");
       });
   }
 

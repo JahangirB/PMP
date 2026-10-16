@@ -69,7 +69,7 @@ jobs:
           mkdir -p screenshots
           for mode in light dark; do
             xcrun simctl ui "$udid" appearance $mode
-            for screen in path practice question mock flashcards learn analytics fitness reports book coach menu settings sync; do
+            for screen in path practice question mock flashcards learn analytics formulas fitness reports book coach menu settings sync; do
               xcrun simctl terminate "$udid" com.jahangirb.pmpprep 2>/dev/null || true
               xcrun simctl launch "$udid" com.jahangirb.pmpprep -uiScreen $screen -uiDemo 1 >/dev/null
               sleep 4

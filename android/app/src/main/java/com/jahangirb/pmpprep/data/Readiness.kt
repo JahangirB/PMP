@@ -113,6 +113,8 @@ class Readiness(
         store.mocks.forEach { days += Srs.startOfDay(it.at) }
         store.scenarioRuns.forEach { days += Srs.startOfDay(it.at) }
         store.cards.values.forEach { if (it.last > 0) days += Srs.startOfDay(it.last) }
+        // A formula-lab drill makes a study day too (index.html §10.00.6), though it never touches accuracy.
+        store.drills.forEach { days += Srs.startOfDay(it.at) }
         val today = Srs.startOfDay(now)
         val kept = if (store.plan.restDays) withRestDays(days, today) else days
         var cursor = if (today in kept) today else prevDay(today)

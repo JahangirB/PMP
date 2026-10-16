@@ -16,18 +16,18 @@ struct FormulaLabScreen: View {
             switch tab {
             case 0: CalculatorTab()
             case 1: FormulaSheet()
-            default: Drills()
+            default: DrillLab()
             }
         }
     }
 }
 
 /** "1,234.5" → 1234.5; anything unreadable is NaN, which the calculators show as "—". */
-private func labNum(_ s: String) -> Double {
+func labNum(_ s: String) -> Double {
     Double(s.replacingOccurrences(of: ",", with: "").trimmingCharacters(in: .whitespaces)) ?? .nan
 }
 
-private struct NumField: View {
+struct NumField: View {
     let label: String
     @Binding var value: String
     var negative = false
@@ -47,7 +47,7 @@ private struct NumField: View {
     }
 }
 
-private struct CalcResults: View {
+struct CalcResults: View {
     let lines: [CalcLine]
     var body: some View {
         ForEach(lines) { l in
@@ -70,7 +70,7 @@ private struct CalcResults: View {
 
 private struct CalculatorTab: View {
     @State private var calc = 0
-    private let names = ["EVM", "PERT", "PTA", "EMV", "Channels", "Finance", "Agile"]
+    private let names = ["EVM", "PERT", "PTA", "EMV", "Channels", "Finance", "Agile", "Decision tree", "Float & critical path", "NPV · IRR · payback"]
 
     @State private var pv = "80000"
     @State private var ev = "70000"
@@ -135,6 +135,12 @@ private struct CalculatorTab: View {
                 if !y.isNaN && y >= 1 && y <= 100 {
                     CalcResults(lines: Calculators.finance(investment: labNum(inv), annualBenefit: labNum(ben), years: Int(y), ratePct: labNum(rate)))
                 }
+            case 7:
+                TreeCalc()
+            case 8:
+                NetworkCalc()
+            case 9:
+                CashCalc()
             default:
                 HStack(spacing: 8) { NumField(label: "Work in progress", value: $wip); NumField(label: "Throughput / week", value: $thr) }
                 CalcResults(lines: Calculators.littlesLaw(wip: labNum(wip), throughputPerWeek: labNum(thr)))
@@ -196,13 +202,14 @@ private struct FormulaCard: View {
     }
 }
 
-private struct Drills: View {
+/** Worked calculation questions from the question banks, under the generated drills. */
+struct BankCalcDrills: View {
     @EnvironmentObject private var m: AppModel
 
     var body: some View {
         let numeric = m.pool().filter { q in q.base == .fillblank && q.blanks.contains { $0.numeric } }
-        ScreenScroll {
-            Text("Calculation drills").font(.nunito(20, .heavy))
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Calculation questions from your banks").font(.nunito(17, .heavy))
             Text("\(numeric.count) worked calculation questions from your question banks, marked to the tolerance their authors set.")
                 .font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant)
             ForEach([5, 10, 20], id: \.self) { n in

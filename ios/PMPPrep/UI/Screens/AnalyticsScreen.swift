@@ -16,6 +16,7 @@ struct AnalyticsScreen: View {
                 Button("How the score works") { m.navigate(.GUIDE) }.textButton()
             }
             componentsCard(report)
+            AnalyticsCharts()
             studyDaysCard(streak)
             if m.store.mocks.count >= 2 {
                 PmpCard {

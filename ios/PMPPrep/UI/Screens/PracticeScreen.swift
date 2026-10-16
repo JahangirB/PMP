@@ -66,12 +66,17 @@ private struct PSSetup: View {
         PracticeFilter.Which.allCases.map { ($0, $0.title) }
     }
 
+    private var modeOptions: [(Bool, String)] {
+        [(false, "Practice with feedback"), (true, "Adaptive: lean towards my weak tasks")]
+    }
+
     var body: some View {
         let f = m.filter
         let matches = m.matching(f).count
         let missed = m.store.last.values.filter { !$0.correct }.count
         let flagged = m.store.flags.count
         let reviews = m.reviewDueCount()
+        let queued: Int = m.queuedQuestions().count
         VStack(spacing: 0) {
             ScreenScroll {
                 ScreenTitle(title: "Build a drill",
@@ -83,7 +88,11 @@ private struct PSSetup: View {
                     if reviews > 0 {
                         Button("\(reviews) missed, due for review") { m.startReview() }.primaryButton()
                     }
+                    if queued > 0 {
+                        Button("From your last mock (\(queued))") { m.startQueue() }.primaryButton()
+                    }
                     Button("10 mixed") { m.startPractice(PracticeFilter(count: 10), title: "Mixed practice") }.outlinedButton()
+                    Button("10 adaptive") { m.startPractice(PracticeFilter(count: 10, adaptive: true), title: "Adaptive drill") }.outlinedButton()
                     Button("20 new") { m.startPractice(PracticeFilter(which: .NEW, count: 20), title: "New questions") }.outlinedButton()
                     Button("Redo \(missed) mistakes") { m.startPractice(PracticeFilter(which: .MISSED, count: 40), title: "Mistakes") }
                         .outlinedButton().disabled(missed == 0)
@@ -133,6 +142,12 @@ private struct PSSetup: View {
         ChoiceSelector(label: "Question type", options: typeOptions, selected: f.type) { t in change { $0.type = t } }
         ChoiceSelector(label: "Approach", options: approachOptions, selected: f.approach) { a in change { $0.approach = a } }
         ChoiceSelector(label: "Which questions", options: whichOptions, selected: f.which) { w in change { $0.which = w } }
+        ChoiceSelector(label: "Mode", options: modeOptions, selected: f.adaptive) { a in change { $0.adaptive = a } }
+        if f.adaptive {
+            Text("Questions are drawn towards the ECO tasks you are weakest on, with unseen ones favoured and ones you got right last time held back.")
+                .font(.nunito(12)).foregroundStyle(Palette.onSurfaceVariant)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 }
 
@@ -314,6 +329,9 @@ struct QuizRunner: View {
                          struck: s.struck[q.id] ?? [],
                          onStrike: revealed || s.reviewOnly ? nil : { id in m.toggleStrike(s, q, id) },
                          onAnswer: { a in m.answer(s, q, a) })
+            if m.hintsAvailable(s) {
+                PSHints(s: s, q: q)
+            }
             if !revealed && !s.reviewOnly && s.index < 2 && (s.struck[q.id] ?? []).isEmpty && (s.marks[q.id] ?? []).isEmpty {
                 Text("Tip: long-press an option to cross it out; long-press words in the question to highlight them.")
                     .font(.nunito(12)).foregroundStyle(Palette.onSurfaceVariant)
@@ -419,6 +437,56 @@ struct QuizRunner: View {
                 }
             }
         }
+    }
+}
+
+/** The hint ladder: a button that shows the next rung, and the rungs shown so far. */
+private struct PSHints: View {
+    @EnvironmentObject private var m: AppModel
+    @ObservedObject var s: QuizSession
+    let q: Question
+
+    var body: some View {
+        let used: Int = s.hints[q.id] ?? 0
+        let shown: [HintLadder.Hint] = s.hintsShown[q.id] ?? []
+        let checked: Bool = s.isChecked(q)
+        let left: Int = HintLadder.RUNGS - used
+        VStack(alignment: .leading, spacing: 8) {
+            if !checked {
+                Button { m.nextHint(s, q) } label: {
+                    Label(used == 0 ? "Hint" : (left > 0 ? "Another hint" : "No more hints"), systemImage: "lightbulb")
+                }
+                .outlinedButton()
+                .disabled(left <= 0)
+                .accessibilityHint(used == 0 ? "Shows a nudge without giving the answer away" : "")
+            }
+            if !shown.isEmpty {
+                Text(HintLadder.NOTE)
+                    .font(.nunito(12)).foregroundStyle(Palette.onSurfaceVariant)
+                    .fixedSize(horizontal: false, vertical: true)
+                ForEach(shown.indices, id: \.self) { i in
+                    PSHintCard(hint: shown[i])
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.top, 12)
+    }
+}
+
+private struct PSHintCard: View {
+    let hint: HintLadder.Hint
+
+    var body: some View {
+        PmpCard(container: Palette.tertiaryContainer.opacity(0.55)) {
+            Text("HINT \(hint.rung) OF \(HintLadder.RUNGS)")
+                .font(.nunito(11, .bold)).tracking(0.8).foregroundStyle(Palette.onTertiaryContainer)
+            Text(hint.text).font(.nunito(14, .bold)).fixedSize(horizontal: false, vertical: true)
+            if let d = hint.detail {
+                Text(d).font(.nunito(14)).lineSpacing(3).fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
     }
 }
 

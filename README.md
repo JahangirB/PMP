@@ -72,6 +72,21 @@ uses the same question banks as the Android app. See [`ios/README.md`](ios/READM
 Open `index.html` in a browser. It is the whole app in one file and works
 offline. Served over http it also loads the extended packs in `packs/`.
 
+Backups (Backup and packs → Export progress) use the shared progress format,
+version 3, described in [docs/progress-format.md](docs/progress-format.md), so
+a backup from the web, Android or iPhone app can be restored on any of them.
+The web app also still reads its own older backups.
+
+**Cloud sync** keeps the web, Android and iPhone apps in step through one file
+in your own Google Drive. It is off until you set it up: open Cloud sync (in
+the menu, or from Settings), copy the script it shows (`sync/pmp-sync.gs`, with
+a random sync code already filled in), deploy it at
+[script.google.com](https://script.google.com) as a web app, and paste its URL
+back. Other devices choose "I already have a script" and use the same URL and
+code. The address and code stay on each device and never go into a backup.
+
+Tests: `node tests/run.js [filter]` (Playwright, Chromium).
+
 ## Writing questions
 
 [`AUTHORING.md`](AUTHORING.md) describes the question pack format. The same

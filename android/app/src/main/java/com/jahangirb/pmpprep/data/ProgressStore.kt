@@ -8,6 +8,14 @@ import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.Executors
 
+/**
+ * One formula-lab drill problem marked or shown (index.html §10.06.10a), the shared `drills` log:
+ * [generator] is the problem kind's stable id ("evm-variance", "float" …), [ok] true only for a right
+ * answer ("close" and "shown" are not). Kept apart from attempts, so drills never touch accuracy,
+ * but a day with one on it is a study day.
+ */
+data class DrillRun(val at: Long, val generator: String, val ok: Boolean)
+
 /** One answer, as it happened. Analytics, readiness and the mistake journal are all computed from these. */
 data class Attempt(
     val qid: String,
@@ -187,6 +195,8 @@ class ProgressStore(private val dir: File) {
     val weekly = ArrayList<WeeklyReport>()
     /** Flashcards you made from your own mistakes (deck [MY_DECK]). */
     val myCards = ArrayList<Flashcard>()
+    /** Formula-lab drills, oldest first, capped at [MAX_DRILLS]. */
+    val drills = ArrayList<DrillRun>()
 
     /** Latest attempt per question. */
     val last = HashMap<String, Attempt>()
@@ -266,6 +276,13 @@ class ProgressStore(private val dir: File) {
     }
 
     @Synchronized
+    fun recordDrill(d: DrillRun) {
+        drills += d
+        if (drills.size > MAX_DRILLS) drills.subList(0, drills.size - MAX_DRILLS).clear()
+        changed()
+    }
+
+    @Synchronized
     fun recordCheckIn(c: CheckIn) {
         checkIns += c
         changed()
@@ -334,7 +351,7 @@ class ProgressStore(private val dir: File) {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear(); plan = StudyPlan()
         notepad = ""; diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
-        sittings.clear(); checkIns.clear(); weekly.clear(); myCards.clear()
+        sittings.clear(); checkIns.clear(); weekly.clear(); myCards.clear(); drills.clear()
         changed()
     }
 
@@ -454,6 +471,7 @@ class ProgressStore(private val dir: File) {
             checkIns.forEach { put(JSONObject().put("at", it.at).put("kind", it.kind).put("v", it.value).put("items", JSONArray(it.items))) }
         })
         put("weekly", JSONArray().apply { weekly.forEach { put(it.toJson()) } })
+        put("drills", JSONArray().apply { drills.forEach { put(JSONObject().put("at", it.at).put("g", it.generator).put("ok", it.ok)) } })
         put("mycards", JSONArray().apply {
             myCards.forEach { put(JSONObject().put("id", it.id).put("t", it.ecoTask ?: "").put("f", it.front).put("b", it.back).put("n", it.note)) }
         })
@@ -465,13 +483,22 @@ class ProgressStore(private val dir: File) {
         attempts.clear(); flags.clear(); notes.clear(); mistakeTags.clear(); cards.clear()
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear()
         diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
-        sittings.clear(); checkIns.clear(); weekly.clear(); myCards.clear()
+        sittings.clear(); checkIns.clear(); weekly.clear(); myCards.clear(); drills.clear()
         notepad = o.optString("notepad", "")
         o.optJSONArray("mycards")?.let { arr ->
             for (i in 0 until arr.length()) {
                 val c = arr.optJSONObject(i) ?: continue
                 myCards += Flashcard(c.optString("id"), MY_DECK, c.optString("t").ifEmpty { null }, c.optString("f"), c.optString("b"), c.optString("n"))
             }
+        }
+        o.optJSONArray("drills")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val d = arr.optJSONObject(i) ?: continue
+                val at = d.optLong("at")
+                if (at > 0) drills += DrillRun(at, d.optString("g", "unknown"), d.optBoolean("ok"))
+            }
+            drills.sortBy { it.at }
+            if (drills.size > MAX_DRILLS) drills.subList(0, drills.size - MAX_DRILLS).clear()
         }
         o.optJSONArray("sittings")?.let { arr ->
             for (i in 0 until arr.length()) {
@@ -585,6 +612,7 @@ class ProgressStore(private val dir: File) {
         val KNOWN = setOf(
             "type", "version", "savedAt", "device", "attempts", "flags", "notes", "mistakes", "cards", "scenarios", "mocks",
             "lessons", "plan", "sessions", "notepad", "diagnostics", "chat", "snoozed", "sittings", "checkins", "weekly", "mycards",
+            "drills",
         )
 
         /**
@@ -616,5 +644,7 @@ class ProgressStore(private val dir: File) {
         }
         private const val MAX_ATTEMPTS = 20000
         private const val MAX_CHAT = 60
+        /** The shared cap for the drills log (docs/progress-format.md §3). */
+        const val MAX_DRILLS = 2000
     }
 }
