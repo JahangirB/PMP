@@ -767,8 +767,11 @@ final class AppModel: ObservableObject {
     }
     func recordCheckIn(_ kind: String, _ value: Int, items: [Int] = []) { store.recordCheckIn(CheckIn(at: Time.now(), kind: kind, value: value, items: items)) }
     func booking(_ now: Millis = Time.now()) -> BookingReport {
-        Booking.check(readiness: readiness.report(store, now).score, fitness: fitness(now).score, mocks: store.mocks,
-                      fullItems: repo.extras.exam.totalItems, weekly: store.weekly, examDate: store.plan.examDate)
+        // Mock results store the scored items only, so a full sitting is the total less its pretest items.
+        let total: Int = repo.extras.exam.totalItems
+        let fullScored: Int = total - MockPlan.pretestCount(total, totalItems: total)
+        return Booking.check(readiness: readiness.report(store, now).score, fitness: fitness(now).score, mocks: store.mocks,
+                      fullItems: fullScored, weekly: store.weekly, examDate: store.plan.examDate)
     }
     /** The weekly five-statement check is offered once a week, once you've started studying. */
     func weeklyCheckDue(_ now: Millis = Time.now()) -> Bool {
