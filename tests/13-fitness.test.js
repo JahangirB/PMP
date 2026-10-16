@@ -282,8 +282,8 @@ module.exports = [
       var pressed = await page.evaluate(function () { return document.querySelector("#wk-cur .seg button[aria-pressed=true]").textContent; });
       assert.strictEqual(pressed, "vs your first week");
       await page.click("details.wk-week summary");
-      var opened = await page.evaluate(function () { return document.querySelectorAll("details.wk-week .wk-tbl").length; });
-      assert.ok(opened > 0);
+      /* The comparison is filled on the details' toggle event, which fires after the click. */
+      await page.waitForFunction(function () { return document.querySelectorAll("details.wk-week .wk-tbl").length > 0; }, null, { timeout: 3000 });
       await lib.clean(page);
       await page.ctx.close();
     }

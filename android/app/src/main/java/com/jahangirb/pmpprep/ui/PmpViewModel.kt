@@ -863,7 +863,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         store.recordCheckIn(CheckIn(System.currentTimeMillis(), kind, value, items))
 
     fun booking(now: Long = System.currentTimeMillis()): BookingReport = Booking.check(
-        readiness.report(store, now).score, fitness(now).score, store.mocks, repo.extras.exam.totalItems, store.weekly, store.plan.examDate)
+        readiness.report(store, now).score, fitness(now).score, store.mocks, repo.extras.exam.scoredItems, store.weekly, store.plan.examDate)
 
     /** The weekly five-statement check is offered once a week, once you've started studying. */
     fun weeklyCheckDue(now: Long = System.currentTimeMillis()): Boolean =
