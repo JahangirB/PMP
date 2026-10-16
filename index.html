@@ -130,7 +130,8 @@ PMP.STORE_CFG = Object.freeze({
   PERSISTED: Object.freeze([
     "settings", "attempts", "srs", "exams", "notes", "flags", "journal", "planner",
     "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons", "coach",
-    "notepad", "drills", "shared", "sittings", "checkins", "weekly", "sessions"
+    "notepad", "drills", "shared", "sittings", "checkins", "weekly", "sessions",
+    "mycards", "chat"
   ])
 });
 
@@ -168,8 +169,26 @@ PMP.STORE_CFG = Object.freeze({
    §10.03 clocks at EXAM.PACE_TARGET_SEC, and only drills use this one. */
 PMP.PRACTICE = Object.freeze({
   PACE_TARGET_SEC: 76,
-  PACE_OVER_RATIO: 1.6,          /* elapsed ÷ target at which the meter goes red */
-  LENGTHS: Object.freeze([5, 10, 20, 40]),
+  /* The pacing bar, as the phones draw it (Components.kt PacingBar): green
+     up to three quarters of the target, amber up to the target, red past
+     it. The bar is full at one and a half times the target, so a question
+     that has run long still shows how long. */
+  PACE_GOOD_RATIO: 0.75,
+  PACE_BAR_MAX: 1.5,
+  /* 60 and 100 as on the phones, so a long sitting can be practised and
+     the checkpoints below have somewhere to appear. */
+  LENGTHS: Object.freeze([5, 10, 20, 40, 60, 100]),
+  /* Checkpoint cards after this many questions, in sets at least
+     CHECKPOINT_MIN long (QuizRunner on Android). */
+  CHECKPOINTS: Object.freeze([60, 120]),
+  CHECKPOINT_MIN: 60,
+  /* The "take a breath" prompt: no touch on an unanswered practice question
+     for max(FREEZE_MIN_MS, FREEZE_X × the median untimed answer time over
+     the last FREEZE_WINDOW answers). With no history the median is the
+     pace target. PmpViewModel.freezePromptMs, line for line. */
+  FREEZE_MIN_MS: 150000,
+  FREEZE_X: 3,
+  FREEZE_WINDOW: 100,
   DEFAULT_LENGTH: 10,
   DEFAULT_MODE: "practice",
   /* Adaptive weighting, consumed by §10.02.2. PRIOR and PRIOR_N stop a task
@@ -19567,10 +19586,10 @@ PMP.Store = (function () {
          `notes`. `open` is persisted so the pane survives a refresh. */
       /* `html` is the formatted note (§12.2.1, sanitised on every load);
          `text` is its plain-text mirror for counting and older readers. */
-      notepad: { open: false, text: "", html: "", updatedAt: null, tab: "notes",
-        /* The Gemini tab (§12.2.2): the chosen model and the conversation.
-           The API key itself is never here. */
-        ai: { model: "", chat: [] } },
+      /* The Gemini conversation used to live here as notepad.ai; it is the
+         shared `chat` slice now (below), and §07.4's hydrate moves an old
+         one across. */
+      notepad: { open: false, text: "", html: "", updatedAt: null, tab: "notes" },
       /* Formula lab drill answers (§10.06), one row per problem marked or
          shown. Kept apart from `attempts` on purpose: a generated numeric
          problem is not an item in the bank, has no ECO task and no option
@@ -19596,9 +19615,19 @@ PMP.Store = (function () {
       checkins: [],
       weekly: [],
       sessions: [],
+      /* Cards the person made from their own mistakes (§10.02.7a), the
+         "My cards" deck in §10.05. The shared row shape exactly, so §10.18
+         copies them both ways: { id: "my:" + qid, t: ecoTask or "",
+         f: front, b: back, n: note }. Their schedules live in `srs` like
+         any card's. */
+      mycards: [],
+      /* The Gemini conversation (§12.2.2), the shared row shape exactly:
+         { r: "user" | "model", t: text, at: ms }, the newest 60. Study
+         material, so it travels; the API key never does. */
+      chat: [],
       /* What another device keeps in the shared progress file that this
-         build does not use itself (§10.18): a phone's own cards, its chat,
-         its diagnostics and snoozed messages, mock summaries
+         build does not use itself (§10.18): its diagnostics and snoozed
+         messages, mock summaries
          without the web's paper behind them, the rest of its plan, the
          `native` block, any key a later version adds, and under `web` any
          web-block key this build does not know. Kept so that nothing from a
@@ -19769,7 +19798,27 @@ PMP.Store = (function () {
           bump(keys[i]);
         });
         adoptShared();
+        adoptChat();
       });
+  }
+
+  /* Before the shared `chat` slice, the Gemini conversation was kept in
+     notepad.ai as { role, text, at: ISO }. Moved across once, in the shared
+     row shape, and the old field dropped. */
+  function adoptChat() {
+    var np = state.notepad;
+    if (!np || !np.ai || typeof np.ai !== "object") return;
+    var old = Array.isArray(np.ai.chat) ? np.ai.chat : [];
+    if (!Array.isArray(state.chat)) state.chat = [];
+    if (!state.chat.length && old.length) {
+      state.chat = old.filter(function (m) { return m && m.text; }).map(function (m) {
+        var t = typeof m.at === "number" ? m.at : Date.parse(m.at);
+        return { r: m.role === "model" ? "model" : "user", t: String(m.text), at: isNaN(t) ? 0 : t };
+      }).slice(-60);
+    }
+    delete np.ai;
+    ["notepad", "chat"].forEach(function (k) { bump(k); dirty[k] = true; });
+    schedule();
   }
 
   /* Before exam fitness, a phone's sittings, check-ins, weekly reports and
@@ -19780,7 +19829,12 @@ PMP.Store = (function () {
     sittings: function (r) { return r.k + "|" + r.at; },
     checkins: function (r) { return r.kind + "|" + r.at; },
     weekly: function (r) { return String(r.w); },
-    sessions: function (r) { return r.k + "|" + r.at; }
+    sessions: function (r) { return r.k + "|" + r.at; },
+    /* My cards are edited and deleted here, so a copy left waiting in
+       `shared` would bring a deleted card back; it is moved across too.
+       The chat is only ever appended to, and a copy still in `shared` is
+       folded in where it is read (§10.18 chatOf). */
+    mycards: function (r) { return String(r.id); }
   };
   function adoptShared() {
     var sh = state.shared;
@@ -20693,7 +20747,8 @@ PMP.validate = (function () {
     }
     if (!checkVersion(obj, "pmp-progress", r)) return r;
     PMP.STORE_CFG.PERSISTED.forEach(function (k) {
-      if (k === "drills" || k === "shared") return;
+      /* Slices added after a file was written are simply absent from it. */
+      if (k === "drills" || k === "shared" || k === "mycards" || k === "chat") return;
       if (!(k in obj)) { r.warn(k, "Not present in the file; the current value will be kept."); return; }
       var expected = Array.isArray(PMP.Store.defaults()[k]) ? "array" : typeof PMP.Store.defaults()[k];
       var actual = Array.isArray(obj[k]) ? "array" : typeof obj[k];
@@ -20983,15 +21038,18 @@ PMP.signals = (function () {
   var live = [];
   var PICK = { single: 1, multi: 1, hotspot: 1 };
 
-  function words(q) {
+  /* stemOnly: a reading drill (§10.02) shows the stem alone until the
+     person says what it asks, so only the stem's words were read before
+     that first touch, as on the phones (wordsOf withOptions = false). */
+  function words(q, stemOnly) {
     var n = 0;
     function count(t) { var m = String(t || "").match(/\w+/g); n += m ? m.length : 0; }
     count(q && q.stem);
-    ((q && q.options) || []).forEach(function (o) { count(o && o.text); });
+    if (!stemOnly) ((q && q.options) || []).forEach(function (o) { count(o && o.text); });
     return n;
   }
 
-  function Tracker(q) {
+  function Tracker(q, opts) {
     this.q = q;
     this.vis = new PMP.time.Clock(0);
     this.shown = false;
@@ -21001,7 +21059,7 @@ PMP.signals = (function () {
     this.rw = 0;
     this.wr = 0;
     this.prev = null;
-    this.w = words(q);
+    this.w = words(q, !!(opts && opts.stemOnly));
   }
   /* The question is on screen. Its clock runs only while the tab is seen. */
   Tracker.prototype.start = function () {
@@ -21024,6 +21082,16 @@ PMP.signals = (function () {
     this.last = t;
     return this;
   };
+  /* A first deliberate act that is not an answer: a reading drill's
+     "show the options" ends the reading time there, as on the phones. */
+  Tracker.prototype.mark = function () {
+    this.touch();
+    if (!this.first) this.first = Math.max(1, Math.round(this.vis.elapsed()));
+    return this;
+  };
+  /* How long since the last touch, on screen and visible: the freeze
+     prompt's measure (§10.02.6b). */
+  Tracker.prototype.idleNow = function () { return this.vis.elapsed() - this.last; };
   /* The answer changed. `correct` is whether the answer now on screen
      would score right, or null while it is incomplete. */
   Tracker.prototype.answer = function (correct) {
@@ -22654,16 +22722,28 @@ PMP.QRender = (function () {
      screen reader, and the browser's own click target handling, none of which
      a div with a role would give for free. The visible ring is drawn on the
      label with :focus-within because the input itself is offscreen. */
+  /* Strike-out (ctx.strike, practice only). The exam's own tool: an option
+     ruled out is crossed through and dimmed, and stays choosable. Three
+     ways in, one behaviour: the small cross button on the row (the
+     keyboard and screen-reader route, a real button with aria-pressed),
+     right-click on the row, or a long press on a touch screen; Shift and
+     the option's letter does the same from the keyboard (§10.02.8).
+     Choosing a struck option brings it back, and striking the chosen one
+     clears the choice, as on the phones (PmpViewModel.toggleStrike). The
+     count of options struck before checking is the attempt's `el`. */
+  var LONG_PRESS_MS = 500;
   function renderChoice(p, q, host, ctx) {
     var multi = p.type === "multi";
     var name = "opt-" + p.qid + "-" + (ctx.nonce || 0);
     var rows = [];
+    var canStrike = !!ctx.strike, lastStrike = 0;
 
     var group = el("fieldset", { class: "opts" }, [
       el("legend", { class: "sr-only", text: instruction(q) })
     ]);
 
     p.options.forEach(function (o, i) {
+      var letter = LETTERS.charAt(i) || String(i + 1);
       var input = el("input", {
         type: multi ? "checkbox" : "radio",
         name: name, value: o.id, id: name + "-" + i
@@ -22672,13 +22752,71 @@ PMP.QRender = (function () {
         class: "opt", for: input.id, dataset: { sel: "false", opt: o.id }
       }, [
         input,
-        el("span", { class: "key", "aria-hidden": "true", text: LETTERS.charAt(i) || String(i + 1) }),
+        el("span", { class: "key", "aria-hidden": "true", text: letter }),
         el("span", { class: "txt" }, [el("span", { text: o.text })])
       ]);
-      on(input, "change", function () { sync(); if (ctx.onChange) ctx.onChange(); });
-      rows.push({ o: o, row: row, input: input });
+      var rec = { o: o, row: row, input: input, letter: letter, struck: false, x: null };
+      on(input, "change", function () {
+        if (input.checked && rec.struck) paintStrike(rec, false);
+        sync();
+        if (ctx.onChange) ctx.onChange();
+      });
+      if (canStrike) {
+        rec.x = el("button", {
+          class: "opt-x", type: "button", "aria-pressed": "false",
+          "aria-label": "Cross out option " + letter,
+          title: "Cross out. Right-click or long-press the option, or Shift+" + letter + "."
+        }, [icon("x")]);
+        /* A button inside a label must not also choose the option. */
+        on(rec.x, "click", function (e) { e.preventDefault(); e.stopPropagation(); toggleStrike(rec); });
+        row.appendChild(rec.x);
+        on(row, "contextmenu", function (e) {
+          if (!canStrike) return;
+          e.preventDefault();
+          toggleStrike(rec);
+        });
+        var pressTimer = null, pressed = false;
+        on(row, "pointerdown", function (e) {
+          if (e.pointerType !== "touch" || !canStrike) return;
+          pressed = false;
+          pressTimer = setTimeout(function () { pressed = true; toggleStrike(rec); }, LONG_PRESS_MS);
+        });
+        ["pointerup", "pointercancel", "pointerleave"].forEach(function (t) {
+          on(row, t, function () { clearTimeout(pressTimer); });
+        });
+        /* The click that ends a long press is not a choice. */
+        on(row, "click", function (e) { if (pressed) { pressed = false; e.preventDefault(); } });
+      }
+      rows.push(rec);
       group.appendChild(row);
     });
+
+    function paintStrike(r, on2) {
+      r.struck = on2;
+      if (on2) { r.row.setAttribute("data-struck", "true"); r.row.setAttribute("data-struck-by", "you"); }
+      else { r.row.removeAttribute("data-struck"); r.row.removeAttribute("data-struck-by"); }
+      if (r.x) {
+        r.x.setAttribute("aria-pressed", on2 ? "true" : "false");
+        r.x.setAttribute("aria-label", (on2 ? "Restore option " : "Cross out option ") + r.letter);
+      }
+    }
+
+    /* A long press can also raise a contextmenu event on some phones; one
+       gesture is one toggle. */
+    function toggleStrike(r) {
+      if (!canStrike) return false;
+      var now = Date.now();
+      if (now - lastStrike < 350) return true;
+      lastStrike = now;
+      var to = !r.struck;
+      paintStrike(r, to);
+      var unchose = to && r.input.checked;
+      if (unchose) { r.input.checked = false; sync(); }
+      PMP.UI.announce("Option " + r.letter + (to ? " crossed out" : " restored") + (unchose ? ", and no longer chosen" : "") + ".");
+      if (ctx.onStrike) ctx.onStrike();
+      if (unchose && ctx.onChange) ctx.onChange();
+      return true;
+    }
 
     function sync() {
       rows.forEach(function (r) { r.row.setAttribute("data-sel", r.input.checked ? "true" : "false"); });
@@ -22711,6 +22849,14 @@ PMP.QRender = (function () {
         sync();
       },
       lock: function () { rows.forEach(function (r) { r.input.disabled = true; }); },
+      /* Strike-out, for §10.02: by letter (Shift+letter) and the ids
+         struck now. */
+      strikeKey: function (k) {
+        var i = LETTERS.indexOf(String(k).toUpperCase());
+        if (i < 0 || i >= rows.length) return false;
+        return toggleStrike(rows[i]);
+      },
+      struck: function () { return rows.filter(function (r) { return r.struck; }).map(function (r) { return r.o.id; }); },
       hotkey: function (k) {
         var i = LETTERS.indexOf(k.toUpperCase());
         if (i < 0 && /^[1-9]$/.test(k)) i = parseInt(k, 10) - 1;
@@ -22725,8 +22871,11 @@ PMP.QRender = (function () {
       },
       reveal: function (res) {
         var chosen = setOf(res.chosen || []);
+        canStrike = false;
+        group.setAttribute("data-revealed", "true");
         rows.forEach(function (r) {
           r.input.disabled = true;
+          if (r.x) { r.x.remove(); r.x = null; }
           var mark = null;
           if (r.o.correct && chosen[r.o.id]) mark = "correct";
           else if (r.o.correct) mark = multi ? "missed" : "correct";
@@ -23056,9 +23205,60 @@ PMP.QRender = (function () {
     return fn(p, q, host, ctx);
   }
 
+  /* ── 10.04.9  AS TEXT ──────────────────────────────────────────────────
+     An item, an answer and the model answer in plain words, for the places
+     that hand a question on: "Ask about this question" (§12.2.2) and
+     "Make a card" (§10.02.7a). Letters follow the order on screen, so "I
+     chose B" means the B the person saw. Every type, not only the choice
+     ones. */
+  function idIndex(list, id) {
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return i;
+    return -1;
+  }
+  function itemText(p) {
+    var t = p.type, out = [];
+    if (t === "single" || t === "multi") {
+      p.options.forEach(function (o, i) { out.push((LETTERS.charAt(i) || String(i + 1)) + ") " + o.text); });
+    } else if (t === "matching") {
+      p.prompts.forEach(function (pr, i) { out.push((i + 1) + ". " + pr.text); });
+      out.push("Choices: " + p.options.map(function (o) { return o.text; }).join("; "));
+    } else if (t === "hotspot") {
+      p.regions.forEach(function (r) { out.push(r.n + ") " + r.label); });
+    } else if (t === "fillblank") {
+      p.blanks.forEach(function (b) { out.push("\u2022 " + b.label + (b.unit ? " (" + b.unit + ")" : "")); });
+    }
+    return out.join("\n");
+  }
+  function answerText(p, value) {
+    var t = p.type;
+    if (value == null) return "";
+    if (t === "single" || t === "multi" || t === "hotspot") {
+      var list = t === "hotspot" ? p.regions : p.options;
+      return (Array.isArray(value) ? value : [value]).map(function (id) {
+        var i = idIndex(list, id);
+        if (i < 0) return String(id);
+        return t === "hotspot" ? list[i].n + ") " + list[i].label : (LETTERS.charAt(i) || String(i + 1)) + ") " + list[i].text;
+      }).join("; ");
+    }
+    if (t === "matching") {
+      return p.prompts.map(function (pr) {
+        var i = idIndex(p.options, value[pr.id]);
+        return pr.text + " \u2192 " + (i < 0 ? "nothing" : p.options[i].text);
+      }).join("; ");
+    }
+    if (t === "fillblank") {
+      return p.blanks.map(function (b) {
+        var v = value[b.id] == null || String(value[b.id]).trim() === "" ? "blank" : String(value[b.id]).trim();
+        return b.label + ": " + v + (b.unit && v !== "blank" ? " " + b.unit : "");
+      }).join("; ");
+    }
+    return "";
+  }
+  function correctText(p, q) { return answerText(p, correctValue(q)); }
+
   return {
     base: base, label: label, instruction: instruction, correctIds: correctIds,
-    correctValue: correctValue,
+    correctValue: correctValue, itemText: itemText, answerText: answerText, correctText: correctText,
     present: present, render: render, score: score, isAnswered: isAnswered,
     parseNumber: parseNumber, TYPE_LABELS: LABEL
   };
