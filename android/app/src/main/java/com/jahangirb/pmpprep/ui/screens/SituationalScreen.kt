@@ -56,7 +56,7 @@ fun SituationalScreen(vm: PmpViewModel) {
     val rev by vm.revision.collectAsState()
     val list = remember(vm.scenarioDomain) { vm.scenarios() }
     val runs = vm.store.scenarioRuns
-    val avg = if (runs.isEmpty()) null else runs.sumOf { it.rank.credit.toDouble() } / runs.size
+    val avg = if (runs.isEmpty()) null else runs.sumOf { vm.repo.extras.rules.credit(it.rank) } / runs.size
     val scroll = rememberScrollState()
     if (list.isEmpty()) return
     val i = vm.scenarioIndex.coerceIn(0, list.size - 1)
@@ -119,7 +119,7 @@ fun ScenarioBlock(vm: PmpViewModel, sc: Scenario, revealed: Boolean, pick: Strin
     if (revealed) {
         val picked = sc.options.firstOrNull { it.id == pick }
         if (picked != null) {
-            Text("Credit for your pick: ${pct(picked.rank.credit.toDouble())}", fontWeight = FontWeight.Bold, color = rankColor(picked.rank))
+            Text("Credit for your pick: ${pct(vm.repo.extras.rules.credit(picked.rank))}", fontWeight = FontWeight.Bold, color = rankColor(picked.rank))
         }
         if (sc.explanation.isNotBlank()) PmpCard { SectionLabel("Why"); Spacer(Modifier.height(6.dp)); Text(sc.explanation, fontSize = 15.sp, lineHeight = 22.sp) }
         MindsetCallout(sc.mindset)

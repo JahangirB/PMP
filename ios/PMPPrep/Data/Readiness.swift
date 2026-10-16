@@ -67,7 +67,8 @@ struct Readiness {
     private func ratio(_ v: Double, _ lo: Double, _ hi: Double) -> Double { hi == lo ? 0 : min(max((v - lo) / (hi - lo), 0), 1) }
 
     func accuracy(_ attempts: [Attempt], _ now: Millis, _ filter: ((Attempt) -> Bool)? = nil) -> (Double, Int) {
-        var list = attempts.filter { $0.source != Self.SOURCE_LESSON }
+        // Answers reached with hints say little about what you know: they stay out of accuracy and pace.
+        var list = attempts.filter { $0.source != Self.SOURCE_LESSON && $0.hints == 0 }
         if let filter { list = list.filter(filter) }
         list = Array(list.suffix(r.accuracyWindow))
         var wSum = r.accuracyPriorN
@@ -95,7 +96,7 @@ struct Readiness {
     }
 
     func medianPace(_ attempts: [Attempt]) -> (Double?, Int) {
-        let secs = attempts.filter { $0.source != Self.SOURCE_LESSON }.suffix(r.accuracyWindow)
+        let secs = attempts.filter { $0.source != Self.SOURCE_LESSON && $0.hints == 0 }.suffix(r.accuracyWindow)
             .filter { $0.ms > 500 }.map { Double($0.ms) / 1000 }.sorted()
         if secs.isEmpty { return (nil, 0) }
         let mid = secs.count / 2
@@ -108,6 +109,8 @@ struct Readiness {
         store.mocks.forEach { days.insert(Time.startOfDay($0.at)) }
         store.scenarioRuns.forEach { days.insert(Time.startOfDay($0.at)) }
         store.cards.values.forEach { if $0.last > 0 { days.insert(Time.startOfDay($0.last)) } }
+        // A formula-lab drill is study too, though it never counts as an answer.
+        store.drills.forEach { days.insert(Time.startOfDay($0.at)) }
         let today = Time.startOfDay(now)
         let kept = store.plan.restDays ? Readiness.withRestDays(days, today) : days
         var cursor = kept.contains(today) ? today : Time.prevDay(today)

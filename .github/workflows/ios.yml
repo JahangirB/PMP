@@ -69,7 +69,7 @@ jobs:
           mkdir -p screenshots
           for mode in light dark; do
             xcrun simctl ui "$udid" appearance $mode
-            for screen in path practice question mock flashcards learn analytics fitness reports book coach menu settings; do
+            for screen in path practice question mock flashcards learn analytics formulas fitness reports book coach menu settings sync; do
               xcrun simctl terminate "$udid" com.jahangirb.pmpprep 2>/dev/null || true
               xcrun simctl launch "$udid" com.jahangirb.pmpprep -uiScreen $screen -uiDemo 1 >/dev/null
               sleep 4
@@ -131,7 +131,7 @@ jobs:
               "bundleIdentifier": "com.jahangirb.pmpprep",
               "developerName": "Jahangir B",
               "subtitle": "Study for the PMP exam",
-              "localizedDescription": "A guided study path for the PMP exam: practice, mocks, lessons, flashcards and an optional Gemini coach. Converted from the Android app by AI and not tested on an iPhone.",
+              "localizedDescription": "A guided study path for the PMP exam: practice, mocks, lessons, flashcards and an optional Gemini coach. Converted from the Android app by AI and not tested on an iPhone. Problems: reach Jahangir Babayev on LinkedIn, linkedin.com/in/jahangir-babayev-a432a5145",
               "iconURL": "https://raw.githubusercontent.com/$repo/main/ios/PMPPrep/Assets.xcassets/AppIcon.appiconset/icon-1024.png",
               "tintColor": "0B6684",
               "versions": [{
@@ -147,5 +147,5 @@ jobs:
           }
           JSON
           gh release view ios >/dev/null 2>&1 || gh release create ios --title "PMP Prep for iPhone" --latest=false \
-            --notes "Sideload PMP-Prep.ipa with SideStore, AltStore or Sideloadly. See the README for steps. Converted from the Android app by AI and never tested on an iPhone."
+            --notes "Sideload PMP-Prep.ipa with SideStore, AltStore or Sideloadly. See the README for steps. Converted from the Android app by AI and never tested on an iPhone. Problems: https://www.linkedin.com/in/jahangir-babayev-a432a5145"
           gh release upload ios ios/PMP-Prep.ipa source.json --clobber

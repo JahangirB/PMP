@@ -206,6 +206,7 @@ object ContentParser {
                 breakMinutes = exam.optInt("BREAK_MINUTES", 10),
                 breakAfter = listOf(exam.optInt("BREAK_1_AFTER", 60), exam.optInt("BREAK_2_AFTER", 120)),
                 paceTargetSec = exam.optDouble("PACE_TARGET_SEC", 80.0).toInt(),
+                scoredItems = exam.optInt("SCORED_ITEMS", 170),
             ),
             srs = SrsConfig(
                 easeStart = srs.optDouble("EASE_START", 2.5), easeMin = srs.optDouble("EASE_MIN", 1.3),
@@ -276,6 +277,48 @@ object ContentParser {
                     mindset = l.str("mindset"),
                 )
             },
+            rules = rules(o.optJSONObject("rules")),
+            adaptive = o.optJSONObject("practice")?.optJSONObject("ADAPTIVE").let { a ->
+                val d = AdaptiveConfig()
+                if (a == null) d else AdaptiveConfig(
+                    a.optDouble("PRIOR", d.prior), a.optDouble("PRIOR_N", d.priorN), a.optDouble("EXPONENT", d.exponent),
+                    a.optDouble("FLOOR", d.floor), a.optDouble("UNSEEN_BOOST", d.unseenBoost), a.optDouble("RIGHT_DAMP", d.rightDamp),
+                )
+            },
+            syncScript = o.str("syncScript"),
+        )
+    }
+
+    /** PMP.RULES (docs/progress-format.md §1). Anything missing keeps the documented default. */
+    fun rules(r: JSONObject?): Rules {
+        val d = Rules()
+        if (r == null) return d
+        val mb = r.optJSONObject("mockBands")
+        val sc = r.optJSONObject("scenarioCredit")
+        val m = r.optJSONObject("mastery")
+        val causes = r.optJSONArray("causes").objects().mapNotNull { c ->
+            val id = c.str("id")
+            if (id.isEmpty()) return@mapNotNull null
+            val fallback = d.causes.firstOrNull { it.id == id }
+            val short = c.str("short").ifEmpty { fallback?.short ?: id }
+            CauseText(id, short, c.str("label").ifEmpty { fallback?.label ?: short }, c.str("hint").ifEmpty { fallback?.hint.orEmpty() })
+        }
+        val confidence = r.optJSONArray("confidence").objects().mapNotNull { c ->
+            val v = c.optInt("v")
+            if (v <= 0) null else ConfidenceLevel(v, c.str("id"), c.str("label"))
+        }
+        return Rules(
+            mockBands = if (mb == null) d.mockBands else MockBands(
+                mb.optDouble("above", d.mockBands.above), mb.optDouble("target", d.mockBands.target), mb.optDouble("below", d.mockBands.below),
+            ),
+            scenarioCredit = Rank.entries.associateWith { rank -> sc?.optDouble(rank.id, d.credit(rank))?.takeIf { !it.isNaN() } ?: d.credit(rank) },
+            mastery = if (m == null) d.mastery else MasteryRule(
+                m.optInt("minAnswers", d.mastery.minAnswers), m.optInt("window", d.mastery.window),
+                m.optDouble("accuracy", d.mastery.accuracy), m.optInt("fadeDays", d.mastery.fadeDays),
+            ),
+            causes = causes.ifEmpty { d.causes },
+            reentryDays = r.optInt("reentryDays", d.reentryDays),
+            confidence = confidence.ifEmpty { d.confidence },
         )
     }
 

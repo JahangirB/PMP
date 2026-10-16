@@ -83,6 +83,10 @@ targets:
     platform: iOS
     sources:
       - path: PMPPrepTests
+      # The cross-app merge fixture (docs/progress-format.md §3), bundled as the folder "sync".
+      - path: ../tests/fixtures/sync
+        type: folder
+        buildPhase: resources
     dependencies:
       - target: PMPPrep
 schemes:

@@ -102,6 +102,7 @@ import com.jahangirb.pmpprep.ui.components.LocalReading
 import com.jahangirb.pmpprep.ui.screens.BookScreen
 import com.jahangirb.pmpprep.ui.screens.SearchScreen
 import com.jahangirb.pmpprep.ui.screens.StudySettingsScreen
+import com.jahangirb.pmpprep.ui.screens.SyncScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -146,11 +147,15 @@ class MainActivity : ComponentActivity() {
         frontSince = System.currentTimeMillis()
         // Opening the app on your own soon after a reminder also counts as answering it.
         Reminders.opened(this, null)
+        // Coming to the front pulls in what other devices did (a no-op until cloud sync is set up).
+        vm.autoSync()
     }
 
     override fun onStop() {
         vm.appVisible = false
         vm.saveMock()
+        // Going to the background pushes what was done here.
+        vm.autoSync()
         if (frontSince > 0) Reminders.foreground(this, frontSince)
         super.onStop()
     }
@@ -270,6 +275,7 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                         Dest.SETTINGS -> StudySettingsScreen(vm)
                         Dest.BOOK -> BookScreen(vm)
                         Dest.SEARCH -> SearchScreen(vm)
+                        Dest.SYNC -> SyncScreen(vm)
                     }
                 }
             }

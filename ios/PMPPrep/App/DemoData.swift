@@ -25,5 +25,9 @@ enum DemoData {
                                       domains: [.people: [44, 76], .process: [55, 81], .business: [22, 23]]))
         for l in m.repo.extras.lessons.prefix(8) { m.store.setLessonDone(l.id, true) }
         if let q = qs.first(where: { m.store.last[$0.id]?.correct == false }) { m.store.tagMistake(q.id, .MISREAD_STEM, "") }
+        let gens: [String] = ["npv", "float", "evm-variance", "pta", "littles-law", "decision-tree"]
+        for (i, g) in gens.enumerated() {
+            m.store.recordDrill(DrillRun(at: now - Millis(i + 1) * day, generator: g, ok: i % 3 != 0))
+        }
     }
 }

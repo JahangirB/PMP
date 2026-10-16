@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Android 11 and older: back up progress, never the Gemini key. -->
+<!-- Android 11 and older: back up progress, never the Gemini key or the cloud sync URL and code.
+     The sync base and the device id belong to this install: a restored phone starts its own. -->
 <full-backup-content>
     <exclude domain="sharedpref" path="gemini.xml" />
+    <exclude domain="sharedpref" path="sync.xml" />
+    <exclude domain="file" path="sync-base.json" />
+    <exclude domain="file" path="device-id" />
 </full-backup-content>

@@ -15,7 +15,10 @@ struct CardState: Equatable {
     var last: Millis = 0
     /** When the card was first studied; drives the new-cards-per-day cap. */
     var first: Millis = 0
+    /** Suspended cards are never due and never offered as new. */
+    var suspended: Bool = false
     var isNew: Bool { last == 0 }
+    func isDue(_ now: Millis) -> Bool { !isNew && !suspended && due <= now }
 }
 
 /** SM-2 exactly as the web app runs it (§10.05.1), with every number taken from its §01.4 settings. */
@@ -46,7 +49,8 @@ struct Srs {
             lapses: failed ? s.lapses + 1 : s.lapses,
             due: Time.startOfDay(now) + Millis(interval) * Time.dayMs,
             last: now,
-            first: s.first == 0 ? now : s.first)
+            first: s.first == 0 ? now : s.first,
+            suspended: s.suspended)
     }
 
     /** The interval each grade would give, for the labels on the buttons. */

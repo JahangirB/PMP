@@ -130,7 +130,7 @@ PMP.STORE_CFG = Object.freeze({
   PERSISTED: Object.freeze([
     "settings", "attempts", "srs", "exams", "notes", "flags", "journal", "planner",
     "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons", "coach",
-    "notepad"
+    "notepad", "drills", "shared"
   ])
 });
 
@@ -180,6 +180,65 @@ PMP.PRACTICE = Object.freeze({
     PRIOR: 0.5, PRIOR_N: 4, EXPONENT: 1.5, FLOOR: 0.05,
     UNSEEN_BOOST: 1.4, RIGHT_DAMP: 0.5
   })
+});
+
+/* ── 01.8  SHARED RULES ─────────────────────────────────────────────────────
+   The figures the web, Android and iPhone apps must agree on, so that a
+   result means the same thing whichever device produced it. Defined here and
+   nowhere else: android/tools/extract-content.mjs copies this object into
+   extras.json as `rules`, and the phone apps read every value from there.
+   docs/progress-format.md §1 is the contract; when it and this object
+   disagree, this object is the one to fix.
+
+     mockBands       Score bands for a sitting and for each domain in it:
+                     at or over `above` reads Above Target, `target` Target,
+                     `below` Below Target, anything less Needs Improvement.
+     scenarioCredit  Credit per rank in the scenario trainer (§10.08).
+     mastery         A task is mastered with at least minAnswers answers and
+                     `accuracy` or better over the last `window` of them; it
+                     fades after fadeDays with no answer on it (§10.15).
+     causes          The mistake journal's root causes, in display order
+                     (§10.10). `label` is first person, for the tag button.
+     reentryDays     Days away before the coach's welcome-back stage (§10.16).
+     confidence      Stored values for "how sure are you"; 0 is not asked.
+
+   Frozen all the way down, because a shared rule that one module could
+   quietly edit at runtime is not shared. */
+PMP.RULES = (function deepFreeze(o) {
+  Object.keys(o).forEach(function (k) {
+    if (o[k] && typeof o[k] === "object") deepFreeze(o[k]);
+  });
+  return Object.freeze(o);
+})({
+  mockBands: { above: 0.80, target: 0.65, below: 0.50 },
+  scenarioCredit: { best: 1, acceptable: 0.5, premature: 0.25, wrong: 0 },
+  mastery: { minAnswers: 10, window: 15, accuracy: 0.75, fadeDays: 14 },
+  causes: [
+    { id: "KNOWLEDGE_GAP", short: "Knowledge gap",
+      label: "I did not know this",
+      hint: "The material itself was missing. This is the cause that answers to study time." },
+    { id: "MISREAD_STEM", short: "Misread the question",
+      label: "I misread it",
+      hint: "You knew the material and answered a question that was not quite the one asked \u2014 a missed \"first\", \"except\", or a role you read past." },
+    { id: "WRONG_MINDSET", short: "Wrong mindset",
+      label: "Wrong instinct",
+      hint: "A defensible action, out of order. Escalating before gathering facts, or fixing before asking. The PMI-preferred move was a step you skipped." },
+    { id: "TWO_PLAUSIBLE", short: "Two plausible answers",
+      label: "Two answers both worked",
+      hint: "You narrowed it to two and chose wrong. The discriminator was there and was not visible to you." },
+    { id: "CALCULATION", short: "Calculation slip",
+      label: "I slipped on the arithmetic",
+      hint: "You knew the method and slipped on the arithmetic, or inverted a ratio. Write the formula down first and check the result against what it should be." },
+    { id: "RUSHED", short: "Rushed",
+      label: "I rushed",
+      hint: "You had it and moved before you had it. Usually visible as a time well under your own median." }
+  ],
+  reentryDays: 5,
+  confidence: [
+    { v: 3, id: "sure", label: "Sure" },
+    { v: 2, id: "think", label: "Think so" },
+    { v: 1, id: "guess", label: "Guess" }
+  ]
 });
 </script>
 
@@ -1959,23 +2018,26 @@ button.task[data-done="true"]:hover { filter: brightness(0.97); }
 .jr-row .jr-q { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--fg-muted); }
 .jr-row .jr-when { font-family: var(--font-mono); color: var(--fg-faint); white-space: nowrap; }
 
-/* The five causes are an ordered set, not five unrelated categories: they run
-   from not knowing the material to knowing it and losing the mark to how the
-   question was worked. The ramp encodes that order. Colour is never the only
-   carrier — every bar is labelled with its name and its count. */
+/* The six causes (§01.8) are an ordered set, not six unrelated categories:
+   they run from not knowing the material to knowing it and losing the mark
+   to how the question was worked. The ramp encodes that order. Colour is
+   never the only carrier — every bar is labelled with its name and its
+   count. Token names are the shared ids in lower case with dashes. */
 :root {
-  --cause-knowledge: #B3382A;
-  --cause-misread:   #9A6510;
-  --cause-rushed:    #7A6A1F;
-  --cause-mindset:   #3D6B7A;
-  --cause-tossup:    #52657A;
+  --cause-knowledge-gap:  #B3382A;
+  --cause-misread-stem:   #9A6510;
+  --cause-wrong-mindset:  #3D6B7A;
+  --cause-two-plausible:  #52657A;
+  --cause-calculation:    #6B5A8E;
+  --cause-rushed:         #7A6A1F;
 }
 :root[data-theme="dark"] {
-  --cause-knowledge: #F0705E;
-  --cause-misread:   #E8A33D;
-  --cause-rushed:    #C9B65A;
-  --cause-mindset:   #6FB6CC;
-  --cause-tossup:    #93A7BB;
+  --cause-knowledge-gap:  #F0705E;
+  --cause-misread-stem:   #E8A33D;
+  --cause-wrong-mindset:  #6FB6CC;
+  --cause-two-plausible:  #93A7BB;
+  --cause-calculation:    #B9A6E0;
+  --cause-rushed:         #C9B65A;
 }
 
 .cause-key { display: grid; gap: var(--sp-3); margin-top: var(--sp-4); }
@@ -2284,6 +2346,26 @@ mark.np-h-none { background: transparent; }
 }
 @media (min-width: 1500px) { :root { --np-w: 400px; } }
 
+/* ── 03.23  CLOUD SYNC — §10.18 ─────────────────────────────────────────────
+   The setup guide is a numbered list a person works down with another tab
+   open beside it, so each step is a block with room around it, and the
+   values to copy (the code, the address) are set in the mono face so a
+   0 and an O cannot be confused. */
+.seg { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-4); }
+.seg .btn[aria-pressed="true"] { border-color: currentColor; font-weight: var(--w-semi); }
+.sync-steps { margin: var(--sp-5) 0 0; padding-left: 1.4em; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); }
+.sync-steps > li { line-height: var(--lh-body); padding-left: var(--sp-2); min-width: 0; overflow-wrap: anywhere; }
+.sync-steps .filter-bar { margin-top: var(--sp-3); }
+.sync-code-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: baseline; margin: var(--sp-3) 0; }
+.sync-code { font-family: var(--font-mono); overflow-wrap: anywhere; word-break: break-all; }
+.sync-script { font-family: var(--font-mono); font-size: var(--t-xs); min-height: 10em; width: 100%; }
+.sync-connect { margin-top: var(--sp-3); display: grid; gap: var(--sp-3); max-width: 46rem; }
+.sync-url { overflow-wrap: anywhere; word-break: break-all; }
+.sync-status, .sync-msg { display: flex; gap: var(--sp-2); align-items: flex-start; margin-top: var(--sp-3); }
+.sync-status[data-kind="err"], .sync-msg[data-kind="err"] { color: var(--st-incorrect-fg); }
+.sync-status[data-kind="ok"], .sync-msg[data-kind="ok"] { color: var(--st-correct-fg); }
+.sync-reveal summary { cursor: pointer; margin-top: var(--sp-3); }
+
 /* ── 03.8  RESPONSIVE ───────────────────────────────────────────────────── */
 @media (min-width: 600px) {
   .view { padding-left: var(--sp-6); padding-right: var(--sp-6); }
@@ -2410,6 +2492,7 @@ mark.np-h-none { background: transparent; }
 <symbol id="i-ul" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9.5 6.5H20M9.5 12H20M9.5 17.5H20"/><circle cx="5" cy="6.5" r="1" fill="currentColor"/><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="5" cy="17.5" r="1" fill="currentColor"/></symbol>
 <symbol id="i-ol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6.5H20M10 12H20M10 17.5H20"/><path d="M4 5l1.5-1v5M4 13.5c0-1 .7-1.5 1.4-1.5s1.3.5 1.3 1.2c0 1-2.7 2.1-2.7 3.3h2.8" stroke-width="1.4"/></symbol>
 <symbol id="i-marker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5l5 5-8 8H8.5L7 16l-.5-3z"/><path d="M6.5 13l4.5 4.5M3.5 20.5h7"/></symbol>
+<symbol id="i-sync" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 9A7.5 7.5 0 0 0 6 6.5L4.5 8M4.5 15A7.5 7.5 0 0 0 18 17.5l1.5-1.5"/><path d="M4.5 4v4h4M19.5 20v-4h-4"/></symbol>
 <symbol id="i-clip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
 </defs></svg>
 
@@ -2460,6 +2543,7 @@ mark.np-h-none { background: transparent; }
       <div class="nav-grp nav-grp--foot">
         <a class="nav-i" href="#/settings"  data-route="settings"><svg class="i"><use href="#i-settings"></use></svg>Settings and About</a>
         <a class="nav-i" href="#/data"      data-route="data"><svg class="i"><use href="#i-data"></use></svg>Backup and packs</a>
+        <a class="nav-i" href="#/sync"      data-route="sync"><svg class="i"><use href="#i-sync"></use></svg>Cloud sync</a>
       </div>
     </div>
 
@@ -2605,13 +2689,88 @@ mark.np-h-none { background: transparent; }
   <div class="sheet-ft" id="sheet-foot"></div>
 </dialog>
 
+<!-- 04.4  The cloud sync script (§10.18), verbatim from sync/pmp-sync.gs.
+     Inert text: the Cloud sync page fills in the code and shows it for the
+     person to copy into their own Google account. A test keeps the two the
+     same. -->
+<script type="text/plain" id="pmp-sync-gs">/**
+ * PMP Prep cloud sync. Keeps your study progress and notes in one file in your Google Drive,
+ * "PMP Prep/pmp-sync.json", so the web, Android and iPhone apps can share it.
+ *
+ * Deploy: Deploy → New deployment → Web app → Execute as: Me, Who has access: Anyone.
+ * "Anyone" only means the URL answers without a Google sign-in. Every request must carry
+ * SYNC_CODE below, so keep the URL and the code private. To revoke access, change the
+ * code and deploy a new version.
+ *
+ * This script reads and writes only that one file. It sends nothing anywhere else.
+ */
+const SYNC_CODE = '__SYNC_CODE__';
+const FOLDER_NAME = 'PMP Prep';
+const FILE_NAME = 'pmp-sync.json';
+
+function doPost(e) {
+  let req;
+  try { req = JSON.parse(e.postData.contents); } catch (err) { return reply({ ok: false, error: 'bad-request' }); }
+  if (!req || req.code !== SYNC_CODE || SYNC_CODE.indexOf('__') === 0) return reply({ ok: false, error: 'bad-code' });
+
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(20000)) return reply({ ok: false, error: 'busy' });
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const rev = Number(props.getProperty('rev') || 0);
+    const file = findFile();
+    if (req.op === 'ping') return reply({ ok: true, rev: rev, savedAt: Number(props.getProperty('savedAt') || 0) });
+    if (req.op === 'get') return reply({ ok: true, rev: rev, doc: file ? JSON.parse(file.getBlob().getDataAsString()) : null });
+    if (req.op === 'put') {
+      if (Number(req.baseRev) !== rev) {
+        return reply({ ok: false, conflict: true, rev: rev, doc: file ? JSON.parse(file.getBlob().getDataAsString()) : null });
+      }
+      if (!req.doc || req.doc.type !== 'pmp-progress') return reply({ ok: false, error: 'bad-doc' });
+      const text = JSON.stringify(req.doc);
+      if (file) file.setContent(text); else folder().createFile(FILE_NAME, text, 'application/json');
+      props.setProperties({ rev: String(rev + 1), savedAt: String(Date.now()) });
+      return reply({ ok: true, rev: rev + 1 });
+    }
+    return reply({ ok: false, error: 'bad-op' });
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** Opening the URL in a browser shows this, so you can check the deployment works. */
+function doGet() {
+  return reply({ ok: true, app: 'PMP Prep sync', note: 'Working. The apps talk to this URL with your sync code.' });
+}
+
+function folder() {
+  const it = DriveApp.getFoldersByName(FOLDER_NAME);
+  return it.hasNext() ? it.next() : DriveApp.createFolder(FOLDER_NAME);
+}
+
+function findFile() {
+  const id = PropertiesService.getScriptProperties().getProperty('fileId');
+  if (id) { try { const f = DriveApp.getFileById(id); if (!f.isTrashed()) return f; } catch (err) {} }
+  const it = folder().getFilesByName(FILE_NAME);
+  if (!it.hasNext()) return null;
+  const f = it.next();
+  PropertiesService.getScriptProperties().setProperty('fileId', f.getId());
+  return f;
+}
+
+function reply(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+</script>
+
 <script>
 "use strict";
 /* ═══════════════════════════════════════════════════════════════════════════
    PMP PREP SUITE                                                  index.html
    Single file · no build · opens from file://
    ECO target ......... PMP Examination Content Outline, July 2026
-   Schema version ..... 2          (question packs and progress exports)
+   Schema version ..... 2          (question packs and stored slices)
+   Progress format .... 3          (pmp-progress, shared with Android and
+                                    iPhone; docs/progress-format.md)
    Not affiliated with, endorsed by, or sponsored by PMI. See §10.12 About.
    ───────────────────────────────────────────────────────────────────────────
    WHAT THIS FILE IS, AND WHAT IS OPTIONAL
@@ -2626,12 +2785,12 @@ mark.np-h-none { background: transparent; }
    There is one optional second tier. When the file is *served* over http
    rather than opened from disk, §05.9 looks for a directory named packs/
    beside it and folds any extended question batches it finds there into the
-   same pool. This is how the pack grows past 300 without the file growing
+   same pool. This is how the pack grows past 348 without the file growing
    with it. Three consequences follow, and they are the whole of the deal:
 
      · Extended packs need hosting. A fetch from a file:// document has no
        origin to fetch from, so on disk the loader does not run at all — it is
-       skipped, silently, and the pool is the 300 embedded items. Any static
+       skipped, silently, and the pool is the 348 embedded items. Any static
        host works: GitHub Pages, an S3 bucket, `python3 -m http.server` in the
        directory. All paths are resolved relative to the document, so a
        GitHub Pages project subpath (user.github.io/repo/) is fine.
@@ -2647,7 +2806,7 @@ mark.np-h-none { background: transparent; }
 
    TO ADD A BATCH:  author packs/<name>.json against AUTHORING.md, drop it in
    packs/, and it is picked up on the next load — packs/index.json already
-   lists all 26 batches, so there is no manifest to edit. Until the file is
+   lists all 28 batches, so there is no manifest to edit. Until the file is
    there its entry reads as pending in the audit panel, which is not an error.
    Full instructions, the schema and a worked example of all seven item types
    are in AUTHORING.md.
@@ -2662,6 +2821,8 @@ mark.np-h-none { background: transparent; }
         01.5  STORAGE_KEYS, SCHEMA_VERSION, DEBOUNCE_MS
         01.6  theme resolution + <html data-theme> (only pre-paint work)
         01.7  PRACTICE — drill pace target (76 s), lengths, adaptive weights
+        01.8  RULES — shared with Android and iPhone: mock bands, scenario
+              credit, mastery, mistake causes, re-entry days, confidence
 
    §02  DESIGN TOKENS ..................... <style>
         02.1  palette · 02.2 surfaces · 02.3 foreground · 02.4 state fills
@@ -2686,6 +2847,7 @@ mark.np-h-none { background: transparent; }
         03.20 learn — lesson hub rows, reader parts, reading measure
         03.21 today and the coach — step rows, messages, sticky start
         03.22 notes pane — top-bar toggle, right column ≥900px, overlay below
+        03.23 cloud sync — numbered setup steps, script box, status line
         03.7  question engine — filters, options, hotspot, blanks, pace meter
         03.14 formula lab — sheet, calculators, network nodes, worked steps
         03.15 reference library — process matrix, ITTO panel, virtual list
@@ -2696,6 +2858,7 @@ mark.np-h-none { background: transparent; }
         04.1  skip link, live regions, app frame, nav rail
         04.2  view mount points (empty; §10 renders into them)
         04.3  dialog + toast hosts, no-storage banner, SVG icon sprite
+        04.4  the cloud sync script, verbatim from sync/pmp-sync.gs (§10.18)
 
    §05  DATA — CONTENT PACKS ............. JS constants, frozen
         05.1  ECO_TASKS — 26 task records, ids and paraphrases
@@ -2710,7 +2873,7 @@ mark.np-h-none { background: transparent; }
               8 domains, agile, 14 tables, 364 terms · built
         05.7.3 ABBREVIATIONS — 121 rows, one per meaning; kept complete
               by the coverage scan in 10.07.9
-        05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS; pilot lesson P4
+        05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS (34 lessons)
         05.11 COACH MESSAGES — every coach sentence, authored: the pool the
               coach picks from and the fixed lines it uses in place
 
@@ -2722,14 +2885,18 @@ mark.np-h-none { background: transparent; }
         06.5  mode → 'persistent' | 'session', published to §07
 
    §07  STORE / STATE
-        07.1  shape, defaults, migrations (schema 1 → 2)
+        07.1  shape, defaults, migrations (schema 1 → 2), and the 01.8
+              upgrade of stored rows (cause ids, confidence, scenario credit)
         07.2  subscribe / notify, selector memoisation
         07.3  actions — the only writers; no feature touches §06 directly
               persisted: … examRun (the sitting in progress), packs, queue,
               scenarioRuns (§10.08; ranked, so not folded into attempts),
               lessons (§10.15; quick checks, never folded into attempts,
               and the latest practice-set score; the set's own answers are
-              attempts with mode "lesson" and a lessonId)
+              attempts with mode "lesson" and a lessonId), drills (§10.06
+              formula drill answers, kept out of accuracy), shared (§10.18:
+              the parts of a phone's progress this build keeps but does not
+              use itself)
         07.4  persistence bridge + beforeunload guard
 
    §08  ROUTER ........................... hash-based
@@ -2750,8 +2917,8 @@ mark.np-h-none { background: transparent; }
 
    §10  FEATURE MODULES ................. one IIFE each
         10.00 Metrics · built                  10.08 Scenario trainer · built
-              the one place a figure is derived 10.09 Study planner · built
-        10.01 Dashboard + readiness · built    10.10 Mistake journal · built
+              the one place a figure is derived 10.09 Study plan · built
+        10.01 Progress + readiness · built     10.10 Mistake journal · built
         10.02 Practice engine · built          10.11 Analytics · built
         10.03 Mock exam simulator · built      10.12 Settings, About, help · built
         10.04 Question renderers · built
@@ -2767,6 +2934,8 @@ mark.np-h-none { background: transparent; }
         10.15 Learn — lesson hub and reader · #/learn, #/learn?lesson=P4
         10.16 Coach — stage, today's session, messages · derives, never renders
         10.17 Today, intake and the coach's surfaces · #/today, the home page
+        10.18 Cloud sync — shared progress format v3, three-way merge, the
+              Apps Script client and its setup guide · #/sync
               (10.14.6 audits 05.11 against fixture contexts)
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
@@ -2842,7 +3011,10 @@ PMP.ECO_TASK_BY_ID = Object.freeze(PMP.ECO_TASKS.reduce(function (m, t) { m[t.id
    the teaching layer, adds 48 Business Environment items beyond it.
    Every figure here is re-derived by the audit in §10.14.
 
-   Distribution, and how it was arrived at:
+   Distribution, and how it was arrived at. The figures below describe the
+   first 300 items, the pack as batch six closed it; with batch seven's 48
+   the pack stands at People 112 · Process 132 · Business 104 and at
+   143 predictive · 122 adaptive · 83 hybrid.
      Domain    People 112 · Process 132 · Business 56, which lands at
                37.3 / 44.0 / 18.7 percent against the published 33 / 41 / 26.
                Batch six was commissioned at People 42 / Process 50 /
@@ -2884,8 +3056,10 @@ PMP.ECO_TASK_BY_ID = Object.freeze(PMP.ECO_TASKS.reduce(function (m, t) { m[t.id
                subtraction happens to round favourably. 19 keeps 0.33 points
                of real margin and leaves all three approach checks clear,
                which the pack has not previously managed.
-     Type      177 multiple choice, 47 multiple response, 19 matching,
-               18 drop-down, 25 fill-in-the-blank, 14 hotspot. All five
+     Type      Across all 348: 217 multiple choice, 55 multiple response,
+               19 matching, 18 drop-down, 25 fill-in-the-blank, 14 hotspot
+               (the first 300 were 177 / 47 / 19 / 18 / 25 / 14; batch seven
+               added 40 multiple choice and 8 multiple response). All five
                renderers and six of the seven accepted type ids are exercised.
                Still no item uses the graphic type, for the reason recorded
                against batch four: §09.6 accepts it but that validator's
@@ -9430,9 +9604,9 @@ PMP.QUESTIONS = [
 
 ];
 
-/* 05.3, 05.5–05.7  The other packs are still empty by design: §12.2 runs a
-   content audit and the views report the real count rather than pretending.
-   05.4 is no longer among them; it is the scenario pack below. */
+/* 05.3  Case studies. Still empty by design: §12.2 runs a content audit and
+   the views report the real count rather than pretending. 05.4 to 05.7 are
+   all authored; they follow below. */
 PMP.CASES      = [];
 /* ── 05.4  SCENARIOS ────────────────────────────────────────────────────────
    80 situational judgement items. These are not questions with a right answer
@@ -14314,7 +14488,7 @@ PMP.Content = (function () {
      app finds its packs wherever it is mounted, including a subdirectory of a
      subdirectory, and including a local dev server at the root.
 
-   · A missing shard is not a failure. The manifest lists all 26 batches from
+   · A missing shard is not a failure. The manifest lists all 28 batches from
      the start so it never needs hand-editing; the shards themselves land one
      at a time as they are authored. A 404 therefore means "not written yet",
      which is the normal state of most of the manifest for most of its life.
@@ -14621,8 +14795,8 @@ PMP.Packs = (function () {
                           with the practice filter keys (domain, ecoTask,
                           approach, type, difficulty, tag); {} is the bank.
 
-   Phase 1 ships the engine with one pilot lesson, P4. Every sentence below
-   is original; nothing is taken from PMI material. ─────────────────────── */
+   34 lessons across the five modules, P4 the first one written. Every
+   sentence below is original; nothing is taken from PMI material. ─────────────────────── */
 PMP.MODULES = Object.freeze([
   { id: "foundations", order: 1, prefix: "F", label: "Foundations",
     blurb: "How the exam works, the mindset it rewards, and the delivery approaches every later lesson assumes." },
@@ -18752,16 +18926,16 @@ PMP.COACH_MESSAGES = Object.freeze([
     action: { label: "Open the mock exam", route: "exam" } },
 
   { id: "cause_misread", priority: 60, cooldownDays: 7,
-    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "misread"; },
+    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "MISREAD_STEM"; },
     text: function () { return "Most of your misses are reading, not knowledge. Find the qualifier (first, next, best, except) before looking at the options."; } },
 
   { id: "cause_mindset", priority: 60, cooldownDays: 7,
-    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "mindset"; },
+    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "WRONG_MINDSET"; },
     text: function () { return "Most misses are the right move at the wrong moment. Two scenario sets this week will help more than more questions."; },
     action: { label: "Open scenarios", route: "scenarios" } },
 
   { id: "cause_knowledge", priority: 60, cooldownDays: 7,
-    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "knowledge"; },
+    when: function (c) { return !!c.journal.lead && c.journal.lead.id === "KNOWLEDGE_GAP"; },
     text: function () { return "Most misses are material you hadn't met. Lessons first, then the questions on them."; },
     action: { label: "Open lessons", route: "learn" } },
 
@@ -19243,11 +19417,58 @@ PMP.Store = (function () {
       notepad: { open: false, text: "", html: "", updatedAt: null, tab: "notes",
         /* The Gemini tab (§12.2.2): the chosen model and the conversation.
            The API key itself is never here. */
-        ai: { model: "", chat: [] } }
+        ai: { model: "", chat: [] } },
+      /* Formula lab drill answers (§10.06), one row per problem marked or
+         shown. Kept apart from `attempts` on purpose: a generated numeric
+         problem is not an item in the bank, has no ECO task and no option
+         order, and counting it would move accuracy for arithmetic practice.
+         It does count as a study day (§10.00.6), and analytics lists it. */
+      drills: [],     /* { at: ms, g: generator id, ok }, last 2000; shared as is (§10.18) */
+      /* What another device keeps in the shared progress file that this
+         build does not use itself (§10.18): a phone's sessions, sittings,
+         check-ins, weekly reports, its own cards, its chat, mock summaries
+         without the web's paper behind them, the rest of its plan, the
+         `native` block, any key a later version adds, and under `web` any
+         web-block key this build does not know. Kept so that nothing from a
+         phone is lost when this device saves, and written back unchanged. */
+      shared: {}
     };
   }
 
   var state = defaults();
+
+  /* ── 07.1a  SHARED-RULE UPGRADE ────────────────────────────────────────
+     Rows written before §01.8 existed carry the web's own vocabulary: five
+     lower-case cause ids, confidence as "sure" or "unsure", and scenario
+     credit on the old 0.6 curve. Every stored row is read through here, on
+     every load and on every import, so the rest of the file only ever sees
+     the shared values. Idempotent: a row already in the new form passes
+     through untouched, which is what lets this run on every hydrate rather
+     than once behind a version bump. */
+  var OLD_CAUSE = { knowledge: "KNOWLEDGE_GAP", misread: "MISREAD_STEM", rushed: "RUSHED",
+                    mindset: "WRONG_MINDSET", tossup: "TWO_PLAUSIBLE" };
+  var OLD_CONFIDENCE = { sure: 3, unsure: 2, "Not sure": 2 };
+  function normalise(key, value) {
+    if (key === "journal" && Array.isArray(value)) {
+      return value.map(function (j) {
+        return j && OLD_CAUSE[j.cause] ? Object.assign({}, j, { cause: OLD_CAUSE[j.cause] }) : j;
+      });
+    }
+    if (key === "attempts" && Array.isArray(value)) {
+      return value.map(function (a) {
+        return a && typeof a.confidence === "string"
+          ? Object.assign({}, a, { confidence: OLD_CONFIDENCE[a.confidence] || null }) : a;
+      });
+    }
+    if (key === "scenarioRuns" && Array.isArray(value)) {
+      var credit = PMP.RULES.scenarioCredit;
+      return value.map(function (r) {
+        return r && r.rank in credit && r.credit !== credit[r.rank]
+          ? Object.assign({}, r, { credit: credit[r.rank] }) : r;
+      });
+    }
+    return value;
+  }
 
   /* Migration hook. Progress files and stored slices carry schemaVersion; a
      v1 slice is upgraded here, an unknown major is refused by §09.6 before it
@@ -19318,14 +19539,25 @@ PMP.Store = (function () {
       if (!(k in state)) throw new Error("Unknown store slice: " + k);
     }
     mutate(state);
+    var wrote = false;
     for (i = 0; i < keys.length; i++) {
       k = keys[i];
       bump(k);
-      if (CFG.PERSISTED.indexOf(k) >= 0 && !opts.transient) dirty[k] = true;
+      if (CFG.PERSISTED.indexOf(k) >= 0 && !opts.transient) { dirty[k] = true; wrote = true; }
+    }
+    /* Write hooks see every persisted commit, silent ones included, which
+       is what lets §10.18 know when this device last changed anything
+       without every keystroke in the notes pane notifying the views. */
+    if (wrote) {
+      for (i = 0; i < writeHooks.length; i++) {
+        try { writeHooks[i](keys, opts); } catch (e) { /* a hook never blocks a write */ }
+      }
     }
     if (!opts.silent) notify(keys);
     schedule();
   }
+  var writeHooks = [];
+  function onWrite(fn) { writeHooks.push(fn); }
 
   /* ── 07.4  PERSISTENCE BRIDGE ──────────────────────────────────────────
      Debounced ~500 ms and batched: a slice touched fifty times in a burst is
@@ -19361,7 +19593,7 @@ PMP.Store = (function () {
           var version = wrapped.v || 1;
           var data = ("d" in wrapped) ? wrapped.d : wrapped;
           if (data === null || data === undefined) return;
-          state[keys[i]] = migrate(keys[i], data, version);
+          state[keys[i]] = normalise(keys[i], migrate(keys[i], data, version));
           bump(keys[i]);
         });
       });
@@ -19408,9 +19640,11 @@ PMP.Store = (function () {
   return {
     get state() { return state; },
     defaults: defaults,
+    normalise: normalise,
     subscribe: subscribe,
     selector: selector,
     commit: commit,
+    onWrite: onWrite,
     hydrate: hydrate,
     flush: flush,
     pruneAttempts: pruneAttempts,
@@ -20220,10 +20454,42 @@ PMP.validate = (function () {
     return r;
   }
 
+  /* Three progress files are read (§10.18.5): the shared format, version 3;
+     a phone's own version 2 ("pmp-android-progress"), which has the same
+     slices; and this app's legacy version 2, which carries the store's
+     slices under schemaVersion. Only the shape is checked here. */
+  var SHARED_ARRAYS = ["attempts", "flags", "scenarios", "mocks", "lessons", "sessions", "diagnostics",
+                       "chat", "sittings", "checkins", "weekly", "mycards", "drills"];
+  var SHARED_OBJECTS = ["notes", "mistakes", "cards", "snoozed", "plan", "web", "native"];
+  function sharedShape(obj, r) {
+    SHARED_ARRAYS.forEach(function (k) {
+      if (k in obj && obj[k] != null && !Array.isArray(obj[k])) r.err(k, "Expected a list.");
+    });
+    SHARED_OBJECTS.forEach(function (k) {
+      if (k in obj && obj[k] != null && (typeof obj[k] !== "object" || Array.isArray(obj[k]))) r.err(k, "Expected an object.");
+    });
+    if ("notepad" in obj && obj.notepad != null && typeof obj.notepad !== "string") r.err("notepad", "Expected text.");
+    if (!Array.isArray(obj.attempts)) r.warn("attempts", "No answers in the file.");
+  }
+
   function progress(obj) {
     var r = new Result();
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) { r.err("file", "The file does not contain a JSON object."); return r; }
+    if (obj.type === "pmp-android-progress") {
+      if (obj.version !== 2) r.err("version", "This is an Android backup in format " + obj.version + ". This build reads format 2 from Android, and format 3 from any app.");
+      else sharedShape(obj, r);
+      return r;
+    }
+    if (obj.type === "pmp-progress" && obj.schemaVersion === undefined && obj.version !== undefined) {
+      if (typeof obj.version !== "number") r.err("version", "Missing a version number.");
+      else if (obj.version > 3) r.err("version", "This file uses progress format " + obj.version + ". This build reads up to 3. Update the app, or export again from the older version.");
+      else if (obj.version < 3) r.err("version", "Progress format " + obj.version + " is not one this build reads.");
+      else sharedShape(obj, r);
+      return r;
+    }
     if (!checkVersion(obj, "pmp-progress", r)) return r;
     PMP.STORE_CFG.PERSISTED.forEach(function (k) {
+      if (k === "drills" || k === "shared") return;
       if (!(k in obj)) { r.warn(k, "Not present in the file; the current value will be kept."); return; }
       var expected = Array.isArray(PMP.Store.defaults()[k]) ? "array" : typeof PMP.Store.defaults()[k];
       var actual = Array.isArray(obj[k]) ? "array" : typeof obj[k];
@@ -20471,10 +20737,16 @@ PMP.Exporter = (function () {
     });
   }
 
+  /* The shared format, version 3 (§10.18), which every app reads. If that
+     cannot be built — this is also the crash handler's way out — the raw
+     store goes out instead, which this app can still read back. */
   function exportProgress() {
     var text;
-    try { text = JSON.stringify(PMP.Store.snapshot(), null, 2); }
-    catch (e) { PMP.UI.toast("Your progress could not be turned into a backup file.", "err"); return Promise.resolve(); }
+    try { text = JSON.stringify(PMP.Sync.toDoc(PMP.Store.state, { savedAt: Date.now() }), null, 2); }
+    catch (e) {
+      try { text = JSON.stringify(PMP.Store.snapshot(), null, 2); }
+      catch (e2) { PMP.UI.toast("Your progress could not be turned into a backup file.", "err"); return Promise.resolve(); }
+    }
     return offer(text, filename("pmp-progress"), "Export progress");
   }
 
@@ -21224,13 +21496,16 @@ PMP.Practice = (function () {
 
     var tools = el("div", { class: "q-tools" }, [flagBtn, noteBtn, reportBtn, el("span", { class: "spacer" })]);
 
+    /* Two buttons, stored on the shared scale in §01.8: Sure is 3 and Not
+       sure is 2, the value a phone stores for "Think so". Guess (1) is not
+       offered here yet; the calibration chart reads it as Not sure. */
     var confBtns = null;
     if (state.settings.confidenceTracking) {
-      confBtns = ["sure", "unsure"].map(function (k) {
+      confBtns = [[3, "Sure"], [2, "Not sure"]].map(function (c) {
         return el("button", {
-          class: "btn btn--sm", type: "button", dataset: { on: "false", conf: k },
-          onclick: function () { setConfidence(item, k); }
-        }, k === "sure" ? "Sure" : "Not sure");
+          class: "btn btn--sm", type: "button", dataset: { on: String(item.confidence === c[0]), conf: String(c[0]) },
+          onclick: function () { setConfidence(item, c[0]); }
+        }, c[1]);
       });
       tools.appendChild(el("span", { class: "eyebrow", text: "Confidence" }));
       confBtns.forEach(function (b) { tools.appendChild(b); });
@@ -21442,7 +21717,7 @@ PMP.Practice = (function () {
   function setConfidence(item, k) {
     item.confidence = item.confidence === k ? null : k;
     item.ui.conf.forEach(function (b) {
-      b.setAttribute("data-on", b.getAttribute("data-conf") === item.confidence ? "true" : "false");
+      b.setAttribute("data-on", b.getAttribute("data-conf") === String(item.confidence) ? "true" : "false");
     });
   }
 
@@ -21534,6 +21809,7 @@ PMP.Practice = (function () {
     }
     cleanup();
     repaint();
+    if (PMP.Sync) PMP.Sync.auto("practice");
   }
 
   /* What the set came to. Skipped items count in n and earn nothing, so
@@ -22483,11 +22759,13 @@ PMP.Exam = (function () {
   /* Proficiency bands. PMI reports Above Target / Target / Below Target /
      Needs Improvement per domain and publishes neither the cut score nor the
      band boundaries, so these four thresholds are this build's own scale and
-     are labelled as such everywhere they are shown. */
+     are labelled as such everywhere they are shown. The boundaries are the
+     shared ones in §01.8, so a sitting reads the same band on every device. */
+  var MB = PMP.RULES.mockBands;
   var BANDS = [
-    { id: "above",  label: "Above Target",      min: 0.75 },
-    { id: "target", label: "Target",            min: 0.60 },
-    { id: "below",  label: "Below Target",      min: 0.45 },
+    { id: "above",  label: "Above Target",      min: MB.above },
+    { id: "target", label: "Target",            min: MB.target },
+    { id: "below",  label: "Below Target",      min: MB.below },
     { id: "needs",  label: "Needs Improvement", min: 0 }
   ];
   var MIN_BAND_SAMPLE = 5;     /* fewer items than this and no band is claimed */
@@ -23379,6 +23657,7 @@ PMP.Exam = (function () {
     live = null;
     reviewing = record.id;
     repaint();
+    if (PMP.Sync) PMP.Sync.auto("mock");
   }
 
   /* ── 10.03.12  RESULTS ───────────────────────────────────────────────── */
@@ -23825,14 +24104,15 @@ PMP.Exam = (function () {
 
    · There is no correct answer, so there is no right or wrong marking. An
      answer earns partial credit by where it sits in the ordering. The credit
-     curve is 1 / 0.6 / 0.25 / 0, and the shape carries an editorial claim:
-     picking the acceptable option is a small miss, because the candidate has
-     chosen a defensible action out of sequence; picking the premature one is
-     a larger miss but the most instructive, because the instinct was right
-     and a step was skipped; picking the wrong one earns nothing. 0.6 rather
-     than 0.75 because the exam does not award part marks for second best,
-     and a curve that is too generous lets someone average 0.7 while never
-     once identifying the first thing to do.
+     curve is 1 / 0.5 / 0.25 / 0, shared with the phone apps through §01.8,
+     and the shape carries an editorial claim: picking the acceptable option
+     is a real miss, because the candidate has chosen a defensible action out
+     of sequence; picking the premature one is a larger miss but the most
+     instructive, because the instinct was right and a step was skipped;
+     picking the wrong one earns nothing. Half rather than more because the
+     exam does not award part marks for second best, and a curve that is too
+     generous lets someone average 0.7 while never once identifying the first
+     thing to do.
 
    · Every option is shown after answering, not just the chosen one and the
      best one. The whole teaching of this pack is the ordering, and an item
@@ -23866,7 +24146,7 @@ PMP.Scenarios = (function () {
     wrong: "Wrong"
   };
   var RANK_SHORT = { best: "Best", acceptable: "Acceptable", premature: "Premature", wrong: "Wrong" };
-  var CREDIT = { best: 1, acceptable: 0.6, premature: 0.25, wrong: 0 };
+  var CREDIT = PMP.RULES.scenarioCredit;
   var LENGTHS = [5, 10, 20];
 
   var filters = null;
@@ -24735,7 +25015,10 @@ PMP.Cards = (function () {
 
     session.i++;
     session.revealed = false;
-    if (session.i >= session.queue.length) session.finished = true;
+    if (session.i >= session.queue.length) {
+      session.finished = true;
+      if (PMP.Sync) PMP.Sync.auto("cards");
+    }
     repaint();
   }
 
@@ -27416,25 +27699,28 @@ PMP.FormulaLab = (function () {
     };
   }
 
+  /* Each generator has a stable id. It names the problem kind in the drill
+     log (§10.06.10a), which the phone apps share as `drills`, so an id is
+     never reused for a different kind of problem. */
   var GENERATORS = [
-    { fn: gEvmVariance, group: "evm" },
-    { fn: gEvmForecast, group: "forecast" },
-    { fn: gTcpi,        group: "forecast" },
-    { fn: gPert,        group: "estimate" },
-    { fn: gPertPath,    group: "estimate" },
-    { fn: gChannels,    group: "comms" },
-    { fn: gEmv,         group: "risk" },
-    { fn: gTree,        group: "risk" },
-    { fn: gPta,         group: "procure" },
-    { fn: gFee,         group: "procure" },
-    { fn: gFloat,       group: "schedule" },
-    { fn: gNpv,         group: "finance" },
-    { fn: gPayback,     group: "finance" },
-    { fn: gIrr,         group: "finance" },
-    { fn: gBcr,         group: "finance" },
-    { fn: gLittle,      group: "agile" },
-    { fn: gVelocity,    group: "agile" },
-    { fn: gLeadTime,    group: "agile" }
+    { id: "evm-variance", fn: gEvmVariance, group: "evm" },
+    { id: "evm-forecast", fn: gEvmForecast, group: "forecast" },
+    { id: "tcpi", fn: gTcpi,        group: "forecast" },
+    { id: "pert", fn: gPert,        group: "estimate" },
+    { id: "pert-path", fn: gPertPath,    group: "estimate" },
+    { id: "channels", fn: gChannels,    group: "comms" },
+    { id: "emv", fn: gEmv,         group: "risk" },
+    { id: "decision-tree", fn: gTree,        group: "risk" },
+    { id: "pta", fn: gPta,         group: "procure" },
+    { id: "fee", fn: gFee,         group: "procure" },
+    { id: "float", fn: gFloat,       group: "schedule" },
+    { id: "npv", fn: gNpv,         group: "finance" },
+    { id: "payback", fn: gPayback,     group: "finance" },
+    { id: "irr", fn: gIrr,         group: "finance" },
+    { id: "bcr", fn: gBcr,         group: "finance" },
+    { id: "littles-law", fn: gLittle,      group: "agile" },
+    { id: "velocity", fn: gVelocity,    group: "agile" },
+    { id: "lead-time", fn: gLeadTime,    group: "agile" }
   ];
 
   /* Some draws are degenerate, and in a degenerate draw a named wrong turn
@@ -27530,6 +27816,7 @@ PMP.FormulaLab = (function () {
     var g = pool[Math.floor(rand() * pool.length)];
     problem = finalise(g.fn(rand));
     problem.seed = seed;
+    problem.gen = g.id;
     revealed = false;
     lastMark = null;
   }
@@ -27569,6 +27856,26 @@ PMP.FormulaLab = (function () {
     if (p.unit === "%") return s + "%";
     if (p.unit === "index" || p.unit === "ratio") return s;
     return s + " " + p.unit;
+  }
+
+  /* ── 10.06.10a  THE DRILL LOG ────────────────────────────────────────────
+     The tally above is per visit, by design: a streak is a mood, not a
+     record. What is kept is one row per problem marked or shown, in the
+     `drills` slice rather than in `attempts` (see §07.1 for why), in the
+     shape the phone apps share: { at: ms, g: generator id, ok }. "Close"
+     and "shown" are not ok. §10.00 counts a day with a drill on it as a
+     study day, and §10.11 lists the log by group. Capped at DRILL_KEEP. */
+  var DRILL_KEEP = 2000;
+  function generatorGroup(id) {
+    for (var i = 0; i < GENERATORS.length; i++) if (GENERATORS[i].id === id) return GENERATORS[i].group;
+    return null;
+  }
+  function logDrill(p, verdict) {
+    var row = { at: Date.now(), g: p.gen || "unknown", ok: verdict === "right" };
+    PMP.Store.commit(["drills"], function (s) {
+      var list = Array.isArray(s.drills) ? s.drills.concat([row]) : [row];
+      s.drills = list.length > DRILL_KEEP ? list.slice(-DRILL_KEEP) : list;
+    }, { silent: true });
   }
 
   /* ── 10.06.11  DRILL VIEW ─────────────────────────────────────────────── */
@@ -27656,6 +27963,7 @@ PMP.FormulaLab = (function () {
       }
       lastMark = res;
       revealed = true;
+      logDrill(p, res.verdict);
       paintTally();
       paintResult();
     }
@@ -27665,6 +27973,7 @@ PMP.FormulaLab = (function () {
       tally.streak = 0;
       lastMark = { verdict: "shown" };
       revealed = true;
+      logDrill(p, "shown");
       paintTally();
       paintResult();
     }
@@ -27772,6 +28081,7 @@ PMP.FormulaLab = (function () {
     /* Exported because these are the parts worth testing: every figure this
        view puts on screen comes out of one of them, and §12.2's boot check
        exercises evm() and network() against known values. */
+    generatorGroup: generatorGroup,
     evm: evm,
     pta: pta,
     network: network,
@@ -29287,70 +29597,13 @@ PMP.Data = (function () {
   function exportProgress() { return PMP.Exporter.exportProgress(); }
 
   /* ── 10.13.4  PROGRESS IN ────────────────────────────────────────────────
-     The list slices are unioned by id, so importing the same backup twice
-     does not double anyone's attempt history. The map slices take the
-     incoming value on a clash, which is the only rule that behaves sensibly
-     when the file is newer than the device. Replace wipes first. */
-  var LIST_SLICES = ["attempts", "exams", "journal", "issues", "scenarioRuns"];
-  var MAP_SLICES = ["srs", "notes", "flags", "lessons"];
-  var WHOLE_SLICES = ["settings", "planner", "packs", "queue", "examRun", "coach", "notepad"];
-
-  function planProgressMerge(obj) {
-    var state = PMP.Store.state;
-    var plan = { rows: [], newRecords: 0, updated: 0 };
-
-    LIST_SLICES.forEach(function (k) {
-      var incoming = Array.isArray(obj[k]) ? obj[k] : null;
-      if (!incoming) { plan.rows.push({ slice: k, note: "not in the file, kept as is", add: 0, keep: (state[k] || []).length }); return; }
-      var have = Object.create(null);
-      (state[k] || []).forEach(function (r) { if (r && r.id) have[r.id] = true; });
-      var add = incoming.filter(function (r) { return r && r.id && !have[r.id]; }).length;
-      var dupe = incoming.length - add;
-      plan.newRecords += add;
-      plan.rows.push({ slice: k, add: add, keep: (state[k] || []).length, dupe: dupe,
-        note: add + " new, " + dupe + " already here" });
-    });
-
-    MAP_SLICES.forEach(function (k) {
-      var incoming = obj[k] && typeof obj[k] === "object" ? obj[k] : null;
-      if (!incoming) { plan.rows.push({ slice: k, note: "not in the file, kept as is", add: 0, keep: Object.keys(state[k] || {}).length }); return; }
-      var keys = Object.keys(incoming);
-      var over = keys.filter(function (kk) { return (state[k] || {})[kk] !== undefined; }).length;
-      plan.newRecords += keys.length - over;
-      plan.updated += over;
-      plan.rows.push({ slice: k, add: keys.length - over, keep: Object.keys(state[k] || {}).length, dupe: over,
-        note: (keys.length - over) + " new, " + over + " overwritten by the file" });
-    });
-
-    WHOLE_SLICES.forEach(function (k) {
-      if (!(k in obj)) { plan.rows.push({ slice: k, note: "not in the file, kept as is" }); return; }
-      plan.rows.push({ slice: k, note: "kept as is unless you choose Replace" });
-    });
-
-    return plan;
-  }
-
-  function applyProgress(obj, mode) {
-    var keys = PMP.STORE_CFG.PERSISTED.slice();
-    PMP.Store.commit(keys, function (s) {
-      if (mode === "replace") {
-        var fresh = PMP.Store.defaults();
-        keys.forEach(function (k) { s[k] = (k in obj && obj[k] != null) ? obj[k] : fresh[k]; });
-        return;
-      }
-      LIST_SLICES.forEach(function (k) {
-        if (!Array.isArray(obj[k])) return;
-        var have = Object.create(null);
-        (s[k] || []).forEach(function (r) { if (r && r.id) have[r.id] = true; });
-        obj[k].forEach(function (r) { if (r && r.id && !have[r.id]) { s[k].push(r); have[r.id] = true; } });
-      });
-      MAP_SLICES.forEach(function (k) {
-        if (!obj[k] || typeof obj[k] !== "object") return;
-        Object.keys(obj[k]).forEach(function (kk) { s[k][kk] = obj[k][kk]; });
-      });
-    });
-    PMP.Store.flush();
-  }
+     Every progress file goes through §10.18: a version 3 file from any app,
+     a phone's version 2, or this app's own legacy version 2 is first turned
+     into one shared document. Merge is then the shared three-way merge with
+     an empty base, so nothing is ever lost from either side: answers and
+     other logs are united, and where a note, a tag or a card differs the
+     newer copy wins. Replace takes the file as it is. */
+  var APP_NAME = { web: "the web app", android: "Android", ios: "iPhone" };
 
   function importProgress(text) {
     var parsed = PMP.validate.parseJSON(text);
@@ -29373,8 +29626,16 @@ PMP.Data = (function () {
       return;
     }
 
-    var obj = parsed.value;
-    var plan = planProgressMerge(obj);
+    var raw = parsed.value, doc;
+    try { doc = PMP.Sync.fromFile(raw); }
+    catch (e) {
+      PMP.UI.sheet({ title: "That progress file was refused",
+        body: el("p", { text: "It passed the shape check but could not be read as progress. Nothing has been changed." }),
+        actions: [{ id: "close", label: "Close", primary: true }] });
+      return;
+    }
+    var local = PMP.Sync.toDoc(PMP.Store.state);
+    var plan = PMP.Sync.mergePlan(local, doc);
     var tbl = el("table", { class: "tbl" }, [
       el("thead", null, [el("tr", null, [
         el("th", { text: "Section" }), el("th", { class: "n", text: "Here now" }), el("th", { text: "What merging does" })
@@ -29390,11 +29651,16 @@ PMP.Data = (function () {
     });
     tbl.appendChild(body);
 
+    var from = raw.type === "pmp-android-progress" ? "Android, format 2"
+      : raw.schemaVersion !== undefined ? "the web app, legacy format v" + raw.schemaVersion
+      : (APP_NAME[(raw.device && raw.device.app) || ""] || "an app") + ", format 3";
+    var when = raw.exportedAt || (raw.savedAt ? new Date(raw.savedAt).toISOString() : null);
+
     PMP.UI.sheet({
       title: "Import this backup?",
       body: frag([
-        el("p", { text: "Exported " + PMP.fmt.dateShort(obj.exportedAt) + ", schema v" + obj.schemaVersion + "." }),
-        el("p", { text: "Merging adds " + PMP.fmt.plural(plan.newRecords, "record") + " and overwrites " + plan.updated + " where the same note, flag or card exists in both. Replacing throws away everything on this device first." }),
+        el("p", { text: "Saved " + PMP.fmt.dateShort(when) + " by " + from + "." }),
+        el("p", { text: "Merging adds " + PMP.fmt.plural(plan.added, "record") + " and keeps everything already here; where the same note, tag or card differs (" + plan.clash + " here), the newer copy wins. Replacing throws away everything on this device first." }),
         tbl,
         result.warnings.length ? el("p", { style: "margin-top:var(--sp-4)", text: "Warnings:" }) : null,
         result.warnings.length ? errorList(result.warnings, "warn") : null
@@ -29406,15 +29672,15 @@ PMP.Data = (function () {
       ]
     }).then(function (choice) {
       if (choice === "merge") {
-        applyProgress(obj, "merge");
-        PMP.UI.toast("Merged " + PMP.fmt.plural(plan.newRecords, "record") + ".", "ok");
+        PMP.Sync.importMerge(doc);
+        PMP.UI.toast("Merged " + PMP.fmt.plural(plan.added, "record") + ".", "ok");
         PMP.Router.navigate("data", null, true);
       } else if (choice === "replace") {
         PMP.UI.confirm("Replace everything on this device?",
           "Every attempt, sitting, note, flag and card schedule here is deleted and replaced by the contents of the file. This cannot be undone.",
           "Replace it all", true).then(function (yes) {
           if (!yes) return;
-          applyProgress(obj, "replace");
+          PMP.Sync.importReplace(doc);
           PMP.UI.toast("Progress replaced from the file.", "ok");
           PMP.Router.navigate("data", null, true);
         });
@@ -29574,7 +29840,9 @@ PMP.Data = (function () {
       el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Everything this app knows about you lives on this device and travels in a file you control. Nothing about you is sent anywhere, and there is no analytics, no telemetry and no account. Opened from disk the file makes no network requests at all. Served over http it makes exactly one kind: a request for its own extended question packs, at a fixed path beside itself, carrying no credentials and no information about you \u2014 the same request the browser would make for an image. What came back, or did not, is itemised in the content audit." }),
-      el("p", { text: "The one exception is optional and yours to trigger: the Gemini tab in the notes pane. If you give it your own Google AI Studio API key, each message you send there goes from this page straight to Google under that key. Nothing is sent until you press Send, nothing else goes with it, and the key stays on this device, outside your backup file, and goes nowhere but Google." })
+      el("p", { text: "The one exception is optional and yours to trigger: the Gemini tab in the notes pane. If you give it your own Google AI Studio API key, each message you send there goes from this page straight to Google under that key. Nothing is sent until you press Send, nothing else goes with it, and the key stays on this device, outside your backup file, and goes nowhere but Google." }),
+      el("p", null, ["The other is Cloud sync, off unless you set it up: your progress then goes to one file in your own Google Drive, through a script you deploy in your own account, so your other devices can share it. ",
+        el("a", { href: "#/sync", text: "Cloud sync" }), " explains it and sets it up."])
     ]));
 
     host.appendChild(el("div", { class: "card" }, [
@@ -29597,7 +29865,7 @@ PMP.Data = (function () {
     host.appendChild(importCard({
       eyebrow: "Import \u00B7 progress",
       title: "Restore a backup",
-      blurb: "Merging adds anything the file has that this device does not, and never duplicates a record you already have. Replacing deletes everything here first, and asks twice before it does.",
+      blurb: "Reads backups from this app, Android and iPhone. Merging adds anything the file has that this device does not, and never duplicates a record you already have. Replacing deletes everything here first, and asks twice before it does.",
       pickLabel: "Choose a progress file",
       label: "Progress backup JSON",
       onText: importProgress
@@ -29662,7 +29930,7 @@ PMP.Data = (function () {
     host.appendChild(el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Danger" }),
       el("h2", { text: "Delete everything" }),
-      el("p", { text: "Removes every attempt, sitting, note, flag, report and card schedule from this device. Export a backup first if any of it matters." }),
+      el("p", { text: "Removes every attempt, sitting, note, flag, report and card schedule from this device. Export a backup first if any of it matters. With cloud sync on, the next sync brings your progress back from your Drive; disconnect it first to start afresh." }),
       el("div", { style: "margin-top:var(--sp-4)" }, [
         el("button", {
           class: "btn btn--danger", type: "button",
@@ -29672,6 +29940,7 @@ PMP.Data = (function () {
               "Delete everything", true).then(function (yes) {
               if (!yes) return;
               PMP.Store.clearAll().then(function () {
+                if (PMP.Sync) PMP.Sync.forgetBase();
                 PMP.UI.toast("All progress deleted.", "ok");
                 PMP.Router.navigate("data", null, true);
               });
@@ -31008,7 +31277,10 @@ PMP.Metrics = (function () {
      for coverage, which measures breadth and makes no claim about scoring,
      and they still reach the mistake journal. This is the only place the
      coach changes a figure. */
-  function unassisted(a) { return !a.hinted; }
+  /* A phone's lesson quick check (`check`, set by §10.18 on import) is kept
+     out on the same terms: on the web quick checks never reach `attempts`,
+     and one arriving from a phone should not lift accuracy either. */
+  function unassisted(a) { return !a.hinted && !a.check; }
 
   /* ── 10.00.2  ACCURACY, DECAYED ──────────────────────────────────────────
      A weighted mean over the last ACCURACY_WINDOW answers, where an answer's
@@ -31095,9 +31367,15 @@ PMP.Metrics = (function () {
 
   /* ── 10.00.5  MOCK SITTINGS ──────────────────────────────────────────────
      Newest first. `pct` is the item mark rather than the part mark, because
-     it has to agree with the figure §10.03 printed on the results screen. */
+     it has to agree with the figure §10.03 printed on the results screen.
+
+     A sitting finished on a phone arrives through §10.18 as a summary only:
+     a score and a per-domain split, with no paper behind it. It counts here
+     like any other sitting, marked `foreign` and with no rows, and is
+     matched to the web's own sittings by finish time and title so a web
+     sitting that went to a phone and back is not counted twice. */
   function mocks(state) {
-    return (state.exams || [])
+    var own = (state.exams || [])
       .filter(function (e) { return e && e.score && e.finishedAt; })
       .map(function (e) {
         return {
@@ -31105,13 +31383,23 @@ PMP.Metrics = (function () {
           right: e.score.right, of: e.score.of,
           rows: e.rows || [], layout: e.layout || null
         };
-      })
-      .sort(function (x, y) { return y.at - x.at; });
+      });
+    var mine = Object.create(null);
+    (state.exams || []).forEach(function (e) {
+      if (e && e.finishedAt && PMP.Sync) mine[PMP.Sync.mockKey(e)] = true;
+    });
+    var sh = state.shared && Array.isArray(state.shared.mocks) ? state.shared.mocks : [];
+    sh.forEach(function (m) {
+      if (!m || !m.at || !(m.n > 0) || mine[m.at + "|" + (m.title || "")]) return;
+      own.push({ id: "mock-" + m.at, at: m.at, pct: (m.right || 0) / m.n, right: m.right || 0, of: m.n,
+                 rows: [], layout: null, foreign: true, title: m.title || "" });
+    });
+    return own.sort(function (x, y) { return y.at - x.at; });
   }
 
   /* ── 10.00.6  DAYS STUDIED ───────────────────────────────────────────────
      A day counts if anything happened on it: a question answered, a sitting
-     finished, or a card reviewed. Cards are read from each record's `last`
+     finished, a scenario ranked, a formula drill marked, or a card reviewed. Cards are read from each record's `last`
      stamp, which is the only per-day evidence §10.05 keeps — a card reviewed
      twice in one day is one card here, which understates volume and gets the
      only thing this index is asked for, whether the day was a study day,
@@ -31121,17 +31409,18 @@ PMP.Metrics = (function () {
     function touch(t, key, n) {
       if (!t) return;
       var d = PMP.time.startOfDay(t);
-      var e = m[d] || (m[d] = { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0 });
+      var e = m[d] || (m[d] = { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0, drills: 0 });
       e[key] += n;
     }
     attempts(state).forEach(function (a) {
       var d = PMP.time.startOfDay(ts(a.at));
-      var e = m[d] || (m[d] = { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0 });
+      var e = m[d] || (m[d] = { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0, drills: 0 });
       e.items++; e.credit += creditOf(a);
       if (a.ms > 500) e.ms += a.ms;
     });
-    (state.exams || []).forEach(function (e) { touch(ts(e.finishedAt), "exams", 1); });
+    mocks(state).forEach(function (mk) { touch(mk.at, "exams", 1); });
     (state.scenarioRuns || []).forEach(function (r) { touch(ts(r.at), "scenarios", 1); });
+    (state.drills || []).forEach(function (r) { if (r) touch(typeof r.at === "number" ? r.at : ts(r.at), "drills", 1); });
     var srs = state.srs || {};
     Object.keys(srs).forEach(function (id) {
       var r = srs[id];
@@ -31140,7 +31429,7 @@ PMP.Metrics = (function () {
     return m;
   }
 
-  function activeDay(e) { return !!e && (e.items > 0 || e.cards > 0 || e.exams > 0 || e.scenarios > 0); }
+  function activeDay(e) { return !!e && (e.items > 0 || e.cards > 0 || e.exams > 0 || e.scenarios > 0 || e.drills > 0); }
 
   /* ── 10.00.7  STREAK ─────────────────────────────────────────────────────
      Counted back from today, and a day with nothing on it only breaks the
@@ -31172,7 +31461,7 @@ PMP.Metrics = (function () {
     return {
       current: cur, longest: best, days: days,
       activeInWindow: days.filter(function (d) { return d.on; }).length,
-      today: idx[today] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0 }
+      today: idx[today] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0, drills: 0 }
     };
   }
 
@@ -31292,7 +31581,7 @@ PMP.Metrics = (function () {
       ready: st.activeInWindow > 0,
       figure: st.activeInWindow + " / " + R.HABIT_TARGET_DAYS,
       detail: "Days you studied in the last " + R.HABIT_WINDOW_DAYS + ", against a target of " +
-        R.HABIT_TARGET_DAYS + ". Anything counts \u2014 a question, a card, a sitting.",
+        R.HABIT_TARGET_DAYS + ". Anything counts \u2014 a question, a card, a sitting, a formula drill.",
       route: "cards", cta: "Do something small today"
     });
 
@@ -31483,7 +31772,7 @@ PMP.Metrics = (function () {
     MIN_SAMPLE: MIN_SAMPLE,
     attempts: attempts, creditOf: creditOf,
     accuracy: accuracy, byTask: byTask, byDomain: byDomain, byApproach: byApproach,
-    pace: pace, mocks: mocks, dayIndex: dayIndex, streak: streak, coverage: coverage,
+    pace: pace, mocks: mocks, dayIndex: dayIndex, activeDay: activeDay, streak: streak, coverage: coverage,
     components: components, readiness: readiness, nextActions: nextActions,
     countdown: countdown, clamp01: clamp01
   };
@@ -32351,7 +32640,7 @@ PMP.Planner = (function () {
     renderPlan(host, p, a);
   }
 
-  PMP.Router.register("planner", { title: "Study planner", render: view });
+  PMP.Router.register("planner", { title: "Study plan", render: view });
 
   return {
     build: build, assess: assess, diagnostic: diagnostic,
@@ -32410,6 +32699,8 @@ PMP.Analytics = (function () {
           onclick: function () { PMP.Router.navigate("practice"); }
         }, [PMP.dom.icon("target"), "Start a drill"])
       ]));
+      var d0 = drillsCard(state);
+      if (d0) host.appendChild(d0);
       return;
     }
 
@@ -32444,6 +32735,49 @@ PMP.Analytics = (function () {
       C.calibration(state),
       "Recorded as one bit \u2014 Sure or Not sure \u2014 so this is a comparison of two rates rather than a reliability curve. The row that matters is Sure: those are the ones a second look on the day will not catch."
     ));
+
+    var dc = drillsCard(state);
+    if (dc) host.appendChild(dc);
+  }
+
+  /* The formula lab's drill log (§10.06.10a), by group. A table rather than
+     a chart: the rows are few, and the useful reading is which group still
+     has misses in it, not a shape. Shown only once a drill has been marked,
+     and never folded into the accuracy figures above. */
+  function drillsCard(state) {
+    var rows = (state.drills || []).filter(function (r) { return r && r.at; });
+    if (!rows.length) return null;
+    var by = Object.create(null), order = [];
+    rows.forEach(function (r) {
+      var k = (PMP.FormulaLab && PMP.FormulaLab.generatorGroup(r.g)) || "other";
+      if (!by[k]) { by[k] = { n: 0, right: 0, last: 0 }; order.push(k); }
+      var e = by[k];
+      e.n++;
+      if (r.ok) e.right++;
+      e.last = Math.max(e.last, typeof r.at === "number" ? r.at : (Date.parse(r.at) || 0));
+    });
+    var label = {};
+    (PMP.FORMULAS || []).forEach(function (g) { label[g.id] = g.label; });
+    var body = el("tbody");
+    order.forEach(function (k) {
+      var e = by[k];
+      body.appendChild(el("tr", null, [
+        el("td", { text: label[k] || (k === "other" ? "Other" : k) }),
+        el("td", { class: "n", text: String(e.n) }),
+        el("td", { class: "n", text: String(e.right) }),
+        el("td", { class: "n", text: PMP.fmt.pct(e.right / e.n) }),
+        el("td", { text: PMP.fmt.dateShort(new Date(e.last).toISOString()) })
+      ]));
+    });
+    var tbl = el("table", { class: "tbl" }, [
+      el("thead", null, [el("tr", null, [
+        el("th", { text: "Group" }), el("th", { class: "n", text: "Problems" }), el("th", { class: "n", text: "Right" }),
+        el("th", { class: "n", text: "Share right" }), el("th", { text: "Last" })
+      ])]),
+      body
+    ]);
+    return card("Formula drills", "Which calculations still slip?", el("div", { style: "overflow-x:auto" }, [tbl]),
+      PMP.fmt.plural(rows.length, "problem") + " marked in the formula lab. They count as study days but stay out of accuracy: a generated sum is practice at arithmetic, not an exam item.");
   }
 
   PMP.Router.register("analytics", { title: "Analytics", render: view });
@@ -32455,13 +32789,15 @@ PMP.Analytics = (function () {
 /* ── 10.10  MISTAKE JOURNAL ─────────────────────────────────────────────────
    Every wrong answer, grouped by why it was wrong rather than by what it was
    about. The claim behind the feature, and it is a strong one, is that the
-   distribution across these five causes is more actionable than the score:
+   distribution across these six causes is more actionable than the score:
    two candidates at 62% need completely different next fortnights if one is
    losing marks to gaps and the other to misreading.
 
-   The five causes are fixed and they are exhaustive by construction — the
-   fifth is the residue. They are ordered from furthest from the mark to
-   closest, which is also roughly the order of how much work each implies.
+   The six causes are fixed and shared with the phone apps: ids, names and
+   order all come from §01.8, so a miss tagged on a phone lands under the
+   same cause here. Rows stored before then used five lower-case ids; §07.1a
+   upgrades them on load. This module adds only what is the web's own: the
+   colour token, the reading for a leading cause, and where it sends you.
 
    Where entries come from. Tagging happens here rather than in the drill, on
    purpose. Asked immediately after getting something wrong, a candidate will
@@ -32478,24 +32814,14 @@ PMP.Analytics = (function () {
 PMP.Journal = (function () {
   var el = PMP.dom.el, icon = PMP.dom.icon;
 
-  var CAUSES = [
-    { id: "knowledge", short: "Knowledge gap",
-      label: "I did not know this",
-      hint: "The material itself was missing. This is the cause that answers to study time." },
-    { id: "misread", short: "Misread the question",
-      label: "I misread it",
-      hint: "You knew the material and answered a question that was not quite the one asked \u2014 a missed \"first\", \"except\", or a role you read past." },
-    { id: "rushed", short: "Rushed",
-      label: "I rushed",
-      hint: "You had it and moved before you had it. Usually visible as a time well under your own median." },
-    { id: "mindset", short: "Wrong mindset",
-      label: "Wrong instinct",
-      hint: "A defensible action, out of order. Escalating before gathering facts, or fixing before asking. The PMI-preferred move was a step you skipped." },
-    { id: "tossup", short: "Two plausible answers",
-      label: "Two answers both worked",
-      hint: "You narrowed it to two and chose wrong. The discriminator was there and was not visible to you." }
-  ];
+  /* The colour token is the id in lower case with dashes, so the stylesheet
+     (03.19) can name it: --cause-knowledge-gap and so on. */
+  var CAUSES = PMP.RULES.causes.map(function (c) {
+    return { id: c.id, short: c.short, label: c.label, hint: c.hint,
+             css: "var(--cause-" + c.id.toLowerCase().replace(/_/g, "-") + ")" };
+  });
   var BY_ID = CAUSES.reduce(function (m, c) { m[c.id] = c; return m; }, {});
+  function colourOf(id) { return BY_ID[id] ? BY_ID[id].css : "var(--fg-muted)"; }
   var MAX_QUEUE = 12;
 
   function repaint() {
@@ -32629,11 +32955,12 @@ PMP.Journal = (function () {
       return "No single cause dominates, which usually means the gaps are real and spread out rather than one habit costing you marks. Work the cold tasks on the analytics heat map.";
     }
     var MSG = {
-      knowledge: "Most of your misses are material you had not learnt. That is the most fixable cause on the list and the one that answers directly to study time \u2014 work the cold tasks and let the flashcards hold them.",
-      misread: "Most of your misses are questions you could have answered. Nothing here is a knowledge problem: slow down on the stem and find the qualifier before you look at the options. Your pace histogram will tell you if you have the seconds to spare.",
-      rushed: "Most of your misses are pace, not knowledge. Check your time-per-question histogram \u2014 if your median is under the band, the marks are being left on the table by speed you do not need.",
-      mindset: "Most of your misses are ordering rather than knowledge: the right action taken at the wrong point. That is what the scenario trainer drills, and it is the cause that most often separates a resit from a pass.",
-      tossup: "Most of your misses are two-answer splits. The discriminator is usually in the stem's constraints rather than in the options \u2014 the scenario trainer's ranked reveal is built to make that visible."
+      KNOWLEDGE_GAP: "Most of your misses are material you had not learnt. That is the most fixable cause on the list and the one that answers directly to study time \u2014 work the cold tasks and let the flashcards hold them.",
+      MISREAD_STEM: "Most of your misses are questions you could have answered. Nothing here is a knowledge problem: slow down on the stem and find the qualifier before you look at the options. Your pace histogram will tell you if you have the seconds to spare.",
+      RUSHED: "Most of your misses are pace, not knowledge. Check your time-per-question histogram \u2014 if your median is under the band, the marks are being left on the table by speed you do not need.",
+      WRONG_MINDSET: "Most of your misses are ordering rather than knowledge: the right action taken at the wrong point. That is what the scenario trainer drills, and it is the cause that most often separates a resit from a pass.",
+      TWO_PLAUSIBLE: "Most of your misses are two-answer splits. The discriminator is usually in the stem's constraints rather than in the options \u2014 the scenario trainer's ranked reveal is built to make that visible.",
+      CALCULATION: "Most of your misses are arithmetic slips on methods you know. Write the formula before the numbers, carry full precision to the end, and check the answer reads the right way round \u2014 a CPI over 1 is under budget. The formula lab's drill is the place to make that a habit."
     };
     return MSG[top.c.id];
   }
@@ -32649,7 +32976,7 @@ PMP.Journal = (function () {
     host.appendChild(el("div", { class: "view-hd" }, [
       el("span", { class: "eyebrow", text: "Mistake journal" }),
       el("h2", { text: "Why you got them wrong" }),
-      el("p", { text: "Every answer that missed full marks, waiting to be given a cause. The distribution across the five causes is usually a better guide to what to do next than the score is." })
+      el("p", { text: "Every answer that missed full marks, waiting to be given a cause. The distribution across the six causes is usually a better guide to what to do next than the score is." })
     ]));
 
     if (!rows.length) {
@@ -32705,7 +33032,7 @@ PMP.Journal = (function () {
     var key = el("div", { class: "cause-key" });
     CAUSES.forEach(function (c) {
       key.appendChild(el("div", { class: "cause-key-row" }, [
-        el("span", { class: "sw", style: "background:var(--cause-" + c.id + ")" }),
+        el("span", { class: "sw", style: "background:" + c.css }),
         el("span", null, [
           el("span", { class: "cn", text: c.short }),
           el("span", { class: "cd", text: c.hint })
@@ -32718,13 +33045,14 @@ PMP.Journal = (function () {
     var lead = CAUSES.map(function (c) { return { c: c, n: cs[c.id] || 0 }; })
       .sort(function (a, b) { return b.n - a.n; })[0];
     if (total >= 8 && lead.n / total >= 0.3) {
-      var target = { knowledge: "practice", misread: "practice", rushed: "practice", mindset: "scenarios", tossup: "scenarios" }[lead.c.id];
+      var target = { KNOWLEDGE_GAP: "practice", MISREAD_STEM: "practice", RUSHED: "practice",
+                     WRONG_MINDSET: "scenarios", TWO_PLAUSIBLE: "scenarios", CALCULATION: "formulas" }[lead.c.id];
       card.appendChild(el("div", { class: "filter-bar" }, [
         el("button", {
           class: "btn btn--primary", type: "button",
           onclick: function () { PMP.Router.navigate(target); }
-        }, [icon(target === "scenarios" ? "branch" : "target"),
-            target === "scenarios" ? "Drill the ordering" : "Work on it"]),
+        }, [icon(target === "scenarios" ? "branch" : target === "formulas" ? "sigma" : "target"),
+            target === "scenarios" ? "Drill the ordering" : target === "formulas" ? "Drill the formulas" : "Work on it"]),
         el("span", { class: "spacer" }),
         el("span", { class: "hint", text: PMP.fmt.plural(total, "tagged mistake") + " on record." })
       ]));
@@ -32735,7 +33063,7 @@ PMP.Journal = (function () {
   /* A knowledge gap answers to teaching, so a miss tagged that way links to
      the lesson for its task when one is written. */
   function lessonLink(r) {
-    if (r.entry.cause !== "knowledge" || !PMP.Learn) return null;
+    if (r.entry.cause !== "KNOWLEDGE_GAP" || !PMP.Learn) return null;
     var lesson = PMP.Learn.forTask(r.entry.ecoTask || r.attempt.ecoTask);
     if (!lesson) return null;
     return el("a", {
@@ -32754,7 +33082,7 @@ PMP.Journal = (function () {
     tagged.slice(0, 40).forEach(function (r) {
       var c = BY_ID[r.entry.cause];
       list.appendChild(el("div", { class: "jr-row" }, [
-        el("span", { class: "chip", style: "border-color:var(--cause-" + r.entry.cause + ");color:var(--cause-" + r.entry.cause + ")", text: c ? c.short : r.entry.cause }),
+        el("span", { class: "chip", style: "border-color:" + colourOf(r.entry.cause) + ";color:" + colourOf(r.entry.cause), text: c ? c.short : r.entry.cause }),
         el("span", { class: "jr-q", text: r.q ? r.q.stem : r.entry.qid }),
         el("span", { style: "display:flex;gap:var(--sp-2);align-items:center" }, [
           el("span", { class: "jr-when", text: PMP.fmt.dateShort(r.entry.at) }),
@@ -32775,11 +33103,15 @@ PMP.Journal = (function () {
 
   PMP.Router.register("journal", { title: "Mistake journal", render: view });
 
-  return { CAUSES: CAUSES, counts: counts, misses: misses, reading: reading };
+  return { CAUSES: CAUSES, counts: counts, misses: misses, reading: reading, colourOf: colourOf };
 })();
 
 
-/* ── 10.01  DASHBOARD AND READINESS SCORE ───────────────────────────────────
+/* ── 10.01  PROGRESS (DASHBOARD) AND READINESS SCORE ────────────────────────
+   Called Progress everywhere a person sees it: the rail, the title bar and
+   the page itself. The module keeps its first name, PMP.Dashboard, and its
+   route, #/dashboard, so links people have saved still open it.
+
    The first screen, and the one most likely to be read in ten seconds on the
    way to doing something else. It answers four questions in that order: how
    ready am I, where am I weak, am I keeping at it, and what should I do next.
@@ -33236,7 +33568,7 @@ PMP.Dashboard = (function () {
           : PMP.fmt.plural(total, "mistake") + " tagged so far. The distribution starts meaning something at about eight."
       }));
     } else {
-      card.appendChild(el("p", { text: "Once something goes wrong it lands there to be given a cause. The distribution across the five causes is usually a better guide to the next fortnight than the score is." }));
+      card.appendChild(el("p", { text: "Once something goes wrong it lands there to be given a cause. The distribution across the six causes is usually a better guide to the next fortnight than the score is." }));
     }
     card.appendChild(el("div", { class: "filter-bar" }, [
       el("button", {
@@ -33394,6 +33726,7 @@ PMP.Settings = (function () {
       ]),
       el("div", { class: "filter-bar" }, [
         el("a", { class: "btn btn--sm", href: "#/data" }, [icon("data"), "Backup and packs"]),
+        el("a", { class: "btn btn--sm", href: "#/sync" }, [icon("sync"), "Cloud sync"]),
         el("a", { class: "btn btn--sm", href: "#/audit" }, "Content audit")
       ])
     ]);
@@ -33469,9 +33802,20 @@ PMP.Settings = (function () {
      "lesson" mode. Those answers are real attempts, recorded like any drill
      and tagged with the lesson id. When the set finishes, its score is kept
      on the lesson as practice: { at, credit, n }, where credit is the share
-     of the set earned, skipped items counting as nothing. The first set at
-     MASTERY_SHARE or better stamps masteredAt, once. A later, weaker set
-     replaces practice but never takes Mastered away.
+     of the set earned, skipped items counting as nothing.
+
+   · Mastered is the shared task rule in §01.8, applied to the lesson's ECO
+     task, so a lesson reads Mastered here exactly when its task does on a
+     phone: at least `minAnswers` answers on the task, `accuracy` or better
+     across the last `window` of them, and an answer within `fadeDays`. It is
+     derived on every read and never stored, so it fades as well as arrives.
+     Counted: every answer on the task, the practice set's included, since on
+     the web those are ordinary drill answers. Left out: hinted answers, a
+     right answer marked as a guess, and a phone's lesson quick checks
+     (`check`, §10.18), the same rows the shared rule leaves out. A lesson
+     with no task of its own (foundations, exam skills) is mastered by its
+     practice set scoring `accuracy` or better. masteredAt still records the
+     first time the badge was earned, as history.
 
    Every piece of lesson text is set with textContent. Section bodies are
    split into paragraphs on blank lines; nothing in a lesson is parsed as
@@ -33480,7 +33824,8 @@ PMP.Settings = (function () {
 PMP.Learn = (function () {
   var el = PMP.dom.el, icon = PMP.dom.icon, on = PMP.dom.on;
 
-  var MASTERY_SHARE = 0.7;   /* practice-set score that earns Mastered */
+  var MR = PMP.RULES.mastery;
+  var MASTERY_SHARE = MR.accuracy;   /* the share that earns Mastered, §01.8 */
   var RETAKE_DAYS = 2;       /* suggested gap before retaking a set below it */
   var PARTS = [
     "Overview", "Why it matters on the exam", "The concept", "Three lenses",
@@ -33540,10 +33885,38 @@ PMP.Learn = (function () {
     };
   }
 
+  /* ── 10.15.1a  MASTERY ─────────────────────────────────────────────────
+     The task rule, as described above. Returns the figures as well as the
+     verdict, because the reader prints them. */
+  function taskMastery(state, ecoTask) {
+    var rows = PMP.Metrics.attempts(state).filter(function (a) {
+      if (a.ecoTask !== ecoTask || a.hinted || a.check) return false;
+      return !(a.confidence === 1 && PMP.Metrics.creditOf(a) >= 1);
+    });
+    var last = rows.slice(-MR.window);
+    var acc = last.length ? last.reduce(function (t, a) { return t + PMP.Metrics.creditOf(a); }, 0) / last.length : 0;
+    var lastAt = rows.length ? Date.parse(rows[rows.length - 1].at) : 0;
+    var idle = lastAt ? Math.floor((Date.now() - lastAt) / 86400000) : null;
+    var faded = idle !== null && idle > MR.fadeDays;
+    var earned = rows.length >= MR.minAnswers && acc >= MR.accuracy;
+    return { n: rows.length, window: last.length, acc: acc, idleDays: idle,
+             earned: earned, faded: earned && faded, mastered: earned && !faded };
+  }
+
+  function mastery(lesson, state) {
+    state = state || PMP.Store.state;
+    if (lesson.ecoTask) return taskMastery(state, lesson.ecoTask);
+    var rec = (state.lessons || {})[lesson.id];
+    var prc = rec && rec.practice;
+    var ok = !!prc && prc.credit >= MR.accuracy;
+    return { set: true, mastered: ok, earned: ok, faded: false, acc: prc ? prc.credit : 0, n: prc ? prc.n : 0 };
+  }
+  function isMastered(lesson) { return mastery(lesson).mastered; }
+
   function status(lesson) {
     var rec = recordOf(lesson.id);
     if (!rec) return "none";
-    if (rec.masteredAt) return "mastered";
+    if (isMastered(lesson)) return "mastered";
     if (rec.completedAt) return "complete";
     var c = counts(lesson, rec);
     return c.done ? "progress" : "none";
@@ -33866,7 +34239,8 @@ PMP.Learn = (function () {
       el("p", { text: PMP.fmt.plural(Math.min(pr.count || 10, nq), "question")
         + (task ? " on " + task.label.toLowerCase() + ", drawn from the " + nq + " in the bank"
                 : ", drawn from the " + nq + " in the bank that fit this lesson")
-        + " and marked as you go. Score " + PMP.fmt.pct(MASTERY_SHARE) + " or more to master the lesson. These answers are recorded like any drill, so they count towards accuracy and readiness." }),
+        + " and marked as you go. These answers are recorded like any drill, so they count towards accuracy and readiness"
+        + (task ? ", and towards mastering the task: " + masteryRuleText() + "." : ". Score " + PMP.fmt.pct(MASTERY_SHARE) + " or more to master the lesson.") }),
       el("div", { class: "filter-bar" }, links)
     ]));
 
@@ -33914,14 +34288,14 @@ PMP.Learn = (function () {
       var prc = rec && rec.practice;
       ui.mastery.appendChild(el("ul", { class: "keylist" }, [
         el("li", null, [
-          el("span", { class: rec && rec.masteredAt ? "chip chip--correct" : "chip",
+          el("span", { class: isMastered(lesson) ? "chip chip--correct" : "chip",
             text: prc ? PMP.fmt.pct(prc.credit) : "\u2014" }),
           el("span", { text: prc
             ? "Last practice set, " + PMP.fmt.plural(prc.n, "question") + " on " + PMP.fmt.dateShort(prc.at)
             : "Practice set not taken yet" })
         ])
       ]));
-      ui.mastery.appendChild(el("p", { class: "ln-note", text: masteryNote(rec) }));
+      ui.mastery.appendChild(el("p", { class: "ln-note", text: masteryNote(lesson, rec) }));
 
       /* Every check tried and no set taken yet: the coach suggests the set
          now, while the teaching is fresh. */
@@ -33975,40 +34349,57 @@ PMP.Learn = (function () {
     var share = r.n ? r.credit / r.n : 0;
     touch(lesson, function (rec) {
       rec.practice = { at: at, credit: Math.round(share * 1000) / 1000, n: r.n };
-      if (!rec.masteredAt && share >= MASTERY_SHARE) rec.masteredAt = at;
     });
+    /* Read after the set is on the record: a set-mastered lesson needs it. */
+    if (isMastered(lesson) && !(recordOf(lesson.id) || {}).masteredAt) {
+      touch(lesson, function (rec) { rec.masteredAt = at; });
+    }
+  }
+
+  function masteryRuleText() {
+    return "at least " + MR.minAnswers + " answers on it, " + PMP.fmt.pct(MR.accuracy) + " or better across your last " +
+      MR.window + ", and an answer in the last " + MR.fadeDays + " days";
   }
 
   function retakeDate(prc) {
     return new Date(Date.parse(prc.at) + RETAKE_DAYS * 86400000).toISOString();
   }
 
-  function masteryNote(rec) {
+  function masteryNote(lesson, rec) {
     var prc = rec && rec.practice;
-    if (rec && rec.masteredAt) return "Mastered since " + PMP.fmt.dateShort(rec.masteredAt) + ".";
-    if (prc) return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on the practice set. Re-read the sections behind your misses, then retake the set on or after " + PMP.fmt.dateShort(retakeDate(prc)) + ".";
-    return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on this lesson's practice set. Skipped questions count as wrong.";
+    var m = mastery(lesson);
+    if (m.set) {
+      if (m.mastered) return "Mastered: the last practice set scored " + PMP.fmt.pct(m.acc) + ".";
+      if (prc) return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on the practice set. Re-read the sections behind your misses, then retake the set on or after " + PMP.fmt.dateShort(retakeDate(prc)) + ".";
+      return "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + " or more on this lesson's practice set. Skipped questions count as wrong.";
+    }
+    var where = PMP.fmt.plural(m.n, "answer") + " on this task so far" +
+      (m.window ? ", " + PMP.fmt.pct(m.acc) + " across the last " + m.window : "") + ".";
+    if (m.mastered) return "Mastered: " + where + " It stays mastered while you answer on the task at least every " + MR.fadeDays + " days.";
+    if (m.faded) return "Mastered once, and faded: nothing has been answered on this task for " + PMP.fmt.plural(m.idleDays, "day") + ". A practice set brings it back.";
+    return "Mastered needs " + masteryRuleText() + ". You have " + where +
+      (prc && m.n >= MR.minAnswers ? " Re-read the sections behind your misses, then retake the set on or after " + PMP.fmt.dateShort(retakeDate(prc)) + "." : "");
   }
 
   /* Shown at the top of the practice summary when a lesson set ends. */
   function setCard(lesson, r) {
     var rec = recordOf(lesson.id);
     var share = r.n ? r.credit / r.n : 0;
-    var passed = share >= MASTERY_SHARE;
+    var m = mastery(lesson);
+    var passed = m.mastered;
     var card = el("div", { class: "card" }, [
       el("span", { class: "eyebrow", text: "Lesson " + lesson.id + " \u00B7 " + lesson.title }),
       el("h2", { text: !r.answered ? "Set not scored"
-        : passed ? "Lesson mastered"
-        : rec && rec.masteredAt ? "Below the mastery mark this time" : "Not mastered yet" }),
+        : passed ? "Lesson mastered" : "Not mastered yet" }),
       el("p", { text: "This set scored " + PMP.fmt.pct(share) + " across " + PMP.fmt.plural(r.n, "question")
-        + ", with part marks counted and skipped questions counted as wrong. Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + "." })
+        + ", with part marks counted and skipped questions counted as wrong. " + (m.set
+          ? "Mastered needs " + PMP.fmt.pct(MASTERY_SHARE) + "."
+          : "Mastering the task needs " + masteryRuleText() + "; you have " + PMP.fmt.plural(m.n, "answer") + " on it, " + PMP.fmt.pct(m.acc) + " across the last " + m.window + ".") })
     ]);
     if (!r.answered) {
       card.lastChild.textContent = "Nothing in this set was answered, so the lesson record is unchanged.";
-    } else if (!passed) {
-      card.appendChild(el("p", { text: rec && rec.masteredAt
-        ? "The lesson stays Mastered from an earlier set. The misses below are still worth reading."
-        : "Every question you missed is open below, with the reasoning for each option. Re-read the lesson, then retake the set on or after "
+    } else if (!passed && rec && rec.practice) {
+      card.appendChild(el("p", { text: "Every question you missed is open below, with the reasoning for each option. Re-read the lesson, then retake the set on or after "
           + PMP.fmt.dateShort(retakeDate(rec.practice)) + ". A gap of a couple of days tests what you kept, not what you just read." }));
     }
     card.appendChild(el("div", { class: "filter-bar" }, [
@@ -34107,6 +34498,7 @@ PMP.Learn = (function () {
   PMP.Router.register("learn", { title: "Learn", render: view });
 
   return { path: path, status: status, lessonById: lessonById, forTask: forTask, bankFor: bankFor,
+           mastery: mastery, taskMastery: taskMastery, isMastered: isMastered,
            POOL_KEYS: POOL_KEYS, MASTERY_SHARE: MASTERY_SHARE, RETAKE_DAYS: RETAKE_DAYS };
 })();
 
@@ -34144,7 +34536,9 @@ PMP.Learn = (function () {
    ═════════════════════════════════════════════════════════════════════════ */
 PMP.Coach = (function () {
   var DAY = 86400000;
-  var REENTRY_GAP_DAYS = 4;   /* a gap this long gets a comeback session */
+  /* A gap this long gets a comeback session. Shared with the phone apps
+     through §01.8, so a week away reads as a week away on every device. */
+  var REENTRY_GAP_DAYS = PMP.RULES.reentryDays;
   var WEEKLY_EVERY_DAYS = 7;
   var EXAM_WEEK_DAYS = 6;     /* the six days before the exam taper */
   var TRIAGE_MIN = 5;         /* untagged misses before triage joins the session */
@@ -34195,18 +34589,17 @@ PMP.Coach = (function () {
 
   /* ── 10.16.2  ACTIVITY ───────────────────────────────────────────────────
      Read off §10.00's day index, on its own rule for what counts as a study
-     day: a question, a card, a sitting or a scenario. */
+     day: a question, a card, a sitting, a scenario or a formula drill. */
   function activeDays(state) {
     var idx = PMP.Metrics.dayIndex(state);
     return Object.keys(idx).map(Number).filter(function (d) {
-      var e = idx[d];
-      return e.items > 0 || e.cards > 0 || e.exams > 0 || e.scenarios > 0;
+      return PMP.Metrics.activeDay(idx[d]);
     }).sort(function (a, b) { return a - b; });
   }
 
   function todayIndex(state) {
     var idx = PMP.Metrics.dayIndex(state);
-    return idx[sod(Date.now())] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0 };
+    return idx[sod(Date.now())] || { items: 0, ms: 0, credit: 0, cards: 0, exams: 0, scenarios: 0, drills: 0 };
   }
 
   /* ── 10.16.3  STAGE ──────────────────────────────────────────────────────
@@ -34262,7 +34655,7 @@ PMP.Coach = (function () {
         if (earlier) return { id: l.id, title: l.title, lesson: l, pct: PMP.fmt.pct(rec.practice.credit), days: 0, done: true };
         continue;
       }
-      if (rec.masteredAt || rec.practice.credit >= PMP.Learn.MASTERY_SHARE) continue;
+      if (PMP.Learn.isMastered(l) || rec.practice.credit >= PMP.Learn.MASTERY_SHARE) continue;
       var days = PMP.time.daysBetween(at, now);
       if (days >= PMP.Learn.RETAKE_DAYS) {
         return { id: l.id, title: l.title, lesson: l, pct: PMP.fmt.pct(rec.practice.credit), days: days, done: false };
@@ -34715,6 +35108,14 @@ PMP.Coach = (function () {
      day" means wherever the file is opened. */
   var STUDY_HOUR = { morning: [7, 0], midday: [12, 30], evening: [19, 0], varies: [19, 0] };
 
+  /* RFC 5545 §3.3.11 TEXT: a backslash, a semicolon and a comma are escaped
+     with a backslash, and a line break becomes the two characters \n. The
+     backslash goes first, or the escapes the later steps add would
+     themselves be doubled. */
+  function icsText(str) {
+    return String(str).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r\n|\r|\n/g, "\\n");
+  }
+
   function calendar(state) {
     state = state || PMP.Store.state;
     var cp = currentPlan(state);
@@ -34723,7 +35124,7 @@ PMP.Coach = (function () {
     var sl = slice(state);
     var hm = STUDY_HOUR[(sl.profile && sl.profile.when) || "varies"] || STUDY_HOUR.varies;
     function pad(n) { return (n < 10 ? "0" : "") + n; }
-    function esc(s) { return String(s).replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n"); }
+    var esc = icsText;
     /* RFC 5545 folds content lines at 75 octets; continuation lines start
        with a space. Counted in characters, which is safe for this ASCII-
        heavy text and only ever folds earlier than required otherwise. */
@@ -34783,16 +35184,16 @@ PMP.Coach = (function () {
           readiness: { score: 31, provisional: true, gates: ["40 more answers needed", "9 more ECO tasks to touch"], gatesText: "40 more answers needed, and 9 more ECO tasks to touch", components: [] },
           plan: { behind: true, debt: 416, behindLabel: "6h 56m", phase: "consolidate", rest: false, todayMins: 60, todayDone: 0, daysLeft: 30, diagnostic: false },
           cards: { today: 25, due: 20, leech: 1 },
-          journal: { untagged: 7, tagged: 12, lead: { id: "misread", short: "Misread the question", n: 6, share: 0.5 }, tagsToday: 0 },
+          journal: { untagged: 7, tagged: 12, lead: { id: "MISREAD_STEM", short: "Misread the question", n: 6, share: 0.5 }, tagsToday: 0 },
           pace: { ready: true, median: 31, fast: true, slow: false, target: 80 },
           coverage: { touched: 22, of: 26, untouched: 4, firstShort: "x" }, topAction: "coverage",
           mocks: { n: 0, lastDays: null },
           retake: { id: "P4", title: "Project finance", pct: "55%", days: 3, done: false } }),
       v({ attempts: 0, cards: { today: 40, due: 0, leech: 3 }, nextLesson: { id: "F1", title: "How the exam works" },
-          journal: { untagged: 0, tagged: 9, lead: { id: "mindset", short: "Wrong mindset", n: 4, share: 0.44 }, tagsToday: 0 },
+          journal: { untagged: 0, tagged: 9, lead: { id: "WRONG_MINDSET", short: "Wrong mindset", n: 4, share: 0.44 }, tagsToday: 0 },
           pace: { ready: true, median: 104, fast: false, slow: true, target: 80 },
           mocks: { n: 2, lastDays: 52 } }),
-      v({ plan: null, journal: { untagged: 2, tagged: 10, lead: { id: "knowledge", short: "Knowledge gap", n: 5, share: 0.5 }, tagsToday: 0 } }),
+      v({ plan: null, journal: { untagged: 2, tagged: 10, lead: { id: "KNOWLEDGE_GAP", short: "Knowledge gap", n: 5, share: 0.5 }, tagsToday: 0 } }),
       v({ plan: { behind: false, debt: 0, behindLabel: "0s", phase: "build", rest: false, todayMins: 60, todayDone: 0, daysLeft: 40, diagnostic: false } }),
       v({ stage: "reentry", plan: { behind: true, debt: 1336, behindLabel: "22h 16m", phase: "consolidate", rest: false, todayMins: 60, todayDone: 0, daysLeft: 40, diagnostic: true } }),
       v({ stage: "examweek", countdown: { days: 1, past: false } }),
@@ -34805,7 +35206,7 @@ PMP.Coach = (function () {
     markShown: markShown, dismiss: dismiss, acted: acted,
     slice: slice, setProfile: setProfile, setPref: setPref, setOutcome: setOutcome,
     weeklySummary: weeklySummary, completeWeekly: completeWeekly,
-    hint: hint, HINT_RUNGS: 3, calendar: calendar, STUDY_HOUR: STUDY_HOUR,
+    hint: hint, HINT_RUNGS: 3, calendar: calendar, icsText: icsText, STUDY_HOUR: STUDY_HOUR,
     line: line, fixtures: fixtures,
     REENTRY_GAP_DAYS: REENTRY_GAP_DAYS, WEEKLY_EVERY_DAYS: WEEKLY_EVERY_DAYS, TRIAGE_MIN: TRIAGE_MIN
   };
@@ -35518,6 +35919,1280 @@ PMP.CoachUI = (function () {
            exportCalendar: exportCalendar };
 })();
 
+/* ── 10.18  CLOUD SYNC ──────────────────────────────────────────────────────
+   One progress format for the web, Android and iPhone apps, a merge that all
+   three run identically, and a client for the person's own Google Apps
+   Script, which keeps the shared file in their Drive. docs/progress-format.md
+   is the contract for every part of this section; where the two disagree the
+   code is wrong.
+
+   Five decisions worth knowing before reading the code:
+
+   · The web keeps its own slices. Everything the views read is still the
+     store §07 describes, and the shared document is built from it on the
+     way out (toDoc) and folded back into it on the way in (fromDoc). Data
+     that starts on a phone therefore has to become web data to be seen: a
+     phone's answers become attempts, its card states become `srs`, its
+     mistake tags become journal entries, its mock summaries are listed by
+     §10.00 next to the web's own sittings. What the web has no slice for
+     (a phone's sessions, sittings, check-ins and so on) waits untouched in
+     the `shared` slice and goes back out exactly as it came in.
+
+   · Round trips are lossless, in both directions. A web row carries the
+     fields the shared row has no room for in `wx` (its option order, lesson
+     id, exam id, mode where the shared `src` cannot say it), and the rest of
+     the web's own state rides in the `web` block. A phone row is given an
+     id the web can recognise ("sx-" + question + time) and keeps whatever
+     the web did not understand in `sx`, so writing it back out reproduces
+     it field for field. Without that, each device would keep "improving"
+     the other's rows and every sync would upload the whole file again.
+
+   · The merge is pure. merge(base, local, remote) reads nothing but its
+     arguments and is the same function in every app; tests/fixtures/sync
+     checks this copy against the shared fixture.
+
+   · Sync is off until set up, and is never a pop-up. It runs when the page
+     opens, comes back to the foreground or is hidden, after a practice set,
+     a mock or a card session, and on Sync now. Never during a mock: the
+     sitting owns the page. Failures land on the Cloud sync screen with the
+     time of the last good sync, and nowhere else.
+
+   · The address and the code are not progress. They live in localStorage
+     beside the store, never in it, so they never reach a backup file, an
+     export or the synced document itself, and Disconnect forgets them.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.Sync = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, frag = PMP.dom.frag;
+  var R = PMP.RULES;
+  var DAY = 86400000;
+
+  /* ── 10.18.1  THE DOCUMENT ───────────────────────────────────────────────
+     The four kinds of slice from §3 of the contract. A log's identity is a
+     string built from the fields that name one record; `at` is where it
+     sorts (the weekly report sorts on its week start). */
+  var LOGS = {
+    attempts:    { id: function (r) { return r.q + "|" + r.at; }, cap: 20000 },
+    scenarios:   { id: function (r) { return r.id + "|" + r.at; } },
+    mocks:       { id: function (r) { return r.at + "|" + (r.title || ""); } },
+    sessions:    { id: function (r) { return r.k + "|" + r.at; } },
+    diagnostics: { id: function (r) { return String(r.at); } },
+    chat:        { id: function (r) { return r.at + "|" + r.r; }, cap: 60 },
+    sittings:    { id: function (r) { return r.k + "|" + r.at; }, cap: 2000 },
+    checkins:    { id: function (r) { return r.kind + "|" + r.at; } },
+    weekly:      { id: function (r) { return String(r.w); }, at: function (r) { return r.w; }, cap: 104 },
+    drills:      { id: function (r) { return r.at + "|" + r.g; }, cap: 2000 }
+  };
+  var SETS = ["flags", "lessons"];
+  var MAPS = ["notes", "mistakes", "cards", "snoozed", "mycards", "web", "native"];
+  var HEADER = { type: 1, version: 1, savedAt: 1, device: 1 };
+  /* Shared slices the web builds from its own store on every export. The
+     rest (plan, mocks, sessions …) are kept in `shared` and written back. */
+  var OWNED = { attempts: 1, flags: 1, notes: 1, mistakes: 1, cards: 1, scenarios: 1,
+                lessons: 1, notepad: 1, web: 1, mocks: 1, drills: 1 };
+
+  function isObj(v) { return !!v && typeof v === "object" && !Array.isArray(v); }
+  function arr(v) { return Array.isArray(v) ? v : []; }
+  function obj(v) { return isObj(v) ? v : {}; }
+  function clone(v) { return v === undefined ? undefined : JSON.parse(JSON.stringify(v)); }
+  function ts(v) { if (typeof v === "number") return v; var t = Date.parse(v); return isNaN(t) ? 0 : t; }
+  function iso(ms) { return new Date(ms).toISOString(); }
+
+  /* Canonical JSON: keys sorted at every depth, so two documents that say
+     the same thing compare equal whatever order their keys were written in. */
+  function canon(v) {
+    if (v === undefined) return "~";
+    if (v === null || typeof v !== "object") return JSON.stringify(v);
+    if (Array.isArray(v)) return "[" + v.map(canon).join(",") + "]";
+    return "{" + Object.keys(v).sort().filter(function (k) { return v[k] !== undefined; })
+      .map(function (k) { return JSON.stringify(k) + ":" + canon(v[k]); }).join(",") + "}";
+  }
+  function same(a, b) { return canon(a) === canon(b); }
+
+  function emptyOf(k) {
+    if (LOGS[k] || SETS.indexOf(k) >= 0 || k === "mycards") return [];
+    if (MAPS.indexOf(k) >= 0) return {};
+    if (k === "notepad") return "";
+    return undefined;
+  }
+  function slice(doc, k) {
+    var v = doc ? doc[k] : undefined;
+    if (v === undefined || v === null) return emptyOf(k);
+    return v;
+  }
+  function emptyDoc() { return { type: "pmp-progress", version: 3, savedAt: 0, device: { app: "", id: "" } }; }
+
+  /* Two documents hold the same progress when every slice is equal. When
+     they were written and by which device is not progress. */
+  function sameDoc(a, b) {
+    var keys = Object.create(null);
+    [a || {}, b || {}].forEach(function (d) { Object.keys(d).forEach(function (k) { if (!HEADER[k]) keys[k] = 1; }); });
+    Object.keys(LOGS).concat(SETS, MAPS, ["notepad"]).forEach(function (k) { keys[k] = 1; });
+    return Object.keys(keys).every(function (k) { return same(slice(a, k), slice(b, k)); });
+  }
+
+  /* ── 10.18.2  THE MERGE ──────────────────────────────────────────────────
+     Docs §3, line for line. Logs are a union and never lose a record; sets
+     and maps are three-way against the base, so a removal on one side
+     survives; values move whole. A tie on savedAt goes to local, so the
+     same inputs always give the same answer. */
+  function sortLog(k, list) {
+    var at = LOGS[k].at || function (r) { return r.at; }, id = LOGS[k].id;
+    return list.slice().sort(function (x, y) {
+      var d = (Number(at(x)) || 0) - (Number(at(y)) || 0);
+      if (d) return d;
+      var a = id(x), b = id(y);
+      return a < b ? -1 : a > b ? 1 : 0;
+    });
+  }
+
+  function mergeLog(k, local, remote) {
+    var id = LOGS[k].id, seen = Object.create(null), out = [];
+    arr(local).concat(arr(remote)).forEach(function (r) {
+      if (!r || typeof r !== "object") return;
+      var key = id(r);
+      if (seen[key]) return;
+      seen[key] = 1;
+      out.push(r);
+    });
+    out = sortLog(k, out);
+    var cap = LOGS[k].cap;
+    return cap && out.length > cap ? out.slice(out.length - cap) : out;
+  }
+
+  function mergeSet(base, local, remote) {
+    var b = Object.create(null), l = Object.create(null), r = Object.create(null), all = Object.create(null);
+    arr(base).forEach(function (x) { b[x] = 1; all[x] = 1; });
+    arr(local).forEach(function (x) { l[x] = 1; all[x] = 1; });
+    arr(remote).forEach(function (x) { r[x] = 1; all[x] = 1; });
+    return Object.keys(all).filter(function (x) {
+      return b[x] ? (l[x] && r[x]) : (l[x] || r[x]);
+    }).sort();
+  }
+
+  /* Both sides changed one key: cards keep the later review, mistakes the
+     later tag, everything else the side saved last. */
+  function decide(kind, l, r, localWins) {
+    if (kind === "cards") {
+      if (l === undefined) return r;
+      if (r === undefined) return l;
+      return (Number(r[5]) || 0) > (Number(l[5]) || 0) ? r : l;
+    }
+    if (kind === "mistakes") {
+      if (l === undefined) return r;
+      if (r === undefined) return l;
+      return (Number(r.at) || 0) > (Number(l.at) || 0) ? r : l;
+    }
+    return localWins ? l : r;
+  }
+
+  function mergeMap(kind, base, local, remote, localWins) {
+    var b = obj(base), l = obj(local), r = obj(remote), keys = Object.create(null), out = {};
+    [b, l, r].forEach(function (m) { Object.keys(m).forEach(function (k) { keys[k] = 1; }); });
+    Object.keys(keys).sort().forEach(function (k) {
+      var lc = !same(l[k], b[k]), rc = !same(r[k], b[k]), v;
+      if (!lc && !rc) v = l[k];
+      else if (lc && !rc) v = l[k];
+      else if (!lc && rc) v = r[k];
+      else v = same(l[k], r[k]) ? l[k] : decide(kind, l[k], r[k], localWins);
+      if (v !== undefined) out[k] = v;
+    });
+    return out;
+  }
+
+  /* mycards is a list keyed by id; it merges as a map and is written back
+     as a list sorted by id. */
+  function byId(list) {
+    var m = {};
+    arr(list).forEach(function (c) { if (c && c.id != null) m[c.id] = c; });
+    return m;
+  }
+
+  function mergeValue(b, l, r, localWins) {
+    var lc = !same(l, b), rc = !same(r, b);
+    if (lc && !rc) return l;
+    if (rc && !lc) return r;
+    if (!lc && !rc) return l;
+    return same(l, r) ? l : (localWins ? l : r);
+  }
+
+  function merge(base, local, remote, opts) {
+    opts = opts || {};
+    base = base || emptyDoc();
+    local = local || emptyDoc();
+    remote = remote || emptyDoc();
+    var localWins = (Number(local.savedAt) || 0) >= (Number(remote.savedAt) || 0);
+    var out = {
+      type: "pmp-progress", version: 3,
+      savedAt: opts.now || Date.now(),
+      device: opts.device || clone(local.device) || { app: "web", id: "" }
+    };
+    Object.keys(LOGS).forEach(function (k) { out[k] = mergeLog(k, slice(local, k), slice(remote, k)); });
+    SETS.forEach(function (k) { out[k] = mergeSet(slice(base, k), slice(local, k), slice(remote, k)); });
+    MAPS.forEach(function (k) {
+      if (k === "mycards") {
+        var m = mergeMap(k, byId(base.mycards), byId(local.mycards), byId(remote.mycards), localWins);
+        out[k] = Object.keys(m).sort().map(function (id) { return m[id]; });
+      } else {
+        out[k] = mergeMap(k, slice(base, k), slice(local, k), slice(remote, k), localWins);
+      }
+    });
+    var keys = Object.create(null);
+    [base, local, remote].forEach(function (d) { Object.keys(d).forEach(function (k) { keys[k] = 1; }); });
+    keys.plan = 1; keys.notepad = 1;
+    Object.keys(keys).sort().forEach(function (k) {
+      if (HEADER[k] || LOGS[k] || SETS.indexOf(k) >= 0 || MAPS.indexOf(k) >= 0) return;
+      var v = mergeValue(slice(base, k), slice(local, k), slice(remote, k), localWins);
+      if (v !== undefined) out[k] = v;
+    });
+    return out;
+  }
+
+  /* ── 10.18.3  WEB → SHARED ───────────────────────────────────────────────
+     An attempt row, both ways. core() is the shared row a web attempt maps
+     to; anything of the web's the shared row has no field for goes in `wx`;
+     anything of a phone's the web has no field for came in as `sx` and goes
+     back out unchanged. */
+  var ATTEMPT_MAPPED = { id: 1, qid: 1, ecoTask: 1, domain: 1, approach: 1, type: 1, difficulty: 1,
+                         correct: 1, credit: 1, ms: 1, at: 1, confidence: 1, hinted: 1, mode: 1,
+                         sx: 1, check: 1 };
+  /* A web lesson's practice-set answers are ordinary practice, so they go
+     out as src "practice" (mode "lesson" and the lessonId ride in wx) and
+     count towards mastery on the phones too. Only a phone's own src
+     "lesson" rows, its quick checks, are kept out (`check`). */
+  function srcOf(mode) { return mode === "diagnostic" ? mode : "practice"; }
+  function modeOf(r) {
+    if (r.src === "diagnostic" || r.src === "lesson" || r.src === "exam") return r.src;
+    return r.tm ? "timed" : "practice";
+  }
+  function phoneId(q, at) { return "sx-" + q + "-" + at; }
+
+  function attemptCore(a) {
+    var at = ts(a.at);
+    var r = {
+      q: a.qid, t: a.ecoTask || "", d: a.domain || "", ap: a.approach || "", ty: a.type || "",
+      cr: typeof a.credit === "number" ? a.credit : (a.correct ? 1 : 0),
+      ok: !!a.correct, ms: Number(a.ms) || 0, at: at, src: srcOf(a.mode)
+    };
+    if (a.id && a.id !== phoneId(a.qid, at)) r.id = a.id;
+    if (a.mode === "timed") r.tm = true;
+    if (typeof a.confidence === "number" && a.confidence > 0) r.cf = a.confidence;
+    if (a.difficulty) r.df = a.difficulty;
+    if (a.hinted) r.h = a.hinted;
+    return r;
+  }
+
+  function attemptOut(a) {
+    var r = attemptCore(a), wx = {}, n = 0;
+    Object.keys(a).forEach(function (k) {
+      if (!ATTEMPT_MAPPED[k]) { wx[k] = a[k]; n++; }
+    });
+    if (a.mode && a.mode !== modeOf(r)) { wx.mode = a.mode; n++; }
+    /* A phone's row goes back exactly as it came, so it never grows a wx. */
+    if (n && !a.sx) r.wx = wx;
+    if (a.sx) {
+      Object.keys(a.sx).forEach(function (k) { if (k !== "-") r[k] = a.sx[k]; });
+      arr(a.sx["-"]).forEach(function (k) { delete r[k]; });
+    }
+    return r;
+  }
+
+  function attemptIn(r) {
+    var x = obj(r.wx);
+    var a = {
+      id: r.id || phoneId(r.q, r.at), qid: r.q, ecoTask: r.t || null, domain: r.d || null,
+      approach: r.ap || null, type: r.ty || null, difficulty: r.df || null,
+      correct: !!r.ok, credit: typeof r.cr === "number" ? r.cr : (r.ok ? 1 : 0),
+      ms: Number(r.ms) || 0, at: iso(Number(r.at) || 0),
+      confidence: typeof r.cf === "number" && r.cf > 0 ? r.cf : null,
+      mode: x.mode || modeOf(r)
+    };
+    if (r.h) a.hinted = r.h;
+    Object.keys(x).forEach(function (k) { if (k !== "mode") a[k] = x[k]; });
+    if (!r.wx && !r.id) {
+      /* A phone's row. Its lesson rows are quick checks, which the web
+         keeps out of accuracy (§10.00.1). Whatever it carries that the web
+         does not model is kept so the row goes back out as it came in. */
+      if (r.src === "lesson") a.check = true;
+      var core = attemptCore(a), sx = {}, drop = [], n = 0;
+      Object.keys(r).forEach(function (k) { if (!same(r[k], core[k])) { sx[k] = r[k]; n++; } });
+      Object.keys(core).forEach(function (k) { if (!(k in r)) drop.push(k); });
+      if (drop.length) { sx["-"] = drop; n++; }
+      if (n) a.sx = sx;
+    }
+    return a;
+  }
+
+  /* A card's schedule as the shared eight-number row, and back. The web's
+     own extras (lifetime reviews, and a leech flag that a reset keeps)
+     ride in web.srs. */
+  function cardOut(rec) {
+    return [Number(rec.ease) || PMP.SRS.EASE_START, Number(rec.interval) || 0, Number(rec.reps) || 0,
+            Number(rec.lapses) || 0, Number(rec.due) || 0, Number(rec.last) || 0, Number(rec.first) || 0,
+            rec.suspended ? 1 : 0];
+  }
+  function cardIn(row, extra) {
+    var lapses = Number(row[3]) || 0;
+    var rec = {
+      ease: Number(row[0]) || PMP.SRS.EASE_START, interval: Number(row[1]) || 0, reps: Number(row[2]) || 0,
+      lapses: lapses, due: Number(row[4]) || 0, suspended: !!row[7],
+      leech: lapses >= PMP.SRS.LEECH_THRESHOLD, first: Number(row[6]) || null, last: Number(row[5]) || null,
+      reviews: (Number(row[2]) || 0) + lapses
+    };
+    if (Array.isArray(extra)) {
+      if (typeof extra[0] === "number") rec.reviews = extra[0];
+      if (extra[1]) rec.leech = true;
+    }
+    return rec;
+  }
+
+  var SCN_MAPPED = { sid: 1, chosen: 1, rank: 1, at: 1, credit: 1, sx: 1 };
+  function scenarioOut(run) {
+    var r = { id: run.sid, p: run.chosen || "", r: run.rank || "wrong", at: ts(run.at) };
+    var wx = {}, n = 0;
+    Object.keys(run).forEach(function (k) { if (!SCN_MAPPED[k]) { wx[k] = run[k]; n++; } });
+    if (n && !(run.sx)) r.wx = wx;
+    if (run.sx) {
+      Object.keys(run.sx).forEach(function (k) { if (k !== "-") r[k] = run.sx[k]; });
+      arr(run.sx["-"]).forEach(function (k) { delete r[k]; });
+    }
+    return r;
+  }
+  var SCN_BY_ID = null;
+  function scenarioIn(r) {
+    var credit = R.scenarioCredit;
+    var rank = r.r in credit ? r.r : "wrong";
+    if (r.wx) {
+      return Object.assign({ sid: r.id, chosen: r.p, rank: rank, credit: credit[rank], at: iso(Number(r.at) || 0) }, r.wx);
+    }
+    if (!SCN_BY_ID) {
+      SCN_BY_ID = Object.create(null);
+      (PMP.SCENARIOS || []).forEach(function (s) { SCN_BY_ID[s.id] = s; });
+    }
+    var scn = SCN_BY_ID[r.id] || {};
+    var run = {
+      id: phoneId(r.id, r.at), sid: r.id, domain: scn.domain || null, ecoTask: scn.ecoTask || null,
+      approach: scn.approach || null, difficulty: scn.difficulty || null,
+      chosen: r.p, rank: rank, credit: credit[rank], ms: 0, at: iso(Number(r.at) || 0), order: []
+    };
+    var core = { id: r.id, p: r.p, r: rank, at: Number(r.at) || 0 }, sx = {}, drop = [], n = 0;
+    Object.keys(r).forEach(function (k) { if (!same(r[k], core[k])) { sx[k] = r[k]; n++; } });
+    Object.keys(core).forEach(function (k) { if (!(k in r)) drop.push(k); });
+    if (drop.length) { sx["-"] = drop; n++; }
+    run.sx = sx;
+    return run;
+  }
+
+  /* A finished sitting as the shared summary. The title is part of the
+     summary's identity, so it is derived the same way every time. */
+  function mockTitle(e) {
+    var n = e.layout && e.layout.items;
+    return n === PMP.EXAM.TOTAL_ITEMS ? "Full exam" : "Mock exam, " + (n || (e.qids || []).length) + " items";
+  }
+  function mockKey(e) { return ts(e.finishedAt) + "|" + mockTitle(e); }
+  function mockOut(e) {
+    var domains = {};
+    (e.rows || []).forEach(function (r) {
+      if (r.pretest || !r.domain) return;
+      var d = domains[r.domain] || (domains[r.domain] = [0, 0]);
+      if (r.correct) d[0]++;
+      d[1]++;
+    });
+    return { at: ts(e.finishedAt), title: mockTitle(e), n: e.score.of, right: e.score.right,
+             usedMs: Number(e.elapsedMs) || 0, domains: domains };
+  }
+
+  /* Exam dates. The web stores the day ("2026-10-05"); the phones store a
+     moment on it, nine in the morning local time. A moment that already
+     falls on the same day is kept as it is, so a date nobody changed does
+     not read as changed. */
+  function ymdOf(ms) {
+    var d = new Date(ms);
+    return d.getFullYear() + "-" + PMP.fmt.pad(d.getMonth() + 1) + "-" + PMP.fmt.pad(d.getDate());
+  }
+  function msOf(ymd) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(ymd || ""));
+    return m ? new Date(+m[1], +m[2] - 1, +m[3], 9, 0, 0).getTime() : 0;
+  }
+
+  /* Web-only slices that travel in the `web` block. examRun, the sitting in
+     progress, does not: it belongs to the device it is being sat on. */
+  var WEB_SLICES = ["planner", "coach", "issues", "exams", "lessons", "queue", "journal", "packs"];
+  var WEB_KEYS = WEB_SLICES.concat(["settings", "notepadHtml", "ai", "srs"]);
+
+  function deviceId() {
+    var id = store.get("pmp.device");
+    if (!id) {
+      id = randomId(20);
+      store.set("pmp.device", id);
+    }
+    return id;
+  }
+
+  function toDoc(state, opts) {
+    opts = opts || {};
+    var sh = obj(state.shared);
+    var doc = {
+      type: "pmp-progress", version: 3,
+      savedAt: opts.savedAt != null ? opts.savedAt : Date.now(),
+      device: opts.device || { app: "web", id: deviceId() }
+    };
+    Object.keys(sh).forEach(function (k) {
+      if (k === "web" || k === "notepadSrc" || HEADER[k] || OWNED[k]) return;
+      doc[k] = clone(sh[k]);
+    });
+
+    doc.attempts = sortLog("attempts", arr(state.attempts).filter(function (a) {
+      return a && a.qid && ts(a.at);
+    }).map(attemptOut));
+    var flags = obj(state.flags);
+    doc.flags = Object.keys(flags).filter(function (k) { return flags[k]; }).sort();
+    var notes = obj(state.notes);
+    doc.notes = {};
+    Object.keys(notes).sort().forEach(function (k) {
+      if (typeof notes[k] === "string" && notes[k]) doc.notes[k] = notes[k];
+    });
+
+    /* The latest tag per question. The journal keeps one entry per missed
+       answer; the shared slice keeps one per question. */
+    var latest = {};
+    arr(state.journal).forEach(function (j) {
+      if (!j || !j.qid || !j.cause) return;
+      if (!latest[j.qid] || ts(j.at) > ts(latest[j.qid].at)) latest[j.qid] = j;
+    });
+    doc.mistakes = {};
+    Object.keys(latest).sort().forEach(function (q) {
+      var j = latest[q];
+      doc.mistakes[q] = { c: j.cause, n: j.note || "", at: ts(j.at) };
+    });
+
+    var srs = obj(state.srs), srsX = {};
+    doc.cards = {};
+    Object.keys(srs).sort().forEach(function (id) {
+      var rec = srs[id];
+      if (!rec) return;
+      doc.cards[id] = cardOut(rec);
+      var derivedLeech = (Number(rec.lapses) || 0) >= PMP.SRS.LEECH_THRESHOLD;
+      if (rec.reviews !== (Number(rec.reps) || 0) + (Number(rec.lapses) || 0) || !!rec.leech !== derivedLeech) {
+        srsX[id] = [Number(rec.reviews) || 0, rec.leech ? 1 : 0];
+      }
+    });
+
+    doc.scenarios = sortLog("scenarios", arr(state.scenarioRuns).filter(function (r) {
+      return r && r.sid && ts(r.at);
+    }).map(scenarioOut));
+
+    var mocks = {};
+    arr(sh.mocks).forEach(function (m) { if (m) mocks[LOGS.mocks.id(m)] = m; });
+    arr(state.exams).forEach(function (e) {
+      if (e && e.finishedAt && e.score) { var m = mockOut(e); mocks[LOGS.mocks.id(m)] = m; }
+    });
+    doc.mocks = sortLog("mocks", Object.keys(mocks).map(function (k) { return mocks[k]; }));
+
+    /* The formula drill log is already in the shared shape (§10.06.10a). */
+    doc.drills = sortLog("drills", arr(state.drills).filter(function (r) {
+      return r && typeof r.at === "number" && r.g;
+    }).map(clone));
+
+    var lessons = obj(state.lessons);
+    doc.lessons = Object.keys(lessons).filter(function (id) { return lessons[id] && lessons[id].completedAt; }).sort();
+
+    var settings = obj(state.settings);
+    var plan = isObj(sh.plan) ? clone(sh.plan) : null;
+    if (settings.examDate) {
+      /* `days` are calendar weekdays, Sunday 1 to Saturday 7 (not JS getDay,
+         which counts Sunday as 0). The web plans every day, so all seven. */
+      if (!plan) plan = { examDate: 0, hours: 10, days: [1, 2, 3, 4, 5, 6, 7], onboarded: true, rest: true };
+      if (!plan.examDate || ymdOf(plan.examDate) !== String(settings.examDate).slice(0, 10)) plan.examDate = msOf(settings.examDate);
+    } else if (plan) {
+      plan.examDate = 0;
+    }
+    if (plan) doc.plan = plan;
+
+    var np = obj(state.notepad);
+    var html = typeof np.html === "string" && np.html ? np.html : textToHtml(np.text);
+    var src = obj(sh.notepadSrc);
+    doc.notepad = src.html === html && typeof src.markup === "string" ? src.markup : htmlToMarkup(html);
+
+    var web = clone(obj(sh.web)) || {};
+    var st = clone(settings);
+    delete st.theme;
+    web.settings = st;
+    WEB_SLICES.forEach(function (k) { if (state[k] !== undefined) web[k] = clone(state[k]); });
+    web.notepadHtml = html;
+    if (np.ai) web.ai = clone(np.ai);
+    web.srs = srsX;
+    doc.web = web;
+
+    Object.keys(LOGS).concat(SETS, MAPS).forEach(function (k) {
+      if (doc[k] === undefined) doc[k] = emptyOf(k);
+    });
+    return doc;
+  }
+
+  /* ── 10.18.4  SHARED → WEB ───────────────────────────────────────────────
+     The inverse: every slice the views read, rebuilt from a document. `cur`
+     supplies only what never travels: the theme, whether the notes pane is
+     open, and which tab it is on. */
+  function fromDoc(doc, cur) {
+    var d = PMP.Store.defaults();
+    var w = obj(doc.web);
+    var out = {};
+
+    out.attempts = arr(doc.attempts).filter(function (r) { return r && r.q && r.at; }).map(attemptIn);
+
+    var srs = {}, srsX = obj(w.srs), cards = obj(doc.cards);
+    Object.keys(cards).forEach(function (id) {
+      if (Array.isArray(cards[id])) srs[id] = cardIn(cards[id], srsX[id]);
+    });
+    out.srs = srs;
+
+    var flags = {};
+    arr(doc.flags).forEach(function (q) { flags[q] = true; });
+    out.flags = flags;
+    out.notes = clone(obj(doc.notes));
+    out.scenarioRuns = arr(doc.scenarios).filter(function (r) { return r && r.id && r.at; }).map(scenarioIn);
+    out.drills = arr(doc.drills).filter(function (r) { return r && typeof r.at === "number"; }).map(clone);
+
+    WEB_SLICES.forEach(function (k) { out[k] = w[k] !== undefined ? clone(w[k]) : d[k]; });
+
+    /* Lessons: the shared set says which are complete; the web record keeps
+       the detail. A lesson completed on a phone gets a record here. */
+    var lessons = obj(out.lessons), done = Object.create(null);
+    arr(doc.lessons).forEach(function (id) { done[id] = 1; });
+    Object.keys(done).forEach(function (id) {
+      var rec = lessons[id] || (lessons[id] = { opened: [], checks: {} });
+      if (!rec.completedAt) rec.completedAt = iso(Number(doc.savedAt) || Date.now());
+    });
+    Object.keys(lessons).forEach(function (id) {
+      if (lessons[id] && lessons[id].completedAt && !done[id]) delete lessons[id].completedAt;
+    });
+    out.lessons = lessons;
+
+    out.journal = reconcileJournal(arr(out.journal), obj(doc.mistakes), out.attempts);
+
+    var settings = Object.assign({}, d.settings, obj(w.settings));
+    settings.theme = (cur && cur.settings && cur.settings.theme) || settings.theme || "system";
+    if (isObj(doc.plan)) settings.examDate = doc.plan.examDate > 0 ? ymdOf(doc.plan.examDate) : null;
+    out.settings = settings;
+
+    var html = typeof w.notepadHtml === "string" ? w.notepadHtml : "";
+    var markup = typeof doc.notepad === "string" ? doc.notepad : "";
+    if (htmlToMarkup(html) !== markup) html = markupToHtml(markup);
+    var np = obj(cur && cur.notepad);
+    out.notepad = {
+      open: !!np.open, tab: np.tab === "ai" ? "ai" : "notes",
+      text: markupToText(markup), html: html,
+      updatedAt: html === np.html ? (np.updatedAt || null) : new Date().toISOString(),
+      ai: isObj(w.ai) ? clone(w.ai) : (np.ai ? clone(np.ai) : d.notepad.ai)
+    };
+
+    var shared = {};
+    Object.keys(doc).forEach(function (k) {
+      if (HEADER[k] || (OWNED[k] && k !== "mocks")) return;
+      shared[k] = clone(doc[k]);
+    });
+    var webExtra = {};
+    Object.keys(w).forEach(function (k) { if (WEB_KEYS.indexOf(k) < 0) webExtra[k] = clone(w[k]); });
+    if (Object.keys(webExtra).length) shared.web = webExtra;
+    shared.notepadSrc = { html: html, markup: markup };
+    out.shared = shared;
+
+    ["journal", "attempts", "scenarioRuns"].forEach(function (k) { out[k] = PMP.Store.normalise(k, out[k]); });
+    return out;
+  }
+
+  /* The journal against the shared tags. The latest entry for a question
+     is brought in line with its tag; a tag with no entry gets one, on the
+     latest missed answer to that question when there is one; a question
+     whose tag has gone loses its entries. */
+  function reconcileJournal(journal, mistakes, attempts) {
+    var latest = {};
+    journal.forEach(function (j) {
+      if (!j || !j.qid) return;
+      if (!latest[j.qid] || ts(j.at) > ts(latest[j.qid].at)) latest[j.qid] = j;
+    });
+    var out = journal.filter(function (j) { return j && j.qid && mistakes[j.qid]; });
+    var missed = {};
+    attempts.forEach(function (a) {
+      if (PMP.Metrics.creditOf(a) < 1 && (!missed[a.qid] || ts(a.at) > ts(missed[a.qid].at))) missed[a.qid] = a;
+    });
+    Object.keys(mistakes).sort().forEach(function (q) {
+      var m = mistakes[q], L = latest[q];
+      if (!m) return;
+      var at = Number(m.at) || 0;
+      if (L && L.cause === m.c && (L.note || "") === (m.n || "") && ts(L.at) === at) return;
+      if (L) {
+        var i = out.indexOf(L);
+        out[i] = Object.assign({}, L, { cause: m.c, note: m.n || "", at: iso(at) });
+        return;
+      }
+      var a = missed[q] || null, qq = PMP.Content && PMP.Content.byId(q);
+      out.push({
+        id: phoneId(q, at), attemptId: a ? a.id : null, qid: q,
+        ecoTask: (a && a.ecoTask) || (qq && qq.ecoTask) || null,
+        domain: (a && a.domain) || (qq && qq.domain) || null,
+        cause: m.c, at: iso(at), note: m.n || ""
+      });
+    });
+    return out;
+  }
+
+  /* Puts a document into the store and repaints. External, so §10.18.6
+     does not read it as a change made on this device. */
+  var SLICES = ["attempts", "srs", "flags", "notes", "scenarioRuns", "lessons", "journal", "settings",
+                "notepad", "shared", "drills"].concat(WEB_SLICES.filter(function (k) { return k !== "lessons" && k !== "journal"; }));
+  function apply(doc) {
+    var next = fromDoc(doc, PMP.Store.state);
+    var keys = SLICES.filter(function (k) { return k in next; });
+    PMP.Store.commit(keys, function (s) { keys.forEach(function (k) { s[k] = next[k]; }); }, { external: true });
+    PMP.Store.flush();
+    try { if (PMP.Data) PMP.Data.loadStoredPacks(); } catch (e) { /* the packs load again on the next start */ }
+    try { PMP.Notepad.sync(); } catch (e) { /* the pane catches up on the next load */ }
+    try { if (PMP.GeminiChat && PMP.GeminiChat.sync) PMP.GeminiChat.sync(); } catch (e) { /* likewise */ }
+    PMP.Shell.renderStatus(PMP.Store.state);
+  }
+
+  /* ── 10.18.5  FILES ──────────────────────────────────────────────────────
+     Any progress file this build reads, as a version 3 document: version 3
+     itself, a phone's version 2, and this app's own legacy version 2. */
+  function fromFile(o) {
+    if (o.type === "pmp-android-progress") {
+      var a = clone(o);
+      a.type = "pmp-progress";
+      a.version = 3;
+      a.savedAt = Number(o.savedAt) || 0;
+      a.device = isObj(o.device) ? o.device : { app: "android", id: "" };
+      return a;
+    }
+    if (o.version === 3 && o.schemaVersion === undefined) return clone(o);
+    var like = PMP.Store.defaults();
+    PMP.STORE_CFG.PERSISTED.forEach(function (k) {
+      if (k in o && o[k] != null) like[k] = PMP.Store.normalise(k, clone(o[k]));
+    });
+    return toDoc(like, { savedAt: ts(o.exportedAt), device: { app: "web", id: "" } });
+  }
+
+  function importReplace(doc) { apply(doc); }
+  function importMerge(doc) {
+    var local = toDoc(PMP.Store.state, { savedAt: changedAt() });
+    apply(merge(emptyDoc(), local, doc, { device: local.device }));
+  }
+
+  /* What merging a file would do, slice by slice, for the import sheet. */
+  function mergePlan(local, file) {
+    var rows = [], added = 0, clash = 0;
+    Object.keys(LOGS).forEach(function (k) {
+      var inFile = arr(file[k]);
+      if (!inFile.length) return;
+      var have = Object.create(null), id = LOGS[k].id;
+      arr(local[k]).forEach(function (r) { have[id(r)] = 1; });
+      var add = inFile.filter(function (r) { return r && !have[id(r)]; }).length;
+      added += add;
+      rows.push({ slice: k, keep: arr(local[k]).length, note: add + " new, " + (inFile.length - add) + " already here" });
+    });
+    SETS.forEach(function (k) {
+      var inFile = arr(file[k]);
+      if (!inFile.length) return;
+      var have = Object.create(null);
+      arr(local[k]).forEach(function (x) { have[x] = 1; });
+      var add = inFile.filter(function (x) { return !have[x]; }).length;
+      added += add;
+      rows.push({ slice: k, keep: arr(local[k]).length, note: add + " new, " + (inFile.length - add) + " already here" });
+    });
+    MAPS.forEach(function (k) {
+      var f = k === "mycards" ? byId(file[k]) : obj(file[k]);
+      var l = k === "mycards" ? byId(local[k]) : obj(local[k]);
+      var keys = Object.keys(f);
+      if (!keys.length) return;
+      var add = keys.filter(function (x) { return l[x] === undefined; }).length;
+      var diff = keys.filter(function (x) { return l[x] !== undefined && !same(l[x], f[x]); }).length;
+      added += add; clash += diff;
+      rows.push({ slice: k, keep: Object.keys(l).length,
+        note: add + " new, " + diff + " different" + (diff ? (k === "cards" ? " (the later review wins)" : k === "mistakes" ? " (the later tag wins)" : " (the newer copy wins)") : "") });
+    });
+    ["plan", "notepad"].forEach(function (k) {
+      if (file[k] === undefined) return;
+      rows.push({ slice: k, note: same(slice(local, k), slice(file, k)) ? "the same" : "the newer copy is kept" });
+    });
+    return { rows: rows, added: added, clash: clash };
+  }
+
+  /* ── 10.18.6  NOTES PANE ↔ LIGHT MARKUP ──────────────────────────────────
+     The phones keep notes as light markup: **bold** *italic* __underline__
+     ~~strike~~ ==highlight==, "- " bullets and "1. " numbers. The web's
+     note is html from §12.2.1's allowlist. Colours and overline have no
+     markup and are dropped on the way out; the html itself stays in the web
+     block, so this device loses nothing. */
+  var INLINE = { B: "**", STRONG: "**", I: "*", EM: "*", U: "__", S: "~~", STRIKE: "~~", DEL: "~~" };
+  function markOf(node) {
+    if (INLINE[node.tagName]) return INLINE[node.tagName];
+    if (node.tagName === "MARK" && /(^|\s)np-h-(yellow|green|blue|pink)(\s|$)/.test(node.getAttribute("class") || "")) return "==";
+    return "";
+  }
+  function inlineText(node, open) {
+    var out = "";
+    Array.prototype.forEach.call(node.childNodes, function (c) {
+      if (c.nodeType === 3) { out += c.nodeValue.replace(/​/g, "").replace(/\n/g, " "); return; }
+      if (c.nodeType !== 1) return;
+      if (c.tagName === "BR") { out += " "; return; }
+      var m = markOf(c);
+      if (m && !open[m]) {
+        var o2 = Object.assign({}, open); o2[m] = 1;
+        var body = inlineText(c, o2);
+        out += body.trim() ? m + body + m : body;
+      } else {
+        out += inlineText(c, open);
+      }
+    });
+    return out;
+  }
+  function blockLines(parent, out) {
+    var line = null;
+    function push() { if (line !== null) { out.push(line); line = null; } }
+    Array.prototype.forEach.call(parent.childNodes, function (c) {
+      if (c.nodeType === 3) { line = (line || "") + c.nodeValue.replace(/​/g, "").replace(/\n/g, " "); return; }
+      if (c.nodeType !== 1) return;
+      var tag = c.tagName;
+      if (tag === "BR") { out.push(line || ""); line = null; return; }
+      if (tag === "DIV" || tag === "P") {
+        push();
+        var sub = [];
+        blockLines(c, sub);
+        out.push.apply(out, sub.length ? sub : [""]);
+        return;
+      }
+      if (tag === "UL" || tag === "OL") {
+        push();
+        var n = 0;
+        Array.prototype.forEach.call(c.children, function (li) {
+          n++;
+          var sub = [];
+          blockLines(li, sub);
+          out.push((tag === "UL" ? "- " : n + ". ") + sub.join(" ").trim());
+        });
+        return;
+      }
+      line = (line || "") + (markOf(c) ? inlineText({ childNodes: [c] }, {}) : inlineText(c, {}));
+    });
+    push();
+  }
+  function htmlToMarkup(html) {
+    if (!html) return "";
+    var t = document.createElement("template");
+    t.innerHTML = String(html);
+    var lines = [];
+    blockLines(t.content, lines);
+    while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
+    return lines.join("\n");
+  }
+  function inlineHtml(text) {
+    return PMP.text.escapeHtml(text)
+      .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
+      .replace(/__(.+?)__/g, "<u>$1</u>")
+      .replace(/~~(.+?)~~/g, "<s>$1</s>")
+      .replace(/==(.+?)==/g, "<mark class=\"np-h-yellow\">$1</mark>")
+      .replace(/\*(.+?)\*/g, "<i>$1</i>");
+  }
+  function markupToHtml(markup) {
+    if (!markup) return "";
+    var out = "", list = null;
+    function close() { if (list) { out += "</" + list + ">"; list = null; } }
+    String(markup).split(/\r?\n/).forEach(function (ln) {
+      var b = /^\s*- (.*)$/.exec(ln), n = /^\s*\d+[.)] (.*)$/.exec(ln);
+      if (b || n) {
+        var want = b ? "ul" : "ol";
+        if (list !== want) { close(); out += "<" + want + ">"; list = want; }
+        out += "<li>" + inlineHtml((b || n)[1]) + "</li>";
+        return;
+      }
+      close();
+      out += "<div>" + (ln ? inlineHtml(ln) : "<br>") + "</div>";
+    });
+    close();
+    return out;
+  }
+  function markupToText(markup) {
+    return String(markup || "").split(/\r?\n/).map(function (ln) {
+      return ln.replace(/^\s*(?:- |\d+[.)] )/, "").replace(/\*\*|__|~~|==|\*/g, "");
+    }).join("\n");
+  }
+  function textToHtml(text) {
+    return text ? PMP.text.escapeHtml(String(text)).replace(/\n/g, "<br>") : "";
+  }
+
+  /* ── 10.18.7  SETTINGS OUTSIDE THE STORE ─────────────────────────────────
+     The script address, the code, the base document and the time of the
+     last change made here. localStorage, beside the store and never in it;
+     where that is refused (file:// in some browsers) they last the session. */
+  var memory = Object.create(null);
+  var store = {
+    get: function (k) {
+      try { var v = window.localStorage.getItem(k); if (v !== null) return v; } catch (e) { /* fall back */ }
+      return k in memory ? memory[k] : null;
+    },
+    set: function (k, v) {
+      memory[k] = v;
+      try { window.localStorage.setItem(k, v); } catch (e) { /* kept in memory for the session */ }
+    },
+    remove: function (k) {
+      delete memory[k];
+      try { window.localStorage.removeItem(k); } catch (e) { /* nothing to remove */ }
+    }
+  };
+  var K = { url: "pmp.sync.url", code: "pmp.sync.code", base: "pmp.sync.base", last: "pmp.sync.last",
+            error: "pmp.sync.error", changed: "pmp.sync.changedAt", pending: "pmp.sync.pending" };
+
+  function config() {
+    var url = store.get(K.url), code = store.get(K.code);
+    return url && code ? { url: url, code: code } : null;
+  }
+  function loadBase() {
+    try { var b = JSON.parse(store.get(K.base) || "null"); if (isObj(b) && isObj(b.doc)) return b; } catch (e) { /* a broken base is no base */ }
+    return { rev: 0, doc: null };
+  }
+  function saveBase(rev, doc) { store.set(K.base, JSON.stringify({ rev: rev, doc: doc })); }
+  function changedAt() { return Number(store.get(K.changed)) || 0; }
+
+  var lastMark = 0;
+  PMP.Store.onWrite(function (keys, opts) {
+    if (opts.external) return;
+    var now = Date.now();
+    lastMark = now;
+    if (now - (Number(memory[K.changed]) || 0) > 1000) store.set(K.changed, String(now));
+  });
+
+  /* A sync code: 32 letters and digits from the platform's random source.
+     Rejection sampling keeps every character equally likely. */
+  var ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  function randomId(len) {
+    var out = "", buf = new Uint8Array(64);
+    while (out.length < len) {
+      window.crypto.getRandomValues(buf);
+      for (var i = 0; i < buf.length && out.length < len; i++) {
+        if (buf[i] < 248) out += ALPHA.charAt(buf[i] % 62);
+      }
+    }
+    return out;
+  }
+  function newCode() { return randomId(32); }
+
+  /* The script, verbatim from sync/pmp-sync.gs (embedded in §04 so this
+     file still works on its own), with the code filled in. */
+  function scriptText(code) {
+    var node = document.getElementById("pmp-sync-gs");
+    var text = node ? node.textContent : "";
+    return code ? text.split("__SYNC_CODE__").join(code) : text;
+  }
+
+  /* ── 10.18.8  THE CLIENT ─────────────────────────────────────────────────
+     Every call is a POST with a text/plain body, which a browser sends
+     without a CORS preflight; fetch follows the redirect Google answers
+     with. A reply that is not the script's JSON is an error with a name. */
+  var TIMEOUT_MS = 30000;
+  function SyncError(code, detail) { this.code = code; this.detail = detail || ""; this.message = code; }
+  function request(cfg, body, opts) {
+    var text = JSON.stringify(Object.assign({ code: cfg.code }, body));
+    var init = {
+      method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: text, redirect: "follow", credentials: "omit", cache: "no-store"
+    };
+    /* keepalive lets a save started as the tab is hidden finish after it
+       closes, but browsers cap such bodies at 64 KB. */
+    if (opts && opts.keepalive && text.length < 60000) init.keepalive = true;
+    var ctl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = null;
+    if (ctl) { init.signal = ctl.signal; timer = setTimeout(function () { ctl.abort(); }, TIMEOUT_MS); }
+    if (typeof fetch !== "function") return Promise.reject(new SyncError("network"));
+    return fetch(cfg.url, init).then(function (res) {
+      if (!res.ok) throw new SyncError("http", String(res.status));
+      return res.text();
+    }, function () { throw new SyncError("network"); }).then(function (t) {
+      if (timer) clearTimeout(timer);
+      var o;
+      try { o = JSON.parse(t); } catch (e) { throw new SyncError("not-script"); }
+      if (!isObj(o)) throw new SyncError("not-script");
+      if (o.ok === false && !o.conflict) throw new SyncError(o.error || "refused");
+      return o;
+    }, function (e) { if (timer) clearTimeout(timer); throw e instanceof SyncError ? e : new SyncError("network"); });
+  }
+
+  var MESSAGES = {
+    "bad-code": "The script refused the sync code. Check that the code here is the one in the script, and that the deployment is the latest version.",
+    "network": "The script could not be reached. Check the address and your connection; nothing was changed.",
+    "http": "The address answered with an error rather than the script. Check that it is the Web app URL, ending in /exec.",
+    "not-script": "That address did not answer like the PMP sync script. Check that you copied the Web app URL, ending in /exec, and that access is set to Anyone.",
+    "busy": "The script was busy with another device. It will try again next time; you can also press Sync now.",
+    "bad-doc": "The script refused the progress file. Nothing was changed.",
+    "conflict": "Another device kept saving at the same moment. Nothing was lost; press Sync now to try again.",
+    "url": "Paste the Web app URL from the deployment. It starts with https:// and ends with /exec.",
+    "code": "The sync code is the 32 letters and digits in the script, between the quotes on the SYNC_CODE line."
+  };
+  function messageOf(e) {
+    var code = e && e.code ? e.code : "network";
+    return MESSAGES[code] || ("The script answered “" + code + "”. Nothing was changed.");
+  }
+
+  var status = { state: "idle", at: 0, error: null };
+  var running = null;
+  var lastTry = 0;
+
+  function setStatus(next) {
+    status = Object.assign({}, status, next);
+    if (next.error !== undefined) {
+      if (next.error) store.set(K.error, JSON.stringify(next.error)); else store.remove(K.error);
+    }
+    paintStatus();
+  }
+  function lastError() {
+    if (status.error) return status.error;
+    try { return JSON.parse(store.get(K.error) || "null"); } catch (e) { return null; }
+  }
+  function lastSynced() { return Number(store.get(K.last)) || 0; }
+
+  /* The algorithm in docs §4: get, merge, put if the merge says anything
+     the file does not, and on a conflict merge again with what the file
+     now holds, at most three more times. */
+  function run(reason, opts) {
+    var cfg = config();
+    if (!cfg) return Promise.resolve({ skipped: "off" });
+    var st = PMP.Store.state;
+    if (st.ui.examActive) return Promise.resolve({ skipped: "exam" });
+    if (!st.sys.ready) return Promise.resolve({ skipped: "starting" });
+    if (running) return running;
+    lastTry = Date.now();
+    setStatus({ state: "syncing" });
+    var base = loadBase();
+    var device = { app: "web", id: deviceId() };
+    var local = toDoc(PMP.Store.state, { savedAt: changedAt() || (base.doc && base.doc.savedAt) || 0, device: device });
+    var retries = 0;
+
+    function round(remote, rev) {
+      var merged = remote ? merge(base.doc, local, remote, { device: device })
+                          : Object.assign(clone(local), { savedAt: Date.now(), device: device });
+      if (remote && sameDoc(merged, remote)) return { doc: merged, rev: rev, uploaded: false };
+      return request(cfg, { op: "put", baseRev: rev, doc: merged }, opts).then(function (res) {
+        if (res.ok) return { doc: merged, rev: res.rev, uploaded: true };
+        if (res.conflict && retries < 3) { retries++; return round(isObj(res.doc) ? res.doc : null, res.rev); }
+        throw new SyncError(res.conflict ? "conflict" : (res.error || "refused"));
+      });
+    }
+
+    running = request(cfg, { op: "get" }, opts).then(function (res) {
+      return round(isObj(res.doc) ? res.doc : null, Number(res.rev) || 0);
+    }).then(function (out) {
+      var mine = toDoc(PMP.Store.state, { savedAt: out.doc.savedAt, device: device });
+      if (!sameDoc(mine, out.doc) && !PMP.Store.state.ui.examActive) { apply(out.doc); repaint(); }
+      saveBase(out.rev, out.doc);
+      var now = Date.now();
+      store.set(K.last, String(now));
+      setStatus({ state: "ok", at: now, error: null });
+      return { ok: true, uploaded: out.uploaded, rev: out.rev, retries: retries, reason: reason };
+    }, function (e) {
+      var err = { code: (e && e.code) || "network", message: messageOf(e), at: Date.now() };
+      setStatus({ state: "error", error: err });
+      return { ok: false, error: err.code, reason: reason };
+    }).then(function (r) { running = null; return r; });
+    return running;
+  }
+
+  /* The automatic triggers, deferred off the event that raised them and
+     spaced so that flicking between tabs does not sync on every flick. */
+  var AUTO_GAP_MS = 10000;
+  function auto(reason, opts) {
+    if (!config()) return;
+    if ((reason === "hidden" || reason === "foreground") && Date.now() - lastTry < AUTO_GAP_MS) return;
+    setTimeout(function () { run(reason, opts); }, 0);
+  }
+
+  /* After a merge lands, the view on screen is redrawn from the new state,
+     unless it holds something in progress: a drill, a sitting, a card
+     review or a scenario set keeps what it started with, and shows the
+     merged state the next time it is opened. */
+  var BUSY_ROUTES = ["practice", "exam", "cards", "scenarios", "formulas"];
+  function repaint() {
+    var cur = PMP.Router.current;
+    if (!cur || BUSY_ROUTES.indexOf(cur.name) >= 0) return;
+    var y = window.scrollY || 0;
+    PMP.Router.navigate(cur.name, cur.params, true);
+    if (y && window.scrollTo) window.scrollTo(0, y);
+  }
+
+  function connect(url, code) {
+    url = String(url || "").trim();
+    code = String(code || "").trim();
+    if (!/^https:\/\/\S+$/.test(url)) return Promise.reject(new SyncError("url"));
+    if (!/^[A-Za-z0-9]{16,}$/.test(code)) return Promise.reject(new SyncError("code"));
+    return request({ url: url, code: code }, { op: "ping" }).then(function (res) {
+      if (res.ok !== true) throw new SyncError("not-script");
+      store.set(K.url, url);
+      store.set(K.code, code);
+      store.remove(K.pending);
+      store.remove(K.base);
+      setStatus({ state: "idle", error: null });
+      return res;
+    });
+  }
+
+  function disconnect() {
+    [K.url, K.code, K.base, K.last, K.error, K.pending].forEach(store.remove);
+    status = { state: "idle", at: 0, error: null };
+  }
+
+  /* After "Delete all progress" the base no longer describes this device,
+     and a three-way merge against it would read every flag, note and card
+     as deleted here and delete them from the Drive file too. Forgetting it
+     turns the next sync into a plain union, which brings progress back. */
+  function forgetBase() { store.remove(K.base); }
+
+  /* ── 10.18.9  THE PAGE ───────────────────────────────────────────────────
+     Off until set up. Setting up is the guide in docs §4, step for step;
+     once connected, the page is the status, Sync now and Disconnect. */
+  var setupMode = "new";
+  var statusNode = null;
+
+  function paintStatus() {
+    if (!statusNode || !document.body.contains(statusNode)) return;
+    statusNode.innerHTML = "";
+    var err = lastError(), last = lastSynced();
+    var when = last ? new Date(last).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : null;
+    var kind = status.state === "syncing" ? "busy" : (status.state === "error" || (status.state !== "ok" && err)) ? "err" : "ok";
+    statusNode.setAttribute("data-kind", kind);
+    statusNode.appendChild(icon(kind === "err" ? "alert" : kind === "busy" ? "sync" : "check"));
+    statusNode.appendChild(el("span", { text:
+      kind === "busy" ? "Syncing…" :
+      kind === "err" ? err.message + (when ? " Last synced " + when + "." : " Not synced yet.") :
+      when ? "Last synced " + when + "." : "Connected. Not synced yet." }));
+  }
+
+  function copyButton(label, getText, done) {
+    return el("button", {
+      class: "btn", type: "button",
+      onclick: function () {
+        PMP.Exporter.copyText(getText()).then(function (ok) {
+          PMP.UI.toast(ok ? done : "Copying was blocked. Select the text and copy it by hand.", ok ? "ok" : "warn");
+        });
+      }
+    }, [icon("clip"), label]);
+  }
+
+  function inlineError(node, e) {
+    node.hidden = false;
+    node.textContent = messageOf(e);
+  }
+
+  function connectForm(getCode, opts) {
+    var urlIn = el("input", { class: "input", id: "sync-url", type: "url", inputmode: "url", autocomplete: "off",
+      spellcheck: "false", placeholder: "https://script.google.com/macros/s/…/exec" });
+    var codeIn = opts.askCode ? el("input", { class: "input", id: "sync-code-in", type: "text", autocomplete: "off",
+      spellcheck: "false", placeholder: "32 letters and digits" }) : null;
+    var msg = el("p", { class: "sync-msg", id: "sync-test-msg", role: "status", "aria-live": "polite", hidden: true });
+    var btn = el("button", { class: "btn btn--primary", type: "button", id: "sync-test" }, [icon("check"), "Test connection"]);
+    btn.addEventListener("click", function () {
+      msg.hidden = false;
+      msg.removeAttribute("data-kind");
+      msg.textContent = "Testing…";
+      btn.disabled = true;
+      connect(urlIn.value, codeIn ? codeIn.value : getCode()).then(function () {
+        msg.setAttribute("data-kind", "ok");
+        msg.textContent = "Connected. Syncing now…";
+        PMP.UI.announce("Cloud sync connected.");
+        return run("setup");
+      }).then(function () {
+        PMP.Router.navigate("sync", null, true);
+      }, function (e) {
+        btn.disabled = false;
+        msg.setAttribute("data-kind", "err");
+        inlineError(msg, e);
+      });
+    });
+    return el("div", { class: "sync-connect" }, [
+      el("label", { class: "field", for: "sync-url" }, [el("span", { class: "lbl", text: "Web app URL" }), urlIn]),
+      codeIn ? el("label", { class: "field", for: "sync-code-in" }, [el("span", { class: "lbl", text: "Sync code" }), codeIn]) : null,
+      el("div", { class: "filter-bar" }, [btn]),
+      msg
+    ]);
+  }
+
+  function pendingCode() {
+    var c = store.get(K.pending);
+    if (!c || !/^[A-Za-z0-9]{32}$/.test(c)) { c = newCode(); store.set(K.pending, c); }
+    return c;
+  }
+
+  function setupCard() {
+    var card = el("section", { class: "card", "aria-labelledby": "sync-setup" }, [
+      el("span", { class: "eyebrow", text: "Set up" }),
+      el("h2", { id: "sync-setup", text: "Connect a script in your Google account" })
+    ]);
+    var modes = el("div", { class: "seg", role: "group", "aria-label": "How to connect" });
+    [["new", "Set up a new script"], ["existing", "I already have a script"]].forEach(function (m) {
+      modes.appendChild(el("button", {
+        class: "btn btn--sm", type: "button", "aria-pressed": setupMode === m[0] ? "true" : "false",
+        onclick: function () { setupMode = m[0]; PMP.Router.navigate("sync", null, true); }
+      }, m[1]));
+    });
+    card.appendChild(modes);
+
+    if (setupMode === "existing") {
+      card.appendChild(el("p", { text: "On another device you have already set up sync. Paste the same Web app URL and sync code here; the Cloud sync page there shows both." }));
+      card.appendChild(connectForm(null, { askCode: true }));
+      return card;
+    }
+
+    var code = pendingCode();
+    var script = el("textarea", { class: "textarea sync-script", id: "sync-script", readonly: true, spellcheck: "false",
+      "aria-label": "The sync script, with your code filled in", rows: "10" });
+    script.value = scriptText(code);
+    var steps = el("ol", { class: "sync-steps" }, [
+      el("li", null, [
+        el("b", { text: "Copy the script. " }),
+        el("span", { text: "This device made a random sync code for you, and it is already filled into the script below. Every request has to carry it." }),
+        el("div", { class: "sync-code-row" }, [
+          el("span", { class: "lbl", text: "Your sync code" }),
+          el("code", { class: "sync-code", id: "sync-code", text: code })
+        ]),
+        script,
+        el("div", { class: "filter-bar" }, [
+          copyButton("Copy the script", function () { return scriptText(code); }, "Script copied, with your code in it."),
+          el("button", { class: "btn btn--ghost", type: "button",
+            onclick: function () { store.set(K.pending, newCode()); PMP.Router.navigate("sync", null, true); } }, "Make a new code")
+        ])
+      ]),
+      el("li", null, [
+        el("b", { text: "Create the project. " }),
+        "Open ", el("a", { href: "https://script.google.com", target: "_blank", rel: "noopener noreferrer", text: "script.google.com" }),
+        ", choose ", el("b", { text: "New project" }), ", replace everything in ", el("code", { text: "Code.gs" }),
+        " with the copied script and save it."
+      ]),
+      el("li", null, [
+        el("b", { text: "Deploy it. " }),
+        "Choose ", el("b", { text: "Deploy → New deployment → Select type: Web app" }), ". Set ",
+        el("b", { text: "Execute as: Me" }), " and ", el("b", { text: "Who has access: Anyone" }), ", then ", el("b", { text: "Deploy" }), "."
+      ]),
+      el("li", null, [
+        el("b", { text: "Authorise it. " }),
+        "Choose your Google account. On “Google hasn’t verified this app”, choose ",
+        el("b", { text: "Advanced → Go to (project) (unsafe)" }), " — it is your own script — then ", el("b", { text: "Allow" }), "."
+      ]),
+      el("li", null, [
+        el("b", { text: "Connect this device. " }),
+        "Copy the ", el("b", { text: "Web app URL" }), " (", el("code", { text: "https://script.google.com/macros/s/…/exec" }),
+        "), paste it here and press ", el("b", { text: "Test connection" }), ".",
+        connectForm(function () { return code; }, { askCode: false })
+      ]),
+      el("li", null, [
+        el("b", { text: "Add your other devices. " }),
+        "On each one, open Cloud sync, choose ", el("b", { text: "I already have a script" }),
+        ", and paste the same URL and sync code."
+      ])
+    ]);
+    card.appendChild(steps);
+    card.appendChild(el("p", { class: "hint", text: "“Anyone” only means the address answers without a Google sign-in. The script refuses every request without your sync code, but whoever has both the address and the code can read and replace your progress file, so keep them private. To shut a device out, change the code in the script and deploy a new version." }));
+    return card;
+  }
+
+  function statusCard(cfg) {
+    statusNode = el("p", { class: "sync-status", id: "sync-status", role: "status", "aria-live": "polite" });
+    var card = el("section", { class: "card", "aria-labelledby": "sync-on" }, [
+      el("span", { class: "eyebrow", text: "On" }),
+      el("h2", { id: "sync-on", text: "Syncing with your Drive" }),
+      el("p", { text: "This device syncs when it opens, when you come back to it, when you leave it, and after each practice set, mock and card session. Never during a mock." }),
+      statusNode,
+      el("dl", { class: "kv", style: "margin-top:var(--sp-3)" }, [
+        el("dt", { text: "Script" }), el("dd", { class: "sync-url", text: cfg.url }),
+        el("dt", { text: "File" }), el("dd", { text: "PMP Prep/pmp-sync.json in your Google Drive" })
+      ]),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--primary", type: "button", id: "sync-now",
+          onclick: function () { run("now"); } }, [icon("sync"), "Sync now"]),
+        el("button", { class: "btn btn--danger", type: "button", id: "sync-off",
+          onclick: function () {
+            PMP.UI.confirm("Disconnect cloud sync?",
+              "This device forgets the script address and the sync code. Your progress here and the file in your Drive are both left as they are, and other devices keep syncing.",
+              "Disconnect", true).then(function (yes) {
+              if (!yes) return;
+              disconnect();
+              PMP.UI.toast("Cloud sync is off on this device.", "ok");
+              PMP.Router.navigate("sync", null, true);
+            });
+          } }, "Disconnect")
+      ])
+    ]);
+    paintStatus();
+    return card;
+  }
+
+  function devicesCard(cfg) {
+    var reveal = el("details", { class: "sync-reveal" }, [
+      el("summary", { text: "Show the address and the code" }),
+      el("dl", { class: "kv", style: "margin-top:var(--sp-3)" }, [
+        el("dt", { text: "Web app URL" }), el("dd", null, [el("code", { class: "sync-code", text: cfg.url })]),
+        el("dt", { text: "Sync code" }), el("dd", null, [el("code", { class: "sync-code", text: cfg.code })])
+      ]),
+      el("div", { class: "filter-bar" }, [
+        copyButton("Copy the URL", function () { return cfg.url; }, "Address copied."),
+        copyButton("Copy the code", function () { return cfg.code; }, "Code copied."),
+        copyButton("Copy the script", function () { return scriptText(cfg.code); }, "Script copied, with your code in it.")
+      ])
+    ]);
+    return el("section", { class: "card", "aria-labelledby": "sync-more" }, [
+      el("span", { class: "eyebrow", text: "Another device" }),
+      el("h2", { id: "sync-more", text: "Add a phone or another browser" }),
+      el("p", { text: "Open Cloud sync there, choose “I already have a script”, and paste these two. They are private: anyone with both can read and replace your progress file." }),
+      reveal
+    ]);
+  }
+
+  function aboutCard() {
+    return el("section", { class: "card", "aria-labelledby": "sync-what" }, [
+      el("span", { class: "eyebrow", text: "What travels" }),
+      el("h2", { id: "sync-what", text: "Your progress, to your own Drive, and nowhere else" }),
+      el("p", { text: "Answers, card schedules, flags, notes, mistake tags, lessons, sittings, your plan and your notes page go to one file in your Google Drive, through a script you deploy in your own account. The web, Android and iPhone apps all read and write the same file, so you can switch between them." }),
+      el("p", { text: "Nothing goes to this app's authors or to anyone else. The Gemini key, the theme and the sync address and code stay on each device. Two devices that change the same thing are merged: answers from both are kept, and where they disagree about one note or one card, the most recent change wins." })
+    ]);
+  }
+
+  function view(host) {
+    var cfg = config();
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Cloud sync" }),
+      el("h2", { text: cfg ? "Your devices, in step" : "Keep your devices in step" }),
+      el("p", { text: cfg
+        ? "Progress on this device and in your Drive are merged each time it syncs. Problems are shown here and nowhere else."
+        : "Off until you set it up. It takes about five minutes, once, in your own Google account: no sign-up, no server of ours, no cost." })
+    ]));
+    if (cfg) {
+      host.appendChild(statusCard(cfg));
+      paintStatus();
+      host.appendChild(devicesCard(cfg));
+    } else {
+      statusNode = null;
+      host.appendChild(setupCard());
+    }
+    host.appendChild(aboutCard());
+  }
+
+  PMP.Router.register("sync", { title: "Cloud sync", render: view });
+
+  /* Leaving and coming back. Hidden is the last chance to save before a
+     phone browser discards the tab, so it is a trigger of its own. */
+  document.addEventListener("visibilitychange", function () {
+    if (!PMP.Store.state.sys.ready) return;
+    if (document.visibilityState === "hidden") auto("hidden", { keepalive: true });
+    else auto("foreground");
+  });
+
+  return {
+    merge: merge, toDoc: toDoc, fromDoc: fromDoc, apply: apply, fromFile: fromFile, sameDoc: sameDoc,
+    canon: canon, emptyDoc: emptyDoc, mergePlan: mergePlan, importMerge: importMerge, importReplace: importReplace,
+    htmlToMarkup: htmlToMarkup, markupToHtml: markupToHtml, mockKey: mockKey, scriptText: scriptText,
+    newCode: newCode, config: config, connect: connect, disconnect: disconnect, forgetBase: forgetBase,
+    run: run, auto: auto, changedAt: changedAt,
+    get status() { return status; }
+  };
+})();
+
+
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
    Hand-rolled SVG. No charting library, no network, no canvas.
 
@@ -35572,13 +37247,15 @@ PMP.Chart = (function () {
   }
 
   /* The four-step accuracy ramp, plus "thin". Boundaries are the same ones
-     §10.03 uses for its proficiency bands so that a task reading band 4 here
-     and a sitting reading Above Target there mean the same thing. */
+     §10.03 uses for its proficiency bands, read from §01.8, so that a task
+     reading band 4 here and a sitting reading Above Target there mean the
+     same thing. */
+  var MB = PMP.RULES.mockBands;
   function band(acc, n) {
     if (n < M.MIN_SAMPLE) return "thin";
-    if (acc >= 0.75) return "4";
-    if (acc >= 0.60) return "3";
-    if (acc >= 0.45) return "2";
+    if (acc >= MB.above) return "4";
+    if (acc >= MB.target) return "3";
+    if (acc >= MB.below) return "2";
     return "1";
   }
 
@@ -35763,10 +37440,10 @@ PMP.Chart = (function () {
       caption: opts.caption || ("Your accuracy on each of the 26 tasks. Grey cells are the ones you have answered fewer than " + M.MIN_SAMPLE + " questions on \u2014 they show what is missing rather than a percentage, because a rate from two answers is not a rate. Choose any cell to drill it."),
       legend: legend([
         { band: "thin", label: "Under " + M.MIN_SAMPLE + " answers" },
-        { band: "1", label: "Below 45%" },
-        { band: "2", label: "45\u201360%" },
-        { band: "3", label: "60\u201375%" },
-        { band: "4", label: "75% and above" }
+        { band: "1", label: "Below " + PMP.fmt.pct(MB.below) },
+        { band: "2", label: PMP.fmt.pct(MB.below).replace("%", "") + "\u2013" + PMP.fmt.pct(MB.target) },
+        { band: "3", label: PMP.fmt.pct(MB.target).replace("%", "") + "\u2013" + PMP.fmt.pct(MB.above) },
+        { band: "4", label: PMP.fmt.pct(MB.above) + " and above" }
       ]),
       draw: function (svg) {
         doms.forEach(function (d, ci) {
@@ -36008,9 +37685,10 @@ PMP.Chart = (function () {
      Not a reliability diagram, and deliberately not.
 
      A reliability diagram plots stated probability against observed frequency
-     and needs confidence on a graded scale. §10.02 collects one bit — Sure or
-     Not sure — so the honest rendering of what was actually recorded is a two
-     by two: how often each of the two states was right.
+     and needs confidence on a graded scale. §10.02 collects one bit — Sure (3)
+     or Not sure (2), on the shared scale in §01.8 — so the honest rendering of
+     what was actually recorded is a two by two: how often each of the two
+     states was right. A phone's Guess (1) is read as Not sure.
 
      The quadrant that matters is sure and wrong. Those are the questions that
      will not be caught by more time or a second look on the day, because
@@ -36021,8 +37699,9 @@ PMP.Chart = (function () {
     opts = opts || {};
     var rows = { sure: { n: 0, right: 0 }, unsure: { n: 0, right: 0 } };
     M.attempts(state).forEach(function (a) {
-      if (a.confidence !== "sure" && a.confidence !== "unsure") return;
-      var e = rows[a.confidence];
+      var cf = a.confidence;
+      if (typeof cf !== "number" || cf < 1) return;
+      var e = rows[cf >= 3 ? "sure" : "unsure"];
       e.n++;
       e.right += M.creditOf(a);
     });
@@ -36167,7 +37846,7 @@ PMP.Chart = (function () {
     return figure({
       w: W, h: H,
       title: "Why answers were missed",
-      desc: "Distribution of " + PMP.fmt.plural(total, "tagged mistake") + " across the five causes.",
+      desc: "Distribution of " + PMP.fmt.plural(total, "tagged mistake") + " across the six causes.",
       caption: opts.caption || ("Across " + PMP.fmt.plural(total, "tagged mistake") + ". The order is fixed so this chart can be compared with itself over time."),
       draw: function (svg) {
         causes.forEach(function (c, i) {
@@ -36179,7 +37858,7 @@ PMP.Chart = (function () {
           if (n) {
             svg.appendChild(s("rect", {
               x: L, y: y, width: Math.max(3, (n / peak) * pw), height: rowH, rx: 3,
-              fill: "var(--cause-" + c.id + ")"
+              fill: c.css || "var(--cause-" + c.id.toLowerCase().replace(/_/g, "-") + ")"
             }));
           }
           svg.appendChild(s("text", {
@@ -36282,17 +37961,30 @@ PMP.Shell = (function () {
     }
     document.documentElement.setAttribute("data-theme", resolved);
     document.getElementById("theme-icon").setAttribute("href", resolved === "dark" ? "#i-moon" : "#i-sun");
-    document.getElementById("theme-label").textContent = resolved === "dark" ? "Dark" : "Light";
+    /* The label names the preference, not the colours on screen, so that
+       "follow this device" stays visible as a choice once it is made. */
+    var name = pref === "system" ? "System" : resolved === "dark" ? "Dark" : "Light";
+    document.getElementById("theme-label").textContent = name;
+    var btn = document.getElementById("theme-btn");
+    btn.setAttribute("title", "Theme: " + (pref === "system" ? "follows this device, " + resolved + " now" : resolved) +
+      ". Press for " + THEME_LABEL[THEME_NEXT[pref] || "system"] + ".");
+    btn.setAttribute("aria-label", "Theme: " + name + ". Change theme");
     /* Written outside the store namespace so §01.6 can read it before paint. */
     try { window.localStorage.setItem("pmp.theme", pref === "system" ? "" : pref); } catch (e) { /* not persistent; the toggle still works for the session */ }
   }
 
+  /* Three states, in a fixed order: follow the device, light, dark. Two
+     states would lose "follow the device" for good after the first press,
+     which is what this button used to do: the OS listener below only acts
+     while the preference is "system", and nothing could set it back. */
+  var THEME_NEXT = { system: "light", light: "dark", dark: "system" };
+  var THEME_LABEL = { system: "following this device", light: "light", dark: "dark" };
   function cycleTheme() {
-    var cur = document.documentElement.getAttribute("data-theme");
-    var next = cur === "dark" ? "light" : "dark";
+    var cur = PMP.Store.state.settings.theme || "system";
+    var next = THEME_NEXT[cur] || "system";
     PMP.Store.commit(["settings"], function (s) { s.settings.theme = next; });
     applyTheme(next);
-    PMP.UI.announce(next === "dark" ? "Dark theme" : "Light theme");
+    PMP.UI.announce(next === "system" ? "Theme follows this device" : next === "dark" ? "Dark theme" : "Light theme");
   }
 
   function renderStatus(state) {
@@ -37148,7 +38840,7 @@ PMP.GeminiChat = (function () {
      this alone. Kept as the description of what the section owes. */
   register("dashboard", {
     title: "Progress",
-    render: stub("Dashboard", "Your readiness score, domain mastery, streak and next best action will open here.", [
+    render: stub("Progress", "Your readiness score, domain mastery, streak and next best action will open here.", [
       ["\u00A73.1", "Readiness score 0\u2013100 with the five-component breakdown on click"],
       ["\u00A73.1", "Domain mastery bars at the 33 / 41 / 26 weighting, and the predictive versus adaptive split"],
       ["\u00A73.1", "Streak, questions answered today against your daily target, minutes studied"],
@@ -37206,8 +38898,8 @@ PMP.GeminiChat = (function () {
 
   /* §10.09 has landed and registered "planner" already. */
   register("planner", {
-    title: "Study planner",
-    render: stub("Study planner", "A week-by-week plan built from your exam date, your available hours and a diagnostic.", [
+    title: "Study plan",
+    render: stub("Study plan", "A week-by-week plan built from your exam date, your available hours and a diagnostic.", [
       ["\u00A73.10", "Inputs: exam date, weekday and weekend hours, 25-question diagnostic baseline"],
       ["\u00A73.10", "Daily task chips that tick off as the underlying activity is completed"],
       ["\u00A73.10", "Recalculates when you fall behind rather than accumulating silent debt"]
@@ -37218,7 +38910,7 @@ PMP.GeminiChat = (function () {
   register("journal", {
     title: "Mistake journal",
     render: stub("Mistake journal", "Every wrong answer, grouped by why you got it wrong.", [
-      ["\u00A73.11", "Causes: knowledge gap, misread question, rushed, mindset, two plausible answers"],
+      ["\u00A73.11", "Causes: knowledge gap, misread question, wrong mindset, two plausible answers, calculation slip, rushed"],
       ["\u00A73.11", "Root-cause distribution chart, which is usually more actionable than the score"]
     ])
   });
@@ -37242,7 +38934,7 @@ PMP.GeminiChat = (function () {
       host.appendChild(el("div", { class: "view-hd" }, [
         el("span", { class: "eyebrow", text: "About this build" }),
         el("h2", { text: "Settings and About" }),
-        el("p", { text: "Full settings arrive with Phase 1. The notices below are final." })
+        el("p", { text: "The settings module is missing from this copy of the file, so only the outline and the notices are shown." })
       ]));
       host.appendChild(el("div", { class: "card" }, [
         el("span", { class: "eyebrow", text: "Exam content outline" }),
@@ -37311,6 +39003,8 @@ PMP.GeminiChat = (function () {
         PMP.Router.start();
         offerResume();
         loadExtendedPacks();
+        /* Off unless set up (§10.18); never during a sitting. */
+        PMP.Sync.auto("open");
       });
   }
 
