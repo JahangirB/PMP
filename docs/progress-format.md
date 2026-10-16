@@ -90,8 +90,10 @@ Rules every app follows:
   version 2 (`pmp-android-progress`). The web also accepts its own legacy
   `pmp-progress` v2 (`schemaVersion: 2`) and Android v2. Writing is always version 3.
 - **Web mapping:**
-  - Web attempts become shared attempts. `mode` diagnostic/lesson becomes `src` diagnostic/lesson,
-    otherwise `practice`; a timed drill gets `tm: true`; `hinted` becomes `h`.
+  - Web attempts become shared attempts. `mode` diagnostic becomes `src` diagnostic; every
+    other mode, including a lesson's practice set, becomes `practice` (the web mode rides in a
+    per-row `wx`). `src: "lesson"` is reserved for the phones' lesson quick checks, which stay
+    out of accuracy, pace and mastery. A timed drill gets `tm: true`; `hinted` becomes `h`.
   - `srs` becomes `cards`.
   - `journal` (latest per qid) becomes `mistakes`.
   - `scenarioRuns` become `scenarios`.
