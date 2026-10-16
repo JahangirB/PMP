@@ -61,6 +61,8 @@ fun StudySettingsScreen(vm: PmpViewModel) {
             SectionLabel("While answering")
             Toggle("Ask how sure I am", "Sure, Think so or Guess, before each practice answer is checked. A right guess won't count toward mastery; a sure-but-wrong answer goes to the top of the mistake journal. Never asked in mocks.",
                 vm.askConfidence) { vm.changeAskConfidence(it) }
+            Toggle("Show hints in practice", "A Hint button on practice questions: the approach's lens, then the principle, then one wrong option crossed out. An answer given after a hint stays out of your accuracy and pace. Never offered in mocks, the diagnostic, timed or reading drills.",
+                vm.showHints) { vm.changeShowHints(it) }
             Toggle("Offer focus mode for mocks", "Do Not Disturb and the screen kept awake while a mock is on screen.", vm.focusOffer) { vm.changeFocusOffer(it) }
         }
 

@@ -55,6 +55,8 @@ import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.Domain
 import com.jahangirb.pmpprep.data.MockBands
 import com.jahangirb.pmpprep.data.MockResult
+import com.jahangirb.pmpprep.data.MockTimeGroup
+import com.jahangirb.pmpprep.data.MockTimeReport
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.ui.Focus
 import com.jahangirb.pmpprep.ui.MockSession
@@ -126,6 +128,7 @@ private fun MockIntro(vm: PmpViewModel) {
             Spacer(Modifier.height(8.dp))
             BulletList(listOf(
                 "${x.totalItems} questions in ${x.minutes} minutes: about ${x.paceTargetSec} seconds each.",
+                "${x.scoredItems} are scored; ${x.totalItems - x.scoredItems} are unscored pretest items you can't tell apart, as on the real exam. Shorter sittings keep the proportion. They're named in the results.",
                 "Three sections. After questions ${x.breakAfter.joinToString(" and ")} you may take a ${x.breakMinutes}-minute break; the clock stops.",
                 "Once a section is closed you cannot go back to it, as in the real exam.",
                 "Mark questions to revisit, and jump around the current section from the question grid.",
@@ -396,8 +399,63 @@ private fun Scorecard(vm: PmpViewModel, r: MockResult) {
                 }
             }
         }
+        val sat = vm.finishedMock
+        val pretestN = sat?.pretest?.count { id -> sat.questions.any { it.id == id } } ?: 0
+        if (sat != null && pretestN > 0) PmpCard {
+            SectionLabel("Pretest items")
+            Text("$pretestN of the ${sat.questions.size} questions were unscored pretest items and didn't count toward the score above, the same proportion as the real exam's ${vm.repo.extras.exam.totalItems - vm.repo.extras.exam.scoredItems} of ${vm.repo.extras.exam.totalItems}. " +
+                "They're marked \"pretest\" in the review.", fontSize = 13.sp, lineHeight = 18.sp)
+        }
+        vm.lastMockTime?.let { TimeCard(it) }
+        val missed = vm.lastMockMissed
+        var sent by remember(r.at) { mutableStateOf(false) }
+        if (missed.isNotEmpty()) PmpCard {
+            SectionLabel("The ${missed.size} you didn't get")
+            Text("Send them to the drill queue: they wait on the Practice screen under \"From your last mock\", so you can work through them over the next few days.",
+                fontSize = 13.sp, lineHeight = 18.sp)
+            Spacer(Modifier.height(8.dp))
+            if (!sent) Button(onClick = { vm.sendMissesToQueue(); sent = true }, modifier = Modifier.fillMaxWidth()) { Text("Send the ${missed.size} to the drill queue") }
+            else Text("Sent. ${vm.mockQueue.size} question(s) are waiting on the Practice screen.", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = ColorSuccess)
+        }
         Button(onClick = { vm.reviewMock(onlyWrong = true) }, modifier = Modifier.fillMaxWidth()) { Text("Review the ones I got wrong") }
         OutlinedButton(onClick = { vm.reviewMock(onlyWrong = false) }, modifier = Modifier.fillMaxWidth()) { Text("Review every question") }
         TextButton(onClick = { vm.clearScorecard() }, modifier = Modifier.fillMaxWidth()) { Text("Done") }
+    }
+}
+
+/**
+ * Where the time went (index.html §10.03.12): answered inside or over the exam pace, the flagged ones,
+ * and each block. If the slow group is no more accurate than the fast one, the extra minutes went on
+ * second-guessing.
+ */
+@Composable
+private fun TimeCard(t: MockTimeReport) {
+    PmpCard {
+        SectionLabel("Where the time went")
+        Text("Average ${t.avgSec}s a question against an exam pace of ${t.paceSec}s" + if (t.unanswered > 0) " · ${t.unanswered} unanswered" else "",
+            fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Spacer(Modifier.height(8.dp))
+        TimeRow("Group", "Items", "Right", "Accuracy", header = true)
+        listOf(t.inside, t.over, t.flagged).forEach { g -> TimeRow(g.label, "${g.n}", "${g.right}", g.accuracy?.let { pct(it) } ?: "—") }
+        Spacer(Modifier.height(10.dp))
+        TimeRow("Block", "Items", "Right", "Time · avg", header = true)
+        t.blocks.forEach { g: MockTimeGroup -> TimeRow(g.label, "${g.n}", "${g.right}", "${clock(g.ms)} · ${g.avgSec}s") }
+        Spacer(Modifier.height(8.dp))
+        val slow = t.over.accuracy; val fast = t.inside.accuracy
+        Text(if (slow != null && fast != null && slow <= fast)
+            "Your slow answers were no more accurate than your quick ones. The extra minutes went on second-guessing rather than working the problem; the fix is a decision rule, not more content."
+            else "If the slow group is no more accurate than the fast one, the extra minutes are being spent on second-guessing rather than on working the problem.",
+            fontSize = 12.sp, lineHeight = 17.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+@Composable
+private fun TimeRow(a: String, b: String, c: String, d: String, header: Boolean = false) {
+    val w = if (header) FontWeight.Bold else FontWeight.Normal
+    Row(Modifier.fillMaxWidth().padding(vertical = 2.dp)) {
+        Text(a, fontSize = 13.sp, fontWeight = w, modifier = Modifier.weight(2.2f))
+        Text(b, fontSize = 13.sp, fontWeight = w, textAlign = TextAlign.End, modifier = Modifier.weight(0.8f))
+        Text(c, fontSize = 13.sp, fontWeight = w, textAlign = TextAlign.End, modifier = Modifier.weight(0.8f))
+        Text(d, fontSize = 13.sp, fontWeight = w, textAlign = TextAlign.End, fontFamily = FontFamily.Monospace, modifier = Modifier.weight(1.6f))
     }
 }

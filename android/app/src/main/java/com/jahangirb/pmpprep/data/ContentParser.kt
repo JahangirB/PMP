@@ -206,6 +206,7 @@ object ContentParser {
                 breakMinutes = exam.optInt("BREAK_MINUTES", 10),
                 breakAfter = listOf(exam.optInt("BREAK_1_AFTER", 60), exam.optInt("BREAK_2_AFTER", 120)),
                 paceTargetSec = exam.optDouble("PACE_TARGET_SEC", 80.0).toInt(),
+                scoredItems = exam.optInt("SCORED_ITEMS", 170),
             ),
             srs = SrsConfig(
                 easeStart = srs.optDouble("EASE_START", 2.5), easeMin = srs.optDouble("EASE_MIN", 1.3),
@@ -277,6 +278,13 @@ object ContentParser {
                 )
             },
             rules = rules(o.optJSONObject("rules")),
+            adaptive = o.optJSONObject("practice")?.optJSONObject("ADAPTIVE").let { a ->
+                val d = AdaptiveConfig()
+                if (a == null) d else AdaptiveConfig(
+                    a.optDouble("PRIOR", d.prior), a.optDouble("PRIOR_N", d.priorN), a.optDouble("EXPONENT", d.exponent),
+                    a.optDouble("FLOOR", d.floor), a.optDouble("UNSEEN_BOOST", d.unseenBoost), a.optDouble("RIGHT_DAMP", d.rightDamp),
+                )
+            },
             syncScript = o.str("syncScript"),
         )
     }

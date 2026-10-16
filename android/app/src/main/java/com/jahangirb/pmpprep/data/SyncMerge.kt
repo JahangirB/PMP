@@ -31,6 +31,8 @@ object SyncMerge {
         Log("chat", 60, byAt, ids("at", "r")),
         Log("sittings", 2_000, byAt, ids("k", "at")),
         Log("checkins", 0, byAt, ids("kind", "at")),
+        // Formula-lab drills: a problem kind marked at a moment.
+        Log("drills", ProgressStore.MAX_DRILLS, byAt, ids("at", "g")),
         // A weekly report's identity and its place in time are both its week start.
         Log("weekly", 104, { it.optLong("w") }, ids("w")),
     )

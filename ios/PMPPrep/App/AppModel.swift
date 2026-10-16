@@ -31,6 +31,8 @@ struct PracticeFilter: Equatable {
     var approach: Approach? = nil
     var which: Which = .ALL
     var count: Int = 20
+    /** Adaptive drill: drawn towards weak ECO tasks, unseen favoured, recently right held back (web §10.02). */
+    var adaptive: Bool = false
 }
 
 /** Reading comfort: text size, line spacing and the reading guide, for questions and lessons. */
@@ -83,6 +85,8 @@ final class AppModel: ObservableObject {
     init() {
         store = ProgressStore(dir: Self.docs)
         askConfidence = defaults.object(forKey: "confidence") as? Bool ?? true
+        showHints = UserDefaults.standard.object(forKey: "hints") as? Bool ?? true
+        mockQueue = UserDefaults.standard.stringArray(forKey: "mockQueue") ?? []
         reading = ReadingPrefs(scale: defaults.object(forKey: "scale") as? Double ?? 1, roomy: defaults.bool(forKey: "roomy"), guide: defaults.bool(forKey: "guide"))
         geminiKey = KeyStore.read() ?? ""
         geminiModels = Self.savedLineup()
@@ -131,6 +135,9 @@ final class AppModel: ObservableObject {
     @Published private(set) var askConfidence: Bool
     @Published private(set) var reading: ReadingPrefs
     func changeAskConfidence(_ on: Bool) { askConfidence = on; defaults.set(on, forKey: "confidence") }
+    /** Show hints in practice (the hint ladder). On unless turned off. */
+    @Published private(set) var showHints: Bool
+    func changeShowHints(_ on: Bool) { showHints = on; defaults.set(on, forKey: "hints") }
     func changeReading(_ r: ReadingPrefs) {
         reading = r
         defaults.set(r.scale, forKey: "scale"); defaults.set(r.roomy, forKey: "roomy"); defaults.set(r.guide, forKey: "guide")
@@ -211,10 +218,43 @@ final class AppModel: ObservableObject {
     }
 
     func startPractice(_ f: PracticeFilter? = nil, title: String = "Practice") {
-        let qs = Array(matching(f ?? filter).shuffled().prefix((f ?? filter).count))
+        let use: PracticeFilter = f ?? filter
+        let candidates: [Question] = matching(use)
+        let qs: [Question]
+        if use.adaptive {
+            qs = AdaptivePicker.pick(candidates, attempts: store.attempts, lastCorrect: { (id: String) -> Bool? in self.store.last[id]?.correct },
+                                     count: use.count)
+        } else {
+            qs = Array(candidates.shuffled().prefix(use.count))
+        }
         if qs.isEmpty { return }
-        practice = QuizSession(title: title, questions: qs)
+        let t: String = use.adaptive && title == "Practice" ? "Adaptive drill" : title
+        practice = QuizSession(title: t, questions: qs)
         if screen != .PRACTICE { navigate(.PRACTICE) }
+    }
+
+    /* ── the hint ladder (practice only) ── */
+
+    func hintsAvailable(_ s: QuizSession) -> Bool { showHints && s.hintable }
+
+    /** Shows the next rung for the question on screen. Rung 3 may cross out one unchosen wrong option. */
+    func nextHint(_ s: QuizSession, _ q: Question) {
+        if !hintsAvailable(s) || s.isChecked(q) { return }
+        let used: Int = s.hints[q.id] ?? 0
+        if used >= HintLadder.RUNGS { return }
+        s.touch(Time.now())
+        let x: Extras = repo.extras
+        let lesson: Lesson? = HintLadder.lessonFor(q.ecoTask, lessons: x.lessons, modules: x.modules)
+        let chosen: Set<String> = s.answers[q.id]?.choices ?? []
+        let h: HintLadder.Hint = HintLadder.hint(q, rung: used + 1, lesson: lesson, options: s.order[q.id] ?? q.options, chosen: chosen)
+        s.hints[q.id] = used + 1
+        var shown: [HintLadder.Hint] = s.hintsShown[q.id] ?? []
+        shown.append(h)
+        s.hintsShown[q.id] = shown
+        if let strike = h.strike {
+            let st: Set<String> = s.struck[q.id] ?? []
+            s.struck[q.id] = st.union([strike])
+        }
     }
 
     func startPracticeWith(_ qs: [Question], title: String) {
@@ -273,7 +313,7 @@ final class AppModel: ObservableObject {
             firstTapMs: s.firstTapAt > 0 ? s.firstTapAt - s.shownAt - s.awayAtFirstTap : 0,
             idleMs: s.maxIdle, rightToWrong: s.rightToWrong, wrongToRight: s.wrongToRight,
             words: wordsOf(q, withOptions: !s.readingDrill), timed: s.timed,
-            confidence: confidence, eliminated: s.struck[q.id]?.count ?? 0))
+            confidence: confidence, eliminated: s.struck[q.id]?.count ?? 0, hints: s.hints[q.id] ?? 0))
     }
 
     func moveTo(_ s: QuizSession, _ i: Int) {
@@ -284,11 +324,11 @@ final class AppModel: ObservableObject {
 
     private func attempt(_ q: Question, _ credit: Double, _ correct: Bool, _ ms: Int64, _ source: String,
                          firstTapMs: Int64 = 0, idleMs: Int64 = 0, rightToWrong: Int = 0, wrongToRight: Int = 0,
-                         words: Int? = nil, timed: Bool = false, confidence: Int = 0, eliminated: Int = 0) -> Attempt {
+                         words: Int? = nil, timed: Bool = false, confidence: Int = 0, eliminated: Int = 0, hints: Int = 0) -> Attempt {
         Attempt(qid: q.id, ecoTask: q.ecoTask, domain: q.domain, approach: q.approach, type: q.type, credit: credit, correct: correct,
                 ms: max(0, ms), at: Time.now(), source: source, firstTapMs: max(0, firstTapMs), idleMs: max(0, idleMs),
                 rightToWrong: rightToWrong, wrongToRight: wrongToRight, words: words ?? wordsOf(q), timed: timed,
-                confidence: confidence, eliminated: eliminated, difficulty: q.difficulty)
+                confidence: confidence, eliminated: eliminated, difficulty: q.difficulty, hints: hints)
     }
 
     /** Accuracy with and without crossing options out first; nil until both have 10. */
@@ -366,6 +406,8 @@ final class AppModel: ObservableObject {
                            durationMs: Int64(minutes) * 60_000,
                            breakAfter: full ? layout.breakAfter.filter { $0 >= 1 && $0 < qs.count } : [],
                            breakMs: Int64(layout.breakMinutes) * 60_000)
+        let pretestN: Int = MockPlan.pretestCount(qs.count, totalItems: layout.totalItems)
+        mock?.pretest = Set(qs.shuffled().prefix(pretestN).map { $0.id })
         lastMock = nil
         finishedMock = nil
         saveMock()
@@ -478,14 +520,19 @@ final class AppModel: ObservableObject {
         var right = 0
         var dom: [Domain: [Int]] = [:]
         let perQ = m.questions.isEmpty ? 0 : (m.durationMs - m.remainingMs) / Int64(m.questions.count)
+        var scoredN = 0
         for q in m.questions {
             let a = m.answers[q.id]
             let r = Scoring.score(q, a)
-            if r.correct { right += 1 }
-            var e = dom[q.domain] ?? [0, 0]
-            e[1] += 1
-            if r.correct { e[0] += 1 }
-            dom[q.domain] = e
+            // Pretest items are marked for history but never scored, as on the real exam.
+            if !m.isPretest(q) {
+                scoredN += 1
+                if r.correct { right += 1 }
+                var e = dom[q.domain] ?? [0, 0]
+                e[1] += 1
+                if r.correct { e[0] += 1 }
+                dom[q.domain] = e
+            }
             // Only answered items feed history; a blank at the bell says nothing about the question.
             if Scoring.isAnswered(q, a) {
                 store.record(attempt(q, r.credit, r.correct, m.spentMs[q.id] ?? perQ, Readiness.SOURCE_EXAM,
@@ -493,7 +540,7 @@ final class AppModel: ObservableObject {
                                      timed: true, eliminated: m.struck[q.id]?.count ?? 0))
             }
         }
-        let result = MockResult(at: now, title: m.title, n: m.questions.count, right: right, usedMs: m.durationMs - max(0, m.remainingMs), domains: dom)
+        let result = MockResult(at: now, title: m.title, n: scoredN, right: right, usedMs: m.durationMs - max(0, m.remainingMs), domains: dom)
         store.recordMock(result)
         store.recordSitting(SittingEvent(key: "mock:\(m.startedAt)", kind: "mock", at: now, planned: m.questions.count, answered: m.answeredCount, finished: true))
         lastMock = result
@@ -517,6 +564,52 @@ final class AppModel: ObservableObject {
         let qs = onlyWrong ? m.questions.filter { !Scoring.score($0, m.answers[$0.id]).correct } : m.questions
         if qs.isEmpty { return }
         mockReview = QuizSession(title: "Review", questions: qs, reviewOnly: true, givenAnswers: m.answers, givenOrder: m.order)
+    }
+
+    /* ── the drill queue: a mock's misses, waiting on the Practice page (kept on this device) ── */
+
+    @Published private(set) var mockQueue: [String]
+
+    private func saveQueue() { defaults.set(mockQueue, forKey: "mockQueue") }
+
+    /** Every question the finished sitting got wrong, pretest included. */
+    func finishedMockMisses() -> [Question] {
+        guard let m = finishedMock else { return [] }
+        return m.questions.filter { !Scoring.score($0, m.answers[$0.id]).correct }
+    }
+
+    /** Adds the misses to the queue, skipping ones already in it. Returns how many were added. */
+    @discardableResult
+    func sendMissesToQueue(_ qs: [Question]) -> Int {
+        var have: Set<String> = Set(mockQueue)
+        var added: Int = 0
+        for q in qs where !have.contains(q.id) { mockQueue.append(q.id); have.insert(q.id); added += 1 }
+        saveQueue()
+        return added
+    }
+
+    /** The queued questions that are still in an enabled bank. */
+    func queuedQuestions() -> [Question] {
+        let byId: [String: Question] = Dictionary(pool().map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a })
+        return mockQueue.compactMap { byId[$0] }
+    }
+
+    /** Drills up to 20 of the queue; those leave it. */
+    func startQueue() {
+        let take: [Question] = Array(queuedQuestions().shuffled().prefix(20))
+        if take.isEmpty { return }
+        let taken: Set<String> = Set(take.map { $0.id })
+        mockQueue.removeAll { taken.contains($0) }
+        saveQueue()
+        startPracticeWith(take, title: "From your last mock")
+    }
+
+    func clearQueue() { mockQueue = []; saveQueue() }
+
+    /* ── formula lab drills: the shared `drills` log ── */
+
+    func recordDrill(_ p: DrillProblem, ok: Bool) {
+        store.recordDrill(DrillRun(at: Time.now(), generator: p.gen.isEmpty ? "unknown" : p.gen, ok: ok))
     }
 
     func saveMock() {
@@ -1363,6 +1456,7 @@ final class AppModel: ObservableObject {
         case "coach": navigate(.COACH)
         case "menu": navigate(.MENU)
         case "settings": navigate(.SETTINGS)
+        case "formulas": navigate(.FORMULAS)
         case "sync": navigate(.SYNC)
         default: break
         }

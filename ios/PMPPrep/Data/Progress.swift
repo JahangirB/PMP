@@ -114,6 +114,9 @@ struct DiagnosticResult: Equatable {
     func domainPct(_ d: Domain) -> Double? { domains[d].flatMap { $0[1] == 0 ? nil : Double($0[0]) / Double($0[1]) } }
 }
 
+/** One formula-lab drill problem marked or shown (shared slice `drills`). ok is false for close, wrong or shown. */
+struct DrillRun: Equatable { var at: Millis; var generator: String; var ok: Bool }
+
 /** One turn of the conversation with the coach. role is "user" or "model". */
 struct ChatTurn: Equatable { var role: String; var text: String; var at: Millis }
 
@@ -133,7 +136,7 @@ final class ProgressStore: ObservableObject {
     /** The top-level keys this store writes from its own fields; anything else is carried through. */
     static let ownKeys: Set<String> = ["type", "version", "savedAt", "device", "schemaVersion", "attempts", "flags", "notes", "mistakes",
                                        "cards", "scenarios", "mocks", "lessons", "plan", "sessions", "notepad", "diagnostics", "chat",
-                                       "snoozed", "sittings", "checkins", "weekly", "mycards"]
+                                       "snoozed", "sittings", "checkins", "weekly", "mycards", "drills"]
 
     /** This install's id in the document's device block. Made once and kept. */
     static var deviceId: String {
@@ -145,6 +148,7 @@ final class ProgressStore: ObservableObject {
     }
     private static let maxAttempts = 20000
     private static let maxChat = 60
+    static let maxDrills = 2000
 
     @Published private(set) var revision = 0
 
@@ -174,6 +178,8 @@ final class ProgressStore: ObservableObject {
     var checkIns: [CheckIn] = []
     var weekly: [WeeklyReport] = []
     var myCards: [Flashcard] = []
+    /** Formula-lab drill log, oldest first. Counts as study days; never as answers. */
+    var drills: [DrillRun] = []
     /** Latest attempt per question. */
     var last: [String: Attempt] = [:]
 
@@ -217,6 +223,11 @@ final class ProgressStore: ObservableObject {
         changed()
     }
     func recordCheckIn(_ c: CheckIn) { checkIns.append(c); changed() }
+    func recordDrill(_ d: DrillRun) {
+        drills.append(d)
+        if drills.count > Self.maxDrills { drills.removeFirst(drills.count - Self.maxDrills) }
+        changed()
+    }
 
     /** Saves this week's report, replacing the week's earlier version. Doesn't bump the revision: it's derived. */
     func putWeekly(_ r: WeeklyReport) {
@@ -246,7 +257,7 @@ final class ProgressStore: ObservableObject {
         attempts = []; flags = []; notes = [:]; mistakeTags = [:]; cards = [:]
         scenarioRuns = []; mocks = []; lessonsDone = []; last = [:]; plan = StudyPlan()
         notepad = ""; diagnostics = []; chat = []; coachSnoozed = [:]; sessionResults = []
-        sittings = []; checkIns = []; weekly = []; myCards = []
+        sittings = []; checkIns = []; weekly = []; myCards = []; drills = []
         changed()
     }
 
@@ -347,6 +358,7 @@ final class ProgressStore: ObservableObject {
         o["checkins"] = checkIns.map { ["at": $0.at, "kind": $0.kind, "v": $0.value, "items": $0.items] as [String: Any] }
         o["weekly"] = weekly.map { $0.toJson() }
         o["mycards"] = myCards.map { ["id": $0.id, "t": $0.ecoTask ?? "", "f": $0.front, "b": $0.back, "n": $0.note] as [String: Any] }
+        o["drills"] = drills.map { (d: DrillRun) -> [String: Any] in ["at": d.at, "g": d.generator, "ok": d.ok] }
         return o
     }
 
@@ -356,8 +368,14 @@ final class ProgressStore: ObservableObject {
         attempts = []; flags = []; notes = [:]; mistakeTags = [:]; cards = [:]
         scenarioRuns = []; mocks = []; lessonsDone = []; last = [:]
         diagnostics = []; chat = []; coachSnoozed = [:]; sessionResults = []
-        sittings = []; checkIns = []; weekly = []; myCards = []
+        sittings = []; checkIns = []; weekly = []; myCards = []; drills = []
         notepad = o.optString("notepad")
+        let readDrills: [DrillRun] = o.objects("drills").compactMap { (d: JObj) -> DrillRun? in
+            let at: Millis = d.optLong("at")
+            if at <= 0 { return nil }
+            return DrillRun(at: at, generator: d.optString("g", "unknown"), ok: d.optBool("ok"))
+        }
+        drills = Array(readDrills.sorted { $0.at < $1.at }.suffix(Self.maxDrills))
         myCards = o.objects("mycards").map {
             Flashcard(id: $0.str("id"), deck: Self.MY_DECK, ecoTask: $0.str("t").isEmpty ? nil : $0.str("t"), front: $0.str("f"), back: $0.str("b"), note: $0.str("n"))
         }

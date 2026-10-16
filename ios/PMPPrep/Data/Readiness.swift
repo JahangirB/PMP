@@ -109,6 +109,8 @@ struct Readiness {
         store.mocks.forEach { days.insert(Time.startOfDay($0.at)) }
         store.scenarioRuns.forEach { days.insert(Time.startOfDay($0.at)) }
         store.cards.values.forEach { if $0.last > 0 { days.insert(Time.startOfDay($0.last)) } }
+        // A formula-lab drill is study too, though it never counts as an answer.
+        store.drills.forEach { days.insert(Time.startOfDay($0.at)) }
         let today = Time.startOfDay(now)
         let kept = store.plan.restDays ? Readiness.withRestDays(days, today) : days
         var cursor = kept.contains(today) ? today : Time.prevDay(today)

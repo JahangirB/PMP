@@ -219,6 +219,18 @@ data class Reference(
 data class ExamLayout(
     val totalItems: Int, val minutes: Int, val breakMinutes: Int,
     val breakAfter: List<Int>, val paceTargetSec: Int,
+    /** Of [totalItems], the ones that count; the rest are unscored pretest items (EXAM.SCORED_ITEMS, 170 of 180). */
+    val scoredItems: Int = 170,
+)
+
+/**
+ * The adaptive drill's weighting, PMP.PRACTICE.ADAPTIVE in index.html §01.7. [prior] and [priorN]
+ * stop a task with two answers from reading as settled evidence; [exponent] sharpens the pull to
+ * weak tasks; [unseenBoost] and [rightDamp] favour questions never seen and hold back ones right last time.
+ */
+data class AdaptiveConfig(
+    val prior: Double = 0.5, val priorN: Double = 4.0, val exponent: Double = 1.5, val floor: Double = 0.05,
+    val unseenBoost: Double = 1.4, val rightDamp: Double = 0.5,
 )
 
 data class SrsConfig(
@@ -258,6 +270,8 @@ data class Extras(
     val lessons: List<Lesson>,
     /** The rules every app shares (docs/progress-format.md §1). */
     val rules: Rules = Rules(),
+    /** How the adaptive drill weights questions (§10.02.2). */
+    val adaptive: AdaptiveConfig = AdaptiveConfig(),
     /** The Google Apps Script the Cloud sync screen shows, with __SYNC_CODE__ still in it. */
     val syncScript: String = "",
 )

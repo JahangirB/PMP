@@ -56,6 +56,14 @@ import com.jahangirb.pmpprep.data.Booking
 import com.jahangirb.pmpprep.data.BookingReport
 import com.jahangirb.pmpprep.data.Deck
 import com.jahangirb.pmpprep.data.QuestionReview
+import com.jahangirb.pmpprep.data.DrillProblem
+import com.jahangirb.pmpprep.data.DrillVerdict
+import com.jahangirb.pmpprep.data.FormulaDrills
+import com.jahangirb.pmpprep.data.Hint
+import com.jahangirb.pmpprep.data.HintLadder
+import com.jahangirb.pmpprep.data.MockPlan
+import com.jahangirb.pmpprep.data.MockRow
+import com.jahangirb.pmpprep.data.MockTimeReport
 import com.jahangirb.pmpprep.ui.components.ReadingPrefs
 import com.jahangirb.pmpprep.data.ReminderBrain
 import com.jahangirb.pmpprep.data.ReminderSnapshot
@@ -108,6 +116,8 @@ data class PracticeFilter(
     val approach: Approach? = null,
     val which: Which = Which.ALL,
     val count: Int = 20,
+    /** Drawn toward your weakest ECO tasks (index.html §10.02 adaptive drill) rather than at random. */
+    val adaptive: Boolean = false,
 ) {
     enum class Which(val title: String) {
         ALL("All questions"), NEW("Not answered yet"), MISSED("Wrong last time"), FLAGGED("Flagged"),
@@ -178,6 +188,12 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     /** The running mock uses focus mode: Do Not Disturb while it's on screen, and the screen kept awake. */
     var focusMock by mutableStateOf(settings.getBoolean("focusMock", false))
         private set
+
+    /** Offer the hint ladder in practice (index.html "Show hints in practice"); on by default, as on the web. */
+    var showHints by mutableStateOf(settings.getBoolean("hints", true))
+        private set
+
+    fun changeShowHints(on: Boolean) { showHints = on; settings.edit().putBoolean("hints", on).apply() }
 
     fun changeFocusMock(on: Boolean) { focusMock = on; settings.edit().putBoolean("focusMock", on).apply() }
 
@@ -261,7 +277,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun startPractice(f: PracticeFilter = filter, title: String = "Practice") {
-        val qs = matching(f).shuffled().take(f.count)
+        val pool = matching(f)
+        val qs = if (f.adaptive) QuestionPicker.adaptive(pool, store.attempts, { store.last[it]?.correct }, f.count, repo.extras.adaptive)
+            else pool.shuffled().take(f.count)
         if (qs.isEmpty()) return
         practice = QuizSession(title, qs)
         if (screen != Dest.PRACTICE) navigate(Dest.PRACTICE)
@@ -291,6 +309,24 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         val st = s.struck[q.id].orEmpty()
         s.struck[q.id] = if (optionId in st) st - optionId else st + optionId
         s.answers[q.id]?.let { a -> if (optionId in a.choices && optionId !in st) s.answers[q.id] = a.copy(choices = a.choices - optionId) }
+    }
+
+    /** Whether the Hint button shows on this question: hints switched on, a practice set, not yet checked, rungs left. */
+    fun canHint(s: QuizSession, q: Question): Boolean =
+        showHints && s.hintsAllowed && !s.isChecked(q) && (s.hints[q.id]?.size ?: 0) < HintLadder.RUNGS
+
+    /** Opens the next rung of the hint ladder. Rung 3 may cross out one wrong option the person hasn't chosen. */
+    fun nextHint(s: QuizSession, q: Question) {
+        if (!canHint(s, q)) return
+        s.touch(System.currentTimeMillis())
+        val have = s.hints[q.id].orEmpty()
+        val lesson = HintLadder.lessonFor(repo.extras.lessons, repo.extras.modules, q.ecoTask)
+        val h = HintLadder.hint(q, have.size + 1, s.order[q.id] ?: q.options, s.answers[q.id]?.choices.orEmpty(), lesson)
+        s.hints[q.id] = have + h
+        h.strike?.let { id ->
+            s.hintStruck[q.id] = id
+            s.struck[q.id] = s.struck[q.id].orEmpty() + id
+        }
     }
 
     /** For pick-type questions: true if a change went wrong → right, false if right → wrong, null otherwise. */
@@ -325,7 +361,9 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             firstTapMs = if (s.firstTapAt > 0) s.firstTapAt - s.shownAt - s.awayAtFirstTap else 0L,
             idleMs = s.maxIdle, rightToWrong = s.rightToWrong, wrongToRight = s.wrongToRight,
             words = wordsOf(q, withOptions = !s.readingDrill), timed = s.timed,
-            confidence = confidence, eliminated = s.struck[q.id]?.size ?: 0))
+            // An option the hint crossed out wasn't the person's own elimination.
+            confidence = confidence, eliminated = (s.struck[q.id].orEmpty() - setOfNotNull(s.hintStruck[q.id])).size,
+            hints = s.hints[q.id]?.size ?: 0))
     }
 
     fun moveTo(s: QuizSession, i: Int) {
@@ -337,12 +375,13 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     private fun attempt(
         q: Question, credit: Double, correct: Boolean, ms: Long, source: String,
         firstTapMs: Long = 0, idleMs: Long = 0, rightToWrong: Int = 0, wrongToRight: Int = 0, words: Int = wordsOf(q), timed: Boolean = false,
-        confidence: Int = 0, eliminated: Int = 0,
+        confidence: Int = 0, eliminated: Int = 0, hints: Int = 0,
     ) = Attempt(
         qid = q.id, ecoTask = q.ecoTask, domain = q.domain, approach = q.approach, type = q.type,
         credit = credit, correct = correct, ms = ms.coerceAtLeast(0), at = System.currentTimeMillis(), source = source,
         firstTapMs = firstTapMs.coerceAtLeast(0), idleMs = idleMs.coerceAtLeast(0), rightToWrong = rightToWrong,
         wrongToRight = wrongToRight, words = words, timed = timed, confidence = confidence, eliminated = eliminated,
+        difficulty = q.difficulty.coerceIn(0, 5), hints = hints,
     )
 
     /** Accuracy with and without crossing options out first, over answers where it was possible; null until both have 10. */
@@ -396,6 +435,11 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     var finishedMock by mutableStateOf<MockSession?>(null)
         private set
     var mockReview by mutableStateOf<QuizSession?>(null)
+    /** The finished sitting's "where the time went" analysis, and the questions it missed (pretest included). */
+    var lastMockTime by mutableStateOf<MockTimeReport?>(null)
+        private set
+    var lastMockMissed by mutableStateOf<List<String>>(emptyList())
+        private set
     private var timerJob: Job? = null
     private val mockFile: File get() = File(getApplication<Application>().filesDir, "exam.json")
 
@@ -430,8 +474,12 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             durationMs = minutes * 60_000L,
             breakAfter = if (full) layout.breakAfter.filter { it in 1 until qs.size } else emptyList(),
             breakMs = layout.breakMinutes * 60_000L,
+            // Unscored pretest items, in proportion to the full 170 + 10 (index.html §10.03.1).
+            pretest = MockPlan.pickPretest(qs.map { it.id }, layout.totalItems, layout.scoredItems, rnd),
         )
         lastMock = null
+        lastMockTime = null
+        lastMockMissed = emptyList()
         finishedMock = null
         saveMock()
         startTimer()
@@ -481,6 +529,50 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun clearScorecard() {
         lastMock = null
         finishedMock = null
+        lastMockTime = null
+        lastMockMissed = emptyList()
+    }
+
+    /* ── the drill queue (index.html §10.03.12 "send misses to the drill queue") ── */
+
+    /** Question ids sent from mock results, waiting on the Practice screen. Device-only, as the web's queue is. */
+    var mockQueue by mutableStateOf(settings.getString("mockQueue", "").orEmpty().split(',').filter { it.isNotBlank() })
+        private set
+
+    private fun saveQueue(ids: List<String>) {
+        mockQueue = ids
+        settings.edit().putString("mockQueue", ids.joinToString(",")).apply()
+    }
+
+    /** Sends the last sitting's misses to the queue; returns how many were sent. */
+    fun sendMissesToQueue(): Int {
+        val ids = lastMockMissed
+        saveQueue(MockPlan.enqueue(mockQueue, ids))
+        return ids.size
+    }
+
+    /** The queue's questions that are still in an enabled bank. */
+    fun queuedQuestions(): List<Question> {
+        val enabled = pool().associateBy { it.id }
+        return mockQueue.mapNotNull { enabled[it] }
+    }
+
+    /** Drills up to 20 from the queue; the ones taken leave it. */
+    fun startQueue() {
+        val take = queuedQuestions().shuffled().take(20)
+        if (take.isEmpty()) return
+        val taken = take.map { it.id }.toSet()
+        saveQueue(mockQueue.filter { it !in taken })
+        startPracticeWith(take, "From your last mock")
+    }
+
+    fun clearQueue() = saveQueue(emptyList())
+
+    /* ── formula lab drills ──────────────────────────────────────────────── */
+
+    /** Logs a drill problem marked ([verdict]) or shown (null) to the shared drills log. */
+    fun recordDrill(p: DrillProblem, verdict: DrillVerdict?) {
+        store.recordDrill(FormulaDrills.logRow(p, verdict, System.currentTimeMillis()))
     }
 
     fun mockAnswer(q: Question, a: Answer) {
@@ -554,25 +646,34 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         var right = 0
         val dom = HashMap<Domain, IntArray>()
         val perQ = if (m.questions.isEmpty()) 0L else (m.durationMs - m.remainingMs) / m.questions.size
-        for (q in m.questions) {
+        val rows = ArrayList<MockRow>()
+        for ((i, q) in m.questions.withIndex()) {
             val a = m.answers[q.id]
             val r = Scoring.score(q, a)
-            if (r.correct) right++
-            val e = dom.getOrPut(q.domain) { IntArray(2) }
-            e[1]++
-            if (r.correct) e[0]++
+            val pre = q.id in m.pretest
+            rows += MockRow(q.id, MockPlan.blockOf(i, m.breakAfter), pre, Scoring.isAnswered(q, a), r.correct, m.marked[q.id] == true,
+                m.spentMs[q.id] ?: perQ)
+            // Pretest items don't count toward the score, as on the exam; their answers still go to history.
+            if (!pre) {
+                if (r.correct) right++
+                val e = dom.getOrPut(q.domain) { IntArray(2) }
+                e[1]++
+                if (r.correct) e[0]++
+            }
             // Only answered items feed history; a blank at the bell says nothing about the question.
             if (Scoring.isAnswered(q, a)) store.record(attempt(q, r.credit, r.correct, m.spentMs[q.id] ?: perQ, Readiness.SOURCE_EXAM,
                 firstTapMs = m.firstTapMs[q.id] ?: 0L, rightToWrong = m.rightToWrong[q.id] ?: 0, wrongToRight = m.wrongToRight[q.id] ?: 0, timed = true,
                 eliminated = m.struck[q.id]?.size ?: 0))
         }
-        val result = MockResult(now, m.title, m.questions.size, right, m.durationMs - m.remainingMs.coerceAtLeast(0),
+        val result = MockResult(now, m.title, m.questions.count { it.id !in m.pretest }, right, m.durationMs - m.remainingMs.coerceAtLeast(0),
             dom.mapValues { it.value[0] to it.value[1] })
         store.recordMock(result)
         store.recordSitting(SittingEvent("mock:${m.startedAt}", "mock", now, m.questions.size, m.answeredCount, true))
         endFocus()
         lastMock = result
         finishedMock = m
+        lastMockTime = MockPlan.timeReport(rows, repo.extras.exam.paceTargetSec, m.sectionCount)
+        lastMockMissed = rows.filter { !it.correct }.map { it.qid }
         mock = null
         mockFile.delete()
         autoSync()
@@ -596,7 +697,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         val m = finishedMock ?: return
         val qs = if (onlyWrong) m.questions.filter { !Scoring.score(it, m.answers[it.id]).correct } else m.questions
         if (qs.isEmpty()) return
-        mockReview = QuizSession("Review", qs, reviewOnly = true, givenAnswers = m.answers.toMap(), givenOrder = m.order)
+        mockReview = QuizSession("Review", qs, reviewOnly = true, givenAnswers = m.answers.toMap(), givenOrder = m.order, pretest = m.pretest)
     }
 
     fun saveMock() {

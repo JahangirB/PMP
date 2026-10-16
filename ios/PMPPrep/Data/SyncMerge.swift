@@ -28,6 +28,7 @@ enum SyncMerge {
         LogSpec(key: "sittings", fields: ["k", "at"], sortField: "at", cap: 2000),
         LogSpec(key: "checkins", fields: ["kind", "at"], sortField: "at", cap: Int.max),
         LogSpec(key: "weekly", fields: ["w"], sortField: "w", cap: 104),
+        LogSpec(key: "drills", fields: ["at", "g"], sortField: "at", cap: 2000),
     ]
     static let setKeys: [String] = ["flags", "lessons"]
     /** Maps merged per key; how a key changed on both sides is settled. */

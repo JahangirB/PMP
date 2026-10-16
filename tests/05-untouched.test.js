@@ -17,8 +17,11 @@ var REF_COMMIT = "3f6ff75";
 /* #/formulas and #/cards are learning surfaces that now spell abbreviations
    out on first use (§09.5a), on purpose; 09-learning-abbr covers them. The
    practice surfaces stay here precisely because they must not change.
-   #/data gained a paragraph on the optional AI tab (§12.2.2), on purpose. */
-var ROUTES = ["library", "analytics", "journal", "exam", "practice", "scenarios"];
+   #/data gained a paragraph on the optional AI tab (§12.2.2), on purpose.
+   #/journal gained a sixth cause (Calculation slip) and #/analytics reads
+   its heat-map bands from the shared rules (§01.8), both on purpose with the
+   shared progress format; their own tests cover them (12-sync). */
+var ROUTES = ["library", "exam", "practice", "scenarios"];
 
 module.exports = [
   {

@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.jahangirb.pmpprep.data.Answer
+import com.jahangirb.pmpprep.data.Hint
 import com.jahangirb.pmpprep.data.Option
 import com.jahangirb.pmpprep.data.Question
 import com.jahangirb.pmpprep.data.Readiness
@@ -38,11 +39,21 @@ class QuizSession(
     val readingDrill: Boolean = false,
     /** Where the answers are recorded as coming from. */
     val source: String = Readiness.SOURCE_PRACTICE,
+    /** A mock review: the sitting's unscored pretest items, labelled as such. */
+    val pretest: Set<String> = emptySet(),
 ) {
     /** Options crossed out, highlighted words of the stem, and how sure you were, per question. */
     val struck = mutableStateMapOf<String, Set<String>>()
     val marks = mutableStateMapOf<String, Set<Int>>()
     val confidence = mutableStateMapOf<String, Int>()
+    /** The hint rungs opened per question, in order, and the option the third rung crossed out. */
+    val hints = mutableStateMapOf<String, List<Hint>>()
+    val hintStruck = mutableStateMapOf<String, String>()
+    /**
+     * The hint ladder is offered in practice only (index.html §10.02.6a): a review, the diagnostic, a timed
+     * drill, a reading drill and a lesson's set are measurements, and the exam gives no hints.
+     */
+    val hintsAllowed: Boolean get() = !reviewOnly && !diagnostic && !timed && !readingDrill && source != Readiness.SOURCE_LESSON
     private val rnd = Random(System.nanoTime())
     val startedAt = System.currentTimeMillis()
     val key = "practice:$startedAt"
@@ -105,6 +116,8 @@ class MockSession(
     /** Question counts at which a section ends and an optional break is offered. */
     val breakAfter: List<Int>,
     val breakMs: Long,
+    /** Unscored pretest items (index.html §10.03.3): not told apart during the sitting, named in the results. */
+    val pretest: Set<String> = emptySet(),
 ) {
     var index by mutableIntStateOf(0)
     var section by mutableIntStateOf(0)
@@ -141,6 +154,7 @@ class MockSession(
         put("index", index); put("section", section)
         put("onBreak", onBreak); put("breakRemaining", breakRemainingMs)
         put("startedAt", startedAt)
+        put("pretest", JSONArray(pretest.toList()))
         put("spent", JSONObject(spentMs as Map<*, *>)); put("firstTap", JSONObject(firstTapMs as Map<*, *>))
         put("rw", JSONObject(rightToWrong as Map<*, *>)); put("wr", JSONObject(wrongToRight as Map<*, *>))
         put("struck", JSONObject().apply { struck.forEach { (k, v) -> put(k, JSONArray(v.toList())) } })
@@ -164,6 +178,7 @@ class MockSession(
                 o.optString("title", "Mock exam"), qs, order, o.optLong("duration"),
                 if (ba == null) emptyList() else (0 until ba.length()).map { ba.optInt(it) }.filter { it in 1 until qs.size },
                 o.optLong("breakMs"),
+                o.optJSONArray("pretest")?.let { p -> (0 until p.length()).map { p.optString(it) }.toSet() } ?: emptySet(),
             )
             o.optJSONObject("answers")?.let { a -> a.keys().forEach { k -> s.answers[k] = answerFrom(a.optJSONObject(k)) } }
             o.optJSONArray("marked")?.let { m -> for (i in 0 until m.length()) s.marked[m.optString(i)] = true }

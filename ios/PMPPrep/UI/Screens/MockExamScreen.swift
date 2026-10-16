@@ -383,9 +383,158 @@ private struct Scorecard: View {
                 }
                 .padding(.top, 8)
             }
+            if let fm = m.finishedMock {
+                MockAfterSitting(s: fm)
+            }
             Button { m.reviewMock(onlyWrong: true) } label: { Text("Review the ones I got wrong").frame(maxWidth: .infinity) }.primaryButton()
             Button { m.reviewMock(onlyWrong: false) } label: { Text("Review every question").frame(maxWidth: .infinity) }.outlinedButton()
             Button { m.clearScorecard() } label: { Text("Done").frame(maxWidth: .infinity) }.textButton()
         }
+    }
+}
+
+/** One row of the time analysis: a group of items, how many, how many right, and the time they took. */
+private struct MockTimeRow: Identifiable {
+    let id: String
+    let items: Int
+    let right: Int
+    let ms: Int64
+}
+
+/**
+ * After a sitting (web §10.03.12): the pretest items revealed, where the time went (inside or over
+ * the pace target, flagged, and by section), and sending the misses to the drill queue on Practice.
+ */
+private struct MockAfterSitting: View {
+    @EnvironmentObject private var m: AppModel
+    @ObservedObject var s: MockSession
+    @State private var sent: Int? = nil
+
+    private func right(_ q: Question) -> Bool { Scoring.score(q, s.answers[q.id]).correct }
+    private func answered(_ q: Question) -> Bool { Scoring.isAnswered(q, s.answers[q.id]) }
+    private func spent(_ q: Question) -> Int64 { s.spentMs[q.id] ?? 0 }
+
+    private func row(_ label: String, _ qs: [Question]) -> MockTimeRow {
+        let r: Int = qs.filter { right($0) }.count
+        let ms: Int64 = qs.reduce(Int64(0)) { $0 + spent($1) }
+        return MockTimeRow(id: label, items: qs.count, right: r, ms: ms)
+    }
+
+    var body: some View {
+        let paceSec: Int = m.repo.extras.exam.paceTargetSec
+        let paceMs: Int64 = Int64(paceSec) * 1000
+        let answeredQs: [Question] = s.questions.filter { answered($0) }
+        let inside: [Question] = answeredQs.filter { spent($0) <= paceMs }
+        let over: [Question] = answeredQs.filter { spent($0) > paceMs }
+        let flagged: [Question] = s.questions.filter { s.marked[$0.id] == true }
+        let paceRows: [MockTimeRow] = [row("Answered inside \(paceSec)s", inside), row("Answered over \(paceSec)s", over), row("Flagged for review", flagged)]
+        let blocks: [MockTimeRow] = blockRows()
+        let misses: [Question] = m.finishedMockMisses()
+        VStack(alignment: .leading, spacing: 12) {
+            if !s.pretest.isEmpty {
+                pretestCard()
+            }
+            PmpCard {
+                SectionLabel("Where the time went")
+                MockTimeTable(rows: paceRows, showTime: false)
+                Text("If the slow group is no more accurate than the fast one, the extra minutes are going on second-guessing rather than on working the problem, and the fix is a decision rule rather than more content.")
+                    .font(.nunito(12)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
+                SectionLabel("By section").padding(.top, 8)
+                MockTimeTable(rows: blocks, showTime: true)
+            }
+            if !misses.isEmpty {
+                queueCard(misses)
+            }
+        }
+    }
+
+    private func blockRows() -> [MockTimeRow] {
+        var out: [MockTimeRow] = []
+        for sec in 0..<s.sectionCount {
+            let lo: Int = min(s.sectionStart(sec), s.questions.count)
+            let hi: Int = min(max(lo, s.sectionEnd(sec)), s.questions.count)
+            let label: String = s.sectionCount > 1 ? "Section \(sec + 1)" : "All questions"
+            out.append(row(label, Array(s.questions[lo..<hi])))
+        }
+        return out
+    }
+
+    private func pretestCard() -> some View {
+        let qs: [Question] = s.questions.filter { s.isPretest($0) }
+        let lines: [String] = qs.map { (q: Question) -> String in
+            let n: Int = (s.questions.firstIndex(of: q) ?? 0) + 1
+            let verdict: String = !answered(q) ? "not answered" : (right(q) ? "right" : "wrong")
+            return "Question \(n) · \(verdict)"
+        }
+        return PmpCard {
+            SectionLabel("Pretest items")
+            Text("\(qs.count) of the \(s.questions.count) questions were unscored pretest items, the same share as the real exam, and did not count towards the score above. You could not tell them apart while sitting it; neither can anyone on the day.")
+                .font(.nunito(13)).fixedSize(horizontal: false, vertical: true)
+            BulletList(items: lines).padding(.top, 4)
+        }
+    }
+
+    private func queueCard(_ misses: [Question]) -> some View {
+        PmpCard {
+            SectionLabel("Next")
+            Text("The \(misses.count) you did not get").font(.nunito(16, .bold))
+            Text("The drill queue waits on the Practice page as \"From your last mock\", so you can work through these over the next few days without finding them again.")
+                .font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
+            if let sent {
+                Text(sent == 0 ? "They are already in the drill queue." : "\(sent) sent to the drill queue on the Practice page.")
+                    .font(.nunito(13, .semibold)).foregroundStyle(Palette.success)
+            } else {
+                Button { sent = m.sendMissesToQueue(misses) } label: {
+                    Text("Send the \(misses.count) you missed to the drill queue").frame(maxWidth: .infinity)
+                }
+                .outlinedButton()
+            }
+            Button { m.startPracticeWith(misses, title: "Mock misses") } label: { Text("Drill them now").frame(maxWidth: .infinity) }
+                .textButton()
+        }
+    }
+}
+
+/** A small table: group, items, right, accuracy, and optionally time and average. */
+private struct MockTimeTable: View {
+    let rows: [MockTimeRow]
+    let showTime: Bool
+
+    var body: some View {
+        VStack(spacing: 6) {
+            HStack(spacing: 6) {
+                Text("").frame(maxWidth: .infinity, alignment: .leading)
+                header("Items")
+                header("Right")
+                header(showTime ? "Time" : "Acc.")
+                if showTime { header("Avg") }
+            }
+            ForEach(rows) { r in
+                line(r)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    private func header(_ t: String) -> some View {
+        Text(t).font(.nunito(11, .bold)).foregroundStyle(Palette.onSurfaceVariant).frame(width: 52, alignment: .trailing)
+    }
+
+    private func cell(_ t: String) -> some View {
+        Text(t).font(.system(size: 12, weight: .semibold, design: .monospaced)).frame(width: 52, alignment: .trailing)
+    }
+
+    private func line(_ r: MockTimeRow) -> some View {
+        let acc: String = r.items == 0 ? "—" : pct(Double(r.right) / Double(r.items))
+        let avg: String = r.items == 0 ? "—" : "\(Int((Double(r.ms) / Double(r.items) / 1000).rounded()))s"
+        return HStack(spacing: 6) {
+            Text(r.id).font(.nunito(13)).frame(maxWidth: .infinity, alignment: .leading).lineLimit(2)
+            cell("\(r.items)")
+            cell("\(r.right)")
+            cell(showTime ? clock(r.ms) : acc)
+            if showTime { cell(avg) }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(r.id): \(r.items) items, \(r.right) right" + (showTime ? ", \(clock(r.ms)), average \(avg)" : ", \(acc)"))
     }
 }
