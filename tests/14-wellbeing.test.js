@@ -73,9 +73,10 @@ module.exports = [
       await page.waitForTimeout(200);
       var still = await page.evaluate(function () {
         var c = document.querySelector(".breath-c");
-        return { still: c.getAttribute("data-still"), transform: c.style.transform };
+        return { still: c.getAttribute("data-still"), transform: c.style.transform, n: document.querySelector(".breath-n").textContent,
+                 timing: [PMP.Wellbeing.BREATH.inMs, PMP.Wellbeing.BREATH.outMs, PMP.Wellbeing.BREATH.cycles] };
       });
-      assert.deepStrictEqual(still, { still: "true", transform: "" });
+      assert.deepStrictEqual(still, { still: "true", transform: "", n: "12 breaths to go", timing: [4000, 6000, 12] });
       await H.clickText(page, "#sheet-foot button", "I'm ready, start now");
       var open = await page.evaluate(function () { return document.getElementById("sheet").open; });
       assert.strictEqual(open, false);

@@ -2975,6 +2975,10 @@ function reply(obj) {
         03.21 today and the coach — step rows, messages, sticky start
         03.22 notes pane — top-bar toggle, right column ≥900px, overlay below
         03.23 cloud sync — numbered setup steps, script box, status line
+        03.24 exam fitness, booking, weekly reports — ladder, checklist,
+              sparklines, comparison tables
+        03.25 wellbeing — check-in faces, breathing circle, weekly check
+        03.26 search results, reading comfort and the reading guide band
         03.7  question engine — filters, options, hotspot, blanks, pace meter
         03.14 formula lab — sheet, calculators, network nodes, worked steps
         03.15 reference library — process matrix, ITTO panel, virtual list
@@ -3012,7 +3016,8 @@ function reply(obj) {
         06.5  mode → 'persistent' | 'session', published to §07
 
    §07  STORE / STATE
-        07.1  shape, defaults, migrations (schema 1 → 2), and the 01.8
+        07.1  shape, defaults, migrations (schema 1 → 2), adoption of rows
+              a phone left in `shared`, and the 01.8
               upgrade of stored rows (cause ids, confidence, scenario credit)
         07.2  subscribe / notify, selector memoisation
         07.3  actions — the only writers; no feature touches §06 directly
@@ -3023,7 +3028,8 @@ function reply(obj) {
               attempts with mode "lesson" and a lessonId), drills (§10.06
               formula drill answers, kept out of accuracy), shared (§10.18:
               the parts of a phone's progress this build keeps but does not
-              use itself)
+              use itself), sittings, checkins, weekly, sessions (§10.19,
+              §10.20: in the shared row shape, copied both ways as they are)
         07.4  persistence bridge + beforeunload guard
 
    §08  ROUTER ........................... hash-based
@@ -3041,6 +3047,8 @@ function reply(obj) {
         09.5a abbreviations — first use spelled out in learning text only
         09.6  validate — pack and progress schema validators, indexed errors
         09.7  ui — dialog, toast, confirm, empty state, icon
+        09.9  answer signals — reading time, idle, words, answer changes
+              (ft, idle, w, rw, wr), measured while the question is seen
 
    §10  FEATURE MODULES ................. one IIFE each
         10.00 Metrics · built                  10.08 Scenario trainer · built
@@ -3063,6 +3071,14 @@ function reply(obj) {
         10.17 Today, intake and the coach's surfaces · #/today, the home page
         10.18 Cloud sync — shared progress format v3, three-way merge, the
               Apps Script client and its setup guide · #/sync
+        10.19 Exam fitness, booking and weekly reports — derivations
+              ported from Android (stamina, composure, consistency, the
+              ladder, least-squares ready date, Monday-to-Sunday reports)
+        10.20 Wellbeing — check-ins, breathing reset, weekly worry check,
+              lighter week, write it down
+        10.21 The pages · #/fitness, #/book, #/reports
+        10.22 Search everything · #/search, and "/" from anywhere
+        10.23 Reading comfort, the reading guide and rest days (Settings)
               (10.14.6 audits 05.11 against fixture contexts)
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built

@@ -93,13 +93,19 @@ Rules every app follows:
   - Web attempts become shared attempts. `mode` diagnostic becomes `src` diagnostic; every
     other mode, including a lesson's practice set, becomes `practice` (the web mode rides in a
     per-row `wx`). `src: "lesson"` is reserved for the phones' lesson quick checks, which stay
-    out of accuracy, pace and mastery. A timed drill gets `tm: true`; `hinted` becomes `h`.
+    out of accuracy, pace and mastery. A timed drill and a mock answer get `tm: true`; `hinted` becomes `h`.
+    The answer signals `ft`, `idle`, `w`, `rw`, `wr` are kept on web attempts under the same names
+    (measured while the question is on screen and the tab visible) and written only when positive.
   - `srs` becomes `cards`.
   - `journal` (latest per qid) becomes `mistakes`.
   - `scenarioRuns` become `scenarios`.
   - Finished `exams` produce `mocks` summaries; the full records stay in `web.exams`.
   - Completed lessons go to `lessons`; the details stay in `web.lessons`.
-  - `settings.examDate` becomes `plan.examDate`.
+  - `settings.examDate` becomes `plan.examDate`; `settings.restDays` becomes `plan.rest` (written only
+    when it differs from the plan; absent means true).
+  - `sittings`, `checkins`, `weekly` and `sessions` are web slices in exactly the shared row shape and are
+    copied both ways unchanged (the web writes practice and mock sittings, check-ins and weekly reports;
+    sessions only come from the phones). Reading comfort (text size, line spacing, guide) is device-only.
   - The rich notes page is converted to `notepad` markup (colours are lost); the HTML stays in `web.notepadHtml`.
     When the shared `notepad` has changed and `notepadHtml` hasn't, the web rebuilds its HTML from the markup.
 - **The Gemini key and device-only settings never go in the document.**
