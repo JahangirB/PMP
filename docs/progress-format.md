@@ -65,7 +65,7 @@ and `unsure`/"Not sure"→`2`.
   "sittings":   [ { "k": "key", "kind": "practice", "at": ms, "p": 20, "a": 20, "f": true } ],
   "checkins":   [ { "at": ms, "kind": "pre|post|weekly", "v": 3, "items": [..] } ],
   "weekly":     [ /* WeeklyReport.toJson(), identity = its week start */ ],
-  "mycards":    [ { "id": "my-…", "t": "task", "f": "front", "b": "back", "n": "note" } ],
+  "mycards":    [ { "id": "my:qid", "t": "task", "f": "front", "b": "back", "n": "note" } ],
   "drills":     [ { "at": ms, "g": "evm-variance", "ok": true } ],   // formula-lab drill problems, see below
 
   // ── app-only blocks: other apps keep them byte-for-byte and never edit them ──
@@ -93,16 +93,28 @@ Rules every app follows:
   - Web attempts become shared attempts. `mode` diagnostic becomes `src` diagnostic; every
     other mode, including a lesson's practice set, becomes `practice` (the web mode rides in a
     per-row `wx`). `src: "lesson"` is reserved for the phones' lesson quick checks, which stay
-    out of accuracy, pace and mastery. A timed drill gets `tm: true`; `hinted` becomes `h`.
+    out of accuracy, pace and mastery. A timed drill and a mock answer get `tm: true`; `hinted` becomes `h`.
+    The answer signals `ft`, `idle`, `w`, `rw`, `wr` are kept on web attempts under the same names
+    (measured while the question is on screen and the tab visible) and written only when positive.
+    So are `cf` (Sure 3, Think so 2, Guess 1, from `confidence`) and `el` (options crossed out before
+    checking). A web reading drill is `src: "practice"` with `wx.mode: "reading"`, and its `w` counts
+    the stem's words only, as on the phones.
+  - `mycards` and `chat` are web slices in exactly the shared row shape and are copied both ways
+    unchanged. A card made on the web has the id `"my:" + question id`, as on Android; the chat is
+    capped at 60 turns. Rows an older web build left in its passthrough are folded in.
   - `srs` becomes `cards`.
   - `journal` (latest per qid) becomes `mistakes`.
   - `scenarioRuns` become `scenarios`.
   - Finished `exams` produce `mocks` summaries; the full records stay in `web.exams`.
   - Completed lessons go to `lessons`; the details stay in `web.lessons`.
-  - `settings.examDate` becomes `plan.examDate`.
+  - `settings.examDate` becomes `plan.examDate`; `settings.restDays` becomes `plan.rest` (written only
+    when it differs from the plan; absent means true).
+  - `sittings`, `checkins`, `weekly` and `sessions` are web slices in exactly the shared row shape and are
+    copied both ways unchanged (the web writes practice and mock sittings, check-ins and weekly reports;
+    sessions only come from the phones). Reading comfort (text size, line spacing, guide) is device-only.
   - The rich notes page is converted to `notepad` markup (colours are lost); the HTML stays in `web.notepadHtml`.
     When the shared `notepad` has changed and `notepadHtml` hasn't, the web rebuilds its HTML from the markup.
-- **The Gemini key and device-only settings never go in the document.**
+- **The Gemini key, its model line-up and device-only settings never go in the document.**
 
 ## 3. Merge (identical in every app)
 

@@ -20,8 +20,16 @@ var REF_COMMIT = "3f6ff75";
    #/data gained a paragraph on the optional AI tab (§12.2.2), on purpose.
    #/journal gained a sixth cause (Calculation slip) and #/analytics reads
    its heat-map bands from the shared rules (§01.8), both on purpose with the
-   shared progress format; their own tests cover them (12-sync). */
+   shared progress format; their own tests cover them (12-sync).
+   #/exam gained the optional "write it down" card before a sitting (§10.20)
+   on purpose; it is taken out of the new page before the comparison, so
+   everything else on the page is still held to the reference, and
+   13-wellbeing covers the card itself.
+   #/practice gained the Reading drill mode and three lines of keyboard help
+   for the answering tools (§10.02, S5) on purpose; both are taken out before
+   the comparison, and 16-answering covers them. */
 var ROUTES = ["library", "exam", "practice", "scenarios"];
+var ADDED = { exam: "#view .wb-write", practice: '#view .mode-opt[for="mode-reading"], #view .keylist li[data-k]' };
 
 module.exports = [
   {
@@ -36,6 +44,7 @@ module.exports = [
         for (var r of ROUTES) {
           await lib.go(a, "#/" + r);
           await lib.go(b, "#/" + r);
+          if (ADDED[r]) await b.evaluate(function (sel) { document.querySelectorAll(sel).forEach(function (n) { n.remove(); }); }, ADDED[r]);
           var sel = r === "library" ? '#view [role="tabpanel"]' : "#view";
           var pa = await a.locator(sel).screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
           var pb = await b.locator(sel).screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
