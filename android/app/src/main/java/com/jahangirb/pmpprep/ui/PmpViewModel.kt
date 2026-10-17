@@ -62,6 +62,8 @@ import com.jahangirb.pmpprep.data.FormulaDrills
 import com.jahangirb.pmpprep.data.Hint
 import com.jahangirb.pmpprep.data.HintLadder
 import com.jahangirb.pmpprep.data.MockPlan
+import com.jahangirb.pmpprep.data.CasePlan
+import com.jahangirb.pmpprep.data.CaseStudy
 import com.jahangirb.pmpprep.data.MockRow
 import com.jahangirb.pmpprep.data.MockTimeReport
 import com.jahangirb.pmpprep.ui.components.ReadingPrefs
@@ -285,6 +287,13 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         if (screen != Dest.PRACTICE) navigate(Dest.PRACTICE)
     }
 
+    /** "Case studies" quick start: one whole case, in authored order, the one with fewest items answered first unless [c] is given. */
+    fun startCase(c: CaseStudy? = null) {
+        val case = c ?: CasePlan.nextCase(repo.extras.cases, { it in store.last }) ?: return
+        practice = QuizSession("Case: ${case.title}", case.questions)
+        if (screen != Dest.PRACTICE) navigate(Dest.PRACTICE)
+    }
+
     fun startPracticeWith(qs: List<Question>, title: String) {
         if (qs.isEmpty()) return
         practice = QuizSession(title, qs.shuffled())
@@ -443,8 +452,21 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     private var timerJob: Job? = null
     private val mockFile: File get() = File(getApplication<Application>().filesDir, "exam.json")
 
-    /** Draws a mock weighted to the domain split, unseen questions first. */
+    /**
+     * Draws a mock: the case-study block first (whole cases, sized as index.html's layoutFor() sizes it for
+     * a sitting of [n]; empty when there are no cases), then the rest weighted to the domain split, unseen first.
+     */
     fun buildMock(n: Int): List<Question> {
+        val layout = repo.extras.exam
+        val target = CasePlan.caseItemsFor(n, layout.totalItems, layout.caseBlockItems)
+        val picks = CasePlan.pickCases(repo.extras.cases, target, { it in store.last })
+        val block = CasePlan.block(picks)
+        return CasePlan.paper(block, buildRest(n - block.size))
+    }
+
+    /** The non-case part of a mock: weighted to the domain split, unseen questions first, shuffled. */
+    private fun buildRest(n: Int): List<Question> {
+        if (n <= 0) return emptyList()
         val pool = pool()
         val weights = repo.extras.domainWeights
         val out = ArrayList<Question>()

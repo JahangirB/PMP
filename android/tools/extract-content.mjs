@@ -61,6 +61,7 @@ const extras = plain({
   tasks: P.ECO_TASKS, scenarios: P.SCENARIOS, decks: P.DECKS, flashcards: P.FLASHCARDS,
   formulas: P.FORMULAS, reference: P.REFERENCE, glossary: P.GLOSSARY,
   abbreviations: P.ABBREVIATIONS, modules: P.MODULES, lessons: P.LESSONS, rules: P.RULES,
+  cases: P.CASES || [],
   // The Google Apps Script the Cloud sync screen shows (docs/progress-format.md §4).
   syncScript: fs.readFileSync(path.join(root, 'sync', 'pmp-sync.gs'), 'utf8'),
 });

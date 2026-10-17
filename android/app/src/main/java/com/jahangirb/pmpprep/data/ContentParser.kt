@@ -207,6 +207,7 @@ object ContentParser {
                 breakAfter = listOf(exam.optInt("BREAK_1_AFTER", 60), exam.optInt("BREAK_2_AFTER", 120)),
                 paceTargetSec = exam.optDouble("PACE_TARGET_SEC", 80.0).toInt(),
                 scoredItems = exam.optInt("SCORED_ITEMS", 170),
+                caseBlockItems = exam.optInt("CASE_BLOCK_ITEMS", 40),
             ),
             srs = SrsConfig(
                 easeStart = srs.optDouble("EASE_START", 2.5), easeMin = srs.optDouble("EASE_MIN", 1.3),
@@ -286,6 +287,34 @@ object ContentParser {
                 )
             },
             syncScript = o.str("syncScript"),
+            cases = cases(o.optJSONArray("cases")),
+        )
+    }
+
+    /**
+     * PMP.CASES. Each item is validated like a pack item and parsed with pack id "case:<id>"; an invalid
+     * item is dropped, and a case left with no items is dropped. A missing or empty array gives no cases.
+     */
+    fun cases(a: JSONArray?): List<CaseStudy> = a.objects().mapNotNull { c ->
+        val id = c.str("id")
+        if (id.isEmpty()) return@mapNotNull null
+        val qs = c.optJSONArray("questions").objects().filter { validate(it) == null }.map { question(it, "case:$id") }
+        if (qs.isEmpty()) return@mapNotNull null
+        CaseStudy(
+            id = id,
+            title = c.str("title").ifEmpty { id },
+            approach = Approach.of(c.optString("approach")),
+            setting = c.str("setting"),
+            passage = c.optJSONArray("passage")?.strings() ?: c.str("passage").split("\n\n").filter { it.isNotBlank() },
+            exhibits = c.optJSONArray("exhibits").objects().map { x ->
+                val rows = x.optJSONArray("rows")
+                CaseExhibit(
+                    x.str("id"), x.str("label"), x.str("title"), x.optJSONArray("cols").strings(),
+                    if (rows == null) emptyList() else (0 until rows.length()).map { rows.optJSONArray(it).strings() },
+                    x.str("note"),
+                )
+            },
+            questions = qs,
         )
     }
 

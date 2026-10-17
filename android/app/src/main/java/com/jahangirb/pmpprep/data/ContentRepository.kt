@@ -16,6 +16,8 @@ class ContentRepository(private val context: Context) {
         private set
     val packs = ArrayList<QuestionPack>()
     val byId = LinkedHashMap<String, Question>()
+    /** Case items by question id. They sit in [byId] (so a restored mock, a note or a flag still resolves) but in no pack, so they stay out of [pool]. */
+    val caseByQid = LinkedHashMap<String, CaseStudy>()
     private val prefs = context.getSharedPreferences("packs", Context.MODE_PRIVATE)
     private val disabled = HashSet<String>()
 
@@ -23,9 +25,15 @@ class ContentRepository(private val context: Context) {
 
     @Synchronized
     fun load() {
-        packs.clear(); byId.clear()
+        packs.clear(); byId.clear(); caseByQid.clear()
         extras = ContentParser.extras(asset("content/extras.json"))
         add(ContentParser.parsePack(asset("content/core.json"), "core", "Core pack (built in)", null, true))
+        // Case items join after the core pack and before every other pack, so an id clash is settled the same way each time.
+        for ((qid, c) in CasePlan.index(extras.cases)) {
+            if (qid in byId) continue
+            byId[qid] = c.questions.first { it.id == qid }
+            caseByQid[qid] = c
+        }
         val files = (context.assets.list("packs") ?: emptyArray())
             .filter { it.endsWith(".json") && it != "index.json" }
             .sortedWith(NATURAL)
@@ -82,6 +90,9 @@ class ContentRepository(private val context: Context) {
         packs.remove(p)
         p.questions.forEach { byId.remove(it.id) }
     }
+
+    /** The case a question belongs to, or null for an ordinary item. */
+    fun caseFor(qid: String): CaseStudy? = caseByQid[qid]
 
     fun task(id: String): EcoTask? = extras.tasks.firstOrNull { it.id == id }
 

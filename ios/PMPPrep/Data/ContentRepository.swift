@@ -11,6 +11,8 @@ final class ContentRepository {
     private(set) var extras: Extras!
     private(set) var packs: [QuestionPack] = []
     private(set) var byId: [String: Question] = [:]
+    /** Case items by question id. They sit in byId (so a restored mock, a note or a flag still resolves) but in no pack, so they stay out of pool(). */
+    private(set) var caseByQid: [String: CaseStudy] = [:]
     private var disabled = Set<String>()
     private let defaults = UserDefaults.standard
     private let bundle: Bundle
@@ -24,11 +26,18 @@ final class ContentRepository {
     }
 
     func load() throws {
-        packs = []; byId = [:]
+        packs = []; byId = [:]; caseByQid = [:]
         let x: Extras = try ContentParser.extras(try resource("content/extras.json"))
         extras = x
         Rules.current = x.rules
         add(try ContentParser.parsePack(try resource("content/core.json"), id: "core", fallbackName: "Core pack (built in)", file: nil, builtin: true))
+        // Case items join after the core pack and before every other pack, so an id clash is settled the same way each time.
+        for c in x.cases {
+            for q in c.questions where byId[q.id] == nil {
+                byId[q.id] = q
+                caseByQid[q.id] = c
+            }
+        }
         let packDir = bundle.resourceURL?.appendingPathComponent("packs")
         let files = ((packDir.flatMap { try? FileManager.default.contentsOfDirectory(atPath: $0.path) }) ?? [])
             .filter { $0.hasSuffix(".json") && $0 != "index.json" }
@@ -55,6 +64,9 @@ final class ContentRepository {
         packs.append(pack)
         return pack
     }
+
+    /** The case a question belongs to, or nil for an ordinary item. */
+    func caseFor(_ qid: String) -> CaseStudy? { caseByQid[qid] }
 
     func isEnabled(_ p: QuestionPack) -> Bool { !disabled.contains(p.id) }
 
