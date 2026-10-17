@@ -257,6 +257,15 @@ final class AppModel: ObservableObject {
         }
     }
 
+    /** "Case studies" quick start: one whole case, in authored order, the one with fewest items answered first unless one is given. */
+    func startCase(_ given: CaseStudy? = nil) {
+        let x: Extras = repo.extras
+        let chosen: CaseStudy? = given ?? CasePlan.nextCase(x.cases, seen: { (id: String) -> Bool in self.store.last[id] != nil })
+        guard let study = chosen else { return }
+        practice = QuizSession(title: "Case: " + study.title, questions: study.questions)
+        if screen != .PRACTICE { navigate(.PRACTICE) }
+    }
+
     func startPracticeWith(_ qs: [Question], title: String) {
         if qs.isEmpty { return }
         practice = QuizSession(title: title, questions: qs.shuffled())
@@ -380,8 +389,22 @@ final class AppModel: ObservableObject {
     private var sinceSave: Int64 = 0
     private var mockFile: URL { Self.docs.appendingPathComponent("exam.json") }
 
-    /** Draws a mock weighted to the domain split, unseen questions first. */
+    /**
+     * Draws a mock: the case-study block first (whole cases, sized as index.html's layoutFor() sizes it for
+     * a sitting of n; empty when there are no cases), then the rest weighted to the domain split, unseen first.
+     */
     func buildMock(_ n: Int) -> [Question] {
+        let x: Extras = repo.extras
+        let target: Int = CasePlan.caseItemsFor(n, total: x.exam.totalItems, caseBlock: x.exam.caseBlockItems)
+        let picks: [CasePick] = CasePlan.pickCases(x.cases, target: target, seen: { (id: String) -> Bool in self.store.last[id] != nil })
+        let caseBlock: [Question] = CasePlan.block(picks)
+        let rest: [Question] = buildRest(n - caseBlock.count)
+        return CasePlan.paper(caseBlock, rest: rest)
+    }
+
+    /** The non-case part of a mock: weighted to the domain split, unseen questions first, shuffled. */
+    private func buildRest(_ n: Int) -> [Question] {
+        if n <= 0 { return [] }
         let pool = pool()
         var out: [Question] = [], spare: [Question] = []
         for d in Domain.allCases {

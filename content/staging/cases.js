@@ -844,7 +844,7 @@ PMP.CASES = [
       "Northway's centre measures success by average call handling time; Calder's by the proportion of queries resolved on first contact. The two centre managers, Ruth Ellis and Sam Okafor, each argue that their measure should be the one used.",
       "A staff survey last month asked advisers in both centres about the change (Exhibit 5). Adviser turnover at the Calder centre has risen. The human resources director wants to tell Calder advisers about their new roles at next week's team meetings to stop the rumours.",
       "Training rooms and trainers are limited, and the busiest period for claims, the winter storm season, begins in eight weeks. Since the first centre moved, customers have been waiting longer on the phone and complaints have risen. The agile team has been unable to test telephony features for two sprints because the telephony supplier has not given it access to its test environment.",
-      "The steering committee wants a single red, amber or green status for the project. Two advisers from the Calder centre who joined the agile team say little in retrospectives."
+      "The steering committee wants a single red, amber or green status for the project. Two advisers from the Calder centre who joined the agile team say little in retrospectives, although they are among the most experienced people on it."
     ],
     exhibits: [
       { id: "ex5", label: "Exhibit 5", title: "Staff survey results, percentage agreeing",

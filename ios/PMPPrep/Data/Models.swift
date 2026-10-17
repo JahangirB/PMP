@@ -198,7 +198,40 @@ struct Reference {
 }
 
 /* Settings the web app keeps in §01, carried over so both apps agree. */
-struct ExamLayout { let totalItems: Int; let minutes: Int; let breakMinutes: Int; let breakAfter: [Int]; let paceTargetSec: Int }
+struct ExamLayout {
+    let totalItems: Int
+    let minutes: Int
+    let breakMinutes: Int
+    let breakAfter: [Int]
+    let paceTargetSec: Int
+    /** Items in the case-study block that opens a full sitting (EXAM.CASE_BLOCK_ITEMS, an assumption PMI does not publish). */
+    var caseBlockItems: Int = 40
+}
+
+/* Case studies (index.html §05.3 PMP.CASES): a background passage, small exhibit tables, and 8 to 12 ordinary items about it. */
+struct CaseExhibit: Hashable {
+    let id: String
+    let label: String
+    let title: String
+    let cols: [String]
+    let rows: [[String]]
+    let note: String
+}
+
+struct CaseStudy: Identifiable, Hashable {
+    let id: String
+    let title: String
+    let approach: Approach?
+    let setting: String
+    /** One string per paragraph. */
+    let passage: [String]
+    let exhibits: [CaseExhibit]
+    /** In authored order: a case is read and answered front to back. */
+    let questions: [Question]
+
+    static func == (a: CaseStudy, b: CaseStudy) -> Bool { a.id == b.id }
+    func hash(into h: inout Hasher) { h.combine(id) }
+}
 
 struct SrsConfig {
     let easeStart: Double, easeMin: Double, easeAgain: Double, easeHard: Double, easeEasy: Double
@@ -239,6 +272,8 @@ struct Extras {
     var rules: Rules = Rules()
     /** The Google Apps Script the Cloud sync screen shows, with __SYNC_CODE__ still in it. */
     var syncScript: String = ""
+    /** Case studies; empty until index.html ships some, and everything works without them. */
+    var cases: [CaseStudy] = []
 }
 
 /** A mistake root cause as the shared rules describe it. label is first person, for the tag button. */

@@ -221,6 +221,23 @@ data class ExamLayout(
     val breakAfter: List<Int>, val paceTargetSec: Int,
     /** Of [totalItems], the ones that count; the rest are unscored pretest items (EXAM.SCORED_ITEMS, 170 of 180). */
     val scoredItems: Int = 170,
+    /** Items in the case-study block that opens a full sitting (EXAM.CASE_BLOCK_ITEMS, an assumption PMI does not publish). */
+    val caseBlockItems: Int = 40,
+)
+
+/* Case studies (index.html §05.3 PMP.CASES): a background passage, small exhibit tables, and 8 to 12 ordinary items about it. */
+data class CaseExhibit(val id: String, val label: String, val title: String, val cols: List<String>, val rows: List<List<String>>, val note: String)
+
+data class CaseStudy(
+    val id: String,
+    val title: String,
+    val approach: Approach?,
+    val setting: String,
+    /** One string per paragraph. */
+    val passage: List<String>,
+    val exhibits: List<CaseExhibit>,
+    /** In authored order: a case is read and answered front to back. */
+    val questions: List<Question>,
 )
 
 /**
@@ -274,6 +291,8 @@ data class Extras(
     val adaptive: AdaptiveConfig = AdaptiveConfig(),
     /** The Google Apps Script the Cloud sync screen shows, with __SYNC_CODE__ still in it. */
     val syncScript: String = "",
+    /** Case studies; empty until index.html ships some, and everything works without them. */
+    val cases: List<CaseStudy> = emptyList(),
 )
 
 /*
