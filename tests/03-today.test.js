@@ -41,12 +41,16 @@ module.exports = [
       assert.strictEqual(d.date, ymd(60));
       await H.finishDrill(page);
       await lib.go(page, "#/today");
+      /* With a date, Today is the guided path's home (§10.25): one card for
+         the next planned session in place of the old step list. */
       var t = await page.evaluate(function () {
-        return { source: PMP.Coach.session(PMP.Store.state).source, steps: document.querySelectorAll(".td-step").length,
+        var plan = PMP.Path.plan(PMP.Store.state);
+        return { source: PMP.Coach.session(PMP.Store.state).source, main: !!document.querySelector(".pt-main"),
+                 next: plan && plan.next && plan.next.title, title: document.querySelector("#pt-main-h").textContent,
                  diag: PMP.Planner.diagnostic(PMP.Store.state).complete };
       });
       assert.strictEqual(t.source, "plan");
-      assert.ok(t.steps > 0 && t.diag, JSON.stringify(t));
+      assert.ok(t.main && t.diag && t.next === t.title, JSON.stringify(t));
       await lib.clean(page);
       await page.ctx.close();
     }
@@ -73,33 +77,23 @@ module.exports = [
     }
   },
   {
-    name: "planned_ontrack: answering the first practice step ticks it, and Today announces it",
+    name: "planned_ontrack: Continue opens the session player on the path's next session; Close keeps the place",
     fn: async function (h, lib) {
       var page = await h.open("planned_ontrack");
-      var before = await page.evaluate(function () {
-        var s = PMP.Coach.session(PMP.Store.state).steps.filter(function (x) { return x.kind === "practice"; })[0];
-        return { id: s.id, done: s.done, label: s.label };
+      var next = await page.evaluate(function () { return PMP.Path.plan(PMP.Store.state).next.key; });
+      await H.clickText(page, "#view .pt-main button", "Continue");
+      var run = await page.evaluate(function () {
+        return { route: PMP.Router.current.name, key: PMP.Session.run.s.key, h: document.querySelector("#view .ss-hd h2").textContent };
       });
-      assert.strictEqual(before.done, false);
-      await page.evaluate(function (id) {
-        var row = Array.prototype.filter.call(document.querySelectorAll(".td-step"), function (li) {
-          return li.querySelector(".td-l").textContent.length && li.querySelector(".td-l").textContent === PMP.Coach.session(PMP.Store.state).steps.filter(function (x) { return x.id === id; })[0].label;
-        })[0];
-        row.querySelector("button").click();
-      }, before.id);
-      await page.waitForTimeout(100);
-      var run = await page.evaluate(function () { return { route: PMP.Router.current.name, n: PMP.Practice.session.items.length, coachRun: !!PMP.Store.state.ui.coachRun }; });
-      assert.strictEqual(run.route, "practice");
-      assert.ok(run.coachRun);
-      await H.finishDrill(page);
-      await lib.go(page, "#/today");
-      await page.waitForTimeout(500);
-      var after = await page.evaluate(function (id) {
-        var s = PMP.Coach.session(PMP.Store.state).steps.filter(function (x) { return x.id === id; })[0];
-        return { done: s.done, live: document.getElementById("live-polite").textContent };
-      }, before.id);
-      assert.strictEqual(after.done, true);
-      assert.ok(/Step done/.test(after.live), after.live);
+      assert.strictEqual(run.route, "session");
+      assert.strictEqual(run.key, next);
+      await page.click('#view .ss-close');
+      await page.waitForTimeout(80);
+      var back = await page.evaluate(function () {
+        return { route: PMP.Router.current.name, eyebrow: document.querySelector(".pt-main .eyebrow").textContent,
+                 button: document.querySelector(".pt-main .btn--primary").textContent };
+      });
+      assert.deepStrictEqual(back, { route: "today", eyebrow: "In progress", button: "Resume" });
       await lib.clean(page);
       await page.ctx.close();
     }
@@ -125,9 +119,9 @@ module.exports = [
       await lib.go(page, "#/settings");
       await page.selectOption("#set-coach-msgs", "off");
       await lib.go(page, "#/today");
-      var b = await page.evaluate(function () { return { m: document.querySelectorAll(".coach-msg").length, s: document.querySelectorAll(".td-step").length }; });
+      var b = await page.evaluate(function () { return { m: document.querySelectorAll(".coach-msg").length, s: document.querySelectorAll(".pt-main").length }; });
       assert.strictEqual(b.m, 0);
-      assert.ok(b.s > 0);
+      assert.strictEqual(b.s, 1);
       await page.ctx.close();
     }
   },
@@ -150,7 +144,7 @@ module.exports = [
     }
   },
   {
-    name: "keyboard: Tab to Start next step and Enter starts it; Escape closes the intake",
+    name: "keyboard: Tab to Continue and Enter starts the session; Escape closes the intake",
     fn: async function (h, lib) {
       var page = await h.open("planned_ontrack");
       var focusedView = await page.evaluate(function () { return document.activeElement === document.getElementById("view"); });
@@ -159,9 +153,9 @@ module.exports = [
       for (var i = 0; i < 40; i++) {
         await page.keyboard.press("Tab");
         var t = await page.evaluate(function () { return document.activeElement.textContent.trim(); });
-        if (t === "Start next step") { found = true; break; }
+        if (t === "Continue") { found = true; break; }
       }
-      assert.ok(found, "Start next step is reachable by Tab");
+      assert.ok(found, "Continue is reachable by Tab");
       await page.keyboard.press("Enter");
       await page.waitForTimeout(100);
       var route = await page.evaluate(function () { return PMP.Router.current.name; });
