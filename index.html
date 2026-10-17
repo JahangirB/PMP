@@ -2519,6 +2519,55 @@ svg.wk-spark-g { display: block; overflow: visible; }
 .breath-p { position: relative; font-size: var(--t-lg); font-weight: var(--w-bold); }
 .breath-n, .breath-lead { text-align: center; color: var(--fg-muted); }
 
+/* ── 03.27  THE PATH AND THE SESSION PLAYER — §10.25 ────────────────────────
+   Existing tokens only. The path card is Today's session card with one
+   button in it; an upcoming session is a whole-row button so the tap
+   target is the row. The player's header keeps Close at the left edge,
+   where the phone puts it, and the one button forward spans the card. */
+.pt-status { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-1) var(--sp-4); margin-bottom: var(--sp-4); }
+.pt-line { font-size: var(--t-sm); color: var(--fg-muted); }
+.pt-fit { font-size: var(--t-sm); font-weight: var(--w-semi); color: var(--c-signal); }
+.pt-main { border-color: var(--c-signal); }
+.pt-main > p { max-width: var(--measure); margin-top: var(--sp-2); }
+.pt-acts { display: grid; gap: var(--sp-2); }
+.pt-behind { border-color: var(--st-flagged-fg); background: var(--st-flagged-bg); }
+.pt-behind h2, .pt-done h2, .pt-up h2 { font-size: var(--t-md); }
+.pt-list { list-style: none; margin: var(--sp-2) 0 0; padding: 0; display: grid; gap: var(--sp-1); }
+.pt-did { display: flex; align-items: center; gap: var(--sp-2); min-height: var(--hit-min); }
+.pt-did > .i { width: var(--icon); height: var(--icon); color: var(--st-correct-fg); flex: 0 0 var(--icon); }
+.pt-did .td-l { flex: 1 1 auto; min-width: 0; }
+.pt-day { margin-top: var(--sp-4); font-size: var(--t-xs); font-weight: var(--w-bold); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.pt-row {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); width: 100%;
+  min-height: var(--hit-min); padding: var(--sp-2) var(--sp-3); text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: var(--s-raise); border: var(--border); border-radius: var(--r-2);
+}
+.pt-row:hover { border-color: var(--c-signal); }
+.pt-row:focus-visible { box-shadow: var(--ring); outline: none; }
+.pt-row .td-l { min-width: 0; overflow-wrap: anywhere; }
+.pt-adj > summary { cursor: pointer; font-weight: var(--w-semi); font-size: var(--t-sm); }
+.pt-adj > summary:focus-visible { box-shadow: var(--ring); border-radius: var(--r-1); }
+.pt-adj .ln-bullets { margin-top: var(--sp-3); }
+.ss-hd { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--sp-2) var(--sp-3); align-items: center; }
+.ss-t { min-width: 0; }
+.ss-t h2 { overflow-wrap: anywhere; }
+.ss-prog { grid-column: 1 / -1; }
+.ss-step h2:focus { outline: none; }
+.ss-step h2:focus-visible { box-shadow: var(--ring); border-radius: var(--r-1); }
+.ss-step > p { max-width: var(--measure); margin-top: var(--sp-2); }
+.ss-next { margin-top: var(--sp-5); }
+.ss-lesson + .ss-next { margin: var(--sp-4) 0 var(--sp-6); }
+.ss-misses { list-style: none; margin: var(--sp-4) 0 0; padding: 0; display: grid; gap: var(--sp-3); }
+.ss-miss { padding: var(--sp-3) var(--sp-4); border: var(--border); border-radius: var(--r-2); background: var(--s-raise); }
+.ss-score { font-family: var(--font-mono); font-size: var(--t-xl); font-weight: var(--w-bold); margin-top: var(--sp-3); }
+.ss-score[data-band="good"] { color: var(--st-correct-fg); }
+.ss-score[data-band="mid"] { color: var(--st-flagged-fg); }
+.ss-score[data-band="low"] { color: var(--st-incorrect-fg); }
+.ss-note { margin-top: var(--sp-4); padding: var(--sp-3) var(--sp-4); border: var(--border); border-radius: var(--r-2); background: var(--s-wash); }
+.ss-note-h { font-weight: var(--w-semi); }
+.ss-by { margin-top: var(--sp-3); }
+.ss-back { border-color: var(--c-signal); }
+
 /* ── 03.26  SEARCH AND READING — §10.22, §10.23 ─────────────────────────── */
 .sr-form .field { max-width: 46rem; }
 .sr-q { width: 100%; }
@@ -3050,6 +3099,7 @@ function reply(obj) {
               sparklines, comparison tables
         03.25 wellbeing — check-in faces, breathing circle, weekly check
         03.26 search results, reading comfort and the reading guide band
+        03.27 the path on Today and the session player
         03.7  question engine — filters, options, hotspot, blanks, pace meter
         03.14 formula lab — sheet, calculators, network nodes, worked steps
         03.15 reference library — process matrix, ITTO panel, virtual list
@@ -3161,6 +3211,13 @@ function reply(obj) {
         10.22 Search everything · #/search, and "/" from anywhere
         10.23 Reading comfort, the reading guide and rest days (Settings)
               (10.14.6 audits 05.11 against fixture contexts)
+        10.24 The guided path — PlanEngine, QuestionPicker and QuestionReview
+              ported from Android: session kinds, steps, capacity, trimming,
+              the adjustments log, lead-cause reshaping, the 1-3-7-21
+              review ladder; the plan's inputs (shared.plan, else the
+              calendar's minutes) · pure, derives, never renders
+        10.25 The path on Today and the session player · #/session; the
+              plan's inputs card on #/planner (the calendar is its view)
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
         11.1  accuracy trend  · 11.2  ECO heat map (low-sample cells greyed)
@@ -19678,9 +19735,11 @@ PMP.Store = (function () {
            weekly    one report per Monday-to-Sunday week, the current
                      week's kept up to date (§10.19.4); { w: week start,
                      u, r, acc, … } as WeeklyReport.toJson writes it, last 104
-           sessions  a phone's guided sessions, { k, kind, t, d, s, m, at }.
-                     The web writes none; their minutes and days count in
-                     exam fitness and the weekly report, as on the phone. */
+           sessions  guided sessions, { k, kind, t, d, s, m, at }, from a
+                     phone or from §10.25 here, keyed as PlanEngine keys
+                     them; the path (§10.24) reads them to know what is
+                     done, and their minutes and days count in exam
+                     fitness and the weekly report, as on the phone. */
       sittings: [],
       checkins: [],
       weekly: [],
@@ -21662,6 +21721,14 @@ PMP.Practice = (function () {
       name: "Diagnostic", icon: "gauge", hidden: true,
       blurb: "The study planner's baseline. Marked as you go, like practice."
     },
+    /* Not offered in the picker. A guided session's warm-up (§10.25) runs
+       the missed questions due back for review (§10.24.5) in this mode, the
+       phones' source "review", which is what counts them against the five
+       a day. Marked as you go, like practice. */
+    review: {
+      name: "Missed questions, back for review", icon: "target", hidden: true,
+      blurb: "Questions you missed before, due again. Marked as you go, like practice."
+    },
     /* Not offered in the picker either. §10.15 runs a lesson's practice set
        through here, and each attempt carries the lesson id so the set can be
        found again. Marked as you go, like practice. */
@@ -21681,7 +21748,8 @@ PMP.Practice = (function () {
   /* opts is optional. opts.lessonId tags every attempt with the lesson the
      set belongs to; opts.onFinish(result) and opts.summary(result) let the
      caller record and show what the set meant, without this module knowing
-     what a lesson is. */
+     what a lesson is. opts.then(result, session) replaces the summary
+     (§10.25), and opts.path names the guided-session step it belongs to. */
   function startWith(questions, mode, opts) {
     var shuffle = PMP.Store.state.settings.shuffleOptions !== false;
     opts = opts || {};
@@ -21766,6 +21834,8 @@ PMP.Practice = (function () {
     };
     if (session.lessonId) attempt.lessonId = session.lessonId;
     if (item.hints) attempt.hinted = item.hints;
+    /* The guided session (§10.25) reads the row back by id for reflect. */
+    item.attemptId = attempt.id;
     /* Options the person crossed out before checking, under the shared
        name. One the hint ladder crossed out was not their elimination. */
     var el2 = item.ctrl && item.ctrl.struck ? item.ctrl.struck().filter(function (id) { return id !== item.hintStrike; }).length : 0;
@@ -22607,7 +22677,11 @@ PMP.Practice = (function () {
       try { session.opts.onFinish(session.result); } catch (e) { /* the drill is saved either way */ }
     }
     cleanup();
-    repaint();
+    /* opts.then hands the finished set back to whoever started it, in
+       place of the summary: a guided session (§10.25) goes on to its next
+       step, as the phone's QuizRunner does. */
+    if (session.opts.then) session.opts.then(session.result, session);
+    else repaint();
     if (PMP.Sync) PMP.Sync.auto("practice");
   }
 
@@ -24758,6 +24832,10 @@ PMP.Exam = (function () {
     /* One tap, optional, and only straight after handing the paper in: how
        tense it felt (§10.20). Opening an old sitting from history does not
        ask about a feeling that long gone. */
+    /* Sat as a guided session's mock step: the way back to it (§10.25). */
+    var back = justFinished === record.id && PMP.Session && PMP.Session.backCard("MOCK");
+    if (back) host.appendChild(back);
+
     if (justFinished === record.id && PMP.Wellbeing) {
       host.appendChild(PMP.Wellbeing.checkInCard("post", "How tense did you feel during it?", function () {
         justFinished = null;
@@ -25128,6 +25206,8 @@ PMP.Exam = (function () {
     layoutFor: layoutFor,
     resumable: resumable,
     resume: resume,
+    /* The "Start the sitting?" sheet, for a guided session's mock step (§10.25). */
+    start: startNew,
     discardSaved: discardSaved,
     BANDS: BANDS,
     bandFor: bandFor,
@@ -25293,13 +25373,16 @@ PMP.Scenarios = (function () {
   }
 
   /* ── 10.08.3  SESSION ──────────────────────────────────────────────────── */
-  function start(list, n) {
+  /* opts.then replaces the summary when the set ends and opts.path names
+     the guided-session step it belongs to (§10.25). */
+  function start(list, n, opts) {
     var seed = PMP.rng.seedFrom(String(Date.now()) + ":" + list.length);
     var rand = PMP.rng.seeded(seed);
     var picked = PMP.rng.shuffle(list, rand).items.slice(0, n);
     var shuffleOpts = PMP.Store.state.settings.shuffleOptions !== false;
 
     session = {
+      opts: opts || {},
       seed: seed,
       startedAt: Date.now(),
       i: 0,
@@ -25478,7 +25561,7 @@ PMP.Scenarios = (function () {
       foot.appendChild(el("button", {
         class: "btn btn--primary", type: "button",
         onclick: function () {
-          if (session.i + 1 >= session.items.length) { session.finished = true; repaint(); return; }
+          if (session.i + 1 >= session.items.length) { done(); return; }
           show(session.i + 1);
         }
       }, session.i + 1 >= session.items.length ? "Finish" : "Next scenario"));
@@ -25487,6 +25570,12 @@ PMP.Scenarios = (function () {
     paintBody();
     paintFoot();
     return panel;
+  }
+
+  function done() {
+    session.finished = true;
+    if (session.opts && session.opts.then) { session.opts.then(); return; }
+    repaint();
   }
 
   /* Panels are built once and kept, so returning to an earlier scenario shows
@@ -25522,7 +25611,7 @@ PMP.Scenarios = (function () {
             "The " + PMP.fmt.plural(done, "scenario") + " you have answered " +
             (done === 1 ? "is" : "are") + " already saved.",
             "End set"
-          ).then(function (ok) { if (ok) { session.finished = true; repaint(); } });
+          ).then(function (ok) { if (ok) done(); });
         }
       }, "End set")
     ]));
@@ -25772,6 +25861,7 @@ PMP.Scenarios = (function () {
 
   return {
     cleanup: cleanup,
+    startWith: function (list, n, opts) { start(list, n, opts); },
     RANKS: RANKS,
     CREDIT: CREDIT,
     get session() { return session; }
@@ -26078,7 +26168,20 @@ PMP.Cards = (function () {
   function start(deck) {
     var queue = buildQueue(deck);
     if (!queue.length) return;
+    begin(queue, deck, {});
+  }
+
+  /* A given queue, for a guided session's warm-up (§10.25): the due cards,
+     most overdue first. opts.then replaces the summary when it ends;
+     opts.path names the session step it belongs to. */
+  function startQueue(queue, opts) {
+    if (!queue || !queue.length) return;
+    begin(queue.slice(), null, opts || {});
+  }
+
+  function begin(queue, deck, opts) {
     session = {
+      opts: opts,
       deck: deck || null,
       queue: queue,
       i: 0,
@@ -26126,6 +26229,7 @@ PMP.Cards = (function () {
     if (session.i >= session.queue.length) {
       session.finished = true;
       if (PMP.Sync) PMP.Sync.auto("cards");
+      if (session.opts && session.opts.then) { session.opts.then(); return; }
     }
     repaint();
   }
@@ -26568,6 +26672,7 @@ PMP.Cards = (function () {
     buildQueue: buildQueue,
     allLeeches: allLeeches,
     allCards: allCards, myCards: myCards, MY_DECK: MY_DECK,
+    startQueue: startQueue,
     cleanup: cleanup,
     get session() { return session; }
   };
@@ -33546,7 +33651,7 @@ PMP.Planner = (function () {
     var cd = PMP.Metrics.countdown(state);
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "Study planner" }),
+      el("span", { class: "eyebrow", text: "Calendar view" }),
       el("h2", { text: "Your plan to " + PMP.fmt.dateShort(plan.inputs.examDate) }),
       el("p", { text: "Chips tick themselves off your actual history \u2014 answering twenty questions on Risk is what completes a chip that asks for twenty questions on Risk. Lessons tick when you complete them in Learn. Only the formula-sheet skim in the last few days takes a click, because skimming is the one thing this file cannot see you do." })
     ]));
@@ -33688,7 +33793,7 @@ PMP.Planner = (function () {
     var diag = diagnostic(state);
 
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "Study planner" }),
+      el("span", { class: "eyebrow", text: "Calendar view" }),
       el("h2", { text: "Build a plan" }),
       el("p", { text: "Three inputs: when you sit, how long you have on an ordinary day, and where you are starting from. The plan that comes out ticks itself off as you work, and rebuilds itself when you fall behind rather than quietly accumulating a backlog." })
     ]));
@@ -33774,7 +33879,12 @@ PMP.Planner = (function () {
     host.appendChild(card);
   }
 
-  function save(plan, inputs) {
+  /* opts.quiet skips the toast; opts.fromPath is the guided path's own
+     rebuild of this calendar (§10.24 setPlan), which must not write its
+     derived minutes back over the hours and days it was given. Every
+     other save makes the path's hours and days follow these minutes. */
+  function save(plan, inputs, opts) {
+    opts = opts || {};
     PMP.Store.commit(["planner", "settings"], function (s) {
       s.planner = {
         generatedAt: plan.generatedAt,
@@ -33789,7 +33899,11 @@ PMP.Planner = (function () {
       };
       if (inputs && inputs.examDate) s.settings.examDate = inputs.examDate;
     });
-    PMP.UI.toast("Plan built. Chips tick off as you work.", "ok");
+    if (!opts.fromPath && PMP.Path) {
+      var d = PMP.Path.fromMinutes(inputs);
+      if (d) PMP.Path.setPlan({ hours: d.hours, days: d.days }, { calendar: false });
+    }
+    if (!opts.quiet) PMP.UI.toast("Plan built. Chips tick off as you work.", "ok");
     repaint();
   }
 
@@ -33829,9 +33943,12 @@ PMP.Planner = (function () {
   }
 
   /* ── 10.09.6  ROUTE ──────────────────────────────────────────────────── */
+  /* The guided path's inputs come first (§10.25.4); what follows is the
+     calendar view of the same plan, kept as it was. */
   function view(host) {
     var state = PMP.Store.state;
     var p = state.planner;
+    if (PMP.Session) host.appendChild(PMP.Session.planCard(repaint));
     if (!p || !p.days || !p.days.length) return renderSetup(host);
     /* A plan that has run out is a finished plan, not a broken one. */
     var last = p.days[p.days.length - 1];
@@ -34074,7 +34191,19 @@ PMP.Journal = (function () {
   }
 
   function tag(row, causeId) {
-    var existing = row.entry;
+    setCause(row.attempt, causeId, row.entry);
+    PMP.UI.announce(BY_ID[causeId].short + " recorded.");
+    repaint();
+  }
+
+  /* The writer, without a repaint, so a guided session's reflect step
+     (§10.25) can tag a miss where it is. The attempt's existing entry is
+     retagged rather than a second one added. */
+  function setCause(attempt, causeId, existing) {
+    if (existing === undefined) {
+      existing = (PMP.Store.state.journal || []).filter(function (j) { return j && j.attemptId === attempt.id; })[0] || null;
+    }
+    var row = { attempt: attempt };
     PMP.Store.commit(["journal"], function (s) {
       if (existing) {
         s.journal = s.journal.map(function (j) {
@@ -34093,8 +34222,6 @@ PMP.Journal = (function () {
         });
       }
     });
-    PMP.UI.announce(BY_ID[causeId].short + " recorded.");
-    repaint();
   }
 
   function untag(entry) {
@@ -34319,7 +34446,7 @@ PMP.Journal = (function () {
 
   PMP.Router.register("journal", { title: "Mistake journal", render: view });
 
-  return { CAUSES: CAUSES, counts: counts, misses: misses, reading: reading, colourOf: colourOf };
+  return { CAUSES: CAUSES, counts: counts, misses: misses, reading: reading, colourOf: colourOf, setCause: setCause };
 })();
 
 
@@ -35258,7 +35385,11 @@ PMP.Learn = (function () {
     ]);
   }
 
-  function renderReader(host, lesson) {
+  /* opts.inSession is a guided session's lesson step (§10.25): the reader
+     without its way out, the coach strip, the practice set and mastery,
+     because the session's own steps and button forward stand in for them. */
+  function renderReader(host, lesson, opts) {
+    var inSession = !!(opts && opts.inSession);
     var task = PMP.ECO_TASK_BY_ID[lesson.ecoTask] || null;
     var mod = moduleById(lesson.module);
     var lessons = path();
@@ -35269,10 +35400,10 @@ PMP.Learn = (function () {
     var abCtx = { where: "lesson " + lesson.id, groups: PMP.Abbr.groups(lesson.sections.map(function (s) { return s.formulaGroup; }).concat([lesson.ecoTask])) };
     function abUnit(strings, part) { return PMP.Abbr.unit(strings, Object.assign({}, abCtx, { where: abCtx.where + " " + part })); }
 
-    host.appendChild(el("div", { class: "filter-bar ln-top" }, [
+    if (!inSession) host.appendChild(el("div", { class: "filter-bar ln-top" }, [
       el("a", { class: "btn btn--ghost btn--sm", href: href("learn") }, "All lessons")
     ]));
-    var cs = PMP.CoachUI && PMP.CoachUI.strip("lesson", { lesson: lesson });
+    var cs = !inSession && PMP.CoachUI && PMP.CoachUI.strip("lesson", { lesson: lesson });
     if (cs) host.appendChild(cs);
 
     /* Part 1 ── header: title, task, minutes, prerequisites, objectives */
@@ -35452,6 +35583,7 @@ PMP.Learn = (function () {
     ]));
 
     /* Part 10 ── practice set: the bank, scenarios and cards for this task */
+    if (inSession) { refresh(); return; }
     var pr = lesson.practice || {};
     var links = [];
     var nq = bankFor(lesson).length;
@@ -35500,6 +35632,7 @@ PMP.Learn = (function () {
         ui.secChips[s.id].hidden = !(rec && rec.opened && rec.opened.indexOf(s.id) >= 0);
       });
 
+      if (!ui.mastery) return;
       ui.mastery.innerHTML = "";
       ui.mastery.appendChild(el("ul", { class: "keylist" }, [
         el("li", null, [
@@ -35726,7 +35859,16 @@ PMP.Learn = (function () {
 
   PMP.Router.register("learn", { title: "Learn", render: view });
 
+  /* Done, as the phone marks a lesson read in a guided session (§10.25):
+     the shared `lessons` set says so from here on. */
+  function complete(id) {
+    var l = lessonById(id);
+    if (!l) return;
+    touch(l, function (rec) { if (!rec.completedAt) rec.completedAt = new Date().toISOString(); });
+  }
+
   return { path: path, status: status, lessonById: lessonById, forTask: forTask, bankFor: bankFor,
+           reader: renderReader, complete: complete,
            mastery: mastery, taskMastery: taskMastery, isMastered: isMastered,
            POOL_KEYS: POOL_KEYS, MASTERY_SHARE: MASTERY_SHARE, RETAKE_DAYS: RETAKE_DAYS };
 })();
@@ -36991,6 +37133,25 @@ PMP.CoachUI = (function () {
       return;
     }
 
+    /* With an exam date, Today is the guided path's home (§10.25.3): one
+       button for the next planned session, in place of the step list
+       below. The weekly review, the messages, the check-in and the
+       wellbeing cards keep their places around it. Without a date there
+       is no path, and the coach's best-guess session stays. */
+    var home = PMP.Session ? PMP.Session.home(state, st !== "weekly", repaint) : null;
+    if (home) {
+      host.appendChild(home.status);
+      if (st === "weekly") host.appendChild(weeklyCard(true));
+      var pm = todaysMessages(state);
+      if (pm.length) host.appendChild(el("div", { class: "td-msgs" }, pm.map(msgNode)));
+      var pp = PMP.Wellbeing && home.active ? PMP.Wellbeing.preCard(state) : null;
+      if (pp) host.appendChild(pp);
+      [home.behind, home.main, home.done, home.upcoming, home.adjust].forEach(function (n) { if (n) host.appendChild(n); });
+      if (PMP.Wellbeing) PMP.Wellbeing.todayCards(state, repaint).forEach(function (n) { host.appendChild(n); });
+      host.appendChild(footer(!home.primary && st !== "weekly", true));
+      return;
+    }
+
     if (st === "weekly") host.appendChild(weeklyCard(true));
 
     var msgs = todaysMessages(state);
@@ -37195,7 +37356,7 @@ PMP.CoachUI = (function () {
      phone's answers become attempts, its card states become `srs`, its
      mistake tags become journal entries, its mock summaries are listed by
      §10.00 next to the web's own sittings. Sittings, check-ins, weekly
-     reports and a phone's guided sessions have web slices of the same
+     reports and guided sessions (a phone's or §10.25's) have web slices of the same
      names and the same row shape (§10.19, §10.20), so they are copied both
      ways as they are, and so are My cards (`mycards`, §10.02.7a) and the
      Gemini conversation (`chat`, §12.2.2). What the web still has no slice
@@ -37431,9 +37592,11 @@ PMP.Sync = (function () {
      out as src "practice" (mode "lesson" and the lessonId ride in wx) and
      count towards mastery on the phones too. Only a phone's own src
      "lesson" rows, its quick checks, are kept out (`check`). */
-  function srcOf(mode) { return mode === "diagnostic" ? mode : "practice"; }
+  /* A missed question back for review (§10.24.5) is src "review" on every
+     device, which is what counts it against the day's five. */
+  function srcOf(mode) { return mode === "diagnostic" || mode === "review" ? mode : "practice"; }
   function modeOf(r) {
-    if (r.src === "diagnostic" || r.src === "lesson" || r.src === "exam") return r.src;
+    if (r.src === "diagnostic" || r.src === "lesson" || r.src === "exam" || r.src === "review") return r.src;
     return r.tm ? "timed" : "practice";
   }
   function phoneId(q, at) { return "sx-" + q + "-" + at; }
@@ -37697,8 +37860,13 @@ PMP.Sync = (function () {
     var plan = isObj(sh.plan) ? clone(sh.plan) : null;
     if (settings.examDate) {
       /* `days` are calendar weekdays, Sunday 1 to Saturday 7 (not JS getDay,
-         which counts Sunday as 0). The web plans every day, so all seven. */
-      if (!plan) plan = { examDate: 0, hours: 10, days: [1, 2, 3, 4, 5, 6, 7], onboarded: true, rest: true };
+         which counts Sunday as 0). With no plan value yet, the hours and
+         days the path itself reads (§10.24 planOf): the calendar planner's
+         minutes, or ten hours on every day. */
+      if (!plan) {
+        var po = PMP.Path ? PMP.Path.planOf(state) : { hours: 10, days: [1, 2, 3, 4, 5, 6, 7] };
+        plan = { examDate: 0, hours: po.hours, days: po.days.slice(), onboarded: true, rest: true };
+      }
       if (!plan.examDate || ymdOf(plan.examDate) !== String(settings.examDate).slice(0, 10)) plan.examDate = msOf(settings.examDate);
     } else if (plan) {
       plan.examDate = 0;
@@ -38233,7 +38401,7 @@ PMP.Sync = (function () {
      unless it holds something in progress: a drill, a sitting, a card
      review or a scenario set keeps what it started with, and shows the
      merged state the next time it is opened. */
-  var BUSY_ROUTES = ["practice", "exam", "cards", "scenarios", "formulas"];
+  var BUSY_ROUTES = ["practice", "exam", "cards", "scenarios", "formulas", "session"];
   function repaint() {
     var cur = PMP.Router.current;
     if (!cur || BUSY_ROUTES.indexOf(cur.name) >= 0) return;
@@ -38611,11 +38779,12 @@ PMP.Fitness = (function () {
     });
   }
 
-  /* Study days (Sunday 1 … Saturday 7) and hours a week. The web's own
-     planner inputs say both when it has been run; otherwise a phone's plan
-     from the shared document; otherwise every day and ten hours, the
-     phones' defaults for hours and the web's for days. */
+  /* Study days (Sunday 1 … Saturday 7) and hours a week, as the guided
+     path reads them (§10.24 planOf): the shared plan's own figures, else
+     the calendar planner's minutes, else every day and ten hours. The
+     fallback below is the same rule, for a build without §10.24. */
   function planOf(state) {
+    if (PMP.Path) { var pp = PMP.Path.planOf(state); return { days: pp.days, hours: pp.hours }; }
     var pi = state.planner && state.planner.inputs;
     if (pi && (Number(pi.weekdayMin) > 0 || Number(pi.weekendMin) > 0)) {
       var days = [];
@@ -39500,7 +39669,7 @@ PMP.Wellbeing = (function () {
 
   return {
     FACES: FACES, TENSION: TENSION, SCALE: SCALE, BREATH: BREATH,
-    record: record, preDue: preDue, weeklyDue: weeklyDue,
+    record: record, preDue: preDue, weeklyDue: weeklyDue, skipToday: skipToday,
     checkInCard: checkInCard, preCard: preCard, breathe: breathe, weeklyCheck: weeklyCheck,
     todayCards: todayCards, worryCard: worryCard, lighterWeekCard: lighterWeekCard, writeItDownCard: writeItDownCard
   };
@@ -40218,6 +40387,1618 @@ PMP.Reading = (function () {
   });
 
   return { SIZES: SIZES, ROOMY: ROOMY, prefs: prefs, apply: apply, stem: stem, settingsCard: settingsCard };
+})();
+
+
+/* ── 10.24  THE GUIDED PATH — PLAN ENGINE ───────────────────────────────────
+   The phones' adaptive study path (PlanEngine.kt, QuestionPicker.kt and
+   QuestionReview.kt on Android), ported line for line so that the same
+   history gives the same plan on every device. §10.25 draws it and plays
+   its sessions; this section renders nothing.
+
+   Four decisions worth knowing before reading the code:
+
+   · Nothing here is a stored calendar. Every build starts from what the
+     person still needs (lessons not done, tasks not mastered, mocks not
+     sat) and the study time left before the exam, so a skipped day is
+     absorbed rather than piling up, and a result changes what comes next.
+     build() is pure: it reads its argument and nothing else, so the tests
+     can run it on synthetic histories exactly as PlanEngineTest does.
+
+   · The figures are the shared ones. Mastery and the re-entry gap come from
+     §01.8; the pass mark, the taper, the slow-answer line and the cause
+     threshold are PlanEngine's own constants, kept here under the same
+     names. Kotlin's integer division and rounding are reproduced where the
+     phone relies on them (idiv, Math.round), because a minute's difference
+     in a day's capacity moves a session to another day.
+
+   · Session keys are the phones' keys, character for character: "build:" +
+     task, "drill:" + task + ":" + n, "checkpoint:" + domain, "lesson:" +
+     id, "mock:" + n, "mixed:" and "taper:" + the day's local midnight in
+     ms, "ladder:" + rung + ":" + week, "reading:" + week, "relearn:" +
+     task + ":" + leeches, "remediation:" + task + ":" + time, "reentry:" +
+     day, and "short:" in front of any of them. The plan decides what is
+     done from the shared `sessions` rows (their task, domain and kind, and
+     for ladder, reading and relearn their key), from lessons completed and
+     from answers, so a session finished on a phone is done here too.
+
+   · The plan's inputs are the shared `plan` slice (hours a week, study days
+     Sunday 1 to Saturday 7), held in `shared.plan` exactly as a phone
+     writes it, and the exam date in settings. Before anyone has set hours
+     on the path, they are derived from the calendar planner's weekday and
+     weekend minutes (§10.09), so a plan built there still means something
+     here; planOf() is the one reader, and §10.19 reads it too.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.Path = (function () {
+  var DAY = 86400000;
+  /* PlanEngine's own constants. */
+  var PASS = 0.70;
+  var TAPER_DAYS = 7;
+  /* A mastered task answered slower than this (median seconds) gets a paced drill. On the day it's about 80. */
+  var SLOW_SEC = 110;
+  /* A passed domain is re-checked when its answers since fall below this: under the pass mark with a margin. */
+  var RECHECK_BELOW = 0.65;
+  /* Tagged misses on a task before its most common cause changes the task's sessions. */
+  var CAUSE_MIN = 2;
+  /* QuestionPicker: answers with an approach needed before judging one weakest. */
+  var PICK_MIN = 30, PICK_MIN_EACH = 10, PICK_GAP = 0.10;
+  /* QuestionReview: a miss comes back after 1, 3, 7 and 21 days; five a day at most. */
+  var REVIEW_STEPS = [1, 3, 7, 21];
+  var REVIEW_PER_DAY = 5;
+  var REVIEW_SOURCE = "review";
+  var LESSON_SOURCE = "lesson";
+  /* Warm-up cards in a session: the most overdue, at most this many. */
+  var CARDS_MAX = 15;
+  var DAYS_ALL = [1, 2, 3, 4, 5, 6, 7];
+
+  var STEP_NAMES = { CARDS: "Warm-up cards", LESSON: "Lesson", PRACTICE: "Practice", REFLECT: "Reflect",
+                     SCENARIOS: "Scenarios", MOCK: "Mock exam", DEBRIEF: "Debrief" };
+
+  function sod(t) { return PMP.time.startOfDay(t); }
+  /* Next calendar day, correct across daylight-saving changes. */
+  function nextDay(d) { return sod(d + DAY + DAY / 2); }
+  /* java.util.Calendar's DAY_OF_WEEK: Sunday 1 … Saturday 7. */
+  function weekday(d) { return new Date(d).getDay() + 1; }
+  /* Kotlin's Long and Int division truncates toward zero. */
+  function idiv(a, b) { var q = a / b; return q < 0 ? Math.ceil(q) : Math.floor(q); }
+  /* roundToInt, as the phones print a share. */
+  function pct(v) { return Math.round(v * 100) + "%"; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function meanCredit(list) {
+    if (!list.length) return 0;
+    return list.reduce(function (a, x) { return a + x.credit; }, 0) / list.length;
+  }
+  /* A stable sort whatever the engine: ties keep their order, as Kotlin's do. */
+  function sortStable(list, cmp) {
+    return list.map(function (x, i) { return [x, i]; })
+      .sort(function (a, b) { return cmp(a[0], b[0]) || a[1] - b[1]; })
+      .map(function (p) { return p[0]; });
+  }
+  function substringAfter(s, sep) { var i = s.indexOf(sep); return i < 0 ? s : s.slice(i + sep.length); }
+  function domainTitle(d) { return PMP.ECO.DOMAIN_LABELS[d] || d; }
+
+  function step(kind, count, o) {
+    o = o || {};
+    return { kind: kind, count: count || 0, timed: !!o.timed, easy: !!o.easy, reading: !!o.reading };
+  }
+  function make(o) {
+    return {
+      key: o.key, kind: o.kind, title: o.title, why: o.why, minutes: o.minutes, steps: o.steps,
+      taskId: o.taskId || null, domain: o.domain || null, lessonId: o.lessonId || null,
+      day: o.day || 0, priority: o.priority || 0, notBefore: o.notBefore || 0
+    };
+  }
+  function copy(s, patch) {
+    var c = {};
+    Object.keys(s).forEach(function (k) { c[k] = s[k]; });
+    Object.keys(patch || {}).forEach(function (k) { c[k] = patch[k]; });
+    return c;
+  }
+
+  /* ── 10.24.1  THE CONTENT THE ENGINE READS ──────────────────────────────
+     The phones read extras.json, which android/tools/extract-content.mjs
+     copies out of this file, so this is the same content in the same order. */
+  function extras() {
+    var CODE = { people: "P", process: "PR", business: "B" };
+    return {
+      tasks: PMP.ECO_TASKS.map(function (t) {
+        return { id: t.id, domain: t.domain, n: t.n, label: t.label, code: (CODE[t.domain] || "") + t.n };
+      }),
+      lessons: PMP.LESSONS.map(function (l) {
+        return { id: l.id, module: l.module, ecoTask: l.ecoTask || "", minutes: l.minutes, title: l.title };
+      }),
+      domainWeights: PMP.ECO.DOMAIN_WEIGHTS,
+      rules: { mastery: PMP.RULES.mastery, reentryDays: PMP.RULES.reentryDays },
+      exam: { totalItems: PMP.EXAM.TOTAL_ITEMS, minutes: PMP.EXAM.MINUTES }
+    };
+  }
+
+  /* ── 10.24.2  TASK STATES ───────────────────────────────────────────────
+     A right answer called a guess, or reached with a hint, is not evidence
+     the task is known, so neither counts here; a phone's lesson quick check
+     is left out altogether. The median is over the same recent answers. */
+  function taskStates(x, attempts, now) {
+    var rule = x.rules.mastery;
+    var byTask = Object.create(null);
+    attempts.forEach(function (a) {
+      if (a.source === LESSON_SOURCE) return;
+      (byTask[a.ecoTask] || (byTask[a.ecoTask] = [])).push(a);
+    });
+    return x.tasks.map(function (t) {
+      var list = sortStable((byTask[t.id] || []).filter(function (a) { return !a.luckyGuess && !a.hinted; }),
+        function (p, q) { return p.at - q.at; });
+      var recent = list.slice(-rule.window);
+      var acc = meanCredit(recent);
+      var last = list.length ? list[list.length - 1].at : 0;
+      var m = !list.length ? "NOT_STARTED"
+        : list.length < rule.minAnswers ? "LEARNING"
+        : acc < rule.accuracy ? "SHAKY"
+        : now - last > rule.fadeDays * DAY ? "FADING"
+        : "MASTERED";
+      var secs = recent.filter(function (a) { return a.ms > 500; }).map(function (a) { return a.ms / 1000; })
+        .sort(function (p, q) { return p - q; });
+      return { task: t, answers: list.length, recentAccuracy: acc, lastAt: last, mastery: m,
+               medianSec: secs.length ? secs[Math.floor(secs.length / 2)] : null };
+    });
+  }
+
+  /* ── 10.24.3  THE BUILD ─────────────────────────────────────────────────
+     inp: { x, attempts, lessonsDone, results, mocks, diagnostic, settings,
+     now, mistakeTags, leeches, ladderNext, readingSlow }, in the shapes
+     input() below produces. Returns { sessions, phase, daysLeft,
+     minutesPerDay, neededMinutes, availableMinutes, behind, dropped,
+     adjustments, tasks, next }. */
+  function build(inp) {
+    var x = inp.x;
+    var now = inp.now;
+    var today = sod(now);
+    var exam = sod(inp.settings.examDate);
+    var studyDays = [];
+    (inp.settings.studyDays || []).forEach(function (d) { if (studyDays.indexOf(d) < 0) studyDays.push(d); });
+    if (!studyDays.length) studyDays = DAYS_ALL.slice();
+    var perDay = Math.max(15, Math.floor(inp.settings.hoursPerWeek * 60 / studyDays.length));
+    var attempts = inp.attempts || [], results = inp.results || [], mocks = inp.mocks || [];
+    var done = Object.create(null);
+    (inp.lessonsDone || []).forEach(function (id) { done[id] = true; });
+    var tags = inp.mistakeTags || {}, leeches = inp.leeches || {};
+    var tasks = taskStates(x, attempts, now);
+    var adjustments = [];
+    var DOMAINS = PMP.ECO.DOMAINS;
+
+    function diagPct(d) {
+      var v = inp.diagnostic ? inp.diagnostic[d] : null;
+      return typeof v === "number" ? v : null;
+    }
+
+    /* ── how weak each domain is: practice once there is enough, else the diagnostic ── */
+    var domainAcc = {};
+    DOMAINS.forEach(function (d) {
+      var a = attempts.filter(function (r) { return r.domain === d && r.source !== LESSON_SOURCE; });
+      domainAcc[d] = a.length >= 30 ? meanCredit(a) : diagPct(d) !== null ? diagPct(d) : 0.6;
+    });
+    function taskPriority(s) {
+      var acc = s.answers >= 5 ? s.recentAccuracy : (s.task.domain in domainAcc ? domainAcc[s.task.domain] : 0.6);
+      var w = x.domainWeights[s.task.domain];
+      return (typeof w === "number" ? w : 0.3) * (1 - clamp(acc, 0, 0.95)) * 10;
+    }
+
+    var items = [];
+    /* associateBy: the last lesson for a task wins, as on the phones. */
+    var lessonsByTask = Object.create(null);
+    x.lessons.forEach(function (l) { if (l.ecoTask && l.ecoTask.trim()) lessonsByTask[l.ecoTask] = l; });
+    var lastResult = Object.create(null);
+    results.forEach(function (r) {
+      if (!r.taskId) return;
+      var cur = lastResult[r.taskId];
+      if (!cur || r.at > cur.at) lastResult[r.taskId] = r;
+    });
+    var worked = Object.create(null);
+    tasks.forEach(function (s) {
+      if (results.some(function (r) { return r.taskId === s.task.id && sod(r.at) === today; })) worked[s.task.id] = true;
+    });
+
+    /* ── 1. coming back after a gap ── */
+    var lastActivity = null;
+    [attempts, results, mocks].forEach(function (list) {
+      list.forEach(function (r) { if (lastActivity === null || r.at > lastActivity) lastActivity = r.at; });
+    });
+    var gapDays = lastActivity === null ? 0 : idiv(today - sod(lastActivity), DAY);
+    if (gapDays >= x.rules.reentryDays) {
+      items.push(make({ key: "reentry:" + sod(lastActivity), kind: "REENTRY", title: "Welcome back: warm-up",
+        why: "Your last study was " + gapDays + " days ago. Due cards and 10 questions on what you learned last, before anything new.",
+        minutes: 25, steps: [step("CARDS"), step("PRACTICE", 10), step("DEBRIEF")], priority: 1000 }));
+      adjustments.push("Re-entry warm-up added: your last study was " + gapDays + " days ago.");
+    }
+
+    /* ── causes you tagged on misses, per task: the most common one shapes that task's sessions ── */
+    var taskOfQuestion = Object.create(null);
+    attempts.forEach(function (a) { taskOfQuestion[a.qid] = a.ecoTask; });
+    var causesByTask = {}, taskOrder = [];
+    Object.keys(tags).forEach(function (qid) {
+      var t = taskOfQuestion[qid];
+      if (!t) return;
+      if (!causesByTask[t]) { causesByTask[t] = []; taskOrder.push(t); }
+      causesByTask[t].push(tags[qid]);
+    });
+    var leadCause = Object.create(null);
+    taskOrder.forEach(function (t) {
+      var counts = {}, order = [];
+      causesByTask[t].forEach(function (c) { if (!(c in counts)) { counts[c] = 0; order.push(c); } counts[c]++; });
+      var best = null;
+      order.forEach(function (c) { if (best === null || counts[c] > counts[best]) best = c; });
+      if (best !== null && counts[best] >= CAUSE_MIN) leadCause[t] = best;
+    });
+    /* Adds what the cause calls for: the lesson for a knowledge gap, scenarios for mindset, a pointer otherwise. */
+    function shaped(base, lesson) {
+      var cause = base.taskId ? leadCause[base.taskId] : null;
+      if (!cause) return base;
+      var label = substringAfter(base.title, ": ");
+      switch (cause) {
+        case "KNOWLEDGE_GAP":
+          if (!lesson || base.steps.some(function (s) { return s.kind === "LESSON"; })) return base;
+          return copy(base, { steps: [step("LESSON")].concat(base.steps), lessonId: lesson.id, minutes: base.minutes + lesson.minutes,
+            why: base.why + " Most misses you tagged here were knowledge gaps, so the lesson comes first." });
+        case "WRONG_MINDSET":
+          var steps = [];
+          base.steps.forEach(function (s) { if (s.kind === "REFLECT") steps.push(step("SCENARIOS", 3)); steps.push(s); });
+          return copy(base, { steps: steps, minutes: base.minutes + 8,
+            why: base.why + " Most misses you tagged on " + label + " were mindset, so three situational scenarios are added." });
+        case "MISREAD_STEM": return copy(base, { why: base.why + " Most misses here were misread stems: read the last sentence first and look for FIRST, NEXT, NOT, BEST." });
+        case "TWO_PLAUSIBLE": return copy(base, { why: base.why + " Most misses here came down to two plausible answers: before choosing, name what makes one better (sooner, more collaborative, within your authority)." });
+        case "RUSHED": return copy(base, { why: base.why + " Most misses here were rushed: read every option before choosing; the pace bar shows the time you have." });
+        case "CALCULATION": return copy(base, { why: base.why + " Most misses here were calculation slips: write the formula before the numbers. The Formula lab has the sheet." });
+      }
+      return base;
+    }
+
+    /* ── 2. per task: remediation, build, drills, reviews ── */
+    var W = x.rules.mastery.window;
+    tasks.forEach(function (s) {
+      var t = s.task;
+      var res = lastResult[t.id] || null;
+      var pri = taskPriority(s);
+      var lesson = lessonsByTask[t.id] || null;
+      var tomorrowIfWorked = worked[t.id] ? nextDay(today) : 0;
+      if (res && res.score < 0.5 && now - res.at < 3 * DAY && res.kind !== "REMEDIATION") {
+        items.push(shaped(make({ key: "remediation:" + t.id + ":" + res.at, kind: "REMEDIATION", title: "Fix: " + t.label,
+          why: "Your last session on " + t.label + " scored " + pct(res.score) + ". Re-read the lesson, then easier questions to rebuild it.",
+          minutes: 30, steps: (lesson ? [step("LESSON")] : []).concat([step("PRACTICE", 10, { easy: true }), step("REFLECT"), step("DEBRIEF")]),
+          taskId: t.id, domain: t.domain, lessonId: lesson ? lesson.id : null, priority: 900 }), lesson));
+        adjustments.push("Fix-up session for " + t.label + ": your last session there scored " + pct(res.score) + ".");
+        return;
+      }
+      if (lesson && !done[lesson.id]) {
+        var mastered = s.mastery === "MASTERED";
+        if (mastered) adjustments.push(t.label + ": already mastered through your own practice, so only the lesson stays (as reading).");
+        var dp = diagPct(t.domain);
+        items.push(make({ key: "build:" + t.id, kind: "BUILD", title: t.code + " · " + t.label,
+          why: mastered ? "You already answer " + t.label + " well; this is the lesson for completeness."
+            : "Learn it, check it, then practise it. " + (dp !== null ? domainTitle(t.domain) + " scored " + pct(dp) + " in your diagnostic." : ""),
+          minutes: lesson.minutes + (mastered ? 0 : 20),
+          steps: mastered ? [step("LESSON"), step("DEBRIEF")]
+            : [step("CARDS"), step("LESSON"), step("PRACTICE", 10), step("REFLECT"), step("DEBRIEF")],
+          taskId: t.id, domain: t.domain, lessonId: lesson.id, priority: pri + 5 }));
+        return;
+      }
+      if (s.mastery === "NOT_STARTED" || s.mastery === "LEARNING" || s.mastery === "SHAKY") {
+        var drills = s.mastery === "SHAKY" && s.recentAccuracy < 0.5 ? 2 : 1;
+        for (var i = 0; i < drills; i++) {
+          items.push(shaped(make({ key: "drill:" + t.id + ":" + i, kind: "DRILL", title: "Drill: " + t.label,
+            why: s.answers === 0 ? "No answers on " + t.label + " yet."
+              : t.label + " is at " + pct(s.recentAccuracy) + " over your last " + Math.min(s.answers, W) + " answers; the bar is " + pct(x.rules.mastery.accuracy) + ".",
+            minutes: 25, steps: [step("PRACTICE", 15), step("REFLECT"), step("DEBRIEF")],
+            taskId: t.id, domain: t.domain, priority: pri - i,
+            notBefore: Math.max(tomorrowIfWorked, i > 0 ? nextDay(nextDay(today)) : 0) }), i === 0 ? lesson : null));
+        }
+        if (res && res.score >= 0.5 && res.score <= 0.799 && now - res.at < 3 * DAY) {
+          adjustments.push("Review of " + t.label + " spaced 2 days out: your last session there scored " + pct(res.score) + ".");
+        }
+      } else if (s.mastery === "FADING") {
+        items.push(make({ key: "review:" + t.id, kind: "REVIEW", title: "Review: " + t.label,
+          why: "You had " + t.label + " mastered, but it's been " + idiv(now - s.lastAt, DAY) + " days. A short refresher keeps it.",
+          minutes: 15, steps: [step("PRACTICE", 10), step("DEBRIEF")], taskId: t.id, domain: t.domain, priority: pri, notBefore: tomorrowIfWorked }));
+        adjustments.push(t.label + " is fading (" + idiv(now - s.lastAt, DAY) + " days since practice): review added.");
+      } else if (s.mastery === "MASTERED") {
+        if (!results.some(function (r) { return r.taskId === t.id; })) adjustments.push(t.label + ": mastered through your own practice, so no drill is planned.");
+      }
+      /* Accurate but slow: mastery shouldn't hide a pace problem the exam will punish. */
+      var median = s.medianSec;
+      if (s.mastery === "MASTERED" && median !== null && median > SLOW_SEC) {
+        items.push(make({ key: "pace:" + t.id, kind: "DRILL", title: "Paced drill: " + t.label,
+          why: "You answer " + t.label + " well (" + pct(s.recentAccuracy) + ") but slowly: a median of " + idiv(median, 1) + " s against about 80 s on the day. 15 questions with the pace bar in view.",
+          minutes: 20, steps: [step("PRACTICE", 15, { timed: true }), step("DEBRIEF")], taskId: t.id, domain: t.domain, priority: pri, notBefore: tomorrowIfWorked }));
+        adjustments.push(t.label + ": accurate but slow (median " + idiv(median, 1) + " s), so a paced drill was added.");
+      }
+      /* Flashcards that keep slipping point back to the lesson behind them. */
+      var leech = leeches[t.id] || 0;
+      var relearnKey = "relearn:" + t.id + ":" + leech;
+      if (leech > 0 && lesson && done[lesson.id] && !results.some(function (r) { return r.key === relearnKey; })) {
+        items.push(make({ key: relearnKey, kind: "REVIEW", title: "Relearn: " + t.label,
+          why: (leech === 1 ? "A flashcard" : leech + " flashcards") + " on " + t.label + " keep slipping. Re-read the lesson, then your due cards.",
+          minutes: lesson.minutes + 5, steps: [step("LESSON"), step("CARDS"), step("DEBRIEF")], taskId: t.id, domain: t.domain, lessonId: lesson.id, priority: pri }));
+        adjustments.push(t.label + ": flashcards keep slipping, so its lesson comes back as a review.");
+      }
+      /* A middling session result books a spaced review even after mastery is reached. */
+      if (s.mastery === "MASTERED" && res && res.score >= 0.5 && res.score <= 0.799 && res.kind !== "REVIEW") {
+        items.push(make({ key: "review:" + t.id, kind: "REVIEW", title: "Review: " + t.label,
+          why: "Your last session on " + t.label + " scored " + pct(res.score) + ". A spaced review makes it stick.",
+          minutes: 15, steps: [step("PRACTICE", 10), step("DEBRIEF")], taskId: t.id, domain: t.domain, priority: pri, notBefore: res.at + 2 * DAY }));
+      }
+    });
+
+    /* ── 3. foundations, checkpoints, exam skills, mocks ── */
+    x.lessons.filter(function (l) { return l.module === "foundations" && !done[l.id]; }).forEach(function (l, i) {
+      items.push(make({ key: "lesson:" + l.id, kind: "FOUNDATION", title: l.title, why: "Foundations come first: how the exam works and the mindset it rewards.",
+        minutes: l.minutes, steps: [step("LESSON"), step("DEBRIEF")], lessonId: l.id, priority: i === 0 ? 800 : 60 - i }));
+    });
+    DOMAINS.forEach(function (d) {
+      var title = domainTitle(d);
+      var lastPass = null, failed = null;
+      results.forEach(function (r) {
+        if (r.kind !== "CHECKPOINT" || r.domain !== d) return;
+        if (r.score >= PASS && (!lastPass || r.at > lastPass.at)) lastPass = r;
+        if (!failed || r.at > failed.at) failed = r;
+      });
+      if (lastPass) {
+        /* Passed once, but has the domain slipped since? Your answers there since the pass decide. */
+        var since = attempts.filter(function (a) { return a.domain === d && a.source !== LESSON_SOURCE && a.at > lastPass.at; }).slice(-30);
+        var acc = since.length ? meanCredit(since) : 1;
+        var finalWeek = inp.settings.examDate - now <= TAPER_DAYS * DAY;
+        if (since.length >= 20 && acc < RECHECK_BELOW && !finalWeek) {
+          items.push(make({ key: "checkpoint:" + d + ":" + lastPass.at, kind: "CHECKPOINT", title: "Re-check: " + title,
+            why: "Your " + title + " answers since you passed its checkpoint average " + pct(acc) + ", well under the " + pct(PASS) + " pass mark. 20 mixed questions show whether it has slipped.",
+            minutes: 35, steps: [step("PRACTICE", 20), step("REFLECT"), step("DEBRIEF")], domain: d, priority: 4 }));
+          adjustments.push(title + " has slipped to " + pct(acc) + " since its checkpoint, so it will be re-checked.");
+        }
+        return;
+      }
+      items.push(make({ key: "checkpoint:" + d, kind: "CHECKPOINT", title: "Checkpoint: " + title,
+        why: failed ? "Last checkpoint scored " + pct(failed.score) + "; " + pct(PASS) + " moves you on. Retest after the reviews."
+          : "20 mixed " + title + " questions. " + pct(PASS) + " or more moves you on.",
+        minutes: 35, steps: [step("PRACTICE", 20), step("REFLECT"), step("DEBRIEF")], domain: d, priority: 4,
+        notBefore: failed ? failed.at + DAY : 0 }));
+    });
+    /* ── exam fitness: one stamina sitting and, if reading is slow, one reading drill a week ── */
+    var week = idiv(today, 7 * DAY);
+    function doneThisWeek(prefix) {
+      return results.some(function (r) { return r.key.indexOf(prefix) === 0 && now - r.at < 6 * DAY; });
+    }
+    var n = inp.ladderNext;
+    if (typeof n === "number" && n < x.exam.totalItems && !doneThisWeek("ladder:")) {
+      items.push(make({ key: "ladder:" + n + ":" + week, kind: "MIXED", title: "Stamina sitting: " + n + " questions",
+        why: "The next rung of your stamina ladder: " + n + " mixed questions at exam pace, in one go. You move up when your accuracy holds in the last quarter.",
+        minutes: Math.floor(n * 76 / 60) + 5, steps: [step("PRACTICE", n, { timed: true }), step("DEBRIEF")], priority: 3.5 }));
+    }
+    if (inp.readingSlow && !doneThisWeek("reading:")) {
+      items.push(make({ key: "reading:" + week, kind: "SKILLS", title: "Reading drill",
+        why: "Each question shows its scenario first. Say to yourself what it's asking, then reveal the options. It trains reading speed and calm on long questions.",
+        minutes: 15, steps: [step("PRACTICE", 10, { reading: true }), step("DEBRIEF")], priority: 3 }));
+    }
+    x.lessons.filter(function (l) { return l.module === "skills" && !done[l.id]; }).forEach(function (l) {
+      items.push(make({ key: "lesson:" + l.id, kind: "SKILLS", title: l.title, why: "Exam technique, once the content is in place.",
+        minutes: l.minutes, steps: [step("LESSON"), step("DEBRIEF")], lessonId: l.id, priority: 2 }));
+    });
+
+    /* ── 4. capacity ── */
+    var taperStart = Math.max(today, sod(exam - TAPER_DAYS * DAY));
+    var days = [];
+    for (var d = today; d < exam; d = nextDay(d)) if (studyDays.indexOf(weekday(d)) >= 0) days.push(d);
+    var doneToday = results.filter(function (r) { return sod(r.at) === today; }).reduce(function (a, r) { return a + r.minutes; }, 0);
+    function cap(day) { return day === today ? Math.max(0, perDay - doneToday) : perDay; }
+    var buildDays = days.filter(function (day) { return day < taperStart; });
+    var available = buildDays.reduce(function (a, day) { return a + cap(day); }, 0);
+
+    var weeksLeft = idiv(exam - today, 7 * DAY);
+    var recentMocks = mocks.filter(function (m) { return now - m.at < 45 * DAY; }).length;
+    var mockTarget = weeksLeft >= 4 ? 3 : 2;
+    var mocksNeeded = Math.max(0, mockTarget - recentMocks);
+    var mockMinimum = Math.max(0, 2 - recentMocks);
+
+    var needed = items.reduce(function (a, s) { return a + s.minutes; }, 0) + mocksNeeded * perDay;
+    var dropped = [];
+    if (needed > available) {
+      /* Trim the least valuable work first: second drills, then reviews, extra foundations, skills, extra mocks. */
+      var trimmable = { DRILL: 1, REVIEW: 1, FOUNDATION: 1, SKILLS: 1 };
+      var order = sortStable(items.filter(function (s) { return trimmable[s.kind] && s.priority < 500; }), function (a, b) {
+        return (dropRank(a.kind, a.key) - dropRank(b.kind, b.key)) || (a.priority - b.priority);
+      });
+      for (var k = 0; k < order.length; k++) {
+        if (needed <= available) break;
+        items.splice(items.indexOf(order[k]), 1);
+        needed -= order[k].minutes;
+        dropped.push(order[k].title);
+      }
+      while (needed > available && mocksNeeded > mockMinimum) { mocksNeeded--; needed -= perDay; dropped.push("A full mock exam"); }
+      if (dropped.length) adjustments.push("Time is short, so " + dropped.length + " lower-value sessions were trimmed.");
+    }
+    var behind = needed > available;
+
+    /* ── 5. order: urgent, foundations, weakest domains first, checkpoints closing each domain ── */
+    var domainOrder = sortStable(DOMAINS.slice(), function (a, b) { return domainAcc[a] - domainAcc[b]; });
+    function orderKey(s) {
+      switch (s.kind) {
+        case "REENTRY": case "REMEDIATION": return -1000 - s.priority;
+        case "FOUNDATION": return s.priority >= 800 ? -900 : -500 - s.priority;
+        case "BUILD": case "DRILL": case "REVIEW":
+          return domainOrder.indexOf(s.domain) * 100 - s.priority - (s.kind === "BUILD" ? 50 : 0);
+        case "CHECKPOINT": return domainOrder.indexOf(s.domain) * 100 + 90;
+        case "SKILLS": return 400 - s.priority;
+        case "MIXED": return s.key.indexOf("ladder:") === 0 ? 300 : 500;
+      }
+      return 500;
+    }
+    var queue = sortStable(items, function (a, b) { return orderKey(a) - orderKey(b); });
+
+    /* ── 6. lay the queue onto study days, then mocks and mixed practice in what's left ── */
+    var planned = [];
+    var used = Object.create(null);
+    buildDays.forEach(function (day) {
+      var i = 0;
+      while (i < queue.length && (used[day] || 0) < cap(day)) {
+        var s = queue[i];
+        if (s.notBefore > day) { i++; continue; }
+        planned.push(copy(s, { day: day }));
+        used[day] = (used[day] || 0) + s.minutes;
+        queue.splice(i, 1);
+      }
+    });
+    /* Anything that did not fit still shows, on the last build day, so nothing silently vanishes. */
+    var lastBuild = buildDays.length ? buildDays[buildDays.length - 1] : today;
+    queue.forEach(function (s) { planned.push(copy(s, { day: Math.max(lastBuild, Math.min(s.notBefore, lastBuild)) })); });
+
+    var free = buildDays.filter(function (day) { return (used[day] || 0) === 0 && cap(day) > 0; });
+    var mockDays = mocksNeeded === 0 ? [] : spread(free, mocksNeeded, lastBuild);
+    mockDays.forEach(function (day, i) {
+      planned.push(make({ key: "mock:" + (recentMocks + i + 1), kind: "MOCK", title: "Full mock exam " + (recentMocks + i + 1),
+        why: "The only evidence you can hold accuracy for " + x.exam.minutes + " minutes. Set aside the whole sitting.",
+        minutes: x.exam.minutes + 30, steps: [step("MOCK"), step("DEBRIEF")], day: day, priority: 3 }));
+    });
+    free.filter(function (day) { return mockDays.indexOf(day) < 0; }).forEach(function (day) {
+      planned.push(make({ key: "mixed:" + day, kind: "MIXED", title: "Mixed timed practice",
+        why: "Every domain mixed, against the clock, the way the exam asks.",
+        minutes: Math.min(perDay, 45), steps: [step("CARDS"), step("PRACTICE", 20, { timed: true }), step("SCENARIOS", 3), step("DEBRIEF")], day: day }));
+    });
+    days.filter(function (day) { return day >= taperStart && day < sod(exam - DAY); }).forEach(function (day) {
+      planned.push(make({ key: "taper:" + day, kind: "TAPER", title: "Light review",
+        why: "Final week: nothing new. Cards, a few mixed questions, then rest.",
+        minutes: Math.min(perDay, 30), steps: [step("CARDS"), step("PRACTICE", 10), step("DEBRIEF")], day: day }));
+    });
+
+    var sessions = sortStable(planned, function (a, b) { return (a.day - b.day) || (orderKey(a) - orderKey(b)); });
+    var first = sessions[0] || null;
+    var phase = !first ? "Exam day"
+      : first.kind === "FOUNDATION" ? "Foundations"
+      : first.kind === "SKILLS" || first.kind === "MOCK" || first.kind === "MIXED" ? "Exam readiness"
+      : first.kind === "TAPER" ? "Final week"
+      : "Build";
+    if (behind) adjustments.push("Behind: about " + idiv(needed, 60) + " hours of work for " + idiv(available, 60) + " hours left. Add hours, a study day, or move the date.");
+    return {
+      sessions: sessions, phase: phase, daysLeft: idiv(exam - today, DAY), minutesPerDay: perDay,
+      neededMinutes: needed, availableMinutes: available, behind: behind, dropped: dropped,
+      adjustments: adjustments, tasks: tasks, next: first
+    };
+  }
+
+  function dropRank(kind, key) {
+    if (kind === "DRILL" && /:1$/.test(key)) return 0;
+    if (kind === "REVIEW") return 1;
+    if (kind === "FOUNDATION") return 2;
+    if (kind === "SKILLS") return 3;
+    return 4;
+  }
+
+  /* n days spread over the free days, the last as late as possible. */
+  function spread(free, n, fallback) {
+    var out = [], i;
+    if (!free.length) { for (i = 0; i < n; i++) out.push(fallback); return out; }
+    if (free.length <= n) {
+      out = free.slice();
+      for (i = free.length; i < n; i++) out.push(free[free.length - 1]);
+      return out;
+    }
+    for (i = 1; i <= n; i++) {
+      var day = free[Math.round((free.length - 1) * i / n)];
+      if (out.indexOf(day) < 0) out.push(day);
+    }
+    return out;
+  }
+
+  /* ── 10.24.4  QUESTION PICKER ───────────────────────────────────────────
+     Unseen first, then the ones missed last time, then the rest. When one
+     delivery approach is clearly the weakest, its questions take every
+     other place within each group, so a drill leans toward it without
+     turning into a one-approach set. */
+  function weakApproach(attempts) {
+    var atts = attempts.filter(function (a) { return a.source !== LESSON_SOURCE && a.approach; });
+    if (atts.length < PICK_MIN) return null;
+    var overall = meanCredit(atts);
+    var groups = {}, order = [];
+    atts.forEach(function (a) {
+      if (!groups[a.approach]) { groups[a.approach] = []; order.push(a.approach); }
+      groups[a.approach].push(a);
+    });
+    var best = null, bestAcc = 0;
+    order.forEach(function (k) {
+      if (groups[k].length < PICK_MIN_EACH) return;
+      var acc = meanCredit(groups[k]);
+      if (best === null || acc < bestAcc) { best = k; bestAcc = acc; }
+    });
+    return best !== null && bestAcc <= overall - PICK_GAP ? best : null;
+  }
+
+  /* lastCorrect(qid) is how a question went the last time it was answered,
+     or null if never. rnd is a [0, 1) generator, Math.random by default. */
+  function order(qs, lastCorrect, weak, count, rnd) {
+    function shuffled(list) { return PMP.rng.shuffle(list, rnd || Math.random).items; }
+    var unseen = shuffled(qs.filter(function (q) { return lastCorrect(q.id) === null; }));
+    var missed = shuffled(qs.filter(function (q) { return lastCorrect(q.id) === false; }));
+    var rest = shuffled(qs.filter(function (q) { return lastCorrect(q.id) === true; }));
+    return tilt(unseen, weak).concat(tilt(missed, weak), tilt(rest, weak)).slice(0, count);
+  }
+
+  function tilt(list, weak) {
+    if (!weak) return list;
+    var a = list.filter(function (q) { return q.approach === weak; });
+    var b = list.filter(function (q) { return q.approach !== weak; });
+    var out = [];
+    while (a.length || b.length) {
+      if (a.length) out.push(a.shift());
+      if (b.length) out.push(b.shift());
+    }
+    return out;
+  }
+
+  /* ── 10.24.5  MISSED-QUESTION REVIEW ────────────────────────────────────
+     A miss comes back after 1 day; each later right answer (on or after
+     the day it was due, and not a guess or hinted) moves it to 3, 7 and 21
+     days, then it graduates. A wrong answer starts it again. Worked out
+     from the answer history, so nothing extra is stored. */
+  function reviewState(history) {
+    var h = history.filter(function (a) { return a.source !== LESSON_SOURCE; });
+    var miss = -1;
+    for (var i = h.length - 1; i >= 0; i--) if (!h[i].correct) { miss = i; break; }
+    if (miss < 0) return null;
+    var st = 0;
+    var due = dueAfter(h[miss].at, 0);
+    for (var j = miss + 1; j < h.length; j++) {
+      var a = h[j];
+      /* Right the same day proves little; only an answer on or after the due day moves it on. */
+      if (a.correct && !a.luckyGuess && !a.hinted && sod(a.at) >= due) {
+        st++;
+        if (st >= REVIEW_STEPS.length) return null;
+        due = dueAfter(a.at, st);
+      }
+    }
+    return { qid: h[miss].qid, due: due, step: st };
+  }
+  function dueAfter(at, st) { return sod(sod(at) + REVIEW_STEPS[st] * DAY + DAY / 2); }
+
+  /* Every missed question due by now, most overdue first. */
+  function reviewsDue(attempts, now) {
+    var by = Object.create(null), order = [];
+    attempts.forEach(function (a) {
+      if (!by[a.qid]) { by[a.qid] = []; order.push(a.qid); }
+      by[a.qid].push(a);
+    });
+    var out = [];
+    order.forEach(function (q) {
+      var s = reviewState(sortStable(by[q], function (x, y) { return x.at - y.at; }));
+      if (s && s.due <= now) out.push(s);
+    });
+    return sortStable(out, function (x, y) { return x.due - y.due; });
+  }
+
+  /* How many more may be reviewed today. */
+  function reviewAllowance(attempts, now) {
+    var today = sod(now), seen = Object.create(null), n = 0;
+    attempts.forEach(function (a) {
+      if (a.source === REVIEW_SOURCE && a.at >= today && !seen[a.qid]) { seen[a.qid] = 1; n++; }
+    });
+    return Math.max(0, REVIEW_PER_DAY - n);
+  }
+
+  /* ── 10.24.6  THE PLAN'S INPUTS ─────────────────────────────────────────
+     The shared `plan` slice as the phones write it, with the calendar
+     planner's minutes as the fallback for hours and days (see the header). */
+  function msOf(ymd) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(ymd || ""));
+    return m ? new Date(+m[1], +m[2] - 1, +m[3], 9, 0, 0).getTime() : 0;
+  }
+  function fromMinutes(pi) {
+    if (!pi) return null;
+    var wd = Number(pi.weekdayMin) || 0, we = Number(pi.weekendMin) || 0;
+    if (!(wd > 0 || we > 0)) return null;
+    var days = [];
+    if (we > 0) days.push(1);
+    if (wd > 0) days.push(2, 3, 4, 5, 6);
+    if (we > 0) days.push(7);
+    return { days: days, hours: Math.round((wd * 5 + we * 2) / 60) };
+  }
+  function planOf(state) {
+    state = state || PMP.Store.state;
+    var sh = state.shared && typeof state.shared === "object" ? state.shared : {};
+    var p = sh.plan && typeof sh.plan === "object" && !Array.isArray(sh.plan) ? sh.plan : null;
+    var d = fromMinutes(state.planner && state.planner.inputs);
+    var days = [];
+    if (p && Array.isArray(p.days)) {
+      p.days.forEach(function (v) { v = Number(v); if (v >= 1 && v <= 7 && days.indexOf(v) < 0) days.push(v); });
+      days.sort(function (a, b) { return a - b; });
+    }
+    var own = !!p && Number(p.hours) > 0;
+    return {
+      examDate: msOf(state.settings && state.settings.examDate),
+      hours: own ? Number(p.hours) : d ? d.hours : 10,
+      days: days.length ? days : d ? d.days : DAYS_ALL.slice(),
+      onboarded: p ? p.onboarded !== false : true,
+      rest: !state.settings || state.settings.restDays !== false,
+      source: own ? "plan" : d ? "planner" : "default"
+    };
+  }
+
+  /* The one writer of hours and days. Writes the whole plan value, as a
+     phone does, so the shared document carries it as one unit (§10.18).
+     opts.calendar false leaves the calendar view alone; otherwise a
+     calendar that exists is rebuilt from today on minutes derived from the
+     new hours and days, so the two views of the plan say the same thing. */
+  function setPlan(patch, opts) {
+    opts = opts || {};
+    var cur = planOf(PMP.Store.state);
+    PMP.Store.commit(["shared"], function (s) {
+      var sh = Object.assign({}, s.shared && typeof s.shared === "object" ? s.shared : {});
+      var p = sh.plan && typeof sh.plan === "object" && !Array.isArray(sh.plan) ? Object.assign({}, sh.plan)
+        : { examDate: cur.examDate || 0, onboarded: true, rest: cur.rest };
+      p.hours = patch.hours != null ? Math.max(1, Math.min(60, Math.round(Number(patch.hours) || 0))) : cur.hours;
+      p.days = (patch.days || cur.days).slice().sort(function (a, b) { return a - b; });
+      if (patch.onboarded != null) p.onboarded = !!patch.onboarded;
+      else if (p.onboarded === undefined) p.onboarded = true;
+      if (cur.examDate) p.examDate = cur.examDate;
+      sh.plan = p;
+      s.shared = sh;
+    });
+    if (opts.calendar !== false) calendarFollows();
+  }
+
+  function calendarFollows() {
+    var st = PMP.Store.state, pl = st.planner;
+    if (!pl || !Array.isArray(pl.days) || !pl.days.length || !pl.inputs || !st.settings.examDate) return;
+    var p = planOf(st);
+    var per = Math.round(p.hours * 60 / Math.max(1, p.days.length));
+    var weekdays = p.days.some(function (d) { return d >= 2 && d <= 6; });
+    var weekend = p.days.indexOf(1) >= 0 || p.days.indexOf(7) >= 0;
+    var inputs = { examDate: st.settings.examDate, weekdayMin: weekdays ? per : 0, weekendMin: weekend ? per : 0 };
+    if (inputs.weekdayMin === pl.inputs.weekdayMin && inputs.weekendMin === pl.inputs.weekendMin &&
+        String(inputs.examDate) === String(pl.inputs.examDate)) return;
+    var built = PMP.Planner.build(inputs, st);
+    if (!built.error) PMP.Planner.save(built, inputs, { quiet: true, fromPath: true });
+  }
+
+  /* ── 10.24.7  FROM THE STORE ─────────────────────────────────────────────
+     The engine's input from live state. An answer's source is "lesson" for
+     a phone's quick check (kept out, as there), "review" for a missed
+     question back for review, and practice otherwise. */
+  function sourceOf(a) {
+    if (a.check) return LESSON_SOURCE;
+    if (a.mode === "review") return REVIEW_SOURCE;
+    if (a.mode === "diagnostic" || a.mode === "exam") return a.mode;
+    return "practice";
+  }
+  function attemptsOf(state) {
+    return PMP.Metrics.attempts(state).map(function (a) {
+      return {
+        qid: a.qid, ecoTask: a.ecoTask || "", domain: a.domain || "", approach: a.approach || null,
+        credit: PMP.Metrics.creditOf(a), correct: !!a.correct, ms: Number(a.ms) || 0, at: Date.parse(a.at),
+        source: sourceOf(a), luckyGuess: !!a.correct && a.confidence === 1, hinted: !!a.hinted
+      };
+    });
+  }
+  function results(state) {
+    return (state.sessions || []).filter(function (r) { return r && typeof r.at === "number"; }).map(function (r) {
+      return { key: String(r.k || ""), kind: String(r.kind || ""), taskId: r.t || null, domain: r.d || null,
+               score: Number(r.s) || 0, minutes: Number(r.m) || 0, at: r.at };
+    });
+  }
+  /* The newer of the web's diagnostic (§10.09) and a phone's, as each domain's share. */
+  function diagnosticOf(state) {
+    var web = PMP.Planner.diagnostic(state), best = null, at = 0;
+    if (web && web.complete) {
+      best = {};
+      PMP.ECO.DOMAINS.forEach(function (d) { var e = web.byDomain[d]; if (e && e.n) best[d] = e.acc; });
+      at = Date.parse(web.at) || 0;
+    }
+    var sh = state.shared && Array.isArray(state.shared.diagnostics) ? state.shared.diagnostics : [];
+    sh.forEach(function (r) {
+      if (!r || !(Number(r.at) > at) || !r.domains) return;
+      var out = {};
+      Object.keys(r.domains).forEach(function (d) {
+        var v = r.domains[d];
+        if (Array.isArray(v) && Number(v[1]) > 0) out[d] = Number(v[0]) / Number(v[1]);
+      });
+      best = out; at = Number(r.at);
+    });
+    return best;
+  }
+  /* The latest tag per question, as the shared `mistakes` slice keeps them. */
+  function mistakeTags(state) {
+    var latest = {};
+    (state.journal || []).forEach(function (j) {
+      if (!j || !j.qid || !j.cause) return;
+      if (!latest[j.qid] || Date.parse(j.at) > Date.parse(latest[j.qid].at)) latest[j.qid] = j;
+    });
+    var out = {};
+    Object.keys(latest).forEach(function (q) { out[q] = latest[q].cause; });
+    return out;
+  }
+  /* Cards forgotten LEECH_THRESHOLD times or more, per ECO task (Srs.isLeech). */
+  function leechesOf(state) {
+    var srs = state.srs || {}, out = {};
+    PMP.Cards.allCards(state).forEach(function (c) {
+      var t = c.ecoTask || c.t;
+      var r = srs[c.id];
+      if (t && r && (Number(r.lapses) || 0) >= PMP.SRS.LEECH_THRESHOLD) out[t] = (out[t] || 0) + 1;
+    });
+    return out;
+  }
+
+  function input(state, now) {
+    state = state || PMP.Store.state;
+    now = now || Date.now();
+    var p = planOf(state);
+    if (!p.examDate) return null;
+    var lessons = state.lessons || {};
+    var fit = null;
+    try { fit = PMP.Fitness.report(state, now); } catch (e) { fit = null; }
+    return {
+      x: extras(), attempts: attemptsOf(state),
+      lessonsDone: Object.keys(lessons).filter(function (id) { return lessons[id] && lessons[id].completedAt; }),
+      results: results(state),
+      mocks: PMP.Metrics.mocks(state).map(function (m) { return { at: m.at }; }),
+      diagnostic: diagnosticOf(state),
+      settings: { examDate: p.examDate, hoursPerWeek: p.hours, studyDays: p.days },
+      now: now, mistakeTags: mistakeTags(state), leeches: leechesOf(state),
+      ladderNext: fit && typeof fit.ladderNext === "number" ? fit.ladderNext : null,
+      readingSlow: !!fit && fit.wpm !== null && fit.wpm < PMP.Fitness.TARGET_WPM * 0.9
+    };
+  }
+
+  /* Rebuilt from scratch on every call: the plan is a view of the current
+     state, never a stored calendar. Null without an exam date. */
+  function plan(state, now) {
+    var inp = input(state, now);
+    return inp ? build(inp) : null;
+  }
+
+  /* ── 10.24.8  WHAT A SESSION'S STEPS NEED ───────────────────────────────── */
+  /* A 15-minute version of a session for a short day: warm-up cards and 10 questions on the same ground. */
+  function shortVersion(s) {
+    return copy(s, { key: "short:" + s.key, title: "Short day: " + s.title, minutes: 15,
+      why: "A quick version so the day still counts.", steps: [step("CARDS"), step("PRACTICE", 10), step("DEBRIEF")] });
+  }
+
+  function pool() { return PMP.Content.all().filter(function (q) { return q && !q.retired; }); }
+
+  function lastCorrectFn(state) {
+    var last = Object.create(null);
+    PMP.Metrics.attempts(state).forEach(function (a) { last[a.qid] = !!a.correct; });
+    return function (id) { return id in last ? last[id] : null; };
+  }
+
+  /* Questions for a practice step: the session's task or domain, least-recently-right first. */
+  function questionsFor(state, s, st, rnd) {
+    state = state || PMP.Store.state;
+    var qs = pool();
+    if (s.taskId) qs = qs.filter(function (q) { return q.ecoTask === s.taskId; });
+    else if (s.domain) qs = qs.filter(function (q) { return q.domain === s.domain; });
+    else if (s.kind === "REENTRY") {
+      var recent = [];
+      PMP.Metrics.attempts(state).slice().reverse().forEach(function (a) {
+        var t = a.ecoTask || "";
+        if (recent.length < 3 && recent.indexOf(t) < 0) recent.push(t);
+      });
+      if (recent.length) qs = qs.filter(function (q) { return recent.indexOf(q.ecoTask || "") >= 0; });
+    }
+    if (st.easy) {
+      var easy = qs.filter(function (q) { return (q.difficulty || 3) <= 3; });
+      if (easy.length) qs = easy;
+    }
+    return order(qs, lastCorrectFn(state), weakApproach(attemptsOf(state)), st.count, rnd);
+  }
+
+  /* The cards a warm-up shows: studied before, not suspended, due now, most overdue first. */
+  function dueCards(state, now) {
+    state = state || PMP.Store.state;
+    now = now || Date.now();
+    var srs = state.srs || {};
+    return sortStable(PMP.Cards.allCards(state).filter(function (c) {
+      var r = srs[c.id];
+      return !!r && !r.suspended && Number(r.last) > 0 && Number(r.due) <= now;
+    }), function (a, b) { return srs[a.id].due - srs[b.id].due; }).slice(0, CARDS_MAX);
+  }
+
+  /* For a warm-up: missed questions due back, within today's allowance. */
+  function warmUpReviews(state, now) {
+    state = state || PMP.Store.state;
+    now = now || Date.now();
+    var atts = attemptsOf(state);
+    var byId = Object.create(null);
+    pool().forEach(function (q) { byId[q.id] = q; });
+    return reviewsDue(atts, now).map(function (r) { return byId[r.qid]; }).filter(Boolean)
+      .slice(0, reviewAllowance(atts, now));
+  }
+
+  /* ── 10.24.9  WORDS ─────────────────────────────────────────────────────── */
+  /* "cards · lesson · 10 questions" */
+  function stepSummary(s) {
+    return s.steps.map(function (st) {
+      switch (st.kind) {
+        case "CARDS": return "cards";
+        case "LESSON": return "lesson";
+        case "PRACTICE": return st.count + " questions";
+        case "SCENARIOS": return st.count + " scenarios";
+        case "MOCK": return "full mock";
+      }
+      return null;
+    }).filter(Boolean).join(" · ");
+  }
+
+  /* A finished session's title from its key alone, for "Done today": a
+     phone's session has only its key on this device. Stamina, reading,
+     paced and relearn keys are named too, where the phone shows the key. */
+  function titleFor(key) {
+    var short = key.indexOf("short:") === 0;
+    var k = short ? key.slice(6) : key;
+    var parts = k.split(":");
+    var kind = parts[0], arg = parts[1] || "";
+    var task = PMP.ECO_TASK_BY_ID[arg];
+    var lesson = kind === "lesson" ? PMP.LESSONS.filter(function (l) { return l.id === arg; })[0] : null;
+    var label = null;
+    if (kind === "build" || kind === "drill" || kind === "review" || kind === "remediation") label = task ? task.label : null;
+    else if (kind === "checkpoint") label = "Checkpoint: " + arg.charAt(0).toUpperCase() + arg.slice(1);
+    else if (kind === "lesson") label = lesson ? lesson.title : null;
+    else if (kind === "mock") label = "Full mock exam";
+    else if (kind === "reentry") label = "Welcome-back warm-up";
+    else if (kind === "mixed") label = "Mixed timed practice";
+    else if (kind === "taper") label = "Light review";
+    else if (kind === "ladder") label = "Stamina sitting: " + arg + " questions";
+    else if (kind === "reading") label = "Reading drill";
+    else if (kind === "pace") label = task ? "Paced drill: " + task.label : null;
+    else if (kind === "relearn") label = task ? "Relearn: " + task.label : null;
+    if (label === null) label = k;
+    var lead = kind === "drill" || kind === "review" || kind === "remediation" ? kind.charAt(0).toUpperCase() + kind.slice(1) + ": " : "";
+    return (short ? "Short: " : "") + lead + label;
+  }
+
+  return {
+    DAY: DAY, PASS: PASS, TAPER_DAYS: TAPER_DAYS, SLOW_SEC: SLOW_SEC, RECHECK_BELOW: RECHECK_BELOW, CAUSE_MIN: CAUSE_MIN,
+    REVIEW_STEPS: REVIEW_STEPS, REVIEW_PER_DAY: REVIEW_PER_DAY, REVIEW_SOURCE: REVIEW_SOURCE, CARDS_MAX: CARDS_MAX,
+    STEP_NAMES: STEP_NAMES,
+    nextDay: nextDay, weekday: weekday, extras: extras, taskStates: taskStates, build: build, spread: spread,
+    weakApproach: weakApproach, order: order,
+    reviewState: reviewState, reviewsDue: reviewsDue, reviewAllowance: reviewAllowance,
+    planOf: planOf, setPlan: setPlan, msOf: msOf, fromMinutes: fromMinutes,
+    input: input, plan: plan, attemptsOf: attemptsOf,
+    shortVersion: shortVersion, questionsFor: questionsFor, dueCards: dueCards, warmUpReviews: warmUpReviews,
+    stepSummary: stepSummary, titleFor: titleFor
+  };
+})();
+
+
+/* ── 10.25  THE PATH HOME AND THE SESSION PLAYER ────────────────────────────
+   What §10.24 decided, drawn: the path on Today (PathScreen.kt on Android)
+   and #/session, which plays one planned session a step at a time with one
+   button forward (SessionScreen.kt, and the run handling in PmpViewModel:
+   startSession, prepareStep, nextStep, finishSession, closeSession,
+   shortVersion, warmUpReviews and the debrief).
+
+   Five decisions worth knowing before reading the code:
+
+   · Steps run in the modules that already own them. Warm-up cards play in
+     §10.05, questions in §10.02, scenarios in §10.08 and the mock in
+     §10.03, each started with a `then` that brings the person back here
+     instead of to that module's own summary, which is how the phone's
+     QuizRunner hands back to its session. The lesson is read inline, in
+     §10.15's reader without its practice set. Reflect and the debrief are
+     drawn here. The page between steps says what the next one is and has
+     one primary button.
+
+   · Closing keeps the place. The run (the session, the step, what was
+     answered, when it started) is kept on this device under its own
+     localStorage key, beside the store and never in it, so Today offers
+     Resume after a close or a reload. It is never synced: a half-played
+     session belongs to the screen it is being played on.
+
+   · Finishing writes what the phones write: one `sessions` row { k, kind,
+     t, d, s, m, at } with the session's key, and a "path" sitting. The key
+     is the plan's own (§10.24), so the path on a phone sees the session as
+     done after the next sync, and the other way round. Then sync runs.
+
+   · The once-a-day "how do you feel" check-in is the session's first screen
+     when it has not been answered or skipped today, with the breathing
+     reset offered after a low answer. It is the same check-in as Today's
+     card (§10.20): answering or skipping either one settles both.
+
+   · A step with nothing to do is passed over, as on the phone: no due cards
+     and no missed questions back, no questions on the ground, no misses to
+     tag. The check-in comes first, so it is not skipped with them.
+   ═════════════════════════════════════════════════════════════════════════ */
+PMP.Session = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon, frag = PMP.dom.frag, on = PMP.dom.on;
+  var P = PMP.Path;
+  var DAY = 86400000;
+  var RUN_KEY = "pmp.path.run";
+  var DOW = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  /* Monday first, as the phone's chips. */
+  var CHIPS = [[2, "Mon"], [3, "Tue"], [4, "Wed"], [5, "Thu"], [6, "Fri"], [7, "Sat"], [1, "Sun"]];
+  var run = null, loaded = false;
+  /* After a low check-in answer, the reset is offered once. Session-only. */
+  var offer = false;
+
+  function sod(t) { return PMP.time.startOfDay(t); }
+  function pct(v) { return Math.round(v * 100) + "%"; }
+
+  /* ── 10.25.1  THE RUN ─────────────────────────────────────────────────── */
+  function load() {
+    if (loaded) return;
+    loaded = true;
+    try {
+      var r = JSON.parse(window.localStorage.getItem(RUN_KEY) || "null");
+      if (r && r.s && r.s.key && Array.isArray(r.s.steps)) run = r;
+    } catch (e) { run = null; }
+  }
+  function save() {
+    try {
+      if (run) window.localStorage.setItem(RUN_KEY, JSON.stringify(run));
+      else window.localStorage.removeItem(RUN_KEY);
+    } catch (e) { /* held in memory for this visit */ }
+  }
+  function current() { load(); return run; }
+  function stepOf(r) { return r ? r.s.steps[r.step] || null : null; }
+  /* Which run and step a module's session was started for. */
+  function tag() { return run ? run.startedAt + ":" + run.step : ""; }
+  function owned(sess) { return sess && !sess.finished && sess.opts && sess.opts.path === tag() ? sess : null; }
+  function ownPractice() { return owned(PMP.Practice.session); }
+  function ownCards() { return owned(PMP.Cards.session); }
+  function ownScenarios() { return owned(PMP.Scenarios.session); }
+
+  function start(s) {
+    load();
+    if (!run || run.s.key !== s.key) {
+      var st = PMP.Store.state;
+      run = {
+        s: JSON.parse(JSON.stringify(s)), step: 0, startedAt: Date.now(),
+        mocksAtStart: PMP.Metrics.mocks(st).length,
+        checkedIn: !(PMP.Wellbeing && PMP.Wellbeing.preDue(st)),
+        answers: [], rw: 0, wr: 0, phase: null
+      };
+      offer = false;
+      save();
+    }
+    PMP.Router.navigate("session");
+  }
+
+  function advance() {
+    if (!run) return;
+    var st = stepOf(run);
+    if (st && st.kind === "LESSON" && run.s.lessonId && PMP.Learn) PMP.Learn.complete(run.s.lessonId);
+    run.phase = null;
+    run.step = Math.min(run.step + 1, run.s.steps.length);
+    save();
+  }
+
+  /* Back to this page from a module, or redrawn when already on it. */
+  function back() {
+    if (PMP.Router.current && PMP.Router.current.name === "session") repaint();
+    else PMP.Router.navigate("session");
+  }
+
+  function practiceCount(r) {
+    return r.s.steps.filter(function (s) { return s.kind === "PRACTICE"; }).reduce(function (a, s) { return a + s.count; }, 0);
+  }
+
+  /* Practice score for the session, or 1 when it was reading only. Mocks score as the sitting did. */
+  function score(r) {
+    if (r.s.steps.some(function (s) { return s.kind === "MOCK"; })) {
+      var mk = PMP.Metrics.mocks(PMP.Store.state);
+      return mk.length > r.mocksAtStart ? mk[0].pct : 0;
+    }
+    if (!r.answers.length) return 1;
+    return r.answers.reduce(function (a, x) { return a + x.c; }, 0) / r.answers.length;
+  }
+
+  /* What a practice set gave the session: each committed answer, by the
+     attempt it was recorded as, and the answer changes for the debrief. */
+  function collect(sess) {
+    var byId = Object.create(null);
+    PMP.Store.state.attempts.slice(-Math.max(50, sess.items.length * 2)).forEach(function (a) { byId[a.id] = a; });
+    sess.items.forEach(function (item) {
+      if (!item.committed || !item.result) return;
+      var a = item.attemptId ? byId[item.attemptId] : null;
+      run.answers.push({ a: item.attemptId || null, q: item.q.id, t: item.q.ecoTask || "",
+                         c: item.result.credit, ok: !!item.result.correct });
+      if (a) { run.rw += Number(a.rw) || 0; run.wr += Number(a.wr) || 0; }
+    });
+  }
+
+  function startPractice(qs, mode, counts) {
+    var mine = tag();
+    PMP.Practice.startWith(qs, mode, { path: mine, then: function (res, sess) {
+      if (!run || tag() !== mine) return;
+      if (counts) collect(sess);
+      advance();
+      back();
+    } });
+  }
+
+  function misses() { return run ? run.answers.filter(function (x) { return !x.ok && x.a; }) : []; }
+  function lessonOf() { return run && run.s.lessonId && PMP.Learn ? PMP.Learn.lessonById(run.s.lessonId) : null; }
+  function scenarioPool() { return PMP.SCENARIOS.filter(function (s) { return s && !s.retired; }); }
+
+  /* PmpViewModel.prepareStep and the steps that hand straight on: a step
+     with nothing to do is passed. */
+  function settle() {
+    var state = PMP.Store.state, guard = 0;
+    while (run && guard++ < 20) {
+      var st = stepOf(run);
+      if (!st || st.kind === "DEBRIEF" || st.kind === "MOCK") return;
+      if (st.kind === "CARDS") {
+        if (run.phase === null && !ownCards() && !P.dueCards(state).length) { run.phase = "reviews"; save(); }
+        if (run.phase === "reviews" && !ownPractice() && !P.warmUpReviews(state).length) { advance(); continue; }
+        return;
+      }
+      if (st.kind === "LESSON" && !lessonOf()) { advance(); continue; }
+      if (st.kind === "PRACTICE" && !ownPractice() && !P.questionsFor(state, run.s, st).length) { advance(); continue; }
+      if (st.kind === "REFLECT" && !misses().length) { advance(); continue; }
+      if (st.kind === "SCENARIOS" && !ownScenarios() && !scenarioPool().length) { advance(); continue; }
+      return;
+    }
+  }
+
+  function finish() {
+    if (!run) return;
+    var r = run, now = Date.now();
+    if (PMP.Fitness) PMP.Fitness.recordSitting(r.s.key, "path", practiceCount(r), r.answers.length, true);
+    var minutes = Math.min(Math.max(Math.floor((now - r.startedAt) / 60000), 5), Math.max(5, r.s.minutes));
+    var row = { k: r.s.key, kind: r.s.kind, t: r.s.taskId || "", d: r.s.domain || "", s: score(r), m: minutes, at: now };
+    PMP.Store.commit(["sessions"], function (s) {
+      s.sessions = (Array.isArray(s.sessions) ? s.sessions : []).concat([row]);
+    });
+    run = null;
+    offer = false;
+    save();
+    PMP.Router.navigate("today");
+    PMP.UI.announce("Session done. It's on your record.");
+    if (PMP.Sync) PMP.Sync.auto("session");
+  }
+
+  /* Leaves the player; the run is kept so Today offers Resume. Answers
+     already given make it a sitting left part-way, as on the phone. */
+  function close() {
+    if (run && run.answers.length && PMP.Fitness) {
+      PMP.Fitness.recordSitting(run.s.key, "path", practiceCount(run), run.answers.length, false);
+    }
+    PMP.Router.navigate("today");
+  }
+
+  /* ── 10.25.2  THE PLAYER ──────────────────────────────────────────────── */
+  function repaint() {
+    if (!PMP.Router.current || PMP.Router.current.name !== "session") return;
+    var host = document.getElementById("view");
+    if (!host) return;
+    host.innerHTML = "";
+    view(host);
+    var f = host.querySelector("[data-focus]");
+    if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }
+    if (window.scrollTo) window.scrollTo(0, 0);
+  }
+
+  function header() {
+    var n = run.s.steps.length, i = Math.min(run.step, n - 1);
+    var st = stepOf(run);
+    var done = Math.round(Math.min(run.step + 1, n) / n * 100);
+    return el("div", { class: "view-hd ss-hd" }, [
+      el("button", { class: "icon-btn ss-close", type: "button", "aria-label": "Close; your place is kept", onclick: close }, [icon("x")]),
+      el("div", { class: "ss-t" }, [
+        el("span", { class: "eyebrow", text: P.STEP_NAMES[st ? st.kind : "DEBRIEF"] + " · step " + (i + 1) + " of " + n }),
+        el("h2", { text: run.s.title })
+      ]),
+      el("div", {
+        class: "progress ss-prog", role: "progressbar", "aria-label": "Session progress",
+        "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(done)
+      }, [el("i", { style: "width:" + done + "%" })])
+    ]);
+  }
+
+  function card(title, kids, cls) {
+    return el("section", { class: "card ss-step" + (cls ? " " + cls : ""), "aria-labelledby": "ss-step-h" }, [
+      el("h2", { id: "ss-step-h", tabindex: "-1", dataset: { focus: "" }, text: title })
+    ].concat(kids || []));
+  }
+
+  /* The one button forward. */
+  function nextBar(label, fn, ic) {
+    return el("div", { class: "ss-next" }, [
+      el("button", { class: "btn btn--primary btn--block", type: "button", onclick: fn }, [ic ? icon(ic) : null, label])
+    ]);
+  }
+  function forward() { advance(); repaint(); }
+
+  function checkIn() {
+    var faces = el("div", { class: "wb-faces", role: "group", "aria-label": "Choose one" }, PMP.Wellbeing.FACES.map(function (f, i) {
+      return el("button", { class: "btn wb-face", type: "button", dataset: { v: String(i + 1) }, onclick: function () {
+        PMP.Wellbeing.record("pre", i + 1);
+        PMP.UI.announce("Noted: " + f[1] + ".");
+        run.checkedIn = true;
+        offer = i + 1 <= 2;
+        save();
+        repaint();
+      } }, [el("span", { class: "wb-emoji", "aria-hidden": "true", text: f[0] }), f[1]]);
+    }));
+    return card("How do you feel about studying right now?", [
+      el("p", { class: "hint", text: "Optional. It helps the app show you how feelings and study relate." }),
+      faces,
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--sm btn--ghost", type: "button", onclick: function () {
+          PMP.Wellbeing.skipToday();
+          run.checkedIn = true;
+          save();
+          repaint();
+        } }, "Skip")
+      ])
+    ], "wb-card");
+  }
+
+  function resetOffer() {
+    return card("Want a two-minute reset first?", [
+      el("p", { text: "Slow breathing before you start makes the first questions easier to read. Optional." }),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn btn--primary", type: "button", onclick: function () {
+          offer = false;
+          PMP.Wellbeing.breathe().then(function () { repaint(); });
+        } }, "Breathe for 2 minutes"),
+        el("button", { class: "btn", type: "button", onclick: function () { offer = false; repaint(); } }, "Skip")
+      ])
+    ]);
+  }
+
+  function cardsStep(state) {
+    if (run.phase === null) {
+      var own = ownCards();
+      var due = own ? null : P.dueCards(state);
+      var left = own ? own.queue.length - own.i : due.length;
+      return card("Warm-up cards", [
+        el("p", { text: own ? PMP.fmt.plural(left, "card") + " left in this warm-up."
+          : PMP.fmt.plural(left, "card") + " due. A quick pass before anything new keeps them from piling up." }),
+        nextBar(own ? "Resume the cards" : "Review " + PMP.fmt.plural(left, "card"), function () {
+          if (!own) {
+            var mine = tag();
+            PMP.Cards.startQueue(due, { path: mine, then: function () {
+              if (!run || tag() !== mine) return;
+              run.phase = "reviews";
+              save();
+              back();
+            } });
+          }
+          PMP.Router.navigate("cards");
+        }, "cards")
+      ]);
+    }
+    var ownP = ownPractice();
+    var qs = ownP ? null : P.warmUpReviews(state);
+    return card("Missed questions, back for review", [
+      el("p", { text: ownP ? "You are part-way through them."
+        : PMP.fmt.plural(qs.length, "question") + " you missed before " + (qs.length === 1 ? "is" : "are") +
+          " due again. A right answer today moves it further out; a wrong one starts it again." }),
+      nextBar(ownP ? "Resume the review" : "Start the review", function () {
+        if (!ownP) startPractice(qs, "review", false);
+        PMP.Router.navigate("practice");
+      }, "target")
+    ]);
+  }
+
+  function lessonStep() {
+    var l = lessonOf();
+    var wrap = el("div", { class: "ss-lesson" });
+    PMP.Learn.reader(wrap, l, { inSession: true });
+    var h = wrap.querySelector("h2");
+    if (h) { h.setAttribute("tabindex", "-1"); h.setAttribute("data-focus", ""); }
+    return frag([wrap, nextBar("I've read it · Continue", forward, "check")]);
+  }
+
+  function scopeOf(s) {
+    var t = s.taskId && PMP.ECO_TASK_BY_ID[s.taskId];
+    if (t) return t.label;
+    if (s.domain) return PMP.ECO.DOMAIN_LABELS[s.domain] + ", mixed tasks";
+    if (s.kind === "REENTRY") return "what you studied last";
+    return "every domain, mixed";
+  }
+
+  function practiceStep(state, st) {
+    var own = ownPractice();
+    var how = st.timed ? "Against the clock at " + PMP.PRACTICE.PACE_TARGET_SEC + " seconds a question, marked at the end, the way the exam asks."
+      : st.reading ? "Each question shows its scenario first. Say to yourself what it's asking, then reveal the options."
+      : st.easy ? "Easier questions on the same ground, marked as you go, to rebuild it."
+      : "Marked as you go, with the reasoning for every option.";
+    return card(PMP.fmt.plural(st.count, "question"), [
+      el("p", { text: how }),
+      el("p", { class: "hint", text: "On " + scopeOf(run.s) + ". Questions you have not seen come first, then the ones you missed last time." }),
+      nextBar(own ? "Resume the questions" : "Start the questions", function () {
+        if (!own) {
+          var qs = P.questionsFor(PMP.Store.state, run.s, st);
+          if (!qs.length) { forward(); return; }
+          startPractice(qs, st.timed ? "timed" : st.reading ? "reading" : "practice", true);
+        }
+        PMP.Router.navigate("practice");
+      }, st.timed ? "timer" : "target")
+    ]);
+  }
+
+  /* Tag why each miss in this session happened, while it is fresh. */
+  function reflectStep(state) {
+    var byId = Object.create(null), tagOf = Object.create(null);
+    state.attempts.forEach(function (a) { byId[a.id] = a; });
+    (state.journal || []).forEach(function (j) { if (j && j.attemptId) tagOf[j.attemptId] = j.cause; });
+    var list = el("ul", { class: "ss-misses" });
+    misses().forEach(function (m, i) {
+      var q = PMP.Content.byId(m.q), a = byId[m.a];
+      if (!a) return;
+      var group = el("div", { class: "jr-causes", role: "group", "aria-labelledby": "ss-miss-" + i });
+      PMP.RULES.causes.forEach(function (c) {
+        var b = el("button", {
+          class: "jr-cause", type: "button", title: c.hint,
+          dataset: { on: String(tagOf[m.a] === c.id) }, "aria-pressed": String(tagOf[m.a] === c.id),
+          onclick: function () {
+            PMP.Journal.setCause(a, c.id);
+            Array.prototype.forEach.call(group.querySelectorAll(".jr-cause"), function (x) {
+              x.setAttribute("data-on", String(x === b));
+              x.setAttribute("aria-pressed", String(x === b));
+            });
+            PMP.UI.announce(c.short + " recorded.");
+          }
+        }, c.short);
+        group.appendChild(b);
+      });
+      list.appendChild(el("li", { class: "ss-miss" }, [
+        el("p", { class: "jr-stem", id: "ss-miss-" + i, text: q ? PMP.Chart.clip(q.stem, 220) : "This question is not in the loaded content pack." }),
+        group
+      ]));
+    });
+    return card("Why did these go wrong?", [
+      el("p", { class: "hint", text: "One tap each. Naming the cause is what stops it happening again, and the plan uses it." }),
+      list,
+      nextBar("Continue", forward)
+    ]);
+  }
+
+  function scenariosStep(st) {
+    var own = ownScenarios();
+    var n = Math.max(1, st.count);
+    return card(PMP.fmt.plural(n, "scenario"), [
+      el("p", { text: "Situational questions: choose the first thing you would do, then see all four options ranked, with the reasoning for each place." }),
+      nextBar(own ? "Resume the scenarios" : "Start the scenarios", function () {
+        if (!own) {
+          var mine = tag();
+          PMP.Scenarios.startWith(scenarioPool(), n, { path: mine, then: function () {
+            if (!run || tag() !== mine) return;
+            advance();
+            back();
+          } });
+        }
+        PMP.Router.navigate("scenarios");
+      }, "branch")
+    ]);
+  }
+
+  function mockStep(state) {
+    var mk = PMP.Metrics.mocks(state);
+    if (mk.length > run.mocksAtStart) {
+      var m = mk[0];
+      return card("Mock done: " + pct(m.pct), [
+        el("p", { text: m.right + " of " + m.of + " correct. Your plan adjusts to the domain scores." }),
+        nextBar("Continue", forward)
+      ]);
+    }
+    var E = PMP.EXAM, saved = PMP.Exam.resumable();
+    return card("Full mock exam", [
+      el("p", { text: E.TOTAL_ITEMS + " questions in " + E.MINUTES + " minutes, with " + E.BREAK_COUNT +
+        " optional breaks. Find a quiet place and the whole sitting. If you have to stop, the sitting is saved and its clock waits until you come back to it." }),
+      nextBar(saved ? "Resume the mock" : "Start the mock", function () {
+        PMP.Router.navigate("exam");
+        if (saved) PMP.Exam.resume(); else PMP.Exam.start();
+      }, "timer")
+    ]);
+  }
+
+  function debrief(state) {
+    var sc = score(run), answered = run.answers;
+    var plan = P.plan(state);
+    var key = run.s.key;
+    var next = plan ? plan.sessions.filter(function (s) { return s.key !== key; })[0] : null;
+    var kids = [];
+    if (answered.length) {
+      var right = answered.filter(function (x) { return x.ok; }).length;
+      var band = sc >= 0.8 ? "good" : sc >= 0.5 ? "mid" : "low";
+      kids.push(el("p", { class: "ss-score", dataset: { band: band }, text: pct(sc) }));
+      kids.push(el("p", { class: "hint", text: right + " of " + answered.length + " right" }));
+      if (run.rw + run.wr > 0) {
+        kids.push(el("div", { class: "ss-note" }, [
+          el("p", { class: "ss-note-h", text: "Changed answers: " + run.wr + " wrong → right, " + run.rw + " right → wrong." }),
+          el("p", { text: run.rw > run.wr
+            ? "Your first instinct was right more often than your changes. Change an answer only when you find a specific reason."
+            : "Your changes helped. Keep checking, but don't reopen answers without a reason." })
+        ]));
+      }
+      /* Went well / watch, by task, from this session only. */
+      var by = {}, order = [];
+      answered.forEach(function (x) {
+        if (!by[x.t]) { by[x.t] = { n: 0, c: 0 }; order.push(x.t); }
+        by[x.t].n++; by[x.t].c += x.c;
+      });
+      var best = null, worst = null;
+      order.forEach(function (t) {
+        var v = by[t].c / by[t].n;
+        if (best === null || v > by[best].c / by[best].n) best = t;
+        if (worst === null || v < by[worst].c / by[worst].n) worst = t;
+      });
+      function label(t) { var x = PMP.ECO_TASK_BY_ID[t]; return x ? x.label : t || "Untagged"; }
+      var lines = [];
+      if (best !== null) lines.push(el("li", { text: "Went well: " + label(best) + ", " + pct(by[best].c / by[best].n) }));
+      var wv = worst !== null ? by[worst].c / by[worst].n : 1;
+      if (wv < 0.8) lines.push(el("li", { text: "Watch: " + label(worst) + ", " + pct(wv) +
+        (wv < 0.5 ? ". Tomorrow starts with a fix-up on it." : ". It comes back for review in a couple of days.") }));
+      kids.push(el("ul", { class: "ln-bullets ss-by" }, lines));
+    } else {
+      kids.push(el("p", { text: "Nicely done. That's on your record." }));
+    }
+    if (next) {
+      kids.push(el("div", { class: "ss-note" }, [
+        el("span", { class: "eyebrow", text: "Next on your path" }),
+        el("p", { class: "ss-note-h", text: next.title }),
+        el("p", { class: "hint", text: next.why })
+      ]));
+    }
+    kids.push(nextBar("Finish", finish, "check"));
+    return card("Session done", kids);
+  }
+
+  function view(host) {
+    load();
+    if (!run) {
+      host.appendChild(PMP.UI.empty("No session in progress",
+        "Today shows the next session on your path. Press Continue there to start it.", "today"));
+      host.appendChild(el("div", { class: "filter-bar" }, [el("a", { class: "btn", href: "#/today" }, [icon("today"), "Back to Today"])]));
+      return;
+    }
+    var state = PMP.Store.state;
+    if (!run.checkedIn && !(PMP.Wellbeing && PMP.Wellbeing.preDue(state))) { run.checkedIn = true; save(); }
+    var asking = !run.checkedIn && run.step === 0;
+    if (!asking && !offer) settle();
+    host.appendChild(header());
+    var st = stepOf(run);
+    var body;
+    if (asking) body = checkIn();
+    else if (offer) body = resetOffer();
+    else if (!st || st.kind === "DEBRIEF") body = debrief(state);
+    else if (st.kind === "CARDS") body = cardsStep(state);
+    else if (st.kind === "LESSON") body = lessonStep();
+    else if (st.kind === "PRACTICE") body = practiceStep(state, st);
+    else if (st.kind === "REFLECT") body = reflectStep(state);
+    else if (st.kind === "SCENARIOS") body = scenariosStep(st);
+    else if (st.kind === "MOCK") body = mockStep(state);
+    host.appendChild(body);
+  }
+
+  PMP.Router.register("session", { title: "Session", render: view });
+
+  /* On a module's own results page (the mock's), the way back here. */
+  function backCard(kind) {
+    load();
+    var st = stepOf(run);
+    if (!st || st.kind !== kind) return null;
+    return el("aside", { class: "card ss-back", "aria-label": "Guided session" }, [
+      el("span", { class: "eyebrow", text: "Guided session" }),
+      el("p", { text: run.s.title }),
+      el("div", { class: "filter-bar" }, [el("a", { class: "btn", href: "#/session" }, [icon("today"), "Back to your session"])])
+    ]);
+  }
+
+  /* ── 10.25.3  THE PATH ON TODAY ───────────────────────────────────────────
+     PathScreen: where you stand, one button for the next session, the
+     15-minute version, what is done today, what comes next by day, and why
+     the plan looks the way it does. Returns the parts for §10.17 to place
+     among its own (the weekly review, messages, check-in and wellbeing
+     cards), or null without an exam date. `primary` is false while the
+     weekly review holds the page's one primary button. */
+  function dayLabel(day, today) {
+    var n = Math.floor((day - today + DAY / 2) / DAY);
+    if (n === 0) return "Today";
+    if (n === 1) return "Tomorrow";
+    return DOW[new Date(day).getDay()] + ", " + PMP.fmt.dateShort(new Date(day).toISOString());
+  }
+
+  function ahead(s) {
+    PMP.UI.sheet({
+      title: s.title,
+      body: frag([el("p", { text: s.why }), el("p", { text: "This is ahead of your plan. You can do it now; the plan adjusts." })]),
+      actions: [{ id: "no", label: "Not now" }, { id: "go", label: "Start now", primary: true }]
+    }).then(function (c) { if (c === "go") start(s); });
+  }
+
+  function home(state, primary, after) {
+    var now = Date.now(), today = sod(now);
+    var plan = P.plan(state, now);
+    if (!plan) return null;
+    load();
+    var p = P.planOf(state);
+    var rd = PMP.Metrics.readiness(state), streak = PMP.Metrics.streak(state);
+    var fit = null;
+    try { fit = PMP.Fitness.report(state, now); } catch (e) { fit = null; }
+    var doneToday = (state.sessions || []).filter(function (r) { return r && typeof r.at === "number" && sod(r.at) === today; });
+    var next = plan.next;
+    var out = { plan: plan, active: !!(run || next), primary: false };
+
+    out.status = el("div", { class: "pt-status" }, [
+      el("p", { class: "pt-line", text: plan.phase + " · readiness " + rd.score + " · " + streak.current + "-day streak" }),
+      el("a", { class: "pt-fit", href: "#/fitness", text: "Exam fitness " + (fit && typeof fit.score === "number" ? fit.score : "–") + " · weekly report" })
+    ]);
+
+    if (plan.behind) {
+      var acts = [
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () {
+          P.setPlan({ hours: p.hours + 2 });
+          PMP.UI.announce("Now " + (p.hours + 2) + " hours a week.");
+          if (after) after();
+        } }, "+2 hours a week")
+      ];
+      if (p.days.length < 7) acts.push(el("button", { class: "btn btn--sm", type: "button", onclick: function () {
+        var add = [1, 2, 3, 4, 5, 6, 7].filter(function (d) { return p.days.indexOf(d) < 0; })[0];
+        P.setPlan({ days: p.days.concat([add]) });
+        PMP.UI.announce(DOW[add - 1] + " added as a study day.");
+        if (after) after();
+      } }, "Add a study day"));
+      acts.push(el("a", { class: "btn btn--sm", href: "#/planner" }, "Move the date"));
+      out.behind = el("section", { class: "card pt-behind", "aria-labelledby": "pt-behind-h" }, [
+        el("h2", { id: "pt-behind-h", text: "The plan doesn't fit the time left" }),
+        el("p", { text: "About " + Math.floor(plan.neededMinutes / 60) + " hours of work for " + Math.floor(plan.availableMinutes / 60) +
+          " hours before the final week. Pick what to change:" }),
+        el("div", { class: "filter-bar" }, acts)
+      ]);
+    }
+
+    var main = el("section", { class: "card pt-main", "aria-labelledby": "pt-main-h" });
+    if (run) {
+      main.appendChild(el("span", { class: "eyebrow", text: "In progress" }));
+      main.appendChild(el("h2", { id: "pt-main-h", text: run.s.title }));
+      main.appendChild(el("p", { class: "td-m", text: "Step " + (Math.min(run.step, run.s.steps.length - 1) + 1) + " of " + run.s.steps.length }));
+      main.appendChild(el("div", { class: "td-cta" }, [
+        el("button", { class: "btn btn--block" + (primary ? " btn--primary" : ""), type: "button",
+          onclick: function () { PMP.Router.navigate("session"); } }, [icon("today"), "Resume"])
+      ]));
+      out.primary = primary;
+    } else if (!next) {
+      main.appendChild(el("h2", { id: "pt-main-h", text: "Nothing left on the plan" }));
+      main.appendChild(el("p", { text: "Rest before the exam: you've done the work." }));
+    } else {
+      var todayDone = doneToday.length > 0 && next.day > today;
+      main.appendChild(el("span", { class: "eyebrow", text: todayDone ? "Today's done · next up"
+        : next.day > today ? "Next study day: " + dayLabel(next.day, today) : "Today" }));
+      main.appendChild(el("h2", { id: "pt-main-h", text: next.title }));
+      main.appendChild(el("p", { text: next.why }));
+      main.appendChild(el("p", { class: "td-m", text: "About " + next.minutes + " minutes · " + P.stepSummary(next) }));
+      var acts2 = [el("button", { class: "btn btn--block" + (primary ? " btn--primary" : ""), type: "button",
+        onclick: function () { start(next); } }, [icon("today"), todayDone || next.day > today ? "Study ahead" : "Continue"])];
+      if (next.minutes > 20 && next.kind !== "MOCK") {
+        acts2.push(el("button", { class: "btn btn--ghost btn--block", type: "button",
+          onclick: function () { start(P.shortVersion(next)); } }, "Short on time? Do a 15-minute version"));
+      }
+      main.appendChild(el("div", { class: "td-cta pt-acts" }, acts2));
+      out.primary = primary;
+    }
+    out.main = main;
+
+    if (doneToday.length) {
+      out.done = el("section", { class: "card pt-done", "aria-labelledby": "pt-done-h" }, [
+        el("h2", { id: "pt-done-h", text: "Done today" }),
+        el("ul", { class: "pt-list" }, doneToday.map(function (r) {
+          return el("li", { class: "pt-did" }, [
+            icon("check"),
+            el("span", { class: "td-l", text: P.titleFor(String(r.k || "")) }),
+            Number(r.s) < 1 ? el("span", { class: "td-m", text: pct(Number(r.s) || 0) }) : null
+          ]);
+        }))
+      ]);
+    }
+
+    var rest = plan.sessions.slice(1);
+    var soon = rest.filter(function (s) { return s.day < today + 15 * DAY; });
+    var later = rest.length - soon.length;
+    if (soon.length || later) {
+      var up = el("section", { class: "card pt-up", "aria-labelledby": "pt-up-h" }, [el("h2", { id: "pt-up-h", text: "Coming up" })]);
+      var days = [], byDay = {};
+      soon.forEach(function (s) { if (!byDay[s.day]) { byDay[s.day] = []; days.push(s.day); } byDay[s.day].push(s); });
+      days.forEach(function (d) {
+        up.appendChild(el("h3", { class: "pt-day", text: dayLabel(d, today) }));
+        up.appendChild(el("ul", { class: "pt-list" }, byDay[d].map(function (s) {
+          return el("li", null, [el("button", { class: "pt-row", type: "button", onclick: function () { ahead(s); } }, [
+            el("span", { class: "td-l", text: s.title }),
+            el("span", { class: "td-m", text: s.minutes + " min" })
+          ])]);
+        })));
+      });
+      if (later > 0) up.appendChild(el("p", { class: "hint", text: "…and " + later + " more sessions before the exam." }));
+      out.upcoming = up;
+    }
+
+    if (plan.adjustments.length || plan.dropped.length) {
+      out.adjust = el("details", { class: "card pt-adj" }, [
+        el("summary", { text: "How your plan adjusted (" + plan.adjustments.length + ")" }),
+        el("ul", { class: "ln-bullets" }, plan.adjustments.map(function (a) { return el("li", { text: a }); })),
+        plan.dropped.length ? el("p", { class: "hint", text: "Trimmed: " + plan.dropped.join(", ") }) : null
+      ]);
+    }
+    return out;
+  }
+
+  /* ── 10.25.4  THE PLAN'S INPUTS ─────────────────────────────────────────────
+     Exam date, hours a week and study days, at the top of #/planner. The
+     calendar below follows them (§10.24 setPlan). */
+  function planCard(after) {
+    var state = PMP.Store.state, p = P.planOf(state);
+    var date = el("input", { class: "input", id: "pt-date", type: "date",
+      value: state.settings.examDate ? String(state.settings.examDate).slice(0, 10) : "" });
+    var hours = el("input", { class: "input", id: "pt-hours", type: "number", min: "1", max: "60", step: "1", value: String(p.hours) });
+    var boxes = [];
+    var days = el("fieldset", { class: "td-choice" }, [el("legend", { text: "Study days" })]);
+    CHIPS.forEach(function (c) {
+      var id = "pt-day-" + c[0];
+      var box = el("input", { type: "checkbox", id: id, value: String(c[0]), checked: p.days.indexOf(c[0]) >= 0 });
+      boxes.push(box);
+      days.appendChild(el("label", { class: "td-opt", for: id }, [box, el("span", { text: c[1] })]));
+    });
+    var per = el("p", { class: "hint", id: "pt-per", "aria-live": "polite" });
+    var err = el("p", { class: "td-err", role: "alert", hidden: true });
+    function picked() { return boxes.filter(function (b) { return b.checked; }).map(function (b) { return Number(b.value); }); }
+    function paintPer() {
+      var n = picked().length, h = Math.max(0, parseInt(hours.value, 10) || 0);
+      per.textContent = n ? h + " hours a week · about " + Math.round(h * 60 / n) + " minutes a study day" : "Choose at least one study day.";
+    }
+    on(hours, "input", paintPer);
+    boxes.forEach(function (b) { on(b, "change", paintPer); });
+    paintPer();
+    return el("section", { class: "card pt-plan", id: "pt-plan", "aria-labelledby": "pt-plan-h" }, [
+      el("span", { class: "eyebrow", text: "Your path" }),
+      el("h2", { id: "pt-plan-h", text: "Exam date, hours and study days" }),
+      el("p", { text: "Today's path is built from these three and re-plans from today whenever they change. An honest figure beats an ambitious one." }),
+      el("div", { class: "filters" }, [
+        el("label", { class: "field", for: "pt-date" }, [el("span", { class: "lbl", text: "Exam date" }), date]),
+        el("label", { class: "field", for: "pt-hours" }, [el("span", { class: "lbl", text: "Hours a week" }), hours])
+      ]),
+      days, per, err,
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn", type: "button", onclick: function () {
+          var d = picked(), h = parseInt(hours.value, 10) || 0;
+          var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date.value || "");
+          var fail = !m || new Date(+m[1], +m[2] - 1, +m[3]).getTime() <= sod(Date.now()) ? "Pick an exam date after today."
+            : h < 1 || h > 60 ? "Hours a week between 1 and 60."
+            : !d.length ? "Choose at least one study day." : null;
+          if (fail) { err.hidden = false; err.textContent = fail; return; }
+          err.hidden = true;
+          var v = date.value;
+          if (String(PMP.Store.state.settings.examDate || "").slice(0, 10) !== v) {
+            PMP.Store.commit(["settings"], function (s) { s.settings.examDate = v; });
+          }
+          P.setPlan({ hours: h, days: d });
+          PMP.UI.toast("Saved. Today's path is planned from it.", "ok");
+          if (after) after();
+        } }, [icon("check"), "Save"]),
+        el("span", { class: "spacer" }),
+        p.source === "planner" ? el("span", { class: "hint", text: "Read from the calendar's minutes until you save them here." }) : null
+      ])
+    ]);
+  }
+
+  return {
+    start: start, close: close, finish: finish, home: home, planCard: planCard, backCard: backCard,
+    get run() { return current(); }, RUN_KEY: RUN_KEY
+  };
 })();
 
 
