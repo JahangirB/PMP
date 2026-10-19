@@ -29,7 +29,13 @@ var REF_COMMIT = "3f6ff75";
    for the answering tools (§10.02, S5) on purpose; both are taken out before
    the comparison, and 16-answering covers them. */
 var ROUTES = ["library", "exam", "practice", "scenarios"];
-var ADDED = { exam: "#view .wb-write", practice: '#view .mode-opt[for="mode-reading"], #view .keylist li[data-k]' };
+var ADDED = { exam: "#view .wb-write, #view .ex-case", practice: '#view .mode-opt[for="mode-reading"], #view .keylist li[data-k], #case-quick' };
+/* The case studies (§10.26) added a row to #/exam's sitting card and the
+   "Case studies" quick start to #/practice, on purpose; 20-cases covers
+   both. The 12 graphic items took the core pack from 348 to 360, so the
+   pool figures on #/practice read 360; they are put back to the
+   reference's figure before the comparison. */
+var CORE_NOW = "360", CORE_REF = "348";
 
 module.exports = [
   {
@@ -45,6 +51,12 @@ module.exports = [
           await lib.go(a, "#/" + r);
           await lib.go(b, "#/" + r);
           if (ADDED[r]) await b.evaluate(function (sel) { document.querySelectorAll(sel).forEach(function (n) { n.remove(); }); }, ADDED[r]);
+          await b.evaluate(function (x) {
+            document.querySelectorAll("#view .pool-n, #view .hint").forEach(function (n) {
+              var w = document.createTreeWalker(n, NodeFilter.SHOW_TEXT), t;
+              while ((t = w.nextNode())) t.nodeValue = t.nodeValue.split(x[0]).join(x[1]);
+            });
+          }, [CORE_NOW, CORE_REF]);
           var sel = r === "library" ? '#view [role="tabpanel"]' : "#view";
           var pa = await a.locator(sel).screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
           var pb = await b.locator(sel).screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });

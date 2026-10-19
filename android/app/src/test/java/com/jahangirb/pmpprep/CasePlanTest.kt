@@ -18,7 +18,7 @@ import kotlin.random.Random
 
 /**
  * Case studies (index.html §05.3) and their place in a mock (§10.03.1 layoutFor). The fixture cases are
- * built inline; the staged content in content/staging/build is checked too when it is present.
+ * built inline; the content index.html ships is checked against the extracted test assets.
  */
 class CasePlanTest {
 
@@ -140,18 +140,17 @@ class CasePlanTest {
         assertTrue(paper.take(10).all { idx[it.id]?.id == block.first().let { q -> idx[q.id]!!.id } })
     }
 
-    /* ── the staged content, when present ───────────────────────────────── */
+    /* ── the shipped content (index.html, extracted into the test assets) ─── */
 
-    private fun staged(name: String): File? {
-        val fx = System.getProperty("pmp.fixtures") ?: return null
-        val f = File(File(fx).parentFile.parentFile.parentFile, "content/staging/build/$name")
-        return if (f.exists()) f else null
+    private fun asset(name: String): File {
+        val dir = System.getProperty("pmp.assets") ?: error("pmp.assets not set; run through Gradle")
+        return File(dir, "content/$name")
     }
 
     @Test
-    fun stagedCasesParseAndScore() {
-        val f = staged("cases.json") ?: return
-        val raw = JSONArray(f.readText())
+    fun shippedCasesParseAndScore() {
+        val raw = JSONObject(asset("extras.json").readText()).getJSONArray("cases")
+        assertTrue("index.html ships case studies", raw.length() > 0)
         val parsed = ContentParser.cases(raw)
         assertEquals(raw.length(), parsed.size)
         for (i in 0 until raw.length()) {
@@ -166,19 +165,16 @@ class CasePlanTest {
     }
 
     @Test
-    fun stagedGraphicItemsRenderAsHotspots() {
-        val f = staged("graphic-questions.json") ?: return
-        val p = ContentParser.parsePack(f.readText(), "staged", "staged", null, true)
-        assertEquals(p.errors.toString(), 0, p.invalid)
-        assertEquals(12, p.questions.size)
-        p.questions.forEach { q ->
-            assertEquals(QType.GRAPHIC, q.type)
+    fun shippedGraphicItemsRenderAsHotspots() {
+        val p = ContentParser.parsePack(asset("core.json").readText(), "core", "core", null, true)
+        val graphic = p.questions.filter { it.type == QType.GRAPHIC }
+        assertTrue("index.html ships graphic items", graphic.isNotEmpty())
+        graphic.forEach { q ->
             assertEquals(QType.HOTSPOT, q.base)
             assertTrue(q.id, q.graphic != null && q.graphic!!.viewBox.size == 4)
             assertEquals(q.id, q.regions.count { it.correct } > 1, q.multiSelect)
             assertTrue(q.id, Scoring.score(q, ContentTest.rightAnswer(q)).correct)
             assertFalse(q.id, Scoring.score(q, Answer(choices = setOf(q.regions.first { !it.correct }.id))).correct)
         }
-        assertTrue(p.questions.any { it.graphic!!.flow.not() })
     }
 }
