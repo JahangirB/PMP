@@ -253,9 +253,11 @@ module.exports = [
       for (var t of ["process", "principles", "glossary"]) {
         await lib.go(a, "#/library?tab=" + t);
         await lib.go(b, "#/library?tab=" + t);
-        var pa = await a.locator('#view [role="tabpanel"]').screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
-        var pb = await b.locator('#view [role="tabpanel"]').screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
-        if (!pa.equals(pb)) diff.push(t);
+        /* Content and structure, not pixels: the Sky Clay restyle changed
+           every pixel on purpose (see lib.structure). */
+        var pa = await a.evaluate(lib.structure, '#view [role="tabpanel"]');
+        var pb = await b.evaluate(lib.structure, '#view [role="tabpanel"]');
+        if (pa.join("\n") !== pb.join("\n")) diff.push(t);
       }
       await a.ctx.close();
       await b.ctx.close();
