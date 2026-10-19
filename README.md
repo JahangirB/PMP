@@ -336,6 +336,16 @@ device.
 Questions or problems:
 [Jahangir Babayev on LinkedIn](https://www.linkedin.com/in/jahangir-babayev-a432a5145).
 
+## Contributing and licence
+
+Found a wrong answer or a bug? See [CONTRIBUTING.md](CONTRIBUTING.md) and the
+[code of conduct](CODE_OF_CONDUCT.md). Security problems go through
+[SECURITY.md](SECURITY.md).
+
+The project is licensed under the [GNU General Public License v3.0](LICENSE).
+PMP, PMBOK and PMI are trademarks of the Project Management Institute, which
+does not endorse this app.
+
 ## For developers
 
 ### Builds and releases
