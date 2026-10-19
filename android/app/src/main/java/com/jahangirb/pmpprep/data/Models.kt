@@ -291,6 +291,8 @@ data class Extras(
     val adaptive: AdaptiveConfig = AdaptiveConfig(),
     /** The Google Apps Script the Cloud sync screen shows, with __SYNC_CODE__ still in it. */
     val syncScript: String = "",
+    /** The prompt the Make more questions card copies (docs/question-generator-prompt.md). */
+    val generatorPrompt: String = "",
     /** Case studies; empty until index.html ships some, and everything works without them. */
     val cases: List<CaseStudy> = emptyList(),
 )

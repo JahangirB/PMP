@@ -287,6 +287,7 @@ object ContentParser {
                 )
             },
             syncScript = o.str("syncScript"),
+            generatorPrompt = o.str("generatorPrompt"),
             cases = cases(o.optJSONArray("cases")),
         )
     }

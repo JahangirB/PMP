@@ -31,6 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,6 +57,8 @@ fun DataScreen(vm: PmpViewModel) {
     val scope = rememberCoroutineScope()
     var message by remember { mutableStateOf<Pair<String, String>?>(null) }
     var confirmReset by remember { mutableStateOf(false) }
+    var promptCopied by remember { mutableStateOf(false) }
+    val ctx = LocalContext.current
     var deleting by remember { mutableStateOf<QuestionPack?>(null) }
     val cv = vm.contentVersion
 
@@ -132,6 +135,29 @@ fun DataScreen(vm: PmpViewModel) {
         OutlinedButton(onClick = { restoreLauncher.launch(arrayOf("*/*")) }, modifier = Modifier.fillMaxWidth()) { Text("Restore from backup") }
         Text("Backups use the shared progress format, so one saved here also restores in the web app and on iPhone.",
             fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+
+        // Make more questions: the web page holds the file links (ledger per topic); the prompt copies from here.
+        SectionLabel("Make more questions")
+        PmpCard {
+            Text("Need more questions? Write them with Claude", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("If a topic runs short, Claude (Opus 5.5 works well) can write a new set to the same rules the app's questions follow.",
+                fontSize = 13.sp, lineHeight = 18.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Spacer(Modifier.height(6.dp))
+            listOf(
+                "1. Get the files: the prompt, AUTHORING.md and the ledger for your topic. The ledger lists every question the app already has, so Claude does not repeat them.",
+                "2. In a new chat at claude.ai, choose Opus 5.5, attach AUTHORING.md and the ledger, and paste the prompt.",
+                "3. Claude asks what the set is for (more on one topic, a mock-style mixed set, or a weak area you describe), how many (up to 20 a file) and any preferences, then gives you one .json file.",
+                "4. Add it above with Add question bank (.json). The app checks every question first and lists any problem.",
+            ).forEach { Text(it, fontSize = 13.sp, lineHeight = 18.sp) }
+            Spacer(Modifier.height(8.dp))
+            Button(onClick = { copyText(ctx, "PMP question prompt", vm.repo.extras.generatorPrompt); promptCopied = true },
+                modifier = Modifier.fillMaxWidth()) { Text(if (promptCopied) "Prompt copied" else "Copy prompt") }
+            OutlinedButton(onClick = { openLink(ctx, "https://pmp-sandy.vercel.app/#/data") },
+                modifier = Modifier.fillMaxWidth()) { Text("Get the files (opens the website)") }
+            Spacer(Modifier.height(6.dp))
+            Text("All questions, lessons and case studies were written with AI (Claude) and checked by scripts, not reviewed against PMI's materials. Some may resemble each other or published questions, and a few may be debatable or wrong. Treat the app as practice alongside official PMI resources, and report any question you think is wrong.",
+                fontSize = 12.sp, lineHeight = 16.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
 
         SectionLabel("Cloud sync")
         PmpCard(onClick = { vm.navigate(Dest.SYNC) }) {

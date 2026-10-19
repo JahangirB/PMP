@@ -238,6 +238,7 @@ enum ContentParser {
             lessons: lessons,
             rules: rules(o.obj("rules")),
             syncScript: o.str("syncScript"),
+            generatorPrompt: o.str("generatorPrompt"),
             cases: cases(o.objects("cases")))
     }
 
