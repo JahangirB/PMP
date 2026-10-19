@@ -197,6 +197,11 @@ class ProgressStore(private val dir: File) {
     val myCards = ArrayList<Flashcard>()
     /** Formula-lab drills, oldest first, capped at [MAX_DRILLS]. */
     val drills = ArrayList<DrillRun>()
+    /** Local dates the app was opened (YYYY-MM-DD), sorted, newest [Support.MAX_OPENS] (docs/progress-format.md §4). */
+    val opens = ArrayList<String>()
+    /** The support reminder's state (§4). */
+    var support = SupportState()
+        private set
 
     /** Latest attempt per question. */
     val last = HashMap<String, Attempt>()
@@ -282,6 +287,22 @@ class ProgressStore(private val dir: File) {
         changed()
     }
 
+    /** Adds [today] to the opens; a change only when the date is new. */
+    @Synchronized
+    fun recordOpen(today: String) {
+        if (today in opens) return
+        val next = Support.recordOpen(opens, today)
+        opens.clear(); opens += next
+        changed()
+    }
+
+    @Synchronized
+    fun setSupport(s: SupportState) {
+        if (s == support) return
+        support = s
+        changed()
+    }
+
     @Synchronized
     fun recordCheckIn(c: CheckIn) {
         checkIns += c
@@ -352,6 +373,7 @@ class ProgressStore(private val dir: File) {
         scenarioRuns.clear(); mocks.clear(); lessonsDone.clear(); last.clear(); plan = StudyPlan()
         notepad = ""; diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
         sittings.clear(); checkIns.clear(); weekly.clear(); myCards.clear(); drills.clear()
+        // opens and support survive: a reset is about study progress, and someone who pressed Support shouldn't be asked again at once.
         changed()
     }
 
@@ -471,6 +493,12 @@ class ProgressStore(private val dir: File) {
             checkIns.forEach { put(JSONObject().put("at", it.at).put("kind", it.kind).put("v", it.value).put("items", JSONArray(it.items))) }
         })
         put("weekly", JSONArray().apply { weekly.forEach { put(it.toJson()) } })
+        put("opens", JSONArray(opens.toList()))
+        put("support", JSONObject().apply {
+            if (support.pressedAt > 0) put("pressedAt", support.pressedAt)
+            if (support.shownAt > 0) put("shownAt", support.shownAt)
+            if (support.anchor.isNotEmpty()) put("anchor", support.anchor)
+        })
         put("drills", JSONArray().apply { drills.forEach { put(JSONObject().put("at", it.at).put("g", it.generator).put("ok", it.ok)) } })
         put("mycards", JSONArray().apply {
             myCards.forEach { put(JSONObject().put("id", it.id).put("t", it.ecoTask ?: "").put("f", it.front).put("b", it.back).put("n", it.note)) }
@@ -485,6 +513,14 @@ class ProgressStore(private val dir: File) {
         diagnostics.clear(); chat.clear(); coachSnoozed.clear(); sessionResults.clear()
         sittings.clear(); checkIns.clear(); weekly.clear(); myCards.clear(); drills.clear()
         notepad = o.optString("notepad", "")
+        opens.clear()
+        o.optJSONArray("opens")?.let { arr ->
+            val dates = (0 until arr.length()).map { arr.optString(it) }.filter { DATE.matches(it) }
+            opens += dates.toSortedSet().toList().takeLast(Support.MAX_OPENS)
+        }
+        support = o.optJSONObject("support")?.let {
+            SupportState(it.optLong("pressedAt"), it.optLong("shownAt"), it.optString("anchor").takeIf { a -> DATE.matches(a) } ?: "")
+        } ?: SupportState()
         o.optJSONArray("mycards")?.let { arr ->
             for (i in 0 until arr.length()) {
                 val c = arr.optJSONObject(i) ?: continue
@@ -612,8 +648,9 @@ class ProgressStore(private val dir: File) {
         val KNOWN = setOf(
             "type", "version", "savedAt", "device", "attempts", "flags", "notes", "mistakes", "cards", "scenarios", "mocks",
             "lessons", "plan", "sessions", "notepad", "diagnostics", "chat", "snoozed", "sittings", "checkins", "weekly", "mycards",
-            "drills",
+            "drills", "opens", "support",
         )
+        private val DATE = Regex("\\d{4}-\\d{2}-\\d{2}")
 
         /**
          * Throws, with a message to show, unless [o] is progress this app can read: the shared
