@@ -1508,6 +1508,12 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .fx-reads::before {
   content: "\25B8"; color: var(--c-signal); flex: 0 0 auto; font-size: var(--t-xs);
 }
+/* L4: a formula's worked example, folded under the row. */
+.fx-ex { font-size: var(--t-xs); line-height: var(--lh-body); }
+.fx-ex > summary { cursor: pointer; font-weight: 700; color: var(--c-signal); }
+.fx-ex > p { margin: var(--sp-1) 0; }
+.fx-steps { margin: var(--sp-1) 0; padding-left: 1.4em; font-family: var(--font-mono, ui-monospace, monospace); overflow-wrap: anywhere; }
+.fx-means { color: var(--fg-muted); }
 
 /* ── 03.14.3  CALCULATORS ───────────────────────────────────────────────── */
 .fx-picker { display: grid; gap: var(--sp-2); grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: var(--sp-4); }
@@ -3012,6 +3018,7 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
   .fx-grp > h3 { font-size: 11pt; }
   .fx-row-t { font-size: 9pt; }
   .fx-where, .fx-reads { font-size: 7.5pt; }
+  .fx-ex { display: none; }
   @page { margin: 12mm; }
 }
 </style>
@@ -28802,7 +28809,8 @@ PMP.FormulaLab = (function () {
      on it, in 05.6's order, and 03.9 prints it two-up without the chrome. */
   function sheetRow(f, gid) {
     /* §09.5a: one row is one unit, and its own tag counts as defined. */
-    var ab = PMP.Abbr.unit([f.where, f.reads], { groups: PMP.Abbr.groups([gid]), known: [f.tag], where: "formula " + f.id });
+    var ex = f.example;
+    var ab = PMP.Abbr.unit([f.where, f.reads].concat(ex ? [ex.situation, ex.means] : []), { groups: PMP.Abbr.groups([gid]), known: [f.tag], where: "formula " + f.id });
     return el("div", { class: "fx-row" }, [
       el("div", { class: "fx-row-t" }, [
         el("span", { text: f.name }),
@@ -28810,7 +28818,14 @@ PMP.FormulaLab = (function () {
       ]),
       el("div", { class: "fx-expr", text: f.expr }),
       f.where ? el("p", { class: "fx-where", text: ab.x(f.where) }) : null,
-      f.reads ? el("p", { class: "fx-reads", text: ab.x(f.reads) }) : null
+      f.reads ? el("p", { class: "fx-reads", text: ab.x(f.reads) }) : null,
+      /* L4: the worked example, folded so the printed sheet stays one page of formulas. */
+      ex ? el("details", { class: "fx-ex" }, [
+        el("summary", { text: "Worked example" }),
+        el("p", { text: ab.x(ex.situation) }),
+        el("ol", { class: "fx-steps" }, (ex.steps || []).map(function (s) { return el("li", { text: s }); })),
+        ex.means ? el("p", { class: "fx-means", text: ab.x(ex.means) }) : null
+      ]) : null
     ]);
   }
 
