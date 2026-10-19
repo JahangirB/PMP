@@ -24,7 +24,7 @@ struct PMPPrepApp: App {
         .onChange(of: phase) { _, p in
             model.appVisible = p == .active
             if p == .active {
-                model.appOpened()
+                model.supportCheck()
                 model.openPending()
                 model.autoSync()
             }
