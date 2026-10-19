@@ -240,7 +240,38 @@ enum ContentParser {
             rules: rules(o.obj("rules")),
             syncScript: o.str("syncScript"),
             generatorPrompt: o.str("generatorPrompt"),
-            cases: cases(o.objects("cases")))
+            cases: cases(o.objects("cases")),
+            documents: documents(o.obj("documents")))
+    }
+
+    static func rows(_ list: Any?) -> [[String]] {
+        let outer: [Any] = list as? [Any] ?? []
+        return outer.map { r in
+            let cells: [Any] = r as? [Any] ?? []
+            return cells.map { c in c as? String ?? "" }
+        }
+    }
+
+    /** index.html PMP.DOCUMENTS: { project: { name, summary }, documents: [...] }. */
+    static func documents(_ o: JObj?) -> SampleDocuments {
+        guard let o = o else { return SampleDocuments(projectName: "", projectSummary: "", list: []) }
+        let p: JObj? = o.obj("project")
+        let list: [SampleDocument] = o.objects("documents").map { d in
+            let links: JObj = d.obj("links") ?? JObj([:])
+            let sections: [DocSection] = d.objects("sections").map { s in
+                DocSection(heading: s.str("heading"), rows: rows(s.d["rows"]))
+            }
+            var table: DocTable? = nil
+            if let t = d.obj("table") {
+                table = DocTable(cols: t.strings("cols"), rows: rows(t.d["rows"]))
+            }
+            return SampleDocument(id: d.str("id"), title: d.str("title"), kind: d.str("kind"),
+                                  purpose: d.str("purpose"), owner: d.str("owner"), whenText: d.str("when"),
+                                  agile: d.str("agile"), examTip: d.str("examTip"),
+                                  sections: sections, table: table,
+                                  lessons: links.strings("lessons"), processes: links.strings("processes"), terms: links.strings("terms"))
+        }
+        return SampleDocuments(projectName: p?.str("name") ?? "", projectSummary: p?.str("summary") ?? "", list: list)
     }
 
     /**

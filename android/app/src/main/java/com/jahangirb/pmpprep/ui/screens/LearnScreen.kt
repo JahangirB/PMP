@@ -118,6 +118,7 @@ fun LessonView(vm: PmpViewModel, l: Lesson, inSession: Boolean = false) {
                 Text(s.heading, fontSize = reading.size(18), fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(6.dp))
                 StemText(s.body, 15, 23)
+                s.figure?.let { Spacer(Modifier.height(10.dp)); LessonFigure(it) }
             }
         }
         if (l.lenses.isNotEmpty()) {
