@@ -28,8 +28,10 @@ module.exports = [
       for (var r of routes) {
         await lib.go(page, "#/" + r);
         var ok = await page.evaluate(function () {
+          /* Notes sits at the right, followed only by the Download menu (§10.28). */
           var b = document.getElementById("np-toggle").getBoundingClientRect();
-          return b.width > 0 && b.right > window.innerWidth - 120;
+          var d = document.getElementById("dl-menu").getBoundingClientRect();
+          return b.width > 0 && b.right <= d.left && d.right > window.innerWidth - 160;
         });
         assert.ok(ok, "toggle not visible at the right on #/" + r);
       }
