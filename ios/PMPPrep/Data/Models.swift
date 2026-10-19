@@ -146,7 +146,10 @@ struct Abbreviation: Hashable { let abbr: String; let full: String; let group: S
 struct FormulaItem: Identifiable, Hashable {
     let id: String; let name: String; let tag: String; let expr: String
     let `where`: String; let reads: String; let trap: String
+    var example: FormulaExample? = nil
 }
+/** A worked example under a formula: the situation, each step of working, and what it means. */
+struct FormulaExample: Hashable { let situation: String; let steps: [String]; let means: String }
 struct FormulaGroup: Identifiable, Hashable { let id: String; let label: String; let blurb: String; let items: [FormulaItem] }
 
 /* Learn: modules of lessons, each with sections, a worked example and checks. */

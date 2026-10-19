@@ -245,7 +245,8 @@ object ContentParser {
             },
             formulas = o.optJSONArray("formulas").objects().map { g ->
                 FormulaGroup(g.str("id"), g.str("label"), g.str("blurb"), g.optJSONArray("items").objects().map { f ->
-                    FormulaItem(f.str("id"), f.str("name"), f.str("tag"), f.str("expr"), f.str("where"), f.str("reads"), f.str("trap"))
+                    FormulaItem(f.str("id"), f.str("name"), f.str("tag"), f.str("expr"), f.str("where"), f.str("reads"), f.str("trap"),
+                        f.optJSONObject("example")?.let { e -> FormulaExample(e.str("situation"), e.optJSONArray("steps").strings(), e.str("means")) })
                 })
             },
             reference = reference(o.getJSONObject("reference")),

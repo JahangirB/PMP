@@ -198,6 +198,31 @@ private struct FormulaCard: View {
             if has(f.trap) {
                 Text("Trap: \(f.trap)").font(.nunito(13)).foregroundStyle(Palette.warning).lineSpacing(3).padding(.top, 6)
             }
+            if let e = f.example {
+                WorkedExampleView(e: e).padding(.top, 6)
+            }
+        }
+    }
+}
+
+/** A formula's worked example, folded until asked for (index.html §10.06.2). */
+private struct WorkedExampleView: View {
+    let e: FormulaExample
+    @State private var open: Bool = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Button(open ? "Hide the worked example" : "Worked example") { open.toggle() }
+                .font(.nunito(14, .bold))
+            if open {
+                Text(e.situation).font(.nunito(14)).lineSpacing(4)
+                ForEach(Array(e.steps.enumerated()), id: \.offset) { pair in
+                    Text(pair.element).font(.system(size: 13, design: .monospaced))
+                }
+                if !e.means.isEmpty {
+                    Text(e.means).font(.nunito(14)).foregroundStyle(Palette.onSurfaceVariant).lineSpacing(4).padding(.top, 2)
+                }
+            }
         }
     }
 }

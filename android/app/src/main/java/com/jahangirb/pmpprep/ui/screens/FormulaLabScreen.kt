@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -55,6 +56,7 @@ import com.jahangirb.pmpprep.data.DrillMark
 import com.jahangirb.pmpprep.data.DrillTally
 import com.jahangirb.pmpprep.data.DrillVerdict
 import com.jahangirb.pmpprep.data.FormulaDrills
+import com.jahangirb.pmpprep.data.FormulaExample
 import com.jahangirb.pmpprep.data.NetInput
 import com.jahangirb.pmpprep.data.NetResult
 import com.jahangirb.pmpprep.data.QType
@@ -229,10 +231,32 @@ private fun FormulaSheet(vm: PmpViewModel) {
                         Spacer(Modifier.height(6.dp))
                         Text("Trap: ${f.trap}", fontSize = 13.sp, color = ColorWarning, lineHeight = 18.sp)
                     }
+                    f.example?.let { WorkedExample(it) }
                 }
             }
         }
         Spacer(Modifier.height(16.dp))
+    }
+}
+
+/** A formula's worked example, folded until asked for (index.html §10.06.2). */
+@Composable
+private fun WorkedExample(e: FormulaExample) {
+    var open by rememberSaveable(e) { mutableStateOf(false) }
+    Spacer(Modifier.height(6.dp))
+    TextButton(onClick = { open = !open }, contentPadding = PaddingValues(0.dp)) {
+        Text(if (open) "Hide the worked example" else "Worked example", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+    }
+    if (open) {
+        Text(e.situation, fontSize = 14.sp, lineHeight = 20.sp)
+        e.steps.forEach { s ->
+            Spacer(Modifier.height(4.dp))
+            Text(s, fontFamily = FontFamily.Monospace, fontSize = 13.sp, lineHeight = 18.sp)
+        }
+        if (e.means.isNotBlank()) {
+            Spacer(Modifier.height(6.dp))
+            Text(e.means, fontSize = 14.sp, lineHeight = 20.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
     }
 }
 

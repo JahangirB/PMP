@@ -228,7 +228,8 @@ enum ContentParser {
             },
             formulas: o.objects("formulas").map { g in
                 FormulaGroup(id: g.str("id"), label: g.str("label"), blurb: g.str("blurb"), items: g.objects("items").map { f in
-                    FormulaItem(id: f.str("id"), name: f.str("name"), tag: f.str("tag"), expr: f.str("expr"), where: f.str("where"), reads: f.str("reads"), trap: f.str("trap"))
+                    FormulaItem(id: f.str("id"), name: f.str("name"), tag: f.str("tag"), expr: f.str("expr"), where: f.str("where"), reads: f.str("reads"), trap: f.str("trap"),
+                                example: ContentParser.formulaExample(f.obj("example")))
                 })
             },
             reference: reference(o.obj("reference") ?? JObj([:])),
@@ -246,6 +247,12 @@ enum ContentParser {
      * PMP.CASES. Each item is validated like a pack item and parsed with pack id "case:<id>"; an invalid
      * item is dropped, and a case left with no items is dropped. A missing or empty array gives no cases.
      */
+    static func formulaExample(_ e: JObj?) -> FormulaExample? {
+        guard let e = e else { return nil }
+        let steps: [String] = e.strings("steps")
+        return FormulaExample(situation: e.str("situation"), steps: steps, means: e.str("means"))
+    }
+
     static func cases(_ list: [JObj]) -> [CaseStudy] {
         var out: [CaseStudy] = []
         for c in list {

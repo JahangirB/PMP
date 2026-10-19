@@ -159,7 +159,11 @@ data class Abbreviation(val abbr: String, val full: String, val group: String, v
 data class FormulaItem(
     val id: String, val name: String, val tag: String, val expr: String,
     val where: String, val reads: String, val trap: String,
+    val example: FormulaExample? = null,
 )
+
+/** A worked example under a formula: the situation, each step of working, and what it means. */
+data class FormulaExample(val situation: String, val steps: List<String>, val means: String)
 
 data class FormulaGroup(val id: String, val label: String, val blurb: String, val items: List<FormulaItem>)
 
