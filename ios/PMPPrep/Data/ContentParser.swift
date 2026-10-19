@@ -180,7 +180,7 @@ enum ContentParser {
                 id: l.str("id"), module: l.str("module"), order: l.optInt("order"), ecoTask: l.str("ecoTask"),
                 minutes: l.optInt("minutes"), title: l.str("title"), objectives: l.strings("objectives"),
                 examWeight: l.str("examWeight"),
-                sections: l.objects("sections").map { LessonSection(heading: $0.str("heading"), body: $0.str("body")) },
+                sections: l.objects("sections").map { LessonSection(heading: $0.str("heading"), body: $0.str("body"), figure: ContentParser.figure($0.obj("figure"))) },
                 lenses: lensKeys.map { ($0, lensObj?.optString($0) ?? "") },
                 worked: worked, traps: l.strings("traps"), checks: checks,
                 terms: l.strings("terms"), recap: l.strings("recap"), mindset: l.str("mindset"))
@@ -241,7 +241,25 @@ enum ContentParser {
             syncScript: o.str("syncScript"),
             generatorPrompt: o.str("generatorPrompt"),
             cases: cases(o.objects("cases")),
-            documents: documents(o.obj("documents")))
+            documents: documents(o.obj("documents")),
+            areaTours: o.objects("areaTours").map { t in
+                AreaTour(area: t.str("area"), intro: t.str("intro"), lessons: t.strings("lessons"), figure: ContentParser.figure(t.obj("figure")))
+            },
+            courseOrder: o.strings("courseOrder"))
+    }
+
+    /** A lesson figure (index.html §10.31), or nil when the section has none. */
+    static func figure(_ o: JObj?) -> Figure? {
+        guard let o = o else { return nil }
+        let shapes: [FigShape] = o.objects("shapes").map { s in
+            var f = FigShape()
+            f.k = s.str("k"); f.x = s.optDouble("x"); f.y = s.optDouble("y"); f.w = s.optDouble("w"); f.h = s.optDouble("h")
+            f.t = s.str("t"); f.tone = s.strOrNil("tone") ?? "ink"; f.fill = s.optBool("fill", true)
+            f.p = s.doubles("p") ?? []; f.arrow = s.optBool("arrow"); f.dash = s.optBool("dash")
+            f.a = s.strOrNil("a") ?? "start"; f.s = s.optDouble("s", 13); f.b = s.optBool("b"); f.r = s.optDouble("r", 5)
+            return f
+        }
+        return Figure(title: o.str("title"), caption: o.str("caption"), alt: o.str("alt"), w: o.optDouble("w"), h: o.optDouble("h"), shapes: shapes)
     }
 
     static func rows(_ list: Any?) -> [[String]] {

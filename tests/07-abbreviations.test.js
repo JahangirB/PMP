@@ -84,7 +84,7 @@ module.exports = [
     }
   },
   {
-    name: "the tab renders, six tabs in the strip, callout lists the clashes",
+    name: "the tab renders, eight tabs in the strip, callout lists the clashes",
     fn: async function (h, lib) {
       var page = await h.open("fresh", { hash: "#/library?tab=abbr" });
       await lib.clean(page, "#/library?tab=abbr");
@@ -99,7 +99,7 @@ module.exports = [
           clash: Array.prototype.map.call(document.querySelectorAll(".lib-ab-clash li .lib-ab-k"), function (e) { return e.textContent; })
         };
       });
-      assert.deepStrictEqual(r.tabs, ["Process view", "Principles", "Agile", "Tables", "Glossary", "Abbreviations"]);
+      assert.deepStrictEqual(r.tabs, ["Process view", "Area tours", "Principles", "Agile", "Tables", "Documents", "Glossary", "Abbreviations"]);
       assert.strictEqual(r.selected, "Abbreviations");
       assert.strictEqual(r.head, "Abbreviations");
       assert.strictEqual(r.rows, await page.evaluate(function () { return PMP.ABBREVIATIONS.length; }));
@@ -249,8 +249,9 @@ module.exports = [
       var b = await h.open("fresh");
       var diff = [];
       /* Agile and Tables now spell abbreviations out on first use (§09.5a),
-         on purpose; 09-learning-abbr checks that text instead. */
-      for (var t of ["process", "principles", "glossary"]) {
+         on purpose; 09-learning-abbr checks that text instead. The glossary
+         gained the lecture-theory terms (L6), also on purpose. */
+      for (var t of ["process", "principles"]) {
         await lib.go(a, "#/library?tab=" + t);
         await lib.go(b, "#/library?tab=" + t);
         /* Content and structure, not pixels: the Sky Clay restyle changed

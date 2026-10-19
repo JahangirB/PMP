@@ -118,6 +118,8 @@ data class StudyPlan(
     val onboarded: Boolean = false,
     /** One missed day a week doesn't break the streak. */
     val restDays: Boolean = true,
+    /** New lessons in the classroom order (Extras.courseOrder) rather than weakest domain first; plan.order "course". */
+    val byArea: Boolean = false,
 )
 
 /** The cold 25-question level check the plan and the coach aim from. */
@@ -468,7 +470,8 @@ class ProgressStore(private val dir: File) {
         })
         put("lessons", JSONArray(lessonsDone.toList()))
         put("plan", JSONObject().put("examDate", plan.examDate ?: 0L).put("hours", plan.hoursPerWeek)
-            .put("days", JSONArray(plan.studyDays.toList())).put("onboarded", plan.onboarded).put("rest", plan.restDays))
+            .put("days", JSONArray(plan.studyDays.toList())).put("onboarded", plan.onboarded).put("rest", plan.restDays)
+            .apply { if (plan.byArea) put("order", "course") })
         put("sessions", JSONArray().apply {
             sessionResults.forEach { r ->
                 put(JSONObject().put("k", r.key).put("kind", r.kind.name).put("t", r.taskId ?: "").put("d", r.domain?.id ?: "")
@@ -631,7 +634,8 @@ class ProgressStore(private val dir: File) {
             val days = it.optJSONArray("days")?.let { a -> (0 until a.length()).map { i -> a.optInt(i) }.toSet() }
             // Older backups have no onboarded flag: a date plus a diagnostic means setup was done.
             plan = StudyPlan(if (date > 0) date else null, it.optInt("hours", 10), days?.ifEmpty { null } ?: StudyPlan().studyDays,
-                it.optBoolean("onboarded", date > 0 && diagnostics.isNotEmpty()), it.optBoolean("rest", true))
+                it.optBoolean("onboarded", date > 0 && diagnostics.isNotEmpty()), it.optBoolean("rest", true),
+                it.optString("order") == "course")
         }
     }
 

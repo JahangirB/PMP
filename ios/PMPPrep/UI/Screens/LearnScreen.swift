@@ -124,6 +124,7 @@ private struct LessonBody: View {
                         VStack(alignment: .leading, spacing: 6) {
                             Text(s.heading).font(.nunito(reading.size(18), .bold)).fixedSize(horizontal: false, vertical: true)
                             StemText(s.body, baseSize: 15)
+                            if let fig = s.figure { FigureView(fig: fig).padding(.top, 4) }
                         }
                     }
                     if !l.lenses.isEmpty {

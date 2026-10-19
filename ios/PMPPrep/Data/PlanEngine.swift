@@ -45,7 +45,7 @@ struct Session: Equatable {
 
 struct SessionResult: Equatable { var key: String; var kind: SessionKind; var taskId: String?; var domain: Domain?; var score: Double; var minutes: Int; var at: Millis }
 
-struct PlanSettings { let examDate: Millis; let hoursPerWeek: Int; let studyDays: Set<Int> }
+struct PlanSettings { let examDate: Millis; let hoursPerWeek: Int; let studyDays: Set<Int>; var byArea: Bool = false }
 
 struct Plan {
     let sessions: [Session]
@@ -344,7 +344,11 @@ enum PlanEngine {
         /* ── 5. order: urgent, foundations, weakest domains first, checkpoints closing each domain ── */
         let domainOrder = Domain.allCases.sorted { (domainAcc[$0] ?? 0.6) < (domainAcc[$1] ?? 0.6) }
         func di(_ dm: Domain?) -> Double { Double(dm.flatMap { domainOrder.firstIndex(of: $0) } ?? -1) }
+        /* By knowledge area, lessons' build sessions come in the classroom order, ahead of the drills and
+           checkpoints, as a course teaches every lecture before its practice stage. */
+        let course: [String] = inp.settings.byArea ? x.courseOrder : []
         func orderKey(_ s: Session) -> Double {
+            if s.kind == .BUILD, let lid = s.lessonId, let ci = course.firstIndex(of: lid) { return -400 + Double(ci) }
             switch s.kind {
             case .REENTRY, .REMEDIATION: return -1000 - s.priority
             case .FOUNDATION: return s.priority >= 800 ? -900 : -500 - s.priority

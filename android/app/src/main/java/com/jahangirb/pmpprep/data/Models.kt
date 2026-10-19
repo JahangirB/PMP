@@ -312,7 +312,12 @@ data class Extras(
     val cases: List<CaseStudy> = emptyList(),
     /** Sample documents, all filled in for one running project (index.html PMP.DOCUMENTS). */
     val documents: SampleDocuments = SampleDocuments("", "", emptyList()),
+    /** The knowledge-area tours and the classroom lesson order (index.html PMP.AREA_TOURS, PMP.COURSE_ORDER). */
+    val areaTours: List<AreaTour> = emptyList(),
+    val courseOrder: List<String> = emptyList(),
 )
+
+data class AreaTour(val area: String, val intro: String, val lessons: List<String>, val figure: Figure?)
 
 data class SampleDocuments(val projectName: String, val projectSummary: String, val list: List<SampleDocument>)
 

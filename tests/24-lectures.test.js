@@ -47,7 +47,7 @@ module.exports = [
     }
   },
   {
-    name: "content: F0 opens the path, the walk-throughs pair each step with a check, the confused pairs ship",
+    name: "content: F0 follows F1, the walk-throughs pair each step with a check, the confused pairs ship",
     fn: async function (h) {
       var page = await h.open("fresh");
       var r = await page.evaluate(function () {
@@ -60,7 +60,7 @@ module.exports = [
           return id + ":" + steps + "/" + checks;
         });
         return {
-          first: PMP.LESSONS.slice().sort(function (a, b) { return a.order - b.order; })[0].id,
+          first: PMP.LESSONS.slice().sort(function (a, b) { return a.order - b.order; }).slice(0, 2).map(function (l) { return l.id; }).join(),
           walks: walks,
           deck: PMP.FLASHCARDS.filter(function (c) { return c.deck === "confused"; }).length,
           tables: PMP.REFERENCE.tables.filter(function (t) { return /^t-confused-/.test(t.id); }).length,
@@ -69,7 +69,7 @@ module.exports = [
           }).length
         };
       });
-      assert.strictEqual(r.first, "F0");
+      assert.strictEqual(r.first, "F1,F0", "F0 follows the study-skills lesson");
       r.walks.forEach(function (w) {
         var m = /(\w+):(\d+)\/(\d+)/.exec(w);
         assert.ok(+m[2] >= 5 && m[2] === m[3], w);
@@ -77,6 +77,47 @@ module.exports = [
       assert.ok(r.deck >= 30, "confused deck");
       assert.strictEqual(r.tables, 3);
       assert.strictEqual(r.theory, 5);
+    }
+  },
+  {
+    name: "study order: by knowledge area, new lessons come in classroom order; the setting is saved in the shared plan",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var r = await page.evaluate(function () {
+        var P = PMP.Path, x = P.extras(), now = new Date(2027, 2, 1, 9).getTime();
+        function builds(order) {
+          var plan = P.build({ x: x, attempts: [], lessonsDone: [], results: [], mocks: [],
+            diagnostic: { people: 0.6, process: 0.5, business: 0.55 },
+            settings: { examDate: now + 90 * 86400000, hoursPerWeek: 10, studyDays: [1, 2, 3, 4, 5, 6, 7], order: order },
+            now: now, mistakeTags: {}, leeches: {}, ladderNext: null, readingSlow: false });
+          return plan.sessions.filter(function (s) { return s.kind === "BUILD"; }).map(function (s) { return s.lessonId; });
+        }
+        var course = builds("course"), domain = builds("domain");
+        var idx = course.map(function (id) { return x.courseOrder.indexOf(id); });
+        return { n: course.length, sorted: idx.every(function (v, i) { return i === 0 || v > idx[i - 1]; }), differs: course.join() !== domain.join() };
+      });
+      assert.ok(r.n >= 10 && r.sorted && r.differs, JSON.stringify(r));
+
+      await lib.go(page, "#/planner");
+      await page.selectOption("#pt-order", "course");
+      await page.fill("#pt-date", "2027-06-01");
+      await page.click("#pt-plan .filter-bar .btn");
+      var saved = await page.evaluate(function () { return [PMP.Store.state.shared.plan.order, PMP.Path.planOf(PMP.Store.state).order]; });
+      assert.deepStrictEqual(saved, ["course", "course"]);
+    }
+  },
+  {
+    name: "Area tours: ten areas, each with its flow figure and its processes in order",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      await lib.go(page, "#/library?tab=tours");
+      var r = await page.evaluate(function () {
+        var secs = document.querySelectorAll("#view [id^='tour-']");
+        return { n: secs.length, figs: document.querySelectorAll("#view [id^='tour-'] figure svg").length,
+                 procs: document.querySelectorAll("#view .lib-tour li").length,
+                 wide: document.documentElement.scrollWidth > document.documentElement.clientWidth };
+      });
+      assert.deepStrictEqual(r, { n: 10, figs: 10, procs: 49, wide: false });
     }
   }
 ];

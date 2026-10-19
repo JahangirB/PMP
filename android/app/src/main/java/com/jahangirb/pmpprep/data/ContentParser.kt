@@ -291,6 +291,10 @@ object ContentParser {
             generatorPrompt = o.str("generatorPrompt"),
             cases = cases(o.optJSONArray("cases")),
             documents = documents(o.optJSONObject("documents")),
+            areaTours = o.optJSONArray("areaTours").objects().map { t ->
+                AreaTour(t.str("area"), t.str("intro"), t.optJSONArray("lessons").strings(), figure(t.optJSONObject("figure")))
+            },
+            courseOrder = o.optJSONArray("courseOrder").strings(),
         )
     }
 
