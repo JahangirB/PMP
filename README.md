@@ -93,7 +93,7 @@ fixed calendar you fall behind on.
     booking, exam day and keeping the certificate);
   - 313 flashcards, including a deck of commonly confused pairs;
   - 52 formulas, each with a worked example;
-  - a reference library with 391 glossary terms, 123 abbreviations, 25
+  - a reference library with 391 glossary terms, 127 abbreviations, 25
     tables, 25 sample documents and a tour of each knowledge area.
 - **Lessons:** each has objectives, the concept, how it plays out in
   predictive, agile and hybrid projects, a worked example, common traps, quick

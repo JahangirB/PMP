@@ -119,5 +119,25 @@ module.exports = [
       });
       assert.deepStrictEqual(r, { n: 10, figs: 10, procs: 49, wide: false });
     }
+  },
+  {
+    name: "lesson figures: drawn in the section they illustrate, with an accessible name, no page scroll at 390px",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var n = await page.evaluate(function () {
+        return PMP.LESSONS.reduce(function (a, l) { return a + l.sections.filter(function (s) { return s.figure; }).length; }, 0);
+      });
+      assert.ok(n >= 40, n + " figures");
+      await page.setViewportSize({ width: 390, height: 800 });
+      await lib.go(page, "#/learn?lesson=P3");
+      var r = await page.evaluate(function () {
+        document.querySelectorAll("#view details.ln-sec").forEach(function (d) { d.open = true; });
+        var svgs = document.querySelectorAll("#view figure.ln-fig svg");
+        return { svgs: svgs.length, named: Array.prototype.every.call(svgs, function (s) { return (s.getAttribute("aria-label") || "").length > 20; }),
+                 shapes: svgs.length ? svgs[0].querySelectorAll("rect, polyline, text, circle").length : 0,
+                 wide: document.documentElement.scrollWidth > document.documentElement.clientWidth };
+      });
+      assert.ok(r.svgs >= 5 && r.named && r.shapes > 3 && !r.wide, JSON.stringify(r));
+    }
   }
 ];
