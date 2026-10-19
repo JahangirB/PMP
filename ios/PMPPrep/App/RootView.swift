@@ -3,6 +3,15 @@ import SwiftUI
 /** The frame around every screen: the backdrop, the top bar, and the coach bubble. */
 struct RootView: View {
     @EnvironmentObject private var m: AppModel
+    @Environment(\.openURL) private var openURL
+
+    /** The support reminder (docs/progress-format.md §4) is up. */
+    private var supportShowing: Binding<Bool> {
+        Binding<Bool>(
+            get: { m.supportAsk != .nothing },
+            set: { (on: Bool) in if !on { m.dismissSupportAsk() } }
+        )
+    }
 
     var body: some View {
         ZStack {
@@ -21,6 +30,15 @@ struct RootView: View {
         .foregroundStyle(Palette.onSurface)
         .tint(Palette.primary)
         .font(.nunito(15))
+        .alert(Support.title, isPresented: supportShowing) {
+            Button("Not now", role: .cancel) { m.dismissSupportAsk() }
+            Button("Support the app") {
+                if let url: URL = URL(string: Support.url) { openURL(url) }
+                m.supportPressed()
+            }
+        } message: {
+            Text(m.supportAsk == .first ? Support.firstBody : Support.alreadyBody)
+        }
     }
 }
 

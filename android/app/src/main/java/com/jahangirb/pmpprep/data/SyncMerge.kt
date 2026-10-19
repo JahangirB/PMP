@@ -38,10 +38,10 @@ object SyncMerge {
     )
 
     /** Sets of ids: an element stays only if neither side removed it. */
-    private val SETS = listOf("flags", "lessons")
+    private val SETS = listOf("flags", "lessons", "opens")
 
     /** Maps merged key by key. [MY_CARDS] is a list keyed by id and is handled as a map too. */
-    private val MAPS = listOf("notes", "mistakes", "cards", "snoozed")
+    private val MAPS = listOf("notes", "mistakes", "cards", "snoozed", "support")
     private const val MY_CARDS = "mycards"
 
     /** App-only blocks: merged key by key, never read. Written only when one of the documents has them. */
@@ -76,6 +76,8 @@ object SyncMerge {
                 // The card studied last has the true schedule; the mistake tagged last is the current tag.
                 "cards" -> { l, r -> higher(l, r, later) { (it as? JSONArray)?.optLong(5) } }
                 "mistakes" -> { l, r -> higher(l, r, later) { (it as? JSONObject)?.optLong("at") } }
+                // Support times and the anchor date only move forward (§4).
+                "support" -> { l, r -> larger(l, r) }
                 else -> later
             }
             out.put(key, mergeMap(b.optJSONObject(key), local.optJSONObject(key), remote.optJSONObject(key), both))
@@ -177,6 +179,14 @@ object SyncMerge {
             r > l -> remote
             else -> tie(local, remote)
         }
+    }
+
+    /** The higher of two values: numbers by value, anything else (the anchor date) as text; an absent side loses. */
+    private fun larger(local: Any?, remote: Any?): Any? = when {
+        local == null -> remote
+        remote == null -> local
+        local is Number && remote is Number -> if (local.toDouble() >= remote.toDouble()) local else remote
+        else -> if (local.toString() >= remote.toString()) local else remote
     }
 
     /* ── helpers ─────────────────────────────────────────────────────────── */

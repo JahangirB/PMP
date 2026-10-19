@@ -90,3 +90,7 @@ val BusinessAccent: Color @Composable @ReadOnlyComposable get() = pick(LocalDark
 val OnStatus: Color @Composable @ReadOnlyComposable get() = pick(LocalDarkTheme.current, 0xFFFFFFFF, 0xFF0A1F29)
 
 val PmpGoldTertiary: Color @Composable @ReadOnlyComposable get() = pick(LocalDarkTheme.current, 0xFFA04A08, 0xFFFBBF24)
+
+/** The support button's warm pill: amber tint, warm dark text; its border is [ColorWarning]. */
+val SupportTint: Color @Composable @ReadOnlyComposable get() = pick(LocalDarkTheme.current, 0xFFFBE8D6, 0xFF3A2C0E)
+val SupportInk: Color @Composable @ReadOnlyComposable get() = pick(LocalDarkTheme.current, 0xFF6E3205, 0xFFFCD58A)

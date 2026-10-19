@@ -109,6 +109,7 @@ final class AppModel: ObservableObject {
             ready = true
             scheduleDerived()
             checkModels()
+            appOpened()
             autoSync()
         } catch {
             loadError = error.localizedDescription
@@ -1286,6 +1287,38 @@ final class AppModel: ObservableObject {
 
     /** Opening, returning to the app, and the end of a session, practice set, mock or card session. */
     func autoSync() { runSync(manual: false) }
+
+    /* ── support reminder (docs/progress-format.md §4) ── */
+
+    /** The support message on screen, or .nothing. */
+    @Published private(set) var supportAsk: SupportDue = .nothing
+
+    /** On start and on coming to the front: note today's date, then show the support message if it's due. */
+    func appOpened() {
+        guard ready else { return }
+        let now: Millis = Time.now()
+        let today: String = Support.day(now)
+        store.recordOpen(today)
+        if supportAsk != .nothing { return }
+        let inSession: Bool = screen == .SESSION
+        let busy: Bool = mock != nil || inSession
+        let opens: [String] = store.opens
+        let state: SupportState = store.support
+        let due: SupportDue = Support.due(opens, state, today: today, now: now, busy: busy)
+        if due == .nothing { return }
+        let shown: SupportState = Support.markShown(state, now: now, today: today)
+        store.setSupport(shown)
+        supportAsk = due
+    }
+
+    func dismissSupportAsk() { supportAsk = .nothing }
+
+    /** The support button, in the message or the menu: the app can't see payments, so pressing is all it knows. */
+    func supportPressed() {
+        supportAsk = .nothing
+        let pressed: SupportState = Support.markPressed(store.support, now: Time.now())
+        store.setSupport(pressed)
+    }
 
     /** Going to the background: asks iOS for a little time so the sync can finish. */
     func syncOnBackground() {
