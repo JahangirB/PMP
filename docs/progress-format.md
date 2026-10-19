@@ -110,8 +110,11 @@ Rules every app follows:
   - `settings.examDate` becomes `plan.examDate`; `settings.restDays` becomes `plan.rest` (written only
     when it differs from the plan; absent means true).
   - `sittings`, `checkins`, `weekly` and `sessions` are web slices in exactly the shared row shape and are
-    copied both ways unchanged (the web writes practice and mock sittings, check-ins and weekly reports;
-    sessions only come from the phones). Reading comfort (text size, line spacing, guide) is device-only.
+    copied both ways unchanged (the web writes practice, mock and path sittings, check-ins, weekly reports
+    and guided sessions; a session's `k` is the plan engine's key, e.g. `build:people-3`, `lesson:F1`,
+    `mixed:<local midnight ms>`, `short:` + key, the same on every app). The web's hours and days for the
+    path are `plan.hours` and `plan.days`; with no plan yet they are derived from its calendar planner's
+    minutes. A missed question back for review is `src: "review"` (counted against five a day). Reading comfort (text size, line spacing, guide) is device-only.
   - The rich notes page is converted to `notepad` markup (colours are lost); the HTML stays in `web.notepadHtml`.
     When the shared `notepad` has changed and `notepadHtml` hasn't, the web rebuilds its HTML from the markup.
 - **The Gemini key, its model line-up and device-only settings never go in the document.**

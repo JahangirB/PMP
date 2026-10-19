@@ -63,6 +63,8 @@ import com.jahangirb.pmpprep.ui.components.PmpCard
 import com.jahangirb.pmpprep.ui.components.ProgressRow
 import com.jahangirb.pmpprep.ui.components.QuestionBody
 import com.jahangirb.pmpprep.ui.components.QuestionHeader
+import com.jahangirb.pmpprep.ui.components.CasePanel
+import com.jahangirb.pmpprep.ui.components.casePosition
 import com.jahangirb.pmpprep.ui.components.SectionLabel
 import com.jahangirb.pmpprep.ui.components.Selector
 import com.jahangirb.pmpprep.ui.components.domainColor
@@ -109,6 +111,7 @@ private fun PracticeSetup(vm: PmpViewModel) {
             if (queued > 0) Button(onClick = { vm.startQueue() }) { Text("From your last mock ($queued)") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(count = 20, adaptive = true), "Adaptive drill") }) { Text("Adaptive 20") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(count = 10), "Mixed practice") }) { Text("10 mixed") }
+            if (vm.repo.extras.cases.isNotEmpty()) OutlinedButton(onClick = { vm.startCase() }) { Text("Case studies") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(which = PracticeFilter.Which.NEW, count = 20), "New questions") }) { Text("20 new") }
             OutlinedButton(onClick = { vm.startPractice(PracticeFilter(which = PracticeFilter.Which.MISSED, count = 40), "Mistakes") },
                 enabled = missed > 0) { Text("Redo $missed mistakes") }
@@ -237,6 +240,7 @@ fun QuizRunner(vm: PmpViewModel, s: QuizSession, onFinish: () -> Unit) {
                 Text("Pretest item · not scored", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.tertiary)
                 Spacer(Modifier.height(6.dp))
             }
+            vm.repo.caseFor(q.id)?.let { c -> CasePanel(c, casePosition(c, q.id)) }
             QuestionHeader(q, task?.let { "${it.code} · ${it.label}" }, s.marks[q.id], if (s.reviewOnly) null else { m -> s.marks[q.id] = m })
             if (!s.optionsShown && !revealed) {
                 // Reading drill: the scenario alone first.

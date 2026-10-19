@@ -55,6 +55,13 @@ private struct MockIntro: View {
         }
     }
 
+    /** One line on the case-study block, or on its absence while index.html ships no cases. */
+    private var caseLine: String {
+        let extras: Extras = m.repo.extras
+        if extras.cases.isEmpty { return "No case studies are loaded yet, so a sitting is all standalone questions." }
+        return "It opens with a case-study block of about \(extras.exam.caseBlockItems) questions drawn from whole cases, each shown with its case. Shorter sittings scale the block."
+    }
+
     private var intro: some View {
         let x = m.repo.extras.exam
         let pool = m.pool().count
@@ -67,6 +74,7 @@ private struct MockIntro: View {
                 SectionLabel("Full exam layout")
                 BulletList(items: [
                     "\(x.totalItems) questions in \(x.minutes) minutes: about \(x.paceTargetSec) seconds each.",
+                    caseLine,
                     "Three sections. After questions \(x.breakAfter.map(String.init).joined(separator: " and ")) you may take a \(x.breakMinutes)-minute break; the clock stops.",
                     "Once a section is closed you cannot go back to it, as in the real exam.",
                     "Mark questions to revisit, and jump around the current section from the question grid.",
@@ -192,6 +200,9 @@ private struct ExamRunner: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         Color.clear.frame(height: 0).id("top")
+                        if let study = m.repo.caseFor(q.id) {
+                            CasePanel(study: study, position: CasePlan.position(study, qid: q.id)).id(study.id)
+                        }
                         QuestionHeader(q: q, taskLabel: m.repo.task(q.ecoTask).map { "\($0.code) · \($0.label)" },
                                        highlights: s.marks[q.id], onHighlights: { w in m.mockMarks(q, w) })
                         QuestionBody(q: q, options: s.order[q.id] ?? q.options, answer: s.answers[q.id], revealed: false,
