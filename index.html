@@ -40399,7 +40399,7 @@ PMP.Sync = (function () {
   }
   function lastSynced() { return Number(store.get(K.last)) || 0; }
 
-  /* The algorithm in docs §4: get, merge, put if the merge says anything
+  /* The algorithm in docs §5: get, merge, put if the merge says anything
      the file does not, and on a conflict merge again with what the file
      now holds, at most three more times. */
   function run(reason, opts) {
@@ -40495,7 +40495,7 @@ PMP.Sync = (function () {
   function forgetBase() { store.remove(K.base); }
 
   /* ── 10.18.9  THE PAGE ───────────────────────────────────────────────────
-     Off until set up. Setting up is the guide in docs §4, step for step;
+     Off until set up. Setting up is the guide in docs §5, step for step;
      once connected, the page is the status, Sync now and Disconnect. */
   var setupMode = "new";
   var statusNode = null;

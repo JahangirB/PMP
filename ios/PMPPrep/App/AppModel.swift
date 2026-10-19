@@ -1179,7 +1179,7 @@ final class AppModel: ObservableObject {
         finishedMock = nil
     }
 
-    /* ── cloud sync through the person's own Google Apps Script (docs/progress-format.md §4) ── */
+    /* ── cloud sync through the person's own Google Apps Script (docs/progress-format.md §5) ── */
 
     /** The script's /exec URL and the sync code, from the Keychain. Both empty: sync is off. */
     @Published private(set) var syncURL: String

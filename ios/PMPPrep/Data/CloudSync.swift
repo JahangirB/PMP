@@ -13,7 +13,7 @@ struct SyncError: LocalizedError {
 }
 
 /**
- * POSTs to the Apps Script web app (docs/progress-format.md §4). The body is JSON sent as
+ * POSTs to the Apps Script web app (docs/progress-format.md §5). The body is JSON sent as
  * text/plain. Google answers with a 302 to a one-time URL that has to be fetched with GET;
  * URLSession turns a redirected POST into a GET for 302 anyway, and the redirect hook below
  * makes sure of it, with no body.
