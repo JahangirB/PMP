@@ -64,6 +64,8 @@ const extras = plain({
   cases: P.CASES || [],
   // The Google Apps Script the Cloud sync screen shows (docs/progress-format.md §4).
   syncScript: fs.readFileSync(path.join(root, 'sync', 'pmp-sync.gs'), 'utf8'),
+  // The Make more questions prompt: the text block of docs/question-generator-prompt.md.
+  generatorPrompt: /```text\n([\s\S]*?)```/.exec(fs.readFileSync(path.join(root, 'docs', 'question-generator-prompt.md'), 'utf8'))[1],
 });
 
 fs.rmSync(out, { recursive: true, force: true });

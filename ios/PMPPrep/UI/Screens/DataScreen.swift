@@ -24,6 +24,7 @@ struct DataScreen: View {
     @State private var restoring = false
     @State private var exporting = false
     @State private var backup: BackupDocument? = nil
+    @State private var promptCopied = false
 
     var body: some View {
         let pool = m.pool()
@@ -52,7 +53,10 @@ struct DataScreen: View {
             }
             SectionLabel("Content audit")
             auditCard(pool)
-            backupSection
+            VStack(alignment: .leading, spacing: 16) {
+                moreQuestionsSection
+                backupSection
+            }
             dangerZone
             Text("PMP, PMBOK and PMI are registered marks of the Project Management Institute, Inc. This is an independent study aid, not endorsed by or affiliated with PMI.")
                 .font(.nunito(11)).foregroundStyle(Palette.onSurfaceVariant).padding(.top, 8).fixedSize(horizontal: false, vertical: true)
@@ -115,6 +119,39 @@ struct DataScreen: View {
             Text(thin.isEmpty ? "Every ECO task has at least 10 questions." : "Under 10 questions: " + thin.map(\.code).joined(separator: ", "))
                 .font(.nunito(12)).foregroundStyle(thin.isEmpty ? Palette.onSurfaceVariant : Palette.warning)
                 .padding(.top, 6).fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    /// Make more questions: the website holds the file links (a ledger per topic); the prompt copies from here.
+    private var moreQuestionsSection: some View {
+        let prompt: String = m.repo.extras.generatorPrompt
+        let steps: [String] = [
+            "1. Get the files: the prompt, AUTHORING.md and the ledger for your topic. The ledger lists every question the app already has, so Claude does not repeat them.",
+            "2. In a new chat at claude.ai, choose Opus 5.5, attach AUTHORING.md and the ledger, and paste the prompt.",
+            "3. Claude asks what the set is for (more on one topic, a mock-style mixed set, or a weak area you describe), how many (up to 20 a file) and any preferences, then gives you one .json file.",
+            "4. Add it above with Add question bank (.json). The app checks every question first and lists any problem."
+        ]
+        return VStack(alignment: .leading, spacing: 12) {
+            SectionLabel("Make more questions")
+            PmpCard {
+                Text("Need more questions? Write them with Claude").font(.nunito(15, .bold))
+                Text("If a topic runs short, Claude (Opus 5.5 works well) can write a new set to the same rules the app's questions follow.")
+                    .font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
+                ForEach(steps, id: \.self) { (line: String) in
+                    Text(line).font(.nunito(13)).fixedSize(horizontal: false, vertical: true)
+                }
+                Button {
+                    UIPasteboard.general.string = prompt
+                    promptCopied = true
+                } label: { Text(promptCopied ? "Prompt copied" : "Copy prompt").frame(maxWidth: .infinity) }
+                    .primaryButton()
+                Link(destination: URL(string: "https://pmp-sandy.vercel.app/#/data")!) {
+                    Text("Get the files (opens the website)").frame(maxWidth: .infinity)
+                }
+                    .outlinedButton()
+                Text("All questions, lessons and case studies were written with AI (Claude) and checked by scripts, not reviewed against PMI's materials. Some may resemble each other or published questions, and a few may be debatable or wrong. Treat the app as practice alongside official PMI resources, and report any question you think is wrong.")
+                    .font(.nunito(12)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 
