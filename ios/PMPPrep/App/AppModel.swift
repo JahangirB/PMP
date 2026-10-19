@@ -109,7 +109,7 @@ final class AppModel: ObservableObject {
             ready = true
             scheduleDerived()
             checkModels()
-            appOpened()
+            supportCheck()
             autoSync()
         } catch {
             loadError = error.localizedDescription
@@ -1294,7 +1294,7 @@ final class AppModel: ObservableObject {
     @Published private(set) var supportAsk: SupportDue = .nothing
 
     /** On start and on coming to the front: note today's date, then show the support message if it's due. */
-    func appOpened() {
+    func supportCheck() {
         guard ready else { return }
         let now: Millis = Time.now()
         let today: String = Support.day(now)
