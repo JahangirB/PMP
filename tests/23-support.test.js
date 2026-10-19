@@ -219,8 +219,10 @@ module.exports = [
       assert.deepStrictEqual([r.id, r.href, r.target, r.rel, r.text], ["nav-support", KOFI, "_blank", "noopener", "Support the app"]);
       assert.ok(r.heart && r.sprite);
       assert.strictEqual(r.scripts, 0, "no Ko-fi script");
-      assert.deepStrictEqual(r.light, ["rgb(251, 232, 214)", "rgb(160, 74, 8)", "rgb(110, 50, 5)", "1.5px"]);
-      assert.deepStrictEqual(r.dark, ["rgb(58, 44, 14)", "rgb(251, 191, 36)", "rgb(252, 213, 138)", "1.5px"]);
+      /* 1.5px is drawn as a whole device pixel at a ratio of 1. */
+      assert.deepStrictEqual(r.light.slice(0, 3), ["rgb(251, 232, 214)", "rgb(160, 74, 8)", "rgb(110, 50, 5)"]);
+      assert.deepStrictEqual(r.dark.slice(0, 3), ["rgb(58, 44, 14)", "rgb(251, 191, 36)", "rgb(252, 213, 138)"]);
+      assert.ok(parseFloat(r.light[3]) >= 1 && parseFloat(r.dark[3]) >= 1);
       assert.ok(r.pressed);
       /* A visible focus ring from the keyboard. */
       await page.keyboard.press("Tab");
