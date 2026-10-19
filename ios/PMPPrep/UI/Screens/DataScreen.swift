@@ -121,7 +121,7 @@ struct DataScreen: View {
     private var backupSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             SectionLabel("Backup")
-            Text("Answers, flags, notes, mistakes, flashcard schedule, mock results and your plan stay on this phone. Save a backup to keep them or move them to another phone. The backup file works with the Android and web apps too, both ways.")
+            Text("Answers, flags, notes, mistakes, flashcard schedule, mock results and your plan stay on this phone unless you turn on cloud sync. Chatting with the Gemini coach sends Google a summary of your progress with each message (see the coach for what it holds). Save a backup to keep them or move them to another phone. The backup file works with the Android and web apps too, both ways.")
                 .font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
             PmpCard(onTap: { m.navigate(.SYNC) }) {
                 Label("Cloud sync", systemImage: "arrow.triangle.2.circlepath").font(.nunito(15, .bold))
