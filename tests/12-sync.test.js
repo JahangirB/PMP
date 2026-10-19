@@ -38,9 +38,9 @@ function normalise(doc) {
       return (at(a) - at(b)) || (LOG_ID[k](a) < LOG_ID[k](b) ? -1 : LOG_ID[k](a) > LOG_ID[k](b) ? 1 : 0);
     });
   });
-  ["flags", "lessons"].forEach(function (k) { d[k] = (d[k] || []).slice().sort(); });
+  ["flags", "lessons", "opens"].forEach(function (k) { d[k] = (d[k] || []).slice().sort(); });
   d.mycards = (d.mycards || []).slice().sort(function (a, b) { return a.id < b.id ? -1 : 1; });
-  ["notes", "mistakes", "cards", "snoozed", "web", "native"].forEach(function (k) { d[k] = d[k] || {}; });
+  ["notes", "mistakes", "cards", "snoozed", "support", "web", "native"].forEach(function (k) { d[k] = d[k] || {}; });
   if (d.notepad === undefined) d.notepad = "";
   return d;
 }

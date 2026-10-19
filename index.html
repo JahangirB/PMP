@@ -757,7 +757,7 @@ svg { display: block; }
 .rail-foot { flex: 0 0 auto; padding: var(--sp-3); border-top: var(--border); display: flex; gap: var(--sp-2); }
 .rail-foot .btn { flex: 1 1 0; min-width: 0; }
 /* The collapse toggle (M2) exists only where the rail is permanent. */
-.rail-toggle { display: none; }
+.icon-btn.rail-toggle { display: none; }
 
 .scrim {
   position: fixed; inset: 0; z-index: 35;
@@ -2917,7 +2917,7 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
   }
   .scrim { display: none; }
   .nav-toggle { display: none; }
-  .rail-toggle { display: grid; }
+  .icon-btn.rail-toggle { display: grid; }
   /* Collapsed (§12.2, remembered per device by §01.6): an icon column. The
      labels stay in the DOM, clipped like .sr-only, so they remain each
      link's accessible name; §12.2 copies them into title for a tooltip. */
@@ -2926,8 +2926,8 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
   :root[data-rail="collapsed"] .rail .brand-txt,
   :root[data-rail="collapsed"] .rail .nav-grp > .eyebrow,
   :root[data-rail="collapsed"] .rail .nav-k {
-    position: absolute; width: 1px; height: 1px; overflow: hidden;
-    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
   }
   :root[data-rail="collapsed"] .brand { justify-content: center; padding-left: 0; padding-right: 0; }
   :root[data-rail="collapsed"] .nav { padding-left: var(--sp-1); padding-right: var(--sp-1); overflow-x: hidden; }
@@ -33086,7 +33086,7 @@ PMP.Data = (function () {
       el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Your answers, scores, notes and settings live on this device, in this browser's storage, and travel in a backup file you control. The app has no account, no analytics, no tracking and no ads. What goes over the network depends on how you opened it:" }),
-      el("p", { text: "A copy you downloaded and opened from your own disk makes no network requests at all." }),
+      el("p", { text: "A copy you downloaded and opened from your own disk makes no network requests at all; the Support the app button opens ko-fi.com in a new tab only when you press it." }),
       el("p", { text: "The website (for example pmp-sandy.vercel.app) is downloaded from its host each time you open it, together with the extended question packs. Once installed as an app it also works offline. The host sees what any website sees, such as your IP address, browser and the time of each request, but the app sends it nothing about you or your progress." }),
       el("p", { text: "Gemini is optional and off until you add your own Google AI Studio API key. Each message you send then goes from this page to Google with your key, and carries three things: the tutor instructions, your last 30 chat messages, and a summary of your study progress. The summary holds your readiness and exam-fitness scores, accuracy by domain and ECO task, mock results, mistake causes, pace, flashcard and lesson counts, your exam date and planned study hours, and, if you answered the weekly check, your exam-worry score. It does not include your notes. Explain it back sends the topic and your explanation. Ask about this question puts the question and your answer in the message box for you to read and edit first. Nothing is sent until you press Send. The key stays on this device and is never in your backup file. Google's terms for the Gemini API apply to what you send; on the free tier Google says it may use it to improve its products." }),
       el("p", null, ["Cloud sync is optional and off until you set it up. It then copies your whole progress file, including your notes and Gemini chat history but never the key, to one file in your own Google Drive, through a script you deploy in your own Google account, so your other devices can share it. Anyone with your script URL and sync code can read that file, so keep them private. ",

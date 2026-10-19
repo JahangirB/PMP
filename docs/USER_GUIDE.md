@@ -219,7 +219,8 @@ Off until you add your own free Google AI Studio API key
 - **Where your data lives:** your answers, scores, notes and settings live on
   your device. There is no account, no analytics, no tracking and no ads.
 - **What goes over the network** depends on how you use the app:
-  - **Downloaded file:** no network requests at all.
+  - **Downloaded file:** no network requests at all; the **Support the app**
+    button opens ko-fi.com only when you press it.
   - **Website:** your browser downloads the app and the question packs from
     the host (Vercel). The host sees what any website sees, such as your IP
     address, browser and the time of each request. The app sends it nothing
@@ -300,6 +301,17 @@ questions** card in **Backup and packs** (web) or **Question banks and backup**
 Questions you make this way carry the same caveat as the rest of the bank:
 they are written by AI and checked by Claude and the app's rules, not by an
 expert.
+
+## Supporting the app
+
+The app is free and has no ads. **Support the app**, the amber button at the
+top of the side menu, opens the developer's Ko-fi page (ko-fi.com) in a new
+tab. Once you have opened the app on 7 days in a row, it asks once whether
+you'd like to support it; after that the count starts again. Pressing Support
+keeps it quiet for 30 days. The app can't see whether you paid, only that you
+pressed the button. The days you opened it and when you pressed Support are
+part of your progress, so with cloud sync the count is the same on every
+device.
 
 ## Known limits
 
