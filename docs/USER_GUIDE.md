@@ -9,6 +9,8 @@ It is a personal, non-commercial project and is not affiliated with or
 endorsed by PMI. "PMP" and "PMI" are trademarks of the Project Management
 Institute.
 
+> **About the content.** All questions, lessons and case studies were written with AI (Claude) and checked by scripts, not reviewed against PMI's materials. Some may resemble each other or published questions, and a few may be debatable or wrong. Treat the app as practice alongside official PMI resources, and report any question you think is wrong.
+
 ## Ways to use it
 
 | | What you get | Needs internet |
@@ -231,7 +233,7 @@ Off until you add your own free Google AI Studio API key
 ## Backups and cloud sync
 
 - **Backups:** save a backup file from **Backup and packs** (web) or
-  **Question Banks & Backup** (phones). The same file restores in the web app,
+  **Question banks and backup** (phones). The same file restores in the web app,
   on Android and on iPhone.
 - **Cloud sync:** keeps all your devices in step through one file in **your
   own Google Drive**. It runs through a small Google Apps Script that you
@@ -261,13 +263,43 @@ Off until you add your own free Google AI Studio API key
     kept. For a flashcard, the most recent review wins; for notes and plans,
     the most recent change wins.
 
-## Your own questions
+## Making more questions
 
-- **Adding a bank:** add your own question banks (JSON files) under
-  **Backup and packs** or **Question Banks & Backup**. They stay on that
-  device.
-- **How the format works:** `AUTHORING.md` in the repository describes the
-  question format.
+If the built-in banks run short on a topic, Claude (Opus 5.5 works well) can
+write a new set to the same rules the app's questions follow. The **Make more
+questions** card in **Backup and packs** (web) or **Question banks and backup**
+(phones) has the files, the prompt and these steps.
+
+1. **Get three files.**
+   - The prompt: `docs/question-generator-prompt.md`.
+   - `AUTHORING.md`: the question format and rules.
+   - The ledger for your topic, for example `ledger/process-6.md`, or a whole
+     domain such as `ledger/people.md` for a mixed set. The ledger lists every
+     question the app already has, so Claude doesn't repeat them.
+2. **Start a chat.** Open a new chat at [claude.ai](https://claude.ai), choose
+   Opus 5.5, attach `AUTHORING.md` and the ledger file, and paste the prompt.
+3. **Answer Claude's questions.** It asks what the set is for:
+   - more questions on one topic;
+   - a mock-style set mixed across People / Process / Business in exam
+     proportion;
+   - a drill on a weak area you describe in your own words.
+
+   It also asks how many (up to 20 a file) and about any preferences, such as
+   difficulty, approach or question types. It shows a plan and waits for your
+   go.
+4. **Get the file.** It writes the questions, checks them against the rules,
+   and gives you one `.json` file with a short report.
+5. **Import it.**
+   - **Web:** **Backup and packs → Add a question pack**.
+   - **Phones:** **Question banks and backup → Add question bank (.json)**.
+
+   The app checks every question before adding it and lists any problem;
+   paste a problem back to Claude and it fixes the file. The questions stay on
+   that device, so import the same file on each device you use.
+
+Questions you make this way carry the same caveat as the rest of the bank:
+they are written by AI and checked by Claude and the app's rules, not by an
+expert.
 
 ## Known limits
 

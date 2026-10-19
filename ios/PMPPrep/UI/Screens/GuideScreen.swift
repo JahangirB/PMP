@@ -119,6 +119,23 @@ struct GuideScreen: View {
                 Button("Set up cloud sync") { m.navigate(.SYNC) }.textButton()
             }
             }
+            SwiftUI.Group {
+            GuideSection(title: "Making more questions") {
+                GuideBullets(lines: [
+                    "If a topic runs short, Claude (Opus 5.5 works well) can write a new set to the same rules the app's questions follow.",
+                    "You give it three files: the prompt, AUTHORING.md (the question rules) and the ledger for your topic, which lists every question the app already has so none repeat.",
+                    "It asks what the set is for (more on one topic, a mock-style mixed set, or a weak area you describe), how many (up to 20 a file) and your preferences, shows a plan, then gives you one .json file.",
+                    "You add the file in Question banks and backup. The app checks every question before adding it, and the questions stay on this phone.",
+                ])
+                Button("Make more questions") { m.navigate(.DATA) }.textButton()
+            }
+            GuideSection(title: "About the content") {
+                GuideBullets(lines: [
+                    "All questions, lessons and case studies were written with AI (Claude) and checked by scripts, not reviewed against PMI's materials. Some may resemble each other or published questions, and a few may be debatable or wrong. Treat the app as practice alongside official PMI resources, and report any question you think is wrong.",
+                    "PMP, PMBOK and PMI are registered marks of the Project Management Institute, Inc. This is an independent study aid, not endorsed by or affiliated with PMI.",
+                ])
+            }
+            }
             Spacer().frame(height: 24)
         }
     }

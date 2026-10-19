@@ -435,7 +435,7 @@ item turns on, stated so it outlives the particular scenario.
 **6. No item may duplicate the situation of another.** This is the rule the app
 cannot enforce. Duplicate detection keys on the normalised stem, so it catches
 copy-and-paste and nothing else: two items can share a scenario, a lesson and a
-correct answer in different words and both pass. **Read `ledger.md` for your task
+correct answer in different words and both pass. **Read your task's ledger slice, `ledger/<task>.md`,
 before writing.** At 14 items per task the obvious scenario is long gone — in the
 core pack, 38 of 50 drafted items in one batch were rewritten because they
 restated something already there. Assume the obvious situation is taken and go
@@ -568,7 +568,7 @@ Per item:
 - [ ] Explanation gives the transferable rule, not a restatement of the answer (≥ 80 chars)
 - [ ] `mindset` written
 - [ ] Type-specific shape complete — options / prompts+match / regions+viewBox / blanks+tol
-- [ ] Scenario checked against `ledger.md` for this task
+- [ ] Scenario checked against `ledger/<task>.md`; after adding, run `node tools/ledger.mjs`
 
 Per batch:
 
