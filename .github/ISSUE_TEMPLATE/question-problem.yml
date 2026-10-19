@@ -1,0 +1,36 @@
+name: Question problem
+description: A question has a wrong answer, a misleading explanation, or a typo.
+title: "Question: "
+labels: ["content"]
+body:
+  - type: input
+    id: question
+    attributes:
+      label: Question
+      description: Its ID if the app shows one, otherwise the first few words.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong?
+      options:
+        - The marked answer is wrong
+        - More than one answer could be right
+        - The explanation is wrong or unclear
+        - Typo or wording
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: What the answer should be, and your reasoning.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Reference
+      description: Optional. For example the PMBOK Guide section, the Agile Practice Guide, or the ECO task.

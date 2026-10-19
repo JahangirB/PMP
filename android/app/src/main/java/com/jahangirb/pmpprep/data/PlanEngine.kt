@@ -50,7 +50,7 @@ data class Session(
 
 data class SessionResult(val key: String, val kind: SessionKind, val taskId: String?, val domain: Domain?, val score: Double, val minutes: Int, val at: Long)
 
-data class PlanSettings(val examDate: Long, val hoursPerWeek: Int, val studyDays: Set<Int>)
+data class PlanSettings(val examDate: Long, val hoursPerWeek: Int, val studyDays: Set<Int>, val byArea: Boolean = false)
 
 data class Plan(
     val sessions: List<Session>,
@@ -343,7 +343,10 @@ object PlanEngine {
 
         /* ── 5. order: urgent, foundations, weakest domains first, checkpoints closing each domain ── */
         val domainOrder = Domain.entries.sortedBy { domainAcc[it] ?: 0.6 }
-        fun orderKey(s: Session): Double = when (s.kind) {
+        /* By knowledge area, lessons' build sessions come in the classroom order, ahead of the drills and
+           checkpoints, as a course teaches every lecture before its practice stage. */
+        val course = if (inp.settings.byArea) x.courseOrder else emptyList()
+        fun orderKey(s: Session): Double = if (s.kind == SessionKind.BUILD && s.lessonId in course) -400.0 + course.indexOf(s.lessonId) else when (s.kind) {
             SessionKind.REENTRY, SessionKind.REMEDIATION -> -1000.0 - s.priority
             SessionKind.FOUNDATION -> if (s.priority >= 800) -900.0 else -500.0 - s.priority
             SessionKind.BUILD, SessionKind.DRILL, SessionKind.REVIEW ->

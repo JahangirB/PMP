@@ -39,6 +39,7 @@ import com.jahangirb.pmpprep.data.Lesson
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.ExplainBackDialog
+import com.jahangirb.pmpprep.ui.components.LessonFigure
 import com.jahangirb.pmpprep.ui.components.LocalReading
 import com.jahangirb.pmpprep.ui.components.StemText
 import com.jahangirb.pmpprep.ui.components.BulletList
@@ -118,6 +119,7 @@ fun LessonView(vm: PmpViewModel, l: Lesson, inSession: Boolean = false) {
                 Text(s.heading, fontSize = reading.size(18), fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(6.dp))
                 StemText(s.body, 15, 23)
+                s.figure?.let { Spacer(Modifier.height(10.dp)); LessonFigure(it) }
             }
         }
         if (l.lenses.isNotEmpty()) {

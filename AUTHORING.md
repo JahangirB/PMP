@@ -582,8 +582,8 @@ Per batch:
 
 ## 9. Authoring lessons
 
-Lessons are the teaching layer: one per ECO task, plus five foundation lessons
-(F1–F5) and three exam-skills lessons (X1–X3). They live in `PMP.LESSONS` in
+Lessons are the teaching layer: one per ECO task, plus six foundation lessons
+(F0–F5, F0 being the certification journey) and three exam-skills lessons (X1–X3). They live in `PMP.LESSONS` in
 §05.10 of `index.html`, are rendered by §10.15 at `#/learn`, and are checked by
 the lesson audit in §10.14.5. Unlike question packs, lessons are embedded and
 are **not** loaded from `packs/` in this release.
@@ -594,17 +594,17 @@ are **not** loaded from `packs/` in this release.
 |---|---|---|
 | `id` | yes | Module letter and a number: `F1`, `P4`, `L3`, `B8`, `X2`. The letter must match the module's prefix. |
 | `module` | yes | `foundations` (F), `process` (P), `people` (L), `business` (B) or `skills` (X). |
-| `order` | yes | Position on the study path, 1 to 34. |
+| `order` | yes | Position on the study path, 1 to 35. `PMP.COURSE_ORDER` gives the classroom order used when the plan is set to "By knowledge area"; add a new lesson there too. |
 | `ecoTask` | domain modules | The task the lesson teaches. Empty for F and X lessons. Exactly one domain lesson per task. |
 | `minutes` | yes | Reading time. |
 | `prereqs` | no | Lesson ids to read first. No self-reference and no cycles. |
 | `title`, `objectives` | yes | 3–5 objectives, each completing "After this lesson you can…". |
 | `examWeight` | yes | How the task is usually tested. **No figures** — weights, item counts and minutes are read from §01 at render time. |
-| `sections` | yes | At least 3 `{ id, heading, body, formulaGroup? }`; 600–1,200 words of body in total. Paragraphs split on a blank line. Rendered with `textContent`, so no markup. |
+| `sections` | yes | At least 3 `{ id, heading, body, formulaGroup?, figure? }`; 600–1,200 words of body in total. Paragraphs split on a blank line. Rendered with `textContent`, so no markup. A **walk-through** is optional extra teaching: sections `w1`, `w2`… that follow one worked example step by step, each ending with a "Check:" sentence and paired with a check `<lesson>-w<n>`, in order. Walk-through words and checks sit outside the word and check limits. |
 | `lenses` | yes | `{ predictive, agile, hybrid }`, all three filled. |
 | `worked` | yes | A scenario in the §05.4 shape: stem ≥ 120 characters ending in `?`, exactly four options with no `correct` flag, a ranking in the order best, acceptable, premature, wrong, each `why` ≥ 60 characters, and a `mindset` ≥ 40 characters. |
 | `traps` | yes | 3–5 lines, each naming a specific wrong instinct. |
-| `checks` | yes | 2–4 quick checks in the §3 item schema. Ids start with the lesson id (`P4-c1`). They inherit `ecoTask` and `domain` from the lesson; F and X lessons must give each check its own `ecoTask`. Checks never write to the attempt history. |
+| `checks` | yes | 2–4 quick checks in the §3 item schema (plus one per walk-through step). Ids start with the lesson id (`P4-c1`). They inherit `ecoTask` and `domain` from the lesson; F and X lessons must give each check its own `ecoTask`. Checks never write to the attempt history. |
 | `terms` | yes | Glossary headwords, matched exactly (case aside). |
 | `recap`, `mindset` | yes | 3–6 recap lines; one mindset sentence ≥ 40 characters. |
 | `practice` | yes | `{ count, decks[], from? }`. The set is drawn from the lesson's ECO task. A lesson with no task names its pool in `from`, using the practice filter keys `domain`, `ecoTask`, `approach`, `type`, `difficulty` and `tag`; `{}` means the whole bank. |
@@ -635,7 +635,33 @@ nearest existing deck and tagged `lesson-<id>`. Follow the card rules in §05.5:
 one fact per card, a front that narrows to one answer, and a note that never
 carries the answer.
 
-### 9.4 Checking a lesson
+### 9.4 Figures
+
+A section may carry a `figure`: a small drawing written as data, so the web,
+Android and iPhone draw the same picture natively, in light and dark, with text
+a screen reader can read (§10.31).
+
+```js
+figure: { title: "Finish-to-start", caption: "B starts only when A finishes.",
+  alt: "Two boxes, A Design and B Build, with an arrow from A to B labelled FS.",
+  w: 640, h: 160, shapes: [
+    { k: "box",  x: 40,  y: 50, w: 160, h: 60, t: "A\nDesign", tone: "accent" },
+    { k: "box",  x: 440, y: 50, w: 160, h: 60, t: "B\nBuild" },
+    { k: "line", p: [200, 80, 438, 80], arrow: true },
+    { k: "text", x: 320, y: 66, t: "FS", a: "middle", s: 12, tone: "muted" } ] }
+```
+
+- Shapes: `box` (`x y w h`, optional `t` text with `\n` breaks, `fill: false`
+  for an outline), `line` (`p` is a list of points, `arrow`, `dash`), `text`
+  (`x y t`, `a` start/middle/end, `s` size, `b` bold) and `dot` (`x y r`).
+- Tones: `ink` (default), `muted`, `accent` for the thing being taught,
+  `good`, `warn`, `bad` for outcomes.
+- Width 640, height 160–360, text size 11 or more and short labels: phones
+  draw it about 340 px wide.
+- `title`, `caption` and `alt` are required; `alt` describes the whole picture
+  in words.
+
+### 9.5 Checking a lesson
 
 Open **Content audit** in the app. The *Lessons* card lists every failure with
 its field path, such as `lessons[12].worked.ranking[1].rank`. Gaps, such as a

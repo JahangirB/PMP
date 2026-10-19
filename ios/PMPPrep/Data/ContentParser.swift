@@ -180,7 +180,7 @@ enum ContentParser {
                 id: l.str("id"), module: l.str("module"), order: l.optInt("order"), ecoTask: l.str("ecoTask"),
                 minutes: l.optInt("minutes"), title: l.str("title"), objectives: l.strings("objectives"),
                 examWeight: l.str("examWeight"),
-                sections: l.objects("sections").map { LessonSection(heading: $0.str("heading"), body: $0.str("body")) },
+                sections: l.objects("sections").map { LessonSection(heading: $0.str("heading"), body: $0.str("body"), figure: ContentParser.figure($0.obj("figure"))) },
                 lenses: lensKeys.map { ($0, lensObj?.optString($0) ?? "") },
                 worked: worked, traps: l.strings("traps"), checks: checks,
                 terms: l.strings("terms"), recap: l.strings("recap"), mindset: l.str("mindset"))
@@ -228,7 +228,8 @@ enum ContentParser {
             },
             formulas: o.objects("formulas").map { g in
                 FormulaGroup(id: g.str("id"), label: g.str("label"), blurb: g.str("blurb"), items: g.objects("items").map { f in
-                    FormulaItem(id: f.str("id"), name: f.str("name"), tag: f.str("tag"), expr: f.str("expr"), where: f.str("where"), reads: f.str("reads"), trap: f.str("trap"))
+                    FormulaItem(id: f.str("id"), name: f.str("name"), tag: f.str("tag"), expr: f.str("expr"), where: f.str("where"), reads: f.str("reads"), trap: f.str("trap"),
+                                example: ContentParser.formulaExample(f.obj("example")))
                 })
             },
             reference: reference(o.obj("reference") ?? JObj([:])),
@@ -239,13 +240,68 @@ enum ContentParser {
             rules: rules(o.obj("rules")),
             syncScript: o.str("syncScript"),
             generatorPrompt: o.str("generatorPrompt"),
-            cases: cases(o.objects("cases")))
+            cases: cases(o.objects("cases")),
+            documents: documents(o.obj("documents")),
+            areaTours: o.objects("areaTours").map { t in
+                AreaTour(area: t.str("area"), intro: t.str("intro"), lessons: t.strings("lessons"), figure: ContentParser.figure(t.obj("figure")))
+            },
+            courseOrder: o.strings("courseOrder"))
+    }
+
+    /** A lesson figure (index.html §10.31), or nil when the section has none. */
+    static func figure(_ o: JObj?) -> Figure? {
+        guard let o = o else { return nil }
+        let shapes: [FigShape] = o.objects("shapes").map { s in
+            var f = FigShape()
+            f.k = s.str("k"); f.x = s.optDouble("x"); f.y = s.optDouble("y"); f.w = s.optDouble("w"); f.h = s.optDouble("h")
+            f.t = s.str("t"); f.tone = s.strOrNil("tone") ?? "ink"; f.fill = s.optBool("fill", true)
+            f.p = s.doubles("p") ?? []; f.arrow = s.optBool("arrow"); f.dash = s.optBool("dash")
+            f.a = s.strOrNil("a") ?? "start"; f.s = s.optDouble("s", 13); f.b = s.optBool("b"); f.r = s.optDouble("r", 5)
+            return f
+        }
+        return Figure(title: o.str("title"), caption: o.str("caption"), alt: o.str("alt"), w: o.optDouble("w"), h: o.optDouble("h"), shapes: shapes)
+    }
+
+    static func rows(_ list: Any?) -> [[String]] {
+        let outer: [Any] = list as? [Any] ?? []
+        return outer.map { r in
+            let cells: [Any] = r as? [Any] ?? []
+            return cells.map { c in c as? String ?? "" }
+        }
+    }
+
+    /** index.html PMP.DOCUMENTS: { project: { name, summary }, documents: [...] }. */
+    static func documents(_ o: JObj?) -> SampleDocuments {
+        guard let o = o else { return SampleDocuments(projectName: "", projectSummary: "", list: []) }
+        let p: JObj? = o.obj("project")
+        let list: [SampleDocument] = o.objects("documents").map { d in
+            let links: JObj = d.obj("links") ?? JObj([:])
+            let sections: [DocSection] = d.objects("sections").map { s in
+                DocSection(heading: s.str("heading"), rows: rows(s.d["rows"]))
+            }
+            var table: DocTable? = nil
+            if let t = d.obj("table") {
+                table = DocTable(cols: t.strings("cols"), rows: rows(t.d["rows"]))
+            }
+            return SampleDocument(id: d.str("id"), title: d.str("title"), kind: d.str("kind"),
+                                  purpose: d.str("purpose"), owner: d.str("owner"), whenText: d.str("when"),
+                                  agile: d.str("agile"), examTip: d.str("examTip"),
+                                  sections: sections, table: table,
+                                  lessons: links.strings("lessons"), processes: links.strings("processes"), terms: links.strings("terms"))
+        }
+        return SampleDocuments(projectName: p?.str("name") ?? "", projectSummary: p?.str("summary") ?? "", list: list)
     }
 
     /**
      * PMP.CASES. Each item is validated like a pack item and parsed with pack id "case:<id>"; an invalid
      * item is dropped, and a case left with no items is dropped. A missing or empty array gives no cases.
      */
+    static func formulaExample(_ e: JObj?) -> FormulaExample? {
+        guard let e = e else { return nil }
+        let steps: [String] = e.strings("steps")
+        return FormulaExample(situation: e.str("situation"), steps: steps, means: e.str("means"))
+    }
+
     static func cases(_ list: [JObj]) -> [CaseStudy] {
         var out: [CaseStudy] = []
         for c in list {

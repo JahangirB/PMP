@@ -778,7 +778,7 @@ final class AppModel: ObservableObject {
         for c in allCards() { if let t = c.ecoTask, let s = store.cards[c.id], srs.isLeech(s) { leeches[t, default: 0] += 1 } }
         let f = fitness(now)
         return PlanEngine.build(PlanInput(x: repo.extras, attempts: store.attempts, lessonsDone: store.lessonsDone, results: store.sessionResults,
-            mocks: store.mocks, diagnostic: store.diagnostic, settings: PlanSettings(examDate: date, hoursPerWeek: p.hoursPerWeek, studyDays: p.studyDays),
+            mocks: store.mocks, diagnostic: store.diagnostic, settings: PlanSettings(examDate: date, hoursPerWeek: p.hoursPerWeek, studyDays: p.studyDays, byArea: p.byArea),
             now: now, mistakeTags: store.mistakeTags.mapValues(\.cause), leeches: leeches,
             ladderNext: f.ladderNext, readingSlow: (f.wpm ?? 999) < ExamFitness.TARGET_WPM * 0.9))
     }

@@ -102,6 +102,8 @@ struct StudyPlan: Equatable {
     var onboarded: Bool = false
     /** One missed day a week doesn't break the streak. */
     var restDays: Bool = true
+    /** New lessons in the classroom order (Extras.courseOrder) rather than weakest domain first; plan.order "course". */
+    var byArea: Bool = false
 }
 
 /** The cold 25-question level check the plan and the coach aim from. */
@@ -359,8 +361,10 @@ final class ProgressStore: ObservableObject {
              "domains": Dictionary(uniqueKeysWithValues: m.domains.map { ($0.key.rawValue, $0.value) })]
         }
         o["lessons"] = lessonsDone.sorted()
-        o["plan"] = ["examDate": plan.examDate ?? 0, "hours": plan.hoursPerWeek, "days": plan.studyDays.sorted(),
-                     "onboarded": plan.onboarded, "rest": plan.restDays] as [String: Any]
+        var planObj: [String: Any] = ["examDate": plan.examDate ?? 0, "hours": plan.hoursPerWeek, "days": plan.studyDays.sorted(),
+                                      "onboarded": plan.onboarded, "rest": plan.restDays]
+        if plan.byArea { planObj["order"] = "course" }
+        o["plan"] = planObj
         o["sessions"] = sessionResults.map { r -> [String: Any] in
             ["k": r.key, "kind": r.kind.rawValue, "t": r.taskId ?? "", "d": r.domain?.rawValue ?? "", "s": r.score, "m": r.minutes, "at": r.at]
         }
@@ -476,7 +480,8 @@ final class ProgressStore: ObservableObject {
             // Older backups have no onboarded flag: a date plus a diagnostic means setup was done.
             plan = StudyPlan(examDate: date > 0 ? date : nil, hoursPerWeek: p.optInt("hours", 10),
                              studyDays: days.isEmpty ? StudyPlan().studyDays : days,
-                             onboarded: p.optBool("onboarded", date > 0 && !diagnostics.isEmpty), restDays: p.optBool("rest", true))
+                             onboarded: p.optBool("onboarded", date > 0 && !diagnostics.isEmpty), restDays: p.optBool("rest", true),
+                             byArea: p.str("order") == "course")
         }
     }
 }

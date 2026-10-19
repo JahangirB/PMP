@@ -159,14 +159,29 @@ data class Abbreviation(val abbr: String, val full: String, val group: String, v
 data class FormulaItem(
     val id: String, val name: String, val tag: String, val expr: String,
     val where: String, val reads: String, val trap: String,
+    val example: FormulaExample? = null,
 )
+
+/** A worked example under a formula: the situation, each step of working, and what it means. */
+data class FormulaExample(val situation: String, val steps: List<String>, val means: String)
 
 data class FormulaGroup(val id: String, val label: String, val blurb: String, val items: List<FormulaItem>)
 
 /* Learn: modules of lessons, each with sections, a worked example and checks. */
 data class LessonModule(val id: String, val order: Int, val prefix: String, val label: String, val domain: Domain?, val blurb: String)
 
-data class LessonSection(val heading: String, val body: String)
+data class LessonSection(val heading: String, val body: String, val figure: Figure? = null)
+
+/** A lesson figure (index.html §10.31): a small drawing as data, drawn natively in either theme. */
+data class Figure(val title: String, val caption: String, val alt: String, val w: Float, val h: Float, val shapes: List<FigShape>)
+
+/** One shape: k is box, line, text or dot. Unused fields keep their defaults. */
+data class FigShape(
+    val k: String, val x: Float = 0f, val y: Float = 0f, val w: Float = 0f, val h: Float = 0f,
+    val t: String = "", val tone: String = "ink", val fill: Boolean = true,
+    val p: List<Float> = emptyList(), val arrow: Boolean = false, val dash: Boolean = false,
+    val a: String = "start", val s: Float = 13f, val b: Boolean = false, val r: Float = 5f,
+)
 
 data class Lesson(
     val id: String,
@@ -295,7 +310,26 @@ data class Extras(
     val generatorPrompt: String = "",
     /** Case studies; empty until index.html ships some, and everything works without them. */
     val cases: List<CaseStudy> = emptyList(),
+    /** Sample documents, all filled in for one running project (index.html PMP.DOCUMENTS). */
+    val documents: SampleDocuments = SampleDocuments("", "", emptyList()),
+    /** The knowledge-area tours and the classroom lesson order (index.html PMP.AREA_TOURS, PMP.COURSE_ORDER). */
+    val areaTours: List<AreaTour> = emptyList(),
+    val courseOrder: List<String> = emptyList(),
 )
+
+data class AreaTour(val area: String, val intro: String, val lessons: List<String>, val figure: Figure?)
+
+data class SampleDocuments(val projectName: String, val projectSummary: String, val list: List<SampleDocument>)
+
+/** One filled-in sample document. Rows are [label, value]; a register or log also has a table. */
+data class SampleDocument(
+    val id: String, val title: String, val kind: String,
+    val purpose: String, val owner: String, val whenText: String, val agile: String, val examTip: String,
+    val sections: List<DocSection>, val table: DocTable?,
+    val lessons: List<String>, val processes: List<String>, val terms: List<String>,
+)
+data class DocSection(val heading: String, val rows: List<List<String>>)
+data class DocTable(val cols: List<String>, val rows: List<List<String>>)
 
 /*
  * The shared rules, PMP.RULES in index.html, carried in extras.json as "rules". The web, Android

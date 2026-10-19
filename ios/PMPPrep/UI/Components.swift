@@ -404,3 +404,92 @@ struct BottomBar<Content: View>: View {
         .background(Palette.surface.ignoresSafeArea(edges: .bottom))
     }
 }
+
+/* ── lesson figures (index.html §10.31) ─────────────────────────────────── */
+
+/** A lesson figure: a small drawing as data, scaled to the width it is given, with its caption. */
+struct FigureView: View {
+    let fig: Figure
+
+    private func tone(_ t: String) -> Color {
+        switch t {
+        case "muted": return Palette.onSurfaceVariant
+        case "accent": return Palette.primary
+        case "good": return Palette.success
+        case "warn": return Palette.warning
+        case "bad": return Palette.error
+        default: return Palette.onSurface
+        }
+    }
+
+    private func drawText(_ ctx: GraphicsContext, _ k: Double, _ x: Double, _ y: Double, _ t: String,
+                          _ size: Double, _ align: String, _ bold: Bool, _ color: Color) {
+        let rows: [String] = t.components(separatedBy: "\n")
+        let lh: Double = size * 1.25
+        let top: Double = y - Double(rows.count - 1) * lh / 2
+        let anchor: UnitPoint = align == "middle" ? .center : (align == "end" ? .trailing : .leading)
+        for (i, r) in rows.enumerated() {
+            let font: Font = .system(size: CGFloat(size * k), weight: bold ? .bold : .regular)
+            let text: Text = Text(r).font(font).foregroundColor(color)
+            let pt: CGPoint = CGPoint(x: x * k, y: (top + Double(i) * lh) * k)
+            ctx.draw(text, at: pt, anchor: anchor)
+        }
+    }
+
+    private func draw(_ ctx: GraphicsContext, _ size: CGSize) {
+        let k: Double = Double(size.width) / max(fig.w, 1)
+        let ink: Color = Palette.onSurface
+        for s in fig.shapes {
+            let c: Color = tone(s.tone)
+            if s.k == "box" {
+                let rect: CGRect = CGRect(x: s.x * k, y: s.y * k, width: s.w * k, height: s.h * k)
+                let path: Path = Path(roundedRect: rect, cornerRadius: CGFloat(6 * k))
+                if s.fill { ctx.fill(path, with: .color(c.opacity(0.12))) }
+                ctx.stroke(path, with: .color(c), lineWidth: CGFloat(1.5 * k))
+                if !s.t.isEmpty { drawText(ctx, k, s.x + s.w / 2, s.y + s.h / 2, s.t, s.s, "middle", s.b, ink) }
+            } else if s.k == "line", s.p.count >= 4 {
+                var path: Path = Path()
+                path.move(to: CGPoint(x: s.p[0] * k, y: s.p[1] * k))
+                var i: Int = 2
+                while i + 1 < s.p.count {
+                    path.addLine(to: CGPoint(x: s.p[i] * k, y: s.p[i + 1] * k))
+                    i += 2
+                }
+                let dash: [CGFloat] = s.dash ? [CGFloat(5 * k), CGFloat(4 * k)] : []
+                ctx.stroke(path, with: .color(c), style: StrokeStyle(lineWidth: CGFloat(2 * k), lineCap: .round, lineJoin: .round, dash: dash))
+                if s.arrow {
+                    let n: Int = s.p.count
+                    let x2: Double = s.p[n - 2] * k
+                    let y2: Double = s.p[n - 1] * k
+                    let ang: Double = atan2(y2 - s.p[n - 3] * k, x2 - s.p[n - 4] * k)
+                    let len: Double = 9 * k
+                    var head: Path = Path()
+                    head.move(to: CGPoint(x: x2, y: y2))
+                    head.addLine(to: CGPoint(x: x2 - len * cos(ang - 0.45), y: y2 - len * sin(ang - 0.45)))
+                    head.addLine(to: CGPoint(x: x2 - len * cos(ang + 0.45), y: y2 - len * sin(ang + 0.45)))
+                    head.closeSubpath()
+                    ctx.fill(head, with: .color(c))
+                }
+            } else if s.k == "text" {
+                drawText(ctx, k, s.x, s.y, s.t, s.s, s.a, s.b, s.tone == "ink" ? ink : c)
+            } else if s.k == "dot" {
+                let rect: CGRect = CGRect(x: (s.x - s.r) * k, y: (s.y - s.r) * k, width: 2 * s.r * k, height: 2 * s.r * k)
+                ctx.fill(Path(ellipseIn: rect), with: .color(c))
+            }
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            if fig.w > 0 && fig.h > 0 {
+                Canvas { ctx, size in draw(ctx, size) }
+                    .aspectRatio(CGFloat(fig.w / fig.h), contentMode: .fit)
+                    .frame(maxWidth: .infinity)
+                    .accessibilityElement()
+                    .accessibilityLabel(fig.alt.isEmpty ? fig.title : fig.alt)
+            }
+            (Text(fig.title.isEmpty ? "" : fig.title + ". ").bold() + Text(fig.caption))
+                .font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).lineSpacing(3)
+        }
+    }
+}

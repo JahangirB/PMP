@@ -70,6 +70,9 @@ fixed calendar you fall behind on.
 - **If the plan no longer fits**, the app offers three fixes: add 2 hours a
   week, add a study day, or move the exam date.
 - **"How your plan adjusted"** lists every change and why it was made.
+- **Study order:** new lessons come weakest exam domain first, or, if you
+  prefer a classroom course's order, by knowledge area (Study planner, Study
+  order). Fixes, reviews and mocks are planned the same either way.
 
 ## What's in it
 
@@ -79,14 +82,28 @@ fixed calendar you fall behind on.
   - 2,582 more questions in extended packs;
   - 5 case studies;
   - 80 ranked situational scenarios;
-  - 34 lessons;
-  - 252 flashcards;
-  - 52 formulas;
-  - a reference library with 364 glossary terms and 121 abbreviations.
+  - 35 lessons, including one on getting certified (application, audit,
+    booking, exam day and keeping the certificate);
+  - 313 flashcards, including a deck of commonly confused pairs;
+  - 52 formulas, each with a worked example;
+  - a reference library with 391 glossary terms, 127 abbreviations, 25
+    tables, 25 sample documents and a tour of each knowledge area.
 - **Lessons:** each has objectives, the concept, how it plays out in
   predictive, agile and hybrid projects, a worked example, common traps, quick
-  checks, key terms and a recap. **Explain it back** lets you explain the idea
-  in your own words and get feedback from Gemini.
+  checks, key terms and a recap. Diagrams sit beside the ideas they explain.
+  The hardest lessons (schedule, finance, quality, procurement and risk) add a
+  **walk-through**: one worked example built step by step, with a quick check
+  after each step. **Explain it back** lets you explain the idea in your own
+  words and get feedback from Gemini.
+- **Reference library:**
+  - **Sample documents:** about 25 documents the exam names (charter,
+    registers, change request, RACI, backlog and more), all filled in for one
+    example project so they connect.
+  - **Area tours:** each knowledge area as a classroom teaches it: plan, then
+    do, then control, with its process flow, the documents it produces and the
+    lessons that teach it.
+  - **Commonly confused:** pairs such as audit vs inspection and contingency
+    vs management reserve, with how the exam blurs them.
 - **Practice:**
   - **Filters:** by domain, ECO task, question bank, type and approach, or
     only the questions you missed or flagged.

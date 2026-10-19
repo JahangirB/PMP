@@ -873,7 +873,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             .groupingBy { it.ecoTask!! }.eachCount()
         val f = fitness(now)
         return PlanEngine.build(PlanInput(repo.extras, store.attempts, store.lessonsDone, store.sessionResults,
-            store.mocks, store.diagnostic, PlanSettings(date, p.hoursPerWeek, p.studyDays), now,
+            store.mocks, store.diagnostic, PlanSettings(date, p.hoursPerWeek, p.studyDays, p.byArea), now,
             mistakeTags = store.mistakeTags.mapValues { it.value.cause }, leeches = leeches,
             ladderNext = f.ladderNext, readingSlow = f.wpm?.let { it < ExamFitness.TARGET_WPM * 0.9 } == true))
     }
