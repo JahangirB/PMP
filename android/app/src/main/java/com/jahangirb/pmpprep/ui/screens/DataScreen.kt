@@ -124,7 +124,7 @@ fun DataScreen(vm: PmpViewModel) {
         }
 
         SectionLabel("Backup")
-        Text("Answers, flags, notes, mistakes, flashcard schedule, mock results and your plan stay on this phone unless you turn on cloud sync. Save a backup to keep them or move them to another phone.",
+        Text("Answers, flags, notes, mistakes, flashcard schedule, mock results and your plan stay on this phone unless you turn on cloud sync. Chatting with the Gemini coach sends Google a summary of your progress with each message (see the coach for what it holds). Save a backup to keep them or move them to another phone.",
             fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         OutlinedButton(onClick = {
             exportLauncher.launch("pmp-progress-" + SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date()) + ".json")
