@@ -272,6 +272,8 @@ struct Extras {
     var rules: Rules = Rules()
     /** The Google Apps Script the Cloud sync screen shows, with __SYNC_CODE__ still in it. */
     var syncScript: String = ""
+    /** The prompt the Make more questions card copies (docs/question-generator-prompt.md). */
+    var generatorPrompt: String = ""
     /** Case studies; empty until index.html ships some, and everything works without them. */
     var cases: [CaseStudy] = []
 }

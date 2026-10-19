@@ -293,11 +293,11 @@ private fun Steps(vararg steps: String) {
     }
 }
 
-private fun copyText(context: Context, label: String, text: String) {
+internal fun copyText(context: Context, label: String, text: String) {
     val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager ?: return
     cm.setPrimaryClip(ClipData.newPlainText(label, text))
 }
 
-private fun openLink(context: Context, url: String) {
+internal fun openLink(context: Context, url: String) {
     runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
 }

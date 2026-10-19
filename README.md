@@ -1,110 +1,373 @@
 # PMP Prep Suite
 
-Offline PMP exam preparation: a starting-level diagnostic, practice questions
-across all 26 ECO tasks, timed mock exams, a situational trainer, lessons,
-spaced-repetition flashcards, a formula lab, a reference library, notes,
-readiness analytics, and a coach that can talk it through with you on Gemini.
-
-## Android app
+**Use it now: <https://pmp-sandy.vercel.app/>**
 
 [![Download APK](https://img.shields.io/badge/Download-Android%20APK-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/JahangirB/PMP/releases/latest/download/PMP-Prep.apk)
-[![Android APK build](https://github.com/JahangirB/PMP/actions/workflows/android-apk.yml/badge.svg)](https://github.com/JahangirB/PMP/actions/workflows/android-apk.yml)
-
-Press **Download APK** on your phone, open the file, and allow "Install
-unknown apps" when Android asks. Android 7.0 or later. A newer APK installs
-over the old one and keeps your progress.
-
-The APK is built automatically by
-[`.github/workflows/android-apk.yml`](.github/workflows/android-apk.yml)
-whenever `index.html`, `packs/` or `android/` changes on `main`. The build
-pulls every question bank in `packs/` and the content in `index.html` into
-one APK, so adding a pack to `packs/` and pushing is all it takes to ship it.
-You can also add your own `.json` banks inside the app (**⋮ → Question Banks &
-Backup → Add question bank**), with no rebuild. See [`android/README.md`](android/README.md).
-
-## iPhone app
-
 [![Download IPA](https://img.shields.io/badge/Download-iPhone%20IPA-000000?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/JahangirB/PMP/releases/download/ios/PMP-Prep.ipa)
+[![Android APK build](https://github.com/JahangirB/PMP/actions/workflows/android-apk.yml/badge.svg)](https://github.com/JahangirB/PMP/actions/workflows/android-apk.yml)
 [![iOS build](https://github.com/JahangirB/PMP/actions/workflows/ios.yml/badge.svg)](https://github.com/JahangirB/PMP/actions/workflows/ios.yml)
 
-> **Please read first.** The iPhone app was converted from the Android version
-> by AI and has **never been tested on a real iPhone**. It builds and passes its
-> automated tests on the iOS simulator, but some things may not work. If you hit
-> a problem, please reach me on LinkedIn: **[Jahangir Babayev](https://www.linkedin.com/in/jahangir-babayev-a432a5145)**. Include your
-> iPhone model, iOS version and what you were doing.
+PMP Prep Suite is a free study app for the PMP exam (PMI's Project Management
+Professional certification, 2026 exam content outline). It plans your study
+up to your exam date, teaches each part of the outline, tests you the way the
+exam does, and tells you honestly how ready you are.
 
-The app isn't on the App Store, so you install it yourself ("sideloading") with
-a free Apple ID. You need iOS 17 or later and a computer (Windows, Mac or
-Linux) for the first setup only.
+It is a personal, non-commercial project and is not affiliated with or
+endorsed by PMI. "PMP" and "PMI" are trademarks of the Project Management
+Institute.
 
-**Install with SideStore (recommended, refreshes on the phone):**
+> **About the content.** All questions, lessons and case studies were written with AI (Claude) and checked by scripts, not reviewed against PMI's materials. Some may resemble each other or published questions, and a few may be debatable or wrong. Treat the app as practice alongside official PMI resources, and report any question you think is wrong.
 
-1. Follow the SideStore install guide at <https://docs.sidestore.io> to put
-   SideStore on your iPhone. You sign in with your own Apple ID; a free one is
-   fine.
-2. On the iPhone turn on **Settings → Privacy & Security → Developer Mode** and
-   restart when asked.
-3. In SideStore open **Sources → +** and add
-   `https://github.com/JahangirB/PMP/releases/download/ios/source.json`.
-   PMP Prep then appears in SideStore and installs with one tap, and updates show
-   up there too.
-   Or download the **IPA** above, then in SideStore go to **My Apps → +** and pick
-   the file.
-4. If iOS says "Untrusted Developer", go to **Settings → General → VPN & Device
-   Management**, tap your Apple ID and choose **Trust**.
+## Ways to use it
 
-**Other ways:** [AltStore](https://altstore.io) (add the same source URL) or
-[Sideloadly](https://sideloadly.io) (drag the IPA in from a computer) both work
-with a free Apple ID.
+| | What you get | Needs internet |
+| --- | --- | --- |
+| **Website**: https://pmp-sandy.vercel.app/ | Everything, plus the extended question packs. Can be installed as an app. | To open it. Once installed, it also works offline. |
+| **Downloaded file**: one HTML file you keep on your computer | Everything except the extended packs | Never |
+| **Android app** (APK, Android 7.0 or later) | Everything, plus reminders that learn when you study and a home-screen widget | Only for Gemini and cloud sync |
+| **iPhone app** (IPA, iOS 17 or later) | The same as Android | Only for Gemini and cloud sync |
 
-**Limits of a free Apple ID:** the app must be refreshed every **7 days**.
-SideStore and AltStore do this for you; Sideloadly means reinstalling from the
-computer. Your progress stays in place. A free ID can have at most 3 sideloaded
-apps at a time. Back up your progress now and then from **⋮ → Question Banks &
-Backup**. The backup file works on both Android and iPhone.
+Use the **Download** button at the top of the web app for any of these. Each
+option opens a page with the file and step-by-step install instructions.
 
-The IPA is built by [`.github/workflows/ios.yml`](.github/workflows/ios.yml) on
-a macOS runner whenever `ios/`, `packs/` or `index.html` changes on `main`. It
-uses the same question banks as the Android app. See [`ios/README.md`](ios/README.md).
+- **Android:** the app isn't on Google Play. Download the APK on the phone,
+  open it, and allow "Install unknown apps" when Android asks. A newer APK
+  installs over the old one and keeps your progress.
+- **iPhone:** the app isn't on the App Store. You install it yourself with a
+  free Apple ID through SideStore (recommended), AltStore or Sideloadly. A free
+  Apple ID means refreshing the app every 7 days (SideStore and AltStore do this
+  for you) and at most 3 sideloaded apps.
+  **The iPhone app was converted from the Android app by AI and has never been
+  tested on a real iPhone.** If something goes wrong, contact
+  [Jahangir Babayev on LinkedIn](https://www.linkedin.com/in/jahangir-babayev-a432a5145)
+  with your iPhone model, iOS version and what you were doing.
 
-## Web app
+Progress lives on each device separately. To use more than one, move it with a
+backup file or turn on cloud sync (see below).
 
-Open `index.html` in a browser. It is the whole app in one file and works
-offline. Served over http it also loads the extended packs in `packs/`.
+## Getting started
 
-The mock exam opens with a case-study block filled with whole case studies
-(passage, exhibits and their questions), and Practice has a **Case studies**
-quick start that runs one case at a time.
+1. Set your **exam date**, how many **hours a week** you can study, and which
+   **days** you study.
+2. Take the **25-question diagnostic** (about 40 minutes). It shows where you
+   start in each domain, so the plan gives your weakest domain the most time.
+   You can skip it.
+3. Open **Today** and press **Continue**. From then on the app tells you what
+   to do next.
 
-**Hosting and installing.** To host it with GitHub Pages: in the repository's
-**Settings → Pages**, choose **Deploy from a branch**, branch `main`, folder
-`/ (root)`, and save. The app is then at `https://<user>.github.io/<repo>/`.
-Served like that it is also an installable app: `manifest.webmanifest`,
-`icons/` and the service worker `sw.js` sit beside `index.html`, and once it
-has been opened online it opens offline too. Install it from the browser's
-install icon or from the **Install** button in Settings (Chrome, Edge,
-Android); in Safari use Share → Add to Home Screen (iPhone, iPad) or
-File → Add to Dock (Mac). `index.html` is fetched network-first, so updates
-arrive on the next online visit; the question packs are cached, so when
-`packs/` changes, bump `VERSION` at the top of `sw.js`. Opened from disk
-(`file://`), nothing is registered and the file works exactly as before.
+## The study path
 
-Backups (Backup and packs → Export progress) use the shared progress format,
-version 3, described in [docs/progress-format.md](docs/progress-format.md), so
-a backup from the web, Android or iPhone app can be restored on any of them.
-The web app also still reads its own older backups.
+The plan is rebuilt every day from what you have actually done. It is never a
+fixed calendar you fall behind on.
 
-**Cloud sync** keeps the web, Android and iPhone apps in step through one file
-in your own Google Drive. It is off until you set it up: open Cloud sync (in
-the menu, or from Settings), copy the script it shows (`sync/pmp-sync.gs`, with
-a random sync code already filled in), deploy it at
-[script.google.com](https://script.google.com) as a web app, and paste its URL
-back. Other devices choose "I already have a script" and use the same URL and
-code. The address and code stay on each device and never go into a backup.
+- **Sessions** combine steps:
+  - flashcards that are due;
+  - a lesson;
+  - a practice set;
+  - **Reflect**, where you tag why you missed each question;
+  - situational scenarios;
+  - a mock;
+  - a **debrief**.
+- **Short on time?** Every session has a 15-minute version.
+- **When things change, the plan adapts:**
+  - a weak session brings a remediation session;
+  - after 5 or more days away you get a gentle re-entry session;
+  - mastered topics come back for review if you leave them for 2 weeks;
+  - the last 7 days before the exam taper off with nothing new.
+- **If the plan no longer fits**, the app offers three fixes: add 2 hours a
+  week, add a study day, or move the exam date.
+- **"How your plan adjusted"** lists every change and why it was made.
 
-Tests: `node tests/run.js [filter]` (Playwright, Chromium).
+## What's in it
 
-## Writing questions
+- **Content:**
+  - 360 core questions in every exam format: single and multiple answer,
+    matching, drop-down, hotspot, diagrams and fill-in numbers;
+  - 2,582 more questions in extended packs;
+  - 5 case studies;
+  - 80 ranked situational scenarios;
+  - 34 lessons;
+  - 252 flashcards;
+  - 52 formulas;
+  - a reference library with 364 glossary terms and 121 abbreviations.
+- **Lessons:** each has objectives, the concept, how it plays out in
+  predictive, agile and hybrid projects, a worked example, common traps, quick
+  checks, key terms and a recap. **Explain it back** lets you explain the idea
+  in your own words and get feedback from Gemini.
+- **Practice:**
+  - **Filters:** by domain, ECO task, question bank, type and approach, or
+    only the questions you missed or flagged.
+  - **Modes:** normal, **adaptive** (leans towards your weakest tasks), timed,
+    and a **reading drill** (read the question before you see the options).
+  - **Every answer explains every option**, plus the mindset the exam rewards.
+- **Answering tools:**
+  - how sure you are (**Sure / Think so / Guess**) before you check;
+  - cross out options;
+  - highlight words in the question;
+  - a reading guide line;
+  - a **hint ladder**: hinted answers don't count towards your scores;
+  - a pacing bar;
+  - a "take a breath" prompt if you freeze;
+  - checkpoints every 60 questions in long sets.
+- **Mock exams:**
+  - **Lengths:** full (180 questions, 240 minutes), half, quarter or a
+    20-question sprint.
+  - **Like the exam:** a full mock opens with a case-study block, includes 10
+    unscored trial questions, and has two optional 10-minute breaks, after
+    questions 40 and 110. A closed section can't be reopened.
+  - **Results:** your score by domain, where your time went, and a review of
+    every answer. You can send your misses to a practice queue.
+- **Flashcards:** spaced repetition (SM-2). Up to 20 new cards a day. A card
+  you keep forgetting is flagged as a "leech". **My cards** turns a missed
+  question into a card in your own words.
+- **Formula lab:**
+  - calculators that show the working: earned value, PERT, point of total
+    assumption, EMV, decision trees, critical path and float with a network
+    diagram, NPV/IRR/payback, communication channels, and Little's law;
+  - the formula sheet;
+  - 18 randomised drills that name the usual wrong turn.
+- **Mistake journal:** every miss waits for you to tag a cause: knowledge
+  gap, misread, wrong mindset, two plausible answers, calculation slip or
+  rushed. Misses you were sure of come first. The most common cause shapes your
+  plan.
+- **Notes:** a formatted notes page, plus notes on any question.
+- **Search everything**, opened with the `/` key on the web.
 
-[`AUTHORING.md`](AUTHORING.md) describes the question pack format. The same
-file works in the web app, the Android app and as a file in `packs/`.
+## How it measures you
+
+- **Readiness (0 to 100)** is built from five parts:
+
+  | Part | Points | Based on |
+  | --- | --- | --- |
+  | Accuracy | 35 | Recent answers count more; each domain is weighted as on the exam |
+  | Coverage | 20 | Up to 5 answers on each of the 26 tasks |
+  | Mocks | 25 | Your last three mocks |
+  | Pace | 10 | 45 to 80 seconds a question earns full marks |
+  | Study habit | 10 | Study days in the last 14 |
+
+  It is marked *provisional* until you have 100 answers across 15 tasks.
+- **Exam fitness** measures whether you can sit the exam, not what you know:
+  - **Stamina:** long sittings without fading.
+  - **Composure under the clock:** reading pace, freezes, rushing after a hard
+    question, and the gap between timed and relaxed accuracy.
+  - **Consistency:** regular days, hours kept, momentum and finishing
+    sessions.
+
+  It is based on behaviour and is not a diagnosis.
+- **Mock bands:** Above Target is 80% and over, Target 65%, Below Target 50%,
+  and anything under 50% is Needs Improvement. PMI doesn't publish its pass
+  mark; these are this app's own thresholds.
+- **Ready to book?** asks for three things at once: readiness of 75 or more,
+  exam fitness of 70 or more, and two full mocks at Target or above. It also
+  projects the date you'll get there from your weekly trend.
+- **Weekly reports** compare each week with the one before.
+- **Analytics** shows:
+  - your accuracy trend;
+  - a heat map of the 26 tasks;
+  - a pace histogram;
+  - whether your confidence matches your results;
+  - mistake causes.
+
+## Wellbeing
+
+- **Daily check-in:** before your first session each day you can say how you
+  feel. A low score offers a **2-minute breathing reset**.
+- **Before a mock:** a box to write down what worries you. Writing it down
+  frees attention, and the box is never saved.
+- **After a mock:** a one-tap tension check-in.
+- **Weekly worry check:** five statements once a week. If worry stays high
+  for three weeks, the app suggests talking to someone you trust.
+- **Rest days:** one missed day a week, between study days, doesn't break your
+  streak. You can turn this off.
+- **Reading comfort:** larger text, roomier lines and a reading guide.
+
+## Reminders and widget (phones)
+
+- **Reminders:** the Android and iPhone apps remind you at the hours that
+  actually lead to studying. They try a few times a day while learning your
+  rhythm, then settle on the hours that work.
+  - **Your controls:** pin or block hours, pause for 1 or 3 days, or press
+    "Not today".
+  - **Extra messages:** a streak-saver in the evening, and a short summary on
+    Sunday.
+- **Widget:** the home-screen widget shows days to the exam, today's progress,
+  readiness, lessons, fitness and your projected ready date. Each tile shades
+  from red to green as you improve.
+- **On the web:** you can export your plan to your calendar.
+
+## Gemini (optional AI tutor)
+
+Off until you add your own free Google AI Studio API key
+(https://aistudio.google.com/apikey).
+
+- **What you can ask:** anything, in the chat. You can also send a question
+  you just answered with "Ask about this question", or ask for a full review of
+  your progress.
+- **Which model:** it picks the newest Gemini Flash model itself (3.5 or
+  later) and falls back to another one if a model fails.
+- **What each message sends to Google, with your key:**
+  - the tutor instructions;
+  - your last 30 chat messages;
+  - a **summary of your study progress**: readiness and exam-fitness scores,
+    accuracy by domain and task, mock results, mistake causes, pace, flashcard
+    and lesson counts, your exam date and planned hours, and your exam-worry
+    score if you answered the weekly check.
+- **What it doesn't send:** your notes.
+- **Explain it back** sends only the topic and your explanation.
+- **"Ask about this question"** puts the question and your answer in the
+  message box, so you can read and edit it before you send.
+- **Your key** stays on your device, is never in a backup or in cloud sync, and
+  goes only to Google.
+- **Google's terms apply.** Google's terms for the Gemini API cover what you
+  send. On the free tier Google says it may use it to improve its products.
+
+## Your data and privacy
+
+- **Where your data lives:** your answers, scores, notes and settings live on
+  your device. There is no account, no analytics, no tracking and no ads.
+- **What goes over the network** depends on how you use the app:
+  - **Downloaded file:** no network requests at all.
+  - **Website:** your browser downloads the app and the question packs from
+    the host (Vercel). The host sees what any website sees, such as your IP
+    address, browser and the time of each request. The app sends it nothing
+    about you or your progress.
+  - **Phone apps:** nothing is sent unless you use Gemini or cloud sync.
+  - **Downloading the phone apps:** the files come from GitHub, which sees
+    that download request.
+- **Gemini:** as described above, and only once you add a key.
+- **Cloud sync:** only if you set it up (below).
+
+## Backups and cloud sync
+
+- **Backups:** save a backup file from **Backup and packs** (web) or
+  **Question banks and backup** (phones). The same file restores in the web app,
+  on Android and on iPhone.
+- **Cloud sync:** keeps all your devices in step through one file in **your
+  own Google Drive**. It runs through a small Google Apps Script that you
+  deploy in your own Google account. Nobody else's server is involved.
+  - **Setting it up (about 5 minutes, steps in the app):**
+    1. Open **Cloud sync**. The app makes a secret sync code and shows the
+       script with the code already filled in. Copy it.
+    2. Go to https://script.google.com, choose **New project**, paste the
+       script over everything in `Code.gs` and save it.
+    3. Choose **Deploy → New deployment → Web app**, with **Execute as: Me**
+       and **Who has access: Anyone**. "Anyone" only means the URL answers
+       without a Google sign-in; every request still needs your secret code.
+    4. Allow access when Google asks. It warns that the app isn't verified,
+       because it is your own script: choose **Advanced → Go to (project)**.
+    5. Paste the web-app URL into the app and press **Test connection**.
+    6. On each other device, choose **I already have a script** and enter the
+       same URL and code.
+  - **When it syncs:** when the app opens or goes to the background, after
+    each session, practice set, mock or card session, and when you press
+    **Sync now**. It never syncs during a mock.
+  - **What it copies:** your whole progress, including notes and Gemini chat
+    history, but never the Gemini key.
+  - **Keep the URL and code private.** Anyone with both can read your
+    progress file. To revoke access, change the code in the script and deploy
+    a new version.
+  - **When two devices change things before syncing:** answers from both are
+    kept. For a flashcard, the most recent review wins; for notes and plans,
+    the most recent change wins.
+
+## Making more questions
+
+If the built-in banks run short on a topic, Claude (Opus 5.5 works well) can
+write a new set to the same rules the app's questions follow. The **Make more
+questions** card in **Backup and packs** (web) or **Question banks and backup**
+(phones) has the files, the prompt and these steps.
+
+1. **Get three files.**
+   - The prompt: `docs/question-generator-prompt.md`.
+   - `AUTHORING.md`: the question format and rules.
+   - The ledger for your topic, for example `ledger/process-6.md`, or a whole
+     domain such as `ledger/people.md` for a mixed set. The ledger lists every
+     question the app already has, so Claude doesn't repeat them.
+2. **Start a chat.** Open a new chat at [claude.ai](https://claude.ai), choose
+   Opus 5.5, attach `AUTHORING.md` and the ledger file, and paste the prompt.
+3. **Answer Claude's questions.** It asks what the set is for:
+   - more questions on one topic;
+   - a mock-style set mixed across People / Process / Business in exam
+     proportion;
+   - a drill on a weak area you describe in your own words.
+
+   It also asks how many (up to 20 a file) and about any preferences, such as
+   difficulty, approach or question types. It shows a plan and waits for your
+   go.
+4. **Get the file.** It writes the questions, checks them against the rules,
+   and gives you one `.json` file with a short report.
+5. **Import it.**
+   - **Web:** **Backup and packs → Add a question pack**.
+   - **Phones:** **Question banks and backup → Add question bank (.json)**.
+
+   The app checks every question before adding it and lists any problem;
+   paste a problem back to Claude and it fixes the file. The questions stay on
+   that device, so import the same file on each device you use.
+
+Questions you make this way carry the same caveat as the rest of the bank:
+they are written by AI and checked by Claude and the app's rules, not by an
+expert.
+
+## Known limits
+
+- **iPhone app:** never tested on a real iPhone.
+- **Exam unknowns:** PMI doesn't publish the size of the case-study block or
+  the pass mark. The app assumes 40 case-study questions and uses its own
+  bands.
+- **Downloaded file:** has no extended packs and no Install option. Use the
+  website for those.
+- **Progress per device:** each browser and each phone keeps its own progress
+  until you move it with a backup or cloud sync.
+
+## Contact
+
+Questions or problems:
+[Jahangir Babayev on LinkedIn](https://www.linkedin.com/in/jahangir-babayev-a432a5145).
+
+## For developers
+
+### Builds and releases
+
+- **Android:** the APK is built by
+  [`.github/workflows/android-apk.yml`](.github/workflows/android-apk.yml)
+  whenever `index.html`, `packs/` or `android/` changes on `main`. The build
+  pulls every question bank in `packs/` and the content in `index.html` into
+  one APK, so adding a pack to `packs/` and pushing is all it takes to ship it.
+  See [`android/README.md`](android/README.md).
+- **iPhone:** the IPA is built by
+  [`.github/workflows/ios.yml`](.github/workflows/ios.yml) on a macOS runner
+  whenever `ios/`, `packs/` or `index.html` changes on `main`, and published
+  with a SideStore/AltStore source at
+  `https://github.com/JahangirB/PMP/releases/download/ios/source.json`. See
+  [`ios/README.md`](ios/README.md).
+- **Web:** `index.html` is the whole app in one file and works offline from
+  disk. Served over http it also loads the extended packs in `packs/` and is
+  installable: `manifest.webmanifest`, `icons/` and the service worker `sw.js`
+  sit beside it. To host it with GitHub Pages: **Settings → Pages → Deploy from
+  a branch**, branch `main`, folder `/ (root)`. `index.html` is fetched
+  network-first, so updates arrive on the next online visit; the question
+  packs are cached, so when `packs/` changes, bump `VERSION` at the top of
+  `sw.js`.
+- **Tests:** `node tests/run.js [filter]` (web, Playwright with Chromium);
+  `./gradlew testDebugUnitTest` in `android/`; the iOS tests run in CI.
+
+### Data formats
+
+- Backups and cloud sync use the shared progress format, version 3:
+  [`docs/progress-format.md`](docs/progress-format.md). The cloud sync script
+  is [`sync/pmp-sync.gs`](sync/pmp-sync.gs).
+
+### Content and question authoring
+
+- [`AUTHORING.md`](AUTHORING.md) is the question pack format and the rules
+  every question follows. A pack works in the web app, the phone apps and as a
+  file in `packs/`.
+- [`ledger.md`](ledger.md) lists every question the app ships (core pack, case
+  studies and every pack), with per-task and per-domain slices in
+  [`ledger/`](ledger/). It is generated: run `node tools/ledger.mjs` after
+  changing any question.
+- [`docs/MASTER_PROMPT.md`](docs/MASTER_PROMPT.md) is the prompt maintainers
+  use to grow the official packs, one ECO task at a time.
+- [`docs/question-generator-prompt.md`](docs/question-generator-prompt.md) is
+  the prompt learners use to make their own sets (the app's **Make more
+  questions** card).
