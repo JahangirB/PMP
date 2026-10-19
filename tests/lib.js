@@ -85,4 +85,64 @@ async function shot(page, dir, name) {
   await page.screenshot({ path: path.join(d, name + ".png") });
 }
 
-module.exports = { loadPlaywright: loadPlaywright, Harness: Harness, clean: clean, go: go, shot: shot, FILE: FILE };
+/* Runs in the page (page.evaluate(lib.structure, selector)). One line per
+   rendered element or text run under the selector, indented by depth, in
+   document order: tag, classes, ARIA and data attributes, link targets,
+   inline style and text. Used where a test holds a surface to an earlier
+   commit's content and structure; those tests compared pixels until the
+   Sky Clay restyle changed every pixel on purpose. Elements not rendered are
+   skipped, as a screenshot skips them, and so are elements scrolled out of
+   a scrolling box (a virtual list's off-screen rows); text clipped to one line with an
+   ellipsis is compared by its first 40 characters. data-dom (domain chip colours) and
+   data-enter (the entry animation flag) are restyle-only and ignored. */
+function structure(sel) {
+  var IGNORE = { "data-dom": 1, "data-enter": 1 };
+  var out = [];
+  function walk(n, depth) {
+    var pad = new Array(depth + 1).join(" ");
+    if (n.nodeType === 3) {
+      var t = n.nodeValue.replace(/\s+/g, " ").trim();
+      /* A one-line run cut off with an ellipsis shows only its start, and
+         how much of it shows depends on the face; only the first 40
+         characters are held to the reference. */
+      var ps = getComputedStyle(n.parentNode);
+      if (ps.textOverflow === "ellipsis" && ps.whiteSpace === "nowrap" && t.length > 40) t = t.slice(0, 40) + "\u2026";
+      if (t) out.push(pad + JSON.stringify(t));
+      return;
+    }
+    if (n.nodeType !== 1) return;
+    /* Not rendered: [hidden], display: none, or inside a closed <details>. */
+    if (n.hidden || (n.getClientRects().length === 0 && getComputedStyle(n).display !== "contents")) return;
+    /* Scrolled out of a scrolling box (the glossary's virtual list): not
+       on screen, so not in a screenshot either. */
+    var r = n.getBoundingClientRect();
+    for (var up = n.parentElement; up && up !== document.body; up = up.parentElement) {
+      var ov = getComputedStyle(up).overflowY;
+      if (ov === "auto" || ov === "scroll" || ov === "hidden") {
+        var u = up.getBoundingClientRect();
+        if (r.bottom <= u.top || r.top >= u.bottom) return;
+      }
+    }
+    var attrs = [];
+    for (var i = 0; i < n.attributes.length; i++) {
+      var a = n.attributes[i];
+      if (IGNORE[a.name]) continue;
+      if (a.name === "class" || a.name === "id" || a.name === "role" || a.name === "href" || a.name === "type" ||
+          a.name === "style" || a.name === "for" || a.name === "name" || a.name === "value" || a.name === "disabled" ||
+          a.name === "tabindex" || a.name.indexOf("aria-") === 0 || a.name.indexOf("data-") === 0) {
+        attrs.push(a.name + "=" + JSON.stringify(a.value));
+      }
+    }
+    attrs.sort();
+    out.push(pad + "<" + n.tagName.toLowerCase() + (attrs.length ? " " + attrs.join(" ") : "") + ">");
+    /* A closed select shows only its chosen option, so only that is held to
+       the reference, as on screen; the lists themselves grew with content
+       (the graphic questions' topics) on purpose. */
+    if (n.tagName === "SELECT") { var o = n.options[n.selectedIndex]; out.push(pad + " " + JSON.stringify(o ? o.text : "")); return; }
+    for (var c = n.firstChild; c; c = c.nextSibling) walk(c, depth + 1);
+  }
+  walk(document.querySelector(sel), 0);
+  return out;
+}
+
+module.exports = { loadPlaywright: loadPlaywright, Harness: Harness, clean: clean, go: go, shot: shot, structure: structure, FILE: FILE };

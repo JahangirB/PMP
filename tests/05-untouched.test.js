@@ -1,12 +1,22 @@
 "use strict";
-/* Routes the coach does not touch render pixel-for-pixel as they did before
-   the coach landed. The reference is index.html at the Phase 0b commit
-   (UI fixes in, no coach), written to a temporary file; only #view is
-   compared, because the rail gained Today and Progress on purpose. On
-   #/library only the tab panel is compared: the tab strip gained
+/* Routes the coach does not touch render the same content and structure as
+   they did before the coach landed. The reference is index.html at the
+   Phase 0b commit (UI fixes in, no coach), written to a temporary file; only
+   #view is compared, because the rail gained Today and Progress on purpose.
+   On #/library only the tab panel is compared: the tab strip gained
    Abbreviations on purpose, and 07-abbreviations checks the strip itself.
-   The sticky top bar is masked in both: it overlaps a full-length element
-   screenshot, and it gained the Notes toggle on purpose (08-notepad). */
+
+   This was a pixel comparison until the Sky Clay restyle (§02, §03.29),
+   which changed every pixel on purpose: new palette, Nunito, clay radii and
+   shadows. A pixel reference taken from the restyled file would only check
+   the restyle against itself, so the test now compares what the restyle
+   must not change: every rendered element in order, with its tag, classes,
+   ARIA and data attributes, link targets, inline style and text. Elements
+   that are not rendered (display: none, [hidden]) are skipped, as the pixel
+   comparison skipped them. Two attributes are ignored, both added by the
+   restyle: data-dom on domain chips, so they take the phones' domain
+   colours, and data-enter, which §08.3 sets on the view for a moment after
+   a route change to run the staggered card entry. */
 var assert = require("assert");
 var fs = require("fs");
 var os = require("os");
@@ -39,7 +49,7 @@ var CORE_NOW = "360", CORE_REF = "348";
 
 module.exports = [
   {
-    name: "routes the coach does not touch are unchanged",
+    name: "routes the coach does not touch are unchanged in content and structure",
     fn: async function (h, lib) {
       var ref = path.join(os.tmpdir(), "pmp-ref-" + REF_COMMIT + ".html");
       fs.writeFileSync(ref, cp.execSync("git show " + REF_COMMIT + ":index.html", { cwd: path.join(__dirname, ".."), maxBuffer: 64 << 20 }));
@@ -58,13 +68,16 @@ module.exports = [
             });
           }, [CORE_NOW, CORE_REF]);
           var sel = r === "library" ? '#view [role="tabpanel"]' : "#view";
-          var pa = await a.locator(sel).screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
-          var pb = await b.locator(sel).screenshot({ mask: [a.locator(".topbar"), b.locator(".topbar")] });
-          if (!pa.equals(pb)) {
+          var pa = await a.evaluate(lib.structure, sel);
+          var pb = await b.evaluate(lib.structure, sel);
+          if (pa.join("\n") !== pb.join("\n")) {
             diff.push(fx + " #/" + r);
+            var at = 0;
+            while (at < pa.length && pa[at] === pb[at]) at++;
+            console.log("      first difference on " + fx + " #/" + r + " at line " + at + ":\n        before: " + pa[at] + "\n        after:  " + pb[at]);
             fs.mkdirSync(path.join(__dirname, "screenshots", "untouched"), { recursive: true });
-            fs.writeFileSync(path.join(__dirname, "screenshots", "untouched", fx + "-" + r + "-before.png"), pa);
-            fs.writeFileSync(path.join(__dirname, "screenshots", "untouched", fx + "-" + r + "-after.png"), pb);
+            fs.writeFileSync(path.join(__dirname, "screenshots", "untouched", fx + "-" + r + "-before.txt"), pa.join("\n"));
+            fs.writeFileSync(path.join(__dirname, "screenshots", "untouched", fx + "-" + r + "-after.txt"), pb.join("\n"));
           }
         }
         await a.ctx.close();
