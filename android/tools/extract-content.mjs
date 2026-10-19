@@ -64,6 +64,9 @@ const extras = plain({
   cases: P.CASES || [],
   // Sample documents for the Reference library (L2); absent in older builds.
   documents: P.DOCUMENTS || null,
+  // The knowledge-area tours and the classroom lesson order (L5).
+  areaTours: P.AREA_TOURS || [],
+  courseOrder: P.COURSE_ORDER || [],
   // The Google Apps Script the Cloud sync screen shows (docs/progress-format.md §5).
   syncScript: fs.readFileSync(path.join(root, 'sync', 'pmp-sync.gs'), 'utf8'),
   // The Make more questions prompt: the text block of docs/question-generator-prompt.md.

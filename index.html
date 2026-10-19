@@ -1733,6 +1733,27 @@ dialog.sheet::backdrop { background: var(--scrim); }
 }
 .lib-sec > h3 + .lib-lead { margin-top: calc(var(--sp-3) * -1 + var(--sp-1)); }
 .lib-lead { font-size: var(--t-sm); color: var(--fg-muted); line-height: var(--lh-body); max-width: var(--measure); margin-bottom: var(--sp-4); }
+/* L1: lesson figures. Each tone sets stroke and fill; boxes are tinted, text is ink. */
+.ln-fig { margin: var(--sp-4) 0; }
+.ln-fig figcaption { font-size: var(--t-xs); color: var(--fg-muted); line-height: var(--lh-body); margin-top: var(--sp-2); }
+.fig-svg { display: block; width: 100%; height: auto; max-width: 720px; overflow: visible; }
+.fig-ink    { stroke: var(--fg);        fill: var(--fg); }
+.fig-muted  { stroke: var(--fg-muted);  fill: var(--fg-muted); }
+.fig-accent { stroke: var(--c-signal);  fill: var(--c-signal); }
+.fig-good   { stroke: var(--c-go);      fill: var(--c-go); }
+.fig-warn   { stroke: var(--c-warn);    fill: var(--c-warn); }
+.fig-bad    { stroke: var(--c-danger);  fill: var(--c-danger); }
+.fig-box    { fill-opacity: .12; stroke-width: 1.5; }
+.fig-hollow { fill-opacity: 0; }
+.fig-line   { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.fig-dash   { stroke-dasharray: 5 4; }
+.fig-dot    { stroke: none; }
+.fig-t      { fill: var(--fg); stroke: none; font-family: var(--font-ui, system-ui, sans-serif); }
+.fig-muted-t  { fill: var(--fg-muted); }
+.fig-accent-t { fill: var(--c-signal); }
+.fig-good-t   { fill: var(--c-go); }
+.fig-warn-t   { fill: var(--c-warn); }
+.fig-bad-t    { fill: var(--c-danger); }
 /* L2: a sample document folds under its title and purpose. */
 .lib-doc > summary { cursor: pointer; list-style: none; }
 .lib-doc > summary::-webkit-details-marker { display: none; }
@@ -1745,6 +1766,8 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .lib-doc > h4 { font-size: var(--t-sm); font-weight: var(--w-semi); margin: var(--sp-3) 0 var(--sp-2); }
 .lib-doc-f, .lib-doc-see { font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); margin-bottom: var(--sp-2); }
 .lib-doc-see { margin-top: var(--sp-3); }
+.lib-tour { font-size: var(--t-sm); line-height: var(--lh-body); max-width: var(--measure); padding-left: 1.4em; }
+.lib-tour li { margin: var(--sp-1) 0; }
 
 /* A numeral in a circle. Used for principle and domain numbers, where the
    ordering is part of how people refer to them. */
@@ -3588,13 +3611,15 @@ STEP 5 — TELL ME HOW TO ADD IT:
         05.8  CONTENT INDEX — id lookup across shipped and imported packs
         05.9  EXTENDED PACK LOADER — optional shards fetched from packs/,
               http only, document-relative; 404 = not authored yet
-        05.5  FLASHCARDS — 252 cards, 7 decks · built
-        05.6  FORMULAS — 9 groups, ~50 entries · built
+        05.5  FLASHCARDS — 313 cards, 8 decks (confused pairs added) · built
+        05.6  FORMULAS — 9 groups, 52 entries, each with a worked example · built
         05.7  REFERENCE + GLOSSARY — 49 processes, 12 principles,
-              8 domains, agile, 14 tables, 364 terms · built
-        05.7.3 ABBREVIATIONS — 121 rows, one per meaning; kept complete
+              8 domains, agile, 25 tables, 391 terms · built
+        05.7.5 DOCUMENTS, AREA TOURS — 25 sample documents (L2); ten
+              knowledge-area tours and the classroom lesson order (L5)
+        05.7.3 ABBREVIATIONS — 123 rows, one per meaning; kept complete
               by the coverage scan in 10.07.9
-        05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS (34 lessons)
+        05.10 LESSONS — PMP.MODULES (5) and PMP.LESSONS (35 lessons)
         05.11 COACH MESSAGES — every coach sentence, authored: the pool the
               coach picks from and the fixed lines it uses in place
 
@@ -3698,6 +3723,8 @@ STEP 5 — TELL ME HOW TO ADD IT:
         10.30 Support — the rail's Support link (Ko-fi, no script) and the
               weekly reminder from the shared opens and support slices
               (docs §4); due() is the pure rule
+        10.31 Lesson figures — drawings as data (box, line, text, dot),
+              drawn as SVG here and natively on the phones
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
         11.1  accuracy trend  · 11.2  ECO heat map (low-sample cells greyed)
@@ -14756,7 +14783,7 @@ PMP.FLASHCARDS = [
   { id: "risk-28", deck: "risk", ecoTask: "business-8", tags: ["lesson-B8", "external"],
     front: "External dependency end dates",
     back: "Track the versions of third-party services and platforms you rely on, when support ends and what the alternatives are.",
-    note: "Plan for a known end date even if it falls after the project closes." },,
+    note: "Plan for a known end date even if it falls after the project closes." },
   {
     id: "confused-01",
     deck: "confused",
@@ -19278,6 +19305,515 @@ PMP.DOCUMENTS = Object.freeze({
   ]
 });
 
+/* L5: the knowledge-area tour. Each area as a classroom teaches it, plan
+   then do then control, with its process flow, and the lessons that teach
+   it. COURSE_ORDER is the classroom order of the lessons, used when the
+   study plan is set to "By knowledge area" (docs/progress-format.md plan.order). */
+PMP.AREA_TOURS = Object.freeze([
+  {
+    area: "integration",
+    intro: "Integration is the area that holds the others together. It starts by getting the project authorised through the charter, then pulls every subsidiary plan and baseline into one project management plan. During execution it directs the work and manages knowledge so that what the team learns is not lost. In control it compares performance with the plan, routes every proposed change through one decision process, and finally closes the phase or project. Exam items here test judgement rather than recall: who may approve a change, what to do before acting on a request, why the plan comes before the work, and what must be finished before closure. When two areas pull in different directions, the answer is usually found here.",
+    lessons: ["P1", "B2", "P10", "P9", "L8", "B4", "P8"],
+    figure: {
+      title: "Integration: the flow",
+      caption: "Authorise, plan once, do the work, watch it, and pass every change through one gate. Approved changes return to the plan.",
+      alt: "Seven boxes in two rows. Top row: Develop charter (initiating), Develop management plan (planning), Direct and manage work and Manage knowledge (executing). Bottom row: Monitor and control work and Integrated change control (monitoring and controlling), then Close project or phase (closing). A dashed line runs from Integrated change control back to the management plan.",
+      w: 640,
+      h: 244,
+      shapes: [
+        { k: "box", x: 26, y: 40, w: 133, h: 54, t: "Develop\ncharter", tone: "muted", s: 12 },
+        { k: "box", x: 181, y: 40, w: 133, h: 54, t: "Develop project\nmgmt plan", tone: "accent", s: 12 },
+        { k: "line", p: [160, 67, 178, 67], arrow: true },
+        { k: "box", x: 336, y: 40, w: 133, h: 54, t: "Direct and\nmanage work", tone: "good", s: 12 },
+        { k: "line", p: [315, 67, 333, 67], arrow: true },
+        { k: "box", x: 491, y: 40, w: 133, h: 54, t: "Manage project\nknowledge", tone: "good", s: 12 },
+        { k: "line", p: [470, 67, 488, 67], arrow: true },
+        { k: "box", x: 26, y: 140, w: 133, h: 54, t: "Monitor and\ncontrol work", tone: "warn", s: 12 },
+        { k: "box", x: 181, y: 140, w: 133, h: 54, t: "Integrated\nchange control", tone: "warn", s: 12 },
+        { k: "line", p: [160, 167, 178, 167], arrow: true },
+        { k: "box", x: 336, y: 140, w: 133, h: 54, t: "Close project\nor phase", tone: "muted", s: 12 },
+        { k: "line", p: [315, 167, 333, 167], arrow: true },
+        { k: "text", x: 92.5, y: 28, t: "Initiating", a: "middle", s: 11, b: true, tone: "muted" },
+        { k: "text", x: 247.5, y: 28, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 480, y: 28, t: "Executing", a: "middle", s: 11, b: true, tone: "good" },
+        {
+          k: "text",
+          x: 170,
+          y: 128,
+          t: "Monitoring & controlling",
+          a: "middle",
+          s: 11,
+          b: true,
+          tone: "warn"
+        },
+        { k: "text", x: 402.5, y: 128, t: "Closing", a: "middle", s: 11, b: true, tone: "muted" },
+        { k: "line", p: [557.5, 94, 557.5, 110, 44, 110, 44, 137], arrow: true },
+        {
+          k: "line",
+          p: [247.5, 194, 247.5, 214, 10, 214, 10, 10, 199, 10, 199, 37],
+          arrow: true,
+          dash: true,
+          tone: "warn"
+        },
+        {
+          k: "text",
+          x: 320,
+          y: 230,
+          t: "approved changes update the plan",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  },
+  {
+    area: "scope",
+    intro: "Scope settles what the project will and will not deliver. Planning comes first and does most of the work: decide how scope will be handled, collect requirements from the people who hold them, write the scope statement, then break the work into a WBS whose lowest level can be estimated and owned. Nothing in this area executes; the deliverables are produced under integration. In control, Validate Scope is the customer formally accepting finished deliverables, while Control Scope watches for creep and routes changes properly. Exam items like to test the difference between those two, what belongs in the scope baseline, how requirements are traced, and what to do when someone quietly asks for extra work.",
+    lessons: ["P2", "L6", "B2"],
+    figure: {
+      title: "Scope: the flow",
+      caption: "Four planning steps build the scope baseline. The work itself happens under integration; scope returns to check acceptance and guard against creep.",
+      alt: "Top row of four planning boxes: Plan scope management, Collect requirements, Define scope, Create WBS. Bottom row: a hollow box for deliverables produced by Direct and Manage Project Work, then Validate scope and Control scope. A dashed line runs from Control scope back to Collect requirements.",
+      w: 640,
+      h: 244,
+      shapes: [
+        { k: "box", x: 26, y: 40, w: 133, h: 54, t: "Plan scope\nmanagement", tone: "accent", s: 12 },
+        { k: "box", x: 181, y: 40, w: 133, h: 54, t: "Collect\nrequirements", tone: "accent", s: 12 },
+        { k: "line", p: [160, 67, 178, 67], arrow: true },
+        { k: "box", x: 336, y: 40, w: 133, h: 54, t: "Define\nscope", tone: "accent", s: 12 },
+        { k: "line", p: [315, 67, 333, 67], arrow: true },
+        { k: "box", x: 491, y: 40, w: 133, h: 54, t: "Create\nWBS", tone: "accent", s: 12 },
+        { k: "line", p: [470, 67, 488, 67], arrow: true },
+        {
+          k: "box",
+          x: 26,
+          y: 140,
+          w: 133,
+          h: 54,
+          t: "Deliverables\nfrom 4.3",
+          tone: "muted",
+          s: 12,
+          fill: false
+        },
+        { k: "box", x: 181, y: 140, w: 133, h: 54, t: "Validate\nscope", tone: "warn", s: 12 },
+        { k: "line", p: [160, 167, 178, 167], arrow: true },
+        { k: "box", x: 336, y: 140, w: 133, h: 54, t: "Control\nscope", tone: "warn", s: 12 },
+        { k: "line", p: [315, 167, 333, 167], arrow: true },
+        { k: "text", x: 325, y: 28, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 92.5, y: 128, t: "Executing", a: "middle", s: 11, b: true, tone: "muted" },
+        {
+          k: "text",
+          x: 325,
+          y: 128,
+          t: "Monitoring & controlling",
+          a: "middle",
+          s: 11,
+          b: true,
+          tone: "warn"
+        },
+        { k: "line", p: [557.5, 94, 557.5, 110, 44, 110, 44, 137], arrow: true },
+        {
+          k: "line",
+          p: [402.5, 194, 402.5, 214, 10, 214, 10, 10, 199, 10, 199, 37],
+          arrow: true,
+          dash: true,
+          tone: "warn"
+        },
+        {
+          k: "text",
+          x: 320,
+          y: 230,
+          t: "approved changes revise requirements and the baseline",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  },
+  {
+    area: "schedule",
+    intro: "Schedule turns the scope into dates, and the order of its processes is the order you would build a network by hand. Plan how the schedule will be managed, break work packages into activities, sequence them with dependencies, estimate how long each takes, then develop the schedule by finding the critical path and adjusting for resources and constraints. As with scope, nothing executes here; the schedule is then controlled against the baseline as work is done. Exam items test the network itself: float, the critical path, crashing versus fast tracking, which dependency type applies, and the right response when a critical activity slips.",
+    lessons: ["P3", "X2", "P5"],
+    figure: {
+      title: "Schedule: the flow",
+      caption: "Five planning steps turn work packages into a dated, approved schedule. Control compares progress with that baseline.",
+      alt: "Top row of four planning boxes: Plan schedule management, Define activities, Sequence activities, Estimate durations. Bottom row: Develop schedule (planning), a hollow box for work done under 4.3, and Control schedule. A dashed line runs from Control schedule back to Define activities.",
+      w: 640,
+      h: 244,
+      shapes: [
+        { k: "box", x: 26, y: 40, w: 133, h: 54, t: "Plan schedule\nmanagement", tone: "accent", s: 12 },
+        { k: "box", x: 181, y: 40, w: 133, h: 54, t: "Define\nactivities", tone: "accent", s: 12 },
+        { k: "line", p: [160, 67, 178, 67], arrow: true },
+        { k: "box", x: 336, y: 40, w: 133, h: 54, t: "Sequence\nactivities", tone: "accent", s: 12 },
+        { k: "line", p: [315, 67, 333, 67], arrow: true },
+        { k: "box", x: 491, y: 40, w: 133, h: 54, t: "Estimate\ndurations", tone: "accent", s: 12 },
+        { k: "line", p: [470, 67, 488, 67], arrow: true },
+        { k: "box", x: 26, y: 140, w: 133, h: 54, t: "Develop\nschedule", tone: "accent", s: 12 },
+        {
+          k: "box",
+          x: 181,
+          y: 140,
+          w: 133,
+          h: 54,
+          t: "Work done\nunder 4.3",
+          tone: "muted",
+          s: 12,
+          fill: false
+        },
+        { k: "line", p: [160, 167, 178, 167], arrow: true },
+        { k: "box", x: 336, y: 140, w: 133, h: 54, t: "Control\nschedule", tone: "warn", s: 12 },
+        { k: "line", p: [315, 167, 333, 167], arrow: true },
+        { k: "text", x: 325, y: 28, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 92.5, y: 128, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 247.5, y: 128, t: "Executing", a: "middle", s: 11, b: true, tone: "muted" },
+        { k: "text", x: 402.5, y: 128, t: "Controlling", a: "middle", s: 11, b: true, tone: "warn" },
+        { k: "line", p: [557.5, 94, 557.5, 110, 44, 110, 44, 137], arrow: true },
+        {
+          k: "line",
+          p: [402.5, 194, 402.5, 214, 10, 214, 10, 10, 199, 10, 199, 37],
+          arrow: true,
+          dash: true,
+          tone: "warn"
+        },
+        {
+          k: "text",
+          x: 320,
+          y: 230,
+          t: "variances and approved changes rework the plan",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  },
+  {
+    area: "cost",
+    intro: "Cost has the shortest story of the three big constraints. Decide how costs will be estimated and reported, estimate the cost of the work, then add those estimates up, with contingency, into a time-phased cost baseline; management reserve sits on top to make the budget. The work is done elsewhere, and Control Costs compares actual spend and earned value against the baseline. Exam items lean heavily on that control step: earned value figures, what CPI and SPI mean, which forecast formula fits the situation, and who may release each kind of reserve.",
+    lessons: ["P4", "X2", "P8"],
+    figure: {
+      title: "Cost: the flow",
+      caption: "Plan, estimate and aggregate into a baseline; then measure spend and earned value against it while the work runs.",
+      alt: "Five boxes in a row: Plan cost management, Estimate costs and Determine budget (planning), a hollow box for work done under 4.3, and Control costs (controlling). A dashed line runs from Control costs back to Estimate costs.",
+      w: 640,
+      h: 160,
+      shapes: [
+        { k: "box", x: 16, y: 38, w: 104, h: 58, t: "Plan cost\nmanagement", tone: "accent", s: 12 },
+        { k: "box", x: 142, y: 38, w: 104, h: 58, t: "Estimate\ncosts", tone: "accent", s: 12 },
+        { k: "line", p: [121, 67, 139, 67], arrow: true },
+        { k: "box", x: 268, y: 38, w: 104, h: 58, t: "Determine\nbudget", tone: "accent", s: 12 },
+        { k: "line", p: [247, 67, 265, 67], arrow: true },
+        {
+          k: "box",
+          x: 394,
+          y: 38,
+          w: 104,
+          h: 58,
+          t: "Work done\nunder 4.3",
+          tone: "muted",
+          s: 12,
+          fill: false
+        },
+        { k: "line", p: [373, 67, 391, 67], arrow: true },
+        { k: "box", x: 520, y: 38, w: 104, h: 58, t: "Control\ncosts", tone: "warn", s: 12 },
+        { k: "line", p: [499, 67, 517, 67], arrow: true },
+        { k: "text", x: 194, y: 24, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 446, y: 24, t: "Executing", a: "middle", s: 11, b: true, tone: "muted" },
+        { k: "text", x: 572, y: 24, t: "Controlling", a: "middle", s: 11, b: true, tone: "warn" },
+        { k: "line", p: [572, 96, 572, 122, 194, 122, 194, 99], arrow: true, dash: true, tone: "warn" },
+        {
+          k: "text",
+          x: 320,
+          y: 140,
+          t: "forecasts and changes feed back into estimates",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  },
+  {
+    area: "quality",
+    intro: "Quality has one process in each of the three middle groups, which makes its story easy to tell. Planning sets the standards and how they will be met and measured. Manage Quality runs while the work is being done and looks at the process: audits, design for quality and improvement. Control Quality inspects the product itself and checks that deliverables meet requirements before they go to the customer for acceptance. Exam items test exactly that split between process and product, the cost of quality, the tools for finding root causes, and why prevention is cheaper than inspection.",
+    lessons: ["P6", "B6", "L6"],
+    figure: {
+      title: "Quality: the flow",
+      caption: "Plan the standards, manage the process while the work runs, and inspect the product before it is handed over.",
+      alt: "Three boxes in a row: Plan quality management (planning), Manage quality (executing), Control quality (controlling). A dashed line runs from Control quality back to Plan quality management.",
+      w: 640,
+      h: 160,
+      shapes: [
+        { k: "box", x: 73, y: 38, w: 150, h: 58, t: "Plan quality\nmanagement", tone: "accent", s: 12 },
+        { k: "box", x: 245, y: 38, w: 150, h: 58, t: "Manage quality\n(the process)", tone: "good", s: 12 },
+        { k: "line", p: [224, 67, 242, 67], arrow: true },
+        { k: "box", x: 417, y: 38, w: 150, h: 58, t: "Control quality\n(the product)", tone: "warn", s: 12 },
+        { k: "line", p: [396, 67, 414, 67], arrow: true },
+        { k: "text", x: 148, y: 24, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 320, y: 24, t: "Executing", a: "middle", s: 11, b: true, tone: "good" },
+        { k: "text", x: 492, y: 24, t: "Monitoring & controlling", a: "middle", s: 11, b: true, tone: "warn" },
+        { k: "line", p: [492, 96, 492, 122, 148, 122, 148, 99], arrow: true, dash: true, tone: "warn" },
+        {
+          k: "text",
+          x: 320,
+          y: 140,
+          t: "measurements and lessons refine the quality plan",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  },
+  {
+    area: "resource",
+    intro: "Resource covers people and physical things, and it is the area where planning hands over to leadership. Plan how resources will be identified and managed, then estimate what each activity needs. Execution has three processes: acquire the team and materials, develop the team into one that works well together, and manage it day to day through feedback, conflict and changes. Control Resources makes sure physical resources are where they are needed and released when they are not. Exam items here are mostly about people: team development stages, conflict approaches, motivation, and what to do when a key person is withdrawn.",
+    lessons: ["P5", "L1", "L3", "L2"],
+    figure: {
+      title: "Resource: the flow",
+      caption: "Two planning steps, three steps about the team, and one control step for physical resources.",
+      alt: "Top row: Plan resource management and Estimate activity resources (planning), then Acquire resources and Develop team (executing). Bottom row: Manage team (executing) and Control resources (controlling). A dashed line runs from Control resources back to Plan resource management.",
+      w: 640,
+      h: 244,
+      shapes: [
+        { k: "box", x: 26, y: 40, w: 133, h: 54, t: "Plan resource\nmanagement", tone: "accent", s: 12 },
+        { k: "box", x: 181, y: 40, w: 133, h: 54, t: "Estimate activity\nresources", tone: "accent", s: 12 },
+        { k: "line", p: [160, 67, 178, 67], arrow: true },
+        { k: "box", x: 336, y: 40, w: 133, h: 54, t: "Acquire\nresources", tone: "good", s: 12 },
+        { k: "line", p: [315, 67, 333, 67], arrow: true },
+        { k: "box", x: 491, y: 40, w: 133, h: 54, t: "Develop\nteam", tone: "good", s: 12 },
+        { k: "line", p: [470, 67, 488, 67], arrow: true },
+        { k: "box", x: 26, y: 140, w: 133, h: 54, t: "Manage\nteam", tone: "good", s: 12 },
+        { k: "box", x: 181, y: 140, w: 133, h: 54, t: "Control\nresources", tone: "warn", s: 12 },
+        { k: "line", p: [160, 167, 178, 167], arrow: true },
+        { k: "text", x: 170, y: 28, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 480, y: 28, t: "Executing", a: "middle", s: 11, b: true, tone: "good" },
+        { k: "text", x: 92.5, y: 128, t: "Executing", a: "middle", s: 11, b: true, tone: "good" },
+        { k: "text", x: 247.5, y: 128, t: "Controlling", a: "middle", s: 11, b: true, tone: "warn" },
+        { k: "line", p: [557.5, 94, 557.5, 110, 44, 110, 44, 137], arrow: true },
+        {
+          k: "line",
+          p: [247.5, 194, 247.5, 214, 10, 214, 10, 10, 44, 10, 44, 37],
+          arrow: true,
+          dash: true,
+          tone: "warn"
+        },
+        {
+          k: "text",
+          x: 320,
+          y: 230,
+          t: "shortfalls and changes return to the resource plan",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  },
+  {
+    area: "comms",
+    intro: "Communications is a short loop. Plan who needs what information, when, in what form and through which channel. Manage Communications produces and distributes it, and also covers the meetings and conversations themselves. Monitor Communications checks whether the messages actually landed and changed what people know or do, rather than merely being sent. Exam items test the number of channels as a team grows, push, pull and interactive methods, choosing the right medium for bad news or a distributed team, and treating a misunderstanding as a fault in the plan rather than in the listener.",
+    lessons: ["L7", "P9", "L4"],
+    figure: {
+      title: "Communications: the flow",
+      caption: "Plan the messages, deliver them, and check that they were understood. Gaps send you back to the plan.",
+      alt: "Three boxes in a row: Plan communications management (planning), Manage communications (executing), Monitor communications (controlling). A dashed line runs from Monitor communications back to the plan.",
+      w: 640,
+      h: 160,
+      shapes: [
+        { k: "box", x: 73, y: 38, w: 150, h: 58, t: "Plan comms\nmanagement", tone: "accent", s: 12 },
+        { k: "box", x: 245, y: 38, w: 150, h: 58, t: "Manage\ncommunications", tone: "good", s: 12 },
+        { k: "line", p: [224, 67, 242, 67], arrow: true },
+        { k: "box", x: 417, y: 38, w: 150, h: 58, t: "Monitor\ncommunications", tone: "warn", s: 12 },
+        { k: "line", p: [396, 67, 414, 67], arrow: true },
+        { k: "text", x: 148, y: 24, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 320, y: 24, t: "Executing", a: "middle", s: 11, b: true, tone: "good" },
+        { k: "text", x: 492, y: 24, t: "Monitoring & controlling", a: "middle", s: 11, b: true, tone: "warn" },
+        { k: "line", p: [492, 96, 492, 122, 148, 122, 148, 99], arrow: true, dash: true, tone: "warn" },
+        {
+          k: "text",
+          x: 320,
+          y: 140,
+          t: "misunderstandings change the plan, not the audience",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  },
+  {
+    area: "risk",
+    intro: "Risk has the longest planning chain of any area. Decide how risk will be managed, identify the risks, rank them by probability and impact, optionally model their combined effect with numbers, and then choose a response and an owner for each. Implement Risk Responses is the owner carrying out the agreed response when the trigger appears. Monitor Risks tracks triggers, residual and secondary risks, and finds new ones, which sends you back to identification. Exam items test the response strategies for threats and opportunities, what goes in the register, when quantitative analysis is worth it, and the difference between a risk and an issue.",
+    lessons: ["B3", "B4", "P4"],
+    figure: {
+      title: "Risk: the flow",
+      caption: "Five planning steps, one of them optional, then carry out the responses and keep watching. New risks restart the cycle.",
+      alt: "Top row of four planning boxes: Plan risk management, Identify risks, Qualitative analysis, and a hollow box for the optional Quantitative analysis. Bottom row: Plan risk responses (planning), Implement responses (executing), Monitor risks (controlling). A dashed line runs from Monitor risks back to Identify risks.",
+      w: 640,
+      h: 244,
+      shapes: [
+        { k: "box", x: 26, y: 40, w: 133, h: 54, t: "Plan risk\nmanagement", tone: "accent", s: 12 },
+        { k: "box", x: 181, y: 40, w: 133, h: 54, t: "Identify\nrisks", tone: "accent", s: 12 },
+        { k: "line", p: [160, 67, 178, 67], arrow: true },
+        { k: "box", x: 336, y: 40, w: 133, h: 54, t: "Qualitative\nanalysis", tone: "accent", s: 12 },
+        { k: "line", p: [315, 67, 333, 67], arrow: true },
+        {
+          k: "box",
+          x: 491,
+          y: 40,
+          w: 133,
+          h: 54,
+          t: "Quantitative\n(optional)",
+          tone: "accent",
+          s: 12,
+          fill: false
+        },
+        { k: "line", p: [470, 67, 488, 67], arrow: true },
+        { k: "box", x: 26, y: 140, w: 133, h: 54, t: "Plan risk\nresponses", tone: "accent", s: 12 },
+        { k: "box", x: 181, y: 140, w: 133, h: 54, t: "Implement\nresponses", tone: "good", s: 12 },
+        { k: "line", p: [160, 167, 178, 167], arrow: true },
+        { k: "box", x: 336, y: 140, w: 133, h: 54, t: "Monitor\nrisks", tone: "warn", s: 12 },
+        { k: "line", p: [315, 167, 333, 167], arrow: true },
+        { k: "text", x: 325, y: 28, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 92.5, y: 128, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 247.5, y: 128, t: "Executing", a: "middle", s: 11, b: true, tone: "good" },
+        { k: "text", x: 402.5, y: 128, t: "Controlling", a: "middle", s: 11, b: true, tone: "warn" },
+        { k: "line", p: [557.5, 94, 557.5, 110, 44, 110, 44, 137], arrow: true },
+        {
+          k: "line",
+          p: [402.5, 194, 402.5, 214, 10, 214, 10, 10, 199, 10, 199, 37],
+          arrow: true,
+          dash: true,
+          tone: "warn"
+        },
+        {
+          k: "text",
+          x: 320,
+          y: 230,
+          t: "new and changed risks go round again",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  },
+  {
+    area: "procurement",
+    intro: "Procurement is about buying from outside the organisation. Planning decides whether to make or buy, chooses the contract type and prepares the bid documents and selection criteria. Conduct Procurements obtains responses, selects a seller and awards the contract. Control Procurements manages the relationship, checks performance against the contract, handles claims and changes, and closes the contract when the work is accepted. Exam items test which contract type puts which risk on whom, the point of total assumption, what to do when a seller underperforms, and that the contract, not goodwill, decides what the seller must do.",
+    lessons: ["P7", "P10", "B5"],
+    figure: {
+      title: "Procurement: the flow",
+      caption: "Decide what to buy and how, award the contract, then manage it to closure. Disputes and changes go through the contract's own terms.",
+      alt: "Three boxes in a row: Plan procurement management (planning), Conduct procurements (executing), Control procurements (controlling). A dashed line runs from Control procurements back to the plan.",
+      w: 640,
+      h: 160,
+      shapes: [
+        { k: "box", x: 73, y: 38, w: 150, h: 58, t: "Plan procurement\nmanagement", tone: "accent", s: 12 },
+        { k: "box", x: 245, y: 38, w: 150, h: 58, t: "Conduct\nprocurements", tone: "good", s: 12 },
+        { k: "line", p: [224, 67, 242, 67], arrow: true },
+        { k: "box", x: 417, y: 38, w: 150, h: 58, t: "Control\nprocurements", tone: "warn", s: 12 },
+        { k: "line", p: [396, 67, 414, 67], arrow: true },
+        { k: "text", x: 148, y: 24, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 320, y: 24, t: "Executing", a: "middle", s: 11, b: true, tone: "good" },
+        { k: "text", x: 492, y: 24, t: "Monitoring & controlling", a: "middle", s: 11, b: true, tone: "warn" },
+        { k: "line", p: [492, 96, 492, 122, 148, 122, 148, 99], arrow: true, dash: true, tone: "warn" },
+        {
+          k: "text",
+          x: 320,
+          y: 140,
+          t: "contract changes and claims revisit the plan",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  },
+  {
+    area: "stakeholder",
+    intro: "Stakeholder starts on the first day, because you cannot plan for people you have not found. Identify Stakeholders lists them and records their interest, influence and attitude. Planning compares how engaged each one is now with how engaged they need to be, and sets out how to close the gap. Manage Stakeholder Engagement is the conversations, negotiations and follow-ups that do it, and Monitor Stakeholder Engagement checks whether the strategy is working and adjusts it. Exam items test the engagement assessment matrix, handling a resistant or newly discovered stakeholder, and the habit of talking to people directly before escalating.",
+    lessons: ["L4", "L5", "L6", "L7"],
+    figure: {
+      title: "Stakeholder: the flow",
+      caption: "Find the people, plan how to engage them, do it, and check whether it is working. Newly found stakeholders restart the cycle.",
+      alt: "Four boxes in a row: Identify stakeholders (initiating), Plan engagement (planning), Manage engagement (executing), Monitor engagement (controlling). A dashed line runs from Monitor engagement back to Plan engagement.",
+      w: 640,
+      h: 160,
+      shapes: [
+        { k: "box", x: 17, y: 38, w: 135, h: 58, t: "Identify\nstakeholders", tone: "muted", s: 12 },
+        { k: "box", x: 174, y: 38, w: 135, h: 58, t: "Plan\nengagement", tone: "accent", s: 12 },
+        { k: "line", p: [153, 67, 171, 67], arrow: true },
+        { k: "box", x: 331, y: 38, w: 135, h: 58, t: "Manage\nengagement", tone: "good", s: 12 },
+        { k: "line", p: [310, 67, 328, 67], arrow: true },
+        { k: "box", x: 488, y: 38, w: 135, h: 58, t: "Monitor\nengagement", tone: "warn", s: 12 },
+        { k: "line", p: [467, 67, 485, 67], arrow: true },
+        { k: "text", x: 84.5, y: 24, t: "Initiating", a: "middle", s: 11, b: true, tone: "muted" },
+        { k: "text", x: 241.5, y: 24, t: "Planning", a: "middle", s: 11, b: true, tone: "accent" },
+        { k: "text", x: 398.5, y: 24, t: "Executing", a: "middle", s: 11, b: true, tone: "good" },
+        { k: "text", x: 555.5, y: 24, t: "Controlling", a: "middle", s: 11, b: true, tone: "warn" },
+        {
+          k: "line",
+          p: [555.5, 96, 555.5, 122, 241.5, 122, 241.5, 99],
+          arrow: true,
+          dash: true,
+          tone: "warn"
+        },
+        {
+          k: "text",
+          x: 320,
+          y: 140,
+          t: "shifts in attitude change the engagement plan",
+          a: "middle",
+          s: 11,
+          tone: "muted"
+        }
+      ]
+    }
+  }
+]);
+
+PMP.COURSE_ORDER = Object.freeze([
+  "F1",
+  "F0",
+  "F2",
+  "F3",
+  "F4",
+  "F5",
+  "P1",
+  "P8",
+  "B4",
+  "L8",
+  "P9",
+  "B2",
+  "P10",
+  "P2",
+  "L6",
+  "P3",
+  "P4",
+  "P6",
+  "P5",
+  "L1",
+  "L2",
+  "L3",
+  "L7",
+  "B3",
+  "P7",
+  "L4",
+  "L5",
+  "B1",
+  "B5",
+  "B7",
+  "B8",
+  "B6",
+  "X1",
+  "X2",
+  "X3"
+]);
+
 PMP.MODULES = Object.freeze([
   { id: "foundations", order: 1, prefix: "F", label: "Foundations",
     blurb: "How the exam works, the mindset it rewards, and the delivery approaches every later lesson assumes." },
@@ -19293,12 +19829,123 @@ PMP.MODULES = Object.freeze([
 
 PMP.LESSONS = Object.freeze([
   {
-    id: "F0",
-    module: "foundations",
-    order: 0,
-    ecoTask: "",
-    minutes: 25,
+    id: "F1", module: "foundations", order: 1, ecoTask: "", minutes: 30,
     prereqs: [],
+    title: "How the exam works and how to study with this suite",
+    objectives: [
+      "Describe what the exam is really testing, beyond recall of terms.",
+      "Recognise each question type you will meet and how it is marked.",
+      "Explain how the three domains and three delivery approaches shape the paper.",
+      "Use the suite's study loop: learn, check, practise, review, retain.",
+      "Build a study plan from an honest diagnostic and the hours you really have."
+    ],
+    examWeight: "This lesson covers the exam as a whole rather than one task. The figures above come straight from the build's own settings, so they change in one place if the outline changes. Check them against the current published outline before you book. What matters most is the balance. No single topic carries the exam, and most items ask what you would do, not what a term means.",
+    sections: [
+      { id: "s1", heading: "What the exam is really testing",
+        body: "The exam is not a vocabulary test. Most items describe a situation and ask what a project manager should do. Some ask what to do first, some ask what to do next, and some ask for the best response.\n\n"
+          + "The answer it wants is the response of a capable, ethical project manager working in a well-run organisation. That is not always what happens in your own workplace. Many experienced managers lose marks by answering from habit.\n\n"
+          + "So the exam rewards judgement built on understanding. You need to know why a practice exists, not just its name. A learner who knows why issues are raised early can answer a question about a situation they have never met.\n\n"
+          + "Terms still matter, because the options use them precisely. But they are the vocabulary of the test, not its subject." },
+      { id: "s2", heading: "The question types you will meet",
+        body: "Most items are single answer: four options, one correct. Read all four before choosing, because two often look reasonable and only one fits every detail.\n\n"
+          + "Multiple response items ask you to choose two or more. The stem tells you how many. There is no credit for choosing too many.\n\n"
+          + "Matching items ask you to pair each prompt with an option. Drop-down items put a choice inside a sentence. Hotspot and graphic items ask you to select a region of a diagram or chart. Fill-in items ask for a value, usually from a calculation.\n\n"
+          + "This suite uses all of these types, so nothing on the day should look unfamiliar. Practise every type at least once before your first full mock.\n\n"
+          + "Some items on the real exam are unscored trials. You cannot tell which, so treat every item as if it counts." },
+      { id: "s3", heading: "Domains and delivery approaches",
+        body: "The outline groups the work into three domains: People, Process and Business Environment. Each domain is split into tasks. The weights shown above tell you roughly how many items each domain contributes.\n\n"
+          + "Every lesson in this suite is tied to one of those tasks, except the foundation and exam-skills lessons. That tie is what lets the suite join a lesson to its questions, scenarios and cards.\n\n"
+          + "Cutting across the domains are delivery approaches. Some items assume predictive delivery, with a plan and baselines set early. More assume adaptive or hybrid delivery, with short cycles and a changing backlog.\n\n"
+          + "This changes how you read a question. The same problem can have a different best answer in a predictive project and an agile team. So the first thing to notice in any stem is the approach it describes." },
+      { id: "s4", heading: "The study loop in this suite",
+        body: "The suite is built around one loop. Learn a topic, check your understanding, practise it under exam conditions, review what went wrong, then hold on to it.\n\n"
+          + "Lessons do the teaching. Quick checks inside a lesson are for learning only and never touch your scores. The practice set at the end of each lesson is real practice and counts.\n\n"
+          + "Every wrong answer then lands in the mistake journal. Tagging why you got it wrong is more useful than the score itself. A knowledge gap sends you back to the lesson; a misread sends you to slower reading.\n\n"
+          + "Flashcards hold terms and formulas over time, using spaced repetition. Mock exams test stamina and pacing across the whole outline.\n\n"
+          + "The readiness score on the dashboard draws all of this together. It is a study signal, not a prediction of your result." },
+      { id: "s5", heading: "Building a plan you will keep",
+        body: "Start with the diagnostic in the planner. It is a short mixed set that shows where you stand in each domain. Take it cold, without revising first, or it measures your revision rather than you.\n\n"
+          + "Then give the planner your exam date and honest hours. An honest figure beats an ambitious one. A plan built on hours you do not have is abandoned within a fortnight.\n\n"
+          + "The plan puts lessons first, then shifts towards mixed practice, scenarios and mocks as the date approaches. Its chips tick themselves from your actual activity, so it cannot be gamed.\n\n"
+          + "If you fall behind, rebuild rather than catch up. The rebuild targets what is still weak, using your live results.\n\n"
+          + "Finally, protect your last few days. New material that late mostly adds anxiety. Review your journal, skim the formula sheet and rest." }
+    ],
+    lenses: {
+      predictive: "Items set in predictive work mention plans, baselines, phase gates, change boards and formal acceptance. The best answer usually follows the agreed process and keeps the baselines honest.",
+      agile: "Items set in adaptive work mention sprints, backlogs, product owners, reviews and retrospectives. The best answer usually empowers the team, keeps the customer close and adapts the plan from evidence.",
+      hybrid: "Items set in hybrid work combine both, often a fixed part beside an iterative part. The best answer usually respects each part's own rules and manages the seam between them."
+    },
+    worked: {
+      stem: "You have just opened the suite with ten weeks until your exam. You have run construction projects for years but have never worked on an agile team. You can study for about an hour on weekdays and three hours at weekends. What should you do first?",
+      options: [
+        { id: "a", text: "Take the planner's diagnostic cold, then build a plan from your exam date and those real hours." },
+        { id: "b", text: "Sit a full mock exam today to find out exactly where you stand across the whole outline." },
+        { id: "c", text: "Read the reference library from start to finish before attempting any questions at all." },
+        { id: "d", text: "Drill agile questions every day until your agile scores catch up with the rest." }
+      ],
+      ranking: [
+        { option: "a", rank: "best", why: "A short diagnostic gives evidence across all three domains at low cost. The plan then spends your real hours where the evidence says they are needed, and it adjusts as you go." },
+        { option: "d", rank: "acceptable", why: "Agile is a likely gap and closing it matters. But this acts on an assumption rather than evidence, and it may leave a weaker area untouched for weeks." },
+        { option: "b", rank: "premature", why: "A full mock is valuable later, once you have covered the outline. Taken on day one it costs a whole session and mostly measures material you have not studied yet." },
+        { option: "c", rank: "wrong", why: "A reference has no sequence and no checks. Reading it end to end feels productive but builds little recall, and it delays practice that would show what you actually need." }
+      ],
+      mindset: "Gather evidence about where you stand before deciding where to spend your time."
+    },
+    traps: [
+      "Answering from how your own organisation works instead of how a well-run one would.",
+      "Choosing the first option that sounds right without reading all four.",
+      "Ignoring whether the stem describes predictive, agile or hybrid delivery.",
+      "Revising before the diagnostic, so it measures your revision instead of you.",
+      "Planning around the hours you wish you had rather than the hours you have."
+    ],
+    checks: [
+      {
+        id: "F1-c1", type: "single", ecoTask: "process-1",
+        stem: "A practice item describes a team that plans in two-week cycles and keeps a ranked backlog. It shows its work to the customer after each cycle. Before reading the options, what should you note first?",
+        options: [
+          { id: "a", text: "That the item is set in adaptive delivery, so the best answer will fit how an agile team works.", correct: true,
+            rationale: "The approach shapes the best answer. Spotting it first stops you choosing a predictive response for an agile team." },
+          { id: "b", text: "That the item is about scope, because the backlog is mentioned.",
+            rationale: "A backlog appears in many agile items whatever their topic. The delivery approach is the more useful first signal." },
+          { id: "c", text: "That the answer will probably involve the change control board.",
+            rationale: "Formal change boards belong mainly to predictive work. Expecting one here would bias you towards the wrong lens." },
+          { id: "d", text: "That the item is likely to be an unscored trial item.",
+            rationale: "Trial items cannot be identified, so guessing which they are wastes attention and should never change how you answer." }
+        ],
+        explanation: "Many situations have a different best response depending on the delivery approach. Reading the approach first sets the lens for the whole item. Here the cycles, ranked backlog and regular demonstrations all point to adaptive delivery.",
+        mindset: "Notice the delivery approach before you weigh the options."
+      },
+      {
+        id: "F1-c2", type: "single", ecoTask: "people-8",
+        stem: "After a week of study you have twelve wrong answers waiting in your mistake journal. You are short of time and tempted to skip tagging them. Why is tagging worth the few minutes it takes?",
+        options: [
+          { id: "a", text: "The causes show what kind of work will fix the misses, which the score alone cannot tell you.", correct: true,
+            rationale: "A knowledge gap needs teaching while a misread needs slower reading. Only the cause tells you which fix to apply." },
+          { id: "b", text: "Tagging a miss removes it from your accuracy figures.",
+            rationale: "Tagging never changes your results. Every answer still counts exactly as it was given." },
+          { id: "c", text: "Untagged misses stop the planner from building a plan.",
+            rationale: "The planner builds plans whether or not misses are tagged. The journal is for your own diagnosis." },
+          { id: "d", text: "The exam itself asks you to classify your own mistakes.",
+            rationale: "The exam asks nothing about your study habits. Tagging is a tool for choosing what to study next." }
+        ],
+        explanation: "Two learners with the same score may need opposite next steps. One is losing marks to material they have not learnt, the other to reading too fast. The journal's cause distribution separates them, and each cause points to a different fix.",
+        mindset: "Find out why an answer was wrong before deciding how to fix it."
+      }
+    ],
+    terms: ["Tailoring", "Predictive life cycle", "Adaptive life cycle", "Hybrid approach"],
+    recap: [
+      "The exam tests judgement in situations, not recall of definitions.",
+      "Know every question type before your first full mock.",
+      "Read the delivery approach first; it changes the best answer.",
+      "Learn, check, practise, review and retain, in that order.",
+      "Plan on honest hours, and rebuild rather than catch up."
+    ],
+    mindset: "Answer as a capable project manager in a well-run organisation would, not as your own workplace does.",
+    practice: { count: 10, decks: [], from: {} }
+  },
+  {
+    id: "F0", module: "foundations", order: 2, ecoTask: "", minutes: 25,
+    prereqs: ["F1"],
     title: "From application to certificate",
     objectives: [
       "Check which eligibility route fits you and what evidence each part needs.",
@@ -19538,122 +20185,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [], from: {  } }
   },
   {
-    id: "F1", module: "foundations", order: 1, ecoTask: "", minutes: 30,
-    prereqs: [],
-    title: "How the exam works and how to study with this suite",
-    objectives: [
-      "Describe what the exam is really testing, beyond recall of terms.",
-      "Recognise each question type you will meet and how it is marked.",
-      "Explain how the three domains and three delivery approaches shape the paper.",
-      "Use the suite's study loop: learn, check, practise, review, retain.",
-      "Build a study plan from an honest diagnostic and the hours you really have."
-    ],
-    examWeight: "This lesson covers the exam as a whole rather than one task. The figures above come straight from the build's own settings, so they change in one place if the outline changes. Check them against the current published outline before you book. What matters most is the balance. No single topic carries the exam, and most items ask what you would do, not what a term means.",
-    sections: [
-      { id: "s1", heading: "What the exam is really testing",
-        body: "The exam is not a vocabulary test. Most items describe a situation and ask what a project manager should do. Some ask what to do first, some ask what to do next, and some ask for the best response.\n\n"
-          + "The answer it wants is the response of a capable, ethical project manager working in a well-run organisation. That is not always what happens in your own workplace. Many experienced managers lose marks by answering from habit.\n\n"
-          + "So the exam rewards judgement built on understanding. You need to know why a practice exists, not just its name. A learner who knows why issues are raised early can answer a question about a situation they have never met.\n\n"
-          + "Terms still matter, because the options use them precisely. But they are the vocabulary of the test, not its subject." },
-      { id: "s2", heading: "The question types you will meet",
-        body: "Most items are single answer: four options, one correct. Read all four before choosing, because two often look reasonable and only one fits every detail.\n\n"
-          + "Multiple response items ask you to choose two or more. The stem tells you how many. There is no credit for choosing too many.\n\n"
-          + "Matching items ask you to pair each prompt with an option. Drop-down items put a choice inside a sentence. Hotspot and graphic items ask you to select a region of a diagram or chart. Fill-in items ask for a value, usually from a calculation.\n\n"
-          + "This suite uses all of these types, so nothing on the day should look unfamiliar. Practise every type at least once before your first full mock.\n\n"
-          + "Some items on the real exam are unscored trials. You cannot tell which, so treat every item as if it counts." },
-      { id: "s3", heading: "Domains and delivery approaches",
-        body: "The outline groups the work into three domains: People, Process and Business Environment. Each domain is split into tasks. The weights shown above tell you roughly how many items each domain contributes.\n\n"
-          + "Every lesson in this suite is tied to one of those tasks, except the foundation and exam-skills lessons. That tie is what lets the suite join a lesson to its questions, scenarios and cards.\n\n"
-          + "Cutting across the domains are delivery approaches. Some items assume predictive delivery, with a plan and baselines set early. More assume adaptive or hybrid delivery, with short cycles and a changing backlog.\n\n"
-          + "This changes how you read a question. The same problem can have a different best answer in a predictive project and an agile team. So the first thing to notice in any stem is the approach it describes." },
-      { id: "s4", heading: "The study loop in this suite",
-        body: "The suite is built around one loop. Learn a topic, check your understanding, practise it under exam conditions, review what went wrong, then hold on to it.\n\n"
-          + "Lessons do the teaching. Quick checks inside a lesson are for learning only and never touch your scores. The practice set at the end of each lesson is real practice and counts.\n\n"
-          + "Every wrong answer then lands in the mistake journal. Tagging why you got it wrong is more useful than the score itself. A knowledge gap sends you back to the lesson; a misread sends you to slower reading.\n\n"
-          + "Flashcards hold terms and formulas over time, using spaced repetition. Mock exams test stamina and pacing across the whole outline.\n\n"
-          + "The readiness score on the dashboard draws all of this together. It is a study signal, not a prediction of your result." },
-      { id: "s5", heading: "Building a plan you will keep",
-        body: "Start with the diagnostic in the planner. It is a short mixed set that shows where you stand in each domain. Take it cold, without revising first, or it measures your revision rather than you.\n\n"
-          + "Then give the planner your exam date and honest hours. An honest figure beats an ambitious one. A plan built on hours you do not have is abandoned within a fortnight.\n\n"
-          + "The plan puts lessons first, then shifts towards mixed practice, scenarios and mocks as the date approaches. Its chips tick themselves from your actual activity, so it cannot be gamed.\n\n"
-          + "If you fall behind, rebuild rather than catch up. The rebuild targets what is still weak, using your live results.\n\n"
-          + "Finally, protect your last few days. New material that late mostly adds anxiety. Review your journal, skim the formula sheet and rest." }
-    ],
-    lenses: {
-      predictive: "Items set in predictive work mention plans, baselines, phase gates, change boards and formal acceptance. The best answer usually follows the agreed process and keeps the baselines honest.",
-      agile: "Items set in adaptive work mention sprints, backlogs, product owners, reviews and retrospectives. The best answer usually empowers the team, keeps the customer close and adapts the plan from evidence.",
-      hybrid: "Items set in hybrid work combine both, often a fixed part beside an iterative part. The best answer usually respects each part's own rules and manages the seam between them."
-    },
-    worked: {
-      stem: "You have just opened the suite with ten weeks until your exam. You have run construction projects for years but have never worked on an agile team. You can study for about an hour on weekdays and three hours at weekends. What should you do first?",
-      options: [
-        { id: "a", text: "Take the planner's diagnostic cold, then build a plan from your exam date and those real hours." },
-        { id: "b", text: "Sit a full mock exam today to find out exactly where you stand across the whole outline." },
-        { id: "c", text: "Read the reference library from start to finish before attempting any questions at all." },
-        { id: "d", text: "Drill agile questions every day until your agile scores catch up with the rest." }
-      ],
-      ranking: [
-        { option: "a", rank: "best", why: "A short diagnostic gives evidence across all three domains at low cost. The plan then spends your real hours where the evidence says they are needed, and it adjusts as you go." },
-        { option: "d", rank: "acceptable", why: "Agile is a likely gap and closing it matters. But this acts on an assumption rather than evidence, and it may leave a weaker area untouched for weeks." },
-        { option: "b", rank: "premature", why: "A full mock is valuable later, once you have covered the outline. Taken on day one it costs a whole session and mostly measures material you have not studied yet." },
-        { option: "c", rank: "wrong", why: "A reference has no sequence and no checks. Reading it end to end feels productive but builds little recall, and it delays practice that would show what you actually need." }
-      ],
-      mindset: "Gather evidence about where you stand before deciding where to spend your time."
-    },
-    traps: [
-      "Answering from how your own organisation works instead of how a well-run one would.",
-      "Choosing the first option that sounds right without reading all four.",
-      "Ignoring whether the stem describes predictive, agile or hybrid delivery.",
-      "Revising before the diagnostic, so it measures your revision instead of you.",
-      "Planning around the hours you wish you had rather than the hours you have."
-    ],
-    checks: [
-      {
-        id: "F1-c1", type: "single", ecoTask: "process-1",
-        stem: "A practice item describes a team that plans in two-week cycles and keeps a ranked backlog. It shows its work to the customer after each cycle. Before reading the options, what should you note first?",
-        options: [
-          { id: "a", text: "That the item is set in adaptive delivery, so the best answer will fit how an agile team works.", correct: true,
-            rationale: "The approach shapes the best answer. Spotting it first stops you choosing a predictive response for an agile team." },
-          { id: "b", text: "That the item is about scope, because the backlog is mentioned.",
-            rationale: "A backlog appears in many agile items whatever their topic. The delivery approach is the more useful first signal." },
-          { id: "c", text: "That the answer will probably involve the change control board.",
-            rationale: "Formal change boards belong mainly to predictive work. Expecting one here would bias you towards the wrong lens." },
-          { id: "d", text: "That the item is likely to be an unscored trial item.",
-            rationale: "Trial items cannot be identified, so guessing which they are wastes attention and should never change how you answer." }
-        ],
-        explanation: "Many situations have a different best response depending on the delivery approach. Reading the approach first sets the lens for the whole item. Here the cycles, ranked backlog and regular demonstrations all point to adaptive delivery.",
-        mindset: "Notice the delivery approach before you weigh the options."
-      },
-      {
-        id: "F1-c2", type: "single", ecoTask: "people-8",
-        stem: "After a week of study you have twelve wrong answers waiting in your mistake journal. You are short of time and tempted to skip tagging them. Why is tagging worth the few minutes it takes?",
-        options: [
-          { id: "a", text: "The causes show what kind of work will fix the misses, which the score alone cannot tell you.", correct: true,
-            rationale: "A knowledge gap needs teaching while a misread needs slower reading. Only the cause tells you which fix to apply." },
-          { id: "b", text: "Tagging a miss removes it from your accuracy figures.",
-            rationale: "Tagging never changes your results. Every answer still counts exactly as it was given." },
-          { id: "c", text: "Untagged misses stop the planner from building a plan.",
-            rationale: "The planner builds plans whether or not misses are tagged. The journal is for your own diagnosis." },
-          { id: "d", text: "The exam itself asks you to classify your own mistakes.",
-            rationale: "The exam asks nothing about your study habits. Tagging is a tool for choosing what to study next." }
-        ],
-        explanation: "Two learners with the same score may need opposite next steps. One is losing marks to material they have not learnt, the other to reading too fast. The journal's cause distribution separates them, and each cause points to a different fix.",
-        mindset: "Find out why an answer was wrong before deciding how to fix it."
-      }
-    ],
-    terms: ["Tailoring", "Predictive life cycle", "Adaptive life cycle", "Hybrid approach"],
-    recap: [
-      "The exam tests judgement in situations, not recall of definitions.",
-      "Know every question type before your first full mock.",
-      "Read the delivery approach first; it changes the best answer.",
-      "Learn, check, practise, review and retain, in that order.",
-      "Plan on honest hours, and rebuild rather than catch up."
-    ],
-    mindset: "Answer as a capable project manager in a well-run organisation would, not as your own workplace does.",
-    practice: { count: 10, decks: [], from: {} }
-  },
-  {
-    id: "F2", module: "foundations", order: 2, ecoTask: "", minutes: 35,
+    id: "F2", module: "foundations", order: 3, ecoTask: "", minutes: 35,
     prereqs: ["F1"],
     title: "The PMI mindset",
     objectives: [
@@ -19788,7 +20320,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["conflict"], from: { tag: "archetype-diagnose-first" } }
   },
   {
-    id: "F3", module: "foundations", order: 3, ecoTask: "", minutes: 35,
+    id: "F3", module: "foundations", order: 4, ecoTask: "", minutes: 35,
     prereqs: ["F1"],
     title: "Projects, value and delivery approaches",
     objectives: [
@@ -19902,7 +20434,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["process"], from: { ecoTask: "process-1" } }
   },
   {
-    id: "F4", module: "foundations", order: 4, ecoTask: "", minutes: 40,
+    id: "F4", module: "foundations", order: 5, ecoTask: "", minutes: 40,
     prereqs: ["F3"],
     title: "Agile fundamentals",
     objectives: [
@@ -20016,7 +20548,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["agile"], from: { approach: "agile" } }
   },
   {
-    id: "F5", module: "foundations", order: 5, ecoTask: "", minutes: 30,
+    id: "F5", module: "foundations", order: 6, ecoTask: "", minutes: 30,
     prereqs: ["F3"],
     title: "The framework map",
     objectives: [
@@ -20128,7 +20660,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["process"], from: {} }
   },
   {
-    id: "P1", module: "process", order: 6, ecoTask: "process-1", minutes: 35,
+    id: "P1", module: "process", order: 7, ecoTask: "process-1", minutes: 35,
     prereqs: ["F3", "F5"],
     title: "Integrated planning and tailoring",
     objectives: [
@@ -20245,7 +20777,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["process"] }
   },
   {
-    id: "P2", module: "process", order: 7, ecoTask: "process-2", minutes: 35,
+    id: "P2", module: "process", order: 8, ecoTask: "process-2", minutes: 35,
     prereqs: ["P1"],
     title: "Scope",
     objectives: [
@@ -20362,7 +20894,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["process"] }
   },
   {
-    id: "P3", module: "process", order: 8, ecoTask: "process-8", minutes: 60,
+    id: "P3", module: "process", order: 9, ecoTask: "process-8", minutes: 40,
     prereqs: ["P2"],
     title: "Schedule",
     objectives: [
@@ -20733,7 +21265,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["agile"] }
   },
   {
-    id: "P4", module: "process", order: 9, ecoTask: "process-6", minutes: 55,
+    id: "P4", module: "process", order: 10, ecoTask: "process-6", minutes: 35,
     prereqs: ["F3", "P1"],
     title: "Project finance",
     objectives: [
@@ -21119,7 +21651,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["evm"] }
   },
   {
-    id: "P5", module: "process", order: 10, ecoTask: "process-4", minutes: 35,
+    id: "P5", module: "process", order: 11, ecoTask: "process-4", minutes: 35,
     prereqs: ["P3"],
     title: "Resources",
     objectives: [
@@ -21236,7 +21768,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "P6", module: "process", order: 11, ecoTask: "process-7", minutes: 55,
+    id: "P6", module: "process", order: 12, ecoTask: "process-7", minutes: 35,
     prereqs: ["P2"],
     title: "Quality",
     objectives: [
@@ -21598,7 +22130,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "P7", module: "process", order: 12, ecoTask: "process-5", minutes: 60,
+    id: "P7", module: "process", order: 13, ecoTask: "process-5", minutes: 40,
     prereqs: ["P4"],
     title: "Procurement",
     objectives: [
@@ -21973,7 +22505,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["contracts"] }
   },
   {
-    id: "P8", module: "process", order: 13, ecoTask: "process-3", minutes: 35,
+    id: "P8", module: "process", order: 14, ecoTask: "process-3", minutes: 35,
     prereqs: ["P1"],
     title: "Value delivery",
     objectives: [
@@ -22090,7 +22622,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "P9", module: "process", order: 14, ecoTask: "process-9", minutes: 30,
+    id: "P9", module: "process", order: 15, ecoTask: "process-9", minutes: 30,
     prereqs: ["P3", "P4"],
     title: "Status and artifacts",
     objectives: [
@@ -22208,7 +22740,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "P10", module: "process", order: 15, ecoTask: "process-10", minutes: 30,
+    id: "P10", module: "process", order: 16, ecoTask: "process-10", minutes: 30,
     prereqs: ["P2"],
     title: "Closure",
     objectives: [
@@ -22327,7 +22859,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "L1", module: "people", order: 16, ecoTask: "people-3", minutes: 35,
+    id: "L1", module: "people", order: 17, ecoTask: "people-3", minutes: 35,
     prereqs: ["F2", "F4"],
     title: "Leading the team",
     objectives: [
@@ -22450,7 +22982,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "L2", module: "people", order: 17, ecoTask: "people-1", minutes: 30,
+    id: "L2", module: "people", order: 18, ecoTask: "people-1", minutes: 30,
     prereqs: ["L1"],
     title: "Shared purpose",
     objectives: [
@@ -22568,7 +23100,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "L3", module: "people", order: 18, ecoTask: "people-2", minutes: 35,
+    id: "L3", module: "people", order: 19, ecoTask: "people-2", minutes: 35,
     prereqs: ["L1"],
     title: "Conflict",
     objectives: [
@@ -22687,7 +23219,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["conflict"] }
   },
   {
-    id: "L4", module: "people", order: 19, ecoTask: "people-4", minutes: 35,
+    id: "L4", module: "people", order: 20, ecoTask: "people-4", minutes: 35,
     prereqs: ["L2"],
     title: "Stakeholder engagement",
     objectives: [
@@ -22805,7 +23337,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "L5", module: "people", order: 20, ecoTask: "people-5", minutes: 30,
+    id: "L5", module: "people", order: 21, ecoTask: "people-5", minutes: 30,
     prereqs: ["L4"],
     title: "Aligning expectations",
     objectives: [
@@ -22926,7 +23458,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "L6", module: "people", order: 21, ecoTask: "people-6", minutes: 30,
+    id: "L6", module: "people", order: 22, ecoTask: "people-6", minutes: 30,
     prereqs: ["L5"],
     title: "Customer expectations",
     objectives: [
@@ -23045,7 +23577,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "L7", module: "people", order: 22, ecoTask: "people-8", minutes: 35,
+    id: "L7", module: "people", order: 23, ecoTask: "people-8", minutes: 35,
     prereqs: ["L4"],
     title: "Communication",
     objectives: [
@@ -23173,7 +23705,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "L8", module: "people", order: 23, ecoTask: "people-7", minutes: 30,
+    id: "L8", module: "people", order: 24, ecoTask: "people-7", minutes: 30,
     prereqs: ["L7"],
     title: "Knowledge transfer",
     objectives: [
@@ -23292,7 +23824,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "B1", module: "business", order: 24, ecoTask: "business-1", minutes: 30,
+    id: "B1", module: "business", order: 25, ecoTask: "business-1", minutes: 30,
     prereqs: ["P1"],
     title: "Governance",
     objectives: [
@@ -23411,7 +23943,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "B2", module: "business", order: 25, ecoTask: "business-3", minutes: 30,
+    id: "B2", module: "business", order: 26, ecoTask: "business-3", minutes: 30,
     prereqs: ["B1", "P2"],
     title: "Change control",
     objectives: [
@@ -23531,7 +24063,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "B3", module: "business", order: 26, ecoTask: "business-5", minutes: 60,
+    id: "B3", module: "business", order: 27, ecoTask: "business-5", minutes: 40,
     prereqs: ["P4", "B1"],
     title: "Risk",
     objectives: [
@@ -23902,7 +24434,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["risk"] }
   },
   {
-    id: "B4", module: "business", order: 27, ecoTask: "business-4", minutes: 30,
+    id: "B4", module: "business", order: 28, ecoTask: "business-4", minutes: 30,
     prereqs: ["B3"],
     title: "Impediments and issues",
     objectives: [
@@ -24025,7 +24557,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "B5", module: "business", order: 28, ecoTask: "business-2", minutes: 30,
+    id: "B5", module: "business", order: 29, ecoTask: "business-2", minutes: 30,
     prereqs: ["B1"],
     title: "Compliance",
     objectives: [
@@ -24148,7 +24680,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "B6", module: "business", order: 29, ecoTask: "business-6", minutes: 30,
+    id: "B6", module: "business", order: 30, ecoTask: "business-6", minutes: 30,
     prereqs: ["L8"],
     title: "Continuous improvement",
     objectives: [
@@ -24271,7 +24803,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "B7", module: "business", order: 30, ecoTask: "business-7", minutes: 30,
+    id: "B7", module: "business", order: 31, ecoTask: "business-7", minutes: 30,
     prereqs: ["L4", "B6"],
     title: "Organisational change",
     objectives: [
@@ -24394,7 +24926,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "B8", module: "business", order: 31, ecoTask: "business-8", minutes: 30,
+    id: "B8", module: "business", order: 32, ecoTask: "business-8", minutes: 30,
     prereqs: ["P8", "B3"],
     title: "External environment",
     objectives: [
@@ -24517,7 +25049,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [] }
   },
   {
-    id: "X1", module: "skills", order: 32, ecoTask: "", minutes: 30,
+    id: "X1", module: "skills", order: 33, ecoTask: "", minutes: 30,
     prereqs: ["F2"],
     title: "Question technique",
     objectives: [
@@ -24632,7 +25164,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: [], from: { difficulty: "4" } }
   },
   {
-    id: "X2", module: "skills", order: 33, ecoTask: "", minutes: 30,
+    id: "X2", module: "skills", order: 34, ecoTask: "", minutes: 30,
     prereqs: ["P3", "P4"],
     title: "Calculations under time",
     objectives: [
@@ -24745,7 +25277,7 @@ PMP.LESSONS = Object.freeze([
     practice: { count: 10, decks: ["evm"], from: { type: "fillblank" } }
   },
   {
-    id: "X3", module: "skills", order: 34, ecoTask: "", minutes: 25,
+    id: "X3", module: "skills", order: 35, ecoTask: "", minutes: 25,
     prereqs: ["X1", "X2"],
     title: "Final review and exam day",
     objectives: [
@@ -35356,6 +35888,7 @@ PMP.Library = (function () {
 
   var TABS = [
     { id: "process",    label: "Process view",  icon: "branch" },
+    { id: "tours",      label: "Area tours",    icon: "book" },
     { id: "principles", label: "Principles",    icon: "book" },
     { id: "agile",      label: "Agile",         icon: "cards" },
     { id: "tables",     label: "Tables",        icon: "data" },
@@ -35726,6 +36259,46 @@ PMP.Library = (function () {
       "The flat lists, in the shape they get recalled in. Each right-hand column is the discriminator: the thing that decides which row a scenario is describing, rather than the thing that defines the row."
     ));
     R.tables.forEach(function (t) { host.appendChild(renderTable(t)); });
+  }
+
+  /* L5: each knowledge area as a classroom teaches it: the story in a
+     paragraph, its process flow, the processes in order, the sample documents
+     they produce and the lessons that teach it. */
+  function renderTours(host) {
+    host.appendChild(sectionHead(
+      "Knowledge-area tours",
+      "The ten areas in the order a classroom course teaches them, each told as plan, then do, then control. The study plan can follow this order too: Study planner, Study order."
+    ));
+    (PMP.AREA_TOURS || []).forEach(function (t) {
+      var a = areaOf(t.area);
+      if (!a) return;
+      var procs = R.processes.filter(function (p) { return p.area === a.id; });
+      var ab = PMP.Abbr.unit([t.intro].concat(procs.map(function (p) { return p.purpose; })), { where: "tour " + a.id });
+      var sec = el("div", { class: "lib-sec", id: "tour-" + a.id }, [
+        el("h3", { text: a.label }),
+        el("p", { class: "lib-lead", text: ab.x(t.intro) })
+      ]);
+      if (t.figure) sec.appendChild(PMP.Figure.render(t.figure));
+      sec.appendChild(el("ol", { class: "lib-tour" }, procs.map(function (p) {
+        return el("li", null, [
+          el("a", { href: "#/library?tab=process&sel=" + p.id, text: p.n + " " + p.name }),
+          ": " + ab.x(p.purpose)
+        ]);
+      })));
+      var ids = procs.map(function (p) { return p.id; });
+      var docs = ((PMP.DOCUMENTS && PMP.DOCUMENTS.documents) || []).filter(function (d) {
+        return ((d.links && d.links.processes) || []).some(function (id) { return ids.indexOf(id) >= 0; });
+      });
+      var links = (t.lessons || []).map(function (id) {
+        var l = PMP.LESSONS.filter(function (x) { return x.id === id; })[0];
+        return l ? el("a", { href: "#/learn?lesson=" + id, text: "Lesson " + id + ": " + l.title }) : null;
+      }).filter(Boolean).concat(docs.map(function (d) {
+        return el("a", { href: "#/library?tab=documents&sel=" + d.id, text: "Sample: " + d.title });
+      }));
+      if (links.length) sec.appendChild(el("p", { class: "lib-doc-see" }, [el("b", { text: "Learn and see: " })].concat(
+        links.reduce(function (acc, x, i) { return acc.concat(i ? [" · ", x] : [x]); }, []))));
+      host.appendChild(sec);
+    });
   }
 
   /* L2: sample documents, all filled in for one running project, so the
@@ -36530,6 +37103,7 @@ PMP.Library = (function () {
     else if (tab === "agile") renderAgile(panel);
     else if (tab === "tables") renderTables(panel);
     else if (tab === "documents") renderDocuments(panel);
+    else if (tab === "tours") renderTours(panel);
     else if (tab === "glossary") renderGlossary(panel);
     else if (tab === "abbr") renderAbbr(panel);
     else renderProcess(panel);
@@ -41644,6 +42218,7 @@ PMP.Learn = (function () {
       var bodyKids = paragraphs(PMP.Abbr.unit([s.body], {
         where: abCtx.where + " " + s.id, groups: s.formulaGroup ? PMP.Abbr.groups([s.formulaGroup]) : abCtx.groups
       }).x(s.body));
+      if (s.figure) bodyKids.push(PMP.Figure.render(s.figure));
       if (s.formulaGroup) {
         var grp = PMP.FORMULAS.filter(function (g) { return g.id === s.formulaGroup; })[0];
         bodyKids.push(el("p", { class: "ln-links" }, [
@@ -46722,7 +47297,8 @@ PMP.Path = (function () {
       }),
       domainWeights: PMP.ECO.DOMAIN_WEIGHTS,
       rules: { mastery: PMP.RULES.mastery, reentryDays: PMP.RULES.reentryDays },
-      exam: { totalItems: PMP.EXAM.TOTAL_ITEMS, minutes: PMP.EXAM.MINUTES }
+      exam: { totalItems: PMP.EXAM.TOTAL_ITEMS, minutes: PMP.EXAM.MINUTES },
+      courseOrder: (PMP.COURSE_ORDER || []).slice()
     };
   }
 
@@ -46770,6 +47346,11 @@ PMP.Path = (function () {
     (inp.settings.studyDays || []).forEach(function (d) { if (studyDays.indexOf(d) < 0) studyDays.push(d); });
     if (!studyDays.length) studyDays = DAYS_ALL.slice();
     var perDay = Math.max(15, Math.floor(inp.settings.hoursPerWeek * 60 / studyDays.length));
+    /* L5: by knowledge area, lessons' build sessions come in the classroom
+       order, ahead of the drills and checkpoints, as a course teaches every
+       lecture before its practice stage. By exam domain (the default) the
+       weakest domain's tasks go first. */
+    var course = inp.settings.order === "course" ? (x.courseOrder || []) : [];
     var attempts = inp.attempts || [], results = inp.results || [], mocks = inp.mocks || [];
     var done = Object.create(null);
     (inp.lessonsDone || []).forEach(function (id) { done[id] = true; });
@@ -47033,6 +47614,7 @@ PMP.Path = (function () {
         case "REENTRY": case "REMEDIATION": return -1000 - s.priority;
         case "FOUNDATION": return s.priority >= 800 ? -900 : -500 - s.priority;
         case "BUILD": case "DRILL": case "REVIEW":
+          if (s.kind === "BUILD" && course.indexOf(s.lessonId) >= 0) return -400 + course.indexOf(s.lessonId);
           return domainOrder.indexOf(s.domain) * 100 - s.priority - (s.kind === "BUILD" ? 50 : 0);
         case "CHECKPOINT": return domainOrder.indexOf(s.domain) * 100 + 90;
         case "SKILLS": return 400 - s.priority;
@@ -47244,6 +47826,8 @@ PMP.Path = (function () {
       days: days.length ? days : d ? d.days : DAYS_ALL.slice(),
       onboarded: p ? p.onboarded !== false : true,
       rest: !state.settings || state.settings.restDays !== false,
+      /* L5: "course" follows the classroom order of the lessons (PMP.COURSE_ORDER). */
+      order: p && p.order === "course" ? "course" : "domain",
       source: own ? "plan" : d ? "planner" : "default"
     };
   }
@@ -47264,6 +47848,8 @@ PMP.Path = (function () {
       p.days = (patch.days || cur.days).slice().sort(function (a, b) { return a - b; });
       if (patch.onboarded != null) p.onboarded = !!patch.onboarded;
       else if (p.onboarded === undefined) p.onboarded = true;
+      if (patch.order === "course") p.order = "course";
+      else if (patch.order === "domain") delete p.order;
       if (cur.examDate) p.examDate = cur.examDate;
       sh.plan = p;
       s.shared = sh;
@@ -47366,7 +47952,7 @@ PMP.Path = (function () {
       results: results(state),
       mocks: PMP.Metrics.mocks(state).map(function (m) { return { at: m.at }; }),
       diagnostic: diagnosticOf(state),
-      settings: { examDate: p.examDate, hoursPerWeek: p.hours, studyDays: p.days },
+      settings: { examDate: p.examDate, hoursPerWeek: p.hours, studyDays: p.days, order: p.order },
       now: now, mistakeTags: mistakeTags(state), leeches: leechesOf(state),
       ladderNext: fit && typeof fit.ladderNext === "number" ? fit.ladderNext : null,
       readingSlow: !!fit && fit.wpm !== null && fit.wpm < PMP.Fitness.TARGET_WPM * 0.9
@@ -48168,6 +48754,12 @@ PMP.Session = (function () {
     });
     var per = el("p", { class: "hint", id: "pt-per", "aria-live": "polite" });
     var err = el("p", { class: "td-err", role: "alert", hidden: true });
+    /* L5: which order new lessons come in. Fixes, reviews and mocks are unchanged. */
+    var order = el("select", { class: "select", id: "pt-order" }, [
+      el("option", { value: "domain", text: "By exam domain: weakest first" }),
+      el("option", { value: "course", text: "By knowledge area: classroom order" })
+    ]);
+    order.value = p.order;
     function picked() { return boxes.filter(function (b) { return b.checked; }).map(function (b) { return Number(b.value); }); }
     function paintPer() {
       var n = picked().length, h = Math.max(0, parseInt(hours.value, 10) || 0);
@@ -48182,7 +48774,8 @@ PMP.Session = (function () {
       el("p", { text: "Today's path is built from these three and re-plans from today whenever they change. An honest figure beats an ambitious one." }),
       el("div", { class: "filters" }, [
         el("label", { class: "field", for: "pt-date" }, [el("span", { class: "lbl", text: "Exam date" }), date]),
-        el("label", { class: "field", for: "pt-hours" }, [el("span", { class: "lbl", text: "Hours a week" }), hours])
+        el("label", { class: "field", for: "pt-hours" }, [el("span", { class: "lbl", text: "Hours a week" }), hours]),
+        el("label", { class: "field", for: "pt-order" }, [el("span", { class: "lbl", text: "Study order" }), order])
       ]),
       days, per, err,
       el("div", { class: "filter-bar" }, [
@@ -48198,7 +48791,7 @@ PMP.Session = (function () {
           if (String(PMP.Store.state.settings.examDate || "").slice(0, 10) !== v) {
             PMP.Store.commit(["settings"], function (s) { s.settings.examDate = v; });
           }
-          P.setPlan({ hours: h, days: d });
+          P.setPlan({ hours: h, days: d, order: order.value });
           PMP.UI.toast("Saved. Today's path is planned from it.", "ok");
           if (after) after();
         } }, [icon("check"), "Save"]),
@@ -48615,6 +49208,75 @@ PMP.Support = (function () {
            show: show, check: check, start: start };
 })();
 
+
+/* ── 10.31  LESSON FIGURES (L1) ──────────────────────────────────────────────
+   A lesson section may carry a figure: a small drawing described as data,
+   so the web, Android and iPhone draw the same picture natively, in either
+   theme, with text a screen reader can read. The format (AUTHORING.md):
+
+     { title, caption, alt, w, h, shapes: [
+       { k: "box",  x, y, w, h, t?, tone?, fill? }   rounded box, centred text ("\n" breaks)
+       { k: "line", p: [x1, y1, x2, y2, …], arrow?, dash?, tone? }
+       { k: "text", x, y, t, a?: "start"|"middle"|"end", s?: size, b?: bold, tone? }
+       { k: "dot",  x, y, r?, tone? } ] }
+
+   Tones: ink (default), muted, accent, good, warn, bad. Units are the
+   drawing's own; it scales to the width it is given. */
+PMP.Figure = (function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var TONES = { ink: 1, muted: 1, accent: 1, good: 1, warn: 1, bad: 1 };
+  function tone(s) { return "fig-" + (TONES[s.tone] ? s.tone : "ink"); }
+  function svg(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    Object.keys(attrs).forEach(function (k) { if (attrs[k] != null) n.setAttribute(k, attrs[k]); });
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function lines(g, x, y, t, size, anchor, bold, cls) {
+    var rows = String(t).split("\n"), lh = size * 1.25;
+    var top = y - (rows.length - 1) * lh / 2;
+    rows.forEach(function (r, i) {
+      g.appendChild(svg("text", { x: x, y: top + i * lh, "font-size": size, "text-anchor": anchor,
+        "dominant-baseline": "central", "font-weight": bold ? 700 : null, class: cls }, r));
+    });
+  }
+  function draw(fig) {
+    var root = svg("svg", { viewBox: "0 0 " + fig.w + " " + fig.h, role: "img", "aria-label": fig.alt || fig.title || "", class: "fig-svg" });
+    root.appendChild(svg("defs", {})).appendChild(function () {
+      var m = svg("marker", { id: "fig-arrow", viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" });
+      m.appendChild(svg("path", { d: "M0,0 L10,5 L0,10 z", fill: "context-stroke", class: "fig-head" }));
+      return m;
+    }());
+    (fig.shapes || []).forEach(function (s) {
+      var c = tone(s);
+      if (s.k === "box") {
+        root.appendChild(svg("rect", { x: s.x, y: s.y, width: s.w, height: s.h, rx: 6, class: c + " fig-box" + (s.fill === false ? " fig-hollow" : "") }));
+        if (s.t) lines(root, s.x + s.w / 2, s.y + s.h / 2, s.t, s.s || 13, "middle", s.b, "fig-t");
+      } else if (s.k === "line") {
+        var p = s.p || [], pts = [];
+        for (var i = 0; i + 1 < p.length; i += 2) pts.push(p[i] + "," + p[i + 1]);
+        root.appendChild(svg("polyline", { points: pts.join(" "), class: c + " fig-line" + (s.dash ? " fig-dash" : ""),
+          "marker-end": s.arrow ? "url(#fig-arrow)" : null }));
+      } else if (s.k === "text") {
+        lines(root, s.x, s.y, s.t, s.s || 13, s.a || "start", s.b, "fig-t " + c + "-t");
+      } else if (s.k === "dot") {
+        root.appendChild(svg("circle", { cx: s.x, cy: s.y, r: s.r || 5, class: c + " fig-dot" }));
+      }
+    });
+    return root;
+  }
+  function render(fig) {
+    var kids = [draw(fig)];
+    var cap = document.createElement("figcaption");
+    if (fig.title) { var b = document.createElement("b"); b.textContent = fig.title + ". "; cap.appendChild(b); }
+    cap.appendChild(document.createTextNode(fig.caption || ""));
+    var f = document.createElement("figure");
+    f.className = "ln-fig";
+    kids.concat([cap]).forEach(function (k) { f.appendChild(k); });
+    return f;
+  }
+  return { render: render, draw: draw };
+})();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
    Hand-rolled SVG. No charting library, no network, no canvas.

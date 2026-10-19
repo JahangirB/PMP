@@ -3,6 +3,9 @@ package com.jahangirb.pmpprep.ui.screens
 import android.app.DatePickerDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.clickable
+import androidx.compose.material3.RadioButton
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -109,6 +112,19 @@ fun PlannerScreen(vm: PmpViewModel) {
             Spacer(Modifier.height(6.dp))
             StudyDayChips(plan) { vm.store.setPlan(it) }
             Text("Your path spreads the week's hours over these days. Miss one and it re-plans from where you are.", fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+
+        PmpCard {
+            SectionLabel("Study order")
+            Spacer(Modifier.height(6.dp))
+            listOf(false to "By exam domain: weakest first", true to "By knowledge area: classroom order").forEach { (byArea, label) ->
+                Row(Modifier.fillMaxWidth().clickable { vm.store.setPlan(plan.copy(byArea = byArea)) }, verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(selected = plan.byArea == byArea, onClick = { vm.store.setPlan(plan.copy(byArea = byArea)) })
+                    Text(label, fontSize = 14.sp)
+                }
+            }
+            Text("Which order new lessons come in. Fixes, reviews and mocks are planned the same either way.", fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
 

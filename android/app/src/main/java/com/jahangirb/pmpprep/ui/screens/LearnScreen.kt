@@ -39,6 +39,7 @@ import com.jahangirb.pmpprep.data.Lesson
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.ExplainBackDialog
+import com.jahangirb.pmpprep.ui.components.LessonFigure
 import com.jahangirb.pmpprep.ui.components.LocalReading
 import com.jahangirb.pmpprep.ui.components.StemText
 import com.jahangirb.pmpprep.ui.components.BulletList

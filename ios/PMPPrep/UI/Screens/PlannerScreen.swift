@@ -35,6 +35,18 @@ struct PlannerScreen: View {
                 Text("Your path spreads the week's hours over these days. Miss one and it re-plans from where you are.")
                     .font(.nunito(12)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
             }
+            PmpCard {
+                SectionLabel("Study order")
+                Picker("Study order", selection: Binding(get: { m.store.plan.byArea },
+                                                         set: { v in var p = m.store.plan; if p.byArea != v { p.byArea = v; m.store.setPlan(p) } })) {
+                    Text("By exam domain").tag(false)
+                    Text("By knowledge area").tag(true)
+                }
+                .pickerStyle(.segmented)
+                .padding(.vertical, 6)
+                Text("Which order new lessons come in: weakest domain first, or the classroom order. Fixes, reviews and mocks are planned the same either way.")
+                    .font(.nunito(12)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
+            }
             PlannerRemindersCard()
             Spacer().frame(height: 16)
         }

@@ -43,6 +43,7 @@ import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.PracticeFilter
 import com.jahangirb.pmpprep.ui.components.BulletList
 import com.jahangirb.pmpprep.ui.components.DomainChip
+import com.jahangirb.pmpprep.ui.components.LessonFigure
 import com.jahangirb.pmpprep.ui.components.PmpCard
 import com.jahangirb.pmpprep.ui.components.SectionLabel
 import com.jahangirb.pmpprep.ui.components.pct
@@ -208,6 +209,18 @@ private fun Processes(vm: PmpViewModel) {
             ref.areas.forEach { a -> Chip(a.label, area == a.id) { area = a.id } }
         }
         LazyColumn(Modifier.fillMaxSize().padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            // The knowledge-area tour (L5): the area as a classroom teaches it, above its processes.
+            vm.repo.extras.areaTours.firstOrNull { it.area == area }?.let { t ->
+                item(key = "tour") {
+                    PmpCard {
+                        SectionLabel("The tour")
+                        Text(t.intro, fontSize = 14.sp, lineHeight = 20.sp)
+                        t.figure?.let { Spacer(Modifier.height(10.dp)); LessonFigure(it) }
+                        val lessons = t.lessons.mapNotNull { id -> vm.repo.extras.lessons.firstOrNull { it.id == id }?.let { "Lesson ${it.id} · ${it.title}" } }
+                        if (lessons.isNotEmpty()) { Spacer(Modifier.height(8.dp)); BulletList(lessons) }
+                    }
+                }
+            }
             items(list, key = { it.id }) { p ->
                 val group = ref.groups.firstOrNull { it.id == p.group }?.label.orEmpty()
                 PmpCard(onClick = { open = if (open == p.id) null else p.id }) {

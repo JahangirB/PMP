@@ -246,7 +246,7 @@ module.exports = [
         return { done: !!st.lessons.F1.completedAt, shared: PMP.Sync.toDoc(st).lessons, next: PMP.Path.plan(st).next.key,
                  skipped: !PMP.Wellbeing.preDue(st), pre: !!document.getElementById("wb-pre") };
       });
-      assert.deepStrictEqual(after, { done: true, shared: ["F1"], next: "lesson:F2", skipped: true, pre: false });
+      assert.deepStrictEqual(after, { done: true, shared: ["F1"], next: "lesson:F0", skipped: true, pre: false });
       await lib.clean(page);
       await page.ctx.close();
     }
@@ -271,7 +271,7 @@ module.exports = [
                  title: PMP.Path.titleFor("lesson:F1") };
       });
       assert.strictEqual(r.before, "lesson:F1");
-      assert.strictEqual(r.after, "lesson:F2");
+      assert.strictEqual(r.after, "lesson:F0");
       assert.strictEqual(r.f1, -1);
       assert.strictEqual(r.people, -1, "a passed checkpoint is not planned again");
       assert.ok(r.process);

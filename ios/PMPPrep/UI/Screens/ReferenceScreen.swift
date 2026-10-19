@@ -261,6 +261,10 @@ private struct Processes: View {
                 .padding(.horizontal, 12).padding(.vertical, 8)
             }
             RefList(spacing: 8) {
+                // The knowledge-area tour (L5): the area as a classroom teaches it, above its processes.
+                if let t = m.repo.extras.areaTours.first(where: { $0.area == area }) {
+                    AreaTourCard(t: t)
+                }
                 ForEach(list) { p in
                     let group = ref.groups.first { $0.id == p.group }?.label ?? ""
                     let isOpen = open == p.id
@@ -286,6 +290,23 @@ private struct Processes: View {
                     .accessibilityHint(isOpen ? "Hides the details" : "Shows inputs, tools and outputs")
                 }
             }
+        }
+    }
+}
+
+private struct AreaTourCard: View {
+    @EnvironmentObject private var m: AppModel
+    let t: AreaTour
+
+    var body: some View {
+        let lessons: [String] = t.lessons.compactMap { id in
+            m.repo.extras.lessons.first(where: { $0.id == id }).map { "Lesson \($0.id) · \($0.title)" }
+        }
+        PmpCard {
+            SectionLabel("The tour")
+            Text(t.intro).font(.nunito(14)).lineSpacing(4).fixedSize(horizontal: false, vertical: true)
+            if let fig = t.figure { FigureView(fig: fig).padding(.top, 8) }
+            if !lessons.isEmpty { BulletList(items: lessons).padding(.top, 8) }
         }
     }
 }

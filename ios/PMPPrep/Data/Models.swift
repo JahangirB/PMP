@@ -154,7 +154,19 @@ struct FormulaGroup: Identifiable, Hashable { let id: String; let label: String;
 
 /* Learn: modules of lessons, each with sections, a worked example and checks. */
 struct LessonModule: Identifiable, Hashable { let id: String; let order: Int; let prefix: String; let label: String; let domain: Domain?; let blurb: String }
-struct LessonSection: Hashable { let heading: String; let body: String }
+struct LessonSection: Hashable { let heading: String; let body: String; var figure: Figure? = nil }
+
+/** A lesson figure (index.html §10.31): a small drawing as data, drawn natively in either theme. */
+struct Figure: Hashable { let title: String; let caption: String; let alt: String; let w: Double; let h: Double; let shapes: [FigShape] }
+/** One shape: k is box, line, text or dot. Unused fields keep their defaults. */
+struct FigShape: Hashable {
+    var k: String = ""; var x: Double = 0; var y: Double = 0; var w: Double = 0; var h: Double = 0
+    var t: String = ""; var tone: String = "ink"; var fill: Bool = true
+    var p: [Double] = []; var arrow: Bool = false; var dash: Bool = false
+    var a: String = "start"; var s: Double = 13; var b: Bool = false; var r: Double = 5
+}
+/** A knowledge-area tour (index.html PMP.AREA_TOURS). */
+struct AreaTour: Hashable { let area: String; let intro: String; let lessons: [String]; let figure: Figure? }
 
 struct Lesson: Identifiable, Hashable {
     let id: String
@@ -281,6 +293,9 @@ struct Extras {
     var cases: [CaseStudy] = []
     /** Sample documents, all filled in for one running project (index.html PMP.DOCUMENTS). */
     var documents: SampleDocuments = SampleDocuments(projectName: "", projectSummary: "", list: [])
+    /** The knowledge-area tours and the classroom lesson order (index.html PMP.AREA_TOURS, PMP.COURSE_ORDER). */
+    var areaTours: [AreaTour] = []
+    var courseOrder: [String] = []
 }
 
 struct SampleDocuments: Hashable { let projectName: String; let projectSummary: String; let list: [SampleDocument] }
