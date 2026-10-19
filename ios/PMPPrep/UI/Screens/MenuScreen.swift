@@ -15,6 +15,7 @@ private struct MenuEntry: Identifiable {
  */
 struct MenuScreen: View {
     @EnvironmentObject private var m: AppModel
+    @Environment(\.openURL) private var openURL
 
     private var groups: [(String, [MenuEntry])] {
         let x: Extras = m.repo.extras
@@ -73,6 +74,12 @@ struct MenuScreen: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
+                SupportPill {
+                    if let url: URL = URL(string: Support.url) { openURL(url) }
+                    m.supportPressed()
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
                 Text("Extra work beside your plan. Anything you do here counts, and the path adjusts to it.")
                     .font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant)
                     .fixedSize(horizontal: false, vertical: true)
@@ -90,6 +97,29 @@ struct MenuScreen: View {
             .frame(maxWidth: 720)
             .frame(maxWidth: .infinity)
         }
+    }
+}
+
+/** "Warm heart": the amber support pill at the top of the menu. */
+private struct SupportPill: View {
+    let action: () -> Void
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 8) {
+                Image(systemName: "heart.fill").font(.system(size: 17, weight: .semibold))
+                Text("Support the app").font(.nunito(16, .semibold))
+            }
+            .foregroundStyle(Palette.supportInk)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .background(Capsule().fill(Palette.supportTint))
+            .overlay(Capsule().stroke(Palette.warning, lineWidth: 1.5))
+            .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Support the app on Ko-fi")
+        .accessibilityAddTraits(.isButton)
     }
 }
 

@@ -43,6 +43,7 @@ import com.jahangirb.pmpprep.data.ScenarioRun
 import com.jahangirb.pmpprep.data.Scoring
 import com.jahangirb.pmpprep.data.Srs
 import com.jahangirb.pmpprep.data.SyncMerge
+import com.jahangirb.pmpprep.data.Support
 import com.jahangirb.pmpprep.data.WidgetStats
 import com.jahangirb.pmpprep.data.SittingEvent
 import com.jahangirb.pmpprep.data.CheckIn
@@ -158,7 +159,8 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 // The weekly check of which Gemini models are current.
                 checkModels()
                 ready = true
-                // Opening the app syncs (onStart came before content was loaded).
+                // onStart came before content was loaded: count this open, then sync.
+                appOpened()
                 autoSync()
                 // Keep the home-screen widget current: a second after progress settles.
                 launch {
@@ -1481,8 +1483,36 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         if (ready) sync()
     }
 
+    /* ── support reminder (docs/progress-format.md §4) ─────────────────── */
+
+    /** The support message on screen, or NONE. */
+    var supportAsk by mutableStateOf(Support.Due.NONE)
+        private set
+
+    /** On start and on coming to the front: note today's date, then show the support message if it's due. */
+    fun appOpened() {
+        if (!ready) return
+        val now = System.currentTimeMillis()
+        val today = Support.day(now)
+        store.recordOpen(today)
+        if (supportAsk != Support.Due.NONE) return
+        val busy = mock != null || screen == Dest.SESSION
+        val due = Support.due(store.opens, store.support, today, now, busy)
+        if (due == Support.Due.NONE) return
+        store.setSupport(Support.markShown(store.support, now, today))
+        supportAsk = due
+    }
+
+    fun dismissSupportAsk() { supportAsk = Support.Due.NONE }
+
+    /** The support button, in the message or the menu: the app can't see payments, so pressing is all it knows. */
+    fun supportPressed() {
+        supportAsk = Support.Due.NONE
+        store.setSupport(Support.markPressed(store.support, System.currentTimeMillis()))
+    }
+
     /**
-     * One sync (docs/progress-format.md §4): this phone's progress against the cloud copy, the result
+     * One sync (docs/progress-format.md §5): this phone's progress against the cloud copy, the result
      * taken as progress here and kept as the next base. Never during a mock: the exam's answers go
      * in together when it's submitted.
      */

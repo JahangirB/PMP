@@ -27,6 +27,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.IntOffset
 import com.jahangirb.pmpprep.data.StepKind
+import com.jahangirb.pmpprep.data.Support
+import com.jahangirb.pmpprep.ui.screens.openLink
 import com.jahangirb.pmpprep.ui.theme.ClayBackdrop
 import com.jahangirb.pmpprep.ui.theme.ClayRim
 import com.jahangirb.pmpprep.widget.PmpWidget
@@ -147,6 +149,7 @@ class MainActivity : ComponentActivity() {
         frontSince = System.currentTimeMillis()
         // Opening the app on your own soon after a reminder also counts as answering it.
         Reminders.opened(this, null)
+        vm.appOpened()
         // Coming to the front pulls in what other devices did (a no-op until cloud sync is set up).
         vm.autoSync()
     }
@@ -287,6 +290,18 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                 CoachBubble(vm) { vm.coachTab = 0; vm.navigate(Dest.COACH) }
             }
         }
+    }
+
+    if (vm.supportAsk != Support.Due.NONE) {
+        AlertDialog(
+            onDismissRequest = { vm.dismissSupportAsk() },
+            confirmButton = {
+                TextButton(onClick = { openLink(context, Support.URL); vm.supportPressed() }) { Text("Support the app") }
+            },
+            dismissButton = { TextButton(onClick = { vm.dismissSupportAsk() }) { Text("Not now") } },
+            title = { Text(Support.TITLE) },
+            text = { Text(if (vm.supportAsk == Support.Due.FIRST) Support.FIRST_BODY else Support.ALREADY_BODY) },
+        )
     }
 
     importReport?.let { report ->

@@ -134,7 +134,7 @@ PMP.STORE_CFG = Object.freeze({
     "settings", "attempts", "srs", "exams", "notes", "flags", "journal", "planner",
     "issues", "examRun", "packs", "queue", "scenarioRuns", "lessons", "coach",
     "notepad", "drills", "shared", "sittings", "checkins", "weekly", "sessions",
-    "mycards", "chat"
+    "mycards", "chat", "opens", "support"
   ])
 });
 
@@ -160,6 +160,13 @@ PMP.STORE_CFG = Object.freeze({
   var pad = null;
   try { pad = window.localStorage.getItem("pmp.notepad"); } catch (e) { pad = null; }
   document.documentElement.setAttribute("data-notepad", pad === "open" ? "open" : "closed");
+
+  /* The side menu's collapsed state (§12.2) is device-only: a choice about
+     this screen, never in the store, a backup or sync. Read here so a
+     collapsed menu does not paint wide first and then snap shut. */
+  var rail = null;
+  try { rail = window.localStorage.getItem("pmp.railCollapsed"); } catch (e) { rail = null; }
+  document.documentElement.setAttribute("data-rail", rail === "1" ? "collapsed" : "open");
 })();
 
 /* ── 01.6b  INSTALLABLE, PRE-PAINT ──────────────────────────────────────────
@@ -378,6 +385,11 @@ PMP.RULES = (function deepFreeze(o) {
   --st-answered-bg:  #DDE7FB;  --st-answered-fg:  #1D4ED8;
   --st-unseen-bg:    #DEEDF2;  --st-unseen-fg:    #5F7D88;
 
+  /* Warm: the Support pill (03.3) and the reminder's button (§10.30), the
+     one amber thing in the rail so it never reads as another teal page
+     link. Ink on soft is 8.3:1; the edge is 5.1:1 on soft, 5.8:1 on panel. */
+  --warm-soft: #FBE8D6;  --warm-edge: #A04A08;  --warm-ink: #6E3205;
+
   /* ── 02.5  TYPE ──────────────────────────────────────────────────────────
      Nunito, embedded below as WOFF2 so the file stays single and offline.
      Its figures are tabular by default, so --font-mono (the web's "figures
@@ -486,6 +498,9 @@ PMP.RULES = (function deepFreeze(o) {
   --st-flagged-bg:   #3D2E0E;  --st-flagged-fg:   #FBBF24;
   --st-answered-bg:  #17294A;  --st-answered-fg:  #60A5FA;
   --st-unseen-bg:    #223239;  --st-unseen-fg:    #8BA0A8;
+
+  /* Warm (see 02.4): ink on soft 9.7:1, edge on soft 8.1:1, on panel 9.7:1. */
+  --warm-soft: #3A2C0E;  --warm-edge: #FBBF24;  --warm-ink: #FCD58A;
 
   --lift-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 12px -4px rgba(0, 0, 0, 0.45);
   --lift-2: 0 2px 6px rgba(0, 0, 0, 0.40), 0 16px 36px -10px rgba(0, 0, 0, 0.65);
@@ -674,7 +689,7 @@ svg { display: block; }
   background-color: var(--s-raise);
   background-image: var(--clay-sheen), var(--clay-shade);
   border-right: 2px solid var(--clay-rim);
-  border-radius: 0 var(--r-clay) var(--r-clay) 0;
+  border-radius: 0;
   transform: translateX(-100%);
   transition: transform var(--dur-2) var(--ease);
   overscroll-behavior: contain;
@@ -689,6 +704,7 @@ svg { display: block; }
   width: 36px; height: 36px; flex: 0 0 36px; border-radius: var(--r-2);
   box-shadow: 0 4px 12px -4px rgba(11, 102, 132, 0.5);
 }
+.brand-txt { min-width: 0; }
 .brand-t { font-size: var(--t-base); font-weight: var(--w-bold); line-height: 1.2; }
 .brand-s { font-family: var(--font-mono); font-size: 11px; font-weight: var(--w-semi); letter-spacing: var(--ls-cap); text-transform: uppercase; color: var(--fg-muted); }
 
@@ -717,6 +733,21 @@ svg { display: block; }
   box-shadow: inset 0 0 0 2px var(--clay-rim);
 }
 .nav-i[aria-current="page"] .i { color: var(--fg-on-wash); }
+/* Support the app (§10.30): an amber pill above the study links, a real
+   link to Ko-fi in a new tab. Warm tint, warm edge and a filled heart, so it
+   stands apart from the teal page links; the focus ring is the app's own. */
+.nav-sup {
+  display: flex; align-items: center; gap: var(--sp-3);
+  min-height: var(--hit-min); margin-bottom: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1.5px solid var(--warm-edge); border-radius: var(--r-full);
+  background: var(--warm-soft); color: var(--warm-ink);
+  font-size: var(--t-sm); font-weight: var(--w-bold); text-decoration: none;
+}
+.nav-sup:hover { background: color-mix(in srgb, var(--warm-edge) 18%, var(--warm-soft)); }
+.nav-sup .i { width: var(--icon); height: var(--icon); flex: 0 0 var(--icon); color: var(--warm-edge); }
+.btn.btn--warm { background: var(--warm-soft); color: var(--warm-ink); border: 1.5px solid var(--warm-edge); }
+.btn.btn--warm .i { color: var(--warm-edge); }
 .nav-i .badge {
   margin-left: auto; font-family: var(--font-mono); font-size: 11px; font-weight: var(--w-bold);
   padding: 1px var(--sp-2); border-radius: var(--r-full);
@@ -725,6 +756,8 @@ svg { display: block; }
 
 .rail-foot { flex: 0 0 auto; padding: var(--sp-3); border-top: var(--border); display: flex; gap: var(--sp-2); }
 .rail-foot .btn { flex: 1 1 0; min-width: 0; }
+/* The collapse toggle (M2) exists only where the rail is permanent. */
+.icon-btn.rail-toggle { display: none; }
 
 .scrim {
   position: fixed; inset: 0; z-index: 35;
@@ -2884,6 +2917,26 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
   }
   .scrim { display: none; }
   .nav-toggle { display: none; }
+  .icon-btn.rail-toggle { display: grid; }
+  /* Collapsed (§12.2, remembered per device by §01.6): an icon column. The
+     labels stay in the DOM, clipped like .sr-only, so they remain each
+     link's accessible name; §12.2 copies them into title for a tooltip. */
+  :root[data-rail="collapsed"] { --rail-w: 64px; }
+  :root[data-rail="collapsed"] .rail .nav-t,
+  :root[data-rail="collapsed"] .rail .brand-txt,
+  :root[data-rail="collapsed"] .rail .nav-grp > .eyebrow,
+  :root[data-rail="collapsed"] .rail .nav-k {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  :root[data-rail="collapsed"] .brand { justify-content: center; padding-left: 0; padding-right: 0; }
+  :root[data-rail="collapsed"] .nav { padding-left: var(--sp-1); padding-right: var(--sp-1); overflow-x: hidden; }
+  :root[data-rail="collapsed"] .nav-grp { margin-top: var(--sp-2); }
+  :root[data-rail="collapsed"] .nav-i,
+  :root[data-rail="collapsed"] .nav-sup { position: relative; justify-content: center; padding-left: 0; padding-right: 0; }
+  :root[data-rail="collapsed"] .nav-i .badge { position: absolute; top: 2px; right: 2px; padding: 0 4px; font-size: 10px; }
+  :root[data-rail="collapsed"] .rail-foot { flex-direction: column; padding-left: var(--sp-1); padding-right: var(--sp-1); }
+  :root[data-rail="collapsed"] .rail-foot .btn { flex: 0 0 auto; padding-left: 0; padding-right: 0; justify-content: center; }
   .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (min-width: 1200px) {
@@ -3006,6 +3059,8 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
 <symbol id="i-report" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h9l4 4v13H6z"/><path d="M15 3.5v4h4M9.5 17v-3M12.5 17v-6M15.5 17v-4"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></symbol>
 <symbol id="i-clip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.2-9.4C1.6 7.6 3.9 4.5 7.2 4.5c2 0 3.6 1.1 4.8 2.8 1.2-1.7 2.8-2.8 4.8-2.8 3.3 0 5.6 3.1 4.4 6.6-1.7 4.8-9.2 9.4-9.2 9.4z"/></symbol>
+<symbol id="i-sidebar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M9.5 4.5v15M6 8.5h1M6 11.5h1"/></symbol>
 </defs></svg>
 
 <a class="skip" href="#view">Skip to content</a>
@@ -3016,7 +3071,7 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
   <nav class="rail" id="rail" data-open="false" aria-label="Sections">
     <div class="brand">
       <img class="mark" alt="" width="36" height="36" src="data:image/png;base64,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">
-      <span>
+      <span class="brand-txt">
         <span class="brand-t">PMP Prep Suite</span><br>
         <span class="brand-s" id="brand-eco">ECO 2026-07</span>
       </span>
@@ -3024,52 +3079,54 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
 
     <div class="nav" id="nav">
       <div class="nav-grp">
-        <a class="nav-i" href="#/today"     data-route="today"><svg class="i"><use href="#i-today"></use></svg>Today</a>
-        <a class="nav-i" href="#/search"    data-route="search" aria-keyshortcuts="/"><svg class="i"><use href="#i-search"></use></svg>Search<kbd class="nav-k" aria-hidden="true">/</kbd></a>
+        <!-- 04.1  Support (§10.30). A plain link: no Ko-fi script is loaded. -->
+        <a class="nav-sup" id="nav-support" href="https://ko-fi.com/T4R728ULEV" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-heart"></use></svg><span class="nav-t">Support the app</span></a>
+        <a class="nav-i" href="#/today"     data-route="today"><svg class="i"><use href="#i-today"></use></svg><span class="nav-t">Today</span></a>
+        <a class="nav-i" href="#/search"    data-route="search" aria-keyshortcuts="/"><svg class="i"><use href="#i-search"></use></svg><span class="nav-t">Search</span><kbd class="nav-k" aria-hidden="true">/</kbd></a>
       </div>
 
       <div class="nav-grp">
         <span class="eyebrow">Learn</span>
-        <a class="nav-i" href="#/learn"     data-route="learn"><svg class="i"><use href="#i-learn"></use></svg>Lessons</a>
-        <a class="nav-i" href="#/practice"  data-route="practice"><svg class="i"><use href="#i-target"></use></svg>Practice</a>
-        <a class="nav-i" href="#/scenarios" data-route="scenarios"><svg class="i"><use href="#i-branch"></use></svg>Situational trainer</a>
-        <a class="nav-i" href="#/cards"     data-route="cards"><svg class="i"><use href="#i-cards"></use></svg>Flashcards<span class="badge num" id="due-badge">0</span></a>
-        <a class="nav-i" href="#/exam"      data-route="exam"><svg class="i"><use href="#i-timer"></use></svg>Mock exam</a>
+        <a class="nav-i" href="#/learn"     data-route="learn"><svg class="i"><use href="#i-learn"></use></svg><span class="nav-t">Lessons</span></a>
+        <a class="nav-i" href="#/practice"  data-route="practice"><svg class="i"><use href="#i-target"></use></svg><span class="nav-t">Practice</span></a>
+        <a class="nav-i" href="#/scenarios" data-route="scenarios"><svg class="i"><use href="#i-branch"></use></svg><span class="nav-t">Situational trainer</span></a>
+        <a class="nav-i" href="#/cards"     data-route="cards"><svg class="i"><use href="#i-cards"></use></svg><span class="nav-t">Flashcards</span><span class="badge num" id="due-badge">0</span></a>
+        <a class="nav-i" href="#/exam"      data-route="exam"><svg class="i"><use href="#i-timer"></use></svg><span class="nav-t">Mock exam</span></a>
       </div>
 
       <div class="nav-grp">
         <span class="eyebrow">Progress</span>
-        <a class="nav-i" href="#/dashboard" data-route="dashboard"><svg class="i"><use href="#i-gauge"></use></svg>Progress</a>
-        <a class="nav-i" href="#/planner"   data-route="planner"><svg class="i"><use href="#i-calendar"></use></svg>Study plan</a>
-        <a class="nav-i" href="#/journal"   data-route="journal"><svg class="i"><use href="#i-journal"></use></svg>Mistake journal</a>
-        <a class="nav-i" href="#/analytics" data-route="analytics"><svg class="i"><use href="#i-chart"></use></svg>Analytics</a>
-        <a class="nav-i" href="#/fitness"   data-route="fitness"><svg class="i"><use href="#i-pulse"></use></svg>Exam fitness</a>
-        <a class="nav-i" href="#/book"      data-route="book"><svg class="i"><use href="#i-ready"></use></svg>Ready to book?</a>
-        <a class="nav-i" href="#/reports"   data-route="reports"><svg class="i"><use href="#i-report"></use></svg>Weekly reports</a>
+        <a class="nav-i" href="#/dashboard" data-route="dashboard"><svg class="i"><use href="#i-gauge"></use></svg><span class="nav-t">Progress</span></a>
+        <a class="nav-i" href="#/planner"   data-route="planner"><svg class="i"><use href="#i-calendar"></use></svg><span class="nav-t">Study plan</span></a>
+        <a class="nav-i" href="#/journal"   data-route="journal"><svg class="i"><use href="#i-journal"></use></svg><span class="nav-t">Mistake journal</span></a>
+        <a class="nav-i" href="#/analytics" data-route="analytics"><svg class="i"><use href="#i-chart"></use></svg><span class="nav-t">Analytics</span></a>
+        <a class="nav-i" href="#/fitness"   data-route="fitness"><svg class="i"><use href="#i-pulse"></use></svg><span class="nav-t">Exam fitness</span></a>
+        <a class="nav-i" href="#/book"      data-route="book"><svg class="i"><use href="#i-ready"></use></svg><span class="nav-t">Ready to book?</span></a>
+        <a class="nav-i" href="#/reports"   data-route="reports"><svg class="i"><use href="#i-report"></use></svg><span class="nav-t">Weekly reports</span></a>
       </div>
 
       <div class="nav-grp">
         <span class="eyebrow">Reference</span>
-        <a class="nav-i" href="#/formulas"  data-route="formulas"><svg class="i"><use href="#i-sigma"></use></svg>Formula lab</a>
-        <a class="nav-i" href="#/library"   data-route="library"><svg class="i"><use href="#i-book"></use></svg>Reference library</a>
+        <a class="nav-i" href="#/formulas"  data-route="formulas"><svg class="i"><use href="#i-sigma"></use></svg><span class="nav-t">Formula lab</span></a>
+        <a class="nav-i" href="#/library"   data-route="library"><svg class="i"><use href="#i-book"></use></svg><span class="nav-t">Reference library</span></a>
       </div>
 
       <!-- Housekeeping sits apart from study. The content audit is an
            authoring tool, so it is reached from Settings and About. -->
       <div class="nav-grp nav-grp--foot">
-        <a class="nav-i" href="#/settings"  data-route="settings"><svg class="i"><use href="#i-settings"></use></svg>Settings and About</a>
-        <a class="nav-i" href="#/data"      data-route="data"><svg class="i"><use href="#i-data"></use></svg>Backup and packs</a>
-        <a class="nav-i" href="#/sync"      data-route="sync"><svg class="i"><use href="#i-sync"></use></svg>Cloud sync</a>
+        <a class="nav-i" href="#/settings"  data-route="settings"><svg class="i"><use href="#i-settings"></use></svg><span class="nav-t">Settings and About</span></a>
+        <a class="nav-i" href="#/data"      data-route="data"><svg class="i"><use href="#i-data"></use></svg><span class="nav-t">Backup and packs</span></a>
+        <a class="nav-i" href="#/sync"      data-route="sync"><svg class="i"><use href="#i-sync"></use></svg><span class="nav-t">Cloud sync</span></a>
       </div>
     </div>
 
     <div class="rail-foot">
       <button class="btn btn--sm" id="theme-btn" type="button" aria-live="off">
         <svg class="i" aria-hidden="true"><use href="#i-moon" id="theme-icon"></use></svg>
-        <span id="theme-label">Dark</span>
+        <span class="nav-t" id="theme-label">Dark</span>
       </button>
       <button class="btn btn--sm" id="export-btn" type="button">
-        <svg class="i" aria-hidden="true"><use href="#i-data"></use></svg>Export
+        <svg class="i" aria-hidden="true"><use href="#i-data"></use></svg><span class="nav-t">Export</span>
       </button>
     </div>
   </nav>
@@ -3081,6 +3138,11 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
       <button class="icon-btn nav-toggle" id="nav-toggle" type="button"
               aria-label="Open navigation" aria-expanded="false" aria-controls="rail">
         <svg class="i" aria-hidden="true"><use href="#i-menu"></use></svg>
+      </button>
+      <!-- 04.1  Collapse toggle (M2), ≥900px only; §12.2 owns it. -->
+      <button class="icon-btn rail-toggle" id="rail-toggle" type="button"
+              aria-label="Collapse menu" title="Collapse menu" aria-expanded="true" aria-controls="rail">
+        <svg class="i" aria-hidden="true"><use href="#i-sidebar"></use></svg>
       </button>
       <h1 id="view-title">Today</h1>
       <span class="spacer"></span>
@@ -3614,6 +3676,9 @@ STEP 5 — TELL ME HOW TO ADD IT:
         10.28 Download — top-bar menu, web / Android / iPhone pages
         10.29 Make more questions — the Claude prompt, files and steps
               registration over http(s) only, the Install button (Settings)
+        10.30 Support — the rail's Support link (Ko-fi, no script) and the
+              weekly reminder from the shared opens and support slices
+              (docs §4); due() is the pure rule
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
         11.1  accuracy trend  · 11.2  ECO heat map (low-sample cells greyed)
@@ -21443,6 +21508,12 @@ PMP.Store = (function () {
          { r: "user" | "model", t: text, at: ms }, the newest 60. Study
          material, so it travels; the API key never does. */
       chat: [],
+      /* The support reminder (§10.30, docs §4), shared so the count is the
+         same on every device. opens: local dates the app was opened,
+         "YYYY-MM-DD", ascending, the newest 60. support: { pressedAt: ms,
+         shownAt: ms, anchor: "YYYY-MM-DD" }, each optional. */
+      opens: [],
+      support: {},
       /* What another device keeps in the shared progress file that this
          build does not use itself (§10.18): its diagnostics and snoozed
          messages, mock summaries
@@ -22631,10 +22702,13 @@ PMP.UI = (function () {
     body.innerHTML = "";
     PMP.dom.append(body, opts.body);
     foot.innerHTML = "";
+    /* An action with an href is a real link (opened in a new tab), so the
+       browser treats it as one; choosing it still settles the sheet. */
     (opts.actions || [{ id: "close", label: "Close" }]).forEach(function (a) {
-      foot.appendChild(el("button", {
-        class: "btn" + (a.primary ? " btn--primary" : a.danger ? " btn--danger" : ""),
-        type: "button",
+      foot.appendChild(el(a.href ? "a" : "button", {
+        class: "btn" + (a.primary ? " btn--primary" : a.danger ? " btn--danger" : "") + (a.cls ? " " + a.cls : ""),
+        type: a.href ? null : "button",
+        href: a.href || null, target: a.href ? "_blank" : null, rel: a.href ? "noopener" : null,
         onclick: function () { close(a.id); }
       }, [a.icon ? icon(a.icon) : null, a.label]));
     });
@@ -33012,7 +33086,7 @@ PMP.Data = (function () {
       el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Your answers, scores, notes and settings live on this device, in this browser's storage, and travel in a backup file you control. The app has no account, no analytics, no tracking and no ads. What goes over the network depends on how you opened it:" }),
-      el("p", { text: "A copy you downloaded and opened from your own disk makes no network requests at all." }),
+      el("p", { text: "A copy you downloaded and opened from your own disk makes no network requests at all; the Support the app button opens ko-fi.com in a new tab only when you press it." }),
       el("p", { text: "The website (for example pmp-sandy.vercel.app) is downloaded from its host each time you open it, together with the extended question packs. Once installed as an app it also works offline. The host sees what any website sees, such as your IP address, browser and the time of each request, but the app sends it nothing about you or your progress." }),
       el("p", { text: "Gemini is optional and off until you add your own Google AI Studio API key. Each message you send then goes from this page to Google with your key, and carries three things: the tutor instructions, your last 30 chat messages, and a summary of your study progress. The summary holds your readiness and exam-fitness scores, accuracy by domain and ECO task, mock results, mistake causes, pace, flashcard and lesson counts, your exam date and planned study hours, and, if you answered the weekly check, your exam-worry score. It does not include your notes. Explain it back sends the topic and your explanation. Ask about this question puts the question and your answer in the message box for you to read and edit first. Nothing is sent until you press Send. The key stays on this device and is never in your backup file. Google's terms for the Gemini API apply to what you send; on the free tier Google says it may use it to improve its products." }),
       el("p", null, ["Cloud sync is optional and off until you set it up. It then copies your whole progress file, including your notes and Gemini chat history but never the key, to one file in your own Google Drive, through a script you deploy in your own Google account, so your other devices can share it. Anyone with your script URL and sync code can read that file, so keep them private. ",
@@ -39464,14 +39538,15 @@ PMP.Sync = (function () {
     weekly:      { id: function (r) { return String(r.w); }, at: function (r) { return r.w; }, cap: 104 },
     drills:      { id: function (r) { return r.at + "|" + r.g; }, cap: 2000 }
   };
-  var SETS = ["flags", "lessons"];
-  var MAPS = ["notes", "mistakes", "cards", "snoozed", "mycards", "web", "native"];
+  var SETS = ["flags", "lessons", "opens"];
+  var MAPS = ["notes", "mistakes", "cards", "snoozed", "mycards", "support", "web", "native"];
   var HEADER = { type: 1, version: 1, savedAt: 1, device: 1 };
   /* Shared slices the web builds from its own store on every export. The
      rest (plan, mocks, chat …) are kept in `shared` and written back. */
   var OWNED = { attempts: 1, flags: 1, notes: 1, mistakes: 1, cards: 1, scenarios: 1,
                 lessons: 1, notepad: 1, web: 1, mocks: 1, drills: 1,
-                sittings: 1, checkins: 1, weekly: 1, sessions: 1, mycards: 1, chat: 1 };
+                sittings: 1, checkins: 1, weekly: 1, sessions: 1, mycards: 1, chat: 1,
+                opens: 1, support: 1 };
   /* Logs the web keeps in the shared row shape, copied both ways as they
      are, like `drills`. */
   var VERBATIM = ["sittings", "checkins", "weekly", "sessions"];
@@ -39556,8 +39631,16 @@ PMP.Sync = (function () {
   }
 
   /* Both sides changed one key: cards keep the later review, mistakes the
-     later tag, everything else the side saved last. */
+     later tag, support the higher value (numbers as numbers, the anchor
+     date as a string, which orders YYYY-MM-DD correctly), everything else
+     the side saved last. */
   function decide(kind, l, r, localWins) {
+    if (kind === "support") {
+      if (l === undefined) return r;
+      if (r === undefined) return l;
+      if (typeof l === "number" && typeof r === "number") return r > l ? r : l;
+      return String(r) > String(l) ? r : l;
+    }
     if (kind === "cards") {
       if (l === undefined) return r;
       if (r === undefined) return l;
@@ -39910,6 +39993,12 @@ PMP.Sync = (function () {
     doc.mycards = Object.keys(mc).sort().map(function (id) { return mc[id]; });
     doc.chat = chatOf(state);
 
+    /* The support reminder's slices (§10.30). A copy an older build kept in
+       `shared` (from a phone, before these were slices here) is folded in:
+       opens as a union, support key by key where the slice has none. */
+    doc.opens = opensOf(arr(state.opens).concat(arr(sh.opens)));
+    doc.support = Object.assign({}, clone(obj(sh.support)), clone(obj(state.support)));
+
     var lessons = obj(state.lessons);
     doc.lessons = Object.keys(lessons).filter(function (id) { return lessons[id] && lessons[id].completedAt; }).sort();
 
@@ -39986,6 +40075,8 @@ PMP.Sync = (function () {
     VERBATIM.forEach(function (k) { out[k] = arr(doc[k]).filter(isObj).map(clone); });
     out.mycards = arr(doc.mycards).filter(function (c) { return isObj(c) && c.id != null; }).map(clone);
     out.chat = arr(doc.chat).filter(isObj).map(clone);
+    out.opens = opensOf(arr(doc.opens));
+    out.support = clone(obj(doc.support));
     /* A document from before the chat slice carried the web's conversation
        in web.ai.chat as { role, text, at: ISO }. */
     if (!out.chat.length && isObj(w.ai) && Array.isArray(w.ai.chat)) {
@@ -40047,6 +40138,14 @@ PMP.Sync = (function () {
      is brought in line with its tag; a tag with no entry gets one, on the
      latest missed answer to that question when there is one; a question
      whose tag has gone loses its entries. */
+  /* Open dates as the slice keeps them: well-formed, unique, ascending,
+     the newest 60 (docs §4). */
+  function opensOf(list) {
+    var seen = Object.create(null);
+    list.forEach(function (d) { if (typeof d === "string" && /^\d{4}-\d{2}-\d{2}$/.test(d)) seen[d] = 1; });
+    return Object.keys(seen).sort().slice(-60);
+  }
+
   /* The conversation as the Gemini tab shows it and the document carries
      it: the chat slice, with any rows an older build left waiting in
      `shared` folded in by identity, sorted, the newest 60. */
@@ -40090,7 +40189,7 @@ PMP.Sync = (function () {
   /* Puts a document into the store and repaints. External, so §10.18.6
      does not read it as a change made on this device. */
   var SLICES = ["attempts", "srs", "flags", "notes", "scenarioRuns", "lessons", "journal", "settings",
-                "notepad", "shared", "drills", "mycards", "chat"].concat(VERBATIM, WEB_SLICES.filter(function (k) { return k !== "lessons" && k !== "journal"; }));
+                "notepad", "shared", "drills", "mycards", "chat", "opens", "support"].concat(VERBATIM, WEB_SLICES.filter(function (k) { return k !== "lessons" && k !== "journal"; }));
   function apply(doc) {
     var next = fromDoc(doc, PMP.Store.state);
     var keys = SLICES.filter(function (k) { return k in next; });
@@ -40158,7 +40257,7 @@ PMP.Sync = (function () {
       var diff = keys.filter(function (x) { return l[x] !== undefined && !same(l[x], f[x]); }).length;
       added += add; clash += diff;
       rows.push({ slice: k, keep: Object.keys(l).length,
-        note: add + " new, " + diff + " different" + (diff ? (k === "cards" ? " (the later review wins)" : k === "mistakes" ? " (the later tag wins)" : " (the newer copy wins)") : "") });
+        note: add + " new, " + diff + " different" + (diff ? (k === "cards" ? " (the later review wins)" : k === "mistakes" ? " (the later tag wins)" : k === "support" ? " (the higher value wins)" : " (the newer copy wins)") : "") });
     });
     ["plan", "notepad"].forEach(function (k) {
       if (file[k] === undefined) return;
@@ -40399,7 +40498,7 @@ PMP.Sync = (function () {
   }
   function lastSynced() { return Number(store.get(K.last)) || 0; }
 
-  /* The algorithm in docs §4: get, merge, put if the merge says anything
+  /* The algorithm in docs §5: get, merge, put if the merge says anything
      the file does not, and on a conflict merge again with what the file
      now holds, at most three more times. */
   function run(reason, opts) {
@@ -40495,7 +40594,7 @@ PMP.Sync = (function () {
   function forgetBase() { store.remove(K.base); }
 
   /* ── 10.18.9  THE PAGE ───────────────────────────────────────────────────
-     Off until set up. Setting up is the guide in docs §4, step for step;
+     Off until set up. Setting up is the guide in docs §5, step for step;
      once connected, the page is the status, Sync now and Disconnect. */
   var setupMode = "new";
   var statusNode = null;
@@ -40733,7 +40832,7 @@ PMP.Sync = (function () {
   });
 
   return {
-    merge: merge, toDoc: toDoc, fromDoc: fromDoc, apply: apply, fromFile: fromFile, sameDoc: sameDoc, chatOf: chatOf,
+    merge: merge, toDoc: toDoc, fromDoc: fromDoc, apply: apply, fromFile: fromFile, sameDoc: sameDoc, chatOf: chatOf, opensOf: opensOf,
     canon: canon, emptyDoc: emptyDoc, mergePlan: mergePlan, importMerge: importMerge, importReplace: importReplace,
     htmlToMarkup: htmlToMarkup, markupToHtml: markupToHtml, mockKey: mockKey, scriptText: scriptText,
     newCode: newCode, config: config, connect: connect, disconnect: disconnect, forgetBase: forgetBase,
@@ -44369,6 +44468,114 @@ PMP.MakeQuestions = (function () {
 })();
 
 
+/* ── 10.30  SUPPORT ──────────────────────────────────────────────────────────
+   The Support button at the top of the rail and the weekly "please support"
+   message, exactly as docs/progress-format.md §4 has them on every app. Two
+   shared slices drive it, so the count is the same on every device once they
+   sync: `opens`, the local dates the app was opened, and `support`, when the
+   button was last pressed, when the message last showed, and the date the
+   seven-day count starts from. The button is a plain link to Ko-fi in a new
+   tab (no Ko-fi script is loaded); the app cannot see payments, so pressing
+   it is all it knows. due() is pure, so the rule is tested on its own. */
+PMP.Support = (function () {
+  "use strict";
+  var URL = "https://ko-fi.com/T4R728ULEV";
+  var DAY = 86400000, QUIET = 30 * DAY, STREAK = 7;
+  var ASK = "If the app is helping you, please support it. It's free, has no ads, and your support keeps it going.";
+  var TEXT = {
+    first:   { title: "Enjoying PMP Prep?", body: "You've studied 7 days in a row. " + ASK },
+    already: { title: "Enjoying PMP Prep?", body: ASK + " If you have already supported, please ignore this message." }
+  };
+
+  /* Local dates, "YYYY-MM-DD"; stepping by calendar day, not 24 hours, so a
+     daylight-saving change cannot skip or repeat a day. */
+  function ymd(ms) {
+    var d = new Date(ms);
+    return d.getFullYear() + "-" + PMP.fmt.pad(d.getMonth() + 1) + "-" + PMP.fmt.pad(d.getDate());
+  }
+  function shift(date, days) {
+    var p = date.split("-");
+    return ymd(new Date(+p[0], +p[1] - 1, +p[2] + days).getTime());
+  }
+
+  /* Consecutive dates ending today, counting only those on or after the
+     anchor. A date string compares in date order. */
+  function streak(opens, anchor, today) {
+    var have = Object.create(null), n = 0, d = today;
+    (opens || []).forEach(function (x) { have[x] = 1; });
+    while (have[d] && (!anchor || d >= anchor)) { n++; d = shift(d, -1); }
+    return n;
+  }
+
+  /* null, "first" or "already", in the order §4 gives. Never during a mock
+     or a guided session, and at most once a day: a showing today, on any
+     device, is in support.shownAt once synced. */
+  function due(state, now) {
+    var ui = state.ui || {}, sup = state.support || {}, today = ymd(now);
+    if (ui.examActive || ui.route === "exam" || ui.route === "session") return null;
+    var pressed = Number(sup.pressedAt) || 0, shown = Number(sup.shownAt) || 0;
+    if (shown && ymd(shown) === today) return null;
+    if (pressed) {
+      if (now - pressed < QUIET) return null;
+      if (shown < pressed + QUIET) return "already";
+    }
+    if (streak(state.opens, sup.anchor, today) >= STREAK) return pressed ? "already" : "first";
+    return null;
+  }
+
+  function recordOpen(now) {
+    var today = ymd(now || Date.now());
+    if (PMP.Store.state.opens.indexOf(today) >= 0) return;
+    PMP.Store.commit(["opens"], function (s) { s.opens = PMP.Sync.opensOf(s.opens.concat([today])); });
+  }
+
+  function pressed() {
+    PMP.Store.commit(["support"], function (s) { s.support = Object.assign({}, s.support, { pressedAt: Date.now() }); });
+  }
+
+  /* Showing restarts the seven-day count from tomorrow. */
+  function show(kind) {
+    var now = Date.now();
+    PMP.Store.commit(["support"], function (s) {
+      s.support = Object.assign({}, s.support, { shownAt: now, anchor: shift(ymd(now), 1) });
+    });
+    return PMP.UI.sheet({
+      title: TEXT[kind].title,
+      body: PMP.dom.el("p", { text: TEXT[kind].body }),
+      actions: [
+        { id: "later", label: "Not now" },
+        { id: "support", label: "Support the app", icon: "heart", href: URL, cls: "btn--warm" }
+      ]
+    }).then(function (choice) { if (choice === "support") pressed(); return choice; });
+  }
+
+  /* After boot and on coming back: never over another sheet. */
+  function check() {
+    var st = PMP.Store.state, dlg = document.getElementById("sheet");
+    if (!st.sys.ready || (dlg && dlg.open)) return null;
+    var kind = due(st, Date.now());
+    if (kind) show(kind);
+    return kind;
+  }
+
+  /* Called once the store is ready (§12.4). The check waits a moment so an
+     unfinished mock's resume offer, which comes first, is not crowded out. */
+  function start() {
+    PMP.dom.on(document.getElementById("nav-support"), "click", pressed);
+    PMP.dom.on(document, "visibilitychange", function () {
+      if (document.visibilityState !== "visible" || !PMP.Store.state.sys.ready) return;
+      recordOpen();
+      check();
+    });
+    recordOpen();
+    setTimeout(check, 1200);
+  }
+
+  return { URL: URL, due: due, streak: streak, ymd: ymd, recordOpen: recordOpen, pressed: pressed,
+           show: show, check: check, start: start };
+})();
+
+
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
    Hand-rolled SVG. No charting library, no network, no canvas.
 
@@ -45131,6 +45338,32 @@ PMP.Shell = (function () {
     if (open) { var first = railEl.querySelector(".nav-i"); if (first) first.focus(); }
   }
 
+  /* M2: at ≥900px the permanent rail folds to an icon column and back.
+     Device-only, like the theme: mirrored to localStorage for §01.6 and
+     never put in the store, so no backup or sync carries it. Collapsed, each
+     label is still in the DOM (CSS clips it) as the accessible name, and is
+     copied into title for a pointer tooltip; expanded, the title goes, as
+     the label is on screen. The theme button keeps its own title. */
+  function railTitles(collapsed) {
+    var items = railEl.querySelectorAll(".nav-i, .nav-sup, #export-btn");
+    for (var i = 0; i < items.length; i++) {
+      var t = items[i].querySelector(".nav-t");
+      if (collapsed && t) items[i].setAttribute("title", t.textContent);
+      else items[i].removeAttribute("title");
+    }
+  }
+  function setRail(collapsed, quiet) {
+    document.documentElement.setAttribute("data-rail", collapsed ? "collapsed" : "open");
+    var btn = document.getElementById("rail-toggle");
+    var label = collapsed ? "Expand menu" : "Collapse menu";
+    btn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    btn.setAttribute("aria-label", label);
+    btn.setAttribute("title", label);
+    railTitles(collapsed);
+    try { window.localStorage.setItem("pmp.railCollapsed", collapsed ? "1" : ""); } catch (e) { /* this session only */ }
+    if (!quiet) PMP.UI.announce(collapsed ? "Menu collapsed" : "Menu expanded");
+  }
+
   function applyTheme(pref) {
     var resolved = pref;
     if (pref === "system") {
@@ -45204,6 +45437,10 @@ PMP.Shell = (function () {
       setNav(railEl.getAttribute("data-open") !== "true");
     });
     PMP.dom.on(scrimEl, "click", function () { setNav(false); });
+    PMP.dom.on(document.getElementById("rail-toggle"), "click", function () {
+      setRail(document.documentElement.getAttribute("data-rail") !== "collapsed");
+    });
+    setRail(document.documentElement.getAttribute("data-rail") === "collapsed", true);
     PMP.dom.on(document, "keydown", function (e) {
       if (e.key === "Escape" && railEl.getAttribute("data-open") === "true") {
         setNav(false); toggleEl.focus();
@@ -45245,7 +45482,7 @@ PMP.Shell = (function () {
     });
   }
 
-  return { init: init, applyTheme: applyTheme, setNav: setNav, renderStatus: renderStatus };
+  return { init: init, applyTheme: applyTheme, setNav: setNav, setRail: setRail, renderStatus: renderStatus };
 })();
 
 
@@ -46567,6 +46804,8 @@ PMP.GeminiChat = (function () {
         loadExtendedPacks();
         /* The offline copy, over http(s) only (§10.27); a no-op from disk. */
         try { PMP.Install.register(); } catch (e) { /* the app works without it */ }
+        /* Today's open, and the weekly support message if due (§10.30). */
+        try { PMP.Support.start(); } catch (e) { PMP.report(e, "support"); }
         /* Off unless set up (§10.18); never during a sitting. */
         PMP.Sync.auto("open");
       });

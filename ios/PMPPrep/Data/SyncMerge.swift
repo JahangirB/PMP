@@ -30,15 +30,15 @@ enum SyncMerge {
         LogSpec(key: "weekly", fields: ["w"], sortField: "w", cap: 104),
         LogSpec(key: "drills", fields: ["at", "g"], sortField: "at", cap: 2000),
     ]
-    static let setKeys: [String] = ["flags", "lessons"]
+    static let setKeys: [String] = ["flags", "lessons", "opens"]
     /** Maps merged per key; how a key changed on both sides is settled. */
-    static let mapKeys: [(String, Tie)] = [("notes", .savedAt), ("mistakes", .at), ("cards", .lastMs), ("snoozed", .savedAt)]
+    static let mapKeys: [(String, Tie)] = [("notes", .savedAt), ("mistakes", .at), ("cards", .lastMs), ("snoozed", .savedAt), ("support", .higher)]
     /** App-only blocks: merged per key, never interpreted. */
     static let blockKeys: [String] = ["web", "native"]
     static let valueKeys: [String] = ["plan", "notepad"]
     static let headerKeys: Set<String> = ["type", "version", "savedAt", "device"]
 
-    enum Tie { case savedAt, at, lastMs }
+    enum Tie { case savedAt, at, lastMs, higher }
 
     /** Every top-level key the merge treats specially; any other key is merged as a whole value. */
     static var knownKeys: Set<String> {
@@ -172,6 +172,7 @@ enum SyncMerge {
 
     /** Both sides changed a key differently: cards keep the later review, mistakes the later tag, the rest the later copy. */
     static func settle(_ lv: Any?, _ rv: Any?, tie: Tie, localLater: Bool) -> Any? {
+        if tie == .higher { return larger(lv, rv) }
         guard let lv, let rv else { return localLater ? lv : rv }
         switch tie {
         case .lastMs:
@@ -184,10 +185,22 @@ enum SyncMerge {
             let lAt: Double = number((lv as? [String: Any])?["at"])
             let rAt: Double = number((rv as? [String: Any])?["at"])
             if lAt != rAt { return lAt > rAt ? lv : rv }
-        case .savedAt:
+        case .savedAt, .higher:
             break
         }
         return localLater ? lv : rv
+    }
+
+    /** support (§4): the higher value, numbers by value and the anchor date as text; an absent side loses. */
+    static func larger(_ lv: Any?, _ rv: Any?) -> Any? {
+        guard let lv else { return rv }
+        guard let rv else { return lv }
+        if let ln = lv as? NSNumber, let rn = rv as? NSNumber {
+            return ln.doubleValue >= rn.doubleValue ? lv : rv
+        }
+        let ls: String = text(lv)
+        let rs: String = text(rv)
+        return ls >= rs ? lv : rv
     }
 
     /** mycards: a list keyed by id, merged as a map and written sorted by id. */

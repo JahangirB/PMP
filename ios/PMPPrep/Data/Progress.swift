@@ -136,7 +136,7 @@ final class ProgressStore: ObservableObject {
     /** The top-level keys this store writes from its own fields; anything else is carried through. */
     static let ownKeys: Set<String> = ["type", "version", "savedAt", "device", "schemaVersion", "attempts", "flags", "notes", "mistakes",
                                        "cards", "scenarios", "mocks", "lessons", "plan", "sessions", "notepad", "diagnostics", "chat",
-                                       "snoozed", "sittings", "checkins", "weekly", "mycards", "drills"]
+                                       "snoozed", "sittings", "checkins", "weekly", "mycards", "drills", "opens", "support"]
 
     /** This install's id in the document's device block. Made once and kept. */
     static var deviceId: String {
@@ -180,6 +180,10 @@ final class ProgressStore: ObservableObject {
     var myCards: [Flashcard] = []
     /** Formula-lab drill log, oldest first. Counts as study days; never as answers. */
     var drills: [DrillRun] = []
+    /** Local dates the app was opened (YYYY-MM-DD), sorted, newest Support.maxOpens (docs/progress-format.md §4). */
+    private(set) var opens: [String] = []
+    /** The support reminder's state (§4). */
+    private(set) var support: SupportState = SupportState()
     /** Latest attempt per question. */
     var last: [String: Attempt] = [:]
 
@@ -222,6 +226,17 @@ final class ProgressStore: ObservableObject {
         if sittings.count > 2000 { sittings.removeFirst(sittings.count - 2000) }
         changed()
     }
+    /** Adds today to the opens; a change only when the date is new. */
+    func recordOpen(_ today: String) {
+        if opens.contains(today) { return }
+        opens = Support.recordOpen(opens, today)
+        changed()
+    }
+    func setSupport(_ s: SupportState) {
+        if s == support { return }
+        support = s
+        changed()
+    }
     func recordCheckIn(_ c: CheckIn) { checkIns.append(c); changed() }
     func recordDrill(_ d: DrillRun) {
         drills.append(d)
@@ -258,6 +273,7 @@ final class ProgressStore: ObservableObject {
         scenarioRuns = []; mocks = []; lessonsDone = []; last = [:]; plan = StudyPlan()
         notepad = ""; diagnostics = []; chat = []; coachSnoozed = [:]; sessionResults = []
         sittings = []; checkIns = []; weekly = []; myCards = []; drills = []
+        // opens and support survive: a reset is about study progress, and someone who pressed Support shouldn't be asked again at once.
         changed()
     }
 
@@ -359,7 +375,18 @@ final class ProgressStore: ObservableObject {
         o["weekly"] = weekly.map { $0.toJson() }
         o["mycards"] = myCards.map { ["id": $0.id, "t": $0.ecoTask ?? "", "f": $0.front, "b": $0.back, "n": $0.note] as [String: Any] }
         o["drills"] = drills.map { (d: DrillRun) -> [String: Any] in ["at": d.at, "g": d.generator, "ok": d.ok] }
+        o["opens"] = opens
+        var sup: [String: Any] = [:]
+        if support.pressedAt > 0 { sup["pressedAt"] = support.pressedAt }
+        if support.shownAt > 0 { sup["shownAt"] = support.shownAt }
+        if !support.anchor.isEmpty { sup["anchor"] = support.anchor }
+        o["support"] = sup
         return o
+    }
+
+    /** True for a YYYY-MM-DD date string. */
+    private static func isDate(_ s: String) -> Bool {
+        return s.range(of: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", options: .regularExpression) != nil
     }
 
     private func fromJson(_ o: JObj) {
@@ -370,6 +397,14 @@ final class ProgressStore: ObservableObject {
         diagnostics = []; chat = []; coachSnoozed = [:]; sessionResults = []
         sittings = []; checkIns = []; weekly = []; myCards = []; drills = []
         notepad = o.optString("notepad")
+        let openDates: [String] = o.strings("opens").filter { (d: String) -> Bool in ProgressStore.isDate(d) }
+        opens = Array(Set(openDates).sorted().suffix(Support.maxOpens))
+        if let sj = o.obj("support") {
+            let anchor: String = sj.optString("anchor")
+            support = SupportState(pressedAt: sj.optLong("pressedAt"), shownAt: sj.optLong("shownAt"), anchor: ProgressStore.isDate(anchor) ? anchor : "")
+        } else {
+            support = SupportState()
+        }
         let readDrills: [DrillRun] = o.objects("drills").compactMap { (d: JObj) -> DrillRun? in
             let at: Millis = d.optLong("at")
             if at <= 0 { return nil }

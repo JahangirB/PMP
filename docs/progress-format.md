@@ -128,8 +128,8 @@ canonical JSON (sorted keys) is equal.
 | Kind | Slices | Rule |
 | --- | --- | --- |
 | log | attempts (q+at), scenarios (id+at), mocks (at+title), sessions (k+at), diagnostics (at), chat (at+r), sittings (k+at), checkins (kind+at), weekly (week start), drills (at+g) | Union by identity; nothing is ever deleted. When both sides hold the same identity, keep the local record. Sort by `at`. Cap attempts at the newest 20,000, sittings at 2,000, drills at 2,000, chat at 60 and weekly at 104. |
-| set | flags, lessons | Per element: kept if kept on both sides; removed if removed on either side relative to base; added if added on either side. |
-| map | notes, mistakes, cards, snoozed, mycards (by id), web (per key), native (per key) | Per key, three-way: if only one side changed the key relative to base (including deleting it), take that side. If both changed it: cards keep the higher `lastMs`, mistakes the higher `at`, everything else the side with the later `savedAt`. |
+| set | flags, lessons, opens | Per element: kept if kept on both sides; removed if removed on either side relative to base; added if added on either side. |
+| map | notes, mistakes, cards, snoozed, mycards (by id), support, web (per key), native (per key) | Per key, three-way: if only one side changed the key relative to base (including deleting it), take that side. If both changed it: cards keep the higher `lastMs`, mistakes the higher `at`, support keeps the higher value, everything else the side with the later `savedAt`. |
 | value | plan, notepad, unknown top-level keys | Three-way as a whole: take the side that changed; if both did, the later `savedAt` wins. |
 
 Sets and id-keyed lists are written sorted ascending, and logs sorted by `at`, so the same
@@ -142,7 +142,40 @@ local progress and the new `base`.
 Each app has a test that merges the first three and compares against `merged.json`,
 ignoring `savedAt` and `device`.
 
-## 4. Cloud sync through Google Apps Script
+## 4. Support reminder
+
+Two shared slices drive the "please support" message, so the count is the same on
+every device once they sync:
+
+```jsonc
+"opens":   [ "2026-10-14", "2026-10-15", … ],   // local dates the app was opened, YYYY-MM-DD, newest 60 kept
+"support": { "pressedAt": ms, "shownAt": ms, "anchor": "2026-10-16" }   // all optional
+```
+
+- **Recording opens:** on start and whenever the app comes back to the foreground,
+  add today's local date to `opens`. Keep the newest 60 dates.
+- **Streak:** the number of consecutive dates ending today in `opens`, counting
+  only dates on or after `support.anchor` (if set).
+- **When to show:** at most once a day, never during a mock exam or a guided
+  session. In order:
+  1. If `pressedAt` is set and less than 30 days have passed since it, show nothing.
+  2. If `pressedAt` is set, 30 days have passed, and `shownAt` is earlier than
+     `pressedAt + 30 days`, show the **"already supported"** message.
+  3. Otherwise, if the streak is 7 or more, show the **first** message (the
+     "already supported" message instead if `pressedAt` was ever set).
+- **After it shows:** set `shownAt = now` and `anchor` = tomorrow's date, so the
+  7-day count starts again.
+- **Support button:** opens `https://ko-fi.com/T4R728ULEV`. Pressing it, in the
+  message or in the menu, sets `pressedAt = now`. The app can't see payments, so
+  pressing is all it knows.
+- **Wording.** First message: title "Enjoying PMP Prep?", body "You've studied 7 days
+  in a row. If the app is helping you, please support it. It's free, has no ads,
+  and your support keeps it going." The "already supported" message has body "If
+  the app is helping you, please support it. It's free, has no ads, and your
+  support keeps it going. If you have already supported, please ignore this
+  message." Buttons: "Not now" and "Support the app".
+
+## 5. Cloud sync through Google Apps Script
 
 The user deploys `sync/pmp-sync.gs` (the same text is embedded in every app's Cloud sync
 screen) as a web app in their own Google account. The script keeps one file,

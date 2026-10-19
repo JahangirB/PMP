@@ -41,6 +41,9 @@ enum Palette {
     static let error = Color(light: 0xB91C1C, dark: 0xF87171)
     static let info = Color(light: 0x1D4ED8, dark: 0x60A5FA)
     static let onStatus = Color(light: 0xFFFFFF, dark: 0x0A1F29)
+    /** The support button's warm pill: amber tint and warm dark text; its border is warning. */
+    static let supportTint = Color(light: 0xFBE8D6, dark: 0x3A2C0E)
+    static let supportInk = Color(light: 0x6E3205, dark: 0xFCD58A)
     static let people = Color(light: 0x4F46E5, dark: 0xA5B4FC)
     static let process = Color(light: 0x0369A1, dark: 0x38BDF8)
     static let business = Color(light: 0xA04A08, dark: 0xFBBF24)
