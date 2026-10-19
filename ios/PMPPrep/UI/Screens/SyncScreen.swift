@@ -2,7 +2,7 @@ import SwiftUI
 import UIKit
 
 /**
- * Cloud sync: the setup guide for the person's own Google Apps Script (docs/progress-format.md §4),
+ * Cloud sync: the setup guide for the person's own Google Apps Script (docs/progress-format.md §5),
  * then the connection's status, Sync now and Disconnect. Errors show here, never as pop-ups.
  */
 struct SyncScreen: View {

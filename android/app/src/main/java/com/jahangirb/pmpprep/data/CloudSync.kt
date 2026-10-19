@@ -7,7 +7,7 @@ import java.net.URL
 import java.security.SecureRandom
 
 /**
- * Cloud sync through the person's own Google Apps Script (docs/progress-format.md §4).
+ * Cloud sync through the person's own Google Apps Script (docs/progress-format.md §5).
  * The script keeps one file in their Drive; every call is a POST of a small JSON
  * request carrying the sync code. This class is the protocol and the client
  * algorithm only: get, merge three ways, put with the revision it was based on,

@@ -1,6 +1,20 @@
 package com.jahangirb.pmpprep.ui.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import com.jahangirb.pmpprep.data.Support
+import com.jahangirb.pmpprep.ui.theme.ColorWarning
+import com.jahangirb.pmpprep.ui.theme.SupportInk
+import com.jahangirb.pmpprep.ui.theme.SupportTint
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -108,7 +122,25 @@ fun MenuScreen(vm: PmpViewModel) {
             Entry(Icons.Default.Cloud, "Cloud sync", vm.syncStatus()) { vm.navigate(Dest.SYNC) },
         ),
     )
+    val context = LocalContext.current
     LazyColumn(Modifier.fillMaxSize()) {
+        item {
+            val pill = RoundedCornerShape(50)
+            Row(
+                Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp).fillMaxWidth().clip(pill)
+                    .background(SupportTint).border(1.5.dp, ColorWarning, pill)
+                    .clickable(role = Role.Button) { openLink(context, Support.URL); vm.supportPressed() }
+                    .semantics { contentDescription = "Support the app on Ko-fi" }
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Icon(Icons.Default.Favorite, contentDescription = null, tint = SupportInk, modifier = Modifier.size(20.dp))
+                Spacer(Modifier.width(8.dp))
+                Text("Support the app", color = SupportInk, fontSize = 16.sp, fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.clearAndSetSemantics { })
+            }
+        }
         item {
             Text("Extra work beside your plan. Anything you do here counts, and the path adjusts to it.",
                 fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(16.dp))
