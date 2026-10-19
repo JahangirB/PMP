@@ -60,7 +60,7 @@ import com.jahangirb.pmpprep.ui.theme.ColorSuccess
 private const val SCRIPT_HOME = "https://script.google.com"
 
 /**
- * Cloud sync (docs/progress-format.md §4). Off until set up: the person deploys our small
+ * Cloud sync (docs/progress-format.md §5). Off until set up: the person deploys our small
  * Apps Script in their own Google account, and the apps keep one progress file in their
  * Drive through it. Set up here once; every other device joins with the same URL and code.
  * Errors stay on this screen with the time of the last good sync, never as pop-ups.

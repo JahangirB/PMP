@@ -62,7 +62,7 @@ const extras = plain({
   formulas: P.FORMULAS, reference: P.REFERENCE, glossary: P.GLOSSARY,
   abbreviations: P.ABBREVIATIONS, modules: P.MODULES, lessons: P.LESSONS, rules: P.RULES,
   cases: P.CASES || [],
-  // The Google Apps Script the Cloud sync screen shows (docs/progress-format.md §4).
+  // The Google Apps Script the Cloud sync screen shows (docs/progress-format.md §5).
   syncScript: fs.readFileSync(path.join(root, 'sync', 'pmp-sync.gs'), 'utf8'),
   // The Make more questions prompt: the text block of docs/question-generator-prompt.md.
   generatorPrompt: /```text\n([\s\S]*?)```/.exec(fs.readFileSync(path.join(root, 'docs', 'question-generator-prompt.md'), 'utf8'))[1],

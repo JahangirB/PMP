@@ -1482,7 +1482,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * One sync (docs/progress-format.md §4): this phone's progress against the cloud copy, the result
+     * One sync (docs/progress-format.md §5): this phone's progress against the cloud copy, the result
      * taken as progress here and kept as the next base. Never during a mock: the exam's answers go
      * in together when it's submitted.
      */
