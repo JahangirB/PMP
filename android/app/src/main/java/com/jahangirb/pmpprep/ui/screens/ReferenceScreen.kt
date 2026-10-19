@@ -51,7 +51,7 @@ import com.jahangirb.pmpprep.ui.theme.ColorWarning
 @Composable
 fun ReferenceScreen(vm: PmpViewModel) {
     var tab by rememberSaveable { mutableIntStateOf(0) }
-    val tabs = listOf("ECO tasks", "Glossary", "Abbreviations", "Principles", "Perf. domains", "Processes", "Agile", "Tables")
+    val tabs = listOf("ECO tasks", "Glossary", "Abbreviations", "Principles", "Perf. domains", "Processes", "Agile", "Tables", "Documents")
     Column(Modifier.fillMaxSize()) {
         ScrollableTabRow(selectedTabIndex = tab, edgePadding = 8.dp) {
             tabs.forEachIndexed { i, t -> Tab(selected = tab == i, onClick = { tab = i }, text = { Text(t) }) }
@@ -64,7 +64,8 @@ fun ReferenceScreen(vm: PmpViewModel) {
             4 -> PerfDomains(vm)
             5 -> Processes(vm)
             6 -> Agile(vm)
-            else -> Tables(vm)
+            7 -> Tables(vm)
+            else -> Documents(vm)
         }
     }
 }
@@ -260,6 +261,66 @@ private fun Agile(vm: PmpViewModel) {
         }
         item { Spacer(Modifier.height(16.dp)) }
     }
+}
+
+/* Sample documents (L2): every one filled in for the same running project, so
+   the charter, the registers and the change request tell one story. */
+@Composable
+private fun Documents(vm: PmpViewModel) {
+    val docs = vm.repo.extras.documents
+    val lessons = vm.repo.extras.lessons
+    val ref = vm.repo.extras.reference
+    var open by rememberSaveable { mutableStateOf<String?>(null) }
+    LazyColumn(Modifier.fillMaxSize().padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        item {
+            Spacer(Modifier.height(8.dp))
+            SectionLabel("The running example: ${docs.projectName}")
+            Text(docs.projectSummary, fontSize = 13.sp, lineHeight = 18.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        items(docs.list, key = { it.id }) { d ->
+            PmpCard(onClick = { open = if (open == d.id) null else d.id }) {
+                Text(d.title, fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                Text(d.kind.replaceFirstChar { it.uppercase() }, fontSize = 12.sp, color = MaterialTheme.colorScheme.primary)
+                Text(d.purpose, fontSize = 14.sp, lineHeight = 20.sp)
+                if (open != d.id) {
+                    Text("Tap to see it filled in", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                } else {
+                    DocFacts("Who", d.owner); DocFacts("When", d.whenText); DocFacts("In agile", d.agile); DocFacts("On the exam", d.examTip)
+                    d.sections.forEach { s ->
+                        Spacer(Modifier.height(8.dp))
+                        if (s.heading.isNotBlank()) SectionLabel(s.heading)
+                        s.rows.forEach { r ->
+                            Spacer(Modifier.height(4.dp))
+                            Text(r.getOrNull(0).orEmpty(), fontWeight = FontWeight.Bold, fontSize = 13.sp, color = MaterialTheme.colorScheme.primary)
+                            Text(r.getOrNull(1).orEmpty(), fontSize = 13.sp, lineHeight = 18.sp)
+                        }
+                    }
+                    d.table?.let { t ->
+                        // Rows read as stacked cards: a phone is too narrow for a wide register.
+                        t.rows.forEach { row ->
+                            Spacer(Modifier.height(8.dp))
+                            row.forEachIndexed { i, cell ->
+                                if (i == 0) Text(cell, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = MaterialTheme.colorScheme.primary)
+                                else Text("${t.cols.getOrNull(i) ?: ""}: $cell", fontSize = 13.sp, lineHeight = 18.sp)
+                            }
+                        }
+                    }
+                    val see = d.lessons.mapNotNull { id -> lessons.firstOrNull { it.id == id }?.let { "Lesson ${it.id} · ${it.title}" } } +
+                        d.processes.mapNotNull { id -> ref.processes.firstOrNull { it.id == id }?.let { "Process ${it.n} ${it.name}" } } +
+                        d.terms.map { "Glossary: $it" }
+                    if (see.isNotEmpty()) { Spacer(Modifier.height(8.dp)); SectionLabel("See also"); BulletList(see) }
+                }
+            }
+        }
+        item { Spacer(Modifier.height(16.dp)) }
+    }
+}
+
+@Composable
+private fun DocFacts(label: String, text: String) {
+    if (text.isBlank()) return
+    Spacer(Modifier.height(6.dp))
+    Text("$label: $text", fontSize = 13.sp, lineHeight = 18.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
 }
 
 @Composable

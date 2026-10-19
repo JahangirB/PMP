@@ -279,7 +279,21 @@ struct Extras {
     var generatorPrompt: String = ""
     /** Case studies; empty until index.html ships some, and everything works without them. */
     var cases: [CaseStudy] = []
+    /** Sample documents, all filled in for one running project (index.html PMP.DOCUMENTS). */
+    var documents: SampleDocuments = SampleDocuments(projectName: "", projectSummary: "", list: [])
 }
+
+struct SampleDocuments: Hashable { let projectName: String; let projectSummary: String; let list: [SampleDocument] }
+
+/** One filled-in sample document. Rows are [label, value]; a register or log also has a table. */
+struct SampleDocument: Identifiable, Hashable {
+    let id: String; let title: String; let kind: String
+    let purpose: String; let owner: String; let whenText: String; let agile: String; let examTip: String
+    let sections: [DocSection]; let table: DocTable?
+    let lessons: [String]; let processes: [String]; let terms: [String]
+}
+struct DocSection: Hashable { let heading: String; let rows: [[String]] }
+struct DocTable: Hashable { let cols: [String]; let rows: [[String]] }
 
 /** A mistake root cause as the shared rules describe it. label is first person, for the tag button. */
 struct CauseRule: Hashable { let id: String; let short: String; let label: String; let hint: String }

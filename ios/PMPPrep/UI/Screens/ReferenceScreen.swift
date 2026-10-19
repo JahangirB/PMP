@@ -3,7 +3,7 @@ import SwiftUI
 /** ECO tasks, glossary, abbreviations, principles, performance domains, processes, agile and tables. */
 struct ReferenceScreen: View {
     @State private var tab = 0
-    private let tabs = ["ECO tasks", "Glossary", "Abbreviations", "Principles", "Perf. domains", "Processes", "Agile", "Tables"]
+    private let tabs = ["ECO tasks", "Glossary", "Abbreviations", "Principles", "Perf. domains", "Processes", "Agile", "Tables", "Documents"]
 
     var body: some View {
         VStack(spacing: 0) {
@@ -17,7 +17,8 @@ struct ReferenceScreen: View {
                 case 4: PerfDomains()
                 case 5: Processes()
                 case 6: Agile()
-                default: Tables()
+                case 7: Tables()
+                default: Documents()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -308,6 +309,106 @@ private struct Agile: View {
                     }
                 }
             }
+        }
+    }
+}
+
+/* Sample documents (L2): every one filled in for the same running project, so
+   the charter, the registers and the change request tell one story. */
+private struct Documents: View {
+    @EnvironmentObject private var m: AppModel
+    @State private var open: String? = nil
+
+    var body: some View {
+        let docs: SampleDocuments = m.repo.extras.documents
+        RefList(spacing: 8) {
+            SectionLabel("The running example: \(docs.projectName)").padding(.top, 8)
+            Text(docs.projectSummary).font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).lineSpacing(3)
+            ForEach(docs.list) { d in
+                let isOpen: Bool = open == d.id
+                PmpCard(onTap: { withAnimation(.easeOut(duration: 0.2)) { open = isOpen ? nil : d.id } }) {
+                    Text(d.title).font(.nunito(15, .bold)).multilineTextAlignment(.leading)
+                    Text(d.kind.capitalized).font(.nunito(12)).foregroundStyle(Palette.primary)
+                    Text(d.purpose).font(.nunito(14)).lineSpacing(4).multilineTextAlignment(.leading)
+                    if isOpen {
+                        DocumentBody(d: d)
+                    } else {
+                        Text("Tap to see it filled in").font(.nunito(11)).foregroundStyle(Palette.onSurfaceVariant)
+                    }
+                }
+                .accessibilityHint(isOpen ? "Hides the sample" : "Shows the sample filled in")
+            }
+        }
+    }
+}
+
+private struct DocumentBody: View {
+    @EnvironmentObject private var m: AppModel
+    let d: SampleDocument
+
+    private func seeAlso() -> [String] {
+        var out: [String] = []
+        for id in d.lessons {
+            if let l = m.repo.extras.lessons.first(where: { $0.id == id }) { out.append("Lesson \(l.id) · \(l.title)") }
+        }
+        for id in d.processes {
+            if let p = m.repo.extras.reference.processes.first(where: { $0.id == id }) { out.append("Process \(p.n) \(p.name)") }
+        }
+        for t in d.terms { out.append("Glossary: \(t)") }
+        return out
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            DocFact(label: "Who", text: d.owner)
+            DocFact(label: "When", text: d.whenText)
+            DocFact(label: "In agile", text: d.agile)
+            DocFact(label: "On the exam", text: d.examTip)
+            ForEach(d.sections.indices, id: \.self) { si in
+                let s: DocSection = d.sections[si]
+                if !refBlank(s.heading) { SectionLabel(s.heading).padding(.top, 8) }
+                ForEach(s.rows.indices, id: \.self) { ri in
+                    let r: [String] = s.rows[ri]
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(r.first ?? "").font(.nunito(13, .bold)).foregroundStyle(Palette.primary)
+                        Text(r.count > 1 ? r[1] : "").font(.nunito(13)).lineSpacing(3)
+                    }
+                    .padding(.top, 4)
+                }
+            }
+            if let t = d.table {
+                // Rows read as stacked cards: a phone is too narrow for a wide register.
+                ForEach(t.rows.indices, id: \.self) { ri in
+                    let row: [String] = t.rows[ri]
+                    VStack(alignment: .leading, spacing: 2) {
+                        ForEach(row.indices, id: \.self) { i in
+                            if i == 0 {
+                                Text(row[i]).font(.nunito(14, .bold)).foregroundStyle(Palette.primary)
+                            } else {
+                                Text("\(i < t.cols.count ? t.cols[i] : ""): \(row[i])").font(.nunito(13)).lineSpacing(3)
+                            }
+                        }
+                    }
+                    .padding(.top, 8)
+                }
+            }
+            let see: [String] = seeAlso()
+            if !see.isEmpty {
+                SectionLabel("See also").padding(.top, 8)
+                BulletList(items: see)
+            }
+        }
+        .padding(.top, 4)
+    }
+}
+
+private struct DocFact: View {
+    let label: String
+    let text: String
+
+    var body: some View {
+        if !refBlank(text) {
+            Text("\(label): \(text)").font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).lineSpacing(3)
         }
     }
 }

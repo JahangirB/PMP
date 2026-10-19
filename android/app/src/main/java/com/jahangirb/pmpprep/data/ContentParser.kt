@@ -262,7 +262,7 @@ object ContentParser {
                     id = l.str("id"), module = l.str("module"), order = l.optInt("order"), ecoTask = l.str("ecoTask"),
                     minutes = l.optInt("minutes"), title = l.str("title"),
                     objectives = l.optJSONArray("objectives").strings(), examWeight = l.str("examWeight"),
-                    sections = l.optJSONArray("sections").objects().map { LessonSection(it.str("heading"), it.str("body")) },
+                    sections = l.optJSONArray("sections").objects().map { LessonSection(it.str("heading"), it.str("body"), figure(it.optJSONObject("figure"))) },
                     lenses = lenses?.keys()?.asSequence()?.associateWith { lenses.optString(it) } ?: emptyMap(),
                     worked = l.optJSONObject("worked")?.let { w ->
                         w.put("id", l.str("id") + "-worked")
@@ -290,7 +290,47 @@ object ContentParser {
             syncScript = o.str("syncScript"),
             generatorPrompt = o.str("generatorPrompt"),
             cases = cases(o.optJSONArray("cases")),
+            documents = documents(o.optJSONObject("documents")),
         )
+    }
+
+    private fun JSONArray?.rows(): List<List<String>> {
+        if (this == null) return emptyList()
+        return (0 until length()).map { optJSONArray(it).strings() }
+    }
+
+    /** A lesson figure (index.html §10.31), or null when the section has none. */
+    fun figure(o: JSONObject?): Figure? {
+        if (o == null) return null
+        val shapes = o.optJSONArray("shapes").objects().map { s ->
+            val p = s.optJSONArray("p")
+            FigShape(
+                k = s.str("k"), x = s.f("x"), y = s.f("y"), w = s.f("w"), h = s.f("h"),
+                t = s.str("t"), tone = s.strOrNull("tone") ?: "ink", fill = s.optBoolean("fill", true),
+                p = if (p == null) emptyList() else (0 until p.length()).map { p.optDouble(it, 0.0).toFloat() },
+                arrow = s.optBoolean("arrow"), dash = s.optBoolean("dash"),
+                a = s.strOrNull("a") ?: "start", s = s.optDouble("s", 13.0).toFloat(), b = s.optBoolean("b"),
+                r = s.optDouble("r", 5.0).toFloat(),
+            )
+        }
+        return Figure(o.str("title"), o.str("caption"), o.str("alt"), o.f("w"), o.f("h"), shapes)
+    }
+
+    /** index.html PMP.DOCUMENTS: { project: { name, summary }, documents: [...] }. */
+    fun documents(o: JSONObject?): SampleDocuments {
+        if (o == null) return SampleDocuments("", "", emptyList())
+        val p = o.optJSONObject("project")
+        val list = o.optJSONArray("documents").objects().map { d ->
+            val links = d.optJSONObject("links")
+            SampleDocument(
+                d.str("id"), d.str("title"), d.str("kind"),
+                d.str("purpose"), d.str("owner"), d.str("when"), d.str("agile"), d.str("examTip"),
+                d.optJSONArray("sections").objects().map { s -> DocSection(s.str("heading"), s.optJSONArray("rows").rows()) },
+                d.optJSONObject("table")?.let { t -> DocTable(t.optJSONArray("cols").strings(), t.optJSONArray("rows").rows()) },
+                links?.optJSONArray("lessons").strings(), links?.optJSONArray("processes").strings(), links?.optJSONArray("terms").strings(),
+            )
+        }
+        return SampleDocuments(p?.str("name") ?: "", p?.str("summary") ?: "", list)
     }
 
     /**
