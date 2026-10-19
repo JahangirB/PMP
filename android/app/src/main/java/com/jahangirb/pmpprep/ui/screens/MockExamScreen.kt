@@ -67,6 +67,8 @@ import com.jahangirb.pmpprep.ui.components.PmpCard
 import com.jahangirb.pmpprep.ui.components.ProgressRow
 import com.jahangirb.pmpprep.ui.components.QuestionBody
 import com.jahangirb.pmpprep.ui.components.QuestionHeader
+import com.jahangirb.pmpprep.ui.components.CasePanel
+import com.jahangirb.pmpprep.ui.components.casePosition
 import com.jahangirb.pmpprep.ui.components.SectionLabel
 import com.jahangirb.pmpprep.ui.components.clock
 import com.jahangirb.pmpprep.ui.components.domainColor
@@ -128,6 +130,8 @@ private fun MockIntro(vm: PmpViewModel) {
             Spacer(Modifier.height(8.dp))
             BulletList(listOf(
                 "${x.totalItems} questions in ${x.minutes} minutes: about ${x.paceTargetSec} seconds each.",
+                if (vm.repo.extras.cases.isEmpty()) "No case studies are loaded yet, so a sitting is all standalone questions."
+                else "It opens with a case-study block of about ${x.caseBlockItems} questions drawn from whole cases, each shown with its case. Shorter sittings scale the block.",
                 "${x.scoredItems} are scored; ${x.totalItems - x.scoredItems} are unscored pretest items you can't tell apart, as on the real exam. Shorter sittings keep the proportion. They're named in the results.",
                 "Three sections. After questions ${x.breakAfter.joinToString(" and ")} you may take a ${x.breakMinutes}-minute break; the clock stops.",
                 "Once a section is closed you cannot go back to it, as in the real exam.",
@@ -256,6 +260,7 @@ private fun ExamRunner(vm: PmpViewModel, m: MockSession) {
             }
         }
         Column(Modifier.weight(1f).verticalScroll(scroll).padding(16.dp)) {
+            vm.repo.caseFor(q.id)?.let { c -> CasePanel(c, casePosition(c, q.id)) }
             QuestionHeader(q, vm.repo.task(q.ecoTask)?.let { "${it.code} · ${it.label}" }, m.marks[q.id]) { w -> vm.mockMarks(q, w) }
             QuestionBody(q, m.order[q.id] ?: q.options, m.answers[q.id], revealed = false, struck = m.struck[q.id].orEmpty(),
                 onStrike = { id -> vm.mockStrike(q, id) }) { a -> vm.mockAnswer(q, a) }

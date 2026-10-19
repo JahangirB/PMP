@@ -37,8 +37,10 @@ Those counts are not arbitrary. The original 300-item core pack sat at People
 37.3% / Process 44.0% / Business 18.7% against a published weighting of
 33 / 41 / 26, with Business 7.3 points light. The batch sizes above were chosen
 to fix that. Since then the core pack has gained 48 Business items (batch seven,
-ids `021`–`026` in each Business task), so it now holds 348 items at
-32.2 / 37.9 / 29.9, and the full 1348-item pool lands at **32.0 / 39.5 / 28.5**.
+ids `021`–`026` in each Business task) and 12 `graphic` items (ids `061`), so
+it now holds 360 items at 32.2 / 38.1 / 29.7, and the full 1360-item pool lands
+at **32.1 / 39.5 / 28.5**. The 50 case-study items in `PMP.CASES` (five cases,
+ids `pmp-caseN-NNN`) are counted separately: they only appear in a case.
 If you change a batch size, you move the pool off the published weighting, and
 a domain more than 8 points out is a *failure* in the content audit, not a
 warning.
@@ -326,11 +328,11 @@ wrong ones. Coordinates are in the `viewBox` space.
 Structurally identical to `hotspot`: `graphic` plus `regions`, no `options`.
 Use it where the diagram is the subject rather than a chart of data.
 
-> **Note.** No item in the core pack uses this type, and not by choice. The
-> validator's missing-options check tested the raw type rather than the resolved
-> base type, so a `graphic` item — which correctly carries regions instead of
-> options — was refused for a missing options array. That bug is fixed. This is
-> the one type with no existing item to duplicate.
+> **Note.** The validator's missing-options check once tested the raw type
+> rather than the resolved base type, so a `graphic` item was refused for a
+> missing options array. That bug is fixed, and the core pack now carries 12
+> `graphic` items (ids `pmp-<task>-061`) to copy from. Labels wrap at 14
+> characters to at most three lines; a no-break space keeps a phrase together.
 
 ```json
 {

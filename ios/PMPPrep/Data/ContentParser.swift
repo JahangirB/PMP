@@ -192,7 +192,8 @@ enum ContentParser {
             exam: ExamLayout(totalItems: exam.optInt("TOTAL_ITEMS", 180), minutes: exam.optInt("MINUTES", 230),
                              breakMinutes: exam.optInt("BREAK_MINUTES", 10),
                              breakAfter: [exam.optInt("BREAK_1_AFTER", 60), exam.optInt("BREAK_2_AFTER", 120)],
-                             paceTargetSec: Int(exam.optDouble("PACE_TARGET_SEC", 80))),
+                             paceTargetSec: Int(exam.optDouble("PACE_TARGET_SEC", 80)),
+                             caseBlockItems: exam.optInt("CASE_BLOCK_ITEMS", 40)),
             srs: SrsConfig(
                 easeStart: srs.optDouble("EASE_START", 2.5), easeMin: srs.optDouble("EASE_MIN", 1.3),
                 easeAgain: srs.optDouble("EASE_AGAIN", 0.2), easeHard: srs.optDouble("EASE_HARD", 0.15),
@@ -236,7 +237,45 @@ enum ContentParser {
             modules: modules,
             lessons: lessons,
             rules: rules(o.obj("rules")),
-            syncScript: o.str("syncScript"))
+            syncScript: o.str("syncScript"),
+            cases: cases(o.objects("cases")))
+    }
+
+    /**
+     * PMP.CASES. Each item is validated like a pack item and parsed with pack id "case:<id>"; an invalid
+     * item is dropped, and a case left with no items is dropped. A missing or empty array gives no cases.
+     */
+    static func cases(_ list: [JObj]) -> [CaseStudy] {
+        var out: [CaseStudy] = []
+        for c in list {
+            let id: String = c.str("id")
+            if id.isEmpty { continue }
+            var qs: [Question] = []
+            for o in c.objects("questions") where validate(o) == nil {
+                qs.append(question(o, packId: "case:" + id))
+            }
+            if qs.isEmpty { continue }
+            var passage: [String] = c.strings("passage")
+            if passage.isEmpty {
+                let joined: String = c.str("passage")
+                passage = joined.components(separatedBy: "\n\n").filter { (p: String) -> Bool in !p.trimmingCharacters(in: .whitespaces).isEmpty }
+            }
+            var exhibits: [CaseExhibit] = []
+            for x in c.objects("exhibits") {
+                let rawRows: [Any] = x.arr("rows") ?? []
+                var rows: [[String]] = []
+                for row in rawRows {
+                    let cells: [Any] = (row as? [Any]) ?? []
+                    rows.append(cells.map { (v: Any) -> String in (v as? String) ?? "" })
+                }
+                exhibits.append(CaseExhibit(id: x.str("id"), label: x.str("label"), title: x.str("title"),
+                                            cols: x.strings("cols"), rows: rows, note: x.str("note")))
+            }
+            let title: String = c.str("title").isEmpty ? id : c.str("title")
+            out.append(CaseStudy(id: id, title: title, approach: Approach.of(c.optString("approach")), setting: c.str("setting"),
+                                 passage: passage, exhibits: exhibits, questions: qs))
+        }
+        return out
     }
 
     /** PMP.RULES (docs/progress-format.md §1). Anything missing keeps its documented default. */

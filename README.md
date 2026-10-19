@@ -72,6 +72,23 @@ uses the same question banks as the Android app. See [`ios/README.md`](ios/READM
 Open `index.html` in a browser. It is the whole app in one file and works
 offline. Served over http it also loads the extended packs in `packs/`.
 
+The mock exam opens with a case-study block filled with whole case studies
+(passage, exhibits and their questions), and Practice has a **Case studies**
+quick start that runs one case at a time.
+
+**Hosting and installing.** To host it with GitHub Pages: in the repository's
+**Settings → Pages**, choose **Deploy from a branch**, branch `main`, folder
+`/ (root)`, and save. The app is then at `https://<user>.github.io/<repo>/`.
+Served like that it is also an installable app: `manifest.webmanifest`,
+`icons/` and the service worker `sw.js` sit beside `index.html`, and once it
+has been opened online it opens offline too. Install it from the browser's
+install icon or from the **Install** button in Settings (Chrome, Edge,
+Android); in Safari use Share → Add to Home Screen (iPhone, iPad) or
+File → Add to Dock (Mac). `index.html` is fetched network-first, so updates
+arrive on the next online visit; the question packs are cached, so when
+`packs/` changes, bump `VERSION` at the top of `sw.js`. Opened from disk
+(`file://`), nothing is registered and the file works exactly as before.
+
 Backups (Backup and packs → Export progress) use the shared progress format,
 version 3, described in [docs/progress-format.md](docs/progress-format.md), so
 a backup from the web, Android or iPhone app can be restored on any of them.

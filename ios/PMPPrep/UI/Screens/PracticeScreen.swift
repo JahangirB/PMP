@@ -93,6 +93,9 @@ private struct PSSetup: View {
                     }
                     Button("10 mixed") { m.startPractice(PracticeFilter(count: 10), title: "Mixed practice") }.outlinedButton()
                     Button("10 adaptive") { m.startPractice(PracticeFilter(count: 10, adaptive: true), title: "Adaptive drill") }.outlinedButton()
+                    if !m.repo.extras.cases.isEmpty {
+                        Button("Case studies") { m.startCase() }.outlinedButton()
+                    }
                     Button("20 new") { m.startPractice(PracticeFilter(which: .NEW, count: 20), title: "New questions") }.outlinedButton()
                     Button("Redo \(missed) mistakes") { m.startPractice(PracticeFilter(which: .MISSED, count: 40), title: "Mistakes") }
                         .outlinedButton().disabled(missed == 0)
@@ -313,6 +316,9 @@ struct QuizRunner: View {
                 Button("OK") { calmed.insert(q.id) }.textButton()
             }
             .padding(.bottom, 10)
+        }
+        if let study = m.repo.caseFor(q.id) {
+            CasePanel(study: study, position: CasePlan.position(study, qid: q.id)).id(study.id)
         }
         QuestionHeader(q: q, taskLabel: m.repo.task(q.ecoTask).map { "\($0.code) · \($0.label)" },
                        highlights: s.marks[q.id], onHighlights: s.reviewOnly ? nil : { marks in s.marks[q.id] = marks })
