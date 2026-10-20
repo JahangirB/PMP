@@ -150,7 +150,16 @@ private struct CoachChat: View {
                             }
                             .padding(8)
                         }
-                        if let err = m.aiError { Text(err).font(.nunito(13)).foregroundStyle(Palette.error).padding(8) }
+                        // The last message went unanswered: why, and one button to send it again.
+                        if !m.aiBusy, let last = turns.last, last.role != "model" {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text(m.aiError ?? "No answer came back for this message.").font(.nunito(13)).foregroundStyle(Palette.error)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Button { m.retryAsk() } label: { Label("Try again", systemImage: "arrow.clockwise").font(.nunito(14, .semibold)) }
+                                    .textButton()
+                            }
+                            .padding(8)
+                        } else if let err = m.aiError { Text(err).font(.nunito(13)).foregroundStyle(Palette.error).padding(8) }
                         if !turns.isEmpty && m.typingAt == nil { Button("Clear conversation") { m.chatAnchor = nil; m.store.clearChat() }.textButton() }
                         Color.clear.frame(height: 4).id("chatEnd")
                         }

@@ -1141,6 +1141,17 @@ final class AppModel: ObservableObject {
         if t.isEmpty || aiBusy || geminiKey.isEmpty { return }
         let sentAt = Time.now()
         store.addChat(ChatTurn(role: "user", text: t, at: sentAt))
+        request(sentAt)
+    }
+
+    /** "Try again": the unanswered last message goes again, as it is, to the next model in turn. */
+    func retryAsk() {
+        guard let last = store.chat.last, last.role != "model", !aiBusy, !geminiKey.isEmpty else { return }
+        request(last.at)
+    }
+
+    /** Asks Gemini to answer the chat as it stands, whose last turn is the message sent at `sentAt`. */
+    private func request(_ sentAt: Millis) {
         chatAnchor = sentAt
         typingAt = nil
         aiBusy = true

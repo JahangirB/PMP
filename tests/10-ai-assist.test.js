@@ -424,5 +424,37 @@ module.exports = [
       await lib.clean(page);
       await page.ctx.close();
     }
+  },
+  {
+    name: "a failed reply leaves Try again under the message; it sends the same message again, once, and the answer arrives",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var posts = 0, fail = true;
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
+        if (r.request().method() === "GET") return json(r, 200, { models: [M("gemini-3.5-flash")] });
+        posts++;
+        if (fail) return json(r, 503, { error: { code: 503, message: "The model is overloaded. Please try again later." } });
+        return json(r, 200, reply("Here is the answer."));
+      });
+      await useKey(page, "GOOD");
+      await page.fill("#np-msg", "What is a WBS?");
+      await page.click("#np-send");
+      await page.waitForSelector("#np-retry");
+      var f = await page.evaluate(function () {
+        var b = document.getElementById("np-fail"), prev = b.previousElementSibling;
+        return { text: b.textContent, after: prev && prev.textContent, chat: PMP.Store.state.chat.length };
+      });
+      assert.ok(/overloaded/.test(f.text) && /Try again/.test(f.text), f.text);
+      assert.strictEqual(f.after, "What is a WBS?", "right under the message that failed");
+      assert.strictEqual(f.chat, 1, "the message is kept");
+      fail = false;
+      await page.click("#np-retry");
+      await page.waitForFunction(function () { return PMP.Store.state.chat.length === 2; });
+      var after = await page.evaluate(function () { return { roles: PMP.Store.state.chat.map(function (c) { return c.r; }), retry: !!document.getElementById("np-retry") }; });
+      assert.deepStrictEqual(after, { roles: ["user", "model"], retry: false }, "not sent twice into the log");
+      page.errors = page.errors.filter(function (e) { return !/status of 503/.test(e); });
+      await lib.clean(page);
+      await page.ctx.close();
+    }
   }
 ];

@@ -306,5 +306,43 @@ module.exports = [
       await lib.clean(page);
       await page.ctx.close();
     }
+  },
+  {
+    name: "the wheel scrolls only the part under the pointer: the end of the notes, or a short note, never moves the page",
+    fn: async function (h, lib) {
+      var page = await h.open("day3");
+      await lib.go(page, "#/library?tab=glossary");
+      await page.click("#np-toggle");
+      await page.click("#np-tab-notes");
+      var lines = [];
+      for (var i = 0; i < 80; i++) lines.push("<div>note line " + i + "</div>");
+      await page.evaluate(function (html) { document.getElementById("np-text").innerHTML = html; }, lines.join(""));
+      function pageTop() { return page.evaluate(function () { var v = document.scrollingElement; return v.scrollTop + window.scrollY; }); }
+      var box = await page.$eval("#np-text", function (n) { var r = n.getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; });
+      await page.mouse.move(box.x, box.y);
+      var before = await pageTop();
+      for (var k = 0; k < 12; k++) { await page.mouse.wheel(0, 600); await page.waitForTimeout(40); }
+      var r = await page.evaluate(function () { var t = document.getElementById("np-text"); return t.scrollTop + t.clientHeight >= t.scrollHeight - 2; });
+      assert.strictEqual(r, true, "the notes reached their end");
+      assert.strictEqual(await pageTop(), before, "and the page behind did not move");
+
+      await page.evaluate(function () { var t = document.getElementById("np-text"); t.innerHTML = "<div>short</div>"; });
+      await page.mouse.wheel(0, 600);
+      await page.waitForTimeout(100);
+      assert.strictEqual(await pageTop(), before, "a short note does not pass the wheel on");
+
+      /* Over the page itself, the page scrolls as ever. */
+      var v = await page.$eval("#view", function (n) { var r = n.getBoundingClientRect(); return { x: r.x + 40, y: r.y + 200 }; });
+      await page.mouse.move(v.x, v.y);
+      await page.mouse.wheel(0, 600);
+      await page.waitForTimeout(200);
+      var moved = await page.evaluate(function () {
+        var all = [document.scrollingElement].concat(Array.prototype.slice.call(document.querySelectorAll("main, #main, .main, #view, .content")));
+        return all.some(function (n) { return n && n.scrollTop > 0; }) || window.scrollY > 0;
+      });
+      assert.strictEqual(moved, true);
+      await lib.clean(page);
+      await page.ctx.close();
+    }
   }
 ];

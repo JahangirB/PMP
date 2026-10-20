@@ -1439,6 +1439,18 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         if (t.isEmpty() || aiBusy || geminiKey.isEmpty()) return
         val sentAt = System.currentTimeMillis()
         store.addChat(ChatTurn("user", t, sentAt))
+        request(sentAt)
+    }
+
+    /** "Try again": the unanswered last message goes again, as it is, to the next model in turn. */
+    fun retryAsk() {
+        val last = store.chat.lastOrNull() ?: return
+        if (last.role == "model" || aiBusy || geminiKey.isEmpty()) return
+        request(last.at)
+    }
+
+    /** Asks Gemini to answer the chat as it stands, whose last turn is the message sent at [sentAt]. */
+    private fun request(sentAt: Long) {
         chatAnchor = sentAt
         typingAt = null
         aiBusy = true

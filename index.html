@@ -708,7 +708,7 @@ svg { display: block; }
 .brand-t { font-size: var(--t-base); font-weight: var(--w-bold); line-height: 1.2; }
 .brand-s { font-family: var(--font-mono); font-size: 11px; font-weight: var(--w-semi); letter-spacing: var(--ls-cap); text-transform: uppercase; color: var(--fg-muted); }
 
-.nav { flex: 1 1 auto; overflow-y: auto; padding: var(--sp-3) var(--sp-2) var(--sp-5); }
+.nav { flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain; padding: var(--sp-3) var(--sp-2) var(--sp-5); }
 .nav-grp { margin-top: var(--sp-4); }
 .nav-grp:first-child { margin-top: 0; }
 .nav-grp > .eyebrow { padding: var(--sp-2) var(--sp-3) var(--sp-1); display: block; }
@@ -903,7 +903,7 @@ dialog.sheet {
 dialog.sheet::backdrop { background: var(--scrim); }
 .sheet-hd { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-4) var(--sp-5); border-bottom: var(--border); }
 .sheet-hd h2 { font-size: var(--t-lg); font-weight: var(--w-bold); flex: 1 1 auto; }
-.sheet-bd { padding: var(--sp-5); overflow-y: auto; max-height: 56vh; }
+.sheet-bd { padding: var(--sp-5); overflow-y: auto; overscroll-behavior: contain; max-height: 56vh; }
 .sheet-bd p { font-size: var(--t-sm); line-height: var(--lh-body); color: var(--fg-muted); }
 .sheet-bd p + p { margin-top: var(--sp-3); }
 .sheet-ft { display: flex; gap: var(--sp-2); justify-content: flex-end; flex-wrap: wrap; padding: var(--sp-4) var(--sp-5); border-top: var(--border); background: var(--s-base); }
@@ -2660,7 +2660,7 @@ html[data-notepad="open"] .np { display: flex; }
 .np-snap-note { margin: 0; flex: 1 1 auto; min-width: 0; }
 .np-snap .icon-btn { flex: 0 0 auto; }
 .np-cmds { position: absolute; left: 0; right: 0; bottom: calc(100% + var(--sp-1)); z-index: 5; margin: 0; padding: var(--sp-1); list-style: none;
-  max-height: 260px; overflow-y: auto; background: var(--s-raise); border: var(--border); border-radius: var(--r-3);
+  max-height: 260px; overflow-y: auto; overscroll-behavior: contain; background: var(--s-raise); border: var(--border); border-radius: var(--r-3);
   box-shadow: 0 12px 28px -14px rgba(0, 0, 0, .45); font-size: var(--t-sm); }
 .np-cmds[hidden] { display: none; }
 .np-cmds .np-cmd-h { padding: var(--sp-1) var(--sp-2) 0; font-size: var(--t-xs); color: var(--fg-muted); text-transform: uppercase; letter-spacing: .06em; }
@@ -2683,11 +2683,13 @@ html[data-notepad="open"] .np { display: flex; }
 .np-caret { display: inline-block; width: .5em; height: 1em; margin-left: 2px; vertical-align: -0.15em; border-radius: 2px;
   background: currentColor; opacity: .55; animation: np-blink 1s steps(2, start) infinite; }
 @keyframes np-blink { to { visibility: hidden; } }
+.np-fail { display: grid; gap: var(--sp-2); justify-items: start; }
+.np-fail .btn { background: var(--s-raise); }
 .np-m[data-role="wait"] { align-self: flex-start; color: var(--fg-muted); font-style: italic; }
 .np-compose { display: flex; gap: var(--sp-2); align-items: flex-end; flex: 0 0 auto; position: relative; }
 .np-msg { flex: 1 1 auto; min-height: 64px; max-height: 160px; resize: vertical; font-size: var(--t-sm); line-height: var(--lh-body); }
 .np-text {
-  flex: 1 1 auto; min-height: 0; width: 100%; overflow-y: auto; position: relative;
+  flex: 1 1 auto; min-height: 0; width: 100%; overflow-y: auto; overscroll-behavior: contain; position: relative;
   padding: var(--sp-4); border: 0; background: transparent; outline: none;
   font-size: var(--t-sm); line-height: var(--lh-body); overflow-wrap: anywhere;
 }
@@ -2997,7 +2999,7 @@ svg.wk-spark-g { display: block; overflow: visible; }
 .cp-pos { font-size: var(--t-xs); color: var(--fg-muted); }
 .cp-tog { flex: 0 0 auto; font-size: var(--t-xs); color: var(--fg-muted); }
 .case-panel[open] .cp-tog--show, .case-panel:not([open]) .cp-tog--hide { display: none; }
-.cp-bd { padding: 0 var(--sp-4) var(--sp-4); max-height: 60vh; overflow-y: auto; border-top: var(--border); }
+.cp-bd { padding: 0 var(--sp-4) var(--sp-4); max-height: 60vh; overflow-y: auto; overscroll-behavior: contain; border-top: var(--border); }
 .cp-bd:focus-visible { box-shadow: var(--ring); }
 .cp-bd > p { margin-top: var(--sp-3); max-width: var(--measure); line-height: var(--lh-body); }
 .cp-ex { margin-top: var(--sp-4); }
@@ -51839,6 +51841,33 @@ PMP.SelectAsk = (function () {
   return { explainText: explainText, questionText: questionText, HOLD: HOLD, hide: hide };
 })();
 
+/* ── 10.36  SCROLL STAYS WHERE THE POINTER IS ──────────────────────────────
+   The wheel scrolls the part under the pointer and nothing else: reaching
+   the end of the notes, the chat or the side menu no longer carries on
+   into the page behind. CSS overscroll-behavior covers the scrolling
+   boxes; this covers a pane whose content is too short to scroll, or the
+   pane's own bars, where the wheel would otherwise move the page. */
+PMP.ScrollGuard = (function () {
+  var PANES = "#np, #rail, #sheet, .cb-panel, .sa-box";
+  function canScroll(node, dy) {
+    var st = window.getComputedStyle(node);
+    if (!/(auto|scroll)/.test(st.overflowY) || node.scrollHeight <= node.clientHeight + 1) return false;
+    return dy > 0 ? node.scrollTop + node.clientHeight < node.scrollHeight - 1 : node.scrollTop > 0;
+  }
+  function onWheel(e) {
+    if (e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY) || !e.deltaY) return;
+    var t = e.target && e.target.nodeType === 1 ? e.target : e.target && e.target.parentElement;
+    var pane = t && t.closest(PANES);
+    if (!pane) return;
+    for (var n = t; n && n !== pane.parentElement; n = n.parentElement) {
+      if (canScroll(n, e.deltaY)) return;
+    }
+    e.preventDefault();
+  }
+  document.addEventListener("wheel", onWheel, { passive: false });
+  return { canScroll: canScroll };
+})();
+
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
    Hand-rolled SVG. No charting library, no network, no canvas.
 
@@ -53634,6 +53663,17 @@ PMP.GeminiChat = (function () {
       nodes.log.appendChild(b);
     });
     if (busy) nodes.log.appendChild(el("div", { class: "np-m", dataset: { role: "wait" }, text: "Gemini is thinking…" }));
+    /* The last message went unanswered (an error, or the page closed while
+       waiting): say so under it, with one button to send it again. */
+    var last = list[list.length - 1];
+    if (!busy && last && last.r !== "model") {
+      var why = failed && failed.at === last.at ? failed.msg : "No answer came back for this message.";
+      nodes.log.appendChild(el("div", { class: "np-m np-fail", dataset: { role: "error" }, role: "alert", id: "np-fail" }, [
+        el("p", { text: why }),
+        el("button", { class: "btn btn--sm", type: "button", id: "np-retry", disabled: !lineup.length,
+          onclick: function () { retry(); } }, [PMP.dom.icon("sync"), "Try again"])
+      ]));
+    }
     spacer = null;
     if (mark) {
       mark.id = "np-sent";
@@ -53804,8 +53844,18 @@ PMP.GeminiChat = (function () {
     anchor = now;
     saveChat(chat().concat([{ r: "user", t: text, at: now }]));
     if (typeof textArg !== "string") nodes.msg.value = "";
+    request(now);
+  }
+
+  /* Asks Gemini to answer the conversation as it stands, whose last turn
+     is the person's message sent at `now`. A failure leaves that message
+     unanswered, with the error and "Try again" under it (renderLog). */
+  var failed = null;
+  function request(now) {
     busy = new AbortController();
     var mine = busy;
+    failed = null;
+    anchor = now;
     paintBusy();
     renderLog();
     var system = SYSTEM + "\n\nLearner progress snapshot, computed by the app just now:\n" + snapshotText();
@@ -53822,12 +53872,19 @@ PMP.GeminiChat = (function () {
       if (busy !== mine) return;
       busy = null;
       anchor = null;
+      if (!(e && e.name === "AbortError")) failed = { at: now, msg: (e && e.message) || "Something went wrong." };
       renderLog();
-      if (!(e && e.name === "AbortError")) showError((e && e.message) || "Something went wrong.");
     }).then(function () {
       paintBusy();
       if (document.activeElement === document.body) nodes.msg.focus();
     });
+  }
+  /* "Try again": the unanswered message goes again, as it is, to the next model in turn. */
+  function retry() {
+    var list = chat(), last = list[list.length - 1];
+    if (!last || last.r === "model" || busy || !key || !lineup.length) return;
+    stopTyping();
+    request(last.at);
   }
 
   function useKey() {
@@ -54032,7 +54089,7 @@ PMP.GeminiChat = (function () {
     init: init, sync: paint, focus: focus, markdown: markdown,
     askAbout: askAbout, sendNow: sendNow, complete: complete, openTab: openTab, questionDraft: questionDraft, review: review, reviewButton: reviewButton,
     explain: explain, explainSheet: explainSheet,
-    lineupOf: lineupOf, parseModels: parseModels, snapshot: snapshot, commands: commands, expand: expand,
+    lineupOf: lineupOf, parseModels: parseModels, snapshot: snapshot, commands: commands, expand: expand, retry: retry,
     SYSTEM: SYSTEM, EXPLAIN_SYSTEM: EXPLAIN_SYSTEM, REVIEW_PROMPT: REVIEW_PROMPT,
     get hasKey() { return !!key; },
     get lineup() { return lineup.slice(); },

@@ -33,9 +33,11 @@ import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.material3.AlertDialog
 import com.jahangirb.pmpprep.ui.components.ClayButton as Button
+import com.jahangirb.pmpprep.ui.components.ClayOutlinedButton as OutlinedButton
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -201,7 +203,17 @@ private fun CoachChat(vm: PmpViewModel) {
                     Spacer(Modifier.width(8.dp))
                     Text("Thinking…", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                vm.aiError?.let { Text(it, color = ColorError, fontSize = 13.sp, modifier = Modifier.padding(8.dp)) }
+                // The last message went unanswered: why, and one button to send it again.
+                if (!vm.aiBusy && chat.lastOrNull()?.let { it.role != "model" } == true) {
+                    Column(Modifier.padding(horizontal = 8.dp)) {
+                        Text(vm.aiError ?: "No answer came back for this message.", color = ColorError, fontSize = 13.sp)
+                        OutlinedButton(onClick = { vm.retryAsk() }) {
+                            Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
+                            Spacer(Modifier.width(6.dp))
+                            Text("Try again")
+                        }
+                    }
+                } else vm.aiError?.let { Text(it, color = ColorError, fontSize = 13.sp, modifier = Modifier.padding(8.dp)) }
                 if (chat.isNotEmpty() && vm.typingAt == null) TextButton(onClick = { vm.chatAnchor = null; vm.store.clearChat() }) { Text("Clear conversation") }
                 Spacer(Modifier.height(4.dp))
                 }
