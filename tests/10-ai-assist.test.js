@@ -98,7 +98,7 @@ module.exports = [
       assert.deepStrictEqual(r.stored, r.lineup, "the line-up is kept in localStorage");
       assert.ok(Date.now() - r.at < 60000, "with when it was fetched");
       assert.strictEqual(r.picker, 0, "no model dropdown");
-      assert.ok(/Gemini 4\.5 Flash, with 4 fallbacks/.test(r.shown), r.shown);
+      assert.ok(/Gemini 4\.5 Flash, taking turns with 4 other models/.test(r.shown), r.shown);
       assert.ok(/Gemini 3\.5 Flash/.test(r.title), r.title);
       assert.strictEqual(r.inStore, false, "never in the store");
       assert.strictEqual(r.inDoc, false, "never in the synced document");
@@ -207,7 +207,7 @@ module.exports = [
     }
   },
   {
-    name: "fallback: an error moves down the line-up and the model that answers is kept for the session",
+    name: "turns and fallback: each message starts one model on, so 3.5 is used too; an error moves on to the next",
     fn: async function (h, lib) {
       var page = await h.open("fresh");
       var posts = [];
@@ -215,17 +215,18 @@ module.exports = [
         var q = r.request();
         if (q.method() === "GET") return json(r, 200, { models: [M("gemini-4-flash"), M("gemini-3.5-flash")] });
         posts.push(q.url().replace(/^.*models\//, "").replace(/:generateContent$/, ""));
-        if (/gemini-4-flash/.test(q.url())) return json(r, 503, { error: { code: 503, message: "The model is overloaded." } });
+        if (/gemini-4-flash/.test(q.url()) && posts.length === 1) return json(r, 503, { error: { code: 503, message: "The model is overloaded." } });
         return json(r, 200, reply("Fine."));
       });
       await useKey(page, "GOOD");
-      for (var t of ["one", "two"]) {
+      for (var t of ["one", "two", "three", "four"]) {
         await page.fill("#np-msg", t);
         await page.click("#np-send");
         await page.waitForTimeout(300);
       }
-      assert.deepStrictEqual(posts, ["gemini-4-flash", "gemini-3.5-flash", "gemini-3.5-flash"], "sticky after the fallback");
-      assert.strictEqual(await page.$$eval('#np-log .np-m[data-role="model"]', function (m) { return m.length; }), 2);
+      assert.deepStrictEqual(posts, ["gemini-4-flash", "gemini-3.5-flash", "gemini-3.5-flash", "gemini-4-flash", "gemini-3.5-flash"],
+        "the first message falls back to 3.5; after that the two take turns");
+      assert.strictEqual(await page.$$eval('#np-log .np-m[data-role="model"]', function (m) { return m.length; }), 4);
       assert.ok(/gemini-3\.5-flash/.test(await page.textContent("#np-lineup")), "the one answering is shown");
       page.errors = page.errors.filter(function (e) { return e.indexOf("status of 503") < 0; });
       await lib.clean(page);

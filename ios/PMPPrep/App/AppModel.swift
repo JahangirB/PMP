@@ -1005,8 +1005,10 @@ final class AppModel: ObservableObject {
     @Published private(set) var geminiKey: String
     /** The Flash models the coach uses, newest first, refreshed from Google once a week. */
     @Published private(set) var geminiModels: [Gemini.Model]
-    /** The model that last answered in this app session: messages keep going to it until it fails. */
+    /** The model that last answered in this app session. */
     private var sessionModel: String? = nil
+    /** Where the next message starts in the line-up: each starts one model on, so every model takes turns. */
+    private var turn: Int = 0
     @Published private(set) var aiBusy = false
     @Published var aiError: String? = nil
     /** Text waiting in the coach's input, e.g. a question sent from practice. */
@@ -1054,19 +1056,22 @@ final class AppModel: ObservableObject {
     }
 
     /**
-     * Sends one request down the line-up: from the model that answered last this session (or the newest),
-     * each error moves it to the next model down; the first that answers is used from then on. A refused key
-     * or no connection stops at once; when every model fails, the error says whether the key's limit is used up.
+     * Sends one request round the line-up: each message starts one model further along than the last, wrapping
+     * round, so every model (3.5 included) shares the work and its own free quota; an error moves the request on
+     * to the next model. A refused key or no connection stops at once; when every model fails, the error says
+     * whether the key's limit is used up.
      */
     private func callGemini(_ system: String, _ turns: [ChatTurn]) async throws -> String {
         let key = geminiKey
         if lineupStale() { try? await updateModels(key) }
         let names = geminiModels.map(\.name)
         if names.isEmpty { throw Gemini.GeminiError(message: "Couldn't get the list of Gemini models from Google. Check your connection and try again.") }
-        let start = sessionModel.flatMap { names.firstIndex(of: $0) } ?? 0
+        let start: Int = turn % names.count
+        turn = start + 1
+        let order: [String] = Array(names[start...]) + Array(names[..<start])
         var last: Gemini.GeminiError? = nil
         var limited = false
-        for model in names[start...] {
+        for model in order {
             do {
                 let reply = try await Gemini.generate(key, model, system, turns)
                 sessionModel = model
