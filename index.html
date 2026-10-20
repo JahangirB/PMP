@@ -3170,9 +3170,6 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
         <svg class="i" aria-hidden="true"><use href="#i-moon" id="theme-icon"></use></svg>
         <span class="nav-t" id="theme-label">Dark</span>
       </button>
-      <button class="btn btn--sm" id="export-btn" type="button">
-        <svg class="i" aria-hidden="true"><use href="#i-data"></use></svg><span class="nav-t">Export</span>
-      </button>
     </div>
   </nav>
 
@@ -3748,8 +3745,8 @@ STEP 5 — TELL ME HOW TO ADD IT:
               sanitised by allowlist on every load; mirrored pre-paint by 01.6
         12.2.2 Gemini tab — chat in the pane with the person's own API key,
               page to Google direct; the phones' automatic line-up (Flash
-              3.5 and newer, no Lite, at most five, refreshed weekly) with
-              fallback down it; every message carries the progress
+              3.5 and newer, no Lite, at most five, refreshed weekly),
+              messages taking turns across it with fallback; every message carries the progress
               snapshot (12.2.2a) and the last 30 turns of the shared chat;
               Ask about this question, Explain it back, the full review;
               the key and the line-up kept outside the store and out of
@@ -47409,6 +47406,20 @@ PMP.Sync = (function () {
     ]);
   }
 
+  /* A copy kept by hand, beside the copy kept in Drive. It used to sit at
+     the foot of the side menu, where its icon read as Download. */
+  function exportCard() {
+    return el("section", { class: "card", "aria-labelledby": "sync-export-h" }, [
+      el("span", { class: "eyebrow", text: "Backup file" }),
+      el("h2", { id: "sync-export-h", text: "Export your progress" }),
+      el("p", { text: "Saves everything this device holds to a file you keep yourself, in the same format the phones and Cloud sync use. Load it again from Backup and packs." }),
+      el("div", { class: "filter-bar" }, [
+        el("button", { class: "btn", id: "export-btn", type: "button", onclick: function () { PMP.Exporter.exportProgress(); } },
+          [PMP.dom.icon("data"), "Export"])
+      ])
+    ]);
+  }
+
   function view(host) {
     var cfg = config();
     host.appendChild(el("div", { class: "view-hd" }, [
@@ -47426,6 +47437,7 @@ PMP.Sync = (function () {
       statusNode = null;
       host.appendChild(setupCard());
     }
+    host.appendChild(exportCard());
     host.appendChild(aboutCard());
   }
 
@@ -52040,7 +52052,7 @@ PMP.Shell = (function () {
      copied into title for a pointer tooltip; expanded, the title goes, as
      the label is on screen. The theme button keeps its own title. */
   function railTitles(collapsed) {
-    var items = railEl.querySelectorAll(".nav-i, .nav-sup, #export-btn");
+    var items = railEl.querySelectorAll(".nav-i, .nav-sup");
     for (var i = 0; i < items.length; i++) {
       var t = items[i].querySelector(".nav-t");
       if (collapsed && t) items[i].setAttribute("title", t.textContent);
@@ -52142,7 +52154,6 @@ PMP.Shell = (function () {
       }
     });
     PMP.dom.on(document.getElementById("theme-btn"), "click", cycleTheme);
-    PMP.dom.on(document.getElementById("export-btn"), "click", function () { PMP.Exporter.exportProgress(); });
     PMP.dom.delegate(document.getElementById("sheet"), "click", "[data-sheet-close]", function () { PMP.UI.closeSheet(null); });
     /* The 'close' event is queued, not fired synchronously, in current
        Chromium. When one sheet's action opens another (import, then its
@@ -52585,9 +52596,10 @@ PMP.Notepad = (function () {
      version, at most five, and a 3.5 model keeps its place while Google
      still lists one. It is fetched when a key is entered and again when a
      week old, so new models arrive with no update to this file.
-   · Fallback. A request starts with the model that last answered in this
-     page session (or the newest), and an error moves it down the line-up;
-     the first that answers is used from then on. A refused key or no
+   · Rotation and fallback. Each request starts one model further along
+     the line-up than the last, wrapping round, so every model in it (3.5
+     included) shares the work and its own free quota; an error moves the
+     request on to the next model, round the whole line-up. A refused key or no
      connection stops at once, since no other model would change that. When
      every model fails, Google's error is shown, and a used-up limit (429)
      is named as one.
@@ -52632,7 +52644,7 @@ PMP.GeminiChat = (function () {
     ["Explain my weakest task", "Teach me the ECO task where my accuracy is lowest: what PMI expects, the common traps, and one example question with the reasoning."]
   ];
 
-  var nodes = {}, key = "", lineup = [], lineupAt = 0, sessionModel = null;
+  var nodes = {}, key = "", lineup = [], lineupAt = 0, sessionModel = null, turn = 0;
   var busy = null, refreshing = null, draft = "";
 
   /* ── storage beside the key ── */
@@ -52795,14 +52807,16 @@ PMP.GeminiChat = (function () {
     });
   }
 
-  /* Down the line-up, from the model that answered last this session. */
+  /* Round the line-up, starting one model on from the last request's start. */
   function callGemini(system, turns, signal) {
     var k = key;
     var ready = stale() ? refresh(k).then(null, function () { return null; }) : Promise.resolve();
     return ready.then(function () {
       var names = lineup.map(function (m) { return m.n; });
       if (!names.length) throw gErr("Couldn't get the list of Gemini models from Google. Check your connection and try again.", 0);
-      var queue = names.slice(Math.max(0, names.indexOf(sessionModel)));
+      var start = turn % names.length;
+      turn = start + 1;
+      var queue = names.slice(start).concat(names.slice(0, start));
       var last = null, limited = false;
       function next() {
         if (!queue.length) {
@@ -53014,8 +53028,8 @@ PMP.GeminiChat = (function () {
       nodes.lineup.removeAttribute("title");
     } else {
       var cur = lineup.filter(function (m) { return m.n === sessionModel; })[0] || lineup[0];
-      nodes.lineup.textContent = cur.l + (lineup.length > 1 ? ", with " + PMP.fmt.plural(lineup.length - 1, "fallback") : "");
-      nodes.lineup.setAttribute("title", "Tried in this order: " + lineup.map(function (m) { return m.l; }).join(", ") + ". Checked with Google weekly.");
+      nodes.lineup.textContent = (sessionModel ? "Last answer: " : "") + cur.l + (lineup.length > 1 ? ", taking turns with " + PMP.fmt.plural(lineup.length - 1, "other model") : "");
+      nodes.lineup.setAttribute("title", "Messages take turns across: " + lineup.map(function (m) { return m.l; }).join(", ") + ". If one fails the next is tried. Checked with Google weekly.");
     }
     paintBusy();
   }

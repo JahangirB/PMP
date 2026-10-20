@@ -1215,8 +1215,10 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
      */
     var geminiModels by mutableStateOf(savedLineup())
         private set
-    /** The model that last answered in this app session: messages keep going to it until it fails. */
+    /** The model that last answered in this app session. */
     private var sessionModel: String? = null
+    /** Where the next message starts in the line-up: each starts one model on, so every model takes turns. */
+    private var turn = 0
     var aiBusy by mutableStateOf(false)
         private set
     var aiError by mutableStateOf<String?>(null)
@@ -1268,20 +1270,21 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     }.getOrDefault(emptyList())
 
     /**
-     * Sends one request down the line-up: from the model that answered last this session (or the
-     * newest), each error moves it to the next model down, and the first that answers is used from
-     * then on. A refused key or no connection stops at once; when every model fails, the error says
-     * whether the key's limit is used up.
+     * Sends one request round the line-up: each message starts one model further along than the last,
+     * wrapping round, so every model (3.5 included) shares the work and its own free quota; an error moves
+     * the request on to the next model. A refused key or no connection stops at once; when every model
+     * fails, the error says whether the key's limit is used up.
      */
     private suspend fun callGemini(system: String, turns: List<ChatTurn>): String {
         val key = geminiKey
         if (lineupStale()) runCatching { updateModels(key) }
         val names = geminiModels.map { it.name }
         if (names.isEmpty()) throw Gemini.GeminiException("Couldn't get the list of Gemini models from Google. Check your connection and try again.")
-        val start = names.indexOf(sessionModel).coerceAtLeast(0)
+        val start = turn % names.size
+        turn = start + 1
         var last: Gemini.GeminiException? = null
         var limited = false
-        for (model in names.drop(start)) {
+        for (model in names.drop(start) + names.take(start)) {
             try {
                 val reply = withContext(Dispatchers.IO) { Gemini.generate(key, model, system, turns) }
                 sessionModel = model

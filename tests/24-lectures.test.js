@@ -139,5 +139,21 @@ module.exports = [
       });
       assert.ok(r.svgs >= 5 && r.named && r.shapes > 3 && !r.wide, JSON.stringify(r));
     }
+  },
+  {
+    name: "Export lives in Cloud sync, not at the foot of the menu, and still saves the progress file",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      assert.strictEqual(await page.$("#rail #export-btn"), null);
+      await lib.go(page, "#/sync");
+      var called = await page.evaluate(function () {
+        var n = 0, real = PMP.Exporter.exportProgress;
+        PMP.Exporter.exportProgress = function () { n++; };
+        document.getElementById("export-btn").click();
+        PMP.Exporter.exportProgress = real;
+        return n;
+      });
+      assert.strictEqual(called, 1);
+    }
   }
 ];
