@@ -2750,6 +2750,14 @@ mark.np-h-none { background: transparent; }
 .np-pop[hidden] { display: none; }
 .np-pop button { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--r-1); }
 .np-pop button:hover { background: var(--s-sunk); }
+/* Labs: a feature still being tested (Theory, §10.37). The flask stays
+   visible when the rail is collapsed. */
+.labs { display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: var(--r-full);
+  background: var(--st-flagged-bg); color: var(--st-flagged-fg); font-size: var(--t-xs); font-weight: var(--w-bold); line-height: 1.6; vertical-align: middle; }
+.labs .i { width: 13px; height: 13px; }
+.labs--nav { margin-left: auto; padding: 2px 6px; }
+:root[data-rail="collapsed"] .rail .labs--nav { position: absolute; top: 2px; right: 4px; padding: 1px 3px; }
+.th-hd { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
 /* Theory (§10.37): the parts list and the chapter reader. Reading text
    runs a little larger than lessons, at a comfortable measure. */
 .th-intro { display: grid; gap: var(--sp-3); justify-items: start; }
@@ -3244,6 +3252,7 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
 <symbol id="i-audit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 4.5 6v6.2c0 4.4 3.1 7.9 7.5 9.1 4.4-1.2 7.5-4.7 7.5-9.1V6z"/><path d="m8.8 11.9 2.2 2.2 4.2-4.4"/></symbol>
 <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-labs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6.5L4.6 18.4A1.7 1.7 0 0 0 6.1 21h11.8a1.7 1.7 0 0 0 1.5-2.6L14 9.5V3"/><path d="M7.2 15h9.6"/></symbol>
 <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4zM13.5 6.5l4 4"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.4 5.6l-1.4 1.4M7 17l-1.4 1.4M18.4 18.4 17 17M7 7 5.6 5.6"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4 8.5 8.5 0 1 0 20 14.2z"/></symbol>
@@ -3291,7 +3300,7 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
       <div class="nav-grp">
         <span class="eyebrow">Learn</span>
         <a class="nav-i" href="#/learn"     data-route="learn"><svg class="i"><use href="#i-learn"></use></svg><span class="nav-t">Lessons</span></a>
-        <a class="nav-i" href="#/theory"    data-route="theory"><svg class="i"><use href="#i-book"></use></svg><span class="nav-t">Theory</span></a>
+        <a class="nav-i" href="#/theory"    data-route="theory"><svg class="i"><use href="#i-book"></use></svg><span class="nav-t">Theory</span><span class="labs labs--nav" title="Labs: new and still being tested"><svg class="i" aria-hidden="true"><use href="#i-labs"></use></svg><span class="sr-only">Labs</span></span></a>
         <a class="nav-i" href="#/practice"  data-route="practice"><svg class="i"><use href="#i-target"></use></svg><span class="nav-t">Practice</span></a>
         <a class="nav-i" href="#/scenarios" data-route="scenarios"><svg class="i"><use href="#i-branch"></use></svg><span class="nav-t">Situational trainer</span></a>
         <a class="nav-i" href="#/cards"     data-route="cards"><svg class="i"><use href="#i-cards"></use></svg><span class="nav-t">Flashcards</span><span class="badge num" id="due-badge">0</span></a>
@@ -18264,8 +18273,6 @@ PMP.ABBREVIATIONS = Object.freeze([
   { abbr: "VAC", full: "Variance at completion", group: "evm", see: "Variance at completion" },
   { abbr: "WBS", full: "Work breakdown structure", group: "scope", see: "Work breakdown structure" },
   { abbr: "WIP", full: "Work in progress", group: "agile", see: "Work in progress" },
-  { abbr: "WoW", full: "Way of working", group: "agile",
-    note: "Disciplined Agile's term for a team's chosen process." },
   { abbr: "X", full: "Exam skills", group: "exam",
     note: "Lesson-id prefix: X1 is the first Exam skills lesson." },
   { abbr: "XP", full: "Extreme Programming", group: "agile", see: "Extreme Programming" },
@@ -20599,14 +20606,14 @@ PMP.THEORY = Object.freeze({
         ]
        }
       },
-      "These methods spread rapidly through defence, aerospace and construction, helped by the arrival of computers that could do the network calculations. Around them grew other techniques: work breakdown structures for organising scope, earned value for measuring progress against cost and schedule together, and formal configuration and change control. The United States Department of Defense and NASA, especially during the Apollo programme of the 1960s, drove much of this. Systems engineering, the discipline of designing complex systems as a whole and managing the interfaces between their parts, grew up alongside."
+      "These methods spread rapidly through defence, aerospace and construction, helped by the arrival of computers that could do the network calculations. Around them grew other techniques: work breakdown structures for organising scope, earned value for measuring progress against cost and schedule together, and formal configuration and change control. The United States Department of Defense and the National Aeronautics and Space Administration (NASA), especially during the Apollo programme of the 1960s, drove much of this. Systems engineering, the discipline of designing complex systems as a whole and managing the interfaces between their parts, grew up alongside."
      ]
     },
     {
      "id": "t2-s4",
      "title": "A profession takes shape",
      "blocks": [
-      "By the 1960s, enough people were managing projects across enough industries that they began to see themselves as a profession. The International Project Management Association was formed in Europe in 1965, and the Project Management Institute was founded in the United States in 1969. Both brought practitioners together to share methods across industries, which was the first time the field's knowledge had been treated as independent of any particular technology.",
+      "By the 1960s, enough people were managing projects across enough industries that they began to see themselves as a profession. The International Project Management Association was formed in Europe in 1965, and the Project Management Institute (PMI) was founded in the United States in 1969. Both brought practitioners together to share methods across industries, which was the first time the field's knowledge had been treated as independent of any particular technology.",
       "Over the following decades PMI collected what its members considered generally recognised good practice. A report on the body of knowledge was published in the 1980s, and the first edition of *A Guide to the Project Management Body of Knowledge*, the PMBOK Guide, appeared in 1996. PMI's certification, the PMP, began in 1984. In the United Kingdom, the government developed a structured method called PRINCE in 1989 and a general-purpose successor, PRINCE2, in 1996, which became widely used in the public sector and in Europe.",
       "The early editions of the PMBOK Guide described project management as a set of processes, grouped by the stage of the project in which they mostly happen (initiating, planning, executing, monitoring and controlling, and closing) and by knowledge area (scope, schedule, cost, quality, risk and so on). Each process had inputs, tools and techniques, and outputs. This gave the field a common vocabulary and a checklist of what a competent project should consider. It also encouraged, in some organisations, a heavy and document-centred style of management that later generations reacted against."
      ]
@@ -20678,7 +20685,7 @@ PMP.THEORY = Object.freeze({
     "Eliyahu M. Goldratt, *Critical Chain* (1997). A novel that applies the theory of constraints to project schedules.",
     "James P. Womack, Daniel T. Jones and Daniel Roos, *The Machine That Changed the World* (1990). The study that introduced lean thinking to the West."
    ],
-   "words": 2162,
+   "words": 2169,
    "minutes": 10,
    "n": 2
   },
@@ -21334,11 +21341,11 @@ PMP.THEORY = Object.freeze({
    ],
    "reading": [
     "Project Management Institute, *The Standard for Portfolio Management* and *The Standard for Program Management*. The formal descriptions of the two levels above the project.",
-    "UK Office of Government Commerce, *Managing Successful Programmes*. A widely used programme management method with a strong emphasis on benefits.",
+    "Office of Government Commerce (United Kingdom), *Managing Successful Programmes*. A widely used programme management method with a strong emphasis on benefits.",
     "Gerald Bradley, *Benefit Realisation Management* (2010). A practical guide to keeping benefits in view.",
     "Harold Kerzner, *Project Management: A Systems Approach to Planning, Scheduling, and Controlling* (many editions). Thorough on organisational structures and project management offices."
    ],
-   "words": 2461,
+   "words": 2462,
    "minutes": 11,
    "n": 4
   },
@@ -22593,11 +22600,11 @@ PMP.THEORY = Object.freeze({
    ],
    "reading": [
     "Project Management Institute, *The Standard for Project Management* (seventh edition), section on tailoring. A structured approach to tailoring decisions.",
-    "Scott Ambler and Mark Lines, *Choose Your WoW!* (2019). Disciplined Agile's argument that teams should choose their way of working from many options.",
+    "Scott Ambler and Mark Lines, *Disciplined Agile Delivery* (2012). The case for teams choosing their own way of working from many options, within guardrails.",
     "Ralph D. Stacey, *Strategic Management and Organisational Dynamics* (many editions). The source of the agreement and certainty matrix.",
     "Alistair Cockburn, *Agile Software Development: The Cooperative Game* (2006). On fitting methodology weight to project size and criticality."
    ],
-   "words": 1778,
+   "words": 1779,
    "minutes": 8,
    "n": 8
   },
@@ -22895,11 +22902,11 @@ PMP.THEORY = Object.freeze({
    ],
    "reading": [
     "Bent Flyvbjerg, \"From Nobel Prize to Project Management: Getting Risks Right\", *Project Management Journal* (2006). Reference class forecasting explained by its main advocate.",
-    "UK Treasury, *The Green Book* and the *Five Case Model* guidance. A thorough public-sector approach to business cases.",
+    "The Treasury (United Kingdom), *The Green Book* and the *Five Case Model* guidance. A thorough public-sector approach to business cases.",
     "Jonathan Rasmusson, *The Agile Samurai* (2010). Includes a practical inception approach for adaptive projects.",
     "Project Management Institute, *Business Analysis for Practitioners: A Practice Guide* (2015). On needs assessment and requirements at the start."
    ],
-   "words": 1939,
+   "words": 1941,
    "minutes": 9,
    "n": 9
   },
@@ -59993,6 +60000,10 @@ PMP.Theory = (function () {
   }
 
   function data() { return PMP.THEORY || { parts: [], chapters: [] }; }
+  /* The Labs flask: Theory is new and still being tested. */
+  function labs() {
+    return el("span", { class: "labs", title: "Labs: new and still being tested" }, [icon("labs"), "Labs"]);
+  }
   function chapter(id) { return data().chapters.filter(function (c) { return c.id === id; })[0] || null; }
   /* Book-wide numbering from the planned contents, so chapter 9 stays
      chapter 9 whichever parts are written. */
@@ -60044,7 +60055,7 @@ PMP.Theory = (function () {
     var planned = data().parts.reduce(function (n, p) { return n + p.planned.length; }, 0);
     var last = mem().last, lastCh = last && chapter(last.ch);
     host.appendChild(el("div", { class: "view-hd" }, [
-      el("span", { class: "eyebrow", text: "Theory" }),
+      el("div", { class: "th-hd" }, [el("span", { class: "eyebrow", text: "Theory" }), labs()]),
       el("h2", { text: "Project management in depth" })
     ]));
     host.appendChild(el("div", { class: "card th-intro" }, [
@@ -60097,7 +60108,7 @@ PMP.Theory = (function () {
 
     var art = el("article", { class: "th-art", id: "th-art", dataset: { ch: c.id } }, [
       el("div", { class: "th-bar", "aria-hidden": "true" }, [el("i", { id: "th-bar" })]),
-      el("span", { class: "eyebrow", text: "Part " + ROMAN[c.part] + " · Chapter " + numberOf(c) + " · " + c.minutes + " min read" }),
+      el("div", { class: "th-hd" }, [el("span", { class: "eyebrow", text: "Part " + ROMAN[c.part] + " · Chapter " + numberOf(c) + " · " + c.minutes + " min read" }), labs()]),
       el("h2", { class: "th-title", text: c.title }),
       el("p", { class: "th-sum" }, rich(c.summary, x)),
       el("aside", { class: "th-why" }, [el("span", { class: "eyebrow", text: "Why it matters" }), el("p", null, rich(c.why, x))])

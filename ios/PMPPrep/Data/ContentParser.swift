@@ -245,7 +245,35 @@ enum ContentParser {
             areaTours: o.objects("areaTours").map { t in
                 AreaTour(area: t.str("area"), intro: t.str("intro"), lessons: t.strings("lessons"), figure: ContentParser.figure(t.obj("figure")))
             },
-            courseOrder: o.strings("courseOrder"))
+            courseOrder: o.strings("courseOrder"),
+            theory: theory(o.obj("theory")))
+    }
+
+    /** index.html PMP.THEORY, as extract-content.mjs writes it (abbreviations spelled out). */
+    static func theory(_ o: JObj?) -> Theory {
+        guard let o = o else { return Theory() }
+        let parts: [TheoryPart] = o.objects("parts").map { p in
+            TheoryPart(n: p.optInt("n"), title: p.str("title"), blurb: p.str("blurb"), planned: p.strings("planned"))
+        }
+        let chapters: [TheoryChapter] = o.objects("chapters").map { c in
+            let sections: [TheorySection] = c.objects("sections").map { s in
+                let raw: [Any] = s.arr("blocks") ?? []
+                let blocks: [TheoryBlock] = raw.compactMap { b -> TheoryBlock? in
+                    if let t = b as? String { return .para(t) }
+                    guard let j = JObj(b) else { return nil }
+                    if j.has("ul") { return .bullets(j.strings("ul")) }
+                    if j.has("ol") { return .numbered(j.strings("ol")) }
+                    if j.has("h") { return .heading(j.str("h")) }
+                    if j.has("box") { return .box(kind: j.str("box"), text: j.str("text")) }
+                    if let f = ContentParser.figure(j.obj("fig")) { return .fig(f) }
+                    return nil
+                }
+                return TheorySection(id: s.str("id"), title: s.str("title"), blocks: blocks)
+            }
+            return TheoryChapter(id: c.str("id"), part: c.optInt("part"), title: c.str("title"), summary: c.str("summary"), why: c.str("why"),
+                                 sections: sections, keyIdeas: c.strings("keyIdeas"), reading: c.strings("reading"), minutes: max(1, c.optInt("minutes", 1)))
+        }
+        return Theory(parts: parts, chapters: chapters)
     }
 
     /** A lesson figure (index.html §10.31), or nil when the section has none. */

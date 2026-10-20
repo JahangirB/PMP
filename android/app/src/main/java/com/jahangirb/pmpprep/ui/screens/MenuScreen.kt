@@ -69,7 +69,7 @@ import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.PracticeFilter
 import com.jahangirb.pmpprep.ui.components.SectionLabel
 
-private class Entry(val icon: ImageVector, val label: String, val detail: String, val go: () -> Unit)
+private class Entry(val icon: ImageVector, val label: String, val detail: String, val labs: Boolean = false, val go: () -> Unit)
 
 /**
  * Extra work, beside the guided path. Grouped by what the person wants to do,
@@ -104,6 +104,9 @@ fun MenuScreen(vm: PmpViewModel) {
         ),
         "Study" to listOf(
             Entry(Icons.AutoMirrored.Filled.MenuBook, "Lessons", "${vm.store.lessonsDone.size} of ${x.lessons.size} done") { vm.navigate(Dest.LEARN) },
+            Entry(Icons.AutoMirrored.Filled.LibraryBooks, "Theory", "${x.theory.chapters.size} chapters on the discipline in depth · ${vm.theoryRead.size} read", labs = true) {
+                vm.theoryChapter = null; vm.navigate(Dest.THEORY)
+            },
             Entry(Icons.Default.Style, "Flashcards", "${vm.deckCounts(null).due} due" + if (vm.store.myCards.isNotEmpty()) " · ${vm.store.myCards.size} of your own" else "") { vm.navigate(Dest.FLASHCARDS) },
             Entry(Icons.AutoMirrored.Filled.LibraryBooks, "Reference and glossary", "ECO tasks, ${x.glossary.size} terms, processes") { vm.navigate(Dest.REFERENCE) },
         ),
@@ -178,7 +181,10 @@ fun MenuScreen(vm: PmpViewModel) {
                         Icon(e.icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(24.dp))
                         Spacer(Modifier.width(16.dp))
                         Column(Modifier.weight(1f)) {
-                            Text(e.label, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(e.label, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+                                if (e.labs) { Spacer(Modifier.width(8.dp)); LabsBadge() }
+                            }
                             Text(e.detail, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }

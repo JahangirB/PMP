@@ -266,6 +266,31 @@ struct ReadinessConfig {
     let gateItems: Int, gateTasks: Int
 }
 
+/** The Theory reading room (index.html §05.12, §10.37; Theory in Models.kt). */
+struct Theory {
+    var parts: [TheoryPart] = []
+    var chapters: [TheoryChapter] = []
+    /** Book-wide chapter number, from the planned contents. */
+    func numberOf(_ c: TheoryChapter) -> Int {
+        let before = parts.filter { $0.n < c.part }.reduce(0) { $0 + $1.planned.count }
+        return before + (chapters.filter { $0.part == c.part }.firstIndex { $0.id == c.id } ?? 0) + 1
+    }
+    var planned: Int { parts.reduce(0) { $0 + $1.planned.count } }
+}
+struct TheoryPart { let n: Int; let title: String; let blurb: String; let planned: [String] }
+struct TheoryChapter: Identifiable {
+    let id: String; let part: Int; let title: String; let summary: String; let why: String
+    let sections: [TheorySection]; let keyIdeas: [String]; let reading: [String]; let minutes: Int
+}
+struct TheorySection: Identifiable { let id: String; let title: String; let blocks: [TheoryBlock] }
+/** One block of a theory section. Text carries **bold** and *italic*; abbreviations arrive already spelled out. */
+enum TheoryBlock {
+    case para(String), bullets([String]), numbered([String]), heading(String)
+    /** kind is "exam", "myth" or "example". */
+    case box(kind: String, text: String)
+    case fig(Figure)
+}
+
 struct Extras {
     let ecoLabel: String
     let domainWeights: [Domain: Double]
@@ -296,6 +321,8 @@ struct Extras {
     /** The knowledge-area tours and the classroom lesson order (index.html PMP.AREA_TOURS, PMP.COURSE_ORDER). */
     var areaTours: [AreaTour] = []
     var courseOrder: [String] = []
+    /** The Theory chapters (Labs); empty in builds from before them. */
+    var theory: Theory = Theory()
 }
 
 struct SampleDocuments: Hashable { let projectName: String; let projectSummary: String; let list: [SampleDocument] }

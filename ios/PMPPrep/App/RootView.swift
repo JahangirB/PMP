@@ -93,6 +93,7 @@ private struct Shell: View {
         case .SYNC: SyncScreen()
         case .SUPPORT: SupportScreen()
         case .UPDATES: UpdateScreen()
+        case .THEORY: TheoryScreen()
         }
     }
 }

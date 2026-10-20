@@ -45,6 +45,40 @@ vm.runInContext(config, sandbox, { filename: 'index.html#config' });
 vm.runInContext(data, sandbox, { filename: 'index.html#data' });
 const P = sandbox.PMP;
 
+// The abbreviation expander (§09.5), so Theory reaches the phones with each
+// abbreviation spelled out on first use in a chapter, exactly as the web shows it.
+const abbrStart = main.indexOf('PMP.Abbr = (function');
+const abbrEnd = main.indexOf('/* ── 09.6');
+if (abbrStart < 0 || abbrEnd < 0) throw new Error('index.html: could not find PMP.Abbr (§09.5)');
+vm.runInContext(main.slice(abbrStart, abbrEnd), sandbox, { filename: 'index.html#abbr' });
+
+/* PMP.THEORY with its text expanded in the web reader's order (§10.37):
+   summary, why, then each section's blocks, then key ideas and reading.
+   Headings and figures are left as they are. */
+function theoryOut(T) {
+  if (!T) return null;
+  const t = plain(T);
+  t.chapters.forEach((c) => {
+    const texts = [c.summary, c.why];
+    c.sections.forEach((s) => { texts.push(s.title); s.blocks.forEach((b) => texts.push(typeof b === 'string' ? b : b.text || b.h || (b.ul || b.ol || []).join(' '))); });
+    const x = P.Abbr.unit(texts.concat(c.keyIdeas, c.reading), { where: 'theory ' + c.id }).x;
+    c.summary = x(c.summary);
+    c.why = x(c.why);
+    c.sections.forEach((s) => {
+      s.blocks = s.blocks.map((b) => {
+        if (typeof b === 'string') return x(b);
+        if (b.ul) return { ul: b.ul.map((i) => x(i)) };
+        if (b.ol) return { ol: b.ol.map((i) => x(i)) };
+        if (b.box) return { box: b.box, text: x(b.text) };
+        return b;
+      });
+    });
+    c.keyIdeas = c.keyIdeas.map((k) => x(k));
+    c.reading = c.reading.map((r) => x(r));
+  });
+  return t;
+}
+
 const need = ['ECO', 'EXAM', 'SRS', 'READINESS', 'PRACTICE', 'ECO_TASKS', 'QUESTIONS', 'SCENARIOS', 'DECKS',
   'FLASHCARDS', 'FORMULAS', 'REFERENCE', 'GLOSSARY', 'ABBREVIATIONS', 'MODULES', 'LESSONS', 'RULES'];
 for (const k of need) if (P[k] == null) throw new Error('index.html: PMP.' + k + ' is missing');
@@ -67,6 +101,8 @@ const extras = plain({
   // The knowledge-area tours and the classroom lesson order (L5).
   areaTours: P.AREA_TOURS || [],
   courseOrder: P.COURSE_ORDER || [],
+  // The Theory reading room (§05.12), abbreviations already spelled out.
+  theory: theoryOut(P.THEORY),
   // The Google Apps Script the Cloud sync screen shows (docs/progress-format.md §5).
   syncScript: fs.readFileSync(path.join(root, 'sync', 'pmp-sync.gs'), 'utf8'),
   // The Make more questions prompt: the text block of docs/question-generator-prompt.md.
@@ -92,4 +128,4 @@ for (const f of fs.readdirSync(packDir).sort()) {
 
 console.log(`content: ${core.questions.length} core questions, ${packCount} packs (${packQuestions} questions), ` +
   `${extras.scenarios.length} scenarios, ${extras.lessons.length} lessons, ${extras.flashcards.length} flashcards, ` +
-  `${extras.glossary.length} glossary terms`);
+  `${extras.glossary.length} glossary terms, ${extras.theory ? extras.theory.chapters.length : 0} theory chapters`);
