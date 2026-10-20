@@ -195,5 +195,48 @@ module.exports = [
       await lib.clean(page);
       await page.ctx.close();
     }
+  },
+  {
+    name: "coach bubble: floats bottom right, opens the coach's messages with Gemini, Notes and Today; hides while answering; drags",
+    fn: async function (h, lib) {
+      var page = await h.open("day3");
+      await page.waitForTimeout(400);
+      assert.strictEqual(await page.isVisible("#cb-btn"), true, "visible on Today");
+      await page.click("#cb-btn");
+      var p = await page.evaluate(function () {
+        var panel = document.getElementById("cb-panel");
+        return { open: !!panel, buttons: Array.prototype.map.call(panel.querySelectorAll(".cb-row:last-child button"), function (b) { return b.textContent; }),
+                 label: document.getElementById("cb-btn").getAttribute("aria-label") };
+      });
+      assert.deepStrictEqual(p.buttons, ["Ask Gemini", "Notes", "Today"]);
+      assert.ok(/^Coach/.test(p.label));
+      await page.click('#cb-panel button:has-text("Ask Gemini")');
+      await page.waitForTimeout(300);
+      var g = await page.evaluate(function () {
+        return { pane: PMP.Notepad.isOpen(), tab: document.getElementById("np-tab-ai").getAttribute("aria-selected"), hidden: document.getElementById("cb").hidden };
+      });
+      assert.deepStrictEqual(g, { pane: true, tab: "true", hidden: true }, "Gemini opens in the pane, and the bubble steps aside");
+      await page.click("#np-toggle");
+      await page.waitForTimeout(300);
+      assert.strictEqual(await page.isVisible("#cb-btn"), true, "back when the pane closes");
+
+      /* Dragged, it stays where it was put. */
+      var box = await page.$eval("#cb-btn", function (b) { var r = b.getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; });
+      await page.mouse.move(box.x, box.y);
+      await page.mouse.down();
+      await page.mouse.move(box.x - 200, box.y - 150, { steps: 6 });
+      await page.mouse.up();
+      var after = await page.evaluate(function () { return { pos: JSON.parse(localStorage.getItem("pmp.coachBubble")), panel: !!document.getElementById("cb-panel") }; });
+      assert.ok(after.pos.x <= -190 && after.pos.y <= -140 && !after.panel, JSON.stringify(after));
+
+      /* A question on screen: out of the way. */
+      await lib.go(page, "#/practice");
+      await page.click('#view button:has-text("Start drill")');
+      await page.waitForTimeout(500);
+      var q = await page.evaluate(function () { return { opts: document.querySelectorAll("#view .opt").length, hidden: document.getElementById("cb").hidden }; });
+      assert.ok(q.opts > 0 && q.hidden, "hidden while a question is on screen: " + JSON.stringify(q));
+      await lib.clean(page);
+      await page.ctx.close();
+    }
   }
 ];
