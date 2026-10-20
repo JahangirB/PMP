@@ -155,5 +155,45 @@ module.exports = [
       });
       assert.strictEqual(called, 1);
     }
+  },
+  {
+    name: "progress tiles: the widget's six figures in the top bar from 900px, tinted, linked; hidden on a phone",
+    fn: async function (h, lib) {
+      var page = await h.open("day3");
+      await page.evaluate(function () {
+        var d = new Date(Date.now() + 45 * 86400000), z = function (n) { return (n < 10 ? "0" : "") + n; };
+        PMP.Store.commit(["settings"], function (s) { s.settings.examDate = d.getFullYear() + "-" + z(d.getMonth() + 1) + "-" + z(d.getDate()); });
+      });
+      await page.waitForTimeout(700);
+      var r = await page.evaluate(function () {
+        var tiles = Array.prototype.slice.call(document.querySelectorAll("#top-stats .ts-tile"));
+        var bar = document.querySelector(".topbar").getBoundingClientRect();
+        return {
+          labels: tiles.map(function (t) { return t.querySelector(".ts-l").textContent; }),
+          links: tiles.map(function (t) { return t.getAttribute("href"); }),
+          tinted: tiles.filter(function (t) { return t.hasAttribute("data-heat"); }).length,
+          oneRow: tiles.every(function (t) { return t.getBoundingClientRect().top < bar.bottom; }),
+          stats: PMP.TopStats.stats()
+        };
+      });
+      assert.deepStrictEqual(r.labels, ["days left", "today", "ready", "syllabus", "fitness", "ready by"]);
+      assert.deepStrictEqual(r.links, ["#/planner", "#/today", "#/analytics", "#/learn", "#/fitness", "#/book"]);
+      assert.ok(r.tinted >= 3 && r.oneRow, JSON.stringify(r));
+      assert.strictEqual(typeof r.stats.readiness, "number");
+      if (process.env.PMP_SHOTS) await page.screenshot({ path: process.env.PMP_SHOTS + "/top-1400.png", clip: { x: 0, y: 0, width: 1400, height: 70 } });
+      await page.click("#np-toggle");
+      await page.waitForTimeout(300);
+      var narrow = await page.evaluate(function () {
+        var bar = document.querySelector(".topbar");
+        return { wide: document.documentElement.scrollWidth > window.innerWidth, h: bar.getBoundingClientRect().height };
+      });
+      assert.ok(!narrow.wide && narrow.h < 80, "with the notes pane open, tiles drop out rather than crowd: " + JSON.stringify(narrow));
+      if (process.env.PMP_SHOTS) await page.screenshot({ path: process.env.PMP_SHOTS + "/top-notes.png", clip: { x: 0, y: 0, width: 1400, height: 70 } });
+      await page.setViewportSize({ width: 390, height: 800 });
+      await page.waitForTimeout(200);
+      assert.strictEqual(await page.isVisible("#top-stats"), false, "not on a phone-width screen");
+      await lib.clean(page);
+      await page.ctx.close();
+    }
   }
 ];

@@ -790,6 +790,35 @@ svg { display: block; }
 .icon-btn:hover { background: var(--s-sunk); color: var(--fg); }
 .icon-btn .i { width: var(--icon-lg); height: var(--icon-lg); }
 .topbar .spacer { flex: 1 1 auto; }
+
+/* Progress tiles (§10.32): the phones' home-screen widget, from 900px. The row
+   is one tile high and wraps, so tiles that don't fit drop out of sight from
+   the right rather than squeezing the title or the buttons. */
+.top-stats { display: none; }
+@media (min-width: 900px) {
+  .top-stats {
+    display: flex; flex: 1 1 0; min-width: 0; flex-wrap: wrap; justify-content: center;
+    gap: var(--sp-2); height: 44px; overflow: hidden; margin: 0 var(--sp-2);
+  }
+  .topbar .spacer { display: none; }
+}
+.ts-tile {
+  --heat: var(--fg-muted);
+  display: grid; justify-items: center; align-content: center; gap: 2px;
+  min-width: 70px; height: 44px; padding: 0 var(--sp-3); border-radius: 14px;
+  background: var(--s-raise); border: var(--border-hi);
+  color: var(--fg); text-decoration: none; line-height: 1;
+}
+.ts-tile[data-heat] {
+  background: color-mix(in srgb, var(--heat) 30%, var(--c-panel));
+  border-color: color-mix(in srgb, var(--heat) 55%, var(--c-panel));
+}
+.ts-tile:hover { filter: brightness(1.04); }
+.ts-tile:focus-visible { outline: 2px solid var(--c-signal); outline-offset: 2px; }
+.ts-v { font-size: 15px; font-weight: var(--w-bold); font-variant-numeric: tabular-nums; }
+.ts-l { font-size: 10px; font-weight: var(--w-semi); color: var(--fg-muted); letter-spacing: .02em; }
+.ts-bar { width: 34px; height: 3px; border-radius: 2px; background: color-mix(in srgb, var(--fg) 15%, transparent); overflow: hidden; }
+.ts-bar > i { display: block; height: 100%; background: var(--heat); }
 .mode-tag {
   display: inline-flex; align-items: center; gap: var(--sp-1);
   font-family: var(--font-mono); font-size: var(--t-xs);
@@ -3187,6 +3216,8 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
         <svg class="i" aria-hidden="true"><use href="#i-sidebar"></use></svg>
       </button>
       <h1 id="view-title">Today</h1>
+      <!-- 04.1  Progress tiles, the phones' widget on wide screens. §10.32 owns them. -->
+      <nav class="top-stats" id="top-stats" aria-label="Your progress at a glance"></nav>
       <span class="spacer"></span>
       <span class="mode-tag" id="mode-tag" data-mode="probing" title="Where your progress is being stored">
         <span class="dot" aria-hidden="true"></span><span id="mode-text">Checking</span>
@@ -3725,6 +3756,7 @@ STEP 5 — TELL ME HOW TO ADD IT:
               (docs §4); due() is the pure rule
         10.31 Lesson figures — drawings as data (box, line, text, dot),
               drawn as SVG here and natively on the phones
+        10.32 Progress tiles — the phones' widget in the top bar from 900px
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
         11.1  accuracy trend  · 11.2  ECO heat map (low-sample cells greyed)
@@ -51281,6 +51313,113 @@ PMP.Figure = (function () {
     return f;
   }
   return { render: render, draw: draw };
+})();
+
+/* ── 10.32  PROGRESS TILES ───────────────────────────────────────────────────
+   The phones' home-screen widget (WidgetStats.kt, PmpWidget.kt), as a row of
+   tiles in the top bar on wide screens: days left, today's study against the
+   plan, readiness, syllabus, exam fitness and the projected ready date. Each
+   tile is tinted on the widget's own scale, red when it needs work, through
+   amber, to green, and opens the page it summarises. Recomputed a moment
+   after progress changes, on every route change and every ten minutes, so
+   the day rolls over by itself; skipped while the row is hidden (under 900px). */
+PMP.TopStats = (function () {
+  var DAY = 86400000;
+  var RED = [214, 69, 69], AMBER = [227, 162, 26], GREEN = [46, 158, 91];
+  var host = null, timer = null, wide = null;
+
+  function mix(a, b, t) { return a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }); }
+  /* WidgetStats.heat: red at 0, amber at ½, green at 1. */
+  function heat(level) {
+    var t = Math.max(0, Math.min(1, level));
+    var c = t < 0.5 ? mix(RED, AMBER, t * 2) : mix(AMBER, GREEN, (t - 0.5) * 2);
+    return "rgb(" + c.join(",") + ")";
+  }
+  function sod(t) { return PMP.time.startOfDay(t); }
+
+  /* WidgetStats.minutesToday: sessions finished today, or answering time, whichever is more. */
+  function minutesToday(inp, now) {
+    var today = sod(now);
+    var sessions = inp.results.filter(function (r) { return sod(r.at) === today; })
+      .reduce(function (a, r) { return a + (r.minutes || 0); }, 0);
+    var answering = Math.round(inp.attempts.filter(function (a) { return sod(a.at) === today; })
+      .reduce(function (a, x) { return a + (x.ms || 0); }, 0) / 60000);
+    return Math.max(sessions, answering);
+  }
+
+  /* The six figures, as the widget computes them (PmpViewModel.publishWidget). */
+  function stats(state, now) {
+    state = state || PMP.Store.state;
+    now = now || Date.now();
+    var P = PMP.Path, F = PMP.Fitness;
+    var exam = P.planOf(state).examDate;
+    var days = exam ? Math.max(0, Math.round((sod(exam) - sod(now)) / DAY)) : null;
+    var inp = P.input(state, now), plan = inp ? P.build(inp) : null;
+    var target = plan ? plan.minutesPerDay : 0;
+    var today = inp && target > 0 ? Math.min(1, minutesToday(inp, now) / target) : null;
+    var lessons = state.lessons || {};
+    var done = PMP.LESSONS.filter(function (l) { return lessons[l.id] && lessons[l.id].completedAt; }).length;
+    var fit = F.report(state, now).score;
+    var b = F.booking(state, now), pr = b.projection, ready;
+    if (b.criteria[0].met && b.criteria[1].met) ready = { text: "Now", on: true };
+    else if (!pr) ready = { text: "–", on: null };
+    else if (pr.stalled.length) ready = { text: "Stalled", on: false };
+    else {
+      var at = pr.latest || pr.earliest;
+      ready = at ? { text: new Date(at).toLocaleDateString(undefined, { day: "numeric", month: "short" }),
+                     on: exam ? sod(at) <= sod(exam) : null } : { text: "–", on: null };
+    }
+    return {
+      days: days, daysLevel: days === null ? null : Math.max(0, Math.min(1, (days - 7) / 53)),
+      today: today, readiness: PMP.Metrics.readiness(state).score,
+      syllabus: PMP.LESSONS.length ? done / PMP.LESSONS.length : 0,
+      fitness: typeof fit === "number" ? fit : null, ready: ready
+    };
+  }
+
+  function tile(value, label, level, route, title) {
+    var el = PMP.dom.el;
+    var a = el("a", { class: "ts-tile", href: "#/" + route, title: title, "aria-label": value + " " + label + ". " + title }, [
+      el("span", { class: "ts-v", text: value }),
+      level === null ? null : el("span", { class: "ts-bar", "aria-hidden": "true" }, [el("i", { style: "width:" + Math.round(level * 100) + "%" })]),
+      el("span", { class: "ts-l", text: label })
+    ]);
+    if (level !== null) { a.setAttribute("data-heat", ""); a.style.setProperty("--heat", heat(level)); }
+    return a;
+  }
+
+  function paint() {
+    timer = null;
+    if (!host || !wide || !wide.matches || !PMP.Store.state.sys.ready) return;
+    var s;
+    try { s = stats(); } catch (e) { PMP.report(e, "progress tiles"); return; }
+    var pct = function (v) { return Math.round(v * 100) + "%"; };
+    host.innerHTML = "";
+    [
+      tile(s.days === null ? "–" : String(s.days), "days left", s.daysLevel, "planner",
+        s.days === null ? "Set your exam date in the study plan." : "Days to your exam."),
+      tile(s.today === null ? "–" : pct(s.today), "today", s.today, "today", "Today's study against your plan."),
+      tile(String(s.readiness), "ready", s.readiness / 100, "analytics", "Readiness score, out of 100."),
+      tile(pct(s.syllabus), "syllabus", s.syllabus, "learn", "Share of the lessons you have finished."),
+      tile(s.fitness === null ? "–" : String(s.fitness), "fitness", s.fitness === null ? null : s.fitness / 100, "fitness", "Exam fitness: stamina, pace and focus, out of 100."),
+      tile(s.ready.text, "ready by", s.ready.on === null ? null : (s.ready.on ? 1 : 0), "book", "When your pace says you will be ready to sit the exam.")
+    ].forEach(function (t) { host.appendChild(t); });
+  }
+  function soon() { if (!timer) timer = setTimeout(paint, 400); }
+
+  function start() {
+    host = document.getElementById("top-stats");
+    if (!host) return;
+    wide = window.matchMedia("(min-width: 900px)");
+    if (wide.addEventListener) wide.addEventListener("change", soon);
+    PMP.Store.subscribe(soon);
+    window.addEventListener("hashchange", soon);
+    setInterval(soon, 10 * 60 * 1000);
+    soon();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+
+  return { stats: stats, heat: heat, paint: paint };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
