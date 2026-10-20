@@ -8,6 +8,7 @@ import com.jahangirb.pmpprep.data.PlanEngine
 import com.jahangirb.pmpprep.data.PlanInput
 import com.jahangirb.pmpprep.data.PlanSettings
 import com.jahangirb.pmpprep.data.SessionKind
+import com.jahangirb.pmpprep.data.SessionResult
 import com.jahangirb.pmpprep.data.StudyPlan
 import com.jahangirb.pmpprep.data.ProgressStore
 import org.junit.Assert.assertEquals
@@ -55,5 +56,20 @@ class CourseOrderTest {
         assertTrue(back.plan.byArea)
         s.setPlan(StudyPlan(hoursPerWeek = 9))
         assertTrue(!s.toJson().getJSONObject("plan").has("order"))
+    }
+
+    /** A finished "lesson:" or "build:" session counts its lesson as read even if the lesson set lost it (sync). */
+    @Test fun finishedSessionsCountTheirLessons() {
+        val f0 = x.lessons.first { it.module == "foundations" }.id
+        val build = x.lessons.first { it.ecoTask.isNotBlank() }
+        fun keys(results: List<SessionResult>) = PlanEngine.build(PlanInput(x, emptyList(), emptySet(), results, emptyList(), diag,
+            PlanSettings(now + 90 * PlanEngine.DAY, 10, (1..7).toSet()), now)).sessions.map { it.key }
+        val before = keys(emptyList())
+        assertTrue("lesson:$f0" in before && "build:${build.ecoTask}" in before)
+        val after = keys(listOf(
+            SessionResult("lesson:$f0", SessionKind.FOUNDATION, null, null, 1.0, 20, now - PlanEngine.DAY),
+            SessionResult("build:${build.ecoTask}", SessionKind.BUILD, build.ecoTask, null, 0.9, 40, now - PlanEngine.DAY)))
+        assertTrue("lesson:$f0" !in after)
+        assertTrue(after.none { it == "build:${build.ecoTask}" })
     }
 }

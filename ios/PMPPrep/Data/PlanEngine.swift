@@ -141,6 +141,13 @@ enum PlanEngine {
         var items: [Session] = []
         var lessonsByTask: [String: Lesson] = [:]
         for l in x.lessons where !l.ecoTask.trimmingCharacters(in: .whitespaces).isEmpty { lessonsByTask[l.ecoTask] = l }
+        /* A finished session that read a lesson counts it as read, even if the lesson's own record was lost:
+           "lesson:<id>", or "build:<task>" for the task's lesson. Otherwise the plan offers it again. */
+        var lessonsDone: Set<String> = inp.lessonsDone
+        for r in inp.results {
+            if r.key.hasPrefix("lesson:") { lessonsDone.insert(String(r.key.dropFirst(7))) }
+            else if r.key.hasPrefix("build:"), let bl = lessonsByTask[String(r.key.dropFirst(6))] { lessonsDone.insert(bl.id) }
+        }
         var lastResult: [String: SessionResult] = [:]
         for r in inp.results { if let t = r.taskId, (lastResult[t]?.at ?? Int64.min) <= r.at { lastResult[t] = r } }
         let worked = Set(tasks.filter { s in inp.results.contains { $0.taskId == s.task.id && startOfDay($0.at) == today } }.map(\.task.id))
@@ -208,7 +215,7 @@ enum PlanEngine {
                 adjustments.append("Fix-up session for \(t.label): your last session there scored \(pct(res.score)).")
                 continue
             }
-            if let lesson, !inp.lessonsDone.contains(lesson.id) {
+            if let lesson, !lessonsDone.contains(lesson.id) {
                 if s.mastery == .MASTERED { adjustments.append("\(t.label): already mastered through your own practice, so only the lesson stays (as reading).") }
                 let why = s.mastery == .MASTERED ? "You already answer \(t.label) well; this is the lesson for completeness."
                     : "Learn it, check it, then practise it. " + (inp.diagnostic?.domainPct(t.domain).map { "\(t.domain.title) scored \(pct($0)) in your diagnostic." } ?? "")
@@ -251,7 +258,7 @@ enum PlanEngine {
             // Flashcards that keep slipping point back to the lesson behind them.
             let leech = inp.leeches[t.id] ?? 0
             let relearnKey = "relearn:\(t.id):\(leech)"
-            if leech > 0, let lesson, inp.lessonsDone.contains(lesson.id), !inp.results.contains(where: { $0.key == relearnKey }) {
+            if leech > 0, let lesson, lessonsDone.contains(lesson.id), !inp.results.contains(where: { $0.key == relearnKey }) {
                 items.append(Session(key: relearnKey, kind: .REVIEW, title: "Relearn: \(t.label)",
                     why: "\(leech == 1 ? "A flashcard" : "\(leech) flashcards") on \(t.label) keep slipping. Re-read the lesson, then your due cards.",
                     minutes: lesson.minutes + 5, steps: [Step(kind: .LESSON), Step(kind: .CARDS), Step(kind: .DEBRIEF)], taskId: t.id, domain: t.domain, lessonId: lesson.id, priority: pri))
@@ -266,7 +273,7 @@ enum PlanEngine {
         }
 
         /* ── 3. foundations, checkpoints, exam skills, mocks ── */
-        for (i, l) in x.lessons.filter({ $0.module == "foundations" && !inp.lessonsDone.contains($0.id) }).enumerated() {
+        for (i, l) in x.lessons.filter({ $0.module == "foundations" && !lessonsDone.contains($0.id) }).enumerated() {
             items.append(Session(key: "lesson:\(l.id)", kind: .FOUNDATION, title: l.title, why: "Foundations come first: how the exam works and the mindset it rewards.",
                 minutes: l.minutes, steps: [Step(kind: .LESSON), Step(kind: .DEBRIEF)], lessonId: l.id, priority: i == 0 ? 800 : 60 - Double(i)))
         }
@@ -304,7 +311,7 @@ enum PlanEngine {
                 why: "Each question shows its scenario first. Say to yourself what it's asking, then reveal the options. It trains reading speed and calm on long questions.",
                 minutes: 15, steps: [Step(kind: .PRACTICE, count: 10, reading: true), Step(kind: .DEBRIEF)], priority: 3))
         }
-        for l in x.lessons where l.module == "skills" && !inp.lessonsDone.contains(l.id) {
+        for l in x.lessons where l.module == "skills" && !lessonsDone.contains(l.id) {
             items.append(Session(key: "lesson:\(l.id)", kind: .SKILLS, title: l.title, why: "Exam technique, once the content is in place.",
                 minutes: l.minutes, steps: [Step(kind: .LESSON), Step(kind: .DEBRIEF)], lessonId: l.id, priority: 2))
         }

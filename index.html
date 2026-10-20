@@ -31001,6 +31001,25 @@ PMP.Practice = (function () {
     ).then(function (yes) { if (yes) finish(true); });
   }
 
+  /* A diagnostic taken here goes into the shared `diagnostics` log in the
+     phones' shape (PmpViewModel.finishDiagnostic): every question counts
+     towards n, only fully right ones towards right, per domain [right, n].
+     Every app's plan aims from the newest of these (§10.24 diagnosticOf). */
+  function shareDiagnostic(sess) {
+    var row = { at: sess.finishedAt, n: sess.items.length, right: 0, domains: {} };
+    sess.items.forEach(function (item) {
+      var d = item.q.domain, ok = !!(item.committed && item.result && item.result.correct);
+      if (!row.domains[d]) row.domains[d] = [0, 0];
+      row.domains[d][1]++;
+      if (ok) { row.right++; row.domains[d][0]++; }
+    });
+    PMP.Store.commit(["shared"], function (st) {
+      var sh = Object.assign({}, st.shared && typeof st.shared === "object" ? st.shared : {});
+      sh.diagnostics = (Array.isArray(sh.diagnostics) ? sh.diagnostics : []).concat([row]);
+      st.shared = sh;
+    });
+  }
+
   /* ── 10.02.9  SUMMARY ────────────────────────────────────────────────────
      `early` is End drill part-way. A set ended early with questions still
      unanswered was left rather than finished, for exam fitness; reaching
@@ -31022,6 +31041,7 @@ PMP.Practice = (function () {
     session.finished = true;
     session.finishedAt = Date.now();
     session.result = result();
+    if (session.mode === "diagnostic") shareDiagnostic(session);
     if (session.opts.onFinish) {
       try { session.opts.onFinish(session.result); } catch (e) { /* the drill is saved either way */ }
     }
@@ -49420,6 +49440,17 @@ PMP.Path = (function () {
     var attempts = inp.attempts || [], results = inp.results || [], mocks = inp.mocks || [];
     var done = Object.create(null);
     (inp.lessonsDone || []).forEach(function (id) { done[id] = true; });
+    /* A finished session that read a lesson counts it as read, even if the
+       lesson's own record was lost: "lesson:<id>", or "build:<task>" for
+       the task's lesson. Otherwise the plan offers it again. */
+    results.forEach(function (r) {
+      var k = String(r.key || "");
+      if (k.indexOf("lesson:") === 0) done[k.slice(7)] = true;
+      else if (k.indexOf("build:") === 0) {
+        var bl = x.lessons.filter(function (l) { return l.ecoTask === k.slice(6); })[0];
+        if (bl) done[bl.id] = true;
+      }
+    });
     var tags = inp.mistakeTags || {}, leeches = inp.leeches || {};
     var tasks = taskStates(x, attempts, now);
     var adjustments = [];
@@ -49962,24 +49993,28 @@ PMP.Path = (function () {
                score: Number(r.s) || 0, minutes: Number(r.m) || 0, at: r.at };
     });
   }
-  /* The newer of the web's diagnostic (§10.09) and a phone's, as each domain's share. */
+  /* The newest shared diagnostic, as the phones read it (store.diagnostic).
+     The web's own figures, re-scored from the attempt log, are only the
+     fallback for history from before the web wrote shared rows: re-scored,
+     they mix sittings and partial credit, and planned differently from the
+     phones on the same data. */
   function diagnosticOf(state) {
-    var web = PMP.Planner.diagnostic(state), best = null, at = 0;
+    var sh0 = state.shared && Array.isArray(state.shared.diagnostics) ? state.shared.diagnostics : [];
+    if (sh0.some(function (r) { return r && r.domains; })) {
+      var latest = sh0.filter(function (r) { return r && r.domains; })
+        .reduce(function (a, r) { return !a || Number(r.at) >= Number(a.at) ? r : a; }, null);
+      var fromShared = {};
+      Object.keys(latest.domains).forEach(function (d) {
+        var v = latest.domains[d];
+        if (Array.isArray(v) && Number(v[1]) > 0) fromShared[d] = Number(v[0]) / Number(v[1]);
+      });
+      return fromShared;
+    }
+    var web = PMP.Planner.diagnostic(state), best = null;
     if (web && web.complete) {
       best = {};
       PMP.ECO.DOMAINS.forEach(function (d) { var e = web.byDomain[d]; if (e && e.n) best[d] = e.acc; });
-      at = Date.parse(web.at) || 0;
     }
-    var sh = state.shared && Array.isArray(state.shared.diagnostics) ? state.shared.diagnostics : [];
-    sh.forEach(function (r) {
-      if (!r || !(Number(r.at) > at) || !r.domains) return;
-      var out = {};
-      Object.keys(r.domains).forEach(function (d) {
-        var v = r.domains[d];
-        if (Array.isArray(v) && Number(v[1]) > 0) out[d] = Number(v[0]) / Number(v[1]);
-      });
-      best = out; at = Number(r.at);
-    });
     return best;
   }
   /* The latest tag per question, as the shared `mistakes` slice keeps them. */
@@ -50140,7 +50175,7 @@ PMP.Path = (function () {
     weakApproach: weakApproach, order: order,
     reviewState: reviewState, reviewsDue: reviewsDue, reviewAllowance: reviewAllowance,
     planOf: planOf, setPlan: setPlan, msOf: msOf, fromMinutes: fromMinutes,
-    input: input, plan: plan, attemptsOf: attemptsOf,
+    input: input, plan: plan, attemptsOf: attemptsOf, diagnosticOf: diagnosticOf,
     shortVersion: shortVersion, questionsFor: questionsFor, dueCards: dueCards, warmUpReviews: warmUpReviews,
     stepSummary: stepSummary, titleFor: titleFor
   };

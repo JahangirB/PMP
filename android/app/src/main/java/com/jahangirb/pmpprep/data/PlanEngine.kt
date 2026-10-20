@@ -151,6 +151,15 @@ object PlanEngine {
 
         val items = ArrayList<Session>()
         val lessonsByTask = x.lessons.filter { it.ecoTask.isNotBlank() }.associateBy { it.ecoTask }
+        /* A finished session that read a lesson counts it as read, even if the lesson's own record was lost:
+           "lesson:<id>", or "build:<task>" for the task's lesson. Otherwise the plan offers it again. */
+        val lessonsDone: Set<String> = inp.lessonsDone + inp.results.mapNotNull { r ->
+            when {
+                r.key.startsWith("lesson:") -> r.key.removePrefix("lesson:")
+                r.key.startsWith("build:") -> lessonsByTask[r.key.removePrefix("build:")]?.id
+                else -> null
+            }
+        }
         val lastResult = inp.results.groupBy { it.taskId }.mapValues { (_, l) -> l.maxByOrNull { it.at }!! }
         val worked = tasks.filter { s -> inp.results.any { it.taskId == s.task.id && startOfDay(it.at) == today } }.map { it.task.id }.toSet()
 
@@ -205,7 +214,7 @@ object PlanEngine {
                 adjustments += "Fix-up session for ${t.label}: your last session there scored ${pct(res.score)}."
                 continue
             }
-            if (lesson != null && lesson.id !in inp.lessonsDone) {
+            if (lesson != null && lesson.id !in lessonsDone) {
                 if (s.mastery == Mastery.MASTERED) {
                     adjustments += "${t.label}: already mastered through your own practice, so only the lesson stays (as reading)."
                 }
@@ -252,7 +261,7 @@ object PlanEngine {
             // Flashcards that keep slipping point back to the lesson behind them.
             val leech = inp.leeches[t.id] ?: 0
             val relearnKey = "relearn:${t.id}:$leech"
-            if (leech > 0 && lesson != null && lesson.id in inp.lessonsDone && inp.results.none { it.key == relearnKey }) {
+            if (leech > 0 && lesson != null && lesson.id in lessonsDone && inp.results.none { it.key == relearnKey }) {
                 items += Session(relearnKey, SessionKind.REVIEW, "Relearn: ${t.label}",
                     "${if (leech == 1) "A flashcard" else "$leech flashcards"} on ${t.label} keep slipping. Re-read the lesson, then your due cards.",
                     lesson.minutes + 5, listOf(Step(StepKind.LESSON), Step(StepKind.CARDS), Step(StepKind.DEBRIEF)), t.id, t.domain, lesson.id, priority = pri)
@@ -267,7 +276,7 @@ object PlanEngine {
         }
 
         /* ── 3. foundations, checkpoints, exam skills, mocks ── */
-        x.lessons.filter { it.module == "foundations" && it.id !in inp.lessonsDone }.forEachIndexed { i, l ->
+        x.lessons.filter { it.module == "foundations" && it.id !in lessonsDone }.forEachIndexed { i, l ->
             items += Session("lesson:${l.id}", SessionKind.FOUNDATION, l.title, "Foundations come first: how the exam works and the mindset it rewards.",
                 l.minutes, listOf(Step(StepKind.LESSON), Step(StepKind.DEBRIEF)), lessonId = l.id, priority = if (i == 0) 800.0 else 60.0 - i)
         }
@@ -305,7 +314,7 @@ object PlanEngine {
                 "Each question shows its scenario first. Say to yourself what it's asking, then reveal the options. It trains reading speed and calm on long questions.",
                 15, listOf(Step(StepKind.PRACTICE, 10, reading = true), Step(StepKind.DEBRIEF)), priority = 3.0)
         }
-        x.lessons.filter { it.module == "skills" && it.id !in inp.lessonsDone }.forEach { l ->
+        x.lessons.filter { it.module == "skills" && it.id !in lessonsDone }.forEach { l ->
             items += Session("lesson:${l.id}", SessionKind.SKILLS, l.title, "Exam technique, once the content is in place.",
                 l.minutes, listOf(Step(StepKind.LESSON), Step(StepKind.DEBRIEF)), lessonId = l.id, priority = 2.0)
         }

@@ -107,6 +107,30 @@ module.exports = [
     }
   },
   {
+    name: "plans match the phones: the newest shared diagnostic sets the domains; a finished lesson session counts its lesson",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var r = await page.evaluate(function () {
+        var P = PMP.Path, x = P.extras(), now = new Date(2027, 2, 1, 9).getTime();
+        var st = { shared: { diagnostics: [
+          { at: 1, n: 10, right: 5, domains: { people: [1, 4], process: [3, 4], business: [1, 2] } },
+          { at: 2, n: 10, right: 6, domains: { people: [4, 4], process: [1, 4], business: [1, 2] } }] } };
+        var f0 = x.lessons.filter(function (l) { return l.module === "foundations"; })[0].id;
+        function keys(results) {
+          return P.build({ x: x, attempts: [], lessonsDone: [], results: results, mocks: [],
+            diagnostic: { people: 0.6, process: 0.5, business: 0.55 },
+            settings: { examDate: now + 90 * 86400000, hoursPerWeek: 10, studyDays: [1, 2, 3, 4, 5, 6, 7] },
+            now: now, mistakeTags: {}, leeches: {}, ladderNext: null, readingSlow: false }).sessions.map(function (s) { return s.key; });
+        }
+        var done = [{ key: "lesson:" + f0, kind: "FOUNDATION", taskId: null, domain: null, score: 1, minutes: 20, at: now - 86400000 }];
+        return { latest: P.diagnosticOf(st),
+                 before: keys([]).indexOf("lesson:" + f0) >= 0, after: keys(done).indexOf("lesson:" + f0) >= 0 };
+      });
+      assert.deepStrictEqual(r.latest, { people: 1, process: 0.25, business: 0.5 });
+      assert.deepStrictEqual([r.before, r.after], [true, false]);
+    }
+  },
+  {
     name: "Area tours: ten areas, each with its flow figure and its processes in order",
     fn: async function (h, lib) {
       var page = await h.open("fresh");

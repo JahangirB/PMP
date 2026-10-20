@@ -108,6 +108,12 @@ Rules every app follows:
   - `scenarioRuns` become `scenarios`.
   - Finished `exams` produce `mocks` summaries; the full records stay in `web.exams`.
   - Completed lessons go to `lessons`; the details stay in `web.lessons`.
+  - A finished diagnostic also adds a `diagnostics` row (`at`, `n`, `right`, `domains` as `[right, n]`),
+    as the phones do.
+- **Planning from the document (every app):** the plan's domain order comes from the newest
+  `diagnostics` row that has `domains` (the web falls back to its own attempts only when there is
+  none). A finished session `lesson:<id>`, or `build:<task>` for that task's lesson, counts the
+  lesson as read even when `lessons` lacks it, so a lesson is never offered twice.
   - `settings.examDate` becomes `plan.examDate`; `settings.restDays` becomes `plan.rest` (written only
     when it differs from the plan; absent means true).
   - `sittings`, `checkins`, `weekly` and `sessions` are web slices in exactly the shared row shape and are
