@@ -317,5 +317,68 @@ module.exports = [
       await lib.clean(page);
       await page.ctx.close();
     }
+  },
+  {
+    name: "chat: the privacy note closes for good; / opens the commands; your own commands are made, used, synced and deleted",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var sent = [];
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
+        var q = r.request();
+        if (q.method() === "GET") return json(r, 200, { models: [M("gemini-3.5-flash")] });
+        var b = JSON.parse(q.postData());
+        sent.push(b.contents[b.contents.length - 1].parts[0].text);
+        return json(r, 200, reply("ok"));
+      });
+      await useKey(page, "GOOD");
+      assert.strictEqual(await page.isVisible("#np-snap"), true);
+      assert.ok(/type \/ for commands/.test(await page.getAttribute("#np-msg", "placeholder")));
+      assert.strictEqual(await page.isVisible("#np-cmds"), false, "no quick buttons and no menu at rest");
+      await page.click("#np-snap-x");
+      await reload(page);
+      assert.strictEqual(await page.isVisible("#np-snap"), false, "closed for good");
+
+      await page.focus("#np-msg");
+      await page.keyboard.type("/");
+      var opts = await page.$$eval("#np-cmds [role=option] code", function (c) { return c.map(function (x) { return x.textContent; }); });
+      assert.deepStrictEqual(opts, ["/progress", "/improve", "/plan", "/weakest"]);
+      await page.keyboard.type("pl");
+      await page.keyboard.press("Enter");
+      var v = await page.inputValue("#np-msg");
+      assert.ok(/^I have about an hour today/.test(v), v);
+      assert.strictEqual(await page.isVisible("#np-cmds"), false);
+      await page.fill("#np-msg", "/weakest in agile");
+      await page.keyboard.press("Control+Enter");
+      await page.waitForTimeout(300);
+      assert.ok(/^Teach me the ECO task[\s\S]*\n\nin agile$/.test(sent[0]), sent[0]);
+
+      /* + New command, with a name already taken first. */
+      await page.fill("#np-msg", "");
+      await page.keyboard.type("/");
+      await page.click("#np-cmds .np-cmd-new");
+      await page.fill("#cmd-name", "plan");
+      await page.fill("#cmd-text", "Quiz me on agile.");
+      await page.click('#sheet-foot button:has-text("Save")');
+      assert.ok(/already a command/.test(await page.textContent("#sheet-body")));
+      await page.fill("#cmd-name", "/Agile");
+      await page.click('#sheet-foot button:has-text("Save")');
+      var st = await page.evaluate(function () { return { own: PMP.Store.state.shared.commands, doc: PMP.Sync.toDoc(PMP.Store.state).commands }; });
+      assert.deepStrictEqual(st.own, [{ n: "agile", t: "Quiz me on agile." }]);
+      assert.deepStrictEqual(st.doc, st.own, "it travels in the progress document");
+      await page.fill("#np-msg", "");
+      await page.focus("#np-msg");
+      await page.keyboard.type("/ag");
+      assert.deepStrictEqual(await page.$$eval("#np-cmds [role=option] code", function (c) { return c.map(function (x) { return x.textContent; }); }), ["/agile"]);
+      await page.keyboard.press("Enter");
+      assert.strictEqual(await page.inputValue("#np-msg"), "Quiz me on agile.");
+
+      await page.fill("#np-msg", "");
+      await page.keyboard.type("/agile");
+      await page.click('#np-cmds button[aria-label="Edit /agile"]');
+      await page.click('#sheet-foot button:has-text("Delete")');
+      assert.strictEqual(await page.evaluate(function () { return "commands" in PMP.Store.state.shared; }), false);
+      await lib.clean(page);
+      await page.ctx.close();
+    }
   }
 ];

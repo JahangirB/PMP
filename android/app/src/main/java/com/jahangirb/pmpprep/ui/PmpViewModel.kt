@@ -12,6 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.jahangirb.pmpprep.data.Answer
 import com.jahangirb.pmpprep.data.Approach
 import com.jahangirb.pmpprep.data.Attempt
+import com.jahangirb.pmpprep.data.ChatCommands
 import com.jahangirb.pmpprep.data.CardState
 import com.jahangirb.pmpprep.data.ChatTurn
 import com.jahangirb.pmpprep.data.CloudSync
@@ -1225,6 +1226,20 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     var aiError by mutableStateOf<String?>(null)
     /** Text waiting in the coach's input, e.g. a question sent from practice. */
     var coachDraft by mutableStateOf("")
+    /** The privacy note above the chat, closed once for good on this phone. */
+    var chatNoteClosed by mutableStateOf(aiPrefs.getBoolean("noteClosed", false))
+        private set
+    fun closeChatNote() { chatNoteClosed = true; aiPrefs.edit().putBoolean("noteClosed", true).apply() }
+
+    /** Saves one of the person's own "/" commands; returns why it can't be saved, or null. */
+    fun saveChatCommand(old: String?, name: String, text: String): String? {
+        val own = store.chatCommands
+        val (n, err) = ChatCommands.check(name, text, own, old)
+        if (n == null) return err
+        store.setChatCommands(ChatCommands.saved(own, old, n, text))
+        return null
+    }
+    fun deleteChatCommand(name: String) { store.setChatCommands(store.chatCommands.filter { it.name != name }) }
     var coachTab by mutableStateOf(0)
 
     /** Checks a pasted key by listing its models, then keeps it with its line-up. */
@@ -1309,7 +1324,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Sends a message with a fresh snapshot of the person's progress. */
     fun ask(text: String) {
-        val t = text.trim()
+        val t = ChatCommands.expand(text.trim(), store.chatCommands)
         if (t.isEmpty() || aiBusy || geminiKey.isEmpty()) return
         store.addChat(ChatTurn("user", t, System.currentTimeMillis()))
         aiBusy = true

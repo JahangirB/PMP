@@ -342,6 +342,15 @@ class ProgressStore(private val dir: File) {
         changed()
     }
 
+    /** The person's own chat commands, the shared `commands` slice ([ChatCommands]). It passes through as a whole value. */
+    val chatCommands: List<ChatCommand> @Synchronized get() = ChatCommands.parse(passthrough.optJSONArray("commands"))
+
+    @Synchronized
+    fun setChatCommands(list: List<ChatCommand>) {
+        if (list.isEmpty()) passthrough.remove("commands") else passthrough.put("commands", ChatCommands.toJson(list))
+        changed()
+    }
+
     @Synchronized
     fun recordDiagnostic(d: DiagnosticResult) {
         diagnostics += d

@@ -261,6 +261,12 @@ final class ProgressStore: ObservableObject {
     func removeMyCard(_ id: String) { myCards.removeAll { $0.id == id }; cards[id] = nil; changed() }
 
     func setNotepad(_ text: String) { if text == notepad { return }; notepad = text; changed() }
+    /** The person's own chat commands, the shared `commands` slice (ChatCommands). It passes through as a whole value. */
+    var chatCommands: [ChatCommand] { ChatCommands.parse(raw["commands"]) }
+    func setChatCommands(_ list: [ChatCommand]) {
+        if list.isEmpty { raw.removeValue(forKey: "commands") } else { raw["commands"] = ChatCommands.json(list) }
+        changed()
+    }
     func recordDiagnostic(_ d: DiagnosticResult) { diagnostics.append(d); changed() }
     func addChat(_ t: ChatTurn) {
         chat.append(t)

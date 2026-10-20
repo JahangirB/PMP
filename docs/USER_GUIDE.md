@@ -141,7 +141,7 @@ fixed calendar you fall behind on.
   rushed. Misses you were sure of come first. The most common cause shapes your
   plan.
 - **Notes:** a formatted notes page, plus notes on any question.
-- **Search everything**, opened with the `/` key on the web.
+- **Search everything**, opened with Alt+F on the web.
 
 ## How it measures you
 
@@ -213,6 +213,11 @@ Off until you add your own free Google AI Studio API key
 - **What you can ask:** anything, in the chat. You can also send a question
   you just answered with "Ask about this question", or ask for a full review of
   your progress.
+- **Commands:** type `/` in the message box for the ready-made questions
+  (`/progress`, `/improve`, `/plan`, `/weakest`) and your own. Pick one to fill
+  the box, or type `/plan` and send. "+ New command" makes your own: a name and
+  the message it sends. Your commands travel with your progress, so cloud sync
+  brings them to your other devices.
 - **Which model:** it uses Google's current Gemini Flash models (3.5 or
   later, up to five) and takes turns between them, one message each, so each
   model's free quota is shared out. If one fails, the next is tried.

@@ -260,10 +260,11 @@ module.exports = [
       /* A question on screen: out of the way. */
       await lib.go(page, "#/practice");
       await page.click('#view button:has-text("Start drill")');
-      await page.waitForSelector("#view .opt");
+      /* Any question type (a diagram one has no .opt), so wait on the drill. */
+      await page.waitForFunction(function () { return PMP.Practice.session && !PMP.Practice.session.finished && document.querySelector("#view .q-stem, #view .opt"); });
       await page.waitForTimeout(400);
-      var q = await page.evaluate(function () { return { opts: document.querySelectorAll("#view .opt").length, hidden: document.getElementById("cb").hidden }; });
-      assert.ok(q.opts > 0 && !q.hidden, "still there during practice: " + JSON.stringify(q));
+      var q = await page.evaluate(function () { return { on: !!PMP.Practice.session, hidden: document.getElementById("cb").hidden }; });
+      assert.ok(q.on && !q.hidden, "still there during practice: " + JSON.stringify(q));
       /* A mock exam in progress: the one place it steps away. */
       await page.click('#view button:has-text("End drill")').catch(function () {});
       await page.waitForTimeout(300);
