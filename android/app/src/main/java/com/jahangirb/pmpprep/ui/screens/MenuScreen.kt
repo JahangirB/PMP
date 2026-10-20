@@ -129,8 +129,8 @@ fun MenuScreen(vm: PmpViewModel) {
             Row(
                 Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp).fillMaxWidth().clip(pill)
                     .background(SupportTint).border(1.5.dp, ColorWarning, pill)
-                    .clickable(role = Role.Button) { openLink(context, Support.URL); vm.supportPressed() }
-                    .semantics { contentDescription = "Support the app on Ko-fi" }
+                    .clickable(role = Role.Button) { vm.navigate(Dest.SUPPORT) }
+                    .semantics { contentDescription = "Support the app" }
                     .padding(horizontal = 16.dp, vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,

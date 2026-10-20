@@ -166,9 +166,17 @@ every device once they sync:
      "already supported" message instead if `pressedAt` was ever set).
 - **After it shows:** set `shownAt = now` and `anchor` = tomorrow's date, so the
   7-day count starts again.
-- **Support button:** opens `https://ko-fi.com/T4R728ULEV`. Pressing it, in the
-  message or in the menu, sets `pressedAt = now`. The app can't see payments, so
-  pressing is all it knows.
+- **Support button (menu):** opens the app's own support message first: a short
+  pop-up on the web, a "Support the app" page on the phones. Their Ko-fi button,
+  like the reminder's, opens `https://ko-fi.com/T4R728ULEV` and sets
+  `pressedAt = now`. Opening the message alone records nothing. The app can't
+  see payments, so pressing is all it knows.
+- **The menu button's wording** (separate from the reminder's). Title "Support
+  PMP Prep"; body "PMP Prep is built by one person in his own time, and stays free
+  for everyone: no ads, no account, no tracking. A coffee on Ko-fi pays for new
+  questions, testing on real phones and the website."; Ko-fi button "Buy a coffee
+  on Ko-fi". The phones' page adds what support pays for and free ways to help:
+  share the app, report a wrong question, star it on GitHub.
 - **Wording.** First message: title "Enjoying PMP Prep?", body "You've studied 7 days
   in a row. If the app is helping you, please support it. It's free, has no ads,
   and your support keeps it going." The "already supported" message has body "If

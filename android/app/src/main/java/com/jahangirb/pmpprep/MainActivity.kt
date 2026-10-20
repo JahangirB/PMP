@@ -279,6 +279,7 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                         Dest.BOOK -> BookScreen(vm)
                         Dest.SEARCH -> SearchScreen(vm)
                         Dest.SYNC -> SyncScreen(vm)
+                        Dest.SUPPORT -> SupportScreen(vm)
                     }
                 }
             }

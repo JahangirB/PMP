@@ -91,6 +91,7 @@ private struct Shell: View {
         case .BOOK: BookScreen()
         case .SEARCH: SearchScreen()
         case .SYNC: SyncScreen()
+        case .SUPPORT: SupportScreen()
         }
     }
 }

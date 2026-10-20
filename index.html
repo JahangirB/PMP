@@ -39742,7 +39742,7 @@ PMP.Data = (function () {
       el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Your answers, scores, notes and settings live on this device, in this browser's storage, and travel in a backup file you control. The app has no account, no analytics, no tracking and no ads. What goes over the network depends on how you opened it:" }),
-      el("p", { text: "A copy you downloaded and opened from your own disk makes no network requests at all; the Support the app button opens ko-fi.com in a new tab only when you press it." }),
+      el("p", { text: "A copy you downloaded and opened from your own disk makes no network requests at all; ko-fi.com opens in a new tab only when you press the Ko-fi button in the Support the app message." }),
       el("p", { text: "The website (for example pmp-sandy.vercel.app) is downloaded from its host each time you open it, together with the extended question packs. Once installed as an app it also works offline. The host sees what any website sees, such as your IP address, browser and the time of each request, but the app sends it nothing about you or your progress." }),
       el("p", { text: "Gemini is optional and off until you add your own Google AI Studio API key. Each message you send then goes from this page to Google with your key, and carries three things: the tutor instructions, your last 30 chat messages, and a summary of your study progress. The summary holds your readiness and exam-fitness scores, accuracy by domain and ECO task, mock results, mistake causes, pace, flashcard and lesson counts, your exam date and planned study hours, and, if you answered the weekly check, your exam-worry score. It does not include your notes. Explain it back sends the topic and your explanation. Ask about this question puts the question and your answer in the message box for you to read and edit first. Nothing is sent until you press Send. The key stays on this device and is never in your backup file. Google's terms for the Gemini API apply to what you send; on the free tier Google says it may use it to improve its products." }),
       el("p", null, ["Cloud sync is optional and off until you set it up. It then copies your whole progress file, including your notes and Gemini chat history but never the key, to one file in your own Google Drive, through a script you deploy in your own Google account, so your other devices can share it. Anyone with your script URL and sync code can read that file, so keep them private. ",
@@ -51248,6 +51248,24 @@ PMP.Support = (function () {
     }).then(function (choice) { if (choice === "support") pressed(); return choice; });
   }
 
+  /* The pill's own message, kept apart from the weekly reminder's wording.
+     Pressing the pill opens it; only its Ko-fi button counts as supported. */
+  var ASK = {
+    title: "Support PMP Prep",
+    body: "PMP Prep is built by one person in his own time, and stays free for everyone: no ads, no account, no tracking. A coffee on Ko-fi pays for new questions, testing on real phones and the website.",
+    note: "Opens ko-fi.com in a new tab. Ko-fi handles the payment; the app never sees it."
+  };
+  function ask() {
+    return PMP.UI.sheet({
+      title: ASK.title,
+      body: PMP.dom.frag([PMP.dom.el("p", { text: ASK.body }), PMP.dom.el("p", { class: "hint", text: ASK.note })]),
+      actions: [
+        { id: "later", label: "Maybe later" },
+        { id: "support", label: "Buy a coffee on Ko-fi", icon: "heart", href: URL, cls: "btn--warm" }
+      ]
+    }).then(function (choice) { if (choice === "support") pressed(); return choice; });
+  }
+
   /* After boot and on coming back: never over another sheet. */
   function check() {
     var st = PMP.Store.state, dlg = document.getElementById("sheet");
@@ -51260,7 +51278,8 @@ PMP.Support = (function () {
   /* Called once the store is ready (§12.4). The check waits a moment so an
      unfinished mock's resume offer, which comes first, is not crowded out. */
   function start() {
-    PMP.dom.on(document.getElementById("nav-support"), "click", pressed);
+    /* The link stays a real Ko-fi link for a page without script; with it, the message comes first. */
+    PMP.dom.on(document.getElementById("nav-support"), "click", function (e) { e.preventDefault(); ask(); });
     PMP.dom.on(document, "visibilitychange", function () {
       if (document.visibilityState !== "visible" || !PMP.Store.state.sys.ready) return;
       recordOpen();
@@ -51271,7 +51290,7 @@ PMP.Support = (function () {
   }
 
   return { URL: URL, due: due, streak: streak, ymd: ymd, recordOpen: recordOpen, pressed: pressed,
-           show: show, check: check, start: start };
+           show: show, ask: ask, ASK: ASK, check: check, start: start };
 })();
 
 

@@ -237,8 +237,8 @@ Off until you add your own free Google AI Studio API key
 - **Where your data lives:** your answers, scores, notes and settings live on
   your device. There is no account, no analytics, no tracking and no ads.
 - **What goes over the network** depends on how you use the app:
-  - **Downloaded file:** no network requests at all; the **Support the app**
-    button opens ko-fi.com only when you press it.
+  - **Downloaded file:** no network requests at all; ko-fi.com opens only
+    when you press the Ko-fi button in the **Support the app** message.
   - **Website:** your browser downloads the app and the question packs from
     the host (Vercel). The host sees what any website sees, such as your IP
     address, browser and the time of each request. The app sends it nothing
@@ -323,11 +323,14 @@ expert.
 ## Supporting the app
 
 The app is free and has no ads. **Support the app**, the amber button at the
-top of the side menu, opens the developer's Ko-fi page (ko-fi.com) in a new
-tab. Once you have opened the app on 7 days in a row, it asks once whether
-you'd like to support it; after that the count starts again. Pressing Support
-keeps it quiet for 30 days. The app can't see whether you paid, only that you
-pressed the button. The days you opened it and when you pressed Support are
+top of the side menu, explains what support pays for: in a short message on
+the web, on a page of its own on the phones, which also offer free ways to
+help (share the app, report a wrong question, star it on GitHub). Its Ko-fi
+button opens the developer's Ko-fi page (ko-fi.com). Once you have opened the
+app on 7 days in a row, it asks once whether
+you'd like to support it; after that the count starts again. Pressing a Ko-fi
+button keeps it quiet for 30 days. The app can't see whether you paid, only
+that you pressed the button. The days you opened it and when you pressed Support are
 part of your progress, so with cloud sync the count is the same on every
 device.
 

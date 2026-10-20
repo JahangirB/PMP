@@ -194,7 +194,7 @@ module.exports = [
     }
   },
   {
-    name: "the Support pill tops the rail: a Ko-fi link, warm colours in both themes, records the press",
+    name: "the Support pill tops the rail: a Ko-fi link that opens its own message first, warm colours in both themes",
     fn: async function (h, lib) {
       var page = await h.open("fresh");
       var r = await page.evaluate(function () {
@@ -207,14 +207,22 @@ module.exports = [
         var light = look();
         document.documentElement.setAttribute("data-theme", "dark");
         var dark = look();
-        a.addEventListener("click", function (e) { e.preventDefault(); });
         a.click();
-        return {
+        var foot = document.getElementById("sheet-foot");
+        var out = {
           id: a.id, href: a.getAttribute("href"), target: a.target, rel: a.rel, text: a.textContent.trim(),
           heart: !!a.querySelector("use[href='#i-heart']"), sprite: !!document.getElementById("i-heart"),
           scripts: Array.prototype.filter.call(document.scripts, function (s) { return /ko-fi/.test(s.src); }).length,
-          light: light, dark: dark, pressed: Date.now() - (PMP.Store.state.support.pressedAt || 0) < 5000
+          light: light, dark: dark,
+          sheet: document.getElementById("sheet").open, title: document.getElementById("sheet-title").textContent,
+          body: document.getElementById("sheet-body").textContent,
+          labels: Array.prototype.map.call(foot.children, function (b) { return b.textContent.trim(); }),
+          pressedOnOpen: !!PMP.Store.state.support.pressedAt
         };
+        var link = foot.querySelector("a");
+        link.addEventListener("click", function (e) { e.preventDefault(); });   /* no new tab in the test */
+        link.click();
+        return out;
       });
       assert.deepStrictEqual([r.id, r.href, r.target, r.rel, r.text], ["nav-support", KOFI, "_blank", "noopener", "Support the app"]);
       assert.ok(r.heart && r.sprite);
@@ -223,7 +231,11 @@ module.exports = [
       assert.deepStrictEqual(r.light.slice(0, 3), ["rgb(251, 232, 214)", "rgb(160, 74, 8)", "rgb(110, 50, 5)"]);
       assert.deepStrictEqual(r.dark.slice(0, 3), ["rgb(58, 44, 14)", "rgb(251, 191, 36)", "rgb(252, 213, 138)"]);
       assert.ok(parseFloat(r.light[3]) >= 1 && parseFloat(r.dark[3]) >= 1);
-      assert.ok(r.pressed);
+      assert.deepStrictEqual([r.sheet, r.title, r.labels, r.pressedOnOpen], [true, "Support PMP Prep", ["Maybe later", "Buy a coffee on Ko-fi"], false],
+        "the pill opens its own message; nothing counts until Ko-fi is pressed");
+      assert.ok(r.body.indexOf("built by one person") > 0 && r.body.indexOf("Enjoying") < 0, "its own wording, not the weekly reminder's");
+      await page.waitForTimeout(50);
+      assert.ok(await page.evaluate(function () { return Date.now() - (PMP.Store.state.support.pressedAt || 0) < 5000; }), "Ko-fi pressed in the message counts");
       /* A visible focus ring from the keyboard. */
       await page.keyboard.press("Tab");
       await page.focus("#nav-support");

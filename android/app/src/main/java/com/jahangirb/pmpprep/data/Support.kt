@@ -19,6 +19,20 @@ object Support {
     const val STREAK = 7
     const val QUIET_MS = 30L * 24 * 60 * 60 * 1000
 
+    /* The menu button's own page (docs/progress-format.md §4), worded apart from the reminder. */
+    const val PAGE_TITLE = "Keep PMP Prep free"
+    const val PAGE_BODY = "PMP Prep is built by one person, Jahangir Babayev, in his own time. Every question, lesson, " +
+        "mock and update is free for everyone, with no ads, no account and no tracking."
+    val PAYS_FOR = listOf("New question packs and lessons as the exam changes", "Testing on real Android phones and iPhones",
+        "Hosting the website", "Time to fix what learners report")
+    const val KOFI_LABEL = "Buy a coffee on Ko-fi"
+    const val KOFI_NOTE = "One-off, any amount, no account needed. Ko-fi handles the payment; the app never sees it."
+    const val THANKS = "Already supported? Thank you. Pressing the Ko-fi button also quiets the weekly reminder for a month."
+    const val SITE = "https://pmp-sandy.vercel.app/"
+    const val SHARE_TEXT = "Free PMP exam prep that works offline, on the web, Android and iPhone: $SITE"
+    const val REPORT_URL = "https://github.com/JahangirB/PMP/issues/new?template=question-problem.yml"
+    const val REPO_URL = "https://github.com/JahangirB/PMP"
+
     const val TITLE = "Enjoying PMP Prep?"
     const val FIRST_BODY = "You've studied 7 days in a row. If the app is helping you, please support it. " +
         "It's free, has no ads, and your support keeps it going."
