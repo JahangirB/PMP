@@ -82,31 +82,31 @@ any question.
 |`pmp-p6-138`|people-6|pulldown|agile|3|Prompts: Midway through a sprint, the clubs' memb… / During a review, the membership lead poi… / The clubs' procurement officer asks for…|
 |`pmp-p6-139`|people-6|fillblank|hybrid|3|An online grocer's operations director is about to sign a hosting contract offering 99.5% monthly availability. She says this…|
 |`pmp-p6-140`|people-6|hotspot|predictive|3|You are delivering a warehouse automation project for a pharmaceutical distributor. The diagram is a timeline of the monthly…|
-|`pmp-p6-1`|pmp-lectures-1-11|single|agile|3|A company has hired a project manager to implement an adaptive project framework. The project has made some progress, but the…|
-|`pmp-p6-2`|pmp-lectures-1-11|single|agile|3|An agile team is developing a product with strict budget constraints. The customer is requesting a new independent feature be…|
-|`pmp-p6-3`|pmp-lectures-1-11|single|agile|3|Even though the customer is receiving sprint velocity and results reports from the project manager by email, escalations to the…|
-|`pmp-p6-4`|pmp-lectures-1-11|single|agile|3|A client has contracted a company to manage a large project in an agile environment with many subcontractors. The client is…|
-|`pmp-p6-201`|pmp-mocks-1-10|single|agile|2|A project manager is involved in a project where requirements are constantly evolving.|
-|`pmp-p6-202`|pmp-mocks-1-10|single|predictive|2|As part of a project deliverable, a project manager demonstrates how to use one of the products to a subset of a client's…|
-|`pmp-p6-203`|pmp-mocks-1-10|single|hybrid|2|In a hybrid project, the need for customer involvement throughout the project is not understood by the customer. As a…|
-|`pmp-p6-204`|pmp-mocks-1-10|single|hybrid|3|During one of the final incremental deliveries of a project, the end user informed the project leader that they are not satisfied…|
-|`pmp-p6-205`|pmp-mocks-1-10|single|predictive|2|A project has been closed and customer care needs to measure customer satisfaction with the deliverables.|
-|`pmp-p6-206`|pmp-mocks-1-10|single|agile|3|A customer is concerned that the current project deliverable will not fulfill stated project requirements.|
-|`pmp-p6-207`|pmp-mocks-1-10|single|agile|3|A complex technology project is in the execution phase. New technologies are added to the backlog based on customer requirements,…|
-|`pmp-p6-208`|pmp-mocks-1-10|single|agile|3|During a daily meeting, the project team raised an impediment that one of the business subject matter experts is frequently…|
-|`pmp-p6-209`|pmp-mocks-1-10|single|hybrid|3|The team informed the project leader that they are not sure of the stakeholder needs, despite the multiple collection…|
-|`pmp-p6-210`|pmp-mocks-1-10|single|predictive|2|An operational support project is running smoothly, but a customer consistently complains about a lack of visibility into the…|
-|`pmp-p6-211`|pmp-mocks-1-10|single|predictive|2|A customer requires knowing exactly the state of a product, the overall project, and the next steps planned for the next month…|
-|`pmp-p6-212`|pmp-mocks-1-10|single|predictive|2|Multiple stakeholders express dissatisfaction with a project deliverable.|
-|`pmp-p6-213`|pmp-mocks-1-10|single|agile|3|A project manager is assigned a project for a customer with a history of being demanding and unclear about requirements. The…|
-|`pmp-p6-214`|pmp-mocks-1-10|single|hybrid|2|A project manager is on a project with a very involved customer. The customer demands regular updates on the project, including…|
-|`pmp-p6-215`|pmp-mocks-1-10|single|predictive|3|During a meeting with stakeholders, the project manager received multiple concerns about the quality of the project’s…|
-|`pmp-p6-216`|pmp-mocks-1-10|single|agile|2|A project manager receives an email from a customer detailing reservations about the project deliverables.|
-|`pmp-p6-217`|pmp-mocks-1-10|single|agile|2|A customer is not satisfied with the delivered product, saying that it was not what they expected. The project manager is…|
-|`pmp-p6-218`|pmp-mocks-1-10|single|agile|3|A customer repeatedly complains, saying that a function developed by the development team does not seem to align with the…|
-|`pmp-p6-219`|pmp-mocks-1-10|single|hybrid|3|During a challenging shareholder meeting, the customer indicates that they will reject an iteration's deliverable.|
-|`pmp-p6-220`|pmp-mocks-1-10|single|predictive|2|A customer's resources have not completed the required training. The project manager has to consider the risk it poses to the…|
-|`pmp-p6-221`|pmp-mocks-1-10|single|predictive|2|A customer is performing a weekly visit to a project site to inspect the final stage of product development. The quality manager…|
-|`pmp-p6-222`|pmp-mocks-1-10|single|agile|2|During a one-year project, a team delivered everything as requested and defined by the product owner and met all of the sprint…|
-|`pmp-p6-223`|pmp-mocks-1-10|single|agile|2|While working on a long project with many changes, a project manager is informed by a team member that some users are…|
-|`pmp-p6-224`|pmp-mocks-1-10|multi|agile|3|A stakeholder on an agile project has attended the sprint demo where the team shows the minimum viable product (MVP) as defined…|
+|`pmp-p6-1`|export-batch-1|single|agile|3|A company has hired a project manager to implement an adaptive project framework. The project has made some progress, but the…|
+|`pmp-p6-2`|export-batch-1|single|agile|3|An agile team is developing a product with strict budget constraints. The customer is requesting a new independent feature be…|
+|`pmp-p6-3`|export-batch-1|single|agile|3|Even though the customer is receiving sprint velocity and results reports from the project manager by email, escalations to the…|
+|`pmp-p6-4`|export-batch-1|single|agile|3|A client has contracted a company to manage a large project in an agile environment with many subcontractors. The client is…|
+|`pmp-p6-201`|export-batch-2|single|agile|2|A project manager is involved in a project where requirements are constantly evolving.|
+|`pmp-p6-202`|export-batch-2|single|predictive|2|As part of a project deliverable, a project manager demonstrates how to use one of the products to a subset of a client's…|
+|`pmp-p6-203`|export-batch-2|single|hybrid|2|In a hybrid project, the need for customer involvement throughout the project is not understood by the customer. As a…|
+|`pmp-p6-204`|export-batch-2|single|hybrid|3|During one of the final incremental deliveries of a project, the end user informed the project leader that they are not satisfied…|
+|`pmp-p6-205`|export-batch-2|single|predictive|2|A project has been closed and customer care needs to measure customer satisfaction with the deliverables.|
+|`pmp-p6-206`|export-batch-2|single|agile|3|A customer is concerned that the current project deliverable will not fulfill stated project requirements.|
+|`pmp-p6-207`|export-batch-2|single|agile|3|A complex technology project is in the execution phase. New technologies are added to the backlog based on customer requirements,…|
+|`pmp-p6-208`|export-batch-2|single|agile|3|During a daily meeting, the project team raised an impediment that one of the business subject matter experts is frequently…|
+|`pmp-p6-209`|export-batch-2|single|hybrid|3|The team informed the project leader that they are not sure of the stakeholder needs, despite the multiple collection…|
+|`pmp-p6-210`|export-batch-2|single|predictive|2|An operational support project is running smoothly, but a customer consistently complains about a lack of visibility into the…|
+|`pmp-p6-211`|export-batch-2|single|predictive|2|A customer requires knowing exactly the state of a product, the overall project, and the next steps planned for the next month…|
+|`pmp-p6-212`|export-batch-2|single|predictive|2|Multiple stakeholders express dissatisfaction with a project deliverable.|
+|`pmp-p6-213`|export-batch-2|single|agile|3|A project manager is assigned a project for a customer with a history of being demanding and unclear about requirements. The…|
+|`pmp-p6-214`|export-batch-2|single|hybrid|2|A project manager is on a project with a very involved customer. The customer demands regular updates on the project, including…|
+|`pmp-p6-215`|export-batch-2|single|predictive|3|During a meeting with stakeholders, the project manager received multiple concerns about the quality of the project’s…|
+|`pmp-p6-216`|export-batch-2|single|agile|2|A project manager receives an email from a customer detailing reservations about the project deliverables.|
+|`pmp-p6-217`|export-batch-2|single|agile|2|A customer is not satisfied with the delivered product, saying that it was not what they expected. The project manager is…|
+|`pmp-p6-218`|export-batch-2|single|agile|3|A customer repeatedly complains, saying that a function developed by the development team does not seem to align with the…|
+|`pmp-p6-219`|export-batch-2|single|hybrid|3|During a challenging shareholder meeting, the customer indicates that they will reject an iteration's deliverable.|
+|`pmp-p6-220`|export-batch-2|single|predictive|2|A customer's resources have not completed the required training. The project manager has to consider the risk it poses to the…|
+|`pmp-p6-221`|export-batch-2|single|predictive|2|A customer is performing a weekly visit to a project site to inspect the final stage of product development. The quality manager…|
+|`pmp-p6-222`|export-batch-2|single|agile|2|During a one-year project, a team delivered everything as requested and defined by the product owner and met all of the sprint…|
+|`pmp-p6-223`|export-batch-2|single|agile|2|While working on a long project with many changes, a project manager is informed by a team member that some users are…|
+|`pmp-p6-224`|export-batch-2|multi|agile|3|A stakeholder on an agile project has attended the sprint demo where the team shows the minimum viable product (MVP) as defined…|

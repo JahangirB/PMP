@@ -1,5 +1,5 @@
 "use strict";
-/* What the lecture series taught well, brought into the app: sample documents
+/* What the course material covered well, brought into the app: sample documents
    (L2), commonly confused pairs (L3), worked formula examples (L4), the extra
    theory (L6), the certification lesson F0 (L7) and the walk-throughs (L8). */
 var assert = require("assert");

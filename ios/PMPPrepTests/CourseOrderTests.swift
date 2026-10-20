@@ -1,7 +1,7 @@
 import XCTest
 @testable import PMPPrep
 
-/** Study order (index.html §10.24, tests/24-lectures, CourseOrderTest.kt): by knowledge area, new lessons come in the classroom order. */
+/** Study order (index.html §10.24, tests/24-course-extras, CourseOrderTest.kt): by knowledge area, new lessons come in the classroom order. */
 final class CourseOrderTests: XCTestCase {
     private let D: Millis = 86_400_000
     private let now: Millis = 1_803_978_000_000

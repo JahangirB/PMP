@@ -81,100 +81,100 @@ any question.
 |`pmp-p4-138`|people-4|pulldown|hybrid|3|Prompts: At one site, managers agree with every p… / At another site, junior engineers will n… / Near a third site, the neighbouring comm…|
 |`pmp-p4-139`|people-4|fillblank|predictive|2|You can give 20 hours a month to engagement on a water utility's smart-meter programme. The plan has monthly one-hour meetings…|
 |`pmp-p4-140`|people-4|hotspot|agile|3|A bus operator's agile team is replacing paper concessionary passes with a phone app. A pensioners' forum has a formal right to…|
-|`pmp-p4-1`|pmp-lectures-1-11|single|predictive|4|A project manager conducted an analysis with relevant stakeholders to validate project alignment with organizational strategy and…|
-|`pmp-p4-2`|pmp-lectures-1-11|single|predictive|3|During the planning phase of a project, the project manager is having trouble identifying stakeholders. Without input from the…|
-|`pmp-p4-3`|pmp-lectures-1-11|single|predictive|3|A project manager has just finished a project charter and received approval from the project sponsor. The project manager then…|
-|`pmp-p4-4`|pmp-lectures-1-11|single|agile|3|A project manager receives an email shortly after the beginning of a sprint. It is from a key stakeholder who is unfamiliar with…|
-|`pmp-p4-5`|pmp-lectures-1-11|single|predictive|3|During the first few days of executing a six-week project, an impediment is discovered by the project team. The project manager…|
-|`pmp-p4-6`|pmp-lectures-1-11|single|predictive|3|A project manager has been assigned to a multimillion-dollar project already in execution. During a project status meeting, one…|
-|`pmp-p4-7`|pmp-lectures-1-11|single|predictive|3|A new product development project has been launched. The project sponsor has reviewed the results of the risk analysis as…|
-|`pmp-p4-8`|pmp-lectures-1-11|single|predictive|2|A project manager has recently been assigned to an existing multinational project and is not familiar with the key stakeholders.|
-|`pmp-p4-9`|pmp-lectures-1-11|single|predictive|2|A project manager is leading a project where a low-level stakeholder has just been promoted to a new position and has now become…|
-|`pmp-p4-10`|pmp-lectures-1-11|single|predictive|3|A company is implementing a new computerized system. During project execution, the leader of a department that is critical to…|
-|`pmp-p4-11`|pmp-lectures-1-11|single|agile|3|A key stakeholder is upset about the new features in the current iteration for the product. The key stakeholder was unavailable…|
-|`pmp-p4-12`|pmp-lectures-1-11|single|predictive|3|An external stakeholder has a significant impact on the project, as they have the ability to approve or reject changes to the…|
-|`pmp-p4-13`|pmp-lectures-1-11|single|predictive|3|A project manager is working on a project charter and discovers that two key stakeholders are transferring to other departments…|
-|`pmp-p4-14`|pmp-lectures-1-11|single|predictive|3|During project execution, a key stakeholder is replaced with a new team member who has approval authority. The new member states…|
-|`pmp-p4-15`|pmp-lectures-1-11|single|predictive|3|A five-year highway construction project is in its third year of execution when the project manager receives a complaint from a…|
-|`pmp-p4-16`|pmp-lectures-1-11|single|predictive|3|During a kick-off meeting with the project sponsor and various project members, it became clear that it was not necessary for…|
-|`pmp-p4-17`|pmp-lectures-1-11|single|predictive|3|During project implementation, a stakeholder is questioning the purpose of the project and wants to pause the project to assess a…|
-|`pmp-p4-18`|pmp-lectures-1-11|single|agile|3|A company is creating a new application for its users. The agile team completed the initiating stage and is performing iterations…|
-|`pmp-p4-19`|pmp-lectures-1-11|single|predictive|2|An experienced project manager is mentoring a new project manager assigned to their first project. As the new project manager…|
-|`pmp-p4-201`|pmp-mocks-1-10|single|predictive|3|A project manager in the execution phase of a project discovers several stakeholders identified at project initiation are no…|
-|`pmp-p4-202`|pmp-mocks-1-10|single|hybrid|3|An ongoing project has a high degree of change.|
-|`pmp-p4-203`|pmp-mocks-1-10|single|predictive|3|A project manager has been working on an internal project for the organization's project management office (PMO). The project was…|
-|`pmp-p4-204`|pmp-mocks-1-10|single|predictive|3|A project manager is in the execution phase of a project. A newly identified stakeholder continuously bypasses the project…|
-|`pmp-p4-205`|pmp-mocks-1-10|single|predictive|3|A project is in the planning phase and requires tremendous time and effort for data collection and analysis. The project sponsor…|
-|`pmp-p4-206`|pmp-mocks-1-10|single|agile|2|A senior stakeholder was invited to a sprint review meeting and asked a project team member to describe the final product that…|
-|`pmp-p4-207`|pmp-mocks-1-10|single|hybrid|3|A business environment has become unstable because a stakeholder has altered the project deliverables and outcomes in the middle…|
-|`pmp-p4-208`|pmp-mocks-1-10|single|predictive|2|A project stakeholder has been missing scheduled facilitation workshops and has delegated assigned tasks to another member of the…|
-|`pmp-p4-209`|pmp-mocks-1-10|single|predictive|2|A project manager is developing a project charter, but a key stakeholder is failing to provide information about the expected…|
-|`pmp-p4-210`|pmp-mocks-1-10|single|agile|3|A critical software development project has been in development for the past six sprints. A demonstration for stakeholders took…|
-|`pmp-p4-211`|pmp-mocks-1-10|single|predictive|2|A complex project has multiple participants. The project manager agrees with the team that they need to better understand the…|
-|`pmp-p4-212`|pmp-mocks-1-10|single|predictive|2|A key stakeholder refuses to sign off on a product because it does not meet the expectations outlined in the project scope.|
-|`pmp-p4-213`|pmp-mocks-1-10|single|predictive|3|While executing a project that is nearly behind schedule, a project manager must commission a new piece of equipment. Two local…|
-|`pmp-p4-214`|pmp-mocks-1-10|single|predictive|1|A project manager compiling a list of project stakeholders discovers an interested stakeholder with little to no authority.|
-|`pmp-p4-215`|pmp-mocks-1-10|single|predictive|2|During a project's execution, a previously unidentified stakeholder within the customer's organization requests a change that…|
-|`pmp-p4-216`|pmp-mocks-1-10|single|predictive|2|A new project manager joins a project during the delivery of a critical milestone. This project has multiple stakeholders, and…|
-|`pmp-p4-217`|pmp-mocks-1-10|single|predictive|2|A project manager must ensure stakeholder responsibilities are clear, concise, and promote successful completion while…|
-|`pmp-p4-218`|pmp-mocks-1-10|single|hybrid|3|A project manager is working on a hybrid project. The team performance has been suffering and multiple team members have…|
-|`pmp-p4-219`|pmp-mocks-1-10|single|agile|3|A key project stakeholder showed interest in the beginning of a complex agile project but has become less involved as the sprint…|
-|`pmp-p4-220`|pmp-mocks-1-10|single|predictive|2|A key stakeholder's input is essential to a project's success. However, the stakeholder is always late on critical project…|
-|`pmp-p4-221`|pmp-mocks-1-10|single|predictive|3|During the initial planning phase of a complex development project, a project team has identified several stakeholders, including…|
-|`pmp-p4-222`|pmp-mocks-1-10|single|hybrid|2|A project manager is managing a hybrid project. After attending an iteration review, a stakeholder tells the project manager that…|
-|`pmp-p4-223`|pmp-mocks-1-10|single|predictive|2|An executive stakeholder has crucial decision power on the execution and success of a project.|
-|`pmp-p4-224`|pmp-mocks-1-10|single|predictive|1|After stakeholder data and information collection is complete, an analysis of the collected data begins. The power/interest…|
-|`pmp-p4-225`|pmp-mocks-1-10|single|hybrid|2|A project manager is leading an environmental project and realizes that they missed an influential foreign stakeholder. After the…|
-|`pmp-p4-226`|pmp-mocks-1-10|single|predictive|1|A project manager is leading a project with seven key stakeholders.|
-|`pmp-p4-227`|pmp-mocks-1-10|single|hybrid|2|A project manager sends out requests for regular status meetings and daily standup meetings during the project setup phase.…|
-|`pmp-p4-228`|pmp-mocks-1-10|single|predictive|2|During a project steering committee meeting, the project manager reports that a formerly supportive key team member has become…|
-|`pmp-p4-229`|pmp-mocks-1-10|single|predictive|2|A project manager has just completed the initiation phase of a project and needs to identify and analyze the stakeholders. The…|
-|`pmp-p4-230`|pmp-mocks-1-10|single|agile|2|A long-term agile project has just reached its midway mark and a new project manager is appointed to take over. Additional to the…|
-|`pmp-p4-231`|pmp-mocks-1-10|single|hybrid|2|A project manager is leading a complex initiative with diverse stakeholders and must cultivate strong stakeholder relationships.…|
-|`pmp-p4-232`|pmp-mocks-1-10|single|predictive|2|A project manager has identified stakeholders for a software development project: the sales team will be the primary users of the…|
-|`pmp-p4-233`|pmp-mocks-1-10|single|predictive|2|A project is experiencing delays because cultural differences are causing misunderstandings among some stakeholders.|
-|`pmp-p4-234`|pmp-mocks-1-10|single|agile|3|A project manager for an important agile project has a key stakeholder who was actively involved at the beginning of the project.…|
-|`pmp-p4-235`|pmp-mocks-1-10|single|predictive|2|Midway through a project, the project manager identifies new stakeholders. Each of these new stakeholders plays a different…|
-|`pmp-p4-236`|pmp-mocks-1-10|single|predictive|1|A project is in development when a functional manager leaves the company and is no longer involved with the project.|
-|`pmp-p4-237`|pmp-mocks-1-10|single|predictive|1|A project manager in a global organization is responsible for a project involving six different companies. Midway through the…|
-|`pmp-p4-238`|pmp-mocks-1-10|single|predictive|2|A project manager is having difficulty managing stakeholders because the stakeholder register does not distinguish how aware of…|
-|`pmp-p4-239`|pmp-mocks-1-10|single|agile|2|A project manager is attempting to engage project stakeholders in a new project and has invited them to daily standup meetings.…|
-|`pmp-p4-240`|pmp-mocks-1-10|single|agile|2|An agile project that the current project manager has been managing for three years is replacing one of the stakeholders with one…|
-|`pmp-p4-241`|pmp-mocks-1-10|single|predictive|2|A project manager is leading a complex infrastructure project that is vital for the company's growth. During the project's…|
-|`pmp-p4-242`|pmp-mocks-1-10|single|agile|3|During the execution of a project, the finance team identified that they were not involved in building the business case for the…|
-|`pmp-p4-243`|pmp-mocks-1-10|single|agile|2|An agile project manager is leading a new software system development project that is in the user acceptance testing phase. The…|
-|`pmp-p4-244`|pmp-mocks-1-10|multi|hybrid|2|A large transformation project that requires cross-functional effort from various business teams is in progress. (Choose two)|
-|`pmp-p4-245`|pmp-mocks-1-10|single|agile|2|A director is acting as the product owner for a government software project. The director is repeatedly unable to engage with the…|
-|`pmp-p4-246`|pmp-mocks-1-10|multi|predictive|2|A project is close to completion when an unidentified and influential stakeholder appears and threatens to put the project in…|
-|`pmp-p4-247`|pmp-mocks-1-10|single|agile|1|At what point in an agile project should a project manager engage stakeholders?|
-|`pmp-p4-248`|pmp-mocks-1-10|single|predictive|2|A project manager is managing a construction project that is 40% through the execution phase. The project sponsor has asked the…|
-|`pmp-p4-249`|pmp-mocks-1-10|single|predictive|1|A project team is creating a stakeholder engagement assessment matrix to govern stakeholder management activities during project…|
-|`pmp-p4-250`|pmp-mocks-1-10|single|agile|2|A project manager is concerned about delivering the planned business value because the product owner is not engaged.|
-|`pmp-p4-251`|pmp-mocks-1-10|single|hybrid|3|Several items remain in the Kanban blocked column despite the team’s efforts to address them. The retrospective reveals that all…|
-|`pmp-p4-252`|pmp-mocks-1-10|single|predictive|2|A functional manager who is also a project stakeholder has time constraints and delegates project responsibilities to someone…|
-|`pmp-p4-253`|pmp-mocks-1-10|single|agile|3|An R&D executive, who is a project stakeholder, occasionally visits the agile team’s work area to give instructions about urgent…|
-|`pmp-p4-254`|pmp-mocks-1-10|single|predictive|2|A new project team is setting early priorities, and they plan to gain the customer's trust by delivering value as quickly as…|
-|`pmp-p4-255`|pmp-mocks-1-10|single|predictive|2|A project manager overseeing the launch of a new e-commerce platform discovers that the finance department has concerns about not…|
-|`pmp-p4-256`|pmp-mocks-1-10|single|predictive|3|A project manager is overseeing the construction of a new office building. A key stakeholder complains that they never received…|
-|`pmp-p4-257`|pmp-mocks-1-10|single|predictive|2|During a pivotal project phase, it was revealed that critical stakeholders did not attend a meeting focused on confirming the…|
-|`pmp-p4-258`|pmp-mocks-1-10|single|predictive|2|At the beginning of a new environmental conservation project, a key stakeholder expresses concerns over the project's approach,…|
-|`pmp-p4-259`|pmp-mocks-1-10|single|hybrid|2|In the development phase of an international public health project, a project manager faces skepticism from government partners…|
-|`pmp-p4-260`|pmp-mocks-1-10|single|predictive|2|As a project manager overseeing the development of a new line of eco-friendly packaging materials, you encounter pushback from…|
-|`pmp-p4-261`|pmp-mocks-1-10|single|predictive|3|Your stakeholders seem to be engaged, however there are frequent changes to scope and requirements, causing delays. Issues are…|
-|`pmp-p4-262`|pmp-mocks-1-10|single|predictive|2|A project manager is leading the development of a new public park in a densely populated urban area. Community leaders have…|
-|`pmp-p4-263`|pmp-mocks-1-10|single|predictive|2|A project manager is leading the development of a new public library. During the planning phase, it comes to light that the…|
-|`pmp-p4-264`|pmp-mocks-1-10|single|predictive|2|At the outset of an initiative to introduce smart city technologies, it's discovered that the input from a crucial environmental…|
-|`pmp-p4-265`|pmp-mocks-1-10|single|predictive|2|You are delivering a critical change and several key stakeholders in your organisation have added seemingly unnecessary steps for…|
-|`pmp-p4-266`|pmp-mocks-1-10|single|predictive|2|You are analysing your stakeholder through an impact over influence chart and have found more than 100 different groups of…|
-|`pmp-p4-267`|pmp-mocks-1-10|single|predictive|2|You are working on a change that includes stakeholders at all levels from front-line workers to senior executives. After…|
-|`pmp-p4-268`|pmp-mocks-1-10|single|predictive|2|The functional manager raises a concern that they have not been engaged correctly and the program is missing some key…|
-|`pmp-p4-269`|pmp-mocks-1-10|single|predictive|2|Your project has been in progress for the past six months. Someone you have not met before approaches you and says they have not…|
-|`pmp-p4-270`|pmp-mocks-1-10|single|predictive|2|You have been working with the stakeholders on your project for some time, and the communication has been getting more and more…|
-|`pmp-p4-271`|pmp-mocks-1-10|single|predictive|2|You have been working on a project in your organisation for some time. In the latest working group meeting, the project sponsor…|
-|`pmp-p4-272`|pmp-mocks-1-10|single|predictive|1|You are creating a high level project charter which has now been approved. The Project Sponsor expects you to get to work…|
-|`pmp-p4-273`|pmp-mocks-1-10|single|predictive|2|The project charter has been approved, you have identified the stakeholders you will be working with and who will be impacted. As…|
-|`pmp-p4-274`|pmp-mocks-1-10|single|predictive|2|Your project charter has been approved and your stakeholder analysis reveals multiple impacted highly paid executives with the…|
-|`pmp-p4-275`|pmp-mocks-1-10|single|agile|2|You are at the beginning of a new iteration and about to plan and decide what gets worked on in the upcoming sprint. You decide…|
-|`pmp-p4-276`|pmp-mocks-1-10|single|hybrid|3|During a retrospective, your team advise that a high ranking executive from another part of the business keep approaching them to…|
-|`pmp-p4-277`|pmp-mocks-1-10|single|predictive|1|You are working on a project to deliver a major system change to retail workers in a large department store. You have worked…|
-|`pmp-p4-278`|pmp-mocks-1-10|single|predictive|1|You are in the initiating stages of a project, and have been given an initial project team. Your team are gathering the project…|
+|`pmp-p4-1`|export-batch-1|single|predictive|4|A project manager conducted an analysis with relevant stakeholders to validate project alignment with organizational strategy and…|
+|`pmp-p4-2`|export-batch-1|single|predictive|3|During the planning phase of a project, the project manager is having trouble identifying stakeholders. Without input from the…|
+|`pmp-p4-3`|export-batch-1|single|predictive|3|A project manager has just finished a project charter and received approval from the project sponsor. The project manager then…|
+|`pmp-p4-4`|export-batch-1|single|agile|3|A project manager receives an email shortly after the beginning of a sprint. It is from a key stakeholder who is unfamiliar with…|
+|`pmp-p4-5`|export-batch-1|single|predictive|3|During the first few days of executing a six-week project, an impediment is discovered by the project team. The project manager…|
+|`pmp-p4-6`|export-batch-1|single|predictive|3|A project manager has been assigned to a multimillion-dollar project already in execution. During a project status meeting, one…|
+|`pmp-p4-7`|export-batch-1|single|predictive|3|A new product development project has been launched. The project sponsor has reviewed the results of the risk analysis as…|
+|`pmp-p4-8`|export-batch-1|single|predictive|2|A project manager has recently been assigned to an existing multinational project and is not familiar with the key stakeholders.|
+|`pmp-p4-9`|export-batch-1|single|predictive|2|A project manager is leading a project where a low-level stakeholder has just been promoted to a new position and has now become…|
+|`pmp-p4-10`|export-batch-1|single|predictive|3|A company is implementing a new computerized system. During project execution, the leader of a department that is critical to…|
+|`pmp-p4-11`|export-batch-1|single|agile|3|A key stakeholder is upset about the new features in the current iteration for the product. The key stakeholder was unavailable…|
+|`pmp-p4-12`|export-batch-1|single|predictive|3|An external stakeholder has a significant impact on the project, as they have the ability to approve or reject changes to the…|
+|`pmp-p4-13`|export-batch-1|single|predictive|3|A project manager is working on a project charter and discovers that two key stakeholders are transferring to other departments…|
+|`pmp-p4-14`|export-batch-1|single|predictive|3|During project execution, a key stakeholder is replaced with a new team member who has approval authority. The new member states…|
+|`pmp-p4-15`|export-batch-1|single|predictive|3|A five-year highway construction project is in its third year of execution when the project manager receives a complaint from a…|
+|`pmp-p4-16`|export-batch-1|single|predictive|3|During a kick-off meeting with the project sponsor and various project members, it became clear that it was not necessary for…|
+|`pmp-p4-17`|export-batch-1|single|predictive|3|During project implementation, a stakeholder is questioning the purpose of the project and wants to pause the project to assess a…|
+|`pmp-p4-18`|export-batch-1|single|agile|3|A company is creating a new application for its users. The agile team completed the initiating stage and is performing iterations…|
+|`pmp-p4-19`|export-batch-1|single|predictive|2|An experienced project manager is mentoring a new project manager assigned to their first project. As the new project manager…|
+|`pmp-p4-201`|export-batch-2|single|predictive|3|A project manager in the execution phase of a project discovers several stakeholders identified at project initiation are no…|
+|`pmp-p4-202`|export-batch-2|single|hybrid|3|An ongoing project has a high degree of change.|
+|`pmp-p4-203`|export-batch-2|single|predictive|3|A project manager has been working on an internal project for the organization's project management office (PMO). The project was…|
+|`pmp-p4-204`|export-batch-2|single|predictive|3|A project manager is in the execution phase of a project. A newly identified stakeholder continuously bypasses the project…|
+|`pmp-p4-205`|export-batch-2|single|predictive|3|A project is in the planning phase and requires tremendous time and effort for data collection and analysis. The project sponsor…|
+|`pmp-p4-206`|export-batch-2|single|agile|2|A senior stakeholder was invited to a sprint review meeting and asked a project team member to describe the final product that…|
+|`pmp-p4-207`|export-batch-2|single|hybrid|3|A business environment has become unstable because a stakeholder has altered the project deliverables and outcomes in the middle…|
+|`pmp-p4-208`|export-batch-2|single|predictive|2|A project stakeholder has been missing scheduled facilitation workshops and has delegated assigned tasks to another member of the…|
+|`pmp-p4-209`|export-batch-2|single|predictive|2|A project manager is developing a project charter, but a key stakeholder is failing to provide information about the expected…|
+|`pmp-p4-210`|export-batch-2|single|agile|3|A critical software development project has been in development for the past six sprints. A demonstration for stakeholders took…|
+|`pmp-p4-211`|export-batch-2|single|predictive|2|A complex project has multiple participants. The project manager agrees with the team that they need to better understand the…|
+|`pmp-p4-212`|export-batch-2|single|predictive|2|A key stakeholder refuses to sign off on a product because it does not meet the expectations outlined in the project scope.|
+|`pmp-p4-213`|export-batch-2|single|predictive|3|While executing a project that is nearly behind schedule, a project manager must commission a new piece of equipment. Two local…|
+|`pmp-p4-214`|export-batch-2|single|predictive|1|A project manager compiling a list of project stakeholders discovers an interested stakeholder with little to no authority.|
+|`pmp-p4-215`|export-batch-2|single|predictive|2|During a project's execution, a previously unidentified stakeholder within the customer's organization requests a change that…|
+|`pmp-p4-216`|export-batch-2|single|predictive|2|A new project manager joins a project during the delivery of a critical milestone. This project has multiple stakeholders, and…|
+|`pmp-p4-217`|export-batch-2|single|predictive|2|A project manager must ensure stakeholder responsibilities are clear, concise, and promote successful completion while…|
+|`pmp-p4-218`|export-batch-2|single|hybrid|3|A project manager is working on a hybrid project. The team performance has been suffering and multiple team members have…|
+|`pmp-p4-219`|export-batch-2|single|agile|3|A key project stakeholder showed interest in the beginning of a complex agile project but has become less involved as the sprint…|
+|`pmp-p4-220`|export-batch-2|single|predictive|2|A key stakeholder's input is essential to a project's success. However, the stakeholder is always late on critical project…|
+|`pmp-p4-221`|export-batch-2|single|predictive|3|During the initial planning phase of a complex development project, a project team has identified several stakeholders, including…|
+|`pmp-p4-222`|export-batch-2|single|hybrid|2|A project manager is managing a hybrid project. After attending an iteration review, a stakeholder tells the project manager that…|
+|`pmp-p4-223`|export-batch-2|single|predictive|2|An executive stakeholder has crucial decision power on the execution and success of a project.|
+|`pmp-p4-224`|export-batch-2|single|predictive|1|After stakeholder data and information collection is complete, an analysis of the collected data begins. The power/interest…|
+|`pmp-p4-225`|export-batch-2|single|hybrid|2|A project manager is leading an environmental project and realizes that they missed an influential foreign stakeholder. After the…|
+|`pmp-p4-226`|export-batch-2|single|predictive|1|A project manager is leading a project with seven key stakeholders.|
+|`pmp-p4-227`|export-batch-2|single|hybrid|2|A project manager sends out requests for regular status meetings and daily standup meetings during the project setup phase.…|
+|`pmp-p4-228`|export-batch-2|single|predictive|2|During a project steering committee meeting, the project manager reports that a formerly supportive key team member has become…|
+|`pmp-p4-229`|export-batch-2|single|predictive|2|A project manager has just completed the initiation phase of a project and needs to identify and analyze the stakeholders. The…|
+|`pmp-p4-230`|export-batch-2|single|agile|2|A long-term agile project has just reached its midway mark and a new project manager is appointed to take over. Additional to the…|
+|`pmp-p4-231`|export-batch-2|single|hybrid|2|A project manager is leading a complex initiative with diverse stakeholders and must cultivate strong stakeholder relationships.…|
+|`pmp-p4-232`|export-batch-2|single|predictive|2|A project manager has identified stakeholders for a software development project: the sales team will be the primary users of the…|
+|`pmp-p4-233`|export-batch-2|single|predictive|2|A project is experiencing delays because cultural differences are causing misunderstandings among some stakeholders.|
+|`pmp-p4-234`|export-batch-2|single|agile|3|A project manager for an important agile project has a key stakeholder who was actively involved at the beginning of the project.…|
+|`pmp-p4-235`|export-batch-2|single|predictive|2|Midway through a project, the project manager identifies new stakeholders. Each of these new stakeholders plays a different…|
+|`pmp-p4-236`|export-batch-2|single|predictive|1|A project is in development when a functional manager leaves the company and is no longer involved with the project.|
+|`pmp-p4-237`|export-batch-2|single|predictive|1|A project manager in a global organization is responsible for a project involving six different companies. Midway through the…|
+|`pmp-p4-238`|export-batch-2|single|predictive|2|A project manager is having difficulty managing stakeholders because the stakeholder register does not distinguish how aware of…|
+|`pmp-p4-239`|export-batch-2|single|agile|2|A project manager is attempting to engage project stakeholders in a new project and has invited them to daily standup meetings.…|
+|`pmp-p4-240`|export-batch-2|single|agile|2|An agile project that the current project manager has been managing for three years is replacing one of the stakeholders with one…|
+|`pmp-p4-241`|export-batch-2|single|predictive|2|A project manager is leading a complex infrastructure project that is vital for the company's growth. During the project's…|
+|`pmp-p4-242`|export-batch-2|single|agile|3|During the execution of a project, the finance team identified that they were not involved in building the business case for the…|
+|`pmp-p4-243`|export-batch-2|single|agile|2|An agile project manager is leading a new software system development project that is in the user acceptance testing phase. The…|
+|`pmp-p4-244`|export-batch-2|multi|hybrid|2|A large transformation project that requires cross-functional effort from various business teams is in progress. (Choose two)|
+|`pmp-p4-245`|export-batch-2|single|agile|2|A director is acting as the product owner for a government software project. The director is repeatedly unable to engage with the…|
+|`pmp-p4-246`|export-batch-2|multi|predictive|2|A project is close to completion when an unidentified and influential stakeholder appears and threatens to put the project in…|
+|`pmp-p4-247`|export-batch-2|single|agile|1|At what point in an agile project should a project manager engage stakeholders?|
+|`pmp-p4-248`|export-batch-2|single|predictive|2|A project manager is managing a construction project that is 40% through the execution phase. The project sponsor has asked the…|
+|`pmp-p4-249`|export-batch-2|single|predictive|1|A project team is creating a stakeholder engagement assessment matrix to govern stakeholder management activities during project…|
+|`pmp-p4-250`|export-batch-2|single|agile|2|A project manager is concerned about delivering the planned business value because the product owner is not engaged.|
+|`pmp-p4-251`|export-batch-2|single|hybrid|3|Several items remain in the Kanban blocked column despite the team’s efforts to address them. The retrospective reveals that all…|
+|`pmp-p4-252`|export-batch-2|single|predictive|2|A functional manager who is also a project stakeholder has time constraints and delegates project responsibilities to someone…|
+|`pmp-p4-253`|export-batch-2|single|agile|3|An R&D executive, who is a project stakeholder, occasionally visits the agile team’s work area to give instructions about urgent…|
+|`pmp-p4-254`|export-batch-2|single|predictive|2|A new project team is setting early priorities, and they plan to gain the customer's trust by delivering value as quickly as…|
+|`pmp-p4-255`|export-batch-2|single|predictive|2|A project manager overseeing the launch of a new e-commerce platform discovers that the finance department has concerns about not…|
+|`pmp-p4-256`|export-batch-2|single|predictive|3|A project manager is overseeing the construction of a new office building. A key stakeholder complains that they never received…|
+|`pmp-p4-257`|export-batch-2|single|predictive|2|During a pivotal project phase, it was revealed that critical stakeholders did not attend a meeting focused on confirming the…|
+|`pmp-p4-258`|export-batch-2|single|predictive|2|At the beginning of a new environmental conservation project, a key stakeholder expresses concerns over the project's approach,…|
+|`pmp-p4-259`|export-batch-2|single|hybrid|2|In the development phase of an international public health project, a project manager faces skepticism from government partners…|
+|`pmp-p4-260`|export-batch-2|single|predictive|2|As a project manager overseeing the development of a new line of eco-friendly packaging materials, you encounter pushback from…|
+|`pmp-p4-261`|export-batch-2|single|predictive|3|Your stakeholders seem to be engaged, however there are frequent changes to scope and requirements, causing delays. Issues are…|
+|`pmp-p4-262`|export-batch-2|single|predictive|2|A project manager is leading the development of a new public park in a densely populated urban area. Community leaders have…|
+|`pmp-p4-263`|export-batch-2|single|predictive|2|A project manager is leading the development of a new public library. During the planning phase, it comes to light that the…|
+|`pmp-p4-264`|export-batch-2|single|predictive|2|At the outset of an initiative to introduce smart city technologies, it's discovered that the input from a crucial environmental…|
+|`pmp-p4-265`|export-batch-2|single|predictive|2|You are delivering a critical change and several key stakeholders in your organisation have added seemingly unnecessary steps for…|
+|`pmp-p4-266`|export-batch-2|single|predictive|2|You are analysing your stakeholder through an impact over influence chart and have found more than 100 different groups of…|
+|`pmp-p4-267`|export-batch-2|single|predictive|2|You are working on a change that includes stakeholders at all levels from front-line workers to senior executives. After…|
+|`pmp-p4-268`|export-batch-2|single|predictive|2|The functional manager raises a concern that they have not been engaged correctly and the program is missing some key…|
+|`pmp-p4-269`|export-batch-2|single|predictive|2|Your project has been in progress for the past six months. Someone you have not met before approaches you and says they have not…|
+|`pmp-p4-270`|export-batch-2|single|predictive|2|You have been working with the stakeholders on your project for some time, and the communication has been getting more and more…|
+|`pmp-p4-271`|export-batch-2|single|predictive|2|You have been working on a project in your organisation for some time. In the latest working group meeting, the project sponsor…|
+|`pmp-p4-272`|export-batch-2|single|predictive|1|You are creating a high level project charter which has now been approved. The Project Sponsor expects you to get to work…|
+|`pmp-p4-273`|export-batch-2|single|predictive|2|The project charter has been approved, you have identified the stakeholders you will be working with and who will be impacted. As…|
+|`pmp-p4-274`|export-batch-2|single|predictive|2|Your project charter has been approved and your stakeholder analysis reveals multiple impacted highly paid executives with the…|
+|`pmp-p4-275`|export-batch-2|single|agile|2|You are at the beginning of a new iteration and about to plan and decide what gets worked on in the upcoming sprint. You decide…|
+|`pmp-p4-276`|export-batch-2|single|hybrid|3|During a retrospective, your team advise that a high ranking executive from another part of the business keep approaching them to…|
+|`pmp-p4-277`|export-batch-2|single|predictive|1|You are working on a project to deliver a major system change to retail workers in a large department store. You have worked…|
+|`pmp-p4-278`|export-batch-2|single|predictive|1|You are in the initiating stages of a project, and have been given an initial project team. Your team are gathering the project…|

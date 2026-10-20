@@ -36,6 +36,7 @@ import androidx.compose.material.icons.filled.Assignment
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Cloud
+import androidx.compose.material.icons.filled.SystemUpdate
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Flag
@@ -120,6 +121,8 @@ fun MenuScreen(vm: PmpViewModel) {
             Entry(Icons.Default.TextFields, "Study settings", "Text size, reading guide, confidence, focus mode, rest days") { vm.navigate(Dest.SETTINGS) },
             Entry(Icons.Default.Storage, "Question banks and backup", "${vm.pool().size} questions enabled") { vm.navigate(Dest.DATA) },
             Entry(Icons.Default.Cloud, "Cloud sync", vm.syncStatus()) { vm.navigate(Dest.SYNC) },
+            Entry(Icons.Default.SystemUpdate, "App updates",
+                vm.updateAvailable?.let { "Update available: build ${it.build}" } ?: "Version ${vm.appVersion.second}") { vm.navigate(Dest.UPDATES) },
         ),
     )
     val context = LocalContext.current
@@ -139,6 +142,25 @@ fun MenuScreen(vm: PmpViewModel) {
                 Spacer(Modifier.width(8.dp))
                 Text("Support the app", color = SupportInk, fontSize = 16.sp, fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.clearAndSetSemantics { })
+            }
+        }
+        // Found by the daily check: one tap to the update.
+        vm.updateAvailable?.let { r ->
+            item {
+                Row(
+                    Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp).fillMaxWidth().clip(RoundedCornerShape(14.dp))
+                        .background(MaterialTheme.colorScheme.primaryContainer)
+                        .clickable(role = Role.Button) { vm.navigate(Dest.UPDATES) }
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(Icons.Default.SystemUpdate, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(22.dp))
+                    Spacer(Modifier.width(10.dp))
+                    Column(Modifier.weight(1f)) {
+                        Text("Update available", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                        Text("Build ${r.build}: tap to download and install", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
             }
         }
         item {

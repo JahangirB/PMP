@@ -75,33 +75,33 @@ any question.
 |`pmp-b1-133`|business-1|single|hybrid|4|On a hybrid programme replacing a national charity's donor database, the governance plan sets your approval limit at £10,000 and…|
 |`pmp-b1-134`|business-1|multi|hybrid|4|On a hybrid programme at a regional airport, the board has failed at three consecutive meetings to choose between two…|
 |`pmp-b1-135`|business-1|pulldown|hybrid|3|Prompts: At the stage review, the board must judg… / The board must judge whether the supplie…|
-|`pmp-b1-1`|pmp-lectures-1-11|single|hybrid|3|A project manager in a quickly growing hybrid organization is becoming increasingly frustrated at the rapid amount of change in…|
-|`pmp-b1-2`|pmp-lectures-1-11|single|agile|3|A project manager has been assigned to an existing agile team and is preparing for an upcoming project. The last project that the…|
-|`pmp-b1-3`|pmp-lectures-1-11|single|agile|4|An organization is trying to adopt agile approaches to execute projects for their customers. During project planning, the product…|
-|`pmp-b1-4`|pmp-lectures-1-11|single|predictive|4|A project can gain downstream marketing benefits if additional equipment is included in the project scope. However, this…|
-|`pmp-b1-201`|pmp-mocks-1-10|single|hybrid|3|As part of a temporary assignment, a project manager is leading a business project. During a daily status meeting, it was…|
-|`pmp-b1-202`|pmp-mocks-1-10|single|predictive|1|After completing the project charter, the project manager sends it to the project stakeholders.|
-|`pmp-b1-203`|pmp-mocks-1-10|single|predictive|3|During a kick-off meeting, the sponsor informs the project team that they can not attend any meetings for the first half of the…|
-|`pmp-b1-204`|pmp-mocks-1-10|single|predictive|4|After several interviews with key stakeholders and checking the project charter, a project manager found that the current project…|
-|`pmp-b1-205`|pmp-mocks-1-10|single|predictive|2|A project manager is working on the development of a business case to secure funding and resources.|
-|`pmp-b1-206`|pmp-mocks-1-10|single|predictive|3|A project manager is tracking an infrastructure project that is dependent on a service provider. The service provider informed…|
-|`pmp-b1-207`|pmp-mocks-1-10|single|predictive|1|A project team member assigned to a new project will be required to report on all project tasks progress to the project manager…|
-|`pmp-b1-208`|pmp-mocks-1-10|single|predictive|2|A project manager is leading a project to develop a new system for a government agency using a predictive approach. The project's…|
-|`pmp-b1-209`|pmp-mocks-1-10|single|hybrid|2|A project manager is on a hybrid project. The project manager meets with the sponsor to get the project milestones. The sponsor…|
-|`pmp-b1-210`|pmp-mocks-1-10|single|predictive|4|A project manager is assigned to join a several year project mid-way. The project was stopped years ago due to organizational…|
-|`pmp-b1-211`|pmp-mocks-1-10|single|predictive|3|A megaproject had reached 10% completion when there was a sudden change of company ownership. After being put on hold for a few…|
-|`pmp-b1-212`|pmp-mocks-1-10|single|predictive|3|Leading a significant initiative to overhaul a corporation's IT infrastructure, the project manager has already navigated through…|
-|`pmp-b1-213`|pmp-mocks-1-10|single|predictive|2|During one of your working group meetings, a stakeholder raises the concern that the product you are working on will be…|
-|`pmp-b1-214`|pmp-mocks-1-10|single|predictive|2|You are working directly with the project sponsor, in the initial phase of a brand new project. The project sponsor asks for your…|
-|`pmp-b1-215`|pmp-mocks-1-10|single|agile|2|Your organisation is starting to move to an agile way of work and they are setting up a Value Delivery Office (VDO) to complement…|
-|`pmp-b1-216`|pmp-mocks-1-10|single|predictive|2|Your project team have planned the requirements, scope, schedule and cost for constructing a new building in your organisation.…|
-|`pmp-b1-217`|pmp-mocks-1-10|single|predictive|1|You are new to a project and are approached by the functional manager. No one has been able to tell them exactly what the project…|
-|`pmp-b1-218`|pmp-mocks-1-10|single|predictive|2|You are working as a project manager in an organisation with a new Project Management Office. They advise all project managers to…|
-|`pmp-b1-219`|pmp-mocks-1-10|single|predictive|2|You have just joined an organisation, and are about to be allocated to an existing project, delivering a new Human Resources…|
-|`pmp-b1-220`|pmp-mocks-1-10|single|predictive|2|You have just started work in a project that has been in development for the past six months. You notice it has been through a…|
-|`pmp-b1-221`|pmp-mocks-1-10|single|predictive|1|You are a project manager brought on during the very early phase of the project. The project sponsor has asked you to create a…|
-|`pmp-b1-222`|pmp-mocks-1-10|single|predictive|1|You have recently become a project manager for a large organisation and you are not sure what to expect. Your colleague tells you…|
-|`pmp-b1-223`|pmp-mocks-1-10|single|hybrid|2|You are a Project Manager who has been tasked with initiating a new project for your area. You review the current organizational…|
-|`pmp-b1-224`|pmp-mocks-1-10|single|predictive|1|You are working as a project manager, asking for proposals from a Third Parties to complete the work. Your brother works for one…|
-|`pmp-b1-225`|pmp-mocks-1-10|single|predictive|2|You are working on a global project in other country, where it is customary to honour the project manager of a successful project…|
-|`pmp-b1-226`|pmp-mocks-1-10|single|predictive|1|You have been asked to prepare a document to gain the project sponsor's sign off to access their function's resources, that…|
+|`pmp-b1-1`|export-batch-1|single|hybrid|3|A project manager in a quickly growing hybrid organization is becoming increasingly frustrated at the rapid amount of change in…|
+|`pmp-b1-2`|export-batch-1|single|agile|3|A project manager has been assigned to an existing agile team and is preparing for an upcoming project. The last project that the…|
+|`pmp-b1-3`|export-batch-1|single|agile|4|An organization is trying to adopt agile approaches to execute projects for their customers. During project planning, the product…|
+|`pmp-b1-4`|export-batch-1|single|predictive|4|A project can gain downstream marketing benefits if additional equipment is included in the project scope. However, this…|
+|`pmp-b1-201`|export-batch-2|single|hybrid|3|As part of a temporary assignment, a project manager is leading a business project. During a daily status meeting, it was…|
+|`pmp-b1-202`|export-batch-2|single|predictive|1|After completing the project charter, the project manager sends it to the project stakeholders.|
+|`pmp-b1-203`|export-batch-2|single|predictive|3|During a kick-off meeting, the sponsor informs the project team that they can not attend any meetings for the first half of the…|
+|`pmp-b1-204`|export-batch-2|single|predictive|4|After several interviews with key stakeholders and checking the project charter, a project manager found that the current project…|
+|`pmp-b1-205`|export-batch-2|single|predictive|2|A project manager is working on the development of a business case to secure funding and resources.|
+|`pmp-b1-206`|export-batch-2|single|predictive|3|A project manager is tracking an infrastructure project that is dependent on a service provider. The service provider informed…|
+|`pmp-b1-207`|export-batch-2|single|predictive|1|A project team member assigned to a new project will be required to report on all project tasks progress to the project manager…|
+|`pmp-b1-208`|export-batch-2|single|predictive|2|A project manager is leading a project to develop a new system for a government agency using a predictive approach. The project's…|
+|`pmp-b1-209`|export-batch-2|single|hybrid|2|A project manager is on a hybrid project. The project manager meets with the sponsor to get the project milestones. The sponsor…|
+|`pmp-b1-210`|export-batch-2|single|predictive|4|A project manager is assigned to join a several year project mid-way. The project was stopped years ago due to organizational…|
+|`pmp-b1-211`|export-batch-2|single|predictive|3|A megaproject had reached 10% completion when there was a sudden change of company ownership. After being put on hold for a few…|
+|`pmp-b1-212`|export-batch-2|single|predictive|3|Leading a significant initiative to overhaul a corporation's IT infrastructure, the project manager has already navigated through…|
+|`pmp-b1-213`|export-batch-2|single|predictive|2|During one of your working group meetings, a stakeholder raises the concern that the product you are working on will be…|
+|`pmp-b1-214`|export-batch-2|single|predictive|2|You are working directly with the project sponsor, in the initial phase of a brand new project. The project sponsor asks for your…|
+|`pmp-b1-215`|export-batch-2|single|agile|2|Your organisation is starting to move to an agile way of work and they are setting up a Value Delivery Office (VDO) to complement…|
+|`pmp-b1-216`|export-batch-2|single|predictive|2|Your project team have planned the requirements, scope, schedule and cost for constructing a new building in your organisation.…|
+|`pmp-b1-217`|export-batch-2|single|predictive|1|You are new to a project and are approached by the functional manager. No one has been able to tell them exactly what the project…|
+|`pmp-b1-218`|export-batch-2|single|predictive|2|You are working as a project manager in an organisation with a new Project Management Office. They advise all project managers to…|
+|`pmp-b1-219`|export-batch-2|single|predictive|2|You have just joined an organisation, and are about to be allocated to an existing project, delivering a new Human Resources…|
+|`pmp-b1-220`|export-batch-2|single|predictive|2|You have just started work in a project that has been in development for the past six months. You notice it has been through a…|
+|`pmp-b1-221`|export-batch-2|single|predictive|1|You are a project manager brought on during the very early phase of the project. The project sponsor has asked you to create a…|
+|`pmp-b1-222`|export-batch-2|single|predictive|1|You have recently become a project manager for a large organisation and you are not sure what to expect. Your colleague tells you…|
+|`pmp-b1-223`|export-batch-2|single|hybrid|2|You are a Project Manager who has been tasked with initiating a new project for your area. You review the current organizational…|
+|`pmp-b1-224`|export-batch-2|single|predictive|1|You are working as a project manager, asking for proposals from a Third Parties to complete the work. Your brother works for one…|
+|`pmp-b1-225`|export-batch-2|single|predictive|2|You are working on a global project in other country, where it is customary to honour the project manager of a successful project…|
+|`pmp-b1-226`|export-batch-2|single|predictive|1|You have been asked to prepare a document to gain the project sponsor's sign off to access their function's resources, that…|

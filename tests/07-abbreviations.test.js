@@ -250,7 +250,7 @@ module.exports = [
       var diff = [];
       /* Agile and Tables now spell abbreviations out on first use (§09.5a),
          on purpose; 09-learning-abbr checks that text instead. The glossary
-         gained the lecture-theory terms (L6), also on purpose. */
+         gained the extra theory terms (L6), also on purpose. */
       for (var t of ["process", "principles"]) {
         await lib.go(a, "#/library?tab=" + t);
         await lib.go(b, "#/library?tab=" + t);

@@ -82,78 +82,78 @@ any question.
 |`pmp-pr1-138`|process-1|pulldown|hybrid|3|Prompts: Asked when the packing hall will be read… / Asked when retailers will be able to pla… / Asked what the programme as a whole will…|
 |`pmp-pr1-139`|process-1|fillblank|agile|2|A language-learning app team has 260 points left in its release backlog. Over its last six two-week sprints, velocity ranged from…|
 |`pmp-pr1-140`|process-1|hotspot|predictive|3|Your £2.1 million extension to a secondary school is scheduled to finish one week after the autumn term starts, and the governors…|
-|`pmp-pr1-1`|pmp-lectures-1-11|single|predictive|3|An urban hotel design project has an international, multidisciplinary, and cross-cultural team. The project manager is in the…|
-|`pmp-pr1-2`|pmp-lectures-1-11|single|hybrid|4|A project team is in the planning phase of a complex project. The project has an end-date constraint to launch a new product with…|
-|`pmp-pr1-3`|pmp-lectures-1-11|multi|predictive|4|A project manager has just taken over an ongoing project from another project manager. During a review of the project management…|
-|`pmp-pr1-4`|pmp-lectures-1-11|single|hybrid|3|During the design phase, a project manager realizes that the project will benefit from using adaptive tools. The effectiveness of…|
-|`pmp-pr1-201`|pmp-mocks-1-10|single|agile|2|In an innovative project, the sponsor wants to deliver a creative and large data processing platform to better serve the…|
-|`pmp-pr1-202`|pmp-mocks-1-10|single|predictive|3|A project manager is managing several interconnected projects. Some of these projects rely on specific deliverables from other…|
-|`pmp-pr1-203`|pmp-mocks-1-10|single|predictive|2|A project manager is assigned to a long-term project with a duration of three years.|
-|`pmp-pr1-204`|pmp-mocks-1-10|single|hybrid|3|A company in a heavily regulated industry is planning to release a new product not previously available in the market. The CEO…|
-|`pmp-pr1-205`|pmp-mocks-1-10|single|hybrid|3|A project manager is managing a project that has a component using agile. The project sponsor asks the project manager to add a…|
-|`pmp-pr1-206`|pmp-mocks-1-10|single|hybrid|3|The local government regulator has issued a notification to all companies regarding a new project aimed at facilitating…|
-|`pmp-pr1-207`|pmp-mocks-1-10|single|hybrid|4|A project is developing a product where the time to market is critical. During the execution phase, the client submits a change…|
-|`pmp-pr1-208`|pmp-mocks-1-10|single|predictive|3|A project schedule requires that two teams work simultaneously on separate parts of a complex project. The two parts of the…|
-|`pmp-pr1-209`|pmp-mocks-1-10|single|predictive|2|A project manager is currently overseeing a project from its inception and is aware that there are several assumptions and…|
-|`pmp-pr1-210`|pmp-mocks-1-10|single|hybrid|3|The project manager's last IT transformation project was canceled due to a misalignment of a business process with the accounting…|
-|`pmp-pr1-211`|pmp-mocks-1-10|single|hybrid|2|A team is working on a complex and fast-changing new product development project. After a recent process evaluation, the team…|
-|`pmp-pr1-212`|pmp-mocks-1-10|single|hybrid|3|During a team meeting, team members asked the project manager to advise them on project dependencies.|
-|`pmp-pr1-213`|pmp-mocks-1-10|single|hybrid|3|A company is using a predictive approach for the development of a particular component as defined in the scope management plan.…|
-|`pmp-pr1-214`|pmp-mocks-1-10|single|predictive|1|After preparing the project management plan, a project manager schedules a meeting with key stakeholders to finalize the planning…|
-|`pmp-pr1-215`|pmp-mocks-1-10|single|predictive|3|A complex project, involving multiple stakeholders with diverse priorities, requires long and challenging negotiations to…|
-|`pmp-pr1-216`|pmp-mocks-1-10|single|predictive|3|A project manager planning a strategic predictive project has suddenly fallen ill. The project baseline must be submitted to the…|
-|`pmp-pr1-217`|pmp-mocks-1-10|single|predictive|2|An organization is under a business transformation. The project manager has been assigned to a project related to one of the new…|
-|`pmp-pr1-218`|pmp-mocks-1-10|single|agile|2|A project manager recently joined a new organization. The project sponsor is a subject matter expert and wants to manage scope by…|
-|`pmp-pr1-219`|pmp-mocks-1-10|single|agile|1|A project manager is managing an agile project. A new team member, who has never worked in an agile team, joins the project. The…|
-|`pmp-pr1-220`|pmp-mocks-1-10|single|hybrid|3|A project management office (PMO) normally runs projects using the waterfall approach. A project currently in development is…|
-|`pmp-pr1-221`|pmp-mocks-1-10|single|hybrid|2|A project team is brainstorming the best project management methodology to recommend to senior management for adoption. The…|
-|`pmp-pr1-222`|pmp-mocks-1-10|single|agile|1|A project team has adopted a new project management methodology which entails holding regular review and retrospective meetings…|
-|`pmp-pr1-223`|pmp-mocks-1-10|single|hybrid|3|The project manager's company won a digital transformation project request for proposal (RFP) with clear scope, time and cost. As…|
-|`pmp-pr1-224`|pmp-mocks-1-10|single|hybrid|3|A project manager is planning a worldwide product launch. Manufacturing the product is subject to rigid time constraints related…|
-|`pmp-pr1-225`|pmp-mocks-1-10|single|hybrid|2|A company that is heavily focused on delivering projects using predictive approaches on-boards a new project manager who uses…|
-|`pmp-pr1-226`|pmp-mocks-1-10|single|agile|1|A project manager is managing a project where requirements are not fully known and a high level of uncertainty exists.|
-|`pmp-pr1-227`|pmp-mocks-1-10|single|hybrid|3|Project team A is launching a complex program in collaboration with project teams B, C, and D.|
-|`pmp-pr1-228`|pmp-mocks-1-10|single|hybrid|3|A project manager is beginning a new financial software project in a very competitive environment. The regulations for compliance…|
-|`pmp-pr1-229`|pmp-mocks-1-10|single|hybrid|2|A product development project has run into design issues. As a result, the team has decided to change the approach of the product…|
-|`pmp-pr1-230`|pmp-mocks-1-10|single|hybrid|2|Embarking on an enterprise-wide software upgrade project, distinctively different from the organization's usual IT initiatives,…|
-|`pmp-pr1-231`|pmp-mocks-1-10|single|hybrid|2|As a project unfolds for a global health initiative, the project manager identifies that the current online collaboration tools…|
-|`pmp-pr1-232`|pmp-mocks-1-10|single|hybrid|2|In a software development project, the project manager notices that the various project teams have differing priorities and…|
-|`pmp-pr1-233`|pmp-mocks-1-10|single|predictive|2|Just assigned to lead a new technology integration project, the project manager learns that no foundational project documentation…|
-|`pmp-pr1-234`|pmp-mocks-1-10|single|hybrid|2|You are managing a project where the majority of the product has been planned up-front, but an external system is needed from a…|
-|`pmp-pr1-235`|pmp-mocks-1-10|single|agile|2|You are working on a project where the requirements are clear but the solution ideas are uncertain. The product owner and the…|
-|`pmp-pr1-236`|pmp-mocks-1-10|single|agile|2|You are working on a new product for your organisation where the requirements are complex and are likely to change a few times as…|
-|`pmp-pr1-237`|pmp-mocks-1-10|single|predictive|2|A new project has been kicked off in your organisation due to a recent government inquiry into your industry, which found…|
-|`pmp-pr1-238`|pmp-mocks-1-10|single|agile|2|Your organisation is moving to an Agile way of work. Your project team are strongly opposed to using Agile as they have been…|
-|`pmp-pr1-239`|pmp-mocks-1-10|single|hybrid|2|Your team have not worked on projects before, and don't know about waterfall, agile, or any of the different models. You project…|
-|`pmp-pr1-240`|pmp-mocks-1-10|single|predictive|2|You a project manager in an organisation with a directive Project Management Office, and are currently in between projects. The…|
-|`pmp-pr1-241`|pmp-mocks-1-10|single|hybrid|2|Your Project Management Office has no prescribed way of work, so are working with a vendor who supplies an eXtreme Programming…|
-|`pmp-pr1-242`|pmp-mocks-1-10|single|hybrid|2|Your Project Management Office is in the middle of a company-wide "ways of working" transformation. They have taken a popular…|
-|`pmp-pr1-243`|pmp-mocks-1-10|single|hybrid|2|You are a manager of a PMO in a large organisation, which has recently undertaken a company- wide way of working transformation.…|
-|`pmp-pr1-244`|pmp-mocks-1-10|single|hybrid|2|You have been planning a project for the last two months, gathering requirements and scope and assigning tasks to a schedule. As…|
-|`pmp-pr1-245`|pmp-mocks-1-10|single|agile|1|You have been asked to make a process improvement in the accounting area of your organisation. You have been assigned a small…|
-|`pmp-pr1-246`|pmp-mocks-1-10|single|agile|2|You have been asked to initiate a project to deliver a new system. The requirements are not clear, and it will take some work to…|
-|`pmp-pr1-247`|pmp-mocks-1-10|single|predictive|1|You have been planning a project to deliver a process change for the past four weeks. The requirements and scope have been signed…|
-|`pmp-pr1-248`|pmp-mocks-1-10|single|agile|1|You are working on a project as an Agile Project Manager. The executive manager who will own the product you are delivering would…|
-|`pmp-pr1-249`|pmp-mocks-1-10|single|agile|1|You are working on a project and the team have recently moved to an Agile way of work. One of the team members is confused about…|
-|`pmp-pr1-250`|pmp-mocks-1-10|single|hybrid|2|You have been assigned to take over a project in your organisation that has gone off track, with scope creep causing the schedule…|
-|`pmp-pr1-251`|pmp-mocks-1-10|single|predictive|2|You have joined a car manufacturing company as a new project manager. Senior Management have asked you to take the necessary…|
-|`pmp-pr1-252`|pmp-mocks-1-10|single|hybrid|2|You are working on a new project where the design and project work, including all the scope and cost have been planned up front.…|
-|`pmp-pr1-253`|pmp-mocks-1-10|single|predictive|2|You have just created your project management plan and are reviewing it with your stakeholders. It includes the subsidiary plans…|
-|`pmp-pr1-254`|pmp-mocks-1-10|single|agile|1|In 2001, a group of individuals, representing the most widely used lightweight software development methodologies, agreed on a…|
-|`pmp-pr1-255`|pmp-mocks-1-10|single|hybrid|1|You are working with your project team in a way that ensures you Analyse the requirements, then Design, Build and Test for those…|
-|`pmp-pr1-256`|pmp-mocks-1-10|single|predictive|1|You are working on a project with clear procedures based on past projects. The product is clear and the risks are fairly well…|
-|`pmp-pr1-257`|pmp-mocks-1-10|single|agile|2|You are an Agile project manager leading a project team who is used to a Waterfall way of work. The project sponsor wants to plan…|
-|`pmp-pr1-258`|pmp-mocks-1-10|single|hybrid|1|You have begun a new project in a new organisation, and the project team mentions you are working in an iterative project…|
-|`pmp-pr1-259`|pmp-mocks-1-10|single|agile|1|In 2001, a group of individuals, representing the most widely used lightweight software development methodologies, agreed on a…|
-|`pmp-pr1-260`|pmp-mocks-1-10|single|agile|1|You are working on a project where the organisation wants to move towards an Agile way of work.|
-|`pmp-pr1-261`|pmp-mocks-1-10|single|predictive|1|You have come on board a new project team and have been advised that the project works with a predictive style project lifecycle.|
-|`pmp-pr1-262`|pmp-mocks-1-10|single|hybrid|2|You are in a new project team and working through which project lifecycle or way of work to use in order to deliver the products…|
-|`pmp-pr1-263`|pmp-mocks-1-10|single|hybrid|2|You are in the forming stages of a new project team, and deciding on the way of work to use when operating as a team.|
-|`pmp-pr1-264`|pmp-mocks-1-10|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values.|
-|`pmp-pr1-265`|pmp-mocks-1-10|single|agile|1|You are working with a team that is new to Agile and are using Scrum to manage the project. The business representative is…|
-|`pmp-pr1-266`|pmp-mocks-1-10|single|agile|1|There are multiple project life-cycles you can choose from, depending on the type of project, environment, deliverable and…|
-|`pmp-pr1-267`|pmp-mocks-1-10|single|predictive|2|You are in the planning phase of your project, having finished the various project plans required to begin. Your Project Sponsor…|
-|`pmp-pr1-268`|pmp-mocks-1-10|single|agile|1|Your organization has recently completed a new system for the sales department. New features still need to be added as the…|
+|`pmp-pr1-1`|export-batch-1|single|predictive|3|An urban hotel design project has an international, multidisciplinary, and cross-cultural team. The project manager is in the…|
+|`pmp-pr1-2`|export-batch-1|single|hybrid|4|A project team is in the planning phase of a complex project. The project has an end-date constraint to launch a new product with…|
+|`pmp-pr1-3`|export-batch-1|multi|predictive|4|A project manager has just taken over an ongoing project from another project manager. During a review of the project management…|
+|`pmp-pr1-4`|export-batch-1|single|hybrid|3|During the design phase, a project manager realizes that the project will benefit from using adaptive tools. The effectiveness of…|
+|`pmp-pr1-201`|export-batch-2|single|agile|2|In an innovative project, the sponsor wants to deliver a creative and large data processing platform to better serve the…|
+|`pmp-pr1-202`|export-batch-2|single|predictive|3|A project manager is managing several interconnected projects. Some of these projects rely on specific deliverables from other…|
+|`pmp-pr1-203`|export-batch-2|single|predictive|2|A project manager is assigned to a long-term project with a duration of three years.|
+|`pmp-pr1-204`|export-batch-2|single|hybrid|3|A company in a heavily regulated industry is planning to release a new product not previously available in the market. The CEO…|
+|`pmp-pr1-205`|export-batch-2|single|hybrid|3|A project manager is managing a project that has a component using agile. The project sponsor asks the project manager to add a…|
+|`pmp-pr1-206`|export-batch-2|single|hybrid|3|The local government regulator has issued a notification to all companies regarding a new project aimed at facilitating…|
+|`pmp-pr1-207`|export-batch-2|single|hybrid|4|A project is developing a product where the time to market is critical. During the execution phase, the client submits a change…|
+|`pmp-pr1-208`|export-batch-2|single|predictive|3|A project schedule requires that two teams work simultaneously on separate parts of a complex project. The two parts of the…|
+|`pmp-pr1-209`|export-batch-2|single|predictive|2|A project manager is currently overseeing a project from its inception and is aware that there are several assumptions and…|
+|`pmp-pr1-210`|export-batch-2|single|hybrid|3|The project manager's last IT transformation project was canceled due to a misalignment of a business process with the accounting…|
+|`pmp-pr1-211`|export-batch-2|single|hybrid|2|A team is working on a complex and fast-changing new product development project. After a recent process evaluation, the team…|
+|`pmp-pr1-212`|export-batch-2|single|hybrid|3|During a team meeting, team members asked the project manager to advise them on project dependencies.|
+|`pmp-pr1-213`|export-batch-2|single|hybrid|3|A company is using a predictive approach for the development of a particular component as defined in the scope management plan.…|
+|`pmp-pr1-214`|export-batch-2|single|predictive|1|After preparing the project management plan, a project manager schedules a meeting with key stakeholders to finalize the planning…|
+|`pmp-pr1-215`|export-batch-2|single|predictive|3|A complex project, involving multiple stakeholders with diverse priorities, requires long and challenging negotiations to…|
+|`pmp-pr1-216`|export-batch-2|single|predictive|3|A project manager planning a strategic predictive project has suddenly fallen ill. The project baseline must be submitted to the…|
+|`pmp-pr1-217`|export-batch-2|single|predictive|2|An organization is under a business transformation. The project manager has been assigned to a project related to one of the new…|
+|`pmp-pr1-218`|export-batch-2|single|agile|2|A project manager recently joined a new organization. The project sponsor is a subject matter expert and wants to manage scope by…|
+|`pmp-pr1-219`|export-batch-2|single|agile|1|A project manager is managing an agile project. A new team member, who has never worked in an agile team, joins the project. The…|
+|`pmp-pr1-220`|export-batch-2|single|hybrid|3|A project management office (PMO) normally runs projects using the waterfall approach. A project currently in development is…|
+|`pmp-pr1-221`|export-batch-2|single|hybrid|2|A project team is brainstorming the best project management methodology to recommend to senior management for adoption. The…|
+|`pmp-pr1-222`|export-batch-2|single|agile|1|A project team has adopted a new project management methodology which entails holding regular review and retrospective meetings…|
+|`pmp-pr1-223`|export-batch-2|single|hybrid|3|The project manager's company won a digital transformation project request for proposal (RFP) with clear scope, time and cost. As…|
+|`pmp-pr1-224`|export-batch-2|single|hybrid|3|A project manager is planning a worldwide product launch. Manufacturing the product is subject to rigid time constraints related…|
+|`pmp-pr1-225`|export-batch-2|single|hybrid|2|A company that is heavily focused on delivering projects using predictive approaches on-boards a new project manager who uses…|
+|`pmp-pr1-226`|export-batch-2|single|agile|1|A project manager is managing a project where requirements are not fully known and a high level of uncertainty exists.|
+|`pmp-pr1-227`|export-batch-2|single|hybrid|3|Project team A is launching a complex program in collaboration with project teams B, C, and D.|
+|`pmp-pr1-228`|export-batch-2|single|hybrid|3|A project manager is beginning a new financial software project in a very competitive environment. The regulations for compliance…|
+|`pmp-pr1-229`|export-batch-2|single|hybrid|2|A product development project has run into design issues. As a result, the team has decided to change the approach of the product…|
+|`pmp-pr1-230`|export-batch-2|single|hybrid|2|Embarking on an enterprise-wide software upgrade project, distinctively different from the organization's usual IT initiatives,…|
+|`pmp-pr1-231`|export-batch-2|single|hybrid|2|As a project unfolds for a global health initiative, the project manager identifies that the current online collaboration tools…|
+|`pmp-pr1-232`|export-batch-2|single|hybrid|2|In a software development project, the project manager notices that the various project teams have differing priorities and…|
+|`pmp-pr1-233`|export-batch-2|single|predictive|2|Just assigned to lead a new technology integration project, the project manager learns that no foundational project documentation…|
+|`pmp-pr1-234`|export-batch-2|single|hybrid|2|You are managing a project where the majority of the product has been planned up-front, but an external system is needed from a…|
+|`pmp-pr1-235`|export-batch-2|single|agile|2|You are working on a project where the requirements are clear but the solution ideas are uncertain. The product owner and the…|
+|`pmp-pr1-236`|export-batch-2|single|agile|2|You are working on a new product for your organisation where the requirements are complex and are likely to change a few times as…|
+|`pmp-pr1-237`|export-batch-2|single|predictive|2|A new project has been kicked off in your organisation due to a recent government inquiry into your industry, which found…|
+|`pmp-pr1-238`|export-batch-2|single|agile|2|Your organisation is moving to an Agile way of work. Your project team are strongly opposed to using Agile as they have been…|
+|`pmp-pr1-239`|export-batch-2|single|hybrid|2|Your team have not worked on projects before, and don't know about waterfall, agile, or any of the different models. You project…|
+|`pmp-pr1-240`|export-batch-2|single|predictive|2|You a project manager in an organisation with a directive Project Management Office, and are currently in between projects. The…|
+|`pmp-pr1-241`|export-batch-2|single|hybrid|2|Your Project Management Office has no prescribed way of work, so are working with a vendor who supplies an eXtreme Programming…|
+|`pmp-pr1-242`|export-batch-2|single|hybrid|2|Your Project Management Office is in the middle of a company-wide "ways of working" transformation. They have taken a popular…|
+|`pmp-pr1-243`|export-batch-2|single|hybrid|2|You are a manager of a PMO in a large organisation, which has recently undertaken a company- wide way of working transformation.…|
+|`pmp-pr1-244`|export-batch-2|single|hybrid|2|You have been planning a project for the last two months, gathering requirements and scope and assigning tasks to a schedule. As…|
+|`pmp-pr1-245`|export-batch-2|single|agile|1|You have been asked to make a process improvement in the accounting area of your organisation. You have been assigned a small…|
+|`pmp-pr1-246`|export-batch-2|single|agile|2|You have been asked to initiate a project to deliver a new system. The requirements are not clear, and it will take some work to…|
+|`pmp-pr1-247`|export-batch-2|single|predictive|1|You have been planning a project to deliver a process change for the past four weeks. The requirements and scope have been signed…|
+|`pmp-pr1-248`|export-batch-2|single|agile|1|You are working on a project as an Agile Project Manager. The executive manager who will own the product you are delivering would…|
+|`pmp-pr1-249`|export-batch-2|single|agile|1|You are working on a project and the team have recently moved to an Agile way of work. One of the team members is confused about…|
+|`pmp-pr1-250`|export-batch-2|single|hybrid|2|You have been assigned to take over a project in your organisation that has gone off track, with scope creep causing the schedule…|
+|`pmp-pr1-251`|export-batch-2|single|predictive|2|You have joined a car manufacturing company as a new project manager. Senior Management have asked you to take the necessary…|
+|`pmp-pr1-252`|export-batch-2|single|hybrid|2|You are working on a new project where the design and project work, including all the scope and cost have been planned up front.…|
+|`pmp-pr1-253`|export-batch-2|single|predictive|2|You have just created your project management plan and are reviewing it with your stakeholders. It includes the subsidiary plans…|
+|`pmp-pr1-254`|export-batch-2|single|agile|1|In 2001, a group of individuals, representing the most widely used lightweight software development methodologies, agreed on a…|
+|`pmp-pr1-255`|export-batch-2|single|hybrid|1|You are working with your project team in a way that ensures you Analyse the requirements, then Design, Build and Test for those…|
+|`pmp-pr1-256`|export-batch-2|single|predictive|1|You are working on a project with clear procedures based on past projects. The product is clear and the risks are fairly well…|
+|`pmp-pr1-257`|export-batch-2|single|agile|2|You are an Agile project manager leading a project team who is used to a Waterfall way of work. The project sponsor wants to plan…|
+|`pmp-pr1-258`|export-batch-2|single|hybrid|1|You have begun a new project in a new organisation, and the project team mentions you are working in an iterative project…|
+|`pmp-pr1-259`|export-batch-2|single|agile|1|In 2001, a group of individuals, representing the most widely used lightweight software development methodologies, agreed on a…|
+|`pmp-pr1-260`|export-batch-2|single|agile|1|You are working on a project where the organisation wants to move towards an Agile way of work.|
+|`pmp-pr1-261`|export-batch-2|single|predictive|1|You have come on board a new project team and have been advised that the project works with a predictive style project lifecycle.|
+|`pmp-pr1-262`|export-batch-2|single|hybrid|2|You are in a new project team and working through which project lifecycle or way of work to use in order to deliver the products…|
+|`pmp-pr1-263`|export-batch-2|single|hybrid|2|You are in the forming stages of a new project team, and deciding on the way of work to use when operating as a team.|
+|`pmp-pr1-264`|export-batch-2|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values.|
+|`pmp-pr1-265`|export-batch-2|single|agile|1|You are working with a team that is new to Agile and are using Scrum to manage the project. The business representative is…|
+|`pmp-pr1-266`|export-batch-2|single|agile|1|There are multiple project life-cycles you can choose from, depending on the type of project, environment, deliverable and…|
+|`pmp-pr1-267`|export-batch-2|single|predictive|2|You are in the planning phase of your project, having finished the various project plans required to begin. Your Project Sponsor…|
+|`pmp-pr1-268`|export-batch-2|single|agile|1|Your organization has recently completed a new system for the sales department. New features still need to be added as the…|
 
 ### process-2 · Scope — 118 items
 
@@ -216,69 +216,69 @@ any question.
 |`pmp-pr2-138`|process-2|pulldown|hybrid|3|Prompts: The steering committee funds the capabil… / A driver suggests that proof of delivery… / Installing the extension's loading-bay d…|
 |`pmp-pr2-139`|process-2|fillblank|agile|3|A fitness app team has six sprints left before a fixed launch date. Its last eight sprints delivered between 34 and 42 points…|
 |`pmp-pr2-140`|process-2|hotspot|predictive|2|The context diagram for a café chain's new loyalty system shows five external interfaces. Each label states how the draft scope…|
-|`pmp-pr2-1`|pmp-lectures-1-11|single|agile|4|A Scrum team is halfway to its release. During the sprint demo, new software is selected by one of the developers and presented…|
-|`pmp-pr2-2`|pmp-lectures-1-11|single|hybrid|3|During a Scrum board review for a hybrid project, a team member suggests adding a task that is outside of the baseline scope.…|
-|`pmp-pr2-3`|pmp-lectures-1-11|single|agile|3|During an iteration, the team spent twice as much time as expected because one of the product backlog items was complex and could…|
-|`pmp-pr2-4`|pmp-lectures-1-11|single|predictive|4|A project manager has been asked to manage an existing complex project. Some goals have already been delivered by the previous…|
-|`pmp-pr2-5`|pmp-lectures-1-11|single|predictive|3|A project manager has developed a schedule for a project involving various departments. The project manager met with each team…|
-|`pmp-pr2-6`|pmp-lectures-1-11|single|agile|3|A customer reviewed a product and requested additional features that were not in the requirements documentation. The…|
-|`pmp-pr2-7`|pmp-lectures-1-11|single|predictive|3|Part of a project has already been delivered as planned and on schedule. However, unclear requirements for some of the remaining…|
-|`pmp-pr2-8`|pmp-lectures-1-11|single|predictive|3|There are concerns that a scheduled-for-release product may not meet the agreed-upon end user requirements.|
-|`pmp-pr2-201`|pmp-mocks-1-10|single|agile|2|A project manager is working on an agile project with a cross-functional team. The project manager is informed that some team…|
-|`pmp-pr2-202`|pmp-mocks-1-10|single|predictive|3|A project manager received a complaint that the project team did not respond correctly to a client's request. However, the…|
-|`pmp-pr2-203`|pmp-mocks-1-10|single|predictive|3|After nine months, a project concludes its first phase with the release of a new product to the customer. The client is…|
-|`pmp-pr2-204`|pmp-mocks-1-10|single|predictive|3|The quality management plan (QMP) calls for regression testing before each product release, but these tests were not included in…|
-|`pmp-pr2-205`|pmp-mocks-1-10|single|hybrid|4|A project manager is asked to manage a project that will allow the company to comply with a new, upcoming regulation. Just after…|
-|`pmp-pr2-206`|pmp-mocks-1-10|single|predictive|3|During acceptance testing of a deliverable, some senior stakeholders complain that a feature essential to their department was…|
-|`pmp-pr2-207`|pmp-mocks-1-10|single|predictive|3|A new project manager has been assigned to a project during its execution stage. During a review of the work breakdown structure…|
-|`pmp-pr2-208`|pmp-mocks-1-10|single|predictive|2|During the project planning phase, the stakeholders neglected to document an essential system feature. The client realizes the…|
-|`pmp-pr2-209`|pmp-mocks-1-10|single|agile|2|An application developer took a story card to work that read "Customer can pay using credit card". After the implementation, the…|
-|`pmp-pr2-210`|pmp-mocks-1-10|single|predictive|2|During the weekly meeting, team members are reviewing the tasks assigned by the Project Manager. A few team members are…|
-|`pmp-pr2-211`|pmp-mocks-1-10|single|hybrid|3|A project manager is working with a team to develop work packages. The project manager noticed a gap in the requirements…|
-|`pmp-pr2-212`|pmp-mocks-1-10|single|predictive|2|A key stakeholder has submitted several requests for new functions for a product under development. The project manager just…|
-|`pmp-pr2-213`|pmp-mocks-1-10|single|hybrid|3|A transportation company is transforming its operational processes and the main system this company uses to move freight. The…|
-|`pmp-pr2-214`|pmp-mocks-1-10|single|predictive|3|A project is entering the user acceptance testing phase. After several business end users raised questions and concerns, the…|
-|`pmp-pr2-215`|pmp-mocks-1-10|single|predictive|2|A project manager is hired by an organization and is given a project that has a vague scope and unclear deliverable requirements.|
-|`pmp-pr2-216`|pmp-mocks-1-10|single|predictive|3|During a periodic review with stakeholders, the project sponsor asks how the project will measure satisfactory completion of the…|
-|`pmp-pr2-217`|pmp-mocks-1-10|single|agile|1|A project manager was assigned to deliver new software for university students. In this project, the software is being delivered…|
-|`pmp-pr2-218`|pmp-mocks-1-10|single|agile|2|A project manager is assigned to a project that is transitioning the organization to adopt agile principles. The project scope…|
-|`pmp-pr2-219`|pmp-mocks-1-10|multi|hybrid|3|During a status meeting, a team member alerts the project manager that the delivery timeline for a component prototype is…|
-|`pmp-pr2-220`|pmp-mocks-1-10|single|predictive|2|The research and development team is planning to build a new facility that will focus on improving existing products the…|
-|`pmp-pr2-221`|pmp-mocks-1-10|single|predictive|1|Following the approval of the project charter, the project manager begins working with the team to organize the project's scope…|
-|`pmp-pr2-222`|pmp-mocks-1-10|single|agile|1|A project manager is leading the development of a new customer support software system. During a sprint, a developer encounters…|
-|`pmp-pr2-223`|pmp-mocks-1-10|single|agile|1|During the development of a new healthcare software system, the project manager requests that the project owner prioritize…|
-|`pmp-pr2-224`|pmp-mocks-1-10|single|predictive|2|During a healthcare facility upgrade project, a project manager is informed by a key stakeholder that certain advanced…|
-|`pmp-pr2-225`|pmp-mocks-1-10|single|predictive|3|In the critical validation stage of a software development project, a third-party component fails to meet the expected…|
-|`pmp-pr2-226`|pmp-mocks-1-10|single|predictive|2|During a project review, the client identifies a crucial feature in the new software application that was discussed but not…|
-|`pmp-pr2-227`|pmp-mocks-1-10|single|predictive|3|In the midst of a software development project, the project manager notices that the software's features are not aligning with…|
-|`pmp-pr2-228`|pmp-mocks-1-10|single|predictive|3|To counteract the issue of certain team members disproportionately influencing the outcome of project scope discussions, the…|
-|`pmp-pr2-229`|pmp-mocks-1-10|single|predictive|1|When the project manager of a software development project finds that the specifications provided by the client are ambiguous,…|
-|`pmp-pr2-230`|pmp-mocks-1-10|single|predictive|2|You have collected the requirements for your project, matched them to project scope, and broken them down into smaller parts and…|
-|`pmp-pr2-231`|pmp-mocks-1-10|single|agile|2|You are working on an agile project where the functional area you are delivering to only has a high level idea of the system…|
-|`pmp-pr2-232`|pmp-mocks-1-10|single|agile|2|You are an Agile project manager and have begun creating user stories with your Agile project team to go into the product…|
-|`pmp-pr2-233`|pmp-mocks-1-10|single|predictive|1|You are working on a project to build a new parkland for the community. The person in charge of parkland design approaches you as…|
-|`pmp-pr2-234`|pmp-mocks-1-10|single|agile|2|You are working in a project team that has recently moved to an Agile way of work. Your business analysts want to gather the…|
-|`pmp-pr2-235`|pmp-mocks-1-10|single|agile|2|You are working as a Product Owner, and have placed high level information about the product in the product backlog, and the…|
-|`pmp-pr2-236`|pmp-mocks-1-10|single|agile|2|You are gathering requirements for a new feature in a customer management system. The product owner has given a user interface…|
-|`pmp-pr2-237`|pmp-mocks-1-10|single|agile|1|You are working in an agile team who are trying to break down the project requirements and scope. They have created a scope…|
-|`pmp-pr2-238`|pmp-mocks-1-10|single|agile|1|You are half way through your current sprint of two weeks. The work is progressing well, however you notice that there is not…|
-|`pmp-pr2-239`|pmp-mocks-1-10|single|predictive|1|A new executive has started in the functional area you are delivering to. They are concerned the project is not delivering what…|
-|`pmp-pr2-240`|pmp-mocks-1-10|single|predictive|2|You are in the planning stages of your project, where you need to find out exactly what the project customer needs so you can…|
-|`pmp-pr2-241`|pmp-mocks-1-10|single|predictive|2|You are planning your project and have captured the requirements from the project customer. You ask your team to plan the project…|
-|`pmp-pr2-242`|pmp-mocks-1-10|single|agile|1|You have created a high level view of the features your project will deliver, and prioritised them. The development team is ready…|
-|`pmp-pr2-243`|pmp-mocks-1-10|single|agile|2|You are working on an Agile project, gathering requirements from the business stakeholders with the Product Owner. During the…|
-|`pmp-pr2-244`|pmp-mocks-1-10|single|agile|2|The product owner has worked with the development team to list all work to be done, write up user stories for each feature and…|
-|`pmp-pr2-245`|pmp-mocks-1-10|single|agile|2|You are the Agile project manager working through the product requirements for the product owner and executive project sponsor.…|
-|`pmp-pr2-246`|pmp-mocks-1-10|single|agile|1|When working in an Agile team it is common to use prototypes, demonstrations and reviews, wireframes and storyboards to elicit…|
-|`pmp-pr2-247`|pmp-mocks-1-10|single|predictive|2|You are working through the scope of a newly kicked-off project, and the senior user is unsure on how the requirements and scope…|
-|`pmp-pr2-248`|pmp-mocks-1-10|single|predictive|2|Your project team have just finished defining the scope of the project. They have matched the scope to the original requirements…|
-|`pmp-pr2-249`|pmp-mocks-1-10|single|predictive|3|You have just taken over a project that is approximately half-way through, and has used around 75% of its budget. A change to one…|
-|`pmp-pr2-250`|pmp-mocks-1-10|single|predictive|2|You have used a project charter and statement of work to create a project management plan. You present the plan to key…|
-|`pmp-pr2-251`|pmp-mocks-1-10|single|predictive|2|Your project charter has recently been approved, and you are gathering the customer requirements that will form the basis of your…|
-|`pmp-pr2-252`|pmp-mocks-1-10|single|predictive|1|You have been planning your project using a waterfall methodology. The project team have collected the requirements from the…|
-|`pmp-pr2-253`|pmp-mocks-1-10|single|agile|1|You are working with your Agile team on your first iteration. The feature has been chosen by the product owner and the team…|
-|`pmp-pr2-254`|pmp-mocks-1-10|single|agile|1|You are working on the product backlog with your Agile project team, and creating user stories to be prioritised.|
-|`pmp-pr2-255`|pmp-mocks-1-10|single|hybrid|1|You have been assigned to a project in your organization, and have been given a list of high-level features or deliverables that…|
+|`pmp-pr2-1`|export-batch-1|single|agile|4|A Scrum team is halfway to its release. During the sprint demo, new software is selected by one of the developers and presented…|
+|`pmp-pr2-2`|export-batch-1|single|hybrid|3|During a Scrum board review for a hybrid project, a team member suggests adding a task that is outside of the baseline scope.…|
+|`pmp-pr2-3`|export-batch-1|single|agile|3|During an iteration, the team spent twice as much time as expected because one of the product backlog items was complex and could…|
+|`pmp-pr2-4`|export-batch-1|single|predictive|4|A project manager has been asked to manage an existing complex project. Some goals have already been delivered by the previous…|
+|`pmp-pr2-5`|export-batch-1|single|predictive|3|A project manager has developed a schedule for a project involving various departments. The project manager met with each team…|
+|`pmp-pr2-6`|export-batch-1|single|agile|3|A customer reviewed a product and requested additional features that were not in the requirements documentation. The…|
+|`pmp-pr2-7`|export-batch-1|single|predictive|3|Part of a project has already been delivered as planned and on schedule. However, unclear requirements for some of the remaining…|
+|`pmp-pr2-8`|export-batch-1|single|predictive|3|There are concerns that a scheduled-for-release product may not meet the agreed-upon end user requirements.|
+|`pmp-pr2-201`|export-batch-2|single|agile|2|A project manager is working on an agile project with a cross-functional team. The project manager is informed that some team…|
+|`pmp-pr2-202`|export-batch-2|single|predictive|3|A project manager received a complaint that the project team did not respond correctly to a client's request. However, the…|
+|`pmp-pr2-203`|export-batch-2|single|predictive|3|After nine months, a project concludes its first phase with the release of a new product to the customer. The client is…|
+|`pmp-pr2-204`|export-batch-2|single|predictive|3|The quality management plan (QMP) calls for regression testing before each product release, but these tests were not included in…|
+|`pmp-pr2-205`|export-batch-2|single|hybrid|4|A project manager is asked to manage a project that will allow the company to comply with a new, upcoming regulation. Just after…|
+|`pmp-pr2-206`|export-batch-2|single|predictive|3|During acceptance testing of a deliverable, some senior stakeholders complain that a feature essential to their department was…|
+|`pmp-pr2-207`|export-batch-2|single|predictive|3|A new project manager has been assigned to a project during its execution stage. During a review of the work breakdown structure…|
+|`pmp-pr2-208`|export-batch-2|single|predictive|2|During the project planning phase, the stakeholders neglected to document an essential system feature. The client realizes the…|
+|`pmp-pr2-209`|export-batch-2|single|agile|2|An application developer took a story card to work that read "Customer can pay using credit card". After the implementation, the…|
+|`pmp-pr2-210`|export-batch-2|single|predictive|2|During the weekly meeting, team members are reviewing the tasks assigned by the Project Manager. A few team members are…|
+|`pmp-pr2-211`|export-batch-2|single|hybrid|3|A project manager is working with a team to develop work packages. The project manager noticed a gap in the requirements…|
+|`pmp-pr2-212`|export-batch-2|single|predictive|2|A key stakeholder has submitted several requests for new functions for a product under development. The project manager just…|
+|`pmp-pr2-213`|export-batch-2|single|hybrid|3|A transportation company is transforming its operational processes and the main system this company uses to move freight. The…|
+|`pmp-pr2-214`|export-batch-2|single|predictive|3|A project is entering the user acceptance testing phase. After several business end users raised questions and concerns, the…|
+|`pmp-pr2-215`|export-batch-2|single|predictive|2|A project manager is hired by an organization and is given a project that has a vague scope and unclear deliverable requirements.|
+|`pmp-pr2-216`|export-batch-2|single|predictive|3|During a periodic review with stakeholders, the project sponsor asks how the project will measure satisfactory completion of the…|
+|`pmp-pr2-217`|export-batch-2|single|agile|1|A project manager was assigned to deliver new software for university students. In this project, the software is being delivered…|
+|`pmp-pr2-218`|export-batch-2|single|agile|2|A project manager is assigned to a project that is transitioning the organization to adopt agile principles. The project scope…|
+|`pmp-pr2-219`|export-batch-2|multi|hybrid|3|During a status meeting, a team member alerts the project manager that the delivery timeline for a component prototype is…|
+|`pmp-pr2-220`|export-batch-2|single|predictive|2|The research and development team is planning to build a new facility that will focus on improving existing products the…|
+|`pmp-pr2-221`|export-batch-2|single|predictive|1|Following the approval of the project charter, the project manager begins working with the team to organize the project's scope…|
+|`pmp-pr2-222`|export-batch-2|single|agile|1|A project manager is leading the development of a new customer support software system. During a sprint, a developer encounters…|
+|`pmp-pr2-223`|export-batch-2|single|agile|1|During the development of a new healthcare software system, the project manager requests that the project owner prioritize…|
+|`pmp-pr2-224`|export-batch-2|single|predictive|2|During a healthcare facility upgrade project, a project manager is informed by a key stakeholder that certain advanced…|
+|`pmp-pr2-225`|export-batch-2|single|predictive|3|In the critical validation stage of a software development project, a third-party component fails to meet the expected…|
+|`pmp-pr2-226`|export-batch-2|single|predictive|2|During a project review, the client identifies a crucial feature in the new software application that was discussed but not…|
+|`pmp-pr2-227`|export-batch-2|single|predictive|3|In the midst of a software development project, the project manager notices that the software's features are not aligning with…|
+|`pmp-pr2-228`|export-batch-2|single|predictive|3|To counteract the issue of certain team members disproportionately influencing the outcome of project scope discussions, the…|
+|`pmp-pr2-229`|export-batch-2|single|predictive|1|When the project manager of a software development project finds that the specifications provided by the client are ambiguous,…|
+|`pmp-pr2-230`|export-batch-2|single|predictive|2|You have collected the requirements for your project, matched them to project scope, and broken them down into smaller parts and…|
+|`pmp-pr2-231`|export-batch-2|single|agile|2|You are working on an agile project where the functional area you are delivering to only has a high level idea of the system…|
+|`pmp-pr2-232`|export-batch-2|single|agile|2|You are an Agile project manager and have begun creating user stories with your Agile project team to go into the product…|
+|`pmp-pr2-233`|export-batch-2|single|predictive|1|You are working on a project to build a new parkland for the community. The person in charge of parkland design approaches you as…|
+|`pmp-pr2-234`|export-batch-2|single|agile|2|You are working in a project team that has recently moved to an Agile way of work. Your business analysts want to gather the…|
+|`pmp-pr2-235`|export-batch-2|single|agile|2|You are working as a Product Owner, and have placed high level information about the product in the product backlog, and the…|
+|`pmp-pr2-236`|export-batch-2|single|agile|2|You are gathering requirements for a new feature in a customer management system. The product owner has given a user interface…|
+|`pmp-pr2-237`|export-batch-2|single|agile|1|You are working in an agile team who are trying to break down the project requirements and scope. They have created a scope…|
+|`pmp-pr2-238`|export-batch-2|single|agile|1|You are half way through your current sprint of two weeks. The work is progressing well, however you notice that there is not…|
+|`pmp-pr2-239`|export-batch-2|single|predictive|1|A new executive has started in the functional area you are delivering to. They are concerned the project is not delivering what…|
+|`pmp-pr2-240`|export-batch-2|single|predictive|2|You are in the planning stages of your project, where you need to find out exactly what the project customer needs so you can…|
+|`pmp-pr2-241`|export-batch-2|single|predictive|2|You are planning your project and have captured the requirements from the project customer. You ask your team to plan the project…|
+|`pmp-pr2-242`|export-batch-2|single|agile|1|You have created a high level view of the features your project will deliver, and prioritised them. The development team is ready…|
+|`pmp-pr2-243`|export-batch-2|single|agile|2|You are working on an Agile project, gathering requirements from the business stakeholders with the Product Owner. During the…|
+|`pmp-pr2-244`|export-batch-2|single|agile|2|The product owner has worked with the development team to list all work to be done, write up user stories for each feature and…|
+|`pmp-pr2-245`|export-batch-2|single|agile|2|You are the Agile project manager working through the product requirements for the product owner and executive project sponsor.…|
+|`pmp-pr2-246`|export-batch-2|single|agile|1|When working in an Agile team it is common to use prototypes, demonstrations and reviews, wireframes and storyboards to elicit…|
+|`pmp-pr2-247`|export-batch-2|single|predictive|2|You are working through the scope of a newly kicked-off project, and the senior user is unsure on how the requirements and scope…|
+|`pmp-pr2-248`|export-batch-2|single|predictive|2|Your project team have just finished defining the scope of the project. They have matched the scope to the original requirements…|
+|`pmp-pr2-249`|export-batch-2|single|predictive|3|You have just taken over a project that is approximately half-way through, and has used around 75% of its budget. A change to one…|
+|`pmp-pr2-250`|export-batch-2|single|predictive|2|You have used a project charter and statement of work to create a project management plan. You present the plan to key…|
+|`pmp-pr2-251`|export-batch-2|single|predictive|2|Your project charter has recently been approved, and you are gathering the customer requirements that will form the basis of your…|
+|`pmp-pr2-252`|export-batch-2|single|predictive|1|You have been planning your project using a waterfall methodology. The project team have collected the requirements from the…|
+|`pmp-pr2-253`|export-batch-2|single|agile|1|You are working with your Agile team on your first iteration. The feature has been chosen by the product owner and the team…|
+|`pmp-pr2-254`|export-batch-2|single|agile|1|You are working on the product backlog with your Agile project team, and creating user stories to be prioritised.|
+|`pmp-pr2-255`|export-batch-2|single|hybrid|1|You have been assigned to a project in your organization, and have been given a list of high-level features or deliverables that…|
 
 ### process-3 · Value delivery — 149 items
 
@@ -342,99 +342,99 @@ any question.
 |`pmp-pr3-138`|process-3|pulldown|hybrid|2|Prompts: Route-planning software lets the existin… / An online repairs service lets the counc… / Finance officers each save four hours a…|
 |`pmp-pr3-139`|process-3|fillblank|agile|3|A meal-kit company's product owner is weighing a family-plan feature that costs £120,000 to build. If families take it up, it…|
 |`pmp-pr3-140`|process-3|hotspot|hybrid|3|A hybrid programme is building a new central library to a fixed opening date. The agile team building its online room-booking…|
-|`pmp-pr3-1`|pmp-lectures-1-11|single|predictive|2|A project is nearing completion and a stakeholder wants to know how the project outcomes will impact the organization.|
-|`pmp-pr3-2`|pmp-lectures-1-11|single|predictive|3|At the beginning of a project, a stakeholder is concerned that the initiative may not deliver value to the organization.|
-|`pmp-pr3-3`|pmp-lectures-1-11|single|predictive|2|A lengthy upgrade project is being delivered in a series of phased outputs. The end users will face some level of disruption…|
-|`pmp-pr3-4`|pmp-lectures-1-11|single|predictive|3|During the final stage of a project, one of the key stakeholders asks the project manager to brief the executive board about the…|
-|`pmp-pr3-5`|pmp-lectures-1-11|single|predictive|2|A project manager has completed the project deliverable and has passed the acceptance criteria.|
-|`pmp-pr3-6`|pmp-lectures-1-11|single|hybrid|4|As a project is nearing completion, a struggle between the product owner and the project sponsor regarding who owns the benefits…|
-|`pmp-pr3-7`|pmp-lectures-1-11|single|hybrid|3|A company is transitioning from using a predictive approach to a hybrid predictive-agile project implementation. The leadership…|
-|`pmp-pr3-8`|pmp-lectures-1-11|single|predictive|3|A newly hired project manager is assigned to a school construction project. The school serves students from surrounding…|
-|`pmp-pr3-9`|pmp-lectures-1-11|single|agile|3|An agile project is in its first of ten iterations. After the iteration review, the team receives stakeholder feedback that the…|
-|`pmp-pr3-10`|pmp-lectures-1-11|single|hybrid|3|During the final sprint review, the product owner stated that the product does not deliver any value. The project manager…|
-|`pmp-pr3-11`|pmp-lectures-1-11|single|agile|4|During sprint planning, an agile team and product owner identified that the team should be able to finish five user stories.…|
-|`pmp-pr3-12`|pmp-lectures-1-11|single|agile|3|An organization makes an acquisition of a similar product halfway through the development cycle of a potential product. This…|
-|`pmp-pr3-201`|pmp-mocks-1-10|single|hybrid|3|A scrum team is using a hybrid approach with 2-week sprints. The minimum viable product (MVP) release is at the end of the…|
-|`pmp-pr3-202`|pmp-mocks-1-10|single|agile|3|A business manager and product owner are requesting a more flexible way to incorporate changes into the product backlog. They…|
-|`pmp-pr3-203`|pmp-mocks-1-10|single|agile|2|An agile team is receiving multiple unplanned requests for product enhancements in an iteration. This impediment is causing the…|
-|`pmp-pr3-204`|pmp-mocks-1-10|single|predictive|3|At the end of a large project, the stakeholders realize that the achieved benefits are not the same as the expected benefits.|
-|`pmp-pr3-205`|pmp-mocks-1-10|single|agile|3|An agile project team has been successfully releasing updated deliverables each sprint that consistently provide an increased…|
-|`pmp-pr3-206`|pmp-mocks-1-10|single|agile|2|During a project planning session, the project manager is trying to define a release plan to achieve consistent value delivery…|
-|`pmp-pr3-207`|pmp-mocks-1-10|single|agile|3|A project manager is working on launching a minimum viable product (MVP) for a new-to-market product. The team has successfully…|
-|`pmp-pr3-208`|pmp-mocks-1-10|single|hybrid|3|During product development, two functional departments indicate that they are short on resources and cannot build and deliver all…|
-|`pmp-pr3-209`|pmp-mocks-1-10|single|agile|3|A project manager has developed a project management plan based on agile methodologies in an effort to deliver the product…|
-|`pmp-pr3-210`|pmp-mocks-1-10|multi|predictive|4|A project manager is leading a project to implement a process improvement software system that was developed in-house. However,…|
-|`pmp-pr3-211`|pmp-mocks-1-10|single|agile|3|In an agile project, the project status indicates that the project is 95% completed. During an iteration review, the stakeholders…|
-|`pmp-pr3-212`|pmp-mocks-1-10|single|predictive|3|A project is close to completion, and the customer wants to celebrate the success by sharing a business case about the benefits…|
-|`pmp-pr3-213`|pmp-mocks-1-10|single|agile|3|A project manager is overseeing a project aimed at providing customers with real-time shipment tracking capabilities. The project…|
-|`pmp-pr3-214`|pmp-mocks-1-10|single|predictive|3|During sign-off for a strategic project that resulted in additional costs, a project manager was unable to justify the additional…|
-|`pmp-pr3-215`|pmp-mocks-1-10|single|hybrid|2|A marketing team is developing ideas in order to revamp an existing product. The marketing executive reaches out to the project…|
-|`pmp-pr3-216`|pmp-mocks-1-10|single|agile|2|An agile project is in its last iteration. During the daily standup, the team realizes that they will not be able to complete all…|
-|`pmp-pr3-217`|pmp-mocks-1-10|single|predictive|3|A project manager has been assigned to a project to implement an asset health management system. The executive business sponsor…|
-|`pmp-pr3-218`|pmp-mocks-1-10|single|predictive|3|During a new technology project, confusion arises due to the lack of a clearly defined and communicated future state of the…|
-|`pmp-pr3-219`|pmp-mocks-1-10|single|agile|2|A team member suggests using a new product to speed up feature development, but this will increase the project budget. The…|
-|`pmp-pr3-220`|pmp-mocks-1-10|single|agile|3|A new system is being developed to replace an existing manual process. During a sprint demo, business stakeholders expressed the…|
-|`pmp-pr3-221`|pmp-mocks-1-10|single|agile|3|Due to a downturn in the business environment, a customer is only able to make a project's payment in part, rather than the fully…|
-|`pmp-pr3-222`|pmp-mocks-1-10|single|agile|3|A startup in its early stages has been acquired by a major company. In light of this new scenario, the project manager has been…|
-|`pmp-pr3-223`|pmp-mocks-1-10|single|predictive|3|A project manager works in a matrix organization and manages an internal software development project to improve the company's…|
-|`pmp-pr3-224`|pmp-mocks-1-10|single|predictive|3|A large-scale, multiyear transformation project was completed as per the defined requirements and within the approved budget and…|
-|`pmp-pr3-225`|pmp-mocks-1-10|single|agile|2|A project manager is working on a software development project. Several team members have become overly focused on delivering…|
-|`pmp-pr3-226`|pmp-mocks-1-10|single|predictive|3|A project manager is leading a business transformation project at a company facing significant financial challenges due to a…|
-|`pmp-pr3-227`|pmp-mocks-1-10|single|predictive|3|A project manager is assigned to a complex IT project that is expected to deliver significant benefits to the organization. The…|
-|`pmp-pr3-228`|pmp-mocks-1-10|single|agile|3|A product owner has been attending daily standups but seems focused only on the budget and costs of each iteration. When…|
-|`pmp-pr3-229`|pmp-mocks-1-10|single|hybrid|3|In the middle of a three-year-long project, the company committee overseeing the project becomes uncertain about whether the…|
-|`pmp-pr3-230`|pmp-mocks-1-10|single|predictive|2|A project manager is overseeing the development and launch of a new product. In order to comply with the Project Management…|
-|`pmp-pr3-231`|pmp-mocks-1-10|single|agile|3|A project manager has started a new project with a 24 month timeline. Soon after the kickoff, the sponsor informs the project…|
-|`pmp-pr3-232`|pmp-mocks-1-10|single|agile|2|During a complex project, a stakeholder informs the project manager about a requirement and proposes to call a meeting to inform…|
-|`pmp-pr3-233`|pmp-mocks-1-10|single|hybrid|3|A project manager is overseeing a project with an extremely tight schedule. During a meeting, the project stakeholders express…|
-|`pmp-pr3-234`|pmp-mocks-1-10|single|predictive|2|An organization is redesigning and relaunching a key product. The stakeholders are all company executives and want to ensure that…|
-|`pmp-pr3-235`|pmp-mocks-1-10|single|predictive|1|A project manager is part of a project management strategy focus group that is brainstorming the ways projects will be used to…|
-|`pmp-pr3-236`|pmp-mocks-1-10|single|agile|1|An agile team is determining which activities to complete first during an upcoming project iteration for a new product…|
-|`pmp-pr3-237`|pmp-mocks-1-10|single|predictive|2|A project manager is midway through project delivery. The project manager decides to hold a stakeholder engagement meeting with…|
-|`pmp-pr3-238`|pmp-mocks-1-10|single|predictive|3|Due to regulatory changes, a government agency is now a key stakeholder in a complex project. An agency representative has asked…|
-|`pmp-pr3-239`|pmp-mocks-1-10|single|agile|2|During a standup, a project team member suggests modifying some features to benefit from a new opportunity. Another team member…|
-|`pmp-pr3-240`|pmp-mocks-1-10|single|agile|3|A project manager is leading a development project for a high-profile client with strict deadlines. During a sprint, the project…|
-|`pmp-pr3-241`|pmp-mocks-1-10|single|agile|3|A product company is transforming the way it develops and releases products in the market. Executives believe that this is a…|
-|`pmp-pr3-242`|pmp-mocks-1-10|single|hybrid|3|A customer indicates that they would like to add functionality. Although this request is made during the execution phase of the…|
-|`pmp-pr3-243`|pmp-mocks-1-10|single|predictive|2|Before a project evaluation meeting, a key stakeholder complains that the project does not deliver the expected business…|
-|`pmp-pr3-244`|pmp-mocks-1-10|single|agile|3|During an agile iteration, Task 1 cannot be completed on time due to unexpected challenges. Another team within the project is…|
-|`pmp-pr3-245`|pmp-mocks-1-10|single|agile|2|During a daily standup, some team members realized they were not all prioritizing the requirements in the same way. This could…|
-|`pmp-pr3-246`|pmp-mocks-1-10|single|agile|2|In the most recent sprint review meeting, the client announced that they need to implement two of the five modules committed for…|
-|`pmp-pr3-247`|pmp-mocks-1-10|single|agile|2|A project manager is assigned to a new project. The requirements are still evolving, but there is a need to deliver business…|
-|`pmp-pr3-248`|pmp-mocks-1-10|single|agile|2|An agile development team changes a design element in a project. Testing results improve dramatically over the next two…|
-|`pmp-pr3-249`|pmp-mocks-1-10|single|agile|2|During a critical phase of a software development project, a key developer notifies the project manager that they will need to…|
-|`pmp-pr3-250`|pmp-mocks-1-10|single|hybrid|2|A project manager is overseeing the development of an enterprise resource planning (ERP) system and has decided that a…|
-|`pmp-pr3-251`|pmp-mocks-1-10|single|predictive|2|Your project is nearing completion. You have monitored and controlled quality through testing, and risks with mitigations…|
-|`pmp-pr3-252`|pmp-mocks-1-10|single|agile|2|In the development stage of an innovative mobile application, the agile project team discovers the need for an advanced software…|
-|`pmp-pr3-253`|pmp-mocks-1-10|single|agile|2|During a mobile application development project, the project manager faces significant uncertainty regarding user preferences and…|
-|`pmp-pr3-254`|pmp-mocks-1-10|single|hybrid|2|Amid the rollout of a new software platform designed to enhance customer engagement for a retail chain, the lead role transitions…|
-|`pmp-pr3-255`|pmp-mocks-1-10|single|agile|2|A technology firm is transitioning its software development practices to agile methodologies to improve its product development…|
-|`pmp-pr3-256`|pmp-mocks-1-10|single|agile|2|As a project manager overseeing a pivotal update to a client's software system, you've noticed a significant lack of engagement…|
-|`pmp-pr3-257`|pmp-mocks-1-10|single|hybrid|3|In a project designed to deploy new technology across several departments, a project manager notices a shift in stakeholder…|
-|`pmp-pr3-258`|pmp-mocks-1-10|single|agile|2|Facing the challenge of rolling out a critical disaster response application, a project manager leads a multidisciplinary team…|
-|`pmp-pr3-259`|pmp-mocks-1-10|single|agile|2|A project manager is overseeing a project designed to deliver iterative enhancements to an existing service and has an…|
-|`pmp-pr3-260`|pmp-mocks-1-10|single|predictive|2|As a project manager overseeing the rollout of a new online banking platform, ensuring that customers can seamlessly transition…|
-|`pmp-pr3-261`|pmp-mocks-1-10|single|agile|3|You have recently completed a project for a new product and have been asked to manage it after its release to keep it relevant in…|
-|`pmp-pr3-262`|pmp-mocks-1-10|single|predictive|3|You are initiating a project to a sales team where the process will change significantly, even though the outcome of a completed…|
-|`pmp-pr3-263`|pmp-mocks-1-10|single|agile|2|The product owner has worked with a team of senior users to gather feature ideas. They now have a list of more than fifty ideas…|
-|`pmp-pr3-264`|pmp-mocks-1-10|single|predictive|2|You have been given authority to manage the upcoming features your team will release. You do not have a high enough level of…|
-|`pmp-pr3-265`|pmp-mocks-1-10|single|agile|1|Your agile project has recently gained some new stakeholders after a department restructure. They complain to you that they are…|
-|`pmp-pr3-266`|pmp-mocks-1-10|single|agile|1|Your agile project has delivered three features so far and is halfway through delivering the latest improvement. During a…|
-|`pmp-pr3-267`|pmp-mocks-1-10|single|agile|1|You are a project manager working on an Agile project, and want your team to maximise the value they bring to the customer.|
-|`pmp-pr3-268`|pmp-mocks-1-10|single|agile|1|You are working on an Agile project and the project team have just finished an iteration. All tasks for the iteration have been…|
-|`pmp-pr3-269`|pmp-mocks-1-10|single|agile|1|Feedback in many different forms is one of the most important parts of a successful Agile product delivery.|
-|`pmp-pr3-270`|pmp-mocks-1-10|single|predictive|2|You are in the process of creating a project charter for your part of the organisation, to try and gain resources for an…|
-|`pmp-pr3-271`|pmp-mocks-1-10|single|predictive|3|You have been planning a project with the manager of a functional area who needs to increase their profit by 57% in the next…|
-|`pmp-pr3-272`|pmp-mocks-1-10|single|agile|2|You are the Scrum Master and about to begin a new iteration in your Agile project. New features have been added to the backlog,…|
-|`pmp-pr3-273`|pmp-mocks-1-10|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values.|
-|`pmp-pr3-274`|pmp-mocks-1-10|single|agile|2|You are the Agile lead or Scrum Master for your Agile team and planning for the next iteration is about to begin.|
-|`pmp-pr3-275`|pmp-mocks-1-10|single|agile|1|The Agile team for which you are the project manager has determined several key features to deliver to the customer.|
-|`pmp-pr3-276`|pmp-mocks-1-10|single|agile|1|You are working on a project as an Agile project manager. You look at the product backlog and ensure several features, or minimum…|
-|`pmp-pr3-277`|pmp-mocks-1-10|single|agile|2|A team new to Agile has worked closely with the product owner and has identified the highest value features of the project.|
-|`pmp-pr3-278`|pmp-mocks-1-10|single|agile|2|You have begun planning a large project with the input from your Project Sponsor and the help of your project team. The project…|
-|`pmp-pr3-279`|pmp-mocks-1-10|single|predictive|2|Your project is around half-way complete and has had a great deal of issues around resources and funding. Other executives from…|
-|`pmp-pr3-280`|pmp-mocks-1-10|single|agile|2|You are an agile project manager and your team have delivered three features to improve a customer app over the last three…|
-|`pmp-pr3-281`|pmp-mocks-1-10|single|agile|3|You are working on an agile project and are planning your product backlog for the next three to six months. You have some high…|
+|`pmp-pr3-1`|export-batch-1|single|predictive|2|A project is nearing completion and a stakeholder wants to know how the project outcomes will impact the organization.|
+|`pmp-pr3-2`|export-batch-1|single|predictive|3|At the beginning of a project, a stakeholder is concerned that the initiative may not deliver value to the organization.|
+|`pmp-pr3-3`|export-batch-1|single|predictive|2|A lengthy upgrade project is being delivered in a series of phased outputs. The end users will face some level of disruption…|
+|`pmp-pr3-4`|export-batch-1|single|predictive|3|During the final stage of a project, one of the key stakeholders asks the project manager to brief the executive board about the…|
+|`pmp-pr3-5`|export-batch-1|single|predictive|2|A project manager has completed the project deliverable and has passed the acceptance criteria.|
+|`pmp-pr3-6`|export-batch-1|single|hybrid|4|As a project is nearing completion, a struggle between the product owner and the project sponsor regarding who owns the benefits…|
+|`pmp-pr3-7`|export-batch-1|single|hybrid|3|A company is transitioning from using a predictive approach to a hybrid predictive-agile project implementation. The leadership…|
+|`pmp-pr3-8`|export-batch-1|single|predictive|3|A newly hired project manager is assigned to a school construction project. The school serves students from surrounding…|
+|`pmp-pr3-9`|export-batch-1|single|agile|3|An agile project is in its first of ten iterations. After the iteration review, the team receives stakeholder feedback that the…|
+|`pmp-pr3-10`|export-batch-1|single|hybrid|3|During the final sprint review, the product owner stated that the product does not deliver any value. The project manager…|
+|`pmp-pr3-11`|export-batch-1|single|agile|4|During sprint planning, an agile team and product owner identified that the team should be able to finish five user stories.…|
+|`pmp-pr3-12`|export-batch-1|single|agile|3|An organization makes an acquisition of a similar product halfway through the development cycle of a potential product. This…|
+|`pmp-pr3-201`|export-batch-2|single|hybrid|3|A scrum team is using a hybrid approach with 2-week sprints. The minimum viable product (MVP) release is at the end of the…|
+|`pmp-pr3-202`|export-batch-2|single|agile|3|A business manager and product owner are requesting a more flexible way to incorporate changes into the product backlog. They…|
+|`pmp-pr3-203`|export-batch-2|single|agile|2|An agile team is receiving multiple unplanned requests for product enhancements in an iteration. This impediment is causing the…|
+|`pmp-pr3-204`|export-batch-2|single|predictive|3|At the end of a large project, the stakeholders realize that the achieved benefits are not the same as the expected benefits.|
+|`pmp-pr3-205`|export-batch-2|single|agile|3|An agile project team has been successfully releasing updated deliverables each sprint that consistently provide an increased…|
+|`pmp-pr3-206`|export-batch-2|single|agile|2|During a project planning session, the project manager is trying to define a release plan to achieve consistent value delivery…|
+|`pmp-pr3-207`|export-batch-2|single|agile|3|A project manager is working on launching a minimum viable product (MVP) for a new-to-market product. The team has successfully…|
+|`pmp-pr3-208`|export-batch-2|single|hybrid|3|During product development, two functional departments indicate that they are short on resources and cannot build and deliver all…|
+|`pmp-pr3-209`|export-batch-2|single|agile|3|A project manager has developed a project management plan based on agile methodologies in an effort to deliver the product…|
+|`pmp-pr3-210`|export-batch-2|multi|predictive|4|A project manager is leading a project to implement a process improvement software system that was developed in-house. However,…|
+|`pmp-pr3-211`|export-batch-2|single|agile|3|In an agile project, the project status indicates that the project is 95% completed. During an iteration review, the stakeholders…|
+|`pmp-pr3-212`|export-batch-2|single|predictive|3|A project is close to completion, and the customer wants to celebrate the success by sharing a business case about the benefits…|
+|`pmp-pr3-213`|export-batch-2|single|agile|3|A project manager is overseeing a project aimed at providing customers with real-time shipment tracking capabilities. The project…|
+|`pmp-pr3-214`|export-batch-2|single|predictive|3|During sign-off for a strategic project that resulted in additional costs, a project manager was unable to justify the additional…|
+|`pmp-pr3-215`|export-batch-2|single|hybrid|2|A marketing team is developing ideas in order to revamp an existing product. The marketing executive reaches out to the project…|
+|`pmp-pr3-216`|export-batch-2|single|agile|2|An agile project is in its last iteration. During the daily standup, the team realizes that they will not be able to complete all…|
+|`pmp-pr3-217`|export-batch-2|single|predictive|3|A project manager has been assigned to a project to implement an asset health management system. The executive business sponsor…|
+|`pmp-pr3-218`|export-batch-2|single|predictive|3|During a new technology project, confusion arises due to the lack of a clearly defined and communicated future state of the…|
+|`pmp-pr3-219`|export-batch-2|single|agile|2|A team member suggests using a new product to speed up feature development, but this will increase the project budget. The…|
+|`pmp-pr3-220`|export-batch-2|single|agile|3|A new system is being developed to replace an existing manual process. During a sprint demo, business stakeholders expressed the…|
+|`pmp-pr3-221`|export-batch-2|single|agile|3|Due to a downturn in the business environment, a customer is only able to make a project's payment in part, rather than the fully…|
+|`pmp-pr3-222`|export-batch-2|single|agile|3|A startup in its early stages has been acquired by a major company. In light of this new scenario, the project manager has been…|
+|`pmp-pr3-223`|export-batch-2|single|predictive|3|A project manager works in a matrix organization and manages an internal software development project to improve the company's…|
+|`pmp-pr3-224`|export-batch-2|single|predictive|3|A large-scale, multiyear transformation project was completed as per the defined requirements and within the approved budget and…|
+|`pmp-pr3-225`|export-batch-2|single|agile|2|A project manager is working on a software development project. Several team members have become overly focused on delivering…|
+|`pmp-pr3-226`|export-batch-2|single|predictive|3|A project manager is leading a business transformation project at a company facing significant financial challenges due to a…|
+|`pmp-pr3-227`|export-batch-2|single|predictive|3|A project manager is assigned to a complex IT project that is expected to deliver significant benefits to the organization. The…|
+|`pmp-pr3-228`|export-batch-2|single|agile|3|A product owner has been attending daily standups but seems focused only on the budget and costs of each iteration. When…|
+|`pmp-pr3-229`|export-batch-2|single|hybrid|3|In the middle of a three-year-long project, the company committee overseeing the project becomes uncertain about whether the…|
+|`pmp-pr3-230`|export-batch-2|single|predictive|2|A project manager is overseeing the development and launch of a new product. In order to comply with the Project Management…|
+|`pmp-pr3-231`|export-batch-2|single|agile|3|A project manager has started a new project with a 24 month timeline. Soon after the kickoff, the sponsor informs the project…|
+|`pmp-pr3-232`|export-batch-2|single|agile|2|During a complex project, a stakeholder informs the project manager about a requirement and proposes to call a meeting to inform…|
+|`pmp-pr3-233`|export-batch-2|single|hybrid|3|A project manager is overseeing a project with an extremely tight schedule. During a meeting, the project stakeholders express…|
+|`pmp-pr3-234`|export-batch-2|single|predictive|2|An organization is redesigning and relaunching a key product. The stakeholders are all company executives and want to ensure that…|
+|`pmp-pr3-235`|export-batch-2|single|predictive|1|A project manager is part of a project management strategy focus group that is brainstorming the ways projects will be used to…|
+|`pmp-pr3-236`|export-batch-2|single|agile|1|An agile team is determining which activities to complete first during an upcoming project iteration for a new product…|
+|`pmp-pr3-237`|export-batch-2|single|predictive|2|A project manager is midway through project delivery. The project manager decides to hold a stakeholder engagement meeting with…|
+|`pmp-pr3-238`|export-batch-2|single|predictive|3|Due to regulatory changes, a government agency is now a key stakeholder in a complex project. An agency representative has asked…|
+|`pmp-pr3-239`|export-batch-2|single|agile|2|During a standup, a project team member suggests modifying some features to benefit from a new opportunity. Another team member…|
+|`pmp-pr3-240`|export-batch-2|single|agile|3|A project manager is leading a development project for a high-profile client with strict deadlines. During a sprint, the project…|
+|`pmp-pr3-241`|export-batch-2|single|agile|3|A product company is transforming the way it develops and releases products in the market. Executives believe that this is a…|
+|`pmp-pr3-242`|export-batch-2|single|hybrid|3|A customer indicates that they would like to add functionality. Although this request is made during the execution phase of the…|
+|`pmp-pr3-243`|export-batch-2|single|predictive|2|Before a project evaluation meeting, a key stakeholder complains that the project does not deliver the expected business…|
+|`pmp-pr3-244`|export-batch-2|single|agile|3|During an agile iteration, Task 1 cannot be completed on time due to unexpected challenges. Another team within the project is…|
+|`pmp-pr3-245`|export-batch-2|single|agile|2|During a daily standup, some team members realized they were not all prioritizing the requirements in the same way. This could…|
+|`pmp-pr3-246`|export-batch-2|single|agile|2|In the most recent sprint review meeting, the client announced that they need to implement two of the five modules committed for…|
+|`pmp-pr3-247`|export-batch-2|single|agile|2|A project manager is assigned to a new project. The requirements are still evolving, but there is a need to deliver business…|
+|`pmp-pr3-248`|export-batch-2|single|agile|2|An agile development team changes a design element in a project. Testing results improve dramatically over the next two…|
+|`pmp-pr3-249`|export-batch-2|single|agile|2|During a critical phase of a software development project, a key developer notifies the project manager that they will need to…|
+|`pmp-pr3-250`|export-batch-2|single|hybrid|2|A project manager is overseeing the development of an enterprise resource planning (ERP) system and has decided that a…|
+|`pmp-pr3-251`|export-batch-2|single|predictive|2|Your project is nearing completion. You have monitored and controlled quality through testing, and risks with mitigations…|
+|`pmp-pr3-252`|export-batch-2|single|agile|2|In the development stage of an innovative mobile application, the agile project team discovers the need for an advanced software…|
+|`pmp-pr3-253`|export-batch-2|single|agile|2|During a mobile application development project, the project manager faces significant uncertainty regarding user preferences and…|
+|`pmp-pr3-254`|export-batch-2|single|hybrid|2|Amid the rollout of a new software platform designed to enhance customer engagement for a retail chain, the lead role transitions…|
+|`pmp-pr3-255`|export-batch-2|single|agile|2|A technology firm is transitioning its software development practices to agile methodologies to improve its product development…|
+|`pmp-pr3-256`|export-batch-2|single|agile|2|As a project manager overseeing a pivotal update to a client's software system, you've noticed a significant lack of engagement…|
+|`pmp-pr3-257`|export-batch-2|single|hybrid|3|In a project designed to deploy new technology across several departments, a project manager notices a shift in stakeholder…|
+|`pmp-pr3-258`|export-batch-2|single|agile|2|Facing the challenge of rolling out a critical disaster response application, a project manager leads a multidisciplinary team…|
+|`pmp-pr3-259`|export-batch-2|single|agile|2|A project manager is overseeing a project designed to deliver iterative enhancements to an existing service and has an…|
+|`pmp-pr3-260`|export-batch-2|single|predictive|2|As a project manager overseeing the rollout of a new online banking platform, ensuring that customers can seamlessly transition…|
+|`pmp-pr3-261`|export-batch-2|single|agile|3|You have recently completed a project for a new product and have been asked to manage it after its release to keep it relevant in…|
+|`pmp-pr3-262`|export-batch-2|single|predictive|3|You are initiating a project to a sales team where the process will change significantly, even though the outcome of a completed…|
+|`pmp-pr3-263`|export-batch-2|single|agile|2|The product owner has worked with a team of senior users to gather feature ideas. They now have a list of more than fifty ideas…|
+|`pmp-pr3-264`|export-batch-2|single|predictive|2|You have been given authority to manage the upcoming features your team will release. You do not have a high enough level of…|
+|`pmp-pr3-265`|export-batch-2|single|agile|1|Your agile project has recently gained some new stakeholders after a department restructure. They complain to you that they are…|
+|`pmp-pr3-266`|export-batch-2|single|agile|1|Your agile project has delivered three features so far and is halfway through delivering the latest improvement. During a…|
+|`pmp-pr3-267`|export-batch-2|single|agile|1|You are a project manager working on an Agile project, and want your team to maximise the value they bring to the customer.|
+|`pmp-pr3-268`|export-batch-2|single|agile|1|You are working on an Agile project and the project team have just finished an iteration. All tasks for the iteration have been…|
+|`pmp-pr3-269`|export-batch-2|single|agile|1|Feedback in many different forms is one of the most important parts of a successful Agile product delivery.|
+|`pmp-pr3-270`|export-batch-2|single|predictive|2|You are in the process of creating a project charter for your part of the organisation, to try and gain resources for an…|
+|`pmp-pr3-271`|export-batch-2|single|predictive|3|You have been planning a project with the manager of a functional area who needs to increase their profit by 57% in the next…|
+|`pmp-pr3-272`|export-batch-2|single|agile|2|You are the Scrum Master and about to begin a new iteration in your Agile project. New features have been added to the backlog,…|
+|`pmp-pr3-273`|export-batch-2|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values.|
+|`pmp-pr3-274`|export-batch-2|single|agile|2|You are the Agile lead or Scrum Master for your Agile team and planning for the next iteration is about to begin.|
+|`pmp-pr3-275`|export-batch-2|single|agile|1|The Agile team for which you are the project manager has determined several key features to deliver to the customer.|
+|`pmp-pr3-276`|export-batch-2|single|agile|1|You are working on a project as an Agile project manager. You look at the product backlog and ensure several features, or minimum…|
+|`pmp-pr3-277`|export-batch-2|single|agile|2|A team new to Agile has worked closely with the product owner and has identified the highest value features of the project.|
+|`pmp-pr3-278`|export-batch-2|single|agile|2|You have begun planning a large project with the input from your Project Sponsor and the help of your project team. The project…|
+|`pmp-pr3-279`|export-batch-2|single|predictive|2|Your project is around half-way complete and has had a great deal of issues around resources and funding. Other executives from…|
+|`pmp-pr3-280`|export-batch-2|single|agile|2|You are an agile project manager and your team have delivered three features to improve a customer app over the last three…|
+|`pmp-pr3-281`|export-batch-2|single|agile|3|You are working on an agile project and are planning your product backlog for the next three to six months. You have some high…|
 
 ### process-4 · Resources — 129 items
 
@@ -497,80 +497,80 @@ any question.
 |`pmp-pr4-138`|process-4|multi|hybrid|3|Your programme for a regional bus operator has finished its predictive design phase. Delivery now moves to three agile software…|
 |`pmp-pr4-139`|process-4|matching|hybrid|3|Prompts: Which developer on an agile team picks u… / Whether a seconded registry analyst's mi… / Which of two features waiting for the sh… / Whether to increase the programme budget…|
 |`pmp-pr4-140`|process-4|pulldown|agile|3|Prompts: Accessibility checks are now needed on a… / The next two iterations carry about thre… / The team's mainframe specialist has had…|
-|`pmp-pr4-1`|pmp-lectures-1-11|single|predictive|2|A project manager noticed that one team member is frequently absent from project team meetings. Instead of working on the current…|
-|`pmp-pr4-2`|pmp-lectures-1-11|single|predictive|5|Due to budgetary constraints, the program manager has requested that project managers prioritize resources over schedule…|
-|`pmp-pr4-3`|pmp-lectures-1-11|single|predictive|3|An inexperienced project manager requires HR support for a project. The HR manager hired interns and sent them for training.…|
-|`pmp-pr4-4`|pmp-lectures-1-11|single|predictive|3|In the middle of a project, the project manager realizes that a specific set of skills is needed to complete project development.…|
-|`pmp-pr4-5`|pmp-lectures-1-11|single|agile|3|During a standup meeting, the project manager discovers that one of the software developers is struggling to complete work…|
-|`pmp-pr4-6`|pmp-lectures-1-11|single|agile|3|A key member of an agile team was replaced with a less experienced member. One of the stakeholders is concerned that the project…|
-|`pmp-pr4-7`|pmp-lectures-1-11|single|agile|4|A Scrum team noticed a trend of work spilling over for the last several sprints. The root cause of this has been identified as…|
-|`pmp-pr4-8`|pmp-lectures-1-11|single|predictive|3|During initial project planning, a project manager was informed that a team member had been exclusively allocated to the project.…|
-|`pmp-pr4-9`|pmp-lectures-1-11|single|predictive|3|A project manager is leading a team of software engineers in developing a new mobile app. The team consistently meets deadlines…|
-|`pmp-pr4-10`|pmp-lectures-1-11|single|hybrid|3|The project manager of a new hybrid project is trying to put together the project team. The best candidates for team members are…|
-|`pmp-pr4-201`|pmp-mocks-1-10|single|agile|2|During week two of a two-week sprint, one of the core team members has an emergency and is unable to work on the project for the…|
-|`pmp-pr4-202`|pmp-mocks-1-10|single|predictive|3|A key resource approaches the project manager after the kick-off meeting and expresses concern that they will be unable to…|
-|`pmp-pr4-203`|pmp-mocks-1-10|single|agile|3|During an iteration, a key project team member announces their resignation. The project manager realizes that one of the product…|
-|`pmp-pr4-204`|pmp-mocks-1-10|single|predictive|1|A project manager has just been assigned a new project team and needs to assign tasks for an upcoming project quickly and…|
-|`pmp-pr4-205`|pmp-mocks-1-10|single|predictive|3|A project is in a key phase of execution and everyone is dedicated to achieving success. A functional manager suddenly takes away…|
-|`pmp-pr4-206`|pmp-mocks-1-10|single|hybrid|4|Two project managers are working on resourcing their respective projects. Both project managers identified the same subject…|
-|`pmp-pr4-207`|pmp-mocks-1-10|single|predictive|3|A project is currently behind schedule when a new team member, known for their high performance, is assigned to the team. While…|
-|`pmp-pr4-208`|pmp-mocks-1-10|single|hybrid|3|A project manager is leading a hybrid project. Several team members recently exited the project, including the only individual…|
-|`pmp-pr4-209`|pmp-mocks-1-10|single|agile|3|A project team working on a high-priority, change-driven project has repeatedly missed release deadlines. The project manager…|
-|`pmp-pr4-210`|pmp-mocks-1-10|single|predictive|3|A project manager is assigned to a top innovation project that has high visibility with the company executives. Recently, one of…|
-|`pmp-pr4-211`|pmp-mocks-1-10|single|predictive|2|A project execution phase overlaps with a holiday in the country where the majority of team members are based. This phase is…|
-|`pmp-pr4-212`|pmp-mocks-1-10|single|agile|3|A project team in the middle of an incremental delivery project decided they need the help of a subject matter expert (SME) who…|
-|`pmp-pr4-213`|pmp-mocks-1-10|single|predictive|2|A key project team member is leaving the organization at the halfway point of the project.|
-|`pmp-pr4-214`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a complex project with many stakeholders and conflicting priorities. Senior management asked the…|
-|`pmp-pr4-215`|pmp-mocks-1-10|single|agile|2|A customer requested a change in functionality for a product that will be delivered in the next sprint. The responsible…|
-|`pmp-pr4-216`|pmp-mocks-1-10|single|predictive|3|A project manager learns that a functional manager is assigning a two-week task in another project to a team member. Loss of this…|
-|`pmp-pr4-217`|pmp-mocks-1-10|single|predictive|3|A new project manager has been assigned to a global project team. In the next few days, the project team must create a resource…|
-|`pmp-pr4-218`|pmp-mocks-1-10|single|predictive|3|In the implementation phase of a project, the project manager receives news that a team lead will be leaving the organization.…|
-|`pmp-pr4-219`|pmp-mocks-1-10|single|predictive|2|A new warehouse facility is under construction. The project manager implements team development efforts such as training that…|
-|`pmp-pr4-220`|pmp-mocks-1-10|single|predictive|2|During project execution, a project manager learns that a team member's functional manager wants to remove them from a project…|
-|`pmp-pr4-221`|pmp-mocks-1-10|single|hybrid|2|A multinational company is locally developing a digital product using a new technology platform. The only expert on this platform…|
-|`pmp-pr4-222`|pmp-mocks-1-10|single|predictive|2|A project manager wants to recruit another team member to replace an architect who recently resigned.|
-|`pmp-pr4-223`|pmp-mocks-1-10|single|predictive|2|A project manager is facing a delay in a project due to a decision made by the functional manager to provide onsite support for…|
-|`pmp-pr4-224`|pmp-mocks-1-10|single|agile|2|A customer requested a change to a functionality that is being delivered in the next iteration. The specialist responsible for…|
-|`pmp-pr4-225`|pmp-mocks-1-10|single|predictive|2|A project team is arranging user testing to be completed for a project but does not have a strong enough server to do so. The…|
-|`pmp-pr4-226`|pmp-mocks-1-10|single|hybrid|2|During the planning of a project with incremental deliveries, the team realizes that they will need specific expertise for one of…|
-|`pmp-pr4-227`|pmp-mocks-1-10|single|predictive|2|A functional manager wants to use resources already allocated to a project.|
-|`pmp-pr4-228`|pmp-mocks-1-10|single|predictive|2|While developing the initial schedule baseline, the project manager learns that a functional manager reassigned two resources…|
-|`pmp-pr4-229`|pmp-mocks-1-10|single|predictive|3|A project manager has been assigned to a newly approved multi-national project. The successful implementation of the project…|
-|`pmp-pr4-230`|pmp-mocks-1-10|single|predictive|3|A project is currently halfway through its timeline when one of the external resources becomes unexpectedly unavailable for the…|
-|`pmp-pr4-231`|pmp-mocks-1-10|single|hybrid|2|A complex project is in the planning stage when the sponsor identifies a need for a specialist who is a citizen of a foreign…|
-|`pmp-pr4-232`|pmp-mocks-1-10|single|agile|2|A project has the following characteristics: The project manager is being asked to deliver a business result in a compressed…|
-|`pmp-pr4-233`|pmp-mocks-1-10|single|predictive|2|A team member is scheduled to visit an overseas client site next week. However, the project manager overheard the team member…|
-|`pmp-pr4-234`|pmp-mocks-1-10|single|predictive|2|A project manager is working on a small project that is critical for a larger program milestone. A new resource has been assigned…|
-|`pmp-pr4-235`|pmp-mocks-1-10|single|predictive|2|A project is following a strategic plan that includes key milestones that have been aligned with stakeholders. As the work is…|
-|`pmp-pr4-236`|pmp-mocks-1-10|single|predictive|2|Close to the end of a large project, some of the technical reports related to the delivered service were not ready. The project…|
-|`pmp-pr4-237`|pmp-mocks-1-10|single|predictive|2|In a multidisciplinary project, a project manager is delegating some project management activities to several team members.|
-|`pmp-pr4-238`|pmp-mocks-1-10|single|agile|3|An organization is adopting an agile approach to fulfill its customer's requirements. Prior to that, the organization worked with…|
-|`pmp-pr4-239`|pmp-mocks-1-10|single|predictive|3|During project execution, a project manager is informed that some resources will soon be removed from the project.|
-|`pmp-pr4-240`|pmp-mocks-1-10|single|predictive|2|A project manager works in a matrix organization. Following a reorganization, several key project resources are reassigned to…|
-|`pmp-pr4-241`|pmp-mocks-1-10|single|predictive|2|A project manager receives complaints from a project sponsor because of a delay in developing a prototype. The project manager…|
-|`pmp-pr4-242`|pmp-mocks-1-10|single|predictive|3|A project manager is experiencing issues with the functional manager of a project team member. The functional manager has given…|
-|`pmp-pr4-243`|pmp-mocks-1-10|multi|agile|3|For an agile project, some team members have other commitments or responsibilities. The project manager faces the challenge of…|
-|`pmp-pr4-244`|pmp-mocks-1-10|single|agile|3|A project team has been efficiently delivering results. The product upgrade they are working on must be released in three months…|
-|`pmp-pr4-245`|pmp-mocks-1-10|single|predictive|3|A project manager is overseeing a large-scale infrastructure project in a hierarchical organization. The project team members are…|
-|`pmp-pr4-246`|pmp-mocks-1-10|single|predictive|2|In the middle of an urban development project, the project manager faces a setback as a key engineer and an urban planner…|
-|`pmp-pr4-247`|pmp-mocks-1-10|single|hybrid|2|As a project manager overseeing a large-scale renewable energy project, you're confronted with the sudden need to transition your…|
-|`pmp-pr4-248`|pmp-mocks-1-10|single|predictive|2|A project manager is tasked with integrating advanced artificial intelligence (AI) features into an existing software product.…|
-|`pmp-pr4-249`|pmp-mocks-1-10|single|predictive|2|In the implementation stage of a critical network security project, it is revealed that a specialist responsible for key parts of…|
-|`pmp-pr4-250`|pmp-mocks-1-10|single|predictive|2|You are managing your team through difficult project, which has been made more difficult by many team members being new and…|
-|`pmp-pr4-251`|pmp-mocks-1-10|single|hybrid|1|You are working on a project where the project team is completely distributed around the country in multiple sites, including…|
-|`pmp-pr4-252`|pmp-mocks-1-10|single|agile|2|You are in the planning stages of an Agile project where the functional manager and senior users have provided the high level…|
-|`pmp-pr4-253`|pmp-mocks-1-10|single|predictive|3|You are putting together a project team to deliver an accounting system to offices around the country. The accounting system you…|
-|`pmp-pr4-254`|pmp-mocks-1-10|single|predictive|2|You put together a resource plan for a large amount of physical inventory to be purchased from overseas. You ordered the…|
-|`pmp-pr4-255`|pmp-mocks-1-10|single|agile|2|You have been working on an Agile project for some time and have been blocked by the need for expertise in another team. You need…|
-|`pmp-pr4-256`|pmp-mocks-1-10|single|predictive|1|You have finished project planning. All baseline documents are approved and the project team is ready to begin project execution…|
-|`pmp-pr4-257`|pmp-mocks-1-10|single|predictive|2|You are in the process of planning the resources required for your project. Work on your project has not started, as your team…|
-|`pmp-pr4-258`|pmp-mocks-1-10|single|predictive|2|You have been planning your project using a waterfall methodology, and need to estimate the resources required with your team.…|
-|`pmp-pr4-259`|pmp-mocks-1-10|single|predictive|2|You have been working on a project where your organisation wanted only onsite workers, while you believed the project needed…|
-|`pmp-pr4-260`|pmp-mocks-1-10|single|predictive|3|You have been assigned to a project that is behind schedule. Some of your team approach you and ask what they should be working…|
-|`pmp-pr4-261`|pmp-mocks-1-10|single|predictive|2|Team members from parts of the organisation have been assigned to your project at an agreed level of 50% availability. As the…|
-|`pmp-pr4-262`|pmp-mocks-1-10|single|agile|2|The executive management in your organisation has assembled a new team, and dictated that they will use Agile for their product…|
-|`pmp-pr4-263`|pmp-mocks-1-10|single|agile|2|You are a program manager overseeing multiple Agile projects within your organization. One of the projects is very important but…|
-|`pmp-pr4-264`|pmp-mocks-1-10|single|predictive|2|You are in the initiating stages of a project. The Project Charter has been approved, and initial funding released. You have been…|
+|`pmp-pr4-1`|export-batch-1|single|predictive|2|A project manager noticed that one team member is frequently absent from project team meetings. Instead of working on the current…|
+|`pmp-pr4-2`|export-batch-1|single|predictive|5|Due to budgetary constraints, the program manager has requested that project managers prioritize resources over schedule…|
+|`pmp-pr4-3`|export-batch-1|single|predictive|3|An inexperienced project manager requires HR support for a project. The HR manager hired interns and sent them for training.…|
+|`pmp-pr4-4`|export-batch-1|single|predictive|3|In the middle of a project, the project manager realizes that a specific set of skills is needed to complete project development.…|
+|`pmp-pr4-5`|export-batch-1|single|agile|3|During a standup meeting, the project manager discovers that one of the software developers is struggling to complete work…|
+|`pmp-pr4-6`|export-batch-1|single|agile|3|A key member of an agile team was replaced with a less experienced member. One of the stakeholders is concerned that the project…|
+|`pmp-pr4-7`|export-batch-1|single|agile|4|A Scrum team noticed a trend of work spilling over for the last several sprints. The root cause of this has been identified as…|
+|`pmp-pr4-8`|export-batch-1|single|predictive|3|During initial project planning, a project manager was informed that a team member had been exclusively allocated to the project.…|
+|`pmp-pr4-9`|export-batch-1|single|predictive|3|A project manager is leading a team of software engineers in developing a new mobile app. The team consistently meets deadlines…|
+|`pmp-pr4-10`|export-batch-1|single|hybrid|3|The project manager of a new hybrid project is trying to put together the project team. The best candidates for team members are…|
+|`pmp-pr4-201`|export-batch-2|single|agile|2|During week two of a two-week sprint, one of the core team members has an emergency and is unable to work on the project for the…|
+|`pmp-pr4-202`|export-batch-2|single|predictive|3|A key resource approaches the project manager after the kick-off meeting and expresses concern that they will be unable to…|
+|`pmp-pr4-203`|export-batch-2|single|agile|3|During an iteration, a key project team member announces their resignation. The project manager realizes that one of the product…|
+|`pmp-pr4-204`|export-batch-2|single|predictive|1|A project manager has just been assigned a new project team and needs to assign tasks for an upcoming project quickly and…|
+|`pmp-pr4-205`|export-batch-2|single|predictive|3|A project is in a key phase of execution and everyone is dedicated to achieving success. A functional manager suddenly takes away…|
+|`pmp-pr4-206`|export-batch-2|single|hybrid|4|Two project managers are working on resourcing their respective projects. Both project managers identified the same subject…|
+|`pmp-pr4-207`|export-batch-2|single|predictive|3|A project is currently behind schedule when a new team member, known for their high performance, is assigned to the team. While…|
+|`pmp-pr4-208`|export-batch-2|single|hybrid|3|A project manager is leading a hybrid project. Several team members recently exited the project, including the only individual…|
+|`pmp-pr4-209`|export-batch-2|single|agile|3|A project team working on a high-priority, change-driven project has repeatedly missed release deadlines. The project manager…|
+|`pmp-pr4-210`|export-batch-2|single|predictive|3|A project manager is assigned to a top innovation project that has high visibility with the company executives. Recently, one of…|
+|`pmp-pr4-211`|export-batch-2|single|predictive|2|A project execution phase overlaps with a holiday in the country where the majority of team members are based. This phase is…|
+|`pmp-pr4-212`|export-batch-2|single|agile|3|A project team in the middle of an incremental delivery project decided they need the help of a subject matter expert (SME) who…|
+|`pmp-pr4-213`|export-batch-2|single|predictive|2|A key project team member is leaving the organization at the halfway point of the project.|
+|`pmp-pr4-214`|export-batch-2|single|predictive|3|A project manager is working on a complex project with many stakeholders and conflicting priorities. Senior management asked the…|
+|`pmp-pr4-215`|export-batch-2|single|agile|2|A customer requested a change in functionality for a product that will be delivered in the next sprint. The responsible…|
+|`pmp-pr4-216`|export-batch-2|single|predictive|3|A project manager learns that a functional manager is assigning a two-week task in another project to a team member. Loss of this…|
+|`pmp-pr4-217`|export-batch-2|single|predictive|3|A new project manager has been assigned to a global project team. In the next few days, the project team must create a resource…|
+|`pmp-pr4-218`|export-batch-2|single|predictive|3|In the implementation phase of a project, the project manager receives news that a team lead will be leaving the organization.…|
+|`pmp-pr4-219`|export-batch-2|single|predictive|2|A new warehouse facility is under construction. The project manager implements team development efforts such as training that…|
+|`pmp-pr4-220`|export-batch-2|single|predictive|2|During project execution, a project manager learns that a team member's functional manager wants to remove them from a project…|
+|`pmp-pr4-221`|export-batch-2|single|hybrid|2|A multinational company is locally developing a digital product using a new technology platform. The only expert on this platform…|
+|`pmp-pr4-222`|export-batch-2|single|predictive|2|A project manager wants to recruit another team member to replace an architect who recently resigned.|
+|`pmp-pr4-223`|export-batch-2|single|predictive|2|A project manager is facing a delay in a project due to a decision made by the functional manager to provide onsite support for…|
+|`pmp-pr4-224`|export-batch-2|single|agile|2|A customer requested a change to a functionality that is being delivered in the next iteration. The specialist responsible for…|
+|`pmp-pr4-225`|export-batch-2|single|predictive|2|A project team is arranging user testing to be completed for a project but does not have a strong enough server to do so. The…|
+|`pmp-pr4-226`|export-batch-2|single|hybrid|2|During the planning of a project with incremental deliveries, the team realizes that they will need specific expertise for one of…|
+|`pmp-pr4-227`|export-batch-2|single|predictive|2|A functional manager wants to use resources already allocated to a project.|
+|`pmp-pr4-228`|export-batch-2|single|predictive|2|While developing the initial schedule baseline, the project manager learns that a functional manager reassigned two resources…|
+|`pmp-pr4-229`|export-batch-2|single|predictive|3|A project manager has been assigned to a newly approved multi-national project. The successful implementation of the project…|
+|`pmp-pr4-230`|export-batch-2|single|predictive|3|A project is currently halfway through its timeline when one of the external resources becomes unexpectedly unavailable for the…|
+|`pmp-pr4-231`|export-batch-2|single|hybrid|2|A complex project is in the planning stage when the sponsor identifies a need for a specialist who is a citizen of a foreign…|
+|`pmp-pr4-232`|export-batch-2|single|agile|2|A project has the following characteristics: The project manager is being asked to deliver a business result in a compressed…|
+|`pmp-pr4-233`|export-batch-2|single|predictive|2|A team member is scheduled to visit an overseas client site next week. However, the project manager overheard the team member…|
+|`pmp-pr4-234`|export-batch-2|single|predictive|2|A project manager is working on a small project that is critical for a larger program milestone. A new resource has been assigned…|
+|`pmp-pr4-235`|export-batch-2|single|predictive|2|A project is following a strategic plan that includes key milestones that have been aligned with stakeholders. As the work is…|
+|`pmp-pr4-236`|export-batch-2|single|predictive|2|Close to the end of a large project, some of the technical reports related to the delivered service were not ready. The project…|
+|`pmp-pr4-237`|export-batch-2|single|predictive|2|In a multidisciplinary project, a project manager is delegating some project management activities to several team members.|
+|`pmp-pr4-238`|export-batch-2|single|agile|3|An organization is adopting an agile approach to fulfill its customer's requirements. Prior to that, the organization worked with…|
+|`pmp-pr4-239`|export-batch-2|single|predictive|3|During project execution, a project manager is informed that some resources will soon be removed from the project.|
+|`pmp-pr4-240`|export-batch-2|single|predictive|2|A project manager works in a matrix organization. Following a reorganization, several key project resources are reassigned to…|
+|`pmp-pr4-241`|export-batch-2|single|predictive|2|A project manager receives complaints from a project sponsor because of a delay in developing a prototype. The project manager…|
+|`pmp-pr4-242`|export-batch-2|single|predictive|3|A project manager is experiencing issues with the functional manager of a project team member. The functional manager has given…|
+|`pmp-pr4-243`|export-batch-2|multi|agile|3|For an agile project, some team members have other commitments or responsibilities. The project manager faces the challenge of…|
+|`pmp-pr4-244`|export-batch-2|single|agile|3|A project team has been efficiently delivering results. The product upgrade they are working on must be released in three months…|
+|`pmp-pr4-245`|export-batch-2|single|predictive|3|A project manager is overseeing a large-scale infrastructure project in a hierarchical organization. The project team members are…|
+|`pmp-pr4-246`|export-batch-2|single|predictive|2|In the middle of an urban development project, the project manager faces a setback as a key engineer and an urban planner…|
+|`pmp-pr4-247`|export-batch-2|single|hybrid|2|As a project manager overseeing a large-scale renewable energy project, you're confronted with the sudden need to transition your…|
+|`pmp-pr4-248`|export-batch-2|single|predictive|2|A project manager is tasked with integrating advanced artificial intelligence (AI) features into an existing software product.…|
+|`pmp-pr4-249`|export-batch-2|single|predictive|2|In the implementation stage of a critical network security project, it is revealed that a specialist responsible for key parts of…|
+|`pmp-pr4-250`|export-batch-2|single|predictive|2|You are managing your team through difficult project, which has been made more difficult by many team members being new and…|
+|`pmp-pr4-251`|export-batch-2|single|hybrid|1|You are working on a project where the project team is completely distributed around the country in multiple sites, including…|
+|`pmp-pr4-252`|export-batch-2|single|agile|2|You are in the planning stages of an Agile project where the functional manager and senior users have provided the high level…|
+|`pmp-pr4-253`|export-batch-2|single|predictive|3|You are putting together a project team to deliver an accounting system to offices around the country. The accounting system you…|
+|`pmp-pr4-254`|export-batch-2|single|predictive|2|You put together a resource plan for a large amount of physical inventory to be purchased from overseas. You ordered the…|
+|`pmp-pr4-255`|export-batch-2|single|agile|2|You have been working on an Agile project for some time and have been blocked by the need for expertise in another team. You need…|
+|`pmp-pr4-256`|export-batch-2|single|predictive|1|You have finished project planning. All baseline documents are approved and the project team is ready to begin project execution…|
+|`pmp-pr4-257`|export-batch-2|single|predictive|2|You are in the process of planning the resources required for your project. Work on your project has not started, as your team…|
+|`pmp-pr4-258`|export-batch-2|single|predictive|2|You have been planning your project using a waterfall methodology, and need to estimate the resources required with your team.…|
+|`pmp-pr4-259`|export-batch-2|single|predictive|2|You have been working on a project where your organisation wanted only onsite workers, while you believed the project needed…|
+|`pmp-pr4-260`|export-batch-2|single|predictive|3|You have been assigned to a project that is behind schedule. Some of your team approach you and ask what they should be working…|
+|`pmp-pr4-261`|export-batch-2|single|predictive|2|Team members from parts of the organisation have been assigned to your project at an agreed level of 50% availability. As the…|
+|`pmp-pr4-262`|export-batch-2|single|agile|2|The executive management in your organisation has assembled a new team, and dictated that they will use Agile for their product…|
+|`pmp-pr4-263`|export-batch-2|single|agile|2|You are a program manager overseeing multiple Agile projects within your organization. One of the projects is very important but…|
+|`pmp-pr4-264`|export-batch-2|single|predictive|2|You are in the initiating stages of a project. The Project Charter has been approved, and initial funding released. You have been…|
 
 ### process-5 · Procurement — 124 items
 
@@ -633,75 +633,75 @@ any question.
 |`pmp-pr5-138`|process-5|pulldown|predictive|2|Prompts: Brake pads are bought in large volumes f… / A £30 door-seal kit is made by only one… / Cleaning materials are cheap, standard a…|
 |`pmp-pr5-139`|process-5|fillblank|predictive|3|Your stadium project buys structural steel for £2,400,000, a price set at signature. An economic price adjustment clause says 70%…|
 |`pmp-pr5-140`|process-5|hotspot|hybrid|2|A water treatment plant is buying filtration equipment for €1.6 million; the civil works follow a fixed plan while the control…|
-|`pmp-pr5-1`|pmp-lectures-1-11|single|predictive|3|Production of a specific machine in a factory was contracted through a foreign supplier. Prior to delivery of the final two…|
-|`pmp-pr5-2`|pmp-lectures-1-11|single|predictive|3|A company is expanding, and the project manager is contemplating whether to hire new resources or outsource resources from an…|
-|`pmp-pr5-3`|pmp-lectures-1-11|single|agile|3|An agile project to implement a new automation process in a factory is underway. The project manager needs a vendor to help with…|
-|`pmp-pr5-4`|pmp-lectures-1-11|single|predictive|3|A two-year project was awarded to a company six months ago, but the procurement process has not yet been initiated.|
-|`pmp-pr5-5`|pmp-lectures-1-11|single|predictive|4|A project manager is meeting with a critical third-party supplier that provides discounted services. During the meeting, the…|
-|`pmp-pr5-6`|pmp-lectures-1-11|single|predictive|3|A member of the project team who was hired for six months to complete a specific task has decided to leave the project in the…|
-|`pmp-pr5-7`|pmp-lectures-1-11|single|predictive|4|A vendor for a large and complex project has been performing more work than what was originally anticipated in the time and…|
-|`pmp-pr5-8`|pmp-lectures-1-11|single|predictive|3|The project manager is responsible for a major project that involves working with many vendors. A key project concern is related…|
-|`pmp-pr5-9`|pmp-lectures-1-11|single|predictive|4|During project closure, the project sponsor requests that a deliverable, developed by a contractor, be transferred to a nonprofit…|
-|`pmp-pr5-10`|pmp-lectures-1-11|single|predictive|4|A complex, multimillion-dollar, multi-year product development project requiring unique knowledge is 70% complete. Contract…|
-|`pmp-pr5-11`|pmp-lectures-1-11|single|predictive|2|A project manager walked into a project office and found a team member and a supplier representative engaged in a disagreement…|
-|`pmp-pr5-12`|pmp-lectures-1-11|single|predictive|3|In order to reduce procurement time during a bidding process, a project manager decided to contract the additional work to a…|
-|`pmp-pr5-13`|pmp-lectures-1-11|single|predictive|4|During the execution of repair work, the root cause of the damage was discovered to be failures that occurred during the…|
-|`pmp-pr5-14`|pmp-lectures-1-11|single|predictive|4|During the testing phase of a technical project, the project manager discovers some issues with the final product and…|
-|`pmp-pr5-15`|pmp-lectures-1-11|single|predictive|3|A project manager is overseeing a procurement project for a company that has a dedicated procurement management team that handles…|
-|`pmp-pr5-16`|pmp-lectures-1-11|single|predictive|3|The development of a final project schedule is delayed due to the inability to negotiate an agreement with one of the vendors…|
-|`pmp-pr5-17`|pmp-lectures-1-11|single|predictive|3|A project manager has received quotes from two vendors for the same parts. Vendor A has informed the project manager that they…|
-|`pmp-pr5-201`|pmp-mocks-1-10|single|predictive|3|A new project manager has taken over an ongoing project. Progress reports show that the project is within the allocated budget…|
-|`pmp-pr5-202`|pmp-mocks-1-10|single|hybrid|4|The service provider and their client agree on about 80% of the scope of a project contract they are working on for the delivery…|
-|`pmp-pr5-203`|pmp-mocks-1-10|single|predictive|3|The construction of a building is well-defined through plans and written specifications. The service is to be delivered in two…|
-|`pmp-pr5-204`|pmp-mocks-1-10|single|predictive|4|A project manager has just taken over an ongoing project. The previous project manager resigned from the organization. During a…|
-|`pmp-pr5-205`|pmp-mocks-1-10|single|predictive|3|A project manager for a delivery project has engaged a vendor to provide testing services.|
-|`pmp-pr5-206`|pmp-mocks-1-10|single|predictive|2|Halfway through a year-long project, a hardware supplier sends a project manager notice of an intent to increase prices due to…|
-|`pmp-pr5-207`|pmp-mocks-1-10|single|predictive|2|A project is in the testing phase, and the quality control team informs the project manager that the quality of the deliverables…|
-|`pmp-pr5-208`|pmp-mocks-1-10|single|predictive|2|Project completion will be delayed because an essential component will not be delivered on time.|
-|`pmp-pr5-209`|pmp-mocks-1-10|single|predictive|2|A project has components that are outsourced and the project manager is in the control phase of the procurement process.|
-|`pmp-pr5-210`|pmp-mocks-1-10|single|predictive|2|A project has begun to develop a new software application that will be used by the company's sales team. The project is expected…|
-|`pmp-pr5-211`|pmp-mocks-1-10|single|predictive|3|A project integrates with several systems developed by various vendors and one of these vendors has gone out of business.|
-|`pmp-pr5-212`|pmp-mocks-1-10|single|predictive|3|A project manager is managing a project with a very aggressive delivery schedule and a firm completion date. The project requires…|
-|`pmp-pr5-213`|pmp-mocks-1-10|single|predictive|3|A project manager oversees a complex project in which a vendor is responsible for delivering several essential components. The…|
-|`pmp-pr5-214`|pmp-mocks-1-10|single|predictive|2|A project manager learns that the project team is involved in an ongoing conflict with an overseas supplier team. The conflict is…|
-|`pmp-pr5-215`|pmp-mocks-1-10|multi|predictive|3|A project steering group has made a decision to change the vendor that will deliver a component of a project. (Choose 2).|
-|`pmp-pr5-216`|pmp-mocks-1-10|single|predictive|3|A project manager is on a project in collaboration with a vendor. The vendor responded to all the Request for Proposal (RFP)…|
-|`pmp-pr5-217`|pmp-mocks-1-10|single|predictive|2|A supplier has been awarded a firm fixed price (FFP) contract to provide various materials for a construction project. The…|
-|`pmp-pr5-218`|pmp-mocks-1-10|single|predictive|3|The production of a key component in a construction project is outsourced to a third-party vendor. The vendor informs the project…|
-|`pmp-pr5-219`|pmp-mocks-1-10|single|predictive|2|A project manager needs to contract with a provider for a large government project. Project guidelines mandate that all potential…|
-|`pmp-pr5-220`|pmp-mocks-1-10|multi|predictive|3|In two months, there will be a delivery of project machines from a factory. The project team is in the process of performing a…|
-|`pmp-pr5-221`|pmp-mocks-1-10|single|predictive|3|A project manager is leading a project where a vendor is engaged. The project team has a dependency on the vendor to complete…|
-|`pmp-pr5-222`|pmp-mocks-1-10|single|predictive|2|After consultation with executive stakeholders, it was decided that the project manager would replace a vendor while the project…|
-|`pmp-pr5-223`|pmp-mocks-1-10|single|predictive|3|A project vendor has informed a project manager that an outsourced project deliverable will be available 6 months later than the…|
-|`pmp-pr5-224`|pmp-mocks-1-10|single|hybrid|3|A project manager is leading a project with a scope partially delivered by a vendor. The vendor's processes and tools differ from…|
-|`pmp-pr5-225`|pmp-mocks-1-10|single|predictive|3|Due to increased price volatility, a vendor asks the project manager of a large development project to make a price change that…|
-|`pmp-pr5-226`|pmp-mocks-1-10|single|predictive|2|A team receives outsourced deliverables and determines that they do not meet the agreed-upon acceptance criteria.|
-|`pmp-pr5-227`|pmp-mocks-1-10|single|predictive|1|A project manager is managing a project involving a few vendors. The project sponsor asks how the project will acquire goods and…|
-|`pmp-pr5-228`|pmp-mocks-1-10|single|predictive|2|A project manager needs to hire suppliers for an international project that has a performance period of several years. The…|
-|`pmp-pr5-229`|pmp-mocks-1-10|single|predictive|2|During project execution, the team finds that changes must be made to a component sourced from an outside supplier. The component…|
-|`pmp-pr5-230`|pmp-mocks-1-10|single|predictive|3|A project manager has been awarded a firm-fixed-price (FFP) contract to develop a new mobile app for a client. The contract scope…|
-|`pmp-pr5-231`|pmp-mocks-1-10|single|predictive|3|The supplier of a tool for a manufacturing project informs the project manager that delivery of the tool will be late. The…|
-|`pmp-pr5-232`|pmp-mocks-1-10|single|predictive|3|A contractor is late with a critical project deliverable due to resource challenges. There is a 22% buffer in the budget for cost…|
-|`pmp-pr5-233`|pmp-mocks-1-10|multi|hybrid|4|The government of a country intends to construct a multibillion-dollar railway across three major cities and hires a contractor…|
-|`pmp-pr5-234`|pmp-mocks-1-10|single|predictive|2|A member of a development project team informs the project manager that the operating system is not going to be installed on time…|
-|`pmp-pr5-235`|pmp-mocks-1-10|single|predictive|3|For the implementation of a sophisticated security software across multiple departments, the selected external provider asserts…|
-|`pmp-pr5-236`|pmp-mocks-1-10|single|predictive|3|For an upcoming critical initiative, a project manager must engage a vendor notorious for not meeting deadlines, yet uniquely…|
-|`pmp-pr5-237`|pmp-mocks-1-10|single|predictive|2|At the beginning of a green building project, the project manager is tasked by the lead architect to engage a key supplier known…|
-|`pmp-pr5-238`|pmp-mocks-1-10|single|predictive|2|You are working on a high value construction project to include smart-home components within multi-million dollar buildings.…|
-|`pmp-pr5-239`|pmp-mocks-1-10|single|predictive|2|A missing item has been uncovered in the project scope that your project team cannot deliver. The item is not complex and seems…|
-|`pmp-pr5-240`|pmp-mocks-1-10|single|hybrid|3|You are working on a project where part of the work is planned carefully upfront, and another part is subject to change. You…|
-|`pmp-pr5-241`|pmp-mocks-1-10|single|predictive|2|You have completed a make-or-buy analysis in your project and found that part of your deliverable is best created by an external…|
-|`pmp-pr5-242`|pmp-mocks-1-10|single|agile|2|Your agile project needs a third party vendor to help complete the work. The product owner has multiple features on their product…|
-|`pmp-pr5-243`|pmp-mocks-1-10|single|predictive|2|You have completed a make-or-buy analysis and you agree to hire a third-party vendor to complete part of your product. You create…|
-|`pmp-pr5-244`|pmp-mocks-1-10|single|predictive|2|You are the project manager on a high profile software project that involves automation technology not used before in your…|
-|`pmp-pr5-245`|pmp-mocks-1-10|single|predictive|2|You are working on a project charter for the initiating stage of a new project that will deliver a new data system. You approach…|
-|`pmp-pr5-246`|pmp-mocks-1-10|single|predictive|2|You have planned, executed and monitored a project to completion. The customer has just received the finished product and you…|
-|`pmp-pr5-247`|pmp-mocks-1-10|single|predictive|2|You are working on a complex, high-value project to replace the telecommunications system across your organisation. You have…|
-|`pmp-pr5-248`|pmp-mocks-1-10|single|predictive|2|Part of your project work needs to be outsourced to a supplier. You are asked to ensure that cost for the outsourced portion of…|
-|`pmp-pr5-249`|pmp-mocks-1-10|single|agile|2|You are a project manager on an Agile project that requires an external third party to develop software for one of your features.…|
-|`pmp-pr5-250`|pmp-mocks-1-10|single|predictive|2|You are working on a project where a vendor is performing a large amount of the work. Lately they have not been performing well,…|
-|`pmp-pr5-251`|pmp-mocks-1-10|single|predictive|2|A recent news article spread a rumour about a supplier who is providing services for the project you are working on. They are…|
-|`pmp-pr5-252`|pmp-mocks-1-10|single|predictive|1|You are working on a project and it has become apparent that part of the product your company was creating they won't be able to…|
+|`pmp-pr5-1`|export-batch-1|single|predictive|3|Production of a specific machine in a factory was contracted through a foreign supplier. Prior to delivery of the final two…|
+|`pmp-pr5-2`|export-batch-1|single|predictive|3|A company is expanding, and the project manager is contemplating whether to hire new resources or outsource resources from an…|
+|`pmp-pr5-3`|export-batch-1|single|agile|3|An agile project to implement a new automation process in a factory is underway. The project manager needs a vendor to help with…|
+|`pmp-pr5-4`|export-batch-1|single|predictive|3|A two-year project was awarded to a company six months ago, but the procurement process has not yet been initiated.|
+|`pmp-pr5-5`|export-batch-1|single|predictive|4|A project manager is meeting with a critical third-party supplier that provides discounted services. During the meeting, the…|
+|`pmp-pr5-6`|export-batch-1|single|predictive|3|A member of the project team who was hired for six months to complete a specific task has decided to leave the project in the…|
+|`pmp-pr5-7`|export-batch-1|single|predictive|4|A vendor for a large and complex project has been performing more work than what was originally anticipated in the time and…|
+|`pmp-pr5-8`|export-batch-1|single|predictive|3|The project manager is responsible for a major project that involves working with many vendors. A key project concern is related…|
+|`pmp-pr5-9`|export-batch-1|single|predictive|4|During project closure, the project sponsor requests that a deliverable, developed by a contractor, be transferred to a nonprofit…|
+|`pmp-pr5-10`|export-batch-1|single|predictive|4|A complex, multimillion-dollar, multi-year product development project requiring unique knowledge is 70% complete. Contract…|
+|`pmp-pr5-11`|export-batch-1|single|predictive|2|A project manager walked into a project office and found a team member and a supplier representative engaged in a disagreement…|
+|`pmp-pr5-12`|export-batch-1|single|predictive|3|In order to reduce procurement time during a bidding process, a project manager decided to contract the additional work to a…|
+|`pmp-pr5-13`|export-batch-1|single|predictive|4|During the execution of repair work, the root cause of the damage was discovered to be failures that occurred during the…|
+|`pmp-pr5-14`|export-batch-1|single|predictive|4|During the testing phase of a technical project, the project manager discovers some issues with the final product and…|
+|`pmp-pr5-15`|export-batch-1|single|predictive|3|A project manager is overseeing a procurement project for a company that has a dedicated procurement management team that handles…|
+|`pmp-pr5-16`|export-batch-1|single|predictive|3|The development of a final project schedule is delayed due to the inability to negotiate an agreement with one of the vendors…|
+|`pmp-pr5-17`|export-batch-1|single|predictive|3|A project manager has received quotes from two vendors for the same parts. Vendor A has informed the project manager that they…|
+|`pmp-pr5-201`|export-batch-2|single|predictive|3|A new project manager has taken over an ongoing project. Progress reports show that the project is within the allocated budget…|
+|`pmp-pr5-202`|export-batch-2|single|hybrid|4|The service provider and their client agree on about 80% of the scope of a project contract they are working on for the delivery…|
+|`pmp-pr5-203`|export-batch-2|single|predictive|3|The construction of a building is well-defined through plans and written specifications. The service is to be delivered in two…|
+|`pmp-pr5-204`|export-batch-2|single|predictive|4|A project manager has just taken over an ongoing project. The previous project manager resigned from the organization. During a…|
+|`pmp-pr5-205`|export-batch-2|single|predictive|3|A project manager for a delivery project has engaged a vendor to provide testing services.|
+|`pmp-pr5-206`|export-batch-2|single|predictive|2|Halfway through a year-long project, a hardware supplier sends a project manager notice of an intent to increase prices due to…|
+|`pmp-pr5-207`|export-batch-2|single|predictive|2|A project is in the testing phase, and the quality control team informs the project manager that the quality of the deliverables…|
+|`pmp-pr5-208`|export-batch-2|single|predictive|2|Project completion will be delayed because an essential component will not be delivered on time.|
+|`pmp-pr5-209`|export-batch-2|single|predictive|2|A project has components that are outsourced and the project manager is in the control phase of the procurement process.|
+|`pmp-pr5-210`|export-batch-2|single|predictive|2|A project has begun to develop a new software application that will be used by the company's sales team. The project is expected…|
+|`pmp-pr5-211`|export-batch-2|single|predictive|3|A project integrates with several systems developed by various vendors and one of these vendors has gone out of business.|
+|`pmp-pr5-212`|export-batch-2|single|predictive|3|A project manager is managing a project with a very aggressive delivery schedule and a firm completion date. The project requires…|
+|`pmp-pr5-213`|export-batch-2|single|predictive|3|A project manager oversees a complex project in which a vendor is responsible for delivering several essential components. The…|
+|`pmp-pr5-214`|export-batch-2|single|predictive|2|A project manager learns that the project team is involved in an ongoing conflict with an overseas supplier team. The conflict is…|
+|`pmp-pr5-215`|export-batch-2|multi|predictive|3|A project steering group has made a decision to change the vendor that will deliver a component of a project. (Choose 2).|
+|`pmp-pr5-216`|export-batch-2|single|predictive|3|A project manager is on a project in collaboration with a vendor. The vendor responded to all the Request for Proposal (RFP)…|
+|`pmp-pr5-217`|export-batch-2|single|predictive|2|A supplier has been awarded a firm fixed price (FFP) contract to provide various materials for a construction project. The…|
+|`pmp-pr5-218`|export-batch-2|single|predictive|3|The production of a key component in a construction project is outsourced to a third-party vendor. The vendor informs the project…|
+|`pmp-pr5-219`|export-batch-2|single|predictive|2|A project manager needs to contract with a provider for a large government project. Project guidelines mandate that all potential…|
+|`pmp-pr5-220`|export-batch-2|multi|predictive|3|In two months, there will be a delivery of project machines from a factory. The project team is in the process of performing a…|
+|`pmp-pr5-221`|export-batch-2|single|predictive|3|A project manager is leading a project where a vendor is engaged. The project team has a dependency on the vendor to complete…|
+|`pmp-pr5-222`|export-batch-2|single|predictive|2|After consultation with executive stakeholders, it was decided that the project manager would replace a vendor while the project…|
+|`pmp-pr5-223`|export-batch-2|single|predictive|3|A project vendor has informed a project manager that an outsourced project deliverable will be available 6 months later than the…|
+|`pmp-pr5-224`|export-batch-2|single|hybrid|3|A project manager is leading a project with a scope partially delivered by a vendor. The vendor's processes and tools differ from…|
+|`pmp-pr5-225`|export-batch-2|single|predictive|3|Due to increased price volatility, a vendor asks the project manager of a large development project to make a price change that…|
+|`pmp-pr5-226`|export-batch-2|single|predictive|2|A team receives outsourced deliverables and determines that they do not meet the agreed-upon acceptance criteria.|
+|`pmp-pr5-227`|export-batch-2|single|predictive|1|A project manager is managing a project involving a few vendors. The project sponsor asks how the project will acquire goods and…|
+|`pmp-pr5-228`|export-batch-2|single|predictive|2|A project manager needs to hire suppliers for an international project that has a performance period of several years. The…|
+|`pmp-pr5-229`|export-batch-2|single|predictive|2|During project execution, the team finds that changes must be made to a component sourced from an outside supplier. The component…|
+|`pmp-pr5-230`|export-batch-2|single|predictive|3|A project manager has been awarded a firm-fixed-price (FFP) contract to develop a new mobile app for a client. The contract scope…|
+|`pmp-pr5-231`|export-batch-2|single|predictive|3|The supplier of a tool for a manufacturing project informs the project manager that delivery of the tool will be late. The…|
+|`pmp-pr5-232`|export-batch-2|single|predictive|3|A contractor is late with a critical project deliverable due to resource challenges. There is a 22% buffer in the budget for cost…|
+|`pmp-pr5-233`|export-batch-2|multi|hybrid|4|The government of a country intends to construct a multibillion-dollar railway across three major cities and hires a contractor…|
+|`pmp-pr5-234`|export-batch-2|single|predictive|2|A member of a development project team informs the project manager that the operating system is not going to be installed on time…|
+|`pmp-pr5-235`|export-batch-2|single|predictive|3|For the implementation of a sophisticated security software across multiple departments, the selected external provider asserts…|
+|`pmp-pr5-236`|export-batch-2|single|predictive|3|For an upcoming critical initiative, a project manager must engage a vendor notorious for not meeting deadlines, yet uniquely…|
+|`pmp-pr5-237`|export-batch-2|single|predictive|2|At the beginning of a green building project, the project manager is tasked by the lead architect to engage a key supplier known…|
+|`pmp-pr5-238`|export-batch-2|single|predictive|2|You are working on a high value construction project to include smart-home components within multi-million dollar buildings.…|
+|`pmp-pr5-239`|export-batch-2|single|predictive|2|A missing item has been uncovered in the project scope that your project team cannot deliver. The item is not complex and seems…|
+|`pmp-pr5-240`|export-batch-2|single|hybrid|3|You are working on a project where part of the work is planned carefully upfront, and another part is subject to change. You…|
+|`pmp-pr5-241`|export-batch-2|single|predictive|2|You have completed a make-or-buy analysis in your project and found that part of your deliverable is best created by an external…|
+|`pmp-pr5-242`|export-batch-2|single|agile|2|Your agile project needs a third party vendor to help complete the work. The product owner has multiple features on their product…|
+|`pmp-pr5-243`|export-batch-2|single|predictive|2|You have completed a make-or-buy analysis and you agree to hire a third-party vendor to complete part of your product. You create…|
+|`pmp-pr5-244`|export-batch-2|single|predictive|2|You are the project manager on a high profile software project that involves automation technology not used before in your…|
+|`pmp-pr5-245`|export-batch-2|single|predictive|2|You are working on a project charter for the initiating stage of a new project that will deliver a new data system. You approach…|
+|`pmp-pr5-246`|export-batch-2|single|predictive|2|You have planned, executed and monitored a project to completion. The customer has just received the finished product and you…|
+|`pmp-pr5-247`|export-batch-2|single|predictive|2|You are working on a complex, high-value project to replace the telecommunications system across your organisation. You have…|
+|`pmp-pr5-248`|export-batch-2|single|predictive|2|Part of your project work needs to be outsourced to a supplier. You are asked to ensure that cost for the outsourced portion of…|
+|`pmp-pr5-249`|export-batch-2|single|agile|2|You are a project manager on an Agile project that requires an external third party to develop software for one of your features.…|
+|`pmp-pr5-250`|export-batch-2|single|predictive|2|You are working on a project where a vendor is performing a large amount of the work. Lately they have not been performing well,…|
+|`pmp-pr5-251`|export-batch-2|single|predictive|2|A recent news article spread a rumour about a supplier who is providing services for the project you are working on. They are…|
+|`pmp-pr5-252`|export-batch-2|single|predictive|1|You are working on a project and it has become apparent that part of the product your company was creating they won't be able to…|
 
 ### process-6 · Project finance — 94 items
 
@@ -765,44 +765,44 @@ any question.
 |`pmp-pr6-138`|process-6|pulldown|predictive|2|Prompts: A two-day independent safety inspection… / A nine-month tunnelling package with six… / Project controls support that runs for t…|
 |`pmp-pr6-139`|process-6|fillblank|predictive|3|A theatre's air-handling upgrade has three work packages with three-point cost estimates (optimistic / most likely / pessimistic,…|
 |`pmp-pr6-140`|process-6|hotspot|predictive|2|A Monte Carlo simulation of a ferry terminal refurbishment's total cost, against a base estimate of £4.6m, produced the five…|
-|`pmp-pr6-1`|pmp-lectures-1-11|single|predictive|4|After the transition and completion of a large equipment installation project, the project manager receives a request from the…|
-|`pmp-pr6-2`|pmp-lectures-1-11|single|predictive|4|During the development phase of a construction project, key stakeholders approved a project budget. The team identified risks and…|
-|`pmp-pr6-3`|pmp-lectures-1-11|single|agile|5|An innovative project is leveraging artificial intelligence (AI) to identify chemical compounds for the development of new…|
-|`pmp-pr6-4`|pmp-lectures-1-11|single|predictive|2|A project manager is appointed to design and develop a strategy for a government organization. The project manager recognizes…|
-|`pmp-pr6-5`|pmp-lectures-1-11|single|predictive|3|A team is working on a new technology deployment project. This product has never been implemented before so there is no past data…|
-|`pmp-pr6-6`|pmp-lectures-1-11|single|predictive|4|A project manager has been assigned to a new, multimillion-dollar project that is similar to a project the company executed three…|
-|`pmp-pr6-7`|pmp-lectures-1-11|single|predictive|4|During a progress meeting, the project team learns that an identified risk materialized. The project manager decides to execute…|
-|`pmp-pr6-8`|pmp-lectures-1-11|single|predictive|3|A construction company is implementing a new strategic project with a fixed budget. While monitoring the project, it was…|
-|`pmp-pr6-9`|pmp-lectures-1-11|single|predictive|3|At project initiation, a quote for the required services was requested from a vendor, and the work was estimated at US$100,000.…|
-|`pmp-pr6-201`|pmp-mocks-1-10|single|hybrid|4|A team is working on a new product development project using a hybrid approach. After the fourth sprint, they learn that the…|
-|`pmp-pr6-202`|pmp-mocks-1-10|single|predictive|4|A project manager is developing a project budget. After estimating the cost of each activity, the manager adds a contingency…|
-|`pmp-pr6-203`|pmp-mocks-1-10|single|agile|3|A team is working on a new project and the sponsor refuses to approve a budget increase needed for the current iteration.|
-|`pmp-pr6-204`|pmp-mocks-1-10|single|hybrid|2|A project manager is managing a hybrid project with a fixed time and fixed price agreement. The project manager is having…|
-|`pmp-pr6-205`|pmp-mocks-1-10|single|agile|2|A project manager is managing an agile project. In order to make sure there is enough funding available for the project, the…|
-|`pmp-pr6-206`|pmp-mocks-1-10|single|predictive|2|A new project has high uncertainty in the cost required for completion.|
-|`pmp-pr6-207`|pmp-mocks-1-10|single|predictive|3|A project is set to install three MRI units in a hospital; one unit has passed acceptance testing and two are under construction.…|
-|`pmp-pr6-208`|pmp-mocks-1-10|single|predictive|1|A project manager is assigned to join a mega industrial project already underway. The latest performance indices are CPI=0.42 and…|
-|`pmp-pr6-209`|pmp-mocks-1-10|single|agile|3|During an iteration the team realizes that the project will overrun the budget. This is due to the support resources being…|
-|`pmp-pr6-210`|pmp-mocks-1-10|single|agile|3|A project manager secures project approval with a constrained budget due to fiscal limitations. The sponsor emphasizes no…|
-|`pmp-pr6-211`|pmp-mocks-1-10|single|predictive|2|An approved change request adds an incentive to a lump sum contract if the contractor is able to maintain the current baseline…|
-|`pmp-pr6-212`|pmp-mocks-1-10|single|predictive|3|A project manager discovers that recent legislative updates necessitate additional security enhancements to the project. Although…|
-|`pmp-pr6-213`|pmp-mocks-1-10|single|agile|3|A project manager needs to prioritize multiple projects within a portfolio and requires accurate budget estimates. The process…|
-|`pmp-pr6-214`|pmp-mocks-1-10|single|predictive|2|A project manager is overseeing the construction of a new office building. The project is running over budget due to the high…|
-|`pmp-pr6-215`|pmp-mocks-1-10|single|predictive|2|In a construction project, the project manager decides to implement Value Engineering (VE) to enhance the project's value. The…|
-|`pmp-pr6-216`|pmp-mocks-1-10|single|predictive|2|A project manager is conducting a Value Engineering (VE) workshop to identify ways to improve a project's value. During the…|
-|`pmp-pr6-217`|pmp-mocks-1-10|single|predictive|2|During the construction of a new office building, the project manager learns that unforeseen geological issues will significantly…|
-|`pmp-pr6-218`|pmp-mocks-1-10|single|predictive|2|Faced with a constrained budget and a tight deadline for launching a new product development project, the project manager…|
-|`pmp-pr6-219`|pmp-mocks-1-10|single|predictive|2|You are working on a business case where you know that the industry is undergoing a significant change at the moment, and there…|
-|`pmp-pr6-220`|pmp-mocks-1-10|single|predictive|3|When reviewing the current progress with your project sponsor, they notice that the system solution is missing a critical piece…|
-|`pmp-pr6-221`|pmp-mocks-1-10|single|predictive|2|The project has faced serious impacts in getting materials, with supply chains being disrupted and a global pandemic, and is…|
-|`pmp-pr6-222`|pmp-mocks-1-10|single|predictive|2|You are planning a project where supply chains have been impacted, and the requirements are complex and intertwined with other…|
-|`pmp-pr6-223`|pmp-mocks-1-10|single|predictive|2|You are working as a Project Manager and your team is about to deliver the completed system to the customer. During the final…|
-|`pmp-pr6-224`|pmp-mocks-1-10|single|predictive|3|You are the project manager on a waterfall project, and you have planned the requirements, scope and schedule with your team. You…|
-|`pmp-pr6-225`|pmp-mocks-1-10|single|predictive|2|The project you are managing has defined the scope and created the Scope Baseline with the Scope Statement, WBS and WBS…|
-|`pmp-pr6-226`|pmp-mocks-1-10|single|predictive|2|Multiple unforeseen events have happened that have set your project behind schedule, and in trying to bring it back on track you…|
-|`pmp-pr6-227`|pmp-mocks-1-10|single|predictive|2|Your project plan includes an estimate of how long the project will take (via a project schedule), how much it will cost and the…|
-|`pmp-pr6-228`|pmp-mocks-1-10|single|predictive|2|You are planning your project and finalizing the project costs. You have broken down the scope into work packages and estimated…|
-|`pmp-pr6-229`|pmp-mocks-1-10|single|predictive|2|You are working as a project manager and created the cost estimate to bid on a government contract, where the scope was set by…|
+|`pmp-pr6-1`|export-batch-1|single|predictive|4|After the transition and completion of a large equipment installation project, the project manager receives a request from the…|
+|`pmp-pr6-2`|export-batch-1|single|predictive|4|During the development phase of a construction project, key stakeholders approved a project budget. The team identified risks and…|
+|`pmp-pr6-3`|export-batch-1|single|agile|5|An innovative project is leveraging artificial intelligence (AI) to identify chemical compounds for the development of new…|
+|`pmp-pr6-4`|export-batch-1|single|predictive|2|A project manager is appointed to design and develop a strategy for a government organization. The project manager recognizes…|
+|`pmp-pr6-5`|export-batch-1|single|predictive|3|A team is working on a new technology deployment project. This product has never been implemented before so there is no past data…|
+|`pmp-pr6-6`|export-batch-1|single|predictive|4|A project manager has been assigned to a new, multimillion-dollar project that is similar to a project the company executed three…|
+|`pmp-pr6-7`|export-batch-1|single|predictive|4|During a progress meeting, the project team learns that an identified risk materialized. The project manager decides to execute…|
+|`pmp-pr6-8`|export-batch-1|single|predictive|3|A construction company is implementing a new strategic project with a fixed budget. While monitoring the project, it was…|
+|`pmp-pr6-9`|export-batch-1|single|predictive|3|At project initiation, a quote for the required services was requested from a vendor, and the work was estimated at US$100,000.…|
+|`pmp-pr6-201`|export-batch-2|single|hybrid|4|A team is working on a new product development project using a hybrid approach. After the fourth sprint, they learn that the…|
+|`pmp-pr6-202`|export-batch-2|single|predictive|4|A project manager is developing a project budget. After estimating the cost of each activity, the manager adds a contingency…|
+|`pmp-pr6-203`|export-batch-2|single|agile|3|A team is working on a new project and the sponsor refuses to approve a budget increase needed for the current iteration.|
+|`pmp-pr6-204`|export-batch-2|single|hybrid|2|A project manager is managing a hybrid project with a fixed time and fixed price agreement. The project manager is having…|
+|`pmp-pr6-205`|export-batch-2|single|agile|2|A project manager is managing an agile project. In order to make sure there is enough funding available for the project, the…|
+|`pmp-pr6-206`|export-batch-2|single|predictive|2|A new project has high uncertainty in the cost required for completion.|
+|`pmp-pr6-207`|export-batch-2|single|predictive|3|A project is set to install three MRI units in a hospital; one unit has passed acceptance testing and two are under construction.…|
+|`pmp-pr6-208`|export-batch-2|single|predictive|1|A project manager is assigned to join a mega industrial project already underway. The latest performance indices are CPI=0.42 and…|
+|`pmp-pr6-209`|export-batch-2|single|agile|3|During an iteration the team realizes that the project will overrun the budget. This is due to the support resources being…|
+|`pmp-pr6-210`|export-batch-2|single|agile|3|A project manager secures project approval with a constrained budget due to fiscal limitations. The sponsor emphasizes no…|
+|`pmp-pr6-211`|export-batch-2|single|predictive|2|An approved change request adds an incentive to a lump sum contract if the contractor is able to maintain the current baseline…|
+|`pmp-pr6-212`|export-batch-2|single|predictive|3|A project manager discovers that recent legislative updates necessitate additional security enhancements to the project. Although…|
+|`pmp-pr6-213`|export-batch-2|single|agile|3|A project manager needs to prioritize multiple projects within a portfolio and requires accurate budget estimates. The process…|
+|`pmp-pr6-214`|export-batch-2|single|predictive|2|A project manager is overseeing the construction of a new office building. The project is running over budget due to the high…|
+|`pmp-pr6-215`|export-batch-2|single|predictive|2|In a construction project, the project manager decides to implement Value Engineering (VE) to enhance the project's value. The…|
+|`pmp-pr6-216`|export-batch-2|single|predictive|2|A project manager is conducting a Value Engineering (VE) workshop to identify ways to improve a project's value. During the…|
+|`pmp-pr6-217`|export-batch-2|single|predictive|2|During the construction of a new office building, the project manager learns that unforeseen geological issues will significantly…|
+|`pmp-pr6-218`|export-batch-2|single|predictive|2|Faced with a constrained budget and a tight deadline for launching a new product development project, the project manager…|
+|`pmp-pr6-219`|export-batch-2|single|predictive|2|You are working on a business case where you know that the industry is undergoing a significant change at the moment, and there…|
+|`pmp-pr6-220`|export-batch-2|single|predictive|3|When reviewing the current progress with your project sponsor, they notice that the system solution is missing a critical piece…|
+|`pmp-pr6-221`|export-batch-2|single|predictive|2|The project has faced serious impacts in getting materials, with supply chains being disrupted and a global pandemic, and is…|
+|`pmp-pr6-222`|export-batch-2|single|predictive|2|You are planning a project where supply chains have been impacted, and the requirements are complex and intertwined with other…|
+|`pmp-pr6-223`|export-batch-2|single|predictive|2|You are working as a Project Manager and your team is about to deliver the completed system to the customer. During the final…|
+|`pmp-pr6-224`|export-batch-2|single|predictive|3|You are the project manager on a waterfall project, and you have planned the requirements, scope and schedule with your team. You…|
+|`pmp-pr6-225`|export-batch-2|single|predictive|2|The project you are managing has defined the scope and created the Scope Baseline with the Scope Statement, WBS and WBS…|
+|`pmp-pr6-226`|export-batch-2|single|predictive|2|Multiple unforeseen events have happened that have set your project behind schedule, and in trying to bring it back on track you…|
+|`pmp-pr6-227`|export-batch-2|single|predictive|2|Your project plan includes an estimate of how long the project will take (via a project schedule), how much it will cost and the…|
+|`pmp-pr6-228`|export-batch-2|single|predictive|2|You are planning your project and finalizing the project costs. You have broken down the scope into work packages and estimated…|
+|`pmp-pr6-229`|export-batch-2|single|predictive|2|You are working as a project manager and created the cost estimate to bid on a government contract, where the scope was set by…|
 
 ### process-7 · Quality — 118 items
 
@@ -865,69 +865,69 @@ any question.
 |`pmp-pr7-138`|process-7|single|agile|3|Your team runs a university's online learning platform. The product owner consistently ranks new features above defect fixes, and…|
 |`pmp-pr7-139`|process-7|multi|predictive|3|You are managing the fit-out of 400 cabins on a cruise ship. Two inspectors check veneer panels for finish defects. In a weekly…|
 |`pmp-pr7-140`|process-7|hotspot|hybrid|3|Your hybrid programme is commissioning a new bread line: equipment is installed to a fixed plan and its control software is tuned…|
-|`pmp-pr7-1`|pmp-lectures-1-11|single|agile|3|A project team member informs the project manager that all items are complete and the team is ready to move on to the next…|
-|`pmp-pr7-2`|pmp-lectures-1-11|single|agile|3|A company is developing a new product that needs to implement nonfunctional security requirements. The product owner is concerned…|
-|`pmp-pr7-3`|pmp-lectures-1-11|single|agile|3|A functional manager involved in a project complains about the latest quality metrics reports associated with all previous…|
-|`pmp-pr7-4`|pmp-lectures-1-11|single|predictive|3|A customer has rejected an interim project deliverable.|
-|`pmp-pr7-5`|pmp-lectures-1-11|single|predictive|3|While closing a project, the client finds some defects in the deliverable.|
-|`pmp-pr7-6`|pmp-lectures-1-11|single|predictive|3|During a final inspection of a new product, the project team discovers a significant defect in one of the key deliverables. This…|
-|`pmp-pr7-201`|pmp-mocks-1-10|single|agile|2|The first iteration of an agile project consists of a minimum viable product (MVP) that is now successfully completed. The team…|
-|`pmp-pr7-202`|pmp-mocks-1-10|single|predictive|3|A project manager is leading a project to deliver a new product in a heavily regulated industry and must prioritize quality…|
-|`pmp-pr7-203`|pmp-mocks-1-10|single|predictive|3|An organization has a policy requiring all project managers to conduct a standardized audit of another project manager's project…|
-|`pmp-pr7-204`|pmp-mocks-1-10|single|predictive|3|A project manager is newly assigned to an ongoing project and determines that the quality has been consistent. There is a…|
-|`pmp-pr7-205`|pmp-mocks-1-10|single|predictive|3|A project manager assigned to an existing project finds that the deliverable quality has been inconsistent. The project manager…|
-|`pmp-pr7-206`|pmp-mocks-1-10|single|predictive|3|A project manager in a manufacturing company was notified of a failure of the delivered machinery during the initial tests. The…|
-|`pmp-pr7-207`|pmp-mocks-1-10|single|predictive|3|A new product was accepted by the customer, but after two weeks the project manager received a complaint from the customer saying…|
-|`pmp-pr7-208`|pmp-mocks-1-10|single|predictive|2|A serious quality issue has been identified during the implementation of a major public infrastructure project. The issue is…|
-|`pmp-pr7-209`|pmp-mocks-1-10|single|hybrid|2|A company is working on a hybrid project in which the deliverables have quality issues at the end of one of the sprints.|
-|`pmp-pr7-210`|pmp-mocks-1-10|single|predictive|3|A project manager working in a matrix organization is managing a project that is scheduled to be completed in one month. At…|
-|`pmp-pr7-211`|pmp-mocks-1-10|single|predictive|3|A project for an accounts receivable system that was recently launched into production received a fine from a regulatory body…|
-|`pmp-pr7-212`|pmp-mocks-1-10|single|predictive|2|A project is in the execution phase, and product testing is almost complete. A team member proposes that the testing can be…|
-|`pmp-pr7-213`|pmp-mocks-1-10|single|predictive|2|The client agreed to the standards that would be used to assess final deliverables prior to hand-off, but is now asking for…|
-|`pmp-pr7-214`|pmp-mocks-1-10|single|predictive|2|A major project deliverable is completed.|
-|`pmp-pr7-215`|pmp-mocks-1-10|single|predictive|3|A project team has not been performing user acceptance tests on a deliverable because the product has been working as expected in…|
-|`pmp-pr7-216`|pmp-mocks-1-10|single|predictive|3|Due to a budget issue, the project team decides to use low-cost equipment with higher testing uncertainty to reduce cost.…|
-|`pmp-pr7-217`|pmp-mocks-1-10|single|predictive|3|During final inspection of a deliverable, the quality team observes that there is a deviation on a particular component. The…|
-|`pmp-pr7-218`|pmp-mocks-1-10|single|agile|3|An agile project team is implementing a supporting technology platform across departments. They're planning a readiness review…|
-|`pmp-pr7-219`|pmp-mocks-1-10|single|predictive|3|All quality controls have passed, and a project deliverable is ready to be released to the customer. However, a change request to…|
-|`pmp-pr7-220`|pmp-mocks-1-10|single|agile|3|During a retrospective meeting, the project team confirmed that all deliverables were completed according to the specifications…|
-|`pmp-pr7-221`|pmp-mocks-1-10|single|agile|3|A project manager is creating a software project's quality management plan. While reviewing lessons learned from past, similar…|
-|`pmp-pr7-222`|pmp-mocks-1-10|single|agile|3|A project manager is responsible for a new agile project that is global in nature. After a few sprints have been completed, the…|
-|`pmp-pr7-223`|pmp-mocks-1-10|single|predictive|2|While reviewing the quality of deliverables with the team, the project manager determines that several quality issues could have…|
-|`pmp-pr7-224`|pmp-mocks-1-10|single|predictive|2|A new project manager joins a project overseen by a senior project manager. The sponsor asks the new project manager to develop…|
-|`pmp-pr7-225`|pmp-mocks-1-10|single|predictive|2|A customer has informed the project manager that they do not accept the project deliverables.|
-|`pmp-pr7-226`|pmp-mocks-1-10|single|predictive|3|A customer identifies performance issues on a newly implemented product.|
-|`pmp-pr7-227`|pmp-mocks-1-10|multi|agile|3|One of the retrospective action items that has recurred for the past two iterations is related to the verification and validation…|
-|`pmp-pr7-228`|pmp-mocks-1-10|single|predictive|2|For quality assurance, a quality audit was conducted on the processes being used in the project execution plan. One of the…|
-|`pmp-pr7-229`|pmp-mocks-1-10|multi|predictive|3|A project is challenged by a multitude of problems resulting in defects and stakeholder complaints. The project manager has been…|
-|`pmp-pr7-230`|pmp-mocks-1-10|single|predictive|2|A project manager is assigned to take over an ongoing project. During the quality review, the team discovered that 40% of the…|
-|`pmp-pr7-231`|pmp-mocks-1-10|multi|predictive|3|A project team is unexpectedly audited. Several nonconformances were identified during the audit. (Choose three)|
-|`pmp-pr7-232`|pmp-mocks-1-10|single|agile|2|During product demonstration, a stakeholder suggests that the product does not meet expectations.|
-|`pmp-pr7-233`|pmp-mocks-1-10|single|predictive|2|A stakeholder complains that a product component is not easy to use.|
-|`pmp-pr7-234`|pmp-mocks-1-10|single|agile|1|A developer has completed the deliverable for a feature. The product owner is not sure how to assess the quality of the…|
-|`pmp-pr7-235`|pmp-mocks-1-10|single|hybrid|3|A project manager is leading an intricate biotechnology research project characterized by significant ambiguity and…|
-|`pmp-pr7-236`|pmp-mocks-1-10|single|predictive|3|Just before the final review of a new software development project, the project manager is informed by the quality assurance team…|
-|`pmp-pr7-237`|pmp-mocks-1-10|single|predictive|2|A project manager is preparing for a quality audit of a new software development project. The audit team needs to ensure the…|
-|`pmp-pr7-238`|pmp-mocks-1-10|single|predictive|2|During the execution phase of a manufacturing project, an internal quality audit reveals several non conformances in the…|
-|`pmp-pr7-239`|pmp-mocks-1-10|single|predictive|2|In the middle of a large infrastructure project, the project manager receives a report from an external quality auditor…|
-|`pmp-pr7-240`|pmp-mocks-1-10|single|predictive|2|In the initial stages of launching a pioneering software tool aimed at small businesses, the project manager is focused on…|
-|`pmp-pr7-241`|pmp-mocks-1-10|single|hybrid|2|Towards the end of a large-scale infrastructure development project, the project manager detects a slowdown in progress with a…|
-|`pmp-pr7-242`|pmp-mocks-1-10|single|agile|2|You are working on a project where senior users have been testing the product as parts are released. They have found some missing…|
-|`pmp-pr7-243`|pmp-mocks-1-10|single|agile|1|Your project team are trialling an agile way of work. The Product Owner has a clear vision for the product. There is confusion in…|
-|`pmp-pr7-244`|pmp-mocks-1-10|single|predictive|2|You have been working closely with the quality manager of your project, planning the budget for the project phase that is due to…|
-|`pmp-pr7-245`|pmp-mocks-1-10|single|agile|3|Your agile project has recently had multiple quality issues. Project features have been prioritised by the Product Owner, and…|
-|`pmp-pr7-246`|pmp-mocks-1-10|single|agile|2|The product owner has prioritised the product backlog of features, and the team creates user stories with estimates and places…|
-|`pmp-pr7-247`|pmp-mocks-1-10|single|predictive|2|You are working on a new software application with a lot of complex interdependencies. The senior user providing and testing most…|
-|`pmp-pr7-248`|pmp-mocks-1-10|single|agile|2|You are working with the team on the team charter and have outlined the project vision, mission, agreed meeting times and…|
-|`pmp-pr7-249`|pmp-mocks-1-10|single|predictive|2|You have been asked to work on a process improvement within your team. Your manager has secured a developer to assist you with…|
-|`pmp-pr7-250`|pmp-mocks-1-10|single|predictive|2|As your project begins, it becomes clear the most of the business analysts, developers and testers are not familiar with system…|
-|`pmp-pr7-251`|pmp-mocks-1-10|single|predictive|2|You have been asked to monitor the changes to a product before completing your next project phase. You review the control chart.…|
-|`pmp-pr7-252`|pmp-mocks-1-10|single|predictive|2|A quality assurance manager has been hired externally to test the project and manage defects. She executed the process in the…|
-|`pmp-pr7-253`|pmp-mocks-1-10|single|predictive|3|You are in the process of measuring the outcome of one of your deliverables on the business. The data shows that there seems to…|
-|`pmp-pr7-254`|pmp-mocks-1-10|single|predictive|2|You take the completed scope to your project sponsor for them to accept. The Project Sponsor advises she cannot accept the…|
-|`pmp-pr7-255`|pmp-mocks-1-10|single|agile|2|You are working as a project manager in an Agile team.|
-|`pmp-pr7-256`|pmp-mocks-1-10|single|agile|1|You are working with your agile team, and they are confused about when the best time is to determine the acceptance test criteria…|
-|`pmp-pr7-257`|pmp-mocks-1-10|single|hybrid|2|You have been working with a project team, delivering new items very quickly. The team were so focused on delivering items…|
+|`pmp-pr7-1`|export-batch-1|single|agile|3|A project team member informs the project manager that all items are complete and the team is ready to move on to the next…|
+|`pmp-pr7-2`|export-batch-1|single|agile|3|A company is developing a new product that needs to implement nonfunctional security requirements. The product owner is concerned…|
+|`pmp-pr7-3`|export-batch-1|single|agile|3|A functional manager involved in a project complains about the latest quality metrics reports associated with all previous…|
+|`pmp-pr7-4`|export-batch-1|single|predictive|3|A customer has rejected an interim project deliverable.|
+|`pmp-pr7-5`|export-batch-1|single|predictive|3|While closing a project, the client finds some defects in the deliverable.|
+|`pmp-pr7-6`|export-batch-1|single|predictive|3|During a final inspection of a new product, the project team discovers a significant defect in one of the key deliverables. This…|
+|`pmp-pr7-201`|export-batch-2|single|agile|2|The first iteration of an agile project consists of a minimum viable product (MVP) that is now successfully completed. The team…|
+|`pmp-pr7-202`|export-batch-2|single|predictive|3|A project manager is leading a project to deliver a new product in a heavily regulated industry and must prioritize quality…|
+|`pmp-pr7-203`|export-batch-2|single|predictive|3|An organization has a policy requiring all project managers to conduct a standardized audit of another project manager's project…|
+|`pmp-pr7-204`|export-batch-2|single|predictive|3|A project manager is newly assigned to an ongoing project and determines that the quality has been consistent. There is a…|
+|`pmp-pr7-205`|export-batch-2|single|predictive|3|A project manager assigned to an existing project finds that the deliverable quality has been inconsistent. The project manager…|
+|`pmp-pr7-206`|export-batch-2|single|predictive|3|A project manager in a manufacturing company was notified of a failure of the delivered machinery during the initial tests. The…|
+|`pmp-pr7-207`|export-batch-2|single|predictive|3|A new product was accepted by the customer, but after two weeks the project manager received a complaint from the customer saying…|
+|`pmp-pr7-208`|export-batch-2|single|predictive|2|A serious quality issue has been identified during the implementation of a major public infrastructure project. The issue is…|
+|`pmp-pr7-209`|export-batch-2|single|hybrid|2|A company is working on a hybrid project in which the deliverables have quality issues at the end of one of the sprints.|
+|`pmp-pr7-210`|export-batch-2|single|predictive|3|A project manager working in a matrix organization is managing a project that is scheduled to be completed in one month. At…|
+|`pmp-pr7-211`|export-batch-2|single|predictive|3|A project for an accounts receivable system that was recently launched into production received a fine from a regulatory body…|
+|`pmp-pr7-212`|export-batch-2|single|predictive|2|A project is in the execution phase, and product testing is almost complete. A team member proposes that the testing can be…|
+|`pmp-pr7-213`|export-batch-2|single|predictive|2|The client agreed to the standards that would be used to assess final deliverables prior to hand-off, but is now asking for…|
+|`pmp-pr7-214`|export-batch-2|single|predictive|2|A major project deliverable is completed.|
+|`pmp-pr7-215`|export-batch-2|single|predictive|3|A project team has not been performing user acceptance tests on a deliverable because the product has been working as expected in…|
+|`pmp-pr7-216`|export-batch-2|single|predictive|3|Due to a budget issue, the project team decides to use low-cost equipment with higher testing uncertainty to reduce cost.…|
+|`pmp-pr7-217`|export-batch-2|single|predictive|3|During final inspection of a deliverable, the quality team observes that there is a deviation on a particular component. The…|
+|`pmp-pr7-218`|export-batch-2|single|agile|3|An agile project team is implementing a supporting technology platform across departments. They're planning a readiness review…|
+|`pmp-pr7-219`|export-batch-2|single|predictive|3|All quality controls have passed, and a project deliverable is ready to be released to the customer. However, a change request to…|
+|`pmp-pr7-220`|export-batch-2|single|agile|3|During a retrospective meeting, the project team confirmed that all deliverables were completed according to the specifications…|
+|`pmp-pr7-221`|export-batch-2|single|agile|3|A project manager is creating a software project's quality management plan. While reviewing lessons learned from past, similar…|
+|`pmp-pr7-222`|export-batch-2|single|agile|3|A project manager is responsible for a new agile project that is global in nature. After a few sprints have been completed, the…|
+|`pmp-pr7-223`|export-batch-2|single|predictive|2|While reviewing the quality of deliverables with the team, the project manager determines that several quality issues could have…|
+|`pmp-pr7-224`|export-batch-2|single|predictive|2|A new project manager joins a project overseen by a senior project manager. The sponsor asks the new project manager to develop…|
+|`pmp-pr7-225`|export-batch-2|single|predictive|2|A customer has informed the project manager that they do not accept the project deliverables.|
+|`pmp-pr7-226`|export-batch-2|single|predictive|3|A customer identifies performance issues on a newly implemented product.|
+|`pmp-pr7-227`|export-batch-2|multi|agile|3|One of the retrospective action items that has recurred for the past two iterations is related to the verification and validation…|
+|`pmp-pr7-228`|export-batch-2|single|predictive|2|For quality assurance, a quality audit was conducted on the processes being used in the project execution plan. One of the…|
+|`pmp-pr7-229`|export-batch-2|multi|predictive|3|A project is challenged by a multitude of problems resulting in defects and stakeholder complaints. The project manager has been…|
+|`pmp-pr7-230`|export-batch-2|single|predictive|2|A project manager is assigned to take over an ongoing project. During the quality review, the team discovered that 40% of the…|
+|`pmp-pr7-231`|export-batch-2|multi|predictive|3|A project team is unexpectedly audited. Several nonconformances were identified during the audit. (Choose three)|
+|`pmp-pr7-232`|export-batch-2|single|agile|2|During product demonstration, a stakeholder suggests that the product does not meet expectations.|
+|`pmp-pr7-233`|export-batch-2|single|predictive|2|A stakeholder complains that a product component is not easy to use.|
+|`pmp-pr7-234`|export-batch-2|single|agile|1|A developer has completed the deliverable for a feature. The product owner is not sure how to assess the quality of the…|
+|`pmp-pr7-235`|export-batch-2|single|hybrid|3|A project manager is leading an intricate biotechnology research project characterized by significant ambiguity and…|
+|`pmp-pr7-236`|export-batch-2|single|predictive|3|Just before the final review of a new software development project, the project manager is informed by the quality assurance team…|
+|`pmp-pr7-237`|export-batch-2|single|predictive|2|A project manager is preparing for a quality audit of a new software development project. The audit team needs to ensure the…|
+|`pmp-pr7-238`|export-batch-2|single|predictive|2|During the execution phase of a manufacturing project, an internal quality audit reveals several non conformances in the…|
+|`pmp-pr7-239`|export-batch-2|single|predictive|2|In the middle of a large infrastructure project, the project manager receives a report from an external quality auditor…|
+|`pmp-pr7-240`|export-batch-2|single|predictive|2|In the initial stages of launching a pioneering software tool aimed at small businesses, the project manager is focused on…|
+|`pmp-pr7-241`|export-batch-2|single|hybrid|2|Towards the end of a large-scale infrastructure development project, the project manager detects a slowdown in progress with a…|
+|`pmp-pr7-242`|export-batch-2|single|agile|2|You are working on a project where senior users have been testing the product as parts are released. They have found some missing…|
+|`pmp-pr7-243`|export-batch-2|single|agile|1|Your project team are trialling an agile way of work. The Product Owner has a clear vision for the product. There is confusion in…|
+|`pmp-pr7-244`|export-batch-2|single|predictive|2|You have been working closely with the quality manager of your project, planning the budget for the project phase that is due to…|
+|`pmp-pr7-245`|export-batch-2|single|agile|3|Your agile project has recently had multiple quality issues. Project features have been prioritised by the Product Owner, and…|
+|`pmp-pr7-246`|export-batch-2|single|agile|2|The product owner has prioritised the product backlog of features, and the team creates user stories with estimates and places…|
+|`pmp-pr7-247`|export-batch-2|single|predictive|2|You are working on a new software application with a lot of complex interdependencies. The senior user providing and testing most…|
+|`pmp-pr7-248`|export-batch-2|single|agile|2|You are working with the team on the team charter and have outlined the project vision, mission, agreed meeting times and…|
+|`pmp-pr7-249`|export-batch-2|single|predictive|2|You have been asked to work on a process improvement within your team. Your manager has secured a developer to assist you with…|
+|`pmp-pr7-250`|export-batch-2|single|predictive|2|As your project begins, it becomes clear the most of the business analysts, developers and testers are not familiar with system…|
+|`pmp-pr7-251`|export-batch-2|single|predictive|2|You have been asked to monitor the changes to a product before completing your next project phase. You review the control chart.…|
+|`pmp-pr7-252`|export-batch-2|single|predictive|2|A quality assurance manager has been hired externally to test the project and manage defects. She executed the process in the…|
+|`pmp-pr7-253`|export-batch-2|single|predictive|3|You are in the process of measuring the outcome of one of your deliverables on the business. The data shows that there seems to…|
+|`pmp-pr7-254`|export-batch-2|single|predictive|2|You take the completed scope to your project sponsor for them to accept. The Project Sponsor advises she cannot accept the…|
+|`pmp-pr7-255`|export-batch-2|single|agile|2|You are working as a project manager in an Agile team.|
+|`pmp-pr7-256`|export-batch-2|single|agile|1|You are working with your agile team, and they are confused about when the best time is to determine the acceptance test criteria…|
+|`pmp-pr7-257`|export-batch-2|single|hybrid|2|You have been working with a project team, delivering new items very quickly. The team were so focused on delivering items…|
 
 ### process-8 · Schedule — 137 items
 
@@ -992,86 +992,86 @@ any question.
 |`pmp-pr8-138`|process-8|pulldown|predictive|3|Prompts: Hundreds of short activities, such as in… / Resurfacing is laid lane-kilometre by la… / Pavement design lasts twelve weeks and p…|
 |`pmp-pr8-139`|process-8|fillblank|predictive|3|A 1.2 km sewer replacement is planned with overlapping activities. Trenching takes 12 days and starts at the beginning of day 1.…|
 |`pmp-pr8-140`|process-8|hotspot|agile|4|A publisher's digital team works in Kanban, and its delivery forecasts have slipped for six weeks. Each band of the cumulative…|
-|`pmp-pr8-1`|pmp-lectures-1-11|single|agile|4|An agile project is midway through its ten iteration cycles. During the last iteration, the team had to work overtime to…|
-|`pmp-pr8-2`|pmp-lectures-1-11|single|predictive|2|A project manager is planning for a complex project that must deliver a high-quality product within the agreed-upon budget. The…|
-|`pmp-pr8-3`|pmp-lectures-1-11|single|agile|3|At a review meeting, the project manager learns about unclear requirements that may impact the project's scheduled completion.…|
-|`pmp-pr8-4`|pmp-lectures-1-11|single|hybrid|4|A project manager works in an organization using a hybrid project delivery approach. The scope of the project is to implement a…|
-|`pmp-pr8-5`|pmp-lectures-1-11|single|agile|3|An agile project team is building a website for a client. The client informs the product owner that their company has decided to…|
-|`pmp-pr8-6`|pmp-lectures-1-11|single|predictive|3|A team member is unable to work for one week because of sick leave. The team member is currently assigned to a task on the…|
-|`pmp-pr8-7`|pmp-lectures-1-11|single|predictive|3|A project manager has a new project. The work breakdown structure (WBS) and sequence of activities have been defined, but the…|
-|`pmp-pr8-8`|pmp-lectures-1-11|single|agile|4|A company is expanding its product manufacturing to a new country. The date the company will start operating is set and broadly…|
-|`pmp-pr8-9`|pmp-lectures-1-11|single|predictive|4|A project manager is required to obtain approval for project requirements before proceeding to the delivery stage. During the…|
-|`pmp-pr8-10`|pmp-lectures-1-11|multi|predictive|4|A project manager is working in the fifth month of an implementation for a construction project. The planner reported that the…|
-|`pmp-pr8-201`|pmp-mocks-1-10|single|predictive|3|During a project schedule review meeting, the project team identified that one of the critical path activities has slipped due to…|
-|`pmp-pr8-202`|pmp-mocks-1-10|single|agile|2|A key deadline is approaching specialized team member has suddenly received news that they must leave the office for two weeks.…|
-|`pmp-pr8-203`|pmp-mocks-1-10|single|hybrid|3|During a hybrid project, a project manager reviews the project team's performance and realizes that the team's velocity is not…|
-|`pmp-pr8-204`|pmp-mocks-1-10|single|predictive|2|During the planning phase, a project manager is creating the project schedule. The designated project team is finishing an…|
-|`pmp-pr8-205`|pmp-mocks-1-10|single|predictive|3|A project manager has identified that a task on the critical path is behind schedule. The project manager thinks that additional…|
-|`pmp-pr8-206`|pmp-mocks-1-10|single|agile|3|An information technology (IT) project manager was assigned a new team for a software development project in an agile…|
-|`pmp-pr8-207`|pmp-mocks-1-10|single|agile|3|A project is estimated to have a total of 250 story points. The team planned 40 story points for each iteration and delivered 40,…|
-|`pmp-pr8-208`|pmp-mocks-1-10|single|predictive|3|A construction project has progressed for about 18 months, and the schedule performance index (SPI) is 0.68. The project manager…|
-|`pmp-pr8-209`|pmp-mocks-1-10|single|agile|4|An intern is replacing a critical resource midway through a sprint. To help the intern get up to speed, the project manager…|
-|`pmp-pr8-210`|pmp-mocks-1-10|multi|predictive|3|A project team is working on determining dependencies for approximately 350 activities for an ongoing project. (Choose 2).|
-|`pmp-pr8-211`|pmp-mocks-1-10|single|agile|3|A project manager is leading an agile project that is in the execution phase. After a couple of sprints, the project manager…|
-|`pmp-pr8-212`|pmp-mocks-1-10|single|predictive|3|An impact assessment reveals that a deliverable could be delayed by two weeks. A key resource has not been available to work on a…|
-|`pmp-pr8-213`|pmp-mocks-1-10|single|agile|2|An agile team has been struggling to keep up with the planned pace, which is frequently resulting in sprint failures.|
-|`pmp-pr8-214`|pmp-mocks-1-10|single|agile|2|A team has been working for two months and has consistently missed planned user stories.|
-|`pmp-pr8-215`|pmp-mocks-1-10|single|predictive|2|A project team is working on determining the dependencies for activities for an ongoing project.|
-|`pmp-pr8-216`|pmp-mocks-1-10|single|predictive|3|A project manager is leading a team that is developing a new software product. The deadline for the product launch is…|
-|`pmp-pr8-217`|pmp-mocks-1-10|single|predictive|3|A project's statement of work (SOW) requires that the project be delivered in nine months. The project manager believes that the…|
-|`pmp-pr8-218`|pmp-mocks-1-10|single|predictive|2|After receiving the project charter, a project manager starts to prepare the project management plan. Although there is a limited…|
-|`pmp-pr8-219`|pmp-mocks-1-10|single|predictive|2|A project is showing a negative schedule variance. The project manager sees that one team is causing the delays.|
-|`pmp-pr8-220`|pmp-mocks-1-10|single|agile|3|A project manager is planning the next release for the software development team. The team has completed two releases to date,…|
-|`pmp-pr8-221`|pmp-mocks-1-10|multi|predictive|3|A project manager is managing a long-term project that is behind schedule. The client is concerned that the project will be…|
-|`pmp-pr8-222`|pmp-mocks-1-10|single|predictive|3|One day before starting a task, the technical lead proposed a new implementation approach that could reduce the schedule by one…|
-|`pmp-pr8-223`|pmp-mocks-1-10|single|agile|3|An experienced project manager joins an ongoing project and wants to estimate the amount of time required to tackle several…|
-|`pmp-pr8-224`|pmp-mocks-1-10|multi|agile|2|A project manager is preparing for a sprint planning session for a new feature in a healthcare management system. This meeting…|
-|`pmp-pr8-225`|pmp-mocks-1-10|single|predictive|2|A project manager has begun a complex airport expansion project. Although the project is in the initiation phase, the sponsor…|
-|`pmp-pr8-226`|pmp-mocks-1-10|single|predictive|2|On an infrastructure project to upgrade city water systems, the project manager is struggling to finalize the project schedule…|
-|`pmp-pr8-227`|pmp-mocks-1-10|single|agile|2|In a software development project, as the team moves into the development phase, they decide to utilize time tracking to estimate…|
-|`pmp-pr8-228`|pmp-mocks-1-10|single|predictive|2|During the deployment phase of a new telecommunications network, the project encounters significant delays.|
-|`pmp-pr8-229`|pmp-mocks-1-10|single|predictive|2|A key stakeholder requests that the project manager deliver a critical infrastructure component two weeks ahead of schedule. The…|
-|`pmp-pr8-230`|pmp-mocks-1-10|single|predictive|2|In the midst of implementing a new healthcare IT system, a project manager faces a challenge. The initial phase, involving the…|
-|`pmp-pr8-231`|pmp-mocks-1-10|single|agile|2|As the project manager for an app development project, you are approached by a stakeholder with a request to add a feature that…|
-|`pmp-pr8-232`|pmp-mocks-1-10|single|predictive|3|During the critical phase of a green energy plant construction project, it becomes evident that the project may not adhere to the…|
-|`pmp-pr8-233`|pmp-mocks-1-10|single|hybrid|3|As the project manager overseeing the rollout of a new IT system, it's discovered halfway through the fiscal year that several…|
-|`pmp-pr8-234`|pmp-mocks-1-10|multi|hybrid|3|In the early planning stages of a green building project, the project manager faces challenges with limited data available for…|
-|`pmp-pr8-235`|pmp-mocks-1-10|single|predictive|1|During the critical testing phase of an enterprise software upgrade, the project manager identifies that testing is significantly…|
-|`pmp-pr8-236`|pmp-mocks-1-10|single|predictive|3|After gathering your project requirements, project scope, and breaking it down into activities, you need to estimate the project…|
-|`pmp-pr8-237`|pmp-mocks-1-10|single|agile|1|You have noted nine epics for delivery as part of your most recent project. Your team have broken down these epics into user…|
-|`pmp-pr8-238`|pmp-mocks-1-10|single|predictive|2|You have taken over as Project Manager for a project that has had issues delivering on time. You review the Earned Value…|
-|`pmp-pr8-239`|pmp-mocks-1-10|single|predictive|1|You are working on a project where you have been completing the deliverables in sequence, and the project work is starting to…|
-|`pmp-pr8-240`|pmp-mocks-1-10|single|agile|2|Your team are new to agile, and had previously been working with Waterfall. Your key customer asks you for a project schedule.…|
-|`pmp-pr8-241`|pmp-mocks-1-10|single|agile|2|You are working in an agile project team that has increased in size and complexity since the project began. In reviewing the…|
-|`pmp-pr8-242`|pmp-mocks-1-10|single|agile|2|You are creating a business case and project charter with a small initial project team. You have a high level feature, decomposed…|
-|`pmp-pr8-243`|pmp-mocks-1-10|single|predictive|2|You are adding an essential feature to your product roadmap. Your team believe they can complete the feature in six weeks,…|
-|`pmp-pr8-244`|pmp-mocks-1-10|single|agile|1|You have a prioritised product backlog of features, and have decomposed the next feature to be delivered into user stories, small…|
-|`pmp-pr8-245`|pmp-mocks-1-10|single|predictive|2|You are integrating a third party system as part of your project. The developers in your project team have not worked with this…|
-|`pmp-pr8-246`|pmp-mocks-1-10|single|agile|1|You are a product owner on an agile project and have created a product backlog of features in a prioritised order for delivery.…|
-|`pmp-pr8-247`|pmp-mocks-1-10|single|agile|1|You have worked with your project customer to create a list of features that will bring the most value to them. They would like…|
-|`pmp-pr8-248`|pmp-mocks-1-10|single|agile|1|You are planning the next iteration in your Agile team, as the Agile lead. The team is going to select user stories from the…|
-|`pmp-pr8-249`|pmp-mocks-1-10|single|agile|2|While on an Agile project team, you prioritise the backlog of features with the product owner, and agree what you will work on…|
-|`pmp-pr8-250`|pmp-mocks-1-10|single|agile|1|You are working with your Agile project team to estimate each task and how long they might take. The team is finding it difficult…|
-|`pmp-pr8-251`|pmp-mocks-1-10|single|agile|1|You are an Agile project manager and talking through the iteration with the product owner. They have created the list of items in…|
-|`pmp-pr8-252`|pmp-mocks-1-10|single|predictive|1|You are working on a large multi-year project. You realise that the estimates from a year ago are extremely inaccurate, and the…|
-|`pmp-pr8-253`|pmp-mocks-1-10|single|predictive|2|When reviewing the project performance with your team, you notice the following: 1) Activity A, on the critical path, is delayed…|
-|`pmp-pr8-254`|pmp-mocks-1-10|single|predictive|2|You are working on a new waterfall project where the scope and cost have been planned up front. As the project progresses, you…|
-|`pmp-pr8-255`|pmp-mocks-1-10|single|predictive|2|About a third of your project team have worked on a similar project in the past. They have gathered requirements and created a…|
-|`pmp-pr8-256`|pmp-mocks-1-10|single|predictive|2|The people and resources involved in your project are currently costing a large amount of money, and your project sponsor…|
-|`pmp-pr8-257`|pmp-mocks-1-10|single|agile|2|You are working through the backlog with the product owner and estimating the story cards with the development team. The team are…|
-|`pmp-pr8-258`|pmp-mocks-1-10|single|agile|1|The business partner or product owner continuously refines, or grooms, the product backlog. This includes adding new stories,…|
-|`pmp-pr8-259`|pmp-mocks-1-10|single|agile|2|You have been estimating story cards with your Agile project team, but the effort captured has not been matching the time it ends…|
-|`pmp-pr8-260`|pmp-mocks-1-10|single|agile|1|You are delivering features through your Agile project and the project sponsor and product owner are happy with the progress.…|
-|`pmp-pr8-261`|pmp-mocks-1-10|single|agile|1|Your Agile team is estimating story cards using planning poker. For one of the larger features, some of the team has estimated…|
-|`pmp-pr8-262`|pmp-mocks-1-10|single|agile|1|You are working through a sprint planning meeting with your team. The team have sized up the cards and prioritised the backlog.|
-|`pmp-pr8-263`|pmp-mocks-1-10|single|agile|2|You are working in a new Agile team and have reviewed the team velocity over the past three iterations. The maximum number of…|
-|`pmp-pr8-264`|pmp-mocks-1-10|single|agile|1|You are running an Agile project and meet with the team for the next sprint planning meeting.|
-|`pmp-pr8-265`|pmp-mocks-1-10|single|agile|1|The team are planning their first upcoming sprint on an Agile project. They have worked with the product owner who has gathered a…|
-|`pmp-pr8-266`|pmp-mocks-1-10|single|hybrid|2|Your project team have been used to working in a Predictive or Waterfall way of work, planning everything up front. As your…|
-|`pmp-pr8-267`|pmp-mocks-1-10|single|predictive|3|You are at the beginning of planning a new project, and have researched and gathered the requirements from the area, broken them…|
-|`pmp-pr8-268`|pmp-mocks-1-10|single|agile|2|You are working on a project that has recently moved to a more agile way of work. The team have not completely taken on the Scrum…|
-|`pmp-pr8-269`|pmp-mocks-1-10|single|hybrid|3|Your product owner wants to bring the next feature forward so that it is done in parallel to the current feature, but is still…|
-|`pmp-pr8-270`|pmp-mocks-1-10|single|predictive|2|After reviewing your project schedule you notice you are behind by three weeks and the schedule will need to be compressed. Your…|
+|`pmp-pr8-1`|export-batch-1|single|agile|4|An agile project is midway through its ten iteration cycles. During the last iteration, the team had to work overtime to…|
+|`pmp-pr8-2`|export-batch-1|single|predictive|2|A project manager is planning for a complex project that must deliver a high-quality product within the agreed-upon budget. The…|
+|`pmp-pr8-3`|export-batch-1|single|agile|3|At a review meeting, the project manager learns about unclear requirements that may impact the project's scheduled completion.…|
+|`pmp-pr8-4`|export-batch-1|single|hybrid|4|A project manager works in an organization using a hybrid project delivery approach. The scope of the project is to implement a…|
+|`pmp-pr8-5`|export-batch-1|single|agile|3|An agile project team is building a website for a client. The client informs the product owner that their company has decided to…|
+|`pmp-pr8-6`|export-batch-1|single|predictive|3|A team member is unable to work for one week because of sick leave. The team member is currently assigned to a task on the…|
+|`pmp-pr8-7`|export-batch-1|single|predictive|3|A project manager has a new project. The work breakdown structure (WBS) and sequence of activities have been defined, but the…|
+|`pmp-pr8-8`|export-batch-1|single|agile|4|A company is expanding its product manufacturing to a new country. The date the company will start operating is set and broadly…|
+|`pmp-pr8-9`|export-batch-1|single|predictive|4|A project manager is required to obtain approval for project requirements before proceeding to the delivery stage. During the…|
+|`pmp-pr8-10`|export-batch-1|multi|predictive|4|A project manager is working in the fifth month of an implementation for a construction project. The planner reported that the…|
+|`pmp-pr8-201`|export-batch-2|single|predictive|3|During a project schedule review meeting, the project team identified that one of the critical path activities has slipped due to…|
+|`pmp-pr8-202`|export-batch-2|single|agile|2|A key deadline is approaching specialized team member has suddenly received news that they must leave the office for two weeks.…|
+|`pmp-pr8-203`|export-batch-2|single|hybrid|3|During a hybrid project, a project manager reviews the project team's performance and realizes that the team's velocity is not…|
+|`pmp-pr8-204`|export-batch-2|single|predictive|2|During the planning phase, a project manager is creating the project schedule. The designated project team is finishing an…|
+|`pmp-pr8-205`|export-batch-2|single|predictive|3|A project manager has identified that a task on the critical path is behind schedule. The project manager thinks that additional…|
+|`pmp-pr8-206`|export-batch-2|single|agile|3|An information technology (IT) project manager was assigned a new team for a software development project in an agile…|
+|`pmp-pr8-207`|export-batch-2|single|agile|3|A project is estimated to have a total of 250 story points. The team planned 40 story points for each iteration and delivered 40,…|
+|`pmp-pr8-208`|export-batch-2|single|predictive|3|A construction project has progressed for about 18 months, and the schedule performance index (SPI) is 0.68. The project manager…|
+|`pmp-pr8-209`|export-batch-2|single|agile|4|An intern is replacing a critical resource midway through a sprint. To help the intern get up to speed, the project manager…|
+|`pmp-pr8-210`|export-batch-2|multi|predictive|3|A project team is working on determining dependencies for approximately 350 activities for an ongoing project. (Choose 2).|
+|`pmp-pr8-211`|export-batch-2|single|agile|3|A project manager is leading an agile project that is in the execution phase. After a couple of sprints, the project manager…|
+|`pmp-pr8-212`|export-batch-2|single|predictive|3|An impact assessment reveals that a deliverable could be delayed by two weeks. A key resource has not been available to work on a…|
+|`pmp-pr8-213`|export-batch-2|single|agile|2|An agile team has been struggling to keep up with the planned pace, which is frequently resulting in sprint failures.|
+|`pmp-pr8-214`|export-batch-2|single|agile|2|A team has been working for two months and has consistently missed planned user stories.|
+|`pmp-pr8-215`|export-batch-2|single|predictive|2|A project team is working on determining the dependencies for activities for an ongoing project.|
+|`pmp-pr8-216`|export-batch-2|single|predictive|3|A project manager is leading a team that is developing a new software product. The deadline for the product launch is…|
+|`pmp-pr8-217`|export-batch-2|single|predictive|3|A project's statement of work (SOW) requires that the project be delivered in nine months. The project manager believes that the…|
+|`pmp-pr8-218`|export-batch-2|single|predictive|2|After receiving the project charter, a project manager starts to prepare the project management plan. Although there is a limited…|
+|`pmp-pr8-219`|export-batch-2|single|predictive|2|A project is showing a negative schedule variance. The project manager sees that one team is causing the delays.|
+|`pmp-pr8-220`|export-batch-2|single|agile|3|A project manager is planning the next release for the software development team. The team has completed two releases to date,…|
+|`pmp-pr8-221`|export-batch-2|multi|predictive|3|A project manager is managing a long-term project that is behind schedule. The client is concerned that the project will be…|
+|`pmp-pr8-222`|export-batch-2|single|predictive|3|One day before starting a task, the technical lead proposed a new implementation approach that could reduce the schedule by one…|
+|`pmp-pr8-223`|export-batch-2|single|agile|3|An experienced project manager joins an ongoing project and wants to estimate the amount of time required to tackle several…|
+|`pmp-pr8-224`|export-batch-2|multi|agile|2|A project manager is preparing for a sprint planning session for a new feature in a healthcare management system. This meeting…|
+|`pmp-pr8-225`|export-batch-2|single|predictive|2|A project manager has begun a complex airport expansion project. Although the project is in the initiation phase, the sponsor…|
+|`pmp-pr8-226`|export-batch-2|single|predictive|2|On an infrastructure project to upgrade city water systems, the project manager is struggling to finalize the project schedule…|
+|`pmp-pr8-227`|export-batch-2|single|agile|2|In a software development project, as the team moves into the development phase, they decide to utilize time tracking to estimate…|
+|`pmp-pr8-228`|export-batch-2|single|predictive|2|During the deployment phase of a new telecommunications network, the project encounters significant delays.|
+|`pmp-pr8-229`|export-batch-2|single|predictive|2|A key stakeholder requests that the project manager deliver a critical infrastructure component two weeks ahead of schedule. The…|
+|`pmp-pr8-230`|export-batch-2|single|predictive|2|In the midst of implementing a new healthcare IT system, a project manager faces a challenge. The initial phase, involving the…|
+|`pmp-pr8-231`|export-batch-2|single|agile|2|As the project manager for an app development project, you are approached by a stakeholder with a request to add a feature that…|
+|`pmp-pr8-232`|export-batch-2|single|predictive|3|During the critical phase of a green energy plant construction project, it becomes evident that the project may not adhere to the…|
+|`pmp-pr8-233`|export-batch-2|single|hybrid|3|As the project manager overseeing the rollout of a new IT system, it's discovered halfway through the fiscal year that several…|
+|`pmp-pr8-234`|export-batch-2|multi|hybrid|3|In the early planning stages of a green building project, the project manager faces challenges with limited data available for…|
+|`pmp-pr8-235`|export-batch-2|single|predictive|1|During the critical testing phase of an enterprise software upgrade, the project manager identifies that testing is significantly…|
+|`pmp-pr8-236`|export-batch-2|single|predictive|3|After gathering your project requirements, project scope, and breaking it down into activities, you need to estimate the project…|
+|`pmp-pr8-237`|export-batch-2|single|agile|1|You have noted nine epics for delivery as part of your most recent project. Your team have broken down these epics into user…|
+|`pmp-pr8-238`|export-batch-2|single|predictive|2|You have taken over as Project Manager for a project that has had issues delivering on time. You review the Earned Value…|
+|`pmp-pr8-239`|export-batch-2|single|predictive|1|You are working on a project where you have been completing the deliverables in sequence, and the project work is starting to…|
+|`pmp-pr8-240`|export-batch-2|single|agile|2|Your team are new to agile, and had previously been working with Waterfall. Your key customer asks you for a project schedule.…|
+|`pmp-pr8-241`|export-batch-2|single|agile|2|You are working in an agile project team that has increased in size and complexity since the project began. In reviewing the…|
+|`pmp-pr8-242`|export-batch-2|single|agile|2|You are creating a business case and project charter with a small initial project team. You have a high level feature, decomposed…|
+|`pmp-pr8-243`|export-batch-2|single|predictive|2|You are adding an essential feature to your product roadmap. Your team believe they can complete the feature in six weeks,…|
+|`pmp-pr8-244`|export-batch-2|single|agile|1|You have a prioritised product backlog of features, and have decomposed the next feature to be delivered into user stories, small…|
+|`pmp-pr8-245`|export-batch-2|single|predictive|2|You are integrating a third party system as part of your project. The developers in your project team have not worked with this…|
+|`pmp-pr8-246`|export-batch-2|single|agile|1|You are a product owner on an agile project and have created a product backlog of features in a prioritised order for delivery.…|
+|`pmp-pr8-247`|export-batch-2|single|agile|1|You have worked with your project customer to create a list of features that will bring the most value to them. They would like…|
+|`pmp-pr8-248`|export-batch-2|single|agile|1|You are planning the next iteration in your Agile team, as the Agile lead. The team is going to select user stories from the…|
+|`pmp-pr8-249`|export-batch-2|single|agile|2|While on an Agile project team, you prioritise the backlog of features with the product owner, and agree what you will work on…|
+|`pmp-pr8-250`|export-batch-2|single|agile|1|You are working with your Agile project team to estimate each task and how long they might take. The team is finding it difficult…|
+|`pmp-pr8-251`|export-batch-2|single|agile|1|You are an Agile project manager and talking through the iteration with the product owner. They have created the list of items in…|
+|`pmp-pr8-252`|export-batch-2|single|predictive|1|You are working on a large multi-year project. You realise that the estimates from a year ago are extremely inaccurate, and the…|
+|`pmp-pr8-253`|export-batch-2|single|predictive|2|When reviewing the project performance with your team, you notice the following: 1) Activity A, on the critical path, is delayed…|
+|`pmp-pr8-254`|export-batch-2|single|predictive|2|You are working on a new waterfall project where the scope and cost have been planned up front. As the project progresses, you…|
+|`pmp-pr8-255`|export-batch-2|single|predictive|2|About a third of your project team have worked on a similar project in the past. They have gathered requirements and created a…|
+|`pmp-pr8-256`|export-batch-2|single|predictive|2|The people and resources involved in your project are currently costing a large amount of money, and your project sponsor…|
+|`pmp-pr8-257`|export-batch-2|single|agile|2|You are working through the backlog with the product owner and estimating the story cards with the development team. The team are…|
+|`pmp-pr8-258`|export-batch-2|single|agile|1|The business partner or product owner continuously refines, or grooms, the product backlog. This includes adding new stories,…|
+|`pmp-pr8-259`|export-batch-2|single|agile|2|You have been estimating story cards with your Agile project team, but the effort captured has not been matching the time it ends…|
+|`pmp-pr8-260`|export-batch-2|single|agile|1|You are delivering features through your Agile project and the project sponsor and product owner are happy with the progress.…|
+|`pmp-pr8-261`|export-batch-2|single|agile|1|Your Agile team is estimating story cards using planning poker. For one of the larger features, some of the team has estimated…|
+|`pmp-pr8-262`|export-batch-2|single|agile|1|You are working through a sprint planning meeting with your team. The team have sized up the cards and prioritised the backlog.|
+|`pmp-pr8-263`|export-batch-2|single|agile|2|You are working in a new Agile team and have reviewed the team velocity over the past three iterations. The maximum number of…|
+|`pmp-pr8-264`|export-batch-2|single|agile|1|You are running an Agile project and meet with the team for the next sprint planning meeting.|
+|`pmp-pr8-265`|export-batch-2|single|agile|1|The team are planning their first upcoming sprint on an Agile project. They have worked with the product owner who has gathered a…|
+|`pmp-pr8-266`|export-batch-2|single|hybrid|2|Your project team have been used to working in a Predictive or Waterfall way of work, planning everything up front. As your…|
+|`pmp-pr8-267`|export-batch-2|single|predictive|3|You are at the beginning of planning a new project, and have researched and gathered the requirements from the area, broken them…|
+|`pmp-pr8-268`|export-batch-2|single|agile|2|You are working on a project that has recently moved to a more agile way of work. The team have not completely taken on the Scrum…|
+|`pmp-pr8-269`|export-batch-2|single|hybrid|3|Your product owner wants to bring the next feature forward so that it is done in parallel to the current feature, but is still…|
+|`pmp-pr8-270`|export-batch-2|single|predictive|2|After reviewing your project schedule you notice you are behind by three weeks and the schedule will need to be compressed. Your…|
 
 ### process-9 · Status and artifacts — 109 items
 
@@ -1136,58 +1136,58 @@ any question.
 |`pmp-pr9-138`|process-9|pulldown|predictive|4|Prompts: The electrical package overran by €80,00… / The joinery package has run at a CPI of… / The ventilation package's original estim…|
 |`pmp-pr9-139`|process-9|fillblank|predictive|4|A ten-month motorway resurfacing contract has cumulative planned value, in £000, of 60, 150, 260, 380, 500, 610, 700, 780, 850…|
 |`pmp-pr9-140`|process-9|hotspot|predictive|3|The tracking Gantt for a hospice extension shows five activities. Each label gives how far the activity's forecast finish has…|
-|`pmp-pr9-1`|pmp-lectures-1-11|single|hybrid|3|A hybrid project involving many stakeholders is underway. As requested by the project management office (PMO), the project status…|
-|`pmp-pr9-2`|pmp-lectures-1-11|single|predictive|4|A new program manager checks the status of a project. The forecast shows the project is slightly behind schedule. However, in…|
-|`pmp-pr9-3`|pmp-lectures-1-11|single|predictive|3|An entrepreneur has initiated a software development project. The project charter has been approved, and a project manager has…|
-|`pmp-pr9-4`|pmp-lectures-1-11|single|predictive|3|During a steering committee meeting, a senior executive raised a concern that although the key cost parameters are reported to be…|
-|`pmp-pr9-5`|pmp-lectures-1-11|single|predictive|3|A project has a budgeted cost of $120,000. According to the schedule, 15% of the project should have been completed after one…|
-|`pmp-pr9-6`|pmp-lectures-1-11|single|predictive|3|A project advisory team is working remotely from the core project team. There is a constant flow of information between these two…|
-|`pmp-pr9-7`|pmp-lectures-1-11|single|agile|3|The leadership team of a company asked a project manager for an ad-hoc status update on the latest iteration of a project. The…|
-|`pmp-pr9-201`|pmp-mocks-1-10|single|agile|2|An agile team is doing an excellent job of focusing on high-priority items and completing them in less time than required.|
-|`pmp-pr9-202`|pmp-mocks-1-10|single|predictive|3|A project sponsor is increasingly anxious about the value returned from the investment made in a project and wants to ensure that…|
-|`pmp-pr9-203`|pmp-mocks-1-10|single|agile|2|While conducting a retrospective meeting, team members were surprised from the performance results of the team shared by the…|
-|`pmp-pr9-204`|pmp-mocks-1-10|single|agile|2|During an agile retrospective session, several team members mentioned that they were confused about the iteration's progress.|
-|`pmp-pr9-205`|pmp-mocks-1-10|single|agile|3|A company is developing a breakthrough product in a highly competitive and rapidly evolving market. The project manager…|
-|`pmp-pr9-206`|pmp-mocks-1-10|single|predictive|2|While preparing a project's third progress report, the project manager identifies that the project will experience delays due to…|
-|`pmp-pr9-207`|pmp-mocks-1-10|single|agile|2|A project manager is leading an agile project. The product owner complains that the project team is constantly completing fewer…|
-|`pmp-pr9-208`|pmp-mocks-1-10|single|agile|2|A project manager conducts a lessons learned meeting and project team members mention that they are not always aware of the…|
-|`pmp-pr9-209`|pmp-mocks-1-10|single|predictive|2|A project manager leads a project team on a project. This project's goal is to enhance a product's capability in the market.|
-|`pmp-pr9-210`|pmp-mocks-1-10|single|agile|3|A newly launched product prototype is receiving a number of customer complaints. To reduce negative feedback, the team comes up…|
-|`pmp-pr9-211`|pmp-mocks-1-10|multi|hybrid|3|The project teams are having difficulties coordinating their tasks due to several constraints and dependencies. The project…|
-|`pmp-pr9-212`|pmp-mocks-1-10|multi|predictive|2|In an ongoing project, performance is continuously evaluated to determine benefits. (Choose two)|
-|`pmp-pr9-213`|pmp-mocks-1-10|single|predictive|2|A project team has complete access to all project-related data, including visual data and information like the Gantt chart,…|
-|`pmp-pr9-214`|pmp-mocks-1-10|multi|agile|3|(Choose two)|
-|`pmp-pr9-215`|pmp-mocks-1-10|single|predictive|2|At the outset of a software development project, the project manager is tasked with devising a strategy for assessing the…|
-|`pmp-pr9-216`|pmp-mocks-1-10|single|predictive|2|During a complex software development project, a project manager notices significant variances between the planned and actual…|
-|`pmp-pr9-217`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a large infrastructure project that is facing schedule delays. The project manager wants to use…|
-|`pmp-pr9-218`|pmp-mocks-1-10|single|predictive|2|A software development project is midway through its timeline, and the project manager notices that the actual progress is…|
-|`pmp-pr9-219`|pmp-mocks-1-10|single|predictive|2|In the midst of a major software development project, the project manager is preparing for an upcoming executive in-depth review.…|
-|`pmp-pr9-220`|pmp-mocks-1-10|single|predictive|2|During the final stages of a significant infrastructure project, it was discovered that comprehensive reports on critical…|
-|`pmp-pr9-221`|pmp-mocks-1-10|single|agile|2|You are working as a project manager for a medium-sized software project. The project sponsor believes that the team have not…|
-|`pmp-pr9-222`|pmp-mocks-1-10|single|hybrid|2|In a hybrid project environment, stakeholders are experiencing challenges in accessing the most recent version of the project…|
-|`pmp-pr9-223`|pmp-mocks-1-10|single|hybrid|3|As a new software development project kicks off, when is it most appropriate for the project manager to conduct the first project…|
-|`pmp-pr9-224`|pmp-mocks-1-10|single|agile|1|Following a directive to enhance operational efficiencies within a multinational corporation, the executive team has requested an…|
-|`pmp-pr9-225`|pmp-mocks-1-10|single|agile|2|You are working in an agile team where executives in the team you are delivering to are asking for a large display of reports to…|
-|`pmp-pr9-226`|pmp-mocks-1-10|single|agile|3|Multiple features have been released, but they are not having the effect the product owner believes they should. Your team are…|
-|`pmp-pr9-227`|pmp-mocks-1-10|single|agile|2|You are working on an agile project where the project customer wants a reliable way to measure the project performance, and you…|
-|`pmp-pr9-228`|pmp-mocks-1-10|single|agile|2|You are working on an agile project where the project sponsor and executive managers require lengthy reports about the project…|
-|`pmp-pr9-229`|pmp-mocks-1-10|single|hybrid|2|You are working on a project that has planned as much as they can up-front. You would like them to move to a more agile way of…|
-|`pmp-pr9-230`|pmp-mocks-1-10|single|agile|2|You are working as a product owner in an agile team, where the main measure of project success is the number of features…|
-|`pmp-pr9-231`|pmp-mocks-1-10|single|hybrid|2|You have been working on a project for the past eight months. Your project team have been approached by multiple stakeholders for…|
-|`pmp-pr9-232`|pmp-mocks-1-10|single|predictive|2|You are managing a large construction project. Due to some delays, the project schedule has been pushed back by one week. As a…|
-|`pmp-pr9-233`|pmp-mocks-1-10|single|agile|1|You have planned and begun the current sprint, where the project team have committed to delivering and releasing a particular…|
-|`pmp-pr9-234`|pmp-mocks-1-10|single|agile|2|You are a program manager on a large scale agile program, where each project team has its own scrum master. You need to know the…|
-|`pmp-pr9-235`|pmp-mocks-1-10|single|predictive|1|Your project has been executing for the past five months, and due to an organisational change a new project sponsor has come on…|
-|`pmp-pr9-236`|pmp-mocks-1-10|single|agile|1|You are managing a project as an Agile project manager and a business representative for the product you are delivering asks you…|
-|`pmp-pr9-237`|pmp-mocks-1-10|single|agile|2|You are the project manager on an Agile project that is half way through. The project sponsor is starting to raise concerns that…|
-|`pmp-pr9-238`|pmp-mocks-1-10|single|hybrid|2|You are working on a traditional waterfall project and the organisation wants to move to an Agile way of work. The functional…|
-|`pmp-pr9-239`|pmp-mocks-1-10|single|predictive|2|The project customer approaches you as they are worried that the project is not delivering fast enough. You review the project…|
-|`pmp-pr9-240`|pmp-mocks-1-10|single|agile|1|You are showing the project sponsor around the team area for your Agile project and see the burndown chart next to the team…|
-|`pmp-pr9-241`|pmp-mocks-1-10|single|agile|1|You are working through the feature backlog with the functional manager of the organisation, who is the product owner for your…|
-|`pmp-pr9-242`|pmp-mocks-1-10|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values. Identify…|
-|`pmp-pr9-243`|pmp-mocks-1-10|single|agile|1|You are working on a complex software project but see that the team uses a whiteboard, and writes tasks on cards or sticky notes.…|
-|`pmp-pr9-244`|pmp-mocks-1-10|single|predictive|2|You have just initiated a project, and the steering committee asks you to keep them updated on the main project activities. You…|
-|`pmp-pr9-245`|pmp-mocks-1-10|single|agile|2|You are working on a project where a competitor is also working on a similar feature, and being first to the market will have a…|
+|`pmp-pr9-1`|export-batch-1|single|hybrid|3|A hybrid project involving many stakeholders is underway. As requested by the project management office (PMO), the project status…|
+|`pmp-pr9-2`|export-batch-1|single|predictive|4|A new program manager checks the status of a project. The forecast shows the project is slightly behind schedule. However, in…|
+|`pmp-pr9-3`|export-batch-1|single|predictive|3|An entrepreneur has initiated a software development project. The project charter has been approved, and a project manager has…|
+|`pmp-pr9-4`|export-batch-1|single|predictive|3|During a steering committee meeting, a senior executive raised a concern that although the key cost parameters are reported to be…|
+|`pmp-pr9-5`|export-batch-1|single|predictive|3|A project has a budgeted cost of $120,000. According to the schedule, 15% of the project should have been completed after one…|
+|`pmp-pr9-6`|export-batch-1|single|predictive|3|A project advisory team is working remotely from the core project team. There is a constant flow of information between these two…|
+|`pmp-pr9-7`|export-batch-1|single|agile|3|The leadership team of a company asked a project manager for an ad-hoc status update on the latest iteration of a project. The…|
+|`pmp-pr9-201`|export-batch-2|single|agile|2|An agile team is doing an excellent job of focusing on high-priority items and completing them in less time than required.|
+|`pmp-pr9-202`|export-batch-2|single|predictive|3|A project sponsor is increasingly anxious about the value returned from the investment made in a project and wants to ensure that…|
+|`pmp-pr9-203`|export-batch-2|single|agile|2|While conducting a retrospective meeting, team members were surprised from the performance results of the team shared by the…|
+|`pmp-pr9-204`|export-batch-2|single|agile|2|During an agile retrospective session, several team members mentioned that they were confused about the iteration's progress.|
+|`pmp-pr9-205`|export-batch-2|single|agile|3|A company is developing a breakthrough product in a highly competitive and rapidly evolving market. The project manager…|
+|`pmp-pr9-206`|export-batch-2|single|predictive|2|While preparing a project's third progress report, the project manager identifies that the project will experience delays due to…|
+|`pmp-pr9-207`|export-batch-2|single|agile|2|A project manager is leading an agile project. The product owner complains that the project team is constantly completing fewer…|
+|`pmp-pr9-208`|export-batch-2|single|agile|2|A project manager conducts a lessons learned meeting and project team members mention that they are not always aware of the…|
+|`pmp-pr9-209`|export-batch-2|single|predictive|2|A project manager leads a project team on a project. This project's goal is to enhance a product's capability in the market.|
+|`pmp-pr9-210`|export-batch-2|single|agile|3|A newly launched product prototype is receiving a number of customer complaints. To reduce negative feedback, the team comes up…|
+|`pmp-pr9-211`|export-batch-2|multi|hybrid|3|The project teams are having difficulties coordinating their tasks due to several constraints and dependencies. The project…|
+|`pmp-pr9-212`|export-batch-2|multi|predictive|2|In an ongoing project, performance is continuously evaluated to determine benefits. (Choose two)|
+|`pmp-pr9-213`|export-batch-2|single|predictive|2|A project team has complete access to all project-related data, including visual data and information like the Gantt chart,…|
+|`pmp-pr9-214`|export-batch-2|multi|agile|3|(Choose two)|
+|`pmp-pr9-215`|export-batch-2|single|predictive|2|At the outset of a software development project, the project manager is tasked with devising a strategy for assessing the…|
+|`pmp-pr9-216`|export-batch-2|single|predictive|2|During a complex software development project, a project manager notices significant variances between the planned and actual…|
+|`pmp-pr9-217`|export-batch-2|single|predictive|3|A project manager is working on a large infrastructure project that is facing schedule delays. The project manager wants to use…|
+|`pmp-pr9-218`|export-batch-2|single|predictive|2|A software development project is midway through its timeline, and the project manager notices that the actual progress is…|
+|`pmp-pr9-219`|export-batch-2|single|predictive|2|In the midst of a major software development project, the project manager is preparing for an upcoming executive in-depth review.…|
+|`pmp-pr9-220`|export-batch-2|single|predictive|2|During the final stages of a significant infrastructure project, it was discovered that comprehensive reports on critical…|
+|`pmp-pr9-221`|export-batch-2|single|agile|2|You are working as a project manager for a medium-sized software project. The project sponsor believes that the team have not…|
+|`pmp-pr9-222`|export-batch-2|single|hybrid|2|In a hybrid project environment, stakeholders are experiencing challenges in accessing the most recent version of the project…|
+|`pmp-pr9-223`|export-batch-2|single|hybrid|3|As a new software development project kicks off, when is it most appropriate for the project manager to conduct the first project…|
+|`pmp-pr9-224`|export-batch-2|single|agile|1|Following a directive to enhance operational efficiencies within a multinational corporation, the executive team has requested an…|
+|`pmp-pr9-225`|export-batch-2|single|agile|2|You are working in an agile team where executives in the team you are delivering to are asking for a large display of reports to…|
+|`pmp-pr9-226`|export-batch-2|single|agile|3|Multiple features have been released, but they are not having the effect the product owner believes they should. Your team are…|
+|`pmp-pr9-227`|export-batch-2|single|agile|2|You are working on an agile project where the project customer wants a reliable way to measure the project performance, and you…|
+|`pmp-pr9-228`|export-batch-2|single|agile|2|You are working on an agile project where the project sponsor and executive managers require lengthy reports about the project…|
+|`pmp-pr9-229`|export-batch-2|single|hybrid|2|You are working on a project that has planned as much as they can up-front. You would like them to move to a more agile way of…|
+|`pmp-pr9-230`|export-batch-2|single|agile|2|You are working as a product owner in an agile team, where the main measure of project success is the number of features…|
+|`pmp-pr9-231`|export-batch-2|single|hybrid|2|You have been working on a project for the past eight months. Your project team have been approached by multiple stakeholders for…|
+|`pmp-pr9-232`|export-batch-2|single|predictive|2|You are managing a large construction project. Due to some delays, the project schedule has been pushed back by one week. As a…|
+|`pmp-pr9-233`|export-batch-2|single|agile|1|You have planned and begun the current sprint, where the project team have committed to delivering and releasing a particular…|
+|`pmp-pr9-234`|export-batch-2|single|agile|2|You are a program manager on a large scale agile program, where each project team has its own scrum master. You need to know the…|
+|`pmp-pr9-235`|export-batch-2|single|predictive|1|Your project has been executing for the past five months, and due to an organisational change a new project sponsor has come on…|
+|`pmp-pr9-236`|export-batch-2|single|agile|1|You are managing a project as an Agile project manager and a business representative for the product you are delivering asks you…|
+|`pmp-pr9-237`|export-batch-2|single|agile|2|You are the project manager on an Agile project that is half way through. The project sponsor is starting to raise concerns that…|
+|`pmp-pr9-238`|export-batch-2|single|hybrid|2|You are working on a traditional waterfall project and the organisation wants to move to an Agile way of work. The functional…|
+|`pmp-pr9-239`|export-batch-2|single|predictive|2|The project customer approaches you as they are worried that the project is not delivering fast enough. You review the project…|
+|`pmp-pr9-240`|export-batch-2|single|agile|1|You are showing the project sponsor around the team area for your Agile project and see the burndown chart next to the team…|
+|`pmp-pr9-241`|export-batch-2|single|agile|1|You are working through the feature backlog with the functional manager of the organisation, who is the product owner for your…|
+|`pmp-pr9-242`|export-batch-2|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values. Identify…|
+|`pmp-pr9-243`|export-batch-2|single|agile|1|You are working on a complex software project but see that the team uses a whiteboard, and writes tasks on cards or sticky notes.…|
+|`pmp-pr9-244`|export-batch-2|single|predictive|2|You have just initiated a project, and the steering committee asks you to keep them updated on the main project activities. You…|
+|`pmp-pr9-245`|export-batch-2|single|agile|2|You are working on a project where a competitor is also working on a similar feature, and being first to the market will have a…|
 
 ### process-10 · Closure — 77 items
 
@@ -1251,24 +1251,24 @@ any question.
 |`pmp-pr10-138`|process-10|hotspot|predictive|3|A coastal path restoration project's closure board lists six items. The organisation's policy allows closure once every item is…|
 |`pmp-pr10-139`|process-10|single|agile|3|An agile team has built an eSIM activation service for a mobile network operator and is due to be reassigned in three weeks. The…|
 |`pmp-pr10-140`|process-10|single|hybrid|3|Your hybrid project has installed 1,200 air-quality sensors across a city, with the public data dashboard built in sprints. The…|
-|`pmp-pr10-1`|pmp-lectures-1-11|single|predictive|3|A project was undertaken to set up a new business function in the company. Several months after completion, the project manager…|
-|`pmp-pr10-2`|pmp-lectures-1-11|single|predictive|2|A junior project manager approaches a senior project manager and asks for assistance in initiating the final closeout process for…|
-|`pmp-pr10-3`|pmp-lectures-1-11|single|predictive|3|A project manager works at a construction company. The current project is a three year, multimillion-dollar initiative to rebuild…|
-|`pmp-pr10-201`|pmp-mocks-1-10|single|hybrid|3|A project is delivering incremental business value to a customer. The success criteria for the project is a 20% increase in…|
-|`pmp-pr10-202`|pmp-mocks-1-10|single|predictive|3|A project team has completed project deliverables, but the project manager would like to evaluate whether the project has…|
-|`pmp-pr10-203`|pmp-mocks-1-10|single|predictive|2|During a project governance assessment, and after expending 40% of the approved project budget, management approved the auditor's…|
-|`pmp-pr10-204`|pmp-mocks-1-10|single|predictive|2|A project to develop a new product is nearing its closing phase after 6 months of contributions from the project team and vendor.…|
-|`pmp-pr10-205`|pmp-mocks-1-10|single|hybrid|2|A project manager is involved in an e-commerce development project. The project has been completed successfully using the hybrid…|
-|`pmp-pr10-206`|pmp-mocks-1-10|single|predictive|2|A project manager needs to close a project phase.|
-|`pmp-pr10-207`|pmp-mocks-1-10|single|predictive|2|A project was cancelled during its initiation phase due to lack of adequate resources.|
-|`pmp-pr10-208`|pmp-mocks-1-10|single|predictive|3|Due to a recent incident, a dissatisfied stakeholder files a complaint about a project that has been closed.|
-|`pmp-pr10-209`|pmp-mocks-1-10|single|predictive|2|During project closure, the project manager finds it difficult to obtain successful project completion feedback. Some…|
-|`pmp-pr10-210`|pmp-mocks-1-10|single|predictive|2|A group of stakeholders at a financial institution are conducting a project closure review. Some of the stakeholders are…|
-|`pmp-pr10-211`|pmp-mocks-1-10|single|predictive|2|A large project involving functional groups in four countries is nearing completion. The project manager is meeting with the…|
-|`pmp-pr10-212`|pmp-mocks-1-10|single|predictive|2|After all deliverables have been completed, a project manager needs to formally close a project.|
-|`pmp-pr10-213`|pmp-mocks-1-10|single|predictive|3|A project manager is concerned that team members spend too much time assisting operations and maintenance staff with a recently…|
-|`pmp-pr10-214`|pmp-mocks-1-10|single|predictive|1|Your team have completed the work on your project and the customer has confirmed the formal acceptance of the product that has…|
-|`pmp-pr10-215`|pmp-mocks-1-10|single|predictive|2|You are nearing the end of a difficult project where the vendor providing the system to your company has taken longer than…|
-|`pmp-pr10-216`|pmp-mocks-1-10|single|predictive|2|During your project, your company was taken over by another, larger company, and the project management office and its policies…|
-|`pmp-pr10-217`|pmp-mocks-1-10|single|predictive|1|You are in the closing phase of your project, after having delivered a large change for employees in the HR department.|
-|`pmp-pr10-218`|pmp-mocks-1-10|single|predictive|1|You as a project manager are listing the things that must be done to close out the project.|
+|`pmp-pr10-1`|export-batch-1|single|predictive|3|A project was undertaken to set up a new business function in the company. Several months after completion, the project manager…|
+|`pmp-pr10-2`|export-batch-1|single|predictive|2|A junior project manager approaches a senior project manager and asks for assistance in initiating the final closeout process for…|
+|`pmp-pr10-3`|export-batch-1|single|predictive|3|A project manager works at a construction company. The current project is a three year, multimillion-dollar initiative to rebuild…|
+|`pmp-pr10-201`|export-batch-2|single|hybrid|3|A project is delivering incremental business value to a customer. The success criteria for the project is a 20% increase in…|
+|`pmp-pr10-202`|export-batch-2|single|predictive|3|A project team has completed project deliverables, but the project manager would like to evaluate whether the project has…|
+|`pmp-pr10-203`|export-batch-2|single|predictive|2|During a project governance assessment, and after expending 40% of the approved project budget, management approved the auditor's…|
+|`pmp-pr10-204`|export-batch-2|single|predictive|2|A project to develop a new product is nearing its closing phase after 6 months of contributions from the project team and vendor.…|
+|`pmp-pr10-205`|export-batch-2|single|hybrid|2|A project manager is involved in an e-commerce development project. The project has been completed successfully using the hybrid…|
+|`pmp-pr10-206`|export-batch-2|single|predictive|2|A project manager needs to close a project phase.|
+|`pmp-pr10-207`|export-batch-2|single|predictive|2|A project was cancelled during its initiation phase due to lack of adequate resources.|
+|`pmp-pr10-208`|export-batch-2|single|predictive|3|Due to a recent incident, a dissatisfied stakeholder files a complaint about a project that has been closed.|
+|`pmp-pr10-209`|export-batch-2|single|predictive|2|During project closure, the project manager finds it difficult to obtain successful project completion feedback. Some…|
+|`pmp-pr10-210`|export-batch-2|single|predictive|2|A group of stakeholders at a financial institution are conducting a project closure review. Some of the stakeholders are…|
+|`pmp-pr10-211`|export-batch-2|single|predictive|2|A large project involving functional groups in four countries is nearing completion. The project manager is meeting with the…|
+|`pmp-pr10-212`|export-batch-2|single|predictive|2|After all deliverables have been completed, a project manager needs to formally close a project.|
+|`pmp-pr10-213`|export-batch-2|single|predictive|3|A project manager is concerned that team members spend too much time assisting operations and maintenance staff with a recently…|
+|`pmp-pr10-214`|export-batch-2|single|predictive|1|Your team have completed the work on your project and the customer has confirmed the formal acceptance of the product that has…|
+|`pmp-pr10-215`|export-batch-2|single|predictive|2|You are nearing the end of a difficult project where the vendor providing the system to your company has taken longer than…|
+|`pmp-pr10-216`|export-batch-2|single|predictive|2|During your project, your company was taken over by another, larger company, and the project management office and its policies…|
+|`pmp-pr10-217`|export-batch-2|single|predictive|1|You are in the closing phase of your project, after having delivered a large change for employees in the HR department.|
+|`pmp-pr10-218`|export-batch-2|single|predictive|1|You as a project manager are listing the things that must be done to close out the project.|

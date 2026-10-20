@@ -1808,6 +1808,18 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .cb-msg { font-size: var(--t-sm); line-height: var(--lh-body); display: grid; gap: var(--sp-2); }
 .cb-msg + .cb-msg { border-top: var(--border); padding-top: var(--sp-3); }
 .cb-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+/* Select text, ask Gemini (§10.34): a dark bar by the selection, or the question box. */
+.sa { position: fixed; z-index: 60; display: flex; gap: 2px; padding: 4px; border-radius: var(--r-2);
+  background: var(--fg); color: var(--c-panel); box-shadow: 0 12px 28px -12px rgba(0, 0, 0, .5); }
+.sa-b { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 12px; border-radius: var(--r-1);
+  font-size: var(--t-sm); font-weight: var(--w-bold); color: inherit; white-space: nowrap; }
+.sa-b:hover, .sa-b:focus-visible { background: rgba(128, 128, 128, .25); }
+.sa-b .i { width: 16px; height: 16px; }
+.sa-box { display: grid; gap: var(--sp-2); width: min(360px, calc(100vw - 16px)); padding: var(--sp-3);
+  background: var(--s-raise); color: var(--fg); border: var(--border-hi); }
+.sa-about { margin: 0; font-size: var(--t-xs); color: var(--fg-muted); overflow-wrap: anywhere; }
+.sa-q { min-height: 64px; resize: vertical; font-size: var(--t-sm); }
+.sa-row { display: flex; justify-content: flex-end; gap: var(--sp-2); }
 /* L2: a sample document folds under its title and purpose. */
 .lib-doc > summary { cursor: pointer; list-style: none; }
 .lib-doc > summary::-webkit-details-marker { display: none; }
@@ -2730,6 +2742,21 @@ mark.np-h-none { background: transparent; }
 .np-pop[hidden] { display: none; }
 .np-pop button { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--r-1); }
 .np-pop button:hover { background: var(--s-sunk); }
+/* Gemini in the notes (§10.35): the three rewrites, the part being worked
+   on (greyed, locked), the answer (highlighted) and the strip to settle it. */
+.np-pop.np-pop-ai { flex-direction: column; gap: 0; }
+.np-pop.np-pop-ai button { display: block; width: 100%; height: auto; min-height: 34px; padding: 0 var(--sp-2); text-align: left; font-size: var(--t-sm); }
+.np-rb--ai { color: var(--c-signal); }
+.np-rb--ai:disabled { opacity: .45; }
+.np-ai-zone.np-ai-busy { background: var(--s-sunk); color: var(--fg-muted); border-radius: 4px; cursor: progress; animation: np-ai-pulse 1.4s ease-in-out infinite; }
+.np-ai-zone.np-ai-done { background: var(--s-wash); border-radius: 4px; box-shadow: 0 0 0 2px var(--s-wash); }
+div.np-ai-zone { display: block; padding: 2px 4px; }
+@keyframes np-ai-pulse { 50% { opacity: .55; } }
+.np-ai-review { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); flex: 0 0 auto;
+  padding: var(--sp-2) var(--sp-3); border-top: var(--border); background: var(--s-raise); font-size: var(--t-sm); }
+.np-ai-review[hidden] { display: none; }
+.np-ai-msg { display: inline-flex; align-items: center; gap: var(--sp-1); flex: 1 1 160px; min-width: 0; color: var(--fg-muted); }
+.np-ai-msg .i { width: 16px; height: 16px; color: var(--c-signal); }
 .np-sw { display: block; width: 20px; height: 20px; border-radius: var(--r-full); border: 1px solid var(--s-edge-hi); }
 .np-sw.np-c-red, .np-sw.np-c-orange, .np-sw.np-c-green, .np-sw.np-c-blue, .np-sw.np-c-purple { background: currentColor; }
 .np-sw--none { background: linear-gradient(135deg, transparent 45%, var(--c-danger) 45%, var(--c-danger) 55%, transparent 55%), var(--s-raise); }
@@ -3322,6 +3349,15 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
         <button class="np-rb np-rb--menu" type="button" data-menu="c" aria-haspopup="true" aria-expanded="false" aria-controls="np-pop-c" title="Text colour" aria-label="Text colour"><span class="np-rb-a">A</span><i class="np-rb-bar" id="np-c-now"></i></button>
         <button class="np-rb np-rb--menu" type="button" data-menu="h" aria-haspopup="true" aria-expanded="false" aria-controls="np-pop-h" title="Highlight" aria-label="Highlight"><svg class="i" aria-hidden="true"><use href="#i-marker"></use></svg><i class="np-rb-bar" id="np-h-now"></i></button>
         <button class="np-rb" type="button" data-cmd="clear" title="Clear formatting from the selection" aria-label="Clear formatting"><span class="np-rb-tx">T<sub>x</sub></span></button>
+        <span class="np-rsep" aria-hidden="true"></span>
+        <!-- Gemini rewrites the selection, or the whole page (§10.35). -->
+        <button class="np-rb np-rb--ai" id="np-ai-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="np-pop-ai"
+                title="Gemini: tidy up, shorten or explain the selected notes" aria-label="Rewrite with Gemini"><svg class="i" aria-hidden="true"><use href="#i-spark"></use></svg></button>
+      </div>
+      <div class="np-pop np-pop-ai" id="np-pop-ai" role="menu" aria-label="Rewrite with Gemini" hidden>
+        <button type="button" role="menuitem" data-ai="tidy">Tidy up</button>
+        <button type="button" role="menuitem" data-ai="short">Make it clear and short</button>
+        <button type="button" role="menuitem" data-ai="detail">Explain in detail</button>
       </div>
       <div class="np-pop" id="np-pop-c" role="group" aria-label="Text colour" hidden>
         <button type="button" data-c="none" aria-label="Default colour"><i class="np-sw np-sw--none"></i></button>
@@ -3340,6 +3376,7 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
       </div>
       <div class="np-text" id="np-text" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Your notes" spellcheck="true" data-empty="true"
            data-placeholder="Jot down anything you want in front of you while you study: a formula, a mnemonic, a trap you fell for, a question to come back to. Select text and use the ribbon to format it. It is saved on this device as you type."></div>
+      <div class="np-ai-review" id="np-ai-review" role="status" aria-live="polite" hidden></div>
       <div class="np-ft">
         <span class="np-stat" id="np-stat" aria-live="off">Empty</span>
         <span class="spacer"></span>
@@ -51662,6 +51699,135 @@ PMP.CoachBubble = (function () {
   return { refresh: refresh, open: function () { if (!panel) open(); }, close: close };
 })();
 
+/* ── 10.34  SELECT TEXT, ASK GEMINI ────────────────────────────────────────
+   Select words anywhere on the page (a lesson, a question, an explanation,
+   a card, the glossary) and a small bar offers "Explain this", sent to the
+   Gemini tab at once, or "Ask a question…", a box whose question goes with
+   the selection. Never in a running mock exam, never inside a box being
+   typed in. In a practice question not yet checked, Gemini is told to
+   explain the words and the idea without naming the right option. */
+PMP.SelectAsk = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon;
+  var MAX = 1500;
+  var bar = null, box = null, picked = null, timer = null;
+
+  function inMock() {
+    var r = PMP.Router.current && PMP.Router.current.name;
+    return r === "exam" && !!(PMP.Exam && PMP.Exam.active);
+  }
+  /* A practice question on screen and not yet checked. */
+  function holdBack() {
+    var r = PMP.Router.current && PMP.Router.current.name, s = PMP.Practice && PMP.Practice.session;
+    var item = s && !s.finished && s.items ? s.items[s.i] : null;
+    return r === "practice" && !!item && !item.committed;
+  }
+  function where() {
+    var h = document.querySelector("#view h1") || document.querySelector("#view h2");
+    var t = h ? h.textContent.replace(/\s+/g, " ").trim() : "";
+    return t ? "\u201c" + t + "\u201d in PMP Prep" : "PMP Prep";
+  }
+  function current() {
+    var sel = window.getSelection && window.getSelection();
+    if (!sel || sel.isCollapsed || !sel.rangeCount || inMock()) return null;
+    var text = String(sel).replace(/\s+/g, " ").trim();
+    if (text.length < 2) return null;
+    var range = sel.getRangeAt(0), node = range.commonAncestorContainer;
+    var host = node.nodeType === 1 ? node : node.parentElement, view = document.getElementById("view");
+    if (!host || !view || !view.contains(host) || host.closest("input, textarea, select, [contenteditable='true']")) return null;
+    var rect = range.getBoundingClientRect();
+    if (!rect.width && !rect.height) return null;
+    return { text: text.length > MAX ? text.slice(0, MAX) + "…" : text, rect: rect, where: where(), hold: holdBack() };
+  }
+
+  var HOLD = "This is from a practice question I haven't answered yet: explain the words and the idea only, and don't tell me which option is right.";
+  function explainText(p) {
+    return "Explain this clearly, in plain words, as it applies to the PMP exam:\n\n\u201c" + p.text + "\u201d\n\n(From " + p.where + ".)" + (p.hold ? "\n\n" + HOLD : "");
+  }
+  function questionText(p, q) {
+    return "About this, from " + p.where + ":\n\n\u201c" + p.text + "\u201d\n\n" + q + (p.hold ? "\n\n" + HOLD : "");
+  }
+
+  function hide() {
+    if (bar) { bar.remove(); bar = null; }
+    if (box) { box.remove(); box = null; }
+  }
+  /* Above the selection, or under it on a touch screen, where the phone's
+     own copy menu sits above; kept on screen. */
+  function place(node, rect) {
+    document.body.appendChild(node);
+    var w = node.offsetWidth, h = node.offsetHeight, below = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+    var top = below ? rect.bottom + 10 : rect.top - h - 10;
+    if (top < 8) top = rect.bottom + 10;
+    if (top + h > window.innerHeight - 8) top = Math.max(8, rect.top - h - 10);
+    var left = Math.max(8, Math.min(window.innerWidth - w - 8, rect.left + rect.width / 2 - w / 2));
+    node.style.top = Math.round(top) + "px";
+    node.style.left = Math.round(left) + "px";
+  }
+  function keep(e) { e.preventDefault(); }
+
+  function showBar(p) {
+    hide();
+    picked = p;
+    bar = el("div", { class: "sa", id: "sa", role: "toolbar", "aria-label": "Ask Gemini about the selected text" }, [
+      el("button", { class: "sa-b", type: "button", id: "sa-explain", onmousedown: keep, onclick: explain }, [icon("spark"), "Explain this"]),
+      el("button", { class: "sa-b", type: "button", id: "sa-ask", onmousedown: keep, onclick: ask }, "Ask a question\u2026")
+    ]);
+    place(bar, p.rect);
+  }
+  function explain() {
+    var p = picked;
+    hide();
+    if (p) PMP.GeminiChat.sendNow(explainText(p));
+  }
+  function ask() {
+    var p = picked;
+    if (!p) return;
+    hide();
+    var ta = el("textarea", { class: "input sa-q", id: "sa-q", rows: "3", placeholder: "Your question about it" });
+    var go = function () {
+      var q = ta.value.trim();
+      if (!q) { ta.focus(); return; }
+      hide();
+      PMP.GeminiChat.sendNow(questionText(p, q));
+    };
+    ta.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); go(); }
+      else if (e.key === "Escape") { e.preventDefault(); hide(); }
+    });
+    box = el("div", { class: "sa sa-box", id: "sa-box", role: "dialog", "aria-label": "Ask Gemini about the selected text" }, [
+      el("p", { class: "sa-about", text: "About: \u201c" + (p.text.length > 90 ? p.text.slice(0, 90) + "\u2026" : p.text) + "\u201d" }),
+      el("label", { class: "sr-only", for: "sa-q", text: "Your question" }), ta,
+      el("div", { class: "sa-row" }, [
+        el("button", { class: "btn btn--sm", type: "button", onclick: hide }, "Cancel"),
+        el("button", { class: "btn btn--sm btn--primary", type: "button", id: "sa-send", onclick: go }, [icon("spark"), "Ask Gemini"])
+      ])
+    ]);
+    place(box, p.rect);
+    ta.focus();
+  }
+
+  function check() {
+    timer = null;
+    if (box) return;
+    var p = current();
+    if (p) showBar(p); else hide();
+  }
+  function soon() { if (timer) clearTimeout(timer); timer = setTimeout(check, 180); }
+
+  function start() {
+    document.addEventListener("selectionchange", function () { if (!box) soon(); });
+    document.addEventListener("pointerdown", function (e) {
+      if (box && !box.contains(e.target)) hide();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && bar) hide(); });
+    window.addEventListener("scroll", function () { if (bar) soon(); }, true);
+    window.addEventListener("hashchange", hide);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+
+  return { explainText: explainText, questionText: questionText, HOLD: HOLD, hide: hide };
+})();
+
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
    Hand-rolled SVG. No charting library, no network, no canvas.
 
@@ -52880,7 +53046,7 @@ PMP.Notepad = (function () {
     });
     PMP.dom.on(rib, "click", function (e) {
       var b = e.target.closest("button");
-      if (!b) return;
+      if (!b || b.id === "np-ai-btn") return;
       if (b.hasAttribute("data-menu")) {
         var k = b.getAttribute("data-menu");
         menu(k, b.getAttribute("aria-expanded") !== "true");
@@ -52955,7 +53121,13 @@ PMP.Notepad = (function () {
     renderStat();
   }
 
-  return { init: init, sync: sync, isOpen: isOpen, setOpen: setOpen, setTab: setTab, sanitise: sanitise };
+  /* The selection in the note, if there is one (§10.35). */
+  function range() {
+    var r = lastRange;
+    return r && !r.collapsed && inEditor(r.commonAncestorContainer) ? r : null;
+  }
+  return { init: init, sync: sync, isOpen: isOpen, setOpen: setOpen, setTab: setTab, sanitise: sanitise,
+           range: range, save: onInput };
 })();
 
 
@@ -53721,6 +53893,18 @@ PMP.GeminiChat = (function () {
     return out;
   }
 
+  /* One request outside the chat, as Explain it back does (§10.35 NoteAI). */
+  function complete(system, text, signal) {
+    return callGemini(system, [{ role: "user", parts: [{ text: text }] }], signal);
+  }
+
+  /* Sent at once when the chat can (SelectAsk); otherwise left as the draft. */
+  function sendNow(text) {
+    openTab();
+    if (key && lineup.length && !busy) { send(text); nodes.msg.focus(); return; }
+    askAbout(text);
+  }
+
   function askAbout(text) {
     openTab();
     if (key) {
@@ -53835,7 +54019,7 @@ PMP.GeminiChat = (function () {
 
   return {
     init: init, sync: paint, focus: focus, markdown: markdown,
-    askAbout: askAbout, questionDraft: questionDraft, review: review, reviewButton: reviewButton,
+    askAbout: askAbout, sendNow: sendNow, complete: complete, openTab: openTab, questionDraft: questionDraft, review: review, reviewButton: reviewButton,
     explain: explain, explainSheet: explainSheet,
     lineupOf: lineupOf, parseModels: parseModels, snapshot: snapshot, commands: commands, expand: expand,
     SYSTEM: SYSTEM, EXPLAIN_SYSTEM: EXPLAIN_SYSTEM, REVIEW_PROMPT: REVIEW_PROMPT,
@@ -53843,6 +54027,162 @@ PMP.GeminiChat = (function () {
     get lineup() { return lineup.slice(); },
     get sessionModel() { return sessionModel; }
   };
+})();
+
+/* ── 10.35  GEMINI IN THE NOTES ───────────────────────────────────────────
+   The ✦ button in the notes ribbon: the selected part of the note (or the
+   whole page) is tidied up, made clear and short, or explained in detail.
+   The part greys out and can't be edited while Gemini works; the rest of
+   the note stays editable. The answer takes its place, highlighted, until
+   the person keeps it, asks again, or undoes it back to their own words.
+   It travels as the notes' light markup (§10.18 htmlToMarkup) and comes
+   back the same way, through the notes' sanitiser. */
+PMP.NoteAI = (function () {
+  var el = PMP.dom.el;
+  var FORMAT = "Reply with the rewritten notes only: no preamble, no closing remark. Use only this light markup: **bold**, *italic*, "
+    + "a line starting with \"- \" for a bullet, \"1. \" for a numbered step, a blank line between paragraphs. No # headings, no tables, no code blocks. "
+    + "The notes are a learner's own, made while preparing for PMI's PMP exam; keep their voice.";
+  var MODES = {
+    tidy: { label: "Tidy up", system: "Tidy up these study notes: fix spelling and grammar, put them in a sensible order with short bold headings and bullet points where they help. Keep every point and the learner's meaning, and add nothing new. " },
+    short: { label: "Make it clear and short", system: "Rewrite these study notes to be clear and short: the same points in fewer, plainer words. Drop repetition, but keep every fact, number and formula. " },
+    detail: { label: "Explain in detail", system: "Explain these study notes in detail: keep each point and expand it with what it means, why it matters on the PMP exam, and a short example. If something in them is wrong, correct it and say so. " }
+  };
+  /* One rewrite at a time: { zone, orig, markup, mode, last, ctl, state: "busy"|"review" }. */
+  var job = null;
+  var btn, pop, review, text;
+
+  function menu(open) {
+    pop.hidden = !open;
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  /* Markdown habits the model may keep anyway, folded into the notes' markup. */
+  function tidyReply(t) {
+    return String(t || "").trim()
+      .replace(/^```[a-z]*\n?|\n?```$/g, "")
+      .replace(/^#{1,6}\s+(.+)$/gm, "**$1**")
+      .replace(/^\s*[*•]\s+/gm, "- ");
+  }
+  function zoneOf(range) {
+    var frag = range.extractContents();
+    var block = !!frag.querySelector("div, p, ul, ol, li");
+    var zone = el(block ? "div" : "span", { class: "np-ai-zone", contenteditable: "false", "aria-busy": "true" });
+    zone.appendChild(frag);
+    range.insertNode(zone);
+    return zone;
+  }
+  function paintReview() {
+    review.innerHTML = "";
+    if (!job) { review.hidden = true; return; }
+    review.hidden = false;
+    if (job.state === "busy") {
+      review.appendChild(el("span", { class: "np-ai-msg" }, [PMP.dom.icon("spark"), MODES[job.mode].label + ": Gemini is working on the grey part\u2026"]));
+      review.appendChild(el("button", { class: "btn btn--sm btn--ghost", type: "button", id: "np-ai-cancel", onclick: undo }, "Cancel"));
+    } else {
+      review.appendChild(el("span", { class: "np-ai-msg", text: "Gemini rewrote the highlighted part." }));
+      review.appendChild(el("button", { class: "btn btn--sm btn--primary", type: "button", id: "np-ai-keep", onclick: keep }, "Keep"));
+      review.appendChild(el("button", { class: "btn btn--sm", type: "button", id: "np-ai-redo", onclick: redo }, "Redo"));
+      review.appendChild(el("button", { class: "btn btn--sm btn--ghost", type: "button", id: "np-ai-undo", onclick: undo }, "Undo"));
+    }
+  }
+  function unwrap(zone) {
+    var parent = zone.parentNode;
+    if (!parent) return;
+    while (zone.firstChild) parent.insertBefore(zone.firstChild, zone);
+    parent.removeChild(zone);
+  }
+  function finish() {
+    var j = job;
+    job = null;
+    btn.disabled = false;
+    if (j && j.ctl) j.ctl.abort();
+    paintReview();
+    PMP.Notepad.save();
+    return j;
+  }
+  function keep() {
+    var j = job;
+    if (!j) return;
+    unwrap(j.zone);
+    finish();
+    PMP.UI.toast("Kept.", "ok");
+  }
+  function undo() {
+    var j = job;
+    if (!j) return;
+    j.zone.innerHTML = j.orig;
+    unwrap(j.zone);
+    finish();
+  }
+  function ask() {
+    var j = job;
+    j.state = "busy";
+    j.zone.className = "np-ai-zone np-ai-busy";
+    j.zone.setAttribute("aria-busy", "true");
+    j.ctl = window.AbortController ? new AbortController() : null;
+    paintReview();
+    var body = "My notes:\n\n" + j.markup + (j.last ? "\n\nYou already suggested the version below; write a noticeably different one.\n\n" + j.last : "");
+    PMP.GeminiChat.complete(MODES[j.mode].system + FORMAT, body, j.ctl && j.ctl.signal).then(function (reply) {
+      if (job !== j) return;
+      var t = tidyReply(reply);
+      if (!t) throw new Error("Gemini sent back an empty answer.");
+      j.last = t;
+      j.zone.innerHTML = PMP.Notepad.sanitise(PMP.Sync.markupToHtml(t));
+      j.zone.className = "np-ai-zone np-ai-done";
+      j.zone.removeAttribute("aria-busy");
+      j.state = "review";
+      j.ctl = null;
+      paintReview();
+      PMP.UI.announce("Gemini rewrote the highlighted part. Keep, redo or undo.");
+    }).then(null, function (e) {
+      if (job !== j || (e && e.name === "AbortError")) return;
+      undo();
+      PMP.UI.toast((e && e.message) || "Gemini couldn't rewrite it.", "err");
+    });
+  }
+  function redo() { if (job && job.state === "review") { job.zone.innerHTML = job.orig; ask(); } }
+
+  function start(mode) {
+    menu(false);
+    if (job) return;
+    if (!PMP.GeminiChat.hasKey) {
+      PMP.UI.toast("Add your Gemini key in the Gemini tab first.", "warn");
+      PMP.GeminiChat.openTab();
+      return;
+    }
+    var r = PMP.Notepad.range();
+    if (!r) {
+      if (!text.textContent.trim()) { PMP.UI.toast("There is nothing in your notes to rewrite yet.", "warn"); return; }
+      r = document.createRange();
+      r.selectNodeContents(text);
+    }
+    var holder = document.createElement("div");
+    holder.appendChild(r.cloneContents());
+    var markup = PMP.Sync.htmlToMarkup(holder.innerHTML).trim();
+    if (!markup) { PMP.UI.toast("Select some text in your notes first.", "warn"); return; }
+    var orig = holder.innerHTML;
+    var zone = zoneOf(r);
+    window.getSelection().removeAllRanges();
+    btn.disabled = true;
+    job = { zone: zone, orig: orig, markup: markup, mode: mode, last: null, ctl: null };
+    ask();
+  }
+
+  function init() {
+    btn = document.getElementById("np-ai-btn");
+    pop = document.getElementById("np-pop-ai");
+    review = document.getElementById("np-ai-review");
+    text = document.getElementById("np-text");
+    pop.addEventListener("mousedown", function (e) { if (e.target.closest("button")) e.preventDefault(); });
+    btn.addEventListener("click", function () { menu(pop.hidden); });
+    pop.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-ai]");
+      if (b) start(b.getAttribute("data-ai"));
+    });
+    document.addEventListener("click", function (e) { if (!pop.hidden && !e.target.closest("#np-ai-btn, #np-pop-ai")) menu(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !pop.hidden) menu(false); });
+  }
+
+  return { init: init, MODES: MODES, tidyReply: tidyReply, get busy() { return !!job; } };
 })();
 
 
@@ -54060,6 +54400,7 @@ PMP.GeminiChat = (function () {
     PMP.Shell.init();
     PMP.Notepad.init();
     PMP.GeminiChat.init();
+    PMP.NoteAI.init();
     PMP.Shell.applyTheme(PMP.Store.state.settings.theme || "system");
 
     PMP.Storage.probe()

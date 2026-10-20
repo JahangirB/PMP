@@ -82,62 +82,62 @@ any question.
 |`pmp-p2-138`|people-2|pulldown|agile|2|Prompts: Two developers disagree about the loggin… / Team members now refer to 'the mobile ca… / One developer refuses to attend any meet…|
 |`pmp-p2-139`|people-2|fillblank|hybrid|3|Two leads on a veterinary diagnostics firm's hybrid programme disagree about which laboratory information system to buy. Before…|
 |`pmp-p2-140`|people-2|hotspot|agile|3|On a fintech app team, a tester asks you, as Scrum Master, to look over a message she plans to send a developer who keeps merging…|
-|`pmp-p2-1`|pmp-lectures-1-11|single|agile|3|During a retrospective meeting, some team members expressed that they strongly disagree with how the product owner and scrum…|
-|`pmp-p2-2`|pmp-lectures-1-11|single|agile|3|A new project manager is assigned to an ongoing agile project. The project is now starting its second 4-week iteration cycle. The…|
-|`pmp-p2-3`|pmp-lectures-1-11|single|agile|3|During a software development project, the team realized that several features failed to comply with quality requirements. After…|
-|`pmp-p2-4`|pmp-lectures-1-11|single|predictive|4|A client's interactions with the project team have been somewhat negative. Project team members don't want to be part of the…|
-|`pmp-p2-5`|pmp-lectures-1-11|single|agile|3|A team has recently adopted agile and is following a scrum model. There is a conflict between a lead developer and a quality…|
-|`pmp-p2-6`|pmp-lectures-1-11|single|predictive|4|A project team member suddenly approaches the project manager and asks to resign from the project. The team member is upset…|
-|`pmp-p2-7`|pmp-lectures-1-11|single|predictive|3|A project manager is leading a complex software development project. The project team cannot agree on which process to use when…|
-|`pmp-p2-8`|pmp-lectures-1-11|single|predictive|4|A key member of a project team publicly declares that another team member has been speaking negatively about them. The team…|
-|`pmp-p2-9`|pmp-lectures-1-11|single|predictive|3|During a multidisciplinary project, a project manager learns that there are many conflicts about design among team members from…|
-|`pmp-p2-201`|pmp-mocks-1-10|single|agile|3|During a standup, a team member falsely reports the completion of a story which is a dependency for other stories. When the team…|
-|`pmp-p2-202`|pmp-mocks-1-10|single|agile|2|During a standup meeting, some of the team members strongly disagreed about how tasks were distributed. They feel tired and…|
-|`pmp-p2-203`|pmp-mocks-1-10|single|predictive|2|Discussions during weekly project team meetings are frequently dominated by a senior team member who has a tendency to talk over…|
-|`pmp-p2-204`|pmp-mocks-1-10|single|predictive|3|A delivery team member is complaining about the workload and the number of top priorities they are handling. Another team member…|
-|`pmp-p2-205`|pmp-mocks-1-10|single|hybrid|3|A project manager is leading a hybrid project with a self-organizing team. The team is unable to agree on the scope for the next…|
-|`pmp-p2-206`|pmp-mocks-1-10|single|predictive|2|A senior team member is having challenges with a new project team member. The senior team member asks the project manager for…|
-|`pmp-p2-207`|pmp-mocks-1-10|single|agile|3|Company A is moving from a predictive approach to an agile one. After the second incremental release of project X, the product…|
-|`pmp-p2-208`|pmp-mocks-1-10|single|hybrid|3|A project is underway with team members from two different countries and there are complaints from both sides. The team members…|
-|`pmp-p2-209`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a new project. Two key project resources have a disagreement regarding a requirement. The project…|
-|`pmp-p2-210`|pmp-mocks-1-10|single|hybrid|2|A virtual project team is composed of members from various countries with cultural differences. The project manager is concerned…|
-|`pmp-p2-211`|pmp-mocks-1-10|single|agile|3|A project leader and a product owner had a side conversation about the status of the next delivery. The product owner raised…|
-|`pmp-p2-212`|pmp-mocks-1-10|single|predictive|2|A delivery milestone for a project is fast approaching, but an item that is planned to be completed is at risk. A team member…|
-|`pmp-p2-213`|pmp-mocks-1-10|single|predictive|2|A project manager complains that three engineers from different cultural backgrounds leave project meetings twice a day and…|
-|`pmp-p2-214`|pmp-mocks-1-10|single|hybrid|2|A project manager identifies conflicts among local and virtual team members' understanding of the deliverables.|
-|`pmp-p2-215`|pmp-mocks-1-10|single|predictive|2|During a meeting with project stakeholders, two stakeholders have a disagreement regarding how a software component is being…|
-|`pmp-p2-216`|pmp-mocks-1-10|single|predictive|2|A project manager is working on a complex software project. Two team members must team up and work together on a critical module…|
-|`pmp-p2-217`|pmp-mocks-1-10|single|predictive|2|A team member is hosting an event and invites several colleagues through their work calendars. Another team member, who was not…|
-|`pmp-p2-218`|pmp-mocks-1-10|single|predictive|1|A project manager has noticed apparent interpersonal conflict between some team members during the initiation of a project.|
-|`pmp-p2-219`|pmp-mocks-1-10|single|predictive|2|A project team has an after-hours get-together. One of the team members who was recently hired and new to the team did not…|
-|`pmp-p2-220`|pmp-mocks-1-10|single|predictive|2|A newly-hired project manager is running a project for the first time and is worried about rising tensions. Project team members…|
-|`pmp-p2-221`|pmp-mocks-1-10|single|predictive|2|A project manager is leading a project team composed of members from different departments, including engineering, marketing, and…|
-|`pmp-p2-222`|pmp-mocks-1-10|single|predictive|2|During a project team meeting, the project manager notices a conflict between three key team members who have very different…|
-|`pmp-p2-223`|pmp-mocks-1-10|single|predictive|2|A project manager is assigned to a project with a lot of stakeholders and competing priorities.|
-|`pmp-p2-224`|pmp-mocks-1-10|single|agile|2|A project manager notices a potential conflict between a remote developer and an on-site tester during a sprint; the developer…|
-|`pmp-p2-225`|pmp-mocks-1-10|single|predictive|3|An expert resource avoids assignments that include working with a foreign contractor.|
-|`pmp-p2-226`|pmp-mocks-1-10|single|agile|2|A project manager is working on an IT project. During an iteration review meeting, a couple of key stakeholders enter into a…|
-|`pmp-p2-227`|pmp-mocks-1-10|single|agile|2|The project manager schedules an iteration review and learns that a few key stakeholders do not approve of how a feature has been…|
-|`pmp-p2-228`|pmp-mocks-1-10|single|predictive|2|A project manager working with a culturally diverse team discovers major intra-team conflicts during project execution.|
-|`pmp-p2-229`|pmp-mocks-1-10|single|predictive|2|A project manager is managing multidisciplinary teams. During the last project review meeting, the project manager realized that…|
-|`pmp-p2-230`|pmp-mocks-1-10|single|agile|2|A project team member continues to change a colleague's deliverable during every sprint. The colleague has asked the project…|
-|`pmp-p2-231`|pmp-mocks-1-10|single|predictive|2|A team member is unhappy with their workload and feels they are not being supported enough. The project manager wants to meet…|
-|`pmp-p2-232`|pmp-mocks-1-10|single|agile|2|The conflict about how to proceed has developed between two team members prior to a release. The team needs to work together to…|
-|`pmp-p2-233`|pmp-mocks-1-10|single|hybrid|3|A geographically distributed project team has development issues between the colocated and virtual teams, causing productivity to…|
-|`pmp-p2-234`|pmp-mocks-1-10|single|predictive|2|A project team is small and the team members have known each other for a long time. The team's project is in the execution phase.…|
-|`pmp-p2-235`|pmp-mocks-1-10|single|predictive|2|A team member with sufficient experience and knowledge informs the project manager about a conflict with another team member and…|
-|`pmp-p2-236`|pmp-mocks-1-10|single|predictive|2|The execution of a construction project in a remote area requires team members to live together in corporate dormitories when…|
-|`pmp-p2-237`|pmp-mocks-1-10|single|predictive|3|At the midpoint of a renewable energy project, the project manager is faced with a conflict between the design team and…|
-|`pmp-p2-238`|pmp-mocks-1-10|single|predictive|3|During a project charter review session, a dispute arises between the project sponsor and the product owner, witnessed by the…|
-|`pmp-p2-239`|pmp-mocks-1-10|single|predictive|3|During the project execution phase, conflicts have arisen between two key team members, negatively impacting their work output.…|
-|`pmp-p2-240`|pmp-mocks-1-10|multi|predictive|3|At the outset of a new phase in a complex project, after a successful kick-off meeting at the client's site, a team member…|
-|`pmp-p2-241`|pmp-mocks-1-10|single|predictive|2|A project manager is overseeing the development of a new urban park. During the project, a dispute arises between the landscape…|
-|`pmp-p2-242`|pmp-mocks-1-10|multi|predictive|3|During the construction phase of a new city park, conflicts have emerged between the landscape designers and environmental…|
-|`pmp-p2-243`|pmp-mocks-1-10|single|agile|2|As the project manager for a novel online education platform, you're faced with divergent views among stakeholders regarding the…|
-|`pmp-p2-244`|pmp-mocks-1-10|single|predictive|2|You are working on a high profile project. Several high-ranking senior executives want to take the credit for this initiative,…|
-|`pmp-p2-245`|pmp-mocks-1-10|single|predictive|2|During a key scope meeting, an argument arises. The business manager accuses the technology manager of not delivering to their…|
-|`pmp-p2-246`|pmp-mocks-1-10|single|predictive|3|Your team members have raised an issue as they believe the current project scope will not reach the intended project goal of…|
-|`pmp-p2-247`|pmp-mocks-1-10|single|agile|2|You are an agile project manager, and holding daily stand-ups with your team. You notice people accusing other team members of…|
-|`pmp-p2-248`|pmp-mocks-1-10|single|predictive|1|You are working on a project where the functional manager is unhappy with the changes being brought about to his part of the…|
-|`pmp-p2-249`|pmp-mocks-1-10|single|predictive|2|The project you are working on has recently started and the team has come together from many different parts of the organisation,…|
-|`pmp-p2-250`|pmp-mocks-1-10|single|predictive|2|You are working on a project where two high-ranked executives keep derailing project meetings with their own agenda, and adding…|
+|`pmp-p2-1`|export-batch-1|single|agile|3|During a retrospective meeting, some team members expressed that they strongly disagree with how the product owner and scrum…|
+|`pmp-p2-2`|export-batch-1|single|agile|3|A new project manager is assigned to an ongoing agile project. The project is now starting its second 4-week iteration cycle. The…|
+|`pmp-p2-3`|export-batch-1|single|agile|3|During a software development project, the team realized that several features failed to comply with quality requirements. After…|
+|`pmp-p2-4`|export-batch-1|single|predictive|4|A client's interactions with the project team have been somewhat negative. Project team members don't want to be part of the…|
+|`pmp-p2-5`|export-batch-1|single|agile|3|A team has recently adopted agile and is following a scrum model. There is a conflict between a lead developer and a quality…|
+|`pmp-p2-6`|export-batch-1|single|predictive|4|A project team member suddenly approaches the project manager and asks to resign from the project. The team member is upset…|
+|`pmp-p2-7`|export-batch-1|single|predictive|3|A project manager is leading a complex software development project. The project team cannot agree on which process to use when…|
+|`pmp-p2-8`|export-batch-1|single|predictive|4|A key member of a project team publicly declares that another team member has been speaking negatively about them. The team…|
+|`pmp-p2-9`|export-batch-1|single|predictive|3|During a multidisciplinary project, a project manager learns that there are many conflicts about design among team members from…|
+|`pmp-p2-201`|export-batch-2|single|agile|3|During a standup, a team member falsely reports the completion of a story which is a dependency for other stories. When the team…|
+|`pmp-p2-202`|export-batch-2|single|agile|2|During a standup meeting, some of the team members strongly disagreed about how tasks were distributed. They feel tired and…|
+|`pmp-p2-203`|export-batch-2|single|predictive|2|Discussions during weekly project team meetings are frequently dominated by a senior team member who has a tendency to talk over…|
+|`pmp-p2-204`|export-batch-2|single|predictive|3|A delivery team member is complaining about the workload and the number of top priorities they are handling. Another team member…|
+|`pmp-p2-205`|export-batch-2|single|hybrid|3|A project manager is leading a hybrid project with a self-organizing team. The team is unable to agree on the scope for the next…|
+|`pmp-p2-206`|export-batch-2|single|predictive|2|A senior team member is having challenges with a new project team member. The senior team member asks the project manager for…|
+|`pmp-p2-207`|export-batch-2|single|agile|3|Company A is moving from a predictive approach to an agile one. After the second incremental release of project X, the product…|
+|`pmp-p2-208`|export-batch-2|single|hybrid|3|A project is underway with team members from two different countries and there are complaints from both sides. The team members…|
+|`pmp-p2-209`|export-batch-2|single|predictive|3|A project manager is working on a new project. Two key project resources have a disagreement regarding a requirement. The project…|
+|`pmp-p2-210`|export-batch-2|single|hybrid|2|A virtual project team is composed of members from various countries with cultural differences. The project manager is concerned…|
+|`pmp-p2-211`|export-batch-2|single|agile|3|A project leader and a product owner had a side conversation about the status of the next delivery. The product owner raised…|
+|`pmp-p2-212`|export-batch-2|single|predictive|2|A delivery milestone for a project is fast approaching, but an item that is planned to be completed is at risk. A team member…|
+|`pmp-p2-213`|export-batch-2|single|predictive|2|A project manager complains that three engineers from different cultural backgrounds leave project meetings twice a day and…|
+|`pmp-p2-214`|export-batch-2|single|hybrid|2|A project manager identifies conflicts among local and virtual team members' understanding of the deliverables.|
+|`pmp-p2-215`|export-batch-2|single|predictive|2|During a meeting with project stakeholders, two stakeholders have a disagreement regarding how a software component is being…|
+|`pmp-p2-216`|export-batch-2|single|predictive|2|A project manager is working on a complex software project. Two team members must team up and work together on a critical module…|
+|`pmp-p2-217`|export-batch-2|single|predictive|2|A team member is hosting an event and invites several colleagues through their work calendars. Another team member, who was not…|
+|`pmp-p2-218`|export-batch-2|single|predictive|1|A project manager has noticed apparent interpersonal conflict between some team members during the initiation of a project.|
+|`pmp-p2-219`|export-batch-2|single|predictive|2|A project team has an after-hours get-together. One of the team members who was recently hired and new to the team did not…|
+|`pmp-p2-220`|export-batch-2|single|predictive|2|A newly-hired project manager is running a project for the first time and is worried about rising tensions. Project team members…|
+|`pmp-p2-221`|export-batch-2|single|predictive|2|A project manager is leading a project team composed of members from different departments, including engineering, marketing, and…|
+|`pmp-p2-222`|export-batch-2|single|predictive|2|During a project team meeting, the project manager notices a conflict between three key team members who have very different…|
+|`pmp-p2-223`|export-batch-2|single|predictive|2|A project manager is assigned to a project with a lot of stakeholders and competing priorities.|
+|`pmp-p2-224`|export-batch-2|single|agile|2|A project manager notices a potential conflict between a remote developer and an on-site tester during a sprint; the developer…|
+|`pmp-p2-225`|export-batch-2|single|predictive|3|An expert resource avoids assignments that include working with a foreign contractor.|
+|`pmp-p2-226`|export-batch-2|single|agile|2|A project manager is working on an IT project. During an iteration review meeting, a couple of key stakeholders enter into a…|
+|`pmp-p2-227`|export-batch-2|single|agile|2|The project manager schedules an iteration review and learns that a few key stakeholders do not approve of how a feature has been…|
+|`pmp-p2-228`|export-batch-2|single|predictive|2|A project manager working with a culturally diverse team discovers major intra-team conflicts during project execution.|
+|`pmp-p2-229`|export-batch-2|single|predictive|2|A project manager is managing multidisciplinary teams. During the last project review meeting, the project manager realized that…|
+|`pmp-p2-230`|export-batch-2|single|agile|2|A project team member continues to change a colleague's deliverable during every sprint. The colleague has asked the project…|
+|`pmp-p2-231`|export-batch-2|single|predictive|2|A team member is unhappy with their workload and feels they are not being supported enough. The project manager wants to meet…|
+|`pmp-p2-232`|export-batch-2|single|agile|2|The conflict about how to proceed has developed between two team members prior to a release. The team needs to work together to…|
+|`pmp-p2-233`|export-batch-2|single|hybrid|3|A geographically distributed project team has development issues between the colocated and virtual teams, causing productivity to…|
+|`pmp-p2-234`|export-batch-2|single|predictive|2|A project team is small and the team members have known each other for a long time. The team's project is in the execution phase.…|
+|`pmp-p2-235`|export-batch-2|single|predictive|2|A team member with sufficient experience and knowledge informs the project manager about a conflict with another team member and…|
+|`pmp-p2-236`|export-batch-2|single|predictive|2|The execution of a construction project in a remote area requires team members to live together in corporate dormitories when…|
+|`pmp-p2-237`|export-batch-2|single|predictive|3|At the midpoint of a renewable energy project, the project manager is faced with a conflict between the design team and…|
+|`pmp-p2-238`|export-batch-2|single|predictive|3|During a project charter review session, a dispute arises between the project sponsor and the product owner, witnessed by the…|
+|`pmp-p2-239`|export-batch-2|single|predictive|3|During the project execution phase, conflicts have arisen between two key team members, negatively impacting their work output.…|
+|`pmp-p2-240`|export-batch-2|multi|predictive|3|At the outset of a new phase in a complex project, after a successful kick-off meeting at the client's site, a team member…|
+|`pmp-p2-241`|export-batch-2|single|predictive|2|A project manager is overseeing the development of a new urban park. During the project, a dispute arises between the landscape…|
+|`pmp-p2-242`|export-batch-2|multi|predictive|3|During the construction phase of a new city park, conflicts have emerged between the landscape designers and environmental…|
+|`pmp-p2-243`|export-batch-2|single|agile|2|As the project manager for a novel online education platform, you're faced with divergent views among stakeholders regarding the…|
+|`pmp-p2-244`|export-batch-2|single|predictive|2|You are working on a high profile project. Several high-ranking senior executives want to take the credit for this initiative,…|
+|`pmp-p2-245`|export-batch-2|single|predictive|2|During a key scope meeting, an argument arises. The business manager accuses the technology manager of not delivering to their…|
+|`pmp-p2-246`|export-batch-2|single|predictive|3|Your team members have raised an issue as they believe the current project scope will not reach the intended project goal of…|
+|`pmp-p2-247`|export-batch-2|single|agile|2|You are an agile project manager, and holding daily stand-ups with your team. You notice people accusing other team members of…|
+|`pmp-p2-248`|export-batch-2|single|predictive|1|You are working on a project where the functional manager is unhappy with the changes being brought about to his part of the…|
+|`pmp-p2-249`|export-batch-2|single|predictive|2|The project you are working on has recently started and the team has come together from many different parts of the organisation,…|
+|`pmp-p2-250`|export-batch-2|single|predictive|2|You are working on a project where two high-ranked executives keep derailing project meetings with their own agenda, and adding…|

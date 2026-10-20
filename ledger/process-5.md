@@ -80,72 +80,72 @@ any question.
 |`pmp-pr5-138`|process-5|pulldown|predictive|2|Prompts: Brake pads are bought in large volumes f… / A £30 door-seal kit is made by only one… / Cleaning materials are cheap, standard a…|
 |`pmp-pr5-139`|process-5|fillblank|predictive|3|Your stadium project buys structural steel for £2,400,000, a price set at signature. An economic price adjustment clause says 70%…|
 |`pmp-pr5-140`|process-5|hotspot|hybrid|2|A water treatment plant is buying filtration equipment for €1.6 million; the civil works follow a fixed plan while the control…|
-|`pmp-pr5-1`|pmp-lectures-1-11|single|predictive|3|Production of a specific machine in a factory was contracted through a foreign supplier. Prior to delivery of the final two…|
-|`pmp-pr5-2`|pmp-lectures-1-11|single|predictive|3|A company is expanding, and the project manager is contemplating whether to hire new resources or outsource resources from an…|
-|`pmp-pr5-3`|pmp-lectures-1-11|single|agile|3|An agile project to implement a new automation process in a factory is underway. The project manager needs a vendor to help with…|
-|`pmp-pr5-4`|pmp-lectures-1-11|single|predictive|3|A two-year project was awarded to a company six months ago, but the procurement process has not yet been initiated.|
-|`pmp-pr5-5`|pmp-lectures-1-11|single|predictive|4|A project manager is meeting with a critical third-party supplier that provides discounted services. During the meeting, the…|
-|`pmp-pr5-6`|pmp-lectures-1-11|single|predictive|3|A member of the project team who was hired for six months to complete a specific task has decided to leave the project in the…|
-|`pmp-pr5-7`|pmp-lectures-1-11|single|predictive|4|A vendor for a large and complex project has been performing more work than what was originally anticipated in the time and…|
-|`pmp-pr5-8`|pmp-lectures-1-11|single|predictive|3|The project manager is responsible for a major project that involves working with many vendors. A key project concern is related…|
-|`pmp-pr5-9`|pmp-lectures-1-11|single|predictive|4|During project closure, the project sponsor requests that a deliverable, developed by a contractor, be transferred to a nonprofit…|
-|`pmp-pr5-10`|pmp-lectures-1-11|single|predictive|4|A complex, multimillion-dollar, multi-year product development project requiring unique knowledge is 70% complete. Contract…|
-|`pmp-pr5-11`|pmp-lectures-1-11|single|predictive|2|A project manager walked into a project office and found a team member and a supplier representative engaged in a disagreement…|
-|`pmp-pr5-12`|pmp-lectures-1-11|single|predictive|3|In order to reduce procurement time during a bidding process, a project manager decided to contract the additional work to a…|
-|`pmp-pr5-13`|pmp-lectures-1-11|single|predictive|4|During the execution of repair work, the root cause of the damage was discovered to be failures that occurred during the…|
-|`pmp-pr5-14`|pmp-lectures-1-11|single|predictive|4|During the testing phase of a technical project, the project manager discovers some issues with the final product and…|
-|`pmp-pr5-15`|pmp-lectures-1-11|single|predictive|3|A project manager is overseeing a procurement project for a company that has a dedicated procurement management team that handles…|
-|`pmp-pr5-16`|pmp-lectures-1-11|single|predictive|3|The development of a final project schedule is delayed due to the inability to negotiate an agreement with one of the vendors…|
-|`pmp-pr5-17`|pmp-lectures-1-11|single|predictive|3|A project manager has received quotes from two vendors for the same parts. Vendor A has informed the project manager that they…|
-|`pmp-pr5-201`|pmp-mocks-1-10|single|predictive|3|A new project manager has taken over an ongoing project. Progress reports show that the project is within the allocated budget…|
-|`pmp-pr5-202`|pmp-mocks-1-10|single|hybrid|4|The service provider and their client agree on about 80% of the scope of a project contract they are working on for the delivery…|
-|`pmp-pr5-203`|pmp-mocks-1-10|single|predictive|3|The construction of a building is well-defined through plans and written specifications. The service is to be delivered in two…|
-|`pmp-pr5-204`|pmp-mocks-1-10|single|predictive|4|A project manager has just taken over an ongoing project. The previous project manager resigned from the organization. During a…|
-|`pmp-pr5-205`|pmp-mocks-1-10|single|predictive|3|A project manager for a delivery project has engaged a vendor to provide testing services.|
-|`pmp-pr5-206`|pmp-mocks-1-10|single|predictive|2|Halfway through a year-long project, a hardware supplier sends a project manager notice of an intent to increase prices due to…|
-|`pmp-pr5-207`|pmp-mocks-1-10|single|predictive|2|A project is in the testing phase, and the quality control team informs the project manager that the quality of the deliverables…|
-|`pmp-pr5-208`|pmp-mocks-1-10|single|predictive|2|Project completion will be delayed because an essential component will not be delivered on time.|
-|`pmp-pr5-209`|pmp-mocks-1-10|single|predictive|2|A project has components that are outsourced and the project manager is in the control phase of the procurement process.|
-|`pmp-pr5-210`|pmp-mocks-1-10|single|predictive|2|A project has begun to develop a new software application that will be used by the company's sales team. The project is expected…|
-|`pmp-pr5-211`|pmp-mocks-1-10|single|predictive|3|A project integrates with several systems developed by various vendors and one of these vendors has gone out of business.|
-|`pmp-pr5-212`|pmp-mocks-1-10|single|predictive|3|A project manager is managing a project with a very aggressive delivery schedule and a firm completion date. The project requires…|
-|`pmp-pr5-213`|pmp-mocks-1-10|single|predictive|3|A project manager oversees a complex project in which a vendor is responsible for delivering several essential components. The…|
-|`pmp-pr5-214`|pmp-mocks-1-10|single|predictive|2|A project manager learns that the project team is involved in an ongoing conflict with an overseas supplier team. The conflict is…|
-|`pmp-pr5-215`|pmp-mocks-1-10|multi|predictive|3|A project steering group has made a decision to change the vendor that will deliver a component of a project. (Choose 2).|
-|`pmp-pr5-216`|pmp-mocks-1-10|single|predictive|3|A project manager is on a project in collaboration with a vendor. The vendor responded to all the Request for Proposal (RFP)…|
-|`pmp-pr5-217`|pmp-mocks-1-10|single|predictive|2|A supplier has been awarded a firm fixed price (FFP) contract to provide various materials for a construction project. The…|
-|`pmp-pr5-218`|pmp-mocks-1-10|single|predictive|3|The production of a key component in a construction project is outsourced to a third-party vendor. The vendor informs the project…|
-|`pmp-pr5-219`|pmp-mocks-1-10|single|predictive|2|A project manager needs to contract with a provider for a large government project. Project guidelines mandate that all potential…|
-|`pmp-pr5-220`|pmp-mocks-1-10|multi|predictive|3|In two months, there will be a delivery of project machines from a factory. The project team is in the process of performing a…|
-|`pmp-pr5-221`|pmp-mocks-1-10|single|predictive|3|A project manager is leading a project where a vendor is engaged. The project team has a dependency on the vendor to complete…|
-|`pmp-pr5-222`|pmp-mocks-1-10|single|predictive|2|After consultation with executive stakeholders, it was decided that the project manager would replace a vendor while the project…|
-|`pmp-pr5-223`|pmp-mocks-1-10|single|predictive|3|A project vendor has informed a project manager that an outsourced project deliverable will be available 6 months later than the…|
-|`pmp-pr5-224`|pmp-mocks-1-10|single|hybrid|3|A project manager is leading a project with a scope partially delivered by a vendor. The vendor's processes and tools differ from…|
-|`pmp-pr5-225`|pmp-mocks-1-10|single|predictive|3|Due to increased price volatility, a vendor asks the project manager of a large development project to make a price change that…|
-|`pmp-pr5-226`|pmp-mocks-1-10|single|predictive|2|A team receives outsourced deliverables and determines that they do not meet the agreed-upon acceptance criteria.|
-|`pmp-pr5-227`|pmp-mocks-1-10|single|predictive|1|A project manager is managing a project involving a few vendors. The project sponsor asks how the project will acquire goods and…|
-|`pmp-pr5-228`|pmp-mocks-1-10|single|predictive|2|A project manager needs to hire suppliers for an international project that has a performance period of several years. The…|
-|`pmp-pr5-229`|pmp-mocks-1-10|single|predictive|2|During project execution, the team finds that changes must be made to a component sourced from an outside supplier. The component…|
-|`pmp-pr5-230`|pmp-mocks-1-10|single|predictive|3|A project manager has been awarded a firm-fixed-price (FFP) contract to develop a new mobile app for a client. The contract scope…|
-|`pmp-pr5-231`|pmp-mocks-1-10|single|predictive|3|The supplier of a tool for a manufacturing project informs the project manager that delivery of the tool will be late. The…|
-|`pmp-pr5-232`|pmp-mocks-1-10|single|predictive|3|A contractor is late with a critical project deliverable due to resource challenges. There is a 22% buffer in the budget for cost…|
-|`pmp-pr5-233`|pmp-mocks-1-10|multi|hybrid|4|The government of a country intends to construct a multibillion-dollar railway across three major cities and hires a contractor…|
-|`pmp-pr5-234`|pmp-mocks-1-10|single|predictive|2|A member of a development project team informs the project manager that the operating system is not going to be installed on time…|
-|`pmp-pr5-235`|pmp-mocks-1-10|single|predictive|3|For the implementation of a sophisticated security software across multiple departments, the selected external provider asserts…|
-|`pmp-pr5-236`|pmp-mocks-1-10|single|predictive|3|For an upcoming critical initiative, a project manager must engage a vendor notorious for not meeting deadlines, yet uniquely…|
-|`pmp-pr5-237`|pmp-mocks-1-10|single|predictive|2|At the beginning of a green building project, the project manager is tasked by the lead architect to engage a key supplier known…|
-|`pmp-pr5-238`|pmp-mocks-1-10|single|predictive|2|You are working on a high value construction project to include smart-home components within multi-million dollar buildings.…|
-|`pmp-pr5-239`|pmp-mocks-1-10|single|predictive|2|A missing item has been uncovered in the project scope that your project team cannot deliver. The item is not complex and seems…|
-|`pmp-pr5-240`|pmp-mocks-1-10|single|hybrid|3|You are working on a project where part of the work is planned carefully upfront, and another part is subject to change. You…|
-|`pmp-pr5-241`|pmp-mocks-1-10|single|predictive|2|You have completed a make-or-buy analysis in your project and found that part of your deliverable is best created by an external…|
-|`pmp-pr5-242`|pmp-mocks-1-10|single|agile|2|Your agile project needs a third party vendor to help complete the work. The product owner has multiple features on their product…|
-|`pmp-pr5-243`|pmp-mocks-1-10|single|predictive|2|You have completed a make-or-buy analysis and you agree to hire a third-party vendor to complete part of your product. You create…|
-|`pmp-pr5-244`|pmp-mocks-1-10|single|predictive|2|You are the project manager on a high profile software project that involves automation technology not used before in your…|
-|`pmp-pr5-245`|pmp-mocks-1-10|single|predictive|2|You are working on a project charter for the initiating stage of a new project that will deliver a new data system. You approach…|
-|`pmp-pr5-246`|pmp-mocks-1-10|single|predictive|2|You have planned, executed and monitored a project to completion. The customer has just received the finished product and you…|
-|`pmp-pr5-247`|pmp-mocks-1-10|single|predictive|2|You are working on a complex, high-value project to replace the telecommunications system across your organisation. You have…|
-|`pmp-pr5-248`|pmp-mocks-1-10|single|predictive|2|Part of your project work needs to be outsourced to a supplier. You are asked to ensure that cost for the outsourced portion of…|
-|`pmp-pr5-249`|pmp-mocks-1-10|single|agile|2|You are a project manager on an Agile project that requires an external third party to develop software for one of your features.…|
-|`pmp-pr5-250`|pmp-mocks-1-10|single|predictive|2|You are working on a project where a vendor is performing a large amount of the work. Lately they have not been performing well,…|
-|`pmp-pr5-251`|pmp-mocks-1-10|single|predictive|2|A recent news article spread a rumour about a supplier who is providing services for the project you are working on. They are…|
-|`pmp-pr5-252`|pmp-mocks-1-10|single|predictive|1|You are working on a project and it has become apparent that part of the product your company was creating they won't be able to…|
+|`pmp-pr5-1`|export-batch-1|single|predictive|3|Production of a specific machine in a factory was contracted through a foreign supplier. Prior to delivery of the final two…|
+|`pmp-pr5-2`|export-batch-1|single|predictive|3|A company is expanding, and the project manager is contemplating whether to hire new resources or outsource resources from an…|
+|`pmp-pr5-3`|export-batch-1|single|agile|3|An agile project to implement a new automation process in a factory is underway. The project manager needs a vendor to help with…|
+|`pmp-pr5-4`|export-batch-1|single|predictive|3|A two-year project was awarded to a company six months ago, but the procurement process has not yet been initiated.|
+|`pmp-pr5-5`|export-batch-1|single|predictive|4|A project manager is meeting with a critical third-party supplier that provides discounted services. During the meeting, the…|
+|`pmp-pr5-6`|export-batch-1|single|predictive|3|A member of the project team who was hired for six months to complete a specific task has decided to leave the project in the…|
+|`pmp-pr5-7`|export-batch-1|single|predictive|4|A vendor for a large and complex project has been performing more work than what was originally anticipated in the time and…|
+|`pmp-pr5-8`|export-batch-1|single|predictive|3|The project manager is responsible for a major project that involves working with many vendors. A key project concern is related…|
+|`pmp-pr5-9`|export-batch-1|single|predictive|4|During project closure, the project sponsor requests that a deliverable, developed by a contractor, be transferred to a nonprofit…|
+|`pmp-pr5-10`|export-batch-1|single|predictive|4|A complex, multimillion-dollar, multi-year product development project requiring unique knowledge is 70% complete. Contract…|
+|`pmp-pr5-11`|export-batch-1|single|predictive|2|A project manager walked into a project office and found a team member and a supplier representative engaged in a disagreement…|
+|`pmp-pr5-12`|export-batch-1|single|predictive|3|In order to reduce procurement time during a bidding process, a project manager decided to contract the additional work to a…|
+|`pmp-pr5-13`|export-batch-1|single|predictive|4|During the execution of repair work, the root cause of the damage was discovered to be failures that occurred during the…|
+|`pmp-pr5-14`|export-batch-1|single|predictive|4|During the testing phase of a technical project, the project manager discovers some issues with the final product and…|
+|`pmp-pr5-15`|export-batch-1|single|predictive|3|A project manager is overseeing a procurement project for a company that has a dedicated procurement management team that handles…|
+|`pmp-pr5-16`|export-batch-1|single|predictive|3|The development of a final project schedule is delayed due to the inability to negotiate an agreement with one of the vendors…|
+|`pmp-pr5-17`|export-batch-1|single|predictive|3|A project manager has received quotes from two vendors for the same parts. Vendor A has informed the project manager that they…|
+|`pmp-pr5-201`|export-batch-2|single|predictive|3|A new project manager has taken over an ongoing project. Progress reports show that the project is within the allocated budget…|
+|`pmp-pr5-202`|export-batch-2|single|hybrid|4|The service provider and their client agree on about 80% of the scope of a project contract they are working on for the delivery…|
+|`pmp-pr5-203`|export-batch-2|single|predictive|3|The construction of a building is well-defined through plans and written specifications. The service is to be delivered in two…|
+|`pmp-pr5-204`|export-batch-2|single|predictive|4|A project manager has just taken over an ongoing project. The previous project manager resigned from the organization. During a…|
+|`pmp-pr5-205`|export-batch-2|single|predictive|3|A project manager for a delivery project has engaged a vendor to provide testing services.|
+|`pmp-pr5-206`|export-batch-2|single|predictive|2|Halfway through a year-long project, a hardware supplier sends a project manager notice of an intent to increase prices due to…|
+|`pmp-pr5-207`|export-batch-2|single|predictive|2|A project is in the testing phase, and the quality control team informs the project manager that the quality of the deliverables…|
+|`pmp-pr5-208`|export-batch-2|single|predictive|2|Project completion will be delayed because an essential component will not be delivered on time.|
+|`pmp-pr5-209`|export-batch-2|single|predictive|2|A project has components that are outsourced and the project manager is in the control phase of the procurement process.|
+|`pmp-pr5-210`|export-batch-2|single|predictive|2|A project has begun to develop a new software application that will be used by the company's sales team. The project is expected…|
+|`pmp-pr5-211`|export-batch-2|single|predictive|3|A project integrates with several systems developed by various vendors and one of these vendors has gone out of business.|
+|`pmp-pr5-212`|export-batch-2|single|predictive|3|A project manager is managing a project with a very aggressive delivery schedule and a firm completion date. The project requires…|
+|`pmp-pr5-213`|export-batch-2|single|predictive|3|A project manager oversees a complex project in which a vendor is responsible for delivering several essential components. The…|
+|`pmp-pr5-214`|export-batch-2|single|predictive|2|A project manager learns that the project team is involved in an ongoing conflict with an overseas supplier team. The conflict is…|
+|`pmp-pr5-215`|export-batch-2|multi|predictive|3|A project steering group has made a decision to change the vendor that will deliver a component of a project. (Choose 2).|
+|`pmp-pr5-216`|export-batch-2|single|predictive|3|A project manager is on a project in collaboration with a vendor. The vendor responded to all the Request for Proposal (RFP)…|
+|`pmp-pr5-217`|export-batch-2|single|predictive|2|A supplier has been awarded a firm fixed price (FFP) contract to provide various materials for a construction project. The…|
+|`pmp-pr5-218`|export-batch-2|single|predictive|3|The production of a key component in a construction project is outsourced to a third-party vendor. The vendor informs the project…|
+|`pmp-pr5-219`|export-batch-2|single|predictive|2|A project manager needs to contract with a provider for a large government project. Project guidelines mandate that all potential…|
+|`pmp-pr5-220`|export-batch-2|multi|predictive|3|In two months, there will be a delivery of project machines from a factory. The project team is in the process of performing a…|
+|`pmp-pr5-221`|export-batch-2|single|predictive|3|A project manager is leading a project where a vendor is engaged. The project team has a dependency on the vendor to complete…|
+|`pmp-pr5-222`|export-batch-2|single|predictive|2|After consultation with executive stakeholders, it was decided that the project manager would replace a vendor while the project…|
+|`pmp-pr5-223`|export-batch-2|single|predictive|3|A project vendor has informed a project manager that an outsourced project deliverable will be available 6 months later than the…|
+|`pmp-pr5-224`|export-batch-2|single|hybrid|3|A project manager is leading a project with a scope partially delivered by a vendor. The vendor's processes and tools differ from…|
+|`pmp-pr5-225`|export-batch-2|single|predictive|3|Due to increased price volatility, a vendor asks the project manager of a large development project to make a price change that…|
+|`pmp-pr5-226`|export-batch-2|single|predictive|2|A team receives outsourced deliverables and determines that they do not meet the agreed-upon acceptance criteria.|
+|`pmp-pr5-227`|export-batch-2|single|predictive|1|A project manager is managing a project involving a few vendors. The project sponsor asks how the project will acquire goods and…|
+|`pmp-pr5-228`|export-batch-2|single|predictive|2|A project manager needs to hire suppliers for an international project that has a performance period of several years. The…|
+|`pmp-pr5-229`|export-batch-2|single|predictive|2|During project execution, the team finds that changes must be made to a component sourced from an outside supplier. The component…|
+|`pmp-pr5-230`|export-batch-2|single|predictive|3|A project manager has been awarded a firm-fixed-price (FFP) contract to develop a new mobile app for a client. The contract scope…|
+|`pmp-pr5-231`|export-batch-2|single|predictive|3|The supplier of a tool for a manufacturing project informs the project manager that delivery of the tool will be late. The…|
+|`pmp-pr5-232`|export-batch-2|single|predictive|3|A contractor is late with a critical project deliverable due to resource challenges. There is a 22% buffer in the budget for cost…|
+|`pmp-pr5-233`|export-batch-2|multi|hybrid|4|The government of a country intends to construct a multibillion-dollar railway across three major cities and hires a contractor…|
+|`pmp-pr5-234`|export-batch-2|single|predictive|2|A member of a development project team informs the project manager that the operating system is not going to be installed on time…|
+|`pmp-pr5-235`|export-batch-2|single|predictive|3|For the implementation of a sophisticated security software across multiple departments, the selected external provider asserts…|
+|`pmp-pr5-236`|export-batch-2|single|predictive|3|For an upcoming critical initiative, a project manager must engage a vendor notorious for not meeting deadlines, yet uniquely…|
+|`pmp-pr5-237`|export-batch-2|single|predictive|2|At the beginning of a green building project, the project manager is tasked by the lead architect to engage a key supplier known…|
+|`pmp-pr5-238`|export-batch-2|single|predictive|2|You are working on a high value construction project to include smart-home components within multi-million dollar buildings.…|
+|`pmp-pr5-239`|export-batch-2|single|predictive|2|A missing item has been uncovered in the project scope that your project team cannot deliver. The item is not complex and seems…|
+|`pmp-pr5-240`|export-batch-2|single|hybrid|3|You are working on a project where part of the work is planned carefully upfront, and another part is subject to change. You…|
+|`pmp-pr5-241`|export-batch-2|single|predictive|2|You have completed a make-or-buy analysis in your project and found that part of your deliverable is best created by an external…|
+|`pmp-pr5-242`|export-batch-2|single|agile|2|Your agile project needs a third party vendor to help complete the work. The product owner has multiple features on their product…|
+|`pmp-pr5-243`|export-batch-2|single|predictive|2|You have completed a make-or-buy analysis and you agree to hire a third-party vendor to complete part of your product. You create…|
+|`pmp-pr5-244`|export-batch-2|single|predictive|2|You are the project manager on a high profile software project that involves automation technology not used before in your…|
+|`pmp-pr5-245`|export-batch-2|single|predictive|2|You are working on a project charter for the initiating stage of a new project that will deliver a new data system. You approach…|
+|`pmp-pr5-246`|export-batch-2|single|predictive|2|You have planned, executed and monitored a project to completion. The customer has just received the finished product and you…|
+|`pmp-pr5-247`|export-batch-2|single|predictive|2|You are working on a complex, high-value project to replace the telecommunications system across your organisation. You have…|
+|`pmp-pr5-248`|export-batch-2|single|predictive|2|Part of your project work needs to be outsourced to a supplier. You are asked to ensure that cost for the outsourced portion of…|
+|`pmp-pr5-249`|export-batch-2|single|agile|2|You are a project manager on an Agile project that requires an external third party to develop software for one of your features.…|
+|`pmp-pr5-250`|export-batch-2|single|predictive|2|You are working on a project where a vendor is performing a large amount of the work. Lately they have not been performing well,…|
+|`pmp-pr5-251`|export-batch-2|single|predictive|2|A recent news article spread a rumour about a supplier who is providing services for the project you are working on. They are…|
+|`pmp-pr5-252`|export-batch-2|single|predictive|1|You are working on a project and it has become apparent that part of the product your company was creating they won't be able to…|

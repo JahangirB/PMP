@@ -81,41 +81,41 @@ any question.
 |`pmp-pr6-138`|process-6|pulldown|predictive|2|Prompts: A two-day independent safety inspection… / A nine-month tunnelling package with six… / Project controls support that runs for t…|
 |`pmp-pr6-139`|process-6|fillblank|predictive|3|A theatre's air-handling upgrade has three work packages with three-point cost estimates (optimistic / most likely / pessimistic,…|
 |`pmp-pr6-140`|process-6|hotspot|predictive|2|A Monte Carlo simulation of a ferry terminal refurbishment's total cost, against a base estimate of £4.6m, produced the five…|
-|`pmp-pr6-1`|pmp-lectures-1-11|single|predictive|4|After the transition and completion of a large equipment installation project, the project manager receives a request from the…|
-|`pmp-pr6-2`|pmp-lectures-1-11|single|predictive|4|During the development phase of a construction project, key stakeholders approved a project budget. The team identified risks and…|
-|`pmp-pr6-3`|pmp-lectures-1-11|single|agile|5|An innovative project is leveraging artificial intelligence (AI) to identify chemical compounds for the development of new…|
-|`pmp-pr6-4`|pmp-lectures-1-11|single|predictive|2|A project manager is appointed to design and develop a strategy for a government organization. The project manager recognizes…|
-|`pmp-pr6-5`|pmp-lectures-1-11|single|predictive|3|A team is working on a new technology deployment project. This product has never been implemented before so there is no past data…|
-|`pmp-pr6-6`|pmp-lectures-1-11|single|predictive|4|A project manager has been assigned to a new, multimillion-dollar project that is similar to a project the company executed three…|
-|`pmp-pr6-7`|pmp-lectures-1-11|single|predictive|4|During a progress meeting, the project team learns that an identified risk materialized. The project manager decides to execute…|
-|`pmp-pr6-8`|pmp-lectures-1-11|single|predictive|3|A construction company is implementing a new strategic project with a fixed budget. While monitoring the project, it was…|
-|`pmp-pr6-9`|pmp-lectures-1-11|single|predictive|3|At project initiation, a quote for the required services was requested from a vendor, and the work was estimated at US$100,000.…|
-|`pmp-pr6-201`|pmp-mocks-1-10|single|hybrid|4|A team is working on a new product development project using a hybrid approach. After the fourth sprint, they learn that the…|
-|`pmp-pr6-202`|pmp-mocks-1-10|single|predictive|4|A project manager is developing a project budget. After estimating the cost of each activity, the manager adds a contingency…|
-|`pmp-pr6-203`|pmp-mocks-1-10|single|agile|3|A team is working on a new project and the sponsor refuses to approve a budget increase needed for the current iteration.|
-|`pmp-pr6-204`|pmp-mocks-1-10|single|hybrid|2|A project manager is managing a hybrid project with a fixed time and fixed price agreement. The project manager is having…|
-|`pmp-pr6-205`|pmp-mocks-1-10|single|agile|2|A project manager is managing an agile project. In order to make sure there is enough funding available for the project, the…|
-|`pmp-pr6-206`|pmp-mocks-1-10|single|predictive|2|A new project has high uncertainty in the cost required for completion.|
-|`pmp-pr6-207`|pmp-mocks-1-10|single|predictive|3|A project is set to install three MRI units in a hospital; one unit has passed acceptance testing and two are under construction.…|
-|`pmp-pr6-208`|pmp-mocks-1-10|single|predictive|1|A project manager is assigned to join a mega industrial project already underway. The latest performance indices are CPI=0.42 and…|
-|`pmp-pr6-209`|pmp-mocks-1-10|single|agile|3|During an iteration the team realizes that the project will overrun the budget. This is due to the support resources being…|
-|`pmp-pr6-210`|pmp-mocks-1-10|single|agile|3|A project manager secures project approval with a constrained budget due to fiscal limitations. The sponsor emphasizes no…|
-|`pmp-pr6-211`|pmp-mocks-1-10|single|predictive|2|An approved change request adds an incentive to a lump sum contract if the contractor is able to maintain the current baseline…|
-|`pmp-pr6-212`|pmp-mocks-1-10|single|predictive|3|A project manager discovers that recent legislative updates necessitate additional security enhancements to the project. Although…|
-|`pmp-pr6-213`|pmp-mocks-1-10|single|agile|3|A project manager needs to prioritize multiple projects within a portfolio and requires accurate budget estimates. The process…|
-|`pmp-pr6-214`|pmp-mocks-1-10|single|predictive|2|A project manager is overseeing the construction of a new office building. The project is running over budget due to the high…|
-|`pmp-pr6-215`|pmp-mocks-1-10|single|predictive|2|In a construction project, the project manager decides to implement Value Engineering (VE) to enhance the project's value. The…|
-|`pmp-pr6-216`|pmp-mocks-1-10|single|predictive|2|A project manager is conducting a Value Engineering (VE) workshop to identify ways to improve a project's value. During the…|
-|`pmp-pr6-217`|pmp-mocks-1-10|single|predictive|2|During the construction of a new office building, the project manager learns that unforeseen geological issues will significantly…|
-|`pmp-pr6-218`|pmp-mocks-1-10|single|predictive|2|Faced with a constrained budget and a tight deadline for launching a new product development project, the project manager…|
-|`pmp-pr6-219`|pmp-mocks-1-10|single|predictive|2|You are working on a business case where you know that the industry is undergoing a significant change at the moment, and there…|
-|`pmp-pr6-220`|pmp-mocks-1-10|single|predictive|3|When reviewing the current progress with your project sponsor, they notice that the system solution is missing a critical piece…|
-|`pmp-pr6-221`|pmp-mocks-1-10|single|predictive|2|The project has faced serious impacts in getting materials, with supply chains being disrupted and a global pandemic, and is…|
-|`pmp-pr6-222`|pmp-mocks-1-10|single|predictive|2|You are planning a project where supply chains have been impacted, and the requirements are complex and intertwined with other…|
-|`pmp-pr6-223`|pmp-mocks-1-10|single|predictive|2|You are working as a Project Manager and your team is about to deliver the completed system to the customer. During the final…|
-|`pmp-pr6-224`|pmp-mocks-1-10|single|predictive|3|You are the project manager on a waterfall project, and you have planned the requirements, scope and schedule with your team. You…|
-|`pmp-pr6-225`|pmp-mocks-1-10|single|predictive|2|The project you are managing has defined the scope and created the Scope Baseline with the Scope Statement, WBS and WBS…|
-|`pmp-pr6-226`|pmp-mocks-1-10|single|predictive|2|Multiple unforeseen events have happened that have set your project behind schedule, and in trying to bring it back on track you…|
-|`pmp-pr6-227`|pmp-mocks-1-10|single|predictive|2|Your project plan includes an estimate of how long the project will take (via a project schedule), how much it will cost and the…|
-|`pmp-pr6-228`|pmp-mocks-1-10|single|predictive|2|You are planning your project and finalizing the project costs. You have broken down the scope into work packages and estimated…|
-|`pmp-pr6-229`|pmp-mocks-1-10|single|predictive|2|You are working as a project manager and created the cost estimate to bid on a government contract, where the scope was set by…|
+|`pmp-pr6-1`|export-batch-1|single|predictive|4|After the transition and completion of a large equipment installation project, the project manager receives a request from the…|
+|`pmp-pr6-2`|export-batch-1|single|predictive|4|During the development phase of a construction project, key stakeholders approved a project budget. The team identified risks and…|
+|`pmp-pr6-3`|export-batch-1|single|agile|5|An innovative project is leveraging artificial intelligence (AI) to identify chemical compounds for the development of new…|
+|`pmp-pr6-4`|export-batch-1|single|predictive|2|A project manager is appointed to design and develop a strategy for a government organization. The project manager recognizes…|
+|`pmp-pr6-5`|export-batch-1|single|predictive|3|A team is working on a new technology deployment project. This product has never been implemented before so there is no past data…|
+|`pmp-pr6-6`|export-batch-1|single|predictive|4|A project manager has been assigned to a new, multimillion-dollar project that is similar to a project the company executed three…|
+|`pmp-pr6-7`|export-batch-1|single|predictive|4|During a progress meeting, the project team learns that an identified risk materialized. The project manager decides to execute…|
+|`pmp-pr6-8`|export-batch-1|single|predictive|3|A construction company is implementing a new strategic project with a fixed budget. While monitoring the project, it was…|
+|`pmp-pr6-9`|export-batch-1|single|predictive|3|At project initiation, a quote for the required services was requested from a vendor, and the work was estimated at US$100,000.…|
+|`pmp-pr6-201`|export-batch-2|single|hybrid|4|A team is working on a new product development project using a hybrid approach. After the fourth sprint, they learn that the…|
+|`pmp-pr6-202`|export-batch-2|single|predictive|4|A project manager is developing a project budget. After estimating the cost of each activity, the manager adds a contingency…|
+|`pmp-pr6-203`|export-batch-2|single|agile|3|A team is working on a new project and the sponsor refuses to approve a budget increase needed for the current iteration.|
+|`pmp-pr6-204`|export-batch-2|single|hybrid|2|A project manager is managing a hybrid project with a fixed time and fixed price agreement. The project manager is having…|
+|`pmp-pr6-205`|export-batch-2|single|agile|2|A project manager is managing an agile project. In order to make sure there is enough funding available for the project, the…|
+|`pmp-pr6-206`|export-batch-2|single|predictive|2|A new project has high uncertainty in the cost required for completion.|
+|`pmp-pr6-207`|export-batch-2|single|predictive|3|A project is set to install three MRI units in a hospital; one unit has passed acceptance testing and two are under construction.…|
+|`pmp-pr6-208`|export-batch-2|single|predictive|1|A project manager is assigned to join a mega industrial project already underway. The latest performance indices are CPI=0.42 and…|
+|`pmp-pr6-209`|export-batch-2|single|agile|3|During an iteration the team realizes that the project will overrun the budget. This is due to the support resources being…|
+|`pmp-pr6-210`|export-batch-2|single|agile|3|A project manager secures project approval with a constrained budget due to fiscal limitations. The sponsor emphasizes no…|
+|`pmp-pr6-211`|export-batch-2|single|predictive|2|An approved change request adds an incentive to a lump sum contract if the contractor is able to maintain the current baseline…|
+|`pmp-pr6-212`|export-batch-2|single|predictive|3|A project manager discovers that recent legislative updates necessitate additional security enhancements to the project. Although…|
+|`pmp-pr6-213`|export-batch-2|single|agile|3|A project manager needs to prioritize multiple projects within a portfolio and requires accurate budget estimates. The process…|
+|`pmp-pr6-214`|export-batch-2|single|predictive|2|A project manager is overseeing the construction of a new office building. The project is running over budget due to the high…|
+|`pmp-pr6-215`|export-batch-2|single|predictive|2|In a construction project, the project manager decides to implement Value Engineering (VE) to enhance the project's value. The…|
+|`pmp-pr6-216`|export-batch-2|single|predictive|2|A project manager is conducting a Value Engineering (VE) workshop to identify ways to improve a project's value. During the…|
+|`pmp-pr6-217`|export-batch-2|single|predictive|2|During the construction of a new office building, the project manager learns that unforeseen geological issues will significantly…|
+|`pmp-pr6-218`|export-batch-2|single|predictive|2|Faced with a constrained budget and a tight deadline for launching a new product development project, the project manager…|
+|`pmp-pr6-219`|export-batch-2|single|predictive|2|You are working on a business case where you know that the industry is undergoing a significant change at the moment, and there…|
+|`pmp-pr6-220`|export-batch-2|single|predictive|3|When reviewing the current progress with your project sponsor, they notice that the system solution is missing a critical piece…|
+|`pmp-pr6-221`|export-batch-2|single|predictive|2|The project has faced serious impacts in getting materials, with supply chains being disrupted and a global pandemic, and is…|
+|`pmp-pr6-222`|export-batch-2|single|predictive|2|You are planning a project where supply chains have been impacted, and the requirements are complex and intertwined with other…|
+|`pmp-pr6-223`|export-batch-2|single|predictive|2|You are working as a Project Manager and your team is about to deliver the completed system to the customer. During the final…|
+|`pmp-pr6-224`|export-batch-2|single|predictive|3|You are the project manager on a waterfall project, and you have planned the requirements, scope and schedule with your team. You…|
+|`pmp-pr6-225`|export-batch-2|single|predictive|2|The project you are managing has defined the scope and created the Scope Baseline with the Scope Statement, WBS and WBS…|
+|`pmp-pr6-226`|export-batch-2|single|predictive|2|Multiple unforeseen events have happened that have set your project behind schedule, and in trying to bring it back on track you…|
+|`pmp-pr6-227`|export-batch-2|single|predictive|2|Your project plan includes an estimate of how long the project will take (via a project schedule), how much it will cost and the…|
+|`pmp-pr6-228`|export-batch-2|single|predictive|2|You are planning your project and finalizing the project costs. You have broken down the scope into work packages and estimated…|
+|`pmp-pr6-229`|export-batch-2|single|predictive|2|You are working as a project manager and created the cost estimate to bid on a government contract, where the scope was set by…|

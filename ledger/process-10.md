@@ -81,24 +81,24 @@ any question.
 |`pmp-pr10-138`|process-10|hotspot|predictive|3|A coastal path restoration project's closure board lists six items. The organisation's policy allows closure once every item is…|
 |`pmp-pr10-139`|process-10|single|agile|3|An agile team has built an eSIM activation service for a mobile network operator and is due to be reassigned in three weeks. The…|
 |`pmp-pr10-140`|process-10|single|hybrid|3|Your hybrid project has installed 1,200 air-quality sensors across a city, with the public data dashboard built in sprints. The…|
-|`pmp-pr10-1`|pmp-lectures-1-11|single|predictive|3|A project was undertaken to set up a new business function in the company. Several months after completion, the project manager…|
-|`pmp-pr10-2`|pmp-lectures-1-11|single|predictive|2|A junior project manager approaches a senior project manager and asks for assistance in initiating the final closeout process for…|
-|`pmp-pr10-3`|pmp-lectures-1-11|single|predictive|3|A project manager works at a construction company. The current project is a three year, multimillion-dollar initiative to rebuild…|
-|`pmp-pr10-201`|pmp-mocks-1-10|single|hybrid|3|A project is delivering incremental business value to a customer. The success criteria for the project is a 20% increase in…|
-|`pmp-pr10-202`|pmp-mocks-1-10|single|predictive|3|A project team has completed project deliverables, but the project manager would like to evaluate whether the project has…|
-|`pmp-pr10-203`|pmp-mocks-1-10|single|predictive|2|During a project governance assessment, and after expending 40% of the approved project budget, management approved the auditor's…|
-|`pmp-pr10-204`|pmp-mocks-1-10|single|predictive|2|A project to develop a new product is nearing its closing phase after 6 months of contributions from the project team and vendor.…|
-|`pmp-pr10-205`|pmp-mocks-1-10|single|hybrid|2|A project manager is involved in an e-commerce development project. The project has been completed successfully using the hybrid…|
-|`pmp-pr10-206`|pmp-mocks-1-10|single|predictive|2|A project manager needs to close a project phase.|
-|`pmp-pr10-207`|pmp-mocks-1-10|single|predictive|2|A project was cancelled during its initiation phase due to lack of adequate resources.|
-|`pmp-pr10-208`|pmp-mocks-1-10|single|predictive|3|Due to a recent incident, a dissatisfied stakeholder files a complaint about a project that has been closed.|
-|`pmp-pr10-209`|pmp-mocks-1-10|single|predictive|2|During project closure, the project manager finds it difficult to obtain successful project completion feedback. Some…|
-|`pmp-pr10-210`|pmp-mocks-1-10|single|predictive|2|A group of stakeholders at a financial institution are conducting a project closure review. Some of the stakeholders are…|
-|`pmp-pr10-211`|pmp-mocks-1-10|single|predictive|2|A large project involving functional groups in four countries is nearing completion. The project manager is meeting with the…|
-|`pmp-pr10-212`|pmp-mocks-1-10|single|predictive|2|After all deliverables have been completed, a project manager needs to formally close a project.|
-|`pmp-pr10-213`|pmp-mocks-1-10|single|predictive|3|A project manager is concerned that team members spend too much time assisting operations and maintenance staff with a recently…|
-|`pmp-pr10-214`|pmp-mocks-1-10|single|predictive|1|Your team have completed the work on your project and the customer has confirmed the formal acceptance of the product that has…|
-|`pmp-pr10-215`|pmp-mocks-1-10|single|predictive|2|You are nearing the end of a difficult project where the vendor providing the system to your company has taken longer than…|
-|`pmp-pr10-216`|pmp-mocks-1-10|single|predictive|2|During your project, your company was taken over by another, larger company, and the project management office and its policies…|
-|`pmp-pr10-217`|pmp-mocks-1-10|single|predictive|1|You are in the closing phase of your project, after having delivered a large change for employees in the HR department.|
-|`pmp-pr10-218`|pmp-mocks-1-10|single|predictive|1|You as a project manager are listing the things that must be done to close out the project.|
+|`pmp-pr10-1`|export-batch-1|single|predictive|3|A project was undertaken to set up a new business function in the company. Several months after completion, the project manager…|
+|`pmp-pr10-2`|export-batch-1|single|predictive|2|A junior project manager approaches a senior project manager and asks for assistance in initiating the final closeout process for…|
+|`pmp-pr10-3`|export-batch-1|single|predictive|3|A project manager works at a construction company. The current project is a three year, multimillion-dollar initiative to rebuild…|
+|`pmp-pr10-201`|export-batch-2|single|hybrid|3|A project is delivering incremental business value to a customer. The success criteria for the project is a 20% increase in…|
+|`pmp-pr10-202`|export-batch-2|single|predictive|3|A project team has completed project deliverables, but the project manager would like to evaluate whether the project has…|
+|`pmp-pr10-203`|export-batch-2|single|predictive|2|During a project governance assessment, and after expending 40% of the approved project budget, management approved the auditor's…|
+|`pmp-pr10-204`|export-batch-2|single|predictive|2|A project to develop a new product is nearing its closing phase after 6 months of contributions from the project team and vendor.…|
+|`pmp-pr10-205`|export-batch-2|single|hybrid|2|A project manager is involved in an e-commerce development project. The project has been completed successfully using the hybrid…|
+|`pmp-pr10-206`|export-batch-2|single|predictive|2|A project manager needs to close a project phase.|
+|`pmp-pr10-207`|export-batch-2|single|predictive|2|A project was cancelled during its initiation phase due to lack of adequate resources.|
+|`pmp-pr10-208`|export-batch-2|single|predictive|3|Due to a recent incident, a dissatisfied stakeholder files a complaint about a project that has been closed.|
+|`pmp-pr10-209`|export-batch-2|single|predictive|2|During project closure, the project manager finds it difficult to obtain successful project completion feedback. Some…|
+|`pmp-pr10-210`|export-batch-2|single|predictive|2|A group of stakeholders at a financial institution are conducting a project closure review. Some of the stakeholders are…|
+|`pmp-pr10-211`|export-batch-2|single|predictive|2|A large project involving functional groups in four countries is nearing completion. The project manager is meeting with the…|
+|`pmp-pr10-212`|export-batch-2|single|predictive|2|After all deliverables have been completed, a project manager needs to formally close a project.|
+|`pmp-pr10-213`|export-batch-2|single|predictive|3|A project manager is concerned that team members spend too much time assisting operations and maintenance staff with a recently…|
+|`pmp-pr10-214`|export-batch-2|single|predictive|1|Your team have completed the work on your project and the customer has confirmed the formal acceptance of the product that has…|
+|`pmp-pr10-215`|export-batch-2|single|predictive|2|You are nearing the end of a difficult project where the vendor providing the system to your company has taken longer than…|
+|`pmp-pr10-216`|export-batch-2|single|predictive|2|During your project, your company was taken over by another, larger company, and the project management office and its policies…|
+|`pmp-pr10-217`|export-batch-2|single|predictive|1|You are in the closing phase of your project, after having delivered a large change for employees in the HR department.|
+|`pmp-pr10-218`|export-batch-2|single|predictive|1|You as a project manager are listing the things that must be done to close out the project.|

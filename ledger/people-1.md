@@ -81,40 +81,40 @@ any question.
 |`pmp-p1-138`|people-1|matching|hybrid|3|Prompts: A team lead asks whether the year-one ta… / Developers on the agile app team ask whi… / Installers on the predictive rollout tea…|
 |`pmp-p1-139`|people-1|multi|hybrid|3|Four developers have joined your hybrid project, which is replacing a city's parking-permit service, after their previous product…|
 |`pmp-p1-140`|people-1|single|hybrid|3|You are running a hybrid project to introduce a common returns process across a retailer's stores in France, Germany and Poland.…|
-|`pmp-p1-201`|pmp-mocks-1-10|single|predictive|3|An organization recently updated its strategic plan and some of the changes were substantial. During a meeting for an ongoing…|
-|`pmp-p1-202`|pmp-mocks-1-10|multi|predictive|4|A project manager is developing a project management plan. The project duration is set for three months due to regulatory…|
-|`pmp-p1-203`|pmp-mocks-1-10|single|agile|3|A project manager just started managing agile projects. The project manager realizes that due to the lack of a clear definition…|
-|`pmp-p1-204`|pmp-mocks-1-10|single|agile|3|At the beginning of an agile project, the project manager is developing the project charter with the team. They are unable to…|
-|`pmp-p1-205`|pmp-mocks-1-10|single|predictive|3|The headquarters of a multinational company is in Europe, with many regional offices in other countries around the world. The…|
-|`pmp-p1-206`|pmp-mocks-1-10|single|predictive|3|A project manager is assigned to a legacy system modernization project. The project management plan is solidified and the…|
-|`pmp-p1-207`|pmp-mocks-1-10|single|predictive|1|A project manager has started developing a plan for a new project. During the first planning meeting, the stakeholders ask about…|
-|`pmp-p1-208`|pmp-mocks-1-10|single|predictive|2|A project team meeting is focused on examining if the business value and vision for a project are being delivered by all parties.…|
-|`pmp-p1-209`|pmp-mocks-1-10|single|predictive|1|Following project approval, a project team is assigned and the project management plan is created.|
-|`pmp-p1-210`|pmp-mocks-1-10|single|predictive|2|A project manager leaves an ongoing project and is replaced by a new project manager.|
-|`pmp-p1-211`|pmp-mocks-1-10|single|predictive|2|An experienced project manager is preparing a kick-off meeting for a new service assessment. A high-level description of the…|
-|`pmp-p1-212`|pmp-mocks-1-10|single|predictive|3|During a project's initiation phase, the project manager reviews the business case and finds that information is incomplete.|
-|`pmp-p1-213`|pmp-mocks-1-10|single|predictive|2|A research and development department is planning to develop a product that will introduce a new line of business for the…|
-|`pmp-p1-214`|pmp-mocks-1-10|single|hybrid|3|A team for a project is composed of individuals from different backgrounds, ages, and interests. The team is struggling to work…|
-|`pmp-p1-215`|pmp-mocks-1-10|single|agile|2|An agile team finds it difficult to complete a checklist because they have different interpretations of what the project aims to…|
-|`pmp-p1-216`|pmp-mocks-1-10|single|predictive|2|A project manager has been assigned to a new project. During the initial review of the project charter, the project manager…|
-|`pmp-p1-217`|pmp-mocks-1-10|single|predictive|2|A project sponsor assigns a project manager to a new, critical project. This project has tight budget and time constraints.|
-|`pmp-p1-218`|pmp-mocks-1-10|single|agile|3|An organization has implemented agile for its recent projects, but all of the recent agile projects have missed their delivery…|
-|`pmp-p1-219`|pmp-mocks-1-10|single|predictive|2|A functional manager questions whether certain aspects of a project are in compliance with the project's goals.|
-|`pmp-p1-220`|pmp-mocks-1-10|single|agile|3|An organization just implemented agile and forms a development team where members are not co-located. The organization’s…|
-|`pmp-p1-221`|pmp-mocks-1-10|single|agile|2|A new product is being constructed by an agile team, but the team has a limited amount of time to complete it. Due to these…|
-|`pmp-p1-222`|pmp-mocks-1-10|single|predictive|1|A project manager is in the initiation phase of a new project and is preparing to develop a project team charter. The project…|
-|`pmp-p1-223`|pmp-mocks-1-10|single|agile|1|In order to function optimally, a project team should have a project charter that states the vision or purpose of the project and…|
-|`pmp-p1-224`|pmp-mocks-1-10|single|predictive|2|The project manager needs to survey the necessary parties to reach a consensus and build a common vision for the project.|
-|`pmp-p1-225`|pmp-mocks-1-10|single|predictive|2|A project manager is working on an internal project and notes that the visions and goals of other department leaders are not…|
-|`pmp-p1-226`|pmp-mocks-1-10|single|predictive|2|Throughout a project, it becomes apparent that team members from different departments have differing perspectives on what the…|
-|`pmp-p1-227`|pmp-mocks-1-10|single|hybrid|2|As the project manager of a new healthcare software implementation project, you're leading a team that's decided to embrace a…|
-|`pmp-p1-228`|pmp-mocks-1-10|single|hybrid|2|You have been allocated to a new project team with members from different parts of the functional business area. It soon becomes…|
-|`pmp-p1-229`|pmp-mocks-1-10|single|agile|2|As the project manager for a software development project, you're informed that due to budget reallocations, several developers…|
-|`pmp-p1-230`|pmp-mocks-1-10|single|predictive|2|You have been assigned to a new project, where the work is behind schedule and the team are not working together well. The team…|
-|`pmp-p1-231`|pmp-mocks-1-10|single|agile|2|Your project team are protected by a union agreement. You notice that they don't know how to use the product you are improving,…|
-|`pmp-p1-232`|pmp-mocks-1-10|single|hybrid|2|You have formed a new project team and have worked through the purpose and mission of the project with them. You expanded on who…|
-|`pmp-p1-233`|pmp-mocks-1-10|single|agile|2|You are working in a new agile team, where the work has started to slow and there is uncertainty and low team engagement. You set…|
-|`pmp-p1-234`|pmp-mocks-1-10|single|agile|1|Your project is new and the team have just come on board. There have been multiple disagreements and the work is slow as they try…|
-|`pmp-p1-235`|pmp-mocks-1-10|single|agile|2|You are an Agile project manager leading a new software project. During the last retrospective there was very little engagement…|
-|`pmp-p1-236`|pmp-mocks-1-10|single|agile|1|You have brought together a new project team to deliver a system that has never been done before in your organization. The…|
-|`pmp-p1-237`|pmp-mocks-1-10|single|agile|1|You are working on an Agile project and have been asked to create a document that lists team principles, agreements, and…|
+|`pmp-p1-201`|export-batch-2|single|predictive|3|An organization recently updated its strategic plan and some of the changes were substantial. During a meeting for an ongoing…|
+|`pmp-p1-202`|export-batch-2|multi|predictive|4|A project manager is developing a project management plan. The project duration is set for three months due to regulatory…|
+|`pmp-p1-203`|export-batch-2|single|agile|3|A project manager just started managing agile projects. The project manager realizes that due to the lack of a clear definition…|
+|`pmp-p1-204`|export-batch-2|single|agile|3|At the beginning of an agile project, the project manager is developing the project charter with the team. They are unable to…|
+|`pmp-p1-205`|export-batch-2|single|predictive|3|The headquarters of a multinational company is in Europe, with many regional offices in other countries around the world. The…|
+|`pmp-p1-206`|export-batch-2|single|predictive|3|A project manager is assigned to a legacy system modernization project. The project management plan is solidified and the…|
+|`pmp-p1-207`|export-batch-2|single|predictive|1|A project manager has started developing a plan for a new project. During the first planning meeting, the stakeholders ask about…|
+|`pmp-p1-208`|export-batch-2|single|predictive|2|A project team meeting is focused on examining if the business value and vision for a project are being delivered by all parties.…|
+|`pmp-p1-209`|export-batch-2|single|predictive|1|Following project approval, a project team is assigned and the project management plan is created.|
+|`pmp-p1-210`|export-batch-2|single|predictive|2|A project manager leaves an ongoing project and is replaced by a new project manager.|
+|`pmp-p1-211`|export-batch-2|single|predictive|2|An experienced project manager is preparing a kick-off meeting for a new service assessment. A high-level description of the…|
+|`pmp-p1-212`|export-batch-2|single|predictive|3|During a project's initiation phase, the project manager reviews the business case and finds that information is incomplete.|
+|`pmp-p1-213`|export-batch-2|single|predictive|2|A research and development department is planning to develop a product that will introduce a new line of business for the…|
+|`pmp-p1-214`|export-batch-2|single|hybrid|3|A team for a project is composed of individuals from different backgrounds, ages, and interests. The team is struggling to work…|
+|`pmp-p1-215`|export-batch-2|single|agile|2|An agile team finds it difficult to complete a checklist because they have different interpretations of what the project aims to…|
+|`pmp-p1-216`|export-batch-2|single|predictive|2|A project manager has been assigned to a new project. During the initial review of the project charter, the project manager…|
+|`pmp-p1-217`|export-batch-2|single|predictive|2|A project sponsor assigns a project manager to a new, critical project. This project has tight budget and time constraints.|
+|`pmp-p1-218`|export-batch-2|single|agile|3|An organization has implemented agile for its recent projects, but all of the recent agile projects have missed their delivery…|
+|`pmp-p1-219`|export-batch-2|single|predictive|2|A functional manager questions whether certain aspects of a project are in compliance with the project's goals.|
+|`pmp-p1-220`|export-batch-2|single|agile|3|An organization just implemented agile and forms a development team where members are not co-located. The organization’s…|
+|`pmp-p1-221`|export-batch-2|single|agile|2|A new product is being constructed by an agile team, but the team has a limited amount of time to complete it. Due to these…|
+|`pmp-p1-222`|export-batch-2|single|predictive|1|A project manager is in the initiation phase of a new project and is preparing to develop a project team charter. The project…|
+|`pmp-p1-223`|export-batch-2|single|agile|1|In order to function optimally, a project team should have a project charter that states the vision or purpose of the project and…|
+|`pmp-p1-224`|export-batch-2|single|predictive|2|The project manager needs to survey the necessary parties to reach a consensus and build a common vision for the project.|
+|`pmp-p1-225`|export-batch-2|single|predictive|2|A project manager is working on an internal project and notes that the visions and goals of other department leaders are not…|
+|`pmp-p1-226`|export-batch-2|single|predictive|2|Throughout a project, it becomes apparent that team members from different departments have differing perspectives on what the…|
+|`pmp-p1-227`|export-batch-2|single|hybrid|2|As the project manager of a new healthcare software implementation project, you're leading a team that's decided to embrace a…|
+|`pmp-p1-228`|export-batch-2|single|hybrid|2|You have been allocated to a new project team with members from different parts of the functional business area. It soon becomes…|
+|`pmp-p1-229`|export-batch-2|single|agile|2|As the project manager for a software development project, you're informed that due to budget reallocations, several developers…|
+|`pmp-p1-230`|export-batch-2|single|predictive|2|You have been assigned to a new project, where the work is behind schedule and the team are not working together well. The team…|
+|`pmp-p1-231`|export-batch-2|single|agile|2|Your project team are protected by a union agreement. You notice that they don't know how to use the product you are improving,…|
+|`pmp-p1-232`|export-batch-2|single|hybrid|2|You have formed a new project team and have worked through the purpose and mission of the project with them. You expanded on who…|
+|`pmp-p1-233`|export-batch-2|single|agile|2|You are working in a new agile team, where the work has started to slow and there is uncertainty and low team engagement. You set…|
+|`pmp-p1-234`|export-batch-2|single|agile|1|Your project is new and the team have just come on board. There have been multiple disagreements and the work is slow as they try…|
+|`pmp-p1-235`|export-batch-2|single|agile|2|You are an Agile project manager leading a new software project. During the last retrospective there was very little engagement…|
+|`pmp-p1-236`|export-batch-2|single|agile|1|You have brought together a new project team to deliver a system that has never been done before in your organization. The…|
+|`pmp-p1-237`|export-batch-2|single|agile|1|You are working on an Agile project and have been asked to create a document that lists team principles, agreements, and…|

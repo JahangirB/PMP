@@ -75,41 +75,41 @@ any question.
 |`pmp-b6-133`|business-6|multi|predictive|3|You manage packaging changeovers for a food manufacturer's product relaunch, with 20 more deliveries due from the film supplier…|
 |`pmp-b6-134`|business-6|multi|hybrid|4|On a smart-meter programme, three software squads hold fortnightly retrospectives, while the hardware workstream records lessons…|
 |`pmp-b6-135`|business-6|single|agile|3|Your team on a charity's donations platform wants to reduce cycle time, which averages nine days per story, and proposes…|
-|`pmp-b6-1`|pmp-lectures-1-11|single|predictive|2|During a project closing review meeting, the project manager notes that a software development task took longer to complete than…|
-|`pmp-b6-2`|pmp-lectures-1-11|single|agile|2|During project closure, the team considers that the final sprint retrospective is not necessary because there are no remaining…|
-|`pmp-b6-3`|pmp-lectures-1-11|single|agile|4|An approved project charter stated that an agile approach must be used. During a lessons learned session, the client indicates…|
-|`pmp-b6-201`|pmp-mocks-1-10|single|agile|3|A project manager is managing a project for a successful startup. The startup has shown exponential growth with multiple benefits…|
-|`pmp-b6-202`|pmp-mocks-1-10|single|agile|2|In the middle of an iteration for the development of a project deliverable, a team member suggests a new method of doing the…|
-|`pmp-b6-203`|pmp-mocks-1-10|single|agile|2|An agile team consistently delivers features on time but recently identified a significant architecture gap leading to rework.|
-|`pmp-b6-204`|pmp-mocks-1-10|single|predictive|2|A project is currently in progress. The project manager has been notified of a new process that may be helpful if it is…|
-|`pmp-b6-205`|pmp-mocks-1-10|single|agile|3|A project team's performance has declined for the last three iterations. Some of the team members are disappointed, and raise…|
-|`pmp-b6-206`|pmp-mocks-1-10|single|agile|2|A project team has recently finished a sprint for developing two features for a fleet management system. Although the team…|
-|`pmp-b6-207`|pmp-mocks-1-10|single|agile|2|During a retrospective meeting, team members show disengagement, stating that they are repeating the same ideas over and over.|
-|`pmp-b6-208`|pmp-mocks-1-10|single|agile|2|A newly formed team has become accustomed to agile practices. The project lead has noticed that while they are performing…|
-|`pmp-b6-209`|pmp-mocks-1-10|single|agile|2|An agile project is running its fifth iteration out of 10. After the last retrospective, the team members realize that they had…|
-|`pmp-b6-210`|pmp-mocks-1-10|single|agile|2|A senior manager informs a project manager that the project is not performing as well as other projects.|
-|`pmp-b6-211`|pmp-mocks-1-10|single|agile|2|At the end of an iteration, a team member tells the project manager that a planned task is unfinished because of an issue that…|
-|`pmp-b6-212`|pmp-mocks-1-10|single|agile|2|A product team is using a prototyping approach to deliver a multiyear business initiative. The project manager notices that a few…|
-|`pmp-b6-213`|pmp-mocks-1-10|single|agile|2|In an agile environment, a project leader should always consider a time for open and free discussions between team members on how…|
-|`pmp-b6-214`|pmp-mocks-1-10|single|hybrid|3|A company has been following a predictive approach and always waits for the preceding phase to be completed before evaluating the…|
-|`pmp-b6-215`|pmp-mocks-1-10|single|agile|2|A project manager is running an agile project that is half completed. During the most recent sprint retrospective, the team…|
-|`pmp-b6-216`|pmp-mocks-1-10|single|agile|3|A project manager typically conducts retrospective sessions at the end of a project. However, the sponsor believes that…|
-|`pmp-b6-217`|pmp-mocks-1-10|multi|hybrid|3|A team member in a hybrid organization informs the project manager of a new way to execute an activity with a shorter duration.…|
-|`pmp-b6-218`|pmp-mocks-1-10|single|agile|2|An agile project team is struggling to keep track of the changes being applied to the product, because its process is cumbersome…|
-|`pmp-b6-219`|pmp-mocks-1-10|single|agile|2|A company is transitioning from a predictive to an agile project management approach. The project manager has noticed that team…|
-|`pmp-b6-220`|pmp-mocks-1-10|single|agile|1|After a few iterations, the project manager feels that even though the team is completing the work as planned, the team is not…|
-|`pmp-b6-221`|pmp-mocks-1-10|single|agile|3|The latest software build for a virtual reality headset release did NOT include urgent change requests already implemented by the…|
-|`pmp-b6-222`|pmp-mocks-1-10|single|agile|2|A project manager convenes an emergency session with the software development team to address significant bugs that are delaying…|
-|`pmp-b6-223`|pmp-mocks-1-10|single|agile|2|During an iterative development project for a new software tool, a developer who was recently added to the team suggests…|
-|`pmp-b6-224`|pmp-mocks-1-10|single|hybrid|2|Your project is starting to go off track due to a large amount of uncertainty in the requirements and resources. At a significant…|
-|`pmp-b6-225`|pmp-mocks-1-10|single|hybrid|2|You have recently taken over on a project that is behind schedule, and slightly over budget. You raise an issue at the steering…|
-|`pmp-b6-226`|pmp-mocks-1-10|single|hybrid|3|Your Project Management Office (PMO) is optimising all the projects within their portfolio. They ask for your advice in tracking…|
-|`pmp-b6-227`|pmp-mocks-1-10|single|agile|2|You have been working as a project manager in an organisation for some time, where an agile- centric delivery approach and way of…|
-|`pmp-b6-228`|pmp-mocks-1-10|single|agile|2|You have been working on a project to deliver a new customer data system, and have noticed that the work is starting to slow…|
-|`pmp-b6-229`|pmp-mocks-1-10|single|agile|2|You have been assigned to take over an existing project as the previous project manager leaves for another opportunity. In…|
-|`pmp-b6-230`|pmp-mocks-1-10|single|agile|2|You are working as a Product Owner. While your sales and revenue have been increasing over the past eight months, the overall…|
-|`pmp-b6-231`|pmp-mocks-1-10|single|agile|1|You are an Agile team leader and talking through the process for your first retrospective. The team is curious as to what they…|
-|`pmp-b6-232`|pmp-mocks-1-10|single|agile|1|You are new to your Agile project, and the team are working through the forming stages.|
-|`pmp-b6-233`|pmp-mocks-1-10|single|agile|1|You are finishing up the first iteration on your Agile project and have set a retrospective meeting for the whole team. One…|
-|`pmp-b6-234`|pmp-mocks-1-10|single|agile|1|The 12th principle of Agile is "At regular intervals, the team reflects on how to become more effective, then tunes and adjusts…|
-|`pmp-b6-235`|pmp-mocks-1-10|single|agile|1|Retrospectives are typically held at the end of an iteration, but an Agile team can also hold retrospectives at any other time.|
+|`pmp-b6-1`|export-batch-1|single|predictive|2|During a project closing review meeting, the project manager notes that a software development task took longer to complete than…|
+|`pmp-b6-2`|export-batch-1|single|agile|2|During project closure, the team considers that the final sprint retrospective is not necessary because there are no remaining…|
+|`pmp-b6-3`|export-batch-1|single|agile|4|An approved project charter stated that an agile approach must be used. During a lessons learned session, the client indicates…|
+|`pmp-b6-201`|export-batch-2|single|agile|3|A project manager is managing a project for a successful startup. The startup has shown exponential growth with multiple benefits…|
+|`pmp-b6-202`|export-batch-2|single|agile|2|In the middle of an iteration for the development of a project deliverable, a team member suggests a new method of doing the…|
+|`pmp-b6-203`|export-batch-2|single|agile|2|An agile team consistently delivers features on time but recently identified a significant architecture gap leading to rework.|
+|`pmp-b6-204`|export-batch-2|single|predictive|2|A project is currently in progress. The project manager has been notified of a new process that may be helpful if it is…|
+|`pmp-b6-205`|export-batch-2|single|agile|3|A project team's performance has declined for the last three iterations. Some of the team members are disappointed, and raise…|
+|`pmp-b6-206`|export-batch-2|single|agile|2|A project team has recently finished a sprint for developing two features for a fleet management system. Although the team…|
+|`pmp-b6-207`|export-batch-2|single|agile|2|During a retrospective meeting, team members show disengagement, stating that they are repeating the same ideas over and over.|
+|`pmp-b6-208`|export-batch-2|single|agile|2|A newly formed team has become accustomed to agile practices. The project lead has noticed that while they are performing…|
+|`pmp-b6-209`|export-batch-2|single|agile|2|An agile project is running its fifth iteration out of 10. After the last retrospective, the team members realize that they had…|
+|`pmp-b6-210`|export-batch-2|single|agile|2|A senior manager informs a project manager that the project is not performing as well as other projects.|
+|`pmp-b6-211`|export-batch-2|single|agile|2|At the end of an iteration, a team member tells the project manager that a planned task is unfinished because of an issue that…|
+|`pmp-b6-212`|export-batch-2|single|agile|2|A product team is using a prototyping approach to deliver a multiyear business initiative. The project manager notices that a few…|
+|`pmp-b6-213`|export-batch-2|single|agile|2|In an agile environment, a project leader should always consider a time for open and free discussions between team members on how…|
+|`pmp-b6-214`|export-batch-2|single|hybrid|3|A company has been following a predictive approach and always waits for the preceding phase to be completed before evaluating the…|
+|`pmp-b6-215`|export-batch-2|single|agile|2|A project manager is running an agile project that is half completed. During the most recent sprint retrospective, the team…|
+|`pmp-b6-216`|export-batch-2|single|agile|3|A project manager typically conducts retrospective sessions at the end of a project. However, the sponsor believes that…|
+|`pmp-b6-217`|export-batch-2|multi|hybrid|3|A team member in a hybrid organization informs the project manager of a new way to execute an activity with a shorter duration.…|
+|`pmp-b6-218`|export-batch-2|single|agile|2|An agile project team is struggling to keep track of the changes being applied to the product, because its process is cumbersome…|
+|`pmp-b6-219`|export-batch-2|single|agile|2|A company is transitioning from a predictive to an agile project management approach. The project manager has noticed that team…|
+|`pmp-b6-220`|export-batch-2|single|agile|1|After a few iterations, the project manager feels that even though the team is completing the work as planned, the team is not…|
+|`pmp-b6-221`|export-batch-2|single|agile|3|The latest software build for a virtual reality headset release did NOT include urgent change requests already implemented by the…|
+|`pmp-b6-222`|export-batch-2|single|agile|2|A project manager convenes an emergency session with the software development team to address significant bugs that are delaying…|
+|`pmp-b6-223`|export-batch-2|single|agile|2|During an iterative development project for a new software tool, a developer who was recently added to the team suggests…|
+|`pmp-b6-224`|export-batch-2|single|hybrid|2|Your project is starting to go off track due to a large amount of uncertainty in the requirements and resources. At a significant…|
+|`pmp-b6-225`|export-batch-2|single|hybrid|2|You have recently taken over on a project that is behind schedule, and slightly over budget. You raise an issue at the steering…|
+|`pmp-b6-226`|export-batch-2|single|hybrid|3|Your Project Management Office (PMO) is optimising all the projects within their portfolio. They ask for your advice in tracking…|
+|`pmp-b6-227`|export-batch-2|single|agile|2|You have been working as a project manager in an organisation for some time, where an agile- centric delivery approach and way of…|
+|`pmp-b6-228`|export-batch-2|single|agile|2|You have been working on a project to deliver a new customer data system, and have noticed that the work is starting to slow…|
+|`pmp-b6-229`|export-batch-2|single|agile|2|You have been assigned to take over an existing project as the previous project manager leaves for another opportunity. In…|
+|`pmp-b6-230`|export-batch-2|single|agile|2|You are working as a Product Owner. While your sales and revenue have been increasing over the past eight months, the overall…|
+|`pmp-b6-231`|export-batch-2|single|agile|1|You are an Agile team leader and talking through the process for your first retrospective. The team is curious as to what they…|
+|`pmp-b6-232`|export-batch-2|single|agile|1|You are new to your Agile project, and the team are working through the forming stages.|
+|`pmp-b6-233`|export-batch-2|single|agile|1|You are finishing up the first iteration on your Agile project and have set a retrospective meeting for the whole team. One…|
+|`pmp-b6-234`|export-batch-2|single|agile|1|The 12th principle of Agile is "At regular intervals, the team reflects on how to become more effective, then tunes and adjusts…|
+|`pmp-b6-235`|export-batch-2|single|agile|1|Retrospectives are typically held at the end of an iteration, but an Agile team can also hold retrospectives at any other time.|
