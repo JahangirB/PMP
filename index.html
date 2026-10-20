@@ -1783,6 +1783,31 @@ dialog.sheet::backdrop { background: var(--scrim); }
 .fig-good-t   { fill: var(--c-go); }
 .fig-warn-t   { fill: var(--c-warn); }
 .fig-bad-t    { fill: var(--c-danger); }
+
+/* The coach bubble (§10.33): the Android app's floating coach, bottom right,
+   draggable, with a count of what the coach has to say. Under the rail
+   overlay and the notes pane, which hide it anyway. */
+.cb { position: fixed; right: 20px; bottom: 24px; z-index: 35; touch-action: none; }
+.cb-btn {
+  position: relative; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%;
+  background: var(--c-signal); color: var(--c-panel); cursor: grab;
+  box-shadow: 0 10px 24px -8px rgba(11, 102, 132, .55), inset 0 2px 0 rgba(255, 255, 255, .35);
+}
+.cb-btn .i { width: 26px; height: 26px; }
+.cb-btn:focus-visible { outline: 3px solid var(--c-signal); outline-offset: 3px; }
+.cb-n {
+  position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px;
+  background: var(--c-danger); color: #fff; font-size: 12px; font-weight: 700; line-height: 20px; text-align: center;
+}
+.cb-panel {
+  position: absolute; right: 0; bottom: 68px; width: min(340px, calc(100vw - 32px));
+  background: var(--s-raise); border: var(--border-hi); border-radius: var(--r-3); padding: var(--sp-4);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .45); display: grid; gap: var(--sp-3);
+}
+.cb-panel h2 { font-size: var(--t-md); margin: 0; }
+.cb-msg { font-size: var(--t-sm); line-height: var(--lh-body); display: grid; gap: var(--sp-2); }
+.cb-msg + .cb-msg { border-top: var(--border); padding-top: var(--sp-3); }
+.cb-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 /* L2: a sample document folds under its title and purpose. */
 .lib-doc > summary { cursor: pointer; list-style: none; }
 .lib-doc > summary::-webkit-details-marker { display: none; }
@@ -3757,6 +3782,8 @@ STEP 5 — TELL ME HOW TO ADD IT:
         10.31 Lesson figures — drawings as data (box, line, text, dot),
               drawn as SVG here and natively on the phones
         10.32 Progress tiles — the phones' widget in the top bar from 900px
+        10.33 Coach bubble — the phones' floating coach: messages, Gemini,
+              Notes and Today; draggable, out of the way while answering
 
    §11  CHARTS ........................... hand-rolled SVG, no library · built
         11.1  accuracy trend  · 11.2  ECO heat map (low-sample cells greyed)
@@ -51420,6 +51447,133 @@ PMP.TopStats = (function () {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 
   return { stats: stats, heat: heat, paint: paint };
+})();
+
+/* ── 10.33  THE COACH BUBBLE ─────────────────────────────────────────────────
+   The Android app's floating coach (MainActivity.CoachBubble): a round
+   button in the bottom-right corner with a count of what the coach has to
+   say, which can be dragged out of the way. Pressing it opens a small panel
+   with the coach's messages and the way into Gemini, Notes and Today, the
+   three things the phones' Coach screen holds. Like on the phones it stays
+   out of the way while there are answers to pick (a mock, or a question on
+   screen), and while the notes pane is open, which carries Gemini itself.
+   Where it was dragged to is a device-only preference. */
+PMP.CoachBubble = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon;
+  var POS = "pmp.coachBubble";
+  var root, btn, badge, panel = null, pos = { x: 0, y: 0 }, timer = null;
+
+  function ls(fn) { try { return fn(window.localStorage); } catch (e) { return null; } }
+  function msgs() {
+    try { return PMP.Coach.messages(PMP.Store.state, "today", 3); } catch (e) { return []; }
+  }
+  /* Answers to pick: a mock, or a question card on screen. */
+  function answering() {
+    var r = PMP.Router.current && PMP.Router.current.name;
+    return r === "exam" || !!document.querySelector("#view .opt, #view [data-opt]");
+  }
+  function place() { root.style.transform = "translate(" + pos.x + "px," + pos.y + "px)"; }
+
+  function close() {
+    if (!panel) return;
+    panel.remove(); panel = null;
+    btn.setAttribute("aria-expanded", "false");
+  }
+  function go(fn) { close(); fn(); }
+  function open() {
+    var list = msgs();
+    panel = el("div", { class: "cb-panel", id: "cb-panel", role: "dialog", "aria-label": "Coach" }, [
+      el("h2", { text: "Coach" }),
+      list.length ? null : el("p", { class: "hint", text: "Nothing new from the coach right now. Your plan for today is on Today." })
+    ].concat(list.map(function (m) {
+      var a = m.action;
+      return el("div", { class: "cb-msg" }, [
+        el("p", { text: m.text }),
+        a ? el("div", { class: "cb-row" }, [el("button", { class: "btn btn--sm", type: "button", onclick: function () {
+          go(function () { PMP.Coach.acted(m.id); if (a.run) a.run(); else PMP.Router.navigate(a.route, a.params || null); });
+        } }, a.label || "Open")]) : null
+      ]);
+    }), [
+      el("div", { class: "cb-row" }, [
+        el("button", { class: "btn btn--sm btn--primary", type: "button", onclick: function () {
+          go(function () { PMP.Notepad.setOpen(true); PMP.Notepad.setTab("ai", true); });
+        } }, [icon("spark"), "Ask Gemini"]),
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () {
+          go(function () { PMP.Notepad.setOpen(true); PMP.Notepad.setTab("notes", true); });
+        } }, [icon("note"), "Notes"]),
+        el("button", { class: "btn btn--sm", type: "button", onclick: function () { go(function () { PMP.Router.navigate("today"); }); } }, "Today")
+      ])
+    ]));
+    root.insertBefore(panel, btn);
+    btn.setAttribute("aria-expanded", "true");
+    var first = panel.querySelector("button");
+    if (first) first.focus();
+  }
+
+  function refresh() {
+    timer = null;
+    if (!root || !PMP.Store.state.sys.ready) return;
+    var hide = answering() || (PMP.Notepad && PMP.Notepad.isOpen());
+    root.hidden = hide;
+    if (hide) { close(); return; }
+    var n = msgs().length;
+    badge.textContent = String(n);
+    badge.hidden = !n;
+    btn.setAttribute("aria-label", "Coach" + (n ? ", " + n + (n === 1 ? " message" : " messages") : ""));
+  }
+  function soon() { if (!timer) timer = setTimeout(refresh, 200); }
+
+  function start() {
+    badge = el("span", { class: "cb-n", "aria-hidden": "true", hidden: true });
+    btn = el("button", { class: "cb-btn", id: "cb-btn", type: "button", title: "Coach. Drag to move.",
+      "aria-haspopup": "dialog", "aria-expanded": "false", "aria-controls": "cb-panel" }, [icon("spark"), badge]);
+    root = el("div", { class: "cb", id: "cb", hidden: true }, [btn]);
+    document.body.appendChild(root);
+    var saved = null;
+    try { saved = JSON.parse(ls(function (s) { return s.getItem(POS); }) || "null"); } catch (e) { saved = null; }
+    if (saved && typeof saved.x === "number" && typeof saved.y === "number") { pos = saved; }
+    place();
+
+    /* Drag with any pointer; a press that hardly moves is a click. */
+    var drag = null;
+    btn.addEventListener("pointerdown", function (e) {
+      drag = { sx: e.clientX, sy: e.clientY, x: pos.x, y: pos.y, moved: false };
+      btn.setPointerCapture(e.pointerId);
+    });
+    btn.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      var dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+      if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 6) return;
+      drag.moved = true;
+      close();
+      var maxX = window.innerWidth - 96, maxY = window.innerHeight - 96;
+      pos = { x: Math.max(-maxX, Math.min(0, drag.x + dx)), y: Math.max(-maxY, Math.min(0, drag.y + dy)) };
+      place();
+    });
+    btn.addEventListener("pointerup", function () {
+      if (drag && drag.moved) ls(function (s) { s.setItem(POS, JSON.stringify(pos)); });
+      btn.dataset.dragged = drag && drag.moved ? "1" : "";
+      drag = null;
+    });
+    btn.addEventListener("click", function () {
+      if (btn.dataset.dragged === "1") { btn.dataset.dragged = ""; return; }
+      if (panel) close(); else open();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel) { close(); btn.focus(); } });
+    document.addEventListener("pointerdown", function (e) { if (panel && !root.contains(e.target)) close(); });
+
+    PMP.Store.subscribe(soon);
+    window.addEventListener("hashchange", function () { close(); soon(); });
+    var view = document.getElementById("view");
+    if (view && window.MutationObserver) new MutationObserver(soon).observe(view, { childList: true, subtree: true });
+    /* The pane opens and closes without telling the store's subscribers; its button says so. */
+    var npBtn = document.getElementById("np-toggle");
+    if (npBtn && window.MutationObserver) new MutationObserver(soon).observe(npBtn, { attributes: true, attributeFilter: ["aria-expanded"] });
+    soon();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+
+  return { refresh: refresh, open: function () { if (!panel) open(); }, close: close };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
