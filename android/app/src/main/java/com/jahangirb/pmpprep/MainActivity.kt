@@ -84,6 +84,7 @@ import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.screens.AnalyticsScreen
 import com.jahangirb.pmpprep.ui.screens.CoachScreen
 import com.jahangirb.pmpprep.ui.screens.MenuScreen
+import com.jahangirb.pmpprep.ui.screens.SupportScreen
 import com.jahangirb.pmpprep.ui.screens.GuideScreen
 import com.jahangirb.pmpprep.ui.screens.FitnessScreen
 import com.jahangirb.pmpprep.ui.screens.ReportsScreen
