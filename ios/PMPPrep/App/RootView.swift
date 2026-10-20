@@ -47,10 +47,10 @@ private struct Shell: View {
 
     private var examRunning: Bool { m.screen == .MOCK && m.mock != nil }
     private var fullScreen: Bool { examRunning || m.screen == .SESSION }
-    /** The coach floats over everything except itself and anything with answers to pick. */
-    private var answering: Bool {
-        (m.screen == .PRACTICE && m.practice.map { !$0.finished } == true) ||
-        (m.screen == .SESSION && m.run.map { r in r.step < r.session.steps.count && [.PRACTICE, .MOCK].contains(r.session.steps[r.step].kind) } == true)
+    /** The coach floats over every screen except a mock exam in progress (web §10.33 alike). */
+    private var inMock: Bool {
+        examRunning ||
+        (m.screen == .SESSION && m.run.map { r in r.step < r.session.steps.count && r.session.steps[r.step].kind == .MOCK } == true)
     }
 
     var body: some View {
@@ -61,7 +61,7 @@ private struct Shell: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .id(m.screen)
                     .transition(.opacity.combined(with: .move(edge: .leading)).animation(.easeOut(duration: 0.35)))
-                if m.screen != .COACH && !examRunning && !answering { CoachBubble() }
+                if !inMock { CoachBubble() }
             }
         }
         .environment(\.reading, m.reading)

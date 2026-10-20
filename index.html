@@ -51454,10 +51454,10 @@ PMP.TopStats = (function () {
    button in the bottom-right corner with a count of what the coach has to
    say, which can be dragged out of the way. Pressing it opens a small panel
    with the coach's messages and the way into Gemini, Notes and Today, the
-   three things the phones' Coach screen holds. Like on the phones it stays
-   out of the way while there are answers to pick (a mock, or a question on
-   screen), and while the notes pane is open, which carries Gemini itself.
-   Where it was dragged to is a device-only preference. */
+   three things the phones' Coach screen holds. It is on every screen except
+   a mock exam in progress, on the web and the phones alike; with the notes
+   pane open it sits at the pane's left edge. Where it was dragged to is a
+   device-only preference. */
 PMP.CoachBubble = (function () {
   var el = PMP.dom.el, icon = PMP.dom.icon;
   var POS = "pmp.coachBubble";
@@ -51467,10 +51467,10 @@ PMP.CoachBubble = (function () {
   function msgs() {
     try { return PMP.Coach.messages(PMP.Store.state, "today", 3); } catch (e) { return []; }
   }
-  /* Answers to pick: a mock, or a question card on screen. */
-  function answering() {
+  /* A mock exam in progress: the only time the coach steps away. */
+  function inMock() {
     var r = PMP.Router.current && PMP.Router.current.name;
-    return r === "exam" || !!document.querySelector("#view .opt, #view [data-opt]");
+    return r === "exam" && !!(PMP.Exam && PMP.Exam.active);
   }
   function place() { root.style.transform = "translate(" + pos.x + "px," + pos.y + "px)"; }
 
@@ -51513,9 +51513,14 @@ PMP.CoachBubble = (function () {
   function refresh() {
     timer = null;
     if (!root || !PMP.Store.state.sys.ready) return;
-    var hide = answering() || (PMP.Notepad && PMP.Notepad.isOpen());
+    var hide = inMock();
     root.hidden = hide;
     if (hide) { close(); return; }
+    /* Beside the notes pane rather than under it. */
+    var np = document.getElementById("np"), paneOpen = PMP.Notepad && PMP.Notepad.isOpen() && np;
+    var paneW = paneOpen ? np.getBoundingClientRect().width : 0;
+    /* A full-width pane (a phone) is a page of its own; the bubble waits under it. */
+    root.style.right = paneW && paneW < window.innerWidth - 120 ? Math.round(paneW + 20) + "px" : "";
     var n = msgs().length;
     badge.textContent = String(n);
     badge.hidden = !n;
