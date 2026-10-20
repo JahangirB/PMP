@@ -256,5 +256,30 @@ module.exports = [
       await lib.clean(page);
       await page.ctx.close();
     }
+  },
+  {
+    name: "flashcards: typing notes in the pane never reveals or grades a card; the shortcuts still work on the deck",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      await lib.go(page, "#/cards");
+      await page.click('#view tr button');
+      await page.waitForTimeout(200);
+      await page.click("#np-toggle");
+      await page.click("#np-tab-notes");
+      await page.click("#np-text");
+      await page.keyboard.type("Notes 1 2 3 4 ");
+      await page.keyboard.press("Enter");
+      var r = await page.evaluate(function () {
+        return { revealed: PMP.Cards.session && PMP.Cards.session.revealed, done: PMP.Cards.session ? PMP.Cards.session.i : -1,
+                 notes: document.getElementById("np-text").textContent };
+      });
+      assert.deepStrictEqual([r.revealed, r.done], [false, 0], "the card is untouched");
+      assert.ok(r.notes.indexOf("Notes 1 2 3 4") >= 0, "the keys went to the notes");
+      await page.click("#view-title");
+      await page.keyboard.press(" ");
+      assert.strictEqual(await page.evaluate(function () { return PMP.Cards.session.revealed; }), true, "space still reveals from the deck");
+      await lib.clean(page);
+      await page.ctx.close();
+    }
   }
 ];

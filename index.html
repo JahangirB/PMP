@@ -34898,13 +34898,15 @@ PMP.Cards = (function () {
   }
 
   /* ── 10.05.5  KEYBOARD ───────────────────────────────────────────────────
-     1-4 grade, space or enter reveals. Ignored while focus is in a field, so
-     the shortcuts cannot fire from a search box elsewhere on the view. */
+     1-4 grade, space or enter reveals. Ignored while focus is in a field,
+     the rich notes editor, the notes and Gemini pane or a dialog, so taking
+     notes beside a deck never turns or grades a card. */
   function bindKeys() {
     teardown.push(on(document, "keydown", function (e) {
       if (!session || session.finished) return;
       var t = e.target;
-      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) return;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
+      if (t && t.closest && t.closest("#np, dialog, #cb")) return;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
 
       if (!session.revealed) {
