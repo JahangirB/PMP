@@ -26,4 +26,21 @@ final class CourseOrderTests: XCTestCase {
         XCTAssertEqual(x.areaTours.count, 10)
         XCTAssertEqual(Set(x.courseOrder), Set(x.lessons.map { $0.id }))
     }
+
+    /** A finished "lesson:" session counts its lesson as read even if the lesson set lost it (sync). */
+    func testFinishedSessionsCountTheirLessons() throws {
+        let repo = ContentRepository(bundle: .main)
+        try repo.load()
+        let x: Extras = repo.extras
+        let f0: String = x.lessons.first { $0.module == "foundations" }!.id
+        let diag: DiagnosticResult = DiagnosticResult(at: 0, n: 25, right: 13, domains: [.people: [6, 10], .process: [5, 10], .business: [5, 9]])
+        let settings: PlanSettings = PlanSettings(examDate: now + 90 * D, hoursPerWeek: 10, studyDays: [1, 2, 3, 4, 5, 6, 7])
+        func keys(_ results: [SessionResult]) -> [String] {
+            PlanEngine.build(PlanInput(x: x, attempts: [], lessonsDone: [], results: results, mocks: [], diagnostic: diag,
+                                       settings: settings, now: now)).sessions.map { $0.key }
+        }
+        XCTAssertTrue(keys([]).contains("lesson:\(f0)"))
+        let done = SessionResult(key: "lesson:\(f0)", kind: .FOUNDATION, taskId: nil, domain: nil, score: 1, minutes: 20, at: now - D)
+        XCTAssertFalse(keys([done]).contains("lesson:\(f0)"))
+    }
 }

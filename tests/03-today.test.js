@@ -40,6 +40,14 @@ module.exports = [
       assert.strictEqual(d.agile, "new");
       assert.strictEqual(d.date, ymd(60));
       await H.finishDrill(page);
+      /* The finished diagnostic is shared, so the phones plan from it too. */
+      var row = await page.evaluate(function () {
+        var rows = PMP.Store.state.shared.diagnostics || [], r = rows[rows.length - 1] || {};
+        var n = 0;
+        Object.keys(r.domains || {}).forEach(function (d) { n += r.domains[d][1]; });
+        return { rows: rows.length, n: r.n, total: n, at: typeof r.at };
+      });
+      assert.ok(row.rows === 1 && row.n > 0 && row.total === row.n && row.at === "number", JSON.stringify(row));
       await lib.go(page, "#/today");
       /* With a date, Today is the guided path's home (§10.25): one card for
          the next planned session in place of the old step list. */

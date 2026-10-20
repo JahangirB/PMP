@@ -68,6 +68,7 @@ and `unsure`/"Not sure"→`2`.
   "weekly":     [ /* WeeklyReport.toJson(), identity = its week start */ ],
   "mycards":    [ { "id": "my:qid", "t": "task", "f": "front", "b": "back", "n": "note" } ],
   "drills":     [ { "at": ms, "g": "evm-variance", "ok": true } ],   // formula-lab drill problems, see below
+  "commands":   [ { "n": "agile", "t": "the message it sends" } ],  // optional: the Gemini chat's own "/" commands
 
   // ── app-only blocks: other apps keep them byte-for-byte and never edit them ──
   "web":    { "settings": {...}, "planner": {...}, "coach": {...}, "issues": [...],
@@ -75,6 +76,11 @@ and `unsure`/"Not sure"→`2`.
   "native": { }
 }
 ```
+
+`commands` holds the person's own chat commands, in the order made: `n` is the name typed after `/`
+(1–24 of a–z, 0–9 and `-`, never one of the built-in `progress`, `improve`, `plan`, `weakest`), `t` the
+message it sends. Typing `/name`, alone or followed by more words, sends `t` (and the words after a blank
+line). The slice is absent when there are none.
 
 `drills` holds one row per formula-lab drill problem marked or shown (web §10.06.10a). `g` is the
 generator id, one of `evm-variance`, `evm-forecast`, `tcpi`, `pert`, `pert-path`, `channels`, `emv`,
@@ -108,6 +114,12 @@ Rules every app follows:
   - `scenarioRuns` become `scenarios`.
   - Finished `exams` produce `mocks` summaries; the full records stay in `web.exams`.
   - Completed lessons go to `lessons`; the details stay in `web.lessons`.
+  - A finished diagnostic also adds a `diagnostics` row (`at`, `n`, `right`, `domains` as `[right, n]`),
+    as the phones do.
+- **Planning from the document (every app):** the plan's domain order comes from the newest
+  `diagnostics` row that has `domains` (the web falls back to its own attempts only when there is
+  none). A finished session `lesson:<id>`, or `build:<task>` for that task's lesson, counts the
+  lesson as read even when `lessons` lacks it, so a lesson is never offered twice.
   - `settings.examDate` becomes `plan.examDate`; `settings.restDays` becomes `plan.rest` (written only
     when it differs from the plan; absent means true).
   - `sittings`, `checkins`, `weekly` and `sessions` are web slices in exactly the shared row shape and are
@@ -131,7 +143,7 @@ canonical JSON (sorted keys) is equal.
 | log | attempts (q+at), scenarios (id+at), mocks (at+title), sessions (k+at), diagnostics (at), chat (at+r), sittings (k+at), checkins (kind+at), weekly (week start), drills (at+g) | Union by identity; nothing is ever deleted. When both sides hold the same identity, keep the local record. Sort by `at`. Cap attempts at the newest 20,000, sittings at 2,000, drills at 2,000, chat at 60 and weekly at 104. |
 | set | flags, lessons, opens | Per element: kept if kept on both sides; removed if removed on either side relative to base; added if added on either side. |
 | map | notes, mistakes, cards, snoozed, mycards (by id), support, web (per key), native (per key) | Per key, three-way: if only one side changed the key relative to base (including deleting it), take that side. If both changed it: cards keep the higher `lastMs`, mistakes the higher `at`, support keeps the higher value, everything else the side with the later `savedAt`. |
-| value | plan, notepad, unknown top-level keys | Three-way as a whole: take the side that changed; if both did, the later `savedAt` wins. |
+| value | plan, notepad, commands, unknown top-level keys | Three-way as a whole: take the side that changed; if both did, the later `savedAt` wins. |
 
 Sets and id-keyed lists are written sorted ascending, and logs sorted by `at`, so the same
 inputs give byte-identical output on every platform.

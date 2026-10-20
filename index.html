@@ -2639,11 +2639,25 @@ html[data-notepad="open"] .np { display: flex; }
 .np-keyset a { color: var(--c-signal); overflow-wrap: anywhere; }
 .np-check { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--t-sm); min-height: 32px; }
 .np-convo { display: flex; flex-direction: column; gap: var(--sp-2); flex: 1 1 auto; min-height: 0; }
-.np-chat-bar { display: flex; align-items: center; gap: var(--sp-1); flex-wrap: wrap; }
-.np-lineup { flex: 1 1 140px; min-width: 0; margin: 0; font-size: var(--t-xs); line-height: var(--lh-body); color: var(--fg-muted); }
-.np-quick { display: flex; gap: var(--sp-1); flex-wrap: wrap; }
-.np-quick .btn { font-size: var(--t-xs); }
-.np-snap-note { margin: 0; }
+.np-chat-bar { display: flex; align-items: center; gap: var(--sp-1); }
+.np-lineup { flex: 1 1 0; min-width: 0; margin: 0; font-size: var(--t-xs); line-height: var(--lh-body); color: var(--fg-muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.np-chat-bar .btn { flex: 0 0 auto; min-height: 28px; padding-block: 0; }
+.np-snap { display: flex; align-items: flex-start; gap: var(--sp-1); padding: var(--sp-1) var(--sp-1) var(--sp-1) var(--sp-2); border: var(--border); border-radius: var(--r-2); }
+.np-snap[hidden] { display: none; }
+.np-snap-note { margin: 0; flex: 1 1 auto; min-width: 0; }
+.np-snap .icon-btn { flex: 0 0 auto; }
+.np-cmds { position: absolute; left: 0; right: 0; bottom: calc(100% + var(--sp-1)); z-index: 5; margin: 0; padding: var(--sp-1); list-style: none;
+  max-height: 260px; overflow-y: auto; background: var(--s-raise); border: var(--border); border-radius: var(--r-3);
+  box-shadow: 0 12px 28px -14px rgba(0, 0, 0, .45); font-size: var(--t-sm); }
+.np-cmds[hidden] { display: none; }
+.np-cmds .np-cmd-h { padding: var(--sp-1) var(--sp-2) 0; font-size: var(--t-xs); color: var(--fg-muted); text-transform: uppercase; letter-spacing: .06em; }
+.np-cmds [role="option"] { display: flex; align-items: center; gap: var(--sp-2); padding: var(--sp-1) var(--sp-2); border-radius: var(--r-1); cursor: pointer; min-height: 32px; }
+.np-cmds [role="option"][aria-selected="true"] { background: var(--s-wash); }
+.np-cmds code { font-family: var(--font-code); color: var(--c-signal); flex: 0 0 auto; }
+.np-cmds .np-cmd-l { flex: 1 1 auto; min-width: 0; color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.np-cmds .np-cmd-new { color: var(--c-signal); font-weight: var(--w-bold); }
+.np-cmds .icon-btn { flex: 0 0 auto; width: 28px; height: 28px; min-height: 28px; }
 .np-log { flex: 1 1 auto; min-height: 120px; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-1) 0; }
 .np-log-empty { margin: auto 0; text-align: center; font-size: var(--t-sm); color: var(--fg-muted); line-height: var(--lh-body); }
 .np-m { padding: var(--sp-2) var(--sp-3); border-radius: var(--r-3); font-size: var(--t-sm); line-height: var(--lh-body); max-width: 92%; overflow-wrap: anywhere; }
@@ -2654,7 +2668,7 @@ html[data-notepad="open"] .np { display: flex; }
 .np-m[data-role="model"] { align-self: flex-start; background: var(--s-sunk); }
 .np-m[data-role="error"] { align-self: stretch; max-width: none; background: var(--st-incorrect-bg); color: var(--st-incorrect-fg); }
 .np-m[data-role="wait"] { align-self: flex-start; color: var(--fg-muted); font-style: italic; }
-.np-compose { display: flex; gap: var(--sp-2); align-items: flex-end; flex: 0 0 auto; }
+.np-compose { display: flex; gap: var(--sp-2); align-items: flex-end; flex: 0 0 auto; position: relative; }
 .np-msg { flex: 1 1 auto; min-height: 64px; max-height: 160px; resize: vertical; font-size: var(--t-sm); line-height: var(--lh-body); }
 .np-text {
   flex: 1 1 auto; min-height: 0; width: 100%; overflow-y: auto; position: relative;
@@ -3141,6 +3155,7 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
 <symbol id="i-audit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 4.5 6v6.2c0 4.4 3.1 7.9 7.5 9.1 4.4-1.2 7.5-4.7 7.5-9.1V6z"/><path d="m8.8 11.9 2.2 2.2 4.2-4.4"/></symbol>
 <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4zM13.5 6.5l4 4"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.4 5.6l-1.4 1.4M7 17l-1.4 1.4M18.4 18.4 17 17M7 7 5.6 5.6"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4 8.5 8.5 0 1 0 20 14.2z"/></symbol>
 <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21 19H3z"/><path d="M12 9.5v4M12 16.4v.2"/></symbol>
@@ -3181,7 +3196,7 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
         <!-- 04.1  Support (§10.30). A plain link: no Ko-fi script is loaded. -->
         <a class="nav-sup" id="nav-support" href="https://ko-fi.com/T4R728ULEV" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-heart"></use></svg><span class="nav-t">Support the app</span></a>
         <a class="nav-i" href="#/today"     data-route="today"><svg class="i"><use href="#i-today"></use></svg><span class="nav-t">Today</span></a>
-        <a class="nav-i" href="#/search"    data-route="search" aria-keyshortcuts="/"><svg class="i"><use href="#i-search"></use></svg><span class="nav-t">Search</span><kbd class="nav-k" aria-hidden="true">/</kbd></a>
+        <a class="nav-i" href="#/search"    data-route="search" aria-keyshortcuts="Alt+F"><svg class="i"><use href="#i-search"></use></svg><span class="nav-t">Search</span><kbd class="nav-k" aria-hidden="true">Alt+F</kbd></a>
       </div>
 
       <div class="nav-grp">
@@ -3350,12 +3365,19 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
             <button class="btn btn--sm btn--ghost" id="np-new" type="button">New chat</button>
             <button class="btn btn--sm btn--ghost" id="np-key-forget" type="button">Forget key</button>
           </div>
-          <p class="hint np-snap-note">Every message carries a snapshot of your progress (scores, tasks, mocks, habits), so Gemini answers about you. It goes only to Google, with your key.</p>
+          <!-- Closed once, gone for good on this device (pmp.geminiNote);
+               the key set-up above says the same. -->
+          <div class="np-snap" id="np-snap">
+            <p class="hint np-snap-note">Every message carries a snapshot of your progress (scores, tasks, mocks, habits), so Gemini answers about you. It goes only to Google, with your key.</p>
+            <button class="icon-btn" id="np-snap-x" type="button" aria-label="Close this note"><svg class="i"><use href="#i-x"></use></svg></button>
+          </div>
           <div class="np-log" id="np-log" role="log" aria-live="polite" aria-label="Conversation with Gemini"></div>
-          <div class="np-quick" id="np-quick" role="group" aria-label="Quick questions"></div>
           <div class="np-compose">
+            <!-- "/" opens the commands: the four built in and the person's own. -->
+            <ul class="np-cmds" id="np-cmds" role="listbox" aria-label="Commands" hidden></ul>
             <label class="sr-only" for="np-msg">Message Gemini</label>
-            <textarea class="input np-msg" id="np-msg" rows="3" spellcheck="true" placeholder="Ask Gemini. Ctrl+Enter to send."></textarea>
+            <textarea class="input np-msg" id="np-msg" rows="3" spellcheck="true" placeholder="Ask Gemini, or type / for commands. Ctrl+Enter to send."
+                      role="combobox" aria-controls="np-cmds" aria-expanded="false" aria-autocomplete="list"></textarea>
             <button class="btn btn--primary" id="np-send" type="button">Send</button>
           </div>
         </div>
@@ -3758,7 +3780,7 @@ STEP 5 — TELL ME HOW TO ADD IT:
         10.20 Wellbeing — check-ins, breathing reset, weekly worry check,
               lighter week, write it down
         10.21 The pages · #/fitness, #/book, #/reports
-        10.22 Search everything · #/search, and "/" from anywhere
+        10.22 Search everything · #/search, and Alt+F from anywhere
         10.23 Reading comfort, the reading guide and rest days (Settings)
               (10.14.6 audits 05.11 against fixture contexts)
         10.24 The guided path — PlanEngine, QuestionPicker and QuestionReview
@@ -31001,6 +31023,25 @@ PMP.Practice = (function () {
     ).then(function (yes) { if (yes) finish(true); });
   }
 
+  /* A diagnostic taken here goes into the shared `diagnostics` log in the
+     phones' shape (PmpViewModel.finishDiagnostic): every question counts
+     towards n, only fully right ones towards right, per domain [right, n].
+     Every app's plan aims from the newest of these (§10.24 diagnosticOf). */
+  function shareDiagnostic(sess) {
+    var row = { at: sess.finishedAt, n: sess.items.length, right: 0, domains: {} };
+    sess.items.forEach(function (item) {
+      var d = item.q.domain, ok = !!(item.committed && item.result && item.result.correct);
+      if (!row.domains[d]) row.domains[d] = [0, 0];
+      row.domains[d][1]++;
+      if (ok) { row.right++; row.domains[d][0]++; }
+    });
+    PMP.Store.commit(["shared"], function (st) {
+      var sh = Object.assign({}, st.shared && typeof st.shared === "object" ? st.shared : {});
+      sh.diagnostics = (Array.isArray(sh.diagnostics) ? sh.diagnostics : []).concat([row]);
+      st.shared = sh;
+    });
+  }
+
   /* ── 10.02.9  SUMMARY ────────────────────────────────────────────────────
      `early` is End drill part-way. A set ended early with questions still
      unanswered was left rather than finished, for exam fitness; reaching
@@ -31022,6 +31063,7 @@ PMP.Practice = (function () {
     session.finished = true;
     session.finishedAt = Date.now();
     session.result = result();
+    if (session.mode === "diagnostic") shareDiagnostic(session);
     if (session.opts.onFinish) {
       try { session.opts.onFinish(session.result); } catch (e) { /* the drill is saved either way */ }
     }
@@ -48828,7 +48870,7 @@ PMP.FitnessUI = (function () {
    lessons, the glossary, the abbreviations, the formulas, their notes page,
    their notes on questions, the case studies (§10.26), and the question
    bank itself, case items included. #/search, the
-   Search link at the top of the rail, and "/" from anywhere outside a box
+   Search link at the top of the rail, and Alt+F from anywhere
    or a running mock. Ported from the Android app's SearchScreen.
 
    The rule is deliberately plain: every word typed must appear somewhere
@@ -48977,7 +49019,7 @@ PMP.Search = (function () {
     host.appendChild(el("div", { class: "view-hd" }, [
       el("span", { class: "eyebrow", text: "Search" }),
       el("h2", { text: "Search everything" }),
-      el("p", { text: "Lessons, the glossary, abbreviations, formulas, your notes and the questions. Every word you type has to appear. Press / from anywhere to come back here." })
+      el("p", { text: "Lessons, the glossary, abbreviations, formulas, your notes and the questions. Every word you type has to appear. Press Alt+F from anywhere to come back here." })
     ]));
     var input = el("input", { class: "input sr-q", id: "search-q", type: "search", autocomplete: "off", spellcheck: "false",
       placeholder: "Search lessons, terms, formulas, notes…", "aria-describedby": "search-n" });
@@ -49013,12 +49055,11 @@ PMP.Search = (function () {
 
   PMP.Router.register("search", { title: "Search", render: view });
 
-  /* "/" from anywhere: not while typing in a box, not with a dialog open,
-     and never during a mock, which owns the page. */
+  /* Alt+F from anywhere, typing included ("/" is the chat's command key):
+     not with a dialog open, and never during a mock, which owns the page.
+     e.code, so it is the F key on every keyboard layout. */
   on(document, "keydown", function (e) {
-    if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
-    var t = e.target, tag = t && t.tagName ? t.tagName.toUpperCase() : "";
-    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
+    if (e.code !== "KeyF" || !e.altKey || e.metaKey || e.ctrlKey || e.shiftKey) return;
     var dlg = document.getElementById("sheet");
     if (dlg && dlg.open) return;
     if (PMP.Store.state.ui.examActive) return;
@@ -49420,6 +49461,17 @@ PMP.Path = (function () {
     var attempts = inp.attempts || [], results = inp.results || [], mocks = inp.mocks || [];
     var done = Object.create(null);
     (inp.lessonsDone || []).forEach(function (id) { done[id] = true; });
+    /* A finished session that read a lesson counts it as read, even if the
+       lesson's own record was lost: "lesson:<id>", or "build:<task>" for
+       the task's lesson. Otherwise the plan offers it again. */
+    results.forEach(function (r) {
+      var k = String(r.key || "");
+      if (k.indexOf("lesson:") === 0) done[k.slice(7)] = true;
+      else if (k.indexOf("build:") === 0) {
+        var bl = x.lessons.filter(function (l) { return l.ecoTask === k.slice(6); })[0];
+        if (bl) done[bl.id] = true;
+      }
+    });
     var tags = inp.mistakeTags || {}, leeches = inp.leeches || {};
     var tasks = taskStates(x, attempts, now);
     var adjustments = [];
@@ -49962,24 +50014,28 @@ PMP.Path = (function () {
                score: Number(r.s) || 0, minutes: Number(r.m) || 0, at: r.at };
     });
   }
-  /* The newer of the web's diagnostic (§10.09) and a phone's, as each domain's share. */
+  /* The newest shared diagnostic, as the phones read it (store.diagnostic).
+     The web's own figures, re-scored from the attempt log, are only the
+     fallback for history from before the web wrote shared rows: re-scored,
+     they mix sittings and partial credit, and planned differently from the
+     phones on the same data. */
   function diagnosticOf(state) {
-    var web = PMP.Planner.diagnostic(state), best = null, at = 0;
+    var sh0 = state.shared && Array.isArray(state.shared.diagnostics) ? state.shared.diagnostics : [];
+    if (sh0.some(function (r) { return r && r.domains; })) {
+      var latest = sh0.filter(function (r) { return r && r.domains; })
+        .reduce(function (a, r) { return !a || Number(r.at) >= Number(a.at) ? r : a; }, null);
+      var fromShared = {};
+      Object.keys(latest.domains).forEach(function (d) {
+        var v = latest.domains[d];
+        if (Array.isArray(v) && Number(v[1]) > 0) fromShared[d] = Number(v[0]) / Number(v[1]);
+      });
+      return fromShared;
+    }
+    var web = PMP.Planner.diagnostic(state), best = null;
     if (web && web.complete) {
       best = {};
       PMP.ECO.DOMAINS.forEach(function (d) { var e = web.byDomain[d]; if (e && e.n) best[d] = e.acc; });
-      at = Date.parse(web.at) || 0;
     }
-    var sh = state.shared && Array.isArray(state.shared.diagnostics) ? state.shared.diagnostics : [];
-    sh.forEach(function (r) {
-      if (!r || !(Number(r.at) > at) || !r.domains) return;
-      var out = {};
-      Object.keys(r.domains).forEach(function (d) {
-        var v = r.domains[d];
-        if (Array.isArray(v) && Number(v[1]) > 0) out[d] = Number(v[0]) / Number(v[1]);
-      });
-      best = out; at = Number(r.at);
-    });
     return best;
   }
   /* The latest tag per question, as the shared `mistakes` slice keeps them. */
@@ -50140,7 +50196,7 @@ PMP.Path = (function () {
     weakApproach: weakApproach, order: order,
     reviewState: reviewState, reviewsDue: reviewsDue, reviewAllowance: reviewAllowance,
     planOf: planOf, setPlan: setPlan, msOf: msOf, fromMinutes: fromMinutes,
-    input: input, plan: plan, attemptsOf: attemptsOf,
+    input: input, plan: plan, attemptsOf: attemptsOf, diagnosticOf: diagnosticOf,
     shortVersion: shortVersion, questionsFor: questionsFor, dueCards: dueCards, warmUpReviews: warmUpReviews,
     stepSummary: stepSummary, titleFor: titleFor
   };
@@ -52956,12 +53012,16 @@ PMP.GeminiChat = (function () {
     + "then what they missed or got wrong, then the key idea in one sentence. Be warm and direct. If their explanation is correct and complete, say so plainly. "
     + "Base your judgement on PMI's current exam content outline and the PMBOK Guide; if unsure, say so rather than guess.";
   var REVIEW_PROMPT = "How am I doing overall? Look at all my figures, tell me honestly where I stand, what is going well, and the three things I should change this week.";
-  var QUICK = [
-    ["How am I doing?", REVIEW_PROMPT],
-    ["What should I improve?", "What are the three weakest areas in my figures, and exactly what should I do about each this week in this app?"],
-    ["Plan my day", "I have about an hour today. Using my figures, what should I do, in order, and why?"],
-    ["Explain my weakest task", "Teach me the ECO task where my accuracy is lowest: what PMI expects, the common traps, and one example question with the reasoning."]
+  /* The built-in commands, typed after "/" (CoachScreen.COMMANDS): name,
+     label, message. The person's own sit in the shared `commands` slice as
+     { n, t } and come after these. */
+  var COMMANDS = [
+    ["progress", "How am I doing?", REVIEW_PROMPT],
+    ["improve", "What should I improve?", "What are the three weakest areas in my figures, and exactly what should I do about each this week in this app?"],
+    ["plan", "Plan my day", "I have about an hour today. Using my figures, what should I do, in order, and why?"],
+    ["weakest", "Explain my weakest task", "Teach me the ECO task where my accuracy is lowest: what PMI expects, the common traps, and one example question with the reasoning."]
   ];
+  var CMD_NAME = /^[a-z0-9-]{1,24}$/, NOTE_STORE = "pmp.geminiNote";
 
   var nodes = {}, key = "", lineup = [], lineupAt = 0, sessionModel = null, turn = 0;
   var busy = null, refreshing = null, draft = "";
@@ -53355,13 +53415,141 @@ PMP.GeminiChat = (function () {
   function paintBusy() {
     if (!nodes.send) return;
     nodes.send.disabled = !!busy || !key || !lineup.length;
-    Array.prototype.forEach.call(nodes.quick.querySelectorAll("button"), function (b) { b.disabled = !!busy || !lineup.length; });
+  }
+
+  /* ── commands ("/") ── */
+  function ownCommands(state) {
+    var sh = (state || PMP.Store.state).shared;
+    var list = sh && Array.isArray(sh.commands) ? sh.commands : [];
+    return list.filter(function (c) { return c && CMD_NAME.test(String(c.n)) && typeof c.t === "string" && c.t.trim(); });
+  }
+  function commands() {
+    return COMMANDS.map(function (c) { return { n: c[0], l: c[1], t: c[2] }; })
+      .concat(ownCommands().map(function (c) { return { n: c.n, l: c.t, t: c.t, own: true }; }));
+  }
+  function saveOwn(list) {
+    PMP.Store.commit(["shared"], function (st) {
+      var sh = Object.assign({}, st.shared && typeof st.shared === "object" ? st.shared : {});
+      if (list.length) sh.commands = list; else delete sh.commands;
+      st.shared = sh;
+    });
+  }
+  /* "/name", alone or followed by more words, becomes that command's message. */
+  function expand(text) {
+    var m = /^\/([a-z0-9-]+)(?:\s+([\s\S]*))?$/i.exec(text);
+    if (!m) return text;
+    var c = commands().filter(function (x) { return x.n === m[1].toLowerCase(); })[0];
+    if (!c) return text;
+    return m[2] && m[2].trim() ? c.t + "\n\n" + m[2].trim() : c.t;
+  }
+
+  var menu = { items: [], sel: 0 };
+  function menuOpen() { return !nodes.cmds.hidden; }
+  function closeMenu() {
+    nodes.cmds.hidden = true;
+    nodes.msg.setAttribute("aria-expanded", "false");
+    nodes.msg.removeAttribute("aria-activedescendant");
+  }
+  function paintMenu() {
+    var v = nodes.msg.value, m = /^\/([a-z0-9-]*)$/i.exec(v);
+    if (!m) { closeMenu(); return; }
+    var q = m[1].toLowerCase(), all = commands();
+    menu.items = all.filter(function (c) { return c.n.indexOf(q) === 0; }).concat([{ add: true }]);
+    if (menu.sel >= menu.items.length) menu.sel = 0;
+    nodes.cmds.innerHTML = "";
+    var heads = { builtIn: false, own: false };
+    menu.items.forEach(function (c, i) {
+      if (!c.add && !c.own && !heads.builtIn) { heads.builtIn = true; nodes.cmds.appendChild(el("li", { class: "np-cmd-h", role: "presentation", text: "Commands" })); }
+      if (c.own && !heads.own) { heads.own = true; nodes.cmds.appendChild(el("li", { class: "np-cmd-h", role: "presentation", text: "Yours" })); }
+      var kids = c.add ? [el("span", { class: "np-cmd-new", text: "+ New command" })]
+        : [el("code", { text: "/" + c.n }), el("span", { class: "np-cmd-l", text: c.l })];
+      if (c.own) {
+        kids.push(el("button", {
+          class: "icon-btn", type: "button", "aria-label": "Edit /" + c.n, tabindex: "-1",
+          onmousedown: function (e) { e.preventDefault(); },
+          onclick: function (e) { e.stopPropagation(); closeMenu(); editCommand(c); }
+        }, [PMP.dom.icon("edit")]));
+      }
+      nodes.cmds.appendChild(el("li", {
+        id: "np-cmd-" + i, role: "option", "aria-selected": i === menu.sel ? "true" : "false",
+        onmousedown: function (e) { e.preventDefault(); },
+        onclick: function () { pick(i); }
+      }, kids));
+    });
+    nodes.cmds.hidden = false;
+    nodes.msg.setAttribute("aria-expanded", "true");
+    nodes.msg.setAttribute("aria-activedescendant", "np-cmd-" + menu.sel);
+    var on = document.getElementById("np-cmd-" + menu.sel);
+    if (on && on.scrollIntoView) on.scrollIntoView({ block: "nearest" });
+  }
+  function pick(i) {
+    var c = menu.items[i];
+    closeMenu();
+    if (!c) return;
+    if (c.add) { nodes.msg.value = ""; editCommand(null); return; }
+    nodes.msg.value = c.t;
+    nodes.msg.focus();
+    try { nodes.msg.setSelectionRange(c.t.length, c.t.length); } catch (e) { /* older engines */ }
+  }
+  function menuKey(e) {
+    if (!menuOpen()) return false;
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      menu.sel = (menu.sel + (e.key === "ArrowDown" ? 1 : menu.items.length - 1)) % menu.items.length;
+      paintMenu();
+    } else if ((e.key === "Enter" && !e.ctrlKey && !e.metaKey && !e.shiftKey) || e.key === "Tab") {
+      pick(menu.sel);
+    } else if (e.key === "Escape") {
+      closeMenu();
+    } else return false;
+    e.preventDefault();
+    e.stopPropagation();
+    return true;
+  }
+
+  /* Make, change or delete one of the person's own commands. */
+  function editCommand(cmd, carry) {
+    carry = carry || {};
+    var name = el("input", { class: "input", id: "cmd-name", type: "text", autocomplete: "off", spellcheck: "false",
+      maxlength: "25", placeholder: "agile", value: carry.n != null ? carry.n : cmd ? cmd.n : "" });
+    var text = el("textarea", { class: "textarea", id: "cmd-text", rows: "4", placeholder: "Ask me three hard agile questions, one at a time, and mark each answer." });
+    text.value = carry.t != null ? carry.t : cmd ? cmd.t : "";
+    var actions = [{ id: "cancel", label: "Cancel" }];
+    if (cmd) actions.push({ id: "delete", label: "Delete", danger: true });
+    actions.push({ id: "save", label: "Save", primary: true });
+    PMP.UI.sheet({
+      title: cmd ? "Edit /" + cmd.n : "New command",
+      body: PMP.dom.frag([
+        carry.err ? el("p", { class: "q-callout q-callout--sure", role: "alert", text: carry.err }) : null,
+        el("label", { class: "field", for: "cmd-name" }, [el("span", { class: "lbl", text: "Name, typed after /" }), name]),
+        el("label", { class: "field", for: "cmd-text" }, [el("span", { class: "lbl", text: "Message it sends" }), text]),
+        el("p", { class: "hint", text: "Your commands travel with your progress, so they are on your other devices after a sync." })
+      ]),
+      actions: actions
+    }).then(function (choice) {
+      var own = ownCommands().map(function (c) { return { n: c.n, t: c.t }; });
+      if (choice === "delete") {
+        saveOwn(own.filter(function (c) { return c.n !== cmd.n; }));
+        PMP.UI.toast("Deleted /" + cmd.n + ".", "ok");
+      } else if (choice === "save") {
+        var n = name.value.trim().replace(/^\//, "").toLowerCase(), t = text.value.trim(), err = null;
+        if (!CMD_NAME.test(n)) err = "Use up to 24 letters, digits or hyphens for the name, with no spaces.";
+        else if (COMMANDS.some(function (c) { return c[0] === n; }) || own.some(function (c) { return c.n === n && (!cmd || cmd.n !== n); })) err = "/" + n + " is already a command. Pick another name.";
+        else if (!t) err = "Write the message the command sends.";
+        if (err) { editCommand(cmd, { n: name.value, t: text.value, err: err }); return; }
+        var row = { n: n, t: t };
+        saveOwn(cmd ? own.map(function (c) { return c.n === cmd.n ? row : c; }) : own.concat([row]));
+        PMP.UI.toast("Saved /" + n + ". Type / in the chat to use it.", "ok");
+      }
+      nodes.msg.focus();
+    });
+    setTimeout(function () { (carry.err || !cmd ? name : text).focus(); }, 0);
   }
 
   /* ── sending ── */
   function send(textArg) {
-    var text = (typeof textArg === "string" ? textArg : nodes.msg.value).trim();
+    var text = expand((typeof textArg === "string" ? textArg : nodes.msg.value).trim());
     if (!text || busy || !key) return;
+    closeMenu();
     var now = Date.now();
     saveChat(chat().concat([{ r: "user", t: text, at: now }]));
     if (typeof textArg !== "string") nodes.msg.value = "";
@@ -53539,17 +53727,17 @@ PMP.GeminiChat = (function () {
   }
 
   function init() {
-    ["chat", "keyset", "convo", "key", "keep", "lineup", "log", "msg", "send", "quick"].forEach(function (n) {
+    ["chat", "keyset", "convo", "key", "keep", "lineup", "log", "msg", "send", "cmds", "snap"].forEach(function (n) {
       nodes[n] = document.getElementById(n === "chat" ? "np-chat" : n === "keep" ? "np-key-keep" : "np-" + n);
     });
     nodes.save = document.getElementById("np-key-save");
     key = readKey();
     readLineup();
-    QUICK.forEach(function (qk) {
-      nodes.quick.appendChild(el("button", {
-        class: "btn btn--sm btn--ghost", type: "button",
-        onclick: function () { send(qk[1]); }
-      }, qk[0]));
+    nodes.snap.hidden = ls(function (st) { return st.getItem(NOTE_STORE); }) === "closed";
+    PMP.dom.on(document.getElementById("np-snap-x"), "click", function () {
+      nodes.snap.hidden = true;
+      ls(function (st) { st.setItem(NOTE_STORE, "closed"); });
+      nodes.msg.focus();
     });
     PMP.dom.on(nodes.save, "click", useKey);
     PMP.dom.on(nodes.key, "keydown", function (e) { if (e.key === "Enter") useKey(); });
@@ -53564,14 +53752,19 @@ PMP.GeminiChat = (function () {
     PMP.Store.subscribe(function (state, changed) { if (changed.indexOf("chat") >= 0) renderLog(); });
     paint();
     PMP.dom.on(nodes.send, "click", function () { send(); });
-    PMP.dom.on(nodes.msg, "keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); send(); } });
+    PMP.dom.on(nodes.msg, "keydown", function (e) {
+      if (menuKey(e)) return;
+      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); send(); }
+    });
+    PMP.dom.on(nodes.msg, "input", function () { menu.sel = 0; paintMenu(); });
+    PMP.dom.on(nodes.msg, "blur", function () { setTimeout(function () { if (document.activeElement !== nodes.msg) closeMenu(); }, 0); });
   }
 
   return {
     init: init, sync: paint, focus: focus, markdown: markdown,
     askAbout: askAbout, questionDraft: questionDraft, review: review, reviewButton: reviewButton,
     explain: explain, explainSheet: explainSheet,
-    lineupOf: lineupOf, parseModels: parseModels, snapshot: snapshot,
+    lineupOf: lineupOf, parseModels: parseModels, snapshot: snapshot, commands: commands, expand: expand,
     SYSTEM: SYSTEM, EXPLAIN_SYSTEM: EXPLAIN_SYSTEM, REVIEW_PROMPT: REVIEW_PROMPT,
     get hasKey() { return !!key; },
     get lineup() { return lineup.slice(); },

@@ -31,10 +31,10 @@ async function results(page, q) {
 
 module.exports = [
   {
-    name: "/ opens search from anywhere outside a box; every word must match; at most 60",
+    name: "Alt+F opens search from anywhere; every word must match; at most 60",
     fn: async function (h, lib) {
       var page = await h.open("day3");
-      await page.keyboard.press("/");
+      await page.keyboard.press("Alt+KeyF");
       await page.waitForTimeout(150);
       var r = await page.evaluate(function () { return { route: PMP.Router.current.name, focus: document.activeElement.id }; });
       assert.deepStrictEqual(r, { route: "search", focus: "search-q" });

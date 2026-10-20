@@ -1,6 +1,6 @@
 import SwiftUI
 
-private let REVIEW_PROMPT = "How am I doing overall? Look at all my figures, tell me honestly where I stand, what is going well, and the three things I should change this week."
+private let REVIEW_PROMPT = ChatCommands.REVIEW
 
 /** The coach: today's offline report, the Gemini chat, and the notes page. */
 struct CoachScreen: View {
@@ -90,13 +90,8 @@ private struct CoachChat: View {
     @EnvironmentObject private var m: AppModel
     @State private var input = ""
     @FocusState private var typing: Bool
-
-    private let shortcuts: [(String, String)] = [
-        ("How am I doing?", REVIEW_PROMPT),
-        ("What should I improve?", "What are the three weakest areas in my figures, and exactly what should I do about each this week in this app?"),
-        ("Plan my day", "I have about an hour today. Using my figures, what should I do, in order, and why?"),
-        ("Explain my weakest task", "Teach me the ECO task where my accuracy is lowest: what PMI expects, the common traps, and one example question with the reasoning."),
-    ]
+    /** The command being made (a blank one) or changed, shown in a sheet. */
+    @State private var editing: ChatCommand? = nil
 
     var body: some View {
         if m.geminiKey.isEmpty {
@@ -112,9 +107,26 @@ private struct CoachChat: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 8) {
-                        Button { m.forgetKey() } label: { Text("Disconnect this key").font(.nunito(12, .semibold)) }.textButton()
-                        Text("Every message carries a snapshot of your progress (scores, tasks, mocks, habits), so the coach answers about you. It goes only to Google, with your key.")
-                            .font(.nunito(11)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
+                        // One short line on top, so the conversation keeps the room.
+                        HStack {
+                            Text("Gemini, with your key").font(.nunito(12)).foregroundStyle(Palette.onSurfaceVariant)
+                            Spacer()
+                            Button { m.forgetKey() } label: { Text("Disconnect key").font(.nunito(12, .semibold)) }.textButton()
+                        }
+                        if !m.chatNoteClosed {
+                            HStack(alignment: .top, spacing: 4) {
+                                Text("Every message carries a snapshot of your progress (scores, tasks, mocks, habits), so the coach answers about you. It goes only to Google, with your key.")
+                                    .font(.nunito(11)).foregroundStyle(Palette.onSurfaceVariant).fixedSize(horizontal: false, vertical: true)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                Button { m.closeChatNote() } label: {
+                                    Image(systemName: "xmark").font(.system(size: 13, weight: .semibold)).frame(width: 32, height: 32)
+                                }
+                                .foregroundStyle(Palette.onSurfaceVariant)
+                                .accessibilityLabel("Close this note")
+                            }
+                            .padding(.leading, 10).padding(.vertical, 4)
+                            .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Palette.outline.opacity(0.5), lineWidth: 1))
+                        }
                         if turns.isEmpty {
                             PmpCard { Text("Ask about your progress, a PMP topic, or a question that confused you.").font(.nunito(14)) }
                         }
@@ -141,25 +153,15 @@ private struct CoachChat: View {
                 .onChange(of: m.aiBusy) { _, _ in withAnimation { proxy.scrollTo("chatEnd", anchor: .bottom) } }
                 .onChange(of: typing) { _, _ in withAnimation { proxy.scrollTo("chatEnd", anchor: .bottom) } }
             }
-            // While typing, the conversation needs the room more than the shortcuts do.
-            if !typing {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 6) {
-                        ForEach(shortcuts.indices, id: \.self) { i in
-                            Button(shortcuts[i].0) { m.ask(shortcuts[i].1) }
-                                .font(.nunito(13, .semibold))
-                                .padding(.horizontal, 12).padding(.vertical, 8)
-                                .foregroundStyle(Palette.onSurface)
-                                .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Palette.outline, lineWidth: 1))
-                                .disabled(m.aiBusy)
-                                .opacity(m.aiBusy ? 0.5 : 1)
-                        }
-                    }
+            // "/" opens the commands: the four built in, then the person's own.
+            if let found = ChatCommands.matching(input, m.store.chatCommands) {
+                CommandMenu(found: found, pick: { input = $0.text }, edit: { editing = $0 },
+                            add: { input = ""; editing = ChatCommand("", "", own: true) })
                     .padding(.horizontal, 12)
-                }
+                    .frame(maxWidth: 720)
             }
             HStack(alignment: .bottom, spacing: 8) {
-                TextField("Ask your coach…", text: $input, axis: .vertical)
+                TextField("Ask your coach, or type / for commands", text: $input, axis: .vertical)
                     .lineLimit(1...6)
                     .font(.nunito(15))
                     .focused($typing)
@@ -183,10 +185,101 @@ private struct CoachChat: View {
             takeDraft()
         }
         .onChange(of: m.coachDraft) { _, _ in takeDraft() }
+        .sheet(item: $editing) { c in CommandEditor(command: c.name.isEmpty ? nil : c).environmentObject(m) }
     }
 
     private func takeDraft() {
         if !m.coachDraft.isEmpty { input = m.coachDraft; m.coachDraft = "" }
+    }
+}
+
+private struct CommandMenu: View {
+    let found: [ChatCommand]
+    let pick: (ChatCommand) -> Void
+    let edit: (ChatCommand) -> Void
+    let add: () -> Void
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(Array(found.enumerated()), id: \.element.name) { i, c in
+                    if i == 0 || c.own != found[i - 1].own {
+                        Text(c.own ? "YOURS" : "COMMANDS").font(.nunito(11, .semibold)).kerning(0.6)
+                            .foregroundStyle(Palette.onSurfaceVariant).padding(.leading, 12).padding(.top, 6)
+                    }
+                    HStack(spacing: 10) {
+                        Button { pick(c) } label: {
+                            HStack(spacing: 10) {
+                                Text("/" + c.name).font(.system(size: 13, design: .monospaced)).foregroundStyle(Palette.primary)
+                                Text(c.label).font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).lineLimit(1)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .frame(minHeight: 40)
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        if c.own {
+                            Button { edit(c) } label: { Image(systemName: "pencil").frame(width: 36, height: 36) }
+                                .foregroundStyle(Palette.onSurfaceVariant)
+                                .accessibilityLabel("Edit /\(c.name)")
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                }
+                Button(action: add) {
+                    Text("+ New command").font(.nunito(13, .bold)).foregroundStyle(Palette.primary)
+                        .frame(maxWidth: .infinity, minHeight: 40, alignment: .leading).contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal, 12)
+            }
+            .padding(.vertical, 4)
+        }
+        .frame(maxHeight: 260)
+        .fixedSize(horizontal: false, vertical: true)
+        .background(RoundedRectangle(cornerRadius: 12).fill(Palette.surface).shadow(color: .black.opacity(0.15), radius: 8, y: 4))
+        .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Palette.outline.opacity(0.5), lineWidth: 1))
+    }
+}
+
+/** Makes one of the person's own commands, or changes or deletes `command`. */
+private struct CommandEditor: View {
+    @EnvironmentObject private var m: AppModel
+    @Environment(\.dismiss) private var dismiss
+    let command: ChatCommand?
+    @State private var name = ""
+    @State private var text = ""
+    @State private var error: String? = nil
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                if let error { Text(error).font(.nunito(13)).foregroundStyle(Palette.error) }
+                Section("Name, typed after /") {
+                    TextField("agile", text: $name).textInputAutocapitalization(.never).autocorrectionDisabled()
+                }
+                Section {
+                    TextField("Ask me three hard agile questions, one at a time, and mark each answer.", text: $text, axis: .vertical).lineLimit(3...8)
+                } header: { Text("Message it sends") } footer: {
+                    Text("Your commands travel with your progress, so they are on your other devices after a sync.")
+                }
+                if let command {
+                    Button("Delete", role: .destructive) { m.deleteChatCommand(command.name); dismiss() }
+                }
+            }
+            .navigationTitle(command.map { "Edit /\($0.name)" } ?? "New command")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        error = m.saveChatCommand(old: command?.name, name: name, text: text)
+                        if error == nil { dismiss() }
+                    }
+                }
+            }
+        }
+        .onAppear { name = command?.name ?? ""; text = command?.text ?? "" }
     }
 }
 

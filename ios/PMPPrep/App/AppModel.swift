@@ -1014,6 +1014,19 @@ final class AppModel: ObservableObject {
     /** Text waiting in the coach's input, e.g. a question sent from practice. */
     @Published var coachDraft = ""
     @Published var coachTab = 0
+    /** The privacy note above the chat, closed once for good on this phone. */
+    @Published private(set) var chatNoteClosed = UserDefaults.standard.bool(forKey: "geminiNoteClosed")
+    func closeChatNote() { chatNoteClosed = true; UserDefaults.standard.set(true, forKey: "geminiNoteClosed") }
+
+    /** Saves one of the person's own "/" commands; returns why it can't be saved, or nil. */
+    func saveChatCommand(old: String?, name: String, text: String) -> String? {
+        let own = store.chatCommands
+        let r = ChatCommands.check(name, text, own, old: old)
+        guard let n = r.name else { return r.error }
+        store.setChatCommands(ChatCommands.saved(own, old: old, name: n, text: text))
+        return nil
+    }
+    func deleteChatCommand(_ name: String) { store.setChatCommands(store.chatCommands.filter { $0.name != name }) }
     private static let lineupMaxAge: Int64 = 7 * 24 * 60 * 60 * 1000
 
     func useKey(_ key: String) {
@@ -1090,7 +1103,7 @@ final class AppModel: ObservableObject {
 
     /** Sends a message with a fresh snapshot of the person's progress. */
     func ask(_ text: String) {
-        let t = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let t = ChatCommands.expand(text.trimmingCharacters(in: .whitespacesAndNewlines), store.chatCommands)
         if t.isEmpty || aiBusy || geminiKey.isEmpty { return }
         store.addChat(ChatTurn(role: "user", text: t, at: Time.now()))
         aiBusy = true

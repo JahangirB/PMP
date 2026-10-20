@@ -2,7 +2,6 @@ package com.jahangirb.pmpprep.ui.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.imePadding
@@ -29,8 +30,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.outlined.Circle
-import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AlertDialog
 import com.jahangirb.pmpprep.ui.components.ClayButton as Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -52,11 +55,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jahangirb.pmpprep.data.ChatCommand
+import com.jahangirb.pmpprep.data.ChatCommands
 import com.jahangirb.pmpprep.data.CoachReport
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.BulletList
@@ -67,7 +74,7 @@ import com.jahangirb.pmpprep.ui.theme.ColorError
 import com.jahangirb.pmpprep.ui.theme.ColorSuccess
 import com.jahangirb.pmpprep.ui.theme.ColorWarning
 
-const val REVIEW_PROMPT = "How am I doing overall? Look at all my figures, tell me honestly where I stand, what is going well, and the three things I should change this week."
+const val REVIEW_PROMPT = ChatCommands.REVIEW
 
 @Composable
 fun CoachScreen(vm: PmpViewModel) {
@@ -152,10 +159,18 @@ private fun CoachChat(vm: PmpViewModel) {
     Column(Modifier.fillMaxSize().imePadding()) {
         LazyColumn(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 12.dp), state = list, verticalArrangement = Arrangement.spacedBy(8.dp)) {
             item {
-                Spacer(Modifier.height(8.dp))
-                TextButton(onClick = { vm.forgetKey() }) { Text("Disconnect this key", fontSize = 12.sp) }
-                Text("Every message carries a snapshot of your progress (scores, tasks, mocks, habits), so the coach answers about you. It goes only to Google, with your key.",
-                    fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 6.dp))
+                // One short line on top, so the conversation keeps the room.
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text("Gemini, with your key", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+                    TextButton(onClick = { vm.forgetKey() }, contentPadding = PaddingValues(horizontal = 8.dp)) { Text("Disconnect key", fontSize = 12.sp) }
+                }
+                if (!vm.chatNoteClosed) Surface(shape = RoundedCornerShape(10.dp), border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.4f))) {
+                    Row(Modifier.padding(start = 10.dp), verticalAlignment = Alignment.Top) {
+                        Text("Every message carries a snapshot of your progress (scores, tasks, mocks, habits), so the coach answers about you. It goes only to Google, with your key.",
+                            fontSize = 11.sp, lineHeight = 15.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f).padding(vertical = 8.dp))
+                        IconButton(onClick = { vm.closeChatNote() }) { Icon(Icons.Filled.Close, contentDescription = "Close this note") }
+                    }
+                }
             }
             if (chat.isEmpty()) item {
                 PmpCard {
@@ -174,27 +189,80 @@ private fun CoachChat(vm: PmpViewModel) {
                 Spacer(Modifier.height(4.dp))
             }
         }
-        // While typing, the conversation needs the room more than the shortcuts do.
-        if (!WindowInsets.isImeVisible) Row(Modifier.horizontalScroll(rememberScrollState()).padding(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            listOf(
-                "How am I doing?" to REVIEW_PROMPT,
-                "What should I improve?" to "What are the three weakest areas in my figures, and exactly what should I do about each this week in this app?",
-                "Plan my day" to "I have about an hour today. Using my figures, what should I do, in order, and why?",
-                "Explain my weakest task" to "Teach me the ECO task where my accuracy is lowest: what PMI expects, the common traps, and one example question with the reasoning.",
-            ).forEach { (label, prompt) ->
-                AssistChip(onClick = { vm.ask(prompt) }, enabled = !vm.aiBusy, label = { Text(label) })
-            }
-        }
         var input by remember { mutableStateOf("") }
+        var editing by remember { mutableStateOf<ChatCommand?>(null) }
+        var adding by remember { mutableStateOf(false) }
         LaunchedEffect(vm.coachDraft) { if (vm.coachDraft.isNotEmpty()) { input = vm.coachDraft; vm.coachDraft = "" } }
+        val own = remember(rev) { vm.store.chatCommands }
+        // "/" opens the commands: the four built in, then the person's own.
+        ChatCommands.matching(input, own)?.let { found ->
+            CommandMenu(found, onPick = { input = it.text }, onEdit = { editing = it }, onAdd = { input = ""; adding = true })
+        }
+        if (adding || editing != null) CommandDialog(vm, editing) { adding = false; editing = null }
         Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.Bottom) {
-            OutlinedTextField(value = input, onValueChange = { input = it }, placeholder = { Text("Ask your coach…") },
+            OutlinedTextField(value = input, onValueChange = { input = it }, placeholder = { Text("Ask your coach, or type / for commands") },
                 maxLines = 6, modifier = Modifier.weight(1f))
             IconButton(onClick = { vm.ask(input); input = "" }, enabled = input.isNotBlank() && !vm.aiBusy) {
                 Icon(Icons.AutoMirrored.Filled.Send, contentDescription = "Send")
             }
         }
     }
+}
+
+@Composable
+private fun CommandMenu(found: List<ChatCommand>, onPick: (ChatCommand) -> Unit, onEdit: (ChatCommand) -> Unit, onAdd: () -> Unit) {
+    Surface(
+        shape = RoundedCornerShape(12.dp), tonalElevation = 3.dp, shadowElevation = 4.dp,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.4f)),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+    ) {
+        Column(Modifier.heightIn(max = 260.dp).verticalScroll(rememberScrollState()).padding(vertical = 4.dp)) {
+            found.forEachIndexed { i, c ->
+                if (i == 0 || c.own != found[i - 1].own) {
+                    Text(if (c.own) "YOURS" else "COMMANDS", fontSize = 11.sp, letterSpacing = 0.6.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(start = 12.dp, top = 6.dp))
+                }
+                Row(Modifier.fillMaxWidth().clickable { onPick(c) }.padding(start = 12.dp).heightIn(min = 40.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text("/" + c.name, fontFamily = FontFamily.Monospace, fontSize = 13.sp, color = MaterialTheme.colorScheme.primary)
+                    Spacer(Modifier.width(10.dp))
+                    Text(c.label, fontSize = 13.sp, maxLines = 1, overflow = TextOverflow.Ellipsis,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+                    if (c.own) IconButton(onClick = { onEdit(c) }) { Icon(Icons.Filled.Edit, contentDescription = "Edit /${c.name}") }
+                    else Spacer(Modifier.width(12.dp))
+                }
+            }
+            Text("+ New command", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.fillMaxWidth().clickable(onClick = onAdd).padding(horizontal = 12.dp, vertical = 10.dp))
+        }
+    }
+}
+
+/** Makes one of the person's own commands, or changes or deletes [cmd]. */
+@Composable
+private fun CommandDialog(vm: PmpViewModel, cmd: ChatCommand?, done: () -> Unit) {
+    var name by remember { mutableStateOf(cmd?.name ?: "") }
+    var text by remember { mutableStateOf(cmd?.text ?: "") }
+    var err by remember { mutableStateOf<String?>(null) }
+    AlertDialog(
+        onDismissRequest = done,
+        title = { Text(if (cmd == null) "New command" else "Edit /${cmd.name}") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                err?.let { Text(it, color = ColorError, fontSize = 13.sp) }
+                OutlinedTextField(value = name, onValueChange = { name = it }, label = { Text("Name, typed after /") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(value = text, onValueChange = { text = it }, label = { Text("Message it sends") }, minLines = 3, maxLines = 6, modifier = Modifier.fillMaxWidth())
+                Text("Your commands travel with your progress, so they are on your other devices after a sync.", fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        },
+        confirmButton = { TextButton(onClick = { err = vm.saveChatCommand(cmd?.name, name, text); if (err == null) done() }) { Text("Save") } },
+        dismissButton = {
+            Row {
+                if (cmd != null) TextButton(onClick = { vm.deleteChatCommand(cmd.name); done() }) { Text("Delete", color = ColorError) }
+                TextButton(onClick = done) { Text("Cancel") }
+            }
+        },
+    )
 }
 
 @Composable
