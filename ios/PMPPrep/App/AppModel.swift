@@ -1013,6 +1013,10 @@ final class AppModel: ObservableObject {
     @Published var aiError: String? = nil
     /** Text waiting in the coach's input, e.g. a question sent from practice. */
     @Published var coachDraft = ""
+    /** The message just sent: the chat keeps it at the top while the reply comes (index.html §12.2.2). */
+    @Published var chatAnchor: Millis? = nil
+    /** The reply being written out word by word (Typewriter); the full text is already saved. */
+    @Published var typingAt: Millis? = nil
     @Published var coachTab = 0
     /** The privacy note above the chat, closed once for good on this phone. */
     @Published private(set) var chatNoteClosed = UserDefaults.standard.bool(forKey: "geminiNoteClosed")
@@ -1105,7 +1109,10 @@ final class AppModel: ObservableObject {
     func ask(_ text: String) {
         let t = ChatCommands.expand(text.trimmingCharacters(in: .whitespacesAndNewlines), store.chatCommands)
         if t.isEmpty || aiBusy || geminiKey.isEmpty { return }
-        store.addChat(ChatTurn(role: "user", text: t, at: Time.now()))
+        let sentAt = Time.now()
+        store.addChat(ChatTurn(role: "user", text: t, at: sentAt))
+        chatAnchor = sentAt
+        typingAt = nil
         aiBusy = true
         aiError = nil
         let system = Coach.SYSTEM + "\n\nLearner progress snapshot, computed by the app just now:\n" + coach().snapshot()
@@ -1113,7 +1120,9 @@ final class AppModel: ObservableObject {
         Task {
             do {
                 let reply = try await callGemini(system, turns)
-                store.addChat(ChatTurn(role: "model", text: reply, at: Time.now()))
+                let at = max(Time.now(), sentAt + 1)
+                store.addChat(ChatTurn(role: "model", text: reply, at: at))
+                typingAt = at
             } catch { aiError = error.localizedDescription }
             aiBusy = false
         }

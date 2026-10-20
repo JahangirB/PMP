@@ -103,7 +103,11 @@ private struct CoachChat: View {
 
     private var chat: some View {
         let turns = m.store.chat
+        /* The message just sent and what follows it form the tail, at least a screen tall, so that message
+           can sit at the top while the reply is written out below it; the person scrolls on. */
+        let split = m.chatAnchor.flatMap { a in turns.firstIndex { $0.at == a && $0.role == "user" } } ?? turns.count
         return VStack(spacing: 0) {
+            GeometryReader { geo in
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 8) {
@@ -130,7 +134,15 @@ private struct CoachChat: View {
                         if turns.isEmpty {
                             PmpCard { Text("Ask about your progress, a PMP topic, or a question that confused you.").font(.nunito(14)) }
                         }
-                        ForEach(Array(turns.enumerated()), id: \.offset) { _, t in CoachBubbleView(mine: t.role == "user", text: t.text) }
+                        ForEach(Array(turns.prefix(split).enumerated()), id: \.offset) { _, t in CoachBubbleView(mine: t.role == "user", text: t.text) }
+                        VStack(alignment: .leading, spacing: 8) {
+                        ForEach(Array(turns.dropFirst(split).enumerated()), id: \.offset) { _, t in
+                            if t.role != "user" && t.at == m.typingAt {
+                                TypedReplyView(text: t.text) { m.typingAt = nil }
+                            } else {
+                                CoachBubbleView(mine: t.role == "user", text: t.text)
+                            }
+                        }
                         if m.aiBusy {
                             HStack(spacing: 8) {
                                 ProgressView()
@@ -139,8 +151,11 @@ private struct CoachChat: View {
                             .padding(8)
                         }
                         if let err = m.aiError { Text(err).font(.nunito(13)).foregroundStyle(Palette.error).padding(8) }
-                        if !turns.isEmpty { Button("Clear conversation") { m.store.clearChat() }.textButton() }
+                        if !turns.isEmpty && m.typingAt == nil { Button("Clear conversation") { m.chatAnchor = nil; m.store.clearChat() }.textButton() }
                         Color.clear.frame(height: 4).id("chatEnd")
+                        }
+                        .frame(maxWidth: .infinity, minHeight: split < turns.count ? geo.size.height : 0, alignment: .topLeading)
+                        .id("tail")
                     }
                     .padding(.horizontal, 12)
                     .padding(.top, 4)
@@ -148,10 +163,10 @@ private struct CoachChat: View {
                     .frame(maxWidth: .infinity)
                 }
                 .scrollDismissesKeyboard(.interactively)
-                .onAppear { proxy.scrollTo("chatEnd", anchor: .bottom) }
-                .onChange(of: turns.count) { _, _ in withAnimation { proxy.scrollTo("chatEnd", anchor: .bottom) } }
-                .onChange(of: m.aiBusy) { _, _ in withAnimation { proxy.scrollTo("chatEnd", anchor: .bottom) } }
-                .onChange(of: typing) { _, _ in withAnimation { proxy.scrollTo("chatEnd", anchor: .bottom) } }
+                .onAppear { if m.chatAnchor != nil { proxy.scrollTo("tail", anchor: .top) } else { proxy.scrollTo("chatEnd", anchor: .bottom) } }
+                .onChange(of: m.chatAnchor) { _, a in if a != nil { withAnimation { proxy.scrollTo("tail", anchor: .top) } } }
+                .onChange(of: typing) { _, on in if on && m.typingAt == nil { withAnimation { proxy.scrollTo("chatEnd", anchor: .bottom) } } }
+            }
             }
             // "/" opens the commands: the four built in, then the person's own.
             if let found = ChatCommands.matching(input, m.store.chatCommands) {
@@ -190,6 +205,30 @@ private struct CoachChat: View {
 
     private func takeDraft() {
         if !m.coachDraft.isEmpty { input = m.coachDraft; m.coachDraft = "" }
+    }
+}
+
+/** A reply written out word by word, though it arrived whole (Typewriter). */
+private struct TypedReplyView: View {
+    let text: String
+    let done: () -> Void
+    @Environment(\.accessibilityReduceMotion) private var still
+    @State private var n = 0
+
+    var body: some View {
+        let count = text.count
+        CoachBubbleView(mine: false, text: n < count ? Typewriter.shown(text, n) + " ▍" : text)
+            .task(id: text) {
+                if !still {
+                    while n < count {
+                        try? await Task.sleep(nanoseconds: Typewriter.frameNanos)
+                        if Task.isCancelled { break }
+                        n = Typewriter.next(text, n)
+                    }
+                }
+                // Done, or left part-way: the whole reply shows from now on.
+                done()
+            }
     }
 }
 

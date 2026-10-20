@@ -380,5 +380,49 @@ module.exports = [
       await lib.clean(page);
       await page.ctx.close();
     }
+  },
+  {
+    name: "a reply is written out word by word, the sent message stays at the top, the full text is saved at once; reduced motion shows it whole",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      var long = [];
+      for (var i = 0; i < 40; i++) long.push("Point **" + i + "** about scope, with enough words to fill the line and push the log down.");
+      await page.ctx.route(/generativelanguage\.googleapis\.com/, function (r) {
+        if (r.request().method() === "GET") return json(r, 200, { models: [M("gemini-3.5-flash")] });
+        return json(r, 200, reply(long.join("\n\n")));
+      });
+      await useKey(page, "GOOD");
+      await page.evaluate(function () {
+        var list = [];
+        for (var i = 0; i < 20; i++) list.push({ r: i % 2 ? "model" : "user", t: "earlier turn " + i + " with a few words in it", at: 1000 + i });
+        PMP.Store.commit(["chat"], function (s) { s.chat = list; });
+      });
+      await page.fill("#np-msg", "Tell me about scope");
+      await page.click("#np-send");
+      await page.waitForFunction(function () { return document.querySelector("#np-log .np-caret"); });
+      var mid = await page.evaluate(function () {
+        var log = document.getElementById("np-log"), ms = log.querySelectorAll(".np-m"), mine = ms[ms.length - 2], last = ms[ms.length - 1];
+        return { shown: last.textContent.length, full: PMP.Store.state.chat[PMP.Store.state.chat.length - 1].t.length,
+                 top: Math.round(mine.getBoundingClientRect().top - log.getBoundingClientRect().top), busy: last.getAttribute("aria-busy") };
+      });
+      assert.ok(mid.shown < mid.full / 2, "still typing: " + JSON.stringify(mid));
+      assert.ok(mid.top >= 0 && mid.top < 40, "the sent message sits at the top: " + JSON.stringify(mid));
+      assert.strictEqual(mid.busy, "true");
+      await page.waitForFunction(function () { return !document.querySelector("#np-log .np-caret"); }, null, { timeout: 15000 });
+      var end = await page.evaluate(function () {
+        var log = document.getElementById("np-log"), ms = log.querySelectorAll(".np-m"), mine = ms[ms.length - 2];
+        return { bold: ms[ms.length - 1].querySelectorAll("b").length, top: Math.round(mine.getBoundingClientRect().top - log.getBoundingClientRect().top) };
+      });
+      assert.deepStrictEqual(end, { bold: 40, top: mid.top }, "all of it, and no jump to the end");
+
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.fill("#np-msg", "Again");
+      await page.click("#np-send");
+      await page.waitForTimeout(400);
+      var still = await page.evaluate(function () { var ms = document.querySelectorAll("#np-log .np-m"); return { caret: !!document.querySelector(".np-caret"), bold: ms[ms.length - 1].querySelectorAll("b").length }; });
+      assert.deepStrictEqual(still, { caret: false, bold: 40 });
+      await lib.clean(page);
+      await page.ctx.close();
+    }
   }
 ];
