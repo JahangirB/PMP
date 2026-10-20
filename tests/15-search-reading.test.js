@@ -41,9 +41,9 @@ module.exports = [
       var ev = await results(page, "earned value");
       var kinds = ev.hits.map(function (x) { return x.kind; });
       ["Lesson", "Glossary", "Formula", "Question"].forEach(function (k) { assert.ok(kinds.indexOf(k) >= 0, k + " in " + kinds.join(",")); });
-      /* In the order lessons, glossary, abbreviations, formulas, notes, case
-         studies (§10.26), questions. */
-      var order = ["Lesson", "Glossary", "Abbreviation", "Formula", "Your notes", "Your note on a question", "Case study", "Question"];
+      /* In the order lessons, theory (§10.37), glossary, abbreviations,
+         formulas, notes, case studies (§10.26), questions. */
+      var order = ["Lesson", "Theory", "Glossary", "Abbreviation", "Formula", "Your notes", "Your note on a question", "Case study", "Question"];
       for (var i = 1; i < kinds.length; i++) assert.ok(order.indexOf(kinds[i]) >= order.indexOf(kinds[i - 1]), kinds.join(","));
       var none = await results(page, "earned qqzzxx");
       assert.deepStrictEqual([none.status, none.hits.length], ["Nothing found.", 0]);

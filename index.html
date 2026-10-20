@@ -2744,6 +2744,53 @@ mark.np-h-none { background: transparent; }
 .np-pop[hidden] { display: none; }
 .np-pop button { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--r-1); }
 .np-pop button:hover { background: var(--s-sunk); }
+/* Theory (§10.37): the parts list and the chapter reader. Reading text
+   runs a little larger than lessons, at a comfortable measure. */
+.th-intro { display: grid; gap: var(--sp-3); justify-items: start; }
+.th-intro p { max-width: var(--measure); line-height: var(--lh-body); }
+.th-count { font-size: var(--t-sm); color: var(--fg-muted); }
+.th-part { display: grid; gap: var(--sp-2); }
+.th-part h3 { font-size: var(--t-lg); margin: 0; }
+.th-blurb { color: var(--fg-muted); max-width: var(--measure); }
+.th-list { margin: var(--sp-2) 0 0; padding-left: 1.6em; display: grid; gap: var(--sp-3); }
+.th-li { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--sp-3); }
+.th-li-t { font-weight: var(--w-semi); }
+a.th-li-t { color: var(--c-signal); }
+.th-li-m { font-size: var(--t-xs); color: var(--fg-muted); white-space: nowrap; }
+.th-li-s { grid-column: 1 / -1; font-size: var(--t-sm); color: var(--fg-muted); line-height: var(--lh-body); }
+.th-li--todo { color: var(--fg-muted); }
+.th-li--read .th-li-m { color: var(--st-correct-fg); }
+.th { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: var(--sp-6, 32px); align-items: start; }
+.th-toc { position: sticky; top: calc(var(--sp-4) + 64px); display: grid; gap: var(--sp-2); font-size: var(--t-sm); max-height: calc(100vh - 120px); overflow-y: auto; overscroll-behavior: contain; }
+.th-toc ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.th-toc-b { text-align: left; width: 100%; padding: 6px var(--sp-2); border-radius: var(--r-1); color: var(--fg-muted); line-height: 1.35; }
+.th-toc-b:hover { background: var(--s-sunk); color: var(--fg); }
+.th-toc-b[aria-current="true"] { background: var(--s-wash); color: var(--fg); font-weight: var(--w-semi); }
+.th-back { color: var(--c-signal); font-weight: var(--w-semi); margin-bottom: var(--sp-2); }
+.th-art { min-width: 0; max-width: 72ch; display: grid; gap: var(--sp-3); }
+.th-bar { position: sticky; top: 0; height: 3px; background: var(--s-edge); border-radius: 2px; overflow: hidden; z-index: 2; }
+.th-bar i { display: block; height: 100%; width: 0; background: var(--c-signal); }
+.th-title { font-size: clamp(1.6rem, 3.4vw, 2.1rem); line-height: 1.2; margin: 0; text-wrap: balance; }
+.th-sum { font-size: var(--t-md); color: var(--fg-muted); line-height: var(--lh-body); }
+.th-art p, .th-art li { font-size: calc(var(--t-md) * var(--read-scale, 1)); line-height: 1.72; }
+.th-why { border-left: 3px solid var(--c-signal); padding: var(--sp-1) 0 var(--sp-1) var(--sp-4); display: grid; gap: var(--sp-1); }
+.th-sec { display: grid; gap: var(--sp-3); scroll-margin-top: 80px; margin-top: var(--sp-4); }
+.th-sec h3 { font-size: var(--t-lg); margin: 0; text-wrap: balance; }
+.th-ul { margin: 0; padding-left: 1.3em; display: grid; gap: var(--sp-2); }
+.th-box { border-radius: var(--r-3); padding: var(--sp-3) var(--sp-4); display: grid; gap: var(--sp-1); }
+.th-box p { font-size: var(--t-sm) !important; }
+.th-box--exam { background: var(--s-wash); }
+.th-box--myth { background: var(--st-flagged-bg); }
+.th-box--example { background: var(--s-sunk); border: var(--border); }
+.th-key { background: var(--s-raise); border: var(--border); border-radius: var(--r-3); padding: var(--sp-4); }
+.th-reading li { font-size: var(--t-sm) !important; }
+.th-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); margin-top: var(--sp-5); padding-top: var(--sp-4); border-top: var(--border); }
+.th-foot .spacer { flex: 1 1 auto; }
+@media (max-width: 899px) {
+  .th { grid-template-columns: minmax(0, 1fr); }
+  .th-toc { position: static; max-height: none; }
+  .th-toc ol { display: none; }
+}
 /* Gemini in the notes (§10.35): the three rewrites, the part being worked
    on (greyed, locked), the answer (highlighted) and the strip to settle it. */
 .np-pop.np-pop-ai { flex-direction: column; gap: 0; }
@@ -3235,6 +3282,7 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
       <div class="nav-grp">
         <span class="eyebrow">Learn</span>
         <a class="nav-i" href="#/learn"     data-route="learn"><svg class="i"><use href="#i-learn"></use></svg><span class="nav-t">Lessons</span></a>
+        <a class="nav-i" href="#/theory"    data-route="theory"><svg class="i"><use href="#i-book"></use></svg><span class="nav-t">Theory</span></a>
         <a class="nav-i" href="#/practice"  data-route="practice"><svg class="i"><use href="#i-target"></use></svg><span class="nav-t">Practice</span></a>
         <a class="nav-i" href="#/scenarios" data-route="scenarios"><svg class="i"><use href="#i-branch"></use></svg><span class="nav-t">Situational trainer</span></a>
         <a class="nav-i" href="#/cards"     data-route="cards"><svg class="i"><use href="#i-cards"></use></svg><span class="nav-t">Flashcards</span><span class="badge num" id="due-badge">0</span></a>
@@ -18035,6 +18083,8 @@ PMP.GLOSSARY = Object.freeze([
    ═════════════════════════════════════════════════════════════════════════ */
 PMP.ABBREVIATIONS = Object.freeze([
   { abbr: "AC", full: "Actual cost", group: "evm", see: "Actual cost" },
+  { abbr: "ADKAR", full: "Awareness, Desire, Knowledge, Ability, Reinforcement", group: "common",
+    note: "A change management model: the five things a person needs to make a change stick." },
   { abbr: "API", full: "Application programming interface", group: "common" },
   { abbr: "B", full: "Business Environment", group: "exam",
     note: "Lesson-id prefix: B2 is the second Business Environment lesson." },
@@ -18115,6 +18165,7 @@ PMP.ABBREVIATIONS = Object.freeze([
     note: "In the channels formula, the project manager included. n\u2081 before, n\u2082 after." },
   { abbr: "n", full: "Iterations remaining", group: "notation",
     note: "In the velocity formula. n also counts periods and people." },
+  { abbr: "NASA", full: "National Aeronautics and Space Administration", group: "common" },
   { abbr: "NPV", full: "Net present value", group: "business", see: "Net present value" },
   { abbr: "O", full: "Optimistic", group: "schedule", see: "Optimistic",
     note: "The best-case estimate in a three-point estimate." },
@@ -18141,6 +18192,10 @@ PMP.ABBREVIATIONS = Object.freeze([
   { abbr: "PMIS", full: "Project management information system", group: "integration", see: "Project management information system" },
   { abbr: "PMO", full: "Project management office", group: "integration", see: "Project management office" },
   { abbr: "PMP", full: "Project Management Professional", group: "exam" },
+  { abbr: "PRINCE", full: "Projects in Controlled Environments", group: "common",
+    note: "The UK government's project management method of 1989." },
+  { abbr: "PRINCE2", full: "Projects in Controlled Environments, second version", group: "common",
+    note: "The general-purpose successor to PRINCE, from 1996." },
   { abbr: "PTA", full: "Point of total assumption", group: "procurement", see: "Point of total assumption" },
   { abbr: "PV", full: "Planned value", group: "evm", see: "Planned value",
     note: "Also present value in the formula lab's finance group." },
@@ -19941,6 +19996,1641 @@ PMP.COURSE_ORDER = Object.freeze([
   "X2",
   "X3"
 ]);
+
+/* §05.12 Theory: the optional reading room (§10.37), chapters on project
+   management as a discipline, beyond what the exam needs. */
+/* THEORY:BEGIN — generated by theory/build.mjs from theory/*.txt; edit those, not this. */
+PMP.THEORY = Object.freeze({
+ "parts": [
+  {
+   "n": 1,
+   "title": "What project management is",
+   "blurb": "What projects are for, where the discipline came from, the project manager's role, how projects serve strategy, and the principles beneath every method.",
+   "planned": [
+    "Projects, operations and value",
+    "A short history of the discipline",
+    "The project manager's job",
+    "Portfolios, programmes and governance",
+    "The principles behind good practice"
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Ways of delivering",
+   "blurb": "Life cycles, agile and lean thinking, and how to choose and tailor an approach.",
+   "planned": [
+    "Life cycles and phases",
+    "Agile and lean thinking",
+    "Choosing and tailoring an approach"
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Planning and controlling the work",
+   "blurb": "Business cases, scope, time, money, quality, risk, contracts, change and measurement.",
+   "planned": [
+    "Starting well: business case and charter",
+    "Scope, requirements and the work breakdown structure",
+    "Time: networks, critical path, estimating",
+    "Money: budgets, reserves and earned value",
+    "Quality: building it in",
+    "Risk and uncertainty",
+    "Contracts and procurement",
+    "Integration and change control",
+    "Measuring progress and value"
+   ]
+  },
+  {
+   "n": 4,
+   "title": "People",
+   "blurb": "Stakeholders, communication, teams, leadership, conflict and negotiation.",
+   "planned": [
+    "Stakeholders and engagement",
+    "Communication that works",
+    "Building and leading teams",
+    "Leadership, power and influence",
+    "Conflict, negotiation and decisions"
+   ]
+  },
+  {
+   "n": 5,
+   "title": "The wider organisation",
+   "blurb": "Organisational change and adoption, and professional ethics.",
+   "planned": [
+    "Organisational change and adoption",
+    "Ethics and professional responsibility"
+   ]
+  },
+  {
+   "n": 6,
+   "title": "The project manager's mindset",
+   "blurb": "Thinking like a project manager, and learning from every project.",
+   "planned": [
+    "Thinking like a project manager",
+    "Closing, learning and getting better"
+   ]
+  }
+ ],
+ "chapters": [
+  {
+   "id": "t1",
+   "part": 1,
+   "title": "Projects, operations and value",
+   "summary": "What makes work a project, how projects differ from the running of an organisation, and why value, not output, is the point.",
+   "why": "Every method in this discipline, from a Gantt chart to a sprint review, exists because projects are a particular kind of work with particular problems. If you are clear about what a project is and what it is for, most of the practices in later chapters stop looking like rules to memorise and start looking like sensible answers to those problems.",
+   "sections": [
+    {
+     "id": "t1-s1",
+     "title": "Two kinds of work",
+     "blocks": [
+      "Every organisation does two kinds of work. The first keeps it running: the payroll is paid each month, the call centre answers calls, the factory makes this week's orders, the ward is staffed tonight. This is **operations**. It repeats, it is measured by how steadily and efficiently it repeats, and the people doing it are usually organised in permanent departments.",
+      "The second kind of work changes the organisation. A new product is designed, a building goes up, a computer system is replaced, a merger is carried through, a law is brought into effect. This is **project** work. It is done once, it ends, and when it ends something exists that did not exist before.",
+      "The most common definition says a project is a temporary endeavour undertaken to create a unique product, service or result. Each word in that sentence carries weight, and each one points to a problem that project management has to solve."
+     ]
+    },
+    {
+     "id": "t1-s2",
+     "title": "Temporary does not mean short",
+     "blocks": [
+      "\"Temporary\" means the project has a beginning and an end. It does not mean it is quick. Building a railway can take fifteen years and is still temporary, because one day the line opens and the project team disbands. The end can come in several ways: the objectives are met, it becomes clear they cannot be met, the need disappears, the money or the people run out, or the sponsor decides to stop.",
+      "Temporariness has consequences that are easy to underestimate. The team is assembled for the work and will scatter afterwards, so it has to form, agree how it works, and become productive quickly, without the years of shared habit a permanent department enjoys. Knowledge gathered during the project leaves with the people unless someone deliberately captures it. And because there is an end, there is always a question of who will own the result once the project has gone. A surprising number of projects deliver something that nobody in operations was ready to receive.",
+      "What is temporary is the project, not its output. The railway, the software or the new process is meant to last for years. A project manager who forgets this optimises the wrong thing: finishing on the planned date with a result that is expensive to run, hard to maintain or unloved by the people who must use it every day."
+     ]
+    },
+    {
+     "id": "t1-s3",
+     "title": "Unique, but rarely new in every part",
+     "blocks": [
+      "\"Unique\" means the result has not been produced before in exactly this form, in this place, for these people. It does not mean that everything about it is new. A housing developer may have built a hundred similar houses, but this site has its own ground conditions, its own neighbours and its own planning officer. A software team may have shipped many releases, but this one carries a different set of changes into a system that has itself changed since the last time.",
+      "Uniqueness is the source of uncertainty. Operations can be standardised because the same thing happens again and again; the organisation learns its true costs and durations from experience. A project can borrow from past experience, but never completely, because some part of it has not happened before. That is why estimates on projects are ranges rather than facts, why risks have to be looked for rather than simply listed from last time, and why a project plan is always partly a hypothesis about how the work will go.",
+      "The degree of uniqueness varies enormously. Repeating a well-understood kind of project in a familiar setting carries little uncertainty and can be planned in detail. Building something nobody has built before, for users whose needs nobody fully understands, carries a great deal. Much of the modern debate about predictive and adaptive approaches (Part II) is really a debate about how much uniqueness, and therefore how much uncertainty, a piece of work contains."
+     ]
+    },
+    {
+     "id": "t1-s4",
+     "title": "Progressive elaboration",
+     "blocks": [
+      "Because a project creates something partly new, nobody knows everything about it at the start. Understanding grows as the work proceeds. Early on, the project may be described in a page: the purpose, the rough scope, an indication of cost and time. Later the description becomes a detailed design, a schedule of individual activities, a budget broken down by work package. This deepening of detail as knowledge improves is called **progressive elaboration**.",
+      "Progressive elaboration is not the same as uncontrolled change. The purpose of the project should stay stable while the detail of how to achieve it fills in. A health trust that sets out to let patients book appointments online should still be doing that at the end; what changes is the understanding of which appointments, which screens, which integrations and which edge cases. When the purpose itself shifts, that is a different matter, and it usually calls for a decision by whoever authorised the project in the first place.",
+      "A related idea is **rolling wave planning**: planning the near term in detail and the further future in outline, then adding detail as each period approaches. It is simply progressive elaboration applied to the schedule. Teams using adaptive approaches do something similar with their backlog, refining the items they will work on soon and leaving the rest coarse.",
+      {
+       "box": "example",
+       "text": "Northfield Health Trust runs three hospitals and forty community clinics. Patients currently book appointments by phone, and the booking lines are overwhelmed every morning. The trust's board has approved a project to let patients book, move and cancel appointments online. At the start, the whole project is described in a two-page business case. By month three there is a list of more than two hundred requirements; by month six, the first clinics are using a working version. We will follow this project through Part I."
+      }
+     ]
+    },
+    {
+     "id": "t1-s5",
+     "title": "Projects as the vehicle of change",
+     "blocks": [
+      "Why do organisations run projects at all? Because projects are how organisations change on purpose. Strategy is a statement about where an organisation wants to be; operations keep it where it is; projects move it from one state to the other.",
+      "Projects are usually triggered by one of a handful of pressures. A market demand (customers want online booking). A strategic opportunity (a new service line). A customer request (a client commissions a bespoke system). A technological advance (an old platform can be replaced by a better one). A legal or regulatory requirement (new rules on patient data). A social need (a community needs a clinic). Or simply a problem that cannot be fixed within normal operations (the booking lines fail every morning).",
+      "Seeing projects this way changes the questions a project manager asks. The question is not only \"are we building the thing we were asked to build?\" but \"will the organisation be in the better state it was hoping for when we are done?\" The first question is about outputs. The second is about value."
+     ]
+    },
+    {
+     "id": "t1-s6",
+     "title": "Outputs, outcomes, benefits and value",
+     "blocks": [
+      "These four words are often used loosely. It helps to keep them apart.",
+      "An **output** is what the project produces: the online booking system, the trained call-centre staff, the updated procedures. Outputs can be inspected and accepted; they either meet their specification or they do not.",
+      "An **outcome** is the change that results when the output is used: patients book online instead of phoning, so the morning queue shrinks. Outcomes happen in the organisation and among its customers, not inside the project, and they often appear only after the project has handed over.",
+      "A **benefit** is a measurable improvement that someone values: fewer missed appointments, lower call-centre costs, higher patient satisfaction scores. Benefits are the reason the outcome matters.",
+      "**Value** is the overall worth of those benefits to the people who care about them, set against what it cost to get them. Value can be financial, but it is often not: safety, compliance, reputation, public good and learning are all forms of value.",
+      {
+       "fig": {
+        "title": "From output to value",
+        "caption": "The project delivers the output. Outcomes, benefits and value happen in the business, mostly after handover, which is why benefits need an owner who stays.",
+        "alt": "Four boxes left to right joined by arrows: Output, Outcome, Benefit, Value. Under each, the booking example: system delivered; patients book online; fewer missed appointments; worth more than it cost. A bracket under Output reads Delivered by the project; a bracket under the other three reads Realised in the business, after handover.",
+        "w": 640,
+        "h": 210,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 20,
+          "y": 30,
+          "w": 125,
+          "h": 54,
+          "t": "Output",
+          "tone": "accent",
+          "s": 14,
+          "b": true
+         },
+         {
+          "k": "line",
+          "p": [
+           146,
+           57,
+           175,
+           57
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 178,
+          "y": 30,
+          "w": 125,
+          "h": 54,
+          "t": "Outcome",
+          "tone": "good",
+          "s": 14,
+          "b": true
+         },
+         {
+          "k": "line",
+          "p": [
+           304,
+           57,
+           333,
+           57
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 336,
+          "y": 30,
+          "w": 125,
+          "h": 54,
+          "t": "Benefit",
+          "tone": "good",
+          "s": 14,
+          "b": true
+         },
+         {
+          "k": "line",
+          "p": [
+           462,
+           57,
+           491,
+           57
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 494,
+          "y": 30,
+          "w": 125,
+          "h": 54,
+          "t": "Value",
+          "tone": "good",
+          "s": 14,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 82.5,
+          "y": 112,
+          "t": "Booking system\ndelivered",
+          "a": "middle",
+          "s": 11,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 240.5,
+          "y": 112,
+          "t": "Patients book\nonline",
+          "a": "middle",
+          "s": 11,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 398.5,
+          "y": 112,
+          "t": "Fewer missed\nappointments",
+          "a": "middle",
+          "s": 11,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 556.5,
+          "y": 112,
+          "t": "Worth more than\nit cost",
+          "a": "middle",
+          "s": 11,
+          "tone": "muted"
+         },
+         {
+          "k": "line",
+          "p": [
+           20,
+           150,
+           20,
+           160,
+           145,
+           160,
+           145,
+           150
+          ],
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 82.5,
+          "y": 182,
+          "t": "Delivered by\nthe project",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "accent"
+         },
+         {
+          "k": "line",
+          "p": [
+           178,
+           150,
+           178,
+           160,
+           619,
+           160,
+           619,
+           150
+          ],
+          "tone": "good"
+         },
+         {
+          "k": "text",
+          "x": 398.5,
+          "y": 182,
+          "t": "Realised in the business, mostly after handover",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "good"
+         }
+        ]
+       }
+      },
+      "The chain matters because the project directly controls only its first link. It can guarantee outputs; it can influence outcomes; it rarely controls benefits on its own. This is why mature organisations keep benefits in view from the business case onwards, assign someone to own them after handover, and judge projects by more than whether the outputs arrived.",
+      {
+       "box": "myth",
+       "text": "\"A project that finishes on time, on budget and to specification is a success.\" It is a delivery success. Whether it is a business success depends on whether the outputs are used and the benefits arrive. Plenty of systems are delivered perfectly and switched off a year later."
+      }
+     ]
+    },
+    {
+     "id": "t1-s7",
+     "title": "The iron triangle, and why it is not enough",
+     "blocks": [
+      "For decades, project success was described with three constraints: scope, time and cost, often drawn as a triangle with quality in the middle. The idea is sound as far as it goes. The three are linked; you cannot ask for more scope in less time at lower cost without something giving way, and when one moves the others are put under pressure.",
+      "The triangle is a useful first model, but practitioners found it too simple. Real projects also juggle risk, the quality expected by different stakeholders, the availability of skilled people, the demands of regulators, the reputation of the organisation and the experience of the people who will use the result. Modern standards therefore talk about competing constraints rather than three, and they place the constraints in service of value rather than treating them as the goal.",
+      "There is a deeper problem with the triangle as a definition of success. It describes the project's efficiency, not its effectiveness. A project can stay within all three constraints and still deliver something nobody needed. Conversely, some of the most valuable projects in history overran badly. The Sydney Opera House was finished a decade late and many times over its budget, yet it became one of the most recognised buildings in the world. That is not an argument for overruns, which usually destroy value rather than create it. It is an argument for judging a project by what it was for."
+     ]
+    },
+    {
+     "id": "t1-s8",
+     "title": "Projects and products",
+     "blocks": [
+      "A **product** is something an organisation offers and sustains over time: a mobile app, a range of cars, an insurance policy, a public service. A product has a life cycle of its own, from idea through development, growth and maturity to retirement. One product may be shaped by many projects across its life: the first build, a major redesign, a move to a new platform, the final decommissioning.",
+      "Many organisations, especially in software, have moved from funding projects to funding long-lived product teams. Instead of assembling a team, delivering a fixed scope and disbanding, they keep a stable team working on a product continuously, choosing the most valuable next piece of work each week. This reduces some of the costs of temporariness: knowledge stays in the team, and nobody has to hand the result over to strangers. It does not remove the need for project thinking. Large changes inside a product still have goals, deadlines, budgets, risks and stakeholders, and still benefit from being planned and governed as a piece of work with an end.",
+      "In the running case, the online booking system will become a product that the trust maintains for years. The project is the effort that brings its first version into service and gets the clinics using it. Recognising that distinction early led the trust to involve the team that would support the system after go-live in the project itself, so that the handover was a gradual transfer rather than a cliff edge."
+     ]
+    },
+    {
+     "id": "t1-s9",
+     "title": "Why projects struggle",
+     "blocks": [
+      "Studies of project performance have been published for decades, and their headline figures vary widely depending on how failure is defined. The causes they find, though, are remarkably consistent. They are worth knowing because almost every practice in this field is a response to one of them.",
+      {
+       "ul": [
+        "**Unclear purpose.** The project starts without a shared understanding of why it exists or what success looks like, so every later decision rests on sand.",
+        "**Optimistic estimates.** People forecast the best case and call it the plan. Psychologists call this the planning fallacy, and it affects experts as well as novices.",
+        "**Weak sponsorship.** Nobody senior enough owns the project, so conflicts with other priorities are never resolved in its favour.",
+        "**Requirements that were never understood.** The team builds what was written down, which was not what was needed.",
+        "**Unmanaged change.** The scope drifts one reasonable request at a time until the plan no longer describes the work.",
+        "**Poor stakeholder engagement.** The people affected by the result learn about it too late to shape it, and resist it when it arrives.",
+        "**Risks noticed too late.** Problems that were visible early are discovered when they have become expensive.",
+        "**Teams that never became teams.** People are assigned part-time to work they do not own, and nobody feels accountable for the whole."
+       ]
+      },
+      {
+       "box": "exam",
+       "text": "The exam rarely asks for a definition of a project, but it constantly tests the ideas behind it. When a question describes a team building to specification while the business need has changed, the answer usually involves going back to the business case and the sponsor. When it describes benefits that will appear after handover, expect an answer about transition and benefits ownership rather than about closing the project faster."
+      }
+     ]
+    },
+    {
+     "id": "t1-s10",
+     "title": "The work of managing a project",
+     "blocks": [
+      "If a project is a temporary effort to create something partly new in order to deliver value, then managing it means a few things that recur throughout this book. It means establishing and protecting a shared purpose. It means turning that purpose into a plan that is detailed where knowledge allows and open where it does not. It means organising people who may not have worked together into a team that can deliver. It means watching for the gap between plan and reality and deciding what to do about it. It means engaging the people who will be affected, long before the result reaches them. And it means keeping the end in view: not only the end date, but the state the organisation should be in afterwards.",
+      "None of these is mechanical. Each requires judgement, and much of the rest of this book is about how experienced practitioners exercise that judgement."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "A project is a temporary effort to create a unique product, service or result. Operations sustain the organisation; projects change it.",
+    "Temporary means it ends, not that it is short. The output is meant to last.",
+    "Uniqueness creates uncertainty, which is why plans are partly hypotheses and estimates are ranges.",
+    "Progressive elaboration fills in detail as knowledge grows; the purpose should stay stable while it does.",
+    "Outputs are produced by the project, outcomes happen when they are used, benefits are the measurable improvements, and value is their worth set against their cost.",
+    "Scope, time and cost matter, but they serve value. Delivery success and business success are different things.",
+    "Products last; projects end. Many changes to a product are still best run as projects."
+   ],
+   "reading": [
+    "Bent Flyvbjerg and Dan Gardner, *How Big Things Get Done* (2023). Why large projects overrun, and what the few successful ones do differently.",
+    "Daniel Kahneman, *Thinking, Fast and Slow* (2011). The chapters on the planning fallacy and the outside view explain why estimates are optimistic.",
+    "Project Management Institute, *The Standard for Project Management*, published with the *PMBOK Guide*. The formal statement of the concepts in this chapter.",
+    "Peter W. G. Morris, *The Management of Projects* (1994). A thoughtful account of what projects are and how the discipline grew."
+   ],
+   "words": 2567,
+   "minutes": 12,
+   "n": 1
+  },
+  {
+   "id": "t2",
+   "part": 1,
+   "title": "A short history of the discipline",
+   "summary": "How project management grew from scheduling charts and military programmes into a profession with competing schools of thought.",
+   "why": "The practices you will meet in later chapters were invented by particular people to solve particular problems. Knowing where they came from tells you what they are good for, and what they were never designed to do. It also explains why the field contains apparently contradictory advice: different traditions grew up around different kinds of work.",
+   "sections": [
+    {
+     "id": "t2-s1",
+     "title": "Great works without a discipline",
+     "blocks": [
+      "People have carried out enormous projects for thousands of years. The pyramids of Giza, the Great Wall of China, Roman aqueducts and medieval cathedrals all required the coordination of thousands of workers, the supply of materials over long distances and the sequencing of work over decades. Their builders clearly planned, estimated and organised.",
+      "What they did not have was project management as a named, teachable discipline with shared methods. Knowledge lived in master builders and guilds, passed from person to person, specific to a craft. A cathedral mason knew how to build cathedrals; that knowledge did not transfer to running a shipyard. The idea that the management of any temporary undertaking has common principles, whatever the technical content, is a twentieth-century one."
+     ]
+    },
+    {
+     "id": "t2-s2",
+     "title": "Scientific management and the first charts",
+     "blocks": [
+      "The roots of the discipline lie in the industrial management movement at the turn of the twentieth century. Frederick Winslow Taylor studied work in factories and argued that it could be analysed, measured and improved systematically. His ideas, known as scientific management, were often applied harshly, and modern management has rejected much of their attitude to workers. But they established something lasting: the belief that work can be broken into parts, timed and planned.",
+      "Henri Fayol, a French mining engineer, described management itself as a set of functions: planning, organising, commanding, coordinating and controlling. Readers of later standards will recognise the family resemblance.",
+      "Henry Gantt, who worked with Taylor, developed the bar chart that carries his name in the 1910s. Each task is a horizontal bar on a timeline, so anyone can see at a glance what should be happening when and whether work is ahead or behind. The Polish engineer Karol Adamiecki had devised a similar chart, which he called a harmonogram, some years earlier, but his work was published mainly in Polish and Russian and became widely known only later. Gantt charts were used to manage American shipbuilding and munitions production during the First World War and remain the most familiar picture of a project plan more than a century later.",
+      "The Gantt chart has a limitation that shaped what came next. It shows when things happen, but not why. It does not show which tasks depend on which, so when one task slips, the chart alone cannot tell you what else will be affected."
+     ]
+    },
+    {
+     "id": "t2-s3",
+     "title": "The network revolution of the 1950s",
+     "blocks": [
+      "The Second World War and the early Cold War produced projects of unprecedented scale and complexity. The Manhattan Project, which developed the atomic bomb, coordinated research, engineering and construction across several sites and many organisations under extreme secrecy and time pressure. It is often cited as an early example of what we would now call programme management.",
+      "In the late 1950s, two techniques appeared almost at the same time that gave project management its first real mathematics. Both represent a project as a network of activities linked by dependencies.",
+      "The **critical path method** was developed by the chemical company DuPont together with Remington Rand to plan the maintenance shutdowns and construction work of chemical plants. By calculating the longest chain of dependent activities through the network, planners could see which tasks determined the end date and which had slack. Speeding up anything off that path would not finish the project sooner; speeding up the critical path would.",
+      "The **program evaluation and review technique**, PERT, was developed for the United States Navy's Polaris submarine missile programme, with the consultancy Booz Allen Hamilton. Polaris involved thousands of contractors and a great deal of novel engineering, so durations were genuinely uncertain. PERT asked for three estimates for each activity (optimistic, most likely and pessimistic) and combined them statistically. It was an early, explicit admission that project durations are uncertain and should be treated as ranges.",
+      {
+       "fig": {
+        "title": "Milestones in the discipline",
+        "caption": "Planning-and-control methods came first; adaptive methods and principle-based standards came later, as the field put uncertainty and people at the centre.",
+        "alt": "A timeline from 1900 to 2025 with six marked points: 1910s Gantt chart; 1957 to 1958 critical path method and PERT; 1969 PMI founded; 1996 first PMBOK Guide and PRINCE2; 2001 Agile Manifesto; 2021 principle-based standard.",
+        "w": 640,
+        "h": 210,
+        "shapes": [
+         {
+          "k": "line",
+          "p": [
+           20,
+           105,
+           620,
+           105
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "dot",
+          "x": 68,
+          "y": 105,
+          "tone": "accent"
+         },
+         {
+          "k": "line",
+          "p": [
+           68,
+           98,
+           68,
+           62
+          ],
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 68,
+          "y": 42,
+          "t": "1910s\nGantt chart",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "dot",
+          "x": 296,
+          "y": 105,
+          "tone": "accent"
+         },
+         {
+          "k": "line",
+          "p": [
+           296,
+           112,
+           296,
+           146
+          ],
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 296,
+          "y": 170,
+          "t": "1957–58\nCritical path and PERT",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "dot",
+          "x": 351,
+          "y": 105,
+          "tone": "accent"
+         },
+         {
+          "k": "line",
+          "p": [
+           351,
+           98,
+           351,
+           62
+          ],
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 351,
+          "y": 42,
+          "t": "1969\nPMI founded",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "dot",
+          "x": 481,
+          "y": 105,
+          "tone": "accent"
+         },
+         {
+          "k": "line",
+          "p": [
+           481,
+           112,
+           481,
+           146
+          ],
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 470,
+          "y": 170,
+          "t": "1996\nPMBOK Guide, PRINCE2",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "dot",
+          "x": 505,
+          "y": 105,
+          "tone": "good"
+         },
+         {
+          "k": "line",
+          "p": [
+           505,
+           98,
+           505,
+           62
+          ],
+          "tone": "good"
+         },
+         {
+          "k": "text",
+          "x": 505,
+          "y": 42,
+          "t": "2001\nAgile Manifesto",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "dot",
+          "x": 601,
+          "y": 105,
+          "tone": "good"
+         },
+         {
+          "k": "line",
+          "p": [
+           601,
+           112,
+           601,
+           146
+          ],
+          "tone": "good"
+         },
+         {
+          "k": "text",
+          "x": 620,
+          "y": 170,
+          "t": "2021\nPrinciples",
+          "a": "end",
+          "s": 11,
+          "b": true
+         }
+        ]
+       }
+      },
+      "These methods spread rapidly through defence, aerospace and construction, helped by the arrival of computers that could do the network calculations. Around them grew other techniques: work breakdown structures for organising scope, earned value for measuring progress against cost and schedule together, and formal configuration and change control. The United States Department of Defense and NASA, especially during the Apollo programme of the 1960s, drove much of this. Systems engineering, the discipline of designing complex systems as a whole and managing the interfaces between their parts, grew up alongside."
+     ]
+    },
+    {
+     "id": "t2-s4",
+     "title": "A profession takes shape",
+     "blocks": [
+      "By the 1960s, enough people were managing projects across enough industries that they began to see themselves as a profession. The International Project Management Association was formed in Europe in 1965, and the Project Management Institute was founded in the United States in 1969. Both brought practitioners together to share methods across industries, which was the first time the field's knowledge had been treated as independent of any particular technology.",
+      "Over the following decades PMI collected what its members considered generally recognised good practice. A report on the body of knowledge was published in the 1980s, and the first edition of *A Guide to the Project Management Body of Knowledge*, the PMBOK Guide, appeared in 1996. PMI's certification, the PMP, began in 1984. In the United Kingdom, the government developed a structured method called PRINCE in 1989 and a general-purpose successor, PRINCE2, in 1996, which became widely used in the public sector and in Europe.",
+      "The early editions of the PMBOK Guide described project management as a set of processes, grouped by the stage of the project in which they mostly happen (initiating, planning, executing, monitoring and controlling, and closing) and by knowledge area (scope, schedule, cost, quality, risk and so on). Each process had inputs, tools and techniques, and outputs. This gave the field a common vocabulary and a checklist of what a competent project should consider. It also encouraged, in some organisations, a heavy and document-centred style of management that later generations reacted against."
+     ]
+    },
+    {
+     "id": "t2-s5",
+     "title": "The waterfall misunderstanding",
+     "blocks": [
+      "In software development, the dominant early model was what came to be called **waterfall**: requirements, then design, then build, then test, then deploy, each phase completed before the next begins. The model is usually traced to a 1970 paper by Winston Royce. Ironically, Royce presented the strictly sequential version as risky and inviting failure, and recommended iterating and involving the customer. The paper's first diagram was remembered; its warnings were not.",
+      "The sequential model suited contracts, governments and engineering cultures that wanted fixed scope, fixed price and clear sign-offs. It worked reasonably well where requirements were stable and the technology familiar. It worked badly where neither was true, which in software was often. Teams spent months writing requirements that turned out to be wrong, built systems against them for months more, and discovered the problems only when users finally saw the result."
+     ]
+    },
+    {
+     "id": "t2-s6",
+     "title": "Iterative, incremental and lightweight methods",
+     "blocks": [
+      "Throughout the 1980s and 1990s, people looked for alternatives. Barry Boehm's spiral model organised development as a series of loops, each one driven by the biggest remaining risk. Rapid application development emphasised prototypes and user involvement. The Dynamic Systems Development Method, in the United Kingdom, fixed time and cost and let scope flex. In 1995, Ken Schwaber and Jeff Sutherland presented Scrum, a framework of short fixed-length iterations with a small self-organising team. Kent Beck and colleagues developed Extreme Programming later in the decade, with practices such as pair programming, test-first development and continuous integration.",
+      "In February 2001, seventeen people associated with these methods met at a ski resort in Utah and wrote the **Manifesto for Agile Software Development**. It is short: four statements of values and twelve principles. Its central claim is that responding to change, collaborating with customers and delivering working software frequently matter more than following a plan, negotiating contracts and producing comprehensive documentation, while acknowledging that the latter still have value. Part II looks at agile thinking in detail.",
+      "The manifesto was written by software developers about software, but its ideas spread into product development, marketing, research and organisational change, anywhere the work was uncertain and the cost of learning late was high."
+     ]
+    },
+    {
+     "id": "t2-s7",
+     "title": "Lean and flow",
+     "blocks": [
+      "A parallel stream came from manufacturing. The Toyota Production System, developed by Taiichi Ohno and others in post-war Japan, aimed to eliminate waste, produce only what was needed when it was needed, and improve continuously. Western researchers studying it in the late 1980s gave it the name **lean**.",
+      "Lean thinking reached project management through several routes. Eliyahu Goldratt's theory of constraints, and his 1997 book *Critical Chain*, applied ideas about bottlenecks and buffers to project schedules. In software, the Kanban method popularised by David Anderson in the late 2000s visualised work on a board, limited the amount of work in progress, and managed the flow of items through the system rather than planning everything upfront. Lean construction applied similar ideas to building sites."
+     ]
+    },
+    {
+     "id": "t2-s8",
+     "title": "Toward principles and hybrids",
+     "blocks": [
+      "By the 2010s, the field had two strong traditions that often talked past each other. One emphasised planning, control and predictability, and was strongest in construction, engineering, defence and government. The other emphasised adaptation, collaboration and early delivery, and was strongest in software and digital products. Practitioners in the middle increasingly mixed the two: an organisation might fund and govern a programme with stage gates while its teams worked in sprints, or build hardware predictively and software adaptively within the same product.",
+      "The standards followed the practice. The PMBOK Guide gained agile content and a companion *Agile Practice Guide* in 2017. In 2021, the seventh edition made a decisive change: instead of being organised around processes, it set out principles of project management and the performance domains in which they apply, and it treated predictive, adaptive and hybrid approaches as equally legitimate choices to be tailored to the work. The same year, the PMP exam's content outline gave agile and hybrid approaches roughly half the weight of the exam. The emphasis moved from \"follow these processes\" to \"understand why, and choose well\"."
+     ]
+    },
+    {
+     "id": "t2-s9",
+     "title": "What the history teaches",
+     "blocks": [
+      "Three lessons from this history recur through the rest of the book.",
+      "First, each technique was invented for a context. The critical path method assumes you know the activities and their dependencies, which is true for a plant shutdown and much less true for a new product. Agile methods assume you can deliver something useful in small pieces and get feedback quickly, which is true for most software and much less true for a bridge. Using a technique well means knowing the context it assumes.",
+      "Second, the field has moved steadily from treating uncertainty as an inconvenience to treating it as central. PERT acknowledged uncertain durations; risk management made uncertainty a subject of its own; adaptive approaches built the whole way of working around it.",
+      "Third, the people side has moved from the margin to the centre. Early methods were largely about scheduling and control. Modern practice puts as much emphasis on leadership, teams, stakeholders and organisational change, because experience showed that projects more often fail for human reasons than technical ones.",
+      {
+       "box": "myth",
+       "text": "\"Agile replaced traditional project management.\" It did not. It added a different set of tools for a different kind of uncertainty. Predictive planning is still the right approach for much construction, manufacturing and regulated work, and most large organisations run hybrids."
+      },
+      {
+       "box": "exam",
+       "text": "The exam does not ask about dates or names from this history. It does test the ideas that came out of it: why the critical path matters, what PERT's three-point estimate is for, when a predictive approach suits the work and when an adaptive one does, and how to combine them. If you understand why each technique was invented, you can usually work out which one a situational question is pointing to."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Large projects are ancient, but project management as a shared, teachable discipline is a twentieth-century invention.",
+    "Gantt charts show when; network methods (the critical path method and PERT) added why, through dependencies, and PERT treated durations as uncertain.",
+    "Defence, aerospace and construction shaped the planning-and-control tradition; professional bodies codified it as processes and knowledge areas.",
+    "The rigidly sequential \"waterfall\" model was a misreading of its own source, and it fitted poorly with uncertain work.",
+    "Iterative, agile and lean methods grew up to handle uncertainty by delivering in small pieces, learning quickly and limiting work in progress.",
+    "Current standards are organised around principles and tailoring, treating predictive, adaptive and hybrid approaches as choices to fit the work."
+   ],
+   "reading": [
+    "Peter W. G. Morris, *The Management of Projects* (1994). The standard history of the discipline, from early engineering to the late twentieth century.",
+    "Winston W. Royce, \"Managing the development of large software systems\" (1970). Short, and worth reading to see what it actually recommends.",
+    "Kent Beck and others, *Manifesto for Agile Software Development* (2001), at agilemanifesto.org. The values and the twelve principles.",
+    "Eliyahu M. Goldratt, *Critical Chain* (1997). A novel that applies the theory of constraints to project schedules.",
+    "James P. Womack, Daniel T. Jones and Daniel Roos, *The Machine That Changed the World* (1990). The study that introduced lean thinking to the West."
+   ],
+   "words": 2162,
+   "minutes": 10,
+   "n": 2
+  },
+  {
+   "id": "t3",
+   "part": 1,
+   "title": "The project manager's job",
+   "summary": "What a project manager actually does, the competencies the role needs, and how to lead when you hold little formal authority.",
+   "why": "Job titles vary wildly, and many people who manage projects do not have \"project manager\" in theirs. Underneath the variety, the role has a stable core. Understanding that core helps you see where your effort makes the most difference, and why so much of the job is about people rather than plans.",
+   "sections": [
+    {
+     "id": "t3-s1",
+     "title": "A role, not a rank",
+     "blocks": [
+      "A project manager is the person assigned by the organisation to lead the team responsible for achieving the project's objectives. That is the whole formal definition, and it says nothing about seniority, technical background or department. Project managers may be senior executives running national infrastructure, or a team member in a small firm who also does half the technical work. Some organisations have no one with the title at all; the role is filled by a team lead, a product manager or a business analyst.",
+      "What makes someone a project manager is accountability for the whole. Specialists on a project are responsible for their part: the design, the code, the training material, the contract. The project manager is responsible for the parts coming together into something that achieves its purpose, on terms the organisation can accept. That accountability for integration is the heart of the role."
+     ]
+    },
+    {
+     "id": "t3-s2",
+     "title": "The integrator",
+     "blocks": [
+      "Every project is a set of pieces that must fit: scope, schedule, budget, quality, risk, people, suppliers, stakeholders. A change in one ripples through the others. Adding a feature affects the schedule, the budget, the test plan, the training and perhaps a contract. Losing a key engineer affects the schedule, the risk profile and the morale of the rest of the team.",
+      "Specialists, quite properly, optimise their own piece. The designer wants the best design, the finance team wants the lowest cost, the sales team wants the earliest date. Only the project manager is paid to look across all of them and make the trade-offs that serve the project as a whole. This is why integration is often described as the knowledge area that ties the others together, and why change control (Chapter 16) is so central: it is the mechanism through which those trade-offs are made deliberately rather than by accident.",
+      "Integration also happens at the level of thinking. The project manager has to hold together the strategic view (why are we doing this, and is it still worth it?), the operational view (what is happening this week, and what is stuck?) and the human view (how is the team, and who is worried about what?). Experienced project managers move between these levels constantly."
+     ]
+    },
+    {
+     "id": "t3-s3",
+     "title": "What project managers spend their time on",
+     "blocks": [
+      "Ask project managers what fills their days and the answers are consistent: talking to people. Practitioners often quote a figure that project managers spend around ninety per cent of their time communicating. The exact number is folklore rather than research, but the point is sound. Meetings, conversations, messages, reports, negotiations, presentations and the quiet word in the corridor are where most of the work happens.",
+      "The rest of the time goes on activities that support those conversations: planning and replanning, tracking progress, analysing problems, preparing decisions, managing risks, checking quality, handling contracts and, in smaller projects, doing some of the technical work. Paperwork matters, but it exists to support decisions and shared understanding, not for its own sake. A plan that nobody reads, or a risk register that nobody acts on, is a cost without a benefit.",
+      "It helps to think of a few recurring roles the project manager plays.",
+      {
+       "ul": [
+        "**Planner.** Turning the purpose into an approach and a plan the team believes in, and keeping it current.",
+        "**Coordinator.** Making sure the right people are working on the right things in the right order, and that hand-offs between them happen.",
+        "**Communicator.** Keeping everyone with a stake informed, in the form and at the frequency that suits them.",
+        "**Problem solver.** Removing obstacles, resolving conflicts and making or escalating decisions so the work can continue.",
+        "**Steward.** Spending the organisation's money and people's time responsibly, and being honest about how things stand.",
+        "**Leader.** Giving the team a sense of purpose and direction, and creating the conditions in which they can do their best work."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "t3-s4",
+     "title": "The competencies the role needs",
+     "blocks": [
+      "PMI describes the competencies a project professional needs in three groups, which it calls the talent triangle. The current labels are ways of working, power skills and business acumen.",
+      "**Ways of working** are the technical skills of project management: planning, scheduling, estimating, budgeting, risk analysis, quality techniques and the practices of predictive, adaptive and hybrid approaches. They are what most training courses teach, and they are necessary. Without them a project manager cannot build a credible plan or tell whether a project is on track.",
+      "**Power skills** are the interpersonal ones: leadership, communication, negotiation, collaboration, emotional intelligence, problem solving, a growth mindset. They used to be called soft skills, a name that undersold them. In practice they are usually what separates a project manager who keeps things moving from one who merely documents why they stopped.",
+      "**Business acumen** is understanding the organisation and its environment: its strategy, how it makes or saves money, its customers and competitors, the regulations it works under, and how the project contributes. A project manager with business acumen can talk to executives in their terms, notice when the business case has quietly stopped being true, and make trade-offs that favour the outcomes the organisation actually needs.",
+      {
+       "fig": {
+        "title": "Three kinds of competence",
+        "caption": "PMI's talent triangle. Good practice draws on all three at once: a risk conversation with a sponsor needs technique, business sense and the skill to get a decision made.",
+        "alt": "A triangle of three boxes joined by lines: Ways of working at the top (planning, scheduling, methods), Power skills at bottom left (leading, communicating, negotiating), Business acumen at bottom right (strategy, finance, customers). In the middle: Project professional.",
+        "w": 640,
+        "h": 240,
+        "shapes": [
+         {
+          "k": "line",
+          "p": [
+           290,
+           77,
+           175,
+           165
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "line",
+          "p": [
+           350,
+           77,
+           465,
+           165
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "line",
+          "p": [
+           241,
+           197,
+           399,
+           197
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "box",
+          "x": 220,
+          "y": 14,
+          "w": 200,
+          "h": 62,
+          "t": "Ways of working\nplanning, scheduling, methods",
+          "tone": "accent",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 40,
+          "y": 166,
+          "w": 200,
+          "h": 62,
+          "t": "Power skills\nleading, communicating,\nnegotiating",
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 400,
+          "y": 166,
+          "w": 200,
+          "h": 62,
+          "t": "Business acumen\nstrategy, finance, customers",
+          "tone": "warn",
+          "s": 12
+         },
+         {
+          "k": "text",
+          "x": 320,
+          "y": 140,
+          "t": "Project\nprofessional",
+          "a": "middle",
+          "s": 13,
+          "b": true
+         }
+        ]
+       }
+      },
+      "The three are not separate tracks. A good risk discussion with a sponsor uses all three at once: technical skill to analyse the risk, business acumen to judge what it means for the organisation, and power skills to present it so that a decision gets made."
+     ]
+    },
+    {
+     "id": "t3-s5",
+     "title": "Authority and influence",
+     "blocks": [
+      "One of the realities of the role is that project managers usually have more responsibility than authority. They are accountable for results but often do not manage the people doing the work. Team members may report to functional managers who decide their priorities, their pay and their careers. Suppliers report to their own companies. Stakeholders who can make or break the project report to nobody the project manager can call on.",
+      "How much formal authority a project manager has depends largely on the organisation's structure, which Chapter 4 describes. In a strongly project-oriented organisation, the project manager may control the budget and direct the team full-time. In a functional organisation, they may be a part-time coordinator with almost no authority at all. Most organisations sit somewhere between, in some form of matrix where team members answer to both a functional manager and a project manager.",
+      "Because formal authority is limited, project managers rely on other sources of influence. Researchers John French and Bertram Raven described several bases of power in the 1950s, and their categories are still widely used: legitimate power from position, reward and coercive power from the ability to give or withhold things people value, expert power from knowledge, and referent power from being respected and liked. Informational power, from controlling information others need, was added later. Project managers tend to have little of the first three and must build the others. Being competent, well informed, fair, reliable and genuinely helpful turns out to be a more durable basis for influence than position.",
+      {
+       "box": "example",
+       "text": "In the running case, Northfield's project manager, Amira, has no line authority over the clinic managers whose staff must change how they book appointments. She builds influence by spending her first month visiting clinics, listening to how booking actually works, and fixing two small irritations in the old system along the way. When she later needs the clinic managers to release staff for training, they agree, because she has shown she understands their work and can be trusted to keep their interests in view."
+      }
+     ]
+    },
+    {
+     "id": "t3-s6",
+     "title": "Leadership and management",
+     "blocks": [
+      "Writers have long distinguished management, which is about plans, processes, control and order, from leadership, which is about direction, alignment, motivation and change. The distinction is useful as long as nobody takes it to mean that a project manager can choose one. Projects need both. Without management, a project has energy but no coherence; without leadership, it has plans but no commitment.",
+      "The style of leadership the role calls for has shifted. Command-and-control leadership, in which the leader decides and the team carries out, fits work that is routine, urgent and well understood. Much project work is none of those. It depends on knowledge workers who often know more about their part than the project manager does, and on their willingness to solve problems the plan did not foresee. This is why **servant leadership**, an idea associated with Robert Greenleaf, has become central to modern practice, especially in adaptive teams. A servant leader sees the job as enabling the team: removing obstacles, protecting it from distraction, securing what it needs, helping it grow, and trusting it to decide how to do its work.",
+      "Servant leadership is sometimes misunderstood as passivity. It is not. A servant leader still holds a clear view of the goal, still has difficult conversations, and still makes decisions when the team cannot. The difference is where the leader's attention goes: to the team's capacity to deliver, rather than to the leader's own control over the work. Part IV discusses leadership in more depth."
+     ]
+    },
+    {
+     "id": "t3-s7",
+     "title": "Adaptive teams and the project manager",
+     "blocks": [
+      "In teams using Scrum, the formal roles are a product owner, who decides what is most valuable to build next, a Scrum Master, who coaches the team and the organisation in the method and removes impediments, and the developers. There is no project manager in the framework. This sometimes leads people to conclude that adaptive work does not need project management.",
+      "What actually happens is that the responsibilities of project management are distributed. The product owner takes on much of the work of scope and value. The Scrum Master takes on much of the work of process and team health. The team plans and tracks its own work. Outside the team, someone still has to coordinate several teams working on the same product, manage dependencies on other parts of the organisation, handle budgets and contracts, report to governance, manage risks that cross team boundaries, and engage stakeholders the team never meets. In larger efforts, those responsibilities are usually held by someone with a project, programme or delivery manager title. The work of project management does not disappear; its shape changes."
+     ]
+    },
+    {
+     "id": "t3-s8",
+     "title": "The project manager's sphere of influence",
+     "blocks": [
+      "It is useful to picture the project manager working at four levels.",
+      {
+       "ul": [
+        "**Within the project**, leading the team, managing the plan and integrating the work.",
+        "**Within the organisation**, working with the sponsor, steering groups, functional managers, the project management office and other project managers competing for the same people and money.",
+        "**Within the industry**, keeping up with technology, standards, regulation and practices that affect the work.",
+        "**Within the profession**, learning continuously, sharing knowledge, mentoring others and acting ethically."
+       ]
+      },
+      "The further out you go, the less formal authority the project manager has and the more their effectiveness depends on reputation, relationships and judgement. Good project managers invest at every level, not just the first."
+     ]
+    },
+    {
+     "id": "t3-s9",
+     "title": "What the job is not",
+     "blocks": [
+      "A few misconceptions about the role cause real harm.",
+      {
+       "ul": [
+        "**Not the person who does all the work.** In small projects the project manager may also be a technical contributor, but a project manager who disappears into the technical work stops integrating, and the project drifts.",
+        "**Not an administrator.** Producing reports and minutes is part of the job; being reduced to it is a sign that real decisions are being made elsewhere.",
+        "**Not the owner of the business case.** The sponsor owns the reason for the project and the benefits. The project manager delivers the means and must say clearly when the reason is in danger.",
+        "**Not the hero.** Projects that depend on one person working nights to rescue them are fragile. A good project manager builds a team and a system that do not need heroics."
+       ]
+      },
+      {
+       "box": "myth",
+       "text": "\"A good project manager should know the technology better than the team.\" It helps to understand the work well enough to ask good questions and spot nonsense, but the team's specialists will know more about their parts. The project manager's distinctive expertise is integration, people and judgement."
+      },
+      {
+       "box": "exam",
+       "text": "The PMP exam is written from the perspective of a project manager who is proactive, collaborative and accountable. In situational questions, the right answer usually has the project manager taking ownership of a problem, investigating before acting, working with the team and stakeholders rather than around them, and escalating only when the issue is genuinely beyond their authority. Answers that blame others, wait passively, or act unilaterally without consulting the people affected are usually wrong."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "A project manager is the person accountable for the team achieving the project's objectives. The defining responsibility is integration: making the pieces fit and making the trade-offs.",
+    "Most of the job is communication; documents exist to support decisions and shared understanding.",
+    "The competencies are ways of working, power skills and business acumen, and good practice uses all three together.",
+    "Project managers usually have more responsibility than authority, so they build influence through expertise, information, fairness and trust.",
+    "Projects need both management and leadership. Servant leadership puts the leader's attention on the team's ability to deliver.",
+    "In adaptive teams the responsibilities of project management are shared among roles; they do not vanish."
+   ],
+   "reading": [
+    "Scott Berkun, *Making Things Happen: Mastering Project Management* (2008). A practical, honest account of the job as it is actually done.",
+    "Robert K. Greenleaf, *Servant Leadership* (1977). The original essays on the idea.",
+    "Tom DeMarco and Timothy Lister, *Peopleware: Productive Projects and Teams* (1987, later editions). Why the human side dominates.",
+    "Project Management Institute, *PMI Talent Triangle* materials, at pmi.org. The current description of the three competency groups."
+   ],
+   "words": 2238,
+   "minutes": 10,
+   "n": 3
+  },
+  {
+   "id": "t4",
+   "part": 1,
+   "title": "Portfolios, programmes and governance",
+   "summary": "How projects connect to strategy: portfolios that choose the work, programmes that coordinate it for benefits, and the governance and structures around them.",
+   "why": "No project exists on its own. It competes with other work for money and people, depends on decisions made above it, and contributes, or fails to contribute, to what the organisation is trying to achieve. A project manager who understands the system around the project can work with it instead of being surprised by it.",
+   "sections": [
+    {
+     "id": "t4-s1",
+     "title": "From strategy to delivery",
+     "blocks": [
+      "An organisation's strategy says where it wants to go. Its leaders cannot deliver a strategy directly; they have to turn it into specific pieces of work, choose among the many pieces they could do, fund some and decline others, and then make sure the chosen work actually produces the intended change. Three levels of management do most of this: portfolio, programme and project management. Operations, which runs the organisation day to day, both receives what the projects deliver and supplies many of the people who do the work.",
+      {
+       "fig": {
+        "title": "From strategy to delivery",
+        "caption": "The portfolio chooses the work, programmes coordinate related projects for combined benefits, and projects hand their outputs to operations.",
+        "alt": "Strategy at the top feeds a portfolio. The portfolio contains a programme made of two projects, a stand-alone project, and operations. Dashed arrows show projects handing outputs over to operations.",
+        "w": 640,
+        "h": 290,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 230,
+          "y": 10,
+          "w": 180,
+          "h": 40,
+          "t": "Strategy",
+          "tone": "muted",
+          "s": 13,
+          "b": true
+         },
+         {
+          "k": "line",
+          "p": [
+           320,
+           51,
+           320,
+           78
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 150,
+          "y": 80,
+          "w": 340,
+          "h": 44,
+          "t": "Portfolio: choose and balance the work",
+          "tone": "accent",
+          "s": 13
+         },
+         {
+          "k": "line",
+          "p": [
+           220,
+           125,
+           140,
+           158
+          ],
+          "arrow": true
+         },
+         {
+          "k": "line",
+          "p": [
+           330,
+           125,
+           330,
+           158
+          ],
+          "arrow": true
+         },
+         {
+          "k": "line",
+          "p": [
+           440,
+           125,
+           515,
+           158
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 30,
+          "y": 160,
+          "w": 220,
+          "h": 40,
+          "t": "Programme: benefits together",
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 30,
+          "y": 232,
+          "w": 104,
+          "h": 40,
+          "t": "Project",
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 146,
+          "y": 232,
+          "w": 104,
+          "h": 40,
+          "t": "Project",
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "line",
+          "p": [
+           82,
+           201,
+           82,
+           230
+          ],
+          "tone": "good"
+         },
+         {
+          "k": "line",
+          "p": [
+           198,
+           201,
+           198,
+           230
+          ],
+          "tone": "good"
+         },
+         {
+          "k": "box",
+          "x": 280,
+          "y": 160,
+          "w": 100,
+          "h": 40,
+          "t": "Project",
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 430,
+          "y": 160,
+          "w": 180,
+          "h": 40,
+          "t": "Operations",
+          "tone": "muted",
+          "s": 12
+         },
+         {
+          "k": "line",
+          "p": [
+           381,
+           180,
+           428,
+           180
+          ],
+          "arrow": true,
+          "dash": true
+         },
+         {
+          "k": "line",
+          "p": [
+           251,
+           252,
+           520,
+           252,
+           520,
+           202
+          ],
+          "arrow": true,
+          "dash": true
+         },
+         {
+          "k": "text",
+          "x": 520,
+          "y": 230,
+          "t": "outputs handed over",
+          "a": "middle",
+          "s": 11,
+          "tone": "muted"
+         }
+        ]
+       }
+      },
+      "The levels answer different questions. Portfolio management asks: are we doing the right work? Programme management asks: are these related pieces of work together producing the benefits we need? Project management asks: are we doing this piece of work right? All three are needed. An organisation can execute its projects flawlessly and still fail if it chose the wrong ones, or if the right projects never add up to the change it intended."
+     ]
+    },
+    {
+     "id": "t4-s2",
+     "title": "Portfolios: choosing the right work",
+     "blocks": [
+      "A **portfolio** is a collection of projects, programmes and sometimes operational work, managed together to achieve strategic objectives. The items in a portfolio need not be related to each other; what they share is a pool of money, people and attention, and a strategy they are meant to serve.",
+      "Portfolio management is mostly about choice. There are always more good ideas than resources to pursue them, so someone must decide which to start, which to continue, which to pause and which to stop. Typical activities include:",
+      {
+       "ul": [
+        "**Identifying and categorising** candidate work: growth initiatives, efficiency improvements, mandatory regulatory changes, maintenance of existing assets.",
+        "**Evaluating and selecting** candidates against criteria such as strategic fit, expected benefit, cost, risk and urgency.",
+        "**Balancing** the portfolio, so that it is not all high-risk innovation or all low-risk maintenance, and so that the organisation is not depending on too many uncertain bets at once.",
+        "**Allocating capacity**, because the binding constraint is often not money but the handful of people with scarce skills.",
+        "**Reviewing** the portfolio regularly and reallocating as strategy, performance and circumstances change."
+       ]
+      },
+      "The hardest part of portfolio management is stopping things. Projects acquire momentum and champions, and money already spent feels like a reason to continue. Economists call this the sunk cost fallacy: past spending cannot be recovered whatever you do next, so it should not influence the decision about whether to continue. The right question is always whether the remaining cost is worth the remaining benefit. A healthy portfolio cancels projects that have stopped being worth finishing, and treats that as good management rather than failure."
+     ]
+    },
+    {
+     "id": "t4-s3",
+     "title": "How organisations compare candidate projects",
+     "blocks": [
+      "Portfolio decisions often rest on a business case for each candidate (Chapter 9 looks at business cases in detail). Several financial measures appear again and again.",
+      {
+       "ul": [
+        "**Payback period**: how long until the money spent is recovered from the returns. Simple and intuitive, but it ignores everything that happens after payback and the time value of money.",
+        "**Net present value**: the sum of all future cash flows, each discounted back to today's money at a chosen rate, minus the investment. A positive value means the project earns more than the discount rate. It is the measure finance specialists generally trust most for comparing investments.",
+        "**Internal rate of return**: the discount rate at which the net present value would be zero. Higher is better, and it can be compared with the organisation's cost of capital.",
+        "**Benefit-cost ratio**: the present value of benefits divided by the present value of costs. Above one, benefits exceed costs."
+       ]
+      },
+      "Financial measures are only part of the picture. Many valuable projects have benefits that are hard to price: compliance with the law, safety, reputation, staff wellbeing, building a capability for the future. Many organisations therefore also use **scoring models** that rate each candidate against weighted criteria, financial and non-financial, so that different kinds of value can be compared on one scale. The weights themselves are a statement of strategy, and arguing about them is often more useful than arguing about individual projects.",
+      {
+       "box": "example",
+       "text": "Northfield Health Trust's portfolio board had more than forty candidate projects competing for one year's capital budget. The online booking project scored well on strategic fit and patient experience and had a reasonable financial case, mainly from reduced call-centre staffing. A new cancer treatment wing scored higher on patient outcomes but needed three years of funding. A mandatory upgrade of the patient records system scored low on everything except compliance, which the board treated as a gate rather than a score: it had to be done regardless. The board's decisions were shaped as much by which projects needed the same scarce clinical informatics staff as by the scores themselves."
+      }
+     ]
+    },
+    {
+     "id": "t4-s4",
+     "title": "Programmes: coordinating for benefits",
+     "blocks": [
+      "A **programme** is a group of related projects, and sometimes ongoing activities, managed in a coordinated way to obtain benefits that would not be available from managing them separately. The key word is benefits. A programme exists because the value lies in the combination.",
+      "Suppose Northfield wanted to transform outpatient care. That would involve online booking, a new clinic scheduling system, changes to how referrals arrive from family doctors, new reminders by text message, a redesign of the clinic reception process, and training for hundreds of staff. Each could be a project. But booking without scheduling is of limited use, reminders without accurate bookings irritate patients, and none of the technology matters unless staff change how they work. Managing these as a programme allows someone to sequence them sensibly, manage the dependencies between them, share resources, and keep the whole effort aimed at the benefits: fewer missed appointments, shorter waits, lower costs.",
+      "Programme management therefore differs from project management in emphasis. Projects focus on delivering outputs within constraints. Programmes focus on achieving outcomes and benefits over a longer period, often while the organisation's needs are evolving. Programme managers spend much of their time on benefits management, governance, stakeholder engagement across many groups and the interfaces between projects. They are expected to adjust the set of projects as they learn: starting new ones, reshaping some, closing others early.",
+      "Not every collection of projects is a programme. If projects merely share a sponsor or a department, but their benefits do not depend on one another, they belong in a portfolio, not a programme."
+     ]
+    },
+    {
+     "id": "t4-s5",
+     "title": "Benefits management",
+     "blocks": [
+      "Because benefits usually appear after a project hands over, they are easy to lose. Benefits management is the discipline of keeping them in view across the whole life of an investment.",
+      "It typically involves identifying the intended benefits and how they will be measured; assigning each benefit an **owner**, usually a manager in the business who will be around after the project closes; planning how and when each benefit will be realised; tracking the measures over time; and doing what is needed to sustain the benefits once they arrive. The tools vary, but the core artefact is often a benefits register or benefits realisation plan, linked to the business case.",
+      "The project manager's part in this is to deliver outputs that make the benefits achievable, to flag early when design choices or scope changes threaten them, and to plan the transition so that the business is ready to use what is delivered. The benefits owner's part is to make the change stick in operations and to report honestly on whether the benefits came."
+     ]
+    },
+    {
+     "id": "t4-s6",
+     "title": "Governance: who decides what",
+     "blocks": [
+      "**Governance** is the framework of rules, roles, decision rights and processes by which an organisation directs and controls its work. Project governance answers questions such as: Who can authorise a project? Who can approve a change to its scope or budget? When must decisions be escalated, and to whom? How is performance reported, and to whom? When is a project reviewed, and on what basis can it be stopped?",
+      "Good governance is proportionate. A small, low-risk project needs a sponsor and a simple approval for changes. A large, high-risk programme may need a steering committee, stage gates, independent assurance reviews and formal reporting to the board. Too little governance lets projects drift and hide problems; too much slows decisions, buries teams in reporting and encourages people to manage the governance instead of the work.",
+      "Several roles appear in most governance arrangements.",
+      {
+       "ul": [
+        "**The sponsor** is the senior person who champions the project, provides or secures the funding, owns the business case and makes or obtains the decisions above the project manager's authority. A sponsor who is engaged, available and willing to make hard calls is one of the strongest predictors of success.",
+        "**A steering committee or project board** brings together senior representatives of the business, the users and the suppliers to give direction and approve major decisions.",
+        "**Stage or phase gates** are decision points at the end of a phase where governance reviews progress and the business case and decides whether to continue, change course or stop.",
+        "**The project management office**, or PMO, provides support, standards and oversight."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "t4-s7",
+     "title": "The project management office",
+     "blocks": [
+      "PMOs vary so much that the name alone tells you little. They are often described by how much control they exercise.",
+      {
+       "ul": [
+        "A **supportive** PMO provides templates, training, good practice and lessons learned. Projects can take or leave its help. Its control is low.",
+        "A **controlling** PMO requires projects to follow its methods and use its templates, and checks compliance through reviews. Its control is moderate.",
+        "A **directive** PMO manages the projects directly, assigning its own project managers to them. Its control is high."
+       ]
+      },
+      "PMOs may also manage the portfolio, maintain shared resources, run assurance reviews or coach teams in adaptive practices. Some organisations now describe theirs as a value management office or an agile centre of excellence, reflecting a shift from enforcing compliance to helping the organisation choose and deliver valuable work. A PMO is most useful when the people in projects see it as making their work easier; when it is seen mainly as a source of forms, its standards tend to be followed on paper and ignored in practice."
+     ]
+    },
+    {
+     "id": "t4-s8",
+     "title": "Organisational structures",
+     "blocks": [
+      "How an organisation is structured shapes how much authority a project manager has and where the team's loyalties lie.",
+      "In a **functional** organisation, staff are grouped by specialism (engineering, finance, marketing) under functional managers. Projects are run within or across departments, often by a coordinator with little authority. Specialist expertise is strong and careers are clear, but cross-department projects are slow, and the project usually loses when it competes with departmental priorities.",
+      "In a **projectised** organisation, staff are grouped around projects, and the project manager has substantial authority over the budget and the team, who often work on the project full-time. Construction firms and consultancies often work this way. Focus is strong, but specialists can become isolated from their professional peers, and people may have no obvious home when a project ends.",
+      "A **matrix** organisation combines the two: staff belong to functional departments but are assigned to projects, and answer to both a functional manager and a project manager. In a weak matrix, the functional manager holds most of the power and the project manager is closer to a coordinator. In a strong matrix, the project manager holds more authority and may be full-time. A balanced matrix sits between. Matrices make efficient use of specialists, but they create two bosses, and with them conflicts over priorities that the project manager must negotiate.",
+      {
+       "fig": {
+        "title": "Who holds the authority",
+        "caption": "From functional to projectised organisations, the project manager's authority over people and budget grows, and so does the team's focus on the project.",
+        "alt": "Five bars of increasing height labelled Functional, Weak matrix, Balanced matrix, Strong matrix and Projectised, showing the project manager's authority rising from low to high.",
+        "w": 640,
+        "h": 230,
+        "shapes": [
+         {
+          "k": "text",
+          "x": 20,
+          "y": 18,
+          "t": "Project manager's authority",
+          "a": "start",
+          "s": 12,
+          "b": true
+         },
+         {
+          "k": "line",
+          "p": [
+           20,
+           180,
+           620,
+           180
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "box",
+          "x": 40,
+          "y": 160,
+          "w": 90,
+          "h": 20,
+          "tone": "accent"
+         },
+         {
+          "k": "box",
+          "x": 160,
+          "y": 135,
+          "w": 90,
+          "h": 45,
+          "tone": "accent"
+         },
+         {
+          "k": "box",
+          "x": 280,
+          "y": 105,
+          "w": 90,
+          "h": 75,
+          "tone": "accent"
+         },
+         {
+          "k": "box",
+          "x": 400,
+          "y": 75,
+          "w": 90,
+          "h": 105,
+          "tone": "accent"
+         },
+         {
+          "k": "box",
+          "x": 520,
+          "y": 40,
+          "w": 90,
+          "h": 140,
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 85,
+          "y": 200,
+          "t": "Functional",
+          "a": "middle",
+          "s": 11
+         },
+         {
+          "k": "text",
+          "x": 205,
+          "y": 200,
+          "t": "Weak matrix",
+          "a": "middle",
+          "s": 11
+         },
+         {
+          "k": "text",
+          "x": 325,
+          "y": 200,
+          "t": "Balanced\nmatrix",
+          "a": "middle",
+          "s": 11
+         },
+         {
+          "k": "text",
+          "x": 445,
+          "y": 200,
+          "t": "Strong matrix",
+          "a": "middle",
+          "s": 11
+         },
+         {
+          "k": "text",
+          "x": 565,
+          "y": 200,
+          "t": "Projectised",
+          "a": "middle",
+          "s": 11
+         }
+        ]
+       }
+      },
+      "Many organisations today are hybrids, and some organise around long-lived, cross-functional product teams rather than temporary projects. The question to ask in any organisation is practical: who controls the people, who controls the money, and who decides priorities when they conflict? The answers tell a project manager where they will need to build influence."
+     ]
+    },
+    {
+     "id": "t4-s9",
+     "title": "Organisational context: what the project inherits",
+     "blocks": [
+      "Every project inherits a context it did not choose. Standards traditionally divide it into two kinds of factor.",
+      "**Enterprise environmental factors** are conditions outside the project team's control that affect the project. Some are internal: the organisation's culture, structure, governance, infrastructure, available skills and tolerance for risk. Some are external: market conditions, laws and regulations, industry standards, economic conditions, and the physical environment.",
+      "**Organisational process assets** are the plans, processes, policies, procedures and knowledge bases the organisation already has and the project can use: templates, methods, past project files, lessons learned, estimating data, and approved supplier lists.",
+      "The distinction is useful mainly as a prompt. Before planning anything, a project manager should find out what the organisation already knows and already requires, and what in the environment will constrain the project. Reinventing an estimating method that the organisation has refined over twenty projects, or discovering halfway through that a procurement policy forbids the supplier you chose, are both avoidable.",
+      {
+       "box": "myth",
+       "text": "\"Governance is bureaucracy that slows projects down.\" Badly designed governance does. Good governance speeds projects up, because decisions get made by the right people at the right time, and teams do not waste effort on work that would have been stopped anyway."
+      },
+      {
+       "box": "exam",
+       "text": "Expect situational questions in which the project manager hits the limit of their authority: a change that needs a budget increase, a conflict between two functional managers over a shared expert, a sponsor who has stopped attending meetings. The right answer usually respects the governance framework: analyse the impact, then take it to the person or body with the authority to decide, rather than deciding alone or ignoring it. Questions about benefits often hinge on whether you remember that benefits are owned by the business and realised after handover."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Portfolios choose the right work for the strategy; programmes coordinate related work for combined benefits; projects deliver outputs.",
+    "Stopping projects that are no longer worth finishing is a sign of good portfolio management. Sunk cost should not drive the decision.",
+    "Financial measures (payback, net present value, internal rate of return, benefit-cost ratio) are useful but partial; scoring models make non-financial value comparable.",
+    "Benefits are owned by the business and usually appear after handover, so they need owners, measures and tracking.",
+    "Governance defines decision rights. It should be proportionate to the size and risk of the work.",
+    "Structure decides authority: functional, matrix (weak, balanced, strong) and projectised organisations give project managers very different levels of control.",
+    "Every project inherits environmental factors that constrain it and process assets it can use."
+   ],
+   "reading": [
+    "Project Management Institute, *The Standard for Portfolio Management* and *The Standard for Program Management*. The formal descriptions of the two levels above the project.",
+    "UK Office of Government Commerce, *Managing Successful Programmes*. A widely used programme management method with a strong emphasis on benefits.",
+    "Gerald Bradley, *Benefit Realisation Management* (2010). A practical guide to keeping benefits in view.",
+    "Harold Kerzner, *Project Management: A Systems Approach to Planning, Scheduling, and Controlling* (many editions). Thorough on organisational structures and project management offices."
+   ],
+   "words": 2461,
+   "minutes": 11,
+   "n": 4
+  },
+  {
+   "id": "t5",
+   "part": 1,
+   "title": "The principles behind good practice",
+   "summary": "Twelve principles that underlie every method, why each one holds, and how to use them when no rule fits.",
+   "why": "Methods tell you what to do in situations their authors foresaw. Principles tell you how to think in situations nobody foresaw, which on real projects is most of them. They are also the bridge between predictive and adaptive ways of working: the practices differ, but good practitioners in both traditions are following the same principles.",
+   "sections": [
+    {
+     "id": "t5-s1",
+     "title": "Why principles rather than processes",
+     "blocks": [
+      "For most of its history, project management was taught as processes: do this, then this, produce these documents. Processes are valuable. They capture experience, give teams a shared language and stop important things from being forgotten. But a process is a solution to a problem in a particular context, and when the context changes, following the process faithfully can produce the wrong result.",
+      "A principle is a statement of something that is generally true about how good outcomes are achieved. It does not tell you exactly what to do; it tells you what to aim for and what to watch out for. The seventh edition of the PMBOK Guide reorganised the standard around twelve such principles, grouped in no particular order and intended to apply to any project, whatever the approach. This chapter explains each of them in its own terms, with the reasoning behind it. Where useful, it also points to the tensions between them, because much of the judgement in project management lies in balancing principles that pull in different directions.",
+      {
+       "fig": {
+        "title": "Twelve principles",
+        "caption": "The principles apply whatever the approach. They are not steps: each is a lens for judging a decision, and good decisions usually satisfy several at once.",
+        "alt": "Twelve boxes in three rows of four: Stewardship, Team, Stakeholders, Value; Systems thinking, Leadership, Tailoring, Quality; Complexity, Risk, Adaptability and resilience, Change.",
+        "w": 640,
+        "h": 210,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 10,
+          "y": 10,
+          "w": 145,
+          "h": 52,
+          "t": "Stewardship",
+          "tone": "accent",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 167,
+          "y": 10,
+          "w": 145,
+          "h": 52,
+          "t": "Team",
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 324,
+          "y": 10,
+          "w": 145,
+          "h": 52,
+          "t": "Stakeholders",
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 481,
+          "y": 10,
+          "w": 145,
+          "h": 52,
+          "t": "Value",
+          "tone": "accent",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 10,
+          "y": 79,
+          "w": 145,
+          "h": 52,
+          "t": "Systems\nthinking",
+          "tone": "muted",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 167,
+          "y": 79,
+          "w": 145,
+          "h": 52,
+          "t": "Leadership",
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 324,
+          "y": 79,
+          "w": 145,
+          "h": 52,
+          "t": "Tailoring",
+          "tone": "muted",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 481,
+          "y": 79,
+          "w": 145,
+          "h": 52,
+          "t": "Quality",
+          "tone": "accent",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 10,
+          "y": 148,
+          "w": 145,
+          "h": 52,
+          "t": "Complexity",
+          "tone": "warn",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 167,
+          "y": 148,
+          "w": 145,
+          "h": 52,
+          "t": "Risk",
+          "tone": "warn",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 324,
+          "y": 148,
+          "w": 145,
+          "h": 52,
+          "t": "Adaptability\nand resilience",
+          "tone": "warn",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 481,
+          "y": 148,
+          "w": 145,
+          "h": 52,
+          "t": "Change",
+          "tone": "good",
+          "s": 12
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "t5-s2",
+     "title": "1. Be a diligent, respectful and caring steward",
+     "blocks": [
+      "Stewardship means managing something on behalf of others. A project manager is entrusted with other people's money, time, reputations and wellbeing, and with resources that belong to the organisation and sometimes to society. The principle asks you to act accordingly: with integrity, with care for the people affected, with honesty about how things stand, and with attention to obligations that go beyond the project itself, such as safety, the law, and the environment.",
+      "Stewardship has a practical side. It is spending money as if it were your own, reporting bad news early, refusing to hide problems from the people who need to know, and leaving things in good order for those who come after. It also has an outward side. Decisions about materials, suppliers or working hours affect people well beyond the project, and a steward considers them."
+     ]
+    },
+    {
+     "id": "t5-s3",
+     "title": "2. Create a collaborative project team environment",
+     "blocks": [
+      "Projects are delivered by teams, and teams deliver more when they work together well. This principle asks the project manager to build an environment where people share information, help one another, agree how they will work, and feel safe to raise problems.",
+      "The reasoning is straightforward. Project work is too complex for any one person to understand fully, so outcomes depend on knowledge being combined. When people protect their own area, hold back bad news or wait to be told what to do, that combination fails. Research on teams, including Google's well-known study of its own teams, has found that **psychological safety**, the belief that you will not be punished for speaking up, asking questions or admitting mistakes, is one of the strongest predictors of team effectiveness. Team agreements, clear roles, shared goals and a leader who responds well to bad news all help to create it."
+     ]
+    },
+    {
+     "id": "t5-s4",
+     "title": "3. Effectively engage with stakeholders",
+     "blocks": [
+      "Stakeholders are the people and groups who affect or are affected by the project. Their support, resistance, knowledge and decisions shape what is possible. The principle asks you to identify them, understand their interests and influence, and engage them actively throughout the project, not just inform them at milestones.",
+      "Engagement matters for two reasons. The first is that stakeholders hold information the project needs: what the users actually do, what the regulator will accept, what the operations team can support. The second is that people who have shaped something are far more likely to adopt it than people who have had it imposed on them. A technically excellent result that the people affected reject is not a success."
+     ]
+    },
+    {
+     "id": "t5-s5",
+     "title": "4. Focus on value",
+     "blocks": [
+      "Projects exist to deliver value, and the principle asks you to keep that in view continuously, not just in the business case. That means understanding what value the project is meant to create and for whom, checking regularly whether it is still on course to do so, and being prepared to change direction, or stop, when it is not.",
+      "Focusing on value changes everyday decisions. It favours delivering the most valuable parts first, so that some benefit arrives even if the project is cut short. It encourages measuring outcomes rather than activity. And it gives the project manager a basis for saying no to scope that adds cost without adding value, however reasonable each individual request may sound."
+     ]
+    },
+    {
+     "id": "t5-s6",
+     "title": "5. Recognise, evaluate and respond to system interactions",
+     "blocks": [
+      "A project is a system: many parts that interact with one another and with the organisation and environment around them. Changes in one part produce effects, often delayed and often surprising, in others. **Systems thinking** asks you to look at the whole, not just the parts, and to anticipate those interactions.",
+      "A classic example is adding people to a late project. It seems obvious that more people will finish the work sooner. But new people need to be trained by the existing team, the number of communication paths grows rapidly with team size, and the work may not divide neatly. Frederick Brooks observed in 1975 that adding people to a late software project makes it later, which became known as Brooks's law. The specific claim does not hold everywhere, but the point does: in a system, the intuitive fix often makes things worse, because it ignores the interactions."
+     ]
+    },
+    {
+     "id": "t5-s7",
+     "title": "6. Demonstrate leadership behaviours",
+     "blocks": [
+      "Leadership is not confined to the person with the title. The principle asks everyone on the project, and especially the project manager, to show leadership: setting direction, motivating others, taking responsibility, influencing without authority, and adapting their style to the situation and the people.",
+      "There is no single right style. A team in a crisis may need clear direction; an expert team on novel work may need a leader who asks questions and removes obstacles; a new team may need more structure than a mature one. The principle is about adapting style deliberately, with enough self-awareness to know your default and when it is not working."
+     ]
+    },
+    {
+     "id": "t5-s8",
+     "title": "7. Tailor based on context",
+     "blocks": [
+      "Every project is different, so the approach to it should be shaped to fit. Tailoring means deliberately choosing the life cycle, processes, practices, documents and level of formality that suit this project's size, complexity, risk, uncertainty, regulatory setting, team and organisation.",
+      "The reasoning cuts both ways. Too little process leaves important things undone and risks unmanaged. Too much wastes effort, slows decisions and buries the real work under ceremony. A ten-person internal improvement project does not need the governance of a national infrastructure programme, and a regulated medical device cannot be run with the informality of a weekend prototype. Tailoring is not a licence to skip what is inconvenient. It is a responsibility to choose consciously, and to be able to explain the choice. Chapter 8 looks at it in detail."
+     ]
+    },
+    {
+     "id": "t5-s9",
+     "title": "8. Build quality into processes and deliverables",
+     "blocks": [
+      "Quality means meeting requirements and being fit for the purpose the result is meant to serve. The principle asks you to build it in from the start, in how the work is done, rather than inspect it in at the end.",
+      "This idea comes from the quality movement associated with W. Edwards Deming and others, and from lean manufacturing: defects are cheapest to prevent, more expensive to find early, and most expensive to find late or, worst of all, after delivery. On projects, building quality in means clear acceptance criteria agreed before work starts, reviews and testing throughout rather than at the end, definitions of done that every piece of work must meet, and a culture where people are encouraged to stop and fix problems rather than pass them on."
+     ]
+    },
+    {
+     "id": "t5-s10",
+     "title": "9. Navigate complexity",
+     "blocks": [
+      "Complexity arises when a project has many interacting parts, many people with different views, uncertainty about cause and effect, or ambiguity about what is even being asked. In complex situations, outcomes cannot be fully predicted from the start, however carefully you plan.",
+      "The principle asks you to recognise complexity when it is present and respond to it appropriately. Useful responses include breaking the work into smaller pieces, delivering in increments so you learn sooner, running experiments to test assumptions, building in options and slack, involving diverse perspectives, and keeping plans flexible where the uncertainty is greatest. The Cynefin framework, developed by Dave Snowden, is one widely used way of thinking about this: it distinguishes clear situations, where best practice applies, from complicated ones, which need expert analysis, complex ones, which need experiments, and chaotic ones, which need immediate action to restore stability."
+     ]
+    },
+    {
+     "id": "t5-s11",
+     "title": "10. Optimise risk responses",
+     "blocks": [
+      "Risks are uncertain events or conditions that would affect the project's objectives if they occurred. Some are threats; some are opportunities. The principle asks you to identify and assess risks continually and to respond to them in proportion: neither ignoring them nor spending more on a response than the risk warrants.",
+      "Two words in this principle deserve attention. \"Continually\" means risk management is not a workshop at the start of the project but a habit throughout it. \"Optimise\" means responses should be appropriate to the significance of the risk, timely, realistic, agreed with the people who must carry them out, and owned by someone. Responding to opportunities, by making them more likely or more valuable, is as much a part of this as defending against threats. Chapter 14 covers risk in depth."
+     ]
+    },
+    {
+     "id": "t5-s12",
+     "title": "11. Embrace adaptability and resiliency",
+     "blocks": [
+      "Things will not go as planned. Adaptability is the ability to respond to changing conditions; resiliency is the ability to absorb impacts and recover quickly from setbacks. The principle asks you to build both into the project.",
+      "In practice this means short feedback loops so that you notice change quickly, plans that focus on outcomes rather than fixing every detail, teams with overlapping skills so that one absence does not stop the work, reserves of time and money for things that go wrong, and a culture that treats setbacks as information rather than as occasions for blame. It also means being open to the possibility that the plan itself was wrong."
+     ]
+    },
+    {
+     "id": "t5-s13",
+     "title": "12. Enable change to achieve the envisioned future state",
+     "blocks": [
+      "Projects change organisations, and organisations are made of people who may not want to change. The principle asks you to treat the human side of change as part of the project, not something that happens afterwards: preparing people for what is coming, helping them through the transition, and making sure the change is sustained.",
+      "The reasoning goes back to value. A new system, process or structure creates benefits only when people use it as intended. Change models such as John Kotter's eight steps, the ADKAR model, and William Bridges's work on transitions all make the same underlying point: people need to understand why the change is happening, want to take part, know how to work in the new way, and be supported until it becomes normal. Chapter 23 explores this in detail."
+     ]
+    },
+    {
+     "id": "t5-s14",
+     "title": "When principles conflict",
+     "blocks": [
+      "The principles are not a checklist to be satisfied one by one. They interact, and sometimes they pull in opposite directions.",
+      {
+       "ul": [
+        "**Adaptability and stewardship.** Responding quickly to change can mean spending money on work that is later discarded. A steward must judge when adapting is worth its cost.",
+        "**Stakeholder engagement and value.** Satisfying every stakeholder's request can dilute the result. Focusing on value sometimes means saying no to someone who matters.",
+        "**Tailoring and quality.** Lightening the process saves effort, but the step you remove may be the one that would have caught a defect.",
+        "**Collaboration and leadership.** Building consensus takes time; sometimes a leader has to decide before everyone agrees."
+       ]
+      },
+      "There is no formula for resolving these tensions. What the principles offer is a vocabulary for recognising them and discussing them openly, which is far better than resolving them by accident.",
+      {
+       "box": "example",
+       "text": "Midway through Northfield's booking project, a group of senior consultants asked for online booking to be extended to a complex type of specialist referral that involved several departments. The request was reasonable and the consultants were influential (stakeholders). But it would delay the first release by four months, during which the morning phone queues would continue (value). Amira, the project manager, did not refuse or accept outright. She set out the trade-off for the sponsor, proposed delivering the simpler appointment types first and treating the referral pathway as a second increment (adaptability), and arranged for two consultants to help design it (collaboration). The sponsor agreed, and the consultants, having been involved, became advocates for the system."
+      }
+     ]
+    },
+    {
+     "id": "t5-s15",
+     "title": "Principles in practice",
+     "blocks": [
+      "How do you actually use principles day to day? A few habits help.",
+      "When you face a decision that no procedure covers, ask which principles are in play and what each suggests. If they agree, the decision is usually clear. If they conflict, you have found the real trade-off, and you can discuss it with the people who should decide.",
+      "When a process feels pointless, ask which principle it serves. If you can find one, the process may need explaining rather than abandoning. If you cannot, it may be ceremony, and tailoring it out may be right.",
+      "When you review a project, ask how well it honoured each principle. Lessons framed this way, such as \"we engaged stakeholders late\" or \"we did not build quality into the integration work\", transfer to the next project far better than lessons about specific documents or tools.",
+      {
+       "box": "myth",
+       "text": "\"Principles are too vague to be useful; what teams need is a method.\" Teams do need methods, but every method eventually meets a situation it did not anticipate. Principles are what let a team handle that situation well, and what let it adapt the method intelligently rather than either following it blindly or abandoning it."
+      },
+      {
+       "box": "exam",
+       "text": "The PMP exam's situational questions are, in effect, tests of these principles. When two answers both sound plausible, ask which better reflects stewardship, collaboration, stakeholder engagement, a focus on value, and building quality in. The answer that involves the team, engages affected stakeholders, protects value and deals with the root cause usually wins over one that is quick, unilateral or cosmetic."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Processes solve foreseen problems; principles guide judgement when the unforeseen happens.",
+    "The twelve principles cover stewardship, collaboration, stakeholders, value, systems thinking, leadership, tailoring, quality, complexity, risk, adaptability and resilience, and enabling change.",
+    "Each principle has a reason behind it, usually learned from experience of projects that ignored it.",
+    "Principles can conflict. Naming the conflict openly is the first step to resolving it well.",
+    "Use principles to make decisions, to evaluate processes, and to draw lessons that transfer."
+   ],
+   "reading": [
+    "Project Management Institute, *The Standard for Project Management* (seventh edition and later). The formal statement of the principles.",
+    "Frederick P. Brooks, *The Mythical Man-Month* (1975, anniversary edition 1995). The classic essays on systems effects in projects, including Brooks's law.",
+    "Amy C. Edmondson, *The Fearless Organization* (2018). Psychological safety and why it matters for teams.",
+    "David J. Snowden and Mary E. Boone, \"A Leader's Framework for Decision Making\", *Harvard Business Review* (2007). An accessible introduction to the Cynefin framework.",
+    "W. Edwards Deming, *Out of the Crisis* (1982). The foundations of building quality in."
+   ],
+   "words": 2467,
+   "minutes": 11,
+   "n": 5
+  }
+ ]
+});
+/* THEORY:END */
 
 PMP.MODULES = Object.freeze([
   { id: "foundations", order: 1, prefix: "F", label: "Foundations",
@@ -39290,9 +40980,11 @@ PMP.Library = (function () {
 
   /* Tokens with the shape of an abbreviation that are not one: roman
      numerals, all-caps emphasis, product names, option letters. Each entry
-     needs a comment saying which. None occurs in the shipped text today, so
-     the list is empty; a real abbreviation belongs in §05.7.3, never here. */
-  var ABBR_IGNORE = [];
+     needs a comment saying which; a real abbreviation belongs in §05.7.3,
+     never here. */
+  var ABBR_IGNORE = [
+    "II", "III", "IV", "VI"   // roman numerals: the Theory parts (Part II, Part IV)
+  ];
 
   /* Keys whose values are identifiers or metadata rather than text anyone
      reads. Everything else that is a string, at any depth, is scanned, so a
@@ -39350,7 +41042,7 @@ PMP.Library = (function () {
       PMP.QUESTIONS.slice(0, PMP.Packs.core), PMP.CASES, PMP.SCENARIOS,
       PMP.FLASHCARDS, PMP.DECKS, PMP.LESSONS, PMP.MODULES, PMP.ECO_TASKS,
       PMP.GLOSSARY, PMP.FORMULAS, (PMP.FormulaLab && PMP.FormulaLab.calcs) || [],
-      PMP.REFERENCE
+      PMP.REFERENCE, PMP.THEORY
     ];
   }
 
@@ -48959,6 +50651,14 @@ PMP.Search = (function () {
       if (matches(l.title, body)) out.push({ kind: "Lesson", title: l.id + " " + l.title,
         snippet: snip(matches(l.title) ? (l.objectives || []).join(" ") : body), href: "#/learn?lesson=" + encodeURIComponent(l.id) });
     });
+    /* Theory (§10.37): one hit per section that matches. */
+    ((PMP.THEORY && PMP.THEORY.chapters) || []).forEach(function (c) {
+      c.sections.forEach(function (sec) {
+        var body = sec.blocks.map(function (b) { return typeof b === "string" ? b : b.text || (b.ul || []).join(" "); }).join(" ").replace(/\*\*?/g, "");
+        if (matches(c.title + " " + sec.title, body)) out.push({ kind: "Theory", title: c.title + ": " + sec.title,
+          snippet: snip(body), href: "#/theory?ch=" + encodeURIComponent(c.id) + "&sec=" + encodeURIComponent(sec.id) });
+      });
+    });
     (PMP.GLOSSARY || []).forEach(function (g) {
       if (matches(g.t, g.d)) out.push({ kind: "Glossary", title: g.t, snippet: snip(g.d), detail: g.d });
     });
@@ -51866,6 +53566,213 @@ PMP.ScrollGuard = (function () {
   }
   document.addEventListener("wheel", onWheel, { passive: false });
   return { canScroll: canScroll };
+})();
+
+/* ── 10.37  THEORY ─────────────────────────────────────────────────────────
+   The reading room: chapters on project management as a discipline, beyond
+   what the exam asks (§05.12, built from theory/*.txt). #/theory lists the
+   parts and chapters, including those not written yet; #/theory?ch=t1 reads
+   one, with its sections on the left, a progress bar, and "Mark as read".
+   Reaching the key ideas marks a chapter read. Which chapters are read, and
+   where the reader stopped, stay on this device (pmp.theory). */
+PMP.Theory = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon;
+  var KEY = "pmp.theory";
+  var ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
+  var BOX = { exam: "On the exam", myth: "Common misconception", example: "The running case" };
+
+  function mem() {
+    try { var v = JSON.parse(window.localStorage.getItem(KEY) || "null"); return v && typeof v === "object" ? v : {}; }
+    catch (e) { return {}; }
+  }
+  function keep(v) { try { window.localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { /* this visit only */ } }
+  function isRead(id) { return !!(mem().read || {})[id]; }
+  function setRead(id, on) {
+    var v = mem();
+    v.read = v.read || {};
+    if (on) v.read[id] = v.read[id] || Date.now(); else delete v.read[id];
+    keep(v);
+  }
+
+  function data() { return PMP.THEORY || { parts: [], chapters: [] }; }
+  function chapter(id) { return data().chapters.filter(function (c) { return c.id === id; })[0] || null; }
+  /* Book-wide numbering from the planned contents, so chapter 9 stays
+     chapter 9 whichever parts are written. */
+  function numberOf(c) {
+    var n = 0, out = 0;
+    data().parts.forEach(function (p) {
+      if (p.n < c.part) n += p.planned.length;
+    });
+    data().chapters.filter(function (x) { return x.part === c.part; }).forEach(function (x, i) { if (x.id === c.id) out = n + i + 1; });
+    return out;
+  }
+
+  /* Paragraph text: abbreviations spelled out on first use in the chapter,
+     then **bold** and *italic*. Text nodes only; nothing is parsed as markup. */
+  function rich(text, x) {
+    var t = x ? x(text) : text, out = [];
+    String(t).split(/(\*\*[^*]+\*\*|\*[^*]+\*)/).forEach(function (part) {
+      if (!part) return;
+      if (/^\*\*[^*]+\*\*$/.test(part)) out.push(el("b", { text: part.slice(2, -2) }));
+      else if (/^\*[^*]+\*$/.test(part)) out.push(el("i", { text: part.slice(1, -1) }));
+      else out.push(document.createTextNode(part));
+    });
+    return out;
+  }
+  function plain(text) { return String(text || "").replace(/\*\*?/g, ""); }
+
+  function block(b, x) {
+    if (typeof b === "string") return el("p", null, rich(b, x));
+    if (b.ul) return el("ul", { class: "th-ul" }, b.ul.map(function (i) { return el("li", null, rich(i, x)); }));
+    if (b.box) return el("aside", { class: "th-box th-box--" + b.box }, [el("span", { class: "eyebrow", text: BOX[b.box] || b.box }), el("p", null, rich(b.text, x))]);
+    if (b.fig) return PMP.Figure.render(b.fig);
+    return null;
+  }
+
+  function textsOf(c) {
+    var out = [c.summary, c.why];
+    c.sections.forEach(function (s) {
+      out.push(s.title);
+      s.blocks.forEach(function (b) { out.push(typeof b === "string" ? b : b.text || (b.ul || []).join(" ")); });
+    });
+    return out.concat(c.keyIdeas, c.reading);
+  }
+
+  /* ── contents ── */
+  function contents(host) {
+    var all = data().chapters, read = all.filter(function (c) { return isRead(c.id); }).length;
+    var planned = data().parts.reduce(function (n, p) { return n + p.planned.length; }, 0);
+    var last = mem().last, lastCh = last && chapter(last.ch);
+    host.appendChild(el("div", { class: "view-hd" }, [
+      el("span", { class: "eyebrow", text: "Theory" }),
+      el("h2", { text: "Project management in depth" })
+    ]));
+    host.appendChild(el("div", { class: "card th-intro" }, [
+      el("p", { text: "Optional reading for people who want to understand the discipline itself: why the practices exist, where they came from, how they fit together and how experienced project managers think. It goes well past what the exam asks, and every chapter ends with what the exam does ask." }),
+      el("p", { class: "th-count", text: all.length + " of " + planned + " chapters written · " + read + " read" }),
+      lastCh ? el("a", { class: "btn btn--primary", href: "#/theory?ch=" + lastCh.id + (last.sec ? "&sec=" + last.sec : "") },
+        [icon("book"), "Continue: " + lastCh.title]) : null
+    ]));
+    data().parts.forEach(function (p) {
+      var mine = all.filter(function (c) { return c.part === p.n; });
+      var first = data().parts.filter(function (q) { return q.n < p.n; }).reduce(function (n, q) { return n + q.planned.length; }, 0);
+      host.appendChild(el("section", { class: "card th-part", id: "th-part-" + p.n }, [
+        el("span", { class: "eyebrow", text: "Part " + ROMAN[p.n] }),
+        el("h3", { text: p.title }),
+        el("p", { class: "th-blurb", text: p.blurb }),
+        el("ol", { class: "th-list", start: String(first + 1) }, p.planned.map(function (t, i) {
+          var c = mine[i];
+          if (!c) return el("li", { class: "th-li th-li--todo" }, [el("span", { class: "th-li-t", text: t }), el("span", { class: "th-li-m", text: "Not written yet" })]);
+          return el("li", { class: "th-li" + (isRead(c.id) ? " th-li--read" : "") }, [
+            el("a", { class: "th-li-t", href: "#/theory?ch=" + c.id, text: c.title }),
+            el("span", { class: "th-li-m", text: c.minutes + " min" + (isRead(c.id) ? " · read" : "") }),
+            el("span", { class: "th-li-s", text: c.summary })
+          ]);
+        }))
+      ]));
+    });
+  }
+
+  /* ── one chapter ── */
+  function reader(host, c, sec) {
+    var x = PMP.Abbr.unit(textsOf(c), { where: "theory " + c.id }).x;
+    var idx = data().chapters.indexOf(c), prev = data().chapters[idx - 1], next = data().chapters[idx + 1];
+    var toc = el("nav", { class: "th-toc", "aria-label": "In this chapter" }, [
+      el("a", { class: "th-back", href: "#/theory", text: "All chapters" }),
+      el("span", { class: "eyebrow", text: "In this chapter" }),
+      el("ol", null, c.sections.map(function (s) {
+        return el("li", null, [el("button", { type: "button", class: "th-toc-b", dataset: { sec: s.id },
+          onclick: function () { go(s.id); } }, s.title)]);
+      }).concat([el("li", null, [el("button", { type: "button", class: "th-toc-b", dataset: { sec: c.id + "-key" },
+          onclick: function () { go(c.id + "-key"); } }, "Key ideas")])]))
+    ]);
+    var readBtn = el("button", { type: "button", class: "btn", id: "th-read" });
+    function paintRead() {
+      var on = isRead(c.id);
+      readBtn.textContent = on ? "Read ✓" : "Mark as read";
+      readBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    }
+    readBtn.addEventListener("click", function () { setRead(c.id, !isRead(c.id)); paintRead(); });
+    paintRead();
+
+    var art = el("article", { class: "th-art", id: "th-art", dataset: { ch: c.id } }, [
+      el("div", { class: "th-bar", "aria-hidden": "true" }, [el("i", { id: "th-bar" })]),
+      el("span", { class: "eyebrow", text: "Part " + ROMAN[c.part] + " · Chapter " + numberOf(c) + " · " + c.minutes + " min read" }),
+      el("h2", { class: "th-title", text: c.title }),
+      el("p", { class: "th-sum" }, rich(c.summary, x)),
+      el("aside", { class: "th-why" }, [el("span", { class: "eyebrow", text: "Why it matters" }), el("p", null, rich(c.why, x))])
+    ]);
+    c.sections.forEach(function (s) {
+      art.appendChild(el("section", { class: "th-sec", id: s.id, "aria-labelledby": s.id + "-h" },
+        [el("h3", { id: s.id + "-h", text: s.title })].concat(s.blocks.map(function (b) { return block(b, x); }))));
+    });
+    art.appendChild(el("section", { class: "th-sec th-key", id: c.id + "-key" }, [
+      el("h3", { text: "Key ideas" }),
+      el("ul", { class: "th-ul" }, c.keyIdeas.map(function (k) { return el("li", null, rich(k, x)); }))
+    ]));
+    if (c.reading.length) art.appendChild(el("section", { class: "th-sec th-reading" }, [
+      el("h3", { text: "Further reading" }),
+      el("ul", { class: "th-ul" }, c.reading.map(function (r) { return el("li", null, rich(r, x)); }))
+    ]));
+    art.appendChild(el("div", { class: "th-foot" }, [
+      readBtn,
+      el("span", { class: "spacer" }),
+      prev ? el("a", { class: "btn btn--ghost", href: "#/theory?ch=" + prev.id, text: "← " + prev.title }) : null,
+      next ? el("a", { class: "btn btn--primary", href: "#/theory?ch=" + next.id, text: next.title + " →" }) : null
+    ]));
+    host.appendChild(el("div", { class: "th" }, [toc, art]));
+
+    /* Reaching the key ideas counts as reading the chapter. */
+    if (window.IntersectionObserver) {
+      var io = new IntersectionObserver(function (es) {
+        if (es.some(function (e) { return e.isIntersecting; }) && !isRead(c.id)) { setRead(c.id, true); paintRead(); io.disconnect(); }
+      });
+      io.observe(document.getElementById(c.id + "-key"));
+    }
+    var v = mem(); v.last = { ch: c.id, sec: sec || null }; keep(v);
+    if (sec) setTimeout(function () { go(sec, true); }, 0);
+    onScroll();
+  }
+
+  function go(id, instant) {
+    var n = document.getElementById(id);
+    if (n) n.scrollIntoView({ behavior: instant ? "auto" : "smooth", block: "start" });
+  }
+
+  /* The progress bar, the current section in the contents, and the place
+     to come back to. */
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    (window.requestAnimationFrame || setTimeout)(function () {
+      ticking = false;
+      var art = document.getElementById("th-art");
+      if (!art) return;
+      var r = art.getBoundingClientRect(), span = Math.max(1, r.height - window.innerHeight);
+      var bar = document.getElementById("th-bar"), top = document.querySelector(".topbar");
+      if (bar && top) bar.parentNode.style.top = top.offsetHeight + "px";
+      if (bar) bar.style.width = Math.round(Math.max(0, Math.min(1, -r.top / span)) * 100) + "%";
+      var cur = null;
+      Array.prototype.forEach.call(art.querySelectorAll(".th-sec[id]"), function (s) {
+        if (s.getBoundingClientRect().top < window.innerHeight * 0.3) cur = s.id;
+      });
+      Array.prototype.forEach.call(document.querySelectorAll(".th-toc-b"), function (b) {
+        b.setAttribute("aria-current", b.dataset.sec === cur ? "true" : "false");
+      });
+      var v = mem();
+      if (v.last && v.last.ch === art.dataset.ch && v.last.sec !== cur) { v.last.sec = cur; keep(v); }
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  function view(host, params) {
+    var c = params && params.ch ? chapter(params.ch) : null;
+    if (c) reader(host, c, params.sec || null); else contents(host);
+  }
+  PMP.Router.register("theory", { title: "Theory", render: view });
+
+  return { chapter: chapter, numberOf: numberOf, isRead: isRead, plain: plain };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════
