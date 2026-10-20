@@ -1,0 +1,108 @@
+id: t14
+part: 3
+title: Risk and uncertainty
+summary: The difference between risk and uncertainty, how to find and assess risks, how to respond to threats and opportunities, and why reserves exist.
+why: Every project is a bet on an uncertain future. Risk management is how a project manager makes that bet with open eyes: finding what might go wrong or right, judging what matters, and acting early, when action is cheapest. Done well, it turns many potential crises into minor adjustments. Done as paperwork, it produces a register that nobody reads until the risk has already happened.
+
+## What a risk is
+A **risk** is an uncertain event or condition that, if it occurs, has a positive or negative effect on one or more project objectives. Three features of this definition matter. A risk is **uncertain**: it may or may not happen. It has an **effect on objectives**: it matters to scope, time, cost, quality or benefits. And it can be **positive or negative**: threats are risks with negative effects, opportunities are risks with positive ones.
+
+A risk is different from an **issue**, which is something that has already happened and must now be dealt with. Risks are managed with a view to the future; issues are managed in the present. A risk that occurs becomes an issue. A good risk process means fewer issues arrive as surprises.
+
+It is also useful to describe risks precisely. A common format separates cause, risk and effect: "Because the records vendor has a fixed release schedule (cause), the interface we need may not be ready by March (risk), which would delay the pilot by up to two months (effect)." This structure helps distinguish the underlying cause, which may be a fact, from the uncertain event, and makes it clearer what a response should target.
+
+## Risk is not the same as uncertainty
+Most projects treat every unknown as a risk and put it in the register. That habit hides an important distinction. A risk is an uncertain event you can name, whose chance and effect you can at least roughly judge: the supplier may deliver late; the regulator may ask for another test. Uncertainty is wider. It covers the things you cannot list in advance because you do not yet know enough to describe them, such as how users will really behave with a product nobody has built before.
+
+The difference matters because the tools differ. Named risks respond well to analysis: you can estimate them, assign an owner, plan a response and set aside a reserve sized to them. Deep uncertainty does not. No amount of analysis at the start will reveal how users react, because the information does not exist yet. The response there is to learn quickly and cheaply: build something small, put it in front of real people, and let the result shape the next step. This is why adaptive approaches suit work with high uncertainty. They are not a way of avoiding planning; they are a way of planning when the most important facts can only be discovered by doing.
+
+Three related ideas complete the picture. **Ambiguity** is when people read the same situation differently; it is resolved by conversation, shared definitions and prototypes, not by more data. **Complexity** is when many parts interact in ways that make outcomes hard to predict; it calls for systems thinking, small experiments and frequent feedback. **Volatility** is rapid, unpredictable change; it calls for options, reserves and the ability to respond quickly. Some writers group these with uncertainty under an acronym used in military and business strategy. Whatever the label, recognising which kind of unknown you face helps you choose the right response.
+
+## Risk attitude, appetite and thresholds
+People and organisations differ in how much risk they are willing to take. **Risk appetite** is the degree of uncertainty an organisation is willing to accept in pursuit of its objectives. **Risk thresholds** turn that appetite into measurable limits: any risk that could delay the project by more than a month, or cost more than fifty thousand, must be reported to the steering committee. **Risk attitude** describes how individuals respond: some are risk-averse, some risk-seeking, most somewhere in between, and attitudes shift with circumstances.
+
+Knowing the sponsor's appetite matters because the same risk might be acceptable to one organisation and intolerable to another. A start-up racing a competitor may accept risks that a hospital handling patient safety could not.
+
+## Identifying risks
+Risk identification aims to find as many relevant risks as possible, early and continually. Useful techniques include:
+
+- **Brainstorming** with the team and stakeholders, often prompted by categories such as technical, external, organisational and project management risks. A **risk breakdown structure** organises these categories hierarchically.
+- **Reviewing assumptions and constraints**, because every assumption is a potential risk if it proves false.
+- **Checklists** and lessons learned from previous projects.
+- **Interviews** with experts and experienced people.
+- **Analysing strengths, weaknesses, opportunities and threats**, a SWOT analysis, which helps surface opportunities as well as threats.
+- **Root cause analysis**, to find the underlying causes that generate several risks.
+- **The pre-mortem**, a technique developed by Gary Klein: the team imagines that the project has failed spectacularly and writes down why. Imagining the failure as a fact rather than a possibility makes people more willing to voice concerns.
+
+Identification is not a one-off workshop. New risks appear throughout the project, and some disappear. Reviewing risks regularly, at team meetings and phase gates, keeps the picture current.
+
+## Assessing risks
+Not all risks deserve the same attention. Assessment ranks them so effort goes where it matters.
+
+**Qualitative analysis** assesses each risk's **probability** and **impact** on a simple scale, such as very low to very high, and combines them, often in a **probability and impact matrix**. Risks in the high-probability, high-impact corner get attention first. Other factors refine the ranking: **urgency** (how soon a response is needed), **proximity** (how soon the risk could occur), **detectability** (how easy it is to see coming) and **connectivity** (how many other risks it is linked to).
+
+[figure: t14-matrix]
+
+**Quantitative analysis** puts numbers on the overall effect of risks on project objectives. It is more work and is usually reserved for large or high-risk projects, or for the most significant risks. Common techniques include:
+
+- **Expected monetary value** (EMV): probability multiplied by impact. A thirty per cent chance of a 50,000 cost overrun has an EMV of −15,000. Summing EMVs gives a rough guide to the size of contingency needed.
+- **Decision trees**, which compare options with uncertain outcomes by rolling back the expected values of each branch.
+- **Monte Carlo simulation**, which runs the schedule or cost model thousands of times with durations and costs drawn from their ranges, producing a probability distribution of outcomes. It answers questions like "what is the chance of finishing by June?" and accounts naturally for merge bias (Chapter 11).
+- **Sensitivity analysis**, often shown as a tornado diagram, which shows which uncertainties have the largest effect on the outcome.
+
+Quantitative results are only as good as the inputs, and they can lend false precision to guesswork. Their main value is often in showing which few uncertainties dominate, so that effort can focus there.
+
+## Responding to risks
+For each significant risk, the project chooses a response strategy and gives the risk an **owner**, a named person responsible for monitoring it and carrying out the response.
+
+For **threats**, the usual strategies are:
+
+- **Avoid**: change the plan to eliminate the threat, for example by removing the risky feature or choosing proven technology.
+- **Transfer**: shift the impact and ownership to a third party, for example through insurance, a warranty or a fixed-price contract. Transfer does not remove the risk; it moves who bears it, usually at a price.
+- **Mitigate**: reduce the probability or impact, for example by prototyping, extra testing, or a second supplier.
+- **Accept**: acknowledge the risk and take no action now, either **passively** or **actively**, by setting aside a contingency reserve or preparing a plan to use if it occurs.
+- **Escalate**: when the threat is outside the project's scope or the project manager's authority, pass it to the person or body who owns it, such as the programme or the sponsor.
+
+For **opportunities**, the mirror strategies are:
+
+- **Exploit**: act to make sure the opportunity happens.
+- **Share**: allocate it to a party better able to capture it, for example through a joint venture or partnership.
+- **Enhance**: increase its probability or impact.
+- **Accept**: be ready to take advantage if it occurs, without active effort.
+- **Escalate**: pass it to the level that can use it.
+
+Some risks also get a **contingency plan**, actions to take if the risk occurs, with a **trigger** that signals it is happening, and a **fallback plan** if the contingency plan fails. Responses can create **secondary risks**, new risks caused by the response itself, and leave **residual risks**, what remains after the response. Both should be recorded.
+
+> example: One of Northfield's highest-rated risks was the vendor interface arriving late. Amira used several responses at once. She mitigated it by asking the vendor for an early test version and paying for a dedicated integration engineer. She prepared a contingency plan: if the interface was not ready by a trigger date in February, the pilot would start with a manual export of bookings, slower but workable. And she set aside a contingency reserve sized to two months of the integration engineer's time. When the interface did arrive late, the contingency plan was activated, the pilot started on time, and the board barely noticed.
+
+## Reserves
+Because not all risks can be prevented, projects hold reserves. **Contingency reserves** are set aside for identified risks that are accepted or may occur despite responses: the known unknowns. They are part of the cost baseline (Chapter 12) and the schedule, and the project manager usually controls them. **Management reserves** cover unidentified risks, the unknown unknowns, and are held outside the baseline, under management control.
+
+Reserves are not padding to be spent. They should be sized to the risks, tracked as risks are retired, and released when no longer needed. A project that has passed its riskiest stage with most of its contingency unspent may be able to return some of it.
+
+## Monitoring risks
+Risks change. Monitoring means reviewing the register regularly, tracking triggers, checking whether responses are working, identifying new risks, and retiring ones that have passed. Risk audits and reviews check whether the process itself is working. A risk register that has not changed in months is a warning sign, not a sign of stability.
+
+## Risk in adaptive projects
+Adaptive approaches manage much risk through their structure. Short iterations limit how much can go wrong before feedback arrives. Delivering working increments retires technical and market risk early. Prioritising the backlog to tackle risky items early, sometimes called a risk-adjusted backlog, deliberately reduces uncertainty first. **Spikes**, short timeboxed investigations, answer specific technical questions before committing to an approach. Daily stand-ups surface impediments quickly, and retrospectives address process risks.
+
+None of this removes the need to think about risks explicitly, especially those outside the team's work, such as supplier, regulatory, organisational and funding risks, which iterations do not address by themselves.
+
+> myth: "A good enough risk register removes surprises." It removes some. Reserves exist precisely because the register will always be incomplete. The aim is not to foresee everything but to be ready for what you can foresee and resilient to what you cannot.
+
+> exam: Expect questions on the response strategies for threats (avoid, transfer, mitigate, accept, escalate) and opportunities (exploit, share, enhance, accept, escalate), EMV and decision trees, contingency versus management reserve, risk owners, triggers, secondary and residual risks, and the difference between a risk and an issue. Scenario questions often hinge on doing the next right step: if a risk has occurred, use the planned response; if a new risk appears, assess it and add it to the register; if it is outside your authority, escalate.
+
+## Key ideas
+- A risk is an uncertain event that would affect objectives; threats and opportunities are both risks. An issue is a risk that has happened.
+- Named risks call for analysis and planned responses; deep uncertainty calls for fast, cheap learning.
+- Appetite and thresholds define how much risk the organisation will accept.
+- Identify risks continually, assess them by probability, impact and urgency, and quantify the few that dominate.
+- Every significant risk needs an owner and a response strategy; responses can create secondary risks and leave residual ones.
+- Contingency reserves cover known unknowns within the baseline; management reserves cover unknown unknowns outside it.
+
+## Further reading
+- David Hillson, *Effective Opportunity Management for Projects* (2003). The case for managing positive risks.
+- Tom DeMarco and Timothy Lister, *Waltzing with Bears: Managing Risk on Software Projects* (2003).
+- Nassim Nicholas Taleb, *The Black Swan* (2007). On the limits of predicting rare, high-impact events.
+- Gary Klein, "Performing a Project Premortem", *Harvard Business Review* (2007).
+- Project Management Institute, *The Standard for Risk Management in Portfolios, Programs, and Projects* (2019).

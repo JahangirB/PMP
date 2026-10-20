@@ -1,0 +1,103 @@
+id: t10
+part: 3
+title: Scope, requirements and the work breakdown structure
+summary: How to find out what is really needed, define the boundaries of the work, break it into manageable pieces, and keep it under control.
+why: Scope answers the most basic question about a project: what are we actually delivering? Get it wrong and everything built on it, the schedule, the budget, the risk plan, rests on a mistake. Requirements that were never understood are among the most frequent causes of project failure, and scope that drifts unnoticed is among the most frequent causes of overrun.
+
+## Product scope and project scope
+Two kinds of scope are worth distinguishing. **Product scope** is the set of features and functions that characterise the product, service or result: the booking system lets patients book, move and cancel appointments; it sends reminders; it works on phones. **Project scope** is the work that must be done to deliver that product: designing, building, testing, training, data migration, rollout, documentation.
+
+Product scope is measured against requirements: does the product do what was needed? Project scope is measured against the plan: did we do the work we agreed to do? Both matter. A project can complete all its planned work and still deliver a product that misses a requirement, or deliver the right product while leaving out work, such as training, that the result depends on.
+
+## What requirements are
+A **requirement** is a condition or capability that must be present in a product, service or result to satisfy a need. Requirements come in several kinds, and it helps to distinguish them because each is discovered and checked differently.
+
+- **Business requirements** describe the high-level needs of the organisation: reduce phone waiting times, increase online bookings.
+- **Stakeholder requirements** describe what particular groups need: clinic receptionists need to see online bookings in their existing screens.
+- **Solution requirements** describe the product itself. **Functional requirements** say what it does: patients can cancel an appointment up to twenty-four hours before. **Non-functional requirements** describe qualities: it responds within two seconds, it is available ninety-nine point nine per cent of the time, it meets accessibility standards, it protects personal data.
+- **Transition requirements** describe what is needed to move from the current state to the new one: data migration, training, a period of running old and new systems side by side.
+- **Project requirements** describe conditions on the project itself, such as milestones or reporting obligations.
+
+Non-functional requirements are the ones most often forgotten, and the ones most often responsible for systems that work in a demonstration and fail in real use.
+
+## Eliciting requirements
+Requirements are rarely written down anywhere, waiting to be collected. They have to be **elicited**: drawn out of people who often cannot fully articulate them, may disagree with each other, and may not know what is possible. Several techniques help, and good analysts combine them.
+
+- **Interviews** with individuals, which allow depth and candour.
+- **Workshops** that bring different groups together, which surface conflicts early and build shared understanding.
+- **Observation**, watching how people actually work, which often reveals needs nobody mentions because they are too familiar to notice.
+- **Prototypes** and mock-ups, which let people react to something concrete. People are often better at saying what is wrong with a prototype than at describing what they want.
+- **Document analysis** of existing procedures, systems and regulations.
+- **Questionnaires and surveys**, useful for reaching many people quickly but poor at depth.
+- **Benchmarking** against other organisations or products.
+
+Whatever the technique, the analyst's job is to understand the need behind each request. "The system must print every booking" may hide the real need, which is that receptionists need a list of the day's patients when the network is down. Understanding the need allows better solutions and avoids building features that answer the letter of a request rather than its purpose.
+
+## Prioritising
+There are always more requirements than time and money allow, so they must be prioritised. Several techniques are common. Requirements can be sorted into those the product **must** have, those it **should** have, those it **could** have if there is room, and those it **won't** have this time, an approach widely known by an acronym built from those words. They can be ranked by value against cost or effort. They can be assessed with the **Kano model**, which distinguishes basic expectations (whose absence causes dissatisfaction but whose presence goes unnoticed), performance features (where more is better), and delighters (unexpected features that create enthusiasm). Or stakeholders can be asked to allocate a fixed budget of points across the requirements.
+
+The method matters less than the discipline. Prioritising means accepting that some things will not be done. A list where everything is a must-have has not been prioritised at all.
+
+## Traceability
+A **requirements traceability matrix** links each requirement to its source (who asked for it and why), to the business objective it supports, and forward to the design, the work, and the tests that verify it. Traceability answers useful questions: is every requirement being built and tested? Is every piece of work traceable to a requirement, or are we building things nobody asked for? If this requirement changes, what else is affected?
+
+Formal traceability is essential in regulated industries, such as medical devices, aviation and finance, where an auditor may ask for proof that every safety requirement was tested. In lighter contexts, a simple link between backlog items and their acceptance tests serves the same purpose.
+
+## The scope statement
+In a predictive approach, the agreed scope is recorded in a **project scope statement**. It typically includes a description of the product scope, the main deliverables, the **acceptance criteria** for each, and, importantly, **exclusions**: things that are explicitly not part of the project. Exclusions are often the most useful part, because they settle arguments before they start. If the scope statement says specialist referrals are excluded from the first release, nobody can later claim they were promised.
+
+## The work breakdown structure
+The **work breakdown structure**, or WBS, is a hierarchical decomposition of the total scope of work into smaller, more manageable pieces. At the top is the whole project. Each level below breaks the level above into its parts, until the lowest level consists of **work packages**: pieces of work small enough to be estimated, scheduled, assigned and monitored with confidence.
+
+[figure: t10-wbs]
+
+Several rules make a WBS useful.
+
+- **The 100 per cent rule.** The WBS includes all the work of the project, including project management itself, and nothing that is not part of the project. The children of each element add up to exactly 100 per cent of the parent. Work not in the WBS is not in the project.
+- **Deliverable orientation.** A WBS is usually organised around deliverables, the things the project produces, rather than around activities. Activities come later, when each work package is planned in detail.
+- **Mutual exclusivity.** Each piece of work appears in exactly one place, so that it is neither counted twice nor missed.
+- **Appropriate depth.** Decompose until work packages are small enough to manage, often a size that one person or team can complete in a few weeks, but no further. Over-decomposition creates administrative burden without improving control.
+
+The WBS is accompanied by a **WBS dictionary**, which describes each element: its scope, deliverables, responsible person or team, milestones, acceptance criteria and estimates. Together, the scope statement, the WBS and the WBS dictionary form the **scope baseline**: the approved version of the scope against which performance is measured and changes are controlled.
+
+Creating the WBS is best done with the team. People who will do the work know what it involves and spot missing pieces; involving them also builds commitment to the plan. The process of decomposition is often where a team first realises how much work a project really contains.
+
+> myth: "A work breakdown structure is a list of tasks." It is a breakdown of the deliverables, which is a different thing. Tasks and activities are defined later, for each work package. Organising by deliverables keeps the focus on what is being produced and makes the 100 per cent rule checkable.
+
+## Scope in adaptive projects
+Adaptive projects handle scope differently. Instead of defining the full scope at the start, they keep a **product backlog**: an ordered list of everything that might be needed, owned by the product owner. Items near the top are well understood and small enough to deliver in a single iteration; items further down are larger and vaguer, to be refined later.
+
+Backlog items are often written as **user stories**, short descriptions of a need from the user's perspective, each with **acceptance criteria** that define when it is done. Teams spend part of each iteration on **backlog refinement**, clarifying, splitting and estimating upcoming items. Some agree a **definition of ready**, the conditions an item must meet before it is taken into an iteration, to avoid starting work that is not understood.
+
+Large items are often called epics, broken down into features and stories. **Story mapping**, a technique popularised by Jeff Patton, arranges stories along the user's journey and in rows by priority, so that the team can see which thin slice of the whole journey would be the most valuable first release.
+
+Scope in adaptive projects is fixed at the level of the goal and flexible at the level of detail. The team commits to delivering the most valuable product it can within the time and budget, and the product owner continually decides what that means as learning accumulates. This is not the absence of scope management; it is scope management done continuously rather than once.
+
+## Controlling scope
+Scope changes during almost every project. Some changes are necessary and valuable: the need has evolved, or something important was missed. The danger is uncontrolled change.
+
+**Scope creep** is the gradual, uncontrolled expansion of scope, usually through many small additions, each of which seems reasonable, without corresponding adjustments to time, cost or resources. It is one of the most common causes of overrun. **Gold plating** is related but different: the team adds features or quality beyond what was required, often with good intentions, using time and money that were not agreed for it.
+
+The remedy for both is not to forbid change but to manage it: every change to the agreed scope goes through a defined change control process (Chapter 16), its impact on time, cost, quality and risk is assessed, and someone with the authority decides. In adaptive projects, the equivalent is that new requests go into the backlog and are prioritised by the product owner against everything else, which makes the trade-off visible: adding something means something else moves down.
+
+## Validating and controlling quality of scope
+Two activities are often confused. **Validating scope** is the formal acceptance of completed deliverables by the customer or sponsor: confirming that they meet the acceptance criteria and accepting them. **Controlling quality** is the internal checking that deliverables are correct, which normally happens first. Quality control asks "did we build it right?"; scope validation asks "is this what you wanted, and do you accept it?". In adaptive approaches, the sprint review serves much the same purpose as scope validation: stakeholders see the working increment and confirm it meets their needs.
+
+> example: In the first requirements workshop for Northfield's booking system, the clinic managers listed forty features they wanted. Amira and Hassan, the product owner, asked them to imagine the system had to go live in three months and could only do ten things. The resulting discussion revealed that two features nobody had mentioned, booking on behalf of a relative and seeing the appointment's location on a map, mattered more to patients than half of the original forty. The backlog was reordered accordingly.
+
+> exam: Expect questions on the work breakdown structure (deliverable-oriented, 100 per cent rule, work packages at the lowest level, the dictionary), the scope baseline, and the difference between validating scope and controlling quality. Scope creep and gold plating appear in scenarios; the right answer usually routes the change through change control, or into the backlog for the product owner to prioritise, rather than simply accepting or refusing it.
+
+## Key ideas
+- Product scope is what the product does; project scope is the work to deliver it.
+- Requirements are business, stakeholder, solution (functional and non-functional), transition and project requirements. Non-functional ones are most often forgotten.
+- Elicitation combines techniques and looks for the need behind each request.
+- The work breakdown structure decomposes the deliverables, includes all the work and only the work, and ends in manageable work packages.
+- The scope baseline is the scope statement, the work breakdown structure and its dictionary.
+- Adaptive projects manage scope continuously through an ordered backlog owned by the product owner.
+- Scope creep and gold plating are controlled by making every change pass through an explicit decision.
+
+## Further reading
+- Karl Wiegers and Joy Beatty, *Software Requirements* (third edition, 2013). A thorough guide to elicitation and specification.
+- Jeff Patton, *User Story Mapping* (2014). How to see the whole product while delivering it in slices.
+- Gregory T. Haugan, *Effective Work Breakdown Structures* (2002). The work breakdown structure in depth.
+- Mike Cohn, *User Stories Applied* (2004). Writing and using stories well.

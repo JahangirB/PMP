@@ -1,0 +1,106 @@
+id: t11
+part: 3
+title: Time: networks, critical path, estimating
+summary: How schedules are built and analysed: activities and dependencies, the critical path, float, estimating under uncertainty, compressing time, and planning releases in adaptive work.
+why: Time is the constraint stakeholders notice first and forgive least. A schedule is more than a list of dates: it is a model of how the work fits together, and a good one tells you which delays matter, which do not, and where effort would actually shorten the project. Understanding the logic behind schedules lets you challenge an impossible deadline with evidence rather than hope.
+
+## From scope to activities
+A schedule starts from the scope. Each work package in the work breakdown structure (Chapter 10) is broken into **activities**, the actions needed to produce it. "Booking screens" becomes design the screens, build them, test them, fix defects, review accessibility. Activities are the units the schedule sequences, estimates and tracks.
+
+Alongside activities, schedules use **milestones**: significant points or events with no duration, such as "design approved" or "first clinic live". Milestones are useful for governance and communication because they are easy to understand and either have or have not been reached.
+
+## Dependencies
+Activities depend on one another. You cannot test screens that have not been built. Representing these dependencies is what turns a list of activities into a schedule model.
+
+The usual technique is the **precedence diagramming method**, which draws activities as boxes (nodes) joined by arrows showing dependencies. Four kinds of logical relationship are possible.
+
+- **Finish-to-start**: the successor cannot start until the predecessor finishes. By far the most common: you build, then you test.
+- **Start-to-start**: the successor cannot start until the predecessor starts. Writing the training material can start once the screen design has started.
+- **Finish-to-finish**: the successor cannot finish until the predecessor finishes. Documentation cannot be finished until the system is finished.
+- **Start-to-finish**: the successor cannot finish until the predecessor starts. Rare; a night-shift guard cannot leave until the day-shift guard arrives.
+
+Relationships can carry a **lead**, which lets the successor start early (start testing two days before the build is finished), or a **lag**, a required wait (wait three days after pouring concrete before loading it).
+
+Dependencies also differ in why they exist. **Mandatory** dependencies are inherent in the work: you cannot test what does not exist. **Discretionary** dependencies reflect a preferred practice that could be changed: the team prefers to finish design before building, but could overlap them. **External** dependencies involve something outside the project: the vendor's release. **Internal** dependencies are within the project's control. The distinction matters when you need to shorten the schedule, because only discretionary dependencies can be changed by choice.
+
+## The critical path
+Once activities, durations and dependencies are known, the schedule can be analysed. The central idea is the **critical path**: the longest sequence of dependent activities through the network, which determines the shortest possible duration of the project. Any delay to an activity on the critical path delays the whole project, unless something else changes.
+
+The calculation uses two passes through the network. The **forward pass** works from the start, computing each activity's **early start** and **early finish**: the earliest it can begin and end given its predecessors. The **backward pass** works from the end, computing each activity's **late start** and **late finish**: the latest it can begin and end without delaying the project.
+
+The difference between an activity's late and early dates is its **total float**, also called slack: how much it can slip without delaying the project end. Activities on the critical path have zero total float in the usual case. **Free float** is how much an activity can slip without delaying the early start of any successor.
+
+[figure: t11-network]
+
+Consider a simple example. Activity A takes three days. When A finishes, two activities can start in parallel: B takes four days, and C takes six. Activity D, which takes two days, can start only when both B and C have finished. There are two paths: A–B–D takes nine days, and A–C–D takes eleven. The critical path is A–C–D, and the project takes eleven days. Activity B has two days of float: it can start up to two days late, or take up to six days, without delaying D. Speeding up B does nothing for the end date; speeding up C does, until B's path becomes critical too.
+
+This simple insight is the main practical value of critical path analysis. It tells you where to focus. Effort spent accelerating work with plenty of float is wasted; effort spent protecting and accelerating the critical path pays off. It also warns you about **near-critical paths**, those with only a little float, which can become critical with a small delay.
+
+> myth: "The critical path is the list of the most important activities." It is the longest chain of dependent activities, whatever their importance. A trivial approval step can sit on the critical path, and a vital piece of design can have weeks of float. Critical means critical to the end date, nothing more.
+
+## Estimating durations
+Every schedule depends on estimates, and estimates are uncertain. Several techniques exist, each suited to a different stage and level of knowledge.
+
+- **Analogous estimating** uses the actual duration of a similar past activity or project, adjusted for differences. It is quick and useful early on, but only as good as the analogy.
+- **Parametric estimating** uses a statistical relationship between a variable and duration: if laying a kilometre of cable takes four days, ten kilometres take about forty. It is accurate when the relationship is well established and the work is scalable.
+- **Bottom-up estimating** estimates each small piece of work and adds them up. It is detailed and usually more accurate, but slower, and it needs a well-decomposed scope.
+- **Expert judgement** draws on the experience of people who have done similar work, often combined with the others.
+
+Because single-number estimates hide uncertainty, many planners use **three-point estimating**: an optimistic estimate (O), a most likely estimate (M) and a pessimistic estimate (P). The PERT technique (Chapter 2) combines them with a weighted average that leans towards the most likely value: the expected duration is (O + 4M + P) ÷ 6. A rough measure of the spread is (P − O) ÷ 6, which behaves like a standard deviation. For an activity with O = 4, M = 6 and P = 14 days, the expected duration is (4 + 24 + 14) ÷ 6 = 7 days, and the spread about 1.7 days. A simpler triangular average, (O + M + P) ÷ 3, gives 8 days, placing more weight on the tails.
+
+The real benefit of three-point estimates is less the arithmetic than the conversation. Asking someone for their pessimistic estimate, and why, surfaces risks that a single number conceals.
+
+## Why schedules slip
+Schedules slip for reasons that are worth understanding, because they suggest remedies.
+
+- **Optimism.** Estimates assume nothing will go wrong.
+- **Merge bias.** Where several paths join, the later of them determines the start of the next activity. Even if each path has an even chance of being on time, the chance that all of them are on time is much lower. Simple critical path calculations ignore this, so they are systematically optimistic for networks with many parallel paths.
+- **Parkinson's law.** Work expands to fill the time available, so early finishes are rarely passed on, while late finishes always are.
+- **Student syndrome.** People start work as late as possible, using up the safety margin before the work even begins.
+- **Multitasking.** People spread across several activities make every one of them take longer.
+- **Resource conflicts.** The plan assumes people are available when they are actually committed elsewhere.
+
+Eliyahu Goldratt's **critical chain** method responds to several of these. It estimates activities aggressively, without hidden padding, and gathers the safety margin into explicit **buffers**: a project buffer at the end of the critical chain and feeding buffers where other paths join it. It also takes resource availability into account when identifying the critical chain. Progress is then managed by watching how fast the buffers are being consumed.
+
+## Resources and the schedule
+A schedule based only on logic assumes unlimited resources. In reality, the same people are often needed for several activities at once. **Resource levelling** adjusts start and finish dates to resolve these conflicts, which often lengthens the schedule and can change the critical path. **Resource smoothing** adjusts activities within their float so that resource demand is more even, without changing the end date.
+
+## Compressing the schedule
+When the schedule is too long, two standard techniques can shorten it without reducing scope.
+
+**Crashing** adds resources to critical path activities to shorten them, for example by adding people, paying overtime or bringing in expedited delivery. It costs money, and not all activities can be crashed: adding people to some work slows it down (Chapter 5). The sensible approach is to crash the critical activities that give the most time for the least extra cost.
+
+**Fast tracking** performs activities in parallel that were planned in sequence, usually by changing discretionary dependencies: starting construction before design is complete, or testing while building. It costs little in money but adds risk, because later work may need to be redone if earlier work changes.
+
+Both techniques work only on the critical path. Compressing an activity with float shortens nothing.
+
+## The schedule baseline
+Once agreed, the schedule becomes the **schedule baseline**: the approved version against which progress is measured. Changes to the baseline go through change control. Day-to-day, the actual schedule moves as work progresses, and the comparison between actual and baseline shows how the project is performing.
+
+## Time in adaptive projects
+Adaptive projects plan time differently. The duration of each iteration is fixed. The team measures its **velocity**, the amount of work it completes per iteration, usually in story points. **Release planning** then divides the estimated size of the backlog by the velocity to forecast how many iterations are needed, or, more often, asks how much of the backlog can be delivered by a fixed date.
+
+Progress is shown with **burndown charts**, which plot the work remaining over time, or **burnup charts**, which plot work completed against the total scope. Burnup charts are often more informative because they show scope changes separately from progress: if the total line rises, the team is not slower, there is simply more to do.
+
+Forecasts in adaptive projects should be ranges, not single dates, because velocity varies. Some teams use their historical throughput, the number of items completed per week, to run simple simulations that give a range of likely completion dates with probabilities. This is often more honest than either a single date or a detailed plan.
+
+## The cone of uncertainty
+Early in a project, the range of possible outcomes is wide; as work proceeds and decisions are made, it narrows. Barry Boehm and later Steve McConnell called this the **cone of uncertainty**. In software, early estimates have been observed to be off by a factor of four in either direction, narrowing as requirements and design are settled.
+
+The practical lessons are to communicate early estimates as ranges, to resist pressure to commit to precise dates before the uncertainty has narrowed, and to re-estimate as knowledge improves. A single date announced at the start of a highly uncertain project is not a commitment; it is a guess that will become a source of conflict.
+
+> exam: Expect calculations: forward and backward passes, total float, the critical path in a small network, the PERT expected duration (O + 4M + P) ÷ 6 and its spread (P − O) ÷ 6. Expect questions that test whether you know crashing adds cost and fast tracking adds risk, that both apply only to the critical path, and that leads and lags change relationships. In adaptive scenarios, know how velocity, burndown and burnup charts are used, and that velocity is for the team's own planning, not for comparing teams.
+
+## Key ideas
+- Schedules are models: activities, dependencies and durations, from which dates follow.
+- The critical path is the longest dependent chain and sets the project's duration; float shows how much other work can slip.
+- Effort to shorten the schedule pays only on the critical path. Crashing costs money; fast tracking adds risk.
+- Estimates are uncertain. Three-point estimates expose the uncertainty; the outside view corrects optimism.
+- Merge bias, Parkinson's law, student syndrome and multitasking explain why schedules slip; critical chain buffers respond to them.
+- Adaptive projects fix iteration length, measure velocity or throughput, and forecast scope or dates as ranges.
+
+## Further reading
+- Eliyahu M. Goldratt, *Critical Chain* (1997).
+- Steve McConnell, *Software Estimation: Demystifying the Black Art* (2006). Excellent on estimating under uncertainty, including the cone of uncertainty.
+- Daniel S. Vacanti, *When Will It Be Done?* (2020). Forecasting with throughput and simulation.
+- Project Management Institute, *Practice Standard for Scheduling*. The formal treatment of network scheduling.

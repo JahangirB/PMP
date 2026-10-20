@@ -1,0 +1,82 @@
+id: t16
+part: 3
+title: Integration and change control
+summary: How the pieces of a project are held together: the management plan and baselines, the controlled handling of change, configuration management, and managing the knowledge the project creates.
+why: A project is many plans, people and decisions that must stay consistent with one another. When one part changes, others must change with it, or the project quietly falls apart into pieces that no longer fit. Integration is the work of keeping the whole coherent, and change control is its main tool. It is also the area where the project manager's role is most distinctive, because nobody else is responsible for the whole.
+
+## The integrator's task
+Chapter 3 described the project manager as an integrator. In practical terms, integration means a few recurring activities: developing a coherent plan for the whole project; directing the work according to that plan; monitoring performance across all areas at once; deciding how to respond to changes, issues and variances in ways that serve the whole; managing what the project learns; and closing the project or phase properly.
+
+What these share is that they cross boundaries. Schedule, cost, scope, quality, risk, resources and stakeholders each have specialists and tools. Integration is about the trade-offs between them: whether to spend contingency to recover a delay, whether to cut a feature to protect quality, whether a supplier's change request is worth its impact on the testing plan. These are judgements, and they are where much of the project manager's value lies.
+
+## The project management plan
+In a predictive approach, the **project management plan** brings together all the subsidiary plans and baselines into one integrated document, or set of documents, describing how the project will be executed, monitored, controlled and closed.
+
+It typically includes the **baselines**, the approved versions of scope, schedule and cost against which performance is measured, together called the **performance measurement baseline**; and the **subsidiary management plans**, which describe how each area will be managed: scope, requirements, schedule, cost, quality, resources, communications, risk, procurement, stakeholder engagement, change and configuration management. It may also describe the life cycle, the development approach, and how reviews and phase gates will work.
+
+The plan is progressively elaborated. Early versions are outlines; detail is added as the project is understood. It should be as detailed as the project needs and no more: a small project's plan might fit on a few pages, while a large infrastructure programme's might fill volumes. What matters is that it is integrated, so that the schedule reflects the scope, the budget reflects the schedule, the risk responses are reflected in all of them, and everyone works from the same version.
+
+Adaptive projects keep the integration but distribute it differently. The product vision, the backlog, the release plan, the definition of done, the team's working agreements and the iteration cadence together play the role of the plan. Integration happens continuously, at every planning event and review, rather than through a single document.
+
+## Directing the work
+Once there is a plan, the project manager leads its execution: making sure the work happens as planned, that deliverables are produced, that problems are noticed and dealt with, and that the plan is updated when reality diverges. Two logs are especially useful.
+
+The **issue log** records problems that have occurred and need resolution: what the issue is, its impact, who owns it, the action and the due date. Unlike risks, issues are happening now, and the log is a tool for making sure none is forgotten.
+
+The **decision log** records significant decisions: what was decided, by whom, when, and why. Projects make hundreds of decisions, and months later nobody remembers why a particular option was chosen. A decision log prevents re-arguing settled questions and helps new team members understand the project's history.
+
+## Why change control exists
+Change is inevitable. Requirements evolve, risks occur, stakeholders learn, the environment shifts. A project that refuses all change delivers something that no longer fits the need. A project that accepts every change drifts until its plan no longer describes its work, and it overruns without anyone deciding that it should. Change control steers between these failures.
+
+The purpose of **integrated change control** is to make sure every change to the agreed baselines is identified, assessed for its impact on the whole project, decided by someone with the authority to decide, and, if approved, reflected consistently in all the affected plans and communicated to the people who need to know. The word "integrated" matters: a change to scope is assessed for its effect on schedule, cost, quality, risk and resources, not just on scope.
+
+## The change control process
+A typical process has these steps.
+
+1. **Raise the change request.** Anyone can propose a change, but it should be written down: what is proposed, why, and by whom.
+2. **Log it**, so it can be tracked.
+3. **Assess the impact** across scope, schedule, cost, quality, risk, resources and benefits, and identify options. This is often the project manager's most important contribution: making the trade-off visible.
+4. **Decide.** The person or body with the authority decides to approve, reject or defer. Small changes within agreed thresholds may be decided by the project manager; larger ones go to the sponsor or a **change control board**, a group with authority over changes.
+5. **Update the plans and baselines** if approved, so that the whole plan remains consistent.
+6. **Communicate** the decision to everyone affected, including the person who raised it.
+7. **Implement and verify** the change.
+
+[figure: t16-change]
+
+Two common failures are worth naming. The first is **unrecorded change**: someone agrees to a change informally, in a corridor or an email, and the plan is never updated. The second is the reverse: a process so heavy that small, sensible changes take weeks, so people stop using it and change goes underground. A good process is proportionate, with fast routes for small changes and careful assessment for large ones.
+
+> myth: "Change control exists to stop changes." It exists to make changes deliberately. The best change control processes approve many changes, quickly, because the trade-offs are clear. What they prevent is change that nobody decided.
+
+## Configuration management
+Closely related to change control is **configuration management**, which controls the specifications and versions of the project's products and documents. It answers questions such as: which version of the design is current? Which version of the software is in the pilot clinic? Which requirements does this release implement? When a defect is found, which components does it affect?
+
+Configuration management typically includes identifying the items under control (configuration items), recording their versions and status, controlling changes to them, and auditing that what exists matches what is recorded. Change control decides whether a change should happen; configuration management keeps track of what the product actually is as a result. In software, version control and automated build systems do much of this work; in construction or manufacturing, drawing registers and document control systems do.
+
+## Change in adaptive projects
+Adaptive projects expect change and handle it through their structure. New requirements and change requests go into the **product backlog**, where the product owner prioritises them against everything else. Changes to work already in progress within an iteration are usually avoided, so that the team can finish what it committed to; anything new waits for the next planning event.
+
+This makes the trade-off of each change visible in a different way. Adding an item to a fixed-budget, fixed-time release means something else falls below the line. The product owner, who represents the business, makes that trade-off continually. For changes that affect the overall budget, timeline or goals, adaptive projects still need escalation to governance, but most day-to-day change is absorbed by reprioritising the backlog.
+
+## Managing knowledge
+Projects generate knowledge: about the product, the users, the technology, the organisation, and what works and what does not. Much of it is lost when the project ends and the team disperses. Managing project knowledge aims to use existing knowledge to improve the project and to capture new knowledge so that others can use it.
+
+Two kinds of knowledge need different approaches. **Explicit knowledge** can be written down: procedures, designs, lessons learned, data. It can be stored in documents and knowledge bases. **Tacit knowledge** is personal and hard to express: the judgement of an experienced engineer, an understanding of a stakeholder's concerns, a feel for what will work. It is shared mainly through people: working together, mentoring, communities of practice, storytelling and conversation.
+
+Projects are usually better at the first kind than the second. A **lessons learned register**, updated throughout the project rather than written at the end, captures explicit knowledge. Tacit knowledge needs deliberate mixing of people: pairing experienced and new team members, involving the people who will support the product in building it, and making time for conversations that are not about immediate tasks.
+
+> example: Three months into Northfield's rollout, a clinic manager asked one of the developers to add a field for interpreter requirements. It was a small change and the developer agreed. A week later, the change broke the export to the records system, which had no such field, and bookings stopped flowing to two clinics for a day. Afterwards, the team agreed a simple rule: any change, however small, went to Hassan's backlog with a one-line impact note, and anything touching the records interface went to a weekly review with the vendor. The interpreter field was added properly in the next sprint, with the vendor's interface updated to match.
+
+> exam: Expect many scenario questions on change. The standard sequence is: evaluate the impact, consider options, take it to the right decision-maker (often the change control board), update the plans and baselines if approved, and communicate. The project manager should not approve changes beyond their authority or implement them before approval, and should not refuse to consider them either. In adaptive scenarios, the right answer usually puts the request into the backlog for the product owner to prioritise. Know the difference between change control and configuration management, and between the issue log and the risk register.
+
+## Key ideas
+- Integration is the work of keeping all parts of the project consistent and making trade-offs that serve the whole.
+- The project management plan integrates the baselines and subsidiary plans; adaptive projects integrate through the vision, backlog and cadence.
+- Integrated change control makes every change deliberate: recorded, assessed across all areas, decided with authority, reflected in the plans and communicated.
+- Proportionate change control is fast for small changes and careful for large ones; both unrecorded change and heavy bureaucracy are failures.
+- Configuration management tracks what the product actually is, version by version.
+- Explicit knowledge can be documented; tacit knowledge travels with people and needs deliberate sharing.
+
+## Further reading
+- Project Management Institute, *The Standard for Project Management* and *PMBOK Guide*, on the integration domain.
+- Ikujiro Nonaka and Hirotaka Takeuchi, *The Knowledge-Creating Company* (1995). The classic account of tacit and explicit knowledge.
+- Frank B. Watts, *Engineering Documentation Control Handbook* (several editions). Configuration management in engineering.
