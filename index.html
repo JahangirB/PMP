@@ -18098,6 +18098,8 @@ PMP.ABBREVIATIONS = Object.freeze([
   { abbr: "B", full: "Business Environment", group: "exam",
     note: "Lesson-id prefix: B2 is the second Business Environment lesson." },
   { abbr: "BAC", full: "Budget at completion", group: "evm", see: "Budget at completion" },
+  { abbr: "BATNA", full: "Best alternative to a negotiated agreement", group: "common",
+    note: "What you will do if the negotiation fails: it tells you when to walk away." },
   { abbr: "BCR", full: "Benefit\u2013cost ratio", group: "business" },
   { abbr: "C", full: "Number of channels", group: "notation", see: "Communication channels" },
   { abbr: "CCB", full: "Change control board", group: "integration", see: "Change control board" },
@@ -25847,6 +25849,1189 @@ PMP.THEORY = Object.freeze({
    "words": 1619,
    "minutes": 7,
    "n": 17
+  },
+  {
+   "id": "t18",
+   "part": 4,
+   "title": "Stakeholders and engagement",
+   "summary": "Who stakeholders are, how to understand their interests and influence, how to engage rather than merely inform them, and how to work with resistance.",
+   "why": "Projects are judged by people, and the people who judge them are rarely only the sponsor. Users, managers, regulators, suppliers, unions, neighbours and the public all have a stake, and their support or opposition can decide the outcome. Many projects that fail technically succeed in the end because stakeholders stayed with them; many technically excellent projects fail because the people they affected were never brought along.",
+   "sections": [
+    {
+     "id": "t18-s1",
+     "title": "Who stakeholders are",
+     "blocks": [
+      "A **stakeholder** is any individual, group or organisation that may affect, be affected by, or perceive itself to be affected by a project. The last clause matters: people who believe a project affects them are stakeholders, whether or not they are right, because their beliefs shape their behaviour.",
+      "Stakeholders can be grouped in several ways. **Internal** stakeholders work in the organisation: the sponsor, the team, functional managers, the project management office, other projects competing for the same people. **External** stakeholders do not: customers, users, suppliers, regulators, partners, communities, the media. Some are **supporters**, some **opponents**, many **neutral** or **unaware**. Some are individuals, others groups who may not speak with one voice.",
+      "Two groups are frequently forgotten. The first is the people who will **operate and support** the result: the help desk, the maintenance team, the clinic receptionists. They inherit the project's decisions and often know exactly what will go wrong. The second is people who lose something because of the project: their role, their influence, their familiar way of working. They are often the most important stakeholders to understand, precisely because their interests run against the project's."
+     ]
+    },
+    {
+     "id": "t18-s2",
+     "title": "Identifying stakeholders",
+     "blocks": [
+      "Identification starts early (Chapter 9) and continues throughout, because new stakeholders appear as the project develops. Useful sources include the charter and business case, organisation charts, the people who will use or support the result, regulations, contracts, and interviews with experienced people who know the organisation. A simple question asked of every stakeholder found, \"who else should we be talking to?\", reliably uncovers more.",
+      "The result is usually recorded in a **stakeholder register**: who each stakeholder is, their role, their interests and expectations, their influence, their current attitude, and how the project intends to engage them. On sensitive projects, parts of the register may be confidential, because candid notes about influence and resistance are not always comfortable reading for the people described."
+     ]
+    },
+    {
+     "id": "t18-s3",
+     "title": "Understanding stakeholders",
+     "blocks": [
+      "Stakeholders differ in how much they can affect the project and how much they care. Several simple models help make sense of this.",
+      "The most common is the **power-interest grid**, which places each stakeholder by their power over the project and their interest in it. Those with high power and high interest need to be **managed closely**: engaged actively and involved in decisions. Those with high power and low interest should be **kept satisfied**: consulted and kept comfortable, without overwhelming them with detail. Those with low power and high interest should be **kept informed**: they care, and they can often help or provide early warning. Those with low power and low interest need **monitoring**, with minimal effort.",
+      {
+       "fig": {
+        "title": "The power and interest grid",
+        "caption": "Where a stakeholder sits suggests how much attention they need. People move between boxes as the project touches them, so revisit the grid.",
+        "alt": "A two-by-two grid with power up the side and interest along the bottom. High power, low interest: keep satisfied. High power, high interest: manage closely. Low power, low interest: monitor. Low power, high interest: keep informed.",
+        "w": 640,
+        "h": 275,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 130,
+          "y": 20,
+          "w": 240,
+          "h": 98,
+          "tone": "warn",
+          "s": 12,
+          "t": "Keep satisfied\nconsult; keep\ncomfortable"
+         },
+         {
+          "k": "box",
+          "x": 380,
+          "y": 20,
+          "w": 240,
+          "h": 98,
+          "tone": "bad",
+          "s": 12,
+          "t": "Manage closely\ninvolve in\ndecisions"
+         },
+         {
+          "k": "box",
+          "x": 130,
+          "y": 125,
+          "w": 240,
+          "h": 98,
+          "tone": "muted",
+          "s": 12,
+          "t": "Monitor\nminimal effort,\nwatch for change"
+         },
+         {
+          "k": "box",
+          "x": 380,
+          "y": 125,
+          "w": 240,
+          "h": 98,
+          "tone": "good",
+          "s": 12,
+          "t": "Keep informed\nshare news;\nthey can help"
+         },
+         {
+          "k": "text",
+          "x": 120,
+          "y": 69,
+          "t": "High",
+          "a": "end",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 120,
+          "y": 174,
+          "t": "Low",
+          "a": "end",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 250,
+          "y": 242,
+          "t": "Low",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 500,
+          "y": 242,
+          "t": "High",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 375,
+          "y": 264,
+          "t": "Interest",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 48,
+          "y": 122,
+          "t": "Power",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         }
+        ]
+       }
+      },
+      "Variations use influence instead of power, or impact instead of interest. The **salience model** adds a third dimension: **power** (the ability to impose their will), **legitimacy** (the appropriateness of their involvement) and **urgency** (the need for immediate attention). Stakeholders who have all three, called definitive stakeholders, demand the most attention.",
+      "These models are tools for thinking, not for labelling people permanently. Stakeholders move: a low-interest manager becomes highly interested when the project proposes to take two of her staff. Revisit the analysis regularly."
+     ]
+    },
+    {
+     "id": "t18-s4",
+     "title": "Engagement, not just communication",
+     "blocks": [
+      "There is an important difference between **informing** stakeholders and **engaging** them. Informing tells people what is happening. Engaging involves them: seeking their views, understanding their concerns, giving them a genuine say in decisions that affect them, and building relationships of trust.",
+      "Engagement matters for three reasons. Stakeholders hold knowledge the project needs. People who have shaped a change are far more likely to support it than people who have had it imposed on them. And relationships built early provide goodwill that the project can draw on when things go wrong, as they will.",
+      "A useful tool is the **stakeholder engagement assessment matrix**, which records for each stakeholder their **current** level of engagement and the **desired** level. Levels are often described as:",
+      {
+       "ul": [
+        "**Unaware** of the project and its potential effects.",
+        "**Resistant**: aware, and resistant to the change.",
+        "**Neutral**: aware, neither supportive nor resistant.",
+        "**Supportive**: aware and supportive.",
+        "**Leading**: aware and actively engaged in making the project succeed."
+       ]
+      },
+      "The gap between current and desired engagement for each important stakeholder shows where effort should go. Not every stakeholder needs to be leading; the aim is the level of engagement the project actually needs from each one."
+     ]
+    },
+    {
+     "id": "t18-s5",
+     "title": "Planning and doing engagement",
+     "blocks": [
+      "Engagement planning decides how to move each important stakeholder from their current to their desired level: what they need to know, what they need to be involved in, who will build the relationship, how often, and through which channels. The plan may be a formal document or a few lines in the stakeholder register.",
+      "In practice, engagement happens through many small actions: a briefing before a steering committee so a director is not surprised; a workshop where users shape a design; a visit to a site to hear concerns first hand; a demonstration of a working prototype; a quick call to explain a delay before it appears in a report. The project manager does not have to do all of it personally, but should make sure it is happening and that the people doing it understand what the project needs from each relationship.",
+      "Expectation management is part of engagement. Many conflicts arise because stakeholders expected something the project never intended to deliver. Making expectations explicit, about scope, timing, involvement and what the result will and will not do, and revisiting them as the project changes, prevents disappointment from turning into opposition."
+     ]
+    },
+    {
+     "id": "t18-s6",
+     "title": "Working with resistance",
+     "blocks": [
+      "Resistance is a normal response to change, and it is often rational. People resist because they fear losing status, skills, control or their jobs; because they have seen similar initiatives fail; because the change creates work for them without benefits; because they were not consulted; or because they know something the project has missed.",
+      "Treating resistance as an obstacle to be overcome tends to harden it. Treating it as information tends to soften it. Useful responses include:",
+      {
+       "ul": [
+        "**Listen first.** Find out what exactly people object to and why. Often the objection is narrower and more reasonable than it first appears.",
+        "**Look for the legitimate concern.** If people say the new system will slow them down, test whether it will. If they are right, fix it.",
+        "**Involve the resisters.** People invited to help solve a problem often become its strongest advocates.",
+        "**Be honest about losses.** If some people will lose something, say so and explain why the change is still worth it, rather than pretending everyone wins.",
+        "**Use the right messenger.** A respected peer is often more persuasive than the project team.",
+        "**Escalate when necessary.** Some resistance reflects genuine conflicts of interest that only senior management can resolve."
+       ]
+      },
+      {
+       "box": "example",
+       "text": "Several senior receptionists at Northfield opposed online booking. Amira spent an afternoon at the busiest clinic and discovered their concern was specific and sensible: patients who booked online often chose the wrong appointment type, and receptionists spent time fixing the mistakes. She brought two receptionists into the design team. Their suggestions, clearer appointment descriptions and a warning when patients chose specialist slots, cut booking errors sharply. One of them later trained receptionists at the other clinics."
+      }
+     ]
+    },
+    {
+     "id": "t18-s7",
+     "title": "Stakeholders in adaptive projects",
+     "blocks": [
+      "Adaptive approaches build stakeholder engagement into their rhythm. The **product owner** represents the customer and business stakeholders day to day. **Sprint reviews** invite stakeholders to see working results regularly and influence what comes next. Frequent delivery means stakeholders form opinions based on the real product rather than documents. And the transparency of backlogs and boards lets interested stakeholders see what is happening without asking.",
+      "The risk in adaptive projects is that the product owner becomes the only channel, and stakeholders the product owner does not represent, such as operations, security, finance or regulators, are engaged too late. Good adaptive teams invite these stakeholders to reviews, include their needs in the backlog, and make sure the product owner has the relationships and authority to represent the wider organisation."
+     ]
+    },
+    {
+     "id": "t18-s8",
+     "title": "Ethics and stakeholders",
+     "blocks": [
+      "Stakeholder management can slide into manipulation: telling different groups different stories, hiding inconvenient facts, or treating people as obstacles to be managed rather than as people with legitimate interests. Beyond being wrong, this tends to fail, because stakeholders talk to each other and trust, once lost, is very hard to regain. The more durable approach is honesty, consistency and respect, including for those who oppose the project. Chapter 24 returns to ethics.",
+      {
+       "box": "myth",
+       "text": "\"Stakeholder management means keeping stakeholders happy.\" It means engaging them appropriately and honestly. Sometimes that involves telling them things they do not want to hear, or making decisions they oppose. The aim is informed support or, at least, informed acceptance, not universal satisfaction."
+      },
+      {
+       "box": "exam",
+       "text": "The exam has many stakeholder scenarios. Common themes: identify stakeholders early and continually; analyse them (power and interest, salience) and record them in the register; engage rather than only inform; when a stakeholder resists, first understand their concern, usually by meeting them; when a new stakeholder appears late, add them to the register and assess their needs rather than ignoring them; use the engagement assessment matrix to compare current and desired engagement. Answers that bypass, ignore or merely inform a powerful stakeholder are usually wrong."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Stakeholders include anyone who affects, is affected by, or believes they are affected by the project, especially those who will support the result or lose something.",
+    "Identification is continual; the stakeholder register records who they are and how to engage them.",
+    "Power-interest grids and the salience model help decide where to focus; stakeholders move, so revisit them.",
+    "Engaging means involving people in decisions, not just informing them; the engagement matrix compares current with desired engagement.",
+    "Resistance is often rational and informative; listen, find the legitimate concern, involve resisters, and be honest about losses.",
+    "Adaptive projects engage stakeholders through reviews and the product owner, but must not forget stakeholders the product owner does not represent."
+   ],
+   "reading": [
+    "R. Edward Freeman, *Strategic Management: A Stakeholder Approach* (1984). The origin of modern stakeholder thinking.",
+    "Ronald K. Mitchell, Bradley R. Agle and Donna J. Wood, \"Toward a Theory of Stakeholder Identification and Salience\", *Academy of Management Review* (1997). The salience model.",
+    "Lynda Bourne, *Stakeholder Relationship Management* (2009). A practical method for projects.",
+    "Rick Maurer, *Beyond the Wall of Resistance* (revised edition, 2010). Understanding and working with resistance to change."
+   ],
+   "words": 1743,
+   "minutes": 8,
+   "n": 18
+  },
+  {
+   "id": "t19",
+   "part": 4,
+   "title": "Communication that works",
+   "summary": "Why communication dominates the project manager's day, how messages get lost, choosing the right method and channel, and the habits of communication that build trust.",
+   "why": "Most project problems are, at some level, communication problems: a requirement understood differently by two people, a risk someone noticed and nobody heard, a decision made in one meeting and unknown in another. Communication is not a soft extra around the real work. On a project, it is much of the real work.",
+   "sections": [
+    {
+     "id": "t19-s1",
+     "title": "Why communication is so hard on projects",
+     "blocks": [
+      "Projects bring together people who often have not worked together, come from different disciplines and organisations, use different vocabularies, and are under time pressure. Each of these makes communication harder. Engineers, clinicians, finance staff and vendors may use the same word to mean different things. Team members may be in different places, time zones and cultures. And the number of people who need to stay aligned grows quickly as a project grows.",
+      "That last point has a simple mathematical form. The number of **communication channels** between n people is n(n − 1) ÷ 2. Five people have 10 channels; ten people have 45; twenty have 190. Each new person adds not one channel but as many as there are people already involved. This is one reason large projects need more structure for communication than small ones, and why splitting work into small, stable teams helps."
+     ]
+    },
+    {
+     "id": "t19-s2",
+     "title": "How messages get lost",
+     "blocks": [
+      "A classic model describes communication as a **sender** who **encodes** an idea into a message, transmits it through a **medium**, and a **receiver** who **decodes** it. **Noise**, anything that interferes with the message, can distort it at any stage: jargon, distraction, language differences, emotions, assumptions, a bad phone line. The receiver's **feedback** tells the sender whether the message arrived as intended.",
+      "The model's main lesson is that a message sent is not a message received, and a message received is not a message understood. Responsibility for communication is shared: the sender must make the message clear and check it was understood; the receiver must listen, ask and confirm. Many project misunderstandings would be avoided by one simple habit: asking \"what did you understand me to say?\"",
+      "Several barriers are especially common on projects.",
+      {
+       "ul": [
+        "**Jargon and acronyms** that one group takes for granted and another does not know.",
+        "**Assumed context**: the sender knows the background and forgets the receiver does not.",
+        "**Filtering**: bad news softened as it travels up the hierarchy, until it arrives as good news.",
+        "**Channel mismatch**: a sensitive or complex message sent by email when it needed a conversation.",
+        "**Overload**: so many messages that important ones are lost.",
+        "**Silence**: people who do not speak up because they fear the response."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "t19-s3",
+     "title": "Choosing a method",
+     "blocks": [
+      "Communication methods are often grouped into three kinds.",
+      {
+       "ul": [
+        "**Interactive communication** happens between two or more people in real time: meetings, calls, video conferences, conversations. It is the best way to deal with complex, sensitive or ambiguous matters, because misunderstandings can be cleared up immediately.",
+        "**Push communication** is sent to specific recipients: emails, reports, memos, messages. It ensures delivery but not reading or understanding.",
+        "**Pull communication** is placed where people can access it when they choose: shared documents, intranet sites, knowledge bases, dashboards. It suits large audiences and reference information."
+       ]
+      },
+      "The choice depends on the message, the audience and the urgency. A schedule slip that affects a director's commitment to her board deserves a conversation, followed by an email confirming what was agreed. A weekly status summary for fifty people is better pulled from a dashboard. A design question between two engineers is best settled at a whiteboard or on a call.",
+      "Alistair Cockburn, writing about software teams, observed that the effectiveness of communication rises with **richness**: two people at a whiteboard communicate more, faster, than two people on a phone, who communicate more than two people exchanging documents. This is why agile principles emphasise face-to-face conversation. Richer channels cost more time per person, so the art is to use rich channels for the communication that needs them and lighter channels for the rest.",
+      {
+       "fig": {
+        "title": "Richness of communication",
+        "caption": "Richer channels carry tone, questions and immediate feedback. Use them for what is complex or sensitive, and lighter channels for the rest.",
+        "alt": "Five bars rising left to right: shared document, email, phone call, video call, and face to face at a whiteboard. An arrow beneath reads: richer means faster understanding and more cost per person.",
+        "w": 640,
+        "h": 265,
+        "shapes": [
+         {
+          "k": "line",
+          "p": [
+           40,
+           220,
+           620,
+           220
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "box",
+          "x": 50,
+          "y": 180,
+          "w": 100,
+          "h": 40,
+          "tone": "muted",
+          "s": 11,
+          "t": "Shared\ndocument"
+         },
+         {
+          "k": "box",
+          "x": 164,
+          "y": 142,
+          "w": 100,
+          "h": 78,
+          "tone": "muted",
+          "s": 11,
+          "t": "Email"
+         },
+         {
+          "k": "box",
+          "x": 278,
+          "y": 104,
+          "w": 100,
+          "h": 116,
+          "tone": "accent",
+          "s": 11,
+          "t": "Phone\ncall"
+         },
+         {
+          "k": "box",
+          "x": 392,
+          "y": 66,
+          "w": 100,
+          "h": 154,
+          "tone": "accent",
+          "s": 11,
+          "t": "Video\ncall"
+         },
+         {
+          "k": "box",
+          "x": 506,
+          "y": 28,
+          "w": 100,
+          "h": 192,
+          "tone": "good",
+          "s": 11,
+          "t": "Face to face\nat a whiteboard"
+         },
+         {
+          "k": "line",
+          "p": [
+           50,
+           236,
+           610,
+           236
+          ],
+          "arrow": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 330,
+          "y": 254,
+          "t": "Richer: faster understanding, more cost per person",
+          "a": "middle",
+          "s": 11,
+          "tone": "muted"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "t19-s4",
+     "title": "Planning communication",
+     "blocks": [
+      "On larger projects, a **communications management plan** records who needs what information, when, in what form, from whom, and through which channel. It typically covers the main stakeholder groups, the regular reports and meetings, escalation paths, how sensitive information is handled, and any glossary of terms.",
+      "The most useful plans start from the needs of the audience rather than from what the project wants to say. A sponsor needs a short view of progress against objectives, emerging risks and decisions required. A team member needs detail about the work and its dependencies. A regulator may need formal documentation in a prescribed format. A plan that sends everyone the same report serves nobody well."
+     ]
+    },
+    {
+     "id": "t19-s5",
+     "title": "Meetings",
+     "blocks": [
+      "Meetings are where much project communication happens, and where much project time is wasted. A few practices make them worth their cost.",
+      {
+       "ul": [
+        "**A clear purpose.** Is the meeting to share information, solve a problem, or make a decision? Each needs a different design.",
+        "**An agenda**, circulated in advance, with the time allotted for each item.",
+        "**The right people**: those needed for the purpose, and no more.",
+        "**A timebox**, respected.",
+        "**Recorded outcomes**: decisions and actions, with owners and dates, sent promptly.",
+        "**The question: could this be done without a meeting?**"
+       ]
+      },
+      "Adaptive teams formalise meetings into a small set of events with clear purposes and strict timeboxes: planning, a short daily stand-up, review and retrospective. The daily stand-up in particular is often misused as a status report to a manager; its purpose is for the team to coordinate its own work for the next day."
+     ]
+    },
+    {
+     "id": "t19-s6",
+     "title": "Reporting",
+     "blocks": [
+      "Project reports are a form of push communication with a specific purpose: to give decision-makers the information they need to act. Chapter 17 discussed what to measure. On the communication side, good reports share some traits.",
+      {
+       "ul": [
+        "**Lead with what matters**: the overall state, what has changed, and what decisions are needed.",
+        "**Be honest.** Reports that are optimistic until the moment of failure destroy trust in every future report.",
+        "**Explain, do not just present.** A variance without a cause and a proposed response is half a report.",
+        "**Fit the audience.** Executives need less detail and more implication; teams need more detail.",
+        "**Be consistent**, so readers can compare one report with the last."
+       ]
+      },
+      "Visual tools, such as charts, boards and dashboards, are often clearer than text. Adaptive teams rely heavily on **information radiators**, displays that make the work visible to anyone who looks, which reduce the need for reporting altogether."
+     ]
+    },
+    {
+     "id": "t19-s7",
+     "title": "Listening",
+     "blocks": [
+      "Most writing on communication focuses on sending. For project managers, listening may matter more. **Active listening** means giving full attention, not preparing your reply while the other person speaks, asking questions to understand, and summarising what you heard to check it. It sounds simple and is rare in practice.",
+      "Listening is how a project manager learns what is really happening: the concern a team member mentions in passing, the hesitation in a stakeholder's voice, the problem a supplier hints at but does not state. It is also how trust is built. People who feel heard are more willing to raise problems early, which is exactly what a project needs."
+     ]
+    },
+    {
+     "id": "t19-s8",
+     "title": "Communicating across distance and culture",
+     "blocks": [
+      "Many projects involve people in different locations, organisations and cultures. Distance removes much of the informal communication that keeps co-located teams aligned, the overheard conversation, the quick question, the shared lunch. Distributed teams need to replace it deliberately: regular video calls with cameras on, shared online boards, written working agreements, overlap hours across time zones, and occasional in-person meetings, especially at the start.",
+      "Cultural differences affect communication in ways that are easy to misread. Cultures differ in how directly they express disagreement, how they treat hierarchy, how much context they expect to be understood without being said, and how they view time and deadlines. A team member who never says \"no\" may be signalling a serious problem through hints that the project manager does not recognise. The remedy is curiosity rather than stereotypes: learning how each person prefers to communicate, making expectations explicit, and checking understanding more often.",
+      {
+       "box": "example",
+       "text": "Northfield's weekly status email went to more than eighty people and was read by almost none of them. Amira replaced it with three things: a one-page dashboard on the trust intranet, updated weekly, which anyone could check; a ten-minute fortnightly briefing for clinic managers, where they could ask questions; and a direct call to the sponsor whenever a risk crossed an agreed threshold. Questions to the project team dropped, and clinic managers said for the first time that they knew what was happening."
+      },
+      {
+       "box": "myth",
+       "text": "\"If it's in the email, they've been told.\" Sending is not communicating. If something matters, check that it has been understood, and choose a channel that fits its importance."
+      },
+      {
+       "box": "exam",
+       "text": "Expect the communication channels formula, n(n − 1) ÷ 2, and questions where the number of people changes. Know the sender-receiver model, the three methods (interactive, push and pull) and when each fits, and the role of the communications management plan. Scenario questions often reward choosing interactive communication for sensitive or complex issues, tailoring communication to the audience, and making sure messages were understood."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Communication is much of a project manager's work; the number of channels grows rapidly with team size.",
+    "A message sent is not a message understood. Senders check understanding; receivers listen and confirm.",
+    "Interactive communication suits complex and sensitive matters; push ensures delivery; pull suits large audiences and reference material.",
+    "Richer channels convey more; use them for what needs them.",
+    "Plan communication from the audience's needs, keep meetings purposeful and timeboxed, and report honestly.",
+    "Listening builds trust and surfaces problems early; distance and culture call for deliberate, explicit practices."
+   ],
+   "reading": [
+    "Alistair Cockburn, *Agile Software Development: The Cooperative Game* (2006). On communication richness and its effect on teams.",
+    "Erin Meyer, *The Culture Map* (2014). How cultures differ in communication, feedback, disagreement and trust.",
+    "Kerry Patterson, Joseph Grenny, Ron McMillan and Al Switzler, *Crucial Conversations* (2002). Communicating when stakes are high and opinions differ.",
+    "Patrick Lencioni, *Death by Meeting* (2004). Why meetings fail and how to fix them."
+   ],
+   "words": 1625,
+   "minutes": 7,
+   "n": 19
+  },
+  {
+   "id": "t20",
+   "part": 4,
+   "title": "Building and leading teams",
+   "summary": "How groups become teams, what motivates people in knowledge work, how to develop and look after a team, and how teams decide and work together.",
+   "why": "Projects are delivered by teams, and the difference between a group of capable individuals and a real team is enormous. A real team shares a goal, trusts its members, solves problems together and holds itself accountable. Such teams are not assembled; they are built, often in difficult conditions: temporary, part-time, distributed and under pressure. Knowing how teams form and what makes them work is one of the most practical skills a project manager can have.",
+   "sections": [
+    {
+     "id": "t20-s1",
+     "title": "Groups and teams",
+     "blocks": [
+      "A **group** is a set of people working in the same place or on related tasks. A **team** is a small number of people with complementary skills who are committed to a common purpose, shared goals and an approach for which they hold themselves mutually accountable. The definition, from Jon Katzenbach and Douglas Smith, highlights what turns a group into a team: a purpose everyone shares, goals that require working together, and accountability to each other rather than only to a manager.",
+      "Not every project needs every group to become a team in this full sense. A collection of specialists contributing independently may be fine for simple work. But where the work requires people to combine their knowledge, solve problems together and adapt to change, which is most project work, the difference between a group and a team shows directly in the results."
+     ]
+    },
+    {
+     "id": "t20-s2",
+     "title": "How teams develop",
+     "blocks": [
+      "Bruce Tuckman's model, proposed in 1965 and extended in 1977, describes stages that groups often pass through.",
+      {
+       "ul": [
+        "**Forming**: people come together, are polite and uncertain, and look to the leader for direction.",
+        "**Storming**: differences emerge about goals, roles and ways of working; conflict and frustration rise.",
+        "**Norming**: the team agrees how it will work; trust and cohesion grow.",
+        "**Performing**: the team works effectively and largely manages itself.",
+        "**Adjourning**: the work ends and the team disbands, which can bring a sense of loss as well as achievement."
+       ]
+      },
+      {
+       "fig": {
+        "title": "How teams develop",
+        "caption": "Performance often dips while a group storms, then rises as it agrees how to work. The leader's role shifts from directing to delegating.",
+        "alt": "A line rising and falling through five stages: Forming, a dip at Storming, rising through Norming to a peak at Performing, then Adjourning. Under each, the leader's role: give direction; surface and resolve conflict; help agree ways of working; delegate and remove obstacles; recognise and capture lessons.",
+        "w": 640,
+        "h": 285,
+        "shapes": [
+         {
+          "k": "line",
+          "p": [
+           70,
+           150,
+           195,
+           195,
+           320,
+           120,
+           445,
+           60,
+           570,
+           140
+          ],
+          "tone": "accent"
+         },
+         {
+          "k": "dot",
+          "x": 70,
+          "y": 150,
+          "r": 6,
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 70,
+          "y": 132,
+          "t": "Forming",
+          "a": "middle",
+          "s": 12,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 70,
+          "y": 240,
+          "t": "give direction",
+          "a": "middle",
+          "s": 10,
+          "tone": "muted"
+         },
+         {
+          "k": "dot",
+          "x": 195,
+          "y": 195,
+          "r": 6,
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 195,
+          "y": 217,
+          "t": "Storming",
+          "a": "middle",
+          "s": 12,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 195,
+          "y": 240,
+          "t": "surface and\nresolve conflict",
+          "a": "middle",
+          "s": 10,
+          "tone": "muted"
+         },
+         {
+          "k": "dot",
+          "x": 320,
+          "y": 120,
+          "r": 6,
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 320,
+          "y": 102,
+          "t": "Norming",
+          "a": "middle",
+          "s": 12,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 320,
+          "y": 240,
+          "t": "help agree\nways of working",
+          "a": "middle",
+          "s": 10,
+          "tone": "muted"
+         },
+         {
+          "k": "dot",
+          "x": 445,
+          "y": 60,
+          "r": 6,
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 445,
+          "y": 42,
+          "t": "Performing",
+          "a": "middle",
+          "s": 12,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 445,
+          "y": 240,
+          "t": "delegate,\nremove obstacles",
+          "a": "middle",
+          "s": 10,
+          "tone": "muted"
+         },
+         {
+          "k": "dot",
+          "x": 570,
+          "y": 140,
+          "r": 6,
+          "tone": "accent"
+         },
+         {
+          "k": "text",
+          "x": 570,
+          "y": 162,
+          "t": "Adjourning",
+          "a": "middle",
+          "s": 12,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 570,
+          "y": 240,
+          "t": "recognise, capture\nlessons",
+          "a": "middle",
+          "s": 10,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 320,
+          "y": 274,
+          "t": "What the leader does at each stage",
+          "a": "middle",
+          "s": 10,
+          "b": true,
+          "tone": "muted"
+         }
+        ]
+       }
+      },
+      "The model is a useful lens rather than a strict sequence. Teams can skip or repeat stages, and a change of membership, goals or circumstances can send a performing team back to storming. Its practical value lies in two lessons. First, storming is normal and often necessary: a team that never disagrees may never have engaged with the hard questions. Second, the leader's role changes with the stage: more direction early on, more facilitation through storming and norming, more delegation once the team is performing."
+     ]
+    },
+    {
+     "id": "t20-s3",
+     "title": "What makes teams effective",
+     "blocks": [
+      "Research on teams points to a few conditions that matter more than individual talent.",
+      {
+       "ul": [
+        "**A clear, compelling purpose** that the team understands and cares about.",
+        "**Psychological safety**: the shared belief that it is safe to take interpersonal risks, such as asking questions, admitting mistakes or disagreeing. Amy Edmondson's research, and Google's study of its own teams, found it to be among the strongest predictors of team effectiveness (Chapter 5).",
+        "**Dependability**: members do what they say they will.",
+        "**Clear roles and goals**, so people know what is expected of them and of each other.",
+        "**Meaning and impact**: members believe their work matters.",
+        "**The right size.** Small teams, often cited as five to nine people, communicate and coordinate far more easily than large ones.",
+        "**Stability.** Teams whose membership changes constantly never get past forming."
+       ]
+      },
+      "Patrick Lencioni described the reverse in his model of five dysfunctions, each building on the one below: absence of trust, fear of conflict, lack of commitment, avoidance of accountability, and inattention to results. A team that cannot trust its members avoids honest conflict; without honest debate, members do not truly commit; without commitment, they do not hold each other accountable; and without accountability, individual interests displace the team's results."
+     ]
+    },
+    {
+     "id": "t20-s4",
+     "title": "Motivation",
+     "blocks": [
+      "Why do people work hard on a project, especially one where the project manager does not control their pay or promotion? Several theories offer partial answers, and together they are useful.",
+      "**Abraham Maslow's hierarchy of needs** suggests that people are motivated by needs in a rough order: physiological, safety, belonging, esteem and self-actualisation. Higher needs motivate once lower ones are reasonably met. For project teams, the practical point is that people worried about job security will not be motivated by interesting work until that worry is addressed.",
+      "**Frederick Herzberg's two-factor theory** distinguishes **hygiene factors**, such as pay, working conditions, policies and relationships with supervisors, from **motivators**, such as achievement, recognition, the work itself, responsibility and growth. Poor hygiene factors cause dissatisfaction, but good ones do not motivate; they only prevent dissatisfaction. Motivation comes from the motivators.",
+      "**Douglas McGregor** described two sets of assumptions managers hold. **Theory X** assumes people dislike work, avoid responsibility and need to be controlled. **Theory Y** assumes people find work natural, seek responsibility and are self-directed when committed to goals. The assumptions tend to be self-fulfilling: people treated as Theory X workers behave like them.",
+      "**Victor Vroom's expectancy theory** says people are motivated when they believe their effort will lead to performance, that performance will lead to an outcome, and that the outcome is something they value.",
+      "**Daniel Pink**, drawing on research by Edward Deci, Richard Ryan and others, argues that for complex, creative work, the strongest motivators are **autonomy** (control over how one works), **mastery** (getting better at something that matters) and **purpose** (working towards something bigger than oneself). External rewards such as bonuses can work for simple, routine tasks but often reduce motivation and creativity for complex ones.",
+      "For project managers without control of pay or promotion, these theories point in the same direction: give people meaningful work, a clear purpose, real responsibility, room to decide how to do their work, recognition for their contribution, and chances to learn. These are within a project manager's gift."
+     ]
+    },
+    {
+     "id": "t20-s5",
+     "title": "Developing the team",
+     "blocks": [
+      "Team development is an ongoing activity, not an event at the start. It includes:",
+      {
+       "ul": [
+        "**Building shared understanding** of the goal, the approach and each other's roles, often through a kick-off and a team charter or working agreements.",
+        "**Training and coaching**, both in skills the project needs and in ways of working.",
+        "**Recognition**: noticing and appreciating good work, specifically and promptly. Recognition costs little and is one of the most powerful motivators available.",
+        "**Team-building**: not only social events, but working together on real problems, which builds trust faster than any exercise.",
+        "**Co-location**, where possible, or deliberate practices that compensate for distance.",
+        "**Regular reflection**: retrospectives and lessons learned, so the team improves how it works."
+       ]
+      },
+      "**Emotional intelligence**, the ability to recognise and manage one's own emotions and to recognise and respond to others', underpins much of this. Daniel Goleman popularised the idea and argued that it predicts leadership effectiveness at least as well as technical skill. For project managers, it shows in practical ways: staying calm under pressure, noticing when a team member is struggling, handling criticism without defensiveness, and reading the mood of a meeting."
+     ]
+    },
+    {
+     "id": "t20-s6",
+     "title": "Self-organising and cross-functional teams",
+     "blocks": [
+      "Adaptive approaches emphasise **self-organising teams**: teams that decide for themselves how to do their work, within the goals and constraints set for them. Self-organisation does not mean no structure or no leadership. It means the people closest to the work make the decisions about how to do it, because they know most about it, and that leadership focuses on setting direction and removing obstacles.",
+      "They also emphasise **cross-functional teams**, which contain all the skills needed to deliver a working result, rather than handing work between specialist departments. Each hand-off is a source of delay, misunderstanding and lost knowledge; a cross-functional team removes many of them. Team members are often described as **T-shaped**: deep expertise in one area and enough breadth to help in others, which makes the team more resilient and flexible."
+     ]
+    },
+    {
+     "id": "t20-s7",
+     "title": "Looking after the team",
+     "blocks": [
+      "Projects often put people under pressure, and sustained pressure is costly. Overtime produces short-term gains and long-term losses: fatigue increases errors, reduces judgement and drives good people away. The agile principle of a **sustainable pace**, working at a rate the team could keep up indefinitely, reflects long experience that heroic effort is a symptom of a planning problem rather than a solution.",
+      "Looking after the team also means managing workload fairly, protecting people from unnecessary interruptions and context switching, dealing promptly with poor behaviour, and planning for what happens to people when the project ends. A project that wears out its team may deliver on time, but the organisation pays for it in turnover and in every project that follows.",
+      {
+       "box": "example",
+       "text": "Northfield's booking team included developers from the supplier, two trust IT staff and a part-time clinical adviser. In the first month, the supplier's developers and the trust's staff worked in separate rooms and communicated through tickets; progress was slow and blame frequent. Amira moved everyone into one room three days a week, ran a session where the team wrote its own working agreements, and asked the clinical adviser to bring two patients to the first sprint review. Seeing real patients struggle with an early screen did more for the team's sense of shared purpose than any meeting about it."
+      },
+      {
+       "box": "myth",
+       "text": "\"Self-organising teams don't need a leader.\" They need a different kind of leadership: one that sets direction, protects the team, removes obstacles and coaches, rather than assigning tasks. Teams left without any leadership often drift, avoid conflict or fall back on the loudest voice."
+      },
+      {
+       "box": "exam",
+       "text": "Expect questions on the Tuckman stages, the motivation theories (Maslow, Herzberg, McGregor, Vroom, and the autonomy-mastery-purpose view), emotional intelligence, team charters, recognition and co-location or virtual team practices. Scenario questions often reward supporting the team to solve its own problems, addressing conflict and performance issues directly but privately, recognising contributions, and protecting the team from distractions. In adaptive scenarios, the team decides how to do the work."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "A team shares a purpose, goals and mutual accountability; a group may not.",
+    "Teams typically move through forming, storming, norming, performing and adjourning; leadership should adapt to the stage.",
+    "Psychological safety, dependability, clear goals, meaning, small size and stability make teams effective.",
+    "Motivation for knowledge work comes from purpose, autonomy, mastery, recognition and meaningful work more than from pay alone.",
+    "Team development is continuous: shared agreements, coaching, recognition, working together and reflection.",
+    "Self-organising, cross-functional teams decide how to work; sustainable pace protects them and the organisation."
+   ],
+   "reading": [
+    "Jon R. Katzenbach and Douglas K. Smith, *The Wisdom of Teams* (1993).",
+    "Patrick Lencioni, *The Five Dysfunctions of a Team* (2002).",
+    "Daniel H. Pink, *Drive* (2009).",
+    "Amy C. Edmondson, *The Fearless Organization* (2018).",
+    "Daniel Goleman, *Emotional Intelligence* (1995)."
+   ],
+   "words": 1693,
+   "minutes": 8,
+   "n": 20
+  },
+  {
+   "id": "t21",
+   "part": 4,
+   "title": "Leadership, power and influence",
+   "summary": "What leadership means on a project, the main styles and when each fits, the sources of power a project manager can draw on, and how to influence without authority.",
+   "why": "Project managers lead people they often do not manage, through change that many of those people did not ask for. Formal authority is limited, and the plan alone motivates nobody. What moves a project forward is the ability to set direction, earn trust and persuade, which is leadership. It can be learned, and the first step is understanding the options.",
+   "sections": [
+    {
+     "id": "t21-s1",
+     "title": "What leadership is",
+     "blocks": [
+      "Leadership has been defined in hundreds of ways, but most definitions share a core: leadership is the ability to influence a group towards achieving shared goals. It is distinct from position. A person can hold a senior title and fail to lead, and a team member with no title can lead a group through a crisis.",
+      "On projects, leadership shows in a few recurring tasks: establishing and communicating a clear vision of what the project is for; aligning people and groups who have different interests behind that vision; motivating and supporting the people doing the work; making and taking responsibility for difficult decisions; and modelling the behaviour the project needs, such as honesty about problems, respect for others and calm under pressure.",
+      "Chapter 3 noted the difference between management, which produces order and predictability, and leadership, which produces direction and change. Projects need both, and the same person usually has to provide both."
+     ]
+    },
+    {
+     "id": "t21-s2",
+     "title": "Styles of leadership",
+     "blocks": [
+      "Researchers have described many leadership styles. A handful are especially useful for project work.",
+      {
+       "ul": [
+        "**Directive** or **autocratic** leaders decide and tell others what to do. This suits emergencies, inexperienced teams and situations needing fast, clear decisions, but stifles initiative if overused.",
+        "**Participative** or **democratic** leaders involve the team in decisions. This builds commitment and draws on more knowledge, but takes time.",
+        "**Laissez-faire** leaders largely leave the team to decide and act. This can suit highly capable, motivated teams, but becomes abdication if the team needs direction.",
+        "**Transactional** leaders focus on exchanges: rewards for performance, correction for deviation, management by exception. This provides clarity but rarely inspires.",
+        "**Transformational** leaders inspire people to exceed their own expectations through vision, personal example, intellectual stimulation and individual attention. This suits change and complex work.",
+        "**Servant** leaders put the needs of the team first, removing obstacles and helping people grow, so that the team can perform (Chapter 3).",
+        "**Charismatic** leaders inspire through personal energy and conviction, a powerful style that can also create dependence on one person."
+       ]
+      },
+      "No style is right everywhere. **Situational leadership**, developed by Paul Hersey and Ken Blanchard, argues that leaders should adapt their style to the readiness of the people they lead. For someone new to a task and unsure of themselves, a directing style; for someone learning but still developing, coaching; for someone capable but hesitant, supporting; and for someone both capable and committed, delegating. The same project manager might direct a new graduate, coach a developing analyst and delegate to an experienced architect, all on the same day.",
+      {
+       "fig": {
+        "title": "Situational leadership",
+        "caption": "The same leader directs someone new to a task, coaches someone learning it, supports someone able but unsure, and delegates to someone able and willing.",
+        "alt": "Four boxes left to right: Directing (much direction, little support), Coaching (much direction, much support), Supporting (little direction, much support), Delegating (little direction, little support). An arrow beneath shows the person's readiness for the task rising from low to high.",
+        "w": 640,
+        "h": 160,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 14,
+          "y": 20,
+          "w": 144,
+          "h": 80,
+          "tone": "warn",
+          "s": 12,
+          "t": "Directing\nmuch direction,\nlittle support"
+         },
+         {
+          "k": "box",
+          "x": 170,
+          "y": 20,
+          "w": 144,
+          "h": 80,
+          "tone": "accent",
+          "s": 12,
+          "t": "Coaching\nmuch direction,\nmuch support"
+         },
+         {
+          "k": "box",
+          "x": 326,
+          "y": 20,
+          "w": 144,
+          "h": 80,
+          "tone": "accent",
+          "s": 12,
+          "t": "Supporting\nlittle direction,\nmuch support"
+         },
+         {
+          "k": "box",
+          "x": 482,
+          "y": 20,
+          "w": 144,
+          "h": 80,
+          "tone": "good",
+          "s": 12,
+          "t": "Delegating\nlittle direction,\nlittle support"
+         },
+         {
+          "k": "line",
+          "p": [
+           14,
+           124,
+           614,
+           124
+          ],
+          "arrow": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 314,
+          "y": 144,
+          "t": "The person's readiness for this task: low  →  high",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "t21-s3",
+     "title": "Sources of power",
+     "blocks": [
+      "Power, in this context, is the capacity to influence others. John French and Bertram Raven's classic study, later extended, identified several bases of power, and later writers have added more. A project manager can draw on several.",
+      {
+       "ul": [
+        "**Legitimate** or **formal** power comes from position: the authority granted by the charter and the organisation. Project managers often have less of this than they need.",
+        "**Reward** power is the ability to give things people value: recognition, interesting assignments, good references.",
+        "**Coercive** or **punitive** power is the ability to impose negative consequences. It produces compliance at best, and resentment at worst; it should be a last resort.",
+        "**Expert** power comes from knowledge and skill that others respect.",
+        "**Referent** power comes from being liked and admired, so that others want to identify with you.",
+        "**Informational** power comes from having or controlling information others need.",
+        "**Relational** power comes from networks and relationships: knowing who to ask and having their goodwill."
+       ]
+      },
+      "Expert, referent, informational and relational power are personal: they belong to the person, not the position, and they cannot be granted by a charter. They are also the most durable, because they rest on others' willing respect. Project managers who build them, by being competent, well informed, connected, fair and reliable, can influence far beyond their formal authority."
+     ]
+    },
+    {
+     "id": "t21-s4",
+     "title": "Influencing without authority",
+     "blocks": [
+      "Much of a project manager's work involves getting people to do things they are not obliged to do: a functional manager to release a specialist, a director to make a decision quickly, a supplier to prioritise a fix, a team in another department to change its plans. A few principles help.",
+      {
+       "ul": [
+        "**Understand what the other person wants.** Every stakeholder has goals, pressures and concerns. Influence starts with knowing them.",
+        "**Find mutual benefit.** Allan Cohen and David Bradford's model of influence describes it as exchange: people help those who help them, in currencies they value, such as information, support, recognition or resources.",
+        "**Build relationships before you need them.** Asking a stranger for a favour is hard; asking someone you have helped is easy.",
+        "**Make it easy to agree.** A clear request, with the work already done to support it, gets a faster yes than a vague problem.",
+        "**Use evidence and reason**, presented in the other person's terms.",
+        "**Be consistent and trustworthy.** Reputations for honesty and fairness accumulate, and they make every future request easier."
+       ]
+      },
+      "Robert Cialdini's research on persuasion identified principles such as reciprocity, commitment and consistency, social proof, authority, liking and scarcity. They describe how people are actually influenced, and they are worth knowing so that you can use them honestly, and recognise when others are using them on you."
+     ]
+    },
+    {
+     "id": "t21-s5",
+     "title": "Leading change and uncertainty",
+     "blocks": [
+      "Projects lead people through change, and change makes people anxious. Leadership in these conditions involves explaining why the change matters, being honest about what is known and unknown, giving people a sense of control where possible, acknowledging losses, and keeping attention on the purpose. Leaders who pretend to certainty they do not have lose credibility when events contradict them; leaders who share their uncertainty while showing how the project will navigate it tend to keep their teams' trust."
+     ]
+    },
+    {
+     "id": "t21-s6",
+     "title": "The leader's own development",
+     "blocks": [
+      "Leadership begins with self-awareness: understanding your own strengths, preferences, blind spots and effect on others. Feedback from colleagues, reflection on experience, coaching and mentoring all build it. Many leadership failures on projects are failures of self-awareness: a project manager who does not realise that their impatience silences the team, or that their wish to be liked stops them confronting a problem.",
+      "**Emotional intelligence** matters here as well as in teams (Chapter 20): managing one's own reactions under pressure, empathising with others, and handling difficult conversations constructively. So does **integrity**, consistently acting on stated values, because people follow leaders they trust.",
+      {
+       "box": "example",
+       "text": "Halfway through Northfield's rollout, the trust announced a restructure that put several clinic administrators' jobs at risk. Morale in the clinics collapsed, and some staff saw the booking system as the cause. Amira could not change the restructure, and she did not pretend otherwise. She met the clinic managers, acknowledged the uncertainty, explained truthfully what the system would and would not change about their roles, and arranged for HR to answer questions she could not. She also slowed the rollout at two clinics where staff were most affected. The project lost three weeks and kept the clinics' cooperation, which the sponsor agreed was the better trade."
+      },
+      {
+       "box": "myth",
+       "text": "\"Leaders are born, not made.\" Some traits help, but studies of leadership development consistently find that the behaviours of effective leaders can be learned: setting direction, listening, giving feedback, adapting style, building trust. Most good project leaders became good through experience and deliberate reflection."
+      },
+      {
+       "box": "exam",
+       "text": "The exam strongly favours servant leadership and collaborative, participative styles, with directive behaviour reserved for emergencies or inexperienced teams. Expect questions on situational leadership, the types of power (and the preference for expert and referent over coercive), and emotional intelligence. In scenarios, the right answer usually influences through understanding, evidence and relationships rather than formal authority or threats, and adapts the leadership approach to the people and the situation."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Leadership is influencing a group towards shared goals; it is distinct from position.",
+    "Styles range from directive to delegating; situational leadership matches style to the people's readiness.",
+    "Power comes from position, reward, coercion, expertise, admiration, information and relationships. The personal sources are the most durable.",
+    "Influence without authority rests on understanding others' goals, mutual benefit, relationships, clear requests, evidence and trust.",
+    "Leading change means honesty about uncertainty and loss, and a steady focus on purpose.",
+    "Leadership is learned, starting with self-awareness, emotional intelligence and integrity."
+   ],
+   "reading": [
+    "Paul Hersey and Kenneth Blanchard, *Management of Organizational Behavior* (many editions). Situational leadership.",
+    "James MacGregor Burns, *Leadership* (1978). The origin of the transformational and transactional distinction.",
+    "Allan R. Cohen and David L. Bradford, *Influence Without Authority* (third edition, 2017).",
+    "Robert B. Cialdini, *Influence: The Psychology of Persuasion* (1984, revised later).",
+    "Simon Sinek, *Leaders Eat Last* (2014). An accessible case for servant leadership."
+   ],
+   "words": 1450,
+   "minutes": 7,
+   "n": 21
+  },
+  {
+   "id": "t22",
+   "part": 4,
+   "title": "Conflict, negotiation and decisions",
+   "summary": "Where project conflict comes from, the ways of handling it and when each fits, how to negotiate well, and how groups can make good decisions.",
+   "why": "Projects concentrate conflict: scarce resources, competing priorities, tight deadlines, different professional values and people who must work closely without having chosen each other. Conflict cannot be avoided, and should not be, because some of it is how good ideas are tested. What matters is handling it well. The same goes for negotiation and decision-making, which together decide most of what a project actually does.",
+   "sections": [
+    {
+     "id": "t22-s1",
+     "title": "Where conflict comes from",
+     "blocks": [
+      "Studies of project conflict have long found that its most common sources are not personalities, though personality clashes get the most attention. Classic research by Hans Thamhain and David Wilemon ranked the main sources as schedules, priorities, resources, technical opinions, administrative procedures, cost, and only then personalities. Most project conflict is about the work.",
+      "That finding is useful, because conflicts about the work can usually be resolved by addressing the work: clarifying priorities, making trade-offs explicit, involving the right decision-maker. Many apparent personality clashes turn out, on closer inspection, to be disagreements about priorities or resources that have become personal because nobody resolved them.",
+      "Other common sources include unclear roles, ambiguous goals, poor communication, differences in values or culture, competition for scarce resources, and incompatible incentives, such as a functional manager rewarded for departmental efficiency while the project needs her people's time."
+     ]
+    },
+    {
+     "id": "t22-s2",
+     "title": "Healthy and unhealthy conflict",
+     "blocks": [
+      "Not all conflict is bad. **Task conflict**, disagreement about ideas, approaches and decisions, can improve outcomes by exposing weaknesses and generating better options, as long as people trust each other and the disagreement stays focused on the problem. **Relationship conflict**, personal friction and animosity, almost always harms performance, consuming energy and undermining trust.",
+      "The project manager's aim is therefore not to eliminate conflict but to keep it productive: to encourage open debate about the work while preventing it from becoming personal. Teams with psychological safety (Chapter 20) are better at this, because people can disagree without feeling attacked."
+     ]
+    },
+    {
+     "id": "t22-s3",
+     "title": "Ways of handling conflict",
+     "blocks": [
+      "Kenneth Thomas and Ralph Kilmann described five approaches to conflict, based on two dimensions: how far a person tries to satisfy their own concerns (assertiveness) and how far they try to satisfy the other's (cooperativeness). Project management literature often uses closely related labels.",
+      {
+       "ul": [
+        "**Collaborating**, or **problem solving**: working together to find a solution that fully satisfies both sides. High assertiveness, high cooperation. It takes time and trust, but produces the best and most lasting resolutions, and addresses the underlying cause.",
+        "**Compromising**, or **reconciling**: each side gives up something to reach an acceptable middle. It is quicker, but often leaves both sides partly dissatisfied and the underlying issue unresolved.",
+        "**Accommodating**, or **smoothing**: emphasising areas of agreement and conceding to the other side. It preserves relationships and suits issues that matter more to the other person, but repeated use builds resentment and leaves real problems unsolved.",
+        "**Competing**, or **forcing**: pursuing one's own position at the other's expense, often using authority. It is fast and sometimes necessary in emergencies or for unpopular but essential decisions, but it damages relationships if used often.",
+        "**Avoiding**, or **withdrawing**: postponing or sidestepping the conflict. It can be useful to let tempers cool or when the issue is trivial, but problems avoided usually grow."
+       ]
+      },
+      {
+       "fig": {
+        "title": "Five ways to handle conflict",
+        "caption": "Based on Thomas and Kilmann's model. Collaborating satisfies both sides and fixes the cause; each other mode fits some situations and harms others if overused.",
+        "alt": "A grid with assertiveness up the side and cooperativeness along the bottom. Top left Competing or forcing; top right Collaborating or problem solving; centre Compromising or reconciling; bottom left Avoiding or withdrawing; bottom right Accommodating or smoothing.",
+        "w": 640,
+        "h": 285,
+        "shapes": [
+         {
+          "k": "line",
+          "p": [
+           90,
+           250,
+           90,
+           20
+          ],
+          "arrow": true,
+          "tone": "muted"
+         },
+         {
+          "k": "line",
+          "p": [
+           90,
+           250,
+           620,
+           250
+          ],
+          "arrow": true,
+          "tone": "muted"
+         },
+         {
+          "k": "box",
+          "x": 110,
+          "y": 30,
+          "w": 170,
+          "h": 56,
+          "tone": "bad",
+          "s": 12,
+          "t": "Competing\nforcing"
+         },
+         {
+          "k": "box",
+          "x": 430,
+          "y": 30,
+          "w": 170,
+          "h": 56,
+          "tone": "good",
+          "s": 12,
+          "t": "Collaborating\nproblem solving",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 270,
+          "y": 112,
+          "w": 170,
+          "h": 56,
+          "tone": "accent",
+          "s": 12,
+          "t": "Compromising\nreconciling"
+         },
+         {
+          "k": "box",
+          "x": 110,
+          "y": 180,
+          "w": 170,
+          "h": 56,
+          "tone": "muted",
+          "s": 12,
+          "t": "Avoiding\nwithdrawing"
+         },
+         {
+          "k": "box",
+          "x": 430,
+          "y": 180,
+          "w": 170,
+          "h": 56,
+          "tone": "warn",
+          "s": 12,
+          "t": "Accommodating\nsmoothing"
+         },
+         {
+          "k": "text",
+          "x": 355,
+          "y": 270,
+          "t": "Cooperativeness: satisfying the other side",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 50,
+          "y": 135,
+          "t": "Asser-\ntiveness:\nyour own\nconcerns",
+          "a": "middle",
+          "s": 10,
+          "b": true,
+          "tone": "muted"
+         }
+        ]
+       }
+      },
+      "No approach is always right. Collaborating is generally preferred for important issues where there is time and goodwill, because it resolves the cause rather than the symptom. But a skilled project manager chooses deliberately: forcing a safety decision, accommodating on a matter that is trivial to the project but important to someone else, withdrawing briefly from a heated meeting to resume when calmer.",
+      "A few practical habits help with most conflicts: address conflict early, before positions harden; deal with it privately rather than in public; focus on the issue and its effects, not on personalities; listen to understand each side's underlying interests; and make sure the resolution is clear and followed through."
+     ]
+    },
+    {
+     "id": "t22-s4",
+     "title": "Negotiation",
+     "blocks": [
+      "**Negotiation** is a discussion aimed at reaching an agreement between parties with different interests. Project managers negotiate constantly: for people with functional managers, for scope and dates with sponsors, for prices and terms with suppliers, for priorities with other projects.",
+      "The most influential modern approach comes from Roger Fisher and William Ury's book *Getting to Yes*, based on work at the Harvard Negotiation Project. It proposes **principled negotiation**, built on four ideas.",
+      {
+       "ul": [
+        "**Separate the people from the problem.** Treat the other party as a partner in solving a shared problem, while being firm on the substance.",
+        "**Focus on interests, not positions.** A position is what someone says they want (\"we need the system live by March\"); an interest is why they want it (\"the old contract expires in April and renewal is expensive\"). Interests often allow solutions that positions do not.",
+        "**Invent options for mutual gain** before deciding, rather than fighting over a single option.",
+        "**Insist on objective criteria**: market prices, standards, precedent, expert opinion, so that the outcome rests on principle rather than pressure."
+       ]
+      },
+      "They also introduced the idea of a **BATNA**, the best alternative to a negotiated agreement: what you will do if no agreement is reached. Knowing your BATNA tells you when to walk away; improving it strengthens your position; and estimating the other side's BATNA tells you how much room there is. A negotiator without a clear BATNA may accept a bad deal for fear of no deal.",
+      "Negotiation outcomes are often described as **win-win**, where both sides gain; **win-lose**, where one gains at the other's expense; or **lose-lose**, where both are worse off. On projects, where the same people must keep working together, win-lose outcomes are usually costly, because the losing side has many chances to make the winner's life difficult later.",
+      {
+       "box": "example",
+       "text": "Northfield needed one of the trust's two database specialists for six weeks, and the head of IT, who managed him, refused: her team was already behind on a security upgrade. Rather than escalate, Amira asked what the upgrade needed. It turned out the specialist's most time-consuming task was migrating test data, which the booking project's supplier could do quickly with its own tools. Amira offered the supplier's help with the migration in exchange for the specialist's time. The upgrade finished early, and the booking project got its specialist."
+      }
+     ]
+    },
+    {
+     "id": "t22-s5",
+     "title": "Making decisions",
+     "blocks": [
+      "Projects run on decisions, and the quality of those decisions shapes the outcome more than almost anything else. Two questions matter for any decision: who should make it, and how?",
+      "Who decides should be clear before the decision arises. Some decisions belong to the project manager, some to the team, some to the sponsor or a governance body, and some to the product owner. Unclear decision rights produce either paralysis, where nobody decides, or conflict, where several people decide differently. A RACI chart or similar responsibility matrix, which shows who is responsible, accountable, consulted and informed for each decision or deliverable, helps make this explicit.",
+      "How to decide depends on the decision. Common approaches include:",
+      {
+       "ul": [
+        "**Autocratic**: one person decides. Fast, and appropriate when time is short, the decision is within one person's expertise, or the team expects it.",
+        "**Consultative**: one person decides after hearing others' views. A good balance for many project decisions.",
+        "**Majority vote**: quick for a group, but can leave a large minority uncommitted.",
+        "**Consensus**: the group discusses until everyone can accept the decision. Slower, but produces strong commitment.",
+        "**Unanimity**: everyone actively agrees. Rarely practical for significant decisions."
+       ]
+      },
+      "Adaptive teams use several lightweight group techniques. **Fist of five** asks each person to show from zero to five fingers to indicate their support, revealing reservations quickly. **Roman voting** uses thumbs up, sideways or down. **Dot voting** gives each person a few votes to distribute across options, useful for prioritising. And **planning poker**, used for estimation, asks everyone to reveal their estimate at once, so that people are not anchored by the first number spoken."
+     ]
+    },
+    {
+     "id": "t22-s6",
+     "title": "Better decisions under uncertainty",
+     "blocks": [
+      "Research on judgement, especially by Daniel Kahneman and Amos Tversky, has shown how predictably human decisions go wrong. A few biases are especially common on projects.",
+      {
+       "ul": [
+        "**Anchoring**: the first number mentioned, such as an executive's hoped-for date, pulls every later estimate towards it.",
+        "**Confirmation bias**: people seek and remember evidence that supports what they already believe.",
+        "**Sunk cost fallacy**: continuing because of what has already been spent (Chapter 4).",
+        "**Groupthink**: a cohesive group suppresses dissent to preserve harmony, and reaches poor decisions with confidence.",
+        "**Overconfidence**: experts in particular are often more certain than their track record justifies."
+       ]
+      },
+      "Practical defences include gathering independent views before discussion (as planning poker does), assigning someone to argue the opposite case, using the outside view (Chapter 9), running a pre-mortem (Chapter 14), separating the decision from the people who proposed the options, and recording the reasons for decisions so that they can be learned from later.",
+      {
+       "box": "myth",
+       "text": "\"Good teams don't have conflict.\" Good teams have plenty of conflict about ideas and very little about each other. A team that never disagrees is usually either not engaging with the hard questions or not feeling safe enough to say what it thinks."
+      },
+      {
+       "box": "exam",
+       "text": "Expect questions on the conflict resolution techniques and which is best in a given situation (collaborate or problem-solve is usually preferred; force only for emergencies or essential decisions; withdraw only temporarily or for trivial issues), on the common sources of project conflict, and on negotiation principles such as interests over positions and win-win outcomes. Scenario questions often ask what the project manager should do first: usually, meet the people involved privately and understand the issue before acting. Know group decision techniques such as fist of five and planning poker."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Most project conflict is about schedules, priorities, resources and technical choices, not personalities.",
+    "Task conflict can improve decisions; relationship conflict harms teams. Keep disagreement about the work.",
+    "Collaborating solves the underlying problem and is usually preferred; compromising, accommodating, forcing and avoiding each have their place.",
+    "Principled negotiation separates people from the problem, focuses on interests, invents options and uses objective criteria; know your best alternative to agreement.",
+    "Decide who decides before decisions arise; choose a decision method that fits the decision.",
+    "Predictable biases distort project decisions; independent views, the outside view and pre-mortems help."
+   ],
+   "reading": [
+    "Roger Fisher, William Ury and Bruce Patton, *Getting to Yes* (1981, revised 2011).",
+    "Kenneth W. Thomas and Ralph H. Kilmann, *Thomas-Kilmann Conflict Mode Instrument* (1974). The five conflict modes.",
+    "Daniel Kahneman, Olivier Sibony and Cass R. Sunstein, *Noise* (2021). Why judgements vary and how to improve them.",
+    "Irving L. Janis, *Groupthink* (second edition, 1982).",
+    "Kerry Patterson and others, *Crucial Conversations* (2002)."
+   ],
+   "words": 1711,
+   "minutes": 8,
+   "n": 22
   }
  ]
 });

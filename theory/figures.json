@@ -3296,5 +3296,535 @@
         "tone": "muted"
       }
     ]
+  },
+  "t18-grid": {
+    "title": "The power and interest grid",
+    "caption": "Where a stakeholder sits suggests how much attention they need. People move between boxes as the project touches them, so revisit the grid.",
+    "alt": "A two-by-two grid with power up the side and interest along the bottom. High power, low interest: keep satisfied. High power, high interest: manage closely. Low power, low interest: monitor. Low power, high interest: keep informed.",
+    "w": 640,
+    "h": 275,
+    "shapes": [
+      {
+        "k": "box",
+        "x": 130,
+        "y": 20,
+        "w": 240,
+        "h": 98,
+        "tone": "warn",
+        "s": 12,
+        "t": "Keep satisfied\nconsult; keep\ncomfortable"
+      },
+      {
+        "k": "box",
+        "x": 380,
+        "y": 20,
+        "w": 240,
+        "h": 98,
+        "tone": "bad",
+        "s": 12,
+        "t": "Manage closely\ninvolve in\ndecisions"
+      },
+      {
+        "k": "box",
+        "x": 130,
+        "y": 125,
+        "w": 240,
+        "h": 98,
+        "tone": "muted",
+        "s": 12,
+        "t": "Monitor\nminimal effort,\nwatch for change"
+      },
+      {
+        "k": "box",
+        "x": 380,
+        "y": 125,
+        "w": 240,
+        "h": 98,
+        "tone": "good",
+        "s": 12,
+        "t": "Keep informed\nshare news;\nthey can help"
+      },
+      {
+        "k": "text",
+        "x": 120,
+        "y": 69,
+        "t": "High",
+        "a": "end",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 120,
+        "y": 174,
+        "t": "Low",
+        "a": "end",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 250,
+        "y": 242,
+        "t": "Low",
+        "a": "middle",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 500,
+        "y": 242,
+        "t": "High",
+        "a": "middle",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 375,
+        "y": 264,
+        "t": "Interest",
+        "a": "middle",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 48,
+        "y": 122,
+        "t": "Power",
+        "a": "middle",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      }
+    ]
+  },
+  "t19-richness": {
+    "title": "Richness of communication",
+    "caption": "Richer channels carry tone, questions and immediate feedback. Use them for what is complex or sensitive, and lighter channels for the rest.",
+    "alt": "Five bars rising left to right: shared document, email, phone call, video call, and face to face at a whiteboard. An arrow beneath reads: richer means faster understanding and more cost per person.",
+    "w": 640,
+    "h": 265,
+    "shapes": [
+      {
+        "k": "line",
+        "p": [
+          40,
+          220,
+          620,
+          220
+        ],
+        "tone": "muted"
+      },
+      {
+        "k": "box",
+        "x": 50,
+        "y": 180,
+        "w": 100,
+        "h": 40,
+        "tone": "muted",
+        "s": 11,
+        "t": "Shared\ndocument"
+      },
+      {
+        "k": "box",
+        "x": 164,
+        "y": 142,
+        "w": 100,
+        "h": 78,
+        "tone": "muted",
+        "s": 11,
+        "t": "Email"
+      },
+      {
+        "k": "box",
+        "x": 278,
+        "y": 104,
+        "w": 100,
+        "h": 116,
+        "tone": "accent",
+        "s": 11,
+        "t": "Phone\ncall"
+      },
+      {
+        "k": "box",
+        "x": 392,
+        "y": 66,
+        "w": 100,
+        "h": 154,
+        "tone": "accent",
+        "s": 11,
+        "t": "Video\ncall"
+      },
+      {
+        "k": "box",
+        "x": 506,
+        "y": 28,
+        "w": 100,
+        "h": 192,
+        "tone": "good",
+        "s": 11,
+        "t": "Face to face\nat a whiteboard"
+      },
+      {
+        "k": "line",
+        "p": [
+          50,
+          236,
+          610,
+          236
+        ],
+        "arrow": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 330,
+        "y": 254,
+        "t": "Richer: faster understanding, more cost per person",
+        "a": "middle",
+        "s": 11,
+        "tone": "muted"
+      }
+    ]
+  },
+  "t20-tuckman": {
+    "title": "How teams develop",
+    "caption": "Performance often dips while a group storms, then rises as it agrees how to work. The leader's role shifts from directing to delegating.",
+    "alt": "A line rising and falling through five stages: Forming, a dip at Storming, rising through Norming to a peak at Performing, then Adjourning. Under each, the leader's role: give direction; surface and resolve conflict; help agree ways of working; delegate and remove obstacles; recognise and capture lessons.",
+    "w": 640,
+    "h": 285,
+    "shapes": [
+      {
+        "k": "line",
+        "p": [
+          70,
+          150,
+          195,
+          195,
+          320,
+          120,
+          445,
+          60,
+          570,
+          140
+        ],
+        "tone": "accent"
+      },
+      {
+        "k": "dot",
+        "x": 70,
+        "y": 150,
+        "r": 6,
+        "tone": "accent"
+      },
+      {
+        "k": "text",
+        "x": 70,
+        "y": 132,
+        "t": "Forming",
+        "a": "middle",
+        "s": 12,
+        "b": true
+      },
+      {
+        "k": "text",
+        "x": 70,
+        "y": 240,
+        "t": "give direction",
+        "a": "middle",
+        "s": 10,
+        "tone": "muted"
+      },
+      {
+        "k": "dot",
+        "x": 195,
+        "y": 195,
+        "r": 6,
+        "tone": "accent"
+      },
+      {
+        "k": "text",
+        "x": 195,
+        "y": 217,
+        "t": "Storming",
+        "a": "middle",
+        "s": 12,
+        "b": true
+      },
+      {
+        "k": "text",
+        "x": 195,
+        "y": 240,
+        "t": "surface and\nresolve conflict",
+        "a": "middle",
+        "s": 10,
+        "tone": "muted"
+      },
+      {
+        "k": "dot",
+        "x": 320,
+        "y": 120,
+        "r": 6,
+        "tone": "accent"
+      },
+      {
+        "k": "text",
+        "x": 320,
+        "y": 102,
+        "t": "Norming",
+        "a": "middle",
+        "s": 12,
+        "b": true
+      },
+      {
+        "k": "text",
+        "x": 320,
+        "y": 240,
+        "t": "help agree\nways of working",
+        "a": "middle",
+        "s": 10,
+        "tone": "muted"
+      },
+      {
+        "k": "dot",
+        "x": 445,
+        "y": 60,
+        "r": 6,
+        "tone": "accent"
+      },
+      {
+        "k": "text",
+        "x": 445,
+        "y": 42,
+        "t": "Performing",
+        "a": "middle",
+        "s": 12,
+        "b": true
+      },
+      {
+        "k": "text",
+        "x": 445,
+        "y": 240,
+        "t": "delegate,\nremove obstacles",
+        "a": "middle",
+        "s": 10,
+        "tone": "muted"
+      },
+      {
+        "k": "dot",
+        "x": 570,
+        "y": 140,
+        "r": 6,
+        "tone": "accent"
+      },
+      {
+        "k": "text",
+        "x": 570,
+        "y": 162,
+        "t": "Adjourning",
+        "a": "middle",
+        "s": 12,
+        "b": true
+      },
+      {
+        "k": "text",
+        "x": 570,
+        "y": 240,
+        "t": "recognise, capture\nlessons",
+        "a": "middle",
+        "s": 10,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 320,
+        "y": 274,
+        "t": "What the leader does at each stage",
+        "a": "middle",
+        "s": 10,
+        "b": true,
+        "tone": "muted"
+      }
+    ]
+  },
+  "t21-situational": {
+    "title": "Situational leadership",
+    "caption": "The same leader directs someone new to a task, coaches someone learning it, supports someone able but unsure, and delegates to someone able and willing.",
+    "alt": "Four boxes left to right: Directing (much direction, little support), Coaching (much direction, much support), Supporting (little direction, much support), Delegating (little direction, little support). An arrow beneath shows the person's readiness for the task rising from low to high.",
+    "w": 640,
+    "h": 160,
+    "shapes": [
+      {
+        "k": "box",
+        "x": 14,
+        "y": 20,
+        "w": 144,
+        "h": 80,
+        "tone": "warn",
+        "s": 12,
+        "t": "Directing\nmuch direction,\nlittle support"
+      },
+      {
+        "k": "box",
+        "x": 170,
+        "y": 20,
+        "w": 144,
+        "h": 80,
+        "tone": "accent",
+        "s": 12,
+        "t": "Coaching\nmuch direction,\nmuch support"
+      },
+      {
+        "k": "box",
+        "x": 326,
+        "y": 20,
+        "w": 144,
+        "h": 80,
+        "tone": "accent",
+        "s": 12,
+        "t": "Supporting\nlittle direction,\nmuch support"
+      },
+      {
+        "k": "box",
+        "x": 482,
+        "y": 20,
+        "w": 144,
+        "h": 80,
+        "tone": "good",
+        "s": 12,
+        "t": "Delegating\nlittle direction,\nlittle support"
+      },
+      {
+        "k": "line",
+        "p": [
+          14,
+          124,
+          614,
+          124
+        ],
+        "arrow": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 314,
+        "y": 144,
+        "t": "The person's readiness for this task: low  →  high",
+        "a": "middle",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      }
+    ]
+  },
+  "t22-conflict": {
+    "title": "Five ways to handle conflict",
+    "caption": "Based on Thomas and Kilmann's model. Collaborating satisfies both sides and fixes the cause; each other mode fits some situations and harms others if overused.",
+    "alt": "A grid with assertiveness up the side and cooperativeness along the bottom. Top left Competing or forcing; top right Collaborating or problem solving; centre Compromising or reconciling; bottom left Avoiding or withdrawing; bottom right Accommodating or smoothing.",
+    "w": 640,
+    "h": 285,
+    "shapes": [
+      {
+        "k": "line",
+        "p": [
+          90,
+          250,
+          90,
+          20
+        ],
+        "arrow": true,
+        "tone": "muted"
+      },
+      {
+        "k": "line",
+        "p": [
+          90,
+          250,
+          620,
+          250
+        ],
+        "arrow": true,
+        "tone": "muted"
+      },
+      {
+        "k": "box",
+        "x": 110,
+        "y": 30,
+        "w": 170,
+        "h": 56,
+        "tone": "bad",
+        "s": 12,
+        "t": "Competing\nforcing"
+      },
+      {
+        "k": "box",
+        "x": 430,
+        "y": 30,
+        "w": 170,
+        "h": 56,
+        "tone": "good",
+        "s": 12,
+        "t": "Collaborating\nproblem solving",
+        "b": true
+      },
+      {
+        "k": "box",
+        "x": 270,
+        "y": 112,
+        "w": 170,
+        "h": 56,
+        "tone": "accent",
+        "s": 12,
+        "t": "Compromising\nreconciling"
+      },
+      {
+        "k": "box",
+        "x": 110,
+        "y": 180,
+        "w": 170,
+        "h": 56,
+        "tone": "muted",
+        "s": 12,
+        "t": "Avoiding\nwithdrawing"
+      },
+      {
+        "k": "box",
+        "x": 430,
+        "y": 180,
+        "w": 170,
+        "h": 56,
+        "tone": "warn",
+        "s": 12,
+        "t": "Accommodating\nsmoothing"
+      },
+      {
+        "k": "text",
+        "x": 355,
+        "y": 270,
+        "t": "Cooperativeness: satisfying the other side",
+        "a": "middle",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 50,
+        "y": 135,
+        "t": "Asser-\ntiveness:\nyour own\nconcerns",
+        "a": "middle",
+        "s": 10,
+        "b": true,
+        "tone": "muted"
+      }
+    ]
   }
 }
