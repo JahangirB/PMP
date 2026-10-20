@@ -265,7 +265,7 @@ module.exports = [
           eyebrowHidden: document.querySelector(".nav-grp > .eyebrow").getBoundingClientRect().width <= 1,
           supTitle: document.getElementById("nav-support").getAttribute("title"),
           supW: document.getElementById("nav-support").getBoundingClientRect().width,
-          exportTitle: document.getElementById("export-btn").getAttribute("title"),
+          foot: Array.prototype.map.call(document.querySelectorAll(".rail-foot button"), function (b) { return b.id; }),
           main: document.querySelector(".main").getBoundingClientRect().width,
           overflow: document.documentElement.scrollWidth > window.innerWidth,
           inDoc: JSON.stringify(PMP.Sync.toDoc(PMP.Store.state)).indexOf("railCollapsed") >= 0
@@ -277,7 +277,7 @@ module.exports = [
       assert.ok(c.brandHidden && c.eyebrowHidden);
       assert.strictEqual(c.supTitle, "Support the app");
       assert.ok(c.supW <= 60, "the pill is just its heart");
-      assert.strictEqual(c.exportTitle, "Export");
+      assert.deepStrictEqual(c.foot, ["theme-btn"], "only the theme toggle at the foot: Export lives in Cloud sync");
       assert.ok(c.main >= before.main + 170, "main takes the freed width");
       assert.ok(!c.overflow, "no horizontal overflow");
       assert.ok(!c.inDoc, "device-only");

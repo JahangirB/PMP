@@ -213,8 +213,9 @@ Off until you add your own free Google AI Studio API key
 - **What you can ask:** anything, in the chat. You can also send a question
   you just answered with "Ask about this question", or ask for a full review of
   your progress.
-- **Which model:** it picks the newest Gemini Flash model itself (3.5 or
-  later) and falls back to another one if a model fails.
+- **Which model:** it uses Google's current Gemini Flash models (3.5 or
+  later, up to five) and takes turns between them, one message each, so each
+  model's free quota is shared out. If one fails, the next is tried.
 - **What each message sends to Google, with your key:**
   - the tutor instructions;
   - your last 30 chat messages;
@@ -250,8 +251,8 @@ Off until you add your own free Google AI Studio API key
 
 ## Backups and cloud sync
 
-- **Backups:** save a backup file from **Backup and packs** (web) or
-  **Question banks and backup** (phones). The same file restores in the web app,
+- **Backups:** save a backup file from **Backup and packs** or **Export** in
+  **Cloud sync** (web), or **Question banks and backup** (phones). The same file restores in the web app,
   on Android and on iPhone.
 - **Cloud sync:** keeps all your devices in step through one file in **your
   own Google Drive**. It runs through a small Google Apps Script that you
