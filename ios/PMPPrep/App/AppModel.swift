@@ -5,7 +5,7 @@ import UIKit
 
 enum Dest: String, CaseIterable {
     case DASHBOARD, PRACTICE, MOCK, SITUATIONAL, LEARN, FLASHCARDS, FORMULAS, REFERENCE, ANALYTICS, MISTAKES, PLANNER, DATA,
-         COACH, MENU, GUIDE, FITNESS, REPORTS, SESSION, SETTINGS, BOOK, SEARCH, SYNC, SUPPORT, UPDATES
+         COACH, MENU, GUIDE, FITNESS, REPORTS, SESSION, SETTINGS, BOOK, SEARCH, SYNC, SUPPORT, UPDATES, THEORY
     var title: String {
         switch self {
         case .DASHBOARD: "PMP Prep"; case .PRACTICE: "Practice"; case .MOCK: "Mock Exam"; case .SITUATIONAL: "Situational Trainer"
@@ -13,7 +13,7 @@ enum Dest: String, CaseIterable {
         case .ANALYTICS: "Analytics"; case .MISTAKES: "Mistake Journal"; case .PLANNER: "Study Planner"; case .DATA: "Banks & Backup"
         case .COACH: "Coach and notes"; case .MENU: "Menu"; case .GUIDE: "How it works"; case .FITNESS: "Exam fitness"
         case .REPORTS: "Weekly reports"; case .SESSION: "Session"; case .SETTINGS: "Study settings"; case .BOOK: "Ready to book?"; case .SEARCH: "Search"
-        case .SYNC: "Cloud sync"; case .SUPPORT: "Support the app"; case .UPDATES: "App updates"
+        case .SYNC: "Cloud sync"; case .SUPPORT: "Support the app"; case .UPDATES: "App updates"; case .THEORY: "Theory"
         }
     }
 }
@@ -117,6 +117,30 @@ final class AppModel: ObservableObject {
         }
     }
 
+    /* ── Theory (Labs): read chapters and the place stay on this phone, as on the web ── */
+    @Published private(set) var theoryRead: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "theoryRead") ?? [])
+    /** The chapter open in the reader, or nil for the contents. */
+    @Published var theoryChapter: String? = nil
+    /** The section the reader opens at, when continuing. */
+    @Published private(set) var theoryStart: String? = nil
+    var theoryPlace: (ch: String, sec: String?)? {
+        guard let ch = UserDefaults.standard.string(forKey: "theoryLastCh") else { return nil }
+        return (ch, UserDefaults.standard.string(forKey: "theoryLastSec"))
+    }
+    func openTheory(_ id: String, resume: Bool = false) {
+        theoryStart = resume && theoryPlace?.ch == id ? theoryPlace?.sec : nil
+        theoryChapter = id
+        UserDefaults.standard.set(id, forKey: "theoryLastCh")
+        if !resume { UserDefaults.standard.removeObject(forKey: "theoryLastSec") }
+    }
+    func saveTheoryPlace(_ id: String, _ sec: String) {
+        UserDefaults.standard.set(id, forKey: "theoryLastCh"); UserDefaults.standard.set(sec, forKey: "theoryLastSec")
+    }
+    func setTheoryRead(_ id: String, _ on: Bool) {
+        if on { theoryRead.insert(id) } else { theoryRead.remove(id) }
+        UserDefaults.standard.set(Array(theoryRead), forKey: "theoryRead")
+    }
+
     /* ── app updates (AppUpdate: through SideStore or AltStore) ── */
 
     enum UpdateState: Equatable { case idle, checking, upToDate, available(IosRelease), failed(String) }
@@ -200,6 +224,7 @@ final class AppModel: ObservableObject {
         case .LEARN: if openLesson != nil { openLesson = nil; return true }
         case .FLASHCARDS: if cardQueue != nil { cardQueue = nil; return true }
         case .MOCK: if mockReview != nil { mockReview = nil; return true }
+        case .THEORY: if theoryChapter != nil { theoryChapter = nil; return true }
         default: break
         }
         guard let last = backStack.popLast() else {

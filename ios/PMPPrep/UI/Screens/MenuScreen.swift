@@ -5,6 +5,8 @@ private struct MenuEntry: Identifiable {
     let icon: String
     let label: String
     let detail: String
+    /** Still being tested: a Labs flask beside the label. */
+    var labs: Bool = false
     let go: () -> Void
 }
 
@@ -46,6 +48,9 @@ struct MenuScreen: View {
             ]),
             ("Study", [
                 MenuEntry(icon: "book", label: "Lessons", detail: "\(m.store.lessonsDone.count) of \(x.lessons.count) done") { m.navigate(.LEARN) },
+                MenuEntry(icon: "books.vertical", label: "Theory", detail: "\(x.theory.chapters.count) chapters on the discipline in depth · \(m.theoryRead.count) read", labs: true) {
+                    m.theoryChapter = nil; m.navigate(.THEORY)
+                },
                 MenuEntry(icon: "rectangle.on.rectangle", label: "Flashcards",
                           detail: "\(m.deckCounts(nil).due) due" + (myCards > 0 ? " · \(myCards) of your own" : "")) { m.navigate(.FLASHCARDS) },
                 MenuEntry(icon: "books.vertical", label: "Reference and glossary", detail: "ECO tasks, \(x.glossary.count) terms, processes") { m.navigate(.REFERENCE) },
@@ -147,7 +152,10 @@ private struct MenuRow: View {
                 Image(systemName: entry.icon).font(.system(size: 20)).foregroundStyle(Palette.primary).frame(width: 24)
                     .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(entry.label).font(.nunito(16, .semibold)).foregroundStyle(Palette.onSurface)
+                    HStack(spacing: 8) {
+                        Text(entry.label).font(.nunito(16, .semibold)).foregroundStyle(Palette.onSurface)
+                        if entry.labs { LabsBadge() }
+                    }
                     Text(entry.detail).font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant).multilineTextAlignment(.leading)
                 }
                 Spacer(minLength: 0)

@@ -295,7 +295,40 @@ object ContentParser {
                 AreaTour(t.str("area"), t.str("intro"), t.optJSONArray("lessons").strings(), figure(t.optJSONObject("figure")))
             },
             courseOrder = o.optJSONArray("courseOrder").strings(),
+            theory = theory(o.optJSONObject("theory")),
         )
+    }
+
+    /** index.html PMP.THEORY, as extract-content.mjs writes it (abbreviations spelled out). */
+    fun theory(o: JSONObject?): Theory {
+        if (o == null) return Theory(emptyList(), emptyList())
+        val parts = o.optJSONArray("parts").objects().map { p ->
+            TheoryPart(p.optInt("n"), p.str("title"), p.str("blurb"), p.optJSONArray("planned").strings())
+        }
+        val chapters = o.optJSONArray("chapters").objects().map { c ->
+            TheoryChapter(
+                id = c.str("id"), part = c.optInt("part"), title = c.str("title"), summary = c.str("summary"), why = c.str("why"),
+                sections = c.optJSONArray("sections").objects().map { s ->
+                    val blocks = s.optJSONArray("blocks")
+                    TheorySection(s.str("id"), s.str("title"), (0 until (blocks?.length() ?: 0)).mapNotNull { i ->
+                        val b = blocks!!.opt(i)
+                        when {
+                            b is String -> TheoryBlock.Para(b)
+                            b !is JSONObject -> null
+                            b.has("ul") -> TheoryBlock.Bullets(b.optJSONArray("ul").strings())
+                            b.has("ol") -> TheoryBlock.Numbered(b.optJSONArray("ol").strings())
+                            b.has("h") -> TheoryBlock.Heading(b.str("h"))
+                            b.has("box") -> TheoryBlock.Box(b.str("box"), b.str("text"))
+                            b.has("fig") -> figure(b.optJSONObject("fig"))?.let { TheoryBlock.Fig(it) }
+                            else -> null
+                        }
+                    })
+                },
+                keyIdeas = c.optJSONArray("keyIdeas").strings(), reading = c.optJSONArray("reading").strings(),
+                minutes = c.optInt("minutes", 1),
+            )
+        }
+        return Theory(parts, chapters)
     }
 
     private fun JSONArray?.rows(): List<List<String>> {

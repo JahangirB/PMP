@@ -23,6 +23,7 @@ module.exports = [
         return { parts: document.querySelectorAll("#view .th-part").length, items: document.querySelectorAll("#view .th-li").length,
                  links: Array.prototype.map.call(document.querySelectorAll("#view a.th-li-t"), function (a) { return a.getAttribute("href"); }),
                  todo: document.querySelectorAll("#view .th-li--todo").length, nav: !!document.querySelector('.nav-i[data-route="theory"]'),
+                 labs: [!!document.querySelector('.nav-i[data-route="theory"] .labs'), !!document.querySelector("#view .view-hd .labs")],
                  wide: document.documentElement.scrollWidth > document.documentElement.clientWidth };
       });
       var planned = await page.evaluate(function () { return PMP.THEORY.parts.reduce(function (n, p) { return n + p.planned.length; }, 0); });
@@ -32,6 +33,7 @@ module.exports = [
       assert.strictEqual(r.links.length, written);
       assert.strictEqual(r.todo, planned - written);
       assert.ok(r.links[0] === "#/theory?ch=t1" && r.nav && !r.wide, JSON.stringify(r));
+      assert.deepStrictEqual(r.labs, [true, true], "marked Labs in the menu and on the page");
       await lib.clean(page);
       await page.ctx.close();
     }

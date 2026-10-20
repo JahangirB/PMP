@@ -283,6 +283,32 @@ data class ReadinessConfig(
     val gateItems: Int, val gateTasks: Int,
 )
 
+/** The Theory reading room (index.html §05.12, §10.37): parts with their planned chapter titles, and the written chapters. */
+data class Theory(val parts: List<TheoryPart>, val chapters: List<TheoryChapter>) {
+    /** Book-wide chapter number, from the planned contents. */
+    fun numberOf(c: TheoryChapter): Int {
+        val before = parts.filter { it.n < c.part }.sumOf { it.planned.size }
+        return before + chapters.filter { it.part == c.part }.indexOf(c) + 1
+    }
+    val planned: Int get() = parts.sumOf { it.planned.size }
+}
+data class TheoryPart(val n: Int, val title: String, val blurb: String, val planned: List<String>)
+data class TheoryChapter(
+    val id: String, val part: Int, val title: String, val summary: String, val why: String,
+    val sections: List<TheorySection>, val keyIdeas: List<String>, val reading: List<String>, val minutes: Int,
+)
+data class TheorySection(val id: String, val title: String, val blocks: List<TheoryBlock>)
+/** One block of a theory section. Text carries **bold** and *italic*; abbreviations arrive already spelled out. */
+sealed interface TheoryBlock {
+    data class Para(val text: String) : TheoryBlock
+    data class Bullets(val items: List<String>) : TheoryBlock
+    data class Numbered(val items: List<String>) : TheoryBlock
+    data class Heading(val text: String) : TheoryBlock
+    /** kind is "exam", "myth" or "example". */
+    data class Box(val kind: String, val text: String) : TheoryBlock
+    data class Fig(val figure: Figure) : TheoryBlock
+}
+
 data class Extras(
     val ecoLabel: String,
     val domainWeights: Map<Domain, Double>,
@@ -314,6 +340,8 @@ data class Extras(
     val documents: SampleDocuments = SampleDocuments("", "", emptyList()),
     /** The knowledge-area tours and the classroom lesson order (index.html PMP.AREA_TOURS, PMP.COURSE_ORDER). */
     val areaTours: List<AreaTour> = emptyList(),
+    /** The Theory chapters (Labs); empty in builds from before them. */
+    val theory: Theory = Theory(emptyList(), emptyList()),
     val courseOrder: List<String> = emptyList(),
 )
 

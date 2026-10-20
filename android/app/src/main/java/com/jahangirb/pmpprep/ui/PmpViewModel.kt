@@ -114,6 +114,7 @@ enum class Dest(val title: String) {
     SYNC("Cloud sync"),
     SUPPORT("Support the app"),
     UPDATES("App updates"),
+    THEORY("Theory"),
 }
 
 /** What to practise. Null means "any". */
@@ -182,6 +183,30 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 loadError = e.message ?: e.toString()
             }
         }
+    }
+
+    /* ── Theory (Labs) ─────────────────────────────────────────────────────
+       Which chapters are read and where the reader stopped stay on this
+       phone, as on the web (pmp.theory), until reading progress syncs. */
+    private val theoryPrefs = app.getSharedPreferences("theory", android.content.Context.MODE_PRIVATE)
+    var theoryRead by mutableStateOf(theoryPrefs.getStringSet("read", emptySet())!!.toSet())
+        private set
+    /** The chapter open in the reader, or null for the contents. */
+    var theoryChapter by mutableStateOf<String?>(null)
+    /** The item the reader opens at: 0, or the saved place when continuing. */
+    var theoryStart by mutableStateOf(0)
+        private set
+    val theoryPlace: Pair<String, Int>? get() = theoryPrefs.getString("lastCh", null)?.let { it to theoryPrefs.getInt("lastItem", 0) }
+
+    fun openTheory(id: String, resume: Boolean = false) {
+        theoryStart = if (resume) theoryPlace?.takeIf { it.first == id }?.second ?: 0 else 0
+        theoryChapter = id
+        theoryPrefs.edit().putString("lastCh", id).putInt("lastItem", theoryStart).apply()
+    }
+    fun saveTheoryPlace(id: String, item: Int) { theoryPrefs.edit().putString("lastCh", id).putInt("lastItem", item).apply() }
+    fun setTheoryRead(id: String, on: Boolean) {
+        theoryRead = if (on) theoryRead + id else theoryRead - id
+        theoryPrefs.edit().putStringSet("read", theoryRead).apply()
     }
 
     /* ── app updates (Android only) ──────────────────────────────────────── */
@@ -344,6 +369,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             Dest.LEARN -> if (openLesson != null) { openLesson = null; return true }
             Dest.FLASHCARDS -> if (cardQueue != null) { cardQueue = null; return true }
             Dest.MOCK -> if (mockReview != null) { mockReview = null; return true }
+            Dest.THEORY -> if (theoryChapter != null) { theoryChapter = null; return true }
             else -> {}
         }
         if (backStack.isEmpty()) return false

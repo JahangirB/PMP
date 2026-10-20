@@ -109,7 +109,8 @@ fixed calendar you fall behind on.
   - 80 ranked situational scenarios;
   - 35 lessons, including one on getting certified (application, audit,
     booking, exam day and keeping the certificate);
-  - **Theory** (web): 26 optional chapters in six parts, about 50,000 words,
+  - **Theory** (Labs: new and still being tested, marked with a flask): 26
+    optional chapters in six parts, about 50,000 words,
     on project management as a discipline beyond what the exam asks: what
     projects are for and where the field came from; ways of delivering;
     planning and controlling the work; people; the wider organisation; and
@@ -117,7 +118,7 @@ fixed calendar you fall behind on.
     exam" notes, key ideas and further reading;
   - 313 flashcards, including a deck of commonly confused pairs;
   - 52 formulas, each with a worked example;
-  - a reference library with 391 glossary terms, 133 abbreviations, 25
+  - a reference library with 391 glossary terms, 132 abbreviations, 25
     tables, 25 sample documents and a tour of each knowledge area.
 - **Lessons:** each has objectives, the concept, how it plays out in
   predictive, agile and hybrid projects, a worked example, common traps, quick
