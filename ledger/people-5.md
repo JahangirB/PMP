@@ -81,40 +81,40 @@ any question.
 |`pmp-p5-138`|people-5|pulldown|predictive|3|Prompts: Residents expect no work on Sundays, and… / Residents expect the street to stay open… / Residents expect bin collections to cont…|
 |`pmp-p5-139`|people-5|fillblank|predictive|3|A supplier's contract for a new contact-centre telephony platform guarantees 99.5% availability, measured over each 30-day month…|
 |`pmp-p5-140`|people-5|hotspot|agile|3|The roadmap for a ferry operator's booking app is shown with each item's current state. The commercial director wants to write…|
-|`pmp-p5-1`|pmp-lectures-1-11|single|agile|4|An agile project is in its first of 12 iterations, and each iteration lasts two weeks. In the first iteration review, the…|
-|`pmp-p5-2`|pmp-lectures-1-11|single|agile|3|The product owner has asked the project manager and the agile team to demonstrate the completed functionality to key project…|
-|`pmp-p5-3`|pmp-lectures-1-11|single|agile|3|A company has started doing agile projects. The project sponsor is frustrated and does not understand the new requirements…|
-|`pmp-p5-4`|pmp-lectures-1-11|single|predictive|3|A company used to deliver technical services to customers using external labor. When a new project manager arrived, the team…|
-|`pmp-p5-5`|pmp-lectures-1-11|single|agile|3|The project manager of an agile project notices that many stakeholders are skipping iteration planning and review meetings. Some…|
-|`pmp-p5-6`|pmp-lectures-1-11|single|predictive|3|An organizational transformation project has two workstreams running in parallel between corporate headquarters and an overseas…|
-|`pmp-p5-7`|pmp-lectures-1-11|single|predictive|3|While gathering requirements for the project scope, the project manager realizes that some of the stakeholder requirements have a…|
-|`pmp-p5-201`|pmp-mocks-1-10|single|agile|2|An agile team is planning for a 2-week iteration. In the middle of the last few iterations, the product owner made changes and…|
-|`pmp-p5-202`|pmp-mocks-1-10|single|hybrid|2|In a software development project, a stakeholder wants to add a major requirement, which they feel will be a great benefit to the…|
-|`pmp-p5-203`|pmp-mocks-1-10|single|predictive|2|A project manager has been assigned to a new project with multiple high-level stakeholders. Each stakeholder has provided their…|
-|`pmp-p5-204`|pmp-mocks-1-10|single|agile|3|A senior business stakeholder with many years of experience is pressuring an agile team to deliver most of the promised…|
-|`pmp-p5-205`|pmp-mocks-1-10|single|predictive|3|Midway through project execution, several stakeholders raise concerns about team performance and delivery. The project manager…|
-|`pmp-p5-206`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a complex project that includes many stakeholders with conflicting priorities.|
-|`pmp-p5-207`|pmp-mocks-1-10|single|agile|3|Following the start of a sprint, a key stakeholder constructed an email to a project team voicing displeasure of the work that…|
-|`pmp-p5-208`|pmp-mocks-1-10|single|predictive|3|A key supplier has become unavailable and the project manager has found a replacement that will meet project approval. Bringing…|
-|`pmp-p5-209`|pmp-mocks-1-10|single|predictive|2|In the early stages of a project, two key stakeholders have different opinions about a project's goals.|
-|`pmp-p5-210`|pmp-mocks-1-10|single|predictive|2|While preparing a project charter for a new project, a project manager reviews lessons learned from previous projects. The…|
-|`pmp-p5-211`|pmp-mocks-1-10|multi|hybrid|3|A project manager is working on a complex project. The project includes many stakeholders with conflicting priorities. (Choose…|
-|`pmp-p5-212`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a complex, political project with many stakeholders having conflicting priorities. Senior…|
-|`pmp-p5-213`|pmp-mocks-1-10|single|predictive|2|A project manager is working on a complex project with multiple stakeholders and competing priorities.|
-|`pmp-p5-214`|pmp-mocks-1-10|single|predictive|2|A project manager is working on a complex project with multiple stakeholders and competing priorities. During a meeting with the…|
-|`pmp-p5-215`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a complex project that requires expertise in negotiation skills.|
-|`pmp-p5-216`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a complex project with many stakeholders that have conflicting priorities. Senior management…|
-|`pmp-p5-217`|pmp-mocks-1-10|single|agile|3|After monitoring a product’s development after the first three releases, the product owner wants to launch a product even though…|
-|`pmp-p5-218`|pmp-mocks-1-10|single|predictive|3|During a project status meeting, the project manager discovers that stakeholders have different expectations that are not…|
-|`pmp-p5-219`|pmp-mocks-1-10|single|predictive|3|The company's top executives are embarking on a pivotal project that holds immense importance for the organization's future. This…|
-|`pmp-p5-220`|pmp-mocks-1-10|single|predictive|2|A project manager has been assigned to a new project. The client has mentioned that the project's inception is based on ideas and…|
-|`pmp-p5-221`|pmp-mocks-1-10|single|agile|2|A stakeholder that is not experienced with agile has emailed the project team expressing frustration and displeasure with their…|
-|`pmp-p5-222`|pmp-mocks-1-10|single|predictive|2|A multinational company with a cross-border project wants to implement new software that will impact several departments. The…|
-|`pmp-p5-223`|pmp-mocks-1-10|single|predictive|3|A project team lead meets with the project manager before a scheduled kick-off meeting. The team lead is worried that…|
-|`pmp-p5-224`|pmp-mocks-1-10|single|predictive|3|A project manager is working on an complex project with multiple stakeholders and competing priorities. Each stakeholder wants to…|
-|`pmp-p5-225`|pmp-mocks-1-10|single|agile|3|A project manager is leading a key flagship solution initiative prioritizing agility, market adaptation, and rapid response to…|
-|`pmp-p5-226`|pmp-mocks-1-10|single|predictive|2|A project manager learns that a few stakeholders have a disagreement regarding the results of one project deliverable.|
-|`pmp-p5-227`|pmp-mocks-1-10|single|predictive|3|A project manager is planning the construction of a new public library. The community and project stakeholders are having…|
-|`pmp-p5-228`|pmp-mocks-1-10|single|agile|2|You are working on an Agile project where the product business representative is pushing for more and more features to be…|
-|`pmp-p5-229`|pmp-mocks-1-10|single|agile|2|While meeting with the customers or business owners, they introduce several pieces of new functionality into the product backlog…|
-|`pmp-p5-230`|pmp-mocks-1-10|single|hybrid|2|Your project has just had its first release of a deliverable, which has taken 4 months to deliver. The team showcased it to the…|
+|`pmp-p5-1`|export-batch-1|single|agile|4|An agile project is in its first of 12 iterations, and each iteration lasts two weeks. In the first iteration review, the…|
+|`pmp-p5-2`|export-batch-1|single|agile|3|The product owner has asked the project manager and the agile team to demonstrate the completed functionality to key project…|
+|`pmp-p5-3`|export-batch-1|single|agile|3|A company has started doing agile projects. The project sponsor is frustrated and does not understand the new requirements…|
+|`pmp-p5-4`|export-batch-1|single|predictive|3|A company used to deliver technical services to customers using external labor. When a new project manager arrived, the team…|
+|`pmp-p5-5`|export-batch-1|single|agile|3|The project manager of an agile project notices that many stakeholders are skipping iteration planning and review meetings. Some…|
+|`pmp-p5-6`|export-batch-1|single|predictive|3|An organizational transformation project has two workstreams running in parallel between corporate headquarters and an overseas…|
+|`pmp-p5-7`|export-batch-1|single|predictive|3|While gathering requirements for the project scope, the project manager realizes that some of the stakeholder requirements have a…|
+|`pmp-p5-201`|export-batch-2|single|agile|2|An agile team is planning for a 2-week iteration. In the middle of the last few iterations, the product owner made changes and…|
+|`pmp-p5-202`|export-batch-2|single|hybrid|2|In a software development project, a stakeholder wants to add a major requirement, which they feel will be a great benefit to the…|
+|`pmp-p5-203`|export-batch-2|single|predictive|2|A project manager has been assigned to a new project with multiple high-level stakeholders. Each stakeholder has provided their…|
+|`pmp-p5-204`|export-batch-2|single|agile|3|A senior business stakeholder with many years of experience is pressuring an agile team to deliver most of the promised…|
+|`pmp-p5-205`|export-batch-2|single|predictive|3|Midway through project execution, several stakeholders raise concerns about team performance and delivery. The project manager…|
+|`pmp-p5-206`|export-batch-2|single|predictive|3|A project manager is working on a complex project that includes many stakeholders with conflicting priorities.|
+|`pmp-p5-207`|export-batch-2|single|agile|3|Following the start of a sprint, a key stakeholder constructed an email to a project team voicing displeasure of the work that…|
+|`pmp-p5-208`|export-batch-2|single|predictive|3|A key supplier has become unavailable and the project manager has found a replacement that will meet project approval. Bringing…|
+|`pmp-p5-209`|export-batch-2|single|predictive|2|In the early stages of a project, two key stakeholders have different opinions about a project's goals.|
+|`pmp-p5-210`|export-batch-2|single|predictive|2|While preparing a project charter for a new project, a project manager reviews lessons learned from previous projects. The…|
+|`pmp-p5-211`|export-batch-2|multi|hybrid|3|A project manager is working on a complex project. The project includes many stakeholders with conflicting priorities. (Choose…|
+|`pmp-p5-212`|export-batch-2|single|predictive|3|A project manager is working on a complex, political project with many stakeholders having conflicting priorities. Senior…|
+|`pmp-p5-213`|export-batch-2|single|predictive|2|A project manager is working on a complex project with multiple stakeholders and competing priorities.|
+|`pmp-p5-214`|export-batch-2|single|predictive|2|A project manager is working on a complex project with multiple stakeholders and competing priorities. During a meeting with the…|
+|`pmp-p5-215`|export-batch-2|single|predictive|3|A project manager is working on a complex project that requires expertise in negotiation skills.|
+|`pmp-p5-216`|export-batch-2|single|predictive|3|A project manager is working on a complex project with many stakeholders that have conflicting priorities. Senior management…|
+|`pmp-p5-217`|export-batch-2|single|agile|3|After monitoring a product’s development after the first three releases, the product owner wants to launch a product even though…|
+|`pmp-p5-218`|export-batch-2|single|predictive|3|During a project status meeting, the project manager discovers that stakeholders have different expectations that are not…|
+|`pmp-p5-219`|export-batch-2|single|predictive|3|The company's top executives are embarking on a pivotal project that holds immense importance for the organization's future. This…|
+|`pmp-p5-220`|export-batch-2|single|predictive|2|A project manager has been assigned to a new project. The client has mentioned that the project's inception is based on ideas and…|
+|`pmp-p5-221`|export-batch-2|single|agile|2|A stakeholder that is not experienced with agile has emailed the project team expressing frustration and displeasure with their…|
+|`pmp-p5-222`|export-batch-2|single|predictive|2|A multinational company with a cross-border project wants to implement new software that will impact several departments. The…|
+|`pmp-p5-223`|export-batch-2|single|predictive|3|A project team lead meets with the project manager before a scheduled kick-off meeting. The team lead is worried that…|
+|`pmp-p5-224`|export-batch-2|single|predictive|3|A project manager is working on an complex project with multiple stakeholders and competing priorities. Each stakeholder wants to…|
+|`pmp-p5-225`|export-batch-2|single|agile|3|A project manager is leading a key flagship solution initiative prioritizing agility, market adaptation, and rapid response to…|
+|`pmp-p5-226`|export-batch-2|single|predictive|2|A project manager learns that a few stakeholders have a disagreement regarding the results of one project deliverable.|
+|`pmp-p5-227`|export-batch-2|single|predictive|3|A project manager is planning the construction of a new public library. The community and project stakeholders are having…|
+|`pmp-p5-228`|export-batch-2|single|agile|2|You are working on an Agile project where the product business representative is pushing for more and more features to be…|
+|`pmp-p5-229`|export-batch-2|single|agile|2|While meeting with the customers or business owners, they introduce several pieces of new functionality into the product backlog…|
+|`pmp-p5-230`|export-batch-2|single|hybrid|2|Your project has just had its first release of a deliverable, which has taken 4 months to deliver. The team showcased it to the…|

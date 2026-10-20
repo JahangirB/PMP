@@ -77,58 +77,58 @@ any question.
 |`pmp-b2-133`|business-2|multi|hybrid|4|Your hybrid programme for a regional tourism body is part-funded by a development grant of €1.2 million. The grant agreement…|
 |`pmp-b2-134`|business-2|hotspot|predictive|3|Your predictive project is laying a fibre-optic cable along a coastal route, and you are reviewing the draft schedule before it…|
 |`pmp-b2-135`|business-2|single|agile|5|Your agile team builds the online shop for a mobile network operator, working in two-week sprints. A new consumer rule requires…|
-|`pmp-b2-1`|pmp-lectures-1-11|single|predictive|3|A project manager is assigned to a project in a country where the company has not previously done business. At the beginning of…|
-|`pmp-b2-2`|pmp-lectures-1-11|single|predictive|4|A project manager is implementing a phase of an IT project in a location that is prone to security issues. A team member, working…|
-|`pmp-b2-3`|pmp-lectures-1-11|single|predictive|3|A project is about to begin and a new regulation has imposed a deadline that will adversely impact the project. Failing to comply…|
-|`pmp-b2-4`|pmp-lectures-1-11|single|predictive|3|An organization is halfway through a five year project and everything has progressed as scheduled. The latest project assessment…|
-|`pmp-b2-5`|pmp-lectures-1-11|single|predictive|3|A compliance issue was found during the course of a project. This caused an inspection of the product by the internal audit team.…|
-|`pmp-b2-6`|pmp-lectures-1-11|single|agile|4|At the start of a project, the team chose to leverage an agile approach to deliver the project, using user stories to capture…|
-|`pmp-b2-7`|pmp-lectures-1-11|single|predictive|3|A team member raises a concern that some deliverables may not be compliant with certain regulations.|
-|`pmp-b2-8`|pmp-lectures-1-11|single|predictive|3|During project execution, the audit team determined that critical regulatory requirements are not being met.|
-|`pmp-b2-9`|pmp-lectures-1-11|single|predictive|4|A project team is installing a fiscal metering system for a crude oil terminal. The project manager has requested a metering…|
-|`pmp-b2-10`|pmp-lectures-1-11|single|agile|4|A company must launch a global product to respond to a competition threat. As part of an agile approach, the team chooses Region…|
-|`pmp-b2-11`|pmp-lectures-1-11|single|agile|4|A team is working in a highly regulated industry and the compliance department keeps pushing documentation and process steps that…|
-|`pmp-b2-12`|pmp-lectures-1-11|single|predictive|3|A project manager is contracted to manage a project for a startup with grants from a foreign source. Midway into this project,…|
-|`pmp-b2-13`|pmp-lectures-1-11|single|predictive|2|A project manager was recently assigned to an investigation project. Due to the complexity of the project, the project manager is…|
-|`pmp-b2-14`|pmp-lectures-1-11|single|predictive|4|An IT contract for a project states that all team members must be certified in IT security. The project manager discovers that…|
-|`pmp-b2-201`|pmp-mocks-1-10|single|hybrid|3|While planning a global solution delivery in a multinational organization, the project manager and team drafted all work items…|
-|`pmp-b2-202`|pmp-mocks-1-10|single|hybrid|3|A project manager is assigned a complex project with significant legal, regulatory, and contractual requirements. However, these…|
-|`pmp-b2-203`|pmp-mocks-1-10|single|predictive|2|A new project manager takes over a construction project. Upon reviewing the project management plan, the project manager realizes…|
-|`pmp-b2-204`|pmp-mocks-1-10|single|predictive|2|A project manager for a building project has been informed that a required permit from the local government has not yet been…|
-|`pmp-b2-205`|pmp-mocks-1-10|single|agile|3|A project manager is working in a regulated industry, and the team is working on a project where the requirements are prioritized…|
-|`pmp-b2-206`|pmp-mocks-1-10|single|predictive|2|During a design workshop for a new robot, the engineers ask the project manager about safety and environmental protocols for its…|
-|`pmp-b2-207`|pmp-mocks-1-10|single|predictive|2|While attending a governance meeting with upper management, a project manager is verbally informed about an impending external…|
-|`pmp-b2-208`|pmp-mocks-1-10|single|predictive|2|During the execution phase of a project, a new director joined the management team and introduced a mandatory compliance…|
-|`pmp-b2-209`|pmp-mocks-1-10|single|predictive|3|A company initiated a project to build a new hydropower plant. Analysis was performed to determine regulatory, safety, and…|
-|`pmp-b2-210`|pmp-mocks-1-10|single|predictive|2|A gas pipeline construction project was planned for completion in 36 months. After 24 months, the project was suspended by the…|
-|`pmp-b2-211`|pmp-mocks-1-10|single|predictive|3|While planning a new project, a new project manager finds that the request for proposal (RFP) references several government…|
-|`pmp-b2-212`|pmp-mocks-1-10|single|agile|3|A new Scrum project manager at a company is contracted to build a traffic measurement and control application for a municipality.…|
-|`pmp-b2-213`|pmp-mocks-1-10|single|hybrid|2|A project manager is working on a hybrid (predictive-agile) project. During a standup meeting, a team member mentions that…|
-|`pmp-b2-214`|pmp-mocks-1-10|single|predictive|2|A majority portion of a local company was recently sold to an international company. The new parent company is mandating the use…|
-|`pmp-b2-215`|pmp-mocks-1-10|multi|hybrid|4|A department store chain is in the implementation stage of a project to replace the payment systems across all of its stores in…|
-|`pmp-b2-216`|pmp-mocks-1-10|single|agile|2|During the last iteration of planning in an agile project, the team discovers that mandatory regulations were not included in the…|
-|`pmp-b2-217`|pmp-mocks-1-10|single|predictive|2|A project manager identifies that the work started by the project team is inconsistent with industry regulations.|
-|`pmp-b2-218`|pmp-mocks-1-10|single|agile|3|During a product backlog refinement meeting, a stakeholder from the legal department and the product owner disagree on the…|
-|`pmp-b2-219`|pmp-mocks-1-10|single|predictive|2|A software development project is in the testing phase. New government regulation requires that additional documentation be…|
-|`pmp-b2-220`|pmp-mocks-1-10|single|predictive|2|What should a project manager do first when people are not following the project compliance process?|
-|`pmp-b2-221`|pmp-mocks-1-10|single|hybrid|3|A project manager is leading a complex project with diverse stakeholders and a strict regulatory environment. The project team is…|
-|`pmp-b2-222`|pmp-mocks-1-10|single|hybrid|3|A project manager has made compliance-related changes by adopting a new project delivery approach. During external validation, an…|
-|`pmp-b2-223`|pmp-mocks-1-10|single|agile|3|A project manager considers compliance to be part of the organization's process assets. The project team, however, has decided to…|
-|`pmp-b2-224`|pmp-mocks-1-10|single|predictive|3|An organization conducted an external audit in an Offshore Data Centre (ODC). The audit team noticed that the project manager is…|
-|`pmp-b2-225`|pmp-mocks-1-10|single|predictive|3|A project manager has engaged the sponsor and discussed concerns regarding noncompliance. The project manager understands that…|
-|`pmp-b2-226`|pmp-mocks-1-10|single|hybrid|3|A project manager is working on a new compliance project that is different from regular projects as it will involve multinational…|
-|`pmp-b2-227`|pmp-mocks-1-10|single|predictive|2|A complex construction project entails the meeting of several regulations throughout project execution. The project team is…|
-|`pmp-b2-228`|pmp-mocks-1-10|single|agile|3|An agile project team has implemented design changes over several iterations. The data privacy officer is concerned because their…|
-|`pmp-b2-229`|pmp-mocks-1-10|single|predictive|2|A new project is initiated to develop several new financial products and services for a company with offices in several…|
-|`pmp-b2-230`|pmp-mocks-1-10|single|predictive|3|A project manager is leading a development project for an external customer in another country. The project manager's company is…|
-|`pmp-b2-231`|pmp-mocks-1-10|single|agile|2|On an agile project, a team member raises concerns about health and safety issues related to the project deliverable.|
-|`pmp-b2-232`|pmp-mocks-1-10|single|predictive|3|A project manager needs to ensure that all data security requirements are covered during a data warehouse development project’s…|
-|`pmp-b2-233`|pmp-mocks-1-10|multi|agile|3|A project manager is leading an agile project developing a new customer relationship management (CRM) system. Midway through the…|
-|`pmp-b2-234`|pmp-mocks-1-10|single|hybrid|3|In anticipation of new environmental regulations, a manufacturing project involving two distinct operational teams-one using…|
-|`pmp-b2-235`|pmp-mocks-1-10|single|predictive|2|A project manager is working on a government infrastructure project that requires strict compliance with company standards.…|
-|`pmp-b2-236`|pmp-mocks-1-10|single|predictive|3|In the rollout of a critical update to an e-commerce platform, the project manager is presented with several pressing issues:…|
-|`pmp-b2-237`|pmp-mocks-1-10|single|predictive|2|During an environmental impact review of an energy project, the project manager discovers that the environmental plan does not…|
-|`pmp-b2-238`|pmp-mocks-1-10|single|predictive|3|Launching a project to introduce a new health information system across multiple clinics, the project manager realizes there are…|
-|`pmp-b2-239`|pmp-mocks-1-10|single|predictive|2|A project manager is tasked with launching a new drug product, which requires adherence to stringent health and safety…|
-|`pmp-b2-240`|pmp-mocks-1-10|single|predictive|2|You are halfway through a large scale project for your organization when you are approached by the internal Audit department.…|
-|`pmp-b2-241`|pmp-mocks-1-10|single|predictive|1|You are working as a project manager in a foreign country. It is customary that gifts be made to the government to obtain the…|
+|`pmp-b2-1`|export-batch-1|single|predictive|3|A project manager is assigned to a project in a country where the company has not previously done business. At the beginning of…|
+|`pmp-b2-2`|export-batch-1|single|predictive|4|A project manager is implementing a phase of an IT project in a location that is prone to security issues. A team member, working…|
+|`pmp-b2-3`|export-batch-1|single|predictive|3|A project is about to begin and a new regulation has imposed a deadline that will adversely impact the project. Failing to comply…|
+|`pmp-b2-4`|export-batch-1|single|predictive|3|An organization is halfway through a five year project and everything has progressed as scheduled. The latest project assessment…|
+|`pmp-b2-5`|export-batch-1|single|predictive|3|A compliance issue was found during the course of a project. This caused an inspection of the product by the internal audit team.…|
+|`pmp-b2-6`|export-batch-1|single|agile|4|At the start of a project, the team chose to leverage an agile approach to deliver the project, using user stories to capture…|
+|`pmp-b2-7`|export-batch-1|single|predictive|3|A team member raises a concern that some deliverables may not be compliant with certain regulations.|
+|`pmp-b2-8`|export-batch-1|single|predictive|3|During project execution, the audit team determined that critical regulatory requirements are not being met.|
+|`pmp-b2-9`|export-batch-1|single|predictive|4|A project team is installing a fiscal metering system for a crude oil terminal. The project manager has requested a metering…|
+|`pmp-b2-10`|export-batch-1|single|agile|4|A company must launch a global product to respond to a competition threat. As part of an agile approach, the team chooses Region…|
+|`pmp-b2-11`|export-batch-1|single|agile|4|A team is working in a highly regulated industry and the compliance department keeps pushing documentation and process steps that…|
+|`pmp-b2-12`|export-batch-1|single|predictive|3|A project manager is contracted to manage a project for a startup with grants from a foreign source. Midway into this project,…|
+|`pmp-b2-13`|export-batch-1|single|predictive|2|A project manager was recently assigned to an investigation project. Due to the complexity of the project, the project manager is…|
+|`pmp-b2-14`|export-batch-1|single|predictive|4|An IT contract for a project states that all team members must be certified in IT security. The project manager discovers that…|
+|`pmp-b2-201`|export-batch-2|single|hybrid|3|While planning a global solution delivery in a multinational organization, the project manager and team drafted all work items…|
+|`pmp-b2-202`|export-batch-2|single|hybrid|3|A project manager is assigned a complex project with significant legal, regulatory, and contractual requirements. However, these…|
+|`pmp-b2-203`|export-batch-2|single|predictive|2|A new project manager takes over a construction project. Upon reviewing the project management plan, the project manager realizes…|
+|`pmp-b2-204`|export-batch-2|single|predictive|2|A project manager for a building project has been informed that a required permit from the local government has not yet been…|
+|`pmp-b2-205`|export-batch-2|single|agile|3|A project manager is working in a regulated industry, and the team is working on a project where the requirements are prioritized…|
+|`pmp-b2-206`|export-batch-2|single|predictive|2|During a design workshop for a new robot, the engineers ask the project manager about safety and environmental protocols for its…|
+|`pmp-b2-207`|export-batch-2|single|predictive|2|While attending a governance meeting with upper management, a project manager is verbally informed about an impending external…|
+|`pmp-b2-208`|export-batch-2|single|predictive|2|During the execution phase of a project, a new director joined the management team and introduced a mandatory compliance…|
+|`pmp-b2-209`|export-batch-2|single|predictive|3|A company initiated a project to build a new hydropower plant. Analysis was performed to determine regulatory, safety, and…|
+|`pmp-b2-210`|export-batch-2|single|predictive|2|A gas pipeline construction project was planned for completion in 36 months. After 24 months, the project was suspended by the…|
+|`pmp-b2-211`|export-batch-2|single|predictive|3|While planning a new project, a new project manager finds that the request for proposal (RFP) references several government…|
+|`pmp-b2-212`|export-batch-2|single|agile|3|A new Scrum project manager at a company is contracted to build a traffic measurement and control application for a municipality.…|
+|`pmp-b2-213`|export-batch-2|single|hybrid|2|A project manager is working on a hybrid (predictive-agile) project. During a standup meeting, a team member mentions that…|
+|`pmp-b2-214`|export-batch-2|single|predictive|2|A majority portion of a local company was recently sold to an international company. The new parent company is mandating the use…|
+|`pmp-b2-215`|export-batch-2|multi|hybrid|4|A department store chain is in the implementation stage of a project to replace the payment systems across all of its stores in…|
+|`pmp-b2-216`|export-batch-2|single|agile|2|During the last iteration of planning in an agile project, the team discovers that mandatory regulations were not included in the…|
+|`pmp-b2-217`|export-batch-2|single|predictive|2|A project manager identifies that the work started by the project team is inconsistent with industry regulations.|
+|`pmp-b2-218`|export-batch-2|single|agile|3|During a product backlog refinement meeting, a stakeholder from the legal department and the product owner disagree on the…|
+|`pmp-b2-219`|export-batch-2|single|predictive|2|A software development project is in the testing phase. New government regulation requires that additional documentation be…|
+|`pmp-b2-220`|export-batch-2|single|predictive|2|What should a project manager do first when people are not following the project compliance process?|
+|`pmp-b2-221`|export-batch-2|single|hybrid|3|A project manager is leading a complex project with diverse stakeholders and a strict regulatory environment. The project team is…|
+|`pmp-b2-222`|export-batch-2|single|hybrid|3|A project manager has made compliance-related changes by adopting a new project delivery approach. During external validation, an…|
+|`pmp-b2-223`|export-batch-2|single|agile|3|A project manager considers compliance to be part of the organization's process assets. The project team, however, has decided to…|
+|`pmp-b2-224`|export-batch-2|single|predictive|3|An organization conducted an external audit in an Offshore Data Centre (ODC). The audit team noticed that the project manager is…|
+|`pmp-b2-225`|export-batch-2|single|predictive|3|A project manager has engaged the sponsor and discussed concerns regarding noncompliance. The project manager understands that…|
+|`pmp-b2-226`|export-batch-2|single|hybrid|3|A project manager is working on a new compliance project that is different from regular projects as it will involve multinational…|
+|`pmp-b2-227`|export-batch-2|single|predictive|2|A complex construction project entails the meeting of several regulations throughout project execution. The project team is…|
+|`pmp-b2-228`|export-batch-2|single|agile|3|An agile project team has implemented design changes over several iterations. The data privacy officer is concerned because their…|
+|`pmp-b2-229`|export-batch-2|single|predictive|2|A new project is initiated to develop several new financial products and services for a company with offices in several…|
+|`pmp-b2-230`|export-batch-2|single|predictive|3|A project manager is leading a development project for an external customer in another country. The project manager's company is…|
+|`pmp-b2-231`|export-batch-2|single|agile|2|On an agile project, a team member raises concerns about health and safety issues related to the project deliverable.|
+|`pmp-b2-232`|export-batch-2|single|predictive|3|A project manager needs to ensure that all data security requirements are covered during a data warehouse development project’s…|
+|`pmp-b2-233`|export-batch-2|multi|agile|3|A project manager is leading an agile project developing a new customer relationship management (CRM) system. Midway through the…|
+|`pmp-b2-234`|export-batch-2|single|hybrid|3|In anticipation of new environmental regulations, a manufacturing project involving two distinct operational teams-one using…|
+|`pmp-b2-235`|export-batch-2|single|predictive|2|A project manager is working on a government infrastructure project that requires strict compliance with company standards.…|
+|`pmp-b2-236`|export-batch-2|single|predictive|3|In the rollout of a critical update to an e-commerce platform, the project manager is presented with several pressing issues:…|
+|`pmp-b2-237`|export-batch-2|single|predictive|2|During an environmental impact review of an energy project, the project manager discovers that the environmental plan does not…|
+|`pmp-b2-238`|export-batch-2|single|predictive|3|Launching a project to introduce a new health information system across multiple clinics, the project manager realizes there are…|
+|`pmp-b2-239`|export-batch-2|single|predictive|2|A project manager is tasked with launching a new drug product, which requires adherence to stringent health and safety…|
+|`pmp-b2-240`|export-batch-2|single|predictive|2|You are halfway through a large scale project for your organization when you are approached by the internal Audit department.…|
+|`pmp-b2-241`|export-batch-2|single|predictive|1|You are working as a project manager in a foreign country. It is customary that gifts be made to the government to obtain the…|

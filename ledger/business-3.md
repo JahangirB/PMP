@@ -74,69 +74,69 @@ any question.
 |`pmp-b3-133`|business-3|matching|hybrid|3|Prompts: A lift in the gatehouse would open the u… / Audio-guide downloads in the app have st… / A themed courtyard café would cost €140,…|
 |`pmp-b3-134`|business-3|single|agile|3|Your Scrum team builds the companion app for an insulin pump, which is regulated as medical-device software. An auditor has asked…|
 |`pmp-b3-135`|business-3|single|predictive|5|You are fourteen months into building a fire station for a fire and rescue service. No scope has changed, but poor groundworks…|
-|`pmp-b3-1`|pmp-lectures-1-11|single|predictive|3|During a predictive project, the project manager is in the process of finalizing the exit criteria for a significant system…|
-|`pmp-b3-2`|pmp-lectures-1-11|single|predictive|3|A major change in a government policy may cause a project's completion date to be delayed. The project is 90% complete.|
-|`pmp-b3-3`|pmp-lectures-1-11|single|hybrid|4|A company that has traditionally used predictive approaches has been experimenting with the use of agile in portions of a…|
-|`pmp-b3-4`|pmp-lectures-1-11|single|predictive|2|In the middle of executing an IT project, two project team members discover a new feature that will change the appearance of the…|
-|`pmp-b3-5`|pmp-lectures-1-11|single|predictive|4|A project manager is working on a project that has been ongoing for some time and is currently at the 70% completion mark. The…|
-|`pmp-b3-6`|pmp-lectures-1-11|single|predictive|3|Halfway through implementation, the project co-sponsor, who is contributing a significant amount of capital to the project,…|
-|`pmp-b3-7`|pmp-lectures-1-11|single|predictive|2|A project manager is working on a project to modernize a bank's information technology (IT) infrastructure. The project manager…|
-|`pmp-b3-8`|pmp-lectures-1-11|single|predictive|5|A project is facing a one-month delay, and the project manager realizes that a change request is necessary. The change control…|
-|`pmp-b3-9`|pmp-lectures-1-11|single|predictive|3|A project manager is responsible for a 12-month waterfall project to create a new product. The project is nine months into…|
-|`pmp-b3-10`|pmp-lectures-1-11|single|predictive|4|During execution, the customer submits a change request to maintain the project's business value, which has been threatened by a…|
-|`pmp-b3-11`|pmp-lectures-1-11|single|predictive|4|A new solution is being deployed in several countries. Country A asked for a change in the solution in order to comply with its…|
-|`pmp-b3-201`|pmp-mocks-1-10|single|predictive|3|A project manager is leading a project that follows the company's predictive approach. The project manager discovers that the…|
-|`pmp-b3-202`|pmp-mocks-1-10|single|predictive|3|While validating deliverables, a project manager realizes that one of the project team members used an older version of the scope…|
-|`pmp-b3-203`|pmp-mocks-1-10|single|predictive|3|The sponsor for a multimillion-dollar project has just called the project manager for a crisis meeting. The client submitted a…|
-|`pmp-b3-204`|pmp-mocks-1-10|single|predictive|2|During a product acceptance test for a software project, the project sponsor tells the project manager that the software will…|
-|`pmp-b3-205`|pmp-mocks-1-10|single|predictive|3|A stakeholder has suggested using an off-the-shelf, open-source product to speed up development. The team has analyzed the…|
-|`pmp-b3-206`|pmp-mocks-1-10|single|predictive|2|A project manager is assigned to redesign a store's point-of-sale system. The team is currently testing the new functionality…|
-|`pmp-b3-207`|pmp-mocks-1-10|single|predictive|2|During project execution, a customer asks to replace a piece of planned hardware with one that has more features and a lower…|
-|`pmp-b3-208`|pmp-mocks-1-10|single|predictive|3|A project manager is reviewing work performance data in preparation for the close project process. The data reveals that one of…|
-|`pmp-b3-209`|pmp-mocks-1-10|single|hybrid|3|A project manager is leading a critical project to deliver a new solution. The CEO is highly invested in the project, and the CFO…|
-|`pmp-b3-210`|pmp-mocks-1-10|multi|hybrid|4|A project manager is leading a project that received a request for additional scope caused by changes in market demand. The…|
-|`pmp-b3-211`|pmp-mocks-1-10|single|predictive|2|A project team discovers an opportunity to enhance software without impacting the budget or schedule. The team makes the…|
-|`pmp-b3-212`|pmp-mocks-1-10|single|predictive|2|A functional manager has been making changes to a project outside of the established management plan. The functional manager…|
-|`pmp-b3-213`|pmp-mocks-1-10|single|predictive|3|The change control board (CCB) has evaluated and approved several change requests in a timely manner in the last several weeks.…|
-|`pmp-b3-214`|pmp-mocks-1-10|single|predictive|2|In the middle of project execution, the project sponsor leaves, and a new sponsor is assigned. The new sponsor is requesting…|
-|`pmp-b3-215`|pmp-mocks-1-10|single|predictive|4|A client requests a major scope change due to a change in the market environment, which will significantly add to the project…|
-|`pmp-b3-216`|pmp-mocks-1-10|single|predictive|3|During the development of a project management plan, the project team inadvertently omitted an essential component required for a…|
-|`pmp-b3-217`|pmp-mocks-1-10|single|predictive|2|While reviewing project documentation, a project manager discovers that modifications were made without proper approvals.|
-|`pmp-b3-218`|pmp-mocks-1-10|single|hybrid|3|A project manager is managing a technology project that is in the implementation phase. A key stakeholder communicates the need…|
-|`pmp-b3-219`|pmp-mocks-1-10|single|predictive|2|A key stakeholder requests new features to be added to a product during the project implementation phase. The stakeholder insists…|
-|`pmp-b3-220`|pmp-mocks-1-10|single|predictive|2|While working on a project, the project team realizes that recent data center upgrades could impact the project's outcome.…|
-|`pmp-b3-221`|pmp-mocks-1-10|single|agile|2|An agile team is working on a new product development project. The product owner has requested a new change to accommodate recent…|
-|`pmp-b3-222`|pmp-mocks-1-10|single|predictive|3|A customer's requested design change is approved by the change control board (CCB). The project manager then discovers that the…|
-|`pmp-b3-223`|pmp-mocks-1-10|single|predictive|2|A project team has identified a number of defects with some deliverables and intends to resolve these as soon as possible. The…|
-|`pmp-b3-224`|pmp-mocks-1-10|single|predictive|2|During nondestructive testing at a construction site, it was discovered that certain components are failing workability tests.…|
-|`pmp-b3-225`|pmp-mocks-1-10|single|predictive|2|During the planning phase for the expansion of a services company, stakeholders conducted a feasibility study to establish the…|
-|`pmp-b3-226`|pmp-mocks-1-10|single|hybrid|3|A new project is about to start and is subject to strict time and budget constraints. When reviewing the lessons learned…|
-|`pmp-b3-227`|pmp-mocks-1-10|single|predictive|2|During project execution, key stakeholders request a change to ensure that the final product will satisfy their requirements.|
-|`pmp-b3-228`|pmp-mocks-1-10|single|predictive|2|While reviewing the approved project schedule, the project manager realizes that the milestones are unrealistic due to…|
-|`pmp-b3-229`|pmp-mocks-1-10|single|predictive|2|During a status review meeting, it was determined that the product will not meet project scope requirements in a particular…|
-|`pmp-b3-230`|pmp-mocks-1-10|single|predictive|2|A customer wants to add new features to the project deliverable.|
-|`pmp-b3-231`|pmp-mocks-1-10|single|predictive|2|A key stakeholder requests a change that will solve a critical issue that might affect continuity of operations. However, the…|
-|`pmp-b3-232`|pmp-mocks-1-10|single|predictive|2|A stakeholder learns that the equipment purchased for a project is of higher quality than originally agreed upon. The stakeholder…|
-|`pmp-b3-233`|pmp-mocks-1-10|single|predictive|2|A project manager is leading a project to deliver a new product to the market. The project sponsor has asked for a broadened…|
-|`pmp-b3-234`|pmp-mocks-1-10|single|predictive|2|The development phase of a new product has concluded. The validation test is about to start, but the test lead disagrees with the…|
-|`pmp-b3-235`|pmp-mocks-1-10|single|predictive|2|After a new project is executed, an executive suggests incorporating a new addon to provide more function to the product.|
-|`pmp-b3-236`|pmp-mocks-1-10|single|predictive|2|As a critical update to an e-commerce platform nears completion, the project manager receives a last-minute request from a…|
-|`pmp-b3-237`|pmp-mocks-1-10|single|predictive|3|As part of an initiative to upgrade an educational institution's digital infrastructure, a department head proposes the…|
-|`pmp-b3-238`|pmp-mocks-1-10|single|agile|2|While working on an innovative web platform, a project manager receives a request from a crucial stakeholder for the inclusion of…|
-|`pmp-b3-239`|pmp-mocks-1-10|single|predictive|2|During a significant landscape redesign project, the project manager finds a cutting-edge irrigation system that could…|
-|`pmp-b3-240`|pmp-mocks-1-10|single|predictive|2|As the project manager for an innovative smart home device project, you receive a request from the stakeholder to incorporate…|
-|`pmp-b3-241`|pmp-mocks-1-10|single|predictive|2|The project manager for a renewable energy initiative receives a suggestion from an environmental consultant to incorporate a new…|
-|`pmp-b3-242`|pmp-mocks-1-10|single|agile|1|While implementing an enterprise resource planning (ERP) system, the agile project manager receives several requests for…|
-|`pmp-b3-243`|pmp-mocks-1-10|single|predictive|2|At the conclusion of an enterprise software implementation project, a department head suggests the addition of a new analytics…|
-|`pmp-b3-244`|pmp-mocks-1-10|single|agile|2|You are half way through your agile project when there is a significant change to the project scope, after it was found that the…|
-|`pmp-b3-245`|pmp-mocks-1-10|single|hybrid|3|You are working on a hybrid project, where the majority of the work has been planned up front. The team manages their work via a…|
-|`pmp-b3-246`|pmp-mocks-1-10|single|predictive|1|One of the stakeholders in your project has raised a change request, after some of the deliverables contained defects and a…|
-|`pmp-b3-247`|pmp-mocks-1-10|single|agile|1|You are a project manager in an agile team developing new features for an app. An executive stakeholder with a high influence in…|
-|`pmp-b3-248`|pmp-mocks-1-10|single|predictive|2|During User Acceptance Testing a senior user points out a major change needed to the project scope for it to be successful. You…|
-|`pmp-b3-249`|pmp-mocks-1-10|single|predictive|1|One of the senior users testing your product found is was missing a key requirement that he had assumed would be there. It was…|
-|`pmp-b3-250`|pmp-mocks-1-10|single|predictive|2|A significant change has been made to the project scope after finding a serious system flaw. This scope change will impact the…|
-|`pmp-b3-251`|pmp-mocks-1-10|single|predictive|1|Five major defects have been found during quality testing, resulting in the scope changing significantly and affecting your…|
-|`pmp-b3-252`|pmp-mocks-1-10|single|predictive|3|You have just taken over as project manager on a difficult waterfall project. Multiple project stakeholders have approached you…|
-|`pmp-b3-253`|pmp-mocks-1-10|single|predictive|2|One of your stakeholders with a very high influence within the company has raised an urgent change that they want to be…|
-|`pmp-b3-254`|pmp-mocks-1-10|single|predictive|2|Your deliverables have recently been quality checked by a specialist testing team, and passed with flying colours. You take them…|
-|`pmp-b3-255`|pmp-mocks-1-10|single|agile|2|You are working on a new project in your organization, where the team is trying to move to an Agile way of work. The team are not…|
+|`pmp-b3-1`|export-batch-1|single|predictive|3|During a predictive project, the project manager is in the process of finalizing the exit criteria for a significant system…|
+|`pmp-b3-2`|export-batch-1|single|predictive|3|A major change in a government policy may cause a project's completion date to be delayed. The project is 90% complete.|
+|`pmp-b3-3`|export-batch-1|single|hybrid|4|A company that has traditionally used predictive approaches has been experimenting with the use of agile in portions of a…|
+|`pmp-b3-4`|export-batch-1|single|predictive|2|In the middle of executing an IT project, two project team members discover a new feature that will change the appearance of the…|
+|`pmp-b3-5`|export-batch-1|single|predictive|4|A project manager is working on a project that has been ongoing for some time and is currently at the 70% completion mark. The…|
+|`pmp-b3-6`|export-batch-1|single|predictive|3|Halfway through implementation, the project co-sponsor, who is contributing a significant amount of capital to the project,…|
+|`pmp-b3-7`|export-batch-1|single|predictive|2|A project manager is working on a project to modernize a bank's information technology (IT) infrastructure. The project manager…|
+|`pmp-b3-8`|export-batch-1|single|predictive|5|A project is facing a one-month delay, and the project manager realizes that a change request is necessary. The change control…|
+|`pmp-b3-9`|export-batch-1|single|predictive|3|A project manager is responsible for a 12-month waterfall project to create a new product. The project is nine months into…|
+|`pmp-b3-10`|export-batch-1|single|predictive|4|During execution, the customer submits a change request to maintain the project's business value, which has been threatened by a…|
+|`pmp-b3-11`|export-batch-1|single|predictive|4|A new solution is being deployed in several countries. Country A asked for a change in the solution in order to comply with its…|
+|`pmp-b3-201`|export-batch-2|single|predictive|3|A project manager is leading a project that follows the company's predictive approach. The project manager discovers that the…|
+|`pmp-b3-202`|export-batch-2|single|predictive|3|While validating deliverables, a project manager realizes that one of the project team members used an older version of the scope…|
+|`pmp-b3-203`|export-batch-2|single|predictive|3|The sponsor for a multimillion-dollar project has just called the project manager for a crisis meeting. The client submitted a…|
+|`pmp-b3-204`|export-batch-2|single|predictive|2|During a product acceptance test for a software project, the project sponsor tells the project manager that the software will…|
+|`pmp-b3-205`|export-batch-2|single|predictive|3|A stakeholder has suggested using an off-the-shelf, open-source product to speed up development. The team has analyzed the…|
+|`pmp-b3-206`|export-batch-2|single|predictive|2|A project manager is assigned to redesign a store's point-of-sale system. The team is currently testing the new functionality…|
+|`pmp-b3-207`|export-batch-2|single|predictive|2|During project execution, a customer asks to replace a piece of planned hardware with one that has more features and a lower…|
+|`pmp-b3-208`|export-batch-2|single|predictive|3|A project manager is reviewing work performance data in preparation for the close project process. The data reveals that one of…|
+|`pmp-b3-209`|export-batch-2|single|hybrid|3|A project manager is leading a critical project to deliver a new solution. The CEO is highly invested in the project, and the CFO…|
+|`pmp-b3-210`|export-batch-2|multi|hybrid|4|A project manager is leading a project that received a request for additional scope caused by changes in market demand. The…|
+|`pmp-b3-211`|export-batch-2|single|predictive|2|A project team discovers an opportunity to enhance software without impacting the budget or schedule. The team makes the…|
+|`pmp-b3-212`|export-batch-2|single|predictive|2|A functional manager has been making changes to a project outside of the established management plan. The functional manager…|
+|`pmp-b3-213`|export-batch-2|single|predictive|3|The change control board (CCB) has evaluated and approved several change requests in a timely manner in the last several weeks.…|
+|`pmp-b3-214`|export-batch-2|single|predictive|2|In the middle of project execution, the project sponsor leaves, and a new sponsor is assigned. The new sponsor is requesting…|
+|`pmp-b3-215`|export-batch-2|single|predictive|4|A client requests a major scope change due to a change in the market environment, which will significantly add to the project…|
+|`pmp-b3-216`|export-batch-2|single|predictive|3|During the development of a project management plan, the project team inadvertently omitted an essential component required for a…|
+|`pmp-b3-217`|export-batch-2|single|predictive|2|While reviewing project documentation, a project manager discovers that modifications were made without proper approvals.|
+|`pmp-b3-218`|export-batch-2|single|hybrid|3|A project manager is managing a technology project that is in the implementation phase. A key stakeholder communicates the need…|
+|`pmp-b3-219`|export-batch-2|single|predictive|2|A key stakeholder requests new features to be added to a product during the project implementation phase. The stakeholder insists…|
+|`pmp-b3-220`|export-batch-2|single|predictive|2|While working on a project, the project team realizes that recent data center upgrades could impact the project's outcome.…|
+|`pmp-b3-221`|export-batch-2|single|agile|2|An agile team is working on a new product development project. The product owner has requested a new change to accommodate recent…|
+|`pmp-b3-222`|export-batch-2|single|predictive|3|A customer's requested design change is approved by the change control board (CCB). The project manager then discovers that the…|
+|`pmp-b3-223`|export-batch-2|single|predictive|2|A project team has identified a number of defects with some deliverables and intends to resolve these as soon as possible. The…|
+|`pmp-b3-224`|export-batch-2|single|predictive|2|During nondestructive testing at a construction site, it was discovered that certain components are failing workability tests.…|
+|`pmp-b3-225`|export-batch-2|single|predictive|2|During the planning phase for the expansion of a services company, stakeholders conducted a feasibility study to establish the…|
+|`pmp-b3-226`|export-batch-2|single|hybrid|3|A new project is about to start and is subject to strict time and budget constraints. When reviewing the lessons learned…|
+|`pmp-b3-227`|export-batch-2|single|predictive|2|During project execution, key stakeholders request a change to ensure that the final product will satisfy their requirements.|
+|`pmp-b3-228`|export-batch-2|single|predictive|2|While reviewing the approved project schedule, the project manager realizes that the milestones are unrealistic due to…|
+|`pmp-b3-229`|export-batch-2|single|predictive|2|During a status review meeting, it was determined that the product will not meet project scope requirements in a particular…|
+|`pmp-b3-230`|export-batch-2|single|predictive|2|A customer wants to add new features to the project deliverable.|
+|`pmp-b3-231`|export-batch-2|single|predictive|2|A key stakeholder requests a change that will solve a critical issue that might affect continuity of operations. However, the…|
+|`pmp-b3-232`|export-batch-2|single|predictive|2|A stakeholder learns that the equipment purchased for a project is of higher quality than originally agreed upon. The stakeholder…|
+|`pmp-b3-233`|export-batch-2|single|predictive|2|A project manager is leading a project to deliver a new product to the market. The project sponsor has asked for a broadened…|
+|`pmp-b3-234`|export-batch-2|single|predictive|2|The development phase of a new product has concluded. The validation test is about to start, but the test lead disagrees with the…|
+|`pmp-b3-235`|export-batch-2|single|predictive|2|After a new project is executed, an executive suggests incorporating a new addon to provide more function to the product.|
+|`pmp-b3-236`|export-batch-2|single|predictive|2|As a critical update to an e-commerce platform nears completion, the project manager receives a last-minute request from a…|
+|`pmp-b3-237`|export-batch-2|single|predictive|3|As part of an initiative to upgrade an educational institution's digital infrastructure, a department head proposes the…|
+|`pmp-b3-238`|export-batch-2|single|agile|2|While working on an innovative web platform, a project manager receives a request from a crucial stakeholder for the inclusion of…|
+|`pmp-b3-239`|export-batch-2|single|predictive|2|During a significant landscape redesign project, the project manager finds a cutting-edge irrigation system that could…|
+|`pmp-b3-240`|export-batch-2|single|predictive|2|As the project manager for an innovative smart home device project, you receive a request from the stakeholder to incorporate…|
+|`pmp-b3-241`|export-batch-2|single|predictive|2|The project manager for a renewable energy initiative receives a suggestion from an environmental consultant to incorporate a new…|
+|`pmp-b3-242`|export-batch-2|single|agile|1|While implementing an enterprise resource planning (ERP) system, the agile project manager receives several requests for…|
+|`pmp-b3-243`|export-batch-2|single|predictive|2|At the conclusion of an enterprise software implementation project, a department head suggests the addition of a new analytics…|
+|`pmp-b3-244`|export-batch-2|single|agile|2|You are half way through your agile project when there is a significant change to the project scope, after it was found that the…|
+|`pmp-b3-245`|export-batch-2|single|hybrid|3|You are working on a hybrid project, where the majority of the work has been planned up front. The team manages their work via a…|
+|`pmp-b3-246`|export-batch-2|single|predictive|1|One of the stakeholders in your project has raised a change request, after some of the deliverables contained defects and a…|
+|`pmp-b3-247`|export-batch-2|single|agile|1|You are a project manager in an agile team developing new features for an app. An executive stakeholder with a high influence in…|
+|`pmp-b3-248`|export-batch-2|single|predictive|2|During User Acceptance Testing a senior user points out a major change needed to the project scope for it to be successful. You…|
+|`pmp-b3-249`|export-batch-2|single|predictive|1|One of the senior users testing your product found is was missing a key requirement that he had assumed would be there. It was…|
+|`pmp-b3-250`|export-batch-2|single|predictive|2|A significant change has been made to the project scope after finding a serious system flaw. This scope change will impact the…|
+|`pmp-b3-251`|export-batch-2|single|predictive|1|Five major defects have been found during quality testing, resulting in the scope changing significantly and affecting your…|
+|`pmp-b3-252`|export-batch-2|single|predictive|3|You have just taken over as project manager on a difficult waterfall project. Multiple project stakeholders have approached you…|
+|`pmp-b3-253`|export-batch-2|single|predictive|2|One of your stakeholders with a very high influence within the company has raised an urgent change that they want to be…|
+|`pmp-b3-254`|export-batch-2|single|predictive|2|Your deliverables have recently been quality checked by a specialist testing team, and passed with flying colours. You take them…|
+|`pmp-b3-255`|export-batch-2|single|agile|2|You are working on a new project in your organization, where the team is trying to move to an Agile way of work. The team are not…|

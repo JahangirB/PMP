@@ -75,50 +75,50 @@ any question.
 |`pmp-b7-133`|business-7|pulldown|hybrid|3|Prompts: Training for all 400 staff was planned a… / The third release lets general managers…|
 |`pmp-b7-134`|business-7|fillblank|predictive|3|A utility's billing team of 60 advisers each handles 40 account queries a day. After the new billing system goes live, past…|
 |`pmp-b7-135`|business-7|hotspot|hybrid|3|You are planning change support for an airport ground-handling company's move to electronic rostering. The diagram places each…|
-|`pmp-b7-1`|pmp-lectures-1-11|single|hybrid|3|A company has been using predictive methods for a very long time and is trying to implement a few iterative initiatives within…|
-|`pmp-b7-2`|pmp-lectures-1-11|single|hybrid|3|In a company that recently adopted hybrid practices, a project is struggling to perform as expected. Neither the project manager…|
-|`pmp-b7-3`|pmp-lectures-1-11|single|agile|4|Due to market changes, a company decided to speed up its product release schedule, moving from yearly cycles to quarterly cycles.…|
-|`pmp-b7-4`|pmp-lectures-1-11|single|predictive|3|A new project manager joins an organization that has never had formal project management processes. Some team members refuse to…|
-|`pmp-b7-201`|pmp-mocks-1-10|single|hybrid|2|A chief technology officer (CTO) is enthusiastic about an organization's recent adoption of servant leadership practices. The CTO…|
-|`pmp-b7-202`|pmp-mocks-1-10|single|hybrid|2|During the project kick-off meeting, the project manager announces that a hybrid approach will be used to deliver the project.…|
-|`pmp-b7-203`|pmp-mocks-1-10|single|hybrid|3|Due to the complex nature of a predictive project, an organization decides to use an agile approach for a project phase. A team…|
-|`pmp-b7-204`|pmp-mocks-1-10|single|predictive|3|A project manager is handling multiple projects in five different countries and is issued a new directive on workplace attire and…|
-|`pmp-b7-205`|pmp-mocks-1-10|single|agile|2|A project manager is assigned to a mobile application development project. The project manager realizes that an agile approach is…|
-|`pmp-b7-206`|pmp-mocks-1-10|single|predictive|3|A company is going through an organizational change. Most of the senior management has changed, including the project manager's…|
-|`pmp-b7-207`|pmp-mocks-1-10|multi|agile|4|A project manager new to an organization has been tasked with running the first agile project. The project manager has decided to…|
-|`pmp-b7-208`|pmp-mocks-1-10|single|agile|3|A project manager is leading a project that entails transitioning to agile. The project will pilot the agile delivery modeled…|
-|`pmp-b7-209`|pmp-mocks-1-10|single|agile|3|A company has decided to form agile teams within the organization to improve project results and take advantage of new…|
-|`pmp-b7-210`|pmp-mocks-1-10|single|agile|3|A parent company announces an integration project for all of its subsidiary companies. The integration project covers the legal,…|
-|`pmp-b7-211`|pmp-mocks-1-10|single|hybrid|3|An international company is implementing an innovative technology at one of its production plants. The technology has already…|
-|`pmp-b7-212`|pmp-mocks-1-10|single|agile|3|A large corporation is transforming itself from a predictive to agile approach. A project team with knowledge of agile practices…|
-|`pmp-b7-213`|pmp-mocks-1-10|single|hybrid|3|A project manager seeks to alleviate the IT department's workload while empowering the business to initiate new implementations…|
-|`pmp-b7-214`|pmp-mocks-1-10|single|agile|2|A project manager is helping their organization transition from using predictive methods to agile methods. The leadership team…|
-|`pmp-b7-215`|pmp-mocks-1-10|single|hybrid|2|A company's project management office (PMO) is incorporating more adaptive technologies and has hired a new project manager with…|
-|`pmp-b7-216`|pmp-mocks-1-10|single|agile|2|A company is considering adopting the agile methodology for future projects. The project manager is leading a discussion focused…|
-|`pmp-b7-217`|pmp-mocks-1-10|single|agile|3|A project manager is helping an organization transition from traditional methods to agile. The infrastructure, data warehousing,…|
-|`pmp-b7-218`|pmp-mocks-1-10|single|agile|4|An agile coach is counseling a large software organization that has been using waterfall methodology and now plans to start using…|
-|`pmp-b7-219`|pmp-mocks-1-10|single|agile|3|A project manager in an organization is considering implementing an agile project delivery. The organization has a strong project…|
-|`pmp-b7-220`|pmp-mocks-1-10|single|predictive|2|The project manager is having difficulties persuading stakeholders to adopt new technlogy in the project.|
-|`pmp-b7-221`|pmp-mocks-1-10|single|predictive|3|A project manager participates in a focus group that implements project management changes across the organization. The goal is…|
-|`pmp-b7-222`|pmp-mocks-1-10|multi|agile|3|A project manager in a project management office (PMO) is tasked with implementing an agile framework. The leadership team…|
-|`pmp-b7-223`|pmp-mocks-1-10|single|hybrid|2|A project manager is assigned to a new multinational project. This will be the project manager's first time working with team…|
-|`pmp-b7-224`|pmp-mocks-1-10|single|agile|2|A project manager in a predictive environment has recently completed agile training and is starting to manage projects in an…|
-|`pmp-b7-225`|pmp-mocks-1-10|single|hybrid|3|A project manager is halfway through a project using a predictive methodology when the organization announces a transition to a…|
-|`pmp-b7-226`|pmp-mocks-1-10|single|predictive|2|A project manager has been assigned to lead a cross-functional project team. During a brainstorming session, the project manager…|
-|`pmp-b7-227`|pmp-mocks-1-10|single|hybrid|3|In order to determine a new hybrid approach for a project, the project manager decides that an assessment of the organizational…|
-|`pmp-b7-228`|pmp-mocks-1-10|single|agile|2|A project manager decided that using an agile approach for a new project will deliver the best outcomes. Some of the team members…|
-|`pmp-b7-229`|pmp-mocks-1-10|single|agile|2|Team members are transferred from a predictive project to a newly formed agile team. The new team members are expressing…|
-|`pmp-b7-230`|pmp-mocks-1-10|single|agile|3|A project manager has been engaged by a managing director to transform the project management office (PMO) from a waterfall…|
-|`pmp-b7-231`|pmp-mocks-1-10|multi|agile|2|A team is transitioning from a predictive to an agile approach. (Choose two)|
-|`pmp-b7-232`|pmp-mocks-1-10|single|hybrid|3|An organizational change program has met with internal resistance, a risk which was previously identified. A logistics manager is…|
-|`pmp-b7-233`|pmp-mocks-1-10|single|predictive|2|In a major software development project, the project manager finds that several team members are reluctant to use new project…|
-|`pmp-b7-234`|pmp-mocks-1-10|single|predictive|3|A project manager is overseeing the upgrade of an old manufacturing system to a new automated solution, aligning with the…|
-|`pmp-b7-235`|pmp-mocks-1-10|single|agile|2|A firm planning to transition to lean development techniques, the project manager encounters resistance from several world wide…|
-|`pmp-b7-236`|pmp-mocks-1-10|single|predictive|2|As a project manager in charge of a new sustainability initiative, you've introduced a groundbreaking environmental monitoring…|
-|`pmp-b7-237`|pmp-mocks-1-10|single|predictive|1|As part of a company-wide project to enhance IT security, the project manager schedules a series of educational webinars for…|
-|`pmp-b7-238`|pmp-mocks-1-10|single|predictive|2|As your project progresses, many of the business stakeholders are starting to voice their concerns, to question some of the…|
-|`pmp-b7-239`|pmp-mocks-1-10|single|agile|2|Your deliverables have been signed off by the Product Owner and are ready to be released to the customer, which is the financial…|
-|`pmp-b7-240`|pmp-mocks-1-10|single|predictive|2|You are leading a large organisational change that affects more than a thousand people across multiple teams. You have engaged…|
-|`pmp-b7-241`|pmp-mocks-1-10|single|agile|1|You working as an Agile project manager in a team with many stakeholders who have not worked on an Agile project before. Some of…|
-|`pmp-b7-242`|pmp-mocks-1-10|single|agile|2|You are an Agile project manager tasked with evolving your part of the organisation into Agile.|
-|`pmp-b7-243`|pmp-mocks-1-10|single|predictive|2|You have been assigned to a project that is half way through its delivery. You analyze the stakeholders involved in the project…|
+|`pmp-b7-1`|export-batch-1|single|hybrid|3|A company has been using predictive methods for a very long time and is trying to implement a few iterative initiatives within…|
+|`pmp-b7-2`|export-batch-1|single|hybrid|3|In a company that recently adopted hybrid practices, a project is struggling to perform as expected. Neither the project manager…|
+|`pmp-b7-3`|export-batch-1|single|agile|4|Due to market changes, a company decided to speed up its product release schedule, moving from yearly cycles to quarterly cycles.…|
+|`pmp-b7-4`|export-batch-1|single|predictive|3|A new project manager joins an organization that has never had formal project management processes. Some team members refuse to…|
+|`pmp-b7-201`|export-batch-2|single|hybrid|2|A chief technology officer (CTO) is enthusiastic about an organization's recent adoption of servant leadership practices. The CTO…|
+|`pmp-b7-202`|export-batch-2|single|hybrid|2|During the project kick-off meeting, the project manager announces that a hybrid approach will be used to deliver the project.…|
+|`pmp-b7-203`|export-batch-2|single|hybrid|3|Due to the complex nature of a predictive project, an organization decides to use an agile approach for a project phase. A team…|
+|`pmp-b7-204`|export-batch-2|single|predictive|3|A project manager is handling multiple projects in five different countries and is issued a new directive on workplace attire and…|
+|`pmp-b7-205`|export-batch-2|single|agile|2|A project manager is assigned to a mobile application development project. The project manager realizes that an agile approach is…|
+|`pmp-b7-206`|export-batch-2|single|predictive|3|A company is going through an organizational change. Most of the senior management has changed, including the project manager's…|
+|`pmp-b7-207`|export-batch-2|multi|agile|4|A project manager new to an organization has been tasked with running the first agile project. The project manager has decided to…|
+|`pmp-b7-208`|export-batch-2|single|agile|3|A project manager is leading a project that entails transitioning to agile. The project will pilot the agile delivery modeled…|
+|`pmp-b7-209`|export-batch-2|single|agile|3|A company has decided to form agile teams within the organization to improve project results and take advantage of new…|
+|`pmp-b7-210`|export-batch-2|single|agile|3|A parent company announces an integration project for all of its subsidiary companies. The integration project covers the legal,…|
+|`pmp-b7-211`|export-batch-2|single|hybrid|3|An international company is implementing an innovative technology at one of its production plants. The technology has already…|
+|`pmp-b7-212`|export-batch-2|single|agile|3|A large corporation is transforming itself from a predictive to agile approach. A project team with knowledge of agile practices…|
+|`pmp-b7-213`|export-batch-2|single|hybrid|3|A project manager seeks to alleviate the IT department's workload while empowering the business to initiate new implementations…|
+|`pmp-b7-214`|export-batch-2|single|agile|2|A project manager is helping their organization transition from using predictive methods to agile methods. The leadership team…|
+|`pmp-b7-215`|export-batch-2|single|hybrid|2|A company's project management office (PMO) is incorporating more adaptive technologies and has hired a new project manager with…|
+|`pmp-b7-216`|export-batch-2|single|agile|2|A company is considering adopting the agile methodology for future projects. The project manager is leading a discussion focused…|
+|`pmp-b7-217`|export-batch-2|single|agile|3|A project manager is helping an organization transition from traditional methods to agile. The infrastructure, data warehousing,…|
+|`pmp-b7-218`|export-batch-2|single|agile|4|An agile coach is counseling a large software organization that has been using waterfall methodology and now plans to start using…|
+|`pmp-b7-219`|export-batch-2|single|agile|3|A project manager in an organization is considering implementing an agile project delivery. The organization has a strong project…|
+|`pmp-b7-220`|export-batch-2|single|predictive|2|The project manager is having difficulties persuading stakeholders to adopt new technlogy in the project.|
+|`pmp-b7-221`|export-batch-2|single|predictive|3|A project manager participates in a focus group that implements project management changes across the organization. The goal is…|
+|`pmp-b7-222`|export-batch-2|multi|agile|3|A project manager in a project management office (PMO) is tasked with implementing an agile framework. The leadership team…|
+|`pmp-b7-223`|export-batch-2|single|hybrid|2|A project manager is assigned to a new multinational project. This will be the project manager's first time working with team…|
+|`pmp-b7-224`|export-batch-2|single|agile|2|A project manager in a predictive environment has recently completed agile training and is starting to manage projects in an…|
+|`pmp-b7-225`|export-batch-2|single|hybrid|3|A project manager is halfway through a project using a predictive methodology when the organization announces a transition to a…|
+|`pmp-b7-226`|export-batch-2|single|predictive|2|A project manager has been assigned to lead a cross-functional project team. During a brainstorming session, the project manager…|
+|`pmp-b7-227`|export-batch-2|single|hybrid|3|In order to determine a new hybrid approach for a project, the project manager decides that an assessment of the organizational…|
+|`pmp-b7-228`|export-batch-2|single|agile|2|A project manager decided that using an agile approach for a new project will deliver the best outcomes. Some of the team members…|
+|`pmp-b7-229`|export-batch-2|single|agile|2|Team members are transferred from a predictive project to a newly formed agile team. The new team members are expressing…|
+|`pmp-b7-230`|export-batch-2|single|agile|3|A project manager has been engaged by a managing director to transform the project management office (PMO) from a waterfall…|
+|`pmp-b7-231`|export-batch-2|multi|agile|2|A team is transitioning from a predictive to an agile approach. (Choose two)|
+|`pmp-b7-232`|export-batch-2|single|hybrid|3|An organizational change program has met with internal resistance, a risk which was previously identified. A logistics manager is…|
+|`pmp-b7-233`|export-batch-2|single|predictive|2|In a major software development project, the project manager finds that several team members are reluctant to use new project…|
+|`pmp-b7-234`|export-batch-2|single|predictive|3|A project manager is overseeing the upgrade of an old manufacturing system to a new automated solution, aligning with the…|
+|`pmp-b7-235`|export-batch-2|single|agile|2|A firm planning to transition to lean development techniques, the project manager encounters resistance from several world wide…|
+|`pmp-b7-236`|export-batch-2|single|predictive|2|As a project manager in charge of a new sustainability initiative, you've introduced a groundbreaking environmental monitoring…|
+|`pmp-b7-237`|export-batch-2|single|predictive|1|As part of a company-wide project to enhance IT security, the project manager schedules a series of educational webinars for…|
+|`pmp-b7-238`|export-batch-2|single|predictive|2|As your project progresses, many of the business stakeholders are starting to voice their concerns, to question some of the…|
+|`pmp-b7-239`|export-batch-2|single|agile|2|Your deliverables have been signed off by the Product Owner and are ready to be released to the customer, which is the financial…|
+|`pmp-b7-240`|export-batch-2|single|predictive|2|You are leading a large organisational change that affects more than a thousand people across multiple teams. You have engaged…|
+|`pmp-b7-241`|export-batch-2|single|agile|1|You working as an Agile project manager in a team with many stakeholders who have not worked on an Agile project before. Some of…|
+|`pmp-b7-242`|export-batch-2|single|agile|2|You are an Agile project manager tasked with evolving your part of the organisation into Agile.|
+|`pmp-b7-243`|export-batch-2|single|predictive|2|You have been assigned to a project that is half way through its delivery. You analyze the stakeholders involved in the project…|

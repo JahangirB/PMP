@@ -81,36 +81,36 @@ any question.
 |`pmp-p7-138`|people-7|pulldown|predictive|3|Prompts: The embankment design assumes the local… / The team has found that the environmenta… / A subcontractor's foreman has explained…|
 |`pmp-p7-139`|people-7|fillblank|predictive|2|Since handover of a new fleet-maintenance scheduling system, a bus operator's depot staff raise about 60 queries a month to your…|
 |`pmp-p7-140`|people-7|hotspot|agile|2|Your agile team's knowledge map lists each component it owns, how many developers can change it safely, how often it has changed…|
-|`pmp-p7-1`|pmp-lectures-1-11|single|predictive|3|A project manager is working on a new healthcare management application. One of the team members will be leaving the organization…|
-|`pmp-p7-2`|pmp-lectures-1-11|single|predictive|2|During project execution, the project sponsor decides to replace a subject matter expert (SME) on the project.|
-|`pmp-p7-3`|pmp-lectures-1-11|single|agile|4|A group of agile team members have just completed in-person training for a number of critical and complex organizational…|
-|`pmp-p7-201`|pmp-mocks-1-10|single|predictive|2|A multi-year project is underway when a key resource announces that they are retiring. The project manager is concerned about the…|
-|`pmp-p7-202`|pmp-mocks-1-10|single|predictive|3|A project manager has just taken over a 5-year project that is at the midpoint. At the steering committee meeting, the CEO asked…|
-|`pmp-p7-203`|pmp-mocks-1-10|single|agile|2|A project manager working in an agile environment realizes that some new team members are having difficulty understanding how…|
-|`pmp-p7-204`|pmp-mocks-1-10|single|predictive|2|In a project where a third-party provider is implementing a custom solution, the project manager must ensure that the local team…|
-|`pmp-p7-205`|pmp-mocks-1-10|single|agile|2|A dispersed project team has been working together on a long-term development project. The team just finished an iteration when a…|
-|`pmp-p7-206`|pmp-mocks-1-10|single|predictive|3|A new project manager is hired to replace a project manager who was recently transferred to another project. The team members…|
-|`pmp-p7-207`|pmp-mocks-1-10|single|predictive|2|An events company is planning a new event for a client that holds biannual conferences. The project is being managed by a new…|
-|`pmp-p7-208`|pmp-mocks-1-10|single|predictive|2|In a functional organization, a product analyst is assigned to a short-duration application development effort. The analyst…|
-|`pmp-p7-209`|pmp-mocks-1-10|single|predictive|2|A project manager needs to close out a project and does not have time to update the lessons learned register.|
-|`pmp-p7-210`|pmp-mocks-1-10|single|hybrid|3|A project manager recognizes the need to improve team dynamics and knowledge sharing during a megaproject.|
-|`pmp-p7-211`|pmp-mocks-1-10|single|predictive|1|A pilot project is ready to close and the project team wants to capture the challenges that were overcome and the opportunities…|
-|`pmp-p7-212`|pmp-mocks-1-10|single|predictive|2|A project manager just completed a project in an organization that values lessons learned. Leadership encourages all the project…|
-|`pmp-p7-213`|pmp-mocks-1-10|single|predictive|2|After an annual staff review, discussing project management and soft skills knowledge, the company made a decision to train all…|
-|`pmp-p7-214`|pmp-mocks-1-10|single|predictive|1|A project manager is consolidating project documentation such as videos, pictures, audio, to ensure the team is sharing out…|
-|`pmp-p7-215`|pmp-mocks-1-10|multi|predictive|3|A project manager is assigned to a project that is already in progress because the original project manager left the organization…|
-|`pmp-p7-216`|pmp-mocks-1-10|single|agile|3|Operations for a new technology-based project are being transitioned to a new project team. Early in the execution phase, the…|
-|`pmp-p7-217`|pmp-mocks-1-10|single|predictive|2|A project manager has been assigned to a new project that revisits a previously completed project.|
-|`pmp-p7-218`|pmp-mocks-1-10|single|hybrid|2|A project manager is new to the organization and is assigned to replace the project manager of an active project.|
-|`pmp-p7-219`|pmp-mocks-1-10|single|predictive|1|Upon completion of a long-term contract, the project manager confirms with the release manager that all planned features are…|
-|`pmp-p7-220`|pmp-mocks-1-10|single|predictive|2|A project manager realizes that some newly hired team members have not been as productive as expected. The project has a very…|
-|`pmp-p7-221`|pmp-mocks-1-10|single|predictive|3|A project manager is preparing for an organization-wide software system replacement project that will have a significant impact…|
-|`pmp-p7-222`|pmp-mocks-1-10|single|predictive|2|A project manager is overseeing the development of a new healthcare facility. The project team is struggling to understand some…|
-|`pmp-p7-223`|pmp-mocks-1-10|single|predictive|2|During a crucial phase of the project, a pivotal team member informs the project manager of their impending resignation,…|
-|`pmp-p7-224`|pmp-mocks-1-10|single|agile|2|During a critical phase of an agile development project, a specialist responsible for designing a key component is unexpectedly…|
-|`pmp-p7-225`|pmp-mocks-1-10|single|hybrid|3|During the critical phase of a remote-operated environmental research project, a key analyst departs, necessitating the swift…|
-|`pmp-p7-226`|pmp-mocks-1-10|multi|hybrid|3|In the midst of deploying a major IT infrastructure update, a project manager identifies a significant knowledge gap within the…|
-|`pmp-p7-227`|pmp-mocks-1-10|single|predictive|2|In finalizing an infrastructure upgrade project, the project manager needs to ensure that all critical operational knowledge has…|
-|`pmp-p7-228`|pmp-mocks-1-10|single|agile|2|You are working on an agile project where there are vastly differing levels of product knowledge within your team. The scrum…|
-|`pmp-p7-229`|pmp-mocks-1-10|single|agile|1|As an Agile project manager, you understand the need to operate with openness and transparency with your team and stakeholders.|
-|`pmp-p7-230`|pmp-mocks-1-10|single|predictive|2|You are nearing the end of your project which has delivered a brand new system to the organization. There have been many…|
+|`pmp-p7-1`|export-batch-1|single|predictive|3|A project manager is working on a new healthcare management application. One of the team members will be leaving the organization…|
+|`pmp-p7-2`|export-batch-1|single|predictive|2|During project execution, the project sponsor decides to replace a subject matter expert (SME) on the project.|
+|`pmp-p7-3`|export-batch-1|single|agile|4|A group of agile team members have just completed in-person training for a number of critical and complex organizational…|
+|`pmp-p7-201`|export-batch-2|single|predictive|2|A multi-year project is underway when a key resource announces that they are retiring. The project manager is concerned about the…|
+|`pmp-p7-202`|export-batch-2|single|predictive|3|A project manager has just taken over a 5-year project that is at the midpoint. At the steering committee meeting, the CEO asked…|
+|`pmp-p7-203`|export-batch-2|single|agile|2|A project manager working in an agile environment realizes that some new team members are having difficulty understanding how…|
+|`pmp-p7-204`|export-batch-2|single|predictive|2|In a project where a third-party provider is implementing a custom solution, the project manager must ensure that the local team…|
+|`pmp-p7-205`|export-batch-2|single|agile|2|A dispersed project team has been working together on a long-term development project. The team just finished an iteration when a…|
+|`pmp-p7-206`|export-batch-2|single|predictive|3|A new project manager is hired to replace a project manager who was recently transferred to another project. The team members…|
+|`pmp-p7-207`|export-batch-2|single|predictive|2|An events company is planning a new event for a client that holds biannual conferences. The project is being managed by a new…|
+|`pmp-p7-208`|export-batch-2|single|predictive|2|In a functional organization, a product analyst is assigned to a short-duration application development effort. The analyst…|
+|`pmp-p7-209`|export-batch-2|single|predictive|2|A project manager needs to close out a project and does not have time to update the lessons learned register.|
+|`pmp-p7-210`|export-batch-2|single|hybrid|3|A project manager recognizes the need to improve team dynamics and knowledge sharing during a megaproject.|
+|`pmp-p7-211`|export-batch-2|single|predictive|1|A pilot project is ready to close and the project team wants to capture the challenges that were overcome and the opportunities…|
+|`pmp-p7-212`|export-batch-2|single|predictive|2|A project manager just completed a project in an organization that values lessons learned. Leadership encourages all the project…|
+|`pmp-p7-213`|export-batch-2|single|predictive|2|After an annual staff review, discussing project management and soft skills knowledge, the company made a decision to train all…|
+|`pmp-p7-214`|export-batch-2|single|predictive|1|A project manager is consolidating project documentation such as videos, pictures, audio, to ensure the team is sharing out…|
+|`pmp-p7-215`|export-batch-2|multi|predictive|3|A project manager is assigned to a project that is already in progress because the original project manager left the organization…|
+|`pmp-p7-216`|export-batch-2|single|agile|3|Operations for a new technology-based project are being transitioned to a new project team. Early in the execution phase, the…|
+|`pmp-p7-217`|export-batch-2|single|predictive|2|A project manager has been assigned to a new project that revisits a previously completed project.|
+|`pmp-p7-218`|export-batch-2|single|hybrid|2|A project manager is new to the organization and is assigned to replace the project manager of an active project.|
+|`pmp-p7-219`|export-batch-2|single|predictive|1|Upon completion of a long-term contract, the project manager confirms with the release manager that all planned features are…|
+|`pmp-p7-220`|export-batch-2|single|predictive|2|A project manager realizes that some newly hired team members have not been as productive as expected. The project has a very…|
+|`pmp-p7-221`|export-batch-2|single|predictive|3|A project manager is preparing for an organization-wide software system replacement project that will have a significant impact…|
+|`pmp-p7-222`|export-batch-2|single|predictive|2|A project manager is overseeing the development of a new healthcare facility. The project team is struggling to understand some…|
+|`pmp-p7-223`|export-batch-2|single|predictive|2|During a crucial phase of the project, a pivotal team member informs the project manager of their impending resignation,…|
+|`pmp-p7-224`|export-batch-2|single|agile|2|During a critical phase of an agile development project, a specialist responsible for designing a key component is unexpectedly…|
+|`pmp-p7-225`|export-batch-2|single|hybrid|3|During the critical phase of a remote-operated environmental research project, a key analyst departs, necessitating the swift…|
+|`pmp-p7-226`|export-batch-2|multi|hybrid|3|In the midst of deploying a major IT infrastructure update, a project manager identifies a significant knowledge gap within the…|
+|`pmp-p7-227`|export-batch-2|single|predictive|2|In finalizing an infrastructure upgrade project, the project manager needs to ensure that all critical operational knowledge has…|
+|`pmp-p7-228`|export-batch-2|single|agile|2|You are working on an agile project where there are vastly differing levels of product knowledge within your team. The scrum…|
+|`pmp-p7-229`|export-batch-2|single|agile|1|As an Agile project manager, you understand the need to operate with openness and transparency with your team and stakeholders.|
+|`pmp-p7-230`|export-batch-2|single|predictive|2|You are nearing the end of your project which has delivered a brand new system to the organization. There have been many…|

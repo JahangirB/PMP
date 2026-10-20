@@ -82,55 +82,55 @@ any question.
 |`pmp-pr9-138`|process-9|pulldown|predictive|4|Prompts: The electrical package overran by €80,00… / The joinery package has run at a CPI of… / The ventilation package's original estim…|
 |`pmp-pr9-139`|process-9|fillblank|predictive|4|A ten-month motorway resurfacing contract has cumulative planned value, in £000, of 60, 150, 260, 380, 500, 610, 700, 780, 850…|
 |`pmp-pr9-140`|process-9|hotspot|predictive|3|The tracking Gantt for a hospice extension shows five activities. Each label gives how far the activity's forecast finish has…|
-|`pmp-pr9-1`|pmp-lectures-1-11|single|hybrid|3|A hybrid project involving many stakeholders is underway. As requested by the project management office (PMO), the project status…|
-|`pmp-pr9-2`|pmp-lectures-1-11|single|predictive|4|A new program manager checks the status of a project. The forecast shows the project is slightly behind schedule. However, in…|
-|`pmp-pr9-3`|pmp-lectures-1-11|single|predictive|3|An entrepreneur has initiated a software development project. The project charter has been approved, and a project manager has…|
-|`pmp-pr9-4`|pmp-lectures-1-11|single|predictive|3|During a steering committee meeting, a senior executive raised a concern that although the key cost parameters are reported to be…|
-|`pmp-pr9-5`|pmp-lectures-1-11|single|predictive|3|A project has a budgeted cost of $120,000. According to the schedule, 15% of the project should have been completed after one…|
-|`pmp-pr9-6`|pmp-lectures-1-11|single|predictive|3|A project advisory team is working remotely from the core project team. There is a constant flow of information between these two…|
-|`pmp-pr9-7`|pmp-lectures-1-11|single|agile|3|The leadership team of a company asked a project manager for an ad-hoc status update on the latest iteration of a project. The…|
-|`pmp-pr9-201`|pmp-mocks-1-10|single|agile|2|An agile team is doing an excellent job of focusing on high-priority items and completing them in less time than required.|
-|`pmp-pr9-202`|pmp-mocks-1-10|single|predictive|3|A project sponsor is increasingly anxious about the value returned from the investment made in a project and wants to ensure that…|
-|`pmp-pr9-203`|pmp-mocks-1-10|single|agile|2|While conducting a retrospective meeting, team members were surprised from the performance results of the team shared by the…|
-|`pmp-pr9-204`|pmp-mocks-1-10|single|agile|2|During an agile retrospective session, several team members mentioned that they were confused about the iteration's progress.|
-|`pmp-pr9-205`|pmp-mocks-1-10|single|agile|3|A company is developing a breakthrough product in a highly competitive and rapidly evolving market. The project manager…|
-|`pmp-pr9-206`|pmp-mocks-1-10|single|predictive|2|While preparing a project's third progress report, the project manager identifies that the project will experience delays due to…|
-|`pmp-pr9-207`|pmp-mocks-1-10|single|agile|2|A project manager is leading an agile project. The product owner complains that the project team is constantly completing fewer…|
-|`pmp-pr9-208`|pmp-mocks-1-10|single|agile|2|A project manager conducts a lessons learned meeting and project team members mention that they are not always aware of the…|
-|`pmp-pr9-209`|pmp-mocks-1-10|single|predictive|2|A project manager leads a project team on a project. This project's goal is to enhance a product's capability in the market.|
-|`pmp-pr9-210`|pmp-mocks-1-10|single|agile|3|A newly launched product prototype is receiving a number of customer complaints. To reduce negative feedback, the team comes up…|
-|`pmp-pr9-211`|pmp-mocks-1-10|multi|hybrid|3|The project teams are having difficulties coordinating their tasks due to several constraints and dependencies. The project…|
-|`pmp-pr9-212`|pmp-mocks-1-10|multi|predictive|2|In an ongoing project, performance is continuously evaluated to determine benefits. (Choose two)|
-|`pmp-pr9-213`|pmp-mocks-1-10|single|predictive|2|A project team has complete access to all project-related data, including visual data and information like the Gantt chart,…|
-|`pmp-pr9-214`|pmp-mocks-1-10|multi|agile|3|(Choose two)|
-|`pmp-pr9-215`|pmp-mocks-1-10|single|predictive|2|At the outset of a software development project, the project manager is tasked with devising a strategy for assessing the…|
-|`pmp-pr9-216`|pmp-mocks-1-10|single|predictive|2|During a complex software development project, a project manager notices significant variances between the planned and actual…|
-|`pmp-pr9-217`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a large infrastructure project that is facing schedule delays. The project manager wants to use…|
-|`pmp-pr9-218`|pmp-mocks-1-10|single|predictive|2|A software development project is midway through its timeline, and the project manager notices that the actual progress is…|
-|`pmp-pr9-219`|pmp-mocks-1-10|single|predictive|2|In the midst of a major software development project, the project manager is preparing for an upcoming executive in-depth review.…|
-|`pmp-pr9-220`|pmp-mocks-1-10|single|predictive|2|During the final stages of a significant infrastructure project, it was discovered that comprehensive reports on critical…|
-|`pmp-pr9-221`|pmp-mocks-1-10|single|agile|2|You are working as a project manager for a medium-sized software project. The project sponsor believes that the team have not…|
-|`pmp-pr9-222`|pmp-mocks-1-10|single|hybrid|2|In a hybrid project environment, stakeholders are experiencing challenges in accessing the most recent version of the project…|
-|`pmp-pr9-223`|pmp-mocks-1-10|single|hybrid|3|As a new software development project kicks off, when is it most appropriate for the project manager to conduct the first project…|
-|`pmp-pr9-224`|pmp-mocks-1-10|single|agile|1|Following a directive to enhance operational efficiencies within a multinational corporation, the executive team has requested an…|
-|`pmp-pr9-225`|pmp-mocks-1-10|single|agile|2|You are working in an agile team where executives in the team you are delivering to are asking for a large display of reports to…|
-|`pmp-pr9-226`|pmp-mocks-1-10|single|agile|3|Multiple features have been released, but they are not having the effect the product owner believes they should. Your team are…|
-|`pmp-pr9-227`|pmp-mocks-1-10|single|agile|2|You are working on an agile project where the project customer wants a reliable way to measure the project performance, and you…|
-|`pmp-pr9-228`|pmp-mocks-1-10|single|agile|2|You are working on an agile project where the project sponsor and executive managers require lengthy reports about the project…|
-|`pmp-pr9-229`|pmp-mocks-1-10|single|hybrid|2|You are working on a project that has planned as much as they can up-front. You would like them to move to a more agile way of…|
-|`pmp-pr9-230`|pmp-mocks-1-10|single|agile|2|You are working as a product owner in an agile team, where the main measure of project success is the number of features…|
-|`pmp-pr9-231`|pmp-mocks-1-10|single|hybrid|2|You have been working on a project for the past eight months. Your project team have been approached by multiple stakeholders for…|
-|`pmp-pr9-232`|pmp-mocks-1-10|single|predictive|2|You are managing a large construction project. Due to some delays, the project schedule has been pushed back by one week. As a…|
-|`pmp-pr9-233`|pmp-mocks-1-10|single|agile|1|You have planned and begun the current sprint, where the project team have committed to delivering and releasing a particular…|
-|`pmp-pr9-234`|pmp-mocks-1-10|single|agile|2|You are a program manager on a large scale agile program, where each project team has its own scrum master. You need to know the…|
-|`pmp-pr9-235`|pmp-mocks-1-10|single|predictive|1|Your project has been executing for the past five months, and due to an organisational change a new project sponsor has come on…|
-|`pmp-pr9-236`|pmp-mocks-1-10|single|agile|1|You are managing a project as an Agile project manager and a business representative for the product you are delivering asks you…|
-|`pmp-pr9-237`|pmp-mocks-1-10|single|agile|2|You are the project manager on an Agile project that is half way through. The project sponsor is starting to raise concerns that…|
-|`pmp-pr9-238`|pmp-mocks-1-10|single|hybrid|2|You are working on a traditional waterfall project and the organisation wants to move to an Agile way of work. The functional…|
-|`pmp-pr9-239`|pmp-mocks-1-10|single|predictive|2|The project customer approaches you as they are worried that the project is not delivering fast enough. You review the project…|
-|`pmp-pr9-240`|pmp-mocks-1-10|single|agile|1|You are showing the project sponsor around the team area for your Agile project and see the burndown chart next to the team…|
-|`pmp-pr9-241`|pmp-mocks-1-10|single|agile|1|You are working through the feature backlog with the functional manager of the organisation, who is the product owner for your…|
-|`pmp-pr9-242`|pmp-mocks-1-10|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values. Identify…|
-|`pmp-pr9-243`|pmp-mocks-1-10|single|agile|1|You are working on a complex software project but see that the team uses a whiteboard, and writes tasks on cards or sticky notes.…|
-|`pmp-pr9-244`|pmp-mocks-1-10|single|predictive|2|You have just initiated a project, and the steering committee asks you to keep them updated on the main project activities. You…|
-|`pmp-pr9-245`|pmp-mocks-1-10|single|agile|2|You are working on a project where a competitor is also working on a similar feature, and being first to the market will have a…|
+|`pmp-pr9-1`|export-batch-1|single|hybrid|3|A hybrid project involving many stakeholders is underway. As requested by the project management office (PMO), the project status…|
+|`pmp-pr9-2`|export-batch-1|single|predictive|4|A new program manager checks the status of a project. The forecast shows the project is slightly behind schedule. However, in…|
+|`pmp-pr9-3`|export-batch-1|single|predictive|3|An entrepreneur has initiated a software development project. The project charter has been approved, and a project manager has…|
+|`pmp-pr9-4`|export-batch-1|single|predictive|3|During a steering committee meeting, a senior executive raised a concern that although the key cost parameters are reported to be…|
+|`pmp-pr9-5`|export-batch-1|single|predictive|3|A project has a budgeted cost of $120,000. According to the schedule, 15% of the project should have been completed after one…|
+|`pmp-pr9-6`|export-batch-1|single|predictive|3|A project advisory team is working remotely from the core project team. There is a constant flow of information between these two…|
+|`pmp-pr9-7`|export-batch-1|single|agile|3|The leadership team of a company asked a project manager for an ad-hoc status update on the latest iteration of a project. The…|
+|`pmp-pr9-201`|export-batch-2|single|agile|2|An agile team is doing an excellent job of focusing on high-priority items and completing them in less time than required.|
+|`pmp-pr9-202`|export-batch-2|single|predictive|3|A project sponsor is increasingly anxious about the value returned from the investment made in a project and wants to ensure that…|
+|`pmp-pr9-203`|export-batch-2|single|agile|2|While conducting a retrospective meeting, team members were surprised from the performance results of the team shared by the…|
+|`pmp-pr9-204`|export-batch-2|single|agile|2|During an agile retrospective session, several team members mentioned that they were confused about the iteration's progress.|
+|`pmp-pr9-205`|export-batch-2|single|agile|3|A company is developing a breakthrough product in a highly competitive and rapidly evolving market. The project manager…|
+|`pmp-pr9-206`|export-batch-2|single|predictive|2|While preparing a project's third progress report, the project manager identifies that the project will experience delays due to…|
+|`pmp-pr9-207`|export-batch-2|single|agile|2|A project manager is leading an agile project. The product owner complains that the project team is constantly completing fewer…|
+|`pmp-pr9-208`|export-batch-2|single|agile|2|A project manager conducts a lessons learned meeting and project team members mention that they are not always aware of the…|
+|`pmp-pr9-209`|export-batch-2|single|predictive|2|A project manager leads a project team on a project. This project's goal is to enhance a product's capability in the market.|
+|`pmp-pr9-210`|export-batch-2|single|agile|3|A newly launched product prototype is receiving a number of customer complaints. To reduce negative feedback, the team comes up…|
+|`pmp-pr9-211`|export-batch-2|multi|hybrid|3|The project teams are having difficulties coordinating their tasks due to several constraints and dependencies. The project…|
+|`pmp-pr9-212`|export-batch-2|multi|predictive|2|In an ongoing project, performance is continuously evaluated to determine benefits. (Choose two)|
+|`pmp-pr9-213`|export-batch-2|single|predictive|2|A project team has complete access to all project-related data, including visual data and information like the Gantt chart,…|
+|`pmp-pr9-214`|export-batch-2|multi|agile|3|(Choose two)|
+|`pmp-pr9-215`|export-batch-2|single|predictive|2|At the outset of a software development project, the project manager is tasked with devising a strategy for assessing the…|
+|`pmp-pr9-216`|export-batch-2|single|predictive|2|During a complex software development project, a project manager notices significant variances between the planned and actual…|
+|`pmp-pr9-217`|export-batch-2|single|predictive|3|A project manager is working on a large infrastructure project that is facing schedule delays. The project manager wants to use…|
+|`pmp-pr9-218`|export-batch-2|single|predictive|2|A software development project is midway through its timeline, and the project manager notices that the actual progress is…|
+|`pmp-pr9-219`|export-batch-2|single|predictive|2|In the midst of a major software development project, the project manager is preparing for an upcoming executive in-depth review.…|
+|`pmp-pr9-220`|export-batch-2|single|predictive|2|During the final stages of a significant infrastructure project, it was discovered that comprehensive reports on critical…|
+|`pmp-pr9-221`|export-batch-2|single|agile|2|You are working as a project manager for a medium-sized software project. The project sponsor believes that the team have not…|
+|`pmp-pr9-222`|export-batch-2|single|hybrid|2|In a hybrid project environment, stakeholders are experiencing challenges in accessing the most recent version of the project…|
+|`pmp-pr9-223`|export-batch-2|single|hybrid|3|As a new software development project kicks off, when is it most appropriate for the project manager to conduct the first project…|
+|`pmp-pr9-224`|export-batch-2|single|agile|1|Following a directive to enhance operational efficiencies within a multinational corporation, the executive team has requested an…|
+|`pmp-pr9-225`|export-batch-2|single|agile|2|You are working in an agile team where executives in the team you are delivering to are asking for a large display of reports to…|
+|`pmp-pr9-226`|export-batch-2|single|agile|3|Multiple features have been released, but they are not having the effect the product owner believes they should. Your team are…|
+|`pmp-pr9-227`|export-batch-2|single|agile|2|You are working on an agile project where the project customer wants a reliable way to measure the project performance, and you…|
+|`pmp-pr9-228`|export-batch-2|single|agile|2|You are working on an agile project where the project sponsor and executive managers require lengthy reports about the project…|
+|`pmp-pr9-229`|export-batch-2|single|hybrid|2|You are working on a project that has planned as much as they can up-front. You would like them to move to a more agile way of…|
+|`pmp-pr9-230`|export-batch-2|single|agile|2|You are working as a product owner in an agile team, where the main measure of project success is the number of features…|
+|`pmp-pr9-231`|export-batch-2|single|hybrid|2|You have been working on a project for the past eight months. Your project team have been approached by multiple stakeholders for…|
+|`pmp-pr9-232`|export-batch-2|single|predictive|2|You are managing a large construction project. Due to some delays, the project schedule has been pushed back by one week. As a…|
+|`pmp-pr9-233`|export-batch-2|single|agile|1|You have planned and begun the current sprint, where the project team have committed to delivering and releasing a particular…|
+|`pmp-pr9-234`|export-batch-2|single|agile|2|You are a program manager on a large scale agile program, where each project team has its own scrum master. You need to know the…|
+|`pmp-pr9-235`|export-batch-2|single|predictive|1|Your project has been executing for the past five months, and due to an organisational change a new project sponsor has come on…|
+|`pmp-pr9-236`|export-batch-2|single|agile|1|You are managing a project as an Agile project manager and a business representative for the product you are delivering asks you…|
+|`pmp-pr9-237`|export-batch-2|single|agile|2|You are the project manager on an Agile project that is half way through. The project sponsor is starting to raise concerns that…|
+|`pmp-pr9-238`|export-batch-2|single|hybrid|2|You are working on a traditional waterfall project and the organisation wants to move to an Agile way of work. The functional…|
+|`pmp-pr9-239`|export-batch-2|single|predictive|2|The project customer approaches you as they are worried that the project is not delivering fast enough. You review the project…|
+|`pmp-pr9-240`|export-batch-2|single|agile|1|You are showing the project sponsor around the team area for your Agile project and see the burndown chart next to the team…|
+|`pmp-pr9-241`|export-batch-2|single|agile|1|You are working through the feature backlog with the functional manager of the organisation, who is the product owner for your…|
+|`pmp-pr9-242`|export-batch-2|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values. Identify…|
+|`pmp-pr9-243`|export-batch-2|single|agile|1|You are working on a complex software project but see that the team uses a whiteboard, and writes tasks on cards or sticky notes.…|
+|`pmp-pr9-244`|export-batch-2|single|predictive|2|You have just initiated a project, and the steering committee asks you to keep them updated on the main project activities. You…|
+|`pmp-pr9-245`|export-batch-2|single|agile|2|You are working on a project where a competitor is also working on a similar feature, and being first to the market will have a…|

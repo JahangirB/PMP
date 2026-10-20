@@ -75,37 +75,37 @@ any question.
 |`pmp-b8-133`|business-8|pulldown|predictive|3|Prompts: After the contract was signed, a new nat… / A volcanic eruption closed the region's…|
 |`pmp-b8-134`|business-8|fillblank|hybrid|3|Your hybrid project is replacing a distribution warehouse, with its stock-control software built in sprints. Demolition will send…|
 |`pmp-b8-135`|business-8|hotspot|agile|2|Your agile team ships releases of a pharmacy dispensing system on fixed dates. A national rule takes effect on 1 November:…|
-|`pmp-b8-1`|pmp-lectures-1-11|single|predictive|3|An oil refinery project is in the middle of the execution phase. The project team found that the project is delayed because of an…|
-|`pmp-b8-2`|pmp-lectures-1-11|single|predictive|3|Organizations face different challenges within their operational areas due to external factors. This has required companies to…|
-|`pmp-b8-3`|pmp-lectures-1-11|single|agile|3|A project manager is overseeing an agile project that has finalized scope and compliance requirements. During a regular project…|
-|`pmp-b8-4`|pmp-lectures-1-11|single|hybrid|4|A project manager is currently overseeing a hybrid project that has specific scope and quality requirements. However, due to…|
-|`pmp-b8-5`|pmp-lectures-1-11|single|predictive|4|A project manager is leading a project that requires approval from a government agency. The agency is currently drafting…|
-|`pmp-b8-201`|pmp-mocks-1-10|single|agile|3|During the daily standup meeting, one of the team members informs the team that a user story that was initially part of the…|
-|`pmp-b8-202`|pmp-mocks-1-10|single|predictive|3|A project manager had just started a long-term project when the government implemented new legislation that all engineers working…|
-|`pmp-b8-203`|pmp-mocks-1-10|single|agile|4|An agile practitioner has been assigned to lead a software development project in a relatively new industry where the external…|
-|`pmp-b8-204`|pmp-mocks-1-10|single|hybrid|3|A new regulation has been approved that will impact the deliverables in the fourth phase of the project. The delivery is…|
-|`pmp-b8-205`|pmp-mocks-1-10|single|predictive|3|A project manager is leading a wastewater treatment project for a factory. During project execution, the government unexpectedly…|
-|`pmp-b8-206`|pmp-mocks-1-10|single|hybrid|3|A team is working on a new product using a gated approach. After the third sprint they noticed that the market needs may be…|
-|`pmp-b8-207`|pmp-mocks-1-10|single|predictive|3|A project manager is assigned to a water treatment investment project. The local government has recently passed a law that…|
-|`pmp-b8-208`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a project that will deliver a solution in country A. Due to the potential for a security breach,…|
-|`pmp-b8-209`|pmp-mocks-1-10|single|predictive|3|During a business status meeting, the project manager acknowledges that several market conditions have recently changed…|
-|`pmp-b8-210`|pmp-mocks-1-10|single|predictive|2|A project is under scrutiny for its amount of water usage. The government's water licensing branch is changing its policy to be…|
-|`pmp-b8-211`|pmp-mocks-1-10|single|predictive|3|A project manager is working on a project in its implementation phase when a stakeholder informs them that sales have suddenly…|
-|`pmp-b8-212`|pmp-mocks-1-10|single|predictive|3|At the midway point of a project, the project manager was informed of a market movement that would make the project results…|
-|`pmp-b8-213`|pmp-mocks-1-10|single|predictive|3|A project manager learns that a new law will go into effect that will regulate the type of products the company can manufacture.…|
-|`pmp-b8-214`|pmp-mocks-1-10|single|predictive|3|A company has an existing contract to maintain and enhance a client's customer database. The company's legal department informs…|
-|`pmp-b8-215`|pmp-mocks-1-10|single|predictive|3|A local government passes a law that affects the scope of a project that is currently in the execution phase. The regulation…|
-|`pmp-b8-216`|pmp-mocks-1-10|single|agile|3|An organization is launching a new product that is critical to the company's success. The stakeholders have identified three key…|
-|`pmp-b8-217`|pmp-mocks-1-10|single|predictive|3|As a predictive project enters the execution phase, a functional manager discovers that one of the materials to be used in the…|
-|`pmp-b8-218`|pmp-mocks-1-10|single|predictive|2|A project is nearing completion when the project manager learns that a change in market regulations may impact the project.|
-|`pmp-b8-219`|pmp-mocks-1-10|single|predictive|2|A country implements new labor laws with specific requirements for labor health and safety. The company's existing procedures…|
-|`pmp-b8-220`|pmp-mocks-1-10|single|agile|3|A company is losing market share to disruptive competitors with new business models. A cross-functional agile team has been…|
-|`pmp-b8-221`|pmp-mocks-1-10|single|predictive|2|A project manager is overseeing the construction of a new manufacturing facility when an economic downturn may suddenly threatens…|
-|`pmp-b8-222`|pmp-mocks-1-10|single|predictive|2|In a large infrastructure project, the project manager is faced with the challenge of sudden regulatory changes that could…|
-|`pmp-b8-223`|pmp-mocks-1-10|single|agile|2|During the rollout of a new e-commerce platform, an agile project manager observes a trend of customers gravitating towards a…|
-|`pmp-b8-224`|pmp-mocks-1-10|single|predictive|2|During the execution phase of a large-scale environmental restoration project, the project manager encounters a debate among team…|
-|`pmp-b8-225`|pmp-mocks-1-10|single|predictive|2|During the planning of a new development project, a recently enacted zoning law changes the permissible building heights within…|
-|`pmp-b8-226`|pmp-mocks-1-10|single|predictive|1|You have been asked to help facilitate a senior planning meeting in your organisation. High level executives have made a…|
-|`pmp-b8-227`|pmp-mocks-1-10|single|predictive|2|You are in the initiating stages of a project working for a car manufacturer. Their vehicles have been losing market share due to…|
-|`pmp-b8-228`|pmp-mocks-1-10|single|predictive|2|You have been assigned to address the fast-moving competition that is rapidly taking market share from your company. Your…|
-|`pmp-b8-229`|pmp-mocks-1-10|single|agile|2|You are a project manager on a project using Agile to deliver a change to a busy team in your organization. Recently there have…|
+|`pmp-b8-1`|export-batch-1|single|predictive|3|An oil refinery project is in the middle of the execution phase. The project team found that the project is delayed because of an…|
+|`pmp-b8-2`|export-batch-1|single|predictive|3|Organizations face different challenges within their operational areas due to external factors. This has required companies to…|
+|`pmp-b8-3`|export-batch-1|single|agile|3|A project manager is overseeing an agile project that has finalized scope and compliance requirements. During a regular project…|
+|`pmp-b8-4`|export-batch-1|single|hybrid|4|A project manager is currently overseeing a hybrid project that has specific scope and quality requirements. However, due to…|
+|`pmp-b8-5`|export-batch-1|single|predictive|4|A project manager is leading a project that requires approval from a government agency. The agency is currently drafting…|
+|`pmp-b8-201`|export-batch-2|single|agile|3|During the daily standup meeting, one of the team members informs the team that a user story that was initially part of the…|
+|`pmp-b8-202`|export-batch-2|single|predictive|3|A project manager had just started a long-term project when the government implemented new legislation that all engineers working…|
+|`pmp-b8-203`|export-batch-2|single|agile|4|An agile practitioner has been assigned to lead a software development project in a relatively new industry where the external…|
+|`pmp-b8-204`|export-batch-2|single|hybrid|3|A new regulation has been approved that will impact the deliverables in the fourth phase of the project. The delivery is…|
+|`pmp-b8-205`|export-batch-2|single|predictive|3|A project manager is leading a wastewater treatment project for a factory. During project execution, the government unexpectedly…|
+|`pmp-b8-206`|export-batch-2|single|hybrid|3|A team is working on a new product using a gated approach. After the third sprint they noticed that the market needs may be…|
+|`pmp-b8-207`|export-batch-2|single|predictive|3|A project manager is assigned to a water treatment investment project. The local government has recently passed a law that…|
+|`pmp-b8-208`|export-batch-2|single|predictive|3|A project manager is working on a project that will deliver a solution in country A. Due to the potential for a security breach,…|
+|`pmp-b8-209`|export-batch-2|single|predictive|3|During a business status meeting, the project manager acknowledges that several market conditions have recently changed…|
+|`pmp-b8-210`|export-batch-2|single|predictive|2|A project is under scrutiny for its amount of water usage. The government's water licensing branch is changing its policy to be…|
+|`pmp-b8-211`|export-batch-2|single|predictive|3|A project manager is working on a project in its implementation phase when a stakeholder informs them that sales have suddenly…|
+|`pmp-b8-212`|export-batch-2|single|predictive|3|At the midway point of a project, the project manager was informed of a market movement that would make the project results…|
+|`pmp-b8-213`|export-batch-2|single|predictive|3|A project manager learns that a new law will go into effect that will regulate the type of products the company can manufacture.…|
+|`pmp-b8-214`|export-batch-2|single|predictive|3|A company has an existing contract to maintain and enhance a client's customer database. The company's legal department informs…|
+|`pmp-b8-215`|export-batch-2|single|predictive|3|A local government passes a law that affects the scope of a project that is currently in the execution phase. The regulation…|
+|`pmp-b8-216`|export-batch-2|single|agile|3|An organization is launching a new product that is critical to the company's success. The stakeholders have identified three key…|
+|`pmp-b8-217`|export-batch-2|single|predictive|3|As a predictive project enters the execution phase, a functional manager discovers that one of the materials to be used in the…|
+|`pmp-b8-218`|export-batch-2|single|predictive|2|A project is nearing completion when the project manager learns that a change in market regulations may impact the project.|
+|`pmp-b8-219`|export-batch-2|single|predictive|2|A country implements new labor laws with specific requirements for labor health and safety. The company's existing procedures…|
+|`pmp-b8-220`|export-batch-2|single|agile|3|A company is losing market share to disruptive competitors with new business models. A cross-functional agile team has been…|
+|`pmp-b8-221`|export-batch-2|single|predictive|2|A project manager is overseeing the construction of a new manufacturing facility when an economic downturn may suddenly threatens…|
+|`pmp-b8-222`|export-batch-2|single|predictive|2|In a large infrastructure project, the project manager is faced with the challenge of sudden regulatory changes that could…|
+|`pmp-b8-223`|export-batch-2|single|agile|2|During the rollout of a new e-commerce platform, an agile project manager observes a trend of customers gravitating towards a…|
+|`pmp-b8-224`|export-batch-2|single|predictive|2|During the execution phase of a large-scale environmental restoration project, the project manager encounters a debate among team…|
+|`pmp-b8-225`|export-batch-2|single|predictive|2|During the planning of a new development project, a recently enacted zoning law changes the permissible building heights within…|
+|`pmp-b8-226`|export-batch-2|single|predictive|1|You have been asked to help facilitate a senior planning meeting in your organisation. High level executives have made a…|
+|`pmp-b8-227`|export-batch-2|single|predictive|2|You are in the initiating stages of a project working for a car manufacturer. Their vehicles have been losing market share due to…|
+|`pmp-b8-228`|export-batch-2|single|predictive|2|You have been assigned to address the fast-moving competition that is rapidly taking market share from your company. Your…|
+|`pmp-b8-229`|export-batch-2|single|agile|2|You are a project manager on a project using Agile to deliver a change to a busy team in your organization. Recently there have…|

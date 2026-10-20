@@ -19,7 +19,7 @@ import java.io.File
 import java.nio.file.Files
 import java.util.Calendar
 
-/** Study order (index.html §10.24, tests/24-lectures): by knowledge area, new lessons come in the classroom order. */
+/** Study order (index.html §10.24, tests/24-course-extras): by knowledge area, new lessons come in the classroom order. */
 class CourseOrderTest {
     private val x: Extras = ContentParser.extras(File(System.getProperty("pmp.assets")!!, "content/extras.json").readText())
     private val now: Long = Calendar.getInstance().apply { set(2027, Calendar.MARCH, 1, 9, 0, 0); set(Calendar.MILLISECOND, 0) }.timeInMillis

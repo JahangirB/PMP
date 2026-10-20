@@ -80,75 +80,75 @@ any question.
 |`pmp-pr1-138`|process-1|pulldown|hybrid|3|Prompts: Asked when the packing hall will be read… / Asked when retailers will be able to pla… / Asked what the programme as a whole will…|
 |`pmp-pr1-139`|process-1|fillblank|agile|2|A language-learning app team has 260 points left in its release backlog. Over its last six two-week sprints, velocity ranged from…|
 |`pmp-pr1-140`|process-1|hotspot|predictive|3|Your £2.1 million extension to a secondary school is scheduled to finish one week after the autumn term starts, and the governors…|
-|`pmp-pr1-1`|pmp-lectures-1-11|single|predictive|3|An urban hotel design project has an international, multidisciplinary, and cross-cultural team. The project manager is in the…|
-|`pmp-pr1-2`|pmp-lectures-1-11|single|hybrid|4|A project team is in the planning phase of a complex project. The project has an end-date constraint to launch a new product with…|
-|`pmp-pr1-3`|pmp-lectures-1-11|multi|predictive|4|A project manager has just taken over an ongoing project from another project manager. During a review of the project management…|
-|`pmp-pr1-4`|pmp-lectures-1-11|single|hybrid|3|During the design phase, a project manager realizes that the project will benefit from using adaptive tools. The effectiveness of…|
-|`pmp-pr1-201`|pmp-mocks-1-10|single|agile|2|In an innovative project, the sponsor wants to deliver a creative and large data processing platform to better serve the…|
-|`pmp-pr1-202`|pmp-mocks-1-10|single|predictive|3|A project manager is managing several interconnected projects. Some of these projects rely on specific deliverables from other…|
-|`pmp-pr1-203`|pmp-mocks-1-10|single|predictive|2|A project manager is assigned to a long-term project with a duration of three years.|
-|`pmp-pr1-204`|pmp-mocks-1-10|single|hybrid|3|A company in a heavily regulated industry is planning to release a new product not previously available in the market. The CEO…|
-|`pmp-pr1-205`|pmp-mocks-1-10|single|hybrid|3|A project manager is managing a project that has a component using agile. The project sponsor asks the project manager to add a…|
-|`pmp-pr1-206`|pmp-mocks-1-10|single|hybrid|3|The local government regulator has issued a notification to all companies regarding a new project aimed at facilitating…|
-|`pmp-pr1-207`|pmp-mocks-1-10|single|hybrid|4|A project is developing a product where the time to market is critical. During the execution phase, the client submits a change…|
-|`pmp-pr1-208`|pmp-mocks-1-10|single|predictive|3|A project schedule requires that two teams work simultaneously on separate parts of a complex project. The two parts of the…|
-|`pmp-pr1-209`|pmp-mocks-1-10|single|predictive|2|A project manager is currently overseeing a project from its inception and is aware that there are several assumptions and…|
-|`pmp-pr1-210`|pmp-mocks-1-10|single|hybrid|3|The project manager's last IT transformation project was canceled due to a misalignment of a business process with the accounting…|
-|`pmp-pr1-211`|pmp-mocks-1-10|single|hybrid|2|A team is working on a complex and fast-changing new product development project. After a recent process evaluation, the team…|
-|`pmp-pr1-212`|pmp-mocks-1-10|single|hybrid|3|During a team meeting, team members asked the project manager to advise them on project dependencies.|
-|`pmp-pr1-213`|pmp-mocks-1-10|single|hybrid|3|A company is using a predictive approach for the development of a particular component as defined in the scope management plan.…|
-|`pmp-pr1-214`|pmp-mocks-1-10|single|predictive|1|After preparing the project management plan, a project manager schedules a meeting with key stakeholders to finalize the planning…|
-|`pmp-pr1-215`|pmp-mocks-1-10|single|predictive|3|A complex project, involving multiple stakeholders with diverse priorities, requires long and challenging negotiations to…|
-|`pmp-pr1-216`|pmp-mocks-1-10|single|predictive|3|A project manager planning a strategic predictive project has suddenly fallen ill. The project baseline must be submitted to the…|
-|`pmp-pr1-217`|pmp-mocks-1-10|single|predictive|2|An organization is under a business transformation. The project manager has been assigned to a project related to one of the new…|
-|`pmp-pr1-218`|pmp-mocks-1-10|single|agile|2|A project manager recently joined a new organization. The project sponsor is a subject matter expert and wants to manage scope by…|
-|`pmp-pr1-219`|pmp-mocks-1-10|single|agile|1|A project manager is managing an agile project. A new team member, who has never worked in an agile team, joins the project. The…|
-|`pmp-pr1-220`|pmp-mocks-1-10|single|hybrid|3|A project management office (PMO) normally runs projects using the waterfall approach. A project currently in development is…|
-|`pmp-pr1-221`|pmp-mocks-1-10|single|hybrid|2|A project team is brainstorming the best project management methodology to recommend to senior management for adoption. The…|
-|`pmp-pr1-222`|pmp-mocks-1-10|single|agile|1|A project team has adopted a new project management methodology which entails holding regular review and retrospective meetings…|
-|`pmp-pr1-223`|pmp-mocks-1-10|single|hybrid|3|The project manager's company won a digital transformation project request for proposal (RFP) with clear scope, time and cost. As…|
-|`pmp-pr1-224`|pmp-mocks-1-10|single|hybrid|3|A project manager is planning a worldwide product launch. Manufacturing the product is subject to rigid time constraints related…|
-|`pmp-pr1-225`|pmp-mocks-1-10|single|hybrid|2|A company that is heavily focused on delivering projects using predictive approaches on-boards a new project manager who uses…|
-|`pmp-pr1-226`|pmp-mocks-1-10|single|agile|1|A project manager is managing a project where requirements are not fully known and a high level of uncertainty exists.|
-|`pmp-pr1-227`|pmp-mocks-1-10|single|hybrid|3|Project team A is launching a complex program in collaboration with project teams B, C, and D.|
-|`pmp-pr1-228`|pmp-mocks-1-10|single|hybrid|3|A project manager is beginning a new financial software project in a very competitive environment. The regulations for compliance…|
-|`pmp-pr1-229`|pmp-mocks-1-10|single|hybrid|2|A product development project has run into design issues. As a result, the team has decided to change the approach of the product…|
-|`pmp-pr1-230`|pmp-mocks-1-10|single|hybrid|2|Embarking on an enterprise-wide software upgrade project, distinctively different from the organization's usual IT initiatives,…|
-|`pmp-pr1-231`|pmp-mocks-1-10|single|hybrid|2|As a project unfolds for a global health initiative, the project manager identifies that the current online collaboration tools…|
-|`pmp-pr1-232`|pmp-mocks-1-10|single|hybrid|2|In a software development project, the project manager notices that the various project teams have differing priorities and…|
-|`pmp-pr1-233`|pmp-mocks-1-10|single|predictive|2|Just assigned to lead a new technology integration project, the project manager learns that no foundational project documentation…|
-|`pmp-pr1-234`|pmp-mocks-1-10|single|hybrid|2|You are managing a project where the majority of the product has been planned up-front, but an external system is needed from a…|
-|`pmp-pr1-235`|pmp-mocks-1-10|single|agile|2|You are working on a project where the requirements are clear but the solution ideas are uncertain. The product owner and the…|
-|`pmp-pr1-236`|pmp-mocks-1-10|single|agile|2|You are working on a new product for your organisation where the requirements are complex and are likely to change a few times as…|
-|`pmp-pr1-237`|pmp-mocks-1-10|single|predictive|2|A new project has been kicked off in your organisation due to a recent government inquiry into your industry, which found…|
-|`pmp-pr1-238`|pmp-mocks-1-10|single|agile|2|Your organisation is moving to an Agile way of work. Your project team are strongly opposed to using Agile as they have been…|
-|`pmp-pr1-239`|pmp-mocks-1-10|single|hybrid|2|Your team have not worked on projects before, and don't know about waterfall, agile, or any of the different models. You project…|
-|`pmp-pr1-240`|pmp-mocks-1-10|single|predictive|2|You a project manager in an organisation with a directive Project Management Office, and are currently in between projects. The…|
-|`pmp-pr1-241`|pmp-mocks-1-10|single|hybrid|2|Your Project Management Office has no prescribed way of work, so are working with a vendor who supplies an eXtreme Programming…|
-|`pmp-pr1-242`|pmp-mocks-1-10|single|hybrid|2|Your Project Management Office is in the middle of a company-wide "ways of working" transformation. They have taken a popular…|
-|`pmp-pr1-243`|pmp-mocks-1-10|single|hybrid|2|You are a manager of a PMO in a large organisation, which has recently undertaken a company- wide way of working transformation.…|
-|`pmp-pr1-244`|pmp-mocks-1-10|single|hybrid|2|You have been planning a project for the last two months, gathering requirements and scope and assigning tasks to a schedule. As…|
-|`pmp-pr1-245`|pmp-mocks-1-10|single|agile|1|You have been asked to make a process improvement in the accounting area of your organisation. You have been assigned a small…|
-|`pmp-pr1-246`|pmp-mocks-1-10|single|agile|2|You have been asked to initiate a project to deliver a new system. The requirements are not clear, and it will take some work to…|
-|`pmp-pr1-247`|pmp-mocks-1-10|single|predictive|1|You have been planning a project to deliver a process change for the past four weeks. The requirements and scope have been signed…|
-|`pmp-pr1-248`|pmp-mocks-1-10|single|agile|1|You are working on a project as an Agile Project Manager. The executive manager who will own the product you are delivering would…|
-|`pmp-pr1-249`|pmp-mocks-1-10|single|agile|1|You are working on a project and the team have recently moved to an Agile way of work. One of the team members is confused about…|
-|`pmp-pr1-250`|pmp-mocks-1-10|single|hybrid|2|You have been assigned to take over a project in your organisation that has gone off track, with scope creep causing the schedule…|
-|`pmp-pr1-251`|pmp-mocks-1-10|single|predictive|2|You have joined a car manufacturing company as a new project manager. Senior Management have asked you to take the necessary…|
-|`pmp-pr1-252`|pmp-mocks-1-10|single|hybrid|2|You are working on a new project where the design and project work, including all the scope and cost have been planned up front.…|
-|`pmp-pr1-253`|pmp-mocks-1-10|single|predictive|2|You have just created your project management plan and are reviewing it with your stakeholders. It includes the subsidiary plans…|
-|`pmp-pr1-254`|pmp-mocks-1-10|single|agile|1|In 2001, a group of individuals, representing the most widely used lightweight software development methodologies, agreed on a…|
-|`pmp-pr1-255`|pmp-mocks-1-10|single|hybrid|1|You are working with your project team in a way that ensures you Analyse the requirements, then Design, Build and Test for those…|
-|`pmp-pr1-256`|pmp-mocks-1-10|single|predictive|1|You are working on a project with clear procedures based on past projects. The product is clear and the risks are fairly well…|
-|`pmp-pr1-257`|pmp-mocks-1-10|single|agile|2|You are an Agile project manager leading a project team who is used to a Waterfall way of work. The project sponsor wants to plan…|
-|`pmp-pr1-258`|pmp-mocks-1-10|single|hybrid|1|You have begun a new project in a new organisation, and the project team mentions you are working in an iterative project…|
-|`pmp-pr1-259`|pmp-mocks-1-10|single|agile|1|In 2001, a group of individuals, representing the most widely used lightweight software development methodologies, agreed on a…|
-|`pmp-pr1-260`|pmp-mocks-1-10|single|agile|1|You are working on a project where the organisation wants to move towards an Agile way of work.|
-|`pmp-pr1-261`|pmp-mocks-1-10|single|predictive|1|You have come on board a new project team and have been advised that the project works with a predictive style project lifecycle.|
-|`pmp-pr1-262`|pmp-mocks-1-10|single|hybrid|2|You are in a new project team and working through which project lifecycle or way of work to use in order to deliver the products…|
-|`pmp-pr1-263`|pmp-mocks-1-10|single|hybrid|2|You are in the forming stages of a new project team, and deciding on the way of work to use when operating as a team.|
-|`pmp-pr1-264`|pmp-mocks-1-10|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values.|
-|`pmp-pr1-265`|pmp-mocks-1-10|single|agile|1|You are working with a team that is new to Agile and are using Scrum to manage the project. The business representative is…|
-|`pmp-pr1-266`|pmp-mocks-1-10|single|agile|1|There are multiple project life-cycles you can choose from, depending on the type of project, environment, deliverable and…|
-|`pmp-pr1-267`|pmp-mocks-1-10|single|predictive|2|You are in the planning phase of your project, having finished the various project plans required to begin. Your Project Sponsor…|
-|`pmp-pr1-268`|pmp-mocks-1-10|single|agile|1|Your organization has recently completed a new system for the sales department. New features still need to be added as the…|
+|`pmp-pr1-1`|export-batch-1|single|predictive|3|An urban hotel design project has an international, multidisciplinary, and cross-cultural team. The project manager is in the…|
+|`pmp-pr1-2`|export-batch-1|single|hybrid|4|A project team is in the planning phase of a complex project. The project has an end-date constraint to launch a new product with…|
+|`pmp-pr1-3`|export-batch-1|multi|predictive|4|A project manager has just taken over an ongoing project from another project manager. During a review of the project management…|
+|`pmp-pr1-4`|export-batch-1|single|hybrid|3|During the design phase, a project manager realizes that the project will benefit from using adaptive tools. The effectiveness of…|
+|`pmp-pr1-201`|export-batch-2|single|agile|2|In an innovative project, the sponsor wants to deliver a creative and large data processing platform to better serve the…|
+|`pmp-pr1-202`|export-batch-2|single|predictive|3|A project manager is managing several interconnected projects. Some of these projects rely on specific deliverables from other…|
+|`pmp-pr1-203`|export-batch-2|single|predictive|2|A project manager is assigned to a long-term project with a duration of three years.|
+|`pmp-pr1-204`|export-batch-2|single|hybrid|3|A company in a heavily regulated industry is planning to release a new product not previously available in the market. The CEO…|
+|`pmp-pr1-205`|export-batch-2|single|hybrid|3|A project manager is managing a project that has a component using agile. The project sponsor asks the project manager to add a…|
+|`pmp-pr1-206`|export-batch-2|single|hybrid|3|The local government regulator has issued a notification to all companies regarding a new project aimed at facilitating…|
+|`pmp-pr1-207`|export-batch-2|single|hybrid|4|A project is developing a product where the time to market is critical. During the execution phase, the client submits a change…|
+|`pmp-pr1-208`|export-batch-2|single|predictive|3|A project schedule requires that two teams work simultaneously on separate parts of a complex project. The two parts of the…|
+|`pmp-pr1-209`|export-batch-2|single|predictive|2|A project manager is currently overseeing a project from its inception and is aware that there are several assumptions and…|
+|`pmp-pr1-210`|export-batch-2|single|hybrid|3|The project manager's last IT transformation project was canceled due to a misalignment of a business process with the accounting…|
+|`pmp-pr1-211`|export-batch-2|single|hybrid|2|A team is working on a complex and fast-changing new product development project. After a recent process evaluation, the team…|
+|`pmp-pr1-212`|export-batch-2|single|hybrid|3|During a team meeting, team members asked the project manager to advise them on project dependencies.|
+|`pmp-pr1-213`|export-batch-2|single|hybrid|3|A company is using a predictive approach for the development of a particular component as defined in the scope management plan.…|
+|`pmp-pr1-214`|export-batch-2|single|predictive|1|After preparing the project management plan, a project manager schedules a meeting with key stakeholders to finalize the planning…|
+|`pmp-pr1-215`|export-batch-2|single|predictive|3|A complex project, involving multiple stakeholders with diverse priorities, requires long and challenging negotiations to…|
+|`pmp-pr1-216`|export-batch-2|single|predictive|3|A project manager planning a strategic predictive project has suddenly fallen ill. The project baseline must be submitted to the…|
+|`pmp-pr1-217`|export-batch-2|single|predictive|2|An organization is under a business transformation. The project manager has been assigned to a project related to one of the new…|
+|`pmp-pr1-218`|export-batch-2|single|agile|2|A project manager recently joined a new organization. The project sponsor is a subject matter expert and wants to manage scope by…|
+|`pmp-pr1-219`|export-batch-2|single|agile|1|A project manager is managing an agile project. A new team member, who has never worked in an agile team, joins the project. The…|
+|`pmp-pr1-220`|export-batch-2|single|hybrid|3|A project management office (PMO) normally runs projects using the waterfall approach. A project currently in development is…|
+|`pmp-pr1-221`|export-batch-2|single|hybrid|2|A project team is brainstorming the best project management methodology to recommend to senior management for adoption. The…|
+|`pmp-pr1-222`|export-batch-2|single|agile|1|A project team has adopted a new project management methodology which entails holding regular review and retrospective meetings…|
+|`pmp-pr1-223`|export-batch-2|single|hybrid|3|The project manager's company won a digital transformation project request for proposal (RFP) with clear scope, time and cost. As…|
+|`pmp-pr1-224`|export-batch-2|single|hybrid|3|A project manager is planning a worldwide product launch. Manufacturing the product is subject to rigid time constraints related…|
+|`pmp-pr1-225`|export-batch-2|single|hybrid|2|A company that is heavily focused on delivering projects using predictive approaches on-boards a new project manager who uses…|
+|`pmp-pr1-226`|export-batch-2|single|agile|1|A project manager is managing a project where requirements are not fully known and a high level of uncertainty exists.|
+|`pmp-pr1-227`|export-batch-2|single|hybrid|3|Project team A is launching a complex program in collaboration with project teams B, C, and D.|
+|`pmp-pr1-228`|export-batch-2|single|hybrid|3|A project manager is beginning a new financial software project in a very competitive environment. The regulations for compliance…|
+|`pmp-pr1-229`|export-batch-2|single|hybrid|2|A product development project has run into design issues. As a result, the team has decided to change the approach of the product…|
+|`pmp-pr1-230`|export-batch-2|single|hybrid|2|Embarking on an enterprise-wide software upgrade project, distinctively different from the organization's usual IT initiatives,…|
+|`pmp-pr1-231`|export-batch-2|single|hybrid|2|As a project unfolds for a global health initiative, the project manager identifies that the current online collaboration tools…|
+|`pmp-pr1-232`|export-batch-2|single|hybrid|2|In a software development project, the project manager notices that the various project teams have differing priorities and…|
+|`pmp-pr1-233`|export-batch-2|single|predictive|2|Just assigned to lead a new technology integration project, the project manager learns that no foundational project documentation…|
+|`pmp-pr1-234`|export-batch-2|single|hybrid|2|You are managing a project where the majority of the product has been planned up-front, but an external system is needed from a…|
+|`pmp-pr1-235`|export-batch-2|single|agile|2|You are working on a project where the requirements are clear but the solution ideas are uncertain. The product owner and the…|
+|`pmp-pr1-236`|export-batch-2|single|agile|2|You are working on a new product for your organisation where the requirements are complex and are likely to change a few times as…|
+|`pmp-pr1-237`|export-batch-2|single|predictive|2|A new project has been kicked off in your organisation due to a recent government inquiry into your industry, which found…|
+|`pmp-pr1-238`|export-batch-2|single|agile|2|Your organisation is moving to an Agile way of work. Your project team are strongly opposed to using Agile as they have been…|
+|`pmp-pr1-239`|export-batch-2|single|hybrid|2|Your team have not worked on projects before, and don't know about waterfall, agile, or any of the different models. You project…|
+|`pmp-pr1-240`|export-batch-2|single|predictive|2|You a project manager in an organisation with a directive Project Management Office, and are currently in between projects. The…|
+|`pmp-pr1-241`|export-batch-2|single|hybrid|2|Your Project Management Office has no prescribed way of work, so are working with a vendor who supplies an eXtreme Programming…|
+|`pmp-pr1-242`|export-batch-2|single|hybrid|2|Your Project Management Office is in the middle of a company-wide "ways of working" transformation. They have taken a popular…|
+|`pmp-pr1-243`|export-batch-2|single|hybrid|2|You are a manager of a PMO in a large organisation, which has recently undertaken a company- wide way of working transformation.…|
+|`pmp-pr1-244`|export-batch-2|single|hybrid|2|You have been planning a project for the last two months, gathering requirements and scope and assigning tasks to a schedule. As…|
+|`pmp-pr1-245`|export-batch-2|single|agile|1|You have been asked to make a process improvement in the accounting area of your organisation. You have been assigned a small…|
+|`pmp-pr1-246`|export-batch-2|single|agile|2|You have been asked to initiate a project to deliver a new system. The requirements are not clear, and it will take some work to…|
+|`pmp-pr1-247`|export-batch-2|single|predictive|1|You have been planning a project to deliver a process change for the past four weeks. The requirements and scope have been signed…|
+|`pmp-pr1-248`|export-batch-2|single|agile|1|You are working on a project as an Agile Project Manager. The executive manager who will own the product you are delivering would…|
+|`pmp-pr1-249`|export-batch-2|single|agile|1|You are working on a project and the team have recently moved to an Agile way of work. One of the team members is confused about…|
+|`pmp-pr1-250`|export-batch-2|single|hybrid|2|You have been assigned to take over a project in your organisation that has gone off track, with scope creep causing the schedule…|
+|`pmp-pr1-251`|export-batch-2|single|predictive|2|You have joined a car manufacturing company as a new project manager. Senior Management have asked you to take the necessary…|
+|`pmp-pr1-252`|export-batch-2|single|hybrid|2|You are working on a new project where the design and project work, including all the scope and cost have been planned up front.…|
+|`pmp-pr1-253`|export-batch-2|single|predictive|2|You have just created your project management plan and are reviewing it with your stakeholders. It includes the subsidiary plans…|
+|`pmp-pr1-254`|export-batch-2|single|agile|1|In 2001, a group of individuals, representing the most widely used lightweight software development methodologies, agreed on a…|
+|`pmp-pr1-255`|export-batch-2|single|hybrid|1|You are working with your project team in a way that ensures you Analyse the requirements, then Design, Build and Test for those…|
+|`pmp-pr1-256`|export-batch-2|single|predictive|1|You are working on a project with clear procedures based on past projects. The product is clear and the risks are fairly well…|
+|`pmp-pr1-257`|export-batch-2|single|agile|2|You are an Agile project manager leading a project team who is used to a Waterfall way of work. The project sponsor wants to plan…|
+|`pmp-pr1-258`|export-batch-2|single|hybrid|1|You have begun a new project in a new organisation, and the project team mentions you are working in an iterative project…|
+|`pmp-pr1-259`|export-batch-2|single|agile|1|In 2001, a group of individuals, representing the most widely used lightweight software development methodologies, agreed on a…|
+|`pmp-pr1-260`|export-batch-2|single|agile|1|You are working on a project where the organisation wants to move towards an Agile way of work.|
+|`pmp-pr1-261`|export-batch-2|single|predictive|1|You have come on board a new project team and have been advised that the project works with a predictive style project lifecycle.|
+|`pmp-pr1-262`|export-batch-2|single|hybrid|2|You are in a new project team and working through which project lifecycle or way of work to use in order to deliver the products…|
+|`pmp-pr1-263`|export-batch-2|single|hybrid|2|You are in the forming stages of a new project team, and deciding on the way of work to use when operating as a team.|
+|`pmp-pr1-264`|export-batch-2|single|agile|1|The Agile manifesto has twelve clarifying principles added to it to help projects and teams understand the Agile values.|
+|`pmp-pr1-265`|export-batch-2|single|agile|1|You are working with a team that is new to Agile and are using Scrum to manage the project. The business representative is…|
+|`pmp-pr1-266`|export-batch-2|single|agile|1|There are multiple project life-cycles you can choose from, depending on the type of project, environment, deliverable and…|
+|`pmp-pr1-267`|export-batch-2|single|predictive|2|You are in the planning phase of your project, having finished the various project plans required to begin. Your Project Sponsor…|
+|`pmp-pr1-268`|export-batch-2|single|agile|1|Your organization has recently completed a new system for the sales department. New features still need to be added as the…|

@@ -80,66 +80,66 @@ any question.
 |`pmp-pr7-138`|process-7|single|agile|3|Your team runs a university's online learning platform. The product owner consistently ranks new features above defect fixes, and…|
 |`pmp-pr7-139`|process-7|multi|predictive|3|You are managing the fit-out of 400 cabins on a cruise ship. Two inspectors check veneer panels for finish defects. In a weekly…|
 |`pmp-pr7-140`|process-7|hotspot|hybrid|3|Your hybrid programme is commissioning a new bread line: equipment is installed to a fixed plan and its control software is tuned…|
-|`pmp-pr7-1`|pmp-lectures-1-11|single|agile|3|A project team member informs the project manager that all items are complete and the team is ready to move on to the next…|
-|`pmp-pr7-2`|pmp-lectures-1-11|single|agile|3|A company is developing a new product that needs to implement nonfunctional security requirements. The product owner is concerned…|
-|`pmp-pr7-3`|pmp-lectures-1-11|single|agile|3|A functional manager involved in a project complains about the latest quality metrics reports associated with all previous…|
-|`pmp-pr7-4`|pmp-lectures-1-11|single|predictive|3|A customer has rejected an interim project deliverable.|
-|`pmp-pr7-5`|pmp-lectures-1-11|single|predictive|3|While closing a project, the client finds some defects in the deliverable.|
-|`pmp-pr7-6`|pmp-lectures-1-11|single|predictive|3|During a final inspection of a new product, the project team discovers a significant defect in one of the key deliverables. This…|
-|`pmp-pr7-201`|pmp-mocks-1-10|single|agile|2|The first iteration of an agile project consists of a minimum viable product (MVP) that is now successfully completed. The team…|
-|`pmp-pr7-202`|pmp-mocks-1-10|single|predictive|3|A project manager is leading a project to deliver a new product in a heavily regulated industry and must prioritize quality…|
-|`pmp-pr7-203`|pmp-mocks-1-10|single|predictive|3|An organization has a policy requiring all project managers to conduct a standardized audit of another project manager's project…|
-|`pmp-pr7-204`|pmp-mocks-1-10|single|predictive|3|A project manager is newly assigned to an ongoing project and determines that the quality has been consistent. There is a…|
-|`pmp-pr7-205`|pmp-mocks-1-10|single|predictive|3|A project manager assigned to an existing project finds that the deliverable quality has been inconsistent. The project manager…|
-|`pmp-pr7-206`|pmp-mocks-1-10|single|predictive|3|A project manager in a manufacturing company was notified of a failure of the delivered machinery during the initial tests. The…|
-|`pmp-pr7-207`|pmp-mocks-1-10|single|predictive|3|A new product was accepted by the customer, but after two weeks the project manager received a complaint from the customer saying…|
-|`pmp-pr7-208`|pmp-mocks-1-10|single|predictive|2|A serious quality issue has been identified during the implementation of a major public infrastructure project. The issue is…|
-|`pmp-pr7-209`|pmp-mocks-1-10|single|hybrid|2|A company is working on a hybrid project in which the deliverables have quality issues at the end of one of the sprints.|
-|`pmp-pr7-210`|pmp-mocks-1-10|single|predictive|3|A project manager working in a matrix organization is managing a project that is scheduled to be completed in one month. At…|
-|`pmp-pr7-211`|pmp-mocks-1-10|single|predictive|3|A project for an accounts receivable system that was recently launched into production received a fine from a regulatory body…|
-|`pmp-pr7-212`|pmp-mocks-1-10|single|predictive|2|A project is in the execution phase, and product testing is almost complete. A team member proposes that the testing can be…|
-|`pmp-pr7-213`|pmp-mocks-1-10|single|predictive|2|The client agreed to the standards that would be used to assess final deliverables prior to hand-off, but is now asking for…|
-|`pmp-pr7-214`|pmp-mocks-1-10|single|predictive|2|A major project deliverable is completed.|
-|`pmp-pr7-215`|pmp-mocks-1-10|single|predictive|3|A project team has not been performing user acceptance tests on a deliverable because the product has been working as expected in…|
-|`pmp-pr7-216`|pmp-mocks-1-10|single|predictive|3|Due to a budget issue, the project team decides to use low-cost equipment with higher testing uncertainty to reduce cost.…|
-|`pmp-pr7-217`|pmp-mocks-1-10|single|predictive|3|During final inspection of a deliverable, the quality team observes that there is a deviation on a particular component. The…|
-|`pmp-pr7-218`|pmp-mocks-1-10|single|agile|3|An agile project team is implementing a supporting technology platform across departments. They're planning a readiness review…|
-|`pmp-pr7-219`|pmp-mocks-1-10|single|predictive|3|All quality controls have passed, and a project deliverable is ready to be released to the customer. However, a change request to…|
-|`pmp-pr7-220`|pmp-mocks-1-10|single|agile|3|During a retrospective meeting, the project team confirmed that all deliverables were completed according to the specifications…|
-|`pmp-pr7-221`|pmp-mocks-1-10|single|agile|3|A project manager is creating a software project's quality management plan. While reviewing lessons learned from past, similar…|
-|`pmp-pr7-222`|pmp-mocks-1-10|single|agile|3|A project manager is responsible for a new agile project that is global in nature. After a few sprints have been completed, the…|
-|`pmp-pr7-223`|pmp-mocks-1-10|single|predictive|2|While reviewing the quality of deliverables with the team, the project manager determines that several quality issues could have…|
-|`pmp-pr7-224`|pmp-mocks-1-10|single|predictive|2|A new project manager joins a project overseen by a senior project manager. The sponsor asks the new project manager to develop…|
-|`pmp-pr7-225`|pmp-mocks-1-10|single|predictive|2|A customer has informed the project manager that they do not accept the project deliverables.|
-|`pmp-pr7-226`|pmp-mocks-1-10|single|predictive|3|A customer identifies performance issues on a newly implemented product.|
-|`pmp-pr7-227`|pmp-mocks-1-10|multi|agile|3|One of the retrospective action items that has recurred for the past two iterations is related to the verification and validation…|
-|`pmp-pr7-228`|pmp-mocks-1-10|single|predictive|2|For quality assurance, a quality audit was conducted on the processes being used in the project execution plan. One of the…|
-|`pmp-pr7-229`|pmp-mocks-1-10|multi|predictive|3|A project is challenged by a multitude of problems resulting in defects and stakeholder complaints. The project manager has been…|
-|`pmp-pr7-230`|pmp-mocks-1-10|single|predictive|2|A project manager is assigned to take over an ongoing project. During the quality review, the team discovered that 40% of the…|
-|`pmp-pr7-231`|pmp-mocks-1-10|multi|predictive|3|A project team is unexpectedly audited. Several nonconformances were identified during the audit. (Choose three)|
-|`pmp-pr7-232`|pmp-mocks-1-10|single|agile|2|During product demonstration, a stakeholder suggests that the product does not meet expectations.|
-|`pmp-pr7-233`|pmp-mocks-1-10|single|predictive|2|A stakeholder complains that a product component is not easy to use.|
-|`pmp-pr7-234`|pmp-mocks-1-10|single|agile|1|A developer has completed the deliverable for a feature. The product owner is not sure how to assess the quality of the…|
-|`pmp-pr7-235`|pmp-mocks-1-10|single|hybrid|3|A project manager is leading an intricate biotechnology research project characterized by significant ambiguity and…|
-|`pmp-pr7-236`|pmp-mocks-1-10|single|predictive|3|Just before the final review of a new software development project, the project manager is informed by the quality assurance team…|
-|`pmp-pr7-237`|pmp-mocks-1-10|single|predictive|2|A project manager is preparing for a quality audit of a new software development project. The audit team needs to ensure the…|
-|`pmp-pr7-238`|pmp-mocks-1-10|single|predictive|2|During the execution phase of a manufacturing project, an internal quality audit reveals several non conformances in the…|
-|`pmp-pr7-239`|pmp-mocks-1-10|single|predictive|2|In the middle of a large infrastructure project, the project manager receives a report from an external quality auditor…|
-|`pmp-pr7-240`|pmp-mocks-1-10|single|predictive|2|In the initial stages of launching a pioneering software tool aimed at small businesses, the project manager is focused on…|
-|`pmp-pr7-241`|pmp-mocks-1-10|single|hybrid|2|Towards the end of a large-scale infrastructure development project, the project manager detects a slowdown in progress with a…|
-|`pmp-pr7-242`|pmp-mocks-1-10|single|agile|2|You are working on a project where senior users have been testing the product as parts are released. They have found some missing…|
-|`pmp-pr7-243`|pmp-mocks-1-10|single|agile|1|Your project team are trialling an agile way of work. The Product Owner has a clear vision for the product. There is confusion in…|
-|`pmp-pr7-244`|pmp-mocks-1-10|single|predictive|2|You have been working closely with the quality manager of your project, planning the budget for the project phase that is due to…|
-|`pmp-pr7-245`|pmp-mocks-1-10|single|agile|3|Your agile project has recently had multiple quality issues. Project features have been prioritised by the Product Owner, and…|
-|`pmp-pr7-246`|pmp-mocks-1-10|single|agile|2|The product owner has prioritised the product backlog of features, and the team creates user stories with estimates and places…|
-|`pmp-pr7-247`|pmp-mocks-1-10|single|predictive|2|You are working on a new software application with a lot of complex interdependencies. The senior user providing and testing most…|
-|`pmp-pr7-248`|pmp-mocks-1-10|single|agile|2|You are working with the team on the team charter and have outlined the project vision, mission, agreed meeting times and…|
-|`pmp-pr7-249`|pmp-mocks-1-10|single|predictive|2|You have been asked to work on a process improvement within your team. Your manager has secured a developer to assist you with…|
-|`pmp-pr7-250`|pmp-mocks-1-10|single|predictive|2|As your project begins, it becomes clear the most of the business analysts, developers and testers are not familiar with system…|
-|`pmp-pr7-251`|pmp-mocks-1-10|single|predictive|2|You have been asked to monitor the changes to a product before completing your next project phase. You review the control chart.…|
-|`pmp-pr7-252`|pmp-mocks-1-10|single|predictive|2|A quality assurance manager has been hired externally to test the project and manage defects. She executed the process in the…|
-|`pmp-pr7-253`|pmp-mocks-1-10|single|predictive|3|You are in the process of measuring the outcome of one of your deliverables on the business. The data shows that there seems to…|
-|`pmp-pr7-254`|pmp-mocks-1-10|single|predictive|2|You take the completed scope to your project sponsor for them to accept. The Project Sponsor advises she cannot accept the…|
-|`pmp-pr7-255`|pmp-mocks-1-10|single|agile|2|You are working as a project manager in an Agile team.|
-|`pmp-pr7-256`|pmp-mocks-1-10|single|agile|1|You are working with your agile team, and they are confused about when the best time is to determine the acceptance test criteria…|
-|`pmp-pr7-257`|pmp-mocks-1-10|single|hybrid|2|You have been working with a project team, delivering new items very quickly. The team were so focused on delivering items…|
+|`pmp-pr7-1`|export-batch-1|single|agile|3|A project team member informs the project manager that all items are complete and the team is ready to move on to the next…|
+|`pmp-pr7-2`|export-batch-1|single|agile|3|A company is developing a new product that needs to implement nonfunctional security requirements. The product owner is concerned…|
+|`pmp-pr7-3`|export-batch-1|single|agile|3|A functional manager involved in a project complains about the latest quality metrics reports associated with all previous…|
+|`pmp-pr7-4`|export-batch-1|single|predictive|3|A customer has rejected an interim project deliverable.|
+|`pmp-pr7-5`|export-batch-1|single|predictive|3|While closing a project, the client finds some defects in the deliverable.|
+|`pmp-pr7-6`|export-batch-1|single|predictive|3|During a final inspection of a new product, the project team discovers a significant defect in one of the key deliverables. This…|
+|`pmp-pr7-201`|export-batch-2|single|agile|2|The first iteration of an agile project consists of a minimum viable product (MVP) that is now successfully completed. The team…|
+|`pmp-pr7-202`|export-batch-2|single|predictive|3|A project manager is leading a project to deliver a new product in a heavily regulated industry and must prioritize quality…|
+|`pmp-pr7-203`|export-batch-2|single|predictive|3|An organization has a policy requiring all project managers to conduct a standardized audit of another project manager's project…|
+|`pmp-pr7-204`|export-batch-2|single|predictive|3|A project manager is newly assigned to an ongoing project and determines that the quality has been consistent. There is a…|
+|`pmp-pr7-205`|export-batch-2|single|predictive|3|A project manager assigned to an existing project finds that the deliverable quality has been inconsistent. The project manager…|
+|`pmp-pr7-206`|export-batch-2|single|predictive|3|A project manager in a manufacturing company was notified of a failure of the delivered machinery during the initial tests. The…|
+|`pmp-pr7-207`|export-batch-2|single|predictive|3|A new product was accepted by the customer, but after two weeks the project manager received a complaint from the customer saying…|
+|`pmp-pr7-208`|export-batch-2|single|predictive|2|A serious quality issue has been identified during the implementation of a major public infrastructure project. The issue is…|
+|`pmp-pr7-209`|export-batch-2|single|hybrid|2|A company is working on a hybrid project in which the deliverables have quality issues at the end of one of the sprints.|
+|`pmp-pr7-210`|export-batch-2|single|predictive|3|A project manager working in a matrix organization is managing a project that is scheduled to be completed in one month. At…|
+|`pmp-pr7-211`|export-batch-2|single|predictive|3|A project for an accounts receivable system that was recently launched into production received a fine from a regulatory body…|
+|`pmp-pr7-212`|export-batch-2|single|predictive|2|A project is in the execution phase, and product testing is almost complete. A team member proposes that the testing can be…|
+|`pmp-pr7-213`|export-batch-2|single|predictive|2|The client agreed to the standards that would be used to assess final deliverables prior to hand-off, but is now asking for…|
+|`pmp-pr7-214`|export-batch-2|single|predictive|2|A major project deliverable is completed.|
+|`pmp-pr7-215`|export-batch-2|single|predictive|3|A project team has not been performing user acceptance tests on a deliverable because the product has been working as expected in…|
+|`pmp-pr7-216`|export-batch-2|single|predictive|3|Due to a budget issue, the project team decides to use low-cost equipment with higher testing uncertainty to reduce cost.…|
+|`pmp-pr7-217`|export-batch-2|single|predictive|3|During final inspection of a deliverable, the quality team observes that there is a deviation on a particular component. The…|
+|`pmp-pr7-218`|export-batch-2|single|agile|3|An agile project team is implementing a supporting technology platform across departments. They're planning a readiness review…|
+|`pmp-pr7-219`|export-batch-2|single|predictive|3|All quality controls have passed, and a project deliverable is ready to be released to the customer. However, a change request to…|
+|`pmp-pr7-220`|export-batch-2|single|agile|3|During a retrospective meeting, the project team confirmed that all deliverables were completed according to the specifications…|
+|`pmp-pr7-221`|export-batch-2|single|agile|3|A project manager is creating a software project's quality management plan. While reviewing lessons learned from past, similar…|
+|`pmp-pr7-222`|export-batch-2|single|agile|3|A project manager is responsible for a new agile project that is global in nature. After a few sprints have been completed, the…|
+|`pmp-pr7-223`|export-batch-2|single|predictive|2|While reviewing the quality of deliverables with the team, the project manager determines that several quality issues could have…|
+|`pmp-pr7-224`|export-batch-2|single|predictive|2|A new project manager joins a project overseen by a senior project manager. The sponsor asks the new project manager to develop…|
+|`pmp-pr7-225`|export-batch-2|single|predictive|2|A customer has informed the project manager that they do not accept the project deliverables.|
+|`pmp-pr7-226`|export-batch-2|single|predictive|3|A customer identifies performance issues on a newly implemented product.|
+|`pmp-pr7-227`|export-batch-2|multi|agile|3|One of the retrospective action items that has recurred for the past two iterations is related to the verification and validation…|
+|`pmp-pr7-228`|export-batch-2|single|predictive|2|For quality assurance, a quality audit was conducted on the processes being used in the project execution plan. One of the…|
+|`pmp-pr7-229`|export-batch-2|multi|predictive|3|A project is challenged by a multitude of problems resulting in defects and stakeholder complaints. The project manager has been…|
+|`pmp-pr7-230`|export-batch-2|single|predictive|2|A project manager is assigned to take over an ongoing project. During the quality review, the team discovered that 40% of the…|
+|`pmp-pr7-231`|export-batch-2|multi|predictive|3|A project team is unexpectedly audited. Several nonconformances were identified during the audit. (Choose three)|
+|`pmp-pr7-232`|export-batch-2|single|agile|2|During product demonstration, a stakeholder suggests that the product does not meet expectations.|
+|`pmp-pr7-233`|export-batch-2|single|predictive|2|A stakeholder complains that a product component is not easy to use.|
+|`pmp-pr7-234`|export-batch-2|single|agile|1|A developer has completed the deliverable for a feature. The product owner is not sure how to assess the quality of the…|
+|`pmp-pr7-235`|export-batch-2|single|hybrid|3|A project manager is leading an intricate biotechnology research project characterized by significant ambiguity and…|
+|`pmp-pr7-236`|export-batch-2|single|predictive|3|Just before the final review of a new software development project, the project manager is informed by the quality assurance team…|
+|`pmp-pr7-237`|export-batch-2|single|predictive|2|A project manager is preparing for a quality audit of a new software development project. The audit team needs to ensure the…|
+|`pmp-pr7-238`|export-batch-2|single|predictive|2|During the execution phase of a manufacturing project, an internal quality audit reveals several non conformances in the…|
+|`pmp-pr7-239`|export-batch-2|single|predictive|2|In the middle of a large infrastructure project, the project manager receives a report from an external quality auditor…|
+|`pmp-pr7-240`|export-batch-2|single|predictive|2|In the initial stages of launching a pioneering software tool aimed at small businesses, the project manager is focused on…|
+|`pmp-pr7-241`|export-batch-2|single|hybrid|2|Towards the end of a large-scale infrastructure development project, the project manager detects a slowdown in progress with a…|
+|`pmp-pr7-242`|export-batch-2|single|agile|2|You are working on a project where senior users have been testing the product as parts are released. They have found some missing…|
+|`pmp-pr7-243`|export-batch-2|single|agile|1|Your project team are trialling an agile way of work. The Product Owner has a clear vision for the product. There is confusion in…|
+|`pmp-pr7-244`|export-batch-2|single|predictive|2|You have been working closely with the quality manager of your project, planning the budget for the project phase that is due to…|
+|`pmp-pr7-245`|export-batch-2|single|agile|3|Your agile project has recently had multiple quality issues. Project features have been prioritised by the Product Owner, and…|
+|`pmp-pr7-246`|export-batch-2|single|agile|2|The product owner has prioritised the product backlog of features, and the team creates user stories with estimates and places…|
+|`pmp-pr7-247`|export-batch-2|single|predictive|2|You are working on a new software application with a lot of complex interdependencies. The senior user providing and testing most…|
+|`pmp-pr7-248`|export-batch-2|single|agile|2|You are working with the team on the team charter and have outlined the project vision, mission, agreed meeting times and…|
+|`pmp-pr7-249`|export-batch-2|single|predictive|2|You have been asked to work on a process improvement within your team. Your manager has secured a developer to assist you with…|
+|`pmp-pr7-250`|export-batch-2|single|predictive|2|As your project begins, it becomes clear the most of the business analysts, developers and testers are not familiar with system…|
+|`pmp-pr7-251`|export-batch-2|single|predictive|2|You have been asked to monitor the changes to a product before completing your next project phase. You review the control chart.…|
+|`pmp-pr7-252`|export-batch-2|single|predictive|2|A quality assurance manager has been hired externally to test the project and manage defects. She executed the process in the…|
+|`pmp-pr7-253`|export-batch-2|single|predictive|3|You are in the process of measuring the outcome of one of your deliverables on the business. The data shows that there seems to…|
+|`pmp-pr7-254`|export-batch-2|single|predictive|2|You take the completed scope to your project sponsor for them to accept. The Project Sponsor advises she cannot accept the…|
+|`pmp-pr7-255`|export-batch-2|single|agile|2|You are working as a project manager in an Agile team.|
+|`pmp-pr7-256`|export-batch-2|single|agile|1|You are working with your agile team, and they are confused about when the best time is to determine the acceptance test criteria…|
+|`pmp-pr7-257`|export-batch-2|single|hybrid|2|You have been working with a project team, delivering new items very quickly. The team were so focused on delivering items…|
