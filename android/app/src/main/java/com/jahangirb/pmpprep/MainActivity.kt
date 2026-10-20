@@ -279,14 +279,14 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                         Dest.BOOK -> BookScreen(vm)
                         Dest.SEARCH -> SearchScreen(vm)
                         Dest.SYNC -> SyncScreen(vm)
+                        Dest.SUPPORT -> SupportScreen(vm)
                     }
                 }
             }
-            // The coach floats over everything except itself and anything with answers to pick:
-            // there it would cover the options (each practice question has its own coach button).
-            val answering = (vm.screen == Dest.PRACTICE && vm.practice?.let { !it.finished } == true) ||
-                (vm.screen == Dest.SESSION && vm.run?.let { r -> r.session.steps.getOrNull(r.step)?.kind in setOf(StepKind.PRACTICE, StepKind.MOCK) } == true)
-            if (vm.screen != Dest.COACH && !examRunning && !answering) {
+            // The coach floats over every screen except a mock exam in progress (web §10.33 alike).
+            val inMock = examRunning ||
+                (vm.screen == Dest.SESSION && vm.run?.let { r -> r.session.steps.getOrNull(r.step)?.kind == StepKind.MOCK } == true)
+            if (!inMock) {
                 CoachBubble(vm) { vm.coachTab = 0; vm.navigate(Dest.COACH) }
             }
         }

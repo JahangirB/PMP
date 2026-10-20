@@ -108,6 +108,7 @@ enum class Dest(val title: String) {
     BOOK("Ready to book?"),
     SEARCH("Search"),
     SYNC("Cloud sync"),
+    SUPPORT("Support the app"),
 }
 
 /** What to practise. Null means "any". */

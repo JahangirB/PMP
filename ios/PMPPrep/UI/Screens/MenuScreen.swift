@@ -74,10 +74,7 @@ struct MenuScreen: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                SupportPill {
-                    if let url: URL = URL(string: Support.url) { openURL(url) }
-                    m.supportPressed()
-                }
+                SupportPill { m.navigate(.SUPPORT) }
                 .padding(.horizontal, 16)
                 .padding(.top, 16)
                 Text("Extra work beside your plan. Anything you do here counts, and the path adjusts to it.")

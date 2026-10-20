@@ -22,6 +22,19 @@ enum Support {
     static let streakDays: Int = 7
     static let quietMs: Millis = 30 * 24 * 60 * 60 * 1000
 
+    /* The menu button's own page (docs/progress-format.md §4), worded apart from the reminder. */
+    static let pageTitle: String = "Keep PMP Prep free"
+    static let pageBody: String = "PMP Prep is built by one person, Jahangir Babayev, in his own time. Every question, lesson, mock and update is free for everyone, with no ads, no account and no tracking."
+    static let paysFor: [String] = ["New question packs and lessons as the exam changes", "Testing on real Android phones and iPhones",
+                                    "Hosting the website", "Time to fix what learners report"]
+    static let kofiLabel: String = "Buy a coffee on Ko-fi"
+    static let kofiNote: String = "One-off, any amount, no account needed. Ko-fi handles the payment; the app never sees it."
+    static let thanks: String = "Already supported? Thank you. Pressing the Ko-fi button also quiets the weekly reminder for a month."
+    static let site: String = "https://pmp-sandy.vercel.app/"
+    static let shareText: String = "Free PMP exam prep that works offline, on the web, Android and iPhone: https://pmp-sandy.vercel.app/"
+    static let reportUrl: String = "https://github.com/JahangirB/PMP/issues/new?template=question-problem.yml"
+    static let repoUrl: String = "https://github.com/JahangirB/PMP"
+
     static let title: String = "Enjoying PMP Prep?"
     static let firstBody: String = "You've studied 7 days in a row. If the app is helping you, please support it. It's free, has no ads, and your support keeps it going."
     static let alreadyBody: String = "If the app is helping you, please support it. It's free, has no ads, and your support keeps it going. If you have already supported, please ignore this message."

@@ -34898,13 +34898,15 @@ PMP.Cards = (function () {
   }
 
   /* ── 10.05.5  KEYBOARD ───────────────────────────────────────────────────
-     1-4 grade, space or enter reveals. Ignored while focus is in a field, so
-     the shortcuts cannot fire from a search box elsewhere on the view. */
+     1-4 grade, space or enter reveals. Ignored while focus is in a field,
+     the rich notes editor, the notes and Gemini pane or a dialog, so taking
+     notes beside a deck never turns or grades a card. */
   function bindKeys() {
     teardown.push(on(document, "keydown", function (e) {
       if (!session || session.finished) return;
       var t = e.target;
-      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) return;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
+      if (t && t.closest && t.closest("#np, dialog, #cb")) return;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
 
       if (!session.revealed) {
@@ -39740,7 +39742,7 @@ PMP.Data = (function () {
       el("span", { class: "eyebrow", text: "Backup and packs" }),
       el("h2", { text: "Your data goes both ways" }),
       el("p", { text: "Your answers, scores, notes and settings live on this device, in this browser's storage, and travel in a backup file you control. The app has no account, no analytics, no tracking and no ads. What goes over the network depends on how you opened it:" }),
-      el("p", { text: "A copy you downloaded and opened from your own disk makes no network requests at all; the Support the app button opens ko-fi.com in a new tab only when you press it." }),
+      el("p", { text: "A copy you downloaded and opened from your own disk makes no network requests at all; ko-fi.com opens in a new tab only when you press the Ko-fi button in the Support the app message." }),
       el("p", { text: "The website (for example pmp-sandy.vercel.app) is downloaded from its host each time you open it, together with the extended question packs. Once installed as an app it also works offline. The host sees what any website sees, such as your IP address, browser and the time of each request, but the app sends it nothing about you or your progress." }),
       el("p", { text: "Gemini is optional and off until you add your own Google AI Studio API key. Each message you send then goes from this page to Google with your key, and carries three things: the tutor instructions, your last 30 chat messages, and a summary of your study progress. The summary holds your readiness and exam-fitness scores, accuracy by domain and ECO task, mock results, mistake causes, pace, flashcard and lesson counts, your exam date and planned study hours, and, if you answered the weekly check, your exam-worry score. It does not include your notes. Explain it back sends the topic and your explanation. Ask about this question puts the question and your answer in the message box for you to read and edit first. Nothing is sent until you press Send. The key stays on this device and is never in your backup file. Google's terms for the Gemini API apply to what you send; on the free tier Google says it may use it to improve its products." }),
       el("p", null, ["Cloud sync is optional and off until you set it up. It then copies your whole progress file, including your notes and Gemini chat history but never the key, to one file in your own Google Drive, through a script you deploy in your own Google account, so your other devices can share it. Anyone with your script URL and sync code can read that file, so keep them private. ",
@@ -51246,6 +51248,24 @@ PMP.Support = (function () {
     }).then(function (choice) { if (choice === "support") pressed(); return choice; });
   }
 
+  /* The pill's own message, kept apart from the weekly reminder's wording.
+     Pressing the pill opens it; only its Ko-fi button counts as supported. */
+  var ASK = {
+    title: "Support PMP Prep",
+    body: "PMP Prep is built by one person in his own time, and stays free for everyone: no ads, no account, no tracking. A coffee on Ko-fi pays for new questions, testing on real phones and the website.",
+    note: "Opens ko-fi.com in a new tab. Ko-fi handles the payment; the app never sees it."
+  };
+  function ask() {
+    return PMP.UI.sheet({
+      title: ASK.title,
+      body: PMP.dom.frag([PMP.dom.el("p", { text: ASK.body }), PMP.dom.el("p", { class: "hint", text: ASK.note })]),
+      actions: [
+        { id: "later", label: "Maybe later" },
+        { id: "support", label: "Buy a coffee on Ko-fi", icon: "heart", href: URL, cls: "btn--warm" }
+      ]
+    }).then(function (choice) { if (choice === "support") pressed(); return choice; });
+  }
+
   /* After boot and on coming back: never over another sheet. */
   function check() {
     var st = PMP.Store.state, dlg = document.getElementById("sheet");
@@ -51258,7 +51278,8 @@ PMP.Support = (function () {
   /* Called once the store is ready (§12.4). The check waits a moment so an
      unfinished mock's resume offer, which comes first, is not crowded out. */
   function start() {
-    PMP.dom.on(document.getElementById("nav-support"), "click", pressed);
+    /* The link stays a real Ko-fi link for a page without script; with it, the message comes first. */
+    PMP.dom.on(document.getElementById("nav-support"), "click", function (e) { e.preventDefault(); ask(); });
     PMP.dom.on(document, "visibilitychange", function () {
       if (document.visibilityState !== "visible" || !PMP.Store.state.sys.ready) return;
       recordOpen();
@@ -51269,7 +51290,7 @@ PMP.Support = (function () {
   }
 
   return { URL: URL, due: due, streak: streak, ymd: ymd, recordOpen: recordOpen, pressed: pressed,
-           show: show, check: check, start: start };
+           show: show, ask: ask, ASK: ASK, check: check, start: start };
 })();
 
 
@@ -51454,10 +51475,10 @@ PMP.TopStats = (function () {
    button in the bottom-right corner with a count of what the coach has to
    say, which can be dragged out of the way. Pressing it opens a small panel
    with the coach's messages and the way into Gemini, Notes and Today, the
-   three things the phones' Coach screen holds. Like on the phones it stays
-   out of the way while there are answers to pick (a mock, or a question on
-   screen), and while the notes pane is open, which carries Gemini itself.
-   Where it was dragged to is a device-only preference. */
+   three things the phones' Coach screen holds. It is on every screen except
+   a mock exam in progress, on the web and the phones alike; with the notes
+   pane open it sits at the pane's left edge. Where it was dragged to is a
+   device-only preference. */
 PMP.CoachBubble = (function () {
   var el = PMP.dom.el, icon = PMP.dom.icon;
   var POS = "pmp.coachBubble";
@@ -51467,10 +51488,10 @@ PMP.CoachBubble = (function () {
   function msgs() {
     try { return PMP.Coach.messages(PMP.Store.state, "today", 3); } catch (e) { return []; }
   }
-  /* Answers to pick: a mock, or a question card on screen. */
-  function answering() {
+  /* A mock exam in progress: the only time the coach steps away. */
+  function inMock() {
     var r = PMP.Router.current && PMP.Router.current.name;
-    return r === "exam" || !!document.querySelector("#view .opt, #view [data-opt]");
+    return r === "exam" && !!(PMP.Exam && PMP.Exam.active);
   }
   function place() { root.style.transform = "translate(" + pos.x + "px," + pos.y + "px)"; }
 
@@ -51513,9 +51534,14 @@ PMP.CoachBubble = (function () {
   function refresh() {
     timer = null;
     if (!root || !PMP.Store.state.sys.ready) return;
-    var hide = answering() || (PMP.Notepad && PMP.Notepad.isOpen());
+    var hide = inMock();
     root.hidden = hide;
     if (hide) { close(); return; }
+    /* Beside the notes pane rather than under it. */
+    var np = document.getElementById("np"), paneOpen = PMP.Notepad && PMP.Notepad.isOpen() && np;
+    var paneW = paneOpen ? np.getBoundingClientRect().width : 0;
+    /* A full-width pane (a phone) is a page of its own; the bubble waits under it. */
+    root.style.right = paneW && paneW < window.innerWidth - 120 ? Math.round(paneW + 20) + "px" : "";
     var n = msgs().length;
     badge.textContent = String(n);
     badge.hidden = !n;

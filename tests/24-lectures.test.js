@@ -197,7 +197,7 @@ module.exports = [
     }
   },
   {
-    name: "coach bubble: floats bottom right, opens the coach's messages with Gemini, Notes and Today; hides while answering; drags",
+    name: "coach bubble: floats bottom right, opens the coach's messages with Gemini, Notes and Today; hides only in a running mock; drags",
     fn: async function (h, lib) {
       var page = await h.open("day3");
       await page.waitForTimeout(400);
@@ -215,7 +215,11 @@ module.exports = [
       var g = await page.evaluate(function () {
         return { pane: PMP.Notepad.isOpen(), tab: document.getElementById("np-tab-ai").getAttribute("aria-selected"), hidden: document.getElementById("cb").hidden };
       });
-      assert.deepStrictEqual(g, { pane: true, tab: "true", hidden: true }, "Gemini opens in the pane, and the bubble steps aside");
+      assert.deepStrictEqual(g, { pane: true, tab: "true", hidden: false }, "Gemini opens in the pane, and the bubble stays");
+      var side = await page.evaluate(function () {
+        return document.getElementById("cb-btn").getBoundingClientRect().right <= document.getElementById("np").getBoundingClientRect().left;
+      });
+      assert.ok(side, "beside the pane, not under it");
       await page.click("#np-toggle");
       await page.waitForTimeout(300);
       assert.strictEqual(await page.isVisible("#cb-btn"), true, "back when the pane closes");
@@ -235,7 +239,45 @@ module.exports = [
       await page.waitForSelector("#view .opt");
       await page.waitForTimeout(400);
       var q = await page.evaluate(function () { return { opts: document.querySelectorAll("#view .opt").length, hidden: document.getElementById("cb").hidden }; });
-      assert.ok(q.opts > 0 && q.hidden, "hidden while a question is on screen: " + JSON.stringify(q));
+      assert.ok(q.opts > 0 && !q.hidden, "still there during practice: " + JSON.stringify(q));
+      /* A mock exam in progress: the one place it steps away. */
+      await page.click('#view button:has-text("End drill")').catch(function () {});
+      await page.waitForTimeout(300);
+      var endSheet = await page.$('#sheet-foot button:has-text("End")');
+      if (endSheet) await endSheet.click();
+      await lib.go(page, "#/exam");
+      await page.evaluate(function () { PMP.Exam.start({ items: 20 }); });
+      await page.waitForTimeout(300);
+      var sheetBtn = await page.$('#sheet-foot button:has-text("Start")');
+      if (sheetBtn) await sheetBtn.click();
+      await page.waitForFunction(function () { return PMP.Exam.active; }, null, { timeout: 5000 });
+      await page.waitForTimeout(400);
+      assert.strictEqual(await page.evaluate(function () { return document.getElementById("cb").hidden; }), true, "hidden in a running mock");
+      await lib.clean(page);
+      await page.ctx.close();
+    }
+  },
+  {
+    name: "flashcards: typing notes in the pane never reveals or grades a card; the shortcuts still work on the deck",
+    fn: async function (h, lib) {
+      var page = await h.open("fresh");
+      await lib.go(page, "#/cards");
+      await page.click('#view tr button');
+      await page.waitForTimeout(200);
+      await page.click("#np-toggle");
+      await page.click("#np-tab-notes");
+      await page.click("#np-text");
+      await page.keyboard.type("Notes 1 2 3 4 ");
+      await page.keyboard.press("Enter");
+      var r = await page.evaluate(function () {
+        return { revealed: PMP.Cards.session && PMP.Cards.session.revealed, done: PMP.Cards.session ? PMP.Cards.session.i : -1,
+                 notes: document.getElementById("np-text").textContent };
+      });
+      assert.deepStrictEqual([r.revealed, r.done], [false, 0], "the card is untouched");
+      assert.ok(r.notes.indexOf("Notes 1 2 3 4") >= 0, "the keys went to the notes");
+      await page.click("#view-title");
+      await page.keyboard.press(" ");
+      assert.strictEqual(await page.evaluate(function () { return PMP.Cards.session.revealed; }), true, "space still reveals from the deck");
       await lib.clean(page);
       await page.ctx.close();
     }

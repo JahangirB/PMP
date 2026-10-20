@@ -5,7 +5,7 @@ import UIKit
 
 enum Dest: String, CaseIterable {
     case DASHBOARD, PRACTICE, MOCK, SITUATIONAL, LEARN, FLASHCARDS, FORMULAS, REFERENCE, ANALYTICS, MISTAKES, PLANNER, DATA,
-         COACH, MENU, GUIDE, FITNESS, REPORTS, SESSION, SETTINGS, BOOK, SEARCH, SYNC
+         COACH, MENU, GUIDE, FITNESS, REPORTS, SESSION, SETTINGS, BOOK, SEARCH, SYNC, SUPPORT
     var title: String {
         switch self {
         case .DASHBOARD: "PMP Prep"; case .PRACTICE: "Practice"; case .MOCK: "Mock Exam"; case .SITUATIONAL: "Situational Trainer"
@@ -13,7 +13,7 @@ enum Dest: String, CaseIterable {
         case .ANALYTICS: "Analytics"; case .MISTAKES: "Mistake Journal"; case .PLANNER: "Study Planner"; case .DATA: "Banks & Backup"
         case .COACH: "Coach and notes"; case .MENU: "Menu"; case .GUIDE: "How it works"; case .FITNESS: "Exam fitness"
         case .REPORTS: "Weekly reports"; case .SESSION: "Session"; case .SETTINGS: "Study settings"; case .BOOK: "Ready to book?"; case .SEARCH: "Search"
-        case .SYNC: "Cloud sync"
+        case .SYNC: "Cloud sync"; case .SUPPORT: "Support the app"
         }
     }
 }
