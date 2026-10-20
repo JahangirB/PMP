@@ -84,6 +84,7 @@ jobs:
           set -o pipefail
           xcodebuild archive -project PMPPrep.xcodeproj -scheme PMPPrep -configuration Release \
             -destination "generic/platform=iOS" -archivePath build/PMPPrep.xcarchive \
+            MARKETING_VERSION="2.0.${{ github.run_number }}" CURRENT_PROJECT_VERSION="${{ github.run_number }}" \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" 2>&1 | tee archive.log | grep -E "error:|\*\* ARCHIVE" || true
           if ! grep -q "\*\* ARCHIVE SUCCEEDED \*\*" archive.log; then
             grep -E "error:" archive.log | sort -u | head -40 | sed 's/^/::error::/'
@@ -136,6 +137,7 @@ jobs:
               "tintColor": "0B6684",
               "versions": [{
                 "version": "$version",
+                "buildVersion": "${{ github.run_number }}",
                 "date": "$date",
                 "downloadURL": "https://github.com/$repo/releases/download/ios/PMP-Prep.ipa",
                 "size": $size,

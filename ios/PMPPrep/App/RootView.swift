@@ -92,6 +92,7 @@ private struct Shell: View {
         case .SEARCH: SearchScreen()
         case .SYNC: SyncScreen()
         case .SUPPORT: SupportScreen()
+        case .UPDATES: UpdateScreen()
         }
     }
 }

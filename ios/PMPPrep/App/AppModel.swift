@@ -5,7 +5,7 @@ import UIKit
 
 enum Dest: String, CaseIterable {
     case DASHBOARD, PRACTICE, MOCK, SITUATIONAL, LEARN, FLASHCARDS, FORMULAS, REFERENCE, ANALYTICS, MISTAKES, PLANNER, DATA,
-         COACH, MENU, GUIDE, FITNESS, REPORTS, SESSION, SETTINGS, BOOK, SEARCH, SYNC, SUPPORT
+         COACH, MENU, GUIDE, FITNESS, REPORTS, SESSION, SETTINGS, BOOK, SEARCH, SYNC, SUPPORT, UPDATES
     var title: String {
         switch self {
         case .DASHBOARD: "PMP Prep"; case .PRACTICE: "Practice"; case .MOCK: "Mock Exam"; case .SITUATIONAL: "Situational Trainer"
@@ -13,7 +13,7 @@ enum Dest: String, CaseIterable {
         case .ANALYTICS: "Analytics"; case .MISTAKES: "Mistake Journal"; case .PLANNER: "Study Planner"; case .DATA: "Banks & Backup"
         case .COACH: "Coach and notes"; case .MENU: "Menu"; case .GUIDE: "How it works"; case .FITNESS: "Exam fitness"
         case .REPORTS: "Weekly reports"; case .SESSION: "Session"; case .SETTINGS: "Study settings"; case .BOOK: "Ready to book?"; case .SEARCH: "Search"
-        case .SYNC: "Cloud sync"; case .SUPPORT: "Support the app"
+        case .SYNC: "Cloud sync"; case .SUPPORT: "Support the app"; case .UPDATES: "App updates"
         }
     }
 }
@@ -111,8 +111,38 @@ final class AppModel: ObservableObject {
             checkModels()
             supportCheck()
             autoSync()
+            quietUpdateCheck()
         } catch {
             loadError = error.localizedDescription
+        }
+    }
+
+    /* ── app updates (AppUpdate: through SideStore or AltStore) ── */
+
+    enum UpdateState: Equatable { case idle, checking, upToDate, available(IosRelease), failed(String) }
+    @Published private(set) var update: UpdateState = .idle
+    /** A newer build, found by a check, for the menu to point at. */
+    var updateAvailable: IosRelease? { if case .available(let r) = update { return r }; return nil }
+
+    /** Once a day, quietly: a newer build shows as "Update available" in the menu; errors stay silent. */
+    private func quietUpdateCheck() {
+        let last = Int64(UserDefaults.standard.double(forKey: "updateCheckedAt"))
+        if Time.now() - last < AppUpdate.checkEveryMs { return }
+        checkForUpdate(quiet: true)
+    }
+
+    func checkForUpdate(quiet: Bool = false) {
+        if update == .checking { return }
+        if !quiet { update = .checking }
+        Task {
+            do {
+                let r = try await AppUpdate.fetchLatest()
+                UserDefaults.standard.set(Double(Time.now()), forKey: "updateCheckedAt")
+                if let r, AppUpdate.isNewer(r, than: AppUpdate.installedBuild) { update = .available(r) }
+                else { update = quiet ? .idle : .upToDate }
+            } catch {
+                update = quiet ? .idle : .failed("Couldn't reach GitHub to check: \(error.localizedDescription)")
+            }
         }
     }
 

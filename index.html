@@ -51158,6 +51158,17 @@ PMP.Download = (function () {
         el("a", { href: "https://sideloadly.io", rel: "noopener", text: "sideloadly.io" }), ") from a computer, also work."]),
       el("p", { class: "hint", text: "With a free Apple ID the app has to be refreshed every 7 days (SideStore and AltStore do this for you) and you can have at most 3 sideloaded apps. Your progress stays when you refresh." })
     ]));
+    /* iOS lets no app install its own updates: they come through the
+       source, in SideStore (the app's Menu → App updates links there). */
+    host.appendChild(el("div", { class: "card" }, [
+      el("span", { class: "eyebrow", text: "One-time setup" }),
+      el("h3", { text: "Get updates" }),
+      steps([
+        el("span", null, ["Add the source to SideStore: in the app, Menu \u2192 App updates \u2192 Add the source to SideStore, or in SideStore, Sources \u2192 + and paste ", el("code", { text: SOURCE }), "."]),
+        "When a new build is out, SideStore shows it under My Apps with an Update button, and the app shows \u201cUpdate available\u201d in its menu. Tap Update; your progress stays.",
+        "Installed the IPA file by hand? Add the source once; nothing you have changes."
+      ])
+    ]));
   }
 
   var PAGES = {
