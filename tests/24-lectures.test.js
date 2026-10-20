@@ -232,7 +232,8 @@ module.exports = [
       /* A question on screen: out of the way. */
       await lib.go(page, "#/practice");
       await page.click('#view button:has-text("Start drill")');
-      await page.waitForTimeout(500);
+      await page.waitForSelector("#view .opt");
+      await page.waitForTimeout(400);
       var q = await page.evaluate(function () { return { opts: document.querySelectorAll("#view .opt").length, hidden: document.getElementById("cb").hidden }; });
       assert.ok(q.opts > 0 && q.hidden, "hidden while a question is on screen: " + JSON.stringify(q));
       await lib.clean(page);
