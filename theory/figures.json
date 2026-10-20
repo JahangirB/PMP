@@ -822,5 +822,533 @@
         "s": 12
       }
     ]
+  },
+  "t6-spectrum": {
+    "title": "Four ways to develop a product",
+    "caption": "Two questions place an approach: how often the product reaches its users, and how much it is expected to change as people learn.",
+    "alt": "A two-by-two grid. Across: frequency of delivery, from once to often. Up: degree of change, from low to high. Bottom left Predictive: plan once, deliver once. Bottom right Incremental: plan once, deliver in pieces. Top left Iterative: refine through cycles, deliver once. Top right Agile: refine and deliver in short cycles.",
+    "w": 640,
+    "h": 300,
+    "shapes": [
+      {
+        "k": "line",
+        "p": [
+          80,
+          20,
+          80,
+          252
+        ],
+        "tone": "muted"
+      },
+      {
+        "k": "line",
+        "p": [
+          80,
+          252,
+          620,
+          252
+        ],
+        "tone": "muted"
+      },
+      {
+        "k": "box",
+        "x": 95,
+        "y": 30,
+        "w": 250,
+        "h": 100,
+        "tone": "accent",
+        "s": 12,
+        "t": "Iterative\nrefine through cycles,\ndeliver once"
+      },
+      {
+        "k": "box",
+        "x": 360,
+        "y": 30,
+        "w": 250,
+        "h": 100,
+        "tone": "good",
+        "s": 12,
+        "t": "Agile\nrefine and deliver\nin short cycles"
+      },
+      {
+        "k": "box",
+        "x": 95,
+        "y": 142,
+        "w": 250,
+        "h": 100,
+        "tone": "muted",
+        "s": 12,
+        "t": "Predictive\nplan once,\ndeliver once"
+      },
+      {
+        "k": "box",
+        "x": 360,
+        "y": 142,
+        "w": 250,
+        "h": 100,
+        "tone": "accent",
+        "s": 12,
+        "t": "Incremental\nplan once,\ndeliver in pieces"
+      },
+      {
+        "k": "text",
+        "x": 350,
+        "y": 276,
+        "t": "Frequency of delivery: once  →  often",
+        "a": "middle",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 40,
+        "y": 136,
+        "t": "Degree\nof change\n↑",
+        "a": "middle",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      }
+    ]
+  },
+  "t7-scrum": {
+    "title": "One Scrum sprint",
+    "caption": "Planning sets a sprint goal, the team works with a daily scrum, the review shows the increment and feeds the backlog, and the retrospective improves how the next sprint runs.",
+    "alt": "Product backlog, then Sprint planning, then the Sprint of one to four weeks with a daily scrum, then Sprint review, then the Increment. A dashed line from the review returns to the product backlog: feedback reorders it. Below, the Sprint retrospective feeds back into the next sprint planning.",
+    "w": 640,
+    "h": 240,
+    "shapes": [
+      {
+        "k": "box",
+        "x": 10,
+        "y": 72,
+        "w": 105,
+        "h": 56,
+        "tone": "accent",
+        "s": 12,
+        "t": "Product\nbacklog"
+      },
+      {
+        "k": "line",
+        "p": [
+          116,
+          100,
+          136,
+          100
+        ],
+        "arrow": true
+      },
+      {
+        "k": "box",
+        "x": 138,
+        "y": 72,
+        "w": 105,
+        "h": 56,
+        "tone": "good",
+        "s": 12,
+        "t": "Sprint\nplanning"
+      },
+      {
+        "k": "line",
+        "p": [
+          244,
+          100,
+          264,
+          100
+        ],
+        "arrow": true
+      },
+      {
+        "k": "box",
+        "x": 266,
+        "y": 52,
+        "w": 150,
+        "h": 96,
+        "tone": "good",
+        "s": 12,
+        "t": "Sprint\n1–4 weeks\ndaily scrum"
+      },
+      {
+        "k": "line",
+        "p": [
+          417,
+          100,
+          437,
+          100
+        ],
+        "arrow": true
+      },
+      {
+        "k": "box",
+        "x": 439,
+        "y": 72,
+        "w": 100,
+        "h": 56,
+        "tone": "good",
+        "s": 12,
+        "t": "Sprint\nreview"
+      },
+      {
+        "k": "line",
+        "p": [
+          540,
+          100,
+          560,
+          100
+        ],
+        "arrow": true
+      },
+      {
+        "k": "box",
+        "x": 562,
+        "y": 72,
+        "w": 70,
+        "h": 56,
+        "tone": "accent",
+        "s": 11,
+        "t": "Increment"
+      },
+      {
+        "k": "line",
+        "p": [
+          489,
+          71,
+          489,
+          30,
+          62,
+          30,
+          62,
+          70
+        ],
+        "arrow": true,
+        "dash": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 276,
+        "y": 20,
+        "t": "feedback reorders the backlog",
+        "a": "middle",
+        "s": 11,
+        "tone": "muted"
+      },
+      {
+        "k": "box",
+        "x": 400,
+        "y": 178,
+        "w": 140,
+        "h": 44,
+        "tone": "warn",
+        "s": 12,
+        "t": "Sprint\nretrospective"
+      },
+      {
+        "k": "line",
+        "p": [
+          470,
+          129,
+          470,
+          176
+        ],
+        "dash": true,
+        "tone": "muted"
+      },
+      {
+        "k": "line",
+        "p": [
+          399,
+          200,
+          190,
+          200,
+          190,
+          130
+        ],
+        "arrow": true,
+        "dash": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 296,
+        "y": 214,
+        "t": "improvements for the next sprint",
+        "a": "middle",
+        "s": 11,
+        "tone": "muted"
+      }
+    ]
+  },
+  "t7-kanban": {
+    "title": "A Kanban board",
+    "caption": "Each column is a stage; the limits cap how much work can sit in each one, so the team finishes work before starting more.",
+    "alt": "A board of four columns: To do with four cards, In progress with a limit of three and three cards, Review with a limit of two and two cards, and Done with three cards. Work moves right only when the next column has room.",
+    "w": 640,
+    "h": 230,
+    "shapes": [
+      {
+        "k": "box",
+        "x": 20,
+        "y": 14,
+        "w": 140,
+        "h": 34,
+        "tone": "muted",
+        "s": 11,
+        "t": "To do",
+        "b": true
+      },
+      {
+        "k": "box",
+        "x": 32,
+        "y": 60,
+        "w": 116,
+        "h": 26,
+        "tone": "ink",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 32,
+        "y": 96,
+        "w": 116,
+        "h": 26,
+        "tone": "ink",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 32,
+        "y": 132,
+        "w": 116,
+        "h": 26,
+        "tone": "ink",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 32,
+        "y": 168,
+        "w": 116,
+        "h": 26,
+        "tone": "ink",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 173,
+        "y": 14,
+        "w": 140,
+        "h": 34,
+        "tone": "accent",
+        "s": 11,
+        "t": "In progress (limit 3)",
+        "b": true
+      },
+      {
+        "k": "box",
+        "x": 185,
+        "y": 60,
+        "w": 116,
+        "h": 26,
+        "tone": "ink",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 185,
+        "y": 96,
+        "w": 116,
+        "h": 26,
+        "tone": "ink",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 185,
+        "y": 132,
+        "w": 116,
+        "h": 26,
+        "tone": "ink",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 326,
+        "y": 14,
+        "w": 140,
+        "h": 34,
+        "tone": "accent",
+        "s": 11,
+        "t": "Review (limit 2)",
+        "b": true
+      },
+      {
+        "k": "box",
+        "x": 338,
+        "y": 60,
+        "w": 116,
+        "h": 26,
+        "tone": "ink",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 338,
+        "y": 96,
+        "w": 116,
+        "h": 26,
+        "tone": "ink",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 479,
+        "y": 14,
+        "w": 140,
+        "h": 34,
+        "tone": "muted",
+        "s": 11,
+        "t": "Done",
+        "b": true
+      },
+      {
+        "k": "box",
+        "x": 491,
+        "y": 60,
+        "w": 116,
+        "h": 26,
+        "tone": "good",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 491,
+        "y": 96,
+        "w": 116,
+        "h": 26,
+        "tone": "good",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 491,
+        "y": 132,
+        "w": 116,
+        "h": 26,
+        "tone": "good",
+        "s": 12
+      },
+      {
+        "k": "text",
+        "x": 320,
+        "y": 214,
+        "t": "Work moves right only when the next column has room",
+        "a": "middle",
+        "s": 11,
+        "tone": "muted"
+      }
+    ]
+  },
+  "t8-uncertainty": {
+    "title": "Two kinds of uncertainty",
+    "caption": "The less agreed the requirements and the less known the technology, the more the work calls for short feedback loops. Adapted from Ralph Stacey's agreement and certainty matrix.",
+    "alt": "A chart with technology from known to unknown along the bottom and requirements from agreed to unclear up the side. Nested regions from the bottom left corner: Simple, suited to predictive; Complicated, predictive or hybrid; Complex, adaptive; and Chaotic at the far corner, act first then stabilise.",
+    "w": 640,
+    "h": 290,
+    "shapes": [
+      {
+        "k": "box",
+        "x": 90,
+        "y": 20,
+        "w": 530,
+        "h": 232,
+        "tone": "bad",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 90,
+        "y": 84,
+        "w": 410,
+        "h": 168,
+        "tone": "warn",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 90,
+        "y": 148,
+        "w": 270,
+        "h": 104,
+        "tone": "accent",
+        "s": 12
+      },
+      {
+        "k": "box",
+        "x": 90,
+        "y": 200,
+        "w": 130,
+        "h": 52,
+        "tone": "good",
+        "s": 12
+      },
+      {
+        "k": "text",
+        "x": 155,
+        "y": 226,
+        "t": "Simple\npredictive",
+        "a": "middle",
+        "s": 11,
+        "b": true
+      },
+      {
+        "k": "text",
+        "x": 290,
+        "y": 174,
+        "t": "Complicated\npredictive or hybrid",
+        "a": "middle",
+        "s": 11,
+        "b": true
+      },
+      {
+        "k": "text",
+        "x": 430,
+        "y": 116,
+        "t": "Complex\nadaptive",
+        "a": "middle",
+        "s": 11,
+        "b": true
+      },
+      {
+        "k": "text",
+        "x": 560,
+        "y": 52,
+        "t": "Chaotic\nact, then stabilise",
+        "a": "middle",
+        "s": 11,
+        "b": true
+      },
+      {
+        "k": "text",
+        "x": 355,
+        "y": 276,
+        "t": "Technology: known  →  unknown",
+        "a": "middle",
+        "s": 11,
+        "b": true,
+        "tone": "muted"
+      },
+      {
+        "k": "text",
+        "x": 45,
+        "y": 136,
+        "t": "Require-\nments:\nunclear\n↑\nagreed",
+        "a": "middle",
+        "s": 10,
+        "b": true,
+        "tone": "muted"
+      }
+    ]
   }
 }

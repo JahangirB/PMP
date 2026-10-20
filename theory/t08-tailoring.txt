@@ -1,0 +1,96 @@
+id: t8
+part: 2
+title: Choosing and tailoring an approach
+summary: How to fit the way of working to the project: choosing a development approach, deliberately designing hybrids, and adjusting processes up or down.
+why: No method fits every project. A process that keeps a nuclear plant safe would strangle a two-week marketing campaign, and the informality that suits a three-person start-up would be negligent on a national railway. Tailoring is the skill of deciding how much process, of what kind, a piece of work needs. Done well, it is invisible: the project simply has what it needs. Done badly, in either direction, it is one of the commonest causes of failure.
+
+## What tailoring means
+**Tailoring** is the deliberate adaptation of the approach, governance and processes to suit the project and its environment. It covers choices such as which life cycle to use, which processes to apply and how formally, which documents to produce and in how much detail, how often to report and to whom, how decisions are made and how change is controlled.
+
+Two misunderstandings are common. The first treats tailoring as a way to drop inconvenient steps: "we're agile, so we don't need a risk register". The second treats a standard method as complete and untouchable: "the methodology requires this document, so we write it, even though nobody reads it". Both miss the point. Tailoring starts from the purpose each practice serves and asks how best to achieve that purpose here. Sometimes the answer is a formal process; sometimes a conversation; sometimes nothing at all, because the risk the practice protects against is absent.
+
+Tailoring happens at several levels. Organisations tailor general standards into their own methods. Projects tailor the organisation's method to their own needs. And teams tailor continually as they learn what works, which in adaptive approaches is formalised in the retrospective.
+
+## Why one size does not fit all
+Projects differ along many dimensions, and each dimension changes what a sensible approach looks like.
+
+- **Size and duration.** Larger and longer projects need more coordination, more formal communication and more explicit governance.
+- **Complexity.** Many interdependent parts, many organisations or many stakeholders require more integration effort.
+- **Uncertainty.** Unclear requirements or untried technology favour shorter feedback loops and less upfront detail.
+- **Criticality and risk.** Safety, security or financial exposure justify more rigour, more review and more documentation.
+- **Regulation.** Regulated industries may require specific documents, approvals and audit trails, whatever the team would prefer.
+- **Contracts.** Fixed-price contracts with external suppliers need clearer scope definitions than internal work.
+- **Team.** Experienced, co-located, stable teams need less formal coordination than new, distributed or rotating ones.
+- **Culture.** An organisation that values predictability and control will resist approaches that ask it to accept flexible scope, and that resistance is itself a factor to plan for.
+
+## Choosing a development approach
+Chapter 6 described the predictive, iterative, incremental and adaptive approaches. Choosing between them starts with the nature of the product and the uncertainty around it.
+
+A useful way to think about it is to assess the work on two kinds of uncertainty: how well the requirements are known and agreed, and how well understood the technology or method for building it is. Ralph Stacey's work on complexity is often adapted into a matrix of this kind. Work with known requirements and known technology is relatively simple and suits predictive planning. Work where both are uncertain is complex and suits adaptive approaches. Work that is unclear on both to an extreme degree may be chaotic, needing immediate action to create some stability before any approach can work.
+
+[figure: t8-uncertainty]
+
+Several other questions sharpen the choice.
+
+- **Can it be delivered in pieces?** If not, adaptive delivery is limited; iteration through prototypes may still help.
+- **How expensive is late change?** If very expensive and unavoidable, invest in getting decisions right early.
+- **Is frequent feedback available?** Adaptive approaches depend on it. Without engaged users or a product owner with authority, they degrade.
+- **What must be fixed?** If scope must be fixed (for a contract or regulation), predictive planning of that scope is often needed. If time and budget are fixed and scope can flex, adaptive approaches fit naturally.
+- **What can the organisation support?** An adaptive team inside an organisation that demands detailed upfront plans, fixed-scope business cases and monthly Gantt chart updates will spend much of its energy translating between worlds.
+
+## Hybrid approaches
+A **hybrid** approach combines elements of different approaches. Hybrids are not a compromise for people who cannot decide; they are a recognition that different parts of the work, or different stages of the project, have different characteristics.
+
+Common hybrid patterns include the following.
+
+- **Different approaches for different components.** Hardware is designed predictively because its tooling has long lead times; the software running on it is built adaptively.
+- **Adaptive start, predictive finish.** Early phases use prototypes and short iterations to clarify uncertain requirements; once stable, the remainder is planned and executed predictively.
+- **Predictive start, adaptive finish.** The architecture, infrastructure and contracts are planned predictively; the features are then built adaptively on that foundation.
+- **Adaptive delivery inside predictive governance.** Teams work in sprints, but the organisation funds, monitors and approves the project through phases and gates.
+- **Predictive plan with adaptive practices.** A largely planned project borrows practices such as daily stand-ups, visual boards and retrospectives because they help, without changing its overall approach.
+
+Hybrids need care at the seams. Where a predictive component hands over to an adaptive one, someone must manage the interface: the predictive side needs firm enough requirements from the adaptive side to plan, and the adaptive side needs to know which of its decisions the predictive side has already locked in. Most trouble in hybrid projects arises at these boundaries.
+
+> example: Northfield's booking project was a deliberate hybrid. Governance used three gates: approval of the business case, approval to roll out after a pilot clinic, and closure. The records system integration followed a predictive plan tied to the vendor's release dates. The booking screens were built in two-week sprints. The rollout to forty clinics was incremental, five clinics at a time. Amira, the project manager, spent much of her effort at the seams: making sure the sprint team knew which data the vendor could deliver by which date, and translating sprint progress into the milestone reports the trust board expected.
+
+## Tailoring the processes
+Beyond choosing an approach, tailoring adjusts the processes and practices themselves. A useful sequence is:
+
+1. **Start from the organisation's method**, if it has one, or from a standard. These capture experience and meet the organisation's own requirements.
+2. **Understand the project**: its size, uncertainty, risks, regulation, stakeholders and team, as described above.
+3. **For each practice, ask what it is for** and whether that purpose matters here. A detailed communications plan serves a project with many stakeholder groups; a five-person internal project may need a single shared calendar.
+4. **Decide how to achieve each purpose that matters**, at the level of formality the project needs.
+5. **Agree the tailoring** with the people who must accept it, such as the sponsor, the project management office and, where relevant, auditors or regulators.
+6. **Review and adjust** as the project learns. Tailoring is not a decision made once at the start.
+
+Some things are rarely worth tailoring away entirely, even on small projects: a clear statement of purpose and success criteria, someone accountable for decisions, a way of noticing and responding to risks, a way to control changes to what was agreed, and a way of confirming the result is acceptable. The form of each can be very light, but projects that lack them altogether tend to discover why they matter.
+
+## Signs of under- and over-tailoring
+Under-tailored projects, with too little process, show recognisable symptoms: decisions nobody remembers making, surprises that someone saw coming but did not raise, scope that has drifted without anyone agreeing it, stakeholders who feel ignored, and arguments at the end about what was promised.
+
+Over-tailored projects, with too much process, show different symptoms: documents produced for the sake of a checklist, approvals that take longer than the work they approve, status reports nobody reads, teams spending more time describing work than doing it, and people quietly working around the official process to get things done.
+
+A useful test for any practice is to ask what would go wrong if it stopped. If nobody can say, or if the answer is "the auditors would complain" for a practice auditors do not actually require, it is a candidate for removal. If the answer is a real risk, keep the practice and find the lightest way to do it.
+
+> myth: "Agile projects don't need tailoring because agile is already lightweight." Agile frameworks are deliberately incomplete; they expect teams to add the practices they need. A team building medical software in Scrum will still need formal risk analysis, traceability and validation, because the regulator requires them and the patients deserve them.
+
+## The project manager's role in tailoring
+Tailoring is a responsibility, not a preference. The project manager should be able to explain the approach chosen for each part of the work and why, which practices have been made lighter or heavier than the organisation's default and why, and how the approach will be reviewed. That explanation is what turns tailoring from a matter of taste into a professional judgement that others can examine and trust.
+
+Often the most valuable tailoring conversation is with the sponsor and governance bodies, because their expectations shape everything else. Agreeing early how progress will be reported, which decisions need their involvement, and what they can expect to be fixed or flexible avoids the common trap of a team working one way while being judged by the standards of another.
+
+> exam: The exam treats tailoring as an expected part of the project manager's job. Questions may describe a team mechanically following a process that does not fit, or abandoning one that does. The right answer usually involves understanding the purpose of the practice and adapting it, consulting the team and relevant stakeholders, and making sure regulatory or contractual requirements are still met. Hybrid scenarios often hinge on managing the interface between predictive and adaptive parts.
+
+## Key ideas
+- Tailoring adapts the approach, governance and processes to the project, starting from what each practice is for.
+- The main factors are size, complexity, uncertainty, criticality, regulation, contracts, the team and the culture.
+- Requirements uncertainty and technical uncertainty together suggest where a piece of work sits between predictive and adaptive.
+- Hybrids fit different approaches to different parts of the work; their risk lies at the seams.
+- Some essentials survive any tailoring: purpose, accountability, risk awareness, change control and acceptance.
+- Under-tailoring produces surprises and drift; over-tailoring produces ceremony and workarounds.
+
+## Further reading
+- Project Management Institute, *The Standard for Project Management* (seventh edition), section on tailoring. A structured approach to tailoring decisions.
+- Scott Ambler and Mark Lines, *Choose Your WoW!* (2019). Disciplined Agile's argument that teams should choose their way of working from many options.
+- Ralph D. Stacey, *Strategic Management and Organisational Dynamics* (many editions). The source of the agreement and certainty matrix.
+- Alistair Cockburn, *Agile Software Development: The Cooperative Game* (2006). On fitting methodology weight to project size and criticality.

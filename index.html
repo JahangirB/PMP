@@ -542,11 +542,17 @@ body {
   font-size: var(--t-base);
   line-height: var(--lh-snug);
   color: var(--fg);
-  background: var(--clay-page) no-repeat fixed;
-  background-color: var(--s-base);
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   overflow-wrap: break-word;
+}
+/* The page's soft gradient, pinned to the window: a fixed layer behind
+   everything, so it never scrolls away and leaves an edge (a background on
+   body is clipped to body's own box, one screen tall, and iOS ignores
+   background-attachment: fixed). */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--clay-page);
 }
 h1, h2, h3, h4, p, figure, ul, ol { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
@@ -2777,6 +2783,9 @@ a.th-li-t { color: var(--c-signal); }
 .th-sec { display: grid; gap: var(--sp-3); scroll-margin-top: 80px; margin-top: var(--sp-4); }
 .th-sec h3 { font-size: var(--t-lg); margin: 0; text-wrap: balance; }
 .th-ul { margin: 0; padding-left: 1.3em; display: grid; gap: var(--sp-2); }
+.th-ul { list-style: disc; }
+.th-ol { list-style: decimal; }
+.th-h4 { font-size: var(--t-md); font-weight: var(--w-bold); margin: var(--sp-2) 0 0; }
 .th-box { border-radius: var(--r-3); padding: var(--sp-3) var(--sp-4); display: grid; gap: var(--sp-1); }
 .th-box p { font-size: var(--t-sm) !important; }
 .th-box--exam { background: var(--s-wash); }
@@ -18253,6 +18262,8 @@ PMP.ABBREVIATIONS = Object.freeze([
   { abbr: "VAC", full: "Variance at completion", group: "evm", see: "Variance at completion" },
   { abbr: "WBS", full: "Work breakdown structure", group: "scope", see: "Work breakdown structure" },
   { abbr: "WIP", full: "Work in progress", group: "agile", see: "Work in progress" },
+  { abbr: "WoW", full: "Way of working", group: "agile",
+    note: "Disciplined Agile's term for a team's chosen process." },
   { abbr: "X", full: "Exam skills", group: "exam",
     note: "Lesson-id prefix: X1 is the first Exam skills lesson." },
   { abbr: "XP", full: "Extreme Programming", group: "agile", see: "Extreme Programming" },
@@ -21627,6 +21638,966 @@ PMP.THEORY = Object.freeze({
    "words": 2467,
    "minutes": 11,
    "n": 5
+  },
+  {
+   "id": "t6",
+   "part": 2,
+   "title": "Life cycles and phases",
+   "summary": "How projects are divided over time, the four basic patterns of development, and what each assumes about the work.",
+   "why": "Every project moves from an idea to a result, but the route can differ enormously. Some projects plan everything first and build once; others build a little, learn, and build again. The choice of life cycle shapes everything else: how you plan, how you estimate, how you report, how you manage change and how early anyone sees value. Choosing it on purpose, rather than by habit, is one of the most consequential decisions a project manager makes.",
+   "sections": [
+    {
+     "id": "t6-s1",
+     "title": "Two kinds of life cycle",
+     "blocks": [
+      "It helps to separate two ideas that are often blurred together.",
+      "The **project life cycle** is the series of phases a project passes through from start to finish. Typical names are something like concept, feasibility, design, build, test, deploy and close, though every industry has its own. Phases give the project a structure for governance: at the end of each, there is usually a review where someone decides whether to continue.",
+      "The **development life cycle**, or delivery approach, describes how the product itself is created within those phases: all at once, in repeated refinements, in successive pieces, or in short cycles that do all of these together. A project can have a predictive overall life cycle with phases and gates, while one of its phases develops software adaptively. Keeping the two ideas apart makes hybrid approaches much easier to understand."
+     ]
+    },
+    {
+     "id": "t6-s2",
+     "title": "Phases and gates",
+     "blocks": [
+      "A **phase** is a collection of related activities that ends with the completion of one or more deliverables. Phases exist because breaking a long effort into stages gives natural points to stop, review and decide. Each phase usually has its own objectives, its own main deliverables and its own exit criteria.",
+      "A **phase gate**, also called a stage gate, decision point or kill point, is the review at the end of a phase. The people with authority, often a sponsor or steering committee, look at what the phase produced, at the updated business case and at the plan for the next phase, and decide to continue, continue with changes, repeat the phase, or stop. Gates are where governance (Chapter 4) touches the project directly.",
+      "Phases can be arranged in several ways.",
+      {
+       "ul": [
+        "**Sequential**: one phase finishes before the next starts. Simple and controllable, but slow.",
+        "**Overlapping**: the next phase starts before the previous one finishes, for example starting procurement of long-lead items before design is complete. This saves time at the cost of risk, because later work rests on earlier work that may still change. Overlapping phases on purpose to shorten a schedule is called fast tracking (Chapter 11).",
+        "**Iterative**: the same phase pattern repeats, each pass refining or extending the result."
+       ]
+      },
+      "A gate is valuable only if stopping is a real option. Gates that always say \"continue\" become rituals that consume time without managing risk. A good gate asks hard questions: is the business case still true, is the next phase properly planned, are the biggest risks understood, and do we still want this?"
+     ]
+    },
+    {
+     "id": "t6-s3",
+     "title": "Four ways to develop the product",
+     "blocks": [
+      "The most useful way to compare development approaches is to ask two questions. How often is the product delivered to the people who will use it? And how much is the product expected to change as people learn? The answers place an approach somewhere on a spectrum.",
+      {
+       "fig": {
+        "title": "Four ways to develop a product",
+        "caption": "Two questions place an approach: how often the product reaches its users, and how much it is expected to change as people learn.",
+        "alt": "A two-by-two grid. Across: frequency of delivery, from once to often. Up: degree of change, from low to high. Bottom left Predictive: plan once, deliver once. Bottom right Incremental: plan once, deliver in pieces. Top left Iterative: refine through cycles, deliver once. Top right Agile: refine and deliver in short cycles.",
+        "w": 640,
+        "h": 300,
+        "shapes": [
+         {
+          "k": "line",
+          "p": [
+           80,
+           20,
+           80,
+           252
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "line",
+          "p": [
+           80,
+           252,
+           620,
+           252
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "box",
+          "x": 95,
+          "y": 30,
+          "w": 250,
+          "h": 100,
+          "tone": "accent",
+          "s": 12,
+          "t": "Iterative\nrefine through cycles,\ndeliver once"
+         },
+         {
+          "k": "box",
+          "x": 360,
+          "y": 30,
+          "w": 250,
+          "h": 100,
+          "tone": "good",
+          "s": 12,
+          "t": "Agile\nrefine and deliver\nin short cycles"
+         },
+         {
+          "k": "box",
+          "x": 95,
+          "y": 142,
+          "w": 250,
+          "h": 100,
+          "tone": "muted",
+          "s": 12,
+          "t": "Predictive\nplan once,\ndeliver once"
+         },
+         {
+          "k": "box",
+          "x": 360,
+          "y": 142,
+          "w": 250,
+          "h": 100,
+          "tone": "accent",
+          "s": 12,
+          "t": "Incremental\nplan once,\ndeliver in pieces"
+         },
+         {
+          "k": "text",
+          "x": 350,
+          "y": 276,
+          "t": "Frequency of delivery: once  →  often",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 40,
+          "y": 136,
+          "t": "Degree\nof change\n↑",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         }
+        ]
+       }
+      },
+      {
+       "h": "Predictive"
+      },
+      "In a **predictive** approach, the scope, schedule and cost are determined as fully as possible early on, in a planning effort, and then the work proceeds according to that plan. Requirements are captured and approved before design; design before build; build before test. Change is possible but is managed formally, because each change disturbs a plan that many other things depend on. The product is usually delivered once, at the end.",
+      "Predictive approaches suit work where the requirements can be known in advance and are unlikely to change, where the technology is well understood, and where changing course late is very expensive. Building a bridge is the classic case: you cannot release half a bridge to see if people like it, and the laws of physics will not change halfway through. Many regulated, contractual and safety-critical projects are predictive for good reasons.",
+      {
+       "h": "Iterative"
+      },
+      "In an **iterative** approach, the product is developed through repeated cycles, each refining it. Early iterations may produce rough versions or prototypes; later ones improve them in response to feedback. The full scope may be roughly known at the start, but its details are worked out by trying versions and learning. Delivery to users may still happen only at the end; the iterations are about getting it right.",
+      "Iterative approaches suit work where the requirements are unclear or the solution is uncertain, but where the product cannot usefully be released in pieces. Designing a new car model goes through many iterations of design and prototype before anything is sold.",
+      {
+       "h": "Incremental"
+      },
+      "In an **incremental** approach, the product is delivered in successive pieces, each adding functionality. The first increment might deliver core features; later ones add more. Each increment is usable in its own right. The overall scope may be well defined, but delivering it in pieces brings some value early and spreads risk.",
+      "Incremental approaches suit work where the requirements are reasonably clear but the customer benefits from getting something sooner, or where the organisation wants to limit how much it invests before seeing results. Rolling out a new system clinic by clinic, or building a housing estate street by street, are incremental.",
+      {
+       "h": "Adaptive or agile"
+      },
+      "An **adaptive** approach, often called agile, combines iteration and increments in short cycles. Each cycle, typically one to four weeks, delivers a small, working, potentially usable piece of the product, gathers feedback and adjusts the plan. The overall goal is fixed, but the scope is expected to change as everyone learns what is most valuable. Detailed planning happens just in time, for the next cycle or two.",
+      "Adaptive approaches suit work with high uncertainty about both what is needed and how to build it, where the product can be delivered in small pieces, and where customers or users can give frequent feedback. Most software products, digital services and many research or design efforts fit this description. Chapter 7 explores the thinking behind these methods.",
+      {
+       "box": "myth",
+       "text": "\"Iterative and incremental mean the same thing.\" They are different ideas that are often combined. Iterating means refining the same thing repeatedly; incrementing means adding new pieces. Painting a portrait in successive layers is iterative; building it one finished square at a time is incremental. Agile methods do both."
+      }
+     ]
+    },
+    {
+     "id": "t6-s4",
+     "title": "What each approach assumes",
+     "blocks": [
+      "Each approach rests on assumptions about the work. When those assumptions are true, the approach works well. When they are false, it struggles, however well it is executed.",
+      "A predictive approach assumes that the requirements can be known early, that the important risks can be foreseen, that the cost of change rises steeply later in the project, and that the organisation needs a fixed commitment on scope, time and cost before it starts. It works well when these hold. Its typical failure is discovering, late and expensively, that the requirements were wrong.",
+      "An adaptive approach assumes that the product can be delivered in small usable pieces, that frequent feedback is available from people who know what is needed, that the team can work closely with the customer, and that the organisation can accept a fixed budget and time with flexible scope. It works well when these hold. Its typical failure is drifting without a clear goal, or building a pile of small pieces that do not add up to a coherent product.",
+      "Iterative and incremental approaches sit between, borrowing part of each set of assumptions. Recognising the assumptions behind an approach is more useful than memorising its practices, because it tells you how to adjust when your project only partly fits.",
+      {
+       "box": "example",
+       "text": "Northfield's online booking project mixed approaches. The integration with the trust's clinical records system was planned predictively, because the records vendor worked to fixed release dates and every interface change required formal testing and approval. The patient-facing booking screens were built adaptively in two-week cycles, because nobody could be sure how patients would use them until they tried. And the rollout was incremental, clinic by clinic, so that problems in the first clinics could be fixed before most patients ever saw the system."
+      }
+     ]
+    },
+    {
+     "id": "t6-s5",
+     "title": "The cost of change curve",
+     "blocks": [
+      "A recurring idea behind these approaches is the **cost of change**. In many kinds of work, the later a change is made, the more expensive it is, because more has been built on the earlier decision. Changing a line on a drawing is cheap; changing a poured foundation is not. Early writers on software engineering argued that a requirement error found in operation could cost many times more to fix than the same error found during requirements analysis.",
+      "This curve is the main justification for predictive planning: if late change is expensive, get the decisions right early. Adaptive methods respond in two ways. First, they try to flatten the curve, by keeping the product in a state where change is cheap: automated testing, simple designs, small batches and frequent integration all help. Second, they bring feedback forward, so that wrong decisions are discovered when they are still cheap to reverse. Both responses are rational. Which one serves a given project depends on whether the curve can actually be flattened for that kind of work. For software, often it can. For concrete, it cannot."
+     ]
+    },
+    {
+     "id": "t6-s6",
+     "title": "Life cycles and the product",
+     "blocks": [
+      "The project life cycle sits inside a longer **product life cycle**: from the idea, through development and introduction, growth and maturity, to decline and retirement. A product may pass through several projects over its life, each with its own life cycle.",
+      "Thinking about the product life cycle changes some project decisions. A system expected to last fifteen years justifies more investment in maintainability than one expected to last two. A product entering a fast-growing market may need early release more than completeness. And decisions made during the project, such as choosing a supplier or a technology, often lock in costs that appear long after the project has closed. Good project managers ask about the whole life of what they are building, not just the part they are paid to deliver."
+     ]
+    },
+    {
+     "id": "t6-s7",
+     "title": "Choosing a life cycle",
+     "blocks": [
+      "There is no universally best life cycle. The choice depends on the product, the project and the organisation. Chapter 8 discusses tailoring in detail, but the main factors are worth stating here.",
+      {
+       "ul": [
+        "**Requirements certainty.** How well can we know what is needed before we start?",
+        "**Technical uncertainty.** How well understood is the way to build it?",
+        "**Ability to deliver in pieces.** Can part of the product be used on its own?",
+        "**Availability of feedback.** Can users or customers give frequent, informed feedback?",
+        "**Cost of change.** How expensive is it to change course late?",
+        "**Regulation and contracts.** Do they require formal approvals, documentation or a fixed scope?",
+        "**Team and organisation.** Do the team and the organisation have the skills, culture and structure for the approach?"
+       ]
+      },
+      "Many projects score differently on different parts of the work, which is why hybrids are so common. The point is not to pick a label but to fit the way of working to the nature of each part of the work.",
+      {
+       "box": "exam",
+       "text": "The exam expects you to recognise which approach fits a scenario and why. High uncertainty and frequent feedback point to adaptive; fixed regulatory requirements and costly late change point to predictive; a need for early value from clear requirements points to incremental. Questions also test whether you understand phase gates as decision points where the project can genuinely be stopped, and whether you can tell iterative from incremental."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "The project life cycle is the sequence of phases; the development approach is how the product is created within them.",
+    "Phase gates are decision points. They are only valuable if stopping is a real option.",
+    "Predictive approaches plan fully up front; iterative ones refine through cycles; incremental ones deliver in pieces; adaptive ones do both in short cycles with flexible scope.",
+    "Each approach rests on assumptions about requirements, uncertainty, feedback and the cost of change. Check the assumptions before choosing.",
+    "The cost of change curve justifies predictive planning where it cannot be flattened, and adaptive delivery where it can.",
+    "Most real projects mix approaches across different parts of the work."
+   ],
+   "reading": [
+    "Project Management Institute and Agile Alliance, *Agile Practice Guide* (2017). Clear on the spectrum of life cycles and how they combine.",
+    "Barry Boehm, \"A Spiral Model of Software Development and Enhancement\", *Computer* magazine (1988). The risk-driven iterative model.",
+    "Alistair Cockburn, \"Using Both Incremental and Iterative Development\", *CrossTalk* (2008). A short, clear essay on the difference.",
+    "Robert G. Cooper, *Winning at New Products* (many editions). The origin of stage-gate thinking in product development."
+   ],
+   "words": 2083,
+   "minutes": 9,
+   "n": 6
+  },
+  {
+   "id": "t7",
+   "part": 2,
+   "title": "Agile and lean thinking",
+   "summary": "The values and principles behind agile methods, how Scrum and Kanban work, and the lean ideas of waste, flow and pull.",
+   "why": "Agile and lean are often presented as sets of ceremonies and artefacts: stand-ups, sprints, boards, story points. Teams that adopt the ceremonies without the thinking get the overhead without the benefit. Understanding why these practices exist lets you use them well, adapt them sensibly, and recognise when a team is going through the motions.",
+   "sections": [
+    {
+     "id": "t7-s1",
+     "title": "The problem agile set out to solve",
+     "blocks": [
+      "Agile methods grew out of software development in the 1990s, where many projects followed a sequential model that suited the work poorly. Requirements were written in detail, approved, designed against and built over many months. By the time users saw the result, their needs had moved on, or the written requirements had captured what they said rather than what they needed. The cost of discovering this so late was enormous.",
+      "The people who developed agile methods noticed that software, unlike most physical products, can be changed relatively cheaply if it is built with change in mind, and that working software shown to real users is the most reliable way to discover what they actually need. Their methods therefore aimed to deliver working pieces of the product early and often, learn from each one, and let the plan follow the learning."
+     ]
+    },
+    {
+     "id": "t7-s2",
+     "title": "The manifesto",
+     "blocks": [
+      "The *Manifesto for Agile Software Development*, written in 2001, states four values. Its authors valued:",
+      {
+       "ul": [
+        "**Individuals and interactions** over processes and tools.",
+        "**Working software** over comprehensive documentation.",
+        "**Customer collaboration** over contract negotiation.",
+        "**Responding to change** over following a plan."
+       ]
+      },
+      "The manifesto adds an important sentence that is often forgotten: while there is value in the items on the right, the items on the left are valued more. Agile does not reject process, documentation, contracts or plans. It puts them in service of the things on the left. A team that refuses to write any documentation, or refuses to plan, has misread the manifesto.",
+      "Twelve principles follow the values. In summary, they call for satisfying the customer through early and continuous delivery; welcoming changing requirements, even late; delivering working software frequently, preferring shorter timescales; business people and developers working together daily; building projects around motivated individuals and trusting them; face-to-face conversation as the most effective way to share information; working software as the primary measure of progress; a sustainable pace; continuous attention to technical excellence and good design; simplicity, described as maximising the amount of work not done; self-organising teams; and regular reflection on how to become more effective.",
+      "Several of these deserve emphasis because they are often neglected. **Sustainable pace** rejects the idea that heroic overtime is a sign of commitment; tired teams make mistakes that cost more than the hours gained. **Technical excellence** is what keeps the cost of change low; teams that skip it slow down as their product becomes harder to change. And **simplicity**, in the sense of not building what is not needed, is one of the most powerful ways to deliver sooner."
+     ]
+    },
+    {
+     "id": "t7-s3",
+     "title": "The agile mindset",
+     "blocks": [
+      "Practitioners often distinguish *doing* agile, following the practices, from *being* agile, holding the mindset the practices are meant to express. The mindset includes a few core beliefs.",
+      {
+       "ul": [
+        "**Value comes from outcomes, not output.** The aim is to solve the customer's problem, not to complete a list of features.",
+        "**Learning is the main activity early on.** When uncertainty is high, the fastest way to reduce it is to build something small and see what happens.",
+        "**Small batches are safer than large ones.** Small pieces of work are easier to estimate, finish, test, review and change.",
+        "**The people closest to the work know most about how to do it.** Teams should decide how to meet their goals, within clear constraints.",
+        "**Transparency enables good decisions.** Making the work, its status and its problems visible lets everyone respond to reality.",
+        "**Improvement is continuous.** The process itself is something the team inspects and adapts."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "t7-s4",
+     "title": "Scrum",
+     "blocks": [
+      "**Scrum** is the most widely used agile framework. It is deliberately light: a few roles, events and artefacts around which a team builds its own practices.",
+      "The **roles**, called accountabilities in the current guide, are three. The **product owner** is accountable for maximising the value of the product: they own the product backlog, decide its order, and make sure everyone understands what is most important. The **Scrum Master** is accountable for the team's effectiveness: they coach the team and the organisation in Scrum, remove impediments, and help the team improve. The **developers** are the people who do the work of creating each increment; in Scrum, \"developers\" means everyone on the team doing the work, whatever their specialism.",
+      "Work happens in **sprints**, fixed periods of one month or less, often two weeks. Each sprint contains four events.",
+      {
+       "ul": [
+        "**Sprint planning**: the team decides what it can deliver in the sprint, agrees a sprint goal, and plans how to do the work.",
+        "**Daily scrum**: a short daily meeting where the developers inspect progress toward the sprint goal and adjust their plan for the next day.",
+        "**Sprint review**: at the end of the sprint, the team shows what it has built to stakeholders, gathers feedback, and discusses what to do next.",
+        "**Sprint retrospective**: the team reflects on how it worked and chooses improvements for the next sprint."
+       ]
+      },
+      {
+       "fig": {
+        "title": "One Scrum sprint",
+        "caption": "Planning sets a sprint goal, the team works with a daily scrum, the review shows the increment and feeds the backlog, and the retrospective improves how the next sprint runs.",
+        "alt": "Product backlog, then Sprint planning, then the Sprint of one to four weeks with a daily scrum, then Sprint review, then the Increment. A dashed line from the review returns to the product backlog: feedback reorders it. Below, the Sprint retrospective feeds back into the next sprint planning.",
+        "w": 640,
+        "h": 240,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 10,
+          "y": 72,
+          "w": 105,
+          "h": 56,
+          "tone": "accent",
+          "s": 12,
+          "t": "Product\nbacklog"
+         },
+         {
+          "k": "line",
+          "p": [
+           116,
+           100,
+           136,
+           100
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 138,
+          "y": 72,
+          "w": 105,
+          "h": 56,
+          "tone": "good",
+          "s": 12,
+          "t": "Sprint\nplanning"
+         },
+         {
+          "k": "line",
+          "p": [
+           244,
+           100,
+           264,
+           100
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 266,
+          "y": 52,
+          "w": 150,
+          "h": 96,
+          "tone": "good",
+          "s": 12,
+          "t": "Sprint\n1–4 weeks\ndaily scrum"
+         },
+         {
+          "k": "line",
+          "p": [
+           417,
+           100,
+           437,
+           100
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 439,
+          "y": 72,
+          "w": 100,
+          "h": 56,
+          "tone": "good",
+          "s": 12,
+          "t": "Sprint\nreview"
+         },
+         {
+          "k": "line",
+          "p": [
+           540,
+           100,
+           560,
+           100
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 562,
+          "y": 72,
+          "w": 70,
+          "h": 56,
+          "tone": "accent",
+          "s": 11,
+          "t": "Increment"
+         },
+         {
+          "k": "line",
+          "p": [
+           489,
+           71,
+           489,
+           30,
+           62,
+           30,
+           62,
+           70
+          ],
+          "arrow": true,
+          "dash": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 276,
+          "y": 20,
+          "t": "feedback reorders the backlog",
+          "a": "middle",
+          "s": 11,
+          "tone": "muted"
+         },
+         {
+          "k": "box",
+          "x": 400,
+          "y": 178,
+          "w": 140,
+          "h": 44,
+          "tone": "warn",
+          "s": 12,
+          "t": "Sprint\nretrospective"
+         },
+         {
+          "k": "line",
+          "p": [
+           470,
+           129,
+           470,
+           176
+          ],
+          "dash": true,
+          "tone": "muted"
+         },
+         {
+          "k": "line",
+          "p": [
+           399,
+           200,
+           190,
+           200,
+           190,
+           130
+          ],
+          "arrow": true,
+          "dash": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 296,
+          "y": 214,
+          "t": "improvements for the next sprint",
+          "a": "middle",
+          "s": 11,
+          "tone": "muted"
+         }
+        ]
+       }
+      },
+      "Three **artefacts** make the work transparent. The **product backlog** is the ordered list of everything that might be needed in the product. The **sprint backlog** is the set of items chosen for the sprint plus the plan for delivering them. The **increment** is the usable product produced, which must meet the team's **definition of done**, a shared statement of the quality standard every piece of work must reach before it counts as finished.",
+      "Scrum is built on three pillars: **transparency**, so that everyone sees the true state of the work; **inspection**, so that problems are noticed; and **adaptation**, so that the team changes course when inspection shows it should. Each event is an opportunity for all three."
+     ]
+    },
+    {
+     "id": "t7-s5",
+     "title": "Kanban",
+     "blocks": [
+      "**Kanban** comes from lean manufacturing, where a kanban (Japanese for \"signboard\" or \"card\") signals that a process needs more input. In knowledge work, the Kanban method focuses on managing the flow of work rather than organising it into fixed iterations.",
+      "Its core practices are simple. **Visualise the work** on a board with columns for each stage, so everyone can see what is being worked on and where it is stuck. **Limit work in progress**, by setting a maximum number of items allowed in each stage. **Manage flow**, by measuring how long items take to move through the system and working to make that time shorter and more predictable. **Make policies explicit**, so everyone understands how work moves. And **improve collaboratively**, using measurement and experiment.",
+      {
+       "fig": {
+        "title": "A Kanban board",
+        "caption": "Each column is a stage; the limits cap how much work can sit in each one, so the team finishes work before starting more.",
+        "alt": "A board of four columns: To do with four cards, In progress with a limit of three and three cards, Review with a limit of two and two cards, and Done with three cards. Work moves right only when the next column has room.",
+        "w": 640,
+        "h": 230,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 20,
+          "y": 14,
+          "w": 140,
+          "h": 34,
+          "tone": "muted",
+          "s": 11,
+          "t": "To do",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 32,
+          "y": 60,
+          "w": 116,
+          "h": 26,
+          "tone": "ink",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 32,
+          "y": 96,
+          "w": 116,
+          "h": 26,
+          "tone": "ink",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 32,
+          "y": 132,
+          "w": 116,
+          "h": 26,
+          "tone": "ink",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 32,
+          "y": 168,
+          "w": 116,
+          "h": 26,
+          "tone": "ink",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 173,
+          "y": 14,
+          "w": 140,
+          "h": 34,
+          "tone": "accent",
+          "s": 11,
+          "t": "In progress (limit 3)",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 185,
+          "y": 60,
+          "w": 116,
+          "h": 26,
+          "tone": "ink",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 185,
+          "y": 96,
+          "w": 116,
+          "h": 26,
+          "tone": "ink",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 185,
+          "y": 132,
+          "w": 116,
+          "h": 26,
+          "tone": "ink",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 326,
+          "y": 14,
+          "w": 140,
+          "h": 34,
+          "tone": "accent",
+          "s": 11,
+          "t": "Review (limit 2)",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 338,
+          "y": 60,
+          "w": 116,
+          "h": 26,
+          "tone": "ink",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 338,
+          "y": 96,
+          "w": 116,
+          "h": 26,
+          "tone": "ink",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 479,
+          "y": 14,
+          "w": 140,
+          "h": 34,
+          "tone": "muted",
+          "s": 11,
+          "t": "Done",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 491,
+          "y": 60,
+          "w": 116,
+          "h": 26,
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 491,
+          "y": 96,
+          "w": 116,
+          "h": 26,
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 491,
+          "y": 132,
+          "w": 116,
+          "h": 26,
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "text",
+          "x": 320,
+          "y": 214,
+          "t": "Work moves right only when the next column has room",
+          "a": "middle",
+          "s": 11,
+          "tone": "muted"
+         }
+        ]
+       }
+      },
+      "The work-in-progress limit is the heart of Kanban and the practice teams most often resist. It seems counter-intuitive: surely starting more work gets more done? The opposite is usually true. When people juggle many tasks, each one waits more, switching between them wastes time, and problems are hidden among the half-finished work. Limiting work in progress forces the team to finish things before starting new ones, which shortens the time each item takes and exposes bottlenecks. The relationship is captured by **Little's law**, from queueing theory: average lead time equals average work in progress divided by average throughput. With the same throughput, less work in progress means shorter lead times.",
+      "Kanban suits work that arrives continuously and unpredictably, such as support, maintenance and operations, and teams that find fixed sprints artificial. Many teams combine it with Scrum, using sprints for planning and review and a Kanban board with work-in-progress limits for the flow within the sprint."
+     ]
+    },
+    {
+     "id": "t7-s6",
+     "title": "Lean thinking",
+     "blocks": [
+      "**Lean** comes from the Toyota Production System and was popularised in the West in the 1990s. Its core idea is to maximise value for the customer while minimising waste. Five principles are often used to summarise it: identify **value** from the customer's point of view; map the **value stream**, all the steps that deliver it; create **flow**, so that work moves through the steps without interruption; establish **pull**, so that work is started only when there is demand for it; and pursue **perfection** through continuous improvement.",
+      "Lean identifies several kinds of waste. In manufacturing the classic list includes overproduction, waiting, transport, over-processing, inventory, motion and defects. Mary and Tom Poppendieck translated these for software development: partially done work, extra features, relearning, hand-offs, task switching, delays and defects. Each of these consumes effort without adding value, and many projects are full of them. Work sitting half-finished, features nobody uses, knowledge lost between teams and approvals that take weeks are all lean waste.",
+      "Two other lean ideas recur in project work. **Kaizen** is continuous improvement through many small changes, made by the people doing the work. **Respect for people** is often forgotten in Western accounts of lean, but in Toyota's original formulation it is one of the two pillars: lean works because it engages the knowledge and judgement of the people who do the work, not because it treats them as interchangeable parts."
+     ]
+    },
+    {
+     "id": "t7-s7",
+     "title": "Other practices and frameworks",
+     "blocks": [
+      "Many other practices sit under the agile umbrella.",
+      {
+       "ul": [
+        "**Extreme Programming**, XP, is a set of engineering practices including pair programming, test-driven development, continuous integration, refactoring and small releases. Its practices are what make low cost of change possible in software.",
+        "**User stories** describe a piece of functionality from the user's point of view, often in the form \"as a [type of user], I want [something] so that [benefit]\". They are deliberately brief, intended as a placeholder for a conversation rather than a complete specification.",
+        "**Relative estimation** with **story points** estimates the size of work compared with other work rather than in hours. Teams then measure their **velocity**, the amount of work completed per sprint, to forecast how much they can do.",
+        "**Timeboxing** fixes the time for an activity and lets the scope flex, which creates focus and forces prioritisation.",
+        "**Information radiators**, such as boards and burn charts displayed where everyone can see them, make the state of the work visible without anyone needing to ask."
+       ]
+      },
+      "When many teams work on one product, organisations use scaling frameworks such as SAFe, LeSS, Nexus or Scrum of Scrums. These add structures for coordinating teams, aligning their goals and integrating their work. Scaling is difficult, and the lighter frameworks argue that the best way to scale agility is to reduce dependencies between teams rather than add coordination on top of them.",
+      {
+       "box": "example",
+       "text": "Northfield's booking team worked in two-week sprints with a product owner from the outpatients department, Hassan, who had spent years running a clinic reception. In early sprints, the team built a rough booking screen for a single clinic and put it in front of patients in the waiting room. They learned in the first week that many older patients wanted to book on behalf of a spouse, something no one had written down. Hassan moved that need to the top of the backlog. A predictive plan would have discovered it during acceptance testing, months later."
+      }
+     ]
+    },
+    {
+     "id": "t7-s8",
+     "title": "Common ways agile goes wrong",
+     "blocks": [
+      "Agile methods are easy to adopt badly. A few failure patterns recur.",
+      {
+       "ul": [
+        "**Cargo cult ceremonies.** The team holds stand-ups and retrospectives, but nothing changes as a result. The ceremonies have become rituals.",
+        "**Mini-waterfalls.** Each sprint contains its own design, build and test phases, with testing squeezed in at the end and work never really finished.",
+        "**Absent product owners.** Nobody with authority is available to make decisions about priorities, so the team guesses.",
+        "**Velocity as a target.** Management uses velocity to compare teams or demands it rise each sprint, so teams inflate their estimates and the measure becomes meaningless.",
+        "**No technical excellence.** The team delivers quickly at first but accumulates technical debt until every change becomes slow and risky.",
+        "**Agile in name only.** The scope, date and cost are all fixed up front, but the team is told to \"be agile\" within them."
+       ]
+      },
+      "Each of these is a failure to understand why the practices exist. Retrospectives exist to drive change; if nothing changes, they are failing. Velocity exists to help the team plan; once it becomes a target, it stops being a reliable measure, an instance of what economists call Goodhart's law.",
+      {
+       "box": "exam",
+       "text": "Roughly half of the exam is about agile and hybrid work, so expect many questions on these ideas. Typical themes: the product owner owns and orders the backlog; the team decides how to do the work; the Scrum Master serves and coaches rather than directs; work-in-progress limits improve flow; the definition of done protects quality; retrospectives drive improvement; and a servant leader removes impediments rather than assigning tasks. When a question describes a team struggling, look for the answer that helps the team solve the problem itself."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Agile methods deliver small working pieces early and often, so that the plan follows what is learned.",
+    "The manifesto values individuals, working products, collaboration and responding to change more than processes, documentation, contracts and plans, while still valuing those.",
+    "Scrum provides roles, events and artefacts around transparency, inspection and adaptation, in fixed sprints.",
+    "Kanban manages flow by visualising work and limiting work in progress; less work in progress means shorter lead times.",
+    "Lean seeks value for the customer and removes waste, through flow, pull and continuous improvement, with respect for people.",
+    "Practices without the underlying thinking produce ceremony without benefit."
+   ],
+   "reading": [
+    "Ken Schwaber and Jeff Sutherland, *The Scrum Guide*, at scrumguides.org. Short and definitive; read it before reading about it.",
+    "David J. Anderson, *Kanban: Successful Evolutionary Change for Your Technology Business* (2010).",
+    "Mary and Tom Poppendieck, *Lean Software Development: An Agile Toolkit* (2003).",
+    "Kent Beck, *Extreme Programming Explained* (second edition, 2004).",
+    "Mike Cohn, *Agile Estimating and Planning* (2005). Story points, velocity and release planning explained well."
+   ],
+   "words": 2238,
+   "minutes": 10,
+   "n": 7
+  },
+  {
+   "id": "t8",
+   "part": 2,
+   "title": "Choosing and tailoring an approach",
+   "summary": "How to fit the way of working to the project: choosing a development approach, deliberately designing hybrids, and adjusting processes up or down.",
+   "why": "No method fits every project. A process that keeps a nuclear plant safe would strangle a two-week marketing campaign, and the informality that suits a three-person start-up would be negligent on a national railway. Tailoring is the skill of deciding how much process, of what kind, a piece of work needs. Done well, it is invisible: the project simply has what it needs. Done badly, in either direction, it is one of the commonest causes of failure.",
+   "sections": [
+    {
+     "id": "t8-s1",
+     "title": "What tailoring means",
+     "blocks": [
+      "**Tailoring** is the deliberate adaptation of the approach, governance and processes to suit the project and its environment. It covers choices such as which life cycle to use, which processes to apply and how formally, which documents to produce and in how much detail, how often to report and to whom, how decisions are made and how change is controlled.",
+      "Two misunderstandings are common. The first treats tailoring as a way to drop inconvenient steps: \"we're agile, so we don't need a risk register\". The second treats a standard method as complete and untouchable: \"the methodology requires this document, so we write it, even though nobody reads it\". Both miss the point. Tailoring starts from the purpose each practice serves and asks how best to achieve that purpose here. Sometimes the answer is a formal process; sometimes a conversation; sometimes nothing at all, because the risk the practice protects against is absent.",
+      "Tailoring happens at several levels. Organisations tailor general standards into their own methods. Projects tailor the organisation's method to their own needs. And teams tailor continually as they learn what works, which in adaptive approaches is formalised in the retrospective."
+     ]
+    },
+    {
+     "id": "t8-s2",
+     "title": "Why one size does not fit all",
+     "blocks": [
+      "Projects differ along many dimensions, and each dimension changes what a sensible approach looks like.",
+      {
+       "ul": [
+        "**Size and duration.** Larger and longer projects need more coordination, more formal communication and more explicit governance.",
+        "**Complexity.** Many interdependent parts, many organisations or many stakeholders require more integration effort.",
+        "**Uncertainty.** Unclear requirements or untried technology favour shorter feedback loops and less upfront detail.",
+        "**Criticality and risk.** Safety, security or financial exposure justify more rigour, more review and more documentation.",
+        "**Regulation.** Regulated industries may require specific documents, approvals and audit trails, whatever the team would prefer.",
+        "**Contracts.** Fixed-price contracts with external suppliers need clearer scope definitions than internal work.",
+        "**Team.** Experienced, co-located, stable teams need less formal coordination than new, distributed or rotating ones.",
+        "**Culture.** An organisation that values predictability and control will resist approaches that ask it to accept flexible scope, and that resistance is itself a factor to plan for."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "t8-s3",
+     "title": "Choosing a development approach",
+     "blocks": [
+      "Chapter 6 described the predictive, iterative, incremental and adaptive approaches. Choosing between them starts with the nature of the product and the uncertainty around it.",
+      "A useful way to think about it is to assess the work on two kinds of uncertainty: how well the requirements are known and agreed, and how well understood the technology or method for building it is. Ralph Stacey's work on complexity is often adapted into a matrix of this kind. Work with known requirements and known technology is relatively simple and suits predictive planning. Work where both are uncertain is complex and suits adaptive approaches. Work that is unclear on both to an extreme degree may be chaotic, needing immediate action to create some stability before any approach can work.",
+      {
+       "fig": {
+        "title": "Two kinds of uncertainty",
+        "caption": "The less agreed the requirements and the less known the technology, the more the work calls for short feedback loops. Adapted from Ralph Stacey's agreement and certainty matrix.",
+        "alt": "A chart with technology from known to unknown along the bottom and requirements from agreed to unclear up the side. Nested regions from the bottom left corner: Simple, suited to predictive; Complicated, predictive or hybrid; Complex, adaptive; and Chaotic at the far corner, act first then stabilise.",
+        "w": 640,
+        "h": 290,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 90,
+          "y": 20,
+          "w": 530,
+          "h": 232,
+          "tone": "bad",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 90,
+          "y": 84,
+          "w": 410,
+          "h": 168,
+          "tone": "warn",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 90,
+          "y": 148,
+          "w": 270,
+          "h": 104,
+          "tone": "accent",
+          "s": 12
+         },
+         {
+          "k": "box",
+          "x": 90,
+          "y": 200,
+          "w": 130,
+          "h": 52,
+          "tone": "good",
+          "s": 12
+         },
+         {
+          "k": "text",
+          "x": 155,
+          "y": 226,
+          "t": "Simple\npredictive",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 290,
+          "y": 174,
+          "t": "Complicated\npredictive or hybrid",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 430,
+          "y": 116,
+          "t": "Complex\nadaptive",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 560,
+          "y": 52,
+          "t": "Chaotic\nact, then stabilise",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "text",
+          "x": 355,
+          "y": 276,
+          "t": "Technology: known  →  unknown",
+          "a": "middle",
+          "s": 11,
+          "b": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 45,
+          "y": 136,
+          "t": "Require-\nments:\nunclear\n↑\nagreed",
+          "a": "middle",
+          "s": 10,
+          "b": true,
+          "tone": "muted"
+         }
+        ]
+       }
+      },
+      "Several other questions sharpen the choice.",
+      {
+       "ul": [
+        "**Can it be delivered in pieces?** If not, adaptive delivery is limited; iteration through prototypes may still help.",
+        "**How expensive is late change?** If very expensive and unavoidable, invest in getting decisions right early.",
+        "**Is frequent feedback available?** Adaptive approaches depend on it. Without engaged users or a product owner with authority, they degrade.",
+        "**What must be fixed?** If scope must be fixed (for a contract or regulation), predictive planning of that scope is often needed. If time and budget are fixed and scope can flex, adaptive approaches fit naturally.",
+        "**What can the organisation support?** An adaptive team inside an organisation that demands detailed upfront plans, fixed-scope business cases and monthly Gantt chart updates will spend much of its energy translating between worlds."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "t8-s4",
+     "title": "Hybrid approaches",
+     "blocks": [
+      "A **hybrid** approach combines elements of different approaches. Hybrids are not a compromise for people who cannot decide; they are a recognition that different parts of the work, or different stages of the project, have different characteristics.",
+      "Common hybrid patterns include the following.",
+      {
+       "ul": [
+        "**Different approaches for different components.** Hardware is designed predictively because its tooling has long lead times; the software running on it is built adaptively.",
+        "**Adaptive start, predictive finish.** Early phases use prototypes and short iterations to clarify uncertain requirements; once stable, the remainder is planned and executed predictively.",
+        "**Predictive start, adaptive finish.** The architecture, infrastructure and contracts are planned predictively; the features are then built adaptively on that foundation.",
+        "**Adaptive delivery inside predictive governance.** Teams work in sprints, but the organisation funds, monitors and approves the project through phases and gates.",
+        "**Predictive plan with adaptive practices.** A largely planned project borrows practices such as daily stand-ups, visual boards and retrospectives because they help, without changing its overall approach."
+       ]
+      },
+      "Hybrids need care at the seams. Where a predictive component hands over to an adaptive one, someone must manage the interface: the predictive side needs firm enough requirements from the adaptive side to plan, and the adaptive side needs to know which of its decisions the predictive side has already locked in. Most trouble in hybrid projects arises at these boundaries.",
+      {
+       "box": "example",
+       "text": "Northfield's booking project was a deliberate hybrid. Governance used three gates: approval of the business case, approval to roll out after a pilot clinic, and closure. The records system integration followed a predictive plan tied to the vendor's release dates. The booking screens were built in two-week sprints. The rollout to forty clinics was incremental, five clinics at a time. Amira, the project manager, spent much of her effort at the seams: making sure the sprint team knew which data the vendor could deliver by which date, and translating sprint progress into the milestone reports the trust board expected."
+      }
+     ]
+    },
+    {
+     "id": "t8-s5",
+     "title": "Tailoring the processes",
+     "blocks": [
+      "Beyond choosing an approach, tailoring adjusts the processes and practices themselves. A useful sequence is:",
+      {
+       "ol": [
+        "**Start from the organisation's method**, if it has one, or from a standard. These capture experience and meet the organisation's own requirements.",
+        "**Understand the project**: its size, uncertainty, risks, regulation, stakeholders and team, as described above.",
+        "**For each practice, ask what it is for** and whether that purpose matters here. A detailed communications plan serves a project with many stakeholder groups; a five-person internal project may need a single shared calendar.",
+        "**Decide how to achieve each purpose that matters**, at the level of formality the project needs.",
+        "**Agree the tailoring** with the people who must accept it, such as the sponsor, the project management office and, where relevant, auditors or regulators.",
+        "**Review and adjust** as the project learns. Tailoring is not a decision made once at the start."
+       ]
+      },
+      "Some things are rarely worth tailoring away entirely, even on small projects: a clear statement of purpose and success criteria, someone accountable for decisions, a way of noticing and responding to risks, a way to control changes to what was agreed, and a way of confirming the result is acceptable. The form of each can be very light, but projects that lack them altogether tend to discover why they matter."
+     ]
+    },
+    {
+     "id": "t8-s6",
+     "title": "Signs of under- and over-tailoring",
+     "blocks": [
+      "Under-tailored projects, with too little process, show recognisable symptoms: decisions nobody remembers making, surprises that someone saw coming but did not raise, scope that has drifted without anyone agreeing it, stakeholders who feel ignored, and arguments at the end about what was promised.",
+      "Over-tailored projects, with too much process, show different symptoms: documents produced for the sake of a checklist, approvals that take longer than the work they approve, status reports nobody reads, teams spending more time describing work than doing it, and people quietly working around the official process to get things done.",
+      "A useful test for any practice is to ask what would go wrong if it stopped. If nobody can say, or if the answer is \"the auditors would complain\" for a practice auditors do not actually require, it is a candidate for removal. If the answer is a real risk, keep the practice and find the lightest way to do it.",
+      {
+       "box": "myth",
+       "text": "\"Agile projects don't need tailoring because agile is already lightweight.\" Agile frameworks are deliberately incomplete; they expect teams to add the practices they need. A team building medical software in Scrum will still need formal risk analysis, traceability and validation, because the regulator requires them and the patients deserve them."
+      }
+     ]
+    },
+    {
+     "id": "t8-s7",
+     "title": "The project manager's role in tailoring",
+     "blocks": [
+      "Tailoring is a responsibility, not a preference. The project manager should be able to explain the approach chosen for each part of the work and why, which practices have been made lighter or heavier than the organisation's default and why, and how the approach will be reviewed. That explanation is what turns tailoring from a matter of taste into a professional judgement that others can examine and trust.",
+      "Often the most valuable tailoring conversation is with the sponsor and governance bodies, because their expectations shape everything else. Agreeing early how progress will be reported, which decisions need their involvement, and what they can expect to be fixed or flexible avoids the common trap of a team working one way while being judged by the standards of another.",
+      {
+       "box": "exam",
+       "text": "The exam treats tailoring as an expected part of the project manager's job. Questions may describe a team mechanically following a process that does not fit, or abandoning one that does. The right answer usually involves understanding the purpose of the practice and adapting it, consulting the team and relevant stakeholders, and making sure regulatory or contractual requirements are still met. Hybrid scenarios often hinge on managing the interface between predictive and adaptive parts."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Tailoring adapts the approach, governance and processes to the project, starting from what each practice is for.",
+    "The main factors are size, complexity, uncertainty, criticality, regulation, contracts, the team and the culture.",
+    "Requirements uncertainty and technical uncertainty together suggest where a piece of work sits between predictive and adaptive.",
+    "Hybrids fit different approaches to different parts of the work; their risk lies at the seams.",
+    "Some essentials survive any tailoring: purpose, accountability, risk awareness, change control and acceptance.",
+    "Under-tailoring produces surprises and drift; over-tailoring produces ceremony and workarounds."
+   ],
+   "reading": [
+    "Project Management Institute, *The Standard for Project Management* (seventh edition), section on tailoring. A structured approach to tailoring decisions.",
+    "Scott Ambler and Mark Lines, *Choose Your WoW!* (2019). Disciplined Agile's argument that teams should choose their way of working from many options.",
+    "Ralph D. Stacey, *Strategic Management and Organisational Dynamics* (many editions). The source of the agreement and certainty matrix.",
+    "Alistair Cockburn, *Agile Software Development: The Cooperative Game* (2006). On fitting methodology weight to project size and criticality."
+   ],
+   "words": 1778,
+   "minutes": 8,
+   "n": 8
   }
  ]
 });
@@ -50654,7 +51625,7 @@ PMP.Search = (function () {
     /* Theory (§10.37): one hit per section that matches. */
     ((PMP.THEORY && PMP.THEORY.chapters) || []).forEach(function (c) {
       c.sections.forEach(function (sec) {
-        var body = sec.blocks.map(function (b) { return typeof b === "string" ? b : b.text || (b.ul || []).join(" "); }).join(" ").replace(/\*\*?/g, "");
+        var body = sec.blocks.map(function (b) { return typeof b === "string" ? b : b.text || b.h || (b.ul || b.ol || []).join(" "); }).join(" ").replace(/\*\*?/g, "");
         if (matches(c.title + " " + sec.title, body)) out.push({ kind: "Theory", title: c.title + ": " + sec.title,
           snippet: snip(body), href: "#/theory?ch=" + encodeURIComponent(c.id) + "&sec=" + encodeURIComponent(sec.id) });
       });
@@ -53624,6 +54595,8 @@ PMP.Theory = (function () {
   function block(b, x) {
     if (typeof b === "string") return el("p", null, rich(b, x));
     if (b.ul) return el("ul", { class: "th-ul" }, b.ul.map(function (i) { return el("li", null, rich(i, x)); }));
+    if (b.ol) return el("ol", { class: "th-ul th-ol" }, b.ol.map(function (i) { return el("li", null, rich(i, x)); }));
+    if (b.h) return el("h4", { class: "th-h4", text: b.h });
     if (b.box) return el("aside", { class: "th-box th-box--" + b.box }, [el("span", { class: "eyebrow", text: BOX[b.box] || b.box }), el("p", null, rich(b.text, x))]);
     if (b.fig) return PMP.Figure.render(b.fig);
     return null;
@@ -53633,7 +54606,7 @@ PMP.Theory = (function () {
     var out = [c.summary, c.why];
     c.sections.forEach(function (s) {
       out.push(s.title);
-      s.blocks.forEach(function (b) { out.push(typeof b === "string" ? b : b.text || (b.ul || []).join(" ")); });
+      s.blocks.forEach(function (b) { out.push(typeof b === "string" ? b : b.text || b.h || (b.ul || b.ol || []).join(" ")); });
     });
     return out.concat(c.keyIdeas, c.reading);
   }

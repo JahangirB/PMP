@@ -5,7 +5,7 @@
 //
 // A chapter file starts with "key: value" lines (id, part, title, summary,
 // why), then "## " sections. In a section, a blank line separates blocks:
-// a paragraph, a list ("- " lines), a box ("> exam: ", "> myth: ",
+// a paragraph, a list ("- " or "1. " lines), a "### " sub-heading, a box ("> exam: ", "> myth: ",
 // "> example: ") or a figure ("[figure: name]", from figures.json). The
 // sections "Key ideas" and "Further reading" become the chapter's summary
 // lists. **bold** and *italic* are kept as written; the app renders them.
@@ -39,7 +39,14 @@ function chapter(file) {
     const title = lines[0].replace(/^## /, "").trim();
     const blocks = [];
     lines.slice(1).join("\n").split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean).forEach((b) => {
-      if (/^- /.test(b)) {
+      if (/^### /.test(b)) {
+        const [h, ...body] = b.split("\n");
+        blocks.push({ h: h.slice(4).trim() });
+        if (body.length) blocks.push(body.join(" ").trim());
+      } else if (/^1\. /.test(b)) {
+        const items = b.split("\n").map((l) => l.replace(/^\d+\. /, "").trim());
+        blocks.push({ ol: items });
+      } else if (/^- /.test(b)) {
         const items = b.split("\n").map((l) => l.replace(/^- /, "").trim());
         if (items.some((i) => !i)) fail(file, `empty list item in "${title}"`);
         blocks.push({ ul: items });
@@ -56,7 +63,7 @@ function chapter(file) {
       }
     });
     blocks.forEach((b) => {
-      const t = typeof b === "string" ? b : b.text || (b.ul || []).join(" ");
+      const t = typeof b === "string" ? b : b.text || b.h || (b.ul || b.ol || []).join(" ");
       words += t.split(/\s+/).length;
     });
     if (title === "Key ideas") { out.keyIdeas = blocks.flatMap((b) => b.ul || []); return; }
