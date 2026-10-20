@@ -1,0 +1,92 @@
+id: t17
+part: 3
+title: Measuring progress and value
+summary: What to measure on a project and why, leading and lagging indicators, the measures adaptive teams use, honest reporting, and the ways measurement goes wrong.
+why: You cannot steer what you cannot see. Measurement turns a project's progress, problems and value into information that people can act on. But measurement is also easy to get wrong: measure the wrong things and people optimise them at the expense of what matters; report optimistically and decisions are made on fiction. Good measurement is less about clever metrics than about honesty and purpose.
+
+## Why measure
+Measurement on a project serves a few purposes. It tells the team whether work is going as expected, so it can adjust. It tells the sponsor and governance whether the project is on track to deliver its objectives, so they can decide. It provides early warning of problems while they are still cheap to fix. It supports forecasting: when will we finish, what will it cost, what will we deliver? And, ultimately, it shows whether the project created the value it was meant to.
+
+A useful test for any measure is to ask what decision it informs. A number that nobody uses to decide anything is a cost without a benefit, however interesting it is.
+
+## What to measure
+Projects typically measure several kinds of thing.
+
+- **Delivery**: progress against the schedule, work completed, milestones reached, scope delivered.
+- **Cost**: spending against budget, cost efficiency, forecast final cost.
+- **Quality**: defects found and their severity, test results, rework, customer-reported problems.
+- **Risk**: the number and severity of open risks, reserves remaining, trends.
+- **Resources**: availability, utilisation, turnover.
+- **Stakeholders**: satisfaction, engagement, adoption.
+- **Value and benefits**: the outcomes the project exists for, such as usage, savings, satisfaction or revenue.
+
+The last category is the one projects most often neglect, because benefits usually appear after delivery. Yet it is the only one that says whether the project was worth doing. Even during delivery, early indicators of value can be tracked: in an adaptive project, how users actually use each increment; in a predictive one, whether pilot results support the business case.
+
+## Leading and lagging indicators
+A **lagging indicator** measures results after the fact: final cost, delivery date, benefits realised. It is definitive but arrives too late to change. A **leading indicator** measures something that predicts future results: the trend in cost performance, the rate at which defects are being found and fixed, the number of open risks, the stability of requirements, team morale. Leading indicators are less certain but allow action.
+
+Good measurement combines both. A dashboard that shows only lagging indicators reports history; one that shows only leading indicators can drift away from the results that matter. The art is choosing a few leading indicators that genuinely predict the lagging outcomes for this kind of project.
+
+## Baselines, variances and thresholds
+In predictive projects, performance is measured against **baselines**: the approved scope, schedule and cost. **Variance analysis** compares actual performance with the baseline and asks why any difference arose. Earned value (Chapter 12) is the most rigorous form of this for cost and schedule.
+
+Not every variance needs attention. **Thresholds** define how much variance is acceptable before action or escalation is required: for example, a schedule variance of more than ten per cent on a critical milestone, or a cost performance index below 0.95. Thresholds keep management attention on what matters and give the project manager clear authority to handle smaller variations.
+
+## Measures in adaptive projects
+Adaptive teams use a different set of measures, focused on flow and delivered value.
+
+- **Velocity**: the amount of work, usually in story points, a team completes per iteration. It is a planning tool for the team itself. It cannot be compared between teams, because each team sizes work differently.
+- **Burndown charts**: work remaining in an iteration or release, plotted over time.
+- **Burnup charts**: work completed and total scope, plotted over time. Because they show scope changes separately, they are often more informative than burndowns.
+- **Cycle time**: how long an item takes from when work starts on it to when it is finished.
+- **Lead time**: how long an item takes from when it is requested to when it is delivered. This is what the customer experiences.
+- **Throughput**: how many items are finished per period.
+- **Cumulative flow diagrams**: the number of items in each stage of the workflow over time. Widening bands reveal bottlenecks and growing work in progress.
+- **Escaped defects**: problems found after delivery, a measure of whether quality is really being built in.
+
+[figure: t17-burnup]
+
+These measures are mostly about the system of work rather than individuals, which is deliberate. Kanban practitioners, in particular, use cycle time and throughput data to forecast delivery as probabilities: "eighty-five per cent of items of this kind finish within nine days", or "there is an eighty per cent chance of completing these thirty items by the end of next month". Such forecasts are often more honest and more reliable than estimates.
+
+## Reporting
+Measurement is only useful if it reaches the people who need it, in a form they can use. Reporting typically includes **status reports** (where we are now), **progress reports** (what has been done since last time), and **forecasts** (where we are heading). Good reports are short, focused on what has changed and what needs a decision, and honest about problems.
+
+Many organisations use **traffic-light ratings**: red, amber or green for each dimension. They are quick to read but easily abused. A common failure is the "watermelon project": green on the outside, red on the inside. Every report says all is well until, suddenly, everything is late. This happens when bad news is unwelcome, when ratings are subjective, or when the person reporting is judged on the colour rather than on the accuracy. The remedy is cultural as much as technical: leaders who respond well to bad news, ratings tied to objective thresholds, and reports that show trends rather than single colours.
+
+Adaptive teams favour **information radiators**: big, visible displays such as boards and charts, kept where everyone can see them, updated as the work happens. They make the state of the work visible without anyone having to ask or write a report, and they are harder to dress up than a slide.
+
+## When measurement goes wrong
+Several well-known problems affect project measurement.
+
+- **Goodhart's law**: when a measure becomes a target, it ceases to be a good measure. If teams are rewarded for velocity, story points inflate. If testers are rewarded for defects found, trivial defects multiply. If projects are judged on milestone dates, milestones are redefined.
+- **Vanity metrics**: numbers that look impressive but do not inform decisions, such as total hours worked or number of documents produced.
+- **Measuring activity instead of outcomes**: reporting tasks completed rather than value delivered. A project can complete ninety per cent of its tasks and deliver nothing usable.
+- **Percentage complete by opinion**: asking people how complete their work is produces numbers that rise quickly to about ninety per cent and stay there. Objective rules, such as counting only finished items, avoid this.
+- **Too many measures**: dashboards with dozens of indicators that nobody can absorb. A handful of well-chosen measures is better than many.
+
+These problems share a cause: forgetting that measures exist to support decisions and learning, not to judge people. Measurement used to understand the system tends to improve it. Measurement used to reward and punish individuals tends to distort it.
+
+> myth: "If a team's velocity is going up, it is getting better." Velocity rises for many reasons, including bigger estimates for the same work. It is useful to the team for planning, but as a measure of improvement it is easy to game and hard to interpret. Cycle time, escaped defects and value delivered are more meaningful.
+
+## Measuring value and benefits
+In the end, projects should be measured by the value they create. That means defining at the start what benefits are expected and how they will be measured (Chapter 4), establishing a baseline before the project changes anything, tracking the measures after delivery, and attributing changes fairly, recognising that other factors also affect outcomes.
+
+A simple question asked at every review helps keep value in view: if we stopped now, what value would we have delivered, and is the remaining work still worth its cost? Adaptive approaches build this question into every iteration; predictive ones can ask it at every gate.
+
+> example: Northfield's board initially wanted a monthly report on "percentage complete". Amira proposed three measures instead: the number of clinics live, the share of bookings made online in live clinics, and the average wait on the phone line, which the business case depended on. During the rollout, the online share in the first clinics was lower than expected among older patients. That leading indicator prompted the team to add a phone-assisted online booking option for receptionists, months before the year-one benefits review would have revealed the problem.
+
+> exam: Expect questions about information radiators, burndown and burnup charts, velocity (team-specific, used for the team's planning), cycle time and lead time, cumulative flow diagrams, and variance thresholds. Scenario questions often test honest reporting: when a project is in trouble, the right answer reports it accurately and early, with analysis and options, rather than waiting or presenting it optimistically.
+
+## Key ideas
+- Every measure should inform a decision; otherwise it is a cost.
+- Measure delivery, cost, quality, risk, people, stakeholders and, above all, value.
+- Lagging indicators confirm results; leading indicators allow action. Use both.
+- Baselines, variance analysis and thresholds focus management attention in predictive work.
+- Adaptive teams measure flow: velocity for their own planning, cycle and lead time, throughput, burnup and cumulative flow.
+- Goodhart's law, vanity metrics and optimistic reporting distort measurement. Honest reporting needs leaders who welcome bad news.
+
+## Further reading
+- Douglas W. Hubbard, *How to Measure Anything* (third edition, 2014). How to measure things that seem unmeasurable, and why it is worth it.
+- Daniel S. Vacanti, *Actionable Agile Metrics for Predictability* (2015). Flow metrics explained clearly.
+- Jerry Z. Muller, *The Tyranny of Metrics* (2018). The costs of measurement used as control.
+- Eric Ries, *The Lean Startup* (2011). Vanity metrics versus actionable ones, and measuring learning.

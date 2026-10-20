@@ -1,0 +1,102 @@
+id: t13
+part: 3
+title: Quality: building it in
+summary: What quality means on a project, what poor quality really costs, the ideas of the quality movement, and the tools for preventing, finding and understanding defects.
+why: Quality problems are expensive in a way that is easy to underestimate, because their costs arrive late and in other people's budgets: in support calls, rework, lost customers, accidents and reputations. The quality movement of the twentieth century showed that the cheapest way to get quality is to design it into the work, not to inspect it in at the end. That idea applies to a software sprint as much as to a car factory.
+
+## What quality means
+Quality has been defined in several complementary ways. Philip Crosby defined it as **conformance to requirements**: a product has quality if it does what it was specified to do. Joseph Juran defined it as **fitness for use**: a product has quality if it serves the purpose its users need. The two can diverge. A product can meet every written requirement and still be unfit for use, because the requirements were wrong or incomplete. Good project quality management aims at both.
+
+Standards describe quality as the degree to which a set of inherent characteristics fulfils requirements. The word "degree" matters: quality is not a yes-or-no property but a level, and the project's job is to achieve the level that was agreed, not the highest imaginable.
+
+Two pairs of terms are often confused.
+
+- **Quality and grade.** Grade is a category of products with the same use but different features: an economy car and a luxury car are different grades. Low grade is not a problem if it is what was asked for; low quality, meaning defects and failure to meet requirements, always is. A simple, reliable booking system is low grade and high quality. A feature-rich one that crashes is high grade and low quality.
+- **Precision and accuracy.** Precision means repeated measurements are close to each other; accuracy means they are close to the true value. A scale that always reads two kilograms too heavy is precise but not accurate.
+
+## The cost of quality
+The **cost of quality** is the total cost of everything an organisation spends to achieve quality and everything it loses through poor quality. It is usually divided into four parts.
+
+- **Prevention costs**: training, design reviews, process improvement, good tools, clear standards. Money spent to avoid defects in the first place.
+- **Appraisal costs**: inspection, testing, audits. Money spent to find defects.
+- **Internal failure costs**: rework, scrap, retesting, delay, when defects are found before the customer sees the product.
+- **External failure costs**: warranty claims, support, recalls, lost business, legal liability and reputation damage, when defects reach the customer.
+
+The first two are the **cost of conformance**; the last two are the **cost of non-conformance**. The central insight is that spending more on prevention usually reduces total cost, because failures, especially external failures, cost far more than preventing them. A defect caught in a design review might cost an hour to fix; the same defect found by a patient trying to book an appointment might cost a support call, a missed appointment and a complaint, multiplied by every patient who meets it.
+
+[figure: t13-coq]
+
+## The quality movement
+Modern quality management draws on the work of several thinkers whose ideas are worth knowing in their own terms.
+
+**Walter Shewhart**, working at Bell Laboratories in the 1920s, introduced statistical process control. He distinguished variation with **common causes**, inherent in the process and present all the time, from variation with **special causes**, arising from specific events. Common-cause variation can only be reduced by changing the process; special-cause variation can be traced and removed. His control chart is still in use.
+
+**W. Edwards Deming** took Shewhart's ideas to Japan after the Second World War and later back to the United States. He popularised the **plan-do-check-act** cycle (also called plan-do-study-act): plan a change, try it, study the results, and act on what you learned by adopting, adapting or abandoning it. He argued that most quality problems come from the system, which management controls, rather than from individual workers, and that fear, slogans and targets imposed on workers do more harm than good. His fourteen points for management are still widely read.
+
+**Joseph Juran** emphasised quality as a management responsibility and described a trilogy of quality planning, quality control and quality improvement. He also popularised the **Pareto principle** in quality: a few causes typically account for most of the problems, so improvement should start with those vital few.
+
+**Philip Crosby** argued that "quality is free", because the costs of poor quality exceed the costs of preventing it, and promoted a standard of zero defects.
+
+**Kaoru Ishikawa** developed the cause-and-effect diagram, often called the fishbone diagram, and promoted quality circles, in which workers meet to solve quality problems in their own work.
+
+From these ideas grew broader movements such as total quality management, lean and Six Sigma, a data-driven approach to reducing variation. Their shared core is that quality is designed into processes, is everyone's responsibility, is improved continuously, and is managed with data.
+
+## Managing, assuring and controlling quality
+On a project, quality work is often described in three parts.
+
+**Planning quality** decides which standards and requirements apply, what "good enough" means for each deliverable, and how quality will be achieved and checked. Its main outputs are quality metrics and acceptance criteria that everyone understands before work starts.
+
+**Managing quality**, which includes quality assurance, focuses on the processes. It asks whether the way the work is being done will produce the required quality, and improves it if not. Process audits, lessons learned, design reviews and process improvement are typical activities. Its aim is prevention.
+
+**Controlling quality** focuses on the deliverables. It inspects, tests and measures them to verify they meet the requirements, and records the results. Its aim is detection, and its outputs feed both into acceptance and into process improvement.
+
+The distinction is useful because it reminds a project that testing alone is not quality management. A project that tests heavily at the end but never asks why defects are arising will keep finding the same kinds of defects.
+
+## Tools for understanding quality
+A small set of tools, often called the seven basic quality tools, remains widely useful.
+
+- **Cause-and-effect diagrams** organise possible causes of a problem into categories, such as people, methods, materials, machines, measurement and environment, so a team can explore them systematically. They are often used with the **five whys** technique: asking "why?" repeatedly until the root cause appears.
+- **Flowcharts** map a process step by step, often revealing waste, loops and hand-offs.
+- **Check sheets** collect data on defects in a structured way as they happen.
+- **Pareto charts** rank causes by frequency, showing the vital few.
+- **Histograms** show how a measurement is distributed.
+- **Scatter diagrams** show whether two variables are related.
+- **Control charts** show whether a process is stable over time.
+
+A **control chart** plots a measurement over time against a centre line (the mean) and **control limits**, usually three standard deviations above and below the mean. Points within the limits reflect the process's normal variation. A point outside the limits, or certain patterns within them, such as seven consecutive points on one side of the mean, suggest a special cause worth investigating. Control limits describe what the process actually does; **specification limits** describe what the customer requires. A process can be in control and still fail to meet the specification, which means the process itself must change.
+
+[figure: t13-control]
+
+## Quality in adaptive projects
+Adaptive approaches build quality in through their practices rather than through a separate quality phase.
+
+- **The definition of done** sets a quality standard every piece of work must meet before it counts as complete: tested, reviewed, documented, integrated.
+- **Acceptance criteria** on each item make quality expectations explicit before the work starts.
+- **Test-driven development** writes the test before the code, so that every piece of functionality is verified from the start.
+- **Continuous integration** merges and tests everyone's work many times a day, so integration problems surface immediately rather than at the end.
+- **Pair programming and code review** catch defects as they are made.
+- **Small batches** mean each defect affects less work and is found sooner.
+- **Retrospectives** are, among other things, a regular process improvement event: the team examines how it works and changes it.
+
+These practices embody the same principles Deming and Juran described: prevention over inspection, continuous improvement, and quality built into the process. A team that skips them to go faster usually discovers that it has borrowed time at a high rate of interest, a debt that teams call **technical debt**.
+
+> example: In the first pilot clinic, Northfield's booking system produced occasional double bookings. The team's first instinct was to add a nightly check that found and fixed them. Amira asked the team to find the cause instead. A cause-and-effect session and a few rounds of "why?" traced it to two clinics sharing one room code in the records system, which the booking logic treated as one room. Fixing the room codes removed the problem at its source, where the nightly check would have hidden it for ever.
+
+> myth: "Quality means testing." Testing finds defects; it does not prevent them. Quality comes mainly from clear requirements, good design, competent people, sound processes and fast feedback. Testing is the last line of defence, and it is far more effective when the lines before it are strong.
+
+> exam: Expect questions on the cost of quality (prevention and appraisal versus internal and external failure), quality versus grade, managing quality (process, prevention) versus controlling quality (deliverables, inspection), control charts (control limits, the rule of seven, special versus common causes), and the basic tools. Scenario questions often reward finding and fixing the root cause rather than adding more inspection, and they treat quality as built into the work, including through the definition of done in adaptive teams.
+
+## Key ideas
+- Quality is conformance to requirements and fitness for use. Grade is a category, not a defect.
+- Preventing defects is cheaper than finding them, and finding them early is cheaper than letting them reach the customer.
+- Deming, Juran, Crosby, Shewhart and Ishikawa established that quality is a property of the system, improved continuously and managed with data.
+- Managing quality improves the process; controlling quality checks the deliverables.
+- Control charts distinguish normal variation from special causes; control limits are not specification limits.
+- Adaptive teams build quality in through the definition of done, testing practices, small batches and retrospectives.
+
+## Further reading
+- W. Edwards Deming, *Out of the Crisis* (1982).
+- Philip B. Crosby, *Quality Is Free* (1979).
+- Joseph M. Juran, *Juran's Quality Handbook* (many editions).
+- Kaoru Ishikawa, *Guide to Quality Control* (1968, English edition 1976).
+- Jez Humble and David Farley, *Continuous Delivery* (2010). How software teams build quality into their delivery pipeline.

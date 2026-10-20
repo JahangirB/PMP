@@ -1,0 +1,89 @@
+id: t2
+part: 1
+title: A short history of the discipline
+summary: How project management grew from scheduling charts and military programmes into a profession with competing schools of thought.
+why: The practices you will meet in later chapters were invented by particular people to solve particular problems. Knowing where they came from tells you what they are good for, and what they were never designed to do. It also explains why the field contains apparently contradictory advice: different traditions grew up around different kinds of work.
+
+## Great works without a discipline
+People have carried out enormous projects for thousands of years. The pyramids of Giza, the Great Wall of China, Roman aqueducts and medieval cathedrals all required the coordination of thousands of workers, the supply of materials over long distances and the sequencing of work over decades. Their builders clearly planned, estimated and organised.
+
+What they did not have was project management as a named, teachable discipline with shared methods. Knowledge lived in master builders and guilds, passed from person to person, specific to a craft. A cathedral mason knew how to build cathedrals; that knowledge did not transfer to running a shipyard. The idea that the management of any temporary undertaking has common principles, whatever the technical content, is a twentieth-century one.
+
+## Scientific management and the first charts
+The roots of the discipline lie in the industrial management movement at the turn of the twentieth century. Frederick Winslow Taylor studied work in factories and argued that it could be analysed, measured and improved systematically. His ideas, known as scientific management, were often applied harshly, and modern management has rejected much of their attitude to workers. But they established something lasting: the belief that work can be broken into parts, timed and planned.
+
+Henri Fayol, a French mining engineer, described management itself as a set of functions: planning, organising, commanding, coordinating and controlling. Readers of later standards will recognise the family resemblance.
+
+Henry Gantt, who worked with Taylor, developed the bar chart that carries his name in the 1910s. Each task is a horizontal bar on a timeline, so anyone can see at a glance what should be happening when and whether work is ahead or behind. The Polish engineer Karol Adamiecki had devised a similar chart, which he called a harmonogram, some years earlier, but his work was published mainly in Polish and Russian and became widely known only later. Gantt charts were used to manage American shipbuilding and munitions production during the First World War and remain the most familiar picture of a project plan more than a century later.
+
+The Gantt chart has a limitation that shaped what came next. It shows when things happen, but not why. It does not show which tasks depend on which, so when one task slips, the chart alone cannot tell you what else will be affected.
+
+## The network revolution of the 1950s
+The Second World War and the early Cold War produced projects of unprecedented scale and complexity. The Manhattan Project, which developed the atomic bomb, coordinated research, engineering and construction across several sites and many organisations under extreme secrecy and time pressure. It is often cited as an early example of what we would now call programme management.
+
+In the late 1950s, two techniques appeared almost at the same time that gave project management its first real mathematics. Both represent a project as a network of activities linked by dependencies.
+
+The **critical path method** was developed by the chemical company DuPont together with Remington Rand to plan the maintenance shutdowns and construction work of chemical plants. By calculating the longest chain of dependent activities through the network, planners could see which tasks determined the end date and which had slack. Speeding up anything off that path would not finish the project sooner; speeding up the critical path would.
+
+The **program evaluation and review technique**, PERT, was developed for the United States Navy's Polaris submarine missile programme, with the consultancy Booz Allen Hamilton. Polaris involved thousands of contractors and a great deal of novel engineering, so durations were genuinely uncertain. PERT asked for three estimates for each activity (optimistic, most likely and pessimistic) and combined them statistically. It was an early, explicit admission that project durations are uncertain and should be treated as ranges.
+
+[figure: t2-timeline]
+
+These methods spread rapidly through defence, aerospace and construction, helped by the arrival of computers that could do the network calculations. Around them grew other techniques: work breakdown structures for organising scope, earned value for measuring progress against cost and schedule together, and formal configuration and change control. The United States Department of Defense and NASA, especially during the Apollo programme of the 1960s, drove much of this. Systems engineering, the discipline of designing complex systems as a whole and managing the interfaces between their parts, grew up alongside.
+
+## A profession takes shape
+By the 1960s, enough people were managing projects across enough industries that they began to see themselves as a profession. The International Project Management Association was formed in Europe in 1965, and the Project Management Institute was founded in the United States in 1969. Both brought practitioners together to share methods across industries, which was the first time the field's knowledge had been treated as independent of any particular technology.
+
+Over the following decades PMI collected what its members considered generally recognised good practice. A report on the body of knowledge was published in the 1980s, and the first edition of *A Guide to the Project Management Body of Knowledge*, the PMBOK Guide, appeared in 1996. PMI's certification, the PMP, began in 1984. In the United Kingdom, the government developed a structured method called PRINCE in 1989 and a general-purpose successor, PRINCE2, in 1996, which became widely used in the public sector and in Europe.
+
+The early editions of the PMBOK Guide described project management as a set of processes, grouped by the stage of the project in which they mostly happen (initiating, planning, executing, monitoring and controlling, and closing) and by knowledge area (scope, schedule, cost, quality, risk and so on). Each process had inputs, tools and techniques, and outputs. This gave the field a common vocabulary and a checklist of what a competent project should consider. It also encouraged, in some organisations, a heavy and document-centred style of management that later generations reacted against.
+
+## The waterfall misunderstanding
+In software development, the dominant early model was what came to be called **waterfall**: requirements, then design, then build, then test, then deploy, each phase completed before the next begins. The model is usually traced to a 1970 paper by Winston Royce. Ironically, Royce presented the strictly sequential version as risky and inviting failure, and recommended iterating and involving the customer. The paper's first diagram was remembered; its warnings were not.
+
+The sequential model suited contracts, governments and engineering cultures that wanted fixed scope, fixed price and clear sign-offs. It worked reasonably well where requirements were stable and the technology familiar. It worked badly where neither was true, which in software was often. Teams spent months writing requirements that turned out to be wrong, built systems against them for months more, and discovered the problems only when users finally saw the result.
+
+## Iterative, incremental and lightweight methods
+Throughout the 1980s and 1990s, people looked for alternatives. Barry Boehm's spiral model organised development as a series of loops, each one driven by the biggest remaining risk. Rapid application development emphasised prototypes and user involvement. The Dynamic Systems Development Method, in the United Kingdom, fixed time and cost and let scope flex. In 1995, Ken Schwaber and Jeff Sutherland presented Scrum, a framework of short fixed-length iterations with a small self-organising team. Kent Beck and colleagues developed Extreme Programming later in the decade, with practices such as pair programming, test-first development and continuous integration.
+
+In February 2001, seventeen people associated with these methods met at a ski resort in Utah and wrote the **Manifesto for Agile Software Development**. It is short: four statements of values and twelve principles. Its central claim is that responding to change, collaborating with customers and delivering working software frequently matter more than following a plan, negotiating contracts and producing comprehensive documentation, while acknowledging that the latter still have value. Part II looks at agile thinking in detail.
+
+The manifesto was written by software developers about software, but its ideas spread into product development, marketing, research and organisational change, anywhere the work was uncertain and the cost of learning late was high.
+
+## Lean and flow
+A parallel stream came from manufacturing. The Toyota Production System, developed by Taiichi Ohno and others in post-war Japan, aimed to eliminate waste, produce only what was needed when it was needed, and improve continuously. Western researchers studying it in the late 1980s gave it the name **lean**.
+
+Lean thinking reached project management through several routes. Eliyahu Goldratt's theory of constraints, and his 1997 book *Critical Chain*, applied ideas about bottlenecks and buffers to project schedules. In software, the Kanban method popularised by David Anderson in the late 2000s visualised work on a board, limited the amount of work in progress, and managed the flow of items through the system rather than planning everything upfront. Lean construction applied similar ideas to building sites.
+
+## Toward principles and hybrids
+By the 2010s, the field had two strong traditions that often talked past each other. One emphasised planning, control and predictability, and was strongest in construction, engineering, defence and government. The other emphasised adaptation, collaboration and early delivery, and was strongest in software and digital products. Practitioners in the middle increasingly mixed the two: an organisation might fund and govern a programme with stage gates while its teams worked in sprints, or build hardware predictively and software adaptively within the same product.
+
+The standards followed the practice. The PMBOK Guide gained agile content and a companion *Agile Practice Guide* in 2017. In 2021, the seventh edition made a decisive change: instead of being organised around processes, it set out principles of project management and the performance domains in which they apply, and it treated predictive, adaptive and hybrid approaches as equally legitimate choices to be tailored to the work. The same year, the PMP exam's content outline gave agile and hybrid approaches roughly half the weight of the exam. The emphasis moved from "follow these processes" to "understand why, and choose well".
+
+## What the history teaches
+Three lessons from this history recur through the rest of the book.
+
+First, each technique was invented for a context. The critical path method assumes you know the activities and their dependencies, which is true for a plant shutdown and much less true for a new product. Agile methods assume you can deliver something useful in small pieces and get feedback quickly, which is true for most software and much less true for a bridge. Using a technique well means knowing the context it assumes.
+
+Second, the field has moved steadily from treating uncertainty as an inconvenience to treating it as central. PERT acknowledged uncertain durations; risk management made uncertainty a subject of its own; adaptive approaches built the whole way of working around it.
+
+Third, the people side has moved from the margin to the centre. Early methods were largely about scheduling and control. Modern practice puts as much emphasis on leadership, teams, stakeholders and organisational change, because experience showed that projects more often fail for human reasons than technical ones.
+
+> myth: "Agile replaced traditional project management." It did not. It added a different set of tools for a different kind of uncertainty. Predictive planning is still the right approach for much construction, manufacturing and regulated work, and most large organisations run hybrids.
+
+> exam: The exam does not ask about dates or names from this history. It does test the ideas that came out of it: why the critical path matters, what PERT's three-point estimate is for, when a predictive approach suits the work and when an adaptive one does, and how to combine them. If you understand why each technique was invented, you can usually work out which one a situational question is pointing to.
+
+## Key ideas
+- Large projects are ancient, but project management as a shared, teachable discipline is a twentieth-century invention.
+- Gantt charts show when; network methods (the critical path method and PERT) added why, through dependencies, and PERT treated durations as uncertain.
+- Defence, aerospace and construction shaped the planning-and-control tradition; professional bodies codified it as processes and knowledge areas.
+- The rigidly sequential "waterfall" model was a misreading of its own source, and it fitted poorly with uncertain work.
+- Iterative, agile and lean methods grew up to handle uncertainty by delivering in small pieces, learning quickly and limiting work in progress.
+- Current standards are organised around principles and tailoring, treating predictive, adaptive and hybrid approaches as choices to fit the work.
+
+## Further reading
+- Peter W. G. Morris, *The Management of Projects* (1994). The standard history of the discipline, from early engineering to the late twentieth century.
+- Winston W. Royce, "Managing the development of large software systems" (1970). Short, and worth reading to see what it actually recommends.
+- Kent Beck and others, *Manifesto for Agile Software Development* (2001), at agilemanifesto.org. The values and the twelve principles.
+- Eliyahu M. Goldratt, *Critical Chain* (1997). A novel that applies the theory of constraints to project schedules.
+- James P. Womack, Daniel T. Jones and Daniel Roos, *The Machine That Changed the World* (1990). The study that introduced lean thinking to the West.

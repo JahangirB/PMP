@@ -1,0 +1,112 @@
+id: t7
+part: 2
+title: Agile and lean thinking
+summary: The values and principles behind agile methods, how Scrum and Kanban work, and the lean ideas of waste, flow and pull.
+why: Agile and lean are often presented as sets of ceremonies and artefacts: stand-ups, sprints, boards, story points. Teams that adopt the ceremonies without the thinking get the overhead without the benefit. Understanding why these practices exist lets you use them well, adapt them sensibly, and recognise when a team is going through the motions.
+
+## The problem agile set out to solve
+Agile methods grew out of software development in the 1990s, where many projects followed a sequential model that suited the work poorly. Requirements were written in detail, approved, designed against and built over many months. By the time users saw the result, their needs had moved on, or the written requirements had captured what they said rather than what they needed. The cost of discovering this so late was enormous.
+
+The people who developed agile methods noticed that software, unlike most physical products, can be changed relatively cheaply if it is built with change in mind, and that working software shown to real users is the most reliable way to discover what they actually need. Their methods therefore aimed to deliver working pieces of the product early and often, learn from each one, and let the plan follow the learning.
+
+## The manifesto
+The *Manifesto for Agile Software Development*, written in 2001, states four values. Its authors valued:
+
+- **Individuals and interactions** over processes and tools.
+- **Working software** over comprehensive documentation.
+- **Customer collaboration** over contract negotiation.
+- **Responding to change** over following a plan.
+
+The manifesto adds an important sentence that is often forgotten: while there is value in the items on the right, the items on the left are valued more. Agile does not reject process, documentation, contracts or plans. It puts them in service of the things on the left. A team that refuses to write any documentation, or refuses to plan, has misread the manifesto.
+
+Twelve principles follow the values. In summary, they call for satisfying the customer through early and continuous delivery; welcoming changing requirements, even late; delivering working software frequently, preferring shorter timescales; business people and developers working together daily; building projects around motivated individuals and trusting them; face-to-face conversation as the most effective way to share information; working software as the primary measure of progress; a sustainable pace; continuous attention to technical excellence and good design; simplicity, described as maximising the amount of work not done; self-organising teams; and regular reflection on how to become more effective.
+
+Several of these deserve emphasis because they are often neglected. **Sustainable pace** rejects the idea that heroic overtime is a sign of commitment; tired teams make mistakes that cost more than the hours gained. **Technical excellence** is what keeps the cost of change low; teams that skip it slow down as their product becomes harder to change. And **simplicity**, in the sense of not building what is not needed, is one of the most powerful ways to deliver sooner.
+
+## The agile mindset
+Practitioners often distinguish *doing* agile, following the practices, from *being* agile, holding the mindset the practices are meant to express. The mindset includes a few core beliefs.
+
+- **Value comes from outcomes, not output.** The aim is to solve the customer's problem, not to complete a list of features.
+- **Learning is the main activity early on.** When uncertainty is high, the fastest way to reduce it is to build something small and see what happens.
+- **Small batches are safer than large ones.** Small pieces of work are easier to estimate, finish, test, review and change.
+- **The people closest to the work know most about how to do it.** Teams should decide how to meet their goals, within clear constraints.
+- **Transparency enables good decisions.** Making the work, its status and its problems visible lets everyone respond to reality.
+- **Improvement is continuous.** The process itself is something the team inspects and adapts.
+
+## Scrum
+**Scrum** is the most widely used agile framework. It is deliberately light: a few roles, events and artefacts around which a team builds its own practices.
+
+The **roles**, called accountabilities in the current guide, are three. The **product owner** is accountable for maximising the value of the product: they own the product backlog, decide its order, and make sure everyone understands what is most important. The **Scrum Master** is accountable for the team's effectiveness: they coach the team and the organisation in Scrum, remove impediments, and help the team improve. The **developers** are the people who do the work of creating each increment; in Scrum, "developers" means everyone on the team doing the work, whatever their specialism.
+
+Work happens in **sprints**, fixed periods of one month or less, often two weeks. Each sprint contains four events.
+
+- **Sprint planning**: the team decides what it can deliver in the sprint, agrees a sprint goal, and plans how to do the work.
+- **Daily scrum**: a short daily meeting where the developers inspect progress toward the sprint goal and adjust their plan for the next day.
+- **Sprint review**: at the end of the sprint, the team shows what it has built to stakeholders, gathers feedback, and discusses what to do next.
+- **Sprint retrospective**: the team reflects on how it worked and chooses improvements for the next sprint.
+
+[figure: t7-scrum]
+
+Three **artefacts** make the work transparent. The **product backlog** is the ordered list of everything that might be needed in the product. The **sprint backlog** is the set of items chosen for the sprint plus the plan for delivering them. The **increment** is the usable product produced, which must meet the team's **definition of done**, a shared statement of the quality standard every piece of work must reach before it counts as finished.
+
+Scrum is built on three pillars: **transparency**, so that everyone sees the true state of the work; **inspection**, so that problems are noticed; and **adaptation**, so that the team changes course when inspection shows it should. Each event is an opportunity for all three.
+
+## Kanban
+**Kanban** comes from lean manufacturing, where a kanban (Japanese for "signboard" or "card") signals that a process needs more input. In knowledge work, the Kanban method focuses on managing the flow of work rather than organising it into fixed iterations.
+
+Its core practices are simple. **Visualise the work** on a board with columns for each stage, so everyone can see what is being worked on and where it is stuck. **Limit work in progress**, by setting a maximum number of items allowed in each stage. **Manage flow**, by measuring how long items take to move through the system and working to make that time shorter and more predictable. **Make policies explicit**, so everyone understands how work moves. And **improve collaboratively**, using measurement and experiment.
+
+[figure: t7-kanban]
+
+The work-in-progress limit is the heart of Kanban and the practice teams most often resist. It seems counter-intuitive: surely starting more work gets more done? The opposite is usually true. When people juggle many tasks, each one waits more, switching between them wastes time, and problems are hidden among the half-finished work. Limiting work in progress forces the team to finish things before starting new ones, which shortens the time each item takes and exposes bottlenecks. The relationship is captured by **Little's law**, from queueing theory: average lead time equals average work in progress divided by average throughput. With the same throughput, less work in progress means shorter lead times.
+
+Kanban suits work that arrives continuously and unpredictably, such as support, maintenance and operations, and teams that find fixed sprints artificial. Many teams combine it with Scrum, using sprints for planning and review and a Kanban board with work-in-progress limits for the flow within the sprint.
+
+## Lean thinking
+**Lean** comes from the Toyota Production System and was popularised in the West in the 1990s. Its core idea is to maximise value for the customer while minimising waste. Five principles are often used to summarise it: identify **value** from the customer's point of view; map the **value stream**, all the steps that deliver it; create **flow**, so that work moves through the steps without interruption; establish **pull**, so that work is started only when there is demand for it; and pursue **perfection** through continuous improvement.
+
+Lean identifies several kinds of waste. In manufacturing the classic list includes overproduction, waiting, transport, over-processing, inventory, motion and defects. Mary and Tom Poppendieck translated these for software development: partially done work, extra features, relearning, hand-offs, task switching, delays and defects. Each of these consumes effort without adding value, and many projects are full of them. Work sitting half-finished, features nobody uses, knowledge lost between teams and approvals that take weeks are all lean waste.
+
+Two other lean ideas recur in project work. **Kaizen** is continuous improvement through many small changes, made by the people doing the work. **Respect for people** is often forgotten in Western accounts of lean, but in Toyota's original formulation it is one of the two pillars: lean works because it engages the knowledge and judgement of the people who do the work, not because it treats them as interchangeable parts.
+
+## Other practices and frameworks
+Many other practices sit under the agile umbrella.
+
+- **Extreme Programming**, XP, is a set of engineering practices including pair programming, test-driven development, continuous integration, refactoring and small releases. Its practices are what make low cost of change possible in software.
+- **User stories** describe a piece of functionality from the user's point of view, often in the form "as a [type of user], I want [something] so that [benefit]". They are deliberately brief, intended as a placeholder for a conversation rather than a complete specification.
+- **Relative estimation** with **story points** estimates the size of work compared with other work rather than in hours. Teams then measure their **velocity**, the amount of work completed per sprint, to forecast how much they can do.
+- **Timeboxing** fixes the time for an activity and lets the scope flex, which creates focus and forces prioritisation.
+- **Information radiators**, such as boards and burn charts displayed where everyone can see them, make the state of the work visible without anyone needing to ask.
+
+When many teams work on one product, organisations use scaling frameworks such as SAFe, LeSS, Nexus or Scrum of Scrums. These add structures for coordinating teams, aligning their goals and integrating their work. Scaling is difficult, and the lighter frameworks argue that the best way to scale agility is to reduce dependencies between teams rather than add coordination on top of them.
+
+> example: Northfield's booking team worked in two-week sprints with a product owner from the outpatients department, Hassan, who had spent years running a clinic reception. In early sprints, the team built a rough booking screen for a single clinic and put it in front of patients in the waiting room. They learned in the first week that many older patients wanted to book on behalf of a spouse, something no one had written down. Hassan moved that need to the top of the backlog. A predictive plan would have discovered it during acceptance testing, months later.
+
+## Common ways agile goes wrong
+Agile methods are easy to adopt badly. A few failure patterns recur.
+
+- **Cargo cult ceremonies.** The team holds stand-ups and retrospectives, but nothing changes as a result. The ceremonies have become rituals.
+- **Mini-waterfalls.** Each sprint contains its own design, build and test phases, with testing squeezed in at the end and work never really finished.
+- **Absent product owners.** Nobody with authority is available to make decisions about priorities, so the team guesses.
+- **Velocity as a target.** Management uses velocity to compare teams or demands it rise each sprint, so teams inflate their estimates and the measure becomes meaningless.
+- **No technical excellence.** The team delivers quickly at first but accumulates technical debt until every change becomes slow and risky.
+- **Agile in name only.** The scope, date and cost are all fixed up front, but the team is told to "be agile" within them.
+
+Each of these is a failure to understand why the practices exist. Retrospectives exist to drive change; if nothing changes, they are failing. Velocity exists to help the team plan; once it becomes a target, it stops being a reliable measure, an instance of what economists call Goodhart's law.
+
+> exam: Roughly half of the exam is about agile and hybrid work, so expect many questions on these ideas. Typical themes: the product owner owns and orders the backlog; the team decides how to do the work; the Scrum Master serves and coaches rather than directs; work-in-progress limits improve flow; the definition of done protects quality; retrospectives drive improvement; and a servant leader removes impediments rather than assigning tasks. When a question describes a team struggling, look for the answer that helps the team solve the problem itself.
+
+## Key ideas
+- Agile methods deliver small working pieces early and often, so that the plan follows what is learned.
+- The manifesto values individuals, working products, collaboration and responding to change more than processes, documentation, contracts and plans, while still valuing those.
+- Scrum provides roles, events and artefacts around transparency, inspection and adaptation, in fixed sprints.
+- Kanban manages flow by visualising work and limiting work in progress; less work in progress means shorter lead times.
+- Lean seeks value for the customer and removes waste, through flow, pull and continuous improvement, with respect for people.
+- Practices without the underlying thinking produce ceremony without benefit.
+
+## Further reading
+- Ken Schwaber and Jeff Sutherland, *The Scrum Guide*, at scrumguides.org. Short and definitive; read it before reading about it.
+- David J. Anderson, *Kanban: Successful Evolutionary Change for Your Technology Business* (2010).
+- Mary and Tom Poppendieck, *Lean Software Development: An Agile Toolkit* (2003).
+- Kent Beck, *Extreme Programming Explained* (second edition, 2004).
+- Mike Cohn, *Agile Estimating and Planning* (2005). Story points, velocity and release planning explained well.

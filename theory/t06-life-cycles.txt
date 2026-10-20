@@ -1,0 +1,102 @@
+id: t6
+part: 2
+title: Life cycles and phases
+summary: How projects are divided over time, the four basic patterns of development, and what each assumes about the work.
+why: Every project moves from an idea to a result, but the route can differ enormously. Some projects plan everything first and build once; others build a little, learn, and build again. The choice of life cycle shapes everything else: how you plan, how you estimate, how you report, how you manage change and how early anyone sees value. Choosing it on purpose, rather than by habit, is one of the most consequential decisions a project manager makes.
+
+## Two kinds of life cycle
+It helps to separate two ideas that are often blurred together.
+
+The **project life cycle** is the series of phases a project passes through from start to finish. Typical names are something like concept, feasibility, design, build, test, deploy and close, though every industry has its own. Phases give the project a structure for governance: at the end of each, there is usually a review where someone decides whether to continue.
+
+The **development life cycle**, or delivery approach, describes how the product itself is created within those phases: all at once, in repeated refinements, in successive pieces, or in short cycles that do all of these together. A project can have a predictive overall life cycle with phases and gates, while one of its phases develops software adaptively. Keeping the two ideas apart makes hybrid approaches much easier to understand.
+
+## Phases and gates
+A **phase** is a collection of related activities that ends with the completion of one or more deliverables. Phases exist because breaking a long effort into stages gives natural points to stop, review and decide. Each phase usually has its own objectives, its own main deliverables and its own exit criteria.
+
+A **phase gate**, also called a stage gate, decision point or kill point, is the review at the end of a phase. The people with authority, often a sponsor or steering committee, look at what the phase produced, at the updated business case and at the plan for the next phase, and decide to continue, continue with changes, repeat the phase, or stop. Gates are where governance (Chapter 4) touches the project directly.
+
+Phases can be arranged in several ways.
+
+- **Sequential**: one phase finishes before the next starts. Simple and controllable, but slow.
+- **Overlapping**: the next phase starts before the previous one finishes, for example starting procurement of long-lead items before design is complete. This saves time at the cost of risk, because later work rests on earlier work that may still change. Overlapping phases on purpose to shorten a schedule is called fast tracking (Chapter 11).
+- **Iterative**: the same phase pattern repeats, each pass refining or extending the result.
+
+A gate is valuable only if stopping is a real option. Gates that always say "continue" become rituals that consume time without managing risk. A good gate asks hard questions: is the business case still true, is the next phase properly planned, are the biggest risks understood, and do we still want this?
+
+## Four ways to develop the product
+The most useful way to compare development approaches is to ask two questions. How often is the product delivered to the people who will use it? And how much is the product expected to change as people learn? The answers place an approach somewhere on a spectrum.
+
+[figure: t6-spectrum]
+
+### Predictive
+In a **predictive** approach, the scope, schedule and cost are determined as fully as possible early on, in a planning effort, and then the work proceeds according to that plan. Requirements are captured and approved before design; design before build; build before test. Change is possible but is managed formally, because each change disturbs a plan that many other things depend on. The product is usually delivered once, at the end.
+
+Predictive approaches suit work where the requirements can be known in advance and are unlikely to change, where the technology is well understood, and where changing course late is very expensive. Building a bridge is the classic case: you cannot release half a bridge to see if people like it, and the laws of physics will not change halfway through. Many regulated, contractual and safety-critical projects are predictive for good reasons.
+
+### Iterative
+In an **iterative** approach, the product is developed through repeated cycles, each refining it. Early iterations may produce rough versions or prototypes; later ones improve them in response to feedback. The full scope may be roughly known at the start, but its details are worked out by trying versions and learning. Delivery to users may still happen only at the end; the iterations are about getting it right.
+
+Iterative approaches suit work where the requirements are unclear or the solution is uncertain, but where the product cannot usefully be released in pieces. Designing a new car model goes through many iterations of design and prototype before anything is sold.
+
+### Incremental
+In an **incremental** approach, the product is delivered in successive pieces, each adding functionality. The first increment might deliver core features; later ones add more. Each increment is usable in its own right. The overall scope may be well defined, but delivering it in pieces brings some value early and spreads risk.
+
+Incremental approaches suit work where the requirements are reasonably clear but the customer benefits from getting something sooner, or where the organisation wants to limit how much it invests before seeing results. Rolling out a new system clinic by clinic, or building a housing estate street by street, are incremental.
+
+### Adaptive or agile
+An **adaptive** approach, often called agile, combines iteration and increments in short cycles. Each cycle, typically one to four weeks, delivers a small, working, potentially usable piece of the product, gathers feedback and adjusts the plan. The overall goal is fixed, but the scope is expected to change as everyone learns what is most valuable. Detailed planning happens just in time, for the next cycle or two.
+
+Adaptive approaches suit work with high uncertainty about both what is needed and how to build it, where the product can be delivered in small pieces, and where customers or users can give frequent feedback. Most software products, digital services and many research or design efforts fit this description. Chapter 7 explores the thinking behind these methods.
+
+> myth: "Iterative and incremental mean the same thing." They are different ideas that are often combined. Iterating means refining the same thing repeatedly; incrementing means adding new pieces. Painting a portrait in successive layers is iterative; building it one finished square at a time is incremental. Agile methods do both.
+
+## What each approach assumes
+Each approach rests on assumptions about the work. When those assumptions are true, the approach works well. When they are false, it struggles, however well it is executed.
+
+A predictive approach assumes that the requirements can be known early, that the important risks can be foreseen, that the cost of change rises steeply later in the project, and that the organisation needs a fixed commitment on scope, time and cost before it starts. It works well when these hold. Its typical failure is discovering, late and expensively, that the requirements were wrong.
+
+An adaptive approach assumes that the product can be delivered in small usable pieces, that frequent feedback is available from people who know what is needed, that the team can work closely with the customer, and that the organisation can accept a fixed budget and time with flexible scope. It works well when these hold. Its typical failure is drifting without a clear goal, or building a pile of small pieces that do not add up to a coherent product.
+
+Iterative and incremental approaches sit between, borrowing part of each set of assumptions. Recognising the assumptions behind an approach is more useful than memorising its practices, because it tells you how to adjust when your project only partly fits.
+
+> example: Northfield's online booking project mixed approaches. The integration with the trust's clinical records system was planned predictively, because the records vendor worked to fixed release dates and every interface change required formal testing and approval. The patient-facing booking screens were built adaptively in two-week cycles, because nobody could be sure how patients would use them until they tried. And the rollout was incremental, clinic by clinic, so that problems in the first clinics could be fixed before most patients ever saw the system.
+
+## The cost of change curve
+A recurring idea behind these approaches is the **cost of change**. In many kinds of work, the later a change is made, the more expensive it is, because more has been built on the earlier decision. Changing a line on a drawing is cheap; changing a poured foundation is not. Early writers on software engineering argued that a requirement error found in operation could cost many times more to fix than the same error found during requirements analysis.
+
+This curve is the main justification for predictive planning: if late change is expensive, get the decisions right early. Adaptive methods respond in two ways. First, they try to flatten the curve, by keeping the product in a state where change is cheap: automated testing, simple designs, small batches and frequent integration all help. Second, they bring feedback forward, so that wrong decisions are discovered when they are still cheap to reverse. Both responses are rational. Which one serves a given project depends on whether the curve can actually be flattened for that kind of work. For software, often it can. For concrete, it cannot.
+
+## Life cycles and the product
+The project life cycle sits inside a longer **product life cycle**: from the idea, through development and introduction, growth and maturity, to decline and retirement. A product may pass through several projects over its life, each with its own life cycle.
+
+Thinking about the product life cycle changes some project decisions. A system expected to last fifteen years justifies more investment in maintainability than one expected to last two. A product entering a fast-growing market may need early release more than completeness. And decisions made during the project, such as choosing a supplier or a technology, often lock in costs that appear long after the project has closed. Good project managers ask about the whole life of what they are building, not just the part they are paid to deliver.
+
+## Choosing a life cycle
+There is no universally best life cycle. The choice depends on the product, the project and the organisation. Chapter 8 discusses tailoring in detail, but the main factors are worth stating here.
+
+- **Requirements certainty.** How well can we know what is needed before we start?
+- **Technical uncertainty.** How well understood is the way to build it?
+- **Ability to deliver in pieces.** Can part of the product be used on its own?
+- **Availability of feedback.** Can users or customers give frequent, informed feedback?
+- **Cost of change.** How expensive is it to change course late?
+- **Regulation and contracts.** Do they require formal approvals, documentation or a fixed scope?
+- **Team and organisation.** Do the team and the organisation have the skills, culture and structure for the approach?
+
+Many projects score differently on different parts of the work, which is why hybrids are so common. The point is not to pick a label but to fit the way of working to the nature of each part of the work.
+
+> exam: The exam expects you to recognise which approach fits a scenario and why. High uncertainty and frequent feedback point to adaptive; fixed regulatory requirements and costly late change point to predictive; a need for early value from clear requirements points to incremental. Questions also test whether you understand phase gates as decision points where the project can genuinely be stopped, and whether you can tell iterative from incremental.
+
+## Key ideas
+- The project life cycle is the sequence of phases; the development approach is how the product is created within them.
+- Phase gates are decision points. They are only valuable if stopping is a real option.
+- Predictive approaches plan fully up front; iterative ones refine through cycles; incremental ones deliver in pieces; adaptive ones do both in short cycles with flexible scope.
+- Each approach rests on assumptions about requirements, uncertainty, feedback and the cost of change. Check the assumptions before choosing.
+- The cost of change curve justifies predictive planning where it cannot be flattened, and adaptive delivery where it can.
+- Most real projects mix approaches across different parts of the work.
+
+## Further reading
+- Project Management Institute and Agile Alliance, *Agile Practice Guide* (2017). Clear on the spectrum of life cycles and how they combine.
+- Barry Boehm, "A Spiral Model of Software Development and Enhancement", *Computer* magazine (1988). The risk-driven iterative model.
+- Alistair Cockburn, "Using Both Incremental and Iterative Development", *CrossTalk* (2008). A short, clear essay on the difference.
+- Robert G. Cooper, *Winning at New Products* (many editions). The origin of stage-gate thinking in product development.

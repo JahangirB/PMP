@@ -667,3 +667,28 @@ Open **Content audit** in the app. The *Lessons* card lists every failure with
 its field path, such as `lessons[12].worked.ranking[1].rank`. Gaps, such as a
 prerequisite not yet written or a practice pool smaller than the set, are listed
 separately and do not fail the build.
+
+## 10. Writing Theory chapters
+
+The Theory section (web: side menu → Theory) is generated from plain text
+files in `theory/`. Edit those, never the `PMP.THEORY` block in `index.html`.
+
+- One file per chapter, `tNN-short-name.txt`, in reading order. It starts with
+  `id`, `part`, `title`, `summary` (one sentence for the contents) and `why`
+  (the "Why it matters" paragraph), one `key: value` per line.
+- Then `## ` sections. Inside a section, a blank line separates blocks: a
+  paragraph, a list (`- ` lines), a box (`> exam: `, `> myth: ` or
+  `> example: ` followed by its text) or a figure (`[figure: name]`, defined in
+  `theory/figures.json` in the lesson figure format of §9.4).
+- The sections `## Key ideas` and `## Further reading` are lists and close the
+  chapter.
+- `**bold**` and `*italic*` work inside text. Write abbreviations as letters;
+  the app spells each out on its first use in the chapter, so never write
+  "Full name (ABBR)". Any new abbreviation needs a row in §05.7.3.
+- `theory/parts.json` holds the six parts and the planned chapter titles, so the
+  contents can show chapters not written yet. Chapter numbers run through the
+  whole book.
+- Build with `node theory/build.mjs`; `--check` fails if `index.html` is out of
+  date, and the test suite runs it. Chapters are written new, in plain British
+  English, and never copied from the PMBOK Guide or any other book.
+

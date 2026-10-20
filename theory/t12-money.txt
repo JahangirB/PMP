@@ -1,0 +1,106 @@
+id: t12
+part: 3
+title: Money: budgets, reserves and earned value
+summary: How project costs are estimated, built into a budget with reserves, and tracked with earned value, which measures cost and schedule performance together.
+why: Money is how organisations keep score. A project that cannot say what it will cost, what it has spent and what it has achieved for the money cannot be governed sensibly. Earned value in particular is one of the few techniques that tells you, early and objectively, whether a project is heading for trouble. It is worth understanding properly, not just memorising its formulas.
+
+## What projects cost
+Project costs come in several kinds. **Direct costs** are attributable to the project: the team's time, materials, equipment, licences, contractors. **Indirect costs** are shared overheads, such as office space, central IT or management, which organisations sometimes allocate to projects. Some costs are **fixed**, not changing with the amount of work, such as a software licence; others are **variable**, rising with the work, such as contractor hours.
+
+Two other ideas matter for decisions. **Sunk costs** are money already spent; they cannot be recovered whatever happens next, so they should not influence decisions about the future (Chapter 4). **Opportunity cost** is the value of the best alternative given up: the people working on this project are not working on something else. And **life-cycle cost** is the total cost of a product over its whole life, including operation, maintenance and disposal, which can dwarf the cost of the project that created it. A design that is cheaper to build but expensive to run may be a poor choice.
+
+## Estimating cost
+Cost estimates use the same broad techniques as duration estimates (Chapter 11): analogous, parametric, bottom-up, three-point and expert judgement. Their accuracy improves as the project's definition improves. Practitioners often describe three levels.
+
+- A **rough order of magnitude** estimate, made very early with little information, is often quoted with a range of about minus 25 to plus 75 per cent.
+- A **budget estimate**, made once the project is better defined, might be within about minus 10 to plus 25 per cent.
+- A **definitive estimate**, made from a detailed design and bottom-up work, might be within about minus 5 to plus 10 per cent.
+
+The exact ranges vary between industries and sources, but the principle holds: early estimates are wide, and should be presented as ranges. An estimate is a forecast with uncertainty, not a promise.
+
+## Building the budget
+The cost estimates of activities and work packages are aggregated up through the work breakdown structure to give the cost of each deliverable and of the project. To this are added reserves for uncertainty.
+
+**Contingency reserves** cover identified risks, the "known unknowns": we know the vendor may be late and have set aside money for the extra weeks. They are part of the cost baseline and are usually controlled by the project manager, released as risks occur.
+
+**Management reserves** cover unidentified risks, the "unknown unknowns": things nobody foresaw. They sit outside the cost baseline but inside the overall budget, and using them usually requires approval from management or the sponsor.
+
+The resulting structure is often described as layers: activity estimates roll up to work package estimates; adding contingency gives control accounts; together these make the **cost baseline**, the time-phased budget against which performance is measured; adding the management reserve gives the total **project budget**.
+
+[figure: t12-budget]
+
+The cost baseline is usually drawn as an **S-curve**: cumulative planned spending over time. It is shaped like an S because spending typically starts slowly, accelerates during the main build, and tails off towards the end.
+
+Organisations may also impose **funding limits**: money is released in tranches, by year or by phase, and the project's spending must fit within them. Reconciling the planned spending curve with the funding available is part of budgeting.
+
+## Earned value: the idea
+Imagine a project with a budget of 400,000 that was planned to spend 200,000 by the end of month four. At that point it has actually spent 180,000. Is it doing well?
+
+You cannot tell. Spending less than planned might mean the team is efficient, or that it has done less work than planned. To judge performance, you need a third number: the value of the work actually completed, measured in the same terms as the budget. That third number is **earned value**, and the technique built around it is **earned value management**.
+
+Earned value management compares three quantities at a point in time, the **status date**.
+
+- **Planned value** (PV): the budgeted cost of the work scheduled to be done by the status date. It answers: how much work should we have done?
+- **Earned value** (EV): the budgeted cost of the work actually completed by the status date. It answers: how much work have we done, valued at its budget?
+- **Actual cost** (AC): the actual cost of the work completed by the status date. It answers: how much did that work actually cost?
+
+The total budget for the work is the **budget at completion** (BAC).
+
+## Variances and indices
+From these three numbers come two variances and two indices.
+
+- **Cost variance**: CV = EV − AC. Negative means over budget for the work done.
+- **Schedule variance**: SV = EV − PV. Negative means behind schedule, in value terms.
+- **Cost performance index**: CPI = EV ÷ AC. Below 1 means each unit of money is buying less than a unit of planned work.
+- **Schedule performance index**: SPI = EV ÷ PV. Below 1 means work is being done more slowly than planned.
+
+Return to the example and suppose the team has completed work budgeted at 160,000. Then PV = 200,000, EV = 160,000 and AC = 180,000. The cost variance is 160,000 − 180,000 = −20,000: over budget. The schedule variance is 160,000 − 200,000 = −40,000: behind schedule. The CPI is 160,000 ÷ 180,000 ≈ 0.89, so each 1 spent has produced about 0.89 of planned work. The SPI is 160,000 ÷ 200,000 = 0.80: work is being done at four fifths of the planned rate.
+
+[figure: t12-evm]
+
+## Forecasting
+Earned value also supports forecasts. The **estimate at completion** (EAC) is the expected total cost when the project finishes. How it is calculated depends on what you believe about the future.
+
+- If current cost efficiency will continue: EAC = BAC ÷ CPI. In the example, 400,000 ÷ 0.89 ≈ 450,000.
+- If the overrun so far was a one-off and the rest will go to plan: EAC = AC + (BAC − EV) = 180,000 + 240,000 = 420,000.
+- If both cost and schedule performance will affect the remaining work: EAC = AC + (BAC − EV) ÷ (CPI × SPI).
+- If the original plan is no longer valid: EAC = AC + a new bottom-up estimate to complete.
+
+The **estimate to complete** (ETC) is EAC − AC: what the rest will cost. The **variance at completion** (VAC) is BAC − EAC: how far over or under budget the project will finish. In the example, using the first formula, the VAC is about −50,000.
+
+Finally, the **to-complete performance index** (TCPI) asks what cost efficiency the remaining work would need to finish on budget: TCPI = (BAC − EV) ÷ (BAC − AC). In the example, (400,000 − 160,000) ÷ (400,000 − 180,000) = 240,000 ÷ 220,000 ≈ 1.09. To finish within the original budget, the team would need to be more efficient for the rest of the project than it has been so far, which experience suggests is unlikely.
+
+That last point is one of the most valuable findings from decades of earned value use. Studies of large defence projects found that once a project is about fifteen to twenty per cent complete, its CPI rarely improves much. An early cost overrun is a strong signal about the final cost, not a blip to be recovered later.
+
+> myth: "If we are behind, we will catch up later." Earned value data from many projects suggest that cumulative performance indices are remarkably stable after the early stages. Plans that depend on future efficiency being much better than past efficiency usually disappoint. A TCPI well above 1 is a warning to revisit the budget, not a target to exhort the team towards.
+
+## Measuring earned value honestly
+Earned value is only as good as the measurement of work completed. Several rules help.
+
+- **Use small work packages**, so that progress can be judged objectively.
+- **Use objective rules for partial completion**, such as zero per cent at start and 100 per cent at finish, or fifty-fifty, rather than people's estimates of percentage complete, which tend to reach ninety per cent quickly and stay there.
+- **Tie earned value to deliverables or milestones** that can be checked.
+- **Watch the schedule variance near the end.** When all work is complete, EV equals BAC and so equals PV, so SV and SPI return to zero and one even for a project that finished late. Schedule performance needs other measures near the end, such as the critical path or earned schedule.
+
+## Money in adaptive projects
+Adaptive projects often budget differently. Because the team is stable and the iteration length fixed, the cost of each iteration is roughly constant: the team's cost per sprint. The budget then determines how many iterations can be funded, and the product owner's job is to maximise the value delivered within that number.
+
+Earned value can be adapted. In one approach, the planned value is based on the story points planned for each iteration, and earned value on the points completed. But many adaptive teams prefer simpler measures: cost per iteration, burnup charts against the release plan, and above all whether the value being delivered justifies the continuing spend. The question "should we continue funding this?" is asked more often, which is itself a form of cost control.
+
+> example: Four months into Northfield's project, the earned value report showed a CPI of 0.88. The team's first reaction was to promise to recover. Amira looked at the cause instead: integration testing with the records vendor was taking far longer than estimated, and the remaining work involved three more integrations of the same kind. She presented the sponsor with a revised estimate at completion based on the actual performance, an explanation of the cause, and two options: accept the higher cost, or reduce the second-phase scope. The sponsor chose a mixture, and the project's credibility rose because the bad news came early and with a plan.
+
+> exam: Earned value calculations are among the most predictable exam content. Know PV, EV, AC and BAC; CV, SV, CPI and SPI with what positive and negative values mean; the EAC formulas and when each applies; ETC, VAC and TCPI. Also know contingency versus management reserve: contingency is for identified risks and sits within the cost baseline; management reserve is for unknown unknowns, sits outside it, and needs management approval to use.
+
+## Key ideas
+- Estimates are ranges that narrow as the project is defined. Present early ones honestly.
+- The cost baseline is the time-phased budget including contingency reserves; adding management reserve gives the project budget.
+- Earned value compares planned value, earned value and actual cost to show cost and schedule performance together.
+- CPI and SPI below 1 signal trouble. Cumulative CPI rarely improves much after the early stages.
+- Choose the estimate at completion formula that matches your belief about future performance.
+- Adaptive projects often budget by iteration and keep asking whether the value justifies continued spending.
+
+## Further reading
+- Quentin W. Fleming and Joel M. Koppelman, *Earned Value Project Management* (fourth edition, 2010). The classic, clear introduction.
+- David S. Christensen, "Using Performance Indices to Evaluate the Estimate at Completion", *Journal of Cost Analysis* (1994). On the stability of the cost performance index.
+- Walt Lipke, *Earned Schedule* (2009). Fixing earned value's blind spot at the end of a project.
+- Project Management Institute, *The Standard for Earned Value Management* (2019).
