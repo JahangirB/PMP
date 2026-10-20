@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- The network is used only by the coach's Gemini chat (the person's own key) and by cloud sync
-         (the person's own Apps Script), both off until set up. Everything else works offline.
+    <!-- The network is used only by the coach's Gemini chat (the person's own key), by cloud sync
+         (the person's own Apps Script), both off until set up, and by the update check (GitHub). Everything else works offline.
          Files go through the system picker. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Smart reminders: post notifications (asked for on Android 13+), set their alarms again after
@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
+    <!-- Check for updates: the downloaded APK goes to Android's installer, which asks you to confirm. -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -48,6 +50,9 @@
 
         <receiver
             android:name=".reminders.ReminderReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".update.UpdateReceiver"
             android:exported="false" />
         <receiver
             android:name=".reminders.ReminderBootReceiver"

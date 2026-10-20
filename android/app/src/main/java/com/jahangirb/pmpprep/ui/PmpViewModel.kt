@@ -12,7 +12,10 @@ import androidx.lifecycle.viewModelScope
 import com.jahangirb.pmpprep.data.Answer
 import com.jahangirb.pmpprep.data.Approach
 import com.jahangirb.pmpprep.data.Attempt
+import com.jahangirb.pmpprep.data.AppUpdate
 import com.jahangirb.pmpprep.data.ChatCommands
+import com.jahangirb.pmpprep.data.Release
+import com.jahangirb.pmpprep.update.UpdateInstaller
 import com.jahangirb.pmpprep.data.CardState
 import com.jahangirb.pmpprep.data.ChatTurn
 import com.jahangirb.pmpprep.data.CloudSync
@@ -110,6 +113,7 @@ enum class Dest(val title: String) {
     SEARCH("Search"),
     SYNC("Cloud sync"),
     SUPPORT("Support the app"),
+    UPDATES("App updates"),
 }
 
 /** What to practise. Null means "any". */
@@ -164,6 +168,7 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
                 // onStart came before content was loaded: count this open, then sync.
                 appOpened()
                 autoSync()
+                quietUpdateCheck()
                 // Keep the home-screen widget current: a second after progress settles.
                 launch {
                     store.revision.collectLatest {
@@ -176,6 +181,108 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
             } catch (e: Exception) {
                 loadError = e.message ?: e.toString()
             }
+        }
+    }
+
+    /* ── app updates (Android only) ──────────────────────────────────────── */
+
+    sealed interface UpdateState {
+        data object Idle : UpdateState
+        data object Checking : UpdateState
+        data object UpToDate : UpdateState
+        data class Available(val r: Release) : UpdateState
+        data class Downloading(val r: Release, val done: Long, val total: Long) : UpdateState
+        /** Downloaded; waiting for "allow installs" or for Android's confirmation. */
+        data class Ready(val r: Release, val apk: java.io.File) : UpdateState
+        data class Failed(val message: String, val r: Release?) : UpdateState
+    }
+    var update by mutableStateOf<UpdateState>(UpdateState.Idle)
+        private set
+    private var updateJob: Job? = null
+    @Volatile private var updateCancelled = false
+    private val updatePrefs = app.getSharedPreferences("updates", android.content.Context.MODE_PRIVATE)
+
+    /** This install's version code and name (build.gradle.kts: 100 + the CI run number). */
+    val appVersion: Pair<Long, String> by lazy {
+        val i = app.packageManager.getPackageInfo(app.packageName, 0)
+        val code = if (android.os.Build.VERSION.SDK_INT >= 28) i.longVersionCode else @Suppress("DEPRECATION") i.versionCode.toLong()
+        code to (i.versionName ?: "")
+    }
+    /** A newer build, found by a check, for the menu to point at. */
+    val updateAvailable: Release? get() = when (val u = update) {
+        is UpdateState.Available -> u.r
+        is UpdateState.Downloading -> u.r
+        is UpdateState.Ready -> u.r
+        else -> null
+    }
+
+    /** Once a day, quietly: a newer build shows as "Update available" in the menu; errors stay silent. */
+    private fun quietUpdateCheck() {
+        if (System.currentTimeMillis() - updatePrefs.getLong("checkedAt", 0) < AppUpdate.CHECK_EVERY_MS) return
+        checkForUpdate(quiet = true)
+    }
+
+    fun checkForUpdate(quiet: Boolean = false) {
+        if (updateJob?.isActive == true) return
+        if (!quiet) update = UpdateState.Checking
+        updateJob = viewModelScope.launch {
+            try {
+                val r = withContext(Dispatchers.IO) { AppUpdate.fetchLatest() }
+                updatePrefs.edit().putLong("checkedAt", System.currentTimeMillis()).apply()
+                update = when {
+                    r != null && AppUpdate.isNewer(r, appVersion.first) -> UpdateState.Available(r)
+                    quiet -> UpdateState.Idle
+                    else -> UpdateState.UpToDate
+                }
+            } catch (e: Exception) {
+                update = if (quiet) UpdateState.Idle
+                else UpdateState.Failed("Couldn't reach GitHub to check: ${e.message ?: "no connection"}.", null)
+            }
+        }
+    }
+
+    fun downloadUpdate(r: Release) {
+        if (updateJob?.isActive == true) return
+        updateCancelled = false
+        update = UpdateState.Downloading(r, 0, r.bytes)
+        val dir = java.io.File(getApplication<Application>().cacheDir, "updates")
+        updateJob = viewModelScope.launch {
+            try {
+                val apk = java.io.File(dir, "PMP-Prep-${r.build}.apk")
+                withContext(Dispatchers.IO) {
+                    dir.listFiles()?.forEach { if (it.name != apk.name) it.delete() }
+                    if (!apk.exists()) {
+                        var shown = 0L
+                        AppUpdate.download(r, apk, { updateCancelled }) { done, total ->
+                            // A redraw per quarter megabyte is plenty.
+                            if (done - shown >= 256 * 1024 || done == total) {
+                                shown = done
+                                viewModelScope.launch { update = UpdateState.Downloading(r, done, total) }
+                            }
+                        }
+                    }
+                }
+                update = UpdateState.Ready(r, apk)
+                installUpdate()
+            } catch (e: InterruptedException) {
+                update = UpdateState.Available(r)
+            } catch (e: Exception) {
+                update = UpdateState.Failed(e.message ?: "The download failed. Try again.", r)
+            }
+        }
+    }
+
+    fun cancelUpdate() { updateCancelled = true }
+
+    /** Hands the downloaded APK to Android, unless installs from this app still need allowing. */
+    fun installUpdate() {
+        val u = update as? UpdateState.Ready ?: return
+        val ctx = getApplication<Application>()
+        if (!UpdateInstaller.canInstall(ctx)) return
+        try {
+            UpdateInstaller.install(ctx, u.apk)
+        } catch (e: Exception) {
+            update = UpdateState.Failed("Android couldn't start the update: ${e.message ?: e}", u.r)
         }
     }
 

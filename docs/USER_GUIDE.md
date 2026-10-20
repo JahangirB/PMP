@@ -25,7 +25,10 @@ option opens a page with the file and step-by-step install instructions.
 
 - **Android:** the app isn't on Google Play. Download the APK on the phone,
   open it, and allow "Install unknown apps" when Android asks. A newer APK
-  installs over the old one and keeps your progress.
+  installs over the old one and keeps your progress. After that, **Menu → App
+  updates → Check for updates** fetches the newest build from GitHub and hands
+  it to Android to install (Android asks you to confirm). The app also checks
+  once a day and shows "Update available" in the menu.
 - **iPhone:** the app isn't on the App Store. You install it yourself with a
   free Apple ID through SideStore (recommended), AltStore or Sideloadly. A free
   Apple ID means refreshing the app every 7 days (SideStore and AltStore do this
@@ -213,6 +216,14 @@ Off until you add your own free Google AI Studio API key
 - **What you can ask:** anything, in the chat. You can also send a question
   you just answered with "Ask about this question", or ask for a full review of
   your progress.
+- **Select text, ask Gemini (web):** select words anywhere in a lesson,
+  question, explanation or the glossary, then press **Explain this** or **Ask a
+  question…**. In a practice question you haven't answered yet, Gemini is told
+  not to give the answer away. Not available during a mock exam.
+- **Gemini in your notes (web):** select part of your notes (or nothing, for
+  the whole page), press ✦ in the notes ribbon and choose **Tidy up**, **Make it
+  clear and short** or **Explain in detail**. The part is locked while Gemini
+  works; then **Keep**, **Redo** or **Undo** back to your own words.
 - **Commands:** type `/` in the message box for the ready-made questions
   (`/progress`, `/improve`, `/plan`, `/weakest`) and your own. Pick one to fill
   the box, or type `/plan` and send. "+ New command" makes your own: a name and
@@ -228,7 +239,7 @@ Off until you add your own free Google AI Studio API key
     accuracy by domain and task, mock results, mistake causes, pace, flashcard
     and lesson counts, your exam date and planned hours, and your exam-worry
     score if you answered the weekly check.
-- **What it doesn't send:** your notes.
+- **What it doesn't send:** your notes, except the part you send with ✦.
 - **Explain it back** sends only the topic and your explanation.
 - **"Ask about this question"** puts the question and your answer in the
   message box, so you can read and edit it before you send.
