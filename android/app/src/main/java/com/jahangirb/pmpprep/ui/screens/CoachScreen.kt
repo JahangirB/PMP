@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -46,6 +47,7 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -65,6 +67,8 @@ import androidx.compose.ui.unit.sp
 import com.jahangirb.pmpprep.data.ChatCommand
 import com.jahangirb.pmpprep.data.ChatCommands
 import com.jahangirb.pmpprep.data.CoachReport
+import com.jahangirb.pmpprep.data.Typewriter
+import kotlinx.coroutines.delay
 import com.jahangirb.pmpprep.ui.PmpViewModel
 import com.jahangirb.pmpprep.ui.components.BulletList
 import com.jahangirb.pmpprep.ui.components.MarkdownText
@@ -154,10 +158,18 @@ private fun CoachChat(vm: PmpViewModel) {
     val list = rememberLazyListState()
     val chat = vm.store.chat.toList()
     val typing = WindowInsets.isImeVisible
-    LaunchedEffect(chat.size, vm.aiBusy, rev, typing) { if (chat.isNotEmpty()) list.animateScrollToItem(chat.size + 1) }
+    /* The message just sent and what follows it share the last item, at least a screen tall, so that
+       message can sit at the top while the reply is written out below it; the person scrolls on. */
+    val split = vm.chatAnchor?.let { a -> chat.indexOfFirst { it.at == a && it.role == "user" }.takeIf { it >= 0 } } ?: chat.size
+    val tailIndex = 1 + (if (chat.isEmpty()) 1 else 0) + split
+    LaunchedEffect(Unit) { list.scrollToItem(tailIndex) }
+    LaunchedEffect(vm.chatAnchor) { if (vm.chatAnchor != null) list.animateScrollToItem(tailIndex) }
+    LaunchedEffect(typing) { if (typing && vm.typingAt == null) list.animateScrollToItem(tailIndex) }
 
     Column(Modifier.fillMaxSize().imePadding()) {
-        LazyColumn(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 12.dp), state = list, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
+        val viewport = maxHeight
+        LazyColumn(Modifier.fillMaxSize().padding(horizontal = 12.dp), state = list, verticalArrangement = Arrangement.spacedBy(8.dp)) {
             item {
                 // One short line on top, so the conversation keeps the room.
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -177,17 +189,24 @@ private fun CoachChat(vm: PmpViewModel) {
                     Text("Ask about your progress, a PMP topic, or a question that confused you.", fontSize = 14.sp)
                 }
             }
-            items(chat) { t -> Bubble(t.role == "user", t.text) }
+            items(chat.take(split)) { t -> Bubble(t.role == "user", t.text) }
             item {
+                Column(if (split < chat.size) Modifier.heightIn(min = viewport) else Modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                chat.drop(split).forEach { t ->
+                    if (t.role != "user" && t.at == vm.typingAt) TypedReply(t.text) { vm.typingAt = null }
+                    else Bubble(t.role == "user", t.text)
+                }
                 if (vm.aiBusy) Row(Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
                     CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp)
                     Spacer(Modifier.width(8.dp))
                     Text("Thinking…", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 vm.aiError?.let { Text(it, color = ColorError, fontSize = 13.sp, modifier = Modifier.padding(8.dp)) }
-                if (chat.isNotEmpty()) TextButton(onClick = { vm.store.clearChat() }) { Text("Clear conversation") }
+                if (chat.isNotEmpty() && vm.typingAt == null) TextButton(onClick = { vm.chatAnchor = null; vm.store.clearChat() }) { Text("Clear conversation") }
                 Spacer(Modifier.height(4.dp))
+                }
             }
+        }
         }
         var input by remember { mutableStateOf("") }
         var editing by remember { mutableStateOf<ChatCommand?>(null) }
@@ -207,6 +226,19 @@ private fun CoachChat(vm: PmpViewModel) {
             }
         }
     }
+}
+
+/** A reply written out word by word, though it arrived whole ([Typewriter]). */
+@Composable
+private fun TypedReply(text: String, done: () -> Unit) {
+    var n by remember(text) { mutableStateOf(0) }
+    LaunchedEffect(text) {
+        while (n < text.length) { delay(Typewriter.FRAME_MS); n = Typewriter.next(text, n) }
+        done()
+    }
+    // Leaving the screen part-way shows the whole reply next time.
+    DisposableEffect(text) { onDispose { if (n < text.length) done() } }
+    Bubble(false, if (n < text.length) Typewriter.shown(text, n) + " ▍" else text)
 }
 
 @Composable

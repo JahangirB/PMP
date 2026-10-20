@@ -1226,6 +1226,10 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     var aiError by mutableStateOf<String?>(null)
     /** Text waiting in the coach's input, e.g. a question sent from practice. */
     var coachDraft by mutableStateOf("")
+    /** The message just sent: the chat keeps it at the top while the reply comes (index.html §12.2.2). */
+    var chatAnchor by mutableStateOf<Long?>(null)
+    /** The reply being written out word by word ([Typewriter]); the full text is already saved. */
+    var typingAt by mutableStateOf<Long?>(null)
     /** The privacy note above the chat, closed once for good on this phone. */
     var chatNoteClosed by mutableStateOf(aiPrefs.getBoolean("noteClosed", false))
         private set
@@ -1326,7 +1330,10 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
     fun ask(text: String) {
         val t = ChatCommands.expand(text.trim(), store.chatCommands)
         if (t.isEmpty() || aiBusy || geminiKey.isEmpty()) return
-        store.addChat(ChatTurn("user", t, System.currentTimeMillis()))
+        val sentAt = System.currentTimeMillis()
+        store.addChat(ChatTurn("user", t, sentAt))
+        chatAnchor = sentAt
+        typingAt = null
         aiBusy = true
         aiError = null
         val system = Coach.SYSTEM + "\n\nLearner progress snapshot, computed by the app just now:\n" + coach().snapshot()
@@ -1334,7 +1341,12 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             try {
                 val reply = callGemini(system, turns)
-                store.addChat(ChatTurn("model", reply, System.currentTimeMillis()))
+                val at = maxOf(System.currentTimeMillis(), sentAt + 1)
+                store.addChat(ChatTurn("model", reply, at))
+                // With animations off in the phone's settings, the reply shows whole.
+                val still = android.provider.Settings.Global.getFloat(getApplication<android.app.Application>().contentResolver,
+                    android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+                typingAt = if (still) null else at
             } catch (e: Exception) {
                 aiError = e.message ?: "Something went wrong."
             } finally {

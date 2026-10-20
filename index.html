@@ -2667,6 +2667,10 @@ html[data-notepad="open"] .np { display: flex; }
 .np-m[data-role="user"] { align-self: flex-end; background: var(--s-wash); border: 1px solid var(--c-signal); white-space: pre-wrap; }
 .np-m[data-role="model"] { align-self: flex-start; background: var(--s-sunk); }
 .np-m[data-role="error"] { align-self: stretch; max-width: none; background: var(--st-incorrect-bg); color: var(--st-incorrect-fg); }
+.np-spacer { flex: 0 0 auto; }
+.np-caret { display: inline-block; width: .5em; height: 1em; margin-left: 2px; vertical-align: -0.15em; border-radius: 2px;
+  background: currentColor; opacity: .55; animation: np-blink 1s steps(2, start) infinite; }
+@keyframes np-blink { to { visibility: hidden; } }
 .np-m[data-role="wait"] { align-self: flex-start; color: var(--fg-muted); font-style: italic; }
 .np-compose { display: flex; gap: var(--sp-2); align-items: flex-end; flex: 0 0 auto; position: relative; }
 .np-msg { flex: 1 1 auto; min-height: 64px; max-height: 160px; resize: vertical; font-size: var(--t-sm); line-height: var(--lh-body); }
@@ -53386,15 +53390,77 @@ PMP.GeminiChat = (function () {
   function bubble(role, text) {
     return el("div", { class: "np-m", dataset: { role: role } }, role === "model" ? markdown(text) : [text]);
   }
+  /* A reply is written out word by word, as chat apps do, though it
+     arrives whole; the full text is saved at once. The person's message
+     stays at the top of the log meanwhile, and they scroll on themselves. */
+  var typing = null, anchor = null, spacer = null;
+  /* Room under the reply, so the sent message can sit at the top while the
+     reply is short; it shrinks as the reply grows. */
+  function fitSpacer() {
+    if (!spacer || !spacer.parentNode) return;
+    var mine = spacer.dataset.mine && document.getElementById(spacer.dataset.mine);
+    if (!mine) return;
+    var below = spacer.getBoundingClientRect().top - mine.getBoundingClientRect().top;
+    spacer.style.height = Math.max(0, nodes.log.clientHeight - below - 4) + "px";
+  }
+  function typedText(t) {
+    var out = t.text.slice(0, t.n);
+    if ((out.match(/\*\*/g) || []).length % 2) out += "**";
+    if ((out.match(/```/g) || []).length % 2) out += "\n```";
+    return out;
+  }
+  function paintTyping() {
+    var t = typing;
+    if (!t || !t.node) return;
+    t.node.innerHTML = "";
+    PMP.dom.append(t.node, markdown(typedText(t)));
+    var last = t.node.lastElementChild || t.node;
+    (last.tagName === "UL" && last.lastElementChild ? last.lastElementChild : last).appendChild(el("span", { class: "np-caret", "aria-hidden": "true" }));
+    fitSpacer();
+  }
+  function tick() {
+    var t = typing;
+    if (!t) return;
+    var next = t.text.slice(t.n + t.step).search(/\s/);
+    t.n = next < 0 ? t.text.length : t.n + t.step + next;
+    if (t.n >= t.text.length) { stopTyping(); return; }
+    paintTyping();
+    setTimeout(tick, 16);
+  }
+  function stopTyping() {
+    var t = typing;
+    typing = null;
+    anchor = null;
+    if (t && t.node) { t.node.innerHTML = ""; PMP.dom.append(t.node, markdown(t.text)); t.node.removeAttribute("aria-busy"); fitSpacer(); }
+  }
+  function typeOut(m) {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    typing = { at: m.at, text: m.t, n: 0, step: Math.max(3, Math.ceil(m.t.length / 200)), node: null };
+  }
+
   function renderLog() {
-    var list = chat();
+    var list = chat(), mark = null;
     nodes.log.innerHTML = "";
     if (!list.length && !busy) {
       nodes.log.appendChild(el("p", { class: "np-log-empty", text: "Ask about your progress, a PMP topic, or a question that confused you. Replies come from Gemini under your key." }));
     }
-    list.forEach(function (m) { nodes.log.appendChild(bubble(m.r === "model" ? "model" : "user", m.t)); });
+    list.forEach(function (m) {
+      var b = bubble(m.r === "model" ? "model" : "user", m.t);
+      if (typing && m.r === "model" && m.at === typing.at) { typing.node = b; b.setAttribute("aria-busy", "true"); }
+      if (anchor !== null && m.r !== "model" && m.at === anchor) mark = b;
+      nodes.log.appendChild(b);
+    });
     if (busy) nodes.log.appendChild(el("div", { class: "np-m", dataset: { role: "wait" }, text: "Gemini is thinking…" }));
-    nodes.log.scrollTop = nodes.log.scrollHeight;
+    spacer = null;
+    if (mark) {
+      mark.id = "np-sent";
+      spacer = el("div", { class: "np-spacer", "aria-hidden": "true", dataset: { mine: "np-sent" } });
+      nodes.log.appendChild(spacer);
+      fitSpacer();
+    }
+    if (typing) paintTyping();
+    if (mark) nodes.log.scrollTop += mark.getBoundingClientRect().top - nodes.log.getBoundingClientRect().top - 4;
+    else nodes.log.scrollTop = nodes.log.scrollHeight;
   }
   function showError(msg) {
     nodes.log.appendChild(el("div", { class: "np-m", dataset: { role: "error" }, role: "alert", text: msg }));
@@ -53551,6 +53617,8 @@ PMP.GeminiChat = (function () {
     if (!text || busy || !key) return;
     closeMenu();
     var now = Date.now();
+    stopTyping();
+    anchor = now;
     saveChat(chat().concat([{ r: "user", t: text, at: now }]));
     if (typeof textArg !== "string") nodes.msg.value = "";
     busy = new AbortController();
@@ -53562,11 +53630,15 @@ PMP.GeminiChat = (function () {
     callGemini(system, turns, mine.signal).then(function (reply) {
       if (busy !== mine) return;
       busy = null;
-      saveChat(chat().concat([{ r: "model", t: reply, at: Math.max(Date.now(), now + 1) }]));
+      var m = { r: "model", t: reply, at: Math.max(Date.now(), now + 1) };
+      saveChat(chat().concat([m]));
+      typeOut(m);
       renderLog();
+      if (typing) setTimeout(tick, 16); else anchor = null;
     }, function (e) {
       if (busy !== mine) return;
       busy = null;
+      anchor = null;
       renderLog();
       if (!(e && e.name === "AbortError")) showError((e && e.message) || "Something went wrong.");
     }).then(function () {
@@ -53744,6 +53816,7 @@ PMP.GeminiChat = (function () {
     PMP.dom.on(document.getElementById("np-key-forget"), "click", forget);
     PMP.dom.on(document.getElementById("np-new"), "click", function () {
       if (busy) { busy.abort(); busy = null; }
+      stopTyping();
       saveChat([]);
       renderLog();
       paintBusy();
