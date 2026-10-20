@@ -27032,6 +27032,999 @@ PMP.THEORY = Object.freeze({
    "words": 1711,
    "minutes": 8,
    "n": 22
+  },
+  {
+   "id": "t23",
+   "part": 5,
+   "title": "Organisational change and adoption",
+   "summary": "Why delivered is not the same as adopted, how people experience change, the main models for leading it, and how a project makes sure its result is used.",
+   "why": "Most projects change the way people work. A new system, process or structure creates value only when people actually use it as intended, and people do not change their habits just because something new has been installed. Many projects declared successful at handover quietly fail afterwards, because the organisation never really changed. Leading the human side of change is how a project turns outputs into outcomes.",
+   "sections": [
+    {
+     "id": "t23-s1",
+     "title": "Delivered is not adopted",
+     "blocks": [
+      "Chapter 1 distinguished outputs, which a project delivers, from outcomes, which happen when the outputs are used. The gap between the two is **adoption**: the process by which people take up the new way of working and keep it up.",
+      "Adoption fails in familiar ways. Staff keep using the old spreadsheet alongside the new system. Managers continue to ask for the old reports. Workarounds appear for features that do not fit real work. Training is given once, months before go-live, and forgotten. Early problems confirm sceptics' doubts and the new way never recovers. Within a year, the expensive new capability is used for a fraction of what it was meant to do.",
+      "None of these failures is technical. All of them are predictable, and most are preventable if the project treats change management as part of its work from the start, rather than as a communication task at the end."
+     ]
+    },
+    {
+     "id": "t23-s2",
+     "title": "How people experience change",
+     "blocks": [
+      "Change affects people as individuals. Even a change they support asks them to give up familiar routines, learn new skills, and accept a period in which they are less competent than before. Change they did not choose may also threaten their status, relationships or job.",
+      "**William Bridges** distinguished **change**, the external event (the new system goes live on Monday), from **transition**, the internal psychological process people go through to come to terms with it. Transition has three phases. It begins with an **ending**: letting go of the old way and the identity that went with it. Then comes a **neutral zone**: an uncomfortable, confused in-between period when the old way has gone and the new one does not yet feel natural. Finally comes a **new beginning**: people commit to the new way and it becomes normal. Projects tend to focus on the change and neglect the transition, and in particular to underestimate how much people need help to let go of the old way.",
+      "Many people's experience of change follows a similar emotional curve, often drawn from Elisabeth Kübler-Ross's work on grief or from Virginia Satir's change model: an initial dip in performance and morale after the change, followed by recovery and, if the change is good, eventual improvement beyond the starting point. The practical lesson is to expect the dip, plan support for it, and not judge the change by how things look in the first weeks.",
+      {
+       "fig": {
+        "title": "Performance through a change",
+        "caption": "Performance usually dips after a change before it recovers and improves. Bridges's three phases of transition run underneath: letting go, an uncertain middle, and a new normal.",
+        "alt": "A line of performance over time: level before the change, dipping after it, then recovering above the original level. Beneath, three phases: Ending, Neutral zone and New beginning.",
+        "w": 640,
+        "h": 275,
+        "shapes": [
+         {
+          "k": "line",
+          "p": [
+           40,
+           20,
+           40,
+           230
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "line",
+          "p": [
+           40,
+           230,
+           610,
+           230
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "line",
+          "p": [
+           40,
+           110,
+           610,
+           110
+          ],
+          "dash": true,
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 46,
+          "y": 100,
+          "t": "performance before",
+          "a": "start",
+          "s": 10,
+          "tone": "muted"
+         },
+         {
+          "k": "line",
+          "p": [
+           40,
+           110,
+           170,
+           110,
+           215,
+           150,
+           270,
+           190,
+           330,
+           185,
+           390,
+           140,
+           470,
+           90,
+           600,
+           70
+          ],
+          "tone": "accent"
+         },
+         {
+          "k": "line",
+          "p": [
+           175,
+           30,
+           175,
+           230
+          ],
+          "dash": true,
+          "tone": "warn"
+         },
+         {
+          "k": "text",
+          "x": 175,
+          "y": 22,
+          "t": "the change",
+          "a": "middle",
+          "s": 10,
+          "b": true,
+          "tone": "warn"
+         },
+         {
+          "k": "text",
+          "x": 270,
+          "y": 212,
+          "t": "the dip: plan support",
+          "a": "middle",
+          "s": 10,
+          "b": true,
+          "tone": "bad"
+         },
+         {
+          "k": "line",
+          "p": [
+           175,
+           248,
+           255,
+           248
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 215,
+          "y": 264,
+          "t": "Ending",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "line",
+          "p": [
+           260,
+           248,
+           395,
+           248
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 327,
+          "y": 264,
+          "t": "Neutral zone",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         },
+         {
+          "k": "line",
+          "p": [
+           400,
+           248,
+           610,
+           248
+          ],
+          "tone": "muted"
+         },
+         {
+          "k": "text",
+          "x": 505,
+          "y": 264,
+          "t": "New beginning",
+          "a": "middle",
+          "s": 11,
+          "b": true
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "t23-s3",
+     "title": "Models for leading change",
+     "blocks": [
+      "Several well-known models offer structure for leading organisational change. They overlap more than they differ.",
+      "**Kurt Lewin** described change in three stages: **unfreeze** (create readiness by showing why the current state must change), **change** (move to the new state), and **refreeze** (stabilise the new state so it sticks). The model is simple, and its main point endures: change needs preparation before and reinforcement after, not just the move itself.",
+      "**John Kotter**, studying failed corporate transformations, proposed eight steps: create a sense of urgency; build a guiding coalition of influential people; form a strategic vision; communicate the vision widely; remove obstacles and empower people to act; generate short-term wins; sustain acceleration by building on those wins; and anchor the change in the culture. His analysis of why changes fail, such as declaring victory too soon or under-communicating the vision by a factor of ten, is as useful as the steps themselves.",
+      "The **ADKAR** model, developed by Jeff Hiatt at Prosci, focuses on the individual. For a person to change successfully, they need **awareness** of why the change is needed, the **desire** to take part, the **knowledge** of how to change, the **ability** to apply that knowledge in practice, and **reinforcement** to sustain it. The model is useful as a diagnostic: when someone is not adopting the change, which of the five is missing? Training addresses knowledge, but it cannot create desire in someone who does not see the point."
+     ]
+    },
+    {
+     "id": "t23-s4",
+     "title": "Who adopts when",
+     "blocks": [
+      "Everett Rogers's research on the **diffusion of innovations** found that people take up new ideas at different speeds, roughly in a bell curve: a small group of **innovators**, then **early adopters**, an **early majority**, a **late majority**, and finally **laggards**. Early adopters are often respected opinion leaders whose example persuades others; the late majority adopts once the change is the norm; laggards may adopt only when the old way is removed.",
+      "For a project, this suggests a practical approach: identify and work with the early adopters first, make their success visible, use them as champions and peer trainers, and plan explicit support for the late majority rather than expecting everyone to move at the speed of the enthusiasts."
+     ]
+    },
+    {
+     "id": "t23-s5",
+     "title": "Making adoption part of the project",
+     "blocks": [
+      "Change management works best when it is built into the project, not added at the end. Several practices help.",
+      {
+       "ul": [
+        "**Assess the impact** early: who is affected, how much their work changes, and what they stand to gain or lose.",
+        "**Involve affected people in design**, so the result fits real work and people feel ownership (Chapter 18).",
+        "**Find and equip champions**, respected people in each affected group who understand the change and can support their colleagues.",
+        "**Communicate the why, repeatedly**, in terms that matter to each group, and through people they trust.",
+        "**Train close to the time of use**, in the context of real work, and follow up after go-live.",
+        "**Plan for the dip**: extra support, floor walkers, quick fixes, and patience in the first weeks.",
+        "**Remove the old way** when the new one is ready, so that people are not tempted back.",
+        "**Align the system around the change**: reports, targets, procedures and incentives that still reward the old behaviour will undermine the new one.",
+        "**Measure adoption**, not just delivery: who is using the new way, how, and with what results."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "t23-s6",
+     "title": "Transition and handover",
+     "blocks": [
+      "The project's last major responsibility for change is the **transition** of the result into operations. A good transition makes sure the operations team is ready to support the result, with the knowledge, documentation, tools and staff it needs; that users are trained and supported; that the old system or process is retired cleanly; and that the people who will own the benefits are in place and measuring them.",
+      "Transition often deserves its own plan, and sometimes its own phase. Projects that treat go-live as the finish line hand over results that the organisation is not ready to receive. Involving the operations team throughout the project, rather than at the end, is one of the most effective ways to make transition smooth."
+     ]
+    },
+    {
+     "id": "t23-s7",
+     "title": "Organisational culture",
+     "blocks": [
+      "Every change happens inside a culture: the shared assumptions, values and habits that shape how people behave, often without noticing. Edgar Schein described culture in layers: visible artefacts (offices, dress, rituals), espoused values (what the organisation says it believes), and underlying assumptions (what people actually take for granted). Changes that conflict with underlying assumptions meet resistance that no amount of communication about espoused values will overcome.",
+      "A project rarely has the power to change an organisation's culture, but it needs to understand it. An organisation where decisions are made by senior consensus will not adopt a system that assumes front-line staff make decisions alone. A project manager who reads the culture can design the change to work with it where possible, and can warn the sponsor where it must work against it.",
+      {
+       "box": "example",
+       "text": "Northfield's first clinics adopted online booking quickly; the next ten did not. Amira's team looked at the difference. The first clinics had receptionist champions who had helped design the system, demonstrated it to patients and stopped offering phone booking for routine appointments once it was working. The later clinics had been trained by the project team, in a classroom, a month before go-live, and kept phone booking as the default. The team changed approach: each remaining clinic chose a champion who spent a week in a working clinic, and phone booking for routine appointments was gradually withdrawn once online use passed half. Adoption in the later clinics recovered within two months."
+      },
+      {
+       "box": "myth",
+       "text": "\"Good systems sell themselves.\" Even excellent changes ask people to give up familiar habits and pass through a period of lower competence. Without deliberate support, many people will stay with what they know, however good the new way is."
+      },
+      {
+       "box": "exam",
+       "text": "Expect questions where a deliverable is accepted but not used, or where users resist a new process. The right answer usually addresses the human side: understand the resistance, involve users, provide training and support, find champions, communicate the benefits, and plan transition to operations. Questions also test that benefits are realised after handover and that the organisation's readiness for change is part of the project's concern."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Outputs create value only when adopted. Adoption fails for human reasons, which are predictable and mostly preventable.",
+    "Bridges separates the external change from the internal transition: an ending, a neutral zone and a new beginning.",
+    "Expect a dip in performance and morale after a change; plan support through it.",
+    "Lewin, Kotter and ADKAR offer structure: prepare, move, reinforce; build urgency, coalitions and early wins; check awareness, desire, knowledge, ability and reinforcement.",
+    "People adopt at different speeds; work with early adopters and champions, and support the late majority.",
+    "Build change management into the project: involvement, champions, timely training, support, removal of the old way, and aligned incentives."
+   ],
+   "reading": [
+    "William Bridges, *Managing Transitions* (1991, later editions).",
+    "John P. Kotter, *Leading Change* (1996).",
+    "Jeffrey M. Hiatt, *ADKAR: A Model for Change in Business, Government and Our Community* (2006).",
+    "Everett M. Rogers, *Diffusion of Innovations* (fifth edition, 2003).",
+    "Edgar H. Schein, *Organizational Culture and Leadership* (many editions)."
+   ],
+   "words": 1612,
+   "minutes": 7,
+   "n": 23
+  },
+  {
+   "id": "t24",
+   "part": 5,
+   "title": "Ethics and professional responsibility",
+   "summary": "Why ethics matters in project work, the values professional codes rest on, the dilemmas project managers actually meet, and how to act well when the right course is unclear.",
+   "why": "Project managers control money, information and people's time, under pressure to deliver. Those conditions create temptations: to hide bad news, to bend rules for a deadline, to favour a supplier, to promise what cannot be delivered. Most ethical failures on projects are not dramatic frauds but small compromises that accumulate. A clear sense of professional ethics protects the people the project affects, the organisation, and the project manager's own credibility, which is ultimately the most valuable thing they have.",
+   "sections": [
+    {
+     "id": "t24-s1",
+     "title": "Why ethics matters on projects",
+     "blocks": [
+      "Ethics is about doing what is right, especially when no rule forces you to and when doing wrong would be easier. On projects, it matters for several practical reasons.",
+      "Projects run on **trust**. Sponsors rely on the project manager's reports to make decisions. Team members rely on promises about workload and recognition. Suppliers rely on fair treatment. Once trust is damaged, every interaction becomes slower, more defensive and more expensive.",
+      "Projects also **affect people beyond the team**: users, communities, the environment, future generations who inherit what is built. Decisions about safety margins, data, materials, working conditions and honesty in reporting have consequences that the people making them may never see.",
+      "And project management is a **profession**. Professions are trusted because their members are expected to put certain standards above their own convenience and their employer's short-term interest. That expectation is what gives professional judgement its weight."
+     ]
+    },
+    {
+     "id": "t24-s2",
+     "title": "The values behind professional codes",
+     "blocks": [
+      "Professional bodies publish codes of conduct for their members. PMI's *Code of Ethics and Professional Conduct* rests on four values, which it identified as most important to practitioners around the world.",
+      {
+       "ul": [
+        "**Responsibility**: taking ownership of decisions and their consequences, including failures; making commitments only within one's competence; keeping promises; reporting errors and unethical conduct.",
+        "**Respect**: treating people, their views and their property with consideration; listening; negotiating in good faith; not exploiting others; respecting cultural differences.",
+        "**Fairness**: making decisions impartially and objectively; disclosing conflicts of interest; not favouring people for personal gain; giving equal access to information and opportunities.",
+        "**Honesty**: understanding the truth and acting truthfully in communications and conduct; not deceiving, including through misleading omissions or half-truths."
+       ]
+      },
+      "The code distinguishes **aspirational standards**, which members strive to uphold, from **mandatory standards**, which set firm requirements and can lead to disciplinary action if broken. Other professional bodies' codes differ in wording but share much the same core.",
+      {
+       "fig": {
+        "title": "Four values of professional conduct",
+        "caption": "The values behind PMI's code of ethics. Most everyday ethical choices on projects test one of them.",
+        "alt": "Four boxes: Responsibility (own decisions and mistakes; keep promises), Respect (listen; good faith; value differences), Fairness (impartial decisions; disclose conflicts), Honesty (truthful reports and estimates).",
+        "w": 640,
+        "h": 135,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 10,
+          "y": 20,
+          "w": 147,
+          "h": 96,
+          "tone": "accent",
+          "s": 12,
+          "t": "Responsibility\n\nown decisions and\nmistakes; keep promises"
+         },
+         {
+          "k": "box",
+          "x": 167,
+          "y": 20,
+          "w": 147,
+          "h": 96,
+          "tone": "good",
+          "s": 12,
+          "t": "Respect\n\nlisten; good faith;\nvalue differences"
+         },
+         {
+          "k": "box",
+          "x": 324,
+          "y": 20,
+          "w": 147,
+          "h": 96,
+          "tone": "warn",
+          "s": 12,
+          "t": "Fairness\n\nimpartial decisions;\ndisclose conflicts"
+         },
+         {
+          "k": "box",
+          "x": 481,
+          "y": 20,
+          "w": 147,
+          "h": 96,
+          "tone": "bad",
+          "s": 12,
+          "t": "Honesty\n\ntruthful reports\nand estimates"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "t24-s3",
+     "title": "Dilemmas project managers meet",
+     "blocks": [
+      "Ethical situations on projects are rarely as clear as textbook cases of bribery. More often they involve competing obligations, pressure and ambiguity. Some common examples:",
+      {
+       "ul": [
+        "**Optimistic reporting.** The sponsor wants good news; the project is in trouble. Softening the report is tempting and always eventually costly.",
+        "**Unrealistic commitments.** A manager pressures the project manager to commit to a date they believe is impossible.",
+        "**Conflicts of interest.** A supplier bidding for work is run by a friend, or offers a \"consultancy\" role after the contract.",
+        "**Gifts and hospitality.** A vendor offers tickets, travel or gifts. Many organisations have clear limits; where they do not, the test is whether the gift could influence, or appear to influence, a decision.",
+        "**Confidential information.** A team member shares a competitor's pricing obtained from a former employer.",
+        "**Quality and safety shortcuts.** Skipping a test or approval to meet a deadline, when the risk falls on users or the public.",
+        "**Taking credit or assigning blame.** Presenting the team's work as one's own, or blaming individuals for failures caused by the plan.",
+        "**Overworking the team** to meet commitments made without their input.",
+        "**Discrimination and unfair treatment** in assignments, recognition or conduct.",
+        "**Data and privacy.** Using personal data beyond what people agreed to, or protecting it carelessly."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "t24-s4",
+     "title": "Acting well when it is unclear",
+     "blocks": [
+      "When the right course is not obvious, a structured approach helps. One practical sequence is:",
+      {
+       "ol": [
+        "**Recognise that there is an ethical question**, rather than treating it purely as a practical or political one.",
+        "**Get the facts.** What exactly is happening? What do you know, and what are you assuming?",
+        "**Identify who is affected** and what each stands to gain or lose.",
+        "**Check the rules**: law, organisational policy, contracts, professional codes.",
+        "**Consider the options**, and test each against simple questions. Would I be comfortable if this appeared in the newspaper? Would I be happy to explain it to the people affected? Is this what I would want done to me? What would a respected colleague do?",
+        "**Seek advice** from a mentor, the organisation's ethics function, legal advisers or the professional body.",
+        "**Act, and take responsibility** for the decision."
+       ]
+      },
+      "Many ethical failures happen not because people do not know what is right but because they do not feel able to act on it, under pressure from a superior, a deadline or a team. Organisations with clear policies, safe ways to raise concerns and leaders who respond well to bad news make ethical action easier. Project managers can do the same for their teams."
+     ]
+    },
+    {
+     "id": "t24-s5",
+     "title": "Honesty about status and estimates",
+     "blocks": [
+      "One ethical issue deserves special attention because it is so common in project work: honesty about status and estimates. Pressure to report that all is well, and to commit to dates and budgets that please sponsors, is constant. Yielding to it seems harmless in the moment and is responsible for a great deal of project failure, because decisions are made on false information and problems grow until they can no longer be hidden.",
+      "The professional obligation is clear: report status truthfully, give estimates honestly, including their uncertainty, and say so when a commitment cannot be met. This does not mean being gloomy or unhelpful. It means presenting problems early, with analysis and options, so that the people who must decide can do so on the basis of reality."
+     ]
+    },
+    {
+     "id": "t24-s6",
+     "title": "Wider responsibilities",
+     "blocks": [
+      "Modern professional practice increasingly recognises responsibilities beyond the immediate project and organisation.",
+      {
+       "ul": [
+        "**Sustainability**: the environmental and social effects of what the project builds and how it builds it, from materials and energy use to the long-term costs of operating the result.",
+        "**Accessibility and inclusion**: making sure results can be used by people with disabilities and do not exclude groups unintentionally.",
+        "**Data and technology ethics**: how personal data is collected and used, how automated decisions affect people, and how systems might be misused.",
+        "**Working conditions**: in the team and in the supply chain."
+       ]
+      },
+      "These considerations are increasingly embedded in law and regulation, but the professional standard is to consider them even where the law does not yet require it."
+     ]
+    },
+    {
+     "id": "t24-s7",
+     "title": "Keeping competent",
+     "blocks": [
+      "Professional responsibility also includes competence: taking on only work one is qualified for, or being open about one's limitations, and continuing to learn. Many certifications, including the PMP, require ongoing professional development, measured in professional development units (PDUs), to stay current. The underlying principle matters more than the requirement: a profession whose methods change, as project management's have, needs practitioners who keep learning.",
+      {
+       "box": "example",
+       "text": "Late in Northfield's rollout, the board asked for a report showing the project was on budget, to support a funding application for the next phase. The project was about six per cent over. A finance manager suggested moving some integration costs into the operations budget, where they would not appear. Amira declined and explained why to the sponsor: the costs were the project's, and hiding them would mislead the board on exactly the question it was deciding. She reported the overrun with its cause and the forecast to completion. The board approved the next phase anyway, and later cited the accuracy of the project's reporting as a reason to trust its next estimate."
+      },
+      {
+       "box": "myth",
+       "text": "\"Ethics is about avoiding fraud and bribery.\" Those are the extreme cases. Most ethical choices on projects are about honesty in everyday reporting, fairness in everyday decisions, and the courage to say what others would rather not hear."
+      },
+      {
+       "box": "exam",
+       "text": "Expect several questions on professional responsibility. The right answers consistently reflect honesty (report accurately, even when the news is bad), fairness (disclose conflicts of interest, treat suppliers equally), respect (address issues privately, respect cultural differences), and responsibility (own mistakes, act within competence, report unethical behaviour through the proper channels). Answers that conceal, falsify, favour, or retaliate are always wrong, whatever pressure the scenario describes."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Projects run on trust; ethics protects the people affected, the organisation and the project manager's credibility.",
+    "Professional codes rest on responsibility, respect, fairness and honesty, with aspirational and mandatory standards.",
+    "Real dilemmas involve pressure and competing obligations: optimistic reporting, impossible commitments, conflicts of interest, shortcuts.",
+    "When unclear, get the facts, identify who is affected, check the rules, test the options, seek advice, and take responsibility.",
+    "Honest status reporting and estimates are among the most important everyday ethical obligations.",
+    "Wider responsibilities include sustainability, accessibility, data ethics, working conditions and continued competence."
+   ],
+   "reading": [
+    "Project Management Institute, *Code of Ethics and Professional Conduct*, at pmi.org. Short and clear; worth reading in full.",
+    "Max H. Bazerman and Ann E. Tenbrunsel, *Blind Spots: Why We Fail to Do What's Right and What to Do about It* (2011).",
+    "Mary C. Gentile, *Giving Voice to Values* (2010). Practical help for acting on what you know is right.",
+    "Bent Flyvbjerg, \"Survival of the Unfittest: Why the Worst Infrastructure Gets Built\", *Oxford Review of Economic Policy* (2009). On strategic misrepresentation in project approvals."
+   ],
+   "words": 1487,
+   "minutes": 7,
+   "n": 24
+  },
+  {
+   "id": "t25",
+   "part": 6,
+   "title": "Thinking like a project manager",
+   "summary": "The habits of thought that experienced project managers share: seeing systems, finding causes, acting early, checking assumptions, weighing trade-offs and staying honest about uncertainty.",
+   "why": "Methods, tools and templates can be learned from books. What distinguishes experienced project managers is how they think when the book runs out: how they read a situation, which questions they ask first, what they notice that others miss, and how they decide under pressure. This chapter draws together the mindset that runs through the whole of this book.",
+   "sections": [
+    {
+     "id": "t25-s1",
+     "title": "Start from purpose",
+     "blocks": [
+      "The first habit is to keep asking what the project is for. Every plan, document, meeting and decision is a means to an end, and it is remarkably easy to lose sight of the end. When a team argues about a feature, a good project manager asks which option better serves the outcome the organisation needs. When a process feels burdensome, they ask what purpose it serves. When the plan and reality diverge, they ask whether the original goal is still the right one.",
+      "Purpose gives decisions a test. Without it, decisions are settled by whoever is loudest, most senior or most persistent. With it, they can be settled by argument about what actually helps."
+     ]
+    },
+    {
+     "id": "t25-s2",
+     "title": "See the system",
+     "blocks": [
+      "Projects are systems of interacting parts (Chapter 5), and many project problems are caused not by any single part but by how the parts interact. A team's slow delivery may be caused by approval delays in another department; a quality problem by an incentive that rewards speed; a supplier's poor performance by a contract that punishes them for raising issues.",
+      "Systems thinking asks a few habitual questions. What else will this change affect? What happens next, and after that? Who else is involved that we have not considered? Are we treating a symptom or a cause? Where are the delays, feedback loops and incentives in this situation?",
+      "It also guards against a common trap: the obvious fix that makes things worse. Adding people to a late project, adding inspection to fix quality, adding reports to fix visibility and adding pressure to fix speed all seem sensible and often backfire, because they ignore how the system responds."
+     ]
+    },
+    {
+     "id": "t25-s3",
+     "title": "Find the cause",
+     "blocks": [
+      "When something goes wrong, the instinct is to fix it quickly. Experienced project managers fix the immediate problem and then ask why it happened. A defect is fixed; then the question is how it got through. A missed deadline is recovered; then the question is why the estimate was wrong. A stakeholder is upset; then the question is what we failed to understand about them.",
+      "Techniques such as the five whys and cause-and-effect diagrams (Chapter 13) help, but the habit matters more than the technique: a refusal to accept the first explanation, especially if it blames an individual. Most problems on projects have causes in the system, the plan or the process, and fixing those prevents the next problem; blaming a person rarely does."
+     ]
+    },
+    {
+     "id": "t25-s4",
+     "title": "Act early",
+     "blocks": [
+      "Problems on projects are almost always cheaper to address early than late: risks before they occur, conflicts before positions harden, scope disagreements before work is built, bad news before it surprises the sponsor. Being **proactive** means looking ahead for trouble and dealing with it while it is still small.",
+      "Acting early has a counterpart: not acting rashly. The most consistent advice in situational judgement, including on the exam, is to **assess before acting**. When something happens, the first step is usually to understand it: gather facts, talk to the people involved, analyse the impact. Then decide. A project manager who reacts instantly to every report, reassigning people, escalating or changing the plan before understanding the situation, creates as much disruption as one who never acts at all."
+     ]
+    },
+    {
+     "id": "t25-s5",
+     "title": "Check assumptions",
+     "blocks": [
+      "Every plan rests on assumptions, and most project surprises are assumptions that turned out to be false. Experienced project managers make assumptions explicit, ask which ones the plan depends on most, and look for cheap ways to test them early. \"We assume users will book online\" can be tested with a pilot clinic long before forty clinics are committed.",
+      "The same habit applies to beliefs about people. \"The vendor isn't interested in fixing this\" or \"finance will never approve that\" may be true, or may be a story nobody has checked. A direct conversation often reveals a different reality."
+     ]
+    },
+    {
+     "id": "t25-s6",
+     "title": "Think in ranges and probabilities",
+     "blocks": [
+      "Projects are uncertain, and good project managers think and speak accordingly. Instead of \"we will finish in March\", they say \"most likely late March, with a reasonable chance of April; here is what would push it later\". Instead of \"this risk won't happen\", they say \"it's unlikely, but if it does, here's what we'll do\".",
+      "This is not hedging. It is honesty about what is known, and it helps decision-makers. A sponsor told that March is certain will make commitments that fail. A sponsor told the range can plan for it. Thinking in probabilities also helps the project manager notice when evidence should change their view: when the first three integrations each took twice as long as estimated, the fourth probably will too."
+     ]
+    },
+    {
+     "id": "t25-s7",
+     "title": "Make trade-offs explicit",
+     "blocks": [
+      "Almost every significant project decision is a trade-off: scope against time, speed against quality, cost against risk, one stakeholder's needs against another's. Inexperienced project managers often try to avoid trade-offs, promising everything, or make them implicitly, letting quality slip silently to protect a date. Experienced ones make them visible and take them to the people who should decide.",
+      "Making a trade-off explicit usually means setting out the options and their consequences in terms the decision-maker cares about: \"we can keep the date by deferring these two features, or keep the features by moving the date three weeks, or keep both by adding two developers at this cost and this risk\". Once the trade-off is visible, decisions get made, and the project manager is no longer quietly absorbing pressure that belongs to someone else."
+     ]
+    },
+    {
+     "id": "t25-s8",
+     "title": "Work through people",
+     "blocks": [
+      "Projects are delivered by people, and much of a project manager's thinking is about them: who needs to be involved, who is worried and why, who has the knowledge, who needs to decide, who will be affected. The habit is to treat people's concerns as information rather than obstacles, to involve the people affected by decisions, and to build the relationships that make future problems easier to solve.",
+      "It also means **servant leadership** in everyday form: asking the team what is getting in their way and removing it, giving them the context to make good decisions, protecting them from distraction, and giving credit generously."
+     ]
+    },
+    {
+     "id": "t25-s9",
+     "title": "Know your role and its limits",
+     "blocks": [
+      "Experienced project managers are clear about what is theirs to decide and what is not. They take full ownership within their authority, and they do not exceed it: decisions that belong to the sponsor, the product owner, a governance board or another manager are taken to them, with analysis and a recommendation. They escalate when it is genuinely necessary, not as a way of avoiding difficult conversations, and not too late.",
+      "The same clarity applies to accountability. When things go wrong, they own their part openly. When things go well, they credit the team."
+     ]
+    },
+    {
+     "id": "t25-s10",
+     "title": "Adapt the approach",
+     "blocks": [
+      "No method is right for every project or every stage of one. The experienced project manager treats methods as tools, chooses among them deliberately (Chapter 8), and changes course when the situation changes. They are equally comfortable writing a detailed plan for a predictable piece of work and running short experiments where nothing can be predicted. What they will not do is follow a method mechanically when it is clearly not working, or abandon one without understanding what it was protecting against."
+     ]
+    },
+    {
+     "id": "t25-s11",
+     "title": "Keep learning",
+     "blocks": [
+      "Finally, the experienced project manager treats every project as a source of learning: reflecting on what happened and why, seeking feedback, reading, talking to other practitioners, and changing how they work as a result. The field itself keeps changing, as the history in Chapter 2 shows, and the best practitioners change with it.",
+      {
+       "fig": {
+        "title": "Habits of thought",
+        "caption": "Not steps in order but questions to bring to any situation. Most good decisions on projects can be traced to one or more of them.",
+        "alt": "Eight boxes in two rows: Start from purpose, See the system, Find the cause, Assess then act early, Check assumptions, Think in ranges, Make trade-offs explicit, Work through people.",
+        "w": 640,
+        "h": 170,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 10,
+          "y": 14,
+          "w": 147,
+          "h": 64,
+          "tone": "accent",
+          "s": 12,
+          "t": "Start from\npurpose",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 167,
+          "y": 14,
+          "w": 147,
+          "h": 64,
+          "tone": "muted",
+          "s": 12,
+          "t": "See the\nsystem",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 324,
+          "y": 14,
+          "w": 147,
+          "h": 64,
+          "tone": "muted",
+          "s": 12,
+          "t": "Find the\ncause",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 481,
+          "y": 14,
+          "w": 147,
+          "h": 64,
+          "tone": "warn",
+          "s": 12,
+          "t": "Assess, then\nact early",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 10,
+          "y": 92,
+          "w": 147,
+          "h": 64,
+          "tone": "muted",
+          "s": 12,
+          "t": "Check\nassumptions",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 167,
+          "y": 92,
+          "w": 147,
+          "h": 64,
+          "tone": "muted",
+          "s": 12,
+          "t": "Think in\nranges",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 324,
+          "y": 92,
+          "w": 147,
+          "h": 64,
+          "tone": "warn",
+          "s": 12,
+          "t": "Make trade-offs\nexplicit",
+          "b": true
+         },
+         {
+          "k": "box",
+          "x": 481,
+          "y": 92,
+          "w": 147,
+          "h": 64,
+          "tone": "good",
+          "s": 12,
+          "t": "Work through\npeople",
+          "b": true
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "t25-s12",
+     "title": "The mindset on the exam",
+     "blocks": [
+      "The PMP exam's situational questions are, in effect, tests of these habits. A few patterns recur, and they follow directly from this chapter.",
+      {
+       "ul": [
+        "**Assess first.** When something happens, understand it before acting: review, analyse, talk to the people involved.",
+        "**Fix causes, not symptoms.** Prefer answers that address why a problem happened.",
+        "**Work with people.** Prefer collaboration, private conversation and involvement over unilateral action, public criticism or bypassing people.",
+        "**Use the right process and the right decision-maker.** Changes go through change control; decisions beyond your authority go to whoever holds it.",
+        "**Be proactive and honest.** Raise risks and bad news early, with options.",
+        "**Serve the team.** Remove obstacles; let the team decide how to do its work.",
+        "**Keep value in view.** Prefer answers that protect the outcome the project exists for."
+       ]
+      },
+      "These patterns are not tricks for passing an exam. They describe how good project managers actually work.",
+      {
+       "box": "example",
+       "text": "Looking back on Northfield's project, Amira wrote that the decisions she was proudest of were rarely technical. Asking the sponsor what success meant at the start; visiting clinics before designing anything; reporting the cost overrun early; slowing the rollout during the restructure; replacing classroom training with clinic champions. Each one came from asking what the project was really for, who it affected, and what was actually happening, before acting."
+      },
+      {
+       "box": "myth",
+       "text": "\"Experience is the number of projects you have run.\" Experience is what you learned from them. Someone who has run ten projects without reflecting may have one project's experience ten times. Deliberate reflection is what turns time into judgement."
+      },
+      {
+       "box": "exam",
+       "text": "Every chapter's exam box points to this one. When two answers look plausible, choose the one that understands the situation first, involves the right people, addresses the cause, follows the proper process, and serves the project's purpose."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Start from purpose; it gives every decision a test.",
+    "See the system: consider interactions, delays and incentives; beware fixes that backfire.",
+    "Find root causes in the system rather than blaming individuals.",
+    "Act early, but assess before acting.",
+    "Make assumptions explicit and test them; think and speak in ranges.",
+    "Make trade-offs visible and take them to the right decision-maker.",
+    "Work through people, know the limits of your role, adapt the approach, and keep learning."
+   ],
+   "reading": [
+    "Donella H. Meadows, *Thinking in Systems: A Primer* (2008).",
+    "Peter M. Senge, *The Fifth Discipline* (1990, revised 2006).",
+    "Annie Duke, *Thinking in Bets* (2018). Deciding well under uncertainty.",
+    "Donald A. Schön, *The Reflective Practitioner* (1983). How professionals think in action and learn from experience."
+   ],
+   "words": 1679,
+   "minutes": 8,
+   "n": 25
+  },
+  {
+   "id": "t26",
+   "part": 6,
+   "title": "Closing, learning and getting better",
+   "summary": "How to close a project properly, why most lessons are identified and never learned, how teams and organisations actually learn, and how a project manager keeps growing.",
+   "why": "Projects end, but the organisation, the people and the profession continue. A well-closed project leaves its result in safe hands, its people recognised and ready for what comes next, its contracts settled and its knowledge available to others. A poorly closed one leaves loose ends that cost money for years and lessons that every later project relearns at its own expense.",
+   "sections": [
+    {
+     "id": "t26-s1",
+     "title": "Why closing matters",
+     "blocks": [
+      "Closing is the most neglected part of most projects. By the time the main deliverables are accepted, the team is tired, people are being pulled onto new work, the sponsor's attention has moved on, and the remaining tasks seem administrative. Yet several things can only be done at the end, and if they are skipped, the costs appear later in other budgets.",
+      {
+       "ul": [
+        "Deliverables that were never formally accepted become disputes.",
+        "Contracts left open accumulate charges and claims.",
+        "Operations teams inherit results they do not fully understand.",
+        "Team members leave without recognition or a clear next role.",
+        "Knowledge disperses with the people who held it.",
+        "Benefits nobody owns are never measured or realised."
+       ]
+      },
+      "Closing well is a final act of stewardship (Chapter 5)."
+     ]
+    },
+    {
+     "id": "t26-s2",
+     "title": "Closing a project or phase",
+     "blocks": [
+      "Closing applies to each phase as well as to the whole project, and to projects that end early as well as those that finish. The main activities are similar in each case.",
+      {
+       "ul": [
+        "**Confirm acceptance.** Obtain formal acceptance of the final deliverables from the sponsor or customer, against the agreed acceptance criteria.",
+        "**Complete the transition** to operations (Chapter 23): support arrangements, documentation, training and handover of responsibility.",
+        "**Close contracts**: confirm all deliverables have been received and accepted, settle final payments and outstanding claims, and record supplier performance (Chapter 15).",
+        "**Settle finances**: final costs, release of unused reserves, closure of cost accounts.",
+        "**Release resources**: people, equipment and facilities, with appropriate notice and support for team members moving to new work.",
+        "**Archive records**: plans, decisions, reports, contracts and correspondence, in a form others can find.",
+        "**Capture and share lessons learned.**",
+        "**Hand over benefits**: make sure the benefits owners are in place, the measures are defined, and a benefits review is scheduled (Chapter 4).",
+        "**Report**: a final report summarising what was achieved against the objectives, the final cost and schedule, the benefits expected and how they will be tracked, and the main lessons.",
+        "**Celebrate and recognise** the team's work."
+       ]
+      },
+      {
+       "fig": {
+        "title": "Closing a project",
+        "caption": "The order varies, but each step matters, including for projects that end early. Lessons and benefits keep working after the project has gone.",
+        "alt": "Steps in sequence: formal acceptance, transition to operations, close contracts, settle finances, release and recognise people, archive and share lessons, hand over benefits, final report.",
+        "w": 640,
+        "h": 180,
+        "shapes": [
+         {
+          "k": "box",
+          "x": 10,
+          "y": 18,
+          "w": 140,
+          "h": 56,
+          "tone": "accent",
+          "s": 12,
+          "t": "Formal\nacceptance"
+         },
+         {
+          "k": "line",
+          "p": [
+           151,
+           46,
+           168,
+           46
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 170,
+          "y": 18,
+          "w": 140,
+          "h": 56,
+          "tone": "accent",
+          "s": 12,
+          "t": "Transition to\noperations"
+         },
+         {
+          "k": "line",
+          "p": [
+           311,
+           46,
+           328,
+           46
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 330,
+          "y": 18,
+          "w": 140,
+          "h": 56,
+          "tone": "warn",
+          "s": 12,
+          "t": "Close\ncontracts"
+         },
+         {
+          "k": "line",
+          "p": [
+           471,
+           46,
+           488,
+           46
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 490,
+          "y": 18,
+          "w": 140,
+          "h": 56,
+          "tone": "warn",
+          "s": 12,
+          "t": "Settle\nfinances"
+         },
+         {
+          "k": "line",
+          "p": [
+           560,
+           75,
+           560,
+           108
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 490,
+          "y": 110,
+          "w": 140,
+          "h": 56,
+          "tone": "good",
+          "s": 12,
+          "t": "Release and\nrecognise people"
+         },
+         {
+          "k": "line",
+          "p": [
+           489,
+           138,
+           472,
+           138
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 330,
+          "y": 110,
+          "w": 140,
+          "h": 56,
+          "tone": "muted",
+          "s": 12,
+          "t": "Archive and\nshare lessons"
+         },
+         {
+          "k": "line",
+          "p": [
+           329,
+           138,
+           312,
+           138
+          ],
+          "arrow": true
+         },
+         {
+          "k": "box",
+          "x": 170,
+          "y": 110,
+          "w": 140,
+          "h": 56,
+          "tone": "good",
+          "s": 12,
+          "t": "Hand over\nbenefits"
+         },
+         {
+          "k": "box",
+          "x": 10,
+          "y": 110,
+          "w": 140,
+          "h": 56,
+          "tone": "muted",
+          "s": 12,
+          "t": "Final report",
+          "b": true
+         },
+         {
+          "k": "line",
+          "p": [
+           169,
+           138,
+           152,
+           138
+          ],
+          "arrow": true
+         }
+        ]
+       }
+      },
+      "The last point is not frivolous. Recognising people's contribution, publicly and specifically, matters for their motivation, their careers and their willingness to work on the next project. It also marks the end, which helps people move on."
+     ]
+    },
+    {
+     "id": "t26-s3",
+     "title": "Projects that end early",
+     "blocks": [
+      "Not every project reaches its planned end. Some are cancelled because the need has disappeared, the business case has failed, priorities have changed or the project cannot succeed. Early termination can be the right decision, and good portfolio management treats it as such (Chapter 4).",
+      "A terminated project still needs closing: work completed so far should be documented and, where useful, preserved; contracts terminated on the terms they allow; people released with care; and, above all, the reasons understood and recorded. Projects stopped without analysis tend to be followed by similar projects that fail in similar ways."
+     ]
+    },
+    {
+     "id": "t26-s4",
+     "title": "Lessons identified, lessons learned",
+     "blocks": [
+      "Almost every organisation collects lessons learned. Far fewer actually learn from them. The common pattern is that a lessons-learned workshop is held at the end of the project, a report is written and stored, and nobody reads it again. The lessons have been **identified** but not **learned**, because nothing changed as a result.",
+      "Several things make the difference.",
+      {
+       "ul": [
+        "**Capture lessons throughout the project**, not just at the end, when memories have faded and the people who knew have left. A lessons learned register updated at every phase and retrospective holds far more than an end-of-project workshop.",
+        "**Make lessons specific and actionable.** \"Communication could have been better\" teaches nothing. \"Clinic managers were not told about go-live dates until two weeks before, so they could not plan staff training; next time, confirm dates with them at least six weeks ahead\" teaches something.",
+        "**Find the cause.** A lesson that describes what went wrong without why it happened will not prevent it next time.",
+        "**Include what went well.** Successful practices are lessons too, and are easier to repeat if recorded.",
+        "**Feed lessons into something that changes behaviour**: templates, checklists, methods, training, estimating data or governance requirements. A lesson that changes a standard process is learned by every future project automatically.",
+        "**Look at lessons before starting**, not just after finishing. The most effective use of lessons learned is at the start of the next similar project."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "t26-s5",
+     "title": "Retrospectives",
+     "blocks": [
+      "Adaptive teams hold **retrospectives** at the end of every iteration: a short, regular reflection on how the team is working, leading to one or two concrete improvements to try in the next iteration. Retrospectives turn learning from an end-of-project event into a habit, and because each improvement is tried immediately, the team quickly learns whether it worked.",
+      "Good retrospectives share a few features. They are safe, so people can be honest; Norm Kerth's prime directive, which asks participants to assume everyone did the best job they could with what they knew at the time, helps. They focus on the system rather than blaming individuals. They vary their format to avoid going stale. And above all, they lead to action: a retrospective that produces observations but no changes is a discussion, not an improvement.",
+      "Predictive projects can borrow the practice. A short retrospective at the end of each phase, or each month, captures lessons while they are fresh and lets the project itself benefit from them."
+     ]
+    },
+    {
+     "id": "t26-s6",
+     "title": "How organisations learn",
+     "blocks": [
+      "Chris Argyris and Donald Schön distinguished two kinds of learning. **Single-loop learning** corrects actions within existing assumptions: the estimate was too low, so next time add more contingency. **Double-loop learning** questions the assumptions themselves: why are our estimates consistently low, and what about how we estimate, approve or report needs to change? Single-loop learning fixes problems; double-loop learning prevents whole classes of them.",
+      "Organisations that learn well from projects tend to share some features: leaders who welcome bad news, time set aside for reflection, people who move between projects carrying knowledge, communities of practice where practitioners share experience, project management offices that act as stewards of learning rather than enforcers of templates, and processes that are actually changed in response to lessons."
+     ]
+    },
+    {
+     "id": "t26-s7",
+     "title": "Growing as a project manager",
+     "blocks": [
+      "The same principles apply to individuals. Project managers grow by reflecting on their own experience, honestly and regularly; by seeking feedback from sponsors, team members and stakeholders; by learning from others through mentoring, reading, communities and courses; and by deliberately taking on work that stretches them.",
+      "Certifications such as the PMP formalise part of this. They establish a common foundation of knowledge, and their renewal requirements encourage continued learning. But a certification is a starting point. The practitioners who become excellent are those who keep asking, after every project, what they would do differently, and who then actually do it differently next time.",
+      {
+       "box": "example",
+       "text": "Northfield's project closed fourteen months after it began. Amira's final report showed online bookings at forty-six per cent of routine appointments in clinics live for more than six months, against a target of forty per cent; phone waits down to four minutes; missed appointments unchanged; and final cost six per cent over budget, with the causes explained. The lessons register had sixty entries, from which the trust's project office changed three things: its estimating guidance for integration work, its standard training approach (champions rather than classrooms) and its template for business cases, which now required a named benefits owner. The benefits review a year later found the online share had reached fifty-eight per cent. The receptionist who had first opposed the system was running training for the next hospital."
+      },
+      {
+       "box": "myth",
+       "text": "\"Lessons learned is an end-of-project activity.\" By the end, most of the people who knew have moved on and much of what happened has been forgotten. Learning needs to happen throughout, and it only counts when it changes what happens next."
+      },
+      {
+       "box": "exam",
+       "text": "Expect questions on what closing involves: formal acceptance, transition, closing procurements, releasing resources, archiving, final reports and lessons learned. Typical scenarios test that you obtain formal acceptance before closing, close contracts properly, update the lessons learned register throughout the project rather than only at the end, and close even a terminated project in an orderly way. In adaptive scenarios, retrospectives are the team's continuous learning mechanism."
+      }
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Closing is stewardship: acceptance, transition, contracts, finances, resources, records, lessons, benefits handover, reporting and recognition.",
+    "Terminated projects need closing too, with their reasons understood and recorded.",
+    "Lessons are learned only when something changes: capture them throughout, make them specific, find causes, and feed them into processes and the start of future projects.",
+    "Retrospectives make learning a regular habit; they must lead to action.",
+    "Single-loop learning fixes problems; double-loop learning questions the assumptions behind them.",
+    "Project managers grow through reflection, feedback, learning from others and deliberate stretch."
+   ],
+   "reading": [
+    "Norman L. Kerth, *Project Retrospectives: A Handbook for Team Reviews* (2001).",
+    "Esther Derby and Diana Larsen, *Agile Retrospectives* (2006).",
+    "Chris Argyris and Donald A. Schön, *Organizational Learning* (1978).",
+    "Peter M. Senge, *The Fifth Discipline* (1990, revised 2006). The learning organisation."
+   ],
+   "words": 1496,
+   "minutes": 7,
+   "n": 26
   }
  ]
 });
