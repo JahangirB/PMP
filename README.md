@@ -40,6 +40,21 @@ option opens a page with the file and step-by-step install instructions.
   free Apple ID through SideStore (recommended), AltStore or Sideloadly. A free
   Apple ID means refreshing the app every 7 days (SideStore and AltStore do this
   for you) and at most 3 sideloaded apps.
+
+  **Updates on iPhone (one-time setup).** iOS doesn't let an app install its
+  own updates, so they go through SideStore (or AltStore):
+  1. In the app, open **Menu → App updates → Add the source to SideStore**. Or,
+     in SideStore, open **Sources → +** and paste
+     `https://github.com/JahangirB/PMP/releases/download/ios/source.json`.
+  2. That's all. When a new build is out, SideStore lists it under **My Apps**
+     with an **Update** button, and the app shows "Update available" in its
+     menu (it checks once a day, or press **Check for updates**). **Update with
+     SideStore** on that screen opens the update in SideStore.
+
+  If you installed the IPA file by hand, do step 1 once; the installed app and
+  your progress stay. Builds before this change all report version 2.0, so
+  SideStore may offer the first update even if you're up to date: take it once,
+  and versions match from then on.
   **The iPhone app was converted from the Android app by AI and has never been
   tested on a real iPhone.** If something goes wrong, contact
   [Jahangir Babayev on LinkedIn](https://www.linkedin.com/in/jahangir-babayev-a432a5145)

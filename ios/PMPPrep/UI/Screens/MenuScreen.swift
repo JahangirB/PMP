@@ -67,6 +67,8 @@ struct MenuScreen: View {
                 MenuEntry(icon: "textformat.size", label: "Study settings", detail: "Text size, reading guide, confidence, rest days") { m.navigate(.SETTINGS) },
                 MenuEntry(icon: "externaldrive", label: "Question banks and backup", detail: "\(m.pool().count) questions enabled") { m.navigate(.DATA) },
                 MenuEntry(icon: "arrow.triangle.2.circlepath", label: "Cloud sync", detail: m.syncStatusLine) { m.navigate(.SYNC) },
+                MenuEntry(icon: "arrow.down.app", label: "App updates",
+                          detail: m.updateAvailable.map { "Update available: build \($0.build)" } ?? "Version \(AppUpdate.installedVersion)") { m.navigate(.UPDATES) },
             ]),
         ]
     }
@@ -77,6 +79,23 @@ struct MenuScreen: View {
                 SupportPill { m.navigate(.SUPPORT) }
                 .padding(.horizontal, 16)
                 .padding(.top, 16)
+                // Found by the daily check: one tap to the update.
+                if let r = m.updateAvailable {
+                    Button { m.navigate(.UPDATES) } label: {
+                        HStack(spacing: 10) {
+                            Image(systemName: "arrow.down.app.fill").font(.system(size: 20)).foregroundStyle(Palette.primary)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Update available").font(.nunito(15, .bold)).foregroundStyle(Palette.onSurface)
+                                Text("Build \(r.build): tap to update").font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant)
+                            }
+                            Spacer(minLength: 0)
+                        }
+                        .padding(.horizontal, 16).padding(.vertical, 12)
+                        .background(RoundedRectangle(cornerRadius: 14).fill(Palette.primaryContainer))
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 16).padding(.top, 12)
+                }
                 Text("Extra work beside your plan. Anything you do here counts, and the path adjusts to it.")
                     .font(.nunito(13)).foregroundStyle(Palette.onSurfaceVariant)
                     .fixedSize(horizontal: false, vertical: true)
