@@ -18,6 +18,30 @@ Institute.
 
 > **About the content.** All questions, lessons and case studies were written with AI (Claude) and checked by scripts, not reviewed against PMI's materials. Some may resemble each other or published questions, and a few may be debatable or wrong. Treat the app as practice alongside official PMI resources, and report any question you think is wrong.
 
+## What it looks like
+
+The screens below show a made-up learner three weeks into a 66-day plan.
+
+![Today: one session planned for you, with a Continue button](docs/screenshots/desktop-today.webp)
+
+| | |
+| --- | --- |
+| ![A practice question with the explanation and the mindset behind the answer](docs/screenshots/desktop-practice.webp) | ![A lesson split into parts, tied to the exam content outline](docs/screenshots/desktop-lesson.webp) |
+| **Practice.** Every answer explains why, and names the mindset the exam rewards. | **Lessons.** Each one covers a task of the exam outline, then checks it. |
+| ![Readiness score and the next best action](docs/screenshots/desktop-progress.webp) | ![Accuracy trend over every answer](docs/screenshots/desktop-analytics.webp) |
+| **Progress.** A readiness score, and what would raise it most per minute. | **Analytics.** Are you getting better, and where are you weak? |
+| ![A full mock exam under exam conditions](docs/screenshots/desktop-mock.webp) | ![Accuracy on all 26 exam tasks, dark theme](docs/screenshots/desktop-analytics-dark.webp) |
+| **Mock exams.** 180 questions, 240 minutes, two breaks, as on the day. | **Every exam task** at a glance (dark theme). |
+| ![A Theory chapter on the business case and charter](docs/screenshots/desktop-theory.webp) | ![Gemini answering how the learner is doing](docs/screenshots/desktop-gemini.webp) |
+| **Theory** (Labs). 26 chapters on project management in depth. | **Gemini** (optional, your own free key) knows your progress. |
+
+<p>
+  <img src="docs/screenshots/phone-welcome.webp" width="24%" alt="Before you start, on a phone">
+  <img src="docs/screenshots/phone-today.webp" width="24%" alt="Today on a phone">
+  <img src="docs/screenshots/phone-question.webp" width="24%" alt="A question on a phone">
+  <img src="docs/screenshots/phone-cards.webp" width="24%" alt="Flashcards on a phone">
+</p>
+
 ## Ways to use it
 
 | | What you get | Needs internet |
