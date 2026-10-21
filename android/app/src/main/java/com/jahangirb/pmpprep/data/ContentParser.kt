@@ -296,7 +296,24 @@ object ContentParser {
             },
             courseOrder = o.optJSONArray("courseOrder").strings(),
             theory = theory(o.optJSONObject("theory")),
+            welcome = welcome(o.optJSONObject("welcome"), "android"),
         )
+    }
+
+    /** index.html PMP.WELCOME. An item is the same text everywhere, or an object with each platform's wording. */
+    fun welcome(o: JSONObject?, platform: String): Welcome? {
+        if (o == null) return null
+        fun text(v: Any?): String = when (v) {
+            is JSONObject -> v.optString(platform, v.optString("web"))
+            null -> ""
+            else -> v.toString()
+        }
+        val sections = o.optJSONArray("sections").objects().map { s ->
+            val items = s.optJSONArray("items")
+            WelcomeSection(s.str("h"), s.str("p"), s.optBoolean("main"), (0 until (items?.length() ?: 0)).map { text(items!!.opt(it)) })
+        }
+        return Welcome(o.str("warn"), o.str("warnSub"), o.str("title"), o.str("intro"), sections,
+            text(o.opt("again")), o.str("button"), o.str("done"))
     }
 
     /** index.html PMP.THEORY, as extract-content.mjs writes it (abbreviations spelled out). */

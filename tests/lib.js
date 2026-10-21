@@ -45,15 +45,17 @@ Harness.prototype.open = async function (fixture, opts) {
   var slices = fixture ? seeds[fixture] : {};
   if (!slices) throw new Error("No fixture called " + fixture);
   var ctx = await this.browser.newContext({ viewport: opts.viewport || { width: 1400, height: 900 } });
-  await ctx.addInitScript(function (payload) {
+  await ctx.addInitScript(function (arg) {
     try {
       if (window.sessionStorage.getItem("pmp.test.seeded")) return;
       window.sessionStorage.setItem("pmp.test.seeded", "1");
-      Object.keys(payload).forEach(function (k) {
-        window.localStorage.setItem("pmp.v2." + k, JSON.stringify({ v: 2, d: payload[k] }));
+      Object.keys(arg.slices).forEach(function (k) {
+        window.localStorage.setItem("pmp.v2." + k, JSON.stringify({ v: 2, d: arg.slices[k] }));
       });
+      /* Before you start (§10.38) is taken as read unless a test asks for it. */
+      if (!arg.welcome) window.localStorage.setItem("pmp.welcome", "1");
     } catch (e) { /* the test that needs storage will fail on its own */ }
-  }, slices);
+  }, { slices: slices, welcome: !!opts.welcome });
   var page = await ctx.newPage();
   var errors = [];
   page.on("pageerror", function (e) { errors.push("pageerror: " + e.message); });

@@ -266,6 +266,14 @@ struct ReadinessConfig {
     let gateItems: Int, gateTasks: Int
 }
 
+/** Before you start (index.html §05.13, §10.38; Welcome in Models.kt): the screens a new starter reads, one at a time, before the setup. */
+struct Welcome {
+    let warn: String, warnSub: String, title: String, intro: String
+    let sections: [WelcomeSection]
+    let again: String, button: String, done: String
+}
+struct WelcomeSection { let h: String; let p: String; let main: Bool; let items: [String] }
+
 /** The Theory reading room (index.html §05.12, §10.37; Theory in Models.kt). */
 struct Theory {
     var parts: [TheoryPart] = []
@@ -323,6 +331,8 @@ struct Extras {
     var courseOrder: [String] = []
     /** The Theory chapters (Labs); empty in builds from before them. */
     var theory: Theory = Theory()
+    /** Before you start (index.html §05.13); nil in content built before it existed. */
+    var welcome: Welcome? = nil
 }
 
 struct SampleDocuments: Hashable { let projectName: String; let projectSummary: String; let list: [SampleDocument] }

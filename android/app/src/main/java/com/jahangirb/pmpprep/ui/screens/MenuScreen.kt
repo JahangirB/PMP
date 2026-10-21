@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.automirrored.filled.LibraryBooks
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.automirrored.filled.Notes
@@ -84,6 +85,7 @@ fun MenuScreen(vm: PmpViewModel) {
     val flagged = vm.store.flags.size
     val groups = listOf(
         "Start here" to listOf(
+            Entry(Icons.Outlined.Info, "Before you start", "How to get the most from the app") { vm.navigate(Dest.WELCOME) },
             Entry(Icons.AutoMirrored.Filled.HelpOutline, "How it works", "What you get, what's measured, how weak spots are handled") { vm.navigate(Dest.GUIDE) },
             Entry(Icons.Default.Search, "Search everything", "Lessons, glossary, formulas, your notes, explanations") { vm.navigate(Dest.SEARCH) },
         ),

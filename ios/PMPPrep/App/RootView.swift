@@ -94,6 +94,7 @@ private struct Shell: View {
         case .SUPPORT: SupportScreen()
         case .UPDATES: UpdateScreen()
         case .THEORY: TheoryScreen()
+        case .WELCOME: WelcomeScreen()
         }
     }
 }

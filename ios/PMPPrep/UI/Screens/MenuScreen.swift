@@ -26,6 +26,7 @@ struct MenuScreen: View {
         let myCards = m.store.myCards.count
         return [
             ("Start here", [
+                MenuEntry(icon: "info.circle", label: "Before you start", detail: "How to get the most from the app") { m.navigate(.WELCOME) },
                 MenuEntry(icon: "questionmark.circle", label: "How it works", detail: "What you get, what's measured, how weak spots are handled") { m.navigate(.GUIDE) },
                 MenuEntry(icon: "magnifyingglass", label: "Search everything", detail: "Lessons, glossary, formulas, your notes, explanations") { m.navigate(.SEARCH) },
             ]),

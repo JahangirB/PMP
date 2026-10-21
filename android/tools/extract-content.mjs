@@ -103,6 +103,8 @@ const extras = plain({
   courseOrder: P.COURSE_ORDER || [],
   // The Theory reading room (§05.12), abbreviations already spelled out.
   theory: theoryOut(P.THEORY),
+  // Before you start (§05.13): the phones pick their own wording from each item.
+  welcome: P.WELCOME || null,
   // The Google Apps Script the Cloud sync screen shows (docs/progress-format.md §5).
   syncScript: fs.readFileSync(path.join(root, 'sync', 'pmp-sync.gs'), 'utf8'),
   // The Make more questions prompt: the text block of docs/question-generator-prompt.md.
