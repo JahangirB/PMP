@@ -46,7 +46,9 @@ private struct Shell: View {
     @EnvironmentObject private var m: AppModel
 
     private var examRunning: Bool { m.screen == .MOCK && m.mock != nil }
-    private var fullScreen: Bool { examRunning || m.screen == .SESSION }
+    /** Before you start, on the first run: no menu and no coach until the screens are read. */
+    private var welcomeGate: Bool { m.screen == .DASHBOARD && m.setupDue && !m.welcomeRead && m.repo.extras.welcome != nil }
+    private var fullScreen: Bool { examRunning || m.screen == .SESSION || welcomeGate }
     /** The coach floats over every screen except a mock exam in progress (web §10.33 alike). */
     private var inMock: Bool {
         examRunning ||
@@ -61,7 +63,7 @@ private struct Shell: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .id(m.screen)
                     .transition(.opacity.combined(with: .move(edge: .leading)).animation(.easeOut(duration: 0.35)))
-                if !inMock { CoachBubble() }
+                if !inMock && !welcomeGate { CoachBubble() }
             }
         }
         .environment(\.reading, m.reading)
