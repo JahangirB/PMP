@@ -425,6 +425,7 @@ PMP.RULES = (function deepFreeze(o) {
   --hit-min: 44px;
   --measure: 68ch;
   --rail-w: 240px;
+  --bar-h: 62px;   /* the top bar from 900px: 44px tiles, 8px padding each side, 2px rim */
 
   /* ── 02.7  RADIUS — big soft corners, as the phones' ClayShapes ──────── */
   --r-0: 0; --r-1: 6px; --r-2: 12px; --r-3: 16px; --r-4: 24px; --r-full: 999px;
@@ -3163,6 +3164,10 @@ a.card:active, button.card:active { transform: translateY(-3px); box-shadow: var
   .scrim { display: none; }
   .nav-toggle { display: none; }
   .icon-btn.rail-toggle { display: grid; }
+  /* The brand block is exactly as tall as the top bar beside it, so the line
+     under the logo meets the line under the bar. */
+  .topbar { height: var(--bar-h); }
+  .rail .brand { height: var(--bar-h); padding-top: 0; padding-bottom: 0; }
   /* Collapsed (§12.2, remembered per device by §01.6): an icon column. The
      labels stay in the DOM, clipped like .sr-only, so they remain each
      link's accessible name; §12.2 copies them into title for a tooltip. */
