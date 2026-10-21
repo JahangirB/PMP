@@ -7,8 +7,8 @@ struct PathScreen: View {
     @EnvironmentObject private var m: AppModel
 
     var body: some View {
-        if !m.store.plan.onboarded || m.store.plan.examDate == nil {
-            Onboarding()
+        if m.setupDue {
+            if !m.welcomeRead && m.repo.extras.welcome != nil { WelcomeScreen() } else { Onboarding() }
         } else if let plan = m.plan() {
             PathHome(plan: plan)
         } else {

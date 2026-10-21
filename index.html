@@ -2808,6 +2808,42 @@ a.th-li-t { color: var(--c-signal); }
   .th-toc { position: static; max-height: none; }
   .th-toc ol { display: none; }
 }
+/* Before you start (§10.38): one screen at a time, the shell hidden. */
+html[data-welcome] .rail, html[data-welcome] .topbar, html[data-welcome] .scrim,
+html[data-welcome] .np, html[data-welcome] .cb { display: none !important; }
+.wl { max-width: 680px; margin: 0 auto; display: grid; gap: var(--sp-4); }
+.wl-top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
+.wl-count { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--fg-muted); font-variant-numeric: tabular-nums; }
+.wl-pg { display: grid; gap: var(--sp-4); }
+.wl-pg p, .wl-pg li { line-height: var(--lh-body); max-width: var(--measure); }
+.wl-h { font-size: var(--t-xl); font-weight: var(--w-bold); line-height: var(--lh-tight); text-wrap: balance; }
+.wl-h:focus { outline: none; }
+.wl-warn {
+  display: flex; gap: var(--sp-3); align-items: flex-start; padding: var(--sp-4);
+  border: 2px solid color-mix(in srgb, var(--c-warn) 55%, transparent); border-radius: var(--r-3);
+  background: color-mix(in srgb, var(--c-warn) 12%, var(--s-raise));
+}
+.wl-warn .i { flex: 0 0 auto; width: var(--icon-xl); height: var(--icon-xl); color: var(--c-warn); margin-top: 2px; }
+.wl-warn strong { display: block; font-size: var(--t-lg); font-weight: 900; line-height: var(--lh-tight); color: var(--c-warn); }
+.wl-warn span { display: block; margin-top: var(--sp-1); }
+.wl-ahead { list-style: decimal; padding-left: var(--sp-5); display: grid; gap: var(--sp-1); font-weight: var(--w-semi); color: var(--fg-muted); }
+.wl-card { display: grid; gap: var(--sp-3); }
+.wl-card ul { list-style: disc; padding-left: var(--sp-5); display: grid; gap: var(--sp-2); }
+.wl-card p, .wl-card li { font-size: var(--t-base); color: var(--fg); }
+.wl-card--main { border: 2px solid var(--c-signal); }
+.wl-again { text-align: center; }
+.wl-ft {
+  position: sticky; bottom: 0; display: grid; gap: var(--sp-2); padding: var(--sp-3) 0 max(var(--sp-3), env(safe-area-inset-bottom));
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+@media (min-width: 900px) { .wl { margin-top: 6vh; } }
+.wl-dots { display: flex; justify-content: center; gap: 6px; }
+.wl-dots i { display: block; width: 8px; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--fg) 18%, transparent); }
+.wl-dots i.done { background: color-mix(in srgb, var(--c-signal) 50%, transparent); }
+.wl-dots i.on { width: 22px; background: var(--c-signal); }
+.wl-nav { display: flex; gap: var(--sp-2); align-items: center; }
+.wl-nav .btn--primary { flex: 1 1 auto; justify-content: center; }
+
 /* Gemini in the notes (§10.35): the three rewrites, the part being worked
    on (greyed, locked), the answer (highlighted) and the strip to settle it. */
 .np-pop.np-pop-ai { flex-direction: column; gap: 0; }
@@ -28036,6 +28072,62 @@ PMP.THEORY = Object.freeze({
  ]
 });
 /* THEORY:END */
+
+/* §05.13 Before you start (§10.38): the screens a new starter reads, one at
+   a time, before the setup. The phones read the same object through
+   android/tools/extract-content.mjs. A string item is the same everywhere;
+   an object item names its web, Android and iPhone wording. */
+PMP.WELCOME = Object.freeze({
+  warn: "Please read this carefully before you start",
+  warnSub: "It takes about two minutes, and it decides how much this app can do for you.",
+  title: "How to get the most from this app",
+  intro: "The next five screens explain how this app works best. Read each one, then press Next.",
+  sections: [
+    { h: "Start with a fixed exam date", main: true,
+      p: "Most people who pass the PMP through self-study have one thing in common: a real exam date. Without one, study slips from week to week. With one, every day has a purpose.",
+      items: [
+        "If you can, book your exam first, then enter that date here.",
+        "If you can't book yet, enter a realistic target date. Change it once you've booked.",
+        "As a rough guide, most people need 8 to 12 weeks at about an hour a day. Fewer hours a day means more weeks."
+      ] },
+    { h: "Let the app plan your study",
+      p: "Once it knows your date and how much time you have, the app builds your study plan and adjusts it every day. You don't have to decide what to study next.",
+      items: [
+        "Start with the 25-question diagnostic. Take it cold, without revising. It shows where you stand.",
+        "Each day, press Continue. It gives you the next lesson, practice, flashcards or mock, in the right order.",
+        "The plan moves through four phases: Foundations, Build, Exam readiness and Final week.",
+        "If you miss days, it re-plans. If time gets too tight, it tells you and suggests what to change."
+      ] },
+    { h: "Habits that make the difference",
+      items: [
+        "Study a little every day. On a busy day, 10 cards or 10 questions still count.",
+        "Answer before you look, and rate your confidence honestly. That is how the app spots lucky guesses.",
+        "Read the explanation for every question, including the ones you got right."
+      ] },
+    { h: "As your exam gets closer",
+      items: [
+        "Go back to your mistakes. Redo mistakes and the Mistake journal keep them coming back until they stick.",
+        "Sit the full mock exams when the plan asks. They build the stamina for 180 questions in about four hours.",
+        "Before your date, check Ready to book?. It shows whether your scores support sitting the exam."
+      ] },
+    { h: "Good to know",
+      items: [
+        { web: "Your progress is saved in this browser. Turn on Cloud sync, or download a backup from Backup and packs, so you don't lose it.",
+          android: "Your progress is saved on this phone. Turn on Cloud sync in the menu, or make a backup, so you don't lose it.",
+          ios: "Your progress is saved on this iPhone. Turn on Cloud sync in the menu, or make a backup, so you don't lose it." },
+        { web: "Gemini chat, Explain this and the notes AI are optional and use your own free key. Everything else works without it.",
+          android: "Gemini chat in Coach is optional and uses your own free key. Everything else works without it.",
+          ios: "Gemini chat in Coach is optional and uses your own free key. Everything else works without it." },
+        "Theory is optional extra reading on project management as a discipline. It is marked Labs while it is being tested.",
+        "This app is a study aid. It is not connected to PMI, and it does not provide the 35 hours of project management education you need to apply."
+      ] }
+  ],
+  again: { web: "You can read this again any time from Settings and About → Before you start.",
+           android: "You can read this again any time from Menu → Before you start.",
+           ios: "You can read this again any time from Menu → Before you start." },
+  button: "I've read this · Set up my plan",
+  done: "I've read this"
+});
 
 PMP.MODULES = Object.freeze([
   { id: "foundations", order: 1, prefix: "F", label: "Foundations",
@@ -54089,6 +54181,11 @@ PMP.CoachUI = (function () {
 
   function view(host) {
     var state = PMP.Store.state;
+    /* A new starter reads Before you start first (§10.38). */
+    if (PMP.Welcome && PMP.Welcome.due(state)) {
+      setTimeout(function () { PMP.Router.navigate("welcome", null, true); }, 0);
+      return;
+    }
     /* Arriving on Today ends whatever run was started from here. */
     if (state.ui.coachRun) PMP.Store.commit(["ui"], function (s) { s.ui.coachRun = null; }, { transient: true });
     var st = C.stage(state);
@@ -54289,6 +54386,7 @@ PMP.CoachUI = (function () {
         el("label", { class: "field", for: "set-coach-hints" }, [el("span", { class: "lbl", text: "Show hints in practice" }), hints])
       ]),
       el("div", { class: "filter-bar" }, [
+        el("a", { class: "btn btn--sm", href: "#/welcome" }, [icon("info"), "Before you start"]),
         el("button", { class: "btn btn--sm", type: "button", onclick: function () { intake({ redo: true }); } },
           [icon("today"), "Redo intake"]),
         el("button", { class: "btn btn--sm", type: "button", onclick: exportCalendar },
@@ -60184,6 +60282,111 @@ PMP.Theory = (function () {
   PMP.Router.register("theory", { title: "Theory", render: view });
 
   return { chapter: chapter, numberOf: numberOf, isRead: isRead, plain: plain };
+})();
+
+/* ── 10.38  BEFORE YOU START ───────────────────────────────────────────────
+   Six short screens a new starter reads one at a time before the setup
+   (§05.13): an opening that asks them to read carefully, then why a fixed
+   exam date matters, how the plan works, habits, and what's good to know.
+   Shown once on this device (pmp.welcome) to anyone who hasn't finished the
+   setup or has no exam date; Today sends them to #/welcome. The menu, the
+   notes and the coach bubble stay hidden while it is open. Settings and
+   About reopens it. The last button opens the setup when it is still due. */
+PMP.Welcome = (function () {
+  var el = PMP.dom.el, icon = PMP.dom.icon;
+  var KEY = "pmp.welcome";
+  var root = document.documentElement;
+  var at = 0;
+
+  function read() { try { return !!window.localStorage.getItem(KEY); } catch (e) { return false; } }
+  function markRead() { try { window.localStorage.setItem(KEY, String(Date.now())); } catch (e) { /* this visit only */ } }
+  function setupDue(state) {
+    state = state || PMP.Store.state;
+    return PMP.Coach.stage(state) === "intake" || !state.settings.examDate;
+  }
+  function due(state) { return !read() && setupDue(state); }
+
+  function text(x) { return typeof x === "string" ? x : x.web; }
+  function pages() { return PMP.WELCOME.sections.length + 1; }
+
+  function opening(W) {
+    return [
+      el("div", { class: "wl-warn", role: "note" }, [icon("alert"),
+        el("div", null, [el("strong", { text: W.warn }), el("span", { text: W.warnSub })])]),
+      el("h2", { class: "wl-h", id: "wl-h", tabindex: "-1", text: W.title }),
+      el("p", { text: W.intro }),
+      el("ol", { class: "wl-ahead" }, W.sections.map(function (s) { return el("li", { text: s.h }); }))
+    ];
+  }
+
+  function card(W, s, last) {
+    return [
+      el("section", { class: "card wl-card" + (s.main ? " wl-card--main" : ""), "aria-labelledby": "wl-h" }, [
+        s.main ? el("span", { class: "eyebrow", text: "Most important" }) : null,
+        el("h2", { class: "wl-h", id: "wl-h", tabindex: "-1", text: s.h }),
+        s.p ? el("p", { text: s.p }) : null,
+        el("ul", null, s.items.map(function (x) { return el("li", { text: text(x) }); }))
+      ]),
+      last ? el("p", { class: "hint wl-again", text: text(W.again) }) : null
+    ];
+  }
+
+  function view(host) {
+    var W = PMP.WELCOME, n = pages();
+    root.setAttribute("data-welcome", "");
+    at = Math.max(0, Math.min(at, n - 1));
+    var last = at === n - 1;
+    var body = at === 0 ? opening(W) : card(W, W.sections[at - 1], last);
+    var dots = [];
+    for (var i = 0; i < n; i++) dots.push(el("i", { class: i === at ? "on" : i < at ? "done" : "" }));
+    var next = el("button", { class: "btn btn--primary", id: "wl-next", type: "button" },
+      last ? (setupDue() ? W.button : W.done) : "Next");
+    var back = el("button", { class: "btn btn--ghost", id: "wl-back", type: "button" }, "Back");
+    if (at === 0) back.style.visibility = "hidden";
+    next.addEventListener("click", function () {
+      if (!last) { at++; repaint(); return; }
+      finish();
+    });
+    back.addEventListener("click", function () { if (at > 0) { at--; repaint(); } });
+    host.appendChild(el("div", { class: "wl" }, [
+      el("div", { class: "wl-top" }, [
+        el("span", { class: "eyebrow", text: "Before you start" }),
+        el("span", { class: "wl-count", id: "wl-count", text: (at + 1) + " of " + n })
+      ]),
+      el("div", { class: "wl-pg" }, body),
+      el("div", { class: "wl-ft" }, [
+        el("div", { class: "wl-dots", "aria-hidden": "true" }, dots),
+        el("div", { class: "wl-nav" }, [back, next])
+      ])
+    ]));
+  }
+
+  function repaint() {
+    var host = document.getElementById("view");
+    host.innerHTML = "";
+    view(host);
+    var h = document.getElementById("wl-h");
+    if (h) { try { h.focus({ preventScroll: true }); } catch (e) { h.focus(); } }
+    if (window.scrollTo) window.scrollTo(0, 0);
+  }
+
+  function finish() {
+    var setup = setupDue();
+    markRead();
+    at = 0;
+    root.removeAttribute("data-welcome");
+    PMP.Router.navigate(setup ? "today" : "settings");
+    if (setup && PMP.Coach.stage(PMP.Store.state) === "intake") PMP.CoachUI.intake();
+  }
+
+  /* Any other page shows the menu again. */
+  window.addEventListener("hashchange", function () {
+    if (PMP.Router.parse(window.location.hash).name !== "welcome") root.removeAttribute("data-welcome");
+  });
+
+  PMP.Router.register("welcome", { title: "Before you start", render: function (host) { at = 0; view(host); } });
+
+  return { due: due, isRead: read };
 })();
 
 /* ═══ §11  CHARTS ═════════════════════════════════════════════════════════

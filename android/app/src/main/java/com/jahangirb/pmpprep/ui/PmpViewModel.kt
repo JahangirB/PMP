@@ -115,6 +115,7 @@ enum class Dest(val title: String) {
     SUPPORT("Support the app"),
     UPDATES("App updates"),
     THEORY("Theory"),
+    WELCOME("Before you start"),
 }
 
 /** What to practise. Null means "any". */
@@ -208,6 +209,19 @@ class PmpViewModel(app: Application) : AndroidViewModel(app) {
         theoryRead = if (on) theoryRead + id else theoryRead - id
         theoryPrefs.edit().putStringSet("read", theoryRead).apply()
     }
+
+    /* ── Before you start ──────────────────────────────────────────────────
+       Read once on this phone (index.html §10.38 keeps pmp.welcome the same
+       way). Shown before the setup to anyone who hasn't finished it. */
+    private val welcomePrefs = app.getSharedPreferences("welcome", android.content.Context.MODE_PRIVATE)
+    var welcomeRead by mutableStateOf(welcomePrefs.getBoolean("read", false))
+        private set
+    fun markWelcomeRead() {
+        welcomeRead = true
+        welcomePrefs.edit().putBoolean("read", true).apply()
+    }
+    /** The setup still has to be done: no exam date, or never finished. */
+    val setupDue: Boolean get() = !store.plan.onboarded || store.plan.examDate == null
 
     /* ── app updates (Android only) ──────────────────────────────────────── */
 

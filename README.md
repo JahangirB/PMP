@@ -65,6 +65,14 @@ backup file or turn on cloud sync (see below).
 
 ## Getting started
 
+The first time you open the app, **Before you start** walks you through six
+short screens, one at a time with **Next**. It asks you to read carefully, then
+explains the main recommendation: book your exam (or pick a firm target date)
+and enter it, so the app can plan your study and keep you on track. It is shown
+once on each device to anyone without an exam date, and you can read it again
+from **Settings and About** on the web or **Menu → Before you start** on the
+phones. Then:
+
 1. Set your **exam date**, how many **hours a week** you can study, and which
    **days** you study.
 2. Take the **25-question diagnostic** (about 40 minutes). It shows where you

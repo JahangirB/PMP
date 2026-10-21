@@ -63,7 +63,11 @@ import kotlin.math.roundToInt
 @Composable
 fun PathScreen(vm: PmpViewModel) {
     val rev by vm.revision.collectAsState()
-    if (rev >= 0 && (!vm.store.plan.onboarded || vm.store.plan.examDate == null)) { Onboarding(vm); return }
+    if (rev >= 0 && vm.setupDue) {
+        val w = vm.repo.extras.welcome
+        if (!vm.welcomeRead && w != null) WelcomeScreen(vm) else Onboarding(vm)
+        return
+    }
     val now = System.currentTimeMillis()
     val plan = remember(rev, vm.contentVersion) { vm.plan(now) } ?: return
     val report = remember(rev) { vm.readiness.report(vm.store) }

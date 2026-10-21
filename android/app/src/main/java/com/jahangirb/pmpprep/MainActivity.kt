@@ -87,6 +87,7 @@ import com.jahangirb.pmpprep.ui.screens.MenuScreen
 import com.jahangirb.pmpprep.ui.screens.SupportScreen
 import com.jahangirb.pmpprep.ui.screens.UpdateScreen
 import com.jahangirb.pmpprep.ui.screens.TheoryScreen
+import com.jahangirb.pmpprep.ui.screens.WelcomeScreen
 import com.jahangirb.pmpprep.ui.screens.GuideScreen
 import com.jahangirb.pmpprep.ui.screens.FitnessScreen
 import com.jahangirb.pmpprep.ui.screens.ReportsScreen
@@ -285,6 +286,7 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
                         Dest.SUPPORT -> SupportScreen(vm)
                         Dest.UPDATES -> UpdateScreen(vm)
                         Dest.THEORY -> TheoryScreen(vm)
+                        Dest.WELCOME -> WelcomeScreen(vm)
                     }
                 }
             }

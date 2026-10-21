@@ -283,6 +283,13 @@ data class ReadinessConfig(
     val gateItems: Int, val gateTasks: Int,
 )
 
+/** Before you start (index.html §05.13, §10.38): the screens a new starter reads, one at a time, before the setup. */
+data class Welcome(
+    val warn: String, val warnSub: String, val title: String, val intro: String,
+    val sections: List<WelcomeSection>, val again: String, val button: String, val done: String,
+)
+data class WelcomeSection(val h: String, val p: String, val main: Boolean, val items: List<String>)
+
 /** The Theory reading room (index.html §05.12, §10.37): parts with their planned chapter titles, and the written chapters. */
 data class Theory(val parts: List<TheoryPart>, val chapters: List<TheoryChapter>) {
     /** Book-wide chapter number, from the planned contents. */
@@ -343,6 +350,8 @@ data class Extras(
     /** The Theory chapters (Labs); empty in builds from before them. */
     val theory: Theory = Theory(emptyList(), emptyList()),
     val courseOrder: List<String> = emptyList(),
+    /** Before you start (index.html §05.13); null in content built before it existed. */
+    val welcome: Welcome? = null,
 )
 
 data class AreaTour(val area: String, val intro: String, val lessons: List<String>, val figure: Figure?)

@@ -246,7 +246,23 @@ enum ContentParser {
                 AreaTour(area: t.str("area"), intro: t.str("intro"), lessons: t.strings("lessons"), figure: ContentParser.figure(t.obj("figure")))
             },
             courseOrder: o.strings("courseOrder"),
-            theory: theory(o.obj("theory")))
+            theory: theory(o.obj("theory")),
+            welcome: welcome(o.obj("welcome"), "ios"))
+    }
+
+    /** index.html PMP.WELCOME. An item is the same text everywhere, or an object with each platform's wording. */
+    static func welcome(_ o: JObj?, _ platform: String) -> Welcome? {
+        guard let o = o else { return nil }
+        func text(_ v: Any?) -> String {
+            if let s = v as? String { return s }
+            if let j = JObj(v) { return j.optString(platform, j.str("web")) }
+            return ""
+        }
+        let sections = o.objects("sections").map { s in
+            WelcomeSection(h: s.str("h"), p: s.str("p"), main: s.optBool("main"), items: (s.arr("items") ?? []).map(text))
+        }
+        return Welcome(warn: o.str("warn"), warnSub: o.str("warnSub"), title: o.str("title"), intro: o.str("intro"),
+                       sections: sections, again: text(o.d["again"]), button: o.str("button"), done: o.str("done"))
     }
 
     /** index.html PMP.THEORY, as extract-content.mjs writes it (abbreviations spelled out). */
