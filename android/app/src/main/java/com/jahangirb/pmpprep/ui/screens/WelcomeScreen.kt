@@ -1,6 +1,19 @@
 package com.jahangirb.pmpprep.ui.screens
 
 import androidx.compose.foundation.BorderStroke
+import kotlin.math.sin
+import kotlin.math.PI
+import com.jahangirb.pmpprep.ui.theme.LocalEnter
+import androidx.compose.ui.unit.lerp
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,7 +38,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -70,22 +82,21 @@ fun WelcomeScreen(vm: PmpViewModel) {
         }
         Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Dots(n, at)
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                TextButton(onClick = { if (at > 0) at-- }, enabled = at > 0, modifier = Modifier.alpha(if (at > 0) 1f else 0f)) {
-                    Text("Back", fontWeight = FontWeight.Bold)
-                }
-                Spacer(Modifier.width(8.dp))
-                Button(onClick = {
-                    if (!last) { at++; return@Button }
-                    val setup = vm.setupDue
-                    vm.markWelcomeRead()
-                    at = 0
-                    // From the menu: back where it was opened, or to the path when the setup is still due.
-                    if (vm.screen == Dest.WELCOME) { if (setup) vm.home() else vm.back() }
-                }, modifier = Modifier.weight(1f).height(52.dp)) {
-                    Text(if (!last) "Next" else if (vm.setupDue) w.button else w.done, fontWeight = FontWeight.Bold)
-                }
-            }
+            SplitButtons(
+                split = at > 0,
+                next = if (!last) "Next" else if (vm.setupDue) w.button else w.done,
+                onBack = { if (at > 0) at-- },
+                onNext = {
+                    if (!last) at++
+                    else {
+                        val setup = vm.setupDue
+                        vm.markWelcomeRead()
+                        at = 0
+                        // From the menu: back where it was opened, or to the path when the setup is still due.
+                        if (vm.screen == Dest.WELCOME) { if (setup) vm.home() else vm.back() }
+                    }
+                },
+            )
         }
     }
 }
@@ -146,6 +157,56 @@ private fun Dots(n: Int, at: Int) {
                         RoundedCornerShape(4.dp),
                     )
             )
+        }
+    }
+}
+
+/**
+ * Next alone, centred, on the opening screen. The first Next tears a piece of clay off its left
+ * side, which slides out and becomes Back; Back on the second screen merges it home again.
+ * Between the later screens nothing moves. The piece starts hidden under Next in Next's own
+ * colour, so the split reads as one button coming apart.
+ */
+@Composable
+private fun SplitButtons(split: Boolean, next: String, onBack: () -> Unit, onNext: () -> Unit) {
+    val reduce = LocalEnter.current?.reduce ?: false
+    val p by animateFloatAsState(
+        if (split) 1f else 0f,
+        if (reduce) snap() else spring(dampingRatio = 0.55f, stiffness = 320f),
+        label = "split",
+    )
+    val primary = MaterialTheme.colorScheme.primary
+    val onPrimary = MaterialTheme.colorScheme.onPrimary
+    val clay = MaterialTheme.colorScheme.primaryContainer
+    val shape = RoundedCornerShape(50)
+    BoxWithConstraints(Modifier.fillMaxWidth().height(52.dp)) {
+        val w = maxWidth
+        val gap = 10.dp
+        val backW = w * 0.3f
+        // Overshoot from the spring is the clay's wobble; keep sizes from going negative with it.
+        val q = p.coerceIn(-0.1f, 1.1f)
+        val nextX = lerp(w * 0.14f, backW + gap, q)
+        val nextW = lerp(w * 0.72f, w - backW - gap, q)
+        val pieceX = lerp(w * 0.14f, 0.dp, q)
+        val pieceW = lerp(w * 0.22f, backW, q).coerceAtLeast(1.dp)
+        val squash = 1f - 0.14f * sin(PI.toFloat() * p.coerceIn(0f, 1f))
+        val c = p.coerceIn(0f, 1f)
+        Surface(
+            onClick = onBack, enabled = split, shape = shape,
+            color = androidx.compose.ui.graphics.lerp(primary, clay, c),
+            contentColor = androidx.compose.ui.graphics.lerp(onPrimary, MaterialTheme.colorScheme.onPrimaryContainer, c),
+            shadowElevation = (3f * c).dp,
+            modifier = Modifier.offset(x = pieceX).width(pieceW).fillMaxHeight()
+                .graphicsLayer { scaleY = squash; alpha = if (p < 0.02f) 0f else 1f }
+                .then(if (split) Modifier else Modifier.clearAndSetSemantics { }),
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Text("Back", fontWeight = FontWeight.Bold, maxLines = 1, modifier = Modifier.alpha(((c - 0.45f) / 0.55f).coerceIn(0f, 1f)))
+            }
+        }
+        Button(onClick = onNext, shape = shape, contentPadding = PaddingValues(horizontal = 12.dp),
+            modifier = Modifier.offset(x = nextX).width(nextW).fillMaxHeight()) {
+            Text(next, fontWeight = FontWeight.Bold, maxLines = 1)
         }
     }
 }

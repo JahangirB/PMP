@@ -34,21 +34,16 @@ struct WelcomeScreen: View {
                 }
                 VStack(spacing: 10) {
                     dots(n)
-                    HStack(spacing: 8) {
-                        Button("Back") { if at > 0 { at -= 1 } }.textButton()
-                            .opacity(at > 0 ? 1 : 0).disabled(at == 0)
-                        Button {
-                            if !last { at += 1; return }
-                            let setup = m.setupDue
-                            m.markWelcomeRead()
-                            at = 0
-                            // From the menu: back where it was opened, or to the path when the setup is still due.
-                            if m.screen == .WELCOME { if setup { m.home() } else { m.back() } }
-                        } label: {
-                            Text(!last ? "Next" : (m.setupDue ? w.button : w.done)).font(.nunito(16, .bold)).frame(maxWidth: .infinity, minHeight: 28)
-                        }
-                        .primaryButton()
-                    }
+                    SplitButtons(split: at > 0, next: !last ? "Next" : (m.setupDue ? w.button : w.done),
+                                 onBack: { if at > 0 { at -= 1 } },
+                                 onNext: {
+                                     if !last { at += 1; return }
+                                     let setup = m.setupDue
+                                     m.markWelcomeRead()
+                                     at = 0
+                                     // From the menu: back where it was opened, or to the path when the setup is still due.
+                                     if m.screen == .WELCOME { if setup { m.home() } else { m.back() } }
+                                 })
                 }
                 .padding(.horizontal, 20).padding(.vertical, 12)
                 .frame(maxWidth: 680)
@@ -106,5 +101,57 @@ struct WelcomeScreen: View {
             }
         }
         .accessibilityHidden(true)
+    }
+}
+
+/**
+ * Next alone, centred, on the opening screen. The first Next tears a piece of clay off its left
+ * side, which slides out and becomes Back; Back on the second screen merges it home again
+ * (SplitButtons in WelcomeScreen.kt). Between the later screens nothing moves. The piece starts
+ * hidden under Next in Next's own colour, so the split reads as one button coming apart.
+ */
+private struct SplitButtons: View {
+    let split: Bool
+    let next: String
+    let onBack: () -> Void
+    let onNext: () -> Void
+    @Environment(\.accessibilityReduceMotion) private var reduce
+
+    var body: some View {
+        GeometryReader { g in
+            let w = g.size.width, gap: CGFloat = 10, backW = w * 0.3
+            let nextX = split ? backW + gap : w * 0.14
+            let nextW = split ? w - backW - gap : w * 0.72
+            let pieceX = split ? 0 : w * 0.14
+            let pieceW = split ? backW : w * 0.22
+            ZStack(alignment: .topLeading) {
+                Button(action: onBack) {
+                    Text("Back").font(.nunito(16, .bold)).lineLimit(1)
+                        .opacity(split ? 1 : 0)
+                        .frame(width: pieceW, height: 52)
+                        .foregroundStyle(split ? Palette.onPrimaryContainer : Palette.onPrimary)
+                        .background(Capsule().fill(split ? Palette.primaryContainer : Palette.primary))
+                        .overlay(Capsule().stroke(Palette.rim.opacity(split ? 1 : 0), lineWidth: 2))
+                        .shadow(color: Palette.shade.opacity(split ? 0.18 : 0), radius: 6, y: 3)
+                }
+                .buttonStyle(.plain)
+                .disabled(!split)
+                .accessibilityHidden(!split)
+                .offset(x: pieceX)
+                Button(action: onNext) {
+                    Text(next).font(.nunito(16, .bold)).lineLimit(1).minimumScaleFactor(0.8)
+                        .padding(.horizontal, 12)
+                        .frame(width: nextW, height: 52)
+                        .foregroundStyle(Palette.onPrimary)
+                        .background(Capsule().fill(Palette.primary))
+                        .overlay(Capsule().stroke(Palette.rim, lineWidth: 2))
+                        .shadow(color: Palette.shade.opacity(0.22), radius: 8, y: 4)
+                }
+                .buttonStyle(.plain)
+                .offset(x: nextX)
+            }
+            .animation(reduce ? nil : .spring(response: 0.5, dampingFraction: 0.58), value: split)
+        }
+        .frame(height: 52)
     }
 }

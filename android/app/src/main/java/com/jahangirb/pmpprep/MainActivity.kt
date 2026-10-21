@@ -221,7 +221,10 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
 
     // A running mock exam and a guided session take the whole screen: nothing to wander off through.
     val examRunning = vm.screen == Dest.MOCK && vm.mock != null
-    val fullScreen = examRunning || vm.screen == Dest.SESSION
+    // Before you start, on the first run: no menu and no coach until the screens are read.
+    val rev by vm.revision.collectAsState()
+    val welcomeGate = rev >= 0 && vm.screen == Dest.DASHBOARD && vm.setupDue && !vm.welcomeRead && vm.repo.extras.welcome != null
+    val fullScreen = examRunning || vm.screen == Dest.SESSION || welcomeGate
 
     Scaffold(
         // The clay backdrop: a soft gradient behind every screen.
@@ -293,7 +296,7 @@ private fun App(vm: PmpViewModel, incoming: List<Uri>, onIncomingHandled: () -> 
             // The coach floats over every screen except a mock exam in progress (web §10.33 alike).
             val inMock = examRunning ||
                 (vm.screen == Dest.SESSION && vm.run?.let { r -> r.session.steps.getOrNull(r.step)?.kind == StepKind.MOCK } == true)
-            if (!inMock) {
+            if (!inMock && !welcomeGate) {
                 CoachBubble(vm) { vm.coachTab = 0; vm.navigate(Dest.COACH) }
             }
         }
